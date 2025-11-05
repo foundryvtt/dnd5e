@@ -1,0 +1,164 @@
+_id: mmPossession0000
+name: Possession
+type: feat
+img: icons/magic/death/skull-energy-light-white.webp
+system:
+  activities:
+    7gmNBVjwuYTyANMe:
+      type: save
+      _id: 7gmNBVjwuYTyANMe
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: EeZIaR3X4cI5glMX
+          onSave: false
+      range:
+        override: false
+        value: '5'
+        units: ft
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: Humanioid
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability:
+          - con
+        dc:
+          calculation: cha
+          formula: 8 + @mod + @prof
+      name: ''
+      img: ''
+      appliedEffects:
+        - EeZIaR3X4cI5glMX
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature"><em>Charisma Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=7gmNBVjwuYTyANMe]], one [[lookup
+      @target.affects.special activity=7gmNBVjwuYTyANMe]] the [[lookup @name
+      lowercase]] can see within [[lookup @range.value
+      activity=7gmNBVjwuYTyANMe]] feet.</p><p class="feature"><em>Failure:</em>
+      The target is possessed by the [[lookup @name lowercase]]; the [[lookup
+      @name lowercase]] disappears, and the target has the
+      &amp;Reference[Incapacitated apply=false] condition and loses control of
+      its body. The [[lookup @name lowercase]] now controls the body, but the
+      target retains awareness. The [[lookup @name lowercase]] can't be targeted
+      by any attack, spell, or other effect, except ones that specifically
+      target Undead. The [[lookup @name lowercase]]'s game statistics are the
+      same, except it uses the possessed target's Speed, as well as the target's
+      Strength, Dexterity, and Constitution modifiers.</p><p class="feature">The
+      possession lasts until the body drops to 0 Hit Points or the [[lookup
+      @name lowercase]] leaves as a Bonus Action. When the possession ends, the
+      [[lookup @name lowercase]] appears in an unoccupied space within 5 feet of
+      the target, and the target is immune to this ghost's Possession for 24
+      hours.</p><p class="feature"><em>Success:</em> The target is immune to
+      this [[lookup @name lowercase]]'s Possession for 24 hours.</p>
+    chat: ''
+  identifier: possession
+  source:
+    revision: 1
+    rules: '2024'
+    book: MM 2024
+    page: ''
+    custom: ''
+    license: ''
+  advancement: []
+  enchant: {}
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: ''
+  type:
+    value: ''
+    subtype: ''
+effects:
+  - name: Incapacitated
+    img: systems/dnd5e/icons/svg/statuses/incapacitated.svg
+    origin: Item.mmPossession0000
+    _id: EeZIaR3X4cI5glMX
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Incapacitated apply=false] condition
+      and loses control of its body.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - incapacitated
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!mmPossession0000.EeZIaR3X4cI5glMX'
+folder: 4T18pEvubPMQLzvD
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1736987392653
+  modifiedTime: 1737792681482
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1400000
+ownership:
+  default: 0
+_key: '!items!mmPossession0000'

@@ -1,0 +1,360 @@
+_id: mmLoathsomeLimbs
+name: Loathsome Limbs
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    1RdczIOwv3VBCELH:
+      type: summon
+      _id: 1RdczIOwv3VBCELH
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: PFledLQkQ75osOlZ
+        - _id: AVZPkC07GONXpRMe
+        - _id: l1PiPpfAiF9TWs88
+        - _id: DCB7xWKhKSEmZHNn
+        - _id: 9Tc60NhDJH43WdEU
+        - _id: drQriWAwmwosemzp
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+        ability: ''
+      profiles:
+        - count: '1'
+          name: Troll Limb
+          _id: Oo1ooV67nRAPVyLL
+          uuid: Compendium.dnd5e.actors24.Actor.mmTrollLimb00000
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: false
+        mode: ''
+        identifier: ''
+      name: Troll Limb
+      img: ''
+      appliedEffects:
+        - PFledLQkQ75osOlZ
+        - AVZPkC07GONXpRMe
+        - l1PiPpfAiF9TWs88
+        - DCB7xWKhKSEmZHNn
+        - 9Tc60NhDJH43WdEU
+        - drQriWAwmwosemzp
+  uses:
+    spent: 0
+    recovery:
+      - period: day
+        type: recoverAll
+    max: '4'
+  description:
+    value: >-
+      <p class="feature">If the [[lookup @name lowercase]] ends any turn
+      Bloodied and took 15+ Slashing damage during that turn, one of the
+      [[lookup @name lowercase]]l's limbs is severed, falls into the [[lookup
+      @name lowercase]]'s space, and becomes a
+      <strong>@UUID[Compendium.dnd5e.actors24.Actor.mmTrollLimb00000]{Troll
+      Limb}</strong>. The limb acts immediately after the [[lookup @name
+      lowercase]]'s turn. The [[lookup @name lowercase]] has 1
+      &amp;Reference[Exhaustion apply=false] level for each missing limb, and it
+      grows replacement limbs the next time it regains Hit Points.</p><section
+      class="secret" id="secret-01PBOuaZ8xS1KYt6"><p><strong>Foundry
+      Note</strong></p><p>This feature provides an Active Effect condition in
+      the character sheet's Effects tab to enable each level of Exhaustion.
+      Since the condition can be applied multiple times, the GM must manually
+      manage the level of Exhaustion. There is an active effect available for
+      each level of exhaustion.</p></section>
+    chat: ''
+  identifier: loathsome-limbs
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/magic/death/hand-withered-gray.webp
+effects:
+  - name: Exhaustion 1
+    img: systems/dnd5e/icons/svg/statuses/exhaustion-1.svg
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmLoathsomeLimbs
+    _id: PFledLQkQ75osOlZ
+    type: base
+    system: {}
+    changes: []
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The creature has 1 &amp;Reference[Exhaustion apply=false] level for
+      each missing limb.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses:
+      - exhaustion
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: 1736357011385
+      modifiedTime: 1736357665120
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmLoathsomeLimbs.PFledLQkQ75osOlZ'
+  - name: Exhaustion 2
+    img: systems/dnd5e/icons/svg/statuses/exhaustion-2.svg
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmLoathsomeLimbs
+    type: base
+    system: {}
+    changes: []
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The creature has 1 &amp;Reference[Exhaustion apply=false] level for
+      each missing limb.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses:
+      - exhaustion
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: 1736357498031
+      modifiedTime: 1736357672303
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: AVZPkC07GONXpRMe
+    _key: '!items.effects!mmLoathsomeLimbs.AVZPkC07GONXpRMe'
+  - name: Exhaustion 3
+    img: systems/dnd5e/icons/svg/statuses/exhaustion-3.svg
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmLoathsomeLimbs
+    type: base
+    system: {}
+    changes: []
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The creature has 1 &amp;Reference[Exhaustion apply=false] level for
+      each missing limb.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses:
+      - exhaustion
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: 1736357514811
+      modifiedTime: 1736357677466
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: l1PiPpfAiF9TWs88
+    _key: '!items.effects!mmLoathsomeLimbs.l1PiPpfAiF9TWs88'
+  - name: Exhaustion 4
+    img: systems/dnd5e/icons/svg/statuses/exhaustion-4.svg
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmLoathsomeLimbs
+    type: base
+    system: {}
+    changes: []
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The creature has 1 &amp;Reference[Exhaustion apply=false] level for
+      each missing limb.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses:
+      - exhaustion
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: 1736357540253
+      modifiedTime: 1736357682919
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: DCB7xWKhKSEmZHNn
+    _key: '!items.effects!mmLoathsomeLimbs.DCB7xWKhKSEmZHNn'
+  - name: Exhaustion 5
+    img: systems/dnd5e/icons/svg/statuses/exhaustion-5.svg
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmLoathsomeLimbs
+    type: base
+    system: {}
+    changes: []
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The creature has 1 &amp;Reference[Exhaustion apply=false] level for
+      each missing limb.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses:
+      - exhaustion
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: 1736357562092
+      modifiedTime: 1736357693153
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: 9Tc60NhDJH43WdEU
+    _key: '!items.effects!mmLoathsomeLimbs.9Tc60NhDJH43WdEU'
+  - name: Exhaustion Dead
+    img: systems/dnd5e/icons/svg/statuses/exhaustion-6.svg
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmLoathsomeLimbs
+    type: base
+    system: {}
+    changes: []
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The creature has 1 &amp;Reference[Exhaustion apply=false] level for
+      each missing limb.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses:
+      - exhaustion
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: 1736357584940
+      modifiedTime: 1736357698404
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: drQriWAwmwosemzp
+    _key: '!items.effects!mmLoathsomeLimbs.drQriWAwmwosemzp'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1737416792082
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 8300000
+ownership:
+  default: 0
+_key: '!items!mmLoathsomeLimbs'

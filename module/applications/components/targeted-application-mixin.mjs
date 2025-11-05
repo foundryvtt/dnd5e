@@ -20,10 +20,10 @@ export default function TargetedApplicationMixin(Base) {
     /**
      * Whether to rebuild the target list.
      * @type {boolean|void}
-     * @abstract
      */
-    // eslint-disable-next-line getter-return
-    get shouldBuildTargetList() {}
+    get shouldBuildTargetList() {
+      return !!this.targetList;
+    }
 
     /* -------------------------------------------- */
 
@@ -69,6 +69,16 @@ export default function TargetedApplicationMixin(Base) {
     targetSourceControl;
 
     /* -------------------------------------------- */
+    /*  Life-Cycle                                  */
+    /* -------------------------------------------- */
+
+    /** @inheritDoc */
+    disconnectedCallback() {
+      super.disconnectedCallback?.();
+      if ( this.selectedTokensHook ) Hooks.off("controlToken", this.selectedTokensHook);
+    }
+
+    /* -------------------------------------------- */
     /*  Rendering                                   */
     /* -------------------------------------------- */
 
@@ -105,7 +115,6 @@ export default function TargetedApplicationMixin(Base) {
      */
     buildTargetsList() {
       if ( this.shouldBuildTargetList === false ) return;
-      if ( !this.targetList ) throw new Error("Must create a element to contain the target list.");
       const targetedTokens = new Map();
       switch ( this.targetingMode ) {
         case "targeted":

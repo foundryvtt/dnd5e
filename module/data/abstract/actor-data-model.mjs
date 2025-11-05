@@ -2,19 +2,19 @@ import Proficiency from "../../documents/actor/proficiency.mjs";
 import SystemDataModel from "./system-data-model.mjs";
 
 /**
+ * @import { CombatRecoveryResults } from "../../documents/combatant.mjs";
+ * @import { ActorDataModelMetadata } from "./types.mjs";
+ */
+
+/**
  * Variant of the SystemDataModel with some extra actor-specific handling.
  */
 export default class ActorDataModel extends SystemDataModel {
 
-  /**
-   * @typedef {SystemDataModelMetadata} ActorDataModelMetadata
-   * @property {boolean} supportsAdvancement  Can advancement be performed for this actor type?
-   */
-
   /** @type {ActorDataModelMetadata} */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     supportsAdvancement: false
-  }, {inplace: false}));
+  }, { inplace: false }));
 
   /* -------------------------------------------- */
   /*  Properties                                  */
@@ -32,7 +32,7 @@ export default class ActorDataModel extends SystemDataModel {
    * @type {Actor5e[]}
    */
   get transferDestinations() {
-    const primaryParty = game.settings.get("dnd5e", "primaryParty")?.actor;
+    const primaryParty = game.actors.party;
     if ( !primaryParty?.system.members.ids.has(this.parent.id) ) return [];
     const destinations = primaryParty.system.members.map(m => m.actor).filter(a => a.isOwner && a !== this.parent);
     if ( primaryParty.isOwner ) destinations.unshift(primaryParty);
@@ -59,9 +59,8 @@ export default class ActorDataModel extends SystemDataModel {
    */
   _prepareScaleValues() {
     this.scale = this.parent.items.reduce((scale, item) => {
-      if ( CONFIG.DND5E.advancementTypes.ScaleValue.validItemTypes.has(item.type) ) {
-        scale[item.identifier] = item.scaleValues;
-      }
+      const scaleValues = item.scaleValues;
+      if ( !foundry.utils.isEmpty(scaleValues) ) scale[item.identifier] = scaleValues;
       return scale;
     }, {});
   }

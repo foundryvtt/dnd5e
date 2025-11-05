@@ -1,0 +1,100 @@
+_id: mmReflectiveCara
+name: Reflective Carapace
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    x2XgvljysagWUIK7:
+      type: utility
+      _id: x2XgvljysagWUIK7
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: true
+        visible: false
+        name: Roll d6
+        formula: 1d6
+      name: Roll d6
+      img: systems/dnd5e/icons/svg/dice/d6.svg
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">If the [[lookup @name lowercase]] is targeted by a
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplMagicMissi]{Magic
+      Missile}</em> spell or a spell that requires a ranged attack roll, roll
+      [[/r 1d6]].</p><p class="feature">On a <strong>1–5</strong>, the [[lookup
+      @name lowercase]] is unaffected.</p><p class="feature">On a
+      <strong>6</strong>, the [[lookup @name lowercase]] is unaffected and
+      reflects the spell, turning the caster into the target.</p>
+    chat: ''
+  identifier: reflective-carapace
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/commodities/biological/shell-tan.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736274672585
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 9900000
+ownership:
+  default: 0
+_key: '!items!mmReflectiveCara'

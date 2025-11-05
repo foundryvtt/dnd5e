@@ -9,12 +9,12 @@
             <i class="fa-solid fa-coins" inert></i>
         </button>
         {{/unless}}
-        {{#each system.currency}}
+        {{#each currency}}
         {{#with (lookup @root.config.currencies @key) as |currency|}}
         <label aria-label="{{ lookup currency 'label' }}">
             <i class="currency {{ @key }}" data-tooltip="{{ lookup currency "label" }}"></i>
             <input type="text" class="uninput always-interactive" name="system.currency.{{ @key }}"
-                   value="{{ ../this }}" data-dtype="Number" inputmode="numeric" pattern="[+=\-]?\d*"
+                   value="{{ ../this }}" data-dtype="Number" inputmode="numeric" pattern="^[+=\-]?\d*"
                    {{#if @root.locked}}readonly{{/if}}>
         </label>
         {{/with}}
@@ -59,7 +59,8 @@
     {{/if}}
 
     {{!-- Items --}}
-    <section class="items-list {{ listControls.list }}-list" data-item-list="{{ listControls.list }}">
+    <section class="items-list {{#if listControls}}{{ listControls.list }}-list{{/if}}"
+             {{#if listControls}}data-item-list="{{ listControls.list }}"{{/if}}>
 
         {{!-- Sections / Categories --}}
         {{#each sections}}
@@ -78,7 +79,7 @@
 
             {{!-- Section Contents --}}
             <ol class="item-list unlist">
-                {{#each items as |item|}}
+                {{~#each items as |item|}}
                 {{#dnd5e-itemContext item as |ctx|}}
 
                 <li class="item collapsible {{#unless ctx.isExpanded}}collapsed{{/unless}}" data-uuid="{{ item.uuid }}"
@@ -131,15 +132,15 @@
 
                         {{!-- Columns --}}
                         {{#if ctx.columns.length}}
-                            {{!-- Column overrides for an individual item --}}
-                            {{#each ctx.columns}}
-                                {{> (lookup . "template") entry=item item=item ctx=ctx isItem=true }}
-                            {{/each}}
+                        {{!-- Column overrides for an individual item --}}
+                        {{#each ctx.columns}}
+                        {{> (lookup . "template") entry=item item=item ctx=ctx isItem=true }}
+                        {{/each}}
                         {{else}}
-                            {{!-- Otherwise use the columns defined in the section --}}
-                            {{#each ../columns}}
-                                {{> (lookup . "template") entry=item item=item ctx=ctx isItem=true }}
-                            {{/each}}
+                        {{!-- Otherwise use the columns defined in the section --}}
+                        {{#each ../columns}}
+                        {{> (lookup . "template") entry=item item=item ctx=ctx isItem=true }}
+                        {{/each}}
                         {{/if}}
 
                     </div>
@@ -152,8 +153,8 @@
                             {{#if ctx.activities.length}}
                             <ol class="activities unlist">
                                 {{#each ctx.activities}}
-                                    {{> "systems/dnd5e/templates/inventory/activity.hbs" columns=../../columns
-                                        item=../item }}
+                                {{> "systems/dnd5e/templates/inventory/activity.hbs" columns=../../columns
+                                    item=../item }}
                                 {{/each}}
                             </ol>
                             {{/if}}
@@ -169,7 +170,7 @@
                 </li>
 
                 {{/dnd5e-itemContext}}
-                {{/each}}
+                {{/each~}}
             </ol>
 
         </div>
@@ -181,7 +182,7 @@
     {{#if encumbrance}}
     <div class="bottom">
         <div class="encumbrance">
-            {{> "systems/dnd5e/templates/inventory/encumbrance.hbs" }}
+            {{> "systems/dnd5e/templates/inventory/encumbrance.hbs" hasBreakpoints=true }}
         </div>
     </div>
     {{/if}}

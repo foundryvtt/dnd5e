@@ -100,6 +100,8 @@ export default class Combat5e extends Combat {
 
   /** @inheritDoc */
   _onDelete(options, userId) {
+    // TODO: Workaround for https://github.com/foundryvtt/foundryvtt/issues/13495
+    this.turn = null;
     super._onDelete(options, userId);
     this.combatants.get(this.current.combatantId)?.refreshDynamicRing();
   }
@@ -154,7 +156,7 @@ export default class Combat5e extends Combat {
    */
   async _recoverUses(types) {
     for ( const combatant of this.combatants ) {
-      if ( combatant.defeated ) continue;
+      if ( combatant.isDefeated ) continue;
       const periods = Object.entries(types).filter(([, v]) => (v === true) || (v === combatant)).map(([k]) => k);
       if ( periods.length ) await combatant.recoverCombatUses(periods);
     }

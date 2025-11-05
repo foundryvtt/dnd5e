@@ -1,0 +1,51 @@
+_id: mmSpellStoring00
+name: Spell Storing
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">A spellcaster who wears the [[lookup @name
+      lowercase]]'s amulet can cause the [[lookup @name lowercase]] to store one
+      spell of level 4 or lower. To do so, the wearer must cast the spell on the
+      [[lookup @name lowercase]] while within 5 feet of it. The spell has no
+      effect but is stored within the [[lookup @name lowercase]]. Any previously
+      stored spell is lost when a new spell is stored. The [[lookup @name
+      lowercase]] can cast the spell stored with any parameters set by the
+      original caster, requiring no spell components and using the caster's
+      spellcasting ability. The stored spell is then lost.</p>
+    chat: ''
+  identifier: spell-storing
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/magic/light/orb-container-orange.webp
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736203161318
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 11500000
+ownership:
+  default: 0
+_key: '!items!mmSpellStoring00'

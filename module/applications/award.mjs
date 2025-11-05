@@ -2,12 +2,7 @@ import { filteredKeys, formatNumber } from "../utils.mjs";
 import Application5e from "./api/application.mjs";
 
 /**
- * @typedef AwardOptions
- * @property {Record<string, number>|null} currency  Amount of each currency to award.
- * @property {boolean} each                          Distribute full award to each destination, rather than dividing it
- *                                                   among the destinations.
- * @property {Set<string>} savedDestinations         Set of IDs for previously selected destinations.
- * @property {number|null} xp                        Amount of experience points to award.
+ * @import { AwardOptions } from "./_types.mjs";
  */
 
 /**
@@ -77,7 +72,7 @@ export default class Award extends Application5e {
   get transferDestinations() {
     if ( this.isPartyAward ) return this.origin.system.transferDestinations ?? [];
     if ( !game.user.isGM ) return [];
-    const primaryParty = game.settings.get("dnd5e", "primaryParty")?.actor;
+    const primaryParty = game.actors.party;
     return primaryParty
       ? [primaryParty, ...primaryParty.system.transferDestinations]
       : game.users.map(u => u.character).filter(c => c);
@@ -90,7 +85,7 @@ export default class Award extends Application5e {
    * @type {boolean}
    */
   get isPartyAward() {
-    return this.origin?.system.type?.value === "party";
+    return this.origin?.type === "group";
   }
 
   /* -------------------------------------------- */
@@ -111,8 +106,8 @@ export default class Award extends Application5e {
     context.destinations = Award.prepareDestinations(this.transferDestinations, this.award.savedDestinations);
     context.each = this.award.each ?? false;
     context.hideXP = game.settings.get("dnd5e", "levelingMode") === "noxp";
-    context.noPrimaryParty = !game.settings.get("dnd5e", "primaryParty")?.actor && !this.isPartyAward;
-    context.xp = this.award.xp ?? this.origin?.system.details.xp.value ?? this.origin?.system.details.xp.derived;
+    context.noPrimaryParty = !game.actors.party && !this.isPartyAward;
+    context.xp = this.award.xp ?? this.origin?.system.details?.xp?.value;
 
     return context;
   }
@@ -270,8 +265,8 @@ export default class Award extends Application5e {
     destinations = destinations.filter(d => ["character", "group"].includes(d.type));
     if ( !amount || !destinations.length ) return;
 
-    const xp = origin?.system.details.xp;
-    let originUpdate = origin ? (xp.value ?? xp.derived ?? 0) : Infinity;
+    const xp = origin?.system.details?.xp;
+    let originUpdate = origin ? (xp?.value ?? 0) : Infinity;
     if ( each ) amount = amount * destinations.length;
     const perDestination = Math.floor(Math.min(amount, originUpdate) / destinations.length);
     originUpdate -= amount;
@@ -379,7 +374,7 @@ export default class Award extends Application5e {
       }
 
       // If the party command is set, a primary party is set, and the award isn't empty, skip the UI
-      const primaryParty = game.settings.get("dnd5e", "primaryParty")?.actor;
+      const primaryParty = game.actors.party;
       if ( party && primaryParty && (xp || filteredKeys(currency).length) ) {
         const destinations = each ? primaryParty.system.playerCharacters : [primaryParty];
         const results = new Map();

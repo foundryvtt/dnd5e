@@ -180,9 +180,12 @@ pages:
         miles</p></td></tr><tr><td><p>Slow</p></td><td><p>200
         feet</p></td><td><p>2 miles</p></td><td><p>18
         miles</p></td></tr></tbody></table><p>Each travel pace has a game
-        effect, as defined below.</p><p>@Embed[.mpnTe02usA9fgzCr
-        inline]</p><p>@Embed[.bcPsR1qaLLv7uBGe
-        inline]</p><p>@Embed[.khOKcrcql9Cssgnb inline]</p>
+        effect, as defined below.</p><p><strong>Fast.</strong> Traveling at a
+        Fast pace imposes Disadvantage on a traveler’s Wisdom (Perception or
+        Survival) and Dexterity (Stealth) checks.</p><p><strong>Normal.</strong>
+        Traveling at a Normal pace imposes Disadvantage on Dexterity (Stealth)
+        checks.</p><p><strong>Slow.</strong> Traveling at a Slow pace grants
+        Advantage on Wisdom (Perception or Survival) checks.</p>
       markdown: ''
     video:
       controls: true
@@ -196,11 +199,11 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1745436977938
+      modifiedTime: 1757386217293
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
@@ -446,7 +449,7 @@ pages:
     category: null
     _key: '!journal.pages!phbAppendixDRule.BIlnr0xYhqt4TGsi'
   - sort: 6900000
-    name: Vision and Light (Revisit)
+    name: Vision and Light
     type: rule
     _id: O6hamUbI9kVASN8b
     title:
@@ -458,16 +461,22 @@ pages:
       content: >-
         <p>Some adventuring tasks—such as noticing danger, hitting an enemy, and
         targeting certain spells—are affected by sight, so effects that obscure
-        vision can hinder you, as explained
-        below.</p><p>@Embed[.MAxtfJyvJV7EpzWN
-        inline]</p><p>@Embed[.wPFjfRruboxhtL4b
-        inline]</p><p>@Embed[.RnMokVPyKGbbL8vi
+        vision can hinder you, as explained below.</p><h3>Obscured
+        Areas</h3><p>An area might be Lightly or Heavily Obscured. In a Lightly
+        Obscured area—such as an area with Dim Light, patchy fog, or moderate
+        foliage—you have Disadvantage on Wisdom (Perception) checks that rely on
+        sight.</p><p>A Heavily Obscured area—such as an area with Darkness,
+        heavy fog, or dense foliage—is opaque. You have the
+        &amp;Reference[Blinded] condition when trying to see something
+        there.</p><h3>Light</h3><p>The presence or absence of light determines
+        the category of illumination in an area, as defined
+        below.</p><p>@Embed[.RnMokVPyKGbbL8vi
         inline]</p><p>@Embed[.n1Ocpbyhr6HhgbCG
-        inline]</p><p>@Embed[.4dfREIDjG5N4fvxd
-        inline]</p><h3>Blindsight</h3><p>@Embed[.sacjsfm9ZXnw4Tqc
-        inline]</p><h3>Darkvision</h3><p>@Embed[.ldmA1PbnEGVkmE11
-        inline]</p><h3>Tremorsense</h3><p>@Embed[.r64UrNusMhwJVnxb
-        inline]</p><h3>Truesight</h3><p>@Embed[.kNa8rJFbtaTM3Rmk inline]</p>
+        inline]</p><p>@Embed[.4dfREIDjG5N4fvxd inline]</p><h3>Special
+        Senses</h3><p>Some creatures have special senses that help them perceive
+        things in certain situations. “Rules Glossary” defines the following
+        special
+        senses:</p><p>@UUID[Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.tdtmXZbUIOZGSnKT]{Blindsight}</p><p>@UUID[Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.7vQ1hLQ5fS6SSUqF]{Darkvision}</p><p>@UUID[Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.r64UrNusMhwJVnxb]{Tremorsense}</p><p>@UUID[Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.be7g0q1xBAwb8drv]{Truesight}</p>
       markdown: ''
     video:
       controls: true
@@ -481,11 +490,11 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757388240910
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
@@ -675,129 +684,6 @@ pages:
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.4dfREIDjG5N4fvxd'
-  - sort: 7500000
-    name: Blindsight
-    type: rule
-    _id: sacjsfm9ZXnw4Tqc
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>If you have Blindsight, you can see within a specific range without
-        relying on physical sight. Within that range, you can see anything that
-        isn't behind &amp;Reference[Total Cover] even if you have the
-        &amp;Reference[Blinded] condition or are in &amp;Reference[Darkness].
-        Moreover, in that range, you can see something has the Invisible
-        condition.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.sacjsfm9ZXnw4Tqc'
-  - sort: 7600000
-    name: Darkvision
-    type: rule
-    _id: ldmA1PbnEGVkmE11
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>If you have Darkvision, you can see in &amp;Reference[Dim Light]
-        within a specified range as if it were Bright Light and in
-        &amp;Reference[Darkness] within that range as if it were Dim Light. You
-        discern colors in that Darkness only as shades of gray. <em>See
-        also</em>
-        @UUID[Compendium.dnd5e.content24.JournalEntry.phbExploration00]{Exploration}.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.ldmA1PbnEGVkmE11'
-  - sort: 7800000
-    name: Truesight
-    type: rule
-    _id: kNa8rJFbtaTM3Rmk
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>If you have Truesight, your vision is enhanced within a specified
-        range. Within that range, your vision pierces through the
-        following:</p><p><strong>Darkness.</strong> You can see in normal and
-        magical &amp;Reference[darkness].</p><p><strong>Invisibility.</strong>
-        You see creatures and objects that have the &amp;Reference[invisible]
-        condition.</p><p><strong>Visual Illusions.</strong> Visual illusions
-        appear transparent to you, and you automatically succeed on saving
-        throws against them.</p><p><strong>Transformations.</strong> You discern
-        the true form of any creature or object you see that has been
-        transformed by magic.</p><p><strong>Ethereal Plane.</strong> You see
-        into the Ethereal Plane. <em>See also</em> appendix A ("Transitive
-        Planes").</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.kNa8rJFbtaTM3Rmk'
   - sort: 8000000
     name: Food
     type: rule
@@ -1066,41 +952,6 @@ pages:
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.RpvmpJcaWKJjfsfn'
-  - sort: 300000
-    name: Strength Checks
-    type: rule
-    _id: Tu30XV5UKGAdgz4Z
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>Make a Strength <strong>check</strong> to lift, push, pull, or break
-        something.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726543135243
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.Tu30XV5UKGAdgz4Z'
   - sort: 200000
     name: Strength
     type: rule
@@ -1112,11 +963,19 @@ pages:
     text:
       format: 1
       content: >-
-        <p>Strength measures physical might.</p><h3>Strength
-        Checks</h3><p>@Embed[.Tu30XV5UKGAdgz4Z inline]</p><h3>Saving
-        Throw</h3><p>@Embed[.9F7Ln8GBlGs029fD inline]</p><h3>Attacks Rolls and
-        Damage</h3><p>@Embed[.9DPXJOLEsspMYK0D inline]</p><h3>Lifting and
-        Carrying</h3><p>@Embed[.Kuj7Lkfn8ZckcNGH inline]</p>
+        <p>Strength measures physical might.</p><h3>Strength Checks</h3><p>Make
+        a Strength <strong>check</strong> to lift, push, pull, or break
+        something.</p><h3>Saving Throw</h3><p>Make a Strength saving throw to
+        physically resist direct force.</p><h3>Attacks Rolls and
+        Damage</h3><p>You add your Strength modifier to your attack roll and
+        your damage roll when attacking with a melee weapon such as a mace, a
+        battleaxe, or a javelin. You use melee weapons to make melee attacks in
+        handto-hand combat, and some of them can be thrown to make a ranged
+        attack.</p><h3>Lifting and Carrying</h3><p>Your size and Strength score
+        determine the maximum weight in pounds that you can carry, as shown in
+        the Carrying Capacity table. The table also shows the maximum weight you
+        can drag, lift, or push.</p><p>@Embed[.Hni8DjqLzoqsVjb6
+        inline]</p><p>@Embed[.1PnjDBKbQJIVyc2t inline]</p>
       markdown: ''
     video:
       controls: true
@@ -1130,53 +989,15 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726543135343
+      modifiedTime: 1757386070532
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.nUPv6C66Ur64BIUH'
-  - sort: 700000
-    name: Lifting and Carrying
-    type: rule
-    _id: Kuj7Lkfn8ZckcNGH
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>Your size and Strength score determine the maximum weight in pounds
-        that you can carry, as shown in the Carrying Capacity table. The table
-        also shows the maximum weight you can drag, lift, or
-        push.</p><p>@Embed[.Hni8DjqLzoqsVjb6
-        inline]</p><p>@Embed[.1PnjDBKbQJIVyc2t inline]</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726543135453
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.Kuj7Lkfn8ZckcNGH'
   - sort: 800000
     name: Carrying Capacity
     type: rule
@@ -1329,77 +1150,6 @@ pages:
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.rIR7ttYDUpH3tMzv'
-  - sort: 1200000
-    name: Encumbered (2014)
-    type: rule
-    _id: Ur7xWFlpVK5X8ueP
-    title:
-      show: true
-      level: 3
-    image: {}
-    text:
-      format: 1
-      content: <p>@Embed[.Hni8DjqLzoqsVjb6 inline]</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: condition
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.Ur7xWFlpVK5X8ueP'
-  - sort: 1300000
-    name: Heavily Encumbered (2014)
-    type: rule
-    _id: RhVgQfF29CyStS22
-    title:
-      show: true
-      level: 3
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>If you carry weight in excess of 10 times your Strength score, up to
-        your maximum carrying capacity, you are instead<strong> heavily
-        encumbered</strong>, which means your speed drops by 20 feet and you
-        have disadvantage on ability checks, attack rolls, and saving throws
-        that use Strength, Dexterity, or Constitution.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: condition
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.RhVgQfF29CyStS22'
   - sort: 1400000
     name: Dexterity
     type: rule
@@ -1412,12 +1162,22 @@ pages:
       format: 1
       content: >-
         <p>Dexterity measures agility, reflexes, and balance.</p><h3>Dexterity
-        Checks</h3><p>@Embed[.310T6po5xJuu8FoZ inline]</p><h3>Attack Rolls and
-        Damage</h3><p>@Embed[.Rk5nUGsGWHkSzPub inline]</p><h3>Armor
-        Class</h3><p>@Embed[.YSFOauOValBylNc7
-        inline]</p><h3>Initiative</h3><p>@Embed[.4AXnTyno7dLBB6Ct
-        inline]</p><div class="fvtt advice"><figure class="icon"><img
-        src="icons/equipment/back/cloak-hooded-blue.webp" class="round"
+        Checks</h3><p>Make a Dexterity <strong>check</strong> to move nimbly,
+        quickly, or quietly.</p><h3>Attack Rolls and Damage</h3><p>You add your
+        Dexterity modifier to your attack roll and your damage roll when
+        attacking with a ranged weapon, such as a sling or a longbow. You can
+        also add your Dexterity modifier to your attack roll and your damage
+        roll when attacking with a melee weapon that has the finesse property,
+        such as a dagger or a rapier.</p><h3>Armor Class</h3><p>Depending on the
+        armor you wear, you might add some or all of your Dexterity modifier to
+        your Armor Class.</p><h3>Initiative</h3><p>Initiative determines the
+        order of turns during combat. When combat starts, every participant
+        rolls Initiative; they make a Dexterity check that determines their
+        place in the Initiative order. The GM rolls for monsters. For a group of
+        identical creatures, the GM makes a single roll, so each member of the
+        group has the same Initiative.</p><div class="fvtt advice"><figure
+        class="icon"><img src="icons/equipment/back/cloak-hooded-blue.webp"
+        class="round"
         /></figure><article><h4>Hiding</h4><p>@Embed[.plHuoNdS0j3umPNS
         inline]</p></article></div>
       markdown: ''
@@ -1433,50 +1193,15 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.ER8CKDUWLsFXuARJ'
-  - sort: 1500000
-    name: Dexterity Checks
-    type: rule
-    _id: 310T6po5xJuu8FoZ
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>Make a Dexterity <strong>check</strong> to move nimbly, quickly, or
-        quietly.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726543136063
+      modifiedTime: 1757386139507
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
-    _key: '!journal.pages!phbAppendixDRule.310T6po5xJuu8FoZ'
+    _key: '!journal.pages!phbAppendixDRule.ER8CKDUWLsFXuARJ'
   - sort: 1600000
     name: Acrobatics
     type: rule
@@ -1582,117 +1307,6 @@ pages:
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.4MfrpERNiQXmvgCI'
-  - sort: 2000000
-    name: Attack Rolls and Damage
-    type: rule
-    _id: Rk5nUGsGWHkSzPub
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>You add your Dexterity modifier to your attack roll and your damage
-        roll when attacking with a ranged weapon, such as a sling or a longbow.
-        You can also add your Dexterity modifier to your attack roll and your
-        damage roll when attacking with a melee weapon that has the finesse
-        property, such as a dagger or a rapier.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726543136491
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.Rk5nUGsGWHkSzPub'
-  - sort: 2100000
-    name: Armor Class
-    type: rule
-    _id: YSFOauOValBylNc7
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>Depending on the armor you wear, you might add some or all of your
-        Dexterity modifier to your Armor Class.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726543136612
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.YSFOauOValBylNc7'
-  - sort: 2200000
-    name: Initiative
-    type: rule
-    _id: 4AXnTyno7dLBB6Ct
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>Initiative determines the order of turns during combat. When combat
-        starts, every participant rolls Initiative; they make a Dexterity check
-        that determines their place in the Initiative order. The GM rolls for
-        monsters. For a group of identical creatures, the GM makes a single
-        roll, so each member of the group has the same Initiative.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726543136742
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.4AXnTyno7dLBB6Ct'
   - sort: 2300000
     name: Hiding
     type: rule
@@ -1786,8 +1400,10 @@ pages:
       format: 1
       content: >-
         <p>Constitution measures health and stamina.</p><h3>Constitution
-        Checks</h3><p>@Embed[.PxYak7E7jGQMxuzh inline]</p><h3>Hit
-        Points</h3><p>@Embed[.8TSg6dtVxOVPzvuY inline]</p>
+        Checks</h3><p>Make a Constitution <strong>check</strong> to push your
+        body beyond normal limits.</p><h3>Hit Points</h3><p>Your Constitution
+        modifier contributes to your hit points. Typically, you add your
+        Constitution modifier to each Hit Die you roll for your hit points.</p>
       markdown: ''
     video:
       controls: true
@@ -1801,86 +1417,15 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1757386153115
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.MpA4jnwD17Q0RPg7'
-  - sort: 2800000
-    name: Hit Points
-    type: rule
-    _id: 8TSg6dtVxOVPzvuY
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>Your Constitution modifier contributes to your hit points. Typically,
-        you add your Constitution modifier to each Hit Die you roll for your hit
-        points.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726543137154
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.8TSg6dtVxOVPzvuY'
-  - sort: 2600000
-    name: Constitution Checks
-    type: rule
-    _id: PxYak7E7jGQMxuzh
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>Make a Constitution <strong>check</strong> to push your body beyond
-        normal limits.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726543137240
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.PxYak7E7jGQMxuzh'
   - sort: 2900000
     name: Intelligence
     type: rule
@@ -2176,8 +1721,11 @@ pages:
       format: 1
       content: >-
         <p>Wisdom measures perceptiveness and mental fortitude.</p><h3>Wisdom
-        Checks</h3><p>@Embed[.CUSrUMAS8EvE3buX inline]</p><h3>Spellcasting
-        Ability</h3><p>@Embed[.va0sfLfuz2kDP78g inline]</p>
+        Checks</h3><p>Make a Wisdom <strong>check</strong> to notice things in
+        the environment or in creatures' behavior.</p><h3>Spellcasting
+        Ability</h3><p>Clerics, druids, and rangers use Wisdom as their
+        spellcasting ability, which helps determine the saving throw DCs of
+        spells they cast.</p>
       markdown: ''
     video:
       controls: true
@@ -2191,86 +1739,15 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1757386172063
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.v3IPyTtqvXqN934s'
-  - sort: 3900000
-    name: Wisdom Checks
-    type: rule
-    _id: CUSrUMAS8EvE3buX
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>Make a Wisdom <strong>check</strong> to notice things in the
-        environment or in creatures' behavior.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726543138060
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.CUSrUMAS8EvE3buX'
-  - sort: 4600000
-    name: Spellcasting Ability
-    type: rule
-    _id: va0sfLfuz2kDP78g
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>Clerics, druids, and rangers use Wisdom as their spellcasting
-        ability, which helps determine the saving throw DCs of spells they
-        cast.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726543138142
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.va0sfLfuz2kDP78g'
   - sort: 4100000
     name: Animal Handling
     type: rule
@@ -2458,8 +1935,11 @@ pages:
       format: 1
       content: >-
         <p>Charisma measures confidence, poise, and charm.</p><h3>Charisma
-        Checks</h3><p>@Embed[.38hXYxwxxyWdZLG7 inline]</p><h3>Spellcasting
-        Ability</h3><p>@Embed[.KUQjsYx3HISWxjO2 inline]</p>
+        Checks</h3><p>Make a Charisma <strong>check</strong> to influence,
+        entertain, or deceive.</p><h3>Spellcasting Ability</h3><p>Bards,
+        paladins, sorcerers, and warlocks use Charisma as their spellcasting
+        ability, which helps determine the saving throw DCs of spells they
+        cast.</p>
       markdown: ''
     video:
       controls: true
@@ -2473,86 +1953,15 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1757386189695
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.9FyghudYFV5QJOuG'
-  - sort: 4800000
-    name: Charisma Checks
-    type: rule
-    _id: 38hXYxwxxyWdZLG7
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>Make a Charisma <strong>check</strong> to influence, entertain, or
-        deceive.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726543138828
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.38hXYxwxxyWdZLG7'
-  - sort: 5400000
-    name: Spellcasting Ability
-    type: rule
-    _id: KUQjsYx3HISWxjO2
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>Bards, paladins, sorcerers, and warlocks use Charisma as their
-        spellcasting ability, which helps determine the saving throw DCs of
-        spells they cast.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726543138938
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.KUQjsYx3HISWxjO2'
   - sort: 5000000
     name: Deception
     type: rule
@@ -2977,8 +2386,18 @@ pages:
         <p>You can break up your move, using some of its movement before and
         after any action, Bonus Action, or Reaction you take on the same turn.
         For example, if you have a Speed of 30 feet, you could go 10 feet, take
-        an action, and then go 20 feet.</p><p>@Embed[.JxboWb0XHo2GwqD0
-        inline]</p><p>@Embed[.dc3D4WGYznFa3HCM inline]</p>
+        an action, and then go 20 feet.</p><p><em><strong>Moving between
+        Attacks.</strong></em> If you move on your turn and have a feature, such
+        as Extra Attack, that gives you more than one attack as part of the
+        Attack action, you can use some or all of that movement to move between
+        those attacks.</p><p><em><strong>Using different speeds.</strong></em>
+        If you have more than one speed, choose which one to use when you move;
+        you can switch between the speeds during your move. Whenever you switch,
+        subtract the distance already moved from the new speed. The result
+        determines how much farther you can move. If the result is 0 or less,
+        you can’t use the new speed during the current move. For example, if you
+        have a Speed of 30 and a Fly Speed of 40, you could fly 10 feet, walk 10
+        feet, and leap into the air to fly 20 feet more.</p>
       markdown: ''
     video:
       controls: true
@@ -2992,93 +2411,15 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757388294397
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.wAMCoSlvbZH5G7lS'
-  - sort: 9200000
-    name: Moving Between Attacks
-    type: rule
-    _id: JxboWb0XHo2GwqD0
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p><em><strong>Moving between Attacks.</strong></em> If you move on your
-        turn and have a feature, such as Extra Attack, that gives you more than
-        one attack as part of the Attack action, you can use some or all of that
-        movement to move between those attacks.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.JxboWb0XHo2GwqD0'
-  - sort: 9300000
-    name: Using Different Speeds
-    type: rule
-    _id: dc3D4WGYznFa3HCM
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p><em><strong>Using different speeds.</strong></em> If you have more
-        than one speed, choose which one to use when you move; you can switch
-        between the speeds during your move. Whenever you switch, subtract the
-        distance already moved from the new speed. The result determines how
-        much farther you can move. If the result is 0 or less, you can’t use the
-        new speed during the current move. For example, if you have a Speed of
-        30 and a Fly Speed of 40, you could fly 10 feet, walk 10 feet, and leap
-        into the air to fly 20 feet more.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.dc3D4WGYznFa3HCM'
   - sort: 9400000
     name: Difficult Terrain
     type: rule
@@ -3497,210 +2838,6 @@ pages:
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.wKtOwagDAiNfVoPS'
-  - sort: 10400000
-    name: Attack
-    type: rule
-    _id: u4GQCzoBig20yRLj
-    title:
-      show: true
-      level: 1
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.f4fZHwBvpbpzRyn4</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.u4GQCzoBig20yRLj'
-  - sort: 10500000
-    name: Magic
-    type: rule
-    _id: GLwN36E4WXn3Cp4Z
-    title:
-      show: true
-      level: 1
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.iIIDUsmSOkL0xNzF</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.GLwN36E4WXn3Cp4Z'
-  - sort: 10600000
-    name: Dash
-    type: rule
-    _id: Jqn0MEvq6fduYNo6
-    title:
-      show: true
-      level: 1
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.6l6nBKip4LqB1sCU</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.Jqn0MEvq6fduYNo6'
-  - sort: 10700000
-    name: Disengage
-    type: rule
-    _id: ZOPRfI48NyjoloEF
-    title:
-      show: true
-      level: 1
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.w1AGsemFERfjqWNx</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.ZOPRfI48NyjoloEF'
-  - sort: 10800000
-    name: Dodge
-    type: rule
-    _id: V1BkwK2HQrtEfa4d
-    title:
-      show: true
-      level: 1
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.3YJIuyCMmuUrfmuX</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.V1BkwK2HQrtEfa4d'
-  - sort: 10900000
-    name: Help
-    type: rule
-    _id: KnrD3u2AnQfmtOWj
-    title:
-      show: true
-      level: 1
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.5S8i59qskkd9GGcJ</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.KnrD3u2AnQfmtOWj'
   - sort: 11000000
     name: Hide
     type: rule
@@ -3736,226 +2873,6 @@ pages:
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.BXlHhE4ZoiFwiXLK'
-  - sort: 11100000
-    name: Ready
-    type: rule
-    _id: 8xJzZVelP2AmQGfU
-    title:
-      show: true
-      level: 1
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.nI9tN6Oq7fCV7hcA</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.8xJzZVelP2AmQGfU'
-  - sort: 11200000
-    name: Search
-    type: rule
-    _id: 5cn1ZTLgQq95vfZx
-    title:
-      show: true
-      level: 1
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.ySj4gYZ4ADZoia7R</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.5cn1ZTLgQq95vfZx'
-  - sort: 11300000
-    name: Use an Object
-    type: rule
-    _id: ljqhJx8Qxu2ivo69
-    title:
-      show: true
-      level: 1
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.UDlogfdiT2uYEZz4</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.ljqhJx8Qxu2ivo69'
-  - sort: 11400000
-    name: Attack Rolls
-    type: rule
-    _id: 5wkqEqhbBD5kDeE7
-    title:
-      show: true
-      level: 1
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.W8uJrd1D8NeOuawp</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.5wkqEqhbBD5kDeE7'
-  - sort: 11500000
-    name: Modifiers to the Roll (2014)
-    type: rule
-    _id: 6WJRdQlCExNsBZMz
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>When a character makes an attack roll, the two most common modifiers
-        to the roll are an ability modifier and the character's proficiency
-        bonus. When a monster makes an attack roll, it uses whatever modifier is
-        provided in its stat block.</p><p><strong>Ability Modifier. </strong>The
-        ability modifier used for a melee weapon attack is Strength, and the
-        ability modifier used for a ranged weapon attack is Dexterity. Weapons
-        that have the finesse or thrown property break this rule.</p><p>Some
-        spells also require an attack roll. The ability modifier used for a
-        spell attack depends on the spellcasting ability of the
-        spellcaster.</p><p><strong>Proficiency Bonus.</strong> You add your
-        proficiency bonus to your attack roll when you attack using a weapon
-        with which you have proficiency, as well as when you attack with a
-        spell.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.6WJRdQlCExNsBZMz'
-  - sort: 11600000
-    name: Rolling 1 or 20 (2014)
-    type: rule
-    _id: Lw9aodFTlNhXLpyx
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>Sometimes fate blesses or curses a combatant, causing the novice to
-        hit and the veteran to miss.</p><p>If the d20 roll for an attack is a
-        20, the attack hits regardless of any modifiers or the target's AC. This
-        is called a critical hit.</p><p>If the d20 roll for an attack is a 1,
-        the attack misses regardless of any modifiers or the target's AC.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.Lw9aodFTlNhXLpyx'
   - sort: 11700000
     name: Unseen Attackers and Targets
     type: rule
@@ -4135,7 +3052,8 @@ pages:
         reach and can thus attack targets within 5 feet when making a melee
         attack. Certain creatures have melee attacks with a reach greater than 5
         feet, as noted in their descriptions.</p><p>@Embed[.xJjJ4lhymAYXAOvO
-        inline]</p><h3>Opportunity Attacks</h3><p>@Embed[.zeU0NyCyP10lkLg3
+        inline]</p><h3>Opportunity
+        Attacks</h3><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.eNvzQabiTqTtfzis
         inline]</p><h3>Grappling</h3><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.YSLWJcQCP6kzsPql
         inline]</p><p></p>
       markdown: ''
@@ -4158,48 +3076,15 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757386254950
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.GTk6emvzNxl8Oosl'
-  - sort: 12400000
-    name: Opportunity Attacks
-    type: rule
-    _id: zeU0NyCyP10lkLg3
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: <p>JournalEntry.phbAppendixCRule.JournalEntryPage.eNvzQabiTqTtfzis</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.zeU0NyCyP10lkLg3'
   - sort: 12500000
     name: Two-Weapon Fighting (2014)
     type: rule
@@ -4240,39 +3125,6 @@ pages:
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.FQTS08uH74A6psL2'
-  - sort: 12600000
-    name: Grappling
-    type: rule
-    _id: Sl4bniSPSbyrakM2
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: <p>JournalEntry.phbAppendixCRule.JournalEntryPage.YSLWJcQCP6kzsPql</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.Sl4bniSPSbyrakM2'
   - sort: 12900000
     name: Shoving a Creature
     type: rule
@@ -5307,10 +4159,14 @@ pages:
         <p>When a creature drops to 0 Hit Points, it either dies outright or
         falls unconscious, as explained below.</p><h3>Instant
         Death</h3><p>@Embed[.8BG05mA0mEzwmrHU inline]</p><h3>Falling
-        Unconscious</h3><p>@Embed[.UZWKjrHZF5pEEqbA inline]</p><h3>Death Saving
-        Throws</h3><p>@Embed[.JL8LePEJQYFdNuLL inline]</p><h3>Stabilizing a
-        Creature</h3><p>@Embed[.r1CgZXLcqFop6Dlx inline]</p><h3>Monsters and
-        Death</h3><p>@Embed[.DyAsc0h0MqTSHzz4 inline]</p>
+        Unconscious</h3><p>If you reach 0 Hit Points and don’t die instantly,
+        you have the &amp;Reference[Unconscious] condition until you regain any
+        Hit Points, and you now face making Death Saving Throws.</p><h3>Death
+        Saving Throws</h3><p>@Embed[.JL8LePEJQYFdNuLL inline]</p><h3>Stabilizing
+        a Creature</h3><p>@Embed[.r1CgZXLcqFop6Dlx inline]</p><h3>Monsters and
+        Death</h3><p><em><strong>Monster Death.</strong></em> A monster dies the
+        instant it drops to 0 Hit Points, although a Game Master can ignore this
+        rule for an individual monster and treat it like a character.</p>
       markdown: ''
     video:
       controls: true
@@ -5324,11 +4180,11 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757386283652
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
@@ -5377,42 +4233,6 @@ pages:
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.8BG05mA0mEzwmrHU'
-  - sort: 15500000
-    name: Falling Unconscious
-    type: rule
-    _id: UZWKjrHZF5pEEqbA
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>If you reach 0 Hit Points and don’t die instantly, you have the
-        &amp;Reference[Unconscious] condition until you regain any Hit Points,
-        and you now face making Death Saving Throws.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.UZWKjrHZF5pEEqbA'
   - sort: 15600000
     name: Death Saving Throws
     type: rule
@@ -5435,8 +4255,13 @@ pages:
         die.</p><p>The successes and failures don’t need to be consecutive; keep
         track of both until you collect three of a kind. The number of both is
         reset to zero when you regain any Hit Points or become
-        Stable.</p><p>@Embed[.fwJOeFAJn8DkwebA
-        inline]</p><p>@Embed[.2umstdyMUtPaf6vB inline]</p>
+        Stable.</p><p><em><strong>Rolling a 1 or 20.</strong></em> When you roll
+        a 1 on the d20 for a Death Saving Throw, you suffer two failures. If you
+        roll a 20 on the d20, you regain 1 Hit Point.</p><p><em><strong>Damage
+        at 0 Hit Points.</strong></em> If you take any damage while you have 0
+        Hit Points, you suffer a Death Saving Throw failure. If the damage is
+        from a Critical Hit, you suffer two failures instead. If the damage
+        equals or exceeds your Hit Point maximum, you die.</p>
       markdown: ''
     video:
       controls: true
@@ -5450,89 +4275,15 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757386298460
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.JL8LePEJQYFdNuLL'
-  - sort: 15700000
-    name: Rolling 1 or 20
-    type: rule
-    _id: fwJOeFAJn8DkwebA
-    title:
-      show: true
-      level: 3
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p><em><strong>Rolling a 1 or 20.</strong></em> When you roll a 1 on the
-        d20 for a Death Saving Throw, you suffer two failures. If you roll a 20
-        on the d20, you regain 1 Hit Point.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.fwJOeFAJn8DkwebA'
-  - sort: 15800000
-    name: Damage at 0 Hit Points
-    type: rule
-    _id: 2umstdyMUtPaf6vB
-    title:
-      show: true
-      level: 3
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p><em><strong>Damage at 0 Hit Points.</strong></em> If you take any
-        damage while you have 0 Hit Points, you suffer a Death Saving Throw
-        failure. If the damage is from a Critical Hit, you suffer two failures
-        instead. If the damage equals or exceeds your Hit Point maximum, you
-        die.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.2umstdyMUtPaf6vB'
   - sort: 15900000
     name: Stabilizing a Creature
     type: rule
@@ -5573,108 +4324,6 @@ pages:
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.r1CgZXLcqFop6Dlx'
-  - sort: 16000000
-    name: Monsters and Death
-    type: rule
-    _id: DyAsc0h0MqTSHzz4
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p><em><strong>Monster Death.</strong></em> A monster dies the instant
-        it drops to 0 Hit Points, although a Game Master can ignore this rule
-        for an individual monster and treat it like a character.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.DyAsc0h0MqTSHzz4'
-  - sort: 16100000
-    name: Knocking a Creature Out
-    type: rule
-    _id: uEwjgKGuCRTNADYv
-    title:
-      show: true
-      level: 1
-    image: {}
-    text:
-      format: 1
-      content: <p>JournalEntry.phbAppendixCRule.JournalEntryPage.PjXBMVcEaWuKjder</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.uEwjgKGuCRTNADYv'
-  - sort: 16200000
-    name: Temporary Hit Points
-    type: rule
-    _id: AW6HpJZHqxfESXaq
-    title:
-      show: true
-      level: 1
-    image: {}
-    text:
-      format: 1
-      content: <p>JournalEntry.phbAppendixCRule.JournalEntryPage.qOKtJt8CB2qRaTNA</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.AW6HpJZHqxfESXaq'
   - sort: 14600000
     name: Poison
     type: rule
@@ -6463,11 +5112,11 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757386329871
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
@@ -6508,11 +5157,11 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757386333718
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
@@ -6653,8 +5302,11 @@ pages:
         <p>A typical spell requires the caster to pick one or more targets to be
         affected by the spell’s magic. A spell’s description says whether the
         spell targets creatures, objects, or something else.</p><h3>A Clear Path
-        to the Target</h3><p>@Embed[.K2lVWIOvfzThf9xe inline]</p><h3>Targeting
-        Yourself</h3><p>@Embed[.Yljd0J36zC8eibW5 inline]</p>
+        to the Target</h3><p>To target something with a spell, a caster must
+        have a clear path to it, so it can’t be behind Total
+        Cover.</p><h3>Targeting Yourself</h3><p>If a spell targets a creature of
+        your choice, you can choose yourself unless the creature must be Hostile
+        or specifically a creature other than you.</p>
       markdown: ''
     video:
       controls: true
@@ -6668,86 +5320,15 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757386346875
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.G80AIQr04sxdVpw4'
-  - sort: 18500000
-    name: A Clear Path to the Target
-    type: rule
-    _id: K2lVWIOvfzThf9xe
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>To target something with a spell, a caster must have a clear path to
-        it, so it can’t be behind Total Cover.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.K2lVWIOvfzThf9xe'
-  - sort: 18600000
-    name: Targeting Yourself
-    type: rule
-    _id: Yljd0J36zC8eibW5
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>If a spell targets a creature of your choice, you can choose yourself
-        unless the creature must be Hostile or specifically a creature other
-        than you.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.Yljd0J36zC8eibW5'
   - sort: 18700000
     name: Areas of Effect
     type: rule
@@ -7476,11 +6057,52 @@ pages:
         <p>When adventurers come across a trap, you need to know how the trap is
         triggered and what it does, as well as the possibility for the
         characters to detect the trap and to disable or avoid
-        it.</p><h3>Triggering a Trap</h3><p>@Embed[.EnsZoNfQh0jVS5Y1
-        inline]</p><h3>Detecting and Disabling a
+        it.</p><h3>Triggering a Trap</h3><p>Most traps are triggered when a
+        creature goes somewhere or touches something that the trap’s creator
+        wanted to protect. Common triggers include stepping on a pressure plate
+        or a false section of floor, pulling a trip wire, turning a doorknob,
+        and using the wrong key in a lock. Magic traps are often set to go off
+        when a creature enters an area or touches an object. Some magic traps
+        (such as the
+        @UUID[Compendium.dnd5e.spells24.Item.pB7XVYwdGNcUG935]{Glyph of Warding}
+        spell) have more complicated trigger conditions, including a password
+        that prevents the trap from activating.</p><h3>Detecting and Disabling a
         Trap</h3><p>@Embed[.DZ7AhdQ94xggG4bj inline]</p><h3>Trap
-        Effects</h3><p>@Embed[.qvBU4XhGZuOrb8LT inline]</p><h3>Complex
-        Traps</h3><p>@Embed[.FjXRWwrGzsLmI83j inline]</p>
+        Effects</h3><p>The effects of traps can range from inconvenient to
+        deadly, making use of elements such as arrows, spikes, blades, poison,
+        toxic gas, blasts of fire, and deep pits. The deadliest traps combine
+        multiple elements to kill, injure, contain, or drive off any creature
+        unfortunate enough to trigger them. A trap’s description specifies what
+        happens when it is triggered.</p><p>The attack bonus of a trap, the save
+        DC to resist its effects, and the damage it deals can vary depending on
+        the trap’s severity. Use the Trap Save DCs and Attack Bonuses table and
+        the Damage Severity by Level table for suggestions based on three levels
+        of trap severity.</p><p>A trap intended to be a <strong>setback</strong>
+        is unlikely to kill or seriously harm characters of the indicated
+        levels, whereas a <strong>dangerous</strong> trap is likely to seriously
+        injure (and potentially kill) characters of the indicated levels. A
+        <strong>deadly</strong> trap is likely to kill characters of the
+        indicated levels.</p><table border="0"><caption><h4>Trap Save DCs and
+        Attack Bonuses</h4></caption><thead><tr><td>Trap Danger</td><td>Save
+        DC</td><td>Attack
+        Bonus</td></tr></thead><tbody><tr><td>Setback</td><td>10–11</td><td>+3
+        to +5</td></tr><tr><td>Dangerous</td><td>12–15</td><td>+6 to
+        +8</td></tr><tr><td>Deadly</td><td>16–20</td><td>+9 to
+        +12</td></tr></tbody></table><table border="0"><caption><h4>Damage
+        Severity by Level</h4></caption><thead><tr><td>Character
+        Level</td><td>Setback</td><td>Dangerous</td><td>Deadly</td></tr></thead><tbody><tr><td>1st–4th</td><td>1d10</td><td>2d10</td><td>4d10</td></tr><tr><td>5th–10th</td><td>2d10</td><td>4d10</td><td>10d10</td></tr><tr><td>11th–16th</td><td>4d10</td><td>10d10</td><td>18d10</td></tr><tr><td>17th–20th</td><td>10d10</td><td>18d10</td><td>24d10</td></tr></tbody></table><h3>Complex
+        Traps</h3><p>Complex traps work like standard traps, except once
+        activated they execute a series of actions each round. A complex trap
+        turns the process of dealing with a trap into something more like a
+        combat encounter.</p><p>When a complex trap activates, it rolls
+        initiative. The trap’s description includes an initiative bonus. On its
+        turn, the trap activates again, often taking an action. It might make
+        successive attacks against intruders, create an effect that changes over
+        time, or otherwise produce a dynamic challenge. Otherwise, the complex
+        trap can be detected and disabled or bypassed in the usual
+        ways.</p><p>For example, a trap that causes a room to slowly flood works
+        best as a complex trap. On the trap’s turn, the water level rises. After
+        several rounds, the room is completely flooded.</p>
       markdown: ''
     video:
       controls: true
@@ -7494,57 +6116,15 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757386396239
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.q8azjjql1Ya5DeR2'
-  - sort: 20700000
-    name: Triggering a Trap (2014)
-    type: rule
-    _id: EnsZoNfQh0jVS5Y1
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>Most traps are triggered when a creature goes somewhere or touches
-        something that the trap’s creator wanted to protect. Common triggers
-        include stepping on a pressure plate or a false section of floor,
-        pulling a trip wire, turning a doorknob, and using the wrong key in a
-        lock. Magic traps are often set to go off when a creature enters an area
-        or touches an object. Some magic traps (such as the
-        @UUID[Compendium.dnd5e.spells24.Item.pB7XVYwdGNcUG935]{Glyph of Warding}
-        spell) have more complicated trigger conditions, including a password
-        that prevents the trap from activating.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.EnsZoNfQh0jVS5Y1'
   - sort: 20800000
     name: Detecting and Disabling a Trap (2014)
     type: rule
@@ -7574,7 +6154,7 @@ pages:
         can attempt an Intelligence (Arcana) check to detect or disarm a magic
         trap, in addition to any other checks noted in the trap’s description.
         The DCs are the same regardless of the check used. In addition,
-        @UUID[Compendium.dnd5e.spells24.Item.15Fa6q1nH27XfbR8]{Dispel Magic} has
+        @UUID[Compendium.dnd5e.spells24.Item.phbsplDispelMagi]{Dispel Magic} has
         a chance of disabling most magic traps. A magic trap’s description
         provides the DC for the ability check made when you use <em>dispel
         magic</em>.</p><p>In most cases, a trap’s description is clear enough
@@ -7614,116 +6194,15 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757388579288
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.DZ7AhdQ94xggG4bj'
-  - sort: 20900000
-    name: Trap Effects (2014)
-    type: rule
-    _id: qvBU4XhGZuOrb8LT
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>The effects of traps can range from inconvenient to deadly, making
-        use of elements such as arrows, spikes, blades, poison, toxic gas,
-        blasts of fire, and deep pits. The deadliest traps combine multiple
-        elements to kill, injure, contain, or drive off any creature unfortunate
-        enough to trigger them. A trap’s description specifies what happens when
-        it is triggered.</p><p>The attack bonus of a trap, the save DC to resist
-        its effects, and the damage it deals can vary depending on the trap’s
-        severity. Use the Trap Save DCs and Attack Bonuses table and the Damage
-        Severity by Level table for suggestions based on three levels of trap
-        severity.</p><p>A trap intended to be a <strong>setback</strong> is
-        unlikely to kill or seriously harm characters of the indicated levels,
-        whereas a <strong>dangerous</strong> trap is likely to seriously injure
-        (and potentially kill) characters of the indicated levels. A
-        <strong>deadly</strong> trap is likely to kill characters of the
-        indicated levels.</p><table border="0"><caption><h4>Trap Save DCs and
-        Attack Bonuses</h4></caption><thead><tr><td>Trap Danger</td><td>Save
-        DC</td><td>Attack
-        Bonus</td></tr></thead><tbody><tr><td>Setback</td><td>10–11</td><td>+3
-        to +5</td></tr><tr><td>Dangerous</td><td>12–15</td><td>+6 to
-        +8</td></tr><tr><td>Deadly</td><td>16–20</td><td>+9 to
-        +12</td></tr></tbody></table><table border="0"><caption><h4>Damage
-        Severity by Level</h4></caption><thead><tr><td>Character
-        Level</td><td>Setback</td><td>Dangerous</td><td>Deadly</td></tr></thead><tbody><tr><td>1st–4th</td><td>1d10</td><td>2d10</td><td>4d10</td></tr><tr><td>5th–10th</td><td>2d10</td><td>4d10</td><td>10d10</td></tr><tr><td>11th–16th</td><td>4d10</td><td>10d10</td><td>18d10</td></tr><tr><td>17th–20th</td><td>10d10</td><td>18d10</td><td>24d10</td></tr></tbody></table>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.qvBU4XhGZuOrb8LT'
-  - sort: 21000000
-    name: Complex Traps (2014)
-    type: rule
-    _id: FjXRWwrGzsLmI83j
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>Complex traps work like standard traps, except once activated they
-        execute a series of actions each round. A complex trap turns the process
-        of dealing with a trap into something more like a combat
-        encounter.</p><p>When a complex trap activates, it rolls initiative. The
-        trap’s description includes an initiative bonus. On its turn, the trap
-        activates again, often taking an action. It might make successive
-        attacks against intruders, create an effect that changes over time, or
-        otherwise produce a dynamic challenge. Otherwise, the complex trap can
-        be detected and disabled or bypassed in the usual ways.</p><p>For
-        example, a trap that causes a room to slowly flood works best as a
-        complex trap. On the trap’s turn, the water level rises. After several
-        rounds, the room is completely flooded.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.FjXRWwrGzsLmI83j'
   - sort: 21200000
     name: Going Mad (2014)
     type: rule
@@ -7737,9 +6216,9 @@ pages:
       content: >-
         <p>Various magical effects can inflict madness on an otherwise stable
         mind. Certain spells, such as
-        @UUID[Compendium.dnd5e.spells24.Item.dSTu1MaPhBqPITwM]{Contact Other
+        @UUID[Compendium.dnd5e.spells24.Item.phbsplContactOth]{Contact Other
         Plane} and
-        @UUID[Compendium.dnd5e.spells24.Item.B2kbmgbA2WQR00kx]{Symbol}, can
+        @UUID[Compendium.dnd5e.spells24.Item.phbsplSymbol0000]{Symbol}, can
         cause insanity, and you can use the madness rules here instead of the
         spell effects of those spells. Diseases, poisons, and planar effects
         such as psychic wind or the howling winds of Pandemonium can all inflict
@@ -7759,11 +6238,11 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757388614195
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
@@ -7782,162 +6261,15 @@ pages:
         <p>Madness can be short-term, long-term, or indefinite. Most relatively
         mundane effects impose short-term madness, which lasts for just a few
         minutes. More horrific effects or cumulative effects can result in
-        long-term or indefinite madness.</p><p>@Embed[.FiOvoBCuCpgyMjAX
-        inline]</p><p>@Embed[.FximlEBSWq8TLAtX
-        inline]</p><p>@Embed[.Ik0x5qoE14RYE6nj inline]</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.s0ZHwT4gTb5fuw4w'
-  - sort: 21700000
-    name: Curing Madness (2014)
-    type: rule
-    _id: 6Icem7G3CICdNOkM
-    title:
-      show: true
-      level: 1
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>A @UUID[Compendium.dnd5e.spells24.Item.3MYDjS6k9IYL0aTj]{Calm
-        Emotions}spell can suppress the effects of madness, while a
-        @UUID[Compendium.dnd5e.spells24.Item.F0GsG0SJzsIOacwV]{Lesser
-        Restoration} spell can rid a character of a short-term or long-term
-        madness. Depending on the source of the madness,
-        @UUID[Compendium.dnd5e.spells24.Item.XZhdgVK3cLoxNCQl]{Remove Curse} or
-        @UUID[Compendium.dnd5e.spells24.Item.15Fa6q1nH27XfbR8]{Dispel Magic}<em>
-        </em>might also prove effective. A
-        @UUID[Compendium.dnd5e.spells24.Item.WzvJ7G3cqvIubsLk]{Greater
-        Restoration} spell or more powerful magic is required to rid a character
-        of indefinite madness.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.6Icem7G3CICdNOkM'
-  - sort: 21400000
-    name: Short-Term Madness (2014)
-    type: rule
-    _id: FiOvoBCuCpgyMjAX
-    title:
-      show: true
-      level: 3
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>A character afflicted with <strong>short-term madness</strong> is
-        subjected to an effect from the
+        long-term or indefinite madness.</p><p>A character afflicted with
+        <strong>short-term madness</strong> is subjected to an effect from the
         @UUID[Compendium.dnd5e.tables24.RollTable.ypk2L9feVwTx0QVj]{Short-Term
-        Madness} table for 1d10 minutes.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.FiOvoBCuCpgyMjAX'
-  - sort: 21500000
-    name: Long-Term Madness (2014)
-    type: rule
-    _id: FximlEBSWq8TLAtX
-    title:
-      show: true
-      level: 3
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>A character afflicted with<strong> long-term madness</strong> is
-        subjected to an effect from the
+        Madness} table for 1d10 minutes.</p><p>A character afflicted
+        with<strong> long-term madness</strong> is subjected to an effect from
+        the
         @UUID[Compendium.dnd5e.tables24.RollTable.kJB79nI9rju6VN8J]{Long-Term
-        Madness} table for 1d10 × 10 hours.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.FximlEBSWq8TLAtX'
-  - sort: 21600000
-    name: Indefinite Madness (2014)
-    type: rule
-    _id: Ik0x5qoE14RYE6nj
-    title:
-      show: true
-      level: 3
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>A character afflicted with <strong>indefinite madness</strong> gains
-        a new character flaw from the
+        Madness} table for 1d10 × 10 hours.</p><p>A character afflicted with
+        <strong>indefinite madness</strong> gains a new character flaw from the
         @UUID[Compendium.dnd5e.tables24.RollTable.MAL5r8ZKx7BVsE9R]{Indefinite
         Madness} table that lasts until cured.</p>
       markdown: ''
@@ -7953,15 +6285,59 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757386438859
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
-    _key: '!journal.pages!phbAppendixDRule.Ik0x5qoE14RYE6nj'
+    _key: '!journal.pages!phbAppendixDRule.s0ZHwT4gTb5fuw4w'
+  - sort: 21700000
+    name: Curing Madness (2014)
+    type: rule
+    _id: 6Icem7G3CICdNOkM
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>A @UUID[Compendium.dnd5e.spells24.Item.phbsplCalmEmotio]{Calm
+        Emotions}spell can suppress the effects of madness, while a
+        @UUID[Compendium.dnd5e.spells24.Item.phbsplLesserRest]{Lesser
+        Restoration} spell can rid a character of a short-term or long-term
+        madness. Depending on the source of the madness,
+        @UUID[Compendium.dnd5e.spells24.Item.phbsplRemoveCurs]{Remove Curse} or
+        @UUID[Compendium.dnd5e.spells24.Item.phbsplDispelMagi]{Dispel Magic}<em>
+        </em>might also prove effective. A
+        @UUID[Compendium.dnd5e.spells24.Item.phbsplGreaterRes]{Greater
+        Restoration} spell or more powerful magic is required to rid a character
+        of indefinite madness.</p>
+      markdown: ''
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    system:
+      tooltip: ''
+      type: rule
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.348'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1757388665223
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbAppendixDRule.6Icem7G3CICdNOkM'
   - sort: 21800000
     name: Statistics for Objects
     type: rule
@@ -7976,87 +6352,17 @@ pages:
         <p>Objects can be harmed by attacks and by some spells, using the rules
         below. If an object is exceedingly fragile, the GM may allow a creature
         to break it automatically with the &amp;Reference[Attack] or
-        &amp;Reference[Utilize] action.</p><p>@Embed[.KWmHLFi39glwuXQ7
-        inline]</p><p>@Embed[.243xmBDKcM1W2QEm
-        inline]</p><p>@Embed[.dWO90EG5camfT34z
-        inline]</p><p>@Embed[.HANU4fJW9LI4MIC8
-        inline]</p><p>@Embed[.9LJZhqvCburpags3 inline]</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.YAhGI1Pyff166NF9'
-  - sort: 21900000
-    name: Armor Class
-    type: rule
-    _id: KWmHLFi39glwuXQ7
-    title:
-      show: true
-      level: 3
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p><em><strong>Armor Class.</strong></em> The Object Armor Class table
-        suggests ACs for various substances.</p><table><caption>Object Armor
+        &amp;Reference[Utilize] action.</p><p><em><strong>Armor
+        Class.</strong></em> The Object Armor Class table suggests ACs for
+        various substances.</p><table><caption>Object Armor
         Class</caption><thead><tr><th><p>AC</p></th><th><p>Substance</p></th></tr></thead><tbody><tr><td><p>11</p></td><td><p>Cloth,
         paper, rope</p></td></tr><tr><td><p>13</p></td><td><p>Crystal, glass,
         ice</p></td></tr><tr><td><p>15</p></td><td><p>Wood</p></td></tr><tr><td><p>17</p></td><td><p>Stone</p></td></tr><tr><td><p>19</p></td><td><p>Iron,
-        steel</p></td></tr><tr><td><p>21</p></td><td><p>Mithral</p></td></tr><tr><td><p>23</p></td><td><p>Adamantine</p></td></tr></tbody></table>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.KWmHLFi39glwuXQ7'
-  - sort: 22000000
-    name: Hit Points
-    type: rule
-    _id: 243xmBDKcM1W2QEm
-    title:
-      show: true
-      level: 3
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p><em><strong>Hit Points.</strong></em> An object is destroyed when it
-        has 0 Hit Points. The Object Hit Points table suggests Hit Points for
-        fragile and resilient objects that are Large or
-        smaller.</p><table><caption>Object Hit
+        steel</p></td></tr><tr><td><p>21</p></td><td><p>Mithral</p></td></tr><tr><td><p>23</p></td><td><p>Adamantine</p></td></tr></tbody></table><p><em><strong>Hit
+        Points.</strong></em> An object is destroyed when it has 0 Hit Points.
+        The Object Hit Points table suggests Hit Points for fragile and
+        resilient objects that are Large or smaller.</p><table><caption>Object
+        Hit
         Points</caption><thead><tr><th><p>Size</p></th><th><p>Fragile</p></th><th><p>Resilient</p></th></tr></thead><tbody><tr><td><p>Tiny
         (bottle, lock)</p></td><td><p>2 (1d4)</p></td><td><p>5 ([[/r
         2d4]])</p></td></tr><tr><td><p>Small (chest, lute)</p></td><td><p>3
@@ -8064,7 +6370,17 @@ pages:
         (barrel, chandelier)</p></td><td><p>4 (1d8)</p></td><td><p>18 ([[/r
         4d8]])</p></td></tr><tr><td><p>Large (cart, dining
         table)</p></td><td><p>5 (1d10)</p></td><td><p>27 ([[/r
-        5d10]])</p></td></tr></tbody></table>
+        5d10]])</p></td></tr></tbody></table><p><em><strong>Huge and Gargantuan
+        Objects.</strong></em> To track Hit Points for a Huge or Gargantuan
+        object, divide it into Large or smaller sections, and track each
+        section’s Hit Points separately. The DM determines whether destroying
+        part of an object causes the whole thing to
+        collapse.</p><p><em><strong>Damage Types and Objects.</strong></em>
+        Objects have Immunity to Poison and Psychic damage. The GM might decide
+        that some damage types are more or less effective against an object. For
+        example, Bludgeoning damage works well for smashing things but not for
+        cutting. Paper or cloth objects might have Vulnerability to Fire
+        damage.</p><p>@Embed[.9LJZhqvCburpags3 inline]</p>
       markdown: ''
     video:
       controls: true
@@ -8078,100 +6394,15 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757386513969
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
-    _key: '!journal.pages!phbAppendixDRule.243xmBDKcM1W2QEm'
-  - sort: 22100000
-    name: Huge and Gargantuan Objects
-    type: rule
-    _id: dWO90EG5camfT34z
-    title:
-      show: true
-      level: 3
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p><em><strong>Huge and Gargantuan Objects.</strong></em> To track Hit
-        Points for a Huge or Gargantuan object, divide it into Large or smaller
-        sections, and track each section’s Hit Points separately. The DM
-        determines whether destroying part of an object causes the whole thing
-        to collapse.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: >-
-        <p>To track Hit Points for a Huge or Gargantuan object, divide it into
-        Large or smaller sections, and track each section’s Hit Points
-        separately. The GM determines whether destroying part of an object
-        causes the whole thing to collapse.</p>
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.dWO90EG5camfT34z'
-  - sort: 22200000
-    name: Objects and Damage Types
-    type: rule
-    _id: HANU4fJW9LI4MIC8
-    title:
-      show: true
-      level: 3
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p><em><strong>Damage Types and Objects.</strong></em> Objects have
-        Immunity to Poison and Psychic damage. The GM might decide that some
-        damage types are more or less effective against an object. For example,
-        Bludgeoning damage works well for smashing things but not for cutting.
-        Paper or cloth objects might have Vulnerability to Fire damage.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: >-
-        <p>Objects have Immunity to Poison and Psychic damage. The GM might
-        decide that some damage types are more or less effective against an
-        object. For example, Bludgeoning damage works well for smashing things
-        but not for cutting. Paper or cloth objects might have Vulnerability to
-        Fire damage.</p>
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.HANU4fJW9LI4MIC8'
+    _key: '!journal.pages!phbAppendixDRule.YAhGI1Pyff166NF9'
   - sort: 22300000
     name: Damage Threshold
     type: rule
@@ -8215,7 +6446,7 @@ pages:
     category: null
     _key: '!journal.pages!phbAppendixDRule.9LJZhqvCburpags3'
   - sort: 22400000
-    name: Poison Types (2014)
+    name: Poison
     type: rule
     _id: I6OMMWUaYCWR9xip
     title:
@@ -8225,8 +6456,9 @@ pages:
     text:
       format: 1
       content: >-
-        <p>Poisons come in the following four
-        types.</p><p>@Embed[.kXnCEqqGUWRZeZDj
+        <p>Given their insidious and deadly nature, poisons are a favorite tool
+        among assassins and evil creatures.</p><p class="p1">Poisons come in the
+        following four types:</p><p>@Embed[.kXnCEqqGUWRZeZDj
         inline]</p><p>@Embed[.Y0vsJYSWeQcFpJ27
         inline]</p><p>@Embed[.KUyN4eK1xTBzXsjP
         inline]</p><p>@Embed[.LUL48OUq6SJeMGc7 inline]</p>
@@ -8243,17 +6475,17 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757389018797
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.I6OMMWUaYCWR9xip'
   - sort: 22500000
-    name: Contact (2014)
+    name: Contact
     type: rule
     _id: kXnCEqqGUWRZeZDj
     title:
@@ -8282,17 +6514,17 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.2.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757388942247
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.kXnCEqqGUWRZeZDj'
   - sort: 22600000
-    name: Ingested (2014)
+    name: Ingested
     type: rule
     _id: Y0vsJYSWeQcFpJ27
     title:
@@ -8302,11 +6534,11 @@ pages:
     text:
       format: 1
       content: >-
-        <p><strong>Ingested. </strong>A creature must swallow an entire dose of
+        <p><strong>Ingested.</strong> A creature must swallow an entire dose of
         ingested poison to suffer its effects. The dose can be delivered in food
         or a liquid. You may decide that a partial dose has a reduced effect,
-        such as allowing advantage on the saving throw or dealing only half
-        damage on a failed save.</p>
+        such as allowing Advantage on the saving throw or dealing only half as
+        much damage on a failed save.</p>
       markdown: ''
     video:
       controls: true
@@ -8317,25 +6549,25 @@ pages:
         <p>A creature must swallow an entire dose of ingested poison to suffer
         its effects. The dose can be delivered in food or a liquid. You may
         decide that a partial dose has a reduced effect, such as allowing
-        advantage on the saving throw or dealing only half damage on a failed
-        save.</p>
+        Advantage on the saving throw or dealing only half as much damage on a
+        failed save.</p>
       type: rule
     ownership:
       default: -1
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.2.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757388964959
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.Y0vsJYSWeQcFpJ27'
   - sort: 22700000
-    name: Inhaled (2014)
+    name: Inhaled
     type: rule
     _id: KUyN4eK1xTBzXsjP
     title:
@@ -8345,12 +6577,12 @@ pages:
     text:
       format: 1
       content: >-
-        <p><strong>Inhaled.</strong> These poisons are powders or gases that
-        take effect when inhaled. Blowing the powder or releasing the gas
-        subjects creatures in a 5-foot cube to its effect. The resulting cloud
-        dissipates immediately afterward. Holding one's breath is ineffective
-        against inhaled poisons, as they affect nasal membranes, tear ducts, and
-        other parts of the body.</p>
+        <p><strong>Inhaled.</strong> Poisonous powders and gases take effect
+        when inhaled. Blowing the powder or releasing the gas subjects creatures
+        in a 5-foot Cube to its effect. The resulting cloud dissipates
+        immediately afterward. Holding one’s breath is ineffective against
+        inhaled poisons, as they affect nasal membranes, tear ducts, and other
+        parts of the body.</p>
       markdown: ''
     video:
       controls: true
@@ -8358,29 +6590,28 @@ pages:
     src: null
     system:
       tooltip: >-
-        <p>These poisons are powders or gases that take effect when inhaled.
-        Blowing the powder or releasing the gas subjects creatures in a 5-foot
-        cube to its effect. The resulting cloud dissipates immediately
-        afterward. Holding one's breath is ineffective against inhaled poisons,
-        as they affect nasal membranes, tear ducts, and other parts of the
-        body.</p>
+        <p>Poisonous powders and gases take effect when inhaled. Blowing the
+        powder or releasing the gas subjects creatures in a 5-foot Cube to its
+        effect. The resulting cloud dissipates immediately afterward. Holding
+        one’s breath is ineffective against inhaled poisons, as they affect
+        nasal membranes, tear ducts, and other parts of the body.</p>
       type: rule
     ownership:
       default: -1
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.2.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757388985403
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.KUyN4eK1xTBzXsjP'
   - sort: 22800000
-    name: Injury (2014)
+    name: Injury
     type: rule
     _id: LUL48OUq6SJeMGc7
     title:
@@ -8390,11 +6621,11 @@ pages:
     text:
       format: 1
       content: >-
-        <p><strong>Injury. </strong>Injury poison can be applied to weapons,
-        ammunition, trap components, and other objects that deal piercing or
-        slashing damage and remains potent until delivered through a wound or
-        washed off. A creature that takes piercing or slashing damage from an
-        object coated with the poison is exposed to its effects.</p>
+        <p><strong>Injury.</strong> Injury poison can be applied as a Bonus
+        Action to a weapon, a piece of ammunition, or similar object. The poison
+        remains potent until delivered through a wound or washed off. A creature
+        that takes Piercing or Slashing damage from an object coated with the
+        poison is exposed to its effects.</p>
       markdown: ''
     video:
       controls: true
@@ -8402,22 +6633,22 @@ pages:
     src: null
     system:
       tooltip: >-
-        <p>Injury poison can be applied to weapons, ammunition, trap components,
-        and other objects that deal piercing or slashing damage and remains
-        potent until delivered through a wound or washed off. A creature that
-        takes piercing or slashing damage from an object coated with the poison
-        is exposed to its effects.</p>
+        <p>Injury poison can be applied as a Bonus Action to a weapon, a piece
+        of ammunition, or similar object. The poison remains potent until
+        delivered through a wound or washed off. A creature that takes Piercing
+        or Slashing damage from an object coated with the poison is exposed to
+        its effects.</p>
       type: rule
     ownership:
       default: -1
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.2.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757389002829
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
@@ -8798,43 +7029,6 @@ pages:
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.NLRXcgrpRCfsA5mO'
-  - sort: 24000000
-    name: Abilities (2014)
-    type: rule
-    _id: 2l5215aIscQ8Y1di
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>A sentient magic item has Intelligence, Wisdom, and Charisma scores.
-        You can choose the item's abilities or determine them randomly. To
-        determine them randomly, roll 4d6 for each one, dropping the lowest roll
-        and totaling the rest.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.2l5215aIscQ8Y1di'
   - sort: 23900000
     name: Creating Sentient Magic Items (2014)
     type: rule
@@ -8848,162 +7042,30 @@ pages:
       content: >-
         <p>When you decide to make a magic item sentient, you create the item's
         persona in the same way you would create an NPC, with a few exceptions
-        described here.</p><h4>Abilities</h4><p>@Embed[.2l5215aIscQ8Y1di
-        inline]</p><h4>Communication</h4><p>@Embed[.iSNOtO9OQxN8Buf3
-        inline]</p><h4>Senses</h4><p>@Embed[.l4Z4cLJmlegyfY6c
-        inline]</p><h4>Alignment</h4><p>@Embed[.SdK1Y86NLlPhjhMl
-        inline]</p><h4>Special Purpose</h4><p>@Embed[.0LBrn5XGigZKGfIe
-        inline]</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.Kh16IbKZRyEer1ju'
-  - sort: 24100000
-    name: Communication (2014)
-    type: rule
-    _id: iSNOtO9OQxN8Buf3
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>A sentient item has some ability to communicate, either by sharing
-        its emotions, broadcasting its thoughts telepathically, or speaking
-        aloud. You can choose how it communicates or roll on the following
-        table.</p><p>@Embed[Compendium.dnd5e.tables24.RollTable.BHckoLKDwoL9d5p3]</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.iSNOtO9OQxN8Buf3'
-  - sort: 24200000
-    name: Senses (2014)
-    type: rule
-    _id: l4Z4cLJmlegyfY6c
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>With sentience comes awareness. A sentient item can perceive its
-        surroundings out to a limited range. You can choose its senses or roll
-        on the following
-        table.</p><p>@Embed[Compendium.dnd5e.tables24.RollTable.gfR9uCe42xBCCktd]</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.l4Z4cLJmlegyfY6c'
-  - sort: 24300000
-    name: Alignment (2014)
-    type: rule
-    _id: SdK1Y86NLlPhjhMl
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>A sentient magic item has an alignment. Its creator or nature might
+        described here.</p><h4>Abilities</h4><p>A sentient magic item has
+        Intelligence, Wisdom, and Charisma scores. You can choose the item's
+        abilities or determine them randomly. To determine them randomly, roll
+        4d6 for each one, dropping the lowest roll and totaling the
+        rest.</p><h4>Communication</h4><p>A sentient item has some ability to
+        communicate, either by sharing its emotions, broadcasting its thoughts
+        telepathically, or speaking aloud. You can choose how it communicates or
+        roll on the following
+        table.</p><p>@Embed[Compendium.dnd5e.tables24.RollTable.BHckoLKDwoL9d5p3]</p><h4>Senses</h4><p>With
+        sentience comes awareness. A sentient item can perceive its surroundings
+        out to a limited range. You can choose its senses or roll on the
+        following
+        table.</p><p>@Embed[Compendium.dnd5e.tables24.RollTable.gfR9uCe42xBCCktd]</p><h4>Alignment</h4><p>A
+        sentient magic item has an alignment. Its creator or nature might
         suggest an alignment. If not, you can pick an alignment or roll on the
         following
-        table.</p><p>@Embed[Compendium.dnd5e.tables24.RollTable.NdjHJMSSVWw5fHsL]</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.SdK1Y86NLlPhjhMl'
-  - sort: 24400000
-    name: Special Purpose (2014)
-    type: rule
-    _id: 0LBrn5XGigZKGfIe
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>You can give a sentient item an objective it pursues, perhaps to the
-        exclusion of all else. As long as the wielder's use of the item aligns
-        with that special purpose, the item remains cooperative. Deviating from
-        this course might cause conflict between the wielder and the item, and
-        could even cause the item to prevent the use of its activated
-        properties. You can pick a special purpose or roll on the following
+        table.</p><p>@Embed[Compendium.dnd5e.tables24.RollTable.NdjHJMSSVWw5fHsL]</p><h4>Special
+        Purpose</h4><p>You can give a sentient item an objective it pursues,
+        perhaps to the exclusion of all else. As long as the wielder's use of
+        the item aligns with that special purpose, the item remains cooperative.
+        Deviating from this course might cause conflict between the wielder and
+        the item, and could even cause the item to prevent the use of its
+        activated properties. You can pick a special purpose or roll on the
+        following
         table.</p><p>@Embed[Compendium.dnd5e.tables24.RollTable.b250eqNa0k8lrE9b]</p>
       markdown: ''
     video:
@@ -9018,15 +7080,15 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757386557305
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
-    _key: '!journal.pages!phbAppendixDRule.0LBrn5XGigZKGfIe'
+    _key: '!journal.pages!phbAppendixDRule.Kh16IbKZRyEer1ju'
   - sort: 24500000
     name: Conflict (2014)
     type: rule
@@ -9214,7 +7276,7 @@ pages:
     category: null
     _key: '!journal.pages!phbAppendixDRule.eqXkPKiwiACNXkfw'
   - sort: 24900000
-    name: Aberrations (2014)
+    name: Aberrations
     type: rule
     _id: yy50qVC1JhPHt4LC
     title:
@@ -9224,10 +7286,8 @@ pages:
     text:
       format: 1
       content: >-
-        <p><strong>Aberrations</strong> are utterly alien beings. Many of them
-        have innate magical abilities drawn from the creature’s alien mind
-        rather than the mystical forces of the world. The quintessential
-        aberrations are aboleths, beholders, mind flayers, and slaadi.</p>
+        <p class="p1"><strong>Aberrations</strong> are utterly alien beings,
+        such as aboleths and cloakers.</p>
       markdown: ''
     video:
       controls: true
@@ -9241,17 +7301,17 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757386804967
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.yy50qVC1JhPHt4LC'
   - sort: 25000000
-    name: Beasts (2014)
+    name: Beasts
     type: rule
     _id: 6bTHn7pZek9YX2tv
     title:
@@ -9261,11 +7321,8 @@ pages:
     text:
       format: 1
       content: >-
-        <p><strong>Beasts</strong> are nonhumanoid creatures that are a natural
-        part of the fantasy ecology. Some of them have magical powers, but most
-        are unintelligent and lack any society or language. Beasts include all
-        varieties of ordinary animals, dinosaurs, and giant versions of
-        animals.</p>
+        <p class="p1"><strong>Beasts</strong> are non-Humanoid natural
+        creatures, like horses and wolves, as well as most giant animals.</p>
       markdown: ''
     video:
       controls: true
@@ -9279,17 +7336,17 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757386817681
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.6bTHn7pZek9YX2tv'
   - sort: 25100000
-    name: Celestials (2014)
+    name: Celestials
     type: rule
     _id: T5CJwxjhBbi6oqaM
     title:
@@ -9299,12 +7356,8 @@ pages:
     text:
       format: 1
       content: >-
-        <p><strong>Celestials</strong> are creatures native to the Upper Planes.
-        Many of them are the servants of deities, employed as messengers or
-        agents in the mortal realm and throughout the planes. Celestials are
-        good by nature, so the exceptional celestial who strays from a good
-        alignment is a horrifying rarity. Celestials include angels, couatls,
-        and pegasi.</p>
+        <p class="p1"><strong>Celestials</strong> are magical creatures, such as
+        angels and pegasi, with ties to the Upper Planes.</p>
       markdown: ''
     video:
       controls: true
@@ -9318,17 +7371,17 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757386829750
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.T5CJwxjhBbi6oqaM'
   - sort: 25200000
-    name: Constructs (2014)
+    name: Constructs
     type: rule
     _id: jQGAJZBZTqDFod8d
     title:
@@ -9338,12 +7391,8 @@ pages:
     text:
       format: 1
       content: >-
-        <p><strong>Constructs</strong> are made, not born. Some are programmed
-        by their creators to follow a simple set of instructions, while others
-        are imbued with sentience and capable of independent thought. Golems are
-        the iconic constructs. Many creatures native to the outer plane of
-        Mechanus, such as modrons, are constructs shaped from the raw material
-        of the plane by the will of more powerful creatures.</p>
+        <p class="p1"><strong>Constructs</strong> are magically created
+        creatures such as homunculi and shield guardians.</p>
       markdown: ''
     video:
       controls: true
@@ -9357,17 +7406,17 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757386841379
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.jQGAJZBZTqDFod8d'
   - sort: 25300000
-    name: Dragons (2014)
+    name: Dragons
     type: rule
     _id: k2IRXZwGk9W0PM2S
     title:
@@ -9377,12 +7426,8 @@ pages:
     text:
       format: 1
       content: >-
-        <p><strong>Dragons</strong> are large reptilian creatures of ancient
-        origin and tremendous power. True dragons, including the good metallic
-        dragons and the evil chromatic dragons, are highly intelligent and have
-        innate magic. Also in this category are creatures distantly related to
-        true dragons, but less powerful, less intelligent, and less magical,
-        such as wyverns and pseudodragons.</p>
+        <p class="p1"><strong>Dragons</strong> are scaly beings of ancient
+        origin, such as red dragons and wyverns.</p>
       markdown: ''
     video:
       controls: true
@@ -9396,17 +7441,17 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757386852109
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.k2IRXZwGk9W0PM2S'
   - sort: 25400000
-    name: Elementals (2014)
+    name: Elementals
     type: rule
     _id: 7z1LXGGkXpHuzkFh
     title:
@@ -9416,13 +7461,8 @@ pages:
     text:
       format: 1
       content: >-
-        <p><strong>Elementals</strong> are creatures native to the elemental
-        planes. Some creatures of this type are little more than animate masses
-        of their respective elements, including the creatures simply called
-        elementals. Others have biological forms infused with elemental energy.
-        The races of genies, including djinn and efreet, form the most important
-        civilizations on the elemental planes. Other elemental creatures include
-        azers and invisible stalkers.</p>
+        <p><strong>Elementals</strong> are beings from the Elemental Planes,
+        such as efreet and water elementals.</p>
       markdown: ''
     video:
       controls: true
@@ -9436,17 +7476,17 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757386865074
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.7z1LXGGkXpHuzkFh'
   - sort: 25500000
-    name: Fey (2014)
+    name: Fey
     type: rule
     _id: OFsRUt3pWljgm8VC
     title:
@@ -9456,12 +7496,8 @@ pages:
     text:
       format: 1
       content: >-
-        <p><strong>Fey</strong> are magical creatures closely tied to the forces
-        of nature. They dwell in twilight groves and misty forests. In some
-        worlds, they are closely tied to the Feywild, also called the Plane of
-        Faerie. Some are also found in the Outer Planes, particularly the planes
-        of Arborea and the Beastlands. Fey include dryads, pixies, and
-        satyrs.</p>
+        <p class="p1"><strong>Fey</strong> are creatures tied to the Feywild or
+        the forces of nature, such as dryads and goblins.</p>
       markdown: ''
     video:
       controls: true
@@ -9475,17 +7511,17 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757386879988
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.OFsRUt3pWljgm8VC'
   - sort: 25600000
-    name: Fiends (2014)
+    name: Fiends
     type: rule
     _id: ElHKBJeiJPC7gj6k
     title:
@@ -9495,13 +7531,8 @@ pages:
     text:
       format: 1
       content: >-
-        <p><strong>Fiends</strong> are creatures of wickedness that are native
-        to the Lower Planes. A few are the servants of deities, but many more
-        labor under the leadership of archdevils and demon princes. Evil priests
-        and mages sometimes summon fiends to the material world to do their
-        bidding. If an evil celestial is a rarity, a good fiend is almost
-        inconceivable. Fiends include demons, devils, hell hounds, rakshasas,
-        and yugoloths.</p>
+        <p class="p1"><strong>Fiends</strong> are creatures tied to terrifying
+        Lower Planes, such as balors and hell hounds.</p>
       markdown: ''
     video:
       controls: true
@@ -9515,17 +7546,17 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757386896924
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.ElHKBJeiJPC7gj6k'
   - sort: 25700000
-    name: Giants (2014)
+    name: Giants
     type: rule
     _id: AOXn3Mv5vPZwo0Uf
     title:
@@ -9535,12 +7566,8 @@ pages:
     text:
       format: 1
       content: >-
-        <p><strong>Giants</strong> tower over humans and their kind. They are
-        humanlike in shape, though some have multiple heads (ettins) or
-        deformities (fomorians). The six varieties of true giant are hill
-        giants, stone giants, frost giants, fire giants, cloud giants, and storm
-        giants. Besides these, creatures such as ogres and trolls are
-        giants.</p>
+        <p class="p1"><strong>Giants</strong> are towering beings with humanlike
+        shapes, like fire giants and trolls.</p>
       markdown: ''
     video:
       controls: true
@@ -9554,17 +7581,17 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757386911089
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.AOXn3Mv5vPZwo0Uf'
   - sort: 25800000
-    name: Humanoids (2014)
+    name: Humanoids
     type: rule
     _id: iFzQs4AenN8ALRvw
     title:
@@ -9574,15 +7601,9 @@ pages:
     text:
       format: 1
       content: >-
-        <p><strong>Humanoids</strong> are the main peoples of a fantasy gaming
-        world, both civilized and savage, including humans and a tremendous
-        variety of other species. They have language and culture, few if any
-        innate magical abilities (though most humanoids can learn spellcasting),
-        and a bipedal form. The most common humanoid races are the ones most
-        suitable as player characters: humans, dwarves, elves, and halflings.
-        Almost as numerous but far more savage and brutal, and almost uniformly
-        evil, are the races of goblinoids (goblins, hobgoblins, and bugbears),
-        orcs, gnolls, lizardfolk, and kobolds.</p>
+        <p class="p1"><strong>Humanoids</strong> are people defined by their
+        roles and professions, such as mages, pirates, and warriors. They
+        include members of varied species.</p>
       markdown: ''
     video:
       controls: true
@@ -9596,17 +7617,17 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757386925092
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.iFzQs4AenN8ALRvw'
   - sort: 25900000
-    name: Monstrosities (2014)
+    name: Monstrosities
     type: rule
     _id: TX0yPEFTn79AMZ8P
     title:
@@ -9616,13 +7637,8 @@ pages:
     text:
       format: 1
       content: >-
-        <p><strong>Monstrosities</strong> are monsters in the strictest
-        sense—frightening creatures that are not ordinary, not truly natural,
-        and almost never benign. Some are the results of magical experimentation
-        gone awry (such as owlbears), and others are the product of terrible
-        curses (including minotaurs and yuan-ti). They defy categorization, and
-        in some sense serve as a catch-all category for creatures that don’t fit
-        into any other type.</p>
+        <p class="p1"><strong>Monstrosities</strong> are unnatural creatures
+        with strange origins, such as mimics and owlbears.</p>
       markdown: ''
     video:
       controls: true
@@ -9636,17 +7652,17 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757386937193
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.TX0yPEFTn79AMZ8P'
   - sort: 26000000
-    name: Oozes (2014)
+    name: Oozes
     type: rule
     _id: cgzIC1ecG03D97Fg
     title:
@@ -9656,11 +7672,8 @@ pages:
     text:
       format: 1
       content: >-
-        <p><strong>Oozes</strong> are gelatinous creatures that rarely have a
-        fixed shape. They are mostly subterranean, dwelling in caves and
-        dungeons and feeding on refuse, carrion, or creatures unlucky enough to
-        get in their way. Black puddings and gelatinous cubes are among the most
-        recognizable oozes.</p>
+        <p class="p1"><strong>Oozes</strong> are gelatinous creatures, including
+        black puddings and gelatinous cubes.</p>
       markdown: ''
     video:
       controls: true
@@ -9674,17 +7687,17 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757386948161
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.cgzIC1ecG03D97Fg'
   - sort: 26100000
-    name: Plants (2014)
+    name: Plants
     type: rule
     _id: 1oT7t6tHE4kZuSN1
     title:
@@ -9694,11 +7707,8 @@ pages:
     text:
       format: 1
       content: >-
-        <p><strong>Plants</strong> in this context are vegetable creatures, not
-        ordinary flora. Most of them are ambulatory, and some are carnivorous.
-        The quintessential plants are the shambling mound and the treant. Fungal
-        creatures such as the gas spore and the myconid also fall into this
-        category.</p>
+        <p class="p1"><strong>Plants</strong> are sentient vegetation and fungal
+        monsters, such as shambling mounds and treants.</p>
       markdown: ''
     video:
       controls: true
@@ -9712,17 +7722,17 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757386959860
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.1oT7t6tHE4kZuSN1'
   - sort: 26200000
-    name: Undead (2014)
+    name: Undead
     type: rule
     _id: D2BdqS1GeD5rcZ6q
     title:
@@ -9732,10 +7742,8 @@ pages:
     text:
       format: 1
       content: >-
-        <p><strong>Undead</strong> are once-living creatures brought to a
-        horrifying state of undeath through the practice of necromantic magic or
-        some unholy curse. Undead include walking corpses, such as vampires and
-        zombies, as well as bodiless spirits, such as ghosts and specters.</p>
+        <p class="p1"><strong>Undead</strong> are spirits and the reanimated
+        dead, such as ghosts, vampires, and zombies.</p>
       markdown: ''
     video:
       controls: true
@@ -9749,17 +7757,17 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757386972250
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.D2BdqS1GeD5rcZ6q'
   - sort: 26300000
-    name: Tags (2014)
+    name: Descriptive Tags
     type: rule
     _id: 9jV1fFF163dr68vd
     title:
@@ -9769,13 +7777,9 @@ pages:
     text:
       format: 1
       content: >-
-        <p>A monster might have one or more tags appended to its type, in
-        parentheses. For example, an orc has the <em>humanoid (orc)</em> type.
-        The parenthetical tags provide additional categorization for certain
-        creatures. The tags have no rules of their own, but something in the
-        game, such as a magic item, might refer to them. For instance, a spear
-        that is especially effective at fighting demons would work against any
-        monster that has the demon tag.</p>
+        <p class="p1">A monster might have one or more tags in parentheses
+        following its type. Such tags provide additional categorization and have
+        no rules of their own, but certain game effects might refer to them.</p>
       markdown: ''
     video:
       controls: true
@@ -9789,11 +7793,11 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757386993415
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
@@ -9809,17 +7813,12 @@ pages:
     text:
       format: 1
       content: >-
-        <p>A creature’s alignment broadly describes its ethical attitudes and
-        ideals. Alignment is a combination of two factors: one identifies
-        morality (good, evil, or neutral), and the other describes attitudes
-        toward order (lawful, chaotic, or neutral). These factors allow for nine
-        possible combinations, such as Lawful Good and Neutral
-        Evil.</p><p><em><strong>Alignment.</strong></em> An alignment is
-        suggested in a creature's stat block, with the GM determining its actual
-        alignment.</p><p><em><strong>Unaligned Creatures.</strong></em> Most
-        creatures that lack the capacity for rational thought don’t have
-        alignments; they are unaligned. Sharks are savage predators, for
-        example, but they aren’t evil; they are unaligned.</p>
+        <p>The alignment specified in a monster's stat block is a default
+        suggestion of how to roleplay the monster, inspired by its traditional
+        role in the game or real-world folklore. Change a monster's alignment to
+        suit your storytelling needs. The Neutral alignment, in particular, is
+        an invitation for you to consider whether an individual leans toward one
+        of the other alignments.</p>
       markdown: ''
     video:
       controls: true
@@ -9833,11 +7832,11 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757387076854
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
@@ -9853,11 +7852,8 @@ pages:
     text:
       format: 1
       content: >-
-        <p>An Armor Class (AC) is the target number for an attack roll. AC
-        represents how difficult it is to hit a target.</p><p>Your base AC
-        calculation is 10 plus your Dexterity modifier. If a rule gives you
-        another base AC calculation, you choose which calculation to use; you
-        can’t use more than one.</p>
+        <p>A monster's Armor Class (AC) includes its natural armor, Dexterity,
+        gear, and other defenses.</p>
       markdown: ''
     video:
       controls: true
@@ -9871,11 +7867,11 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757387086567
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
@@ -9891,23 +7887,18 @@ pages:
     text:
       format: 1
       content: >-
-        <p>A creature has a Speed, which is the distance in feet the creature
-        can cover when it moves on its turn. <em>See also</em>
-        @UUID[Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.a4CjDIEMeSbRaEjA]{Climbing},
-        @UUID[Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.zRZl7vdjzjqpazxn]{Crawling},
-        @UUID[Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.ozHhbP8JVHCJAx0b]{Flying},
-        @UUID[Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.aaJOlRhI1H6vAxt9]{Jumping},
-        @UUID[Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.53c9JMqckHagYYB5]{Swimming}.</p><h3>Burrow</h3><p>A
-        creature that has a Burrow Speed can use that speed to move through
-        sand, earth, mud, or ice. The creature can’t burrow through solid rock
-        unless the creature has a trait that allows it to do
-        so.</p><h3>Climb</h3><p>A Climb Speed can be used in place of Speed to
-        traverse a vertical surface without expending the extra movement
-        normally associated with climbing.</p><h3>Fly</h3><p>A Fly Speed can be
-        used to travel through the air. While you have a Fly Speed, you can stay
-        aloft until you land, fall, or die.</p><h3>Swim</h3><p>A Swim Speed can
-        be used to swim without expending the extra movement normally associated
-        with swimming.</p>
+        <p>The Speed entry specifies a monster's Speed. Some monsters have one
+        or more of the following speeds: Burrow, Climb, Fly,
+        Swim.</p><h3>Burrow</h3><p>A creature that has a Burrow Speed can use
+        that speed to move through sand, earth, mud, or ice. The creature can’t
+        burrow through solid rock unless the creature has a trait that allows it
+        to do so.</p><h3>Climb</h3><p>A Climb Speed can be used in place of
+        Speed to traverse a vertical surface without expending the extra
+        movement normally associated with climbing.</p><h3>Fly</h3><p>A Fly
+        Speed can be used to travel through the air. While you have a Fly Speed,
+        you can stay aloft until you land, fall, or die.</p><h3>Swim</h3><p>A
+        Swim Speed can be used to swim without expending the extra movement
+        normally associated with swimming.</p>
       markdown: ''
     video:
       controls: true
@@ -9921,11 +7912,11 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757387115013
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
@@ -9941,12 +7932,8 @@ pages:
     text:
       format: 1
       content: >-
-        <p>A creature has six ability scores—Strength, Dexterity, Constitution,
-        Intelligence, Wisdom, and Charisma—each of which has a corresponding
-        modifier. Add the modifier when you make a &amp;Reference[D20 Test] with
-        the corresponding ability or when a rule asks you to do so.</p><p>A
-        table provides the monster’s ability scores, modifiers, and saving throw
-        modifiers, all of which are detailed in chapter 1.</p>
+        <p>Every monster has six ability scores along with corresponding ability
+        score modifiers and saving throw modifiers.</p>
       markdown: ''
     video:
       controls: true
@@ -9960,11 +7947,11 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757387128646
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
@@ -10018,7 +8005,13 @@ pages:
     image: {}
     text:
       format: 1
-      content: <p>This entry lists the monster’s skill proficiencies, if any.</p>
+      content: >-
+        <p>The Skills entry specifies a monster's skill proficiencies, if any.
+        For example, a monster that is very perceptive and stealthy might have
+        bonuses to Wisdom (Perception) and Dexterity (Stealth) checks. A skill
+        bonus is the sum of a monster's relevant ability modifier and its
+        Proficiency Bonus. Other modifiers might apply.This entry lists the
+        monster’s skill proficiencies, if any.</p>
       markdown: ''
     video:
       controls: true
@@ -10032,11 +8025,11 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757387150454
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
@@ -10092,13 +8085,9 @@ pages:
     text:
       format: 1
       content: >-
-        <p>The Sense's entry lists the monster’s special senses, such as
-        Darkvision, and its Passive
-        Perception.</p><h3>Blindsight</h3><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.tdtmXZbUIOZGSnKT
-        inline]</p><h3>Darkvision</h3><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.7vQ1hLQ5fS6SSUqF
-        inline]</p><h3>Tremorsense</h3><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.r64UrNusMhwJVnxb
-        inline]</p><h3>Truesight</h3><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.be7g0q1xBAwb8drv
-        inline]</p>
+        <p>The Senses entry specifies a monster’s Passive Perception score, as
+        well as any special senses the monster possesses. Passive Perception and
+        special senses are described in “Rules Glossary.”</p>
       markdown: ''
     video:
       controls: true
@@ -10112,11 +8101,11 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757388745155
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
@@ -10264,8 +8253,11 @@ pages:
         circumstances and the number of player characters can significantly
         alter how threatening a monster is in actual play. The Game Master’s
         Guide provides guidance to the GM on using CR while planning potential
-        combat encounters.</p><h3>Experience
-        Points</h3><p>@Embed[.cNflBe0pZX8eAFB4 inline]</p>
+        combat encounters.</p><h3>Experience Points</h3><p>As they overcome
+        challenges and complete adventures, characters earn Experience Points
+        (XP), which are awarded by the Game Master. When a character’s XP total
+        crosses certain thresholds, the character’s level increases. The Game
+        Master’s Guide provides guidance on awarding XP.</p>
       markdown: ''
     video:
       controls: true
@@ -10279,54 +8271,17 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757386578766
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.m4ErwsuDpgi9Hu0V'
-  - sort: 27600000
-    name: Experience Points
-    type: rule
-    _id: cNflBe0pZX8eAFB4
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>As they overcome challenges and complete adventures, characters earn
-        Experience Points (XP), which are awarded by the Game Master. When a
-        character’s XP total crosses certain thresholds, the character’s level
-        increases. The Game Master’s Guide provides guidance on awarding XP.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.cNflBe0pZX8eAFB4'
   - sort: 27700000
-    name: Special Traits (2014)
+    name: Traits
     type: rule
     _id: aeJoiagWfLPkJSFM
     title:
@@ -10336,12 +8291,8 @@ pages:
     text:
       format: 1
       content: >-
-        <p>Special traits (which appear after a monster’s challenge rating but
-        before any actions or reactions) are characteristics that are likely to
-        be relevant in a combat encounter and that require some
-        explanation.</p><h3>Innate Spellcasting</h3><p>@Embed[.pyo2jnYvavIGyg0s
-        inline]</p><h3>Spellcasting</h3><p>@Embed[.LrDxITNV8raUt37y
-        inline]</p><h3>Psionics</h3><p>@Embed[.LLLopR0IZOleE1xT inline]</p>
+        <p>A monster’s traits, if any, are features that are active at all times
+        or in certain situations.</p>
       markdown: ''
     video:
       controls: true
@@ -10355,152 +8306,15 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757388770432
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.aeJoiagWfLPkJSFM'
-  - sort: 27800000
-    name: Innate Spellcasting (2014)
-    type: rule
-    _id: pyo2jnYvavIGyg0s
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>A monster with the innate ability to cast spells has the Innate
-        Spellcasting special trait. Unless noted otherwise, an innate spell of
-        1st level or higher is always cast at its lowest possible level and
-        can’t be cast at a higher level. If a monster has a cantrip where its
-        level matters and no level is given, use the monster’s challenge
-        rating.</p><p>An innate spell can have special rules or restrictions.
-        For example, a drow mage can innately cast the
-        @UUID[Compendium.dnd5e.spells24.Item.MRxldJd6C4bsBo3O]{Levitate} spell,
-        but the spell has a “self only” restriction, which means that the spell
-        affects only the drow mage.</p><p>A monster’s innate spells can’t be
-        swapped out with other spells. If a monster’s innate spells don’t
-        require attack rolls, no attack bonus is given for them.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.pyo2jnYvavIGyg0s'
-  - sort: 27900000
-    name: Spellcasting (2014)
-    type: rule
-    _id: LrDxITNV8raUt37y
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>A monster with the Spellcasting special trait has a spellcaster level
-        and spell slots, which it uses to cast its spells of 1st level and
-        higher (as explained in the <em>Player’s Handbook</em>). The spellcaster
-        level is also used for any cantrips included in the feature.</p><p>The
-        monster has a list of spells known or prepared from a specific class.
-        The list might also include spells from a feature in that class, such as
-        the @UUID[Compendium.dnd5e.classfeatures.Item.x637K2Icp2ZFM1TB]{Divine
-        Domain} feature of the cleric or the
-        @UUID[Compendium.dnd5e.classfeatures.Item.u6Du2P9s81SWuGbi]{Druid
-        Circle} feature of the druid. The monster is considered a member of that
-        class when attuning to or using a magic item that requires membership in
-        the class or access to its spell list.</p><p>A monster can cast a spell
-        from its list at a higher level if it has the spell slot to do so. For
-        example, a drow mage with the 3rd-level
-        @UUID[Compendium.dnd5e.spells24.Item.IyikgTEOTv701jgQ]{Lightning Bolt}
-        spell can cast it as a 5th-level spell by using one of its 5th-level
-        spell slots.</p><p>You can change the spells that a monster knows or has
-        prepared, replacing any spell on its spell list with a spell of the same
-        level and from the same class list. If you do so, you might cause the
-        monster to be a greater or lesser threat than suggested by its challenge
-        rating.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.LrDxITNV8raUt37y'
-  - sort: 28000000
-    name: Psionics (2014)
-    type: rule
-    _id: LLLopR0IZOleE1xT
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>A monster that casts spells using only the power of its mind has the
-        psionics tag added to its Spellcasting or Innate Spellcasting special
-        trait. This tag carries no special rules of its own, but other parts of
-        the game might refer to it. A monster that has this tag typically
-        doesn’t require any components to cast its spells.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.LLLopR0IZOleE1xT'
   - sort: 28100000
     name: Actions
     type: rule
@@ -10513,8 +8327,11 @@ pages:
       format: 1
       content: >-
         <p>The monster can take these actions in addition to those detailed in
-        this glossary.</p><h3>Melee and Ranged
-        Attacks</h3><p>@Embed[.kwj04a1za8L4cqPw inline]</p>
+        this glossary.</p><h3>Melee and Ranged Attacks</h3><p>The entry for a
+        monster’s attack starts by identifying whether the attack is a melee or
+        a ranged attack and then provides the attack roll’s bonus, its reach or
+        range, and what happens on a hit. An attack is against one target unless
+        its entry says otherwise.</p>
       markdown: ''
     video:
       controls: true
@@ -10528,52 +8345,15 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757386621170
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.63gRBbKNthvnmFmh'
-  - sort: 28200000
-    name: Melee and Ranged Attacks
-    type: rule
-    _id: kwj04a1za8L4cqPw
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>The entry for a monster’s attack starts by identifying whether the
-        attack is a melee or a ranged attack and then provides the attack roll’s
-        bonus, its reach or range, and what happens on a hit. An attack is
-        against one target unless its entry says otherwise.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.kwj04a1za8L4cqPw'
   - sort: 28300000
     name: Multiattack (2014)
     type: rule
@@ -10694,9 +8474,23 @@ pages:
       format: 1
       content: >-
         <p>Some special abilities have restrictions on the number of times they
-        can be used.</p><p>@Embed[.GOlh1UMmEIjEQcSE
-        inline]</p><p>@Embed[.NmdLIJPXEMZIWWQa
-        inline]</p><p>@Embed[.saRwXXdZ2trLoGHZ inline]</p>
+        can be used.</p><p><strong>X/Day. </strong>The notation “X/Day” means a
+        special ability can be used X number of times and that a monster must
+        finish a long rest to regain expended uses. For example, “1/Day” means a
+        special ability can be used once and that the monster must finish a long
+        rest to use it again.</p><p><strong>Recharge X–Y. </strong>The notation
+        “Recharge X–Y” means a monster can use a special ability once and that
+        the ability then has a random chance of recharging during each
+        subsequent round of combat. At the start of each of the monster’s turns,
+        roll a d6. If the roll is one of the numbers in the recharge notation,
+        the monster regains the use of the special ability. The ability also
+        recharges when the monster finishes a short or long rest.</p><p>For
+        example, “Recharge 5–6” means a monster can use the special ability
+        once. Then, at the start of the monster’s turn, it regains the use of
+        that ability if it rolls a 5 or 6 on a d6.</p><p><strong>Recharge after
+        a Short or Long Rest. </strong>This notation means that a monster can
+        use a special ability once and then must finish a short or long rest to
+        use it again.</p>
       markdown: ''
     video:
       controls: true
@@ -10710,132 +8504,15 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757386642686
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.xBOHFPuQWeudrfqy'
-  - sort: 28700000
-    name: X/Day (2014)
-    type: rule
-    _id: GOlh1UMmEIjEQcSE
-    title:
-      show: true
-      level: 3
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p><strong>X/Day. </strong>The notation “X/Day” means a special ability
-        can be used X number of times and that a monster must finish a long rest
-        to regain expended uses. For example, “1/Day” means a special ability
-        can be used once and that the monster must finish a long rest to use it
-        again.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.GOlh1UMmEIjEQcSE'
-  - sort: 28800000
-    name: Recharge X–Y (2014)
-    type: rule
-    _id: NmdLIJPXEMZIWWQa
-    title:
-      show: true
-      level: 3
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p><strong>Recharge X–Y. </strong>The notation “Recharge X–Y” means a
-        monster can use a special ability once and that the ability then has a
-        random chance of recharging during each subsequent round of combat. At
-        the start of each of the monster’s turns, roll a d6. If the roll is one
-        of the numbers in the recharge notation, the monster regains the use of
-        the special ability. The ability also recharges when the monster
-        finishes a short or long rest.</p><p>For example, “Recharge 5–6” means a
-        monster can use the special ability once. Then, at the start of the
-        monster’s turn, it regains the use of that ability if it rolls a 5 or 6
-        on a d6.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.NmdLIJPXEMZIWWQa'
-  - sort: 28900000
-    name: Recharge after a Short or Long Rest (2014)
-    type: rule
-    _id: saRwXXdZ2trLoGHZ
-    title:
-      show: true
-      level: 3
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p><strong>Recharge after a Short or Long Rest. </strong>This notation
-        means that a monster can use a special ability once and then must finish
-        a short or long rest to use it again.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.saRwXXdZ2trLoGHZ'
   - sort: 29000000
     name: Grapple Rules for Monsters (2014)
     type: rule
@@ -11153,7 +8830,7 @@ pages:
         warlock offends some dark power and contracts a strange affliction that
         spreads whenever he casts spells.</p><p>A simple outbreak might amount
         to little more than a small drain on party resources, curable by a
-        casting of @UUID[Compendium.dnd5e.spells24.Item.F0GsG0SJzsIOacwV]{Lesser
+        casting of @UUID[Compendium.dnd5e.spells24.Item.phbsplLesserRest]{Lesser
         Restoration}. A more complicated outbreak can form the basis of one or
         more adventures as characters search for a cure, stop the spread of the
         disease, and deal with the consequences.</p><p>A disease that does more
@@ -11175,48 +8852,15 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757388594777
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.oNQWvyRZkTOJ8PBq'
-  - sort: 500000
-    name: Strength Saving Throw
-    type: rule
-    _id: 9F7Ln8GBlGs029fD
-    system:
-      tooltip: ''
-      type: rule
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: <p>Make a Strength saving throw to physically resist direct force.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726543153217
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.9F7Ln8GBlGs029fD'
   - sort: 1100000
     name: 'Variant: Encumbrance (2014)'
     type: rule
@@ -11232,8 +8876,12 @@ pages:
         a variant if you are looking for more detailed rules for determining how
         a character is hindered by the weight of equipment. When you use this
         variant, ignore the Strength column of the Armor
-        table.</p><p>@Embed[.Ur7xWFlpVK5X8ueP
-        inline]</p><p>@Embed[.RhVgQfF29CyStS22 inline]</p>
+        table.</p><p>@Embed[.Hni8DjqLzoqsVjb6 inline]</p><p>If you carry weight
+        in excess of 10 times your Strength score, up to your maximum carrying
+        capacity, you are instead<strong> heavily encumbered</strong>, which
+        means your speed drops by 20 feet and you have disadvantage on ability
+        checks, attack rolls, and saving throws that use Strength, Dexterity, or
+        Constitution.</p>
       markdown: ''
     video:
       controls: true
@@ -11247,12 +8895,12 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1757386094427
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.JwqYf9qb6gJAWZKs'
@@ -11418,184 +9066,6 @@ pages:
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.LctvYhAwwujfBccv'
-  - sort: 600000
-    name: Attacks Rolls and Damage
-    type: rule
-    _id: 9DPXJOLEsspMYK0D
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>You add your Strength modifier to your attack roll and your damage
-        roll when attacking with a melee weapon such as a mace, a battleaxe, or
-        a javelin. You use melee weapons to make melee attacks in handto-hand
-        combat, and some of them can be thrown to make a ranged attack.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.9DPXJOLEsspMYK0D'
-  - sort: 5800000
-    name: Fast Travel Pace
-    type: rule
-    _id: mpnTe02usA9fgzCr
-    system:
-      tooltip: ''
-      type: rule
-    title:
-      show: true
-      level: 3
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p><strong>Fast.</strong> Traveling at a Fast pace imposes Disadvantage
-        on a traveler’s Wisdom (Perception or Survival) and Dexterity (Stealth)
-        checks.</p>
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.mpnTe02usA9fgzCr'
-  - sort: 5900000
-    name: Normal Travel Pace
-    type: rule
-    _id: bcPsR1qaLLv7uBGe
-    system:
-      tooltip: ''
-      type: rule
-    title:
-      show: true
-      level: 3
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p><strong>Normal.</strong> Traveling at a Normal pace imposes
-        Disadvantage on Dexterity (Stealth) checks.</p>
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.bcPsR1qaLLv7uBGe'
-  - sort: 6000000
-    name: Slow Travel Pace
-    type: rule
-    _id: khOKcrcql9Cssgnb
-    system:
-      tooltip: ''
-      type: rule
-    title:
-      show: true
-      level: 3
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p><strong>Slow.</strong> Traveling at a Slow pace grants Advantage on
-        Wisdom (Perception or Survival) checks.</p>
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.khOKcrcql9Cssgnb'
-  - sort: 7700000
-    name: Tremorsense
-    type: rule
-    _id: r64UrNusMhwJVnxb
-    system:
-      tooltip: ''
-      type: rule
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>A creature with Tremorsense can pinpoint the location of creatures
-        and moving objects within a specific range, provided that the creature
-        with Tremorsense and anything it is detecting are both in contact with
-        the same surface (such as the ground, a wall, or a ceiling) or the same
-        liquid.</p><p>Tremorsense can't detect creatures or objects in the air,
-        and it doesn't count as a form of sight.</p>
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.r64UrNusMhwJVnxb'
   - sort: 29600000
     name: Weapon Masteries
     type: rule
@@ -11924,6 +9394,358 @@ pages:
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.ULDpodOdTxTTiNEx'
+  - sort: 30500000
+    name: Life Domain Spells
+    type: spells
+    _id: spellsLife000000
+    system:
+      type: subclass
+      grouping: level
+      description:
+        value: ''
+      spells:
+        - Compendium.dnd5e.spells24.Item.phbsplAid0000000
+        - Compendium.dnd5e.spells24.Item.phbsplBless00000
+        - Compendium.dnd5e.spells24.Item.phbsplCureWounds
+        - Compendium.dnd5e.spells24.Item.phbsplLesserRest
+        - Compendium.dnd5e.spells24.Item.phbsplMassHealin
+        - Compendium.dnd5e.spells24.Item.phbsplMassCureWo
+        - Compendium.dnd5e.spells24.Item.phbsplRevivify00
+        - Compendium.dnd5e.spells24.Item.phbsplAuraofLife
+        - Compendium.dnd5e.spells24.Item.phbsplDeathWard0
+        - Compendium.dnd5e.spells24.Item.phbsplGreaterRes
+      unlinkedSpells: []
+      identifier: life
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    category: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 5.1.0
+      createdTime: 1753229779525
+      modifiedTime: 1753229882722
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!journal.pages!phbAppendixDRule.spellsLife000000'
+  - sort: 30800000
+    name: Circle of the Land, Arid Spells
+    type: spells
+    _id: spellsLandArid00
+    system:
+      type: subclass
+      grouping: level
+      description:
+        value: ''
+      spells:
+        - Compendium.dnd5e.spells24.Item.phbsplBlur000000
+        - Compendium.dnd5e.spells24.Item.phbsplBurningHan
+        - Compendium.dnd5e.spells24.Item.phbsplFireBolt00
+        - Compendium.dnd5e.spells24.Item.phbsplFireball00
+        - Compendium.dnd5e.spells24.Item.phbsplBlight0000
+        - Compendium.dnd5e.spells24.Item.phbsplWallofSton
+      unlinkedSpells: []
+      identifier: land-arid
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    category: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 5.1.0
+      createdTime: 1753230031951
+      modifiedTime: 1753230211901
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!journal.pages!phbAppendixDRule.spellsLandArid00'
+  - sort: 30900000
+    name: Circle of the Land, Polar Spells
+    type: spells
+    _id: spellsLandPolar0
+    system:
+      type: subclass
+      grouping: level
+      description:
+        value: ''
+      spells:
+        - Compendium.dnd5e.spells24.Item.phbsplFogCloud00
+        - Compendium.dnd5e.spells24.Item.phbsplHoldPerson
+        - Compendium.dnd5e.spells24.Item.phbsplRayofFrost
+        - Compendium.dnd5e.spells24.Item.phbsplSleetStorm
+        - Compendium.dnd5e.spells24.Item.phbsplIceStorm00
+        - Compendium.dnd5e.spells24.Item.phbsplConeofCold
+      unlinkedSpells: []
+      identifier: land-polar
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    category: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 5.1.0
+      createdTime: 1753230037257
+      modifiedTime: 1753230226645
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!journal.pages!phbAppendixDRule.spellsLandPolar0'
+  - sort: 31000000
+    name: Circle of the Land, Temperate Spells
+    type: spells
+    _id: spellsLandTemper
+    system:
+      type: subclass
+      grouping: level
+      description:
+        value: ''
+      spells:
+        - Compendium.dnd5e.spells24.Item.phbsplMistyStep0
+        - Compendium.dnd5e.spells24.Item.phbsplShockingGr
+        - Compendium.dnd5e.spells24.Item.phbsplSleep00000
+        - Compendium.dnd5e.spells24.Item.phbsplLightningB
+        - Compendium.dnd5e.spells24.Item.phbsplFreedomofM
+        - Compendium.dnd5e.spells24.Item.phbsplTreeStride
+      unlinkedSpells: []
+      identifier: land-temperate
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    category: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 5.1.0
+      createdTime: 1753230043618
+      modifiedTime: 1753230253535
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!journal.pages!phbAppendixDRule.spellsLandTemper'
+  - sort: 31100000
+    name: Circle of the Land, Tropical Spells
+    type: spells
+    _id: spellsLandTropic
+    system:
+      type: subclass
+      grouping: level
+      description:
+        value: ''
+      spells:
+        - Compendium.dnd5e.spells24.Item.phbsplAcidSplash
+        - Compendium.dnd5e.spells24.Item.phbsplRayofSickn
+        - Compendium.dnd5e.spells24.Item.phbsplWeb0000000
+        - Compendium.dnd5e.spells24.Item.phbsplStinkingCl
+        - Compendium.dnd5e.spells24.Item.phbsplPolymorph0
+        - Compendium.dnd5e.spells24.Item.phbsplInsectPlag
+      unlinkedSpells: []
+      identifier: land-tropical
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    category: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 5.1.0
+      createdTime: 1753230048930
+      modifiedTime: 1753230280568
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!journal.pages!phbAppendixDRule.spellsLandTropic'
+  - sort: 31200000
+    name: Oath of Devotion Spells
+    type: spells
+    _id: spellsDevotion00
+    system:
+      type: subclass
+      grouping: level
+      description:
+        value: ''
+      spells:
+        - Compendium.dnd5e.spells24.Item.phbEvilAndGoodPr
+        - Compendium.dnd5e.spells24.Item.phbsplShieldofFa
+        - Compendium.dnd5e.spells24.Item.phbsplAid0000000
+        - Compendium.dnd5e.spells24.Item.phbsplZoneofTrut
+        - Compendium.dnd5e.spells24.Item.phbsplBeaconofHo
+        - Compendium.dnd5e.spells24.Item.phbsplDispelMagi
+        - Compendium.dnd5e.spells24.Item.phbsplFreedomofM
+        - Compendium.dnd5e.spells24.Item.phbsplGuardianof
+        - Compendium.dnd5e.spells24.Item.phbsplCommune000
+        - Compendium.dnd5e.spells24.Item.phbsplFlameStrik
+      unlinkedSpells: []
+      identifier: devotion
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    category: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 5.1.0
+      createdTime: 1753230626423
+      modifiedTime: 1753230672088
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!journal.pages!phbAppendixDRule.spellsDevotion00'
+  - sort: 31300000
+    name: Draconic Spells
+    type: spells
+    _id: spellsDraconic00
+    system:
+      type: subclass
+      grouping: level
+      description:
+        value: ''
+      spells:
+        - Compendium.dnd5e.spells24.Item.phbsplAlterSelf0
+        - Compendium.dnd5e.spells24.Item.phbsplChromaticO
+        - Compendium.dnd5e.spells24.Item.phbsplCommand000
+        - Compendium.dnd5e.spells24.Item.phbsplDragonsBre
+        - Compendium.dnd5e.spells24.Item.phbsplFear000000
+        - Compendium.dnd5e.spells24.Item.phbsplFly0000000
+        - Compendium.dnd5e.spells24.Item.phbsplArcaneEye0
+        - Compendium.dnd5e.spells24.Item.phbsplCharmMonst
+        - Compendium.dnd5e.spells24.Item.phbsplLegendLore
+        - Compendium.dnd5e.spells24.Item.phbsplSummonDrag
+      unlinkedSpells: []
+      identifier: draconic
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    category: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 5.1.0
+      createdTime: 1753231119226
+      modifiedTime: 1753231139391
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!journal.pages!phbAppendixDRule.spellsDraconic00'
+  - sort: 31400000
+    name: Fiend Spells
+    type: spells
+    _id: spellsFiend00000
+    system:
+      type: subclass
+      grouping: level
+      description:
+        value: ''
+      spells:
+        - Compendium.dnd5e.spells24.Item.phbsplBurningHan
+        - Compendium.dnd5e.spells24.Item.phbsplCommand000
+        - Compendium.dnd5e.spells24.Item.phbsplScorchingR
+        - Compendium.dnd5e.spells24.Item.phbsplSuggestion
+        - Compendium.dnd5e.spells24.Item.phbsplFireball00
+        - Compendium.dnd5e.spells24.Item.phbsplStinkingCl
+        - Compendium.dnd5e.spells24.Item.phbsplFireShield
+        - Compendium.dnd5e.spells24.Item.phbsplWallofFire
+        - Compendium.dnd5e.spells24.Item.phbsplGeas000000
+        - Compendium.dnd5e.spells24.Item.phbsplInsectPlag
+      unlinkedSpells: []
+      identifier: fiend
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    category: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 5.1.0
+      createdTime: 1753231257428
+      modifiedTime: 1753231274046
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!journal.pages!phbAppendixDRule.spellsFiend00000'
 folder: kkR3zR8yqdNg4nMV
 flags: {}
 _stats:

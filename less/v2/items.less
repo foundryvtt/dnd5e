@@ -75,8 +75,10 @@
   .sheet-header {
     display: flex;
     padding: 0 12px;
+    margin-top: 8px;
     align-items: stretch;
     gap: 8px;
+    min-height: 104px;
 
     input, select { background: var(--dnd5e-background-5); }
 
@@ -103,8 +105,8 @@
       display: block;
       width: 96px;
       height: 96px;
-      border-radius: 100%;
-      border: 4px solid var(--dnd5e-color-gold);
+      border-radius: 8px;
+      border: 2px solid var(--dnd5e-color-gold);
       box-shadow: 0 0 4px var(--dnd5e-shadow-45);
       object-fit: cover;
       background: var(--dnd5e-background-alt-1);
@@ -396,40 +398,6 @@
     }
   }
 
-  .editor.prosemirror {
-    flex: 1;
-    overflow: hidden;
-
-    menu { border-radius: 0; }
-
-    .editor-container {
-      overflow: hidden auto;
-      scrollbar-gutter: stable;
-      margin: 0 4px 0 16px;
-      padding-right: 4px;
-    }
-
-    .editor-content {
-      position: unset;
-      min-height: 300px;
-      padding: 0;
-    }
-
-    code-mirror {
-      min-height: 300px;
-      display: flex;
-      flex-direction: column;
-
-      .cm-editor { overflow: auto; }
-      .cm-scroller { position: relative; }
-    }
-
-    > textarea {
-      flex: none;
-      min-height: 300px;
-    }
-  }
-
   /* Container Contents */
   .inventory-element {
     .top .containers { justify-content: end; }
@@ -556,6 +524,7 @@
       --icon-fill: var(--activity-icon-color);
       flex: 0 0 50px;
       height: 24px;
+      gap: 8px;
 
       .gold-icon {
         border-width: 1px;
@@ -569,7 +538,7 @@
       font-weight: bold;
       flex: 1;
       font-size: var(--font-size-14);
-      cursor: pointer;
+      cursor: var(--cursor-pointer);
       text-align: center;
 
       &:hover { text-shadow: 0 0 6px var(--color-shadow-primary); }

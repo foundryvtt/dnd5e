@@ -3,8 +3,6 @@ import MappingField from "../fields/mapping-field.mjs";
 
 /**
  * A template for currently held currencies.
- *
- * @property {object} currency  Object containing currencies as numbers.
  * @mixin
  */
 export default class CurrencyTemplate extends SystemDataModel {
@@ -18,7 +16,7 @@ export default class CurrencyTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
-  /*  Getters                                     */
+  /*  Properties                                  */
   /* -------------------------------------------- */
 
   /**

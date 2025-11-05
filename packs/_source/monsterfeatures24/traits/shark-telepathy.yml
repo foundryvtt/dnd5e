@@ -1,0 +1,44 @@
+_id: mmSharkTelepathy
+name: Shark Telepathy
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] can magically control
+      sharks within 120 feet of itself, using a special telepathy.</p>
+    chat: ''
+  identifier: shark-telepathy
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/magic/sonic/explosion-shock-sound-wave.webp
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736209842027
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 10500000
+ownership:
+  default: 0
+_key: '!items!mmSharkTelepathy'

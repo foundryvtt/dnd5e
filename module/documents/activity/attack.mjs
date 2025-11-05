@@ -1,13 +1,19 @@
 import AttackSheet from "../../applications/activity/attack-sheet.mjs";
 import AttackRollConfigurationDialog from "../../applications/dice/attack-configuration-dialog.mjs";
-import AttackActivityData from "../../data/activity/attack-data.mjs";
+import BaseAttackActivityData from "../../data/activity/attack-data.mjs";
 import { getTargetDescriptors } from "../../utils.mjs";
 import ActivityMixin from "./mixin.mjs";
 
 /**
+ * @import {
+ *   AttackRollDialogConfiguration, AttackRollProcessConfiguration, BasicRollMessageConfiguration, D20RollConfiguration
+ * } from "../../dice/_types.mjs";
+ */
+
+/**
  * Activity for making attacks and rolling damage.
  */
-export default class AttackActivity extends ActivityMixin(AttackActivityData) {
+export default class AttackActivity extends ActivityMixin(BaseAttackActivityData) {
   /* -------------------------------------------- */
   /*  Model Configuration                         */
   /* -------------------------------------------- */
@@ -68,19 +74,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
   /* -------------------------------------------- */
 
   /**
-   * @typedef {D20RollProcessConfiguration} AttackRollProcessConfiguration
-   * @property {string|boolean} [ammunition]  Specific ammunition to consume, or `false` to prevent any ammo usage.
-   * @property {string} [attackMode]          Mode to use for making the attack and rolling damage.
-   * @property {string} [mastery]             Weapon mastery option to use.
-   */
-
-  /**
-   * @typedef {BasicRollDialogConfiguration} AttackRollDialogConfiguration
-   * @property {AttackRollConfigurationDialogOptions} [options]  Configuration options.
-   */
-
-  /**
-   * @typedef {object} AmmunitionUpdate
+   * @typedef AmmunitionUpdate
    * @property {string} id        ID of the ammunition item to update.
    * @property {boolean} destroy  Will the ammunition item be deleted?
    * @property {number} quantity  New quantity after the ammunition is spent.
@@ -250,7 +244,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
   /**
    * Configure a roll config for each roll performed as part of the attack process. Will be called once per roll
    * in the process each time an option is changed in the roll configuration interface.
-   * @param {D20RollProcessConfiguration} process          Configuration for the entire rolling process.
+   * @param {AttackRollProcessConfiguration} process       Configuration for the entire rolling process.
    * @param {D20RollConfiguration} config                  Configuration for a specific roll.
    * @param {FormDataExtended} [formData]                  Any data entered into the rolling prompt.
    * @param {number} index                                 Index of the roll within all rolls being prepared.

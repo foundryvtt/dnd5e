@@ -4,25 +4,21 @@ import SystemDataModel from "./system-data-model.mjs";
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
+ * @import { FavoriteData5e } from "../../data/actor/_types.mjs";
+ * @import { ItemDataModelMetadata } from "./types.mjs";
+ */
+
+/**
  * Variant of the SystemDataModel with support for rich item tooltips.
  */
 export default class ItemDataModel extends SystemDataModel {
-
-  /**
-   * @typedef {SystemDataModelMetadata} ItemDataModelMetadata
-   * @property {boolean} enchantable    Can this item be modified by enchantment effects?
-   * @property {boolean} hasEffects     Display the effects tab on this item's sheet.
-   * @property {boolean} singleton      Should only a single item of this type be allowed on an actor?
-   * @property {InventorySectionDescriptor} [inventory]  Configuration for displaying this item type in its own section
-   *                                                     in creature inventories.
-   */
 
   /** @type {ItemDataModelMetadata} */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     enchantable: false,
     hasEffects: false,
     singleton: false
-  }, {inplace: false}));
+  }, { inplace: false }));
 
   /**
    * The handlebars template for rendering item tooltips.
@@ -68,6 +64,36 @@ export default class ItemDataModel extends SystemDataModel {
   /* -------------------------------------------- */
 
   /**
+   * Whether this item's activities can have scaling configured for their consumption.
+   * @type {boolean}
+   */
+  get canConfigureScaling() {
+    return false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Whether this item's activities should prompt for scaling when used.
+   * @type {boolean}
+   */
+  get canScale() {
+    return false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Whether this item's activities can have scaling configured for their damage.
+   * @type {boolean}
+   */
+  get canScaleDamage() {
+    return false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Modes that can be used when making an attack with this item.
    * @type {FormSelectOption[]}
    */
@@ -103,15 +129,24 @@ export default class ItemDataModel extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Parts making up the subtitle on the item's tooltip.
+   * @type {string[]}
+   */
+  get tooltipSubtitle() {
+    return [this.type?.label ?? game.i18n.localize(CONFIG.Item.typeLabels[this.parent.type])];
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
   prepareBaseData() {
     if ( this.parent.isEmbedded && this.parent.actor?.items.has(this.parent.id) ) {
-      if ( this.identifier ) this.parent.actor.identifiedItems?.set(this.identifier, this.parent);
-      const sourceId = this.parent.flags.dnd5e?.sourceId ?? this.parent._stats.compendiumSource
-        ?? this.parent.flags.core?.sourceId;
+      this.parent.actor.identifiedItems?.set(this.parent.identifier, this.parent);
+      const sourceId = this.parent._stats.compendiumSource ?? this.parent.flags.dnd5e?.sourceId;
       if ( sourceId ) this.parent.actor.sourcedItems?.set(sourceId, this.parent);
     }
   }
@@ -166,14 +201,13 @@ export default class ItemDataModel extends SystemDataModel {
     uses = this.hasLimitedUses && (game.user.isGM || identified) ? uses : null;
     price = game.user.isGM || identified ? price : null;
 
-    const subtitle = [this.type?.label ?? game.i18n.localize(CONFIG.Item.typeLabels[this.parent.type])];
     const context = {
       name, type, img, price, weight, uses, school, materials,
       config: CONFIG.DND5E,
       controlHints: game.settings.get("dnd5e", "controlHints"),
       labels: foundry.utils.deepClone((activity ?? this.parent).labels),
       tags: this.parent.labels?.components?.tags,
-      subtitle: subtitle.filterJoin(" &bull; "),
+      subtitle: this.tooltipSubtitle.filterJoin(" • "),
       description: {
         value: await TextEditor.enrichHTML(description ?? "", {
           rollData, relativeTo: this.parent, ...enrichmentOptions

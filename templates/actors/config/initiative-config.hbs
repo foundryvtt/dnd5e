@@ -30,7 +30,9 @@
     <fieldset class="card">
         <legend>{{ ability.label }}</legend>
         {{ formField ability.local.field name=ability.local.name value=ability.local.value localize=true rootId=partId }}
+        {{#if ability.global.field}}
         {{ formField ability.global.field name=ability.global.name value=ability.global.value
                      label=(localize "DND5E.GlobalBonus") rootId=partId }}
+        {{/if}}
     </fieldset>
 </fieldset>

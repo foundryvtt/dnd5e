@@ -1,5 +1,4 @@
 import FormulaField from "../fields/formula-field.mjs";
-import IdentifierField from "../fields/identifier-field.mjs";
 import TransformationSetting from "../settings/transformation-setting.mjs";
 import BaseActivityData from "./base-activity.mjs";
 
@@ -9,36 +8,15 @@ const {
 } = foundry.data.fields;
 
 /**
- * @import { TransformationSettingData } from "../settings/transformation-setting.mjs";
- */
-
-/**
- * @typedef TransformProfile
- * @property {string} _id            Unique ID for this profile.
- * @property {string} cr             Formula for the CR of creature to transform into if in CR mode.
- * @property {object} level
- * @property {number} level.min      Minimum level at which this profile can be used.
- * @property {number} level.max      Maximum level at which this profile can be used.
- * @property {Set<string>} movement  Movement types that aren't allowed on selected creatures.
- * @property {string} name           Display name for this profile.
- * @property {Set<string>} sizes     Allowed creature sizes, or blank to allow all sizes.
- * @property {Set<string>} types     Allowed creature types, or blank to allow all types.
- * @property {string} uuid           UUID of the actor to transform into if in direct mode.
+ * @import { TransformActivityData, TransformProfile } from "./_types.mjs";
  */
 
 /**
  * Data model for a transform activity.
- *
- * @property {TransformProfile[]} profiles     Information on transformation methods and sources.
- * @property {TransformationSetting} settings  Settings data to use when summoning.
- * @property {object} transform
- * @property {boolean} transform.customize     Should any customized settings be respected or should the default
- *                                             settings for the selected profile be used instead.
- * @property {string} transform.identifier     Class identifier that will be used to determine applicable level.
- * @property {""|"cr"} transform.mode          Method of determining what type of creature to transform into.
- * @property {string} transform.preset         Transformation preset to use.
+ * @extends {BaseActivityData<TransformActivityData>}
+ * @mixes TransformActivityData
  */
-export default class TransformActivityData extends BaseActivityData {
+export default class BaseTransformActivityData extends BaseActivityData {
   /** @inheritDoc */
   static defineSchema() {
     return {
@@ -59,7 +37,6 @@ export default class TransformActivityData extends BaseActivityData {
       settings: new EmbeddedDataField(TransformationSetting, { nullable: true, initial: null }),
       transform: new SchemaField({
         customize: new BooleanField(),
-        identifier: new IdentifierField(),
         mode: new StringField({ initial: "cr" }),
         preset: new StringField()
       })
@@ -87,16 +64,17 @@ export default class TransformActivityData extends BaseActivityData {
   }
 
   /* -------------------------------------------- */
+  /*  Data Migrations                             */
+  /* -------------------------------------------- */
 
-  /**
-   * Determine the level used to determine profile limits, based on the spell level for spells or either the
-   * character or class level, depending on whether `classIdentifier` is set.
-   * @type {number}
-   */
-  get relevantLevel() {
-    const keyPath = (this.item.type === "spell") && (this.item.system.level > 0) ? "item.level"
-      : this.transform.identifier ? `classes.${this.transform.identifier}.levels` : "details.level";
-    return foundry.utils.getProperty(this.getRollData(), keyPath) ?? 0;
+  /** @inheritDoc */
+  static migrateData(source) {
+    super.migrateData(source);
+    if ( source.transform?.identifier ) {
+      foundry.utils.setProperty(source, "visibility.identifier", source.transform.identifier);
+      delete source.transform.identifier;
+    }
+    return source;
   }
 
   /* -------------------------------------------- */

@@ -1,5 +1,6 @@
 <div>
     {{ formField fields.onSave name=(concat prefix "onSave") value=data.onSave localize=true
                  label="DND5E.SAVE.FIELDS.effects.onSave.label" hint="DND5E.SAVE.FIELDS.effects.onSave.hint"
-                 input=@root.inputs.createCheckboxInput }}
+                 input=@root.inputs.createCheckboxInput rootId=@root.partId }}
+    {{> "systems/dnd5e/templates/activity/parts/activity-effect-level-limit.hbs" }}
 </div>

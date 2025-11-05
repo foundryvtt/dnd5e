@@ -4,6 +4,10 @@ import Dialog5e from "../../api/dialog.mjs";
 const { BooleanField } = foundry.data.fields;
 
 /**
+ * @import { RestConfiguration } from "../../../documents/actor/actor.mjs";
+ */
+
+/**
  * Dialog with shared resting functionality.
  */
 export default class BaseRestDialog extends Dialog5e {
@@ -58,7 +62,7 @@ export default class BaseRestDialog extends Dialog5e {
    * @type {boolean}
    */
   get isPartyGroup() {
-    return (this.actor.type === "group") && (this.actor.system.type.value === "party");
+    return this.actor.type === "group";
   }
 
   /* -------------------------------------------- */

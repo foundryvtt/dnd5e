@@ -10,24 +10,21 @@ import RollConfigField from "../../shared/roll-config-field.mjs";
 const { NumberField, SchemaField } = foundry.data.fields;
 
 /**
- * @typedef {object} AbilityData
- * @property {number} value          Ability score.
- * @property {number} proficient     Proficiency value for saves.
- * @property {number} max            Maximum possible score for the ability.
- * @property {object} bonuses        Bonuses that modify ability checks and saves.
- * @property {string} bonuses.check  Numeric or dice bonus to ability checks.
- * @property {string} bonuses.save   Numeric or dice bonus to ability saving throws.
- * @property {RollConfigData} check    Properties related to ability checks.
- * @property {RollConfigData} save     Properties related to saving throws.
+ * @import { CurrencyTemplateData } from "../../shared/_types.mjs";
+ * @import { CommonTemplateData } from "./_types.mjs";
  */
 
 /**
  * A template for all actors that share the common template.
- *
- * @property {Object<string, AbilityData>} abilities  Actor's abilities.
- * @mixin
+ * @extends {ActorDataModel<CurrencyTemplate & CommonTemplateData>}
+ * @mixes CurrencyTemplate
+ * @mixes CommonTemplateData
  */
 export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplate) {
+
+  /* -------------------------------------------- */
+  /*  Model Configuration                         */
+  /* -------------------------------------------- */
 
   /** @inheritDoc */
   static defineSchema() {

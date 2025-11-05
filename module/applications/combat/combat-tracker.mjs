@@ -1,9 +1,7 @@
-import ContextMenu5e from "../context-menu.mjs";
 import { formatNumber, getPluralRules } from "../../utils.mjs";
 
 /**
- * @typedef {object} CombatGroupData
- * @property {boolean} expanded
+ * @import { CombatGroupData } from "./_types.mjs";
  */
 
 /**
@@ -33,15 +31,6 @@ export default class CombatTracker5e extends foundry.applications.sidebar.tabs.C
     const action = btn.dataset.control || btn.dataset.action;
     if ( (action === "rollInitiative") && combatant?.actor ) return combatant.actor.rollInitiativeDialog();
     return super._onCombatantControl(event, target);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  _contextMenu(html) {
-    new ContextMenu5e(
-      html.querySelector(".directory-list"), ".directory-item:not(.combatant-group)", this._getEntryContextOptions()
-    );
   }
 
   /* -------------------------------------------- */

@@ -1,0 +1,47 @@
+_id: mmUndeadFortitud
+name: Undead Fortitude
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">If damage reduces the [[lookup @name lowercase]] to 0
+      Hit Points, it makes a Constitution saving throw (DC 5 plus the damage
+      taken) unless the damage is Radiant or from a Critical Hit. On a
+      successful save, the [[lookup @name lowercase]] drops to 1 Hit Point
+      instead.</p>
+    chat: ''
+  identifier: undead-fortitude
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/magic/death/skull-flames-white-blue.webp
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1735944943825
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 13600000
+ownership:
+  default: 0
+_key: '!items!mmUndeadFortitud'

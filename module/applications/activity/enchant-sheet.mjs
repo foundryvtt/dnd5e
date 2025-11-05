@@ -51,8 +51,8 @@ export default class EnchantSheet extends ActivitySheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _prepareEffectContext(context) {
-    context = await super._prepareEffectContext(context);
+  async _prepareEffectContext(context, options) {
+    context = await super._prepareEffectContext(context, options);
 
     const appliedEnchantments = new Set(context.activity.effects?.map(e => e._id) ?? []);
     context.allEnchantments = this.item.effects
@@ -85,8 +85,8 @@ export default class EnchantSheet extends ActivitySheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _prepareIdentityContext(context) {
-    context = await super._prepareIdentityContext(context);
+  async _prepareIdentityContext(context, options) {
+    context = await super._prepareIdentityContext(context, options);
     context.behaviorFields.unshift({
       field: context.fields.enchant.fields.self,
       value: context.source.enchant.self,

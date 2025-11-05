@@ -1,12 +1,12 @@
 import EnchantSheet from "../../applications/activity/enchant-sheet.mjs";
 import EnchantUsageDialog from "../../applications/activity/enchant-usage-dialog.mjs";
-import EnchantActivityData from "../../data/activity/enchant-data.mjs";
+import BaseEnchantActivityData from "../../data/activity/enchant-data.mjs";
 import ActivityMixin from "./mixin.mjs";
 
 /**
  * Activity for enchanting items.
  */
-export default class EnchantActivity extends ActivityMixin(EnchantActivityData) {
+export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityData) {
   /* -------------------------------------------- */
   /*  Model Configuration                         */
   /* -------------------------------------------- */
@@ -153,13 +153,12 @@ export default class EnchantActivity extends ActivityMixin(EnchantActivityData) 
       }
     }
 
+    const flags = { enchantmentProfile: profile };
+    if ( concentration ) flags.dependentOn = concentration.uuid;
     const applied = await ActiveEffect.create(
-      effect.clone({
-        origin: this.uuid, "flags.dnd5e.enchantmentProfile": profile
-      }).toObject(),
+      effect.clone({ origin: this.uuid, "flags.dnd5e": flags }).toObject(),
       { parent: item, keepOrigin: true, chatMessageOrigin: chatMessage?.id }
     );
-    if ( concentration ) await concentration.addDependent(applied);
   }
 
   /* -------------------------------------------- */

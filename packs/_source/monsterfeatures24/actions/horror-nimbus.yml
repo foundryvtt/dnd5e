@@ -1,0 +1,168 @@
+_id: mmHorrorNimbus00
+name: Horror Nimbus
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    GP5MnIyXCVZ4ZMTQ:
+      type: save
+      _id: GP5MnIyXCVZ4ZMTQ
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: false
+        value: '1'
+      effects:
+        - _id: ahNNQZ2FHPsRpYbH
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: radius
+          size: '15'
+          count: ''
+        affects:
+          choice: false
+          type: creature
+          count: ''
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 8
+            denomination: '6'
+            bonus: ''
+            types:
+              - psychic
+        onSave: none
+      save:
+        ability:
+          - wis
+        dc:
+          calculation: cha
+          formula: 8 + @mod + @prof
+      name: Save
+      img: ''
+      appliedEffects:
+        - ahNNQZ2FHPsRpYbH
+  uses:
+    spent: 0
+    recovery:
+      - period: recharge
+        formula: '5'
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <p class="feature"><em>Wisdom Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=GP5MnIyXCVZ4ZMTQ]], each [[lookup
+      @target.affects.type activity=GP5MnIyXCVZ4ZMTQ]] in a [[lookup
+      @target.template.size activity=GP5MnIyXCVZ4ZMTQ]]-<span
+      style="font-family:'Roboto Condensed', sans-serif">foot</span> Emanation
+      originating from the [[lookup @name lowercase]].</p><p
+      class="feature"><em>Failure:</em> [[/damage average]] damage, and the
+      target has the &amp;Reference[Frightened apply=false] condition for
+      [[lookup @duration.value activity=GP5MnIyXCVZ4ZMTQ]] [[lookup
+      @duration.units activity=GP5MnIyXCVZ4ZMTQ]], until it takes damage, or
+      until it ends its turn with the [[lookup @name lowercase]] out of line of
+      sight.</p><p class="feature"><em>Success:</em> The target is immune to
+      this [[lookup @name lowercase]]'s Horror Nimbus for 24 hours.</p>
+    chat: ''
+  identifier: horror-nimbus
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/unholy/hand-claw-fire-blue.webp
+effects:
+  - name: Frightened
+    img: systems/dnd5e/icons/svg/statuses/frightened.svg
+    origin: Item.mmHorrorNimbus00
+    _id: ahNNQZ2FHPsRpYbH
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: 0
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Frightened apply=false] condition for
+      1 minute, until it takes damage, or until it ends its turn with the
+      attacking creature out of line of sight.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - frightened
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736055249315
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmHorrorNimbus00.ahNNQZ2FHPsRpYbH'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737913372263
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 12100000
+ownership:
+  default: 0
+_key: '!items!mmHorrorNimbus00'

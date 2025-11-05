@@ -1,0 +1,138 @@
+_id: mmNimbleEscape00
+name: Nimble Escape
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    CcMi6Alf0pup7o81:
+      type: utility
+      _id: CcMi6Alf0pup7o81
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: 7U7Pe61lsMZgN7qh
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Expend Use
+      img: systems/dnd5e/icons/svg/monster.svg
+      appliedEffects:
+        - 7U7Pe61lsMZgN7qh
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] takes the
+      &amp;Reference[Disengage] or &amp;Reference[Hide] action.</p>
+    chat: ''
+  identifier: nimble-escape
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/skills/movement/ball-spinning-blue.webp
+effects:
+  - name: Apply Hide Action to Target
+    img: systems/dnd5e/icons/svg/statuses/hiding.svg
+    origin: Item.mmNimbleEscape00
+    _id: 7U7Pe61lsMZgN7qh
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    transfer: true
+    statuses:
+      - hiding
+    sort: 0
+    flags:
+      dae:
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!mmNimbleEscape00.7U7Pe61lsMZgN7qh'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736073451432
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 16000000
+ownership:
+  default: 0
+_key: '!items!mmNimbleEscape00'

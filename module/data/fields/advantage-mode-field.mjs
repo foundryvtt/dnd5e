@@ -1,14 +1,5 @@
 /**
- * @typedef AdvantageModeData
- * @property {number|null} override               Whether the mode has been entirely overridden.
- * @property {AdvantageModeCounts} advantages     The advantage counts.
- * @property {AdvantageModeCounts} disadvantages  The disadvantage counts.
- */
-
-/**
- * @typedef AdvantageModeCounts
- * @property {number} count          The number of applications of this mode.
- * @property {boolean} [suppressed]  Whether this mode is suppressed.
+ * @import { AdvantageModeData } from "./_types.mjs";
  */
 
 /**
@@ -95,28 +86,31 @@ export default class AdvantageModeField extends foundry.data.fields.NumberField 
 
   /**
    * Retrieve the counts from several advantage mode fields and determine the final advantage mode.
-   * @param {DataModel} model    The model containing the fields.
-   * @param {string[]} keyPaths  Paths to the individual fields to combine within the model.
+   * @param {DataModel} model                      The model containing the fields.
+   * @param {string[]} keyPaths                    Paths to the individual fields to combine within the model.
+   * @param {Partial<AdvantageModeData>} [counts]  External sources of advantage/disadvantage.
    * @returns {{ advantage: boolean, disadvantage: boolean, mode: number }}
    */
-  static combineFields(model, keyPaths) {
-    const counts = {
+  static combineFields(model, keyPaths, counts={}) {
+    counts = foundry.utils.mergeObject({
       override: null,
       advantages: { count: 0, suppressed: false },
       disadvantages: { count: 0, suppressed: false }
-    };
+    }, counts);
     for ( const kp of keyPaths ) {
       const c = this.getCounts(model, kp);
       const src = foundry.utils.getProperty(model._source, kp) ?? 0;
-      if ( c.override ) counts.override = c.override;
+      if ( c.override !== null ) counts.override = c.override;
       if ( c.advantages.suppressed ) counts.advantages.suppressed = true;
       if ( c.disadvantages.suppressed ) counts.disadvantages.suppressed = true;
       counts.advantages.count += c.advantages.count + Number(src === 1);
       counts.disadvantages.count += c.disadvantages.count + Number(src === -1);
     }
     return {
-      advantage: (counts.advantages.count > 0) && !counts.advantages.suppressed,
-      disadvantage: (counts.disadvantages.count > 0) && !counts.disadvantages.suppressed,
+      advantage: (((counts.advantages.count > 0) && (counts.override === null)) || (counts.override === 1))
+        && !counts.advantages.suppressed,
+      disadvantage: (((counts.disadvantages.count > 0) && (counts.override === null)) || (counts.override === -1))
+        && !counts.disadvantages.suppressed,
       mode: this.resolveMode(model, null, counts)
     };
   }

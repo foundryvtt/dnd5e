@@ -4,6 +4,11 @@
         {{#each parts}}
         <section class="tooltip-part">
             <div class="dice">
+                {{#if icon}}
+                <span class="part-method" data-tooltip aria-label="{{ localize method }}">
+                    {{{ icon }}}
+                </span>
+                {{/if}}
                 <ol class="dice-rolls">
                     {{#each rolls}}
                     <li class="roll {{ classes }}">{{{ result }}}</li>

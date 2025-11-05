@@ -12,6 +12,10 @@ const {
  */
 export default class SummonsField extends EmbeddedDataField {
   constructor(options={}) {
+    foundry.utils.logCompatibilityWarning(
+      "The `SummonsField` field has been deprecated in favor of the Summons activity.",
+      { since: "DnD5e 5.2", until: "DnD5e 5.3", once: true }
+    );
     super(SummonsData, foundry.utils.mergeObject({ required: false, nullable: true, initial: null }, options));
   }
 }
@@ -53,6 +57,16 @@ export default class SummonsField extends EmbeddedDataField {
  * @property {boolean} prompt               Should the player be prompted to place the summons?
  */
 export class SummonsData extends foundry.abstract.DataModel {
+  constructor(...args) {
+    foundry.utils.logCompatibilityWarning(
+      "The `SummonsData` data model has been deprecated in favor of the Summon activity.",
+      { since: "DnD5e 5.2", until: "DnD5e 5.3", once: true }
+    );
+    super(...args);
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   static defineSchema() {
     return {

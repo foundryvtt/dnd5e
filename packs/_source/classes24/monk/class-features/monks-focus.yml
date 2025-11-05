@@ -60,7 +60,7 @@ system:
   requirements: Monk
   activities:
     2ghJTBhilLrFn9xT:
-      type: attack
+      type: utility
       name: Flurry of Blows
       _id: 2ghJTBhilLrFn9xT
       activation:
@@ -76,9 +76,8 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
-        chatFlavor: ''
+        chatFlavor: Make two [[/item Unarmed Strike]]{Unarmed Strikes}
       duration:
         units: inst
         concentration: false
@@ -105,30 +104,11 @@ system:
         recovery: []
         max: ''
       sort: 100000
-      attack:
-        critical:
-          threshold: null
-        flat: false
-        type:
-          value: melee
-          classification: unarmed
-        ability: dex
-        bonus: ''
-      damage:
-        critical:
-          bonus: ''
-        includeBase: true
-        parts:
-          - custom:
-              enabled: true
-              formula: '@scale.monk.die + @mod'
-            number: null
-            denomination: 0
-            bonus: ''
-            types:
-              - bludgeoning
-            scaling:
-              number: 1
+      img: ''
+      roll:
+        name: ''
+        formula: ''
+      appliedEffects: []
     7xj7b6e8tDznDSrE:
       type: utility
       name: Patient Defense (Focus Point)
@@ -354,18 +334,14 @@ effects:
       lastModifiedBy: null
       exportSource: null
     _key: '!items.effects!phbmnkMonksFocus.92bFICMzRpJmnO56'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.350'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1735866307724
-  modifiedTime: 1745256763198
+  modifiedTime: 1759782137284
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1200000

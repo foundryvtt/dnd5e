@@ -9,12 +9,14 @@
 
 "TYPES.Actor.character": "Player Character",
 "TYPES.Actor.characterPl": "Player Characters",
+"TYPES.Actor.encounter": "Encounter",
+"TYPES.Actor.encounterPl": "Encounters",
+"TYPES.Actor.group": "Group",
+"TYPES.Actor.groupPl": "Groups",
 "TYPES.Actor.npc": "Non-Player Character",
 "TYPES.Actor.npcPl": "Non-Player Characters",
 "TYPES.Actor.vehicle": "Vehicle",
 "TYPES.Actor.vehiclePl": "Vehicles",
-"TYPES.Actor.group": "Group",
-"TYPES.Actor.groupPl": "Groups",
 
 "TYPES.ActiveEffect.enchantment": "Enchantment",
 "TYPES.ActiveEffect.enchantmentPl": "Enchantments",
@@ -187,6 +189,10 @@
       "Label": "Bonus Action"
     },
     "Crew": {
+      "Counted": {
+        "one": "{number} crew action",
+        "other": "{number} crew actions"
+      },
       "Header": "Crew Actions",
       "Label": "Crew Action"
     },
@@ -245,6 +251,7 @@
 },
 
 "DND5E.ACTIVEEFFECT": {
+  "AttributeKeyTooltip": "For a list of common keys, see <a href=\"{url}\">the wiki</a>.",
   "FIELDS": {
     "statuses": {
       "label": "Status Conditions",
@@ -271,6 +278,18 @@
       }
     },
     "effects": {
+      "element": {
+        "level": {
+          "label": "Level Limit",
+          "hint": "Range of levels required to apply this effect.",
+          "max": {
+            "label": "Maximum Level"
+          },
+          "min": {
+            "label": "Minimum Level"
+          }
+        }
+      },
       "label": "Applied Effects"
     },
     "img": {
@@ -278,6 +297,35 @@
     },
     "name": {
       "label": "Name"
+    },
+    "visibility": {
+      "identifier": {
+        "hint": "The identifier of the class that level limits apply to. If left blank, the character level is used.",
+        "label": "Class Identifier"
+      },
+      "label": "Visibility",
+      "level": {
+        "hint": "Range of levels required to use this activity.",
+        "label": "Level Limit",
+        "max": {
+          "label": "Maximum Level"
+        },
+        "min": {
+          "label": "Minimum Level"
+        }
+      },
+      "requireAttunement": {
+        "hint": "Activity will not be usable if item requires attunement and isn't attuned.",
+        "label": "Require Attunement"
+      },
+      "requireIdentification": {
+        "hint": "Activity will not be usable if item isn't identified.",
+        "label": "Require Identification"
+      },
+      "requireMagic": {
+        "hint": "Activity will not be usable if magic isn't available.",
+        "label": "Require Magic"
+      }
     }
   },
   "SECTIONS": {
@@ -292,8 +340,15 @@
   }
 },
 
-"DND5E.ActorWarningInvalidItem": "{itemType} items cannot be added to a {actorType}.",
-"DND5E.ActorWarningSingleton": "Only a single {itemType} can be added to a {actorType}.",
+"DND5E.ACTOR": {
+  "Warning": {
+    "CreateActor": "You must have 'Create New Actors' permission in order to summon directly from a compendium.",
+    "InvalidItem": "{itemType} items cannot be added to a {actorType}.",
+    "NoActor": "Actor cannot be found with UUID '{uuid}' to summon.",
+    "Singleton": "Only a single {itemType} can be added to a {actorType}."
+  }
+},
+
 "DND5E.ActiveEffectOverrideWarning": "This value is being modified by an Active Effect and cannot be edited. Disable the effect to edit it.",
 "DND5E.Add": "Add",
 "DND5E.AdditionalControls": "Additional Controls",
@@ -347,7 +402,8 @@
     },
     "Hint": "Allow the player to increase one or more ability scores or take an optional feat.",
     "Journal": {
-      "DescriptionEpic": "<p>You gain an Epic Boon feat or another feat of your choice for which you qualify. {recommendation} is recommended.</p>",
+      "DescriptionEpic": "<p>You gain an Epic Boon feat or another feat of your choice for which you qualify.",
+      "DescriptionEpicRecommendation": "<p>You gain an Epic Boon feat or another feat of your choice for which you qualify. {recommendation} is recommended.</p>",
       "DescriptionLegacy": "<p>When you reach {firstLevelOrdinal} level, and again at {otherLevelsOrdinal} level, you can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can’t increase an ability score above {maxAbilityScore} using this feature.</p><p>Using the optional feats rule, you can forgo taking this feature to take a feat of your choice instead.</p>",
       "DescriptionModern": "<p>You gain the Ability Score Improvement feat or another feat of your choice for which you qualify. You gain this feature again at {class} levels {otherLevels}.</p>",
       "Name": "Ability Score Improvement"
@@ -1265,6 +1321,7 @@
   },
   "Filters": {
     "Label": "Filters",
+    "Grouped": "{type} ({group})",
     "HasDarkvision": "Has Darkvision",
     "HasSpellcasting": "Has Spellcasting",
     "SearchResults": "Search results"
@@ -1455,6 +1512,9 @@
     },
     "Wand": {
       "Label": "Wand"
+    },
+    "Wondrous": {
+      "Label": "Wondrous Item"
     }
   }
 },
@@ -1529,7 +1589,8 @@
     "SlotLevel": "Slot Level"
   },
   "Target": {
-    "ThisItem": "This Item"
+    "ThisItem": "This Item",
+    "UnknownItem": "an unknown item"
   },
   "Type": {
     "Action": {
@@ -1784,6 +1845,7 @@
     "Modification": "{type} Modification",
     "Immunity": "{type} Immunity",
     "Resistance": "{type} Resistance",
+    "Threshold": "Damage Threshold",
     "Vulnerability": "{type} Vulnerability"
   },
   "Downgrading": "Downgrading {source} to Resistance",
@@ -1913,7 +1975,11 @@
     "Dissociate": "Dissociate Effect"
   },
   "Empty": "No associated effects. Use the <i class=\"fas fa-plus\"></i> button above to create one, or select an existing effect from the drop-down.",
-  "Label": "Available Effects"
+  "Label": "Available Effects",
+  "RIDER": {
+    "Activity": "Enchantment Rider Activity",
+    "Effect": "Enchantment Rider Effect"
+  }
 },
 "DND5E.EffectsApplyTokens": "Apply to selected tokens",
 "DND5E.EffectApplyWarningConcentration": "Applying an effect that is being concentrated on by another character requires GM permissions.",
@@ -2051,6 +2117,23 @@
   }
 },
 
+"DND5E.ENCOUNTER": {
+  "Action": {
+    "Award": "Award XP & Currency"
+  },
+  "Difficulty": {
+    "high": "High Difficulty",
+    "low": "Low Difficulty",
+    "moderate": "Moderate Difficulty"
+  },
+  "DropCreature": "Drop Creature",
+  "Tab": {
+    "Description": "Description",
+    "Loot": "Loot",
+    "Members": "Members"
+  }
+},
+
 "DND5E.Environment": "Environment",
 
 "DND5E.EQUIPMENT": {
@@ -2099,6 +2182,7 @@
   "Current": "Current XP",
   "Format": "{value} XP",
   "Label": "Experience Points",
+  "Pool": "XP Pool",
   "Progress": "Progress to next Level",
   "StatBlock": {
     "Standard": "XP {value}",
@@ -2554,7 +2638,30 @@
 "DND5E.GroupSummaryEmpty": "Empty group",
 "DND5E.GroupControls": "Controls",
 "DND5E.Group": {
+  "Action": {
+    "ChangePace": "Change Pace",
+    "Inventory": {
+      "Group": "Show Group Inventory",
+      "Vehicle": "Show Vehicle Inventory"
+    },
+    "Remove": "Remove Member",
+    "SetPrimaryVehicle": "Set Primary Vehicle",
+    "UnsetPrimaryVehicle": "Unset Primary Vehicle",
+    "View": "View Member"
+  },
+  "Config": {
+    "Art": {
+      "Label": "Member Art",
+      "portraits": "Portraits",
+      "tokens": "Tokens"
+    },
+    "Legend": "Group Sheet Options"
+  },
   "Challenge": "Challenge",
+  "Distribute": {
+    "noxp": "Distribute pooled currency",
+    "xp": "Distribute pooled XP & currency"
+  },
   "Member": {
     "one": "Member",
     "other": "Members"
@@ -2569,8 +2676,17 @@
   "TypeGeneric": "Group",
   "TypeParty": "Party",
   "Vehicle": {
-    "one": "Vehicle",
-    "other": "Vehicles"
+    "Count": {
+      "one": "Vehicle",
+      "other": "Vehicles"
+    },
+    "Primary": {
+      "label": "Primary Vehicle"
+    }
+  },
+  "Warning": {
+    "PhysicalItemOnly": "Only physical items are supported.",
+    "PlaceMembers": "Error placing tokens in scene."
   }
 },
 "DND5E.Habitat": {
@@ -2661,6 +2777,12 @@
   "Counted": {
     "one": "{number} hit point",
     "other": "{number} hit points"
+  },
+  "DT": {
+    "abbr": "DT"
+  },
+  "Other": {
+    "label": "Other Options"
   }
 },
 
@@ -2684,6 +2806,7 @@
 "DND5E.HPFormulaRollMessage": "Roll Hit Point Formula",
 
 "DND5E.HITDICE": {
+  "Abbreviation": "HD",
   "Action": {
     "Decrease": "Decrease",
     "Increase": "Increase"
@@ -2946,6 +3069,7 @@
 },
 
 "DND5E.Level": "Level",
+"DND5E.LevelAvg": "Avg. Level",
 "DND5E.LevelPl": "Levels",
 "DND5E.LevelActionDecrease": "Level Down",
 "DND5E.LevelActionIncrease": "Level Up",
@@ -2998,6 +3122,18 @@
 "DND5E.NPC": {
   "Label": "NPC",
   "FIELDS": {
+    "attributes": {
+      "price": {
+        "denomination": {
+          "label": "Denomination"
+        },
+        "hint": "The hire rate per day, or the livestock purchase price.",
+        "label": "Cost",
+        "value": {
+          "label": "Amount"
+        }
+      }
+    },
     "traits": {
       "important": {
         "hint": "Important NPCs track death saves, hit dice, and loyalty (if enabled). Any NPC with class levels is considered important regardless of this setting.",
@@ -3083,6 +3219,7 @@
 "DND5E.PropertyBase": "Base",
 "DND5E.PropertyTotal": "Total",
 "DND5E.Public": "Public",
+"DND5E.Quality": "Quality",
 "DND5E.Quantity": "Quantity",
 "DND5E.QuantityAbbr": "Qty",
 "DND5E.QuantityFormula": "Quantity Formula",
@@ -3351,21 +3488,37 @@
     "Rule": "Rule"
   }
 },
+
+"DND5E.MOVEMENT": {
+  "Action": {
+    "Configure": "Configure Movement Speed"
+  },
+  "FIELDS": {
+    "ignoredDifficultTerrain": {
+      "label": "Ignored Difficult Terrain"
+    },
+    "special": {
+      "label": "Special Movement"
+    },
+    "speeds": {
+      "label": "Movement Speeds"
+    },
+    "units": {
+      "label": "Unit"
+    }
+  },
+  "Hover": "Hover",
+  "Speed": "Combat Speed",
+  "Type": {
+    "Burrow": "Burrow",
+    "Climb": "Climb",
+    "Fly": "Fly",
+    "Swim": "Swim",
+    "Walk": "Walk"
+  }
+},
+
 "DND5E.Movement": "Movement",
-"DND5E.MovementConfig": "Configure Movement Speed",
-"DND5E.MovementConfigHint": "Configure movement speed and special movement attributes.",
-"DND5E.MovementWalk": "Walk",
-"DND5E.MovementBurrow": "Burrow",
-"DND5E.MovementClimb": "Climb",
-"DND5E.MovementHover": "Hover",
-"DND5E.MovementFly": "Fly",
-"DND5E.MovementSwim": "Swim",
-"DND5E.MovementLand": "Land",
-"DND5E.MovementWater": "Water",
-"DND5E.MovementAir": "Air",
-"DND5E.MovementSpeeds": "Movement Speeds",
-"DND5E.MovementUnits": "Units",
-"DND5E.MovementIgnoredDifficultTerrain": "Ignored Difficult Terrain",
 
 "DND5E.SAVE": {
   "Title": {
@@ -3449,6 +3602,7 @@
   "ClassSummary": "Default 5e Class Summary Sheet",
   "Container": "Default 5e Container Sheet",
   "DifficultTerrain": "Default 5e Difficult Terrain Sheet",
+  "Encounter": "Default 5e Encounter Sheet",
   "Group": "Default 5e Group Sheet",
   "Item": "Default 5e Item Sheet",
   "JournalEntry": "Default 5e Journal Entry Sheet",
@@ -3530,6 +3684,7 @@
 "DND5E.SkillSlt": "Sleight of Hand",
 "DND5E.SkillSte": "Stealth",
 "DND5E.SkillSur": "Survival",
+"DND5E.SkillRoll": "Roll {ability} ({skill}) Check",
 "DND5E.SkillPromptTitle": "{ability} ({skill}) Check",
 "DND5E.SkillConfigureTitle": "Configure {skill}",
 "DND5E.SkillConfigure": "Configure Skill",
@@ -3599,6 +3754,7 @@
 "DND5E.SpellAbility": "Spellcasting Ability",
 "DND5E.SpellAbilitySet": "Set as Primary Spellcasting Ability",
 "DND5E.SpellAdd": "Add Spell",
+"DND5E.SpellAttackBonus": "Spell Attack Bonus",
 "DND5E.SpellCantrip": "Cantrip",
 "DND5E.SpellCastConsume": "Consume Spell Slot?",
 "DND5E.SpellCastNoSlots": "You have no available {level} spell slots with which to cast {name}",
@@ -3659,7 +3815,8 @@
     "Unprepared": "Not Prepared",
     "Prepared": "Prepared",
     "AlwaysPrepared": "Always Prepared"
-  }
+  },
+  "Unlabeled": "Unlabeled Spellcasting"
 },
 
 "DND5E.SpellcastingClass": "{class} Spellcasting",
@@ -3777,6 +3934,7 @@
 "DND5E.SubclassMismatchWarn": "{name} subclass has no matching class with identifier '{class}'.",
 "DND5E.SubclassName": "Subclass Name",
 "DND5E.Subtype": "Subtype",
+"DND5E.Summary": "Summary",
 
 "DND5E.SUMMON": {
   "Title": "Summon",
@@ -3915,8 +4073,6 @@
     "EmptyDrop": "Click the <i class=\"fas fa-plus\"></i> button above to create a profile or drop a creature to summon here."
   },
   "Warning": {
-    "CreateActor": "You must have 'Create New Actors' permission in order to summon directly from a compendium.",
-    "NoActor": "Actor cannot be found with UUID '{uuid}' to summon.",
     "NoOwnership": "You must have ownership of '{actor}' in order to summon it.",
     "NoProfile": "Cannot find summoning profile {profileId} on '{item}'.",
     "Wildcard": "You must have 'Use File Browser' permissions to summon creatures with wildcard artwork."
@@ -4425,6 +4581,10 @@
       "other": {
         "label": "Other Options"
       },
+      "spellLists": {
+        "hint": "The spells on these spell lists will be kept if the actor has a matching item.",
+        "label": "Retained Spell Lists"
+      },
       "tempFormula": {
         "hint": "Formula for temp HP that will be added upon transformation.",
         "label": "Temp Formula"
@@ -4505,6 +4665,38 @@
   }
 },
 
+"DND5E.TRAVEL": {
+  "FIELDS": {
+    "pace": {
+      "label": "Pace"
+    },
+    "time": {
+      "hint": "Number of hours traveled per day used to convert travel speed to pace.",
+      "label": "Hours per Day"
+    }
+  },
+  "Label": "Travel Pace",
+  "Pace": {
+    "Fast": "Fast",
+    "Normal": "Normal",
+    "Slow": "Slow"
+  },
+  "Per": {
+    "Day": "Per Day",
+    "Hour": "Per Hour"
+  },
+  "Slowed": {
+    "Group": "The group's pace is slowed due to a member having their speed reduced to half or less.",
+    "Member": "This group member is slowing down the rest of the group."
+  },
+  "Speed": "Travel Speed",
+  "Type": {
+    "Air": "Air",
+    "Land": "Land",
+    "Water": "Water"
+  }
+},
+
 "DND5E.Treasure": {
   "Categories": {
     "Any": "Any",
@@ -4532,7 +4724,6 @@
 
 "DND5E.UNITS": {
   "DISTANCE": {
-    "Label": "Distance Units",
     "Foot": {
       "Label": "Feet",
       "Abbreviation": "ft"
@@ -4541,6 +4732,7 @@
       "Label": "Kilometers",
       "Abbreviation": "km"
     },
+    "Label": "Distance Unit",
     "Meter": {
       "Label": "Meters",
       "Abbreviation": "m"
@@ -4588,6 +4780,19 @@
     },
     "Year": {
       "Label": "Year"
+    }
+  },
+  "TRAVEL": {
+    "Kilometer": {
+      "AbbreviationHour": "km/h",
+      "AbbreviationDay": "km/d",
+      "Label": "Kilometers"
+    },
+    "Label": "Travel Unit",
+    "Mile": {
+      "AbbreviationDay": "mi/d",
+      "AbbreviationHour": "mph",
+      "Label": "Miles"
     }
   },
   "VOLUME": {
@@ -4801,14 +5006,116 @@
 "DND5E.Value": "Value",
 
 "DND5E.VEHICLE": {
+  "Action": {
+    "Create": {
+      "Equipment": "Create Equipment",
+      "Feature": "Create Feature",
+      "Weapon": "Create Weapon"
+    },
+    "Crew": {
+      "Decrease": "Decrease",
+      "Increase": "Increase"
+    },
+    "Drop": {
+      "Animal": "Drop Draft Animal",
+      "Crew": "Drop Crew",
+      "Passengers": "Drop Passengers"
+    },
+    "Uncrew": "Uncrew"
+  },
+  "Actions": {
+    "Ordinal": {
+      "one": "{n}st Action",
+      "two": "{n}nd Action",
+      "few": "{n}rd Action",
+      "other": "{n}th Action"
+    }
+  },
+  "Activation": {
+    "Crew": {
+      "label": "Crew Action"
+    }
+  },
+  "Crew": {
+    "Assigned": "Assigned",
+    "Label": "Crew",
+    "Passengers": "Passengers",
+    "Unassigned": "Unassigned"
+  },
+  "FIELDS": {
+    "attributes": {
+      "actions": {
+        "label": "Actions",
+        "max": {
+          "hint": "Actions taken with a full crew complement",
+          "label": "Maximum Actions"
+        },
+        "spent": {
+          "label": "Spent Actions"
+        },
+        "stations": {
+          "label": "Action Stations"
+        },
+        "thresholds": {
+          "full": {
+            "label": "Full Crew Complement"
+          },
+          "mid": {
+            "label": "Partial Crew Complement"
+          },
+          "min": {
+            "label": "Minimum Crew Complement"
+          },
+          "label": "Thresholds"
+        }
+      },
+      "capacity": {
+        "cargo": {
+          "value": {
+            "label": "Cargo"
+          }
+        },
+        "label": "Capacity"
+      }
+    },
+    "crew": {
+      "max": {
+        "label": "Crew"
+      }
+    },
+    "passengers": {
+      "max": {
+        "label": "Passengers"
+      }
+    },
+    "traits": {
+      "beam": {
+        "value": {
+          "label": "Beam"
+        }
+      },
+      "keel": {
+        "value": {
+          "label": "Keel"
+        }
+      }
+    }
+  },
+  "Mishap": {
+    "label": "Mishap",
+    "Threshold": {
+      "abbr": "MT",
+      "label": "Mishap Threshold"
+    }
+  },
   "MOUNTABLE": {
     "FIELDS": {
       "cover": {
         "label": "Cover",
         "hint": "Cover provided to crew operating this equipment."
       },
-      "crewed": {
-        "label": "Crewed"
+      "crew": {
+        "label": "Crew"
       },
       "hp": {
         "label": "Hit Points",
@@ -4834,38 +5141,34 @@
         }
       }
     }
+  },
+  "Option": {
+    "Abilities": "Show Abilities",
+    "Initiative": "Show Initiative",
+    "Quality": "Show Quality"
+  },
+  "Tabs": {
+    "Cargo": "Cargo",
+    "CrewPassengers": "Crew & Passengers"
+  },
+  "Type": {
+    "Air": {
+      "label": "Air Vehicle"
+    },
+    "label": "Vehicle Type",
+    "Land": {
+      "label": "Land Vehicle"
+    },
+    "Space": {
+      "label": "Space Vehicle"
+    },
+    "Water": {
+      "label": "Water Vehicle"
+    }
   }
 },
 
 "DND5E.Vehicle": "Vehicle",
-"DND5E.VehicleActions": "Actions",
-"DND5E.VehicleActionsHint": "Actions taken with full crew complement",
-"DND5E.VehicleActionMax": "Maximum Actions",
-"DND5E.VehicleActionStations": "Action Stations",
-"DND5E.VehicleActionThresholds": "Action Thresholds",
-"DND5E.VehicleActionThresholdsFull": "Full Crew Complement",
-"DND5E.VehicleActionThresholdsMid": "Partial Crew Complement",
-"DND5E.VehicleActionThresholdsMin": "Minimum Crew Complement",
-"DND5E.VehicleCargo": "Cargo",
-"DND5E.VehicleCargoCapacity": "Cargo Capacity",
-"DND5E.VehicleCargoCrew": "Cargo & Crew",
-"DND5E.VehicleCreatureCapacity": "Creature Capacity",
-"DND5E.VehicleCrew": "Crew",
-"DND5E.VehicleCrewPassengers": "Crew & Passengers",
-"DND5E.VehicleCrewed": "Crewed",
-"DND5E.VehicleCrewAction": "Crew Action",
-"DND5E.VehicleEquipment": "Vehicle Equipment",
-"DND5E.VehicleMishap": "Mishap",
-"DND5E.VehicleMishapThreshold": "Mishap Threshold",
-"DND5E.VehiclePassengers": "Passengers",
-"DND5E.VehiclePassengerName": "Passenger Name or Type",
-"DND5E.VehiclePassengerQuantity": "Passenger Quantity",
-"DND5E.VehicleType": "Vehicle Type",
-"DND5E.VehicleTypeAir": "Air Vehicle",
-"DND5E.VehicleTypeLand": "Land Vehicle",
-"DND5E.VehicleTypeSpace": "Space Vehicle",
-"DND5E.VehicleTypeWater": "Water Vehicle",
-"DND5E.VehicleUncrewed": "Uncrewed",
 "DND5E.Versatile": "Versatile",
 "DND5E.VersatileDamage": "Versatile Damage",
 "DND5E.VsDC": "vs DC.",
@@ -4944,6 +5247,7 @@
   "DC": "DC {dc} {check}",
   "DCPassiveShort": "DC {dc} passive {check}",
   "DCPassiveLong": "passive {check} score of {dc} or higher",
+  "ItemActivity": "{item} ({activity})",
   "NoActorWarning": "No selected or assigned actor could be found to execute this roll.",
   "PassiveShort": "passive {check}",
   "PassiveLong": "passive {check} score",
@@ -5238,11 +5542,11 @@
       "Name": "Allow Individual Rests"
     },
     "AllowSummoning": {
-      "Hint": "Allow players to use summoning abilities to summon actors. Players must also have the Create Token core permission for this to work.",
+      "Hint": "Allow players to use summoning abilities to summon actors. Players must also have the Create Tokens core permission.",
       "Name": "Allow Summoning"
     },
     "AllowTransformation": {
-      "Hint": "Allow players to transform their own actors. Players must also have the Create Actor core permission for this to work.",
+      "Hint": "Allow players to transform their own actors. Players must also have the Create Actors & Create Tokens core permissions.",
       "Name": "Allow Transformation"
     }
   },

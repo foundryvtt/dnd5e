@@ -10,26 +10,16 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
 const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
+ * @import { SpellItemSystemData } from "./_types.mjs";
+ * @import { ActivitiesTemplateData ItemDescriptionTemplateData } from "./templates/_types.mjs";
+ */
+
+/**
  * Data definition for Spell items.
- * @mixes ActivitiesTemplate
- * @mixes ItemDescriptionTemplate
- *
- * @property {string} ability                    Override of default spellcasting ability.
- * @property {ActivationData} activation         Casting time & conditions.
- * @property {DurationData} duration             Duration of the spell effect.
- * @property {number} level                      Base level of the spell.
- * @property {object} materials                  Details on material components required for this spell.
- * @property {string} materials.value            Description of the material components required for casting.
- * @property {boolean} materials.consumed        Are these material components consumed during casting?
- * @property {number} materials.cost             GP cost for the required components.
- * @property {number} materials.supply           Quantity of this component available.
- * @property {string} method                     The spellcasting method this spell was gained via.
- * @property {number} prepared                   The spell availability.
- * @property {Set<string>} properties            General components and tags for this spell.
- * @property {RangeData} range                   Range of the spell
- * @property {string} school                     Magical school to which this spell belongs.
- * @property {string} sourceClass                Associated spellcasting class when this spell is on an actor.
- * @property {TargetData} target                 Information on area and individual targets.
+ * @extends {ItemDataModel<ActivitiesTemplate & ItemDescriptionTemplate & SpellItemSystemData>}
+ * @mixes ActivitiesTemplateData
+ * @mixes ItemDescriptionTemplateData
+ * @mixes SpellItemSystemData
  */
 export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, ItemDescriptionTemplate) {
 
@@ -104,7 +94,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
           let include = new Set();
           let exclude = new Set();
           for ( const [k, v] of Object.entries(value ?? {}) ) {
-            const list = dnd5e.registry.spellLists.forType(...k.split(":"));
+            const list = dnd5e.registry.spellLists.forType(k);
             if ( !list || (v === 0) ) continue;
             if ( v === 1 ) include = include.union(list.identifiers);
             else if ( v === -1 ) exclude = exclude.union(list.identifiers);
@@ -114,10 +104,14 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
         },
         config: {
           choices: dnd5e.registry.spellLists.options.reduce((obj, entry) => {
-            const list = dnd5e.registry.spellLists.forType(...entry.value.split(":"));
-            if ( list?.identifiers.size ) obj[entry.value] = entry.label;
+            const [type, identifier] = entry.value.split(":");
+            const list = dnd5e.registry.spellLists.forType(type, identifier);
+            if ( list?.identifiers.size ) obj[entry.value] = {
+              label: entry.label, group: CONFIG.DND5E.spellListTypes[type]
+            };
             return obj;
-          }, {})
+          }, {}),
+          collapseGroup: group => group !== CONFIG.DND5E.spellListTypes.class
         }
       }],
       ["properties", this.compendiumBrowserPropertiesFilter("spell")]
@@ -125,7 +119,143 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   }
 
   /* -------------------------------------------- */
-  /*  Data Migrations                             */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Attack classification of this spell.
+   * @type {"spell"}
+   */
+  get attackClassification() {
+    return "spell";
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  get availableAbilities() {
+    if ( this.ability ) return new Set([this.ability]);
+    const spellcasting = this.parent?.actor?.spellcastingClasses[this.sourceClass]?.spellcasting.ability
+      ?? this.parent?.actor?.system.attributes?.spellcasting;
+    return new Set(spellcasting ? [spellcasting] : []);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  get canConfigureScaling() {
+    return this.level > 0;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Whether the spell can be prepared.
+   * @type {boolean}
+   */
+  get canPrepare() {
+    return !!CONFIG.DND5E.spellcasting[this.method]?.prepares;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  get canScale() {
+    return (this.level > 0) && !!CONFIG.DND5E.spellcasting[this.method]?.slots;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  get canScaleDamage() {
+    return true;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Properties displayed in chat.
+   * @type {string[]}
+   */
+  get chatProperties() {
+    return [
+      this.parent.labels.level,
+      this.parent.labels.components.vsm + (this.parent.labels.materials ? ` (${this.parent.labels.materials})` : ""),
+      ...this.parent.labels.components.tags,
+      this.parent.labels.duration
+    ];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Whether this spell counts towards a class' number of prepared spells.
+   * @type {boolean}
+   */
+  get countsPrepared() {
+    return !!CONFIG.DND5E.spellcasting[this.method]?.prepares
+      && (this.level > 0)
+      && (this.prepared === CONFIG.DND5E.spellPreparationStates.prepared.value);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  get _typeAbilityMod() {
+    return this.availableAbilities.first() ?? "int";
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  get criticalThreshold() {
+    return this.parent?.actor?.flags.dnd5e?.spellCriticalThreshold ?? Infinity;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Retrieve a linked activity that granted this spell using the stored `cachedFor` value.
+   * @returns {Activity|null}
+   */
+  get linkedActivity() {
+    const relative = this.parent.actor;
+    const uuid = this.parent.getFlag("dnd5e", "cachedFor");
+    if ( !relative || !uuid ) return null;
+    const data = foundry.utils.parseUuid(uuid, { relative });
+    const [itemId, , activityId] = (data?.embedded ?? []).slice(-3);
+    return relative.items.get(itemId)?.system.activities?.get(activityId) ?? null;
+    // TODO: Swap back to fromUuidSync once https://github.com/foundryvtt/foundryvtt/issues/11214 is resolved
+    // return fromUuidSync(this.parent.getFlag("dnd5e", "cachedFor"), { relative, strict: false }) ?? null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The proficiency multiplier for this item.
+   * @returns {number}
+   */
+  get proficiencyMultiplier() {
+    return 1;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  get scalingIncrease() {
+    if ( this.level !== 0 ) return null;
+    return Math.floor(((this.parent.actor?.system.cantripLevel?.(this.parent) ?? 0) + 1) / 6);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  get tooltipSubtitle() {
+    return [this.parent.labels.level, CONFIG.DND5E.spellSchools[this.school]?.label];
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /**
@@ -291,7 +421,6 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   async getCardData(enrichmentOptions={}) {
     const context = await super.getCardData(enrichmentOptions);
     context.isSpell = true;
-    context.subtitle = [this.parent.labels.level, CONFIG.DND5E.spellSchools[this.school]?.label].filterJoin(" &bull; ");
     const { activation, components, duration, range, target } = this.parent.labels;
     context.properties = [components?.vsm, activation, duration, range, target].filter(_ => _);
     if ( !this.properties.has("material") ) delete context.materials;
@@ -386,114 +515,6 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     if ( this.method && !(this.method in CONFIG.DND5E.spellcasting) ) {
       context.spellcastingMethods.push({ label: this.method, value: this.method });
     }
-  }
-
-  /* -------------------------------------------- */
-  /*  Properties                                  */
-  /* -------------------------------------------- */
-
-  /**
-   * Attack classification of this spell.
-   * @type {"spell"}
-   */
-  get attackClassification() {
-    return "spell";
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  get availableAbilities() {
-    if ( this.ability ) return new Set([this.ability]);
-    const spellcasting = this.parent?.actor?.spellcastingClasses[this.sourceClass]?.spellcasting.ability
-      ?? this.parent?.actor?.system.attributes?.spellcasting;
-    return new Set(spellcasting ? [spellcasting] : []);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Whether the spell can be prepared.
-   * @type {boolean}
-   */
-  get canPrepare() {
-    return !!CONFIG.DND5E.spellcasting[this.method]?.prepares;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Properties displayed in chat.
-   * @type {string[]}
-   */
-  get chatProperties() {
-    return [
-      this.parent.labels.level,
-      this.parent.labels.components.vsm + (this.parent.labels.materials ? ` (${this.parent.labels.materials})` : ""),
-      ...this.parent.labels.components.tags,
-      this.parent.labels.duration
-    ];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Whether this spell counts towards a class' number of prepared spells.
-   * @type {boolean}
-   */
-  get countsPrepared() {
-    return !!CONFIG.DND5E.spellcasting[this.method]?.prepares
-      && (this.level > 0)
-      && (this.prepared === CONFIG.DND5E.spellPreparationStates.prepared.value);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  get _typeAbilityMod() {
-    return this.availableAbilities.first() ?? "int";
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  get criticalThreshold() {
-    return this.parent?.actor?.flags.dnd5e?.spellCriticalThreshold ?? Infinity;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Retrieve a linked activity that granted this spell using the stored `cachedFor` value.
-   * @returns {Activity|null}
-   */
-  get linkedActivity() {
-    const relative = this.parent.actor;
-    const uuid = this.parent.getFlag("dnd5e", "cachedFor");
-    if ( !relative || !uuid ) return null;
-    const data = foundry.utils.parseUuid(uuid, { relative });
-    const [itemId, , activityId] = (data?.embedded ?? []).slice(-3);
-    return relative.items.get(itemId)?.system.activities?.get(activityId) ?? null;
-    // TODO: Swap back to fromUuidSync once https://github.com/foundryvtt/foundryvtt/issues/11214 is resolved
-    // return fromUuidSync(this.parent.getFlag("dnd5e", "cachedFor"), { relative, strict: false }) ?? null;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * The proficiency multiplier for this item.
-   * @returns {number}
-   */
-  get proficiencyMultiplier() {
-    return 1;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  get scalingIncrease() {
-    if ( this.level !== 0 ) return null;
-    return Math.floor(((this.parent.actor?.system.cantripLevel?.(this.parent) ?? 0) + 1) / 6);
   }
 
   /* -------------------------------------------- */

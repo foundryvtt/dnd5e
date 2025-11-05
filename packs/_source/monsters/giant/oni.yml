@@ -634,6 +634,7 @@ items:
         conditions: ''
       properties:
         - hvy
+        - mgc
         - rch
         - two
       proficient: 1
@@ -803,11 +804,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.rOG1OM2ihgPjOvFW
       duplicateSource: null
-      coreVersion: '13.345'
+      coreVersion: '13.350'
       systemId: dnd5e
-      systemVersion: 5.1.0
+      systemVersion: 5.2.0
       createdTime: null
-      modifiedTime: 1749402619120
+      modifiedTime: 1760378799817
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!L1w8yBkInMscfJ3F.FC0FNE8O4rnbth8s'
@@ -880,7 +881,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties: []
+      properties:
+        - mgc
       proficient: 1
       unidentified:
         description: ''
@@ -957,6 +959,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: claw-oni-form-only
+      mastery: ''
     effects: []
     folder: null
     sort: 300000
@@ -966,11 +969,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.345'
+      coreVersion: '13.350'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.2.0
       createdTime: null
-      modifiedTime: 1749402494828
+      modifiedTime: 1760378803707
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!L1w8yBkInMscfJ3F.q7J7PERrJb2vxtlt'
@@ -2049,8 +2052,8 @@ items:
           with the next lowest hit points. A creature's hit points must be equal
           to or less than the remaining total for that creature to be
           affected.</p><p>Undead and creatures immune to being charmed aren't
-          affected by this spell.</p><p><strong>Higher Levels.</strong> When you
-          cast this spell using a spell slot of 2nd level or higher, roll an
+          affected by this spell.</p><p><strong>At Higher Levels.</strong> When
+          you cast this spell using a spell slot of 2nd level or higher, roll an
           additional 2d8 for each slot level above 1st.</p>
         chat: ''
       source:

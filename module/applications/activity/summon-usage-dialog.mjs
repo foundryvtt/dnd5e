@@ -48,7 +48,9 @@ export default class SummonUsageDialog extends ActivityUsageDialog {
             options = options.map(({ value, label }) => ({ value, label: label.replace("1 × ", "") }));
           }
           context.summonsFields.push({
-            field: new StringField({ label: game.i18n.localize("DND5E.SUMMON.Profile.Label") }),
+            field: new StringField({
+              required: true, blank: false, label: game.i18n.localize("DND5E.SUMMON.Profile.Label")
+            }),
             name: "summons.profile",
             value: this.config.summons?.profile,
             options

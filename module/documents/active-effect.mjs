@@ -2,14 +2,19 @@ import FormulaField from "../data/fields/formula-field.mjs";
 import MappingField from "../data/fields/mapping-field.mjs";
 import { parseOrString, staticID } from "../utils.mjs";
 import Item5e from "./item.mjs";
+import DependentDocumentMixin from "./mixins/dependent.mjs";
 
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
 const { ObjectField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
+ * @import { FavoriteData5e } from "../data/actor/_types.mjs";
+ */
+
+/**
  * Extend the base ActiveEffect class to implement system-specific logic.
  */
-export default class ActiveEffect5e extends ActiveEffect {
+export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect) {
   /**
    * Static ActiveEffect ID for various conditions.
    * @type {Record<string, string>}
@@ -46,6 +51,19 @@ export default class ActiveEffect5e extends ActiveEffect {
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "DND5E.ACTIVEEFFECT"];
 
   /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Another effect that granted this effect as a rider.
+   * @type {ActiveEffect5e|null}
+   */
+  get dependentOrigin() {
+    if ( !(this.parent instanceof Item) ) return null;
+    return this.parent.effects.get(this.flags.dnd5e?.dependentOn) ?? null;
+  }
+
+  /* -------------------------------------------- */
 
   /**
    * Is this effect an enchantment on an item that accepts enchantment?
@@ -78,7 +96,10 @@ export default class ActiveEffect5e extends ActiveEffect {
   get isSuppressed() {
     if ( super.isSuppressed ) return true;
     if ( this.type === "enchantment" ) return false;
-    if ( this.parent instanceof dnd5e.documents.Item5e ) return this.parent.areEffectsSuppressed;
+    if ( this.parent instanceof dnd5e.documents.Item5e ) {
+      if ( this.parent.areEffectsSuppressed ) return true;
+      if ( this.dependentOrigin?.active === false ) return true;
+    }
     return false;
   }
 
@@ -429,6 +450,7 @@ export default class ActiveEffect5e extends ActiveEffect {
       const activityData = item.system.activities.get(id)?.toObject();
       if ( !activityData ) continue;
       activityData._id = foundry.utils.randomID();
+      foundry.utils.setProperty(activityData, "flags.dnd5e.dependentOn", this.id);
       riderActivities[activityData._id] = activityData;
     }
     let createdActivities = [];
@@ -450,7 +472,8 @@ export default class ActiveEffect5e extends ActiveEffect {
       }
       return effectData;
     }));
-    riderEffects = riderEffects.filter(_ => _);
+    riderEffects = riderEffects.filter(_ => _)
+    riderEffects.forEach(e => foundry.utils.setProperty(e, "flags.dnd5e.dependentOn", this.id));
     const createdEffects = await this.parent.createEmbeddedDocuments("ActiveEffect", riderEffects, { keepId: true });
 
     // Create Items
@@ -458,14 +481,15 @@ export default class ActiveEffect5e extends ActiveEffect {
     if ( this.parent.isEmbedded ) {
       const riderItems = await Item5e.createWithContents(
         (await Promise.all(profile.riders.item.map(uuid => fromUuid(uuid)))).filter(_ => _), {
-          transformAll: item => item.clone({ "flags.dnd5e.enchantment.origin": this.uuid }, { keepId: true })
+          transformAll: item => {
+            const itemData = item.clone({}, { keepId: true }).toObject();
+            foundry.utils.setProperty(itemData, "flags.dnd5e.dependentOn", this.uuid);
+            foundry.utils.setProperty(itemData, "flags.dnd5e.enchantment.origin", this.uuid);
+            return itemData;
+          }
         }
       );
       createdItems = await this.parent.actor.createEmbeddedDocuments("Item", riderItems, { keepId: true });
-    }
-
-    if ( createdActivities.length || createdEffects.length || createdItems.length ) {
-      this.addDependent(...createdActivities, ...createdEffects, ...createdItems);
     }
   }
 
@@ -658,6 +682,18 @@ export default class ActiveEffect5e extends ActiveEffect {
       disabled: !context.editable
     });
     html.querySelector("[data-tab=details] > .form-group:has([name=statuses])")?.after(element);
+
+    // Add tooltip with link to wiki for effects/enchantments
+    const helpIconElement = document.createElement("i");
+    helpIconElement.classList.add("fa-solid", "fa-circle-question");
+    const tooltipText = game.i18n.format("DND5E.ACTIVEEFFECT.AttributeKeyTooltip", {
+      url: app.document.type === "enchantment"
+        ? "https://github.com/foundryvtt/dnd5e/wiki/Enchantment"
+        : "https://github.com/foundryvtt/dnd5e/wiki/Active-Effect-Guide"
+    });
+    Object.assign(helpIconElement.dataset, { tooltip: tooltipText, tooltipDirection: "RIGHT", locked: "" });
+    const targetElement = html.querySelector("section:is([data-tab='effects'], [data-tab='changes']) .key");
+    if ( targetElement ) targetElement.insertAdjacentElement("beforeend", helpIconElement);
   }
 
   /* -------------------------------------------- */
@@ -688,9 +724,8 @@ export default class ActiveEffect5e extends ActiveEffect {
    * @returns {string}
    */
   static _getExhaustionImage(level) {
-    // TODO: Only use `img` in 5.2.
-    const { img, icon } = CONFIG.DND5E.conditionTypes.exhaustion;
-    const split = img ? img.split(".") : icon.split(".");
+    const { img } = CONFIG.DND5E.conditionTypes.exhaustion;
+    const split = img.split(".");
     const ext = split.pop();
     const path = split.join(".");
     return `${path}-${level}.${ext}`;
@@ -783,9 +818,11 @@ export default class ActiveEffect5e extends ActiveEffect {
    * @returns {Promise<ActiveEffect5e>}
    */
   addDependent(...dependent) {
-    const dependents = this.getFlag("dnd5e", "dependents") ?? [];
-    dependents.push(...dependent.map(d => ({ uuid: d.uuid })));
-    return this.setFlag("dnd5e", "dependents", dependents);
+    foundry.utils.logCompatibilityWarning(
+      "Dependent documents are now tracked using the `dependentOn` flag on the document itself.",
+      { since: "DnD5e 5.2", until: "DnD5e 5.4", once: true }
+    );
+    return Promise.all(dependent.map(d => d.setFlag("dnd5e", "dependentOn", this.uuid))).then(() => this);
   }
 
   /* -------------------------------------------- */
@@ -795,17 +832,24 @@ export default class ActiveEffect5e extends ActiveEffect {
    * @returns {Array<ActiveEffect5e|Item5e>}
    */
   getDependents() {
+    const actor = this.parent instanceof Actor ? this.parent : this.parent?.parent;
+    const item = this.parent instanceof Item ? this.parent : null;
     return (this.getFlag("dnd5e", "dependents") || []).reduce((arr, { uuid }) => {
-      let effect;
+      let doc;
       // TODO: Remove this special casing once https://github.com/foundryvtt/foundryvtt/issues/11214 is resolved
       if ( this.parent.pack && uuid.includes(this.parent.uuid) ) {
         const [, embeddedName, id] = uuid.replace(this.parent.uuid, "").split(".");
-        effect = this.parent.getEmbeddedDocument(embeddedName, id);
+        doc = this.parent.getEmbeddedDocument(embeddedName, id);
       }
-      else effect = fromUuidSync(uuid, { strict: false });
-      if ( effect ) arr.push(effect);
+      else doc = fromUuidSync(uuid, { strict: false });
+      if ( doc ) {
+        const otherActor = doc.parent instanceof Actor ? doc.parent : doc.parent?.parent;
+        const otherItem = doc.parent instanceof Item ? doc.parent : null;
+        if ( ((doc instanceof ActiveEffect) && (doc.origin === this.uuid))
+          || ((actor && (actor === otherActor)) || (item && (item === otherItem)))) arr.push(doc);
+      }
       return arr;
-    }, []);
+    }, []).concat(dnd5e.registry.dependents.get(this));
   }
 
   /* -------------------------------------------- */

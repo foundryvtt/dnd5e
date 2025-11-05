@@ -3,10 +3,7 @@ import ContextMenu5e from "../context-menu.mjs";
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 
 /**
- * @typedef {ApplicationContainerParts}
- * @property {object} [container]
- * @property {string} [container.id]         ID of the container. Containers with the same ID will be grouped together.
- * @property {string[]} [container.classes]  Classes to add to the container.
+ * @import { ApplicationContainerParts } from "./_types.mjs";
  */
 
 /**

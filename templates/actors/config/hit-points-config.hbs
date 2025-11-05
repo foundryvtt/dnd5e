@@ -64,6 +64,14 @@
         {{ formField fields.value value=source.value localize=true }}
         {{ formField fields.temp value=source.temp localize=true }}
     </fieldset>
+    {{#if otherFields.length }}
+    <fieldset class="card">
+        <legend>{{ localize "DND5E.HITPOINTS.Other.label" }}</legend>
+        {{#each otherFields}}
+        {{ formField field value=value localize=true placeholder="—" }}
+        {{/each}}
+    </fieldset>
+    {{/if}}
 </section>
 
 {{#*inline ".effects"}}

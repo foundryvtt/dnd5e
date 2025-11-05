@@ -1,0 +1,265 @@
+_id: mmSleepBreath000
+name: Sleep Breath
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    6ce9oevQRWomSVSF:
+      type: save
+      _id: 6ce9oevQRWomSVSF
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: turn
+        concentration: false
+        override: false
+        value: '1'
+      effects:
+        - _id: 9t5G87DeDyAF22dr
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: cone
+          size: '15'
+          count: ''
+        affects:
+          choice: false
+          type: creature
+          count: ''
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability:
+          - con
+        dc:
+          calculation: con
+          formula: 8 + @mod + @prof
+      name: 1st Save
+      img: ''
+      appliedEffects:
+        - 9t5G87DeDyAF22dr
+    EZma0lCmQeTuVuAL:
+      type: save
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: false
+        value: '1'
+      effects:
+        - _id: eiPsvHBjVi4pRHqJ
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          count: ''
+          type: ''
+          size: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: Creatures who failed the first save
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability:
+          - con
+        dc:
+          calculation: con
+          formula: 8 + @mod + @prof
+      name: 2nd Save
+      _id: EZma0lCmQeTuVuAL
+      img: ''
+      appliedEffects:
+        - eiPsvHBjVi4pRHqJ
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature"><em>Constitution Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=6ce9oevQRWomSVSF]], each [[lookup
+      @target.affects.type activity=6ce9oevQRWomSVSF]] in a [[lookup
+      @target.template.size activity=6ce9oevQRWomSVSF]]-foot Cone.</p><p
+      class="feature"><em>Failure:</em> The target has the
+      &amp;Reference[Incapacitated apply=false] condition until the end of its
+      next turn, at which point it repeats the save.</p><p
+      class="feature"><em>Second Failure:</em> The target has the
+      &amp;Reference[Unconscious apply=false] condition for [[lookup
+      @duration.value activity=EZma0lCmQeTuVuAL]] minute. This effect ends for
+      the target if it takes damage or a creature within 5 feet of it takes an
+      action to wake it.</p>
+    chat: ''
+  identifier: sleep-breath
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/control/sleep-bubble-purple.webp
+effects:
+  - name: Incapacitated
+    img: systems/dnd5e/icons/svg/statuses/incapacitated.svg
+    origin: Item.mmSleepBreath000
+    _id: 9t5G87DeDyAF22dr
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: 0
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Incapacitated apply=false] condition
+      until the end of its next turn, at which point it repeats the save.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - incapacitated
+    sort: 0
+    flags:
+      dae:
+        enableCondition: ''
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736117747262
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmSleepBreath000.9t5G87DeDyAF22dr'
+  - name: Unconscious
+    img: systems/dnd5e/icons/svg/statuses/unconscious.svg
+    origin: Item.mmSleepBreath000
+    _id: eiPsvHBjVi4pRHqJ
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: 0
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Unconscious apply=false] condition
+      for the duration (see source item for the length of the duration). </p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - unconscious
+    sort: 0
+    flags:
+      dae:
+        enableCondition: ''
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1737802157494
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmSleepBreath000.eiPsvHBjVi4pRHqJ'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737802133311
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 20100000
+ownership:
+  default: 0
+_key: '!items!mmSleepBreath000'

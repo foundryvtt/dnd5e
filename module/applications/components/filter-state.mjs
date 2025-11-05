@@ -32,6 +32,19 @@ export default class FilterStateElement extends foundry.applications.elements.Ab
   #indicator;
 
   /* -------------------------------------------- */
+
+  /**
+   * Get any labels describing this element.
+   * @type {HTMLElement[]}
+   */
+  get labels() {
+    const labels = this.id ? Array.from(document.querySelectorAll(`[for="${this.id}"]`)) : [];
+    const containing = this.closest("label:not([for])");
+    if ( containing && !labels.includes(containing) ) labels.push(containing);
+    return labels;
+  }
+
+  /* -------------------------------------------- */
   /*  Element Properties                          */
   /* -------------------------------------------- */
 
@@ -86,6 +99,7 @@ export default class FilterStateElement extends foundry.applications.elements.Ab
     this.addEventListener("click", this._onClick.bind(this), { signal });
     this.addEventListener("contextmenu", this._onClick.bind(this), { signal });
     this.addEventListener("keydown", event => event.key === " " ? this.#handleValueChange() : null, { signal });
+    this.labels.forEach(label => label.addEventListener("contextmenu", this._onClick.bind(this), { signal }));
   }
 
   /* -------------------------------------------- */

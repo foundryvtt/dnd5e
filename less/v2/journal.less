@@ -287,6 +287,8 @@
 }
 
 .journal-entry-page.sheet.class {
+  .journal-header { margin: 0; }
+
   .form-group {
     align-items: start;
     &:has(button[data-action="launchTextEditor"]) .form-fields { flex: 0 0 125px; }
@@ -432,7 +434,7 @@
   }
 }
 
-.journal-entry-page.spells, .content-embed.spells {
+.journal-entry-page.spells, document-embed.spells {
   .grouping {
     font-size: var(--font-size-12);
 

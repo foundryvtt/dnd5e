@@ -3,6 +3,10 @@ import ChatTrayElement from "./chat-tray-element.mjs";
 import TargetedApplicationMixin from "./targeted-application-mixin.mjs";
 
 /**
+ * @import { DamageApplicationOptions, DamageDescription } from "../../documents/actor/actor.mjs";
+ */
+
+/**
  * List of multiplier options as tuples containing their numeric value and rendered text.
  * @type {[number, string][]}
  */
@@ -43,7 +47,7 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
 
   /** @override */
   get shouldBuildTargetList() {
-    return this.open && this.visible;
+    return super.shouldBuildTargetList && this.open && this.visible;
   }
 
   /* -------------------------------------------- */
@@ -117,6 +121,7 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
 
     const types = [];
     for ( const [change, values] of Object.entries(active) ) {
+      if ( foundry.utils.getType(values) !== "Set" ) continue;
       for ( const type of values ) {
         const config = CONFIG.DND5E.damageTypes[type] ?? CONFIG.DND5E.healingTypes[type];
         if ( !config ) continue;
@@ -124,18 +129,7 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
         types.push(data);
       }
     }
-    const changeSources = types.reduce((acc, {type, change, icon}) => {
-      const { label, pressed } = this.getChangeSourceOptions(type, change, targetOptions);
-      acc += `
-        <button class="change-source unbutton" type="button" data-type="${type}" data-change="${change}"
-                data-tooltip aria-label="${label}" aria-pressed="${pressed}">
-          <dnd5e-icon src="${icon}" inert></dnd5e-icon>
-          <i class="fa-solid fa-slash" inert></i>
-          <i class="fa-solid fa-arrow-turn-down" inert></i>
-        </button>
-      `;
-      return acc;
-    }, "");
+    const changeSources = types.reduce((acc, config) => acc + this.getChangeSourceButton(config, targetOptions), "");
 
     const li = document.createElement("li");
     li.classList.add("target");
@@ -144,7 +138,7 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
       <img class="gold-icon">
       <div class="name-stacked">
         <span class="title"></span>
-        ${changeSources ? `<span class="subtitle">${changeSources}</span>` : ""}
+        <span class="subtitle">${changeSources}</span>
       </div>
       <div class="calculated damage">
         ${total}
@@ -183,20 +177,19 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
    */
   calculateDamage(actor, options) {
     const damages = actor.calculateDamage(this.damages, options);
+    let { amount, temp } = damages;
 
-    let temp = 0;
-    let total = 0;
-    let active = { modification: new Set(), resistance: new Set(), vulnerability: new Set(), immunity: new Set() };
+    let active = {
+      modification: new Set(), resistance: new Set(), vulnerability: new Set(), immunity: new Set(), threshold: false
+    };
     for ( const damage of damages ) {
-      if ( damage.type === "temphp" ) temp += damage.value;
-      else total += damage.value;
       if ( damage.active.modification ) active.modification.add(damage.type);
       if ( damage.active.resistance ) active.resistance.add(damage.type);
       if ( damage.active.vulnerability ) active.vulnerability.add(damage.type);
       if ( damage.active.immunity ) active.immunity.add(damage.type);
+      if ( damage.active.threshold ) active.threshold = true;
     }
     temp = Math.floor(Math.max(0, temp));
-    total = total > 0 ? Math.floor(total) : Math.ceil(total);
 
     // Add values from options to prevent active changes from being lost when re-rendering target list
     const union = t => {
@@ -209,8 +202,29 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
     if ( foundry.utils.getType(options.downgrade) === "Set" ) {
       active.immunity = active.immunity.union(options.downgrade);
     }
+    active.threshold ||= options.ignore?.threshold;
 
-    return { temp, total, active };
+    return { temp, total: amount, active };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create the HTML for a new change source button.
+   * @param {{ change: string, icon: string, type: string }} config
+   * @param {DamageApplicationOptions} targetOptions
+   * @returns {string}
+   */
+  getChangeSourceButton({ change, icon, type }, targetOptions) {
+    const { label, pressed } = this.getChangeSourceOptions(type, change, targetOptions);
+    return `
+      <button class="change-source unbutton" type="button" data-type="${type}" data-change="${change}"
+              data-tooltip aria-label="${label}" aria-pressed="${pressed}">
+        <dnd5e-icon src="${icon}" inert></dnd5e-icon>
+        <i class="fa-solid fa-slash" inert></i>
+        <i class="fa-solid fa-arrow-turn-down" inert></i>
+      </button>
+    `;
   }
 
   /* -------------------------------------------- */
@@ -224,7 +238,7 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
    */
   getChangeSourceOptions(type, change, options) {
     let mode = "active";
-    if ( options.ignore?.[change]?.has(type) ) mode = "ignore";
+    if ( (options.ignore?.[change] === true) || options.ignore?.[change]?.has?.(type) ) mode = "ignore";
     else if ( (change === "immunity") && options.downgrade?.has(type) ) mode = "downgrade";
 
     let label = game.i18n.format(`DND5E.DamageApplication.Change.${change.capitalize()}`, {
@@ -245,7 +259,7 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
    * @param {DamageApplicationOptions} options
    */
   refreshListEntry(token, entry, options) {
-    const { temp, total } = this.calculateDamage(token, options);
+    const { active, temp, total } = this.calculateDamage(token, options);
     const calculatedDamage = entry.querySelector(".calculated.damage");
     calculatedDamage.innerText = formatNumber(-total, { signDisplay: "exceptZero" });
     calculatedDamage.classList.toggle("healing", total < 0);
@@ -260,6 +274,15 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
       if ( pressedMultiplier ) pressedMultiplier.ariaPressed = false;
       const toPress = entry.querySelector(`[value="${options.multiplier}"]`);
       if ( toPress ) toPress.ariaPressed = true;
+    }
+
+    const thresholdButton = entry.querySelector('[data-change="threshold"]');
+    if ( thresholdButton && !active.threshold ) thresholdButton.remove();
+    else if ( !thresholdButton && active.threshold ) {
+      const button = this.getChangeSourceButton({
+        change: "threshold", icon: "systems/dnd5e/icons/svg/damage/threshold.svg", type: "threshold"
+      }, this.getTargetOptions(entry.dataset.uuid));
+      entry.querySelector(".subtitle").insertAdjacentHTML("beforeend", button);
     }
 
     for ( const element of entry.querySelectorAll(".change-source") ) {
@@ -325,6 +348,10 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
           options.ignore[change] ??= new Set();
           options.ignore[change].add(type);
         }
+      }
+      else if ( change === "threshold" ) {
+        options.ignore ??= {};
+        options.ignore.threshold = !options.ignore.threshold;
       }
       else if ( options.ignore?.[change]?.has(type) ) options.ignore[change].delete(type);
       else {

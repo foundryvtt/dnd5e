@@ -6,7 +6,8 @@ export default class TokenRuler5e extends foundry.canvas.placeables.tokens.Token
       && (waypoint.unreachable || !waypoint.next.unreachable) ) return { radius: 0 };
     const user = game.users.get(waypoint.userId);
     const scale = canvas.dimensions.uiScale;
-    return {radius: 6 * scale, color: user?.color ?? 0x000000, alpha: waypoint.explicit ? 1 : 0.5};
+    const style = {radius: 6 * scale, color: user?.color ?? 0x000000, alpha: waypoint.explicit ? 1 : 0.5};
+    return this.#getSpeedBasedStyle(waypoint, style);
   }
 
   /* -------------------------------------------- */
@@ -87,15 +88,16 @@ export default class TokenRuler5e extends foundry.canvas.placeables.tokens.Token
     // If movement automation disabled, or if showing a different client's measurement, use default style
     const noAutomation = game.settings.get("dnd5e", "disableMovementAutomation");
     const isSameClient = game.user.id in this.token._plannedMovement;
-    if ( noAutomation || !isSameClient ) return style;
+    if ( noAutomation || !isSameClient || CONFIG.Token.movement.actions[waypoint.action]?.teleport ) return style;
 
     // Get actor's movement speed for currently selected token movement action
-    const movement = this.token.actor.system.attributes?.movement;
-    if ( !movement ) return style;
+    const movement = this.token.actor?.system.attributes?.movement;
+    if ( !movement || !this.token.actor?.system.isCreature ) return style;
     let currActionSpeed = movement[waypoint.action] ?? 0;
 
     // If current action can fall back to walk, treat "max" speed as maximum between current & walk
-    if ( CONFIG.DND5E.movementTypes[waypoint.action]?.walkFallback ) {
+    if ( CONFIG.DND5E.movementTypes[waypoint.action]?.walkFallback
+      || !CONFIG.DND5E.movementTypes[waypoint.action] ) {
       currActionSpeed = Math.max(currActionSpeed, movement.walk);
     }
 

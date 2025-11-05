@@ -56,7 +56,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
       template: "systems/dnd5e/templates/items/header.hbs"
     },
     tabs: {
-      template: "systems/dnd5e/templates/items/tabs.hbs",
+      template: "systems/dnd5e/templates/shared/horizontal-tabs.hbs",
       templates: ["templates/generic/tab-navigation.hbs"]
     },
     activities: {
@@ -244,12 +244,13 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
    */
   async _prepareActivitiesContext(context, options) {
     context.activities = (this.item.system.activities ?? [])
-      .filter(a => CONFIG.DND5E.activityTypes[a.type]?.configurable !== false)
+      .filter(a => a.canConfigure)
       .map(activity => {
         const { _id: id, name, img, sort } = activity.prepareSheetContext();
         return {
           id, name, sort,
           img: { src: img, svg: img?.endsWith(".svg") },
+          isRider: activity.isRider,
           uuid: activity.uuid
         };
       });
@@ -315,8 +316,9 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     context.tab = context.tabs.details;
     context.parts ??= [];
 
-    context.baseItemOptions = await this._getBaseItemOptions();
+    context.baseItemOptions = await this._getBaseItemOptions(context);
     context.coverOptions = Object.entries(CONFIG.DND5E.cover).map(([value, label]) => ({ value, label }));
+    context.unitsOptions = Object.entries(CONFIG.DND5E.movementUnits).map(([value, { label }]) => ({ value, label }));
 
     // If using modern rules, do not show redundant artificer progression unless it is already selected.
     context.spellProgression = { ...CONFIG.DND5E.spellProgression };
@@ -374,7 +376,8 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
           id, name, img, disabled, duration, source,
           parent,
           durationParts: duration.remaining ? duration.label.split(", ") : [],
-          hasTooltip: true
+          hasTooltip: true,
+          isRider: this.item.getFlag("dnd5e", "riders.effect")?.includes(id)
         });
         return arr;
       }, []);
@@ -423,7 +426,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     const advancement = {};
     const configMode = !this.item.parent || (this._mode === ItemSheet5e.MODES.EDIT);
     const legacyDisplay = this.options.legacyDisplay;
-    const maxLevel = !configMode ? (this.item.system.levels ?? this.item.class?.system.levels
+    const maxLevel = this.item.parent ? (this.item.system.levels ?? this.item.class?.system.levels
       ?? this.item.parent.system.details?.level ?? -1) : -1;
 
     // Improperly configured advancements
@@ -498,28 +501,31 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
 
   /**
    * Get the base weapons and tools based on the selected type.
+   * @param {ApplicationRenderContext} context  Context being prepared.
    * @returns {Promise<FormSelectOptions[]|null>}
    * @protected
    */
-  async _getBaseItemOptions() {
+  async _getBaseItemOptions(context) {
     const baseIds = this.item.type === "equipment" ? {
       ...CONFIG.DND5E.armorIds,
       ...CONFIG.DND5E.shieldIds
     } : CONFIG.DND5E[`${this.item.type}Ids`];
     if ( baseIds === undefined ) return null;
 
-    const baseType = this.item.system._source.type.value ?? this.item.system.type.value;
     const options = [];
     for ( const [value, id] of Object.entries(baseIds) ) {
       const baseItem = await Trait.getBaseItem(id);
-      if ( baseType !== baseItem?.system?.type?.value ) continue;
+      if ( context?.source.type.value !== baseItem?.system?.type?.value ) continue;
       options.push({ value, label: baseItem.name });
     }
 
-    return options.length ? [
-      { value: "", label: "" },
-      ...options.sort((lhs, rhs) => lhs.label.localeCompare(rhs.label, game.i18n.lang))
-    ] : null;
+    if ( !options.length ) return null;
+
+    options.sort((lhs, rhs) => lhs.label.localeCompare(rhs.label, game.i18n.lang));
+    const baseId = this.item.system._source.type.baseItem ?? this.item.system.type.baseItem;
+    if ( baseId && !(baseId in baseIds) ) options.unshift({ value: baseId, label: baseId });
+    options.unshift({ value: "", label: "" });
+    return options;
   }
 
   /* -------------------------------------------- */
@@ -621,12 +627,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
   /** @override */
   _addDocument() {
     if ( this.tabGroups.primary === "activities" ) {
-      return dnd5e.documents.activity.UtilityActivity.createDialog({}, {
-        parent: this.item,
-        types: Object.entries(CONFIG.DND5E.activityTypes).filter(([, { configurable }]) => {
-          return configurable !== false;
-        }).map(([k]) => k)
-      });
+      return dnd5e.documents.activity.UtilityActivity.createDialog({}, { parent: this.item });
     }
 
     if ( this.tabGroups.primary === "advancement" ) {
@@ -933,7 +934,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
       const target = this.item.system.activities.get(targetId);
       if ( !target || (target === source) ) return;
       const siblings = this.item.system.activities.filter(a => a._id !== id);
-      const sortUpdates = foundry.utils.SortingHelpers.performIntegerSort(source, { target, siblings });
+      const sortUpdates = foundry.utils.performIntegerSort(source, { target, siblings });
       const updateData = Object.fromEntries(sortUpdates.map(({ target, update }) => {
         return [target._id, { sort: update.sort }];
       }));

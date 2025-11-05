@@ -67,7 +67,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -106,9 +105,7 @@ system:
             bonus: ''
             types:
               - radiant
-            scaling:
-              number: 1
-        onSave: half
+        onSave: none
       save:
         ability: dex
         dc:
@@ -125,18 +122,14 @@ effects: []
 sort: 2600000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1724425909126
-  modifiedTime: 1740680135139
+  modifiedTime: 1757448564373
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbagHolyWater00'

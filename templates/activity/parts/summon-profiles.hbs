@@ -8,8 +8,7 @@
             </button>
         </legend>
         {{#with fields.summon.fields as |fields|}}
-        {{ formField fields.mode value=../source.summon.mode options=../profileModes }}
-        {{#unless @root.activity.isSpell}}{{ formField fields.identifier value=../source.summon.identifier }}{{/unless}}
+        {{ formField fields.mode value=../source.summon.mode options=../profileModes rootId=@root.partId }}
         {{/with}}
         <ul class="separated-list flexcol unlist">
             {{#each profiles}}
@@ -32,7 +31,7 @@
 
             {{!-- Count --}}
             {{ formField fields.count name=(concat prefix "count") value=data.count placeholder="1"
-                         classes="label-top" }}
+                         classes="label-top" rootId=@root.partId }}
 
             <span class="sep">&times;</span>
 
@@ -40,7 +39,7 @@
 
             {{!-- CR --}}
             {{ formField fields.cr name=(concat prefix "cr") value=data.cr localize=true hint=false classes="label-top"
-                         label="DND5E.SUMMON.FIELDS.profiles.element.cr.abbr" }}
+                         label="DND5E.SUMMON.FIELDS.profiles.element.cr.abbr" rootId=@root.partId }}
 
             {{else if document}}
 
@@ -56,7 +55,7 @@
 
             {{!-- Name --}}
             {{ formField fields.name name=(concat prefix "name") value=data.name hint=false classes="label-top"
-                         placeholder=(ifThen document document.name "") }}
+                         placeholder=(ifThen document document.name "") rootId=@root.partId }}
 
             {{!-- Delete --}}
             <button type="button" class="unbutton control-button" data-action="deleteProfile"

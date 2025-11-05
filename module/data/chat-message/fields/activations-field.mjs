@@ -1,7 +1,7 @@
 const { SetField, StringField } = foundry.data.fields;
 
 /**
- * @typedef {Set<string>} ActivationsData
+ * @import { ActivationsData } from "./_types.mjs";
  */
 
 /**
@@ -22,7 +22,9 @@ export default class ActivationsField extends SetField {
    */
   static getActivations(actor, periods) {
     return actor.items
-      .map(i => i.system.activities?.filter(a => periods.includes(a.activation?.type)).map(a => a.relativeUUID) ?? [])
+      .map(i => i.system.activities
+        ?.filter(a => periods.includes(a.activation?.type) && a.canUse)
+        .map(a => a.relativeUUID) ?? [])
       .flat();
   }
 

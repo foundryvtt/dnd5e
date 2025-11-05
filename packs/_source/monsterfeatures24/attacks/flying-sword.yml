@@ -1,0 +1,160 @@
+_id: mmFlyingSword000
+name: Flying Sword
+type: weapon
+system:
+  type:
+    value: natural
+    baseItem: ''
+  activities:
+    ZfY0kFhF2VC1rGy4:
+      _id: ZfY0kFhF2VC1rGy4
+      type: attack
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ''
+          classification: ''
+        ability: ''
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 8
+            denomination: '8'
+            bonus: ''
+            types:
+              - radiant
+      name: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">[[/attack extended]]. [[/damage average extended]].
+      <em>Hit or Miss:</em> The sword magically returns to the [[lookup @name
+      lowercase]]'s hand or hovers within 5 feet of the [[lookup @name
+      lowercase]] immediately after a ranged attack.</p>
+    chat: ''
+  identifier: flying-sword
+  source:
+    revision: 1
+    rules: '2024'
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  ammunition: {}
+  damage:
+    base:
+      number: 4
+      denomination: 6
+      types:
+        - slashing
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties:
+    - ret
+  proficient: null
+  range:
+    value: 120
+    long: null
+    reach: 10
+    units: ft
+  mastery: ''
+folder: pSCWWdqMX9eUATRJ
+img: icons/skills/melee/strike-sword-slashing-red.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1737512392436
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 9700000
+ownership:
+  default: 0
+_key: '!items!mmFlyingSword000'

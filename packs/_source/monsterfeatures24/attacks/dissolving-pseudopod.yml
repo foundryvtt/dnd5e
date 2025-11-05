@@ -1,0 +1,203 @@
+_id: mmDissolvingPseu
+name: Dissolving Pseudopod
+type: weapon
+system:
+  type:
+    value: natural
+    baseItem: ''
+  activities:
+    HGEMC3ouhGsC1a1a:
+      _id: HGEMC3ouhGsC1a1a
+      type: attack
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: qYzNNpsYbmdB2cg6
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ''
+          classification: ''
+        ability: ''
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts: []
+      name: ''
+      img: ''
+      appliedEffects:
+        - qYzNNpsYbmdB2cg6
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">[[/attack extended]]. [[/damage average extended]].
+      Nonmagical armor worn by the target takes a -1 penalty to the AC it
+      offers. The armor is destroyed if the penalty reduces its AC to 10. The
+      penalty can be removed by casting the
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplMending000]{Mending}</em>
+      spell on the armor.</p>
+    chat: ''
+  identifier: dissolving-pseudopod
+  source:
+    revision: 1
+    rules: '2024'
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  ammunition: {}
+  damage:
+    base:
+      number: 4
+      denomination: 6
+      types:
+        - acid
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties: []
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: 10
+    units: ft
+  mastery: ''
+folder: pSCWWdqMX9eUATRJ
+img: icons/creatures/slimes/slime-movement-dripping-purple.webp
+effects:
+  - name: 'Damaged: -1 AC'
+    img: icons/creatures/slimes/slime-movement-dripping-purple.webp
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmDissolvingPseu
+    _id: qYzNNpsYbmdB2cg6
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.ac.bonus
+        mode: 2
+        value: '-1'
+        priority: 20
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>Nonmagical armor worn by the target takes a -1 penalty to the AC it
+      offers. The armor is destroyed if the penalty reduces its AC to 10.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    flags:
+      dae:
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+        enableCondition: ''
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: 1736528091486
+      modifiedTime: 1736528212326
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmDissolvingPseu.qYzNNpsYbmdB2cg6'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736528311156
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 6800000
+ownership:
+  default: 0
+_key: '!items!mmDissolvingPseu'

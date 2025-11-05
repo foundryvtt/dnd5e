@@ -5,7 +5,8 @@
 
         {{!-- Encumbrance --}}
         <div class="encumbrance card">
-            {{> "systems/dnd5e/templates/inventory/encumbrance.hbs" encumbrance=system.attributes.encumbrance }}
+            {{> "systems/dnd5e/templates/inventory/encumbrance.hbs" encumbrance=system.attributes.encumbrance
+                hasBreakpoints=true }}
             <div class="info">
                 <div class="strength">
                     <span class="label">{{ localize "DND5E.AbilityStr" }}</span>
@@ -26,22 +27,7 @@
         </div>
 
         {{!-- Containers --}}
-        <ul class="containers unlist">
-            {{#each containers}}
-            <li class="container draggable" data-item-id="{{ id }}" data-uuid="{{ uuid }}">
-                <a class="item-action" data-action="showDocument" data-tooltip="{{ name }}" aria-label="{{ name }}">
-                    {{#dnd5e-itemContext this as |ctx|}}
-                    {{#with ctx.capacity}}
-                    <div class="meter progress" role="meter" aria-valuemin="0" aria-valuenow="{{ pct }}"
-                         aria-valuetext="{{ value }}" aria-valuemax="{{ max }}"
-                         style="--bar-percentage: {{ pct }}%"></div>
-                    {{/with}}
-                    {{/dnd5e-itemContext}}
-                    <img src="{{ img }}" alt="{{ name }}" draggable="false">
-                </a>
-            </li>
-            {{/each}}
-        </ul>
+        {{> "systems/dnd5e/templates/inventory/containers.hbs" }}
 
     </div>
 

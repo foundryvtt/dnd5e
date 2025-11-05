@@ -18,7 +18,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   }
 
   /* -------------------------------------------- */
-  /*  Data Migrations                             */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -76,7 +76,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     const groups = super.getTrackedAttributeChoices(attributes);
     const i18n = {
       abilities: game.i18n.localize("DND5E.AbilityScorePl"),
-      movement: game.i18n.localize("DND5E.MovementSpeeds"),
+      movement: game.i18n.localize("DND5E.MOVEMENT.FIELDS.speeds.label"),
       senses: game.i18n.localize("DND5E.Senses"),
       skills: game.i18n.localize("DND5E.SkillPassives"),
       slots: game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.SpellSlots")
@@ -121,12 +121,21 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
       const actionConfig = CONFIG.Token.movement.actions[type];
       if ( !actionConfig ) continue;
       actionConfig.getAnimationOptions = token => {
-        const actorMovement = token.actor?.system.attributes?.movement ?? {};
+        const actorMovement = token?.actor?.system.attributes?.movement ?? {};
         if ( !(type in actorMovement) || actorMovement[type] ) return {};
         return { movementSpeed: CONFIG.Token.movement.defaultSpeed / 2 };
       };
       actionConfig.getCostFunction = (...args) => this.getMovementActionCostFunction(type, ...args);
     }
+    CONFIG.Token.movement.actions.crawl.getCostFunction = token => {
+      const noAutomation = game.settings.get("dnd5e", "disableMovementAutomation");
+      const { actor } = token;
+      const actorMovement = actor?.system.attributes?.movement;
+      const hasMovement = actorMovement !== undefined;
+      return noAutomation || !actor?.system.isCreature || !hasMovement
+        ? cost => cost
+        : (cost, _from, _to, distance) => cost + distance;
+    };
   }
 
   /* -------------------------------------------- */
@@ -140,10 +149,14 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
    */
   static getMovementActionCostFunction(type, token, options) {
     const noAutomation = game.settings.get("dnd5e", "disableMovementAutomation");
-    const actorMovement = token.actor?.system.attributes?.movement ?? {};
-    if ( noAutomation || !(type in actorMovement) || actorMovement[type] ) return cost => cost;
-    if ( CONFIG.DND5E.movementTypes[type]?.walkFallback ) return (cost, _from, _to, distance) => cost + distance;
-    return () => Infinity;
+    const { actor } = token;
+    const actorMovement = actor?.system.attributes?.movement;
+    const walkFallback = CONFIG.DND5E.movementTypes[type]?.walkFallback;
+    const hasMovement = actorMovement !== undefined;
+    const speed = actorMovement?.[type];
+    return noAutomation || !actor?.system.isCreature || !hasMovement || speed || (!speed && !walkFallback)
+      ? cost => cost
+      : (cost, _from, _to, distance) => cost + distance;
   }
 
   /* -------------------------------------------- */
@@ -204,7 +217,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
 
     if ( (this.actor?.type === "npc") && !this.actorLink
       && foundry.utils.getProperty(this.actor, "system.attributes.hp.formula")?.trim().length ) {
-      const autoRoll = game.settings.get("dnd5e", "autoRollNPCHP");
+      const autoRoll = options.dnd5e?.autoRollNPCHP ?? game.settings.get("dnd5e", "autoRollNPCHP");
       if ( autoRoll === "no" ) return;
       const roll = await this.actor.rollNPCHitPoints({ chatMessage: autoRoll === "yes" });
       this.delta.updateSource({
@@ -225,7 +238,9 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     super._onDelete(options, userId);
 
     const origin = this.actor?.getFlag("dnd5e", "summon.origin");
-    // TODO: Replace with parseUuid once V11 support is dropped
-    if ( origin ) dnd5e.registry.summons.untrack(origin.split(".Item.")[0], this.actor.uuid);
+    if ( origin ) {
+      const { collection, primaryId } = foundry.utils.parseUuid(origin);
+      dnd5e.registry.summons.untrack(collection?.get?.(primaryId)?.uuid, this.actor.uuid);
+    }
   }
 }

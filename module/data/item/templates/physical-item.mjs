@@ -4,17 +4,13 @@ import SystemDataModel from "../../abstract/system-data-model.mjs";
 const { ForeignDocumentField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
+ * @import { CompendiumBrowserFilterDefinitionEntry } from "../../../applications/compendium-browser.mjs";
+ * @import { PhysicalItemTemplateData } from "./_types.mjs";
+ */
+
+/**
  * Data model template with information on physical items.
- *
- * @property {string} container           Container within which this item is located.
- * @property {number} quantity            Number of items in a stack.
- * @property {object} weight
- * @property {number} weight.value        Item's weight.
- * @property {string} weight.units        Units used to measure the weight.
- * @property {object} price
- * @property {number} price.value         Item's cost in the specified denomination.
- * @property {string} price.denomination  Currency denomination used to determine price.
- * @property {string} rarity              Item rarity as defined in `DND5E.itemRarity`.
+ * @extends {SystemDataModel<PhysicalItemTemplateData>}
  * @mixin
  */
 export default class PhysicalItemTemplate extends SystemDataModel {
@@ -34,7 +30,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
         units: new StringField({
           required: true, blank: false, label: "DND5E.UNITS.WEIGHT.Label", initial: () => defaultUnits("weight")
         })
-      }, {label: "DND5E.Weight"}),
+      }, { label: "DND5E.Weight" }),
       price: new SchemaField({
         value: new NumberField({
           required: true, nullable: false, initial: 0, min: 0, label: "DND5E.Price"
@@ -42,8 +38,8 @@ export default class PhysicalItemTemplate extends SystemDataModel {
         denomination: new StringField({
           required: true, blank: false, initial: "gp", label: "DND5E.Currency"
         })
-      }, {label: "DND5E.Price"}),
-      rarity: new StringField({required: true, blank: true, label: "DND5E.Rarity"})
+      }, { label: "DND5E.Price" }),
+      rarity: new StringField({ required: true, blank: true, label: "DND5E.Rarity" })
     };
   }
 
@@ -86,7 +82,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
-  /*  Getters                                     */
+  /*  Properties                                  */
   /* -------------------------------------------- */
 
   /**
@@ -128,25 +124,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
-  /*  Data Preparation                            */
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare physical item properties.
-   */
-  preparePhysicalData() {
-    if ( !("gp" in CONFIG.DND5E.currencies) ) return;
-    const { value, denomination } = this.price;
-    const { conversion } = CONFIG.DND5E.currencies[denomination] ?? {};
-    const { gp } = CONFIG.DND5E.currencies;
-    if ( conversion ) {
-      const multiplier = gp.conversion / conversion;
-      this.price.valueInGP = Math.floor(value * multiplier);
-    }
-  }
-
-  /* -------------------------------------------- */
-  /*  Migrations                                  */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -196,6 +174,24 @@ export default class PhysicalItemTemplate extends SystemDataModel {
       value: Number.isNumeric(source.weight) ? Number(source.weight) : 0,
       units: defaultUnits("weight")
     };
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare physical item properties.
+   */
+  preparePhysicalData() {
+    if ( !("gp" in CONFIG.DND5E.currencies) ) return;
+    const { value, denomination } = this.price;
+    const { conversion } = CONFIG.DND5E.currencies[denomination] ?? {};
+    const { gp } = CONFIG.DND5E.currencies;
+    if ( conversion ) {
+      const multiplier = gp.conversion / conversion;
+      this.price.valueInGP = Math.floor(value * multiplier);
+    }
   }
 
   /* -------------------------------------------- */

@@ -1,0 +1,145 @@
+_id: mmEnthrallingPan
+name: Enthralling Panache
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    66IPjaLIJqqwvmrL:
+      type: save
+      _id: 66IPjaLIJqqwvmrL
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: sxNoZcfI2KVb3zHr
+          onSave: false
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '30'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability:
+          - wis
+        dc:
+          calculation: cha
+          formula: 8 + @mod + @prof
+      name: Save
+      img: ''
+      appliedEffects:
+        - sxNoZcfI2KVb3zHr
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature"><em>Wisdom Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=66IPjaLIJqqwvmrL]], [[lookup
+      @target.affects.labels.statblock activity=66IPjaLIJqqwvmrL]] the [[lookup
+      @name lowercase]] can see within [[lookup @range.value
+      activity=66IPjaLIJqqwvmrL]] feet.</p><p class="feature"><em>Failure:</em>
+      The target has the &amp;Reference[Charmed apply=false] condition until the
+      start of the [[lookup @name lowercase]]'s next turn.</p>
+    chat: ''
+  identifier: enthralling-panache
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/commodities/materials/feather-blue-green.webp
+effects:
+  - name: Charmed
+    img: systems/dnd5e/icons/svg/statuses/charmed.svg
+    origin: Item.mmEnthrallingPan
+    _id: sxNoZcfI2KVb3zHr
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: 1
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Charmed apply=false] condition until
+      the start of the attacking creature’s next turn.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - charmed
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1737840002001
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmEnthrallingPan.sxNoZcfI2KVb3zHr'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737839986635
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 9200000
+ownership:
+  default: 0
+_key: '!items!mmEnthrallingPan'

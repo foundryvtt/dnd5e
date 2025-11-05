@@ -28,7 +28,47 @@ system:
   properties: []
   requirements: Halfling
   identifier: halfling-nimbleness
-effects: []
+effects:
+  - name: Halfling Nimbleness
+    img: icons/skills/movement/figure-running-gray.webp
+    origin: Compendium.dnd5e.origins24.Item.phbsptHalflingNi
+    _id: HtNoV5usxEadPbqp
+    type: base
+    system: {}
+    changes:
+      - key: flags.dnd5e.halflingNimbleness
+        mode: 5
+        value: 'true'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.350'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      createdTime: 1762280399491
+      modifiedTime: 1762280421329
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!phbsptHalflingNi.HtNoV5usxEadPbqp'
 folder: zVLJosGQ7viZqH14
 flags:
   dnd5e:

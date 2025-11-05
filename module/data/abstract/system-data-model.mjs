@@ -1,6 +1,11 @@
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
+ * @import { CompendiumBrowserFilterDefinition } from "../../applications/compendium-browser.mjs";
+ * @import { SystemDataModelMetadata } from "./_types.mjs";
+ */
+
+/**
  * Data Model variant with some extra methods to support template mix-ins.
  *
  * **Note**: This uses some advanced Javascript techniques that are not necessary for most data models.
@@ -66,11 +71,6 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
     "shimData", "_shimData", "defineSchema"]);
 
   /* -------------------------------------------- */
-
-  /**
-   * @typedef {object} SystemDataModelMetadata
-   * @property {typeof DataModel} [systemFlagsModel]  Model that represents flags data within the dnd5e namespace.
-   */
 
   /**
    * Metadata that describes this DataModel.
@@ -190,10 +190,12 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
     const actor = this.parent.actor;
     if ( (actor?.type !== "character") || !this.metadata?.singleton ) return;
     if ( actor.itemTypes[data.type]?.length ) {
-      ui.notifications.error(game.i18n.format("DND5E.ActorWarningSingleton", {
-        itemType: game.i18n.localize(CONFIG.Item.typeLabels[data.type]),
-        actorType: game.i18n.localize(CONFIG.Actor.typeLabels[actor.type])
-      }));
+      ui.notifications.error("DND5E.ACTOR.Warning.Singleton", {
+        format: {
+          itemType: game.i18n.localize(CONFIG.Item.typeLabels[data.type]),
+          actorType: game.i18n.localize(CONFIG.Actor.typeLabels[actor.type])
+        }
+      });
       return false;
     }
   }

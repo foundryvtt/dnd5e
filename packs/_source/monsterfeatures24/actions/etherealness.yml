@@ -1,0 +1,99 @@
+_id: mmEtherealness00
+name: Etherealness
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    N5QCNM4uIBjpu6sD:
+      type: cast
+      _id: N5QCNM4uIBjpu6sD
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '7'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+        uuid: Compendium.dnd5e.spells24.Item.phbsplEtherealne
+        ability: cha
+      name: Etherealness
+      img: ''
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] casts the
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplEtherealne]{Etherealness}</em>
+      spell, requiring no spell components and using Charisma as the
+      spellcasting ability. The [[lookup @name lowercase]] is visible on the
+      Material Plane while on the Border Ethereal and vice versa, but it can't
+      affect or be affected by anything on the other plane.</p>
+    chat: ''
+  identifier: etherealness
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/air/wind-vortex-swirl-purple.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737792180251
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 9500000
+ownership:
+  default: 0
+_key: '!items!mmEtherealness00'

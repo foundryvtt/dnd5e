@@ -2,10 +2,15 @@ import ActivitySheet from "../../applications/activity/activity-sheet.mjs";
 import ActivityUsageDialog from "../../applications/activity/activity-usage-dialog.mjs";
 import AbilityTemplate from "../../canvas/ability-template.mjs";
 import { ConsumptionError } from "../../data/activity/fields/consumption-targets-field.mjs";
-import { formatNumber, getTargetDescriptors, localizeSchema } from "../../utils.mjs";
+import { formatNumber, getSceneTargets, getTargetDescriptors, localizeSchema } from "../../utils.mjs";
+import DependentDocumentMixin from "../mixins/dependent.mjs";
 import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
 
 /**
+ * @import { FavoriteData5e } from "../../data/actor/_types.mjs";
+ * @import {
+ *   BasicRollDialogConfiguration, BasicRollMessageConfiguration, DamageRollProcessConfiguration
+ * } from "../../dice/_types.mjs";
  * @import { PseudoDocumentsMetadata } from "../mixins/pseudo-document.mjs";
  */
 
@@ -17,7 +22,7 @@ import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
  * @mixin
  */
 export default function ActivityMixin(Base) {
-  class Activity extends PseudoDocumentMixin(Base) {
+  class Activity extends DependentDocumentMixin(PseudoDocumentMixin(Base)) {
     /**
      * Configuration information for Activities.
      *
@@ -82,10 +87,32 @@ export default function ActivityMixin(Base) {
     /* -------------------------------------------- */
 
     /**
+     * Should this activity be visible on the item sheet?
+     * @type {boolean}
+     */
+    get canConfigure() {
+      if ( CONFIG.DND5E.activityTypes[this.type]?.configurable === false ) return false;
+      if ( this.visibility?.requireIdentification && !this.item.system.identified && !game.user.isGM ) return false;
+      if ( this.dependentOrigin?.active === false ) return false;
+      return true;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
      * Should this activity be able to be used?
      * @type {boolean}
      */
     get canUse() {
+      if ( this.isRider ) return false;
+      if ( this.dependentOrigin?.active === false ) return false;
+      if ( !this.item.getFlag("dnd5e", "riders.activity")?.includes(this.id) ) return false;
+      if ( this.visibility?.requireAttunement && !this.item.system.attuned ) return false;
+      if ( this.visibility?.requireMagic && !this.item.system.magicAvailable ) return false;
+      if ( this.visibility?.requireIdentification && !this.item.system.identified ) return false;
+      const level = this.relevantLevel;
+      if ( ((this.visibility?.level?.min ?? -Infinity) > level)
+        || ((this.visibility?.level?.max ?? Infinity) < level) ) return false;
       return true;
     }
 
@@ -97,6 +124,16 @@ export default function ActivityMixin(Base) {
      */
     get damageFlavor() {
       return game.i18n.localize("DND5E.DamageRoll");
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Active effect that granted this activity as a rider.
+     * @type {ActiveEffect5e|null}
+     */
+    get dependentOrigin() {
+      return this.item.effects.get(this.flags?.dnd5e?.dependentOn) ?? null;
     }
 
     /* -------------------------------------------- */
@@ -233,10 +270,7 @@ export default function ActivityMixin(Base) {
           flags: {
             dnd5e: {
               ...this.messageFlags,
-              messageType: "usage",
-              use: {
-                effects: this.applicableEffects?.map(e => e.id)
-              }
+              messageType: "usage"
             }
           }
         },
@@ -485,7 +519,9 @@ export default function ActivityMixin(Base) {
 
       const ignoreLinkedConsumption = this.isSpell && !this.consumption.spellSlot;
       if ( config.consume !== false ) {
-        const hasActionConsumption = this.activation.type === "legendary";
+        const activationConfig = CONFIG.DND5E.activityActivationTypes[this.activation.type] ?? {};
+        const hasActionConsumption = activationConfig.consume
+          && (activationConfig.consume.canConsume?.(this) !== false);
         const hasResourceConsumption = this.consumption.targets.length > 0;
         const hasLinkedConsumption = (linked?.consumption.targets.length > 0) && !ignoreLinkedConsumption;
         const hasSpellSlotConsumption = this.requiresSpellSlot && this.consumption.spellSlot;
@@ -569,10 +605,12 @@ export default function ActivityMixin(Base) {
 
       if ( usageConfig.scaling ) {
         foundry.utils.setProperty(messageConfig, "data.flags.dnd5e.scaling", usageConfig.scaling);
-        item.actor._embeddedPreparation = true;
-        item.updateSource({ "flags.dnd5e.scaling": usageConfig.scaling });
-        delete item.actor._embeddedPreparation;
-        item.prepareFinalAttributes();
+        if ( usageConfig.scaling !== item.flags.dnd5e?.scaling ) {
+          item.actor._embeddedPreparation = true;
+          item.updateSource({ "flags.dnd5e.scaling": usageConfig.scaling });
+          delete item.actor._embeddedPreparation;
+          item.prepareFinalAttributes();
+        }
       }
     }
 
@@ -604,25 +642,29 @@ export default function ActivityMixin(Base) {
       if ( config.consume === false ) return updates;
       const errors = [];
 
-      // Handle action economy
-      if ( ((config.consume === true) || config.consume.action) && (this.activation.type === "legendary") ) {
-        const containsLegendaryConsumption = this.consumption.targets
-          .find(t => (t.type === "attribute") && (t.target === "resources.legact.value"));
+      // Handle auto consumption.
+      const activationConfig = CONFIG.DND5E.activityActivationTypes[this.activation.type];
+      if ( ((config.consume === true) || config.consume.action) && activationConfig?.consume ) {
+        const { property } = activationConfig.consume;
+        const valueProperty = `${property}.value`;
+        const containsConsumption = this.consumption.targets.find(t => {
+          return (t.type === "attribute") && (t.target === valueProperty);
+        });
         const count = this.activation.value ?? 1;
-        const legendary = this.actor.system.resources?.legact;
-        if ( legendary && !containsLegendaryConsumption ) {
+        const current = foundry.utils.getProperty(this.actor.system, property);
+        if ( current && !containsConsumption ) {
           let message;
-          if ( legendary.value === 0 ) message = "DND5E.ACTIVATION.Warning.NoActions";
-          else if ( count > legendary.value ) message = "DND5E.ACTIVATION.Warning.NotEnoughActions";
+          if ( current.value < 1 ) message = "DND5E.ACTIVATION.Warning.NoActions";
+          else if ( count > current.value ) message = "DND5E.ACTIVATION.Warning.NotEnoughActions";
           if ( message ) {
             const err = new ConsumptionError(game.i18n.format(message, {
-              type: game.i18n.localize("DND5E.LegendaryAction.Label"),
+              type: activationConfig.label,
               required: formatNumber(count),
-              available: formatNumber(legendary.value)
+              available: formatNumber(current.value)
             }));
             errors.push(err);
           } else {
-            updates.actor["system.resources.legact.spent"] = legendary.spent + count;
+            updates.actor[`system.${property}.spent`] = current.spent + count;
           }
         }
       }
@@ -660,8 +702,10 @@ export default function ActivityMixin(Base) {
             updates.item.push(...results.item);
             updates.rolls.push(...results.rolls);
             // Mark this item for deletion if it is linked to a cast activity that will be deleted
+            const otherLinkedActivity = linkedActivity.type === "forward"
+              ? linkedActivity.item.system.activities.get(linkedActivity.activity.id) : linkedActivity;
             if ( updates.delete.includes(linkedActivity.item.id)
-              && (this.item.getFlag("dnd5e", "cachedFor") === linkedActivity.relativeUUID) ) {
+              && (this.item.getFlag("dnd5e", "cachedFor") === otherLinkedActivity?.relativeUUID) ) {
               updates.delete.push(this.item.id);
             }
           } else if ( results?.length ) {
@@ -673,10 +717,9 @@ export default function ActivityMixin(Base) {
       // Handle spell slot consumption
       else if ( ((config.consume === true) || config.consume.spellSlot)
         && this.requiresSpellSlot && this.consumption.spellSlot ) {
-        const { method } = this.item.system.preparation;
-        const spellcasting = CONFIG.DND5E.spellcasting[method];
+        const spellcasting = CONFIG.DND5E.spellcasting[this.item.system.method];
         const effectiveLevel = this.item.system.level + (config.scaling ?? 0);
-        const slot = config.spell?.slot ?? spellcasting?.getSpellSlotKey(effectiveLevel) ?? method;
+        const slot = config.spell?.slot ?? spellcasting?.getSpellSlotKey(effectiveLevel) ?? this.item.system.method;
         const slotData = this.actor.system.spells?.[slot];
         if ( slotData ) {
           if ( slotData.value ) {
@@ -781,6 +824,8 @@ export default function ActivityMixin(Base) {
      */
     _finalizeMessageConfig(usageConfig, messageConfig, results) {
       messageConfig.data.rolls = (messageConfig.data.rolls ?? []).concat(results.updates.rolls);
+      const effects = this.applicableEffects?.map(e => e.id);
+      if ( effects ) foundry.utils.setProperty(messageConfig.data, "flags.dnd5e.use.effects", effects);
     }
 
     /* -------------------------------------------- */
@@ -1228,6 +1273,17 @@ export default function ActivityMixin(Base) {
     /* -------------------------------------------- */
 
     /**
+     * Get the best matched token from which this activity is being used if one can be found for this actor
+     * in the current scene.
+     * @returns {TokenDocument|void}
+     */
+    getUsageToken() {
+      return getSceneTargets(this.actor)[0]?.document;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
      * Merge the activity updates into this activity's item updates.
      * @param {ActivityUsageUpdates} updates
      * @internal
@@ -1245,10 +1301,21 @@ export default function ActivityMixin(Base) {
     /*  Importing and Exporting                     */
     /* -------------------------------------------- */
 
+    /**
+     * Can an activity of this type be added to the provided item?
+     * @param {Item5e} item  Candidate item to which the activity might be added.
+     * @returns {boolean}    Should this activity be available?
+     */
+    static availableForItem(item) {
+      return true;
+    }
+
+    /* -------------------------------------------- */
+
     /** @override */
     static _createDialogTypes(parent) {
       return Object.entries(CONFIG.DND5E.activityTypes)
-        .filter(([, { configurable }]) => configurable !== false)
+        .filter(([, c]) => (c.configurable !== false) && c.documentClass.availableForItem(parent))
         .map(([k]) => k);
     }
   }

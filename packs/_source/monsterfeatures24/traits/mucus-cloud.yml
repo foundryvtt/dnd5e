@@ -1,0 +1,212 @@
+_id: mmMucusCloud0000
+name: Mucus Cloud
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    clFFG8uDBSFzxIo8:
+      type: save
+      _id: clFFG8uDBSFzxIo8
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: VesaHwtQEHKpxdAB
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: radius
+          size: '5'
+          count: ''
+        affects:
+          choice: false
+          type: creature
+          count: ''
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability:
+          - con
+        dc:
+          calculation: ''
+          formula: '14'
+      name: ''
+      img: ''
+      appliedEffects:
+        - VesaHwtQEHKpxdAB
+    JrxCVyCOsBAMVZS7:
+      type: damage
+      _id: JrxCVyCOsBAMVZS7
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: 'Damage: Every 10 min. unless skin is wet.'
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 12
+            bonus: ''
+            types:
+              - acid
+            scaling:
+              number: 1
+      name: 'Damage: Outside Water'
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">While underwater, the [[lookup @name lowercase]] is
+      surrounded by mucus.</p><p class="feature"><em>Constitution Saving
+      Throw:</em> DC 14, each [[lookup @target.affects.type
+      activity=clFFG8uDBSFzxIo8]] in a [[lookup @target.template.size
+      activity=clFFG8uDBSFzxIo8]]-[[lookup @target.template.units
+      activity=clFFG8uDBSFzxIo8]] Emanation originating from the [[lookup @name
+      lowercase]] at the end of the [[lookup @name lowercase]]'s turn.
+      <em>Failure:</em> The target is cursed. Until the curse ends, the target's
+      skin becomes slimy, the target can breathe air and water, and it can't
+      regain Hit Points unless it is underwater.</p><p class="feature">While the
+      cursed creature is outside a body of water, the creature takes [[/damage
+      average activity=JrxCVyCOsBAMVZS7]] damage at the end of every 10 minutes
+      unless moisture is applied to its skin before those minutes have
+      passed.</p>
+    chat: ''
+  identifier: mucus-cloud
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/magic/acid/dissolve-pool-bubbles.webp
+effects:
+  - name: Cursed
+    img: systems/dnd5e/icons/svg/statuses/cursed.svg
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmMucusCloud0000
+    _id: VesaHwtQEHKpxdAB
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>While the cursed creature is outside a body of water, the creature
+      takes [[/damage 1d12 Acid average]] damage at the end of every 10 minutes
+      unless moisture is applied to its skin before those minutes have
+      passed.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - cursed
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: 1736297188822
+      modifiedTime: 1736297310884
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmMucusCloud0000.VesaHwtQEHKpxdAB'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736297455969
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 9100000
+ownership:
+  default: 0
+_key: '!items!mmMucusCloud0000'

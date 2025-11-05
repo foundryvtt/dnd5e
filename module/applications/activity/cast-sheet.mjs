@@ -42,8 +42,8 @@ export default class CastSheet extends ActivitySheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _prepareEffectContext(context) {
-    context = await super._prepareEffectContext(context);
+  async _prepareEffectContext(context, options) {
+    context = await super._prepareEffectContext(context, options);
 
     if ( context.spell ) {
       context.contentLink = context.spell.toAnchor().outerHTML;
@@ -67,14 +67,18 @@ export default class CastSheet extends ActivitySheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _prepareIdentityContext(context) {
-    context = await super._prepareIdentityContext(context);
+  async _prepareIdentityContext(context, options) {
+    context = await super._prepareIdentityContext(context, options);
     context.behaviorFields = [{
       field: context.fields.spell.fields.spellbook,
       value: context.source.spell.spellbook,
       input: context.inputs.createCheckboxInput
     }];
     if ( context.spell ) context.placeholder = { name: context.spell.name, img: context.spell.img };
+    const requireAttunementField = context.visibilityFields.find(f => f.field.name === "requireAttunement");
+    if ( requireAttunementField?.disabled ) requireAttunementField.value = true;
+    const requireMagicField = context.visibilityFields.find(f => f.field.name === "requireMagic");
+    if ( requireMagicField ) Object.assign(requireMagicField, { disabled: true, value: true });
     return context;
   }
 

@@ -2,7 +2,7 @@
 
     {{!-- Portrait --}}
     <div class="portrait {{#if portrait.token}}token{{/if}}">
-        <img src="{{ portrait.src }}" alt="{{ actor.name }}">
+        <img src="{{ ifThen portrait portrait.src actor.img }}" alt="{{ actor.name }}">
     </div>
 
     {{!-- Name --}}

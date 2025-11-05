@@ -1,19 +1,21 @@
 import Actor5e from "../../documents/actor/actor.mjs";
 import { defaultUnits, formatLength, splitSemicolons } from "../../utils.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
-import AdvancementField from "../fields/advancement-field.mjs";
 import { CreatureTypeField, MovementField, SensesField } from "../shared/_module.mjs";
 import AdvancementTemplate from "./templates/advancement.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
 /**
+ * @import { RaceItemSystemData } from "./_types.mjs";
+ * @import { AdvancementTemplateData, ItemDescriptionTemplateData } from "./templates/_types.mjs";
+ */
+
+/**
  * Data definition for Race items.
- * @mixes AdvancementTemplate
- * @mixes ItemDescriptionTemplate
- *
- * @property {MovementField} movement
- * @property {SensesField} senses
- * @property {CreatureType} type
+ * @extends {ItemDataModel<AdvancementTemplate, ItemDescriptionTemplate & RaceItemSystemData>}
+ * @mixes AdvancementTemplateData
+ * @mixes ItemDescriptionTemplateData
+ * @mixes RaceItemSystemData
  */
 export default class RaceData extends ItemDataModel.mixin(AdvancementTemplate, ItemDescriptionTemplate) {
 
@@ -131,7 +133,7 @@ export default class RaceData extends ItemDataModel.mixin(AdvancementTemplate, I
       label: "DND5E.Movement",
       classes: "info-sm info-grid",
       config: "movement",
-      tooltip: "DND5E.MovementConfig",
+      tooltip: "DND5E.MOVEMENT.Action.Configure",
       value: Object.entries(CONFIG.DND5E.movementTypes).reduce((str, [k, { label }]) => {
         const value = this.movement[k];
         if ( !value ) return str;

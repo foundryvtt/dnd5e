@@ -48,6 +48,7 @@ system:
     rules: '2024'
     license: CC-BY-4.0
     book: SRD 5.2
+    page: ''
   uses:
     max: '@scale.cleric.channel-divinity'
     recovery:
@@ -245,7 +246,7 @@ system:
         formula: ''
       img: systems/dnd5e/icons/svg/trait-damage-immunities.svg
   enchant: {}
-  identifier: channel-divinity
+  identifier: channel-divinity-cleric
 effects:
   - name: Turned
     img: icons/magic/symbols/star-rising-purple.webp
@@ -289,11 +290,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.10
   createdTime: 1735866373481
-  modifiedTime: 1745256760672
+  modifiedTime: 1759426486254
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 200000

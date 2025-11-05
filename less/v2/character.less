@@ -193,6 +193,8 @@
             width: var(--bar-percentage);
             background: var(--dnd5e-color-red);
             display: block;
+            box-shadow: inset 0 1px 0 1px var(--dnd5e-highlight-40);
+            border-radius: 2px;
           }
         }
       }
@@ -879,6 +881,8 @@
     .pills-group {
       margin-top: .5rem;
 
+      h3 { margin-bottom: 2px; }
+
       &.empty {
         opacity: .4;
         > h3 > a { color: var(--dnd5e-color-black); }
@@ -925,64 +929,6 @@
 
   /* Features */
   .tab[data-tab=features] { gap: 16px; }
-
-  /* Inventory */
-  .tab[data-tab=inventory] {
-
-    .top {
-      display: flex;
-      align-items: start;
-      gap: 1rem;
-    }
-
-    /* Containers */
-    .containers {
-      flex: 1;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(39px, max-content));
-      gap: .5rem;
-
-      .container {
-        max-width: 78px;
-        max-height: 78px;
-        aspect-ratio: 1;
-        border: var(--dnd5e-border-gold);
-        border-radius: 4px;
-        box-shadow: 0 0 6px var(--dnd5e-shadow-45);
-        background-color: var(--dnd5e-background-alt-1);
-
-        a {
-          display: flex;
-          flex-direction: column;
-          height: 100%;
-
-          &:hover {
-            text-shadow: none;
-          }
-
-          .meter {
-            flex: 0 0 6px;
-            border: none;
-            border-radius: 3px 3px 0 0;
-
-            &.progress::before {
-              --border-width: 1px;
-              box-shadow: none;
-              clip-path: none;
-            }
-          }
-
-          img {
-            flex: 1;
-            border: none;
-            object-fit: cover;
-            border-radius: 0 0 3px 3px;
-            min-height: 0;
-          }
-        }
-      }
-    }
-  }
 
   /* ---------------------------------- */
   /*  Ability Scores                    */
@@ -1322,6 +1268,7 @@
       display: flex;
       flex-direction: column;
       gap: 4px;
+      overflow: hidden;
 
       > * { position: relative; }
 
@@ -1336,8 +1283,7 @@
         &:hover { opacity: 1; }
       }
 
-      &.disabled, &.building { filter: grayscale(1); }
-      &.disabled { pointer-events: none; }
+      &.damaged, &.building { filter: grayscale(1); }
 
       &:not(.empty) {
         border: var(--dnd5e-border-gold);

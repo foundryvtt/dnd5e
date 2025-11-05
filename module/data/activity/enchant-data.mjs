@@ -7,38 +7,20 @@ const {
 } = foundry.data.fields;
 
 /**
- * @typedef {EffectApplicationData} EnchantEffectApplicationData
- * @property {object} level
- * @property {number} level.min             Minimum level at which this profile can be used.
- * @property {number} level.max             Maximum level at which this profile can be used.
- * @property {object} riders
- * @property {Set<string>} riders.activity  IDs of other activities on this item that will be added when enchanting.
- * @property {Set<string>} riders.effect    IDs of other effects on this item that will be added when enchanting.
- * @property {Set<string>} riders.item      UUIDs of items that will be added with this enchantment.
+ * @import { EnchantActivityData, EnchantEffectApplicationData } from "./_types.mjs";
  */
 
 /**
  * Data model for a enchant activity.
- *
- * @property {object} enchant
- * @property {string} enchant.identifier    Class identifier that will be used to determine applicable level.
- * @property {string} enchant.self          Automatically apply enchantment to item containing this activity when used.
- * @property {object} restrictions
- * @property {boolean} restrictions.allowMagical    Allow enchantments to be applied to items that are already magical.
- * @property {Set<string>} restrictions.categories  Item categories to restrict to.
- * @property {Set<string>} restrictions.properties  Item properties to restrict to.
- * @property {string} restrictions.type             Item type to which this enchantment can be applied.
+ * @extends {BaseActivityData<EnchantActivityData>}
+ * @mixes EnchantActivityData
  */
-export default class EnchantActivityData extends BaseActivityData {
+export default class BaseEnchantActivityData extends BaseActivityData {
   /** @inheritDoc */
   static defineSchema() {
     return {
       ...super.defineSchema(),
       effects: new ArrayField(new AppliedEffectField({
-        level: new SchemaField({
-          min: new NumberField({ min: 0, integer: true }),
-          max: new NumberField({ min: 0, integer: true })
-        }),
         riders: new SchemaField({
           activity: new SetField(new DocumentIdField()),
           effect: new SetField(new DocumentIdField()),
@@ -91,9 +73,7 @@ export default class EnchantActivityData extends BaseActivityData {
    * @type {EnchantEffectApplicationData[]}
    */
   get availableEnchantments() {
-    const keyPath = (this.item.type === "spell") && (this.item.system.level > 0) ? "item.level"
-      : this.classIdentifier ? `classes.${this.classIdentifier}.levels` : "details.level";
-    const level = foundry.utils.getProperty(this.getRollData(), keyPath) ?? 0;
+    const level = this.relevantLevel;
     return this.effects
       .filter(e => e.effect && ((e.level.min ?? -Infinity) <= level) && (level <= (e.level.max ?? Infinity)));
   }
@@ -112,7 +92,7 @@ export default class EnchantActivityData extends BaseActivityData {
   }
 
   /* -------------------------------------------- */
-  /*  Data Migrations                             */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @override */

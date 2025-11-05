@@ -113,8 +113,14 @@ export default class TransformDialog extends Dialog5e {
    * @protected
    */
   async _prepareDetailsContext(context, options) {
-    context.sourceActor = this.options.transform.source;
-    context.hostActor = this.options.transform.host;
+    context.sourceActor = {
+      artwork: (await this.options.transform.source.getTokenImages())[0],
+      name: this.options.transform.source.name
+    };
+    context.hostActor = {
+      artwork: (await this.options.transform.host.getTokenImages())[0],
+      name: this.options.transform.host.name
+    };
     return context;
   }
 
@@ -149,7 +155,7 @@ export default class TransformDialog extends Dialog5e {
    * @protected
    */
   async _prepareSettingsContext(context, options) {
-    context.categories = this.#settings.createFormCategories();
+    context.categories = this.#settings.createFormCategories({ host: this.options.transform.host });
     return context;
   }
 

@@ -1,6 +1,6 @@
 import AdvancementConfig from "../../applications/advancement/advancement-config-v2.mjs";
 import AdvancementFlow from "../../applications/advancement/advancement-flow.mjs";
-import BaseAdvancement from "../../data/advancement/base-advancement.mjs";
+import BaseAdvancementData from "../../data/advancement/base-advancement.mjs";
 import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
 
 /**
@@ -24,7 +24,7 @@ class AdvancementError extends Error {
  * @param {object} [options={}]  Options which affect DataModel construction.
  * @abstract
  */
-export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
+export default class Advancement extends PseudoDocumentMixin(BaseAdvancementData) {
   constructor(data, {parent=null, ...options}={}) {
     if ( parent instanceof Item ) parent = parent.system;
     super(data, {parent, ...options});

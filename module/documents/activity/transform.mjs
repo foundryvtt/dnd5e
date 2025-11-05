@@ -1,14 +1,18 @@
 import TransformSheet from "../../applications/activity/transform-sheet.mjs";
 import TransformUsageDialog from "../../applications/activity/transform-usage-dialog.mjs";
 import CompendiumBrowser from "../../applications/compendium-browser.mjs";
-import TransformActivityData from "../../data/activity/transform-data.mjs";
+import BaseTransformActivityData from "../../data/activity/transform-data.mjs";
 import { getSceneTargets, simplifyBonus } from "../../utils.mjs";
 import ActivityMixin from "./mixin.mjs";
 
 /**
+ * @import { TransformationConfiguration } from "../../_types.mjs";
+ */
+
+/**
  * Activity for transforming an actor into something else.
  */
-export default class TransformActivity extends ActivityMixin(TransformActivityData) {
+export default class TransformActivity extends ActivityMixin(BaseTransformActivityData) {
   /* -------------------------------------------- */
   /*  Model Configuration                         */
   /* -------------------------------------------- */
@@ -133,7 +137,7 @@ export default class TransformActivity extends ActivityMixin(TransformActivityDa
    * @returns {Promise<string|null>}    UUID of the actor to transform into or `null` if canceled.
    */
   async queryActor(profile) {
-    const locked = { documentClass: "Actor", types: new Set(["npc"]) };
+    const locked = { documentClass: "Actor", types: new Set(["npc"]), additional: {} };
     if ( profile.cr !== "" ) locked.additional = {
       cr: { max: simplifyBonus(profile.cr, this.getRollData({ deterministic: true })) }
     };

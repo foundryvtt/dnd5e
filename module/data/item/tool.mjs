@@ -11,24 +11,27 @@ import PhysicalItemTemplate from "./templates/physical-item.mjs";
 const { NumberField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @import { ItemTypeData } from "./fields/item-type-field.mjs";
+ * @import { InventorySectionDescriptor } from "../../applications/components/_types.mjs";
+ * @import { ToolItemSystemData } from "./_types.mjs";
+ * @import {
+ *   ActivitiesTemplateData, EquippableItemTemplateData, IdentifiableTemplateData,
+ *   ItemDescriptionTemplateData, ItemTypeTemplateData, PhysicalItemTemplateData
+ * } from "./templates/_types.mjs";
  */
 
 /**
  * Data definition for Tool items.
- * @mixes ActivitiesTemplate
- * @mixes ItemDescriptionTemplate
- * @mixes ItemTypeTemplate
- * @mixes IdentifiableTemplate
- * @mixes PhysicalItemTemplate
- * @mixes EquippableItemTemplate
- *
- * @property {string} ability                      Default ability when this tool is being used.
- * @property {string} bonus                        Bonus formula added to tool rolls.
- * @property {string} chatFlavor                   Additional text added to chat when this tool is used.
- * @property {number} proficient                   Level of proficiency as defined in `DND5E.proficiencyLevels`.
- * @property {Set<string>} properties              Tool properties.
- * @property {Omit<ItemTypeData, "subtype">} type  Tool type and base item.
+ * @extends {ItemDataModel<
+ *   ActivitiesTemplate & ItemDescriptionTemplate & IdentifiableTemplate & ItemTypeTemplate &
+ *   PhysicalItemTemplate & EquippableItemTemplate & ToolItemSystemData
+ * >}
+ * @mixes ActivitiesTemplateData
+ * @mixes ItemDescriptionTemplateData
+ * @mixes ItemTypeTemplateData
+ * @mixes IdentifiableTemplateData
+ * @mixes PhysicalItemTemplateData
+ * @mixes EquippableItemTemplateData
+ * @mixes ToolItemSystemData
  */
 export default class ToolData extends ItemDataModel.mixin(
   ActivitiesTemplate, ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate,
@@ -47,14 +50,14 @@ export default class ToolData extends ItemDataModel.mixin(
   /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      type: new ItemTypeField({ subtype: false }, { label: "DND5E.ItemToolType" }),
       ability: new StringField({ required: true, blank: true, label: "DND5E.DefaultAbilityCheck" }),
+      bonus: new FormulaField({ required: true, label: "DND5E.ItemToolBonus" }),
       chatFlavor: new StringField({ required: true, label: "DND5E.ChatFlavor" }),
       proficient: new NumberField({
         required: true, initial: null, min: 0, max: 2, step: 0.5, label: "DND5E.ItemToolProficiency"
       }),
       properties: new SetField(new StringField(), { label: "DND5E.ItemToolProperties" }),
-      bonus: new FormulaField({ required: true, label: "DND5E.ItemToolBonus" })
+      type: new ItemTypeField({ subtype: false }, { label: "DND5E.ItemToolType" })
     });
   }
 
@@ -102,7 +105,62 @@ export default class ToolData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
-  /*  Migrations                                  */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Properties displayed in chat.
+   * @type {string[]}
+   */
+  get chatProperties() {
+    return [CONFIG.DND5E.abilities[this.ability]?.label];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Properties displayed on the item card.
+   * @type {string[]}
+   */
+  get cardProperties() {
+    return [CONFIG.DND5E.abilities[this.ability]?.label];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Which ability score modifier is used by this item?
+   * @type {string|null}
+   */
+  get abilityMod() {
+    return this.ability || "int";
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  static get itemCategories() {
+    return CONFIG.DND5E.toolTypes;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The proficiency multiplier for this item.
+   * @returns {number}
+   */
+  get proficiencyMultiplier() {
+    if ( Number.isFinite(this.proficient) ) return this.proficient;
+    const actor = this.parent.actor;
+    if ( !actor ) return 0;
+    if ( actor.type === "npc" ) return 1;
+    const baseItemProf = actor.system.tools?.[this.type.baseItem];
+    const categoryProf = actor.system.tools?.[this.type.value];
+    return Math.max(baseItemProf?.value ?? 0, categoryProf?.value ?? 0);
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -163,61 +221,6 @@ export default class ToolData extends ItemDataModel.mixin(
       ...this.physicalItemSheetFields
     ];
     context.parts = ["dnd5e.details-tool", "dnd5e.field-uses"];
-  }
-
-  /* -------------------------------------------- */
-  /*  Getters                                     */
-  /* -------------------------------------------- */
-
-  /**
-   * Properties displayed in chat.
-   * @type {string[]}
-   */
-  get chatProperties() {
-    return [CONFIG.DND5E.abilities[this.ability]?.label];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Properties displayed on the item card.
-   * @type {string[]}
-   */
-  get cardProperties() {
-    return [CONFIG.DND5E.abilities[this.ability]?.label];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Which ability score modifier is used by this item?
-   * @type {string|null}
-   */
-  get abilityMod() {
-    return this.ability || "int";
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  static get itemCategories() {
-    return CONFIG.DND5E.toolTypes;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * The proficiency multiplier for this item.
-   * @returns {number}
-   */
-  get proficiencyMultiplier() {
-    if ( Number.isFinite(this.proficient) ) return this.proficient;
-    const actor = this.parent.actor;
-    if ( !actor ) return 0;
-    if ( actor.type === "npc" ) return 1;
-    const baseItemProf = actor.system.tools?.[this.type.baseItem];
-    const categoryProf = actor.system.tools?.[this.type.value];
-    return Math.max(baseItemProf?.value ?? 0, categoryProf?.value ?? 0);
   }
 
   /* -------------------------------------------- */

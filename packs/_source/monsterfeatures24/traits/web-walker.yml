@@ -1,0 +1,45 @@
+_id: mmWebWalker00000
+name: Web Walker
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] ignores movement
+      restrictions caused by webs, and the [[lookup @name lowercase]] knows the
+      location of any other creature in contact with the same web.</p>
+    chat: ''
+  identifier: web-walker
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/creatures/webs/web-spider-glowing-purple.webp
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1735924978426
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 14500000
+ownership:
+  default: 0
+_key: '!items!mmWebWalker00000'

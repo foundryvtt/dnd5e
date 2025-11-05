@@ -1,0 +1,107 @@
+_id: mmBarbedHide0000
+name: Barbed Hide
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    1O5eyc72vPW0UxYZ:
+      type: damage
+      sort: 0
+      activation:
+        type: special
+        value: null
+        override: false
+        condition: start of each of its turns
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: touch
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: it is grappling or any creature grappling it
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 10
+            bonus: ''
+            types:
+              - piercing
+            scaling:
+              number: 1
+      name: ''
+      _id: 1O5eyc72vPW0UxYZ
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>At the start of each of its turns, the [[lookup @name lowercase]] deals
+      [[/damage average]] damage to any creature [[lookup
+      @target.affects.special activity=1O5eyc72vPW0UxYZ]].</p>
+    chat: ''
+  identifier: barbed-hide
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/creatures/abilities/stinger-spine-horn-blood.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1734984280861
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1700000
+ownership:
+  default: 0
+_key: '!items!mmBarbedHide0000'

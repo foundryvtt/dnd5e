@@ -49,7 +49,7 @@
       img {
         width: 38px;
         height: 38px;
-        border-radius: 100%;
+        border-radius: 4px;
         box-shadow: 0 0 6px rgb(0 0 0 / 85%);
         object-fit: cover;
         object-position: top;
@@ -293,6 +293,35 @@
   }
 }
 
+/* ----------------------------------------- */
+/*  Inline Roll Actions                      */
+/* ----------------------------------------- */
+
+.roll-link-group, .roll-link, .reference-link {
+  a {
+    &:first-child {
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px;
+    }
+    &:last-child {
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
+    }
+
+    i {
+      color: var(--color-text-dark-inactive);
+      margin-inline-end: 0.25em;
+    }
+
+    &.enricher-action {
+      padding-inline-end: 1px;
+    }
+  }
+  a + a {
+    margin-inline-start: 2px;
+  }
+}
+
 /* ---------------------------------- */
 /*  Chat Notifications                */
 /* ---------------------------------- */
@@ -473,9 +502,11 @@
   margin-block-start: .375rem;
 }
 
-.chat-sidebar:not([data-gm-user]) .card-header[data-concealed] {
-  .summary { cursor: inherit; }
-  .fa-chevron-down, .details { display: none; }
+.chat-sidebar, .chat-popout, #chat-notifications {
+  &:not([data-gm-user]) .card-header[data-concealed] {
+    .summary { cursor: inherit; }
+    .fa-chevron-down, .details { display: none; }
+  }
 }
 
 .message {
@@ -827,6 +858,27 @@ enchantment-application {
     .status {
       flex: 0 0 30px;
       text-align: center;
+
+      &.success, &.failure {
+        flex-basis: 60px;
+        display: flex;
+        align-items: center;
+
+        .total, i {
+          flex: 0 0 30px;
+          text-align: center;
+        }
+
+        i { height: 14px; }
+      }
+
+      &.success { color: var(--dnd5e-color-success); }
+      &.failure { color: var(--dnd5e-color-failure); }
+    }
+
+    .total {
+      font-weight: bold;
+      font-family: var(--dnd5e-font-roboto-condensed);
     }
   }
   .deltas ul {

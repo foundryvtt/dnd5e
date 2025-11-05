@@ -1,9 +1,14 @@
 import simplifyRollFormula from "../../../dice/simplify-roll-formula.mjs";
 import { formatNumber, getHumanReadableAttributeLabel, simplifyBonus } from "../../../utils.mjs";
-import EmbeddedDataField5e from "../..//fields/embedded-data-field.mjs";
+import EmbeddedDataField5e from "../../fields/embedded-data-field.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 
 const { ArrayField, SchemaField, StringField } = foundry.data.fields;
+
+/**
+ * @import { ConsumptionLabels } from "../../../_types.mjs";
+ * @import { UsesData } from "../../shared/_types.mjs";
+ */
 
 /**
  * Field for holding one or more consumption targets.
@@ -16,20 +21,12 @@ export default class ConsumptionTargetsField extends ArrayField {
 
 /**
  * Embedded data model for storing consumption target data and handling consumption.
- *
- * @property {string} type             Type of consumption (e.g. activity uses, item uses, hit die, spell slot).
- * @property {string} target           Target of the consumption depending on the selected type (e.g. item's ID, hit
- *                                     die denomination, spell slot level).
- * @property {string} value            Formula that determines amount consumed or recovered.
- * @property {object} scaling
- * @property {string} scaling.mode     Scaling mode (e.g. no scaling, scale target amount, scale spell level).
- * @property {string} scaling.formula  Specific scaling formula if not automatically calculated from target's value.
  */
 export class ConsumptionTargetData extends foundry.abstract.DataModel {
   /** @override */
   static defineSchema() {
     return {
-      type: new StringField(),
+      type: new StringField({ required: true, blank: false, initial: "activityUses" }),
       target: new StringField(),
       value: new FormulaField({ initial: "1" }),
       scaling: new SchemaField({
@@ -216,7 +213,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 
     let toConsume = cost;
     for ( const cls of validClasses ) {
-      const available = toConsume > 0 ? cls.system.hd.value : 0;
+      const available = toConsume > 0 ? cls.system.hd.value : toConsume < 0 ? -cls.system.hd.spent : 0;
       const delta = toConsume > 0 ? Math.min(toConsume, available) : Math.max(toConsume, available);
       const itemUpdate = { "system.hd.spent": cls.system.hd.spent + delta };
       if ( delta !== 0 ) {
@@ -281,7 +278,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    * @throws ConsumptionError
    */
   static async consumeMaterial(config, updates) {
-    const item = this.target ? this.actor.items.get(this.target) : this.item;
+    const item = this.actor.items.get(this.target);
     if ( !item ) throw new ConsumptionError(game.i18n.format("DND5E.CONSUMPTION.Warning.MissingItem", {
       activity: this.activity.name, item: this.item.name
     }));
@@ -431,7 +428,11 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
       label: game.i18n.localize(`DND5E.CONSUMPTION.Type.Attribute.Prompt${increaseKey}`),
       hint: game.i18n.format(
         `DND5E.CONSUMPTION.Type.Attribute.PromptHint${increaseKey}`,
-        { cost, attribute: this.target, current: formatNumber(current) }
+        {
+          cost,
+          attribute: getHumanReadableAttributeLabel(this.target, { actor: this.actor }),
+          current: formatNumber(current)
+        }
       ),
       warn: simplifiedCost > current
     };
@@ -524,18 +525,19 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
   static consumptionLabelsMaterial(config, { consumed }={}) {
     const { cost, simplifiedCost, increaseKey } = this._resolveHintCost(config);
     const item = this.actor.items.get(this.target);
-    const quantity = (item ?? this.item).system.quantity;
+    const quantity = item?.system.quantity ?? 0;
     return {
       label: game.i18n.localize(`DND5E.CONSUMPTION.Type.Material.Prompt${increaseKey}`),
       hint: game.i18n.format(
         `DND5E.CONSUMPTION.Type.Material.PromptHint${increaseKey}`,
         {
           cost,
-          item: item ? `<em>${item.name}</em>` : game.i18n.localize("DND5E.CONSUMPTION.Target.ThisItem").toLowerCase(),
+          item: item ? `<em>${item.name}</em>`
+            : game.i18n.localize("DND5E.CONSUMPTION.Target.UnknownItem").toLowerCase(),
           quantity: formatNumber(quantity)
         }
       ),
-      warn: simplifiedCost > quantity
+      warn: !item || (simplifiedCost > quantity)
     };
   }
 
@@ -608,6 +610,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
       else if ( attr.startsWith("spells.") ) group = game.i18n.localize("DND5E.CONSUMPTION.Type.SpellSlots.Label");
       else if ( attr.startsWith("attributes.movement.") ) group = game.i18n.localize("DND5E.Speed");
       else if ( attr.startsWith("attributes.senses.") ) group = game.i18n.localize("DND5E.Senses");
+      else if ( attr.startsWith("attributes.actions.") ) group = game.i18n.localize("DND5E.Vehicle");
       else if ( attr.startsWith("resources.") ) group = game.i18n.localize("DND5E.Resources");
       return { group, value: attr, label: getHumanReadableAttributeLabel(attr, { actor: this.actor }) || attr };
     });
@@ -665,7 +668,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    */
   static validMaterialTargets() {
     return (this.actor?.items ?? [])
-      .filter(i => ["consumable", "loot"].includes(i.type) && !i.system.activities?.size)
+      .filter(i => ["consumable", "loot"].includes(i.type))
       .map(i => ({ value: i.id, label: `${i.name} (${formatNumber(i.system.quantity)})` }));
   }
 
@@ -744,7 +747,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
       // Otherwise increase the number of dice and the numeric term for each scaling step
       else roll.terms = roll.terms.map(term => {
         if ( term instanceof foundry.dice.terms.DiceTerm ) return term.alter(undefined, scaling);
-        else if ( term instanceof foundry.dice.terms.NumericTerm ) term.number += scaling;
+        else if ( term instanceof foundry.dice.terms.NumericTerm ) term.number += term.number > 0 ? scaling : -scaling;
         return term;
       });
 

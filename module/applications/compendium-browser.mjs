@@ -5,48 +5,10 @@ import Application5e from "./api/application.mjs";
 import CompendiumBrowserSettingsConfig from "./settings/compendium-browser-settings.mjs";
 
 /**
- * @typedef {ApplicationConfiguration} CompendiumBrowserConfiguration
- * @property {{locked: CompendiumBrowserFilters, initial: CompendiumBrowserFilters}} filters  Filters to set to start.
- *                                              Locked filters won't be able to be changed by the user. Initial filters
- *                                              will be set to start but can be changed.
- * @property {CompendiumBrowserSelectionConfiguration} selection  Configuration used to define document selections.
- */
-
-/**
- * @typedef {object} CompendiumBrowserSelectionConfiguration
- * @property {number|null} min                  Minimum number of documents that must be selected.
- * @property {number|null} max                  Maximum number of documents that must be selected.
- */
-
-/**
- * @typedef {object} CompendiumBrowserFilters
- * @property {string} [documentClass]  Document type to fetch (e.g. Actor or Item).
- * @property {Set<string>} [types]     Individual document subtypes to filter upon (e.g. "loot", "class", "npc").
- * @property {object} [additional]     Additional type-specific filters applied.
- * @property {FilterDescription[]} [arbitrary]  Additional arbitrary filters to apply, not displayed in the UI.
- *                                     Only available as part of locked filters.
- * @property {string} [name]           A substring to filter by Document name.
- */
-
-/**
- * Filter definition object for additional filters in the Compendium Browser.
- *
- * @typedef {object} CompendiumBrowserFilterDefinitionEntry
- * @property {string} label                                   Localizable label for the filter.
- * @property {"boolean"|"range"|"set"} type                   Type of filter control to display.
- * @property {object} config                                  Type-specific configuration data.
- * @property {CompendiumBrowserCreateFilters} [createFilter]  Method that can be called to create filters.
- */
-
-/**
- * @callback CompendiumBrowserFilterCreateFilters
- * @param {FilterDescription[]} filters                        Array of filters to be applied that should be mutated.
- * @param {*} value                                            Value of the filter.
- * @param {CompendiumBrowserFilterDefinitionEntry} definition  Definition for this filter.
- */
-
-/**
- * @typedef {Map<string, CompendiumBrowserFilterDefinitionEntry>} CompendiumBrowserFilterDefinition
+ * @import { FilterDescription } from "../_types.mjs";
+ * @import {
+ *   CompendiumBrowserConfiguration, CompendiumBrowserFilterDefinition, CompendiumBrowserFilters
+ * } from "./_types.mjs";
  */
 
 /**
@@ -69,7 +31,7 @@ export default class CompendiumBrowser extends Application5e {
       const isAdvanced = this._mode === this.constructor.MODES.ADVANCED;
       const tab = this.constructor.TABS.find(t => t.tab === this.options.tab);
       if ( !tab || (!!tab.advanced !== isAdvanced) ) this.options.tab = isAdvanced ? "actors" : "classes";
-      this._applyTabFilters(this.options.tab);
+      this._applyTabFilters(this.options.tab, { keepFilters: true });
     }
   }
 
@@ -162,14 +124,6 @@ export default class CompendiumBrowser extends Application5e {
   };
 
   /* -------------------------------------------- */
-
-  /**
-   * @typedef {SheetTabDescriptor5e} CompendiumBrowserTabDescriptor5e
-   * @property {string} documentClass  The class of Documents this tab contains.
-   * @property {string[]} [types]      The sub-types of Documents this tab contains, otherwise all types of the Document
-   *                                   class are assumed.
-   * @property {boolean} [advanced]    Is this tab only available in the advanced browsing mode.
-   */
 
   /**
    * Application tabs.
@@ -573,11 +527,31 @@ export default class CompendiumBrowser extends Application5e {
           return data !== undefined;
         };
 
-        arr.push(foundry.utils.mergeObject(data, {
+        const pushFilter = data => arr.push(foundry.utils.mergeObject(data, {
           key, sort,
           value: context.filters.additional?.[key],
           locked: generateLocked(this.options.filters.locked?.additional?.[key])
         }, { inplace: false }));
+
+        if ( data.type === "set" ) {
+          const groups = Object.entries(data.config.choices).reduce((groups, [k, v]) => {
+            groups[v.group] ??= {};
+            groups[v.group][k] = v;
+            return groups;
+          }, {});
+          if ( Object.keys(groups).length > 1 ) Object.entries(groups).forEach(([group, choices]) => pushFilter({
+            ...data,
+            collapsed: data.config.collapseGroup?.(group),
+            label: game.i18n.format("DND5E.CompendiumBrowser.Filters.Grouped", {
+              type: game.i18n.localize(data.label), group
+            }),
+            config: { ...data.config, choices }
+          }));
+
+          else pushFilter({ ...data, collapsed: data.collapseGroup?.(null) });
+        }
+        else pushFilter(data);
+
         return arr;
       }, []);
 
@@ -738,7 +712,8 @@ export default class CompendiumBrowser extends Application5e {
         value: locked,
         key: "source",
         label: "DND5E.SOURCE.FIELDS.source.label",
-        config: { choices: this.#sources }
+        config: { choices: this.#sources },
+        partId: `${this.id}-filters`
       }
     );
     filters.insertAdjacentHTML("beforeend", filter);
@@ -807,14 +782,16 @@ export default class CompendiumBrowser extends Application5e {
 
   /**
    * Apply filters based on the selected tab.
-   * @param {string} id  The tab ID.
+   * @param {string} id                           The tab ID.
+   * @param {object} [options]                    Additional options
+   * @param {boolean} [options.keepFilters=false] Whether to keep the existing additional filters
    * @protected
    */
-  _applyTabFilters(id) {
+  _applyTabFilters(id, { keepFilters=false }={}) {
     const tab = this.constructor.TABS.find(t => t.tab === id);
     if ( !tab ) return;
     const { documentClass, types } = tab;
-    delete this.#filters.additional;
+    if ( !keepFilters ) delete this.#filters.additional;
     this.#filters.documentClass = documentClass;
     this.#filters.types = new Set(types);
 
@@ -825,7 +802,10 @@ export default class CompendiumBrowser extends Application5e {
     }
 
     // Special case handling for 'Feats' tab in basic mode.
-    if ( id === "feats" ) this.#filters.additional = { category: { feat: 1 } };
+    if ( id === "feats" ) {
+      this.#filters.additional ??= {};
+      foundry.utils.mergeObject(this.#filters.additional, { category: { feat: 1 } });
+    }
   }
 
   /* -------------------------------------------- */
@@ -1140,7 +1120,11 @@ export default class CompendiumBrowser extends Application5e {
         })
 
         // Remove any documents that don't match the specified types or the provided filters
-        .filter(i => (!types.size || types.has(i.type)) && (!filters.length || Filter.performCheck(i, filters)))
+        .filter(i =>
+          (!types.size || (types.has(i.type)
+            && (!p.metadata.flags.dnd5e?.types || p.metadata.flags.dnd5e.types.includes(i.type))))
+            && (!filters.length || Filter.performCheck(i, filters))
+        )
 
         // If full documents are required, retrieve those, otherwise stick with the indices
         .map(async i => index ? i : await fromUuid(i.uuid))

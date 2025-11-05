@@ -35,7 +35,8 @@ import ItemListControlsElement from "../../components/item-list-controls.mjs";
 const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
- * @import { DropEffectValue } from "../../../drag-drop.mjs"
+ * @import { DropEffectValue } from "../../../_types.mjs"
+ * @import { InventorySectionDescriptor } from "../../components/_types.mjs";
  */
 
 /**
@@ -123,19 +124,21 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   /* -------------------------------------------- */
 
   /**
+   * The Actor whose items are shown on the sheet.
+   * @type {Actor5e}
+   */
+  get inventorySource() {
+    return this.actor;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * The cached concentration information for the character.
    * @type {{ items: Set<Item5e>, effects: Set<ActiveEffect5e> }}
    * @internal
    */
   _concentration;
-
-  /* -------------------------------------------- */
-
-  /**
-   * Temporary stored copy of the drop behavior.
-   * @type {string|null}
-   */
-  #dropBehavior = null;
 
   /* -------------------------------------------- */
 
@@ -233,25 +236,11 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     const conditionIds = new Set();
     context.conditions = Object.entries(CONFIG.DND5E.conditionTypes).reduce((arr, [k, c]) => {
       if ( c.pseudo ) return arr; // Filter out pseudo-conditions.
-      let { label, name, icon, img, reference } = c;
-      if ( label ) {
-        foundry.utils.logCompatibilityWarning(
-          "The `label` property of status conditions has been deprecated in place of using `name`.",
-          { since: "DnD5e 5.0", until: "DnD5e 5.2" }
-        );
-        name = label;
-      }
+      let { name, img, reference } = c;
       const id = staticID(`dnd5e${k}`);
       conditionIds.add(id);
       const existing = this.actor.effects.get(id);
       const { disabled } = existing ?? {};
-      if ( icon ) {
-        foundry.utils.logCompatibilityWarning(
-          "The `icon` property of status conditions has been deprecated in place of using `img`.",
-          { since: "DnD5e 5.0", until: "DnD5e 5.2" }
-        );
-        img = icon;
-      }
       arr.push({
         name, reference,
         id: k,
@@ -300,6 +289,9 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    */
   async _prepareInventoryContext(context, options) {
     const Inventory = customElements.get(this.options.elements.inventory);
+
+    // Currency
+    context.currency = this.inventorySource.system._source.currency;
 
     // Containers
     context.itemContext ??= {};
@@ -460,7 +452,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   async _prepareItems(context) {
     context.itemCategories = {};
     context.itemContext = {};
-    context.items = Array.from(this.actor.items).filter(i => !this.actor.items.has(i.system.container));
+    context.items = Array.from(this.inventorySource.items).filter(i => !this.actor.items.has(i.system.container));
     await Promise.all(context.items.map(async item => {
       // Prepare item context
       const ctx = context.itemContext[item.id] ??= {};
@@ -472,9 +464,9 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
       // Handle expanded data
       ctx.isExpanded = this.expandedSections.get(item.id) === true;
-      if ( ctx.isExpanded ) ctx.expanded = await item.getChatData({ secrets: this.actor.isOwner });
+      if ( ctx.isExpanded ) ctx.expanded = await item.getChatData({ secrets: item.isOwner });
 
-      // Place the item into a specific categories
+      // Place the item into specific categories.
       const categories = this._assignItemCategories(item) ?? [];
       for ( const category of categories ) {
         context.itemCategories[category] ??= [];
@@ -635,6 +627,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       // Spells from items
       if ( spell.getFlag("dnd5e", "cachedFor") ) {
         method = "item";
+        if ( !spell.system.linkedActivity?.displayInSpellbook ) return;
         registerSection(method);
       }
 
@@ -768,6 +761,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @protected
    */
   _assignItemCategories(item) {
+    if ( item.dependentOrigin?.active === false ) return [];
     if ( item.type === "container" ) return new Set(["containers", "inventory"]);
     if ( item.type === "spell" ) return new Set(["spells"]);
     if ( "inventorySection" in item.system.constructor ) return new Set(["inventory"]);
@@ -796,7 +790,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     }[activation?.type || ""];
 
     // To Hit
-    const toHit = parseInt(labels.toHit);
+    const toHit = parseInt(labels.modifier);
 
     // Limited Uses
     uses = { ...(uses ?? {}) };
@@ -840,7 +834,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
     // Activities
     ctx.activities = item.system.activities
-      ?.filter(a => !item.getFlag("dnd5e", "riders.activity")?.includes(a.id))
+      ?.filter(a => a.canUse)
       ?.map(this._prepareActivity.bind(this));
 
     // Concentration
@@ -857,15 +851,19 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       : game.i18n.localize("DND5E.AbbreviationDC") : null;
 
     // Linked Uses
-    const cachedFor = fromUuidSync(item.flags.dnd5e?.cachedFor, { relative: this.actor, strict: false });
-    if ( cachedFor ) ctx.linkedUses = cachedFor.consumption?.targets.find(t => t.type === "activityUses")
-      ? cachedFor.uses : cachedFor.consumption?.targets.find(t => t.type === "itemUses")
-        ? cachedFor.item.system.uses : null;
+    const cachedFor = fromUuidSync(item.flags.dnd5e?.cachedFor, { relative: item.parent, strict: false });
+    if ( cachedFor ) {
+      const targetItemUses = cachedFor.consumption?.targets.find(t => t.type === "itemUses");
+      ctx.linkedUses = cachedFor.consumption?.targets.find(t => t.type === "activityUses")
+        ? cachedFor.uses : targetItemUses
+          ? (this.actor.items.get(targetItemUses.target) ?? cachedFor.item).system.uses : null;
+    }
     ctx.uses = { ...(item.system.uses ?? {}) };
     ctx.uses.hasRecharge = item.hasRecharge;
     ctx.uses.hasUses = item.hasLimitedUses;
     ctx.uses.isOnCooldown = item.isOnCooldown;
     ctx.uses.prop = "system.uses.value";
+    ctx.uses.pct = ctx.uses.max ? Math.clamp((ctx.uses.value / ctx.uses.max) * 100, 0, 100) : 0;
   }
 
   /* -------------------------------------------- */
@@ -883,11 +881,11 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       if ( item.type === "class" ) ctx.availableLevels = Array.fromRange(CONFIG.DND5E.maxLevel, 1).map(level => {
         const value = level - item.system.levels;
         const label = value ? `${level} (${formatNumber(value, { signDisplay: "always" })})` : `${level}`;
-        return { label, value, disabled: value > (CONFIG.DND5E.maxLevel - (this.actor.system.details?.level ?? 0)) };
+        return { label, value, disabled: value > (CONFIG.DND5E.maxLevel - (item.parent.system.details?.level ?? 0)) };
       });
     }
 
-    ctx.subtitle = [item.system.type?.label, item.isActive ? item.labels.activation : null].filterJoin(" &bull; ");
+    ctx.subtitle = [item.system.type?.label, item.isActive ? item.labels.activation : null].filterJoin(" • ");
   }
 
   /* -------------------------------------------- */
@@ -917,7 +915,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     else ctx.equip = { applicable: false };
 
     // Subtitles
-    ctx.subtitle = [item.system.type?.label, item.isActive ? item.labels.activation : null].filterJoin(" &bull; ");
+    ctx.subtitle = [item.system.type?.label, item.isActive ? item.labels.activation : null].filterJoin(" • ");
 
     // Weight
     ctx.totalWeight = item.system.totalWeight?.toNearest(0.1);
@@ -978,9 +976,9 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
     // Subtitle
     ctx.subtitle = [
-      linked ? linked.name : this.actor.classes[item.system.sourceClass]?.name,
+      linked ? linked.name : item.parent.classes[item.system.sourceClass]?.name,
       item.labels.components.vsm
-    ].filterJoin(" &bull; ");
+    ].filterJoin(" • ");
   }
 
   /* -------------------------------------------- */
@@ -1014,6 +1012,25 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       element.querySelector(".max").append(attunement.max);
     }
     this.element.querySelector('[data-application-part="inventory"] .middle').append(element);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Render a button for creating items in the inventory tab.
+   * @protected
+   */
+  _renderCreateInventory() {
+    const button = document.createElement("button");
+    Object.assign(button, {
+      type: "button", className: "create-child gold-button",
+      ariaLabel: game.i18n.format("SIDEBAR.Create", { type: game.i18n.localize("DOCUMENT.Item") })
+    });
+    button.dataset.action = "addDocument";
+    button.insertAdjacentHTML("beforeend", '<i class="fa-solid fa-plus" inert></i>');
+    const bottom = this.element.querySelector('[data-application-part="inventory"] .bottom');
+    bottom.classList.add("with-child");
+    bottom.append(button);
   }
 
   /* -------------------------------------------- */
@@ -1143,7 +1160,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       }
 
       // Handle delta inputs
-      this.element.querySelectorAll('input[type="text"][data-dtype="Number"]')
+      this.element.querySelectorAll('input[type="text"]:is([data-dtype="Number"], [inputmode="numeric"])')
         .forEach(i => i.addEventListener("change", this._onChangeInputDelta.bind(this)));
 
       // Meter editing
@@ -1172,16 +1189,15 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       icon: "icons/svg/aura.svg"
     }, { parent: this.actor, renderSheet: true });
 
+    const actor = this.inventorySource;
     const types = this._addDocumentItemTypes(this.tabGroups.primary)
-      .filter(type => !CONFIG.Item.dataModels[type].metadata?.singleton || !this.actor.itemTypes[type].length);
-    if ( types.length > 1 ) return Item.implementation.createDialog({}, {
-      parent: this.actor, pack: this.actor.pack, types
-    });
+      .filter(type => !CONFIG.Item.dataModels[type].metadata?.singleton || !actor.itemTypes[type].length);
+    if ( types.length > 1 ) return Item.implementation.createDialog({}, { types, parent: actor });
 
     const type = types[0];
     return Item.implementation.create({
       type, name: game.i18n.format("DOCUMENT.New", { type: game.i18n.format(CONFIG.Item.typeLabels[type]) })
-    }, { parent: this.actor, renderSheet: true });
+    }, { parent: actor, renderSheet: true });
   }
 
   /* -------------------------------------------- */
@@ -1290,7 +1306,9 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    */
   _onChangeInputDelta(event) {
     const input = event.target;
-    const target = this.actor.items.get(input.closest("[data-item-id]")?.dataset.itemId) ?? this.actor;
+    const { itemId } = input.closest("[data-item-id]")?.dataset ?? {};
+    const actor = input.closest(".inventory-element") ? this.inventorySource : this.actor;
+    const target = actor.items.get(itemId) ?? actor;
     const { activityId } = input.closest("[data-activity-id]")?.dataset ?? {};
     const activity = target?.system.activities?.get(activityId);
     const result = parseInputDelta(input, activity ?? target);
@@ -1454,8 +1472,12 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    */
   #saveSheetSize(position) {
     const { width, height } = position;
+    const prefs = {};
+    if ( width !== "auto" ) prefs.width = width;
+    if ( height !== "auto" ) prefs.height = height;
+    if ( foundry.utils.isEmpty(prefs) ) return;
     const key = `${this.actor.type}${this.actor.limited ? ":limited": ""}`;
-    game.user.setFlag("dnd5e", `sheetPrefs.${key}`, { width, height });
+    game.user.setFlag("dnd5e", `sheetPrefs.${key}`, prefs);
   }
 
   /* -------------------------------------------- */
@@ -1467,9 +1489,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @param {HTMLElement} target  Button that was clicked.
    */
   static #showArtwork(event, target) {
-    const img = target.src;
     new foundry.applications.apps.ImagePopout({
-      src: img,
+      src: target.getAttribute("src"),
       uuid: this.actor.uuid,
       window: { title: this.actor.name }
     }).render({ force: true });
@@ -1525,9 +1546,11 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       case "senses":
         return new MovementSensesConfig({ ...config, type: target.dataset.config }).render({ force: true });
       case "skill":
+        const skill = target.closest("[data-key]").dataset.key;
+        return new SkillToolConfig({ ...config, trait: "skills", key: skill }).render({ force: true });
       case "tool":
-        const key = target.closest("[data-key]").dataset.key;
-        return new SkillToolConfig({ ...config, trait: `${target.dataset.config}s`, key }).render({ force: true });
+        const tool = target.closest("[data-key]").dataset.key;
+        return new SkillToolConfig({ ...config, trait: "tool", key: tool }).render({ force: true });
       case "skills":
         return new SkillsConfig(config).render({ force: true });
       case "source":
@@ -1578,8 +1601,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     const prop = target.dataset.prop ?? target.closest("[data-prop]")?.dataset.prop;
     if ( !Number.isNumeric(n) || !prop ) return;
     let value = foundry.utils.getProperty(this.actor, prop);
-    if ( (value === n) && prop.endsWith(".value") ) value--;
-    else if ( (value === n) && prop.endsWith(".spent") ) value++;
+    if ( (value === n) && prop.endsWith(".spent") ) value++;
+    else if ( value === n ) value--;
     else value = n;
     this.submit({ updateData: { [prop]: value } });
   }
@@ -1609,6 +1632,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     this.element.classList.toggle("sidebar-collapsed", collapsed);
     collapsed = this.element.classList.contains("sidebar-collapsed");
     const collapser = this.form.querySelector(".sidebar-collapser");
+    if ( !collapser ) return collapsed;
     const icon = collapser.querySelector("i");
     collapser.dataset.tooltip = `JOURNAL.View${collapsed ? "Expand" : "Collapse"}`;
     collapser.setAttribute("aria-label", game.i18n.localize(collapser.dataset.tooltip));
@@ -1653,6 +1677,18 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   /*  Drag & Drop                                 */
   /* -------------------------------------------- */
 
+  /** @override */
+  _defaultDropBehavior(event, data) {
+    if ( !data?.uuid ) return "copy";
+    const d = foundry.utils.parseUuid(data.uuid);
+    const t = foundry.utils.parseUuid(this.inventorySource.uuid);
+    const base = d.embedded?.length ? "document" : "primary";
+    return (d.collection === t.collection) && (d[`${base}Id`] === t[`${base}Id`])
+    && (d[`${base}Type`] === t[`${base}Type`]) ? "move" : "copy";
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Handling beginning a drag-drop operation on an Activity.
    * @param {DragEvent} event  The originating drag event.
@@ -1687,7 +1723,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    */
   _onDragItem(event) {
     const { itemId } = event.target.closest("[data-item-id]").dataset;
-    const item = this.actor.items.get(itemId);
+    const item = this.inventorySource.items.get(itemId);
     if ( item ) event.dataTransfer.setData("text/plain", JSON.stringify(item.toDragData()));
   }
 
@@ -1706,19 +1742,15 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     if ( li.dataset.effectId ) return this._onDragEffect(event);
     if ( li.matches("[data-item-id] > .item-row") ) return this._onDragItem(event);
 
-    super._onDragStart(event);
+    return super._onDragStart(event);
   }
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
   async _onDrop(event) {
-    this.#dropBehavior = this._dropBehavior(event);
-    try {
-      await super._onDrop(event);
-    } finally {
-      this.#dropBehavior = null;
-    }
+    event._behavior = this._dropBehavior(event);
+    await super._onDrop(event);
   }
 
   /* -------------------------------------------- */
@@ -1742,25 +1774,23 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
   /** @override */
   async _onDropItem(event, item) {
-    const behavior = this.#dropBehavior;
-    if ( !this.actor.isOwner || (behavior === "none") ) return;
+    if ( !this.inventorySource.isOwner || (event._behavior === "none") ) return;
 
     // Handle moving out of container & item sorting
-    if ( (behavior === "move") && (this.actor.uuid === item.parent?.uuid) ) {
+    if ( (event._behavior === "move") && (this.inventorySource.uuid === item.parent?.uuid) ) {
       if ( item.system.container !== null ) await item.update({ "system.container": null });
       return this._onSortItem(event, item);
     }
 
-    return this._onDropCreateItems(event, [item], behavior);
+    return this._onDropCreateItems(event, [item]);
   }
 
   /* -------------------------------------------- */
 
   /** @override */
   async _onDropFolder(event, data) {
-    const behavior = this.#dropBehavior;
     const folder = await Folder.implementation.fromDropData(data);
-    if ( !this.actor.isOwner || (behavior === "none") || (folder.type !== "Item") ) return;
+    if ( !this.actor.isOwner || (event._behavior === "none") || (folder.type !== "Item") ) return;
 
     const items = await Promise.all(folder.contents.map(async item => {
       if ( !(item instanceof Item) ) item = await fromUuid(item.uuid);
@@ -1773,13 +1803,14 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
   /**
    * Handle the final creation of dropped Item data on the Actor.
-   * @param {DragEvent} event           The concluding DragEvent which provided the drop data.
-   * @param {Item5e[]} items            The items requested for creation.
-   * @param {DropEffectValue} behavior  The specific drop behavior.
+   * @param {DragEvent} event             The concluding DragEvent which provided the drop data.
+   * @param {Item5e[]} items              The items requested for creation.
+   * @param {DropEffectValue} [behavior]  The specific drop behavior.
    * @returns {Promise<Item5e[]>}
    * @protected
    */
   async _onDropCreateItems(event, items, behavior) {
+    behavior ??= event._behavior;
     const itemsWithoutAdvancement = items.filter(i => !i.system.advancement?.length);
     const multipleAdvancements = (items.length - itemsWithoutAdvancement.length) > 1;
     if ( multipleAdvancements && !game.settings.get("dnd5e", "disableAdvancements") ) {
@@ -1798,7 +1829,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         return this._onDropSingleItem(event, item);
       }
     });
-    const created = await Item5e.createDocuments(toCreate, { pack: this.actor.pack, parent: this.actor, keepId: true });
+    const created = await Item5e.createDocuments(toCreate, { parent: this.inventorySource, keepId: true });
     if ( behavior === "move" ) items.forEach(i => i.delete({ deleteContents: true }));
     return created;
   }
@@ -1814,18 +1845,22 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @protected
    */
   async _onDropSingleItem(event, itemData) {
+    const actor = this.inventorySource;
+
     // Check to make sure items of this type are allowed on this actor
     if ( this.constructor.unsupportedItemTypes.has(itemData.type) ) {
-      ui.notifications.warn(game.i18n.format("DND5E.ActorWarningInvalidItem", {
-        itemType: game.i18n.localize(CONFIG.Item.typeLabels[itemData.type]),
-        actorType: game.i18n.localize(CONFIG.Actor.typeLabels[this.actor.type])
-      }));
+      ui.notifications.warn("DND5E.ACTOR.Warning.InvalidItem", {
+        format: {
+          itemType: game.i18n.localize(CONFIG.Item.typeLabels[itemData.type]),
+          actorType: game.i18n.localize(CONFIG.Actor.typeLabels[actor.type])
+        }
+      });
       return false;
     }
 
     // Create a Consumable spell scroll on the Inventory tab
     if ( (itemData.type === "spell")
-      && ((this.tabGroups.primary === "inventory") || (this.actor.type === "vehicle")) ) {
+      && ((this.tabGroups.primary === "inventory") || (actor.type === "vehicle")) ) {
       const scroll = await Item5e.createScrollFromSpell(itemData);
       return scroll?.toObject?.() ?? false;
     }
@@ -1838,20 +1873,22 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     if ( stacked ) return false;
 
     // Bypass normal creation flow for any items with advancement
-    if ( this.actor.system.metadata?.supportsAdvancement && itemData.system.advancement?.length
+    if ( actor.system.metadata?.supportsAdvancement && itemData.system.advancement?.length
         && !game.settings.get("dnd5e", "disableAdvancements") ) {
       // Ensure that this item isn't violating the singleton rule
       const dataModel = CONFIG.Item.dataModels[itemData.type];
       const singleton = dataModel?.metadata.singleton ?? false;
-      if ( singleton && this.actor.itemTypes[itemData.type].length ) {
-        ui.notifications.error(game.i18n.format("DND5E.ActorWarningSingleton", {
-          itemType: game.i18n.localize(CONFIG.Item.typeLabels[itemData.type]),
-          actorType: game.i18n.localize(CONFIG.Actor.typeLabels[this.actor.type])
-        }));
+      if ( singleton && actor.itemTypes[itemData.type].length ) {
+        ui.notifications.error("DND5E.ACTOR.Warning.Singleton", {
+          format: {
+            itemType: game.i18n.localize(CONFIG.Item.typeLabels[itemData.type]),
+            actorType: game.i18n.localize(CONFIG.Actor.typeLabels[actor.type])
+          }
+        });
         return false;
       }
 
-      const manager = AdvancementManager.forNewItem(this.actor, itemData);
+      const manager = AdvancementManager.forNewItem(actor, itemData);
       if ( manager.steps.length ) {
         manager.render(true);
         return false;
@@ -1859,7 +1896,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     }
 
     // Let specific item types apply any changes from a drop event
-    CONFIG.Item.dataModels[itemData.type]?.onDropCreate?.(event, this.actor, itemData);
+    CONFIG.Item.dataModels[itemData.type]?.onDropCreate?.(event, actor, itemData);
 
     return itemData;
   }
@@ -1887,14 +1924,46 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @returns {Promise<Item5e>|null}           If a duplicate was found, returns the adjusted item stack.
    */
   _onDropStackConsumables(event, itemData, { container=null }={}) {
-    const droppedSourceId = itemData._stats?.compendiumSource ?? itemData.flags.core?.sourceId;
+    const droppedSourceId = itemData._stats?.compendiumSource ?? itemData.flags?.core?.sourceId;
     if ( itemData.type !== "consumable" || !droppedSourceId ) return null;
-    const similarItem = this.actor.sourcedItems.get(droppedSourceId, { legacy: false })
+    const similarItem = this.inventorySource.sourcedItems.get(droppedSourceId, { legacy: false })
       ?.filter(i => (i.system.container === container) && (i.name === itemData.name))?.first();
     if ( !similarItem ) return null;
     return similarItem.update({
       "system.quantity": similarItem.system.quantity + Math.max(itemData.system.quantity, 1)
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _onSortItem(event, item) {
+    const items = this.inventorySource.items;
+    const source = items.get(item.id);
+
+    // Confirm the drop target
+    const dropTarget = event.target.closest("[data-item-id]");
+    if ( !dropTarget ) return;
+    const target = items.get(dropTarget.dataset.itemId);
+    if ( source.id === target.id ) return;
+
+    // Identify sibling items based on adjacent HTML elements
+    const siblings = [];
+    for ( const element of dropTarget.parentElement.children ) {
+      const siblingId = element.dataset.itemId;
+      if ( siblingId && (siblingId !== source.id) ) siblings.push(items.get(element.dataset.itemId));
+    }
+
+    // Perform the sort
+    const sortUpdates = foundry.utils.performIntegerSort(source, {target, siblings});
+    const updateData = sortUpdates.map(u => {
+      const update = u.update;
+      update._id = u.target._id;
+      return update;
+    });
+
+    // Perform the update
+    return this.inventorySource.updateEmbeddedDocuments("Item", updateData);
   }
 
   /* -------------------------------------------- */
@@ -1910,7 +1979,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    */
   _filterChildren(collection, filters) {
     switch ( collection ) {
-      case "items": return this._filterItems(this.actor.items, filters);
+      case "items": return this._filterItems(this.inventorySource.items, filters);
       case "effects": return this._filterEffects(Array.from(this.actor.allApplicableEffects()), filters);
     }
     return [];
@@ -2016,7 +2085,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   /** @override */
   _sortChildren(collection, mode) {
     switch ( collection ) {
-      case "items": return this._sortItems(this.actor.items.contents, mode);
+      case "items": return this._sortItems(this.inventorySource.items.contents, mode);
       case "effects": return this._sortEffects(Array.from(this.actor.allApplicableEffects()), mode);
     }
     return [];

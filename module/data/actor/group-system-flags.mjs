@@ -1,4 +1,4 @@
-const { BooleanField, DocumentIdField, SchemaField, SetField } = foundry.data.fields;
+const { BooleanField, DocumentIdField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * A custom model to validate system flags on Group Actors.
@@ -13,10 +13,12 @@ export default class GroupSystemFlags extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
       awardDestinations: new SetField(new DocumentIdField(), { required: false }),
+      inventorySource: new StringField({ blank: false }),
       restSettings: new SchemaField({
         autoRest: new BooleanField(),
         targets: new SetField(new DocumentIdField())
-      }, { required: false, initial: null })
+      }, { required: false, nullable: true, initial: null }),
+      showTokenPortrait: new BooleanField()
     };
   }
 }

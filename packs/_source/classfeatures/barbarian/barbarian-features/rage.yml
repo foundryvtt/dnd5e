@@ -88,7 +88,10 @@ system:
   identifier: rage
 effects:
   - _id: eWhL8hUr0c2ujDUm
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     changes:
       - key: system.bonuses.mwak.damage
         mode: 2
@@ -105,6 +108,14 @@ effects:
       - key: system.traits.dr.value
         mode: 2
         value: bludgeoning
+        priority: null
+      - key: system.abilities.str.check.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
+      - key: system.abilities.str.save.roll.mode
+        mode: 2
+        value: '1'
         priority: null
     disabled: true
     duration:
@@ -124,12 +135,12 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.2.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1757446401485
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     img: icons/creatures/abilities/mouth-teeth-human.webp
     type: base

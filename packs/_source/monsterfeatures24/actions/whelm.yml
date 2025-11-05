@@ -1,0 +1,292 @@
+_id: mmWhelm000000000
+name: Whelm
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    TQchFj2VXXJgU7Lq:
+      type: save
+      _id: TQchFj2VXXJgU7Lq
+      sort: 100000
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: rN76liiHkUoMRMJN
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: Inside the creature's space
+        value: '10'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: circle
+          size: '10'
+          count: ''
+        affects:
+          choice: false
+          type: creature
+          count: ''
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 4
+            denomination: '8'
+            bonus: '4'
+            types:
+              - bludgeoning
+        onSave: half
+      save:
+        ability:
+          - str
+        dc:
+          calculation: con
+          formula: '15'
+      name: Save
+      img: ''
+      appliedEffects:
+        - rN76liiHkUoMRMJN
+    khxVwH3AB0sx1qRG:
+      type: damage
+      _id: khxVwH3AB0sx1qRG
+      sort: 300000
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: 8
+            bonus: ''
+            types:
+              - bludgeoning
+            scaling:
+              number: 1
+      name: 'Damage: Start of Turn'
+      img: ''
+      appliedEffects: []
+    aCRTymzPRSdmfVjr:
+      type: check
+      name: Escape Check
+      sort: 200000
+      activation:
+        type: special
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated:
+          - acr
+          - ath
+        dc:
+          calculation: ''
+          formula: '@skills.ath.passive'
+        ability: ''
+      _id: aCRTymzPRSdmfVjr
+  uses:
+    spent: 0
+    recovery:
+      - period: recharge
+        formula: '4'
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <p class="feature"><em>Strength Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=TQchFj2VXXJgU7Lq]], each [[lookup
+      @target.affects.type activity=TQchFj2VXXJgU7Lq]] in the [[lookup @name
+      lowercase]]'s space.</p><p class="feature"><em>Failure:</em> [[/damage
+      average activity=TQchFj2VXXJgU7Lq]] damage. If the target is a Large or
+      smaller creature, it has the &amp;Reference[Grappled apply=false]
+      condition (escape DC [[lookup @skills.ath.passive]]). Until the grapple
+      ends, the target has the &amp;Reference[Restrained apply=false] condition,
+      is &amp;Reference[suffocating]{suffocating} unless it can breathe water,
+      and takes [[/damage average activity=khxVwH3AB0sx1qRG]] damage at the
+      start of each of the [[lookup @name lowercase]]'s turns. The [[lookup
+      @name lowercase]] can grapple one Large creature or up to two Medium or
+      smaller creatures at a time with Whelm.</p><p class="feature">As an
+      action, a creature within 5 feet of the [[lookup @name lowercase]] can
+      pull a creature out of it by succeeding on a [[/check ath
+      dc=@skills.ath.passive format=long]].</p><p
+      class="feature"><em>Success:</em> Half damage only.</p>
+    chat: ''
+  identifier: whelm
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/water/bubbles-air-water-light.webp
+effects:
+  - name: Grappled & Restrained
+    img: systems/dnd5e/icons/svg/statuses/grappled.svg
+    origin: Item.mmWhelm000000000
+    _id: rN76liiHkUoMRMJN
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>If the target is a Large or smaller creature, it has the
+      &amp;Reference[Grappled apply=false] condition (see source item for the
+      escape DC). Until the grapple ends, the target has the
+      &amp;Reference[Restrained apply=false] condition, is
+      &amp;Reference[Suffocating]{suffocating} unless it can breathe water, and
+      takes damage (see source for damage) at the start of each of the attacking
+      creature's turns.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - grappled
+      - restrained
+    sort: 0
+    flags:
+      dae:
+        enableCondition: ''
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736140088798
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmWhelm000000000.rN76liiHkUoMRMJN'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1738098899676
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 24600000
+ownership:
+  default: 0
+_key: '!items!mmWhelm000000000'

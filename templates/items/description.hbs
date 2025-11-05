@@ -4,7 +4,7 @@
          {{~#if singleDescription}} data-target="system.description.value"{{/if}}>
     {{#if editingDescription}}
     <prose-mirror name="{{ editingDescription.target }}" value="{{ editingDescription.value }}"
-                  document-uuid="{{ item.uuid }}" compact></prose-mirror>
+                  document-uuid="{{ item.uuid }}" class="sized" compact></prose-mirror>
     {{else}}
 
     {{#if (eq item.type "spell")}}
@@ -35,7 +35,7 @@
     {{#if singleDescription}}
     {{#if editable}}
     <prose-mirror name="system.description.value" value="{{ source.description.value }}"
-                  document-uuid="{{ item.uuid }}" compact>{{{ enriched.description }}}</prose-mirror>
+                  document-uuid="{{ item.uuid }}" class="sized" compact>{{{ enriched.description }}}</prose-mirror>
     {{else}}
     <div class="editor editor-content">
         {{{ enriched.description }}}

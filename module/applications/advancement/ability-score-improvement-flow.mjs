@@ -95,7 +95,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
       recommendation = {
         img, name, uuid,
         checked: this.feat?.uuid === uuid,
-        locked: this.feat && (this.feat.uuid !== uuid),
+        locked: this.feat && (this.feat.uuid !== uuid)
       };
     }
 

@@ -101,7 +101,7 @@
 </section>
 
 {{#*inline ".facility"}}
-<li class="facility {{#unless building.built}}building{{/unless}} {{#if disabled}}disabled{{/if}}"
+<li class="facility {{#unless building.built}}building{{/unless}} {{#if disabled}}damaged{{/if}}"
     data-item-id="{{ id }}" data-facility-id="{{ id }}" style="--underlay: url('{{ img }}')">
     {{#if (and progress.max executing)}}
     <div class="facility-progress meter progress" role="meter" aria-valuemin="0" aria-valuenow="{{ progress.pct }}"
@@ -115,7 +115,7 @@
     </div>
     {{/if}}
     <div class="facility-header">
-        <div class="name-stacked {{ @root.rollableClass }}" data-action="useFacility">
+        <div class="name-stacked {{ ifThen disabled '' @root.rollableClass }}" data-action="useFacility">
             <span class="title">{{ name }}</span>
             <span class="subtitle">{{{ subtitle }}}</span>
         </div>

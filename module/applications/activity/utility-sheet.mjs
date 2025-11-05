@@ -26,8 +26,8 @@ export default class UtilitySheet extends ActivitySheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _prepareIdentityContext(context) {
-    context = await super._prepareIdentityContext(context);
+  async _prepareIdentityContext(context, options) {
+    context = await super._prepareIdentityContext(context, options);
     context.behaviorFields.push({
       field: context.fields.roll.fields.prompt,
       value: context.source.roll.prompt,

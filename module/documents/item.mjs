@@ -9,7 +9,7 @@ import EquipmentData from "../data/item/equipment.mjs";
 import SpellData from "../data/item/spell.mjs";
 import ActivitiesTemplate from "../data/item/templates/activities.mjs";
 import PhysicalItemTemplate from "../data/item/templates/physical-item.mjs";
-import { staticID } from "../utils.mjs";
+import { formatIdentifier, staticID } from "../utils.mjs";
 import Scaling from "./scaling.mjs";
 import Proficiency from "./actor/proficiency.mjs";
 import SelectChoices from "./actor/select-choices.mjs";
@@ -17,6 +17,10 @@ import Advancement from "./advancement/advancement.mjs";
 import SystemDocumentMixin from "./mixins/document.mjs";
 
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
+
+/**
+ * @import { SpellScrollValues } from "../_types.mjs";
+ */
 
 /**
  * Override and extend the basic Item implementation.
@@ -71,7 +75,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   }
 
   /* -------------------------------------------- */
-  /*  Migrations                                  */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -173,6 +177,16 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /**
+   * Active effect that granted this item as a rider.
+   * @type {ActiveEffect5e|null}
+   */
+  get dependentOrigin() {
+    return fromUuidSync(this.flags.dnd5e?.dependentOn, { strict: false }) ?? null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Does this item support advancement and have advancements defined?
    * @type {boolean}
    */
@@ -222,8 +236,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   get identifier() {
     if ( this.system.identifier ) return this.system.identifier;
-    const identifier = this.name.replaceAll(/(\w+)([\\|/])(\w+)/g, "$1-$3");
-    return identifier.slugify({ strict: true });
+    return formatIdentifier(this.name);
   }
 
   /* --------------------------------------------- */
@@ -484,6 +497,21 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   }
 
   /* -------------------------------------------- */
+  /*  Data Migration                              */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static migrateData(source) {
+    source = super.migrateData(source);
+    ActivitiesTemplate.initializeActivities(source);
+    if ( source.type === "class" ) ClassData._migrateTraitAdvancement(source);
+    else if ( source.type === "container" ) ContainerData._migrateWeightlessData(source);
+    else if ( source.type === "equipment" ) EquipmentData._migrateStealth(source);
+    else if ( source.type === "spell" ) SpellData._migrateComponentData(source);
+    return source;
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
@@ -498,7 +526,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   prepareEmbeddedDocuments() {
     super.prepareEmbeddedDocuments();
     for ( const activity of this.system.activities ?? [] ) activity.prepareData();
-    for ( const advancement of this.system.advancement ?? [] ) advancement.prepareData();
+    for ( const advancement of this.system.advancement ?? [] ) {
+      if ( !(advancement instanceof Advancement) ) continue;
+      advancement.prepareData();
+    }
     if ( !this.actor || this.actor._embeddedPreparation ) this.applyActiveEffects();
   }
 
@@ -605,7 +636,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const damages = this.labels.damages = [];
     if ( !this.system.activities?.size ) return;
     for ( const activity of this.system.activities ) {
-      if ( !("activation" in activity) ) continue;
+      if ( !("activation" in activity) || !activity.canUse ) continue;
       const activationLabels = activity.activationLabels;
       if ( activationLabels ) activations.push({
         ...activationLabels,
@@ -684,9 +715,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( this.pack ) return;
 
     let event = config.event;
-    const activities = this.system.activities?.filter(a =>
-      !this.getFlag("dnd5e", "riders.activity")?.includes(a.id) && a.canUse
-    );
+    const activities = this.system.activities?.filter(a => a.canUse);
     if ( activities?.length ) {
       const { chooseActivity, ...activityConfig } = config;
       let usageConfig = activityConfig;
@@ -1056,12 +1085,15 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   }
 
   /* -------------------------------------------- */
-  /*  Event Handlers                              */
+  /*  Socket Event Handlers                       */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
   async _preCreate(data, options, user) {
     if ( (await super._preCreate(data, options, user)) === false ) return false;
+
+    const isPhysical = this.system.constructor._schemaTemplates?.includes(PhysicalItemTemplate);
+    if ( this.parent?.system?.isGroup && !isPhysical ) return false;
 
     // Create identifier based on name
     if ( this.system.hasOwnProperty("identifier") && !data.system?.identifier ) {
@@ -1099,10 +1131,13 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   async _onDelete(options, userId) {
     super._onDelete(options, userId);
     await this.system.onDeleteActivities?.(options, userId);
+    if ( game.user.isActiveGM ) this.effects.forEach(e => e.getDependents().forEach(e => e.delete()));
     if ( userId !== game.user.id ) return;
     this.parent?.endConcentration?.(this);
   }
 
+  /* -------------------------------------------- */
+  /*  Event Handlers                              */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -1496,12 +1531,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         const scrollIntro = scrollDescription.slice(0, scrollIntroEnd + pdel.length);
         const scrollDetails = scrollDescription.slice(scrollIntroEnd + pdel.length);
         return [
-          scrollIntro,
+          scrollDetails ? scrollIntro : null,
           `<h3>${spell.name} (${game.i18n.format("DND5E.LevelNumber", { level })})</h3>`,
           isConc ? `<p><em>${game.i18n.localize("DND5E.Scroll.RequiresConcentration")}</em></p>` : null,
           spellDescription,
           `<h3>${game.i18n.localize("DND5E.Scroll.Details")}</h3>`,
-          scrollDetails
+          scrollDetails || scrollIntro
         ].filterJoin("");
       case "reference":
         return [
@@ -1590,20 +1625,5 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const { type } = itemData;
     const { img } = super.getDefaultArtwork(itemData);
     return { img: CONFIG.DND5E.defaultArtwork.Item[type] ?? img };
-  }
-
-  /* -------------------------------------------- */
-  /*  Migrations & Deprecations                   */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  static migrateData(source) {
-    source = super.migrateData(source);
-    ActivitiesTemplate.initializeActivities(source);
-    if ( source.type === "class" ) ClassData._migrateTraitAdvancement(source);
-    else if ( source.type === "container" ) ContainerData._migrateWeightlessData(source);
-    else if ( source.type === "equipment" ) EquipmentData._migrateStealth(source);
-    else if ( source.type === "spell" ) SpellData._migrateComponentData(source);
-    return source;
   }
 }

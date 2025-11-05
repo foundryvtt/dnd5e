@@ -2,7 +2,7 @@ import ActivationsField from "../data/chat-message/fields/activations-field.mjs"
 import { ActorDeltasField } from "../data/chat-message/fields/deltas-field.mjs";
 
 /**
- * @import { ActorDeltasData } from "../data/chat-message/fields/deltas-field.mjs";
+ * @import { ActorDeltasData } from "../data/chat-message/fields/_types.mjs";
  */
 
 /**
@@ -25,6 +25,8 @@ export default class Combatant5e extends Combatant {
    * @returns {ChatMessage5e|void}
    */
   async createTurnMessage({ deltas, periods, rolls }={}) {
+    if ( !this.actor ) return;
+
     const messageConfig = {
       create: false,
       data: {
@@ -102,7 +104,8 @@ export default class Combatant5e extends Combatant {
     await this.actor?.system.recoverCombatUses?.(periods, results);
 
     for ( const item of this.actor?.items ?? [] ) {
-      if ( foundry.utils.getType(item.system.recoverUses) !== "function" ) continue;
+      if ( (item.dependentOrigin?.active === false)
+        || (foundry.utils.getType(item.system.recoverUses) !== "function") ) continue;
       const rollData = item.getRollData();
       const { updates, rolls } = await item.system.recoverUses(Array.from(periods), rollData);
       if ( !foundry.utils.isEmpty(updates) ) {

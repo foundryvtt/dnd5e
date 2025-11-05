@@ -948,7 +948,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties: []
+      properties:
+        - mgc
       proficient: 1
       unidentified:
         description: ''
@@ -1107,11 +1108,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.350'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.2.0
       createdTime: null
-      modifiedTime: 1745174970089
+      modifiedTime: 1760378617409
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!RCv5y7iWlfNxkinx.GjIQl7UOQUtsrj2v'
@@ -1185,6 +1186,7 @@ items:
         dt: null
         conditions: ''
       properties:
+        - mgc
         - rch
       proficient: 1
       unidentified:
@@ -1272,11 +1274,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.350'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.2.0
       createdTime: null
-      modifiedTime: 1745174923823
+      modifiedTime: 1760378620819
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!RCv5y7iWlfNxkinx.RkuPEGbAXHhxfNWJ'
@@ -1350,6 +1352,7 @@ items:
         dt: null
         conditions: ''
       properties:
+        - mgc
         - rch
       proficient: 1
       unidentified:
@@ -1439,6 +1442,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: mace
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -1448,11 +1452,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.Ajyq6nGwF7FtLhDQ
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.350'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.2.0
       createdTime: null
-      modifiedTime: 1745107551751
+      modifiedTime: 1760378625159
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!RCv5y7iWlfNxkinx.gpjBebqxqbQA35st'
@@ -1526,6 +1530,7 @@ items:
         dt: null
         conditions: ''
       properties:
+        - mgc
         - rch
       proficient: 1
       unidentified:
@@ -1603,6 +1608,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: tail
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -1612,11 +1618,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.350'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.2.0
       createdTime: null
-      modifiedTime: 1745107551751
+      modifiedTime: 1760378629200
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!RCv5y7iWlfNxkinx.Gh1DbMpJiaTlTwWp'
@@ -1752,7 +1758,7 @@ items:
           fire damage on a failed save, or half as much damage on a successful
           one.</p><p>The fire spreads around corners. It ignites flammable
           objects in the area that aren't being worn or
-          carried.</p><p><strong>Higher Levels.</strong> When you cast this
+          carried.</p><p><strong>At Higher Levels.</strong> When you cast this
           spell using a spell slot of 4th level or higher, the damage increases
           by 1d6 for each slot level above 3rd.</p>
         chat: ''

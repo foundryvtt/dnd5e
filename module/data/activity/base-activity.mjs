@@ -1,6 +1,7 @@
 import simplifyRollFormula from "../../dice/simplify-roll-formula.mjs";
 import { safePropertyExists, staticID } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
+import IdentifierField from "../fields/identifier-field.mjs";
 import ActivationField from "../shared/activation-field.mjs";
 import DurationField from "../shared/duration-field.mjs";
 import RangeField from "../shared/range-field.mjs";
@@ -10,43 +11,19 @@ import AppliedEffectField from "./fields/applied-effect-field.mjs";
 import ConsumptionTargetsField from "./fields/consumption-targets-field.mjs";
 
 const {
-  ArrayField, BooleanField, DocumentIdField, FilePathField, IntegerSortField, SchemaField, StringField
+  ArrayField, BooleanField, DocumentFlagsField, DocumentIdField,
+  FilePathField, IntegerSortField, NumberField, SchemaField, StringField
 } = foundry.data.fields;
 
 /**
- * Data for effects that can be applied.
- *
- * @typedef {object} EffectApplicationData
- * @property {string} _id  ID of the effect to apply.
+ * @import { DamageRollConfiguration, DamageRollProcessConfiguration } from "../../dice/_types.mjs";
+ * @import { ActivityData } from "./_types.mjs";
  */
 
 /**
  * Data model for activities.
- *
- * @property {string} _id                        Unique ID for the activity on an item.
- * @property {string} type                       Type name of the activity used to build a specific activity class.
- * @property {string} name                       Name for this activity.
- * @property {string} img                        Image that represents this activity.
- * @property {ActivationField} activation        Activation time & conditions.
- * @property {boolean} activation.override       Override activation values inferred from item.
- * @property {object} consumption
- * @property {object} consumption.scaling
- * @property {boolean} consumption.scaling.allowed          Can this non-spell activity be activated at higher levels?
- * @property {string} consumption.scaling.max               Maximum number of scaling levels for this item.
- * @property {boolean} consumption.spellSlot                If this is on a spell, should it consume a spell slot?
- * @property {ConsumptionTargetData[]} consumption.targets  Collection of consumption targets.
- * @property {object} description
- * @property {string} description.chatFlavor     Extra text displayed in the activation chat message.
- * @property {DurationField} duration            Duration of the effect.
- * @property {boolean} duration.concentration    Does this effect require concentration?
- * @property {boolean} duration.override         Override duration values inferred from item.
- * @property {EffectApplicationData[]} effects   Linked effects that can be applied.
- * @property {object} range
- * @property {boolean} range.override            Override range values inferred from item.
- * @property {TargetData} target
- * @property {boolean} target.override           Override target values inferred from item.
- * @property {boolean} target.prompt             Should the player be prompted to place the template?
- * @property {UsesData} uses                     Uses available to this activity.
+ * @extends {foundry.abstract.DataModel<ActivityData>}
+ * @mixes ActivityData
  */
 export default class BaseActivityData extends foundry.abstract.DataModel {
 
@@ -91,6 +68,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         override: new BooleanField()
       }),
       effects: new ArrayField(new AppliedEffectField()),
+      flags: new DocumentFlagsField(),
       range: new RangeField({
         override: new BooleanField()
       }),
@@ -98,7 +76,17 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         override: new BooleanField(),
         prompt: new BooleanField({ initial: true })
       }),
-      uses: new UsesField()
+      uses: new UsesField(),
+      visibility: new SchemaField({
+        identifier: new IdentifierField(),
+        level: new SchemaField({
+          min: new NumberField({ integer: true, min: 0 }),
+          max: new NumberField({ integer: true, min: 0 })
+        }),
+        requireAttunement: new BooleanField(),
+        requireIdentification: new BooleanField(),
+        requireMagic: new BooleanField()
+      })
     };
   }
 
@@ -143,7 +131,10 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @type {ActiveEffect5e[]|null}
    */
   get applicableEffects() {
-    return this.effects?.map(e => e.effect).filter(e => e) ?? null;
+    const level = this.relevantLevel;
+    return this.effects?.filter(e =>
+      e.effect && ((e.level?.min ?? -Infinity) <= level) && (level <= (e.level?.max ?? Infinity))
+    ).map(e => e.effect) ?? null;
   }
 
   /* -------------------------------------------- */
@@ -153,7 +144,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @type {boolean}
    */
   get canConfigureScaling() {
-    return this.consumption.scaling.allowed || (this.isSpell && (this.item.system.level > 0));
+    return this.consumption.scaling.allowed || this.item.system.canConfigureScaling;
   }
 
   /* -------------------------------------------- */
@@ -163,8 +154,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @type {boolean}
    */
   get canScale() {
-    return this.consumption.scaling.allowed || (this.isSpell && (this.item.system.level > 0)
-      && CONFIG.DND5E.spellcasting[this.item.system.method]?.slots);
+    return this.consumption.scaling.allowed || this.item.system.canScale;
   }
 
   /* -------------------------------------------- */
@@ -174,7 +164,17 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @type {boolean}
    */
   get canScaleDamage() {
-    return this.consumption.scaling.allowed || this.isScaledScroll || this.isSpell;
+    return this.consumption.scaling.allowed || this.isScaledScroll || this.item.system.canScaleDamage;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is this activity a rider for a non-applied enchantment?
+   * @type {boolean}
+   */
+  get isRider() {
+    return !!this.item.getFlag("dnd5e", "riders.activity")?.includes(this.id);
   }
 
   /* -------------------------------------------- */
@@ -195,6 +195,19 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    */
   get isSpell() {
     return this.item.type === "spell";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine the level used to determine visibility limits, based on the spell level for spells or either the
+   * character or class level, depending on whether `classIdentifier` is set.
+   * @type {number}
+   */
+  get relevantLevel() {
+    const keyPath = (this.item.type === "spell") && (this.item.system.level > 0) ? "item.level"
+      : this.visibility?.identifier ? `classes.${this.visibility.identifier}.levels` : "details.level";
+    return foundry.utils.getProperty(this.getRollData(), keyPath) ?? 0;
   }
 
   /* -------------------------------------------- */
@@ -231,7 +244,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   }
 
   /* -------------------------------------------- */
-  /*  Data Migrations                             */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /**
@@ -538,16 +551,6 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
-   * Prepare context to display this activity in a parent sheet.
-   * @returns {object}
-   */
-  prepareSheetContext() {
-    return this;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Prepare data related to this activity.
    */
   prepareData() {
@@ -582,6 +585,18 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       writable: false
     });
 
+    if ( this.visibility && !this.isRider ) {
+      if ( !this.item.system.properties?.has("mgc") && this.item.system.validProperties.has("mgc") ) {
+        this.visibility.requireAttunement = false;
+        this.visibility.requireMagic = false;
+      } else if ( (this.item.system.attunement === "required") && this.visibility.requireMagic ) {
+        this.visibility.requireAttunement = true;
+      } else if ( !this.item.system.canAttune ) {
+        this.visibility.requireAttunement = false;
+      }
+      if ( !("identified" in this.item.system) ) this.visibility.requireIdentification = false;
+    }
+
     // TODO: Temporarily add parent to consumption targets & damage parts added by enchantment
     // Can be removed once https://github.com/foundryvtt/foundryvtt/issues/12528 is implemented
     if ( this.consumption?.targets ) this.consumption.targets = this.consumption.targets.map(c => {
@@ -604,14 +619,11 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
     for ( const target of this.consumption.targets ) {
       if ( !["itemUses", "material"].includes(target.type) || !target.target ) continue;
 
-      // Re-link UUIDs in consumption fields to explicit items on the actor
-      if ( target.target.includes(".") ) {
-        const item = actor.sourcedItems?.get(target.target)?.first();
-        if ( item ) target.target = item.id;
-      }
+      // Re-link UUID or identifier target to explicit item on the actor
+      target.target = this._remapConsumptionTarget(target.target);
 
       // If targeted item isn't found, display preparation warning
-      if ( !actor.items.get(target.target) ) {
+      if ( !actor.items.has(target.target) ) {
         const message = game.i18n.format("DND5E.CONSUMPTION.Warning.MissingItem", {
           activity: this.name, item: this.item.name
         });
@@ -625,17 +637,8 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /**
    * Prepare the label for a compiled and simplified damage formula.
    * @param {object} rollData  Deterministic roll data from the item.
-   * @param {object} _rollData
    */
-  prepareDamageLabel(rollData, _rollData=rollData) {
-    if ( foundry.utils.getType(rollData) === "Array" ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `BaseActivityData#prepareDamageLabel` no longer takes damage parts as an input.",
-        { since: "DnD5e 4.4", until: "DnD5e 5.1" }
-      );
-      rollData = _rollData;
-    }
-
+  prepareDamageLabel(rollData) {
     const config = this.getDamageConfig({}, { rollData });
     this.labels.damage = this.labels.damages = (config.rolls ?? []).map(part => {
       let formula;
@@ -664,6 +667,16 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         damageType: part.options?.types.length === 1 ? part.options.types[0] : null
       };
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare context to display this activity in a parent sheet.
+   * @returns {object}
+   */
+  prepareSheetContext() {
+    return this;
   }
 
   /* -------------------------------------------- */
@@ -749,6 +762,33 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
           .filter(p => CONFIG.DND5E.itemProperties[p]?.isPhysical)
       }
     };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Remap a UUID or identifier in a consumption target to the ID of an item on the actor.
+   * @param {string} target
+   * @returns {string}
+   * @internal
+   */
+  _remapConsumptionTarget(target) {
+    if ( !target || !this.actor || this.actor.items.has(target) ) return target;
+
+    // Re-link UUID target
+    const { type } = foundry.utils.parseUuid(target) ?? {};
+    if ( type === "Item" ) {
+      const item = this.actor.sourcedItems?.get(target)?.first();
+      if ( item ) return item.id;
+    }
+
+    // Re-link identifier target
+    else {
+      const item = this.actor.identifiedItems?.get(target)?.first();
+      if ( item ) return item.id;
+    }
+
+    return target;
   }
 
   /* -------------------------------------------- */

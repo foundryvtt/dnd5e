@@ -1,12 +1,12 @@
 import CastSheet from "../../applications/activity/cast-sheet.mjs";
-import CastActivityData from "../../data/activity/cast-data.mjs";
+import BaseCastActivityData from "../../data/activity/cast-data.mjs";
 import { staticID } from "../../utils.mjs";
 import ActivityMixin from "./mixin.mjs";
 
 /**
  * Activity for casting a spell from another item.
  */
-export default class CastActivity extends ActivityMixin(CastActivityData) {
+export default class CastActivity extends ActivityMixin(BaseCastActivityData) {
   /* -------------------------------------------- */
   /*  Model Configuration                         */
   /* -------------------------------------------- */
@@ -53,7 +53,7 @@ export default class CastActivity extends ActivityMixin(CastActivityData) {
    * @type {boolean}
    */
   get displayInSpellbook() {
-    return (this.item.system.magicAvailable !== false) && this.spell.spellbook;
+    return this.canUse && (this.item.system.magicAvailable !== false) && this.spell.spellbook;
   }
 
   /* -------------------------------------------- */
@@ -174,5 +174,14 @@ export default class CastActivity extends ActivityMixin(CastActivityData) {
     );
 
     return changes;
+  }
+
+  /* -------------------------------------------- */
+  /*  Importing and Exporting                     */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static availableForItem(item) {
+    return item.type !== "spell";
   }
 }

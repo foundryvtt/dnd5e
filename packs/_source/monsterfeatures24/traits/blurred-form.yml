@@ -1,0 +1,45 @@
+_id: mmBlurredForm000
+name: Blurred Form
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>Attack rolls against the [[lookup @name lowercase]] are made with
+      Disadvantage unless the [[lookup @name lowercase]] has the Incapacitated
+      condition.</p>
+    chat: ''
+  identifier: blurred-form
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: Not Incapacitated
+folder: L9Zgr8qAPc3ngKhb
+img: icons/creatures/magical/spirit-fear-energy-pink.webp
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1735008003300
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 2400000
+ownership:
+  default: 0
+_key: '!items!mmBlurredForm000'

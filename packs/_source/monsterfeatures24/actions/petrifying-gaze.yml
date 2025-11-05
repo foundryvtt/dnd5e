@@ -1,0 +1,271 @@
+_id: mmPetrifyingGaze
+name: Petrifying Gaze
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    mN9aF1WkHQWLIN4B:
+      type: save
+      _id: mN9aF1WkHQWLIN4B
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: a5kKgU7vfT0v17yF
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: cone
+          size: '30'
+          count: ''
+        affects:
+          choice: false
+          type: creature
+          count: ''
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability:
+          - con
+        dc:
+          calculation: con
+          formula: 8 + @mod + @prof
+      name: First Save
+      img: ''
+      appliedEffects:
+        - a5kKgU7vfT0v17yF
+    QR1rwV2CJ02B1Qgh:
+      type: save
+      sort: 0
+      activation:
+        type: turnEnd
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: YLFv2Ujss9c0vtMQ
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ''
+          type: ''
+          size: ''
+          count: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: Restrained creature
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability:
+          - con
+        dc:
+          calculation: con
+          formula: 8 + @mod + @prof
+      name: Second Save
+      _id: QR1rwV2CJ02B1Qgh
+      img: ''
+      appliedEffects:
+        - YLFv2Ujss9c0vtMQ
+  uses:
+    spent: 0
+    recovery:
+      - period: recharge
+        formula: '4'
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <p class="feature"><em>Constitution Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=mN9aF1WkHQWLIN4B]], each [[lookup
+      @target.affects.type activity=mN9aF1WkHQWLIN4B]] in a [[lookup
+      @target.template.size activity=mN9aF1WkHQWLIN4B]]-foot [[lookup
+      @target.template.type capitalize activity=mN9aF1WkHQWLIN4B]]. If the
+      [[lookup @name lowercase]] sees its reflection in the [[lookup
+      @target.template.type capitalize activity=mN9aF1WkHQWLIN4B]], the [[lookup
+      @name lowercase]] must make this save. </p><p class="feature"><em>First
+      Failure:</em> The target has the &amp;Reference[Restrained apply=false]
+      condition and repeats the save at the end of its next turn if it is still
+      Restrained, ending the effect on itself on a success. </p><p
+      class="feature"><em>Second Failure:</em> The target has the
+      &amp;Reference[Petrified apply=false] condition instead of the Restrained
+      condition.</p>
+    chat: ''
+  identifier: petrifying-gaze
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/defensive/armor-stone-skin.webp
+effects:
+  - name: Restrained
+    img: systems/dnd5e/icons/svg/statuses/restrained.svg
+    origin: Item.mmPetrifyingGaze
+    _id: a5kKgU7vfT0v17yF
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: 0
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Restrained apply=false] condition and
+      repeats the save at the end of its next turn if it is still Restrained,
+      ending the effect on itself on a success.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - restrained
+    sort: 0
+    flags:
+      dae:
+        enableCondition: ''
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736074114628
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmPetrifyingGaze.a5kKgU7vfT0v17yF'
+  - name: Petrified
+    img: systems/dnd5e/icons/svg/statuses/petrified.svg
+    origin: Item.mmPetrifyingGaze
+    _id: YLFv2Ujss9c0vtMQ
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Petrified apply=false] condition
+      instead of the Restrained condition.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - petrified
+    sort: 0
+    flags:
+      dae:
+        enableCondition: ''
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736074128922
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmPetrifyingGaze.YLFv2Ujss9c0vtMQ'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737818775712
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 16400000
+ownership:
+  default: 0
+_key: '!items!mmPetrifyingGaze'

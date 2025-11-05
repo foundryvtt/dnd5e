@@ -3,12 +3,12 @@
 
     {{!-- Tool Type --}}
     {{ formField fields.type.fields.value value=source.type.value choices=CONFIG.toolTypes label="DND5E.ItemToolType"
-                 blank="" localize=true }}
+                 blank="" localize=true rootId=partId }}
 
     {{!-- Base Tool --}}
     {{#if baseItemOptions.length}}
     {{ formField fields.type.fields.baseItem value=source.type.baseItem options=baseItemOptions blank=""
-                 label="DND5E.ItemToolBase" localize=true }}
+                 label="DND5E.ItemToolBase" localize=true rootId=partId }}
     {{/if}}
 
     {{!-- Tool Properties --}}
@@ -22,11 +22,12 @@
 
             {{!-- Proficiency --}}
             {{ formField fields.proficient value=source.proficient choices=CONFIG.proficiencyLevels
-                         label="DND5E.Proficiency" blank="DND5E.Automatic" localize=true classes="label-top" }}
+                         label="DND5E.Proficiency" blank="DND5E.Automatic" localize=true classes="label-top"
+                         rootId=partId }}
 
             {{!-- Ability --}}
             {{ formField fields.ability value=source.ability choices=CONFIG.abilities labelAttr="label"
-                         label="DND5E.Ability" blank="DND5E.Default" localize=true classes="label-top" }}
+                         label="DND5E.Ability" blank="DND5E.Default" localize=true classes="label-top" rootId=partId }}
         </div>
     </div>
 

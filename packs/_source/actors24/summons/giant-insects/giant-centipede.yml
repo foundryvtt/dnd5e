@@ -3,109 +3,58 @@ type: npc
 system:
   details:
     biography:
-      value: ''
+      value: >-
+        <p>@Embed[Compendium.dnd5e.spells24.Item.phbsplGiantInsec
+        caption=false]</p>
       public: ''
     alignment: Unaligned
     type:
       value: beast
     race: null
-    cr: 0.25
+    environment: ''
+    cr: null
+    spellLevel: 0
+    source:
+      custom: ''
     ideal: ''
     bond: ''
     flaw: ''
-    habitat:
-      custom: ''
-      value:
-        - type: underdark
-        - type: urban
-    treasure:
-      value: []
   abilities:
     str:
-      value: 5
+      value: 17
       proficient: 0
       max: null
       bonuses:
         check: ''
         save: ''
-      check:
-        roll:
-          min: null
-          max: null
-          mode: 0
-      save:
-        roll:
-          min: null
-          max: null
-          mode: 0
     dex:
+      value: 13
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+    con:
+      value: 15
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+    int:
+      value: 4
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+    wis:
       value: 14
       proficient: 0
       max: null
       bonuses:
         check: ''
         save: ''
-      check:
-        roll:
-          min: null
-          max: null
-          mode: 0
-      save:
-        roll:
-          min: null
-          max: null
-          mode: 0
-    con:
-      value: 12
-      proficient: 0
-      max: null
-      bonuses:
-        check: ''
-        save: ''
-      check:
-        roll:
-          min: null
-          max: null
-          mode: 0
-      save:
-        roll:
-          min: null
-          max: null
-          mode: 0
-    int:
-      value: 1
-      proficient: 0
-      max: null
-      bonuses:
-        check: ''
-        save: ''
-      check:
-        roll:
-          min: null
-          max: null
-          mode: 0
-      save:
-        roll:
-          min: null
-          max: null
-          mode: 0
-    wis:
-      value: 7
-      proficient: 0
-      max: null
-      bonuses:
-        check: ''
-        save: ''
-      check:
-        roll:
-          min: null
-          max: null
-          mode: 0
-      save:
-        roll:
-          min: null
-          max: null
-          mode: 0
     cha:
       value: 3
       proficient: 0
@@ -113,18 +62,8 @@ system:
       bonuses:
         check: ''
         save: ''
-      check:
-        roll:
-          min: null
-          max: null
-          mode: 0
-      save:
-        roll:
-          min: null
-          max: null
-          mode: 0
   traits:
-    size: sm
+    size: lg
     di:
       bypasses: []
       value: []
@@ -145,9 +84,7 @@ system:
       custom: ''
     languages:
       value: []
-      custom: ''
-      communication: {}
-    important: false
+      custom: Understands the languages you know
   currency:
     pp: 0
     gp: 0
@@ -396,22 +333,22 @@ system:
       bonus: ''
     movement:
       burrow: null
-      climb: 30
+      climb: 40
       fly: null
       swim: null
-      walk: 30
+      walk: 40
       units: null
       hover: false
     attunement:
       max: 3
     senses:
-      darkvision: null
-      blindsight: 30
+      darkvision: 60
+      blindsight: null
       tremorsense: null
       truesight: null
       units: null
       special: ''
-    spellcasting: str
+    spellcasting: int
     exhaustion: 0
     concentration:
       ability: ''
@@ -423,29 +360,24 @@ system:
         save: ''
       limit: 1
     ac:
-      flat: null
-      calc: default
+      flat: 11
+      calc: natural
     hd:
       spent: 0
     hp:
-      value: 9
-      max: 9
-      temp: null
-      tempmax: null
-      formula: 2d6 + 2
+      value: 30
+      max: 30
+      temp: 0
+      tempmax: 0
+      formula: '30'
     death:
+      ability: ''
       roll:
         min: null
         max: null
         mode: 0
       success: 0
       failure: 0
-      bonuses:
-        save: ''
-    spell:
-      level: 0
-    loyalty:
-      value: null
   resources:
     legact:
       value: 0
@@ -456,39 +388,34 @@ system:
     lair:
       value: false
       initiative: null
-      inside: false
   source:
     rules: '2024'
-    book: SRD 5.2
-    custom: ''
-    revision: 2
-    license: CC-BY-4.0
-_id: mmGiantCentipede
-img: systems/dnd5e/tokens/beast/GiantCentipede.webp
+_id: phbginGiantCenti
+img: null
 prototypeToken:
-  name: Giant Centipede
+  name: Giant Insect
   displayName: 0
   actorLink: false
   appendNumber: false
   prependAdjective: false
-  width: 1
-  height: 1
+  width: 2
+  height: 2
   texture:
-    src: systems/dnd5e/tokens/beast/GiantCentipede.webp
+    src: null
     anchorX: 0.5
     anchorY: 0.5
     offsetX: 0
     offsetY: 0
     fit: contain
-    scaleX: 1.5
-    scaleY: 1.5
+    scaleX: 1
+    scaleY: 1
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
   rotation: 0
   alpha: 1
-  disposition: -1
+  disposition: 1
   displayBars: 0
   bar1:
     attribute: attributes.hp
@@ -518,19 +445,22 @@ prototypeToken:
       max: 1
   sight:
     enabled: false
-    range: 0
+    range: 60
     angle: 360
-    visionMode: basic
+    visionMode: darkvision
     color: null
     attenuation: 0.1
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes:
+    - id: basicSight
+      range: 60
+      enabled: true
   occludable:
     radius: 0
   ring:
-    enabled: false
+    enabled: true
     colors:
       ring: null
       background: null
@@ -557,9 +487,6 @@ items:
       source:
         custom: ''
         rules: '2024'
-        book: SRD 5.2
-        revision: 1
-        license: CC-BY-4.0
       uses:
         max: ''
         spent: 0
@@ -569,15 +496,11 @@ items:
         subtype: ''
       prerequisites:
         level: null
-        repeatable: false
       properties: []
       requirements: ''
       activities: {}
       enchant: {}
       identifier: spider-climb
-      advancement: []
-      cover: null
-      crewed: false
     _id: phbaoiSpiderClim
     type: feat
     img: icons/creatures/invertebrates/spider-large-white-green.webp
@@ -590,14 +513,14 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.346'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1740680151395
+      modifiedTime: 1725827369657
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!mmGiantCentipede.phbaoiSpiderClim'
+    _key: '!actors.items!phbginGiantCenti.phbaoiSpiderClim'
   - name: Multiattack
     system:
       description:
@@ -609,9 +532,6 @@ items:
       source:
         custom: ''
         rules: '2024'
-        book: SRD 5.2
-        revision: 1
-        license: CC-BY-4.0
       uses:
         max: ''
         recovery: []
@@ -621,7 +541,6 @@ items:
         subtype: ''
       prerequisites:
         level: null
-        repeatable: false
       properties: []
       requirements: ''
       activities:
@@ -638,7 +557,6 @@ items:
             scaling:
               allowed: false
               max: ''
-            spellSlot: true
           description:
             chatFlavor: ''
           duration:
@@ -646,7 +564,6 @@ items:
             units: inst
             special: ''
             override: false
-            concentration: false
           effects: []
           range:
             units: self
@@ -679,11 +596,10 @@ items:
             max: ''
           sort: 0
           name: Activate
+          img: ''
+          appliedEffects: []
       enchant: {}
       identifier: multiattack
-      advancement: []
-      cover: null
-      crewed: false
     _id: phbaoiMultiattac
     type: feat
     img: icons/magic/movement/abstract-ribbons-red-orange.webp
@@ -700,14 +616,14 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.346'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1740680151395
+      modifiedTime: 1725907821422
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!mmGiantCentipede.phbaoiMultiattac'
+    _key: '!actors.items!phbginGiantCenti.phbaoiMultiattac'
   - name: Poison Jab
     system:
       description:
@@ -719,9 +635,6 @@ items:
       source:
         custom: ''
         rules: '2024'
-        book: SRD 5.2
-        revision: 1
-        license: CC-BY-4.0
       uses:
         max: ''
         recovery: []
@@ -731,7 +644,6 @@ items:
         subtype: ''
       prerequisites:
         level: null
-        repeatable: false
       properties: []
       requirements: ''
       activities:
@@ -748,7 +660,6 @@ items:
             scaling:
               allowed: false
               max: ''
-            spellSlot: true
           description:
             chatFlavor: ''
           duration:
@@ -756,7 +667,6 @@ items:
             units: inst
             special: ''
             override: false
-            concentration: false
           effects: []
           range:
             value: '10'
@@ -819,11 +729,10 @@ items:
             max: ''
           sort: 0
           name: ''
+          img: ''
+          appliedEffects: []
       enchant: {}
       identifier: poison-jab
-      advancement: []
-      cover: null
-      crewed: false
     _id: phbaoiPoisonJab0
     type: feat
     img: icons/creatures/abilities/stinger-poison-green.webp
@@ -840,14 +749,14 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.346'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1740680151395
+      modifiedTime: 1725907895024
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!mmGiantCentipede.phbaoiPoisonJab0'
+    _key: '!actors.items!phbginGiantCenti.phbaoiPoisonJab0'
   - name: Venomous Spew
     system:
       description:
@@ -860,9 +769,6 @@ items:
       source:
         custom: ''
         rules: '2024'
-        book: SRD 5.2
-        revision: 1
-        license: CC-BY-4.0
       uses:
         max: ''
         recovery: []
@@ -872,7 +778,6 @@ items:
         subtype: ''
       prerequisites:
         level: null
-        repeatable: false
       properties: []
       requirements: ''
       activities:
@@ -889,7 +794,6 @@ items:
             scaling:
               allowed: false
               max: ''
-            spellSlot: true
           description:
             chatFlavor: ''
           duration:
@@ -897,7 +801,6 @@ items:
             units: round
             special: ''
             override: false
-            concentration: false
           effects:
             - _id: uUvxWKSj8qQRIbTK
               onSave: false
@@ -926,8 +829,7 @@ items:
             onSave: half
             parts: []
           save:
-            ability:
-              - con
+            ability: con
             dc:
               calculation: spellcasting
               formula: ''
@@ -937,16 +839,14 @@ items:
           sort: 0
       enchant: {}
       identifier: venomous-spew
-      advancement: []
-      cover: null
-      crewed: false
     _id: phbaoiVenomousSp
     type: feat
     img: icons/magic/acid/projectile-flame-smoke-green.webp
     effects:
       - name: Poisoned
         img: systems/dnd5e/icons/svg/statuses/poisoned.svg
-        origin: Compendium.dnd5e.actors24.Actor.mmGiantCentipede.Item.phbaoiVenomousSp
+        origin: >-
+          Compendium.dnd-players-handbook.actors.Actor.phbginGiantCenti.Item.phbaoiVenomousSp
         transfer: false
         _id: uUvxWKSj8qQRIbTK
         type: base
@@ -972,15 +872,15 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
+          coreVersion: '13.346'
           systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
+          systemVersion: 4.0.0
+          createdTime: 1725909404214
+          modifiedTime: 1725909648174
+          lastModifiedBy: dnd5ebuilder0000
           exportSource: null
         _key: >-
-          !actors.items.effects!mmGiantCentipede.phbaoiVenomousSp.uUvxWKSj8qQRIbTK
+          !actors.items.effects!phbginGiantCenti.phbaoiVenomousSp.uUvxWKSj8qQRIbTK
     folder: null
     sort: 0
     ownership:
@@ -993,199 +893,14 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.346'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1740680151395
+      modifiedTime: 1725909404239
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!mmGiantCentipede.phbaoiVenomousSp'
-  - _id: mmBite0000000000
-    name: Bite
-    type: weapon
-    system:
-      type:
-        value: natural
-        baseItem: ''
-      activities:
-        xWlMeXFjELfSUWX9:
-          type: attack
-          _id: xWlMeXFjELfSUWX9
-          sort: 0
-          activation:
-            type: action
-            value: null
-            override: false
-            condition: ''
-          consumption:
-            scaling:
-              allowed: false
-            spellSlot: true
-            targets: []
-          description:
-            chatFlavor: ''
-          duration:
-            units: inst
-            concentration: false
-            override: false
-          effects:
-            - _id: PzxN1RHxvVfpYZxa
-          range:
-            override: false
-          target:
-            template:
-              contiguous: false
-              units: ft
-              type: ''
-            affects:
-              choice: false
-              type: ''
-            override: false
-            prompt: true
-          uses:
-            spent: 0
-            recovery: []
-            max: ''
-          attack:
-            critical:
-              threshold: null
-            flat: false
-            type:
-              value: ''
-              classification: ''
-            ability: dex
-            bonus: ''
-          damage:
-            critical:
-              bonus: ''
-            includeBase: true
-            parts: []
-          name: ''
-      uses:
-        spent: 0
-        recovery: []
-        max: ''
-      description:
-        value: >-
-          <p>[[/attack extended]]. [[/damage average extended]], and the target
-          has the &amp;Reference[Poisoned apply=false]  condition until the
-          start of the [[lookup @name lowercase]]'s next turn.</p>
-        chat: ''
-      identifier: bite
-      source:
-        revision: 1
-        rules: '2024'
-        book: SRD 5.2
-        license: CC-BY-4.0
-      properties: []
-      identified: true
-      unidentified:
-        name: Unidentified Weapon
-        description: ''
-      mastery: ''
-      range:
-        units: ft
-        value: null
-        long: null
-        reach: null
-      damage:
-        base:
-          denomination: 4
-          bonus: ''
-          number: 1
-          types:
-            - piercing
-          custom:
-            enabled: false
-          scaling:
-            number: 1
-        versatile:
-          number: null
-          denomination: null
-          types: []
-          custom:
-            enabled: false
-          scaling:
-            number: 1
-      container: null
-      quantity: 1
-      weight:
-        value: 0
-        units: lb
-      price:
-        value: 0
-        denomination: gp
-      rarity: ''
-      attunement: ''
-      attuned: false
-      equipped: true
-      cover: null
-      crewed: false
-      ammunition: {}
-      armor:
-        value: null
-      magicalBonus: null
-      proficient: null
-    folder: pSCWWdqMX9eUATRJ
-    img: icons/creatures/abilities/fangs-teeth-bite.webp
-    effects:
-      - name: Poisoned
-        img: systems/dnd5e/icons/svg/statuses/poisoned.svg
-        origin: Compendium.dnd5e.actors24.Actor.mmGiantCentipede.Item.mmBite0000000000
-        _id: PzxN1RHxvVfpYZxa
-        type: base
-        system: {}
-        changes: []
-        disabled: false
-        duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
-        description: >-
-          <p>The target has the &amp;Reference[Poisoned apply=false] condition
-          until the start of the attacking creature’s next turn.</p>
-        tint: '#ffffff'
-        transfer: false
-        statuses:
-          - poisoned
-        sort: 0
-        flags: {}
-        _stats:
-          compendiumSource: null
-          duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
-          exportSource: null
-        _key: >-
-          !actors.items.effects!mmGiantCentipede.mmBite0000000000.PzxN1RHxvVfpYZxa
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
-    _stats:
-      compendiumSource: Compendium.dnd-monster-manual.features.Item.mmBite0000000000
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745342039971
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    ownership:
-      default: 0
-    sort: 0
-    _key: '!actors.items!mmGiantCentipede.mmBite0000000000'
+    _key: '!actors.items!phbginGiantCenti.phbaoiVenomousSp'
 effects: []
 folder: beGRXWKaYfeeR1Iz
 sort: 100000
@@ -1196,11 +911,11 @@ flags:
     showTokenPortrait: false
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.346'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1740679132059
-  modifiedTime: 1745256820109
+  systemVersion: 4.0.0
+  createdTime: 1724425909379
+  modifiedTime: 1726547395290
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
-_key: '!actors!mmGiantCentipede'
+_key: '!actors!phbginGiantCenti'

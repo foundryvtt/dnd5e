@@ -1,0 +1,122 @@
+_id: mmColdBreath0000
+name: Cold Breath
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    8P7hmd3Nron4RAIv:
+      type: save
+      _id: 8P7hmd3Nron4RAIv
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: cone
+          size: '30'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 4
+            denomination: 8
+            bonus: ''
+            types:
+              - cold
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability:
+          - con
+        dc:
+          calculation: con
+          formula: ''
+      name: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery:
+      - period: recharge
+        formula: '5'
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <p><em>Constitution Saving Throw: </em>DC [[lookup @save.dc.value
+      activity=8P7hmd3Nron4RAIv]], each [[lookup @target.affects.type
+      activity=8P7hmd3Nron4RAIv]] in a [[lookup @target.template.size
+      activity=8P7hmd3Nron4RAIv]]-foot Cone.</p><p><em>Failure: </em>[[/damage
+      average]] damage.</p><p><em>Success:</em> Half damage.</p>
+    chat: ''
+  identifier: cold-breath
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/creatures/abilities/dragon-ice-breath-blue.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737753991086
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 5300000
+ownership:
+  default: 0
+_key: '!items!mmColdBreath0000'

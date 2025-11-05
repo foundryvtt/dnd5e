@@ -9,6 +9,11 @@ import * as Trait from "../../documents/actor/trait.mjs";
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
+ * @import { FavoriteData5e } from "../../data/actor/_types.mjs";
+ * @import { FacilityOccupants } from "../../data/item/_types.mjs";
+ */
+
+/**
  * Extension of base actor sheet for characters.
  */
 export default class CharacterActorSheet extends BaseActorSheet {
@@ -53,7 +58,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       template: "systems/dnd5e/templates/actors/tabs/character-inventory.hbs",
       templates: [
         "systems/dnd5e/templates/inventory/inventory.hbs", "systems/dnd5e/templates/inventory/activity.hbs",
-        "systems/dnd5e/templates/inventory/encumbrance.hbs"
+        "systems/dnd5e/templates/inventory/encumbrance.hbs", "systems/dnd5e/templates/inventory/containers.hbs"
       ],
       scrollable: [""]
     },
@@ -131,13 +136,6 @@ export default class CharacterActorSheet extends BaseActorSheet {
   ];
 
   /* -------------------------------------------- */
-
-  /** @override */
-  tabGroups = {
-    primary: "details"
-  };
-
-  /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
 
@@ -156,6 +154,13 @@ export default class CharacterActorSheet extends BaseActorSheet {
     effects: { name: "", properties: new Set() },
     inventory: { name: "", properties: new Set() },
     spells: { name: "", properties: new Set() }
+  };
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  tabGroups = {
+    primary: "details"
   };
 
   /* -------------------------------------------- */
@@ -287,6 +292,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       secrets: this.actor.isOwner, relativeTo: this.actor, rollData: context.rollData
     };
     context.enriched = {
+      label: "DND5E.Biography",
       value: await TextEditor.enrichHTML(this.actor.system.details.biography.value, enrichmentOptions)
     };
 
@@ -296,7 +302,11 @@ export default class CharacterActorSheet extends BaseActorSheet {
     ].map(k => {
       const field = this.actor.system.schema.fields.details.fields[k];
       const name = `system.details.${k}`;
-      return { name, label: field.label, value: foundry.utils.getProperty(this.actor, name) ?? "" };
+      return {
+        name, label: field.label,
+        value: foundry.utils.getProperty(this.actor, name) ?? "",
+        source: foundry.utils.getProperty(this.actor._source, name) ?? ""
+      };
     });
 
     return context;
@@ -333,7 +343,6 @@ export default class CharacterActorSheet extends BaseActorSheet {
     for ( let ability of Object.values(this._prepareAbilities(context)) ) {
       ability = context.saves[ability.key] = { ...ability };
       ability.class = this.constructor.PROFICIENCY_CLASSES[context.editable ? ability.baseProf : ability.proficient];
-      ability.hover = CONFIG.DND5E.proficiencyLevels[ability.proficient];
     }
     if ( this.actor.statuses.has(CONFIG.specialStatusEffects.CONCENTRATING) || context.editable ) {
       context.saves.concentration = {
@@ -849,11 +858,11 @@ export default class CharacterActorSheet extends BaseActorSheet {
   async _prepareItemFeature(item, ctx) {
     if ( item.type === "facility" ) return this._prepareItemFacility(item, ctx);
 
-    super._prepareItemFeature(item, ctx);
+    await super._prepareItemFeature(item, ctx);
 
     const [originId] = (item.getFlag("dnd5e", "advancementRoot") ?? item.getFlag("dnd5e", "advancementOrigin"))
       ?.split(".") ?? [];
-    const group = this.actor.items.get(originId);
+    const group = item.parent.items.get(originId);
     ctx.groups.origin = "other";
     switch ( group?.type ) {
       case "race": ctx.groups.origin = "species"; break;
@@ -1082,6 +1091,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
    * @param {HTMLElement} target  Button that was clicked.
    */
   static #useFacility(event, target) {
+    if ( !target.classList.contains("rollable") ) return;
     const { facilityId } = target.closest("[data-facility-id]")?.dataset ?? {};
     const facility = this.actor.items.get(facilityId);
     facility?.use({ legacy: false, chooseActivity: true, event });
@@ -1103,7 +1113,9 @@ export default class CharacterActorSheet extends BaseActorSheet {
       if ( favorite.type === "container" ) favorite.sheet.render({ force: true });
       else favorite.use({ event });
     }
-    else if ( favorite instanceof dnd5e.dataModels.activity.BaseActivityData ) favorite.use({ event });
+    else if ( favorite instanceof dnd5e.dataModels.activity.BaseActivityData ) {
+      if ( favorite.canUse ) favorite.use({ event });
+    }
     else if ( favorite instanceof dnd5e.documents.ActiveEffect5e ) favorite.update({ disabled: !favorite.disabled });
     else {
       const { key } = target.closest("[data-key]")?.dataset ?? {};
@@ -1305,7 +1317,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       else if ( f.id === srcId ) source = f;
       return f.id !== srcId;
     });
-    const updates = foundry.utils.SortingHelpers.performIntegerSort(source, { target, siblings });
+    const updates = foundry.utils.performIntegerSort(source, { target, siblings });
     const favorites = this.actor.system.favorites.reduce((map, f) => map.set(f.id, { ...f }), new Map());
     for ( const { target, update } of updates ) {
       const favorite = favorites.get(target.id);

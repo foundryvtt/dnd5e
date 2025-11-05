@@ -1,0 +1,104 @@
+_id: mmPhantasms00000
+name: Phantasms
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    4GBMAwbnCOrMQ4Gf:
+      type: cast
+      _id: 4GBMAwbnCOrMQ4Gf
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '2'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+        uuid: Compendium.dnd5e.spells24.Item.phbsplMirrorImag
+        ability: wis
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery:
+      - period: sr
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] casts the
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplMirrorImag]{Mirror
+      Image}</em> spell, requiring no spell components and using Wisdom as the
+      spellcasting ability. The spell ends early if the [[lookup @name
+      lowercase]] starts or ends its turn in Bright Light.</p>
+    chat: ''
+  identifier: phantasms
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/defensive/illusion-evasion-echo-purple.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1737060761283
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 15400000
+ownership:
+  default: 0
+_key: '!items!mmPhantasms00000'

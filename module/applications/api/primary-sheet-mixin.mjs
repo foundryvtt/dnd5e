@@ -1,8 +1,10 @@
+import DragDropApplicationMixin from "../api/drag-drop-mixin.mjs";
+import CheckboxElement from "../components/checkbox.mjs";
 import ItemSheet5e from "../item/item-sheet.mjs";
-import DragDropApplicationMixin from "../mixins/drag-drop-mixin.mjs";
 
 /**
- * @import { FilterState5e } from "../components/item-list-controls.mjs";
+ * @import { FilterState5e, ItemListComparator5e } from "../components/_types.mjs";
+ * @import { SheetTabDescriptor5e } from "./_types.mjs";
  */
 
 /**
@@ -22,21 +24,6 @@ export default function PrimarySheetMixin(Base) {
     };
 
     /* -------------------------------------------- */
-
-    /**
-     * @typedef {object} SheetTabDescriptor5e
-     * @property {string} tab                       The tab key.
-     * @property {string} label                     The tab label's localization key.
-     * @property {string} [icon]                    A font-awesome icon.
-     * @property {string} [svg]                     An SVG icon.
-     * @property {SheetTabCondition5e} [condition]  A predicate to check before rendering the tab.
-     */
-
-    /**
-     * @callback SheetTabCondition5e
-     * @param {Document} doc  The Document instance.
-     * @returns {boolean}     Whether to render the tab.
-     */
 
     /**
      * Sheet tabs.
@@ -201,9 +188,21 @@ export default function PrimarySheetMixin(Base) {
     /* -------------------------------------------- */
 
     /** @inheritDoc */
-    async _preparePartContext(partId, options) {
-      const context = await super._preparePartContext(partId, options);
+    async _preparePartContext(partId, context, options) {
+      context = await super._preparePartContext(partId, context, options);
       context.tab = context.tabs[partId];
+
+      /**
+       * A hook event that fires during preparation of sheet parts.
+       * @function dnd5e.prepareSheetContext
+       * @memberof hookEvents
+       * @param {PrimarySheet5e} sheet  Sheet being rendered.
+       * @param {string} partId         The ID of the part being prepared.
+       * @param {object} context        Preparation context that should be mutated.
+       * @param {object} options        Render options.
+       */
+      Hooks.callAll("dnd5e.prepareSheetContext", this, partId, context, options);
+
       return context;
     }
 
@@ -261,6 +260,7 @@ export default function PrimarySheetMixin(Base) {
     /** @inheritDoc */
     async _onRender(context, options) {
       await super._onRender(context, options);
+      this._renderSource();
 
       // Set toggle state and add status class to frame
       this._renderModeToggle();
@@ -410,6 +410,7 @@ export default function PrimarySheetMixin(Base) {
      */
     static async #showDocument(event, target) {
       if ( await this._showDocument(event, target) === false ) return;
+      if ( [HTMLInputElement, HTMLSelectElement, CheckboxElement].some(el => event.target instanceof el) ) return;
       const uuid = target.closest("[data-uuid]")?.dataset.uuid;
       const doc = await fromUuid(uuid);
       const mode = target.dataset.action === "showDocument" ? "PLAY" : "EDIT";
@@ -503,7 +504,7 @@ export default function PrimarySheetMixin(Base) {
     static sortItemsPriority(a, b) {
       return a.system.linkedActivity?.item?.name.localeCompare(b.system.linkedActivity?.item?.name, game.i18n.lang)
         || ((a.system.level ?? 0) - (b.system.level ?? 0))
-        || ((a.system.prepared ?? 0) - (b.system.prepared ?? 0))
+        || ((b.system.prepared ?? 0) - (a.system.prepared ?? 0))
         || (a.system.method ?? "").compare(b.system.method ?? "")
         || a.name.localeCompare(b.name, game.i18n.lang);
     }

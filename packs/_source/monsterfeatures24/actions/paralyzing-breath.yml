@@ -1,0 +1,209 @@
+_id: mmParalyzingBrea
+name: Paralyzing Breath
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    r4MGqEq5U9aaseBh:
+      type: save
+      _id: r4MGqEq5U9aaseBh
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: turn
+        concentration: false
+        override: false
+        value: '1'
+      effects:
+        - _id: MML0hjuixzKZ61FT
+          onSave: false
+        - _id: qHhQi1VSyVic0Z22
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: cone
+          size: '15'
+          count: ''
+        affects:
+          choice: false
+          type: creature
+          count: ''
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability:
+          - con
+        dc:
+          calculation: con
+          formula: 8 + @mod + @prof
+      name: Save
+      img: ''
+      appliedEffects:
+        - MML0hjuixzKZ61FT
+        - qHhQi1VSyVic0Z22
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature"><em>Constitution Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=r4MGqEq5U9aaseBh]], each [[lookup
+      @target.affects.type activity=r4MGqEq5U9aaseBh]] in a [[lookup
+      @target.template.size activity=r4MGqEq5U9aaseBh]]-foot Cone.</p><p
+      class="feature"><em>First Failure:</em> The target has the
+      &amp;Reference[Incapacitated apply=false] condition until the end of its
+      next turn, when it repeats the save.</p><p class="feature"><em>Second
+      Failure:</em> The target has the &amp;Reference[Paralyzed apply=false]
+      condition, and it repeats the save at the end of each of its turns, ending
+      the effect on itself on a success. After 1 minute, it succeeds
+      automatically.</p>
+    chat: ''
+  identifier: paralyzing-breath
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/unholy/energy-smoke-pink.webp
+effects:
+  - name: Incapacitated
+    img: systems/dnd5e/icons/svg/statuses/incapacitated.svg
+    origin: Item.mmParalyzingBrea
+    _id: MML0hjuixzKZ61FT
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Incapacitated apply=false] condition
+      until the end of its next turn, when it repeats the save.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - incapacitated
+    sort: 0
+    flags:
+      dae:
+        enableCondition: ''
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1737804236515
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmParalyzingBrea.MML0hjuixzKZ61FT'
+  - name: Paralyzed
+    img: systems/dnd5e/icons/svg/statuses/paralyzed.svg
+    origin: Item.mmParalyzingBrea
+    _id: qHhQi1VSyVic0Z22
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: 0
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Paralyzed apply=false] condition, and
+      it repeats the save at the end of each of its turns, ending the effect on
+      itself on a success. After 1 minute, it succeeds automatically.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - paralyzed
+    sort: 0
+    flags:
+      dae:
+        enableCondition: ''
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1737804251118
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmParalyzingBrea.qHhQi1VSyVic0Z22'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737804217600
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 16000000
+ownership:
+  default: 0
+_key: '!items!mmParalyzingBrea'

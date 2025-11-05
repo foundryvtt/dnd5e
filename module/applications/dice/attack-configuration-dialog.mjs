@@ -1,14 +1,12 @@
 import D20RollConfigurationDialog from "./d20-configuration-dialog.mjs";
 
 /**
- * @typedef {BasicRollConfigurationDialogOptions} AttackRollConfigurationDialogOptions
- * @property {FormSelectOption[]} ammunitionOptions  Ammunition that can be used with the attack.
- * @property {FormSelectOption[]} attackModeOptions  Different modes of attack.
- * @property {FormSelectOption[]} masteryOptions     Available masteries for the attacking weapon.
+ * @import { AttackRollConfigurationDialogOptions } from "../../dice/_types.mjs";
  */
 
 /**
  * Extended roll configuration dialog that allows selecting attack mode, ammunition, and weapon mastery.
+ * @extends D20RollConfigurationDialog<AttackRollConfigurationDialogOptions>
  */
 export default class AttackRollConfigurationDialog extends D20RollConfigurationDialog {
   /** @override */

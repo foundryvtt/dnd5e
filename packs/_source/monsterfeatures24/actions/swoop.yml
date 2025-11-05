@@ -1,0 +1,104 @@
+_id: mmSwoop000000000
+name: Swoop
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    tsFMPBQGABPfCQo4:
+      type: utility
+      _id: tsFMPBQGABPfCQo4
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: If the roc has a creature Grappled
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Expend Use
+      img: systems/dnd5e/icons/svg/monster.svg
+  uses:
+    spent: 0
+    recovery:
+      - period: recharge
+        formula: '5'
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <p class="feature">If the [[lookup @name lowercase]] has a creature
+      Grappled, the [[lookup @name lowercase]] flies up to half its Fly Speed
+      without provoking &amp;Reference[OpportunityAttacks] and drops that
+      creature.</p>
+    chat: ''
+  identifier: swoop
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/creatures/claws/claw-talons-glowing-orange.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1735916418436
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 23400000
+ownership:
+  default: 0
+_key: '!items!mmSwoop000000000'

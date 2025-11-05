@@ -10,28 +10,22 @@ import ItemTypeField from "./fields/item-type-field.mjs";
 const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @import { ItemTypeData } from "./fields/item-type-field.mjs";
+ * @import { FeatItemSystemData } from "./_types.mjs";
+ * @import {
+ *   ActivitiesTemplateData, AdvancementTemplateData, ItemDescriptionTemplateData, ItemTypeTemplateData
+ * } from "./templates/_types.mjs";
  */
 
 /**
  * Data definition for Feature items.
- * @mixes ActivitiesTemplate
- * @mixes AdvancementTemplate
- * @mixes ItemDescriptionTemplate
- * @mixes ItemTypeTemplate
- *
- * @property {number} cover                         Amount of cover this feature affords to its crew on a vehicle.
- * @property {boolean} crewed                       Is this vehicle feature currently crewed?
- * @property {object} enchant
- * @property {string} enchant.max                   Maximum number of items that can have this enchantment.
- * @property {string} enchant.period                Frequency at which the enchantment can be swapped.
- * @property {object} prerequisites
- * @property {Set<string>} prerequisites.items      Items that must be taken first before this item.
- * @property {number} prerequisites.level           Character or class level required to choose this feature.
- * @property {boolean} prerequisites.repeatable     Can this item be selected more than once?
- * @property {Set<string>} properties               General properties of a feature item.
- * @property {string} requirements                  Actor details required to use this feature.
- * @property {Omit<ItemTypeData, "baseItem">} type  Feature type and subtype.
+ * @extends {ItemDataModel<
+ *   ActivitiesTemplate & AdvancementTemplate & ItemDescriptionTemplate & ItemTypeTemplate & FeatItemSystemData
+ * >}
+ * @mixes ActivitiesTemplateData
+ * @mixes AdvancementTemplateData
+ * @mixes ItemDescriptionTemplateData
+ * @mixes ItemTypeTemplateData
+ * @mixes FeatItemSystemData
  */
 export default class FeatData extends ItemDataModel.mixin(
   ActivitiesTemplate, AdvancementTemplate, ItemDescriptionTemplate, ItemTypeTemplate
@@ -56,7 +50,7 @@ export default class FeatData extends ItemDataModel.mixin(
         period: new StringField()
       }),
       prerequisites: new SchemaField({
-        items: new SetField(new IdentifierField()),
+        items: new SetField(new IdentifierField({ allowType: true })),
         level: new NumberField({ integer: true, min: 0 }),
         repeatable: new BooleanField()
       }),
@@ -136,6 +130,110 @@ export default class FeatData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /** @override */
+  get advancementClassLinked() {
+    return this.type.value !== "feat";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Properties displayed in chat.
+   * @type {string[]}
+   */
+  get chatProperties() {
+    return [this.requirements];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Properties displayed on the item card.
+   * @type {string[]}
+   */
+  get cardProperties() {
+    return [this.requirements];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does this feature represent a group of individual enchantments (e.g. the "Infuse Item" feature stores data about
+   * all of the character's infusions).
+   * @type {boolean}
+   */
+  get isEnchantmentSource() {
+    return CONFIG.DND5E.featureTypes[this.type?.value]?.subtypes?.[this.type?.subtype]
+      && (this.type?.subtype in CONFIG.DND5E.featureTypes.enchantment.subtypes);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The proficiency multiplier for this item.
+   * @returns {number}
+   */
+  get proficiencyMultiplier() {
+    return 1;
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Migration                              */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static _migrateData(source) {
+    super._migrateData(source);
+    FeatData.#migrateEnchantment(source);
+    ActivitiesTemplate.migrateActivities(source);
+    FeatData.#migrateType(source);
+    FeatData.#migrateRecharge(source);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate enchantment data format.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateEnchantment(source) {
+    if ( foundry.utils.getType(source.enchantment?.items) !== "Object" ) return;
+    const { items } = source.enchantment;
+    source.enchant ??= {};
+    if ( "max" in items ) source.enchant.max = items.max;
+    if ( "period" in items ) source.enchant.period = items.period;
+    delete source.enchantment.items;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Ensure feats have a type object.
+   * @param {object} source The candidate source data from which the model will be constructed.
+   */
+  static #migrateType(source) {
+    if ( !("type" in source) ) return;
+    if ( !source.type ) source.type = {value: "", subtype: ""};
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate 0 values to null.
+   * @param {object} source The candidate source data from which the model will be constructed.
+   */
+  static #migrateRecharge(source) {
+    if ( !("recharge" in source) ) return;
+    const value = source.recharge.value;
+    if ( (value === 0) || (value === "") ) source.recharge.value = null;
+    else if ( (typeof value === "string") && Number.isNumeric(value) ) source.recharge.value = Number(value);
+    if ( source.recharge.charged === null ) source.recharge.charged = false;
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
@@ -198,110 +296,6 @@ export default class FeatData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
-  /*  Data Migrations                             */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  static _migrateData(source) {
-    super._migrateData(source);
-    FeatData.#migrateEnchantment(source);
-    ActivitiesTemplate.migrateActivities(source);
-    FeatData.#migrateType(source);
-    FeatData.#migrateRecharge(source);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Migrate enchantment data format.
-   * @param {object} source  The candidate source data from which the model will be constructed.
-   */
-  static #migrateEnchantment(source) {
-    if ( foundry.utils.getType(source.enchantment?.items) !== "Object" ) return;
-    const { items } = source.enchantment;
-    source.enchant ??= {};
-    if ( "max" in items ) source.enchant.max = items.max;
-    if ( "period" in items ) source.enchant.period = items.period;
-    delete source.enchantment.items;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Ensure feats have a type object.
-   * @param {object} source The candidate source data from which the model will be constructed.
-   */
-  static #migrateType(source) {
-    if ( !("type" in source) ) return;
-    if ( !source.type ) source.type = {value: "", subtype: ""};
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Migrate 0 values to null.
-   * @param {object} source The candidate source data from which the model will be constructed.
-   */
-  static #migrateRecharge(source) {
-    if ( !("recharge" in source) ) return;
-    const value = source.recharge.value;
-    if ( (value === 0) || (value === "") ) source.recharge.value = null;
-    else if ( (typeof value === "string") && Number.isNumeric(value) ) source.recharge.value = Number(value);
-    if ( source.recharge.charged === null ) source.recharge.charged = false;
-  }
-
-  /* -------------------------------------------- */
-  /*  Properties                                  */
-  /* -------------------------------------------- */
-
-  /** @override */
-  get advancementClassLinked() {
-    return this.type.value !== "feat";
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Properties displayed in chat.
-   * @type {string[]}
-   */
-  get chatProperties() {
-    return [this.requirements];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Properties displayed on the item card.
-   * @type {string[]}
-   */
-  get cardProperties() {
-    return [this.requirements];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Does this feature represent a group of individual enchantments (e.g. the "Infuse Item" feature stores data about
-   * all of the character's infusions).
-   * @type {boolean}
-   */
-  get isEnchantmentSource() {
-    return CONFIG.DND5E.featureTypes[this.type?.value]?.subtypes?.[this.type?.subtype]
-      && (this.type?.subtype in CONFIG.DND5E.featureTypes.enchantment.subtypes);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * The proficiency multiplier for this item.
-   * @returns {number}
-   */
-  get proficiencyMultiplier() {
-    return 1;
-  }
-
-  /* -------------------------------------------- */
   /*  Helpers                                     */
   /* -------------------------------------------- */
 
@@ -309,12 +303,16 @@ export default class FeatData extends ItemDataModel.mixin(
    * Validate the prerequisites specified on this item.
    * @param {Actor5e} actor                        Actor against which the prerequisites should be checked.
    * @param {object} [options={}]
+   * @param {Item5e[]} [options.added]             Items that are pending addition to the Actor.
    * @param {number} [options.level]               Level to validate. Falls back to character level.
+   * @param {Item5e[]} [options.removed]           Items that are pending removal from the Actor.
    * @param {boolean} [options.showMessage=false]  Show a UI message if the validation fails.
    * @param {boolean} [options.throwError=false]   Throw an error if validation fails.
    * @returns {true|string[]}  True if the item is valid or a list of invalid descriptions if validation failed.
    */
-  validatePrerequisites(actor, { level=actor.system?.details?.level, showMessage=false, throwError=false }={}) {
+  validatePrerequisites(actor, {
+    added=[], level=actor.system?.details?.level, removed=[], showMessage=false, throwError=false
+  }={}) {
     const messages = [];
 
     // Check to ensure the item doesn't already exist on actor if it is not repeatable
@@ -323,8 +321,11 @@ export default class FeatData extends ItemDataModel.mixin(
     }
 
     // If a feature has item pre-requisites, make sure the other items exist on the actor
-    const someExist = !this.prerequisites.items.size || Array.from(this.prerequisites.items)
-      .some(i => actor.identifiedItems.get(i)?.size);
+    const pendingAddition = new Set(added.map(i => i.system.identifier));
+    const pendingRemoval = new Set(removed.map(i => i.system.identifier));
+    const someExist = !this.prerequisites.items.size || Array.from(this.prerequisites.items).some(i => {
+      return (actor.identifiedItems.get(i)?.size || pendingAddition.has(i)) && !pendingRemoval.has(i);
+    });
     if ( !someExist ) {
       messages.push(game.i18n.format("DND5E.Prerequisites.Warning.MissingItem", {
         items: game.i18n.getListFormatter({ type: "disjunction" }).format(Array.from(this.prerequisites.items))

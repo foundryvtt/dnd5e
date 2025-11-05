@@ -50,8 +50,8 @@ export default class TransformSheet extends ActivitySheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _prepareEffectContext(context) {
-    context = await super._prepareEffectContext(context);
+  async _prepareEffectContext(context, options) {
+    context = await super._prepareEffectContext(context, options);
 
     const settings = new TransformationSetting({
       ...(context.source.transform.customize ? context.source.settings

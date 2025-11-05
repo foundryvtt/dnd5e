@@ -9,22 +9,21 @@ import StartingEquipmentTemplate from "./templates/starting-equipment.mjs";
 const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
+ * @import { ClassItemSystemData } from "./_types.mjs";
+ * @import {
+ *   AdvancementTemplateData, ItemDescriptionTemplateData, StartingEquipmentTemplateData
+ * } from "./templates/_types.mjs";
+ */
+
+/**
  * Data definition for Class items.
- * @mixes AdvancementTemplate
- * @mixes ItemDescriptionTemplate
- * @mixes StartingEquipmentTemplate
- *
- * @property {object} hd                        Object describing hit dice properties.
- * @property {string} hd.additional             Additional hit dice beyond the level of the class.
- * @property {string} hd.denomination           Denomination of hit dice available as defined in `DND5E.hitDieTypes`.
- * @property {number} hd.spent                  Number of hit dice consumed.
- * @property {number} levels                    Current number of levels in this class.
- * @property {object} primaryAbility
- * @property {Set<string>} primaryAbility.value List of primary abilities used by this class.
- * @property {boolean} primaryAbility.all       If multiple abilities are selected, does multiclassing require all of
- *                                              them to be 13 or just one.
- * @property {Set<string>} properties           General properties of a class item.
- * @property {SpellcastingField} spellcasting   Details on class's spellcasting ability.
+ * @extends {ItemDataModel<
+ *   AdvancementTemplate & ItemDescriptionTemplate & StartingEquipmentTemplate & ClassItemSystemData
+ * >}
+ * @mixes AdvancementTemplateData
+ * @mixes ItemDescriptionTemplateData
+ * @mixes StartingEquipmentTemplateData
+ * @mixes ClassItemSystemData
  */
 export default class ClassData extends ItemDataModel.mixin(
   AdvancementTemplate, ItemDescriptionTemplate, StartingEquipmentTemplate
@@ -80,61 +79,7 @@ export default class ClassData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
-  /*  Data Preparation                            */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  prepareBaseData() {
-    super.prepareBaseData();
-    this.spellcasting.preparation.value = 0;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  prepareDerivedData() {
-    super.prepareDerivedData();
-    this.prepareDescriptionData();
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  prepareFinalData() {
-    this.isOriginalClass = this.parent.isOriginalClass;
-    const rollData = this.parent.getRollData({ deterministic: true });
-    SpellcastingField.prepareData.call(this, rollData);
-    this.hd.additional = this.hd.additional ? Roll.create(this.hd.additional, rollData).evaluateSync().total : 0;
-    this.hd.max = Math.max(this.levels + this.hd.additional, 0);
-    this.hd.value = Math.max(this.hd.max - this.hd.spent, 0);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async getFavoriteData() {
-    const context = await super.getFavoriteData();
-    if ( this.parent.subclass ) context.subtitle = this.parent.subclass.name;
-    context.value = this.levels;
-    return context;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async getSheetData(context) {
-    context.subtitles = [{ label: game.i18n.localize(CONFIG.Item.typeLabels.class) }];
-    context.singleDescription = true;
-
-    context.parts = ["dnd5e.details-class", "dnd5e.details-spellcasting", "dnd5e.details-starting-equipment"];
-    context.hitDieOptions = CONFIG.DND5E.hitDieTypes.map(d => ({ value: d, label: d }));
-    context.primaryAbilities = Object.entries(CONFIG.DND5E.abilities).map(([value, data]) => ({
-      value, label: data.label, selected: this.primaryAbility.value.has(value)
-    }));
-  }
-
-  /* -------------------------------------------- */
-  /*  Migrations                                  */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -242,6 +187,60 @@ export default class ClassData extends ItemDataModel.mixin(
     }
 
     if ( needsMigration ) foundry.utils.setProperty(source, "flags.dnd5e.persistSourceMigration", true);
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareBaseData() {
+    super.prepareBaseData();
+    this.spellcasting.preparation.value = 0;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    this.prepareDescriptionData();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareFinalData() {
+    this.isOriginalClass = this.parent.isOriginalClass;
+    const rollData = this.parent.getRollData({ deterministic: true });
+    SpellcastingField.prepareData.call(this, rollData);
+    this.hd.additional = this.hd.additional ? Roll.create(this.hd.additional, rollData).evaluateSync().total : 0;
+    this.hd.max = Math.max(this.levels + this.hd.additional, 0);
+    this.hd.value = Math.max(this.hd.max - this.hd.spent, 0);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getFavoriteData() {
+    const context = await super.getFavoriteData();
+    if ( this.parent.subclass ) context.subtitle = this.parent.subclass.name;
+    context.value = this.levels;
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getSheetData(context) {
+    context.subtitles = [{ label: game.i18n.localize(CONFIG.Item.typeLabels.class) }];
+    context.singleDescription = true;
+
+    context.parts = ["dnd5e.details-class", "dnd5e.details-spellcasting", "dnd5e.details-starting-equipment"];
+    context.hitDieOptions = CONFIG.DND5E.hitDieTypes.map(d => ({ value: d, label: d }));
+    context.primaryAbilities = Object.entries(CONFIG.DND5E.abilities).map(([value, data]) => ({
+      value, label: data.label, selected: this.primaryAbility.value.has(value)
+    }));
   }
 
   /* -------------------------------------------- */

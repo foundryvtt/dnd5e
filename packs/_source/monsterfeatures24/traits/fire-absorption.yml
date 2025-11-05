@@ -1,0 +1,45 @@
+_id: mmFireAbsorption
+name: Fire Absorption
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">Whenever the [[lookup @name lowercase]] is subjected to
+      Fire damage, it regains a number of Hit Points equal to the Fire damage
+      dealt.</p>
+    chat: ''
+  identifier: fire-absorption
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/magic/fire/flame-burning-earth-orange.webp
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736460561306
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 5500000
+ownership:
+  default: 0
+_key: '!items!mmFireAbsorption'

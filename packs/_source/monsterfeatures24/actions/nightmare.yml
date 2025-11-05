@@ -1,0 +1,165 @@
+_id: mmNightmare00000
+name: Nightmare
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    Y9H9ImnMcffBZlH3:
+      type: save
+      _id: Y9H9ImnMcffBZlH3
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: false
+        override: false
+        value: '1'
+      effects:
+        - _id: Di6rSDXgFkxAGsFE
+          onSave: false
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '60'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 4
+            denomination: '8'
+            bonus: ''
+            types:
+              - psychic
+        onSave: none
+      save:
+        ability:
+          - wis
+        dc:
+          calculation: cha
+          formula: 8 + @mod + @prof
+      name: Save
+      img: ''
+      appliedEffects:
+        - Di6rSDXgFkxAGsFE
+  uses:
+    spent: 0
+    recovery:
+      - period: recharge
+        formula: '6'
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <p class="feature"><em>Wisdom Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=Y9H9ImnMcffBZlH3]], one [[lookup
+      @target.affects.type activity=Y9H9ImnMcffBZlH3]] the [[lookup @name
+      lowercase]] can see within [[lookup @range.value
+      activity=Y9H9ImnMcffBZlH3]] feet. <em>Failure:</em> If the target has 20
+      Hit Points or fewer, it has the &amp;Reference[Unconscious apply=false]
+      condition for [[lookup @duration.value activity=Y9H9ImnMcffBZlH3]]
+      [[lookup @duration.units activity=Y9H9ImnMcffBZlH3]], until it takes
+      damage, or until a creature within 5 feet of it takes an action to wake
+      it. Otherwise, the target takes [[/damage average]] damage.</p>
+    chat: ''
+  identifier: nightmare
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/control/fear-fright-white.webp
+effects:
+  - name: Unconscious
+    img: systems/dnd5e/icons/svg/statuses/unconscious.svg
+    origin: Item.mmNightmare00000
+    _id: Di6rSDXgFkxAGsFE
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: 0
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>If the target has 20 Hit Points or fewer, it has the
+      &amp;Reference[Unconscious apply=false] condition for 1 hour, until it
+      takes damage, or until a creature within 5 feet of it takes an action to
+      wake it.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - unconscious
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736073395092
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmNightmare00000.Di6rSDXgFkxAGsFE'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737655703112
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 15600000
+ownership:
+  default: 0
+_key: '!items!mmNightmare00000'

@@ -19,6 +19,28 @@ export default class Token5e extends foundry.canvas.placeables.Token {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  findMovementPath(waypoints, options) {
+
+    // Normal behavior if movement automation is disabled or this actor is not a creature or cannot block
+    if ( game.settings.get("dnd5e", "disableMovementAutomation") || !this.document.actor?.system.isCreature
+      || this.document.actor.statuses.intersects(CONFIG.DND5E.neverBlockStatuses) ) {
+      return super.findMovementPath(waypoints, options);
+    }
+
+    // Get all grid spaces as waypoints so that running into a blocking token stops us immediately before it
+    waypoints = this.document.getCompleteMovementPath(waypoints);
+
+    // Drop all intermediate waypoints except those immediately before a blocking token
+    const grid = this.document.parent.grid;
+    waypoints = waypoints.filter((waypoint, i) => {
+      return !waypoint.intermediate || this.layer.isOccupiedGridSpaceBlocking(grid.getOffset(waypoints[i + 1]), this);
+    });
+    return super.findMovementPath(waypoints, options);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   _getDragConstrainOptions() {
     const unconstrainedMovement = game.user.isGM
       && ui.controls.controls.tokens.tools.unconstrainedMovement.active;
@@ -59,6 +81,11 @@ export default class Token5e extends foundry.canvas.placeables.Token {
     let { preview=false, ignoreTokens=false } = options; // Custom constrain option to ignore tokens
 
     ignoreTokens ||= game.settings.get("dnd5e", "disableMovementAutomation");
+    ignoreTokens ||= !this.actor?.system.isCreature;
+    ignoreTokens ||= this.actor?.statuses?.intersects(CONFIG.DND5E.neverBlockStatuses);
+
+    // Ignore tokens if path contains resize
+    ignoreTokens ||= waypoints.some(w => (w.width !== waypoints[0].width) || (w.height !== waypoints[0].height));
 
     if ( ignoreTokens ) return super.constrainMovementPath(waypoints, options);
 

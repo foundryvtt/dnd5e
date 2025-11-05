@@ -41,9 +41,9 @@ export default class ChatLog5e extends foundry.applications.sidebar.tabs.ChatLog
    * @param {IntersectionObserverEntry[]} entries  The observed elements that have entered or left the viewport.
    */
   #onCardIntersects(entries) {
+    const selector = ChatMessage5e.TRAY_TYPES.join(", ");
     for ( const { isIntersecting, target } of entries ) {
-      const tray = target.querySelector("damage-application, effect-application");
-      if ( tray ) tray.visible = isIntersecting;
+      target.querySelectorAll(selector).forEach(t => t.visible = isIntersecting);
     }
   }
 

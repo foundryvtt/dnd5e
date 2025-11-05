@@ -61,7 +61,9 @@ Hooks.once("init", function() {
   CONFIG.DND5E = DND5E;
   CONFIG.ActiveEffect.documentClass = documents.ActiveEffect5e;
   CONFIG.ActiveEffect.legacyTransferral = false;
+  CONFIG.Actor.collection = dataModels.collection.Actors5e;
   CONFIG.Actor.documentClass = documents.Actor5e;
+  CONFIG.Adventure.documentClass = documents.Adventure5e;
   CONFIG.Canvas.layers.tokens.layerClass = CONFIG.Token.layerClass = canvas.layers.TokenLayer5e;
   CONFIG.ChatMessage.documentClass = documents.ChatMessage5e;
   CONFIG.Combat.documentClass = documents.Combat5e;
@@ -143,7 +145,7 @@ Hooks.once("init", function() {
     makeDefault: true,
     label: "DND5E.SheetClass.NPC"
   });
-  DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.ActorSheet5eVehicle, {
+  DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.VehicleActorSheet, {
     types: ["vehicle"],
     makeDefault: true,
     label: "DND5E.SheetClass.Vehicle"
@@ -152,6 +154,11 @@ Hooks.once("init", function() {
     types: ["group"],
     makeDefault: true,
     label: "DND5E.SheetClass.Group"
+  });
+  DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.EncounterActorSheet, {
+    types: ["encounter"],
+    makeDefault: true,
+    label: "DND5E.SheetClass.Encounter"
   });
 
   DocumentSheetConfig.unregisterSheet(Item, "core", foundry.appv1.sheets.ItemSheet);
@@ -256,7 +263,7 @@ function _configureTrackableAttributes() {
       ...common.value,
       ...Object.keys(DND5E.skills).map(skill => `skills.${skill}.passive`),
       ...Object.keys(DND5E.senses).map(sense => `attributes.senses.${sense}`),
-      "attributes.spell.attack", "attributes.spell.dc"
+      "attributes.hp.temp", "attributes.spell.attack", "attributes.spell.dc"
     ]
   };
 
@@ -284,13 +291,14 @@ function _configureTrackableAttributes() {
 
 /**
  * Get all trackable spell slot attributes.
+ * @param {string} [suffix=""]  Suffix appended to the path.
  * @returns {Set<string>}
  * @internal
  */
-function _trackedSpellAttributes() {
+function _trackedSpellAttributes(suffix="") {
   return Object.entries(DND5E.spellcasting).reduce((acc, [k, v]) => {
     if ( v.slots ) Array.fromRange(Object.keys(DND5E.spellLevels).length - 1, 1).forEach(l => {
-      acc.add(`spells.${v.getSpellSlotKey(l)}`);
+      acc.add(`spells.${v.getSpellSlotKey(l)}${suffix}`);
     });
     return acc;
   }, new Set());
@@ -313,8 +321,8 @@ function _configureConsumableAttributes() {
     ...Object.keys(DND5E.currencies).map(denom => `currency.${denom}`),
     "details.xp.value",
     "resources.primary.value", "resources.secondary.value", "resources.tertiary.value",
-    "resources.legact.value", "resources.legres.value",
-    ..._trackedSpellAttributes()
+    "resources.legact.value", "resources.legres.value", "attributes.actions.value",
+    ..._trackedSpellAttributes(".value")
   ];
 }
 
@@ -365,24 +373,9 @@ function _configureStatusEffects() {
   const addEffect = (effects, {special, ...data}) => {
     data = foundry.utils.deepClone(data);
     data._id = utils.staticID(`dnd5e${data.id}`);
-    if ( data.icon ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `icon` property of status conditions has been deprecated in place of using `img`.",
-        { since: "DnD5e 5.0", until: "DnD5e 5.2" }
-      );
-      data.img = data.icon;
-      delete data.icon;
-    }
-    if ( data.label ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `label` property of status conditions has been deprecated in place of using `name`.",
-        { since: "DnD5e 5.0", until: "DnD5e 5.2" }
-      );
-      data.name = data.label;
-      delete data.label;
-    }
     effects.push(data);
     if ( special ) CONFIG.specialStatusEffects[special] = data.id;
+    if ( data.neverBlockMovement ) DND5E.neverBlockStatuses.add(data.id);
   };
   CONFIG.statusEffects = Object.entries(CONFIG.DND5E.statusEffects).reduce((arr, [id, data]) => {
     const original = CONFIG.statusEffects.find(s => s.id === id);
@@ -433,8 +426,6 @@ Hooks.once("setup", function() {
     }
   `;
   document.head.append(style);
-
-  _migrateInventoryMetadata();
 });
 
 /* --------------------------------------------- */
@@ -553,6 +544,7 @@ Hooks.once("ready", function() {
 /* -------------------------------------------- */
 
 Hooks.on("renderGamePause", (app, html) => {
+  if ( Hooks.events.renderGamePause.length > 1 ) return;
   html.classList.add("dnd5e2");
   const container = document.createElement("div");
   container.classList.add("flexcol");
@@ -581,6 +573,7 @@ Hooks.on("renderChatLog", (app, html, data) => {
 Hooks.on("renderChatPopout", (app, html, data) => documents.Item5e.chatListeners(html));
 
 Hooks.on("chatMessage", (app, message, data) => applications.Award.chatMessage(message));
+Hooks.on("createChatMessage", dataModels.chatMessage.RequestMessageData.onCreateMessage);
 Hooks.on("updateChatMessage", dataModels.chatMessage.RequestMessageData.onUpdateResultMessage);
 
 Hooks.on("renderActorDirectory", (app, html, data) => documents.Actor5e.onRenderActorDirectory(html));
@@ -593,6 +586,13 @@ Hooks.on("renderCompendiumDirectory", (app, html) => applications.CompendiumBrow
 Hooks.on("renderJournalEntryPageSheet", applications.journal.JournalEntrySheet5e.onRenderJournalPageSheet);
 
 Hooks.on("renderActiveEffectConfig", documents.ActiveEffect5e.onRenderActiveEffectConfig);
+
+Hooks.on("renderDocumentSheetConfig", (app, html) => {
+  const { document } = app.options;
+  if ( (document instanceof Actor) && document.system.isGroup ) {
+    applications.actor.MultiActorSheet.addDocumentSheetConfigOptions(app, html);
+  }
+});
 
 Hooks.on("targetToken", canvas.Token5e.onTargetToken);
 
@@ -608,35 +608,6 @@ Hooks.on("preCreateScene", (doc, createData, options, userId) => {
     });
   }
 });
-
-/* -------------------------------------------- */
-/*  Deprecations                                */
-/* -------------------------------------------- */
-
-/**
- * Migrate legacy inventory metadata.
- */
-function _migrateInventoryMetadata() {
-  Object.entries(CONFIG.Item.dataModels).forEach(([type, model]) => {
-    if ( ("inventorySection" in model) || (model.metadata.inventoryItem === false) ) return;
-    if ( !("inventoryItem" in model.metadata) && !("inventoryOrder" in model.metadata) ) return;
-    const { inventoryOrder=Infinity } = model.metadata;
-    foundry.utils.logCompatibilityWarning("ItemDataModel.metadata.inventoryItem and "
-      + "ItemDataModel.metadata.inventoryOrder are deprecated. Please define an inventorySection getter on the model "
-      + "instead.", { since: "dnd5e 5.0", until: "dnd5e 5.2" });
-    Object.defineProperty(model, "inventorySection", {
-      get() {
-        return {
-          id: type,
-          order: inventoryOrder,
-          label: `${CONFIG.Item.typeLabels[type]}Pl`,
-          groups: { type },
-          columns: ["price", "weight", "quantity", "charges", "controls"]
-        };
-      }
-    });
-  });
-}
 
 /* -------------------------------------------- */
 /*  Bundled Module Exports                      */

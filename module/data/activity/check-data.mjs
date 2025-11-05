@@ -5,16 +5,15 @@ import BaseActivityData from "./base-activity.mjs";
 const { SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
- * Data model for a check activity.
- *
- * @property {object} check
- * @property {string} check.ability          Ability used with the check.
- * @property {Set<string>} check.associated  Skills or tools that can contribute to the check.
- * @property {object} check.dc
- * @property {string} check.dc.calculation   Method or ability used to calculate the difficulty class of the check.
- * @property {string} check.dc.formula       Custom DC formula or flat value.
+ * @import { CheckActivityData } from "./_types.mjs";
  */
-export default class CheckActivityData extends BaseActivityData {
+
+/**
+ * Data model for a check activity.
+ * @extends {BaseActivityData<CheckActivityData>}
+ * @mixes CheckActivityData
+ */
+export default class BaseCheckActivityData extends BaseActivityData {
   /** @inheritDoc */
   static defineSchema() {
     return {
@@ -42,7 +41,7 @@ export default class CheckActivityData extends BaseActivityData {
   }
 
   /* -------------------------------------------- */
-  /*  Data Migrations                             */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @override */

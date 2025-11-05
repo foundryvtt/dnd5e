@@ -3,12 +3,12 @@
 
     {{!-- Consumable Type --}}
     {{ formField fields.type.fields.value value=source.type.value choices=CONFIG.consumableTypes labelAttr="label"
-                 label="DND5E.ItemConsumableType" localize=true }}
+                 label="DND5E.ItemConsumableType" localize=true rootId=partId }}
 
     {{!-- Consumable Sub-Type --}}
     {{#if itemSubtypes}}
     {{ formField fields.type.fields.subtype value=source.type.subtype choices=itemSubtypes blank="" localize=true
-                 label=(localize "DND5E.ItemConsumableSubtype" category=(lookup (lookup CONFIG.consumableTypes source.type.value) "label")) }}
+                 label=(localize "DND5E.ItemConsumableSubtype" category=(lookup (lookup CONFIG.consumableTypes source.type.value) "label")) rootId=partId }}
     {{/if}}
 
     {{!-- Consumable Properties --}}
@@ -42,7 +42,7 @@
             {{!-- Magical Bonus --}}
             {{#if (and properties.object.mgc (eq source.type.value "ammo"))}}
             {{ formField fields.magicalBonus value=source.magicalBonus step=1 placeholder="0" label="DND5E.Bonus"
-                         localize=true classes="label-top" }}
+                         localize=true classes="label-top" rootId=partId }}
             {{/if}}
         </div>
     </div>
@@ -52,8 +52,13 @@
 {{#if (eq source.type.value "ammo")}}
 <fieldset>
     <legend>{{ localize "DND5E.CONSUMABLE.FIELDS.damage.label" }}</legend>
-    {{ formField fields.damage.fields.replace value=source.damage.replace input=inputs.createCheckboxInput }}
+
+    {{!-- Replace Damage --}}
+    {{ formField fields.damage.fields.replace value=source.damage.replace input=inputs.createCheckboxInput
+                 rootId=partId }}
+
     {{> "dnd5e.field-damage" fields=fields.damage.fields.base.fields source=source.damage.base
         types=damageTypes prefix="system.damage.base." }}
+
 </fieldset>
 {{/if}}

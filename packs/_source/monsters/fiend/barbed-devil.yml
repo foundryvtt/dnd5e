@@ -880,6 +880,7 @@ items:
         conditions: ''
       properties:
         - fin
+        - mgc
       proficient: 1
       unidentified:
         description: ''
@@ -966,11 +967,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.350'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.2.0
       createdTime: null
-      modifiedTime: 1745175641118
+      modifiedTime: 1760378654655
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!sLdpiuaZF8lujJQy.pya9jchjLkwMedEr'
@@ -1043,7 +1044,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties: []
+      properties:
+        - mgc
       proficient: 1
       unidentified:
         description: ''
@@ -1120,6 +1122,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: tail
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -1129,11 +1132,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.350'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.2.0
       createdTime: null
-      modifiedTime: 1745107553753
+      modifiedTime: 1760378658660
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!sLdpiuaZF8lujJQy.mlWql992zSZ6hvl6'

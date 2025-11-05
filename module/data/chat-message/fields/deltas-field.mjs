@@ -4,18 +4,7 @@ import MappingField from "../../fields/mapping-field.mjs";
 const { ArrayField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
- * @typedef ActorDeltasData
- * @property {IndividualDeltaData[]} actor                 Changes for the actor.
- * @property {Record<string, IndividualDeltaData[]>} item  Changes for each item grouped by ID.
- */
-
-/**
- * @typedef DeltaDisplayContext
- * @property {string} type              Type of document to which the delta applies.
- * @property {string} delta             The formatted numeric change.
- * @property {Actor5e|Item5e} document  The document to which the delta applies.
- * @property {string} label             The formatted label for the attribute.
- * @property {Roll[]} [rolls]           Any rolls associated with the delta.
+ * @import { ActorDeltasData, DeltaDisplayContext, IndividualDeltaData } from "./_types.mjs";
  */
 
 /**
@@ -68,12 +57,6 @@ export class ActorDeltasField extends SchemaField {
     ];
   }
 }
-
-/**
- * @typedef IndividualDeltaData
- * @property {number} delta    The change in the specified field.
- * @property {string} keyPath  Path to the changed field on the document.
- */
 
 /**
  * A field that stores a delta for an individual property on an actor or item.

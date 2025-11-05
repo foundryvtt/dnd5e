@@ -51,6 +51,19 @@ export default class JournalEntrySheet5e extends foundry.applications.sheets.jou
   }
 
   /* -------------------------------------------- */
+  /*  Event Listeners & Handlers                  */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _attachFrameListeners() {
+    super._attachFrameListeners();
+    this.element.addEventListener("pointerdown", event => {
+      const tooltipActive = event.target.ownerDocument.getElementById("tooltip")?.classList.contains("active");
+      if ( (event.button === 1) && tooltipActive ) event.preventDefault();
+    });
+  }
+
+  /* -------------------------------------------- */
   /*  Helpers                                     */
   /* -------------------------------------------- */
 

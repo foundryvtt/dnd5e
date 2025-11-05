@@ -1,0 +1,111 @@
+_id: mmArcaneBurst000
+name: Arcane Burst
+type: weapon
+system:
+  type:
+    value: natural
+    subtype: ''
+  activities:
+    YeB7cBHXeaBqxxK2:
+      type: attack
+      _id: YeB7cBHXeaBqxxK2
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ''
+          classification: ''
+        ability: int
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts: []
+      name: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: <p>[[/attack extended]]. [[/damage average extended]].</p>
+    chat: ''
+  identifier: arcane-burst
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+  mastery: ''
+  range:
+    units: ft
+    reach: 5
+    value: 120
+  damage:
+    base:
+      denomination: 10
+      bonus: ''
+      number: 2
+      types:
+        - force
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/unholy/hands-cloud-light-pink.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1737515542020
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 2400000
+ownership:
+  default: 0
+_key: '!items!mmArcaneBurst000'
