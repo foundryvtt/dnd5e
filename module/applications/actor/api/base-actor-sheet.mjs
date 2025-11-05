@@ -761,7 +761,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @protected
    */
   _assignItemCategories(item) {
-    if ( item.riderOrigin?.disabled ) return [];
+    if ( item.dependentOrigin?.active === false ) return [];
     if ( item.type === "container" ) return new Set(["containers", "inventory"]);
     if ( item.type === "spell" ) return new Set(["spells"]);
     if ( "inventorySection" in item.system.constructor ) return new Set(["inventory"]);

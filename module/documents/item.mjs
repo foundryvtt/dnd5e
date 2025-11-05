@@ -177,6 +177,16 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /**
+   * Active effect that granted this item as a rider.
+   * @type {ActiveEffect5e|null}
+   */
+  get dependentOrigin() {
+    return fromUuidSync(this.flags.dnd5e?.dependentOn, { strict: false }) ?? null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Does this item support advancement and have advancements defined?
    * @type {boolean}
    */
@@ -326,16 +336,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   get requiresConcentration() {
     if ( this.system.validProperties.has("concentration") && this.system.properties.has("concentration") ) return true;
     return this.system.activities?.contents[0]?.duration.concentration ?? false;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Active effect that granted this item as a rider.
-   * @type {ActiveEffect5e|null}
-   */
-  get riderOrigin() {
-    return fromUuidSync(this.flags.dnd5e?.riderOrigin, { strict: false }) ?? null;
   }
 
   /* -------------------------------------------- */

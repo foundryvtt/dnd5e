@@ -51,6 +51,19 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "DND5E.ACTIVEEFFECT"];
 
   /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Another effect that granted this effect as a rider.
+   * @type {ActiveEffect5e|null}
+   */
+  get dependentOrigin() {
+    if ( !(this.parent instanceof Item) ) return null;
+    return this.parent.effects.get(this.flags.dnd5e?.dependentOn) ?? null;
+  }
+
+  /* -------------------------------------------- */
 
   /**
    * Is this effect an enchantment on an item that accepts enchantment?
@@ -85,7 +98,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     if ( this.type === "enchantment" ) return false;
     if ( this.parent instanceof dnd5e.documents.Item5e ) {
       if ( this.parent.areEffectsSuppressed ) return true;
-      if ( this.riderOrigin?.disabled ) return true;
+      if ( this.dependentOrigin?.active === false ) return true;
     }
     return false;
   }
@@ -95,17 +108,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /** @inheritDoc */
   get isTemporary() {
     return super.isTemporary && !this.isConcealed;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Another effect that granted this effect as a rider.
-   * @type {ActiveEffect5e|null}
-   */
-  get riderOrigin() {
-    if (!(this.parent instanceof Item)) return null;
-    return this.parent.effects.get(this.flags.dnd5e?.riderOrigin) ?? null;
   }
 
   /* -------------------------------------------- */
@@ -449,7 +451,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       if ( !activityData ) continue;
       activityData._id = foundry.utils.randomID();
       foundry.utils.setProperty(activityData, "flags.dnd5e.dependentOn", this.id);
-      foundry.utils.setProperty(activityData, "flags.dnd5e.riderOrigin", this.id);
       riderActivities[activityData._id] = activityData;
     }
     let createdActivities = [];
@@ -469,7 +470,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
         delete effectData.flags?.dnd5e?.rider;
         effectData.origin = this.origin;
       }
-      foundry.utils.setProperty(effectData, "flags.dnd5e.riderOrigin", this.id);
       return effectData;
     }));
     riderEffects = riderEffects.filter(_ => _)
@@ -485,7 +485,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
             const itemData = item.clone({}, { keepId: true }).toObject();
             foundry.utils.setProperty(itemData, "flags.dnd5e.dependentOn", this.uuid);
             foundry.utils.setProperty(itemData, "flags.dnd5e.enchantment.origin", this.uuid);
-            foundry.utils.setProperty(itemData, "flags.dnd5e.riderOrigin", this.uuid);
             return itemData;
           }
         }

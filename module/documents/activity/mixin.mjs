@@ -92,7 +92,7 @@ export default function ActivityMixin(Base) {
      */
     get canConfigure() {
       if ( CONFIG.DND5E.activityTypes[this.type]?.configurable === false ) return false;
-      if ( this.riderOrigin?.disabled ) return false;
+      if ( this.dependentOrigin?.active === false ) return false;
       return true;
     }
 
@@ -103,7 +103,7 @@ export default function ActivityMixin(Base) {
      * @type {boolean}
      */
     get canUse() {
-      if ( this.riderOrigin?.disabled ) return false;
+      if ( this.dependentOrigin?.active === false ) return false;
       return !this.item.getFlag("dnd5e", "riders.activity")?.includes(this.id);
     }
 
@@ -115,6 +115,16 @@ export default function ActivityMixin(Base) {
      */
     get damageFlavor() {
       return game.i18n.localize("DND5E.DamageRoll");
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Active effect that granted this activity as a rider.
+     * @type {ActiveEffect5e|null}
+     */
+    get dependentOrigin() {
+      return this.item.effects.get(this.flags?.dnd5e?.dependentOn) ?? null;
     }
 
     /* -------------------------------------------- */
@@ -139,16 +149,6 @@ export default function ActivityMixin(Base) {
      */
     get relativeUUID() {
       return `.Item.${this.item.id}.Activity.${this.id}`;
-    }
-
-    /* -------------------------------------------- */
-
-    /**
-     * Active effect that granted this activity as a rider.
-     * @type {ActiveEffect5e|null}
-     */
-    get riderOrigin() {
-      return this.item.effects.get(this.flags?.dnd5e?.riderOrigin) ?? null;
     }
 
     /* -------------------------------------------- */
