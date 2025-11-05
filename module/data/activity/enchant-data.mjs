@@ -21,10 +21,6 @@ export default class BaseEnchantActivityData extends BaseActivityData {
     return {
       ...super.defineSchema(),
       effects: new ArrayField(new AppliedEffectField({
-        level: new SchemaField({
-          min: new NumberField({ min: 0, integer: true }),
-          max: new NumberField({ min: 0, integer: true })
-        }),
         riders: new SchemaField({
           activity: new SetField(new DocumentIdField()),
           effect: new SetField(new DocumentIdField()),
@@ -77,9 +73,7 @@ export default class BaseEnchantActivityData extends BaseActivityData {
    * @type {EnchantEffectApplicationData[]}
    */
   get availableEnchantments() {
-    const keyPath = (this.item.type === "spell") && (this.item.system.level > 0) ? "item.level"
-      : this.enchant.identifier ? `classes.${this.enchant.identifier}.levels` : "details.level";
-    const level = foundry.utils.getProperty(this.getRollData(), keyPath) ?? 0;
+    const level = this.relevantLevel;
     return this.effects
       .filter(e => e.effect && ((e.level.min ?? -Infinity) <= level) && (level <= (e.level.max ?? Infinity)));
   }

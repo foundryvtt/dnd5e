@@ -278,6 +278,18 @@
       }
     },
     "effects": {
+      "element": {
+        "level": {
+          "label": "Level Limit",
+          "hint": "Range of levels required to apply this effect.",
+          "max": {
+            "label": "Maximum Level"
+          },
+          "min": {
+            "label": "Minimum Level"
+          }
+        }
+      },
       "label": "Applied Effects"
     },
     "img": {
