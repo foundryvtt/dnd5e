@@ -45,6 +45,7 @@ export default class BaseCastActivityData extends BaseActivityData {
       this.img = this._source.img || spell.img || this.img;
     }
 
+    this.visibility.requireMagic = true;
     super.prepareFinalData(rollData);
 
     for ( const field of ["activation", "duration", "range", "target"] ) {

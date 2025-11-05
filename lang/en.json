@@ -285,6 +285,35 @@
     },
     "name": {
       "label": "Name"
+    },
+    "visibility": {
+      "identifier": {
+        "hint": "The identifier of the class that level limits apply to. If left blank, the character level is used.",
+        "label": "Class Identifier"
+      },
+      "label": "Visibility",
+      "level": {
+        "hint": "Range of levels required to use this activity.",
+        "label": "Level Limit",
+        "max": {
+          "label": "Maximum Level"
+        },
+        "min": {
+          "label": "Minimum Level"
+        }
+      },
+      "requireAttunement": {
+        "hint": "Activity will not be usable if item requires attunement and isn't attuned.",
+        "label": "Require Attunement"
+      },
+      "requireIdentification": {
+        "hint": "Activity will not be usable if item isn't identified.",
+        "label": "Require Identification"
+      },
+      "requireMagic": {
+        "hint": "Activity will not be usable if magic isn't available.",
+        "label": "Require Magic"
+      }
     }
   },
   "SECTIONS": {

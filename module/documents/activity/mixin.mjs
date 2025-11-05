@@ -92,6 +92,7 @@ export default function ActivityMixin(Base) {
      */
     get canConfigure() {
       if ( CONFIG.DND5E.activityTypes[this.type]?.configurable === false ) return false;
+      if ( this.visibility?.requireIdentification && !this.item.system.identified && !game.user.isGM ) return false;
       if ( this.dependentOrigin?.active === false ) return false;
       return true;
     }
@@ -103,8 +104,16 @@ export default function ActivityMixin(Base) {
      * @type {boolean}
      */
     get canUse() {
+      if ( this.isRider ) return false;
       if ( this.dependentOrigin?.active === false ) return false;
-      return !this.item.getFlag("dnd5e", "riders.activity")?.includes(this.id);
+      if ( !this.item.getFlag("dnd5e", "riders.activity")?.includes(this.id) ) return false;
+      if ( this.visibility?.requireAttunement && !this.item.system.attuned ) return false;
+      if ( this.visibility?.requireMagic && !this.item.system.magicAvailable ) return false;
+      if ( this.visibility?.requireIdentification && !this.item.system.identified ) return false;
+      const level = this.relevantLevel;
+      if ( ((this.visibility?.level?.min ?? -Infinity) > level)
+        || ((this.visibility?.level?.max ?? Infinity) < level) ) return false;
+      return true;
     }
 
     /* -------------------------------------------- */

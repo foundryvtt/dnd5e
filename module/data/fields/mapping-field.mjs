@@ -129,4 +129,17 @@ export default class MappingField extends foundry.data.fields.ObjectField {
     path.shift();
     return this.model._getField(path);
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate this field's candidate source data.
+   * @param {object} sourceData   Candidate source data of the root model
+   * @param {any} fieldData       The value of this field within the source data
+   */
+  migrateSource(sourceData, fieldData) {
+    if ( !(this.model.migrateSource instanceof Function) ) return;
+    if ( foundry.utils.getType(fieldData) !== "Object" ) return;
+    for ( const entry of Object.values(fieldData) ) this.model.migrateSource(sourceData, entry);
+  }
 }

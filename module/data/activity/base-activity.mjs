@@ -1,6 +1,7 @@
 import simplifyRollFormula from "../../dice/simplify-roll-formula.mjs";
 import { safePropertyExists, staticID } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
+import IdentifierField from "../fields/identifier-field.mjs";
 import ActivationField from "../shared/activation-field.mjs";
 import DurationField from "../shared/duration-field.mjs";
 import RangeField from "../shared/range-field.mjs";
@@ -11,7 +12,7 @@ import ConsumptionTargetsField from "./fields/consumption-targets-field.mjs";
 
 const {
   ArrayField, BooleanField, DocumentFlagsField, DocumentIdField,
-  FilePathField, IntegerSortField, SchemaField, StringField
+  FilePathField, IntegerSortField, NumberField, SchemaField, StringField
 } = foundry.data.fields;
 
 /**
@@ -75,7 +76,17 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         override: new BooleanField(),
         prompt: new BooleanField({ initial: true })
       }),
-      uses: new UsesField()
+      uses: new UsesField(),
+      visibility: new SchemaField({
+        identifier: new IdentifierField(),
+        level: new SchemaField({
+          min: new NumberField({ integer: true, min: 0 }),
+          max: new NumberField({ integer: true, min: 0 })
+        }),
+        requireAttunement: new BooleanField(),
+        requireIdentification: new BooleanField(),
+        requireMagic: new BooleanField()
+      })
     };
   }
 
@@ -181,6 +192,19 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    */
   get isSpell() {
     return this.item.type === "spell";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine the level used to determine visibility limits, based on the spell level for spells or either the
+   * character or class level, depending on whether `classIdentifier` is set.
+   * @type {number}
+   */
+  get relevantLevel() {
+    const keyPath = (this.item.type === "spell") && (this.item.system.level > 0) ? "item.level"
+      : this.visibility?.identifier ? `classes.${this.visibility.identifier}.levels` : "details.level";
+    return foundry.utils.getProperty(this.getRollData(), keyPath) ?? 0;
   }
 
   /* -------------------------------------------- */
@@ -557,6 +581,18 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       enumerable: false,
       writable: false
     });
+
+    if ( this.visibility && !this.isRider ) {
+      if ( !this.item.system.properties?.has("mgc") && this.item.system.validProperties.has("mgc") ) {
+        this.visibility.requireAttunement = false;
+        this.visibility.requireMagic = false;
+      } else if ( (this.item.system.attunement === "required") && this.visibility.requireMagic ) {
+        this.visibility.requireAttunement = true;
+      } else if ( !this.item.system.canAttune ) {
+        this.visibility.requireAttunement = false;
+      }
+      if ( !("identified" in this.item.system) ) this.visibility.requireIdentification = false;
+    }
 
     // TODO: Temporarily add parent to consumption targets & damage parts added by enchantment
     // Can be removed once https://github.com/foundryvtt/foundryvtt/issues/12528 is implemented

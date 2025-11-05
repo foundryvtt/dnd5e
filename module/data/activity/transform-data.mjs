@@ -1,5 +1,4 @@
 import FormulaField from "../fields/formula-field.mjs";
-import IdentifierField from "../fields/identifier-field.mjs";
 import TransformationSetting from "../settings/transformation-setting.mjs";
 import BaseActivityData from "./base-activity.mjs";
 
@@ -38,7 +37,6 @@ export default class BaseTransformActivityData extends BaseActivityData {
       settings: new EmbeddedDataField(TransformationSetting, { nullable: true, initial: null }),
       transform: new SchemaField({
         customize: new BooleanField(),
-        identifier: new IdentifierField(),
         mode: new StringField({ initial: "cr" }),
         preset: new StringField()
       })
@@ -66,16 +64,17 @@ export default class BaseTransformActivityData extends BaseActivityData {
   }
 
   /* -------------------------------------------- */
+  /*  Data Migrations                             */
+  /* -------------------------------------------- */
 
-  /**
-   * Determine the level used to determine profile limits, based on the spell level for spells or either the
-   * character or class level, depending on whether `classIdentifier` is set.
-   * @type {number}
-   */
-  get relevantLevel() {
-    const keyPath = (this.item.type === "spell") && (this.item.system.level > 0) ? "item.level"
-      : this.transform.identifier ? `classes.${this.transform.identifier}.levels` : "details.level";
-    return foundry.utils.getProperty(this.getRollData(), keyPath) ?? 0;
+  /** @inheritDoc */
+  static migrateData(source) {
+    super.migrateData(source);
+    if ( source.transform?.identifier ) {
+      foundry.utils.setProperty(source, "visibility.identifier", source.transform.identifier);
+      delete source.transform.identifier;
+    }
+    return source;
   }
 
   /* -------------------------------------------- */

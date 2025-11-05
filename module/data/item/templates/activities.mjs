@@ -14,6 +14,10 @@ import UsesField from "../../shared/uses-field.mjs";
  */
 export default class ActivitiesTemplate extends SystemDataModel {
 
+  /* -------------------------------------------- */
+  /*  Model Configuration                         */
+  /* -------------------------------------------- */
+
   /** @override */
   static LOCALIZATION_PREFIXES = ["DND5E.USES"];
 
