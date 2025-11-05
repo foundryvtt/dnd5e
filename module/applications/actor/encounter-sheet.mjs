@@ -134,8 +134,8 @@ export default class EncounterActorSheet extends MultiActorSheet {
         game.i18n.format("DND5E.ExperiencePoints.Format", { value: formatter.format(system.details.xp.value) })
       ].filterJoin(" • ");
       member.underlay = `var(--underlay-npc-${system.details.type.value})`;
-      member.showFormula = context.editable || (quantity.formula && !quantity.value);
-      member.showQuantity = context.editable || quantity.value || !quantity.formula;
+      member.showFormula = context.editable || (quantity.formula && (quantity.value === null));
+      member.showQuantity = context.editable || (quantity.value !== null) || !quantity.formula;
       member.showRoll = !context.editable && quantity.formula;
       await this._prepareMemberPortrait(actor, member);
       return member;
@@ -305,15 +305,7 @@ export default class EncounterActorSheet extends MultiActorSheet {
   static async #onRollQuantity(event, target) {
     const index = Number(target.closest("[data-index]")?.dataset.index);
     if ( Number.isNaN(index) ) return;
-    const members = this.actor.system.toObject().members;
-    const member = members[index];
-    if ( !member?.quantity?.formula ) return;
-    const roll = new Roll(member.quantity.formula);
-    await roll.evaluate();
-    if ( roll.total ) {
-      member.quantity.value = roll.total;
-      this.actor.update({ "system.members": members });
-    }
+    this.actor.system.rollQuantities({ index });
   }
 
   /* -------------------------------------------- */
