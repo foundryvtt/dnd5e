@@ -288,7 +288,7 @@
     },
     "visibility": {
       "identifier": {
-        "hint": "Identifier used to determine whether the character level or a specific class level should be used for visibility level limits.",
+        "hint": "The identifier of the class that level limits apply to. If left blank, the character level is used.",
         "label": "Class Identifier"
       },
       "label": "Visibility",

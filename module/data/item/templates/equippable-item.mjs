@@ -50,7 +50,7 @@ export default class EquippableItemTemplate extends SystemDataModel {
    * @type {boolean}
    */
   get canAttune() {
-    return ["required", "optional"].includes(this.attunement);
+    return (this.attunement === "required") || (this.attunement === "optional");
   }
 
   /* -------------------------------------------- */

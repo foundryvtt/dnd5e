@@ -350,7 +350,7 @@ export default class ActivitySheet extends PseudoDocumentSheet {
       // Only show "Require Attunement" if item has an attunement option
       ["required", "optional"].includes(itemSystem.attunement) || isRider ? addField("requireAttunement",
         // If item requires attunement, then the "Require Attunement" option is locked to the "Require Magic" option
-        !isRider && itemSystem.attunement === "required"
+        !isRider && (itemSystem.attunement === "required")
           ? context.source.visibility.requireMagic : undefined
       ) : null,
       // Only show "Require Magic" if item is magical or doesn't support the magical property

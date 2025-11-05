@@ -75,8 +75,10 @@ export default class CastSheet extends ActivitySheet {
       input: context.inputs.createCheckboxInput
     }];
     if ( context.spell ) context.placeholder = { name: context.spell.name, img: context.spell.img };
+    const requireAttunementField = context.visibilityFields.find(f => f.field.name === "requireAttunement");
+    if ( requireAttunementField?.disabled ) requireAttunementField.value = true;
     const requireMagicField = context.visibilityFields.find(f => f.field.name === "requireMagic");
-    if ( requireMagicField ) requireMagicField.disabled = true;
+    if ( requireMagicField ) Object.assign(requireMagicField, { disabled: true, value: true });
     return context;
   }
 
