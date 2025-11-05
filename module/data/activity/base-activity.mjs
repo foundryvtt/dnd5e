@@ -183,7 +183,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @type {boolean}
    */
   get isRider() {
-    return this.item.getFlag("dnd5e", "riders.activity")?.includes(this.id);
+    return !!this.item.getFlag("dnd5e", "riders.activity")?.includes(this.id);
   }
 
   /* -------------------------------------------- */
