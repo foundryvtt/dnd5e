@@ -317,8 +317,8 @@
  * @typedef LimitedUsePeriodConfiguration
  * @property {string} label                Localized label.
  * @property {string}  abbreviation        Shorthand form of the label.
- * @property {"combat"|"special"} [group]  Grouping if outside the normal "time" group.
  * @property {boolean} [formula]           Whether this limited use period restores charges via formula.
+ * @property {"combat"|"special"} [type]   Grouping if outside the normal "time" group.
  */
 
 /* -------------------------------------------- */
