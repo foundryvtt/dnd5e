@@ -357,11 +357,13 @@ export default class BasicRoll extends Roll {
    * @returns {BasicRoll}
    */
   invert() {
-    // Add or remove "0 +" from the start of formulas that don't being with a numeric term
+    // Add "0 +" to the start of formulas that don't begin with a numeric term
     if ( !(this.terms[0] instanceof foundry.dice.terms.NumericTerm) ) this.terms.unshift(
       new foundry.dice.terms.NumericTerm({ number: 0 }),
       new foundry.dice.terms.OperatorTerm({ operator: "+" })
     );
+
+    // Otherwise remove "0 -" from formulas that start with that
     else if ( (this.terms[0]?.number === 0) && (this.terms[1]?.operator === "-") ) this.terms.splice(0, 2);
 
     // Starting numeric terms should be directly inverted
