@@ -622,6 +622,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const damages = this.labels.damages = [];
     if ( !this.system.activities?.size ) return;
     const existingDamageLabels = new Set();
+    let firstDamage = true;
     for ( const activity of this.system.activities ) {
       if ( !("activation" in activity) ) continue;
       const activationLabels = activity.activationLabels;
@@ -637,8 +638,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       for ( const damage of activity.labels?.damage ?? [] ) {
         if ( existingDamageLabels.has(damage.label) ) continue;
         existingDamageLabels.add(damage.label);
-        damages.push(damage);
+        damages.push({ ...damage, firstDamage });
       }
+      if ( activity.labels?.damage?.length ) firstDamage = false;
     }
     if ( activations.length ) {
       Object.assign(this.labels, activations[0]);

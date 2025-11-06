@@ -543,7 +543,8 @@ export default class WeaponData extends ItemDataModel.mixin(
     }];
     if ( this.parent.labels.damages?.length ) {
       const config = { ...CONFIG.DND5E.damageTypes, ...CONFIG.DND5E.healingTypes };
-      context.info.push({ value: this.parent.labels.damages.reduce((str, { formula, damageType }) => {
+      context.info.push({ value: this.parent.labels.damages.reduce((str, { formula, damageType, firstDamage }) => {
+        if ( !firstDamage ) return str;
         const type = config[damageType];
         return `${str}
           <span class="formula">${formula}</span>
