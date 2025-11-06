@@ -1628,7 +1628,7 @@
     },
     "ItemUses": {
       "Label": "Item Uses",
-      "NonEmbeddedHint": "UUID of compendium item that will be linked automatically to matching item on sheet.",
+      "NonEmbeddedHint": "Item identifier or UUID of item in compendium that will be linked automatically to matching item on sheet.",
       "PromptDecrease": "Consume Item Use?",
       "PromptIncrease": "Restore Item Use?",
       "PromptHintDecrease": "Spend <strong>{cost}</strong> {use} of {item} ({available} {availableUse} available).",
@@ -1637,7 +1637,7 @@
     },
     "Material": {
       "Label": "Material",
-      "NonEmbeddedHint": "UUID of compendium item that will be linked automatically to matching item on sheet.",
+      "NonEmbeddedHint": "Item identifier or UUID of item in compendium that will be linked automatically to matching item on sheet.",
       "PromptDecrease": "Consume Material?",
       "PromptIncrease": "Restore Material?",
       "PromptHintDecrease": "Reduce quantity of {item} by <strong>{cost}</strong> ({quantity} remaining).",
