@@ -106,7 +106,6 @@ export default function ActivityMixin(Base) {
     get canUse() {
       if ( this.isRider ) return false;
       if ( this.dependentOrigin?.active === false ) return false;
-      if ( !this.item.getFlag("dnd5e", "riders.activity")?.includes(this.id) ) return false;
       if ( this.visibility?.requireAttunement && !this.item.system.attuned ) return false;
       if ( this.visibility?.requireMagic && !this.item.system.magicAvailable ) return false;
       if ( this.visibility?.requireIdentification && !this.item.system.identified ) return false;
