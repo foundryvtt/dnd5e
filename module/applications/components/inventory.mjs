@@ -215,8 +215,7 @@ export default class InventoryElement extends HTMLElement {
   /** @override */
   connectedCallback() {
     if ( this.#app ) return;
-    this.#app = foundry.applications.instances.get(this.closest(".application")?.id)
-      ?? ui.windows[this.closest(".app")?.dataset.appid]; // TODO: Remove when V1 sheets are gone
+    this.#app = foundry.applications.instances.get(this.closest(".application")?.id);
 
     if ( !this.canUse ) {
       for ( const element of this.querySelectorAll('[data-action="use"]') ) {

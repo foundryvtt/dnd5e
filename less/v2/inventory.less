@@ -160,8 +160,6 @@
           font-size: var(--font-size-13);
         }
 
-        &.activity-name .title { font-size: var(--font-size-12); }
-
         .name { flex: 1; }
 
         .tags {
@@ -210,23 +208,13 @@
 
       /* Item Image */
       .item-image {
+        --icon-size: 32px;
+        --icon-fill: var(--activity-icon-color);
         width: 32px;
         height: 32px;
         object-fit: cover;
         min-width: 32px;
         min-height: 32px;
-
-        &.activity-image {
-          --icon-size: 24px;
-          --gold-icon-size: 24px;
-          --icon-fill: var(--activity-icon-color);
-          width: 24px;
-          height: 24px;
-          min-width: 24px;
-          min-height: 24px;
-          border-width: 1px;
-          border-radius: 3px;
-        }
       }
 
       /* Item Weight & Price */
@@ -458,11 +446,6 @@
       &:last-child { border: none; }
     }
 
-    .effect {
-      display: flex;
-      align-items: stretch;
-    }
-
     .activities .activity-row {
       position: relative;
       border-top: var(--activity-row-border);
@@ -478,6 +461,20 @@
         font-weight: bold;
         color: var(--activity-row-indent-color);
       }
+
+      .item-image {
+        --icon-size: 24px;
+        --gold-icon-size: 24px;
+        --icon-fill: var(--activity-icon-color);
+        width: 24px;
+        height: 24px;
+        min-width: 24px;
+        min-height: 24px;
+        border-width: 1px;
+        border-radius: 3px;
+      }
+
+      .item-name .title { font-size: var(--font-size-12); }
     }
   }
 

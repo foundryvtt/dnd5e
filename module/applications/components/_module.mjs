@@ -1,3 +1,4 @@
+import ActivitiesElement from "./activities.mjs";
 import AdoptedStyleSheetMixin from "./adopted-stylesheet-mixin.mjs";
 import CheckboxElement from "./checkbox.mjs";
 import CopyableTextElement from "./copyable-text.mjs";
@@ -15,6 +16,7 @@ import SlideToggleElement from "./slide-toggle.mjs";
 
 window.customElements.define("copyable-text", CopyableTextElement);
 window.customElements.define("damage-application", DamageApplicationElement);
+window.customElements.define("dnd5e-activities", ActivitiesElement);
 window.customElements.define("dnd5e-checkbox", CheckboxElement);
 window.customElements.define("dnd5e-effects", EffectsElement);
 window.customElements.define("dnd5e-icon", IconElement);
@@ -28,7 +30,7 @@ window.customElements.define("proficiency-cycle", ProficiencyCycleElement);
 window.customElements.define("slide-toggle", SlideToggleElement);
 
 export {
-  AdoptedStyleSheetMixin, CopyableTextElement, CheckboxElement, DamageApplicationElement, EffectApplicationElement,
-  EffectsElement, EnchantmentApplicationElement, FiligreeBoxElement, FilterStateElement, IconElement,
-  InventoryElement, ItemListControlsElement, ProficiencyCycleElement, SlideToggleElement
+  ActivitiesElement, AdoptedStyleSheetMixin, CopyableTextElement, CheckboxElement, DamageApplicationElement,
+  EffectApplicationElement, EffectsElement, EnchantmentApplicationElement, FiligreeBoxElement, FilterStateElement,
+  IconElement, InventoryElement, ItemListControlsElement, ProficiencyCycleElement, SlideToggleElement
 };

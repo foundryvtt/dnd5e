@@ -50,11 +50,7 @@
     {{!-- Expand/Collapse --}}
     <button type="button" class="unbutton config-button item-control item-action always-interactive"
             data-toggle-description data-action="toggleExpand" aria-label="{{ localize "DND5E.ToggleDescription" }}">
-        {{#if ctx.isExpanded}}
-        <i class="fa-solid fa-compress" inert></i>
-        {{else}}
-        <i class="fa-solid fa-expand" inert></i>
-        {{/if}}
+        <i class="fa-solid fa-{{ ifThen ctx.isExpanded "compress" "expand" }}" inert></i>
     </button>
 
     {{!-- Context Menu --}}

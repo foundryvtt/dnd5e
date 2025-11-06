@@ -1,0 +1,88 @@
+<{{ elements.activities }} class="activities-element">
+
+    {{!-- Activities List --}}
+    <section class="items-list activities-list" data-item-list="activities">
+
+        {{!-- Sections / Categories --}}
+        <div class="items-section card">
+
+            {{!-- Section Header --}}
+            <div class="items-header header">
+                <h3 class="item-name activity-name">{{ localize "DND5E.ACTIVITY.Title.other" }}</h3>
+                <div class="item-header item-controls activity-controls"></div>
+            </div>
+
+            {{!-- Section Contents --}}
+            <ol class="item-list unlist">
+                {{#each activities}}
+
+                {{!-- Activities --}}
+                <li class="item activity" data-activity-id="{{ id }}" data-uuid="{{ uuid }}">
+
+                    {{!-- Primary Activity --}}
+                    <div class="item-row draggable">
+                        {{> ".activity" }}
+                    </div>
+
+                    {{!-- Rider Activities --}}
+                    <div class="item-description collapsible-content">
+                        <div class="wrapper">
+
+                            <ol class="activities riders unlist">
+                                {{#each riders}}
+                                <li class="activity-row item-row" data-activity-id="{{ id }}" data-uuid="{{ uuid }}"
+                                    data-action="showDocument">
+                                    {{> ".activity" }}
+                                </li>
+                                {{/each}}
+                            </ol>
+
+                        </div>
+                    </div>
+
+                </li>
+
+                {{/each}}
+            </ol>
+
+        </div>
+
+    </section>
+
+</{{ elements.activities }}>
+
+{{#*inline ".activity"}}
+
+{{!-- Name & Icon --}}
+<div class="item-name activity-name">
+
+    {{#if img.svg}}<dnd5e-icon src="{{ img.src }}" class="item-image"></dnd5e-icon>
+    {{else}}<img src="{{ img.src }}" class="item-image gold-icon" alt="{{ name }}">{{/if}}
+
+    <div class="name name-stacked">
+        <span class="title">{{ name }}</span>
+        {{#if subtitle}}<span class="subtitle">{{ subtitle }}</span>{{/if}}
+    </div>
+
+</div>
+
+{{!-- Controls --}}
+<div class="item-detail item-controls activity-controls always-visible">
+
+    {{#if @root.editable}}
+    {{!-- Delete --}}
+    <button type="button" class="unbutton control-button" data-action="deleteDocument"
+            data-tooltip aria-label="{{ localize "DND5E.ACTIVITY.Action.Delete" }}">
+        <i class="fas fa-trash" inert></i>
+    </button>
+    {{/if}}
+
+    {{!-- Context Menu --}}
+    <button type="button" class="unbutton config-button item-control always-interactive" data-context-menu
+            aria-label="{{ localize "DND5E.AdditionalControls" }}">
+        <i class="fa-solid fa-ellipsis-vertical" inert></i>
+    </button>
+
+</div>
+
+{{/inline}}

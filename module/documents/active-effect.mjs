@@ -472,12 +472,11 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       }
       return effectData;
     }));
-    riderEffects = riderEffects.filter(_ => _)
+    riderEffects = riderEffects.filter(_ => _);
     riderEffects.forEach(e => foundry.utils.setProperty(e, "flags.dnd5e.dependentOn", this.id));
-    const createdEffects = await this.parent.createEmbeddedDocuments("ActiveEffect", riderEffects, { keepId: true });
+    await this.parent.createEmbeddedDocuments("ActiveEffect", riderEffects, { keepId: true });
 
     // Create Items
-    let createdItems = [];
     if ( this.parent.isEmbedded ) {
       const riderItems = await Item5e.createWithContents(
         (await Promise.all(profile.riders.item.map(uuid => fromUuid(uuid)))).filter(_ => _), {
@@ -489,7 +488,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
           }
         }
       );
-      createdItems = await this.parent.actor.createEmbeddedDocuments("Item", riderItems, { keepId: true });
+      await this.parent.actor.createEmbeddedDocuments("Item", riderItems, { keepId: true });
     }
   }
 

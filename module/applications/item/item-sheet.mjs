@@ -35,6 +35,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     classes: ["item"],
     editingDescriptionTarget: null,
     elements: {
+      activities: "dnd5e-activities",
       effects: "dnd5e-effects"
     },
     form: {
@@ -61,6 +62,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     },
     activities: {
       template: "systems/dnd5e/templates/items/activities.hbs",
+      templates: ["systems/dnd5e/templates/shared/activities.hbs"],
       scrollable: [""]
     },
     advancement: {
@@ -243,18 +245,36 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
    * @protected
    */
   async _prepareActivitiesContext(context, options) {
-    context.activities = (this.item.system.activities ?? [])
-      .filter(a => a.canConfigure)
-      .map(activity => {
-        const { _id: id, name, img, sort } = activity.prepareSheetContext();
-        return {
-          id, name, sort,
-          img: { src: img, svg: img?.endsWith(".svg") },
-          isRider: activity.isRider,
-          uuid: activity.uuid
-        };
-      });
-
+    const activityMap = {};
+    const origins = {};
+    const riders = [];
+    context.activities = (this.item.system.activities ?? []).reduce((arr, activity) => {
+      if ( activity.type === "enchant" ) {
+        for ( const effect of activity.effects ?? [] ) {
+          for ( const id of effect.riders.activity ) {
+            origins[id] ??= [];
+            origins[id].push(activity._id);
+          }
+        }
+      }
+      if ( !activity.canConfigure ) return arr;
+      const { _id: id, name, img, labels, sort } = activity.prepareSheetContext();
+      const descriptor = activityMap[id] = {
+        id, name, sort,
+        img: { src: img, svg: img?.endsWith(".svg") },
+        riders: [],
+        subtitle: labels?.activation ?? "",
+        uuid: activity.uuid
+      };
+      if ( activity.isRider ) riders.push(descriptor);
+      else arr.push(descriptor);
+      return arr;
+    }, []);
+    riders.forEach(r => {
+      for ( const origin of origins[r.id] ?? [] ) {
+        if ( origin in activityMap ) activityMap[origin].riders.push(r);
+      }
+    });
     return context;
   }
 
@@ -363,8 +383,10 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
    * @protected
    */
   async _prepareEffectsContext(context, options) {
+    const effectMap = {};
+    const riders = [];
+    const riderIds = new Set(this.item.getFlag("dnd5e", "riders.effect") ?? []);
     context.tab = context.tabs.effects;
-
     context.effects = EffectsElement.prepareCategories(this.item.effects, { parent: this.item });
     for ( const category of Object.values(context.effects) ) {
       category.effects = await category.effects.reduce(async (arr, effect) => {
@@ -372,17 +394,32 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
         const { id, name, img, disabled, duration } = effect;
         const source = await effect.getSource();
         arr = await arr;
-        arr.push({
-          id, name, img, disabled, duration, source,
-          parent,
+        const ctx = effectMap[id] = {
+          id, name, img, disabled, duration, source, parent,
           durationParts: duration.remaining ? duration.label.split(", ") : [],
           hasTooltip: true,
-          isRider: this.item.getFlag("dnd5e", "riders.effect")?.includes(id)
-        });
+          riders: []
+        };
+        if ( riderIds.has(id) ) riders.push(ctx);
+        else arr.push(ctx);
         return arr;
       }, []);
     }
-
+    const origins = (this.item.system.activities?.getByType("enchant") ?? [])
+      .flatMap(a => a.effects)
+      .reduce((obj, effects) => {
+        const { _id, riders } = effects;
+        for ( const id of riders.effect ) {
+          obj[id] ??= [];
+          obj[id].push(_id);
+        }
+        return obj;
+      }, {});
+    riders.forEach(r => {
+      for ( const origin of origins[r.id] ?? [] ) {
+        if ( origin in effectMap ) effectMap[origin].riders.push(r);
+      }
+    });
     return context;
   }
 
@@ -568,9 +605,6 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     super._attachFrameListeners();
     new ContextMenu5e(this.element, ".advancement-item[data-id]", [], {
       onOpen: target => dnd5e.documents.advancement.Advancement.onContextMenu(this.item, target), jQuery: false
-    });
-    new ContextMenu5e(this.element, ".activity[data-activity-id]", [], {
-      onOpen: target => dnd5e.documents.activity.UtilityActivity.onContextMenu(this.item, target), jQuery: false
     });
   }
 
