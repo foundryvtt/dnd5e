@@ -188,6 +188,7 @@ export default class ActivitySheet extends PseudoDocumentSheet {
         fields: this.activity.schema.fields.consumption.fields.targets.element.fields,
         prefix: `consumption.targets.${index}.`,
         source: context.source.consumption.targets[index] ?? data,
+        targetHint: this.item.isEmbedded ? undefined : typeConfig.nonEmbeddedHint,
         typeOptions: consumptionTypeOptions,
         scalingModes: canScale ? [
           { value: "", label: game.i18n.localize("DND5E.CONSUMPTION.Scaling.None") },

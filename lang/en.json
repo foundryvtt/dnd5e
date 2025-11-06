@@ -1607,6 +1607,7 @@
     },
     "Attribute": {
       "Label": "Attribute",
+      "NonEmbeddedHint": "Path of the attribute to consume (e.g. attributes.exhaustion, spells.pact.value).",
       "PromptDecrease": "Consume Attribute?",
       "PromptIncrease": "Restore Attribute?",
       "PromptHintDecrease": "Decrease <code>{attribute}</code> by <strong>{cost}</strong> (currently {current}).",
@@ -1627,6 +1628,7 @@
     },
     "ItemUses": {
       "Label": "Item Uses",
+      "NonEmbeddedHint": "Item identifier or UUID of item in compendium that will be linked automatically to matching item on sheet.",
       "PromptDecrease": "Consume Item Use?",
       "PromptIncrease": "Restore Item Use?",
       "PromptHintDecrease": "Spend <strong>{cost}</strong> {use} of {item} ({available} {availableUse} available).",
@@ -1635,6 +1637,7 @@
     },
     "Material": {
       "Label": "Material",
+      "NonEmbeddedHint": "Item identifier or UUID of item in compendium that will be linked automatically to matching item on sheet.",
       "PromptDecrease": "Consume Material?",
       "PromptIncrease": "Restore Material?",
       "PromptHintDecrease": "Reduce quantity of {item} by <strong>{cost}</strong> ({quantity} remaining).",

@@ -26,7 +26,7 @@
                 {{#if showTargets}}
                 <div class="field-group">
                     {{ formField fields.target name=(concat prefix "target") value=selectedTarget options=validTargets
-                                 placeholder=targetPlaceholder label="DND5E.Target" localize=true hint=false
+                                 placeholder=targetPlaceholder label="DND5E.Target" localize=true hint=targetHint
                                  blank=(not validTargets) classes="label-top" rootId=@root.partId }}
                 </div>
                 {{/if}}
