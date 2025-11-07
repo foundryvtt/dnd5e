@@ -448,7 +448,7 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
           name: document.name, level: formatNumber(level)
         }) : document.name,
         description: await TextEditor.enrichHTML(document.system.description.value, {
-          relativeTo: item, secrets: false
+          relativeTo: document, secrets: false
         })
       };
     };
