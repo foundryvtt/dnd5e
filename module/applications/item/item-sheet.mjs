@@ -461,7 +461,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     if ( !this.item.system.advancement ) return {};
 
     const advancement = {};
-    const configMode = !this.item.parent || (this._mode === ItemSheet5e.MODES.EDIT);
+    const configMode = !this.item.parent || this.isEditMode;
     const legacyDisplay = this.options.legacyDisplay;
     const maxLevel = this.item.parent ? (this.item.system.levels ?? this.item.class?.system.levels
       ?? this.item.parent.system.details?.level ?? -1) : -1;
@@ -518,7 +518,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
    * @protected
    */
   _getAdvancementTags(advancement) {
-    if ( this.item.isEmbedded && (this._mode !== this.constructor.MODES.EDIT) ) return [];
+    if ( this.item.isEmbedded && !this.isEditMode ) return [];
     const tags = [];
     if ( advancement.classRestriction === "primary" ) {
       tags.push({
