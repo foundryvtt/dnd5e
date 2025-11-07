@@ -19,7 +19,7 @@ export default class ContextMenu5e extends foundry.applications.ux.ContextMenu {
     event.preventDefault();
     event.stopPropagation();
     const { clientX, clientY } = event;
-    const selector = "[data-id],[data-effect-id],[data-item-id],[data-message-id]";
+    const selector = "[data-id],[data-effect-id],[data-item-id],[data-message-id],[data-activity-id]";
     const target = event.target.closest(selector) ?? event.currentTarget.closest(selector);
     target?.dispatchEvent(new PointerEvent("contextmenu", {
       view: window, bubbles: true, cancelable: true, clientX, clientY
