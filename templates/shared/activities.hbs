@@ -70,8 +70,14 @@
 <div class="item-detail item-controls activity-controls always-visible">
 
     {{#if @root.editable}}
+    {{!-- Edit --}}
+    <button type="button" class="unbutton control-button item-control item-action" data-action="editDocument"
+            data-tooltip aria-label="{{ localize "DND5E.ACTIVITY.Action.Edit" }}">
+        <i class="fa-solid fa-pen-to-square" inert></i>
+    </button>
+
     {{!-- Delete --}}
-    <button type="button" class="unbutton control-button" data-action="deleteDocument"
+    <button type="button" class="unbutton control-button item-control" data-action="deleteDocument"
             data-tooltip aria-label="{{ localize "DND5E.ACTIVITY.Action.Delete" }}">
         <i class="fas fa-trash" inert></i>
     </button>
