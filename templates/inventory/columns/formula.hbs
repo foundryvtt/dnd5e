@@ -1,5 +1,6 @@
 <div class="item-detail item-formula {{#unless entry.labels.damages.length}}empty{{/unless}}" data-column-id="formula">
     {{#each entry.labels.damages}}
+    {{#unless (eq firstDamage false)}}
     <div class="row">
         <span class="formula">{{ formula }}</span>
         {{#with (lookup @root.labels.damageAndHealing damageType)}}
@@ -8,5 +9,6 @@
         </span>
         {{/with}}
     </div>
+    {{/unless}}
     {{/each}}
 </div>
