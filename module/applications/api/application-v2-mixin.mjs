@@ -14,7 +14,8 @@ const { HandlebarsApplicationMixin } = foundry.applications.api;
  * @mixin
  */
 export default function ApplicationV2Mixin(Base) {
-  class BaseApplication5e extends HandlebarsApplicationMixin(Base) {
+  const _BaseApplication5e = "PARTS" in Base ? Base : HandlebarsApplicationMixin(Base);
+  class BaseApplication5e extends _BaseApplication5e {
     /** @override */
     static DEFAULT_OPTIONS = {
       actions: {
@@ -31,7 +32,7 @@ export default function ApplicationV2Mixin(Base) {
     /**
      * @type {Record<string, HandlebarsTemplatePart & ApplicationContainerParts>}
      */
-    static PARTS = {};
+    static PARTS = Base.PARTS ?? {};
 
     /* -------------------------------------------- */
     /*  Properties                                  */
@@ -170,6 +171,32 @@ export default function ApplicationV2Mixin(Base) {
       }
 
       return frame;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Handle re-rendering the mode toggle on ownership changes.
+     * @protected
+     */
+    _renderModeToggle() {
+      const header = this.element.querySelector(".window-header");
+      const toggle = header.querySelector(".mode-slider");
+      if ( this.isEditable && !toggle ) {
+        const toggle = document.createElement("slide-toggle");
+        toggle.checked = this.isEditMode;
+        toggle.classList.add("mode-slider");
+        toggle.dataset.action = "changeMode";
+        toggle.dataset.tooltip = "DND5E.SheetModeEdit";
+        toggle.setAttribute("aria-label", game.i18n.localize("DND5E.SheetModeEdit"));
+        toggle.addEventListener("dblclick", event => event.stopPropagation());
+        toggle.addEventListener("pointerdown", event => event.stopPropagation());
+        header.prepend(toggle);
+      } else if ( this.isEditable ) {
+        toggle.checked = this.isEditMode;
+      } else if ( !this.isEditable && toggle ) {
+        toggle.remove();
+      }
     }
 
     /* -------------------------------------------- */
