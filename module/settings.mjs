@@ -1,5 +1,6 @@
 import BastionSettingsConfig from "./applications/settings/bastion-settings.mjs";
 import CombatSettingsConfig from "./applications/settings/combat-settings.mjs";
+import CompendiumBrowser from "./applications/compendium-browser.mjs";
 import CompendiumBrowserSettingsConfig from "./applications/settings/compendium-browser-settings.mjs";
 import ModuleArtSettingsConfig from "./applications/settings/module-art-settings.mjs";
 import VariantRulesSettingsConfig from "./applications/settings/variant-rules-settings.mjs";
@@ -36,6 +37,29 @@ export function registerSystemKeybindings() {
   game.keybindings.register("dnd5e", "dragMove", {
     name: "KEYBINDINGS.DND5E.DragMove",
     editable: [{ key: "ShiftLeft" }, { key: "ShiftRight" }, { key: "OsLeft" }, { key: "OsRight" }]
+  });
+
+  game.keybindings.register("dnd5e", "toggleSheetMode", {
+    name: "KEYBINDINGS.DND5E.ToggleSheetMode",
+    editable: [{ key: "KeyL" }],
+    onDown: () => {
+      const app = ui.activeWindow;
+      if ( app?.rendered && app.constructor?.MODES && app._mode !== undefined ) {
+        const { MODES } = app.constructor;
+        app._mode = app._mode === MODES.EDIT ? MODES.PLAY : MODES.EDIT;
+        app.render();
+      }
+      return true;
+    }
+  });
+
+  game.keybindings.register("dnd5e", "openCompendiumBrowser", {
+    name: "KEYBINDINGS.DND5E.OpenCompendiumBrowser",
+    editable: [{ key: "KeyB", modifiers: ["Shift"] }],
+    onDown: () => {
+      new CompendiumBrowser().render({ force: true });
+      return true;
+    }
   });
 }
 
