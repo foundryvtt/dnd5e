@@ -77,14 +77,12 @@ export default class SpellConfigurationData extends foundry.abstract.DataModel {
     if ( this.method ) {
       foundry.utils.setProperty(itemData, "system.method", this.method);
       foundry.utils.setProperty(itemData, "system.prepared", this.prepared);
-      const model = CONFIG.DND5E.spellcasting[this.method];
-      const hasClass = (this.item?.type === "class") || (this.item?.type === "subclass");
+    }
 
-      // Set source class.
-      if ( model.slots && hasClass ) {
-        const identifier = this.item.type === "class" ? this.item.identifier : this.item.system.classIdentifier;
-        if ( identifier ) foundry.utils.setProperty(itemData, "system.sourceClass", identifier);
-      }
+    // Set spell source based on the item type.
+    if ( this.item ) {
+      foundry.utils.setProperty(itemData, "system.spellSource.type", this.item.type);
+      foundry.utils.setProperty(itemData, "system.spellSource.identifier", this.item.identifier);
     }
 
     if ( this.uses.max && this.uses.per ) {

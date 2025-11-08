@@ -52,7 +52,10 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
       properties: new SetField(new StringField(), { label: "DND5E.SpellComponents" }),
       range: new RangeField(),
       school: new StringField({ required: true, label: "DND5E.SpellSchool" }),
-      sourceClass: new StringField({ label: "DND5E.SpellSourceClass" }),
+      spellSource: new SchemaField({
+        type: new StringField({ label: "DND5E.SpellSource.Type" }),
+        identifier: new StringField({ label: "DND5E.SpellSource.Identifier" })
+      }, { label: "DND5E.SpellSource.Label" }),
       target: new TargetField()
     });
   }
@@ -132,10 +135,30 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
 
   /* -------------------------------------------- */
 
+  /**
+   * @deprecated since 5.2
+   * @ignore
+   */
+  get sourceClass() {
+    foundry.utils.logCompatibilityWarning("SpellData#sourceClass is deprecated. Please use SpellData#spellSource "
+      + "instead.", { since: "DnD5e 5.2", until: "DnD5e 6.0" });
+    return this.spellSource?.identifier;
+  }
+
+  /* -------------------------------------------- */
+
   /** @override */
   get availableAbilities() {
     if ( this.ability ) return new Set([this.ability]);
-    const spellcasting = this.parent?.actor?.spellcastingClasses[this.sourceClass]?.spellcasting.ability
+
+    // Get class identifier for looking up spellcasting ability
+    let classIdentifier = this.spellSource?.identifier;
+    if ( this.spellSource?.type === "subclass" ) {
+      const subclassItem = this.parent?.actor?.items.find(i => i.identifier === this.spellSource.identifier);
+      classIdentifier = subclassItem?.system.classIdentifier;
+    }
+
+    const spellcasting = this.parent?.actor?.spellcastingClasses[classIdentifier]?.spellcasting.ability
       ?? this.parent?.actor?.system.attributes?.spellcasting;
     return new Set(spellcasting ? [spellcasting] : []);
   }
@@ -280,6 +303,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     SpellData.#migrateActivation(source);
     SpellData.#migrateTarget(source);
     SpellData.#migratePreparation(source);
+    SpellData.#migrateSpellSource(source);
   }
 
   /* -------------------------------------------- */
@@ -356,6 +380,24 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Migrate sourceClass to spellSource.
+   * @since 5.2.0
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateSpellSource(source) {
+    if ( !("sourceClass" in source) || ("spellSource" in source) ) return;
+    if ( source.sourceClass ) {
+      source.spellSource = {
+        type: "class",
+        identifier: source.sourceClass
+      };
+    }
+    delete source.sourceClass;
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
@@ -407,9 +449,23 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     TargetField.prepareData.call(this, rollData, labels);
 
     // Count preparations.
-    if ( this.parent.isOwned && this.sourceClass && this.countsPrepared ) {
-      const sourceClass = this.parent.actor.spellcastingClasses[this.sourceClass];
-      const sourceSubclass = sourceClass?.subclass;
+    if ( this.parent.isOwned && this.spellSource?.identifier && this.countsPrepared
+      && ["class", "subclass"].includes(this.spellSource.type) ) {
+      let sourceClass;
+      let sourceSubclass;
+
+      if ( this.spellSource.type === "class" ) {
+        sourceClass = this.parent.actor.spellcastingClasses[this.spellSource.identifier];
+        sourceSubclass = sourceClass?.subclass;
+      } else if ( this.spellSource.type === "subclass" ) {
+        // Find the subclass item and its parent class
+        const subclassItem = this.parent.actor.items.find(i => i.identifier === this.spellSource.identifier);
+        if ( subclassItem ) {
+          sourceClass = this.parent.actor.spellcastingClasses[subclassItem.system.classIdentifier];
+          sourceSubclass = sourceClass?.subclass;
+        }
+      }
+
       if ( sourceClass ) sourceClass.system.spellcasting.preparation.value++;
       if ( sourceSubclass ) sourceSubclass.system.spellcasting.preparation.value++;
     }
@@ -454,14 +510,65 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
 
     // Default Ability & Spellcasting Classes
     if ( this.parent.actor ) {
+      // For subclass spells, resolve to the parent class identifier.
+      let classIdentifier = this.spellSource?.identifier;
+      if ( this.spellSource?.type === "subclass" ) {
+        const subclassItem = this.parent.actor.items.find(i => i.identifier === this.spellSource.identifier);
+        classIdentifier = subclassItem?.system.classIdentifier;
+      }
+
       const ability = CONFIG.DND5E.abilities[
-        this.parent.actor.spellcastingClasses[this.sourceClass]?.spellcasting.ability
+        this.parent.actor.spellcastingClasses[classIdentifier]?.spellcasting.ability
           ?? this.parent.actor.system.attributes?.spellcasting
       ]?.label?.toLowerCase();
       if ( ability ) context.defaultAbility = game.i18n.format("DND5E.DefaultSpecific", { default: ability });
       else context.defaultAbility = game.i18n.localize("DND5E.Default");
       context.spellcastingClasses = Object.entries(this.parent.actor.spellcastingClasses ?? {})
         .map(([value, cls]) => ({ value, label: cls.name }));
+
+      const sourceType = this.spellSource?.type;
+      let sourceIdentifier = this.spellSource?.identifier;
+
+      // Class spells can have their source changed.
+      if ( sourceType === "class" ) {
+        context.spellSourceLocked = false;
+      }
+      // All other spells are locked to their granting item.
+      else {
+        let grantingItem;
+
+        // Check for advancement-granted spells.
+        const advancementOrigin = this.parent.getFlag("dnd5e", "advancementOrigin");
+        if ( advancementOrigin ) {
+          const [itemId] = advancementOrigin.split(".");
+          grantingItem = this.parent.actor.items.get(itemId);
+        }
+
+        // Check for item-granted spells.
+        if ( !grantingItem ) {
+          const linked = this.linkedActivity;
+          grantingItem = linked?.item;
+        }
+
+        if ( grantingItem ) {
+          sourceIdentifier = grantingItem.identifier;
+
+          context.spellcastingClasses.push({
+            value: sourceIdentifier,
+            label: grantingItem.name
+          });
+
+          if ( !this.spellSource?.identifier ) {
+            context.source.spellSource = context.source.spellSource || {};
+            context.source.spellSource.identifier = sourceIdentifier;
+          }
+
+          context.spellSourceLocked = true;
+          context.spellSourceHint = "DND5E.SpellSource.LockedHint";
+        } else {
+          context.spellSourceLocked = false;
+        }
+      }
     }
 
     // Activation
@@ -574,13 +681,17 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
       this.updateSource({ prepared: Number(this.parent.actor.type === "npc" || (this.level < 1)) });
     }
 
-    if ( ["atwill", "innate"].includes(system.method) || this.sourceClass ) return;
+    if ( ["atwill", "innate"].includes(system.method) || this.spellSource?.identifier ) return;
     const classes = new Set(Object.keys(this.parent.actor.spellcastingClasses));
     if ( !classes.size ) return;
 
     // Set the source class, and ensure the preparation mode matches if adding a prepared spell to an alt class
     const setClass = cls => {
-      this.updateSource({ sourceClass: cls, method: this.parent.actor.classes[cls].spellcasting.type });
+      this.updateSource({
+        "spellSource.type": "class",
+        "spellSource.identifier": cls,
+        method: this.parent.actor.classes[cls].spellcasting.type
+      });
     };
 
     // If preparation mode matches an alt spellcasting type and matching class exists, set as that class

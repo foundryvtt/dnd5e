@@ -973,10 +973,28 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     else ctx.preparation = { applicable: false };
 
     // Subtitle
-    ctx.subtitle = [
-      linked ? linked.name : item.parent.classes[item.system.sourceClass]?.name,
-      item.labels.components.vsm
-    ].filterJoin(" • ");
+    let sourceLabel;
+    if ( linked ) {
+      sourceLabel = linked.name;
+    } else if ( item.system.spellSource?.identifier ) {
+      const { type, identifier } = item.system.spellSource;
+      if ( type === "class" ) {
+        sourceLabel = item.parent.classes[identifier]?.name;
+      } else {
+        // For all other sources (subclass, race, background, item), look up the granting item by identifier
+        const grantingItem = item.parent.items.find(i => i.identifier === identifier);
+        sourceLabel = grantingItem?.name;
+      }
+    } else {
+      // Check spells added from advancements
+      const advancementOrigin = item.getFlag("dnd5e", "advancementOrigin");
+      if ( advancementOrigin ) {
+        const [itemId] = advancementOrigin.split(".");
+        const grantingItem = item.parent.items.get(itemId);
+        if ( grantingItem ) sourceLabel = grantingItem.name;
+      }
+    }
+    ctx.subtitle = [sourceLabel, item.labels.components.vsm].filterJoin(" • ");
   }
 
   /* -------------------------------------------- */
