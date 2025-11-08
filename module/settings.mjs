@@ -57,7 +57,10 @@ export function registerSystemKeybindings() {
     name: "KEYBINDINGS.DND5E.OpenCompendiumBrowser",
     editable: [{ key: "KeyB", modifiers: ["Shift"] }],
     onDown: () => {
-      new CompendiumBrowser().render({ force: true });
+      const existing = Array.from(foundry.applications.instances.values())
+        .find(app => app instanceof CompendiumBrowser && app.rendered);
+      if ( existing ) existing.bringToFront();
+      else new CompendiumBrowser().render({ force: true });
       return true;
     }
   });
