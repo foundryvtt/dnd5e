@@ -143,7 +143,18 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   get sourceClass() {
     foundry.utils.logCompatibilityWarning("SpellData#sourceClass is deprecated. Please use SpellData#spellSource "
       + "instead.", { since: "DnD5e 5.2", until: "DnD5e 6.0" });
-    return this.spellSource?.identifier;
+
+    // Return class identifier for class spells.
+    if ( this.spellSource?.type === "class" ) return this.spellSource.identifier;
+
+    // For subclass spells, resolve to parent class identifier.
+    if ( this.spellSource?.type === "subclass" ) {
+      const subclassItem = this.parent.actor.subclasses[this.spellSource.identifier];
+      return subclassItem?.system.classIdentifier ?? "";
+    }
+
+    // Return empty string for all other types.
+    return "";
   }
 
   /* -------------------------------------------- */
@@ -155,7 +166,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     // Get class identifier for looking up spellcasting ability
     let classIdentifier = this.spellSource?.identifier;
     if ( this.spellSource?.type === "subclass" ) {
-      const subclassItem = this.parent?.actor?.items.find(i => i.identifier === this.spellSource.identifier);
+      const subclassItem = this.parent.actor.subclasses[this.spellSource.identifier];
       classIdentifier = subclassItem?.system.classIdentifier;
     }
 
@@ -525,7 +536,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
       // For subclass spells, resolve to the parent class identifier.
       let classIdentifier = this.spellSource?.identifier;
       if ( this.spellSource?.type === "subclass" ) {
-        const subclassItem = this.parent.actor.items.find(i => i.identifier === this.spellSource.identifier);
+        const subclassItem = this.parent.actor.subclasses[classIdentifier];
         classIdentifier = subclassItem?.system.classIdentifier;
       }
 
@@ -538,11 +549,8 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
       context.spellcastingClasses = Object.entries(this.parent.actor.spellcastingClasses ?? {})
         .map(([value, cls]) => ({ value, label: cls.name }));
 
-      const sourceType = this.spellSource?.type;
-      let sourceIdentifier = this.spellSource?.identifier;
-
       // Class spells can have their source changed.
-      if ( sourceType === "class" ) {
+      if ( this.spellSource?.type === "class" ) {
         context.spellSourceLocked = false;
       }
       // All other spells are locked to their granting item.
@@ -557,13 +565,10 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
         }
 
         // Check for item-granted spells.
-        if ( !grantingItem ) {
-          const linked = this.linkedActivity;
-          grantingItem = linked?.item;
-        }
+        grantingItem ??= this.linkedActivity?.item;
 
         if ( grantingItem ) {
-          sourceIdentifier = grantingItem.identifier;
+          const sourceIdentifier = grantingItem.identifier;
 
           context.spellcastingClasses.push({
             value: sourceIdentifier,
