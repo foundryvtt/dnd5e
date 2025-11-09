@@ -978,13 +978,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       sourceLabel = linked.name;
     } else if ( item.system.spellSource?.identifier ) {
       const { type, identifier } = item.system.spellSource;
-      if ( type === "class" ) {
-        sourceLabel = item.parent.classes[identifier]?.name;
-      } else {
-        // For all other sources (subclass, race, background, item), look up the granting item by identifier
-        const grantingItem = item.parent.items.find(i => i.identifier === identifier);
-        sourceLabel = grantingItem?.name;
-      }
+      const grantingItem = item.parent.itemTypes[type]?.find(i => i.identifier === identifier);
+      sourceLabel = grantingItem?.name;
     } else {
       // Check spells added from advancements
       const advancementOrigin = item.getFlag("dnd5e", "advancementOrigin");
@@ -2052,7 +2047,17 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       if ( filters.has("ritual") && !item.system.properties?.has("ritual") ) return false;
       if ( filters.has("concentration") && !item.system.properties?.has("concentration") ) return false;
       if ( schoolFilter.size && !schoolFilter.has(item.system.school) ) return false;
-      if ( classFilter.size && !classFilter.has(item.system.sourceClass) ) return false;
+      if ( classFilter.size ) {
+        let classIdentifier = item.system.spellSource?.identifier;
+        // Resolve subclass spells to parent class identifier.
+        if ( item.system.spellSource?.type === "subclass" ) {
+          const subclassItem = this.actor.subclasses[classIdentifier];
+          classIdentifier = subclassItem?.system.classIdentifier;
+        }
+        // Only match if spell source is class or subclass.
+        if ( !["class", "subclass"].includes(item.system.spellSource?.type) ) return false;
+        if ( !classFilter.has(classIdentifier) ) return false;
+      }
       if ( filters.has("prepared") ) return item.system.canPrepare && item.system.prepared;
 
       // Equipment-specific filters
