@@ -58,7 +58,7 @@ export default class UsesField extends SchemaField {
     }
     if ( labels ) labels.recovery = game.i18n.getListFormatter({ style: "narrow" }).format(periods);
 
-    this.uses.label = UsesField.getStatblockLabel.call(this);
+    this.uses.label ??= UsesField.getStatblockLabel.call(this);
 
     Object.defineProperty(this.uses, "rollRecharge", {
       value: UsesField.rollRecharge.bind(this.parent?.system ? this.parent : this),
