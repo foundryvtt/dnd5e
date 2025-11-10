@@ -790,7 +790,8 @@ export default class NPCData extends CreatureTemplate {
         } else {
           const openingTag = description.match(/^\s*(<p(?:\s[^>]+)?>)/gi)?.[0];
           if ( openingTag ) description = description.replace(openingTag, "");
-          const uses = item.system.uses.label || item.system.activities?.contents[0]?.uses.label;
+          const uses = item.system.uses.label
+            || (item.system.activities?.size === 1 ? item.system.activities?.contents[0]?.uses.label : undefined);
           context.actionSections[category].actions.push({
             description, openingTag,
             name: uses ? `${item.name} (${uses})` : item.name,
