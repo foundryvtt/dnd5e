@@ -375,9 +375,17 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
       const config = this.validProperties.has(c) ? CONFIG.DND5E.itemProperties[c] : null;
       if ( !config ) return obj;
       const { abbreviation: abbr, label, icon } = config;
-      obj.all.push({ abbr, icon, tag: config.isTag });
-      if ( config.isTag ) obj.tags.push(label);
-      else obj.vsm.push(abbr);
+      // Only add properties to display arrays if they have displayable content
+      if ( config.isTag ) {
+        // Tag properties: add to tags if has label
+        if ( label ) obj.tags.push(label);
+        if ( abbr || icon ) obj.all.push({ abbr, icon, tag: true });
+      } else if ( abbr ) {
+        // VSM properties: only add if has abbreviation
+        obj.vsm.push(abbr);
+        obj.all.push({ abbr, icon, tag: false });
+      }
+      // Properties with neither abbreviation nor isTag are silently ignored for display
       return obj;
     }, { all: [], vsm: [], tags: [] });
     labels.components.vsm = game.i18n.getListFormatter({ style: "narrow" }).format(labels.components.vsm);
