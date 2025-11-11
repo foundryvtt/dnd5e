@@ -3505,6 +3505,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   }
 
   /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static getDefaultArtwork(actorData={}) {
+    const img = CONFIG.DND5E.defaultArtwork.Actor[actorData.type];
+    return img ? { img, texture: { src: img } } : super.getDefaultArtwork(actorData);
+  }
+
+  /* -------------------------------------------- */
   /*  Deprecations                                */
   /* -------------------------------------------- */
 

@@ -182,21 +182,21 @@ export default class CompendiumBrowser extends Application5e {
     {
       tab: "monsters",
       label: "DND5E.CompendiumBrowser.Tabs.Monster.other",
-      svg: "systems/dnd5e/icons/svg/monster.svg",
+      svg: "systems/dnd5e/icons/svg/actors/npc.svg",
       documentClass: "Actor",
       types: ["npc"]
     },
     {
       tab: "vehicles",
       label: "TYPES.Actor.vehiclePl",
-      svg: "systems/dnd5e/icons/svg/vehicle.svg",
+      svg: "systems/dnd5e/icons/svg/actors/vehicle.svg",
       documentClass: "Actor",
       types: ["vehicle"]
     },
     {
       tab: "actors",
       label: "DOCUMENT.Actors",
-      svg: "systems/dnd5e/icons/svg/monster.svg",
+      svg: "systems/dnd5e/icons/svg/actors/npc.svg",
       documentClass: "Actor",
       advanced: true
     },
