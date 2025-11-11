@@ -1,6 +1,6 @@
+import CompendiumBrowser from "./applications/compendium-browser.mjs";
 import BastionSettingsConfig from "./applications/settings/bastion-settings.mjs";
 import CombatSettingsConfig from "./applications/settings/combat-settings.mjs";
-import CompendiumBrowser from "./applications/compendium-browser.mjs";
 import CompendiumBrowserSettingsConfig from "./applications/settings/compendium-browser-settings.mjs";
 import ModuleArtSettingsConfig from "./applications/settings/module-art-settings.mjs";
 import VariantRulesSettingsConfig from "./applications/settings/variant-rules-settings.mjs";
