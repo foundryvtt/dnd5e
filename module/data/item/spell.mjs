@@ -699,10 +699,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
 
     // Set the source class, and ensure the preparation mode matches if adding a prepared spell to an alt class
     const setClass = cls => {
-      this.updateSource({
-        spellSource: cls,
-        method: this.parent.actor.classes[cls].spellcasting.type
-      });
+      this.updateSource({ spellSource: cls, method: this.parent.actor.classes[cls].spellcasting.type });
     };
 
     // If preparation mode matches an alt spellcasting type and matching class exists, set as that class
