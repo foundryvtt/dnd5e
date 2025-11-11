@@ -79,10 +79,9 @@ export default class SpellConfigurationData extends foundry.abstract.DataModel {
       foundry.utils.setProperty(itemData, "system.prepared", this.prepared);
     }
 
-    // Set spell source based on the item type.
+    // Set spell source based on the item identifier.
     if ( this.item ) {
-      foundry.utils.setProperty(itemData, "system.spellSource.type", this.item.type);
-      foundry.utils.setProperty(itemData, "system.spellSource.identifier", this.item.identifier);
+      foundry.utils.setProperty(itemData, "system.spellSource", this.item.identifier);
     }
 
     if ( this.uses.max && this.uses.per ) {

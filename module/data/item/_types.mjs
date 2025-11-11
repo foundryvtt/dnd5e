@@ -144,9 +144,7 @@
  * @property {Set<string>} properties            General components and tags for this spell.
  * @property {RangeData} range                   Range of the spell
  * @property {string} school                     Magical school to which this spell belongs.
- * @property {object} spellSource                Source that granted this spell when on an actor.
- * @property {string} spellSource.type           Type of source.
- * @property {string} spellSource.identifier     Identifier of the source item.
+ * @property {string} spellSource                Identifier of the spell's source item.
  * @property {TargetData} target                 Information on area and individual targets.
  */
 

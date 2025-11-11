@@ -63,7 +63,7 @@
 
     {{!-- Spell Source --}}
     {{#if isEmbedded}}
-    {{ formField fields.spellSource.fields.identifier value=source.spellSource.identifier localize=true
+    {{ formField fields.spellSource value=source.spellSource localize=true
                  options=spellcastingClasses blank="" label="DND5E.SpellSource.Label" rootId=partId
                  disabled=spellSourceLocked hint=spellSourceHint }}
 
