@@ -265,17 +265,10 @@ export default class EffectsElement extends HTMLElement {
   async _onToggleCondition(conditionId, event) {
     // Handle exhaustion specially - increment/decrement level
     if ( conditionId === "exhaustion" ) {
+      // Initialize exhaustion to 0 if not set
       let level = foundry.utils.getProperty(this.document, "system.attributes.exhaustion");
-      if ( !Number.isFinite(level) ) level = 0;
-      if ( event ) {
-        event.preventDefault();
-        event.stopPropagation();
-        // Left click increments, right click decrements
-        if ( event.button === 0 ) level++;
-        else if ( event.button === 2 ) level--;
-      }
-      const max = CONFIG.DND5E.conditionTypes.exhaustion.levels;
-      return this.document.update({ "system.attributes.exhaustion": Math.clamp(level, 0, max) });
+      if ( !Number.isFinite(level) ) await this.document.update({ "system.attributes.exhaustion": 0 });
+      return ActiveEffect.implementation._manageExhaustion(event, this.document);
     }
 
     // Handle other conditions normally
