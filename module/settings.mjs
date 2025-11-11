@@ -1,3 +1,4 @@
+import CompendiumBrowser from "./applications/compendium-browser.mjs";
 import BastionSettingsConfig from "./applications/settings/bastion-settings.mjs";
 import CombatSettingsConfig from "./applications/settings/combat-settings.mjs";
 import CompendiumBrowserSettingsConfig from "./applications/settings/compendium-browser-settings.mjs";
@@ -261,7 +262,15 @@ export function registerSystemSettings() {
     scope: "world",
     config: false,
     type: Object,
-    default: {}
+    default: {},
+    onChange: () => {
+      // Refresh all open Compendium Browser instances when source configuration changes
+      foundry.applications.instances.forEach(app => {
+        if ( app instanceof CompendiumBrowser ) {
+          app.render({ parts: ["results", "filters"], changedTab: true });
+        }
+      });
+    }
   });
 
   // Bastions
