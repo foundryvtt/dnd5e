@@ -976,9 +976,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     let sourceLabel;
     if ( linked ) {
       sourceLabel = linked.name;
-    } else if ( item.system.spellSource?.identifier ) {
-      const { type, identifier } = item.system.spellSource;
-      const grantingItem = item.parent.itemTypes[type]?.find(i => i.identifier === identifier);
+    } else if ( item.system.spellSource ) {
+      const grantingItem = item.parent.identifiedItems.get(item.system.spellSource)?.first();
       sourceLabel = grantingItem?.name;
     } else {
       // Check spells added from advancements
@@ -2048,14 +2047,15 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       if ( filters.has("concentration") && !item.system.properties?.has("concentration") ) return false;
       if ( schoolFilter.size && !schoolFilter.has(item.system.school) ) return false;
       if ( classFilter.size ) {
-        let classIdentifier = item.system.spellSource?.identifier;
-        // Resolve subclass spells to parent class identifier.
-        if ( item.system.spellSource?.type === "subclass" ) {
-          const subclassItem = this.actor.subclasses[classIdentifier];
-          classIdentifier = subclassItem?.system.classIdentifier;
-        }
+        if ( !item.system.spellSource ) return false;
+        const sourceItem = this.actor.identifiedItems.get(item.system.spellSource)?.first();
         // Only match if spell source is class or subclass.
-        if ( !["class", "subclass"].includes(item.system.spellSource?.type) ) return false;
+        if ( !["class", "subclass"].includes(sourceItem?.type) ) return false;
+        // Resolve subclass spells to parent class identifier.
+        let classIdentifier = item.system.spellSource;
+        if ( sourceItem.type === "subclass" ) {
+          classIdentifier = sourceItem.system.classIdentifier;
+        }
         if ( !classFilter.has(classIdentifier) ) return false;
       }
       if ( filters.has("prepared") ) return item.system.canPrepare && item.system.prepared;
