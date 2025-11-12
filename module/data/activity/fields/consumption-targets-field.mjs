@@ -738,7 +738,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    */
   _resolveScaledRoll(formula, scaling, { delta, evaluate=true, rolls }={}) {
     const rollData = this.activity.getRollData();
-    const roll = new CONFIG.Dice.BasicRoll(`0 + ${formula}`, rollData, { delta });
+    const roll = new CONFIG.Dice.BasicRoll(formula ? `0 + ${formula}` : "0", rollData, { delta });
 
     if ( scaling ) {
       // If a scaling formula is provided, multiply it and add to the end of the initial formula
