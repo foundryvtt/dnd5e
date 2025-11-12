@@ -4433,6 +4433,10 @@ DND5E.advancementTypes = {
     documentClass: advancement.ItemGrantAdvancement,
     validItemTypes: new Set(_ALL_ITEM_TYPES)
   },
+  ModifyItem: {
+    documentClass: advancement.ModifyItemAdvancement,
+    validItemTypes: new Set(_ALL_ITEM_TYPES)
+  },
   ScaleValue: {
     documentClass: advancement.ScaleValueAdvancement,
     validItemTypes: new Set(_ALL_ITEM_TYPES)

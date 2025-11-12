@@ -214,6 +214,36 @@
 }
 
 /* ----------------------------------------- */
+/*  Modify Items Advancement                 */
+/* ----------------------------------------- */
+
+.dnd5e2.advancement.modify-item.sheet {
+  .separated-list {
+    margin-block-start: 4px;
+    li.flexcol { gap: 4px; }
+  }
+}
+.advancement.flow[data-type="ModifyItem"] {
+  .item-list .item {
+    > .item-row, > .linked-items { flex: 1 0 100%; }
+    .linked-items .item-row {
+      position: relative;
+      border-block-start: var(--activity-row-border);
+      padding-left: 20px;
+
+      &::before {
+        content: "┗";
+        position: absolute;
+        inset: 9px auto auto 5px;
+        font-size: var(--font-size-12);
+        font-weight: bold;
+        color: var(--activity-row-indent-color);
+      }
+    }
+  }
+}
+
+/* ----------------------------------------- */
 /*  Scale Value Advancement                  */
 /* ----------------------------------------- */
 

@@ -1,5 +1,5 @@
 import AdvancementConfig from "./advancement-config-v2.mjs";
-import { TYPES } from "../../data/advancement/scale-value.mjs";
+import { TYPES } from "../../data/advancement/scale-value-data.mjs";
 import { formatIdentifier } from "../../utils.mjs";
 
 /**

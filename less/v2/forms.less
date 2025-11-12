@@ -335,9 +335,10 @@
       &.multi-select {
         position: relative;
 
-        multi-select .tags.input-element-tags {
-          min-height: 10px;
+        :is(multi-select, string-tags) .tags.input-element-tags {
+          min-height: 16px;
           padding-left: 40%;
+          &:empty { display: flex; }
         }
 
         > label {
@@ -474,7 +475,7 @@
     &:not(:disabled) { cursor: var(--cursor-pointer); }
   }
 
-  :is(document-tags, multi-select) .tags.input-element-tags .tag {
+  :is(document-tags, multi-select, string-tags) .tags.input-element-tags .tag {
     cursor: var(--cursor-pointer);
     font-size: var(--font-size-10);
     border: var(--dnd5e-border-gold);
@@ -484,7 +485,7 @@
     &:hover a { text-shadow: 0 0 6px var(--color-shadow-primary); }
   }
 
-  :is(document-tags, multi-select):has(select:disabled) .tags.input-element-tags .tag {
+  :is(document-tags, multi-select, string-tags):has(select:disabled) .tags.input-element-tags .tag {
     cursor: var(--cursor-default);
     a { cursor: var(--cursor-default); }
     &:hover a { text-shadow: none; }

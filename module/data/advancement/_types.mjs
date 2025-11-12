@@ -30,6 +30,8 @@
  *                                           on an actor, or only on a class that is multi-classing?
  */
 
+/* -------------------------------------------- */
+
 /**
  * @typedef ItemChoiceAdvancementConfigurationData
  * @property {boolean} allowDrops                             Should players be able to drop non-listed items?
@@ -69,6 +71,8 @@
  * @property {string} [replacement]  ID of the replacement item.
  */
 
+/* -------------------------------------------- */
+
 /**
  * @typedef ItemGrantAdvancementConfigurationData
  * @property {ItemGrantItemConfiguration[]} items       Data for the items to be granted.
@@ -81,6 +85,33 @@
  * @property {string} uuid       UUID of the item to grant.
  * @property {boolean} optional  Is this item optional? Has no effect if whole advancement is optional.
  */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef ModifyItemAdvancementConfigurationData
+ * @property {ModifyItemChangeConfiguration[]} changes  List of enchantments to apply and their valid items.
+ */
+
+/**
+ * @typedef ModifyItemChangeConfiguration
+ * @property {string} _id               ID of the enchantment to apply to matched items.
+ * @property {Set<string>} identifiers  One or more identifiers used to find matching items.
+ */
+
+/**
+ * @typedef ModifyItemAdvancementValueData
+ * @property {ModifyItemModifiedItemValue[]} modified  List of items that were modified by the advancement.
+ */
+
+/**
+ * @typedef ModifyItemModifiedItemValue
+ * @property {string} change  ID of the change effect that was applied (referencing entry in `configuration.changes`).
+ * @property {string} effect  ID of the enchantment that was created on the item.
+ * @property {string} item    ID of the item that was modified.
+ */
+
+/* -------------------------------------------- */
 
 /**
  * @typedef ScaleValueAdvancementConfigurationData
@@ -118,6 +149,8 @@
  * @property {boolean} isNumeric  When using the default editing interface, should numeric inputs be used?
  */
 
+/* -------------------------------------------- */
+
 /**
  * @typedef SizeAdvancementConfigurationData
  * @property {Set<string>} sizes  Sizes that can be selected.
@@ -127,6 +160,8 @@
  * @typedef SizeAdvancementValueData
  * @property {string} size  Selected size.
  */
+
+/* -------------------------------------------- */
 
 /**
  * @typedef AdvancementSpellConfigurationData
@@ -139,11 +174,15 @@
  * @property {boolean} uses.requireSlot  Require a spell slot in addition to limited uses.
  */
 
+/* -------------------------------------------- */
+
 /**
  * @typedef SubclassAdvancementValueData
  * @property {Item5e} document  Copy of the subclass on the actor.
  * @property {string} uuid      UUID of the remote subclass source.
  */
+
+/* -------------------------------------------- */
 
 /**
  * @typedef TraitAdvancementConfigurationData
