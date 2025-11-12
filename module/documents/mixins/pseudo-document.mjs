@@ -35,14 +35,6 @@ export default function PseudoDocumentMixin(Base) {
 
     /**
      * Configuration information for PseudoDocuments.
-     *
-     * @typedef PseudoDocumentsMetadata
-     * @property {string} name        Base type name of this PseudoDocument (e.g. "Activity", "Advancement").
-     * @property {string} label       Localized name for this PseudoDocument type.
-     */
-
-    /**
-     * Configuration information for PseudoDocuments.
      * @type {PseudoDocumentsMetadata}
      */
     get metadata() {

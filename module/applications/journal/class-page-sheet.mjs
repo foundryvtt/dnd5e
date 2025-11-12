@@ -8,6 +8,10 @@ const { JournalEntryPageHandlebarsSheet } = foundry.applications.sheets.journal;
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
+ * @import { SpellcastingDescription } from "../../documents/_types.mjs";
+ */
+
+/**
  * Journal entry page that displays an automatically generated summary of a class along with additional description.
  */
 export default class JournalClassPageSheet extends JournalEntryPageHandlebarsSheet {

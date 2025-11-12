@@ -3,13 +3,7 @@ import { ActorDeltasField } from "../data/chat-message/fields/deltas-field.mjs";
 
 /**
  * @import { ActorDeltasData } from "../data/chat-message/fields/_types.mjs";
- */
-
-/**
- * @typedef CombatRecoveryResults
- * @property {object} actor       Updates to be applied to the actor.
- * @property {object[]} item      Updates to be applied to the actor's items.
- * @property {BasicRoll[]} rolls  Any recovery rolls performed.
+ * @import { CombatRecoveryResults } from "./_types.mjs";
  */
 
 /**

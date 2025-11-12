@@ -19,7 +19,11 @@ import SystemDocumentMixin from "./mixins/document.mjs";
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
- * @import { SpellScrollValues } from "../_types.mjs";
+ * @import { D20RollConfiguration } from "../dice/_types.mjs";
+ * @import { ItemContentsTransformer, SpellcastingDescription, SpellScrollConfiguration } from "./_types.mjs";
+ * @import {
+ *   ActivityDialogConfiguration, ActivityMessageConfiguration, ActivityUsageResults, ActivityUseConfiguration
+ * } from "./activity/mixin.mjs";
  */
 
 /**
@@ -393,16 +397,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /**
-   * Spellcasting details for a class or subclass.
-   *
-   * @typedef {object} SpellcastingDescription
-   * @property {string} type              Spellcasting method as defined in `CONFIG.DND5E.spellcasting`.
-   * @property {string|null} progression  Progression within the specified spellcasting type if supported.
-   * @property {string} ability           Ability used when casting spells from this class or subclass.
-   * @property {number|null} levels       Number of levels of this class or subclass's class if embedded.
-   */
-
-  /**
    * Retrieve the spellcasting for a class or subclass. For classes, this will return the spellcasting
    * of the subclass if it overrides the class. For subclasses, this will return the class's spellcasting
    * if no spellcasting is defined on the subclass.
@@ -676,36 +670,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * Configuration data for an item usage being prepared.
-   *
-   * @typedef {object} ItemUseConfiguration
-   * @property {boolean} createMeasuredTemplate     Should this item create a template?
-   * @property {boolean} createSummons              Should this item create a summoned creature?
-   * @property {boolean} consumeResource            Should this item consume a (non-ammo) resource?
-   * @property {boolean} consumeSpellSlot           Should this item (a spell) consume a spell slot?
-   * @property {boolean} consumeUsage               Should this item consume its limited uses or recharge?
-   * @property {string} enchantmentProfile          ID of the enchantment to apply.
-   * @property {boolean} promptEnchantment          Does an enchantment profile need to be selected?
-   * @property {string|number|null} slotLevel       The spell slot type or level to consume by default.
-   * @property {string|null} summonsProfile         ID of the summoning profile to use.
-   * @property {number|null} resourceAmount         The amount to consume by default when scaling with consumption.
-   * @property {boolean} beginConcentrating         Should this item initiate concentration?
-   * @property {string|null} endConcentration       The id of the active effect to end concentration on, if any.
-   */
-
-  /**
-   * Additional options used for configuring item usage.
-   *
-   * @typedef {object} ItemUseOptions
-   * @property {boolean} configureDialog  Display a configuration dialog for the item usage, if applicable?
-   * @property {string} rollMode          The roll display mode with which to display (or not) the card.
-   * @property {boolean} createMessage    Whether to automatically create a chat message (if true) or simply return
-   *                                      the prepared chat message data (if false).
-   * @property {object} flags             Additional flags added to the chat message.
-   * @property {Event} event              The browser event which triggered the item usage, if any.
-   */
 
   /**
    * Trigger an Item usage, optionally creating a chat message with followup actions.
@@ -1220,15 +1184,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /**
-   * @callback ItemContentsTransformer
-   * @param {Item5e|object} item        Data for the item to transform.
-   * @param {object} options
-   * @param {string} options.container  ID of the container to create the items.
-   * @param {number} options.depth      Current depth of the item being created.
-   * @returns {Item5e|object|void}
-   */
-
-  /**
    * Prepare creation data for the provided items and any items contained within them. The data created by this method
    * can be passed to `createDocuments` with `keepId` always set to true to maintain links to container contents.
    * @param {Item5e[]} items                     Items to create.
@@ -1274,16 +1229,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * Configuration options for spell scroll creation.
-   *
-   * @typedef {object} SpellScrollConfiguration
-   * @property {boolean} [dialog=true]                           Present scroll creation dialog?
-   * @property {"full"|"reference"|"none"} [explanation="full"]  Length of spell scroll rules text to include.
-   * @property {number} [level]                                  Level at which the spell should be cast.
-   * @property {Partial<SpellScrollValues>} [values]             Spell scroll DC and attack bonus.
-   */
 
   /**
    * Create a consumable spell scroll Item from a spell Item.

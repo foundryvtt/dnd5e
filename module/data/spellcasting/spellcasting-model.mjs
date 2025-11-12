@@ -3,6 +3,7 @@ const {
 } = foundry.data.fields;
 
 /**
+ * @import { SpellcastingDescription } from "../../documents/_types.mjs";
  * @import {
  *   MultiLevelSpellcasting, SingleLevelSpellcastingData, SlotSpellcastingData, SpellcastingModelData
  * } from "./_types.mjs";

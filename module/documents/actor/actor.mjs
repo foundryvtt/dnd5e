@@ -27,6 +27,7 @@ import * as Trait from "./trait.mjs";
  *   HitDieRollProcessConfiguration, InitiativeRollOptions,
  *   SkillToolRollDialogConfiguration, SkillToolRollProcessConfiguration
  * } from "../../dice/_types.mjs";
+ * @import { SpellcastingDescription } from "../_types.mjs";
  */
 
 /**

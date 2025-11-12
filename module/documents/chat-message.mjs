@@ -897,11 +897,10 @@ export default class ChatMessage5e extends ChatMessage {
 
   /**
    * Handle rendering a chat popout.
-   * @param {ChatPopout} app  The ChatPopout Application instance.
-   * @param {jQuery} html     The rendered Application HTML.
+   * @param {ChatPopout} app    The ChatPopout Application instance.
+   * @param {HTMLElement} html  The rendered Application HTML.
    */
   static onRenderChatPopout(app, html) {
-    html = html instanceof HTMLElement ? html : html[0];
     if ( game.user.isGM ) html.dataset.gmUser = "";
     const close = html.querySelector(".header-button.close");
     if ( close ) {
@@ -916,7 +915,7 @@ export default class ChatMessage5e extends ChatMessage {
 
   /**
    * Wait to apply appropriate element heights until after the chat log has completed its initial batch render.
-   * @param {HTMLElement|jQuery} html
+   * @param {HTMLElement} html
    */
   static onRenderChatLog(html) {
     if ( game.user.isGM ) {

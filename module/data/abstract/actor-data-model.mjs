@@ -2,8 +2,8 @@ import Proficiency from "../../documents/actor/proficiency.mjs";
 import SystemDataModel from "./system-data-model.mjs";
 
 /**
- * @import { CombatRecoveryResults } from "../../documents/combatant.mjs";
- * @import { ActorDataModelMetadata } from "./types.mjs";
+ * @import { CombatRecoveryResults } from "../../documents/_types.mjs";
+ * @import { ActorDataModelMetadata } from "./_types.mjs";
  */
 
 /**

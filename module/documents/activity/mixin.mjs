@@ -12,7 +12,7 @@ import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
  * @import {
  *   BasicRollDialogConfiguration, BasicRollMessageConfiguration, DamageRollProcessConfiguration
  * } from "../../dice/_types.mjs";
- * @import { PseudoDocumentsMetadata } from "../mixins/pseudo-document.mjs";
+ * @import { PseudoDocumentsMetadata } from "../mixins/_types.mjs";
  */
 
 /**

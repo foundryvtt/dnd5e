@@ -4,7 +4,7 @@ import BaseAdvancementData from "../../data/advancement/base-advancement.mjs";
 import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
 
 /**
- * @import { PseudoDocumentsMetadata } from "../mixins/pseudo-document.mjs";
+ * @import { PseudoDocumentsMetadata } from "../mixins/_types.mjs";
  */
 
 /**
