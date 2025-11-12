@@ -7,7 +7,7 @@ const { ArrayField, ForeignDocumentField, NumberField, SchemaField } = foundry.d
 
 /**
  * @import { SkillToolRollProcessConfiguration } from "../../dice/_types.mjs";
- * @import { RestResult } from "../../documents/actor/actor.mjs";
+ * @import { RestResult } from "../../documents/_types.mjs";
  * @import { GroupActorSystemData, GroupRestConfiguration, TravelPaceDescriptor } from "./_types.mjs";
  */
 

@@ -1,6 +1,6 @@
 /**
  * @import { UnitValue5e } from "../../_types.mjs";
- * @import { RestConfiguration, RestResult } from "../../documents/actor/actor.mjs";
+ * @import { RestConfiguration, RestResult } from "../../documents/_types.mjs";
  * @import { CreatureTypeData, RollConfigData, SourceData } from "../shared/_types.mjs";
  * @import { SimpleTraitData, TravelData, TravelPace5e } from "./fields/_types.mjs";
  * @import {

@@ -3,7 +3,7 @@ import ChatTrayElement from "./chat-tray-element.mjs";
 import TargetedApplicationMixin from "./targeted-application-mixin.mjs";
 
 /**
- * @import { DamageApplicationOptions, DamageDescription } from "../../documents/actor/actor.mjs";
+ * @import { DamageApplicationOptions, DamageDescription } from "../../documents/_types.mjs";
  */
 
 /**
