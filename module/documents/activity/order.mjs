@@ -5,25 +5,7 @@ import CurrencyManager from "../../applications/currency-manager.mjs";
 import { formatNumber } from "../../utils.mjs";
 
 /**
- * @typedef {ActivityUseConfiguration} OrderUseConfiguration
- * @property {object} [building]
- * @property {string} [building.size]            The size of facility to build.
- * @property {object} [costs]
- * @property {number} [costs.days]               The cost of executing the order, in days.
- * @property {number} [costs.gold]               The cost of executing the order, in gold.
- * @property {boolean} [costs.paid]              Whether the gold cost has been paid.
- * @property {object} [craft]
- * @property {string} [craft.item]               The item being crafted or harvested.
- * @property {number} [craft.quantity]           The quantity of items to harvest.
- * @property {object} [trade]
- * @property {boolean} [trade.sell]              Whether the trade was a sell operation.
- * @property {object} [trade.stock]
- * @property {boolean} [trade.stock.stocked]     Whether the order was to fully stock the inventory.
- * @property {boolean} [trade.stock.value]       The base value of goods transacted.
- * @property {object} [trade.creatures]
- * @property {string[]} [trade.creatures.buy]    Additional animals purchased.
- * @property {boolean[]} [trade.creatures.sell]  Whether a creature in a given slot was sold.
- * @property {number} [trade.creatures.price]    The base value of the animals sold.
+ * @import { OrderUseConfiguration } from "./_types.mjs";
  */
 
 /**

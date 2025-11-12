@@ -12,7 +12,10 @@ import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
  * @import {
  *   BasicRollDialogConfiguration, BasicRollMessageConfiguration, DamageRollProcessConfiguration
  * } from "../../dice/_types.mjs";
- * @import { PseudoDocumentsMetadata } from "../mixins/_types.mjs";
+ * @import {
+ *   ActivityConsumptionDescriptor, ActivityDialogConfiguration, ActivityMessageConfiguration, ActivityMetadata,
+ *   ActivityUsageChatButton, ActivityUsageResults, ActivityUsageUpdates, ActivityUseConfiguration
+ * } from "./_types.mjs";
  */
 
 /**
@@ -24,20 +27,6 @@ import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
  */
 export default function ActivityMixin(Base) {
   class Activity extends DependentDocumentMixin(PseudoDocumentMixin(Base)) {
-    /**
-     * Configuration information for Activities.
-     *
-     * @typedef {PseudoDocumentsMetadata} ActivityMetadata
-     * @property {string} type                              Type name of this activity.
-     * @property {string} img                               Default icon.
-     * @property {string} title                             Default title.
-     * @property {typeof ActivitySheet} sheetClass          Sheet class used to configure this activity.
-     * @property {object} usage
-     * @property {Record<string, Function>} usage.actions   Actions that can be triggered from the chat card.
-     * @property {string} usage.chatCard                    Template used to render the chat card.
-     * @property {typeof ActivityUsageDialog} usage.dialog  Default usage prompt.
-     */
-
     /**
      * Configuration information for this PseudoDocument.
      * @type {Readonly<ActivityMetadata>}
@@ -175,65 +164,6 @@ export default function ActivityMixin(Base) {
     /* -------------------------------------------- */
     /*  Activation                                  */
     /* -------------------------------------------- */
-
-    /**
-     * Configuration data for an activity usage being prepared.
-     *
-     * @typedef {object} ActivityUseConfiguration
-     * @property {object|false} create
-     * @property {boolean} create.measuredTemplate     Should this item create a template?
-     * @property {object} concentration
-     * @property {boolean} concentration.begin         Should this usage initiate concentration?
-     * @property {string|null} concentration.end       ID of an active effect to end concentration on.
-     * @property {object|false} consume
-     * @property {boolean} consume.action              Should action economy be tracked? Currently only handles
-     *                                                 legendary actions.
-     * @property {boolean|number[]} consume.resources  Set to `true` or `false` to enable or disable all resource
-     *                                                 consumption or provide a list of consumption target indexes
-     *                                                 to only enable those targets.
-     * @property {boolean} consume.spellSlot           Should this spell consume a spell slot?
-     * @property {Event} event                         The browser event which triggered the item usage, if any.
-     * @property {boolean|number} scaling              Number of steps above baseline to scale this usage, or `false` if
-     *                                                 scaling is not allowed.
-     * @property {object} spell
-     * @property {number} spell.slot                   The spell slot to consume.
-     * @property {boolean} [subsequentActions=true]    Trigger subsequent actions defined by this activity.
-     * @property {object} [cause]
-     * @property {string} [cause.activity]             Relative UUID to the activity that caused this one to be used.
-     *                                                 Activity must be on the same actor as this one.
-     * @property {boolean|number[]} [cause.resources]  Control resource consumption on linked item.
-     */
-
-    /**
-     * Data for the activity activation configuration dialog.
-     *
-     * @typedef {object} ActivityDialogConfiguration
-     * @property {boolean} [configure=true]  Display a configuration dialog for the item usage, if applicable?
-     * @property {typeof ActivityUsageDialog} [applicationClass]  Alternate activation dialog to use.
-     * @property {object} [options]          Options passed through to the dialog.
-     */
-
-    /**
-     * Message configuration for activity usage.
-     *
-     * @typedef {object} ActivityMessageConfiguration
-     * @property {boolean} [create=true]     Whether to automatically create a chat message (if true) or simply return
-     *                                       the prepared chat message data (if false).
-     * @property {object} [data={}]          Additional data used when creating the message.
-     * @property {boolean} [hasConsumption]  Was consumption available during activation.
-     * @property {string} [rollMode]         The roll display mode with which to display (or not) the card.
-     */
-
-    /**
-     * Details of final changes performed by the usage.
-     *
-     * @typedef {object} ActivityUsageResults
-     * @property {ActiveEffect5e[]} effects              Active effects that were created or deleted.
-     * @property {ChatMessage5e|object} message          The chat message created for the activation, or the message
-     *                                                   data if `create` in ActivityMessageConfiguration was `false`.
-     * @property {MeasuredTemplateDocument[]} templates  Created measured templates.
-     * @property {ActivityUsageUpdates} updates          Updates to the actor & items.
-     */
 
     /**
      * Activate this activity.
@@ -409,12 +339,6 @@ export default function ActivityMixin(Base) {
     }
 
     /* -------------------------------------------- */
-
-    /**
-     * @typedef ActivityConsumptionDescriptor
-     * @property {{ keyPath: string, delta: number }[]} actor                 Changes for the actor.
-     * @property {Record<string, { keyPath: string, delta: number }[]>} item  Changes for each item grouped by ID.
-     */
 
     /**
      * Refund previously used consumption for an activity.
@@ -619,18 +543,6 @@ export default function ActivityMixin(Base) {
     /* -------------------------------------------- */
 
     /**
-     * Update data produced by activity usage.
-     *
-     * @typedef {object} ActivityUsageUpdates
-     * @property {object} activity  Updates applied to activity that performed the activation.
-     * @property {object} actor     Updates applied to the actor that performed the activation.
-     * @property {object[]} create  Full data for Items to create (with IDs maintained).
-     * @property {string[]} delete  IDs of items to be deleted from the actor.
-     * @property {object[]} item    Updates applied to items on the actor that performed the activation.
-     * @property {Roll[]} rolls     Any rolls performed as part of the activation.
-     */
-
-    /**
      * Calculate changes to actor, items, & this activity based on resource consumption.
      * @param {ActivityUseConfiguration} config                  Usage configuration.
      * @param {object} [options={}]
@@ -831,14 +743,6 @@ export default function ActivityMixin(Base) {
     }
 
     /* -------------------------------------------- */
-
-    /**
-     * @typedef {object} ActivityUsageChatButton
-     * @property {string} label    Label to display on the button.
-     * @property {string} icon     Icon to display on the button.
-     * @property {string} classes  Classes for the button.
-     * @property {object} dataset  Data attributes attached to the button.
-     */
 
     /**
      * Create the buttons that will be displayed in chat.

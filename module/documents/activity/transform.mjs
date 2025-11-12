@@ -6,7 +6,7 @@ import { getSceneTargets, simplifyBonus } from "../../utils.mjs";
 import ActivityMixin from "./mixin.mjs";
 
 /**
- * @import { TransformationConfiguration } from "../../_types.mjs";
+ * @import { TransformProfile } from "../../data/activity/_types.mjs";
  */
 
 /**
@@ -52,19 +52,6 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
 
   /* -------------------------------------------- */
   /*  Activation                                  */
-  /* -------------------------------------------- */
-
-  /**
-   * @typedef {ActivityUseConfiguration} TransformUseConfiguration
-   * @property {Partial<TransformationConfiguration>} transform  Options for configuring transformation behavior.
-   */
-
-  /**
-   * @typedef TransformationConfiguration
-   * @property {string} profile  ID of the transformation profile to use.
-   * @property {string} [uuid]   UUID of the creature to transform into.
-   */
-
   /* -------------------------------------------- */
 
   /** @inheritDoc */

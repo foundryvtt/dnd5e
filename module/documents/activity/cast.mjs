@@ -4,6 +4,12 @@ import { staticID } from "../../utils.mjs";
 import ActivityMixin from "./mixin.mjs";
 
 /**
+ * @import {
+ *   ActivityDialogConfiguration, ActivityMessageConfiguration, ActivityUsageResults, ActivityUseConfiguration
+ * } from "./_types.mjs";
+ */
+
+/**
  * Activity for casting a spell from another item.
  */
 export default class CastActivity extends ActivityMixin(BaseCastActivityData) {

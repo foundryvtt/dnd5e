@@ -8,6 +8,7 @@ import ActivityMixin from "./mixin.mjs";
  * @import {
  *   AttackRollDialogConfiguration, AttackRollProcessConfiguration, BasicRollMessageConfiguration, D20RollConfiguration
  * } from "../../dice/_types.mjs";
+ * @import { AmmunitionUpdate } from "./_types.mjs";
  */
 
 /**
@@ -72,13 +73,6 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
   /* -------------------------------------------- */
   /*  Rolling                                     */
   /* -------------------------------------------- */
-
-  /**
-   * @typedef AmmunitionUpdate
-   * @property {string} id        ID of the ammunition item to update.
-   * @property {boolean} destroy  Will the ammunition item be deleted?
-   * @property {number} quantity  New quantity after the ammunition is spent.
-   */
 
   /**
    * Perform an attack roll.

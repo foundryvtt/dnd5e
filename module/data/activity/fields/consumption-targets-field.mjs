@@ -7,6 +7,7 @@ const { ArrayField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * @import { ConsumptionLabels } from "../../../_types.mjs";
+ * @import { ActivityUsageUpdates, ActivityUseConfiguration } from "../../../documents/activity/_types.mjs";
  * @import { UsesData } from "../../shared/_types.mjs";
  */
 

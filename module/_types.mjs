@@ -1,6 +1,6 @@
 /**
  * @import { TransformationSettingData } from "./data/settings/_types.mjs";
- * @import { ActivityUsageUpdates, ActivityUseConfiguration } from "./documents/activity/mixin.mjs";
+ * @import { ActivityUsageUpdates, ActivityUseConfiguration } from "./documents/activity/_types.mjs";
  */
 
 /**

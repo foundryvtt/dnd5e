@@ -4,7 +4,7 @@ import Dialog5e from "../api/dialog.mjs";
 const { BooleanField, NumberField, StringField } = foundry.data.fields;
 
 /**
- * @import { ActivityUseConfiguration } from "../../documents/activity/mixin.mjs";
+ * @import { ActivityUseConfiguration } from "../../documents/activity/_types.mjs";
  */
 
 /**

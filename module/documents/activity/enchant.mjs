@@ -59,11 +59,6 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
   /*  Activation                                  */
   /* -------------------------------------------- */
 
-  /**
-   * @typedef {ActivityUseConfiguration} EnchantUseConfiguration
-   * @property {string} enchantmentProfile
-   */
-
   /** @inheritDoc */
   _prepareUsageConfig(config) {
     config = super._prepareUsageConfig(config);

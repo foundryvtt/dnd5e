@@ -6,7 +6,7 @@ import { parseInputDelta } from "../../utils.mjs";
 import Item5e from "../../documents/item.mjs";
 
 /**
- * @import { ActivityUsageResults } from "../../documents/activity/mixin.mjs";
+ * @import { ActivityUsageResults } from "../../documents/activity/_types.mjs";
  * @import { InventoryColumnDescriptor, InventorySectionDescriptor } from "./_types.mjs";
  */
 

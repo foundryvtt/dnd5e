@@ -23,7 +23,7 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
  * @import { ItemContentsTransformer, SpellcastingDescription, SpellScrollConfiguration } from "./_types.mjs";
  * @import {
  *   ActivityDialogConfiguration, ActivityMessageConfiguration, ActivityUsageResults, ActivityUseConfiguration
- * } from "./activity/mixin.mjs";
+ * } from "./activity/_types.mjs";
  */
 
 /**

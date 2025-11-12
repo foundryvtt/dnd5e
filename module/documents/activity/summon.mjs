@@ -8,7 +8,8 @@ import ActivityMixin from "./mixin.mjs";
 
 /**
  * @import { TokenPlacementData } from "../../canvas/_types.mjs";
- * @import { ActivityUseConfiguration, ActivityUsageResults } from "./mixin.mjs";
+ * @import { SummonsProfile } from "../../data/activity/_types.mjs";
+ * @import { SummoningConfiguration, SummonUsageResults, SummonUseConfiguration, TokenUpdateData } from "./_types.mjs";
  */
 
 /**
@@ -55,27 +56,6 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
   /* -------------------------------------------- */
   /*  Activation                                  */
   /* -------------------------------------------- */
-
-  /**
-   * @typedef {ActivityUseConfiguration} SummonUseConfiguration
-   * @property {object|false} create
-   * @property {string} create.summons                    Should a summoned creature be created?
-   * @property {Partial<SummoningConfiguration>} summons  Options for configuring summoning behavior.
-   */
-
-  /**
-   * Configuration data for summoning behavior.
-   *
-   * @typedef SummoningConfiguration
-   * @property {string} profile         ID of the summoning profile to use.
-   * @property {string} [creatureSize]  Selected creature size if multiple are available.
-   * @property {string} [creatureType]  Selected creature type if multiple are available.
-   */
-
-  /**
-   * @typedef {ActivityUsageResults} SummonUsageResults
-   * @property {Token5e[]} summoned  Summoned tokens.
-   */
 
   /** @inheritDoc */
   _prepareUsageConfig(config) {
@@ -507,18 +487,8 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
   /* -------------------------------------------- */
 
   /**
-   * Configuration for creating a modified token.
-   *
-   * @typedef {object} TokenUpdateData
-   * @property {Actor5e} actor                 Original actor from which the token will be created.
-   * @property {TokenPlacementData} placement  Information on the location to summon the token.
-   * @property {object} tokenUpdates           Additional updates that will be applied to token data.
-   * @property {object} actorUpdates           Updates that will be applied to actor delta.
-   */
-
-  /**
    * Create token data ready to be summoned.
-   * @param {config} TokenUpdateData  Configuration for creating a modified token.
+   * @param {TokenUpdateData} config  Configuration for creating a modified token.
    * @returns {object}
    */
   async getTokenData({ actor, placement, tokenUpdates, actorUpdates }) {
