@@ -1,6 +1,6 @@
 import ItemChoiceConfig from "../../applications/advancement/item-choice-config.mjs";
 import ItemChoiceFlow from "../../applications/advancement/item-choice-flow.mjs";
-import { ItemChoiceConfigurationData, ItemChoiceValueData } from "../../data/advancement/item-choice.mjs";
+import { ItemChoiceConfigurationData, ItemChoiceValueData } from "../../data/advancement/item-choice-data.mjs";
 import ItemGrantAdvancement from "./item-grant.mjs";
 
 /**

@@ -1,6 +1,6 @@
 import ItemGrantConfig from "../../applications/advancement/item-grant-config.mjs";
 import ItemGrantFlow from "../../applications/advancement/item-grant-flow-v2.mjs";
-import ItemGrantConfigurationData from "../../data/advancement/item-grant.mjs";
+import ItemGrantConfigurationData from "../../data/advancement/item-grant-data.mjs";
 import Advancement from "./advancement.mjs";
 
 /**

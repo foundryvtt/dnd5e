@@ -1,0 +1,49 @@
+<fieldset class="flexcol">
+    <legend>
+        <span>{{ localize "DND5E.ADVANCEMENT.ModifyItem.FIELDS.changes.label" }}</span>
+        <button type="button" class="unbutton control-button" data-action="addChange"
+                data-tooltip aria-label="{{ localize 'DND5E.ADVANCEMENT.ModifyItem.Action.AddChange' }}">
+            <i class="fa-solid fa-plus" inert></i>
+        </button>
+    </legend>
+    {{#if hasEffectsTab}}
+    <multi-select name="selectedEnchantments" class="hidden-tags">
+        {{ selectOptions allEnchantments }}
+    </multi-select>
+    {{/if}}
+    <ul class="separated-list effects-list flexcol unlist">
+        {{#each changes}}
+        <li class="flexcol" data-index="{{ @index }}" data-effect-id="{{ effect.id }}">
+            {{> ".change" }}
+        </li>
+        {{else}}
+        <li class="empty">
+            {{{ localize (concat "DND5E.ADVANCEMENT.ModifyItem.Empty." (ifThen hasEffectsTab "With" "Without") "Dropdown") }}}
+        </li>
+        {{/each}}
+    </ul>
+</fieldset>
+
+{{#*inline ".change"}}
+<div class="details flexrow">
+    <img class="gold-icon" src="{{ effect.img }}" alt="{{ effect.name }}">
+    {{{ contentLink }}}
+    <div class="list-controls flexrow">
+        {{#if @root.hasEffectsTab}}
+        <button type="button" class="unbutton control-button" data-action="dissociateEffect"
+                data-tooltip aria-label="{{ localize 'DND5E.EFFECT.Action.Dissociate' }}">
+            <i class="fa-solid fa-minus" inert></i>
+        </button>
+        {{/if}}
+        <button type="button" class="unbutton control-button" data-action="deleteChange"
+                data-tooltip aria-label="{{ localize 'DND5E.ADVANCEMENT.ModifyItem.Action.DeleteChange' }}">
+            <i class="fa-solid fa-trash" inert></i>
+        </button>
+    </div>
+</div>
+<input type="hidden" name="{{ prefix }}_id" value="{{ data._id }}">
+<div class="flexrow">
+    {{ formField fields.identifiers name=(concat prefix "identifiers") value=data.identifiers
+                 classes="label-top multi-select" rootId=@root.partId }}
+</div>
+{{/inline}}
