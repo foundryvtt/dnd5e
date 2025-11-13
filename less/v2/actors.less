@@ -199,7 +199,10 @@
 
     .main-content {
       /* Tabbed Content */
-      .tab-body .tab:not(.active) { display: none; }
+      .tab-body {
+        overflow-x: hidden;
+        .tab:not(.active) { display: none; }
+      }
     }
   }
 
