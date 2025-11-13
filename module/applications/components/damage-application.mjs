@@ -22,6 +22,14 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
   /* -------------------------------------------- */
 
   /**
+   * The HTML tag named used by this element.
+   * @type {string}
+   */
+  static tagName = "damage-application";
+
+  /* -------------------------------------------- */
+
+  /**
    * The apply damage button within the element.
    * @type {HTMLButtonElement}
    */

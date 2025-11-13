@@ -1,5 +1,7 @@
 import FilterMenu from "./filter-menu.mjs";
 
+const MaybeAdoptable = foundry.applications.elements.AdoptableHTMLElement ?? HTMLElement;
+
 /**
  * @import { TabPreferences5e } from "../../data/user/_types.mjs";
  * @import { FilterState5e, ListControlConfiguration, ListControlDescriptor } from "./_types.mjs";
@@ -8,7 +10,7 @@ import FilterMenu from "./filter-menu.mjs";
 /**
  * A custom element that encapsulates functionality for sorting, filtering, searching, and grouping lists of items.
  */
-export default class ItemListControlsElement extends HTMLElement {
+export default class ItemListControlsElement extends MaybeAdoptable {
   /* -------------------------------------------- */
   /*  Configuration                               */
   /* -------------------------------------------- */
@@ -48,10 +50,20 @@ export default class ItemListControlsElement extends HTMLElement {
   /* -------------------------------------------- */
 
   /**
+   * The HTML tag named used by this element.
+   * @type {string}
+   */
+  static tagName = "item-list-controls";
+
+  /* -------------------------------------------- */
+
+  /**
    * The amount of time to wait after a user's keypress before the name search filter is applied, in milliseconds.
    * @type {number}
    */
   static FILTER_DEBOUNCE_MS = 200;
+
+  /* -------------------------------------------- */
 
   /**
    * The Application instance that houses this item control.
@@ -63,6 +75,8 @@ export default class ItemListControlsElement extends HTMLElement {
 
   #app;
 
+  /* -------------------------------------------- */
+
   /**
    * The configured filtering options.
    * @type {Record<string, string>}
@@ -73,17 +87,23 @@ export default class ItemListControlsElement extends HTMLElement {
 
   #filters;
 
+  /* -------------------------------------------- */
+
   /**
    * The configured grouping modes.
    * @type {Record<string, ListControlDescriptor>}
    */
   #groups;
 
+  /* -------------------------------------------- */
+
   /**
    * The managing inventory element.
    * @type {InventoryElement}
    */
   #inventory;
+
+  /* -------------------------------------------- */
 
   /**
    * The list element that this element manages.
@@ -95,11 +115,15 @@ export default class ItemListControlsElement extends HTMLElement {
 
   #list;
 
+  /* -------------------------------------------- */
+
   /**
    * The configured sort modes.
    * @type {Record<string, ListControlDescriptor>}
    */
   #modes;
+
+  /* -------------------------------------------- */
 
   /**
    * The current filter state.
@@ -111,6 +135,8 @@ export default class ItemListControlsElement extends HTMLElement {
 
   #state;
 
+  /* -------------------------------------------- */
+
   /**
    * The tab this element is part of.
    * @type {string}
@@ -121,12 +147,16 @@ export default class ItemListControlsElement extends HTMLElement {
 
   #tab;
 
+  /* -------------------------------------------- */
+
   /**
    * The search input.
    * @type {HTMLInputElement}
    * @protected
    */
   _inputElement;
+
+  /* -------------------------------------------- */
 
   /**
    * The individual filtering controls.
@@ -135,6 +165,8 @@ export default class ItemListControlsElement extends HTMLElement {
    */
   _controls;
 
+  /* -------------------------------------------- */
+
   /**
    * The user's preferences for this tab.
    * @type {TabPreferences5e}
@@ -142,6 +174,8 @@ export default class ItemListControlsElement extends HTMLElement {
   get prefs() {
     return game.user.getFlag("dnd5e", `sheetPrefs.${this.app.document.type}.tabs.${this.tab}`);
   }
+
+  /* -------------------------------------------- */
 
   /**
    * Whether to keep empty sections visible.

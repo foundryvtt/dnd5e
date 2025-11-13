@@ -270,6 +270,9 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
         else current.add(v);
       };
       if ( Array.isArray(delta) ) delta.forEach(item => handle(item));
+      else if ( delta instanceof Set ) {
+        for ( const item of delta ) handle(item);
+      }
       else handle(delta);
       return;
     }

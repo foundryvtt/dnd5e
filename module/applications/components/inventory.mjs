@@ -13,7 +13,7 @@ import Item5e from "../../documents/item.mjs";
 /**
  * A custom element that handles displaying a collection of items.
  */
-export default class InventoryElement extends HTMLElement {
+export default class InventoryElement extends (foundry.applications.elements.AdoptableHTMLElement ?? HTMLElement) {
   /* -------------------------------------------- */
   /*  Configuration                               */
   /* -------------------------------------------- */
@@ -156,6 +156,14 @@ export default class InventoryElement extends HTMLElement {
   /* -------------------------------------------- */
 
   /**
+   * The HTML tag named used by this element.
+   * @type {string}
+   */
+  static tagName = "dnd5e-inventory";
+
+  /* -------------------------------------------- */
+
+  /**
    * The actor that manages these items.
    * @returns {Actor5e|null}
    */
@@ -163,6 +171,8 @@ export default class InventoryElement extends HTMLElement {
     if ( this.document instanceof Actor ) return this.document;
     return this.document.actor ?? null;
   }
+
+  /* -------------------------------------------- */
 
   /**
    * Reference to the Application that contains this component.
@@ -174,6 +184,8 @@ export default class InventoryElement extends HTMLElement {
 
   #app;
 
+  /* -------------------------------------------- */
+
   /**
    * Can items be used from this inventory list.
    * @type {boolean}
@@ -182,6 +194,8 @@ export default class InventoryElement extends HTMLElement {
     return this.actor && this.actor.isOwner && !this.actor.pack;
   }
 
+  /* -------------------------------------------- */
+
   /**
    * The document that holds these items.
    * @returns {Actor5e|Item5e}
@@ -189,6 +203,8 @@ export default class InventoryElement extends HTMLElement {
   get document() {
     return this.app.inventorySource ?? this.app.document;
   }
+
+  /* -------------------------------------------- */
 
   /**
    * Cached section data to avoid expensive lookups during resize events.
@@ -199,6 +215,8 @@ export default class InventoryElement extends HTMLElement {
    * }[]}
    */
   #sections;
+
+  /* -------------------------------------------- */
 
   /**
    * Retrieve the templates needed to render the inventory.

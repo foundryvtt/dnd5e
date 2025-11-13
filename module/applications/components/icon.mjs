@@ -1,15 +1,27 @@
 import AdoptedStyleSheetMixin from "./adopted-stylesheet-mixin.mjs";
 
+const MaybeAdoptable = foundry.applications.elements.AdoptableHTMLElement ?? HTMLElement;
+
 /**
  * Custom element for displaying SVG icons that are cached and can be styled.
  */
-export default class IconElement extends AdoptedStyleSheetMixin(HTMLElement) {
+export default class IconElement extends AdoptedStyleSheetMixin(MaybeAdoptable) {
   constructor() {
     super();
     this.#internals = this.attachInternals();
     this.#internals.role = "img";
     this.#shadowRoot = this.attachShadow({ mode: "closed" });
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The HTML tag named used by this element.
+   * @type {string}
+   */
+  static tagName = "dnd5e-icon";
+
+  /* -------------------------------------------- */
 
   /** @inheritDoc */
   static CSS = `
@@ -23,17 +35,23 @@ export default class IconElement extends AdoptedStyleSheetMixin(HTMLElement) {
     }
   `;
 
+  /* -------------------------------------------- */
+
   /**
    * Cached SVG files by SRC.
    * @type {Map<string, SVGElement|Promise<SVGElement>>}
    */
   static #svgCache = new Map();
 
+  /* -------------------------------------------- */
+
   /**
    * The custom element's form and accessibility internals.
    * @type {ElementInternals}
    */
   #internals;
+
+  /* -------------------------------------------- */
 
   /**
    * Shadow root that contains the icon.

@@ -11,6 +11,14 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
   /* -------------------------------------------- */
 
   /**
+   * The HTML tag named used by this element.
+   * @type {string}
+   */
+  static tagName = "effect-application";
+
+  /* -------------------------------------------- */
+
+  /**
    * The chat message with which this application is associated.
    * @type {ChatMessage5e}
    */

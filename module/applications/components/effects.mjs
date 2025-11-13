@@ -5,7 +5,7 @@ import ContextMenu5e from "../context-menu.mjs";
 /**
  * Custom element that handles displaying active effects lists.
  */
-export default class EffectsElement extends HTMLElement {
+export default class EffectsElement extends (foundry.applications.elements.AdoptableHTMLElement ?? HTMLElement) {
   connectedCallback() {
     if ( this.#app ) return;
     this.#app = foundry.applications.instances.get(this.closest(".application")?.id);
@@ -34,6 +34,14 @@ export default class EffectsElement extends HTMLElement {
 
   /* -------------------------------------------- */
   /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * The HTML tag named used by this element.
+   * @type {string}
+   */
+  static tagName = "dnd5e-effects";
+
   /* -------------------------------------------- */
 
   /**
