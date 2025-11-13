@@ -72,13 +72,6 @@ export default class BaseSummonActivityData extends BaseActivityData {
 
   /* -------------------------------------------- */
 
-  /** @override */
-  get applicableEffects() {
-    return null;
-  }
-
-  /* -------------------------------------------- */
-
   /**
    * Summons that can be performed based on spell/character/class level.
    * @type {SummonsProfile[]}

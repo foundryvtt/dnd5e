@@ -22,7 +22,7 @@ export default class SummonSheet extends ActivitySheet {
     effect: {
       template: "systems/dnd5e/templates/activity/summon-effect.hbs",
       templates: [
-        "systems/dnd5e/templates/activity/parts/activity-effects.hbs",
+        ...super.PARTS.effect.templates,
         "systems/dnd5e/templates/activity/parts/summon-changes.hbs",
         "systems/dnd5e/templates/activity/parts/summon-profiles.hbs"
       ]

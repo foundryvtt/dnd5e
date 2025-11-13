@@ -24,7 +24,7 @@ export default class TransformSheet extends ActivitySheet {
     effect: {
       template: "systems/dnd5e/templates/activity/transform-effect.hbs",
       templates: [
-        "systems/dnd5e/templates/activity/parts/activity-effects.hbs",
+        ...super.PARTS.effect.templates,
         "systems/dnd5e/templates/activity/parts/transform-profiles.hbs",
         "systems/dnd5e/templates/activity/parts/transform-settings.hbs"
       ]

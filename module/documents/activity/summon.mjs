@@ -74,6 +74,14 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  _finalizeMessageConfig(usageConfig, messageConfig, results) {
+    super._finalizeMessageConfig(usageConfig, messageConfig, results);
+    delete messageConfig.data.flags?.dnd5e?.use?.effects;
+  }
+
+  /* -------------------------------------------- */
+
   /** @override */
   _usageChatButtons(message) {
     if ( !this.availableProfiles.length ) return super._usageChatButtons(message);
