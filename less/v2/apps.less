@@ -1597,7 +1597,7 @@ dialog.dnd5e2.application {
       padding: 6px 10px;
       &:hover {
         cursor: var(--cursor-pointer);
-        background: var(--dnd5e-background-parchment);
+        background: var(--radio-list-hover);
       }
     }
     &.custom label {
@@ -1914,7 +1914,12 @@ dialog.dnd5e2.application {
 /* ---------------------------------- */
 
 .dnd5e2.create-document {
-  form header { padding: 0 .5rem; }
+  &:not(.minimized) .window-header {
+    margin-block-end: 0;
+    .window-title { display: none; }
+  }
+  .window-content header { padding: 0 .5rem; }
+  [data-application-part="content"] { display: contents; }
 
   .document-name {
     font-family: var(--dnd5e-font-roboto-slab);
@@ -1923,7 +1928,7 @@ dialog.dnd5e2.application {
     text-align: center;
     background: none;
 
-    &:hover, &:focus, &:focus-visible { box-shadow: none; }
+    &:enabled:is(:hover, :focus, :focus-visible) { box-shadow: none; }
   }
 
   ol {
@@ -1932,7 +1937,8 @@ dialog.dnd5e2.application {
     li {
       border-bottom: var(--dnd5e-border-dotted);
 
-      &:hover { background: var(--dnd5e-color-parchment); }
+      &:has(input:enabled):hover { background: var(--radio-list-hover); }
+      &:has(input:disabled) { opacity: .5; }
       &:last-child { border: none; }
     }
 
@@ -1972,7 +1978,7 @@ dialog.dnd5e2.application {
     flex: none;
   }
 
-  .dialog-buttons {
+  .form-footer {
     flex-wrap: wrap;
     select {
       flex: 1;

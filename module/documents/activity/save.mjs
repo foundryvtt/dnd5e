@@ -22,6 +22,7 @@ export default class SaveActivity extends ActivityMixin(BaseSaveActivityData) {
       type: "save",
       img: "systems/dnd5e/icons/svg/activity/save.svg",
       title: "DND5E.SAVE.Title.one",
+      hint: "DND5E.SAVE.Hint",
       sheetClass: SaveSheet,
       usage: {
         actions: {

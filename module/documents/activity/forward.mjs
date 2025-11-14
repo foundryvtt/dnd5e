@@ -21,6 +21,7 @@ export default class ForwardActivity extends ActivityMixin(BaseForwardActivityDa
       type: "forward",
       img: "systems/dnd5e/icons/svg/activity/forward.svg",
       title: "DND5E.FORWARD.Title",
+      hint: "DND5E.FORWARD.Hint",
       sheetClass: ForwardSheet
     }, { inplace: false })
   );

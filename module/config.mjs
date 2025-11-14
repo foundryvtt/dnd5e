@@ -4415,6 +4415,13 @@ DND5E.advancementTypes = {
  * @enum {Record<string, string>}
  */
 DND5E.defaultArtwork = {
+  Actor: {
+    character: "systems/dnd5e/icons/svg/actors/character.svg",
+    encounter: "systems/dnd5e/icons/svg/actors/encounter.svg",
+    group: "systems/dnd5e/icons/svg/actors/group.svg",
+    npc: "systems/dnd5e/icons/svg/actors/npc.svg",
+    vehicle: "systems/dnd5e/icons/svg/actors/vehicle.svg"
+  },
   Item: {
     background: "systems/dnd5e/icons/svg/items/background.svg",
     class: "systems/dnd5e/icons/svg/items/class.svg",

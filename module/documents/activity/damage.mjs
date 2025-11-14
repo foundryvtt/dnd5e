@@ -21,6 +21,7 @@ export default class DamageActivity extends ActivityMixin(BaseDamageActivityData
       type: "damage",
       img: "systems/dnd5e/icons/svg/activity/damage.svg",
       title: "DND5E.DAMAGE.Title",
+      hint: "DND5E.DAMAGE.Hint",
       sheetClass: DamageSheet,
       usage: {
         actions: {

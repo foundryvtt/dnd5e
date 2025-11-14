@@ -21,6 +21,7 @@ export default class HealActivity extends ActivityMixin(BaseHealActivityData) {
       type: "heal",
       img: "systems/dnd5e/icons/svg/activity/heal.svg",
       title: "DND5E.HEAL.Title",
+      hint: "DND5E.HEAL.Hint",
       sheetClass: HealSheet,
       usage: {
         actions: {
