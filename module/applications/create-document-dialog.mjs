@@ -16,8 +16,7 @@ export default class CreateDocumentDialog extends Dialog5e {
     },
     position: {
       width: 350
-    },
-    types: null
+    }
   };
 
   /* -------------------------------------------- */
@@ -92,7 +91,7 @@ export default class CreateDocumentDialog extends Dialog5e {
 
       for ( const type of TYPES ) {
         if ( type === CONST.BASE_DOCUMENT_TYPE ) continue;
-        if ( this.options.types && !this.options.types.includes(type) ) continue;
+        if ( this.options.createOptions.types && !this.options.createOptions.types.includes(type) ) continue;
         const typeData = { selected: type === defaultType, type };
         if ( this.documentType._createDialogData ) {
           Object.assign(typeData, this.documentType._createDialogData(type, parent));
@@ -155,8 +154,10 @@ export default class CreateDocumentDialog extends Dialog5e {
    * @param {object} [data={}]                                    Document creation data.
    * @param {DatabaseCreateOperation} [createOptions={}]          Document creation options.
    * @param {object} [dialogOptions={}]                           Options forwarded to dialog.
+   * @param {object} [dialogOptions.ok={}]                        Options for the OK button.
+   * @returns {Promise<Document>}
    */
-  static async prompt(documentType, data={}, createOptions={}, {ok={}, ...config}={}) {
+  static async prompt(documentType, data={}, createOptions={}, { ok={}, ...config }={}) {
     const label = game.i18n.localize(documentType.metadata.label ?? `DOCUMENT.DND5E.${documentType.documentName}`);
     const title = game.i18n.format("DOCUMENT.Create", { type: label });
 
@@ -174,8 +175,7 @@ export default class CreateDocumentDialog extends Dialog5e {
     const dialog = new this(config);
     dialog.addEventListener("close", event => {
       if ( !dialog.submitted ) return;
-      const createData = dialog.options.createData;
-      const createOptions = dialog.options.createOptions;
+      const { createData, createOptions } = dialog.options;
       if ( !createData.folder ) delete createData.folder;
       if ( !createData.name?.trim() ) createData.name = documentType.defaultName?.({
         type: createData.type, parent: createOptions.parent, pack: createOptions.pack
@@ -209,13 +209,13 @@ export default class CreateDocumentDialog extends Dialog5e {
       title: "window", id: "", classes: "", jQuery: ""
     };
 
-    for (const [k, v] of Object.entries(createOptions)) {
-      if (k in applicationOptions) {
+    for ( const [k, v] of Object.entries(createOptions) ) {
+      if ( k in applicationOptions ) {
         foundry.utils.logCompatibilityWarning("The ClientDocument.createDialog signature has changed. "
           + "It now accepts database operation options in its second parameter, "
           + "and options for DialogV2.prompt in its third parameter.", { since: 13, until: 15, once: true });
         const dialogOption = applicationOptions[k];
-        if (dialogOption) foundry.utils.setProperty(dialogOptions, `${dialogOption}.${k}`, v);
+        if ( dialogOption ) foundry.utils.setProperty(dialogOptions, `${dialogOption}.${k}`, v);
         else dialogOptions[k] = v;
         delete createOptions[k];
       }
