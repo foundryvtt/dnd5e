@@ -16,7 +16,8 @@ export default class CreateDocumentDialog extends Dialog5e {
     },
     position: {
       width: 350
-    }
+    },
+    types: null
   };
 
   /* -------------------------------------------- */
@@ -81,6 +82,7 @@ export default class CreateDocumentDialog extends Dialog5e {
     context.folders.unshift({ id: "", name: game.i18n.localize("DOCUMENT.Folder"), rule: true });
 
     context.name = this.options.createData.name;
+    context.folder = this.options.createData.folder;
 
     context.types = [];
     context.hasTypes = false;
@@ -91,7 +93,7 @@ export default class CreateDocumentDialog extends Dialog5e {
 
       for ( const type of TYPES ) {
         if ( type === CONST.BASE_DOCUMENT_TYPE ) continue;
-        if ( this.options.createOptions.types && !this.options.createOptions.types.includes(type) ) continue;
+        if ( this.options.types && !this.options.types.includes(type) ) continue;
         const typeData = { selected: type === defaultType, type };
         if ( this.documentType._createDialogData ) {
           Object.assign(typeData, this.documentType._createDialogData(type, parent));
@@ -157,12 +159,12 @@ export default class CreateDocumentDialog extends Dialog5e {
    * @param {object} [dialogOptions.ok={}]                        Options for the OK button.
    * @returns {Promise<Document>}
    */
-  static async prompt(documentType, data={}, createOptions={}, { ok={}, ...config }={}) {
+  static async prompt(documentType, data={}, { folders, types, ...createOptions }={}, { ok={}, ...config }={}) {
     const label = game.i18n.localize(documentType.metadata.label ?? `DOCUMENT.DND5E.${documentType.documentName}`);
     const title = game.i18n.format("DOCUMENT.Create", { type: label });
 
     foundry.utils.mergeObject(config, {
-      createOptions, documentType,
+      createOptions, documentType, folders, types,
       createData: data,
       window: { title }
     });
