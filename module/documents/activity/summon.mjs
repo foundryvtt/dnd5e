@@ -388,6 +388,8 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
       }
     }
 
+    if ( this.disposition ) tokenUpdates.disposition = this.disposition;
+
     const attackDamageBonus = CONFIG.Dice.BasicRoll.replaceFormulaData(this.bonuses.attackDamage ?? "", rollData);
     const saveDamageBonus = CONFIG.Dice.BasicRoll.replaceFormulaData(this.bonuses.saveDamage ?? "", rollData);
     const healingBonus = CONFIG.Dice.BasicRoll.replaceFormulaData(this.bonuses.healing ?? "", rollData);
@@ -523,7 +525,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
       }, { newEffects: [], oldEffects: [] });
 
       await tokenDocument.actor.updateEmbeddedDocuments("ActiveEffect", oldEffects);
-      await tokenDocument.actor.createEmbeddedDocuments("ActiveEffect", newEffects, {keepId: true});
+      await tokenDocument.actor.createEmbeddedDocuments("ActiveEffect", newEffects, { keepId: true });
     } else {
       tokenDocument.delta.updateSource(actorUpdates);
       if ( actor.prototypeToken.appendNumber ) TokenPlacement.adjustAppendedNumber(tokenDocument, placement);

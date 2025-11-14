@@ -97,17 +97,18 @@ system:
         attacks: false
         proficiency: false
         saves: false
+        ability: ''
       profiles:
         - count: '1'
           cr: '@item.level'
           name: ''
           _id: BFnNfSl7Ojcw4Rm2
           uuid: ''
+          types:
+            - elemental
           level:
             min: null
             max: null
-          types:
-            - elemental
       summon:
         identifier: ''
         mode: cr
@@ -115,7 +116,12 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      disposition: 1
+      appliedEffects: []
   identifier: conjure-elemental
 sort: 0
 flags: {}
@@ -124,11 +130,11 @@ effects: []
 folder: bG9QTayc46rfNkv2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.350'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.2.0
   createdTime: 1725037345639
-  modifiedTime: 1725992716468
+  modifiedTime: 1760981561138
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!1LkZvINag7KqBmDR'
