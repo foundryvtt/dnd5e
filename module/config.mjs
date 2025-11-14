@@ -3416,6 +3416,9 @@ DND5E.transformation = {
     hp: {
       label: "DND5E.TRANSFORM.Setting.Keep.Health.Label"
     },
+    tempHP: {
+      label: "DND5E.TRANSFORM.Setting.Keep.TempHP.Label"
+    },
     resistances: {
       label: "DND5E.TRANSFORM.Setting.Keep.Resistances.Label"
     },
@@ -3446,7 +3449,7 @@ DND5E.transformation = {
       label: "DND5E.TRANSFORM.Preset.WildShape.Label",
       settings: {
         effects: new Set(["otherOrigin", "origin", "feat", "spell", "class", "background"]),
-        keep: new Set(["bio", "class", "feats", "hp", "languages", "mental", "type"]),
+        keep: new Set(["bio", "class", "feats", "hp", "languages", "mental", "tempHP", "type"]),
         merge: new Set(["saves", "skills"]),
         minimumAC: "(13 + @abilities.wis.mod) * sign(@subclasses.moon.levels)",
         spellLists: new Set(["subclass:moon"]),
