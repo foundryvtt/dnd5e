@@ -19,7 +19,7 @@ export function registerCustomEnrichers() {
     enricher: enrichString
   },
   {
-    pattern: /\[\[(?<type>lookup) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
+    pattern: /\[\[(?<type>language|lookup) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
     enricher: enrichString
   },
   {
@@ -56,6 +56,7 @@ async function enrichString(match, options) {
     case "check":
     case "skill":
     case "tool": return enrichCheck(config, label, options);
+    case "language": return enrichLanguage(config, label, options);
     case "lookup": return enrichLookup(config, label, options);
     case "concentration": config._isConcentration = true;
     case "save": return enrichSave(config, label, options);
@@ -909,6 +910,29 @@ async function enrichDamage(configs, label, options) {
   }
 
   return link;
+}
+
+/* -------------------------------------------- */
+/*  Language Enricher                           */
+/* -------------------------------------------- */
+
+/**
+ * Enrich a language reference.
+ */
+function enrichLanguage(config, label, options) {
+  for ( const value of config.values ) {
+    const slug = foundry.utils.getType(value) === "string" ? slugify(value) : value;
+    if ( slug in CONFIG.DND5E.enrichmentLookup.languages ) config.language = slug;
+  }
+  delete config.values;
+
+  if ( !(config.language in CONFIG.DND5E.enrichmentLookup.languages) ) {
+    console.warn(`No language found while enriching ${config._input}.`);
+    return null;
+  }
+
+  config.type = "language";
+  return createPassiveTag(label ?? CONFIG.DND5E.enrichmentLookup.languages[config.language], config);
 }
 
 /* -------------------------------------------- */
