@@ -129,7 +129,7 @@ export default class ChatMessage5e extends ChatMessage {
       html.querySelectorAll(".description.collapsible").forEach(el => el.classList.add("collapsed"));
     }
 
-    this._enrichChatCard(html);
+    await this._enrichChatCard(html);
     this._collapseTrays(html);
     this._activateActivityListeners(html);
     dnd5e.bastion._activateChatListeners(this, html);
@@ -266,28 +266,38 @@ export default class ChatMessage5e extends ChatMessage {
    * @param {HTMLElement} html  The chat card markup.
    * @protected
    */
-  _enrichChatCard(html) {
+  async _enrichChatCard(html) {
     html.querySelectorAll(".dnd5e2").forEach(el => el.classList.remove("dnd5e2")); // Legacy
     html.classList.add("dnd5e2");
 
     // Header matter
     const actor = this.getAssociatedActor();
+    const avatar = document.createElement("a");
+    avatar.classList.add("avatar");
+    let avatarImg = document.createElement("img");
 
     let img;
     let nameText;
     if ( this.isContentVisible ) {
-      img = actor?.img ?? this.author?.avatar;
+      const artworkData = await actor?.getPreferredArtwork();
+      img = artworkData?.src ?? this.author?.avatar;
       nameText = this.alias;
+      if ( artworkData?.isToken ) avatar.classList.add("token");
+      if ( artworkData?.isVideo ) {
+        avatarImg = document.createElement("video");
+        avatarImg.toggleAttribute("autoplay", true);
+        avatarImg.toggleAttribute("muted", true);
+        avatarImg.toggleAttribute("disablepictureinpicture", true);
+        avatarImg.toggleAttribute("loop", true);
+        avatarImg.toggleAttribute("playsinline", true);
+      }
     } else {
       img = this.author?.avatar;
       nameText = this.author?.name ?? "";
     }
     img ??= CONST.DEFAULT_TOKEN;
 
-    const avatar = document.createElement("a");
-    avatar.classList.add("avatar");
     if ( actor ) avatar.dataset.uuid = actor.uuid;
-    const avatarImg = document.createElement("img");
     Object.assign(avatarImg, { src: img, alt: nameText });
     avatar.append(avatarImg);
 

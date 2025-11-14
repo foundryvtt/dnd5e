@@ -487,23 +487,13 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @protected
    */
   async _preparePortrait(context) {
-    const showTokenPortrait = this.actor.getFlag("dnd5e", "showTokenPortrait") === true;
-    const token = this.actor.isToken ? this.actor.token : this.actor.prototypeToken;
-    const defaultArtwork = Actor.implementation.getDefaultArtwork(this.actor._source)?.img;
-    let action = "editImage";
-    let texture = token?.texture.src;
-    if ( showTokenPortrait && token?.randomImg ) {
-      const images = await this.actor.getTokenImages();
-      texture = images[Math.floor(Math.random() * images.length)];
-      action = "configurePrototypeToken";
-    }
-    const src = (showTokenPortrait ? texture : this.actor.img) ?? defaultArtwork;
+    const portraitData = await this.actor.getPreferredArtwork();
     return {
-      src, action,
-      token: showTokenPortrait,
-      path: showTokenPortrait ? this.actor.isToken ? "token.texture.src" : "prototypeToken.texture.src" : "img",
-      type: showTokenPortrait ? "imagevideo" : "image",
-      isVideo: foundry.helpers.media.VideoHelper.hasVideoExtension(src)
+      ...portraitData,
+      action: portraitData.isRandom ? "configurePrototypeToken" : "editImage",
+      path: portraitData.isToken ? this.actor.isToken ? "token.texture.src" : "prototypeToken.texture.src" : "img",
+      token: portraitData.isToken,
+      type: portraitData.token ? "imagevideo" : "image"
     };
   }
 

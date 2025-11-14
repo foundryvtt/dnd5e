@@ -48,6 +48,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
+   * Cached copy of the preferred artwork.
+   * @type {{ src: string, isToken: boolean, isRandom: boolean, isVideo: boolean }|null}
+   */
+  _preferredArtwork = this._preferredArtwork;
+
+  /* -------------------------------------------- */
+
+  /**
    * Mapping of item identifiers to the items.
    * @type {IdentifiedItemsMap<string, Set<Item5e>>}
    */
@@ -265,6 +273,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   _clearCachedValues() {
     this._lazy = {};
+    this._preferredArtwork = null;
   }
 
   /* --------------------------------------------- */
@@ -352,6 +361,33 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         "_stats.duplicateSource": actor.uuid
       }, { save: true });
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Select appropriate artwork to display on sheet & chat cards based on `showTokenPortrait` flag.
+   * @returns {Promise<{ src: string, token: boolean, isRandom: boolean, isVideo: boolean }>}
+   */
+  async getPreferredArtwork() {
+    if ( !this._preferredArtwork ) {
+      const showTokenPortrait = this.getFlag("dnd5e", "showTokenPortrait") === true;
+      const token = this.isToken ? this.token : this.prototypeToken;
+      const defaultArtwork = Actor.implementation.getDefaultArtwork(this._source)?.img;
+      let texture = token?.texture.src;
+      if ( showTokenPortrait && token?.randomImg ) {
+        const images = await this.getTokenImages();
+        texture = images[Math.floor(Math.random() * images.length)];
+      }
+      const src = (showTokenPortrait ? texture : this.img) ?? defaultArtwork;
+      this._preferredArtwork = {
+        src,
+        isRandom: showTokenPortrait && token?.randomImg,
+        isToken: showTokenPortrait,
+        isVideo: foundry.helpers.media.VideoHelper.hasVideoExtension(src)
+      };
+    }
+    return this._preferredArtwork;
   }
 
   /* -------------------------------------------- */

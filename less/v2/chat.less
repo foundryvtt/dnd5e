@@ -46,16 +46,22 @@
         place-content: center;
       }
 
-      img {
+      img, video {
         width: 38px;
         height: 38px;
-        border-radius: 4px;
-        box-shadow: 0 0 6px rgb(0 0 0 / 85%);
-        object-fit: cover;
-        object-position: top;
         border: none;
         flex: none;
+      }
+      .avatar:not(.token) img {
+        border-radius: 4px;
+        box-shadow: 0 0 6px rgb(0 0 0 / 85%);
         background: var(--dnd5e-background-alt-1);
+        object-fit: cover;
+        object-position: top;
+      }
+      .avatar.token :is(img, video) {
+        object-fix: contain;
+        object-position: center;
       }
     }
 
