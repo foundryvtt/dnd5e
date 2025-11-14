@@ -2330,11 +2330,20 @@ DND5E.difficultTerrainTypes = {
   rocks: {
     label: "DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Rocks"
   },
+  mud: {
+    label: "DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Mud"
+  },
+  sand: {
+    label: "DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Sand"
+  },
   slope: {
     label: "DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Slope"
   },
   snow: {
     label: "DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Snow"
+  },
+  web: {
+    label: "DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Webs"
   }
 };
 preLocalize("difficultTerrainTypes", { key: "label", sort: true });
