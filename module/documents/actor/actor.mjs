@@ -2835,7 +2835,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Token appearance updates
     const tokenPropsFromSource = ["width", "height", "alpha", "lockRotation", "ring"];
     const tokenTexturePropsFromSource = ["offsetX", "offsetY", "scaleX", "scaleY", "src", "tint"];
-    const tokenPropsFromSelf = ["bar1", "bar2", "displayBars", "displayName", "disposition", "rotation", "elevation"];
+    const tokenPropsFromSelf = [
+      "bar1", "bar2", "displayBars", "displayName", "disposition", "rotation", "elevation", "hidden"
+    ];
 
     for ( const k of tokenPropsFromSource ) {
       d.prototypeToken[k] = sourceData.prototypeToken[k];
@@ -3039,7 +3041,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( this.isToken ) {
       const tokenData = d.prototypeToken;
       delete d.prototypeToken;
-      tokenData.hidden = this.token.hidden;
       for ( const k of tokenPropsFromSelf ) {
         tokenData[k] = this.token[k];
       }
@@ -3101,7 +3102,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       newTokenData._id = t.id;
       newTokenData.actorId = newActor.id;
       newTokenData.actorLink = true;
-      newTokenData.hidden = t.document.hidden;
       for ( const k of tokenPropsFromSelf ) {
         newTokenData[k] = t.document[k];
       }
