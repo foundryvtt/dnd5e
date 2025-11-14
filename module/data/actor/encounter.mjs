@@ -74,21 +74,23 @@ export default class EncounterData extends GroupTemplate {
   /* -------------------------------------------- */
 
   /**
-   * Add a new member to the group.
-   * @param {Actor5e} actor       The actor to add.
+   * Add new members to the group.
+   * @param {...Actor5e} actors   The actors to add.
    * @returns {Promise<Actor5e>}  The updated encounter Actor.
    */
-  async addMember(actor) {
-    if ( actor.type !== "npc" ) throw new Error("Only NPC actors can be part of encounters.");
-    let existing = false;
+  async addMember(...actors) {
     const members = this.toObject().members;
-    for ( const member of members ) {
-      if ( (member.uuid === actor.uuid) && member.quantity?.value ) {
-        member.quantity.value++;
-        existing = true;
+    for ( const actor of actors ) {
+      if ( actor.type !== "npc" ) throw new Error("Only NPC actors can be part of encounters.");
+      let existing = false;
+      for ( const member of members ) {
+        if ( (member.uuid === actor.uuid) && member.quantity?.value ) {
+          member.quantity.value++;
+          existing = true;
+        }
       }
+      if ( !existing ) members.push({ uuid: actor.uuid });
     }
-    if ( !existing ) members.push({ uuid: actor.uuid });
     return this.parent.update({ "system.members": members });
   }
 

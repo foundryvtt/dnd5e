@@ -1,6 +1,7 @@
-import Award from "../award.mjs";
-import MultiActorSheet from "./api/multi-actor-sheet.mjs";
 import { parseInputDelta } from "../../utils.mjs";
+import Award from "../award.mjs";
+import CompendiumBrowser from "../compendium-browser.mjs";
+import MultiActorSheet from "./api/multi-actor-sheet.mjs";
 
 /**
  * Extension of the base actor sheet for encounter actors.
@@ -10,6 +11,7 @@ export default class EncounterActorSheet extends MultiActorSheet {
   static DEFAULT_OPTIONS = {
     actions: {
       award: EncounterActorSheet.#onAward,
+      browse: EncounterActorSheet.#onBrowse,
       decrease: EncounterActorSheet.#onDecrease,
       increase: EncounterActorSheet.#onIncrease,
       rollQuantities: EncounterActorSheet.#onRollQuantities,
@@ -192,6 +194,13 @@ export default class EncounterActorSheet extends MultiActorSheet {
   }
 
   /* -------------------------------------------- */
+  /*  Life-Cycle Handlers                         */
+  /* -------------------------------------------- */
+
+  /** @override */
+  _saveSheetPosition() {}
+
+  /* -------------------------------------------- */
   /*  Event Listeners & Handlers                  */
   /* -------------------------------------------- */
 
@@ -218,7 +227,7 @@ export default class EncounterActorSheet extends MultiActorSheet {
 
   /**
    * Handle distributing XP & currency.
-   * @this {MultiActorSheet}
+   * @this {EncounterActorSheet}
    */
   static async #onAward() {
     new Award({
@@ -228,6 +237,33 @@ export default class EncounterActorSheet extends MultiActorSheet {
         xp: await this.actor.system.getXPValue()
       }
     }).render({ force: true });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle opening the compendium browser to add actors.
+   * @this {EncounterActorSheet}
+   * @param {PointerEvent} event  The triggering event.
+   * @param {HTMLElement} target  The action target.
+   */
+  static async #onBrowse(event, target) {
+    if ( !this.isEditable ) return;
+    const results = await CompendiumBrowser.select({
+      filters: {
+        locked: {
+          documentClass: "Actor",
+          types: new Set(["npc"])
+        }
+      },
+      selection: {
+        min: 1
+      }
+    });
+    if ( results ) {
+      const actors = await Promise.all(results.map(fromUuid));
+      this.actor.system.addMember(...actors);
+    }
   }
 
   /* -------------------------------------------- */
@@ -307,11 +343,4 @@ export default class EncounterActorSheet extends MultiActorSheet {
     if ( Number.isNaN(index) ) return;
     this.actor.system.rollQuantities({ index });
   }
-
-  /* -------------------------------------------- */
-  /*  Life-Cycle Handlers                         */
-  /* -------------------------------------------- */
-
-  /** @override */
-  _saveSheetPosition() {}
 }
