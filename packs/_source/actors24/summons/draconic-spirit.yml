@@ -518,7 +518,8 @@ items:
       prerequisites:
         level: null
         repeatable: false
-      properties: []
+      properties:
+        - trait
       requirements: ''
       activities:
         fSlF41kzEOJncuNi:
@@ -987,11 +988,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.350'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.2.0
       createdTime: null
-      modifiedTime: 1740680159247
+      modifiedTime: 1763150380582
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!phbmobDraconicSp.phbaoiSharedResi'
@@ -1001,8 +1002,9 @@ items:
         value: >-
           <p>The spirit makes a number of [[/item Rend]] attacks equal to half
           the spell's level (round down), and it uses [[/item Breath
-          Weapon]].</p><p>[[floor(@flags.dnd5e.summon.level / 2)]]{Number of
-          attacks}</p>
+          Weapon]].</p><p
+          class="hide-in-embed">[[floor(@flags.dnd5e.summon.level / 2)]]{Number
+          of attacks}</p>
         chat: ''
       source:
         custom: ''
@@ -1100,11 +1102,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.350'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.2.0
       createdTime: null
-      modifiedTime: 1740680159247
+      modifiedTime: 1763150437643
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!phbmobDraconicSp.phbaoiMultiattac'
@@ -1379,13 +1381,18 @@ ownership:
 flags:
   dnd5e:
     showTokenPortrait: false
+    statBlockOverride:
+      ac: 14 + the spell's level
+      hp: 50 + 10 for each spell level above 5
+      pb: PB equals your Proficiency Bonus
+      cr: None
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.350'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1724425912241
-  modifiedTime: 1745256827525
+  modifiedTime: 1763150332118
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!actors!phbmobDraconicSp'
