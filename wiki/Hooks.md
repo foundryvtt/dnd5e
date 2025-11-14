@@ -846,4 +846,28 @@ Fires after an embedded NPC stat block is rendered.
 | config   | DocumentHTMLEmbedConfig | Configuration for embedding behavior.     |
 | options  | EnrichmentOptions       | Original enrichment options.              |
 
+## Movement Automation
+
+### `dnd5e.determineOccupiedGridSpaceBlocking`
+
+Fires when determining whether a grid space is occupied by a token which should block movement for a provided token.
+| Name            | Type         | Description                                                            |
+| --------------- | ------------ | ---------------------------------------------------------------------- |
+| gridSpace       | GridOffset3D | The grid space being checked.                                          |
+| token           | Token5e      | The token being moved.                                                 |
+| options         | object       | Additional options.                                                    |
+| options.preview | boolean      | Whether the movement in question is previewed.                         |
+| found           | Set<Token5e> | The found set of tokens which would block movement. *Will be mutated.* |
+
+### `dnd5e.determineOccupiedGridSpaceDifficult`
+
+Fires when determining whether a grid space is occupied by a token which should cause difficult terrain for a provided token.
+| Name            | Type         | Description                                                                     |
+| --------------- | ------------ | ------------------------------------------------------------------------------- |
+| gridSpace       | GridOffset3D | The grid space being checked.                                                   |
+| token           | Token5e      | The token being moved.                                                          |
+| options         | object       | Additional options.                                                             |
+| options.preview | boolean      | Whether the movement in question is previewed.                                  |
+| found           | Set<Token5e> | The found set of tokens which would cause difficult terrain. *Will be mutated.* |
+
 
