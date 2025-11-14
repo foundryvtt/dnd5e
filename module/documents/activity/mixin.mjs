@@ -2,6 +2,7 @@ import ActivitySheet from "../../applications/activity/activity-sheet.mjs";
 import ActivityUsageDialog from "../../applications/activity/activity-usage-dialog.mjs";
 import AbilityTemplate from "../../canvas/ability-template.mjs";
 import { ConsumptionError } from "../../data/activity/fields/consumption-targets-field.mjs";
+import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
 import { formatNumber, getSceneTargets, getTargetDescriptors, localizeSchema } from "../../utils.mjs";
 import DependentDocumentMixin from "../mixins/dependent.mjs";
 import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
@@ -342,7 +343,7 @@ export default function ActivityMixin(Base) {
 
     /**
      * Refund previously used consumption for an activity.
-     * @param {ActivityConsumptionDescriptor} consumed  Data on the consumption that occurred.
+     * @param {ActorDeltasData} consumed  Data on the consumption that occurred.
      */
     async refund(consumed) {
       const updates = {
@@ -378,41 +379,17 @@ export default function ActivityMixin(Base) {
     /**
      * Merge activity updates into the appropriate item updates and apply.
      * @param {ActivityUsageUpdates} updates
-     * @returns {ActivityConsumptionDescriptor}  Information on consumption performed to store in message flag.
+     * @returns {ActorDeltasData}  Information on consumption performed to store in message flag.
      */
     async #applyUsageUpdates(updates) {
       this._mergeActivityUpdates(updates);
 
       // Ensure no existing items are created again & no non-existent items try to be deleted
-      updates.create = updates.create?.filter(i => !this.actor.items.has(i));
+      updates.create = updates.create?.filter(i => !this.actor.items.has(i._id));
       updates.delete = updates.delete?.filter(i => this.actor.items.has(i));
 
       // Create the consumed flag
-      const getDeltas = (document, updates) => {
-        updates = foundry.utils.flattenObject(updates);
-        return Object.entries(updates).map(([keyPath, value]) => {
-          let currentValue;
-          if ( keyPath.startsWith("system.activities") ) {
-            const [id, ...kp] = keyPath.slice(18).split(".");
-            currentValue = foundry.utils.getProperty(document.system.activities?.get(id) ?? {}, kp.join("."));
-          } else currentValue = foundry.utils.getProperty(document, keyPath);
-          const delta = value - currentValue;
-          if ( delta && !Number.isNaN(delta) ) return { keyPath, delta };
-          return null;
-        }).filter(_ => _);
-      };
-      const consumed = {
-        actor: getDeltas(this.actor, updates.actor),
-        item: updates.item.reduce((obj, { _id, ...changes }) => {
-          const deltas = getDeltas(this.actor.items.get(_id), changes);
-          if ( deltas.length ) obj[_id] = deltas;
-          return obj;
-        }, {})
-      };
-      if ( foundry.utils.isEmpty(consumed.actor) ) delete consumed.actor;
-      if ( foundry.utils.isEmpty(consumed.item) ) delete consumed.item;
-      if ( updates.create?.length ) consumed.created = updates.create;
-      if ( updates.delete?.length ) consumed.deleted = updates.delete.map(i => this.actor.items.get(i).toObject());
+      const consumed = ActorDeltasField.getDeltas(this.actor, updates);
 
       // Update documents with consumption
       if ( !foundry.utils.isEmpty(updates.actor) ) await this.actor.update(updates.actor);

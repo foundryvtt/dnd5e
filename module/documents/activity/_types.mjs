@@ -1,6 +1,7 @@
 /**
  * @import { TransformationConfiguration } from "../../_types.mjs";
  * @import { TokenPlacementData } from "../../canvas/_types.mjs";
+ * @import { ActorUpdatesDescription } from "../../data/chat-message/fields/_types.mjs";
  * @import { PseudoDocumentsMetadata } from "../mixins/_types.mjs";
  */
 
@@ -90,12 +91,8 @@
 /**
  * Update data produced by activity usage.
  *
- * @typedef ActivityUsageUpdates
+ * @typedef {ActorUpdatesDescription} ActivityUsageUpdates
  * @property {object} activity  Updates applied to activity that performed the activation.
- * @property {object} actor     Updates applied to the actor that performed the activation.
- * @property {object[]} create  Full data for Items to create (with IDs maintained).
- * @property {string[]} delete  IDs of items to be deleted from the actor.
- * @property {object[]} item    Updates applied to items on the actor that performed the activation.
  * @property {Roll[]} rolls     Any rolls performed as part of the activation.
  */
 
