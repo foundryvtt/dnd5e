@@ -261,7 +261,7 @@ export default class EncounterActorSheet extends MultiActorSheet {
       }
     });
     if ( results ) {
-      const actors = await Promise.all(results.map(r => fromUuid(r)));
+      const actors = await Promise.all(results.map(fromUuid));
       this.actor.system.addMember(...actors);
     }
   }
