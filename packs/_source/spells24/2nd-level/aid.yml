@@ -5,13 +5,7 @@ system:
       <p>Choose up to three creatures within range. Each target's Hit Point
       maximum and current Hit Points increase by 5 for the
       duration.</p><p><strong>Using a Higher-Level Spell Slot. </strong>Each
-      target's Hit Points increase by 5 for each spell slot level above
-      2.</p><section id="secret-u9DpSmufNhFMDGmN"
-      class="secret"><p><strong>Foundry Note</strong></p><p>The default
-      <strong>Heal</strong> activity is configured with multiple Active Effects
-      representing the temporary maximum Hit Points provided by this
-      spell.</p><p>Users should apply the appropriate Active Effect for the
-      spell slot level used in the casting of this spell.</p></section>
+      target's Hit Points increase by 5 for each spell slot level above 2.</p>
     chat: ''
   source:
     custom: ''
@@ -78,13 +72,37 @@ system:
         override: false
       effects:
         - _id: XyGKCCrIhrFlixG8
+          level:
+            min: 2
+            max: 2
         - _id: cTNQ2KRJLj4CRpQJ
+          level:
+            min: 3
+            max: 3
         - _id: 6hOGzq87iQntkHE5
+          level:
+            min: 4
+            max: 4
         - _id: Fs7zeTW4u9SvteWO
+          level:
+            min: 5
+            max: 5
         - _id: o1Gvp7nIrEHqdn3g
+          level:
+            min: 6
+            max: 6
         - _id: n4jjrd9bNOaDkos7
+          level:
+            min: 7
+            max: 7
         - _id: EHMDA2J47jwUUTKu
+          level:
+            min: 8
+            max: 8
         - _id: YnQP5Rd6w5NwZVLN
+          level:
+            min: 9
+            max: 9
       range:
         override: false
       target:
@@ -123,6 +141,10 @@ system:
         - n4jjrd9bNOaDkos7
         - EHMDA2J47jwUUTKu
         - YnQP5Rd6w5NwZVLN
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: aid
 _id: phbsplAid0000000
 type: spell
@@ -435,18 +457,14 @@ folder: 3SjcO2acsFnWegp4
 sort: 100000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.350'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1724425940061
-  modifiedTime: 1745256784934
+  modifiedTime: 1763149735102
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplAid0000000'
