@@ -130,4 +130,14 @@ export default class BaseSummonActivityData extends BaseActivityData {
       }
     });
   }
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _preCreate(data) {
+    super._preCreate(data);
+    if ( !("disposition" in data) ) this.updateSource({ disposition: CONST.TOKEN_DISPOSITIONS.FRIENDLY });
+  }
 }
