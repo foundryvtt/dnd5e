@@ -175,7 +175,7 @@ export default class Tooltips5e {
         const abilityMod = systemData.abilities?.[ability]?.mod;
         if ( abilityMod !== undefined ) passive = 10 + abilityMod;
       }
-      if ( !passive ) return false;
+      if ( passive === undefined ) return false;
       return {
         passive, status: dc !== undefined ? passive >= dc ? "success" : "failure" : ""
       };
@@ -198,7 +198,7 @@ export default class Tooltips5e {
    * @protected
    */
   async _onHoverPassive({ label }, memberCallback) {
-    const party = game.actors.party;
+    const { party } = game.actors;
     if ( !party ) {
       this.tooltip.innerHTML = label;
       return;
@@ -207,8 +207,8 @@ export default class Tooltips5e {
     const context = { label, party: [] };
     for ( const member of party.system.members ) {
       if ( !member.actor ) continue;
-      const c = memberCallback(member.actor);
-      if ( c ) context.party.push({ name: member.actor.name, img: member.actor.img, ...c });
+      const ctx = memberCallback(member.actor);
+      if ( ctx ) context.party.push({ name: member.actor.name, img: member.actor.img, ...ctx });
     }
 
     this.tooltip.classList.add("dnd5e-tooltip", "passive-tooltip", "dnd5e2", "themed", "theme-light");
