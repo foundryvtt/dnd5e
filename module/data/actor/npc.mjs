@@ -431,6 +431,15 @@ export default class NPCData extends CreatureTemplate {
     legact.value = Math.clamp(legact.max - legact.spent, 0, legact.max);
     legres.value = Math.clamp(legres.max - legres.spent, 0, legres.max);
     this.resources.legact.label = this.getLegendaryActionsDescription();
+    const legendaryResistanceItem = this.parent.identifiedItems.get("legendary-resistance", { type: "feat" })?.first();
+    if ( legres.max && legendaryResistanceItem ) {
+      const max = this._source.resources.legres.max;
+      const modernRules = (this.source?.rules
+        || (game.settings.get("dnd5e", "rulesVersion") === "modern" ? "2024" : "2014")) === "2024";
+      legendaryResistanceItem.system.uses.label = this.resources.lair.value && modernRules ? game.i18n.format(
+        "DND5E.LegendaryResistance.LairUses",  { normal: formatNumber(max), lair: formatNumber(max + 1) }
+      ) : `${formatNumber(max)}/${CONFIG.DND5E.limitedUsePeriods.day?.label ?? ""}`;
+    }
   }
 
   /* -------------------------------------------- */
