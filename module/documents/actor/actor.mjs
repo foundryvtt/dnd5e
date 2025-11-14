@@ -2694,7 +2694,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     if ( settings.keep.has("self") ) {
       o.img = sourceData.img;
-      o.name = `${o.name} (${game.i18n.localize("DND5E.TRANSFORM.Preset.Appearance.Label")})`;
+      o.name = o.prototypeToken.name = `${o.name} (${game.i18n.localize("DND5E.TRANSFORM.Preset.Appearance.Label")})`;
     }
 
     // Prepare new data to merge from the source
@@ -2729,14 +2729,19 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     d.system.attributes.ac.flat = source.system.attributes.ac.value; // Override AC
 
     // Token appearance updates
-    for ( const k of ["width", "height", "alpha", "lockRotation"] ) {
+    const tokenPropsFromSource = ["width", "height", "alpha", "lockRotation", "ring"];
+    const tokenTexturePropsFromSource = ["offsetX", "offsetY", "scaleX", "scaleY", "src", "tint"];
+    const tokenPropsFromSelf = [
+      "bar1", "bar2", "displayBars", "displayName", "disposition", "rotation", "elevation", "hidden"
+    ];
+
+    for ( const k of tokenPropsFromSource ) {
       d.prototypeToken[k] = sourceData.prototypeToken[k];
     }
-    for ( const k of ["offsetX", "offsetY", "scaleX", "scaleY", "src", "tint"] ) {
+    for ( const k of tokenTexturePropsFromSource ) {
       d.prototypeToken.texture[k] = sourceData.prototypeToken.texture[k];
     }
-    d.prototypeToken.ring = sourceData.prototypeToken.ring;
-    for ( const k of ["bar1", "bar2", "displayBars", "displayName", "disposition", "rotation", "elevation"] ) {
+    for ( const k of tokenPropsFromSelf ) {
       d.prototypeToken[k] = o.prototypeToken[k];
     }
 
@@ -2932,11 +2937,21 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( this.isToken ) {
       const tokenData = d.prototypeToken;
       delete d.prototypeToken;
-      tokenData.elevation = this.token.elevation;
-      tokenData.hidden = this.token.hidden;
-      tokenData.rotation = this.token.rotation;
-      const previousActorData = this.token.delta.toObject();
-      foundry.utils.setProperty(tokenData, "flags.dnd5e.previousActorData", previousActorData);
+      for ( const k of tokenPropsFromSelf ) {
+        tokenData[k] = this.token[k];
+      }
+      if ( !this.token.flags.dnd5e?.previousActorData ) {
+        const previousActorData = this.token.delta.toObject();
+        const previousTokenData = { texture: {} };
+        for ( const k of [...tokenPropsFromSource, ...tokenPropsFromSelf, "name"] ) {
+          previousTokenData[k] = this.token[k];
+        }
+        for ( const k of tokenTexturePropsFromSource ) {
+          previousTokenData.texture[k] = this.token.texture[k];
+        }
+        foundry.utils.setProperty(tokenData, "flags.dnd5e.previousActorData", previousActorData);
+        foundry.utils.setProperty(tokenData, "flags.dnd5e.previousTokenData", previousTokenData);
+      }
       await this.sheet?.close();
       const update = await this.token.update(tokenData);
       // TODO: We have to make do with these extra server hits until #12768 or #12769 is resolved.
@@ -2983,13 +2998,23 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       newTokenData._id = t.id;
       newTokenData.actorId = newActor.id;
       newTokenData.actorLink = true;
-      newTokenData.elevation = t.document.elevation;
-      newTokenData.hidden = t.document.hidden;
-      newTokenData.rotation = t.document.rotation;
+      for ( const k of tokenPropsFromSelf ) {
+        newTokenData[k] = t.document[k];
+      }
 
       const dOriginalActor = foundry.utils.getProperty(d, "flags.dnd5e.originalActor");
       foundry.utils.setProperty(newTokenData, "flags.dnd5e.originalActor", dOriginalActor);
       foundry.utils.setProperty(newTokenData, "flags.dnd5e.isPolymorphed", true);
+      if ( !t.document.flags.dnd5e?.previousTokenData ) {
+        const previousTokenData = { texture: {} };
+        for ( const k of [...tokenPropsFromSource, ...tokenPropsFromSelf, "name"] ) {
+          previousTokenData[k] = t.document[k];
+        }
+        for ( const k of tokenTexturePropsFromSource ) {
+          previousTokenData.texture[k] = t.document.texture[k];
+        }
+        foundry.utils.setProperty(newTokenData, "flags.dnd5e.previousTokenData", previousTokenData);
+      }
       return newTokenData;
     });
     return canvas.scene?.updateEmbeddedDocuments("Token", updates);
@@ -3026,7 +3051,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     const transformOptions = this.getFlag("dnd5e", "transformOptions");
     const previousActorIds = this.getFlag("dnd5e", "previousActorIds") ?? [];
-    const isOriginalActor = !previousActorIds.length;
     const isRendered = this.sheet.rendered;
 
     // Obtain a reference to the original actor
@@ -3058,24 +3082,15 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       actorData._id = tokenUpdate.delta._id;
       tokenUpdate.delta = actorData;
 
-      for ( const k of ["width", "height", "alpha", "lockRotation", "name"] ) {
-        tokenUpdate[k] = prototypeTokenData[k];
-      }
-      for ( const k of ["offsetX", "offsetY", "scaleX", "scaleY", "src", "tint"] ) {
-        tokenUpdate.texture[k] = prototypeTokenData.texture[k];
-      }
-      tokenUpdate.ring = prototypeTokenData.ring;
+      foundry.utils.mergeObject(tokenUpdate, this.token.getFlag("dnd5e", "previousTokenData"));
       tokenUpdate.sight = prototypeTokenData.sight;
       tokenUpdate.detectionModes = prototypeTokenData.detectionModes;
+      delete tokenUpdate.flags.dnd5e.previousActorData;
+      delete tokenUpdate.flags.dnd5e.previousTokenData;
 
       await this.sheet.close();
       const token = await TokenDocument.implementation.create(tokenUpdate, { parent: this.token.parent, render: true });
       await this.token.delete({ replacements: { [this.token._id]: token.uuid } });
-      if ( isOriginalActor ) {
-        await this.unsetFlag("dnd5e", "isPolymorphed");
-        await this.unsetFlag("dnd5e", "previousActorIds");
-        await this.token.unsetFlag("dnd5e", "previousActorData");
-      }
       if ( isRendered && options.renderSheet ) token.actor?.sheet?.render(true);
       return token;
     }
@@ -3097,27 +3112,29 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         update.elevation = t.document.elevation;
         update.hidden = t.document.hidden;
         update.rotation = t.document.rotation;
+        foundry.utils.mergeObject(update, t.document.getFlag("dnd5e", "previousTokenData"));
         delete update.x;
         delete update.y;
         return update;
       });
       await canvas.scene.updateEmbeddedDocuments("Token", tokenUpdates, { diff: false, recursive: false });
     }
-    if ( isOriginalActor ) {
-      await this.unsetFlag("dnd5e", "isPolymorphed");
-      await this.unsetFlag("dnd5e", "previousActorIds");
-    }
 
+    const polymorphedActorIds = previousActorIds.filter(id =>
+      id !== original.id // Is not original Actor Id
+      && game.actors?.get(id) // Actor still exists
+    ).concat([this.id]); // Add this id
     // Delete the polymorphed version(s) of the actor, if possible
     if ( game.user.isGM ) {
-      const idsToDelete = previousActorIds.filter(id =>
-        id !== original.id // Is not original Actor Id
-        && game.actors?.get(id) // Actor still exists
-      ).concat([this.id]); // Add this id
+      await Actor.implementation.deleteDocuments(polymorphedActorIds);
+    } else {
+      // Remove the flags
+      const actorUpdates = polymorphedActorIds.filter(id => game.actors.get(id).isOwner).map(p => {
+        return { _id: p, "flags.dnd5e": { "-=isPolymorphed": null, "-=previousActorIds": null } };
+      });
+      await Actor.implementation.updateDocuments(actorUpdates);
 
-      await Actor.implementation.deleteDocuments(idsToDelete);
-    } else if ( isRendered ) {
-      this.sheet?.close();
+      if ( isRendered ) this.sheet?.close();
     }
     if ( isRendered && options.renderSheet ) original.sheet?.render(isRendered);
     if ( !foundry.utils.isEmpty(update) ) await original.update(update, { dnd5e: { concentrationCheck: false } });
