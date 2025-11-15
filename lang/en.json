@@ -5512,12 +5512,11 @@
 "SETTINGS.DND5E": {
   "AUTOMATION": {
     "Movement": {
-      "Name": "Disable Movement Automation",
-      "Hint": "Do not apply difficult terrain movement penalties, including tokens counting as difficult terrain according to the rules version."
-    },
-    "TokenBlocking": {
-      "Name": "Disable Token Blocking",
-      "Hint": "Do not prevent creatures from moving through each other according to the rules version."
+      "Name": "Movement Automation",
+      "Hint": "Configure the amount of movement automation used by the system.",
+      "Full": "Full: Tokens may block or hinder movement of other tokens",
+      "NoBlocking": "Partial: Tokens may act as difficult terrain but cannot block each other",
+      "None": "None: Tokens can move freely through each other, difficult terrain does nothing"
     }
   },
   "BLOODIED": {
