@@ -39,8 +39,7 @@ export default class CalendarData5e extends foundry.data.CalendarData {
    * @returns {number}                  Progress through day period, with 0 representing sunrise and 1 sunset.
    */
   progressDay(time=game.time.components) {
-    const components = typeof time === "number" ? this.timeToComponents(time) : time;
-    return (CalendarData5e.hoursOfDay(components) - this.sunrise(time)) / this.daylightHours(time);
+    return (CalendarData5e.hoursOfDay(time) - this.sunrise(time)) / this.daylightHours(time);
   }
 
   /* -------------------------------------------- */
@@ -51,9 +50,8 @@ export default class CalendarData5e extends foundry.data.CalendarData {
    * @returns {number}                  Progress through night period, with 0 representing sunset and 1 sunrise.
    */
   progressNight(time=game.time.components) {
-    const components = typeof time === "number" ? this.timeToComponents(time) : time;
     const daylightHours = this.daylightHours(time);
-    let hour = CalendarData5e.hoursOfDay(components);
+    let hour = CalendarData5e.hoursOfDay(time);
     if ( hour < daylightHours ) hour += this.days.hoursPerDay;
     return (hour - this.sunset(time)) / daylightHours;
   }
@@ -162,7 +160,7 @@ export default class CalendarData5e extends foundry.data.CalendarData {
    * @param {object} options             Additional formatting options.
    * @returns {string}                   The returned string format.
    */
-  static formatMonthHoursMinutesSeconds(calendar, components, options) {
+  static formatHoursMinutesSeconds(calendar, components, options) {
     return CalendarData5e.formatLocalized(
       "DND5E.CALENDAR.Formatters.HoursMinutesSeconds.Format", calendar, components, options
     );

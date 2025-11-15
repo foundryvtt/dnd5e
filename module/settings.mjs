@@ -303,7 +303,7 @@ export function registerSystemSettings() {
     scope: "world",
     config: false,
     type: CalendarConfigSetting,
-    onChange: () => CONFIG.DND5E.calendar.instance?.onUpdateSettings?.()
+    onChange: () => dnd5e.ui.calendar?.onUpdateSettings?.()
   });
 
   game.settings.register("dnd5e", "calendarPreferences", {
@@ -311,7 +311,7 @@ export function registerSystemSettings() {
     scope: "user",
     config: false,
     type: CalendarPreferencesSetting,
-    onChange: () => CONFIG.DND5E.calendar.instance?.onUpdateSettings?.()
+    onChange: () => dnd5e.ui.calendar?.onUpdateSettings?.()
   });
 
   // Combat Settings

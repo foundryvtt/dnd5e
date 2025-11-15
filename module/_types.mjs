@@ -144,7 +144,6 @@
 /**
  * @typedef CalendarHUDConfiguration
  * @property {typeof ApplicationV2|null} application  HUD application to display, or `null` to not display one.
- * @property {ApplicationV2|null} instance            Currently instantiated calendar application.
  * @property {CalendarTimeFormatter[]} formatters     Formatters that can be used to display the date or time.
  */
 

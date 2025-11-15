@@ -3,17 +3,7 @@ import { formatTime } from "../../utils.mjs";
 import BaseCalendarHUD from "./base-calendar-hud.mjs";
 
 /**
- * @typedef CalendarHUDButton
- * @property {string} [action]                    The action name triggered by clicking the button.
- * @property {Omit<CalendarHUDButton, "additional"|"position">[]} [additional]  Additional buttons that appear when
- *                                                the button is hovered.
- * @property {object} [dataset]                   Additional data to attach to the button.
- * @property {string} [icon]                      SVG icon path or font-awesome icon class for the button.
- * @property {string} [label]                     Label used for the button.
- * @property {"start"|"end"} position             Should this be displayed before or after the interface.
- * @property {string} [tooltip]                   Tooltip displayed on hover.
- * @property {(event: PointerEvent) => void|Promise<void>} [onClick]  A custom click handler function.
- * @property {boolean|(() => boolean)} [visible]  Is the control button visible for the current client.
+ * @import { CalendarHUDButton } from "./_types.mjs";
  */
 
 /**
@@ -51,18 +41,36 @@ export default class CalendarHUD extends BaseCalendarHUD {
 
   /**
    * Default time periods to display for controlling time.
-   * @type {{ value: number, unit: string }}
+   * @type {{ value: number, unit: string, [default]: boolean }}
    */
   static TIME_CONTROL_VALUES = [
     { value: 7, unit: "day" },
     { value: 1, unit: "day" },
     { value: 8, unit: "hour" },
-    { value: 30, unit: "minute" },
+    { value: 1, unit: "hour", default: true },
     { value: 1, unit: "minute" }
   ];
 
   /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepared calendar buttons to display.
+   * @type {CalendarHUDButton[]}
+   */
+  #buttons = [];
+
+  /* -------------------------------------------- */
   /*  Rendering                                   */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _configureRenderOptions(options) {
+    super._configureRenderOptions(options);
+    if ( this.rendered ) options.parts = options.parts.filter(p => p !== "core");
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -71,14 +79,15 @@ export default class CalendarHUD extends BaseCalendarHUD {
    * @protected
    */
   _getCalendarButtons() {
-    const config = game.settings.get("dnd5e", "calendarConfig");
+    const defaultTime = CalendarHUD.TIME_CONTROL_VALUES.find(v => v.default) ?? { value: 1, unit: "hour" };
+    const defaultAmount = formatTime(defaultTime.value, defaultTime.unit).titleCase();
     return [
       {
         action: "reverse",
-        dataset: { value: 1, unit: "hour" },
+        dataset: defaultTime,
         icon: "fa-solid fa-angles-left",
         position: "start",
-        tooltip: game.i18n.format("DND5E.CALENDAR.Action.ReverseTime", { amount: formatTime(1, "hour").titleCase() }),
+        tooltip: game.i18n.format("DND5E.CALENDAR.Action.ReverseTime", { amount: defaultAmount }),
         visible: game.user.isGM,
         additional: CalendarHUD.TIME_CONTROL_VALUES.map(({ value, unit }) => ({
           action: "reverse",
@@ -98,9 +107,10 @@ export default class CalendarHUD extends BaseCalendarHUD {
       },
       {
         action: "advance",
+        dataset: defaultTime,
         icon: "fa-solid fa-angles-right",
         position: "end",
-        tooltip: game.i18n.format("DND5E.CALENDAR.Action.AdvanceTime", { amount: formatTime(1, "hour").titleCase() }),
+        tooltip: game.i18n.format("DND5E.CALENDAR.Action.AdvanceTime", { amount: defaultAmount }),
         visible: game.user.isGM,
         additional: CalendarHUD.TIME_CONTROL_VALUES.map(({ value, unit }) => ({
           action: "advance",
@@ -116,8 +126,7 @@ export default class CalendarHUD extends BaseCalendarHUD {
         icon: "fa-solid fa-users",
         position: "end",
         tooltip: game.i18n.localize("DND5E.CALENDAR.Action.OpenPartySheet"),
-        visible: game.settings.get("dnd5e", "primaryParty")?.actor
-          ?.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.LIMITED)
+        visible: game.actors.party?.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.LIMITED)
       }
     ];
   }
@@ -161,7 +170,7 @@ export default class CalendarHUD extends BaseCalendarHUD {
       tooltipDirection: (parent?.position ?? data.position) === "start" ? "LEFT" : "RIGHT"
     });
 
-    context.buttons = controls
+    this.#buttons = context.buttons = controls
       .filter(b => typeof b.visible === "function" ? b.visible.call(this) : b.visible ?? true)
       .map(prepareCalendarButton);
   }
@@ -222,24 +231,6 @@ export default class CalendarHUD extends BaseCalendarHUD {
   async _onRender(context, options) {
     await super._onRender(context, options);
     await this.renderCore();
-
-    const addButtonEvent = (button, config) => {
-      if ( typeof config?.onClick === "function" ) {
-        button.addEventListener("click", event => {
-          event.preventDefault();
-          config.onClick(event);
-        });
-      }
-    };
-
-    for ( const button of this.element.querySelectorAll(".calendar-buttons > .calendar-button > button") ) {
-      const config = context.buttons[parseInt(button.dataset.index)];
-      addButtonEvent(button, config);
-      for ( const additionalButton of button.parentElement.querySelectorAll(".calendar-button > button") ) {
-        const additionalConfig = config?.additional?.[parseInt(additionalButton.dataset.index)];
-        addButtonEvent(additionalButton, additionalConfig);
-      }
-    }
   }
 
   /* -------------------------------------------- */
@@ -265,7 +256,18 @@ export default class CalendarHUD extends BaseCalendarHUD {
    * @param {HTMLElement} target  Button that was clicked.
    */
   static #openPartySheet(event, target) {
-    game.settings.get("dnd5e", "primaryParty")?.actor?.sheet.render({ force: true });
+    game.actors.party?.sheet.render({ force: true });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _onClickAction(event, target) {
+    if ( !target.parentElement.classList.contains("calendar-button") ) return;
+    const topLevelButton = target.closest(".calendar-buttons > .calendar-button").querySelector(":scope > button");
+    let config = this.#buttons[topLevelButton.dataset.index];
+    if ( topLevelButton !== target ) config = config?.additional?.[target.dataset.index];
+    if ( typeof config?.onClick === "function" ) config.onClick(event);
   }
 
   /* -------------------------------------------- */
@@ -275,6 +277,6 @@ export default class CalendarHUD extends BaseCalendarHUD {
 
   /** @override */
   static onUpdateWorldTime(worldTime, deltaTime, options, userId) {
-    CONFIG.DND5E.calendar.instance?.renderCore(options.dnd5e?.deltas);
+    dnd5e.ui.calendar?.renderCore(options.dnd5e?.deltas);
   }
 }

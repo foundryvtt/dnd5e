@@ -1,4 +1,4 @@
-const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
+const { BooleanField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * A data model that represents the GM-specific calendar settings.
@@ -13,7 +13,7 @@ export class CalendarConfigSetting extends foundry.abstract.DataModel {
   /** @override */
   static defineSchema() {
     return {
-      enabled: new BooleanField({ required: true })
+      enabled: new BooleanField()
     };
   }
 }

@@ -46,6 +46,7 @@ globalThis.dnd5e = {
   Filter,
   migrations,
   registry,
+  ui: {},
   utils
 };
 
@@ -528,8 +529,8 @@ Hooks.once("ready", function() {
 
   // Display the calendar HUD
   if ( CONFIG.DND5E.calendar.application ) {
-    CONFIG.DND5E.calendar.instance = new CONFIG.DND5E.calendar.application();
-    CONFIG.DND5E.calendar.instance.render({ force: true });
+    dnd5e.ui.calendar = new CONFIG.DND5E.calendar.application();
+    dnd5e.ui.calendar.render({ force: true });
   }
 
   // Determine whether a system migration is required and feasible

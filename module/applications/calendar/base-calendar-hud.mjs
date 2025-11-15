@@ -41,17 +41,14 @@ export default class BaseCalendarHUD extends Application5e {
   }
 
   /* -------------------------------------------- */
-  /*  Rendering                                   */
+  /*  Life-Cycle Handlers                         */
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  async render(options) {
-    if ( this.rendered || this.shouldDisplay ) await super.render(options);
-    return this;
+  /** @override */
+  _canRender(options) {
+    return this.shouldDisplay;
   }
 
-  /* -------------------------------------------- */
-  /*  Life-Cycle Handlers                         */
   /* -------------------------------------------- */
 
   /** @override */
@@ -101,6 +98,6 @@ export default class BaseCalendarHUD extends Application5e {
    * @param {string} userId
    */
   static onUpdateWorldTime(worldTime, deltaTime, options, userId) {
-    if ( this.shouldDisplay ) CONFIG.DND5E.calendar.instance?.render();
+    if ( this.shouldDisplay ) dnd5e.ui.calendar?.render();
   }
 }

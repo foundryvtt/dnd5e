@@ -4430,7 +4430,6 @@ DND5E.defaultArtwork = {
  */
 DND5E.calendar = {
   application: CalenderHUD,
-  instance: null,
   formatters: [
     {
       value: "monthDay",
