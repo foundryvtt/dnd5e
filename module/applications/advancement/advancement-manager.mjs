@@ -239,12 +239,12 @@ export default class AdvancementManager extends Application5e {
     if ( itemData.type === "class" ) {
       dataClone.system.levels = 0;
       if ( !manager.clone.system.details.originalClass ) {
-        manager.clone.updateSource({"system.details.originalClass": dataClone._id});
+        manager.clone.updateSource({ "system.details.originalClass": dataClone._id });
       }
     }
 
     // Add item to clone & get new instance from clone
-    manager.clone.updateSource({items: [dataClone]});
+    manager.clone.updateSource({ items: [dataClone] });
     const clonedItem = manager.clone.items.get(dataClone._id);
 
     // For class items, prepare level change data
@@ -256,6 +256,11 @@ export default class AdvancementManager extends Application5e {
     Array.fromRange(this.currentLevel(clonedItem, manager.clone) + 1)
       .flatMap(l => this.flowsForLevel(clonedItem, l))
       .forEach(flow => manager.steps.push({ type: "forward", flow }));
+
+    // Ensure the final level is indicated to ensure any synthetic steps end up at correct level
+    if ( actor.system.details.level > 0 ) manager.steps.push({
+      type: "forward", automatic: true, level: actor.system.details.level
+    });
 
     return manager;
   }
@@ -704,10 +709,10 @@ export default class AdvancementManager extends Application5e {
       for ( let idx = this.#stepIndex; idx < this.steps.length; idx++ ) {
         // Find spots where the level increases
         const getLevel = step => (item.system.advancementClassLinked ? undefined : step?.level)
-          ?? step?.flow?.level ?? step?.class?.level;
+          ?? step?.flow?.level ?? step?.class?.level ?? step?.level;
         const thisLevel = getLevel(this.steps[idx]);
         const nextLevel = getLevel(this.steps[idx + 1]);
-        if ( (thisLevel < handledLevel) || (thisLevel === nextLevel) ) continue;
+        if ( (thisLevel < handledLevel) || (thisLevel >= nextLevel) ) continue;
 
         // Determine if there is any advancement to be done for the added item to this level
         // from the previously handled level
