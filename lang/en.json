@@ -1092,6 +1092,59 @@
   }
 },
 
+"DND5E.CALENDAR": {
+  "Action": {
+    "AdvanceTime": "Advance by {amount}",
+    "OpenCharacterSheet": "Open Character Sheet",
+    "OpenPartySheet": "Open Party Sheet",
+    "ReverseTime": "Reverse by {amount}"
+  },
+  "Configuration": {
+    "DisabledMessage": "The DM must enable the calendar interface before it can be used by players.",
+    "Hint": "Control whether the calendar HUD is displayed and how it functions.",
+    "Label": "Configure Calendar",
+    "Name": "Calendar",
+    "Preferences": "Calendar Preferences"
+  },
+  "FIELDS": {
+    "enabled": {
+      "hint": "Allow the calendar UI to be viewed & customized by all users.",
+      "label": "Enabled"
+    },
+    "formatters": {
+      "date": {
+        "label": "Date Format"
+      },
+      "time": {
+        "label": "Time Format"
+      }
+    },
+    "visible": {
+      "label": "Display Calendar HUD"
+    }
+  },
+  "Formatters": {
+    "Date": "Date Formatters",
+    "HoursMinutes": {
+      "Format": "{H}:{M}",
+      "Label": "Hours & Minutes"
+    },
+    "HoursMinutesSeconds": {
+      "Format": "{H}:{M}:{S}",
+      "Label": "Hours, Minutes, & Seconds"
+    },
+    "MonthDay": {
+      "Format": "{B} {D}",
+      "Label": "Month & Day"
+    },
+    "MonthDayYear": {
+      "Format": "{B} {D}, {Y}",
+      "Label": "Month, Day, & Year"
+    },
+    "Time": "Time Formatters"
+  }
+},
+
 "DND5E.CAST": {
   "Action": {
     "RemoveSpell": "Remove Spell"
@@ -4369,23 +4422,6 @@
   "NoneTargeted": "No Tokens Targeted",
   "Selected": "Selected",
   "Targeted": "Targeted"
-},
-"DND5E.TokenRings": {
-  "BackgroundColor": "Background Color",
-  "Effects": {
-    "Label": "Effects",
-    "BackgroundWave": "Background Wave",
-    "RingGradient": "Ring Gradient",
-    "RingPulse": "Ring Pulse"
-  },
-  "Enabled": "Use Dynamic Ring",
-  "RingColor": "Ring Color",
-  "ScaleCorrection": "Scale Correction",
-  "Subject": {
-    "Label": "Subject Path",
-    "Hint": "Explicitly specify a path for the artwork placed over the dynamic token ring. If not provided, the subject image will be set to the normal token artwork."
-  },
-  "Title": "Dynamic Ring"
 },
 "DND5E.ToggleDescription": "Toggle Description",
 

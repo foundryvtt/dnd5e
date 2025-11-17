@@ -46,6 +46,7 @@ globalThis.dnd5e = {
   Filter,
   migrations,
   registry,
+  ui: {},
   utils
 };
 
@@ -235,6 +236,10 @@ Hooks.once("init", function() {
   CONFIG.Token.movement.costAggregator = (results, distance, segment) => {
     return Math.max(...results.map(i => i.cost));
   };
+
+  // Setup Calendar
+  CONFIG.time.earthCalendarClass = dataModels.calendar.CalendarData5e;
+  CONFIG.time.worldCalendarClass = dataModels.calendar.CalendarData5e;
 });
 
 /* -------------------------------------------- */
@@ -485,6 +490,8 @@ Hooks.once("i18nInit", () => {
   utils.performPreLocalization(CONFIG.DND5E);
   Object.values(CONFIG.DND5E.activityTypes).forEach(c => c.documentClass.localize());
   Object.values(CONFIG.DND5E.advancementTypes).forEach(c => c.documentClass.localize());
+  foundry.helpers.Localization.localizeDataModel(dataModels.settings.CalendarConfigSetting);
+  foundry.helpers.Localization.localizeDataModel(dataModels.settings.CalendarPreferencesSetting);
   foundry.helpers.Localization.localizeDataModel(dataModels.settings.TransformationSetting);
 
   // Spellcasting
@@ -519,6 +526,12 @@ Hooks.once("ready", function() {
 
   // Bastion initialization
   game.dnd5e.bastion.initializeUI();
+
+  // Display the calendar HUD
+  if ( CONFIG.DND5E.calendar.application ) {
+    dnd5e.ui.calendar = new CONFIG.DND5E.calendar.application();
+    dnd5e.ui.calendar.render({ force: true });
+  }
 
   // Determine whether a system migration is required and feasible
   if ( !game.user.isGM ) return;
@@ -607,6 +620,11 @@ Hooks.on("preCreateScene", (doc, createData, options, userId) => {
       grid: { distance: utils.convertLength(dnd5e.grid.distance, dnd5e.grid.units, units, { strict: false }), units }
     });
   }
+});
+
+Hooks.on("updateWorldTime", (...args) => {
+  dataModels.calendar.CalendarData5e.onUpdateWorldTime(...args);
+  if ( CONFIG.DND5E.calendar.application ) CONFIG.DND5E.calendar.application.onUpdateWorldTime(...args);
 });
 
 /* -------------------------------------------- */

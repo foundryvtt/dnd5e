@@ -144,6 +144,26 @@
 /* -------------------------------------------- */
 
 /**
+ * @typedef CalendarHUDConfiguration
+ * @property {typeof ApplicationV2|null} application  HUD application to display, or `null` to not display one.
+ * @property {CalendarTimeFormatter[]} formatters     Formatters that can be used to display the date or time.
+ */
+
+/**
+ * @typedef {FormSelectOption} CalendarTimeFormatter
+ * @property {string|TimeFormatter} formatter  The formatter name on the current calendar or a formatter function.
+ */
+
+/**
+ * @callback CalendarProgress
+ * @param {GameTime} time  Game time to use in the calculation.
+ * @returns {number}       Progress through day period. For day progress 0 represents sunrise and 1 sunset. For night
+ *                         progress 0 represents sunset and 1 sunrise. Values outside that range are valid.
+ */
+
+/* -------------------------------------------- */
+
+/**
  * @typedef CharacterFlagConfiguration
  * @property {string} name
  * @property {string} hint
@@ -625,6 +645,7 @@
  * @typedef {Omit<UnitConfiguration, "abbreviation"|"type">} TimeUnitConfiguration
  * @property {boolean} [combat=false]  Is this a combat-specific time unit?
  * @property {boolean} [option=true]   Should this be available when users can select from a list of units?
+ * @property {string} [timeComponent]  Mapping of this unit to a `TimeComponent` provided by core's calendar system.
  */
 
 /**
