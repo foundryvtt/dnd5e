@@ -127,6 +127,7 @@ system:
       creatureTypes: []
       match:
         attacks: false
+        disposition: true
         proficiency: false
         saves: false
         ability: ''
@@ -165,7 +166,6 @@ system:
         identifier: ''
       name: Animate Corpses
       img: icons/magic/death/hand-dirt-undead-zombie.webp
-      disposition: 1
       appliedEffects: []
     BepVtap2tWyUwaxk:
       type: utility

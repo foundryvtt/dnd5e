@@ -68,12 +68,6 @@ export default class SummonSheet extends ActivitySheet {
     context.creatureTypeOptions = Object.entries(CONFIG.DND5E.creatureTypes).map(([value, config]) => ({
       value, label: config.label, selected: this.activity.creatureTypes.has(value)
     }));
-    context.dispositionOptions = [
-      { value: "", label: "" },
-      ...Object.entries(CONST.TOKEN_DISPOSITIONS).map(([key, value]) => ({
-        value, label: game.i18n.localize(`TOKEN.DISPOSITION.${key}`)
-      }))
-    ];
 
     context.profileModes = [
       { value: "", label: game.i18n.localize("DND5E.SUMMON.FIELDS.summon.mode.Direct") },

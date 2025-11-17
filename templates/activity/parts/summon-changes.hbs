@@ -11,7 +11,6 @@
         {{ formField fields.bonuses.fields.hp value=source.bonuses.hp rootId=partId }}
         {{ formField fields.creatureSizes value=source.creatureSizes options=creatureSizeOptions rootId=partId }}
         {{ formField fields.creatureTypes value=source.creatureTypes options=creatureTypeOptions rootId=partId }}
-        {{ formField fields.disposition value=source.disposition options=dispositionOptions rootId=partId }}
     </fieldset>
     <fieldset>
         <legend>{{ localize "DND5E.SUMMON.ItemChanges.Label" }}</legend>
@@ -20,6 +19,8 @@
         </div>
         {{ formField fields.match.fields.ability value=source.match.ability options=abilityOptions rootId=partId }}
         {{ formField fields.match.fields.attacks value=source.match.attacks input=inputs.createCheckboxInput
+                     rootId=partId }}
+        {{ formField fields.match.fields.disposition value=source.match.disposition input=inputs.createCheckboxInput
                      rootId=partId }}
         {{ formField fields.match.fields.saves value=source.match.saves input=inputs.createCheckboxInput
                      rootId=partId }}

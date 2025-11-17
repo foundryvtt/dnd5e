@@ -94,6 +94,7 @@ system:
         - fey
       match:
         attacks: false
+        disposition: true
         proficiency: false
         saves: false
         ability: ''
@@ -150,7 +151,6 @@ system:
       name: ''
       img: ''
       appliedEffects: []
-      disposition: 1
   identifier: conjure-animals
 sort: 0
 flags: {}

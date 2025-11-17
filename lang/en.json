@@ -3991,10 +3991,6 @@
       "label": "Creature Types",
       "hint": "Summoned creature will be changed to this type. If more than one type is selected, then the player will be able to choose from these types when summoning."
     },
-    "disposition": {
-      "label": "Disposition",
-      "hint": "Disposition of the summoned token will be changed to this from its default."
-    },
     "match": {
       "ability": {
         "label": "Match Ability",
@@ -4003,6 +3999,10 @@
       "attacks": {
         "label": "Match Attacks",
         "hint": "Modify to hit values on the summoned creature's attacks to match that of the summoner."
+      },
+      "disposition": {
+        "label": "Match Disposition",
+        "hint": "Modify the summoned creature's disposition to match that of the summoner."
       },
       "proficiency": {
         "label": "Match Proficiency",

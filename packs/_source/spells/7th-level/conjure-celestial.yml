@@ -89,6 +89,7 @@ system:
       creatureTypes: []
       match:
         attacks: false
+        disposition: true
         proficiency: false
         saves: false
         ability: ''
@@ -114,7 +115,6 @@ system:
       sort: 0
       name: ''
       img: ''
-      disposition: 1
       appliedEffects: []
   identifier: conjure-celestial
 sort: 0

@@ -89,6 +89,7 @@ system:
       creatureTypes: []
       match:
         attacks: false
+        disposition: true
         proficiency: false
         saves: false
         ability: ''
@@ -144,7 +145,6 @@ system:
       sort: 0
       name: ''
       img: ''
-      disposition: 1
       appliedEffects: []
   identifier: conjure-minor-elementals
 sort: 0

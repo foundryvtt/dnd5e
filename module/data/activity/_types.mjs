@@ -162,10 +162,10 @@
  * @property {string} bonuses.healing       Formula for bonus added to healing.
  * @property {Set<string>} creatureSizes    Set of creature sizes that will be set on summoned creature.
  * @property {Set<string>} creatureTypes    Set of creature types that will be set on summoned creature.
- * @property {number|null} disposition      Control the disposition of the summoned token.
  * @property {object} match
  * @property {string} match.ability         Ability to use for calculating match values.
  * @property {boolean} match.attacks        Match the to hit values on summoned actor's attack to the summoner.
+ * @property {boolean} match.disposition    Match the summoner's disposition.
  * @property {boolean} match.proficiency    Match proficiency on summoned actor to the summoner.
  * @property {boolean} match.saves          Match the save DC on summoned actor's abilities to the summoner.
  * @property {SummonsProfile[]} profiles    Information on creatures that can be summoned.

@@ -287,6 +287,12 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
       actorUpdates.effects.push(proficiencyEffect.toObject());
     }
 
+    // Match disposition
+    if ( this.match.disposition && this.actor ) {
+      const { disposition } = this.actor.isToken ? this.actor.token : this.actor.prototypeToken;
+      tokenUpdates.disposition = disposition;
+    }
+
     // Add bonus to AC
     if ( this.bonuses.ac ) {
       const acBonus = new Roll(this.bonuses.ac, rollData);
@@ -388,8 +394,6 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
         actorUpdates["system.details.type.value"] = type;
       }
     }
-
-    if ( this.disposition ) tokenUpdates.disposition = this.disposition;
 
     const attackDamageBonus = CONFIG.Dice.BasicRoll.replaceFormulaData(this.bonuses.attackDamage ?? "", rollData);
     const saveDamageBonus = CONFIG.Dice.BasicRoll.replaceFormulaData(this.bonuses.saveDamage ?? "", rollData);
