@@ -140,7 +140,7 @@ export default class MovementSensesConfig extends BaseConfigSheet {
    * @protected
    */
   _prepareTravelFields(context) {
-    const keyPath = this.keyPath.replace(".movement", ".travel");
+    const keyPath = this.keyPath.replace("movement", "travel");
     const data = foundry.utils.getProperty(this.document.system._source, keyPath);
     if ( !data ) return;
     const derived = foundry.utils.getProperty(this.document.system, keyPath);
