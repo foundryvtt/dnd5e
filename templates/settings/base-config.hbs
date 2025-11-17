@@ -1,4 +1,5 @@
-<fieldset>
+<fieldset {{ disabled disabled }}>
     <legend>{{ ifThen legend legend (localize "SETUP.Configuration") }}</legend>
+    {{#if message}}<p class="note {{ message.level }}">{{ message.text }}</p>{{/if}}
     {{> "dnd5e.fieldlist" fields}}
 </fieldset>

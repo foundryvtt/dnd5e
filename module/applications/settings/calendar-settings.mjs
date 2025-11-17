@@ -23,7 +23,7 @@ export default class CalendarSettingsConfig extends BaseSettingsConfig {
       template: "systems/dnd5e/templates/settings/base-config.hbs"
     },
     preferences: {
-      template: "systems/dnd5e/templates/settings/calendar-preferences.hbs"
+      template: "systems/dnd5e/templates/settings/base-config.hbs"
     },
     footer: {
       template: "templates/generic/form-footer.hbs"
@@ -72,6 +72,15 @@ export default class CalendarSettingsConfig extends BaseSettingsConfig {
         name: `calendarConfig.${name}`,
         value: data[name]
       }));
+    if ( !CONFIG.DND5E.calendar.application ) {
+      const enabledField = context.fields.find(f => f.name === "calendarConfig.enabled");
+      enabledField.disabled = true;
+      enabledField.value = false;
+      context.message = {
+        level: "warn",
+        text: game.i18n.localize("DND5E.CALENDAR.Configuration.UnavailableMessage")
+      };
+    }
     return context;
   }
 
@@ -107,8 +116,20 @@ export default class CalendarSettingsConfig extends BaseSettingsConfig {
         value: data.formatters.time
       }
     ];
-    context.showMessage = !game.settings.get("dnd5e", "calendarConfig")?.enabled;
-    context.disabled = context.showMessage && !game.user.isGM;
+    context.legend = game.i18n.localize("DND5E.CALENDAR.Configuration.Preferences");
+    if ( !CONFIG.DND5E.calendar.application ) {
+      context.disabled = true;
+      if ( !game.user.isGM ) context.message = {
+        level: "warn",
+        text: game.i18n.localize("DND5E.CALENDAR.Configuration.UnavailableMessage")
+      };
+    } else if ( !game.settings.get("dnd5e", "calendarConfig")?.enabled ) {
+      context.disabled = !game.user.isGM;
+      context.message = {
+        level: "warn",
+        text: game.i18n.localize("DND5E.CALENDAR.Configuration.DisabledMessage")
+      };
+    }
     return context;
   }
 }
