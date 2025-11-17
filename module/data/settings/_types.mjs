@@ -5,6 +5,23 @@
  * @property {boolean} enabled  Display bastion tab on sheets of characters that are 5th level or higher.
  */
 
+/* -------------------------------------------- */
+
+/**
+ * @typedef CalendarConfigSettingData
+ * @property {boolean} enabled         Enable the calendar system for all users.
+ */
+
+/**
+ * @typedef CalendarPreferencesSettingData
+ * @property {object} formatters
+ * @property {string} formatters.date  Formatter used to display the date (left position).
+ * @property {string} formatters.time  Formatter used to display the time (right position).
+ * @property {boolean} visible         Display the calendar UI.
+ */
+
+/* -------------------------------------------- */
+
 /**
  * @typedef CompendiumSourceConfig5e
  * @property {object} packages
@@ -41,10 +58,14 @@
  * @property {boolean} checked  True if the pack is included.
  */
 
+/* -------------------------------------------- */
+
 /**
  * @typedef PrimaryPartySettingData
  * @property {Actor5e} actor  Group actor representing the primary party.
  */
+
+/* -------------------------------------------- */
 
 /**
  * @typedef TransformationSettingData

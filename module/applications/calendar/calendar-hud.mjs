@@ -3,6 +3,7 @@ import { formatTime } from "../../utils.mjs";
 import BaseCalendarHUD from "./base-calendar-hud.mjs";
 
 /**
+ * @import { CalendarTimeDeltas } from "../../data/calendar/_types.mjs";
  * @import { CalendarHUDButton } from "./_types.mjs";
  */
 

@@ -1,7 +1,13 @@
 const { BooleanField, SchemaField, StringField } = foundry.data.fields;
 
 /**
+ * @import { CalendarConfigSettingData, CalendarPreferencesSettingData } from "./_types.mjs";
+ */
+
+/**
  * A data model that represents the GM-specific calendar settings.
+ * @extends {foundry.abstract.DataModel<CalendarConfigSettingData>}
+ * @mixes CalendarConfigSettingData
  */
 export class CalendarConfigSetting extends foundry.abstract.DataModel {
 
@@ -18,8 +24,12 @@ export class CalendarConfigSetting extends foundry.abstract.DataModel {
   }
 }
 
+/* -------------------------------------------- */
+
 /**
  * A data model that represents the player visible calendar settings.
+ * @extends {foundry.abstract.DataModel<CalendarPreferencesSettingData>}
+ * @mixes CalendarPreferencesSettingData
  */
 export class CalendarPreferencesSetting extends foundry.abstract.DataModel {
 
