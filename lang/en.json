@@ -5513,10 +5513,10 @@
   "AUTOMATION": {
     "Movement": {
       "Name": "Movement Automation",
-      "Hint": "Configure the amount of movement automation used by the system.",
-      "Full": "Full: Tokens may block or hinder movement of other tokens",
-      "NoBlocking": "Partial: Tokens may act as difficult terrain but cannot block each other",
-      "None": "None: Tokens can move freely through each other, difficult terrain does nothing"
+      "Hint": "Configure the amount of movement automation used by the system: Full automation including token blocking, partial automation of difficult terrain only, or off entirely.",
+      "Full": "Full",
+      "NoBlocking": "Partial",
+      "None": "None"
     }
   },
   "BLOODIED": {
