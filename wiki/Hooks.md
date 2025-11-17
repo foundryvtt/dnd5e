@@ -183,6 +183,20 @@ Fires after damage has been applied to an actor.
 | amount  | number                   | Amount of damage that has been applied. |
 | options | DamageApplicationOptions | Additional damage application options.  |
 
+### `dnd5e.healActor` & `dnd5e.damageActor`
+
+A hook event that fires when an actor is damaged or healed by any means. The actual name of the hook will depend on the change in hit points.
+
+| Name          | Type    | Description                                  |
+| ------------- | ------- | -------------------------------------------- |
+| actor         | Actor5e | The actor that had their hit points reduced. |
+| changes       | object  | The changes to hit points.                   |
+| changes.hp    | number  | The change to hit points.                    |
+| changes.temp  | number  | The change to temporary hit points.          |
+| changes.total | number  | The summed changes to hit points.            |
+| update        | object  | The original update delta.                   |
+| userId        | string  | Id of the user that performed the update.    |
+
 ### `dnd5e.preRollDeathSave`
 
 See `dnd5e.preRoll` for more details. Passes `D20RollProcessConfiguration` for the `config` parameter.
@@ -204,7 +218,7 @@ A hook event that fires after a death saving throw has been rolled for an Actor,
 A hook event that fires after a death saving throw has been rolled and after changes have been applied.
 
 | Name          | Type                | Description                                              |
-| ------------- | ------------------- | ----------------------------------------------- -------- |
+| ------------- | ------------------- | -------------------------------------------------------- |
 | rolls         | D20Roll[]           | The resulting rolls.                                     |
 | data          | object              |                                                          |
 | data.message  | ChatMessage5e|void  | The created results chat message.                        |
