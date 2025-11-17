@@ -48,6 +48,7 @@ export default class CalendarHUD extends BaseCalendarHUD {
     { value: 1, unit: "day" },
     { value: 8, unit: "hour" },
     { value: 1, unit: "hour", default: true },
+    { value: 10, unit: "minute" },
     { value: 1, unit: "minute" }
   ];
 

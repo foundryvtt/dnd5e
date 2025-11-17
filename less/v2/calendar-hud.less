@@ -36,10 +36,9 @@
     display: flex;
     gap: var(--calendar-gap);
     align-items: center;
-    position: relative;
 
     .dropdown {
-      position: relative;
+      position: absolute;
       inline-size: min-content;
       padding: var(--calendar-gap);
       gap: var(--calendar-gap);
@@ -49,6 +48,7 @@
     }
     &[data-application-part="startButtons"] .dropdown { inset-inline-end: calc(var(--calendar-gap) * -1); }
     &[data-application-part="endButtons"] .dropdown { inset-inline-start: calc(var(--calendar-gap) * -1); }
+    .calendar-button { position: relative; }
     .calendar-button:not(:hover, :focus-visible) .dropdown {
       opacity: 0;
       visibility: hidden;
@@ -67,7 +67,7 @@
     button {
       block-size: 100%;
       inline-size: 100%;
-      padding: 4px;
+      padding: 6px;
       background: none;
       border: none;
       color: inherit;
@@ -93,8 +93,8 @@
     position: relative;
     margin-block: 2px;
     align-self: stretch;
-    border: 1px solid var(--control-icon-color);
-    border-radius: 2px;
+    border: 1px solid var(--dnd5e-color-gold);
+    border-radius: 3px;
     overflow: hidden;
     isolation: isolate;
 
