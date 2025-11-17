@@ -193,7 +193,7 @@ A hook event that fires when an actor is damaged or healed by any means. The act
 | changes       | object  | The changes to hit points.                   |
 | changes.hp    | number  | The change to hit points.                    |
 | changes.temp  | number  | The change to temporary hit points.          |
-| changes.total | number  | The summed change to hit points.            |
+| changes.total | number  | The summed change to hit points.             |
 | update        | object  | The original update delta.                   |
 | userId        | string  | Id of the user that performed the update.    |
 
