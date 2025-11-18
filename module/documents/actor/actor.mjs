@@ -1902,8 +1902,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         return null;
       }
     }
-
-    formula ??= `max(1, 1${config.denomination} + @abilities.con.mod)`;
+    const rulesVersion = game.settings.get("dnd5e", "rulesVersion");
+    const minimumValue = rulesVersion === "modern" ? 1 : 0;
+    formula ??= `max(${minimumValue}, 1${config.denomination} + @abilities.con.mod)`;
     const rollConfig = foundry.utils.deepClone(config);
     rollConfig.hookNames = [...(config.hookNames ?? []), "hitDie"];
     rollConfig.rolls = [{ parts: [formula], data: this.getRollData() }].concat(config.rolls ?? []);
