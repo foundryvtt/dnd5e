@@ -22,7 +22,8 @@ system:
     custom: ''
     rules: '2024'
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
+    revision: 2
   activation:
     type: action
     condition: ''
@@ -79,7 +80,8 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: WUkq6HS8v9DK6fQz
       range:
         override: false
       target:
@@ -106,23 +108,64 @@ system:
 _id: phbsplThaumaturg
 type: spell
 img: icons/environment/people/cleric-orange.webp
-effects: []
+effects:
+  - name: Booming Voice
+    img: icons/environment/people/cleric-orange.webp
+    origin: Compendium.dnd5e.spells24.Item.phbsplThaumaturg
+    transfer: false
+    _id: WUkq6HS8v9DK6fQz
+    type: base
+    system: {}
+    changes:
+      - key: system.skills.itm.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: 60
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>Your voice booms up to three times as loud as normal for 1 minute. For
+      the duration, you have Advantage on [[/check ability=cha skill=itm]]
+      checks.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.348'
+      systemId: dnd5e
+      systemVersion: 5.1.9
+      createdTime: 1760127609488
+      modifiedTime: 1760127840291
+      lastModifiedBy: BcGywgWNTaQhpKPn
+    _key: '!items.effects!phbsplThaumaturg.WUkq6HS8v9DK6fQz'
 folder: 4FhsY9FJQd7h7MZb
 sort: 100391
 ownership:
   default: 0
 flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+  dnd5e: {}
 _stats:
+  compendiumSource: null
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.9
   createdTime: 1724425975220
-  modifiedTime: 1745256799199
+  modifiedTime: 1760127609524
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplThaumaturg'

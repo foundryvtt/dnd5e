@@ -15,7 +15,8 @@ system:
     custom: ''
     rules: '2024'
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
+    revision: 2
   activation:
     type: action
     condition: ''
@@ -113,7 +114,8 @@ effects:
       startRound: null
       startTurn: null
     disabled: false
-    flags: {}
+    flags:
+      dnd5e: {}
     img: icons/skills/melee/sword-damaged-broken-glow-red.webp
     _id: yril8uhQgO1dR507
     type: base
@@ -129,7 +131,7 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.346'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -148,7 +150,10 @@ effects:
       startRound: null
       startTurn: null
     disabled: false
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     img: icons/skills/wounds/blood-cells-disease-green.webp
     _id: uaHZaHEalgWa6eoC
     type: base
@@ -170,6 +175,14 @@ effects:
         mode: 2
         value: '- 1d8'
         priority: null
+      - key: system.abilities.str.check.roll.mode
+        mode: 2
+        value: '-1'
+        priority: null
+      - key: system.abilities.str.save.roll.mode
+        mode: 2
+        value: '-1'
+        priority: null
     description: >-
       <p>The target has Disadvantage on Strength-based D20 Tests for the
       duration. During that time, it also subtracts 1d8 from all its damage
@@ -182,12 +195,12 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.9
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1760127505191
+      lastModifiedBy: BcGywgWNTaQhpKPn
       exportSource: null
     _key: '!items.effects!phbsplRayofEnfee.uaHZaHEalgWa6eoC'
 folder: 3SjcO2acsFnWegp4
@@ -195,17 +208,15 @@ sort: 1100000
 ownership:
   default: 0
 flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+  dnd5e: {}
 _stats:
+  compendiumSource: null
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.9
   createdTime: 1724425968070
-  modifiedTime: 1745256797408
+  modifiedTime: 1760127432635
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplRayofEnfee'

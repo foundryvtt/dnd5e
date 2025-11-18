@@ -3,7 +3,7 @@ system:
   description:
     value: >-
       <p>Choose a willing creature that you can see within range. Until the
-      spell ends, the target's Speed is doubled, it gains a +2 bonus to Armor
+      spell ends, the target’s Speed is doubled, it gains a +2 bonus to Armor
       Class, it has Advantage on Dexterity saving throws, and it gains an
       additional action on each of its turns. That action can be used to take
       only the Attack (one attack only), Dash, Disengage, Hide, or Utilize
@@ -15,7 +15,8 @@ system:
     custom: ''
     rules: '2024'
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
+    revision: 2
   activation:
     type: action
     condition: ''
@@ -164,7 +165,10 @@ effects:
       startRound: null
       startTurn: null
     disabled: false
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     img: icons/magic/time/clock-spinning-gold-pink.webp
     _id: NEFWcyysYgsE6de3
     type: base
@@ -194,6 +198,10 @@ effects:
         mode: 2
         value: '2'
         priority: null
+      - key: system.abilities.dex.save.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
     description: >-
       <p>Until the spell ends, the target’s Speed is doubled, it gains a +2
       bonus to Armor Class, it has Advantage on Dexterity saving throws, and it
@@ -210,12 +218,12 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.9
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1760128875594
+      lastModifiedBy: BcGywgWNTaQhpKPn
       exportSource: null
     _key: '!items.effects!phbsplHaste00000.NEFWcyysYgsE6de3'
   - name: Lethargy
@@ -229,7 +237,8 @@ effects:
       startRound: null
       startTurn: null
     disabled: false
-    flags: {}
+    flags:
+      dnd5e: {}
     img: icons/tools/nautical/anchor-blue.webp
     _id: S5XcFawnnNHO8bUr
     type: base
@@ -267,7 +276,7 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.346'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -285,12 +294,13 @@ flags:
       activity: []
       effect: []
 _stats:
+  compendiumSource: null
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.9
   createdTime: 1724425958065
-  modifiedTime: 1745256794412
+  modifiedTime: 1760128878395
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplHaste00000'

@@ -10,21 +10,22 @@ system:
       carrying changes size with it. Any item it drops returns to normal size at
       once. A thrown weapon or piece of ammunition returns to normal size
       immediately after it hits or misses a
-      target.</p><p><strong>Enlarge.</strong> The target's size increases by one
+      target.</p><p><strong>Enlarge.</strong> The target’s size increases by one
       category—from Medium to Large, for example. The target also has Advantage
-      on Strength checks and Strength saving throws. The target's attacks with
+      on Strength checks and Strength saving throws. The target’s attacks with
       its enlarged weapons or Unarmed Strikes deal an extra 1d4 damage on a
-      hit.</p><p><strong>Reduce.</strong> The target's size decreases by one
+      hit.</p><p><strong>Reduce.</strong> The target’s size decreases by one
       category—from Medium to Small, for example. The target also has
-      Disadvantage on Strength checks and Strength saving throws. The target's
+      Disadvantage on Strength checks and Strength saving throws. The target’s
       attacks with its reduced weapons or Unarmed Strikes deal 1d4 less damage
-      on a hit (this can't reduce the damage below 1).</p>
+      on a hit (this can’t reduce the damage below 1).</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
+    revision: 2
   activation:
     type: action
     condition: ''
@@ -37,12 +38,15 @@ system:
       type: creatureOrObject
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -123,7 +127,10 @@ effects:
       startRound: null
       startTurn: null
     disabled: false
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     img: icons/magic/control/silhouette-grow-shrink-tan.webp
     _id: Wi2E10l7n6Ka8k6u
     type: base
@@ -137,6 +144,14 @@ effects:
         mode: 2
         value: 1d4
         priority: null
+      - key: system.abilities.str.check.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
+      - key: system.abilities.str.save.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
     description: >-
       <p>The target’s size increases by one category—from Medium to Large, for
       example. The target also has Advantage on Strength checks and Strength
@@ -149,12 +164,12 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.9
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1760128165509
+      lastModifiedBy: BcGywgWNTaQhpKPn
       exportSource: null
     _key: '!items.effects!phbsplEnlargeRed.Wi2E10l7n6Ka8k6u'
   - name: Reduced
@@ -168,7 +183,10 @@ effects:
       startRound: null
       startTurn: null
     disabled: false
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     img: icons/magic/control/silhouette-grow-shrink-blue.webp
     _id: NXdtOxX4HvPeodml
     type: base
@@ -181,6 +199,14 @@ effects:
       - key: system.bonuses.rwak.damage
         mode: 2
         value: '- 1d4'
+        priority: null
+      - key: system.abilities.str.check.roll.mode
+        mode: 2
+        value: '-1'
+        priority: null
+      - key: system.abilities.str.save.roll.mode
+        mode: 2
+        value: '-1'
         priority: null
     description: >-
       <p>The target’s size decreases by one category—from Medium to Small, for
@@ -195,12 +221,12 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.9
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1760128184394
+      lastModifiedBy: BcGywgWNTaQhpKPn
       exportSource: null
     _key: '!items.effects!phbsplEnlargeRed.NXdtOxX4HvPeodml'
 folder: 3SjcO2acsFnWegp4
@@ -208,17 +234,15 @@ sort: 3700000
 ownership:
   default: 0
 flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+  dnd5e: {}
 _stats:
+  compendiumSource: null
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.9
   createdTime: 1724425952041
-  modifiedTime: 1745256792260
+  modifiedTime: 1760128197778
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplEnlargeRed'
