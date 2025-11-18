@@ -9,7 +9,8 @@ import * as Trait from "../../documents/actor/trait.mjs";
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
- * @import { FavoriteData5e } from "../../data/actor/_types.mjs";
+ * @import { FavoriteData5e } from "../../data/abstract/_types.mjs";
+ * @import { ActorFavorites5e } from "../../data/actor/_types.mjs";
  * @import { FacilityOccupants } from "../../data/item/_types.mjs";
  */
 

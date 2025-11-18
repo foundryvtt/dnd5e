@@ -8,7 +8,7 @@ import DependentDocumentMixin from "../mixins/dependent.mjs";
 import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
 
 /**
- * @import { FavoriteData5e } from "../../data/actor/_types.mjs";
+ * @import { FavoriteData5e } from "../../data/abstract/_types.mjs";
  * @import { ActorDeltasData } from "../../data/chat-message/fields/_types.mjs";
  * @import {
  *   BasicRollDialogConfiguration, BasicRollMessageConfiguration, DamageRollProcessConfiguration

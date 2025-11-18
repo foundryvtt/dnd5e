@@ -16,7 +16,7 @@ const {
 } = foundry.data.fields;
 
 /**
- * @import { CharacterActorSystemData, ResourceData } from "./_types.mjs";
+ * @import { ActorFavorites5e, CharacterActorSystemData, ResourceData } from "./_types.mjs";
  */
 
 /**

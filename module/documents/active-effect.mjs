@@ -8,7 +8,7 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
 const { ObjectField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @import { FavoriteData5e } from "../data/actor/_types.mjs";
+ * @import { FavoriteData5e } from "../data/abstract/_types.mjs";
  */
 
 /**

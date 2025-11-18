@@ -75,6 +75,8 @@
  * @property {string} label  Displayed name.
  */
 
+/* -------------------------------------------- */
+
 /**
  * @typedef EncounterActorSystemData
  * @property {EncounterMemberData[]} members  Members of the encounter.
@@ -87,6 +89,8 @@
  * @property {number} quantity.value      Number of this actor in the group.
  * @property {string} [quantity.formula]  Formula used for re-rolling actor quantities in encounters.
  */
+
+/* -------------------------------------------- */
 
 /**
  * @typedef GroupActorSystemData
@@ -119,6 +123,8 @@
  * @param {TravelPace5e} pace.value       The travel pace key.
  * @param {Record<string, number>} paces  The available travel pace speeds.
  */
+
+/* -------------------------------------------- */
 
 /**
  * @typedef NPCActorSystemData
@@ -166,6 +172,8 @@
  * @property {string} type       The habitat category.
  * @property {string} [subtype]  An optional discriminator for the main category.
  */
+
+/* -------------------------------------------- */
 
 /**
  * @typedef VehicleActorSystemData
