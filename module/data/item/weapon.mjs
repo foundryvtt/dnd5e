@@ -74,7 +74,7 @@ export default class WeaponData extends ItemDataModel.mixin(
         value: new NumberField({ min: 0 }),
         long: new NumberField({ min: 0 }),
         reach: new NumberField({ min: 0 }),
-        units: new StringField()
+        units: new StringField({ required: true, blank: false, initial: () => defaultUnits("length") })
       }),
       type: new ItemTypeField({ value: "simpleM", subtype: false }, {label: "DND5E.ItemWeaponType"})
     });
