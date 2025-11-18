@@ -386,7 +386,7 @@ Enchantments can also target changes to item activities based on their type. Thi
 | Attribute Key                     | Change Mode | Effect Value | Roll Data? |
 | --------------------------------- | ----------- | ------------ | ---------- |
 | `activities[attack].attack.bonus` | Override    | `[formula]`  | Yes        |
-| `activities[attack].attack.flat`  | Override    | `true        | No         |
+| `activities[attack].attack.flat`  | Override    | `true`       | No         |
 
 #### Lowering the Critical Threshold
 
