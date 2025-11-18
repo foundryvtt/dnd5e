@@ -142,7 +142,8 @@ export default class ActivitySheet extends PseudoDocumentSheet {
     for ( const field of ["activation", "duration", "range", "target", "uses"] ) {
       if ( !this.activity[field] ) continue;
       context.data[field] = this.activity[field].override ? context.source[field] : context.inferred[field];
-      context.disabled[field] = this.activity[field].canOverride && !this.activity[field].override;
+      context.disabled[field] = this.activity[field].canOverride && !this.activity[field].override
+        && !this.activity.isRider;
     }
 
     context.activationTypes = [
@@ -203,8 +204,8 @@ export default class ActivitySheet extends PseudoDocumentSheet {
         validTargets: showTextTarget ? null : target.validTargets
       };
     });
-    context.showConsumeSpellSlot = this.activity.isSpell && (this.item.system.level !== 0);
-    context.showScaling = !this.activity.isSpell;
+    context.showConsumeSpellSlot = (this.activity.isSpell || this.activity.isRider) && (this.item.system.level !== 0);
+    context.showScaling = !this.activity.isSpell || this.activity.isRider;
 
     // Uses recovery
     context.recoveryPeriods = CONFIG.DND5E.limitedUsePeriods.recoveryOptions;

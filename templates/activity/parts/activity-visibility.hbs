@@ -14,7 +14,7 @@
         </div>
         <p class="hint">{{ localize "DND5E.ACTIVITY.FIELDS.visibility.level.hint" }}</p>
     </div>
-    {{#unless activity.isSpell}}
+    {{#if (or (not activity.isSpell) activity.isRider)}}
     {{ formField fields.visibility.fields.identifier value=source.visibility.identifier rootId=partId }}
-    {{/unless}}
+    {{/if}}
 </fieldset>

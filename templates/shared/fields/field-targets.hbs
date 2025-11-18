@@ -1,4 +1,4 @@
-{{#if target.canOverride}}
+{{#if (or target.canOverride @root.activity.isRider)}}
 {{ formField fields.override value=source.override input=inputs.createCheckboxInput rootId=partId }}
 {{/if}}
 

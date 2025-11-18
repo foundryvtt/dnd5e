@@ -3,7 +3,7 @@
         <legend>
             <label class="checkbox">
                 {{ localize "DND5E.ACTIVATION.FIELDS.activation.label" }}
-                {{#if activity.activation.canOverride}}
+                {{#if (or activity.activation.canOverride activity.isRider)}}
                 {{ formInput fields.activation.fields.override value=source.activation.override
                              input=inputs.createCheckboxInput
                              dataset=(dnd5e-object tooltip="DND5E.ACTIVATION.FIELDS.activation.override.hint")
@@ -19,7 +19,7 @@
         <legend>
             <label class="checkbox">
                 {{ localize "DND5E.DURATION.FIELDS.duration.label" }}
-                {{#if activity.duration.canOverride}}
+                {{#if (or activity.duration.canOverride activity.isRider)}}
                 {{ formInput fields.duration.fields.override value=source.duration.override
                              input=inputs.createCheckboxInput
                              dataset=(dnd5e-object tooltip="DND5E.DURATION.FIELDS.duration.override.hint")
