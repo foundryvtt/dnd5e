@@ -1903,7 +1903,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       }
     }
 
-    formula ??= `max(0, 1${config.denomination} + @abilities.con.mod)`;
+    formula ??= `max(1, 1${config.denomination} + @abilities.con.mod)`;
     const rollConfig = foundry.utils.deepClone(config);
     rollConfig.hookNames = [...(config.hookNames ?? []), "hitDie"];
     rollConfig.rolls = [{ parts: [formula], data: this.getRollData() }].concat(config.rolls ?? []);
