@@ -751,7 +751,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @protected
    */
   _assignItemCategories(item) {
-    if ( item.dependentOrigin?.active === false ) return [];
+    const origin = item.dependentOrigin;
+    if ( (origin?.active === false) && (origin.parent !== item) ) return [];
     if ( item.type === "container" ) return new Set(["containers", "inventory"]);
     if ( item.type === "spell" ) return new Set(["spells"]);
     if ( "inventorySection" in item.system.constructor ) return new Set(["inventory"]);

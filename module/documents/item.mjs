@@ -191,7 +191,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @type {ActiveEffect5e|null}
    */
   get dependentOrigin() {
-    return fromUuidSync(this.flags.dnd5e?.dependentOn, { strict: false }) ?? null;
+    return fromUuidSync(this.flags.dnd5e?.dependentOn, { relative: this, strict: false }) ?? null;
   }
 
   /* -------------------------------------------- */
