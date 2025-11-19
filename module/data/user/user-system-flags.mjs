@@ -28,7 +28,7 @@ export default class UserSystemFlags extends foundry.abstract.DataModel {
           collapseSidebar: new BooleanField({ required: false }),
           group: new StringField({ required: false }),
           sort: new StringField({ required: false, initial: "m", choices: [...foundry.documents.BaseFolder.SORTING_MODES, "p"] })
-        }))
+        }), { required: false })
       }))
     };
   }

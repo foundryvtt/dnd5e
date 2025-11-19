@@ -79,12 +79,8 @@ export default class MappingField extends foundry.data.fields.ObjectField {
   /** @override */
   _validateType(value, options={}) {
     if ( foundry.utils.getType(value) !== "Object" ) throw new Error("must be an Object");
-    const errors = this._validateValues(value, options);
-    if ( !foundry.utils.isEmpty(errors) ) {
-      const failure = new foundry.data.validation.DataModelValidationFailure();
-      failure.elements = Object.entries(errors).map(([id, failure]) => ({ id, failure }));
-      throw failure.asError();
-    }
+    const failure = this._validateValues(value, options);
+    if ( failure && !failure.isEmpty() ) throw failure.asError();
   }
 
   /* -------------------------------------------- */
@@ -93,16 +89,19 @@ export default class MappingField extends foundry.data.fields.ObjectField {
    * Validate each value of the object.
    * @param {object} value     The object to validate.
    * @param {object} options   Validation options.
-   * @returns {Record<string, Error>}  An object of value-specific errors by key.
+   * @returns {DataModelValidationFailure|void}
    */
-  _validateValues(value, options) {
-    const errors = {};
+  _validateValues(value, { phase: _phase, ...options }={}) {
+    const failure = new foundry.data.validation.DataModelValidationFailure();
     for ( const [k, v] of Object.entries(value) ) {
       if ( k.startsWith("-=") ) continue;
-      const error = this.model.validate(v, options);
-      if ( error ) errors[k] = error;
+      const error = this.model.validate(v, { ...options, strict: false, recursive: true });
+      if ( error ) {
+        failure.fields[k] = error;
+        if ( error.unresolved ) failure.unresolved = true;
+      }
     }
-    return errors;
+    if ( !failure.isEmpty() ) return failure;
   }
 
   /* -------------------------------------------- */

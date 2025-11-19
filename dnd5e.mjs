@@ -378,6 +378,7 @@ function _configureStatusEffects() {
   const addEffect = (effects, {special, ...data}) => {
     data = foundry.utils.deepClone(data);
     data._id = utils.staticID(`dnd5e${data.id}`);
+    data.order ??= Infinity;
     effects.push(data);
     if ( special ) CONFIG.specialStatusEffects[special] = data.id;
     if ( data.neverBlockMovement ) DND5E.neverBlockStatuses.add(data.id);
