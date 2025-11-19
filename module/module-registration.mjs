@@ -105,3 +105,48 @@ function setupPackSorting(pack) {
   sortingChanged = true;
   return "default sorting";
 }
+
+/* -------------------------------------------- */
+/*  Redirects                                   */
+/* -------------------------------------------- */
+
+/**
+ * Add compendium UUID redirects from core premium modules to SRD if module's aren't enabled.
+ */
+export function registerModuleRedirects() {
+  log("Registering Module Redirects", { level: "groupCollapsed" });
+  for ( const [moduleId, redirects] of Object.entries(moduleRedirects) ) {
+    if ( game.modules.get(moduleId)?.active ) {
+      log(`Skipped redirects for ${moduleId}`);
+    } else {
+      log(`Registered redirects to SRD for ${moduleId}`);
+      Object.assign(CONFIG.compendium.uuidRedirects, redirects);
+    }
+  }
+  console.groupEnd();
+}
+
+const moduleRedirects = {
+  "dnd-players-handbook": {
+    "Compendium.dnd-players-handbook.actors": "Compendium.dnd5e.actors24",
+    "Compendium.dnd-players-handbook.classes": "Compendium.dnd5e.classes24",
+    "Compendium.dnd-players-handbook.content": "Compendium.dnd5e.content24",
+    "Compendium.dnd-players-handbook.equipment": "Compendium.dnd5e.equipment24",
+    "Compendium.dnd-players-handbook.feats": "Compendium.dnd5e.feats24",
+    "Compendium.dnd-players-handbook.origins": "Compendium.dnd5e.origins24",
+    "Compendium.dnd-players-handbook.spells": "Compendium.dnd5e.spells24",
+    "Compendium.dnd-players-handbook.tables": "Compendium.dnd5e.tables24"
+  },
+  "dnd-dungeon-masters-guide": {
+    "Compendium.dnd-dungeon-masters-guide.actors": "Compendium.dnd5e.actors24",
+    "Compendium.dnd-dungeon-masters-guide.content": "Compendium.dnd5e.content24",
+    "Compendium.dnd-dungeon-masters-guide.equipment": "Compendium.dnd5e.equipment24",
+    "Compendium.dnd-dungeon-masters-guide.tables": "Compendium.dnd5e.tables24"
+  },
+  "dnd-monster-manual": {
+    "Compendium.dnd-monster-manual.actors": "Compendium.dnd5e.actors24",
+    "Compendium.dnd-monster-manual.content": "Compendium.dnd5e.content24",
+    "Compendium.dnd-monster-manual.features": "Compendium.dnd5e.monsterfeatures24",
+    "Compendium.dnd-monster-manual.tables": "Compendium.dnd5e.tables24"
+  }
+};
