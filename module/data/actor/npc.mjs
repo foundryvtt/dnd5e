@@ -808,6 +808,7 @@ export default class NPCData extends CreatureTemplate {
             || (item.system.activities?.size === 1 ? item.system.activities?.contents[0]?.uses.label : undefined);
           context.actionSections[category].actions.push({
             description, openingTag,
+            dataset: { id: item.id, identifier: item.system.identifier },
             name: uses ? `${item.name} (${uses})` : item.name,
             sort: item.sort
           });
