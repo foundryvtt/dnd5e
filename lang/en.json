@@ -227,6 +227,10 @@
       "Label": "Minute"
     },
     "Mythic": {
+      "Counted": {
+        "one": "{number} mythic action",
+        "other": "{number} mythic actions"
+      },
       "Header": "Mythic Actions",
       "Label": "Mythic Action"
     },
@@ -3189,7 +3193,9 @@
 "DND5E.Notes": "Notes",
 
 "DND5E.NPC": {
-  "Label": "NPC",
+  "ActionCostCounted": {
+    "other": "Costs {number} Actions"
+  },
   "FIELDS": {
     "attributes": {
       "price": {
@@ -3210,10 +3216,12 @@
       }
     }
   },
+  "Label": "NPC",
   "SECTIONS": {
     "Actions": "Actions",
     "BonusActions": "Bonus Actions",
     "LegendaryActions": "Legendary Actions",
+    "MythicActions": "Mythic Actions",
     "Reactions": "Reactions",
     "Traits": "Traits"
   }

@@ -633,6 +633,11 @@ export default class NPCData extends CreatureTemplate {
           label: game.i18n.localize("DND5E.NPC.SECTIONS.LegendaryActions"),
           description: "",
           actions: []
+        },
+        mythic: {
+          label: game.i18n.localize("DND5E.NPC.SECTIONS.MythicActions"),
+          description: "",
+          actions: []
         }
       },
       CONFIG: CONFIG.DND5E,
@@ -801,6 +806,8 @@ export default class NPCData extends CreatureTemplate {
         }));
         if ( item.identifier === "legendary-actions" ) {
           context.actionSections.legendary.description = description;
+        } else if ( item.identifier === "mythic-actions" ) {
+          context.actionSections.mythic.description = description;
         } else {
           const openingTag = description.match(/^\s*(<p(?:\s[^>]+)?>)/gi)?.[0];
           if ( openingTag ) description = description.replace(openingTag, "");

@@ -1,4 +1,4 @@
-import { formatNumber, formatRange, prepareFormulaValue } from "../../utils.mjs";
+import { formatNumber, formatRange, getPluralRules, prepareFormulaValue } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 
 const { ArrayField, NumberField, SchemaField, StringField } = foundry.data.fields;
@@ -90,6 +90,15 @@ export default class UsesField extends SchemaField {
    * @returns {string}
    */
   static getStatblockLabel() {
+    // Legendary/Mythic Actions
+    if ( (this.activation?.type === "legendary") || (this.activation?.type === "mythic") ) {
+      if ( this.activation.value < 2 ) return "";
+      const pr = getPluralRules();
+      return game.i18n.format(`DND5E.NPC.ActionCostCounted.${pr.select(this.activation.value)}`, {
+        number: formatNumber(this.activation.value)
+      });
+    }
+
     if ( !this.uses.max || (this.uses.recovery.length !== 1) ) return "";
     const recovery = this.uses.recovery[0];
 
