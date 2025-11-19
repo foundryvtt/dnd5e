@@ -4421,6 +4421,10 @@ DND5E.advancementTypes = {
  * @enum {Record<string, string>}
  */
 DND5E.defaultArtwork = {
+  ActiveEffect: {
+    base: "systems/dnd5e/icons/svg/active-effects/base.svg",
+    enchantment: "systems/dnd5e/icons/svg/active-effects/enchantment.svg"
+  },
   Actor: {
     character: "systems/dnd5e/icons/svg/actors/character.svg",
     encounter: "systems/dnd5e/icons/svg/actors/encounter.svg",

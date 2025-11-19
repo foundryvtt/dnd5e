@@ -1,3 +1,4 @@
+import CreateDocumentDialog from "../applications/create-document-dialog.mjs";
 import FormulaField from "../data/fields/formula-field.mjs";
 import MappingField from "../data/fields/mapping-field.mjs";
 import { parseOrString, staticID } from "../utils.mjs";
@@ -15,6 +16,15 @@ const { ObjectField, SchemaField, SetField, StringField } = foundry.data.fields;
  * Extend the base ActiveEffect class to implement system-specific logic.
  */
 export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect) {
+
+  /**
+   * The default icon used for newly created Active Effect documents.
+   * @type {string}
+   */
+  static DEFAULT_ICON = "systems/dnd5e/icons/svg/documents/active-effect.svg";
+
+  /* -------------------------------------------- */
+
   /**
    * Static ActiveEffect ID for various conditions.
    * @type {Record<string, string>}
@@ -852,6 +862,35 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       }
       return arr;
     }, []).concat(dnd5e.registry.dependents.get(this));
+  }
+
+  /* -------------------------------------------- */
+  /*  Importing and Exporting                     */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static async createDialog(data={}, createOptions={}, dialogOptions={}) {
+    CreateDocumentDialog.migrateOptions(createOptions, dialogOptions);
+    return CreateDocumentDialog.prompt(this, data, createOptions, dialogOptions);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  static _createDialogTypes(parent) {
+    return ActiveEffect.TYPES.filter(t => CONFIG.ActiveEffect.dataModels[t]?.availableForItem?.(parent) ?? true);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine default artwork based on the provided effect data.
+   * @param {object} effectData  The source effect data.
+   * @returns {{ img: string }}  Candidate effect image.
+   */
+  static getDefaultArtwork(effectData={}) {
+    const type = effectData.type !== "base" ? effectData.type : "standard";
+    return { img: CONFIG.DND5E.defaultArtwork.ActiveEffect[type] ?? this.DEFAULT_ICON };
   }
 
   /* -------------------------------------------- */
