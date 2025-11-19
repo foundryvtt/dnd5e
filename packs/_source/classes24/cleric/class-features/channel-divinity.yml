@@ -44,7 +44,7 @@ system:
     chat: ''
   source:
     custom: ''
-    revision: 1
+    revision: 2
     rules: '2024'
     license: CC-BY-4.0
     book: SRD 5.2
@@ -114,16 +114,19 @@ system:
         max: ''
       sort: 0
       healing:
-        number: 1
-        denomination: 8
+        number: null
+        denomination: null
         types:
           - healing
         custom:
-          enabled: false
+          enabled: true
+          formula: (@scale.channel-divinity.spark)d8 + @abilities.wis.mod
         scaling:
           number: 1
-        bonus: '@abilities.wis.mod'
+        bonus: ''
       name: 'Divine Spark: Heal'
+      img: ''
+      appliedEffects: []
     OY9UrTXvlRL0JUoI:
       type: save
       name: 'Divine Spark: Save'
@@ -141,7 +144,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -174,25 +176,24 @@ system:
       damage:
         parts:
           - custom:
-              enabled: false
-              formula: ''
-            number: 1
-            denomination: 8
-            bonus: '@abilities.wis.mod'
+              enabled: true
+              formula: (@scale.channel-divinity.spark)d8 + @abilities.wis.mod
+            number: null
+            denomination: null
+            bonus: ''
             types:
               - necrotic
               - radiant
-            scaling:
-              number: 1
         onSave: half
       save:
-        ability:
-          - con
+        ability: con
         dc:
           calculation: spellcasting
           formula: ''
+      img: ''
+      appliedEffects: []
     aOptL5pMaj3WtR8S:
-      type: utility
+      type: save
       name: Turn Undead
       _id: aOptL5pMaj3WtR8S
       activation:
@@ -208,7 +209,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -245,8 +245,36 @@ system:
         name: ''
         formula: ''
       img: systems/dnd5e/icons/svg/trait-damage-immunities.svg
+      appliedEffects:
+        - iUeSbfduM7K8XrCF
+      save:
+        ability:
+          - wis
+        dc:
+          calculation: spellcasting
+          formula: ''
   enchant: {}
   identifier: channel-divinity-cleric
+  advancement:
+    - type: ScaleValue
+      title: Divine Spark Die Count
+      _id: uFauTQi3ls40bO1J
+      configuration:
+        identifier: spark
+        type: number
+        distance:
+          units: ''
+        scale:
+          '2':
+            value: 1
+          '7':
+            value: 2
+          '13':
+            value: 3
+          '18':
+            value: 4
+      value: {}
+      hint: ''
 effects:
   - name: Turned
     img: icons/magic/symbols/star-rising-purple.webp
@@ -265,22 +293,28 @@ effects:
       turns: null
       startRound: null
       startTurn: null
-    description: ''
+    description: >-
+      <p>For that duration, it tries to move as far from you as it can on its
+      turns. This effect ends early on the creature if it takes any damage, if
+      you have the Incapacitated condition, or if you die.</p>
     tint: '#ffffff'
     statuses:
       - frightened
       - incapacitated
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.347'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 5.1.1
+      createdTime: 1725377184193
+      modifiedTime: 1755538106434
+      lastModifiedBy: xREoBzi7Iao0TR7B
       exportSource: null
     _key: '!items.effects!phbclcChannelDiv.iUeSbfduM7K8XrCF'
 flags:
@@ -289,6 +323,7 @@ flags:
       activity: []
       effect: []
 _stats:
+  compendiumSource: null
   duplicateSource: null
   coreVersion: '13.348'
   systemId: dnd5e

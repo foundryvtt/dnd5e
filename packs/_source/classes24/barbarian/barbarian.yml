@@ -9,20 +9,15 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
+    revision: 2
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
   startingEquipment:
-    - type: OR
-      requiresProficiency: false
-      _id: iEStK5sr3bu18iLG
-      group: ''
-      sort: 100000
     - type: AND
       requiresProficiency: false
       _id: 0Yx0DOCxeeNYZw7n
-      group: iEStK5sr3bu18iLG
-      sort: 800000
+      group: ''
+      sort: 200000
     - type: linked
       count: null
       key: Compendium.dnd5e.equipment24.Item.phbagExplorersPa
@@ -91,7 +86,7 @@ system:
             optional: false
           - uuid: Compendium.dnd5e.classes24.Item.phbbrbWeaponMast
             optional: false
-          - uuid: Compendium.dnd5e.classes24.Item.phbbrbUnarmedStr
+          - uuid: Compendium.dnd5e.equipment24.Item.phbUnarmedStrike
             optional: false
         optional: false
         spell: null
@@ -503,20 +498,20 @@ system:
       type: ScaleValue
       configuration:
         identifier: ''
-        type: string
+        type: number
         distance:
           units: ''
         scale:
           '1':
-            value: '2'
+            value: 2
           '3':
-            value: '3'
+            value: 3
           '6':
-            value: '4'
+            value: 4
           '12':
-            value: '5'
+            value: 5
           '16':
-            value: '6'
+            value: 6
       value: {}
       title: Rages
       hint: ''
@@ -556,14 +551,16 @@ system:
     additional: ''
 effects: []
 folder: ZzMJGIp9Rxhr2hDV
-flags: {}
+flags:
+  dnd5e: {}
 _stats:
+  compendiumSource: null
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 5.1.0
-  createdTime: 1735865940469
-  modifiedTime: 1752706172822
+  systemVersion: 5.1.9
+  createdTime: 1724425956393
+  modifiedTime: 1760125251283
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
