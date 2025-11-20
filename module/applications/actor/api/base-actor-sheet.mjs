@@ -1643,6 +1643,10 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     // Remove any flags that are false-ish
     for ( const [key, value] of Object.entries(submitData.flags?.dnd5e ?? {}) ) {
       if ( value ) continue;
+
+      // Keep the flag for synthetic actor overrides
+      if ( this.actor.isToken && this.actor.parent.baseActor.getFlag("dnd5e", key) ) continue;
+
       delete submitData.flags.dnd5e[key];
       if ( foundry.utils.hasProperty(this.document._source, `flags.dnd5e.${key}`) ) {
         submitData.flags.dnd5e[`-=${key}`] = null;
