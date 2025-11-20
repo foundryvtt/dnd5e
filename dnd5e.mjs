@@ -265,8 +265,6 @@ function _configureCalendar() {
   if ( calendarConfig ) {
     CONFIG.time.worldCalendarConfig = calendarConfig.config;
     if ( calendarConfig.class ) CONFIG.time.worldCalendarClass = calendarConfig.class;
-    CONFIG.DND5E.calendar.formatters = CONFIG.DND5E.calendar.formatters
-      .filter(f => !f.calendars || f.calendars.includes(calendar));
   }
 }
 

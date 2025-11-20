@@ -159,7 +159,6 @@
 /**
  * @typedef {FormSelectOption} CalendarTimeFormatter
  * @property {string|TimeFormatter} formatter  The formatter name on the current calendar or a formatter function.
- * @property {string[]} [calendars]            Calendars that support this formatter, or blank for all calendars.
  */
 
 /**
