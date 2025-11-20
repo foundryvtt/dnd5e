@@ -239,9 +239,34 @@ Hooks.once("init", function() {
   };
 
   // Setup Calendar
+  _configureCalendar();
+});
+
+/* -------------------------------------------- */
+
+/**
+ * Configure world calendar based on setting.
+ */
+function _configureCalendar() {
   CONFIG.time.earthCalendarClass = dataModels.calendar.CalendarData5e;
   CONFIG.time.worldCalendarClass = dataModels.calendar.CalendarData5e;
-});
+
+  /**
+   * A hook event that fires during the `init` step to give modules a chance to customize the calendar
+   * configuration before loading the world calendar.
+   * @function dnd5e.preSetupCalendar
+   * @memberof hookEvents
+   * @returns               Explicitly return `false` to prevent system from setting up the calendar.
+   */
+  if ( Hooks.call("dnd5e.setupCalendar") === false ) return;
+
+  const calendar = game.settings.get("dnd5e", "calendar");
+  const calendarConfig = CONFIG.DND5E.calendar.calendars.find(c => c.value === calendar);
+  if ( calendarConfig ) {
+    CONFIG.time.worldCalendarConfig = calendarConfig.config;
+    if ( calendarConfig.class ) CONFIG.time.worldCalendarClass = calendarConfig.class;
+  }
+}
 
 /* -------------------------------------------- */
 

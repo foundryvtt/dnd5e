@@ -4459,6 +4459,13 @@ DND5E.defaultArtwork = {
  */
 DND5E.calendar = {
   application: CalenderHUD,
+  calendars: [
+    {
+      value: "gregorian",
+      label: "DND5E.CALENDAR.Gregorian",
+      config: foundry.data.SIMPLIFIED_GREGORIAN_CALENDAR_CONFIG
+    }
+  ],
   formatters: [
     {
       value: "monthDay",
@@ -4486,6 +4493,7 @@ DND5E.calendar = {
     }
   ]
 };
+preLocalize("calendar.calendars", { keys: ["label", "group"] });
 preLocalize("calendar.formatters", { keys: ["label", "group"] });
 
 /* -------------------------------------------- */
