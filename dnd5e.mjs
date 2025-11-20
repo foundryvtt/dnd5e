@@ -25,7 +25,7 @@ import * as enrichers from "./module/enrichers.mjs";
 import * as Filter from "./module/filter.mjs";
 import * as migrations from "./module/migration.mjs";
 import ModuleArt from "./module/module-art.mjs";
-import { registerModuleData, setupModulePacks } from "./module/module-registration.mjs";
+import { registerModuleData, registerModuleRedirects, setupModulePacks } from "./module/module-registration.mjs";
 import { default as registry } from "./module/registry.mjs";
 import Tooltips5e from "./module/tooltips.mjs";
 import * as utils from "./module/utils.mjs";
@@ -117,6 +117,7 @@ Hooks.once("init", function() {
 
   // Register module data from manifests
   registerModuleData();
+  registerModuleRedirects();
 
   // Register Roll Extensions
   CONFIG.Dice.rolls = [dice.BasicRoll, dice.D20Roll, dice.DamageRoll];
