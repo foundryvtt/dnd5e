@@ -1,6 +1,9 @@
 import CalenderHUD from "./applications/calendar/calendar-hud.mjs";
 import MapLocationControlIcon from "./canvas/map-location-control-icon.mjs";
 import { ConsumptionTargetData } from "./data/activity/fields/consumption-targets-field.mjs";
+import { CalendarGreyhawk, CALENDAR_OF_GREYHAWK } from "./data/calendar/calendar-of-greyhawk.mjs";
+import { CalendarHarptos, CALENDAR_OF_HARPTOS } from "./data/calendar/calendar-of-harptos.mjs";
+import { CalendarKhorvaire, CALENDAR_OF_KHORVAIRE } from "./data/calendar/calendar-of-khorvaire.mjs";
 import * as activities from "./documents/activity/_module.mjs";
 import Actor5e from "./documents/actor/actor.mjs";
 import * as advancement from "./documents/advancement/_module.mjs";
@@ -4464,6 +4467,24 @@ DND5E.calendar = {
       value: "gregorian",
       label: "DND5E.CALENDAR.Gregorian",
       config: foundry.data.SIMPLIFIED_GREGORIAN_CALENDAR_CONFIG
+    },
+    {
+      value: "greyhawk",
+      label: "DND5E.CALENDAR.Greyhawk.Name",
+      config: CALENDAR_OF_GREYHAWK,
+      class: CalendarGreyhawk
+    },
+    {
+      value: "harptos",
+      label: "DND5E.CALENDAR.Harptos.Name",
+      config: CALENDAR_OF_HARPTOS,
+      class: CalendarHarptos
+    },
+    {
+      value: "khorvaire",
+      label: "DND5E.CALENDAR.Khorvaire.Name",
+      config: CALENDAR_OF_KHORVAIRE,
+      class: CalendarKhorvaire
     }
   ],
   formatters: [
@@ -4480,6 +4501,12 @@ DND5E.calendar = {
       group: "DND5E.CALENDAR.Formatters.Date"
     },
     {
+      value: "approximateDate",
+      label: "DND5E.CALENDAR.Formatters.ApproximateDate.Label",
+      formatter: "formatApproximateDate",
+      group: "DND5E.CALENDAR.Formatters.Date"
+    },
+    {
       value: "hoursMinutes",
       label: "DND5E.CALENDAR.Formatters.HoursMinutes.Label",
       formatter: "formatHoursMinutes",
@@ -4489,6 +4516,12 @@ DND5E.calendar = {
       value: "hoursMinutesSeconds",
       label: "DND5E.CALENDAR.Formatters.HoursMinutesSeconds.Label",
       formatter: "formatHoursMinutesSeconds",
+      group: "DND5E.CALENDAR.Formatters.Time"
+    },
+    {
+      value: "approximateTime",
+      label: "DND5E.CALENDAR.Formatters.ApproximateTime.Label",
+      formatter: "formatApproximateTime",
       group: "DND5E.CALENDAR.Formatters.Time"
     }
   ]
