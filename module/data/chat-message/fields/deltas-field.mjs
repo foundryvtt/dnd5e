@@ -110,7 +110,8 @@ export class IndividualDeltaField extends SchemaField {
    * Prepare a delta for display in a chat message.
    * @this {IndividualDeltaData}
    * @param {Actor5e|Item5e} doc  Actor or item to which this delta applies.
-   * @param {Roll[]} [rolls]      Rolls that may be associated with a delta.
+   * @param {Roll[]} [rolls]      Rolls that may be associated with a delta. Should be pre-filtered to only the rolls
+   *                              that apply to this delta.
    * @returns {DeltaDisplayContext}
    */
   static processDelta(doc, rolls=[]) {

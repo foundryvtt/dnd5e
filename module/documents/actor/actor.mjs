@@ -2508,10 +2508,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     recoverShortRestUses, recoverLongRestUses, recoverDailyUses, ...config
   }={}, result={}) {
     const restConfig = CONFIG.DND5E.restTypes[config.type];
-    const recovery = Array.from(restConfig.recoverPeriods ?? []);
-    if ( recoverShortRestUses ) recovery.unshift("sr");
-    if ( recoverLongRestUses ) recovery.unshift("lr");
-    if ( recoverDailyUses || config.newDay ) recovery.unshift("day", "dawn", "dusk");
+    let recovery = Array.from(restConfig.recoverPeriods ?? []).map(p => [p, 1]);
+    if ( recoverShortRestUses ) recovery.unshift(["sr", 1]);
+    if ( recoverLongRestUses ) recovery.unshift(["lr", 1]);
+    if ( (recoverDailyUses || config.newDay) && game.settings.get("dnd5e", "calendarConfig").manualRecovery ) {
+      const days = (game.settings.get("dnd5e", "restVariant") === "gritty") && (config.type === "long") ? 7 : 1;
+      recovery.unshift(["day", days], ["dawn", days], ["dusk", days]);
+    }
+    recovery = new Map(recovery);
 
     result.updateItems ??= [];
     result.rolls ??= [];
