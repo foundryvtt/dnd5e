@@ -6,7 +6,6 @@ import { formatNumber } from "../../utils.mjs";
 
 /**
  * Extension of the core calendar with extra formatters.
- * @template {TimeComponents} Components
  */
 export default class CalendarData5e extends foundry.data.CalendarData {
 
@@ -16,12 +15,12 @@ export default class CalendarData5e extends foundry.data.CalendarData {
 
   /**
    * Calculate the decimal hours since the start of the day.
-   * @param {number|Components} [time]  The time to use, by default the current world time.
-   * @param {CalendarData} [calendar]   Calendar to use, by default the current world calendar.
-   * @returns {number}                  Number of hours since the start of the day as a decimal.
+   * @param {number|TimeComponents} [time]  The time to use, by default the current world time.
+   * @param {CalendarData} [calendar]       Calendar to use, by default the current world calendar.
+   * @returns {number}                      Number of hours since the start of the day as a decimal.
    */
   static hoursOfDay(time=game.time.components, calendar=game.time.calendar) {
-    const components = typeof time === "number" ? this.timeToComponents(time) : time;
+    const components = typeof time === "number" ? this.timeToTimeComponents(time) : time;
     const minutes = components.minute + (components.second / calendar.days.secondsPerMinute);
     return components.hour + (minutes / calendar.days.minutesPerHour);
   }
@@ -30,8 +29,8 @@ export default class CalendarData5e extends foundry.data.CalendarData {
 
   /**
    * Get the number of hours in a given day.
-   * @param {number|Components} [time]  The time to use, by default the current world time.
-   * @returns {number}                  Number of hours between sunrise and sunset.
+   * @param {number|TimeComponents} [time]  The time to use, by default the current world time.
+   * @returns {number}                      Number of hours between sunrise and sunset.
    */
   daylightHours(time=game.time.components) {
     return this.sunset(time) - this.sunrise(time);
@@ -41,8 +40,8 @@ export default class CalendarData5e extends foundry.data.CalendarData {
 
   /**
    * Progress between sunrise and sunset assuming it is daylight half the day duration.
-   * @param {number|Components} [time]  The time to use, by default the current world time.
-   * @returns {number}                  Progress through day period, with 0 representing sunrise and 1 sunset.
+   * @param {number|TimeComponents} [time]  The time to use, by default the current world time.
+   * @returns {number}                      Progress through day period, with 0 representing sunrise and 1 sunset.
    */
   progressDay(time=game.time.components) {
     return (CalendarData5e.hoursOfDay(time) - this.sunrise(time)) / this.daylightHours(time);
@@ -52,8 +51,8 @@ export default class CalendarData5e extends foundry.data.CalendarData {
 
   /**
    * Progress between sunset and sunrise assuming it is night half the day duration.
-   * @param {number|Components} [time]  The time to use, by default the current world time.
-   * @returns {number}                  Progress through night period, with 0 representing sunset and 1 sunrise.
+   * @param {number|TimeComponents} [time]  The time to use, by default the current world time.
+   * @returns {number}                      Progress through night period, with 0 representing sunset and 1 sunrise.
    */
   progressNight(time=game.time.components) {
     const daylightHours = this.daylightHours(time);
@@ -66,8 +65,8 @@ export default class CalendarData5e extends foundry.data.CalendarData {
 
   /**
    * Get the sunrise time for a given day.
-   * @param {number|Components} [time]  The time to use, by default the current world time.
-   * @returns {number}                  Sunrise time in hours.
+   * @param {number|TimeComponents} [time]  The time to use, by default the current world time.
+   * @returns {number}                      Sunrise time in hours.
    */
   sunrise(time=game.time.components) {
     return this.days.hoursPerDay * .25;
@@ -77,8 +76,8 @@ export default class CalendarData5e extends foundry.data.CalendarData {
 
   /**
    * Get the sunset time for a given day.
-   * @param {number|Components} [time]  The time to use, by default the current world time.
-   * @returns {number}                  Sunset time in hours.
+   * @param {number|TimeComponents} [time]  The time to use, by default the current world time.
+   * @returns {number}                      Sunset time in hours.
    */
   sunset(time=game.time.components) {
     return this.days.hoursPerDay * .75;
@@ -90,8 +89,8 @@ export default class CalendarData5e extends foundry.data.CalendarData {
 
   /**
    * Prepared date parts passed to the localization.
-   * @param {CalendarData} calendar  The configured calendar.
-   * @param {Components} components  Time components to format.
+   * @param {CalendarData} calendar      The configured calendar.
+   * @param {TimeComponents} components  Time components to format.
    * @returns {CalendarFormattingContext}
    */
   static dateFormattingParts(calendar, components) {
@@ -134,10 +133,10 @@ export default class CalendarData5e extends foundry.data.CalendarData {
 
   /**
    * Format the date to approximate value based on season (e.g. "Early Spring", "Mid-Winter").
-   * @param {CalendarData} calendar  The configured calendar.
-   * @param {Components} components  Time components to format.
-   * @param {object} options         Additional formatting options.
-   * @returns {string}               The returned string format.
+   * @param {CalendarData} calendar      The configured calendar.
+   * @param {TimeComponents} components  Time components to format.
+   * @param {object} options             Additional formatting options.
+   * @returns {string}                   The returned string format.
    */
   static formatApproximateDate(calendar, components, options) {
     const season = calendar.seasons.values[components.season];
@@ -166,10 +165,10 @@ export default class CalendarData5e extends foundry.data.CalendarData {
 
   /**
    * Format the time to approximate value (e.g. "Dawn", "Noon", "Night").
-   * @param {CalendarData} calendar  The configured calendar.
-   * @param {Components} components  Time components to format.
-   * @param {object} options         Additional formatting options.
-   * @returns {string}               The returned string format.
+   * @param {CalendarData} calendar      The configured calendar.
+   * @param {TimeComponents} components  Time components to format.
+   * @param {object} options             Additional formatting options.
+   * @returns {string}                   The returned string format.
    */
   static formatApproximateTime(calendar, components, options) {
     const day = calendar.progressDay(components);
@@ -192,10 +191,10 @@ export default class CalendarData5e extends foundry.data.CalendarData {
 
   /**
    * Format the time to a value including hours and minutes.
-   * @param {CalendarData} calendar  The configured calendar.
-   * @param {Components} components  Time components to format.
-   * @param {object} options         Additional formatting options.
-   * @returns {string}               The returned string format.
+   * @param {CalendarData} calendar      The configured calendar.
+   * @param {TimeComponents} components  Time components to format.
+   * @param {object} options             Additional formatting options.
+   * @returns {string}                   The returned string format.
    */
   static formatHoursMinutes(calendar, components, options) {
     return CalendarData5e.formatLocalized(
@@ -207,10 +206,10 @@ export default class CalendarData5e extends foundry.data.CalendarData {
 
   /**
    * Format the time to a value including hours, minutes, and seconds.
-   * @param {CalendarData} calendar  The configured calendar.
-   * @param {Components} components  Time components to format.
-   * @param {object} options         Additional formatting options.
-   * @returns {string}               The returned string format.
+   * @param {CalendarData} calendar      The configured calendar.
+   * @param {TimeComponents} components  Time components to format.
+   * @param {object} options             Additional formatting options.
+   * @returns {string}                   The returned string format.
    */
   static formatHoursMinutesSeconds(calendar, components, options) {
     return CalendarData5e.formatLocalized(
@@ -222,11 +221,11 @@ export default class CalendarData5e extends foundry.data.CalendarData {
 
   /**
    * Format the date using the provided localization key and the default formatting parts.
-   * @param {string} localizationKey  Key to use for localization.
-   * @param {CalendarData} calendar   The configured calendar.
-   * @param {Components} components   Time components to format.
-   * @param {object} options          Additional formatting options.
-   * @returns {string}                The returned string format.
+   * @param {string} localizationKey         Key to use for localization.
+   * @param {CalendarData} calendar          The configured calendar.
+   * @param {TimeComponents} components   Time components to format.
+   * @param {object} options                 Additional formatting options.
+   * @returns {string}                       The returned string format.
    */
   static formatLocalized(localizationKey, calendar, components, options) {
     return game.i18n.format(localizationKey, CalendarData5e.dateFormattingParts(calendar, components));
@@ -236,10 +235,10 @@ export default class CalendarData5e extends foundry.data.CalendarData {
 
   /**
    * Format the date to a value including month and day.
-   * @param {CalendarData} calendar   The configured calendar.
-   * @param {Components} components  Time components to format.
-   * @param {object} options         Additional formatting options.
-   * @returns {string}               The returned string format.
+   * @param {CalendarData} calendar      The configured calendar.
+   * @param {TimeComponents} components  Time components to format.
+   * @param {object} options                 Additional formatting options.
+   * @returns {string}                       The returned string format.
    */
   static formatMonthDay(calendar, components, options) {
     return CalendarData5e.formatLocalized(
@@ -251,10 +250,10 @@ export default class CalendarData5e extends foundry.data.CalendarData {
 
   /**
    * Format the date to a value including month, day, and year.
-   * @param {CalendarData} calendar  The configured calendar.
-   * @param {Components} components  Time components to format.
-   * @param {object} options         Additional formatting options.
-   * @returns {string}               The returned string format.
+   * @param {CalendarData} calendar      The configured calendar.
+   * @param {TimeComponents} components  Time components to format.
+   * @param {object} options             Additional formatting options.
+   * @returns {string}                   The returned string format.
    */
   static formatMonthDayYear(calendar, components, options) {
     return CalendarData5e.formatLocalized(
