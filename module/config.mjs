@@ -1040,6 +1040,10 @@ DND5E.activityActivationTypes = {
     scalar: true
   },
   mythic: {
+    counted: "DND5E.ACTIVATION.Type.Mythic.Counted",
+    consume: {
+      property: "resources.legact"
+    },
     label: "DND5E.ACTIVATION.Type.Mythic.Label",
     header: "DND5E.ACTIVATION.Type.Mythic.Header",
     group: "DND5E.ACTIVATION.Category.Monster",
