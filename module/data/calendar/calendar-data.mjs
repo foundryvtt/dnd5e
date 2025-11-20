@@ -20,7 +20,7 @@ export default class CalendarData5e extends foundry.data.CalendarData {
    * @returns {number}                      Number of hours since the start of the day as a decimal.
    */
   static hoursOfDay(time=game.time.components, calendar=game.time.calendar) {
-    const components = typeof time === "number" ? this.timeToTimeComponents(time) : time;
+    const components = typeof time === "number" ? this.timeToComponents(time) : time;
     const minutes = components.minute + (components.second / calendar.days.secondsPerMinute);
     return components.hour + (minutes / calendar.days.minutesPerHour);
   }
