@@ -21,8 +21,8 @@ export default class Token5e extends foundry.canvas.placeables.Token {
   /** @inheritDoc */
   findMovementPath(waypoints, options) {
 
-    // Normal behavior if movement automation is disabled or this actor is not a creature or cannot block
-    if ( game.settings.get("dnd5e", "disableMovementAutomation") || !this.document.actor?.system.isCreature
+    // Normal behavior if token blocking is disabled or this actor is not a creature or cannot block
+    if ( (game.settings.get("dnd5e", "movementAutomation") !== "full") || !this.document.actor?.system.isCreature
       || this.document.actor.statuses.intersects(CONFIG.DND5E.neverBlockStatuses) ) {
       return super.findMovementPath(waypoints, options);
     }
@@ -52,7 +52,7 @@ export default class Token5e extends foundry.canvas.placeables.Token {
   /** @inheritDoc */
   _getMovementCostFunction(options) {
     const costFunction = super._getMovementCostFunction(options);
-    if ( game.settings.get("dnd5e", "disableMovementAutomation") ) return costFunction;
+    if ( game.settings.get("dnd5e", "movementAutomation") === "none" ) return costFunction;
 
     const ignoredDifficultTerrain = this.actor?.system.attributes?.movement?.ignoredDifficultTerrain ?? new Set();
     const ignoreDifficult = ["all", "nonmagical"].some(i => ignoredDifficultTerrain.has(i));
@@ -80,7 +80,7 @@ export default class Token5e extends foundry.canvas.placeables.Token {
   constrainMovementPath(waypoints, options) {
     let { preview=false, ignoreTokens=false } = options; // Custom constrain option to ignore tokens
 
-    ignoreTokens ||= game.settings.get("dnd5e", "disableMovementAutomation");
+    ignoreTokens ||= game.settings.get("dnd5e", "movementAutomation") !== "full";
     ignoreTokens ||= !this.actor?.system.isCreature;
     ignoreTokens ||= this.actor?.statuses?.intersects(CONFIG.DND5E.neverBlockStatuses);
 

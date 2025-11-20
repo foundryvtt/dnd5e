@@ -80,13 +80,18 @@ export function registerSystemSettings() {
   });
 
   // Movement automation
-  game.settings.register("dnd5e", "disableMovementAutomation", {
+  game.settings.register("dnd5e", "movementAutomation", {
     name: "SETTINGS.DND5E.AUTOMATION.Movement.Name",
     hint: "SETTINGS.DND5E.AUTOMATION.Movement.Hint",
     scope: "world",
     config: true,
-    default: false,
-    type: Boolean
+    default: "full",
+    type: String,
+    choices: {
+      full: "SETTINGS.DND5E.AUTOMATION.Movement.Full",
+      noBlocking: "SETTINGS.DND5E.AUTOMATION.Movement.NoBlocking",
+      none: "SETTINGS.DND5E.AUTOMATION.Movement.None"
+    }
   });
 
   // Allow rotating square templates

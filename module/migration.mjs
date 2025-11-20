@@ -431,6 +431,14 @@ export async function migrateSettings() {
   if ( (disableExperienceTracking !== undefined) && (levelingMode === undefined) ) {
     await game.settings.set("dnd5e", "levelingMode", "noxp");
   }
+  // Migrate Disable Movement Automation to Movement Automation
+  const disableMovementAutomation = game.settings.storage.get("world")
+    ?.find(s => s.key === "dnd5e.disableMovementAutomation")?.value;
+  const movementAutomation = game.settings.storage.get("world")
+    ?.find(s => s.key === "dnd5e.movementAutomation")?.value;
+  if ( (disableMovementAutomation !== undefined) && (movementAutomation === undefined) ) {
+    await game.settings.set("dnd5e", "movementAutomation", disableMovementAutomation ? "none" : "full");
+  }
 }
 
 /* -------------------------------------------- */

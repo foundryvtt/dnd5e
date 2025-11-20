@@ -128,7 +128,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
       actionConfig.getCostFunction = (...args) => this.getMovementActionCostFunction(type, ...args);
     }
     CONFIG.Token.movement.actions.crawl.getCostFunction = token => {
-      const noAutomation = game.settings.get("dnd5e", "disableMovementAutomation");
+      const noAutomation = game.settings.get("dnd5e", "movementAutomation") === "none";
       const { actor } = token;
       const actorMovement = actor?.system.attributes?.movement;
       const hasMovement = actorMovement !== undefined;
@@ -148,7 +148,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
    * @returns {TokenMovementActionCostFunction}
    */
   static getMovementActionCostFunction(type, token, options) {
-    const noAutomation = game.settings.get("dnd5e", "disableMovementAutomation");
+    const noAutomation = game.settings.get("dnd5e", "movementAutomation") === "none";
     const { actor } = token;
     const actorMovement = actor?.system.attributes?.movement;
     const walkFallback = CONFIG.DND5E.movementTypes[type]?.walkFallback;
