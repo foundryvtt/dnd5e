@@ -1,6 +1,7 @@
 import CalendarData5e from "../../data/calendar/calendar-data.mjs";
 import { formatTime } from "../../utils.mjs";
 import BaseCalendarHUD from "./base-calendar-hud.mjs";
+import SetDateDialog from "./set-date-dialog.mjs";
 
 /**
  * @import { CalendarTimeDeltas } from "../../data/calendar/_types.mjs";
@@ -15,7 +16,8 @@ export default class CalendarHUD extends BaseCalendarHUD {
   static DEFAULT_OPTIONS = {
     actions: {
       openCharacterSheet: CalendarHUD.#openCharacterSheet,
-      openPartySheet: CalendarHUD.#openPartySheet
+      openPartySheet: CalendarHUD.#openPartySheet,
+      setDate: CalendarHUD.#setDate
     },
     classes: ["faded-ui", "ui-control"]
   };
@@ -99,6 +101,13 @@ export default class CalendarHUD extends BaseCalendarHUD {
             amount: formatTime(value, unit).titleCase()
           })
         }))
+      },
+      {
+        action: "setDate",
+        icon: "fa-solid fa-calendar-days",
+        position: "start",
+        tooltip: game.i18n.localize("DND5E.CALENDAR.Action.SetDate"),
+        visible: game.user.isGM
       },
       {
         action: "openCharacterSheet",
@@ -259,6 +268,20 @@ export default class CalendarHUD extends BaseCalendarHUD {
    */
   static #openPartySheet(event, target) {
     game.actors.party?.sheet.render({ force: true });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle opening the set date dialog.
+   * @this {CalendarHUD}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   */
+  static #setDate(event, target) {
+    if ( !game.user.isGM ) return;
+    const dialog = new SetDateDialog();
+    dialog.render({ force: true });
   }
 
   /* -------------------------------------------- */
