@@ -301,8 +301,8 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
    */
   static prefixOrEntries(entries, { depth=1, modernStyle=true, usedPrefixes }={}) {
     let letters = game.i18n.localize("DND5E.StartingEquipment.Prefixes");
-    if (!letters) return entries;
-    if ( (modernStyle && (depth == 1)) || (!modernStyle && (depth === 2)) ) letters = letters.toUpperCase();
+    if ( !letters ) return entries;
+    if ( (modernStyle && (depth === 1)) || (!modernStyle && (depth === 2)) ) letters = letters.toUpperCase();
     return entries.map((e, idx) => {
       if ( usedPrefixes ) usedPrefixes.push(letters[idx]);
       return `(${letters[idx]}) ${e}`;
