@@ -701,9 +701,9 @@ export default class NPCData extends CreatureTemplate {
 
         // Tag (e.g. `Gargantuan Dragon, Lawful Evil`)
         tag: o.tag ?? game.i18n.format("DND5E.CreatureTag", {
-          size: CONFIG.DND5E.actorSizes[this.traits.size]?.label ?? "",
-          type: Actor5e.formatCreatureType(this.details.type) ?? "",
-          alignment: this.details.alignment
+          size: o.size ?? CONFIG.DND5E.actorSizes[this.traits.size]?.label ?? "",
+          type: o.type ?? Actor5e.formatCreatureType(this.details.type) ?? "",
+          alignment: o.alignment ?? this.details.alignment
         }).replace(/, $/, "")
       },
       system: this
