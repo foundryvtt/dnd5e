@@ -573,7 +573,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties: []
+      properties:
+        - mgc
       proficient: 1
       unidentified:
         description: ''
@@ -721,11 +722,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.350'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.2.0
       createdTime: null
-      modifiedTime: 1745447518695
+      modifiedTime: 1760378713016
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!YOqhbf8WsX0jH9Fu.vEEJei0CNaNbfQ2w'

@@ -14,7 +14,19 @@
     <fieldset class="card">
         <legend>{{ label }}</legend>
         {{#each fields}}
+        {{#if fields}}
+        <div class="form-group split-group">
+            <label>{{ localize label }}</label>
+            <div class="form-fields">
+                {{#each fields}}
+                {{ formInput field name=name value=value choices=choices input=input disabled=@root.flags.disabled }}
+                {{/each}}
+            </div>
+            {{#if hint}}<p class="hint">{{ localize hint }}</p>{{/if}}
+        </div>
+        {{else}}
         {{ formField field name=name value=value choices=choices input=input disabled=@root.flags.disabled }}
+        {{/if}}
         {{/each}}
     </fieldset>
     {{/each}}

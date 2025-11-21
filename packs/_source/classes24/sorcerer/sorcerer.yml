@@ -45,7 +45,7 @@ system:
     rules: '2024'
     revision: 2
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
   startingEquipment:
     - type: AND
       requiresProficiency: false
@@ -85,6 +85,13 @@ system:
       _id: LgbG4QYKBQTlDhOd
       group: pR0mEuxe1qPdiMXB
       sort: 500000
+    - type: currency
+      count: 28
+      key: gp
+      requiresProficiency: false
+      _id: mXGHdwbuSIEboiMy
+      group: pR0mEuxe1qPdiMXB
+      sort: 700000
   identifier: sorcerer
   levels: 1
   advancement:
@@ -469,11 +476,11 @@ effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1735866286897
-  modifiedTime: 1752705940073
+  modifiedTime: 1757541715654
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

@@ -3,7 +3,7 @@
         <legend>
             <label class="checkbox">
                 {{ localize "DND5E.RANGE.FIELDS.range.label" }}
-                {{#if activity.range.canOverride}}
+                {{#if (or activity.range.canOverride activity.isRider)}}
                 {{ formInput fields.range.fields.override value=source.range.override input=inputs.createCheckboxInput
                              dataset=(dnd5e-object tooltip="DND5E.RANGE.FIELDS.range.override.hint")
                              ariaLabel=(localize "DND5E.RANGE.FIELDS.range.override.hint")}}

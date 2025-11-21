@@ -7,25 +7,16 @@ import BaseActivityData from "./base-activity.mjs";
 const { ArrayField, BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
- * Data model for an attack activity.
- *
- * @property {object} attack
- * @property {string} attack.ability              Ability used to make the attack and determine damage.
- * @property {string} attack.bonus                Arbitrary bonus added to the attack.
- * @property {object} attack.critical
- * @property {number} attack.critical.threshold   Minimum value on the D20 needed to roll a critical hit.
- * @property {boolean} attack.flat                Should the bonus be used in place of proficiency & ability modifier?
- * @property {object} attack.type
- * @property {string} attack.type.value           Is this a melee or ranged attack?
- * @property {string} attack.type.classification  Is this a unarmed, weapon, or spell attack?
- * @property {object} damage
- * @property {object} damage.critical
- * @property {string} damage.critical.bonus       Extra damage applied when a critical is rolled. Added to the base
- *                                                damage or first damage part.
- * @property {boolean} damage.includeBase         Should damage defined by the item be included with other damage parts?
- * @property {DamageData[]} damage.parts          Parts of damage to inflict.
+ * @import { AttackDamageRollProcessConfiguration } from "../../dice/_types.mjs";
+ * @import { AttackActivityData } from "./_types.mjs";
  */
-export default class AttackActivityData extends BaseActivityData {
+
+/**
+ * Data model for an attack activity.
+ * @extends {BaseActivityData<AttackActivityData>}
+ * @mixes AttackActivityData
+ */
+export default class BaseAttackActivityData extends BaseActivityData {
   /** @inheritDoc */
   static defineSchema() {
     return {
@@ -153,7 +144,7 @@ export default class AttackActivityData extends BaseActivityData {
   }
 
   /* -------------------------------------------- */
-  /*  Data Migrations                             */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @override */
@@ -219,8 +210,8 @@ export default class AttackActivityData extends BaseActivityData {
 
     const { data, parts } = this.getAttackData();
     const roll = new Roll(parts.join("+"), data);
-    this.labels.modifier = simplifyRollFormula(roll.formula, { deterministic: true }) || "0";
-    const formula = simplifyRollFormula(roll.formula) || "0";
+    this.labels.modifier = simplifyRollFormula(roll.formula, { deterministic: true }).replaceAll(" ", "") || "0";
+    const formula = simplifyRollFormula(roll.formula).trim() || "0";
     this.labels.toHit = !/^[+-]/.test(formula) ? `+${formula}` : formula;
   }
 
@@ -245,14 +236,14 @@ export default class AttackActivityData extends BaseActivityData {
     const isUnarmed = this.attack.type.classification === "unarmed";
     if ( isUnarmed ) attackModeLabel = game.i18n.localize("DND5E.ATTACK.Classification.Unarmed");
     const isSpell = (actionType === "rsak") || (actionType === "msak");
-    if ( isLegacy || isSpell ) return [actionTypeLabel, attackModeLabel].filterJoin(" &bull; ");
+    if ( isLegacy || isSpell ) return [actionTypeLabel, attackModeLabel].filterJoin(" • ");
     actionTypeLabel = game.i18n.localize(`DND5E.ATTACK.Attack.${actionType}`);
-    if ( isUnarmed ) return [actionTypeLabel, attackModeLabel].filterJoin(" &bull; ");
+    if ( isUnarmed ) return [actionTypeLabel, attackModeLabel].filterJoin(" • ");
     const weaponType = CONFIG.DND5E.weaponTypeMap[this.item.system.type?.value];
     const weaponTypeLabel = weaponType
       ? game.i18n.localize(`DND5E.ATTACK.Weapon.${weaponType.capitalize()}`)
       : CONFIG.DND5E.weaponTypes[this.item.system.type?.value];
-    return [actionTypeLabel, weaponTypeLabel, attackModeLabel].filterJoin(" &bull; ");
+    return [actionTypeLabel, weaponTypeLabel, attackModeLabel].filterJoin(" • ");
   }
 
   /* -------------------------------------------- */
@@ -288,12 +279,6 @@ export default class AttackActivityData extends BaseActivityData {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * @typedef {AttackDamageRollProcessConfiguration} [config={}]
-   * @property {Item5e} ammunition  Ammunition used with the attack.
-   * @property {"oneHanded"|"twoHanded"|"offhand"|"thrown"|"thrown-offhand"} attackMode  Attack mode.
-   */
 
   /**
    * Get the roll parts used to create the damage rolls.
@@ -372,9 +357,9 @@ export default class AttackActivityData extends BaseActivityData {
       else {
         const { value, long, units } = this.item.system.range;
         if ( long && (value !== long) ) range = `${value}/${formatLength(long, units, { strict: false })}`;
-        else range = formatLength(value, units, { strict: false });
+        else if ( value ) range = formatLength(value, units, { strict: false });
       }
-      parts.push(game.i18n.format("DND5E.RANGE.Formatted.Range", { range }));
+      if ( range ) parts.push(game.i18n.format("DND5E.RANGE.Formatted.Range", { range }));
     }
 
     return game.i18n.getListFormatter({ type: "disjunction" }).format(parts.filter(_ => _));

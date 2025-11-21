@@ -631,7 +631,7 @@ items:
         chat: ''
       source:
         custom: ''
-        book: SRD 5.1
+        book: ''
         page: ''
         license: CC-BY-4.0
         rules: '2014'
@@ -772,7 +772,7 @@ items:
         chat: ''
       source:
         custom: ''
-        book: SRD 5.1
+        book: ''
         page: ''
         license: CC-BY-4.0
         rules: '2014'
@@ -896,7 +896,7 @@ items:
         chat: ''
       source:
         custom: ''
-        book: SRD 5.1
+        book: ''
         page: ''
         license: CC-BY-4.0
         rules: '2014'
@@ -1568,7 +1568,7 @@ items:
         chat: ''
       source:
         custom: ''
-        book: SRD 5.1
+        book: ''
         page: ''
         license: CC-BY-4.0
         rules: '2014'
@@ -1676,7 +1676,7 @@ items:
         chat: ''
       source:
         custom: ''
-        book: SRD 5.1
+        book: ''
         page: ''
         license: CC-BY-4.0
         rules: '2014'
@@ -1749,7 +1749,7 @@ items:
         chat: ''
       source:
         custom: ''
-        book: SRD 5.1
+        book: ''
         page: ''
         license: CC-BY-4.0
         rules: '2014'
@@ -1866,7 +1866,7 @@ items:
         chat: ''
       source:
         custom: ''
-        book: SRD 5.1
+        book: ''
         page: ''
         license: CC-BY-4.0
         rules: '2014'
@@ -1932,7 +1932,7 @@ items:
               - temphp
             custom:
               enabled: true
-              formula: max(1, @mod + @classes.warlock.levels)
+              formula: max(1, @abilities.cha.mod + @classes.warlock.levels)
             scaling:
               mode: whole
               number: null
@@ -1940,7 +1940,11 @@ items:
           uses:
             spent: 0
             recovery: []
+            max: ''
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
@@ -1956,11 +1960,11 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.classfeatures.Item.Jv0zu4BtUi8bFCqJ
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 5.2.0
       createdTime: null
-      modifiedTime: 1738093814407
+      modifiedTime: 1758300993654
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!Jw8DeuPjt1qpusdB.7VjDwCQSWcmnzmts'
@@ -1990,7 +1994,7 @@ items:
         chat: ''
       source:
         custom: ''
-        book: SRD 5.1
+        book: ''
         page: ''
         license: CC-BY-4.0
         rules: '2014'
@@ -2040,7 +2044,7 @@ items:
         chat: ''
       source:
         custom: ''
-        book: SRD 5.1
+        book: ''
         page: ''
         license: CC-BY-4.0
         rules: '2014'
@@ -2211,7 +2215,7 @@ items:
         chat: ''
       source:
         custom: ''
-        book: SRD 5.1
+        book: ''
         page: ''
         license: CC-BY-4.0
         rules: '2014'
@@ -2263,7 +2267,7 @@ items:
         chat: ''
       source:
         custom: ''
-        book: SRD 5.1
+        book: ''
         page: ''
         license: CC-BY-4.0
         rules: '2014'
@@ -2393,7 +2397,7 @@ items:
         chat: ''
       source:
         custom: ''
-        book: SRD 5.1
+        book: ''
         page: ''
         license: CC-BY-4.0
         rules: '2014'
@@ -2546,7 +2550,7 @@ items:
         chat: ''
       source:
         custom: ''
-        book: SRD 5.1
+        book: ''
         page: ''
         license: CC-BY-4.0
         rules: '2014'
@@ -2604,7 +2608,7 @@ items:
         chat: ''
       source:
         custom: ''
-        book: SRD 5.1
+        book: ''
         page: ''
         license: CC-BY-4.0
         rules: '2014'
@@ -2731,7 +2735,7 @@ items:
         chat: ''
       source:
         custom: ''
-        book: SRD 5.1
+        book: ''
         page: ''
         license: CC-BY-4.0
         rules: '2014'
@@ -2862,7 +2866,7 @@ items:
         chat: ''
       source:
         custom: ''
-        book: SRD 5.1
+        book: ''
         page: ''
         license: CC-BY-4.0
         rules: '2014'
@@ -2922,7 +2926,7 @@ items:
         chat: ''
       source:
         custom: ''
-        book: SRD 5.1
+        book: ''
         page: ''
         license: CC-BY-4.0
         rules: '2014'
@@ -2971,7 +2975,7 @@ items:
         chat: ''
       source:
         custom: ''
-        book: SRD 5.1
+        book: ''
         page: ''
         license: CC-BY-4.0
         rules: '2014'
@@ -3023,7 +3027,7 @@ items:
         chat: ''
       source:
         custom: ''
-        book: SRD 5.1
+        book: ''
         page: ''
         license: CC-BY-4.0
         rules: '2014'
@@ -3083,7 +3087,7 @@ items:
         chat: ''
       source:
         custom: ''
-        book: SRD 5.1
+        book: ''
         page: ''
         license: CC-BY-4.0
         rules: '2014'
@@ -3217,7 +3221,7 @@ items:
         chat: ''
       source:
         custom: ''
-        book: SRD 5.1
+        book: ''
         page: ''
         license: CC-BY-4.0
         rules: '2014'
@@ -3293,7 +3297,7 @@ items:
         chat: ''
       source:
         custom: ''
-        book: SRD 5.1
+        book: ''
         page: ''
         license: CC-BY-4.0
         rules: '2014'
@@ -3345,7 +3349,7 @@ items:
         chat: ''
       source:
         custom: ''
-        book: SRD 5.1
+        book: ''
         page: ''
         license: CC-BY-4.0
         rules: '2014'
@@ -3421,7 +3425,7 @@ items:
         chat: ''
       source:
         custom: ''
-        book: SRD 5.1
+        book: ''
         page: ''
         license: CC-BY-4.0
         rules: '2014'
@@ -3592,7 +3596,7 @@ items:
         chat: ''
       source:
         custom: ''
-        book: SRD 5.1
+        book: ''
         page: ''
         license: CC-BY-4.0
         rules: '2014'
@@ -3655,7 +3659,7 @@ items:
         chat: ''
       source:
         custom: ''
-        book: SRD 5.1
+        book: ''
         page: ''
         license: CC-BY-4.0
         rules: '2014'
@@ -3777,7 +3781,7 @@ items:
         chat: ''
       source:
         custom: ''
-        book: SRD 5.1
+        book: ''
         page: ''
         license: CC-BY-4.0
         rules: '2014'
@@ -3908,7 +3912,7 @@ items:
         chat: ''
       source:
         custom: ''
-        book: SRD 5.1
+        book: ''
         page: ''
         license: CC-BY-4.0
         rules: '2014'
@@ -4038,7 +4042,7 @@ items:
         chat: ''
       source:
         custom: ''
-        book: SRD 5.1
+        book: ''
         page: ''
         license: CC-BY-4.0
         rules: '2014'
@@ -4159,7 +4163,7 @@ items:
         chat: ''
       source:
         custom: ''
-        book: SRD 5.1
+        book: ''
         page: ''
         license: CC-BY-4.0
         rules: '2014'

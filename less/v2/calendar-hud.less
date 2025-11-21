@@ -1,0 +1,183 @@
+@property --calendar-day-progress {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+@property --calendar-night-progress {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 1;
+}
+
+#calendar-hud {
+  --calendar-animation-time: 250ms;
+  --calendar-animation: var(--calendar-animation-time) ease-in-out;
+  --calendar-gap: .5rem;
+  --calendar-sun-size: 6px;
+
+  display: flex;
+  gap: var(--calendar-gap);
+  block-size: var(--control-size);
+  margin-block-start: 16px;
+  margin-inline: 16px;
+
+  align-content: center;
+  color: var(--control-icon-color);
+  font-size: var(--font-size-12);
+  pointer-events: all;
+
+  .calendar-core, .calendar-button {
+    background: var(--control-bg-color);
+    border: 1px solid var(--control-border-color);
+    border-radius: 4px;
+  }
+
+  .calendar-buttons {
+    display: flex;
+    gap: var(--calendar-gap);
+    align-items: center;
+
+    .dropdown {
+      position: absolute;
+      inline-size: min-content;
+      padding: var(--calendar-gap);
+      gap: var(--calendar-gap);
+      transition-behavior: allow-discrete;
+      transition-duration: var(--ui-fade-duration);
+      transition-property: opacity, display;
+    }
+    &[data-application-part="startButtons"] .dropdown { inset-inline-end: calc(var(--calendar-gap) * -1); }
+    &[data-application-part="endButtons"] .dropdown { inset-inline-start: calc(var(--calendar-gap) * -1); }
+    .calendar-button { position: relative; }
+    .calendar-button:not(:hover, :focus-visible) .dropdown {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+  .calendar-button {
+    block-size: 24px;
+    inline-size: 24px;
+
+    .calendar-button {
+      block-size: unset;
+      inline-size: unset;
+      button { font-size: var(--font-size-12); }
+    }
+
+    button {
+      block-size: 100%;
+      inline-size: 100%;
+      padding: 6px;
+      background: none;
+      border: none;
+      color: inherit;
+      text-transform: none;
+    }
+  }
+
+  .calendar-core {
+    display: grid;
+    grid-template-columns: minmax(110px, 1fr) 80px minmax(110px, 1fr);
+    // TODO: Allow width to be customized
+    align-items: center;
+    gap: 6px;
+  }
+  .calendar-date, .calendar-time {
+    padding: 6px;
+    text-align: center;
+  }
+  .calendar-widget {
+    --sky-top-color: rgb(0 115 188);
+    --sky-bottom-color: rgb(161 176 209);
+
+    position: relative;
+    margin-block: 2px;
+    align-self: stretch;
+    border: 1px solid var(--dnd5e-color-gold);
+    border-radius: 3px;
+    overflow: hidden;
+    isolation: isolate;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, var(--sky-top-color), var(--sky-bottom-color));
+      z-index: -1;
+      opacity: ~"calc(.75 + sin((var(--calendar-day-progress) * pi)))";
+      transition: opacity var(--calendar-animation);
+    }
+  }
+  .calendar-stars, .calendar-sun {
+    position: absolute;
+    block-size: 100px;
+    inline-size: 100px;
+    top: 6px;
+    left: -10px;
+    border-radius: 100%;
+    transition: rotate var(--calendar-animation);
+  }
+  .calendar-stars {
+    rotate: calc(var(--calendar-night-progress) * -.5turn);
+    z-index: -2;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: -20px;
+      border-radius: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cfilter id='filter'%3E%3CfeTurbulence baseFrequency='0.3'/%3E%3CfeColorMatrix values='0 0 0 9 -4 0 0 0 9 -4 0 0 0 9 -4 0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23filter)'/%3E%3C/svg%3E%0A");
+    }
+  }
+  .calendar-sun {
+    --calendar-sun-adjustment-factor: 0.45;
+    --_offset: ~"mod(calc(var(--calendar-day-progress) + 0.5), 2)";
+    --_adjusted-distance: calc(var(--calendar-sun-adjustment-factor) * (1 - var(--_offset)));
+    --_sun-progress: calc(var(--calendar-day-progress) + var(--_adjusted-distance));
+
+    rotate: calc(var(--_sun-progress) * -.5turn);
+    opacity: ~"calc(1 + sin((var(--calendar-day-progress) * pi)))";
+    transition: opacity var(--calendar-animation), rotate var(--calendar-animation);
+
+    &::before, &::after {
+      content: "";
+      position: absolute;
+    }
+    &::before {
+      block-size: 100%;
+      inline-size: 100%;
+      inset-inline-start: 50%;
+      background:
+        radial-gradient(20px 10px, rgb(252 249 214 / .7), transparent),
+        radial-gradient(30px 20px, rgb(248 243 161 / .5), transparent),
+        radial-gradient(35px 25px, rgb(250 188 90 / .3), transparent),
+        radial-gradient(40px 30px, rgb(234 158 111 / .2), transparent);
+      rotate: calc(var(--_sun-progress) * .5turn);
+      opacity: ~"calc(1 - sin((var(--calendar-day-progress) * pi)))";
+      transition: opacity var(--calendar-animation), rotate var(--calendar-animation);
+    }
+    &::after {
+      block-size: var(--calendar-sun-size);
+      inline-size: var(--calendar-sun-size);
+      inset-block-end: calc(var(--calendar-sun-size) * -0.5 + 50%);
+      inset-inline-end: calc(var(--calendar-sun-size) * -0.5);
+      background: yellow;
+      border-radius: 100%;
+      outline-offset: 5px;
+    }
+  }
+
+  &.debug {
+    opacity: 1;
+    .calendar-widget { overflow: visible; }
+    .calendar-sun {
+      opacity: 1;
+      outline: 1px solid white;
+      &::before {
+        opacity: 1;
+        outline: 1px solid greenyellow;
+      }
+      &::after { outline: 1px solid red; }
+    }
+  }
+}

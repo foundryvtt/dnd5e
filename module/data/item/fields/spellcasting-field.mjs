@@ -5,11 +5,6 @@ const { SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Data field for class & subclass spellcasting information.
- *
- * @property {string} progression          Spellcasting progression (e.g. full, half, pact).
- * @property {string} ability              Ability used for spell attacks and save DCs.
- * @property {object} preparation
- * @property {string} preparation.formula  Formula used to calculate max prepared spells, if a prepared caster.
  */
 export default class SpellcastingField extends SchemaField {
   constructor(fields={}, options={}) {

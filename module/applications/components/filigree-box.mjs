@@ -1,9 +1,11 @@
 import AdoptedStyleSheetMixin from "./adopted-stylesheet-mixin.mjs";
 
+const MaybeAdoptable = foundry.applications.elements.AdoptableHTMLElement ?? HTMLElement;
+
 /**
  * Custom element that adds a filigree border that can be colored.
  */
-export default class FiligreeBoxElement extends AdoptedStyleSheetMixin(HTMLElement) {
+export default class FiligreeBoxElement extends AdoptedStyleSheetMixin(MaybeAdoptable) {
   constructor() {
     super();
     this.#shadowRoot = this.attachShadow({ mode: "closed" });
@@ -22,6 +24,16 @@ export default class FiligreeBoxElement extends AdoptedStyleSheetMixin(HTMLEleme
     const slot = document.createElement("slot");
     this.#shadowRoot.appendChild(slot);
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The HTML tag named used by this element.
+   * @type {string}
+   */
+  static tagName = "filigree-box";
+
+  /* -------------------------------------------- */
 
   /** @inheritDoc */
   static CSS = `
@@ -73,6 +85,8 @@ export default class FiligreeBoxElement extends AdoptedStyleSheetMixin(HTMLEleme
     }
   `;
 
+  /* -------------------------------------------- */
+
   /**
    * Path definitions for the various box corners and edges.
    * @type {object}
@@ -82,6 +96,8 @@ export default class FiligreeBoxElement extends AdoptedStyleSheetMixin(HTMLEleme
     block: "M 0 0 L 10 0 L 10 3.1 L 0 3.1 L 0 0 Z",
     inline: "M 0 10 L 0 0 L 2.99 0 L 2.989 10 L 0 10 Z M 6.9 10 L 6.9 0 L 8.6 0 L 8.6 10 L 6.9 10 Z"
   });
+
+  /* -------------------------------------------- */
 
   /**
    * Shadow root that contains the box shapes.

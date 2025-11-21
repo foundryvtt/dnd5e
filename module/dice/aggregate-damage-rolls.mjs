@@ -2,7 +2,7 @@ const { OperatorTerm, RollTerm } = foundry.dice.terms;
 
 /**
  * Parse the provided rolls, splitting parts based on damage types & properties, taking flavor into account.
- * @param {DamageRoll[]} rolls                   Evaluated damage rolls to aggregate.
+ * @param {DamageRoll[]} rolls                   Damage rolls to aggregate.
  * @param {object} [options={}]
  * @param {boolean} [options.respectProperties]  Should damage properties also affect grouping?
  * @returns {DamageRoll[]}
@@ -13,7 +13,6 @@ export default function aggregateDamageRolls(rolls, { respectProperties }={}) {
   // Split rolls into new sets of terms based on damage type & properties
   const types = new Map();
   for ( const roll of rolls ) {
-    if ( !roll._evaluated ) throw new Error("Only evaluated rolls can be aggregated.");
     for ( const chunk of chunkTerms(roll.terms, roll.options.type) ) {
       const key = makeHash(chunk.type, roll.options.properties);
       if ( !types.has(key) ) types.set(key, { type: chunk.type, properties: new Set(), terms: [] });

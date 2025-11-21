@@ -1,10 +1,20 @@
+const MaybeAdoptable = foundry.applications.elements.AdoptableHTMLElement ?? HTMLElement;
+
 /**
  * Application to handle applying enchantments to items from a chat card.
  */
-export default class EnchantmentApplicationElement extends HTMLElement {
+export default class EnchantmentApplicationElement extends MaybeAdoptable {
 
   /* -------------------------------------------- */
   /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * The HTML tag named used by this element.
+   * @type {string}
+   */
+  static tagName = "enchantment-application";
+
   /* -------------------------------------------- */
 
   /**

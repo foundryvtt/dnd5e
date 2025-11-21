@@ -3,59 +3,11 @@ import RollConfigurationDialog from "../applications/dice/roll-configuration-dia
 const { DiceTerm, NumericTerm } = foundry.dice.terms;
 
 /**
- * Configuration data for the process of creating one or more basic rolls.
- *
- * @typedef {object} BasicRollProcessConfiguration
- * @property {BasicRollConfiguration[]} rolls  Configuration data for individual rolls.
- * @property {boolean} [evaluate=true]         Should the rolls be evaluated? If set to `false`, then no chat message
- *                                             will be created regardless of message configuration.
- * @property {Event} [event]                   Event that triggered the rolls.
- * @property {string[]} [hookNames]            Name suffixes for configuration hooks called.
- * @property {Document} [subject]              Document that initiated this roll.
- * @property {number} [target]                 Default target value for all rolls.
+ * @import {
+ *   BasicRollConfiguration, BasicRollDialogConfiguration, BasicRollMessageConfiguration,
+ *   BasicRollOptions, BasicRollProcessConfiguration
+ * } from "./_types.mjs";
  */
-
-/**
- * Configuration data for an individual roll.
- *
- * @typedef {object} BasicRollConfiguration
- * @property {string[]} [parts=[]]         Parts used to construct the roll formula.
- * @property {object} [data={}]            Data used to resolve placeholders in the formula.
- * @property {boolean} [situational=true]  Whether the situational bonus can be added to this roll in the prompt.
- * @property {BasicRollOptions} [options]  Additional options passed through to the created roll.
- */
-
-/**
- * Options allowed on a basic roll.
- *
- * @typedef {object} BasicRollOptions
- * @property {number} [target]  The total roll result that must be met for the roll to be considered a success.
- */
-
-/* -------------------------------------------- */
-
-/**
- * Configuration data for the roll prompt.
- *
- * @typedef {object} BasicRollDialogConfiguration
- * @property {boolean} [configure=true]  Display a configuration dialog for the rolling process.
- * @property {typeof RollConfigurationDialog} [applicationClass]  Alternate configuration application to use.
- * @property {BasicRollConfigurationDialogOptions} [options]      Additional options passed to the dialog.
- */
-
-/* -------------------------------------------- */
-
-/**
- * Configuration data for creating a roll message.
- *
- * @typedef {object} BasicRollMessageConfiguration
- * @property {boolean} [create=true]     Create a message when the rolling is complete.
- * @property {ChatMessage5e} [document]  Final created chat message document once process is completed.
- * @property {string} [rollMode]         The roll mode to apply to this message from `CONFIG.Dice.rollModes`.
- * @property {object} [data={}]          Additional data used when creating the message.
- */
-
-/* -------------------------------------------- */
 
 /**
  * Custom base roll type with methods for building rolls, presenting prompts, and creating messages.
@@ -99,7 +51,7 @@ export default class BasicRoll extends Roll {
       if ( !value && (value !== 0) ) continue;
       finalParts.push(`@${key}`);
       foundry.utils.setProperty(
-        data, key, foundry.utils.getType(value) === "string" ? Roll.replaceFormulaData(value, data) : value
+        data, key, foundry.utils.getType(value) === "string" ? BasicRoll.replaceFormulaData(value, data) : value
       );
     }
     return { parts: finalParts, data };
@@ -345,6 +297,42 @@ export default class BasicRoll extends Roll {
     // been added to ensure this is a deliberate shim from the system, not a unintentional usage that should
     // show an error).
     return super.replaceFormulaData(formula, data, options).replaceAll(/\$"?!(.+?)!"?\$/g, "$1");
+  }
+
+  /* -------------------------------------------- */
+  /*  Inversion Methods                           */
+  /* -------------------------------------------- */
+
+  /**
+   * Invert the roll's formula, resulting in a formula whose total, if multiplied by -1, will be the same as
+   * the evaluated total of the original formula.
+   * @returns {BasicRoll}
+   */
+  invert() {
+    // Add "0 +" to the start of formulas that don't begin with a numeric term
+    if ( !(this.terms[0] instanceof foundry.dice.terms.NumericTerm) ) this.terms.unshift(
+      new foundry.dice.terms.NumericTerm({ number: 0 }),
+      new foundry.dice.terms.OperatorTerm({ operator: "+" })
+    );
+
+    // Otherwise remove "0 -" from formulas that start with that
+    else if ( (this.terms[0]?.number === 0) && (this.terms[1]?.operator === "-") ) this.terms.splice(0, 2);
+
+    // Starting numeric terms should be directly inverted
+    if ( this.terms[0] instanceof foundry.dice.terms.NumericTerm ) this.terms[0].number *= -1;
+
+    // Invert all addition & subtraction operators
+    this.terms = this.terms.map((term, index) => {
+      if ( term instanceof foundry.dice.terms.OperatorTerm ) {
+        if ( term.operator === "+" ) term.operator = "-";
+        else if ( term.operator === "-" ) term.operator = "+";
+      }
+      return term;
+    });
+
+    if ( this._evaluated ) this._total *= -1;
+    this.resetFormula();
+    return this;
   }
 
   /* -------------------------------------------- */

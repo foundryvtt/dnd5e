@@ -14,26 +14,27 @@ import PhysicalItemTemplate from "./templates/physical-item.mjs";
 const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @import { ItemTypeData } from "./fields/item-type-field.mjs";
+ * @import { InventorySectionDescriptor } from "../../applications/components/_types.mjs";
+ * @import { ConsumableItemSystemData } from "./_types.mjs";
+ * @import {
+ *   ActivitiesTemplateData, EquippableItemTemplateData, IdentifiableTemplateData,
+ *   ItemDescriptionTemplateData, ItemTypeTemplateData, PhysicalItemTemplateData
+ * } from "./templates/_types.mjs";
  */
 
 /**
  * Data definition for Consumable items.
- * @mixes ActivitiesTemplate
- * @mixes ItemDescriptionTemplate
- * @mixes ItemTypeTemplate
- * @mixes IdentifiableTemplate
- * @mixes PhysicalItemTemplate
- * @mixes EquippableItemTemplate
- *
- * @property {object} damage
- * @property {DamageData} damage.base               Damage caused by this ammunition.
- * @property {string} damage.replace                Should ammunition damage replace the base weapon's damage?
- * @property {number} magicalBonus                  Magical bonus added to attack & damage rolls by ammunition.
- * @property {Set<string>} properties               Ammunition properties.
- * @property {Omit<ItemTypeData, "baseItem">} type  Ammunition type and subtype.
- * @property {object} uses
- * @property {boolean} uses.autoDestroy  Should this item be destroyed when it runs out of uses.
+ * @extends {ItemDataModel<
+ *   ActivitiesTemplate & ItemDescriptionTemplate & IdentifiableTemplate &
+ *   ItemTypeTemplate & PhysicalItemTemplate & EquippableItemTemplate & ConsumableItemSystemData
+ * >}
+ * @mixes ActivitiesTemplateData
+ * @mixes ItemDescriptionTemplateData
+ * @mixes ItemTypeTemplateData
+ * @mixes IdentifiableTemplateData
+ * @mixes PhysicalItemTemplateData
+ * @mixes EquippableItemTemplateData
+ * @mixes ConsumableItemSystemData
  */
 export default class ConsumableData extends ItemDataModel.mixin(
   ActivitiesTemplate, ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate,
@@ -109,7 +110,73 @@ export default class ConsumableData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
-  /*  Data Migrations                             */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Properties displayed in chat.
+   * @type {string[]}
+   */
+  get chatProperties() {
+    return [
+      this.type.label,
+      this.hasLimitedUses ? `${this.uses.value}/${this.uses.max} ${game.i18n.localize("DND5E.Charges")}` : null,
+      this.priceLabel
+    ];
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  get _typeAbilityMod() {
+    if ( this.type.value !== "scroll" ) return null;
+    return this.parent?.actor?.system.attributes.spellcasting || "int";
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  static get itemCategories() {
+    return CONFIG.DND5E.consumableTypes;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does this item have base damage defined in `damage.base` to offer to an activity?
+   * @type {boolean}
+   */
+  get offersBaseDamage() {
+    return this.type.value === "ammo";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The proficiency multiplier for this item.
+   * @returns {number}
+   */
+  get proficiencyMultiplier() {
+    const isProficient = this.parent?.actor?.getFlag("dnd5e", "tavernBrawlerFeat");
+    return isProficient ? 1 : 0;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  get validProperties() {
+    const valid = super.validProperties;
+    if ( this.type.value === "ammo" ) Object.entries(CONFIG.DND5E.itemProperties).forEach(([k, v]) => {
+      if ( v.isPhysical ) valid.add(k);
+      valid.add("ret");
+    });
+    else if ( this.type.value === "scroll" ) CONFIG.DND5E.validProperties.spell
+      .filter(p => p !== "material").forEach(p => valid.add(p));
+    return valid;
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -209,72 +276,6 @@ export default class ConsumableData extends ItemDataModel.mixin(
       context.itemType = itemTypes.label;
       context.itemSubtypes = itemTypes.subtypes;
     }
-  }
-
-  /* -------------------------------------------- */
-  /*  Getters                                     */
-  /* -------------------------------------------- */
-
-  /**
-   * Properties displayed in chat.
-   * @type {string[]}
-   */
-  get chatProperties() {
-    return [
-      this.type.label,
-      this.hasLimitedUses ? `${this.uses.value}/${this.uses.max} ${game.i18n.localize("DND5E.Charges")}` : null,
-      this.priceLabel
-    ];
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  get _typeAbilityMod() {
-    if ( this.type.value !== "scroll" ) return null;
-    return this.parent?.actor?.system.attributes.spellcasting || "int";
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  static get itemCategories() {
-    return CONFIG.DND5E.consumableTypes;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Does this item have base damage defined in `damage.base` to offer to an activity?
-   * @type {boolean}
-   */
-  get offersBaseDamage() {
-    return this.type.value === "ammo";
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * The proficiency multiplier for this item.
-   * @returns {number}
-   */
-  get proficiencyMultiplier() {
-    const isProficient = this.parent?.actor?.getFlag("dnd5e", "tavernBrawlerFeat");
-    return isProficient ? 1 : 0;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  get validProperties() {
-    const valid = super.validProperties;
-    if ( this.type.value === "ammo" ) Object.entries(CONFIG.DND5E.itemProperties).forEach(([k, v]) => {
-      if ( v.isPhysical ) valid.add(k);
-      valid.add("ret");
-    });
-    else if ( this.type.value === "scroll" ) CONFIG.DND5E.validProperties.spell
-      .filter(p => p !== "material").forEach(p => valid.add(p));
-    return valid;
   }
 
   /* -------------------------------------------- */

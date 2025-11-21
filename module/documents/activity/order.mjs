@@ -1,35 +1,17 @@
 import ActivityMixin from "./mixin.mjs";
-import OrderActivityData from "../../data/activity/order-data.mjs";
+import BaseOrderActivityData from "../../data/activity/order-data.mjs";
 import OrderUsageDialog from "../../applications/activity/order-usage-dialog.mjs";
 import CurrencyManager from "../../applications/currency-manager.mjs";
 import { formatNumber } from "../../utils.mjs";
 
 /**
- * @typedef {ActivityUseConfiguration} OrderUseConfiguration
- * @property {object} [building]
- * @property {string} [building.size]            The size of facility to build.
- * @property {object} [costs]
- * @property {number} [costs.days]               The cost of executing the order, in days.
- * @property {number} [costs.gold]               The cost of executing the order, in gold.
- * @property {boolean} [costs.paid]              Whether the gold cost has been paid.
- * @property {object} [craft]
- * @property {string} [craft.item]               The item being crafted or harvested.
- * @property {number} [craft.quantity]           The quantity of items to harvest.
- * @property {object} [trade]
- * @property {boolean} [trade.sell]              Whether the trade was a sell operation.
- * @property {object} [trade.stock]
- * @property {boolean} [trade.stock.stocked]     Whether the order was to fully stock the inventory.
- * @property {boolean} [trade.stock.value]       The base value of goods transacted.
- * @property {object} [trade.creatures]
- * @property {string[]} [trade.creatures.buy]    Additional animals purchased.
- * @property {boolean[]} [trade.creatures.sell]  Whether a creature in a given slot was sold.
- * @property {number} [trade.creatures.price]    The base value of the animals sold.
+ * @import { OrderUseConfiguration } from "./_types.mjs";
  */
 
 /**
  * An activity for issuing an order to a facility.
  */
-export default class OrderActivity extends ActivityMixin(OrderActivityData) {
+export default class OrderActivity extends ActivityMixin(BaseOrderActivityData) {
   /* -------------------------------------------- */
   /*  Model Configuration                         */
   /* -------------------------------------------- */
@@ -55,8 +37,8 @@ export default class OrderActivity extends ActivityMixin(OrderActivityData) {
   /** @inheritDoc */
   get canUse() {
     return super.canUse
-      // Don't allow usage if facility is already executing the same order
-      && !this.inProgress
+      // Don't allow usage if facility is already executing the same order or has been disabled by attack
+      && !this.inProgress && !this.item.system.disabled
       // Enlarge order cannot be executed if facility is already maximum size
       && ((this.order !== "enlarge") || (this.parent.size !== "vast"));
   }

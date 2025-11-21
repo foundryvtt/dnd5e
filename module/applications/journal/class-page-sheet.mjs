@@ -8,6 +8,10 @@ const { JournalEntryPageHandlebarsSheet } = foundry.applications.sheets.journal;
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
+ * @import { SpellcastingDescription } from "../../documents/_types.mjs";
+ */
+
+/**
  * Journal entry page that displays an automatically generated summary of a class along with additional description.
  */
 export default class JournalClassPageSheet extends JournalEntryPageHandlebarsSheet {
@@ -180,7 +184,7 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
       };
     }
 
-    advancement.equipment = item.system.startingEquipmentDescription;
+    advancement.equipment = item.system.getStartingEquipmentDescription({ modernStyle });
 
     return advancement;
   }
@@ -226,21 +230,19 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
     if ( item.type === "class" ) headers[0].push({content: game.i18n.localize("DND5E.ProficiencyBonus")});
     if ( hasFeatures ) headers[0].push({content: game.i18n.localize("DND5E.Features")});
     headers[0].push(...scaleValues.map(a => ({content: a.title})));
-    if ( spellProgression ) {
-      if ( spellProgression.headers.length > 1 ) {
-        headers[0].forEach(h => h.rowSpan = 2);
-        headers[0].push(...spellProgression.headers[0]);
-        headers[1] = spellProgression.headers[1];
-      } else {
-        headers[0].push(...spellProgression.headers[0]);
-      }
+    if ( spellProgression?.headers?.length > 1 ) {
+      headers[0].forEach(h => h.rowSpan = 2);
+      headers[0].push(...spellProgression.headers[0]);
+      headers[1] = spellProgression.headers[1];
+    } else if ( spellProgression?.headers?.length ) {
+      headers[0].push(...spellProgression.headers[0]);
     }
 
     const cols = [{ class: "level", span: 1 }];
     if ( item.type === "class" ) cols.push({class: "prof", span: 1});
     if ( hasFeatures ) cols.push({class: "features", span: 1});
     if ( scaleValues.length ) cols.push({class: "scale", span: scaleValues.length});
-    if ( spellProgression ) cols.push(...spellProgression.cols);
+    if ( spellProgression?.cols?.length ) cols.push(...spellProgression.cols);
 
     const prepareFeature = uuid => {
       const index = fromUuidSync(uuid);
@@ -269,7 +271,7 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
       if ( item.type === "class" ) cells.push({class: "prof", content: `+${Proficiency.calculateMod(level)}`});
       if ( hasFeatures ) cells.push({class: "features", content: features.join(", ")});
       scaleValues.forEach(s => cells.push({class: "scale", content: s.valueForLevel(level)?.display}));
-      const spellCells = spellProgression?.rows[level - 1];
+      const spellCells = spellProgression?.rows?.[level - 1];
       if ( spellCells ) cells.push(...spellCells);
 
       // Skip empty rows on subclasses
@@ -301,7 +303,7 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
     if ( !spellcasting || (spellcasting.progression === "none") ) return null;
 
     const spellcastingModel = CONFIG.DND5E.spellcasting[spellcasting.type];
-    const table = { rows: [] };
+    const table = {};
 
     if ( spellcastingModel?.isSingleLevel ) {
       const spellSlotKey = spellcastingModel.getSpellSlotKey();
@@ -314,6 +316,7 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
       table.cols = [{class: "spellcasting", span: 2}];
 
       // Loop through each level, gathering "Spell Slots" & "Slot Level" for each one
+      table.rows = [];
       for ( const level of Array.fromRange(CONFIG.DND5E.maxLevel, 1) ) {
         const progression = { [spellSlotKey]: 0 };
         spellcasting.levels = level;
@@ -331,6 +334,7 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
       }));
 
       let largestSlot;
+      table.rows = [];
       for ( const level of Array.fromRange(CONFIG.DND5E.maxLevel, 1).reverse() ) {
         const progression = { [spellcasting.type]: 0 };
         spellcasting.levels = level;
@@ -371,7 +375,7 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
      */
     Hooks.callAll(`dnd5e.build${spellcasting.type.capitalize()}SpellcastingTable`, table, item, spellcasting);
 
-    return table;
+    return foundry.utils.isEmpty(table) ? null : table;
   }
 
   /* -------------------------------------------- */
@@ -448,7 +452,7 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
           name: document.name, level: formatNumber(level)
         }) : document.name,
         description: await TextEditor.enrichHTML(document.system.description.value, {
-          relativeTo: item, secrets: false
+          relativeTo: document, secrets: false
         })
       };
     };
@@ -490,9 +494,10 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
     for ( const advancement of asi.boons ) {
       const recommendation = await fromUuid(advancement.configuration.recommendation);
       features.push({
-        description: game.i18n.format("DND5E.ADVANCEMENT.AbilityScoreImprovement.Journal.DescriptionEpic", {
-          recommendation: recommendation?.toAnchor().outerHTML ?? "—"
-        }),
+        description: game.i18n.format(
+          `DND5E.ADVANCEMENT.AbilityScoreImprovement.Journal.DescriptionEpic${recommendation ? "Recommendation" : ""}`,
+          { recommendation: recommendation?.toAnchor().outerHTML }
+        ),
         level: advancement.level,
         name: game.i18n.format("JOURNALENTRYPAGE.DND5E.Class.Features.Name", {
           name: advancement._defaultTitle, level: formatNumber(advancement.level)

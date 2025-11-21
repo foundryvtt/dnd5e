@@ -44,7 +44,7 @@ system:
     rules: '2024'
     revision: 1
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
   startingEquipment:
     - type: AND
       requiresProficiency: false
@@ -79,6 +79,13 @@ system:
       _id: X63sE2GlxSzKzUho
       group: tWEfE6HLPbiS0OtF
       sort: 475000
+    - type: currency
+      count: 19
+      key: gp
+      requiresProficiency: false
+      _id: WMhogYYNWoJmO3k6
+      group: tWEfE6HLPbiS0OtF
+      sort: 800000
   identifier: bard
   levels: 1
   advancement:
@@ -529,11 +536,11 @@ effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1735866377962
-  modifiedTime: 1752705712593
+  modifiedTime: 1757541456276
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

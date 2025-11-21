@@ -3,20 +3,20 @@ system:
   description:
     value: >-
       <p>Starting at character level 5, you can change your size to Large as a
-      Bonus Action if you're in a big enough space. This transformation lasts
+      Bonus Action if you’re in a big enough space. This transformation lasts
       for 10 minutes or until you end it (no action required). For that
       duration, you have Advantage on Strength checks, and your Speed increases
-      by 10 feet. Once you use this trait, you can't use it again until you
+      by 10 feet. Once you use this trait, you can’t use it again until you
       finish a Long Rest.</p><section class="secret"
       id="secret-MnS2QCGjgh6nXxEa"><p><strong>Foundry Note</strong></p><p>This
-      feature includes an Active Effect which automatically increases your
-      walking Speed but does not automate the Advantage.</p></section>
+      feature includes an Active Effect which automates the increase to your
+      Speed and the Advantage on Strength checks.</p></section>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    book: SRD 5.2
+    revision: 2
+    book: ''
     license: CC-BY-4.0
   uses:
     max: '1'
@@ -29,7 +29,6 @@ system:
     subtype: ''
   prerequisites:
     level: 5
-    repeatable: false
   properties: []
   requirements: Goliath
   activities:
@@ -87,11 +86,10 @@ system:
         name: ''
         formula: ''
       img: systems/dnd5e/icons/svg/size.svg
+      appliedEffects:
+        - QI7POclNlvX9a8VD
   enchant: {}
   identifier: large-form
-  advancement: []
-  cover: null
-  crewed: false
 _id: phbsptLargeForm0
 type: feat
 folder: 4KZykhQTGVAuVo1I
@@ -109,6 +107,10 @@ effects:
         mode: 2
         value: '10'
         priority: null
+      - key: system.abilities.str.check.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
     disabled: false
     duration:
       startTime: null
@@ -118,20 +120,26 @@ effects:
       turns: null
       startRound: null
       startTurn: null
-    description: ''
+    description: >-
+      <p>For the duration, you have Advantage on Strength checks, and your Speed
+      increases by 10 feet. Once you use this trait, you can’t use it again
+      until you finish a Long Rest.</p>
     tint: '#ffffff'
     statuses: []
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 5.1.9
+      createdTime: 1725810985123
+      modifiedTime: 1760131436359
+      lastModifiedBy: BcGywgWNTaQhpKPn
       exportSource: null
     _key: '!items.effects!phbsptLargeForm0.QI7POclNlvX9a8VD'
 sort: 100000
@@ -143,12 +151,13 @@ flags:
       activity: []
       effect: []
 _stats:
+  compendiumSource: null
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1745340849458
-  modifiedTime: 1745341995510
+  systemVersion: 5.1.9
+  createdTime: 1724425891196
+  modifiedTime: 1760131474099
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsptLargeForm0'

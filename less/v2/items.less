@@ -456,6 +456,8 @@
       }
 
       .summary {
+        display: flex;
+        flex-wrap: wrap;
         font-size: var(--font-size-10);
         color: var(--color-text-secondary);
 
@@ -511,49 +513,7 @@
 
   /* Activities */
   .activities { gap: 0; }
-
-  .activities .activity {
-    padding: 6px;
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    box-shadow: 0 0 6px var(--dnd5e-shadow-15);
-
-    > .icon {
-      --icon-size: 24px;
-      --icon-fill: var(--activity-icon-color);
-      flex: 0 0 50px;
-      height: 24px;
-
-      .gold-icon {
-        border-width: 1px;
-        width: 24px;
-        height: 24px;
-      }
-    }
-
-    > .name {
-      font-family: var(--dnd5e-font-roboto-slab);
-      font-weight: bold;
-      flex: 1;
-      font-size: var(--font-size-14);
-      cursor: var(--cursor-pointer);
-      text-align: center;
-
-      &:hover { text-shadow: 0 0 6px var(--color-shadow-primary); }
-    }
-
-    > .controls {
-      flex: 0 0 50px;
-      display: flex;
-      align-items: center;
-      justify-content: end;
-      gap: 2px;
-      padding-right: 4px;
-    }
-
-    + .activity { margin-top: 8px; }
-  }
+  .activities-list .activity:first-child { border-left: 4px solid var(--dnd5e-color-gold); }
 
   /* Facilities */
   fieldset.harvesting {

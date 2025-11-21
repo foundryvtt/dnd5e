@@ -5,11 +5,17 @@ import AdvancementTemplate from "./templates/advancement.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
 /**
+ * @import { SubclassItemSystemData } from "./_types.mjs";
+ * @import { ItemDescriptionTemplateData } from "./templates/_types.mjs";
+ * @import { AdvancementTemplateData, ItemDescriptionTemplateData } from "./templates/_types.mjs";
+ */
+
+/**
  * Data definition for Subclass items.
- * @mixes ItemDescriptionTemplate
- *
- * @property {string} classIdentifier  Identifier slug for the class with which this subclass should be associated.
- * @property {SpellcastingField} spellcasting  Details on subclass's spellcasting ability.
+ * @extends {ItemDataModel<AdvancementTemplate & ItemDescriptionTemplate & SubclassItemSystemData>}
+ * @mixes AdvancementTemplateData
+ * @mixes ItemDescriptionTemplateData
+ * @mixes SubclassItemSystemData
  */
 export default class SubclassData extends ItemDataModel.mixin(AdvancementTemplate, ItemDescriptionTemplate) {
 

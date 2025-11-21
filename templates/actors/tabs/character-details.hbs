@@ -212,16 +212,16 @@
     {{#if isConcentration}}
     <dnd5e-icon src="systems/dnd5e/icons/svg/statuses/concentrating.svg"></dnd5e-icon>
     {{else}}
-    <proficiency-cycle type="ability" name="{{ path }}.proficient" data-tooltip="{{ hover }}"
+    <proficiency-cycle type="ability" name="{{ path }}.proficient" data-tooltip aria-label="{{ hover }}"
                        value="{{#if @root.editable}}{{ source.proficient }}{{else}}{{ proficient }}{{/if}}"
-                       aria-label="{{ localize hover }}" {{ disabled (not @root.editable) }}></proficiency-cycle>
+                       {{ disabled (not @root.editable) }}></proficiency-cycle>
     {{/if}}
     <a class="name saving-throw full {{ @root.rollableClass }}" data-action="roll" data-type="ability">{{ label }}</a>
     <a class="name saving-throw abbr {{ @root.rollableClass }}" data-action="roll" data-type="ability">{{ abbr }}</a>
     <div class="bonus">{{ dnd5e-formatModifier save.value }}</div>
     {{#if @root.editable}}
     <button type="button" class="config-button unbutton" data-action="showConfiguration" data-config="ability"
-            data-tooltip="{{ config }}" aria-label="{{ localize config }}">
+            data-tooltip aria-label="{{ config }}">
         <i class="fas fa-cog" inert></i>
     </button>
     {{/if}}

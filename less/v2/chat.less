@@ -46,16 +46,22 @@
         place-content: center;
       }
 
-      img {
+      img, video {
         width: 38px;
         height: 38px;
-        border-radius: 4px;
-        box-shadow: 0 0 6px rgb(0 0 0 / 85%);
-        object-fit: cover;
-        object-position: top;
         border: none;
         flex: none;
+      }
+      .avatar:not(.token) img {
+        border-radius: 4px;
+        box-shadow: 0 0 6px rgb(0 0 0 / 85%);
         background: var(--dnd5e-background-alt-1);
+        object-fit: cover;
+        object-position: top;
+      }
+      .avatar.token :is(img, video) {
+        object-fix: contain;
+        object-position: center;
       }
     }
 
@@ -290,6 +296,35 @@
       content: none;
     }
     .dice-total > i { display: none; }
+  }
+}
+
+/* ----------------------------------------- */
+/*  Inline Roll Actions                      */
+/* ----------------------------------------- */
+
+.roll-link-group, .roll-link, .reference-link {
+  a {
+    &:first-child {
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px;
+    }
+    &:last-child {
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
+    }
+
+    i {
+      color: var(--color-text-dark-inactive);
+      margin-inline-end: 0.25em;
+    }
+
+    &.enricher-action {
+      padding-inline-end: 1px;
+    }
+  }
+  a + a {
+    margin-inline-start: 2px;
   }
 }
 
@@ -859,5 +894,6 @@ enchantment-application {
       .label { flex-grow: 1; }
       .roll { font-size: var(--font-size-12); }
     }
+    :is(.operation-create, .operation-delete) .label { font-style: italic; }
   }
 }

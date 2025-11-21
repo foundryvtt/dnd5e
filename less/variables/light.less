@@ -13,6 +13,9 @@
   --dnd5e-character-background-image: transparent;
   --dnd5e-character-header-image: url("ui/official/banner-character.jpg");
   --dnd5e-character-body-image: var(--dnd5e-background-texture-paper-red);
+  --dnd5e-vehicle-header-content: none;
+  --dnd5e-vehicle-header-image: transparent;
+  --dnd5e-vehicle-station-blend-mode: none;
   --dnd5e-background-card: var(--dnd5e-color-card);
   --dnd5e-background-parchment: var(--dnd5e-color-parchment);
   --dnd5e-background-5: rgb(0 0 0 / 5%);
@@ -131,11 +134,14 @@
   --hint-icon-color: var(--color-text-dark-5);
   --multi-select-tag-background: var(--dnd5e-color-card);
   --multi-select-tag-border: var(--dnd5e-color-gold);
+  --radio-list-hover: var(--dnd5e-color-parchment);
 
   button {
     --button-border-color: var(--color-border-light-2);
     --button-hover-border-color: var(--dnd5e-color-gold);
     --button-toggle-depressed-color: color-mix(in oklab, var(--dnd5e-background-card), var(--dnd5e-color-gold) 10%);
+    --control-border-color: #999;
+    --control-active-background-color: rgb(0 0 0 / 20%);
   }
 
   input, textarea { --input-placeholder-color: var(--color-text-light-6); }

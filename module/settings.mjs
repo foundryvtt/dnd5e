@@ -1,13 +1,18 @@
+import CompendiumBrowser from "./applications/compendium-browser.mjs";
 import BastionSettingsConfig from "./applications/settings/bastion-settings.mjs";
+import CalendarSettingsConfig from "./applications/settings/calendar-settings.mjs";
 import CombatSettingsConfig from "./applications/settings/combat-settings.mjs";
 import CompendiumBrowserSettingsConfig from "./applications/settings/compendium-browser-settings.mjs";
 import ModuleArtSettingsConfig from "./applications/settings/module-art-settings.mjs";
 import VariantRulesSettingsConfig from "./applications/settings/variant-rules-settings.mjs";
 import VisibilitySettingsConfig from "./applications/settings/visibility-settings.mjs";
 import BastionSetting from "./data/settings/bastion-setting.mjs";
+import { CalendarConfigSetting, CalendarPreferencesSetting } from "./data/settings/calendar-setting.mjs";
 import PrimaryPartySetting from "./data/settings/primary-party-setting.mjs";
 import TransformationSetting from "./data/settings/transformation-setting.mjs";
 import * as LEGACY from "./config-legacy.mjs";
+
+const { StringField } = foundry.data.fields;
 
 /**
  * Register all of the system's keybindings.
@@ -77,13 +82,18 @@ export function registerSystemSettings() {
   });
 
   // Movement automation
-  game.settings.register("dnd5e", "disableMovementAutomation", {
+  game.settings.register("dnd5e", "movementAutomation", {
     name: "SETTINGS.DND5E.AUTOMATION.Movement.Name",
     hint: "SETTINGS.DND5E.AUTOMATION.Movement.Hint",
     scope: "world",
     config: true,
-    default: false,
-    type: Boolean
+    default: "full",
+    type: String,
+    choices: {
+      full: "SETTINGS.DND5E.AUTOMATION.Movement.Full",
+      noBlocking: "SETTINGS.DND5E.AUTOMATION.Movement.NoBlocking",
+      none: "SETTINGS.DND5E.AUTOMATION.Movement.None"
+    }
   });
 
   // Allow rotating square templates
@@ -261,7 +271,15 @@ export function registerSystemSettings() {
     scope: "world",
     config: false,
     type: Object,
-    default: {}
+    default: {},
+    onChange: () => {
+      // Refresh all open Compendium Browser instances when source configuration changes
+      foundry.applications.instances.forEach(app => {
+        if ( app instanceof CompendiumBrowser ) {
+          app.render({ parts: ["results", "filters"], changedTab: true });
+        }
+      });
+    }
   });
 
   // Bastions
@@ -285,6 +303,44 @@ export function registerSystemSettings() {
       duration: 7
     },
     onChange: () => game.dnd5e.bastion.initializeUI()
+  });
+
+  // Calendar Settings
+  game.settings.registerMenu("dnd5e", "calendarConfiguration", {
+    name: "DND5E.CALENDAR.Configuration.Name",
+    label: "DND5E.CALENDAR.Configuration.Label",
+    hint: "DND5E.CALENDAR.Configuration.Hint",
+    icon: "fas fa-calendar-days",
+    type: CalendarSettingsConfig
+  });
+
+  game.settings.register("dnd5e", "calendar", {
+    name: "DND5E.CALENDAR.FIELDS.calendar.label",
+    hint: "DND5E.CALENDAR.FIELDS.calendar.hint",
+    scope: "world",
+    config: false,
+    type: new StringField({
+      required: true, blank: false, initial: "gregorian", choices: () => Object.fromEntries(
+        CONFIG.DND5E.calendar.calendars.map(({ value, label }) => [value, label])
+      )
+    }),
+    requiresReload: true
+  });
+
+  game.settings.register("dnd5e", "calendarConfig", {
+    name: "Calendar Configuration",
+    scope: "world",
+    config: false,
+    type: CalendarConfigSetting,
+    onChange: () => dnd5e.ui.calendar?.onUpdateSettings?.()
+  });
+
+  game.settings.register("dnd5e", "calendarPreferences", {
+    name: "Calendar Preferences",
+    scope: "user",
+    config: false,
+    type: CalendarPreferencesSetting,
+    onChange: () => dnd5e.ui.calendar?.onUpdateSettings?.()
   });
 
   // Combat Settings

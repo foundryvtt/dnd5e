@@ -48,11 +48,10 @@ export default class MovementSensesConfig extends BaseConfigSheet {
 
   /**
    * Specific types measured, depending on trait type and actor type.
-   * @type {Record<string, string>}
+   * @type {string}
    */
   get types() {
     if ( this.options.type === "senses" ) return Object.keys(CONFIG.DND5E.senses);
-    if ( this.document.type === "group" ) return ["land", "water", "air"];
     return Object.keys(CONFIG.DND5E.movementTypes);
   }
 
@@ -76,24 +75,28 @@ export default class MovementSensesConfig extends BaseConfigSheet {
     const placeholderData = this.document.system.details?.race?.system?.[this.options.type] ?? null;
 
     context.data = foundry.utils.getProperty(source, this.keyPath) ?? {};
-    context.fields = this.document.system.schema.getField(this.keyPath).fields;
-    context.extras = this._prepareExtraFields(context);
-    context.types = this.types.map(key => ({
-      field: context.fields[key],
-      value: context.data[key],
-      placeholder: placeholderData?.[key] ?? ""
-    }));
+    context.fields = this.document.system.schema.getField(this.keyPath)?.fields;
+    if ( context.fields ) {
+      context.extras = this._prepareExtraFields(context);
+      context.types = this.types.map(key => ({
+        field: context.fields[key],
+        value: context.data[key],
+        placeholder: placeholderData?.[key] ?? ""
+      }));
 
-    context.unitsOptions = Object.entries(CONFIG.DND5E.movementUnits).map(([value, { label }]) => ({ value, label }));
-    context.unitsOptions.blank = false;
-    if ( (this.document.type === "character") || ((this.document.type === "npc") && placeholderData) ) {
-      const automaticUnit = CONFIG.DND5E.movementUnits[placeholderData?.units ?? defaultUnits("length")]?.label ?? "";
-      context.unitsOptions.blank = true;
-      context.unitsOptions.unshift(
-        { value: "", label: game.i18n.format("DND5E.AutomaticValue", { value: automaticUnit.toLowerCase() }) },
-        { rule: true }
-      );
+      context.unitsOptions = Object.entries(CONFIG.DND5E.movementUnits).map(([value, { label }]) => ({ value, label }));
+      context.unitsOptions.blank = false;
+      if ( (this.document.type === "character") || ((this.document.type === "npc") && placeholderData) ) {
+        const automaticUnit = CONFIG.DND5E.movementUnits[placeholderData?.units ?? defaultUnits("length")]?.label ?? "";
+        context.unitsOptions.blank = true;
+        context.unitsOptions.unshift(
+          { value: "", label: game.i18n.format("DND5E.AutomaticValue", { value: automaticUnit.toLowerCase() }) },
+          { rule: true }
+        );
+      }
     }
+
+    if ( this.options.type === "movement" ) this._prepareTravelFields(context);
 
     return context;
   }
@@ -126,12 +129,53 @@ export default class MovementSensesConfig extends BaseConfigSheet {
       ],
       localize: true
     });
-    if ( context.fields.pace ) extras.push({
-      field: context.fields.pace,
-      value: context.data.pace,
-      options: Object.entries(CONFIG.DND5E.travelPace).map(([value, { label }]) => ({ value, label })),
-      localize: true
-    });
     return extras;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare travel-specific fields.
+   * @param {ApplicationRenderContext} context  Context being prepared.
+   * @protected
+   */
+  _prepareTravelFields(context) {
+    const keyPath = this.keyPath.replace("movement", "travel");
+    const data = foundry.utils.getProperty(this.document.system._source, keyPath);
+    if ( !data ) return;
+    const derived = foundry.utils.getProperty(this.document.system, keyPath);
+    context.travel = {
+      data,
+      extras: [],
+      fields: this.document.system.schema.getField(keyPath).fields,
+      unitsOptions: Object.entries(CONFIG.DND5E.travelUnits).map(([value, { label }]) => ({ value, label }))
+    };
+    context.travel.types = Object.entries(CONFIG.DND5E.travelTypes).map(([key, config]) => ({
+      label: config.label,
+      pace: {
+        field: context.travel.fields.paces.model,
+        name: `system.${keyPath}.paces.${key}`,
+        placeholder: derived.paces[key] && !data.paces[key] ? derived.paces[key] : "",
+        value: data.paces[key]
+      },
+      speed: {
+        field: context.travel.fields.speeds.model,
+        name: `system.${keyPath}.speeds.${key}`,
+        placeholder: derived.speeds[key] && !data.speeds[key] ? derived.speeds[key] : "",
+        value: data.speeds[key]
+      }
+    }));
+    if ( context.travel.fields.pace ) context.travel.extras.push({
+      field: context.travel.fields.pace,
+      localize: true,
+      options: Object.entries(CONFIG.DND5E.travelPace).map(([value, { label }]) => ({ value, label })),
+      value: data.pace
+    });
+    if ( context.travel.fields.time ) context.travel.extras.push({
+      field: context.travel.fields.time,
+      localize: true,
+      value: data.time
+    });
+    if ( context.fields ) context.legend = game.i18n.localize("DND5E.MOVEMENT.Speed");
   }
 }

@@ -190,8 +190,12 @@ pages:
     text:
       format: 1
       content: >-
-        <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.sacjsfm9ZXnw4Tqc
-        inline]</p>
+        <p>If you have Blindsight, you can see within a specific range without
+        relying on physical sight. Within that range, you can see anything that
+        isn't behind &amp;Reference[Total Cover] even if you have the
+        &amp;Reference[Blinded] condition or are in &amp;Reference[Darkness].
+        Moreover, in that range, you can see something has the Invisible
+        condition.</p>
       markdown: ''
     video:
       controls: true
@@ -202,11 +206,11 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726540819516
+      modifiedTime: 1757389201803
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
@@ -225,8 +229,12 @@ pages:
     text:
       format: 1
       content: >-
-        <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.ldmA1PbnEGVkmE11
-        inline]</p>
+        <p>If you have Darkvision, you can see in &amp;Reference[Dim Light]
+        within a specified range as if it were Bright Light and in
+        &amp;Reference[Darkness] within that range as if it were Dim Light. You
+        discern colors in that Darkness only as shades of gray. <em>See
+        also</em>
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbExploration00]{Exploration}.</p>
     video:
       controls: true
       volume: 0.5
@@ -236,11 +244,11 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726541500655
+      modifiedTime: 1757389245519
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
@@ -259,8 +267,12 @@ pages:
     text:
       format: 1
       content: >-
-        <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.r64UrNusMhwJVnxb
-        inline]</p>
+        <p>A creature with Tremorsense can pinpoint the location of creatures
+        and moving objects within a specific range, provided that the creature
+        with Tremorsense and anything it is detecting are both in contact with
+        the same surface (such as the ground, a wall, or a ceiling) or the same
+        liquid.</p><p>Tremorsense can't detect creatures or objects in the air,
+        and it doesn't count as a form of sight.</p>
     video:
       controls: true
       volume: 0.5
@@ -270,11 +282,11 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726539451965
+      modifiedTime: 1757389361237
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
@@ -305,9 +317,7 @@ pages:
         them.</p><p><strong>Transformations.</strong> You discern the true form
         of any creature or object you see that has been transformed by
         magic.</p><p><strong>Ethereal Plane.</strong> You see into the Ethereal
-        Plane. <em>See also</em>
-        @UUID[Compendium.dnd5e.content24.JournalEntry.phbAppendixATheM.JournalEntryPage.JUMfpR65UBZvvQut]{Transitive
-        Planes}.</p>
+        Plane.</p>
       markdown: ''
     video:
       controls: true
@@ -318,11 +328,11 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726542977585
+      modifiedTime: 1757389376390
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
@@ -464,9 +474,11 @@ pages:
         after the attack. If you equip a weapon before an attack, you don't need
         to use it for that attack. Equipping a weapon includes drawing it from a
         sheath or picking it up. Unequipping a weapon includes sheathing,
-        stowing, or dropping
-        it.</p><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.JxboWb0XHo2GwqD0
-        inline]</p>
+        stowing, or dropping it.</p><p><em><strong>Moving between
+        Attacks.</strong></em> If you move on your turn and have a feature, such
+        as Extra Attack, that gives you more than one attack as part of the
+        Attack action, you can use some or all of that movement to move between
+        those attacks.</p>
     video:
       controls: true
       volume: 0.5
@@ -476,11 +488,11 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726540045212
+      modifiedTime: 1757389123131
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
@@ -6138,8 +6150,6 @@ pages:
     _key: '!journal.pages!phbAppendixCRule.hTXYRfVTvcL9LYiB'
 folder: kkR3zR8yqdNg4nMV
 flags:
-  core:
-    sheetClass: dnd5e.JournalSheet5e
   dnd5e:
     type: chapter
     position: 8
@@ -6150,11 +6160,11 @@ flags:
       next: dmgTheBasics0000
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.348'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1724425887719
-  modifiedTime: 1745677864190
+  modifiedTime: 1757375372192
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 225000

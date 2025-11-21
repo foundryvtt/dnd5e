@@ -1,4 +1,8 @@
 /**
+ * @import { RestConfiguration, RestResult } from "../_types.mjs";
+ */
+
+/**
  * Object describing the hit dice for an actor.
  */
 export default class HitDice {

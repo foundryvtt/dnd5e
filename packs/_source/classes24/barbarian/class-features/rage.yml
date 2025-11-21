@@ -41,7 +41,7 @@ system:
     revision: 1
     rules: '2024'
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
   uses:
     max: '@scale.barbarian.rages'
     recovery:
@@ -123,7 +123,10 @@ system:
   identifier: rage
 effects:
   - _id: G5XZTi4zYTFiHVll
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     changes:
       - key: system.bonuses.mwak.damage
         mode: 2
@@ -140,6 +143,14 @@ effects:
       - key: system.traits.dr.value
         mode: 2
         value: bludgeoning
+        priority: null
+      - key: system.abilities.str.check.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
+      - key: system.abilities.str.save.roll.mode
+        mode: 2
+        value: '1'
         priority: null
     disabled: true
     duration:
@@ -160,12 +171,12 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classfeatures.Item.VoR0SUrNX5EJVPIO.ActiveEffect.eWhL8hUr0c2ujDUm
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1757446401089
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     img: icons/creatures/abilities/mouth-teeth-human.webp
     type: base

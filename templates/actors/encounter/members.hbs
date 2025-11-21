@@ -37,7 +37,7 @@
                         data-property="system.quantity.value">
                     <i class="fa-solid fa-minus" inert></i>
                 </button>
-                <input type="text" class="slot uninput" inputmode="numeric" pattern="^[+=\-]?\d*" placeholder="0"
+                <input type="text" class="slot uninput" inputmode="numeric" pattern="^[+=\-]?\d*" placeholder="—"
                        data-dtype="Number" data-name="quantity.value" aria-label="{{ localize "DND5E.Quantity" }}"
                        value="{{ quantity.value }}" min="0">
                 <button type="button" class="control-button adjustment-button unbutton" data-action="increase"
@@ -45,8 +45,7 @@
                     <i class="fa-solid fa-plus" inert></i>
                 </button>
                 {{else}}
-                {{#if quantity.value}}<div class="slot">{{ quantity.value }}</div>
-                {{else}}<div class="slot empty"></div>{{/if}}
+                <div class="slot">{{ quantity.value }}</div>
                 {{/if}}
             </div>
             {{/if}}
@@ -66,11 +65,13 @@
             </div>
         </div>
     </div>
-    {{else}}
-    <div class="pill-lg roboto-upper empty">
-        {{ localize "DND5E.ENCOUNTER.DropCreature" }}
-    </div>
     {{/each}}
+
+    {{#if (or editable (not members.length))}}
+    <div class="pill-lg roboto-upper empty" data-action="browse">
+        {{ localize "DND5E.ENCOUNTER.Action.AddCreature" }}
+    </div>
+    {{/if}}
 
     {{#with difficulty}}
     <div class="bottom">

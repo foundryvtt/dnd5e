@@ -62,11 +62,10 @@ system:
   description:
     value: >-
       <p>The [[lookup @name lowercase]] casts
-      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplCommand000]</em>,
-      requiring no spell components and using Charisma as the spellcasting
-      ability (spell save DC [[lookup @abilities.cha.dc]]). The [[lookup @name
-      lowercase]] can't take this action again until the start of its next
-      turn.</p>
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplCommand000]</em>, requiring
+      no spell components and using Charisma as the spellcasting ability (spell
+      save DC [[lookup @abilities.cha.dc]]). The [[lookup @name lowercase]]
+      can't take this action again until the start of its next turn.</p>
     chat: ''
   identifier: beguile
   source:

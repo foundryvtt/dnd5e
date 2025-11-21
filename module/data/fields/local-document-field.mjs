@@ -1,6 +1,5 @@
 /**
- * @typedef {StringFieldOptions} LocalDocumentFieldOptions
- * @property {boolean} [fallback=false]  Display the string value if no matching item is found.
+ * @import { LocalDocumentFieldOptions } from "./_types.mjs";
  */
 
 /**

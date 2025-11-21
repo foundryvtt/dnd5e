@@ -9,7 +9,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: ''
     license: CC-BY-4.0
     rules: '2014'
@@ -89,19 +89,21 @@ system:
       creatureTypes: []
       match:
         attacks: false
+        disposition: true
         proficiency: false
         saves: false
+        ability: ''
       profiles:
         - count: '1'
           cr: '@item.level - 3'
           name: ''
           _id: 4exNRoIOFTvFrefI
           uuid: ''
+          types:
+            - celestial
           level:
             min: null
             max: null
-          types:
-            - celestial
       summon:
         identifier: ''
         mode: cr
@@ -109,7 +111,11 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      appliedEffects: []
   identifier: conjure-celestial
 sort: 0
 flags: {}
@@ -118,11 +124,11 @@ effects: []
 folder: irCSpQWIMtp978TA
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.350'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.2.0
   createdTime: 1725037358366
-  modifiedTime: 1725992720549
+  modifiedTime: 1760981595037
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!XT7nzJmVGgv73uaf'

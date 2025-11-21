@@ -10,7 +10,7 @@
 
         {{#if showConsumeSpellSlot}}
         {{ formField fields.consumption.fields.spellSlot value=source.consumption.spellSlot
-                     input=inputs.createCheckboxInput }}
+                     input=inputs.createCheckboxInput rootId=partId }}
         {{/if}}
 
         {{#each consumptionTargets}}
@@ -18,27 +18,28 @@
             <div class="form-fields field-groups">
                 <div class="field-group">
                     {{ formField fields.type name=(concat prefix "type") value=data.type label="DND5E.Type"
-                                 localize=true hint=false options=typeOptions classes="label-top" }}
+                                 localize=true hint=false options=typeOptions classes="label-top" rootId=@root.partId }}
                     {{ formField fields.value name=(concat prefix "value") value=data.value label="DND5E.Amount"
                                  hint="DND5E.CONSUMPTION.FIELDS.consumption.targets.FIELDS.value.hint" localize=true
-                                 classes="label-top" }}
+                                 classes="label-top" rootId=@root.partId }}
                 </div>
                 {{#if showTargets}}
                 <div class="field-group">
                     {{ formField fields.target name=(concat prefix "target") value=selectedTarget options=validTargets
-                                 placeholder=targetPlaceholder label="DND5E.Target" localize=true hint=false
-                                 classes="label-top" }}
+                                 placeholder=targetPlaceholder label="DND5E.Target" localize=true hint=targetHint
+                                 blank=(not validTargets) classes="label-top" rootId=@root.partId }}
                 </div>
                 {{/if}}
                 <div class="field-group">
                     {{#if scalingModes}}
                     {{ formField fields.scaling.fields.mode name=(concat prefix "scaling.mode") value=data.scaling.mode
                                  label="DND5E.CONSUMPTION.FIELDS.consumption.scaling.abbr" localize=true hint=false
-                                 options=scalingModes classes="label-top" }}
+                                 options=scalingModes classes="label-top" rootId=@root.partId }}
                     {{#if data.scaling.mode}}
                     {{ formField fields.scaling.fields.formula name=(concat prefix "scaling.formula")
                                  value=data.scaling.formula placeholder=(localize "DND5E.CONSUMPTION.Scaling.Automatic")
-                                 label="DND5E.Formula" localize=true hint=false classes="label-top"}}
+                                 label="DND5E.Formula" localize=true hint=false classes="label-top"
+                                 rootId=@root.partId }}
                     {{/if}}
                     {{/if}}
                 </div>
@@ -58,9 +59,9 @@
     <fieldset>
         <legend>{{ localize "DND5E.CONSUMPTION.FIELDS.consumption.scaling.label" }}</legend>
         {{ formField fields.allowed value=../activity.consumption.scaling.allowed
-                     input=@root.inputs.createCheckboxInput }}
+                     input=@root.inputs.createCheckboxInput rootId=@root.partId }}
         {{#if ../activity.consumption.scaling.allowed}}
-        {{ formField fields.max value=../activity.consumption.scaling.max placeholder="∞" }}
+        {{ formField fields.max value=../activity.consumption.scaling.max placeholder="∞" rootId=@root.partId }}
         {{/if}}
     </fieldset>
     {{/with}}

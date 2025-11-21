@@ -1,16 +1,7 @@
 import { sortObjectEntries } from "../../utils.mjs";
 
 /**
- * Object representing a nested set of choices to be displayed in a grouped select list or a trait selector.
- *
- * @typedef {object} SelectChoicesEntry
- * @property {string} label              Label, either pre- or post-localized.
- * @property {boolean} [chosen]          Has this choice been selected?
- * @property {boolean} [sorting=true]    Should this value be sorted? If there are a mixture of this value at
- *                                       a level, unsorted values are listed first followed by sorted values.
- * @property {SelectChoices} [children]  Nested choices. If wildcard filtering support is desired, then trait keys
- *                                       should be provided prefixed for children (e.g. `parent:child`, rather than
- *                                       just `child`).
+ * @import { SelectChoicesEntry } from "../_types.mjs";
  */
 
 /**

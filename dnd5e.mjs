@@ -25,7 +25,7 @@ import * as enrichers from "./module/enrichers.mjs";
 import * as Filter from "./module/filter.mjs";
 import * as migrations from "./module/migration.mjs";
 import ModuleArt from "./module/module-art.mjs";
-import { registerModuleData, setupModulePacks } from "./module/module-registration.mjs";
+import { registerModuleData, registerModuleRedirects, setupModulePacks } from "./module/module-registration.mjs";
 import { default as registry } from "./module/registry.mjs";
 import Tooltips5e from "./module/tooltips.mjs";
 import * as utils from "./module/utils.mjs";
@@ -46,6 +46,7 @@ globalThis.dnd5e = {
   Filter,
   migrations,
   registry,
+  ui: {},
   utils
 };
 
@@ -116,6 +117,7 @@ Hooks.once("init", function() {
 
   // Register module data from manifests
   registerModuleData();
+  registerModuleRedirects();
 
   // Register Roll Extensions
   CONFIG.Dice.rolls = [dice.BasicRoll, dice.D20Roll, dice.DamageRoll];
@@ -145,7 +147,7 @@ Hooks.once("init", function() {
     makeDefault: true,
     label: "DND5E.SheetClass.NPC"
   });
-  DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.ActorSheet5eVehicle, {
+  DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.VehicleActorSheet, {
     types: ["vehicle"],
     makeDefault: true,
     label: "DND5E.SheetClass.Vehicle"
@@ -235,7 +237,36 @@ Hooks.once("init", function() {
   CONFIG.Token.movement.costAggregator = (results, distance, segment) => {
     return Math.max(...results.map(i => i.cost));
   };
+
+  // Setup Calendar
+  _configureCalendar();
 });
+
+/* -------------------------------------------- */
+
+/**
+ * Configure world calendar based on setting.
+ */
+function _configureCalendar() {
+  CONFIG.time.earthCalendarClass = dataModels.calendar.CalendarData5e;
+  CONFIG.time.worldCalendarClass = dataModels.calendar.CalendarData5e;
+
+  /**
+   * A hook event that fires during the `init` step to give modules a chance to customize the calendar
+   * configuration before loading the world calendar.
+   * @function dnd5e.preSetupCalendar
+   * @memberof hookEvents
+   * @returns               Explicitly return `false` to prevent system from setting up the calendar.
+   */
+  if ( Hooks.call("dnd5e.setupCalendar") === false ) return;
+
+  const calendar = game.settings.get("dnd5e", "calendar");
+  const calendarConfig = CONFIG.DND5E.calendar.calendars.find(c => c.value === calendar);
+  if ( calendarConfig ) {
+    CONFIG.time.worldCalendarConfig = calendarConfig.config;
+    if ( calendarConfig.class ) CONFIG.time.worldCalendarClass = calendarConfig.class;
+  }
+}
 
 /* -------------------------------------------- */
 
@@ -263,7 +294,7 @@ function _configureTrackableAttributes() {
       ...common.value,
       ...Object.keys(DND5E.skills).map(skill => `skills.${skill}.passive`),
       ...Object.keys(DND5E.senses).map(sense => `attributes.senses.${sense}`),
-      "attributes.spell.attack", "attributes.spell.dc"
+      "attributes.hp.temp", "attributes.spell.attack", "attributes.spell.dc"
     ]
   };
 
@@ -291,13 +322,14 @@ function _configureTrackableAttributes() {
 
 /**
  * Get all trackable spell slot attributes.
+ * @param {string} [suffix=""]  Suffix appended to the path.
  * @returns {Set<string>}
  * @internal
  */
-function _trackedSpellAttributes() {
+function _trackedSpellAttributes(suffix="") {
   return Object.entries(DND5E.spellcasting).reduce((acc, [k, v]) => {
     if ( v.slots ) Array.fromRange(Object.keys(DND5E.spellLevels).length - 1, 1).forEach(l => {
-      acc.add(`spells.${v.getSpellSlotKey(l)}`);
+      acc.add(`spells.${v.getSpellSlotKey(l)}${suffix}`);
     });
     return acc;
   }, new Set());
@@ -320,8 +352,8 @@ function _configureConsumableAttributes() {
     ...Object.keys(DND5E.currencies).map(denom => `currency.${denom}`),
     "details.xp.value",
     "resources.primary.value", "resources.secondary.value", "resources.tertiary.value",
-    "resources.legact.value", "resources.legres.value",
-    ..._trackedSpellAttributes()
+    "resources.legact.value", "resources.legres.value", "attributes.actions.value",
+    ..._trackedSpellAttributes(".value")
   ];
 }
 
@@ -372,22 +404,7 @@ function _configureStatusEffects() {
   const addEffect = (effects, {special, ...data}) => {
     data = foundry.utils.deepClone(data);
     data._id = utils.staticID(`dnd5e${data.id}`);
-    if ( data.icon ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `icon` property of status conditions has been deprecated in place of using `img`.",
-        { since: "DnD5e 5.0", until: "DnD5e 5.2" }
-      );
-      data.img = data.icon;
-      delete data.icon;
-    }
-    if ( data.label ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `label` property of status conditions has been deprecated in place of using `name`.",
-        { since: "DnD5e 5.0", until: "DnD5e 5.2" }
-      );
-      data.name = data.label;
-      delete data.label;
-    }
+    data.order ??= Infinity;
     effects.push(data);
     if ( special ) CONFIG.specialStatusEffects[special] = data.id;
     if ( data.neverBlockMovement ) DND5E.neverBlockStatuses.add(data.id);
@@ -441,8 +458,6 @@ Hooks.once("setup", function() {
     }
   `;
   document.head.append(style);
-
-  _migrateInventoryMetadata();
 });
 
 /* --------------------------------------------- */
@@ -502,6 +517,8 @@ Hooks.once("i18nInit", () => {
   utils.performPreLocalization(CONFIG.DND5E);
   Object.values(CONFIG.DND5E.activityTypes).forEach(c => c.documentClass.localize());
   Object.values(CONFIG.DND5E.advancementTypes).forEach(c => c.documentClass.localize());
+  foundry.helpers.Localization.localizeDataModel(dataModels.settings.CalendarConfigSetting);
+  foundry.helpers.Localization.localizeDataModel(dataModels.settings.CalendarPreferencesSetting);
   foundry.helpers.Localization.localizeDataModel(dataModels.settings.TransformationSetting);
 
   // Spellcasting
@@ -536,6 +553,12 @@ Hooks.once("ready", function() {
 
   // Bastion initialization
   game.dnd5e.bastion.initializeUI();
+
+  // Display the calendar HUD
+  if ( CONFIG.DND5E.calendar.application ) {
+    dnd5e.ui.calendar = new CONFIG.DND5E.calendar.application();
+    dnd5e.ui.calendar.render({ force: true });
+  }
 
   // Determine whether a system migration is required and feasible
   if ( !game.user.isGM ) return;
@@ -626,34 +649,10 @@ Hooks.on("preCreateScene", (doc, createData, options, userId) => {
   }
 });
 
-/* -------------------------------------------- */
-/*  Deprecations                                */
-/* -------------------------------------------- */
-
-/**
- * Migrate legacy inventory metadata.
- */
-function _migrateInventoryMetadata() {
-  Object.entries(CONFIG.Item.dataModels).forEach(([type, model]) => {
-    if ( ("inventorySection" in model) || (model.metadata.inventoryItem === false) ) return;
-    if ( !("inventoryItem" in model.metadata) && !("inventoryOrder" in model.metadata) ) return;
-    const { inventoryOrder=Infinity } = model.metadata;
-    foundry.utils.logCompatibilityWarning("ItemDataModel.metadata.inventoryItem and "
-      + "ItemDataModel.metadata.inventoryOrder are deprecated. Please define an inventorySection getter on the model "
-      + "instead.", { since: "dnd5e 5.0", until: "dnd5e 5.2" });
-    Object.defineProperty(model, "inventorySection", {
-      get() {
-        return {
-          id: type,
-          order: inventoryOrder,
-          label: `${CONFIG.Item.typeLabels[type]}Pl`,
-          groups: { type },
-          columns: ["price", "weight", "quantity", "charges", "controls"]
-        };
-      }
-    });
-  });
-}
+Hooks.on("updateWorldTime", (...args) => {
+  dataModels.calendar.CalendarData5e.onUpdateWorldTime(...args);
+  if ( CONFIG.DND5E.calendar.application ) CONFIG.DND5E.calendar.application.onUpdateWorldTime(...args);
+});
 
 /* -------------------------------------------- */
 /*  Bundled Module Exports                      */

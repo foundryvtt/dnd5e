@@ -19,7 +19,7 @@ system:
     rules: '2024'
     revision: 1
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
   identifier: fiend
   classIdentifier: warlock
   advancement:
@@ -84,11 +84,12 @@ system:
         optional: false
         spell:
           ability: []
-          preparation: pact
           uses:
             max: ''
             per: ''
             requireSlot: false
+          method: pact
+          prepared: 2
       value: {}
       level: 3
       title: Fiend Spells
@@ -107,11 +108,12 @@ system:
         optional: false
         spell:
           ability: []
-          preparation: pact
           uses:
             max: ''
             per: ''
             requireSlot: false
+          method: pact
+          prepared: 2
       value: {}
       level: 5
       title: Fiend Spells
@@ -130,11 +132,12 @@ system:
         optional: false
         spell:
           ability: []
-          preparation: pact
           uses:
             max: ''
             per: ''
             requireSlot: false
+          method: pact
+          prepared: 2
       value: {}
       level: 7
       title: Fiend Spells
@@ -153,11 +156,12 @@ system:
         optional: false
         spell:
           ability: []
-          preparation: pact
           uses:
             max: ''
             per: ''
             requireSlot: false
+          method: pact
+          prepared: 2
       value: {}
       level: 9
       title: Fiend Spells
@@ -174,11 +178,11 @@ effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1735866551616
-  modifiedTime: 1745256767365
+  modifiedTime: 1757447162214
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 400000

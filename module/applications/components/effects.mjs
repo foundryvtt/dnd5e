@@ -5,11 +5,10 @@ import ContextMenu5e from "../context-menu.mjs";
 /**
  * Custom element that handles displaying active effects lists.
  */
-export default class EffectsElement extends HTMLElement {
+export default class EffectsElement extends (foundry.applications.elements.AdoptableHTMLElement ?? HTMLElement) {
   connectedCallback() {
     if ( this.#app ) return;
-    this.#app = foundry.applications.instances.get(this.closest(".application")?.id)
-      ?? ui.windows[this.closest(".app")?.dataset.appid];
+    this.#app = foundry.applications.instances.get(this.closest(".application")?.id);
 
     for ( const control of this.querySelectorAll("[data-action]") ) {
       control.addEventListener("click", event => {
@@ -25,17 +24,24 @@ export default class EffectsElement extends HTMLElement {
       control.addEventListener("click", ContextMenu5e.triggerEvent);
     }
 
-    const MenuCls = this.hasAttribute("v2") ? ContextMenu5e : ContextMenu;
-    new MenuCls(this, "[data-effect-id]", [], { onOpen: element => {
+    new ContextMenu5e(this, "[data-effect-id]", [], { onOpen: element => {
       const effect = this.getEffect(element.dataset);
       if ( !effect ) return;
       ui.context.menuItems = this._getContextOptions(effect);
       Hooks.call("dnd5e.getActiveEffectContextOptions", effect, ui.context.menuItems);
-    }, jQuery: true });
+    }, jQuery: false });
   }
 
   /* -------------------------------------------- */
   /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * The HTML tag named used by this element.
+   * @type {string}
+   */
+  static tagName = "dnd5e-effects";
+
   /* -------------------------------------------- */
 
   /**
@@ -119,7 +125,9 @@ export default class EffectsElement extends HTMLElement {
 
     // Iterate over active effects, classifying them into categories
     for ( const e of effects ) {
-      if ( (e.parent.system?.identified === false) && !game.user.isGM ) continue;
+      if ( (e.dependentOrigin?.active === false) || ((e.parent.system?.identified === false) && !game.user.isGM) ) {
+        continue;
+      }
       if ( e.isAppliedEnchantment ) {
         if ( e.disabled ) categories.enchantmentInactive.effects.push(e);
         else categories.enchantmentActive.effects.push(e);
@@ -159,26 +167,26 @@ export default class EffectsElement extends HTMLElement {
         name: "DND5E.ContextMenuActionEdit",
         icon: "<i class='fas fa-edit fa-fw'></i>",
         condition: () => effect.isOwner,
-        callback: li => this._onAction(li[0], "edit")
+        callback: li => this._onAction(li, "edit")
       },
       {
         name: "DND5E.ContextMenuActionDuplicate",
         icon: "<i class='fas fa-copy fa-fw'></i>",
         condition: () => effect.isOwner,
-        callback: li => this._onAction(li[0], "duplicate")
+        callback: li => this._onAction(li, "duplicate")
       },
       {
         name: "DND5E.ContextMenuActionDelete",
         icon: "<i class='fas fa-trash fa-fw'></i>",
         condition: () => effect.isOwner && !isConcentrationEffect,
-        callback: li => this._onAction(li[0], "delete")
+        callback: li => this._onAction(li, "delete")
       },
       {
         name: effect.disabled ? "DND5E.ContextMenuActionEnable" : "DND5E.ContextMenuActionDisable",
         icon: effect.disabled ? "<i class='fas fa-check fa-fw'></i>" : "<i class='fas fa-times fa-fw'></i>",
         group: "state",
         condition: () => effect.isOwner && !isConcentrationEffect,
-        callback: li => this._onAction(li[0], "toggle")
+        callback: li => this._onAction(li, "toggle")
       },
       {
         name: "DND5E.ConcentrationBreak",
@@ -197,7 +205,7 @@ export default class EffectsElement extends HTMLElement {
         name: isFavorited ? "DND5E.FavoriteRemove" : "DND5E.Favorite",
         icon: "<i class='fas fa-bookmark fa-fw'></i>",
         condition: () => effect.isOwner,
-        callback: li => this._onAction(li[0], isFavorited ? "unfavorite" : "favorite"),
+        callback: li => this._onAction(li, isFavorited ? "unfavorite" : "favorite"),
         group: "state"
       });
     }

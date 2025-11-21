@@ -22,7 +22,7 @@ export default class SummonSheet extends ActivitySheet {
     effect: {
       template: "systems/dnd5e/templates/activity/summon-effect.hbs",
       templates: [
-        "systems/dnd5e/templates/activity/parts/activity-effects.hbs",
+        ...super.PARTS.effect.templates,
         "systems/dnd5e/templates/activity/parts/summon-changes.hbs",
         "systems/dnd5e/templates/activity/parts/summon-profiles.hbs"
       ]
@@ -48,12 +48,18 @@ export default class SummonSheet extends ActivitySheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _prepareEffectContext(context) {
-    context = await super._prepareEffectContext(context);
+  async _prepareEffectContext(context, options) {
+    context = await super._prepareEffectContext(context, options);
 
     context.abilityOptions = [
-      { value: "", label: this.activity.isSpell ? game.i18n.localize("DND5E.Spellcasting") : "" },
-      { rule: true },
+      {
+        value: "", rule: true,
+        label: game.i18n.format("DND5E.DefaultSpecific", {
+          default: this.activity.isSpell ? game.i18n.localize("DND5E.Spellcasting").toLowerCase()
+            : CONFIG.DND5E.abilities[this.activity.ability]?.label.toLowerCase()
+              ?? game.i18n.localize("DND5E.None").toLowerCase()
+        })
+      },
       ...Object.entries(CONFIG.DND5E.abilities).map(([value, { label }]) => ({ value, label }))
     ];
     context.creatureSizeOptions = Object.entries(CONFIG.DND5E.actorSizes).map(([value, config]) => ({
@@ -88,8 +94,8 @@ export default class SummonSheet extends ActivitySheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _prepareIdentityContext(context) {
-    context = await super._prepareIdentityContext(context);
+  async _prepareIdentityContext(context, options) {
+    context = await super._prepareIdentityContext(context, options);
     context.behaviorFields.push({
       field: context.fields.summon.fields.prompt,
       value: context.source.summon.prompt,

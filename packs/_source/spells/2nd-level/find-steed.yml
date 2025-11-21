@@ -35,7 +35,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: pg. 143
     license: CC-BY-4.0
     rules: '2014'
@@ -110,6 +110,7 @@ system:
         attackDamage: ''
         saveDamage: ''
         healing: ''
+        hd: ''
       creatureSizes: []
       creatureTypes:
         - celestial
@@ -117,44 +118,46 @@ system:
         - fiend
       match:
         attacks: false
+        disposition: true
         proficiency: false
         saves: false
+        ability: ''
       profiles:
-        - name: ''
+        - count: ''
+          name: ''
           _id: AjbDWduosqyViS2D
           uuid: Compendium.dnd5e.monsters.Actor.FQMFuzzSh73d0Nrd
           level:
             min: null
             max: null
-          types: []
-        - name: ''
+        - count: ''
+          name: ''
           _id: 5bNPkSBX9Nc043lQ
           uuid: Compendium.dnd5e.monsters.Actor.55PkbskG5iBZGrgR
           level:
             min: null
             max: null
-          types: []
-        - name: ''
+        - count: ''
+          name: ''
           _id: 3hWu8Ub25OiFqWhu
           uuid: Compendium.dnd5e.monsters.Actor.YTpL2c3NO4sOn2UA
           level:
             min: null
             max: null
-          types: []
-        - name: ''
+        - count: ''
+          name: ''
           _id: qwzKyNaevY3tXRfu
           uuid: Compendium.dnd5e.monsters.Actor.PHO4J98zK2p4KNyc
           level:
             min: null
             max: null
-          types: []
-        - name: ''
+        - count: ''
+          name: ''
           _id: DprNdxi3hb7lbrjw
           uuid: Compendium.dnd5e.monsters.Actor.T1xZTDCGuvMBSq8d
           level:
             min: null
             max: null
-          types: []
       summon:
         identifier: ''
         mode: ''
@@ -162,7 +165,11 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      appliedEffects: []
   identifier: find-steed
 sort: 0
 flags: {}
@@ -171,11 +178,11 @@ effects: []
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.350'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.2.0
   createdTime: 1725037347604
-  modifiedTime: 1725992717038
+  modifiedTime: 1760981518718
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!5eh2HFbS13078Y3H'

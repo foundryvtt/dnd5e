@@ -1,11 +1,11 @@
 import ForwardSheet from "../../applications/activity/forward-sheet.mjs";
-import ForwardActivityData from "../../data/activity/forward-data.mjs";
+import BaseForwardActivityData from "../../data/activity/forward-data.mjs";
 import ActivityMixin from "./mixin.mjs";
 
 /**
  * Activity for triggering another activity with modified consumption.
  */
-export default class ForwardActivity extends ActivityMixin(ForwardActivityData) {
+export default class ForwardActivity extends ActivityMixin(BaseForwardActivityData) {
   /* -------------------------------------------- */
   /*  Model Configuration                         */
   /* -------------------------------------------- */
@@ -21,6 +21,7 @@ export default class ForwardActivity extends ActivityMixin(ForwardActivityData) 
       type: "forward",
       img: "systems/dnd5e/icons/svg/activity/forward.svg",
       title: "DND5E.FORWARD.Title",
+      hint: "DND5E.FORWARD.Hint",
       sheetClass: ForwardSheet
     }, { inplace: false })
   );

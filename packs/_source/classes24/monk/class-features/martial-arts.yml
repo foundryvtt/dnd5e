@@ -2,7 +2,7 @@ _id: phbmnkMartialArt
 name: Martial Arts
 type: feat
 folder: kK77WX8hVJHRQRda
-img: icons/skills/melee/unarmed-punch-fist.webp
+img: icons/skills/melee/maneuver-sword-katana-yellow.webp
 system:
   description:
     value: >-
@@ -31,9 +31,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
+    revision: 2
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
   uses:
     max: ''
     spent: 0
@@ -106,6 +106,9 @@ system:
           - simpleM
         properties: []
         type: weapon
+      img: ''
+      appliedEffects:
+        - VnV6opO1b3apq6wt
     uCIVkZurvxHYJ0h0:
       type: enchant
       name: Master Light Martial Weapon
@@ -147,7 +150,7 @@ system:
           type: ''
         affects:
           choice: false
-          count: ''
+          count: '1'
           type: object
           special: ''
         override: false
@@ -166,89 +169,35 @@ system:
           - lgt
         type: weapon
       _id: uCIVkZurvxHYJ0h0
-    w1iULzeSjTNs16nf:
-      type: attack
-      activation:
-        type: action
-        value: 1
-        condition: ''
-        override: false
-      consumption:
-        targets: []
-        scaling:
-          allowed: false
-          max: ''
-        spellSlot: true
-      description:
-        chatFlavor: ''
-      duration:
-        concentration: false
-        value: ''
-        units: inst
-        special: ''
-        override: false
-      effects: []
-      range:
-        value: '5'
-        units: ft
-        special: ''
-        override: false
-      target:
-        template:
-          count: ''
-          contiguous: false
-          type: ''
-          size: ''
-          width: ''
-          height: ''
-          units: ''
-        affects:
-          count: '1'
-          type: creature
-          choice: false
-          special: ''
-        prompt: false
-        override: false
-      attack:
-        ability: dex
-        bonus: ''
-        critical:
-          threshold: null
-        flat: false
-        type:
-          value: melee
-          classification: weapon
-      damage:
-        critical:
-          bonus: ''
-        includeBase: false
-        parts:
-          - custom:
-              enabled: true
-              formula: '@scale.monk.die + @mod'
-            number: null
-            denomination: 0
-            bonus: ''
-            types: []
-            scaling:
-              number: 1
-      uses:
-        spent: 0
-        recovery: []
-        max: ''
-      sort: 300000
-      name: Monk Attack
-      _id: w1iULzeSjTNs16nf
+      img: ''
+      appliedEffects:
+        - VnV6opO1b3apq6wt
   enchant: {}
   identifier: martial-arts
 effects:
   - type: enchantment
-    name: Martial Arts
-    img: icons/skills/melee/unarmed-punch-fist.webp
+    name: Dexterous Attacks & Martial Arts Damage
+    img: icons/skills/melee/maneuver-sword-katana-yellow.webp
     disabled: true
     _id: VnV6opO1b3apq6wt
     system: {}
-    changes: []
+    changes:
+      - key: system.properties
+        mode: 2
+        value: fin
+        priority: null
+      - key: system.damage.base.custom.enabled
+        mode: 5
+        value: 'true'
+        priority: null
+      - key: system.damage.base.custom.formula
+        mode: 5
+        value: '@scale.monk.die + @mod'
+        priority: null
+      - key: name
+        mode: 5
+        value: '{} (Martial Arts)'
+        priority: null
     duration:
       startTime: null
       seconds: null
@@ -257,57 +206,36 @@ effects:
       turns: null
       startRound: null
       startTurn: null
-    description: ''
+    description: >-
+      <p><strong>Martial Arts Die.</strong> You can roll [[lookup
+      @scale.monk.die]] in place of the normal damage of your Unarmed Strike or
+      Monk weapons. This die changes as you gain Monk levels, as shown in the
+      Martial Arts column of the Monk Features table.</p><p><strong>Dexterous
+      Attacks.</strong> You can use your Dexterity modifier instead of your
+      Strength modifier for the attack and damage rolls of your Unarmed Strikes
+      and Monk weapons. In addition, when you use the Grapple or Shove option of
+      your Unarmed Strike, you can use your Dexterity modifier instead of your
+      Strength modifier to determine the save DC.</p><p></p>
     origin: null
     tint: '#ffffff'
     transfer: true
     statuses: []
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.347'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 5.1.0
+      createdTime: 1726772286789
+      modifiedTime: 1755021875050
+      lastModifiedBy: xREoBzi7Iao0TR7B
       exportSource: null
     _key: '!items.effects!phbmnkMartialArt.VnV6opO1b3apq6wt'
-  - type: enchantment
-    name: Martial Arts
-    img: icons/skills/melee/unarmed-punch-fist.webp
-    disabled: true
-    _id: lP5YUVrrdrLUE4zC
-    system: {}
-    changes: []
-    duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
-    description: ''
-    origin: null
-    tint: '#ffffff'
-    transfer: true
-    statuses: []
-    sort: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!items.effects!phbmnkMartialArt.lP5YUVrrdrLUE4zC'
 flags:
   dnd5e:
     riders:
@@ -315,12 +243,13 @@ flags:
         - w1iULzeSjTNs16nf
       effect: []
 _stats:
+  compendiumSource: null
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.347'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866307724
-  modifiedTime: 1745256763129
+  systemVersion: 5.1.0
+  createdTime: 1724425979197
+  modifiedTime: 1755023122347
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1100000

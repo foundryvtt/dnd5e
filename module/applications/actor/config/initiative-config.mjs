@@ -55,9 +55,9 @@ export default class InitiativeConfig extends BaseConfigSheet {
     context.ability = {
       label: game.i18n.format("DND5E.AbilityCheckConfigure", { ability: abilityConfig.label }),
       global: {
-        field: this.document.system.schema.fields.bonuses.fields.abilities.fields.check,
+        field: this.document.system.schema.fields.bonuses?.fields.abilities.fields.check,
         name: "system.bonuses.abilities.check",
-        value: source.system.bonuses.abilities.check
+        value: source.system.bonuses?.abilities.check
       },
       local: {
         field: this.document.system.schema.fields.abilities.model.fields.bonuses.fields.check,

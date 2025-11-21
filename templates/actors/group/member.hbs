@@ -1,5 +1,9 @@
 <li class="member" data-uuid="{{ uuid }}">
     <div class="vitals card" {{#if underlay}}style="--underlay: {{ underlay }}"{{/if}}>
+        {{#if isPrimaryVehicle}}
+        <i class="fa-duotone fa-solid fa-circle-star primary-vehicle" data-tooltip
+           aria-label="{{ localize "DND5E.Group.Vehicle.Primary.label" }}"></i>
+        {{/if}}
         <div class="portrait">
             {{#if portrait.isVideo}}
             <video src="{{ portrait.src }}" autoplay muted playsinline disablepictureinpicture loop></video>
@@ -12,6 +16,7 @@
                 <a class="rollable" data-action="showDocument" data-uuid="{{ uuid }}">{{ name }}</a>
             </strong>
             {{#with system.attributes.hp}}
+            {{#if max}}
             <div class="hp-bar bar">
                 <label>{{ localize "DND5E.HP" }}</label>
                 <div class="meter hit-points progress" role="meter" aria-valuemin="0"
@@ -23,6 +28,7 @@
                     <span class="max">{{ max }}</span>
                 </div>
             </div>
+            {{/if}}
             {{/with}}
             {{#with system.attributes.hd}}
             <div class="hd-bar bar">
@@ -76,7 +82,13 @@
             </div>
             <div>
                 <i class="fa-solid fa-shoe-prints" data-tooltip aria-label="{{ localize "DND5E.Speed" }}"></i>
-                <span class="value">{{ system.attributes.movement.walk }}</span>
+                <span class="value">
+                    {{ system.attributes.movement.walk }}
+                    {{#if system.attributes.movement.slowed}}
+                    <i class="fa-solid fa-triangle-exclamation" data-tooltip
+                       aria-label="{{ localize "DND5E.TRAVEL.Slowed.Member" }}"></i>
+                    {{/if}}
+                </span>
             </div>
         </div>
         <div class="info">

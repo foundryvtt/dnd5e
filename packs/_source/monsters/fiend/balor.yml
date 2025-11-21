@@ -1118,8 +1118,9 @@ items:
         dt: null
         conditions: ''
       properties:
-        - ver
+        - mgc
         - rch
+        - ver
       proficient: 1
       unidentified:
         description: ''
@@ -1208,6 +1209,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: longsword
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -1217,11 +1219,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.10ZP2Bu3vnCuYMIB
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.350'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.2.0
       createdTime: null
-      modifiedTime: 1745107553951
+      modifiedTime: 1760378666907
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!uZ8NrRenwYZ4qNf6.6ZAh5TkiXwQMUfDB'
@@ -1301,6 +1303,7 @@ items:
         conditions: ''
       properties:
         - fin
+        - mgc
         - rch
       proficient: 1
       unidentified:
@@ -1461,11 +1464,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.QKTyxoO0YDnAsbYe
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.350'
       systemId: dnd5e
-      systemVersion: 5.1.0
+      systemVersion: 5.2.0
       createdTime: null
-      modifiedTime: 1747956149361
+      modifiedTime: 1760378671284
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!uZ8NrRenwYZ4qNf6.1oGgJQB1ItqyKoZ5'

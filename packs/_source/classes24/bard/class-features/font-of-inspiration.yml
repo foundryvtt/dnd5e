@@ -21,7 +21,7 @@ system:
     rules: '2024'
     revision: 1
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
   uses:
     max: ''
     spent: 0
@@ -48,12 +48,10 @@ system:
         targets:
           - type: itemUses
             value: '-1'
-            target: Compendium.dnd5e.classes24.Item.phbbrdBardicInsp
-            scaling: {}
+            target: feat:bardic-inspiration
           - type: spellSlots
             value: '1'
             target: '1'
-            scaling: {}
         scaling:
           allowed: false
         spellSlot: true
@@ -77,6 +75,7 @@ system:
           choice: false
           count: ''
           type: self
+          special: ''
         override: false
         prompt: false
       uses:
@@ -89,21 +88,19 @@ system:
         visible: false
         name: ''
         formula: ''
+      img: ''
+      appliedEffects: []
   enchant: {}
   identifier: font-of-inspiration
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.10
   createdTime: 1735866377962
-  modifiedTime: 1745256760410
+  modifiedTime: 1759426669892
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

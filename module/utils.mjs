@@ -1,3 +1,7 @@
+/**
+ * @import { TargetDescriptor5e, UnitConfiguration } from "./_types.mjs";
+ */
+
 /* -------------------------------------------- */
 /*  Formatters                                  */
 /* -------------------------------------------- */
@@ -13,6 +17,18 @@ export function formatCR(value, { narrow=true }={}) {
   if ( value === null ) return "—";
   const fractions = narrow ? { 0.125: "⅛", 0.25: "¼", 0.5: "½" } : { 0.125: "1/8", 0.25: "1/4", 0.5: "1/2" };
   return fractions[value] ?? formatNumber(value);
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Create a valid identifier from the provided string.
+ * @param {string} input
+ * @returns {string}
+ */
+export function formatIdentifier(input) {
+  input = input.replaceAll(/(\w+)([\\|/])(\w+)/g, "$1-$3");
+  return input.slugify({ strict: true });
 }
 
 /* -------------------------------------------- */
@@ -111,6 +127,22 @@ export function formatNumberParts(value, options) {
   if ( options.numerals ) throw new Error("Cannot segment numbers when formatted as numerals.");
   return new Intl.NumberFormat(game.i18n.lang, options).formatToParts(value)
     .reduce((str, { type, value }) => `${str}<span class="${type}">${value}</span>`, "");
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Form a number using the provided travel speed unit.
+ * @param {number} value                    Travel speed to display.
+ * @param {string} unit                     Unit as defined in `CONFIG.DND5E.travelUnits`.
+ * @param {object} [options={}]             Formatting options passed to `formatNumber`.
+ * @param {string} [options.period="hour"]  Time period formatting unit (e.g. hour or day).
+ * @returns {string}
+ */
+export function formatTravelSpeed(value, unit, { period="hour", ...options }={}) {
+  const unitConfig = CONFIG.DND5E.travelUnits[unit];
+  options.unit ??= `${unitConfig?.formattingUnit ?? unit}-per-${period}`;
+  return _formatSystemUnits(value, unit, unitConfig, options);
 }
 
 /* -------------------------------------------- */
@@ -260,6 +292,25 @@ export function isValidDieModifier(mod) {
 /* -------------------------------------------- */
 
 /**
+ * Convert a delta string into a number.
+ * @param {string} raw     The raw string.
+ * @param {number} target  A target number to apply the delta to.
+ * @returns {number}
+ */
+export function parseDelta(raw, target) {
+  if ( !raw ) return target;
+  let value = Number(raw);
+  if ( (raw[0] === "+") || (raw[0] === "-") ) {
+    const delta = parseFloat(raw);
+    value = target + delta;
+  }
+  else if ( raw[0] === "=" ) value = Number(raw.slice(1));
+  return Number.isNaN(value) ? target : value;
+}
+
+/* -------------------------------------------- */
+
+/**
  * Handle a delta input for a number value from a form.
  * @param {HTMLInputElement} input  Input that contains the modified value.
  * @param {Document} target         Target document to be updated.
@@ -267,15 +318,10 @@ export function isValidDieModifier(mod) {
  */
 export function parseInputDelta(input, target) {
   const prop = input.dataset.name ?? input.name;
-  const current = foundry.utils.getProperty(target?._source ?? {}, prop) ?? foundry.utils.getProperty(target, prop);
-  let value = input.value;
-  if ( ["+", "-"].includes(value[0]) ) {
-    const delta = parseFloat(value);
-    value = Number(current) + delta;
-  }
-  else if ( value[0] === "=" ) value = Number(value.slice(1));
+  let current = foundry.utils.getProperty(target?._source ?? {}, prop) ?? foundry.utils.getProperty(target, prop);
+  const value = parseDelta(input.value, Number(current));
   if ( Number.isNaN(value) ) return;
-  input.value = value;
+  input.value = value.toString();
   return value;
 }
 
@@ -553,18 +599,8 @@ export function linkForUuid(uuid, { tooltip, renderBroken }={}) {
 /* -------------------------------------------- */
 
 /**
- * Important information on a targeted token.
- *
- * @typedef {object} TargetDescriptor5e
- * @property {string} uuid  The UUID of the target.
- * @property {string} img   The target's image.
- * @property {string} name  The target's name.
- * @property {number} ac    The target's armor class, if applicable.
- */
-
-/**
  * Grab the targeted tokens and return relevant information on them.
- * @returns {TargetDescriptor[]}
+ * @returns {TargetDescriptor5e[]}
  */
 export function getTargetDescriptors() {
   const targets = new Map();
@@ -583,11 +619,13 @@ export function getTargetDescriptors() {
 
 /**
  * Get currently selected tokens in the scene or user's character's tokens.
+ * @param {Actor5e} [actor]  Only allow tokens associated with this specific actor.
  * @returns {Token5e[]}
  */
-export function getSceneTargets() {
-  let targets = canvas.tokens?.controlled.filter(t => t.actor) ?? [];
-  if ( !targets.length && game.user.character ) targets = game.user.character.getActiveTokens();
+export function getSceneTargets(actor) {
+  let targets = canvas.tokens?.controlled.filter(t => t.actor && (!actor || t.actor === actor)) ?? [];
+  if ( !targets.length && actor ) targets = actor.getActiveTokens();
+  else if ( !targets.length && game.user.character ) targets = game.user.character.getActiveTokens();
   return targets;
 }
 
@@ -639,6 +677,22 @@ export function convertTime(value, from, { combat=false, strict=true, to }={}) {
 
   const message = unit => `Time unit ${unit} not defined in CONFIG.DND5E.timeUnits`;
   return { value: _convertSystemUnits(value, from, to, CONFIG.DND5E.timeUnits, { message, strict }), unit: to };
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Convert the provided travel speed to another unit.
+ * @param {number} value                    The travel speed being converted.
+ * @param {string} from                     The initial unit.
+ * @param {object} options
+ * @param {boolean} [options.strict=false]  Throw an error if either unit isn't found.
+ * @param {string} options.to               The final unit.
+ * @returns {{ value: number, unit: string }}
+ */
+export function convertTravelSpeed(value, from, { strict=false, to }) {
+  const message = unit => `Travel speed unit ${unit} not defined in CONFIG.DND5E.travelUnits`;
+  return { value: _convertSystemUnits(value, from, to, CONFIG.DND5E.travelUnits, { message, strict }), unit: to };
 }
 
 /* -------------------------------------------- */
@@ -696,9 +750,17 @@ export function defaultUnits(type) {
 /**
  * Ensure the provided string contains only the characters allowed in identifiers.
  * @param {string} identifier
+ * @param {object} [options={}]
+ * @param {boolean} [options.allowType]  Consider an identifier with a single ":" to be valid. Only the portion after
+ *                                       the colon must follow the strict identifier validation.
  * @returns {boolean}
  */
-function isValidIdentifier(identifier) {
+function isValidIdentifier(identifier, { allowType=false }={}) {
+  if ( allowType ) {
+    const split = identifier.split(":");
+    if ( split.length > 2 ) return false;
+    identifier = split[1];
+  }
   return /^([a-z0-9_-]+)$/i.test(identifier);
 }
 
@@ -744,8 +806,6 @@ export async function preloadHandlebarsTemplates() {
   const partials = [
     // Shared Partials
     "systems/dnd5e/templates/shared/active-effects.hbs",
-    "systems/dnd5e/templates/shared/active-effects2.hbs",
-    "systems/dnd5e/templates/shared/inventory.hbs",
     "systems/dnd5e/templates/apps/parts/trait-list.hbs",
     "systems/dnd5e/templates/apps/parts/traits-list.hbs",
 
@@ -754,7 +814,6 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/actors/parts/actor-trait-pills.hbs",
     "systems/dnd5e/templates/actors/parts/actor-traits.hbs",
     "systems/dnd5e/templates/actors/parts/actor-features.hbs",
-    "systems/dnd5e/templates/actors/parts/actor-inventory.hbs",
     "systems/dnd5e/templates/actors/parts/actor-spellbook.hbs",
     "systems/dnd5e/templates/actors/parts/actor-warnings.hbs",
     "systems/dnd5e/templates/actors/parts/actor-warnings-dialog.hbs",
@@ -763,7 +822,6 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/actors/tabs/character-biography.hbs",
     "systems/dnd5e/templates/actors/tabs/character-details.hbs",
     "systems/dnd5e/templates/actors/tabs/creature-special-traits.hbs",
-    "systems/dnd5e/templates/actors/tabs/group-members.hbs",
     "systems/dnd5e/templates/actors/tabs/npc-biography.hbs",
 
     // Chat Message Partials
@@ -982,6 +1040,10 @@ function makeObject({ hash }) {
  * Register custom Handlebars helpers used by 5e.
  */
 export function registerHandlebarsHelpers() {
+  const curryUnitFormatter = method => (value, { hash }) => {
+    const { unit, ...options } = hash;
+    return method(value, unit, options);
+  };
   Handlebars.registerHelper({
     getProperty: foundry.utils.getProperty,
     "dnd5e-concealSection": concealSection,
@@ -991,13 +1053,18 @@ export function registerHandlebarsHelpers() {
       if ( !element && options.fallback ) element = generateIcon(options.fallback, options);
       return element ? new Handlebars.SafeString(element.outerHTML) : "";
     },
-    "dnd5e-formatCR": formatCR,
+    "dnd5e-formatCR": (value, options) => formatCR(value, options.hash),
+    "dnd5e-formatLength": curryUnitFormatter(formatLength),
     "dnd5e-formatModifier": formatModifier,
+    "dnd5e-formatTravelSpeed": curryUnitFormatter(formatTravelSpeed),
+    "dnd5e-formatTime": curryUnitFormatter(formatTime),
+    "dnd5e-formatVolume": curryUnitFormatter(formatVolume),
+    "dnd5e-formatWeight": curryUnitFormatter(formatWeight),
     "dnd5e-groupedSelectOptions": groupedSelectOptions,
     "dnd5e-itemContext": itemContext,
     "dnd5e-linkForUuid": (uuid, options) => linkForUuid(uuid, options.hash),
-    "dnd5e-numberFormat": (context, options) => formatNumber(context, options.hash),
-    "dnd5e-numberParts": (context, options) => formatNumberParts(context, options.hash),
+    "dnd5e-numberFormat": (value, options) => formatNumber(value, options.hash),
+    "dnd5e-numberParts": (value, options) => formatNumberParts(value, options.hash),
     "dnd5e-object": makeObject,
     "dnd5e-textFormat": formatText
   });
@@ -1045,10 +1112,12 @@ export function performPreLocalization(config) {
 
   // Localize & sort status effects
   CONFIG.statusEffects.forEach(s => s.name = game.i18n.localize(s.name));
-  CONFIG.statusEffects.sort((lhs, rhs) =>
-    lhs.order || rhs.order ? (lhs.order ?? Infinity) - (rhs.order ?? Infinity)
-      : lhs.name.localeCompare(rhs.name, game.i18n.lang)
-  );
+  if ( game.release.generation < 14 ) {
+    CONFIG.statusEffects.sort((lhs, rhs) =>
+      lhs.order || rhs.order ? (lhs.order ?? Infinity) - (rhs.order ?? Infinity)
+        : lhs.name.localeCompare(rhs.name, game.i18n.lang)
+    );
+  }
 }
 
 /* -------------------------------------------- */
@@ -1171,6 +1240,7 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
   // Derived fields.
   else if ( attr === "attributes.init.total" ) label = "DND5E.InitiativeBonus";
   else if ( (attr === "attributes.ac.value") || (attr === "attributes.ac.flat") ) label = "DND5E.ArmorClass";
+  else if ( attr === "attributes.spell.attack" ) label = "DND5E.SpellAttackBonus";
   else if ( attr === "attributes.spell.dc" ) label = "DND5E.SpellDC";
 
   // Abilities.
@@ -1184,6 +1254,7 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
   else if ( attr === "resources.legact.value" ) label = "DND5E.LegendaryAction.Remaining";
   else if ( attr === "resources.legres.spent" ) label = "DND5E.LegendaryResistance.LabelPl";
   else if ( attr === "resources.legres.value" ) label = "DND5E.LegendaryResistance.Remaining";
+  else if ( attr === "attributes.actions.value" ) label = "DND5E.VEHICLE.FIELDS.attributes.actions.label";
 
   // Skills.
   else if ( attr.startsWith("skills.") ) {

@@ -21,7 +21,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: ''
     license: CC-BY-4.0
     rules: '2014'
@@ -102,8 +102,10 @@ system:
       creatureTypes: []
       match:
         attacks: false
+        disposition: true
         proficiency: false
         saves: false
+        ability: ''
       profiles:
         - count: '10'
           name: ''
@@ -112,7 +114,6 @@ system:
           level:
             min: null
             max: null
-          types: []
         - count: ''
           name: ''
           _id: zzh3sTByUIvUYVvE
@@ -120,7 +121,6 @@ system:
           level:
             min: null
             max: null
-          types: []
         - count: '3'
           name: ''
           _id: Mjp51GLFAYyA6NgW
@@ -128,7 +128,6 @@ system:
           level:
             min: null
             max: null
-          types: []
         - count: '5'
           name: ''
           _id: LkxYBiqNIyzUJxuH
@@ -136,7 +135,6 @@ system:
           level:
             min: null
             max: null
-          types: []
       summon:
         identifier: ''
         mode: ''
@@ -144,7 +142,11 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      appliedEffects: []
   identifier: giant-insect
 sort: 0
 flags: {}
@@ -153,11 +155,11 @@ effects: []
 folder: 5auWSClKMDUIV5Ni
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.350'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.2.0
   createdTime: 1725037360727
-  modifiedTime: 1725992721324
+  modifiedTime: 1760981610690
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!czXrVRx6XYRWsHAi'

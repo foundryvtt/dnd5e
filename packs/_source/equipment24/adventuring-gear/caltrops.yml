@@ -15,7 +15,7 @@ system:
     custom: ''
     rules: '2024'
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
   identified: true
   unidentified:
     description: ''
@@ -61,7 +61,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
         scaling:
           allowed: false
           max: ''
@@ -99,7 +98,7 @@ system:
         prompt: true
         override: false
       damage:
-        onSave: half
+        onSave: none
         parts:
           - custom:
               enabled: true
@@ -109,8 +108,6 @@ system:
             bonus: ''
             types:
               - piercing
-            scaling:
-              number: 1
       save:
         ability: dex
         dc:
@@ -124,7 +121,8 @@ system:
       _id: G8upRnZw22jGWKWy
       name: ''
       img: ''
-      appliedEffects: []
+      appliedEffects:
+        - HsbtDDdiWhk4d7WB
   identifier: caltrops
 _id: phbagCaltrops000
 type: consumable
@@ -187,18 +185,14 @@ effects:
 sort: 500000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1724425907080
-  modifiedTime: 1745256811307
+  modifiedTime: 1757448552545
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbagCaltrops000'

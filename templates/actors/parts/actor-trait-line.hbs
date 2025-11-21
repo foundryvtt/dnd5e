@@ -1,0 +1,28 @@
+<div class="pills-group empty {{#if (and (or field fields.units) @root.editable)}}edit-inline units{{/if}}">
+    <h3 class="icon">
+        <i class="{{ icon }} fa-fw" inert></i>
+        <span class="roboto-upper">{{ localize label }}</span>
+        {{#if @root.editable}}
+
+        {{#if configAction}}
+        <button type="button" class="config-button unbutton" data-action="showConfiguration"
+                data-config="{{ configAction }}" data-tooltip aria-label="{{ localize configLabel }}">
+            <i class="fa-solid fa-cog"></i>
+        </button>
+        {{else if field}}
+        {{ formInput field value=source placeholder="—" }}
+        {{else if fields}}
+        {{ formInput fields.value value=source.value placeholder="—" }}
+        {{ formInput fields.units value=source.units choices=unitsConfig
+                     labelAttr=(ifThen abbreviationKey abbreviationKey "abbreviation") }}
+        {{/if}}
+
+        {{else}}
+
+        <span class="counter">
+            {{#if formatted}}{{{ formatted }}}{{else}}{{ ifThen data.value data.value value }}{{/if}}
+        </span>
+
+        {{/if}}
+    </h3>
+</div>

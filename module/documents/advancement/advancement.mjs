@@ -1,10 +1,10 @@
 import AdvancementConfig from "../../applications/advancement/advancement-config-v2.mjs";
 import AdvancementFlow from "../../applications/advancement/advancement-flow.mjs";
-import BaseAdvancement from "../../data/advancement/base-advancement.mjs";
+import BaseAdvancementData from "../../data/advancement/base-advancement.mjs";
 import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
 
 /**
- * @import { PseudoDocumentsMetadata } from "../mixins/pseudo-document.mjs";
+ * @import { AdvancementMetadata } from "./_types.mjs";
  */
 
 /**
@@ -24,7 +24,7 @@ class AdvancementError extends Error {
  * @param {object} [options={}]  Options which affect DataModel construction.
  * @abstract
  */
-export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
+export default class Advancement extends PseudoDocumentMixin(BaseAdvancementData) {
   constructor(data, {parent=null, ...options}={}) {
     if ( parent instanceof Item ) parent = parent.system;
     super(data, {parent, ...options});
@@ -47,28 +47,6 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
   static ERROR = AdvancementError;
 
   /* -------------------------------------------- */
-
-  /**
-   * Information on how an advancement type is configured.
-   *
-   * @typedef {PseudoDocumentsMetadata} AdvancementMetadata
-   * @property {object} dataModels
-   * @property {DataModel} configuration  Data model used for validating configuration data.
-   * @property {DataModel} value          Data model used for validating value data.
-   * @property {number} order          Number used to determine default sorting order of advancement items.
-   * @property {string} icon           Icon used for this advancement type if no user icon is specified.
-   * @property {string} typeIcon       Icon used when selecting this advancement type during advancement creation.
-   * @property {string} title          Title to be displayed if no user title is specified.
-   * @property {string} hint           Description of this type shown in the advancement selection dialog.
-   * @property {boolean} multiLevel    Can this advancement affect more than one level? If this is set to true,
-   *                                   the level selection control in the configuration window is hidden and the
-   *                                   advancement should provide its own implementation of `Advancement#levels`
-   *                                   and potentially its own level configuration interface.
-   * @property {Set<string>} validItemTypes  Set of types to which this advancement can be added. (deprecated)
-   * @property {object} apps
-   * @property {*} apps.config         Subclass of AdvancementConfig that allows for editing of this advancement type.
-   * @property {*} apps.flow           Subclass of AdvancementFlow that is displayed while fulfilling this advancement.
-   */
 
   /**
    * Configuration information for this advancement type.

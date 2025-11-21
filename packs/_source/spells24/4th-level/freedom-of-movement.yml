@@ -22,7 +22,7 @@ system:
     custom: ''
     rules: '2024'
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
   activation:
     type: action
     condition: ''
@@ -121,7 +121,10 @@ effects:
       startRound: null
       startTurn: null
     disabled: false
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     img: icons/skills/movement/feet-bladed-boots-fire.webp
     _id: bcTPZ6dJ4kHwaBRD
     type: base
@@ -139,6 +142,10 @@ effects:
         mode: 4
         value: '1'
         priority: null
+      - key: system.attributes.movement.ignoredDifficultTerrain
+        mode: 2
+        value: all
+        priority: null
     description: ''
     tint: '#ffffff'
     transfer: false
@@ -147,12 +154,12 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.347'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.3
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1755806834292
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!phbsplFreedomofM.bcTPZ6dJ4kHwaBRD'
 folder: qi3IbnEwap7mRw4b

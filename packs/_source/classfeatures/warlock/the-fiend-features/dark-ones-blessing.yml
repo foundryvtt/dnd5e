@@ -12,7 +12,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: ''
     license: CC-BY-4.0
     rules: '2014'
@@ -77,7 +77,7 @@ system:
           - temphp
         custom:
           enabled: true
-          formula: max(1, @mod + @classes.warlock.levels)
+          formula: max(1, @abilities.cha.mod + @classes.warlock.levels)
         scaling:
           mode: whole
           number: null
@@ -85,7 +85,11 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      appliedEffects: []
   enchant: {}
   prerequisites:
     level: null
@@ -97,11 +101,11 @@ folder: AjZEXaNUIFQ13Z3F
 sort: 0
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.2.0
   createdTime: 1725037382557
-  modifiedTime: 1725992287900
+  modifiedTime: 1758300939101
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!Jv0zu4BtUi8bFCqJ'

@@ -61,7 +61,7 @@ export default class ChatMessage5e extends ChatMessage {
     if ( game.user.isGM || (this.author === game.user) ) return true;
     switch ( game.settings.get("dnd5e", "challengeVisibility") ) {
       case "all": return true;
-      case "player": return !this.author.isGM;
+      case "player": return !this.author?.isGM;
       default: return false;
     }
   }
@@ -76,7 +76,7 @@ export default class ChatMessage5e extends ChatMessage {
   _trayStates;
 
   /* -------------------------------------------- */
-  /*  Data Migrations                             */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -129,7 +129,7 @@ export default class ChatMessage5e extends ChatMessage {
       html.querySelectorAll(".description.collapsible").forEach(el => el.classList.add("collapsed"));
     }
 
-    this._enrichChatCard(html);
+    await this._enrichChatCard(html);
     this._collapseTrays(html);
     this._activateActivityListeners(html);
     dnd5e.bastion._activateChatListeners(this, html);
@@ -185,7 +185,7 @@ export default class ChatMessage5e extends ChatMessage {
       if ( this.shouldDisplayChallenge ) chatCard.dataset.displayChallenge = "";
 
       const actor = game.actors.get(this.speaker.actor);
-      const isCreator = game.user.isGM || actor?.isOwner || (this.author.id === game.user.id);
+      const isCreator = game.user.isGM || actor?.isOwner || (this.author?.id === game.user.id);
       for ( const button of html.querySelectorAll(".card-buttons button") ) {
         if ( button.dataset.visibility === "all" ) continue;
 
@@ -266,27 +266,38 @@ export default class ChatMessage5e extends ChatMessage {
    * @param {HTMLElement} html  The chat card markup.
    * @protected
    */
-  _enrichChatCard(html) {
+  async _enrichChatCard(html) {
     html.querySelectorAll(".dnd5e2").forEach(el => el.classList.remove("dnd5e2")); // Legacy
     html.classList.add("dnd5e2");
 
     // Header matter
     const actor = this.getAssociatedActor();
+    const avatar = document.createElement("a");
+    avatar.classList.add("avatar");
+    let avatarImg = document.createElement("img");
 
     let img;
     let nameText;
     if ( this.isContentVisible ) {
-      img = actor?.img ?? this.author.avatar;
+      const artworkData = await actor?.getPreferredArtwork();
+      img = artworkData?.src ?? this.author?.avatar;
       nameText = this.alias;
+      if ( artworkData?.isToken ) avatar.classList.add("token");
+      if ( artworkData?.isVideo ) {
+        avatarImg = document.createElement("video");
+        avatarImg.toggleAttribute("autoplay", true);
+        avatarImg.toggleAttribute("muted", true);
+        avatarImg.toggleAttribute("disablepictureinpicture", true);
+        avatarImg.toggleAttribute("loop", true);
+        avatarImg.toggleAttribute("playsinline", true);
+      }
     } else {
-      img = this.author.avatar;
-      nameText = this.author.name;
+      img = this.author?.avatar;
+      nameText = this.author?.name ?? "";
     }
+    img ??= CONST.DEFAULT_TOKEN;
 
-    const avatar = document.createElement("a");
-    avatar.classList.add("avatar");
     if ( actor ) avatar.dataset.uuid = actor.uuid;
-    const avatarImg = document.createElement("img");
     Object.assign(avatarImg, { src: img, alt: nameText });
     avatar.append(avatarImg);
 
@@ -508,11 +519,13 @@ export default class ChatMessage5e extends ChatMessage {
     const roll = document.createElement("div");
     roll.classList.add("dice-roll");
 
-    const tooltipContents = breakdown.reduce((str, { type, total, constant, dice }) => {
+    const tooltipContents = breakdown.reduce((str, { type, total, constant, dice, icon, method }) => {
       const config = CONFIG.DND5E.damageTypes[type] ?? CONFIG.DND5E.healingTypes[type];
       return `${str}
         <section class="tooltip-part">
           <div class="dice">
+            ${icon
+              ? `<span class="part-method" data-tooltip aria-label="${game.i18n.localize(method)}">${icon}</span>` : ""}
             <ol class="dice-rolls">
               ${dice.reduce((str, { result, classes }) => `
                 ${str}<li class="roll ${classes}">${result}</li>
@@ -574,7 +587,9 @@ export default class ChatMessage5e extends ChatMessage {
    * @protected
    */
   _simplifyDamageRoll(roll) {
-    const aggregate = { type: roll.options.type, total: Math.max(0, roll.total), constant: 0, dice: [] };
+    const aggregate = {
+      type: roll.options.type, total: Math.max(0, roll.total), constant: 0, dice: [], icon: null, method: null
+    };
     let hasMultiplication = false;
     for ( let i = roll.terms.length - 1; i >= 0; ) {
       const term = roll.terms[i--];
@@ -582,9 +597,12 @@ export default class ChatMessage5e extends ChatMessage {
         continue;
       }
       const value = term.total;
-      if ( term instanceof foundry.dice.terms.DiceTerm ) aggregate.dice.push(...term.results.map(r => ({
-        result: term.getResultLabel(r), classes: term.getResultCSS(r).filterJoin(" ")
-      })));
+      if ( term instanceof foundry.dice.terms.DiceTerm ) {
+        const tooltipData = term.getTooltipData();
+        aggregate.dice.push(...tooltipData.rolls);
+        aggregate.icon ??= tooltipData.icon;
+        aggregate.method ??= tooltipData.method;
+      }
       let multiplier = 1;
       let operator = roll.terms[i];
       while ( operator instanceof foundry.dice.terms.OperatorTerm ) {
@@ -674,7 +692,7 @@ export default class ChatMessage5e extends ChatMessage {
     const item = this.getAssociatedItem();
     const effects = this.getFlag("dnd5e", "use.effects")
       ?.map(id => item?.effects.get(id))
-      .filter(e => e && (game.user.isGM || (e.transfer && (this.author.id === game.user.id))));
+      .filter(e => e && (game.user.isGM || (e.transfer && (this.author?.id === game.user.id))));
     if ( !effects?.length ) return;
 
     const effectApplication = document.createElement("effect-application");
@@ -889,11 +907,10 @@ export default class ChatMessage5e extends ChatMessage {
 
   /**
    * Handle rendering a chat popout.
-   * @param {ChatPopout} app  The ChatPopout Application instance.
-   * @param {jQuery} html     The rendered Application HTML.
+   * @param {ChatPopout} app    The ChatPopout Application instance.
+   * @param {HTMLElement} html  The rendered Application HTML.
    */
   static onRenderChatPopout(app, html) {
-    html = html instanceof HTMLElement ? html : html[0];
     if ( game.user.isGM ) html.dataset.gmUser = "";
     const close = html.querySelector(".header-button.close");
     if ( close ) {
@@ -908,7 +925,7 @@ export default class ChatMessage5e extends ChatMessage {
 
   /**
    * Wait to apply appropriate element heights until after the chat log has completed its initial batch render.
-   * @param {HTMLElement|jQuery} html
+   * @param {HTMLElement} html
    */
   static onRenderChatLog(html) {
     if ( game.user.isGM ) {

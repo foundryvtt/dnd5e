@@ -19,7 +19,7 @@ export function registerCustomEnrichers() {
     enricher: enrichString
   },
   {
-    pattern: /\[\[(?<type>lookup) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
+    pattern: /\[\[(?<type>language|lookup) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
     enricher: enrichString
   },
   {
@@ -56,6 +56,7 @@ async function enrichString(match, options) {
     case "check":
     case "skill":
     case "tool": return enrichCheck(config, label, options);
+    case "language": return enrichLanguage(config, label, options);
     case "lookup": return enrichLookup(config, label, options);
     case "concentration": config._isConcentration = true;
     case "save": return enrichSave(config, label, options);
@@ -200,7 +201,7 @@ async function enrichAttack(config, label, options) {
   config.type = "attack";
   if ( label ) return createRollLink(label, config, { classes: "roll-link-group roll-link" });
 
-  let displayFormula = simplifyRollFormula(config.formula) || "+0";
+  let displayFormula = simplifyRollFormula(config.formula)?.trim() || "+0";
   if ( !displayFormula.startsWith("+") && !displayFormula.startsWith("-") ) displayFormula = `+${displayFormula}`;
 
   const span = document.createElement("span");
@@ -912,6 +913,29 @@ async function enrichDamage(configs, label, options) {
 }
 
 /* -------------------------------------------- */
+/*  Language Enricher                           */
+/* -------------------------------------------- */
+
+/**
+ * Enrich a language reference.
+ */
+function enrichLanguage(config, label, options) {
+  for ( const value of config.values ) {
+    const slug = foundry.utils.getType(value) === "string" ? slugify(value) : value;
+    if ( slug in CONFIG.DND5E.enrichmentLookup.languages ) config.language = slug;
+  }
+  delete config.values;
+
+  if ( !(config.language in CONFIG.DND5E.enrichmentLookup.languages) ) {
+    console.warn(`No language found while enriching ${config._input}.`);
+    return null;
+  }
+
+  config.type = "language";
+  return createPassiveTag(label ?? CONFIG.DND5E.enrichmentLookup.languages[config.language], config);
+}
+
+/* -------------------------------------------- */
 /*  Lookup Enricher                             */
 /* -------------------------------------------- */
 
@@ -960,6 +984,7 @@ function enrichLookup(config, fallback, options) {
   const data = activity ? activity.getRollData().activity : options.rollData
     ?? options.relativeTo?.getRollData?.() ?? {};
   let value = foundry.utils.getProperty(data, keyPath.substring(1)) ?? fallback;
+  if ( value !== undefined ) value = String(value);
   if ( value && style ) {
     if ( style === "capitalize" ) value = value.capitalize();
     else if ( style === "lowercase" ) value = value.toLowerCase();
@@ -1102,10 +1127,7 @@ async function enrichReference(config, label, options) {
  */
 async function enrichItem(config, label, options) {
   const givenItem = config.values.join(" ");
-  // If config is a UUID
-  const itemUuidMatch = givenItem.match(
-    /^(?<synthid>Scene\.\w{16}\.Token\.\w{16}\.)?(?<actorid>Actor\.\w{16})(?<itemid>\.?Item(?<relativeId>\.\w{16}))$/
-  );
+  let parsed = foundry.utils.parseUuid(givenItem);
 
   const makeLink = (label, dataset) => {
     const span = document.createElement("span");
@@ -1115,26 +1137,33 @@ async function enrichItem(config, label, options) {
     return span;
   };
 
-  if ( itemUuidMatch ) {
-    const ownerActor = itemUuidMatch.groups.actorid.trim();
-    if ( !label ) {
-      const item = await fromUuid(givenItem);
-      if ( !item ) {
-        console.warn(`Item not found while enriching ${config._input}.`);
+  if ( ["Activity", "Item"].includes(parsed?.type) ) {
+    const ownerActor = parsed.primaryType === "Actor" ? parsed.primaryId
+      : parsed.embedded.includes("Actor") ? parsed.embedded[parsed.embedded.findIndex(e => e === "Actor") + 1] : null;
+    let doc = await fromUuid(parsed.uuid);
+    if ( !doc ) {
+      console.warn(`Item not found while enriching ${config._input}.`);
+      return null;
+    }
+    if ( (doc instanceof Item) && config.activity ) {
+      doc = doc.system.activities?.get(config.activity) ?? doc.system.activities?.getName(config.activity);
+      if ( !doc ) {
+        console.warn(`Activity not found while enriching ${config._input}.`);
         return null;
       }
-      label = item.name;
     }
-    return makeLink(label, { type: "item", rollItemActor: ownerActor, rollItemUuid: givenItem });
+    if ( !label ) {
+      if ( doc instanceof Item ) label = doc.name;
+      else label = game.i18n.format("EDITOR.DND5E.Inline.ItemActivity", { item: doc.item.name, activity: doc.name });
+    }
+    return makeLink(label, { type: "item", rollItemActor: ownerActor, [`roll${doc.documentName}Uuid`]: doc.uuid });
   }
 
-  let foundItem;
   const foundActor = options.relativeTo instanceof Item
     ? options.relativeTo.parent
     : options.relativeTo instanceof Actor ? options.relativeTo : null;
-
-  // If config is an Item ID
-  if ( /^\w{16}$/.test(givenItem) && foundActor ) foundItem = foundActor.items.get(givenItem);
+  let foundItem = foundActor?.items.get(givenItem);
+  let foundActivity;
 
   // If config is a relative UUID
   if ( givenItem.startsWith(".") ) {
@@ -1143,8 +1172,9 @@ async function enrichItem(config, label, options) {
     } catch(err) { return null; }
   }
 
+  if ( !foundItem && !givenItem && (options.relativeTo instanceof Item) ) foundItem = options.relativeTo;
+
   if ( foundItem ) {
-    let foundActivity;
     if ( config.activity ) {
       foundActivity = foundItem.system.activities?.get(config.activity)
         ?? foundItem.system.activities?.getName(config.activity);
@@ -1152,7 +1182,9 @@ async function enrichItem(config, label, options) {
         console.warn(`Activity ${config.activity} not found on ${foundItem.name} while enriching ${config._input}.`);
         return null;
       }
-      if ( !label ) label = `${foundItem.name}: ${foundActivity.name}`;
+      if ( !label ) label = game.i18n.format("EDITOR.DND5E.Inline.ItemActivity", {
+        item: foundItem.name, activity: foundActivity.name
+      });
       return makeLink(label, { type: "item", rollActivityUuid: foundActivity.uuid });
     }
 
@@ -1161,7 +1193,9 @@ async function enrichItem(config, label, options) {
   }
 
   // Finally, if config is an item name
-  if ( !label ) label = config.activity ? `${givenItem}: ${config.activity}` : givenItem;
+  if ( !label ) label = config.activity ? game.i18n.format("EDITOR.DND5E.Inline.ItemActivity", {
+    item: foundItem?.name ?? givenItem, activity: foundActivity?.name ?? config.activity
+  }) : givenItem;
   return makeLink(label, {
     type: "item", rollItemActor: foundActor?.uuid, rollItemName: givenItem, rollActivityName: config.activity
   });
@@ -1503,6 +1537,7 @@ async function rollAttack(event) {
 
   const rolls = await CONFIG.Dice.D20Roll.build(rollConfig, dialogConfig, messageConfig);
   if ( rolls?.length ) {
+    Hooks.callAll("dnd5e.rollAttack", rolls, { subject: null, ammoUpdate: null });
     Hooks.callAll("dnd5e.rollAttackV2", rolls, { subject: null, ammoUpdate: null });
     Hooks.callAll("dnd5e.postRollAttack", rolls, { subject: null });
   }
@@ -1556,6 +1591,7 @@ async function rollDamage(event) {
 
   const rolls = await CONFIG.Dice.DamageRoll.build(rollConfig, {}, messageConfig);
   if ( !rolls?.length ) return;
+  Hooks.callAll("dnd5e.rollDamage", rolls);
   Hooks.callAll("dnd5e.rollDamageV2", rolls);
 }
 

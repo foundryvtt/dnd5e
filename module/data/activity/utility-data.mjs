@@ -4,15 +4,15 @@ import BaseActivityData from "./base-activity.mjs";
 const { BooleanField, SchemaField, StringField } = foundry.data.fields;
 
 /**
- * Data model for an utility activity.
- *
- * @property {object} roll
- * @property {string} roll.formula   Arbitrary formula that can be rolled.
- * @property {string} roll.name      Label for the rolling button.
- * @property {boolean} roll.prompt   Should the roll configuration dialog be displayed?
- * @property {boolean} roll.visible  Should the rolling button be visible to all players?
+ * @import { UtilityActivityData } from "./_types.mjs";
  */
-export default class UtilityActivityData extends BaseActivityData {
+
+/**
+ * Data model for an utility activity.
+ * @extends {BaseActivityData<UtilityActivityData>}
+ * @mixes UtilityActivityData
+ */
+export default class BaseUtilityActivityData extends BaseActivityData {
   /** @inheritDoc */
   static defineSchema() {
     return {
@@ -27,7 +27,7 @@ export default class UtilityActivityData extends BaseActivityData {
   }
 
   /* -------------------------------------------- */
-  /*  Data Migrations                             */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @override */

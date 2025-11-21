@@ -3,6 +3,10 @@ import Dialog5e from "../api/dialog.mjs";
 const { NumberField, StringField } = foundry.data.fields;
 
 /**
+ * @import { SpellScrollConfiguration } from "../../documents/_types.mjs";
+ */
+
+/**
  * Application for configuration spell scroll creation.
  */
 export default class CreateScrollDialog extends Dialog5e {

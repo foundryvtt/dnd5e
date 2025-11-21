@@ -16,7 +16,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: ''
     license: CC-BY-4.0
     rules: '2014'
@@ -32,11 +32,14 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -122,23 +125,30 @@ effects:
         mode: 2
         value: restrained
         priority: null
+      - key: system.attributes.movement.ignoredDifficultTerrain
+        mode: 2
+        value: all
+        priority: null
     description: >-
       <p>The target's Movement is unaffected by difficult terrain, and Spells
       and other magical Effects can neither reduce the target's speed nor cause
       the target to be Paralyzed or Restrained.</p>
     transfer: false
     statuses: []
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     tint: '#ffffff'
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.347'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.3
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1755806855234
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     img: icons/skills/melee/strike-blade-knife-white-red.webp
     type: base
@@ -148,11 +158,11 @@ effects:
 folder: 5auWSClKMDUIV5Ni
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.347'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.1.3
   createdTime: 1725037361182
-  modifiedTime: 1725992721490
+  modifiedTime: 1755806857216
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!da0a1t2FqaTjRZGT'

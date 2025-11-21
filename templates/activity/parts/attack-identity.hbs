@@ -1,8 +1,9 @@
 <fieldset>
     <legend>{{ localize "DND5E.ATTACK.Title.one" }}</legend>
     {{#with fields.attack.fields.type.fields as |fields|}}
-    {{ formField fields.value value=@root.source.attack.type.value options=@root.attackTypeOptions }}
+    {{ formField fields.value value=@root.source.attack.type.value options=@root.attackTypeOptions
+                 rootId=@root.partId }}
     {{ formField fields.classification value=@root.source.attack.type.classification
-       options=@root.attackClassificationOptions }}
+                 options=@root.attackClassificationOptions rootId=@root.partId }}
     {{/with}}
 </fieldset>

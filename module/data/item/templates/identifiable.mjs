@@ -4,28 +4,28 @@ import SystemDataModel from "../../abstract/system-data-model.mjs";
 const { BooleanField, SchemaField, StringField, HTMLField } = foundry.data.fields;
 
 /**
+ * @import { IdentifiableTemplateData } from "./_types.mjs";
+ */
+
+/**
  * Data model template for items that can be identified.
- *
- * @property {boolean} identified               Has this item been identified?
- * @property {object} unidentified
- * @property {string} unidentified.name         Name of the item when it is unidentified.
- * @property {string} unidentified.description  Description displayed if item is unidentified.
+ * @extends {SystemDataModel<IdentifiableTemplateData>}
  * @mixin
  */
 export default class IdentifiableTemplate extends SystemDataModel {
   /** @inheritDoc */
   static defineSchema() {
     return {
-      identified: new BooleanField({required: true, initial: true, label: "DND5E.Identified"}),
+      identified: new BooleanField({ required: true, initial: true, label: "DND5E.Identified" }),
       unidentified: new SchemaField({
-        name: new StringField({label: "DND5E.NameUnidentified"}),
-        description: new HTMLField({label: "DND5E.DescriptionUnidentified"})
+        name: new StringField({ label: "DND5E.NameUnidentified" }),
+        description: new HTMLField({ label: "DND5E.DescriptionUnidentified" })
       })
     };
   }
 
   /* -------------------------------------------- */
-  /*  Migrations                                  */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @inheritDoc */

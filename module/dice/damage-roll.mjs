@@ -5,56 +5,19 @@ import BasicRoll from "./basic-roll.mjs";
 const { DiceTerm, FunctionTerm, NumericTerm, OperatorTerm, ParentheticalTerm, StringTerm } = foundry.dice.terms;
 
 /**
- * Configuration data for the process of rolling a damage roll.
- *
- * @typedef {BasicRollProcessConfiguration} DamageRollProcessConfiguration
- * @property {DamageRollConfiguration[]} rolls         Configuration data for individual rolls.
- * @property {CriticalDamageConfiguration} [critical]  Critical configuration for all rolls.
- * @property {boolean} [isCritical]                    Treat each roll as a critical unless otherwise specified.
- * @property {number} [scaling=0]                      Scale increase above base damage.
+ * @import { CriticalDamageConfiguration, DamageRollOptions } from "./_types.mjs";
  */
-
-/**
- * Damage roll configuration data.
- *
- * @typedef {BasicRollConfiguration} DamageRollConfiguration
- * @property {DamageRollOptions} [options] - Options passed through to the roll.
- */
-
-/**
- * Options that describe a damage roll.
- *
- * @typedef {BasicRollOptions} DamageRollOptions
- * @property {boolean} [isCritical]                    Should critical damage be calculated for this roll?
- * @property {CriticalDamageConfiguration} [critical]  Critical configuration for this roll.
- * @property {string[]} [properties]                   Physical properties of the source (e.g. magical, silvered).
- * @property {string} [type]                           Type of damage represented.
- * @property {string[]} [types]                        List of damage types selectable in the configuration app. If no
- *                                                     type is provided, then the first of these types will be used.
- */
-
-/**
- * Critical effects configuration data.
- *
- * @typedef {object} CriticalDamageConfiguration
- * @property {boolean} [allow=true]       Should critical damage be allowed?
- * @property {number} [multiplier=2]      Amount by which to multiply critical damage.
- * @property {number} [bonusDice=0]       Additional dice added to first term when calculating critical damage.
- * @property {string} [bonusDamage]       Additional, unmodified, damage formula added when calculating a critical.
- * @property {boolean} [multiplyDice]     Should dice result be multiplied rather than number of dice rolled increased?
- * @property {boolean} [multiplyNumeric]  Should numeric terms be multiplied along side dice during criticals?
- * @property {string} [powerfulCritical]  Maximize result of extra dice added by critical, rather than rolling.
- */
-
-/* -------------------------------------------- */
 
 /**
  * A type of Roll specific to a damage (or healing) roll in the 5e system.
- * @param {string} formula                  The string formula to parse.
- * @param {object} data                     The data object against which to parse attributes within the formula.
- * @param {DamageRollOptions} [options={}]  Extra optional arguments which describe or modify the DamageRoll.
+ * @extends {BasicRoll}
  */
 export default class DamageRoll extends BasicRoll {
+  /**
+   * @param {string} formula                  The string formula to parse.
+   * @param {object} data                     The data object against which to parse attributes within the formula.
+   * @param {DamageRollOptions} [options={}]  Extra optional arguments which describe or modify the DamageRoll.
+   */
   constructor(formula, data, options) {
     super(formula, data, options);
     if ( !this.options.preprocessed ) this.preprocessFormula();

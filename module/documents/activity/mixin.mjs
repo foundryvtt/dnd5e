@@ -2,11 +2,21 @@ import ActivitySheet from "../../applications/activity/activity-sheet.mjs";
 import ActivityUsageDialog from "../../applications/activity/activity-usage-dialog.mjs";
 import AbilityTemplate from "../../canvas/ability-template.mjs";
 import { ConsumptionError } from "../../data/activity/fields/consumption-targets-field.mjs";
-import { formatNumber, getTargetDescriptors, localizeSchema } from "../../utils.mjs";
+import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
+import { formatNumber, getSceneTargets, getTargetDescriptors, localizeSchema } from "../../utils.mjs";
+import DependentDocumentMixin from "../mixins/dependent.mjs";
 import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
 
 /**
- * @import { PseudoDocumentsMetadata } from "../mixins/pseudo-document.mjs";
+ * @import { FavoriteData5e } from "../../data/abstract/_types.mjs";
+ * @import { ActorDeltasData } from "../../data/chat-message/fields/_types.mjs";
+ * @import {
+ *   BasicRollDialogConfiguration, BasicRollMessageConfiguration, DamageRollProcessConfiguration
+ * } from "../../dice/_types.mjs";
+ * @import {
+ *   ActivityConsumptionDescriptor, ActivityDialogConfiguration, ActivityMessageConfiguration, ActivityMetadata,
+ *   ActivityUsageChatButton, ActivityUsageResults, ActivityUsageUpdates, ActivityUseConfiguration
+ * } from "./_types.mjs";
  */
 
 /**
@@ -17,21 +27,7 @@ import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
  * @mixin
  */
 export default function ActivityMixin(Base) {
-  class Activity extends PseudoDocumentMixin(Base) {
-    /**
-     * Configuration information for Activities.
-     *
-     * @typedef {PseudoDocumentsMetadata} ActivityMetadata
-     * @property {string} type                              Type name of this activity.
-     * @property {string} img                               Default icon.
-     * @property {string} title                             Default title.
-     * @property {typeof ActivitySheet} sheetClass          Sheet class used to configure this activity.
-     * @property {object} usage
-     * @property {Record<string, Function>} usage.actions   Actions that can be triggered from the chat card.
-     * @property {string} usage.chatCard                    Template used to render the chat card.
-     * @property {typeof ActivityUsageDialog} usage.dialog  Default usage prompt.
-     */
-
+  class Activity extends DependentDocumentMixin(PseudoDocumentMixin(Base)) {
     /**
      * Configuration information for this PseudoDocument.
      * @type {Readonly<ActivityMetadata>}
@@ -82,11 +78,32 @@ export default function ActivityMixin(Base) {
     /* -------------------------------------------- */
 
     /**
+     * Should this activity be visible on the item sheet?
+     * @type {boolean}
+     */
+    get canConfigure() {
+      if ( CONFIG.DND5E.activityTypes[this.type]?.configurable === false ) return false;
+      if ( this.visibility?.requireIdentification && !this.item.system.identified && !game.user.isGM ) return false;
+      if ( this.dependentOrigin?.active === false ) return false;
+      return true;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
      * Should this activity be able to be used?
      * @type {boolean}
      */
     get canUse() {
-      return !this.item.getFlag("dnd5e", "riders.activity")?.includes(this.id);
+      if ( this.isRider ) return false;
+      if ( this.dependentOrigin?.active === false ) return false;
+      if ( this.visibility?.requireAttunement && !this.item.system.attuned ) return false;
+      if ( this.visibility?.requireMagic && !this.item.system.magicAvailable ) return false;
+      if ( this.visibility?.requireIdentification && !this.item.system.identified ) return false;
+      const level = this.relevantLevel;
+      if ( ((this.visibility?.level?.min ?? -Infinity) > level)
+        || ((this.visibility?.level?.max ?? Infinity) < level) ) return false;
+      return true;
     }
 
     /* -------------------------------------------- */
@@ -97,6 +114,16 @@ export default function ActivityMixin(Base) {
      */
     get damageFlavor() {
       return game.i18n.localize("DND5E.DamageRoll");
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Active effect that granted this activity as a rider.
+     * @type {ActiveEffect5e|null}
+     */
+    get dependentOrigin() {
+      return this.item.effects.get(this.flags?.dnd5e?.dependentOn) ?? null;
     }
 
     /* -------------------------------------------- */
@@ -140,65 +167,6 @@ export default function ActivityMixin(Base) {
     /* -------------------------------------------- */
 
     /**
-     * Configuration data for an activity usage being prepared.
-     *
-     * @typedef {object} ActivityUseConfiguration
-     * @property {object|false} create
-     * @property {boolean} create.measuredTemplate     Should this item create a template?
-     * @property {object} concentration
-     * @property {boolean} concentration.begin         Should this usage initiate concentration?
-     * @property {string|null} concentration.end       ID of an active effect to end concentration on.
-     * @property {object|false} consume
-     * @property {boolean} consume.action              Should action economy be tracked? Currently only handles
-     *                                                 legendary actions.
-     * @property {boolean|number[]} consume.resources  Set to `true` or `false` to enable or disable all resource
-     *                                                 consumption or provide a list of consumption target indexes
-     *                                                 to only enable those targets.
-     * @property {boolean} consume.spellSlot           Should this spell consume a spell slot?
-     * @property {Event} event                         The browser event which triggered the item usage, if any.
-     * @property {boolean|number} scaling              Number of steps above baseline to scale this usage, or `false` if
-     *                                                 scaling is not allowed.
-     * @property {object} spell
-     * @property {number} spell.slot                   The spell slot to consume.
-     * @property {boolean} [subsequentActions=true]    Trigger subsequent actions defined by this activity.
-     * @property {object} [cause]
-     * @property {string} [cause.activity]             Relative UUID to the activity that caused this one to be used.
-     *                                                 Activity must be on the same actor as this one.
-     * @property {boolean|number[]} [cause.resources]  Control resource consumption on linked item.
-     */
-
-    /**
-     * Data for the activity activation configuration dialog.
-     *
-     * @typedef {object} ActivityDialogConfiguration
-     * @property {boolean} [configure=true]  Display a configuration dialog for the item usage, if applicable?
-     * @property {typeof ActivityUsageDialog} [applicationClass]  Alternate activation dialog to use.
-     * @property {object} [options]          Options passed through to the dialog.
-     */
-
-    /**
-     * Message configuration for activity usage.
-     *
-     * @typedef {object} ActivityMessageConfiguration
-     * @property {boolean} [create=true]     Whether to automatically create a chat message (if true) or simply return
-     *                                       the prepared chat message data (if false).
-     * @property {object} [data={}]          Additional data used when creating the message.
-     * @property {boolean} [hasConsumption]  Was consumption available during activation.
-     * @property {string} [rollMode]         The roll display mode with which to display (or not) the card.
-     */
-
-    /**
-     * Details of final changes performed by the usage.
-     *
-     * @typedef {object} ActivityUsageResults
-     * @property {ActiveEffect5e[]} effects              Active effects that were created or deleted.
-     * @property {ChatMessage5e|object} message          The chat message created for the activation, or the message
-     *                                                   data if `create` in ActivityMessageConfiguration was `false`.
-     * @property {MeasuredTemplateDocument[]} templates  Created measured templates.
-     * @property {ActivityUsageUpdates} updates          Updates to the actor & items.
-     */
-
-    /**
      * Activate this activity.
      * @param {ActivityUseConfiguration} usage        Configuration info for the activation.
      * @param {ActivityDialogConfiguration} dialog    Configuration info for the usage dialog.
@@ -233,10 +201,7 @@ export default function ActivityMixin(Base) {
           flags: {
             dnd5e: {
               ...this.messageFlags,
-              messageType: "usage",
-              use: {
-                effects: this.applicableEffects?.map(e => e.id)
-              }
+              messageType: "usage"
             }
           }
         },
@@ -307,6 +272,8 @@ export default function ActivityMixin(Base) {
 
       // Trigger any primary action provided by this activity
       if ( usageConfig.subsequentActions !== false ) {
+        const consumed = this.createConsumedFlag(this.actor, updates);
+        if ( consumed ) item.updateSource({ "flags.dnd5e.consumed": consumed });
         activity._triggerSubsequentActions(usageConfig, results);
       }
 
@@ -375,14 +342,8 @@ export default function ActivityMixin(Base) {
     /* -------------------------------------------- */
 
     /**
-     * @typedef ActivityConsumptionDescriptor
-     * @property {{ keyPath: string, delta: number }[]} actor                 Changes for the actor.
-     * @property {Record<string, { keyPath: string, delta: number }[]>} item  Changes for each item grouped by ID.
-     */
-
-    /**
      * Refund previously used consumption for an activity.
-     * @param {ActivityConsumptionDescriptor} consumed  Data on the consumption that occurred.
+     * @param {ActorDeltasData} consumed  Data on the consumption that occurred.
      */
     async refund(consumed) {
       const updates = {
@@ -418,41 +379,17 @@ export default function ActivityMixin(Base) {
     /**
      * Merge activity updates into the appropriate item updates and apply.
      * @param {ActivityUsageUpdates} updates
-     * @returns {ActivityConsumptionDescriptor}  Information on consumption performed to store in message flag.
+     * @returns {ActorDeltasData}  Information on consumption performed to store in message flag.
      */
     async #applyUsageUpdates(updates) {
       this._mergeActivityUpdates(updates);
 
       // Ensure no existing items are created again & no non-existent items try to be deleted
-      updates.create = updates.create?.filter(i => !this.actor.items.has(i));
+      updates.create = updates.create?.filter(i => !this.actor.items.has(i._id));
       updates.delete = updates.delete?.filter(i => this.actor.items.has(i));
 
       // Create the consumed flag
-      const getDeltas = (document, updates) => {
-        updates = foundry.utils.flattenObject(updates);
-        return Object.entries(updates).map(([keyPath, value]) => {
-          let currentValue;
-          if ( keyPath.startsWith("system.activities") ) {
-            const [id, ...kp] = keyPath.slice(18).split(".");
-            currentValue = foundry.utils.getProperty(document.system.activities?.get(id) ?? {}, kp.join("."));
-          } else currentValue = foundry.utils.getProperty(document, keyPath);
-          const delta = value - currentValue;
-          if ( delta && !Number.isNaN(delta) ) return { keyPath, delta };
-          return null;
-        }).filter(_ => _);
-      };
-      const consumed = {
-        actor: getDeltas(this.actor, updates.actor),
-        item: updates.item.reduce((obj, { _id, ...changes }) => {
-          const deltas = getDeltas(this.actor.items.get(_id), changes);
-          if ( deltas.length ) obj[_id] = deltas;
-          return obj;
-        }, {})
-      };
-      if ( foundry.utils.isEmpty(consumed.actor) ) delete consumed.actor;
-      if ( foundry.utils.isEmpty(consumed.item) ) delete consumed.item;
-      if ( updates.create?.length ) consumed.created = updates.create;
-      if ( updates.delete?.length ) consumed.deleted = updates.delete.map(i => this.actor.items.get(i).toObject());
+      const consumed = ActorDeltasField.getDeltas(this.actor, updates);
 
       // Update documents with consumption
       if ( !foundry.utils.isEmpty(updates.actor) ) await this.actor.update(updates.actor);
@@ -485,7 +422,9 @@ export default function ActivityMixin(Base) {
 
       const ignoreLinkedConsumption = this.isSpell && !this.consumption.spellSlot;
       if ( config.consume !== false ) {
-        const hasActionConsumption = this.activation.type === "legendary";
+        const activationConfig = CONFIG.DND5E.activityActivationTypes[this.activation.type] ?? {};
+        const hasActionConsumption = activationConfig.consume
+          && (activationConfig.consume.canConsume?.(this) !== false);
         const hasResourceConsumption = this.consumption.targets.length > 0;
         const hasLinkedConsumption = (linked?.consumption.targets.length > 0) && !ignoreLinkedConsumption;
         const hasSpellSlotConsumption = this.requiresSpellSlot && this.consumption.spellSlot;
@@ -581,18 +520,6 @@ export default function ActivityMixin(Base) {
     /* -------------------------------------------- */
 
     /**
-     * Update data produced by activity usage.
-     *
-     * @typedef {object} ActivityUsageUpdates
-     * @property {object} activity  Updates applied to activity that performed the activation.
-     * @property {object} actor     Updates applied to the actor that performed the activation.
-     * @property {object[]} create  Full data for Items to create (with IDs maintained).
-     * @property {string[]} delete  IDs of items to be deleted from the actor.
-     * @property {object[]} item    Updates applied to items on the actor that performed the activation.
-     * @property {Roll[]} rolls     Any rolls performed as part of the activation.
-     */
-
-    /**
      * Calculate changes to actor, items, & this activity based on resource consumption.
      * @param {ActivityUseConfiguration} config                  Usage configuration.
      * @param {object} [options={}]
@@ -606,25 +533,29 @@ export default function ActivityMixin(Base) {
       if ( config.consume === false ) return updates;
       const errors = [];
 
-      // Handle action economy
-      if ( ((config.consume === true) || config.consume.action) && (this.activation.type === "legendary") ) {
-        const containsLegendaryConsumption = this.consumption.targets
-          .find(t => (t.type === "attribute") && (t.target === "resources.legact.value"));
+      // Handle auto consumption.
+      const activationConfig = CONFIG.DND5E.activityActivationTypes[this.activation.type];
+      if ( ((config.consume === true) || config.consume.action) && activationConfig?.consume ) {
+        const { property } = activationConfig.consume;
+        const valueProperty = `${property}.value`;
+        const containsConsumption = this.consumption.targets.find(t => {
+          return (t.type === "attribute") && (t.target === valueProperty);
+        });
         const count = this.activation.value ?? 1;
-        const legendary = this.actor.system.resources?.legact;
-        if ( legendary && !containsLegendaryConsumption ) {
+        const current = foundry.utils.getProperty(this.actor.system, property);
+        if ( current && !containsConsumption ) {
           let message;
-          if ( legendary.value === 0 ) message = "DND5E.ACTIVATION.Warning.NoActions";
-          else if ( count > legendary.value ) message = "DND5E.ACTIVATION.Warning.NotEnoughActions";
+          if ( current.value < 1 ) message = "DND5E.ACTIVATION.Warning.NoActions";
+          else if ( count > current.value ) message = "DND5E.ACTIVATION.Warning.NotEnoughActions";
           if ( message ) {
             const err = new ConsumptionError(game.i18n.format(message, {
-              type: game.i18n.localize("DND5E.LegendaryAction.Label"),
+              type: activationConfig.label,
               required: formatNumber(count),
-              available: formatNumber(legendary.value)
+              available: formatNumber(current.value)
             }));
             errors.push(err);
           } else {
-            updates.actor["system.resources.legact.spent"] = legendary.spent + count;
+            updates.actor[`system.${property}.spent`] = current.spent + count;
           }
         }
       }
@@ -677,10 +608,9 @@ export default function ActivityMixin(Base) {
       // Handle spell slot consumption
       else if ( ((config.consume === true) || config.consume.spellSlot)
         && this.requiresSpellSlot && this.consumption.spellSlot ) {
-        const { method } = this.item.system.preparation;
-        const spellcasting = CONFIG.DND5E.spellcasting[method];
+        const spellcasting = CONFIG.DND5E.spellcasting[this.item.system.method];
         const effectiveLevel = this.item.system.level + (config.scaling ?? 0);
-        const slot = config.spell?.slot ?? spellcasting?.getSpellSlotKey(effectiveLevel) ?? method;
+        const slot = config.spell?.slot ?? spellcasting?.getSpellSlotKey(effectiveLevel) ?? this.item.system.method;
         const slotData = this.actor.system.spells?.[slot];
         if ( slotData ) {
           if ( slotData.value ) {
@@ -785,17 +715,11 @@ export default function ActivityMixin(Base) {
      */
     _finalizeMessageConfig(usageConfig, messageConfig, results) {
       messageConfig.data.rolls = (messageConfig.data.rolls ?? []).concat(results.updates.rolls);
+      const effects = this.applicableEffects?.map(e => e.id);
+      if ( effects ) foundry.utils.setProperty(messageConfig.data, "flags.dnd5e.use.effects", effects);
     }
 
     /* -------------------------------------------- */
-
-    /**
-     * @typedef {object} ActivityUsageChatButton
-     * @property {string} label    Label to display on the button.
-     * @property {string} icon     Icon to display on the button.
-     * @property {string} classes  Classes for the button.
-     * @property {object} dataset  Data attributes attached to the button.
-     */
 
     /**
      * Create the buttons that will be displayed in chat.
@@ -1066,8 +990,11 @@ export default function ActivityMixin(Base) {
      * @param {ChatMessage5e} message  Message associated with the activation.
      */
     async #onChatAction(event, target, message) {
+      const consumed = this.createConsumedFlag(message.getAssociatedActor(), message.getFlag("dnd5e", "use.consumed"));
       const scaling = message.getFlag("dnd5e", "scaling") ?? 0;
-      const item = scaling ? this.item.clone({ "flags.dnd5e.scaling": scaling }, { keepId: true }) : this.item;
+      const item = (consumed || scaling) ? this.item.clone({
+        "flags.dnd5e": { consumed, scaling }
+      }, { keepId: true }) : this.item;
       const activity = item.system.activities.get(this.id);
 
       const action = target.dataset.action;
@@ -1187,6 +1114,28 @@ export default function ActivityMixin(Base) {
     /* -------------------------------------------- */
 
     /**
+     * Retrieve consumed flag for given update data.
+     * @param {Actor5e} actor
+     * @type {ActivityUsageUpdates|ActorDeltasData} updates
+     * @returns {{ hd: string }|void}
+     */
+    createConsumedFlag(actor, updates) {
+      if ( !actor || !updates ) return;
+      const hitDice = Object.entries(updates.item ?? [])
+        .reduce((obj, [id, changes]) => {
+          const hdChange = changes.find?.(c => (c.keyPath === "system.hd.spent") && (c.delta > 0))
+            ?? foundry.utils.getProperty(changes, "system.hd.spent");
+          const hdDenom = actor.items.get(changes._id ?? id)?.system.hd.denomination;
+          if ( hdChange && hdDenom ) obj[hdDenom] = (obj[hdDenom] ?? 0) + 1;
+          return obj;
+        }, {});
+      if ( foundry.utils.isEmpty(hitDice) ) return;
+      return { hd: Object.entries(hitDice).map(([d, n]) => `${n}${d}`).join(" + ") };
+    }
+
+    /* -------------------------------------------- */
+
+    /**
      * Prepare activity favorite data.
      * @returns {Promise<FavoriteData5e>}
      */
@@ -1225,8 +1174,20 @@ export default function ActivityMixin(Base) {
     getRollData(options) {
       const rollData = this.item.getRollData(options);
       rollData.activity = { ...this };
+      rollData.consumed = this.item.flags.dnd5e?.consumed;
       rollData.mod = this.actor?.system.abilities?.[this.ability]?.mod ?? 0;
       return rollData;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Get the best matched token from which this activity is being used if one can be found for this actor
+     * in the current scene.
+     * @returns {TokenDocument|void}
+     */
+    getUsageToken() {
+      return getSceneTargets(this.actor)[0]?.document;
     }
 
     /* -------------------------------------------- */
@@ -1249,10 +1210,21 @@ export default function ActivityMixin(Base) {
     /*  Importing and Exporting                     */
     /* -------------------------------------------- */
 
+    /**
+     * Can an activity of this type be added to the provided item?
+     * @param {Item5e} item  Candidate item to which the activity might be added.
+     * @returns {boolean}    Should this activity be available?
+     */
+    static availableForItem(item) {
+      return true;
+    }
+
+    /* -------------------------------------------- */
+
     /** @override */
     static _createDialogTypes(parent) {
       return Object.entries(CONFIG.DND5E.activityTypes)
-        .filter(([, { configurable }]) => configurable !== false)
+        .filter(([, c]) => (c.configurable !== false) && c.documentClass.availableForItem(parent))
         .map(([k]) => k);
     }
   }

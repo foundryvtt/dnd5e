@@ -66,7 +66,7 @@ system:
   uses:
     spent: 0
     recovery: []
-    autoDestroy: false
+    autoDestroy: true
     max: '1'
   description:
     value: >-
@@ -79,7 +79,7 @@ system:
     revision: 1
     rules: '2024'
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
   identified: true
   unidentified:
     description: ''
@@ -119,11 +119,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1746464464099
+  modifiedTime: 1757446597472
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 200000

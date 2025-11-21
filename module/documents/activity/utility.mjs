@@ -1,11 +1,17 @@
 import UtilitySheet from "../../applications/activity/utility-sheet.mjs";
-import UtilityActivityData from "../../data/activity/utility-data.mjs";
+import BaseUtilityActivityData from "../../data/activity/utility-data.mjs";
 import ActivityMixin from "./mixin.mjs";
+
+/**
+ * @import {
+ *   BasicRollDialogConfiguration, BasicRollMessageConfiguration, BasicRollProcessConfiguration
+ * } from "../../dice/_types.mjs";
+ */
 
 /**
  * Generic activity for applying effects and rolling an arbitrary die.
  */
-export default class UtilityActivity extends ActivityMixin(UtilityActivityData) {
+export default class UtilityActivity extends ActivityMixin(BaseUtilityActivityData) {
   /* -------------------------------------------- */
   /*  Model Configuration                         */
   /* -------------------------------------------- */
@@ -21,6 +27,7 @@ export default class UtilityActivity extends ActivityMixin(UtilityActivityData) 
       type: "utility",
       img: "systems/dnd5e/icons/svg/activity/utility.svg",
       title: "DND5E.UTILITY.Title",
+      hint: "DND5E.UTILITY.Hint",
       sheetClass: UtilitySheet,
       usage: {
         actions: {

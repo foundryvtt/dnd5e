@@ -9,7 +9,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: ''
     license: CC-BY-4.0
     rules: '2014'
@@ -94,8 +94,10 @@ system:
         - fey
       match:
         attacks: false
+        disposition: true
         proficiency: false
         saves: false
+        ability: ''
       profiles:
         - count: 1 * floor((@item.level - 1) / 2)
           cr: '2'
@@ -157,11 +159,11 @@ effects: []
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.350'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.2.0
   createdTime: 1725037345541
-  modifiedTime: 1725992716427
+  modifiedTime: 1760981531391
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!1Drt0SHxbEAHxprN'

@@ -5,12 +5,16 @@ import CurrencyTemplate from "../../shared/currency.mjs";
 const { HTMLField, SchemaField } = foundry.data.fields;
 
 /**
+ * @import { CurrencyTemplateData } from "../../shared/_types.mjs";
+ * @import { GroupTemplateData } from "./_types.mjs";
+ */
+
+/**
  * A template for all actors that contain collections of other actors.
+ * @extends {ActorDataModel<CurrencyTemplate & GroupTemplateData>}
  * @mixes CurrencyTemplate
- *
- * @property {object} description
- * @property {string} description.full           Description of this group.
- * @property {string} description.summary        Summary description (currently unused).
+ * @mixes GroupTemplateData
+ * @mixin
  */
 export default class GroupTemplate extends ActorDataModel.mixin(CurrencyTemplate) {
   /** @inheritDoc */
@@ -60,10 +64,11 @@ export default class GroupTemplate extends ActorDataModel.mixin(CurrencyTemplate
    */
   async placeMembers() {
     if ( !game.user.isGM || !canvas.scene ) return;
-    const minimized = !this.parent.sheet._minimized;
+    const members = await this.getPlaceableMembers();
+    if ( !members.some(m => m.quantity.value) ) return;
+    const minimized = !this.parent.sheet.minimized;
     await this.parent.sheet.minimize();
     const tokensData = [];
-    const members = await this.getPlaceableMembers();
 
     try {
       const placements = await TokenPlacement.place({
@@ -79,6 +84,12 @@ export default class GroupTemplate extends ActorDataModel.mixin(CurrencyTemplate
         if ( appendNumber ) TokenPlacement.adjustAppendedNumber(tokenDocument, placement);
         tokensData.push(tokenDocument.toObject());
       }
+    } catch(err) {
+      Hooks.onError("GroupTemplate#placeMembers", err, {
+        msg: game.i18n.localize("DND5E.Group.Warning.PlaceMembers"),
+        log: "error",
+        notify: "error"
+      });
     } finally {
       if ( minimized ) this.parent.sheet.maximize();
     }

@@ -2,16 +2,7 @@ import { formatNumber } from "../../utils.mjs";
 import Dialog5e from "../../applications/api/dialog.mjs";
 
 /**
- * @typedef BastionTurnResult
- * @property {string} [order]             The order that was completed, if any.
- * @property {number} [gold]              Gold generated.
- * @property {BastionTurnItem[]} [items]  Items created.
- */
-
-/**
- * @typedef BastionTurnItem
- * @property {string} uuid      The UUID of the generated Item.
- * @property {number} quantity  The quantity of items generated.
+ * @import { BastionTurnItem, BastionTurnResult } from "../_types.mjs";
  */
 
 /**

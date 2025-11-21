@@ -5,18 +5,13 @@ import { ActorDeltasField } from "./fields/deltas-field.mjs";
 const { DocumentIdField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @import { ActorDeltasData } from "./fields/deltas-field.mjs";
+ * @import { TurnMessageSystemData } from "./_types.mjs";
  */
 
 /**
  * Data stored in a combat turn chat message.
- *
- * @property {ActivationsData} activations  Activities that can be used with these periods, stored as relative UUIDs.
- * @property {ActorDeltasData} deltas       Actor/item recovery from this turn change.
- * @property {object} origin
- * @property {string} origin.combat         ID of the triggering combat.
- * @property {string} origin.combatant      ID of the relevant combatant within the combat.
- * @property {Set<string>} periods          Combat state change that triggered this message.
+ * @extends {ChatMessageDataModel<TurnMessageSystemData>}
+ * @mixes TurnMessageSystemData
  */
 export default class TurnMessageData extends ChatMessageDataModel {
 

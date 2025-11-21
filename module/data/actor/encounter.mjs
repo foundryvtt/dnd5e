@@ -4,18 +4,13 @@ import FormulaField from "../fields/formula-field.mjs";
 const { ArrayField, DocumentUUIDField, NumberField, SchemaField } = foundry.data.fields;
 
 /**
- * @typedef EncounterMemberData
- * @property {string} uuid                The UUID to the Actor.
- * @property {object} quantity
- * @property {number} quantity.value      Number of this actor in the group.
- * @property {string} [quantity.formula]  Formula used for re-rolling actor quantities in encounters.
+ * @import { EncounterActorSystemData } from "./_types.mjs";
  */
 
 /**
  * An Actor that represents a collection of adversaries.
- * @extends {GroupTemplate}
- *
- * @property {EncounterMemberData[]} members  Members of the encounter.
+ * @extends {GroupTemplate<EncounterActorSystemData>}
+ * @mixes EncounterActorSystemData
  */
 export default class EncounterData extends GroupTemplate {
   /** @inheritDoc */
@@ -79,21 +74,23 @@ export default class EncounterData extends GroupTemplate {
   /* -------------------------------------------- */
 
   /**
-   * Add a new member to the group.
-   * @param {Actor5e} actor       The actor to add.
+   * Add new members to the group.
+   * @param {...Actor5e} actors   The actors to add.
    * @returns {Promise<Actor5e>}  The updated encounter Actor.
    */
-  async addMember(actor) {
-    if ( actor.type !== "npc" ) throw new Error("Only NPC actors can be part of encounters.");
-    let existing = false;
+  async addMember(...actors) {
     const members = this.toObject().members;
-    for ( const member of members ) {
-      if ( (member.uuid === actor.uuid) && member.quantity?.value ) {
-        member.quantity.value++;
-        existing = true;
+    for ( const actor of actors ) {
+      if ( actor.type !== "npc" ) throw new Error("Only NPC actors can be part of encounters.");
+      let existing = false;
+      for ( const member of members ) {
+        if ( (member.uuid === actor.uuid) && member.quantity?.value ) {
+          member.quantity.value++;
+          existing = true;
+        }
       }
+      if ( !existing ) members.push({ uuid: actor.uuid });
     }
-    if ( !existing ) members.push({ uuid: actor.uuid });
     return this.parent.update({ "system.members": members });
   }
 
@@ -143,7 +140,7 @@ export default class EncounterData extends GroupTemplate {
     }
 
     return Array.from(members.entries().map(([id, { collection, ...data }]) => {
-      return { actor: collection.get(id), ...data };
+      return { actor: collection.get(id), ...foundry.utils.deepClone(data) };
     }).filter(d => d.actor));
   }
 
@@ -153,6 +150,11 @@ export default class EncounterData extends GroupTemplate {
   async getPlaceableMembers() {
     return Promise.all((await this.getMembers()).map(async member => {
       member.actor = await dnd5e.documents.Actor5e.fetchExisting(member.actor.uuid);
+      if ( (member.quantity.value === null) && member.quantity.formula ) {
+        const roll = new Roll(member.quantity.formula);
+        await roll.evaluate();
+        if ( roll.total > 0 ) member.quantity.value = roll.total;
+      }
       return member;
     }));
   }
@@ -186,14 +188,16 @@ export default class EncounterData extends GroupTemplate {
   /* -------------------------------------------- */
 
   /**
-   * Roll the quantity formulas for each member and replace their quantity. Any entries without formulas will not be
-   * modified.
+   * Roll the quantity formulas for each member and replace their quantity. Any entries without formulas
+   * will not be modified.
+   * @param {object} [options={}]
+   * @param {number} [options.index]  Index of a specific member to roll.
    * @returns {Promise<Actor5e>}
    */
-  async rollQuantities() {
+  async rollQuantities({ index }={}) {
     const membersCollection = this.toObject().members;
-    await Promise.all(membersCollection.map(async member => {
-      if ( !member.quantity?.formula ) return member;
+    await Promise.all(membersCollection.map(async (member, i) => {
+      if ( !member.quantity?.formula || ((index !== undefined) && (index !== i)) ) return member;
       const roll = new Roll(member.quantity.formula);
       await roll.evaluate();
       if ( roll.total > 0 ) member.quantity.value = roll.total;

@@ -3,9 +3,13 @@ import LocalDocumentField from "../fields/local-document-field.mjs";
 const { DocumentUUIDField } = foundry.data.fields;
 
 /**
+ * @import { SubclassAdvancementValueData } from "./_types.mjs";
+ */
+
+/**
  * Value data for Subclass advancement.
- * @property {Item5e} document  Copy of the subclass on the actor.
- * @property {string} uuid      UUID of the remote subclass source.
+ * @extends {foundry.abstract.DataModel<SubclassAdvancementValueData>}
+ * @mixes SubclassAdvancementValueData
  */
 export class SubclassValueData extends foundry.abstract.DataModel {
   /** @override */

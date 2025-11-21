@@ -10,28 +10,22 @@ import ItemTypeField from "./fields/item-type-field.mjs";
 const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @import { ItemTypeData } from "./fields/item-type-field.mjs";
+ * @import { FeatItemSystemData } from "./_types.mjs";
+ * @import {
+ *   ActivitiesTemplateData, AdvancementTemplateData, ItemDescriptionTemplateData, ItemTypeTemplateData
+ * } from "./templates/_types.mjs";
  */
 
 /**
  * Data definition for Feature items.
- * @mixes ActivitiesTemplate
- * @mixes AdvancementTemplate
- * @mixes ItemDescriptionTemplate
- * @mixes ItemTypeTemplate
- *
- * @property {number} cover                         Amount of cover this feature affords to its crew on a vehicle.
- * @property {boolean} crewed                       Is this vehicle feature currently crewed?
- * @property {object} enchant
- * @property {string} enchant.max                   Maximum number of items that can have this enchantment.
- * @property {string} enchant.period                Frequency at which the enchantment can be swapped.
- * @property {object} prerequisites
- * @property {Set<string>} prerequisites.items      Items that must be taken first before this item.
- * @property {number} prerequisites.level           Character or class level required to choose this feature.
- * @property {boolean} prerequisites.repeatable     Can this item be selected more than once?
- * @property {Set<string>} properties               General properties of a feature item.
- * @property {string} requirements                  Actor details required to use this feature.
- * @property {Omit<ItemTypeData, "baseItem">} type  Feature type and subtype.
+ * @extends {ItemDataModel<
+ *   ActivitiesTemplate & AdvancementTemplate & ItemDescriptionTemplate & ItemTypeTemplate & FeatItemSystemData
+ * >}
+ * @mixes ActivitiesTemplateData
+ * @mixes AdvancementTemplateData
+ * @mixes ItemDescriptionTemplateData
+ * @mixes ItemTypeTemplateData
+ * @mixes FeatItemSystemData
  */
 export default class FeatData extends ItemDataModel.mixin(
   ActivitiesTemplate, AdvancementTemplate, ItemDescriptionTemplate, ItemTypeTemplate
@@ -56,7 +50,7 @@ export default class FeatData extends ItemDataModel.mixin(
         period: new StringField()
       }),
       prerequisites: new SchemaField({
-        items: new SetField(new IdentifierField()),
+        items: new SetField(new IdentifierField({ allowType: true })),
         level: new NumberField({ integer: true, min: 0 }),
         repeatable: new BooleanField()
       }),
@@ -136,69 +130,58 @@ export default class FeatData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
-  /*  Data Preparation                            */
+  /*  Properties                                  */
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  prepareDerivedData() {
-    super.prepareDerivedData();
-    this.prepareDescriptionData();
-
-    if ( this.type.value ) {
-      const config = CONFIG.DND5E.featureTypes[this.type.value];
-      if ( config ) this.type.label = config.subtypes?.[this.type.subtype] ?? null;
-      else this.type.label = game.i18n.localize(CONFIG.Item.typeLabels.feat);
-    }
-
-    let label;
-    const activation = this.activities.contents[0]?.activation.type;
-    if ( activation === "legendary" ) label = game.i18n.localize("DND5E.LegendaryAction.Label");
-    else if ( activation === "lair" ) label = game.i18n.localize("DND5E.LAIR.Action.Label");
-    else if ( activation === "action" && this.hasAttack ) label = game.i18n.localize("DND5E.Attack");
-    else if ( activation ) label = game.i18n.localize("DND5E.Action");
-    else label = game.i18n.localize("DND5E.Passive");
-    this.parent.labels ??= {};
-    this.parent.labels.featType = label;
+  /** @override */
+  get advancementClassLinked() {
+    return this.type.value !== "feat";
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  prepareFinalData() {
-    this.prepareFinalActivityData(this.parent.getRollData({ deterministic: true }));
+  /**
+   * Properties displayed in chat.
+   * @type {string[]}
+   */
+  get chatProperties() {
+    return [this.requirements];
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  async getFavoriteData() {
-    return foundry.utils.mergeObject(await super.getFavoriteData(), {
-      subtitle: [this.parent.labels.activation, this.parent.labels.recovery],
-      uses: this.hasLimitedUses ? this.getUsesData() : null
-    });
+  /**
+   * Properties displayed on the item card.
+   * @type {string[]}
+   */
+  get cardProperties() {
+    return [this.requirements];
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  async getSheetData(context) {
-    context.subtitles = [
-      { label: this.type.label },
-      { label: this.parent.labels.featType },
-      { label: this.requirements, value: this._source.requirements, field: this.schema.getField("requirements"),
-        placeholder: "DND5E.Requirements" }
-    ];
-
-    context.parts = ["dnd5e.details-feat", "dnd5e.field-uses"];
-    const itemTypes = CONFIG.DND5E.featureTypes[this._source.type.value];
-    if ( itemTypes ) {
-      context.itemType = itemTypes.label;
-      context.itemSubtypes = itemTypes.subtypes;
-    }
+  /**
+   * Does this feature represent a group of individual enchantments (e.g. the "Infuse Item" feature stores data about
+   * all of the character's infusions).
+   * @type {boolean}
+   */
+  get isEnchantmentSource() {
+    return CONFIG.DND5E.featureTypes[this.type?.value]?.subtypes?.[this.type?.subtype]
+      && (this.type?.subtype in CONFIG.DND5E.featureTypes.enchantment.subtypes);
   }
 
   /* -------------------------------------------- */
-  /*  Data Migrations                             */
+
+  /**
+   * The proficiency multiplier for this item.
+   * @returns {number}
+   */
+  get proficiencyMultiplier() {
+    return 1;
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -251,54 +234,66 @@ export default class FeatData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
-  /*  Properties                                  */
+  /*  Data Preparation                            */
   /* -------------------------------------------- */
 
-  /** @override */
-  get advancementClassLinked() {
-    return this.type.value !== "feat";
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    this.prepareDescriptionData();
+
+    if ( this.type.value ) {
+      const config = CONFIG.DND5E.featureTypes[this.type.value];
+      if ( config ) this.type.label = config.subtypes?.[this.type.subtype] ?? null;
+      else this.type.label = game.i18n.localize(CONFIG.Item.typeLabels.feat);
+    }
+
+    let label;
+    const activation = this.activities.contents[0]?.activation.type;
+    if ( activation === "legendary" ) label = game.i18n.localize("DND5E.LegendaryAction.Label");
+    if ( activation === "mythic" ) label = game.i18n.localize("DND5E.MythicActionLabel");
+    else if ( activation === "lair" ) label = game.i18n.localize("DND5E.LAIR.Action.Label");
+    else if ( activation === "action" && this.hasAttack ) label = game.i18n.localize("DND5E.Attack");
+    else if ( activation ) label = game.i18n.localize("DND5E.Action");
+    else label = game.i18n.localize("DND5E.Passive");
+    this.parent.labels ??= {};
+    this.parent.labels.featType = label;
   }
 
   /* -------------------------------------------- */
 
-  /**
-   * Properties displayed in chat.
-   * @type {string[]}
-   */
-  get chatProperties() {
-    return [this.requirements];
+  /** @inheritDoc */
+  prepareFinalData() {
+    this.prepareFinalActivityData(this.parent.getRollData({ deterministic: true }));
   }
 
   /* -------------------------------------------- */
 
-  /**
-   * Properties displayed on the item card.
-   * @type {string[]}
-   */
-  get cardProperties() {
-    return [this.requirements];
+  /** @inheritDoc */
+  async getFavoriteData() {
+    return foundry.utils.mergeObject(await super.getFavoriteData(), {
+      subtitle: [this.parent.labels.activation, this.parent.labels.recovery],
+      uses: this.hasLimitedUses ? this.getUsesData() : null
+    });
   }
 
   /* -------------------------------------------- */
 
-  /**
-   * Does this feature represent a group of individual enchantments (e.g. the "Infuse Item" feature stores data about
-   * all of the character's infusions).
-   * @type {boolean}
-   */
-  get isEnchantmentSource() {
-    return CONFIG.DND5E.featureTypes[this.type?.value]?.subtypes?.[this.type?.subtype]
-      && (this.type?.subtype in CONFIG.DND5E.featureTypes.enchantment.subtypes);
-  }
+  /** @inheritDoc */
+  async getSheetData(context) {
+    context.subtitles = [
+      { label: this.type.label },
+      { label: this.parent.labels.featType },
+      { label: this.requirements, value: this._source.requirements, field: this.schema.getField("requirements"),
+        placeholder: "DND5E.Requirements" }
+    ];
 
-  /* -------------------------------------------- */
-
-  /**
-   * The proficiency multiplier for this item.
-   * @returns {number}
-   */
-  get proficiencyMultiplier() {
-    return 1;
+    context.parts = ["dnd5e.details-feat", "dnd5e.field-uses"];
+    const itemTypes = CONFIG.DND5E.featureTypes[this._source.type.value];
+    if ( itemTypes ) {
+      context.itemType = itemTypes.label;
+      context.itemSubtypes = itemTypes.subtypes;
+    }
   }
 
   /* -------------------------------------------- */

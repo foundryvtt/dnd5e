@@ -1,7 +1,5 @@
 /**
- * @typedef {object} ChatMessageDataModelMetadata
- * @property {Record<string, ApplicationClickAction>} actions  Default click actions for buttons on the message.
- * @property {string} template                                 Template to use when rendering this message.
+ * @import { ChatMessageDataModelMetadata } from "./types.mjs";
  */
 
 /**

@@ -53,7 +53,7 @@ system:
     rules: '2024'
     revision: 1
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
   startingEquipment:
     - type: AND
       requiresProficiency: false
@@ -102,6 +102,13 @@ system:
       _id: QtswKbw3wDtJyho7
       group: 55QxZJqMqe2yhcIx
       sort: 650000
+    - type: currency
+      count: 9
+      key: gp
+      requiresProficiency: false
+      _id: YWOqClo8j5g8L4Ml
+      group: 55QxZJqMqe2yhcIx
+      sort: 750000
   identifier: paladin
   levels: 1
   advancement:
@@ -571,11 +578,11 @@ effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1735866297701
-  modifiedTime: 1752705867279
+  modifiedTime: 1757541629246
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

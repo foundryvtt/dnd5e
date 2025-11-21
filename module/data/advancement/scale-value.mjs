@@ -6,13 +6,16 @@ import { createCheckboxInput } from "../../applications/fields.mjs";
 const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
+ * @import {
+ *   ScaleValueAdvancementConfigurationData, ScaleValueDiceTypeData, ScaleValueNumberTypeData,
+ *   ScaleValueStringTypeData, ScaleValueTypeMetadata
+ * } from "./_types.mjs";
+ */
+
+/**
  * Data model for the Scale Value advancement type.
- *
- * @property {string} identifier        Identifier used to select this scale value in roll formulas.
- * @property {string} type              Type of data represented by this scale value.
- * @property {object} [distance]
- * @property {string} [distance.units]  If distance type is selected, the units each value uses.
- * @property {Object<string, *>} scale  Scale values for each level. Value format is determined by type.
+ * @extends {foundry.abstract.DataModel<ScaleValueAdvancementConfigurationData>}
+ * @mixes ScaleValueAdvancementConfigurationData
  */
 export class ScaleValueConfigurationData extends foundry.abstract.DataModel {
 
@@ -36,7 +39,7 @@ export class ScaleValueConfigurationData extends foundry.abstract.DataModel {
   }
 
   /* -------------------------------------------- */
-  /*  Data Migrations                             */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -83,8 +86,8 @@ export class ScaleValueEntryField extends foundry.data.fields.ObjectField {
 
 /**
  * Base scale value data type that stores generic string values.
- *
- * @property {string} value  String value.
+ * @extends {foundry.abstract.DataModel<ScaleValueStringTypeData>}
+ * @mixes ScaleValueStringTypeData
  */
 export class ScaleValueType extends foundry.abstract.DataModel {
 
@@ -105,16 +108,6 @@ export class ScaleValueType extends foundry.abstract.DataModel {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * Information on how a scale value of this type is configured.
-   *
-   * @typedef {object} ScaleValueTypeMetadata
-   * @property {string} label       Name of this type.
-   * @property {string} hint        Hint for this type shown in the scale value configuration.
-   * @property {string} identifier  Hint for the identifier for this type.
-   * @property {boolean} isNumeric  When using the default editing interface, should numeric inputs be used?
-   */
 
   /**
    * Configuration information for this scale value type.
@@ -211,8 +204,8 @@ export class ScaleValueType extends foundry.abstract.DataModel {
 
 /**
  * Scale value data type that stores numeric values.
- *
- * @property {number} value  Numeric value.
+ * @extends {ScaleValueType<ScaleValueNumberTypeData>}
+ * @mixes ScaleValueNumberTypeData
  */
 export class ScaleValueTypeNumber extends ScaleValueType {
 
@@ -251,8 +244,8 @@ export class ScaleValueTypeNumber extends ScaleValueType {
 
 /**
  * Scale value data type that stores challenge ratings.
- *
- * @property {number} value  CR value.
+ * @extends {ScaleValueType<ScaleValueNumberTypeData>}
+ * @mixes ScaleValueNumberTypeData
  */
 export class ScaleValueTypeCR extends ScaleValueTypeNumber {
 
@@ -301,9 +294,8 @@ export class ScaleValueTypeCR extends ScaleValueTypeNumber {
 
 /**
  * Scale value data type that stores dice values.
- *
- * @property {number} number  Number of dice.
- * @property {number} faces   Die faces.
+ * @extends {ScaleValueType<ScaleValueDiceTypeData>}
+ * @mixes ScaleValueDiceTypeData
  */
 export class ScaleValueTypeDice extends ScaleValueType {
 
@@ -433,8 +425,8 @@ export class ScaleValueTypeDice extends ScaleValueType {
 
 /**
  * Scale value data type that stores distance values.
- *
- * @property {number} value  Numeric value.
+ * @extends {ScaleValueType<ScaleValueNumberTypeData>}
+ * @mixes ScaleValueNumberTypeData
  */
 export class ScaleValueTypeDistance extends ScaleValueTypeNumber {
 
