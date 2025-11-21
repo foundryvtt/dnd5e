@@ -84,6 +84,39 @@ export default class CalendarData5e extends foundry.data.CalendarData {
   }
 
   /* -------------------------------------------- */
+  /*  Set Date Methods                            */
+  /* -------------------------------------------- */
+
+  /**
+   * Set the date to a specific year, month, or day. Any values not provided will remain the same.
+   * @param {object} components
+   * @param {number} [components.year]   Visible year (with `yearZero` added in).
+   * @param {number} [components.month]  Index of month.
+   * @param {number} [components.day]    Day within the month.
+   */
+  async jumpToDate({ year, month, day }) {
+    const components = { ...game.time.components };
+    year ??= components.year + this.years.yearZero;
+    month ??= components.month;
+    day ??= components.dayOfMonth;
+
+    // Subtract out year zero
+    components.year = year - this.years.yearZero;
+    const { leapYear } = this._decomposeTimeYears(this.componentsToTime(components));
+
+    // Convert days within month to day of year
+    let dayOfYear = day - 1;
+    for ( let idx=0; idx<month; idx++ ) {
+      const m = this.months.values[idx];
+      dayOfYear += leapYear ? (m.leapDays ?? m.days) : m.days;
+    }
+    components.day = dayOfYear;
+    components.month = month;
+
+    await game.time.set(components);
+  }
+
+  /* -------------------------------------------- */
   /*  Formatter Functions                         */
   /* -------------------------------------------- */
 
