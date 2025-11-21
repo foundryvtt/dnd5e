@@ -87,6 +87,13 @@ system:
       _id: YZ87ItdbDaRpBDQ2
       group: z3xcULs5Q70zNQ2D
       sort: 700000
+    - type: currency
+      count: 11
+      key: gp
+      requiresProficiency: false
+      _id: LFeGHcHHhv8YPetO
+      group: z3xcULs5Q70zNQ2D
+      sort: 800000
   identifier: monk
   levels: 1
   advancement:
@@ -567,11 +574,11 @@ effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1735866307724
-  modifiedTime: 1752705841415
+  modifiedTime: 1757541602069
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
