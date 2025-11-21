@@ -80,7 +80,14 @@ export default class MappingField extends foundry.data.fields.ObjectField {
   _validateType(value, options={}) {
     if ( foundry.utils.getType(value) !== "Object" ) throw new Error("must be an Object");
     const failure = this._validateValues(value, options);
-    if ( failure && !failure.isEmpty() ) throw failure.asError();
+    if ( failure ) {
+      const isV13 = game.release.generation < 14;
+      const empty = isV13 ? failure.isEmpty() : failure.empty;
+      if ( !empty ) {
+        if ( isV13 ) throw failure.asError();
+        throw failure;
+      }
+    }
   }
 
   /* -------------------------------------------- */
@@ -92,7 +99,10 @@ export default class MappingField extends foundry.data.fields.ObjectField {
    * @returns {DataModelValidationFailure|void}
    */
   _validateValues(value, { phase: _phase, ...options }={}) {
-    const failure = new foundry.data.validation.DataModelValidationFailure();
+    const isV13 = game.release.generation < 14;
+    const failure = isV13
+      ? new foundry.data.validation.DataModelValidationFailure()
+      : new foundry.data.validation.DataModelValidationError();
     for ( const [k, v] of Object.entries(value) ) {
       if ( k.startsWith("-=") ) continue;
       const error = this.model.validate(v, { ...options, strict: false, recursive: true });
@@ -101,7 +111,8 @@ export default class MappingField extends foundry.data.fields.ObjectField {
         if ( error.unresolved ) failure.unresolved = true;
       }
     }
-    if ( !failure.isEmpty() ) return failure;
+    const empty = isV13 ? failure.isEmpty() : failure.empty;
+    if ( !empty ) return failure;
   }
 
   /* -------------------------------------------- */
