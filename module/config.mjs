@@ -2379,6 +2379,10 @@ DND5E.movementTypes = {
     label: "DND5E.MOVEMENT.Type.Fly",
     travel: "air"
   },
+  jump: {
+    label: "DND5E.MOVEMENT.Type.Jump",
+    deriveSpeed: token => (token.actor?.system.abilities?.str.value ?? 0) / 2
+  },
   swim: {
     label: "DND5E.MOVEMENT.Type.Swim",
     travel: "water",
