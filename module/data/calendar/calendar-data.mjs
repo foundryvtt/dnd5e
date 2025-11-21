@@ -95,7 +95,7 @@ export default class CalendarData5e extends foundry.data.CalendarData {
    * @param {number} [components.day]    Day within the month.
    */
   async jumpToDate({ year, month, day }) {
-    const components = game.time.components;
+    const components = { ...game.time.components };
     year ??= components.year + this.years.yearZero;
     month ??= components.month;
     day ??= components.dayOfMonth;
@@ -111,6 +111,7 @@ export default class CalendarData5e extends foundry.data.CalendarData {
       dayOfYear += leapYear ? (m.leapDays ?? m.days) : m.days;
     }
     components.day = dayOfYear;
+    components.month = month;
 
     await game.time.set(components);
   }
