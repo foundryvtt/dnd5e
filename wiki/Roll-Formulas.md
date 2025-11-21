@@ -336,6 +336,8 @@ Items have roll data same as actors, but only while said item is owned by an act
 
 `@scaling.increase` - Scaling steps above the baseline (so a 3rd level spell cast at 3rd level would be `0`).
 
+`@consumed.hd` - A formula for any hit dice consumed by an activity (so if an activity consumed two d6 hit dice and one d10, the formula would be `2d6 + 1d10`).
+
 The most common `@item` properties are:
 
 `@item.uses.value` - The current Limited Uses available on the item.

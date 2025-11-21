@@ -707,6 +707,17 @@ Fires when summoning is complete.
 | options  | SummoningConfiguration | Configuration data for summoning behavior.     |
 
 
+## Calendar
+
+### `dnd5e.setupCalendar`
+
+Fires during the `init` step to give modules a chance to customize the calendar configuration before loading the world calendar. Returning `false` will prevent the system from setting up the calendar.
+
+### `updateWorldTime`
+
+The system introduces a few extra options to the normal `updateWorldTime` hook to track when certain points in time have passed. The `options` object for that hook has a `dnd5e.deltas` object that contains `midnights`, `middays`, `sunrises`, and `sunsets`, each of which is a number indicating how many of those times have been passed during the current time change. Positive numbers indicate a forward time advancement while negative ones indicate a reverse.
+
+
 ## Combat
 
 ### `dnd5e.preCombatRecovery`
