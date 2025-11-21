@@ -124,7 +124,8 @@ export default class GroupData extends GroupTemplate {
    */
   static #migrateTravel(source) {
     if ( !source.attributes?.movement ) return;
-    const travel = source.attributes.travel ??= { paces: {} };
+    const travel = source.attributes.travel ?? {};
+    travel.paces ??= {};
     let { pace, units, ...paces } = source.attributes.movement;
     const config = CONFIG.DND5E.movementUnits[units];
     const finalUnit = config?.type === "metric" ? "kph" : "mph";

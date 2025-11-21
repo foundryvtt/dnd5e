@@ -2431,17 +2431,20 @@ DND5E.travelPace = Object.freeze({
   slow: {
     label: "DND5E.TRAVEL.Pace.Slow",
     standard: 18,
-    multiplier: 2 / 3
+    multiplier: 2 / 3,
+    round: "down"
   },
   normal: {
     label: "DND5E.TRAVEL.Pace.Normal",
     standard: 24,
-    multiplier: 1
+    multiplier: 1,
+    round: "down"
   },
   fast: {
     label: "DND5E.TRAVEL.Pace.Fast",
     standard: 30,
-    multiplier: 4 / 3
+    multiplier: 4 / 3,
+    round: "down"
   }
 });
 preLocalize("travelPace", { key: "label" });

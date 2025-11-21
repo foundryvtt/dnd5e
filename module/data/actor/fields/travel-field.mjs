@@ -95,10 +95,13 @@ export default class TravelField extends foundry.data.fields.SchemaField {
    * @returns {number}
    */
   static applyPaceMultiplier(value, pace, unitType) {
-    if ( (unitType === "imperial")
-      && (value === CONFIG.DND5E.travelPace.normal.standard)
-      && CONFIG.DND5E.travelPace[pace]?.standard ) return CONFIG.DND5E.travelPace[pace].standard;
-    return Math.floor(value * (CONFIG.DND5E.travelPace[pace]?.multiplier ?? 1));
+    const { normal } = CONFIG.DND5E.travelPace;
+    const config = CONFIG.DND5E.travelPace[pace];
+    if ( (unitType === "imperial") && (value === normal.standard) && config?.standard ) return config.standard;
+    value *= CONFIG.DND5E.travelPace[pace]?.multiplier ?? 1;
+    if ( config?.round === "down" ) value = Math.floor(value);
+    else if ( config?.round === "up" ) value = Math.ceil(value);
+    return value;
   }
 
   /* -------------------------------------------- */

@@ -614,9 +614,11 @@
 
 /**
  * @typedef TravelPaceConfiguration
- * @property {string} label       The human-readable label.
- * @property {number} standard    The standard pace value in miles per day.
- * @property {number} multiplier  The speed up or slow down factor for this travel pace.
+ * @property {string} label              The human-readable label.
+ * @property {number} standard           The standard pace value in miles per day.
+ * @property {number} multiplier         The speed up or slow down factor for this travel pace.
+ * @property {"up"|"down"} [round]       Whether to round the result of applying the multiplier up or down. Omitting
+ *                                       this option will not round the result at all.
  */
 
 /* -------------------------------------------- */
