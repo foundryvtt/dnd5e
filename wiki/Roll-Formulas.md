@@ -1,4 +1,4 @@
-![Up to date as of 5.1.0](https://img.shields.io/static/v1?label=dnd5e&message=5.1.0&color=informational)
+![Up to date as of 5.2.0](https://img.shields.io/static/v1?label=dnd5e&message=5.2.0&color=informational)
 
 > <details><summary>To explore the data model within Foundry to find the properties detailed below, here are a few approaches:</summary>
 >
