@@ -2369,7 +2369,7 @@ preLocalize("difficultTerrainTypes", { key: "label", sort: true });
  */
 DND5E.movementTypes = {
   walk: {
-    label: "DND5E.MOVEMENT.Type.Walk"
+    label: "DND5E.MOVEMENT.Type.Speed"
   },
   burrow: {
     label: "DND5E.MOVEMENT.Type.Burrow"

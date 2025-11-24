@@ -443,10 +443,9 @@ export default class AttributesFields {
       if ( speed ) speed = Math.max(0, speed + bonus);
       this.attributes.movement[type] = speed;
       this.attributes.movement.max = Math.max(speed, this.attributes.movement.max);
-      const base = this._source.attributes.movement[type] ?? this.attributes.movement.fromSpecies?.[type];
-      slowed = speed <= (base / 2);
     }
-    this.attributes.movement.slowed = slowed;
+    const baseSpeed = this._source.attributes.movement.walk || this.attributes.movement.fromSpecies?.walk;
+    this.attributes.movement.slowed = this.attributes.movement.walk <= (simplifyBonus(baseSpeed, rollData) / 2);
   }
 
   /* -------------------------------------------- */

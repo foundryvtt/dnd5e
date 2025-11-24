@@ -13,7 +13,7 @@ export default class MovementField extends foundry.data.fields.SchemaField {
   constructor(fields={}, { initialUnits=null, ...options }={}) {
     const numberConfig = { required: true, nullable: true, min: 0, step: 0.1, initial: null };
     fields = {
-      walk: new FormulaField({ deterministic: true, label: "DND5E.MOVEMENT.Type.Walk", speed: true }),
+      walk: new FormulaField({ deterministic: true, label: "DND5E.MOVEMENT.Type.Speed", speed: true }),
       burrow: new FormulaField({ deterministic: true, label: "DND5E.MOVEMENT.Type.Burrow", speed: true }),
       climb: new FormulaField({ deterministic: true, label: "DND5E.MOVEMENT.Type.Climb", speed: true }),
       fly: new FormulaField({ deterministic: true, label: "DND5E.MOVEMENT.Type.Fly", speed: true }),
