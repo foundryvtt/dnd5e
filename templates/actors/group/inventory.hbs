@@ -3,7 +3,7 @@
     <section class="sidebar">
         {{#each members}}
         <div class="encumbrance card" data-uuid="{{ uuid }}">
-            {{> "systems/dnd5e/templates/inventory/encumbrance.hbs" }}
+            {{> "systems/dnd5e/templates/inventory/encumbrance.hbs" hidden=hiddenStats}}
             <div class="stats">
                 <div class="portrait">
                     <img src="{{ img }}" alt="{{ name }}">
@@ -12,6 +12,7 @@
                     <strong class="name">
                         <a class="rollable" data-action="showDocument" data-uuid="{{ uuid }}">{{ name }}</a>
                     </strong>
+                    {{#unless hiddenStats}}
                     <ul class="currency pills unlist">
                         {{#each system.currency}}
                         {{#if this}}
@@ -22,6 +23,7 @@
                         {{/if}}
                         {{/each}}
                     </ul>
+                    {{/unless}}
                 </div>
             </div>
         </div>
