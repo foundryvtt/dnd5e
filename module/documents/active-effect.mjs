@@ -47,6 +47,17 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /* -------------------------------------------- */
 
+  /**
+   * Active effect fields that should be redirected to another field, optionally with a compatibility warning.
+   * Optional warning object contains options passed to `foundry.utils.logCompatibilityWarning`.
+   * @type {Record<string, { key: string, [warning]: object }>}
+   */
+  static SHIM_FIELDS = {
+    "system.attributes.movement.speed": { key: "system.attributes.movement.walk" }
+  };
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "DND5E.ACTIVEEFFECT"];
 
@@ -169,6 +180,9 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /** @inheritDoc */
   apply(doc, change) {
+    // Apply shims to moved fields
+    change = this._applyChangeShim(change);
+
     // Ensure changes targeting flags use the proper types
     if ( change.key.startsWith("flags.dnd5e.") ) change = this._prepareFlagChange(doc, change);
 
@@ -277,6 +291,24 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       return;
     }
     super._applyAdd(actor, change, current, delta, changes);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Modify the provided change according to a shim an emit a warning if required.
+   * @param {EffectChangeData} change  The change being applied.
+   * @returns {EffectChangeData}
+   * @protected
+   */
+  _applyChangeShim(change) {
+    const shim = ActiveEffect5e.SHIM_FIELDS[change.key];
+    if ( !shim ) return change;
+    if ( shim.warning ) foundry.utils.logCompatibilityWarning(
+      `The active effect key "${change.key}" has been deprecated and should be changed to "${shim.key}".`,
+      shim.warning
+    );
+    return { ...change, key: shim.key };
   }
 
   /* -------------------------------------------- */
