@@ -1,6 +1,8 @@
 import EnchantSheet from "../../applications/activity/enchant-sheet.mjs";
 import EnchantUsageDialog from "../../applications/activity/enchant-usage-dialog.mjs";
 import BaseEnchantActivityData from "../../data/activity/enchant-data.mjs";
+import Item5e from "../../documents/item.mjs";
+import { getSceneTargets } from "../../utils.mjs";
 import ActivityMixin from "./mixin.mjs";
 
 /**
@@ -165,8 +167,22 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
      */
     if ( Hooks.call("dnd5e.preApplyEnchantment", item, enchantmentData, { activity: this }) === false ) return null;
 
+    // For compendium items, create on actor
+    if ( item.inCompendium ) {
+      const actor = this.actor.isOwner ? this.actor : (getSceneTargets()[0]?.actor ?? game.user.character);
+      if ( !actor ) {
+        ui.notifications.warn("DND5E.ENCHANT.Warning.NoTargetActor", { localize: true });
+        return null;
+      }
+      enchantmentData._id = foundry.utils.randomID();
+      const toCreate = await Item5e.createWithContents([item], {
+        transformAll: item => item.clone({ "flags.dnd5e.dependentOn": `.ActiveEffect.${enchantmentData._id}` })
+      });
+      [item] = await Item5e.createDocuments(toCreate, { keepId: true, parent: actor });
+    }
+
     const enchantment = await ActiveEffect.create(enchantmentData, {
-      parent: item, keepOrigin: true, chatMessageOrigin: chatMessage?.id
+      parent: item, keepId: true, keepOrigin: true, chatMessageOrigin: chatMessage?.id
     });
 
     /**
