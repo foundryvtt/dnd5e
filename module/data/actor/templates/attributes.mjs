@@ -425,7 +425,6 @@ export default class AttributesFields {
     reduction = convertLength(reduction, CONFIG.DND5E.defaultUnits.length.imperial, units);
     const bonus = simplifyBonus(this.attributes.movement.bonus, rollData);
     this.attributes.movement.max = 0;
-    let slowed = false;
     for ( const type of Object.keys(CONFIG.DND5E.movementTypes) ) {
       let speed = Math.max(0, simplifyBonus(this.attributes.movement[type], rollData) - reduction);
       if ( noMovement || (crawl && (type !== "walk")) ) speed = 0;
