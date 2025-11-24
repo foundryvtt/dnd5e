@@ -370,11 +370,18 @@
 
 /**
  * @typedef MovementTypeConfiguration
- * @property {string} label            Localized label for the movement type.
- * @property {string} [travel]         Travel type in `CONFIG.DND5E.travelTypes` to map this movement speed to. If not
- *                                     provided, then `land` is assumed.
- * @property {boolean} [walkFallback]  When this special movement type runs out, can the actor fall back to using their
- *                                     walk speed at 2x cost?
+ * @property {string} label                       Localized label for the movement type.
+ * @property {string} [travel]                    Travel type in `CONFIG.DND5E.travelTypes` to map this movement
+ *                                                speed to. If not provided, then `land` is assumed.
+ * @property {boolean} [walkFallback]             When this special movement type runs out, can the actor fall back
+ *                                                to using their walk speed at 2x cost?
+ * @property {DeriveSpeedFunction} [deriveSpeed]  Function used to derive the max action speed.
+ */
+
+/**
+ * @callback DeriveSpeedFunction
+ * @param {Token5e} token  The token attempting the movement.
+ * @returns {number}
  */
 
 /* -------------------------------------------- */

@@ -136,6 +136,8 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
         ? cost => cost
         : (cost, _from, _to, distance) => cost + distance;
     };
+    CONFIG.Token.movement.actions.jump.deriveTerrainDifficulty = () => 1;
+    CONFIG.Token.movement.actions.jump.getCostFunction = () => cost => cost;
   }
 
   /* -------------------------------------------- */
