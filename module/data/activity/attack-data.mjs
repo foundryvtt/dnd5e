@@ -344,7 +344,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
     // Add reach for melee weapons, unless the activity is explicitly specified as a ranged attack
     if ( this.validAttackTypes.has("melee") ) {
       let { reach, units } = this.item.system.range;
-      if ( !reach ) reach = convertLength(5, "ft", units);
+      if ( !reach ) reach = convertLength(5, "ft", { to: units, legacy: false }).value;
       parts.push(game.i18n.format("DND5E.RANGE.Formatted.Reach", {
         reach: formatLength(reach, units, { strict: false })
       }));
