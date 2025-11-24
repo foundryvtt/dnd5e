@@ -1,4 +1,3 @@
-import IdentifierField from "../fields/identifier-field.mjs";
 import BaseActivityData from "./base-activity.mjs";
 import AppliedEffectField from "./fields/applied-effect-field.mjs";
 
@@ -28,7 +27,6 @@ export default class BaseEnchantActivityData extends BaseActivityData {
         })
       })),
       enchant: new SchemaField({
-        identifier: new IdentifierField(),
         self: new BooleanField()
       }),
       restrictions: new SchemaField({
@@ -95,6 +93,18 @@ export default class BaseEnchantActivityData extends BaseActivityData {
   /*  Data Migration                              */
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  static migrateData(source) {
+    super.migrateData(source);
+    if ( source.enchant?.identifier ) {
+      foundry.utils.setProperty(source, "visibility.identifier", source.enchant.identifier);
+      delete source.enchant.identifier;
+    }
+    return source;
+  }
+
+  /* -------------------------------------------- */
+
   /** @override */
   static transformEffectsData(source, options) {
     const effects = [];
@@ -111,10 +121,10 @@ export default class BaseEnchantActivityData extends BaseActivityData {
   /** @override */
   static transformTypeData(source, activityData) {
     return foundry.utils.mergeObject(activityData, {
-      enchant: {
+      restrictions: source.system.enchantment?.restrictions ?? [],
+      visibility: {
         identifier: source.system.enchantment?.classIdentifier ?? ""
-      },
-      restrictions: source.system.enchantment?.restrictions ?? []
+      }
     });
   }
 }
