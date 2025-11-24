@@ -50,7 +50,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /**
    * Active effect fields that should be redirected to another field, optionally with a compatibility warning.
    * Optional warning object contains options passed to `foundry.utils.logCompatibilityWarning`.
-   * @type {Record<string, { path: string, [warning]: object }>}
+   * @type {Record<string, { key: string, [warning]: object }>}
    */
   static SHIM_FIELDS = {
     "system.attributes.movement.speed": { key: "system.attributes.movement.walk" }
