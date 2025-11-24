@@ -2679,7 +2679,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       if ( !e.origin || (e.origin === this.uuid) ) source = e.name;
       if ( !source || e.disabled || e.isSuppressed ) continue;
       const value = e.changes.reduce((n, change) => {
-        if ( change.key !== target ) return n;
+        if ( (ActiveEffect5e.SHIM_FIELDS[change.key]?.key ?? change.key) !== target ) return n;
         if ( change.mode !== CONST.ACTIVE_EFFECT_MODES.ADD ) return n;
         return n + simplifyBonus(change.value, rollData);
       }, 0);
