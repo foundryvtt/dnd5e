@@ -428,6 +428,46 @@ effects:
       lastModifiedBy: null
       exportSource: null
     _key: '!items.effects!dmgWaterRingOfEl.cN85nWiTzfGzWR7D'
+  - name: Water Focus
+    img: icons/equipment/finger/ring-cabochon-gold-purple.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgWaterRingOfEl
+    _id: T2Ca1y3uMstuVanT
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.movement.swim
+        mode: 4
+        value: '60'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.350'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      createdTime: 1759793729867
+      modifiedTime: 1759793751661
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!dmgWaterRingOfEl.T2Ca1y3uMstuVanT'
 folder: DC1x1wAm0NLFudA6
 flags:
   dnd5e:

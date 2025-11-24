@@ -424,12 +424,9 @@ export default class AttributesFields {
       ? (this.attributes.exhaustion ?? 0) * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.speed ?? 0) : 0;
     reduction = convertLength(reduction, CONFIG.DND5E.defaultUnits.length.imperial, units);
     const bonus = simplifyBonus(this.attributes.movement.bonus, rollData);
-    const field = this.schema.getField("attributes.movement");
     this.attributes.movement.max = 0;
-    let slowed = false;
-    for ( const [type, v] of Object.entries(this.attributes.movement) ) {
-      if ( !field.getField(type)?.options.speed ) continue;
-      let speed = Math.max(0, v - reduction);
+    for ( const type of Object.keys(CONFIG.DND5E.movementTypes) ) {
+      let speed = Math.max(0, simplifyBonus(this.attributes.movement[type], rollData) - reduction);
       if ( noMovement || (crawl && (type !== "walk")) ) speed = 0;
       else {
         if ( halfMovement ) speed *= 0.5;
@@ -445,10 +442,9 @@ export default class AttributesFields {
       if ( speed ) speed = Math.max(0, speed + bonus);
       this.attributes.movement[type] = speed;
       this.attributes.movement.max = Math.max(speed, this.attributes.movement.max);
-      const base = this._source.attributes.movement[type] ?? this.attributes.movement.fromSpecies?.[type];
-      slowed = speed <= (base / 2);
     }
-    this.attributes.movement.slowed = slowed;
+    const baseSpeed = this._source.attributes.movement.walk || this.attributes.movement.fromSpecies?.walk;
+    this.attributes.movement.slowed = this.attributes.movement.walk <= (simplifyBonus(baseSpeed, rollData) / 2);
   }
 
   /* -------------------------------------------- */
@@ -463,7 +459,7 @@ export default class AttributesFields {
    */
   static prepareRace(race, { force=false }={}) {
     for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) {
-      if ( !race.system.movement[key] || (!force && (this.attributes.movement[key] !== null)) ) continue;
+      if ( !race.system.movement[key] || (!force && this.attributes.movement[key]) ) continue;
       this.attributes.movement.fromSpecies ??= {};
       this.attributes.movement[key] = this.attributes.movement.fromSpecies[key] = race.system.movement[key];
     }

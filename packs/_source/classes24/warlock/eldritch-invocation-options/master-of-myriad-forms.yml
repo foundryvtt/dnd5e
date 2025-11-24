@@ -388,7 +388,7 @@ effects:
     changes:
       - key: system.attributes.movement.swim
         mode: 4
-        value: '1'
+        value: '@attributes.movement.walk'
         priority: null
     disabled: false
     duration:
@@ -405,16 +405,19 @@ effects:
     tint: '#ffffff'
     statuses: []
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.350'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1759793207379
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!phbinvMasterofMy.6SL9vuAkx7nAfS5D'
   - name: Altered Appearance

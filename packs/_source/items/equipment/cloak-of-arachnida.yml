@@ -129,7 +129,51 @@ system:
       img: ''
   attuned: false
   identifier: cloak-of-arachnida
-effects: []
+effects:
+  - name: Spider Movement and Resistance
+    img: icons/equipment/back/cloak-collared-blue-iron.webp
+    origin: Compendium.dnd5e.items.Item.VwJjuNbBf2KHMPrY
+    _id: xwfSsFuNslCeBhw5
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: poison
+        priority: null
+      - key: system.attributes.movement.climb
+        mode: 4
+        value: '@attributes.movement.walk'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.350'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      createdTime: 1759793467138
+      modifiedTime: 1759793506675
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!VwJjuNbBf2KHMPrY.xwfSsFuNslCeBhw5'
 folder: aJgMxnZED9XdoN2W
 sort: 0
 ownership:

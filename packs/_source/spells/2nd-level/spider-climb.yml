@@ -97,7 +97,47 @@ system:
 sort: 0
 flags: {}
 img: icons/magic/control/debuff-chains-blue.webp
-effects: []
+effects:
+  - name: Spider Climb
+    img: icons/magic/control/debuff-chains-blue.webp
+    origin: Compendium.dnd5e.spells.Item.KJRVzeMQXPj8Gtyx
+    _id: ePoOPQwLqzESWoGj
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.movement.climb
+        mode: 4
+        value: '@attributes.movement.walk'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.350'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      createdTime: 1759793932090
+      modifiedTime: 1759793969523
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!KJRVzeMQXPj8Gtyx.ePoOPQwLqzESWoGj'
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null

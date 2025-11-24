@@ -59,7 +59,55 @@ system:
   activities: {}
   attuned: false
   identifier: gloves-of-swimming-and-climbing
-effects: []
+effects:
+  - name: Gloves of Swimming and Climbing
+    img: icons/equipment/hand/glove-simple-leather-green.webp
+    origin: Compendium.dnd5e.items.Item.PRhtLbRLb9LjHZG7
+    _id: GER4WeaEEvX545Rj
+    type: base
+    system: {}
+    changes:
+      - key: system.skills.ath.bonuses.check
+        mode: 2
+        value: '5'
+        priority: null
+      - key: system.attributes.movement.climb
+        mode: 4
+        value: '@attributes.movement.walk'
+        priority: null
+      - key: system.attributes.movement.swim
+        mode: 4
+        value: '@attributes.movement.walk'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.350'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      createdTime: 1759793569159
+      modifiedTime: 1759793598418
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!PRhtLbRLb9LjHZG7.GER4WeaEEvX545Rj'
 folder: aJgMxnZED9XdoN2W
 sort: 0
 ownership:
