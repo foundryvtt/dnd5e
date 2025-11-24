@@ -1,3 +1,5 @@
+import FormulaField from "../fields/formula-field.mjs";
+
 const { BooleanField, NumberField, SetField, StringField } = foundry.data.fields;
 
 /**
@@ -16,6 +18,7 @@ export default class MovementField extends foundry.data.fields.SchemaField {
       fly: new NumberField({ ...numberConfig, label: "DND5E.MOVEMENT.Type.Fly", speed: true }),
       swim: new NumberField({ ...numberConfig, label: "DND5E.MOVEMENT.Type.Swim", speed: true }),
       walk: new NumberField({ ...numberConfig, label: "DND5E.MOVEMENT.Type.Walk", speed: true }),
+      bonus: new FormulaField({ deterministic: true, label: "DND5E.MOVEMENT.FIELDS.bonus.label" }),
       special: new StringField({ label: "DND5E.MOVEMENT.FIELDS.special.label" }),
       units: new StringField({
         required: true, nullable: true, blank: false, initial: initialUnits, label: "DND5E.MOVEMENT.FIELDS.units.label"

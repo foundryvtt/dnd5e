@@ -52,6 +52,7 @@
  * @property {number} fly                           Actor flying speed.
  * @property {number} swim                          Actor swimming speed.
  * @property {number} walk                          Actor walking speed.
+ * @property {string} bonus                         Bonus applied to all movement types that already have a speed.
  * @property {string} special                       Semi-colon separated list of special movement information.
  * @property {string} units                         Movement used to measure the various speeds.
  * @property {boolean} hover                        This flying creature able to hover in place.
