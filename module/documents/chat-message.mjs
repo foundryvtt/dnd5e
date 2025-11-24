@@ -588,6 +588,7 @@ export default class ChatMessage5e extends ChatMessage {
    */
   _simplifyDamageRoll(roll) {
     const { OperatorTerm, NumericTerm, DiceTerm, PoolTerm } = foundry.dice.terms;
+    const termResultClasses = ["success", "failure", "rerolled", "exploded", "discarded"];
     const aggregate = {
       type: roll.options.type, total: Math.max(0, roll.total), constant: 0, dice: [], icon: null, method: null
     };
@@ -611,10 +612,10 @@ export default class ChatMessage5e extends ChatMessage {
           const result = term.results[i];
           // Apply main result classes to individual dice
           simplified.dice.forEach(die => {
-            const resultClasses = ["success", "failure", "rerolled", "exploded", "discarded"]
-              .filter(c => !!result[c] && !die.classes.includes(c))
-              .filterJoin(" ");
-            if (resultClasses.length) die.classes += ` ${resultClasses}`;
+            const resultClasses = termResultClasses
+              .filter(c => result[c])
+              .join(" ");
+            if ( resultClasses.length ) die.classes += ` ${resultClasses}`;
           });
           aggregate.dice.push(...simplified.dice);
           aggregate.icon ??= simplified.icon;
