@@ -226,6 +226,11 @@
         font-family: var(--dnd5e-font-roboto-slab);
         font-weight: bold;
         font-size: var(--font-size-14);
+
+        a:not([data-action=showDocument]):hover {
+          cursor: var(--cursor-default);
+          text-shadow: none;
+        }
       }
 
       .classes {
@@ -268,6 +273,14 @@
       border: var(--dnd5e-border-gold);
       border-radius: 4px;
       padding-block: 8px;
+
+      .empty {
+        display: inline grid;
+        place-content: center;
+        opacity: .25;
+        font-weight: bold;
+        font-size: var(--font-size-16);
+      }
 
       .info {
         display: flex;
@@ -313,6 +326,11 @@
             color: var(--color-text-tertiary);
             font-size: var(--font-size-13);
           }
+        }
+
+        a.skill:not(.rollable):hover {
+          cursor: var(--cursor-default);
+          text-shadow: none;
         }
       }
     }
@@ -412,6 +430,15 @@
   /* -------------------------------------------- */
 
   &.tab-inventory.vehicle-inventory .window-content > .create-child { display: none; }
+
+  /* -------------------------------------------- */
+  /*  Locked                                      */
+  /* -------------------------------------------- */
+
+  &.locked {
+    .sheet-header-buttons > button, [data-action=editDescription], [data-action=award] { display: none; }
+    [data-action=changePace] { visibility: hidden; }
+  }
 }
 
 /* ---------------------------------- */

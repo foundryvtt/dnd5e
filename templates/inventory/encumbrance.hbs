@@ -8,9 +8,11 @@
         {{else}}
         <i class="fa-solid fa-weight-hanging" inert></i>
         {{/if}}
+        {{#unless ../hidden}}
         <span class="value">{{ dnd5e-numberFormat value }}</span>
         <span class="separator">&sol;</span>
         <span class="max">{{{ ifThen maxLabel maxLabel (dnd5e-numberFormat max) }}}</span>
+        {{/unless}}
     </div>
     {{#if ../hasBreakpoints}}
     <i class="breakpoint breakpoint-low arrow-up" role="presentation"></i>
