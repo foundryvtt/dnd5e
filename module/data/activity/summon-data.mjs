@@ -139,6 +139,6 @@ export default class BaseSummonActivityData extends BaseActivityData {
   _preCreate(data) {
     super._preCreate(data);
     const { match } = data ?? {};
-    if ( !("disposition" in match) ) this.updateSource({ match: { disposition: true } });
+    if ( match && !("disposition" in match) ) this.updateSource({ match: { disposition: true } });
   }
 }
