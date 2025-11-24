@@ -61,7 +61,7 @@ export default class BaseCastActivityData extends BaseActivityData {
 
   /** @inheritDoc */
   prepareSheetContext() {
-    const context = { ...super.prepareSheetContext() };
+    const context = super.prepareSheetContext();
     const cachedSpell = this.cachedSpell;
     if ( cachedSpell ) {
       const spellLabels = { ...(cachedSpell.labels ?? {}) };

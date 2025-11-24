@@ -685,7 +685,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @returns {object}
    */
   prepareSheetContext() {
-    return this;
+    return { ...this, _id: this._id };
   }
 
   /* -------------------------------------------- */
