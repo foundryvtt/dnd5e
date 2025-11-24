@@ -1,4 +1,4 @@
-![Up to date as of 5.1.0](https://img.shields.io/static/v1?label=dnd5e&message=5.1.0&color=informational)
+![Up to date as of 5.2.0](https://img.shields.io/static/v1?label=dnd5e&message=5.2.0&color=informational)
 
 This document only covers Active Effects available to the Core dnd5e System.
 
@@ -257,11 +257,11 @@ system.attributes.movement.[movementType]
 >
 > | Movement Type | Value    |
 > | ------------- | -------- |
+> | Speed/Walk    | `walk`   |
 > | Burrow        | `burrow` |
 > | Climb         | `climb`  |
 > | Fly           | `fly`    |
 > | Swim          | `swim`   |
-> | Walk          | `walk`   |
 >
 > Source: `CONFIG.DND5E.movementTypes`
 > </details>
@@ -272,15 +272,23 @@ E.g. An Item or Spell which doubles/halves/etc. an Actor's speed.
 
 | Attribute Key                               | Change Mode | Effect Value | Roll Data? |
 | ------------------------------------------- | ----------- | ------------ | ---------- |
-| `system.attributes.movement.[movementType]` | Multiply    | `[number]`   | No         |
+| `system.attributes.movement.[movementType]` | Multiply    | `[formula]`  | Yes        |
 
 
 ### Add a different Speed
-E.g. An Item or Spell which grants an Actor a flying or swimming speed.
+E.g. An Item or Spell which grants an Actor a flying or swimming speed. **Note**: Speeds can reference any speed prepared earlier (in the order of the movement types listed above). So when setting the fly speed you can use `@attributes.movement.walk` to reference the character's walk speed, but not the other way around.
 
 | Attribute Key                               | Change Mode | Effect Value | Roll Data? |
 | ------------------------------------------- | ----------- | ------------ | ---------- |
-| `system.attributes.movement.[movementType]` | Override    | `[number]`   | No         |
+| `system.attributes.movement.[movementType]` | Upgrade     | `[formula]`  | Yes        |
+
+
+### Give a bonus to all speeds
+E.g. An Feature or Spell which increases all movement speeds by a certain amount.
+
+| Attribute Key                      | Change Mode | Effect Value | Roll Data? |
+| ---------------------------------- | ----------- | ------------ | ---------- |
+| `system.attributes.movement.bonus` | Add         | `[formula]`  | Yes        |
 
 
 ### Add a type of difficult terrain to ignore

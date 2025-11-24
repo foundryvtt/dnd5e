@@ -142,7 +142,7 @@
 
 `@attributes.movement.swim` - The actor's swimming speed.
 
-`@attributes.movement.walk` - The actor's walking speed.
+`@attributes.movement.walk` or `@attributes.movement.speed` - The actor's walking speed.
 
 #### Senses
 
