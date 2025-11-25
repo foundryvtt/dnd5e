@@ -652,7 +652,7 @@ Hooks.on("preCreateScene", (doc, createData, options, userId) => {
 
 Hooks.on("updateWorldTime", (...args) => {
   dataModels.calendar.CalendarData5e.onUpdateWorldTime(...args);
-  if ( CONFIG.DND5E.calendar.application ) CONFIG.DND5E.calendar.application.onUpdateWorldTime(...args);
+  CONFIG.DND5E.calendar.application?.onUpdateWorldTime?.(...args);
 });
 
 /* -------------------------------------------- */
