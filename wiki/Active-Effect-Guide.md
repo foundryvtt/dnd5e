@@ -435,6 +435,21 @@ system.bonuses.msak.damage
 | `system.bonuses.rsak.damage` | Add         | `[formula]`  | Yes        |
 
 
+### Specifying Damage Types
+
+Damage types can be specified for bonus damage by adding them in square brackets after the dice formula. For example, to add 1d8 radiant damage to melee weapon attacks:
+
+| Attribute Key                | Change Mode | Effect Value    | Roll Data? |
+| ---------------------------- | ----------- | --------------- | ---------- |
+| `system.bonuses.mwak.damage` | Add         | `1d8[radiant]`  | Yes        |
+
+This works with any damage type and any of the attack damage bonuses (mwak, rwak, msak, rsak). Examples:
+- `1d6[fire]` - 1d6 fire damage
+- `2d4[cold]` - 2d4 cold damage
+- `1d10[necrotic]` - 1d10 necrotic damage
+- `@abilities.cha.mod[radiant]` - Charisma modifier as radiant damage (using roll data)
+
+
 ------------------------
 
 
