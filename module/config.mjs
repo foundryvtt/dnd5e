@@ -1788,7 +1788,7 @@ DND5E.featureTypes = {
     label: "DND5E.Feature.Class.Label",
     subtypes: {
       arcaneShot: "DND5E.Feature.Class.ArcaneShot",
-      artificerInfusion: "DND5E.Feature.Class.ArtificerInfusion",
+      artificerInfusion: "DND5E.Feature.Class.ArtificerPlan",
       channelDivinity: "DND5E.Feature.Class.ChannelDivinity",
       defensiveTactic: "DND5E.Feature.Class.DefensiveTactic",
       eldritchInvocation: "DND5E.Feature.Class.EldritchInvocation",
@@ -1814,7 +1814,7 @@ DND5E.featureTypes = {
   enchantment: {
     label: "DND5E.ENCHANTMENT.Label",
     subtypes: {
-      artificerInfusion: "DND5E.Feature.Class.ArtificerInfusion",
+      artificerInfusion: "DND5E.Feature.Class.ArtificerPlan",
       rune: "DND5E.Feature.Class.Rune"
     }
   },

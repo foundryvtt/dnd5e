@@ -491,6 +491,7 @@ Hooks.once("i18nInit", () => {
         racePl: game.i18n.localize("TYPES.Item.raceLegacyPl")
       },
       DND5E: {
+        "Feature.Class.ArtificerPlan": game.i18n.localize("DND5E.Feature.Class.ArtificerInfusion"),
         "Feature.Species": game.i18n.localize("DND5E.Feature.SpeciesLegacy"),
         FlagsAlertHint: game.i18n.localize("DND5E.FlagsAlertHintLegacy"),
         ItemSpeciesDetails: game.i18n.localize("DND5E.ItemSpeciesDetailsLegacy"),
