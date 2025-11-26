@@ -554,7 +554,7 @@ export default class CompendiumBrowser extends Application5e {
     else if ( partId === "filters" ) {
       context.additional = Array.from(context.filterDefinitions?.entries() ?? []).reduce((arr, [key, data]) => {
         // Special case handling for 'Feats' tab in basic mode.
-        if ( (types[0] === "feat") && ((key === "category")) ) return arr;
+        if ( (types[0] === "feat") && (key === "category") ) return arr;
 
         let sort = 0;
         switch ( data.type ) {
@@ -1041,7 +1041,8 @@ export default class CompendiumBrowser extends Application5e {
       button.ariaPressed = button.value === value;
     }
 
-    this.render({ parts: ["filters", "results"] });
+    const activeTab = this.constructor.TABS.find(t => t.tab === this.tabGroups.primary);
+    this.render({ parts: ["filters", "results"], dnd5e: { browser: { types: activeTab?.types } } });
   }
 
   /* -------------------------------------------- */
