@@ -151,10 +151,36 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
 
     const flags = { enchantmentProfile: profile };
     if ( concentration ) flags.dependentOn = concentration.uuid;
-    const applied = await ActiveEffect.create(
-      effect.clone({ origin: this.uuid, "flags.dnd5e": flags }).toObject(),
-      { parent: item, keepOrigin: true, chatMessageOrigin: chatMessage?.id }
-    );
+    const enchantmentData = effect.clone({ origin: this.uuid, "flags.dnd5e": flags }).toObject();
+
+    /**
+     * Hook that fires before an enchantment is applied to an item.
+     * @function dnd5e.preApplyEnchantment
+     * @memberof hookEvents
+     * @param {Item5e} item                Item to which the enchantment will be applied.
+     * @param {object} enchantmentData     Data for the enchantment effect that will be created.
+     * @param {object} options
+     * @param {Activity} options.activity  Enchant activity applied the enchantment.
+     * @returns {boolean}                  Explicitly return `false` to prevent enchantment from being applied.
+     */
+    if ( Hooks.call("dnd5e.preApplyEnchantment", item, enchantmentData, { activity: this }) === false ) return null;
+
+    const enchantment = await ActiveEffect.create(enchantmentData, {
+      parent: item, keepOrigin: true, chatMessageOrigin: chatMessage?.id
+    });
+
+    /**
+     * Hook that fires after an enchantment has been applied to an item.
+     * @function dnd5e.applyEnchantment
+     * @memberof hookEvents
+     * @param {Item5e} item                 Item to which the enchantment was be applied.
+     * @param {ActiveEffect5e} enchantment  The enchantment effect that was be created.
+     * @param {object} options
+     * @param {Activity} options.activity   Enchant activity applied the enchantment.
+     */
+    Hooks.callAll("dnd5e.applyEnchantment", item, enchantment, { activity: this });
+
+    return enchantment;
   }
 
   /* -------------------------------------------- */
