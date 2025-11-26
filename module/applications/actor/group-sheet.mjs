@@ -388,6 +388,15 @@ export default class GroupActorSheet extends MultiActorSheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  async _onDropActor(event, actor) {
+    await super._onDropActor(event, actor);
+    if ( actor ) actor.apps[this.id] = this;
+    return actor;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async _onDropItem(event, item) {
     const { uuid } = event.target.closest("[data-uuid]")?.dataset ?? {};
     const target = await fromUuid(uuid);
