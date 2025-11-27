@@ -38,7 +38,7 @@ This enchantment level can be used to restrict certain profiles to only certain 
 
 #### Additional Activities, Effects, & Items
 
-When enchanting profiles can be given additional activities, effects, and items that are added alongside the enchantment. The *Additional Activities* can be used to automatically add new activities to the item that is enchanted. Because enchantments can only affect the item to which they are applied, these *Additional Effects* can be used to give the item and Active Effect that changes the actor. The *Additional Items* can be used to specify additional items that are given to the actor when this enchantment is applied. All of these activities, effects, and items will be removed from the actor when the enchantment is removed.
+When enchanting, profiles can be given additional activities, effects, and items that are added alongside the enchantment. The *Additional Activities* can be used to automatically add new activities to the item that is enchanted. Because enchantments can only affect the item to which they are applied, these *Additional Effects* can be used to give the item an Active Effect that changes the actor. The *Additional Items* can be used to specify additional items that are given to the actor when this enchantment is applied. All of these activities, effects, and items will be removed from the actor when the enchantment is removed.
 
 ![Enchant Sheet - Enchantments Tab, Additional Activities, Effects, & Items](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/enchantment/enchant-enchantments-riders.jpg)
 
