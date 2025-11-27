@@ -1,4 +1,4 @@
-![Up to date as of 5.1.0](https://img.shields.io/static/v1?label=dnd5e&message=5.1.0&color=informational)
+![Up to date as of 5.2.0](https://img.shields.io/static/v1?label=dnd5e&message=5.2.0&color=informational)
 
 > <details><summary>To explore the data model within Foundry to find the properties detailed below, here are a few approaches:</summary>
 >
@@ -142,7 +142,7 @@
 
 `@attributes.movement.swim` - The actor's swimming speed.
 
-`@attributes.movement.walk` - The actor's walking speed.
+`@attributes.movement.walk` or `@attributes.movement.speed` - The actor's walking speed.
 
 #### Senses
 
@@ -335,6 +335,8 @@ Items have roll data same as actors, but only while said item is owned by an act
 `@scaling` - Current scaling of an activity when used (so a 3rd level spell cast at 3rd level would be `1`).
 
 `@scaling.increase` - Scaling steps above the baseline (so a 3rd level spell cast at 3rd level would be `0`).
+
+`@consumed.hd` - A formula for any hit dice consumed by an activity (so if an activity consumed two d6 hit dice and one d10, the formula would be `2d6 + 1d10`).
 
 The most common `@item` properties are:
 
