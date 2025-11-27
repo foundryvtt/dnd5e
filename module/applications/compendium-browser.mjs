@@ -60,6 +60,7 @@ export default class CompendiumBrowser extends Application5e {
       handler: CompendiumBrowser.#onHandleSubmit,
       closeOnSubmit: true
     },
+    hint: null,
     position: {
       width: 850,
       height: 700
@@ -580,6 +581,7 @@ export default class CompendiumBrowser extends Application5e {
       indexFields: new Set(["system.source"])
     });
     context.displaySelection = this.displaySelection;
+    context.hint = this.options.hint;
     return context;
   }
 
