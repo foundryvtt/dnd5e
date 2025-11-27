@@ -677,6 +677,28 @@ Fires after a formula has been rolled for a Utility activity.
 | data         | object          |                                       |
 | data.subject | UtilityActivity | The activity that performed the roll. |
 
+### `dnd5e.preApplyEnchantment`
+
+Fires before an enchantment is applied to an item. Returning `false` will prevent enchantment from being applied.
+
+| Name             | Type     | Description                                            |
+| ---------------- | -------- | ------------------------------------------------------ |
+| item             | Item5e   | Item to which the enchantment will be applied.         |
+| enchantmentData  | object   | Data for the enchantment effect that will be created.  |
+| options          | object   |                                                        |
+| options.activity | Activity | Enchant activity applied the enchantment.              |
+
+### `dnd5e.applyEnchantment`
+
+Fires after an enchantment has been applied to an item.
+
+| Name             | Type           | Description                                   |
+| ---------------- | -------------- | --------------------------------------------- |
+| item             | Item5e         | Item to which the enchantment was be applied. |
+| enchantment      | ActiveEffect5e | The enchantment effect that was be created.   |
+| options          | object         |                                               |
+| options.activity | Activity       | Enchant activity applied the enchantment.     |
+
 ### `dnd5e.preSummon`
 
 Fires before summoning is performed. Returning `false` will prevent summoning from occurring.
