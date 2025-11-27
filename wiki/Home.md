@@ -26,6 +26,7 @@
     - [Advancement Type: Subclass](Advancement-Type-Subclass.md)
     - [Advancement Type: Trait](Advancement-Type-Trait.md)
 - [Awards](Awards.md)
+- [Calendar](Calendar.md)
 - [Compendium Browser](Compendium-Browser.md)
 - [Dynamic Module Art](Dynamic-Module-Art.md)
 - [Enchantment](Enchantment.md)
