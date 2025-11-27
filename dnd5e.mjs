@@ -652,7 +652,6 @@ Hooks.on("preCreateScene", (doc, createData, options, userId) => {
 });
 
 Hooks.on("updateWorldTime", (...args) => {
-  if ( !game.settings.get("dnd5e", "calendarConfig")?.enabled ) return;
   dataModels.calendar.CalendarData5e.onUpdateWorldTime(...args);
   CONFIG.DND5E.calendar.application?.onUpdateWorldTime?.(...args);
 });

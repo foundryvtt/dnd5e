@@ -302,6 +302,6 @@ export default class CalendarHUD extends BaseCalendarHUD {
 
   /** @override */
   static onUpdateWorldTime(worldTime, deltaTime, options, userId) {
-    dnd5e.ui.calendar?.renderCore(options.dnd5e?.deltas);
+    if ( this.shouldDisplay ) dnd5e.ui.calendar?.renderCore(options.dnd5e?.deltas);
   }
 }
