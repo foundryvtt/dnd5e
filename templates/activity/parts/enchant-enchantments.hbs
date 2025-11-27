@@ -8,9 +8,6 @@
                 <i class="fas fa-plus"></i>
             </button>
         </legend>
-        {{#with fields.enchant.fields as |fields|}}
-        {{#unless ../activity.isSpell}}{{ formField fields.identifier value=../source.enchant.identifier }}{{/unless}}
-        {{/with}}
         <multi-select name="appliedEffects" class="hidden-tags">
             {{ selectOptions allEnchantments }}
         </multi-select>

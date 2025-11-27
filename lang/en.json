@@ -1101,7 +1101,13 @@
     "AdvanceTime": "Advance by {amount}",
     "OpenCharacterSheet": "Open Character Sheet",
     "OpenPartySheet": "Open Party Sheet",
-    "ReverseTime": "Reverse by {amount}"
+    "ReverseTime": "Reverse by {amount}",
+    "SetDate": "Set Date"
+  },
+  "Component": {
+    "Day": "Day",
+    "Month": "Month",
+    "Year": "Year"
   },
   "Configuration": {
     "DisabledMessage": "The DM must enable the calendar interface before it can be used by players.",
@@ -2299,6 +2305,7 @@
     "ConcentrationEnded": "Cannot apply this enchantment because concentration has ended.",
     "MissingProperty": "Item must have one of these properties to be enchanted: {validProperties}.",
     "NoMagicalItems": "Items that are already magical cannot be enchanted.",
+    "NoTargetActor": "Enchanting from a compendium requires an assigned character or selected token.",
     "NoSubtype": "Only {allowedType} items can be enchanted by this enchantment, but this item doesn't have a sub-type.",
     "WrongType": "{incorrectType} items cannot be enchanted by this enchantment, only {allowedType} items are allowed."
   }
@@ -2708,6 +2715,7 @@
     "Label": "Class Feature",
     "ArcaneShot": "Arcane Shot",
     "ArtificerInfusion": "Artificer Infusion",
+    "ArtificerPlan": "Artificer Plan",
     "ChannelDivinity": "Channel Divinity",
     "DefensiveTactic": "Defensive Tactic",
     "EldritchInvocation": "Eldritch Invocation",
@@ -3736,6 +3744,9 @@
     "Configure": "Configure Movement Speed"
   },
   "FIELDS": {
+    "bonus": {
+      "label": "Movement Bonus"
+    },
     "ignoredDifficultTerrain": {
       "label": "Ignored Difficult Terrain"
     },
@@ -3755,6 +3766,7 @@
     "Burrow": "Burrow",
     "Climb": "Climb",
     "Fly": "Fly",
+    "Speed": "Speed",
     "Swim": "Swim",
     "Walk": "Walk"
   }
@@ -3928,6 +3940,7 @@
 "DND5E.SkillSte": "Stealth",
 "DND5E.SkillSur": "Survival",
 "DND5E.SkillRoll": "Roll {ability} ({skill}) Check",
+"DND5E.SkillTitle": "{ability} ({skill})",
 "DND5E.SkillPromptTitle": "{ability} ({skill}) Check",
 "DND5E.SkillConfigureTitle": "Configure {skill}",
 "DND5E.SkillConfigure": "Configure Skill",
@@ -5595,7 +5608,7 @@
     "ItemHint": "Drop a class here",
     "NoValidClass": "No valid class selected, press the edit button to add a class.",
     "OptionalFeaturesCaption": "Optional Class Features",
-    "OptionalFeaturesDescription": "The following section contains options {class} features. These features are not granted automatically, and you can choose one, some, or all of them at your DM's discretion.",
+    "OptionalFeaturesDescription": "The following section contains optional {class} features. These features are not granted automatically, and you can choose one, some, or all of them at your DM's discretion.",
     "SpellSlotLevel": "Slot Level",
     "SpellSlots": "Spell Slots",
     "SpellSlotsPerSpellLevel": "—Spell Slots per Spell Level—",

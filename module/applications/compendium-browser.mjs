@@ -60,6 +60,7 @@ export default class CompendiumBrowser extends Application5e {
       handler: CompendiumBrowser.#onHandleSubmit,
       closeOnSubmit: true
     },
+    hint: null,
     position: {
       width: 850,
       height: 700
@@ -385,10 +386,7 @@ export default class CompendiumBrowser extends Application5e {
     if ( context.filters.types?.size ) dataModels = dataModels.filter(([type]) => context.filters.types.has(type));
     context.filterDefinitions = dataModels
       .map(([, d]) => d.compendiumBrowserFilters ?? new Map())
-      .reduce((first, second) => {
-        if ( !first ) return second;
-        return CompendiumBrowser.intersectFilters(first, second);
-      }, null) ?? new Map();
+      .reduce((final, second) => CompendiumBrowser.intersectFilters(second, final, context.filters), null) ?? new Map();
     context.filterDefinitions.set("source", {
       label: "DND5E.SOURCE.FIELDS.source.label",
       type: "set",
@@ -511,7 +509,7 @@ export default class CompendiumBrowser extends Application5e {
     else if ( partId === "filters" ) {
       context.additional = Array.from(context.filterDefinitions?.entries() ?? []).reduce((arr, [key, data]) => {
         // Special case handling for 'Feats' tab in basic mode.
-        if ( (types[0] === "feat") && ((key === "category") || (key === "subtype")) ) return arr;
+        if ( (types[0] === "feat") && (key === "category") ) return arr;
 
         let sort = 0;
         switch ( data.type ) {
@@ -573,7 +571,7 @@ export default class CompendiumBrowser extends Application5e {
   async _prepareResultsContext(context, options) {
     // TODO: Determine if new set of results need to be fetched, otherwise use old results and re-sort as necessary
     // Sorting changes alone shouldn't require a re-fetch, but any change to filters will
-    const filters = CompendiumBrowser.applyFilters(context.filterDefinitions, context.filters.additional);
+    const filters = CompendiumBrowser.applyFilters(context.filterDefinitions, context.filters);
     // Add the name & arbitrary filters
     if ( this.#filters.name?.length ) filters.push({ k: "name", o: "icontains", v: this.#filters.name });
     if ( context.filters.arbitrary?.length ) filters.push(...context.filters.arbitrary);
@@ -583,6 +581,7 @@ export default class CompendiumBrowser extends Application5e {
       indexFields: new Set(["system.source"])
     });
     context.displaySelection = this.displaySelection;
+    context.hint = this.options.hint;
     return context;
   }
 
@@ -998,7 +997,8 @@ export default class CompendiumBrowser extends Application5e {
       button.ariaPressed = button.value === value;
     }
 
-    this.render({ parts: ["results"] });
+    const activeTab = this.constructor.TABS.find(t => t.tab === this.tabGroups.primary);
+    this.render({ parts: ["filters", "results"], dnd5e: { browser: { types: activeTab?.types } } });
   }
 
   /* -------------------------------------------- */
@@ -1184,12 +1184,12 @@ export default class CompendiumBrowser extends Application5e {
   /**
    * Transform filter definition and additional filters values into the final filters to apply.
    * @param {CompendiumBrowserFilterDefinition} definition  Filter definition provided by type.
-   * @param {object} values                                 Values of currently selected filters.
+   * @param {CompendiumBrowserFilters} currentFilters       Values of currently selected filters.
    * @returns {FilterDescription[]}
    */
-  static applyFilters(definition, values) {
+  static applyFilters(definition, currentFilters) {
     const filters = [];
-    for ( const [key, value] of Object.entries(values ?? {}) ) {
+    for ( const [key, value] of Object.entries(currentFilters.additional ?? {}) ) {
       const def = definition.get(key);
       if ( !def ) continue;
       if ( foundry.utils.getType(def.createFilter) === "function" ) {
@@ -1207,7 +1207,8 @@ export default class CompendiumBrowser extends Application5e {
           if ( Number.isFinite(max) ) filters.push({ k: def.config.keyPath, o: "lte", v: max });
           break;
         case "set":
-          const choices = foundry.utils.deepClone(def.config.choices);
+          const choices = foundry.utils.getType(def.config.choices) === "function"
+            ? def.config.choices(currentFilters) : foundry.utils.deepClone(def.config.choices);
           if ( def.config.blank ) choices._blank = "";
           const [positive, negative] = Object.entries(value ?? {}).reduce(([positive, negative], [k, v]) => {
             if ( k in choices ) {
@@ -1263,19 +1264,23 @@ export default class CompendiumBrowser extends Application5e {
   /**
    * Take two filter sets and find only the filters that match between the two.
    * @param {CompendiumBrowserFilterDefinition} first
-   * @param {CompendiumBrowserFilterDefinition>} second
+   * @param {CompendiumBrowserFilterDefinition} [second]
+   * @param {CompendiumBrowserFilters} [currentFilters]
    * @returns {CompendiumBrowserFilterDefinition}
    */
-  static intersectFilters(first, second) {
+  static intersectFilters(first, second, currentFilters) {
     const final = new Map();
 
     // Iterate over all keys in first map
     for ( const [key, firstConfig] of first.entries() ) {
-      const secondConfig = second.get(key);
-      if ( firstConfig.type !== secondConfig?.type ) continue;
+      const secondConfig = second?.get(key);
+      if ( secondConfig?.type && (firstConfig.type !== secondConfig.type) ) continue;
       const finalConfig = foundry.utils.deepClone(firstConfig);
+      if ( foundry.utils.getType(finalConfig.config?.choices) === "function" ) {
+        finalConfig.config.choices = finalConfig.config.choices(currentFilters);
+      }
 
-      switch ( firstConfig.type ) {
+      switch ( secondConfig?.type ) {
         case "range":
           if ( ("min" in firstConfig.config) || ("min" in secondConfig.config) ) {
             if ( !("min" in firstConfig.config) || !("min" in secondConfig.config) ) continue;
@@ -1289,8 +1294,10 @@ export default class CompendiumBrowser extends Application5e {
             && (finalConfig.config.min > finalConfig.config.max) ) continue;
           break;
         case "set":
+          const choices = foundry.utils.getType(secondConfig.config.choices) === "function"
+            ? secondConfig.config.choices(currentFilters) : secondConfig.config.choices;
           Object.keys(finalConfig.config.choices).forEach(k => {
-            if ( !(k in secondConfig.config.choices) ) delete finalConfig.config.choices[k];
+            if ( !(k in choices) ) delete finalConfig.config.choices[k];
           });
           if ( foundry.utils.isEmpty(finalConfig.config.choices) ) continue;
           break;

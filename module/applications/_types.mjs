@@ -17,6 +17,7 @@
  * @property {{locked: CompendiumBrowserFilters, initial: CompendiumBrowserFilters}} filters  Filters to set to start.
  *                                              Locked filters won't be able to be changed by the user. Initial filters
  *                                              will be set to start but can be changed.
+ * @property {string|null} hint                 Hint displayed in the interface.
  * @property {CompendiumBrowserSelectionConfiguration} selection  Configuration used to define document selections.
  */
 

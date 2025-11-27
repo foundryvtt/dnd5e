@@ -4,6 +4,8 @@
         <div class="form-group">
             <p class="hint">{{ localize "DND5E.SUMMON.CreatureChanges.Hint" }}</p>
         </div>
+        {{ formField fields.match.fields.disposition value=source.match.disposition input=inputs.createCheckboxInput
+                     rootId=partId }}
         {{ formField fields.match.fields.proficiency value=source.match.proficiency input=inputs.createCheckboxInput
                      rootId=partId }}
         {{ formField fields.bonuses.fields.ac value=source.bonuses.ac rootId=partId }}
@@ -19,8 +21,6 @@
         </div>
         {{ formField fields.match.fields.ability value=source.match.ability options=abilityOptions rootId=partId }}
         {{ formField fields.match.fields.attacks value=source.match.attacks input=inputs.createCheckboxInput
-                     rootId=partId }}
-        {{ formField fields.match.fields.disposition value=source.match.disposition input=inputs.createCheckboxInput
                      rootId=partId }}
         {{ formField fields.match.fields.saves value=source.match.saves input=inputs.createCheckboxInput
                      rootId=partId }}

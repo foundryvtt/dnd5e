@@ -50,7 +50,7 @@ class DependentsRegistry {
    * @returns {string}
    */
   static #resolveDependentID(idOrUuid, dependent) {
-    if ( idOrUuid.length > 16 ) return idOrUuid;
+    if ( idOrUuid.length > 16 ) return foundry.utils.parseUuid(idOrUuid, { relative: dependent })?.uuid;
     let relative = dependent.parent;
     if ( relative && !(relative instanceof Item) ) relative = relative.parent;
     return relative.effects.get(idOrUuid)?.uuid;

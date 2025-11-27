@@ -409,27 +409,32 @@ export default class AttributesFields {
   /**
    * Modify movement speeds taking exhaustion and any other conditions into account.
    * @this {CharacterData|NPCData}
+   * @param {object} rollData  The Actor's roll data.
    */
-  static prepareMovement() {
+  static prepareMovement(rollData=this.parent.getRollData()) {
     const statuses = this.parent.statuses;
     const noMovement = this.parent.hasConditionEffect("noMovement");
+    const crawl = this.parent.hasConditionEffect("crawl");
+    for ( const type of Object.keys(CONFIG.DND5E.movementTypes) ) {
+      if ( noMovement || (crawl && (type !== "walk")) ) this.attributes.movement[type] = 0;
+      else this.attributes.movement[type] = Math.max(0, simplifyBonus(this.attributes.movement[type], rollData));
+      if ( type === "walk" ) this.attributes.movement.speed = this.attributes.movement.walk;
+    }
+
     const halfMovement = this.parent.hasConditionEffect("halfMovement");
     const encumbered = statuses.has("encumbered");
     const heavilyEncumbered = statuses.has("heavilyEncumbered");
     const exceedingCarryingCapacity = statuses.has("exceedingCarryingCapacity");
-    const crawl = this.parent.hasConditionEffect("crawl");
     const units = this.attributes.movement.units ??= defaultUnits("length");
     let reduction = game.settings.get("dnd5e", "rulesVersion") === "modern"
       ? (this.attributes.exhaustion ?? 0) * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.speed ?? 0) : 0;
     reduction = convertLength(reduction, CONFIG.DND5E.defaultUnits.length.imperial, units);
-    const field = this.schema.getField("attributes.movement");
+    const bonus = simplifyBonus(this.attributes.movement.bonus, rollData);
     this.attributes.movement.max = 0;
-    let slowed = false;
-    for ( const [type, v] of Object.entries(this.attributes.movement) ) {
-      if ( !field.getField(type)?.options.speed ) continue;
-      let speed = Math.max(0, v - reduction);
-      if ( noMovement || (crawl && (type !== "walk")) ) speed = 0;
-      else {
+    for ( const type of Object.keys(CONFIG.DND5E.movementTypes) ) {
+      let speed = Math.max(0, this.attributes.movement[type] - reduction);
+      if ( speed ) {
+        speed = Math.max(0, speed + bonus);
         if ( halfMovement ) speed *= 0.5;
         if ( heavilyEncumbered ) {
           speed = Math.max(0, speed - (CONFIG.DND5E.encumbrance.speedReduction.heavilyEncumbered[units] ?? 0));
@@ -442,10 +447,10 @@ export default class AttributesFields {
       }
       this.attributes.movement[type] = speed;
       this.attributes.movement.max = Math.max(speed, this.attributes.movement.max);
-      const base = this._source.attributes.movement[type] ?? this.attributes.movement.fromSpecies?.[type];
-      slowed = speed <= (base / 2);
+      if ( type === "walk" ) this.attributes.movement.speed = speed;
     }
-    this.attributes.movement.slowed = slowed;
+    const baseSpeed = this._source.attributes.movement.walk || this.attributes.movement.fromSpecies?.walk;
+    this.attributes.movement.slowed = this.attributes.movement.walk <= (simplifyBonus(baseSpeed, rollData) / 2);
   }
 
   /* -------------------------------------------- */
@@ -460,7 +465,7 @@ export default class AttributesFields {
    */
   static prepareRace(race, { force=false }={}) {
     for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) {
-      if ( !race.system.movement[key] || (!force && (this.attributes.movement[key] !== null)) ) continue;
+      if ( !race.system.movement[key] || (!force && this.attributes.movement[key]) ) continue;
       this.attributes.movement.fromSpecies ??= {};
       this.attributes.movement[key] = this.attributes.movement.fromSpecies[key] = race.system.movement[key];
     }

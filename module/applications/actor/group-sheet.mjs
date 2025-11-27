@@ -118,6 +118,7 @@ export default class GroupActorSheet extends MultiActorSheet {
       if ( !actor || (actor === this.inventorySource) ) continue;
       const { id, type, img, name, system, uuid } = actor;
       const member = { id, type, img, name, system, uuid };
+      member.hiddenStats = !actor.testUserPermission(game.user, "OBSERVER");
       await this._prepareMemberEncumbrance(actor, member);
       context.members.push(member);
     }
@@ -149,7 +150,9 @@ export default class GroupActorSheet extends MultiActorSheet {
       const section = context.sections[type];
       if ( !section ) continue;
       const member = { id, type, img, name, system, uuid };
-      member.classes = actor.itemTypes.class;
+      member.canView = actor.testUserPermission(game.user, "LIMITED");
+      member.hiddenStats = !actor.testUserPermission(game.user, "OBSERVER");
+      member.classes = member.hiddenStats ? [] : actor.itemTypes.class;
       await this._prepareMemberPortrait(actor, member);
       this._prepareMemberEncumbrance(actor, member);
       this._prepareMemberSkills(actor, member);
@@ -266,11 +269,12 @@ export default class GroupActorSheet extends MultiActorSheet {
   _prepareMemberSkills(actor, context) {
     context.skills = Object.fromEntries(Object.entries(actor.system.skills ?? {}).map(([key, skill]) => {
       const { ability, passive, total } = skill;
-      const label = game.i18n.format("DND5E.SkillRoll", {
+      const css = [actor.isOwner ? "rollable" : "", "skill"].filterJoin(" ");
+      const label = game.i18n.format(actor.isOwner ? "DND5E.SkillRoll" : "DND5E.SkillTitle", {
         ability: CONFIG.DND5E.abilities[ability]?.label,
         skill: CONFIG.DND5E.skills[key]?.label
       });
-      return [key, { label, passive, total }];
+      return [key, { css, label, passive, total }];
     }));
   }
 
@@ -384,6 +388,15 @@ export default class GroupActorSheet extends MultiActorSheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  async _onDropActor(event, actor) {
+    await super._onDropActor(event, actor);
+    if ( actor ) actor.apps[this.id] = this;
+    return actor;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async _onDropItem(event, item) {
     const { uuid } = event.target.closest("[data-uuid]")?.dataset ?? {};
     const target = await fromUuid(uuid);
@@ -405,7 +418,7 @@ export default class GroupActorSheet extends MultiActorSheet {
     const { uuid } = target.closest("[data-uuid]")?.dataset ?? {};
     const { pace } = this.actor.system.getTravelPace();
     const actor = await fromUuid(uuid);
-    actor?.rollSkill({ event, pace, skill: key });
+    if ( actor.isOwner ) actor?.rollSkill({ event, pace, skill: key });
   }
 
   /* -------------------------------------------- */

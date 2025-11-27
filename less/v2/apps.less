@@ -937,7 +937,8 @@
   /* ---------------------------------- */
 
   &.sidebar-info {
-    h4 { --color-text-primary: var(--color-light-2); }
+    .theme-dark :not(.themed) & h4 { color: var(--color-light-1); }
+    .theme-light :not(.themed) & h4 { color: var(--color-dark-1); }
 
     ul.links {
       flex: 1;
@@ -2132,8 +2133,8 @@ dialog.dnd5e2.application {
     font-family: var(--font-primary);
     font-size: var(--font-size-14);
     font-weight: normal;
-    height: var(--menu-height);
-    line-height: var(--menu-height);
+    height: ~"min(var(--menu-height), var(--menu-button-height, 100px))";
+    line-height: ~"min(var(--menu-height), var(--menu-button-height, 100px))";
     min-height: unset;
     background: transparent;
     border: none;

@@ -491,10 +491,12 @@ Hooks.once("i18nInit", () => {
         racePl: game.i18n.localize("TYPES.Item.raceLegacyPl")
       },
       DND5E: {
+        "Feature.Class.ArtificerPlan": game.i18n.localize("DND5E.Feature.Class.ArtificerInfusion"),
         "Feature.Species": game.i18n.localize("DND5E.Feature.SpeciesLegacy"),
         FlagsAlertHint: game.i18n.localize("DND5E.FlagsAlertHintLegacy"),
         ItemSpeciesDetails: game.i18n.localize("DND5E.ItemSpeciesDetailsLegacy"),
         "Language.Category.Rare": game.i18n.localize("DND5E.Language.Category.Exotic"),
+        "MOVEMENT.Type.Speed": game.i18n.localize("DND5E.MOVEMENT.Type.Walk"),
         RacialTraits: game.i18n.localize("DND5E.RacialTraitsLegacy"),
         "REST.Long.Hint.Normal": game.i18n.localize("DND5E.REST.Long.Hint.NormalLegacy"),
         "REST.Long.Hint.Group": game.i18n.localize("DND5E.REST.Long.Hint.GroupLegacy"),
@@ -651,7 +653,7 @@ Hooks.on("preCreateScene", (doc, createData, options, userId) => {
 
 Hooks.on("updateWorldTime", (...args) => {
   dataModels.calendar.CalendarData5e.onUpdateWorldTime(...args);
-  if ( CONFIG.DND5E.calendar.application ) CONFIG.DND5E.calendar.application.onUpdateWorldTime(...args);
+  CONFIG.DND5E.calendar.application?.onUpdateWorldTime?.(...args);
 });
 
 /* -------------------------------------------- */

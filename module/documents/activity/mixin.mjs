@@ -98,7 +98,7 @@ export default function ActivityMixin(Base) {
       if ( this.isRider ) return false;
       if ( this.dependentOrigin?.active === false ) return false;
       if ( this.visibility?.requireAttunement && !this.item.system.attuned ) return false;
-      if ( this.visibility?.requireMagic && !this.item.system.magicAvailable ) return false;
+      if ( this.visibility?.requireMagic && (this.item.system.magicAvailable === false) ) return false;
       if ( this.visibility?.requireIdentification && !this.item.system.identified ) return false;
       const level = this.relevantLevel;
       if ( ((this.visibility?.level?.min ?? -Infinity) > level)
@@ -1125,7 +1125,7 @@ export default function ActivityMixin(Base) {
         .reduce((obj, [id, changes]) => {
           const hdChange = changes.find?.(c => (c.keyPath === "system.hd.spent") && (c.delta > 0))
             ?? foundry.utils.getProperty(changes, "system.hd.spent");
-          const hdDenom = actor.items.get(changes._id ?? id)?.system.hd.denomination;
+          const hdDenom = actor.items.get(changes._id ?? id)?.system?.hd?.denomination;
           if ( hdChange && hdDenom ) obj[hdDenom] = (obj[hdDenom] ?? 0) + 1;
           return obj;
         }, {});

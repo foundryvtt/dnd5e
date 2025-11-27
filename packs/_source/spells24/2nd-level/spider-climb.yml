@@ -117,7 +117,10 @@ effects:
       startRound: null
       startTurn: null
     disabled: false
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     img: icons/creatures/invertebrates/spider-dotted-green.webp
     _id: q2ug9SpVRCGuudoG
     type: base
@@ -125,7 +128,7 @@ effects:
     changes:
       - key: system.attributes.movement.climb
         mode: 4
-        value: '1'
+        value: '@attributes.movement.walk'
         priority: null
     description: ''
     tint: '#ffffff'
@@ -135,11 +138,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.350'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.2.0
       createdTime: null
-      modifiedTime: 1725055220696
+      modifiedTime: 1759793968184
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!phbsplSpiderClim.q2ug9SpVRCGuudoG'

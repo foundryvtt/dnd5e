@@ -117,6 +117,11 @@ export default class MovementSensesConfig extends BaseConfigSheet {
       value: context.data.hover,
       localize: true
     };
+    if ( context.fields.bonus ) extras.push({
+      field: context.fields.bonus,
+      value: context.data.bonus,
+      localize: true
+    });
     if ( context.fields.ignoredDifficultTerrain ) extras.push({
       field: context.fields.ignoredDifficultTerrain,
       value: context.data.ignoredDifficultTerrain,

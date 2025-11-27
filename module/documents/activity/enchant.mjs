@@ -1,6 +1,8 @@
 import EnchantSheet from "../../applications/activity/enchant-sheet.mjs";
 import EnchantUsageDialog from "../../applications/activity/enchant-usage-dialog.mjs";
 import BaseEnchantActivityData from "../../data/activity/enchant-data.mjs";
+import Item5e from "../../documents/item.mjs";
+import { getSceneTargets } from "../../utils.mjs";
 import ActivityMixin from "./mixin.mjs";
 
 /**
@@ -151,10 +153,50 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
 
     const flags = { enchantmentProfile: profile };
     if ( concentration ) flags.dependentOn = concentration.uuid;
-    const applied = await ActiveEffect.create(
-      effect.clone({ origin: this.uuid, "flags.dnd5e": flags }).toObject(),
-      { parent: item, keepOrigin: true, chatMessageOrigin: chatMessage?.id }
-    );
+    const enchantmentData = effect.clone({ origin: this.uuid, "flags.dnd5e": flags }).toObject();
+
+    /**
+     * Hook that fires before an enchantment is applied to an item.
+     * @function dnd5e.preApplyEnchantment
+     * @memberof hookEvents
+     * @param {Item5e} item                Item to which the enchantment will be applied.
+     * @param {object} enchantmentData     Data for the enchantment effect that will be created.
+     * @param {object} options
+     * @param {Activity} options.activity  Enchant activity applied the enchantment.
+     * @returns {boolean}                  Explicitly return `false` to prevent enchantment from being applied.
+     */
+    if ( Hooks.call("dnd5e.preApplyEnchantment", item, enchantmentData, { activity: this }) === false ) return null;
+
+    // For compendium items, create on actor
+    if ( item.inCompendium ) {
+      const actor = this.actor.isOwner ? this.actor : (getSceneTargets()[0]?.actor ?? game.user.character);
+      if ( !actor ) {
+        ui.notifications.warn("DND5E.ENCHANT.Warning.NoTargetActor", { localize: true });
+        return null;
+      }
+      enchantmentData._id = foundry.utils.randomID();
+      const toCreate = await Item5e.createWithContents([item], {
+        transformAll: item => item.clone({ "flags.dnd5e.dependentOn": `.ActiveEffect.${enchantmentData._id}` })
+      });
+      [item] = await Item5e.createDocuments(toCreate, { keepId: true, parent: actor });
+    }
+
+    const enchantment = await ActiveEffect.create(enchantmentData, {
+      parent: item, keepId: true, keepOrigin: true, chatMessageOrigin: chatMessage?.id
+    });
+
+    /**
+     * Hook that fires after an enchantment has been applied to an item.
+     * @function dnd5e.applyEnchantment
+     * @memberof hookEvents
+     * @param {Item5e} item                 Item to which the enchantment was be applied.
+     * @param {ActiveEffect5e} enchantment  The enchantment effect that was be created.
+     * @param {object} options
+     * @param {Activity} options.activity   Enchant activity applied the enchantment.
+     */
+    Hooks.callAll("dnd5e.applyEnchantment", item, enchantment, { activity: this });
+
+    return enchantment;
   }
 
   /* -------------------------------------------- */

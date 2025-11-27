@@ -71,10 +71,7 @@ system:
       Fly Speed equal to your Speed for 1 hour and can hover. If you're in the
       air when the potion wears off, you fall unless you have some other means
       of staying aloft.</p><p>This potion's clear liquid floats at the top of
-      its container and has cloudy white impurities drifting in it.</p><section
-      id="secret-ZF077WzsqCDJpGtS" class="secret"><p><strong>Foundry
-      Note</strong></p><p>The <strong>Flyer</strong> Active Effect can be used
-      for tracking but can not automate the Speed adjustments.</p></section>
+      its container and has cloudy white impurities drifting in it.</p>
     chat: ''
   identifier: potion-of-flying
   source:
@@ -126,6 +123,10 @@ effects:
         mode: 5
         value: 'true'
         priority: null
+      - key: system.attributes.movement.fly
+        mode: 4
+        value: '@attributes.movement.walk'
+        priority: null
     disabled: false
     duration:
       startTime: null
@@ -139,15 +140,18 @@ effects:
     tint: '#ffffff'
     statuses: []
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.350'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 5.2.0
       createdTime: 1730862909967
-      modifiedTime: 1730862970802
+      modifiedTime: 1759793416091
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmgPotionOfFlyin.GIybtF2qEmtPCOZj'
@@ -158,11 +162,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.350'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745256807295
+  modifiedTime: 1759793398965
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

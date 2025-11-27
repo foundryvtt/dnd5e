@@ -12,11 +12,7 @@ system:
       as manacles or a creature imposing the &amp;Reference[Grappled
       apply=false] condition on it.</p><p><strong>Using a Higher-Level Spell
       Slot.</strong> You can target one additional creature for each spell slot
-      level above 4.</p><section class="secret"
-      id="secret-uwteEBj1fBNIf7KZ"><p><strong>Foundry Note</strong></p><p>The
-      Active Effect provided by the <strong>Cast</strong> activity upgrades the
-      character's Swim Speed to a value of "1" to indicate equivalence to (walk)
-      Speed, in addition to the condition immunities.</p></section>
+      level above 4.</p>
     chat: ''
   source:
     custom: ''
@@ -140,7 +136,7 @@ effects:
         priority: null
       - key: system.attributes.movement.swim
         mode: 4
-        value: '1'
+        value: '@attributes.movement.walk'
         priority: null
       - key: system.attributes.movement.ignoredDifficultTerrain
         mode: 2
@@ -154,11 +150,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.347'
+      coreVersion: '13.350'
       systemId: dnd5e
-      systemVersion: 5.1.3
+      systemVersion: 5.2.0
       createdTime: null
-      modifiedTime: 1755806834292
+      modifiedTime: 1759794006820
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!phbsplFreedomofM.bcTPZ6dJ4kHwaBRD'
@@ -173,11 +169,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.350'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1724425955725
-  modifiedTime: 1745256793524
+  modifiedTime: 1759794000182
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplFreedomofM'
