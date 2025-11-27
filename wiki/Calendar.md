@@ -80,7 +80,7 @@ The core of the calendar configuration options can be found in `CONFIG.DND5E.cal
 
 ### Calendar HUD Application
 
-To create a new calendar HUD, simply replace `CONFIG.DND5E.calendar.application` with and ApplicationV2 class. To ensure the calendar is displayed and hidden when the visibility settings are changed a custom application should implement a `onUpdateSettings` method. This will be called whenever the calendar configuration or preferences are changed to allow the interface a chance to adjust to any changes.
+To create a new calendar HUD, simply replace `CONFIG.DND5E.calendar.application` with an ApplicationV2 class. To ensure the calendar is displayed and hidden when the visibility settings are changed a custom application should implement a `onUpdateSettings` method. This will be called whenever the calendar configuration or preferences are changed to allow the interface a chance to adjust to any changes.
 
 To avoid having to implement the settings updating manually, the system provides `dnd5e.applications.calendar.BaseCalendarHUD` that provides the most basic components of the calendar HUD. For smaller changes, the default application at `dnd5e.applications.calendar.CalendarHUD` can be extended.
 
@@ -127,7 +127,7 @@ Returning `false` from this hook will prevent the system from initializing the c
 
 The system enhances core's [`updateWorldTime`](https://foundryvtt.com/api/functions/hookEvents.updateWorldTime.html) hook with some additional information. Inside the `options` object passed to this hook the system adds a new `dnd5e.deltas` object that contains information on how many of certain time periods were passed during the world time update. These periods includes `midnights`, `middays`, `sunrises`, and `sunsets`.
 
-These options are added regardless of whether the calendar system is enabled or a system-specific calendar data model is provided, thought the `sunrises` and `sunsets` values are only available if the current calendar data model provides `sunrise` and `sunset` methods.
+These options are added regardless of whether the calendar system is enabled or a system-specific calendar data model is provided, though the `sunrises` and `sunsets` values are only available if the current calendar data model provides `sunrise` and `sunset` methods.
 
 ### Disabling the System's Calendar Completely
 
