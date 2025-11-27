@@ -284,7 +284,7 @@ E.g. An Item or Spell which grants an Actor a flying or swimming speed. **Note**
 
 
 ### Give a bonus to all speeds
-E.g. An Feature or Spell which increases all movement speeds by a certain amount.
+E.g. A Feature or Spell which increases all movement speeds by a certain amount.
 
 | Attribute Key                      | Change Mode | Effect Value | Roll Data? |
 | ---------------------------------- | ----------- | ------------ | ---------- |
