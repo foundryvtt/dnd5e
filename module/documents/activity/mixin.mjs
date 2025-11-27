@@ -1123,10 +1123,10 @@ export default function ActivityMixin(Base) {
       if ( !actor || !updates ) return;
       const hitDice = Object.entries(updates.item ?? [])
         .reduce((obj, [id, changes]) => {
-          const hdChange = changes.find?.(c => (c.keyPath === "system.hd.spent") && (c.delta > 0))
+          const hdChange = changes.find?.(c => (c.keyPath === "system.hd.spent") && (c.delta > 0))?.delta
             ?? foundry.utils.getProperty(changes, "system.hd.spent");
           const hdDenom = actor.items.get(changes._id ?? id)?.system?.hd?.denomination;
-          if ( hdChange && hdDenom ) obj[hdDenom] = (obj[hdDenom] ?? 0) + 1;
+          if ( hdChange && hdDenom ) obj[hdDenom] = (obj[hdDenom] ?? 0) + hdChange;
           return obj;
         }, {});
       if ( foundry.utils.isEmpty(hitDice) ) return;
