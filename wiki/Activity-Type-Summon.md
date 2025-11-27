@@ -1,4 +1,4 @@
-![Up to date as of 5.1.0](https://img.shields.io/static/v1?label=dnd5e&message=5.1.0&color=informational)
+![Up to date as of 5.2.0](https://img.shields.io/static/v1?label=dnd5e&message=5.2.0&color=informational)
 
 The Summon activity is designed to automatically bring summoned creatures into your world. This allows for summoning based on a pre-determined list of creatures or allowing the player to select a creature to summon based on CR and creature type. This activity can modify the summoned creatures before they are brought into the world and includes an interface for players to place them as desired in the scene.
 
@@ -71,7 +71,7 @@ The second example shows the spell "Conjure Element", also from the Player’s H
 
 #### Summoning Level
 
-When summoning occurs the process always has an associated level. For spells, this is based on the level at which the spell is cast, but for Summon activities on other items it varies depending on whether the *Class Identifier* is populated. If provided, then the summoning level will be based on the character’s level in that specific class, otherwise it will use the character’s overall level.
+When summoning occurs the process always has an associated level. For spells, this is based on the level at which the spell is cast, but for Summon activities on other items it varies depending on whether the *Class Identifier* on the "Identity" tab is populated. If provided, then the summoning level will be based on the character’s level in that specific class, otherwise it will use the character’s overall level.
 
 ![Summon Sheet - Profiles Tab, Level Limits](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/summoning/summoning-profiles-level-limits.jpg)
 
@@ -81,11 +81,12 @@ This summoning level can be used to restrict certain profiles to only certain le
 
 The next tab defines changes to the creature and its items when summoned. Any fields that accept formulas will be resolved at time of summoning using `@` references from the item performing the summoning (allowing the use of `@item.level` or `@scaling` to adjust details based on the level cast) with details of the summoned creature available using `@summon` (so `@summon.attributes.hd` will give access to the HD size of a summoned NPC).
 
-![Summon Sheet - Changes Tab](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/summoning/summoning-changes.jpg)
+![Summon Sheet - Changes Tab - Creature Changes](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/summoning/summoning-changes-creature.jpg)
 
 #### Creature Changes
 
 The "Creature Changes" section defines changes to the creature itself:
+- *Match Disposition*: The created token's disposition will match that of the summoner
 - *Match Proficiency*: Changes the summoned creature’s proficiency to match that of the summoner
 - *Bonus Armor Class*: Bonus to the armor class on top of what is specified in the stat block
 - *Bonus Hit Dice*: Number of hit dice to add to those on the summoned creature, based on the hit dice details inferred from the HP formula or creature size
@@ -93,6 +94,8 @@ The "Creature Changes" section defines changes to the creature itself:
 - *Creature Sizes* & *Creature Types*: Change the summoned creature’s size and type when summoning. If more than one option is selected, then the player will be able to choose in the summoning dialog
 
 The example above shows the "Summon Beast" spell from *Tasha’s Cauldron of Everything* which matches the caster’s proficiency, gives a bonus to armor class based on spell level, and an extra 5 hit points for each level cast above the base level.
+
+![Summon Sheet - Changes Tab - Item Changes & Applied Effects](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/summoning/summoning-changes-item.jpg)
 
 #### Item Changes
 
@@ -102,3 +105,7 @@ the "Item Changes" section defines changes make to the items (features, attacks,
 - *Bonus Attack Damage*, *Bonus Save Damage*, *Bonus Healing*: Additional damage when using the Attack or Save activities or additional healing when using the Heal activity
 
 In the example above the *Match Attacks* checkbox is checked to ensure the attacks rolls match that of the caster, and the *Bonus Attack Damage* contains `@item.level` giving a bonus of the spell’s level to attack damage rolls. The other fields are left unchanged because the summoned creature doesn’t have any of those.
+
+#### Applied Effects
+
+The applied effects section behaves a bit differently than on other activity types in that these effects will be applied to the actor that is summoned regardless of selected summoning profile. Level limits for the applied effects behave the same as other activities and can be used to restrict which effects are applied.

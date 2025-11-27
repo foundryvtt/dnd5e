@@ -1,4 +1,4 @@
-![Up to date as of 5.1.0](https://img.shields.io/static/v1?label=dnd5e&message=5.1.0&color=informational)
+![Up to date as of 5.2.0](https://img.shields.io/static/v1?label=dnd5e&message=5.2.0&color=informational)
 
 The Transform activity is designed to change one or more actors using the stats of another. It is based on the same transformation system that has been long supported by dragging one actor onto another, but with the activity the transformation settings can be pre-configured and a compendium browser can be shown to make it easy to select which creature to transform into.
 
@@ -55,7 +55,7 @@ In the example above, a "Shape-Shift" feature on a Weretiger, includes two profi
 
 #### Transform Level
 
-When transformation occurs the process always has an associated level. For spells, this is based on the level at which the spell is cast, but for Transform activities on other items it varies depending on whether the *Class Identifier* is populated. If provided, then the transform level will be based on the character’s level in that specific class, otherwise it will use the character’s overall level.
+When transformation occurs the process always has an associated level. For spells, this is based on the level at which the spell is cast, but for Transform activities on other items it varies depending on whether the *Class Identifier* on the "Identity" tab is populated. If provided, then the transform level will be based on the character’s level in that specific class, otherwise it will use the character’s overall level.
 
 This transform level can be used to restrict certain profiles to only certain levels using the *Level Limits* fields in the "Additional Settings" dropdown.
 

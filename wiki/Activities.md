@@ -1,4 +1,4 @@
-![Up to date as of 5.1.0](https://img.shields.io/static/v1?label=dnd5e&message=5.1.0&color=informational)
+![Up to date as of 5.2.0](https://img.shields.io/static/v1?label=dnd5e&message=5.2.0&color=informational)
 
 The activities system is a new method for adding things that can be done by an item. It replaces the older method of defining a single action for an item with a much more flexible system.
 
@@ -11,7 +11,7 @@ Activities are created on items through the "Activities" tab, using the plus but
 
 ![Activity Creation Dialog](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/activities/activity-creation.jpg)
 
-Clicking the plus button brings up the Create Activity dialog with a list of activity types that can be created. After selecting one of these options, optionally entering a name, and clicking "Create New Activity" the sheet for the new activity will be opened.
+Clicking the plus button brings up the Create Activity dialog with a list of activity types that can be created. After selecting one of these options, optionally entering a name, and clicking "Create Activity" the sheet for the new activity will be opened.
 
 ### Activity Types
 
@@ -37,11 +37,18 @@ While parts of the activity sheet change based on the selected activity type, ma
 
 ![Activity Sheet - Identity Tab](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/activities/activity-identity.jpg)
 
-The first tab that appears is the "Identity" tab which contains details on how the activity is present and how it behaves:
+The first tab that appears is the "Identity" tab which contains details on how the activity is presented and how it behaves:
 - *Name*: Name for the activity, will default to the name of the activity type if none is provided
 - *Icon*: Icon used when the activity appears in the actor and item sheets
 - *Chat Flavor*: Brief additional text used in the usage chat message
 - *Measured Template Prompt*: If the activity defines an area of effect, should the player be prompted to place the template by default? If unchecked, then the player can still place the template using a button on the chat card
+
+There are also several options that control when the activity is visible and usable:
+- *Require Attunement*: Activity won't be usable on an item that supports attunement and isn't attuned.
+- *Require Magic*: Activity won't be usable if magic isn't available, including in an anti-magic field or on an item that requires attunement and isn't attuned.
+- *Require Identification*: Activity won't be usable or visible if item isn't identified.
+- *Level Limit*: Range of levels at which the activity is visible.
+- *Class Identifier*: Identifier of a specific class that will drive the level restriction. If provided, then a matching class's level will be used for the limit, otherwise it will use the overall character level. This won't be visible on spells which are always limited based on the spell level.
 
 ### Activation
 
@@ -76,3 +83,5 @@ The "Range", "Targets", and "Area" sections contain details on where and who the
 ![Activity Sheet - Effect Tab](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/activities/activity-effect.jpg)
 
 The final tab will vary the most between different activity types. Most activity types contain an "Applied Effects" list which specifies what Active Effects present on the item will be available to apply to targets through the chat card. The dropdown allows for selecting existing effects on the item, or the plus button can be used to create a new Active Effect.
+
+Inside the "Additional Settings" dropdown for each effect is a set of level limits. These allow restricting what level the effect will be offered for application and follow the same rules as the level limits on the identity tab.

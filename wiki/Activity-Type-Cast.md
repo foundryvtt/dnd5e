@@ -1,4 +1,4 @@
-![Up to date as of 5.1.0](https://img.shields.io/static/v1?label=dnd5e&message=5.1.0&color=informational)
+![Up to date as of 5.2.0](https://img.shields.io/static/v1?label=dnd5e&message=5.2.0&color=informational)
 
 The Cast activity allows for casting a spell through an item.
 
@@ -7,7 +7,7 @@ The Cast activity allows for casting a spell through an item.
 
 When items that contain Cast activities are added to a character the spells they offer appear in a new section of the spell list called Item Spells. If an item requires attunement, then these spells will only be listed if the item is attuned.
 
-![Cast Sheet - Identity Tab](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/activities/cast-spellbook.jpg)
+![Cast Sheet - Additional Spells in Spells Tab](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/activities/cast-spellbook.jpg)
 
 
 ## Casting Spells
