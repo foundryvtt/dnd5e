@@ -85,10 +85,19 @@ export default class FeatData extends ItemDataModel.mixin(
         label: "DND5E.ItemFeatureType",
         type: "set",
         config: {
-          choices: Object.values(CONFIG.DND5E.featureTypes).reduce((obj, config) => {
-            for ( const [key, label] of Object.entries(config.subtypes ?? {}) ) obj[key] = label;
-            return obj;
-          }, {}),
+          choices: filters => {
+            const { anyPositive, anyNegative } = Object.values(filters?.additional?.category ?? {}).reduce((o, v) => {
+              o.anyPositive ||= v > 0;
+              o.anyNegative ||= v < 0;
+              return o;
+            }, { anyPositive: false, anyNegative: false });
+            return Object.entries(CONFIG.DND5E.featureTypes).reduce((obj, [type, config]) => {
+              if ( anyPositive && (filters.additional.category[type] !== 1) ) return obj;
+              if ( anyNegative && (filters.additional.category[type] < 0) ) return obj;
+              for ( const [key, label] of Object.entries(config.subtypes ?? {}) ) obj[key] = label;
+              return obj;
+            }, {})
+          },
           keyPath: "system.type.subtype"
         }
       }],
