@@ -272,7 +272,9 @@ export default function ActivityMixin(Base) {
 
       // Trigger any primary action provided by this activity
       if ( usageConfig.subsequentActions !== false ) {
-        const consumed = this.createConsumedFlag(this.actor, updates);
+        const deltas = results.message?.flags?.dnd5e?.use?.consumed
+          ?? results.message?.data?.flags?.dnd5e?.use?.consumed;
+        const consumed = this.createConsumedFlag(this.actor, deltas);
         if ( consumed ) item.updateSource({ "flags.dnd5e.consumed": consumed });
         activity._triggerSubsequentActions(usageConfig, results);
       }
@@ -1116,15 +1118,14 @@ export default function ActivityMixin(Base) {
     /**
      * Retrieve consumed flag for given update data.
      * @param {Actor5e} actor
-     * @type {ActivityUsageUpdates|ActorDeltasData} updates
+     * @type {ActorDeltasData} deltas
      * @returns {{ hd: string }|void}
      */
-    createConsumedFlag(actor, updates) {
-      if ( !actor || !updates ) return;
-      const hitDice = Object.entries(updates.item ?? [])
+    createConsumedFlag(actor, deltas) {
+      if ( !actor || !deltas ) return;
+      const hitDice = Object.entries(deltas.item ?? [])
         .reduce((obj, [id, changes]) => {
-          const hdChange = changes.find?.(c => (c.keyPath === "system.hd.spent") && (c.delta > 0))?.delta
-            ?? foundry.utils.getProperty(changes, "system.hd.spent");
+          const hdChange = changes.find(c => (c.keyPath === "system.hd.spent") && (c.delta > 0))?.delta;
           const hdDenom = actor.items.get(changes._id ?? id)?.system?.hd?.denomination;
           if ( hdChange && hdDenom ) obj[hdDenom] = (obj[hdDenom] ?? 0) + hdChange;
           return obj;
