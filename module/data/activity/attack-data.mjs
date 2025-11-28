@@ -1,5 +1,5 @@
 import simplifyRollFormula from "../../dice/simplify-roll-formula.mjs";
-import { convertLength, formatLength } from "../../utils.mjs";
+import { convertLength, formatLength, formatNumber } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import DamageField from "../shared/damage-field.mjs";
 import BaseActivityData from "./base-activity.mjs";
@@ -356,8 +356,8 @@ export default class BaseAttackActivityData extends BaseActivityData {
       if ( this.range.override ) range = `${this.range.value} ${this.range.units ?? ""}`;
       else {
         const { value, long, units } = this.item.system.range;
-        if ( long && (value !== long) ) range = `${value}/${formatLength(long, units, { strict: false })}`;
-        else if ( value ) range = formatLength(value, units, { strict: false });
+        range = !long || (long === value) ? formatLength(value, units)
+          : `${formatNumber(value)}/${formatLength(long, units)}`;
       }
       if ( range ) parts.push(game.i18n.format("DND5E.RANGE.Formatted.Range", { range }));
     }
