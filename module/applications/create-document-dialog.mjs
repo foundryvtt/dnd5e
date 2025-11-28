@@ -114,7 +114,7 @@ export default class CreateDocumentDialog extends Dialog5e {
       context.hasTypes = true;
 
       // Some dialogs may restrict types, resulting in nothing pre-selected.
-      if (!context.types.some(t => t.selected)) {
+      if ( !context.types.some(t => t.selected) ) {
         context.types[0].selected = true;
         defaultType = context.types[0].type;
       }
