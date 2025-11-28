@@ -21,7 +21,7 @@ export default class BaseSaveActivityData extends BaseActivityData {
     return {
       ...super.defineSchema(),
       damage: new SchemaField({
-        onSave: new StringField({ required: true, blank: false, initial: "none" }),
+        onSave: new StringField({ required: true, blank: false, initial: "half" }),
         parts: new ArrayField(new DamageField())
       }),
       effects: new ArrayField(new AppliedEffectField({
@@ -90,7 +90,6 @@ export default class BaseSaveActivityData extends BaseActivityData {
   /** @inheritDoc */
   prepareData() {
     super.prepareData();
-    if ( !this.damage.onSave ) this.damage.onSave = this.isSpell && (this.item.system.level === 0) ? "none" : "half";
     if ( this.save.dc.calculation === "initial" ) this.save.dc.calculation = this.isSpell ? "spellcasting" : "";
     this.save.dc.bonus = "";
   }
@@ -116,6 +115,18 @@ export default class BaseSaveActivityData extends BaseActivityData {
       dc: this.save.dc.value,
       ability: CONFIG.DND5E.abilities[ability]?.label ?? ""
     });
+  }
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _preCreate(data) {
+    super._preCreate(data);
+    if ( !("onSave" in (data.damage ?? {})) && this.isSpell && (this.item.system.level === 0) ) {
+      this.updateSource({ "damage.onSave": "none" });
+    }
   }
 
   /* -------------------------------------------- */
