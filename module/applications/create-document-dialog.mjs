@@ -167,7 +167,7 @@ export default class CreateDocumentDialog extends Dialog5e {
     }));
     foundry.utils.mergeObject(this.options.createData, formData.object);
     this.#submitted = true;
-    if (CONFIG[this.documentName]) CONFIG[this.documentName].defaultType = this.options.createData.type;
+    if ( CONFIG[this.documentName] ) CONFIG[this.documentName].defaultType = this.options.createData.type;
     else this.documentType.defaultType = this.options.createData.type;
     await this.close();
   }
