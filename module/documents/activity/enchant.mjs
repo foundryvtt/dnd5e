@@ -134,7 +134,7 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
 
     // Validate against the enchantment's restraints on the origin item
     if ( strict ) {
-      const errors = this.canEnchant(item);
+      const errors = this.canEnchant(item, chatMessage);
       if ( errors?.length ) {
         errors.forEach(err => ui.notifications.error(err.message, { console: false }));
         return null;
@@ -159,13 +159,14 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
      * Hook that fires before an enchantment is applied to an item.
      * @function dnd5e.preApplyEnchantment
      * @memberof hookEvents
-     * @param {Item5e} item                Item to which the enchantment will be applied.
-     * @param {object} enchantmentData     Data for the enchantment effect that will be created.
+     * @param {Item5e} item                        Item to which the enchantment will be applied.
+     * @param {object} enchantmentData             Data for the enchantment effect that will be created.
      * @param {object} options
-     * @param {Activity} options.activity  Enchant activity applied the enchantment.
-     * @returns {boolean}                  Explicitly return `false` to prevent enchantment from being applied.
+     * @param {Activity} options.activity          Enchant activity applied the enchantment.
+     * @param {ChatMessage5e} options.chatMessage  Chat message used to make the enchantment, if applicable.
+     * @returns {boolean}                          Explicitly return `false` to prevent enchantment from being applied.
      */
-    if ( Hooks.call("dnd5e.preApplyEnchantment", item, enchantmentData, { activity: this }) === false ) return null;
+    if ( Hooks.call("dnd5e.preApplyEnchantment", item, enchantmentData, { activity: this, chatMessage }) === false ) return null;
 
     // For compendium items, create on actor
     if ( item.inCompendium ) {
@@ -189,12 +190,13 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
      * Hook that fires after an enchantment has been applied to an item.
      * @function dnd5e.applyEnchantment
      * @memberof hookEvents
-     * @param {Item5e} item                 Item to which the enchantment was be applied.
-     * @param {ActiveEffect5e} enchantment  The enchantment effect that was be created.
+     * @param {Item5e} item                        Item to which the enchantment was be applied.
+     * @param {ActiveEffect5e} enchantment         The enchantment effect that was be created.
      * @param {object} options
-     * @param {Activity} options.activity   Enchant activity applied the enchantment.
+     * @param {Activity} options.activity          Enchant activity applied the enchantment.
+     * @param {ChatMessage5e} options.chatMessage  Chat message used to make the enchantment, if applicable.
      */
-    Hooks.callAll("dnd5e.applyEnchantment", item, enchantment, { activity: this });
+    Hooks.callAll("dnd5e.applyEnchantment", item, enchantment, { activity: this, chatMessage });
 
     return enchantment;
   }
@@ -203,10 +205,11 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
 
   /**
    * Determine whether the provided item can be enchanted based on this enchantment's restrictions.
-   * @param {Item5e} item  Item that might be enchanted.
+   * @param {Item5e} item                Item that might be enchanted.
+   * @param {ChatMessage5e} chatMessage  Chat message used to make the enchantment, if applicable.
    * @returns {true|EnchantmentError[]}
    */
-  canEnchant(item) {
+  canEnchant(item, chatMessage) {
     const errors = [];
 
     if ( !this.restrictions.allowMagical && item.system.properties?.has("mgc")
@@ -257,8 +260,9 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
      * @param {EnchantmentError[]} errors  List of errors containing failed restrictions. The item will be enchanted
      *                                     so long as no errors are listed, otherwise the provided errors will be
      *                                     displayed to the user.
+     * @param {ChatMessage5e} chatMessage  Chat message used to make the enchantment, if applicable.
      */
-    Hooks.callAll("dnd5e.canEnchant", this, item, errors);
+    Hooks.callAll("dnd5e.canEnchant", this, item, errors, chatMessage);
 
     return errors.length ? errors : true;
   }
