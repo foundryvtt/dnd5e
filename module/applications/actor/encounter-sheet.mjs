@@ -288,7 +288,7 @@ export default class EncounterActorSheet extends MultiActorSheet {
     if ( Number.isNaN(index) || !name ) return;
     const members = this.actor.system.toObject().members;
     const member = members[index];
-    const result = parseInputDelta(event.target, member);
+    const result = event.target.value === "" ? null : parseInputDelta(event.target, member);
     if ( result !== undefined ) {
       foundry.utils.setProperty(member, name, result);
       this.actor.update({ "system.members": members });
