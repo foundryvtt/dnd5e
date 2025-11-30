@@ -961,6 +961,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
   _onDropActivity(event, { data }) {
     const { _id: id, type } = data;
     const source = this.item.system.activities.get(id);
+    const config = CONFIG.DND5E.activityTypes[type] ?? {};
 
     // Reordering
     if ( source ) {
@@ -976,7 +977,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     }
 
     // Copying
-    else {
+    else if ( (config?.configurable !== false) && config.documentClass.availableForItem(this.item) ) {
       delete data._id;
       this.item.createActivity(type, data, { renderSheet: false });
     }
