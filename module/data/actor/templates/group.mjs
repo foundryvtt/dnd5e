@@ -65,7 +65,7 @@ export default class GroupTemplate extends ActorDataModel.mixin(CurrencyTemplate
   async placeMembers() {
     if ( !game.user.isGM || !canvas.scene ) return;
     const members = await this.getPlaceableMembers();
-    if ( !members.some(m => m.quantity.value) ) return;
+    if ( !members.length ) return;
     const minimized = !this.parent.sheet.minimized;
     await this.parent.sheet.minimize();
     const tokensData = [];

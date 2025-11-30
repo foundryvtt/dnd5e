@@ -148,7 +148,7 @@ export default class EncounterData extends GroupTemplate {
 
   /** @override */
   async getPlaceableMembers() {
-    return Promise.all((await this.getMembers()).map(async member => {
+    return (await Promise.all((await this.getMembers()).map(async member => {
       member.actor = await dnd5e.documents.Actor5e.fetchExisting(member.actor.uuid);
       if ( (member.quantity.value === null) && member.quantity.formula ) {
         const roll = new Roll(member.quantity.formula);
@@ -156,7 +156,7 @@ export default class EncounterData extends GroupTemplate {
         if ( roll.total > 0 ) member.quantity.value = roll.total;
       }
       return member;
-    }));
+    }))).filter(m => m.quantity.value);
   }
 
   /* -------------------------------------------- */
