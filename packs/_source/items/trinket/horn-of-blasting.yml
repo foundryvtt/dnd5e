@@ -113,18 +113,14 @@ system:
       damage:
         onSave: half
         parts:
-          - number: 5
+          - custom:
+              enabled: false
+              formula: ''
+            number: 5
             denomination: 6
             bonus: ''
             types:
               - thunder
-            custom:
-              enabled: false
-              formula: ''
-            scaling:
-              mode: whole
-              number: null
-              formula: ''
       save:
         ability: con
         dc:
@@ -133,7 +129,17 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+      appliedEffects: []
     dnd5eactivity300:
       _id: dnd5eactivity300
       type: utility
@@ -185,7 +191,17 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+      appliedEffects: []
   attuned: false
   identifier: horn-of-blasting
 effects: []
@@ -196,11 +212,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037306138
-  modifiedTime: 1750697344647
+  modifiedTime: 1764621165241
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!t7GfyRp3dB3lqS9i'

@@ -106,6 +106,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: 2BmS0duA6cOAkzUW
       sort: 0
       activation:
@@ -120,7 +121,6 @@ system:
           - type: itemUses
             value: '2'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -147,6 +147,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     d8GlId9yzDbJHrS7:
       type: cast
       spell:
@@ -160,6 +166,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: d8GlId9yzDbJHrS7
       sort: 0
       activation:
@@ -174,7 +181,6 @@ system:
           - type: itemUses
             value: '2'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -197,6 +203,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     lsp1CkHeT5EWo09F:
       type: cast
       spell:
@@ -210,6 +222,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: lsp1CkHeT5EWo09F
       sort: 0
       activation:
@@ -224,7 +237,6 @@ system:
           - type: itemUses
             value: '3'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -247,6 +259,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     KEqwUW6z1Hk9CyB2:
       type: cast
       spell:
@@ -260,6 +278,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: KEqwUW6z1Hk9CyB2
       sort: 0
       activation:
@@ -274,7 +293,6 @@ system:
           - type: itemUses
             value: '3'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -297,6 +315,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   attuned: false
   identifier: ring-of-earth-elemental-command
 effects: []
@@ -304,18 +328,14 @@ folder: 5jrDZJ1U23Q9jDqB
 sort: 0
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037219133
-  modifiedTime: 1750697344647
+  modifiedTime: 1764620220860
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!Zf7kBZa5f4WBepn1'

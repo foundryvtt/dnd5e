@@ -147,7 +147,6 @@ system:
               - fire
             scaling:
               mode: ''
-              number: 1
       save:
         ability: dex
         dc:
@@ -161,6 +160,13 @@ system:
       name: Shooting Star
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
     BmdTWkjcU0ZkyCLr:
       type: cast
       spell:
@@ -174,6 +180,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: BmdTWkjcU0ZkyCLr
       sort: 0
       activation:
@@ -185,93 +192,6 @@ system:
           allowed: false
         spellSlot: true
         targets: []
-      description: {}
-      duration:
-        units: inst
-        concentration: false
-        override: false
-      range:
-        override: false
-      target:
-        template:
-          contiguous: false
-          units: ft
-        affects:
-          choice: false
-        override: false
-        prompt: true
-      uses:
-        spent: 0
-        recovery: []
-    vbdZ39RG4LdxLH0a:
-      type: cast
-      spell:
-        uuid: Compendium.dnd5e.spells.Item.Bnn9Nzajixvow9xi
-        challenge:
-          attack: null
-          save: null
-          override: false
-        level: null
-        properties:
-          - vocal
-          - somatic
-          - material
-      _id: vbdZ39RG4LdxLH0a
-      sort: 0
-      activation:
-        type: action
-        value: null
-        override: false
-      consumption:
-        scaling:
-          allowed: false
-        spellSlot: true
-        targets: []
-      description: {}
-      duration:
-        units: inst
-        concentration: false
-        override: false
-      range:
-        override: false
-      target:
-        template:
-          contiguous: false
-          units: ft
-        affects:
-          choice: false
-        override: false
-        prompt: true
-      uses:
-        spent: 0
-        recovery: []
-    TkKZyzTSjdDD6a8i:
-      type: cast
-      spell:
-        uuid: Compendium.dnd5e.spells.Item.nqBDWkVOfcGZt4YU
-        challenge:
-          attack: null
-          save: null
-          override: false
-        level: '1'
-        properties:
-          - vocal
-          - somatic
-          - material
-      _id: TkKZyzTSjdDD6a8i
-      sort: 0
-      activation:
-        type: action
-        value: null
-        override: false
-      consumption:
-        scaling:
-          allowed: false
-        spellSlot: true
-        targets:
-          - type: itemUses
-            value: '1'
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -294,6 +214,121 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+    vbdZ39RG4LdxLH0a:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.Bnn9Nzajixvow9xi
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: null
+        properties:
+          - vocal
+          - somatic
+          - material
+        ability: ''
+      _id: vbdZ39RG4LdxLH0a
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+    TkKZyzTSjdDD6a8i:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.nqBDWkVOfcGZt4YU
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '1'
+        properties:
+          - vocal
+          - somatic
+          - material
+        ability: ''
+      _id: TkKZyzTSjdDD6a8i
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   attuned: false
   identifier: ring-of-shooting-stars
 effects: []
@@ -301,18 +336,14 @@ folder: 5jrDZJ1U23Q9jDqB
 sort: 0
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037243774
-  modifiedTime: 1750697344647
+  modifiedTime: 1764620473216
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!etA2SBgWwduCLgLT'

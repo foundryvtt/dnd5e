@@ -84,6 +84,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: pC9sdScwAtSLIx3a
       sort: 0
       activation:
@@ -97,7 +98,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -120,6 +121,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     3Ag2tI8TAhvtGP7V:
       type: cast
       spell:
@@ -133,6 +140,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: 3Ag2tI8TAhvtGP7V
       sort: 0
       activation:
@@ -147,7 +155,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -174,6 +181,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     0zewU222OCtjpOty:
       type: cast
       spell:
@@ -187,6 +200,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: 0zewU222OCtjpOty
       sort: 0
       activation:
@@ -200,7 +214,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -223,6 +237,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   attuned: false
   identifier: ring-of-animal-influence
 effects: []
@@ -230,18 +250,14 @@ folder: 5jrDZJ1U23Q9jDqB
 sort: 0
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037138894
-  modifiedTime: 1731017355045
+  modifiedTime: 1764619428440
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!ElLfmohtIFMagr5f'

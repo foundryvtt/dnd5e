@@ -209,6 +209,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   attuned: false
   ammunition: {}
   identifier: trident-of-fish-command
@@ -218,18 +224,14 @@ folder: MLMTCAvKsuFE3vYA
 sort: 0
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037285209
-  modifiedTime: 1750697344647
+  modifiedTime: 1764620938694
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!o4Irx3hHiD3FnPbL'

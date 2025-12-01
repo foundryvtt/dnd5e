@@ -102,6 +102,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: AcACbFOCPB59VKfz
       sort: 300000
       activation:
@@ -119,6 +120,7 @@ system:
             target: ''
             scaling:
               mode: amount
+              formula: ''
       description:
         chatFlavor: ''
       duration:
@@ -141,6 +143,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     nn4geEXkhCgdAySL:
       type: cast
       spell:
@@ -154,6 +162,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: nn4geEXkhCgdAySL
       sort: 400000
       activation:
@@ -168,7 +177,6 @@ system:
           - type: itemUses
             value: '2'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -191,6 +199,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     r4S7IfUpK5ccLGpa:
       type: cast
       spell:
@@ -204,6 +218,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: r4S7IfUpK5ccLGpa
       sort: 500000
       activation:
@@ -218,7 +233,6 @@ system:
           - type: itemUses
             value: '5'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -241,6 +255,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     HySVJaepP2wG5nCg:
       type: attack
       _id: HySVJaepP2wG5nCg
@@ -291,18 +311,14 @@ folder: MLMTCAvKsuFE3vYA
 sort: 0
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037204182
-  modifiedTime: 1750697344647
+  modifiedTime: 1764620106371
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!WLVQJVpCWiPkCAtZ'

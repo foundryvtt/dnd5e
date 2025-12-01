@@ -121,6 +121,13 @@ system:
       name: ''
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: false
   attuned: false
   identifier: ring-of-regeneration
 effects: []
@@ -128,18 +135,14 @@ folder: 5jrDZJ1U23Q9jDqB
 sort: 0
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037123520
-  modifiedTime: 1750697344647
+  modifiedTime: 1764619219044
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!AweD4kpKGM7Ilu3n'

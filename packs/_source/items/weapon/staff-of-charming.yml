@@ -112,6 +112,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: jQpPiY9JypFhSabm
       sort: 100000
       activation:
@@ -125,7 +126,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -148,6 +149,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     kyu1xW3gkZI4gPRh:
       type: cast
       spell:
@@ -161,6 +168,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: kyu1xW3gkZI4gPRh
       sort: 300000
       activation:
@@ -174,7 +182,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -197,6 +205,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     rkyJP9ExCzn3gY7I:
       type: cast
       spell:
@@ -210,6 +224,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: rkyJP9ExCzn3gY7I
       sort: 400000
       activation:
@@ -223,7 +238,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -246,6 +261,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     m2ld3DGVjzh1mfvQ:
       type: utility
       name: Save Against Enchantment
@@ -265,7 +286,6 @@ system:
         targets:
           - type: activityUses
             value: '1'
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -299,6 +319,13 @@ system:
         formula: ''
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
     qYGpiqu9mc8BzArx:
       type: utility
       _id: qYGpiqu9mc8BzArx
@@ -318,7 +345,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -353,6 +379,13 @@ system:
       name: Turn Back Spell
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
     5uagImprd2VO7ueb:
       type: attack
       _id: 5uagImprd2VO7ueb
@@ -403,18 +436,14 @@ folder: MLMTCAvKsuFE3vYA
 sort: 0
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037143507
-  modifiedTime: 1750697344647
+  modifiedTime: 1764619478495
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!FeouSUPUlUhfgeRp'
