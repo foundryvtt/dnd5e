@@ -394,6 +394,7 @@ export default class VehicleActorSheet extends BaseActorSheet {
 
   /** @inheritDoc */
   async _onRender(context, options) {
+    this._renderContainers(context, options);
     await super._onRender(context, options);
     if ( !this.actor.limited ) this._renderCreateInventory();
     for ( const input of this.element.querySelectorAll('[data-action="toggleEditInline"] input[hidden]') ) {
