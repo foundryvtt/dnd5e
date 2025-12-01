@@ -120,7 +120,18 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
+      appliedEffects: []
   attuned: false
   identifier: robe-of-useful-items
 effects: []
@@ -131,11 +142,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037090618
-  modifiedTime: 1750697344647
+  modifiedTime: 1764618844530
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!2ksm2KXCY3vBHTAx'

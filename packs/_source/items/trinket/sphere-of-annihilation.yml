@@ -131,18 +131,14 @@ system:
       damage:
         onSave: half
         parts:
-          - number: 4
+          - custom:
+              enabled: false
+              formula: ''
+            number: 4
             denomination: 10
             bonus: ''
             types:
               - force
-            custom:
-              enabled: false
-              formula: ''
-            scaling:
-              mode: whole
-              number: null
-              formula: ''
       save:
         ability: dex
         dc:
@@ -151,7 +147,17 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+      appliedEffects: []
   attuned: false
   identifier: sphere-of-annihilation
 effects: []
@@ -162,11 +168,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037089464
-  modifiedTime: 1750697344647
+  modifiedTime: 1764618839172
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!2YNqk5zm9jDTvd7q'

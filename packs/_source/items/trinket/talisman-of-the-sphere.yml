@@ -118,6 +118,13 @@ system:
       name: Control Check
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
   attuned: false
   identifier: talisman-of-the-sphere
 effects: []
@@ -125,18 +132,14 @@ folder: UnUwTG4YIgd0kaUJ
 sort: 1100000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037098121
-  modifiedTime: 1750697344647
+  modifiedTime: 1764618939109
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!46ikeR4RrSim6DsN'

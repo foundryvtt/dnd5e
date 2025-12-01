@@ -106,6 +106,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: YYSStWx9ygrl41hI
       sort: 100000
       activation:
@@ -120,7 +121,6 @@ system:
           - type: itemUses
             value: '4'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -143,6 +143,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     daXCQjAPpv1uGjw4:
       type: cast
       spell:
@@ -156,6 +162,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: daXCQjAPpv1uGjw4
       sort: 300000
       activation:
@@ -170,7 +177,6 @@ system:
           - type: itemUses
             value: '5'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -193,6 +199,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     330BsWHVJ4uVFg90:
       type: utility
       name: Insect Cloud
@@ -211,7 +223,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -248,6 +259,13 @@ system:
         formula: ''
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
     McIzoYjcpMDRnr7n:
       type: attack
       _id: McIzoYjcpMDRnr7n
@@ -298,18 +316,14 @@ folder: MLMTCAvKsuFE3vYA
 sort: 0
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037228686
-  modifiedTime: 1750697344647
+  modifiedTime: 1764620293383
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!bod1dKzbAkAm21Ho'

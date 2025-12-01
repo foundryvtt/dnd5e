@@ -76,11 +76,8 @@ system:
       consumption:
         targets:
           - type: itemUses
-            target: ''
             value: '1'
-            scaling:
-              mode: ''
-              formula: ''
+            target: ''
         scaling:
           allowed: false
           max: ''
@@ -126,7 +123,18 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
+      appliedEffects: []
     MQiFj6kmbG849P2I:
       type: cast
       spell:
@@ -141,6 +149,7 @@ system:
           - somatic
           - material
         spellbook: false
+        ability: ''
       _id: MQiFj6kmbG849P2I
       sort: 0
       activation:
@@ -177,6 +186,12 @@ system:
         max: ''
       name: Slow (1–5)
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     6DZzvyzd46LbnfIL:
       type: cast
       spell:
@@ -191,6 +206,7 @@ system:
           - somatic
           - material
         spellbook: false
+        ability: ''
       _id: 6DZzvyzd46LbnfIL
       sort: 0
       activation:
@@ -227,6 +243,12 @@ system:
         max: ''
       name: Faerie Fire (6–10)
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     CasBiIZXL54laOOx:
       type: cast
       spell:
@@ -241,6 +263,7 @@ system:
           - somatic
           - material
         spellbook: false
+        ability: ''
       _id: CasBiIZXL54laOOx
       sort: 0
       activation:
@@ -274,6 +297,12 @@ system:
         max: ''
       name: Gust of Wind (16–20)
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     scEVZazoOleSrYw2:
       type: cast
       spell:
@@ -288,6 +317,7 @@ system:
           - somatic
           - material
         spellbook: false
+        ability: ''
       _id: scEVZazoOleSrYw2
       sort: 0
       activation:
@@ -324,6 +354,12 @@ system:
         max: ''
       name: Detect Thoughts (21–25)
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     4xPLz74G1GRXtSmB:
       type: cast
       spell:
@@ -338,6 +374,7 @@ system:
           - somatic
           - material
         spellbook: false
+        ability: ''
       _id: 4xPLz74G1GRXtSmB
       sort: 0
       activation:
@@ -374,6 +411,12 @@ system:
         max: ''
       name: Stinking Cloud (26–30)
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     mfe676QinSfB6v8H:
       type: cast
       spell:
@@ -388,6 +431,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: mfe676QinSfB6v8H
       sort: 0
       activation:
@@ -421,6 +465,12 @@ system:
         max: ''
       name: Lightning Bolt (37–46)
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     V6TIchqdN8i6seVY:
       type: cast
       spell:
@@ -435,6 +485,7 @@ system:
           - somatic
           - material
         spellbook: false
+        ability: ''
       _id: V6TIchqdN8i6seVY
       sort: 0
       activation:
@@ -471,6 +522,12 @@ system:
         max: ''
       name: Darkness (54–58)
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     3dSvQUQq9gxu0HSl:
       type: cast
       spell:
@@ -485,6 +542,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: 3dSvQUQq9gxu0HSl
       sort: 0
       activation:
@@ -521,6 +579,12 @@ system:
         max: ''
       name: Fireball (70–79)
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     fcFugwiJmL6UEXvv:
       type: cast
       spell:
@@ -535,6 +599,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: fcFugwiJmL6UEXvv
       sort: 0
       activation:
@@ -570,6 +635,12 @@ system:
         max: ''
       name: Invisibility (80–84)
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   attuned: false
   identifier: wand-of-wonder
 effects: []
@@ -577,18 +648,14 @@ folder: 1aDgsGVwDbPdxG2V
 sort: 0
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037273704
-  modifiedTime: 1750697344647
+  modifiedTime: 1764620832237
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!lPsueMv4ZoXqCYf9'

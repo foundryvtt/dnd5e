@@ -88,7 +88,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -132,12 +131,13 @@ system:
         saves: false
         ability: ''
       profiles:
-        - _id: BSmt90fVS8ND9KeN
+        - count: ''
+          name: ''
+          _id: BSmt90fVS8ND9KeN
+          uuid: Compendium.dnd5e.monsters.Actor.5P1VGAZQwOilwZQf
           level:
             min: null
             max: null
-          types: []
-          uuid: Compendium.dnd5e.monsters.Actor.5P1VGAZQwOilwZQf
       summon:
         prompt: true
         mode: ''
@@ -145,6 +145,13 @@ system:
       name: ''
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
   attuned: false
   identifier: ring-of-djinni-summoning
 effects: []
@@ -152,18 +159,14 @@ folder: 5jrDZJ1U23Q9jDqB
 sort: 0
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037257586
-  modifiedTime: 1750697344647
+  modifiedTime: 1764620585491
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!hdlBOEbEjiwUjTW5'

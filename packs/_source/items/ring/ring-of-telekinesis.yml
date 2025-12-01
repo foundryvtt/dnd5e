@@ -71,6 +71,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: yhJYyZZLiK862s7T
       sort: 0
       activation:
@@ -108,6 +109,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   attuned: false
   identifier: ring-of-telekinesis
 effects: []
@@ -115,18 +122,14 @@ folder: 5jrDZJ1U23Q9jDqB
 sort: 0
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037258445
-  modifiedTime: 1750697344647
+  modifiedTime: 1764620600084
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!hxfOtvFrY1PXHQN1'

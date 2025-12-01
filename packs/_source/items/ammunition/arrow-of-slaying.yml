@@ -108,7 +108,7 @@ system:
               enabled: false
               formula: ''
             number: 6
-            denomination: '10'
+            denomination: 10
             bonus: ''
             types:
               - piercing
@@ -125,6 +125,12 @@ system:
       name: ''
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   attuned: false
   identifier: arrow-of-slaying
 effects: []
@@ -135,11 +141,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037223206
-  modifiedTime: 1750697344647
+  modifiedTime: 1764620249091
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!aXsfZvDCdpuv3Yvb'

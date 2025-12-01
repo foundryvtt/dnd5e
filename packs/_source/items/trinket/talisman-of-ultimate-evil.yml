@@ -85,11 +85,8 @@ system:
       consumption:
         targets:
           - type: itemUses
-            target: ''
             value: '1'
-            scaling:
-              mode: ''
-              formula: ''
+            target: ''
         scaling:
           allowed: false
           max: ''
@@ -127,18 +124,14 @@ system:
       damage:
         onSave: half
         parts:
-          - number: 6
+          - custom:
+              enabled: false
+              formula: ''
+            number: 6
             denomination: 6
             bonus: ''
             types:
               - necrotic
-            custom:
-              enabled: false
-              formula: ''
-            scaling:
-              mode: whole
-              number: null
-              formula: ''
       save:
         ability: dex
         dc:
@@ -147,7 +140,18 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
+      appliedEffects: []
     dnd5eactivity200:
       _id: dnd5eactivity200
       type: damage
@@ -159,11 +163,8 @@ system:
       consumption:
         targets:
           - type: itemUses
-            target: ''
             value: '1'
-            scaling:
-              mode: ''
-              formula: ''
+            target: ''
         scaling:
           allowed: false
           max: ''
@@ -203,21 +204,28 @@ system:
           allow: false
           bonus: ''
         parts:
-          - number: 8
+          - custom:
+              enabled: false
+              formula: ''
+            number: 8
             denomination: 6
             bonus: ''
             types: []
-            custom:
-              enabled: false
-              formula: ''
-            scaling:
-              mode: whole
-              number: null
-              formula: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: false
+      appliedEffects: []
   attuned: false
   identifier: talisman-of-ultimate-evil
 effects: []
@@ -228,11 +236,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037179912
-  modifiedTime: 1750697344647
+  modifiedTime: 1764619907176
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!PAXfmZ2ErDlCVy0N'

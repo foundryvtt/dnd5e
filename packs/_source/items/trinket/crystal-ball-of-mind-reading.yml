@@ -61,61 +61,6 @@ system:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: save
-      activation:
-        type: action
-        value: 1
-        condition: ''
-        override: false
-      consumption:
-        targets: []
-        scaling:
-          allowed: false
-          max: ''
-        spellSlot: true
-      description:
-        chatFlavor: ''
-      duration:
-        concentration: false
-        value: '10'
-        units: minute
-        special: ''
-        override: false
-      effects: []
-      range:
-        units: ''
-        special: ''
-        override: false
-      target:
-        template:
-          count: ''
-          contiguous: false
-          type: ''
-          size: ''
-          width: ''
-          height: ''
-          units: ''
-        affects:
-          count: ''
-          type: ''
-          choice: false
-          special: ''
-        prompt: true
-        override: false
-      damage:
-        onSave: half
-        parts: []
-      save:
-        ability: wis
-        dc:
-          calculation: ''
-          formula: '17'
-      uses:
-        spent: 0
-        recovery: []
-      sort: 0
     tZv4jpd4zviSzUWu:
       type: cast
       spell:
@@ -129,6 +74,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: tZv4jpd4zviSzUWu
       sort: 0
       activation:
@@ -162,6 +108,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     fRkGCqgiCHP528xk:
       type: cast
       spell:
@@ -175,6 +127,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: fRkGCqgiCHP528xk
       sort: 0
       activation:
@@ -210,6 +163,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   attuned: false
   identifier: crystal-ball-of-mind-reading
 effects: []
@@ -217,18 +176,14 @@ folder: UnUwTG4YIgd0kaUJ
 sort: 5600000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037195309
-  modifiedTime: 1750697344647
+  modifiedTime: 1764620007946
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!TwYeck6buBZ602mg'
