@@ -260,11 +260,12 @@ export default class GroupData extends GroupTemplate {
     if ( typeof actor === "string" ) actorId = actor;
     else if ( actor instanceof Actor ) actorId = actor.id;
     else throw new Error("You must provide an Actor document or an actor ID to remove a group member");
-    if ( !this.members.ids.has(actorId) ) throw new Error(`Actor id "${actorId}" is not a group member`);
 
     // Remove the actor and update the parent document
     const membersCollection = this.toObject().members;
-    membersCollection.findSplice(member => member.actor === actorId);
+    if ( !membersCollection.findSplice(member => member.actor === actorId) ) {
+      throw new Error(`Actor id "${actorId}" is not a group member`);
+    }
     return this.parent.update({"system.members": membersCollection});
   }
 
