@@ -109,7 +109,7 @@ export const CALENDAR_OF_HARPTOS = {
         ordinal: 7, days: 31, leapDays: 32 // Days: 182–213
       },
       {
-        name: "DND5E.CALENDAR.Harptos.Month.Eleasias", abbreviation: "DND5E.CALENDAR.Harptos.Month.EleasiasCommon",
+        name: "DND5E.CALENDAR.Harptos.Month.Eleasis", abbreviation: "DND5E.CALENDAR.Harptos.Month.EleasisCommon",
         ordinal: 8, days: 30 // Days: 213–243
       },
       {
@@ -153,7 +153,7 @@ export const CALENDAR_OF_HARPTOS = {
     { name: "DND5E.CALENDAR.Harptos.Festival.Greengrass", month: 4, day: 31 },
     { name: "DND5E.CALENDAR.Harptos.Festival.Midsummer", month: 7, day: 31 },
     { name: "DND5E.CALENDAR.Harptos.Festival.Shieldmeet", month: 7, day: 32 },
-    { name: "DND5E.CALENDAR.Harptos.Festival.Highharvesttide", month: 9, day: 31 },
+    { name: "DND5E.CALENDAR.Harptos.Festival.Highharvestide", month: 9, day: 31 },
     { name: "DND5E.CALENDAR.Harptos.Festival.FeastOfTheMoon", month: 11, day: 31 }
   ],
   seasons: {

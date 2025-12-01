@@ -407,7 +407,7 @@
     },
     "Hint": "Allow the player to increase one or more ability scores or take an optional feat.",
     "Journal": {
-      "DescriptionEpic": "<p>You gain an Epic Boon feat or another feat of your choice for which you qualify.",
+      "DescriptionEpic": "<p>You gain an Epic Boon feat or another feat of your choice for which you qualify.</p>",
       "DescriptionEpicRecommendation": "<p>You gain an Epic Boon feat or another feat of your choice for which you qualify. {recommendation} is recommended.</p>",
       "DescriptionLegacy": "<p>When you reach {firstLevelOrdinal} level, and again at {otherLevelsOrdinal} level, you can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can’t increase an ability score above {maxAbilityScore} using this feature.</p><p>Using the optional feats rule, you can forgo taking this feature to take a feat of your choice instead.</p>",
       "DescriptionModern": "<p>You gain the Ability Score Improvement feat or another feat of your choice for which you qualify. You gain this feature again at {class} levels {otherLevels}.</p>",
@@ -1238,13 +1238,13 @@
       "Greengrass": "Greengrass",
       "Midsummer": "Midsummer",
       "Shieldmeet": "Shieldmeet",
-      "Highharvesttide": "Highharvesttide",
+      "Highharvestide": "Highharvestide",
       "FeastOfTheMoon": "The Feast of the Moon"
     },
     "Formatters": {
       "DayMonth": "{d} {B}",
       "DayMonthYear": "{d} {B}, {y} DR",
-      "FestivalDayYear": "{day}, {Y} DR"
+      "FestivalDayYear": "{day}, {y} DR"
     },
     "Month": {
       "Hammer": "Hammer",
@@ -1261,8 +1261,8 @@
       "KythornCommon": "The Time of Flowers",
       "Flamerule": "Flamerule",
       "FlameruleCommon": "Summertide",
-      "Eleasias": "Eleasias",
-      "EleasiasCommon": "Highsun",
+      "Eleasis": "Eleasis",
+      "EleasisCommon": "Highsun",
       "Eleint": "Eleint",
       "EleintCommon": "The Fading",
       "Marpenoth": "Marpenoth",

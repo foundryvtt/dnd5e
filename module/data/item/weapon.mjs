@@ -1,4 +1,4 @@
-import { convertLength, defaultUnits, filteredKeys, formatLength } from "../../utils.mjs";
+import { convertLength, defaultUnits, filteredKeys, formatLength, formatNumber } from "../../utils.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import BaseActivityData from "../activity/base-activity.mjs";
 import DamageField from "../shared/damage-field.mjs";
@@ -284,7 +284,8 @@ export default class WeaponData extends ItemDataModel.mixin(
    * @type {boolean}
    */
   get hasRange() {
-    return (this.attackType === "ranged") || this.properties.has("thr");
+    return (this.attackType === "ranged") || this.properties.has("thr")
+      || ((this.type.value === "natural") && this.range.value);
   }
 
   /* -------------------------------------------- */
@@ -496,15 +497,11 @@ export default class WeaponData extends ItemDataModel.mixin(
     this.prepareFinalEquippableData();
 
     const labels = this.parent.labels ??= {};
-    const units = this.range.units ?? defaultUnits("length");
-    if ( this.hasRange ) {
-      const parts = [this.range.value, this.range.long !== this.range.value ? this.range.long : null].filter(_ => _);
-      parts.push(formatLength(parts.pop(), units));
-      labels.range = parts.filterJoin("/");
-    }
-    if ( this.range.reach ) {
-      labels.reach = game.i18n.format("DND5E.RANGE.Formatted.Reach", { reach: formatLength(this.range.reach, units) });
-    }
+    let { value, long, reach, units } = this.range;
+    units ??= defaultUnits("length");
+    if ( this.hasRange ) labels.range = !long || (long === value) ? formatLength(value, units)
+      : `${formatNumber(value)}/${formatLength(long, units)}`;
+    if ( reach ) labels.reach = game.i18n.format("DND5E.RANGE.Formatted.Reach", { reach: formatLength(reach, units) });
   }
 
   /* -------------------------------------------- */

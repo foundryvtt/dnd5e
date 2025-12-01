@@ -102,20 +102,7 @@ export default function ApplicationV2Mixin(Base) {
     /** @inheritDoc */
     _onFirstRender(context, options) {
       super._onFirstRender(context, options);
-      const containers = {};
-      for ( const [part, config] of Object.entries(this.constructor.PARTS) ) {
-        if ( !config.container?.id ) continue;
-        const element = this.element.querySelector(`[data-application-part="${part}"]`);
-        if ( !element ) continue;
-        if ( !containers[config.container.id] ) {
-          const div = document.createElement("div");
-          div.dataset.containerId = config.container.id;
-          div.classList.add(...config.container.classes ?? []);
-          containers[config.container.id] = div;
-          element.replaceWith(div);
-        }
-        containers[config.container.id].append(element);
-      }
+      this._renderContainers(context, options);
     }
 
     /* -------------------------------------------- */
@@ -133,6 +120,33 @@ export default function ApplicationV2Mixin(Base) {
     /** @inheritDoc */
     async _preparePartContext(partId, context, options) {
       return { ...await super._preparePartContext(partId, context, options) };
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Lazily create containers and place parts appropriately.
+     * @param {object} context  Render context.
+     * @param {object} options  Render options.
+     * @protected
+     */
+    _renderContainers(context, options) {
+      const containerElements = Array.from(this.element.querySelectorAll("[data-container-id]"));
+      const containers = Object.fromEntries(containerElements.map(el => [el.dataset.containerId, el]));
+      for ( const [part, config] of Object.entries(this.constructor.PARTS) ) {
+        if ( !config.container?.id ) continue;
+        const element = this.element.querySelector(`[data-application-part="${part}"]`);
+        if ( !element ) continue;
+        let container = containers[config.container.id];
+        if ( !container ) {
+          const div = document.createElement("div");
+          div.dataset.containerId = config.container.id;
+          div.classList.add(...config.container.classes ?? []);
+          container = containers[config.container.id] = div;
+          element.replaceWith(div);
+        }
+        if ( element.parentElement !== container ) container.append(element);
+      }
     }
 
     /* -------------------------------------------- */

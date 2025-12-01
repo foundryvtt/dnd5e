@@ -590,8 +590,8 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       if ( !this.item.system.properties?.has("mgc") && this.item.system.validProperties.has("mgc") ) {
         this.visibility.requireAttunement = false;
         this.visibility.requireMagic = false;
-      } else if ( (this.item.system.attunement === "required") && this.visibility.requireMagic ) {
-        this.visibility.requireAttunement = true;
+      } else if ( this.item.system.attunement === "required" ) {
+        this.visibility.requireAttunement = this.visibility.requireMagic;
       } else {
         if ( !this.item.system.canAttune ) this.visibility.requireAttunement = false;
         if ( this.isSpell ) this.visibility.requireMagic = true;

@@ -262,7 +262,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
       const descriptor = activityMap[id] = {
         id, name, sort,
         img: { src: img, svg: img?.endsWith(".svg") },
-        riders: [],
+        riders: new Set(),
         subtitle: labels?.activation ?? "",
         uuid: activity.uuid
       };
@@ -272,7 +272,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     }, []);
     riders.forEach(r => {
       for ( const origin of origins[r.id] ?? [] ) {
-        if ( origin in activityMap ) activityMap[origin].riders.push(r);
+        if ( origin in activityMap ) activityMap[origin].riders.add(r);
       }
     });
     return context;
@@ -961,6 +961,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
   _onDropActivity(event, { data }) {
     const { _id: id, type } = data;
     const source = this.item.system.activities.get(id);
+    const config = CONFIG.DND5E.activityTypes[type] ?? {};
 
     // Reordering
     if ( source ) {
@@ -976,7 +977,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     }
 
     // Copying
-    else {
+    else if ( (config?.configurable !== false) && config.documentClass.availableForItem(this.item) ) {
       delete data._id;
       this.item.createActivity(type, data, { renderSheet: false });
     }
