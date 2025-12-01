@@ -33,7 +33,6 @@ system:
           - type: itemUses
             value: '5'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -78,6 +77,7 @@ system:
         attacks: false
         proficiency: false
         saves: false
+        ability: ''
       profiles:
         - count: ''
           name: ''
@@ -86,7 +86,6 @@ system:
           level:
             min: null
             max: null
-          types: []
       summon:
         prompt: true
         identifier: ''
@@ -95,6 +94,13 @@ system:
       _id: eOtdNtz5e4c1CSHd
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: false
   uses:
     spent: 0
     recovery:
@@ -146,18 +152,14 @@ folder: EK3hCTgvAmjsKlfl
 sort: 100000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1729781655759
-  modifiedTime: 1745712700054
+  modifiedTime: 1764615716876
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!dmgFwpBronzeGrif'

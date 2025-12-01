@@ -28,6 +28,9 @@ system:
       effects:
         - _id: cN85nWiTzfGzWR7D
           onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
         value: '60'
@@ -57,6 +60,16 @@ system:
         dc:
           calculation: ''
           formula: '18'
+      img: ''
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
+      appliedEffects:
+        - cN85nWiTzfGzWR7D
     vTkZY9QUnH16jHrV:
       type: cast
       spell:
@@ -71,6 +84,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: vTkZY9QUnH16jHrV
       sort: 200000
       activation:
@@ -84,7 +98,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -107,6 +121,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     pBLKd2Ukm41DD9Tw:
       type: cast
       spell:
@@ -121,6 +141,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: pBLKd2Ukm41DD9Tw
       sort: 300000
       activation:
@@ -135,7 +156,6 @@ system:
           - type: itemUses
             value: '2'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -158,6 +178,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     f78Oiitz2BMcKx6i:
       type: cast
       spell:
@@ -172,6 +198,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: f78Oiitz2BMcKx6i
       sort: 500000
       activation:
@@ -186,7 +213,6 @@ system:
           - type: itemUses
             value: '2'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -209,6 +235,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     J9591oTJtg4nJxEA:
       type: cast
       spell:
@@ -273,6 +305,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: OsiNV2wXjfJPtpUx
       sort: 450000
       activation:
@@ -287,7 +320,6 @@ system:
           - type: itemUses
             value: '3'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -310,6 +342,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery:
@@ -469,18 +507,14 @@ effects:
       lastModifiedBy: dnd5ebuilder0000
     _key: '!items.effects!dmgWaterRingOfEl.T2Ca1y3uMstuVanT'
 folder: DC1x1wAm0NLFudA6
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1730684815591
-  modifiedTime: 1745712704871
+  modifiedTime: 1764616175609
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1450000

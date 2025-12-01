@@ -58,10 +58,14 @@ system:
             bonus: ''
             types:
               - force
-            scaling:
-              number: 1
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     9dTRH8Pj9QqzCbTC:
       type: check
       name: Control the Sphere
@@ -113,6 +117,13 @@ system:
         ability: int
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
     eA2EcW8p6IoxeM4n:
       type: save
       _id: eA2EcW8p6IoxeM4n
@@ -164,8 +175,6 @@ system:
             bonus: ''
             types:
               - force
-            scaling:
-              number: 1
         onSave: none
       save:
         ability: dex
@@ -175,6 +184,12 @@ system:
       name: ''
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery: []
@@ -251,18 +266,14 @@ system:
   proficient: null
 effects: []
 folder: U4xmShLy19Ry54zl
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1730664060452
-  modifiedTime: 1745712703512
+  modifiedTime: 1764617523499
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 35450000

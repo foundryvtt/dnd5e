@@ -185,7 +185,6 @@ system:
               - force
             scaling:
               mode: ''
-              number: 1
         onSave: half
       save:
         ability: dex
@@ -194,6 +193,12 @@ system:
           formula: '15'
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     fo7GQpsx1ryDXtPU:
       type: utility
       _id: fo7GQpsx1ryDXtPU
@@ -211,7 +216,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -247,19 +251,21 @@ system:
       name: Plant Bean
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712697960
+  modifiedTime: 1764614879506
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 350000

@@ -27,6 +27,9 @@ system:
       effects: []
       range:
         override: false
+        value: ''
+        units: ft
+        special: ''
       target:
         template:
           contiguous: false
@@ -66,11 +69,15 @@ system:
               - bludgeoning
               - piercing
               - slashing
-            scaling:
-              number: 1
       name: Attack vs Giant
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     9zzccmgorGRVKuZi:
       type: enchant
       name: Giant Slayer
@@ -267,14 +274,13 @@ flags:
     riders:
       activity:
         - RYyb1MBEt8avd2sN
-      effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745256805475
+  modifiedTime: 1764615074130
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 8200000

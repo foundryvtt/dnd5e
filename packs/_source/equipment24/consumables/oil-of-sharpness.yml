@@ -70,7 +70,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -117,6 +116,12 @@ system:
       img: ''
       appliedEffects:
         - qwUNBZRXUAvDcqDw
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     MVRpUqiBnbDX0snB:
       type: enchant
       name: Apply Oil to Ammunition
@@ -134,7 +139,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -181,6 +185,12 @@ system:
       img: ''
       appliedEffects:
         - qwUNBZRXUAvDcqDw
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
 effects:
   - type: enchantment
     name: Oiled
@@ -280,18 +290,14 @@ effects:
       exportSource: null
     _id: RcpoKs7oJMugW7ib
     _key: '!items.effects!dmgOilOfSharpnes.RcpoKs7oJMugW7ib'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712701671
+  modifiedTime: 1764614830211
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1300000

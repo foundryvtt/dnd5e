@@ -23,7 +23,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -33,6 +32,9 @@ system:
         value: '10'
       effects:
         - _id: z8fm5PbP5qz4iJuP
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: self
@@ -61,6 +63,13 @@ system:
       img: systems/dnd5e/icons/svg/damage/psychic.svg
       appliedEffects:
         - z8fm5PbP5qz4iJuP
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
   uses:
     spent: 0
     recovery:
@@ -153,18 +162,14 @@ effects:
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmgGemOfSeeing00.z8fm5PbP5qz4iJuP'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712700384
+  modifiedTime: 1764616933015
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 15500000

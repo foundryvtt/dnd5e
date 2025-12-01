@@ -27,7 +27,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: Card's effect occurs immediately upon draw
       duration:
@@ -36,6 +35,9 @@ system:
         override: false
       effects:
         - _id: TdKyE2tB9wNdh86t
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: self
@@ -65,6 +67,12 @@ system:
       _id: lrLn1wxOuly8zelE
       appliedEffects:
         - TdKyE2tB9wNdh86t
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery: []
@@ -152,18 +160,14 @@ folder: XVXuU21XyvevGap7
 sort: 1900000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1729188934076
-  modifiedTime: 1745256804159
+  modifiedTime: 1764615877898
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!dmgDmtEuryale000'

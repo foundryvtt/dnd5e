@@ -59,6 +59,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: 7bZzIRhMxei7kmFO
       sort: 200000
       activation:
@@ -72,7 +73,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -95,6 +96,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     jqnIS8yB9Mbih7tp:
       type: cast
       spell:
@@ -109,6 +116,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: jqnIS8yB9Mbih7tp
       sort: 400000
       activation:
@@ -122,7 +130,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -145,6 +153,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     zlCbbGPfUWPIMItx:
       type: cast
       spell:
@@ -159,6 +173,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: zlCbbGPfUWPIMItx
       sort: 500000
       activation:
@@ -172,7 +187,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -195,6 +210,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     t8vD0vJ4MzCZIku2:
       type: utility
       name: Reflect Enchantment
@@ -213,7 +234,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -245,6 +265,13 @@ system:
         formula: ''
       img: systems/dnd5e/icons/svg/activity/save.svg
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
     tEk1wNWngqDYOgOB:
       type: utility
       name: Resist Enchantment
@@ -262,7 +289,6 @@ system:
         targets:
           - type: activityUses
             value: '1'
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -297,6 +323,13 @@ system:
         formula: ''
       img: systems/dnd5e/icons/svg/rosa-shield.svg
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
   uses:
     spent: 0
     recovery:
@@ -393,18 +426,14 @@ system:
   mastery: topple
 effects: []
 folder: 5p9KrkF39e6vFO4g
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712703554
+  modifiedTime: 1764615317920
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 100025

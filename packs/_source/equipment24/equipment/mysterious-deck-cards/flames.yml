@@ -27,7 +27,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -37,6 +36,9 @@ system:
         special: Until either you or the devil dies
       effects:
         - _id: UpR6gfUl5Qqjddq1
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: self
@@ -66,6 +68,12 @@ system:
       _id: XcM358fbA5QM0s84
       appliedEffects:
         - UpR6gfUl5Qqjddq1
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery: []
@@ -149,18 +157,14 @@ folder: XVXuU21XyvevGap7
 sort: 1700000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1729190087505
-  modifiedTime: 1745256804260
+  modifiedTime: 1764615886325
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!dmgDmtFlames0000'

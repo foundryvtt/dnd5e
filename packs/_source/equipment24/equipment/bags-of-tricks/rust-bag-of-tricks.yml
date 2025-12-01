@@ -65,7 +65,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: Transformed creature determined by GM or table roll
       duration:
@@ -108,6 +107,7 @@ system:
         attacks: false
         proficiency: false
         saves: false
+        ability: ''
       profiles:
         - count: ''
           name: ''
@@ -116,7 +116,6 @@ system:
           level:
             min: null
             max: null
-          types: []
         - count: ''
           name: ''
           _id: sz8G8hKLXnov0Ogq
@@ -124,7 +123,6 @@ system:
           level:
             min: null
             max: null
-          types: []
         - count: ''
           name: ''
           _id: DuOt4Z41ZMs4foqq
@@ -132,7 +130,6 @@ system:
           level:
             min: null
             max: null
-          types: []
         - count: ''
           name: ''
           _id: J1kF0U6RizYz9jaa
@@ -140,7 +137,6 @@ system:
           level:
             min: null
             max: null
-          types: []
         - count: ''
           name: ''
           _id: vrkqGgFiq2kOG1kt
@@ -148,7 +144,6 @@ system:
           level:
             min: null
             max: null
-          types: []
         - count: ''
           name: ''
           _id: iV4Q4Qjp73ZCcLqx
@@ -156,7 +151,6 @@ system:
           level:
             min: null
             max: null
-          types: []
         - count: ''
           name: ''
           _id: iYlBabuB5uOig7hm
@@ -164,7 +158,6 @@ system:
           level:
             min: null
             max: null
-          types: []
         - count: ''
           name: ''
           _id: 9txdXobEjQtYqTT7
@@ -172,12 +165,19 @@ system:
           level:
             min: null
             max: null
-          types: []
       summon:
         prompt: false
         identifier: ''
         mode: ''
       name: Pull and Throw
+      img: ''
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+      appliedEffects: []
   uses:
     spent: 0
     max: '3'
@@ -201,21 +201,17 @@ system:
   strength: null
   proficient: null
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 sort: 200000
 ownership:
   default: 0
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1728589118138
-  modifiedTime: 1745712703243
+  modifiedTime: 1764615591872
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!dmgRustBagofTric'

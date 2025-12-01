@@ -78,7 +78,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -115,6 +114,12 @@ system:
         formula: ''
       img: systems/dnd5e/icons/svg/ink-pot.svg
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     keqZVIzoCF0jud8i:
       type: save
       name: Sprinkle on Elemental
@@ -133,7 +138,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -172,8 +176,6 @@ system:
             bonus: ''
             types:
               - necrotic
-            scaling:
-              number: 1
         onSave: half
       save:
         ability: con
@@ -182,6 +184,12 @@ system:
           formula: '13'
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery: []
@@ -247,18 +255,14 @@ system:
   properties:
     - mgc
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712699479
+  modifiedTime: 1764614857169
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 600000

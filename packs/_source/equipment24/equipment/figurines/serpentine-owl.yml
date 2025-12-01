@@ -35,7 +35,6 @@ system:
           - type: itemUses
             value: '@item.uses.max'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -78,13 +77,15 @@ system:
         attacks: false
         proficiency: false
         saves: false
+        ability: ''
       profiles:
-        - _id: BcEYpyd1XmoGOaPj
+        - count: ''
+          name: ''
+          _id: BcEYpyd1XmoGOaPj
+          uuid: Compendium.dnd5e.actors24.Actor.VVXly3ue0i3YgGrB
           level:
             min: null
             max: null
-          types: []
-          uuid: Compendium.dnd5e.actors24.Actor.VVXly3ue0i3YgGrB
       summon:
         prompt: true
         mode: ''
@@ -92,6 +93,12 @@ system:
       name: ''
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery:
@@ -143,18 +150,14 @@ folder: EK3hCTgvAmjsKlfl
 sort: 175000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1729781760022
-  modifiedTime: 1745712700279
+  modifiedTime: 1764615759976
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!dmgFwpSerpentine'
