@@ -3,7 +3,7 @@ system:
   description:
     value: >-
       <p>Choose a willing creature that you can see within range. Until the
-      spell ends, the target’s Speed is doubled, it gains a +2 bonus to Armor
+      spell ends, the target's Speed is doubled, it gains a +2 bonus to Armor
       Class, it has Advantage on Dexterity saving throws, and it gains an
       additional action on each of its turns. That action can be used to take
       only the Attack (one attack only), Dash, Disengage, Hide, or Utilize
@@ -223,7 +223,7 @@ effects:
       systemVersion: 5.1.9
       createdTime: null
       modifiedTime: 1760128875594
-      lastModifiedBy: BcGywgWNTaQhpKPn
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!phbsplHaste00000.NEFWcyysYgsE6de3'
   - name: Lethargy
@@ -237,8 +237,7 @@ effects:
       startRound: null
       startTurn: null
     disabled: false
-    flags:
-      dnd5e: {}
+    flags: {}
     img: icons/tools/nautical/anchor-blue.webp
     _id: S5XcFawnnNHO8bUr
     type: base
@@ -294,7 +293,6 @@ flags:
       activity: []
       effect: []
 _stats:
-  compendiumSource: null
   duplicateSource: null
   coreVersion: '13.348'
   systemId: dnd5e
