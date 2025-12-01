@@ -90,7 +90,6 @@ system:
         targets:
           - type: activityUses
             value: '1'
-            scaling: {}
       description:
         chatFlavor: 'On Hit: [[/save ability=con dc=17]] vs Stunned'
       duration:
@@ -99,6 +98,9 @@ system:
         override: false
       effects:
         - _id: 4awBYMh85YMXFJDS
+          level:
+            min: null
+            max: null
       range:
         override: true
         units: ft
@@ -142,6 +144,14 @@ system:
       img: ''
       appliedEffects:
         - 4awBYMh85YMXFJDS
+      visibility:
+        requireAttunement: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireMagic: true
+        requireIdentification: true
     VwpaQcj4wp0XLazq:
       type: save
       name: Giants' Bane (On Crit)
@@ -166,6 +176,9 @@ system:
       effects: []
       range:
         override: false
+        value: ''
+        units: ft
+        special: ''
       target:
         template:
           contiguous: false
@@ -187,11 +200,9 @@ system:
               enabled: false
               formula: ''
             number: null
-            denomination: 0
+            denomination: null
             bonus: '1000'
             types: []
-            scaling:
-              number: 1
         onSave: none
       save:
         ability: con
@@ -200,6 +211,14 @@ system:
           formula: '17'
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
+        requireAttunement: true
   uses:
     spent: 0
     recovery: []
@@ -503,11 +522,11 @@ flags:
         - dC3xorzL0AAgy7y1
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712700540
+  modifiedTime: 1764615117102
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 8300000

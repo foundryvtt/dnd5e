@@ -35,7 +35,6 @@ system:
           - type: itemUses
             value: '@item.uses.max'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -75,6 +74,7 @@ system:
         attacks: false
         proficiency: false
         saves: false
+        ability: ''
       profiles:
         - count: ''
           name: ''
@@ -83,7 +83,6 @@ system:
           level:
             min: null
             max: null
-          types: []
       summon:
         prompt: true
         mode: ''
@@ -91,6 +90,12 @@ system:
       name: ''
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     bO4agG7byTwFTiFg:
       type: cast
       spell:
@@ -190,18 +195,14 @@ folder: EK3hCTgvAmjsKlfl
 sort: 162500
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1729781769404
-  modifiedTime: 1745712700308
+  modifiedTime: 1764615764688
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!dmgFwpSilverRave'

@@ -18,6 +18,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: FYtfhGIVPzCls9Mv
       sort: 0
       activation:
@@ -32,7 +33,6 @@ system:
           - type: itemUses
             value: '5'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -55,6 +55,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     fKknnO6Gnieic15C:
       type: cast
       spell:
@@ -69,6 +75,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: fKknnO6Gnieic15C
       sort: 0
       activation:
@@ -83,7 +90,6 @@ system:
           - type: itemUses
             value: '2'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -106,6 +112,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery:
@@ -189,18 +201,14 @@ system:
     reach: null
 effects: []
 folder: rLoBplj1TIznxeWI
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712704539
+  modifiedTime: 1764616360326
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: -50000

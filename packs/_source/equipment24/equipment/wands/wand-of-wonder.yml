@@ -18,6 +18,7 @@ system:
           - somatic
           - material
         spellbook: false
+        ability: ''
       _id: Z62czXwABB7SN1lP
       sort: 0
       activation:
@@ -33,7 +34,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -56,6 +56,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     4h4Aazi3L1MmByOt:
       type: cast
       spell:
@@ -70,6 +76,7 @@ system:
           - somatic
           - material
         spellbook: false
+        ability: ''
       _id: 4h4Aazi3L1MmByOt
       sort: 0
       activation:
@@ -85,7 +92,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -108,6 +114,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     76MvwJBXwm1GbzfW:
       type: cast
       spell:
@@ -122,6 +134,7 @@ system:
           - somatic
           - material
         spellbook: false
+        ability: ''
       _id: 76MvwJBXwm1GbzfW
       sort: 0
       activation:
@@ -137,7 +150,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -160,6 +172,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     F6QdFpERu7c4x6cd:
       type: cast
       spell:
@@ -174,6 +192,7 @@ system:
           - somatic
           - material
         spellbook: false
+        ability: ''
       _id: F6QdFpERu7c4x6cd
       sort: 0
       activation:
@@ -189,7 +208,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -212,6 +230,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     uDrKgJTXIcF0EM33:
       type: cast
       spell:
@@ -226,6 +250,7 @@ system:
           - somatic
           - material
         spellbook: false
+        ability: ''
       _id: uDrKgJTXIcF0EM33
       sort: 0
       activation:
@@ -241,7 +266,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -264,6 +288,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     yMZ4RIhJV1jvkKaf:
       type: cast
       spell:
@@ -278,6 +308,7 @@ system:
           - somatic
           - material
         spellbook: false
+        ability: ''
       _id: yMZ4RIhJV1jvkKaf
       sort: 0
       activation:
@@ -293,7 +324,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -316,6 +346,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     DIkFGxynTge6LTPJ:
       type: utility
       name: Heavy Rain (36-40)
@@ -333,7 +369,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -373,6 +409,13 @@ system:
         formula: ''
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
     Go7QGLKLGLggVcNK:
       type: utility
       name: Cloud of Oversized Butterflies (41-45)
@@ -389,7 +432,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -430,6 +473,13 @@ system:
       _id: Go7QGLKLGLggVcNK
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
     EhdR11nT5sMOi9h5:
       type: cast
       spell:
@@ -444,6 +494,7 @@ system:
           - somatic
           - material
         spellbook: false
+        ability: ''
       _id: EhdR11nT5sMOi9h5
       sort: 0
       activation:
@@ -459,7 +510,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -482,6 +532,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     cKz4qaK2elWiFRCS:
       type: cast
       spell:
@@ -496,6 +552,7 @@ system:
           - somatic
           - material
         spellbook: false
+        ability: ''
       _id: cKz4qaK2elWiFRCS
       sort: 0
       activation:
@@ -511,7 +568,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -534,9 +590,15 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     2x5DGGxGI3bgymqf:
       type: utility
-      name: Grass Cover (61-64
+      name: Grass Cover (61-64)
       sort: 0
       activation:
         type: ''
@@ -550,7 +612,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -591,6 +653,13 @@ system:
       _id: 2x5DGGxGI3bgymqf
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
     6kTej94dEVrwxM9D:
       type: save
       name: Burst of Colorful Light (78-82)
@@ -608,7 +677,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -618,6 +687,9 @@ system:
       effects:
         - _id: jSv9Ref3gLDObysC
           onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: self
@@ -651,6 +723,13 @@ system:
       img: ''
       appliedEffects:
         - jSv9Ref3gLDObysC
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
     hohchQU2VPFVUIWG:
       type: cast
       spell:
@@ -665,6 +744,7 @@ system:
           - somatic
           - material
         spellbook: false
+        ability: ''
       _id: hohchQU2VPFVUIWG
       sort: 0
       activation:
@@ -680,7 +760,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -703,6 +782,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     R4TuLg6r7fTmIMF9:
       type: damage
       name: Stream of Gems (88-92)
@@ -720,7 +805,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -763,10 +848,15 @@ system:
             bonus: ''
             types:
               - bludgeoning
-            scaling:
-              number: 1
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
     Wxry2v7kMU16VG7T:
       type: cast
       spell:
@@ -781,6 +871,7 @@ system:
           - somatic
           - material
         spellbook: false
+        ability: ''
       _id: Wxry2v7kMU16VG7T
       sort: 0
       activation:
@@ -796,7 +887,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -819,6 +909,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery:
@@ -945,18 +1041,14 @@ effects:
       exportSource: null
     _key: '!items.effects!dmgWandOfWonder0.jSv9Ref3gLDObysC'
 folder: rLoBplj1TIznxeWI
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712704839
+  modifiedTime: 1764616499376
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: -46875

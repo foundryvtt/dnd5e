@@ -56,6 +56,13 @@ system:
       name: Splash
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
     PdtjMpg7Bcqa1AVp:
       type: utility
       sort: 0
@@ -107,6 +114,13 @@ system:
       _id: PdtjMpg7Bcqa1AVp
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
     QObmaE8dWI8pIXFE:
       type: save
       name: Geyser
@@ -162,8 +176,6 @@ system:
             bonus: ''
             types:
               - bludgeoning
-            scaling:
-              number: 1
         onSave: none
       save:
         ability: str
@@ -172,6 +184,13 @@ system:
           formula: '13'
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
   uses:
     spent: 0
     recovery: []
@@ -236,18 +255,14 @@ system:
   properties:
     - mgc
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712698959
+  modifiedTime: 1764616828341
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 38300000

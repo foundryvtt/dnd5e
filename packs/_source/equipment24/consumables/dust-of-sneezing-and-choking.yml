@@ -22,7 +22,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -32,6 +31,9 @@ system:
       effects:
         - _id: AZcO17cLsTHbb0P9
           onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: self
@@ -66,6 +68,12 @@ system:
       img: ''
       appliedEffects:
         - AZcO17cLsTHbb0P9
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery: []
@@ -170,18 +178,14 @@ effects:
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmgDustOfSneezin.AZcO17cLsTHbb0P9'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712699512
+  modifiedTime: 1764614847025
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 700000

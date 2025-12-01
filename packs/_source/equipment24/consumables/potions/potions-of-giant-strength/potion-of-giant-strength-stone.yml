@@ -23,7 +23,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -32,6 +31,9 @@ system:
         override: false
       effects:
         - _id: ja1TakW2VVvY8HW3
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: self
@@ -45,6 +47,7 @@ system:
           choice: false
           count: ''
           type: creature
+          special: ''
         override: false
         prompt: false
       uses:
@@ -57,7 +60,14 @@ system:
         name: ''
         formula: ''
       img: ''
-      appliedEffects: []
+      appliedEffects:
+        - ja1TakW2VVvY8HW3
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery: []
@@ -146,18 +156,14 @@ effects:
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmgStonePotionOf.ja1TakW2VVvY8HW3'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745432578420
+  modifiedTime: 1764614663373
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 250000

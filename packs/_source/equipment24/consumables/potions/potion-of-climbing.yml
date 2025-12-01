@@ -22,7 +22,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -31,6 +31,9 @@ system:
         override: false
       effects:
         - _id: D6fYii3nkDC4Tsbi
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: self
@@ -58,6 +61,12 @@ system:
       img: ''
       appliedEffects:
         - D6fYii3nkDC4Tsbi
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery: []
@@ -145,18 +154,14 @@ effects:
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmgPotionOfClimb.D6fYii3nkDC4Tsbi'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745431704598
+  modifiedTime: 1764614755899
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

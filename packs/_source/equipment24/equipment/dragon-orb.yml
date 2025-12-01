@@ -29,6 +29,9 @@ system:
       effects:
         - _id: raPJlnmYfmMnMEE3
           onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: self
@@ -58,7 +61,14 @@ system:
           calculation: ''
           formula: '15'
       img: ''
-      appliedEffects: []
+      appliedEffects:
+        - raPJlnmYfmMnMEE3
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     FaXepcc5YH9rqwu7:
       type: cast
       spell:
@@ -73,6 +83,7 @@ system:
           - somatic
           - material
         spellbook: false
+        ability: ''
       _id: FaXepcc5YH9rqwu7
       sort: 200000
       activation:
@@ -106,6 +117,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     gU19MBO5R6a6xhIX:
       type: cast
       spell:
@@ -120,6 +137,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: gU19MBO5R6a6xhIX
       sort: 400000
       activation:
@@ -134,7 +152,6 @@ system:
           - type: itemUses
             value: '4'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -157,6 +174,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     OQftVaabJyONkpL3:
       type: cast
       spell:
@@ -171,6 +194,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: OQftVaabJyONkpL3
       sort: 500000
       activation:
@@ -184,7 +208,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -207,6 +231,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     tUFymm8hAKT7VZul:
       type: cast
       spell:
@@ -221,6 +251,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: tUFymm8hAKT7VZul
       sort: 600000
       activation:
@@ -235,7 +266,6 @@ system:
           - type: itemUses
             value: '2'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -258,6 +288,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     QDkpJHMmqFX13rKr:
       type: cast
       spell:
@@ -266,12 +302,13 @@ system:
           attack: null
           save: null
           override: false
-        level: null
+        level: 1
         properties:
           - vocal
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: QDkpJHMmqFX13rKr
       sort: 700000
       activation:
@@ -283,7 +320,8 @@ system:
           allowed: false
         spellSlot: true
         targets: []
-      description: {}
+      description:
+        chatFlavor: ''
       duration:
         units: inst
         concentration: false
@@ -301,6 +339,15 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
+      name: ''
+      img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     FJYPyl7amErsBC3X:
       type: cast
       spell:
@@ -315,6 +362,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: FJYPyl7amErsBC3X
       sort: 800000
       activation:
@@ -329,7 +377,6 @@ system:
           - type: itemUses
             value: '3'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -352,6 +399,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     KNtsQw6UPEuzR1Qu:
       type: utility
       name: Call Dragons
@@ -402,6 +455,13 @@ system:
         formula: ''
       img: ''
       appliedEffects: []
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireMagic: true
   uses:
     spent: 0
     recovery: []
@@ -522,18 +582,14 @@ effects:
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmgOrbOfDragonki.raPJlnmYfmMnMEE3'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712701746
+  modifiedTime: 1764616868178
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 24200000

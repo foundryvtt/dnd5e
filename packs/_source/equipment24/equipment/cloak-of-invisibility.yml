@@ -22,7 +22,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -32,6 +31,9 @@ system:
         value: '1'
       effects:
         - _id: sSsgrnNQCK4vurTm
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: self
@@ -45,6 +47,7 @@ system:
           choice: false
           count: ''
           type: self
+          special: ''
         override: false
         prompt: true
       uses:
@@ -58,7 +61,14 @@ system:
         formula: ''
       name: Raise Hood
       img: ''
-      appliedEffects: []
+      appliedEffects:
+        - sSsgrnNQCK4vurTm
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery:
@@ -152,18 +162,14 @@ effects:
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmgCloakOfInvisi.sSsgrnNQCK4vurTm'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1740680117716
+  modifiedTime: 1764616722094
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 7900000

@@ -14,34 +14,55 @@ system:
         type: action
         value: null
         override: false
+        condition: ''
       consumption:
         scaling:
           allowed: false
         spellSlot: true
         targets: []
-      description: {}
+      description:
+        chatFlavor: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects:
         - _id: XP45fDHAojcVjDc0
+          level:
+            min: null
+            max: null
       range:
         override: false
+        special: ''
       target:
         template:
           contiguous: false
           units: ft
+          type: ''
         affects:
           choice: false
+          type: ''
         override: false
         prompt: true
       uses:
         spent: 0
         recovery: []
+        max: ''
       roll:
         prompt: false
         visible: false
+        name: ''
+        formula: ''
+      img: ''
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
+      appliedEffects:
+        - XP45fDHAojcVjDc0
   uses:
     spent: 0
     recovery:
@@ -158,18 +179,14 @@ effects:
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmgBootsOfSpeed0.XP45fDHAojcVjDc0'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745431704598
+  modifiedTime: 1764616628853
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 4000000

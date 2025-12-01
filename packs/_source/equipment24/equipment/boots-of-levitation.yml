@@ -19,6 +19,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: IcLhhO0f7VGtA9ut
       sort: 0
       activation:
@@ -49,6 +50,7 @@ system:
           choice: false
           count: ''
           type: self
+          special: ''
         override: true
         prompt: true
       uses:
@@ -57,6 +59,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery: []
@@ -108,18 +116,14 @@ system:
   strength: null
   proficient: null
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1740680116496
+  modifiedTime: 1764616621218
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 3900000

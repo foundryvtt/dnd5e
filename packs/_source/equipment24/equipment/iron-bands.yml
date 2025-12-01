@@ -28,6 +28,9 @@ system:
         override: false
       effects:
         - _id: IgRS1gR2uBlWZnIK
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: ft
@@ -64,7 +67,14 @@ system:
         includeBase: true
         parts: []
       img: ''
-      appliedEffects: []
+      appliedEffects:
+        - IgRS1gR2uBlWZnIK
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     2FSMsnJsj8zfMx85:
       type: check
       name: Break Check
@@ -212,18 +222,14 @@ effects:
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmgIronBandsOfBi.IgRS1gR2uBlWZnIK'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712701020
+  modifiedTime: 1764617113535
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 19300000

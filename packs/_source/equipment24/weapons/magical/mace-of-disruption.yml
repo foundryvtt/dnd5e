@@ -92,6 +92,9 @@ system:
       effects:
         - _id: Z49QSPjltZ1NT28K
           onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
       target:
@@ -120,7 +123,15 @@ system:
           formula: '15'
       name: ''
       img: ''
-      appliedEffects: []
+      appliedEffects:
+        - Z49QSPjltZ1NT28K
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: false
   uses:
     spent: 0
     recovery: []
@@ -240,18 +251,14 @@ effects:
       exportSource: null
     _key: '!items.effects!dmgMaceOfDisrupt.Z49QSPjltZ1NT28K'
 folder: kie870i5kr7yuxO8
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745431704598
+  modifiedTime: 1764615183500
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

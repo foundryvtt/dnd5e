@@ -40,6 +40,7 @@ system:
           choice: false
           count: ''
           type: self
+          special: ''
         override: false
         prompt: true
       uses:
@@ -58,6 +59,13 @@ system:
         bonus: '15'
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
   uses:
     spent: 0
     recovery: []
@@ -116,18 +124,14 @@ system:
   strength: null
   proficient: null
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712702395
+  modifiedTime: 1764615809799
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: -100000

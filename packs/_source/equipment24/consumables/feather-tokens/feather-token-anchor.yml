@@ -23,7 +23,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -32,6 +31,9 @@ system:
         override: false
       effects:
         - _id: Fvj9Ua7rVEqdfPz5
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: self
@@ -59,6 +61,13 @@ system:
       img: ''
       appliedEffects:
         - Fvj9Ua7rVEqdfPz5
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
   uses:
     spent: 0
     recovery: []
@@ -148,18 +157,14 @@ effects:
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmgAnchorQuaalsF.Fvj9Ua7rVEqdfPz5'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712697765
+  modifiedTime: 1764614410831
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 100000
