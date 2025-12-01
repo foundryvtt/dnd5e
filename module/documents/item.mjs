@@ -383,7 +383,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( !this.advancement.byType.ScaleValue ) return {};
     const item = ["class", "subclass"].includes(this.advancementRootItem?.type) ? this.advancementRootItem : this;
     const level = item.type === "class" ? item.system.levels : item.type === "subclass" ? item.class?.system.levels
-      : this.parent?.system.details.level ?? 0;
+      : item.system.advancementLevel ?? this.parent?.system.details.level ?? 0;
     return this.advancement.byType.ScaleValue.reduce((obj, advancement) => {
       obj[advancement.identifier] = advancement.valueForLevel(level);
       return obj;
