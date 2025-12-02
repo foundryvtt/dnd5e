@@ -552,6 +552,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    */
   _prepareSpellbook(context) {
     const spellbook = {};
+    if ( this.actor.statuses.has("antimagic") ) return spellbook;
     const columns = customElements.get(this.options.elements.inventory).mapColumns([
       "school", "time", "range", "target", "roll", { id: "uses", order: 650, priority: 300 },
       { id: "formula", priority: 200 }, "controls"

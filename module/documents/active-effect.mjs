@@ -20,6 +20,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * @type {Record<string, string>}
    */
   static ID = {
+    ANTIMAGIC: staticID("dnd5eantimagic"),
     BLOODIED: staticID("dnd5ebloodied"),
     ENCUMBERED: staticID("dnd5eencumbered"),
     EXHAUSTION: staticID("dnd5eexhaustion")
