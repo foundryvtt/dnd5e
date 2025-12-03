@@ -7,8 +7,8 @@ system:
   uses:
     spent: 0
     recovery: []
-    autoDestroy: false
-    max: ''
+    autoDestroy: true
+    max: '1'
   description:
     value: <p>@Embed[Compendium.dnd5e.equipment24.Item.dmgSpellScroll00 inline]</p>
     chat: ''
@@ -59,11 +59,11 @@ flags:
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.348'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 5.2.1
   createdTime: 1757718208802
-  modifiedTime: 1757719012276
+  modifiedTime: 1764795478051
   lastModifiedBy: dnd5ebuilder0000
 ownership:
   default: 0
