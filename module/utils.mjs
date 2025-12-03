@@ -1249,6 +1249,12 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
     label = game.i18n.format("DND5E.AbilityScoreL", { ability: CONFIG.DND5E.abilities[key].label });
   }
 
+  // Senses
+  else if ( attr.startsWith("attributes.senses.ranges.") ) {
+    const key = attr.split(".")[3];
+    label = CONFIG.DND5E.senses[key];
+  }
+
   // Resources
   else if ( attr === "resources.legact.spent" ) label = "DND5E.LegendaryAction.LabelPl";
   else if ( attr === "resources.legact.value" ) label = "DND5E.LegendaryAction.Remaining";

@@ -39,6 +39,16 @@ export default class MovementSensesConfig extends BaseConfigSheet {
 
   /* -------------------------------------------- */
 
+  /**
+   * Location of the specific distances within the data.
+   * @type {string|null}
+   */
+  get subPath() {
+    return this.options.type === "movement" ? null : "ranges";
+  }
+
+  /* -------------------------------------------- */
+
   /** @override */
   get title() {
     return game.i18n.localize(this.options.type === "movement" ? "DND5E.Movement" : "DND5E.Senses");
@@ -79,8 +89,10 @@ export default class MovementSensesConfig extends BaseConfigSheet {
     if ( context.fields ) {
       context.extras = this._prepareExtraFields(context);
       context.types = this.types.map(key => ({
-        field: context.fields[key],
-        value: context.data[key],
+        field: this.subPath ? context.fields[this.subPath].model : context.fields[key],
+        label: this.options.type === "movement" ? CONFIG.DND5E.movementTypes[key].label : CONFIG.DND5E.senses[key],
+        name: this.subPath ? `system.${this.keyPath}.${this.subPath}.${key}` : `system.${this.keyPath}.${key}`,
+        value: this.subPath ? context.data[this.subPath][key] : context.data[key],
         placeholder: placeholderData?.[key] ?? ""
       }));
 
