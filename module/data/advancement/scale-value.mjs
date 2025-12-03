@@ -1,9 +1,9 @@
-import { formatLength } from "../../utils.mjs";
+import { filteredKeys, formatLength } from "../../utils.mjs";
 import IdentifierField from "../fields/identifier-field.mjs";
 import MappingField from "../fields/mapping-field.mjs";
 import { createCheckboxInput } from "../../applications/fields.mjs";
 
-const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { BooleanField, NumberField, ObjectField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * @import {
@@ -34,7 +34,7 @@ export class ScaleValueConfigurationData extends foundry.abstract.DataModel {
       identifier: new IdentifierField({ required: true }),
       type: new StringField({ required: true, initial: "string", choices: TYPES }),
       distance: new SchemaField({ units: new StringField({ required: true }) }),
-      scale: new MappingField(new ScaleValueEntryField(), { required: true })
+      scale: new MappingField(new ObjectField(), { required: true })
     };
   }
 
@@ -90,6 +90,11 @@ export class ScaleValueEntryField extends foundry.data.fields.ObjectField {
  * @mixes ScaleValueStringTypeData
  */
 export class ScaleValueType extends foundry.abstract.DataModel {
+  constructor(data = {}, options = {}) {
+    const explicitKeys = new Set(filteredKeys(data));
+    super(data, options);
+    this.#explicitKeys = explicitKeys;
+  }
 
   /* -------------------------------------------- */
   /*  Model Configuration                         */
@@ -139,6 +144,14 @@ export class ScaleValueType extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
+   * Keys provided directly to the model rather than filled in automatically from default values.
+   * @type {Set<string>}
+   */
+  #explicitKeys;
+
+  /* -------------------------------------------- */
+
+  /**
    * This scale value prepared to be used in roll formulas.
    * @type {string|null}
    */
@@ -169,23 +182,34 @@ export class ScaleValueType extends foundry.abstract.DataModel {
   /**
    * Retrieve field data with associated values.
    * @param {number} level                Level for which this data is being prepared.
-   * @param {ScaleValueType} [value]      Value for the field at this level.
    * @param {ScaleValueType} [lastValue]  Previous value used to generate placeholders.
    * @returns {Record<string, object>}
    */
-  static getFields(level, value, lastValue) {
+  getFields(level, lastValue) {
     const fields = {};
     for ( const [name, field] of Object.entries(this.schema.fields) ) {
       if ( field.options.hidden ) continue;
       fields[name] = {
         field,
         input: field instanceof BooleanField ? createCheckboxInput : null,
+        isPlaceholder: !this.#explicitKeys.has(name),
         name: `configuration.scale.${level}.${name}`,
-        placeholder: this.getPlaceholder(name, lastValue),
-        value: value?.[name]
+        placeholder: this.constructor.getPlaceholder(name, lastValue),
+        value: this.#explicitKeys.has(name) ? this[name] : null
       };
     }
     return fields;
+  }
+
+  /**
+   * Retrieve field data with associated values.
+   * @param {number} level                Level for which this data is being prepared.
+   * @param {ScaleValueType} value        Value for this level.
+   * @param {ScaleValueType} [lastValue]  Previous value used to generate placeholders.
+   * @returns {Record<string, object>}
+   */
+  static getFields(level, value, lastValue) {
+    return value.getFields(level, lastValue);
   }
 
   /* -------------------------------------------- */
@@ -239,6 +263,13 @@ export class ScaleValueTypeNumber extends ScaleValueType {
     if ( Number.isNaN(value) ) return null;
     return new this({value}, options);
   }
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /** @override */
+  get formula() { return String(this.value); }
 }
 
 
