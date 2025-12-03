@@ -903,7 +903,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     damages.amount = damages.amount > 0 ? Math.floor(damages.amount) : Math.ceil(damages.amount);
 
     // Apply damage threshold
-    if ( (damages.amount < (this.system.attributes?.hp?.dt ?? -Infinity))
+    if ( (damages.amount > 0 && damages.amount < (this.system.attributes?.hp?.dt ?? -Infinity))
       && !((options.ignore === true) || options.ignore?.threshold) ) {
       damages.amount = 0;
       damages.forEach(d => {
