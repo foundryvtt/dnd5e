@@ -3,35 +3,22 @@ import { log } from "../../utils.mjs";
 import Application5e from "../api/application.mjs";
 
 /**
- * Internal type used to manage each step within the advancement process.
- *
- * @typedef {object} AdvancementStep
- * @property {string} type                Step type from "forward", "reverse", "restore", or "delete".
- * @property {AdvancementFlow} [flow]     Flow object for the advancement being applied by this step. In the case of
- *                                        "delete" steps, this flow indicates the advancement flow that originally
- *                                        deleted the item.
- * @property {Item5e} [item]              For "delete" steps only, the item to be removed.
- * @property {object} [class]             Contains data on class if step was triggered by class level change.
- * @property {Item5e} [class.item]        Class item that caused this advancement step.
- * @property {number} [class.level]       Level the class should be during this step.
- * @property {number} [level]             Character level at this step, if different than flow's level.
- * @property {boolean} [automatic=false]  Should the manager attempt to apply this step without user interaction?
- * @property {boolean} [synthetic=false]  Was this step created as a result of an item introduced or deleted?
+ * @import { _AdvancementManagerOptions, AdvancementStep } from "./_types.mjs";
  */
 
 /**
- * @typedef AdvancementManagerConfiguration
- * @property {boolean} [automaticApplication=false]  Apply advancement steps automatically if no user input is required.
- * @property {boolean} [showVisualizer=false]        Display the step debugging application.
+ * @typedef {ApplicationConfiguration & _AdvancementManagerOptions} AdvancementManagerOptions
  */
 
 /**
  * Application for controlling the advancement workflow and displaying the interface.
- *
- * @param {Actor5e} actor        Actor on which this advancement is being performed.
- * @param {object} [options={}]  Additional application options.
+ * @extends {Application5e<AdvancementManagerOptions>}
  */
 export default class AdvancementManager extends Application5e {
+  /**
+   * @param {Actor5e} actor        Actor on which this advancement is being performed.
+   * @param {DeepPartial<AdvancementManagerOptions>} [options={}]  Additional application options.
+   */
   constructor(actor, options={}) {
     super(options);
     this.actor = actor;
@@ -252,12 +239,12 @@ export default class AdvancementManager extends Application5e {
     if ( itemData.type === "class" ) {
       dataClone.system.levels = 0;
       if ( !manager.clone.system.details.originalClass ) {
-        manager.clone.updateSource({"system.details.originalClass": dataClone._id});
+        manager.clone.updateSource({ "system.details.originalClass": dataClone._id });
       }
     }
 
     // Add item to clone & get new instance from clone
-    manager.clone.updateSource({items: [dataClone]});
+    manager.clone.updateSource({ items: [dataClone] });
     const clonedItem = manager.clone.items.get(dataClone._id);
 
     // For class items, prepare level change data
@@ -269,6 +256,11 @@ export default class AdvancementManager extends Application5e {
     Array.fromRange(this.currentLevel(clonedItem, manager.clone) + 1)
       .flatMap(l => this.flowsForLevel(clonedItem, l))
       .forEach(flow => manager.steps.push({ type: "forward", flow }));
+
+    // Ensure the final level is indicated to ensure any synthetic steps end up at correct level
+    if ( actor.system.details.level > 0 ) manager.steps.push({
+      type: "forward", automatic: true, level: actor.system.details.level
+    });
 
     return manager;
   }
@@ -717,10 +709,10 @@ export default class AdvancementManager extends Application5e {
       for ( let idx = this.#stepIndex; idx < this.steps.length; idx++ ) {
         // Find spots where the level increases
         const getLevel = step => (item.system.advancementClassLinked ? undefined : step?.level)
-          ?? step?.flow?.level ?? step?.class?.level;
+          ?? step?.flow?.level ?? step?.class?.level ?? step?.level;
         const thisLevel = getLevel(this.steps[idx]);
         const nextLevel = getLevel(this.steps[idx + 1]);
-        if ( (thisLevel < handledLevel) || (thisLevel === nextLevel) ) continue;
+        if ( (thisLevel < handledLevel) || (thisLevel >= nextLevel) ) continue;
 
         // Determine if there is any advancement to be done for the added item to this level
         // from the previously handled level

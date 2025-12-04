@@ -21,7 +21,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: ''
     license: CC-BY-4.0
     rules: '2014'
@@ -113,7 +113,18 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireMagic: true
+      appliedEffects: []
   attuned: false
   identifier: broom-of-flying
 effects: []
@@ -124,11 +135,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037255100
-  modifiedTime: 1750697344647
+  modifiedTime: 1764620560420
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!hFAVm9pTJDm0nu3g'

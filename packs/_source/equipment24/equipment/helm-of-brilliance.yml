@@ -61,10 +61,14 @@ system:
             bonus: ''
             types:
               - radiant
-            scaling:
-              number: 1
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     xQ4EJKRTUkDJyIus:
       type: enchant
       name: Fire Opal Flames
@@ -125,6 +129,13 @@ system:
       img: ''
       appliedEffects:
         - oZBFpi117yOXca3k
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
     m8aK98SDuts6egnq:
       type: cast
       spell:
@@ -133,12 +144,13 @@ system:
           attack: null
           save: null
           override: false
-        level: null
+        level: 3
         properties:
           - vocal
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: m8aK98SDuts6egnq
       sort: 0
       activation:
@@ -150,7 +162,8 @@ system:
           allowed: false
         spellSlot: true
         targets: []
-      description: {}
+      description:
+        chatFlavor: ''
       duration:
         units: inst
         concentration: false
@@ -168,6 +181,15 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
+      name: ''
+      img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     ePzoCWNEAI8dymbs:
       type: cast
       spell:
@@ -182,6 +204,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: ePzoCWNEAI8dymbs
       sort: 0
       activation:
@@ -215,6 +238,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     cyHTGkuJ0EfnTyR3:
       type: cast
       spell:
@@ -229,6 +258,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: cyHTGkuJ0EfnTyR3
       sort: 0
       activation:
@@ -262,6 +292,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     jOM1L4QpJZo0dPr3:
       type: cast
       spell:
@@ -276,6 +312,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: jOM1L4QpJZo0dPr3
       sort: 0
       activation:
@@ -309,6 +346,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     yCKpY8iNj7IoLdHN:
       type: save
       name: Explosive Emanation
@@ -360,13 +403,12 @@ system:
               enabled: false
               formula: ''
             number: null
-            denomination: 0
+            denomination: null
             bonus: '@scaling'
             types:
               - radiant
             scaling:
               mode: ''
-              number: 1
         onSave: half
       save:
         ability: dex
@@ -375,6 +417,12 @@ system:
           formula: '17'
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery: []
@@ -428,7 +476,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   identified: true
   unidentified:
@@ -538,18 +586,14 @@ effects:
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmgHelmOfBrillia.MxOB3as0nJAw2AVI'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712700596
+  modifiedTime: 1764617036824
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 18200000

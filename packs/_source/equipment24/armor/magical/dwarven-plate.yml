@@ -53,6 +53,14 @@ system:
         formula: ''
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
+        requireAttunement: true
     KV80Pu1iX8Isz7wX:
       type: enchant
       name: Dwarven Plate
@@ -134,7 +142,7 @@ system:
     revision: 1
     rules: '2024'
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
   identified: true
   unidentified:
     description: ''
@@ -229,14 +237,13 @@ flags:
     riders:
       activity:
         - n5tsFCvJgAjPSR2U
-      effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745431704598
+  modifiedTime: 1764614333976
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 500000

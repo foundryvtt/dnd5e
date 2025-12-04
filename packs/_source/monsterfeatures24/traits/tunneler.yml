@@ -1,0 +1,45 @@
+_id: mmTunneler000000
+name: Tunneler
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] can burrow through solid
+      rock at half its Burrow Speed and leaves a 10-foot-diameter tunnel in its
+      wake.</p>
+    chat: ''
+  identifier: tunneler
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/magic/earth/projectile-stone-landslide.webp
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1735946589446
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 13500000
+ownership:
+  default: 0
+_key: '!items!mmTunneler000000'

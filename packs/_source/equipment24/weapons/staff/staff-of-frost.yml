@@ -59,6 +59,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: csRhMMBN2tuiCgQI
       sort: 0
       activation:
@@ -73,7 +74,6 @@ system:
           - type: itemUses
             value: '5'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -96,6 +96,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     9jOlvc6oFRuJJV3j:
       type: cast
       spell:
@@ -110,6 +116,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: 9jOlvc6oFRuJJV3j
       sort: 0
       activation:
@@ -124,7 +131,6 @@ system:
           - type: itemUses
             value: '4'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -147,6 +153,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     HZJDEiK50FONr6zO:
       type: cast
       spell:
@@ -161,6 +173,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: HZJDEiK50FONr6zO
       sort: 0
       activation:
@@ -174,7 +187,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -197,6 +210,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     5jvMsJjf4j8A4iC1:
       type: cast
       spell:
@@ -211,6 +230,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: 5jvMsJjf4j8A4iC1
       sort: 0
       activation:
@@ -225,7 +245,6 @@ system:
           - type: itemUses
             value: '4'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -248,6 +267,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery:
@@ -279,7 +304,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   identified: true
   unidentified:
@@ -379,18 +404,14 @@ effects:
       exportSource: null
     _key: '!items.effects!dmgStaffOfFrost0.3IIEhRyQ20MTf7Rn'
 folder: 5p9KrkF39e6vFO4g
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712703624
+  modifiedTime: 1764615343025
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 100196

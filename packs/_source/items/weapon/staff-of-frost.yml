@@ -21,7 +21,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: ''
     license: CC-BY-4.0
     rules: '2014'
@@ -104,6 +104,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: t2bjgs4Rehoss7mc
       sort: 100000
       activation:
@@ -118,7 +119,6 @@ system:
           - type: itemUses
             value: '5'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -141,6 +141,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     3ozkXRFfpdGwx6zZ:
       type: cast
       spell:
@@ -154,6 +160,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: 3ozkXRFfpdGwx6zZ
       sort: 300000
       activation:
@@ -167,7 +174,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -190,6 +197,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     BjnMyi8sdbu0Ybrr:
       type: cast
       spell:
@@ -203,6 +216,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: BjnMyi8sdbu0Ybrr
       sort: 400000
       activation:
@@ -217,7 +231,6 @@ system:
           - type: itemUses
             value: '4'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -240,6 +253,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     LOde45eToutGhwC6:
       type: cast
       spell:
@@ -253,6 +272,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: LOde45eToutGhwC6
       sort: 500000
       activation:
@@ -267,7 +287,6 @@ system:
           - type: itemUses
             value: '4'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -290,6 +309,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     IRwrNunMhdXwXXne:
       type: attack
       _id: IRwrNunMhdXwXXne
@@ -377,18 +402,14 @@ folder: MLMTCAvKsuFE3vYA
 sort: 0
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037322364
-  modifiedTime: 1750697344647
+  modifiedTime: 1764621379804
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!xEtBeZjJnkDXojQM'

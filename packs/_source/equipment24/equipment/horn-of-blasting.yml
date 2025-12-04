@@ -29,6 +29,9 @@ system:
       effects:
         - _id: HREyjqFevgTvN4uC
           onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: self
@@ -60,8 +63,6 @@ system:
             bonus: ''
             types:
               - thunder
-            scaling:
-              number: 1
         onSave: half
       save:
         ability: con
@@ -69,7 +70,14 @@ system:
           calculation: ''
           formula: '15'
       img: ''
-      appliedEffects: []
+      appliedEffects:
+        - HREyjqFevgTvN4uC
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     CohXMZ4aojCQTIpk:
       type: damage
       name: Object Damage
@@ -124,10 +132,14 @@ system:
             bonus: ''
             types:
               - thunder
-            scaling:
-              number: 1
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     FIPuYfZI5jKkVYYo:
       type: utility
       name: Roll for Explosion Chance
@@ -176,6 +188,12 @@ system:
         formula: 1d100cs<21
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     q8PShLHyh2ItXbkQ:
       type: damage
       name: Explosion Damage
@@ -229,10 +247,14 @@ system:
             bonus: ''
             types:
               - force
-            scaling:
-              number: 1
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery: []
@@ -257,7 +279,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   identified: true
   unidentified:
@@ -327,18 +349,14 @@ effects:
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmgHornOfBlastin.HREyjqFevgTvN4uC'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712700775
+  modifiedTime: 1764617080418
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 18600000

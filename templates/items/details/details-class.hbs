@@ -20,16 +20,16 @@
 
             {{!-- Denomination --}}
             {{ formField fields.hd.fields.denomination value=source.hd.denomination options=hitDieOptions
-                         label="DND5E.Denomination" localize=true classes="label-top" }}
+                         label="DND5E.Denomination" localize=true classes="label-top" rootId=partId }}
 
             {{!-- Spent --}}
             {{ formField fields.hd.fields.spent value=source.hd.spent placeholder="0" localize=true label="DND5E.Spent"
-                         classes="label-top" }}
+                         classes="label-top" rootId=partId }}
         </div>
     </div>
 
     {{#if source.hd.additional}}
-    {{ formField fields.hd.fields.additional value=source.hd.additional localize=true }}
+    {{ formField fields.hd.fields.additional value=source.hd.additional localize=true rootId=partId }}
     {{/if}}
 
     {{!-- Class Properties --}}
@@ -41,10 +41,12 @@
     <legend>{{ localize "DND5E.CLASS.Multiclass.Title" }}</legend>
 
     {{!-- Primary Ability --}}
-    {{ formField fields.primaryAbility.fields.value value=source.primaryAbility.value options=primaryAbilities }}
+    {{ formField fields.primaryAbility.fields.value value=source.primaryAbility.value options=primaryAbilities
+                 rootId=partId }}
 
     {{!-- All Required --}}
     {{#if (gt source.primaryAbility.value.length 1)}}
-    {{ formField fields.primaryAbility.fields.all value=source.primaryAbility.all input=inputs.createCheckboxInput }}
+    {{ formField fields.primaryAbility.fields.all value=source.primaryAbility.all input=inputs.createCheckboxInput
+                 rootId=partId }}
     {{/if}}
 </fieldset>

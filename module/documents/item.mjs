@@ -2,6 +2,7 @@ import ActivityChoiceDialog from "../applications/activity/activity-choice-dialo
 import AdvancementManager from "../applications/advancement/advancement-manager.mjs";
 import AdvancementConfirmationDialog from "../applications/advancement/advancement-confirmation-dialog.mjs";
 import ContextMenu5e from "../applications/context-menu.mjs";
+import CreateDocumentDialog from "../applications/create-document-dialog.mjs";
 import CreateScrollDialog from "../applications/item/create-scroll-dialog.mjs";
 import ClassData from "../data/item/class.mjs";
 import ContainerData from "../data/item/container.mjs";
@@ -9,7 +10,7 @@ import EquipmentData from "../data/item/equipment.mjs";
 import SpellData from "../data/item/spell.mjs";
 import ActivitiesTemplate from "../data/item/templates/activities.mjs";
 import PhysicalItemTemplate from "../data/item/templates/physical-item.mjs";
-import { staticID } from "../utils.mjs";
+import { formatIdentifier, staticID } from "../utils.mjs";
 import Scaling from "./scaling.mjs";
 import Proficiency from "./actor/proficiency.mjs";
 import SelectChoices from "./actor/select-choices.mjs";
@@ -19,9 +20,22 @@ import SystemDocumentMixin from "./mixins/document.mjs";
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
+ * @import { D20RollConfiguration } from "../dice/_types.mjs";
+ * @import { ItemContentsTransformer, SpellcastingDescription, SpellScrollConfiguration } from "./_types.mjs";
+ * @import {
+ *   ActivityDialogConfiguration, ActivityMessageConfiguration, ActivityUsageResults, ActivityUseConfiguration
+ * } from "./activity/_types.mjs";
+ */
+
+/**
  * Override and extend the basic Item implementation.
  */
 export default class Item5e extends SystemDocumentMixin(Item) {
+
+  /** @override */
+  static DEFAULT_ICON = "systems/dnd5e/icons/svg/documents/item.svg";
+
+  /* -------------------------------------------- */
 
   /**
    * Caches an item linked to this one, such as a subclass associated with a class.
@@ -71,7 +85,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   }
 
   /* -------------------------------------------- */
-  /*  Migrations                                  */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -173,6 +187,16 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /**
+   * Active effect that granted this item as a rider.
+   * @type {ActiveEffect5e|null}
+   */
+  get dependentOrigin() {
+    return fromUuidSync(this.flags.dnd5e?.dependentOn, { relative: this, strict: false }) ?? null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Does this item support advancement and have advancements defined?
    * @type {boolean}
    */
@@ -222,8 +246,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   get identifier() {
     if ( this.system.identifier ) return this.system.identifier;
-    const identifier = this.name.replaceAll(/(\w+)([\\|/])(\w+)/g, "$1-$3");
-    return identifier.slugify({ strict: true });
+    return formatIdentifier(this.name);
   }
 
   /* --------------------------------------------- */
@@ -360,7 +383,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( !this.advancement.byType.ScaleValue ) return {};
     const item = ["class", "subclass"].includes(this.advancementRootItem?.type) ? this.advancementRootItem : this;
     const level = item.type === "class" ? item.system.levels : item.type === "subclass" ? item.class?.system.levels
-      : this.parent?.system.details.level ?? 0;
+      : item.system.advancementLevel ?? this.parent?.system.details.level ?? 0;
     return this.advancement.byType.ScaleValue.reduce((obj, advancement) => {
       obj[advancement.identifier] = advancement.valueForLevel(level);
       return obj;
@@ -378,16 +401,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * Spellcasting details for a class or subclass.
-   *
-   * @typedef {object} SpellcastingDescription
-   * @property {string} type              Spellcasting method as defined in `CONFIG.DND5E.spellcasting`.
-   * @property {string|null} progression  Progression within the specified spellcasting type if supported.
-   * @property {string} ability           Ability used when casting spells from this class or subclass.
-   * @property {number|null} levels       Number of levels of this class or subclass's class if embedded.
-   */
 
   /**
    * Retrieve the spellcasting for a class or subclass. For classes, this will return the spellcasting
@@ -481,6 +494,21 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       item.prepareFinalAttributes();
     }
     return item;
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Migration                              */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static migrateData(source) {
+    source = super.migrateData(source);
+    ActivitiesTemplate.initializeActivities(source);
+    if ( source.type === "class" ) ClassData._migrateTraitAdvancement(source);
+    else if ( source.type === "container" ) ContainerData._migrateWeightlessData(source);
+    else if ( source.type === "equipment" ) EquipmentData._migrateStealth(source);
+    else if ( source.type === "spell" ) SpellData._migrateComponentData(source);
+    return source;
   }
 
   /* -------------------------------------------- */
@@ -607,8 +635,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const attacks = this.labels.attacks = [];
     const damages = this.labels.damages = [];
     if ( !this.system.activities?.size ) return;
+    const existingDamageLabels = new Set();
+    let firstDamage = true;
     for ( const activity of this.system.activities ) {
-      if ( !("activation" in activity) ) continue;
+      if ( !("activation" in activity) || !activity.canUse ) continue;
       const activationLabels = activity.activationLabels;
       if ( activationLabels ) activations.push({
         ...activationLabels,
@@ -619,7 +649,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         const { toHit, modifier } = activity.labels;
         attacks.push({ toHit, modifier });
       }
-      if ( activity.labels?.damage?.length ) damages.push(...activity.labels.damage);
+      for ( const damage of activity.labels?.damage ?? [] ) {
+        if ( existingDamageLabels.has(damage.label) ) continue;
+        existingDamageLabels.add(damage.label);
+        damages.push({ ...damage, firstDamage });
+      }
+      if ( activity.labels?.damage?.length ) firstDamage = false;
     }
     if ( activations.length ) {
       Object.assign(this.labels, activations[0]);
@@ -641,36 +676,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * Configuration data for an item usage being prepared.
-   *
-   * @typedef {object} ItemUseConfiguration
-   * @property {boolean} createMeasuredTemplate     Should this item create a template?
-   * @property {boolean} createSummons              Should this item create a summoned creature?
-   * @property {boolean} consumeResource            Should this item consume a (non-ammo) resource?
-   * @property {boolean} consumeSpellSlot           Should this item (a spell) consume a spell slot?
-   * @property {boolean} consumeUsage               Should this item consume its limited uses or recharge?
-   * @property {string} enchantmentProfile          ID of the enchantment to apply.
-   * @property {boolean} promptEnchantment          Does an enchantment profile need to be selected?
-   * @property {string|number|null} slotLevel       The spell slot type or level to consume by default.
-   * @property {string|null} summonsProfile         ID of the summoning profile to use.
-   * @property {number|null} resourceAmount         The amount to consume by default when scaling with consumption.
-   * @property {boolean} beginConcentrating         Should this item initiate concentration?
-   * @property {string|null} endConcentration       The id of the active effect to end concentration on, if any.
-   */
-
-  /**
-   * Additional options used for configuring item usage.
-   *
-   * @typedef {object} ItemUseOptions
-   * @property {boolean} configureDialog  Display a configuration dialog for the item usage, if applicable?
-   * @property {string} rollMode          The roll display mode with which to display (or not) the card.
-   * @property {boolean} createMessage    Whether to automatically create a chat message (if true) or simply return
-   *                                      the prepared chat message data (if false).
-   * @property {object} flags             Additional flags added to the chat message.
-   * @property {Event} event              The browser event which triggered the item usage, if any.
-   */
 
   /**
    * Trigger an Item usage, optionally creating a chat message with followup actions.
@@ -938,12 +943,13 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @param {string} type                          Type of advancement to create.
    * @param {object} [data]                        Data to use when creating the advancement.
    * @param {object} [options]
-   * @param {boolean} [options.showConfig=true]    Should the new advancement's configuration application be shown?
+   * @param {boolean} [options.renderSheet=true]   Should the advancement's sheet be rendered after creation?
+   * @param {boolean} [options.showConfig]         Deprecated, use `renderSheet`.
    * @param {boolean} [options.source=false]       Should a source-only update be performed?
    * @returns {Promise<AdvancementConfig>|Item5e}  Promise for advancement config for new advancement if local
    *                                               is `false`, or item with newly added advancement.
    */
-  createAdvancement(type, data={}, { showConfig=true, source=false }={}) {
+  createAdvancement(type, data={}, { renderSheet=true, showConfig=renderSheet, source=false }={}) {
     if ( !this.system.advancement ) return this;
 
     const config = CONFIG.DND5E.advancementTypes[type];
@@ -1057,7 +1063,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   }
 
   /* -------------------------------------------- */
-  /*  Event Handlers                              */
+  /*  Socket Event Handlers                       */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -1103,10 +1109,13 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   async _onDelete(options, userId) {
     super._onDelete(options, userId);
     await this.system.onDeleteActivities?.(options, userId);
+    if ( game.user.isActiveGM ) this.effects.forEach(e => e.getDependents().forEach(e => e.delete()));
     if ( userId !== game.user.id ) return;
     this.parent?.endConcentration?.(this);
   }
 
+  /* -------------------------------------------- */
+  /*  Event Handlers                              */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -1182,15 +1191,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /**
-   * @callback ItemContentsTransformer
-   * @param {Item5e|object} item        Data for the item to transform.
-   * @param {object} options
-   * @param {string} options.container  ID of the container to create the items.
-   * @param {number} options.depth      Current depth of the item being created.
-   * @returns {Item5e|object|void}
-   */
-
-  /**
    * Prepare creation data for the provided items and any items contained within them. The data created by this method
    * can be passed to `createDocuments` with `keepId` always set to true to maintain links to container contents.
    * @param {Item5e[]} items                     Items to create.
@@ -1236,16 +1236,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * Configuration options for spell scroll creation.
-   *
-   * @typedef {object} SpellScrollConfiguration
-   * @property {boolean} [dialog=true]                           Present scroll creation dialog?
-   * @property {"full"|"reference"|"none"} [explanation="full"]  Length of spell scroll rules text to include.
-   * @property {number} [level]                                  Level at which the spell should be cast.
-   * @property {Partial<SpellScrollValues>} [values]             Spell scroll DC and attack bonus.
-   */
 
   /**
    * Create a consumable spell scroll Item from a spell Item.
@@ -1500,12 +1490,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         const scrollIntro = scrollDescription.slice(0, scrollIntroEnd + pdel.length);
         const scrollDetails = scrollDescription.slice(scrollIntroEnd + pdel.length);
         return [
-          scrollIntro,
+          scrollDetails ? scrollIntro : null,
           `<h3>${spell.name} (${game.i18n.format("DND5E.LevelNumber", { level })})</h3>`,
           isConc ? `<p><em>${game.i18n.localize("DND5E.Scroll.RequiresConcentration")}</em></p>` : null,
           spellDescription,
           `<h3>${game.i18n.localize("DND5E.Scroll.Details")}</h3>`,
-          scrollDetails
+          scrollDetails || scrollIntro
         ].filterJoin("");
       case "reference":
         return [
@@ -1522,69 +1512,22 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /* -------------------------------------------- */
 
+  /** @override */
+  static async createDialog(data={}, createOptions={}, dialogOptions={}) {
+    CreateDocumentDialog.migrateOptions(createOptions, dialogOptions);
+    return CreateDocumentDialog.prompt(this, data, createOptions, dialogOptions);
+  }
+
+  /* -------------------------------------------- */
+
   /**
-   * Spawn a dialog for creating a new Item.
-   * @param {object} [data]  Data to pre-populate the Item with.
-   * @param {object} [context]
-   * @param {Actor5e} [context.parent]       A parent for the Item.
-   * @param {string|null} [context.pack]     A compendium pack the Item should be placed in.
-   * @param {string[]|null} [context.types]  A list of types to restrict the choices to, or null for no restriction.
-   * @returns {Promise<Item5e|null>}
+   * Prepare default list of types if none are specified.
+   * @param {Actor5e} parent  Parent document within which this Item will be created.
+   * @returns {string[]}
+   * @protected
    */
-  static async createDialog(data={}, { parent=null, pack=null, types=null, ...options }={}) {
-    types ??= game.documentTypes[this.documentName].filter(t => (t !== CONST.BASE_DOCUMENT_TYPE) && (t !== "backpack"));
-    if ( !types.length ) return null;
-    const collection = parent ? null : pack ? game.packs.get(pack) : game.collections.get(this.documentName);
-    const folders = collection?._formatFolderSelectOptions() ?? [];
-    const label = game.i18n.localize(this.metadata.label);
-    const title = game.i18n.format("DOCUMENT.Create", { type: label });
-    const name = data.name || game.i18n.format("DOCUMENT.New", { type: label });
-    let type = data.type || CONFIG[this.documentName]?.defaultType;
-    const content = await foundry.applications.handlebars.renderTemplate(
-      "systems/dnd5e/templates/apps/document-create.hbs",
-      {
-        folders, name, type,
-        folder: data.folder,
-        hasFolders: folders.length > 0,
-        types: types.map(type => {
-          const label = CONFIG[this.documentName]?.typeLabels?.[type] ?? type;
-          const data = {
-            type,
-            label: game.i18n.has(label) ? game.i18n.localize(label) : type,
-            icon: this.getDefaultArtwork({ type })?.img ?? "icons/svg/item-bag.svg"
-          };
-          data.svg = data.icon?.endsWith(".svg");
-          return data;
-        }).sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang))
-      }
-    );
-    return Dialog.prompt({
-      title, content,
-      label: title,
-      render: html => {
-        const app = html.closest(".app");
-        const folder = app.querySelector("select");
-        if ( folder ) app.querySelector(".dialog-buttons").insertAdjacentElement("afterbegin", folder);
-        app.querySelectorAll(".window-header .header-button").forEach(btn => {
-          const label = btn.innerText;
-          const icon = btn.querySelector("i");
-          btn.innerHTML = icon.outerHTML;
-          btn.dataset.tooltip = label;
-          btn.setAttribute("aria-label", label);
-        });
-        app.querySelector(".document-name").select();
-      },
-      callback: html => {
-        const form = html.querySelector("form");
-        const fd = new foundry.applications.ux.FormDataExtended(form);
-        const createData = foundry.utils.mergeObject(data, fd.object, { inplace: false });
-        if ( !createData.folder ) delete createData.folder;
-        if ( !createData.name?.trim() ) createData.name = this.defaultName();
-        return this.create(createData, { parent, pack, renderSheet: true });
-      },
-      rejectClose: false,
-      options: { ...options, jQuery: false, width: 350, classes: ["dnd5e2", "create-document", "dialog"] }
-    });
+  static _createDialogTypes(parent) {
+    return this.TYPES.filter(t => t !== "backpack");
   }
 
   /* -------------------------------------------- */
@@ -1594,20 +1537,5 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const { type } = itemData;
     const { img } = super.getDefaultArtwork(itemData);
     return { img: CONFIG.DND5E.defaultArtwork.Item[type] ?? img };
-  }
-
-  /* -------------------------------------------- */
-  /*  Migrations & Deprecations                   */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  static migrateData(source) {
-    source = super.migrateData(source);
-    ActivitiesTemplate.initializeActivities(source);
-    if ( source.type === "class" ) ClassData._migrateTraitAdvancement(source);
-    else if ( source.type === "container" ) ContainerData._migrateWeightlessData(source);
-    else if ( source.type === "equipment" ) EquipmentData._migrateStealth(source);
-    else if ( source.type === "spell" ) SpellData._migrateComponentData(source);
-    return source;
   }
 }

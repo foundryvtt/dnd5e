@@ -827,19 +827,12 @@
 
     .pill-lg {
       position: relative;
-      transition: box-shadow 250ms ease;
 
       .name .title { color: var(--color-text-title); }
 
       &.race, &.background {
         cursor: var(--cursor-pointer);
         &:hover:not(:has(a:hover)) { box-shadow: 0 0 12px var(--dnd5e-color-gold); }
-      }
-
-      &.empty:not(.disabled) {
-        cursor: var(--cursor-pointer);
-        transition: opacity 250ms ease;
-        &:hover { opacity: .5; }
       }
 
       &.texture {
@@ -880,6 +873,8 @@
     /* Senses & Traits */
     .pills-group {
       margin-top: .5rem;
+
+      h3 { margin-bottom: 2px; }
 
       &.empty {
         opacity: .4;
@@ -1281,8 +1276,7 @@
         &:hover { opacity: 1; }
       }
 
-      &.disabled, &.building { filter: grayscale(1); }
-      &.disabled { pointer-events: none; }
+      &.damaged, &.building { filter: grayscale(1); }
 
       &:not(.empty) {
         border: var(--dnd5e-border-gold);

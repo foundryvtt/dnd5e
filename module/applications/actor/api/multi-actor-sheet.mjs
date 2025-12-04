@@ -20,6 +20,13 @@ export default class MultiActorSheet extends BaseActorSheet {
   /*  Properties                                  */
   /* -------------------------------------------- */
 
+  /** @override */
+  static unsupportedItemTypes = new Set([
+    "background", "class", "facility", "feat", "race", "spell", "subclass"
+  ]);
+
+  /* -------------------------------------------- */
+
   /**
    * Description currently being edited.
    * @type {string|null}

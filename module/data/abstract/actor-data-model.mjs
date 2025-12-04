@@ -2,19 +2,19 @@ import Proficiency from "../../documents/actor/proficiency.mjs";
 import SystemDataModel from "./system-data-model.mjs";
 
 /**
+ * @import { CombatRecoveryResults } from "../../documents/_types.mjs";
+ * @import { ActorDataModelMetadata } from "./_types.mjs";
+ */
+
+/**
  * Variant of the SystemDataModel with some extra actor-specific handling.
  */
 export default class ActorDataModel extends SystemDataModel {
 
-  /**
-   * @typedef {SystemDataModelMetadata} ActorDataModelMetadata
-   * @property {boolean} supportsAdvancement  Can advancement be performed for this actor type?
-   */
-
   /** @type {ActorDataModelMetadata} */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     supportsAdvancement: false
-  }, {inplace: false}));
+  }, { inplace: false }));
 
   /* -------------------------------------------- */
   /*  Properties                                  */

@@ -1,0 +1,146 @@
+_id: mmWarCry00000000
+name: War Cry
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    uN0VTW2Fqig7YAs9:
+      type: heal
+      _id: uN0VTW2Fqig7YAs9
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: qNmREVJzIbrjEJyb
+      range:
+        override: false
+        units: spec
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: ''
+          special: The giant or one creature of its choice that can see or hear it
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      healing:
+        number: 2
+        denomination: '10'
+        types:
+          - temphp
+        custom:
+          enabled: false
+        scaling:
+          number: 1
+        bonus: '5'
+      name: Temp. Healing
+      img: ''
+      appliedEffects:
+        - qNmREVJzIbrjEJyb
+  uses:
+    spent: 0
+    recovery:
+      - period: recharge
+        formula: '5'
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] or one [[lookup
+      @target.affects.type activity=uN0VTW2Fqig7YAs9]] of its choice that can
+      see or hear it gains [[/healing average temp]] and has Advantage on attack
+      rolls until the start of the [[lookup @name lowercase]]'s next turn.</p>
+    chat: ''
+  identifier: war-cry
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/sonic/scream-wail-shout-teal.webp
+effects:
+  - name: 'Attack: Advantage'
+    img: icons/magic/sonic/scream-wail-shout-teal.webp
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmWarCry00000000
+    _id: qNmREVJzIbrjEJyb
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has Advantage on attack rolls until the start of the
+      granter’s next turn.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: 1736135657240
+      modifiedTime: 1736136122043
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmWarCry00000000.qNmREVJzIbrjEJyb'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1737515542020
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 23500000
+ownership:
+  default: 0
+_key: '!items!mmWarCry00000000'

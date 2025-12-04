@@ -13,7 +13,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: ''
     license: CC-BY-4.0
     rules: '2014'
@@ -28,12 +28,16 @@ system:
     affects:
       type: creature
       choice: false
+      count: ''
+      special: ''
     template:
       units: any
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -96,15 +100,60 @@ system:
 sort: 0
 flags: {}
 img: icons/magic/light/explosion-star-large-blue-yellow.webp
-effects: []
+effects:
+  - name: Hopeful
+    origin: Compendium.dnd5e.spells.Item.ZU9d6woBdUP8pIPt
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 60
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/magic/light/explosion-star-large-blue-yellow.webp
+    _id: rTmKyD87PuzUBGpJ
+    type: base
+    system: {}
+    changes:
+      - key: system.abilities.wis.save.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
+      - key: system.attributes.death.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
+    description: >-
+      <p>The target has Advantage on Wisdom saving throws and Death Saving
+      Throws and regains the maximum number of Hit Points possible from any
+      healing.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells.Item.ZU9d6woBdUP8pIPt.ActiveEffect.rTmKyD87PuzUBGpJ
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.350'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      createdTime: 1761859046145
+      modifiedTime: 1761859086918
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!ZU9d6woBdUP8pIPt.rTmKyD87PuzUBGpJ'
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.350'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.2.0
   createdTime: 1725037359331
-  modifiedTime: 1725992720854
+  modifiedTime: 1761859103342
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!ZU9d6woBdUP8pIPt'

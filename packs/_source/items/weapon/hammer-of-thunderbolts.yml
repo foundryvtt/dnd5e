@@ -31,7 +31,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: ''
     license: CC-BY-4.0
     rules: '2014'
@@ -232,6 +232,14 @@ system:
       name: Giant's Bane (On Crit)
       img: ''
       appliedEffects: []
+      visibility:
+        requireAttunement: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireMagic: true
+        requireIdentification: true
     HUaufCvw2ISsEtbL:
       type: attack
       name: Hurl Hammer
@@ -250,7 +258,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -295,6 +302,14 @@ system:
         parts: []
       img: ''
       appliedEffects: []
+      visibility:
+        requireAttunement: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireMagic: true
+        requireIdentification: true
     raoOPd1C5wdDhOed:
       type: save
       name: Thunderclap
@@ -349,6 +364,14 @@ system:
           formula: '17'
       img: ''
       appliedEffects: []
+      visibility:
+        requireAttunement: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireMagic: true
+        requireIdentification: true
   attuned: false
   ammunition: {}
   identifier: hammer-of-thunderbolts
@@ -401,18 +424,14 @@ folder: MLMTCAvKsuFE3vYA
 sort: 0
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037317730
-  modifiedTime: 1750697344647
+  modifiedTime: 1764621286954
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!wGDDt17DpBcXPuUD'

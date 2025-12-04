@@ -15,18 +15,16 @@ system:
       wearing these gloves, you have a Climb Speed and a Swim Speed equal to
       your Speed, and you gain a +5 bonus to Strength (Athletics) checks made to
       climb or swim.</p><section class="secret"
-      id="secret-9sClXeq4AMq44GSR"><p><strong>Foundry Note</strong></p><p>The
-      <strong>Gloves On</strong> Active Effect increases your Climb and Swim
-      speed by 1 to indicate its equivalence to your Speed.  The +5 bonus to
-      checks made to climb or swim should be added as a situational bonus when
-      applicable.</p></section>
+      id="secret-9sClXeq4AMq44GSR"><p><strong>Foundry Note</strong></p><p>The +5
+      bonus to checks made to climb or swim should be added as a situational
+      bonus when applicable.</p></section>
     chat: ''
   identifier: gloves-of-swimming-and-climbing
   source:
     revision: 1
     rules: '2024'
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
   identified: true
   unidentified:
     description: ''
@@ -62,7 +60,7 @@ system:
   proficient: null
 effects:
   - name: Gloves On
-    img: systems/dnd5e/icons/items/gloves-of-thievery.webp
+    img: icons/equipment/hand/glove-cuffed-leather-purple.webp
     _id: Nh870Ujh6Eqy0RFi
     type: base
     system: {}
@@ -72,12 +70,12 @@ effects:
         value: '5'
         priority: null
       - key: system.attributes.movement.climb
-        mode: 2
-        value: '1'
+        mode: 4
+        value: '@attributes.movement.walk'
         priority: null
       - key: system.attributes.movement.swim
-        mode: 2
-        value: '1'
+        mode: 4
+        value: '@attributes.movement.walk'
         priority: null
     disabled: false
     duration:
@@ -96,16 +94,19 @@ effects:
     transfer: true
     statuses: []
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     _stats:
       compendiumSource: >-
         Compendium.dnd5e.equipment24.Item.dmgGlovesOfThiev.ActiveEffect.6f8ARzOvPmhNZ0NV
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.350'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 5.2.0
       createdTime: 1730728909619
-      modifiedTime: 1731355168612
+      modifiedTime: 1759793555006
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmgGlovesOfSwimm.Nh870Ujh6Eqy0RFi'
@@ -116,11 +117,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.350'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745256805526
+  modifiedTime: 1759793535884
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 17000000

@@ -58,6 +58,8 @@ system:
         includeBase: true
         parts: []
       name: ''
+      img: ''
+      appliedEffects: []
     Sl673lS0oweTsTHf:
       type: save
       name: Grapple/Shove
@@ -73,7 +75,7 @@ system:
         spellSlot: true
         targets: []
       description:
-        chatFlavor: ''
+        chatFlavor: Grapple or Shove attempt
       duration:
         units: inst
         concentration: false
@@ -110,7 +112,7 @@ system:
           - dex
         dc:
           calculation: ''
-          formula: 8 + max(@abilities.str.mod, @abilities.dex.mod) + @prof
+          formula: max(@abilities.str.dc, @abilities.dex.dc)
       _id: Sl673lS0oweTsTHf
       img: ''
       appliedEffects:
@@ -121,14 +123,19 @@ system:
     recovery: []
     max: ''
   description:
-    value: ''
+    value: >-
+      <p><em>See:
+      @UUID[Compendium.dnd5e.classes24.Item.phbmnkMartialArt]{Martial Arts
+      (Monk)}</em></p>
     chat: ''
   identifier: unarmed-strike
   source:
     revision: 2
     rules: '2024'
-    license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
+    page: ''
+    custom: ''
+    license: ''
   identified: true
   unidentified:
     description: ''
@@ -165,7 +172,7 @@ system:
         - bludgeoning
       custom:
         enabled: true
-        formula: 1@scale.monk.die + @mod
+        formula: '@scale.monk.die + @mod'
       scaling:
         number: 1
       bonus: ''
@@ -189,7 +196,7 @@ system:
   mastery: ''
 effects:
   - name: Grappled
-    img: icons/skills/melee/unarmed-punch-fist-yellow-red.webp
+    img: systems/dnd5e/icons/svg/statuses/grappled.svg
     origin: Compendium.dnd5e.classes24.Item.phbmnkUnarmedStr
     transfer: false
     _id: OM3Rt1nQv3WKS0pc
@@ -210,21 +217,24 @@ effects:
     statuses:
       - grappled
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     _stats:
       compendiumSource: >-
         Compendium.dnd5e.equipment24.Item.phbUnarmedStrike.ActiveEffect.bdG1d6kwc7F8Gbfg
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.347'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 5.1.0
+      createdTime: 1736290806405
+      modifiedTime: 1755025523298
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!phbmnkUnarmedStr.OM3Rt1nQv3WKS0pc'
   - name: Prone
-    img: icons/skills/melee/unarmed-punch-fist-yellow-red.webp
+    img: systems/dnd5e/icons/svg/statuses/prone.svg
     origin: Compendium.dnd5e.classes24.Item.phbmnkUnarmedStr
     transfer: false
     _id: OgkonP6JL0AdFtQN
@@ -245,17 +255,20 @@ effects:
     statuses:
       - prone
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     _stats:
       compendiumSource: >-
         Compendium.dnd5e.equipment24.Item.phbUnarmedStrike.ActiveEffect.SfM8X3xktY0PR0Kz
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.347'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 5.1.0
+      createdTime: 1736290807662
+      modifiedTime: 1755025546429
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!phbmnkUnarmedStr.OgkonP6JL0AdFtQN'
 folder: kK77WX8hVJHRQRda
@@ -266,11 +279,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.347'
   systemId: dnd5e
-  systemVersion: 5.1.0
-  createdTime: 1735866307724
-  modifiedTime: 1750442964195
+  systemVersion: 5.1.1
+  createdTime: 1726692994690
+  modifiedTime: 1755625475148
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

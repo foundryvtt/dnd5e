@@ -2,6 +2,10 @@ import AdvancementFlow from "./advancement-flow.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
 
 /**
+ * @import { TraitConfiguration } from "../../_types.mjs";
+ */
+
+/**
  * Inline application that presents the player with a trait choices.
  */
 export default class TraitFlow extends AdvancementFlow {

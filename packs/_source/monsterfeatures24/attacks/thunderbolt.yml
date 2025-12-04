@@ -1,0 +1,191 @@
+_id: mmThunderbolt000
+name: Thunderbolt
+type: weapon
+system:
+  type:
+    value: natural
+    baseItem: ''
+  activities:
+    8jqOskiu8rme8GbX:
+      _id: 8jqOskiu8rme8GbX
+      type: attack
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: R2yhnEJ7lKT4VSvK
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ranged
+          classification: ''
+        ability: str
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts: []
+      name: ''
+      img: ''
+      appliedEffects:
+        - R2yhnEJ7lKT4VSvK
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">[[/attack extended]]. [[/damage average extended]], and
+      the target has the &amp;Reference[Blinded apply=false] and
+      &amp;Reference[Deafened apply=false] conditions until the start of the
+      [[lookup @name lowercase]]'s next turn.</p>
+    chat: ''
+  identifier: thunderbolt
+  source:
+    revision: 1
+    rules: '2024'
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  ammunition: {}
+  damage:
+    base:
+      number: 2
+      denomination: 12
+      types:
+        - lightning
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties: []
+  proficient: null
+  range:
+    value: 500
+    long: null
+    reach: null
+    units: ft
+  mastery: ''
+folder: pSCWWdqMX9eUATRJ
+img: icons/magic/lightning/bolt-strike-blue.webp
+effects:
+  - name: Blinded & Deafened
+    img: systems/dnd5e/icons/svg/statuses/blinded.svg
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmThunderbolt000
+    _id: R2yhnEJ7lKT4VSvK
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: 1
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Blinded apply=false] and
+      &amp;Reference[Deafened apply=false] conditions until the start of the
+      attacking creature’s next turn.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - blinded
+      - deafened
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: 1736185713810
+      modifiedTime: 1737856349791
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmThunderbolt000.R2yhnEJ7lKT4VSvK'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736185794956
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 21000000
+ownership:
+  default: 0
+_key: '!items!mmThunderbolt000'

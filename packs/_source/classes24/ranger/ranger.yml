@@ -33,7 +33,7 @@ system:
       mistletoe}),
       @UUID[Compendium.dnd5e.equipment24.Item.phbagExplorersPa]{Explorer's
       Pack}, and [[/award 7GP]]; or (B) [[/award
-      150GP]]</p></td></tr></tbody></table><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixClass.JournalEntryPage.phbwzdWizard0000
+      150GP]]</p></td></tr></tbody></table><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixClass.JournalEntryPage.phbrgrRanger0000
       inline classes="free-rules-embed"]</p><h2>Becoming a Ranger …</h2><h3>As a
       Level 1 Character</h3><ul><li>Gain all the traits in the Core Ranger
       Traits table.</li><li>Gain the Ranger's level 1 features, which are listed
@@ -51,7 +51,7 @@ system:
     rules: '2024'
     revision: 1
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
   startingEquipment:
     - type: AND
       requiresProficiency: false
@@ -114,6 +114,13 @@ system:
       _id: 3BV41WTrCIy6HLHS
       group: WFIcVPxUX9AVm6Bi
       sort: 900000
+    - type: currency
+      count: 7
+      key: gp
+      requiresProficiency: false
+      _id: Rpvzjvy76WfbCkxs
+      group: WFIcVPxUX9AVm6Bi
+      sort: 1000000
   identifier: ranger
   levels: 1
   advancement:
@@ -652,11 +659,11 @@ effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1735932734523
-  modifiedTime: 1752705893809
+  modifiedTime: 1757541658137
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

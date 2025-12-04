@@ -26,7 +26,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -63,6 +62,12 @@ system:
       img: icons/svg/card-joker.svg
       _id: 6WJ08JWazu3OZign
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     gzBrijeF3lJYqIkz:
       type: utility
       name: 'Card Effect: Draw Two'
@@ -80,7 +85,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: You draw two additional cards
       duration:
@@ -115,8 +119,13 @@ system:
         formula: ''
       img: icons/svg/card-joker.svg
       _id: gzBrijeF3lJYqIkz
-      appliedEffects:
-        - 4PPDM5AWhWupsiSq
+      appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery: []
@@ -127,7 +136,7 @@ system:
     revision: 1
     rules: '2024'
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
   identified: true
   unidentified:
     description: ''
@@ -164,18 +173,14 @@ effects: []
 sort: 100000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1729200597533
-  modifiedTime: 1740680118930
+  modifiedTime: 1764615904154
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!dmgDmtJester0000'

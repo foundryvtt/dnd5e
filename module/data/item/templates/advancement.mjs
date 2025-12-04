@@ -4,13 +4,15 @@ import AdvancementField from "../../fields/advancement-field.mjs";
 const { ArrayField } = foundry.data.fields;
 
 /**
+ * @import { AdvancementTemplateData } from "./_types.mjs";
+ */
+
+/**
  * Data model template for items with advancement.
- *
- * @property {Advancement[]} advancement  Advancement objects for this item.
+ * @extends {SystemDataModel<AdvancementTemplateData>}
  * @mixin
  */
 export default class AdvancementTemplate extends SystemDataModel {
-
   /** @inheritDoc */
   static defineSchema() {
     return {
@@ -29,13 +31,16 @@ export default class AdvancementTemplate extends SystemDataModel {
    */
   async preCreateAdvancement(data, options) {
     if ( data._id || foundry.utils.hasProperty(data, "system.advancement") ) return;
-    const toCreate = this._advancementToCreate(options)
+    const toCreate = this._advancementToCreate(options);
     if ( toCreate.length ) this.parent.updateSource({
       "system.advancement": toCreate.map(c => {
+        const baseData = foundry.utils.deepClone(c);
         const config = CONFIG.DND5E.advancementTypes[c.type];
         const cls = config.documentClass ?? config;
-        return new cls(c, { parent: this.parent }).toObject();
-      })
+        const advancement = new cls(c, { parent: this.parent });
+        if ( advancement._preCreate(baseData) === false ) return null;
+        return advancement.toObject();
+      }).filter(_ => _)
     });
   }
 

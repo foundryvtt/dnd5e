@@ -1,15 +1,27 @@
 import AdoptedStyleSheetMixin from "./adopted-stylesheet-mixin.mjs";
 
+const MaybeAdoptable = foundry.applications.elements.AdoptableHTMLElement ?? HTMLElement;
+
 /**
  * Custom element for displaying SVG icons that are cached and can be styled.
  */
-export default class IconElement extends AdoptedStyleSheetMixin(HTMLElement) {
+export default class IconElement extends AdoptedStyleSheetMixin(MaybeAdoptable) {
   constructor() {
     super();
     this.#internals = this.attachInternals();
     this.#internals.role = "img";
     this.#shadowRoot = this.attachShadow({ mode: "closed" });
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The HTML tag named used by this element.
+   * @type {string}
+   */
+  static tagName = "dnd5e-icon";
+
+  /* -------------------------------------------- */
 
   /** @inheritDoc */
   static CSS = `
@@ -23,17 +35,23 @@ export default class IconElement extends AdoptedStyleSheetMixin(HTMLElement) {
     }
   `;
 
+  /* -------------------------------------------- */
+
   /**
    * Cached SVG files by SRC.
    * @type {Map<string, SVGElement|Promise<SVGElement>>}
    */
   static #svgCache = new Map();
 
+  /* -------------------------------------------- */
+
   /**
    * The custom element's form and accessibility internals.
    * @type {ElementInternals}
    */
   #internals;
+
+  /* -------------------------------------------- */
 
   /**
    * Shadow root that contains the icon.
@@ -93,9 +111,24 @@ export default class IconElement extends AdoptedStyleSheetMixin(HTMLElement) {
         const temp = document.createElement("div");
         temp.innerHTML = t;
         const svg = temp.querySelector("svg");
+        if ( svg ) this.#cleanSVG(svg);
         this.#svgCache.set(src, svg);
         return svg;
       }));
     return this.#svgCache.get(src);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Clean non-image content from the SVG.
+   * @param {SVGElement} svg  The SVG.
+   */
+  static #cleanSVG(svg) {
+    svg.querySelectorAll("script, foreignObject").forEach(el => el.remove());
+    svg.querySelectorAll("*").forEach(el => Array.from(el.attributes).forEach(attr => {
+      if ( attr.name.startsWith("on") ) el.removeAttribute(attr.name);
+      if ( attr.value && attr.value.trim().toLowerCase().startsWith("javascript:") ) el.removeAttribute(attr.name);
+    }));
   }
 }

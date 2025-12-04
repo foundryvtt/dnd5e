@@ -31,6 +31,9 @@ system:
           no longer in Dim Light or Darkness
       effects:
         - _id: LOByj7F1KjZdSUMi
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: self
@@ -57,7 +60,15 @@ system:
         name: ''
         formula: ''
       img: ''
-      appliedEffects: []
+      appliedEffects:
+        - LOByj7F1KjZdSUMi
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
     baY1WKtwieimGXWd:
       type: cast
       _id: baY1WKtwieimGXWd
@@ -75,7 +86,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -93,6 +103,7 @@ system:
           choice: false
           count: ''
           type: self
+          special: ''
         override: true
         prompt: true
       uses:
@@ -107,8 +118,15 @@ system:
         level: '4'
         properties: []
         uuid: Compendium.dnd5e.spells24.Item.phbsplPolymorph0
+        ability: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery:
@@ -136,7 +154,7 @@ system:
     revision: 1
     rules: '2024'
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
   identified: true
   unidentified:
     description: ''
@@ -205,18 +223,14 @@ effects:
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmgCloakOfTheBat.LOByj7F1KjZdSUMi'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745256803703
+  modifiedTime: 1764616739113
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 8200000

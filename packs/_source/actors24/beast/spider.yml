@@ -356,8 +356,11 @@ system:
       fly: null
       swim: null
       walk: 20
-      units: null
+      units: ft
       hover: false
+      ignoredDifficultTerrain:
+        - web
+      special: ''
     attunement:
       max: 3
     senses:
@@ -438,7 +441,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   traits:
     size: tiny
@@ -571,7 +574,7 @@ items:
       source:
         revision: 1
         rules: '2024'
-        book: SRD 5.2
+        book: ''
         license: CC-BY-4.0
       enchant: {}
       prerequisites:
@@ -623,7 +626,7 @@ items:
       source:
         revision: 1
         rules: '2024'
-        book: SRD 5.2
+        book: ''
         license: CC-BY-4.0
       enchant: {}
       prerequisites:
@@ -734,7 +737,7 @@ items:
       source:
         revision: 1
         rules: '2024'
-        book: SRD 5.2
+        book: ''
         license: CC-BY-4.0
       properties: []
       identified: true
@@ -814,11 +817,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.347'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.3
   createdTime: 1740679136185
-  modifiedTime: 1745712727499
+  modifiedTime: 1755806516014
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!actors!mmSpider00000000'

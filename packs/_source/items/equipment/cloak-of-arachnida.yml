@@ -31,7 +31,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: ''
     license: CC-BY-4.0
     rules: '2014'
@@ -90,6 +90,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: ARmT21Y3mklDGsvO
       sort: 0
       activation:
@@ -104,7 +105,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -127,25 +127,71 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   attuned: false
   identifier: cloak-of-arachnida
-effects: []
+effects:
+  - name: Spider Movement and Resistance
+    img: icons/equipment/back/cloak-collared-blue-iron.webp
+    origin: Compendium.dnd5e.items.Item.VwJjuNbBf2KHMPrY
+    _id: xwfSsFuNslCeBhw5
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: poison
+        priority: null
+      - key: system.attributes.movement.climb
+        mode: 4
+        value: '@attributes.movement.walk'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.350'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      createdTime: 1759793467138
+      modifiedTime: 1759793506675
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!VwJjuNbBf2KHMPrY.xwfSsFuNslCeBhw5'
 folder: aJgMxnZED9XdoN2W
 sort: 0
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037203028
-  modifiedTime: 1750697344647
+  modifiedTime: 1764620097080
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!VwJjuNbBf2KHMPrY'

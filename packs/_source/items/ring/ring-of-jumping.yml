@@ -14,7 +14,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: ''
     license: CC-BY-4.0
     rules: '2014'
@@ -71,6 +71,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: PapftzJT2Yh8Iu9D
       sort: 0
       activation:
@@ -102,6 +103,7 @@ system:
           choice: false
           count: ''
           type: self
+          special: ''
         override: true
         prompt: true
       uses:
@@ -110,6 +112,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   attuned: false
   identifier: ring-of-jumping
 effects: []
@@ -117,18 +125,14 @@ folder: 5jrDZJ1U23Q9jDqB
 sort: 0
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037321555
-  modifiedTime: 1750697344647
+  modifiedTime: 1764621362895
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!x7LfMrLafLKfemGH'

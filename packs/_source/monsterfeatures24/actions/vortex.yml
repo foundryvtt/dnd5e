@@ -1,0 +1,276 @@
+_id: mmVortex00000000
+name: Vortex
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    cZy0VYbCVY8aRB4z:
+      type: save
+      _id: cZy0VYbCVY8aRB4z
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: fWPQye4Mr7VNbX9J
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: In the creature's space
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: Large or smaller creature
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 8
+            bonus: '3'
+            types:
+              - thunder
+            scaling:
+              number: 1
+        onSave: none
+      save:
+        ability:
+          - con
+        dc:
+          calculation: ''
+          formula: '14'
+      name: Save
+      img: ''
+      appliedEffects:
+        - fWPQye4Mr7VNbX9J
+    kDz92inkRCjGrPiz:
+      type: damage
+      _id: kDz92inkRCjGrPiz
+      sort: 200000
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '0'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: The creature that is grappled
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: 6
+            bonus: ''
+            types:
+              - thunder
+            scaling:
+              number: 1
+      name: 'Damage: Grappled'
+      img: ''
+      appliedEffects: []
+    HtOlg4C8C2cikzCt:
+      type: check
+      name: Escape Check
+      sort: 100000
+      activation:
+        type: special
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated:
+          - acr
+          - ath
+        dc:
+          calculation: ''
+          formula: '@skills.ath.passive'
+        ability: ''
+      _id: HtOlg4C8C2cikzCt
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature"><em>Constitution Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=cZy0VYbCVY8aRB4z]], one [[lookup
+      @target.affects.special activity=cZy0VYbCVY8aRB4z]] in the [[lookup @name
+      lowercase]]'s space. <em>Failure:</em> [[/damage average
+      activity=cZy0VYbCVY8aRB4z]] damage, and the target has the
+      &amp;Reference[Grappled apply=false] condition (escape DC [[lookup
+      @skills.ath.passive]]). Until the grapple ends, the target can't cast
+      spells with a Verbal component and takes [[/damage average
+      activity=kDz92inkRCjGrPiz]] damage at the start of each of the [[lookup
+      @name lowercase]]'s turns.</p>
+    chat: ''
+  identifier: vortex
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/air/wind-vortex-swirl-blue.webp
+effects:
+  - name: Grappled
+    img: systems/dnd5e/icons/svg/statuses/grappled.svg
+    origin: Item.mmVortex00000000
+    _id: fWPQye4Mr7VNbX9J
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Grappled apply=false] condition
+      (escape DC [[/check ability=str skill=ath format=long]], see source item
+      for DC).</p><p>Until the grapple ends, the target can’t cast spells with a
+      Verbal component and takes additional damage at the start of each of the
+      NPC’s turns.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - grappled
+    sort: 0
+    flags:
+      dae:
+        enableCondition: ''
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736127221163
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmVortex00000000.fWPQye4Mr7VNbX9J'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736127342948
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 25800000
+ownership:
+  default: 0
+_key: '!items!mmVortex00000000'

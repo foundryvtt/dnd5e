@@ -22,7 +22,6 @@ system:
         targets:
           - type: activityUses
             value: '1'
-            scaling: {}
       description:
         chatFlavor: >-
           GM rolls on the Efreeti Bottle table and user activates corresponding
@@ -58,6 +57,12 @@ system:
         formula: ''
       img: systems/dnd5e/icons/svg/ink-pot.svg
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     rddGVm8j6vMqpfQw:
       type: summon
       name: '2—9: Obeys Commands'
@@ -75,7 +80,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -118,6 +122,7 @@ system:
         attacks: false
         proficiency: false
         saves: false
+        ability: ''
       profiles:
         - count: ''
           name: ''
@@ -126,7 +131,6 @@ system:
           level:
             min: null
             max: null
-          types: []
       summon:
         prompt: true
         mode: ''
@@ -134,6 +138,12 @@ system:
       _id: rddGVm8j6vMqpfQw
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     XDtXNjpnhJEARukk:
       type: summon
       name: '10: Casts Wish'
@@ -151,7 +161,6 @@ system:
           - type: itemUses
             value: '@item.uses.max'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -194,6 +203,7 @@ system:
         attacks: false
         proficiency: false
         saves: false
+        ability: ''
       profiles:
         - count: ''
           name: ''
@@ -202,7 +212,6 @@ system:
           level:
             min: null
             max: null
-          types: []
       summon:
         prompt: true
         mode: ''
@@ -210,6 +219,12 @@ system:
       _id: XDtXNjpnhJEARukk
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     E72KrlzSrA2xsYf5:
       type: utility
       _id: E72KrlzSrA2xsYf5
@@ -227,7 +242,6 @@ system:
           - type: itemUses
             value: '@item.uses.max'
             target: ''
-            scaling: {}
       description:
         chatFlavor: >-
           A Hostile
@@ -267,6 +281,12 @@ system:
       name: '1: Attacks You'
       img: systems/dnd5e/icons/svg/trait-weapon-proficiencies.svg
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery: []
@@ -287,7 +307,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   identified: true
   unidentified:
@@ -323,18 +343,14 @@ system:
   strength: null
   proficient: null
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712699596
+  modifiedTime: 1764616891815
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 11400000

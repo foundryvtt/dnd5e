@@ -2,14 +2,20 @@ import SummonSheet from "../../applications/activity/summon-sheet.mjs";
 import SummonUsageDialog from "../../applications/activity/summon-usage-dialog.mjs";
 import CompendiumBrowser from "../../applications/compendium-browser.mjs";
 import TokenPlacement from "../../canvas/token-placement.mjs";
-import SummonActivityData from "../../data/activity/summon-data.mjs";
+import BaseSummonActivityData from "../../data/activity/summon-data.mjs";
 import { simplifyBonus, staticID } from "../../utils.mjs";
 import ActivityMixin from "./mixin.mjs";
 
 /**
+ * @import { TokenPlacementData } from "../../canvas/_types.mjs";
+ * @import { SummonsProfile } from "../../data/activity/_types.mjs";
+ * @import { SummoningConfiguration, SummonUsageResults, SummonUseConfiguration, TokenUpdateData } from "./_types.mjs";
+ */
+
+/**
  * Activity for summoning creatures.
  */
-export default class SummonActivity extends ActivityMixin(SummonActivityData) {
+export default class SummonActivity extends ActivityMixin(BaseSummonActivityData) {
   /* -------------------------------------------- */
   /*  Model Configuration                         */
   /* -------------------------------------------- */
@@ -25,6 +31,7 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
       type: "summon",
       img: "systems/dnd5e/icons/svg/activity/summon.svg",
       title: "DND5E.SUMMON.Title",
+      hint: "DND5E.SUMMON.Hint",
       sheetClass: SummonSheet,
       usage: {
         actions: {
@@ -51,27 +58,6 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
   /*  Activation                                  */
   /* -------------------------------------------- */
 
-  /**
-   * @typedef {ActivityUseConfiguration} SummonUseConfiguration
-   * @property {object|false} create
-   * @property {string} create.summons                    Should a summoned creature be created?
-   * @property {Partial<SummoningConfiguration>} summons  Options for configuring summoning behavior.
-   */
-
-  /**
-   * Configuration data for summoning behavior.
-   *
-   * @typedef {object} SummoningConfiguration
-   * @property {string} profile         ID of the summoning profile to use.
-   * @property {string} [creatureSize]  Selected creature size if multiple are available.
-   * @property {string} [creatureType]  Selected creature type if multiple are available.
-   */
-
-  /**
-   * @typedef {ActivityUsageResults} SummonUsageResults
-   * @property {Token5e[]} summoned  Summoned tokens.
-   */
-
   /** @inheritDoc */
   _prepareUsageConfig(config) {
     config = super._prepareUsageConfig(config);
@@ -85,6 +71,14 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
     config.summons.creatureSize ??= this.creatureSizes.first() ?? null;
     config.summons.creatureType ??= this.creatureTypes.first() ?? null;
     return config;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _finalizeMessageConfig(usageConfig, messageConfig, results) {
+    super._finalizeMessageConfig(usageConfig, messageConfig, results);
+    delete messageConfig.data.flags?.dnd5e?.use?.effects;
   }
 
   /* -------------------------------------------- */
@@ -212,7 +206,9 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
       if ( minimized ) this.actor?.sheet.maximize();
     }
 
-    const createdTokens = await canvas.scene.createEmbeddedDocuments("Token", tokensData);
+    const createdTokens = await canvas.scene.createEmbeddedDocuments("Token", tokensData, {
+      dnd5e: { autoRollNPCHP: "no" }
+    });
 
     /**
      * A hook event that fires when summoning is complete.
@@ -289,6 +285,12 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
         name: game.i18n.localize("DND5E.SUMMON.FIELDS.match.proficiency.label")
       });
       actorUpdates.effects.push(proficiencyEffect.toObject());
+    }
+
+    // Match disposition
+    if ( this.match.disposition && this.actor ) {
+      const { disposition } = this.actor.isToken ? this.actor.token : this.actor.prototypeToken;
+      tokenUpdates.disposition = disposition;
     }
 
     // Add bonus to AC
@@ -393,9 +395,9 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
       }
     }
 
-    const attackDamageBonus = Roll.replaceFormulaData(this.bonuses.attackDamage ?? "", rollData);
-    const saveDamageBonus = Roll.replaceFormulaData(this.bonuses.saveDamage ?? "", rollData);
-    const healingBonus = Roll.replaceFormulaData(this.bonuses.healing ?? "", rollData);
+    const attackDamageBonus = CONFIG.Dice.BasicRoll.replaceFormulaData(this.bonuses.attackDamage ?? "", rollData);
+    const saveDamageBonus = CONFIG.Dice.BasicRoll.replaceFormulaData(this.bonuses.saveDamage ?? "", rollData);
+    const healingBonus = CONFIG.Dice.BasicRoll.replaceFormulaData(this.bonuses.healing ?? "", rollData);
     for ( const item of actor.items ) {
       if ( !item.system.activities?.size ) continue;
       const changes = [];
@@ -404,13 +406,14 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
       if ( this.match.attacks && item.system.hasAttack ) {
         let attack = this.flat?.attack;
         if ( attack === undefined ) {
-          const ability = this.ability ?? this.item.abilityMod ?? rollData.attributes?.spellcasting;
           const actionType = item.system.activities.getByType("attack")[0].actionType;
           const typeMapping = { mwak: "msak", rwak: "rsak" };
           const parts = [
-            rollData.abilities?.[ability]?.mod,
+            rollData.abilities?.[this.ability]?.mod,
             prof,
-            rollData.bonuses?.[typeMapping[actionType] ?? actionType]?.attack
+            CONFIG.Dice.BasicRoll.replaceFormulaData(
+              rollData.bonuses?.[typeMapping[actionType] ?? actionType]?.attack ?? "", rollData
+            )
           ].filter(p => p);
           attack = parts.join(" + ");
         }
@@ -427,20 +430,12 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
 
       // Match saves
       if ( this.match.saves && item.hasSave ) {
-        let dc = this.flat?.save;
-        if ( dc === undefined ) {
-          dc = rollData.abilities?.[this.ability]?.dc ?? rollData.attributes.spell.dc;
-          if ( this.item.type === "spell" ) {
-            const ability = this.item.system.availableAbilities?.first();
-            if ( ability ) dc = rollData.abilities[ability]?.dc ?? dc;
-          }
-        }
         changes.push({
           key: "activities[save].save.dc.formula",
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: dc
+          value: this.flat?.save ?? rollData.abilities?.[this.ability]?.dc ?? rollData.attributes.spell.dc
         }, {
-          key: "activities[save].save.calculation",
+          key: "activities[save].save.dc.calculation",
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: ""
         });
@@ -469,12 +464,12 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
           origin: this.uuid,
           type: "enchantment"
         })).toObject();
-        actorUpdates.items.push({ _id: item.id, effects: [effect] });
+        actorUpdates.items.push({ _id: item.id, effects: [effect, ...item.effects.map(e => e.toObject())] });
       }
     }
 
     // Add applied effects
-    actorUpdates.effects.push(...this.effects.map(e => e.effect?.toObject()).filter(e => e));
+    actorUpdates.effects.push(...this.applicableEffects.map(e => e.toObject()));
 
     return { actorUpdates, tokenUpdates };
   }
@@ -486,7 +481,7 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
    * @param {PrototypeToken} token            Token to be placed.
    * @param {SummonsProfile} profile          Profile used for summoning.
    * @param {SummoningConfiguration} options  Additional summoning options.
-   * @returns {Promise<PlacementData[]>}
+   * @returns {Promise<TokenPlacementData[]>}
    */
   async getPlacement(token, profile, options) {
     // Ensure the token matches the final size
@@ -499,24 +494,16 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
     const rollData = this.getRollData();
     const count = new Roll(profile.count || "1", rollData);
     await count.evaluate();
-    return TokenPlacement.place({ tokens: Array(parseInt(count.total)).fill(token) });
+    return TokenPlacement.place({
+      origin: this.getUsageToken(), tokens: Array(parseInt(count.total)).fill(token)
+    });
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Configuration for creating a modified token.
-   *
-   * @typedef {object} TokenUpdateData
-   * @property {Actor5e} actor            Original actor from which the token will be created.
-   * @property {PlacementData} placement  Information on the location to summon the token.
-   * @property {object} tokenUpdates      Additional updates that will be applied to token data.
-   * @property {object} actorUpdates      Updates that will be applied to actor delta.
-   */
-
-  /**
    * Create token data ready to be summoned.
-   * @param {config} TokenUpdateData  Configuration for creating a modified token.
+   * @param {TokenUpdateData} config  Configuration for creating a modified token.
    * @returns {object}
    */
   async getTokenData({ actor, placement, tokenUpdates, actorUpdates }) {
@@ -543,7 +530,7 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
       }, { newEffects: [], oldEffects: [] });
 
       await tokenDocument.actor.updateEmbeddedDocuments("ActiveEffect", oldEffects);
-      await tokenDocument.actor.createEmbeddedDocuments("ActiveEffect", newEffects, {keepId: true});
+      await tokenDocument.actor.createEmbeddedDocuments("ActiveEffect", newEffects, { keepId: true });
     } else {
       tokenDocument.delta.updateSource(actorUpdates);
       if ( actor.prototypeToken.appendNumber ) TokenPlacement.adjustAppendedNumber(tokenDocument, placement);

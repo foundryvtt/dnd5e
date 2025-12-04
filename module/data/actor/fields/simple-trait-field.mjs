@@ -1,14 +1,6 @@
 const { SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
- * Data structure for a standard actor trait.
- *
- * @typedef {object} SimpleTraitData
- * @property {Set<string>} value  Keys for currently selected traits.
- * @property {string} custom      Semicolon-separated list of custom traits.
- */
-
-/**
  * Field for storing standard trait data.
  */
 export default class SimpleTraitField extends SchemaField {

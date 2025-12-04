@@ -1,5 +1,9 @@
 <li class="member" data-uuid="{{ uuid }}">
     <div class="vitals card" {{#if underlay}}style="--underlay: {{ underlay }}"{{/if}}>
+        {{#if isPrimaryVehicle}}
+        <i class="fa-duotone fa-solid fa-circle-star primary-vehicle" data-tooltip
+           aria-label="{{ localize "DND5E.Group.Vehicle.Primary.label" }}"></i>
+        {{/if}}
         <div class="portrait">
             {{#if portrait.isVideo}}
             <video src="{{ portrait.src }}" autoplay muted playsinline disablepictureinpicture loop></video>
@@ -9,20 +13,26 @@
         </div>
         <div class="bars">
             <strong class="name">
-                <a class="rollable" data-action="showDocument" data-uuid="{{ uuid }}">{{ name }}</a>
+                <a {{#if canView}}data-action="showDocument"{{/if}} data-uuid="{{ uuid }}">
+                    {{ name }}
+                </a>
             </strong>
             {{#with system.attributes.hp}}
+            {{#if max}}
             <div class="hp-bar bar">
                 <label>{{ localize "DND5E.HP" }}</label>
                 <div class="meter hit-points progress" role="meter" aria-valuemin="0"
                      aria-valuenow="{{ value }}" aria-valuemax="{{ max }}"
                      style="--bar-percentage: {{ pct }}%"></div>
                 <div class="values">
+                    {{#unless ../hiddenStats}}
                     <span class="value">{{ value }}</span>
                     <span class="separator">&sol;</span>
                     <span class="max">{{ max }}</span>
+                    {{/unless}}
                 </div>
             </div>
+            {{/if}}
             {{/with}}
             {{#with system.attributes.hd}}
             <div class="hd-bar bar">
@@ -31,9 +41,11 @@
                      aria-valuenow="{{ value }}" aria-valuemax="{{ max }}"
                      style="--bar-percentage: {{ pct }}%"></div>
                 <div class="values">
+                    {{#unless ../hiddenStats}}
                     <span class="value">{{ value }}</span>
                     <span class="separator">&sol;</span>
                     <span class="max">{{ max }}</span>
+                    {{/unless}}
                 </div>
             </div>
             {{/with}}
@@ -69,6 +81,9 @@
     </div>
     {{#if section.hasStats}}
     <div class="stats">
+        {{#if hiddenStats}}
+        <div class="empty">???</div>
+        {{else}}
         <div class="info">
             <div>
                 <i class="fa-solid fa-shield" data-tooltip aria-label="{{ localize "DND5E.ArmorClass" }}"></i>
@@ -76,12 +91,18 @@
             </div>
             <div>
                 <i class="fa-solid fa-shoe-prints" data-tooltip aria-label="{{ localize "DND5E.Speed" }}"></i>
-                <span class="value">{{ system.attributes.movement.walk }}</span>
+                <span class="value">
+                    {{ system.attributes.movement.walk }}
+                    {{#if system.attributes.movement.slowed}}
+                    <i class="fa-solid fa-triangle-exclamation" data-tooltip
+                       aria-label="{{ localize "DND5E.TRAVEL.Slowed.Member" }}"></i>
+                    {{/if}}
+                </span>
             </div>
         </div>
         <div class="info">
             <div>
-                <a class="{{ @root.rollableClass }} skill" data-action="roll" data-type="skill" data-key="prc"
+                <a class="{{ skills.prc.css }}" data-action="roll" data-type="skill" data-key="prc"
                    data-tooltip aria-label="{{ skills.prc.label }}">
                     <i class="fa-solid fa-eye" inert></i>
                 </a>
@@ -91,7 +112,7 @@
                 </div>
             </div>
             <div>
-                <a class="{{ @root.rollableClass }} skill" data-action="roll" data-type="skill" data-key="ste"
+                <a class="{{ skills.ste.css }}" data-action="roll" data-type="skill" data-key="ste"
                    data-tooltip aria-label="{{ skills.ste.label }}">
                     <i class="fa-solid fa-hood-cloak" inert></i>
                 </a>
@@ -101,7 +122,7 @@
                 </div>
             </div>
             <div>
-                <a class="{{ @root.rollableClass }} skill" data-action="roll" data-type="skill" data-key="sur"
+                <a class="{{ skills.sur.css }}" data-action="roll" data-type="skill" data-key="sur"
                    data-tooltip aria-label="{{ skills.sur.label }}">
                     <i class="fa-solid fa-bow-arrow" inert></i>
                 </a>
@@ -111,6 +132,7 @@
                 </div>
             </div>
         </div>
+        {{/if}}
     </div>
     {{/if}}
 </li>

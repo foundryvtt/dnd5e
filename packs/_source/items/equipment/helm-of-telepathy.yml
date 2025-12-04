@@ -20,7 +20,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: ''
     license: CC-BY-4.0
     rules: '2014'
@@ -77,6 +77,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: ojwSZNV7dBmpFdcC
       sort: 0
       activation:
@@ -110,6 +111,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     HG9ikbJ7bHYwKcug:
       type: cast
       spell:
@@ -123,6 +130,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: HG9ikbJ7bHYwKcug
       sort: 200000
       activation:
@@ -137,7 +145,6 @@ system:
         targets:
           - type: activityUses
             value: '1'
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -162,6 +169,12 @@ system:
         max: '1'
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     0KtYlJxRLKoAwU8R:
       type: utility
       _id: 0KtYlJxRLKoAwU8R
@@ -210,6 +223,13 @@ system:
       name: Telepathic Message
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
   attuned: false
   identifier: helm-of-telepathy
 effects: []
@@ -217,18 +237,14 @@ folder: aJgMxnZED9XdoN2W
 sort: 0
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037137132
-  modifiedTime: 1750697344647
+  modifiedTime: 1764619415651
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!EJVaAvNfCq6gn6VG'

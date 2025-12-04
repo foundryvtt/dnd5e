@@ -3,6 +3,10 @@ import Dialog5e from "../api/dialog.mjs";
 const { NumberField, StringField } = foundry.data.fields;
 
 /**
+ * @import { SpellScrollConfiguration } from "../../documents/_types.mjs";
+ */
+
+/**
  * Application for configuration spell scroll creation.
  */
 export default class CreateScrollDialog extends Dialog5e {
@@ -85,6 +89,7 @@ export default class CreateScrollDialog extends Dialog5e {
     context.config = this.config;
     context.fields = [{
       field: new StringField({
+        required: true, blank: false,
         label: game.i18n.localize("DND5E.Scroll.Explanation.Label"),
         hint: game.i18n.localize("DND5E.Scroll.Explanation.Hint")
       }),

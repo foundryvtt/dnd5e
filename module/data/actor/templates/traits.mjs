@@ -7,46 +7,16 @@ import SimpleTraitField from "../fields/simple-trait-field.mjs";
 const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @import { DamageTraitData } from "./fields/damage-trait.mjs";
- * @import { SimpleTraitData } from "./fields/simple-trait.mjs";
- */
-
-/**
- * Data structure for a damage actor trait.
- *
- * @typedef {object} DamageModificationData
- * @property {Record<string, string>} amount  Damage boost or reduction by damage type.
- * @property {Set<string>} bypasses           Keys for physical properties that cause modification to be bypassed.
- */
-
-/**
- * @typedef {SimpleTraitData} LanguageTraitData
- * @property {Record<string, CommunicationData>} communication  Measured communication ranges (e.g. telepathy).
- */
-
-/**
- * @typedef {object} LanguageCommunicationData
- * @property {string} units  Units used to measure range.
- * @property {number} value  Range to which this ability can be used.
+ * @import { TraitsCommonData, TraitsCreatureData } from "./_types.mjs";
  */
 
 /**
  * Shared contents of the traits schema between various actor types.
  */
 export default class TraitsField {
-
-  /* -------------------------------------------- */
-
   /**
    * Fields shared between characters, NPCs, and vehicles.
-   *
-   * @type {object}
-   * @property {string} size                Actor's size.
-   * @property {DamageTraitData} di         Damage immunities.
-   * @property {DamageTraitData} dr         Damage resistances.
-   * @property {DamageTraitData} dv         Damage vulnerabilities.
-   * @property {DamageModificationData} dm  Damage modification.
-   * @property {SimpleTraitData} ci         Condition immunities.
+   * @type {TraitsCommonData}
    */
   static get common() {
     return {
@@ -68,16 +38,14 @@ export default class TraitsField {
 
   /**
    * Fields shared between characters and NPCs.
-   *
-   * @type {object}
-   * @property {SimpleTraitData} languages  Languages known by this creature.
+   * @type {TraitsCreatureData}
    */
   static get creature() {
     return {
       languages: new SimpleTraitField({
         communication: new MappingField(new SchemaField({
           units: new StringField({ initial: () => defaultUnits("length") }),
-          value: new NumberField({ min: 0 })
+          value: new NumberField({ required: true, min: 0 })
         }))
       }, { label: "DND5E.Languages" })
     };
@@ -102,7 +70,7 @@ export default class TraitsField {
         if ( languages.value.has(key) ) (group?.children ?? labels.languages).push(data.label ?? data);
 
         // Display children as part of this group (e.g. "Primordial (Ignan)")
-        else if ( data.children ) {
+        else if ( data.children && (data.selectable !== false) ) {
           const topLevel = group === undefined;
           group ??= { label: data.label, children: [] };
           Object.entries(data.children).forEach(([k, d]) => processCategory(k, d, group));
@@ -110,6 +78,9 @@ export default class TraitsField {
             `${data.label} (${game.i18n.getListFormatter({ type: "unit" }).format(group.children)})`
           );
         }
+
+        // Display children alone if category isn't selectable
+        else if ( data.children ) Object.entries(data.children).forEach(([k, d]) => processCategory(k, d));
       };
 
       for ( const [key, data] of Object.entries(CONFIG.DND5E.languages) ) {

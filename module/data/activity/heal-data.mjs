@@ -2,11 +2,15 @@ import DamageField from "../shared/damage-field.mjs";
 import BaseActivityData from "./base-activity.mjs";
 
 /**
- * Data model for an heal activity.
- *
- * @property {DamageData} healing
+ * @import { HealActivityData } from "./_types.mjs";
  */
-export default class HealActivityData extends BaseActivityData {
+
+/**
+ * Data model for an heal activity.
+ * @extends {BaseActivityData<HealActivityData>}
+ * @mixes HealActivityData
+ */
+export default class BaseHealActivityData extends BaseActivityData {
   /** @inheritDoc */
   static defineSchema() {
     return {
@@ -16,7 +20,7 @@ export default class HealActivityData extends BaseActivityData {
   }
 
   /* -------------------------------------------- */
-  /*  Data Migrations                             */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @override */

@@ -3,9 +3,10 @@
         <span>{{ localize "DND5E.DAMAGE.FIELDS.damage.label" }}</span>
     </legend>
     {{#with fields.damage.fields.critical.fields as |fields|}}
-    {{ formField fields.allow value=../source.damage.critical.allow input=@root.inputs.createCheckboxInput }}
+    {{ formField fields.allow value=../source.damage.critical.allow input=@root.inputs.createCheckboxInput
+                 rootId=@root.partId }}
     {{#if ../source.damage.critical.allow}}
-    {{ formField fields.bonus value=../source.damage.critical.bonus }}
+    {{ formField fields.bonus value=../source.damage.critical.bonus rootId=@root.partId }}
     {{/if}}
     {{/with}}
     {{> "systems/dnd5e/templates/activity/parts/damage-parts.hbs" }}

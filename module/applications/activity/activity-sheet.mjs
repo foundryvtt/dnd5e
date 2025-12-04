@@ -39,7 +39,8 @@ export default class ActivitySheet extends PseudoDocumentSheet {
     identity: {
       template: "systems/dnd5e/templates/activity/identity.hbs",
       templates: [
-        "systems/dnd5e/templates/activity/parts/activity-identity.hbs"
+        "systems/dnd5e/templates/activity/parts/activity-identity.hbs",
+        "systems/dnd5e/templates/activity/parts/activity-visibility.hbs"
       ]
     },
     activation: {
@@ -53,7 +54,9 @@ export default class ActivitySheet extends PseudoDocumentSheet {
     effect: {
       template: "systems/dnd5e/templates/activity/effect.hbs",
       templates: [
-        "systems/dnd5e/templates/activity/parts/activity-effects.hbs"
+        "systems/dnd5e/templates/activity/parts/activity-effects.hbs",
+        "systems/dnd5e/templates/activity/parts/activity-effect-level-limit.hbs",
+        "systems/dnd5e/templates/activity/parts/activity-effect-settings.hbs"
       ]
     }
   };
@@ -112,11 +115,12 @@ export default class ActivitySheet extends PseudoDocumentSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  async _preparePartContext(partId, context) {
+  async _preparePartContext(partId, context, options) {
+    context = await super._preparePartContext(partId, context, options);
     switch ( partId ) {
-      case "activation": return this._prepareActivationContext(context);
-      case "effect": return this._prepareEffectContext(context);
-      case "identity": return this._prepareIdentityContext(context);
+      case "activation": return this._prepareActivationContext(context, options);
+      case "effect": return this._prepareEffectContext(context, options);
+      case "identity": return this._prepareIdentityContext(context, options);
     }
     return context;
   }
@@ -126,10 +130,11 @@ export default class ActivitySheet extends PseudoDocumentSheet {
   /**
    * Prepare rendering context for the activation tab.
    * @param {ApplicationRenderContext} context  Context being prepared.
+   * @param {HandlebarsRenderOptions} options   Options which configure application rendering behavior.
    * @returns {ApplicationRenderContext}
    * @protected
    */
-  async _prepareActivationContext(context) {
+  async _prepareActivationContext(context, options) {
     context.tab = context.tabs.activation;
 
     context.data = {};
@@ -137,7 +142,8 @@ export default class ActivitySheet extends PseudoDocumentSheet {
     for ( const field of ["activation", "duration", "range", "target", "uses"] ) {
       if ( !this.activity[field] ) continue;
       context.data[field] = this.activity[field].override ? context.source[field] : context.inferred[field];
-      context.disabled[field] = this.activity[field].canOverride && !this.activity[field].override;
+      context.disabled[field] = this.activity[field].canOverride && !this.activity[field].override
+        && !this.activity.isRider;
     }
 
     context.activationTypes = [
@@ -183,6 +189,7 @@ export default class ActivitySheet extends PseudoDocumentSheet {
         fields: this.activity.schema.fields.consumption.fields.targets.element.fields,
         prefix: `consumption.targets.${index}.`,
         source: context.source.consumption.targets[index] ?? data,
+        targetHint: this.item.isEmbedded ? undefined : typeConfig.nonEmbeddedHint,
         typeOptions: consumptionTypeOptions,
         scalingModes: canScale ? [
           { value: "", label: game.i18n.localize("DND5E.CONSUMPTION.Scaling.None") },
@@ -190,15 +197,15 @@ export default class ActivitySheet extends PseudoDocumentSheet {
           ...(typeConfig.scalingModes ?? []).map(({ value, label }) => ({ value, label: game.i18n.localize(label) }))
         ] : null,
         showTargets: "validTargets" in typeConfig,
-        selectedTarget: ("validTargets" in typeConfig) && ((data.type === "itemUses") && data.target?.includes("."))
-          ? (this.activity.actor?.sourcedItems?.get(data.target)?.first()?.id ?? data.target)
+        selectedTarget: ("validTargets" in typeConfig) && ["itemUses", "material"].includes(data.type)
+          ? this.activity._remapConsumptionTarget(data.target)
           : data.target,
         targetPlaceholder: data.type === "itemUses" ? game.i18n.localize("DND5E.CONSUMPTION.Target.ThisItem") : "",
         validTargets: showTextTarget ? null : target.validTargets
       };
     });
-    context.showConsumeSpellSlot = this.activity.isSpell && (this.item.system.level !== 0);
-    context.showScaling = !this.activity.isSpell;
+    context.showConsumeSpellSlot = (this.activity.isSpell || this.activity.isRider) && (this.item.system.level !== 0);
+    context.showScaling = !this.activity.isSpell || this.activity.isRider;
 
     // Uses recovery
     context.recoveryPeriods = CONFIG.DND5E.limitedUsePeriods.recoveryOptions;
@@ -252,10 +259,11 @@ export default class ActivitySheet extends PseudoDocumentSheet {
   /**
    * Prepare rendering context for the effect tab.
    * @param {ApplicationRenderContext} context  Context being prepared.
+   * @param {HandlebarsRenderOptions} options   Options which configure application rendering behavior.
    * @returns {ApplicationRenderContext}
    * @protected
    */
-  async _prepareEffectContext(context) {
+  async _prepareEffectContext(context, options) {
     context.tab = context.tabs.effect;
 
     if ( context.activity.effects ) {
@@ -275,7 +283,7 @@ export default class ActivitySheet extends PseudoDocumentSheet {
           prefix: `effects.${data._index}.`,
           source: context.source.effects[data._index] ?? data,
           contentLink: data.effect.toAnchor().outerHTML,
-          additionalSettings: null
+          additionalSettings: "systems/dnd5e/templates/activity/parts/activity-effect-settings.hbs"
         };
         arr.push(this._prepareAppliedEffectContext(context, effect));
         return arr;
@@ -317,10 +325,11 @@ export default class ActivitySheet extends PseudoDocumentSheet {
   /**
    * Prepare rendering context for the identity tab.
    * @param {ApplicationRenderContext} context  Context being prepared.
+   * @param {HandlebarsRenderOptions} options   Options which configure application rendering behavior.
    * @returns {ApplicationRenderContext}
    * @protected
    */
-  async _prepareIdentityContext(context) {
+  async _prepareIdentityContext(context, options) {
     context.tab = context.tabs.identity;
     context.behaviorFields = [];
     if ( context.fields.target?.fields?.prompt ) context.behaviorFields.push({
@@ -332,6 +341,29 @@ export default class ActivitySheet extends PseudoDocumentSheet {
       name: game.i18n.localize(this.activity.metadata.title),
       img: this.activity.metadata.img
     };
+
+    const addField = (name, lockedValue) => name in context.fields.visibility.fields ? {
+      disabled: lockedValue !== undefined,
+      field: context.fields.visibility.fields[name],
+      input: context.inputs.createCheckboxInput,
+      value: lockedValue ?? context.source.visibility[name]
+    } : null;
+    const itemSystem = this.activity.item.system;
+    const isRider = this.activity.isRider;
+    context.visibilityFields = [
+      // Only show "Require Attunement" if item has an attunement option
+      ["required", "optional"].includes(itemSystem.attunement) || isRider ? addField("requireAttunement",
+        // If item requires attunement, then the "Require Attunement" option is locked to the "Require Magic" option
+        !isRider && (itemSystem.attunement === "required")
+          ? context.source.visibility.requireMagic : undefined
+      ) : null,
+      // Only show "Require Magic" if item is magical or doesn't support the magical property
+      (!this.activity.isSpell && (itemSystem.properties?.has("mgc") || !itemSystem.validProperties.has("mgc")))
+        || isRider ? addField("requireMagic") : null,
+      // Only show "Require Identification" if item can be identified
+      "identified" in this.activity.item.system || isRider ? addField("requireIdentification") : null
+    ].filter(_ => _);
+
     return context;
   }
 
@@ -435,10 +467,13 @@ export default class ActivitySheet extends PseudoDocumentSheet {
     const types = this.activity.validConsumptionTypes;
     const existingTypes = new Set(this.activity.consumption.targets.map(t => t.type));
     const filteredTypes = types.difference(existingTypes);
+    let type = filteredTypes.first() ?? types.first();
+    if ( (type === "activityUses") && !this.activity.uses.max && this.activity.item.system.uses.max
+      && filteredTypes.has("itemUses") ) type="itemUses";
     this.activity.update({
       "consumption.targets": [
         ...this.activity.toObject().consumption.targets,
-        { type: filteredTypes.first() ?? types.first() }
+        { type }
       ]
     });
   }

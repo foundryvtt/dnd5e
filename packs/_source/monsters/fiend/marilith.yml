@@ -803,7 +803,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties: []
+      properties:
+        - mgc
       proficient: 1
       unidentified:
         description: ''
@@ -880,6 +881,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: longsword
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -889,11 +891,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.10ZP2Bu3vnCuYMIB
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.350'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.2.0
       createdTime: null
-      modifiedTime: 1745107552539
+      modifiedTime: 1760378599594
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!egsSDYbqoLCelb0J.VzPNwzlwJ7knJ9MC'
@@ -977,6 +979,7 @@ items:
         dt: null
         conditions: ''
       properties:
+        - mgc
         - rch
       proficient: 1
       unidentified:
@@ -1054,6 +1057,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: tail
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -1063,11 +1067,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.350'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.2.0
       createdTime: null
-      modifiedTime: 1745107552539
+      modifiedTime: 1760378603401
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!egsSDYbqoLCelb0J.BoIambnHLbZXr85T'

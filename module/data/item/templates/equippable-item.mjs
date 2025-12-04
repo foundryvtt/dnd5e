@@ -3,11 +3,13 @@ import SystemDataModel from "../../abstract/system-data-model.mjs";
 const { BooleanField, StringField } = foundry.data.fields;
 
 /**
+ * @import { CompendiumBrowserFilterDefinitionEntry } from "../../../applications/compendium-browser.mjs";
+ * @import { EquippableItemTemplateData } from "./_types.mjs";
+ */
+
+/**
  * Data model template with information on items that can be attuned and equipped.
- *
- * @property {string} attunement  Attunement information as defined in `DND5E.attunementTypes`.
- * @property {boolean} attuned    Is this item attuned on its owning actor?
- * @property {boolean} equipped   Is this item equipped on its owning actor?
+ * @extends {SystemDataModel<EquippableItemTemplateData>}
  * @mixin
  */
 export default class EquippableItemTemplate extends SystemDataModel {
@@ -40,7 +42,45 @@ export default class EquippableItemTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
-  /*  Data Migrations                             */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * This item is capable of being attuned.
+   * @type {boolean}
+   */
+  get canAttune() {
+    return (this.attunement === "required") || (this.attunement === "optional");
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Chat properties for equippable items.
+   * @type {string[]}
+   */
+  get equippableItemCardProperties() {
+    return [
+      this.attuned ? game.i18n.localize("DND5E.AttunementAttuned")
+        : CONFIG.DND5E.attunementTypes[this.attunement] ?? null,
+      game.i18n.localize(this.equipped ? "DND5E.Equipped" : "DND5E.Unequipped"),
+      ("proficient" in this) ? CONFIG.DND5E.proficiencyLevels[this.prof?.multiplier || 0] : null
+    ];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Are the magical properties of this item, such as magical bonuses to armor & damage, available?
+   * @type {boolean}
+   */
+  get magicAvailable() {
+    const attunement = this.attuned || (this.attunement !== "required");
+    return attunement && this.properties.has("mgc") && this.validProperties.has("mgc");
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -89,22 +129,6 @@ export default class EquippableItemTemplate extends SystemDataModel {
     if ( this.attuned && this.parent.actor?.system.attributes?.attunement ) {
       this.parent.actor.system.attributes.attunement.value += 1;
     }
-  }
-
-  /* -------------------------------------------- */
-  /*  Properties                                  */
-  /* -------------------------------------------- */
-
-  /**
-   * Chat properties for equippable items.
-   * @type {string[]}
-   */
-  get equippableItemCardProperties() {
-    return [
-      this.attunement === "required" ? CONFIG.DND5E.attunementTypes.required : null,
-      game.i18n.localize(this.equipped ? "DND5E.Equipped" : "DND5E.Unequipped"),
-      ("proficient" in this) ? CONFIG.DND5E.proficiencyLevels[this.prof?.multiplier || 0] : null
-    ];
   }
 
   /* -------------------------------------------- */

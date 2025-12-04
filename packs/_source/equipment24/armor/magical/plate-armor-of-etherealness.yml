@@ -19,12 +19,14 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: 4dRHNHbVFlWq34Ow
       sort: 200000
       activation:
         type: action
         value: null
         override: false
+        condition: ''
       consumption:
         scaling:
           allowed: false
@@ -32,7 +34,6 @@ system:
         targets:
           - type: activityUses
             value: '1'
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -45,6 +46,7 @@ system:
           the command word.
       range:
         override: false
+        special: ''
       target:
         template:
           contiguous: false
@@ -54,6 +56,7 @@ system:
           choice: false
           count: ''
           type: self
+          special: ''
         override: true
         prompt: true
       uses:
@@ -64,6 +67,13 @@ system:
         max: '1'
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: true
     ETp0AleqjJT1ZtPZ:
       type: enchant
       name: Plate Armor of Etherealness
@@ -147,7 +157,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   identified: true
   unidentified:
@@ -251,14 +261,13 @@ flags:
     riders:
       activity:
         - 4dRHNHbVFlWq34Ow
-      effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712701962
+  modifiedTime: 1764614353140
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: -175000

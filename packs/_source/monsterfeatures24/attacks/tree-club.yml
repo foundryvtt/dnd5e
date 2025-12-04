@@ -1,0 +1,188 @@
+_id: mmTreeClub000000
+name: Tree Club
+type: weapon
+system:
+  type:
+    value: simpleM
+    baseItem: club
+  activities:
+    uFMz2nKxqcVOJIGn:
+      _id: uFMz2nKxqcVOJIGn
+      type: attack
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: 7GhARrr7f6zhJjqy
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ''
+          classification: ''
+        ability: ''
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts: []
+      name: ''
+      img: ''
+      appliedEffects:
+        - 7GhARrr7f6zhJjqy
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>[[/attack extended]]. [[/damage average extended]]. If the target is a
+      Large or smaller creature, it has the &amp;Reference[Prone apply=false]
+      condition.</p>
+    chat: ''
+  identifier: tree-club
+  source:
+    revision: 1
+    rules: '2024'
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  ammunition: {}
+  damage:
+    base:
+      number: 3
+      denomination: 8
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties:
+    - hvy
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: 10
+    units: ft
+  mastery: slow
+folder: pSCWWdqMX9eUATRJ
+img: icons/weapons/clubs/club-simple-black.webp
+effects:
+  - name: Prone
+    img: systems/dnd5e/icons/svg/statuses/prone.svg
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmTreeClub000000
+    _id: 7GhARrr7f6zhJjqy
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>If the target is a Large or smaller creature, it has the
+      &amp;Reference[Prone apply=false] condition.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - prone
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: 1735948873799
+      modifiedTime: 1735948910958
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmTreeClub000000.7GhARrr7f6zhJjqy'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1735949024843
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 21700000
+ownership:
+  default: 0
+_key: '!items!mmTreeClub000000'

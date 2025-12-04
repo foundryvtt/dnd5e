@@ -125,6 +125,14 @@ system:
       img: ''
       appliedEffects:
         - MHnAqxEXBhUbnjPq
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
+        requireAttunement: true
   uses:
     spent: 0
     recovery: []
@@ -147,7 +155,7 @@ system:
     revision: 1
     rules: '2024'
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
   identified: true
   unidentified:
     description: ''
@@ -314,14 +322,13 @@ flags:
     riders:
       activity:
         - FrNZRC1C2HFJxUNu
-      effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.347'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1754951987831
+  modifiedTime: 1764615065505
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 8000000

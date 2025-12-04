@@ -5,7 +5,7 @@
 
         {{!-- Portrait --}}
         {{#if editable}}
-        <label class="slide-toggle">
+        <label class="slide-toggle header-interactable">
             <input type="checkbox" name="flags.dnd5e.showTokenPortrait" {{ checked portrait.token }}>
             {{#if portrait.token}}
             {{ localize "DOCUMENT.Token" }}
@@ -93,7 +93,7 @@
                  {{#unless editable}}data-tooltip="DND5E.Loyalty"{{/unless}}>
                 {{#if editable}}
                 <input type="text" class="uninput" name="system.attributes.loyalty.value" inputmode="numeric"
-                       pattern="[+=\-]?\d*" placeholder="—" value="{{ source.attributes.loyalty.value }}"
+                       pattern="^[+=\-]?\d*" placeholder="—" value="{{ source.attributes.loyalty.value }}"
                        data-dtype="Number">
                 {{else if system.attributes.loyalty.value includeZero=true}}
                 {{ system.attributes.loyalty.value }}
@@ -217,8 +217,9 @@
                     {{!-- Type --}}
                     <li class="creature-type">
                         {{#if editable}}
-                        <button type="button" class="config-button unbutton" data-action="showConfiguration"
-                                data-config="creatureType" data-tooltip="DND5E.CreatureTypeConfig"
+                        <button type="button" class="config-button unbutton header-interactable"
+                                data-action="showConfiguration" data-config="creatureType"
+                                data-tooltip="DND5E.CreatureTypeConfig"
                                 aria-label="{{ localize 'DND5E.CreatureTypeConfig' }}">
                             <span>{{ system.details.type.label }}</span>
                             <i class="fas fa-cog" inert></i>

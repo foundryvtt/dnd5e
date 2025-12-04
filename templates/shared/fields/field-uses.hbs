@@ -8,18 +8,18 @@
 
             {{!-- Spent --}}
             {{ formField fields.uses.fields.spent value=data.uses.spent label="DND5E.Spent" localize=true hint=false
-                         classes="label-top" }}
+                         classes="label-top" rootId=partId }}
 
             {{!-- Max --}}
             {{ formField fields.uses.fields.max value=data.uses.max label="DND5E.Max" localize=true hint=false
-                         classes="label-top" }}
+                         classes="label-top" rootId=partId }}
         </div>
     </div>
 
     {{!-- Auto-Destroy --}}
     {{#if fields.uses.fields.autoDestroy}}
     {{ formField fields.uses.fields.autoDestroy value=data.uses.autoDestroy localize=true
-                 input=inputs.createCheckboxInput }}
+                 input=inputs.createCheckboxInput rootId=partId }}
     {{/if}}
 </fieldset>
 
@@ -34,18 +34,19 @@
 
             {{!-- Period --}}
             {{ formField fields.period name=(concat prefix "period") value=source.period options=@root.recoveryPeriods
-                         label="DND5E.Period" localize=true hint=false classes="label-top" }}
+                         label="DND5E.Period" localize=true hint=false classes="label-top" rootId=@root.partId }}
 
             {{!-- Type --}}
             {{#unless (eq source.period "recharge")}}
             {{ formField fields.type name=(concat prefix "type") value=source.type options=@root.recoveryTypes
-                         label="DND5E.Recovery" localize=true hint=false classes="label-top" }}
+                         label="DND5E.Recovery" localize=true hint=false classes="label-top" rootId=@root.partId }}
             {{/unless}}
 
             {{!-- Formula --}}
             {{#if (or (eq source.type "formula") formulaOptions)}}
             {{ formField fields.formula name=(concat prefix "formula") value=source.formula options=formulaOptions
-                         label="DND5E.Formula" localize=true hint=false classes="label-top" blank=false }}
+                         label="DND5E.Formula" localize=true hint=false classes="label-top" blank=false
+                         rootId=@root.partId }}
             {{/if}}
 
             <button type="button" class="unbutton control-button" data-action="deleteRecovery"

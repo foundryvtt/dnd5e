@@ -28,7 +28,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   identified: true
   unidentified:
@@ -81,7 +81,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: Transformed creature determined by GM or table roll
       duration:
@@ -124,6 +123,7 @@ system:
         attacks: false
         proficiency: false
         saves: false
+        ability: ''
       profiles:
         - count: ''
           name: ''
@@ -132,7 +132,6 @@ system:
           level:
             min: null
             max: null
-          types: []
         - count: ''
           name: ''
           _id: sz8G8hKLXnov0Ogq
@@ -140,7 +139,6 @@ system:
           level:
             min: null
             max: null
-          types: []
         - count: ''
           name: ''
           _id: DuOt4Z41ZMs4foqq
@@ -148,7 +146,6 @@ system:
           level:
             min: null
             max: null
-          types: []
         - count: ''
           name: ''
           _id: J1kF0U6RizYz9jaa
@@ -156,7 +153,6 @@ system:
           level:
             min: null
             max: null
-          types: []
         - count: ''
           name: ''
           _id: vrkqGgFiq2kOG1kt
@@ -164,7 +160,6 @@ system:
           level:
             min: null
             max: null
-          types: []
         - count: ''
           name: ''
           _id: iV4Q4Qjp73ZCcLqx
@@ -172,7 +167,6 @@ system:
           level:
             min: null
             max: null
-          types: []
         - count: ''
           name: ''
           _id: iYlBabuB5uOig7hm
@@ -180,7 +174,6 @@ system:
           level:
             min: null
             max: null
-          types: []
         - count: ''
           name: ''
           _id: 9txdXobEjQtYqTT7
@@ -188,7 +181,6 @@ system:
           level:
             min: null
             max: null
-          types: []
       summon:
         prompt: false
         mode: ''
@@ -196,19 +188,21 @@ system:
       name: Pull and Throw
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712698014
+  modifiedTime: 1764615596424
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 100000

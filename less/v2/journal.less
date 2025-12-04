@@ -390,7 +390,10 @@
     overflow: hidden;
     gap: 0;
 
-    > .left { padding: 16px 8px 16px 16px; }
+    > .left {
+      padding: 16px 8px 16px 16px;
+      overflow-x: hidden;
+    }
 
     > .right {
       overflow-y: auto;
@@ -434,7 +437,7 @@
   }
 }
 
-.journal-entry-page.spells, .content-embed.spells {
+.journal-entry-page.spells, document-embed.spells {
   .grouping {
     font-size: var(--font-size-12);
 

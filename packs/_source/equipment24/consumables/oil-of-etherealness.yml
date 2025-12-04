@@ -20,7 +20,7 @@ system:
     revision: 1
     rules: '2024'
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
   identified: true
   unidentified:
     description: ''
@@ -65,7 +65,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -75,6 +75,9 @@ system:
         value: '10'
       effects:
         - _id: YIlD33DO4Py9aaRi
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: touch
@@ -106,6 +109,12 @@ system:
       _id: CEUD70b6Aouaqs6Z
       appliedEffects:
         - YIlD33DO4Py9aaRi
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   type:
     value: potion
 effects:
@@ -144,18 +153,14 @@ effects:
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmgOilOfEthereal.YIlD33DO4Py9aaRi'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745256806752
+  modifiedTime: 1764614834412
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1150000

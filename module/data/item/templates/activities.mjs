@@ -4,13 +4,19 @@ import { ActivitiesField } from "../../fields/activities-field.mjs";
 import UsesField from "../../shared/uses-field.mjs";
 
 /**
+ * @import { ActivitiesTemplateData } from "./_types.mjs";
+ */
+
+/**
  * Data model template for items with activities.
- *
- * @property {ActivityCollection} activities  Activities on this item.
- * @property {UsesData} uses                  Item's limited uses & recovery.
+ * @extends {SystemDataModel<ActivitiesTemplateData>}
  * @mixin
  */
 export default class ActivitiesTemplate extends SystemDataModel {
+
+  /* -------------------------------------------- */
+  /*  Model Configuration                         */
+  /* -------------------------------------------- */
 
   /** @override */
   static LOCALIZATION_PREFIXES = ["DND5E.USES"];
@@ -149,7 +155,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
-  /*  Data Migrations                             */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /**
@@ -306,7 +312,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
 
   /**
    * Retrieve information on available uses for display.
-   * @returns {{value: number, max: number, name: string}}
+   * @returns {{ value: number, max: number, name: string }}
    */
   getUsesData() {
     return { value: this.uses.value, max: this.uses.max, name: "system.uses.value" };
@@ -318,7 +324,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
    * Perform any item & activity uses recovery.
    * @param {string[]} periods  Recovery periods to check.
    * @param {object} rollData   Roll data to use when evaluating recover formulas.
-   * @returns {Promise<{ updates: object, rolls: BasicRoll[] }>}
+   * @returns {Promise<{ updates: object, rolls: BasicRoll[], destroy: boolean }>}
    */
   async recoverUses(periods, rollData) {
     const updates = {};
@@ -344,7 +350,11 @@ export default class ActivitiesTemplate extends SystemDataModel {
     }
     if ( shouldRecharge ) await recharge(this.parent);
 
+    const destroy = this.uses.autoDestroy && this.uses.recovery.some(r => r.type === "loseAll")
+      && (updates.system?.uses?.spent >= this.uses.max);
+
     for ( const activity of this.activities ) {
+      if ( activity.dependentOrigin?.active === false ) continue;
       const result = await UsesField.recoverUses.call(activity, periods, rollData);
       if ( result ) {
         foundry.utils.mergeObject(updates, { [`system.activities.${activity.id}.uses`]: result.updates });
@@ -353,7 +363,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
       if ( shouldRecharge ) await recharge(activity);
     }
 
-    return { updates, rolls };
+    return { updates, rolls, destroy };
   }
 
   /* -------------------------------------------- */
@@ -396,9 +406,17 @@ export default class ActivitiesTemplate extends SystemDataModel {
       });
       return riders;
     }, { activity: new Set(), effect: new Set() });
-    foundry.utils.setProperty(changed, "flags.dnd5e.riders", {
-      activity: Array.from(riders.activity), effect: Array.from(riders.effect)
-    });
+    if ( !riders.activity.size && !riders.effect.size ) {
+      foundry.utils.setProperty(changed, "flags.dnd5e.-=riders", null);
+    } else {
+      foundry.utils.setProperty(changed, "flags.dnd5e.riders", Object.entries(riders)
+        .reduce((updates, [key, value]) => {
+          if ( value.size ) updates[key] = Array.from(value);
+          else updates[`-=${key}`] = null;
+          return updates;
+        }, {})
+      );
+    }
 
     if ( !this.parent.isEmbedded ) return;
 
@@ -462,20 +480,5 @@ export default class ActivitiesTemplate extends SystemDataModel {
     // If item has any Cast activities, clean up any cached spells
     const spellIds = this.activities.getByType("cast").map(a => a.cachedSpell?.id).filter(_ => _);
     if ( spellIds.length ) this.parent.actor.deleteEmbeddedDocuments("Item", spellIds);
-  }
-
-  /* -------------------------------------------- */
-  /*  Shims                                       */
-  /* -------------------------------------------- */
-
-  /**
-   * Apply shims for data removed from ActionTemplate & ActivatedEffectTemplate.
-   * @this {ItemDataModel}
-   */
-  static _applyActivityShims() {
-    foundry.utils.logCompatibilityWarning(
-      "The `_applyActivityShims` method has been deprecated and should no longer be called.",
-      { since: "DnD5e 5.0", until: "DnD5e 5.2", once: true }
-    );
   }
 }

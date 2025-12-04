@@ -12,21 +12,15 @@ system:
       (no action required by you). If you don't issue any, it takes the Dodge
       action and uses its movement to avoid danger.</p><p><strong>Using a
       Higher-Level Spell Slot. </strong>Use the spell slot's level for the
-      spell's level in the stat block.</p><section class="fvtt advice"
-      style="margin:0.5rem;padding:0.5rem"><article><p>In addition to the noted
-      usage of the spell's level in the spirit's Traits and Actions, the
-      following attributes are also affected.</p><table><caption>Draconic
-      Spirit</caption><tbody><tr><td><strong>AC</strong></td><td>14 + the
-      spell's level</td></tr><tr><td><strong>HP</strong></td><td>50 + 10 for
-      each spell level above
-      5</td></tr><tr><td><strong>PB</strong></td><td>equals your Proficiency
-      Bonus</td></tr></tbody></table></article></section>
+      spell's level in the stat
+      block.</p><p>@Embed[Compendium.dnd5e.actors24.Actor.phbmobDraconicSp
+      caption=false statblock]</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
   activation:
     type: action
     condition: ''
@@ -142,11 +136,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.350'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1724425973657
-  modifiedTime: 1745256798908
+  modifiedTime: 1763150360860
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplSummonDrag'

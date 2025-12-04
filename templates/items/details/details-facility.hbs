@@ -3,17 +3,18 @@
 
     {{!-- Type --}}
     {{ formField fields.type.fields.value value=source.type.value choices=CONFIG.facilities.types labelAttr="label"
-                 blank=false localize=true }}
+                 blank=false localize=true rootId=partId }}
 
     {{!-- Sub-Type --}}
-    {{ formField fields.type.fields.subtype value=source.type.subtype choices=facilitySubtypes localize=true }}
+    {{ formField fields.type.fields.subtype value=source.type.subtype choices=facilitySubtypes localize=true
+                 rootId=partId }}
 
     {{!-- Size --}}
-    {{ formField fields.size value=source.size choices=CONFIG.facilities.sizes labelAttr="label" }}
+    {{ formField fields.size value=source.size choices=CONFIG.facilities.sizes labelAttr="label" rootId=partId }}
 
     {{!-- Level --}}
     {{#if (eq source.type.value "basic")}}
-    {{ formField fields.level value=source.level }}
+    {{ formField fields.level value=source.level rootId=partId }}
     {{/if}}
 
     {{#if (eq source.type.value "special")}}
@@ -23,10 +24,12 @@
         <div class="form-fields">
 
             {{!-- Level --}}
-            {{ formField fields.level value=source.level label="DND5E.Level" localize=true classes="label-top" }}
+            {{ formField fields.level value=source.level label="DND5E.Level" localize=true classes="label-top"
+                         rootId=partId }}
 
             {{!-- Order --}}
-            {{ formField fields.order value=source.order classes="label-top" options=orders.available blank="" }}
+            {{ formField fields.order value=source.order classes="label-top" options=orders.available blank=""
+                         rootId=partId }}
         </div>
     </div>
 
@@ -36,26 +39,29 @@
         <div class="form-fields">
 
             {{!-- Hirelings --}}
-            {{ formField fields.hirelings.fields.max value=source.hirelings.max classes="label-top" placeholder="—" }}
+            {{ formField fields.hirelings.fields.max value=source.hirelings.max classes="label-top" placeholder="—"
+                         rootId=partId }}
 
             {{!-- Defenders --}}
-            {{ formField fields.defenders.fields.max value=source.defenders.max classes="label-top" placeholder="—" }}
+            {{ formField fields.defenders.fields.max value=source.defenders.max classes="label-top" placeholder="—"
+                         rootId=partId }}
         </div>
     </div>
 
     {{!-- Free Facility --}}
-    {{ formField fields.free value=source.free input=inputs.createCheckboxInput }}
+    {{ formField fields.free value=source.free input=inputs.createCheckboxInput rootId=partId }}
 
     {{!-- Enlargeable --}}
-    {{ formField fields.enlargeable value=source.enlargeable input=inputs.createCheckboxInput }}
+    {{ formField fields.enlargeable value=source.enlargeable input=inputs.createCheckboxInput rootId=partId }}
 
     {{!-- Disabled --}}
-    {{ formField fields.disabled value=source.disabled input=inputs.createCheckboxInput }}
+    {{ formField fields.disabled value=source.disabled input=inputs.createCheckboxInput rootId=partId }}
 
     {{else}}
 
     {{!-- Built --}}
-    {{ formField fields.building.fields.built value=source.building.built input=inputs.createCheckboxInput }}
+    {{ formField fields.building.fields.built value=source.building.built input=inputs.createCheckboxInput
+                 rootId=partId }}
 
     {{/if}}
 
@@ -65,7 +71,8 @@
     <legend>{{ localize "DND5E.FACILITY.Orders.Label" }}</legend>
 
     {{!-- Executing --}}
-    {{ formField fields.progress.fields.order value=source.progress.order options=orders.executable blank="" }}
+    {{ formField fields.progress.fields.order value=source.progress.order options=orders.executable blank=""
+                 rootId=partId }}
 
     {{!-- Progress --}}
     <div class="form-group split-group">
@@ -73,10 +80,11 @@
         <div class="form-fields">
 
             {{!-- Current --}}
-            {{ formField fields.progress.fields.value value=source.progress.value classes="label-top" }}
+            {{ formField fields.progress.fields.value value=source.progress.value classes="label-top" rootId=partId }}
 
             {{!-- Total --}}
-            {{ formField fields.progress.fields.max value=source.progress.max classes="label-top" placeholder="—" }}
+            {{ formField fields.progress.fields.max value=source.progress.max classes="label-top" placeholder="—"
+                         rootId=partId }}
         </div>
     </div>
 </fieldset>
@@ -120,7 +128,7 @@
 
     {{!-- Stocked --}}
     {{ formField fields.trade.fields.stock.fields.stocked value=source.trade.stock.stocked
-                 input=inputs.createCheckboxInput }}
+                 input=inputs.createCheckboxInput rootId=partId }}
 
     {{!-- Goods --}}
     <div class="form-group split-group">
@@ -129,16 +137,17 @@
 
             {{!-- Value --}}
             {{ formField fields.trade.fields.stock.fields.value value=source.trade.stock.value classes="label-top"
-                         placeholder="—" }}
+                         placeholder="—" rootId=partId }}
 
             {{!-- Max --}}
             {{ formField fields.trade.fields.stock.fields.max value=source.trade.stock.max classes="label-top"
-                         placeholder="—" }}
+                         placeholder="—" rootId=partId }}
         </div>
     </div>
 
     {{!-- Creatures --}}
-    {{ formField fields.trade.fields.creatures.fields.max value=source.trade.creatures.max placeholder="—" }}
+    {{ formField fields.trade.fields.creatures.fields.max value=source.trade.creatures.max placeholder="—"
+                 rootId=partId }}
 
     {{!-- Profit Factor --}}
     <div class="form-group">

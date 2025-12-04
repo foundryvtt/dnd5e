@@ -17,7 +17,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: ''
     license: CC-BY-4.0
     rules: '2014'
@@ -108,7 +108,18 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
+      appliedEffects: []
   attuned: false
   identifier: carpet-of-flying-3x5
 effects: []
@@ -116,11 +127,11 @@ flags: {}
 _id: XwqNHyox5OQQio8q
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037212268
-  modifiedTime: 1750697344647
+  modifiedTime: 1764620170307
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 folder: UnUwTG4YIgd0kaUJ

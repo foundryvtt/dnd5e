@@ -1,0 +1,162 @@
+_id: mmLuringSong0000
+name: Luring Song
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    dxxqZP7Vo01te3QB:
+      type: save
+      _id: dxxqZP7Vo01te3QB
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: true
+        override: false
+      effects:
+        - _id: gJscxYD5nf7GlEo8
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: radius
+          size: '300'
+          count: ''
+        affects:
+          choice: false
+          type: creature
+          count: ''
+          special: Humanoid and Giant
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability:
+          - wis
+        dc:
+          calculation: con
+          formula: 8 + @mod + @prof
+      name: Save
+      img: ''
+      appliedEffects:
+        - gJscxYD5nf7GlEo8
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] sings a magical melody,
+      which lasts until the [[lookup @name lowercase]]'s Concentration ends on
+      it.</p><p class="feature"><em>Wisdom Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=dxxqZP7Vo01te3QB]], each [[lookup
+      @target.affects.special activity=dxxqZP7Vo01te3QB]] in a [[lookup
+      @target.template.size activity=dxxqZP7Vo01te3QB]]-foot Emanation
+      originating from the [[lookup @name lowercase]] when the song
+      starts.</p><p class="feature"><em>Failure:</em> The target has the
+      &amp;Reference[Charmed apply=false] condition until the song ends and
+      repeats the save at the end of each of its turns. While Charmed, the
+      target has the &amp;Reference[Incapacitated apply=false] condition and
+      ignores the Luring Song of other harpies.</p><p class="feature">If the
+      target is more than 5 feet from the [[lookup @name lowercase]], the target
+      moves on its turn toward the [[lookup @name lowercase]] by the most direct
+      route, trying to get within 5 feet of the [[lookup @name lowercase]]. It
+      doesn't avoid &amp;Reference[OpportunityAttacks]; however, before moving
+      into damaging terrain (such as lava or a pit) and whenever it takes damage
+      from a source other than the [[lookup @name lowercase]], the target
+      repeats the save.</p><p class="feature"><em>Success:</em> The target is
+      immune to this [[lookup @name lowercase]]'s Luring Song for 24 hours.</p>
+    chat: ''
+  identifier: luring-song
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/skills/trades/music-singing-voice-blue.webp
+effects:
+  - name: Charmed & Incapacitated
+    img: systems/dnd5e/icons/svg/statuses/charmed.svg
+    origin: Item.mmLuringSong0000
+    _id: gJscxYD5nf7GlEo8
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: 1
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Charmed apply=false] condition until
+      the song ends and repeats the save at the end of each of its
+      turns.</p><p>While Charmed, the target has the
+      &amp;Reference[Incapacitated apply=false] condition.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - charmed
+      - incapacitated
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1737822533030
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmLuringSong0000.gJscxYD5nf7GlEo8'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737822615064
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 13800000
+ownership:
+  default: 0
+_key: '!items!mmLuringSong0000'

@@ -19,6 +19,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: 745v4uo4m3ghldT9
       sort: 0
       activation:
@@ -32,7 +33,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -55,6 +56,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     sZwpvVE0OpUNXe2B:
       type: utility
       name: Create Lightning Spheres
@@ -114,6 +121,13 @@ system:
         formula: ''
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
     GLyk6XaqTk5JOVQ8:
       type: save
       name: Lightning Sphere Save
@@ -166,6 +180,13 @@ system:
           formula: '15'
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
     4ZI0cvhpjWiYg9i4:
       type: save
       name: Shooting Stars
@@ -229,7 +250,6 @@ system:
               - radiant
             scaling:
               mode: ''
-              number: 1
         onSave: half
       save:
         ability: dex
@@ -238,6 +258,13 @@ system:
           formula: '15'
       img: ''
       appliedEffects: []
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireMagic: true
   uses:
     spent: 0
     recovery:
@@ -289,7 +316,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   identified: true
   unidentified:
@@ -325,18 +352,14 @@ system:
   strength: null
   proficient: null
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712702692
+  modifiedTime: 1764616109446
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1300000

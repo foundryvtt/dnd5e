@@ -27,7 +27,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: ''
     license: CC-BY-4.0
     rules: '2014'
@@ -84,7 +84,6 @@ system:
           - type: itemUses
             value: '2'
             target: ''
-            scaling: {}
         scaling:
           allowed: false
           max: ''
@@ -135,6 +134,13 @@ system:
       name: Cone of Fear
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
     J1oQUVbZNLMFnm4f:
       type: cast
       spell:
@@ -149,6 +155,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: J1oQUVbZNLMFnm4f
       sort: 200000
       activation:
@@ -162,7 +169,6 @@ system:
         targets:
           - type: activityUses
             value: '1'
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -185,6 +191,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   attuned: false
   identifier: wand-of-fear
 effects: []
@@ -192,18 +204,14 @@ folder: 1aDgsGVwDbPdxG2V
 sort: 0
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037136851
-  modifiedTime: 1750697344647
+  modifiedTime: 1764619405639
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!EJFql4aNWHHJSxT9'

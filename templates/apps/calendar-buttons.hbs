@@ -1,0 +1,25 @@
+<menu>
+    {{#each buttons}}
+    <li class="calendar-button">
+        {{> ".button" }}
+        {{#if additional}}
+        <menu class="dropdown flexcol unlist">
+            {{#each additional}}
+            <li class="calendar-button">
+                {{> ".button" }}
+            </li>
+            {{/each}}
+        </menu>
+        {{/if}}
+    </li>
+    {{/each}}
+</menu>
+
+{{#*inline ".button"}}
+<button type="button" {{~#if action}} data-action="{{ action }}"{{/if}} {{ dnd5e-dataset dataset }}
+        data-index="{{ index }}" {{~#if tooltip}} data-tooltip aria-label="{{ tooltip }}"
+        data-tooltip-direction="{{ tooltipDirection }}"{{/if}}>
+    {{#if icon}}{{ dnd5e-icon icon }}{{/if}}
+    {{#if label}}{{ label }}{{/if}}
+</button>
+{{/inline}}

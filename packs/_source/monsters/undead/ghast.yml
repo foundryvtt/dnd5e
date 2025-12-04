@@ -716,7 +716,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: 0
       unidentified:
         description: ''
       type:
@@ -792,6 +792,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -801,11 +802,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.2.0
       createdTime: null
-      modifiedTime: 1745107551051
+      modifiedTime: 1757447672096
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!IyIybE5t2adMEVUM.nSgLkorv2oln5BIt'

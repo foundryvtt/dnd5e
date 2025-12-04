@@ -50,7 +50,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: pg. 143
     license: CC-BY-4.0
     rules: '2014'
@@ -129,6 +129,7 @@ system:
         attackDamage: ''
         saveDamage: ''
         healing: ''
+        hd: ''
       creatureSizes: []
       creatureTypes:
         - celestial
@@ -136,114 +137,116 @@ system:
         - fiend
       match:
         attacks: false
+        disposition: true
         proficiency: false
         saves: false
+        ability: ''
       profiles:
-        - name: ''
+        - count: ''
+          name: ''
           _id: HShhzdPtYkhNleyj
           uuid: Compendium.dnd5e.monsters.Actor.qav2dvMIUiMQCCsy
           level:
             min: null
             max: null
-          types: []
-        - name: ''
+        - count: ''
+          name: ''
           _id: NIHXnk03LvysDp7t
           uuid: Compendium.dnd5e.monsters.Actor.hIf83RD3ZVW4Egfi
           level:
             min: null
             max: null
-          types: []
-        - name: ''
+        - count: ''
+          name: ''
           _id: L59Xqchh128r45Rc
           uuid: Compendium.dnd5e.monsters.Actor.8RgUhb31VvjUNZU1
           level:
             min: null
             max: null
-          types: []
-        - name: Fish
+        - count: ''
+          name: Fish
           _id: kaiiJrnUWOqlQHt3
           uuid: Compendium.dnd5e.monsters.Actor.nkyCGJ9wXeAZkyyz
           level:
             min: null
             max: null
-          types: []
-        - name: ''
+        - count: ''
+          name: ''
           _id: zGRnQq2EkrfRb14O
           uuid: Compendium.dnd5e.monsters.Actor.EZgiprHXA2D7Uyb3
           level:
             min: null
             max: null
-          types: []
-        - name: ''
+        - count: ''
+          name: ''
           _id: n2fhgnH9XTc8MbKt
           uuid: Compendium.dnd5e.monsters.Actor.fnkPNfIpS62LqOu4
           level:
             min: null
             max: null
-          types: []
-        - name: ''
+        - count: ''
+          name: ''
           _id: bZJcnv1H2Vjm5XI6
           uuid: Compendium.dnd5e.monsters.Actor.I2x01hzOjVN4NUjf
           level:
             min: null
             max: null
-          types: []
-        - name: ''
+        - count: ''
+          name: ''
           _id: aqC42mfjOB5PB5JU
           uuid: Compendium.dnd5e.monsters.Actor.3UUNbGiG2Yf1ZPxM
           level:
             min: null
             max: null
-          types: []
-        - name: ''
+        - count: ''
+          name: ''
           _id: 9sLcKSCGrnG7gO7O
           uuid: Compendium.dnd5e.monsters.Actor.d0prpsGSAorDadec
           level:
             min: null
             max: null
-          types: []
-        - name: ''
+        - count: ''
+          name: ''
           _id: IxXkUKUna11rHprj
           uuid: Compendium.dnd5e.monsters.Actor.D5rwVIxmfFrdyyxT
           level:
             min: null
             max: null
-          types: []
-        - name: ''
+        - count: ''
+          name: ''
           _id: 0t4KAcZWZ7fY9A5u
           uuid: Compendium.dnd5e.monsters.Actor.pozQUPTnLZW8epox
           level:
             min: null
             max: null
-          types: []
-        - name: ''
+        - count: ''
+          name: ''
           _id: op4FTfM9QWefJxOJ
           uuid: Compendium.dnd5e.monsters.Actor.LPdX5YLlwci0NDZx
           level:
             min: null
             max: null
-          types: []
-        - name: ''
+        - count: ''
+          name: ''
           _id: 1gJGQBWi5LJYjONw
           uuid: Compendium.dnd5e.monsters.Actor.FWSDiq9SZsdiBAa8
           level:
             min: null
             max: null
-          types: []
-        - name: ''
+        - count: ''
+          name: ''
           _id: 7hgp23Fe02ITFtIw
           uuid: Compendium.dnd5e.monsters.Actor.28gU50HtG8Kp7uIz
           level:
             min: null
             max: null
-          types: []
-        - name: ''
+        - count: ''
+          name: ''
           _id: czhL1VUn6ecvG0WV
           uuid: Compendium.dnd5e.monsters.Actor.WOdeacKCYVhgLDuN
           level:
             min: null
             max: null
-          types: []
       summon:
         identifier: ''
         mode: ''
@@ -251,7 +254,11 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      appliedEffects: []
   identifier: find-familiar
 sort: 0
 flags: {}
@@ -260,11 +267,11 @@ effects: []
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.350'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.2.0
   createdTime: 1725037352867
-  modifiedTime: 1725992718741
+  modifiedTime: 1760981511022
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!JGT5bNqu9REL7Fuz'

@@ -2,7 +2,7 @@
     <legend>
         <span>{{ localize "DND5E.SAVE.FIELDS.damage.label" }}</span>
     </legend>
-    {{ formField fields.damage.fields.onSave value=activity.damage.onSave options=onSaveOptions }}
+    {{ formField fields.damage.fields.onSave value=activity.damage.onSave options=onSaveOptions rootId=@root.partId }}
     {{> "systems/dnd5e/templates/activity/parts/damage-parts.hbs" }}
     <button type="button" class="unbutton control-button add-button" data-action="addDamagePart">
         <i class="fas fa-plus" inert></i>

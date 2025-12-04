@@ -3,23 +3,23 @@
 
     {{!-- Feature Type --}}
     {{ formField fields.type.fields.value value=source.type.value choices=CONFIG.featureTypes labelAttr="label" blank=""
-                 localize=true }}
+                 localize=true rootId=partId }}
 
     {{!-- Feature Sub-Type --}}
     {{#if itemSubtypes}}
     {{ formField fields.type.fields.subtype value=source.type.subtype choices=itemSubtypes blank="" localize=true
-                 label=(localize "DND5E.ItemFeatureSubtype" category=(lookup (lookup CONFIG.featureTypes source.type.value) "label")) }}
+                 label=(localize "DND5E.ItemFeatureSubtype" category=(lookup (lookup CONFIG.featureTypes source.type.value) "label")) rootId=partId }}
     {{/if}}
 
     {{#if (eq system.type.value "vehicle")}}
-    {{ formField fields.cover value=source.cover options=coverOptions }}
+    {{ formField fields.cover value=source.cover options=coverOptions rootId=partId }}
     {{/if}}
 
     {{!-- Feature Prerequisites --}}
-    {{ formField fields.prerequisites.fields.level value=source.prerequisites.level }}
-    {{ formField fields.prerequisites.fields.items value=source.prerequisites.items }}
+    {{ formField fields.prerequisites.fields.level value=source.prerequisites.level rootId=partId }}
+    {{ formField fields.prerequisites.fields.items value=source.prerequisites.items rootId=partId }}
     {{ formField fields.prerequisites.fields.repeatable value=source.prerequisites.repeatable
-                 input=inputs.createCheckboxInput }}
+                 input=inputs.createCheckboxInput rootId=partId }}
 
     {{!-- Feature Properties --}}
     {{ formField fields.properties options=properties.options label="DND5E.ItemFeatureProperties" localize=true
@@ -33,12 +33,12 @@
     {{!-- Max Enchantments --}}
     {{ formField fields.enchant.fields.max value=source.enchant.max localize=true
                  label="DND5E.ENCHANTMENT.FIELDS.enchantment.items.max.label"
-                 hint="DND5E.ENCHANTMENT.FIELDS.enchantment.items.max.hint" }}
+                 hint="DND5E.ENCHANTMENT.FIELDS.enchantment.items.max.hint" rootId=partId }}
 
     {{!-- Enchantment Replacement --}}
     {{ formField fields.enchant.fields.period value=source.enchant.period localize=true
                  choices=CONFIG.enchantmentPeriods labelAttr="label" blank="DND5E.ENCHANTMENT.Period.Never"
                  label="DND5E.ENCHANTMENT.FIELDS.enchantment.items.period.label"
-                 hint="DND5E.ENCHANTMENT.FIELDS.enchantment.items.period.hint" }}
+                 hint="DND5E.ENCHANTMENT.FIELDS.enchantment.items.period.hint" rootId=partId }}
 </fieldset>
 {{/if}}

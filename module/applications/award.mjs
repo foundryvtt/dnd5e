@@ -2,12 +2,7 @@ import { filteredKeys, formatNumber } from "../utils.mjs";
 import Application5e from "./api/application.mjs";
 
 /**
- * @typedef AwardOptions
- * @property {Record<string, number>|null} currency  Amount of each currency to award.
- * @property {boolean} each                          Distribute full award to each destination, rather than dividing it
- *                                                   among the destinations.
- * @property {Set<string>} savedDestinations         Set of IDs for previously selected destinations.
- * @property {number|null} xp                        Amount of experience points to award.
+ * @import { AwardOptions } from "./_types.mjs";
  */
 
 /**

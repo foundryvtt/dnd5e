@@ -19,6 +19,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: UtT5lj94xD2gC7t7
       sort: 0
       activation:
@@ -52,6 +53,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     KeNwSWKR7BsH8e9G:
       type: cast
       spell:
@@ -66,6 +73,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: KeNwSWKR7BsH8e9G
       sort: 0
       activation:
@@ -99,6 +107,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery: []
@@ -117,7 +131,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   identified: true
   unidentified:
@@ -190,18 +204,14 @@ effects:
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmgHelmOfTelepat.hFWmlSeGZKjnB2ZE'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712700646
+  modifiedTime: 1764617055730
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 18400000

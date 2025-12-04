@@ -1,0 +1,148 @@
+_id: mmVileAppearance
+name: Vile Appearance
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    FR0ETDHBas1Z5LfF:
+      type: save
+      _id: FR0ETDHBas1Z5LfF
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: CiH2KTuvmdGmuz20
+          onSave: false
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '30'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: Beast or Humanoid
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability:
+          - wis
+        dc:
+          calculation: cha
+          formula: 8 + @mod + @prof
+      name: ''
+      img: ''
+      appliedEffects:
+        - CiH2KTuvmdGmuz20
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature"><em>Wisdom Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=FR0ETDHBas1Z5LfF]], any [[lookup
+      @target.affects.special activity=FR0ETDHBas1Z5LfF]] that starts its turn
+      within [[lookup @range.value activity=FR0ETDHBas1Z5LfF]] feet of the
+      [[lookup @name lowercase]] and can see the [[lookup @name lowercase]]'s
+      true form.</p><p class="feature"><em>Failure:</em> The target has the
+      &amp;Reference[Frightened apply=false] condition until the start of its
+      next turn.</p><p class="feature"><em>Success:</em> The target is immune to
+      this [[lookup @name lowercase]]'s Horrific Appearance for 24 hours.</p>
+    chat: ''
+  identifier: vile-appearance
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/magic/control/fear-fright-monster-purple-blue.webp
+effects:
+  - name: Frightened
+    img: systems/dnd5e/icons/svg/statuses/frightened.svg
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmVileAppearance
+    _id: CiH2KTuvmdGmuz20
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: 1
+    description: >-
+      <p>The target has the &amp;Reference[Frightened apply=false] condition
+      until the start of its next turn.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - frightened
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: 1735942012260
+      modifiedTime: 1737935972644
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmVileAppearance.CiH2KTuvmdGmuz20'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737935939722
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 14000000
+ownership:
+  default: 0
+_key: '!items!mmVileAppearance'

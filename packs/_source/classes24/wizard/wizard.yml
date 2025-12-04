@@ -63,7 +63,7 @@ system:
     rules: '2024'
     revision: 2
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
   startingEquipment:
     - type: AND
       requiresProficiency: false
@@ -103,6 +103,13 @@ system:
       _id: ipKkaDAn6KnKgpVH
       group: zcKhKDfR6l9mjjo0
       sort: 500000
+    - type: currency
+      count: 5
+      key: gp
+      requiresProficiency: false
+      _id: xxd2IhkKWk9bmLjp
+      group: zcKhKDfR6l9mjjo0
+      sort: 700000
   identifier: wizard
   levels: 1
   advancement:
@@ -428,11 +435,11 @@ effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1735866273692
-  modifiedTime: 1752705980871
+  modifiedTime: 1757541790477
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

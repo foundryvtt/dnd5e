@@ -1,0 +1,161 @@
+_id: mmUnnervingGaze0
+name: Unnerving Gaze
+type: feat
+system:
+  activities:
+    btp6NZvx465nxWTF:
+      type: save
+      _id: btp6NZvx465nxWTF
+      sort: 0
+      activation:
+        type: reaction
+        value: null
+        override: false
+        condition: A creature the devil can see
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: turn
+        concentration: false
+        override: false
+        value: '1'
+      effects:
+        - _id: BheOE4RU2wcG94yl
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+        value: '30'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: radius
+          size: '30'
+          count: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability:
+          - wis
+        dc:
+          calculation: wis
+          formula: 8 + @mod + @prof
+      name: Save
+      img: ''
+      appliedEffects:
+        - BheOE4RU2wcG94yl
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature"><em>Trigger:</em> A [[lookup @target.affects.type
+      activity=btp6NZvx465nxWTF]] the [[lookup @name lowercase]] can see starts
+      its turn within [[lookup @target.template.size activity=btp6NZvx465nxWTF]]
+      feet of the [[lookup @name lowercase]] and can see the [[lookup @name
+      lowercase]].</p><p class="feature"><em>Response—Wisdom Saving Throw:</em>
+      DC [[lookup @save.dc.value activity=btp6NZvx465nxWTF]], the triggering
+      [[lookup @target.affects.type activity=btp6NZvx465nxWTF]].</p><p
+      class="feature"><em>Failure:</em> The target has the
+      &amp;Reference[Frightened apply=false] condition until the end of its
+      turn.</p><p class="feature"><em>Success:</em> The target is immune to this
+      [[lookup @name lowercase]]'s Unnerving Gaze for 24 hours.</p>
+    chat: ''
+  identifier: unnerving-gaze
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  type:
+    value: monster
+    subtype: ''
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/perception/eye-slit-red-orange.webp
+effects:
+  - name: Frightened
+    img: systems/dnd5e/icons/svg/statuses/frightened.svg
+    origin: Item.1psii5msWut9Uxse
+    _id: BheOE4RU2wcG94yl
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: 0
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Frightened apply=false] condition
+      until the end of its turn.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - frightened
+    sort: 0
+    flags:
+      dae:
+        enableCondition: ''
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736126302564
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmUnnervingGaze0.BheOE4RU2wcG94yl'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737866665273
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 23000000
+ownership:
+  default: 0
+_key: '!items!mmUnnervingGaze0'

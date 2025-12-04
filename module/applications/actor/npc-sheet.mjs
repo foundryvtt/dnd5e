@@ -31,7 +31,7 @@ export default class NPCActorSheet extends BaseActorSheet {
     },
     sidebarCollapser: {
       container: { classes: ["main-content"], id: "main" },
-      template: "systems/dnd5e/templates/actors/npc-sidebar-collapser.hbs"
+      template: "systems/dnd5e/templates/actors/parts/sidebar-collapser.hbs"
     },
     sidebar: {
       container: { classes: ["main-content"], id: "main" },
@@ -360,7 +360,7 @@ export default class NPCActorSheet extends BaseActorSheet {
         if ( !value ) return null;
         const data = { label, value };
         if ( (k === "fly") && attributes.movement.hover ) data.icons = [{
-          icon: "fas fa-cloud", label: game.i18n.localize("DND5E.MovementHover")
+          icon: "fas fa-cloud", label: game.i18n.localize("DND5E.MOVEMENT.Hover")
         }];
         return data;
       }),
@@ -392,13 +392,27 @@ export default class NPCActorSheet extends BaseActorSheet {
   async _prepareSpecialTraitsContext(context, options) {
     context = await super._prepareSpecialTraitsContext(context, options);
 
+    const { fields } = this.document.system.schema;
     context.flags.sections.unshift({
       label: game.i18n.localize("DND5E.NPC.Label"),
       fields: [{
-        field: this.document.system.schema.fields.traits.fields.important,
+        field: fields.traits.fields.important,
         input: createCheckboxInput,
         name: "system.traits.important",
         value: context.source.traits.important
+      }, {
+        label: "DND5E.NPC.FIELDS.attributes.price.label",
+        hint: "DND5E.NPC.FIELDS.attributes.price.hint",
+        fields: [{
+          field: fields.attributes.fields.price.fields.value,
+          name: "system.attributes.price.value",
+          value: context.source.attributes.price.value
+        }, {
+          choices: CONFIG.DND5E.currencies,
+          field: fields.attributes.fields.price.fields.denomination,
+          name: "system.attributes.price.denomination",
+          value: context.source.attributes.price.denomination
+        }]
       }]
     });
 
@@ -444,23 +458,6 @@ export default class NPCActorSheet extends BaseActorSheet {
 
   /* -------------------------------------------- */
 
-  /**
-   * Render a button for creating items in the inventory tab.
-   * @protected
-   */
-  _renderCreateInventory() {
-    const button = document.createElement("button");
-    Object.assign(button, {
-      type: "button", className: "create-child gold-button",
-      ariaLabel: game.i18n.format("SIDEBAR.Create", { type: game.i18n.localize("DOCUMENT.Item") })
-    });
-    button.dataset.action = "addDocument";
-    button.insertAdjacentHTML("beforeend", '<i class="fa-solid fa-plus" inert></i>');
-    this.element.querySelector('[data-application-part="inventory"] .bottom').append(button);
-  }
-
-  /* -------------------------------------------- */
-
   /** @inheritDoc */
   async _renderFrame(options) {
     const html = await super._renderFrame(options);
@@ -498,7 +495,6 @@ export default class NPCActorSheet extends BaseActorSheet {
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
-    this._renderSource();
 
     if ( !this.actor.limited ) {
       this._renderCreateInventory();

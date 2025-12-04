@@ -9,11 +9,11 @@ system:
       can't take Reactions. On its turns, it can take either an action or a
       Bonus Action, not both, and it can make only one attack if it takes the
       Attack action. If it casts a spell with a Somatic component, there is a
-      [[/r 1d100cs&lt;=25#Slowed spell cast success]]{25 percent} chance the
+      [[/r 1d100cs&gt;25#Spell cast successfully on 1]]{25 percent} chance the
       spell fails as a result of the target making the spell's gestures too
       slowly.</p><p>An affected target repeats the save at the end of each of
       its turns, ending the spell on itself on a success.</p><section
-      id="secret-2RobIVhv3tn7gmU7" class="secret"><p><strong>Foundry
+      class="secret" id="secret-2RobIVhv3tn7gmU7"><p><strong>Foundry
       Note</strong></p><p>The inline roll above will return 1 if it succeeded or
       0 if it failed.</p></section>
     chat: ''
@@ -21,7 +21,7 @@ system:
     custom: ''
     rules: '2024'
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
     revision: 2
   activation:
     type: action
@@ -107,44 +107,6 @@ system:
         spent: 0
         recovery: []
       sort: 0
-    dnd5eactivity300:
-      _id: dnd5eactivity300
-      type: utility
-      activation:
-        type: action
-        value: null
-        override: false
-      consumption:
-        targets: []
-        scaling:
-          allowed: false
-          max: ''
-      description:
-        chatFlavor: ''
-      duration:
-        units: inst
-        override: false
-      effects:
-        - _id: z1lkguBohjqXRSHm
-      range:
-        override: false
-      target:
-        prompt: true
-        template:
-          contiguous: false
-          units: ft
-        affects:
-          choice: false
-        override: false
-      roll:
-        formula: 1d100cs>25
-        name: ''
-        prompt: false
-        visible: false
-      uses:
-        spent: 0
-        recovery: []
-      sort: 0
   identifier: slow
 _id: phbsplSlow000000
 type: spell
@@ -196,25 +158,28 @@ effects:
       Dexterity saving throws, and it can’t take Reactions. On its turns, it can
       take either an action or a Bonus Action, not both, and it can make only
       one attack if it takes the Attack action. If it casts a spell with a
-      Somatic component, there is a [[/r 1d100cs&gt;25#Slowed spell cast
-      success]]{25 percent} chance the spell fails as a result of the target
-      making the spell’s gestures too slowly.</p><p>An affected target repeats
-      the [[/save ability=wis]] save at the end of each of its turns, ending the
+      Somatic component, there is a [[/r 1d100cs&gt;25#Spell cast successfully
+      on 1]]{25 percent} chance the spell fails as a result of the target making
+      the spell’s gestures too slowly.</p><p>An affected target repeats the
+      [[/save ability=wis]] save at the end of each of its turns, ending the
       spell on itself on a success.</p>
     transfer: false
     statuses: []
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     tint: '#ffffff'
     _stats:
       compendiumSource: >-
         Compendium.dnd5e.spells.Item.yqUDoxk4x0NWG5Bz.ActiveEffect.YtN8kTDQyxFaxpEx
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.347'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.1
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1755290154685
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     img: icons/magic/time/clock-stopwatch-white-blue.webp
     type: base
@@ -232,11 +197,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.347'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.1
   createdTime: 1724425971412
-  modifiedTime: 1745256798405
+  modifiedTime: 1755290138453
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplSlow000000'

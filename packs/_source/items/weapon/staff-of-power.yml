@@ -53,7 +53,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: ''
     license: CC-BY-4.0
     rules: '2014'
@@ -209,6 +209,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: L1GZU5PNRP6yTTzv
       sort: 400000
       activation:
@@ -223,7 +224,6 @@ system:
           - type: itemUses
             value: '5'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -246,6 +246,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     MPzQMc46FPOA0fOv:
       type: cast
       spell:
@@ -259,6 +265,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: MPzQMc46FPOA0fOv
       sort: 500000
       activation:
@@ -273,7 +280,6 @@ system:
           - type: itemUses
             value: '5'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -296,6 +302,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     pYnqALTnXAWsBrFx:
       type: cast
       spell:
@@ -309,6 +321,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: pYnqALTnXAWsBrFx
       sort: 600000
       activation:
@@ -323,7 +336,6 @@ system:
           - type: itemUses
             value: '6'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -346,6 +358,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     DlGnSXkbJ2GvX5Mq:
       type: cast
       spell:
@@ -359,6 +377,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: DlGnSXkbJ2GvX5Mq
       sort: 700000
       activation:
@@ -373,7 +392,6 @@ system:
           - type: itemUses
             value: '5'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -396,6 +414,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     U6ZnqbAPuN6TLnmy:
       type: cast
       spell:
@@ -409,6 +433,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: U6ZnqbAPuN6TLnmy
       sort: 800000
       activation:
@@ -423,7 +448,6 @@ system:
           - type: itemUses
             value: '2'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -446,6 +470,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     ARYvRDrR6qLC7bKF:
       type: cast
       spell:
@@ -459,6 +489,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: ARYvRDrR6qLC7bKF
       sort: 900000
       activation:
@@ -473,7 +504,6 @@ system:
           - type: itemUses
             value: '5'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -496,6 +526,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     GbPA5LNCN13UmsGZ:
       type: cast
       spell:
@@ -509,6 +545,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: GbPA5LNCN13UmsGZ
       sort: 1000000
       activation:
@@ -523,7 +560,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -546,6 +583,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     NaBuO150m8H0tTyj:
       type: cast
       spell:
@@ -559,6 +602,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: NaBuO150m8H0tTyj
       sort: 1100000
       activation:
@@ -572,7 +616,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -595,6 +639,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     cukAoZkQvzMEF4gI:
       type: cast
       spell:
@@ -608,6 +658,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: cukAoZkQvzMEF4gI
       sort: 1200000
       activation:
@@ -622,7 +673,6 @@ system:
           - type: itemUses
             value: '5'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -645,6 +695,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     ahU6uTAGGEVFyPfz:
       type: damage
       name: Power Strike
@@ -663,7 +719,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -701,10 +756,15 @@ system:
             bonus: ''
             types:
               - force
-            scaling:
-              number: 1
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
     V1rkYRygV4mgJgMa:
       type: save
       _id: V1rkYRygV4mgJgMa
@@ -758,8 +818,6 @@ system:
             bonus: ''
             types:
               - force
-            scaling:
-              number: 1
         onSave: half
       save:
         ability: dex
@@ -769,6 +827,12 @@ system:
       name: Retributive Strike
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   attuned: false
   ammunition: {}
   identifier: staff-of-power
@@ -829,18 +893,14 @@ folder: MLMTCAvKsuFE3vYA
 sort: 0
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037240031
-  modifiedTime: 1750697344647
+  modifiedTime: 1764620435421
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!eM5gEe4SEOvA2Y9t'

@@ -12,7 +12,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: ''
     license: CC-BY-4.0
     rules: '2014'
@@ -30,18 +30,15 @@ system:
       _id: dnd5eactivity000
       type: utility
       activation:
-        type: special
+        type: encounter
         value: null
         condition: When you roll initiative and have no uses of Bardic Inspiration
         override: false
       consumption:
         targets:
           - type: itemUses
-            target: Compendium.dnd5e.classfeatures.Item.hpLNiGq7y67d2EHA
             value: '-1'
-            scaling:
-              mode: ''
-              formula: ''
+            target: feat:bardic-inspiration
         scaling:
           allowed: false
           max: ''
@@ -83,7 +80,11 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      appliedEffects: []
   enchant: {}
   prerequisites:
     level: null
@@ -95,11 +96,11 @@ folder: XEu43QVhYfhUcewt
 sort: 0
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.2.0
   createdTime: 1725037382182
-  modifiedTime: 1725992287807
+  modifiedTime: 1759426989604
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!GBYN5rH4nh1ocRlY'

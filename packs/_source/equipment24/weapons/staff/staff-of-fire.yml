@@ -59,6 +59,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: XhhA9HxQ68wpgY1V
       sort: 0
       activation:
@@ -72,7 +73,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -95,6 +96,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     Vb0miyFHetlOTk1l:
       type: cast
       spell:
@@ -109,6 +116,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: Vb0miyFHetlOTk1l
       sort: 0
       activation:
@@ -123,7 +131,6 @@ system:
           - type: itemUses
             value: '3'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -146,6 +153,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     Sf6jPpI4gdwD3YGl:
       type: cast
       spell:
@@ -160,6 +173,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: Sf6jPpI4gdwD3YGl
       sort: 0
       activation:
@@ -174,7 +188,6 @@ system:
           - type: itemUses
             value: '4'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -197,6 +210,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery:
@@ -225,7 +244,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   identified: true
   unidentified:
@@ -325,18 +344,14 @@ effects:
       exportSource: null
     _key: '!items.effects!dmgStaffOfFire00.Bc3ZPQcKlFVadTvE'
 folder: 5p9KrkF39e6vFO4g
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712703594
+  modifiedTime: 1764615331413
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 100049

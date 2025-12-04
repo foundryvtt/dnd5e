@@ -55,6 +55,13 @@ system:
         ability: int
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
   uses:
     spent: 0
     recovery: []
@@ -76,7 +83,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   identified: true
   unidentified:
@@ -112,18 +119,14 @@ system:
   strength: null
   proficient: null
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712697736
+  modifiedTime: 1764616586665
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1800000

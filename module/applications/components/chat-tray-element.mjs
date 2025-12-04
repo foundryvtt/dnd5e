@@ -1,7 +1,7 @@
 /**
  * Custom element designed to display as a collapsible tray in chat.
  */
-export default class ChatTrayElement extends HTMLElement {
+export default class ChatTrayElement extends (foundry.applications.elements.AdoptableHTMLElement ?? HTMLElement) {
 
   static observedAttributes = ["open"];
 
@@ -28,7 +28,7 @@ export default class ChatTrayElement extends HTMLElement {
    * @returns {boolean}
    */
   get visible() {
-    return this.hasAttribute("visible");
+    return this.hasAttribute("visible") || this.matches("#chat-notifications :scope");
   }
 
   set visible(visible) {

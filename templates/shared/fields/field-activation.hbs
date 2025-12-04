@@ -6,15 +6,15 @@
         {{!-- Amount --}}
         {{#if activation.scalar}}
         {{ formField fields.value value=data.value label="DND5E.Amount" placeholder="—" localize=true hint=false
-                     classes="label-top" }}
+                     classes="label-top" rootId=partId }}
         {{/if}}
 
         {{!-- Type --}}
         {{ formField fields.type value=data.type label="DND5E.Cost" localize=true classes="label-top" hint=false
-                     options=activationTypes }}
+                     options=activationTypes rootId=partId }}
     </div>
 
     {{!-- Condition --}}
     {{ formInput fields.condition value=data.condition input=inputs.createTextInput classes="full-width"
-                 placeholder=(localize "DND5E.ItemActivationCondition") }}
+                 placeholder=(localize "DND5E.ItemActivationCondition") rootId=partId }}
 </div>

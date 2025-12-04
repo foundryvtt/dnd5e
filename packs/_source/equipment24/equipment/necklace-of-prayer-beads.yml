@@ -19,6 +19,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: SEwmmaZFABa5L61F
       sort: 0
       activation:
@@ -32,7 +33,6 @@ system:
         targets:
           - type: activityUses
             value: '1'
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -57,6 +57,12 @@ system:
         max: '1'
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     i1xNzPeIb7VkHrh6:
       type: cast
       spell:
@@ -71,6 +77,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: i1xNzPeIb7VkHrh6
       sort: 0
       activation:
@@ -84,7 +91,6 @@ system:
         targets:
           - type: activityUses
             value: '1'
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -109,6 +115,12 @@ system:
         max: '1'
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     yiGuTjneUv0F9NnC:
       type: cast
       spell:
@@ -123,6 +135,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: yiGuTjneUv0F9NnC
       sort: 0
       activation:
@@ -136,7 +149,6 @@ system:
         targets:
           - type: activityUses
             value: '1'
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -161,6 +173,12 @@ system:
         max: '1'
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     xjMwMrJpNfh3HZyP:
       type: cast
       spell:
@@ -175,6 +193,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: xjMwMrJpNfh3HZyP
       sort: 0
       activation:
@@ -188,7 +207,6 @@ system:
         targets:
           - type: activityUses
             value: '1'
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -213,6 +231,12 @@ system:
         max: '1'
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     FGwlSZAUgTaknnt1:
       type: cast
       spell:
@@ -227,6 +251,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: FGwlSZAUgTaknnt1
       sort: 0
       activation:
@@ -240,7 +265,6 @@ system:
         targets:
           - type: activityUses
             value: '1'
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -265,6 +289,12 @@ system:
         max: '1'
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     VBwVZg8g1vPZ1xep:
       type: cast
       spell:
@@ -279,6 +309,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: VBwVZg8g1vPZ1xep
       sort: 0
       activation:
@@ -292,7 +323,6 @@ system:
         targets:
           - type: activityUses
             value: '1'
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -317,6 +347,12 @@ system:
         max: '1'
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery: []
@@ -347,7 +383,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   identified: true
   unidentified:
@@ -383,18 +419,14 @@ system:
   strength: null
   proficient: null
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712701573
+  modifiedTime: 1764617231138
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 22800000

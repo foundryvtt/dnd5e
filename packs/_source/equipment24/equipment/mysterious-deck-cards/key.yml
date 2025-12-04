@@ -26,7 +26,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -61,6 +60,13 @@ system:
         formula: ''
       img: icons/svg/card-joker.svg
       _id: NihzLeu0A9RkNWD7
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+      appliedEffects: []
   uses:
     spent: 0
     recovery: []
@@ -71,7 +77,7 @@ system:
     revision: 1
     rules: '2024'
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
   identified: true
   unidentified:
     description: ''
@@ -108,18 +114,14 @@ effects: []
 sort: 300000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1729201481266
-  modifiedTime: 1740680118952
+  modifiedTime: 1764615913217
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!dmgDmtKey0000000'

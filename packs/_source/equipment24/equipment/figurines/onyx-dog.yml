@@ -34,7 +34,6 @@ system:
           - type: itemUses
             value: '7'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -44,6 +43,9 @@ system:
         value: '6'
       effects:
         - _id: fMC3o8l8D2GamPbU
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: ft
@@ -78,6 +80,7 @@ system:
         attacks: false
         proficiency: false
         saves: false
+        ability: ''
       profiles:
         - count: ''
           name: ''
@@ -86,7 +89,6 @@ system:
           level:
             min: null
             max: null
-          types: []
       summon:
         prompt: true
         mode: ''
@@ -95,6 +97,12 @@ system:
       img: ''
       appliedEffects:
         - fMC3o8l8D2GamPbU
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery:
@@ -106,7 +114,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   identified: true
   unidentified:
@@ -193,18 +201,14 @@ folder: EK3hCTgvAmjsKlfl
 sort: 300000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1729781752415
-  modifiedTime: 1745712700249
+  modifiedTime: 1764615756233
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!dmgFwpOnyxDogRar'

@@ -30,7 +30,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: You draw no more cards
       duration:
@@ -39,6 +38,9 @@ system:
         override: false
       effects:
         - _id: ZCkhbQFg4H5ePlNm
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: self
@@ -52,6 +54,7 @@ system:
           choice: false
           count: ''
           type: self
+          special: ''
         override: false
         prompt: true
       uses:
@@ -66,7 +69,14 @@ system:
       name: Card Effect
       img: icons/svg/card-joker.svg
       _id: gKWsEeny8LfTH4yC
-      appliedEffects: []
+      appliedEffects:
+        - ZCkhbQFg4H5ePlNm
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery: []
@@ -77,7 +87,7 @@ system:
     revision: 1
     rules: '2024'
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
   identified: true
   unidentified:
     description: ''
@@ -153,18 +163,14 @@ effects:
 sort: 1300000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1729207284596
-  modifiedTime: 1745256804740
+  modifiedTime: 1764615964603
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!dmgDmtVoid000000'

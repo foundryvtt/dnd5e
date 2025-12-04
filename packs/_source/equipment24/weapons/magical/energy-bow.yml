@@ -95,6 +95,14 @@ system:
         formula: ''
       img: systems/dnd5e/icons/svg/trait-damage-immunities.svg
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
+        requireAttunement: true
     tb2iE3Kl3QUgMeO4:
       type: utility
       _id: tb2iE3Kl3QUgMeO4
@@ -150,6 +158,14 @@ system:
       name: Energy Ladder
       img: systems/dnd5e/icons/svg/size.svg
       appliedEffects: []
+      visibility:
+        requireAttunement: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireMagic: true
+        requireIdentification: true
     chvrwNIzOx8rq5fE:
       type: enchant
       name: Energy Bow
@@ -237,8 +253,14 @@ system:
       effects:
         - _id: Yw1oocFffwM4cePn
           onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
+        value: ''
+        units: ft
+        special: ''
       target:
         template:
           contiguous: false
@@ -266,6 +288,14 @@ system:
       img: ''
       appliedEffects:
         - Yw1oocFffwM4cePn
+      visibility:
+        requireAttunement: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireMagic: true
+        requireIdentification: true
   uses:
     spent: 0
     recovery: []
@@ -312,7 +342,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   identified: true
   unidentified:
@@ -509,11 +539,11 @@ flags:
         - Yw1oocFffwM4cePn
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745611751175
+  modifiedTime: 1764615036140
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 7600000

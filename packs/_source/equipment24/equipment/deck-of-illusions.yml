@@ -122,6 +122,7 @@ system:
         attacks: false
         proficiency: false
         saves: false
+        ability: ''
       profiles:
         - count: ''
           name: ''
@@ -130,13 +131,18 @@ system:
           level:
             min: null
             max: null
-          types: []
       summon:
         prompt: true
         mode: ''
         identifier: ''
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery: []
@@ -180,7 +186,7 @@ system:
     revision: 1
     rules: '2024'
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
   identified: true
   unidentified:
     description: ''
@@ -215,18 +221,14 @@ system:
   strength: null
   proficient: null
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745256803902
+  modifiedTime: 1764616815962
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 10400000

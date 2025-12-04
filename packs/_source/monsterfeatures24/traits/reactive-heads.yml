@@ -1,0 +1,45 @@
+_id: mmReactiveHeads0
+name: Reactive Heads
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">For each head the [[lookup @name lowercase]] has beyond
+      one, it gets an extra &amp;Reference[Reaction] that can be used only for
+      &amp;Reference[OpportunityAttacks].</p>
+    chat: ''
+  identifier: reactive-heads
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/creatures/abilities/wolf-heads-swirl-purple.webp
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736274856150
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 9800000
+ownership:
+  default: 0
+_key: '!items!mmReactiveHeads0'

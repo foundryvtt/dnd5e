@@ -7,7 +7,7 @@
         <i class="fa-solid fa-minus" inert></i>
     </a>
     <input type="text" class="always-interactive" value="{{ entry.system.quantity }}" placeholder="0"
-           data-dtype="Number" data-name="system.quantity" inputmode="numeric" pattern="[+=\-]?\d*" min="0"
+           data-dtype="Number" data-name="system.quantity" inputmode="numeric" pattern="^[+=\-]?\d*" min="0"
            aria-label="{{ localize "DND5E.Quantity" }}">
     <a class="adjustment-button always-interactive" data-action="increase" data-property="system.quantity">
         <i class="fa-solid fa-plus" inert></i>

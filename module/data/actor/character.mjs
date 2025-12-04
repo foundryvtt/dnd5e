@@ -16,62 +16,13 @@ const {
 } = foundry.data.fields;
 
 /**
- * @import { SimpleTraitData } from "./fields/simple-trait.mjs";
- */
-
-/**
- * @typedef {object} ActorFavorites5e
- * @property {"activity"|"effect"|"item"|"skill"|"slots"|"tool"} type  The favorite type.
- * @property {string} id                                    The Document UUID, skill or tool identifier, or spell slot
- *                                                          level identifier.
- * @property {number} [sort]                                The sort value.
+ * @import { ActorFavorites5e, CharacterActorSystemData, ResourceData } from "./_types.mjs";
  */
 
 /**
  * System data definition for Characters.
- *
- * @property {object} attributes
- * @property {object} attributes.hp
- * @property {number} attributes.hp.value                 Current hit points.
- * @property {number} attributes.hp.max                   Override for maximum HP.
- * @property {number} attributes.hp.temp                  Temporary HP applied on top of value.
- * @property {number} attributes.hp.tempmax               Temporary change to the maximum HP.
- * @property {object} attributes.hp.bonuses
- * @property {string} attributes.hp.bonuses.level         Bonus formula applied for each class level.
- * @property {string} attributes.hp.bonuses.overall       Bonus formula applied to total HP.
- * @property {object} attributes.death
- * @property {object} attributes.death.bonuses
- * @property {string} attributes.death.bonuses.save       Numeric or dice bonus to death saving throws.
- * @property {number} attributes.death.success            Number of successful death saves.
- * @property {number} attributes.death.failure            Number of failed death saves.
- * @property {number} attributes.exhaustion               Number of levels of exhaustion.
- * @property {number} attributes.inspiration              Does this character have inspiration?
- * @property {object} bastion
- * @property {string} bastion.name                        The name of the character's bastion.
- * @property {string} bastion.description                 Additional description and details for the character's
- *                                                        bastion.
- * @property {object} details
- * @property {Item5e|string} details.background           Character's background item or name.
- * @property {string} details.originalClass               ID of first class taken by character.
- * @property {object} details.xp                          Experience points gained.
- * @property {number} details.xp.value                    Total experience points earned.
- * @property {string} details.appearance                  Description of character's appearance.
- * @property {string} details.trait                       Character's personality traits.
- * @property {string} details.ideal                       Character's ideals.
- * @property {string} details.bond                        Character's bonds.
- * @property {string} details.flaw                        Character's flaws.
- * @property {object} traits
- * @property {SimpleTraitData} traits.weaponProf             Character's weapon proficiencies.
- * @property {object} traits.weaponProf.mastery
- * @property {Set<string>} traits.weaponProf.mastery.value   Weapon masteries.
- * @property {Set<string>} traits.weaponProf.mastery.bonus   Extra mastery properties that can be chosen when making an
- *                                                           attack with a weapon that has mastery.
- * @property {SimpleTraitData} traits.armorProf              Character's armor proficiencies.
- * @property {object} resources
- * @property {ResourceData} resources.primary             Resource number one.
- * @property {ResourceData} resources.secondary           Resource number two.
- * @property {ResourceData} resources.tertiary            Resource number three.
- * @property {ActorFavorites5e[]} favorites               The character's favorites.
+ * @extends {CreatureTemplate<CharacterActorSystemData>}
+ * @mixes CharacterActorSystemData
  */
 export default class CharacterData extends CreatureTemplate {
 
@@ -87,7 +38,7 @@ export default class CharacterData extends CreatureTemplate {
   /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     supportsAdvancement: true
-  }, {inplace: false}));
+  }, { inplace: false }));
 
   /* -------------------------------------------- */
 
@@ -103,16 +54,10 @@ export default class CharacterData extends CreatureTemplate {
         ...AttributesFields.common,
         ...AttributesFields.creature,
         hp: new SchemaField({
-          value: new NumberField({
-            nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.HitPointsCurrent"
-          }),
+          ...AttributesFields.hitPoints,
           max: new NumberField({
             nullable: true, integer: true, min: 0, initial: null, label: "DND5E.HitPointsOverride",
             hint: "DND5E.HitPointsOverrideHint"
-          }),
-          temp: new NumberField({ integer: true, initial: 0, min: 0, label: "DND5E.HitPointsTemp" }),
-          tempmax: new NumberField({
-            integer: true, initial: 0, label: "DND5E.HitPointsTempMax", hint: "DND5E.HitPointsTempMaxHint"
           }),
           bonuses: new SchemaField({
             level: new FormulaField({ deterministic: true, label: "DND5E.HitPointsBonusLevel" }),
@@ -268,8 +213,7 @@ export default class CharacterData extends CreatureTemplate {
     AttributesFields.prepareConcentration.call(this, rollData);
     AttributesFields.prepareEncumbrance.call(this, rollData);
     AttributesFields.prepareInitiative.call(this, rollData);
-    AttributesFields.prepareMovement.call(this);
-    AttributesFields.prepareConcentration.call(this, rollData);
+    AttributesFields.prepareMovement.call(this, rollData);
     AttributesFields.prepareSpellcastingAbility.call(this);
     TraitsFields.prepareLanguages.call(this);
     TraitsFields.prepareResistImmune.call(this);
@@ -351,17 +295,6 @@ export default class CharacterData extends CreatureTemplate {
 }
 
 /* -------------------------------------------- */
-
-/**
- * Data structure for character's resources.
- *
- * @typedef {object} ResourceData
- * @property {number} value  Available uses of this resource.
- * @property {number} max    Maximum allowed uses of this resource.
- * @property {boolean} sr    Does this resource recover on a short rest?
- * @property {boolean} lr    Does this resource recover on a long rest?
- * @property {string} label  Displayed name.
- */
 
 /**
  * Produce the schema field for a simple trait.

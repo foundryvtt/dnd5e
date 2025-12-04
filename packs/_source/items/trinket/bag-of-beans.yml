@@ -22,7 +22,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: ''
     license: CC-BY-4.0
     rules: '2014'
@@ -80,7 +80,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
         scaling:
           allowed: false
           max: ''
@@ -125,8 +124,6 @@ system:
             bonus: ''
             types:
               - fire
-            scaling:
-              number: 1
       save:
         ability: dex
         dc:
@@ -140,6 +137,12 @@ system:
       name: ''
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   attuned: false
   identifier: bag-of-beans
 effects: []
@@ -147,18 +150,14 @@ folder: UnUwTG4YIgd0kaUJ
 sort: 3100000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037141214
-  modifiedTime: 1750697344647
+  modifiedTime: 1764619446760
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!F8QpasPjLrw2POzE'

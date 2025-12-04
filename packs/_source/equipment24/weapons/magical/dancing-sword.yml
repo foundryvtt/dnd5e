@@ -69,7 +69,6 @@ system:
           level:
             min: null
             max: null
-          types: []
       summon:
         prompt: true
         mode: ''
@@ -77,6 +76,13 @@ system:
       name: 'Activate Sword: Stength'
       img: systems/dnd5e/icons/svg/abilities/strength.svg
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
     HjoCaTF4RcIkhGqc:
       type: enchant
       name: Dancing Sword
@@ -200,7 +206,6 @@ system:
           level:
             min: null
             max: null
-          types: []
       summon:
         prompt: true
         mode: ''
@@ -209,6 +214,13 @@ system:
       _id: qQ7MztRj7Iuv2EyK
       img: systems/dnd5e/icons/svg/abilities/dexterity.svg
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
   uses:
     spent: 0
     recovery: []
@@ -242,7 +254,7 @@ system:
     revision: 1
     rules: '2024'
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
   identified: true
   unidentified:
     description: ''
@@ -362,14 +374,13 @@ flags:
       activity:
         - FztT9hvr1r8FV8kK
         - qQ7MztRj7Iuv2EyK
-      effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745433492099
+  modifiedTime: 1764615015204
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 6900000

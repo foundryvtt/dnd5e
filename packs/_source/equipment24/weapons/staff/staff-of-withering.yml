@@ -63,7 +63,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -73,6 +72,9 @@ system:
       effects:
         - _id: x0R9R2vD4quIgYy2
           onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
       target:
@@ -101,8 +103,6 @@ system:
             bonus: ''
             types:
               - necrotic
-            scaling:
-              number: 1
         onSave: full
       save:
         ability: con
@@ -112,6 +112,13 @@ system:
       img: ''
       appliedEffects:
         - x0R9R2vD4quIgYy2
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireMagic: true
   uses:
     spent: 0
     recovery:
@@ -138,7 +145,7 @@ system:
     revision: 1
     rules: '2024'
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
   identified: true
   unidentified:
     description: ''
@@ -235,18 +242,14 @@ effects:
       exportSource: null
     _key: '!items.effects!dmgStaffOfWither.x0R9R2vD4quIgYy2'
 folder: 5p9KrkF39e6vFO4g
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745431704598
+  modifiedTime: 1764615555822
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 100000

@@ -35,6 +35,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     classes: ["item"],
     editingDescriptionTarget: null,
     elements: {
+      activities: "dnd5e-activities",
       effects: "dnd5e-effects"
     },
     form: {
@@ -61,6 +62,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     },
     activities: {
       template: "systems/dnd5e/templates/items/activities.hbs",
+      templates: ["systems/dnd5e/templates/shared/activities.hbs"],
       scrollable: [""]
     },
     advancement: {
@@ -243,17 +245,36 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
    * @protected
    */
   async _prepareActivitiesContext(context, options) {
-    context.activities = (this.item.system.activities ?? [])
-      .filter(a => CONFIG.DND5E.activityTypes[a.type]?.configurable !== false)
-      .map(activity => {
-        const { _id: id, name, img, sort } = activity.prepareSheetContext();
-        return {
-          id, name, sort,
-          img: { src: img, svg: img?.endsWith(".svg") },
-          uuid: activity.uuid
-        };
-      });
-
+    const activityMap = {};
+    const origins = {};
+    const riders = [];
+    context.activities = (this.item.system.activities ?? []).reduce((arr, activity) => {
+      if ( activity.type === "enchant" ) {
+        for ( const effect of activity.effects ?? [] ) {
+          for ( const id of effect.riders.activity ) {
+            origins[id] ??= [];
+            origins[id].push(activity._id);
+          }
+        }
+      }
+      if ( !activity.canConfigure ) return arr;
+      const { _id: id, name, img, labels, sort } = activity.prepareSheetContext();
+      const descriptor = activityMap[id] = {
+        id, name, sort,
+        img: { src: img, svg: img?.endsWith(".svg") },
+        riders: new Set(),
+        subtitle: labels?.activation ?? "",
+        uuid: activity.uuid
+      };
+      if ( activity.isRider ) riders.push(descriptor);
+      else arr.push(descriptor);
+      return arr;
+    }, []);
+    riders.forEach(r => {
+      for ( const origin of origins[r.id] ?? [] ) {
+        if ( origin in activityMap ) activityMap[origin].riders.add(r);
+      }
+    });
     return context;
   }
 
@@ -315,8 +336,9 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     context.tab = context.tabs.details;
     context.parts ??= [];
 
-    context.baseItemOptions = await this._getBaseItemOptions();
+    context.baseItemOptions = await this._getBaseItemOptions(context);
     context.coverOptions = Object.entries(CONFIG.DND5E.cover).map(([value, label]) => ({ value, label }));
+    context.unitsOptions = Object.entries(CONFIG.DND5E.movementUnits).map(([value, { label }]) => ({ value, label }));
 
     // If using modern rules, do not show redundant artificer progression unless it is already selected.
     context.spellProgression = { ...CONFIG.DND5E.spellProgression };
@@ -361,8 +383,10 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
    * @protected
    */
   async _prepareEffectsContext(context, options) {
+    const effectMap = {};
+    const riders = [];
+    const riderIds = new Set(this.item.getFlag("dnd5e", "riders.effect") ?? []);
     context.tab = context.tabs.effects;
-
     context.effects = EffectsElement.prepareCategories(this.item.effects, { parent: this.item });
     for ( const category of Object.values(context.effects) ) {
       category.effects = await category.effects.reduce(async (arr, effect) => {
@@ -370,16 +394,32 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
         const { id, name, img, disabled, duration } = effect;
         const source = await effect.getSource();
         arr = await arr;
-        arr.push({
-          id, name, img, disabled, duration, source,
-          parent,
+        const ctx = effectMap[id] = {
+          id, name, img, disabled, duration, source, parent,
           durationParts: duration.remaining ? duration.label.split(", ") : [],
-          hasTooltip: true
-        });
+          hasTooltip: true,
+          riders: []
+        };
+        if ( riderIds.has(id) ) riders.push(ctx);
+        else arr.push(ctx);
         return arr;
       }, []);
     }
-
+    const origins = (this.item.system.activities?.getByType("enchant") ?? [])
+      .flatMap(a => a.effects)
+      .reduce((obj, effects) => {
+        const { _id, riders } = effects;
+        for ( const id of riders.effect ) {
+          obj[id] ??= [];
+          obj[id].push(_id);
+        }
+        return obj;
+      }, {});
+    riders.forEach(r => {
+      for ( const origin of origins[r.id] ?? [] ) {
+        if ( origin in effectMap ) effectMap[origin].riders.push(r);
+      }
+    });
     return context;
   }
 
@@ -498,28 +538,31 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
 
   /**
    * Get the base weapons and tools based on the selected type.
+   * @param {ApplicationRenderContext} context  Context being prepared.
    * @returns {Promise<FormSelectOptions[]|null>}
    * @protected
    */
-  async _getBaseItemOptions() {
+  async _getBaseItemOptions(context) {
     const baseIds = this.item.type === "equipment" ? {
       ...CONFIG.DND5E.armorIds,
       ...CONFIG.DND5E.shieldIds
     } : CONFIG.DND5E[`${this.item.type}Ids`];
     if ( baseIds === undefined ) return null;
 
-    const baseType = this.item.system._source.type.value ?? this.item.system.type.value;
     const options = [];
     for ( const [value, id] of Object.entries(baseIds) ) {
       const baseItem = await Trait.getBaseItem(id);
-      if ( baseType !== baseItem?.system?.type?.value ) continue;
+      if ( context?.source.type.value !== baseItem?.system?.type?.value ) continue;
       options.push({ value, label: baseItem.name });
     }
 
-    return options.length ? [
-      { value: "", label: "" },
-      ...options.sort((lhs, rhs) => lhs.label.localeCompare(rhs.label, game.i18n.lang))
-    ] : null;
+    if ( !options.length ) return null;
+
+    options.sort((lhs, rhs) => lhs.label.localeCompare(rhs.label, game.i18n.lang));
+    const baseId = this.item.system._source.type.baseItem ?? this.item.system.type.baseItem;
+    if ( baseId && !(baseId in baseIds) ) options.unshift({ value: baseId, label: baseId });
+    options.unshift({ value: "", label: "" });
+    return options;
   }
 
   /* -------------------------------------------- */
@@ -562,9 +605,6 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     super._attachFrameListeners();
     new ContextMenu5e(this.element, ".advancement-item[data-id]", [], {
       onOpen: target => dnd5e.documents.advancement.Advancement.onContextMenu(this.item, target), jQuery: false
-    });
-    new ContextMenu5e(this.element, ".activity[data-activity-id]", [], {
-      onOpen: target => dnd5e.documents.activity.UtilityActivity.onContextMenu(this.item, target), jQuery: false
     });
   }
 
@@ -621,12 +661,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
   /** @override */
   _addDocument() {
     if ( this.tabGroups.primary === "activities" ) {
-      return dnd5e.documents.activity.UtilityActivity.createDialog({}, {
-        parent: this.item,
-        types: Object.entries(CONFIG.DND5E.activityTypes).filter(([, { configurable }]) => {
-          return configurable !== false;
-        }).map(([k]) => k)
-      });
+      return dnd5e.documents.activity.UtilityActivity.createDialog({}, { parent: this.item });
     }
 
     if ( this.tabGroups.primary === "advancement" ) {
@@ -926,6 +961,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
   _onDropActivity(event, { data }) {
     const { _id: id, type } = data;
     const source = this.item.system.activities.get(id);
+    const config = CONFIG.DND5E.activityTypes[type] ?? {};
 
     // Reordering
     if ( source ) {
@@ -941,7 +977,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     }
 
     // Copying
-    else {
+    else if ( (config?.configurable !== false) && config.documentClass.availableForItem(this.item) ) {
       delete data._id;
       this.item.createActivity(type, data, { renderSheet: false });
     }

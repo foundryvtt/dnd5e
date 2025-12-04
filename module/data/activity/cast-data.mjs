@@ -3,20 +3,15 @@ import BaseActivityData from "./base-activity.mjs";
 const { BooleanField, DocumentUUIDField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
- * Data model for a Cast activity.
- *
- * @property {object} spell
- * @property {string} spell.ability              Ability to override default spellcasting ability.
- * @property {object} spell.challenge
- * @property {number} spell.challenge.attack     Flat to hit bonus in place of the spell's normal attack bonus.
- * @property {number} spell.challenge.save       Flat DC to use in place of the spell's normal save DC.
- * @property {boolean} spell.challenge.override  Use custom attack bonus & DC rather than creature's.
- * @property {number} spell.level                Base level at which to cast the spell.
- * @property {Set<string>} spell.properties      Spell components & tags to ignore while casting.
- * @property {boolean} spell.spellbook           Display spell in the Spells tab of the character sheet.
- * @property {string} spell.uuid                 UUID of the spell to cast.
+ * @import { CastActivityData } from "./_types.mjs";
  */
-export default class CastActivityData extends BaseActivityData {
+
+/**
+ * Data model for a Cast activity.
+ * @extends {BaseActivityData<CastActivityData>}
+ * @mixes CastActivityData
+ */
+export default class BaseCastActivityData extends BaseActivityData {
   /** @inheritDoc */
   static defineSchema() {
     const schema = super.defineSchema();
@@ -47,9 +42,10 @@ export default class CastActivityData extends BaseActivityData {
     const spell = fromUuidSync(this.spell.uuid) ?? this.cachedSpell;
     if ( spell ) {
       this.name = this._source.name || spell.name || this.name;
-      this.img = this._source.img || spell.img || this.name;
+      this.img = this._source.img || spell.img || this.img;
     }
 
+    this.visibility.requireMagic = true;
     super.prepareFinalData(rollData);
 
     for ( const field of ["activation", "duration", "range", "target"] ) {
@@ -59,5 +55,20 @@ export default class CastActivityData extends BaseActivityData {
         enumerable: false
       });
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareSheetContext() {
+    const context = super.prepareSheetContext();
+    const cachedSpell = this.cachedSpell;
+    if ( cachedSpell ) {
+      const spellLabels = { ...(cachedSpell.labels ?? {}) };
+      delete spellLabels.recovery;
+      context.labels = foundry.utils.mergeObject(context.labels, spellLabels, { inplace: false });
+      context.save = { ...cachedSpell.system.activities?.getByType("save")[0]?.save };
+    }
+    return context;
   }
 }

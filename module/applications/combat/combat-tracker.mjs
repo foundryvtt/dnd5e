@@ -1,8 +1,7 @@
 import { formatNumber, getPluralRules } from "../../utils.mjs";
 
 /**
- * @typedef {object} CombatGroupData
- * @property {boolean} expanded
+ * @import { CombatGroupData } from "./_types.mjs";
  */
 
 /**

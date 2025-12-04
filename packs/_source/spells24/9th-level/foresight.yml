@@ -11,7 +11,8 @@ system:
     custom: ''
     rules: '2024'
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
+    revision: 2
   activation:
     type: minute
     condition: ''
@@ -100,7 +101,55 @@ effects:
     _id: P3m4C2ZVEsMzgb5q
     type: base
     system: {}
-    changes: []
+    changes:
+      - key: system.abilities.str.save.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
+      - key: system.abilities.dex.save.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
+      - key: system.abilities.con.save.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
+      - key: system.abilities.int.save.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
+      - key: system.abilities.wis.save.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
+      - key: system.abilities.cha.save.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
+      - key: system.abilities.str.check.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
+      - key: system.abilities.dex.check.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
+      - key: system.abilities.con.check.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
+      - key: system.abilities.int.check.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
+      - key: system.abilities.wis.check.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
+      - key: system.abilities.cha.check.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
     disabled: false
     duration:
       startTime: null
@@ -116,15 +165,18 @@ effects:
     tint: '#ffffff'
     statuses: []
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.9
       createdTime: 1725374503679
-      modifiedTime: 1725374781233
+      modifiedTime: 1760129164175
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!phbsplForesight0.P3m4C2ZVEsMzgb5q'
@@ -132,18 +184,14 @@ folder: iG0Zia8jh6uK39TB
 sort: 200000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.9
   createdTime: 1724425955033
-  modifiedTime: 1745256793477
+  modifiedTime: 1760129168483
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplForesight0'

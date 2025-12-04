@@ -19,7 +19,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: ''
     license: CC-BY-4.0
     rules: '2014'
@@ -175,7 +175,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
         scaling:
           allowed: false
           max: ''
@@ -226,6 +225,14 @@ system:
       sort: 0
       name: Save vs Death
       _id: sFSTSSOvTZIlTaxs
+      img: ''
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+      appliedEffects: []
   attuned: false
   ammunition: {}
   identifier: nine-lives-stealer-scimitar
@@ -235,18 +242,14 @@ folder: MLMTCAvKsuFE3vYA
 sort: 0
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037117635
-  modifiedTime: 1750697344647
+  modifiedTime: 1764619138889
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!9Mdes2tKt0cqsNTw'

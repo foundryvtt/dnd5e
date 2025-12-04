@@ -1,3 +1,4 @@
+import ActivitiesElement from "./activities.mjs";
 import AdoptedStyleSheetMixin from "./adopted-stylesheet-mixin.mjs";
 import CheckboxElement from "./checkbox.mjs";
 import CopyableTextElement from "./copyable-text.mjs";
@@ -13,22 +14,23 @@ import ItemListControlsElement from "./item-list-controls.mjs";
 import ProficiencyCycleElement from "./proficiency-cycle.mjs";
 import SlideToggleElement from "./slide-toggle.mjs";
 
-window.customElements.define("copyable-text", CopyableTextElement);
-window.customElements.define("damage-application", DamageApplicationElement);
-window.customElements.define("dnd5e-checkbox", CheckboxElement);
-window.customElements.define("dnd5e-effects", EffectsElement);
-window.customElements.define("dnd5e-icon", IconElement);
-window.customElements.define("dnd5e-inventory", InventoryElement);
-window.customElements.define("effect-application", EffectApplicationElement);
-window.customElements.define("enchantment-application", EnchantmentApplicationElement);
-window.customElements.define("filigree-box", FiligreeBoxElement);
-window.customElements.define("filter-state", FilterStateElement);
-window.customElements.define("item-list-controls", ItemListControlsElement);
-window.customElements.define("proficiency-cycle", ProficiencyCycleElement);
-window.customElements.define("slide-toggle", SlideToggleElement);
+window.customElements.define(CopyableTextElement.tagName, CopyableTextElement);
+window.customElements.define(DamageApplicationElement.tagName, DamageApplicationElement);
+window.customElements.define(ActivitiesElement.tagName, ActivitiesElement);
+window.customElements.define(CheckboxElement.tagName, CheckboxElement);
+window.customElements.define(EffectsElement.tagName, EffectsElement);
+window.customElements.define(IconElement.tagName, IconElement);
+window.customElements.define(InventoryElement.tagName, InventoryElement);
+window.customElements.define(EffectApplicationElement.tagName, EffectApplicationElement);
+window.customElements.define(EnchantmentApplicationElement.tagName, EnchantmentApplicationElement);
+window.customElements.define(FiligreeBoxElement.tagName, FiligreeBoxElement);
+window.customElements.define(FilterStateElement.tagName, FilterStateElement);
+window.customElements.define(ItemListControlsElement.tagName, ItemListControlsElement);
+window.customElements.define(ProficiencyCycleElement.tagName, ProficiencyCycleElement);
+window.customElements.define(SlideToggleElement.tagName, SlideToggleElement);
 
 export {
-  AdoptedStyleSheetMixin, CopyableTextElement, CheckboxElement, DamageApplicationElement, EffectApplicationElement,
-  EffectsElement, EnchantmentApplicationElement, FiligreeBoxElement, FilterStateElement, IconElement,
-  InventoryElement, ItemListControlsElement, ProficiencyCycleElement, SlideToggleElement
+  ActivitiesElement, AdoptedStyleSheetMixin, CopyableTextElement, CheckboxElement, DamageApplicationElement,
+  EffectApplicationElement, EffectsElement, EnchantmentApplicationElement, FiligreeBoxElement, FilterStateElement,
+  IconElement, InventoryElement, ItemListControlsElement, ProficiencyCycleElement, SlideToggleElement
 };

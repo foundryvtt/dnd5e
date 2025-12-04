@@ -1,12 +1,18 @@
 import CastSheet from "../../applications/activity/cast-sheet.mjs";
-import CastActivityData from "../../data/activity/cast-data.mjs";
+import BaseCastActivityData from "../../data/activity/cast-data.mjs";
 import { staticID } from "../../utils.mjs";
 import ActivityMixin from "./mixin.mjs";
 
 /**
+ * @import {
+ *   ActivityDialogConfiguration, ActivityMessageConfiguration, ActivityUsageResults, ActivityUseConfiguration
+ * } from "./_types.mjs";
+ */
+
+/**
  * Activity for casting a spell from another item.
  */
-export default class CastActivity extends ActivityMixin(CastActivityData) {
+export default class CastActivity extends ActivityMixin(BaseCastActivityData) {
   /* -------------------------------------------- */
   /*  Model Configuration                         */
   /* -------------------------------------------- */
@@ -29,6 +35,7 @@ export default class CastActivity extends ActivityMixin(CastActivityData) {
       type: "cast",
       img: "systems/dnd5e/icons/svg/activity/cast.svg",
       title: "DND5E.CAST.Title",
+      hint: "DND5E.CAST.Hint",
       sheetClass: CastSheet
     }, { inplace: false })
   );
@@ -174,5 +181,14 @@ export default class CastActivity extends ActivityMixin(CastActivityData) {
     );
 
     return changes;
+  }
+
+  /* -------------------------------------------- */
+  /*  Importing and Exporting                     */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static availableForItem(item) {
+    return item.type !== "spell";
   }
 }

@@ -1,0 +1,50 @@
+_id: mmIncorporealMov
+name: Incorporeal Movement
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>The [[lookup @name lowercase]] can move through other creatures and
+      objects as if they were &amp;Reference[Difficult Terrain]. It takes
+      [[/damage 1d10 average type=force]] damage if it ends its turn inside an
+      object.</p>
+    chat: ''
+  identifier: incorporeal-movement
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/magic/death/undead-ghost-scream-teal.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736705224679
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 7100000
+ownership:
+  default: 0
+_key: '!items!mmIncorporealMov'

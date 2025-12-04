@@ -1,9 +1,10 @@
+import DragDropApplicationMixin from "../api/drag-drop-mixin.mjs";
 import CheckboxElement from "../components/checkbox.mjs";
 import ItemSheet5e from "../item/item-sheet.mjs";
-import DragDropApplicationMixin from "../mixins/drag-drop-mixin.mjs";
 
 /**
- * @import { FilterState5e } from "../components/item-list-controls.mjs";
+ * @import { FilterState5e, ItemListComparator5e } from "../components/_types.mjs";
+ * @import { SheetTabDescriptor5e } from "./_types.mjs";
  */
 
 /**
@@ -23,21 +24,6 @@ export default function PrimarySheetMixin(Base) {
     };
 
     /* -------------------------------------------- */
-
-    /**
-     * @typedef {object} SheetTabDescriptor5e
-     * @property {string} tab                       The tab key.
-     * @property {string} label                     The tab label's localization key.
-     * @property {string} [icon]                    A font-awesome icon.
-     * @property {string} [svg]                     An SVG icon.
-     * @property {SheetTabCondition5e} [condition]  A predicate to check before rendering the tab.
-     */
-
-    /**
-     * @callback SheetTabCondition5e
-     * @param {Document} doc  The Document instance.
-     * @returns {boolean}     Whether to render the tab.
-     */
 
     /**
      * Sheet tabs.
@@ -274,6 +260,7 @@ export default function PrimarySheetMixin(Base) {
     /** @inheritDoc */
     async _onRender(context, options) {
       await super._onRender(context, options);
+      this._renderSource();
 
       // Set toggle state and add status class to frame
       this._renderModeToggle();
@@ -517,7 +504,7 @@ export default function PrimarySheetMixin(Base) {
     static sortItemsPriority(a, b) {
       return a.system.linkedActivity?.item?.name.localeCompare(b.system.linkedActivity?.item?.name, game.i18n.lang)
         || ((a.system.level ?? 0) - (b.system.level ?? 0))
-        || ((a.system.prepared ?? 0) - (b.system.prepared ?? 0))
+        || ((b.system.prepared ?? 0) - (a.system.prepared ?? 0))
         || (a.system.method ?? "").compare(b.system.method ?? "")
         || a.name.localeCompare(b.name, game.i18n.lang);
     }

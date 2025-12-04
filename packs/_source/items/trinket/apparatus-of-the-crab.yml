@@ -54,7 +54,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: ''
     license: CC-BY-4.0
     rules: '2014'
@@ -145,7 +145,17 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+      appliedEffects: []
   attuned: false
   identifier: apparatus-of-the-crab
 effects: []
@@ -156,11 +166,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037273984
-  modifiedTime: 1750697344647
+  modifiedTime: 1764620837246
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!lSd5QHnIJbKvP1bh'

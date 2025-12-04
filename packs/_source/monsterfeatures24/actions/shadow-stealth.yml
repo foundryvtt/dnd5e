@@ -1,0 +1,137 @@
+_id: mmShadowStealth0
+name: Shadow Stealth
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    ydslIM9mBqNRGOnq:
+      type: utility
+      _id: ydslIM9mBqNRGOnq
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: siHMgi75fxHCESex
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Expend Use
+      img: systems/dnd5e/icons/svg/monster.svg
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">While in Dim Light or Darkness, the [[lookup @name
+      lowercase]] takes the &amp;Reference[Hide] action.</p>
+    chat: ''
+  identifier: shadow-stealth
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/control/silhouette-hold-change-green.webp
+effects:
+  - name: Hide
+    img: systems/dnd5e/icons/svg/statuses/hiding.svg
+    origin: Item.mmShadowStealth0
+    _id: siHMgi75fxHCESex
+    type: base
+    system: {}
+    changes: []
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: <p>You takes the &amp;Reference[Hide] action.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses:
+      - hiding
+    sort: 0
+    flags:
+      dae:
+        enableCondition: ''
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736114329498
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmShadowStealth0.siHMgi75fxHCESex'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1735858384979
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 20600000
+ownership:
+  default: 0
+_key: '!items!mmShadowStealth0'

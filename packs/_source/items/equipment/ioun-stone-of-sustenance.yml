@@ -27,7 +27,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: ''
     license: CC-BY-4.0
     rules: '2014'
@@ -70,70 +70,7 @@ system:
   crewed: false
   properties:
     - mgc
-  activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: damage
-      activation:
-        type: action
-        value: 1
-        condition: ''
-        override: false
-      consumption:
-        targets: []
-        scaling:
-          allowed: false
-          max: ''
-        spellSlot: true
-      description:
-        chatFlavor: ''
-      duration:
-        concentration: false
-        value: ''
-        units: ''
-        special: ''
-        override: false
-      effects: []
-      range:
-        units: self
-        special: ''
-        override: false
-      target:
-        template:
-          count: ''
-          contiguous: false
-          type: ''
-          size: ''
-          width: ''
-          height: ''
-          units: ''
-        affects:
-          count: ''
-          type: self
-          choice: false
-          special: ''
-        prompt: true
-        override: false
-      damage:
-        critical:
-          allow: false
-          bonus: ''
-        parts:
-          - number: null
-            denomination: null
-            bonus: ''
-            types: []
-            custom:
-              enabled: true
-              formula: 1d3
-            scaling:
-              mode: whole
-              number: null
-              formula: ''
-      uses:
-        spent: 0
-        recovery: []
-      sort: 0
+  activities: {}
   attuned: false
   identifier: ioun-stone-of-sustenance
 effects: []
@@ -144,11 +81,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037105159
-  modifiedTime: 1750697344647
+  modifiedTime: 1764619011442
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!6MDTnMG4Hcw7qZsy'

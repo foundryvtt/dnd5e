@@ -9,22 +9,26 @@ import PhysicalItemTemplate from "./templates/physical-item.mjs";
 const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
+ * @import { InventorySectionDescriptor } from "../../applications/components/_types.mjs";
+ * @import { CurrencyTemplateData } from "../shared/_types.mjs";
+ * @import { ContainerItemSystemData } from "./_types.mjs";
+ * @import {
+ *   EquippableItemTemplateData, IdentifiableTemplateData, ItemDescriptionTemplateData, PhysicalItemTemplateData
+ * } from "./templates/_types.mjs";
+ */
+
+/**
  * Data definition for Container items.
- * @mixes ItemDescriptionTemplate
- * @mixes IdentifiableTemplate
- * @mixes PhysicalItemTemplate
- * @mixes EquippableItemTemplate
- * @mixes CurrencyTemplate
- *
- * @property {object} capacity              Information on container's carrying capacity.
- * @property {number} capacity.count        Number of items that can be stored within the container.
- * @property {object} capacity.volume
- * @property {string} capacity.volume.units  Units used to measure volume capacity.
- * @property {number} capacity.volume.value  Amount of volume that can be stored.
- * @property {object} capacity.weight
- * @property {string} capacity.weight.units  Units used to measure weight capacity.
- * @property {number} capacity.weight.value  Amount of weight that can be stored.
- * @property {Set<string>} properties       Container properties.
+ * @extends {ItemDataModel<
+ *   ItemDescriptionTemplate & IdentifiableTemplate & PhysicalItemTemplate &
+ *   EquippableItemTemplate & CurrencyTemplate & ContainerItemSystemData
+ * >}
+ * @mixes ItemDescriptionTemplateData
+ * @mixes IdentifiableTemplateData
+ * @mixes PhysicalItemTemplateData
+ * @mixes EquippableItemTemplateData
+ * @mixes CurrencyTemplateData
+ * @mixes ContainerItemSystemData
  */
 export default class ContainerData extends ItemDataModel.mixin(
   ItemDescriptionTemplate, IdentifiableTemplate, PhysicalItemTemplate, EquippableItemTemplate, CurrencyTemplate
@@ -93,99 +97,7 @@ export default class ContainerData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
-  /*  Data Migrations                             */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  static _migrateData(source) {
-    super._migrateData(source);
-    ContainerData.#migrateCapacity(source);
-    ContainerData.#migrateQuantity(source);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Migrate the weightless property into `properties`.
-   * @param {object} source  The candidate source data from which the model will be constructed.
-   */
-  static _migrateWeightlessData(source) {
-    if ( foundry.utils.getProperty(source, "system.capacity.weightless") === true ) {
-      foundry.utils.setProperty(source, "flags.dnd5e.migratedProperties", ["weightlessContents"]);
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Migrate capacity to support multiple fields and units.
-   * @param {object} source  The candidate source data from which the model will be constructed.
-   */
-  static #migrateCapacity(source) {
-    if ( !source.capacity || !source.capacity.type || !source.capacity.value || (source.capacity.count !== undefined)
-      || (foundry.utils.getType(source.capacity.weight) === "Object") ) return;
-    if ( source.capacity.type === "weight" ) {
-      source.capacity.weight ??= {};
-      source.capacity.weight.value = source.capacity.value;
-    } else if ( source.capacity.type === "item" ) {
-      source.capacity.count = source.capacity.value;
-    }
-    delete source.capacity.type;
-    delete source.capacity.value;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Force quantity to always be 1.
-   * @param {object} source  The candidate source data from which the model will be constructed.
-   */
-  static #migrateQuantity(source) {
-    source.quantity = 1;
-  }
-
-  /* -------------------------------------------- */
-  /*  Data Preparation                            */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  prepareDerivedData() {
-    super.prepareDerivedData();
-    this.prepareDescriptionData();
-    this.prepareIdentifiable();
-    this.preparePhysicalData();
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  prepareFinalData() {
-    this.prepareFinalEquippableData();
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async getFavoriteData() {
-    const data = super.getFavoriteData();
-    const capacity = await this.computeCapacity();
-    if ( Number.isFinite(capacity.max) ) return foundry.utils.mergeObject(await data, { uses: capacity });
-    return await data;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async getSheetData(context) {
-    context.subtitles = [
-      { label: game.i18n.localize(CONFIG.Item.typeLabels.container) },
-      ...this.physicalItemSheetFields
-    ];
-    context.parts = ["dnd5e.details-container"];
-  }
-
-  /* -------------------------------------------- */
-  /*  Getters                                     */
+  /*  Properties                                  */
   /* -------------------------------------------- */
 
   /**
@@ -333,6 +245,98 @@ export default class ContainerData extends ItemDataModel.mixin(
     context.value = context.value.toNearest(0.1);
     context.pct = Math.clamp(context.max ? (context.value / context.max) * 100 : 0, 0, 100);
     return context;
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Migration                              */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static _migrateData(source) {
+    super._migrateData(source);
+    ContainerData.#migrateCapacity(source);
+    ContainerData.#migrateQuantity(source);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate the weightless property into `properties`.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static _migrateWeightlessData(source) {
+    if ( foundry.utils.getProperty(source, "system.capacity.weightless") === true ) {
+      foundry.utils.setProperty(source, "flags.dnd5e.migratedProperties", ["weightlessContents"]);
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate capacity to support multiple fields and units.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateCapacity(source) {
+    if ( !source.capacity || !source.capacity.type || !source.capacity.value || (source.capacity.count !== undefined)
+      || (foundry.utils.getType(source.capacity.weight) === "Object") ) return;
+    if ( source.capacity.type === "weight" ) {
+      source.capacity.weight ??= {};
+      source.capacity.weight.value = source.capacity.value;
+    } else if ( source.capacity.type === "item" ) {
+      source.capacity.count = source.capacity.value;
+    }
+    delete source.capacity.type;
+    delete source.capacity.value;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Force quantity to always be 1.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateQuantity(source) {
+    source.quantity = 1;
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    this.prepareDescriptionData();
+    this.prepareIdentifiable();
+    this.preparePhysicalData();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareFinalData() {
+    this.prepareFinalEquippableData();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getFavoriteData() {
+    const data = super.getFavoriteData();
+    const capacity = await this.computeCapacity();
+    if ( Number.isFinite(capacity.max) ) return foundry.utils.mergeObject(await data, { uses: capacity });
+    return await data;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getSheetData(context) {
+    context.subtitles = [
+      { label: game.i18n.localize(CONFIG.Item.typeLabels.container) },
+      ...this.physicalItemSheetFields
+    ];
+    context.parts = ["dnd5e.details-container"];
   }
 
   /* -------------------------------------------- */

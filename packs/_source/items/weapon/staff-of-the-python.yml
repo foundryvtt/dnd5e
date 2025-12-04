@@ -26,7 +26,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: ''
     license: CC-BY-4.0
     rules: '2014'
@@ -156,7 +156,6 @@ system:
           level:
             min: null
             max: null
-          types: []
       summon:
         prompt: true
         mode: ''
@@ -164,6 +163,13 @@ system:
       name: Transform
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
     tJYJnIP5Zu0tGRsx:
       type: attack
       _id: tJYJnIP5Zu0tGRsx
@@ -214,18 +220,14 @@ folder: MLMTCAvKsuFE3vYA
 sort: 0
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037170767
-  modifiedTime: 1750697344647
+  modifiedTime: 1764619725250
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!MOeFq5MLAQzVQC7z'

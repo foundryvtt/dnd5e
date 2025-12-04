@@ -1,6 +1,10 @@
 import Application5e from "../api/application.mjs";
 
 /**
+ * @import { ActivityChoiceDialogContext } from "./_types.mjs";
+ */
+
+/**
  * Dialog for choosing an activity to use on an Item.
  * @param {Item5e} item                         The Item whose activities are being chosen.
  * @param {ApplicationConfiguration} [options]  Application configuration options.
@@ -98,16 +102,6 @@ export default class ActivityChoiceDialog extends Application5e {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * @typedef ActivityChoiceDialogContext
-   * @property {string} id
-   * @property {string} name
-   * @property {number} sort
-   * @property {object} icon
-   * @property {string} icon.src
-   * @property {boolean} icon.svg
-   */
 
   /**
    * Prepare rendering context for a given activity.

@@ -68,8 +68,6 @@ system:
             bonus: ''
             types:
               - force
-            scaling:
-              number: 1
         onSave: half
       save:
         ability: con
@@ -78,6 +76,14 @@ system:
           formula: '17'
       name: Slaying Save
       _id: FXPI8uOLJuWDUTax
+      img: ''
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+      appliedEffects: []
     ImH9UxTuyMRjiYzp:
       type: enchant
       name: Ammunition of Slaying
@@ -277,7 +283,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   identified: true
   unidentified:
@@ -983,14 +989,13 @@ flags:
     riders:
       activity:
         - FXPI8uOLJuWDUTax
-      effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1728337643089
-  modifiedTime: 1746464506652
+  modifiedTime: 1764614487938
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!dmgSlayingAmmuni'

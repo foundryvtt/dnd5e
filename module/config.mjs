@@ -1,14 +1,36 @@
+import CalenderHUD from "./applications/calendar/calendar-hud.mjs";
 import MapLocationControlIcon from "./canvas/map-location-control-icon.mjs";
 import { ConsumptionTargetData } from "./data/activity/fields/consumption-targets-field.mjs";
-import TransformationSetting from "./data/settings/transformation-setting.mjs";
+import { CalendarGreyhawk, CALENDAR_OF_GREYHAWK } from "./data/calendar/calendar-of-greyhawk.mjs";
+import { CalendarHarptos, CALENDAR_OF_HARPTOS } from "./data/calendar/calendar-of-harptos.mjs";
+import { CalendarKhorvaire, CALENDAR_OF_KHORVAIRE } from "./data/calendar/calendar-of-khorvaire.mjs";
 import * as activities from "./documents/activity/_module.mjs";
 import Actor5e from "./documents/actor/actor.mjs";
 import * as advancement from "./documents/advancement/_module.mjs";
 import { preLocalize } from "./utils.mjs";
 import MappingField from "./data/fields/mapping-field.mjs";
+import VehicleData from "./data/actor/vehicle.mjs";
 
 /**
- * @import { TravelPace5e } from "./data/shared/movement-field.mjs";
+ * @import {
+ *   AbilityConfiguration, ActivityActivationTypeConfiguration, ActivityConsumptionTargetConfiguration,
+ *   ActivityTypeConfiguration, ActorSizeConfiguration, AdvancementTypeConfiguration,
+ *   AreaTargetDefinition, CalendarHUDConfiguration, CharacterFlagConfiguration, ConditionConfiguration,
+ *   CraftingConfiguration, CreatureTypeConfiguration, CurrencyConfiguration, DamageTypeConfiguration,
+ *   EncumbranceConfiguration, FacilityConfiguration, HabitatConfiguration5e,
+ *   IndividualTargetDefinition, ItemPropertyConfiguration, LimitedUsePeriodConfiguration,
+ *   MapLocationMarkerStyle, MovementTypeConfiguration, MovementUnitConfiguration,
+ *   RestTypeConfiguration, RequestCallback5e, RuleTypeConfiguration, SkillConfiguration,
+ *   SpellcastingFocusConfiguration, SpellcastingPreparationState5e, SpellSchoolConfiguration,
+ *   SpellScrollValues, StatusEffectConfig5e, SubtypeTypeConfiguration, TimeUnitConfiguration,
+ *   ToolConfiguration, TraitConfiguration, TransformationConfiguration, TravelPaceConfiguration,
+ *   TravelUnitConfiguration, TreasureConfiguration5e, UnitConfiguration, WeaponMasterConfiguration
+ * } from "./_types.mjs";
+ * @import { TravelPace5e } from "./data/actor/fields/_types.mjs";
+ * @import {
+ *   MultiLevelSpellcasting, SingleLevelSpellcastingData, SlotSpellcastingData, SpellcastingModelData,
+ *   SpellcastingTable5e, SpellcastingTableSingle5e
+ * } from "./data/spellcasting/_types.mjs";
  */
 
 // Namespace Configuration Values
@@ -23,21 +45,6 @@ ______      ______ _____ _____
 | |/ / (_>  < |/ //\\__/ / |___
 |___/ \\___/\\/___/ \\____/\\____/
 _______________________________`;
-
-/**
- * Configuration data for abilities.
- *
- * @typedef {object} AbilityConfiguration
- * @property {string} label                               Localized label.
- * @property {string} abbreviation                        Localized abbreviation.
- * @property {string} fullKey                             Fully written key used as alternate for enrichers.
- * @property {string} [reference]                         Reference to a rule page describing this ability.
- * @property {string} [type]                              Whether this is a "physical" or "mental" ability.
- * @property {Object<string, number|string>}  [defaults]  Default values for this ability based on actor type.
- *                                                        If a string is used, the system will attempt to fetch.
- *                                                        the value of the specified ability.
- * @property {string} [icon]                              An SVG icon that represents the ability.
- */
 
 /**
  * The set of Ability Scores used within the system.
@@ -129,20 +136,6 @@ DND5E.defaultAbilities = {
 };
 
 /* -------------------------------------------- */
-
-/**
- * Configuration data for skills.
- *
- * @typedef {object} SkillConfiguration
- * @property {string} label        Localized label.
- * @property {string} ability      Key for the default ability used by this skill.
- * @property {string} fullKey      Fully written key used as alternate for enrichers.
- * @property {string} [reference]  Reference to a rule page describing this skill.
- * @property {object} [pace]       Configuration for skills affected by travel pace.
- * @property {Set<TravelPace5e>} [pace.advantage]     Grant advantage on this skill when traveling at the given paces.
- * @property {Set<TravelPace5e>} [pace.disadvantage]  Grant disadvantage on this skill when traveling at the given
- *                                                    paces.
- */
 
 /**
  * The set of skill which can be trained with their default ability scores.
@@ -332,18 +325,6 @@ DND5E.attunementTypes = {
 };
 preLocalize("attunementTypes");
 
-/**
- * An enumeration of item attunement states.
- * @type {{"0": string, "1": string, "2": string}}
- * @deprecated since 3.2, available until 3.4
- */
-DND5E.attunements = {
-  0: "DND5E.AttunementNone",
-  1: "DND5E.AttunementRequired",
-  2: "DND5E.AttunementAttuned"
-};
-preLocalize("attunements");
-
 /* -------------------------------------------- */
 /*  Weapon Details                              */
 /* -------------------------------------------- */
@@ -376,12 +357,6 @@ DND5E.weaponProficiencies = {
 preLocalize("weaponProficiencies");
 
 /* -------------------------------------------- */
-
-/**
- * @typedef {object} WeaponMasterConfiguration
- * @property {string} label        Localized label for the mastery
- * @property {string} [reference]  Reference to a rule page describing this mastery.
- */
 
 /**
  * Weapon masteries.
@@ -525,32 +500,6 @@ DND5E.ammoIds = {
 /* -------------------------------------------- */
 /*  Bastion Facilities                          */
 /* -------------------------------------------- */
-
-/**
- * @typedef FacilityConfiguration
- * @property {Record<string, Record<number, number>>} advancement  The number of free facilities of a given type awarded
- *                                                                 at certain character levels.
- * @property {Record<string, FacilityOrder>} orders                Orders that can be issued to a facility.
- * @property {Record<string, FacilitySize>} sizes                  Facility size categories.
- * @property {Record<string, SubtypeTypeConfiguration>} types      Facility types and subtypes.
- */
-
-/**
- * @typedef FacilityOrder
- * @property {string} label       The human-readable name of the order.
- * @property {string} icon        The SVG icon for this order.
- * @property {boolean} [basic]    Whether this order can be issued to basic facilities.
- * @property {number} [duration]  The amount of time taken to complete the order if different to a normal bastion turn.
- * @property {boolean} [hidden]   This order is not normally available for execution.
- */
-
-/**
- * @typedef FacilitySize
- * @property {string} label    The human-readable name of the size category.
- * @property {number} days     The number of days to build the facility.
- * @property {number} squares  The maximum area the facility may occupy in the bastion plan.
- * @property {number} value    The cost in gold pieces to build the facility.
- */
 
 /**
  * Configuration data for bastion facilities.
@@ -710,12 +659,6 @@ DND5E.toolProficiencies = {
   vehicle: "DND5E.ToolVehicle"
 };
 preLocalize("toolProficiencies", { sort: true });
-
-/**
- * @typedef ToolConfiguration
- * @property {string} ability  Default ability used for the tool.
- * @property {string} id       UUID of reference tool or ID within pack defined by `DND5E.sourcePacks.ITEMS`.
- */
 
 /**
  * Configuration data for tools.
@@ -884,17 +827,6 @@ DND5E.toolIds = new Proxy(DND5E.tools, {
 /* -------------------------------------------- */
 
 /**
- * @typedef {object} TimeUnitConfiguration
- * @property {string} label            Localized label for this unit.
- * @property {string} [counted]        Localization path for counted plural forms. Only necessary if non-supported unit
- *                                     or using non-standard name for a supported unit. List of supported units can be
- *                                     found here: https://tc39.es/ecma402/#table-sanctioned-single-unit-identifiers
- * @property {number} conversion       Conversion multiplier used to converting between units.
- * @property {boolean} [combat=false]  Is this a combat-specific time unit?
- * @property {boolean} [option=true]   Should this be available when users can select from a list of units?
- */
-
-/**
  * Configuration for time units available to the system.
  * @enum {TimeUnitConfiguration}
  */
@@ -914,19 +846,23 @@ DND5E.timeUnits = {
   second: {
     label: "DND5E.UNITS.TIME.Second.Label",
     conversion: 1 / 60,
-    option: false
+    option: false,
+    timeComponent: "second"
   },
   minute: {
     label: "DND5E.UNITS.TIME.Minute.Label",
-    conversion: 1
+    conversion: 1,
+    timeComponent: "minute"
   },
   hour: {
     label: "DND5E.UNITS.TIME.Hour.Label",
-    conversion: 60
+    conversion: 60,
+    timeComponent: "hour"
   },
   day: {
     label: "DND5E.UNITS.TIME.Day.Label",
-    conversion: 1_440
+    conversion: 1_440,
+    timeComponent: "day"
   },
   week: {
     label: "DND5E.UNITS.TIME.Week.Label",
@@ -939,7 +875,8 @@ DND5E.timeUnits = {
   },
   year: {
     label: "DND5E.UNITS.TIME.Year.Label",
-    conversion: 525_600
+    conversion: 525_600,
+    timeComponent: "year"
   }
 };
 preLocalize("timeUnits", { key: "label" });
@@ -1026,24 +963,15 @@ DND5E.abilityActivationTypes = {
   legendary: "DND5E.LegendaryAction.Label",
   mythic: "DND5E.MythicActionLabel",
   lair: "DND5E.LAIR.Action.Label",
-  crew: "DND5E.VehicleCrewAction"
+  crew: "DND5E.VEHICLE.Activation.Crew.label"
 };
 preLocalize("abilityActivationTypes");
 
 /* -------------------------------------------- */
 
 /**
- * @typedef ActivityActivationTypeConfig
- * @property {string} label             Localized label for the activation type.
- * @property {string} [header]          Localized label for the activation type header.
- * @property {string} [group]           Localized label for the presentational group.
- * @property {boolean} [passive=false]  Classify this item as a passive feature on NPC sheets.
- * @property {boolean} [scalar=false]   Does this activation type have a numeric value attached?
- */
-
-/**
  * Configuration data for activation types on activities.
- * @enum {ActivityActivationTypeConfig}
+ * @enum {ActivityActivationTypeConfiguration}
  */
 DND5E.activityActivationTypes = {
   action: {
@@ -1105,12 +1033,20 @@ DND5E.activityActivationTypes = {
     passive: true
   },
   legendary: {
+    counted: "DND5E.ACTIVATION.Type.Legendary.Counted",
+    consume: {
+      property: "resources.legact"
+    },
     label: "DND5E.ACTIVATION.Type.Legendary.Label",
     header: "DND5E.ACTIVATION.Type.Legendary.Header",
     group: "DND5E.ACTIVATION.Category.Monster",
     scalar: true
   },
   mythic: {
+    counted: "DND5E.ACTIVATION.Type.Mythic.Counted",
+    consume: {
+      property: "resources.legact"
+    },
     label: "DND5E.ACTIVATION.Type.Mythic.Label",
     header: "DND5E.ACTIVATION.Type.Mythic.Header",
     group: "DND5E.ACTIVATION.Category.Monster",
@@ -1122,13 +1058,19 @@ DND5E.activityActivationTypes = {
     group: "DND5E.ACTIVATION.Category.Monster"
   },
   crew: {
+    counted: "DND5E.ACTIVATION.Type.Crew.Counted",
+    consume: {
+      canConsume: VehicleData.canConsumeCrewAction,
+      property: "attributes.actions"
+    },
     label: "DND5E.ACTIVATION.Type.Crew.Label",
     header: "DND5E.ACTIVATION.Type.Crew.Header",
     group: "DND5E.ACTIVATION.Category.Vehicle",
     scalar: true
   },
   special: {
-    label: "DND5E.Special"
+    label: "DND5E.Special",
+    passive: true
   }
 };
 preLocalize("activityActivationTypes", { key: "label" });
@@ -1151,50 +1093,8 @@ preLocalize("abilityConsumptionTypes", { sort: true });
 /* -------------------------------------------- */
 
 /**
- * @typedef {object} ActivityConsumptionTargetConfig
- * @property {string} label                                     Localized label for the target type.
- * @property {ConsumptionConsumeFunction} consume               Function used to consume according to this type.
- * @property {ConsumptionLabelsFunction} consumptionLabels      Function used to generate a hint of consumption amount.
- * @property {{value: string, label: string}[]} [scalingModes]  Additional scaling modes for this consumption type in
- *                                                              addition to the default "amount" scaling.
- * @property {boolean} [targetRequiresEmbedded]                 Use text input rather than select when not embedded.
- * @property {ConsumptionValidTargetsFunction} [validTargets]   Function for creating an array of consumption targets.
- */
-
-/**
- * @callback ConsumptionConsumeFunction
- * @this {ConsumptionTargetData}
- * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
- * @param {ActivityUsageUpdates} updates     Updates to be performed.
- * @throws ConsumptionError
- */
-
-/**
- * @callback ConsumptionLabelsFunction
- * @this {ConsumptionTargetData}
- * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
- * @param {object} [options={}]
- * @param {boolean} [options.consumed]       Is this consumption currently set to be consumed?
- * @returns {ConsumptionLabels}
- */
-
-/**
- * @typedef ConsumptionLabels
- * @property {string} label      Label displayed for the consumption checkbox.
- * @property {string} hint       Hint text describing what should be consumed.
- * @property {{ type: string, message: string }} [notes]  Additional notes relating to the consumption to be performed.
- * @property {boolean} [warn]    Display a warning icon indicating consumption will fail.
- */
-
-/**
- * @callback ConsumptionValidTargetsFunction
- * @this {ConsumptionTargetData}
- * @returns {FormSelectOption[]}
- */
-
-/**
  * Configuration information for different consumption targets.
- * @enum {ActivityConsumptionTargetConfig}
+ * @enum {ActivityConsumptionTargetConfiguration}
  */
 DND5E.activityConsumptionTypes = {
   activityUses: {
@@ -1206,6 +1106,7 @@ DND5E.activityConsumptionTypes = {
     label: "DND5E.CONSUMPTION.Type.ItemUses.Label",
     consume: ConsumptionTargetData.consumeItemUses,
     consumptionLabels: ConsumptionTargetData.consumptionLabelsItemUses,
+    nonEmbeddedHint: "DND5E.CONSUMPTION.Type.ItemUses.NonEmbeddedHint",
     targetRequiresEmbedded: true,
     validTargets: ConsumptionTargetData.validItemUsesTargets
   },
@@ -1213,6 +1114,7 @@ DND5E.activityConsumptionTypes = {
     label: "DND5E.CONSUMPTION.Type.Material.Label",
     consume: ConsumptionTargetData.consumeMaterial,
     consumptionLabels: ConsumptionTargetData.consumptionLabelsMaterial,
+    nonEmbeddedHint: "DND5E.CONSUMPTION.Type.Material.NonEmbeddedHint",
     targetRequiresEmbedded: true,
     validTargets: ConsumptionTargetData.validMaterialTargets
   },
@@ -1233,6 +1135,7 @@ DND5E.activityConsumptionTypes = {
     label: "DND5E.CONSUMPTION.Type.Attribute.Label",
     consume: ConsumptionTargetData.consumeAttribute,
     consumptionLabels: ConsumptionTargetData.consumptionLabelsAttribute,
+    nonEmbeddedHint: "DND5E.CONSUMPTION.Type.Attribute.NonEmbeddedHint",
     targetRequiresEmbedded: true,
     validTargets: ConsumptionTargetData.validAttributeTargets
   }
@@ -1240,18 +1143,6 @@ DND5E.activityConsumptionTypes = {
 preLocalize("activityConsumptionTypes", { key: "label" });
 
 /* -------------------------------------------- */
-
-/**
- * Configuration data for actor sizes.
- *
- * @typedef {object} ActorSizeConfiguration
- * @property {string} label                   Localized label.
- * @property {string} abbreviation            Localized abbreviation.
- * @property {number} hitDie                  Default hit die denomination for NPCs of this size.
- * @property {number} [token=1]               Default token size.
- * @property {number} [capacityMultiplier=1]  Multiplier used to calculate carrying capacities.
- * @property {number} numerical               Numerical representation of size.
- */
 
 /**
  * Creature sizes ordered from smallest to largest.
@@ -1350,20 +1241,6 @@ DND5E.tokenRulerColors = {
 /* -------------------------------------------- */
 
 /**
- * Configuration data for a map marker style. Options not included will fall back to the value set in `default` style.
- * Any additional styling options added will be passed into the custom marker class and be available for rendering.
- *
- * @typedef {object} MapLocationMarkerStyle
- * @property {typeof PIXI.Container} [icon]  Map marker class used to render the icon.
- * @property {number} [backgroundColor]      Color of the background inside the circle.
- * @property {number} [borderColor]          Color of the border in normal state.
- * @property {number} [borderHoverColor]     Color of the border when hovering over the marker.
- * @property {string} [fontFamily]           Font used for rendering the code on the marker.
- * @property {number} [shadowColor]          Color of the shadow under the marker.
- * @property {number} [textColor]            Color of the text on the marker.
- */
-
-/**
  * Settings used to render map location markers on the canvas.
  * @enum {MapLocationMarkerStyle}
  */
@@ -1380,16 +1257,6 @@ DND5E.mapLocationMarker = {
 };
 
 /* -------------------------------------------- */
-
-/**
- * Configuration data for creature types.
- *
- * @typedef {object} CreatureTypeConfiguration
- * @property {string} label               Localized label.
- * @property {string} plural              Localized plural form used in swarm name.
- * @property {string} [reference]         Reference to a rule page describing this type.
- * @property {boolean} [detectAlignment]  Is this type detectable by spells such as "Detect Evil and Good"?
- */
 
 /**
  * Default types of creatures.
@@ -1541,16 +1408,6 @@ preLocalize("itemRarity");
 /* -------------------------------------------- */
 
 /**
- * Configuration data for limited use periods.
- *
- * @typedef {object} LimitedUsePeriodConfiguration
- * @property {string} label                Localized label.
- * @property {string}  abbreviation        Shorthand form of the label.
- * @property {"combat"|"special"} [group]  Grouping if outside the normal "time" group.
- * @property {boolean} [formula]           Whether this limited use period restores charges via formula.
- */
-
-/**
  * Enumerate the lengths of time over which an item can have limited use ability.
  * @enum {LimitedUsePeriodConfiguration}
  */
@@ -1633,6 +1490,8 @@ DND5E.enchantmentPeriods = {
 preLocalize("enchantmentPeriods", { key: "label" });
 
 /* -------------------------------------------- */
+/*  Armor                                       */
+/* -------------------------------------------- */
 
 /**
  * Specific equipment types that modify base AC.
@@ -1650,51 +1509,8 @@ preLocalize("armorTypes");
 /* -------------------------------------------- */
 
 /**
- * Equipment types that aren't armor.
- * @enum {string}
- */
-DND5E.miscEquipmentTypes = {
-  clothing: "DND5E.EQUIPMENT.Type.Clothing.Label",
-  ring: "DND5E.EQUIPMENT.Type.Ring.Label",
-  rod: "DND5E.EQUIPMENT.Type.Rod.Label",
-  trinket: "DND5E.EQUIPMENT.Type.Trinket.Label",
-  vehicle: "DND5E.EQUIPMENT.Type.Vehicle.Label",
-  wand: "DND5E.EQUIPMENT.Type.Wand.Label",
-  wondrous: "DND5E.EQUIPMENT.Type.Wondrous.Label"
-};
-preLocalize("miscEquipmentTypes", { sort: true });
-
-/* -------------------------------------------- */
-
-/**
- * The set of equipment types for armor, clothing, and other objects which can be worn by the character.
- * @enum {string}
- */
-DND5E.equipmentTypes = {
-  ...DND5E.miscEquipmentTypes,
-  ...DND5E.armorTypes
-};
-preLocalize("equipmentTypes", { sort: true });
-
-/* -------------------------------------------- */
-
-/**
- * The various types of vehicles in which characters can be proficient.
- * @enum {string}
- */
-DND5E.vehicleTypes = {
-  air: "DND5E.VehicleTypeAir",
-  land: "DND5E.VehicleTypeLand",
-  space: "DND5E.VehicleTypeSpace",
-  water: "DND5E.VehicleTypeWater"
-};
-preLocalize("vehicleTypes", { sort: true });
-
-/* -------------------------------------------- */
-
-/**
  * The set of Armor Proficiencies which a character may have.
- * @type {object}
+ * @enum {string}
  */
 DND5E.armorProficiencies = {
   lgt: "DND5E.ArmorLightProficiency",
@@ -1703,6 +1519,8 @@ DND5E.armorProficiencies = {
   shl: "DND5E.EquipmentShieldProficiency"
 };
 preLocalize("armorProficiencies");
+
+/* -------------------------------------------- */
 
 /**
  * A mapping between `DND5E.equipmentTypes` and `DND5E.armorProficiencies` that
@@ -1717,6 +1535,8 @@ DND5E.armorProficienciesMap = {
   heavy: "hvy",
   shield: "shl"
 };
+
+/* -------------------------------------------- */
 
 /**
  * The basic armor types in 5e. This enables specific armor proficiencies,
@@ -1738,6 +1558,8 @@ DND5E.armorIds = {
   studded: "Compendium.dnd5e.equipment24.Item.phbarmStuddedLea"
 };
 
+/* -------------------------------------------- */
+
 /**
  * The basic shield in 5e.
  * @enum {string}
@@ -1745,6 +1567,8 @@ DND5E.armorIds = {
 DND5E.shieldIds = {
   shield: "Compendium.dnd5e.equipment24.Item.phbarmShield0000"
 };
+
+/* -------------------------------------------- */
 
 /**
  * Common armor class calculations.
@@ -1790,14 +1614,51 @@ DND5E.armorClasses = {
 preLocalize("armorClasses", { key: "label" });
 
 /* -------------------------------------------- */
+/*  Other Equipment Types                       */
+/* -------------------------------------------- */
 
 /**
- * Configuration data for an items that have sub-types.
- *
- * @typedef {object} SubtypeTypeConfiguration
- * @property {string} label                       Localized label for this type.
- * @property {Record<string, string>} [subtypes]  Enum containing localized labels for subtypes.
+ * Equipment types that aren't armor.
+ * @enum {string}
  */
+DND5E.miscEquipmentTypes = {
+  clothing: "DND5E.EQUIPMENT.Type.Clothing.Label",
+  ring: "DND5E.EQUIPMENT.Type.Ring.Label",
+  rod: "DND5E.EQUIPMENT.Type.Rod.Label",
+  trinket: "DND5E.EQUIPMENT.Type.Trinket.Label",
+  vehicle: "DND5E.EQUIPMENT.Type.Vehicle.Label",
+  wand: "DND5E.EQUIPMENT.Type.Wand.Label",
+  wondrous: "DND5E.EQUIPMENT.Type.Wondrous.Label"
+};
+preLocalize("miscEquipmentTypes", { sort: true });
+
+/* -------------------------------------------- */
+
+/**
+ * The set of equipment types for armor, clothing, and other objects which can be worn by the character.
+ * @enum {string}
+ */
+DND5E.equipmentTypes = {
+  ...DND5E.miscEquipmentTypes,
+  ...DND5E.armorTypes
+};
+preLocalize("equipmentTypes", { sort: true });
+
+/* -------------------------------------------- */
+
+/**
+ * The various types of vehicles in which characters can be proficient.
+ * @enum {string}
+ */
+DND5E.vehicleTypes = {
+  air: "DND5E.VEHICLE.Type.Air.label",
+  land: "DND5E.VEHICLE.Type.Land.label",
+  space: "DND5E.VEHICLE.Type.Space.label",
+  water: "DND5E.VEHICLE.Type.Water.label"
+};
+preLocalize("vehicleTypes", { sort: true });
+
+/* -------------------------------------------- */
 
 /**
  * Enumerate the valid consumable types which are recognized by the system.
@@ -1841,6 +1702,9 @@ DND5E.consumableTypes = {
   },
   trinket: {
     label: "DND5E.CONSUMABLE.Type.Trinket.Label"
+  },
+  wondrous: {
+    label: "DND5E.CONSUMABLE.Type.Wondrous.Label"
   }
 };
 preLocalize("consumableTypes", { key: "label", sort: true });
@@ -1875,14 +1739,6 @@ DND5E.containerTypes = {
 };
 
 /* -------------------------------------------- */
-
-/**
- * Configuration data for spellcasting foci.
- *
- * @typedef {object} SpellcastingFocusConfiguration
- * @property {string} label                    Localized label for this category.
- * @property {Object<string, string>} itemIds  Item IDs or UUIDs.
- */
 
 /**
  * Type of spellcasting foci.
@@ -1932,7 +1788,7 @@ DND5E.featureTypes = {
     label: "DND5E.Feature.Class.Label",
     subtypes: {
       arcaneShot: "DND5E.Feature.Class.ArcaneShot",
-      artificerInfusion: "DND5E.Feature.Class.ArtificerInfusion",
+      artificerInfusion: "DND5E.Feature.Class.ArtificerPlan",
       channelDivinity: "DND5E.Feature.Class.ChannelDivinity",
       defensiveTactic: "DND5E.Feature.Class.DefensiveTactic",
       eldritchInvocation: "DND5E.Feature.Class.EldritchInvocation",
@@ -1958,7 +1814,7 @@ DND5E.featureTypes = {
   enchantment: {
     label: "DND5E.ENCHANTMENT.Label",
     subtypes: {
-      artificerInfusion: "DND5E.Feature.Class.ArtificerInfusion",
+      artificerInfusion: "DND5E.Feature.Class.ArtificerPlan",
       rune: "DND5E.Feature.Class.Rune"
     }
   },
@@ -1990,18 +1846,6 @@ preLocalize("featureTypes.feat.subtypes", { sort: true });
 preLocalize("featureTypes.supernaturalGift.subtypes", { sort: true });
 
 /* -------------------------------------------- */
-
-/**
- * Configuration data for item properties.
- *
- * @typedef {object} ItemPropertyConfiguration
- * @property {string} label           Localized label.
- * @property {string} [abbreviation]  Localized abbreviation.
- * @property {string} [icon]          Icon that can be used in certain places to represent this property.
- * @property {string} [reference]     Reference to a rule page describing this property.
- * @property {boolean} [isPhysical]   Is this property one that can cause damage resistance bypasses?
- * @property {boolean} [isTag]        Is this spell property a tag, rather than a component?
- */
 
 /**
  * The various properties of all item types.
@@ -2164,6 +2008,7 @@ DND5E.validProperties = {
     "ritual"
   ]),
   tool: new Set([
+    "foc",
     "mgc"
   ])
 };
@@ -2171,15 +2016,8 @@ DND5E.validProperties = {
 /* -------------------------------------------- */
 
 /**
- * Configuration data for an item with the "loot" type.
- *
- * @typedef {object} LootTypeConfiguration
- * @property {string} label                       Localized label for this type.
- */
-
-/**
  * Types of "loot" items.
- * @enum {LootTypeConfiguration}
+ * @enum {{ label: string }}
  */
 DND5E.lootTypes = {
   art: {
@@ -2200,6 +2038,9 @@ DND5E.lootTypes = {
   resource: {
     label: "DND5E.Loot.Resource"
   },
+  trade: {
+    label: "DND5E.Loot.Trade"
+  },
   treasure: {
     label: "DND5E.Loot.Treasure"
   }
@@ -2207,14 +2048,6 @@ DND5E.lootTypes = {
 preLocalize("lootTypes", { key: "label" });
 
 /* -------------------------------------------- */
-
-/**
- * @typedef {object} CurrencyConfiguration
- * @property {string} label         Localized label for the currency.
- * @property {string} abbreviation  Localized abbreviation for the currency.
- * @property {number} conversion    Number by which this currency should be multiplied to arrive at a standard value.
- * @property {string} icon          Icon representing the currency in the interface.
- */
 
 /**
  * The valid currency denominations with localized labels, abbreviations, and conversions.
@@ -2256,28 +2089,6 @@ DND5E.currencies = {
 preLocalize("currencies", { keys: ["label", "abbreviation"] });
 
 /* -------------------------------------------- */
-
-/**
- * @typedef CraftingConfiguration
- * @property {CraftingCostsMultiplier} consumable        Discounts for crafting a magical consumable.
- * @property {Record<string, CraftingCosts>} exceptions  Crafting costs for items that are exception to the general
- *                                                       crafting rules, by identifier.
- * @property {Record<string, CraftingCosts>} magic       Magic item crafting costs by rarity.
- * @property {CraftingCostsMultiplier} mundane           Multipliers for crafting mundane items.
- * @property {Record<number, CraftingCosts>} scrolls     Crafting costs for spell scrolls by level.
- */
-
-/**
- * @typedef CraftingCostsMultiplier
- * @property {number} days  The days multiplier.
- * @property {number} gold  The gold multiplier.
- */
-
-/**
- * @typedef CraftingCosts
- * @property {number} days  The number of days required to craft the item, not including its base item.
- * @property {number} gold  The amount of gold required for the raw materials, not including the base item.
- */
 
 /**
  * Configuration data for crafting costs.
@@ -2395,17 +2206,6 @@ preLocalize("damageScalingModes", { keys: ["label", "labelCantrip"] });
 /* -------------------------------------------- */
 
 /**
- * Configuration data for damage types.
- *
- * @typedef {object} DamageTypeConfiguration
- * @property {string} label          Localized label.
- * @property {string} icon           Icon representing this type.
- * @property {boolean} [isPhysical]  Is this a type that can be bypassed by magical or silvered weapons?
- * @property {string} [reference]    Reference to a rule page describing this damage type.
- * @property {Color} [color]         Visual color of the damage type.
- */
-
-/**
  * Types of damage the can be caused by abilities.
  * @enum {DamageTypeConfiguration}
  */
@@ -2501,11 +2301,12 @@ preLocalize("damageTypes", { keys: ["label"], sort: true });
  * @type {boolean}
  */
 DND5E.aggregateDamageDisplay = true;
+
 /* -------------------------------------------- */
 
 /**
  * Different types of healing that can be applied using abilities.
- * @enum {string}
+ * @enum {DamageTypeConfiguration}
  */
 DND5E.healingTypes = {
   healing: {
@@ -2542,11 +2343,20 @@ DND5E.difficultTerrainTypes = {
   rocks: {
     label: "DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Rocks"
   },
+  mud: {
+    label: "DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Mud"
+  },
+  sand: {
+    label: "DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Sand"
+  },
   slope: {
     label: "DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Slope"
   },
   snow: {
     label: "DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Snow"
+  },
+  web: {
+    label: "DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Webs"
   }
 };
 preLocalize("difficultTerrainTypes", { key: "label", sort: true });
@@ -2554,66 +2364,87 @@ preLocalize("difficultTerrainTypes", { key: "label", sort: true });
 /* -------------------------------------------- */
 
 /**
- * @typedef MovementTypeConfig
- * @property {string} label            Localized label for the movement type.
- * @property {boolean} [walkFallback]  When this special movement type runs out, can the actor fall back to using their
- *                                     walk speed at 2x cost?
- */
-
-/**
  * Types of movement supported by creature actors in the system.
- * @enum {MovementTypeConfig}
+ * @enum {MovementTypeConfiguration}
  */
 DND5E.movementTypes = {
+  walk: {
+    label: "DND5E.MOVEMENT.Type.Speed"
+  },
   burrow: {
-    label: "DND5E.MovementBurrow"
+    label: "DND5E.MOVEMENT.Type.Burrow"
   },
   climb: {
-    label: "DND5E.MovementClimb",
+    label: "DND5E.MOVEMENT.Type.Climb",
     walkFallback: true
   },
   fly: {
-    label: "DND5E.MovementFly"
+    label: "DND5E.MOVEMENT.Type.Fly",
+    travel: "air"
   },
   swim: {
-    label: "DND5E.MovementSwim",
+    label: "DND5E.MOVEMENT.Type.Swim",
+    travel: "water",
     walkFallback: true
-  },
-  walk: {
-    label: "DND5E.MovementWalk"
   }
 };
-preLocalize("movementTypes", { key: "label", sort: true });
+preLocalize("movementTypes", { key: "label" });
 patchConfig("movementTypes", "label", { since: "DnD5e 5.1", until: "DnD5e 5.3" });
 
 /* -------------------------------------------- */
 
 /**
- * @typedef TravelPaceConfig
- * @property {string} label       The human-readable label.
- * @property {number} standard    The standard pace value in miles per day.
- * @property {number} multiplier  The speed up or slow down factor for this travel pace.
+ * Default number of hours per day traveled by specific actor types.
+ * @enum {number}
  */
+DND5E.travelTimes = {
+  group: 8,
+  vehicle: 24
+};
+
+/* -------------------------------------------- */
+
+/**
+ * Types of movement supported by creature actors in the system.
+ * @enum {Omit<MovementTypeConfiguration, "travel">}
+ */
+DND5E.travelTypes = {
+  land: {
+    label: "DND5E.TRAVEL.Type.Land"
+  },
+  water: {
+    label: "DND5E.TRAVEL.Type.Water"
+  },
+  air: {
+    label: "DND5E.TRAVEL.Type.Air"
+  }
+};
+preLocalize("travelTypes", { key: "label" });
+
+/* -------------------------------------------- */
 
 /**
  * Available travel paces.
- * @type {Readonly<Record<string, TravelPaceConfig>>}
+ * @type {Readonly<Record<string, TravelPaceConfiguration>>}
  */
 DND5E.travelPace = Object.freeze({
   slow: {
-    label: "DND5E.Travel.Pace.Slow",
+    label: "DND5E.TRAVEL.Pace.Slow",
     standard: 18,
-    multiplier: 2 / 3
+    multiplier: 2 / 3,
+    round: "down"
   },
   normal: {
-    label: "DND5E.Travel.Pace.Normal",
+    label: "DND5E.TRAVEL.Pace.Normal",
     standard: 24,
-    multiplier: 1
+    multiplier: 1,
+    round: "down"
   },
   fast: {
-    label: "DND5E.Travel.Pace.Fast",
+    label: "DND5E.TRAVEL.Pace.Fast",
     standard: 30,
-    multiplier: 4 / 3
+    multiplier: 4 / 3,
+    round: "down"
   }
 });
 preLocalize("travelPace", { key: "label" });
@@ -2632,8 +2463,8 @@ DND5E.defaultUnits = {
     metric: "m"
   },
   travel: {
-    imperial: "mi",
-    metric: "km"
+    imperial: "mph",
+    metric: "kph"
   },
   volume: {
     imperial: "cubicFoot",
@@ -2648,24 +2479,8 @@ DND5E.defaultUnits = {
 /* -------------------------------------------- */
 
 /**
- * @typedef {object} UnitConfiguration
- * @property {string} label              Localized label for the unit.
- * @property {string} abbreviation       Localized abbreviation for the unit.
- * @property {number} conversion         Multiplier used to convert between various units.
- * @property {string} [counted]          Localization path for counted plural forms in various unit display modes.
- *                                       Only necessary if non-supported unit or using a non-standard name for a
- *                                       supported unit.
- * @property {string} [formattingUnit]   Unit formatting value as supported by javascript's internationalization system:
- *                                       https://tc39.es/ecma402/#table-sanctioned-single-unit-identifiers. Only
- *                                       required if the formatting name doesn't match the unit key.
- * @property {"imperial"|"metric"} type  Whether this is an "imperial" or "metric" unit.
- * @property {"day"|"round"} [travelResolution]  Whether the distance is per-round or per-day when used in the context
- *                                               of overland travel.
- */
-
-/**
  * The valid units of measure for movement distances in the game system.
- * @enum {UnitConfiguration}
+ * @enum {MovementUnitConfiguration}
  */
 DND5E.movementUnits = {
   ft: {
@@ -2702,6 +2517,33 @@ DND5E.movementUnits = {
   }
 };
 preLocalize("movementUnits", { keys: ["label", "abbreviation"] });
+
+/* -------------------------------------------- */
+
+/**
+ * The valid units for measuring travel speed. When being formatted, the formatting unit will be combined with
+ * `-per-hour` or `-per-day` to result in the final unit passed to `Intl.NumberFormat`.
+ * @enum {TravelUnitConfiguration}
+ */
+DND5E.travelUnits = {
+  mph: {
+    label: "DND5E.UNITS.TRAVEL.Mile.Label",
+    abbreviationDay: "DND5E.UNITS.TRAVEL.Mile.AbbreviationDay",
+    abbreviationHour: "DND5E.UNITS.TRAVEL.Mile.AbbreviationHour",
+    formattingUnit: "mile",
+    conversion: 1,
+    type: "imperial"
+  },
+  kph: {
+    label: "DND5E.UNITS.TRAVEL.Kilometer.Label",
+    abbreviationDay: "DND5E.UNITS.TRAVEL.Kilometer.AbbreviationDay",
+    abbreviationHour: "DND5E.UNITS.TRAVEL.Kilometer.AbbreviationHour",
+    formattingUnit: "kilometer",
+    conversion: 0.6,
+    type: "metric"
+  }
+};
+preLocalize("travelUnits", { keys: ["label", "abbreviationDay", "abbreviationHour"] });
 
 /* -------------------------------------------- */
 
@@ -2794,21 +2636,6 @@ preLocalize("weightUnits", { keys: ["label", "abbreviation"] });
 /* -------------------------------------------- */
 
 /**
- * Encumbrance configuration data.
- *
- * @typedef {object} EncumbranceConfiguration
- * @property {Record<string, number>} currencyPerWeight  Pieces of currency that equal a base weight (lbs or kgs).
- * @property {Record<string, object>} effects            Data used to create encumbrance-related Active Effects.
- * @property {object} threshold                          Amount to multiply strength to get given capacity threshold.
- * @property {Record<string, number>} threshold.encumbered
- * @property {Record<string, number>} threshold.heavilyEncumbered
- * @property {Record<string, number>} threshold.maximum
- * @property {Record<string, {ft: number, m: number}>} speedReduction  Speed reduction caused by encumbered status.
- * @property {Record<string, number>} vehicleWeightMultiplier  Multiplier used to determine vehicle carrying capacity.
- * @property {Record<string, Record<string, string>>} baseUnits  Base units used to calculate carrying weight.
- */
-
-/**
  * Configure aspects of encumbrance calculation so that it could be configured by modules.
  * @type {EncumbranceConfiguration}
  */
@@ -2817,6 +2644,7 @@ DND5E.encumbrance = {
     imperial: 50,
     metric: 110
   },
+  draftMultiplier: 5,
   effects: {
     encumbered: {
       name: "EFFECT.DND5E.StatusEncumbered",
@@ -2863,10 +2691,6 @@ DND5E.encumbrance = {
     default: {
       imperial: "lb",
       metric: "kg"
-    },
-    vehicle: {
-      imperial: "tn",
-      metric: "Mg"
     }
   }
 };
@@ -2875,13 +2699,6 @@ preLocalize("encumbrance.effects", { key: "name" });
 /* -------------------------------------------- */
 /*  Targeting                                   */
 /* -------------------------------------------- */
-
-/**
- * @typedef {object} IndividualTargetDefinition
- * @property {string} label           Localized label for this type.
- * @property {string} [counted]       Localization path for counted plural forms. Only necessary for scalar types.
- * @property {boolean} [scalar=true]  Can this target take an associated numeric value?
- */
 
 /**
  * Targeting types that apply to one or more distinct targets.
@@ -2928,20 +2745,6 @@ DND5E.individualTargetTypes = {
 preLocalize("individualTargetTypes", { key: "label" });
 
 /* -------------------------------------------- */
-
-/**
- * Information needed to represent different area of effect target types.
- *
- * @typedef {object} AreaTargetDefinition
- * @property {string} label        Localized label for this type.
- * @property {string} counted      Localization path for counted plural forms.
- * @property {string} template     Type of `MeasuredTemplate` create for this target type.
- * @property {string} [reference]  Reference to a rule page describing this area of effect.
- * @property {string[]} [sizes]    List of available sizes for this template. Options are chosen from the list:
- *                                 "radius", "width", "height", "length", "thickness". No more than 3 dimensions
- *                                 may be specified.
- * @property {boolean} [standard]  Is this a standard area of effect as defined explicitly by the rules?
- */
 
 /**
  * Targeting types that cover an area.
@@ -3050,26 +2853,8 @@ DND5E.hitDieTypes = ["d4", "d6", "d8", "d10", "d12"];
 /* -------------------------------------------- */
 
 /**
- * Configuration data for rest types.
- *
- * @typedef {object} RestConfiguration
- * @property {Record<string, number>} duration      Duration of different rest variants in minutes.
- * @property {string} label                         Localized label for the rest type.
- * @property {string} icon                          Icon representing this rest type. Can be either a set of FontAwesome
- *                                                  classes or an image path.
- * @property {string[]} [activationPeriods]         Activation types that should be displayed in the chat card.
- * @property {number} [exhaustionDelta]             Delta exhaustion to apply to creatures undergoing the rest.
- * @property {boolean} [recoverHitDice]             Should hit dice be recovered during this rest?
- * @property {boolean} [recoverHitPoints]           Should hit points be recovered during this rest?
- * @property {string[]} [recoverPeriods]            What recovery periods should be applied when this rest is taken. The
- *                                                  ordering of the periods determines which is applied if more than one
- *                                                  recovery profile is found.
- * @property {Set<string>} [recoverSpellSlotTypes]  Types of spellcasting slots to recover during this rest.
- */
-
-/**
  * Types of rests.
- * @enum {RestConfiguration}
+ * @enum {RestTypeConfiguration}
  */
 DND5E.restTypes = {
   short: {
@@ -3235,53 +3020,10 @@ const pactCastingProgression = DND5E.pactCastingProgression = {
 /* -------------------------------------------- */
 
 /**
- * @typedef SpellcastingMethod5e
- * @property {string} label                                              The human-readable label.
- * @property {"none"|"single"|"multi"} [type="none"]                     "none" - No spell slots.
- *                                                                       "single" - Spell slots of a single level only.
- *                                                                       "multi" - Spell slots of multiple levels.
- * @property {SpellcastingTable5e|SpellcastingTableSingle5e} [table]     The spell slot progression table.
- * @property {string} [img]                                              The icon to use if this spellcasting method is
- *                                                                       favorited.
- * @property {number} order                                              The ordering of this spellcasting method on an
- *                                                                       actor sheet's spells tab, ascending.
- * @property {boolean} [cantrips]                                        Whether this spellcasting method includes
- *                                                                       cantrips.
- * @property {object} [exclusive]                                        Exclusivity options.
- * @property {boolean} [exclusive.slots]                                 Whether the slots provided by this spellcasting
- *                                                                       method may only be used to cast spells that use
- *                                                                       this spellcasting method.
- * @property {boolean} [exclusive.spells]                                Whether spells that use this spellcasting
- *                                                                       method may only be cast with slots provided by
- *                                                                       this spellcasting method.
- * @property {boolean} [prepares]                                        Whether spells using this method are variably
- *                                                                       available for casting. In 2024 this term was
- *                                                                       unified to 'prepares', but 2014 uses different
- *                                                                       nomenclature for different classes.
- * @property {Record<string, SpellcastingProgression5e>} [progression]   Spell slot progressions available for this
- *                                                                       method.
- */
-
-/**
- * @typedef {number[][]} SpellcastingTable5e
- */
-
-/**
- * @typedef {Record<number, SpellcastingTableEntry5e>} SpellcastingTableSingle5e
- */
-
-/**
- * @typedef SpellcastingTableEntry5e
- * @property {number} slots  The number of slots available.
- * @property {number} level  The level of the slots.
- */
-
-/**
- * @typedef SpellcastingProgression5e
- * @property {string} label       The human-readable label.
- * @property {number} divisor     How much this progression mode contributes to the base progression of the spellcasting
- *                                method.
- * @property {boolean} [roundUp]  Whether to round up or down when determining contribution.
+ * @typedef {Partial<
+ *   SpellcastingModelData & SlotSpellcastingData & SingleLevelSpellcastingData & MultiLevelSpellcasting
+ * >} SpellcastingMethod5e
+ * @property {SpellcastingTable5e|SpellcastingTableSingle5e} [table]
  */
 
 /**
@@ -3351,12 +3093,6 @@ preLocalize("spellcasting.spell.progression", { key: "label" });
 preLocalize("spellcasting.pact.progression", { key: "label" });
 
 /* -------------------------------------------- */
-
-/**
- * @typedef SpellcastingPreparationState5e
- * @property {string} label  The human-readable label.
- * @property {number} value  A unique number representing this state.
- */
 
 /**
  * Spell preparation states.
@@ -3500,16 +3236,6 @@ preLocalize("spellScalingModes", { sort: true });
 /* -------------------------------------------- */
 
 /**
- * Configuration data for spell schools.
- *
- * @typedef {object} SpellSchoolConfiguration
- * @property {string} label        Localized label.
- * @property {string} icon         Spell school icon.
- * @property {string} fullKey      Fully written key used as alternate for enrichers.
- * @property {string} [reference]  Reference to a rule page describing this school.
- */
-
-/**
  * Schools to which a spell can belong.
  * @enum {SpellSchoolConfiguration}
  */
@@ -3587,25 +3313,19 @@ preLocalize("spellListTypes");
  * @enum {string}
  */
 DND5E.spellScrollIds = {
-  0: "rQ6sO7HDWzqMhSI3",
-  1: "9GSfMg0VOA2b4uFN",
-  2: "XdDp6CKh9qEvPTuS",
-  3: "hqVKZie7x9w3Kqds",
-  4: "DM7hzgL836ZyUFB1",
-  5: "wa1VF8TXHmkrrR35",
-  6: "tI3rWx4bxefNCexS",
-  7: "mtyw4NS1s7j2EJaD",
-  8: "aOrinPg7yuDZEuWr",
-  9: "O4YbkJkLlnsgUszZ"
+  0: "Compendium.dnd5e.equipment24.Item.dmgSpellScrollCa",
+  1: "Compendium.dnd5e.equipment24.Item.dmgSpellScroll1s",
+  2: "Compendium.dnd5e.equipment24.Item.dmgSpellScroll2n",
+  3: "Compendium.dnd5e.equipment24.Item.dmgSpellScroll3r",
+  4: "Compendium.dnd5e.equipment24.Item.dmgSpellScroll4t",
+  5: "Compendium.dnd5e.equipment24.Item.dmgSpellScroll5t",
+  6: "Compendium.dnd5e.equipment24.Item.dmgSpellScroll6t",
+  7: "Compendium.dnd5e.equipment24.Item.dmgSpellScroll7t",
+  8: "Compendium.dnd5e.equipment24.Item.dmgSpellScroll8t",
+  9: "Compendium.dnd5e.equipment24.Item.dmgSpellScroll9t"
 };
 
 /* -------------------------------------------- */
-
-/**
- * @typedef {object} SpellScrollValues
- * @property {number} bonus  Attack to hit bonus.
- * @property {number} dc     Saving throw DC.
- */
 
 /**
  * Spell scroll save DCs and attack bonus values based on spell level. If matching level isn't found,
@@ -3634,34 +3354,6 @@ DND5E.sourcePacks = {
 };
 
 /* -------------------------------------------- */
-
-/**
- * @import { TransformationSettingData } from "./data/settings/transformation-setting.mjs";
- */
-
-/**
- * @typedef TransformationConfiguration
- * @property {Record<string, TransformationFlagConfiguration>} effects
- * @property {Record<string, TransformationFlagConfiguration>} keep
- * @property {Record<string, TransformationFlagConfiguration>} merge
- * @property {Record<string, TransformationFlagConfiguration>} others
- * @property {Record<string, TransformationPresetConfiguration} presets
- */
-
-/**
- * @typedef TransformationFlagConfiguration
- * @property {string} label         Localized label for the flag.
- * @property {string} [hint]        Localized hint for the flag.
- * @property {boolean} [default]    This should be part of the default transformation settings.
- * @property {string[]} [disables]  Names of specific settings to disable, or whole categories if an `*` is used.
- */
-
-/**
- * @typedef TransformationPresetConfiguration
- * @property {string} icon                         Icon representing this preset on the button.
- * @property {string} label                        Localized label for the preset.
- * @property {TransformationSettingData} settings  Options that will be set for the preset.
- */
 
 /**
  * Settings that configuration how actors are changed when transformation is applied.
@@ -3749,6 +3441,9 @@ DND5E.transformation = {
     hp: {
       label: "DND5E.TRANSFORM.Setting.Keep.Health.Label"
     },
+    tempHP: {
+      label: "DND5E.TRANSFORM.Setting.Keep.TempHP.Label"
+    },
     resistances: {
       label: "DND5E.TRANSFORM.Setting.Keep.Resistances.Label"
     },
@@ -3779,7 +3474,7 @@ DND5E.transformation = {
       label: "DND5E.TRANSFORM.Preset.WildShape.Label",
       settings: {
         effects: new Set(["otherOrigin", "origin", "feat", "spell", "class", "background"]),
-        keep: new Set(["bio", "class", "feats", "hp", "languages", "mental", "type"]),
+        keep: new Set(["bio", "class", "feats", "hp", "languages", "mental", "tempHP", "type"]),
         merge: new Set(["saves", "skills"]),
         minimumAC: "(13 + @abilities.wis.mod) * sign(@subclasses.moon.levels)",
         spellLists: new Set(["subclass:moon"]),
@@ -3810,103 +3505,6 @@ preLocalize("transformation.keep", { keys: ["label", "hint"] });
 preLocalize("transformation.merge", { keys: ["label", "hint"] });
 preLocalize("transformation.other", { keys: ["label", "hint"], sort: true });
 preLocalize("transformation.presets", { key: "label", sort: true });
-
-/**
- * Settings to configure how actors are merged when polymorphing is applied.
- * @enum {string}
- * @deprecated since DnD5e 4.4, available until DnD5e 5.0
- */
-DND5E.polymorphSettings = new Proxy(DND5E.transformation, {
-  get(target, prop) {
-    if ( typeof prop !== "string" ) return target[prop];
-    foundry.utils.logCompatibilityWarning(
-      "`CONFIG.DND5E.polymorphSettings` is deprecated, use `CONFIG.DND5E.transformation` instead.",
-      { since: "DnD5e 4.4", until: "DnD5e 5.2", once: true }
-    );
-    const [category, key] = TransformationSetting._splitDeprecatedKey(prop);
-    return target[category]?.[key]?.label;
-  },
-  set(target, prop, value) {
-    foundry.utils.logCompatibilityWarning(
-      "`CONFIG.DND5E.polymorphSettings` is deprecated, use `CONFIG.DND5E.transformation` instead.",
-      { since: "DnD5e 4.4", until: "DnD5e 5.2", once: true }
-    );
-    const [category, key] = TransformationSetting._splitDeprecatedKey(prop);
-    if ( !category ) return false;
-    target[category][key] = { label: value };
-    return true;
-  }
-});
-
-/**
- * Settings to configure how actors are effects are merged when polymorphing is applied.
- * @enum {string}
- * @deprecated since DnD5e 4.4, available until DnD5e 5.0
- */
-DND5E.polymorphEffectSettings = new Proxy(DND5E.transformation, {
-  get(target, prop) {
-    if ( typeof prop !== "string" ) return target[prop];
-    foundry.utils.logCompatibilityWarning(
-      "`CONFIG.DND5E.polymorphEffectSettings` is deprecated, use `CONFIG.DND5E.transformation` instead.",
-      { since: "DnD5e 4.4", until: "DnD5e 5.2", once: true }
-    );
-    if ( prop === "keepAE" ) return target.effects.all?.label;
-    const [category, key] = TransformationSetting._splitDeprecatedKey(prop);
-    return target[category]?.[key]?.label;
-  },
-  set(target, prop, value) {
-    foundry.utils.logCompatibilityWarning(
-      "`CONFIG.DND5E.polymorphEffectSettings` is deprecated, use `CONFIG.DND5E.transformation` instead.",
-      { since: "DnD5e 4.4", until: "DnD5e 5.2", once: true }
-    );
-    if ( prop === "keepAE" ) {
-      target.effects.all = { label: value };
-      return true;
-    }
-    const [category, key] = TransformationSetting._splitDeprecatedKey(prop);
-    if ( !category ) return false;
-    target[category][key] = { label: value };
-    return true;
-  }
-});
-
-/**
- * Settings to configure how actors are merged when preset polymorphing is applied.
- * @enum {object}
- */
-DND5E.transformationPresets = new Proxy(DND5E.transformation, {
-  get(target, prop) {
-    if ( typeof prop !== "string" ) return target[prop];
-    foundry.utils.logCompatibilityWarning(
-      "`CONFIG.DND5E.transformationPresets` is deprecated, use `CONFIG.DND5E.transformation.presets` instead.",
-      { since: "DnD5e 4.4", until: "DnD5e 5.2", once: true }
-    );
-    const preset = target.presets[prop];
-    if ( !preset ) return;
-    const setting = new TransformationSetting(preset.settings);
-    return {
-      icon: preset.icon,
-      label: preset.label,
-      options: {
-        ...setting._toDeprecatedConfig(),
-        preset: prop
-      }
-    };
-  },
-  set(target, prop, value) {
-    foundry.utils.logCompatibilityWarning(
-      "`CONFIG.DND5E.transformationPresets` is deprecated, use `CONFIG.DND5E.transformation.presets` instead.",
-      { since: "DnD5e 4.4", until: "DnD5e 5.2", once: true }
-    );
-    const preset = {
-      label: value.label,
-      icon: value.icon,
-      settings: TransformationSetting._fromDeprecatedConfig(value.options ?? {})
-    };
-    target.presets[prop] = preset.toObject();
-    return true;
-  }
-});
 
 /* -------------------------------------------- */
 
@@ -3974,42 +3572,6 @@ DND5E.consumableResources = [
 ];
 
 /* -------------------------------------------- */
-
-/**
- * @typedef {object} _StatusEffectConfig5e
- * @property {string} img                    Image used to represent the condition on the token.
- * @property {number} [order]                Order status to the start of the token HUD, rather than alphabetically.
- * @property {string} [reference]            UUID of a journal entry with details on this condition.
- * @property {string} [special]              Set this condition as a special status effect under this name.
- * @property {string[]} [riders]             Additional conditions, by id, to apply as part of this condition.
- * @property {string} [exclusiveGroup]       Any status effects with the same group will not be able to be applied at
- *                                           the same time through the token HUD (multiple statuses applied through
- *                                           other effects can still coexist).
- * @property {number} [coverBonus]           A bonus this condition provides to AC and dexterity saving throws.
- * @property {boolean} [neverBlockMovement]  If true, a token with this status will not block movement for other tokens.
- */
-
-/**
- * Configuration data for system status effects.
- * @typedef {Omit<StatusEffectConfig, "img"> & _StatusEffectConfig5e} StatusEffectConfig5e
- */
-
-/**
- * @typedef {object} _ConditionConfiguration
- * @property {string} name         Localized name for the condition.
- * @property {boolean} [pseudo]    Is this a pseudo-condition, i.e. one that does not appear in the conditions appendix
- *                                 but acts as a status effect?
- * @property {number} [levels]     The number of levels of exhaustion an actor can obtain.
- * @property {{ rolls: number, speed: number }} [reduction]  Amount D20 Tests & Speed are reduced per exhaustion level
- *                                                           when using the modern rules. Speed reduction is measured
- *                                                           in the default imperial units and converted to metric
- *                                                           if necessary.
- */
-
-/**
- * Configuration data for system conditions.
- * @typedef {Omit<StatusEffectConfig5e, "name"> & _ConditionConfiguration} ConditionConfiguration
- */
 
 /**
  * Conditions that can affect an actor.
@@ -4162,14 +3724,14 @@ DND5E.conditionTypes = {
     riders: ["prone"]
   }
 };
-preLocalize("conditionTypes", { keys: ["name", "label"], sort: true }); // TODO: Remove 'label' in 5.2.
+preLocalize("conditionTypes", { key: "name", sort: true });
 
 /* -------------------------------------------- */
 
 /**
  * Various effects of conditions and which conditions apply it. Either keys for the conditions,
  * and with a number appended for a level of exhaustion.
- * @enum {object}
+ * @enum {Set<string>}
  */
 DND5E.conditionEffects = {
   noMovement: new Set(["exhaustion-5", "grappled", "paralyzed", "petrified", "restrained", "unconscious"]),
@@ -4192,7 +3754,7 @@ DND5E.conditionEffects = {
 /**
  * Extra status effects not specified in `conditionTypes`. If the ID matches a core-provided effect, then this
  * data will be merged into the core data.
- * @enum {Omit<StatusEffectConfig5e, "img"> & { icon: string }}
+ * @enum {StatusEffectConfig5e}
  */
 DND5E.statusEffects = {
   burrowing: {
@@ -4282,7 +3844,7 @@ DND5E.neverBlockStatuses = new Set();
 
 /**
  * Configuration for the special bloodied status effect.
- * @type {{ name: string, img: string, threshold: number }}
+ * @type {{ name: string, icon: string, threshold: number }}
  */
 DND5E.bloodied = {
   name: "EFFECT.DND5E.StatusBloodied",
@@ -4363,14 +3925,8 @@ preLocalize("communicationTypes", { key: "label" });
 /* -------------------------------------------- */
 
 /**
- * @typedef HabitatConfiguration5e
- * @property {string} label        The human-readable habitat name.
- * @property {boolean} [subtypes]  Whether this habitat is divided into sub-types.
- */
-
-/**
  * NPC habitats.
- * @type {Record<string, HabitatConfiguration5e>}
+ * @enum {HabitatConfiguration5e}
  */
 DND5E.habitats = {
   any: {
@@ -4419,13 +3975,8 @@ preLocalize("habitats", { key: "label" });
 /* -------------------------------------------- */
 
 /**
- * @typedef TreasureConfiguration5e
- * @property {string} label  The human-readable treasure category name.
- */
-
-/**
  * NPC Treasure
- * @type {Record<string, TreasureConfiguration5e>}
+ * @enum {TreasureConfiguration5e}
  */
 DND5E.treasure = {
   any: {
@@ -4516,33 +4067,6 @@ DND5E.ENCOUNTER_DIFFICULTY = [
 DND5E.epicBoonInterval = 30000;
 
 /* -------------------------------------------- */
-
-/**
- * Trait configuration information.
- *
- * @typedef {object} TraitConfiguration
- * @property {object} labels
- * @property {string} labels.title         Localization key for the trait name.
- * @property {string} labels.localization  Prefix for a localization key that can be used to generate various
- *                                         plural variants of the trait type.
- * @property {string} [labels.all]         Localization to use for the "all" option for this trait. If not provided,
- *                                         then no all option will be available.
- * @property {string} icon                 Path to the icon used to represent this trait.
- * @property {string} [actorKeyPath]       If the trait doesn't directly map to an entry as `traits.[key]`, where is
- *                                         this trait's data stored on the actor?
- * @property {string} [configKey]          If the list of trait options doesn't match the name of the trait, where can
- *                                         the options be found within `CONFIG.DND5E`?
- * @property {boolean|number} [dataType]   Type of data represented.
- * @property {string} [labelKeyPath]       If config is an enum of objects, where can the label be found?
- * @property {object} [subtypes]           Configuration for traits that take some sort of base item.
- * @property {string} [subtypes.keyPath]   Path to subtype value on base items, should match a category key.
- *                                         Deprecated in favor of the standardized `system.type.value`.
- * @property {string[]} [subtypes.ids]     Key for base item ID objects within `CONFIG.DND5E`.
- * @property {object} [children]           Mapping of category key to an object defining its children.
- * @property {boolean} [sortCategories]    Whether top-level categories should be sorted.
- * @property {boolean} [expertise]         Can an actor receive expertise in this trait?
- * @property {boolean} [mastery]           Can an actor receive mastery in this trait?
- */
 
 /**
  * Configurable traits on actors.
@@ -4661,7 +4185,7 @@ preLocalize("traits", { keys: ["labels.title", "labels.all"] });
 
 /**
  * Modes used within a trait advancement.
- * @enum {object}
+ * @enum {{ label: string, hint: string }}
  */
 DND5E.traitModes = {
   default: {
@@ -4690,21 +4214,8 @@ preLocalize("traitModes", { keys: ["label", "hint"] });
 /* -------------------------------------------- */
 
 /**
- * @typedef {object} CharacterFlagConfig
- * @property {string} name
- * @property {string} hint
- * @property {string} section
- * @property {typeof boolean|string|number} type
- * @property {string} placeholder
- * @property {string[]} [abilities]
- * @property {Object<string, string>} [choices]
- * @property {boolean} [deprecated]               Hide the flag unless it already has a value.
- * @property {string[]} [skills]
- */
-
-/**
  * Special character flags.
- * @enum {CharacterFlagConfig}
+ * @enum {CharacterFlagConfiguration}
  */
 DND5E.characterFlags = {
   diamondSoul: {
@@ -4812,12 +4323,6 @@ DND5E.characterFlags = {
 };
 preLocalize("characterFlags", { keys: ["name", "hint", "section"] });
 
-/**
- * Flags allowed on actors. Any flags not in the list may be deleted during a migration.
- * @type {string[]}
- */
-DND5E.allowedActorFlags = ["isPolymorphed", "originalActor"].concat(Object.keys(DND5E.characterFlags));
-
 /* -------------------------------------------- */
 
 /**
@@ -4834,11 +4339,7 @@ preLocalize("groupTypes");
 
 /**
  * Configuration information for activity types.
- *
- * @typedef {object} ActivityTypeConfiguration
- * @property {typeof Activity} documentClass  The activity's document class.
- * @property {boolean} [configurable=true]    Whether the activity is editable via the UI.
- * @property {boolean} [hidden]               Should this activity type be hidden in the selection dialog?
+ * @enum {ActivityTypeConfiguration}
  */
 DND5E.activityTypes = {
   attack: {
@@ -4881,15 +4382,6 @@ DND5E.activityTypes = {
 };
 
 /* -------------------------------------------- */
-
-/**
- * Configuration information for advancement types.
- *
- * @typedef {object} AdvancementTypeConfiguration
- * @property {typeof Advancement} documentClass  The advancement's document class.
- * @property {Set<string>} validItemTypes        What item types this advancement can be used with.
- * @property {boolean} [hidden]                  Should this advancement type be hidden in the selection dialog?
- */
 
 const _ALL_ITEM_TYPES = ["background", "class", "feat", "race", "subclass"];
 
@@ -4936,9 +4428,16 @@ DND5E.advancementTypes = {
 
 /**
  * Default artwork configuration for each Document type and sub-type.
- * @type {Record<string, Record<string, string>>}
+ * @enum {Record<string, string>}
  */
 DND5E.defaultArtwork = {
+  Actor: {
+    character: "systems/dnd5e/icons/svg/actors/character.svg",
+    encounter: "systems/dnd5e/icons/svg/actors/encounter.svg",
+    group: "systems/dnd5e/icons/svg/actors/group.svg",
+    npc: "systems/dnd5e/icons/svg/actors/npc.svg",
+    vehicle: "systems/dnd5e/icons/svg/actors/vehicle.svg"
+  },
   Item: {
     background: "systems/dnd5e/icons/svg/items/background.svg",
     class: "systems/dnd5e/icons/svg/items/class.svg",
@@ -4957,22 +4456,85 @@ DND5E.defaultArtwork = {
 };
 
 /* -------------------------------------------- */
-/*  Requests                                    */
+/*  Calendar                                    */
 /* -------------------------------------------- */
 
 /**
- * @callback RequestCallback5e
- * @param {Actor5e} actor               The actor fulfilling the request.
- * @param {ChatMessage5e} request       The request message.
- * @param {object} config               Additional request configuration.
- * @param {RequestOptions5e} [options]  Additional options provided at fulfillment time.
- * @returns {Promise<ChatMessage5e>}    Result chat message that will be associated with request.
+ * Configuration information for the calendar UI.
+ * @type {CalendarHUDConfiguration}
  */
+DND5E.calendar = {
+  application: CalenderHUD,
+  calendars: [
+    {
+      value: "gregorian",
+      label: "DND5E.CALENDAR.Gregorian",
+      config: foundry.data.SIMPLIFIED_GREGORIAN_CALENDAR_CONFIG
+    },
+    {
+      value: "greyhawk",
+      label: "DND5E.CALENDAR.Greyhawk.Name",
+      config: CALENDAR_OF_GREYHAWK,
+      class: CalendarGreyhawk
+    },
+    {
+      value: "harptos",
+      label: "DND5E.CALENDAR.Harptos.Name",
+      config: CALENDAR_OF_HARPTOS,
+      class: CalendarHarptos
+    },
+    {
+      value: "khorvaire",
+      label: "DND5E.CALENDAR.Khorvaire.Name",
+      config: CALENDAR_OF_KHORVAIRE,
+      class: CalendarKhorvaire
+    }
+  ],
+  formatters: [
+    {
+      value: "monthDay",
+      label: "DND5E.CALENDAR.Formatters.MonthDay.Label",
+      formatter: "formatMonthDay",
+      group: "DND5E.CALENDAR.Formatters.Date"
+    },
+    {
+      value: "monthDayYear",
+      label: "DND5E.CALENDAR.Formatters.MonthDayYear.Label",
+      formatter: "formatMonthDayYear",
+      group: "DND5E.CALENDAR.Formatters.Date"
+    },
+    {
+      value: "approximateDate",
+      label: "DND5E.CALENDAR.Formatters.ApproximateDate.Label",
+      formatter: "formatApproximateDate",
+      group: "DND5E.CALENDAR.Formatters.Date"
+    },
+    {
+      value: "hoursMinutes",
+      label: "DND5E.CALENDAR.Formatters.HoursMinutes.Label",
+      formatter: "formatHoursMinutes",
+      group: "DND5E.CALENDAR.Formatters.Time"
+    },
+    {
+      value: "hoursMinutesSeconds",
+      label: "DND5E.CALENDAR.Formatters.HoursMinutesSeconds.Label",
+      formatter: "formatHoursMinutesSeconds",
+      group: "DND5E.CALENDAR.Formatters.Time"
+    },
+    {
+      value: "approximateTime",
+      label: "DND5E.CALENDAR.Formatters.ApproximateTime.Label",
+      formatter: "formatApproximateTime",
+      group: "DND5E.CALENDAR.Formatters.Time"
+    }
+  ]
+};
+preLocalize("calendar.calendars", { keys: ["label", "group"] });
+preLocalize("calendar.formatters", { keys: ["label", "group"] });
 
-/**
- * @typedef RequestOptions5e
- * @property {Event} [event]  The event forwarded from the user clicking the request button.
- */
+/* -------------------------------------------- */
+/*  Requests                                    */
+/* -------------------------------------------- */
 
 /**
  * Handler functions for named request/response operations
@@ -4986,14 +4548,6 @@ DND5E.requests = {
 /* -------------------------------------------- */
 /*  Rules                                       */
 /* -------------------------------------------- */
-
-/**
- * Configuration information for rule types.
- *
- * @typedef {object} RuleTypeConfiguration
- * @property {string} label         Localized label for the rule type.
- * @property {string} [references]  Key path for a configuration object that contains reference data.
- */
 
 /**
  * Types of rules that can be used in rule pages and the &Reference enricher.
@@ -5080,10 +4634,10 @@ DND5E.rules = {
   brightlight: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.RnMokVPyKGbbL8vi",
   dimlight: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.n1Ocpbyhr6HhgbCG",
   darkness: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.4dfREIDjG5N4fvxd",
-  blindsight: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.sacjsfm9ZXnw4Tqc",
-  darkvision: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.ldmA1PbnEGVkmE11",
-  tremorsense: "Compendium.dnd5e.rules.JournalEntry.eVtpEGXjA2tamEIJ.JournalEntryPage.8AIlZ95v54mL531X",
-  truesight: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.kNa8rJFbtaTM3Rmk",
+  blindsight: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.tdtmXZbUIOZGSnKT",
+  darkvision: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.7vQ1hLQ5fS6SSUqF",
+  tremorsense: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.r64UrNusMhwJVnxb",
+  truesight: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.be7g0q1xBAwb8drv",
   food: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.jayo7XVgGnRCpTW0",
   water: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.iIEI87J7lr2sqtb5",
   resting: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.dpHJXYLigIdEseIb",
@@ -5104,7 +4658,7 @@ DND5E.rules = {
   space: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.WIA5bs3P45PmO3OS",
   squeezing: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.wKtOwagDAiNfVoPS",
   attack: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.f4fZHwBvpbpzRyn4",
-  castaspell: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.GLwN36E4WXn3Cp4Z",
+  castaspell: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.iIIDUsmSOkL0xNzF",
   dash: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.6l6nBKip4LqB1sCU",
   disengage: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.w1AGsemFERfjqWNx",
   dodge: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.3YJIuyCMmuUrfmuX",
@@ -5112,7 +4666,7 @@ DND5E.rules = {
   hide: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.rqhOsUY4wWa1oHTy",
   ready: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.nI9tN6Oq7fCV7hcA",
   search: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.ySj4gYZ4ADZoia7R",
-  useanobject: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.ljqhJx8Qxu2ivo69",
+  useanobject: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.UDlogfdiT2uYEZz4",
   attackrolls: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.W8uJrd1D8NeOuawp",
   unseenattackers: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.5ZJNwEPlsGurecg5",
   unseentargets: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.5ZJNwEPlsGurecg5",
@@ -5122,7 +4676,7 @@ DND5E.rules = {
   meleeattacks: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.GTk6emvzNxl8Oosl",
   reach: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.hgZ5ZN4B3y7tmFlt",
   unarmedstrike: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.xJjJ4lhymAYXAOvO",
-  opportunityattacks: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.zeU0NyCyP10lkLg3",
+  opportunityattacks: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.eNvzQabiTqTtfzis",
   twoweaponfighting: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.FQTS08uH74A6psL2",
   grappling: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.YSLWJcQCP6kzsPql",
   escapingagrapple: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.2TZKy9YbMN3ZY3h8",
@@ -5143,9 +4697,9 @@ DND5E.rules = {
   deathsavingthrows: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.JL8LePEJQYFdNuLL",
   deathsaves: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.JL8LePEJQYFdNuLL",
   stabilizing: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.r1CgZXLcqFop6Dlx",
-  knockingacreatureout: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.uEwjgKGuCRTNADYv",
-  temporaryhitpoints: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.AW6HpJZHqxfESXaq",
-  temphp: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.AW6HpJZHqxfESXaq",
+  knockingacreatureout: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.PjXBMVcEaWuKjder",
+  temporaryhitpoints: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.qOKtJt8CB2qRaTNA",
+  temphp: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.qOKtJt8CB2qRaTNA",
   mounting: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.MFpyvUIdcBpC9kIE",
   dismounting: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.MFpyvUIdcBpC9kIE",
   controllingamount: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.khmR2xFk1NxoQUgZ",
@@ -5221,35 +4775,9 @@ DND5E.rules = {
   hazards: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.5hyEitPd1Kb27fP5",
   bloodied: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.shZaSIlFPpHufPFn",
   jumping: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.aaJOlRhI1H6vAxt9",
-  resistance: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.Uk3xhCTvEfx8BN1O"
+  resistance: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.Uk3xhCTvEfx8BN1O",
+  stable: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.klXWp4c90n7Kt5LB"
 };
-
-/* -------------------------------------------- */
-/*  Token Rings Framework                       */
-/* -------------------------------------------- */
-
-/**
- * Token Rings configuration data
- *
- * @typedef {object} TokenRingsConfiguration
- * @property {Record<string, string>} effects        Localized names of the configurable ring effects.
- * @property {string} spriteSheet                    The sprite sheet json source.
- * @property {typeof BaseSamplerShader} shaderClass  The shader class definition associated with the token ring.
- */
-
-/**
- * @type {TokenRingsConfiguration}
- */
-DND5E.tokenRings = {
-  effects: {
-    RING_PULSE: "DND5E.TokenRings.Effects.RingPulse",
-    RING_GRADIENT: "DND5E.TokenRings.Effects.RingGradient",
-    BKG_WAVE: "DND5E.TokenRings.Effects.BackgroundWave"
-  },
-  spriteSheet: "systems/dnd5e/tokens/composite/token-rings.json",
-  shaderClass: null
-};
-preLocalize("tokenRings.effects");
 
 /* -------------------------------------------- */
 /*  Sources                                     */
@@ -5287,6 +4815,7 @@ Object.defineProperty(DND5E, "enrichmentLookup", {
     if ( !_enrichmentLookup ) {
       _enrichmentLookup = {
         abilities: foundry.utils.deepClone(DND5E.abilities),
+        languages: _flattenConfig(DND5E.languages, { labelKey: "label", skipEntry: (k, d) => d.selectable === false }),
         skills: foundry.utils.deepClone(DND5E.skills),
         spellSchools: foundry.utils.deepClone(DND5E.spellSchools),
         tools: foundry.utils.deepClone(DND5E.tools)
@@ -5302,6 +4831,30 @@ Object.defineProperty(DND5E, "enrichmentLookup", {
   },
   enumerable: true
 });
+
+/* -------------------------------------------- */
+
+/**
+ * Create a flattened version of a nested config (such as CONFIG.DND5E.languages) so all leaf entries are at
+ * a single level.
+ * @param {object} config
+ * @param {object} [options={}]
+ * @param {string} [options.labelKey]        If provided, simplify all included objects to just the label.
+ * @param {Function} [options.skipCategory]  Callback passed the key and data that should return a boolean to skip a
+ *                                           category but not its children when creating flattened object.
+ * @returns {object}
+ */
+function _flattenConfig(config, { labelKey, skipEntry }={}) {
+  const obj = {};
+  for ( const [key, data] of Object.entries(config) ) {
+    if ( !skipEntry?.(key, data) ) {
+      if ( labelKey && (foundry.utils.getType(data) === "Object") ) obj[key] = data[labelKey];
+      else obj[key] = data;
+    }
+    if ( data.children ) Object.assign(obj, _flattenConfig(data.children, { labelKey, skipEntry }));
+  }
+  return obj;
+}
 
 /* -------------------------------------------- */
 

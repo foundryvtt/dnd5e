@@ -1,0 +1,45 @@
+_id: mmEarthGlide0000
+name: Earth Glide
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] can burrow through
+      nonmagical, unworked earth and stone. While doing so, the [[lookup @name
+      lowercase]] doesn't disturb the material it moves through.</p>
+    chat: ''
+  identifier: earth-glide
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/magic/earth/projectile-stone-landslide.webp
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736469448876
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 4300000
+ownership:
+  default: 0
+_key: '!items!mmEarthGlide0000'

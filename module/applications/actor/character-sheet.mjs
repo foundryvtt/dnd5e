@@ -9,6 +9,12 @@ import * as Trait from "../../documents/actor/trait.mjs";
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
+ * @import { FavoriteData5e } from "../../data/abstract/_types.mjs";
+ * @import { ActorFavorites5e } from "../../data/actor/_types.mjs";
+ * @import { FacilityOccupants } from "../../data/item/_types.mjs";
+ */
+
+/**
  * Extension of base actor sheet for characters.
  */
 export default class CharacterActorSheet extends BaseActorSheet {
@@ -338,7 +344,6 @@ export default class CharacterActorSheet extends BaseActorSheet {
     for ( let ability of Object.values(this._prepareAbilities(context)) ) {
       ability = context.saves[ability.key] = { ...ability };
       ability.class = this.constructor.PROFICIENCY_CLASSES[context.editable ? ability.baseProf : ability.proficient];
-      ability.hover = CONFIG.DND5E.proficiencyLevels[ability.proficient];
     }
     if ( this.actor.statuses.has(CONFIG.specialStatusEffects.CONCENTRATING) || context.editable ) {
       context.saves.concentration = {
@@ -655,6 +660,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       const { id, type, sort } = f;
       const favorite = await fromUuid(id, { relative: this.actor });
       if ( !favorite && ((type === "item") || (type === "effect") || (type === "activity")) ) return arr;
+      if ( favorite?.dependentOrigin?.active === false ) return arr;
       arr = await arr;
 
       let data;
@@ -854,11 +860,11 @@ export default class CharacterActorSheet extends BaseActorSheet {
   async _prepareItemFeature(item, ctx) {
     if ( item.type === "facility" ) return this._prepareItemFacility(item, ctx);
 
-    super._prepareItemFeature(item, ctx);
+    await super._prepareItemFeature(item, ctx);
 
     const [originId] = (item.getFlag("dnd5e", "advancementRoot") ?? item.getFlag("dnd5e", "advancementOrigin"))
       ?.split(".") ?? [];
-    const group = this.actor.items.get(originId);
+    const group = item.parent.items.get(originId);
     ctx.groups.origin = "other";
     switch ( group?.type ) {
       case "race": ctx.groups.origin = "species"; break;
@@ -1087,6 +1093,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
    * @param {HTMLElement} target  Button that was clicked.
    */
   static #useFacility(event, target) {
+    if ( !target.classList.contains("rollable") ) return;
     const { facilityId } = target.closest("[data-facility-id]")?.dataset ?? {};
     const facility = this.actor.items.get(facilityId);
     facility?.use({ legacy: false, chooseActivity: true, event });
@@ -1108,7 +1115,9 @@ export default class CharacterActorSheet extends BaseActorSheet {
       if ( favorite.type === "container" ) favorite.sheet.render({ force: true });
       else favorite.use({ event });
     }
-    else if ( favorite instanceof dnd5e.dataModels.activity.BaseActivityData ) favorite.use({ event });
+    else if ( favorite instanceof dnd5e.dataModels.activity.BaseActivityData ) {
+      if ( favorite.canUse ) favorite.use({ event });
+    }
     else if ( favorite instanceof dnd5e.documents.ActiveEffect5e ) favorite.update({ disabled: !favorite.disabled });
     else {
       const { key } = target.closest("[data-key]")?.dataset ?? {};

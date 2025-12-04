@@ -87,8 +87,14 @@ system:
       effects:
         - _id: UeuDQeM3fRIB0aMN
           onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
+        value: ''
+        units: ft
+        special: ''
       target:
         template:
           contiguous: false
@@ -116,6 +122,13 @@ system:
       img: ''
       appliedEffects:
         - UeuDQeM3fRIB0aMN
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: true
   uses:
     spent: 0
     recovery: []
@@ -141,7 +154,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   identified: true
   unidentified:
@@ -306,14 +319,13 @@ flags:
     riders:
       activity:
         - LOKYV2JQKWQlJxxa
-      effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712704160
+  modifiedTime: 1764615243935
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 15400000

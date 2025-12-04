@@ -12,12 +12,13 @@ system:
           attack: null
           save: null
           override: false
-        level: null
+        level: 1
         properties:
           - vocal
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: 1QtWQjNgCeQvsRXb
       sort: 100000
       activation:
@@ -29,7 +30,8 @@ system:
           allowed: false
         spellSlot: true
         targets: []
-      description: {}
+      description:
+        chatFlavor: ''
       duration:
         units: inst
         concentration: false
@@ -47,6 +49,15 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
+      name: ''
+      img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     lmhyPV4BzFsooFUy:
       type: cast
       spell:
@@ -55,12 +66,13 @@ system:
           attack: null
           save: null
           override: false
-        level: null
+        level: 1
         properties:
           - vocal
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: lmhyPV4BzFsooFUy
       sort: 300000
       activation:
@@ -72,7 +84,8 @@ system:
           allowed: false
         spellSlot: true
         targets: []
-      description: {}
+      description:
+        chatFlavor: ''
       duration:
         units: inst
         concentration: false
@@ -90,6 +103,15 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
+      name: ''
+      img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     FdoTXcNrE4D5k8TZ:
       type: cast
       spell:
@@ -98,12 +120,13 @@ system:
           attack: null
           save: null
           override: false
-        level: null
+        level: 1
         properties:
           - vocal
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: FdoTXcNrE4D5k8TZ
       sort: 400000
       activation:
@@ -115,7 +138,8 @@ system:
           allowed: false
         spellSlot: true
         targets: []
-      description: {}
+      description:
+        chatFlavor: ''
       duration:
         units: inst
         concentration: false
@@ -133,6 +157,15 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
+      name: ''
+      img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     CLHEZxKXJVquJbgo:
       type: cast
       spell:
@@ -141,12 +174,13 @@ system:
           attack: null
           save: null
           override: false
-        level: null
+        level: 2
         properties:
           - vocal
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: CLHEZxKXJVquJbgo
       sort: 500000
       activation:
@@ -158,7 +192,8 @@ system:
           allowed: false
         spellSlot: true
         targets: []
-      description: {}
+      description:
+        chatFlavor: ''
       duration:
         units: inst
         concentration: false
@@ -176,6 +211,15 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
+      name: ''
+      img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     IU45FUsDoVTzMBip:
       type: utility
       name: Plant Rod
@@ -194,7 +238,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -204,6 +247,9 @@ system:
         value: '10'
       effects:
         - _id: fHNlrUKZ6KWRNTmy
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: self
@@ -234,6 +280,13 @@ system:
       img: ''
       appliedEffects:
         - fHNlrUKZ6KWRNTmy
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
   uses:
     spent: 0
     recovery:
@@ -272,7 +325,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   identified: true
   unidentified:
@@ -371,18 +424,14 @@ effects:
       exportSource: null
     _key: '!items.effects!dmgRodOfAlertnes.fHNlrUKZ6KWRNTmy'
 folder: XVIITMl9kCCSjZQz
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712703055
+  modifiedTime: 1764616281604
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 200000

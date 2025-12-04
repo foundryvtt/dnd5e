@@ -93,6 +93,9 @@ system:
       effects:
         - _id: Rg9qnmIespepasJN
           onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: self
@@ -124,7 +127,15 @@ system:
           calculation: ''
           formula: '15'
       img: ''
-      appliedEffects: []
+      appliedEffects:
+        - Rg9qnmIespepasJN
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
     qBF3OnmfMzdXgxM8:
       type: save
       name: 'Earthquake: Save'
@@ -142,7 +153,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -152,6 +163,9 @@ system:
       effects:
         - _id: Rg9qnmIespepasJN
           onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
       target:
@@ -183,6 +197,13 @@ system:
       img: ''
       appliedEffects:
         - Rg9qnmIespepasJN
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
     4bCa4M3YWvFBx4Hz:
       type: damage
       name: 'Earthquake: Object Damage'
@@ -240,10 +261,15 @@ system:
             bonus: ''
             types:
               - bludgeoning
-            scaling:
-              number: 1
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
     hCBV3X0BsH2JPEJr:
       type: save
       name: 'Earthquake: Fissure'
@@ -268,6 +294,9 @@ system:
       effects:
         - _id: Rg9qnmIespepasJN
           onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: true
         units: ft
@@ -303,6 +332,13 @@ system:
       img: ''
       appliedEffects:
         - Rg9qnmIespepasJN
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
     yLcHX3mcjhGVnbPj:
       type: save
       name: 'Earthquake: Concentration Save'
@@ -353,6 +389,13 @@ system:
           formula: '20'
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
   uses:
     spent: 0
     recovery:
@@ -393,7 +436,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   identified: true
   unidentified:
@@ -526,18 +569,14 @@ effects:
       exportSource: null
     _key: '!items.effects!dmgThunderousGre.Rg9qnmIespepasJN'
 folder: kie870i5kr7yuxO8
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745611687561
+  modifiedTime: 1764615270010
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

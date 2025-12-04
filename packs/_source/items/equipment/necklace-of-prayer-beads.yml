@@ -41,7 +41,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: ''
     license: CC-BY-4.0
     rules: '2014'
@@ -100,6 +100,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: JEZSgGmMUnJjLZnY
       sort: 0
       activation:
@@ -114,7 +115,6 @@ system:
         targets:
           - type: activityUses
             value: '1'
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -137,6 +137,12 @@ system:
         max: ''
       name: Bead of Blessing (bless)
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     N52T1PHwMzYlRrd9:
       type: cast
       spell:
@@ -150,6 +156,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: N52T1PHwMzYlRrd9
       sort: 0
       activation:
@@ -165,7 +172,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -188,6 +194,12 @@ system:
         max: ''
       name: Bead of Curing (cure wounds)
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     elE3WRvgeS74pI8C:
       type: cast
       spell:
@@ -201,6 +213,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: elE3WRvgeS74pI8C
       sort: 0
       activation:
@@ -215,7 +228,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -238,6 +250,12 @@ system:
         max: ''
       name: Bead of Curing (lesser restoration)
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     Cgqj8eZR8ZiKtnsS:
       type: cast
       spell:
@@ -251,6 +269,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: Cgqj8eZR8ZiKtnsS
       sort: 0
       activation:
@@ -265,7 +284,6 @@ system:
         targets:
           - type: activityUses
             value: '1'
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -290,6 +308,12 @@ system:
         max: ''
       name: Bead of Favor (greater restoration)
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     PQtYreEqxAhDUIWZ:
       type: cast
       spell:
@@ -303,6 +327,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: PQtYreEqxAhDUIWZ
       sort: 0
       activation:
@@ -317,7 +342,6 @@ system:
         targets:
           - type: activityUses
             value: '1'
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -342,6 +366,12 @@ system:
         max: '1'
       name: Bead of Smiting (branding smite)
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     6F2HhcDk94H0kGqV:
       type: cast
       spell:
@@ -355,6 +385,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: 6F2HhcDk94H0kGqV
       sort: 0
       activation:
@@ -369,7 +400,6 @@ system:
         targets:
           - type: activityUses
             value: '1'
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -394,6 +424,12 @@ system:
         max: '1'
       name: Bead of Summons (planar ally)
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     zqkOXnnqsBvQTS9v:
       type: cast
       spell:
@@ -407,6 +443,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: zqkOXnnqsBvQTS9v
       sort: 0
       activation:
@@ -421,7 +458,6 @@ system:
         targets:
           - type: activityUses
             value: '1'
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -446,6 +482,12 @@ system:
         max: '1'
       name: Bead of Wind Walking (wind walk)
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   attuned: false
   identifier: necklace-of-prayer-beads
 effects: []
@@ -453,18 +495,14 @@ folder: aJgMxnZED9XdoN2W
 sort: 0
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037320203
-  modifiedTime: 1750697344647
+  modifiedTime: 1764621341231
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!wqVSRfkcTjuhvDyx'

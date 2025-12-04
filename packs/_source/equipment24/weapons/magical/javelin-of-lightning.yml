@@ -62,7 +62,6 @@ system:
         targets:
           - type: activityUses
             value: '1'
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -106,8 +105,6 @@ system:
             bonus: ''
             types:
               - lightning
-            scaling:
-              number: 1
         onSave: half
       save:
         ability: dex
@@ -116,6 +113,13 @@ system:
           formula: '13'
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
   uses:
     spent: 0
     recovery: []
@@ -142,7 +146,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   identified: true
   unidentified:
@@ -206,18 +210,14 @@ system:
   mastery: slow
 effects: []
 folder: kie870i5kr7yuxO8
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712701112
+  modifiedTime: 1764615127128
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

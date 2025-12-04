@@ -2,14 +2,8 @@ import ActivationsField from "../data/chat-message/fields/activations-field.mjs"
 import { ActorDeltasField } from "../data/chat-message/fields/deltas-field.mjs";
 
 /**
- * @import { ActorDeltasData } from "../data/chat-message/fields/deltas-field.mjs";
- */
-
-/**
- * @typedef CombatRecoveryResults
- * @property {object} actor       Updates to be applied to the actor.
- * @property {object[]} item      Updates to be applied to the actor's items.
- * @property {BasicRoll[]} rolls  Any recovery rolls performed.
+ * @import { ActorDeltasData } from "../data/chat-message/fields/_types.mjs";
+ * @import { CombatRecoveryResults } from "./_types.mjs";
  */
 
 /**
@@ -45,8 +39,7 @@ export default class Combatant5e extends Combatant {
       }
     };
 
-    if ( !foundry.utils.isEmpty(messageConfig.data.system.deltas?.actor)
-      || !foundry.utils.isEmpty(messageConfig.data.system.deltas?.item)
+    if ( !foundry.utils.isEmpty(messageConfig.data.system.deltas)
       || !foundry.utils.isEmpty(messageConfig.data.system.activations) ) messageConfig.create = true;
 
     /**
@@ -100,14 +93,17 @@ export default class Combatant5e extends Combatant {
      */
     if ( Hooks.call("dnd5e.preCombatRecovery", this, periods) === false ) return;
 
-    const results = { actor: {}, item: [], rolls: [] };
+    const results = { actor: {}, delete: [], item: [], rolls: [] };
     await this.actor?.system.recoverCombatUses?.(periods, results);
 
     for ( const item of this.actor?.items ?? [] ) {
-      if ( foundry.utils.getType(item.system.recoverUses) !== "function" ) continue;
+      if ( (item.dependentOrigin?.active === false)
+        || (foundry.utils.getType(item.system.recoverUses) !== "function") ) continue;
       const rollData = item.getRollData();
-      const { updates, rolls } = await item.system.recoverUses(Array.from(periods), rollData);
-      if ( !foundry.utils.isEmpty(updates) ) {
+      const { updates, rolls, destroy } = await item.system.recoverUses(Array.from(periods), rollData);
+      if ( destroy ) {
+        results.delete.push(item.id);
+      } else if ( !foundry.utils.isEmpty(updates) ) {
         const updateTarget = results.item.find(i => i._id === item.id);
         if ( updateTarget ) foundry.utils.mergeObject(updateTarget, updates);
         else results.item.push({ _id: item.id, ...updates });
@@ -130,6 +126,7 @@ export default class Combatant5e extends Combatant {
     const deltas = ActorDeltasField.getDeltas(this.actor, results);
 
     if ( !foundry.utils.isEmpty(results.actor) ) await this.actor.update(results.actor);
+    if ( results.delete.length ) await this.actor.deleteEmbeddedDocuments("Item", results.delete);
     if ( results.item.length ) await this.actor.updateEmbeddedDocuments("Item", results.item);
 
     const message = await this.createTurnMessage({ deltas, periods, rolls: results.rolls });

@@ -22,7 +22,6 @@ system:
           - type: itemUses
             value: '@item.uses.max'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -32,6 +31,9 @@ system:
         value: '1'
       effects:
         - _id: zdUROHVtNHVtR4JL
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: ft
@@ -66,6 +68,7 @@ system:
         attacks: false
         proficiency: false
         saves: false
+        ability: ''
       profiles:
         - count: '5'
           name: ''
@@ -74,7 +77,6 @@ system:
           level:
             min: null
             max: null
-          types: []
       summon:
         prompt: true
         identifier: ''
@@ -84,6 +86,12 @@ system:
       img: ''
       appliedEffects:
         - zdUROHVtNHVtR4JL
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery:
@@ -112,7 +120,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   identified: true
   unidentified:
@@ -193,18 +201,14 @@ effects:
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmgIronHornOfVal.zdUROHVtNHVtR4JL'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712701082
+  modifiedTime: 1764615779221
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 200000

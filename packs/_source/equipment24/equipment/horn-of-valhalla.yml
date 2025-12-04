@@ -53,6 +53,9 @@ system:
         value: '1'
       effects:
         - _id: 7da5gsAdyzIIfWBL
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: ft
@@ -87,6 +90,7 @@ system:
         attacks: false
         proficiency: false
         saves: false
+        ability: ''
       profiles:
         - count: '@scaling'
           name: ''
@@ -95,7 +99,6 @@ system:
           level:
             min: null
             max: null
-          types: []
       summon:
         prompt: true
         mode: ''
@@ -104,6 +107,12 @@ system:
       img: ''
       appliedEffects:
         - 7da5gsAdyzIIfWBL
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery:
@@ -115,7 +124,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   identified: true
   unidentified:
@@ -199,18 +208,14 @@ folder: U4xmShLy19Ry54zl
 sort: 37950000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1730402610154
-  modifiedTime: 1745712700805
+  modifiedTime: 1764617087587
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!dmgHornofValhall'

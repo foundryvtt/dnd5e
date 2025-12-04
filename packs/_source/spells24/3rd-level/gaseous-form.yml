@@ -22,7 +22,8 @@ system:
     custom: ''
     rules: '2024'
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
+    revision: 3
   activation:
     type: action
     condition: ''
@@ -114,7 +115,10 @@ effects:
       startRound: null
       startTurn: null
     disabled: false
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     img: icons/magic/air/wind-vortex-swirl-blue-purple.webp
     _id: QeYsfnjEj2T9A3C8
     type: base
@@ -148,6 +152,18 @@ effects:
         mode: 5
         value: icons/magic/air/wind-vortex-swirl-blue-purple.webp
         priority: null
+      - key: system.abilities.str.save.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
+      - key: system.abilities.dex.save.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
+      - key: system.abilities.con.save.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
     description: >-
       <p>The target’s only method of movement is a Fly Speed of 10 feet, and it
       can hover. The target can enter and occupy the space of another creature.
@@ -167,30 +183,26 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.9
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1760128804307
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!phbsplGaseousFor.QeYsfnjEj2T9A3C8'
 folder: HCovEE4VoPGlIbKi
 sort: 1900000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.9
   createdTime: 1724425956002
-  modifiedTime: 1745256793568
+  modifiedTime: 1760128807672
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplGaseousFor'

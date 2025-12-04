@@ -1,0 +1,180 @@
+_id: mmDeflectMissile
+name: Deflect Missile
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    9T8cNbSBVACrrmRI:
+      type: heal
+      _id: 9T8cNbSBVACrrmRI
+      sort: 0
+      activation:
+        type: reaction
+        value: null
+        override: false
+        condition: >-
+          hit by a ranged attack roll and takes Bludgeoning, Piercing, or
+          Slashing damage from it
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      healing:
+        number: 1
+        denomination: '10'
+        types:
+          - healing
+        custom:
+          enabled: false
+        scaling:
+          number: 1
+        bonus: '@abilities.str.mod'
+      name: Reduce Damage
+      img: ''
+      appliedEffects: []
+    x0MjUmnv2OPAbm6y:
+      type: save
+      _id: x0MjUmnv2OPAbm6y
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '60'
+      target:
+        template:
+          contiguous: false
+          units: ''
+          type: ''
+          size: ''
+          count: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: '10'
+            bonus: '@mod'
+            types:
+              - force
+        onSave: none
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: str
+          formula: 8 + @mod + @prof
+      name: Save
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery:
+      - period: recharge
+        formula: '5'
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <p class="feature"><em>Trigger:</em> The [[lookup @name lowercase]] is
+      [[lookup @activation.condition activity=9T8cNbSBVACrrmRI]].</p><p
+      class="feature"><em>Response:</em> The [[lookup @name lowercase]] reduces
+      the damage it takes from the attack by [[/healing average]], and if that
+      damage is reduced to 0, the [[lookup @name lowercase]] can redirect some
+      of the attack's force.</p><p class="feature"><em>Dexterity Saving
+      Throw:</em> DC [[lookup @save.dc.value activity=x0MjUmnv2OPAbm6y]], one
+      [[lookup @target.affects.type activity=x0MjUmnv2OPAbm6y]] the [[lookup
+      @name lowercase]] can see within [[lookup @range.value
+      activity=x0MjUmnv2OPAbm6y]] feet. </p><p class="feature"><em>Failure:</em>
+      [[/damage average]] damage.</p>
+    chat: ''
+  identifier: deflect-missile
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/light/beam-impact-deflect-teal.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737856175914
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 7800000
+ownership:
+  default: 0
+_key: '!items!mmDeflectMissile'

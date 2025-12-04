@@ -14,7 +14,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: ''
     license: CC-BY-4.0
     rules: '2014'
@@ -54,67 +54,64 @@ system:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: save
+    DN8gzY6YObgBtXba:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.ppWAAEul0QHtm4er
+        challenge:
+          override: true
+          attack: null
+          save: 13
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+        ability: ''
+        level: 2
+      _id: DN8gzY6YObgBtXba
+      sort: 0
       activation:
         type: action
-        value: 1
-        condition: ''
         override: false
       consumption:
-        targets:
-          - type: itemUses
-            target: ''
-            value: '1'
-            scaling:
-              mode: ''
-              formula: ''
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets:
+          - type: itemUses
       description:
         chatFlavor: ''
       duration:
+        units: inst
         concentration: false
-        value: '1'
-        units: minute
-        special: ''
         override: false
-      effects: []
+      flags: {}
       range:
-        units: touch
-        special: ''
+        units: self
         override: false
       target:
         template:
-          count: ''
           contiguous: false
-          type: ''
-          size: ''
-          width: ''
-          height: ''
-          units: ''
+          units: ft
         affects:
-          count: '1'
-          type: creature
           choice: false
-          special: ''
-        prompt: true
         override: false
-      damage:
-        onSave: half
-        parts: []
-      save:
-        ability: wis
-        dc:
-          calculation: ''
-          formula: '13'
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      name: ''
+      img: ''
   attuned: false
   identifier: potion-of-mind-reading
 effects: []
@@ -125,11 +122,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037129606
-  modifiedTime: 1750697344647
+  modifiedTime: 1764619315594
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!Ct9LR9Ft1FG4a6Y1'

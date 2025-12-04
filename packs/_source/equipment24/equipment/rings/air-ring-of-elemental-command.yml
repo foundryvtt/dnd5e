@@ -28,6 +28,9 @@ system:
       effects:
         - _id: cN85nWiTzfGzWR7D
           onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
         value: '60'
@@ -57,6 +60,16 @@ system:
         dc:
           calculation: ''
           formula: '18'
+      img: ''
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
+      appliedEffects:
+        - cN85nWiTzfGzWR7D
     XBLdYOx6G8zS67Gb:
       type: cast
       spell:
@@ -71,6 +84,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: XBLdYOx6G8zS67Gb
       sort: 0
       activation:
@@ -85,7 +99,6 @@ system:
           - type: itemUses
             value: '3'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -108,6 +121,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     WEBJIJBHSUTJruRZ:
       type: cast
       spell:
@@ -122,6 +141,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: WEBJIJBHSUTJruRZ
       sort: 0
       activation:
@@ -155,6 +175,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     KN5CZz5BdRVGC2IN:
       type: cast
       spell:
@@ -169,6 +195,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: KN5CZz5BdRVGC2IN
       sort: 0
       activation:
@@ -183,7 +210,6 @@ system:
           - type: itemUses
             value: '2'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -206,6 +232,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     4sy1GTbqChCOkOdZ:
       type: cast
       spell:
@@ -220,6 +252,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: 4sy1GTbqChCOkOdZ
       sort: 0
       activation:
@@ -234,7 +267,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -257,6 +289,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery:
@@ -304,7 +342,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   identified: true
   unidentified:
@@ -392,6 +430,10 @@ effects:
         mode: 5
         value: 'true'
         priority: null
+      - key: system.attributes.movement.fly
+        mode: 4
+        value: '@attributes.movement.walk'
+        priority: null
     disabled: false
     duration:
       startTime: null
@@ -407,31 +449,30 @@ effects:
     transfer: true
     statuses: []
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.350'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 5.2.0
       createdTime: 1730685122369
-      modifiedTime: 1730685488423
+      modifiedTime: 1759793661174
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmgAirRingOfElem.d5aFCMPqEUaUQ37L'
 folder: DC1x1wAm0NLFudA6
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1730684815591
-  modifiedTime: 1745712697669
+  modifiedTime: 1764616009617
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 100000

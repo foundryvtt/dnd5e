@@ -22,7 +22,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -33,6 +32,9 @@ system:
       effects:
         - _id: x1imiHMHJdzBfnVe
           onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: ft
@@ -65,7 +67,15 @@ system:
           calculation: ''
           formula: '15'
       img: ''
-      appliedEffects: []
+      appliedEffects:
+        - x1imiHMHJdzBfnVe
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
   uses:
     spent: 0
     recovery:
@@ -88,7 +98,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   identified: true
   unidentified:
@@ -183,18 +193,14 @@ effects:
       exportSource: null
     _key: '!items.effects!dmgRodOfRulershi.x1imiHMHJdzBfnVe'
 folder: XVIITMl9kCCSjZQz
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712703117
+  modifiedTime: 1764616190174
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 50000

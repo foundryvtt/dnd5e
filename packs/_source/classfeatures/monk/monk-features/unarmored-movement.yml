@@ -15,7 +15,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: ''
     license: CC-BY-4.0
     rules: '2014'
@@ -37,11 +37,14 @@ flags: {}
 img: icons/magic/nature/root-vine-entangle-foot-green.webp
 effects:
   - _id: Veg0vXI93A0qlxZn
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     changes:
       - key: system.attributes.movement.walk
-        value: '10'
         mode: 2
+        value: '@scale.monk.unarmored-movement'
         priority: null
     disabled: false
     duration:
@@ -61,12 +64,12 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.350'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.2.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1759793290437
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     img: icons/magic/nature/root-vine-entangle-foot-green.webp
     type: base

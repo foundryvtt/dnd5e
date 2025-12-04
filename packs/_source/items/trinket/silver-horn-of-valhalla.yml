@@ -29,7 +29,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: ''
     license: CC-BY-4.0
     rules: '2014'
@@ -84,11 +84,8 @@ system:
       consumption:
         targets:
           - type: itemUses
-            target: ''
             value: '1'
-            scaling:
-              mode: ''
-              formula: ''
+            target: ''
         scaling:
           allowed: false
           max: ''
@@ -128,21 +125,27 @@ system:
           allow: false
           bonus: ''
         parts:
-          - number: 2
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
             denomination: 4
             bonus: '2'
             types: []
-            custom:
-              enabled: false
-              formula: ''
-            scaling:
-              mode: whole
-              number: null
-              formula: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+      appliedEffects: []
   attuned: false
   identifier: silver-horn-of-valhalla
 effects: []
@@ -153,11 +156,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037274276
-  modifiedTime: 1750697344647
+  modifiedTime: 1764620841304
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!lTfo6OVvAY2iJ4oq'

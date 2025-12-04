@@ -2,6 +2,15 @@ import FormulaField from "../fields/formula-field.mjs";
 
 const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
+/**
+ * @import { AdvancementSpellConfigurationData } from "./_types.mjs";
+ */
+
+/**
+ * Embedded data model describing changes to granted spells.
+ * @extends {foundry.abstract.DataModel<AdvancementSpellConfigurationData>}
+ * @mixes AdvancementSpellConfigurationData
+ */
 export default class SpellConfigurationData extends foundry.abstract.DataModel {
   /** @inheritDoc */
   static defineSchema() {
@@ -30,7 +39,7 @@ export default class SpellConfigurationData extends foundry.abstract.DataModel {
   }
 
   /* -------------------------------------------- */
-  /*  Data Migrations                             */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @inheritDoc */

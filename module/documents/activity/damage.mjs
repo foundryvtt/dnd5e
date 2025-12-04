@@ -1,11 +1,11 @@
 import DamageSheet from "../../applications/activity/damage-sheet.mjs";
-import DamageActivityData from "../../data/activity/damage-data.mjs";
+import BaseDamageActivityData from "../../data/activity/damage-data.mjs";
 import ActivityMixin from "./mixin.mjs";
 
 /**
  * Activity for rolling damage.
  */
-export default class DamageActivity extends ActivityMixin(DamageActivityData) {
+export default class DamageActivity extends ActivityMixin(BaseDamageActivityData) {
   /* -------------------------------------------- */
   /*  Model Configuration                         */
   /* -------------------------------------------- */
@@ -21,6 +21,7 @@ export default class DamageActivity extends ActivityMixin(DamageActivityData) {
       type: "damage",
       img: "systems/dnd5e/icons/svg/activity/damage.svg",
       title: "DND5E.DAMAGE.Title",
+      hint: "DND5E.DAMAGE.Hint",
       sheetClass: DamageSheet,
       usage: {
         actions: {

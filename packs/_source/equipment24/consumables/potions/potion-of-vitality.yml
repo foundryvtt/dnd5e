@@ -22,7 +22,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -32,6 +31,9 @@ system:
         value: '24'
       effects:
         - _id: GxutU47JS0FNfeoM
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: self
@@ -60,6 +62,12 @@ system:
       img: ''
       appliedEffects:
         - GxutU47JS0FNfeoM
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery: []
@@ -81,7 +89,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   identified: true
   unidentified:
@@ -151,18 +159,14 @@ effects:
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmgPotionOfVital.GxutU47JS0FNfeoM'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745612001388
+  modifiedTime: 1764614688854
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

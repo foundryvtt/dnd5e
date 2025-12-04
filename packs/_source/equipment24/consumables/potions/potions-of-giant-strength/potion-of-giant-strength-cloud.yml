@@ -22,7 +22,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -31,6 +30,9 @@ system:
         override: false
       effects:
         - _id: 1dBN1NUlcymoWlxz
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: self
@@ -60,6 +62,12 @@ system:
       img: ''
       appliedEffects:
         - 1dBN1NUlcymoWlxz
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery: []
@@ -78,7 +86,7 @@ system:
     revision: 1
     rules: '2024'
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
   identified: true
   unidentified:
     description: ''
@@ -149,18 +157,14 @@ effects:
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmgCloudPotionOf.1dBN1NUlcymoWlxz'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745432520720
+  modifiedTime: 1764614646690
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 300000

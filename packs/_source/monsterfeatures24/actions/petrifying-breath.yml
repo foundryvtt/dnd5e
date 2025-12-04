@@ -1,0 +1,213 @@
+_id: mmPetrifyingBrea
+name: Petrifying Breath
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    reU3RXAk0MdPmKCl:
+      type: save
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: SY6t8UAImw8B9PVT
+          onSave: false
+        - _id: ggyTZHJj11jkOFlX
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          count: ''
+          type: cone
+          size: '30'
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability:
+          - con
+        dc:
+          calculation: con
+          formula: 8 + @mod + @prof
+      name: Save
+      _id: reU3RXAk0MdPmKCl
+      img: ''
+      appliedEffects:
+        - ggyTZHJj11jkOFlX
+        - SY6t8UAImw8B9PVT
+  uses:
+    spent: 0
+    recovery:
+      - period: recharge
+        formula: '5'
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <p class="feature"><em>Constitution Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=reU3RXAk0MdPmKCl]], each [[lookup
+      @target.affects.type activity=reU3RXAk0MdPmKCl]] in a [[lookup
+      @target.template.size activity=reU3RXAk0MdPmKCl]]-foot Cone.</p><p
+      class="feature"><em>First</em> <em>Failure:</em> The target has the
+      &amp;Reference[Restrained apply=false] condition and repeats the save at
+      the end of its next turn if it is still Restrained, ending the effect on
+      itself on a success.</p><p class="feature"><em>Second</em>
+      <em>Failure:</em> The target has the &amp;Reference[Petrified apply=false]
+      condition instead of the Restrained condition.</p>
+    chat: ''
+  identifier: petrifying-breath
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/defensive/armor-stone-skin.webp
+effects:
+  - name: Petrified
+    img: systems/dnd5e/icons/svg/statuses/petrified.svg
+    origin: Item.mmPetrifyingBrea
+    _id: ggyTZHJj11jkOFlX
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Petrified apply=false] condition
+      instead of the Restrained condition.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - petrified
+    sort: 0
+    flags:
+      dae:
+        enableCondition: ''
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: Item.mmPetrifyingGaze.ActiveEffect.YLFv2Ujss9c0vtMQ
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736074054456
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmPetrifyingBrea.ggyTZHJj11jkOFlX'
+  - name: Restrained
+    img: systems/dnd5e/icons/svg/statuses/restrained.svg
+    origin: Item.mmPetrifyingBrea
+    _id: SY6t8UAImw8B9PVT
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: 0
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Restrained apply=false] condition and
+      repeats the save at the end of its next turn if it is still Restrained,
+      ending the effect on itself on a success.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - restrained
+    sort: 0
+    flags:
+      dae:
+        enableCondition: ''
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: Item.mmPetrifyingGaze.ActiveEffect.a5kKgU7vfT0v17yF
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736074039504
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmPetrifyingBrea.SY6t8UAImw8B9PVT'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737803677847
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 16300000
+ownership:
+  default: 0
+_key: '!items!mmPetrifyingBrea'

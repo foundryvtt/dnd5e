@@ -4,25 +4,20 @@ import SystemDataModel from "./system-data-model.mjs";
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
+ * @import { FavoriteData5e, ItemDataModelMetadata } from "./_types.mjs";
+ */
+
+/**
  * Variant of the SystemDataModel with support for rich item tooltips.
  */
 export default class ItemDataModel extends SystemDataModel {
-
-  /**
-   * @typedef {SystemDataModelMetadata} ItemDataModelMetadata
-   * @property {boolean} enchantable    Can this item be modified by enchantment effects?
-   * @property {boolean} hasEffects     Display the effects tab on this item's sheet.
-   * @property {boolean} singleton      Should only a single item of this type be allowed on an actor?
-   * @property {InventorySectionDescriptor} [inventory]  Configuration for displaying this item type in its own section
-   *                                                     in creature inventories.
-   */
 
   /** @type {ItemDataModelMetadata} */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     enchantable: false,
     hasEffects: false,
     singleton: false
-  }, {inplace: false}));
+  }, { inplace: false }));
 
   /**
    * The handlebars template for rendering item tooltips.
@@ -125,22 +120,21 @@ export default class ItemDataModel extends SystemDataModel {
   /* -------------------------------------------- */
 
   /**
-   * Are the magical properties of this item, such as magical bonuses to armor & damage, available?
-   * @type {boolean}
-   */
-  get magicAvailable() {
-    return (!("attuned" in this) || this.attuned || (this.attunement !== "required"))
-      && (!("properties" in this) || this.properties.has("mgc") || !this.validProperties.has("mgc"));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Scaling increase for this item type.
    * @type {number|null}
    */
   get scalingIncrease() {
     return null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Parts making up the subtitle on the item's tooltip.
+   * @type {string[]}
+   */
+  get tooltipSubtitle() {
+    return [this.type?.label ?? game.i18n.localize(CONFIG.Item.typeLabels[this.parent.type])];
   }
 
   /* -------------------------------------------- */
@@ -151,8 +145,7 @@ export default class ItemDataModel extends SystemDataModel {
   prepareBaseData() {
     if ( this.parent.isEmbedded && this.parent.actor?.items.has(this.parent.id) ) {
       this.parent.actor.identifiedItems?.set(this.parent.identifier, this.parent);
-      const sourceId = this.parent.flags.dnd5e?.sourceId ?? this.parent._stats.compendiumSource
-        ?? this.parent.flags.core?.sourceId;
+      const sourceId = this.parent._stats.compendiumSource ?? this.parent.flags.dnd5e?.sourceId;
       if ( sourceId ) this.parent.actor.sourcedItems?.set(sourceId, this.parent);
     }
   }
@@ -207,14 +200,13 @@ export default class ItemDataModel extends SystemDataModel {
     uses = this.hasLimitedUses && (game.user.isGM || identified) ? uses : null;
     price = game.user.isGM || identified ? price : null;
 
-    const subtitle = [this.type?.label ?? game.i18n.localize(CONFIG.Item.typeLabels[this.parent.type])];
     const context = {
       name, type, img, price, weight, uses, school, materials,
       config: CONFIG.DND5E,
       controlHints: game.settings.get("dnd5e", "controlHints"),
       labels: foundry.utils.deepClone((activity ?? this.parent).labels),
       tags: this.parent.labels?.components?.tags,
-      subtitle: subtitle.filterJoin(" &bull; "),
+      subtitle: this.tooltipSubtitle.filterJoin(" • "),
       description: {
         value: await TextEditor.enrichHTML(description ?? "", {
           rollData, relativeTo: this.parent, ...enrichmentOptions
@@ -280,31 +272,6 @@ export default class ItemDataModel extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * @typedef {object} FavoriteData5e
-   * @property {string} img                  The icon path.
-   * @property {string} title                The title.
-   * @property {string|string[]} [subtitle]  An optional subtitle or several subtitle parts.
-   * @property {number} [value]              A single value to display.
-   * @property {number} [quantity]           The item's quantity.
-   * @property {string|number} [modifier]    A modifier associated with the item.
-   * @property {number} [passive]            A passive score associated with the item.
-   * @property {object} [range]              The item's range.
-   * @property {number} [range.value]        The first range increment.
-   * @property {number|null} [range.long]    The second range increment.
-   * @property {string} [range.units]        The range units.
-   * @property {object} [save]               The item's saving throw.
-   * @property {string} [save.ability]       The saving throw ability.
-   * @property {number} [save.dc]            The saving throw DC.
-   * @property {object} [uses]               Data on an item's uses.
-   * @property {number} [uses.value]         The current available uses.
-   * @property {number} [uses.max]           The maximum available uses.
-   * @property {string} [uses.name]          The property to update on the item. If none is provided, the property will
-   *                                         not be updatable.
-   * @property {boolean} [toggle]            The effect's toggle state.
-   * @property {boolean} [suppressed]        Whether the favorite is suppressed.
-   */
 
   /**
    * Prepare item favorite data.

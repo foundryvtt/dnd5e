@@ -31,7 +31,7 @@
     <legend>{{ localize "DND5E.CONTAINER.FIELDS.capacity.label" }}</legend>
 
     {{!-- Item Capacity --}}
-    {{ formField fields.capacity.fields.count value=source.capacity.count placeholder="—" }}
+    {{ formField fields.capacity.fields.count value=source.capacity.count placeholder="—" rootId=partId }}
 
     {{!-- Volume Capacity --}}
     <div class="form-group split-group">
@@ -40,12 +40,12 @@
 
             {{!-- Amount --}}
             {{ formField fields.capacity.fields.volume.fields.value value=source.capacity.volume.value
-                         label="DND5E.Amount" localize=true classes="label-top" placeholder="—" }}
+                         label="DND5E.Amount" localize=true classes="label-top" placeholder="—" rootId=partId }}
 
             {{!-- Units --}}
             {{ formField fields.capacity.fields.volume.fields.units value=source.capacity.volume.units
                          label="DND5E.Unit" localize=true classes="label-top" choices=CONFIG.volumeUnits
-                         labelAttr="label" }}
+                         labelAttr="label" rootId=partId }}
 
         </div>
     </div>
@@ -57,12 +57,12 @@
 
             {{!-- Amount --}}
             {{ formField fields.capacity.fields.weight.fields.value value=source.capacity.weight.value
-                         label="DND5E.Amount" localize=true classes="label-top" placeholder="—" }}
+                         label="DND5E.Amount" localize=true classes="label-top" placeholder="—" rootId=partId }}
 
             {{!-- Units --}}
             {{ formField fields.capacity.fields.weight.fields.units value=source.capacity.weight.units
                          label="DND5E.Unit" localize=true classes="label-top" choices=CONFIG.weightUnits
-                         labelAttr="label" }}
+                         labelAttr="label" rootId=partId }}
 
         </div>
     </div>

@@ -116,6 +116,13 @@ system:
       img: ''
       appliedEffects:
         - f0WvHHwmTfdkF3OP
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
     VHStJ3hZGwHAHcUQ:
       type: save
       name: Poison Save
@@ -140,8 +147,14 @@ system:
       effects:
         - _id: zM8Qfv5u9OCNUrhE
           onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
+        value: '20'
+        units: ft
+        special: ''
       target:
         template:
           contiguous: false
@@ -167,8 +180,6 @@ system:
             bonus: ''
             types:
               - poison
-            scaling:
-              number: 1
         onSave: none
       save:
         ability: con
@@ -178,6 +189,13 @@ system:
       img: ''
       appliedEffects:
         - zM8Qfv5u9OCNUrhE
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: false
   uses:
     spent: 0
     recovery:
@@ -199,7 +217,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   identified: true
   unidentified:
@@ -345,14 +363,13 @@ flags:
     riders:
       activity:
         - VHStJ3hZGwHAHcUQ
-      effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.347'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1754951968846
+  modifiedTime: 1764615004411
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 7100000

@@ -1,28 +1,12 @@
-import { formatNumber, formatRange, prepareFormulaValue } from "../../utils.mjs";
+import { formatNumber, formatRange, getPluralRules, prepareFormulaValue } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 
 const { ArrayField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * @import {
- *   BasicRollProcessConfiguration, BasicRollDialogConfiguration, BasicRollMessageConfiguration
- * } from "../../dice/basic-roll.mjs";
- */
-
-/**
- * @typedef {object} UsesData
- * @property {number} spent                 Number of uses that have been spent.
- * @property {string} max                   Formula for the maximum number of uses.
- * @property {UsesRecoveryData[]} recovery  Recovery profiles for this activity's uses.
- */
-
-/**
- * Data for a recovery profile for an activity's uses.
- *
- * @typedef {object} UsesRecoveryData
- * @property {string} period   Period at which this profile is activated.
- * @property {string} type     Whether uses are reset to full, reset to zero, or recover a certain number of uses.
- * @property {string} formula  Formula used to determine recovery if type is not reset.
+ *   BasicRollDialogConfiguration, BasicRollMessageConfiguration, RechargeRollProcessConfiguration
+ * } from "../../dice/_types.mjs";
  */
 
 /**
@@ -74,7 +58,7 @@ export default class UsesField extends SchemaField {
     }
     if ( labels ) labels.recovery = game.i18n.getListFormatter({ style: "narrow" }).format(periods);
 
-    this.uses.label = UsesField.getStatblockLabel.call(this);
+    this.uses.label ??= UsesField.getStatblockLabel.call(this);
 
     Object.defineProperty(this.uses, "rollRecharge", {
       value: UsesField.rollRecharge.bind(this.parent?.system ? this.parent : this),
@@ -106,6 +90,15 @@ export default class UsesField extends SchemaField {
    * @returns {string}
    */
   static getStatblockLabel() {
+    // Legendary/Mythic Actions
+    if ( (this.activation?.type === "legendary") || (this.activation?.type === "mythic") ) {
+      if ( this.activation.value < 2 ) return "";
+      const pr = getPluralRules();
+      return game.i18n.format(`DND5E.NPC.ActionCostCounted.${pr.select(this.activation.value)}`, {
+        number: formatNumber(this.activation.value)
+      });
+    }
+
     if ( !this.uses.max || (this.uses.recovery.length !== 1) ) return "";
     const recovery = this.uses.recovery[0];
 
@@ -195,11 +188,6 @@ export default class UsesField extends SchemaField {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * @typedef {BasicRollProcessConfiguration} RechargeRollProcessConfiguration
-   * @property {boolean} [apply=true]  Apply the uses updates back to the item or activity.
-   */
 
   /**
    * Rolls a recharge test for an Item or Activity that uses the d6 recharge mechanic.

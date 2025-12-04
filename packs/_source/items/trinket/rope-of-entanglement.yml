@@ -15,7 +15,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: ''
     license: CC-BY-4.0
     rules: '2014'
@@ -110,7 +110,18 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
+      appliedEffects: []
   attuned: false
   identifier: rope-of-entanglement
 effects: []
@@ -121,11 +132,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.2.0
   createdTime: 1725037158319
-  modifiedTime: 1725992503269
+  modifiedTime: 1764619601640
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!J8gQdJJi5e8LmD7H'

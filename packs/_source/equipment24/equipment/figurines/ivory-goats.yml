@@ -63,7 +63,6 @@ system:
         targets:
           - type: activityUses
             value: '15'
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -109,6 +108,7 @@ system:
         attacks: false
         proficiency: false
         saves: false
+        ability: ''
       profiles:
         - count: ''
           name: ''
@@ -117,13 +117,18 @@ system:
           level:
             min: null
             max: null
-          types: []
       summon:
         prompt: true
         mode: ''
         identifier: ''
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     G771YStNNwTixstV:
       type: summon
       name: Goat of Traveling
@@ -140,11 +145,9 @@ system:
         targets:
           - type: activityUses
             value: '7'
-            scaling: {}
           - type: itemUses
             value: '-@item.uses.spent'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -191,6 +194,7 @@ system:
         attacks: false
         proficiency: false
         saves: false
+        ability: ''
       profiles:
         - count: ''
           name: ''
@@ -199,7 +203,6 @@ system:
           level:
             min: null
             max: null
-          types: []
       summon:
         prompt: true
         identifier: ''
@@ -207,6 +210,12 @@ system:
       _id: G771YStNNwTixstV
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     5g8tPLkudHb2kfkt:
       type: summon
       name: Revert or Recall Goat of Traveling
@@ -303,7 +312,6 @@ system:
         targets:
           - type: activityUses
             value: '30'
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -350,6 +358,7 @@ system:
         attacks: false
         proficiency: false
         saves: false
+        ability: ''
       profiles:
         - count: ''
           name: ''
@@ -358,7 +367,6 @@ system:
           level:
             min: null
             max: null
-          types: []
       summon:
         prompt: true
         identifier: ''
@@ -366,6 +374,12 @@ system:
       _id: KguY9D4cU0ognpu4
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery: []
@@ -374,7 +388,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   identified: true
   unidentified:
@@ -414,18 +428,14 @@ folder: EK3hCTgvAmjsKlfl
 sort: 125000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1729781709220
-  modifiedTime: 1745712700149
+  modifiedTime: 1764615741400
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!dmgFwpIvoryGoats'

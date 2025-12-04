@@ -10,16 +10,7 @@ import SensesField from "../../shared/senses-field.mjs";
 const { NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
- * @import { MovementData } from "../../shared/movement-field.mjs"
- * @import { RollConfigData } from "../../shared/roll-config-field.mjs"
- * @import { SensesData } from "../../shared/senses-field.mjs"
- */
-
-/**
- * @typedef {object} ArmorClassData
- * @property {string} calc     Name of one of the built-in formulas to use.
- * @property {number} flat     Flat value used for flat or natural armor calculation.
- * @property {string} formula  Custom formula to use.
+ * @import { ArmorClassData, AttributesCommonData, AttributesCreatureData, HitPointsData } from "./_types.mjs";
  */
 
 /**
@@ -28,14 +19,30 @@ const { NumberField, SchemaField, StringField } = foundry.data.fields;
 export default class AttributesFields {
   /**
    * Armor class fields shared between characters, NPCs, and vehicles.
-   *
    * @type {ArmorClassData}
    */
   static get armorClass() {
     return {
       calc: new StringField({ initial: "default", label: "DND5E.ArmorClassCalculation" }),
-      flat: new NumberField({ integer: true, min: 0, label: "DND5E.ArmorClassFlat" }),
+      flat: new NumberField({ required: true, integer: true, min: 0, label: "DND5E.ArmorClassFlat" }),
       formula: new FormulaField({ deterministic: true, label: "DND5E.ArmorClassFormula" })
+    };
+  }
+
+  /* -------------------------------------------- */
+  /**
+   * Hit points fields shared between NPCs, objects, and vehicles.
+   * @type {HitPointsData}
+   */
+  static get hitPoints() {
+    return {
+      dt: new NumberField({ integer: true, min: 0, label: "DND5E.DamageThreshold" }),
+      max: new NumberField({ nullable: true, integer: true, min: 0, initial: null, label: "DND5E.HitPointsMax" }),
+      temp: new NumberField({ integer: true, initial: 0, min: 0, label: "DND5E.HitPointsTemp" }),
+      tempmax: new NumberField({
+        integer: true, initial: 0, label: "DND5E.HitPointsTempMax", hint: "DND5E.HitPointsTempMaxHint"
+      }),
+      value: new NumberField({ nullable: true, integer: true, min: 0, initial: null, label: "DND5E.HitPointsCurrent" })
     };
   }
 
@@ -43,13 +50,7 @@ export default class AttributesFields {
 
   /**
    * Fields shared between characters, NPCs, and vehicles.
-   *
-   * @type {object}
-   * @property {ArmorClassData} ac       Armor class configuration.
-   * @property {RollConfigData} init
-   * @property {string} init.ability     The ability used for initiative rolls.
-   * @property {string} init.bonus       The bonus provided to initiative rolls.
-   * @property {MovementData} movement
+   * @type {AttributesCommonData}
    */
   static get common() {
     return {
@@ -66,20 +67,7 @@ export default class AttributesFields {
 
   /**
    * Fields shared between characters and NPCs.
-   *
-   * @type {object}
-   * @property {object} attunement
-   * @property {number} attunement.max              Maximum number of attuned items.
-   * @property {SensesData} senses
-   * @property {string} spellcasting                Primary spellcasting ability.
-   * @property {number} exhaustion                  Creature's exhaustion level.
-   * @property {RollConfigData} concentration
-   * @property {string} concentration.ability       The ability used for concentration saving throws.
-   * @property {object} concentration.bonuses
-   * @property {string} concentration.bonuses.save  The bonus provided to concentration saving throws.
-   * @property {number} concentration.limit         The amount of items this actor can concentrate on.
-   * @property {object} loyalty
-   * @property {number} loyalty.value               The creature's loyalty score.
+   * @type {AttributesCreatureData}
    */
   static get creature() {
     return {
@@ -275,6 +263,7 @@ export default class AttributesFields {
     const baseUnits = CONFIG.DND5E.encumbrance.baseUnits[this.parent.type]
       ?? CONFIG.DND5E.encumbrance.baseUnits.default;
     const unitSystem = game.settings.get("dnd5e", "metricWeightUnits") ? "metric" : "imperial";
+    const { attributes } = this;
 
     // Get the total weight from items
     let weight = this.parent.items
@@ -309,7 +298,10 @@ export default class AttributesFields {
       let multiplier = simplifyBonus(encumbrance.multipliers[threshold], rollData)
         * simplifyBonus(encumbrance.multipliers.overall, rollData);
       if ( threshold === "maximum" ) maximumMultiplier = multiplier;
-      if ( this.parent.type === "vehicle" ) base = this.attributes.capacity.cargo;
+      if ( this.parent.type === "vehicle" ) {
+        const { cargo } = attributes.capacity;
+        base = convertWeight(cargo.value || Infinity, cargo.units, baseUnits[unitSystem]);
+      }
       else multiplier *= (config.threshold[threshold]?.[unitSystem] ?? 1) * sizeMod;
       return (base * multiplier).toNearest(0.1) + bonus;
     };
@@ -324,8 +316,12 @@ export default class AttributesFields {
     encumbrance.max = encumbrance.thresholds.maximum;
     encumbrance.mod = (sizeMod * maximumMultiplier).toNearest(0.1);
     encumbrance.stops = {
-      encumbered: Math.clamp((encumbrance.thresholds.encumbered * 100) / encumbrance.max, 0, 100),
-      heavilyEncumbered: Math.clamp((encumbrance.thresholds.heavilyEncumbered * 100) / encumbrance.max, 0, 100)
+      encumbered: Number.isFinite(encumbrance.max)
+        ? Math.clamp((encumbrance.thresholds.encumbered * 100) / encumbrance.max, 0, 100)
+        : 0,
+      heavilyEncumbered: Number.isFinite(encumbrance.max)
+        ? Math.clamp((encumbrance.thresholds.heavilyEncumbered * 100) / encumbrance.max, 0, 100)
+        : 0
     };
     encumbrance.pct = Math.clamp((encumbrance.value * 100) / encumbrance.max, 0, 100);
     encumbrance.encumbered = encumbrance.value > encumbrance.heavilyEncumbered;
@@ -401,7 +397,8 @@ export default class AttributesFields {
     // Total initiative includes all numeric terms
     const initBonus = simplifyBonus(init.bonus, rollData);
     const abilityBonus = simplifyBonus(ability.bonuses?.check, rollData);
-    init.total = init.mod + initBonus + abilityBonus + globalCheckBonus
+    const quality = this.attributes.quality?.value ?? 0;
+    init.total = init.mod + initBonus + abilityBonus + globalCheckBonus + quality
       + (flags.initiativeAlert && isLegacy ? 5 : 0)
       + (Number.isNumeric(init.prof.term) ? init.prof.flat : 0);
     init.score = CONFIG.DND5E.skillPassive.base + init.total + (init.roll.mode * CONFIG.DND5E.skillPassive.modifier);
@@ -412,23 +409,32 @@ export default class AttributesFields {
   /**
    * Modify movement speeds taking exhaustion and any other conditions into account.
    * @this {CharacterData|NPCData}
+   * @param {object} rollData  The Actor's roll data.
    */
-  static prepareMovement() {
+  static prepareMovement(rollData=this.parent.getRollData()) {
     const statuses = this.parent.statuses;
     const noMovement = this.parent.hasConditionEffect("noMovement");
+    const crawl = this.parent.hasConditionEffect("crawl");
+    for ( const type of Object.keys(CONFIG.DND5E.movementTypes) ) {
+      if ( noMovement || (crawl && (type !== "walk")) ) this.attributes.movement[type] = 0;
+      else this.attributes.movement[type] = Math.max(0, simplifyBonus(this.attributes.movement[type], rollData));
+      if ( type === "walk" ) this.attributes.movement.speed = this.attributes.movement.walk;
+    }
+
     const halfMovement = this.parent.hasConditionEffect("halfMovement");
     const encumbered = statuses.has("encumbered");
     const heavilyEncumbered = statuses.has("heavilyEncumbered");
     const exceedingCarryingCapacity = statuses.has("exceedingCarryingCapacity");
-    const crawl = this.parent.hasConditionEffect("crawl");
     const units = this.attributes.movement.units ??= defaultUnits("length");
     let reduction = game.settings.get("dnd5e", "rulesVersion") === "modern"
       ? (this.attributes.exhaustion ?? 0) * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.speed ?? 0) : 0;
     reduction = convertLength(reduction, CONFIG.DND5E.defaultUnits.length.imperial, units);
+    const bonus = simplifyBonus(this.attributes.movement.bonus, rollData);
+    this.attributes.movement.max = 0;
     for ( const type of Object.keys(CONFIG.DND5E.movementTypes) ) {
       let speed = Math.max(0, this.attributes.movement[type] - reduction);
-      if ( noMovement || (crawl && (type !== "walk")) ) speed = 0;
-      else {
+      if ( speed ) {
+        speed = Math.max(0, speed + bonus);
         if ( halfMovement ) speed *= 0.5;
         if ( heavilyEncumbered ) {
           speed = Math.max(0, speed - (CONFIG.DND5E.encumbrance.speedReduction.heavilyEncumbered[units] ?? 0));
@@ -440,7 +446,11 @@ export default class AttributesFields {
         }
       }
       this.attributes.movement[type] = speed;
+      this.attributes.movement.max = Math.max(speed, this.attributes.movement.max);
+      if ( type === "walk" ) this.attributes.movement.speed = speed;
     }
+    const baseSpeed = this._source.attributes.movement.walk || this.attributes.movement.fromSpecies?.walk;
+    this.attributes.movement.slowed = this.attributes.movement.walk <= (simplifyBonus(baseSpeed, rollData) / 2);
   }
 
   /* -------------------------------------------- */
@@ -455,8 +465,9 @@ export default class AttributesFields {
    */
   static prepareRace(race, { force=false }={}) {
     for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) {
-      if ( !race.system.movement[key] || (!force && (this.attributes.movement[key] !== null)) ) continue;
-      this.attributes.movement[key] = race.system.movement[key];
+      if ( !race.system.movement[key] || (!force && this.attributes.movement[key]) ) continue;
+      this.attributes.movement.fromSpecies ??= {};
+      this.attributes.movement[key] = this.attributes.movement.fromSpecies[key] = race.system.movement[key];
     }
     if ( race.system.movement.hover ) this.attributes.movement.hover = true;
     if ( force && race.system.movement.units ) this.attributes.movement.units = race.system.movement.units;

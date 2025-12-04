@@ -1,0 +1,125 @@
+_id: mmCreateSpecter0
+name: Create Specter
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    ypIQdXr13u7LATUP:
+      type: summon
+      _id: ypIQdXr13u7LATUP
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '10'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+        ability: ''
+      profiles:
+        - count: ''
+          name: Specter
+          _id: y0YdYaqmueLXoHCZ
+          uuid: Compendium.dnd5e.actors24.Actor.mmSpecter0000000
+          level:
+            min: null
+            max: null
+      summon:
+        prompt: false
+        mode: ''
+        identifier: ''
+      name: Spirit Rises
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] targets a Humanoid
+      corpse within [[lookup @range.value activity=ypIQdXr13u7LATUP]] feet of
+      itself that has been dead for no longer than 1 minute. The target's spirit
+      rises as a
+      <strong>@UUID[Compendium.dnd5e.actors24.Actor.mmSpecter0000000]{Specter}</strong>
+      in the space of its corpse or in the nearest unoccupied space. The specter
+      is under the [[lookup @name lowercase]]'s control. The [[lookup @name
+      lowercase]] can have no more than seven specters under its control at a
+      time.</p>
+    chat: ''
+  identifier: create-specter
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/death/undead-skeleton-lich-armor.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737801402492
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 6900000
+ownership:
+  default: 0
+_key: '!items!mmCreateSpecter0'

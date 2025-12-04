@@ -14,7 +14,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: ''
     license: CC-BY-4.0
     rules: '2014'
@@ -54,61 +54,63 @@ system:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: save
+    5QjNKVTv8j5hXeuC:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.fVbCxFRaORalHB20
+        challenge:
+          override: true
+          attack: null
+          save: 17
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+        ability: ''
+        level: 5
+      _id: 5QjNKVTv8j5hXeuC
+      sort: 0
       activation:
         type: action
-        value: 1
-        condition: ''
         override: false
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
         chatFlavor: ''
       duration:
+        units: inst
         concentration: false
-        value: '10'
-        units: minute
-        special: ''
         override: false
-      effects: []
+      flags: {}
       range:
-        units: ''
-        special: ''
+        units: self
         override: false
       target:
         template:
-          count: ''
           contiguous: false
-          type: ''
-          size: ''
-          width: ''
-          height: ''
-          units: ''
+          units: ft
         affects:
-          count: ''
-          type: ''
           choice: false
-          special: ''
-        prompt: true
         override: false
-      damage:
-        onSave: half
-        parts: []
-      save:
-        ability: wis
-        dc:
-          calculation: ''
-          formula: '17'
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      name: ''
+      img: ''
   attuned: false
   identifier: crystal-ball
 effects: []
@@ -119,11 +121,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037157737
-  modifiedTime: 1750697344647
+  modifiedTime: 1764619594682
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!ItoGjtOtDOQ2noNM'

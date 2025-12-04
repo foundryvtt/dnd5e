@@ -16,7 +16,8 @@ system:
     custom: ''
     rules: '2024'
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
+    revision: 2
   activation:
     type: bonus
     condition: ''
@@ -109,7 +110,7 @@ system:
         spent: 0
         recovery: []
         max: ''
-      sort: 100000
+      sort: 200000
       name: Bonus Hex Damage
       img: ''
       appliedEffects: []
@@ -150,13 +151,69 @@ system:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
+      sort: 100000
       roll:
         prompt: false
         visible: true
         name: ''
         formula: ''
       name: Place Curse
+      img: ''
+      appliedEffects:
+        - ljMTBKPVmEnLPX1b
+        - Mmss2SPIy7wtt2PV
+        - XVQwGWbC0A1svBNm
+        - FfVB2Yyb7wfgpsQB
+        - k2569xtIeXKRReLU
+        - sC2IXWDs07oTt5JN
+    E3f3Y8ULb3t5mBQu:
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+        spellSlot: false
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: true
+        concentration: false
+      effects:
+        - _id: ljMTBKPVmEnLPX1b
+        - _id: Mmss2SPIy7wtt2PV
+        - _id: XVQwGWbC0A1svBNm
+        - _id: FfVB2Yyb7wfgpsQB
+        - _id: k2569xtIeXKRReLU
+        - _id: sC2IXWDs07oTt5JN
+      range:
+        override: true
+        units: any
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 300000
+      roll:
+        prompt: false
+        visible: true
+        name: ''
+        formula: ''
+      name: Curse New Creature
+      _id: E3f3Y8ULb3t5mBQu
       img: ''
       appliedEffects:
         - ljMTBKPVmEnLPX1b
@@ -173,7 +230,7 @@ effects:
   - name: Hexed Strength
     origin: Compendium.dnd5e.spells24.Item.phbsplHex0000000
     duration:
-      rounds: 1
+      rounds: null
       startTime: null
       seconds: 3600
       combat: null
@@ -181,12 +238,19 @@ effects:
       startRound: null
       startTurn: null
     disabled: false
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     img: systems/dnd5e/icons/svg/abilities/strength.svg
     _id: ljMTBKPVmEnLPX1b
     type: base
     system: {}
-    changes: []
+    changes:
+      - key: system.abilities.str.check.roll.mode
+        mode: 2
+        value: '-1'
+        priority: null
     description: >-
       <p>The target has Disadvantage on ability checks made with the chosen
       ability.</p>
@@ -198,12 +262,12 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.347'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1755706389146
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!phbsplHex0000000.ljMTBKPVmEnLPX1b'
   - name: Hexed Dexterity
@@ -217,12 +281,19 @@ effects:
       startRound: null
       startTurn: null
     disabled: false
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     img: systems/dnd5e/icons/svg/abilities/dexterity.svg
     _id: Mmss2SPIy7wtt2PV
     type: base
     system: {}
-    changes: []
+    changes:
+      - key: system.abilities.dex.check.roll.mode
+        mode: 2
+        value: '-1'
+        priority: null
     description: >-
       <p>The target has Disadvantage on ability checks made with the chosen
       ability.</p>
@@ -234,18 +305,18 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.347'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1755018821109
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!phbsplHex0000000.Mmss2SPIy7wtt2PV'
   - name: Hexed Constitution
     origin: Compendium.dnd5e.spells24.Item.phbsplHex0000000
     duration:
-      rounds: 1
+      rounds: null
       startTime: null
       seconds: 3600
       combat: null
@@ -253,12 +324,19 @@ effects:
       startRound: null
       startTurn: null
     disabled: false
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     img: systems/dnd5e/icons/svg/abilities/constitution.svg
     _id: XVQwGWbC0A1svBNm
     type: base
     system: {}
-    changes: []
+    changes:
+      - key: system.abilities.con.check.roll.mode
+        mode: 2
+        value: '-1'
+        priority: null
     description: >-
       <p>The target has Disadvantage on ability checks made with the chosen
       ability.</p>
@@ -270,18 +348,18 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.347'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1755706395405
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!phbsplHex0000000.XVQwGWbC0A1svBNm'
   - name: Hexed Intelligence
     origin: Compendium.dnd5e.spells24.Item.phbsplHex0000000
     duration:
-      rounds: 1
+      rounds: null
       startTime: null
       seconds: 3600
       combat: null
@@ -289,12 +367,19 @@ effects:
       startRound: null
       startTurn: null
     disabled: false
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     img: systems/dnd5e/icons/svg/abilities/intelligence.svg
     _id: FfVB2Yyb7wfgpsQB
     type: base
     system: {}
-    changes: []
+    changes:
+      - key: system.abilities.int.check.roll.mode
+        mode: 2
+        value: '-1'
+        priority: null
     description: >-
       <p>The target has Disadvantage on ability checks made with the chosen
       ability.</p>
@@ -306,18 +391,18 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.347'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1755706399248
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!phbsplHex0000000.FfVB2Yyb7wfgpsQB'
   - name: Hexed Wisdom
     origin: Compendium.dnd5e.spells24.Item.phbsplHex0000000
     duration:
-      rounds: 1
+      rounds: null
       startTime: null
       seconds: 3600
       combat: null
@@ -325,12 +410,19 @@ effects:
       startRound: null
       startTurn: null
     disabled: false
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     img: systems/dnd5e/icons/svg/abilities/wisdom.svg
     _id: k2569xtIeXKRReLU
     type: base
     system: {}
-    changes: []
+    changes:
+      - key: system.abilities.wis.check.roll.mode
+        mode: 2
+        value: '-1'
+        priority: null
     description: >-
       <p>The target has Disadvantage on ability checks made with the chosen
       ability.</p>
@@ -342,18 +434,18 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.347'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1755706408471
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!phbsplHex0000000.k2569xtIeXKRReLU'
   - name: Hexed Charisma
     origin: Compendium.dnd5e.spells24.Item.phbsplHex0000000
     duration:
-      rounds: 1
+      rounds: null
       startTime: null
       seconds: 3600
       combat: null
@@ -361,12 +453,19 @@ effects:
       startRound: null
       startTurn: null
     disabled: false
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     img: systems/dnd5e/icons/svg/abilities/charisma.svg
     _id: sC2IXWDs07oTt5JN
     type: base
     system: {}
-    changes: []
+    changes:
+      - key: system.abilities.cha.check.roll.mode
+        mode: 2
+        value: '-1'
+        priority: null
     description: >-
       <p>The target has Disadvantage on ability checks made with the chosen
       ability.</p>
@@ -378,12 +477,12 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1760125980779
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!phbsplHex0000000.sC2IXWDs07oTt5JN'
 folder: pBaAAtXBCq9FVEnL
@@ -397,11 +496,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.1.9
   createdTime: 1724425958706
-  modifiedTime: 1750441411562
+  modifiedTime: 1760125985801
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplHex0000000'

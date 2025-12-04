@@ -15,7 +15,7 @@ system:
   source:
     rules: '2024'
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
     revision: 2
   identified: true
   unidentified:
@@ -67,7 +67,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -108,9 +107,7 @@ system:
             bonus: ''
             types:
               - fire
-            scaling:
-              number: 1
-        onSave: half
+        onSave: none
       save:
         ability:
           - dex
@@ -118,6 +115,9 @@ system:
           calculation: dex
           formula: ''
       name: ''
+      img: ''
+      appliedEffects:
+        - HL12olRyPOCmmMQ5
   identifier: alchemists-fire
 _id: phbagAlchemistsF
 type: consumable
@@ -163,18 +163,14 @@ effects:
 sort: 200000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1724425904945
-  modifiedTime: 1745256810720
+  modifiedTime: 1757448570779
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbagAlchemistsF'

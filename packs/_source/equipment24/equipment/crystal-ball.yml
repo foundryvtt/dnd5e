@@ -19,6 +19,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: 2e2o9P9Kr0NgHi4B
       sort: 0
       activation:
@@ -52,6 +53,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery: []
@@ -68,7 +75,7 @@ system:
     revision: 1
     rules: '2024'
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
   identified: true
   unidentified:
     description: ''
@@ -103,18 +110,14 @@ system:
   strength: null
   proficient: null
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1740680118118
+  modifiedTime: 1764616750927
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

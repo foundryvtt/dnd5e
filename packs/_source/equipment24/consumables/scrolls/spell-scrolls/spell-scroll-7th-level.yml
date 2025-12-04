@@ -1,0 +1,71 @@
+_id: dmgSpellScroll7t
+name: Spell Scroll, 7th Level
+type: consumable
+img: icons/sundries/scrolls/scroll-bound-sealed-black-orange.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '1'
+  description:
+    value: <p>@Embed[Compendium.dnd5e.equipment24.Item.dmgSpellScroll00 inline]</p>
+    chat: ''
+  identifier: spell-scroll
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: ''
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 12500
+    denomination: gp
+  rarity: veryRare
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: scroll
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties:
+    - mgc
+effects: []
+folder: a2UFIyuviRp94dzx
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.2.1
+  createdTime: 1757718209746
+  modifiedTime: 1764795481155
+  lastModifiedBy: dnd5ebuilder0000
+ownership:
+  default: 0
+sort: 173048
+_key: '!items!dmgSpellScroll7t'

@@ -1,5 +1,5 @@
 import CheckSheet from "../../applications/activity/check-sheet.mjs";
-import CheckActivityData from "../../data/activity/check-data.mjs";
+import BaseCheckActivityData from "../../data/activity/check-data.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
 import { getSceneTargets } from "../../utils.mjs";
 import ActivityMixin from "./mixin.mjs";
@@ -7,7 +7,7 @@ import ActivityMixin from "./mixin.mjs";
 /**
  * Activity for making ability checks.
  */
-export default class CheckActivity extends ActivityMixin(CheckActivityData) {
+export default class CheckActivity extends ActivityMixin(BaseCheckActivityData) {
   /* -------------------------------------------- */
   /*  Model Configuration                         */
   /* -------------------------------------------- */
@@ -23,6 +23,7 @@ export default class CheckActivity extends ActivityMixin(CheckActivityData) {
       type: "check",
       img: "systems/dnd5e/icons/svg/activity/check.svg",
       title: "DND5E.CHECK.Title",
+      hint: "DND5E.CHECK.Hint",
       sheetClass: CheckSheet,
       usage: {
         actions: {

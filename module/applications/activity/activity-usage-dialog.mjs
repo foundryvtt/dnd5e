@@ -4,6 +4,10 @@ import Dialog5e from "../api/dialog.mjs";
 const { BooleanField, NumberField, StringField } = foundry.data.fields;
 
 /**
+ * @import { ActivityUseConfiguration } from "../../documents/activity/_types.mjs";
+ */
+
+/**
  * Dialog for configuring the usage of an activity.
  */
 export default class ActivityUsageDialog extends Dialog5e {
@@ -243,33 +247,36 @@ export default class ActivityUsageDialog extends Dialog5e {
     context.fields = [];
     context.notes = [];
 
-    const containsLegendaryConsumption = this.activity.consumption.targets
-      .find(t => (t.type === "attribute") && (t.target === "resources.legact.value"));
-    if ( (this.activity.activation.type === "legendary") && this.actor.system.resources?.legact
-      && this._shouldDisplay("consume.action") && !containsLegendaryConsumption ) {
-      const pr = new Intl.PluralRules(game.i18n.lang);
-      const value = (this.config.consume !== false) && (this.config.consume?.action !== false);
-      const warn = (this.actor.system.resources.legact.value < this.activity.activation.value) && value;
-      context.fields.push({
-        field: new BooleanField({
-          label: game.i18n.format("DND5E.CONSUMPTION.Type.Action.Prompt", {
-            type: game.i18n.localize("DND5E.LegendaryAction.Label")
-          }),
-          hint: game.i18n.format("DND5E.CONSUMPTION.Type.Action.PromptHint", {
-            available: game.i18n.format(
-              `DND5E.ACTIVATION.Type.Legendary.Counted.${pr.select(this.actor.system.resources.legact.value)}`,
-              { number: `<strong>${formatNumber(this.actor.system.resources.legact.value)}</strong>` }
-            ),
-            cost: game.i18n.format(
-              `DND5E.ACTIVATION.Type.Legendary.Counted.${pr.select(this.activity.activation.value)}`,
-              { number: `<strong>${formatNumber(this.activity.activation.value)}</strong>` }
-            )
-          })
-        }),
-        input: context.inputs.createCheckboxInput,
-        name: "consume.action",
-        value, warn
+    const activationConfig = CONFIG.DND5E.activityActivationTypes[this.activity.activation.type];
+    if ( activationConfig?.consume && this._shouldDisplay("consume.action") ) {
+      const { property } = activationConfig.consume;
+      const containsConsumption = this.activity.consumption.targets.find(t => {
+        return (t.type === "attribute") && (t.target === `${property}.value`);
       });
+      const current = foundry.utils.getProperty(this.actor.system, property);
+      if ( current && !containsConsumption ) {
+        const plurals = new Intl.PluralRules(game.i18n.lang);
+        const value = (this.config.consume !== false) && (this.config.consume?.action !== false);
+        const warn = (current.value < this.activity.activation.value) && value;
+        context.fields.push({
+          value, warn,
+          field: new BooleanField({
+            label: game.i18n.format("DND5E.CONSUMPTION.Type.Action.Prompt", {
+              type: activationConfig.label
+            }),
+            hint: game.i18n.format("DND5E.CONSUMPTION.Type.Action.PromptHint", {
+              available: game.i18n.format(`${activationConfig.counted}.${plurals.select(current.value)}`, {
+                number: `<strong>${formatNumber(current.value)}</strong>`
+              }),
+              cost: game.i18n.format(`${activationConfig.counted}.${plurals.select(this.activity.activation.value)}`, {
+                number: `<strong>${formatNumber(this.activity.activation.value)}</strong>`
+              })
+            })
+          }),
+          input: context.inputs.createCheckboxInput,
+          name: "consume.action"
+        });
+      }
     }
 
     if ( this.activity.requiresSpellSlot && this.activity.consumption.spellSlot
@@ -379,7 +386,7 @@ export default class ActivityUsageDialog extends Dialog5e {
         return { value: `spell${level}`, label };
       }).filter(_ => _);
       context.spellSlots = {
-        field: new StringField({ label: game.i18n.localize("DND5E.SpellCastUpcast") }),
+        field: new StringField({ required: true, blank: false, label: game.i18n.localize("DND5E.SpellCastUpcast") }),
         name: "spell.slot",
         value: this.config.spell?.slot,
         options: spellSlotOptions

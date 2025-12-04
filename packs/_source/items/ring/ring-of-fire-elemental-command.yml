@@ -41,7 +41,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: ''
     license: CC-BY-4.0
     rules: '2014'
@@ -101,6 +101,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: dxaE4B2S9PJ692hU
       sort: 0
       activation:
@@ -115,7 +116,6 @@ system:
           - type: itemUses
             value: '2'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -142,6 +142,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     rWInlhCUYFV0xFpU:
       type: cast
       spell:
@@ -155,6 +161,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: rWInlhCUYFV0xFpU
       sort: 0
       activation:
@@ -169,7 +176,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -192,6 +198,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     MWSaqDybpLBn8R9V:
       type: cast
       spell:
@@ -205,6 +217,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: MWSaqDybpLBn8R9V
       sort: 0
       activation:
@@ -219,7 +232,6 @@ system:
           - type: itemUses
             value: '2'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -242,6 +254,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     Favmm3fyHI1GTOcN:
       type: cast
       spell:
@@ -255,6 +273,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: Favmm3fyHI1GTOcN
       sort: 0
       activation:
@@ -269,7 +288,6 @@ system:
           - type: itemUses
             value: '3'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -292,6 +310,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   attuned: false
   identifier: ring-of-fire-elemental-command
 effects: []
@@ -299,18 +323,14 @@ folder: 5jrDZJ1U23Q9jDqB
 sort: 0
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037164666
-  modifiedTime: 1750697344647
+  modifiedTime: 1764619679610
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!L9KBLub5vfb3mTDz'

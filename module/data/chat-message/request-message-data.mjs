@@ -5,22 +5,13 @@ const {
 } = foundry.data.fields;
 
 /**
- * @typedef RequestTargetData
- * @property {string} actor            Actor for whom the request was made.
- * @property {ChatMessage5e} [result]  Chat message indicating the result of the request.
- * @property {User} [user]             Specific user who should handle the request. If not present, then any owner of
- *                                     the actor is able to handle it.
+ * @import { RequestMessageSystemData } from "./_types.mjs";
  */
 
 /**
  * Custom chat message type used for requesting an action be performed for a specific actor.
- *
- * @property {object} button
- * @property {string} [button.icon]         Font awesome code or path to SVG icon for the request button.
- * @property {string} [button.label]        Label used for the button.
- * @property {object} data                  Arbitrary data passed to the request handling method in addition to actor.
- * @property {string} handler               Name of the request handler specified in the config.
- * @property {RequestTargetData[]} targets  Actors that were the target of the request.
+ * @extends {ChatMessageDataModel<RequestMessageSystemData>}
+ * @mixes RequestMessageSystemData
  */
 export default class RequestMessageData extends ChatMessageDataModel {
 

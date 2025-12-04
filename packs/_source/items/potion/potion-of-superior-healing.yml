@@ -10,7 +10,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: ''
     license: CC-BY-4.0
     rules: '2014'
@@ -66,11 +66,8 @@ system:
       consumption:
         targets:
           - type: itemUses
-            target: ''
             value: '1'
-            scaling:
-              mode: ''
-              formula: ''
+            target: ''
         scaling:
           allowed: false
           max: ''
@@ -120,7 +117,17 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+      appliedEffects: []
   attuned: false
   identifier: potion-of-superior-healing
 effects: []
@@ -131,11 +138,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037101838
-  modifiedTime: 1750697344647
+  modifiedTime: 1764618987292
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!5m9ErO9In8Uc5yyf'

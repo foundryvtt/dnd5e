@@ -20,7 +20,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: ''
     license: CC-BY-4.0
     rules: '2014'
@@ -79,6 +79,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: XfgWDmDHXWX4rREQ
       sort: 0
       activation:
@@ -92,7 +93,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -115,6 +116,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   attuned: false
   identifier: cape-of-the-mountebank
 effects: []
@@ -122,18 +129,14 @@ folder: aJgMxnZED9XdoN2W
 sort: 0
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037253374
-  modifiedTime: 1750697344647
+  modifiedTime: 1764620534945
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!gpHgWLsD8k2yzbfR'

@@ -19,9 +19,9 @@ system:
     max: ''
   identifier: blessed-warrior
   source:
-    revision: 1
+    revision: 2
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   enchant: {}
   type:
@@ -29,28 +29,60 @@ system:
     subtype: fightingStyle
   prerequisites:
     level: 2
-    repeatable: false
+    items:
+      - fighting-style
   properties: []
   requirements: Paladin
-  advancement: []
-  cover: null
-  crewed: false
+  advancement:
+    - type: ItemChoice
+      _id: 6dwyqBA13Ui6p4Bf
+      configuration:
+        allowDrops: true
+        choices:
+          '0':
+            count: 2
+            replacement: false
+        pool: []
+        restriction:
+          list:
+            - class:cleric
+          level: '0'
+        spell:
+          ability:
+            - cha
+          method: spell
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+          prepared: 2
+        type: spell
+      value:
+        added: {}
+        replaced: {}
+      title: Choose Cantrips
+      hint: >-
+        You learn two Cleric cantrips of your choice. Guidance and Sacred Flame
+        are recommended. The chosen cantrips count as Paladin spells for you,
+        and Charisma is your spellcasting ability for them. Whenever you gain a
+        Paladin level, you can replace one of these cantrips with another Cleric
+        cantrip.
 _id: phbfstBlessedWar
 type: feat
 folder: 6uMLnndK8UPkb7Uy
 img: icons/skills/melee/sword-winged-holy-orange.webp
 effects: []
+sort: 0
+ownership:
+  default: 0
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1745513480134
-  modifiedTime: 1745712691385
+  systemVersion: 5.1.9
+  createdTime: 1726255213983
+  modifiedTime: 1760132295709
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
-sort: 1500000
-ownership:
-  default: 0
 _key: '!items!phbfstBlessedWar'

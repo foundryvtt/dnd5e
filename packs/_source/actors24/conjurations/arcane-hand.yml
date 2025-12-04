@@ -395,7 +395,7 @@ system:
   source:
     rules: '2024'
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
 prototypeToken:
   name: Bigby's Hand
   displayName: 0
@@ -491,7 +491,7 @@ items:
       source:
         custom: ''
         rules: '2024'
-        book: SRD 5.2
+        book: ''
         license: CC-BY-4.0
         revision: 1
       uses:
@@ -568,14 +568,12 @@ items:
             parts:
               - custom:
                   enabled: true
-                  formula: (2 * @flags.dnd5e.summon.level - 8)d8
+                  formula: (2 * @flags.dnd5e.summon.level - 5)d8
                 number: null
                 denomination: 0
                 bonus: ''
                 types:
                   - force
-                scaling:
-                  number: 1
           uses:
             spent: 0
             recovery: []
@@ -584,6 +582,11 @@ items:
           name: ''
           img: ''
           appliedEffects: []
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
       enchant: {}
       identifier: clenched-fist
       advancement: []
@@ -597,19 +600,15 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.2.0
       createdTime: null
-      modifiedTime: 1740680160054
+      modifiedTime: 1764613618689
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!phbsplBigbysHand.phbaoiClenchedFi'
@@ -626,7 +625,7 @@ items:
       source:
         custom: ''
         rules: '2024'
-        book: SRD 5.2
+        book: ''
         license: CC-BY-4.0
         revision: 1
       uses:
@@ -751,7 +750,7 @@ items:
       source:
         custom: ''
         rules: '2024'
-        book: SRD 5.2
+        book: ''
         license: CC-BY-4.0
         revision: 1
       uses:
@@ -940,7 +939,7 @@ items:
       source:
         custom: ''
         rules: '2024'
-        book: SRD 5.2
+        book: ''
         license: CC-BY-4.0
         revision: 1
       uses:

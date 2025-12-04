@@ -1,12 +1,12 @@
 import SaveSheet from "../../applications/activity/save-sheet.mjs";
-import SaveActivityData from "../../data/activity/save-data.mjs";
+import BaseSaveActivityData from "../../data/activity/save-data.mjs";
 import { getSceneTargets } from "../../utils.mjs";
 import ActivityMixin from "./mixin.mjs";
 
 /**
  * Activity for making saving throws and rolling damage.
  */
-export default class SaveActivity extends ActivityMixin(SaveActivityData) {
+export default class SaveActivity extends ActivityMixin(BaseSaveActivityData) {
   /* -------------------------------------------- */
   /*  Model Configuration                         */
   /* -------------------------------------------- */
@@ -22,6 +22,7 @@ export default class SaveActivity extends ActivityMixin(SaveActivityData) {
       type: "save",
       img: "systems/dnd5e/icons/svg/activity/save.svg",
       title: "DND5E.SAVE.Title.one",
+      hint: "DND5E.SAVE.Hint",
       sheetClass: SaveSheet,
       usage: {
         actions: {

@@ -358,8 +358,11 @@ system:
       fly: null
       swim: null
       walk: 30
-      units: null
+      units: ft
       hover: false
+      ignoredDifficultTerrain:
+        - web
+      special: ''
     attunement:
       max: 3
     senses:
@@ -444,7 +447,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   traits:
     size: lg
@@ -574,7 +577,7 @@ items:
       source:
         revision: 1
         rules: '2024'
-        book: SRD 5.2
+        book: ''
         license: CC-BY-4.0
       enchant: {}
       prerequisites:
@@ -626,7 +629,7 @@ items:
       source:
         revision: 1
         rules: '2024'
-        book: SRD 5.2
+        book: ''
         license: CC-BY-4.0
       enchant: {}
       prerequisites:
@@ -678,7 +681,7 @@ items:
       source:
         revision: 1
         rules: '2024'
-        book: SRD 5.2
+        book: ''
         license: CC-BY-4.0
       enchant: {}
       prerequisites:
@@ -778,7 +781,7 @@ items:
       source:
         revision: 1
         rules: '2024'
-        book: SRD 5.2
+        book: ''
         license: CC-BY-4.0
       enchant: {}
       prerequisites:
@@ -898,7 +901,7 @@ items:
       source:
         revision: 1
         rules: '2024'
-        book: SRD 5.2
+        book: ''
         license: CC-BY-4.0
       properties: []
       identified: true
@@ -1083,7 +1086,7 @@ items:
       source:
         revision: 1
         rules: '2024'
-        book: SRD 5.2
+        book: ''
         license: CC-BY-4.0
       enchant: {}
       prerequisites:
@@ -1123,11 +1126,11 @@ flags:
     showTokenPortrait: false
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.347'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.3
   createdTime: 1745416008124
-  modifiedTime: 1745712724699
+  modifiedTime: 1755806672135
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

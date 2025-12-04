@@ -41,8 +41,8 @@ export default class SaveSheet extends ActivitySheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _prepareEffectContext(context) {
-    context = await super._prepareEffectContext(context);
+  async _prepareEffectContext(context, options) {
+    context = await super._prepareEffectContext(context, options);
 
     context.abilityOptions = Object.entries(CONFIG.DND5E.abilities).map(([value, config]) => ({
       value, label: config.label

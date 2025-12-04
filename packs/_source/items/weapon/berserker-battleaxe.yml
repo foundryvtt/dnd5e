@@ -30,7 +30,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: ''
     license: CC-BY-4.0
     rules: '2014'
@@ -208,18 +208,14 @@ system:
       damage:
         onSave: half
         parts:
-          - number: 1
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
             denomination: 8
             bonus: '@mod'
             types:
               - slashing
-            custom:
-              enabled: false
-              formula: ''
-            scaling:
-              mode: whole
-              number: null
-              formula: ''
       save:
         ability: wis
         dc:
@@ -228,7 +224,17 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+      appliedEffects: []
   attuned: false
   ammunition: {}
   mastery: ''
@@ -241,11 +247,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037237138
-  modifiedTime: 1750697344647
+  modifiedTime: 1764620389986
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!dvNzJqb7vq6oJlA2'

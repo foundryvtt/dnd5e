@@ -1,10 +1,5 @@
 /**
- * A filter description.
- *
- * @typedef {object} FilterDescription
- * @property {string} k        Key on the data object to check.
- * @property {any} v           Value to compare.
- * @property {string} [o="_"]  Operator or comparison function to use.
+ * @import { FilterDescription } from "./_types.mjs";
  */
 
 /**

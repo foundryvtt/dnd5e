@@ -27,6 +27,9 @@ system:
       effects: []
       range:
         override: false
+        value: ''
+        units: ft
+        special: ''
       target:
         template:
           contiguous: false
@@ -64,11 +67,17 @@ system:
             bonus: ''
             types:
               - piercing
-            scaling:
-              number: 1
       name: Attack Sworn Enemy
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: true
+        requireIdentification: true
     hQyhQEtRT1J0ks2q:
       type: enchant
       name: Oathbow
@@ -151,8 +160,14 @@ system:
         override: false
       effects:
         - _id: EWoLqkPJeK9dwYhn
+          level:
+            min: null
+            max: null
       range:
         override: false
+        value: ''
+        units: ft
+        special: ''
       target:
         template:
           contiguous: false
@@ -176,6 +191,14 @@ system:
       img: systems/dnd5e/icons/svg/trait-languages.svg
       appliedEffects:
         - EWoLqkPJeK9dwYhn
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: true
+        requireIdentification: true
   uses:
     spent: 0
     recovery: []
@@ -206,7 +229,7 @@ system:
     revision: 1
     rules: '2024'
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
   identified: true
   unidentified:
     description: ''
@@ -378,14 +401,13 @@ flags:
       activity:
         - wBvt7GZJkhTta6By
         - kq0kzDyPVPzx5iXr
-      effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745431704598
+  modifiedTime: 1764615203427
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 9400000

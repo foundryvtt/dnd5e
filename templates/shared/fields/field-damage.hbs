@@ -22,15 +22,15 @@
 
         {{!-- Number --}}
         {{ formField fields.number name=(concat prefix "number") value=source.number label="DND5E.Number" localize=true
-                     hint=false classes="label-top" placeholder=numberPlaceholder }}
+                     hint=false classes="label-top" placeholder=numberPlaceholder rootId=@root.partId }}
 
         {{!-- Die --}}
         {{ formField fields.denomination name=(concat prefix "denomination") value=source.denomination label="DND5E.Die"
-                     hint=false localize=true options=denominationOptions classes="label-top" }}
+                     hint=false localize=true options=denominationOptions classes="label-top" rootId=@root.partId }}
 
         {{!-- Bonus --}}
         {{ formField fields.bonus name=(concat prefix "bonus") value=source.bonus label="DND5E.Bonus" localize=true
-                     hint=false classes="label-top" }}
+                     hint=false classes="label-top" rootId=@root.partId }}
     </div>
 </div>
 {{/unless}}
@@ -38,7 +38,7 @@
 {{!-- Types --}}
 {{#if types}}
 {{ formField fields.types name=(concat prefix "types") value=source.types options=types label="DND5E.Type"
-             localize=true }}
+             localize=true rootId=@root.partId }}
 {{/if}}
 
 {{!-- Scaling --}}
@@ -50,19 +50,20 @@
         {{!-- Mode --}}
         {{ formField fields.scaling.fields.mode name=(concat prefix "scaling.mode") value=source.scaling.mode
                      options=scalingOptions label="DND5E.DAMAGE.FIELDS.damage.parts.FIELDS.scaling.mode.abbr" hint=false
-                     localize=true classes="label-top" }}
+                     localize=true classes="label-top" rootId=@root.partId }}
 
         {{!-- Dice --}}
         {{#if source.scaling.mode}}
         {{ formField fields.scaling.fields.number name=(concat prefix "scaling.number") value=source.scaling.number
                      label="DND5E.DAMAGE.FIELDS.damage.parts.FIELDS.scaling.number.abbr" hint=false localize=true
-                     classes="label-top" }}
+                     classes="label-top" rootId=@root.partId }}
         {{/if}}
     </div>
 </div>
 
 {{!-- Formula --}}
 {{#if source.scaling.mode}}
-{{ formField fields.scaling.fields.formula name=(concat prefix "scaling.formula") value=source.scaling.formula }}
+{{ formField fields.scaling.fields.formula name=(concat prefix "scaling.formula") value=source.scaling.formula
+             rootId=@root.partId }}
 {{/if}}
 {{/if}}

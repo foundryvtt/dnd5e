@@ -1,13 +1,14 @@
 name: Hunter's Mark
 system:
   description:
-    value: "<p>You magically mark one creature you can see within range as your quarry. Until the spell ends, you deal an extra 1d6 Force damage to the target whenever you hit it with an attack roll. You also have Advantage on any [[/check ability=wis skill=prc]] or [[/check ability=wis skill=sur]] check you make to find it.</p><p>If the target drops to 0 Hit Points before this spell ends, you can take a Bonus Action to move the mark to a new creature you can see within range.</p><p><strong>Using a Higher-Level Spell Slot.</strong>\_Your Concentration can last longer with a spell slot of level 3–4 (up to 8 hours) or 5+ (up to 24 hours).</p>"
+    value: "<p>You magically mark one creature you can see within range as your quarry. Until the spell ends, you deal an extra [[/damage]] damage to the target whenever you hit it with an attack roll. You also have Advantage on any [[/check ability=wis skill=prc]] or [[/check ability=wis skill=sur]] check you make to find it.</p><p>If the target drops to 0 Hit Points before this spell ends, you can take a Bonus Action to move the mark to a new creature you can see within range.</p><p><strong>Using a Higher-Level Spell Slot.</strong>\_Your Concentration can last longer with a spell slot of level 3–4 (up to 8 hours) or 5+ (up to 24 hours).</p>"
     chat: ''
   source:
     custom: ''
     rules: '2024'
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
+    revision: 2
   activation:
     type: bonus
     condition: ''
@@ -88,7 +89,7 @@ system:
               enabled: false
               formula: ''
             number: 1
-            denomination: 6
+            denomination: '6'
             bonus: ''
             types:
               - force
@@ -98,10 +99,11 @@ system:
         spent: 0
         recovery: []
         max: ''
-      sort: 100000
+      sort: 200000
       name: Bonus Mark Damage
       img: ''
-      appliedEffects: []
+      appliedEffects:
+        - hYD38IP9Meq2ArIS
     vxr2JKuQ3jyMDTwb:
       type: utility
       _id: vxr2JKuQ3jyMDTwb
@@ -121,7 +123,7 @@ system:
         concentration: false
         override: false
       effects:
-        - _id: hYD38IP9Meq2ArIS
+        - _id: vPkln6UeePHnbLr4
       range:
         override: false
       target:
@@ -136,7 +138,7 @@ system:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
+      sort: 100000
       roll:
         prompt: false
         visible: false
@@ -145,12 +147,98 @@ system:
       name: Mark Creature
       img: ''
       appliedEffects:
-        - hYD38IP9Meq2ArIS
+        - vPkln6UeePHnbLr4
+    NQtVK0T5uwfMPGQL:
+      type: utility
+      activation:
+        type: bonus
+        value: null
+        override: true
+        condition: when the currently marked target drops to 0 Hit Points
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects:
+        - _id: vPkln6UeePHnbLr4
+      range:
+        override: true
+        units: any
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 300000
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Move Mark
+      _id: NQtVK0T5uwfMPGQL
+      img: ''
+      appliedEffects:
+        - vPkln6UeePHnbLr4
   identifier: hunters-mark
 _id: phbsplHuntersMar
 type: spell
 img: icons/skills/targeting/crosshair-scope-sniper-green.webp
-effects: []
+effects:
+  - name: Hunter's Mark
+    img: icons/skills/targeting/crosshair-scope-sniper-green.webp
+    origin: Compendium.dnd5e.spells24.Item.phbsplHuntersMar
+    transfer: false
+    _id: vPkln6UeePHnbLr4
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: 3600
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>Until the spell ends, the caster deals an extra [[/damage 1d6 force]]
+      damage to the target whenever they hit it with an attack roll.</p>
+    tint: '#ffffff'
+    statuses:
+      - marked
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.347'
+      systemId: dnd5e
+      systemVersion: 5.1.0
+      createdTime: 1755019302366
+      modifiedTime: 1755019416980
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!phbsplHuntersMar.vPkln6UeePHnbLr4'
 folder: pBaAAtXBCq9FVEnL
 sort: 1900000
 ownership:
@@ -162,11 +250,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.347'
   systemId: dnd5e
   systemVersion: 5.1.0
   createdTime: 1724425959210
-  modifiedTime: 1750441422104
+  modifiedTime: 1755019619035
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplHuntersMar'

@@ -1,0 +1,99 @@
+_id: mmEtherealStride
+name: Ethereal Stride
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    0EfvhIXAIPlYUiNE:
+      type: utility
+      _id: 0EfvhIXAIPlYUiNE
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '5'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: willing
+          count: '3'
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Expend Use
+      img: systems/dnd5e/icons/svg/monster.svg
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] and up to [[lookup
+      @target.affects.labels.statblock activity=0EfvhIXAIPlYUiNE]] within
+      [[lookup @range.value activity=0EfvhIXAIPlYUiNE]] [[lookup @range.units
+      activity=0EfvhIXAIPlYUiNE]]. of it teleport to the Ethereal Plane from the
+      Material Plane or vice versa.</p>
+    chat: ''
+  identifier: ethereal-stride
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/control/silhouette-hold-change-green.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1735858384979
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 7400000
+ownership:
+  default: 0
+_key: '!items!mmEtherealStride'

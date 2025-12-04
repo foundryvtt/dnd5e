@@ -7,6 +7,10 @@ import {TraitConfigurationData, TraitValueData} from "../../data/advancement/tra
 import { filteredKeys, localizeSchema } from "../../utils.mjs";
 
 /**
+ * @import { TraitChoices } from "./_types.mjs";
+ */
+
+/**
  * Advancement that grants the player with certain traits or presents them with a list of traits from which
  * to choose.
  */
@@ -303,18 +307,6 @@ export default class TraitAdvancement extends Advancement {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * The advancement configuration is flattened into separate options for the user that are chosen step-by-step. Some
-   * are automatically picked for them if they are 'grants' or if there is only one option after the character's
-   * existing traits have been taken into account.
-   * @typedef {object} TraitChoices
-   * @property {"grant"|"choice"} type  Whether this trait is automatically granted or is chosen from some options.
-   * @property {number} [choiceIdx]     An index that groups each separate choice into the groups that they originally
-   *                                    came from.
-   * @property {SelectChoices} choices  The available traits to pick from. Grants have only 0 or 1, depending on whether
-   *                                    the character already has the granted trait.
-   */
 
   /**
    * Determine which of the provided grants, if any, still needs to be fulfilled.

@@ -5,13 +5,13 @@ import SourceField from "../../shared/source-field.mjs";
 const { SchemaField, HTMLField } = foundry.data.fields;
 
 /**
+ * @import { CompendiumBrowserFilterDefinitionEntry } from "../../../applications/compendium-browser.mjs";
+ * @import { ItemDescriptionTemplateData } from "./_types.mjs";
+ */
+
+/**
  * Data model template with item description & source.
- *
- * @property {object} description               Various item descriptions.
- * @property {string} description.value         Full item description.
- * @property {string} description.chat          Description displayed in chat card.
- * @property {string} identifier                Identifier slug for this item.
- * @property {SourceData} source                Adventure or sourcebook where this item originated.
+ * @extends {SystemDataModel<ItemDescriptionTemplateData>}
  * @mixin
  */
 export default class ItemDescriptionTemplate extends SystemDataModel {
@@ -19,8 +19,8 @@ export default class ItemDescriptionTemplate extends SystemDataModel {
   static defineSchema() {
     return {
       description: new SchemaField({
-        value: new HTMLField({required: true, nullable: true, label: "DND5E.Description"}),
-        chat: new HTMLField({required: true, nullable: true, label: "DND5E.DescriptionChat"})
+        value: new HTMLField({ required: true, nullable: true, label: "DND5E.Description" }),
+        chat: new HTMLField({ required: true, nullable: true, label: "DND5E.DescriptionChat" })
       }),
       identifier: new IdentifierField({ required: true, label: "DND5E.Identifier" }),
       source: new SourceField()
@@ -28,7 +28,19 @@ export default class ItemDescriptionTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
-  /*  Data Migrations                             */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * What properties can be used for this item?
+   * @returns {Set<string>}
+   */
+  get validProperties() {
+    return new Set(CONFIG.DND5E.validProperties[this.parent.type] ?? []);
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -59,18 +71,6 @@ export default class ItemDescriptionTemplate extends SystemDataModel {
   prepareDescriptionData() {
     const uuid = this.parent.flags.dnd5e?.sourceId ?? this.parent._stats?.compendiumSource ?? this.parent.uuid;
     SourceField.prepareData.call(this.source, uuid);
-  }
-
-  /* -------------------------------------------- */
-  /*  Getters                                     */
-  /* -------------------------------------------- */
-
-  /**
-   * What properties can be used for this item?
-   * @returns {Set<string>}
-   */
-  get validProperties() {
-    return new Set(CONFIG.DND5E.validProperties[this.parent.type] ?? []);
   }
 
   /* -------------------------------------------- */

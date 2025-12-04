@@ -14,7 +14,8 @@ system:
     custom: ''
     rules: '2024'
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
+    revision: 2
   activation:
     type: action
     condition: ''
@@ -167,7 +168,31 @@ effects:
     _id: csA26qg5YSsji1ZZ
     type: base
     system: {}
-    changes: []
+    changes:
+      - key: system.abilities.str.save.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
+      - key: system.abilities.dex.save.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
+      - key: system.abilities.con.save.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
+      - key: system.abilities.int.save.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
+      - key: system.abilities.wis.save.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
+      - key: system.abilities.cha.save.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
     disabled: false
     duration:
       startTime: null
@@ -181,15 +206,18 @@ effects:
     tint: '#ffffff'
     statuses: []
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.9
       createdTime: 1725305728157
-      modifiedTime: 1725306705284
+      modifiedTime: 1760129009586
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!phbsplHolyAura00.csA26qg5YSsji1ZZ'
@@ -221,7 +249,7 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.346'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: 1725306554545
@@ -233,18 +261,14 @@ folder: M5CvwK9zVtzx6Dnn
 sort: 100196
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.9
   createdTime: 1724425959000
-  modifiedTime: 1745256794841
+  modifiedTime: 1760129012237
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplHolyAura00'

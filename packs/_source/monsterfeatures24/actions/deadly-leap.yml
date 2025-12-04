@@ -1,0 +1,156 @@
+_id: mmDeadlyLeap0000
+name: Deadly Leap
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    IPCXEQoTuaAG5l52:
+      type: save
+      _id: IPCXEQoTuaAG5l52
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: 6922OmgCjpz242Ib
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: line
+          size: '15'
+          count: ''
+          width: ''
+        affects:
+          choice: false
+          type: creature
+          count: ''
+          special: in the creature's destination space
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 3
+            denomination: '12'
+            bonus: ''
+            types:
+              - bludgeoning
+        onSave: half
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: str
+          formula: 8 + @mod + @prof
+      name: Save
+      img: ''
+      appliedEffects:
+        - 6922OmgCjpz242Ib
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] spends 5 feet of
+      movement to jump to a space within 15 feet that contains one or more Large
+      or smaller creatures.</p><p class="feature"><em>Dexterity Saving
+      Throw:</em> DC [[lookup @save.dc.value activity=IPCXEQoTuaAG5l52]], each
+      [[lookup @target.affects.type activity=IPCXEQoTuaAG5l52]] in the [[lookup
+      @name lowercase]]'s destination space.</p><p
+      class="feature"><em>Failure:</em> [[/damage average]] damage, and the
+      target has the &amp;Reference[Prone apply=false] condition.</p><p
+      class="feature"><em>Success:</em> Half damage, and the target is pushed 5
+      feet straight away from the [[lookup @name lowercase]].</p>
+    chat: ''
+  identifier: deadly-leap
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/skills/movement/arrow-upward-blue.webp
+effects:
+  - name: Prone
+    img: systems/dnd5e/icons/svg/statuses/prone.svg
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmDeadlyLeap0000
+    _id: 6922OmgCjpz242Ib
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: <p>The target has the &amp;Reference[Prone apply=false] condition.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - prone
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: 1735676319820
+      modifiedTime: 1736047663176
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmDeadlyLeap0000.6922OmgCjpz242Ib'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1738096704402
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 7400000
+ownership:
+  default: 0
+_key: '!items!mmDeadlyLeap0000'

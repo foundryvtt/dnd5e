@@ -5,10 +5,6 @@ const { SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Field for storing duration data.
- *
- * @property {string} value             Scalar value for the activity's duration.
- * @property {string} units             Units that are used for the duration.
- * @property {string} special           Description of any special duration details.
  */
 export default class DurationField extends SchemaField {
   constructor(fields={}, options={}) {
@@ -66,6 +62,7 @@ export default class DurationField extends SchemaField {
       case "minute": return { seconds: this.value * 60 };
       case "hour": return { seconds: this.value * 60 * 60 };
       case "day": return { seconds: this.value * 60 * 60 * 24 };
+      case "month": return { seconds: this.value * 60 * 60 * 24 * 30 };
       case "year": return { seconds: this.value * 60 * 60 * 24 * 365 };
       default: return {};
     }

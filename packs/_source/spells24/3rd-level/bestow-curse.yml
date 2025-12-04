@@ -25,7 +25,7 @@ system:
     custom: ''
     rules: '2024'
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
     revision: 2
   activation:
     type: action
@@ -284,7 +284,15 @@ effects:
     _id: 2Xjz5PKhyDferpZ7
     type: base
     system: {}
-    changes: []
+    changes:
+      - key: system.abilities.cha.check.roll.mode
+        mode: 2
+        value: '-1'
+        priority: null
+      - key: system.abilities.cha.save.roll.mode
+        mode: 2
+        value: '-1'
+        priority: null
     description: >-
       <p>The target has Disadvantage on ability checks and saving throws made
       with the chosen ability.</p>
@@ -297,11 +305,11 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplHex0000000.ActiveEffect.sC2IXWDs07oTt5JN
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.350'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.2.0
       createdTime: 1725055417995
-      modifiedTime: 1725055533898
+      modifiedTime: 1761861523129
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!phbsplBestowCurs.2Xjz5PKhyDferpZ7'
@@ -321,7 +329,15 @@ effects:
     _id: BXWN6AGeNbxrRBUZ
     type: base
     system: {}
-    changes: []
+    changes:
+      - key: system.abilities.con.check.roll.mode
+        mode: 2
+        value: '-1'
+        priority: null
+      - key: system.abilities.con.save.roll.mode
+        mode: 2
+        value: '-1'
+        priority: null
     description: >-
       <p>The target has Disadvantage on ability checks and saving throws made
       with the chosen ability.</p>
@@ -334,11 +350,11 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplHex0000000.ActiveEffect.XVQwGWbC0A1svBNm
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.350'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.2.0
       createdTime: 1725055419250
-      modifiedTime: 1725055539962
+      modifiedTime: 1761861541688
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!phbsplBestowCurs.BXWN6AGeNbxrRBUZ'
@@ -358,7 +374,15 @@ effects:
     _id: pG5HdDpW8VELR1O3
     type: base
     system: {}
-    changes: []
+    changes:
+      - key: system.abilities.dex.check.roll.mode
+        mode: 2
+        value: '-1'
+        priority: null
+      - key: system.abilities.dex.save.roll.mode
+        mode: 2
+        value: '-1'
+        priority: null
     description: >-
       <p>The target has Disadvantage on ability checks and saving throws made
       with the chosen ability.</p>
@@ -371,11 +395,11 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplHex0000000.ActiveEffect.Mmss2SPIy7wtt2PV
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.350'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.2.0
       createdTime: 1725055420606
-      modifiedTime: 1725055546409
+      modifiedTime: 1761861559532
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!phbsplBestowCurs.pG5HdDpW8VELR1O3'
@@ -395,7 +419,15 @@ effects:
     _id: eA7PgIuucNGqZ1AS
     type: base
     system: {}
-    changes: []
+    changes:
+      - key: system.abilities.int.check.roll.mode
+        mode: 2
+        value: '-1'
+        priority: null
+      - key: system.abilities.int.save.roll.mode
+        mode: 2
+        value: '-1'
+        priority: null
     description: >-
       <p>The target has Disadvantage on ability checks and saving throws made
       with the chosen ability.</p>
@@ -408,11 +440,11 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplHex0000000.ActiveEffect.FfVB2Yyb7wfgpsQB
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.350'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.2.0
       createdTime: 1725055422101
-      modifiedTime: 1725055491416
+      modifiedTime: 1761861579749
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!phbsplBestowCurs.eA7PgIuucNGqZ1AS'
@@ -432,7 +464,15 @@ effects:
     _id: m5aRx9iXnJi2WWPU
     type: base
     system: {}
-    changes: []
+    changes:
+      - key: system.abilities.str.check.roll.mode
+        mode: 2
+        value: '-1'
+        priority: null
+      - key: system.abilities.str.save.roll.mode
+        mode: 2
+        value: '-1'
+        priority: null
     description: >-
       <p>The target has Disadvantage on ability checks and saving throws made
       with the chosen ability.</p>
@@ -445,11 +485,11 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplHex0000000.ActiveEffect.ljMTBKPVmEnLPX1b
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.350'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.2.0
       createdTime: 1725055423595
-      modifiedTime: 1725055515289
+      modifiedTime: 1761861611803
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!phbsplBestowCurs.m5aRx9iXnJi2WWPU'
@@ -469,7 +509,15 @@ effects:
     _id: qLBTtRHOpGfv4IAb
     type: base
     system: {}
-    changes: []
+    changes:
+      - key: system.abilities.wis.save.roll.mode
+        mode: 2
+        value: '-1'
+        priority: null
+      - key: system.abilities.wis.save.roll.mode
+        mode: 2
+        value: '-1'
+        priority: null
     description: >-
       <p>The target has Disadvantage on ability checks and saving throws made
       with the chosen ability.</p>
@@ -482,11 +530,11 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplHex0000000.ActiveEffect.k2569xtIeXKRReLU
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.350'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.2.0
       createdTime: 1725055424987
-      modifiedTime: 1725055527988
+      modifiedTime: 1761861624520
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!phbsplBestowCurs.qLBTtRHOpGfv4IAb'

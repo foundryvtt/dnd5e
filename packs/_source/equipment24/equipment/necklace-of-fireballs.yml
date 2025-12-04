@@ -74,6 +74,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: v2sP2OkYkHfhR8hu
       sort: 0
       activation:
@@ -117,6 +118,12 @@ system:
         max: ''
       name: Throw Bead
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 9
     recovery: []
@@ -142,7 +149,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   identified: true
   unidentified:
@@ -178,18 +185,14 @@ system:
   strength: null
   proficient: null
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712701541
+  modifiedTime: 1764617214013
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 22700000

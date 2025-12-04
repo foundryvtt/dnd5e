@@ -1,7 +1,13 @@
 const { BooleanField } = foundry.data.fields;
 
 /**
+ * @import { SystemTerrainData } from "./_types.mjs";
+ */
+
+/**
  * Extension of terrain data with support for 5e concepts.
+ * @extends {foundry.data.TerrainData<SystemTerrainData>}
+ * @mixes SystemTerrainData
  */
 export default class TerrainData5e extends foundry.data.TerrainData {
 
@@ -26,7 +32,7 @@ export default class TerrainData5e extends foundry.data.TerrainData {
 
   /** @override */
   static resolveTerrainEffects(effects) {
-    const noAutomation = game.settings.get("dnd5e", "disableMovementAutomation");
+    const noAutomation = game.settings.get("dnd5e", "movementAutomation") === "none";
     let data = super.resolveTerrainEffects(effects);
     if ( noAutomation || !effects.some(e => e.name === "difficultTerrain") ) return data;
     if ( !data ) return new this({ difficulty: 2, difficultTerrain: true });

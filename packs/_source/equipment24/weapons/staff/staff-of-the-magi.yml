@@ -98,6 +98,13 @@ system:
         formula: ''
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
     yf3QuUmZ7yHBdu3l:
       type: cast
       spell:
@@ -106,12 +113,13 @@ system:
           attack: null
           save: null
           override: false
-        level: null
+        level: 2
         properties:
           - vocal
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: yf3QuUmZ7yHBdu3l
       sort: 300000
       activation:
@@ -123,53 +131,6 @@ system:
           allowed: false
         spellSlot: true
         targets: []
-      description: {}
-      duration:
-        units: inst
-        concentration: false
-        override: false
-      range:
-        override: false
-      target:
-        template:
-          contiguous: false
-          units: ft
-        affects:
-          choice: false
-        override: false
-        prompt: true
-      uses:
-        spent: 0
-        recovery: []
-    3L8BGb2MQfsXgtiI:
-      type: cast
-      spell:
-        uuid: Compendium.dnd5e.spells24.Item.phbsplConjureEle
-        challenge:
-          attack: null
-          save: null
-          override: false
-        level: '5'
-        properties:
-          - vocal
-          - somatic
-          - material
-        spellbook: true
-      _id: 3L8BGb2MQfsXgtiI
-      sort: 400000
-      activation:
-        type: action
-        value: null
-        override: false
-      consumption:
-        scaling:
-          allowed: false
-        spellSlot: true
-        targets:
-          - type: itemUses
-            value: '7'
-            target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -192,6 +153,69 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+    3L8BGb2MQfsXgtiI:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplConjureEle
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '5'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+        ability: ''
+      _id: 3L8BGb2MQfsXgtiI
+      sort: 400000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '7'
+            target: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     HxUNEjj9zqXWE3Ab:
       type: cast
       spell:
@@ -206,6 +230,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: HxUNEjj9zqXWE3Ab
       sort: 500000
       activation:
@@ -239,6 +264,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     FEXImib6NMikFURp:
       type: cast
       spell:
@@ -253,6 +284,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: FEXImib6NMikFURp
       sort: 600000
       activation:
@@ -267,7 +299,6 @@ system:
           - type: itemUses
             value: '3'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -290,6 +321,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     UNOZrUtFOPFeqGTV:
       type: cast
       spell:
@@ -298,12 +335,13 @@ system:
           attack: null
           save: null
           override: false
-        level: null
+        level: 2
         properties:
           - vocal
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: UNOZrUtFOPFeqGTV
       sort: 700000
       activation:
@@ -315,7 +353,8 @@ system:
           allowed: false
         spellSlot: true
         targets: []
-      description: {}
+      description:
+        chatFlavor: ''
       duration:
         units: inst
         concentration: false
@@ -333,6 +372,15 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
+      name: ''
+      img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     q19KXqvPK8FWrLT9:
       type: cast
       spell:
@@ -347,6 +395,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: q19KXqvPK8FWrLT9
       sort: 800000
       activation:
@@ -361,7 +410,6 @@ system:
           - type: itemUses
             value: '7'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -384,6 +432,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     ZD8LtVtrjvBl3D0F:
       type: cast
       spell:
@@ -398,6 +452,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: ZD8LtVtrjvBl3D0F
       sort: 900000
       activation:
@@ -412,7 +467,6 @@ system:
           - type: itemUses
             value: '2'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -435,6 +489,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     afXaXdDq9syhL5dh:
       type: cast
       spell:
@@ -449,6 +509,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: afXaXdDq9syhL5dh
       sort: 1100000
       activation:
@@ -463,7 +524,6 @@ system:
           - type: itemUses
             value: '4'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -486,6 +546,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     WzFr30itpNQnq6JS:
       type: cast
       spell:
@@ -500,6 +566,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: WzFr30itpNQnq6JS
       sort: 1200000
       activation:
@@ -514,7 +581,6 @@ system:
           - type: itemUses
             value: '2'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -537,6 +603,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     ak1haIVycqSCBUBH:
       type: cast
       spell:
@@ -551,6 +623,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: ak1haIVycqSCBUBH
       sort: 1300000
       activation:
@@ -564,7 +637,7 @@ system:
         targets:
           - type: itemUses
             value: '2'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -587,6 +660,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     Leajkf976uWPrzcW:
       type: cast
       spell:
@@ -601,6 +680,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: Leajkf976uWPrzcW
       sort: 1400000
       activation:
@@ -612,7 +692,8 @@ system:
           allowed: false
         spellSlot: true
         targets: []
-      description: {}
+      description:
+        chatFlavor: ''
       duration:
         units: inst
         concentration: false
@@ -630,6 +711,15 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
+      name: ''
+      img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     AWCWzGMIZfHxoALt:
       type: cast
       spell:
@@ -644,6 +734,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: AWCWzGMIZfHxoALt
       sort: 1500000
       activation:
@@ -658,7 +749,6 @@ system:
           - type: itemUses
             value: '7'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -681,6 +771,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     O7WRsRmSPQYoWLIZ:
       type: cast
       spell:
@@ -695,6 +791,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: O7WRsRmSPQYoWLIZ
       sort: 1600000
       activation:
@@ -706,7 +803,8 @@ system:
           allowed: false
         spellSlot: true
         targets: []
-      description: {}
+      description:
+        chatFlavor: ''
       duration:
         units: inst
         concentration: false
@@ -724,6 +822,15 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
+      name: ''
+      img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     SzTx745dFkckEiUF:
       type: cast
       spell:
@@ -738,6 +845,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: SzTx745dFkckEiUF
       sort: 1700000
       activation:
@@ -751,7 +859,7 @@ system:
         targets:
           - type: itemUses
             value: '5'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -774,6 +882,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     CvcYvfj8kKJwtBRx:
       type: cast
       spell:
@@ -788,6 +902,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: CvcYvfj8kKJwtBRx
       sort: 1800000
       activation:
@@ -801,7 +916,7 @@ system:
         targets:
           - type: itemUses
             value: '7'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -824,6 +939,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     j2A50xIz8n5xxucC:
       type: cast
       spell:
@@ -838,6 +959,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: j2A50xIz8n5xxucC
       sort: 1900000
       activation:
@@ -871,6 +993,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     sCErCqrSk0MKkRzj:
       type: cast
       spell:
@@ -885,6 +1013,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: sCErCqrSk0MKkRzj
       sort: 2000000
       activation:
@@ -898,7 +1027,7 @@ system:
         targets:
           - type: itemUses
             value: '5'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -921,6 +1050,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     XkvsDzMADJkba8kz:
       type: cast
       spell:
@@ -935,6 +1070,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: XkvsDzMADJkba8kz
       sort: 2100000
       activation:
@@ -949,7 +1085,6 @@ system:
           - type: itemUses
             value: '4'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -972,6 +1107,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     MWT8UKRWGxp5caKv:
       type: cast
       spell:
@@ -986,6 +1127,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: MWT8UKRWGxp5caKv
       sort: 2200000
       activation:
@@ -1000,7 +1142,6 @@ system:
           - type: itemUses
             value: '2'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -1023,6 +1164,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     214FXhkTH9yenAGw:
       type: save
       name: 'Retributive Strike: Save'
@@ -1075,8 +1222,6 @@ system:
             bonus: ''
             types:
               - force
-            scaling:
-              number: 1
         onSave: half
       save:
         ability: dex
@@ -1085,6 +1230,13 @@ system:
           formula: '17'
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: false
     NVRhuyVOreCm0o7T:
       type: damage
       name: Retributive Strike
@@ -1137,10 +1289,15 @@ system:
             bonus: ''
             types:
               - force
-            scaling:
-              number: 1
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: false
   uses:
     spent: 0
     recovery:
@@ -1205,7 +1362,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   identified: true
   unidentified:
@@ -1310,18 +1467,14 @@ effects:
       exportSource: null
     _key: '!items.effects!dmgStaffOfTheMag.Jinexib3GfyrMbrP'
 folder: 5p9KrkF39e6vFO4g
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712703768
+  modifiedTime: 1764615480721
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 112500

@@ -2,11 +2,7 @@ import SystemDataModel from "../../abstract/system-data-model.mjs";
 
 /**
  * Data model template with item type, subtype and baseItem.
- *
- * @property {object} type                      Standardized item type object.
- * @property {string} type.value                Category to which this item belongs.
- * @property {string} type.subtype              Item subtype according to its category.
- * @property {string} type.baseItem             Item this one is based on.
+ * @extends {SystemDataModel}
  * @mixin
  */
 export default class ItemTypeTemplate extends SystemDataModel {
@@ -28,7 +24,7 @@ export default class ItemTypeTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
-  /*  Migrations                                  */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @inheritDoc */

@@ -76,7 +76,6 @@ system:
         targets:
           - type: activityUses
             value: '1'
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -86,6 +85,9 @@ system:
       effects:
         - _id: UTstWNbk0NXrKgS6
           onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
       target:
@@ -117,6 +119,13 @@ system:
       img: ''
       appliedEffects:
         - UTstWNbk0NXrKgS6
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireMagic: true
     npfuUn0YaFlIYyD1:
       type: damage
       name: Lightning
@@ -134,7 +143,6 @@ system:
         targets:
           - type: activityUses
             value: '1'
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -174,10 +182,15 @@ system:
             bonus: ''
             types:
               - lightning
-            scaling:
-              number: 1
       img: ''
       appliedEffects: []
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireMagic: true
     EtOETCHaEK0mcw03:
       type: save
       name: Thunder & Lightning
@@ -195,7 +208,6 @@ system:
         targets:
           - type: activityUses
             value: '1'
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -205,6 +217,9 @@ system:
       effects:
         - _id: UTstWNbk0NXrKgS6
           onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
       target:
@@ -235,17 +250,13 @@ system:
             bonus: ''
             types:
               - lightning
-            scaling:
-              number: 1
           - custom:
               enabled: false
               formula: ''
             number: null
-            denomination: 0
+            denomination: null
             bonus: ''
             types: []
-            scaling:
-              number: 1
         onSave: full
       save:
         ability: con
@@ -255,6 +266,13 @@ system:
       img: ''
       appliedEffects:
         - UTstWNbk0NXrKgS6
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
     hjxRfoWyCUGCMbMr:
       type: save
       name: Lightning Strike
@@ -272,7 +290,6 @@ system:
         targets:
           - type: activityUses
             value: '1'
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -313,8 +330,6 @@ system:
             bonus: ''
             types:
               - lightning
-            scaling:
-              number: 1
         onSave: half
       save:
         ability: dex
@@ -323,6 +338,13 @@ system:
           formula: '17'
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
     CnEqIoGzAUahrQIH:
       type: save
       name: Thunderclap
@@ -340,7 +362,6 @@ system:
         targets:
           - type: activityUses
             value: '1'
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -350,6 +371,9 @@ system:
       effects:
         - _id: VdYJQUJUwgsuptnY
           onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
       target:
@@ -382,8 +406,6 @@ system:
             bonus: ''
             types:
               - thunder
-            scaling:
-              number: 1
         onSave: half
       save:
         ability: con
@@ -393,6 +415,13 @@ system:
       img: ''
       appliedEffects:
         - VdYJQUJUwgsuptnY
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
   uses:
     spent: 0
     recovery:
@@ -434,7 +463,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   identified: true
   unidentified:
@@ -565,18 +594,14 @@ effects:
       exportSource: null
     _key: '!items.effects!dmgStaffOfThunde.VdYJQUJUwgsuptnY'
 folder: 5p9KrkF39e6vFO4g
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712703845
+  modifiedTime: 1764615542202
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 200000

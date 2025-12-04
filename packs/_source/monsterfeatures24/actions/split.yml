@@ -1,0 +1,126 @@
+_id: mmSplit000000000
+name: Split
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    zoXFSgzmWq8frUjI:
+      type: summon
+      _id: zoXFSgzmWq8frUjI
+      sort: 0
+      activation:
+        type: reaction
+        value: null
+        override: false
+        condition: >-
+          is Large or Medium and has 10+ Hit Points, it becomes Bloodied or is
+          subjected to Lightning or Slashing damage.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: self
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: '-@summon.attributes.hp.value + floor(@attributes.hp.value / 2)'
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes:
+        - sm
+        - med
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+        ability: ''
+      profiles:
+        - count: '2'
+          name: Black Pudding
+          _id: tqwi23UTxK7RtlbZ
+          uuid: Compendium.dnd5e.actors24.Actor.mmBlackPudding00
+          level:
+            min: null
+            max: null
+      summon:
+        prompt: true
+        mode: ''
+        identifier: ''
+      name: Split
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature"><em>Trigger:</em> While the [[lookup @name lowercase]]
+      [[lookup @activation.condition activity=zoXFSgzmWq8frUjI]] </p><p
+      class="feature"><em>Response:</em> The [[lookup @name lowercase]] splits
+      into two new <strong>[[lookup @name capitalize]]</strong>. Each new
+      [[lookup @name lowercase]] is one size smaller than the original [[lookup
+      @name lowercase]] and acts on its Initiative. The original [[lookup @name
+      lowercase]]'s Hit Points are divided evenly between the new [[lookup @name
+      lowercase]]s (round down).</p>
+    chat: ''
+  identifier: split
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/creatures/slimes/slime-movement-pseudopod-green.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.3.5
+  createdTime: 1733432292956
+  modifiedTime: 1741122935853
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 21900000
+ownership:
+  default: 0
+_key: '!items!mmSplit000000000'

@@ -8,7 +8,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: ''
     license: CC-BY-4.0
     rules: '2014'
@@ -51,59 +51,7 @@ system:
   crewed: false
   properties:
     - mgc
-  activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: utility
-      activation:
-        type: ''
-        value: null
-        condition: ''
-        override: false
-      consumption:
-        targets: []
-        scaling:
-          allowed: false
-          max: ''
-        spellSlot: true
-      description:
-        chatFlavor: ''
-      duration:
-        concentration: false
-        value: ''
-        units: ''
-        special: ''
-        override: false
-      effects: []
-      range:
-        units: self
-        special: ''
-        override: false
-      target:
-        template:
-          count: ''
-          contiguous: false
-          type: ''
-          size: ''
-          width: ''
-          height: ''
-          units: ''
-        affects:
-          count: ''
-          type: self
-          choice: false
-          special: ''
-        prompt: true
-        override: false
-      roll:
-        formula: ''
-        name: ''
-        prompt: false
-        visible: false
-      uses:
-        spent: 0
-        recovery: []
-      sort: 0
+  activities: {}
   attuned: false
   identifier: ring-of-swimming
 effects:
@@ -151,11 +99,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037221551
-  modifiedTime: 1750697344647
+  modifiedTime: 1764620239708
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!aA7MbjnpHYoYvmuW'

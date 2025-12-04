@@ -10,7 +10,7 @@ system:
     custom: ''
     rules: '2024'
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
   activation:
     type: action
     condition: ''
@@ -107,7 +107,15 @@ effects:
     _id: 5fziLN2CaamManlf
     type: base
     system: {}
-    changes: []
+    changes:
+      - key: system.abilities.wis.save.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
+      - key: system.attributes.death.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
     description: >-
       <p>The target has Advantage on Wisdom saving throws and Death Saving
       Throws and regains the maximum number of Hit Points possible from any
@@ -119,9 +127,9 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.350'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.2.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null

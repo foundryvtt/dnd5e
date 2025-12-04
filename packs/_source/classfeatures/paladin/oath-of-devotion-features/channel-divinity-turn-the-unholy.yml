@@ -19,7 +19,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: ''
     license: CC-BY-4.0
     rules: '2014'
@@ -44,11 +44,8 @@ system:
       consumption:
         targets:
           - type: itemUses
-            target: Compendium.dnd5e.classfeatures.Item.8M7uOPhbTxoxxJSo
             value: '1'
-            scaling:
-              mode: ''
-              formula: ''
+            target: feat:channel-divinity
         scaling:
           allowed: false
           max: ''
@@ -94,7 +91,11 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      appliedEffects: []
   enchant: {}
   prerequisites:
     level: null
@@ -106,11 +107,11 @@ folder: W9eAXfvupEhLWmZ4
 sort: 0
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.2.0
   createdTime: 1725037385286
-  modifiedTime: 1725992288749
+  modifiedTime: 1759426763396
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!ZdwGlsJNtc7pGFCd'

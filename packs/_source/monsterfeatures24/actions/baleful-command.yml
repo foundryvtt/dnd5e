@@ -1,0 +1,166 @@
+_id: mmBalefulCommand
+name: Baleful Command
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    SzU2lwdbqgoFMuBM:
+      type: save
+      _id: SzU2lwdbqgoFMuBM
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: round
+        concentration: false
+        override: false
+        value: '1'
+      effects:
+        - _id: 4GgIe9QPQ5oYRsHN
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: radius
+          size: '30'
+          count: ''
+        affects:
+          choice: false
+          type: enemy
+          count: ''
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 8
+            denomination: 6
+            bonus: ''
+            types:
+              - psychic
+            scaling:
+              number: 1
+        onSave: none
+      save:
+        ability:
+          - wis
+        dc:
+          calculation: cha
+          formula: ''
+      name: ''
+      img: ''
+      appliedEffects:
+        - 4GgIe9QPQ5oYRsHN
+  uses:
+    spent: 0
+    recovery:
+      - period: recharge
+        formula: '5'
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <p><em>Wisdom Saving Throw:</em> DC [[lookup @save.dc.value
+      activity=SzU2lwdbqgoFMuBM]], each [[lookup @target.affects.type
+      activity=SzU2lwdbqgoFMuBM]] in a [[lookup @target.template.size
+      activity=SzU2lwdbqgoFMuBM]]-foot Emanation originating from the [[lookup
+      @name lowercase]].</p><p><em>Failure:</em> [[/damage average]] damage, and
+      the target has the &amp;Reference[Frightened apply=false] and
+      &amp;Reference[Incapacitated apply=false] conditions until the start of
+      the [[lookup @name lowercase]]'s next turn.</p>
+    chat: ''
+  identifier: baleful-command
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/unholy/silhouette-robe-evil-power.webp
+effects:
+  - name: Frightened & Incapacitated
+    img: systems/dnd5e/icons/svg/statuses/frightened.svg
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmBalefulCommand
+    transfer: false
+    _id: 4GgIe9QPQ5oYRsHN
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: 1
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Frightened apply=false] and
+      &amp;Reference[Incapacitated apply=false] conditions until the start of
+      the user's next turn.</p>
+    tint: '#ffffff'
+    statuses:
+      - frightened
+      - incapacitated
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: 1734980182936
+      modifiedTime: 1737668273231
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmBalefulCommand.4GgIe9QPQ5oYRsHN'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737915744404
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 2700000
+ownership:
+  default: 0
+_key: '!items!mmBalefulCommand'

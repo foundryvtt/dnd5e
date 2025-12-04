@@ -38,7 +38,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: ''
     license: CC-BY-4.0
     rules: '2014'
@@ -194,6 +194,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: 3NG2heM5F2MZC8jp
       sort: 300000
       activation:
@@ -207,7 +208,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -230,6 +231,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     joTmq1XPNETQqiag:
       type: cast
       spell:
@@ -243,6 +250,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: joTmq1XPNETQqiag
       sort: 400000
       activation:
@@ -257,7 +265,6 @@ system:
           - type: itemUses
             value: '5'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -280,6 +287,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     5nuhAqCJUQrLA2Dl:
       type: cast
       spell:
@@ -293,6 +306,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: 5nuhAqCJUQrLA2Dl
       sort: 500000
       activation:
@@ -307,7 +321,6 @@ system:
           - type: itemUses
             value: '2'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -330,6 +343,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     xETqUC7cpESvgEeV:
       type: cast
       spell:
@@ -343,6 +362,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: xETqUC7cpESvgEeV
       sort: 600000
       activation:
@@ -357,7 +377,6 @@ system:
           - type: itemUses
             value: '2'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -380,6 +399,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     Jddd8ljisRX31g8l:
       type: cast
       spell:
@@ -393,6 +418,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: Jddd8ljisRX31g8l
       sort: 700000
       activation:
@@ -407,7 +433,6 @@ system:
           - type: itemUses
             value: '3'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -430,6 +455,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     8u2nn7PKK1PomSZA:
       type: cast
       spell:
@@ -443,6 +474,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: 8u2nn7PKK1PomSZA
       sort: 900000
       activation:
@@ -457,7 +489,6 @@ system:
           - type: itemUses
             value: '6'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -480,6 +511,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     iXNUoYwkgNbcwFJZ:
       type: cast
       spell:
@@ -488,11 +525,12 @@ system:
           attack: null
           save: null
           override: false
-        level: null
+        level: 2
         properties:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: iXNUoYwkgNbcwFJZ
       sort: 625000
       activation:
@@ -504,7 +542,8 @@ system:
           allowed: false
         spellSlot: true
         targets: []
-      description: {}
+      description:
+        chatFlavor: ''
       duration:
         units: inst
         concentration: false
@@ -522,6 +561,15 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
+      name: ''
+      img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     SdJnKtMS2hnx9Yhf:
       type: cast
       spell:
@@ -535,6 +583,7 @@ system:
           - vocal
           - somatic
           - material
+        ability: ''
       _id: SdJnKtMS2hnx9Yhf
       sort: 650000
       activation:
@@ -548,7 +597,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -571,11 +620,17 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     xxaouOqTNX24LNTz:
       type: utility
       name: Tree Form
       _id: xxaouOqTNX24LNTz
-      sort: 0
+      sort: 1000000
       activation:
         type: action
         value: null
@@ -588,7 +643,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -620,6 +675,13 @@ system:
         formula: ''
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
   attuned: false
   ammunition: {}
   identifier: staff-of-the-woodlands
@@ -672,18 +734,14 @@ folder: MLMTCAvKsuFE3vYA
 sort: 0
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037231207
-  modifiedTime: 1750697344647
+  modifiedTime: 1764620337722
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!caEn3ixCUFBnHTx6'

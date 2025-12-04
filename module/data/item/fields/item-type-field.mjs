@@ -1,13 +1,6 @@
 const { SchemaField, StringField } = foundry.data.fields;
 
 /**
- * @typedef ItemTypeData
- * @param {string} value     Primary type for this item.
- * @param {string} subtype   Secondary type within the primary type.
- * @param {string} baseItem  Base item identifier.
- */
-
-/**
  * A field for storing Item type data.
  *
  * @param {object} [options={}]                   Options to configure this field's behavior.

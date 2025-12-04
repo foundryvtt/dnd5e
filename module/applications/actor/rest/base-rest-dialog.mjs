@@ -4,6 +4,10 @@ import Dialog5e from "../../api/dialog.mjs";
 const { BooleanField } = foundry.data.fields;
 
 /**
+ * @import { RestConfiguration } from "../../../documents/_types.mjs";
+ */
+
+/**
  * Dialog with shared resting functionality.
  */
 export default class BaseRestDialog extends Dialog5e {

@@ -16,6 +16,16 @@ export default class ProficiencyCycleElement extends AdoptedStyleSheetMixin(
     this._value = Number(this.getAttribute("value") ?? 0);
   }
 
+  /* -------------------------------------------- */
+
+  /**
+   * The HTML tag named used by this element.
+   * @type {string}
+   */
+  static tagName = "proficiency-cycle";
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   static CSS = `
     :host { display: inline-block; }
@@ -75,11 +85,15 @@ export default class ProficiencyCycleElement extends AdoptedStyleSheetMixin(
     }
   `;
 
+  /* -------------------------------------------- */
+
   /**
    * Controller for removing listeners automatically.
    * @type {AbortController}
    */
   #controller;
+
+  /* -------------------------------------------- */
 
   /**
    * Shadow root of the element.

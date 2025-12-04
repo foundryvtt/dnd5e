@@ -25,7 +25,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: ''
     license: CC-BY-4.0
     rules: '2014'
@@ -70,139 +70,66 @@ system:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: save
+    C8zhwUVACrcYrfbe:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.ztgcdrWPshKRpFd0
+        challenge:
+          override: true
+          attack: null
+          save: 15
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+        ability: ''
+        level: 3
+      _id: C8zhwUVACrcYrfbe
+      sort: 0
       activation:
         type: action
-        value: 1
-        condition: ''
         override: false
       consumption:
-        targets:
-          - type: itemUses
-            target: ''
-            value: '1'
-            scaling:
-              mode: ''
-              formula: ''
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
       description:
         chatFlavor: ''
       duration:
+        units: inst
         concentration: false
-        value: ''
-        units: ''
-        special: ''
         override: false
-      effects: []
+      flags: {}
       range:
-        value: '60'
-        units: ft
-        special: ''
+        units: self
         override: false
       target:
         template:
-          count: ''
           contiguous: false
-          type: radius
-          size: '20'
-          width: ''
-          height: ''
           units: ft
         affects:
-          count: ''
-          type: ''
           choice: false
-          special: ''
-        prompt: true
         override: false
-      damage:
-        onSave: half
-        parts:
-          - number: 8
-            denomination: 6
-            bonus: ''
-            types:
-              - fire
-            custom:
-              enabled: false
-              formula: ''
-            scaling:
-              mode: whole
-              number: null
-              formula: ''
-      save:
-        ability: dex
-        dc:
-          calculation: ''
-          formula: '15'
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
-    dnd5eactivity300:
-      _id: dnd5eactivity300
-      type: utility
-      activation:
-        type: action
-        value: 1
-        condition: ''
-        override: false
-      consumption:
-        targets:
-          - type: itemUses
-            target: ''
-            value: '1'
-            scaling:
-              mode: ''
-              formula: ''
-        scaling:
-          allowed: false
-          max: ''
-        spellSlot: true
-      description:
-        chatFlavor: ''
-      duration:
-        concentration: false
-        value: ''
-        units: ''
-        special: ''
-        override: false
-      effects: []
-      range:
-        value: '60'
-        units: ft
-        special: ''
-        override: false
-      target:
-        template:
-          count: ''
-          contiguous: false
-          type: radius
-          size: '20'
-          width: ''
-          height: ''
-          units: ft
-        affects:
-          count: ''
-          type: ''
-          choice: false
-          special: ''
-        prompt: true
-        override: false
-      roll:
-        formula: 1d6
-        name: ''
-        prompt: false
-        visible: false
-      uses:
-        spent: 0
-        recovery: []
-      sort: 0
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: true
+        requireMagic: false
+        identifier: ''
+      name: ''
+      img: ''
   attuned: false
   identifier: necklace-of-fireballs
 effects: []
@@ -213,11 +140,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037092424
-  modifiedTime: 1750697344647
+  modifiedTime: 1764618892524
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!3ALOhh6JNInIK4o7'

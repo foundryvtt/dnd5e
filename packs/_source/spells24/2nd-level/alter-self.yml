@@ -7,31 +7,27 @@ system:
       replace the option you chose with a different one.</p><p><strong>Aquatic
       Adaptation.</strong> You sprout gills and grow webs between your fingers.
       You can breathe underwater and gain a Swim Speed equal to your
-      Speed.</p><section class="secret"
-      id="secret-7sTILHJaR1io7TWi"><p><strong>Foundry Note</strong></p><p>The
-      Active Effect provided by the <strong>Aquatic Adaptation</strong> activity
-      upgrades the character's Swim Speed to a value of "1" to indicate
-      equivalence to (walk) Speed.</p></section><p><strong>Change
-      Appearance.</strong> You alter your appearance. You decide what you look
-      like, including your height, weight, facial features, sound of your voice,
-      hair length, coloration, and other distinguishing characteristics. You can
-      make yourself appear as a member of another species, though none of your
-      statistics change. You can't appear as a creature of a different size, and
-      your basic shape stays the same; if you're bipedal, you can't use this
-      spell to become quadrupedal, for instance. For the duration, you can take
-      a Magic action to change your appearance in this way
-      again.</p><p><strong>Natural Weapons. </strong>You grow claws (Slashing),
-      fangs (Piercing), horns (Piercing), or hooves (Bludgeoning). When you use
-      your Unarmed Strike to deal damage with that new growth, it deals 1d6
-      damage of the type in parentheses instead of dealing the normal damage for
-      your Unarmed Strike, and you use your spellcasting ability modifier for
-      the attack and damage rolls rather than using Strength.</p>
+      Speed.</p><p><strong>Change Appearance.</strong> You alter your
+      appearance. You decide what you look like, including your height, weight,
+      facial features, sound of your voice, hair length, coloration, and other
+      distinguishing characteristics. You can make yourself appear as a member
+      of another species, though none of your statistics change. You can't
+      appear as a creature of a different size, and your basic shape stays the
+      same; if you're bipedal, you can't use this spell to become quadrupedal,
+      for instance. For the duration, you can take a Magic action to change your
+      appearance in this way again.</p><p><strong>Natural Weapons. </strong>You
+      grow claws (Slashing), fangs (Piercing), horns (Piercing), or hooves
+      (Bludgeoning). When you use your Unarmed Strike to deal damage with that
+      new growth, it deals 1d6 damage of the type in parentheses instead of
+      dealing the normal damage for your Unarmed Strike, and you use your
+      spellcasting ability modifier for the attack and damage rolls rather than
+      using Strength.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
   activation:
     type: action
     condition: ''
@@ -520,11 +516,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.350'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1724425940243
-  modifiedTime: 1745256785130
+  modifiedTime: 1759793902591
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplAlterSelf0'

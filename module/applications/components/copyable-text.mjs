@@ -1,7 +1,7 @@
 /**
  * Bit of text with a button after it for copying it.
  */
-export default class CopyableTextElement extends HTMLElement {
+export default class CopyableTextElement extends (foundry.applications.elements.AdoptableHTMLElement ?? HTMLElement) {
   /** @override */
   connectedCallback() {
     this.#controller = new AbortController();
@@ -13,6 +13,14 @@ export default class CopyableTextElement extends HTMLElement {
     this.addEventListener("click", this._onClick.bind(this), { signal: this.#controller.signal });
     this.append(button);
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The HTML tag named used by this element.
+   * @type {string}
+   */
+  static tagName = "copyable-text";
 
   /* -------------------------------------------- */
 

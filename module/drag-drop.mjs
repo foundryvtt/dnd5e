@@ -1,6 +1,5 @@
 /**
- * Valid `dropEffect` value (see https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/dropEffect).
- * @typedef {"copy"|"move"|"link"|"none"} DropEffectValue
+ * @import { DropEffectValue } from "./_types.mjs";
  */
 
 /**

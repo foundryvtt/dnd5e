@@ -1,17 +1,5 @@
 /**
- * @callback MappingFieldInitialValueBuilder
- * @param {string} key       The key within the object where this new value is being generated.
- * @param {*} initial        The generic initial data provided by the contained model.
- * @param {object} existing  Any existing mapping data.
- * @returns {object}         Value to use as default for this key.
- */
-
-/**
- * @typedef {DataFieldOptions} MappingFieldOptions
- * @property {string[]} [initialKeys]       Keys that will be created if no data is provided.
- * @property {MappingFieldInitialValueBuilder} [initialValue]  Function to calculate the initial value for a key.
- * @property {boolean} [initialKeysOnly=false]  Should the keys in the initialized data be limited to the keys provided
- *                                              by `options.initialKeys`?
+ * @import { MappingFieldInitialValueBuilder, MappingFieldOptions } from "./_types.mjs";
  */
 
 /**
@@ -91,11 +79,14 @@ export default class MappingField extends foundry.data.fields.ObjectField {
   /** @override */
   _validateType(value, options={}) {
     if ( foundry.utils.getType(value) !== "Object" ) throw new Error("must be an Object");
-    const errors = this._validateValues(value, options);
-    if ( !foundry.utils.isEmpty(errors) ) {
-      const failure = new foundry.data.validation.DataModelValidationFailure();
-      failure.elements = Object.entries(errors).map(([id, failure]) => ({ id, failure }));
-      throw failure.asError();
+    const failure = this._validateValues(value, options);
+    if ( failure ) {
+      const isV13 = game.release.generation < 14;
+      const empty = isV13 ? failure.isEmpty() : failure.empty;
+      if ( !empty ) {
+        if ( isV13 ) throw failure.asError();
+        throw failure;
+      }
     }
   }
 
@@ -105,16 +96,23 @@ export default class MappingField extends foundry.data.fields.ObjectField {
    * Validate each value of the object.
    * @param {object} value     The object to validate.
    * @param {object} options   Validation options.
-   * @returns {Record<string, Error>}  An object of value-specific errors by key.
+   * @returns {DataModelValidationFailure|void}
    */
-  _validateValues(value, options) {
-    const errors = {};
+  _validateValues(value, { phase: _phase, ...options }={}) {
+    const isV13 = game.release.generation < 14;
+    const failure = isV13
+      ? new foundry.data.validation.DataModelValidationFailure()
+      : new foundry.data.validation.DataModelValidationError();
     for ( const [k, v] of Object.entries(value) ) {
       if ( k.startsWith("-=") ) continue;
-      const error = this.model.validate(v, options);
-      if ( error ) errors[k] = error;
+      const error = this.model.validate(v, { ...options, strict: false, recursive: true });
+      if ( error ) {
+        failure.fields[k] = error;
+        if ( error.unresolved ) failure.unresolved = true;
+      }
     }
-    return errors;
+    const empty = isV13 ? failure.isEmpty() : failure.empty;
+    if ( !empty ) return failure;
   }
 
   /* -------------------------------------------- */
@@ -140,5 +138,18 @@ export default class MappingField extends foundry.data.fields.ObjectField {
     else if ( path.length === 1 ) return this.model;
     path.shift();
     return this.model._getField(path);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate this field's candidate source data.
+   * @param {object} sourceData   Candidate source data of the root model
+   * @param {any} fieldData       The value of this field within the source data
+   */
+  migrateSource(sourceData, fieldData) {
+    if ( !(this.model.migrateSource instanceof Function) ) return;
+    if ( foundry.utils.getType(fieldData) !== "Object" ) return;
+    for ( const entry of Object.values(fieldData) ) this.model.migrateSource(sourceData, entry);
   }
 }

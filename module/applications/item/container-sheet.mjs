@@ -135,6 +135,7 @@ export default class ContainerSheet extends ItemSheet5e {
     inventory.forEach(s => s.minWidth = 190);
     context.inventory = Inventory.prepareSections(inventory);
     context.listControls = foundry.utils.deepClone(ItemListControlsElement.CONFIG.inventory);
+    context.currency = context.source.currency;
     context.showCurrency = true;
     this._items = context.items;
 

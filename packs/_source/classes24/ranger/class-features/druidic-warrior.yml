@@ -19,9 +19,9 @@ system:
     max: ''
   identifier: druidic-warrior
   source:
-    revision: 1
+    revision: 2
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   enchant: {}
   type:
@@ -29,28 +29,59 @@ system:
     subtype: fightingStyle
   prerequisites:
     level: 2
-    repeatable: false
+    items:
+      - fighting-style
   properties: []
   requirements: Ranger
-  advancement: []
-  cover: null
-  crewed: false
+  advancement:
+    - type: ItemChoice
+      _id: 6dwyqBA13Ui6p4Bf
+      configuration:
+        allowDrops: true
+        choices:
+          '0':
+            count: 2
+            replacement: false
+        pool: []
+        restriction:
+          list:
+            - class:druid
+          level: '0'
+        spell:
+          ability:
+            - cha
+          method: spell
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+          prepared: 2
+        type: spell
+      value:
+        added: {}
+        replaced: {}
+      title: Choose Cantrips
+      hint: >-
+        You learn two Druid cantrips of your choice. Guidance and Starry Wisp
+        are recommended. The chosen cantrips count as Ranger spells for you, and
+        Wisdom is your spellcasting ability for them. Whenever you gain a Ranger
+        level, you can replace one of these cantrips with another Druid cantrip.
 _id: phbfstDruidicWar
 type: feat
 folder: h5OUzaJcZzsNsOGc
 img: icons/magic/nature/root-vines-face-glow-green.webp
 effects: []
-flags: {}
-_stats:
-  duplicateSource: null
-  coreVersion: '13.344'
-  systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1745514386972
-  modifiedTime: 1745712691399
-  lastModifiedBy: dnd5ebuilder0000
-  exportSource: null
 sort: 0
 ownership:
   default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.348'
+  systemId: dnd5e
+  systemVersion: 5.1.9
+  createdTime: 1726255124302
+  modifiedTime: 1760132451517
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!items!phbfstDruidicWar'

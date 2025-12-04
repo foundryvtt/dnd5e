@@ -85,10 +85,9 @@ export default class TokenRuler5e extends foundry.canvas.placeables.tokens.Token
    * @returns {object} The adjusted style, or existing style if no adjustment is necessary
    */
   #getSpeedBasedStyle(waypoint, style) {
-    // If movement automation disabled, or if showing a different client's measurement, use default style
-    const noAutomation = game.settings.get("dnd5e", "disableMovementAutomation");
-    const isSameClient = game.user.id in this.token._plannedMovement;
-    if ( noAutomation || !isSameClient ) return style;
+    // If showing a different client's measurement, use default style
+    if ( !(game.user.id in this.token._plannedMovement)
+      || CONFIG.Token.movement.actions[waypoint.action]?.teleport ) return style;
 
     // Get actor's movement speed for currently selected token movement action
     const movement = this.token.actor?.system.attributes?.movement;
@@ -96,16 +95,17 @@ export default class TokenRuler5e extends foundry.canvas.placeables.tokens.Token
     let currActionSpeed = movement[waypoint.action] ?? 0;
 
     // If current action can fall back to walk, treat "max" speed as maximum between current & walk
-    if ( CONFIG.DND5E.movementTypes[waypoint.action]?.walkFallback ) {
+    if ( CONFIG.DND5E.movementTypes[waypoint.action]?.walkFallback
+      || !CONFIG.DND5E.movementTypes[waypoint.action] ) {
       currActionSpeed = Math.max(currActionSpeed, movement.walk);
     }
 
     // Color `normal` if <= max speed, else `double` if <= double max speed, else `triple`
     const { normal, double, triple } = CONFIG.DND5E.tokenRulerColors;
     const increment = (waypoint.measurement.cost - .1) / currActionSpeed;
-    if ( increment <= 1 ) style.color = normal;
-    else if ( increment <= 2 ) style.color = double;
-    else style.color = triple;
+    if ( increment <= 1 ) style.color = normal ?? style.color;
+    else if ( increment <= 2 ) style.color = double ?? style.color;
+    else style.color = triple ?? style.color;
     return style;
   }
 }

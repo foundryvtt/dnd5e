@@ -19,6 +19,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: Y0cSjJs5olZWdSgZ
       sort: 0
       activation:
@@ -33,7 +34,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -56,6 +56,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     kn4eCuLZrcps7ujc:
       type: cast
       spell:
@@ -70,6 +76,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: kn4eCuLZrcps7ujc
       sort: 0
       activation:
@@ -84,7 +91,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -107,6 +113,12 @@ system:
         max: ''
       name: Fear (Affects Beasts Only)
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     76ZGwAp8abm0ZB5Z:
       type: cast
       spell:
@@ -121,6 +133,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: 76ZGwAp8abm0ZB5Z
       sort: 0
       activation:
@@ -135,7 +148,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -158,6 +170,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery:
@@ -180,7 +198,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   identified: true
   unidentified:
@@ -216,18 +234,14 @@ system:
   strength: null
   proficient: null
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712702464
+  modifiedTime: 1764616049162
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 300000

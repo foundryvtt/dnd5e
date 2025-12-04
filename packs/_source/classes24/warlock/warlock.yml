@@ -45,7 +45,7 @@ system:
     rules: '2024'
     revision: 2
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
   startingEquipment:
     - type: AND
       requiresProficiency: false
@@ -94,6 +94,13 @@ system:
       _id: QtlLMEGt8LF296xx
       group: HNL3GVldnPCsg4BR
       sort: 800000
+    - type: currency
+      count: 15
+      key: gp
+      requiresProficiency: false
+      _id: KqxMWGbayv1QRIDV
+      group: HNL3GVldnPCsg4BR
+      sort: 900000
   identifier: warlock
   levels: 1
   advancement:
@@ -573,11 +580,11 @@ effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1735866281378
-  modifiedTime: 1752705960661
+  modifiedTime: 1757541745637
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

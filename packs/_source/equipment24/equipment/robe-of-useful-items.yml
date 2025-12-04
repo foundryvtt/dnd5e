@@ -21,7 +21,6 @@ system:
         targets:
           - type: activityUses
             value: '1'
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -56,6 +55,12 @@ system:
       name: Bullseye Lantern
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     gzkM1WvNfpmo48YP:
       type: utility
       sort: 0
@@ -71,7 +76,6 @@ system:
         targets:
           - type: activityUses
             value: '1'
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -107,6 +111,12 @@ system:
       _id: gzkM1WvNfpmo48YP
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     8714LxXzxWUgz2iy:
       type: utility
       sort: 0
@@ -122,7 +132,6 @@ system:
         targets:
           - type: activityUses
             value: '1'
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -158,6 +167,12 @@ system:
       _id: 8714LxXzxWUgz2iy
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     A0T4ezb8ANRXbNFn:
       type: utility
       sort: 0
@@ -173,7 +188,6 @@ system:
         targets:
           - type: activityUses
             value: '1'
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -209,6 +223,12 @@ system:
       _id: A0T4ezb8ANRXbNFn
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     oWCkue5qnRqcQGQE:
       type: utility
       sort: 0
@@ -224,7 +244,6 @@ system:
         targets:
           - type: activityUses
             value: '1'
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -260,6 +279,12 @@ system:
       _id: oWCkue5qnRqcQGQE
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     GEjvz3xtYjhD50U4:
       type: utility
       sort: 0
@@ -275,7 +300,6 @@ system:
         targets:
           - type: activityUses
             value: '1'
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -311,6 +335,12 @@ system:
       _id: GEjvz3xtYjhD50U4
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery: []
@@ -344,7 +374,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   identified: true
   unidentified:
@@ -380,18 +410,14 @@ system:
   strength: null
   proficient: null
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712703012
+  modifiedTime: 1764617464267
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 32700000

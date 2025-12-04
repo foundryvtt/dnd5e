@@ -19,7 +19,7 @@ system:
     chat: ''
   source:
     custom: ''
-    book: SRD 5.1
+    book: ''
     page: ''
     license: CC-BY-4.0
     rules: '2014'
@@ -70,11 +70,8 @@ system:
       consumption:
         targets:
           - type: itemUses
-            target: ''
             value: '1'
-            scaling:
-              mode: ''
-              formula: ''
+            target: ''
         scaling:
           allowed: false
           max: ''
@@ -116,10 +113,64 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+      appliedEffects: []
   attuned: false
   identifier: potion-of-flying
-effects: []
+effects:
+  - name: Flying
+    img: icons/consumables/potions/potion-tube-corked-bat-gold-red.webp
+    origin: Compendium.dnd5e.items.Item.eTNc8XPtvZNe3yQs
+    _id: EfRsYOQoBVRth2Hv
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.movement.fly
+        mode: 4
+        value: '@attributes.movement.walk'
+        priority: null
+      - key: system.attributes.movement.hover
+        mode: 5
+        value: 'true'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.350'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      createdTime: 1759793328544
+      modifiedTime: 1759793381173
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!eTNc8XPtvZNe3yQs.EfRsYOQoBVRth2Hv'
 folder: gyBZp72zKb56Da84
 sort: 0
 ownership:
@@ -127,11 +178,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037241439
-  modifiedTime: 1750697344647
+  modifiedTime: 1764620454112
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!eTNc8XPtvZNe3yQs'

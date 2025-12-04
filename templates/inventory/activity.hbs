@@ -1,4 +1,4 @@
-<div class="activity-row draggable item-row" data-activity-id="{{ _id }}">
+<li class="activity-row draggable item-row" data-activity-id="{{ _id }}">
 
     {{!-- Name --}}
     <div class="activity-name item-name item-action {{ @root.rollableClass }}" role="button" aria-label="{{ name }}"
@@ -24,4 +24,4 @@
         {{> (lookup . "template") entry=.. ctx=.. item=../item isActivity=true }}
     {{/each}}
 
-</div>
+</li>

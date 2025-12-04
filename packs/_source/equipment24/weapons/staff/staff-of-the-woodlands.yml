@@ -61,7 +61,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -94,7 +94,14 @@ system:
           - material
         spellbook: true
         uuid: Compendium.dnd5e.spells24.Item.phbsplAnimalFrie
+        ability: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     ZsTnyKpNKhX2UNw8:
       type: cast
       name: Awaken
@@ -112,7 +119,6 @@ system:
           - type: itemUses
             value: '5'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -145,7 +151,14 @@ system:
           - material
         spellbook: true
         uuid: Compendium.dnd5e.spells24.Item.phbsplAwaken0000
+        ability: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     HRmbe3tUq47ZLbeM:
       type: cast
       name: Barkskin
@@ -163,7 +176,6 @@ system:
           - type: itemUses
             value: '2'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -189,14 +201,21 @@ system:
           attack: null
           save: null
           override: false
-        level: null
+        level: 2
         properties:
           - vocal
           - somatic
           - material
         spellbook: true
         uuid: Compendium.dnd5e.spells24.Item.phbsplBarkskin00
+        ability: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     swaYlNmRQNmfu6MB:
       type: cast
       name: Locate Animals or Plants
@@ -214,7 +233,6 @@ system:
           - type: itemUses
             value: '2'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -247,7 +265,14 @@ system:
           - material
         spellbook: true
         uuid: Compendium.dnd5e.spells24.Item.phbsplLocateAnim
+        ability: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     cDbVrjDu0tnXlzaR:
       type: cast
       name: Pass without Trace
@@ -265,7 +290,6 @@ system:
           - type: itemUses
             value: '2'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -298,7 +322,14 @@ system:
           - material
         spellbook: true
         uuid: Compendium.dnd5e.spells24.Item.phbsplPasswithou
+        ability: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     j5AgCtSJZN12vsJW:
       type: cast
       name: Speak with Animals
@@ -315,7 +346,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -348,7 +379,14 @@ system:
           - material
         spellbook: true
         uuid: Compendium.dnd5e.spells24.Item.phbsplSpeakwithA
+        ability: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     eoNl5saIm2pOFmsu:
       type: cast
       name: Speak with Plants
@@ -366,7 +404,6 @@ system:
           - type: itemUses
             value: '3'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -399,7 +436,14 @@ system:
           - material
         spellbook: true
         uuid: Compendium.dnd5e.spells24.Item.phbsplSpeakwithP
+        ability: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     WmZyIUTekKP2iDtH:
       type: cast
       spell:
@@ -414,6 +458,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: WmZyIUTekKP2iDtH
       sort: 0
       activation:
@@ -428,7 +473,6 @@ system:
           - type: itemUses
             value: '6'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -451,6 +495,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     9xO1w9Vzhq6EU5Qr:
       type: utility
       name: Tree Form
@@ -469,7 +519,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -502,6 +551,13 @@ system:
         formula: ''
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
   uses:
     spent: 0
     recovery:
@@ -548,7 +604,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   identified: true
   unidentified:
@@ -652,18 +708,14 @@ effects:
       exportSource: null
     _key: '!items.effects!dmgStaffOfTheWoo.r6B9McDx4diFtkOt'
 folder: 5p9KrkF39e6vFO4g
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712703812
+  modifiedTime: 1764615522636
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 150000

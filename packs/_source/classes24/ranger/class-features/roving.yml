@@ -7,19 +7,14 @@ system:
   description:
     value: >-
       <p>Your Speed increases by 10 feet while you aren't wearing Heavy armor.
-      You also have a Climb Speed and a Swim Speed equal to your
-      Speed.</p><section class="secret"
-      id="secret-XnQYiG0fJWJSHkQw"><p><strong>Foundry Note</strong></p><p>This
-      feature includes an Active Effect which increases your Speed by 10 feet.
-      It does not automatically grant an equivalent Climb and Swim Speed though.
-      It can be disabled if you choose to wear Heavy armor.</p></section>
+      You also have a Climb Speed and a Swim Speed equal to your Speed.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
     revision: 1
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
   uses:
     max: ''
     spent: 0
@@ -45,6 +40,14 @@ effects:
         mode: 2
         value: '10'
         priority: null
+      - key: system.attributes.movement.climb
+        mode: 4
+        value: '@attributes.movement.walk'
+        priority: null
+      - key: system.attributes.movement.swim
+        mode: 4
+        value: '@attributes.movement.walk'
+        priority: null
     disabled: false
     duration:
       startTime: null
@@ -60,16 +63,19 @@ effects:
     transfer: true
     statuses: []
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.350'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1759793135157
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!phbrgrRoving0000.J9RWCSmYGnP0fkn1'
 flags:
@@ -79,11 +85,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.350'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1735932734523
-  modifiedTime: 1745256765119
+  modifiedTime: 1759793154279
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

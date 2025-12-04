@@ -6,33 +6,14 @@ import { parseInputDelta } from "../../utils.mjs";
 import Item5e from "../../documents/item.mjs";
 
 /**
- * @typedef InventorySectionDescriptor
- * @property {string} id                                     The section identifier.
- * @property {number} order                                  Sections are displayed in ascending order of this value.
- * @property {Record<string, string>} groups                 Group identifiers that this section belongs to.
- * @property {string} label                                  The name of the section. Will be localized.
- * @property {number} [minWidth=200]                         The minimum width of the primary column in this section.
- *                                                           If the section is resized such that the primary column
- *                                                           would be smaller than this width, secondary columns are
- *                                                           hidden in order to retain this minimum.
- * @property {(string|InventoryColumnDescriptor)[]} columns  A list of column descriptors or IDs of well-known columns.
- * @property {Record<string, string>} [dataset]              Section data stored in the DOM.
- */
-
-/**
- * @typedef InventoryColumnDescriptor
- * @property {string} id        The column identifier.
- * @property {string} template  The handlebars template used to render the column.
- * @property {number} width     The amount of pixels of width allocated to represent this column.
- * @property {number} order     Columns are displayed from left-to-right in ascending order of this value.
- * @property {number} priority  Columns with a higher priority take precedence when there is not enough space to
- *                              display all columns.
+ * @import { ActivityUsageResults } from "../../documents/activity/_types.mjs";
+ * @import { InventoryColumnDescriptor, InventorySectionDescriptor } from "./_types.mjs";
  */
 
 /**
  * A custom element that handles displaying a collection of items.
  */
-export default class InventoryElement extends HTMLElement {
+export default class InventoryElement extends (foundry.applications.elements.AdoptableHTMLElement ?? HTMLElement) {
   /* -------------------------------------------- */
   /*  Configuration                               */
   /* -------------------------------------------- */
@@ -175,6 +156,14 @@ export default class InventoryElement extends HTMLElement {
   /* -------------------------------------------- */
 
   /**
+   * The HTML tag named used by this element.
+   * @type {string}
+   */
+  static tagName = "dnd5e-inventory";
+
+  /* -------------------------------------------- */
+
+  /**
    * The actor that manages these items.
    * @returns {Actor5e|null}
    */
@@ -182,6 +171,8 @@ export default class InventoryElement extends HTMLElement {
     if ( this.document instanceof Actor ) return this.document;
     return this.document.actor ?? null;
   }
+
+  /* -------------------------------------------- */
 
   /**
    * Reference to the Application that contains this component.
@@ -193,6 +184,8 @@ export default class InventoryElement extends HTMLElement {
 
   #app;
 
+  /* -------------------------------------------- */
+
   /**
    * Can items be used from this inventory list.
    * @type {boolean}
@@ -201,13 +194,17 @@ export default class InventoryElement extends HTMLElement {
     return this.actor && this.actor.isOwner && !this.actor.pack;
   }
 
+  /* -------------------------------------------- */
+
   /**
    * The document that holds these items.
    * @returns {Actor5e|Item5e}
    */
   get document() {
-    return this.app.document;
+    return this.app.inventorySource ?? this.app.document;
   }
+
+  /* -------------------------------------------- */
 
   /**
    * Cached section data to avoid expensive lookups during resize events.
@@ -218,6 +215,8 @@ export default class InventoryElement extends HTMLElement {
    * }[]}
    */
   #sections;
+
+  /* -------------------------------------------- */
 
   /**
    * Retrieve the templates needed to render the inventory.
@@ -234,8 +233,7 @@ export default class InventoryElement extends HTMLElement {
   /** @override */
   connectedCallback() {
     if ( this.#app ) return;
-    this.#app = foundry.applications.instances.get(this.closest(".application")?.id)
-      ?? ui.windows[this.closest(".app")?.dataset.appid]; // TODO: Remove when V1 sheets are gone
+    this.#app = foundry.applications.instances.get(this.closest(".application")?.id);
 
     if ( !this.canUse ) {
       for ( const element of this.querySelectorAll('[data-action="use"]') ) {
@@ -470,6 +468,7 @@ export default class InventoryElement extends HTMLElement {
       case "duplicate": return this._onDuplicateItem(item);
       case "edit": return this._onEditItem(item);
       case "equip": return this._onToggleEquipped(item);
+      case "identify": return this._onToggleIdentify(item);
       case "prepare": return this._onTogglePrepared(item);
       case "recharge": return this._onRollRecharge(activity ?? item, { event });
       case "toggleCharge": return this._onToggleCharge(item);
@@ -710,6 +709,18 @@ export default class InventoryElement extends HTMLElement {
   /* -------------------------------------------- */
 
   /**
+   * Handle toggling an item's identified state.
+   * @param {Item5e} item  The item.
+   * @returns {Promise<Item5e>}
+   * @protected
+   */
+  _onToggleIdentify(item) {
+    return item.update({ "system.identified": !item.system.identified });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Handle toggling an item's in-line description.
    * @param {HTMLElement} target     The action target.
    * @param {object} [options]
@@ -725,7 +736,7 @@ export default class InventoryElement extends HTMLElement {
         summary.slideUp(200, () => summary.remove());
         this.app._expanded.delete(item.id);
       } else {
-        const chatData = await item.getChatData({secrets: this.document.isOwner});
+        const chatData = await item.getChatData({secrets: item.isOwner});
         const summary = $(await foundry.applications.handlebars.renderTemplate(
           "systems/dnd5e/templates/items/parts/item-summary.hbs", chatData
         ));

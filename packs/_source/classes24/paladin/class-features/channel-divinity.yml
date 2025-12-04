@@ -36,7 +36,8 @@ system:
     rules: '2024'
     revision: 1
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
+    page: ''
   uses:
     max: '@scale.paladin.channel-divinity'
     spent: 0
@@ -109,7 +110,7 @@ system:
         name: ''
         formula: ''
   enchant: {}
-  identifier: channel-divinity
+  identifier: channel-divinity-paladin
 effects:
   - name: Divine Sense
     img: icons/magic/holy/saint-glass-portrait-halo.webp
@@ -151,11 +152,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.10
   createdTime: 1735866297701
-  modifiedTime: 1745256763606
+  modifiedTime: 1759426547851
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

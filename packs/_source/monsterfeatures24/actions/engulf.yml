@@ -1,0 +1,215 @@
+_id: mmEngulf00000000
+name: Engulf
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    5o0Bh8PQaojx5XMx:
+      type: save
+      _id: 5o0Bh8PQaojx5XMx
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: vsa7d6xWOAvWdOWM
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creatureOrObject
+          count: ''
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability:
+          - str
+        dc:
+          calculation: str
+          formula: '23'
+      name: Save
+      img: ''
+      appliedEffects:
+        - vsa7d6xWOAvWdOWM
+    Exfa4q7O4SvXjGt7:
+      type: damage
+      _id: Exfa4q7O4SvXjGt7
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 6
+            denomination: 6
+            bonus: ''
+            types:
+              - force
+            scaling:
+              number: 1
+      name: 'Engulfed: Damage'
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] moves up to its Speed
+      and can move through the spaces of Huge or smaller creatures and
+      objects.</p><p class="feature"><em>Strength Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=5o0Bh8PQaojx5XMx]], each creature or object whose
+      space the [[lookup @name lowercase]] enters for the first time during this
+      move.</p><p class="feature"><em>Failure:</em> The target is engulfed.
+      While engulfed, a target has &amp;Reference[Total Cover] against attacks
+      and other effects outside the [[lookup @name lowercase]], and when the
+      [[lookup @name lowercase]] moves, the engulfed target moves with it. A
+      nonmagical object is destroyed after spending 1 minute engulfed.</p><p
+      class="feature">While engulfed, a creature takes [[/damage average
+      activity=Exfa4q7O4SvXjGt7]] damage at the start of each of its turns, is
+      &amp;Reference[Suffocating]{suffocating}, has the
+      &amp;Reference[Restrained apply=long] condition, and repeats the save at
+      the end of each of its turns. An engulfed creature that is reduced to 0
+      Hit Points dissolves into ash, which is ejected into the Astral Sea.</p><p
+      class="feature"><em>Success:</em> The target escapes and enters the
+      nearest unoccupied space.</p>
+    chat: ''
+  identifier: engulf
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/creatures/slimes/slime-face-skull-green.webp
+effects:
+  - name: Total Cover, Suffocating & Restrained
+    img: systems/dnd5e/icons/svg/statuses/suffocation.svg
+    origin: Item.mmEngulf00000000
+    _id: vsa7d6xWOAvWdOWM
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>At the start of each of its turns, is
+      &amp;Reference[Suffocating]{suffocating}, has the
+      &amp;Reference[Restrained apply=long] condition, and repeats the save at
+      the end of each of its turns.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - restrained
+      - suffocation
+      - coverTotal
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736051047165
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmEngulf00000000.vsa7d6xWOAvWdOWM'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1738097235622
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 8900000
+ownership:
+  default: 0
+_key: '!items!mmEngulf00000000'

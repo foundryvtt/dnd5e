@@ -1,0 +1,99 @@
+_id: mmBite0000000000
+name: Bite
+type: weapon
+system:
+  type:
+    value: natural
+    subtype: ''
+  activities:
+    xWlMeXFjELfSUWX9:
+      type: attack
+      _id: xWlMeXFjELfSUWX9
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type: {}
+      damage:
+        critical: {}
+        includeBase: true
+        parts: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: <p>[[/attack extended]]. [[/damage average extended]].</p>
+    chat: ''
+  identifier: bite
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+  identified: true
+  unidentified:
+    name: Unidentified Weapon
+  mastery: ''
+  range:
+    units: ft
+  damage:
+    base:
+      denomination: 4
+      bonus: ''
+      number: 1
+      types:
+        - piercing
+folder: pSCWWdqMX9eUATRJ
+img: icons/creatures/abilities/fangs-teeth-bite.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1733950635009
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 14500000
+ownership:
+  default: 0
+_key: '!items!mmBite0000000000'

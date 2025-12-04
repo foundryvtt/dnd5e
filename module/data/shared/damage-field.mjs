@@ -17,19 +17,6 @@ export default class DamageField extends EmbeddedDataField5e {
 
 /**
  * Data model that stores information on a single damage part.
- *
- * @property {number} number           Number of dice to roll.
- * @property {number} denomination     Die denomination to roll.
- * @property {string} bonus            Bonus added to the damage.
- * @property {Set<string>} types       One or more damage types. If multiple are selected, then the user will be able to
- *                                     select from those types.
- * @property {object} custom
- * @property {boolean} custom.enabled  Should the custom formula be used?
- * @property {string} custom.formula   Custom damage formula.
- * @property {object} scaling
- * @property {string} scaling.mode     How the damage scales in relation with levels.
- * @property {number} scaling.number   Number of dice to add per scaling level.
- * @property {string} scaling.formula  Arbitrary scaling formula which will be multiplied by scaling increase.
  */
 export class DamageData extends foundry.abstract.DataModel {
 

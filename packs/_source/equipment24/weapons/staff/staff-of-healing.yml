@@ -59,6 +59,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: mkIIFw98V1d8uABu
       sort: 0
       activation:
@@ -99,6 +100,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     MjiU3c8lzUOQk8sk:
       type: cast
       spell:
@@ -113,6 +120,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: MjiU3c8lzUOQk8sk
       sort: 0
       activation:
@@ -127,7 +135,6 @@ system:
           - type: itemUses
             value: '2'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -150,6 +157,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     tfGfEtth3JKF7BXQ:
       type: cast
       spell:
@@ -164,6 +177,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: tfGfEtth3JKF7BXQ
       sort: 0
       activation:
@@ -178,7 +192,6 @@ system:
           - type: itemUses
             value: '5'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -201,6 +214,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery:
@@ -231,7 +250,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   identified: true
   unidentified:
@@ -294,18 +313,14 @@ system:
   mastery: topple
 effects: []
 folder: 5p9KrkF39e6vFO4g
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712703654
+  modifiedTime: 1764615353662
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 100391

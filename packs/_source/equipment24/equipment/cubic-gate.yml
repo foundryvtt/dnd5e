@@ -20,7 +20,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -49,8 +49,15 @@ system:
         level: '9'
         properties: []
         uuid: Compendium.dnd5e.spells24.Item.phbsplGate000000
+        ability: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     4xkx3c93IMfNXg9x:
       type: cast
       _id: 4xkx3c93IMfNXg9x
@@ -66,7 +73,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -95,8 +102,15 @@ system:
         level: '7'
         properties: []
         uuid: Compendium.dnd5e.spells24.Item.phbsplPlaneShift
+        ability: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery:
@@ -126,7 +140,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   identified: true
   unidentified:
@@ -162,18 +176,14 @@ system:
   strength: null
   proficient: null
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712698853
+  modifiedTime: 1764616809028
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 10100000

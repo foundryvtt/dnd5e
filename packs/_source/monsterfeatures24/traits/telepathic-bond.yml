@@ -1,0 +1,45 @@
+_id: mmTelepathicBond
+name: Telepathic Bond
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">While the [[lookup @name lowercase]] is on the same
+      plane of existence as its master, the two of them can communicate
+      telepathically with each other.</p>
+    chat: ''
+  identifier: telepathic-bond
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/magic/control/energy-stream-link-teal.webp
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736189544120
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 12900000
+ownership:
+  default: 0
+_key: '!items!mmTelepathicBond'

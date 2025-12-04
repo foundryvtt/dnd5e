@@ -46,8 +46,15 @@ system:
         level: '5'
         properties: []
         uuid: Compendium.dnd5e.spells24.Item.phbsplScrying000
+        ability: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     M05Q5IeuXKLQsEyw:
       type: cast
       _id: M05Q5IeuXKLQsEyw
@@ -64,7 +71,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -94,8 +100,15 @@ system:
         properties:
           - concentration
         uuid: Compendium.dnd5e.spells24.Item.phbsplSuggestion
+        ability: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery:
@@ -121,7 +134,7 @@ system:
     revision: 1
     rules: '2024'
     license: CC-BY-4.0
-    book: SRD 5.2
+    book: ''
   identified: true
   unidentified:
     description: ''
@@ -156,18 +169,14 @@ system:
   strength: null
   proficient: null
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745256809455
+  modifiedTime: 1764616771032
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 35800000

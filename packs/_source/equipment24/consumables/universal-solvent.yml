@@ -112,6 +112,14 @@ system:
         formula: ''
         name: ''
       _id: 29Jn4qIeO3YkUZhG
+      img: ''
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+      appliedEffects: []
   uses:
     spent: 0
     recovery: []
@@ -136,7 +144,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   identified: true
   unidentified:
@@ -170,18 +178,14 @@ system:
   properties:
     - mgc
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712704448
+  modifiedTime: 1764614804726
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1200000

@@ -28,7 +28,7 @@ system:
   source:
     revision: 1
     rules: '2024'
-    book: SRD 5.2
+    book: ''
     license: CC-BY-4.0
   identified: true
   unidentified:
@@ -65,7 +65,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: Transformed creature determined by GM or table roll
       duration:
@@ -108,60 +107,77 @@ system:
         attacks: false
         proficiency: false
         saves: false
+        ability: ''
       profiles:
-        - uuid: Compendium.dnd5e.actors24.Actor.phbmobApe0000000
+        - count: ''
+          name: ''
           _id: GHPZeky1w72GL4lN
+          uuid: Compendium.dnd5e.actors24.Actor.phbmobApe0000000
           level:
             min: null
             max: null
-          types: []
-        - uuid: Compendium.dnd5e.actors24.Actor.MZYCPIVoBs918qGZ
+        - count: ''
+          name: ''
           _id: oJtdCfur0YjQcN5S
+          uuid: Compendium.dnd5e.actors24.Actor.MZYCPIVoBs918qGZ
           level:
             min: null
             max: null
-          types: []
-        - uuid: Compendium.dnd5e.actors24.Actor.JW8bXggOMBx1S6tF
+        - count: ''
+          name: ''
           _id: mK0C90AP9NoSoDHc
+          uuid: Compendium.dnd5e.actors24.Actor.JW8bXggOMBx1S6tF
           level:
             min: null
             max: null
-          types: []
-        - uuid: Compendium.dnd5e.actors24.Actor.SXXvwaLBNuzBymp3
+        - count: ''
+          name: ''
           _id: Q84QytFBOgZlPYyK
+          uuid: Compendium.dnd5e.actors24.Actor.SXXvwaLBNuzBymp3
           level:
             min: null
             max: null
-          types: []
-        - uuid: Compendium.dnd5e.actors24.Actor.phbmobBlackBear0
+        - count: ''
+          name: ''
           _id: paUPq24gdSjQUCNq
+          uuid: Compendium.dnd5e.actors24.Actor.phbmobBlackBear0
           level:
             min: null
             max: null
-          types: []
-        - uuid: Compendium.dnd5e.actors24.Actor.phbmobGiantWease
+        - count: ''
+          name: ''
           _id: yFG9Dsrd6Dd4qI2J
+          uuid: Compendium.dnd5e.actors24.Actor.phbmobGiantWease
           level:
             min: null
             max: null
-          types: []
-        - uuid: Compendium.dnd5e.actors24.Actor.aAqfEHPiVbhMwZ6j
+        - count: ''
+          name: ''
           _id: W3Q0TgeomalBWPDE
+          uuid: Compendium.dnd5e.actors24.Actor.aAqfEHPiVbhMwZ6j
           level:
             min: null
             max: null
-          types: []
-        - uuid: Compendium.dnd5e.actors24.Actor.phbmobTiger00000
+        - count: ''
+          name: ''
           _id: Eonmk8mpWd3O0Xn1
+          uuid: Compendium.dnd5e.actors24.Actor.phbmobTiger00000
           level:
             min: null
             max: null
-          types: []
       summon:
         prompt: false
         identifier: ''
         mode: ''
       name: Pull and Throw
+      img: ''
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+      appliedEffects: []
   uses:
     spent: 0
     max: '3'
@@ -185,21 +201,17 @@ system:
   strength: null
   proficient: null
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 sort: 300000
 ownership:
   default: 0
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1728589118138
-  modifiedTime: 1745712704282
+  modifiedTime: 1764615578571
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!dmgTanBagofTrick'

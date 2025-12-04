@@ -39,6 +39,41 @@
   }
 
   /* ---------------------------------- */
+  /*  Window Header                     */
+  /* ---------------------------------- */
+
+  &:not(.minimized) .window-header .header-elements {
+    flex: none;
+    color: var(--color-text-primary);
+    font-family: var(--dnd5e-font-roboto-condensed);
+    display: flex;
+    align-items: center;
+    line-height: 1;
+    gap: 4px;
+
+    > div:has(> span:not(:empty)) + div:not(:empty)::before { content: " • "; }
+
+    .source-book {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    a {
+      margin: 0;
+      display: grid;
+      place-content: center;
+      &[hidden] { display: none; }
+    }
+
+    i {
+      font-size: var(--font-size-11);
+      color: var(--color-text-tertiary);
+      margin: 0;
+    }
+  }
+
+  /* ---------------------------------- */
   /*  Sheet Header                      */
   /* ---------------------------------- */
 
@@ -51,6 +86,110 @@
     }
   }
 
+  .slide-toggle.header-interactable, button.header-interactable {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 3px;
+    border: 1px solid transparent;
+    transition: all 250ms ease;
+    background: var(--npc-header-input-background);
+    padding: 0 4px;
+
+    &:hover {
+      border-color: var(--dnd5e-color-gold);
+      box-shadow: 0 0 6px var(--dnd5e-color-gold);
+      text-shadow: none;
+    }
+  }
+
+  button.header-interactable {
+    color: inherit;
+    font-family: inherit;
+    font-weight: inherit;
+    text-transform: inherit;
+  }
+
+  .slide-toggle.header-interactable {
+    font-family: var(--dnd5e-font-roboto-condensed);
+    height: var(--form-field-height);
+    margin-bottom: 8px;
+
+    .fa-toggle-on { color: var(--npc-portrait-toggle-on); }
+  }
+
+  /* ---------------------------------- */
+  /*  Portrait                          */
+  /* ---------------------------------- */
+
+  .portrait {
+
+    /* Initiative */
+    .initiative-wrapper {
+      position: absolute;
+      inset: 4px 4px auto auto;
+    }
+
+    .initiative {
+      width: 44px;
+      height: 44px;
+      background: var(--dnd5e-color-gold) url("../../icons/svg/d20-black.svg") center / contain;
+      display: grid;
+      place-content: center;
+      font-weight: bold;
+      font-family: var(--dnd5e-font-roboto);
+      font-size: var(--font-size-18);
+      text-shadow: 0 0 4px var(--dnd5e-color-gold);
+      cursor: var(--cursor-pointer);
+      border-radius: 100%;
+      color: var(--color-text-light-0);
+      border: 2px solid var(--dnd5e-color-gold);
+      clip-path: polygon(48.5% 0, 91% 25%, 92% 75%, 49% 100%, 6% 75%, 7% 25%);
+
+      .config-button {
+        color: inherit;
+        font-size: inherit;
+      }
+    }
+
+    .initiative-score {
+      --size: 19px;
+      width: var(--size);
+      height: var(--size);
+      position: absolute;
+      inset: auto auto calc((var(--size) / 3) * -1) calc(50% - var(--size) / 2);
+      background: var(--dnd5e-color-gold);
+      color: var(--dnd5e-color-black);
+      font-weight: bold;
+      display: grid;
+      place-content: center;
+      border-radius: 100%;
+      font-size: var(--font-size-11);
+    }
+
+    /* Loyalty/Quality */
+    .loyalty-badge, .quality-badge {
+      position: absolute;
+      inset: 55px 4px auto auto;
+      width: 45px;
+      height: 45px;
+      background-image: url("ui/loyalty-badge.webp");
+      font-size: var(--font-size-16);
+
+      > input {
+        width: 45px;
+        text-align: center;
+
+        &:hover, &:focus {
+          border-color: transparent;
+          box-shadow: none;
+        }
+      }
+    }
+  }
+
   /* ---------------------------------- */
   /*  Sheet Body                        */
   /* ---------------------------------- */
@@ -60,7 +199,9 @@
 
     .main-content {
       /* Tabbed Content */
-      .tab-body .tab:not(.active) { display: none; }
+      .tab-body {
+        .tab:not(.active) { display: none; }
+      }
     }
   }
 
@@ -96,6 +237,38 @@
   /*  Meters                            */
   /* ---------------------------------- */
 
+  .bars .bar {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+    label {
+      flex: 0 0 25px;
+      text-transform: uppercase;
+      font-weight: bold;
+      color: var(--dnd5e-color-gold);
+      text-align: center;
+      font-size: var(--font-size-11);
+    }
+
+    .meter {
+      --border-width: 0;
+      flex: 1;
+      height: 8px;
+
+      &.hit-points::before { background: linear-gradient(to right, var(--dnd5e-color-hp-1) 0%, var(--dnd5e-color-hp-2) 100%); }
+      &.hit-dice::before { background: linear-gradient(to right, var(--dnd5e-color-hd-1) 0%, var(--dnd5e-color-hd-2) 100%); }
+      &.uses::before { background: linear-gradient(to right, #023491 0%, var(--dnd5e-color-blue) 100%,); }
+    }
+
+    .values {
+      flex: 0 0 48px;
+      font-weight: bold;
+      font-size: var(--font-size-11);
+      text-shadow: var(--group-vitals-shadow);
+    }
+  }
+
   .meter {
     &.hit-points {
       height: 32px;
@@ -119,7 +292,7 @@
       }
     }
 
-    &.hit-points, &.hit-dice {
+    &.hit-points, &.hit-dice, &.uses {
       &.progress::before, .progress::before {
         block-size: unset;
         clip-path: unset;
@@ -281,6 +454,24 @@
   }
 
   /* ---------------------------------- */
+  /*  Sidebar                           */
+  /* ---------------------------------- */
+
+  .sidebar-collapser {
+    position: absolute;
+    inset: 0 auto 0 var(--sidebar-size);
+    width: 16px;
+    padding: 0;
+    color: var(--dnd5e-color-gold);
+    transition: left 450ms ease;
+
+    &:hover, &:focus-visible {
+      box-shadow: none;
+      background: var(--dnd5e-background-5);
+    }
+  }
+
+  /* ---------------------------------- */
   /*  Badges                            */
   /* ---------------------------------- */
 
@@ -434,7 +625,9 @@
         }
       }
     }
+  }
 
+  .tab[data-tab=members] .member, .sheet-stations .station {
     .controls {
       position: absolute;
       inset: -8px 0 auto auto;
@@ -533,4 +726,13 @@
   &.locked {
     .meter.sectioned > .hit-points { cursor: var(--cursor-default); }
   }
+}
+
+/* -------------------------------------------- */
+/*  Actors Sidebar                              */
+/* -------------------------------------------- */
+
+.actors-sidebar .primary-party .entry-name::after {
+  content: " ✦";
+  color: var(--dnd5e-color-blue);
 }

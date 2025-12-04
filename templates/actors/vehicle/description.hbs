@@ -1,0 +1,10 @@
+<section class="tab flex1 {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+    {{#if editable}}
+    <prose-mirror name="system.details.biography.value" value="{{ source.details.biography.value }}"
+                  document-uuid="{{ actor.uuid }}" class="sized" compact>{{{ description }}}</prose-mirror>
+    {{else}}
+    <div class="editor editor-content">
+        {{{ description }}}
+    </div>
+    {{/if}}
+</section>

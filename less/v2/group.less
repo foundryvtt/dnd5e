@@ -112,6 +112,8 @@
             width: 24px;
             line-height: 28px;
             font-size: var(--font-size-10);
+
+            &.suppressed { visibility: hidden; }
           }
         }
       }
@@ -224,36 +226,10 @@
         font-family: var(--dnd5e-font-roboto-slab);
         font-weight: bold;
         font-size: var(--font-size-14);
-      }
 
-      .bar {
-        display: flex;
-        gap: 8px;
-        align-items: center;
-
-        label {
-          flex: 0 0 25px;
-          text-transform: uppercase;
-          font-weight: bold;
-          color: var(--dnd5e-color-gold);
-          text-align: center;
-          font-size: var(--font-size-11);
-        }
-
-        .meter {
-          --border-width: 0;
-          flex: 1;
-          height: 8px;
-
-          &.hit-points::before { background: linear-gradient(to right, var(--dnd5e-color-hp-1) 0%, var(--dnd5e-color-hp-2) 100%); }
-          &.hit-dice::before { background: linear-gradient(to right, var(--dnd5e-color-hd-1) 0%, var(--dnd5e-color-hd-2) 100%); }
-        }
-
-        .values {
-          flex: 0 0 48px;
-          font-weight: bold;
-          font-size: var(--font-size-11);
-          text-shadow: var(--group-vitals-shadow);
+        a:not([data-action=showDocument]):hover {
+          cursor: var(--cursor-default);
+          text-shadow: none;
         }
       }
 
@@ -280,6 +256,15 @@
           padding: 3px 6px;
         }
       }
+
+      .primary-vehicle {
+        position: absolute;
+        inset: -4px -6px auto auto;
+        font-size: var(--font-size-18);
+        --fa-primary-color: black;
+        --fa-secondary-opacity: 1;
+        --fa-secondary-color: var(--dnd5e-color-gold);
+      }
     }
 
     div.stats {
@@ -288,6 +273,14 @@
       border: var(--dnd5e-border-gold);
       border-radius: 4px;
       padding-block: 8px;
+
+      .empty {
+        display: inline grid;
+        place-content: center;
+        opacity: .25;
+        font-weight: bold;
+        font-size: var(--font-size-16);
+      }
 
       .info {
         display: flex;
@@ -334,6 +327,11 @@
             font-size: var(--font-size-13);
           }
         }
+
+        a.skill:not(.rollable):hover {
+          cursor: var(--cursor-default);
+          text-shadow: none;
+        }
       }
     }
   }
@@ -357,14 +355,7 @@
       gap: 8px;
     }
 
-    .body {
-      padding: 6px 4px calc(1.5rem + 30px) 4px;
-      margin-right: 4px;
-      scrollbar-gutter: stable;
-      overflow-y: auto;
-    }
-
-    .encumbrance {
+    .sidebar .encumbrance {
       width: 100%;
 
       .meter {
@@ -419,6 +410,34 @@
         }
       }
     }
+
+    .body {
+      padding: 6px 4px calc(1.5rem + 30px) 4px;
+      margin-right: 4px;
+      scrollbar-gutter: stable;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+
+      .inventory-element { flex: 1; }
+    }
+  }
+
+  &.vehicle-inventory [data-application-part=inventory] .body { padding-bottom: 8px; }
+
+  /* -------------------------------------------- */
+  /*  Child Creation                              */
+  /* -------------------------------------------- */
+
+  &.tab-inventory.vehicle-inventory .window-content > .create-child { display: none; }
+
+  /* -------------------------------------------- */
+  /*  Locked                                      */
+  /* -------------------------------------------- */
+
+  &.locked {
+    .sheet-header-buttons > button, [data-action=editDescription], [data-action=award] { display: none; }
+    [data-action=changePace] { visibility: hidden; }
   }
 }
 
