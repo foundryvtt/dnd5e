@@ -362,12 +362,16 @@ export default class ChatMessage5e extends ChatMessage {
           </header>
         </section>
       `;
+      const imgSrc = (activity?.img === activity?.metadata.img) ? item.img : activity.img;
+      const titleText = activity
+        ? game.i18n.format("DND5E.CHATMESSAGE.USAGE.Title", { item: item.name, activity: activity.name})
+        : item.name;
       const icon = document.createElement("img");
-      Object.assign(icon, { className: "gold-icon", src: item.img, alt: item.name });
+      Object.assign(icon, { className: "gold-icon", src: imgSrc, alt: titleText });
       flavor.querySelector("header").insertAdjacentElement("afterbegin", icon);
       const title = document.createElement("span");
       title.classList.add("title");
-      title.append(item.name);
+      title.append(titleText);
       flavor.querySelector(".name-stacked").insertAdjacentElement("afterbegin", title);
       html.querySelector(".message-header .flavor-text").remove();
       html.querySelector(".message-content").insertAdjacentElement("afterbegin", flavor);
