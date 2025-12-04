@@ -23,7 +23,6 @@ system:
         targets:
           - type: activityUses
             value: '1'
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -33,6 +32,9 @@ system:
       effects: []
       range:
         override: false
+        value: ''
+        units: ft
+        special: ''
       target:
         template:
           contiguous: false
@@ -58,6 +60,14 @@ system:
           formula: '15'
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: true
+        requireIdentification: true
     9rvsI8e3iaHSuv1k:
       type: enchant
       _id: 9rvsI8e3iaHSuv1k
@@ -266,14 +276,13 @@ flags:
     riders:
       activity:
         - QxD7LVTB9MWX8QmK
-      effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745433606005
+  modifiedTime: 1764615192127
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 9300000

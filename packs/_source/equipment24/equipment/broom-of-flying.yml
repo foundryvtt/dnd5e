@@ -27,7 +27,13 @@ system:
         override: false
       effects:
         - _id: HT7JLnMCpfGKFxI2
+          level:
+            min: null
+            max: null
         - _id: UzcvESI8ovNwhIPz
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: self
@@ -57,6 +63,13 @@ system:
       appliedEffects:
         - HT7JLnMCpfGKFxI2
         - UzcvESI8ovNwhIPz
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
     LvSkgvxIXSxWdGHa:
       type: utility
       _id: LvSkgvxIXSxWdGHa
@@ -107,6 +120,13 @@ system:
       name: Send Alone or Recall
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
   uses:
     spent: 0
     recovery: []
@@ -278,18 +298,14 @@ effects:
       exportSource: null
     _id: UzcvESI8ovNwhIPz
     _key: '!items.effects!dmgBroomOfFlying.UzcvESI8ovNwhIPz'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745431704598
+  modifiedTime: 1764616670999
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 5100000

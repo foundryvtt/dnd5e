@@ -28,6 +28,9 @@ system:
         value: '1'
       effects:
         - _id: EyOtzMokDEOeHxkn
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: self
@@ -41,6 +44,7 @@ system:
           choice: false
           count: ''
           type: self
+          special: ''
         override: false
         prompt: true
       uses:
@@ -54,7 +58,15 @@ system:
         formula: ''
       name: Animate
       img: ''
-      appliedEffects: []
+      appliedEffects:
+        - EyOtzMokDEOeHxkn
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
   uses:
     spent: 0
     recovery: []
@@ -145,18 +157,14 @@ effects:
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmgAnimatedShiel.EyOtzMokDEOeHxkn'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745256802282
+  modifiedTime: 1764614282921
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 900000

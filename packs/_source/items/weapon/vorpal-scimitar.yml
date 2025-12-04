@@ -199,13 +199,19 @@ system:
               enabled: false
               formula: ''
             number: 6
-            denomination: '8'
+            denomination: 8
             bonus: ''
             types:
               - slashing
       name: ''
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   attuned: false
   ammunition: {}
   identifier: vorpal-scimitar
@@ -215,18 +221,14 @@ folder: MLMTCAvKsuFE3vYA
 sort: 0
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037154568
-  modifiedTime: 1750697344647
+  modifiedTime: 1764619569109
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!I7cOsXsklWkzouHA'

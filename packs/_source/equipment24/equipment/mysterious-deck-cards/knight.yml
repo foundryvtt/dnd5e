@@ -32,7 +32,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -67,6 +66,13 @@ system:
         formula: ''
       img: icons/svg/card-joker.svg
       _id: 6XiRtSUT6tc6Za36
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+      appliedEffects: []
   uses:
     spent: 0
     recovery: []
@@ -114,18 +120,14 @@ effects: []
 sort: 400000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1729201900508
-  modifiedTime: 1745606935245
+  modifiedTime: 1764615918451
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!dmgDmtKnight0000'

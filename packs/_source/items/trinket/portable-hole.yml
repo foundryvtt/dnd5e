@@ -124,11 +124,23 @@ system:
         override: false
       check:
         ability: ''
-        dc: {}
+        dc:
+          calculation: ''
+          formula: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+      appliedEffects: []
     dnd5eactivity100:
       _id: dnd5eactivity100
       type: save
@@ -183,7 +195,17 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+      appliedEffects: []
   attuned: false
   identifier: portable-hole
 effects: []
@@ -194,11 +216,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037300564
-  modifiedTime: 1750697344647
+  modifiedTime: 1764621102162
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!rvxGvcUzoQXVNbAu'

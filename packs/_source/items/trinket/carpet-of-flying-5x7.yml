@@ -108,7 +108,17 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+      appliedEffects: []
   attuned: false
   identifier: carpet-of-flying-5x7
 effects: []
@@ -116,11 +126,11 @@ flags: {}
 _id: XAr1SR4POx5BAArk
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037208119
-  modifiedTime: 1750697344647
+  modifiedTime: 1764620139147
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 folder: UnUwTG4YIgd0kaUJ

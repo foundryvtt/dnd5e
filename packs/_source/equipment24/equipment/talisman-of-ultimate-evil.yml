@@ -59,10 +59,15 @@ system:
             bonus: ''
             types:
               - necrotic
-            scaling:
-              number: 1
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
     zknPGzuSFtET9BIe:
       type: save
       name: Ultimate End
@@ -81,7 +86,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -120,8 +124,6 @@ system:
             bonus: ''
             types:
               - psychic
-            scaling:
-              number: 1
         onSave: full
       save:
         ability: dex
@@ -130,6 +132,13 @@ system:
           formula: '20'
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
   uses:
     spent: 0
     recovery: []
@@ -236,18 +245,14 @@ effects:
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmgTalismanOfUlt.tBqJ9VbBK1VpE2JD'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712704254
+  modifiedTime: 1764617572053
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 35500000

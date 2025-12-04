@@ -133,8 +133,6 @@ system:
             bonus: '-3'
             types:
               - fire
-            scaling:
-              number: 1
       uses:
         spent: 0
         recovery: []
@@ -144,6 +142,13 @@ system:
       _id: apuqiDlUPRWfQkhf
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: false
     BsQ1WDJiSRkltvi5:
       type: attack
       activation:
@@ -209,8 +214,6 @@ system:
             bonus: ''
             types:
               - slashing
-            scaling:
-              number: 1
       uses:
         spent: 0
         recovery: []
@@ -220,6 +223,13 @@ system:
       _id: BsQ1WDJiSRkltvi5
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: false
     CVIAWq4QHDwg2R3U:
       type: attack
       activation:
@@ -285,8 +295,6 @@ system:
             bonus: ''
             types:
               - piercing
-            scaling:
-              number: 1
       uses:
         spent: 0
         recovery: []
@@ -296,6 +304,12 @@ system:
       _id: CVIAWq4QHDwg2R3U
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     Q9R9WCGGIX935S4g:
       type: save
       name: Drain Life
@@ -313,7 +327,6 @@ system:
         targets:
           - type: activityUses
             value: '1'
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -351,8 +364,6 @@ system:
             bonus: ''
             types:
               - necrotic
-            scaling:
-              number: 1
         onSave: none
       save:
         ability: con
@@ -361,6 +372,13 @@ system:
           formula: '17'
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
     YhJPINea1brL2HKP:
       type: save
       name: Paralyze
@@ -377,7 +395,6 @@ system:
         targets:
           - type: activityUses
             value: '1'
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -388,6 +405,9 @@ system:
       effects:
         - _id: vi5lX9Cyx51e2fNs
           onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
       target:
@@ -419,7 +439,14 @@ system:
       _id: YhJPINea1brL2HKP
       img: ''
       appliedEffects:
-        - cBnYRJkAGVoHDyiN
+        - vi5lX9Cyx51e2fNs
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
     LxHj2WU81djz502O:
       type: save
       name: Terrify
@@ -436,7 +463,6 @@ system:
         targets:
           - type: activityUses
             value: '1'
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -447,6 +473,9 @@ system:
       effects:
         - _id: cBnYRJkAGVoHDyiN
           onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: self
@@ -484,6 +513,13 @@ system:
       img: ''
       appliedEffects:
         - cBnYRJkAGVoHDyiN
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
     5Mhd70dNk5UBYbXW:
       type: attack
       activation:
@@ -549,8 +585,6 @@ system:
             bonus: ''
             types:
               - slashing
-            scaling:
-              number: 1
       uses:
         spent: 0
         recovery: []
@@ -560,6 +594,12 @@ system:
       _id: 5Mhd70dNk5UBYbXW
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery: []
@@ -760,18 +800,14 @@ effects:
       exportSource: null
     _key: '!items.effects!dmgRodOfLordlyMi.vi5lX9Cyx51e2fNs'
 folder: XVIITMl9kCCSjZQz
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712703085
+  modifiedTime: 1764616265642
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

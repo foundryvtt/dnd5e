@@ -199,14 +199,20 @@ system:
               enabled: false
               formula: ''
             number: 2
-            denomination: 0
+            denomination: null
             bonus: ''
             types:
               - radiant
-            scaling:
-              number: 1
       name: ''
       _id: KD1P4pdXDZN60uXn
+      img: ''
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+      appliedEffects: []
   attuned: false
   ammunition: {}
   identifier: holy-avenger-rapier
@@ -216,18 +222,14 @@ folder: MLMTCAvKsuFE3vYA
 sort: 0
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037268933
-  modifiedTime: 1750697344647
+  modifiedTime: 1764620710640
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!kTxi62RTrrdrIBr9'

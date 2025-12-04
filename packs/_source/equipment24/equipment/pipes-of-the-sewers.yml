@@ -67,6 +67,7 @@ system:
         attacks: false
         proficiency: false
         saves: false
+        ability: ''
       profiles:
         - count: '@scaling'
           name: ''
@@ -75,13 +76,18 @@ system:
           level:
             min: null
             max: null
-          types: []
       summon:
         prompt: true
         mode: ''
         identifier: ''
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     eODd7jfqxrFREsrY:
       type: save
       name: Sway Rats
@@ -135,6 +141,13 @@ system:
           formula: '15'
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: false
   uses:
     spent: 0
     recovery:
@@ -209,18 +222,14 @@ system:
   strength: null
   proficient: null
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745440756557
+  modifiedTime: 1764617399211
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 25100000

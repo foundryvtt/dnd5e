@@ -78,7 +78,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -115,6 +114,13 @@ system:
       name: Detect Enemy
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
   attuned: false
   identifier: wand-of-enemy-detection
 effects: []
@@ -122,18 +128,14 @@ folder: 1aDgsGVwDbPdxG2V
 sort: 0
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1725037100973
-  modifiedTime: 1731015765246
+  modifiedTime: 1764618981987
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!5Rxo4K9cgpwgW9vZ'

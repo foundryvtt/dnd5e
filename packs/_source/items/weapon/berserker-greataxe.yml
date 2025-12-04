@@ -211,18 +211,14 @@ system:
       damage:
         onSave: half
         parts:
-          - number: 1
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
             denomination: 12
             bonus: '@mod'
             types:
               - slashing
-            custom:
-              enabled: false
-              formula: ''
-            scaling:
-              mode: whole
-              number: null
-              formula: ''
       save:
         ability: wis
         dc:
@@ -231,7 +227,17 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+      appliedEffects: []
   attuned: false
   ammunition: {}
   identifier: berserker-greataxe
@@ -243,11 +249,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037330226
-  modifiedTime: 1750697344647
+  modifiedTime: 1764621453180
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!zSKorO6lwT7vs2uk'

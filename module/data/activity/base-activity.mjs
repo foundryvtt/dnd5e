@@ -650,6 +650,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         console.warn(`Unable to prepare formula "${formula}" for ${this.name} in item ${this.item.name}${
           this.actor ? ` on ${this.actor.name} (${this.actor.id})` : ""
         } (${this.uuid})`, err);
+        return null;
       }
     }).filter(_ => _));
     this.labels.damage = this.labels.damages = rolls.map(roll => {
@@ -815,7 +816,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       configurable: true,
       enumerable: false
     });
-    if ( obj.canOverride && !obj.override ) {
+    if ( obj.canOverride && !obj.override && !this.isRider ) {
       foundry.utils.mergeObject(obj, foundry.utils.getProperty(this.item.system, keyPath));
     }
   }

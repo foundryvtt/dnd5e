@@ -22,7 +22,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -31,15 +30,45 @@ system:
         override: false
       effects:
         - _id: rp68qDxzWquL4KsY
+          level:
+            min: null
+            max: null
         - _id: En6oT73Shu6Alr46
+          level:
+            min: null
+            max: null
         - _id: UI7peFQB9vCGuwpG
+          level:
+            min: null
+            max: null
         - _id: CuxyOkR4W9VP8KOM
+          level:
+            min: null
+            max: null
         - _id: ZPdhGzt0bhaZyVd2
+          level:
+            min: null
+            max: null
         - _id: 29M8rjINOWKcHek6
+          level:
+            min: null
+            max: null
         - _id: VAndQR2Hu88gg4NF
+          level:
+            min: null
+            max: null
         - _id: 4YWphFJwC5ojd6Ib
+          level:
+            min: null
+            max: null
         - _id: SH3poodOtfaaAiv8
+          level:
+            min: null
+            max: null
         - _id: hSarjVpqNwhqKOB1
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: self
@@ -77,6 +106,12 @@ system:
         - 4YWphFJwC5ojd6Ib
         - SH3poodOtfaaAiv8
         - hSarjVpqNwhqKOB1
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery: []
@@ -502,18 +537,14 @@ effects:
     _id: hSarjVpqNwhqKOB1
     _key: '!items.effects!dmgPotionOfResis.hSarjVpqNwhqKOB1'
 folder: 4NjJfCbRAVhw8ESv
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1730742719641
-  modifiedTime: 1745256807726
+  modifiedTime: 1764614700042
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

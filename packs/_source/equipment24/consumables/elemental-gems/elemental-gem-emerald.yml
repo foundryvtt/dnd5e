@@ -21,7 +21,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -63,6 +62,7 @@ system:
         attacks: false
         proficiency: false
         saves: false
+        ability: ''
       profiles:
         - count: ''
           name: ''
@@ -71,13 +71,20 @@ system:
           level:
             min: null
             max: null
-          types: []
       summon:
         prompt: true
         identifier: ''
         mode: ''
       name: Utilize
       _id: 3XZnWV3DIKuypGIu
+      img: ''
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+      appliedEffects: []
   uses:
     spent: 0
     recovery: []
@@ -136,18 +143,14 @@ system:
   strength: null
   proficient: null
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712699668
+  modifiedTime: 1764614468380
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 200000

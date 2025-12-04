@@ -32,8 +32,7 @@ system:
         units: inst
         concentration: false
         override: false
-      effects:
-        - _id: 9npFjYvEL3twc99F
+      effects: []
       range:
         override: false
         units: self
@@ -59,6 +58,14 @@ system:
         formula: ''
         name: ''
       _id: L5OnUjZIn27NHd2E
+      img: ''
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+      appliedEffects: []
     AtSTn7SENNBRbKlL:
       type: utility
       name: Reset Progress
@@ -211,18 +218,14 @@ effects:
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmgManualOfBodil.7W1n7zchV0g7BKyq'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745431704598
+  modifiedTime: 1764617147326
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 21300000

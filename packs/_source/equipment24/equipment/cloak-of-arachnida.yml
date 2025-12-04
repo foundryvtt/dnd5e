@@ -20,7 +20,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -55,8 +55,15 @@ system:
         level: '2'
         properties: []
         uuid: Compendium.dnd5e.spells24.Item.phbsplWeb0000000
+        ability: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery:
@@ -169,18 +176,14 @@ effects:
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmgCloakOfArachn.6ZKscgdcc55OsAuN'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745256803537
+  modifiedTime: 1764616709863
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 7500000

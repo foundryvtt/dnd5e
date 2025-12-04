@@ -23,7 +23,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -33,6 +32,9 @@ system:
       effects:
         - _id: 29Rm9ru4fP60YFj3
           onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: self
@@ -67,6 +69,12 @@ system:
       img: ''
       appliedEffects:
         - 29Rm9ru4fP60YFj3
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery:
@@ -160,18 +168,14 @@ effects:
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmgPipesOfHaunti.29Rm9ru4fP60YFj3'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712701920
+  modifiedTime: 1764617376429
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 25000000

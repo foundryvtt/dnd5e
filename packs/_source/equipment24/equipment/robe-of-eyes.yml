@@ -57,6 +57,12 @@ system:
           formula: '11'
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     idP25eFI8qWG7FTV:
       type: save
       name: Daylight Save
@@ -109,6 +115,12 @@ system:
       _id: idP25eFI8qWG7FTV
       img: ''
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery: []
@@ -211,18 +223,14 @@ effects:
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmgRobeOfEyes000.XYTd1ck6pd7NhWs7'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712702913
+  modifiedTime: 1764617417044
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 32300000

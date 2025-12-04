@@ -81,7 +81,6 @@ system:
         targets:
           - type: activityUses
             value: '1'
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -118,6 +117,14 @@ system:
         formula: 1d20
       img: systems/dnd5e/icons/svg/scale-value.svg
       appliedEffects: []
+      visibility:
+        requireAttunement: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireMagic: true
+        requireIdentification: true
     9qgEdXDrdcn9Hw9W:
       type: cast
       spell:
@@ -383,11 +390,11 @@ flags:
         - bDZufQP0jaHOUY6j
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712701219
+  modifiedTime: 1764615145824
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 8600000

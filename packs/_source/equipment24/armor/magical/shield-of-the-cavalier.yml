@@ -28,6 +28,9 @@ system:
         override: false
       effects:
         - _id: TNWNbk14uUGiJGvv
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: ft
@@ -71,11 +74,16 @@ system:
             bonus: 2 + @mod
             types:
               - force
-            scaling:
-              number: 1
       img: ''
       appliedEffects:
         - TNWNbk14uUGiJGvv
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
     Zk2NWOrZcSWTaogR:
       type: utility
       name: Protective Field
@@ -94,7 +102,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -133,6 +140,13 @@ system:
         formula: ''
       img: systems/dnd5e/icons/svg/trait-damage-immunities.svg
       appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
   uses:
     spent: 0
     recovery:
@@ -240,18 +254,14 @@ effects:
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmgShieldOfTheCa.TNWNbk14uUGiJGvv'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745612094961
+  modifiedTime: 1764614376689
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 837500

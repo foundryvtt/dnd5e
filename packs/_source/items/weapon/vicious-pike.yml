@@ -148,7 +148,17 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      visibility:
+        requireMagic: false
+        level:
+          min: null
+          max: null
+        identifier: ''
+      appliedEffects: []
   attuned: false
   ammunition: {}
   identifier: vicious-pike
@@ -160,11 +170,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1725037331040
-  modifiedTime: 1750697344647
+  modifiedTime: 1764621468299
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!zibIgdxPz8QHSCg6'

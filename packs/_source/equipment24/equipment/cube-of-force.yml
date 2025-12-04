@@ -21,7 +21,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -50,8 +49,15 @@ system:
         level: '1'
         properties: []
         uuid: Compendium.dnd5e.spells24.Item.phbsplMageArmor0
+        ability: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     ZtRR3jrinUNMIEvU:
       type: cast
       _id: ZtRR3jrinUNMIEvU
@@ -67,7 +73,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -96,8 +102,15 @@ system:
         level: '1'
         properties: []
         uuid: Compendium.dnd5e.spells24.Item.phbsplShield0000
+        ability: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     tCJJNlbzPWFK6X2m:
       type: cast
       _id: tCJJNlbzPWFK6X2m
@@ -114,7 +127,6 @@ system:
           - type: itemUses
             value: '3'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -143,8 +155,15 @@ system:
         level: '3'
         properties: []
         uuid: Compendium.dnd5e.spells24.Item.phbsplLeomundsTi
+        ability: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     KRhYoWhmZNWAmv1i:
       type: cast
       _id: KRhYoWhmZNWAmv1i
@@ -161,7 +180,6 @@ system:
           - type: itemUses
             value: '4'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -190,8 +208,15 @@ system:
         level: '4'
         properties: []
         uuid: Compendium.dnd5e.spells24.Item.phbPrivateSanctu
+        ability: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     N5Y0YZKK2llU4HXf:
       type: cast
       _id: N5Y0YZKK2llU4HXf
@@ -208,7 +233,6 @@ system:
           - type: itemUses
             value: '4'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -237,8 +261,15 @@ system:
         level: '4'
         properties: []
         uuid: Compendium.dnd5e.spells24.Item.phbsplOtilukesRe
+        ability: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     ZIMYDxhyS56bcRQE:
       type: cast
       _id: ZIMYDxhyS56bcRQE
@@ -255,7 +286,6 @@ system:
           - type: itemUses
             value: '5'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -284,8 +314,15 @@ system:
         level: '5'
         properties: []
         uuid: Compendium.dnd5e.spells24.Item.phbsplWallofForc
+        ability: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
   uses:
     spent: 0
     recovery:
@@ -351,18 +388,14 @@ system:
   strength: null
   proficient: null
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712698819
+  modifiedTime: 1764616800065
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 9900000

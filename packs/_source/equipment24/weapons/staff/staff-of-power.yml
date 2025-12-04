@@ -59,6 +59,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: NQqC0MHmisyfOmfQ
       sort: 300000
       activation:
@@ -73,7 +74,6 @@ system:
           - type: itemUses
             value: '5'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -96,6 +96,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     zNjqfiDxCIdNI7Rn:
       type: cast
       spell:
@@ -110,6 +116,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: zNjqfiDxCIdNI7Rn
       sort: 400000
       activation:
@@ -124,7 +131,6 @@ system:
           - type: itemUses
             value: '5'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -147,6 +153,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     QABYkCIP5lk8NXSh:
       type: cast
       spell:
@@ -161,6 +173,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: QABYkCIP5lk8NXSh
       sort: 500000
       activation:
@@ -174,7 +187,7 @@ system:
         targets:
           - type: itemUses
             value: '6'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -197,6 +210,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     NoWO7edVhEWuVAmx:
       type: cast
       spell:
@@ -262,6 +281,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: czjvyoIovQka1F9F
       sort: 700000
       activation:
@@ -276,7 +296,6 @@ system:
           - type: itemUses
             value: '2'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -299,6 +318,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     mRMA2XqUdvDvMOnP:
       type: cast
       spell:
@@ -313,6 +338,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: mRMA2XqUdvDvMOnP
       sort: 800000
       activation:
@@ -327,7 +353,6 @@ system:
           - type: itemUses
             value: '5'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -350,6 +375,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     aORrsuLy6pVeYbRK:
       type: cast
       spell:
@@ -364,6 +395,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: aORrsuLy6pVeYbRK
       sort: 900000
       activation:
@@ -377,7 +409,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -400,6 +432,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     w4ATj8Ttf7inmYQ8:
       type: cast
       spell:
@@ -414,6 +452,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: w4ATj8Ttf7inmYQ8
       sort: 1000000
       activation:
@@ -427,7 +466,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            scaling: {}
+            target: ''
       description:
         chatFlavor: ''
       duration:
@@ -450,6 +489,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     NpEs7lhVzV3erVyY:
       type: cast
       spell:
@@ -464,6 +509,7 @@ system:
           - somatic
           - material
         spellbook: true
+        ability: ''
       _id: NpEs7lhVzV3erVyY
       sort: 1100000
       activation:
@@ -478,7 +524,6 @@ system:
           - type: itemUses
             value: '5'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -501,6 +546,12 @@ system:
         max: ''
       name: ''
       img: ''
+      visibility:
+        requireIdentification: true
+        level:
+          min: null
+          max: null
+        identifier: ''
     udI31yfOHiwPCiSF:
       type: damage
       name: Retributive Strike
@@ -552,9 +603,16 @@ system:
             bonus: ''
             types:
               - force
-            scaling:
-              number: 1
       _id: udI31yfOHiwPCiSF
+      img: ''
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: false
+      appliedEffects: []
     3CrTUVjWDAG17HYK:
       type: save
       name: 'Retributive Strike: Save'
@@ -606,8 +664,6 @@ system:
             bonus: ''
             types:
               - force
-            scaling:
-              number: 1
         onSave: half
       save:
         ability: dex
@@ -617,6 +673,13 @@ system:
       _id: 3CrTUVjWDAG17HYK
       img: ''
       appliedEffects: []
+      visibility:
+        requireIdentification: false
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireMagic: true
   uses:
     spent: 0
     recovery:
@@ -734,18 +797,14 @@ system:
   mastery: topple
 effects: []
 folder: 5p9KrkF39e6vFO4g
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712703688
+  modifiedTime: 1764615492694
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 100782

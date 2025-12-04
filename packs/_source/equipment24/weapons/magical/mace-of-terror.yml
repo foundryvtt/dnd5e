@@ -63,7 +63,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -73,6 +72,9 @@ system:
       effects:
         - _id: amYapIKWPpJZ9EuO
           onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
       target:
@@ -102,7 +104,15 @@ system:
           calculation: ''
           formula: '15'
       img: ''
-      appliedEffects: []
+      appliedEffects:
+        - amYapIKWPpJZ9EuO
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
   uses:
     spent: 0
     recovery:
@@ -226,18 +236,14 @@ effects:
       exportSource: null
     _key: '!items.effects!dmgMaceOfTerror0.amYapIKWPpJZ9EuO'
 folder: kie870i5kr7yuxO8
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1745712701275
+  modifiedTime: 1764615174904
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
