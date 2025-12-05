@@ -494,6 +494,7 @@ Hooks.once("i18nInit", () => {
         "Feature.Class.ArtificerPlan": game.i18n.localize("DND5E.Feature.Class.ArtificerInfusion"),
         "Feature.Species": game.i18n.localize("DND5E.Feature.SpeciesLegacy"),
         FlagsAlertHint: game.i18n.localize("DND5E.FlagsAlertHintLegacy"),
+        FlagsRemarkableAthleteHint: game.i18n.localize("DND5E.FlagsRemarkableAthleteHintLegacy"),
         ItemSpeciesDetails: game.i18n.localize("DND5E.ItemSpeciesDetailsLegacy"),
         "Language.Category.Rare": game.i18n.localize("DND5E.Language.Category.Exotic"),
         "MOVEMENT.Type.Speed": game.i18n.localize("DND5E.MOVEMENT.Type.Walk"),
