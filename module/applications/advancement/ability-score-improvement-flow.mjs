@@ -99,7 +99,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
       };
     }
 
-    const modernRules = game.settings.get("dnd5e", "rulesVersion") === "modern";
+    const modernRules = dnd5e.settings.rulesVersion === "modern";
     const pluralRules = new Intl.PluralRules(game.i18n.lang);
     return foundry.utils.mergeObject(super.getData(), {
       abilities, lockImprovement, points, recommendation,
