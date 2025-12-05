@@ -165,7 +165,7 @@ export default class RaceData extends ItemDataModel.mixin(AdvancementTemplate, I
 
   /** @override */
   _advancementToCreate(options) {
-    if ( game.settings.get("dnd5e", "rulesVersion") === "legacy" ) return [
+    if ( dnd5e.settings.rulesVersion === "legacy" ) return [
       { type: "AbilityScoreImprovement" },
       { type: "Size" },
       { type: "Trait", configuration: { grants: ["languages:standard:common"] } }

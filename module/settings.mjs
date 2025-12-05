@@ -618,6 +618,26 @@ export function registerSystemSettings() {
     default: [],
     config: true
   });
+
+  cacheSettings();
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Cache various World settings to improve performance.
+ */
+function cacheSettings() {
+  dnd5e.settings = {};
+  for ( const setting of game.settings.settings.values() ) {
+    const { key, namespace, onChange, requiresReload, scope } = setting;
+    if ( (scope !== "world") || (namespace !== "dnd5e") ) continue;
+    dnd5e.settings[key] = game.settings.get(namespace, key);
+    if ( !requiresReload ) setting.onChange = (value, ...args) => {
+      dnd5e.settings[key] = value;
+      onChange?.(value, ...args);
+    };
+  }
 }
 
 /* -------------------------------------------- */
