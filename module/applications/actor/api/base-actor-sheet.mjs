@@ -508,7 +508,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   _prepareSenses(context) {
     return [
       ...Object.entries(CONFIG.DND5E.senses).map(([k, label]) => {
-        const value = context.system.attributes.senses[k];
+        const value = context.system.attributes.senses.ranges[k];
         return value ? { label, value } : null;
       }, {}).filter(_ => _),
       ...splitSemicolons(context.system.attributes.senses.special)
