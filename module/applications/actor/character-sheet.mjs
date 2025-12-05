@@ -460,7 +460,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
     //   name: subclass.name, class: subclass.system.classIdentifier
     // });
     // context.warnings.push({ message, type: "warning" });
-    context.showClassDrop = !context.classes.length || (this._mode === this.constructor.MODES.EDIT);
+    context.showClassDrop = !context.classes.length || this.isEditMode;
     return context;
   }
 

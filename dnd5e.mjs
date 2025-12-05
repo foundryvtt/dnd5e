@@ -214,6 +214,11 @@ Hooks.once("init", function() {
     types: ["dnd5e.rotateArea"]
   });
 
+  DocumentSheetConfig.registerSheet(RollTable, "dnd5e", applications.RollTableSheet5e, {
+    makeDefault: true,
+    label: "DND5E.SheetClass.RollTable"
+  });
+
   CONFIG.Token.prototypeSheetClass = applications.PrototypeTokenConfig5e;
   DocumentSheetConfig.unregisterSheet(TokenDocument, "core", foundry.applications.sheets.TokenConfig);
   DocumentSheetConfig.registerSheet(TokenDocument, "dnd5e", applications.TokenConfig5e, {

@@ -22,6 +22,7 @@ export {default as CreateDocumentDialog} from "./create-document-dialog.mjs";
 export {default as CurrencyManager} from "./currency-manager.mjs";
 export {default as DialogMixin} from "./dialog-mixin.mjs";
 export {default as PropertyAttribution} from "./property-attribution.mjs";
+export {default as RollTableSheet5e} from "./roll-table-sheet.mjs";
 export {default as SheetConfig} from "./sheet-config.mjs";
 export {default as Tabs5e} from "./tabs.mjs";
 export {PrototypeTokenConfig5e, TokenConfig5e} from "./token-config.mjs";
