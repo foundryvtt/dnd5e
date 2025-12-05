@@ -330,12 +330,13 @@
  * Configuration data for item properties.
  *
  * @typedef ItemPropertyConfiguration
- * @property {string} label           Localized label.
- * @property {string} [abbreviation]  Localized abbreviation.
- * @property {string} [icon]          Icon that can be used in certain places to represent this property.
- * @property {string} [reference]     Reference to a rule page describing this property.
- * @property {boolean} [isPhysical]   Is this property one that can cause damage resistance bypasses?
- * @property {boolean} [isTag]        Is this spell property a tag, rather than a component?
+ * @property {string} label                 Localized label.
+ * @property {string} [abbreviation]        Localized abbreviation.
+ * @property {string} [icon]                Icon that can be used in certain places to represent this property.
+ * @property {string} [reference]           Reference to a rule page describing this property.
+ * @property {boolean} [isPhysical]         Is this property one that can cause damage resistance bypasses?
+ * @property {boolean} [isTag]              Is this spell property a tag, rather than a component?
+ * @property {boolean} [validForAmmunition] Can this property be applied to ammunition without being physical?
  */
 
 /* -------------------------------------------- */

@@ -1901,7 +1901,8 @@ DND5E.itemProperties = {
     label: "DND5E.ITEM.Property.Reload"
   },
   ret: {
-    label: "DND5E.ITEM.Property.Returning"
+    label: "DND5E.ITEM.Property.Returning",
+    validForAmmunition: true
   },
   ritual: {
     label: "DND5E.ITEM.Property.Ritual",
