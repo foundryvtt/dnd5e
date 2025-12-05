@@ -501,7 +501,7 @@ export default class NPCData extends CreatureTemplate {
   getGear() {
     return this.parent.items
       .filter(i => i.system.quantity && (i.system.type?.value !== "natural"))
-      .sort((lhs, rhs) => lhs.sort - rhs.sort);
+      .sort((lhs, rhs) => lhs.name.localeCompare(rhs.name, game.i18n.lang));
   }
 
   /* -------------------------------------------- */
@@ -754,10 +754,10 @@ export default class NPCData extends CreatureTemplate {
       ];
       context.definitions.lower = [
         summary.skills ? { label: "DND5E.Skills", definitions: [summary.skills] } : null,
-        summary.gear ? { label: "DND5E.Gear", definitions: [summary.gear] } : null,
         summary.vulnerabilities ? { label: "DND5E.Vulnerabilities", definitions: [summary.vulnerabilities] } : null,
         summary.resistances ? { label: "DND5E.Resistances", definitions: [summary.resistances] } : null,
         summary.immunities ? { label: "DND5E.Immunities", definitions: [summary.immunities] } : null,
+        summary.gear ? { label: "DND5E.Gear", definitions: [summary.gear] } : null,
         { label: "DND5E.Senses", definitions: [summary.senses] },
         { label: "DND5E.Languages", definitions: [summary.languages] },
         { label: "DND5E.AbbreviationCR", definitions: [summary.cr] }
