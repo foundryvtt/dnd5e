@@ -416,7 +416,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   getConcentrationDC(damage) {
     return Math.clamp(
-      Math.floor(damage / 2), 10, game.settings.get("dnd5e", "rulesVersion") === "modern" ? 30 : Infinity
+      Math.floor(damage / 2), 10, dnd5e.settings.rulesVersion === "modern" ? 30 : Infinity
     );
   }
 
@@ -480,7 +480,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const level = this.system.attributes?.exhaustion ?? null;
     const imms = this.system.traits?.ci?.value ?? new Set();
     const applyExhaustion = (level !== null) && !imms.has("exhaustion")
-      && (game.settings.get("dnd5e", "rulesVersion") === "legacy");
+      && (dnd5e.settings.rulesVersion === "legacy");
     const statuses = this.statuses;
     return props.some(k => {
       const l = Number(k.split("-").pop());
@@ -1098,7 +1098,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @private
    */
   _isRemarkableAthlete(ability) {
-    return (game.settings.get("dnd5e", "rulesVersion") === "legacy") && this.getFlag("dnd5e", "remarkableAthlete")
+    return (dnd5e.settings.rulesVersion === "legacy") && this.getFlag("dnd5e", "remarkableAthlete")
       && CONFIG.DND5E.characterFlags.remarkableAthlete.abilities.includes(ability);
   }
 
@@ -1112,7 +1112,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @param {object} data     Roll data.
    */
   addRollExhaustion(parts, data) {
-    if ( (game.settings.get("dnd5e", "rulesVersion") !== "modern") || !this.system.attributes?.exhaustion ) return;
+    if ( (dnd5e.settings.rulesVersion !== "modern") || !this.system.attributes?.exhaustion ) return;
     const amount = this.system.attributes.exhaustion * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.rolls ?? 0);
     if ( amount ) {
       parts.push("@exhaustion");
@@ -1744,7 +1744,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       initiativeBonus: init.bonus,
       [`${abilityId}AbilityCheckBonus`]: ability?.bonuses?.check,
       abilityCheckBonus: this.system.bonuses?.abilities?.check,
-      alert: flags.initiativeAlert && (game.settings.get("dnd5e", "rulesVersion") === "legacy") ? 5 : null
+      alert: flags.initiativeAlert && (dnd5e.settings.rulesVersion === "legacy") ? 5 : null
     }, rollData);
 
     const { advantage, disadvantage } = AdvantageModeField.combineFields(this.system, [
@@ -1902,7 +1902,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         return null;
       }
     }
-    const rulesVersion = game.settings.get("dnd5e", "rulesVersion");
+    const rulesVersion = dnd5e.settings.rulesVersion;
     const minimumValue = rulesVersion === "modern" ? 1 : 0;
     formula ??= `max(${minimumValue}, 1${config.denomination} + @abilities.con.mod)`;
     const rollConfig = foundry.utils.deepClone(config);
@@ -2404,7 +2404,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   _getRestHitDiceRecovery({ maxHitDice, fraction, ...config }={}, result={}) {
     const restConfig = CONFIG.DND5E.restTypes[config.type];
     if ( !this.system.attributes.hd || !restConfig?.recoverHitDice ) return;
-    fraction ??= game.settings.get("dnd5e", "rulesVersion") === "modern" ? 1 : 0.5;
+    fraction ??= dnd5e.settings.rulesVersion === "modern" ? 1 : 0.5;
 
     // Handle simpler HD recovery for NPCs
     if ( this.type === "npc" ) {

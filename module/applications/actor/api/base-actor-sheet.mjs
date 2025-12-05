@@ -204,7 +204,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       limited: this.actor.limited,
       modernRules: this.actor.system.source?.rules
         ? this.actor.system.source.rules === "2024"
-        : game.settings.get("dnd5e", "rulesVersion") === "modern",
+        : dnd5e.settings.rulesVersion === "modern",
       rollableClass: this.isEditable ? "rollable" : "",
       sidebarCollapsed: !!game.user.getFlag("dnd5e", this._sidebarCollapsedKeyPath),
       system: this.actor.system,

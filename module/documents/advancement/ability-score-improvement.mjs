@@ -67,7 +67,7 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
    */
   get allowFeat() {
     return (this.item.type === "class") && (game.settings.get("dnd5e", "allowFeats")
-      || game.settings.get("dnd5e", "rulesVersion") === "modern");
+      || dnd5e.settings.rulesVersion === "modern");
   }
 
   /* -------------------------------------------- */
@@ -80,7 +80,7 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
     return (this.level >= AbilityScoreImprovementAdvancement.EPIC_BOON_LEVEL)
       && (this.item.type === "class")
       && (this.item.system.source?.rules ? (this.item.system.source.rules === "2024")
-        : (game.settings.get("dnd5e", "rulesVersion") === "modern"));
+        : (dnd5e.settings.rulesVersion === "modern"));
   }
 
   /* -------------------------------------------- */

@@ -293,7 +293,7 @@ export default class NPCActorSheet extends BaseActorSheet {
     // Visibility
     if ( this._mode === this.constructor.MODES.PLAY ) {
       context.showDeathSaves = context.important && !context.system.attributes.hp.value;
-      context.showInitiativeScore = game.settings.get("dnd5e", "rulesVersion") === "modern";
+      context.showInitiativeScore = dnd5e.settings.rulesVersion === "modern";
     }
     context.showLoyalty = context.important && game.settings.get("dnd5e", "loyaltyScore") && game.user.isGM;
     context.showRests = game.user.isGM || (this.actor.isOwner && game.settings.get("dnd5e", "allowRests"));
