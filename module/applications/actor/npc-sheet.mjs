@@ -474,7 +474,8 @@ export default class NPCActorSheet extends BaseActorSheet {
   _assignItemCategories(item) {
     if ( ["class", "subclass"].includes(item.type) ) return new Set(["classes"]);
     const categories = super._assignItemCategories(item);
-    if ( item.type === "weapon" ) categories.add("features");
+    if ( (item.type === "weapon")
+      && (item.flags.dnd5e?.statBlockOverride?.section !== "gearOnly") ) categories.add("features");
     return categories;
   }
 
