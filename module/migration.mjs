@@ -616,7 +616,7 @@ export function migrateEffects(parent, migrationData, itemUpdateData, flags={}) 
  * @param {object} [options]             Additional options.
  * @param {string} [options.actorUuid]   UUID of the parent actor
  */
-export const migrateCopyActorTransferEffects = function(actor, effects, { actorUuid }={}) {
+export function migrateCopyActorTransferEffects(actor, effects, { actorUuid }={}) {
   if ( !actor.items ) return;
 
   for ( const item of actor.items ) {
@@ -644,15 +644,18 @@ export const migrateCopyActorTransferEffects = function(actor, effects, { actorU
  * @param {object} [options.parent]  Parent of this effect.
  * @returns {object}                 The updateData to apply.
  */
-export const migrateEffectData = function(effect, migrationData, { parent }={}) {
+export function migrateEffectData(effect, migrationData, { parent }={}) {
   const updateData = {};
   _migrateDocumentIcon(effect, updateData, {...migrationData, field: "img"});
   _migrateEffectArmorClass(effect, updateData);
+  if ( foundry.utils.isNewerVersion("5.2.0", effect._stats?.systemVersion ?? parent?._stats?.systemVersion) ) {
+    _migrateEffectMagical(effect, parent, updateData);
+  }
   if ( foundry.utils.isNewerVersion("3.1.0", effect._stats?.systemVersion ?? parent?._stats?.systemVersion) ) {
-    _migrateTransferEffect(effect, parent, updateData);
+    _migrateEffectTransfer(effect, parent, updateData);
   }
   return updateData;
-};
+}
 
 /* -------------------------------------------- */
 
@@ -662,12 +665,12 @@ export const migrateEffectData = function(effect, migrationData, { parent }={}) 
  * @param {object} [migrationData]  Additional data to perform the migration
  * @returns {object}                The updateData to apply
  */
-export const migrateMacroData = function(macro, migrationData) {
+export function migrateMacroData(macro, migrationData) {
   const updateData = {};
   _migrateDocumentIcon(macro, updateData, migrationData);
   _migrateMacroCommands(macro, updateData);
   return updateData;
-};
+}
 
 /* -------------------------------------------- */
 
@@ -909,6 +912,42 @@ function _migrateEffectArmorClass(effect, updateData) {
 /* -------------------------------------------- */
 
 /**
+ * Marks effects on spells & items marked with "Magical" property as magical.
+ * @param {object} effect      Effect data to migrate.
+ * @param {object} parent      The parent of this effect.
+ * @param {object} updateData  Existing update to expand upon.
+ * @returns {object}           The updateData to apply.
+ */
+function _migrateEffectMagical(effect, parent, updateData) {
+  if ( isSpellOrScroll(parent) || parent.system?.properties?.includes("mgc") ) updateData["system.magical"] = true;
+  return updateData;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Disable transfer on effects on spell items
+ * @param {object} effect      Effect data to migrate.
+ * @param {object} parent      The parent of this effect.
+ * @param {object} updateData  Existing update to expand upon.
+ * @returns {object}           The updateData to apply.
+ */
+function _migrateEffectTransfer(effect, parent, updateData) {
+  if ( !effect.transfer ) return updateData;
+  if ( !isSpellOrScroll(parent) ) return updateData;
+
+  updateData.transfer = false;
+  updateData.disabled = true;
+  updateData["duration.startTime"] = null;
+  updateData["duration.startRound"] = null;
+  updateData["duration.startTurn"] = null;
+
+  return updateData;
+}
+
+/* -------------------------------------------- */
+
+/**
  * Move `uses.value` to `uses.spent` for items.
  * @param {Item5e} item        Full item instance.
  * @param {object} itemData    Item data to migrate.
@@ -923,28 +962,6 @@ function _migrateItemUses(item, itemData, updateData, flags) {
     flags.persistSourceMigration = true;
   }
   if ( value !== undefined ) updateData["flags.dnd5e.-=migratedUses"] = null;
-}
-
-/* -------------------------------------------- */
-
-/**
- * Disable transfer on effects on spell items
- * @param {object} effect      Effect data to migrate.
- * @param {object} parent      The parent of this effect.
- * @param {object} updateData  Existing update to expand upon.
- * @returns {object}           The updateData to apply.
- */
-function _migrateTransferEffect(effect, parent, updateData) {
-  if ( !effect.transfer ) return updateData;
-  if ( !isSpellOrScroll(parent) ) return updateData;
-
-  updateData.transfer = false;
-  updateData.disabled = true;
-  updateData["duration.startTime"] = null;
-  updateData["duration.startRound"] = null;
-  updateData["duration.startTurn"] = null;
-
-  return updateData;
 }
 
 /* -------------------------------------------- */
