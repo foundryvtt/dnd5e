@@ -18,7 +18,7 @@ export default class SourceField extends SchemaField {
       license: new StringField(),
       revision: new NumberField({ initial: 1 }),
       rules: new StringField({
-        initial: () => game.settings.get("dnd5e", "rulesVersion") === "modern" ? "2024" : "2014"
+        initial: () => dnd5e.settings.rulesVersion === "modern" ? "2024" : "2014"
       }),
       ...fields
     };

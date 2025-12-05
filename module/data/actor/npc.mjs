@@ -435,7 +435,7 @@ export default class NPCData extends CreatureTemplate {
     if ( legres.max && legendaryResistanceItem ) {
       const max = this._source.resources.legres.max;
       const modernRules = (this.source?.rules
-        || (game.settings.get("dnd5e", "rulesVersion") === "modern" ? "2024" : "2014")) === "2024";
+        || (dnd5e.settings.rulesVersion === "modern" ? "2024" : "2014")) === "2024";
       legendaryResistanceItem.system.uses.label = this.resources.lair.value && modernRules ? game.i18n.format(
         "DND5E.LegendaryResistance.LairUses",  { normal: formatNumber(max), lair: formatNumber(max + 1) }
       ) : `${formatNumber(max)}/${CONFIG.DND5E.limitedUsePeriods.day?.label ?? ""}`;
@@ -482,7 +482,7 @@ export default class NPCData extends CreatureTemplate {
     if ( !max ) return "";
     const pr = getPluralRules().select(max);
     const rulesVersion = this.source?.rules
-      || (game.settings.get("dnd5e", "rulesVersion") === "modern" ? "2024" : "2014");
+      || (dnd5e.settings.rulesVersion === "modern" ? "2024" : "2014");
     return game.i18n.format(`DND5E.LegendaryAction.Description${rulesVersion === "2014" ? "Legacy" : ""}`, {
       name: name.toLowerCase(),
       uses: this.resources.lair.value ? game.i18n.format("DND5E.LegendaryAction.LairUses", {
