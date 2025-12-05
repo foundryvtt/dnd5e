@@ -87,6 +87,9 @@ export default class TableOfContentsCompendium extends foundry.applications.side
     for ( const entry of documents ) {
       const flags = entry.flags?.dnd5e;
       if ( !flags ) continue;
+      const keys = Object.keys(flags);
+      if ( (keys.length === 1) && (keys[0] === "navigation") ) continue;
+      if ( flags.tocHidden ) continue;
       const type = flags.type ?? "chapter";
 
       if ( type === "header" ) {
