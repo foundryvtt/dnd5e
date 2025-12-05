@@ -105,6 +105,16 @@ export default class RaceData extends ItemDataModel.mixin(AdvancementTemplate, I
   }
 
   /* -------------------------------------------- */
+  /*  Data Migrations                             */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static _migrateData(source) {
+    super._migrateData(source);
+    AdvancementTemplate.migrateAdvancement(source);
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 

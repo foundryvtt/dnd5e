@@ -201,7 +201,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @type {boolean}
    */
   get hasAdvancement() {
-    return !!this.system.advancement?.length;
+    return !!this.system.advancement?.size;
   }
 
   /* -------------------------------------------- */
@@ -943,13 +943,21 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @param {string} type                          Type of advancement to create.
    * @param {object} [data]                        Data to use when creating the advancement.
    * @param {object} [options]
-   * @param {boolean} [options.renderSheet=true]   Should the advancement's sheet be rendered after creation?
-   * @param {boolean} [options.showConfig]         Deprecated, use `renderSheet`.
+   * @param {boolean} [options.renderSheet]        Should the sheet be rendered after creation?
+   * @param {boolean} [options.showConfig]         Deprecated, use `renderSheet` instead.
    * @param {boolean} [options.source=false]       Should a source-only update be performed?
-   * @returns {Promise<AdvancementConfig>|Item5e}  Promise for advancement config for new advancement if local
+   * @returns {Promise<AdvancementConfig>|Item5e}  Promise for advancement config for new advancement if source
    *                                               is `false`, or item with newly added advancement.
    */
-  createAdvancement(type, data={}, { renderSheet=true, showConfig=renderSheet, source=false }={}) {
+  createAdvancement(type, data={}, { renderSheet, showConfig, source=false }={}) {
+    if ( showConfig !== undefined ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `showConfig` options in `createAdvancement` has been deprecated and replaced with `renderSheet`.",
+        { since: "DnD5e 5.2", until: "DnD5e 5.4" }
+      );
+      renderSheet = showConfig;
+    }
+
     if ( !this.system.advancement ) return this;
 
     const config = CONFIG.DND5E.advancementTypes[type];
@@ -961,14 +969,13 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     }
 
     const createData = foundry.utils.deepClone(data);
-    const advancement = new cls(data, {parent: this});
+    const advancement = new cls(data, { parent: this });
     if ( advancement._preCreate(createData) === false ) return;
 
-    const advancementCollection = this.toObject().system.advancement;
-    advancementCollection.push(advancement.toObject());
-    if ( source ) return this.updateSource({"system.advancement": advancementCollection});
-    return this.update({ "system.advancement": advancementCollection }).then(() => {
-      if ( showConfig ) return this.advancement.byId[advancement.id]?.sheet?.render(true);
+    const update = { [`system.advancement.${advancement.id}`]: advancement.toObject() };
+    if ( source ) return this.updateSource(update);
+    return this.update(update).then(() => {
+      if ( showConfig ) return this.system.advancement.get(advancement.id)?.sheet?.render({ force: true });
       return this;
     });
   }
@@ -985,23 +992,19 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   updateAdvancement(id, updates, { source=false }={}) {
     if ( !this.system.advancement ) return this;
-    const idx = this.system.advancement.findIndex(a => a._id === id);
-    if ( idx === -1 ) throw new Error(`Advancement of ID ${id} could not be found to update`);
+    if ( !this.system.advancement.has(id) ) throw new Error(`Advancement of ID ${id} could not be found to update`);
 
-    const advancement = this.advancement.byId[id];
+    const advancement = this.system.advancement.get(id);
+    const update = { [`system.advancement.${id}`]: updates };
     if ( source ) {
-      advancement.updateSource(updates);
+      this.updateSource(update);
       advancement.render();
       return this;
     }
 
-    const advancementCollection = this.toObject().system.advancement;
-    const clone = new advancement.constructor(advancementCollection[idx], { parent: advancement.parent });
-    clone.updateSource(updates);
-    advancementCollection[idx] = clone.toObject();
-    return this.update({"system.advancement": advancementCollection}).then(r => {
-      advancement.render(false, { height: "auto" });
-      return r;
+    return this.update(update).then(() => {
+      advancement.render({ height: "auto" });
+      return this;
     });
   }
 
@@ -1015,11 +1018,15 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @returns {Promise<Item5e>|Item5e}        This item with the changes applied.
    */
   deleteAdvancement(id, { source=false }={}) {
-    if ( !this.system.advancement ) return this;
+    const advancement = this.system.advancement?.get(id);
+    if ( !advancement ) return this;
 
-    const advancementCollection = this.toObject().system.advancement.filter(a => a._id !== id);
-    if ( source ) return this.updateSource({"system.advancement": advancementCollection});
-    return this.update({"system.advancement": advancementCollection});
+    const update = { [`system.advancement.-=${id}`]: null };
+    if ( source ) return this.updateSource(update);
+
+    Promise.allSettled(advancement.constructor._apps.get(advancement.uuid)?.map(a => a.close()) ?? []).then(() => {
+      return this.update(update);
+    });
   }
 
   /* -------------------------------------------- */
@@ -1034,7 +1041,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    *                                                is `false`, or item with newly duplicated advancement.
    */
   duplicateAdvancement(id, options) {
-    const original = this.advancement.byId[id];
+    const original = this.system.advancement?.get(id);
     if ( !original ) return this;
     const duplicate = original.toObject();
     delete duplicate._id;
@@ -1053,10 +1060,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     let doc;
     switch ( embeddedName ) {
       case "Activity": doc = this.system.activities?.get(id); break;
-      case "Advancement": doc = this.advancement.byId[id]; break;
+      case "Advancement": doc = this.system.advancement?.get(id); break;
       default: return super.getEmbeddedDocument(embeddedName, id, options);
     }
-    if ( options?.strict && (advancement === undefined) ) {
+    if ( options?.strict && (doc === undefined) ) {
       throw new Error(`The key ${id} does not exist in the ${embeddedName} Collection`);
     }
     return doc;

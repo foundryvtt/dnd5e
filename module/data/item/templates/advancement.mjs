@@ -1,5 +1,5 @@
 import SystemDataModel from "../../abstract/system-data-model.mjs";
-import AdvancementField from "../../fields/advancement-field.mjs";
+import AdvancementCollectionField from "../../fields/advancement-collection-field.mjs";
 
 const { ArrayField } = foundry.data.fields;
 
@@ -16,8 +16,35 @@ export default class AdvancementTemplate extends SystemDataModel {
   /** @inheritDoc */
   static defineSchema() {
     return {
-      advancement: new ArrayField(new AdvancementField(), { label: "DND5E.AdvancementTitle" })
+      advancement: new AdvancementCollectionField({ label: "DND5E.AdvancementTitle" })
     };
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Migrations                             */
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate advancement data.
+   * @param {object} source  Candidate source data to migrate.
+   */
+  static migrateAdvancement(source) {
+    AdvancementTemplate.#migrateStorage(source);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate advancement data to be stored in an object, not an array.
+   * @param {object} source  Candidate source data to migrate.
+   */
+  static #migrateStorage(source) {
+    if ( foundry.utils.getType(source.advancement) === "Array" ) {
+      source.advancement = source.advancement.reduce((obj, advancement) => {
+        obj[advancement._id] = advancement;
+        return obj;
+      }, {});
+    }
   }
 
   /* -------------------------------------------- */
@@ -33,14 +60,15 @@ export default class AdvancementTemplate extends SystemDataModel {
     if ( data._id || foundry.utils.hasProperty(data, "system.advancement") ) return;
     const toCreate = this._advancementToCreate(options);
     if ( toCreate.length ) this.parent.updateSource({
-      "system.advancement": toCreate.map(c => {
+      "system.advancement": toCreate.reduce((obj, c) => {
         const baseData = foundry.utils.deepClone(c);
         const config = CONFIG.DND5E.advancementTypes[c.type];
         const cls = config.documentClass ?? config;
         const advancement = new cls(c, { parent: this.parent });
-        if ( advancement._preCreate(baseData) === false ) return null;
-        return advancement.toObject();
-      }).filter(_ => _)
+        if ( advancement._preCreate(baseData) === false ) return obj;
+        obj[advancement.id] = advancement.toObject();
+        return obj;
+      })
     });
   }
 
