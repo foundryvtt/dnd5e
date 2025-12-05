@@ -176,19 +176,20 @@ export default class DamageRoll extends BasicRoll {
         term.number = term.options.baseNumber;
         if ( this.isCritical ) {
           let cm = critical.multiplier ?? 2;
+          let cb = (critical.bonusDice && (i === 0)) ? critical.bonusDice : 0;
 
-          // Powerful critical - maximize damage and reduce the multiplier by 1
+          // Powerful critical - add maximized damage dice and reset term alterations
           if ( critical.powerfulCritical ) {
-            const bonus = Roll.create(term.formula).evaluateSync({ maximize: true }).total;
+            const bonus = Roll.create(term.formula).evaluateSync({ maximize: true }).total * (Math.max(1, cm-1) + cb);
             if ( bonus > 0 ) {
               const flavor = term.flavor?.toLowerCase().trim() ?? game.i18n.localize("DND5E.PowerfulCritical");
               flatBonus.set(flavor, (flatBonus.get(flavor) ?? 0) + bonus);
             }
-            cm = Math.max(1, cm-1);
+            cm = 1;
+            cb = 0;
           }
 
           // Alter the damage term
-          let cb = (critical.bonusDice && (i === 0)) ? critical.bonusDice : 0;
           term.alter(cm, cb);
           term.options.critical = true;
         }
