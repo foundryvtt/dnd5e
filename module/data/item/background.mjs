@@ -59,7 +59,7 @@ export default class BackgroundData extends ItemDataModel.mixin(
 
   /** @override */
   _advancementToCreate(options) {
-    if ( game.settings.get("dnd5e", "rulesVersion") === "legacy" ) return [
+    if ( dnd5e.settings.rulesVersion === "legacy" ) return [
       { type: "Trait", title: game.i18n.localize("DND5E.ADVANCEMENT.Defaults.BackgroundProficiencies") },
       { type: "ItemGrant", title: game.i18n.localize("DND5E.ADVANCEMENT.Defaults.BackgroundFeature") }
     ];

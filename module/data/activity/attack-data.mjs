@@ -232,7 +232,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
     }
     const actionType = this.getActionType(attackMode);
     let actionTypeLabel = game.i18n.localize(`DND5E.Action${actionType.toUpperCase()}`);
-    const isLegacy = game.settings.get("dnd5e", "rulesVersion") === "legacy";
+    const isLegacy = dnd5e.settings.rulesVersion === "legacy";
     const isUnarmed = this.attack.type.classification === "unarmed";
     if ( isUnarmed ) attackModeLabel = game.i18n.localize("DND5E.ATTACK.Classification.Unarmed");
     const isSpell = (actionType === "rsak") || (actionType === "msak");

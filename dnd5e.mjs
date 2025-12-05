@@ -110,7 +110,7 @@ Hooks.once("init", function() {
   if ( !game.settings.get("dnd5e", "sanityScore") ) delete DND5E.abilities.san;
 
   // Legacy rules.
-  if ( game.settings.get("dnd5e", "rulesVersion") === "legacy" ) applyLegacyRules();
+  if ( dnd5e.settings.rulesVersion === "legacy" ) applyLegacyRules();
 
   // Register system
   DND5E.SPELL_LISTS.forEach(uuid => dnd5e.registry.spellLists.register(uuid));
@@ -483,7 +483,7 @@ Hooks.once("i18nInit", () => {
   // Set up status effects. Explicitly performed after init and before prelocalization.
   _configureStatusEffects();
 
-  if ( game.settings.get("dnd5e", "rulesVersion") === "legacy" ) {
+  if ( dnd5e.settings.rulesVersion === "legacy" ) {
     const { translations, _fallback } = game.i18n;
     foundry.utils.mergeObject(translations, {
       "TYPES.Item": {
