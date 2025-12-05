@@ -1248,7 +1248,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( spell.pack ) return this.createScrollFromCompendiumSpell(spell.uuid, config);
 
     const values = {};
-    if ( (spell instanceof Item5e) && spell.isOwned && (game.settings.get("dnd5e", "rulesVersion") === "modern") ) {
+    if ( (spell instanceof Item5e) && spell.isOwned && (dnd5e.settings.rulesVersion === "modern") ) {
       const spellcastingClass = spell.actor.spellcastingClasses?.[spell.system.sourceClass];
       if ( spellcastingClass ) {
         values.bonus = spellcastingClass.spellcasting.attack;

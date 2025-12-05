@@ -104,7 +104,7 @@ export function getRulesVersion(config={}, options={}) {
   if ( Number.isNumeric(config.rules) ) return String(config.rules);
   return options.relativeTo?.parent?.system?.source?.rules
     || options.relativeTo?.system?.source?.rules
-    || (game.settings.get("dnd5e", "rulesVersion") === "modern" ? "2024" : "2014");
+    || (dnd5e.settings.rulesVersion === "modern" ? "2024" : "2014");
 }
 
 /* -------------------------------------------- */

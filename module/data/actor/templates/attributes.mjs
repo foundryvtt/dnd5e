@@ -379,7 +379,7 @@ export default class AttributesFields {
     init.mod = ability.mod ?? 0;
 
     // Initiative proficiency
-    const isLegacy = game.settings.get("dnd5e", "rulesVersion") === "legacy";
+    const isLegacy = dnd5e.settings.rulesVersion === "legacy";
     const prof = this.attributes.prof ?? 0;
     const joat = flags.jackOfAllTrades && isLegacy;
     const ra = this.parent._isRemarkableAthlete(abilityId);
@@ -426,7 +426,7 @@ export default class AttributesFields {
     const heavilyEncumbered = statuses.has("heavilyEncumbered");
     const exceedingCarryingCapacity = statuses.has("exceedingCarryingCapacity");
     const units = this.attributes.movement.units ??= defaultUnits("length");
-    let reduction = game.settings.get("dnd5e", "rulesVersion") === "modern"
+    let reduction = dnd5e.settings.rulesVersion === "modern"
       ? (this.attributes.exhaustion ?? 0) * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.speed ?? 0) : 0;
     reduction = convertLength(reduction, CONFIG.DND5E.defaultUnits.length.imperial, units);
     const bonus = simplifyBonus(this.attributes.movement.bonus, rollData);
