@@ -647,7 +647,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>While in sunlight, the [[lookup @name lowercase]] has Disadvantage
+          <p>While in sunlight, the [[lookup @name lowercase]]{creature} has Disadvantage
           on ability checks and attack rolls.</p>
         chat: ''
       identifier: sunlight-sensitivity
@@ -734,7 +734,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] makes two attacks,
+          <p class="feature">The [[lookup @name lowercase]]{creature} makes two attacks,
           using [[/item .mmNecroticSword0]] or [[/item .mmNecroticBow000]] in
           any combination. It can replace one attack with a use of [[/item
           .mmLifeDrain00000]].</p>
@@ -1088,7 +1088,7 @@ items:
           class="feature">A Humanoid slain by this attack rises 24 hours later
           as a
           <strong>@UUID[Compendium.dnd5e.actors24.Actor.mmZombie00000000]{Zombie}</strong>
-          under the [[lookup @name lowercase]]'s control, unless the Humanoid is
+          under the [[lookup @name lowercase]]{creature}'s control, unless the Humanoid is
           restored to life or its body is destroyed. The [[lookup @name
           lowercase]] can have no more than twelve zombies under its control at
           a time.</p>

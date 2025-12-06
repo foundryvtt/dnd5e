@@ -608,7 +608,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] makes two attacks,
+          <p class="feature">The [[lookup @name lowercase]]{creature} makes two attacks,
           using [[/item .mmThunderousMace]] or [[/item .mmThundercloud00]] in
           any combination. It can replace one attack with a use of Spellcasting
           to cast <em>[[/item
@@ -1299,7 +1299,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts one of the
           following spells, requiring no Material components and using Charisma
           as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]]):</p><p class="feature-trait"><strong>At
@@ -1416,7 +1416,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplMistyStep0]{Misty
           Step}</em>, using the same spellcasting ability as Spellcasting.</p>
         chat: ''

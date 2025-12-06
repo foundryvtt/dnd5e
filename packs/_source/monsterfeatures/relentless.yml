@@ -8,14 +8,14 @@ system:
     value: >-
       <section class="secret">
 
-      <p>If the [[lookup @name lowercase]] takes <strong>7 damage</strong> or
+      <p>If the [[lookup @name lowercase]]{creature} takes <strong>7 damage</strong> or
       less that would reduce it to <strong>0 hit points</strong>, it is reduced
       to <strong>1 hit point</strong> instead. Recharges on a short or long
       rest.</p>
 
       </section>
 
-      <p>If the [[lookup @name lowercase]] takes damage that would reduce it to
+      <p>If the [[lookup @name lowercase]]{creature} takes damage that would reduce it to
       <strong>0 hit points</strong>, it is reduced to <strong>1 hit
       point</strong> instead.</p>
     chat: ''

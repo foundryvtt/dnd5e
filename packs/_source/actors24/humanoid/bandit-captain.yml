@@ -1022,7 +1022,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two attacks, using [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes two attacks, using [[/item
           .w3cX0piuU875Hc2M]] and [[/item .2TB9ZSIbtbi4UtSv]] in any
           combination.</p>
         chat: ''
@@ -1123,9 +1123,9 @@ items:
         max: ''
       description:
         value: >-
-          <p><em>Trigger:</em> The [[lookup @name lowercase]] is [[lookup
+          <p><em>Trigger:</em> The [[lookup @name lowercase]]{creature} is [[lookup
           @activation.condition activity=aLG3BRZL7P6OEjwd]]. <em>Response:</em>
-          The [[lookup @name lowercase]] adds [[lookup @roll.formula
+          The [[lookup @name lowercase]]{creature} adds [[lookup @roll.formula
           activity=aLG3BRZL7P6OEjwd]] to its AC against that attack, possibly
           causing it to miss.</p>
         chat: ''

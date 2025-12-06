@@ -63,8 +63,8 @@ system:
     max: ''
   description:
     value: >-
-      <p><em>Trigger</em>: The [[lookup @name lowercase]] takes damage while
-      underwater. </p><p><em>Response</em>: The [[lookup @name lowercase]]
+      <p><em>Trigger</em>: The [[lookup @name lowercase]]{creature} takes damage while
+      underwater. </p><p><em>Response</em>: The [[lookup @name lowercase]]{creature}
       releases ink that fills a [[lookup @target.template.size
       activity=1MiIPcVuCpfgBIkS]]-foot Cube centered on itself, and the [[lookup
       @name lowercase]] moves up to its Swim Speed. The Cube is Heavily Obscured

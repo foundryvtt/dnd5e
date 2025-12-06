@@ -567,7 +567,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] can burrow through
+          <p class="feature">The [[lookup @name lowercase]]{creature} can burrow through
           nonmagical, unworked earth and stone. While doing so, the [[lookup
           @name lowercase]] doesn't disturb the material it moves through.</p>
         chat: ''
@@ -619,7 +619,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] can pinpoint the
+          <p class="feature">The [[lookup @name lowercase]]{creature} can pinpoint the
           location of precious metals and stones within 60 feet of itself.</p>
         chat: ''
       identifier: treasure-sense
@@ -710,7 +710,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes one [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes one [[/item
           .mmBite0000000000]] attack and three [[/item .mmClaw0000000000]]
           attacks.</p>
         chat: ''
@@ -1083,7 +1083,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] moves up to [[lookup @range.special
+          <p>The [[lookup @name lowercase]]{creature} moves up to [[lookup @range.special
           activity=Y2IncZu5BjB42z7l]] straight toward an enemy it can sense.</p>
         chat: ''
       identifier: charge

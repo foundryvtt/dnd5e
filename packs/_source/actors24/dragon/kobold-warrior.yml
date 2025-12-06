@@ -745,8 +745,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] has Advantage on an attack roll
-          against a creature if at least one of the [[lookup @name lowercase]]'s
+          <p>The [[lookup @name lowercase]]{creature} has Advantage on an attack roll
+          against a creature if at least one of the [[lookup @name lowercase]]{creature}'s
           allies is within 5 feet of the creature and the ally doesn't have the
           Incapacitated condition.</p>
         chat: ''
@@ -798,7 +798,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>While in sunlight, the [[lookup @name lowercase]] has Disadvantage
+          <p>While in sunlight, the [[lookup @name lowercase]]{creature} has Disadvantage
           on ability checks and attack rolls.</p>
         chat: ''
       identifier: sunlight-sensitivity

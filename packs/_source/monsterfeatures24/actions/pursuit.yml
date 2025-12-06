@@ -67,8 +67,8 @@ system:
     value: >-
       <p class="feature"><em>Trigger:</em> Another creature the [[lookup @name
       lowercase]] can see ends its move within [[lookup @range.value
-      activity=blUXkjLhs9kD2ofo]] feet of the [[lookup @name lowercase]].
-      <em>Response:</em> The [[lookup @name lowercase]] uses Teleport, but its
+      activity=blUXkjLhs9kD2ofo]] feet of the [[lookup @name lowercase]]{creature}.
+      <em>Response:</em> The [[lookup @name lowercase]]{creature} uses Teleport, but its
       destination space must be [[lookup @target.affects.special
       activity=blUXkjLhs9kD2ofo]].</p>
     chat: ''

@@ -564,7 +564,7 @@ items:
         recovery: []
         max: ''
       description:
-        value: <p>The [[lookup @name lowercase]] can breathe air and water.</p>
+        value: <p>The [[lookup @name lowercase]]{creature} can breathe air and water.</p>
         chat: ''
       identifier: amphibious
       source:
@@ -915,7 +915,7 @@ items:
       description:
         value: >-
           <p class="feature">While within 30 feet of at least two hag allies,
-          the [[lookup @name lowercase]] can cast one of the following spells,
+          the [[lookup @name lowercase]]{creature} can cast one of the following spells,
           requiring no Material components, using the spell's normal casting
           time, and using Intelligence as the spellcasting ability (spell save
           DC [[lookup @abilities.int.dc]]):
@@ -927,7 +927,7 @@ items:
           Object}</em>,
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplScrying000]{Scrying}</em>,
           or <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplUnseenServ]{Unseen
-          Servant}</em>. The [[lookup @name lowercase]] must finish a Long Rest
+          Servant}</em>. The [[lookup @name lowercase]]{creature} must finish a Long Rest
           before using this trait to cast that spell again.</p>
         chat: ''
       identifier: coven-magic
@@ -2541,7 +2541,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] can mimic animal
+          <p class="feature">The [[lookup @name lowercase]]{creature} can mimic animal
           sounds and humanoid voices. A creature that hears the sounds can tell
           they are imitations only with a successful [[/check format=long]].</p>
         chat: ''
@@ -2643,7 +2643,7 @@ items:
         max: ''
       description:
         value: >-
-          <p> The [[lookup @name lowercase]] makes two [[/item
+          <p> The [[lookup @name lowercase]]{creature} makes two [[/item
           .mmClaw0000000000]] attacks.</p>
         chat: ''
       identifier: multiattack
@@ -3080,7 +3080,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts one of the
           following spells, requiring no Material components and using Wisdom as
           the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]], +4 to hit with spell attacks):</p><p

@@ -568,7 +568,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] deals double damage to objects and
+          <p>The [[lookup @name lowercase]]{creature} deals double damage to objects and
           structures.</p>
         chat: ''
       identifier: siege-monster
@@ -655,7 +655,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item mmSlam0000000000]]
+          <p>The [[lookup @name lowercase]]{creature} makes two [[/item mmSlam0000000000]]
           attacks.</p>
         chat: ''
       identifier: multiattack

@@ -625,13 +625,13 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] explodes [[lookup
+          <p>The [[lookup @name lowercase]]{creature} explodes [[lookup
           @activation.condition activity=1SfqWSp7RSyHgG4b]].</p><p><em>Dexterity
           Saving Throw: </em>DC [[lookup @save.dc.value
           activity=1SfqWSp7RSyHgG4b]], each [[lookup @target.affects.type
           activity=1SfqWSp7RSyHgG4b]] in a [[lookup @target.template.size
           activity=1SfqWSp7RSyHgG4b]]-foot Emanation originating from the
-          [[lookup @name lowercase]].</p><p><em>Failure: </em>[[/damage
+          [[lookup @name lowercase]]{creature}.</p><p><em>Failure: </em>[[/damage
           average]] damage.</p><p><em>Success:</em> Half damage.</p>
         chat: ''
       identifier: death-burst
@@ -882,7 +882,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] sets itself ablaze
+          <p class="feature">The [[lookup @name lowercase]]{creature} sets itself ablaze
           or extinguishes its flames. While ablaze, the [[lookup @name
           lowercase]] sheds Bright Light in a 10-foot radius and Dim Light for
           an additional 10 feet.</p>

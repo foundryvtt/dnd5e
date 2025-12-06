@@ -720,12 +720,12 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] fills its entire
+          <p class="feature">The [[lookup @name lowercase]]{creature} fills its entire
           space and is transparent. Other creatures can enter that space, but a
-          creature that does so is subjected to the [[lookup @name lowercase]]'s
+          creature that does so is subjected to the [[lookup @name lowercase]]{creature}'s
           Engulf and has Disadvantage on the saving throw.</p><p
-          class="feature">Creatures inside the [[lookup @name lowercase]] have
-          &amp;Reference[Total Cover], and the [[lookup @name lowercase]] can
+          class="feature">Creatures inside the [[lookup @name lowercase]]{creature} have
+          &amp;Reference[Total Cover], and the [[lookup @name lowercase]]{creature} can
           hold one Large creature or up to four Medium or Small creatures inside
           itself at a time.</p><p class="feature">As an action, a creature
           within [[lookup @range.value activity=EcTOfXWsDJRHLydy]] [[lookup
@@ -869,10 +869,10 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">Even when the [[lookup @name lowercase]] is in
+          <p class="feature">Even when the [[lookup @name lowercase]]{creature} is in
           plain sight, a creature must succeed on a [[/check dc=15 ability=wis
-          skill=prc format=long]] to notice the [[lookup @name lowercase]] if
-          the creature hasn't witnessed the [[lookup @name lowercase]] move or
+          skill=prc format=long]] to notice the [[lookup @name lowercase]]{creature} if
+          the creature hasn't witnessed the [[lookup @name lowercase]]{creature} move or
           otherwise act.</p>
         chat: ''
       identifier: transparent
@@ -1175,7 +1175,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] moves up to its
+          <p class="feature">The [[lookup @name lowercase]]{creature} moves up to its
           Speed without provoking Opportunity Attacks. The [[lookup @name
           lowercase]] can move through the spaces of Large or smaller creatures
           if it has room inside itself to contain them (see the
@@ -1188,13 +1188,13 @@ items:
           can't cast spells with a Verbal component, has the
           &amp;Reference[Restrained apply=false] condition, and takes [[/damage
           average]] damage at the start of each of the [[lookup @name
-          lowercase]]'s turns. When the [[lookup @name lowercase]] moves, the
+          lowercase]]'s turns. When the [[lookup @name lowercase]]{creature} moves, the
           engulfed target moves with it. An engulfed target can try to escape by
           taking an action to make a [[/check ability=str skill=ath
           dc=@abilities.str.dc]] check. On a successful check, the target
           escapes and enters the nearest unoccupied space.</p><p
           class="feature"><em>Success:</em> Half damage, and the target moves to
-          an unoccupied space within 5 feet of the [[lookup @name lowercase]]'s.
+          an unoccupied space within 5 feet of the [[lookup @name lowercase]]{creature}'s.
           If there is no unoccupied space, the target fails the save
           instead.</p>
         chat: ''

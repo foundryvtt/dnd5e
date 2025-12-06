@@ -1261,7 +1261,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two attacks, using [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes two attacks, using [[/item
           .8gwXLDcYj3mk6Kr3]] or [[/item .XbNHC5OBGT6VQF40]] in any
           combination.</p>
         chat: ''
@@ -1363,7 +1363,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] takes the
+          <p class="feature">The [[lookup @name lowercase]]{creature} takes the
           &amp;Reference[Disengage] or &amp;Reference[Hide] action.</p>
         chat: ''
       identifier: nimble-escape
@@ -1511,10 +1511,10 @@ items:
         value: >-
           <p class="feature"><em>Trigger:</em> A creature the [[lookup @name
           lowercase]] can see makes an attack roll against it.</p><p
-          class="feature"><em>Response:</em> The [[lookup @name lowercase]]
+          class="feature"><em>Response:</em> The [[lookup @name lowercase]]{creature}
           chooses [[lookup @target.affects.special activity=pIlCmuPw8YUqAISY]]
           within [[lookup @range.value activity=pIlCmuPw8YUqAISY]] feet of
-          itself. The [[lookup @name lowercase]] and that [[lookup
+          itself. The [[lookup @name lowercase]]{creature} and that [[lookup
           @target.affects.type activity=pIlCmuPw8YUqAISY]] swap places, and the
           [[lookup @target.affects.type activity=pIlCmuPw8YUqAISY]] becomes the
           target of the attack instead.</p>

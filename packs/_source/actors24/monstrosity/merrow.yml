@@ -562,7 +562,7 @@ items:
         recovery: []
         max: ''
       description:
-        value: <p>The [[lookup @name lowercase]] can breathe air and water.</p>
+        value: <p>The [[lookup @name lowercase]]{creature} can breathe air and water.</p>
         chat: ''
       identifier: amphibious
       source:
@@ -658,7 +658,7 @@ items:
       description:
         value: >-
           <p><span style="font-family:'Roboto Condensed', sans-serif">The
-          </span>[[lookup @name lowercase]]<span style="font-family:'Roboto
+          </span>[[lookup @name lowercase]]{creature}<span style="font-family:'Roboto
           Condensed', sans-serif"> makes two attacks, using </span>[[/item
           .mmBite0000000000]]<span style="font-family:'Roboto Condensed',
           sans-serif">, </span>[[/item .mmClaw0000000000]]<span
@@ -773,7 +773,7 @@ items:
           <p>[[/attack extended]]. [[/damage average extended]]<span
           style="font-family:'Roboto Condensed', sans-serif">, and the target
           has the &amp;Reference[Poisoned apply=false] condition until the end
-          of the </span>[[lookup @name lowercase]]'s<span
+          of the </span>[[lookup @name lowercase]]{creature}'s<span
           style="font-family:'Roboto Condensed', sans-serif"> next
           turn.</span></p>
         chat: ''

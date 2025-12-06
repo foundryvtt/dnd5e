@@ -128,19 +128,19 @@ system:
     max: ''
   description:
     value: >-
-      <p class="feature">The [[lookup @name lowercase]] conjures a whirlwind at
+      <p class="feature">The [[lookup @name lowercase]]{creature} conjures a whirlwind at
       a point it can see within 120 feet. The whirlwind fills a [[lookup
       @target.template.size activity=TYNKL0QDItFpbR2G]]-foot-radius, [[lookup
       @target.template.height activity=TYNKL0QDItFpbR2G]]-foot-high [[lookup
       @target.template.type capitalize activity=TYNKL0QDItFpbR2G]] centered on
-      that point. The whirlwind lasts until the [[lookup @name lowercase]]'s
-      Concentration on it ends. The [[lookup @name lowercase]] can move the
+      that point. The whirlwind lasts until the [[lookup @name lowercase]]{creature}'s
+      Concentration on it ends. The [[lookup @name lowercase]]{creature} can move the
       whirlwind up to 20 feet at the start of each of its turns.</p><p
       class="feature">Whenever the whirlwind enters a creature's space or a
       creature enters the whirlwind, that creature is subjected to the following
       effect.</p><p class="feature"><em>Strength Saving Throw:</em> DC [[lookup
       @save.dc.value activity=TYNKL0QDItFpbR2G]] (a creature makes this save
-      only once per turn, and the [[lookup @name lowercase]] is
+      only once per turn, and the [[lookup @name lowercase]]{creature} is
       unaffected).</p><p class="feature"><em>Failure:</em> While in the
       whirlwind, the target has the &amp;Reference[Restrained apply=false]
       condition and moves with the whirlwind. At the start of each of its turns,

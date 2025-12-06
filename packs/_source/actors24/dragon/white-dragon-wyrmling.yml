@@ -569,7 +569,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] can move across and climb icy
+          <p>The [[lookup @name lowercase]]{creature} can move across and climb icy
           surfaces without needing to make an ability check. Additionally,
           &amp;Reference[Difficult Terrain] composed of ice or snow doesn't cost
           it extra movement.</p>
@@ -816,7 +816,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes two [[/item
           .mmRend0000000000]] attacks.</p>
         chat: ''
       identifier: multiattack

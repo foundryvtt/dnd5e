@@ -83,11 +83,11 @@ system:
     max: ''
   description:
     value: >-
-      <p class="feature">The [[lookup @name lowercase]] explodes when it
+      <p class="feature">The [[lookup @name lowercase]]{creature} explodes when it
       dies.</p><p class="feature"><em>Dexterity Saving Throw:</em> DC [[lookup
       @save.dc.value activity=jTq2czA8KQITUK4c]], each creature in a [[lookup
       @target.template.size activity=jTq2czA8KQITUK4c]]-foot Emanation
-      originating from the [[lookup @name lowercase]].</p><p
+      originating from the [[lookup @name lowercase]]{creature}.</p><p
       class="feature"><em>Failure:</em> [[/damage average]] damage.</p><p
       class="feature"><em>Failure or Success:</em> If the [[lookup @name
       lowercase]] dies outside the Abyss, it gains a new body instantly,

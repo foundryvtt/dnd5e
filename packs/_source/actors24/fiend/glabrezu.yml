@@ -575,7 +575,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] dies outside the Abyss, its body
+          <p>If the [[lookup @name lowercase]]{creature} dies outside the Abyss, its body
           dissolves into ichor, and it gains a new body instantly, reviving with
           all its Hit Points somewhere in the Abyss.</p>
         chat: ''
@@ -626,7 +626,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] has Advantage on saving throws
+          <p>The [[lookup @name lowercase]]{creature} has Advantage on saving throws
           against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
@@ -723,7 +723,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes two [[/item
           .mmPincer00000000]] attacks and uses [[/item .mmPummel00000000]] or
           [[/item .mmSpellcasting00]].</p>
         chat: ''
@@ -1082,7 +1082,7 @@ items:
         value: >-
           <p class="feature"><em>Dexterity Saving Throw:</em> DC [[lookup
           @save.dc.value activity=aae828c0Hue0XOMP]], one creature Grappled by
-          the [[lookup @name lowercase]].</p><p><em>Failure:</em> [[/damage
+          the [[lookup @name lowercase]]{creature}.</p><p><em>Failure:</em> [[/damage
           average]] damage.</p><p><em>Success:</em> Half damage.</p>
         chat: ''
       identifier: pummel
@@ -1423,7 +1423,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts one of the
           following spells, requiring no Material components and using
           Intelligence as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]]):</p><p class="feature-trait"><strong>At
