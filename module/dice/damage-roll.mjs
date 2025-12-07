@@ -164,45 +164,50 @@ export default class DamageRoll extends BasicRoll {
     this.terms = this.terms.filter(t => !t.options.criticalBonusDamage && !t.options.criticalFlatBonus);
 
     const flatBonus = new Map();
+    let extraTerms = [];
     for ( let [i, term] of this.terms.entries() ) {
-      // Multiply dice terms
-      if ( term instanceof DiceTerm ) {
-        if ( term._number instanceof Roll ) {
+      if ( !(term instanceof OperatorTerm )) {
+        if ( term instanceof DiceTerm && term._number instanceof Roll ) {
           // Complex number term.
           if ( !term._number.isDeterministic ) continue;
           if ( !term._number._evaluated ) term._number.evaluateSync();
         }
-        term.options.baseNumber = term.options.baseNumber ?? term.number; // Reset back
-        term.number = term.options.baseNumber;
-        if ( this.isCritical ) {
-          let cm = critical.multiplier ?? 2;
-          let cb = (critical.bonusDice && (i === 0)) ? critical.bonusDice : 0;
-
-          // Powerful critical - add maximized damage dice and reset term alterations
-          if ( critical.powerfulCritical ) {
-            const bonus = Roll.create(term.formula).evaluateSync({ maximize: true }).total * (Math.max(1, cm-1) + cb);
-            if ( bonus > 0 ) {
-              const flavor = term.flavor?.toLowerCase().trim() ?? game.i18n.localize("DND5E.PowerfulCritical");
-              flatBonus.set(flavor, (flatBonus.get(flavor) ?? 0) + bonus);
-            }
-            cm = 1;
-            cb = 0;
-          }
-
-          // Alter the damage term
-          term.alter(cm, cb);
-          term.options.critical = true;
-        }
-      }
-
-      else if ( term instanceof NumericTerm ) {
-        // Multiply numeric terms
-        if ( critical.multiplyNumeric ) {
+        if ( term instanceof DiceTerm || ( term instanceof NumericTerm && critical.multiplyNumeric ) ) {
           term.options.baseNumber = term.options.baseNumber ?? term.number; // Reset back
           term.number = term.options.baseNumber;
-          if ( this.isCritical ) {
-            term.number *= (critical.multiplier ?? 2);
-            term.options.critical = true;
+        }
+        if ( this.isCritical ) {
+          term.options.critical = true;
+          if ( term instanceof NumericTerm ) {
+            if ( critical.multiplyNumeric ) {
+              // Multiply numeric terms
+              term.number *= (critical.multiplier ?? 2);
+            }
+          } else {
+            let cm = critical.multiplier ?? 2;
+            let cb = (critical.bonusDice && (i === 0)) ? critical.bonusDice : 0;
+
+            // Powerful critical - add maximized damage dice and reset term alterations
+            if ( critical.powerfulCritical ) {
+              const bonus = Roll.create(term.formula).evaluateSync({ maximize: true }).total * (Math.max(1, cm-1) + cb);
+              if ( bonus > 0 ) {
+                const flavor = term.flavor?.toLowerCase().trim() ?? game.i18n.localize("DND5E.PowerfulCritical");
+                flatBonus.set(flavor, (flatBonus.get(flavor) ?? 0) + bonus);
+              }
+              cm = 1;
+              cb = 0;
+            }
+
+            if ( term instanceof DiceTerm && !term.modifiers.length ) {
+              // Alter the damage dice term
+              term.alter(cm, cb);
+            } else if ( !term.isDeterministic ) {
+              // Complex terms are added
+              for ( let i = 0; i < cm - 1 + cb; i++ ) {
+                extraTerms.push(new OperatorTerm({ operator: "+" }));
+                extraTerms.push(...Roll.create(term.formula).terms);
+              }
+            }
           }
         }
       }
@@ -218,7 +223,10 @@ export default class DamageRoll extends BasicRoll {
 
     // Add extra critical damage term
     if ( this.isCritical && critical.bonusDamage ) {
-      let extraTerms = new Roll(critical.bonusDamage, this.data).terms;
+      extraTerms = extraTerms.concat(new Roll(critical.bonusDamage, this.data).terms);
+    }
+
+    if (extraTerms.length) {
       if ( !(extraTerms[0] instanceof OperatorTerm) ) extraTerms.unshift(new OperatorTerm({ operator: "+" }));
       extraTerms.forEach(t => t.options.criticalBonusDamage = true);
       this.terms.push(...extraTerms);

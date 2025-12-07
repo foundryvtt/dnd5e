@@ -218,3 +218,15 @@
  * @property {string} [rollMode]         The roll mode to apply to this message from `CONFIG.Dice.rollModes`.
  * @property {object} [data={}]          Additional data used when creating the message.
  */
+
+/* -------------------------------------------- */
+
+/**
+ * Dice modifier data for terms that are going to be pre-calculated.
+ *
+ * @typedef BasicRollTermApplicableModifier
+ * @property {string} command  The parsed base modifier command.
+ * @property {string} value    The parsed numerical part of the modifier.
+ * @property {boolean} keep    Whether this is a "keep" modifier.
+ * @property {boolean} drop    Whether this is a "drop" modifier.
+ */
