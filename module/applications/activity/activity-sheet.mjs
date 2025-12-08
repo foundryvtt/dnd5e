@@ -638,6 +638,7 @@ export default class ActivitySheet extends PseudoDocumentSheet {
         if ( submitData.effects.find(e => e._id === _id) ) continue;
         submitData.effects.push({ _id });
       }
+      delete submitData.appliedEffects;
     }
     return submitData;
   }
