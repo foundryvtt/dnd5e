@@ -1,3 +1,4 @@
+import { getCollectionDocumentOptions } from "../../../utils.mjs";
 import DocumentSheet5e from "../../api/document-sheet.mjs";
 
 const { StringField } = foundry.data.fields;
@@ -52,7 +53,9 @@ export default class JournalNavigationConfig extends DocumentSheet5e {
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
     const data = this.document.getFlag("dnd5e", "navigation") ?? {};
-    const entryOptions = this.#getEntryOptions();
+    const entryOptions = getCollectionDocumentOptions(this.document.collection, {
+      disabled: entry => entry._id === this.document.id
+    });
     context.fields = ["previous", "up", "next"].map(name => ({
       field: new StringField(),
       label: game.i18n.localize(`DND5E.JOURNALENTRY.Navigation.${name.capitalize()}`),
@@ -61,27 +64,6 @@ export default class JournalNavigationConfig extends DocumentSheet5e {
       value: data[name]
     }));
     return context;
-  }
-
-  /* --------------------------------------------- */
-
-  /**
-   * Build the list of journal entries.
-   * @returns {FormSelectOption[]}
-   */
-  #getEntryOptions() {
-    const options = [];
-    const traverse = (node, parentName) => {
-      if ( !node ) return;
-      let group;
-      if ( node.folder ) group = parentName ? `${parentName} > ${node.folder.name}` : node.folder.name;
-      for ( const entry of node.entries ) {
-        options.push({ value: entry._id, label: entry.name, group, disabled: entry._id === this.document.id });
-      }
-      node.children.forEach((c, idx) => traverse(c, group));
-    };
-    traverse(this.document.collection.tree);
-    return options;
   }
 
   /* -------------------------------------------- */
