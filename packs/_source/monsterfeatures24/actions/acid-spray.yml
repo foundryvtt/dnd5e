@@ -86,12 +86,8 @@ system:
   description:
     value: >-
       <p><em>Dexterity Saving Throw: </em>DC [[lookup @save.dc.value
-      activity=20GU2JBM5zJfNPD1]], each [[lookup @target.affects.type
-      activity=20GU2JBM5zJfNPD1]] in a [[lookup @target.template.size
-      activity=20GU2JBM5zJfNPD1]]-[[lookup @target.template.units
-      activity=20GU2JBM5zJfNPD1]]-long, [[lookup @target.template.width
-      activity=20GU2JBM5zJfNPD1]]-[[lookup @target.template.units
-      activity=20GU2JBM5zJfNPD1]]-wide [[lookup @target.template.type capitalize
+      activity=20GU2JBM5zJfNPD1]], [[lookup @labels.description.affects
+      activity=20GU2JBM5zJfNPD1]] in a [[lookup @labels.description.template
       activity=20GU2JBM5zJfNPD1]]. <em>Failure: </em>[[/damage average]] damage.
       <em>Success:</em> Half damage.</p>
     chat: ''
@@ -114,11 +110,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.2.2
+  systemVersion: 5.2.2
   createdTime: 1733432292956
-  modifiedTime: 1738096017760
+  modifiedTime: 1765235930883
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1800000
