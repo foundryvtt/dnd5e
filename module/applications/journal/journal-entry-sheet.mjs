@@ -1,10 +1,25 @@
+import JournalNavigationConfig from "./config/journal-navigation-config.mjs";
+
 /**
  * Variant of the standard journal sheet with support for additional page types.
  */
 export default class JournalEntrySheet5e extends foundry.applications.sheets.journal.JournalEntrySheet {
   /** @override */
   static DEFAULT_OPTIONS = {
-    classes: ["dnd5e2", "dnd5e2-journal", "titlebar"]
+    actions: {
+      configureNavigation: JournalEntrySheet5e.#configureNavigation
+    },
+    classes: ["dnd5e2", "dnd5e2-journal", "titlebar"],
+    window: {
+      controls: [
+        {
+          action: "configureNavigation",
+          icon: "fa-solid fa-compass",
+          label: "DND5E.JOURNALENTRY.Action.ConfigureNavigation",
+          ownership: "OWNER"
+        }
+      ]
+    }
   };
 
   /* -------------------------------------------- */
@@ -61,6 +76,18 @@ export default class JournalEntrySheet5e extends foundry.applications.sheets.jou
       const tooltipActive = event.target.ownerDocument.getElementById("tooltip")?.classList.contains("active");
       if ( (event.button === 1) && tooltipActive ) event.preventDefault();
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle opening the navigation configuration application.
+   * @this {JournalEntrySheet5e}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   */
+  static async #configureNavigation(event, target) {
+    new JournalNavigationConfig({ document: this.document }).render({ force: true });
   }
 
   /* -------------------------------------------- */
