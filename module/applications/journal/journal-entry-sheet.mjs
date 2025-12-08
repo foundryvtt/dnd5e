@@ -7,7 +7,7 @@ export default class JournalEntrySheet5e extends foundry.applications.sheets.jou
   /** @override */
   static DEFAULT_OPTIONS = {
     actions: {
-      configureNavigation: JournalEntrySheet5e.#configureNavigation
+      configureNavigation: JournalEntrySheet5e.#onConfigureNavigation
     },
     classes: ["dnd5e2", "dnd5e2-journal", "titlebar"],
     window: {
@@ -16,7 +16,7 @@ export default class JournalEntrySheet5e extends foundry.applications.sheets.jou
           action: "configureNavigation",
           icon: "fa-solid fa-compass",
           label: "DND5E.JOURNALENTRY.Action.ConfigureNavigation",
-          ownership: "OWNER"
+          visible: JournalEntrySheet5e.#canConfigureNavigation
         }
       ]
     }
@@ -81,12 +81,23 @@ export default class JournalEntrySheet5e extends foundry.applications.sheets.jou
   /* -------------------------------------------- */
 
   /**
+   * Whether it's possible to configure the navigation for this sheet.
+   * @this {JournalEntrySheet5e}
+   * @returns {boolean}
+   */
+  static #canConfigureNavigation() {
+    return this.isEditable && this.document.isOwner;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Handle opening the navigation configuration application.
    * @this {JournalEntrySheet5e}
    * @param {Event} event         Triggering click event.
    * @param {HTMLElement} target  Button that was clicked.
    */
-  static async #configureNavigation(event, target) {
+  static async #onConfigureNavigation(event, target) {
     new JournalNavigationConfig({ document: this.document }).render({ force: true });
   }
 

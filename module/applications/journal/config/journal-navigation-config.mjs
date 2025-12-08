@@ -80,7 +80,7 @@ export default class JournalNavigationConfig extends DocumentSheet5e {
       }
       node.children.forEach((c, idx) => traverse(c, group));
     };
-    traverse(this.document.pack ? game.packs.get(this.document.pack).tree : game.journal.tree);
+    traverse(this.document.collection.tree);
     return options;
   }
 
