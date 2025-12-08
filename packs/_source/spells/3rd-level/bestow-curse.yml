@@ -99,7 +99,48 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: OSGSF1Zm61GXLvrC
+          onSave: false
+          level:
+            min: null
+            max: null
+        - _id: pgBN0brGeJBSc413
+          onSave: false
+          level:
+            min: null
+            max: null
+        - _id: RoAMbIx9IUqpNREv
+          onSave: false
+          level:
+            min: null
+            max: null
+        - _id: KCdm5KtgQkFm9L9b
+          onSave: false
+          level:
+            min: null
+            max: null
+        - _id: yO17H6NUUH6yTtJj
+          onSave: false
+          level:
+            min: null
+            max: null
+        - _id: yFn5nMRayDT5pVeT
+          onSave: false
+          level:
+            min: null
+            max: null
+        - _id: aahOmoNF6ZsMVxUs
+          onSave: false
+          level:
+            min: null
+            max: null
+        - _id: Ebzd58ARPldBzKci
+          onSave: false
+          level:
+            min: null
+            max: null
+        - _id: 2EP5ujWSLnkP1zV0
       range:
         override: false
       target:
@@ -121,7 +162,14 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: bestow-curse
 sort: 0
 flags: {}
@@ -507,11 +555,11 @@ effects:
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.2.2
   createdTime: 1725037365284
-  modifiedTime: 1725992722822
+  modifiedTime: 1765219896749
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!pO4zGe5LmFIYqJiL'
