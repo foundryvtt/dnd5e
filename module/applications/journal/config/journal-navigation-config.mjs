@@ -71,25 +71,27 @@ export default class JournalNavigationConfig extends DocumentSheet5e {
   async #getEntryOptions() {
     const collection = this.document.pack ? game.packs.get(this.document.pack).index : game.journal;
     const folders = new Map();
-    const buildFolders = (node, parentName) => {
+    const buildFolders = (node, idx, parentName) => {
       if ( !node ) return;
       let folderName;
       if ( node.folder ) {
         folderName = parentName ? `${parentName} > ${node.folder.name}` : node.folder.name;
-        folders.set(node.folder.id, folderName);
+        folders.set(node.folder.id, { name: folderName, sort: idx });
       }
-      node.children.forEach(c => buildFolders(c, folderName));
+      node.children.forEach((c, idx) => buildFolders(c, idx, folderName));
     };
-    buildFolders(this.document.pack ? game.packs.get(this.document.pack).tree : game.journal.tree);
+    buildFolders(this.document.pack ? game.packs.get(this.document.pack).tree : game.journal.tree, 0);
 
     return Array.from(collection.values())
-      .sort((lhs, rhs) => lhs.sort - rhs.sort)
       .map(entry => ({
         value: entry._id,
         label: entry.name,
-        group: folders.get(entry.folder?._id ?? entry.folder),
-        disabled: entry._id === this.document.id
-      }));
+        group: folders.get(entry.folder?._id ?? entry.folder)?.name,
+        disabled: entry._id === this.document.id,
+        folderSort: folders.get(entry.folder?._id ?? entry.folder)?.sort,
+        sort: entry.sort
+      }))
+      .sort((lhs, rhs) => (lhs.folderSort - rhs.folderSort) || (lhs.sort - rhs.sort));
   }
 
   /* -------------------------------------------- */
