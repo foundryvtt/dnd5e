@@ -163,7 +163,7 @@ export default class JournalSpellListPageSheet extends JournalEntryPageHandlebar
     if ( context.grouping === "school" ) context.sections = sortObjectEntries(context.sections, "header");
 
     if ( this.options.displayAsTable ) Object.values(context.sections).forEach(section => {
-      const spells = section.spells.map(s => linkForUuid(s.spell?.uuid)).filter(_ => _);
+      const spells = section.spells.map(s => s.display).filter(_ => _);
       section.spellList = game.i18n.getListFormatter({ type: "unit" }).format(spells);
     });
 
@@ -221,8 +221,8 @@ export default class JournalSpellListPageSheet extends JournalEntryPageHandlebar
             tooltip: '<section class="loading"><i class="fas fa-spinner fa-spin-pulse"></i></section>'
           });
         } else {
-          data.display = `<span class="unlinked-spell"
-            data-tooltip="${data.unlinked.source.label}">${data.unlinked.name ?? "—"}*</span>`;
+          data.display = `<span class="unlinked-spell" data-tooltip="${
+            data.unlinked.source.label}">${data.unlinked.name ?? "—"}*</span>`;
         }
         return data;
       })
