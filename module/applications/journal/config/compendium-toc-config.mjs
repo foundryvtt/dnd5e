@@ -166,7 +166,7 @@ export default class CompendiumTOCConfig extends Application5e {
     for ( const [id, flags] of Object.entries(submitData) ) {
       const update = { _id: id };
       for ( const key of ["type", "position", "append"] ) {
-        if ( flags[key] ) update[`flags.dnd5e.${key}`] = flags[key];
+        if ( flags[key] || (flags[key] === 0) ) update[`flags.dnd5e.${key}`] = flags[key];
         else update[`flags.dnd5e.-=${key}`] = null;
       }
       updates.push(update);
