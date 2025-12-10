@@ -1,10 +1,25 @@
+import JournalTOCConfig from "./config/journal-toc-config.mjs";
+
 /**
  * Variant of the standard journal sheet with support for additional page types.
  */
 export default class JournalEntrySheet5e extends foundry.applications.sheets.journal.JournalEntrySheet {
   /** @override */
   static DEFAULT_OPTIONS = {
-    classes: ["dnd5e2", "dnd5e2-journal", "titlebar"]
+    actions: {
+      configureTableOfContents: JournalEntrySheet5e.#onConfigureTableOfContents
+    },
+    classes: ["dnd5e2", "dnd5e2-journal", "titlebar"],
+    window: {
+      controls: [
+        {
+          action: "configureTableOfContents",
+          icon: "fa-solid fa-bars-staggered",
+          label: "DND5E.TABLEOFCONTENTS.Action.Configure",
+          visible: JournalEntrySheet5e.#canConfigureTableOfContents
+        }
+      ]
+    }
   };
 
   /* -------------------------------------------- */
@@ -61,6 +76,31 @@ export default class JournalEntrySheet5e extends foundry.applications.sheets.jou
       const tooltipActive = event.target.ownerDocument.getElementById("tooltip")?.classList.contains("active");
       if ( (event.button === 1) && tooltipActive ) event.preventDefault();
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Whether it's possible to configure the table of contents listing for this sheet.
+   * @this {JournalEntrySheet5e}
+   * @returns {boolean}
+   */
+  static #canConfigureTableOfContents() {
+    const flags = this.entry.collection.metadata?.flags ?? {};
+    return this.isEditable && this.entry.isOwner && this.entry.inCompendium
+      && ((flags.display === "table-of-contents") || (flags.dnd5e?.display === "table-of-contents"));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle opening the table of contents configuration application.
+   * @this {JournalEntrySheet5e}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   */
+  static async #onConfigureTableOfContents(event, target) {
+    new JournalTOCConfig({ document: this.entry }).render({ force: true });
   }
 
   /* -------------------------------------------- */

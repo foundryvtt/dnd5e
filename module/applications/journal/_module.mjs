@@ -8,3 +8,4 @@ export {default as JournalSpellListPageSheet} from "./spells-page-sheet.mjs";
 export {default as TableOfContentsCompendium} from "./table-of-contents.mjs";
 
 export {default as CompendiumTOCConfig} from "./config/compendium-toc-config.mjs";
+export {default as JournalTOCConfig} from "./config/journal-toc-config.mjs";

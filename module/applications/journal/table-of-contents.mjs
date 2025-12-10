@@ -51,6 +51,19 @@ export default class TableOfContentsCompendium extends foundry.applications.side
   };
 
   /* -------------------------------------------- */
+
+  /**
+   * Options allowed for entry types.
+   * @type {FormSelectOption[]}
+   */
+  static TYPE_OPTIONS = [
+    { value: "chapter", label: "DND5E.TABLEOFCONTENTS.Type.Chapter" },
+    { value: "appendix", label: "DND5E.TABLEOFCONTENTS.Type.Appendix" },
+    { value: "header", label: "DND5E.TABLEOFCONTENTS.Type.Header" },
+    { value: "special", label: "DND5E.TABLEOFCONTENTS.Type.Special" }
+  ];
+
+  /* -------------------------------------------- */
   /*  Rendering                                   */
   /* -------------------------------------------- */
 
@@ -215,5 +228,40 @@ export default class TableOfContentsCompendium extends foundry.applications.side
     dragData = this._getEntryDragData(event.target.dataset.documentId);
     if ( !dragData ) return;
     event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare information on all entries in the provided compendium for configuring table of contents.
+   * @param {CompendiumCollection} compendium
+   * @returns { chapterOptions: FormSelectOption[], counts: Record<string, number> }
+   */
+  static async _getEntryBreakdown(compendium) {
+    // TODO: Ideally this would be `getIndex({ fields: ["flags.dnd5e.type", "flags.dnd5e.position"] })`
+    // but that doesn't seem to properly update the flags when they are updated, see:
+    // https://github.com/foundryvtt/foundryvtt/issues/9984
+    const docs = await compendium.getDocuments();
+
+    const counts = {};
+    const chapterOptions = docs
+      .reduce((arr, doc) => {
+        const flags = doc.flags.dnd5e ?? {};
+        if ( flags.type ) {
+          counts[`${flags.type}-${flags.position ?? 0}`] ??= 0;
+          counts[`${flags.type}-${flags.position ?? 0}`] += 1;
+        }
+        if ( (flags.type === "appendix") || (flags.type === "chapter") ) {
+          const sort = TableOfContentsCompendium.TYPES[flags.type] + (flags.position ?? 0);
+          arr.push({ label: game.i18n.format("DND5E.TABLEOFCONTENTS.Special.After", { chapter: doc.name }), sort });
+        }
+        return arr;
+      }, [{ value: null, label: game.i18n.localize("DND5E.TABLEOFCONTENTS.Special.End"), rule: true }])
+      .sort((lhs, rhs) => lhs.sort - rhs.sort)
+      .map((option, value) => ({ ...option, value }));
+
+    return { chapterOptions, counts };
   }
 }

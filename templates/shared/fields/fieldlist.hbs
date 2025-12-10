@@ -1,4 +1,5 @@
 {{#each this}}
+{{#unless (eq visible false)}}
 {{#if name}}{{!-- TODO: Work around core issue with providing undefined name --}}
 {{ formField field name=name value=value input=input options=options disabled=disabled localize=localize
              placeholder=placeholder label=label hint=hint classes=classes rootId=@root.partId }}
@@ -6,4 +7,5 @@
 {{ formField field value=value input=input options=options disabled=disabled localize=localize
              placeholder=placeholder label=label hint=hint classes=classes rootId=@root.partId }}
 {{/if}}
+{{/unless}}
 {{/each}}
