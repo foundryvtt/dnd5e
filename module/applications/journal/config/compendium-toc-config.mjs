@@ -74,24 +74,8 @@ export default class CompendiumTOCConfig extends Application5e {
   /** @inheritDoc */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
-
-    const docs = await this.compendium.getIndex({ fields: ["flags.dnd5e.type", "flags.dnd5e.position"] });
-    const counts = {};
-    const chapterOptions = docs
-      .reduce((arr, doc) => {
-        const flags = doc.flags.dnd5e ?? {};
-        if ( flags.type ) {
-          counts[`${flags.type}-${flags.position ?? 0}`] ??= 0;
-          counts[`${flags.type}-${flags.position ?? 0}`] += 1;
-        }
-        if ( (flags.type === "appendix") || (flags.type === "chapter") ) {
-          const sort = dnd5e.applications.journal.TableOfContentsCompendium.TYPES[flags.type] + (flags.position ?? 0);
-          arr.push({ label: game.i18n.format("DND5E.TABLEOFCONTENTS.Special.After", { chapter: doc.name }), sort });
-        }
-        return arr;
-      }, [{ value: null, label: game.i18n.localize("DND5E.TABLEOFCONTENTS.Special.End"), rule: true }])
-      .sort((lhs, rhs) => lhs.sort - rhs.sort)
-      .map((option, value) => ({ ...option, value }));
+    const TableOfContentsCompendium = dnd5e.applications.journal.TableOfContentsCompendium;
+    const { chapterOptions, counts } = await TableOfContentsCompendium._getEntryBreakdown(this.compendium);
 
     context.folders = [];
     const traverse = node => {
@@ -103,13 +87,9 @@ export default class CompendiumTOCConfig extends Application5e {
           const data = entry.flags?.dnd5e ?? {};
           const fields = [{
             field: new StringField(),
+            localize: true,
             name: `${entry._id}.type`,
-            options: [
-              { value: "chapter", label: game.i18n.localize("DND5E.TABLEOFCONTENTS.Type.Chapter") },
-              { value: "appendix", label: game.i18n.localize("DND5E.TABLEOFCONTENTS.Type.Appendix") },
-              { value: "header", label: game.i18n.localize("DND5E.TABLEOFCONTENTS.Type.Header") },
-              { value: "special", label: game.i18n.localize("DND5E.TABLEOFCONTENTS.Type.Special") }
-            ],
+            options: TableOfContentsCompendium.TYPE_OPTIONS,
             value: data.type
           }];
 
