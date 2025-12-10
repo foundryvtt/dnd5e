@@ -11,14 +11,14 @@
 <div class="flexcol" {{#unless showTypes}}hidden{{/unless}}>
     {{#each types}}
     {{#if children}}
-    <div class="type-group collapsible">
+    <div class="type-group collapsible" data-expand-id="types-{{ @key }}">
         <div class="type-group-header">
             <label>
                 <dnd5e-checkbox data-action="setType" {{ checked chosen }}
                                 {{ disabled @root.isLocked.types }}></dnd5e-checkbox>
                 <span>{{ localize label }}</span>
             </label>
-            <div data-action="toggleCollapse"><i class="fa-solid fa-caret-down"></i></div>
+            <div data-action="toggleCollapsed"><i class="fa-solid fa-caret-down"></i></div>
         </div>
         <div class="collapsible-content">
             <div class="wrapper">

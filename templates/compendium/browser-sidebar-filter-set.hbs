@@ -1,6 +1,7 @@
-<div class="filter filter-set collapsible {{~#if collapsed}} collapsed{{/if}}" data-filter-id="{{ key }}">
+<div class="filter filter-set collapsible {{~#if (eq expanded false)}} collapsed{{/if}}"
+     data-expand-id="{{ expandId }}" data-filter-id="{{ key }}">
     <div class="filter-header">
-        <label data-action="toggleCollapse">
+        <label data-action="toggleCollapsed">
             <span class="roboto-upper">{{ localize label }}</span>
             <i class="fa-solid fa-caret-down" inert></i>
         </label>

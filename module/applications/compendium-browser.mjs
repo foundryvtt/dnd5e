@@ -53,7 +53,6 @@ export default class CompendiumBrowser extends Application5e {
       openLink: CompendiumBrowser.#onOpenLink,
       setFilter: CompendiumBrowser.#onSetFilter,
       setType: CompendiumBrowser.#onSetType,
-      toggleCollapse: CompendiumBrowser.#onToggleCollapse,
       toggleMode: CompendiumBrowser.#onToggleMode
     },
     form: {
@@ -531,22 +530,27 @@ export default class CompendiumBrowser extends Application5e {
           locked: generateLocked(this.options.filters.locked?.additional?.[key])
         }, { inplace: false }));
 
+        data.expandId = key;
+
         if ( data.type === "set" ) {
           const groups = Object.entries(data.config.choices).reduce((groups, [k, v]) => {
             groups[v.group] ??= {};
             groups[v.group][k] = v;
             return groups;
           }, {});
-          if ( Object.keys(groups).length > 1 ) Object.entries(groups).forEach(([group, choices]) => pushFilter({
+          if ( Object.keys(groups).length > 1 ) Object.entries(groups).forEach(([group, choices], index) => pushFilter({
             ...data,
-            collapsed: data.config.collapseGroup?.(group),
+            expandId: `${key}-${group}`,
+            expanded: this.expandedSections.get(`${key}-${group}`) ?? !data.config.collapseGroup?.(group),
             label: game.i18n.format("DND5E.CompendiumBrowser.Filters.Grouped", {
               type: game.i18n.localize(data.label), group
             }),
             config: { ...data.config, choices }
           }));
 
-          else pushFilter({ ...data, collapsed: data.collapseGroup?.(null) });
+          else pushFilter({
+            ...data, expanded: this.expandedSections.get(data.expandId) ?? !data.collapseGroup?.(null)
+          });
         }
         else pushFilter(data);
 
@@ -710,6 +714,7 @@ export default class CompendiumBrowser extends Application5e {
         locked,
         value: locked,
         key: "source",
+        expandId: "source",
         label: "DND5E.SOURCE.FIELDS.source.label",
         config: { choices: this.#sources },
         partId: `${this.id}-filters`
@@ -1028,18 +1033,6 @@ export default class CompendiumBrowser extends Application5e {
     }
 
     this.render({ parts: ["filters", "results"] });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle toggling the collapsed state of a collapsible section.
-   * @this {CompendiumBrowser}
-   * @param {PointerEvent} event  The originating click event.
-   * @param {HTMLElement} target  The capturing HTML element which defined a [data-action].
-   */
-  static async #onToggleCollapse(event, target) {
-    target.closest(".collapsible")?.classList.toggle("collapsed");
   }
 
   /* -------------------------------------------- */

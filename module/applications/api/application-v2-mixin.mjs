@@ -277,11 +277,12 @@ export default function ApplicationV2Mixin(Base) {
      * @param {HTMLElement} target  Button that was clicked.
      */
     static #toggleCollapsed(event, target) {
-      if ( event.target.closest(".collapsible-content") ) return;
-      target.classList.toggle("collapsed");
+      const collapsible = target.closest(".collapsible");
+      if ( !collapsible || event.target.closest(".collapsible-content") ) return;
+      collapsible.classList.toggle("collapsed");
       this.#expandedSections.set(
         target.closest("[data-expand-id]")?.dataset.expandId,
-        !target.classList.contains("collapsed")
+        !collapsible.classList.contains("collapsed")
       );
     }
   }
