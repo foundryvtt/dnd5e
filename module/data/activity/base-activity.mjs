@@ -241,7 +241,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   get spellcastingAbility() {
     let ability;
     if ( this.isSpell ) ability = this.item.system.availableAbilities?.first();
-    return ability ?? this.actor?.system.attributes?.spellcasting ?? null;
+    return ability ?? this.actor?.spellcastingAbility ?? null;
   }
 
   /* -------------------------------------------- */
