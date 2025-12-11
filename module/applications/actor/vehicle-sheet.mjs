@@ -369,7 +369,7 @@ export default class VehicleActorSheet extends BaseActorSheet {
         ctx.enriched.damage = await TextEditor.enrichHTML("[[/damage extended]]", enrichmentOptions);
       }
     }
-    ctx.crew = await Promise.all(Array.fromRange(Math.max(crew.max, crew.value.length)).map(async index => {
+    ctx.crew = await Promise.all(Array.fromRange(Math.max(crew.max ?? -1, crew.value.length)).map(async index => {
       const uuid = crew.value[index];
       if ( uuid ) return { index, actor: await fromUuid(uuid) };
       return { empty: true };
