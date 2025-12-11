@@ -27,10 +27,6 @@
 <fieldset>
     <legend>
         <span>{{ localize "DND5E.Recovery" }}</span>
-        <button type="button" class="unbutton control-button" data-action="addRecovery"
-                data-tooltip aria-label="{{ localize "DND5E.USES.Recovery.Action.Create" }}">
-            <i class="fas fa-plus" inert></i>
-        </button>
     </legend>
     {{#each usesRecovery}}
     <div class="form-group split-group full-width card" data-index="{{ @index }}">
@@ -59,8 +55,10 @@
             </button>
         </div>
     </div>
-    {{else}}
-    <div class="empty">{{ localize "DND5E.USES.Recovery.Never" }}</div>
     {{/each}}
+    <button type="button" class="unbutton control-button add-button" data-action="addRecovery">
+        <i class="fas fa-plus" inert></i>
+        <span>{{ localize "DND5E.USES.Recovery.Action.Create" }}</span>
+    </button>
 </fieldset>
 {{/if}}
