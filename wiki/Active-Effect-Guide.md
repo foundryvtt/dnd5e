@@ -24,6 +24,8 @@ Useful examples:
 > When using formulas in an Active Effect Value, the actor sheet display that corresponds to the changed value will not always display the evaluated formula, but it will be applied when rolled.
 > E.g. When adding `@abilities.cha.mod` to `system.bonuses.abilities.save` to simulate a Paladin's Aura of Protection, the actor sheet will not display that bonus applied to saving throws. The bonus will be present when the saving throw is rolled.
 
+## Change Modes
+### General description
 | Change Mode | Description |
 |------------ | ------------|
 | Add         | Adds the provided value to the specified attribute. For numerical attributes, this can be used to both add and subtract from a particular value by specifying `1` or `-1` as the value to add. For sets such as an item's properties or character's damage resistances this can be used to add or remove and entry (e.g. `mgc` to add the magical property, or `-mgc` to remove it).  |
@@ -32,6 +34,17 @@ Useful examples:
 | Downgrade   | Reduces the defined attribute only in cases where the current value of that attribute would be greater than value specified in the Effect Value field.|
 | Upgrade     | Increases the defined attribute only in cases where the current value of that attribute would be less than value specified in the Effect Value field. |
 | Custom      | The Custom change mode applies logic defined by a game system or add-on module. The dnd5e system does not utilize the Custom Change Mode|
+
+### Change Modes for Advantage Mode
+| Change Mode | Value | Description |
+|------------ | ----- | ------------|
+| Add         |   1   | Adds one instance of advantage |
+| Add         |  -1   | Adds one instance of disadvantage |
+| Override    |   1   | Sets the roll mode to advantage |
+| Override    |   0   | Sets the roll mode to normal |
+| Override    |  -1   | Sets the roll mode to disadvantage |
+| Downgrade   |   0   | Enforces no advantage |
+| Upgrade     |   0   | Enforces no disadvantage |
 
 # Commonly Desired Effect Examples
 
@@ -101,25 +114,14 @@ E.g. an Item or potion that sets an ability score to a set value, if the value d
 
 | Attribute Key                                     | Change Mode |    Effect Value    | Roll Data? |
 | ------------------------------------------------- | ----------- | ------------------ | ---------- |
-| `system.abilities.[abbreviation].check.roll.mode` | see below   | `1`: Advantage     | No         |
-|                                                   | see below   | `0`: Normal        | No         |
-|                                                   | see below   | `-1`: Disadvantage | No         |
+| `system.abilities.[abbreviation].check.roll.mode` | [see details](#change-modes-for-advantage-mode) | `-1`, `0`, `1` | No |
 
 
 ### Altering Advantage Modes on a Specific Saving Throw
 
 | Attribute Key                                    | Change Mode |    Effect Value    | Roll Data? |
 | ------------------------------------------------ | ----------- | ------------------ | ---------- |
-| `system.abilities.[abbreviation].save.roll.mode` | see below   | `1`: Advantage     | No         |
-|                                                  | see below   | `0`: Normal        | No         |
-|                                                  | see below   | `-1`: Disadvantage | No         |
-
-For both Ability Checks and Saves, the following Change Modes are supported:
-* `Add`: Adds one instance of the specified Advantage Mode to the roll.
-* `Override`: Forces the roll to the specified Advantage Mode.
-* `Downgrade` with Effect Value `0`: The roll cannot have advantage.
-* `Upgrade` with Effect Value `0`: The roll cannot have disadvantage.
-
+| `system.abilities.[abbreviation].save.roll.mode` | [see details](#change-modes-for-advantage-mode) | `-1`, `0`, `1` | No |
 
 
 ### Bonus to All Ability Checks
@@ -145,6 +147,12 @@ E.g. Paladin Aura of Protection
 | `system.attributes.init.bonus` | Add         | `[formula]`  | Yes        |
 
 
+### Altering Advantage Modes on a initiative roll
+
+| Attribute Key                                    | Change Mode |    Effect Value    | Roll Data? |
+| ------------------------------------------------ | ----------- | ------------------ | ---------- |
+| `system.attributes.init.roll.mode` | [see details](#change-modes-for-advantage-mode) | `-1`, `0`, `1` | No |
+
 ------------------------
 
 
@@ -156,6 +164,12 @@ Add a bonus to concentration saving throws.
 | Attribute Key                                  | Change Mode | Effect Value | Roll Data? |
 | ---------------------------------------------- | ----------- | ------------ | ---------- |
 | `system.attributes.concentration.bonuses.save` | Add         | `[formula]`  | Yes        |
+
+### Altering Advantage Modes on a concentration saving throw
+
+| Attribute Key                                    | Change Mode |    Effect Value    | Roll Data? |
+| ------------------------------------------------ | ----------- | ------------------ | ---------- |
+| `system.attributes.concentration.roll.mode` | [see details](#change-modes-for-advantage-mode) | `-1`, `0`, `1` | No |
 
 ### Concentration Limit
 Change the amount of effects you can maintain concentration on at the same time.
@@ -221,11 +235,12 @@ system.skills.[abbreviation].value
 | `system.skills.[abbreviation].bonuses.passive` | Add         | `[number]`   | No         |
 
 
-### Advantage on a Specific Skill
+### Altering Advantage Modes on a Specific Skill Check
 
-| Attribute Key                            | Change Mode | Effect Value | Roll Data? |
-| ---------------------------------------- | ----------- | ------------ | ---------- |
-| `system.skills.[abbreviation].roll.mode` | Add         | `1`          | No         |
+| Attribute Key                                    | Change Mode |    Effect Value    | Roll Data? |
+| ------------------------------------------------ | ----------- | ------------------ | ---------- |
+| `system.skills.[abbreviation].roll.mode` | [see details](#change-modes-for-advantage-mode) | `-1`, `0`, `1` | No |
+
 
 
 ### Upgrade Proficiency Level to Expertise
@@ -671,6 +686,13 @@ system.tools.[abbreviation].value
 | Attribute Key                                | Change Mode | Effect Value | Roll Data? |
 | -------------------------------------------- | ----------- | ------------ | ---------- |
 | `system.tools.[abbreviation].bonuses.check`  | Add         | `[formula]`  | Yes        |
+
+
+### Altering Advantage Modes on a Specific Tool Check
+
+| Attribute Key                                    | Change Mode |    Effect Value    | Roll Data? |
+| ------------------------------------------------ | ----------- | ------------------ | ---------- |
+| `system.tools.[abbreviation].roll.mode` | [see details](#change-modes-for-advantage-mode) | `-1`, `0`, `1` | No |
 
 
 ### Upgrade Proficiency Level to Expertise
