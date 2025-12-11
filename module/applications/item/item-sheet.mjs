@@ -539,7 +539,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
   /**
    * Get the base weapons and tools based on the selected type.
    * @param {ApplicationRenderContext} context  Context being prepared.
-   * @returns {Promise<FormSelectOptions[]|null>}
+   * @returns {Promise<FormSelectOption[]|null>}
    * @protected
    */
   async _getBaseItemOptions(context) {
