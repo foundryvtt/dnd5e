@@ -97,11 +97,29 @@ E.g. an Item or potion that sets an ability score to a set value, if the value d
 | `system.abilities.[abbreviation].bonuses.check` | Add         | `[formula]`  | Yes        |
 
 
-### Advantage on a Specific Saving Throw
+### Altering Advantage Modes on a Specific Ability Check
 
-| Attribute Key                                    | Change Mode | Effect Value | Roll Data? |
-| ------------------------------------------------ | ----------- | ------------ | ---------- |
-| `system.abilities.[abbreviation].save.roll.mode` | Add         | `1`          | No         |
+| Attribute Key                                     | Change Mode |    Effect Value    | Roll Data? |
+| ------------------------------------------------- | ----------- | ------------------ | ---------- |
+| `system.abilities.[abbreviation].check.roll.mode` | see below   | `1`: Advantage     | No         |
+|                                                   | see below   | `0`: Normal        | No         |
+|                                                   | see below   | `-1`: Disadvantage | No         |
+
+
+### Altering Advantage Modes on a Specific Saving Throw
+
+| Attribute Key                                    | Change Mode |    Effect Value    | Roll Data? |
+| ------------------------------------------------ | ----------- | ------------------ | ---------- |
+| `system.abilities.[abbreviation].save.roll.mode` | see below   | `1`: Advantage     | No         |
+|                                                  | see below   | `0`: Normal        | No         |
+|                                                  | see below   | `-1`: Disadvantage | No         |
+
+For both Ability Checks and Saves, the following Change Modes are supported:
+* `Add`: Adds one instance of the specified Advantage Mode to the roll.
+* `Override`: Forces the roll to the specified Advantage Mode.
+* `Downgrade` with Effect Value `0`: The roll cannot have advantage.
+* `Upgrade` with Effect Value `0`: The roll cannot have disadvantage.
+
 
 
 ### Bonus to All Ability Checks
