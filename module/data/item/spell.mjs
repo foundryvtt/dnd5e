@@ -1,4 +1,5 @@
-import { filteredKeys } from "../../utils.mjs";
+import { getRulesVersion } from "../../enrichers.mjs";
+import { filteredKeys, formatNumber } from "../../utils.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import ActivationField from "../shared/activation-field.mjs";
 import DurationField from "../shared/duration-field.mjs";
@@ -389,6 +390,9 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
       return obj;
     }, { all: [], vsm: [], tags: [] });
     labels.components.vsm = game.i18n.getListFormatter({ style: "narrow" }).format(labels.components.vsm);
+    labels.components.full = labels.materials ? game.i18n.format("DND5E.SpellComponentsMaterial", {
+      components: labels.components.vsm, materials: labels.materials
+    }) : labels.components.vsm;
 
     const uuid = this.parent._stats.compendiumSource ?? this.parent.uuid;
     Object.defineProperty(labels, "classes", {
@@ -565,6 +569,80 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     const data = super.getRollData(...options);
     data.item.level = data.item.level + (this.parent.getFlag("dnd5e", "scaling") ?? 0);
     return data;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async toEmbed(config, options={}) {
+    const description = await super.toEmbed(config, options);
+    config.details ??= config.values.includes("details");
+    if ( !config.details ) return description;
+
+    const details = document.createElement("div");
+    details.classList.add("item-entry-details");
+    const labels = this.parent.labels;
+    const rulesVersion = getRulesVersion(config, { ...options, relativeTo: this.parent });
+
+    const tag = document.createElement("p");
+    tag.classList.add("item-entry-tag");
+    const classes = labels.classes;
+    tag.innerText = game.i18n.format(
+      `DND5E.SPELL.Embed.Tag.${!this.level ? "Cantrip" : "Leveled"}${rulesVersion === "2014" ? "Legacy" : ""}`,
+      {
+        level: formatNumber(this.level),
+        levelOrdinal: formatNumber(this.level, { ordinal: true }),
+        school: CONFIG.DND5E.spellSchools[this.school]?.label ?? ""
+      }
+    );
+    if ( (rulesVersion === "2014") && this.properties.has("ritual") ) {
+      tag.innerText = game.i18n.format("DND5E.SPELL.Embed.Tag.Ritual", { levelSchool: tag.innerText });
+    } else if ( (rulesVersion === "2024") && classes?.length ) {
+      tag.innerText = game.i18n.format("DND5E.SPELL.Embed.Tag.Classes", {
+        classes: game.i18n.getListFormatter({ type: "unit" }).format(classes),
+        levelSchool: tag.innerText
+      });
+    }
+    details.append(tag);
+
+    let castingTime = rulesVersion === "2014" ? labels.legacyActivation : labels.ritualActivation;
+    if ( (this.activation.type === "reaction") && this.activation.condition ) castingTime = game.i18n.format(
+      "DND5E.SPELL.Embed.CastingTimeTrigger", { castingTime, trigger: this.activation.condition }
+    );
+    const specifics = [
+      ["DND5E.SpellCastTime", castingTime],
+      ["DND5E.SpellHeader.Range", labels.description.range || labels.range],
+      ["DND5E.Components", labels.components.full],
+      ["DND5E.Duration", labels.concentrationDuration]
+    ];
+    const dl = document.createElement("dl");
+    dl.classList.add("item-entry-specifics");
+    for ( const [label, description] of specifics ) {
+      const div = document.createElement("div");
+      const dt = document.createElement("dt");
+      dt.innerText = game.i18n.localize(label);
+      const dd = document.createElement("dd");
+      dd.innerText = description;
+      div.append(dt, dd);
+      dl.append(div);
+    }
+    details.append(dl);
+
+    const template = document.createElement("template");
+    template.append(details, ...description);
+
+    /**
+     * A hook event that fires after an embedded spell with details is rendered.
+     * @function dnd5e.renderEmbeddedSpell
+     * @memberof hookEvents
+     * @param {Item5e} item                     Spell being embedded.
+     * @param {HTMLTemplateElement} template    Template whose children will be embedded.
+     * @param {DocumentHTMLEmbedConfig} config  Configuration for embedding behavior.
+     * @param {EnrichmentOptions} options       Original enrichment options.
+     */
+    Hooks.call("dnd5e.renderEmbeddedSpell", this.parent, template, config, options);
+
+    return template.children;
   }
 
   /* -------------------------------------------- */
