@@ -114,14 +114,14 @@ E.g. an Item or potion that sets an ability score to a set value, if the value d
 
 | Attribute Key                                     | Change Mode |    Effect Value    | Roll Data? |
 | ------------------------------------------------- | ----------- | ------------------ | ---------- |
-| `system.abilities.[abbreviation].check.roll.mode` | [see details](#change-modes-for-advantage-mode) | `-1`, `0`, `1` | No |
+| `system.abilities.[abbreviation].check.roll.mode` | [see details](#altering-advantage-modes) | `-1`, `0`, `1` | No |
 
 
 ### Altering Advantage Modes on a Specific Saving Throw
 
 | Attribute Key                                    | Change Mode |    Effect Value    | Roll Data? |
 | ------------------------------------------------ | ----------- | ------------------ | ---------- |
-| `system.abilities.[abbreviation].save.roll.mode` | [see details](#change-modes-for-advantage-mode) | `-1`, `0`, `1` | No |
+| `system.abilities.[abbreviation].save.roll.mode` | [see details](#altering-advantage-modes) | `-1`, `0`, `1` | No |
 
 
 ### Bonus to All Ability Checks
@@ -151,7 +151,7 @@ E.g. Paladin Aura of Protection
 
 | Attribute Key                                    | Change Mode |    Effect Value    | Roll Data? |
 | ------------------------------------------------ | ----------- | ------------------ | ---------- |
-| `system.attributes.init.roll.mode` | [see details](#change-modes-for-advantage-mode) | `-1`, `0`, `1` | No |
+| `system.attributes.init.roll.mode` | [see details](#altering-advantage-modes) | `-1`, `0`, `1` | No |
 
 ------------------------
 
@@ -169,7 +169,7 @@ Add a bonus to concentration saving throws.
 
 | Attribute Key                                    | Change Mode |    Effect Value    | Roll Data? |
 | ------------------------------------------------ | ----------- | ------------------ | ---------- |
-| `system.attributes.concentration.roll.mode` | [see details](#change-modes-for-advantage-mode) | `-1`, `0`, `1` | No |
+| `system.attributes.concentration.roll.mode` | [see details](#altering-advantage-modes) | `-1`, `0`, `1` | No |
 
 ### Concentration Limit
 Change the amount of effects you can maintain concentration on at the same time.
@@ -239,7 +239,7 @@ system.skills.[abbreviation].value
 
 | Attribute Key                                    | Change Mode |    Effect Value    | Roll Data? |
 | ------------------------------------------------ | ----------- | ------------------ | ---------- |
-| `system.skills.[abbreviation].roll.mode` | [see details](#change-modes-for-advantage-mode) | `-1`, `0`, `1` | No |
+| `system.skills.[abbreviation].roll.mode` | [see details](#altering-advantage-modes) | `-1`, `0`, `1` | No |
 
 
 
@@ -692,7 +692,7 @@ system.tools.[abbreviation].value
 
 | Attribute Key                                    | Change Mode |    Effect Value    | Roll Data? |
 | ------------------------------------------------ | ----------- | ------------------ | ---------- |
-| `system.tools.[abbreviation].roll.mode` | [see details](#change-modes-for-advantage-mode) | `-1`, `0`, `1` | No |
+| `system.tools.[abbreviation].roll.mode` | [see details](#altering-advantage-modes) | `-1`, `0`, `1` | No |
 
 
 ### Upgrade Proficiency Level to Expertise
