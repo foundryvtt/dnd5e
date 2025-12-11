@@ -222,8 +222,8 @@ export default class Bastion {
    */
   #evaluateEnlargeOrder(facility, updates) {
     const { size } = facility.system;
-    const sizes = Object.entries(CONFIG.DND5E.facilities.sizes).sort((a, b) => a.value - b.value);
-    const index = sizes.findIndex(([key]) => key === size);
+    const sizes = Object.entries(CONFIG.DND5E.facilities.sizes).sort(([, a], [, b]) => a.value - b.value);
+    const index = Math.clamp(sizes.findIndex(([key]) => key === size), 0, sizes.length - 2);
     const [next] = sizes[index + 1];
     updates["system.size"] = next;
     return {};
