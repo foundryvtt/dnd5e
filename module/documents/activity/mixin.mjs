@@ -692,6 +692,8 @@ export default function ActivityMixin(Base) {
         const { spellLevels, spellSchools } = CONFIG.DND5E;
         data.subtitle = [spellLevels[spellLevel], spellSchools[this.item.system.school]?.label].filterJoin(" &bull; ");
       }
+      const img = (this.img === this.metadata.img) ? this.item.img : this.img;
+      const title = game.i18n.format("DND5E.CHATMESSAGE.USAGE.Title", { item: this.item.name, activity: this.name});
 
       return {
         activity: this,
@@ -702,7 +704,9 @@ export default function ActivityMixin(Base) {
         description: data.description,
         properties: properties.length ? properties : null,
         subtitle: this.description.chatFlavor || data.subtitle,
-        supplements
+        supplements,
+        img,
+        title
       };
     }
 
