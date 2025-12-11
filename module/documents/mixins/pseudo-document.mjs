@@ -32,6 +32,14 @@ export default function PseudoDocumentMixin(Base) {
     static _sheets = new Map();
 
     /* -------------------------------------------- */
+
+    /**
+     * The default type for the purpose of a creation dialog.
+     * @type {string|void}
+     */
+    static defaultType;
+
+    /* -------------------------------------------- */
     /*  Model Configuration                         */
     /* -------------------------------------------- */
 
@@ -264,6 +272,19 @@ export default function PseudoDocumentMixin(Base) {
     static async createDialog(data={}, createOptions={}, dialogOptions={}) {
       CreateDocumentDialog.migrateOptions(createOptions, dialogOptions);
       return CreateDocumentDialog.prompt(this, data, createOptions, dialogOptions);
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * The default display name of a pseudo-document of this type.
+     * @param {object} options
+     * @param {string} options.type
+     * @returns {string}
+     */
+    static defaultName({ type }) {
+      const title = this.documentConfig[type].documentClass.metadata.title;
+      return game.i18n.localize(title);
     }
 
     /* -------------------------------------------- */

@@ -543,6 +543,10 @@ Hooks.once("ready", function() {
     }
   });
 
+  // Assign default document types.
+  CONFIG.Actor.defaultType = game.user.isGM ? "npc" : "character";
+  CONFIG.Item.defaultType = "feat";
+
   // Adjust sourced items on actors now that compendium UUID redirects have been initialized
   game.actors.forEach(a => a.sourcedItems._redirectKeys());
 
