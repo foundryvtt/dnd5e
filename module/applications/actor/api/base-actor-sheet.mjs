@@ -1704,8 +1704,9 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @protected
    */
   _onDragEffect(event) {
-    const collection = this.actor.items.get(event.currentTarget.dataset.parentId)?.effects ?? this.actor.effects;
-    const effect = collection.get(event.currentTarget.dataset.effectId);
+    const { effectId, parentId } = event.currentTarget.closest("[data-effect-id]")?.dataset ?? {};
+    const collection = this.actor.items.get(parentId)?.effects ?? this.actor.effects;
+    const effect = collection.get(effectId);
     if ( effect ) event.dataTransfer.setData("text/plain", JSON.stringify(effect.toDragData()));
   }
 
@@ -1734,7 +1735,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
     const li = event.currentTarget;
     if ( li.dataset.activityId ) return this._onDragActivity(event);
-    if ( li.dataset.effectId ) return this._onDragEffect(event);
+    if ( li.matches("[data-effect-id] > .item-row") ) return this._onDragEffect(event);
     if ( li.matches("[data-item-id] > .item-row") ) return this._onDragItem(event);
 
     return super._onDragStart(event);
@@ -1905,7 +1906,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    */
   _onDropResetData(event, itemData) {
     if ( !itemData.system ) return;
-    ["attuned", "equipped", "prepared"].forEach(k => foundry.utils.deleteProperty(itemData.system, k));
+    ["attuned", "equipped", "prepared", "crew.value"].forEach(k => foundry.utils.deleteProperty(itemData.system, k));
   }
 
   /* -------------------------------------------- */

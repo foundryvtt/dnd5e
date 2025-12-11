@@ -3188,8 +3188,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
       if ( isRendered ) this.sheet?.close();
     }
-    if ( isRendered && options.renderSheet ) original.sheet?.render(isRendered);
     if ( !foundry.utils.isEmpty(update) ) await original.update(update, { dnd5e: { concentrationCheck: false } });
+    if ( isRendered && options.renderSheet ) original.sheet?.render(isRendered);
     return original;
   }
 
@@ -3632,6 +3632,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 class IdentifiedItemsMap extends Map {
   /** @inheritDoc */
   get(key, { type }={}) {
+    if ( !key ) return;
     if ( key.includes(":") && !type ) [type, key] = key.split(":", 2);
     const result = super.get(key);
     if ( !result?.size || !type ) return result;

@@ -102,6 +102,10 @@ export default class UsesField extends SchemaField {
     if ( !this.uses.max || (this.uses.recovery.length !== 1) ) return "";
     const recovery = this.uses.recovery[0];
 
+    // Ignore combat & special recovery periods
+    const type = CONFIG.DND5E.limitedUsePeriods[recovery.period]?.type;
+    if ( (type === "combat") || (type === "special") ) return "";
+
     // Recharge X–Y
     if ( recovery.period === "recharge" ) {
       const value = parseInt(recovery.formula);

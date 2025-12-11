@@ -107,7 +107,7 @@ export default class VehicleActorSheet extends BaseActorSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  static unsupportedItemTypes = new Set(["background", "class", "race", "spell", "subclass"]);
+  static unsupportedItemTypes = new Set(["background", "class", "facility", "race", "spell", "subclass"]);
 
   /* -------------------------------------------- */
   /*  Properties                                  */
@@ -340,6 +340,7 @@ export default class VehicleActorSheet extends BaseActorSheet {
   /** @override */
   _assignItemCategories(item) {
     if ( item.type === "container" ) return new Set(["containers", "inventory"]);
+    if ( item.type === "facility" ) return new Set(["facilities"]);
     if ( item.system.isMountable ) return new Set(["stations"]);
     if ( "inventorySection" in item.system.constructor ) return new Set(["inventory"]);
     return new Set(["features"]);
@@ -368,7 +369,7 @@ export default class VehicleActorSheet extends BaseActorSheet {
         ctx.enriched.damage = await TextEditor.enrichHTML("[[/damage extended]]", enrichmentOptions);
       }
     }
-    ctx.crew = await Promise.all(Array.fromRange(Math.max(crew.max, crew.value.length)).map(async index => {
+    ctx.crew = await Promise.all(Array.fromRange(Math.max(crew.max ?? -1, crew.value.length)).map(async index => {
       const uuid = crew.value[index];
       if ( uuid ) return { index, actor: await fromUuid(uuid) };
       return { empty: true };

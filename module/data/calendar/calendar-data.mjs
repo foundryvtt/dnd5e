@@ -316,12 +316,45 @@ export default class CalendarData5e extends foundry.data.CalendarData {
       return 0;
     };
 
-    const days = nowTime.day - previousTime.day;
+    const days = CalendarData5e.#dayDifference(previousTime, nowTime);
     foundry.utils.setProperty(options, "dnd5e.deltas", {
       midnights: days,
       middays: days + passedHour(game.time.calendar.days.hoursPerDay / 2),
       sunrises: ("sunrise" in game.time.calendar) ? days + passedHour(game.time.calendar.sunrise(nowTime)) : null,
       sunsets: ("sunset" in game.time.calendar) ? days + passedHour(game.time.calendar.sunset(nowTime)) : null
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Count the total number of full days that have passed between two times.
+   * @param {Components} previousTime
+   * @param {Components} currentTime
+   * @returns {number}
+   */
+  static #dayDifference(previousTime, currentTime) {
+    // If years are the same, simple subtraction should work
+    if ( previousTime.year === currentTime.year ) return currentTime.day - previousTime.day;
+
+    // Calculate the number of days just in current & previous years
+    const daysForYear = year => game.time.calendar.isLeapYear(previousTime.year)
+      ? game.time.calendar.days.daysPerLeapYear : game.time.calendar.days.daysPerYear;
+    let days = 0;
+    if ( previousTime.year < currentTime.year ) {
+      days += currentTime.day + (daysForYear(previousTime.year) - previousTime.day);
+    } else {
+      days -= (daysForYear(currentTime.year) - currentTime.day) + previousTime.day;
+    }
+
+    // If more than one year has passed, count the number of days for each year
+    const largerYear = Math.max(currentTime.year, previousTime.year);
+    const smallerYear = Math.min(currentTime.year, previousTime.year);
+    for ( let year = smallerYear + 1; year < largerYear; year++ ) {
+      if ( previousTime.year < currentTime.year ) days += daysForYear(year);
+      else days -= daysForYear(year);
+    }
+
+    return days;
   }
 }

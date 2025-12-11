@@ -243,7 +243,7 @@ class ItemRegistry {
 
     const indexes = await CompendiumBrowser.fetch(Item, {
       types: new Set([this.#itemType]),
-      indexFields: new Set(["system.identifier"]),
+      indexFields: new Set(["system.identifier", "system.source"]),
       sort: false
     });
     for ( const item of indexes ) {

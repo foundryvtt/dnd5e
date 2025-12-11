@@ -317,6 +317,7 @@ export function parseDelta(raw, target) {
  * @returns {number|void}
  */
 export function parseInputDelta(input, target) {
+  if ( !input?.value ) return input?.value;
   const prop = input.dataset.name ?? input.name;
   let current = foundry.utils.getProperty(target?._source ?? {}, prop) ?? foundry.utils.getProperty(target, prop);
   const value = parseDelta(input.value, Number(current));
