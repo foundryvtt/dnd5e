@@ -58,6 +58,18 @@ export default function ApplicationV2Mixin(Base) {
     }
 
     /* -------------------------------------------- */
+
+    /** @inheritDoc */
+    get window() {
+      return { ...super.window, ...this.#window };
+    }
+
+    #window = {
+      subtitle: null,
+      titleMeasure: null
+    };
+
+    /* -------------------------------------------- */
     /*  Rendering                                   */
     /* -------------------------------------------- */
 
@@ -103,6 +115,14 @@ export default function ApplicationV2Mixin(Base) {
     _onFirstRender(context, options) {
       super._onFirstRender(context, options);
       this._renderContainers(context, options);
+    }
+
+    /* -------------------------------------------- */
+
+    /** @inheritDoc */
+    _onPosition(position) {
+      super._onPosition(position);
+      if ( "width" in position ) this.#scaleTitle();
     }
 
     /* -------------------------------------------- */
@@ -155,10 +175,18 @@ export default function ApplicationV2Mixin(Base) {
     async _renderFrame(options) {
       const frame = await super._renderFrame(options);
 
+      // Title
+      const titleMeasure = document.createElement("span");
+      titleMeasure.ariaHidden = true;
+      titleMeasure.classList.add("title-measure");
+      frame?.querySelector(".window-title")?.insertAdjacentElement("afterend", titleMeasure);
+      this.#window.titleMeasure = titleMeasure;
+
       // Subtitles
       const subtitle = document.createElement("h2");
       subtitle.classList.add("window-subtitle");
       frame?.querySelector(".window-title")?.insertAdjacentElement("afterend", subtitle);
+      this.#window.subtitle = subtitle;
 
       // Icon
       if ( (options.window?.icon ?? "").includes(".") ) {
@@ -190,9 +218,13 @@ export default function ApplicationV2Mixin(Base) {
     /** @inheritDoc */
     _updateFrame(options) {
       super._updateFrame(options);
-      if ( options.window && ("subtitle" in options.window) ) {
-        this.element.querySelector(".window-header > .window-subtitle").innerText = options.window.subtitle;
+      const window = options.window;
+      if ( !window ) return;
+      if ( ("title" in window) && this.#window.titleMeasure ) {
+        this.window.titleMeasure.innerText = window.title;
+        this.#scaleTitle();
       }
+      if ( ("subtitle" in window) && this.#window.subtitle ) this.#window.subtitle.innerText = window.subtitle;
     }
 
     /* -------------------------------------------- */
@@ -240,6 +272,21 @@ export default function ApplicationV2Mixin(Base) {
         if ( element.tagName === "TEXTAREA" ) element.readOnly = true;
         else element.disabled = true;
       }
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Scale the font size of the app's title to ensure it fits.
+     */
+    #scaleTitle() {
+      requestAnimationFrame(() => {
+        const maxWidth = this.element.offsetWidth - 60;
+        const fullWidth = this.window.titleMeasure.offsetWidth;
+        if ( fullWidth > maxWidth ) {
+          this.window.title.style.setProperty("--font-size-scale", Math.clamp(maxWidth / fullWidth, 0.5, 1));
+        }
+      });
     }
 
     /* -------------------------------------------- */
