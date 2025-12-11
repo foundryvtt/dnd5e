@@ -35,7 +35,7 @@ Useful examples:
 | Upgrade     | Increases the defined attribute only in cases where the current value of that attribute would be less than value specified in the Effect Value field. |
 | Custom      | The Custom change mode applies logic defined by a game system or add-on module. The dnd5e system does not utilize the Custom Change Mode|
 
-### Change Modes for Advantage Mode
+### Altering Advantage Modes
 | Change Mode | Value | Description |
 |------------ | ----- | ------------|
 | Add         |   1   | Adds one instance of advantage |
