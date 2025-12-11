@@ -500,7 +500,8 @@ export default class NPCData extends CreatureTemplate {
    */
   getGear() {
     return this.parent.items
-      .filter(i => i.system.quantity && (i.system.type?.value !== "natural"))
+      .filter(i => i.system.quantity && (i.system.type?.value !== "natural")
+        && (i.flags.dnd5e?.statBlockOverride?.section !== "featureOnly"))
       .sort((lhs, rhs) => lhs.name.localeCompare(rhs.name, game.i18n.lang));
   }
 
@@ -797,7 +798,8 @@ export default class NPCData extends CreatureTemplate {
     }
 
     for ( const item of this.parent.items ) {
-      if ( !["feat", "weapon"].includes(item.type) ) continue;
+      if ( !["feat", "weapon"].includes(item.type)
+        || (item.flags.dnd5e?.statBlockOverride?.section === "gearOnly") ) continue;
       const category = item.system.properties.has("trait") ? "trait"
         : (item.system.activities?.contents[0]?.activation?.type ?? "trait");
       if ( category in context.actionSections ) {
