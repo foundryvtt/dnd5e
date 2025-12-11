@@ -100,9 +100,7 @@ export default class MappingField extends foundry.data.fields.ObjectField {
    */
   _validateValues(value, { phase: _phase, ...options }={}) {
     const isV13 = game.release.generation < 14;
-    const failure = isV13
-      ? new foundry.data.validation.DataModelValidationFailure()
-      : new foundry.data.validation.DataModelValidationError();
+    const failure = new foundry.data.validation.DataModelValidationFailure();
     for ( const [k, v] of Object.entries(value) ) {
       if ( k.startsWith("-=") ) continue;
       const error = this.model.validate(v, { ...options, strict: false, recursive: true });
