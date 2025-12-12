@@ -3,4 +3,13 @@
     {{ formField fields.name value=source.name placeholder=placeholder.name rootId=partId }}
     {{ formField fields.img value=source.img placeholder=placeholder.img rootId=partId }}
     {{ formField fields.description.fields.chatFlavor value=source.description.chatFlavor rootId=partId }}
+
+    {{!-- Description --}}
+    {{#if editable}}
+    <hr>
+    <prose-mirror name="description.value" value="{{ source.description.value }}" compact></prose-mirror>
+    {{else if enriched}}
+    <hr>
+    <div class="editor"><div class="editor-content">{{{ enriched }}}</div></div>
+    {{/if}}
 </fieldset>
