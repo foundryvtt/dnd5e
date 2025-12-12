@@ -1,9 +1,9 @@
-const { Die } = foundry.dice.terms;
+import BasicDie from "./basic-die.mjs";
 
 /**
  * Primary die used when performing a D20 roll.
  */
-export default class D20Die extends Die {
+export default class D20Die extends BasicDie {
   constructor({ number=1, faces=20, ...args }={}) {
     super({ number, faces, ...args });
   }
@@ -68,13 +68,10 @@ export default class D20Die extends Die {
    */
   applyAdvantage(advantageMode) {
     this.options.advantageMode = advantageMode;
-    this.modifiers.findSplice(m => ["kh", "kl"].includes(m));
-    if ( advantageMode === CONFIG.Dice.D20Roll.ADV_MODE.NORMAL ) this.number = 1;
-    else {
-      const isAdvantage = advantageMode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE;
-      this.number = (isAdvantage && this.options.elvenAccuracy) ? 3 : 2;
-      this.modifiers.push(isAdvantage ? "kh" : "kl");
-    }
+    this.modifiers.findSplice(m => m.startsWith("adv") || m.startsWith("dis"));
+    if ( advantageMode === CONFIG.Dice.D20Roll.ADV_MODE.NORMAL ) return;
+    const isAdvantage = advantageMode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE;
+    this.modifiers.push(`${isAdvantage ? "adv" : "dis"}${isAdvantage && this.options.elvenAccuracy ? "2" : ""}`);
   }
 
   /* -------------------------------------------- */
