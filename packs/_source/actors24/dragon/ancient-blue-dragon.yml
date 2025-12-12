@@ -612,7 +612,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] fails a saving throw, it can
+          <p>If the [[lookup @name lowercase]]{creature} fails a saving throw, it can
           choose to succeed instead.</p>
         chat: ''
       identifier: legendary-resistance
@@ -706,7 +706,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes three [[/item Rend]] attacks.
+          <p>The [[lookup @name lowercase]]{creature} makes three [[/item Rend]] attacks.
           It can replace one attack with a use of [[/item Spellcasting]] to cast
           @UUID[Compendium.dnd5e.spells24.Item.phbsplShatter000]{Shatter} (level
           3 version).</p>
@@ -1330,7 +1330,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts one of the
           following spells, requiring no Material components and using Charisma
           as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]]):</p><p class="feature-trait"><strong>At
@@ -2960,7 +2960,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] uses [[/item Spellcasting]] to cast
+          <p>The [[lookup @name lowercase]]{creature} uses [[/item Spellcasting]] to cast
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplInvisibili]</em> on
           itself, and it can fly up to half its Fly Speed. The dragon can't take
           this action again until the start of its next turn.</p>
@@ -3260,10 +3260,10 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] uses Spellcasting to
+          <p class="feature">The [[lookup @name lowercase]]{creature} uses Spellcasting to
           cast
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplShatter000]{Shatter}</em>
-          (level 3 version). The [[lookup @name lowercase]] can't take this
+          (level 3 version). The [[lookup @name lowercase]]{creature} can't take this
           action again until the start of its next turn.</p>
         chat: ''
       identifier: sonic-boom
@@ -3536,7 +3536,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] makes one [[/item
+          <p class="feature">The [[lookup @name lowercase]]{creature} makes one [[/item
           Rend]] attack.</p>
         chat: ''
       identifier: tail-swipe

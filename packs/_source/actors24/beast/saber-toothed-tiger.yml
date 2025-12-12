@@ -648,7 +648,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes two [[/item
           .mmRend0000000000]] attacks.</p>
         chat: ''
       identifier: multiattack
@@ -882,7 +882,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] takes the
+          <p class="feature">The [[lookup @name lowercase]]{creature} takes the
           &amp;Reference[Disengage] or &amp;Reference[Hide] action.</p>
         chat: ''
       identifier: nimble-escape

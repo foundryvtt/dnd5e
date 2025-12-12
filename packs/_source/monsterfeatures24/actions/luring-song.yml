@@ -70,26 +70,26 @@ system:
     max: ''
   description:
     value: >-
-      <p class="feature">The [[lookup @name lowercase]] sings a magical melody,
-      which lasts until the [[lookup @name lowercase]]'s Concentration ends on
+      <p class="feature">The [[lookup @name lowercase]]{creature} sings a magical melody,
+      which lasts until the [[lookup @name lowercase]]{creature}'s Concentration ends on
       it.</p><p class="feature"><em>Wisdom Saving Throw:</em> DC [[lookup
       @save.dc.value activity=dxxqZP7Vo01te3QB]], each [[lookup
       @target.affects.special activity=dxxqZP7Vo01te3QB]] in a [[lookup
       @target.template.size activity=dxxqZP7Vo01te3QB]]-foot Emanation
-      originating from the [[lookup @name lowercase]] when the song
+      originating from the [[lookup @name lowercase]]{creature} when the song
       starts.</p><p class="feature"><em>Failure:</em> The target has the
       &amp;Reference[Charmed apply=false] condition until the song ends and
       repeats the save at the end of each of its turns. While Charmed, the
       target has the &amp;Reference[Incapacitated apply=false] condition and
       ignores the Luring Song of other harpies.</p><p class="feature">If the
-      target is more than 5 feet from the [[lookup @name lowercase]], the target
-      moves on its turn toward the [[lookup @name lowercase]] by the most direct
-      route, trying to get within 5 feet of the [[lookup @name lowercase]]. It
+      target is more than 5 feet from the [[lookup @name lowercase]]{creature}, the target
+      moves on its turn toward the [[lookup @name lowercase]]{creature} by the most direct
+      route, trying to get within 5 feet of the [[lookup @name lowercase]]{creature}. It
       doesn't avoid &amp;Reference[OpportunityAttacks]; however, before moving
       into damaging terrain (such as lava or a pit) and whenever it takes damage
-      from a source other than the [[lookup @name lowercase]], the target
+      from a source other than the [[lookup @name lowercase]]{creature}, the target
       repeats the save.</p><p class="feature"><em>Success:</em> The target is
-      immune to this [[lookup @name lowercase]]'s Luring Song for 24 hours.</p>
+      immune to this [[lookup @name lowercase]]{creature}'s Luring Song for 24 hours.</p>
     chat: ''
   identifier: luring-song
   source:

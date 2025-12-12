@@ -62,11 +62,11 @@ system:
     max: ''
   description:
     value: >-
-      <p class="feature"><em>Trigger:</em> The [[lookup @name lowercase]] is hit
+      <p class="feature"><em>Trigger:</em> The [[lookup @name lowercase]]{creature} is hit
       by a melee attack roll while holding a weapon.</p><p
-      class="feature"><em>Response:</em> The [[lookup @name lowercase]] adds 3
+      class="feature"><em>Response:</em> The [[lookup @name lowercase]]{creature} adds 3
       to its AC against that attack, possibly causing it to miss. On a miss, the
-      [[lookup @name lowercase]] makes one Rapier attack against the triggering
+      [[lookup @name lowercase]]{creature} makes one Rapier attack against the triggering
       creature if within range.</p><section class="secret"
       id="secret-VqXu1b39RjadyOE4"><p><strong>Foundry Note</strong></p><p>This
       feature also provides an <strong>Active Effect (AE)</strong> that will
@@ -107,7 +107,7 @@ effects:
       startRound: null
       startTurn: null
     description: >-
-      <p>The [[lookup @name lowercase]] adds 3 to its AC against that attack,
+      <p>The [[lookup @name lowercase]]{creature} adds 3 to its AC against that attack,
       possibly causing it to miss.</p>
     tint: '#ffffff'
     transfer: false

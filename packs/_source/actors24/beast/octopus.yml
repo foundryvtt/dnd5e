@@ -680,7 +680,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] can move through a
+          <p class="feature">The [[lookup @name lowercase]]{creature} can move through a
           space as narrow as 1 inch without expending extra movement to do
           so.</p>
         chat: ''
@@ -731,7 +731,7 @@ items:
         recovery: []
         max: ''
       description:
-        value: <p>The [[lookup @name lowercase]] can breathe only underwater.</p>
+        value: <p>The [[lookup @name lowercase]]{creature} can breathe only underwater.</p>
         chat: ''
       identifier: water-breathing
       source:

@@ -857,7 +857,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes two [[/item
           .MC6uJTSfGDW6jSdI]] attacks. It can replace one attack with a use of
           [[/item .mmEnthrallingPan]].</p>
         chat: ''
@@ -969,11 +969,11 @@ items:
           <p class="feature"><em>Wisdom Saving Throw:</em> DC [[lookup
           @save.dc.value activity=66IPjaLIJqqwvmrL]], [[lookup
           @target.affects.labels.statblock activity=66IPjaLIJqqwvmrL]] the
-          [[lookup @name lowercase]] can see within [[lookup @range.value
+          [[lookup @name lowercase]]{creature} can see within [[lookup @range.value
           activity=66IPjaLIJqqwvmrL]] feet.</p><p
           class="feature"><em>Failure:</em> The target has the
           &amp;Reference[Charmed apply=false] condition until the start of the
-          [[lookup @name lowercase]]'s next turn.</p>
+          [[lookup @name lowercase]]{creature}'s next turn.</p>
         chat: ''
       identifier: enthralling-panache
       source:

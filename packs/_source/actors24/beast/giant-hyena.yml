@@ -745,7 +745,7 @@ items:
       description:
         value: >-
           <p class="feature">Immediately after dealing damage to a creature that
-          is already &amp;Reference[Bloodied], the [[lookup @name lowercase]]
+          is already &amp;Reference[Bloodied], the [[lookup @name lowercase]]{creature}
           moves up to half its Speed, and it makes one [[/item
           .mmBite0000000000]] attack.</p>
         chat: ''

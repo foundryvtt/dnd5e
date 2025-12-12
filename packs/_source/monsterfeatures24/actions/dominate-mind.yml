@@ -72,17 +72,17 @@ system:
     value: >-
       <p><em>Wisdom Saving Throw:</em> DC [[lookup @save.dc.value
       activity=zdXAMnjaOcsVmLZP]], one [[lookup @target.affects.type
-      activity=zdXAMnjaOcsVmLZP]] the [[lookup @name lowercase]] can see within
+      activity=zdXAMnjaOcsVmLZP]] the [[lookup @name lowercase]]{creature} can see within
       [[lookup @range.value activity=zdXAMnjaOcsVmLZP]]
       feet.</p><p><em>Failure:</em> The target has the &amp;Reference[Charmed
-      apply=false] condition until the [[lookup @name lowercase]] dies or is on
+      apply=false] condition until the [[lookup @name lowercase]]{creature} dies or is on
       a different plane of existence from the target. While Charmed, the target
-      acts as an ally to the [[lookup @name lowercase]] and is under its control
+      acts as an ally to the [[lookup @name lowercase]]{creature} and is under its control
       while within [[lookup @target.template.size activity=zdXAMnjaOcsVmLZP]]
-      feet of it. In addition, the [[lookup @name lowercase]] and the target can
+      feet of it. In addition, the [[lookup @name lowercase]]{creature} and the target can
       communicate telepathically with each other over any distance.</p><p>The
       target repeats the save whenever it takes damage as well as after every 24
-      hours it spends at least 1 mile away from the [[lookup @name lowercase]],
+      hours it spends at least 1 mile away from the [[lookup @name lowercase]]{creature},
       ending the effect on itself on a success.</p>
     chat: ''
   identifier: dominate-mind

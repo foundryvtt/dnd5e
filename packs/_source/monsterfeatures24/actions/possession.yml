@@ -72,21 +72,21 @@ system:
       @target.affects.special activity=7gmNBVjwuYTyANMe]] the [[lookup @name
       lowercase]] can see within [[lookup @range.value
       activity=7gmNBVjwuYTyANMe]] feet.</p><p class="feature"><em>Failure:</em>
-      The target is possessed by the [[lookup @name lowercase]]; the [[lookup
+      The target is possessed by the [[lookup @name lowercase]]{creature}; the [[lookup
       @name lowercase]] disappears, and the target has the
       &amp;Reference[Incapacitated apply=false] condition and loses control of
-      its body. The [[lookup @name lowercase]] now controls the body, but the
-      target retains awareness. The [[lookup @name lowercase]] can't be targeted
+      its body. The [[lookup @name lowercase]]{creature} now controls the body, but the
+      target retains awareness. The [[lookup @name lowercase]]{creature} can't be targeted
       by any attack, spell, or other effect, except ones that specifically
-      target Undead. The [[lookup @name lowercase]]'s game statistics are the
+      target Undead. The [[lookup @name lowercase]]{creature}'s game statistics are the
       same, except it uses the possessed target's Speed, as well as the target's
       Strength, Dexterity, and Constitution modifiers.</p><p class="feature">The
       possession lasts until the body drops to 0 Hit Points or the [[lookup
       @name lowercase]] leaves as a Bonus Action. When the possession ends, the
-      [[lookup @name lowercase]] appears in an unoccupied space within 5 feet of
+      [[lookup @name lowercase]]{creature} appears in an unoccupied space within 5 feet of
       the target, and the target is immune to this ghost's Possession for 24
       hours.</p><p class="feature"><em>Success:</em> The target is immune to
-      this [[lookup @name lowercase]]'s Possession for 24 hours.</p>
+      this [[lookup @name lowercase]]{creature}'s Possession for 24 hours.</p>
     chat: ''
   identifier: possession
   source:

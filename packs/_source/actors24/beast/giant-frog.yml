@@ -559,7 +559,7 @@ items:
         recovery: []
         max: ''
       description:
-        value: <p>The [[lookup @name lowercase]] can breathe air and water.</p>
+        value: <p>The [[lookup @name lowercase]]{creature} can breathe air and water.</p>
         chat: ''
       identifier: amphibious
       source:
@@ -609,7 +609,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]]'s Long Jump is up to
+          <p class="feature">The [[lookup @name lowercase]]{creature}'s Long Jump is up to
           20 feet and its High Jump is up to 10 feet with or without a running
           start.</p>
         chat: ''
@@ -1002,19 +1002,19 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] swallows a [[lookup
+          <p>The [[lookup @name lowercase]]{creature} swallows a [[lookup
           @target.affects.special activity=IPD9mDjKJEXc2uMQ]] target it is
           grappling. While swallowed, the target isn't Grappled but has the
           &amp;Reference[Blinded apply=false] and &amp;Reference[Restrained
           apply=false] conditions, and it has &amp;Reference[Total Cover]
           against attacks and other effects outside the frog.</p><p>While
-          swallowing the target, the [[lookup @name lowercase]] can't use Bite,
-          and if the [[lookup @name lowercase]] dies, the swallowed target is no
+          swallowing the target, the [[lookup @name lowercase]]{creature} can't use Bite,
+          and if the [[lookup @name lowercase]]{creature} dies, the swallowed target is no
           longer Restrained and can escape from the corpse using 5 feet of
           movement, exiting with the &amp;Reference[Prone apply=false]
-          condition.</p><p>At the end of the [[lookup @name lowercase]]'s next
+          condition.</p><p>At the end of the [[lookup @name lowercase]]{creature}'s next
           turn, the swallowed target takes [[/damage 2d4 acid average]] damage.
-          If that damage doesn't kill it, the [[lookup @name lowercase]]
+          If that damage doesn't kill it, the [[lookup @name lowercase]]{creature}
           disgorges it, causing it to exit &amp;Reference[Prone
           apply=false].</p>
         chat: ''

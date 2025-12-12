@@ -609,7 +609,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] makes two attacks,
+          <p class="feature">The [[lookup @name lowercase]]{creature} makes two attacks,
           using [[/item .mmFrostAxe000000]] or [[/item .mmGreatBow000000]] in
           any combination.</p>
         chat: ''
@@ -1090,10 +1090,10 @@ items:
         max: '1'
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] or one [[lookup
+          <p class="feature">The [[lookup @name lowercase]]{creature} or one [[lookup
           @target.affects.type activity=uN0VTW2Fqig7YAs9]] of its choice that
           can see or hear it gains [[/healing average temp]] and has Advantage
-          on attack rolls until the start of the [[lookup @name lowercase]]'s
+          on attack rolls until the start of the [[lookup @name lowercase]]{creature}'s
           next turn.</p>
         chat: ''
       identifier: war-cry

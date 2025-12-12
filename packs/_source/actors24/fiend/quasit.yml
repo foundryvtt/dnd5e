@@ -572,7 +572,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] has Advantage on saving throws
+          <p>The [[lookup @name lowercase]]{creature} has Advantage on saving throws
           against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
@@ -678,7 +678,7 @@ items:
         value: >-
           <p>[[/attack extended]]. [[/damage average extended]], and the target
           has the &amp;Reference[Poisoned apply=false] condition until the start
-          of the [[lookup @name lowercase]]'s next turn.</p>
+          of the [[lookup @name lowercase]]{creature}'s next turn.</p>
         chat: ''
       identifier: rend
       source:
@@ -760,7 +760,7 @@ items:
           startTurn: null
         description: >-
           <p> The target has the &amp;Reference[Poisoned apply=false] condition
-          until the start of the [[lookup @name lowercase]]’s next turn.</p>
+          until the start of the [[lookup @name lowercase]]{creature}’s next turn.</p>
         tint: '#ffffff'
         transfer: false
         statuses:
@@ -859,7 +859,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplInvisibili]{Invisibility}</em>
           on itself, requiring no spell components and using Charisma as the
           spellcasting ability.</p>
@@ -1173,7 +1173,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] shape-shifts to
+          <p class="feature">The [[lookup @name lowercase]]{creature} shape-shifts to
           resemble a bat (Speed 10 ft., Fly 40 ft.), a centipede (40 ft., Climb
           40 ft.), or a toad (40 ft., Swim 40 ft.), or it returns to its true
           form. Its game statistics are the same in each form, except for its

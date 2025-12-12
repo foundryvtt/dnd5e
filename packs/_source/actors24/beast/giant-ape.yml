@@ -605,7 +605,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes two [[/item
           .mmFist0000000000]] attacks.</p>
         chat: ''
       identifier: multiattack
@@ -880,7 +880,7 @@ items:
         max: '1'
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] hurls a boulder at a point it can
+          <p>The [[lookup @name lowercase]]{creature} hurls a boulder at a point it can
           see within [[lookup @range.value activity=jpC3fk7LJlhH4CDr]]
           feet.</p><p><em>Dexterity Saving Throw:</em> DC [[lookup
           @save.dc.value activity=jpC3fk7LJlhH4CDr]], each creature in a
@@ -989,7 +989,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] jumps up to [[lookup @range.value
+          <p>The [[lookup @name lowercase]]{creature} jumps up to [[lookup @range.value
           activity=C28C43DeD8iFtZMe]] feet by [[lookup @activation.condition
           activity=C28C43DeD8iFtZMe]].</p>
         chat: ''

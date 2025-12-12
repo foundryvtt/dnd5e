@@ -561,7 +561,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] can hold its breath
+          <p class="feature">The [[lookup @name lowercase]]{creature} can hold its breath
           for 10 minutes.</p>
         chat: ''
       identifier: hold-breath
@@ -652,7 +652,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes two [[/item
           .mmBite0000000000]] attacks.</p>
         chat: ''
       identifier: multiattack

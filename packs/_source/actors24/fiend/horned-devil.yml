@@ -575,7 +575,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] dies outside the Nine Hells, its
+          <p>If the [[lookup @name lowercase]]{creature} dies outside the Nine Hells, its
           body disappears in sulfurous smoke, and it gains a new body instantly,
           reviving with all its Hit Points somewhere in the Nine Hells.</p>
         chat: ''
@@ -626,7 +626,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] has Advantage on saving throws
+          <p>The [[lookup @name lowercase]]{creature} has Advantage on saving throws
           against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
@@ -723,7 +723,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes three attacks, using [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes three attacks, using [[/item
           .mmSearingFork000]] or [[/item .mmHurlFlame00000]] in any combination.
           It can replace one attack with a use of [[/item
           .mmInfernalTail00]].</p>

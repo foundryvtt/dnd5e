@@ -575,7 +575,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] dies outside the Nine Hells, its
+          <p>If the [[lookup @name lowercase]]{creature} dies outside the Nine Hells, its
           body disappears in sulfurous smoke, and it gains a new body instantly,
           reviving with all its Hit Points somewhere in the Nine Hells.</p>
         chat: ''
@@ -681,7 +681,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] emanates an aura in
+          <p class="feature">The [[lookup @name lowercase]]{creature} emanates an aura in
           a [[lookup @target.template.size activity=oT8238p9jXwVy76c]]-foot
           Emanation while it doesn't have the Incapacitated condition.</p><p
           class="feature"><em>Wisdom Saving Throw:</em> DC [[lookup
@@ -690,7 +690,7 @@ items:
           class="feature"><em>Failure:</em> The target has the
           &amp;Reference[Frightened apply=false] condition until the start of
           its next turn.</p><p class="feature"><em>Success:</em> The target is
-          immune to this [[lookup @name lowercase]]'s aura for 24 hours.</p>
+          immune to this [[lookup @name lowercase]]{creature}'s aura for 24 hours.</p>
         chat: ''
       identifier: fear-aura
       source:
@@ -781,7 +781,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] has Advantage on saving throws
+          <p>The [[lookup @name lowercase]]{creature} has Advantage on saving throws
           against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
@@ -878,7 +878,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes one [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes one [[/item
           .mmBite0000000000]] attack, two [[/item .mmDevilishClaw00]] attacks,
           and one [[/item .mmFieryMace00000]] attack.</p>
         chat: ''
@@ -981,7 +981,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] fails a saving throw, it can
+          <p>If the [[lookup @name lowercase]]{creature} fails a saving throw, it can
           choose to succeed instead.</p>
         chat: ''
       identifier: legendary-resistance

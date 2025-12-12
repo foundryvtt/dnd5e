@@ -583,7 +583,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] can move through other creatures and
+          <p>The [[lookup @name lowercase]]{creature} can move through other creatures and
           objects as if they were &amp;Reference[Difficult Terrain]. It takes
           [[/damage 1d10 average type=force]] damage if it ends its turn inside
           an object.</p>
@@ -640,7 +640,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>While in sunlight, the [[lookup @name lowercase]] has Disadvantage
+          <p>While in sunlight, the [[lookup @name lowercase]]{creature} has Disadvantage
           on ability checks and attack rolls.</p>
         chat: ''
       identifier: sunlight-sensitivity
@@ -883,14 +883,14 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] targets a Humanoid
+          <p class="feature">The [[lookup @name lowercase]]{creature} targets a Humanoid
           corpse within [[lookup @range.value activity=ypIQdXr13u7LATUP]] feet
           of itself that has been dead for no longer than 1 minute. The target's
           spirit rises as a
           <strong>@UUID[Compendium.dnd5e.actors24.Actor.mmSpecter0000000]{Specter}</strong>
           in the space of its corpse or in the nearest unoccupied space. The
-          specter is under the [[lookup @name lowercase]]'s control. The
-          [[lookup @name lowercase]] can have no more than seven specters under
+          specter is under the [[lookup @name lowercase]]{creature}'s control. The
+          [[lookup @name lowercase]]{creature} can have no more than seven specters under
           its control at a time.</p>
         chat: ''
       identifier: create-specter

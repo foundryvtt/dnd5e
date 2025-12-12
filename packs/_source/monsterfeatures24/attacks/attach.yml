@@ -107,11 +107,11 @@ system:
   description:
     value: >-
       <p>[[/attack extended]]. [[/damage average extended]]. If the target is a
-      Large or smaller creature, the [[lookup @name lowercase]] attaches to it.
-      While the [[lookup @name lowercase]] is attached, the target has the
+      Large or smaller creature, the [[lookup @name lowercase]]{creature} attaches to it.
+      While the [[lookup @name lowercase]]{creature} is attached, the target has the
       &amp;Reference[Blinded apply=false] condition, and the [[lookup @name
       lowercase]] can't make Bite attacks against other targets. In addition,
-      the [[lookup @name lowercase]] halves the damage it takes (round down),
+      the [[lookup @name lowercase]]{creature} halves the damage it takes (round down),
       and the target takes the same amount of damage.</p><p>The [[lookup @name
       lowercase]] can detach itself by spending 5 feet of movement. The target
       or a creature within [[lookup @range.value activity=6iLqAufAeEqDOlGs]]

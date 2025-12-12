@@ -559,7 +559,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] can breathe only underwater. It can
+          <p>The [[lookup @name lowercase]]{creature} can breathe only underwater. It can
           hold its breath for 1 hour outside water.</p>
         chat: ''
       identifier: water-breathing
@@ -902,11 +902,11 @@ items:
         max: ''
       description:
         value: >-
-          <p><em>Trigger</em>: The [[lookup @name lowercase]] takes damage while
-          underwater. <em>Response</em>: The [[lookup @name lowercase]] releases
+          <p><em>Trigger</em>: The [[lookup @name lowercase]]{creature} takes damage while
+          underwater. <em>Response</em>: The [[lookup @name lowercase]]{creature} releases
           ink that fills a [[lookup @target.template.size
           activity=1MiIPcVuCpfgBIkS]]-foot Cube centered on itself, and the
-          [[lookup @name lowercase]] moves up to its Swim Speed. The Cube is
+          [[lookup @name lowercase]]{creature} moves up to its Swim Speed. The Cube is
           Heavily Obscured for 1 minute or until a strong current or similar
           effect disperses the ink.</p>
         chat: ''

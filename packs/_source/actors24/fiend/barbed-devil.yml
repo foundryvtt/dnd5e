@@ -631,7 +631,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>At the start of each of its turns, the [[lookup @name lowercase]]
+          <p>At the start of each of its turns, the [[lookup @name lowercase]]{creature}
           deals [[/damage average]] damage to any creature [[lookup
           @target.affects.special activity=1O5eyc72vPW0UxYZ]].</p>
         chat: ''
@@ -687,7 +687,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] dies outside the Nine Hells, its
+          <p>If the [[lookup @name lowercase]]{creature} dies outside the Nine Hells, its
           body disappears in sulfurous smoke, and it gains a new body instantly,
           reviving with all its Hit Points somewhere in the Nine Hells.</p>
         chat: ''
@@ -738,7 +738,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] has Advantage on saving throws
+          <p>The [[lookup @name lowercase]]{creature} has Advantage on saving throws
           against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
@@ -835,7 +835,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes one [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes one [[/item
           .mmClaws000000000]] attack and one [[/item .mmTail0000000000]] attack,
           or it makes two [[/item .mmHurlFlame00000]] attacks.</p>
         chat: ''

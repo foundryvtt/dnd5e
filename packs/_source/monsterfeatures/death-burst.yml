@@ -8,7 +8,7 @@ system:
     value: >-
       <section class="secret">
 
-      <p>When the [[lookup @name lowercase]] dies, it explodes in a burst of
+      <p>When the [[lookup @name lowercase]]{creature} dies, it explodes in a burst of
       dust. Each creature within <strong>5 ft.</strong> of it must then succeed
       on a <strong>DC 10 Constitution saving throw</strong> or be blinded for
       <strong>1 minute</strong>. A blinded creature can repeat the saving throw
@@ -16,7 +16,7 @@ system:
 
       </section>
 
-      <p>When the [[lookup @name lowercase]] dies, it explodes in a burst of
+      <p>When the [[lookup @name lowercase]]{creature} dies, it explodes in a burst of
       dust. Each creature within <strong>5 ft.</strong> of it must make a
       <strong>Constitution</strong> saving throw.</p>
     chat: ''

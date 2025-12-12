@@ -8,14 +8,14 @@ system:
     value: >-
       <section class="secret">
 
-      <p>the [[lookup @name lowercase]] magically turns invisible until it
+      <p>the [[lookup @name lowercase]]{creature} magically turns invisible until it
       attacks, casts a spell, or uses its Enlarge, or until its concentration is
       broken, up to 1 hour (as if concentrating on a spell).</p>
 
       </section>
 
-      <p>the [[lookup @name lowercase]] magically turns invisible. Any equipment
-      the [[lookup @name lowercase]] wears or carries is invisible with it.</p>
+      <p>the [[lookup @name lowercase]]{creature} magically turns invisible. Any equipment
+      the [[lookup @name lowercase]]{creature} wears or carries is invisible with it.</p>
     chat: ''
   source:
     custom: ''

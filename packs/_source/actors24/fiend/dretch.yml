@@ -770,7 +770,7 @@ items:
           <p class="feature"><em>Constitution Saving Throw:</em> DC [[lookup
           @save.dc.value activity=vRnhmBCQqIwIlfS4]], each creature in a
           [[lookup @target.template.size activity=vRnhmBCQqIwIlfS4]]-foot
-          Emanation originating from the [[lookup @name lowercase]].</p><p
+          Emanation originating from the [[lookup @name lowercase]]{creature}.</p><p
           class="feature"><em>Failure:</em> The target has the
           &amp;Reference[Poisoned apply=false] condition until the end of its
           next turn. While Poisoned, the creature can take either an action or a

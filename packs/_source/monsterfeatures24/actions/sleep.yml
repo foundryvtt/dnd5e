@@ -62,7 +62,7 @@ system:
     max: '1'
   description:
     value: >-
-      <p>The [[lookup @name lowercase]] casts the
+      <p>The [[lookup @name lowercase]]{creature} casts the
       @UUID[Compendium.dnd5e.spells24.Item.phbsplSleep00000] spell, requiring no
       spell components and using Charisma as the spellcasting ability (spell
       save DC [[lookup @attributes.spell.dc]]).</p>

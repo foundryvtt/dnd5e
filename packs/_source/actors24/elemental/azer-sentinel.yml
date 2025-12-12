@@ -625,12 +625,12 @@ items:
         max: ''
       description:
         value: >-
-          <p>At the end of each of the [[lookup @name lowercase]]'s turns, each
+          <p>At the end of each of the [[lookup @name lowercase]]{creature}'s turns, each
           [[lookup @target.affects.type activity=15VgJKVXwYBOFSqJ]] of the
-          [[lookup @name lowercase]]'s choice in a [[lookup
+          [[lookup @name lowercase]]{creature}'s choice in a [[lookup
           @target.template.size activity=15VgJKVXwYBOFSqJ]]-foot Emanation
-          originating from the [[lookup @name lowercase]] takes [[/damage
-          average]] damage unless the [[lookup @name lowercase]] has the
+          originating from the [[lookup @name lowercase]]{creature} takes [[/damage
+          average]] damage unless the [[lookup @name lowercase]]{creature} has the
           Incapacitated condition.</p>
         chat: ''
       identifier: fire-aura
@@ -685,7 +685,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] sheds Bright Light in a 10-foot
+          <p>The [[lookup @name lowercase]]{creature} sheds Bright Light in a 10-foot
           radius and Dim Light for an additional 10 feet.</p>
         chat: ''
       identifier: illumination

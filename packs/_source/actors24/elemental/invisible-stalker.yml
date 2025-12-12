@@ -573,7 +573,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] can enter an enemy's space and stop
+          <p>The [[lookup @name lowercase]]{creature} can enter an enemy's space and stop
           there. It can move through a space as narrow as 1 inch without
           expending extra movement to do so.</p>
         chat: ''
@@ -625,7 +625,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] has the
+          <p class="feature">The [[lookup @name lowercase]]{creature} has the
           &amp;Reference[Invisible apply=false] condition.</p>
         chat: ''
       identifier: invisibility
@@ -716,7 +716,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes three [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes three [[/item
           .mmWindSwipe00000]] attacks. It can replace one attack with a use of
           [[/item .mmVortex00000000]].</p>
         chat: ''
@@ -1096,7 +1096,7 @@ items:
           @skills.ath.passive]]). Until the grapple ends, the target can't cast
           spells with a Verbal component and takes [[/damage average
           activity=kDz92inkRCjGrPiz]] damage at the start of each of the
-          [[lookup @name lowercase]]'s turns.</p>
+          [[lookup @name lowercase]]{creature}'s turns.</p>
         chat: ''
       identifier: vortex
       source:

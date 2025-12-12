@@ -8,20 +8,20 @@ system:
     value: >-
       <section class="secret">
 
-      <p>One humanoid the [[lookup @name lowercase]] can see within 30 feet of
+      <p>One humanoid the [[lookup @name lowercase]]{creature} can see within 30 feet of
       it must make a <strong>Wisdom</strong> saving throw or be magically
       charmed for 1 day. The charmed target obeys the [[lookup @name
       lowercase]]'s verbal or telepathic commands.</p><p>If the target suffers
       any harm or receives a suicidal command, it can repeat the saving throw,
       ending the effect on a success. If the target successfully saves against
       the effect, or if the effect on it ends, the target is immune to this
-      [[lookup @name lowercase]]'s Charm for the next 24 hours. the [[lookup
+      [[lookup @name lowercase]]{creature}'s Charm for the next 24 hours. the [[lookup
       @name lowercase]] can have only one target charmed at a time. If it charms
       another, the effect on the previous target ends.</p>
 
       </section>
 
-      <p>One humanoid the [[lookup @name lowercase]] can see within 30 feet of
+      <p>One humanoid the [[lookup @name lowercase]]{creature} can see within 30 feet of
       it must make a <strong>Wisdom</strong> saving throw.</p>
     chat: ''
   source:

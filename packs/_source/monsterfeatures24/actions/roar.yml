@@ -213,7 +213,7 @@ system:
       Roar.</strong> <em>Wisdom Saving Throw:</em> DC [[lookup @save.dc.value
       activity=Igeu89TALGlNPXDg]], each enemy in a [[lookup
       @target.template.size activity=Igeu89TALGlNPXDg]]-foot Emanation
-      originating from the [[lookup @name lowercase]]. <em>Failure:</em> The
+      originating from the [[lookup @name lowercase]]{creature}. <em>Failure:</em> The
       target has the &amp;Reference[Frightened apply=false] condition for
       [[lookup @duration.value activity=Igeu89TALGlNPXDg]] [[lookup
       @duration.units activity=Igeu89TALGlNPXDg]].</p><p
@@ -221,7 +221,7 @@ system:
       Throw:</em> DC [[lookup @save.dc.value activity=uFTndQPvULZVHT9R]], each
       [[lookup @target.affects.type activity=uFTndQPvULZVHT9R]] in a [[lookup
       @target.template.size activity=uFTndQPvULZVHT9R]]-foot Emanation
-      originating from the [[lookup @name lowercase]]. <em>Failure:</em> The
+      originating from the [[lookup @name lowercase]]{creature}. <em>Failure:</em> The
       target has the &amp;Reference[Paralyzed apply=false] condition, and it
       repeats the save at the end of each of its turns, ending the effect on
       itself on a success. After [[lookup @duration.value
@@ -231,7 +231,7 @@ system:
       Throw:</em> DC [[lookup @save.dc.value activity=Td8ArIMDfxWDLbE9]], each
       [[lookup @target.affects.type activity=Td8ArIMDfxWDLbE9]] in a [[lookup
       @target.template.size activity=Td8ArIMDfxWDLbE9]]-foot Emanation
-      originating from the [[lookup @name lowercase]]. <em>Failure:</em>
+      originating from the [[lookup @name lowercase]]{creature}. <em>Failure:</em>
       [[/damage average]] damage, and the target has the &amp;Reference[Prone
       apply=false] condition. <em>Success:</em> [[lookup @damage.onSave
       capitalize activity=Td8ArIMDfxWDLbE9]] damage only.</p>
