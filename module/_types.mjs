@@ -646,6 +646,7 @@
 
 /**
  * @typedef {UnitConfiguration} MovementUnitConfiguration
+ * @property {string} template                   Localized label for a template size (e.g. 50-foot).
  * @property {"day"|"round"} [travelResolution]  Whether the distance is per-round or per-day when used in the context
  *                                               of overland travel.
  */
