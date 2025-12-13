@@ -28,7 +28,7 @@
  * @property {object} damage
  * @property {DamageData} damage.base               Damage caused by this ammunition.
  * @property {string} damage.replace                Should ammunition damage replace the base weapon's damage?
- * @property {number} magicalBonus                  Magical bonus added to attack & damage rolls by ammunition.
+ * @property {string} magicalBonus                  Magical bonus added to attack & damage rolls by ammunition.
  * @property {Set<string>} properties               Ammunition properties.
  * @property {Omit<ItemTypeData, "baseItem">} type  Ammunition type and subtype.
  * @property {UsesData} uses
@@ -48,7 +48,7 @@
  * @typedef EquipmentItemSystemData
  * @property {object} armor                        Armor details and equipment type information.
  * @property {number} armor.value                  Base armor class or shield bonus.
- * @property {number} armor.magicalBonus           Bonus added to AC from the armor's magical nature.
+ * @property {string} armor.magicalBonus           Bonus added to AC from the armor's magical nature.
  * @property {number} armor.dex                    Maximum dex bonus added to armor class.
  * @property {number} proficient                   Does the owner have proficiency in this piece of equipment?
  * @property {Set<string>} properties              Equipment properties.
@@ -174,7 +174,7 @@
  * @property {object} damage
  * @property {DamageData} damage.base              Weapon's base damage.
  * @property {DamageData} damage.versatile         Weapon's versatile damage.
- * @property {number} magicalBonus                 Magical bonus added to attack & damage rolls.
+ * @property {string} magicalBonus                 Magical bonus added to attack & damage rolls.
  * @property {string} mastery                      Mastery Property usable with this weapon.
  * @property {Set<string>} properties              Weapon's properties.
  * @property {number} proficient                   Does the weapon's owner have proficiency?

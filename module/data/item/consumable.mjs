@@ -1,6 +1,7 @@
 import { filteredKeys } from "../../utils.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import BaseActivityData from "../activity/base-activity.mjs";
+import FormulaField from "../fields/formula-field.mjs";
 import DamageField from "../shared/damage-field.mjs";
 import UsesField from "../shared/uses-field.mjs";
 import ItemTypeField from "./fields/item-type-field.mjs";
@@ -57,7 +58,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
         base: new DamageField(),
         replace: new BooleanField()
       }),
-      magicalBonus: new NumberField({ min: 0, integer: true }),
+      magicalBonus: new FormulaField({ deterministic: true }),
       properties: new SetField(new StringField()),
       type: new ItemTypeField({ baseItem: false }, { label: "DND5E.ItemConsumableType" }),
       uses: new UsesField({
