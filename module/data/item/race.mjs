@@ -88,7 +88,7 @@ export default class RaceData extends ItemDataModel.mixin(AdvancementTemplate, I
   get sensesLabels() {
     const units = this.senses.units || defaultUnits("length");
     return Object.entries(CONFIG.DND5E.senses).reduce((arr, [k, label]) => {
-      const value = this.senses[k];
+      const value = this.senses.ranges[k];
       if ( value ) arr.push(`${label} ${formatLength(value, units)}`);
       return arr;
     }, []).concat(splitSemicolons(this.senses.special));
@@ -105,6 +105,16 @@ export default class RaceData extends ItemDataModel.mixin(AdvancementTemplate, I
   }
 
   /* -------------------------------------------- */
+  /*  Data Migration                              */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static _migrateData(source) {
+    super._migrateData(source);
+    SensesField._migrate(source.senses);
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
@@ -112,6 +122,7 @@ export default class RaceData extends ItemDataModel.mixin(AdvancementTemplate, I
   prepareDerivedData() {
     super.prepareDerivedData();
     this.prepareDescriptionData();
+    SensesField._shim(this.senses);
   }
 
   /* -------------------------------------------- */
@@ -149,7 +160,7 @@ export default class RaceData extends ItemDataModel.mixin(AdvancementTemplate, I
       config: "senses",
       tooltip: "DND5E.SensesConfig",
       value: Object.entries(CONFIG.DND5E.senses).reduce((str, [k, label]) => {
-        const value = this.senses[k];
+        const value = this.senses.ranges[k];
         if ( !value ) return str;
         return `${str}
           <span class="key">${label}</span>

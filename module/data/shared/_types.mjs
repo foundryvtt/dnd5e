@@ -77,12 +77,9 @@
 
 /**
  * @typedef SensesData
- * @property {number} darkvision       Creature's darkvision range.
- * @property {number} blindsight       Creature's blindsight range.
- * @property {number} tremorsense      Creature's tremorsense range.
- * @property {number} truesight        Creature's truesight range.
- * @property {string} units            Distance units used to measure senses.
- * @property {string} special          Description of any special senses or restrictions.
+ * @property {Record<string, number} ranges  Ranges of various senses.
+ * @property {string} units                  Distance units used to measure senses.
+ * @property {string} special                Description of any special senses or restrictions.
  */
 
 /**
