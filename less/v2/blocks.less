@@ -194,4 +194,18 @@
       }
     }
   }
+
+  .item-entry-details {
+    .item-entry-tag { font-style: italic; }
+    .item-entry-specifics {
+      :is(dt, dd) { display: inline; }
+      dt {
+        color: inherit;
+        text-shadow: none;
+        font-weight: bold;
+        &::after { content: ": "; }
+      }
+      dd { margin-inline-start: 0; }
+    }
+  }
 }
