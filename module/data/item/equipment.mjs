@@ -1,4 +1,6 @@
+import { simplifyBonus } from "../../utils.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
+import FormulaField from "../fields/formula-field.mjs";
 import ActivitiesTemplate from "./templates/activities.mjs";
 import EquippableItemTemplate from "./templates/equippable-item.mjs";
 import IdentifiableTemplate from "./templates/identifiable.mjs";
@@ -53,7 +55,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
     return this.mergeSchema(super.defineSchema(), {
       armor: new SchemaField({
         value: new NumberField({ required: true, integer: true, min: 0, label: "DND5E.ArmorClass" }),
-        magicalBonus: new NumberField({ min: 0, integer: true, label: "DND5E.MagicalBonus" }),
+        magicalBonus: new FormulaField({ deterministic: true, label: "DND5E.MagicalBonus" }),
         dex: new NumberField({ required: true, integer: true, label: "DND5E.ItemEquipmentDexMod" })
       }),
       proficient: new NumberField({
@@ -277,7 +279,8 @@ export default class EquipmentData extends ItemDataModel.mixin(
     this.prepareIdentifiable();
     this.preparePhysicalData();
     this.prepareMountableData();
-    if ( this.magicAvailable && this.armor.magicalBonus ) this.armor.value += this.armor.magicalBonus;
+    const magicalBonus = simplifyBonus(this.armor.magicalBonus, this.parent.getRollData());
+    if ( this.magicAvailable && magicalBonus ) this.armor.value += magicalBonus;
     this.type.label = CONFIG.DND5E.equipmentTypes[this.type.value]
       ?? game.i18n.localize(CONFIG.Item.typeLabels.equipment);
     this.type.identifier = this.type.value === "shield"

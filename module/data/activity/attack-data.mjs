@@ -1,5 +1,5 @@
 import simplifyRollFormula from "../../dice/simplify-roll-formula.mjs";
-import { convertLength, formatLength, formatNumber } from "../../utils.mjs";
+import { convertLength, formatLength, formatNumber, simplifyBonus } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import DamageField from "../shared/damage-field.mjs";
 import BaseActivityData from "./base-activity.mjs";
@@ -392,16 +392,18 @@ export default class BaseAttackActivityData extends BaseActivityData {
       if ( includeMod && !roll.parts.some(p => p.includes("@mod")) ) roll.parts.push("@mod");
 
       // Add magical bonus
-      if ( this.item.system.magicalBonus && this.item.system.magicAvailable ) {
+      const magicalBonus = simplifyBonus(this.item.system.magicalBonus, rollData);
+      if ( magicalBonus && this.item.system.magicAvailable ) {
         roll.parts.push("@magicalBonus");
-        roll.data.magicalBonus = this.item.system.magicalBonus;
+        roll.data.magicalBonus = magicalBonus;
       }
 
       // Add ammunition bonus
       const ammo = rollConfig.ammunition?.system;
-      if ( ammo?.magicAvailable && ammo.magicalBonus ) {
+      const ammoMagicalBonus = simplifyBonus(ammo?.magicalBonus, rollData);
+      if ( ammo?.magicAvailable && ammoMagicalBonus ) {
         roll.parts.push("@ammoBonus");
-        roll.data.ammoBonus = ammo.magicalBonus;
+        roll.data.ammoBonus = ammoMagicalBonus;
       }
     }
 
