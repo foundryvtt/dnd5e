@@ -46,6 +46,10 @@ ______      ______ _____ _____
 |___/ \\___/\\/___/ \\____/\\____/
 _______________________________`;
 
+/* -------------------------------------------- */
+/*  Abilities                                   */
+/* -------------------------------------------- */
+
 /**
  * The set of Ability Scores used within the system.
  * @enum {AbilityConfiguration}
@@ -121,6 +125,8 @@ DND5E.abilities = {
 };
 preLocalize("abilities", { keys: ["label", "abbreviation"] });
 
+/* -------------------------------------------- */
+
 /**
  * Configure which ability score is used as the default modifier for initiative rolls,
  * when calculating hit points per level and hit dice, and as the default modifier for
@@ -135,6 +141,16 @@ DND5E.defaultAbilities = {
   concentration: "con"
 };
 
+/* -------------------------------------------- */
+
+/**
+ * Maximum ability score value allowed by default.
+ * @type {number}
+ */
+DND5E.maxAbilityScore = 20;
+
+/* -------------------------------------------- */
+/*  Skills                                      */
 /* -------------------------------------------- */
 
 /**
@@ -3923,6 +3939,8 @@ DND5E.communicationTypes = {
 preLocalize("communicationTypes", { key: "label" });
 
 /* -------------------------------------------- */
+/*  Habitats & Treasure                         */
+/* -------------------------------------------- */
 
 /**
  * NPC habitats.
@@ -4001,6 +4019,8 @@ DND5E.treasure = {
 preLocalize("treasure", { key: "label" });
 
 /* -------------------------------------------- */
+/*  Leveling & Experience                       */
+/* -------------------------------------------- */
 
 /**
  * Maximum allowed character level.
@@ -4008,11 +4028,7 @@ preLocalize("treasure", { key: "label" });
  */
 DND5E.maxLevel = 20;
 
-/**
- * Maximum ability score value allowed by default.
- * @type {number}
- */
-DND5E.maxAbilityScore = 20;
+/* -------------------------------------------- */
 
 /**
  * XP required to achieve each character level.
@@ -4023,6 +4039,8 @@ DND5E.CHARACTER_EXP_LEVELS = [
   120000, 140000, 165000, 195000, 225000, 265000, 305000, 355000
 ];
 
+/* -------------------------------------------- */
+
 /**
  * XP granted for each challenge rating.
  * @type {number[]}
@@ -4031,6 +4049,8 @@ DND5E.CR_EXP_LEVELS = [
   10, 200, 450, 700, 1100, 1800, 2300, 2900, 3900, 5000, 5900, 7200, 8400, 10000, 11500, 13000, 15000, 18000,
   20000, 22000, 25000, 33000, 41000, 50000, 62000, 75000, 90000, 105000, 120000, 135000, 155000
 ];
+
+/* -------------------------------------------- */
 
 /**
  * XP thresholds for encounter difficulty.
@@ -4060,12 +4080,16 @@ DND5E.ENCOUNTER_DIFFICULTY = [
   [6400, 13200, 22000]
 ];
 
+/* -------------------------------------------- */
+
 /**
  * Intervals above the maximum XP that result in an epic boon.
  * @type {number}
  */
 DND5E.epicBoonInterval = 30000;
 
+/* -------------------------------------------- */
+/*  Traits                                      */
 /* -------------------------------------------- */
 
 /**
