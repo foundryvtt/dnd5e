@@ -258,6 +258,12 @@ export default class CreatureTemplate extends CommonTemplate {
       skillData.total += difference;
     }
 
+    const isLegacy = game.settings.get("dnd5e", "rulesVersion") === "legacy";
+    if ( flags.remarkableAthlete
+      && CONFIG.DND5E.characterFlags.remarkableAthlete.skills.includes(skillId) && !isLegacy ) {
+      AdvantageModeField.setMode(this, `skills.${skillId}.roll.mode`, 1);
+    }
+
     // Compute passive bonus
     const passive = flags.observantFeat && CONFIG.DND5E.characterFlags.observantFeat.skills.includes(skillId) ? 5 : 0;
     const passiveBonus = simplifyBonus(skillData.bonuses?.passive, rollData);
