@@ -3643,6 +3643,7 @@ class IdentifiedItemsMap extends Map {
 
   /** @inheritDoc */
   set(key, value) {
+    if ( !key ) return this;
     if ( !this.has(key) ) super.set(key, new Set());
     this.get(key).add(value);
     return this;
