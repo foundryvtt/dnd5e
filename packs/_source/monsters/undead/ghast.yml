@@ -495,11 +495,10 @@ items:
     system:
       description:
         value: >-
-          <p>Any creature that starts its turn within <strong>5 ft.</strong> of
-          the ghast must succeed on a <strong>DC 10 Constitution saving
-          throw</strong> or be poisoned until the start of its next turn. On a
-          successful saving throw, the creature is immune to the ghast's Stench
-          for 24 hours.</p>
+          <p>Any creature that starts its turn within 5 feet of the ghast must
+          succeed on a DC 10 Constitution saving throw or be poisoned until the
+          start of its next turn. On a successful saving throw, the creature is
+          immune to the ghast's Stench for 24 hours.</p>
         chat: >-
           <p>Any creature that starts its turn within <strong>5 ft.</strong> of
           the ghast must succeed on a Constitution saving throw.</p>
@@ -589,11 +588,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.OsPhT7jA5LlvUA6e
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676781
+      modifiedTime: 1765828041131
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!IyIybE5t2adMEVUM.gBiHo206x7uGoySO'
@@ -604,9 +603,8 @@ items:
     system:
       description:
         value: >-
-          <p>The ghast and any ghouls within <strong>30 ft.</strong> of it
-          have<strong> advantage </strong>on saving throws against effects that
-          turn undead.</p>
+          <p>The ghast and any ghouls within 30 feet of it have advantage on
+          saving throws against effects that turn undead.</p>
         chat: ''
       source:
         custom: ''
@@ -638,12 +636,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.oi1sikVSw463lQlp
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1765828051385
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!IyIybE5t2adMEVUM.WjqNhFTYP9w4gGHd'
   - _id: nSgLkorv2oln5BIt
@@ -817,11 +815,11 @@ items:
     system:
       description:
         value: >-
-          <p>[[/attack extended]]. [[/damage extended]]. </p><p>If the target is
-          a creature other than an undead, it must succeed on a  <strong>DC 10
-          Constitution</strong> saving throw or be paralyzed for 1 minute. The
-          target can repeat the saving throw at the end of each of its turns,
-          ending the effect on itself on a success.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
+          a creature other than an undead, it must succeed on a DC 10
+          Constitution saving throw or be paralyzed for 1 minute. The target can
+          repeat the saving throw at the end of each of its turns, ending the
+          effect on itself on a success.</p>
         chat: >-
           <p>The Ghast attacks with its Claws. If the target is a creature other
           than an undead, it must make a <strong>Constitution</strong> saving
@@ -961,10 +959,68 @@ items:
             includeBase: true
             parts: []
           sort: 0
+        ZD0bnBuStMv4GFbh:
+          type: save
+          _id: ZD0bnBuStMv4GFbh
+          sort: 0
+          activation:
+            type: action
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: self
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          damage:
+            onSave: half
+            parts: []
+          save:
+            ability:
+              - con
+            dc:
+              calculation: ''
+              formula: '10'
+          name: ''
+          img: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: claws
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -974,11 +1030,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1745107551051
+      modifiedTime: 1765828064995
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!IyIybE5t2adMEVUM.ricjyd1SKzeQ5gQE'

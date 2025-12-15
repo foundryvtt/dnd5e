@@ -600,14 +600,13 @@ items:
     system:
       description:
         value: >-
-          <p>[[/attack extended]]. [[/damage extended]]. </p><p>If the target is
-          a creature, it must succeed on a  <strong>DC 12 Constitution</strong>
-          saving throw or be cursed with mummy rot. The cursed target can't
-          regain hit points, and its hit point maximum decreases by 10 (3d6) for
-          every 24 hours that elapse. If the curse reduces the target's hit
-          point maximum to 0, the target dies, and its body turns to dust. The
-          curse lasts until removed by the remove curse spell or other
-          magic.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
+          a creature, it must succeed on a DC 12 Constitution saving throw or be
+          cursed with mummy rot. The cursed target can't regain hit points, and
+          its hit point maximum decreases by 10 (3d6) for every 24 hours that
+          elapse. If the curse reduces the target's hit point maximum to 0, the
+          target dies, and its body turns to dust. The curse lasts until removed
+          by the remove curse spell or other magic.</p>
         chat: >-
           <p>The Mummy attacks with its Rotting Fist. If the target is a
           creature, it must make a <strong>Constitution</strong> saving
@@ -808,19 +807,7 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts:
-              - number: 2
-                denomination: 6
-                bonus: '@mod'
-                types:
-                  - bludgeoning
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            parts: []
           save:
             ability: con
             dc:
@@ -831,6 +818,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: rotting-fist
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -840,11 +828,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1745107553847
+      modifiedTime: 1765828401412
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!t8WYD7ak07X7xpx8.ik1IkSZi4fpiGbB3'
@@ -856,12 +844,12 @@ items:
       description:
         value: >-
           <p>The mummy targets one creature it can see within 60 ft. of it. If
-          the target can see the mummy, it must succeed on a  <strong>DC 11
-          Wisdom</strong> saving throw against this magic or become frightened
-          until the end of the mummy's next turn. </p><p>If the target fails the
-          saving throw by 5 or more, it is also paralyzed for the same duration.
-          A target that succeeds on the saving throw is immune to the Dreadful
-          Glare of all mummies (but not mummy lords) for the next 24 hours.</p>
+          the target can see the mummy, it must succeed on a DC 11 Wisdom saving
+          throw against this magic or become frightened until the end of the
+          mummy's next turn.</p><p>If the target fails the saving throw by 5 or
+          more, it is also paralyzed for the same duration. A target that
+          succeeds on the saving throw is immune to the Dreadful Glare of all
+          mummies (but not mummy lords) for the next 24 hours.</p>
         chat: >-
           <p>The mummy targets one creature it can see within 60 ft. of it. If
           the target can see the mummy, it must make a <strong>Wisdom</strong>
@@ -953,11 +941,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.H306eluIH47Wfr0U
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676609
+      modifiedTime: 1765828409328
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!t8WYD7ak07X7xpx8.8Jju4CVZaIDab6Ju'

@@ -654,11 +654,10 @@ items:
     system:
       description:
         value: >-
-          <p>If damage reduces the zombie to <strong>0 hit points</strong>, it
-          must make a <strong>Constitution</strong> saving throw with a DC of
-          5+the damage taken, unless the damage is radiant or from a critical
-          hit. On a success, the zombie drops to <strong>1 hit point</strong>
-          instead.</p>
+          <p>If damage reduces the zombie to 0 hit points, it must make a
+          Constitution saving throw with a DC of 5+the damage taken, unless the
+          damage is radiant or from a critical hit. On a success, the zombie
+          drops to 1 hit point instead.</p>
         chat: >-
           <p>If damage reduces the zombie to <strong>0 hit points</strong>, it
           must make a <strong>Constitution</strong> saving throw.</p>
@@ -692,11 +691,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.VYAnJjIgb5nPXfRr
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676571
+      modifiedTime: 1765828935763
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!RenLfmDT2XlbCF4x.NPmV7puA7Yg3esqg'
