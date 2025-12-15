@@ -596,20 +596,21 @@ items:
           <p>The sphinx is a 12th-level spellcaster. Its spellcasting ability is
           Wisdom (spell save DC 18, +10 to hit with spell attacks). It requires
           no material components to cast its spells. The sphinx has the
-          following cleric spells prepared:</p><p>• Cantrips (at will): [[/item
+          following cleric spells prepared:</p><p>Cantrips (at will): [[/item
           .n9pJzTDsAwQxJVRl]]{sacred flame}, [[/item .8zT7njvqbpXs4Cel]]{spare
-          the dying}, [[/item .MUO1uYN7JR1hm4dR]]{thaumaturgy}• 1st level (4
-          slots): [[/item .arzCrMRgcNiQuh43]]{command}, [[/item
+          the dying}, [[/item .MUO1uYN7JR1hm4dR]]{thaumaturgy}</p><p>1st level
+          (4 slots): [[/item .arzCrMRgcNiQuh43]]{command}, [[/item
           .Mzh95utKDPIrjiH8]]{detect evil and good}, [[/item
-          .ghXTfe7sgCbgf1Q8]]{detect magic}• 2nd level (3 slots): [[/item
+          .ghXTfe7sgCbgf1Q8]]{detect magic}</p><p>2nd level (3 slots): [[/item
           .F0GsG0SJzsIOacwV]]{lesser restoration}, [[/item
-          .CylBa7jR8DSbo8Z3]]{zone of truth}• 3rd level (3 slots): [[/item
+          .CylBa7jR8DSbo8Z3]]{zone of truth}</p><p>3rd level (3 slots): [[/item
           .15Fa6q1nH27XfbR8]]{dispel magic}, [[/item
-          .gopnZvS0c2jD5FP8]]{tongues}• 4th level (3 slots): [[/item
+          .gopnZvS0c2jD5FP8]]{tongues}</p><p>4th level (3 slots): [[/item
           .pxpb2eOB6bv4phAf]]{banishment}, [[/item .da0a1t2FqaTjRZGT]]{freedom
-          of movement}• 5th level (2 slots): [[/item .5e1xTohkzqFqbYH4]]{flame
-          strike}, [[/item .WzvJ7G3cqvIubsLk]]{greater restoration}• 6th level
-          (1 slot): [[/item .mgFqi0ev8f7Ut19y]]{heroes' feast}</p>
+          of movement}</p><p>5th level (2 slots): [[/item
+          .5e1xTohkzqFqbYH4]]{flame strike}, [[/item .WzvJ7G3cqvIubsLk]]{greater
+          restoration}</p><p>6th level (1 slot): [[/item
+          .mgFqi0ev8f7Ut19y]]{heroes' feast}</p>
         chat: >-
           <p>The sphinx is a spellcaster. Its spellcasting ability is
           Wisdom.</p>
@@ -643,11 +644,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.fdmzHw875EzpXM2a
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1745447015920
+      modifiedTime: 1765824512170
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!nEC1BRwM8Lx9hLXW.zXzGfPnSFJbfZ7oW'
@@ -925,19 +926,21 @@ items:
           <p>The sphinx emits a magical roar. Each time it roars before
           finishing a long rest, the roar is louder and the effect is different,
           as detailed below. Each creature within 500 feet of the sphinx and
-          able to hear the roar must make a saving throw.</p><p>**First Roar.**
-          Each creature that fails a  <strong>DC 18 Wisdom</strong> saving throw
-          is frightened for 1 minute. A frightened creature can repeat the
-          saving throw at the end of each of its turns, ending the effect on
-          itself on a success.**Second Roar.** Each creature that fails a 
-          <strong>DC 18 Wisdom</strong> saving throw is deafened and frightened
-          for 1 minute. A frightened creature is paralyzed and can repeat the
-          saving throw at the end of each of its turns, ending the effect on
-          itself on a success.**Third Roar.** Each creature makes a  <strong>DC
-          18 Constitution</strong> saving throw. On a failed save, a creature
-          takes 44 (8d10) thunder damage and is knocked prone. On a successful
-          save, the creature takes half as much damage and isn't knocked
-          prone.</p>
+          able to hear the roar must make a saving throw.</p><p><strong>First
+          Roar.</strong> Each creature that fails a DC 18 Wisdom saving throw is
+          &amp;Reference[frightened apply=false]{frightened} for 1 minute. A
+          frightened creature can repeat the saving throw at the end of each of
+          its turns, ending the effect on itself on a
+          success.</p><p><strong>Second Roar.</strong> Each creature that fails
+          a DC 18 Wisdom saving throw is &amp;Reference[deafened
+          apply=false]{deafened} and frightened for 1 minute. A frightened
+          creature is &amp;Reference[paralyzed apply=false]{paralyzed} and can
+          repeat the saving throw at the end of each of its turns, ending the
+          effect on itself on a success.</p><p><strong>Third Roar.</strong> Each
+          creature makes a DC 18 Constitution saving throw. On a failed save, a
+          creature takes 44 (8d10) thunder damage and is knocked
+          &amp;Reference[prone]{prone}. On a successful save, the creature takes
+          half as much damage and isn't knocked prone.</p>
         chat: >-
           <p>The sphinx emits a magical roar. Each time it roars before
           finishing a long rest, the roar is louder and the effect is different.
@@ -962,22 +965,18 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
+        YEy36H064rrzAAxY:
+          type: save
           activation:
             type: action
-            value: 1
+            value: null
             condition: ''
             override: false
           consumption:
             targets:
               - type: itemUses
-                target: ''
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: ''
             scaling:
               allowed: false
               max: ''
@@ -986,25 +985,25 @@ items:
             chatFlavor: ''
           duration:
             concentration: false
-            value: ''
-            units: ''
+            value: '1'
+            units: minute
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: 8y59T2g8cbSOAHCs
           range:
-            value: '500'
-            units: ft
+            units: self
             special: ''
             override: false
           target:
             template:
               count: ''
               contiguous: false
-              type: ''
-              size: ''
+              type: radius
+              size: '500'
               width: ''
               height: ''
-              units: any
+              units: ft
             affects:
               count: ''
               type: creature
@@ -1016,64 +1015,29 @@ items:
             spent: 0
             max: ''
             recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
+          damage:
+            onSave: half
+            parts: []
+          save:
+            ability:
+              - wis
+            dc:
+              calculation: wis
+              formula: '18'
           sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: roar
-    effects: []
-    folder: null
-    sort: 300000
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.QCNJD2GuOZSTT4Wt
-      duplicateSource: null
-      coreVersion: '13.350'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1760378366024
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!nEC1BRwM8Lx9hLXW.ez87kySQJgKUPT9L'
-  - _id: sCcGdT18vb7al854
-    name: First Roar
-    type: feat
-    img: icons/magic/sonic/scream-wail-shout-teal.webp
-    system:
-      description:
-        value: >-
-          <p>Each creature that fails a  <strong>DC 18 Wisdom</strong> saving
-          throw is frightened for 1 minute. A frightened creature can repeat the
-          saving throw at the end of each of its turns, ending the effect on
-          itself on a success.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+          name: First Roar
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: YEy36H064rrzAAxY
+          img: ''
+        bw7Ol7mkkyDDH3LD:
           type: save
           activation:
             type: action
@@ -1084,7 +1048,7 @@ items:
             targets:
               - type: itemUses
                 value: '1'
-                target: ez87kySQJgKUPT9L
+                target: ''
             scaling:
               allowed: false
               max: ''
@@ -1097,23 +1061,24 @@ items:
             units: minute
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: zFYAB0S0YmMO1C8D
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
             template:
               count: ''
               contiguous: false
-              type: ''
-              size: ''
+              type: radius
+              size: '500'
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -1126,66 +1091,25 @@ items:
             onSave: half
             parts: []
           save:
-            ability: wis
+            ability:
+              - wis
             dc:
-              calculation: ''
+              calculation: wis
               formula: '18'
           sort: 0
-          name: ''
+          name: Second Roar
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: bw7Ol7mkkyDDH3LD
           img: ''
-          appliedEffects: []
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: first-roar
-    effects: []
-    folder: null
-    sort: 400000
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.T25IRJ66yUqi2F1m
-      duplicateSource: null
-      coreVersion: '13.350'
-      systemId: dnd5e
-      systemVersion: 5.2.0
-      createdTime: null
-      modifiedTime: 1760378483118
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!nEC1BRwM8Lx9hLXW.sCcGdT18vb7al854'
-  - _id: hrPPu1rypQZWPHDp
-    name: Second Roar
-    type: feat
-    img: icons/magic/sonic/scream-wail-shout-teal.webp
-    system:
-      description:
-        value: >-
-          <p>Each creature that fails a  <strong>DC 18 Wisdom</strong> saving
-          throw is deafened and frightened for 1 minute. A frightened creature
-          is paralyzed and can repeat the saving throw at the end of each of its
-          turns, ending the effect on itself on a success.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        euc6EMlISPKQtmY5:
           type: save
           activation:
             type: action
@@ -1196,119 +1120,7 @@ items:
             targets:
               - type: itemUses
                 value: '1'
-                target: ez87kySQJgKUPT9L
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: '1'
-            units: minute
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ''
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          damage:
-            onSave: half
-            parts: []
-          save:
-            ability: wis
-            dc:
-              calculation: ''
-              formula: '18'
-          sort: 0
-          name: ''
-          img: ''
-          appliedEffects: []
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: second-roar
-    effects: []
-    folder: null
-    sort: 500000
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.lWnUAwBPfJf9WupM
-      duplicateSource: null
-      coreVersion: '13.350'
-      systemId: dnd5e
-      systemVersion: 5.2.0
-      createdTime: null
-      modifiedTime: 1760378493850
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!nEC1BRwM8Lx9hLXW.hrPPu1rypQZWPHDp'
-  - _id: guh5qlJFR8iKncKj
-    name: Third Roar
-    type: feat
-    img: icons/magic/sonic/scream-wail-shout-teal.webp
-    system:
-      description:
-        value: >-
-          <p>Each creature makes a  <strong>DC 18 Constitution</strong> saving
-          throw. On a failed save, a creature takes 44 (8d10) thunder damage and
-          is knocked prone. On a successful save, the creature takes half as
-          much damage and isn't knocked prone.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: save
-          activation:
-            type: action
-            value: null
-            condition: ''
-            override: false
-          consumption:
-            targets:
-              - type: itemUses
-                value: '1'
-                target: ez87kySQJgKUPT9L
+                target: ''
             scaling:
               allowed: false
               max: ''
@@ -1318,26 +1130,26 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
             template:
               count: ''
               contiguous: false
-              type: ''
-              size: ''
+              type: radius
+              size: '500'
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -1358,42 +1170,130 @@ items:
                 types:
                   - thunder
           save:
-            ability: con
+            ability:
+              - con
             dc:
-              calculation: ''
+              calculation: wis
               formula: '18'
           sort: 0
-          name: ''
+          name: Third Roar
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: euc6EMlISPKQtmY5
           img: ''
-          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
-      identifier: third-roar
-    effects: []
+      identifier: roar
+    effects:
+      - name: Frightened
+        img: systems/dnd5e/icons/svg/statuses/frightened.svg
+        origin: Compendium.dnd5e.monsters.Actor.nEC1BRwM8Lx9hLXW.Item.ez87kySQJgKUPT9L
+        transfer: false
+        _id: 8y59T2g8cbSOAHCs
+        type: base
+        system: {}
+        changes: []
+        disabled: false
+        duration:
+          startTime: null
+          combat: null
+          seconds: 60
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        tint: '#ffffff'
+        statuses:
+          - frightened
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.3
+          createdTime: 1765824670938
+          modifiedTime: 1765824693547
+          lastModifiedBy: dnd5ebuilder0000
+        _key: >-
+          !actors.items.effects!nEC1BRwM8Lx9hLXW.ez87kySQJgKUPT9L.8y59T2g8cbSOAHCs
+      - name: Deafened, Frightened, & Paralyzed
+        img: systems/dnd5e/icons/svg/statuses/deafened.svg
+        origin: Compendium.dnd5e.monsters.Actor.nEC1BRwM8Lx9hLXW.Item.ez87kySQJgKUPT9L
+        transfer: false
+        _id: zFYAB0S0YmMO1C8D
+        type: base
+        system: {}
+        changes: []
+        disabled: false
+        duration:
+          startTime: null
+          combat: null
+          seconds: 60
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        tint: '#ffffff'
+        statuses:
+          - deafened
+          - frightened
+          - paralyzed
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.3
+          createdTime: 1765824705378
+          modifiedTime: 1765824758890
+          lastModifiedBy: dnd5ebuilder0000
+        _key: >-
+          !actors.items.effects!nEC1BRwM8Lx9hLXW.ez87kySQJgKUPT9L.zFYAB0S0YmMO1C8D
     folder: null
-    sort: 600000
+    sort: 300000
     ownership:
       default: 0
     flags: {}
     _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.WtQHjfWuFrsYEns3
+      compendiumSource: Compendium.dnd5e.monsterfeatures.QCNJD2GuOZSTT4Wt
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1760378502218
+      modifiedTime: 1765824842919
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!nEC1BRwM8Lx9hLXW.guh5qlJFR8iKncKj'
+    _key: '!actors.items!nEC1BRwM8Lx9hLXW.ez87kySQJgKUPT9L'
   - _id: fZY6aMo87z2iSl9Q
     name: Claw Attack
     type: feat
     img: icons/skills/melee/blood-slash-foam-red.webp
     system:
       description:
-        value: <p>The sphinx makes one claw attack.</p>
+        value: <p>The sphinx makes one [[/item .yotsIj19d5spOVGb]]{claw} attack.</p>
         chat: ''
       source:
         custom: ''
@@ -1484,12 +1384,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.DPrO7eVVxiKD8QWD
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1765825709190
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!nEC1BRwM8Lx9hLXW.fZY6aMo87z2iSl9Q'
   - _id: ZZdoas8GMbE3AzzZ

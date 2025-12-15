@@ -491,9 +491,8 @@ items:
     system:
       description:
         value: >-
-          <p>In the first round of a combat, the doppelganger has<strong>
-          advantage </strong>on attack rolls against any creature it has
-          surprised.</p>
+          <p>In the first round of a combat, the doppelganger has advantage on
+          attack rolls against any creature it has surprised.</p>
         chat: ''
       source:
         custom: ''
@@ -518,19 +517,19 @@ items:
       identifier: ambusher
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EMygUh5uRujWaFYK
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1765825336192
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!mWbrPhcKOz6oLXMV.Cp2MgsVDDSRiF2aj'
   - _id: yfN4gklLV7zqhzxo
@@ -632,19 +631,19 @@ items:
       identifier: surprise-attack
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.5DJYFjGQCz5aSl5e
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1765825331013
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!mWbrPhcKOz6oLXMV.yfN4gklLV7zqhzxo'
   - _id: Sr7ZTAYd1TQ6Nfto
@@ -1028,11 +1027,11 @@ items:
     system:
       description:
         value: >-
-          <p>The doppelganger can use its action to <strong>polymorph</strong>
-          into a Small or Medium humanoid it has seen, or back into its true
-          form.</p><p>Its statistics, other than its size, are the same in each
-          form. Any equipment it is wearing or carrying isn't transformed. It
-          reverts to its true form if it dies.</p>
+          <p>The doppelganger can use its action to polymorph into a Small or
+          Medium humanoid it has seen, or back into its true form.</p><p>Its
+          statistics, other than its size, are the same in each form. Any
+          equipment it is wearing or carrying isn't transformed. It reverts to
+          its true form if it dies.</p>
         chat: >-
           <p>The doppelganger can use its action to <strong>polymorph</strong>
           into a Small or Medium humanoid it has seen, or back into its true
@@ -1052,7 +1051,8 @@ items:
         value: ''
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
@@ -1120,11 +1120,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.VhByyxHJN7MNQJRd
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676742
+      modifiedTime: 1765825332121
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!mWbrPhcKOz6oLXMV.cG4WdhcrTZt6rxUi'

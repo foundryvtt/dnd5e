@@ -490,11 +490,11 @@ items:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
-          succeed on a  <strong>DC 11 Constitution</strong> saving throw against
-          being magically petrified. On a failed save, the creature begins to
-          turn to stone and is restrained. It must repeat the saving throw at
-          the end of its next turn. On a success, the effect ends. On a failure,
-          the creature is petrified for 24 hours.</p>
+          succeed on a DC 11 Constitution saving throw against being magically
+          petrified. On a failed save, the creature begins to turn to stone and
+          is restrained. It must repeat the saving throw at the end of its next
+          turn. On a success, the effect ends. On a failure, the creature is
+          petrified for 24 hours.</p>
         chat: >-
           <p>The Cockatrice attacks with its Bite. The target must make a
           <strong>Constitution</strong> saving throw. On a failed save, it must
@@ -684,19 +684,7 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts:
-              - number: 1
-                denomination: 4
-                bonus: '@mod'
-                types:
-                  - piercing
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            parts: []
           save:
             ability: con
             dc:
@@ -707,6 +695,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -716,11 +705,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1745107550914
+      modifiedTime: 1765825179291
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!EpYl7qifM5pq6W6B.gpxvIs8yjQ4awt4s'

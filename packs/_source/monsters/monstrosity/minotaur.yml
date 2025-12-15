@@ -492,10 +492,9 @@ items:
         value: >-
           <p>If the minotaur moves at least 10 ft. straight toward a target and
           then hits it with a gore attack on the same turn, the target takes an
-          extra <strong>9 (2d8) <em>piercing damage</em></strong>. </p><p>If the
-          target is a creature, it must succeed on a  <strong>DC 14
-          Strength</strong> saving throw or be pushed up to 10 ft. away and
-          knocked prone.</p>
+          extra 9 (2d8) piercing damage.</p><p>If the target is a creature, it
+          must succeed on a DC 14 Strength saving throw or be pushed up to 10
+          ft. away and knocked prone.</p>
         chat: >-
           <p>If the minotaur moves at least 10 ft. straight toward a target and
           then hits it with a gore attack on the same turn, the target takes
@@ -519,72 +518,6 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: damage
-          activation:
-            type: ''
-            value: null
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '10'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          damage:
-            critical:
-              allow: false
-              bonus: ''
-            parts:
-              - number: 2
-                denomination: 8
-                bonus: ''
-                types:
-                  - piercing
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
         dnd5eactivity100:
           _id: dnd5eactivity100
           type: save
@@ -634,26 +567,29 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: full
             parts:
-              - number: 2
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 2
                 denomination: 8
                 bonus: ''
                 types:
                   - piercing
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
           save:
             ability: str
             dc:
               calculation: ''
               formula: '14'
           sort: 0
+          name: ''
+          img: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
       enchant: {}
       prerequisites:
         level: null
@@ -667,11 +603,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WqRzbokPG0am6AHb
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676897
+      modifiedTime: 1765826296132
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!pOPQU4UnR27zA0jf.Z1aFAtAP0JJ02tPV'
@@ -727,7 +663,10 @@ items:
     img: icons/skills/social/intimidation-impressing.webp
     system:
       description:
-        value: ''
+        value: >-
+          <p>At the start of its turn, the minotaur can gain advantage on all
+          melee weapon attack rolls it makes during that turn, but attack rolls
+          against it have advantage  until the start of its next turn.</p>
         chat: >-
           <section class="secret"><p></p></section><p>At the start of its turn,
           the minotaur can gain advantage on all melee weapon attack rolls it
@@ -763,11 +702,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.4v3xxn1jEEMRzLBG
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676897
+      modifiedTime: 1765826337595
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!pOPQU4UnR27zA0jf.i1CyGkejt1lDCHEu'

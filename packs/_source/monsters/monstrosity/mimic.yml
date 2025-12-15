@@ -491,10 +491,10 @@ items:
     system:
       description:
         value: >-
-          <p>The mimic can use its action to <strong>polymorph</strong> into an
-          object or back into its true, amorphous form. Its statistics are the
-          same in each form. </p><p>Any equipment it is wearing or carrying
-          isn't transformed. It reverts to its true form if it dies.</p>
+          <p>The mimic can use its action to polymorph into an object or back
+          into its true, amorphous form. Its statistics are the same in each
+          form.</p><p>Any equipment it is wearing or carrying isn't transformed.
+          It reverts to its true form if it dies.</p>
         chat: >-
           <p>The mimic can use its action to <strong>polymorph</strong> into an
           object or back into its true, amorphous form. </p>
@@ -513,7 +513,8 @@ items:
         value: ''
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
@@ -581,11 +582,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.VhByyxHJN7MNQJRd
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676894
+      modifiedTime: 1765826252363
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!hx240PG5r5qpRet3.DOyBdRdgMxLm9BIh'
@@ -597,9 +598,8 @@ items:
       description:
         value: >-
           <p>The mimic adheres to anything that touches it. A Huge or smaller
-          creature adhered to the mimic is also grappled by it <strong>escape DC
-          13</strong>. Ability checks made to escape this grapple have
-          disadvantage.</p>
+          creature adhered to the mimic is also grappled by it escape DC 13.
+          Ability checks made to escape this grapple have disadvantage.</p>
         chat: >-
           <p>The mimic adheres to anything that touches it. A Huge or smaller
           creature adhered to the mimic is also grappled by it. Make an escape
@@ -634,11 +634,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676894
+      modifiedTime: 1765826259264
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!hx240PG5r5qpRet3.aPL8wE2ARwh9JFeX'
@@ -697,8 +697,8 @@ items:
     system:
       description:
         value: >-
-          <p>The mimic has<strong> advantage </strong>on attack rolls against
-          any creature grappled by it.</p>
+          <p>The mimic has advantage on attack rolls against any creature
+          grappled by it.</p>
         chat: ''
       source:
         custom: ''
@@ -730,12 +730,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.kP9t6MAeUvBBmoM3
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1765826266045
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!hx240PG5r5qpRet3.sGiOJWWFPPQ6J5Zm'
   - _id: qHJyEXRC7oExTjES

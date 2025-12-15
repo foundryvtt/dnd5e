@@ -635,18 +635,18 @@ items:
       identifier: pike
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.tC0kcqZT9HHAO0PD
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107550021
+      modifiedTime: 1765825099125
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!5kZNNWzZ6HrfKuWf.uhqyN44IRWXixgxU'
@@ -798,18 +798,18 @@ items:
       identifier: hooves
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.re3oXQ3Xg4Z3Fr6O
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107550021
+      modifiedTime: 1765825099125
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!5kZNNWzZ6HrfKuWf.ICbiLFrPjwIfA1Nj'
@@ -964,18 +964,18 @@ items:
       identifier: longbow
     effects: []
     folder: null
-    sort: 0
+    sort: 400000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.3cymOVja8jXbzrdT
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745173384893
+      modifiedTime: 1765825099125
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!5kZNNWzZ6HrfKuWf.v7ForWMLPJp1u78X'
@@ -1074,11 +1074,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745273655160
+      modifiedTime: 1765825100156
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!5kZNNWzZ6HrfKuWf.iYlIoEDfSCrggrca'
@@ -1091,7 +1091,7 @@ items:
         value: >-
           <p>If the centaur moves at least 30 ft. straight toward a target and
           then hits it with a pike attack on the same turn, the target takes an
-          extra <strong>10 (3d6) <em>piercing damage</em></strong>.</p>
+          extra 10 (3d6) piercing damage.</p>
         chat: >-
           <p>If the centaur moves at least 30 ft. straight toward a target and
           then hits it with a pike attack on the same turn, the target takes
@@ -1111,7 +1111,8 @@ items:
         value: ''
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
@@ -1192,11 +1193,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WqRzbokPG0am6AHb
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676912
+      modifiedTime: 1765825096049
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!5kZNNWzZ6HrfKuWf.4R48w4DH2CqCpmED'

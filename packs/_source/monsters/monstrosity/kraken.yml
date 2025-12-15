@@ -72,6 +72,10 @@ system:
       walk: 20
       units: ft
       hover: false
+      bonus: ''
+      ignoredDifficultTerrain:
+        - all
+      special: ''
     attunement:
       max: 3
     senses:
@@ -749,12 +753,11 @@ items:
           a Large or smaller creature grappled by the kraken, that creature is
           swallowed, and the grapple ends. While swallowed, the creature is
           blinded and restrained, it has total cover against attacks and other
-          effects outside the kraken, and it takes <strong>42 (12d6) <em>acid
-          damage</em></strong> at the start of each of the kraken's turns. If
-          the kraken takes 50 damage or more on a single turn from a creature
-          inside it, the kraken must succeed on a  <strong>DC 25
-          Constitution</strong> saving throw at the end of that turn or
-          regurgitate all swallowed creatures, which fall prone in a space
+          effects outside the kraken, and it takes 42 (12d6) acid damage at the
+          start of each of the kraken's turns. If the kraken takes 50 damage or
+          more on a single turn from a creature inside it, the kraken must
+          succeed on a DC 25 Constitution saving throw at the end of that turn
+          or regurgitate all swallowed creatures, which fall prone in a space
           within 10 feet of the kraken. If the kraken dies, a swallowed creature
           is no longer restrained by it and can escape from the corpse using 15
           feet of movement, exiting prone.</p>
@@ -896,64 +899,71 @@ items:
             includeBase: true
             parts: []
           sort: 0
-        dnd5eactivity300:
-          _id: dnd5eactivity300
-          type: utility
+        7NqsOwtHOcmvjNFZ:
+          type: damage
+          name: Swallowed Damage
+          _id: 7NqsOwtHOcmvjNFZ
+          sort: 0
           activation:
-            type: action
-            value: 1
-            condition: ''
+            type: turnStart
             override: false
+            condition: ''
           consumption:
-            targets: []
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets: []
           description:
             chatFlavor: ''
           duration:
+            units: inst
             concentration: false
-            value: ''
-            units: ''
-            special: ''
             override: false
           effects: []
+          flags: {}
           range:
-            value: '5'
-            units: ft
-            special: ''
+            units: self
             override: false
           target:
             template:
-              count: ''
               contiguous: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: ''
-              type: ''
               choice: false
-              special: ''
-            prompt: true
+              type: ''
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
-          roll:
-            formula: 12d6
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          damage:
+            critical:
+              allow: false
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 12
+                denomination: 6
+                bonus: ''
+                types:
+                  - acid
+          img: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -963,11 +973,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1745107553020
+      modifiedTime: 1765825889060
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!kVg37NlPcACAzjCT.r51OovswZTVF8Yna'
@@ -1151,12 +1161,12 @@ items:
       description:
         value: >-
           <p>One Large or smaller object held or creature grappled by the kraken
-          is thrown up to 60 feet in a random direction and knocked prone.
-          </p><p>If a thrown target strikes a solid surface, the target takes
-          <strong>3 (1d6) <em>bludgeoning damage</em></strong> for every 10 feet
-          it was thrown. If the target is thrown at another creature, that
-          creature must succeed on a  <strong>DC 18 Dexterity</strong> saving
-          throw or take the same damage and be knocked prone.</p>
+          is thrown up to 60 feet in a random direction and knocked
+          prone.</p><p>If a thrown target strikes a solid surface, the target
+          takes 3 (1d6) bludgeoning damage for every 10 feet it was thrown. If
+          the target is thrown at another creature, that creature must succeed
+          on a DC 18 Dexterity saving throw or take the same damage and be
+          knocked prone.</p>
         chat: >-
           <p>One Large or smaller object held or creature grappled by the kraken
           is thrown up to 60 feet in a random direction and knocked prone. If
@@ -1180,72 +1190,78 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: damage
+        nDEUGK9GxUWfn6xM:
+          type: save
+          _id: nDEUGK9GxUWfn6xM
+          sort: 0
           activation:
             type: action
-            value: 1
-            condition: ''
             override: false
+            condition: ''
           consumption:
-            targets: []
             scaling:
-              allowed: false
-              max: ''
+              allowed: true
+              max: '6'
             spellSlot: true
+            targets: []
           description:
             chatFlavor: ''
           duration:
+            units: inst
             concentration: false
-            value: ''
-            units: ''
-            special: ''
             override: false
           effects: []
+          flags: {}
           range:
-            value: '60'
-            units: ''
-            special: ''
+            units: ft
             override: false
+            special: ''
+            value: '60'
           target:
             template:
-              count: ''
               contiguous: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: '1'
-              type: creature
               choice: false
-              special: ''
-            prompt: true
+              type: creature
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
           damage:
-            critical:
-              allow: false
-              bonus: ''
+            onSave: half
             parts:
-              - number: 1
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
                 denomination: 6
                 bonus: ''
                 types:
                   - bludgeoning
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
                   mode: whole
-                  number: null
+                  number: 1
                   formula: ''
-          sort: 0
+          save:
+            ability:
+              - dex
+            dc:
+              calculation: ''
+              formula: '18'
+          name: ''
+          img: ''
       enchant: {}
       prerequisites:
         level: null
@@ -1259,11 +1275,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hxXzd3KCfnqnT89w
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676965
+      modifiedTime: 1765825974517
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!kVg37NlPcACAzjCT.bwwyMBn4QwiNd4SM'
@@ -1275,10 +1291,10 @@ items:
       description:
         value: >-
           <p>The kraken magically creates three bolts of lightning, each of
-          which can strike a target the kraken can see within 120 feet of it.
-          </p><p>A target must make a  <strong>DC 23 Dexterity</strong> saving
-          throw, taking <strong>22 (4d10) <em>lightning damage</em></strong> on
-          a failed save, or half as much damage on a successful one.</p>
+          which can strike a target the kraken can see within 120 feet of
+          it.</p><p>A target must make a DC 23 Dexterity saving throw, taking 22
+          (4d10) lightning damage on a failed save, or half as much damage on a
+          successful one.</p>
         chat: >-
           <p>The kraken magically creates three bolts of lightning, each of
           which can strike a target the kraken can see within 120 feet of it. A
@@ -1382,11 +1398,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.gM767AhU36B6LUGU
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676965
+      modifiedTime: 1765825995013
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!kVg37NlPcACAzjCT.wVCkpBj5omvdfaMm'
@@ -1440,116 +1456,15 @@ items:
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!kVg37NlPcACAzjCT.ojhTng7wa5ehcJz3'
-  - _id: y6iT81UwIkojo6c5
-    name: Lair Actions
-    type: feat
-    img: icons/magic/nature/stealth-hide-eyes-green.webp
-    system:
-      description:
-        value: >-
-          <p>If a legendary creature has lair actions, it can use them to
-          harness the ambient magic in its lair. On initiative count 20 (losing
-          all initiative ties), it can use one of its lair action options. It
-          can't do so while incapacitated or otherwise unable to take actions.
-          If surprised, it can't use one until after its first turn in the
-          combat.</p>
-        chat: >-
-          <p>If a legendary creature has lair actions, it can use them to
-          harness the ambient magic in its lair. </p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: lair-actions
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.P0DMM1rgpoiBodDT
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676965
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!kVg37NlPcACAzjCT.y6iT81UwIkojo6c5'
-  - _id: K9y1op1wZOMNsFg0
-    name: Regional Effects
-    type: feat
-    img: icons/environment/wilderness/cave-entrance-mountain-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The mere presence of a legendary creature can have strange and
-          wondrous effects on its environment. Regional effects end abruptly or
-          dissipate over time when the legendary creature dies.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: regional-effects
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.L7myj23X3PFPUNh6
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!kVg37NlPcACAzjCT.K9y1op1wZOMNsFg0'
   - _id: e2EtrJsAPZ19WuE7
     name: Tentacle Attack or Fling
     type: feat
     img: icons/creatures/tentacles/tentacles-thing-green.webp
     system:
       description:
-        value: <p>The kraken makes one tentacle attack or uses its Fling.</p>
+        value: >-
+          <p>The kraken makes one [[/item .lfg28JvVAru30yJ4]]{tentacle} attack
+          or uses its [[/item .bwwyMBn4QwiNd4SM]]{Fling}.</p>
         chat: ''
       source:
         custom: ''
@@ -1640,12 +1555,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.czKwBo1qw5O2gCNy
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1765826041280
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!kVg37NlPcACAzjCT.e2EtrJsAPZ19WuE7'
   - _id: OKGAJSxcW9xQiwyj
@@ -1654,7 +1569,7 @@ items:
     img: icons/magic/lightning/bolts-forked-large-blue-yellow.webp
     system:
       description:
-        value: <p>The kraken uses Lightning Storm.</p>
+        value: <p>The kraken uses [[/item .wVCkpBj5omvdfaMm]]{Lightning Storm}.</p>
         chat: ''
       source:
         custom: ''
@@ -1745,12 +1660,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.gM767AhU36B6LUGU
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1765826015645
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!kVg37NlPcACAzjCT.OKGAJSxcW9xQiwyj'
   - _id: K0T5NDyi2n8Yt8Ts
@@ -1763,11 +1678,11 @@ items:
           <p>While Underwater, the Kraken expels an ink cloud in a 60-foot
           radius. The cloud spreads around corners, and that area is heavily
           obscured to creatures other than the Kraken. Each creature other than
-          the Kraken that ends its turn there must succeed on a  <strong>DC 23
-          Constitution</strong> saving throw, taking <strong>16 (3d10)
-          <em>poison damage</em></strong> on a failed save, or half as much
-          damage on a successful one. A strong current disperses the cloud,
-          which otherwise disappears at the end of the kraken's next turn.</p>
+          the Kraken that ends its turn there must succeed on a DC 23
+          Constitution saving throw, taking 16 (3d10) poison damage on a failed
+          save, or half as much damage on a successful one. A strong current
+          disperses the cloud, which otherwise disappears at the end of the
+          kraken's next turn.</p>
         chat: >-
           <p>The Kraken expels an ink cloud. The cloud spreads around corners,
           and that area is heavily obscured to creatures other than the Kraken.
@@ -1801,11 +1716,8 @@ items:
           consumption:
             targets:
               - type: attribute
-                target: resources.legact.value
                 value: '3'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: resources.legact.value
             scaling:
               allowed: false
               max: ''
@@ -1834,7 +1746,7 @@ items:
               units: ft
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -1846,24 +1758,27 @@ items:
           damage:
             onSave: half
             parts:
-              - number: 3
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 3
                 denomination: 10
                 bonus: ''
                 types:
                   - poison
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
           save:
             ability: con
             dc:
               calculation: ''
               formula: '23'
           sort: 0
+          name: ''
+          img: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
       enchant: {}
       prerequisites:
         level: null
@@ -1877,11 +1792,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.bojUXmNOZ2rJVujD
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676965
+      modifiedTime: 1765826060635
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!kVg37NlPcACAzjCT.K0T5NDyi2n8Yt8Ts'
@@ -1893,11 +1808,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.3
   createdTime: 1726171252481
-  modifiedTime: 1744916293114
+  modifiedTime: 1765825813303
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!actors!kVg37NlPcACAzjCT'

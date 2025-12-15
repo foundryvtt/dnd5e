@@ -675,8 +675,7 @@ items:
       description:
         value: >-
           <p>A creature that touches the remorhaz or hits it with a melee attack
-          while within 5 feet of it takes <strong>10 (3d6) <em>fire
-          damage</em></strong>.</p>
+          while within 5 feet of it takes 10 (3d6) fire damage.</p>
         chat: >-
           <p>A creature that touches the remorhaz or hits it with a melee attack
           while within 5 feet of it takes <em>fire damage</em>.</p>
@@ -775,11 +774,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.iFNpsEMJT66eLoat
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676794
+      modifiedTime: 1765826526867
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!VBzqw2rOUvTuNOPI.usmJdksgWhPnjq94'
@@ -791,12 +790,11 @@ items:
       description:
         value: >-
           <p>The remorhaz makes one bite attack against a Medium or smaller
-          creature it is grappling. </p><p>If the attack hits, that creature
+          creature it is grappling.</p><p>If the attack hits, that creature
           takes the bite's damage and is swallowed, and the grapple ends. While
           swallowed, the creature is blinded and restrained, it has total cover
           against attacks and other effects outside the remorhaz, and it takes
-          <strong>21 (6d6) <em>acid damage</em></strong> at the start of each of
-          the remorhaz's turns.</p>
+          21 (6d6) acid damage at the start of each of the remorhaz's turns.</p>
         chat: <p>The Remorhaz attacks with its Swallow.</p>
       source:
         custom: ''
@@ -921,23 +919,27 @@ items:
               allow: false
               bonus: ''
             parts:
-              - number: 6
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 6
                 denomination: 6
                 bonus: ''
                 types:
                   - acid
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
           sort: 0
+          name: ''
+          img: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: swallow
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -947,11 +949,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.aH5ncM30tP8tPQ24
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676794
+      modifiedTime: 1765826557086
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!VBzqw2rOUvTuNOPI.kT6wF3F49uuWgP3h'

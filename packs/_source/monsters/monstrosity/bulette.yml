@@ -652,9 +652,8 @@ items:
     system:
       description:
         value: >-
-          <p>The bulette's long jump is up to <strong>30 ft.</strong> and its
-          high jump is up to <strong>15 ft.</strong>, with or without a running
-          start.</p>
+          <p>The bulette's long jump is up to 30 feet and its high jump is up to
+          15 feet, with or without a running start.</p>
         chat: ''
       source:
         custom: ''
@@ -686,12 +685,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.f4yvSah35ixQOswD
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1765825031471
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!1ES45ODWg3pCrkzv.xZeM7pLE9OPzdhBY'
   - _id: Keg9oouX6Vbl9tms
@@ -705,13 +704,13 @@ items:
           can then use this action to land on its feet in a space that contains
           one or more other creatures.</p><p>Each of those creatures must
           succeed on a DC 16 Strength or Dexterity saving throw (target's
-          choice) or be knocked prone and take <strong>14 (3d6 + 4)
-          <em>bludgeoning damage</em></strong> plus <strong>14 (3d6 + 4)
-          <em>slashing damage</em></strong>. On a successful save, the creature
-          takes only half the damage, isn't knocked prone, and is pushed 5 ft.
-          out of the bulette's space into an unoccupied space of the creature's
-          choice. If no unoccupied space is within range, the creature instead
-          falls prone in the bulette's space.</p>
+          choice) or be knocked prone and take 14 (3d6 + 4) <em>bludgeoning
+          damage</em> plus 14 (3d6 + 4) <em>slashing damage</em>. On a
+          successful save, the creature takes only half the damage, isn't
+          knocked prone, and is pushed 5 ft. out of the bulette's space into an
+          unoccupied space of the creature's choice. If no unoccupied space is
+          within range, the creature instead falls prone in the bulette's
+          space.</p>
         chat: >-
           <p>If the bulette jumps at least 15 ft. as part of its movement, it
           can then use this action to land on its feet in a space that contains
@@ -735,89 +734,11 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: damage
-          activation:
-            type: ''
-            value: null
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '15'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          damage:
-            critical:
-              allow: false
-              bonus: ''
-            parts:
-              - number: 3
-                denomination: 6
-                bonus: '@mod'
-                types:
-                  - bludgeoning
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-              - number: 3
-                denomination: 6
-                bonus: '@mod'
-                types:
-                  - slashing
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
         dnd5eactivity100:
           _id: dnd5eactivity100
           type: save
           activation:
-            type: ''
+            type: action
             value: null
             condition: ''
             override: false
@@ -864,36 +785,35 @@ items:
           damage:
             onSave: half
             parts:
-              - number: 3
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 3
                 denomination: 6
                 bonus: '@mod'
                 types:
                   - bludgeoning
-                custom:
+              - custom:
                   enabled: false
                   formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-              - number: 3
+                number: 3
                 denomination: 6
                 bonus: '@mod'
                 types:
                   - slashing
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
           save:
             ability: str
             dc:
               calculation: ''
               formula: '16'
-          sort: 0
+          sort: 100000
+          name: ''
+          img: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
       enchant: {}
       prerequisites:
         level: null
@@ -907,11 +827,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.bG5Z45jj4wz0N3T6
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676520
+      modifiedTime: 1765825064404
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!1ES45ODWg3pCrkzv.Keg9oouX6Vbl9tms'
