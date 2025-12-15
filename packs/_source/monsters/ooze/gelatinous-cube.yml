@@ -497,15 +497,13 @@ items:
         value: >-
           <p>The cube takes up its entire space. Other creatures can enter the
           space, but a creature that does so is subjected to the cube's Engulf
-          and has<strong> disadvantage </strong>on the saving throw<strong>.
-          C</strong>reatures inside the cube can be seen but have total
-          cover.</p><p>A creature <strong>within 5 feet</strong> of the cube can
-          take an action to pull a creature or object out of the cube. Doing so
-          requires a successful <strong>DC 12 Strength check</strong>, and the
-          creature making the attempt takes <strong>10 (3d6) <em>acid
-          damage</em></strong><strong>. T</strong>he cube can hold only one
-          Large creature or up to four Medium or smaller creatures inside it at
-          a time.</p>
+          and has disadvantage on the saving throw. Creatures inside the cube
+          can be seen but have total cover.</p><p>A creature within 5 feet of
+          the cube can take an action to pull a creature or object out of the
+          cube. Doing so requires a successful DC 12 Strength check, and the
+          creature making the attempt takes 10 (3d6) acid damage. The cube can
+          hold only one Large creature or up to four Medium or smaller creatures
+          inside it at a time.</p>
         chat: >-
           <p>The cube takes up its entire space. Other creatures can enter the
           space, but a creature that does so is subjected to the cube's Engulf
@@ -529,8 +527,125 @@ items:
         value: ''
         subtype: ''
       requirements: ''
-      properties: []
-      activities: {}
+      properties:
+        - trait
+      activities:
+        Zk4kCn0YQO2k3QBf:
+          type: check
+          name: Rescue
+          _id: Zk4kCn0YQO2k3QBf
+          sort: 0
+          activation:
+            type: action
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: self
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          check:
+            associated: []
+            dc:
+              calculation: ''
+              formula: '12'
+            ability: str
+          img: ''
+        Po03o5Zvaah8GBHL:
+          type: damage
+          _id: Po03o5Zvaah8GBHL
+          sort: 0
+          activation:
+            type: action
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: self
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          damage:
+            critical:
+              allow: false
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 3
+                denomination: 6
+                bonus: ''
+                types:
+                  - acid
+          name: ''
+          img: ''
       enchant: {}
       prerequisites:
         level: null
@@ -544,11 +659,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.CvtGj6YimGuZdrhB
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676859
+      modifiedTime: 1765827393116
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!3fzQVYQhXxCXRa2o.m8prrQUwqGwX6Jyk'
@@ -559,10 +674,10 @@ items:
     system:
       description:
         value: >-
-          <p>Even when the cube is in plain sight, it takes a successful
-          <strong>DC 15 Wisdom (Perception) check</strong> to spot a cube that
-          has neither moved nor attacked. A creature that tries to enter the
-          cube's space while unaware of the cube is surprised by the cube.</p>
+          <p>Even when the cube is in plain sight, it takes a successful DC 15
+          Wisdom (Perception) check to spot a cube that has neither moved nor
+          attacked. A creature that tries to enter the cube's space while
+          unaware of the cube is surprised by the cube.</p>
         chat: >-
           <p>Even when the cube is in plain sight, it takes a successful Wisdom
           (Perception) check to spot a cube that has neither moved nor attacked.
@@ -598,11 +713,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.cueeLXQ3W8gKHiLq
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676859
+      modifiedTime: 1765827402668
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!3fzQVYQhXxCXRa2o.ISZmp6ev081hhUxT'
@@ -785,18 +900,17 @@ items:
         value: >-
           <p>The cube moves up to its speed. While doing so, it can enter Large
           or smaller creatures' spaces. Whenever the cube enters a creature's
-          space, the creature must make a  <strong>DC 12 Dexterity</strong>
-          saving throw.On a successful save, the creature can choose to be
-          pushed 5 feet back or to the side of the cube. A creature that chooses
-          not to be pushed suffers the consequences of a failed saving
-          throw.</p><p>On a failed save, the cube enters the creature's space,
-          and the creature takes <strong>10 (3d6) <em>acid damage</em></strong>
-          and is engulfed. The engulfed creature can't breathe, is restrained,
-          and takes <strong>21 (6d6) <em>acid damage</em></strong> at the start
-          of each of the cube's turns. When the cube moves, the engulfed
-          creature moves with it.An engulfed creature can try to escape by
-          taking an action to make a DC 12 Strength check. On a success, the
-          creature escapes and enters a space of its choice within 5 feet of the
+          space, the creature must make a DC 12 Dexterity saving throw.On a
+          successful save, the creature can choose to be pushed 5 feet back or
+          to the side of the cube. A creature that chooses not to be pushed
+          suffers the consequences of a failed saving throw.</p><p>On a failed
+          save, the cube enters the creature's space, and the creature takes 10
+          (3d6) acid damage and is engulfed. The engulfed creature can't
+          breathe, is restrained, and takes 21 (6d6) acid damage at the start of
+          each of the cube's turns. When the cube moves, the engulfed creature
+          moves with it.An engulfed creature can try to escape by taking an
+          action to make a DC 12 Strength check. On a success, the creature
+          escapes and enters a space of its choice within 5 feet of the
           cube.</p>
         chat: >-
           <p>Whenever the cube enters a creature's space, the creature must make
@@ -889,59 +1003,67 @@ items:
               calculation: ''
               formula: '12'
           sort: 0
-        dnd5eactivity300:
-          _id: dnd5eactivity300
-          type: utility
+        sDRiVB3bhk4S5XZI:
+          type: damage
+          _id: sDRiVB3bhk4S5XZI
+          sort: 0
           activation:
-            type: action
-            value: 1
-            condition: ''
+            type: turnStart
             override: false
+            condition: ''
           consumption:
-            targets: []
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets: []
           description:
             chatFlavor: ''
           duration:
+            units: inst
             concentration: false
-            value: ''
-            units: ''
-            special: ''
             override: false
           effects: []
+          flags: {}
           range:
-            units: touch
-            special: ''
+            units: self
             override: false
+            special: ''
           target:
             template:
-              count: ''
               contiguous: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: ''
-              type: ''
               choice: false
-              special: ''
-            prompt: true
+              type: ''
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
-          roll:
-            formula: 6d6
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          damage:
+            critical:
+              allow: false
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 6
+                denomination: 6
+                bonus: ''
+                types:
+                  - acid
+          name: ''
+          img: ''
       enchant: {}
       prerequisites:
         level: null
@@ -955,11 +1077,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Eh80lkzHiEOJP8FI
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676859
+      modifiedTime: 1765827441974
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!3fzQVYQhXxCXRa2o.6PuULfBzy5vpBSFI'
