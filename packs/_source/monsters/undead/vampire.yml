@@ -495,21 +495,19 @@ items:
       description:
         value: >-
           <p>If the vampire isn't in sun light or running water, it can use its
-          action to <strong>polymorph</strong> into a Tiny bat or a Medium cloud
-          of mist, or back into its true form.</p><p>While in bat form, the
-          vampire can't speak, its walking speed is <strong>5 feet,</strong> and
-          it has a flying speed of <strong>30 feet.</strong> Its statistics,
-          other than its size and speed, are unchanged. Anything it is wearing
-          transforms with it, but nothing it is carrying does. It reverts to its
-          true form if it dies<strong>. </strong>While in mist form, the vampire
-          can't take any actions, speak, or manipulate objects. It is
-          weightless, has a flying speed of <strong>20 feet,</strong> can hover,
-          and can enter a hostile creature's space and stop there. In addition,
-          if air can pass through a space, the mist can do so without squeezing,
-          and it can't pass through water. It has<strong> advantage </strong>on
-          Strength, Dexterity, and Constitution saving throws, and it is immune
-          to all <strong>nonmagical damage</strong>, except the damage it takes
-          from sunlight.</p>
+          action to polymorph into a Tiny bat or a Medium cloud of mist, or back
+          into its true form.</p><p>While in bat form, the vampire can't speak,
+          its walking speed is 5 feet, and it has a flying speed of 30 feet. Its
+          statistics, other than its size and speed, are unchanged. Anything it
+          is wearing transforms with it, but nothing it is carrying does. It
+          reverts to its true form if it dies.</p><p>While in mist form, the
+          vampire can't take any actions, speak, or manipulate objects. It is
+          weightless, has a flying speed of 20 feet, can hover, and can enter a
+          hostile creature's space and stop there. In addition, if air can pass
+          through a space, the mist can do so without squeezing, and it can't
+          pass through water. It has advantage on Strength, Dexterity, and
+          Constitution saving throws, and it is immune to all nonmagical damage,
+          except the damage it takes from sunlight.</p>
         chat: >-
           <p>The vampire can use its action to <strong>polymorph</strong> or
           return to its true form.</p>
@@ -543,11 +541,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.VhByyxHJN7MNQJRd
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676990
+      modifiedTime: 1765828539560
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.BqG5guVa93LaOAn1'
@@ -665,17 +663,15 @@ items:
     system:
       description:
         value: >-
-          <p>When it drops to <strong>0 hit points</strong> outside its resting
-          place, the vampire transforms into a cloud of mist (as in the
-          Shapechanger trait) instead of falling unconscious, provided that it
-          isn't in sunlight or running water. If it can't transform, it is
-          destroyed.</p><p>While it has <strong>0 hit points</strong> in mist
-          form, it can't revert to its vampire form, and it must reach its
-          resting place within 2 hours or be destroyed. Once in its resting
-          place, it reverts to its vampire form. It is then paralyzed until it
-          regains at least <strong>1 hit point</strong>. After spending 1 hour
-          in its resting place with <strong>0 hit points</strong>, it regains
-          <strong>1 hit point</strong>.</p>
+          <p>When it drops to 0 hit points outside its resting place, the
+          vampire transforms into a cloud of mist (as in the Shapechanger trait)
+          instead of falling unconscious, provided that it isn't in sunlight or
+          running water. If it can't transform, it is destroyed.</p><p>While it
+          has 0 hit points in mist form, it can't revert to its vampire form,
+          and it must reach its resting place within 2 hours or be destroyed.
+          Once in its resting place, it reverts to its vampire form. It is then
+          paralyzed until it regains at least 1 hit point. After spending 1 hour
+          in its resting place with 0 hit points, it regains 1 hit point.</p>
         chat: >-
           <p>A slain vampire transforms into a cloud of mist (as in the
           Shapechanger trait) instead of falling unconscious.</p>
@@ -709,11 +705,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hMC7XCkDbzVMZ0QG
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676990
+      modifiedTime: 1765828551461
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.pVlKFunmE2qxO0pe'
@@ -724,11 +720,10 @@ items:
     system:
       description:
         value: >-
-          <p>The vampire regains <strong>20 hit points</strong> at the start of
-          its turn if it has at least <strong>1 hit point</strong> and isn't in
-          sunlight or running water. If the vampire takes <em>radiant
-          damage</em> or damage from holy water, this trait doesn't function at
-          the start of the vampire's next turn.</p>
+          <p>The vampire regains 20 hit points at the start of its turn if it
+          has at least 1 hit point and isn't in sunlight or running water. If
+          the vampire takes radiant damage or damage from holy water, this trait
+          doesn't function at the start of the vampire's next turn.</p>
         chat: >-
           <p>The vampire regains <strong>20 hit points</strong> at the start of
           its turn.</p>
@@ -747,13 +742,14 @@ items:
         value: ''
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
           type: heal
           activation:
-            type: ''
+            type: turnStart
             value: null
             condition: ''
             override: false
@@ -810,6 +806,13 @@ items:
               number: null
               formula: ''
           sort: 0
+          name: ''
+          img: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
       enchant: {}
       prerequisites:
         level: null
@@ -823,11 +826,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Av7H0ymGdPeTsnwV
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676990
+      modifiedTime: 1765828569480
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.BDnluJG7T7FfBjsQ'
@@ -886,23 +889,16 @@ items:
     system:
       description:
         value: >-
-          <p>The vampire has the following flaws:</p>
-
-          <p><em>Forbiddance</em>. The vampire can't enter a residence without
-          an invitation from one of the occupants<strong>. </strong></p>
-
-          <p><em>Harmed by Running Water</em>. The vampire takes 20 <em>acid
-          damage</em> if it ends its turn in running water<strong>.
-          </strong></p>
-
-          <p><em>Stake to the Heart</em>. If a piercing weapon made of wood is
-          driven into the vampire's heart while the vampire is incapacitated in
-          its resting place, the vampire is paralyzed until the stake is
-          removed.</p>
-
-          <p><em>Sunlight Hypersensitivity</em>. The vampire takes 20
-          <em>radiant damage</em> when it starts its turn in sunlight. While in
-          sunlight, it has<strong> disadvantage </strong>on attack rolls and
+          <p>The vampire has the following flaws:</p><p><em>Forbiddance</em>.
+          The vampire can't enter a residence without an invitation from one of
+          the occupants.</p><p><em>Harmed by Running Water</em>. The vampire
+          takes 20 acid damage if it ends its turn in running
+          water.</p><p><em>Stake to the Heart</em>. If a piercing weapon made of
+          wood is driven into the vampire's heart while the vampire is
+          incapacitated in its resting place, the vampire is paralyzed until the
+          stake is removed.</p><p><em>Sunlight Hypersensitivity</em>. The
+          vampire takes 20 <em>radiant damage</em> when it starts its turn in
+          sunlight. While in sunlight, it has disadvantage on attack rolls and
           ability checks.</p>
         chat: ''
       source:
@@ -935,12 +931,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Ervkb8H99e2Beiae
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1765828586712
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.RLsKLdfdmHajHSwD'
   - _id: siO3h9XOkgPVi78F
@@ -1405,18 +1401,18 @@ items:
       description:
         value: >-
           <p>The vampire targets one humanoid it can see within 30 ft. of it. If
-          the target can see the vampire, the target must succeed on a 
-          <strong>DC 17 Wisdom</strong> saving throw against this magic or be
-          charmed by the vampire. The charmed target regards the vampire as a
-          trusted friend to be heeded and protected. Although the target isn't
-          under the vampire's control, it takes the vampire's requests or
-          actions in the most favorable way it can, and it is a willing target
-          for the vampire's bite attack.</p><p>Each time the vampire or the
-          vampire's companions do anything harmful to the target, it can repeat
-          the saving throw, ending the effect on itself on a success. Otherwise,
-          the effect lasts 24 hours or until the vampire is destroyed, is on a
-          different plane of existence than the target, or takes a bonus action
-          to end the effect.</p>
+          the target can see the vampire, the target must succeed on a DC 17
+          Wisdom saving throw against this magic or be charmed by the vampire.
+          The charmed target regards the vampire as a trusted friend to be
+          heeded and protected. Although the target isn't under the vampire's
+          control, it takes the vampire's requests or actions in the most
+          favorable way it can, and it is a willing target for the vampire's
+          bite attack.</p><p>Each time the vampire or the vampire's companions
+          do anything harmful to the target, it can repeat the saving throw,
+          ending the effect on itself on a success. Otherwise, the effect lasts
+          24 hours or until the vampire is destroyed, is on a different plane of
+          existence than the target, or takes a bonus action to end the
+          effect.</p>
         chat: >-
           <p>The vampire targets one humanoid it can see within 30 ft. of it. If
           the target can see the vampire, the target must make a
@@ -1508,11 +1504,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.ykoo88OJOdfYH7mH
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676990
+      modifiedTime: 1765828614521
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.RHezeN7HzNf2oKYP'
@@ -1681,109 +1677,6 @@ items:
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.rQOFEdWpVwJWS2U4'
-  - _id: hNBduaMwPI3vordA
-    name: Lair Actions
-    type: feat
-    img: icons/magic/nature/stealth-hide-eyes-green.webp
-    system:
-      description:
-        value: >-
-          <p>If a legendary creature has lair actions, it can use them to
-          harness the ambient magic in its lair. On initiative count 20 (losing
-          all initiative ties), it can use one of its lair action options. It
-          can't do so while incapacitated or otherwise unable to take actions.
-          If surprised, it can't use one until after its first turn in the
-          combat.</p>
-        chat: >-
-          <p>If a legendary creature has lair actions, it can use them to
-          harness the ambient magic in its lair. </p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: lair-actions
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.P0DMM1rgpoiBodDT
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676990
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!DDO9lDCDtNHkfShP.hNBduaMwPI3vordA'
-  - _id: zV0DTNKndsVldLsV
-    name: Regional Effects
-    type: feat
-    img: icons/environment/wilderness/cave-entrance-mountain-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The mere presence of a legendary creature can have strange and
-          wondrous effects on its environment. Regional effects end abruptly or
-          dissipate over time when the legendary creature dies.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: regional-effects
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.L7myj23X3PFPUNh6
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!DDO9lDCDtNHkfShP.zV0DTNKndsVldLsV'
   - _id: o4v4mHxP82HTbIOX
     name: Move
     type: feat
@@ -1898,7 +1791,9 @@ items:
     img: icons/skills/melee/unarmed-punch-fist-yellow-red.webp
     system:
       description:
-        value: <p>The vampire makes one unarmed strike.</p>
+        value: >-
+          <p>The vampire makes one [[/item .jYBYvv9EF1UnOvqZ]]{unarmed
+          strike}.</p>
         chat: ''
       source:
         custom: ''
@@ -1989,12 +1884,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.GsuvwoekKZatfKwF
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1765828636959
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.rEmbKJQ6mpvnUPOO'
   - _id: pW4iNTQphTJ3litv
@@ -2003,7 +1898,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: <p>The vampire makes a bite attack.</p>
+        value: <p>The vampire makes a [[/item .uqHuj7Pjf2sjny21]]{bite} attack.</p>
         chat: ''
       source:
         custom: ''
@@ -2094,12 +1989,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1765828649318
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.pW4iNTQphTJ3litv'
 effects: []

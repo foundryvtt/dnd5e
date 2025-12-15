@@ -575,7 +575,8 @@ items:
         value: ''
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
@@ -643,11 +644,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.nUVFUgyKK7fmQaFh
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676570
+      modifiedTime: 1765828346422
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!QGcQYZbVl4bWzi4E.Xa0lRW8VhYHTAQT0'
@@ -658,8 +659,8 @@ items:
     system:
       description:
         value: >-
-          <p>While in sunlight, the shadow has<strong> disadvantage </strong>on
-          attack rolls, ability checks, and saving throws.</p>
+          <p>While in sunlight, the shadow has disadvantage on attack rolls,
+          ability checks, and saving throws.</p>
         chat: ''
       source:
         custom: ''
@@ -691,12 +692,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.u1Tt4l4Mczgt3wOS
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1765828335736
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!QGcQYZbVl4bWzi4E.BrzbftAD7eqZXWA8'
   - _id: 2OUOBIN4TJDoL0sJ
@@ -707,10 +708,10 @@ items:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target's
-          Strength score is reduced by 1d4. The target dies if this reduces its
-          Strength to 0. Otherwise, the reduction lasts until the target
-          finishes a short or long rest.If a non-evil humanoid dies from this
-          attack, a new shadow rises from the corpse 1d4 hours later.</p>
+          Strength score is reduced by [[/r 1d4]]. The target dies if this
+          reduces its Strength to 0. Otherwise, the reduction lasts until the
+          target finishes a short or long rest.If a non-evil humanoid dies from
+          this attack, a new shadow rises from the corpse 1d4 hours later.</p>
         chat: <p>The Shadow attacks with its Strength Drain.</p>
       source:
         custom: ''
@@ -850,6 +851,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: strength-drain
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -859,11 +861,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1745107551716
+      modifiedTime: 1765828365244
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!QGcQYZbVl4bWzi4E.2OUOBIN4TJDoL0sJ'
