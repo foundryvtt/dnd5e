@@ -35,6 +35,16 @@ export default class BackgroundData extends ItemDataModel.mixin(
   }, {inplace: false}));
 
   /* -------------------------------------------- */
+  /*  Data Migrations                             */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static _migrateData(source) {
+    super._migrateData(source);
+    AdvancementTemplate.migrateAdvancement(source);
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 

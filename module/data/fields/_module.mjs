@@ -1,4 +1,5 @@
 export * from "./activities-field.mjs";
+export {default as AdvancementCollectionField} from "./advancement-collection-field.mjs";
 export {default as AdvancementDataField} from "./advancement-data-field.mjs";
 export {default as AdvancementField} from "./advancement-field.mjs";
 export {default as AdvantageModeField} from "./advantage-mode-field.mjs";

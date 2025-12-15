@@ -198,6 +198,7 @@ export default class FeatData extends ItemDataModel.mixin(
     super._migrateData(source);
     FeatData.#migrateEnchantment(source);
     ActivitiesTemplate.migrateActivities(source);
+    AdvancementTemplate.migrateAdvancement(source);
     FeatData.#migrateType(source);
     FeatData.#migrateRecharge(source);
   }
