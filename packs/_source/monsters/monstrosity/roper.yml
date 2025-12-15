@@ -538,12 +538,11 @@ items:
       description:
         value: >-
           <p>The roper can have up to six tendrils at a time. Each tendril can
-          be attacked (AC 20; <strong>10 hit points</strong>; immunity to poison
-          and <em>psychic damage</em>). </p><p>Destroying a tendril deals no
-          damage to the roper, which can extrude a replacement tendril on its
-          next turn. A tendril can also be broken if a creature takes an action
-          and succeeds on a <strong>DC 15 Strength check</strong> against
-          it.</p>
+          be attacked (AC 20; 10 hit points; immunity to poison and psychic
+          damage).</p><p>Destroying a tendril deals no damage to the roper,
+          which can extrude a replacement tendril on its next turn. A tendril
+          can also be broken if a creature takes an action and succeeds on a DC
+          15 Strength check against it.</p>
         chat: >-
           <p>The roper can have up to six tendrils at a time. Each tendril can
           be attacked. A tendril can also be broken if a creature takes an
@@ -578,11 +577,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.LkepRN2rP3Hp4orY
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676899
+      modifiedTime: 1765826617674
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!qZyLwdx7lj5d1wfD.hQLj7Zzuva4M9KzH'
@@ -782,18 +781,18 @@ items:
       identifier: bite
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107553551
+      modifiedTime: 1765826632050
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!qZyLwdx7lj5d1wfD.mBRjMwEitGrPDm5I'
@@ -952,18 +951,18 @@ items:
       mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745175622958
+      modifiedTime: 1765826632050
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!qZyLwdx7lj5d1wfD.bTiw89tDx64zTqDk'
@@ -973,7 +972,9 @@ items:
     img: icons/magic/control/sihouette-hold-beam-green.webp
     system:
       description:
-        value: ''
+        value: >-
+          <p>The roper pulls each creature grappled by it up to 25 feet straight
+          toward it.</p>
         chat: >-
           <section class="secret"><p></p></section><p>The roper pulls each
           creature grappled by it up to 25 ft. straight toward it.</p>
@@ -1053,18 +1054,18 @@ items:
       identifier: reel
     effects: []
     folder: null
-    sort: 0
+    sort: 400000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.IwQRhCTgCfAADyt8
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676899
+      modifiedTime: 1765826665977
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!qZyLwdx7lj5d1wfD.iGuyFLbKazqPCcXY'
@@ -1162,11 +1163,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745273657285
+      modifiedTime: 1765826633014
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!qZyLwdx7lj5d1wfD.fyF8vQbuvkuLKmKf'

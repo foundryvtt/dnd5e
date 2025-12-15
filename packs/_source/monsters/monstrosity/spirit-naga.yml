@@ -495,9 +495,8 @@ items:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
-          make a  <strong>DC 13 Constitution</strong> saving throw, taking
-          <strong>31 (7d8) <em>poison damage</em></strong> on a failed save, or
-          half as much damage on a successful one.</p>
+          make a DC 13 Constitution saving throw, taking 31 (7d8) poison damage
+          on a failed save, or half as much damage on a successful one.</p>
         chat: >-
           <p>The Spirit Naga attacks with its Bite. The target must make a
           <strong>Constitution</strong> saving throw.</p>
@@ -633,19 +632,7 @@ items:
             critical:
               bonus: ''
             includeBase: true
-            parts:
-              - number: 7
-                denomination: 8
-                bonus: ''
-                types:
-                  - poison
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            parts: []
           sort: 0
         dnd5eactivity100:
           _id: dnd5eactivity100
@@ -698,28 +685,32 @@ items:
           damage:
             onSave: half
             parts:
-              - number: 1
-                denomination: 6
-                bonus: '@mod'
-                types:
-                  - piercing
-                custom:
+              - custom:
                   enabled: false
                   formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+                number: 7
+                denomination: 6
+                bonus: ''
+                types:
+                  - poison
           save:
             ability: con
             dc:
               calculation: con
               formula: '13'
           sort: 0
+          name: ''
+          img: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -729,11 +720,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1745107550626
+      modifiedTime: 1765826791566
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!BAT6ld8qJZetpycL.aap2fFb4b7uX3XAO'
@@ -745,8 +736,8 @@ items:
       description:
         value: >-
           <p>If it dies, the naga returns to life in 1d6 days and regains all
-          its<strong> hit points</strong>. Only a wish spell can prevent this
-          trait from functioning.</p>
+          its hit points. Only a wish spell can prevent this trait from
+          functioning.</p>
         chat: >-
           <p>If it dies, the naga returns to life in 1d6 days and regains all
           its<strong> hit points</strong>.</p>
@@ -780,11 +771,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.JcfHlAcfwSWnt7Ud
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676709
+      modifiedTime: 1765826750445
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!BAT6ld8qJZetpycL.WqOflwn1ubAMkGdQ'
@@ -798,19 +789,19 @@ items:
           <p>The naga is a 10th-level spellcaster. Its spellcasting ability is
           Intelligence (spell save DC 14, +6 to hit with spell attacks), and it
           needs only verbal components to cast its spells. It has the following
-          wizard spells prepared:</p><p><strong>• Cantrips (at will)</strong>:
-          [[/item .Utk1OQRwYkMkFRD3]]{mage hand}, [[/item
-          .oIzA2MEHwxhtQneU]]{minor illusion}, [[/item .ctW81uiX56xZR2c5]]{ray
-          of frost}</p><p><strong>• 1st level (4 slots)</strong>: [[/item
-          .eS7XnnApoxRxYXPs]]{charm person}, [[/item .ghXTfe7sgCbgf1Q8]]{detect
-          magic}, [[/item .KhwiSi9fwVfUPtku]]{sleep}</p><p><strong>• 2nd level
-          (3 slots)</strong>: [[/item .ppWAAEul0QHtm4er]]{detect thoughts},
-          [[/item .3Lo9boi7P2ro6QV4]]{hold person}</p><p><strong>• 3rd level (3
-          slots)</strong>: [[/item .IyikgTEOTv701jgQ]]{lightning bolt}, [[/item
-          .13uVuBQP6VaiSPvC]]{water breathing}</p><p><strong>• 4th level (3
-          slots)</strong>: [[/item .pybg5MNc3lkerH4Y]]{blight}, [[/item
-          .A4RsPuSvB9wFtz1j]]{dimension door}</p><p><strong>• 5th level (2
-          slots)</strong>: [[/item .91Sw6vOIaO7U8DvM]]{dominate person}</p>
+          wizard spells prepared:</p><p>Cantrips (at will): [[/item
+          .Utk1OQRwYkMkFRD3]]{mage hand}, [[/item .oIzA2MEHwxhtQneU]]{minor
+          illusion}, [[/item .ctW81uiX56xZR2c5]]{ray of frost}</p><p>1st level
+          (4 slots): [[/item .eS7XnnApoxRxYXPs]]{charm person}, [[/item
+          .ghXTfe7sgCbgf1Q8]]{detect magic}, [[/item
+          .KhwiSi9fwVfUPtku]]{sleep}</p><p>2nd level (3 slots): [[/item
+          .ppWAAEul0QHtm4er]]{detect thoughts}, [[/item .3Lo9boi7P2ro6QV4]]{hold
+          person}</p><p>3rd level (3 slots): [[/item
+          .IyikgTEOTv701jgQ]]{lightning bolt}, [[/item .13uVuBQP6VaiSPvC]]{water
+          breathing}</p><p>4th level (3 slots): [[/item
+          .pybg5MNc3lkerH4Y]]{blight}, [[/item .A4RsPuSvB9wFtz1j]]{dimension
+          door}</p><p>5th level (2 slots): [[/item .91Sw6vOIaO7U8DvM]]{dominate
+          person}</p>
         chat: >-
           <p>The naga is a spellcaster. Its spellcasting ability is Intelligence
           and it needs only verbal components to cast its spells.</p>
@@ -844,11 +835,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.fdmzHw875EzpXM2a
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1745447015621
+      modifiedTime: 1765826764882
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!BAT6ld8qJZetpycL.Fla0ZsaY2HvXWqbR'

@@ -785,25 +785,20 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts:
-              - number: 1
-                denomination: 6
-                bonus: '@mod'
-                types:
-                  - bludgeoning
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            parts: []
           save:
             ability: str
             dc:
               calculation: ''
               formula: '13'
           sort: 0
+          name: Detach
+          img: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -817,11 +812,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1745107552647
+      modifiedTime: 1765825222088
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!g7FSu2oU4YHPgWNA.DA34sS4nWGc4OTwm'

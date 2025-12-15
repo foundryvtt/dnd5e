@@ -485,7 +485,7 @@ prototypeToken:
   movementAction: null
 items:
   - _id: 72qxug7ywesnINin
-    name: Disguise Self (any humanoid form)
+    name: Disguise Self
     type: spell
     img: icons/magic/control/debuff-energy-hold-teal-blue.webp
     system:
@@ -525,11 +525,14 @@ items:
         affects:
           type: self
           choice: false
+          special: ''
         template:
           units: ''
           contiguous: false
+          type: ''
       range:
         units: self
+        special: ''
       uses:
         max: ''
         recovery: []
@@ -588,7 +591,9 @@ items:
             prompt: false
             visible: false
           sort: 0
-      identifier: disguise-self-any-humanoid-form
+      identifier: disguise-self
+      sourceClass: ''
+      ability: ''
     effects: []
     folder: null
     sort: 0
@@ -598,12 +603,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.A3q2gTNqG6fvNGrv
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1765826115276
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!MnoL59nOOfYatAkQ.72qxug7ywesnINin'
   - _id: mSRxk4sD2tHfYAUo
@@ -615,17 +620,13 @@ items:
         value: >-
           <p>The lamia's innate spellcasting ability is Charisma (spell save DC
           13). It can innately cast the following spells, requiring no material
-          components:</p>
-
-          <p>At will: disguise self (any humanoid form), [[/item
-          .nslx2nT3p4lNkmdp]]{major image}</p>
-
-          <p>3/day each: [[/item .eS7XnnApoxRxYXPs]]{charm person}, [[/item
-          .X4c8xCkmF8U9HUMz]]{mirror image}, [[/item
+          components:</p><p>At will: [[/item .72qxug7ywesnINin]]{disguise self}
+          (any humanoid form), [[/item .nslx2nT3p4lNkmdp]]{major
+          image}</p><p>3/day each: [[/item .eS7XnnApoxRxYXPs]]{charm person},
+          [[/item .X4c8xCkmF8U9HUMz]]{mirror image}, [[/item
           .fVbCxFRaORalHB20]]{scrying}, [[/item
-          .zMAWdyc8UVb37BK4]]{suggestion}</p>
-
-          <p>1/day: [[/item .JQyigMNPiDnGI18b]]{geas}</p>
+          .zMAWdyc8UVb37BK4]]{suggestion}</p><p>1/day: [[/item
+          .JQyigMNPiDnGI18b]]{geas}</p>
         chat: ''
       source:
         custom: ''
@@ -657,11 +658,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1745447015747
+      modifiedTime: 1765826105570
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!MnoL59nOOfYatAkQ.mSRxk4sD2tHfYAUo'

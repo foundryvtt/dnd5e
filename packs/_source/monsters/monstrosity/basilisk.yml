@@ -489,21 +489,20 @@ items:
     system:
       description:
         value: >-
-          <p>If a creature starts its turn within <strong>30 ft.</strong> of the
-          basilisk and the two of them can see each other, the basilisk can
-          force the creature to make a <strong>DC 12 Constitution saving
-          throw</strong> if the basilisk isn't incapacitated. On a failed save,
-          the creature magically begins to turn to stone and is restrained. It
-          must repeat the saving throw at the end of its next turn. On a
-          success, the effect ends. On a failure, the creature is petrified
-          until freed by the greater restoration spell or other magic.</p><p>A
-          creature that isn't surprised can avert its eyes to avoid the saving
-          throw at the start of its turn. If it does so, it can't see the
-          basilisk until the start of its next turn, when it can avert its eyes
-          again. If it looks at the basilisk in the meantime, it must
-          immediately make the save<strong>. I</strong>f the basilisk sees its
-          reflection within <strong>30 ft.</strong> of it in bright light, it
-          mistakes itself for a rival and targets itself with its gaze.</p>
+          <p>If a creature starts its turn within 30 ft. of the basilisk and the
+          two of them can see each other, the basilisk can force the creature to
+          make a DC 12 Constitution saving throw if the basilisk isn't
+          incapacitated. On a failed save, the creature magically begins to turn
+          to stone and is restrained. It must repeat the saving throw at the end
+          of its next turn. On a success, the effect ends. On a failure, the
+          creature is petrified until freed by the <em>greater restoration</em>
+          spell or other magic.</p><p>A creature that isn't surprised can avert
+          its eyes to avoid the saving throw at the start of its turn. If it
+          does so, it can't see the basilisk until the start of its next turn,
+          when it can avert its eyes again. If it looks at the basilisk in the
+          meantime, it must immediately make the save.</p><p>If the basilisk
+          sees its reflection within 30 ft. of it in bright light, it mistakes
+          itself for a rival and targets itself with its gaze.</p>
         chat: >-
           <p>The basilisk can force the creature to make a
           <strong>Constitution</strong> saving throw. It must repeat the saving
@@ -527,7 +526,8 @@ items:
         value: ''
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
@@ -599,11 +599,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.wkIN7WTeX8ebbjtv
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676591
+      modifiedTime: 1765824959651
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!hqj2yXtgwt64v3Lj.bKBPawscKpixPeO0'
