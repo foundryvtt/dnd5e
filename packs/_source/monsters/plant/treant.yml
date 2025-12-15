@@ -496,15 +496,14 @@ items:
     system:
       description:
         value: >-
-          <p>The treant magically animates one or two trees it can see
-          <strong>within 60 feet</strong> of it. These trees have the same
-          statistics as a treant, except they have Intelligence and Charisma
-          scores of 1, they can't speak, and they have only the Slam action
-          option. </p><p>An animated tree acts as an ally of the treant. The
-          tree remains animate for 1 day or until it dies; until the treant dies
-          or is more than 120 feet from the tree; or until the treant takes a
-          bonus action to turn it back into an inanimate tree. The tree then
-          takes root if possible.</p>
+          <p>The treant magically animates one or two trees it can see within 60
+          feet of it. These trees have the same statistics as a treant, except
+          they have Intelligence and Charisma scores of 1, they can't speak, and
+          they have only the Slam action option.</p><p>An animated tree acts as
+          an ally of the treant. The tree remains animate for 1 day or until it
+          dies; until the treant dies or is more than 120 feet from the tree; or
+          until the treant takes a bonus action to turn it back into an
+          inanimate tree. The tree then takes root if possible.</p>
         chat: >-
           <p>The treant magically animates one or two trees it can see
           <strong>within 60 feet</strong> of it.</p>
@@ -585,18 +584,18 @@ items:
       identifier: animate-trees
     effects: []
     folder: null
-    sort: 0
+    sort: 500000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.j6F0v4guYhRYWddT
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676791
+      modifiedTime: 1765827815644
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!NB6wUgVqeOQtsQKu.8uUyRr6Ho7Yvx8pP'
@@ -739,16 +738,16 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745273656063
+      modifiedTime: 1765827792922
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!NB6wUgVqeOQtsQKu.BLz58sp79C2HvinU'
   - _id: eTROJriR9B5abIZy
-    name: Treant - Rock
+    name: Rock
     type: weapon
     img: icons/magic/earth/projectile-boulder-yellow.webp
     system:
@@ -893,20 +892,21 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: treant-rock
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1745173385401
+      modifiedTime: 1765827800449
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!NB6wUgVqeOQtsQKu.eTROJriR9B5abIZy'
@@ -1103,18 +1103,18 @@ items:
       identifier: slam
     effects: []
     folder: null
-    sort: 0
+    sort: 150000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107551521
+      modifiedTime: 1765827805385
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!NB6wUgVqeOQtsQKu.lisZZTaupqInGEi1'

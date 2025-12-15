@@ -495,10 +495,9 @@ items:
     system:
       description:
         value: >-
-          <p>Whenever the shambling mound is subjected to <strong><em>lightning
-          damage</em></strong>, it takes no damage and regains a number
-          of<strong> hit points</strong> equal to the <strong><em>lightning
-          damage</em> dealt</strong>.</p>
+          <p>Whenever the shambling mound is subjected to lightning damage, it
+          takes no damage and regains a number of hit points equal to the
+          lightning damage dealt.</p>
         chat: ''
       source:
         custom: ''
@@ -530,12 +529,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.KTsFgSQlDetDDm1f
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1765827705396
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!gGeLeV411iQ5Yijs.gyAyLX9CJBbawmr3'
   - _id: 2aGoBVVEF54VcC9d
@@ -547,8 +546,8 @@ items:
         value: >-
           <p>The shambling mound makes two [[/item .lOIA9YKQU8xSx7Lj]]{slam}
           attacks. If both attacks hit a Medium or smaller target, the target is
-          grappled <strong>escape DC 14</strong>, and the shambling mound uses
-          its [[/item .N42BQALoCmeYphD1]]{Engulf} on it.</p>
+          grappled escape DC 14, and the shambling mound uses its [[/item
+          .N42BQALoCmeYphD1]]{Engulf} on it.</p>
         chat: ''
       source:
         custom: ''
@@ -633,11 +632,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1745273656670
+      modifiedTime: 1765827711755
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!gGeLeV411iQ5Yijs.2aGoBVVEF54VcC9d'
@@ -650,11 +649,11 @@ items:
         value: >-
           <p>The shambling mound engulfs a Medium or smaller creature grappled
           by it. The engulfed target is blinded, restrained, and unable to
-          breathe, and it must succeed on a  <strong>DC 14 Constitution</strong>
-          saving throw at the start of each of the mound's turns or take
-          <strong>13 (2d8 + 4) <em>bludgeoning damage</em></strong>.</p><p>If
-          the mound moves, the engulfed target moves with it. The mound can have
-          only one creature engulfed at a time.</p>
+          breathe, and it must succeed on a DC 14 Constitution saving throw at
+          the start of each of the mound's turns or take 13 (2d8 + 4)
+          bludgeoning damage.</p><p>If the mound moves, the engulfed target
+          moves with it. The mound can have only one creature engulfed at a
+          time.</p>
         chat: >-
           <p>The shambling mound engulfs a Medium or smaller creature grappled
           by it. The engulfed target is blinded, restrained, and unable to
@@ -726,7 +725,7 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts:
               - custom:
                   enabled: false
@@ -736,8 +735,6 @@ items:
                 bonus: '@mod'
                 types:
                   - bludgeoning
-                scaling:
-                  number: 1
           save:
             ability: con
             dc:
@@ -745,24 +742,30 @@ items:
               formula: '14'
           sort: 0
           name: ''
+          img: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
       enchant: {}
       prerequisites:
         level: null
       identifier: engulf
     effects: []
     folder: null
-    sort: 0
+    sort: 200000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Eh80lkzHiEOJP8FI
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676589
+      modifiedTime: 1765827741520
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!gGeLeV411iQ5Yijs.N42BQALoCmeYphD1'
@@ -914,18 +917,18 @@ items:
       identifier: slam
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107552654
+      modifiedTime: 1765827719954
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!gGeLeV411iQ5Yijs.lOIA9YKQU8xSx7Lj'
