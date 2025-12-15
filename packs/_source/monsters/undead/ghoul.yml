@@ -666,11 +666,11 @@ items:
     system:
       description:
         value: >-
-          <p>[[/attack extended]]. [[/damage extended]]. </p><p>If the target is
-          a creature other than an elf or undead, it must succeed on a 
-          <strong>DC 10 Constitution</strong> saving throw or be paralyzed for 1
-          minute. The target can repeat the saving throw at the end of each of
-          its turns, ending the effect on itself on a success.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
+          a creature other than an elf or undead, it must succeed on a DC 10
+          Constitution saving throw or be paralyzed for 1 minute. The target can
+          repeat the saving throw at the end of each of its turns, ending the
+          effect on itself on a success.</p>
         chat: >-
           <p>The Ghoul attacks with its Claws. If the target is a creature other
           than an elf or undead, it must make a <strong>Constitution</strong>
@@ -814,6 +814,63 @@ items:
           name: ''
           img: ''
           appliedEffects: []
+        whHtUhVBlQkDgqQ0:
+          type: save
+          _id: whHtUhVBlQkDgqQ0
+          sort: 0
+          activation:
+            type: action
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: self
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          damage:
+            onSave: half
+            parts: []
+          save:
+            ability:
+              - con
+            dc:
+              calculation: ''
+              formula: '10'
+          name: ''
+          img: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -824,19 +881,15 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1745108147352
+      modifiedTime: 1765828097493
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!OBujQLLPSmlJiZnL.ArxzPC3rsBztgUvI'

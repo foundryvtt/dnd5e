@@ -608,7 +608,9 @@ items:
     img: icons/magic/water/water-hand.webp
     system:
       description:
-        value: <p>The lich uses its Paralyzing Touch.</p>
+        value: >-
+          <p>The lich uses its [[/item .KDSrdpdFPDKnh80y]]{Paralyzing
+          Touch}.</p>
         chat: ''
       source:
         custom: ''
@@ -691,11 +693,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.ebcmg4M5LsUYCqee
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1745175210887
+      modifiedTime: 1765828208313
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!bfh29vIEoGzI240e.dJLqLsCek3uxbzuX'
@@ -707,12 +709,12 @@ items:
       description:
         value: >-
           <p>The lich fixes its gaze on one creature it can see within 10 feet
-          of it. The target must succeed on a  <strong>DC 18 Wisdom</strong>
-          saving throw against this magic or become grappled for 1 minute. The
-          grappled target can repeat the saving throw at the end of each of its
-          turns, ending the effect on itself on a success. If a target's saving
-          throw is successful or the effect ends for it, the target is immune to
-          the lich's gaze for the next 24 hours.</p>
+          of it. The target must succeed on a DC 18 Wisdom saving throw against
+          this magic or become grappled for 1 minute. The grappled target can
+          repeat the saving throw at the end of each of its turns, ending the
+          effect on itself on a success. If a target's saving throw is
+          successful or the effect ends for it, the target is immune to the
+          lich's gaze for the next 24 hours.</p>
         chat: >-
           <p>The lich fixes its gaze on one creature it can see within 10 feet
           of it. The target must make a <strong>Wisdom</strong> saving
@@ -810,11 +812,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.cpnrDGQrqgPlSmwR
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676949
+      modifiedTime: 1765828215173
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!bfh29vIEoGzI240e.Uox2GEp5GMXOOXOc'
@@ -825,10 +827,10 @@ items:
     system:
       description:
         value: >-
-          <p>Each non-undead creature within 20 feet of the lich must make a 
-          <strong>DC 18 Constitution</strong> saving throw against this magic,
-          taking <strong>21 (6d6) <em>necrotic damage</em></strong> on a failed
-          save, or half as much damage on a successful one.</p>
+          <p>Each non-undead creature within 20 feet of the lich must make a DC
+          18 Constitution saving throw against this magic, taking 21 (6d6)
+          necrotic damage on a failed save, or half as much damage on a
+          successful one.</p>
         chat: >-
           <p>Each non-undead creature within 20 feet of the lich must make a
           <strong>Constitution</strong> saving throw against this magic.</p>
@@ -936,11 +938,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EguIm3u5kkopYwEM
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676949
+      modifiedTime: 1765828222353
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!bfh29vIEoGzI240e.sXU9KTYnmgi08EQw'
@@ -1059,9 +1061,8 @@ items:
       description:
         value: >-
           <p>If it has a phylactery, a destroyed lich gains a new body in 1d10
-          days, regaining all its<strong> hit points</strong> and becoming
-          active again. The new body appears <strong>within 5 feet</strong> of
-          the phylactery.</p>
+          days, regaining all its hit points and becoming active again. The new
+          body appears within 5 feet of the phylactery.</p>
         chat: >-
           <p>A destroyed lich gains a new body in 1d10 days, regaining all
           its<strong> hit points</strong> and becoming active again.</p>
@@ -1148,11 +1149,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.JcfHlAcfwSWnt7Ud
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676949
+      modifiedTime: 1765828163097
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!bfh29vIEoGzI240e.stk9i3rPK7z99CDf'
@@ -1564,109 +1565,6 @@ items:
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!bfh29vIEoGzI240e.GvT7gczoJ6QCocrA'
-  - _id: TB52r9CGyQ5lewor
-    name: Regional Effects
-    type: feat
-    img: icons/environment/wilderness/cave-entrance-mountain-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The mere presence of a legendary creature can have strange and
-          wondrous effects on its environment. Regional effects end abruptly or
-          dissipate over time when the legendary creature dies.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: regional-effects
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.L7myj23X3PFPUNh6
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!bfh29vIEoGzI240e.TB52r9CGyQ5lewor'
-  - _id: XbzBKNTXHSUjzWtt
-    name: Lair Actions
-    type: feat
-    img: icons/magic/nature/stealth-hide-eyes-green.webp
-    system:
-      description:
-        value: >-
-          <p>If a legendary creature has lair actions, it can use them to
-          harness the ambient magic in its lair. On initiative count 20 (losing
-          all initiative ties), it can use one of its lair action options. It
-          can't do so while incapacitated or otherwise unable to take actions.
-          If surprised, it can't use one until after its first turn in the
-          combat.</p>
-        chat: >-
-          <p>If a legendary creature has lair actions, it can use them to
-          harness the ambient magic in its lair. </p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: lair-actions
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.P0DMM1rgpoiBodDT
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676949
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!bfh29vIEoGzI240e.XbzBKNTXHSUjzWtt'
   - _id: Utk1OQRwYkMkFRD3
     name: Mage Hand
     ownership:

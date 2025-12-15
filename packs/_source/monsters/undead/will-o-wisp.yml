@@ -508,11 +508,10 @@ items:
       description:
         value: >-
           <p>As a bonus action, the will-o'-wisp can target one creature it can
-          see within <strong>5 ft.</strong> of it that has <strong>0 hit
-          points</strong> and is still alive. </p><p>The target must succeed on
-          a <strong>DC 10 Constitution saving throw</strong> against this magic
-          or die. If the target dies, the will-o'-wisp regains 10 (3d6)<strong>
-          hit points</strong>.</p>
+          see within 5 feet of it that has 0 hit points and is still
+          alive.</p><p>The target must succeed on a DC 10 Constitution saving
+          throw against this magic or die. If the target dies, the will-o'-wisp
+          regains 10 (3d6) hit points.</p>
         chat: >-
           <p>The will-o'-wisp can target one creature it can see within
           <strong>5 ft.</strong> The target must succeed on a Constitution
@@ -532,7 +531,8 @@ items:
         value: ''
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
@@ -584,16 +584,7 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts:
-              - custom:
-                  enabled: false
-                  formula: ''
-                number: 3
-                denomination: 6
-                bonus: ''
-                types: []
-                scaling:
-                  number: 1
+            parts: []
           save:
             ability: con
             dc:
@@ -601,6 +592,66 @@ items:
               formula: '10'
           sort: 0
           name: ''
+        XXlHnpAClv3SEWrJ:
+          type: heal
+          _id: XXlHnpAClv3SEWrJ
+          sort: 0
+          activation:
+            type: ''
+            override: false
+            condition: if the target dies
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: self
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: self
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          healing:
+            types:
+              - healing
+            custom:
+              enabled: false
+            scaling:
+              number: 1
+            number: 3
+            denomination: 6
+            bonus: ''
+          name: ''
+          img: ''
       enchant: {}
       prerequisites:
         level: null
@@ -614,11 +665,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.r2nM5I77LnSvkLvD
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676865
+      modifiedTime: 1765828834056
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!8KSVpQZyzius93ko.RAnyTfj3CGaiGK3W'
@@ -676,8 +727,8 @@ items:
       description:
         value: >-
           <p>The will-o'-wisp can move through other creatures and objects as if
-          they were difficult terrain.</p><p>It takes <strong>5 (1d10) <em>force
-          damage</em></strong> if it ends its turn inside an object.</p>
+          they were difficult terrain.</p><p>It takes 5 (1d10) force damage if
+          it ends its turn inside an object.</p>
         chat: >-
           <p>The will-o'-wisp can move through other creatures and objects as if
           they were difficult terrain.</p>
@@ -776,11 +827,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.LUHmtIDD1VTreFqI
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676865
+      modifiedTime: 1765828843131
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!8KSVpQZyzius93ko.MGdIOXhRAQQRrAcO'
@@ -791,10 +842,9 @@ items:
     system:
       description:
         value: >-
-          <p>The will-o'-wisp sheds bright light in a 5- to <strong>20-foot
-          radius</strong> and dim light for an additional number of<strong>
-          ft.</strong> equal to the chosen radius. The will-o'-wisp can alter
-          the radius as a bonus action.</p>
+          <p>The will-o'-wisp sheds bright light in a 5- to 20-foot radius and
+          dim light for an additional number of feet equal to the chosen radius.
+          The will-o'-wisp can alter the radius as a bonus action.</p>
         chat: ''
       source:
         custom: ''
@@ -826,12 +876,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.iQGaWIinmYFPRF94
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1765828855319
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!8KSVpQZyzius93ko.3Sr6MrVgbTGw66Aa'
   - _id: np6oHDOwHQFsSn5B

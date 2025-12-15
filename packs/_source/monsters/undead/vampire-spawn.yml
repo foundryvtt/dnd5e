@@ -655,18 +655,18 @@ items:
       mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745175966453
+      modifiedTime: 1765828689254
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!zpaZb7I8alY32vWV.HebvJc2NqYvdR79s'
@@ -676,7 +676,9 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: <p>[[/attack extended]]. [[/damage extended]]. </p>
+        value: >-
+          <p>[[/attack extended]]. [[/damage extended]]. Instead of dealing
+          damage, the vampire can grapple the target (escape DC 13).</p>
         chat: >-
           <p>The Vampire Spawn attacks with its Claws. Instead of dealing
           damage, the vampire can grapple the target.</p>
@@ -818,20 +820,21 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: claws
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 50000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1745107554337
+      modifiedTime: 1765828724796
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!zpaZb7I8alY32vWV.DY9MW3aTF5T5zhpo'
@@ -928,11 +931,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745273657774
+      modifiedTime: 1765828690184
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!zpaZb7I8alY32vWV.Q9tHfkUiN6f1sguc'
@@ -943,11 +946,10 @@ items:
     system:
       description:
         value: >-
-          <p>The vampire regains <strong>10 hit points</strong> at the start of
-          its turn if it has at least <strong>1 hit point</strong> and isn't in
-          sunlight or running water. If the vampire takes <em>radiant
-          damage</em> or damage from holy water, this trait doesn't function at
-          the start of the vampire's next turn.</p>
+          <p>The vampire regains 10 hit points at the start of its turn if it
+          has at least 1 hit point and isn't in sunlight or running water. If
+          the vampire takes radiant damage or damage from holy water, this trait
+          doesn't function at the start of the vampire's next turn.</p>
         chat: >-
           <p>The vampire regains <strong>10 hit points</strong> at the start of
           its turn.</p>
@@ -966,13 +968,14 @@ items:
         value: ''
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
           type: heal
           activation:
-            type: ''
+            type: turnStart
             value: null
             condition: ''
             override: false
@@ -1029,6 +1032,13 @@ items:
               number: null
               formula: ''
           sort: 0
+          name: ''
+          img: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
       enchant: {}
       prerequisites:
         level: null
@@ -1042,11 +1052,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Av7H0ymGdPeTsnwV
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676837
+      modifiedTime: 1765828668263
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!zpaZb7I8alY32vWV.wzRyhY2I1U0ytB7D'
@@ -1105,23 +1115,16 @@ items:
     system:
       description:
         value: >-
-          <p>The vampire has the following flaws:</p>
-
-          <p><strong>Forbiddance</strong>. The vampire can't enter a residence
-          without an invitation from one of the occupants<strong>. </strong></p>
-
-          <p><strong>Harmed by Running Water. </strong>The vampire takes 20
-          <em>acid damage</em> when it ends its turn in running water<strong>.
-          </strong></p>
-
-          <p><strong>Stake to the Heart. </strong>The vampire is destroyed if a
-          piercing weapon made of wood is driven into its heart while it is
-          incapacitated in its resting place<strong>. </strong></p>
-
-          <p><strong>Sunlight Hypersensitivity.</strong> The vampire takes 20
-          <em>radiant damage</em> when it starts its turn in sunlight. While in
-          sunlight, it has<strong> disadvantage </strong>on attack rolls and
-          ability checks.</p>
+          <p>The vampire has the following flaws:</p><p><em>Forbiddance.</em>
+          The vampire can't enter a residence without an invitation from one of
+          the occupants.</p><p><em>Harmed by Running Water.</em> The vampire
+          takes 20 acid damage when it ends its turn in running
+          water.</p><p><em>Stake to the Heart.</em> The vampire is destroyed if
+          a piercing weapon made of wood is driven into its heart while it is
+          incapacitated in its resting place.</p><p><em>Sunlight
+          Hypersensitivity.</em> The vampire takes 20 radiant damage when it
+          starts its turn in sunlight. While in sunlight, it has disadvantage on
+          attack rolls and ability checks.</p>
         chat: ''
       source:
         custom: ''
@@ -1153,12 +1156,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Ervkb8H99e2Beiae
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1765828685210
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!zpaZb7I8alY32vWV.lLAigtCvoIuj0TM9'
 effects: []
