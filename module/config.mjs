@@ -2326,12 +2326,12 @@ DND5E.aggregateDamageDisplay = true;
  */
 DND5E.healingTypes = {
   healing: {
-    label: "DND5E.Healing",
+    label: "DND5E.HEAL.Type.Healing",
     icon: "systems/dnd5e/icons/svg/damage/healing.svg",
     color: new Color(0x46C252)
   },
   temphp: {
-    label: "DND5E.HealingTemp",
+    label: "DND5E.HEAL.Type.TempHP",
     icon: "systems/dnd5e/icons/svg/damage/temphp.svg",
     color: new Color(0x4B66DE)
   }

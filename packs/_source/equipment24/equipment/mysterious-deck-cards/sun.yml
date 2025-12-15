@@ -136,20 +136,22 @@ effects:
     description: >-
       <p><em>Source:
       @UUID[Compendium.dnd5e.equipment24.Item.dmgDmtSun0000000]{Sun}</em></p><p>You
-      gain [[/healing 10 type=temphp]]{10 Temporary Hit Points} daily at dawn
-      until you die.</p>
+      gain [[/healing 10 temp]] daily at dawn until you die.</p>
     tint: '#ffffff'
     statuses: []
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 5.2.3
       createdTime: 1729205768672
-      modifiedTime: 1729205932148
+      modifiedTime: 1765823916155
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmgDmtSun0000000.enZ79fOzsta0vlqK'
