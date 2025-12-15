@@ -606,8 +606,8 @@ items:
     system:
       description:
         value: >-
-          <p>The tarrasque has<strong> advantage </strong>on saving throws
-          against spells and other magical effects.</p>
+          <p>The tarrasque has advantage on saving throws against spells and
+          other magical effects.</p>
         chat: ''
       source:
         custom: ''
@@ -639,12 +639,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1765826831151
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!KCvt4FdOVJbuZ3T0.QmAWameRMoj0gDKt'
   - _id: tE9TjxIMLnqDisjv
@@ -1413,9 +1413,9 @@ items:
     system:
       description:
         value: >-
-          <p>[[/attack extended]]. [[/damage extended]]. </p><p>If the target is
-          a creature, it must succeed on a  <strong>DC 20 Strength</strong>
-          saving throw or be knocked prone.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
+          a creature, it must succeed on a DC 20 Strength saving throw or be
+          knocked prone.</p>
         chat: >-
           <p>The Tarrasque attacks with its Tail. If the target is a creature,
           it must make a <strong>Strength</strong> saving throw or be knocked
@@ -1605,19 +1605,7 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts:
-              - number: 4
-                denomination: 6
-                bonus: '@mod'
-                types:
-                  - bludgeoning
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            parts: []
           save:
             ability: str
             dc:
@@ -1628,6 +1616,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: tail
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -1637,11 +1626,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1745107551149
+      modifiedTime: 1765826862424
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!KCvt4FdOVJbuZ3T0.Lo4LU9FBxez1Nzqm'
@@ -1652,15 +1641,14 @@ items:
     system:
       description:
         value: >-
-          <p>Each creature of the tarrasque's choice <strong>within 120
-          feet</strong> of it and aware of it must succeed on a <strong>DC 17
-          Wisdom saving throw</strong> or become frightened for <strong>1
-          minute</strong>.</p><p>A creature can repeat the saving throw at the
-          end of each of its turns, with<strong> disadvantage </strong>if the
-          tarrasque is within line of sight, ending the effect on itself on a
-          success. If a creature's saving throw is successful or the effect ends
-          for it, the creature is immune to the tarrasque's Frightful Presence
-          for the next 24 hours.</p>
+          <p>Each creature of the tarrasque's choice within 120 feet of it and
+          aware of it must succeed on a DC 17 Wisdom saving throw or become
+          frightened for 1 minute.</p><p>A creature can repeat the saving throw
+          at the end of each of its turns, with disadvantage if the tarrasque is
+          within line of sight, ending the effect on itself on a success. If a
+          creature's saving throw is successful or the effect ends for it, the
+          creature is immune to the tarrasque's Frightful Presence for the next
+          24 hours.</p>
         chat: >-
           <p>Each creature of the tarrasque's choice <strong>within 120
           feet</strong> of it and aware of it must succeed on a Wisdom saving
@@ -1752,11 +1740,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.nb6zOmwIIJBLz4iT
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676998
+      modifiedTime: 1765826873404
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!KCvt4FdOVJbuZ3T0.3mtn5D2GoD19WDVW'
@@ -1769,15 +1757,14 @@ items:
         value: >-
           <p>The tarrasque makes one bite attack against a Large or smaller
           creature it is grappling. If the attack hits, the target takes the
-          bite's damage, the target is swallowed, and the grapple ends.
-          </p><p>While swallowed, the creature is blinded and restrained, it has
-          total cover against attacks and other effects outside the tarrasque,
-          and it takes <strong>56 (16d6) <em>acid damage</em></strong> at the
-          start of each of the tarrasque's turns.If the tarrasque takes 60
-          damage or more on a single turn from a creature inside it, the
-          tarrasque must succeed on a  <strong>DC 20 Constitution</strong>
-          saving throw at the end of that turn or regurgitate all swallowed
-          creatures, which fall prone in a space within 10 feet of the
+          bite's damage, the target is swallowed, and the grapple ends. While
+          swallowed, the creature is blinded and restrained, it has total cover
+          against attacks and other effects outside the tarrasque, and it takes
+          56 (16d6) acid damage at the start of each of the tarrasque's
+          turns.</p><p>If the tarrasque takes 60 damage or more on a single turn
+          from a creature inside it, the tarrasque must succeed on a DC 20
+          Constitution saving throw at the end of that turn or regurgitate all
+          swallowed creatures, which fall prone in a space within 10 feet of the
           tarrasque. If the tarrasque dies, a swallowed creature is no longer
           restrained by it and can escape from the corpse by using 30 feet of
           movement, exiting prone.</p>
@@ -1853,72 +1840,71 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: attack
+        KKNpoOVnXklx84vr:
+          type: damage
+          _id: KKNpoOVnXklx84vr
+          sort: 0
           activation:
             type: action
-            value: 1
-            condition: Large or smaller creature it is grappling
             override: false
+            condition: ''
           consumption:
-            targets: []
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets: []
           description:
             chatFlavor: ''
           duration:
+            units: inst
             concentration: false
-            value: ''
-            units: ''
-            special: ''
             override: false
           effects: []
+          flags: {}
           range:
-            units: ''
-            special: ''
+            units: self
             override: false
           target:
             template:
-              count: ''
               contiguous: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: ''
-              type: ''
               choice: false
-              special: ''
-            prompt: true
+              type: ''
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
-          attack:
-            ability: str
-            bonus: ''
-            critical:
-              threshold: null
-            flat: false
-            type:
-              value: melee
-              classification: weapon
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
           damage:
             critical:
-              bonus: ''
-            includeBase: true
-            parts: []
-          sort: 0
+              allow: false
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 16
+                denomination: 6
+                bonus: ''
+                types:
+                  - acid
+          name: ''
+          img: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: swallow
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -1928,68 +1914,14 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.aH5ncM30tP8tPQ24
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: 1736804676998
+      modifiedTime: 1765826941357
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!KCvt4FdOVJbuZ3T0.7ycN6rrAEJQP3ZOs'
-  - _id: 9OZ6Zm76HXyRSKlP
-    name: Lair Actions
-    type: feat
-    img: icons/magic/nature/stealth-hide-eyes-green.webp
-    system:
-      description:
-        value: >-
-          <p>If a legendary creature has lair actions, it can use them to
-          harness the ambient magic in its lair. On initiative count 20 (losing
-          all initiative ties), it can use one of its lair action options. It
-          can't do so while incapacitated or otherwise unable to take actions.
-          If surprised, it can't use one until after its first turn in the
-          combat.</p>
-        chat: >-
-          <p>If a legendary creature has lair actions, it can use them to
-          harness the ambient magic in its lair. </p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: lair-actions
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.P0DMM1rgpoiBodDT
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676998
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!KCvt4FdOVJbuZ3T0.9OZ6Zm76HXyRSKlP'
   - _id: sBnQiUt83GYUkKBw
     name: Legendary Actions
     type: feat
@@ -2040,62 +1972,15 @@ items:
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!KCvt4FdOVJbuZ3T0.sBnQiUt83GYUkKBw'
-  - _id: UUapff5kwkff2TJP
-    name: Regional Effects
-    type: feat
-    img: icons/environment/wilderness/cave-entrance-mountain-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The mere presence of a legendary creature can have strange and
-          wondrous effects on its environment. Regional effects end abruptly or
-          dissipate over time when the legendary creature dies.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: regional-effects
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.L7myj23X3PFPUNh6
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!KCvt4FdOVJbuZ3T0.UUapff5kwkff2TJP'
   - _id: XFNRU61XBt7FvXAM
     name: Attack
     type: feat
     img: icons/skills/melee/blood-slash-foam-red.webp
     system:
       description:
-        value: <p>The tarrasque makes one claw attack or tail attack.</p>
+        value: >-
+          <p>The tarrasque makes one [[/item .7DRko62ztr6FjZLA]]{claw} attack or
+          [[/item .Lo4LU9FBxez1Nzqm]]{tail} attack.</p>
         chat: ''
       source:
         custom: ''
@@ -2186,12 +2071,12 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1765826969643
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!KCvt4FdOVJbuZ3T0.XFNRU61XBt7FvXAM'
   - _id: wYuyOwVFLle1u78H
@@ -2306,7 +2191,9 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: <p>The tarrasque makes one bite attack or uses its Swallow.</p>
+        value: >-
+          <p>The tarrasque makes one [[/item .suUr7bJqBqE7xk2F]]{bite} attack or
+          uses its [[/item .7ycN6rrAEJQP3ZOs]]{Swallow}.</p>
         chat: ''
       source:
         custom: ''
@@ -2397,12 +2284,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.5rr8YdsGtL8WxEuE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.2.3
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1765826999122
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!KCvt4FdOVJbuZ3T0.wqgAyjgICylYksGZ'
 effects: []
