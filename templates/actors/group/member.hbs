@@ -86,11 +86,17 @@
         {{else}}
         <div class="info">
             <div>
-                <i class="fa-solid fa-shield" data-tooltip aria-label="{{ localize "DND5E.ArmorClass" }}"></i>
+                <i class="fa-solid fa-shield"
+                   data-attribution="attributes.ac" data-reference-tooltip="{{ uuid }}"
+                   data-attribution-caption="DND5E.ArmorClass" aria-label="{{ localize "DND5E.ArmorClass" }}">
+                </i>
                 <span class="value">{{ system.attributes.ac.value }}</span>
             </div>
             <div>
-                <i class="fa-solid fa-shoe-prints" data-tooltip aria-label="{{ localize "DND5E.Speed" }}"></i>
+                <i class="fa-solid fa-shoe-prints"
+                   data-attribution="attributes.movement" data-reference-tooltip="{{ uuid }}"
+                   aria-label="{{ localize "DND5E.Speed" }}">
+                </i>
                 <span class="value">
                     {{ system.attributes.movement.walk }}
                     {{#if system.attributes.movement.slowed}}
