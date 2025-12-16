@@ -131,11 +131,12 @@ export default class MappingField extends foundry.data.fields.ObjectField {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _getField(path) {
+  _getField(path, options) {
     if ( path.length === 0 ) return this;
     else if ( path.length === 1 ) return this.model;
-    path.shift();
-    return this.model._getField(path);
+    if ( game.release.generation < 14 ) path.shift();
+    else path.pop();
+    return this.model._getField(path, options);
   }
 
   /* -------------------------------------------- */
