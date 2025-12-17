@@ -1,0 +1,5253 @@
+name: Aoth
+type: character
+_id: AothLv0100000000
+img: null
+system:
+  currency:
+    pp: 0
+    gp: 50
+    ep: 0
+    sp: 0
+    cp: 0
+  abilities:
+    str:
+      value: 10
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+    dex:
+      value: 14
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+    con:
+      value: 14
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+    int:
+      value: 12
+      proficient: 1
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+    wis:
+      value: 17
+      proficient: 1
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+    cha:
+      value: 8
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+  bonuses:
+    mwak:
+      attack: ''
+      damage: ''
+    rwak:
+      attack: ''
+      damage: ''
+    msak:
+      attack: ''
+      damage: ''
+    rsak:
+      attack: ''
+      damage: ''
+    abilities:
+      check: ''
+      save: ''
+      skill: ''
+    spell:
+      dc: ''
+  skills:
+    acr:
+      ability: dex
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    ani:
+      ability: wis
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 1
+      bonuses:
+        check: ''
+        passive: ''
+    arc:
+      ability: int
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    ath:
+      ability: str
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    dec:
+      ability: cha
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    his:
+      ability: int
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    ins:
+      ability: wis
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 1
+      bonuses:
+        check: ''
+        passive: ''
+    itm:
+      ability: cha
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    inv:
+      ability: int
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    med:
+      ability: wis
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 1
+      bonuses:
+        check: ''
+        passive: ''
+    nat:
+      ability: int
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 1
+      bonuses:
+        check: ''
+        passive: ''
+    prc:
+      ability: wis
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 1
+      bonuses:
+        check: ''
+        passive: ''
+    prf:
+      ability: cha
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    per:
+      ability: cha
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    rel:
+      ability: int
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 1
+      bonuses:
+        check: ''
+        passive: ''
+    slt:
+      ability: dex
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    ste:
+      ability: dex
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    sur:
+      ability: wis
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 1
+      bonuses:
+        check: ''
+        passive: ''
+  tools:
+    woodcarver:
+      value: 1
+      ability: dex
+      roll:
+        min: null
+        max: null
+        mode: 0
+      bonuses:
+        check: ''
+    herb:
+      value: 1
+      ability: int
+      roll:
+        min: null
+        max: null
+        mode: 0
+      bonuses:
+        check: ''
+  spells:
+    spell1:
+      value: 2
+    spell2:
+      value: 0
+    spell3:
+      value: 0
+    spell4:
+      value: 0
+    spell5:
+      value: 0
+    spell6:
+      value: 0
+    spell7:
+      value: 0
+    spell8:
+      value: 0
+    spell9:
+      value: 0
+    pact:
+      value: 0
+  attributes:
+    ac:
+      calc: default
+      flat: null
+    init:
+      ability: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+      bonus: ''
+    movement:
+      units: null
+      hover: false
+      ignoredDifficultTerrain: []
+    attunement:
+      max: 3
+    senses:
+      darkvision: null
+      blindsight: null
+      tremorsense: null
+      truesight: null
+      units: null
+      special: ''
+    spellcasting: wis
+    exhaustion: 0
+    concentration:
+      ability: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+      bonuses:
+        save: ''
+      limit: 1
+    loyalty: {}
+    hp:
+      max: null
+      temp: null
+      tempmax: 0
+      value: 10
+      bonuses: {}
+    death:
+      roll:
+        min: null
+        max: null
+        mode: 0
+      success: 0
+      failure: 0
+      bonuses:
+        save: ''
+    inspiration: true
+  bastion:
+    name: ''
+    description: ''
+  details:
+    biography:
+      value: >-
+        <p>Aoth lived among animals for so long that he now has difficulty
+        speaking Common. His natural habitat in danger, he decided to join an
+        adventuring group to return balance to his land.</p>
+      public: ''
+    alignment: Neutral
+    ideal: ''
+    bond: ''
+    flaw: ''
+    race: cMEhIqzMYKu7zlaO
+    background: caFi0Tslu7qxmXTK
+    originalClass: PC4BrUcf3LeplS7g
+    xp:
+      value: 0
+    appearance: ''
+    trait: ''
+    gender: ''
+    eyes: ''
+    height: ''
+    faith: ''
+    hair: ''
+    skin: ''
+    age: ''
+    weight: ''
+  traits:
+    size: med
+    di:
+      value: []
+      custom: ''
+      bypasses: []
+    dr:
+      value: []
+      custom: ''
+      bypasses: []
+    dv:
+      value: []
+      custom: ''
+      bypasses: []
+    dm:
+      amount: {}
+      bypasses: []
+    ci:
+      value: []
+      custom: ''
+    languages:
+      value:
+        - common
+        - gnomish
+        - sign
+        - druidic
+      custom: ''
+      communication: {}
+    weaponProf:
+      value:
+        - sim
+      custom: ''
+      mastery:
+        value: []
+        bonus: []
+    armorProf:
+      value:
+        - lgt
+        - shl
+      custom: ''
+  resources:
+    primary:
+      value: 0
+      max: 0
+      sr: false
+      lr: false
+      label: ''
+    secondary:
+      value: 0
+      max: 0
+      sr: false
+      lr: false
+      label: ''
+    tertiary:
+      value: 0
+      max: 0
+      sr: false
+      lr: false
+      label: ''
+  favorites:
+    - type: item
+      id: .Item.ioBBKdth7zlMBLfa
+      sort: 400000
+    - type: item
+      id: .Item.13KeNgoeriSW45ZW
+      sort: 200000
+    - type: item
+      id: .Item.xwOIo5M5A2KHyh88
+      sort: 300000
+prototypeToken:
+  name: Aoth
+  displayName: 20
+  actorLink: true
+  width: 1
+  height: 1
+  texture:
+    src: systems/dnd5e/icons/svg/actors/character.svg
+    anchorX: 0.5
+    anchorY: 0.5
+    offsetX: 0
+    offsetY: 0
+    fit: contain
+    scaleX: 1
+    scaleY: 1
+    rotation: 0
+    tint: '#ffffff'
+    alphaThreshold: 0.75
+  lockRotation: false
+  rotation: 0
+  alpha: 1
+  disposition: 1
+  displayBars: 20
+  bar1:
+    attribute: attributes.hp
+  bar2:
+    attribute: null
+  light:
+    negative: false
+    priority: 0
+    alpha: 0.5
+    angle: 360
+    bright: 0
+    color: null
+    coloration: 1
+    dim: 0
+    attenuation: 0.5
+    luminosity: 0.5
+    saturation: 0
+    contrast: 0
+    shadows: 0
+    animation:
+      type: null
+      speed: 5
+      intensity: 5
+      reverse: false
+    darkness:
+      min: 0
+      max: 1
+  sight:
+    enabled: true
+    range: 0
+    angle: 360
+    visionMode: basic
+    color: null
+    attenuation: 0.1
+    brightness: 0
+    saturation: 0
+    contrast: 0
+  detectionModes: []
+  occludable:
+    radius: 0
+  ring:
+    enabled: false
+    colors:
+      ring: null
+      background: null
+    effects: 0
+    subject:
+      scale: 1
+      texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
+  flags: {}
+  randomImg: false
+  appendNumber: false
+  prependAdjective: false
+items:
+  - name: Human
+    system:
+      description:
+        value: >-
+          <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixSpeci.JournalEntryPage.phbspHuman000000
+          inline classes="free-rules-embed"]</p><h3
+          data-anchor="human-traits">Human Traits</h3><p><strong>Creature Type:
+          </strong>Humanoid</p><p><strong>Size: </strong>Medium (about 4–7 feet
+          tall) or Small (about 2–4 feet tall), chosen when you select this
+          species</p><p><strong>Speed: </strong>30 feet</p><p>As a Human, you
+          have these special traits.</p><p><strong>Resourceful. </strong>You
+          gain Heroic Inspiration whenever you finish a Long
+          Rest.</p><p><strong>Skillful. </strong>You gain proficiency in one
+          skill of your choice.</p><p><strong>Versatile.</strong> You gain an
+          Origin feat of your choice (see chapter 5). Skilled is
+          recommended.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      advancement:
+        - _id: dLxv96vt2B2KOEe2
+          type: Size
+          configuration:
+            sizes:
+              - sm
+              - med
+          level: 0
+          title: ''
+          hint: >-
+            Medium (about 4-7 feet tall) or Small (about 2-4 feet tall), chosen
+            when you select this species
+          value:
+            size: med
+        - _id: 2H3yQa0PfjBgXw2W
+          type: ItemGrant
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.origins24.Item.phbsptResourcefu
+                optional: false
+              - uuid: Compendium.dnd5e.origins24.Item.phbsptSkillful00
+                optional: false
+              - uuid: Compendium.dnd5e.origins24.Item.phbsptVersatile0
+                optional: false
+            optional: false
+            spell: null
+          value:
+            added:
+              Ir5yM70jcP2LXENT: Compendium.dnd5e.origins24.Item.phbsptResourcefu
+              zDXTOpJPvuVpLz1A: Compendium.dnd5e.origins24.Item.phbsptSkillful00
+              HcsIXROMnSAhdjze: Compendium.dnd5e.origins24.Item.phbsptVersatile0
+          level: 0
+          title: Human Traits
+          hint: ''
+        - _id: xIdIaWtTj1cBERln
+          type: Trait
+          configuration:
+            mode: default
+            allowReplacements: false
+            grants: []
+            choices:
+              - count: 1
+                pool:
+                  - skills:*
+          value:
+            chosen:
+              - skills:ani
+          level: 0
+          title: Skillful
+          hint: You gain proficiency in one skill of your choice.
+        - _id: KB8IQLwyuL6SOFnv
+          type: ItemChoice
+          configuration:
+            choices:
+              '0':
+                count: 1
+                replacement: false
+            allowDrops: true
+            type: feat
+            pool:
+              - uuid: Compendium.dnd5e.feats24.Item.phbftAlert000000
+              - uuid: Compendium.dnd5e.feats24.Item.phbftMagicInitia
+              - uuid: Compendium.dnd5e.feats24.Item.phbftSavageAttac
+              - uuid: Compendium.dnd5e.feats24.Item.phbftSkilled0000
+            spell: null
+            restriction:
+              type: feat
+              subtype: origin
+              list: []
+          value:
+            added:
+              '0':
+                x2ry76h0dhnBKBt1: Compendium.dnd5e.feats24.Item.phbftSkilled0000
+            replaced: {}
+          title: Versatile
+          hint: You gain an Origin feat of your choice. Skillful is recommended.
+      movement:
+        walk: '30'
+        units: null
+        hover: false
+        ignoredDifficultTerrain: []
+      senses:
+        darkvision: null
+        blindsight: null
+        tremorsense: null
+        truesight: null
+        units: null
+        special: ''
+      type:
+        value: humanoid
+        custom: ''
+        subtype: Human
+      identifier: human
+    _id: cMEhIqzMYKu7zlaO
+    type: race
+    folder: Ulvo8nbygUegLa59
+    img: icons/environment/people/commoner.webp
+    effects: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0100000000.cMEhIqzMYKu7zlaO'
+  - _id: Ir5yM70jcP2LXENT
+    name: Resourceful
+    type: feat
+    img: icons/tools/hand/hammer-and-nail.webp
+    system:
+      activities: {}
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      description:
+        value: <p>You gain Heroic Inspiration whenever you finish a Long Rest.</p>
+        chat: ''
+      source:
+        revision: 1
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+      enchant: {}
+      type:
+        value: race
+        subtype: ''
+      prerequisites:
+        level: null
+        repeatable: false
+        items: []
+      properties: []
+      requirements: Human
+      identifier: resourceful
+      advancement: []
+      crewed: false
+    effects: []
+    folder: uCr9wkkriM8r4C9R
+    flags:
+      dnd5e:
+        sourceId: Compendium.dnd5e.origins24.Item.phbsptResourcefu
+        advancementOrigin: cMEhIqzMYKu7zlaO.2H3yQa0PfjBgXw2W
+        advancementRoot: cMEhIqzMYKu7zlaO.2H3yQa0PfjBgXw2W
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      lastModifiedBy: null
+    sort: 100000
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0100000000.Ir5yM70jcP2LXENT'
+  - _id: zDXTOpJPvuVpLz1A
+    name: Skillful
+    type: feat
+    img: icons/commodities/treasure/medal-ribbon-silver-blue.webp
+    system:
+      activities: {}
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      description:
+        value: >-
+          <p>You gain proficiency in one skill of your choice.</p><section
+          id="secret-lvP62g2xTxkz2VN3" class="secret"><p><strong>Foundry
+          Note</strong></p><p>You will be prompted for this choice when you
+          select this Species.</p></section>
+        chat: ''
+      source:
+        revision: 1
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+      enchant: {}
+      type:
+        value: race
+        subtype: ''
+      prerequisites:
+        level: null
+        repeatable: false
+        items: []
+      properties: []
+      requirements: Human
+      identifier: skillful
+      advancement: []
+      crewed: false
+    effects: []
+    folder: uCr9wkkriM8r4C9R
+    flags:
+      dnd5e:
+        sourceId: Compendium.dnd5e.origins24.Item.phbsptSkillful00
+        advancementOrigin: cMEhIqzMYKu7zlaO.2H3yQa0PfjBgXw2W
+        advancementRoot: cMEhIqzMYKu7zlaO.2H3yQa0PfjBgXw2W
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      lastModifiedBy: null
+    sort: 200000
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0100000000.zDXTOpJPvuVpLz1A'
+  - _id: HcsIXROMnSAhdjze
+    name: Versatile
+    type: feat
+    img: icons/skills/trades/academics-investigation-puzzles.webp
+    system:
+      activities: {}
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      description:
+        value: >-
+          <p>You gain an
+          @UUID[Compendium.dnd5e.content24.JournalEntry.phbFeats00000000.JournalEntryPage.otAeQs0TLHYIBNuj]{Origin
+          feat} of your choice.
+          @UUID[Compendium.dnd5e.feats24.Item.phbftSkilled0000]{Skilled} is
+          recommended.</p><section id="secret-9E1yve6WHohyBage"
+          class="secret"><p><strong>Foundry Note</strong></p><p>You will be
+          prompted for your choice when you select this Species.</p></section>
+        chat: ''
+      source:
+        revision: 1
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+      enchant: {}
+      type:
+        value: race
+        subtype: ''
+      prerequisites:
+        level: null
+        repeatable: false
+        items: []
+      properties: []
+      requirements: Human
+      identifier: versatile
+      advancement: []
+      crewed: false
+    effects: []
+    folder: uCr9wkkriM8r4C9R
+    flags:
+      dnd5e:
+        sourceId: Compendium.dnd5e.origins24.Item.phbsptVersatile0
+        advancementOrigin: cMEhIqzMYKu7zlaO.2H3yQa0PfjBgXw2W
+        advancementRoot: cMEhIqzMYKu7zlaO.2H3yQa0PfjBgXw2W
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      lastModifiedBy: null
+    sort: 150000
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0100000000.HcsIXROMnSAhdjze'
+  - name: Skilled
+    system:
+      description:
+        value: >-
+          <p>You gain proficiency in any combination of three skills or tools of
+          your choice.</p><p><strong>Repeatable.</strong> You can take this feat
+          more than once.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: feat
+        subtype: origin
+      prerequisites:
+        level: null
+        repeatable: true
+        items: []
+      properties: []
+      requirements: ''
+      activities: {}
+      enchant: {}
+      identifier: skilled
+      advancement:
+        - type: Trait
+          _id: Mm4MAeZK89zGqmyH
+          configuration:
+            allowReplacements: false
+            choices:
+              - count: 3
+                pool:
+                  - skills:*
+                  - tool:*
+            grants: []
+            mode: default
+          level: 0
+          title: ''
+          hint: ''
+          value:
+            chosen:
+              - tool:art:woodcarver
+              - skills:ins
+              - skills:prc
+      crewed: false
+    _id: x2ry76h0dhnBKBt1
+    type: feat
+    img: icons/commodities/treasure/medal-ribbon-blue.webp
+    effects: []
+    folder: d5jrO8A6QpjEV9rn
+    sort: 101563
+    flags:
+      dnd5e:
+        sourceId: Compendium.dnd5e.feats24.Item.phbftSkilled0000
+        advancementOrigin: cMEhIqzMYKu7zlaO.KB8IQLwyuL6SOFnv
+        advancementRoot: cMEhIqzMYKu7zlaO.KB8IQLwyuL6SOFnv
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0100000000.x2ry76h0dhnBKBt1'
+  - name: Recluse
+    type: background
+    _id: caFi0Tslu7qxmXTK
+    img: icons/magic/light/explosion-beam-impact-silhouette.webp
+    system:
+      advancement:
+        - type: AbilityScoreImprovement
+          configuration:
+            points: 3
+            cap: 2
+            fixed:
+              str: 0
+              dex: 0
+              con: 0
+              int: 0
+              wis: 0
+              cha: 0
+            locked:
+              - str
+              - int
+              - cha
+            recommendation: null
+            max: null
+          _id: 4jWdlHqpflZX04l1
+          value:
+            type: asi
+            assignments:
+              dex: 1
+              wis: 2
+          level: 0
+          title: ''
+          hint: ''
+        - type: Trait
+          title: Background Proficiencies
+          _id: H1F8A8yrHkRg0yFU
+          configuration:
+            allowReplacements: true
+            choices: []
+            grants:
+              - skills:med
+              - skills:rel
+              - tool:herb
+            mode: default
+          level: 0
+          hint: ''
+          value:
+            chosen:
+              - skills:med
+              - skills:rel
+              - tool:herb
+        - type: Trait
+          title: Choose Languages
+          configuration:
+            grants:
+              - languages:standard:common
+            allowReplacements: true
+            choices:
+              - count: 2
+                pool:
+                  - languages:standard:*
+            mode: default
+          _id: EfBHg2S48Wu6VgdC
+          level: 0
+          hint: ''
+          value:
+            chosen:
+              - languages:standard:common
+              - languages:standard:gnomish
+              - languages:standard:sign
+        - type: ItemGrant
+          title: Background Feat
+          _id: 5u82wk5B8DGNgPiu
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.feats24.Item.phbftAlert000000
+                optional: false
+            optional: false
+            spell: null
+          value:
+            added:
+              J42CWbBer23HsBL9: Compendium.dnd5e.feats24.Item.phbftAlert000000
+          level: 0
+      description:
+        value: >-
+          <p><strong>Ability Scores:</strong> Dexterity, Constitution,
+          Wisdom</p><p><strong>Feat:</strong> Alert</p><p><strong>Skill
+          Proficiencies:</strong> Medicine, Religion</p><p><strong>Tool
+          Proficiency:</strong> Herbalism Kit</p><p><strong>Equipment:</strong>
+          <em>Choose A or B: </em>(A)
+          @UUID[Compendium.dnd5e.equipment24.Item.phbagCaseMaporSc]{Scroll
+          Case}, @UUID[Compendium.dnd5e.equipment24.Item.phbagBlanket0000],
+          @UUID[Compendium.dnd5e.equipment24.Item.phbagClothesTrav],
+          @UUID[Compendium.dnd5e.equipment24.Item.phbtulHerbalismK], [[/award
+          41gp]]; or (B) [[/award 50gp]]</p>
+        chat: ''
+      identifier: recluse
+      source:
+        revision: 1
+        rules: '2024'
+      startingEquipment:
+        - type: AND
+          requiresProficiency: false
+          _id: Y4Tg3uq8bdLC71yI
+          group: ''
+          sort: 100000
+        - type: linked
+          count: null
+          key: Compendium.dnd5e.equipment24.Item.phbagCaseMaporSc
+          requiresProficiency: false
+          _id: e8jqgpXAktqy8ZJJ
+          group: Y4Tg3uq8bdLC71yI
+          sort: 200000
+        - type: linked
+          count: null
+          key: Compendium.dnd5e.equipment24.Item.phbagBlanket0000
+          requiresProficiency: false
+          _id: hC56TinCNfgjMPzp
+          group: Y4Tg3uq8bdLC71yI
+          sort: 300000
+        - type: linked
+          count: null
+          key: Compendium.dnd5e.equipment24.Item.phbagClothesTrav
+          requiresProficiency: false
+          _id: PCze3mbltT84zA6c
+          group: Y4Tg3uq8bdLC71yI
+          sort: 400000
+        - type: linked
+          count: null
+          key: Compendium.dnd5e.equipment24.Item.phbtulHerbalismK
+          requiresProficiency: false
+          _id: DtMEnwRxTbg0dgln
+          group: Y4Tg3uq8bdLC71yI
+          sort: 500000
+        - type: currency
+          count: 41
+          key: gp
+          requiresProficiency: false
+          _id: VZboEvgVBIQRrmaL
+          group: Y4Tg3uq8bdLC71yI
+          sort: 600000
+      wealth: '50'
+    effects: []
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0100000000.caFi0Tslu7qxmXTK'
+  - name: Alert
+    system:
+      description:
+        value: >-
+          <p>You gain the following benefits.</p><p><strong>Initiative
+          Proficiency.</strong> When you roll Initiative, you can add your
+          Proficiency Bonus to the roll.</p><p><strong>Initiative Swap.</strong>
+          Immediately after you roll Initiative, you can swap your Initiative
+          with the Initiative of one willing ally in the same combat. You can't
+          make this swap if you or the ally has the
+          &amp;Reference[Incapacitated] condition.</p><section
+          id="secret-yzfXk3D5M1jv9ixH" class="secret"><p><strong>Foundry
+          Note</strong></p><p>This feature automatically includes the bonus to
+          your Initiative.</p></section>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 2
+        license: CC-BY-4.0
+        book: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: feat
+        subtype: origin
+      prerequisites:
+        level: null
+        repeatable: false
+        items: []
+      properties: []
+      requirements: ''
+      activities: {}
+      enchant: {}
+      identifier: alert
+      advancement: []
+      crewed: false
+    _id: J42CWbBer23HsBL9
+    type: feat
+    img: icons/creatures/eyes/human-single-brown.webp
+    effects:
+      - name: Alert
+        img: icons/creatures/eyes/human-single-brown.webp
+        _id: uvZy4Zzi0oPd54qs
+        type: base
+        system: {}
+        changes:
+          - key: flags.dnd5e.initiativeAlert
+            mode: 2
+            value: 'true'
+            priority: null
+        disabled: false
+        duration:
+          startTime: 0
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        origin: null
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.0
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!AothLv0100000000.J42CWbBer23HsBL9.uvZy4Zzi0oPd54qs
+    folder: d5jrO8A6QpjEV9rn
+    sort: 100000
+    flags:
+      dnd5e:
+        sourceId: Compendium.dnd5e.feats24.Item.phbftAlert000000
+        advancementOrigin: caFi0Tslu7qxmXTK.5u82wk5B8DGNgPiu
+        advancementRoot: caFi0Tslu7qxmXTK.5u82wk5B8DGNgPiu
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0100000000.J42CWbBer23HsBL9'
+  - _id: PC4BrUcf3LeplS7g
+    name: Druid
+    type: class
+    folder: 5WSAEI5S847BwZ8e
+    img: systems/dnd5e/icons/classes/druid.webp
+    system:
+      description:
+        value: >-
+          <h3>Core Druid Traits</h3><table
+          class="core-class-traits"><tbody><tr><th
+          scope="row"><p><strong>Primary
+          Ability</strong></p></th><td><p>Wisdom</p></td></tr><tr><th
+          scope="row"><p><strong>Hit Point Die</strong></p></th><td><p>D8 per
+          Druid level</p></td></tr><tr><th scope="row"><p><strong>Saving Throw
+          Proficiencies</strong></p></th><td><p>Intelligence and
+          Wisdom</p></td></tr><tr><th scope="row"><p><strong>Skill
+          Proficiencies</strong></p></th><td><p><em>Choose 2:</em> Animal
+          Handling, Arcana, Insight, Medicine, Nature, Perception, Religion, or
+          Survival</p></td></tr><tr><th scope="row"><p><strong>Weapon
+          Proficiencies</strong></p></th><td><p>Simple
+          weapons</p></td></tr><tr><th scope="row"><p><strong>Tool
+          Proficiencies</strong></p></th><td><p>Herbalism
+          Kit</p></td></tr><tr><th scope="row"><p><strong>Armor
+          Training</strong></p></th><td><p>Light armor and
+          Shields</p></td></tr><tr><th scope="row"><p><strong>Starting
+          Equipment</strong></p></th><td><p><em>Choose A or B:</em> (A)
+          @UUID[Compendium.dnd5e.equipment24.Item.phbarmLeatherArm]{Leather
+          Armor},
+          @UUID[Compendium.dnd5e.equipment24.Item.phbarmShield0000]{Shield},
+          @UUID[Compendium.dnd5e.equipment24.Item.phbwepSickle0000]{Sickle},
+          @UUID[Compendium.dnd5e.equipment24.Item.phbagDruidicFocu]{Druidic
+          Focus}
+          (@UUID[Compendium.dnd5e.equipment24.Item.phbwepQuartersta]{Quarterstaff}),
+          @UUID[Compendium.dnd5e.equipment24.Item.phbagExplorersPa]{Explorer's
+          Pack},
+          @UUID[Compendium.dnd5e.equipment24.Item.phbtulHerbalismK]{Herbalism
+          Kit}, and [[/award 9GP]]; or (B) [[/award
+          50GP]]</p></td></tr></tbody></table><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixClass.JournalEntryPage.phbdrdDruid00000
+          inline classes="free-rules-embed"]</p><h2>Becoming a Druid
+          …</h2><h3>As a Level 1 Character</h3><ul><li>Gain all the traits in
+          the Core Druid Traits table.</li><li>Gain the Druid's level 1
+          features, which are listed in the Druid Features
+          table.</li></ul><h3>As a Multiclass Character</h3><ul><li>Gain the
+          following traits from the Core Druid Traits table: Hit Point Die and
+          training with Light armor and Shields.</li><li>Gain the Druid's level
+          1 features, which are listed in the Druid Features table. See the
+          multiclassing rules in chapter 2 to determine your available spell
+          slots.</li></ul>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 2
+        license: CC-BY-4.0
+        book: ''
+      startingEquipment:
+        - type: AND
+          requiresProficiency: false
+          _id: SE7gQkJVBVBLku2Z
+          group: ''
+          sort: 100000
+        - type: linked
+          count: null
+          key: Compendium.dnd5e.equipment24.Item.phbarmLeatherArm
+          requiresProficiency: false
+          _id: rkPZmPWx6nzImWwC
+          group: SE7gQkJVBVBLku2Z
+          sort: 200000
+        - type: linked
+          count: null
+          key: Compendium.dnd5e.equipment24.Item.phbarmShield0000
+          requiresProficiency: false
+          _id: 9zoKn2Wfan8s4Zrw
+          group: SE7gQkJVBVBLku2Z
+          sort: 300000
+        - type: linked
+          count: null
+          key: Compendium.dnd5e.equipment24.Item.phbwepSickle0000
+          requiresProficiency: false
+          _id: CVZKjmb4PIYJViPx
+          group: SE7gQkJVBVBLku2Z
+          sort: 400000
+        - type: OR
+          requiresProficiency: false
+          _id: LSQ0jJVeVhuSyjFF
+          group: SE7gQkJVBVBLku2Z
+          sort: 500000
+        - type: linked
+          count: null
+          key: Compendium.dnd5e.equipment24.Item.phbafcStaffalsoa
+          requiresProficiency: false
+          _id: QSpEE9Vk7jat3iJF
+          group: LSQ0jJVeVhuSyjFF
+          sort: 800000
+        - type: linked
+          count: null
+          key: Compendium.dnd5e.equipment24.Item.phbagExplorersPa
+          requiresProficiency: false
+          _id: anr8GUJzm5gPRqAR
+          group: SE7gQkJVBVBLku2Z
+          sort: 600000
+        - type: linked
+          count: null
+          key: Compendium.dnd5e.equipment24.Item.phbtulHerbalismK
+          requiresProficiency: false
+          _id: f6RriL1CTIForH9O
+          group: SE7gQkJVBVBLku2Z
+          sort: 700000
+        - type: currency
+          count: 9
+          key: gp
+          requiresProficiency: false
+          _id: lSik2V9Hely7gsff
+          group: SE7gQkJVBVBLku2Z
+          sort: 900000
+      identifier: druid
+      levels: 1
+      advancement:
+        - _id: wp38UtjwG71SVceB
+          type: HitPoints
+          configuration: {}
+          value:
+            '1': max
+        - _id: P65WodekLKSPQLGZ
+          type: ItemGrant
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.classes24.Item.phbdrdSpellcasti
+                optional: false
+              - uuid: Compendium.dnd5e.classes24.Item.phbdrdDruidic000
+                optional: false
+              - uuid: Compendium.dnd5e.classes24.Item.phbdrdPrimalOrde
+                optional: false
+            optional: false
+            spell:
+              ability: []
+              uses:
+                max: ''
+                per: ''
+                requireSlot: false
+              prepared: 0
+          value:
+            added:
+              gbhec9bOvShetEsF: Compendium.dnd5e.classes24.Item.phbdrdSpellcasti
+              WiCEry3Wba40wBy8: Compendium.dnd5e.classes24.Item.phbdrdDruidic000
+              EPZBzyu35z61qIxw: Compendium.dnd5e.classes24.Item.phbdrdPrimalOrde
+          level: 1
+          title: Class Features
+          hint: ''
+        - _id: hmO24ovOBpmXAb4U
+          type: ItemGrant
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.classes24.Item.phbdrdWildShape0
+                optional: false
+              - uuid: Compendium.dnd5e.classes24.Item.phbdrdWildCompan
+                optional: false
+            optional: false
+            spell: null
+          value: {}
+          level: 2
+          title: Class Features
+        - _id: J2JpbQEZhVD3Dnjz
+          type: ItemGrant
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.classes24.Item.phbdrdWildResurg
+                optional: false
+            optional: false
+            spell: null
+          value: {}
+          level: 5
+          title: Class Features
+        - _id: 2G5tFifGdMns95Jw
+          type: ItemGrant
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.classes24.Item.phbdrdElementalF
+                optional: false
+            optional: false
+            spell: null
+          value: {}
+          level: 7
+          title: Class Features
+        - _id: uNjxqZQ9lZuOKmU7
+          type: ItemGrant
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.classes24.Item.phbdrdImprovedEl
+                optional: false
+            optional: false
+            spell: null
+          value: {}
+          level: 15
+          title: Class Features
+        - _id: 3DZ1Olv41g5BzP4z
+          type: ItemGrant
+          configuration:
+            items:
+              - optional: false
+                uuid: Compendium.dnd5e.classes24.Item.phbdrdBeastSpell
+            optional: false
+            spell: null
+          value: {}
+          level: 18
+          title: Class Features
+        - _id: K72jypxSpzVJRXDh
+          type: ItemGrant
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.classes24.Item.phbdrdArchdruid0
+                optional: false
+            optional: false
+            spell: null
+          value: {}
+          level: 20
+          title: Class Features
+        - _id: bwCLOdauuzoHofil
+          type: AbilityScoreImprovement
+          configuration:
+            points: 2
+            fixed:
+              str: 0
+              dex: 0
+              con: 0
+              int: 0
+              wis: 0
+              cha: 0
+            cap: 2
+            locked: []
+            recommendation: null
+          value:
+            type: asi
+          level: 4
+          title: ''
+        - _id: mRSh9oUVjLU33e7p
+          type: AbilityScoreImprovement
+          configuration:
+            points: 2
+            fixed:
+              str: 0
+              dex: 0
+              con: 0
+              int: 0
+              wis: 0
+              cha: 0
+            cap: 2
+            locked: []
+            recommendation: null
+          value:
+            type: asi
+          level: 8
+          title: ''
+        - _id: mhZh3LfLMa15tXee
+          type: AbilityScoreImprovement
+          configuration:
+            points: 2
+            fixed:
+              str: 0
+              dex: 0
+              con: 0
+              int: 0
+              wis: 0
+              cha: 0
+            cap: 2
+            locked: []
+            recommendation: null
+          value:
+            type: asi
+          level: 12
+          title: ''
+        - _id: FOf5CkGnSs0OlppY
+          type: AbilityScoreImprovement
+          configuration:
+            points: 2
+            fixed:
+              str: 0
+              dex: 0
+              con: 0
+              int: 0
+              wis: 0
+              cha: 0
+            cap: 2
+            locked: []
+            recommendation: null
+          value:
+            type: asi
+          level: 16
+          title: ''
+        - _id: JoHnvnMWRhadHGwf
+          type: ScaleValue
+          configuration:
+            identifier: ''
+            type: number
+            distance:
+              units: ''
+            scale:
+              '1':
+                value: 2
+              '4':
+                value: 3
+              '10':
+                value: 4
+          value: {}
+          title: Cantrips Known
+          hint: ''
+        - _id: VmNGSY7Jbmy4AwBb
+          type: ScaleValue
+          configuration:
+            identifier: max-prepared
+            type: number
+            distance:
+              units: ''
+            scale:
+              '1':
+                value: 4
+              '2':
+                value: 5
+              '3':
+                value: 6
+              '4':
+                value: 7
+              '5':
+                value: 9
+              '6':
+                value: 10
+              '7':
+                value: 11
+              '8':
+                value: 12
+              '9':
+                value: 14
+              '10':
+                value: 15
+              '11':
+                value: 16
+              '13':
+                value: 17
+              '15':
+                value: 18
+              '17':
+                value: 19
+              '18':
+                value: 20
+              '19':
+                value: 21
+              '20':
+                value: 22
+          value: {}
+          title: Max Prepared Spells
+          hint: ''
+        - _id: pIfdGSkqdp00omkE
+          type: ScaleValue
+          configuration:
+            identifier: wild-shape
+            type: cr
+            distance:
+              units: ''
+            scale:
+              '2':
+                value: 0.25
+              '4':
+                value: 0.5
+              '8':
+                value: 1
+          value: {}
+          title: Wild Shape CR
+          hint: ''
+        - _id: MIVwoANGkc6gmUWN
+          type: ScaleValue
+          configuration:
+            identifier: ''
+            type: number
+            distance:
+              units: ''
+            scale:
+              '2':
+                value: 2
+              '6':
+                value: 3
+              '17':
+                value: 4
+          value: {}
+          title: Wild Shape Uses
+          hint: ''
+        - _id: EoM7g9kruaS8VvhA
+          type: ScaleValue
+          configuration:
+            identifier: ''
+            type: number
+            distance:
+              units: ''
+            scale:
+              '2':
+                value: 4
+              '4':
+                value: 6
+              '8':
+                value: 8
+          value: {}
+          title: Known Forms
+          hint: ''
+        - _id: SpGvDfOabbJrOR3K
+          type: ItemGrant
+          configuration:
+            items:
+              - optional: false
+                uuid: Compendium.dnd5e.spells24.Item.phbsplSpeakwithA
+            optional: false
+            spell:
+              ability: []
+              uses:
+                max: ''
+                per: ''
+                requireSlot: false
+              method: spell
+              prepared: 2
+          value:
+            added:
+              n8vESdT4PJtiFw1F: Compendium.dnd5e.spells24.Item.phbsplSpeakwithA
+          level: 1
+          title: Druidic Spells
+          hint: ''
+        - _id: NpBpNlHOO43gMD0U
+          type: ItemChoice
+          configuration:
+            choices:
+              '1':
+                count: 1
+                replacement: false
+            allowDrops: false
+            type: feat
+            pool:
+              - uuid: Compendium.dnd5e.classes24.Item.phbPrimalOrderMa
+              - uuid: Compendium.dnd5e.classes24.Item.phbPrimalOrderWa
+            spell: null
+            restriction:
+              type: class
+              subtype: ''
+              list: []
+          value:
+            added:
+              '1':
+                GBSFN896aPOdii01: Compendium.dnd5e.classes24.Item.phbPrimalOrderWa
+            replaced: {}
+          title: Primal Order
+          hint: >-
+            You have dedicated yourself to one of the following sacred roles of
+            your choice.
+        - _id: HYDmnuNUbI5liP08
+          type: ItemChoice
+          configuration:
+            choices:
+              '7':
+                count: 1
+                replacement: false
+            allowDrops: false
+            type: feat
+            pool:
+              - uuid: Compendium.dnd5e.classes24.Item.phbFuryPotentSpe
+              - uuid: Compendium.dnd5e.classes24.Item.phbFuryPrimalStr
+            spell: null
+            restriction:
+              type: class
+              list: []
+          value:
+            added: {}
+            replaced: {}
+          title: Elemental Fury
+          hint: >-
+            The might of the elements flows through you. You gain one of the
+            following options of your choice.
+        - _id: W0d3c6X31SgnFFYM
+          type: ScaleValue
+          configuration:
+            identifier: ''
+            type: dice
+            distance:
+              units: ''
+            scale:
+              '7':
+                number: 1
+                faces: 8
+                modifiers: []
+              '15':
+                number: 2
+                faces: 8
+                modifiers: []
+          value: {}
+          title: Elemental Fury
+          hint: ''
+        - _id: jOMGuG8a0KfmaeJd
+          type: Subclass
+          configuration: {}
+          value:
+            document: null
+            uuid: null
+          level: 3
+          title: ''
+          hint: ''
+        - _id: Kx19MYNjomUt6m4p
+          type: Trait
+          configuration:
+            mode: default
+            allowReplacements: false
+            grants:
+              - saves:int
+              - saves:wis
+            choices: []
+          value:
+            chosen:
+              - saves:int
+              - saves:wis
+          level: 1
+          title: Saving Throw Proficiencies
+          hint: ''
+          classRestriction: primary
+        - _id: ail7EZ56O8d037cL
+          type: Trait
+          configuration:
+            mode: default
+            allowReplacements: false
+            grants: []
+            choices:
+              - count: 2
+                pool:
+                  - skills:ani
+                  - skills:arc
+                  - skills:ins
+                  - skills:med
+                  - skills:nat
+                  - skills:prc
+                  - skills:rel
+                  - skills:sur
+          value:
+            chosen:
+              - skills:nat
+              - skills:sur
+          level: 1
+          title: Skill Proficiencies
+          hint: ''
+          classRestriction: primary
+        - _id: Eq4uHvKtlKorid7h
+          type: Trait
+          configuration:
+            mode: default
+            allowReplacements: false
+            grants:
+              - weapon:sim
+            choices: []
+          value:
+            chosen:
+              - weapon:sim
+          level: 1
+          title: Weapon Proficiencies
+          hint: ''
+          classRestriction: primary
+        - _id: wB9ulPjnFnueTfr5
+          type: Trait
+          configuration:
+            mode: default
+            allowReplacements: false
+            grants:
+              - tool:herb
+            choices: []
+          value:
+            chosen: []
+          level: 1
+          title: Tool Proficiencies
+          hint: ''
+          classRestriction: primary
+        - _id: iqdFykNhppeEsmtM
+          type: Trait
+          configuration:
+            mode: default
+            allowReplacements: false
+            grants:
+              - armor:lgt
+              - armor:shl
+            choices: []
+          value:
+            chosen:
+              - armor:lgt
+              - armor:shl
+          level: 1
+          title: Armor Training
+          hint: ''
+        - _id: fwwJ7sF6UAsgWaLf
+          type: Trait
+          configuration:
+            mode: default
+            allowReplacements: false
+            grants:
+              - languages:exotic:druidic
+            choices: []
+          value:
+            chosen:
+              - languages:exotic:druidic
+          level: 1
+          title: Druidic
+          hint: You know Druidic, the secret language of Druids.
+        - type: AbilityScoreImprovement
+          _id: gLRZK2OjtSnWNVJv
+          configuration:
+            cap: 2
+            fixed:
+              str: 0
+              dex: 0
+              con: 0
+              int: 0
+              wis: 0
+              cha: 0
+            locked: []
+            points: 2
+            recommendation: Compendium.dnd5e.feats24.Item.phbBoonofDimensi
+            max: null
+          value:
+            type: asi
+          level: 19
+          title: ''
+          hint: ''
+      spellcasting:
+        progression: full
+        ability: wis
+        preparation:
+          formula: '@scale.druid.max-prepared'
+      wealth: '50'
+      primaryAbility:
+        value:
+          - wis
+        all: true
+      hd:
+        denomination: d8
+        spent: 0
+        additional: ''
+      properties: []
+    effects: []
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      lastModifiedBy: null
+    sort: 0
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0100000000.PC4BrUcf3LeplS7g'
+  - _id: gbhec9bOvShetEsF
+    name: Spellcasting
+    type: feat
+    folder: EXYmwRGoNyMbByN1
+    img: icons/magic/nature/beam-hand-leaves-green.webp
+    system:
+      description:
+        value: >-
+          <p>You have learned to cast spells through studying the mystical
+          forces of nature. See
+          @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.b2QVn25z2N1ykWpf]{chapter
+          7} for the rules on spellcasting. The information below details how
+          you use those rules with Druid spells, which appear on the
+          @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.LhvuDQEyrCdg5EfU]{Druid
+          spell list}.</p><p><strong>Cantrips.</strong> You know two cantrips of
+          your choice from the Druid spell list.
+          @UUID[Compendium.dnd5e.spells24.Item.phbsplDruidcraft]{Druidcraft} and
+          @UUID[Compendium.dnd5e.spells24.Item.phbsplProduceFla]{Produce Flame}
+          are recommended.</p><p>Whenever you gain a Druid level, you can
+          replace one of your cantrips with another cantrip of your choice from
+          the Druid spell list.</p><p>When you reach Druid levels 4 and 10, you
+          learn another cantrip of your choice from the Druid spell list, as
+          shown in the Cantrips column of the
+          @UUID[Compendium.dnd5e.content24.JournalEntry.phbDruid00000000.JournalEntryPage.UCOh3zlvGxyk5jLr#class-features]{Druid
+          Features} table.</p><p><strong>Spell Slots.</strong> The Druid
+          Features table shows how many spell slots you have to cast your level
+          1+ spells. You regain all expended slots when you finish a Long
+          Rest.</p><p><strong>Prepared Spells of Level 1+.</strong> You prepare
+          the list of level 1+ spells that are available for you to cast with
+          this feature. To start, choose four level 1 spells from the Druid
+          spell list.
+          @UUID[Compendium.dnd5e.spells24.Item.phbsplAnimalFrie]{Animal
+          Friendship},
+          @UUID[Compendium.dnd5e.spells24.Item.phbsplCureWounds]{Cure Wounds},
+          @UUID[Compendium.dnd5e.spells24.Item.phbsplFaerieFire]{Faerie Fire},
+          and
+          @UUID[Compendium.dnd5e.spells24.Item.phbsplThunderwav]{Thunderwave}
+          are recommended.</p><p>The number of spells on your list increases as
+          you gain Druid levels, as shown in the Prepared Spells column of the
+          Druid Features table. Whenever that number increases, choose
+          additional spells from the Druid spell list until the number of spells
+          on your list matches the number on the table. The chosen spells must
+          be of a level for which you have spell slots. For example, if you're a
+          level 3 Druid, your list of prepared spells can include six spells of
+          levels 1 and 2 in any combination.</p><p>If another Druid feature
+          gives you spells that you always have prepared, those spells don't
+          count against the number of spells you can prepare with this feature,
+          but those spells otherwise count as Druid spells for
+          you.</p><p><strong>Changing Your Prepared Spells.</strong> Whenever
+          you finish a Long Rest, you can change your list of prepared spells,
+          replacing any of the spells with other Druid spells for which you have
+          spell slots.</p><p><strong>Spellcasting Ability. </strong>Wisdom is
+          your spellcasting ability for your Druid
+          spells.</p><p><strong>Spellcasting Focus. </strong>You can use a
+          Druidic Focus as a Spellcasting Focus for your Druid spells.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: class
+        subtype: ''
+      prerequisites:
+        level: 1
+        repeatable: false
+        items: []
+      properties: []
+      requirements: Druid
+      activities: {}
+      enchant: {}
+      identifier: spellcasting
+      advancement: []
+      crewed: false
+    effects: []
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        sourceId: Compendium.dnd5e.classes24.Item.phbdrdSpellcasti
+        advancementOrigin: PC4BrUcf3LeplS7g.P65WodekLKSPQLGZ
+        advancementRoot: PC4BrUcf3LeplS7g.P65WodekLKSPQLGZ
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      lastModifiedBy: null
+    sort: 800000
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0100000000.gbhec9bOvShetEsF'
+  - _id: WiCEry3Wba40wBy8
+    name: Druidic
+    type: feat
+    folder: EXYmwRGoNyMbByN1
+    img: icons/commodities/treasure/token-runed-circle-green.webp
+    system:
+      description:
+        value: >-
+          <p>You know Druidic, the secret language of Druids. While learning
+          this ancient tongue, you also unlocked the magic of communicating with
+          animals; you always have the
+          @UUID[Compendium.dnd5e.spells24.Item.phbsplSpeakwithA]{Speak with
+          Animals} spell prepared.</p><p>You can use Druidic to leave hidden
+          messages. You and others who know Druidic automatically spot such a
+          message. Others spot the message's presence with a successful [[/check
+          inv 15]] check but can't decipher it without magic.</p><section
+          class="secret" id="secret-5uD3Qi61JX7q2Fk8"><p><strong>Foundry
+          Note</strong></p><p>Druidic and Speak with Animals are automatically
+          added during advancement.</p></section>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: class
+        subtype: ''
+      prerequisites:
+        level: 1
+        repeatable: false
+        items: []
+      properties: []
+      requirements: Druid
+      activities: {}
+      enchant: {}
+      identifier: druidic
+      advancement: []
+      crewed: false
+    effects: []
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        sourceId: Compendium.dnd5e.classes24.Item.phbdrdDruidic000
+        advancementOrigin: PC4BrUcf3LeplS7g.P65WodekLKSPQLGZ
+        advancementRoot: PC4BrUcf3LeplS7g.P65WodekLKSPQLGZ
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      lastModifiedBy: null
+    sort: 300000
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0100000000.WiCEry3Wba40wBy8'
+  - _id: EPZBzyu35z61qIxw
+    name: Primal Order
+    type: feat
+    folder: EXYmwRGoNyMbByN1
+    img: icons/magic/nature/leaf-juggle-humanoid-green.webp
+    system:
+      description:
+        value: >-
+          <p>You have dedicated yourself to one of the following sacred roles of
+          your choice.</p><p><strong>Magician.</strong> You know one extra
+          cantrip from the Druid spell list. In addition, your mystical
+          connection to nature gives you a bonus to your Intelligence (Arcana or
+          Nature) checks. The bonus equals your Wisdom modifier (minimum bonus
+          of +1).</p><p><strong>Warden.</strong> Trained for battle, you gain
+          proficiency with Martial weapons and training with Medium
+          armor.</p><section id="secret-SgYOtpnQW9hL4WJ8"
+          class="secret"><p><strong>Foundry Note</strong></p><p>You will be
+          prompted to choose during advancement.</p></section>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: class
+        subtype: ''
+      prerequisites:
+        level: 1
+        repeatable: false
+        items: []
+      properties: []
+      requirements: Druid
+      activities: {}
+      enchant: {}
+      identifier: primal-order
+      advancement: []
+      crewed: false
+    effects: []
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        sourceId: Compendium.dnd5e.classes24.Item.phbdrdPrimalOrde
+        advancementOrigin: PC4BrUcf3LeplS7g.P65WodekLKSPQLGZ
+        advancementRoot: PC4BrUcf3LeplS7g.P65WodekLKSPQLGZ
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      lastModifiedBy: null
+    sort: 700000
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0100000000.EPZBzyu35z61qIxw'
+  - name: Speak with Animals
+    system:
+      description:
+        value: >-
+          <p>For the duration, you can comprehend and verbally communicate with
+          Beasts, and you can use any of the Influence action's skill options
+          with them.</p><p>Most Beasts have little to say about topics that
+          don't pertain to survival or companionship, but at minimum, a Beast
+          can give you information about nearby locations and monsters,
+          including whatever it has perceived within the past day.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: '10'
+        units: minute
+      target:
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        template:
+          units: ft
+          contiguous: false
+          type: ''
+      range:
+        units: self
+        special: ''
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: div
+      properties:
+        - vocal
+        - somatic
+        - ritual
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects:
+            - _id: lHx55SIuimKR3ALR
+              level: {}
+          range:
+            override: false
+            units: self
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: speak-with-animals
+      method: spell
+      prepared: 2
+      sourceClass: druid
+    _id: n8vESdT4PJtiFw1F
+    type: spell
+    img: icons/creatures/mammals/dog-husky-white-blue.webp
+    effects:
+      - name: Bestial Communication
+        origin: Compendium.dnd5e.spells24.Item.phbsplSpeakwithA
+        duration:
+          rounds: 1
+          startTime: null
+          seconds: 600
+          combat: null
+          turns: null
+          startRound: null
+          startTurn: null
+        disabled: false
+        flags: {}
+        img: icons/creatures/mammals/dog-husky-white-blue.webp
+        _id: lHx55SIuimKR3ALR
+        type: base
+        system: {}
+        changes:
+          - key: system.traits.languages.custom
+            mode: 2
+            value: ;comprehend and verbally communicate with Beasts
+            priority: null
+        description: ''
+        tint: '#ffffff'
+        transfer: false
+        statuses: []
+        sort: 0
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.0
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!AothLv0100000000.n8vESdT4PJtiFw1F.lHx55SIuimKR3ALR
+    folder: pBaAAtXBCq9FVEnL
+    sort: 300000
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        sourceId: Compendium.dnd5e.spells24.Item.phbsplSpeakwithA
+        advancementOrigin: PC4BrUcf3LeplS7g.SpGvDfOabbJrOR3K
+        advancementRoot: PC4BrUcf3LeplS7g.SpGvDfOabbJrOR3K
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0100000000.n8vESdT4PJtiFw1F'
+  - _id: GBSFN896aPOdii01
+    name: 'Primal Order: Warden'
+    type: feat
+    img: icons/magic/nature/barrier-shield-wood-vines.webp
+    system:
+      description:
+        value: >-
+          <p>Trained for battle, you gain proficiency with Martial weapons and
+          training with Medium armor.</p><section id="secret-hVQSjHcU93Zpf54G"
+          class="secret"><p><strong>Foundry Note</strong></p><p>This feature
+          includes an Active Effect which automates the addition of your Martial
+          weapons proficiency and Medium armor training.</p></section>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: class
+        subtype: ''
+      prerequisites:
+        level: 1
+        repeatable: false
+        items: []
+      properties: []
+      requirements: Druid
+      activities: {}
+      enchant: {}
+      identifier: primal-order-warden
+      advancement: []
+      crewed: false
+    effects:
+      - name: 'Primal Order: Warden'
+        origin: Item.phbPrimalOrderWa
+        duration:
+          rounds: null
+          startTime: 0
+          seconds: null
+          combat: null
+          turns: null
+          startRound: null
+          startTurn: null
+        disabled: false
+        flags: {}
+        img: systems/dnd5e/icons/svg/items/feature.svg
+        _id: j6MsESItx2TEvDju
+        type: base
+        system: {}
+        changes:
+          - key: system.traits.armorProf.value
+            mode: 2
+            value: '"med"'
+            priority: null
+          - key: system.traits.weaponProf.value
+            mode: 2
+            value: '"mar"'
+            priority: null
+        description: ''
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.0
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!AothLv0100000000.GBSFN896aPOdii01.j6MsESItx2TEvDju
+    folder: EXYmwRGoNyMbByN1
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        sourceId: Compendium.dnd5e.classes24.Item.phbPrimalOrderWa
+        advancementOrigin: PC4BrUcf3LeplS7g.NpBpNlHOO43gMD0U
+        advancementRoot: PC4BrUcf3LeplS7g.NpBpNlHOO43gMD0U
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      lastModifiedBy: null
+    sort: 1050000
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0100000000.GBSFN896aPOdii01'
+  - name: Case, Map or Scroll
+    system:
+      description:
+        value: >-
+          <p>A Map or Scroll Case holds up to 10 sheets of paper or 5 sheets of
+          parchment.</p>
+        chat: ''
+      price:
+        value: 1
+        denomination: gp
+      quantity: 1
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      weight:
+        value: 1
+        units: lb
+      rarity: ''
+      attunement: ''
+      currency:
+        pp: 0
+        gp: 0
+        ep: 0
+        sp: 0
+        cp: 0
+      properties: []
+      capacity:
+        volume:
+          units: cubicFoot
+        weight:
+          units: lb
+      identifier: case-map-or-scroll
+      attuned: false
+      equipped: false
+    _id: sLcRTHOgDG0K2gYH
+    type: container
+    folder: uDk4FBYfcP2JnX6t
+    img: icons/containers/bags/case-leather-tan.webp
+    effects: []
+    sort: 800000
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0100000000.sLcRTHOgDG0K2gYH'
+  - name: Blanket
+    system:
+      description:
+        value: >-
+          <p>While wrapped in a blanket, you have Advantage on saving throws
+          against extreme cold (see
+          @UUID[Compendium.dnd5e.content24.JournalEntry.dmgDmsToolbox000.JournalEntryPage.xgLA30rErlkjIPAK]{Gameplay
+          Toolbox}).</p>
+        chat: ''
+      price:
+        value: 5
+        denomination: sp
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 3
+        units: lb
+      rarity: ''
+      properties: []
+      type:
+        value: gear
+        subtype: ''
+      identifier: blanket
+    _id: ga9jjjbiSB4CWulw
+    type: loot
+    folder: uDk4FBYfcP2JnX6t
+    img: icons/sundries/survival/bedroll-pink.webp
+    effects: []
+    sort: 7800000
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0100000000.ga9jjjbiSB4CWulw'
+  - name: Clothes, Traveler's
+    system:
+      description:
+        value: >-
+          <p>Traveler's Clothes are resilient garments designed for travel in
+          various environments.</p>
+        chat: ''
+      price:
+        value: 2
+        denomination: gp
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 4
+        units: lb
+      rarity: ''
+      attunement: ''
+      cover: null
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      armor:
+        value: null
+        magicalBonus: null
+        dex: null
+      hp:
+        value: null
+        max: null
+        dt: null
+        conditions: ''
+      type:
+        value: clothing
+        baseItem: ''
+      properties: []
+      speed:
+        value: null
+        conditions: ''
+        units: ft
+      strength: null
+      proficient: null
+      activities: {}
+      identifier: clothes-travelers
+      crew:
+        value: []
+      attuned: false
+      equipped: false
+    _id: ACvsOKJUvEvAtZcl
+    type: equipment
+    folder: uDk4FBYfcP2JnX6t
+    img: icons/equipment/chest/shirt-collared-yellow.webp
+    effects: []
+    sort: 1300000
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0100000000.ACvsOKJUvEvAtZcl'
+  - name: Herbalism Kit
+    system:
+      description:
+        value: >-
+          <p class="phb-meta"><strong>Ability:</strong> Intelligence</p><p
+          class="phb-meta"><strong>Utilize:</strong> Identify a plant (DC
+          10)</p><p class="phb-meta"><strong>Craft:</strong>
+          @UUID[Compendium.dnd5e.equipment24.Item.phbagAntitoxin00]{Antitoxin},
+          @UUID[Compendium.dnd5e.equipment24.Item.phbagCandle00000]{Candle},
+          @UUID[Compendium.dnd5e.equipment24.Item.phbagHealersKit0]{Healer's
+          Kit}, @UUID[Compendium.dnd5e.equipment24.Item.phbagPotionofHea]{Potion
+          of Healing}</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 2
+      weight:
+        value: 8
+        units: lb
+      price:
+        value: 5
+        denomination: gp
+      rarity: ''
+      attunement: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: ''
+        baseItem: herb
+      ability: int
+      chatFlavor: ''
+      proficient: null
+      properties: []
+      bonus: ''
+      activities:
+        EEn8IAiinlOlAluN:
+          type: check
+          activation:
+            type: action
+            value: null
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: self
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: false
+            override: false
+          check:
+            ability: int
+            dc:
+              calculation: ''
+              formula: '10'
+            associated: []
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          _id: EEn8IAiinlOlAluN
+          name: Identify Plant
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: herbalism-kit
+      attuned: false
+      equipped: false
+    _id: fksmE2j9z26bbTaM
+    type: tool
+    folder: GdxYMawvxybALCny
+    img: icons/containers/bags/pouch-leather-green.webp
+    effects: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0100000000.fksmE2j9z26bbTaM'
+  - name: Leather Armor
+    system:
+      description:
+        value: ''
+        chat: ''
+      price:
+        value: 10
+        denomination: gp
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 10
+        units: lb
+      rarity: ''
+      attunement: ''
+      cover: null
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      armor:
+        value: 11
+        magicalBonus: null
+        dex: null
+      hp:
+        value: null
+        max: null
+        dt: null
+        conditions: ''
+      type:
+        value: light
+        baseItem: leather
+      properties: []
+      speed:
+        value: null
+        conditions: ''
+        units: ft
+      strength: null
+      proficient: null
+      activities: {}
+      identifier: leather-armor
+      crew:
+        value: []
+      attuned: false
+      equipped: true
+    _id: UI6zAmFUqT1s7fu1
+    type: equipment
+    folder: G3X11BbtmEqLmEnK
+    img: icons/equipment/chest/breastplate-scale-leather.webp
+    effects: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0100000000.UI6zAmFUqT1s7fu1'
+  - name: Shield
+    system:
+      description:
+        value: >-
+          <p>You gain the Armor Class benefit of a Shield only if you have
+          training with it.</p>
+        chat: ''
+      price:
+        value: 10
+        denomination: gp
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 6
+        units: lb
+      rarity: ''
+      attunement: ''
+      cover: null
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      armor:
+        value: 2
+        magicalBonus: null
+        dex: null
+      hp:
+        value: null
+        max: null
+        dt: null
+        conditions: ''
+      type:
+        value: shield
+        baseItem: shield
+      properties: []
+      speed:
+        value: null
+        conditions: ''
+        units: ft
+      strength: null
+      proficient: null
+      activities: {}
+      identifier: shield
+      crew:
+        value: []
+      attuned: false
+      equipped: true
+    _id: OkPGEgZet5e8Yvds
+    type: equipment
+    folder: Iyyec8ij0PAfdLBd
+    img: icons/equipment/shield/round-wooden-boss-steel-brown.webp
+    effects: []
+    sort: 100000
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0100000000.OkPGEgZet5e8Yvds'
+  - name: Sickle
+    system:
+      description:
+        value: ''
+        chat: ''
+      price:
+        value: 1
+        denomination: gp
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 2
+        units: lb
+      rarity: ''
+      attunement: ''
+      cover: null
+      range:
+        value: null
+        long: null
+        units: ft
+        reach: null
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      damage:
+        versatile:
+          number: null
+          denomination: null
+          bonus: ''
+          types: []
+          custom:
+            enabled: true
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+        base:
+          number: 1
+          denomination: 4
+          types:
+            - slashing
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+          bonus: ''
+      armor:
+        value: null
+      hp:
+        value: null
+        max: null
+        dt: null
+        conditions: ''
+      type:
+        value: simpleM
+        baseItem: sickle
+      magicalBonus: null
+      properties:
+        - lgt
+      proficient: null
+      activities:
+        ApQ85BtlIJDElLuu:
+          type: attack
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '5'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: false
+            override: false
+          attack:
+            ability: ''
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: melee
+              classification: weapon
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts: []
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          _id: ApQ85BtlIJDElLuu
+          name: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      ammunition: {}
+      mastery: nick
+      identifier: sickle
+      crew:
+        value: []
+      attuned: false
+      equipped: false
+    _id: 6PiUEjxGjS0uAI7h
+    type: weapon
+    folder: FL1Jee9DzStc7vM3
+    img: icons/weapons/sickles/sickle-curved.webp
+    effects: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0100000000.6PiUEjxGjS0uAI7h'
+  - name: Staff
+    system:
+      description:
+        value: >-
+          <p>An @UUID[Compendium.dnd5e.equipment24.Item.phbagArcaneFocus]{Arcane
+          Focus} is bejeweled or carved to channel arcane magic. A Sorcerer,
+          Warlock, or Wizard can use such an item as a Spellcasting
+          Focus.</p><p>This item also functions as a
+          @UUID[Compendium.dnd5e.equipment24.Item.phbwepQuartersta]{Quarterstaff}</p><section
+          class="secret" id="secret-wJ4SJVg9unbYSBJb"><p><strong>Foundry
+          Note</strong></p><p>This item has been configured with the additional
+          properties of a Quarterstaff.</p></section>
+        chat: ''
+      price:
+        value: 5
+        denomination: gp
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 4
+        units: lb
+      rarity: ''
+      attunement: ''
+      cover: null
+      range:
+        value: null
+        long: null
+        units: ft
+        reach: null
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      damage:
+        versatile:
+          number: null
+          denomination: 0
+          bonus: ''
+          types: []
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+        base:
+          number: 1
+          denomination: 6
+          types:
+            - bludgeoning
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+          bonus: ''
+      armor:
+        value: null
+      hp:
+        value: null
+        max: null
+        dt: null
+        conditions: ''
+      type:
+        value: simpleM
+        baseItem: quarterstaff
+      magicalBonus: null
+      properties:
+        - foc
+        - ver
+      proficient: null
+      activities:
+        5c4fPKVW51b3Ri3j:
+          type: attack
+          _id: 5c4fPKVW51b3Ri3j
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description: {}
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+          attack:
+            critical:
+              threshold: null
+            flat: false
+            type: {}
+          damage:
+            critical: {}
+            includeBase: true
+            parts: []
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      ammunition: {}
+      mastery: topple
+      identifier: staff
+      crew:
+        value: []
+      attuned: false
+      equipped: true
+    _id: hJhbXaZdpO3FQxzb
+    type: weapon
+    folder: 5qvlWBbvYXzxqIa1
+    img: icons/weapons/staves/staff-ornate-jeweled-blue.webp
+    effects: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0100000000.hJhbXaZdpO3FQxzb'
+  - name: Explorer's Pack
+    system:
+      description:
+        value: >-
+          <p>An Explorer's Pack contains the following items:
+          @UUID[Compendium.dnd5e.equipment24.Item.phbagBackpack000]{Backpack},
+          @UUID[Compendium.dnd5e.equipment24.Item.phbagBedroll0000]{Bedroll}, 2
+          flasks of
+          @UUID[Compendium.dnd5e.equipment24.Item.phbagOil00000000]{Oil}, 10
+          days of
+          @UUID[Compendium.dnd5e.equipment24.Item.phbagRations0000]{Rations},
+          @UUID[Compendium.dnd5e.equipment24.Item.phbagRope0000000]{Rope},
+          @UUID[Compendium.dnd5e.equipment24.Item.phbagTinderbox00]{Tinderbox},
+          10 @UUID[Compendium.dnd5e.equipment24.Item.phbagTorch000000]{Torches},
+          and
+          @UUID[Compendium.dnd5e.equipment24.Item.phbagWaterskin00]{Waterskin}.</p>
+        chat: ''
+      price:
+        value: 10
+        denomination: gp
+      quantity: 1
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      weight:
+        value: 5
+        units: lb
+      rarity: ''
+      attunement: ''
+      currency:
+        pp: 0
+        gp: 0
+        ep: 0
+        sp: 0
+        cp: 0
+      properties: []
+      capacity:
+        weight:
+          value: 30
+          units: lb
+        volume:
+          units: cubicFoot
+      identifier: explorers-pack
+      attuned: false
+      equipped: false
+    _id: f9Ql0O4GwOIoaj7s
+    type: container
+    folder: uDk4FBYfcP2JnX6t
+    img: icons/containers/bags/pack-simple-leather-fur-tan.webp
+    effects: []
+    sort: 2100000
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0100000000.f9Ql0O4GwOIoaj7s'
+  - name: Tinderbox
+    system:
+      description:
+        value: >-
+          <p>A Tinderbox is a small container holding flint, fire steel, and
+          tinder (usually dry cloth soaked in light oil) used to kindle a fire.
+          Using it to light a Candle, Lamp, Lantern, or Torch—or anything else
+          with exposed fuel—takes a Bonus Action. Lighting any other fire takes
+          1 minute.</p>
+        chat: ''
+      price:
+        value: 5
+        denomination: sp
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      identified: true
+      unidentified:
+        description: ''
+      container: f9Ql0O4GwOIoaj7s
+      quantity: 1
+      weight:
+        value: 1
+        units: lb
+      rarity: ''
+      attunement: ''
+      attuned: false
+      equipped: false
+      cover: null
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      armor:
+        value: null
+        magicalBonus: null
+        dex: null
+      hp:
+        value: null
+        max: null
+        dt: null
+        conditions: ''
+      type:
+        value: trinket
+        baseItem: ''
+      properties: []
+      speed:
+        value: null
+        conditions: ''
+        units: ft
+      strength: null
+      proficient: null
+      activities:
+        lshQ6ZeI69B0aRpu:
+          type: utility
+          name: Light
+          _id: lshQ6ZeI69B0aRpu
+          sort: 0
+          activation:
+            type: bonus
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: ''
+              type: ''
+            override: false
+            prompt: false
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: tinderbox
+      crew:
+        value: []
+    _id: oQ33sOFbaYOJIVkQ
+    type: equipment
+    folder: uDk4FBYfcP2JnX6t
+    img: icons/sundries/lights/torch-black.webp
+    effects: []
+    sort: 65565
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0100000000.oQ33sOFbaYOJIVkQ'
+  - name: Rope
+    system:
+      description:
+        value: >-
+          <p>As a Utilize action, you can tie a knot with Rope if you succeed on
+          a DC 10 Dexterity (Sleight of Hand) check. The Rope can be burst with
+          a successful DC 20 Strength (Athletics) check.</p><p>You can bind an
+          unwilling creature with the Rope only if the creature has the
+          &amp;Reference[Grappled], &amp;Reference[Incapacitated], or
+          &amp;Reference[Restrained] condition. If the creature's legs are
+          bound, the creature has the Restrained condition until it escapes.
+          Escaping the Rope requires the creature to make a successful DC 15
+          Dexterity (Acrobatics) check as an action.</p>
+        chat: ''
+      price:
+        value: 1
+        denomination: gp
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      identified: true
+      unidentified:
+        description: ''
+      container: f9Ql0O4GwOIoaj7s
+      quantity: 1
+      weight:
+        value: 5
+        units: lb
+      rarity: ''
+      attunement: ''
+      attuned: false
+      equipped: false
+      uses:
+        max: '1'
+        autoDestroy: false
+        spent: 0
+        recovery: []
+      damage:
+        base:
+          number: null
+          denomination: null
+          types: []
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+        replace: false
+      type:
+        value: trinket
+        subtype: ''
+      magicalBonus: null
+      properties: []
+      activities:
+        Y0LvyxjfVHNbp4CG:
+          type: check
+          name: Tie Knot
+          _id: Y0LvyxjfVHNbp4CG
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling: {}
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: ''
+              type: ''
+            override: false
+            prompt: false
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          check:
+            associated:
+              - slt
+            dc:
+              calculation: ''
+              formula: '10'
+            ability: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+        rYGOWDRcT5jBKvzq:
+          type: check
+          name: Burst Rope
+          _id: rYGOWDRcT5jBKvzq
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: ''
+              type: ''
+            override: false
+            prompt: false
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          check:
+            associated:
+              - ath
+            dc:
+              calculation: ''
+              formula: '20'
+            ability: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+        5q6tX1T7ONDvgJiA:
+          type: check
+          name: Escape Check
+          _id: 5q6tX1T7ONDvgJiA
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: ''
+              type: ''
+            override: false
+            prompt: false
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          check:
+            associated:
+              - acr
+            dc:
+              calculation: ''
+              formula: '15'
+            ability: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: rope
+    _id: 5FWKCtyB8xQdFtiZ
+    type: consumable
+    folder: uDk4FBYfcP2JnX6t
+    img: icons/sundries/survival/rope-wrapped-brown.webp
+    effects: []
+    sort: 63282
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0100000000.5FWKCtyB8xQdFtiZ'
+  - name: Bedroll
+    system:
+      description:
+        value: >-
+          <p>A Bedroll sleeps one Small or Medium creature. While in a Bedroll,
+          you automatically succeed on saving throws against extreme cold (see
+          @UUID[Compendium.dnd5e.content24.JournalEntry.dmgDmsToolbox000.JournalEntryPage.xgLA30rErlkjIPAK]{Gameplay
+          Toolbox}).</p>
+        chat: ''
+      price:
+        value: 1
+        denomination: gp
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      identified: true
+      unidentified:
+        description: ''
+      container: f9Ql0O4GwOIoaj7s
+      quantity: 1
+      weight:
+        value: 7
+        units: lb
+      rarity: ''
+      properties: []
+      type:
+        value: gear
+        subtype: ''
+      identifier: bedroll
+    _id: vsbVmwogcDr9PBTx
+    type: loot
+    folder: uDk4FBYfcP2JnX6t
+    img: icons/sundries/survival/bedroll-grey.webp
+    effects: []
+    sort: 64844
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0100000000.vsbVmwogcDr9PBTx'
+  - name: Waterskin
+    system:
+      description:
+        value: >-
+          <p>A Waterskin holds up to 4 pints. If you don't drink sufficient
+          water, you risk &amp;Reference[dehydration].</p>
+        chat: ''
+      price:
+        value: 2
+        denomination: sp
+      quantity: 1
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      identified: true
+      unidentified:
+        description: ''
+      container: f9Ql0O4GwOIoaj7s
+      weight:
+        value: 1
+        units: lb
+      rarity: ''
+      attunement: ''
+      attuned: false
+      equipped: false
+      currency:
+        pp: 0
+        gp: 0
+        ep: 0
+        sp: 0
+        cp: 0
+      properties: []
+      capacity:
+        weight:
+          value: 4
+          units: lb
+        volume:
+          units: cubicFoot
+      identifier: waterskin
+    _id: 09TlVNQUiMsgsjNX
+    type: container
+    folder: uDk4FBYfcP2JnX6t
+    img: icons/sundries/survival/waterskin-leather-brown.webp
+    effects: []
+    sort: 63868
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0100000000.09TlVNQUiMsgsjNX'
+  - name: Water (Pint)
+    type: consumable
+    img: icons/magic/water/water-drop-swirl-blue.webp
+    system:
+      activities:
+        XlTBFtJ0jyBJ71bh:
+          type: utility
+          name: Consume
+          sort: 0
+          activation:
+            type: ''
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling: {}
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: ''
+              type: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          roll:
+            prompt: false
+            visible: false
+            formula: ''
+            name: ''
+          _id: XlTBFtJ0jyBJ71bh
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      uses:
+        spent: 0
+        recovery: []
+        autoDestroy: true
+        max: '1'
+      description:
+        value: >-
+          <p>If you don't drink sufficient water, you risk
+          &amp;Reference[dehydration].</p>
+        chat: ''
+      identifier: water-pint
+      source:
+        revision: 1
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+      identified: true
+      unidentified:
+        description: ''
+      container: 09TlVNQUiMsgsjNX
+      quantity: 4
+      weight:
+        value: 1
+        units: lb
+      price:
+        value: 0
+        denomination: gp
+      rarity: ''
+      attunement: ''
+      attuned: false
+      equipped: false
+      type:
+        value: food
+        subtype: ''
+      damage:
+        base:
+          number: null
+          denomination: null
+          types: []
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+        replace: false
+      magicalBonus: null
+      properties: []
+    effects: []
+    folder: uDk4FBYfcP2JnX6t
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      lastModifiedBy: null
+    _id: Hg98zbyUsAnPgvde
+    sort: 100000
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0100000000.Hg98zbyUsAnPgvde'
+  - name: Torch
+    system:
+      description:
+        value: >-
+          <p>A Torch burns for 1 hour, casting Bright Light in a 20-foot radius
+          and Dim Light for an additional 20 feet. When you take the Attack
+          action, you can attack with the Torch, using it as a Simple Melee
+          weapon. On a hit, the target takes 1 Fire damage.</p>
+        chat: ''
+      price:
+        value: 1
+        denomination: cp
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      identified: true
+      unidentified:
+        description: ''
+      container: f9Ql0O4GwOIoaj7s
+      quantity: 10
+      weight:
+        value: 1
+        units: lb
+      rarity: ''
+      attunement: ''
+      attuned: false
+      equipped: false
+      uses:
+        max: ''
+        autoDestroy: false
+        spent: 0
+        recovery: []
+      damage:
+        base:
+          number: null
+          denomination: null
+          types: []
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+        replace: false
+      type:
+        value: trinket
+        subtype: ''
+      magicalBonus: null
+      properties: []
+      activities:
+        SouNhSdWdnznKCam:
+          type: attack
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling: {}
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: '1'
+            units: hour
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: self
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: radius
+              size: '40'
+              width: ''
+              height: ''
+              units: ft
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: false
+            override: false
+          attack:
+            ability: str
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: melee
+              classification: weapon
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts:
+              - custom:
+                  enabled: true
+                  formula: '1'
+                number: null
+                denomination: null
+                bonus: ''
+                types:
+                  - fire
+                scaling:
+                  number: 1
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          _id: SouNhSdWdnznKCam
+          name: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: torch
+    _id: fjnGiHB9KwgOgzq8
+    type: consumable
+    folder: uDk4FBYfcP2JnX6t
+    img: icons/sundries/lights/torch-brown-lit.webp
+    effects: []
+    sort: 63478
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0100000000.fjnGiHB9KwgOgzq8'
+  - name: Oil
+    system:
+      description:
+        value: >-
+          <p>You can douse a creature, object, or space with Oil or use it as
+          fuel, as detailed below.</p><p><strong>Dousing a Creature or an
+          Object.</strong> When you take the Attack action, you can replace one
+          of your attacks with throwing an Oil flask. Target one creature or
+          object within 20 feet of yourself. The target must succeed on a
+          Dexterity saving throw (DC 8 plus your Dexterity modifier and
+          Proficiency Bonus) or be covered in oil. If the target takes Fire
+          damage before the oil dries (after 1 minute), the target takes an
+          extra [[/damage 5 type=fire]] damage from burning
+          oil.</p><p><strong>Dousing a Space.</strong> You can take the Utilize
+          action to pour an Oil flask on level ground to cover a 5-foot-square
+          area within 5 feet of yourself. If lit, the oil burns until the end of
+          the turn 2 rounds from when the oil was lit (or 12 seconds) and deals
+          5 Fire damage to any creature that enters the area or ends its turn
+          there. A creature can take this damage only once per
+          turn.</p><p><strong>Fuel.</strong> Oil serves as fuel for Lamps and
+          Lanterns. Once lit, a flask of Oil burns for 6 hours in a Lamp or
+          Lantern. That duration doesn't need to be consecutive; you can
+          extinguish the burning Oil (as a Utilize action) and rekindle it again
+          until it has burned for a total of 6 hours.</p>
+        chat: ''
+      price:
+        value: 1
+        denomination: sp
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      identified: true
+      unidentified:
+        description: ''
+      container: f9Ql0O4GwOIoaj7s
+      quantity: 2
+      weight:
+        value: 1
+        units: lb
+      rarity: ''
+      attunement: ''
+      attuned: false
+      equipped: false
+      uses:
+        max: '1'
+        autoDestroy: true
+        spent: 0
+        recovery: []
+      damage:
+        base:
+          number: null
+          denomination: null
+          types: []
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+        replace: false
+      type:
+        value: potion
+        subtype: ''
+      magicalBonus: null
+      properties: []
+      activities:
+        FoeoumkYcnAsGCRo:
+          type: save
+          name: Throw
+          _id: FoeoumkYcnAsGCRo
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling: {}
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: ft
+            special: ''
+            value: '20'
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: '1'
+              type: creature
+              special: ''
+            override: false
+            prompt: false
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          damage:
+            parts: []
+            onSave: half
+          save:
+            ability:
+              - dex
+            dc:
+              calculation: dex
+              formula: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+        mDj3jtAY6ICmi1ZL:
+          type: damage
+          name: Douse Space
+          _id: mDj3jtAY6ICmi1ZL
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling: {}
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: ft
+            special: ''
+            value: '5'
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: square
+              size: '5'
+              count: ''
+            affects:
+              choice: false
+              count: '1'
+              type: space
+              special: ''
+            override: false
+            prompt: false
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          damage:
+            critical:
+              allow: false
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: null
+                denomination: 0
+                bonus: '5'
+                types:
+                  - fire
+                scaling:
+                  number: 1
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: oil
+    _id: Pi97S5euSOQEvz6e
+    type: consumable
+    folder: uDk4FBYfcP2JnX6t
+    img: icons/consumables/potions/bottle-bulb-empty-glass.webp
+    effects: []
+    sort: 65625
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0100000000.Pi97S5euSOQEvz6e'
+  - name: Rations
+    system:
+      description:
+        value: >-
+          <p>Rations consist of travel-ready food, including jerky, dried fruit,
+          hardtack, and nuts. See &amp;Reference[Malnutrition] in the rules
+          glossary for the risks of not eating.</p>
+        chat: ''
+      price:
+        value: 5
+        denomination: sp
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      identified: true
+      unidentified:
+        description: ''
+      container: f9Ql0O4GwOIoaj7s
+      quantity: 10
+      weight:
+        value: 2
+        units: lb
+      rarity: ''
+      attunement: ''
+      attuned: false
+      equipped: false
+      uses:
+        max: '1'
+        autoDestroy: true
+        spent: 0
+        recovery: []
+      damage:
+        base:
+          number: null
+          denomination: null
+          types: []
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+        replace: false
+      type:
+        value: food
+        subtype: ''
+      magicalBonus: null
+      properties: []
+      activities: {}
+      identifier: rations
+    _id: ZJsiwoEvh2PMbj5z
+    type: consumable
+    folder: uDk4FBYfcP2JnX6t
+    img: icons/consumables/food/berries-ration-round-red.webp
+    effects: []
+    sort: 65553
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0100000000.ZJsiwoEvh2PMbj5z'
+  - name: Druidcraft
+    system:
+      description:
+        value: >-
+          <p>Whispering to the spirits of nature, you create one of the
+          following effects within range.</p><p><strong>Weather Sensor.</strong>
+          You create a Tiny, harmless sensory effect that predicts what the
+          weather will be at your location for the next 24 hours. The effect
+          might manifest as a golden orb for clear skies, a cloud for rain,
+          falling snowflakes for snow, and so on. This effect persists for 1
+          round.</p><p><strong>Bloom.</strong> You instantly make a flower
+          blossom, a seed pod open, or a leaf bud bloom.</p><p><strong>Sensory
+          Effect.</strong> You create a harmless sensory effect, such as falling
+          leaves, spectral dancing fairies, a gentle breeze, the sound of an
+          animal, or the faint odor of skunk. The effect must fit in a 5-foot
+          Cube.</p><p><strong>Fire Play.</strong> You light or snuff out a
+          candle, a torch, or a campfire.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: ''
+        units: inst
+      target:
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        template:
+          units: ft
+          contiguous: false
+          type: ''
+      range:
+        units: ft
+        special: ''
+        value: '30'
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      level: 0
+      school: trs
+      properties:
+        - vocal
+        - somatic
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      activities:
+        q44z5qbBWBc0qUdc:
+          type: utility
+          name: ''
+          _id: q44z5qbBWBc0qUdc
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: cube
+              size: '5'
+              count: ''
+            affects:
+              choice: false
+              count: '1'
+              type: space
+              special: ''
+            override: true
+            prompt: false
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: druidcraft
+      method: spell
+      sourceClass: druid
+      prepared: 1
+    _id: 2a3S3q9JT8xy3c7I
+    type: spell
+    img: icons/magic/nature/plant-seed-hands-glow-yellow.webp
+    effects: []
+    folder: 4FhsY9FJQd7h7MZb
+    sort: 1700000
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0100000000.2a3S3q9JT8xy3c7I'
+  - name: Produce Flame
+    system:
+      description:
+        value: >-
+          <p>A flickering flame appears in your hand and remains there for the
+          duration. While there, the flame emits no heat and ignites nothing,
+          and it sheds Bright Light in a 20-foot radius and Dim Light for an
+          additional 20 feet. The spell ends if you cast it again.</p><p>Until
+          the spell ends, you can take a Magic action to hurl fire at a creature
+          or an object within 60 feet of you. Make a ranged spell attack. On a
+          hit, the target takes 1d8 Fire damage.</p><p><strong>Cantrip
+          Upgrade.</strong> The damage increases by 1d8 when you reach levels 5
+          (2d8), 11 (3d8), and 17 (4d8).</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      activation:
+        type: bonus
+        condition: ''
+        value: null
+      duration:
+        value: '10'
+        units: minute
+      target:
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        template:
+          units: ft
+          contiguous: false
+          type: ''
+      range:
+        units: self
+        special: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      level: 0
+      school: con
+      properties:
+        - vocal
+        - somatic
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      activities:
+        MModRd17Oi6hhztj:
+          type: utility
+          name: Cast
+          _id: MModRd17Oi6hhztj
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description: {}
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+          roll:
+            prompt: false
+            visible: false
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+        tqKlIEdglRYdqHrp:
+          type: attack
+          name: Hurl Fire
+          _id: tqKlIEdglRYdqHrp
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: true
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: true
+          effects: []
+          range:
+            override: true
+            units: ft
+            special: ''
+            value: '60'
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: '1'
+              type: creatureOrObject
+              special: ''
+            override: true
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          attack:
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: ranged
+              classification: ''
+            ability: ''
+            bonus: ''
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
+                denomination: 8
+                bonus: ''
+                types:
+                  - fire
+                scaling:
+                  mode: whole
+                  number: 1
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: produce-flame
+      method: spell
+      sourceClass: druid
+      prepared: 1
+    _id: ioBBKdth7zlMBLfa
+    type: spell
+    img: icons/magic/light/hand-sparks-glow-yellow.webp
+    effects: []
+    folder: 4FhsY9FJQd7h7MZb
+    sort: 300000
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0100000000.ioBBKdth7zlMBLfa'
+  - name: Animal Friendship
+    system:
+      description:
+        value: >-
+          <p>Target a Beast that you can see within range. The target must
+          succeed on a Wisdom saving throw or have the &amp;Reference[charmed
+          apply=false] condition for the duration. If you or one of your allies
+          deals damage to the target, the spells ends.</p><p><strong>Using a
+          Higher-Level Spell Slot.</strong> You can target one additional Beast
+          for each spell slot level above 1.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: '24'
+        units: hour
+      target:
+        affects:
+          type: creature
+          count: '@item.level'
+          choice: false
+          special: ''
+        template:
+          units: ft
+          contiguous: false
+          type: ''
+      range:
+        value: '30'
+        units: ft
+        special: ''
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: enc
+      properties:
+        - vocal
+        - somatic
+        - material
+      materials:
+        value: a morsel of food
+        consumed: false
+        cost: 0
+        supply: 0
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects:
+            - _id: 55NWwccKvMKQPL4h
+              onSave: false
+              level: {}
+          range:
+            override: false
+            units: self
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          damage:
+            onSave: half
+            parts: []
+          save:
+            ability:
+              - wis
+            dc:
+              calculation: spellcasting
+              formula: ''
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: animal-friendship
+      method: spell
+      sourceClass: druid
+      prepared: 1
+    _id: 9nGDhZbv6gnPrqtS
+    type: spell
+    img: icons/creatures/abilities/paw-glowing-yellow.webp
+    effects:
+      - name: Charmed
+        origin: Compendium.dnd5e.spells24.Item.phbsplAnimalFrie
+        duration:
+          rounds: 1
+          startTime: null
+          seconds: 86400
+          combat: null
+          turns: null
+          startRound: null
+          startTurn: null
+        disabled: false
+        flags: {}
+        img: systems/dnd5e/icons/svg/statuses/charmed.svg
+        _id: 55NWwccKvMKQPL4h
+        type: base
+        system: {}
+        changes: []
+        description: >-
+          <p><span style="font-family:Signika, sans-serif">The target has the
+          &amp;Reference[charmed apply=false] condition for the duration. If you
+          or one of your allies deals damage to the target, the spells
+          ends.</span></p>
+        tint: '#ffffff'
+        transfer: false
+        statuses:
+          - charmed
+        sort: 0
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.0
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!AothLv0100000000.9nGDhZbv6gnPrqtS.55NWwccKvMKQPL4h
+    folder: pBaAAtXBCq9FVEnL
+    sort: 5600000
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0100000000.9nGDhZbv6gnPrqtS'
+  - name: Cure Wounds
+    system:
+      description:
+        value: >-
+          <p>A creature you touch regains a number of Hit Points equal to 2d8
+          plus your spellcasting ability modifier.</p><p><strong>Using a
+          Higher-Level Spell Slot.</strong> The healing increases by 2d8 for
+          each spell slot level above 1.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: ''
+        units: inst
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+          special: ''
+        template:
+          units: ft
+          contiguous: false
+          type: ''
+      range:
+        units: touch
+        special: ''
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: abj
+      properties:
+        - vocal
+        - somatic
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: heal
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects: []
+          range:
+            override: false
+            units: self
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          healing:
+            number: 2
+            denomination: 8
+            bonus: '@mod'
+            types:
+              - healing
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 2
+              formula: ''
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: cure-wounds
+      method: spell
+      sourceClass: druid
+      prepared: 1
+    _id: 13KeNgoeriSW45ZW
+    type: spell
+    img: icons/magic/nature/leaf-drip-light-green.webp
+    effects: []
+    folder: pBaAAtXBCq9FVEnL
+    sort: 4300000
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0100000000.13KeNgoeriSW45ZW'
+  - name: Faerie Fire
+    system:
+      description:
+        value: >-
+          <p>Objects in a 20-foot Cube within range are outlined in blue, green,
+          or violet light (your choice). Each creature in the Cube is also
+          outlined if it fails a Dexterity saving throw. For the duration,
+          objects and affected creatures shed &amp;Reference[dimlight] in a
+          10-foot radius and can't benefit from the Invisible
+          condition.</p><p>Attack rolls against an affected creature or object
+          have Advantage if the attacker can see it.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: '1'
+        units: minute
+      target:
+        affects:
+          choice: false
+        template:
+          units: ft
+          type: cube
+          size: '20'
+          contiguous: false
+      range:
+        value: '60'
+        units: ft
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: evo
+      properties:
+        - vocal
+        - concentration
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects:
+            - _id: Y2i0OvwOixxag0ed
+              onSave: false
+              level: {}
+          range:
+            override: false
+            units: self
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          damage:
+            onSave: half
+            parts: []
+          save:
+            ability:
+              - dex
+            dc:
+              calculation: spellcasting
+              formula: ''
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: faerie-fire
+      method: spell
+      sourceClass: druid
+      prepared: 1
+    _id: xwOIo5M5A2KHyh88
+    type: spell
+    img: icons/magic/fire/projectile-meteor-salvo-strong-pink.webp
+    effects:
+      - name: Outlined
+        origin: Compendium.dnd5e.spells24.Item.phbsplFaerieFire
+        duration:
+          rounds: null
+          startTime: null
+          seconds: 60
+          combat: null
+          turns: null
+          startRound: null
+          startTurn: null
+        disabled: false
+        flags: {}
+        img: icons/magic/control/silhouette-hold-change-green.webp
+        _id: Y2i0OvwOixxag0ed
+        type: base
+        system: {}
+        changes: []
+        description: >-
+          <p>For the duration, objects and affected creatures shed
+          &amp;Reference[dimlight] in a 10-foot radius and can’t benefit from
+          the Invisible condition.</p><p>Attack rolls against an affected
+          creature or object have Advantage if the attacker can see it.</p>
+        tint: '#ffffff'
+        transfer: false
+        statuses: []
+        sort: 0
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.0
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!AothLv0100000000.xwOIo5M5A2KHyh88.Y2i0OvwOixxag0ed
+    folder: pBaAAtXBCq9FVEnL
+    sort: 3200000
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0100000000.xwOIo5M5A2KHyh88'
+  - name: Thunderwave
+    system:
+      description:
+        value: >-
+          <p>You unleash a wave of thunderous energy. Each creature in a 15-foot
+          Cube originating from you makes a Constitution saving throw. On a
+          failed save, a creature takes 2d8 Thunder damage and is pushed 10 feet
+          away from you. On a successful save, a creature takes half as much
+          damage only.</p><p>In addition, unsecured objects that are entirely
+          within the Cube are pushed 10 feet away from you, and a thunderous
+          boom is audible within 300 feet.</p><p><strong>Using a Higher-Level
+          Spell Slot.</strong> The damage increases by 1d8 for each spell slot
+          level above 1.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: ''
+        units: inst
+      target:
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        template:
+          units: ft
+          type: cube
+          size: '15'
+          contiguous: false
+          count: ''
+      range:
+        units: self
+        special: ''
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: evo
+      properties:
+        - vocal
+        - somatic
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects: []
+          range:
+            override: false
+            units: self
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          damage:
+            onSave: half
+            parts:
+              - number: 2
+                denomination: 8
+                bonus: ''
+                types:
+                  - thunder
+                custom:
+                  enabled: false
+                  formula: ''
+                scaling:
+                  mode: whole
+                  number: 1
+                  formula: ''
+          save:
+            ability:
+              - con
+            dc:
+              calculation: spellcasting
+              formula: ''
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: thunderwave
+      method: spell
+      sourceClass: druid
+      prepared: 1
+    _id: sotKZaTFF7vBSUjK
+    type: spell
+    img: icons/magic/sonic/explosion-shock-wave-teal.webp
+    effects: []
+    folder: pBaAAtXBCq9FVEnL
+    sort: 112500
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0100000000.sotKZaTFF7vBSUjK'
+effects: []
+folder: Yg8rxL4JuMi44szP
+flags: {}
+_stats:
+  duplicateSource: null
+  exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.2.0
+  createdTime: 1764364704587
+  modifiedTime: 1765857416967
+  lastModifiedBy: dnd5ebuilder0000
+ownership:
+  default: 0
+sort: 1000000
+_key: '!actors!AothLv0100000000'
