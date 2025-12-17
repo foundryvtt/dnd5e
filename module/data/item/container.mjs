@@ -282,7 +282,7 @@ export default class ContainerData extends ItemDataModel.mixin(
     if ( source.capacity.type === "weight" ) {
       source.capacity.weight ??= {};
       source.capacity.weight.value = source.capacity.value;
-    } else if ( source.capacity.type === "item" ) {
+    } else if ( source.capacity.type === "items" ) {
       source.capacity.count = source.capacity.value;
     }
     delete source.capacity.type;
