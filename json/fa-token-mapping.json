@@ -2088,7 +2088,13 @@
     },
     "MerricLv01000000": {
       "actor": "systems/dnd5e/tokens/heroes/BarbarianMaul.webp",
-      "token": "systems/dnd5e/tokens/heroes/BarbarianMaul.webp"
+      "token": {
+        "texture": {
+          "src": "systems/dnd5e/tokens/heroes/BarbarianMaul.webp",
+          "scaleX": 1.25,
+          "scaleY": 1.25
+        }
+      }
     },
     "MorthosLv0100000": {
       "actor": "systems/dnd5e/tokens/heroes/SorcererTiefling.webp",
