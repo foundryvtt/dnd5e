@@ -153,7 +153,7 @@ export default function PrimarySheetMixin(Base) {
           <span></span>
         </div>
       `;
-      html.querySelector(".window-subtitle")?.after(elements);
+      this.window.subtitle?.after(elements);
     }
 
     /* -------------------------------------------- */
