@@ -177,7 +177,7 @@ export default class Tooltips5e {
       }
       if ( passive === undefined ) return false;
       return {
-        passive, status: dc !== undefined ? passive >= dc ? "success" : "failure" : ""
+        value: passive, status: dc !== undefined ? passive >= dc ? "success" : "failure" : ""
       };
     });
   }
