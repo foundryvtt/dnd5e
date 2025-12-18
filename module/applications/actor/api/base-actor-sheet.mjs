@@ -966,10 +966,22 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     else ctx.preparation = { applicable: false };
 
     // Subtitle
-    ctx.subtitle = [
-      linked ? linked.name : item.parent.classes[item.system.sourceClass]?.name,
-      item.labels.components.vsm
-    ].filterJoin(" • ");
+    let sourceLabel;
+    if ( linked ) {
+      sourceLabel = linked.name;
+    } else if ( item.system.spellSource ) {
+      const grantingItem = item.parent.identifiedItems.get(item.system.spellSource)?.first();
+      sourceLabel = grantingItem?.name;
+    } else {
+      // Check spells added from advancements
+      const advancementOrigin = item.getFlag("dnd5e", "advancementOrigin");
+      if ( advancementOrigin ) {
+        const [itemId] = advancementOrigin.split(".");
+        const grantingItem = item.parent.items.get(itemId);
+        if ( grantingItem ) sourceLabel = grantingItem.name;
+      }
+    }
+    ctx.subtitle = [sourceLabel, item.labels.components.vsm].filterJoin(" • ");
   }
 
   /* -------------------------------------------- */
@@ -2032,7 +2044,18 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       if ( filters.has("ritual") && !item.system.properties?.has("ritual") ) return false;
       if ( filters.has("concentration") && !item.system.properties?.has("concentration") ) return false;
       if ( schoolFilter.size && !schoolFilter.has(item.system.school) ) return false;
-      if ( classFilter.size && !classFilter.has(item.system.sourceClass) ) return false;
+      if ( classFilter.size ) {
+        if ( !item.system.spellSource ) return false;
+        const sourceItem = this.actor.identifiedItems.get(item.system.spellSource)?.first();
+        // Only match if spell source is class or subclass.
+        if ( !["class", "subclass"].includes(sourceItem?.type) ) return false;
+        // Resolve subclass spells to parent class identifier.
+        let classIdentifier = item.system.spellSource;
+        if ( sourceItem.type === "subclass" ) {
+          classIdentifier = sourceItem.system.classIdentifier;
+        }
+        if ( !classFilter.has(classIdentifier) ) return false;
+      }
       if ( filters.has("prepared") ) return item.system.canPrepare && item.system.prepared;
 
       // Equipment-specific filters
