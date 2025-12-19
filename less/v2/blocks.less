@@ -61,10 +61,10 @@
   .align-start { align-items:start; }
 
   /* Hidden Content */
-  .hide-secrets .content-embed, .hide-secrets.content-embed {
+  .hide-secrets :is(document-embed, .content-embed), .hide-secrets:is(document-embed, .content-embed) {
     .secret { display: none; }
   }
-  .content-embed .hide-in-embed { display: none; }
+  :is(document-embed, .content-embed) .hide-in-embed { display: none; }
 
   /* Common Typography for Callouts */
   :is(.notable, .quest, .advice, .narrative) {

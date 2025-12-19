@@ -1,5 +1,5 @@
 _id: dmgRegnerationIo
-name: Ioun Stone of Regneration
+name: Ioun Stone of Regeneration
 type: equipment
 folder: vl17N1arOkN66aMi
 img: icons/commodities/stone/rock-chunk-pumice-white.webp
@@ -84,12 +84,14 @@ system:
       end of each hour this pearly white spindle orbits your head if you have at
       least 1 Hit Point.</p>
     chat: ''
-  identifier: regneration-ioun-stone
+  identifier: regeneration-ioun-stone
   source:
     revision: 1
     rules: '2024'
     book: ''
     license: CC-BY-4.0
+    page: ''
+    custom: ''
   identified: true
   unidentified:
     description: ''
@@ -129,9 +131,9 @@ _stats:
   duplicateSource: null
   coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 5.2.3
   createdTime: 1727883376108
-  modifiedTime: 1764615809799
+  modifiedTime: 1765823972128
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: -100000

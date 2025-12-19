@@ -146,8 +146,8 @@ export default function PrimarySheetMixin(Base) {
       elements.classList.add("header-elements");
       elements.innerHTML = `
         <div class="source-book">
-          <button type="button" class="unbutton control-button" data-action="showConfiguration" data-config="source"
-                  data-tooltip aria-label="${game.i18n.localize("DND5E.SOURCE.Action.Configure")}">
+          <button type="button" class="unbutton control-button header-control" data-action="showConfiguration"
+                  data-config="source" data-tooltip aria-label="${game.i18n.localize("DND5E.SOURCE.Action.Configure")}">
             <i class="fas fa-cog" inert></i>
           </button>
           <span></span>

@@ -21,6 +21,16 @@ export default class AdvancementTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
+  /*  Data Migrations                             */
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate advancement data.
+   * @param {object} source  Candidate source data to migrate.
+   */
+  static migrateAdvancement(source) {}
+
+  /* -------------------------------------------- */
   /*  Socket Event Handlers                       */
   /* -------------------------------------------- */
 
