@@ -1,20 +1,31 @@
+import CompendiumTOCConfig from "./config/compendium-toc-config.mjs";
+
 /**
  * Compendium that renders pages as a table of contents.
  */
 export default class TableOfContentsCompendium extends foundry.applications.sidebar.apps.Compendium {
   /** @override */
   static DEFAULT_OPTIONS = {
-    classes: ["table-of-contents"],
-    window: {
-      resizable: true,
-      contentTag: "article"
+    actions: {
+      activateEntry: this.prototype._onClickLink,
+      configureTableOfContents: TableOfContentsCompendium.#onConfigureTableOfContents
     },
+    classes: ["table-of-contents"],
     position: {
       width: 800,
       height: 950
     },
-    actions: {
-      activateEntry: this.prototype._onClickLink
+    window: {
+      contentTag: "article",
+      controls: [
+        {
+          action: "configureTableOfContents",
+          icon: "fa-solid fa-bars-staggered",
+          label: "DND5E.TABLEOFCONTENTS.Action.Configure",
+          visible: TableOfContentsCompendium.#canConfigureTableOfContents
+        }
+      ],
+      resizable: true
     }
   };
 
@@ -155,6 +166,29 @@ export default class TableOfContentsCompendium extends foundry.applications.side
 
   /* -------------------------------------------- */
   /*  Event Handlers                              */
+  /* -------------------------------------------- */
+
+  /**
+   * Whether it's possible to configure the table of contents.
+   * @this {TableOfContentsCompendium}
+   * @returns {boolean}
+   */
+  static #canConfigureTableOfContents() {
+    return !this.collection.locked && this.collection.testUserPermission(game.user, "OWNER");
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle opening the configuration application.
+   * @this {TableOfContentsCompendium}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   */
+  static async #onConfigureTableOfContents(event, target) {
+    new CompendiumTOCConfig({ compendium: this.collection }).render({ force: true });
+  }
+
   /* -------------------------------------------- */
 
   /**
