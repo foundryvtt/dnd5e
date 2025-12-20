@@ -669,7 +669,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     }
 
     if ( this.tabGroups.primary === "effects" ) {
-      return ActiveEffect.implementation.create({
+      return ActiveEffect.implementation.createDialog({
         name: this.document.name,
         img: this.document.img,
         origin: this.document.uuid

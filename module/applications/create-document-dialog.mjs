@@ -92,7 +92,9 @@ export default class CreateDocumentDialog extends Dialog5e {
       if ( this.options.types?.length === 0 ) throw new Error("The array of sub-types to restrict to must not be empty");
 
       for ( const type of TYPES ) {
-        if ( type === CONST.BASE_DOCUMENT_TYPE ) continue;
+        // TODO: When `standard` AE type replaces `base`, remove this check for active effect
+        // See https://github.com/foundryvtt/dnd5e/pull/5941
+        if ( (this.documentName !== "ActiveEffect") && (type === CONST.BASE_DOCUMENT_TYPE) ) continue;
         if ( this.options.types && !this.options.types.includes(type) ) continue;
         const typeData = { selected: type === defaultType, type };
         if ( this.documentType._createDialogData ) {
