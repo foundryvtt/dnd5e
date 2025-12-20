@@ -3865,7 +3865,7 @@ DND5E.neverBlockStatuses = new Set();
 DND5E.bloodied = {
   name: "EFFECT.DND5E.StatusBloodied",
   img: "systems/dnd5e/icons/svg/statuses/bloodied.svg",
-  threshold: .5
+  threshold: 50
 };
 
 /* -------------------------------------------- */

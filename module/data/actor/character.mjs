@@ -174,6 +174,7 @@ export default class CharacterData extends CreatureTemplate {
     }
 
     AttributesFields.prepareBaseArmorClass.call(this);
+    AttributesFields.prepareBaseBloodied.call(this);
     AttributesFields.prepareBaseEncumbrance.call(this);
   }
 

@@ -3493,7 +3493,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( !hp?.effectiveMax || (game.settings.get("dnd5e", "bloodied") === "none") ) return;
 
     const effect = this.effects.get(ActiveEffect5e.ID.BLOODIED);
-    if ( hp.value > hp.effectiveMax * CONFIG.DND5E.bloodied.threshold ) return effect?.delete();
+    if ( (hp.pct === 100) || (hp.pct > this.system.attributes.bloodiedThreshold) ) return effect?.delete();
     if ( effect ) return;
 
     return ActiveEffect.implementation.create({
