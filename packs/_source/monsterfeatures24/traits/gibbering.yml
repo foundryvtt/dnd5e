@@ -114,12 +114,12 @@ system:
     max: ''
   description:
     value: >-
-      <p class="feature">The [[lookup @name lowercase]] babbles incoherently
+      <p class="feature">The [[lookup @name lowercase]]{creature} babbles incoherently
       while it doesn't have the Incapacitated condition. <em>Wisdom Saving
       Throw:</em> DC [[lookup @save.dc.value activity=PyGOI84k0PPYrru8]], any
       [[lookup @target.affects.type activity=PyGOI84k0PPYrru8]] that starts its
       turn within [[lookup @target.template.size activity=PyGOI84k0PPYrru8]]
-      feet of the [[lookup @name lowercase]] while it is babbling.
+      feet of the [[lookup @name lowercase]]{creature} while it is babbling.
       <em>Failure:</em> The target rolls [[/r 1d8]] to determine what it does
       during the current turn:</p><p class="feature-trait"><strong>1–4.</strong>
       The target does nothing.</p><p class="feature-trait"><strong>5–6.</strong>

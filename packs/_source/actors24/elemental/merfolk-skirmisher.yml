@@ -562,7 +562,7 @@ items:
         recovery: []
         max: ''
       description:
-        value: <p>The [[lookup @name lowercase]] can breathe air and water.</p>
+        value: <p>The [[lookup @name lowercase]]{creature} can breathe air and water.</p>
         chat: ''
       identifier: amphibious
       source:
@@ -678,7 +678,7 @@ items:
           <p class="feature">[[/attack extended]]. [[/damage average extended]].
           If the target is a creature, its Speed decreases by 10 feet until the
           end of its next turn. <em>Hit or Miss:</em> The spear magically
-          returns to the [[lookup @name lowercase]]'s hand immediately after a
+          returns to the [[lookup @name lowercase]]{creature}'s hand immediately after a
           ranged attack.</p>
         chat: ''
       identifier: ocean-spear

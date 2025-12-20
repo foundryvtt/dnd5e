@@ -694,7 +694,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes three [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes three [[/item
           .mmArcaneBurst000]] attacks.</p>
         chat: ''
       identifier: multiattack
@@ -1312,7 +1312,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts one of the
           following spells, using Intelligence as the spellcasting ability
           (spell save DC [[lookup @attributes.spell.dc]]):</p><p
           class="feature-trait"><strong>At Will:</strong>
@@ -1435,7 +1435,7 @@ items:
         max: '3'
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplMistyStep0]{Misty
           Step}</em>, using the same spellcasting ability as Spellcasting.</p>
         chat: ''
@@ -1738,7 +1738,7 @@ items:
         max: '3'
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplCounterspe]{Counterspell}</em>
           or
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplShield0000]{Shield}</em>

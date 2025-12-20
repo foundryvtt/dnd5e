@@ -643,7 +643,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">When the [[lookup @name lowercase]] finishes a Long
+          <p class="feature">When the [[lookup @name lowercase]]{creature} finishes a Long
           Rest, it can shape-shift into an
           <strong>@UUID[Compendium.dnd5e.actors24.Actor.mmIncubus0000000]{Incubus}</strong>,
           using that stat block instead of this one.</p>
@@ -746,7 +746,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes one [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes one [[/item
           .mmFiendishTouch0]] attack and uses [[/item .mmCharm000000000]] or
           [[/item .mmDrainingKiss00]].</p>
         chat: ''
@@ -1001,7 +1001,7 @@ items:
         max: '1'
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDominatePe]{Dominate
           Person}</em> (level 8 version), requiring no spell components and
           using Charisma as the spellcasting ability (spell save DC [[lookup
@@ -1125,7 +1125,7 @@ items:
           <p class="feature"><em>Constitution Saving Throw:</em> DC [[lookup
           @save.dc.value activity=kFyuof0SS3nohP0f]], one [[lookup
           @target.affects.type activity=kFyuof0SS3nohP0f]] Charmed by the
-          [[lookup @name lowercase]] within [[lookup @range.value
+          [[lookup @name lowercase]]{creature} within [[lookup @range.value
           activity=kFyuof0SS3nohP0f]] feet.</p><p
           class="feature"><em>Failure:</em> [[/damage average]] damage.</p><p
           class="feature"><em>Success:</em> Half damage.</p><p
@@ -1231,7 +1231,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] shape-shifts into a
+          <p class="feature">The [[lookup @name lowercase]]{creature} shape-shifts into a
           Medium or Small Humanoid, or it returns to its true form. Its game
           statistics are the same in each form, except its Fly Speed is
           available only in its true form. Any equipment it is wearing or

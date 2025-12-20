@@ -595,7 +595,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two  [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes two  [[/item
           .mmGore0000000000]] attacks.</p>
         chat: ''
       identifier: multiattack
@@ -704,7 +704,7 @@ items:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended average]]. If the target
-          is a Huge or smaller creature and the [[lookup @name lowercase]] moved
+          is a Huge or smaller creature and the [[lookup @name lowercase]]{creature} moved
           20+ feet straight toward it immediately before the hit, the target has
           the &amp;Reference[Prone apply=false] condition.</p>
         chat: ''

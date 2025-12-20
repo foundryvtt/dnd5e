@@ -563,7 +563,7 @@ items:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage average extended]]. If the target
-          is a Large or smaller creature, the [[lookup @name lowercase]] pushes
+          is a Large or smaller creature, the [[lookup @name lowercase]]{creature} pushes
           the target up to 10 feet straight away from itself.</p>
         chat: ''
       price:
@@ -984,8 +984,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] has Advantage on an attack roll
-          against a creature if at least one of the [[lookup @name lowercase]]'s
+          <p>The [[lookup @name lowercase]]{creature} has Advantage on an attack roll
+          against a creature if at least one of the [[lookup @name lowercase]]{creature}'s
           allies is within 5 feet of the creature and the ally doesn't have the
           Incapacitated condition.</p>
         chat: ''
@@ -1083,7 +1083,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two attacks, using [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes two attacks, using [[/item
           .iD5121TXziB6ZcSt]] or [[/item .7MS7v84QoTYESVax]] in any
           combination.</p>
         chat: ''

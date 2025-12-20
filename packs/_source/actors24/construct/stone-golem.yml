@@ -571,7 +571,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] can't
+          <p class="feature">The [[lookup @name lowercase]]{creature} can't
           shape-shift.</p>
         chat: ''
       identifier: immutable-form
@@ -622,7 +622,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] has Advantage on saving throws
+          <p>The [[lookup @name lowercase]]{creature} has Advantage on saving throws
           against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
@@ -709,7 +709,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two attacks, using [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes two attacks, using [[/item
           Slam]] or [[/item Force Bolt]] in any combination.</p>
         chat: ''
       identifier: multiattack
@@ -1136,7 +1136,7 @@ items:
         max: '1'
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts the
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts the
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplSlow000000]{Slow}</em>
           spell, requiring no spell components and using Constitution as the
           spellcasting ability (spell save DC [[lookup

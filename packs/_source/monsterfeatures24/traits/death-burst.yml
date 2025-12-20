@@ -77,12 +77,12 @@ system:
     max: ''
   description:
     value: >-
-      <p>The [[lookup @name lowercase]] explodes [[lookup @activation.condition
+      <p>The [[lookup @name lowercase]]{creature} explodes [[lookup @activation.condition
       activity=1SfqWSp7RSyHgG4b]]. <em>Dexterity Saving Throw: </em>DC [[lookup
       @save.dc.value activity=1SfqWSp7RSyHgG4b]], each [[lookup
       @target.affects.type activity=1SfqWSp7RSyHgG4b]] in a [[lookup
       @target.template.size activity=1SfqWSp7RSyHgG4b]]-foot Emanation
-      originating from the [[lookup @name lowercase]]. <em>Failure:
+      originating from the [[lookup @name lowercase]]{creature}. <em>Failure:
       </em>[[/damage average]] damage. <em>Success:</em> Half damage.</p>
     chat: ''
   identifier: death-burst

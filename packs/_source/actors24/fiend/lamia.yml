@@ -610,7 +610,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes two [[/item
           .mmClaw0000000000]] attacks. It can replace one attack with a use of
           [[/item .mmCorruptingTouc]].</p>
         chat: ''
@@ -892,7 +892,7 @@ items:
           <p class="feature"><em>Wisdom Saving Throw:</em> DC [[lookup
           @save.dc.value activity=F4cByCi1IEouN08a]], [[lookup
           @target.affects.labels.statblock activity=F4cByCi1IEouN08a]] the
-          [[lookup @name lowercase]] can see within [[lookup @range.value
+          [[lookup @name lowercase]]{creature} can see within [[lookup @range.value
           activity=F4cByCi1IEouN08a]] feet.</p><p><em>Failure:</em> [[/damage
           average]] damage, and the target is cursed for 1 hour. Until the curse
           ends, the target has the &amp;Reference[Charmed apply=false] and
@@ -1265,7 +1265,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts one of the
           following spells, requiring no Material components and using Charisma
           as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]]):</p><p class="feature-trait"><strong>At
@@ -1379,7 +1379,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] jumps up to [[lookup @range.value
+          <p>The [[lookup @name lowercase]]{creature} jumps up to [[lookup @range.value
           activity=C28C43DeD8iFtZMe]] feet by [[lookup @activation.condition
           activity=C28C43DeD8iFtZMe]].</p>
         chat: ''

@@ -75,7 +75,7 @@ system:
     value: >-
       <p class="feature"><em>Dexterity Saving Throw:</em> DC [[lookup
       @save.dc.value activity=aae828c0Hue0XOMP]], one creature Grappled by the
-      [[lookup @name lowercase]].</p><p class="feature"><em>Failure:</em>
+      [[lookup @name lowercase]]{creature}.</p><p class="feature"><em>Failure:</em>
       [[/damage average]] damage.</p><p class="feature"><em>Success:</em> Half
       damage.</p>
     chat: ''

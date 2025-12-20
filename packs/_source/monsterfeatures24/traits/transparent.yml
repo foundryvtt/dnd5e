@@ -61,10 +61,10 @@ system:
     max: ''
   description:
     value: >-
-      <p class="feature">Even when the [[lookup @name lowercase]] is in plain
+      <p class="feature">Even when the [[lookup @name lowercase]]{creature} is in plain
       sight, a creature must succeed on a [[/check dc=15 ability=wis skill=prc
-      format=long]] to notice the [[lookup @name lowercase]] if the creature
-      hasn't witnessed the [[lookup @name lowercase]] move or otherwise act.</p>
+      format=long]] to notice the [[lookup @name lowercase]]{creature} if the creature
+      hasn't witnessed the [[lookup @name lowercase]]{creature} move or otherwise act.</p>
     chat: ''
   identifier: transparent
   source:

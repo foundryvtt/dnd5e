@@ -60,7 +60,7 @@ system:
     max: ''
   description:
     value: >-
-      <p class="feature">The [[lookup @name lowercase]] casts
+      <p class="feature">The [[lookup @name lowercase]]{creature} casts
       <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDetectThou]{Detect
       Thoughts}</em>, requiring no spell components and using Charisma as the
       spellcasting ability (spell save DC [[lookup @abilities.cha.dc]]).</p>

@@ -563,7 +563,7 @@ items:
         recovery: []
         max: ''
       description:
-        value: <p>The [[lookup @name lowercase]] can breathe air and water.</p>
+        value: <p>The [[lookup @name lowercase]]{creature} can breathe air and water.</p>
         chat: ''
       identifier: amphibious
       source:
@@ -914,7 +914,7 @@ items:
       description:
         value: >-
           <p class="feature">While within 30 feet of at least two hag allies,
-          the [[lookup @name lowercase]] can cast one of the following spells,
+          the [[lookup @name lowercase]]{creature} can cast one of the following spells,
           requiring no Material components, using the spell's normal casting
           time, and using Intelligence as the spellcasting ability (spell save
           DC [[lookup @abilities.int.dc]]):
@@ -926,7 +926,7 @@ items:
           Object}</em>,
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplScrying000]{Scrying}</em>,
           or <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplUnseenServ]{Unseen
-          Servant}</em>. The [[lookup @name lowercase]] must finish a Long Rest
+          Servant}</em>. The [[lookup @name lowercase]]{creature} must finish a Long Rest
           before using this trait to cast that spell again.</p>
         chat: ''
       identifier: coven-magic
@@ -2551,11 +2551,11 @@ items:
           @save.dc.value activity=FR0ETDHBas1Z5LfF]], any [[lookup
           @target.affects.special activity=FR0ETDHBas1Z5LfF]] that starts its
           turn within [[lookup @range.value activity=FR0ETDHBas1Z5LfF]] feet of
-          the [[lookup @name lowercase]] and can see the [[lookup @name
+          the [[lookup @name lowercase]]{creature} and can see the [[lookup @name
           lowercase]]'s true form.</p><p class="feature"><em>Failure:</em> The
           target has the &amp;Reference[Frightened apply=false] condition until
           the start of its next turn.</p><p class="feature"><em>Success:</em>
-          The target is immune to this [[lookup @name lowercase]]'s Horrific
+          The target is immune to this [[lookup @name lowercase]]{creature}'s Horrific
           Appearance for 24 hours.</p>
         chat: ''
       identifier: vile-appearance
@@ -2954,7 +2954,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDisguiseSe]{Disguise
           Self}</em>, using Constitution as the spellcasting ability (spell save
           DC [[lookup @attributes.spell.dc]]). The spell's duration is [[lookup

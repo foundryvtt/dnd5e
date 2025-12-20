@@ -571,7 +571,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] can move through a space as narrow
+          <p>The [[lookup @name lowercase]]{creature} can move through a space as narrow
           as 1 inch without expending extra movement to do so.</p>
         chat: ''
       identifier: amorphous
@@ -622,7 +622,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] can climb difficult surfaces,
+          <p>The [[lookup @name lowercase]]{creature} can climb difficult surfaces,
           including along ceilings, without needing to make an ability
           check.</p>
         chat: ''
@@ -885,10 +885,10 @@ items:
           lowercase]] [[lookup @activation.condition activity=zoXFSgzmWq8frUjI]]
           </p><p class="feature"><em>Response:</em> The [[lookup @name
           lowercase]] splits into two new <strong>[[lookup @name
-          capitalize]]</strong>. Each new [[lookup @name lowercase]] is one size
-          smaller than the original [[lookup @name lowercase]] and acts on its
-          Initiative. The original [[lookup @name lowercase]]'s Hit Points are
-          divided evenly between the new [[lookup @name lowercase]]s (round
+          capitalize]]</strong>. Each new [[lookup @name lowercase]]{creature} is one size
+          smaller than the original [[lookup @name lowercase]]{creature} and acts on its
+          Initiative. The original [[lookup @name lowercase]]{creature}'s Hit Points are
+          divided evenly between the new [[lookup @name lowercase]]{creature}s (round
           down).</p>
         chat: ''
       identifier: split

@@ -77,12 +77,12 @@ system:
   description:
     value: >-
       <p><em>Dexterity Saving Throw:</em> DC [[lookup @save.dc.value
-      activity=0OkFhjOM80ipoNKy]], one creature the [[lookup @name lowercase]]
+      activity=0OkFhjOM80ipoNKy]], one creature the [[lookup @name lowercase]]{creature}
       can see within [[lookup @range.value activity=0OkFhjOM80ipoNKy]]
       feet.</p><p><em>Failure:</em> [[/damage average]] damage, and the target
       has Disadvantage on saving throws to maintain
       &amp;Reference[Concentration] until the end of its next
-      turn.</p><p><em>Failure or Success:</em> The [[lookup @name lowercase]]
+      turn.</p><p><em>Failure or Success:</em> The [[lookup @name lowercase]]{creature}
       can't take this action again until the start of its next turn.</p>
     chat: ''
   identifier: cloud-of-insects

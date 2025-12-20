@@ -610,7 +610,7 @@ items:
       description:
         value: >-
           <p><span style="font-family:'Roboto Condensed', sans-serif">The
-          </span>[[lookup @name lowercase]] <span style="font-family:'Roboto
+          </span>[[lookup @name lowercase]]{creature} <span style="font-family:'Roboto
           Condensed', sans-serif">makes two</span> [[/item .mmRend0000000000]]
           <span style="font-family:'Roboto Condensed',
           sans-serif">attacks.</span></p>
@@ -770,7 +770,7 @@ items:
           <p>[[/attack extended]]. [[/damage average extended]]. If the target
           is a Medium or smaller creature, it has the &amp;Reference[Grappled
           apply=false] condition (escape DC [[lookup @skills.ath.passive]]) from
-          both of the [[lookup @name lowercase]]'s front claws.</p>
+          both of the [[lookup @name lowercase]]{creature}'s front claws.</p>
         chat: ''
       identifier: rend
       source:

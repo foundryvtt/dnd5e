@@ -663,19 +663,19 @@ items:
       description:
         value: >-
           <p class="feature">[[/attack extended]]. [[/damage average extended]],
-          and the [[lookup @name lowercase]] attaches to the target. If the
+          and the [[lookup @name lowercase]]{creature} attaches to the target. If the
           target is a Medium or smaller creature and the [[lookup @name
           lowercase]] had Advantage on the attack roll, it covers the target,
           which has the &amp;Reference[Blinded apply=false] condition and is
           &amp;Reference[suffocating apply=false]{suffocating} while the
-          [[lookup @name lowercase]] is attached in this way.</p><p
+          [[lookup @name lowercase]]{creature} is attached in this way.</p><p
           class="feature">While attached to a target, the [[lookup @name
           lowercase]] can attack only the target but has Advantage on its attack
           rolls. Its Speed becomes 0, it can't benefit from any bonus to its
           Speed, and it moves with the target.</p><p class="feature">A creature
-          can take an action to try to detach the [[lookup @name lowercase]]
+          can take an action to try to detach the [[lookup @name lowercase]]{creature}
           from itself, doing so with a successful [[/check format=long]]. On its
-          turn, the [[lookup @name lowercase]] can detach itself by using 5 feet
+          turn, the [[lookup @name lowercase]]{creature} can detach itself by using 5 feet
           of movement.</p>
         chat: ''
       identifier: crush
@@ -804,7 +804,7 @@ items:
           startRound: null
           startTurn: null
         description: >-
-          <p>While attached to a target, the [[lookup @name lowercase]] can
+          <p>While attached to a target, the [[lookup @name lowercase]]{creature} can
           attack only the target but has Advantage on its attack rolls. Its
           Speed becomes 0, it can’t benefit from any bonus to its Speed, and it
           moves with the target.</p>

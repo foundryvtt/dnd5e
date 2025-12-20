@@ -567,7 +567,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] can hold its breath
+          <p class="feature">The [[lookup @name lowercase]]{creature} can hold its breath
           for 1 hour.</p>
         chat: ''
       identifier: hold-breath
@@ -622,11 +622,11 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] has five heads.
-          Whenever the [[lookup @name lowercase]] takes 25 damage or more on a
-          single turn, one of its heads dies. The [[lookup @name lowercase]]
+          <p class="feature">The [[lookup @name lowercase]]{creature} has five heads.
+          Whenever the [[lookup @name lowercase]]{creature} takes 25 damage or more on a
+          single turn, one of its heads dies. The [[lookup @name lowercase]]{creature}
           dies if all its heads are dead. At the end of each of its turns when
-          it has at least one living head, the [[lookup @name lowercase]] grows
+          it has at least one living head, the [[lookup @name lowercase]]{creature} grows
           two heads for each of its heads that died since its last turn, unless
           it has taken Fire damage since its last turn. The [[lookup @name
           lowercase]] regains 20 Hit Points when it grows new heads.</p>
@@ -679,7 +679,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">For each head the [[lookup @name lowercase]] has
+          <p class="feature">For each head the [[lookup @name lowercase]]{creature} has
           beyond one, it gets an extra &amp;Reference[Reaction] that can be used
           only for &amp;Reference[OpportunityAttacks].</p>
         chat: ''
@@ -778,7 +778,7 @@ items:
       description:
         value: >-
           <p><span style="font-family:'Roboto Condensed', sans-serif">The
-          </span>[[lookup @name lowercase]] <span style="font-family:'Roboto
+          </span>[[lookup @name lowercase]]{creature} <span style="font-family:'Roboto
           Condensed', sans-serif">makes as many </span> [[/item
           .mmBite0000000000]]<span style="font-family:'Roboto Condensed',
           sans-serif"> attacks as it has heads.</span></p>

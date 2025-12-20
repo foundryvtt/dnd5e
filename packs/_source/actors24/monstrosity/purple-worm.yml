@@ -606,7 +606,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes one [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes one [[/item
           .mmBite0000000000]] attack and one [[/item .mmTailStinger000]]
           attack.</p>
         chat: ''
@@ -661,7 +661,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] can burrow through
+          <p class="feature">The [[lookup @name lowercase]]{creature} can burrow through
           solid rock at half its Burrow Speed and leaves a 10-foot-diameter
           tunnel in its wake.</p>
         chat: ''
@@ -1291,19 +1291,19 @@ items:
           @target.affects.special activity=YorssyWMumAsvzx3]] by the [[lookup
           @name lowercase]] (it can have up to three creatures swallowed at a
           time).</p><p class="feature"><em>Failure:</em> The target is swallowed
-          by the [[lookup @name lowercase]], and the Grappled conditions end. A
+          by the [[lookup @name lowercase]]{creature}, and the Grappled conditions end. A
           swallowed creature has the &amp;Reference[Blinded apply=false] and
           &amp;Reference[Restrained apply=false] conditions, has
           &amp;Reference[Total Cover] against attacks and other effects outside
-          the [[lookup @name lowercase]], and takes [[/damage average
+          the [[lookup @name lowercase]]{creature}, and takes [[/damage average
           activity=zrWNjO9mkbN28spL]] damage at the start of each of the
-          [[lookup @name lowercase]]'s turns.</p><p class="feature">If the
-          [[lookup @name lowercase]] takes 30 damage or more on a single turn
-          from a creature inside it, the [[lookup @name lowercase]] must succeed
+          [[lookup @name lowercase]]{creature}'s turns.</p><p class="feature">If the
+          [[lookup @name lowercase]]{creature} takes 30 damage or more on a single turn
+          from a creature inside it, the [[lookup @name lowercase]]{creature} must succeed
           on a [[/save format=long activity=rGeGukkm2t2fXsoy]] at the end of
           that turn or regurgitate all swallowed creatures, each of which falls
           in a space within [[lookup @range.value activity=rGeGukkm2t2fXsoy]]
-          feet of the [[lookup @name lowercase]] and has the
+          feet of the [[lookup @name lowercase]]{creature} and has the
           &amp;Reference[Prone apply=false] condition. If the [[lookup @name
           lowercase]] dies, any swallowed creature no longer has the Restrained
           and can escape from the corpse by using 20 feet of movement, exiting

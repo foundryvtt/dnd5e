@@ -864,7 +864,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes three [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes three [[/item
           .vTZW4dSRGXTDWvRd]] attacks. It can replace one attack with a use of
           [[/item .mmShieldBash0000]].</p>
         chat: ''
@@ -986,7 +986,7 @@ items:
           @save.dc.value activity=eIErvLccVVCXiCSl]], one [[lookup
           @target.affects.type activity=eIErvLccVVCXiCSl]] within [[lookup
           @range.value activity=eIErvLccVVCXiCSl]] [[lookup @range.units
-          activity=eIErvLccVVCXiCSl]]. that the [[lookup @name lowercase]] can
+          activity=eIErvLccVVCXiCSl]]. that the [[lookup @name lowercase]]{creature} can
           see.</p><p><em>Failure:</em> [[/damage average]] damage. If the target
           is a Medium or smaller creature, it has the &amp;Reference[Prone
           apply=false] condition.</p>
@@ -1134,9 +1134,9 @@ items:
         max: ''
       description:
         value: >-
-          <p><em>Trigger:</em> The [[lookup @name lowercase]] is [[lookup
+          <p><em>Trigger:</em> The [[lookup @name lowercase]]{creature} is [[lookup
           @activation.condition activity=aLG3BRZL7P6OEjwd]]. <em>Response:</em>
-          The [[lookup @name lowercase]] adds [[lookup @roll.formula
+          The [[lookup @name lowercase]]{creature} adds [[lookup @roll.formula
           activity=aLG3BRZL7P6OEjwd]] to its AC against that attack, possibly
           causing it to miss.</p>
         chat: ''

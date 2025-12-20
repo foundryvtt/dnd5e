@@ -1042,9 +1042,9 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">If the [[lookup @name lowercase]] is subjected to
+          <p class="feature">If the [[lookup @name lowercase]]{creature} is subjected to
           an effect that allows it to make a Dexterity saving throw to take only
-          half damage, the [[lookup @name lowercase]] instead takes no damage if
+          half damage, the [[lookup @name lowercase]]{creature} instead takes no damage if
           it succeeds on the save and only half damage if it fails. It can't use
           this trait if it has the Incapacitated condition.</p>
         chat: ''
@@ -1142,7 +1142,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes three attacks, using [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes three attacks, using [[/item
           .jLa5l9pntsTVrMKH]] or [[/item .dL4668G7zXeC5zyY]] in any
           combination.</p>
         chat: ''
@@ -1245,7 +1245,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] takes the
+          <p class="feature">The [[lookup @name lowercase]]{creature} takes the
           &amp;Reference[Dash apply=false], the &amp;Reference[Disengage
           apply=false], or &amp;Reference[Hide apply=false] action.</p>
         chat: ''

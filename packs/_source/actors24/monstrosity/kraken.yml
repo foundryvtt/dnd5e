@@ -571,7 +571,7 @@ items:
         recovery: []
         max: ''
       description:
-        value: <p>The [[lookup @name lowercase]] can breathe air and water.</p>
+        value: <p>The [[lookup @name lowercase]]{creature} can breathe air and water.</p>
         chat: ''
       identifier: amphibious
       source:
@@ -668,7 +668,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] fails a saving throw, it can
+          <p>If the [[lookup @name lowercase]]{creature} fails a saving throw, it can
           choose to succeed instead.</p>
         chat: ''
       identifier: legendary-resistance
@@ -726,7 +726,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] deals double damage to objects and
+          <p>The [[lookup @name lowercase]]{creature} deals double damage to objects and
           structures.</p>
         chat: ''
       identifier: siege-monster
@@ -823,8 +823,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]  makes two  [[/item
-          .mmTentacle000000]] attacks and uses  [[/item .mmFling000000000]], 
+          <p>The [[lookup @name lowercase]]{creature}  makes two  [[/item
+          .mmTentacle000000]] attacks and uses  [[/item .mmFling000000000]],
           [[/item .mmLightningStrik]], or  [[/item .mmSwallow0000000]].</p>
         chat: ''
       identifier: multiattack
@@ -1198,7 +1198,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] throws a [[lookup
+          <p class="feature">The [[lookup @name lowercase]]{creature} throws a [[lookup
           @target.affects.special activity=E7YKnUIWsavrnNzK]] Grappled by it to
           a space it can see within [[lookup @range.value
           activity=E7YKnUIWsavrnNzK]] feet of itself [[lookup @range.special
@@ -1643,21 +1643,21 @@ items:
           <p class="feature"><em>Dexterity Saving Throw:</em> DC [[lookup
           @save.dc.value activity=YorssyWMumAsvzx3]], [[lookup
           @target.affects.labels.statblock activity=YorssyWMumAsvzx3]] Grappled
-          by the [[lookup @name lowercase]] (it can have up to four creatures
+          by the [[lookup @name lowercase]]{creature} (it can have up to four creatures
           swallowed at a time).</p><p><em>Failure:</em> [[/damage average
           activity=YorssyWMumAsvzx3]] damage. If the target is Large or smaller,
           it is swallowed and no longer Grappled. A swallowed creature has the
           &amp;Reference[Restrained apply=false] condition, has
           &amp;Reference[Total Cover] against attacks and other effects outside
-          the [[lookup @name lowercase]], and takes [[/damage average
+          the [[lookup @name lowercase]]{creature}, and takes [[/damage average
           activity=zrWNjO9mkbN28spL]] damage at the start of each of its
-          turns.</p><p class="feature">If the [[lookup @name lowercase]] takes
+          turns.</p><p class="feature">If the [[lookup @name lowercase]]{creature} takes
           50 damage or more on a single turn from a creature inside it, the
-          [[lookup @name lowercase]] must succeed on a [[/save format=long
+          [[lookup @name lowercase]]{creature} must succeed on a [[/save format=long
           activity=rGeGukkm2t2fXsoy]] at the end of that turn or regurgitate all
           swallowed creatures, each of which falls in a space within 10 feet of
-          the [[lookup @name lowercase]] with the &amp;Reference[Prone
-          apply=false] condition. If the [[lookup @name lowercase]] dies, any
+          the [[lookup @name lowercase]]{creature} with the &amp;Reference[Prone
+          apply=false] condition. If the [[lookup @name lowercase]]{creature} dies, any
           swallowed creature no longer has the Restrained condition and can
           escape from the corpse using 15 feet of movement, exiting Prone.</p>
         chat: ''
@@ -1889,7 +1889,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] uses [[/item
+          <p class="feature">The [[lookup @name lowercase]]{creature} uses [[/item
           .mmLightningStrik]].</p>
         chat: ''
       identifier: storm-bolt
@@ -2050,13 +2050,13 @@ items:
           @save.dc.value activity=Kquf9zADg0jtKBqw]], each [[lookup
           @target.affects.type activity=Kquf9zADg0jtKBqw]] in a [[lookup
           @target.template.size activity=Kquf9zADg0jtKBqw]]-foot Emanation
-          originating from the [[lookup @name lowercase]] while it is
+          originating from the [[lookup @name lowercase]]{creature} while it is
           underwater.</p><p class="feature"><em>Failure:</em> The target has the
           &amp;Reference[Blinded apply=false] and &amp;Reference[Poisoned
           apply=false] conditions until the end of the [[lookup @name
-          lowercase]]'s next turn. The [[lookup @name lowercase]] then moves up
+          lowercase]]'s next turn. The [[lookup @name lowercase]]{creature} then moves up
           to its Speed.</p><p class="feature"><em>Failure or Success:</em> The
-          [[lookup @name lowercase]] can't take this action again until the
+          [[lookup @name lowercase]]{creature} can't take this action again until the
           start of its next turn.</p>
         chat: ''
       identifier: toxic-ink

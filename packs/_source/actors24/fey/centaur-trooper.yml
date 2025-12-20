@@ -1025,7 +1025,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two attacks, using [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes two attacks, using [[/item
           .XMKFiS5XUEC4fLCr]] or [[/item .4C5jy0VkmoTdrbTC]] in any
           combination.</p>
         chat: ''
@@ -1149,11 +1149,11 @@ items:
         max: '1'
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] moves up to its
+          <p class="feature">The [[lookup @name lowercase]]{creature} moves up to its
           Speed without provoking &amp;Reference[OpportunityAttacks] and can
           move through the spaces of [[lookup @target.affects.special
           activity=FG9rAj3Q8UTxbGLF]]. Each [[lookup @target.affects.type
-          activity=FG9rAj3Q8UTxbGLF]] whose space the [[lookup @name lowercase]]
+          activity=FG9rAj3Q8UTxbGLF]] whose space the [[lookup @name lowercase]]{creature}
           enters is targeted once by the following effect.</p><p
           class="feature"><em>Strength Saving Throw:</em> DC [[lookup
           @save.dc.value activity=FG9rAj3Q8UTxbGLF]].</p><p

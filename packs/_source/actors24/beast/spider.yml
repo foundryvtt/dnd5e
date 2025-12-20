@@ -566,7 +566,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] can climb difficult surfaces,
+          <p>The [[lookup @name lowercase]]{creature} can climb difficult surfaces,
           including along ceilings, without needing to make an ability
           check.</p>
         chat: ''
@@ -618,8 +618,8 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] ignores movement
-          restrictions caused by webs, and the [[lookup @name lowercase]] knows
+          <p class="feature">The [[lookup @name lowercase]]{creature} ignores movement
+          restrictions caused by webs, and the [[lookup @name lowercase]]{creature} knows
           the location of any other creature in contact with the same web.</p>
         chat: ''
       identifier: web-walker

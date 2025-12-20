@@ -631,13 +631,13 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] explodes [[lookup
+          <p>The [[lookup @name lowercase]]{creature} explodes [[lookup
           @activation.condition activity=1SfqWSp7RSyHgG4b]].</p><p><em>Dexterity
           Saving Throw: </em>DC [[lookup @save.dc.value
           activity=1SfqWSp7RSyHgG4b]], each [[lookup @target.affects.type
           activity=1SfqWSp7RSyHgG4b]] in a [[lookup @target.template.size
           activity=1SfqWSp7RSyHgG4b]]-foot Emanation originating from the
-          [[lookup @name lowercase]].</p><p><em>Failure: </em>[[/damage
+          [[lookup @name lowercase]]{creature}.</p><p><em>Failure: </em>[[/damage
           average]] damage.</p><p><em>Success:</em> Half damage.</p>
         chat: ''
       identifier: death-burst
@@ -892,7 +892,7 @@ items:
           @target.template.size activity=soAO2jRWos8FsxeU]]-foot
           Cone.</p><p><em>Failure:</em> The target has the
           &amp;Reference[Blinded apply=false] condition until the end of the
-          [[lookup @name lowercase]]'s next turn.</p>
+          [[lookup @name lowercase]]{creature}'s next turn.</p>
         chat: ''
       identifier: blinding-breath
       source:
@@ -1032,7 +1032,7 @@ items:
         max: '1'
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] casts the
+          <p>The [[lookup @name lowercase]]{creature} casts the
           @UUID[Compendium.dnd5e.spells24.Item.phbsplSleep00000] spell,
           requiring no spell components and using Charisma as the spellcasting
           ability (spell save DC [[lookup @attributes.spell.dc]]).</p>

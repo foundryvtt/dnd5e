@@ -565,7 +565,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] has Advantage on saving throws
+          <p>The [[lookup @name lowercase]]{creature} has Advantage on saving throws
           against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
@@ -669,7 +669,7 @@ items:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage average extended]].  If the target
-          is a Medium or smaller creature, the [[lookup @name lowercase]] pushes
+          is a Medium or smaller creature, the [[lookup @name lowercase]]{creature} pushes
           the target up to 10 feet straight away from itself.</p>
         chat: ''
       identifier: hooves
@@ -832,7 +832,7 @@ items:
           <p class="feature"><em>Wisdom Saving Throw:</em> DC [[lookup
           @save.dc.value activity=s5CMus4LOXBkt1Wn]], [[lookup
           @target.affects.labels.statblock activity=s5CMus4LOXBkt1Wn]] the
-          [[lookup @name lowercase]] can see within [[lookup @range.value
+          [[lookup @name lowercase]]{creature} can see within [[lookup @range.value
           activity=s5CMus4LOXBkt1Wn]] <span style="font-family:'Roboto
           Condensed', sans-serif">feet.</span></p><p><em>Failure:</em> [[/damage
           average]] damage.</p>

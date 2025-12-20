@@ -564,7 +564,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] knows if it hears a
+          <p class="feature">The [[lookup @name lowercase]]{creature} knows if it hears a
           lie.</p>
         chat: ''
       identifier: divine-awareness
@@ -615,7 +615,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">If the [[lookup @name lowercase]] dies outside
+          <p class="feature">If the [[lookup @name lowercase]]{creature} dies outside
           Mount Celestia, its body disappears, and it gains a new body
           instantly, reviving with all its Hit Points somewhere in Mount
           Celestia.</p>
@@ -668,7 +668,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] has Advantage on saving throws
+          <p>The [[lookup @name lowercase]]{creature} has Advantage on saving throws
           against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
@@ -755,7 +755,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes three [[/item Radiant Sword]]
+          <p>The [[lookup @name lowercase]]{creature} makes three [[/item Radiant Sword]]
           attacks or uses [[/item Holy Burst]] twice.</p>
         chat: ''
       identifier: multiattack
@@ -1038,7 +1038,7 @@ items:
           @save.dc.value activity=HrgMO1rsQla47fff]], each [[lookup
           @target.affects.type activity=HrgMO1rsQla47fff]] in a [[lookup
           @target.template.size activity=HrgMO1rsQla47fff]]-foot-radius Sphere
-          centered on a point the [[lookup @name lowercase]] can see within
+          centered on a point the [[lookup @name lowercase]]{creature} can see within
           [[lookup @range.value activity=HrgMO1rsQla47fff]]
           feet.</p><p><em>Failure:</em> [[/damage average]]
           damage.</p><p><em>Success:</em> Half damage.</p>
@@ -1339,7 +1339,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts one of the
           following spells, requiring no Material components and using Charisma
           as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]]):</p><p class="feature-trait"><strong>At
@@ -3117,7 +3117,7 @@ items:
         max: '2'
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplCureWounds]{Cure
           Wounds}</em>,
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplInvisibili]{Invisibility}</em>,

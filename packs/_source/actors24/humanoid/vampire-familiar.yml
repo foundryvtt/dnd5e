@@ -573,10 +573,10 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">While the [[lookup @name lowercase]] and its
+          <p class="feature">While the [[lookup @name lowercase]]{creature} and its
           vampire master are on the same plane of existence, the vampire can
-          communicate with the [[lookup @name lowercase]] telepathically, and
-          the vampire can perceive through the [[lookup @name lowercase]]'s
+          communicate with the [[lookup @name lowercase]]{creature} telepathically, and
+          the vampire can perceive through the [[lookup @name lowercase]]{creature}'s
           senses.</p>
         chat: ''
       identifier: vampiric-connection
@@ -677,7 +677,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes two [[/item
           .mmUmbralDagger00]] attacks.</p>
         chat: ''
       identifier: multiattack
@@ -983,7 +983,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] takes the
+          <p class="feature">The [[lookup @name lowercase]]{creature} takes the
           &amp;Reference[Dash] or &amp;Reference[Disengage] action.</p>
         chat: ''
       identifier: deathless-agility

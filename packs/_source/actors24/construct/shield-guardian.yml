@@ -566,14 +566,14 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] is magically bound to an amulet.
-          While the [[lookup @name lowercase]] and its amulet are on the same
+          <p>The [[lookup @name lowercase]]{creature} is magically bound to an amulet.
+          While the [[lookup @name lowercase]]{creature} and its amulet are on the same
           plane of existence, the amulet's wearer can telepathically call the
-          [[lookup @name lowercase]] to travel to it, and the [[lookup @name
+          [[lookup @name lowercase]]{creature} to travel to it, and the [[lookup @name
           lowercase]] knows the distance and direction to the amulet. If the
-          [[lookup @name lowercase]] is within 60 feet of the amulet's wearer,
+          [[lookup @name lowercase]]{creature} is within 60 feet of the amulet's wearer,
           half of any damage the wearer takes (round up) is transferred to the
-          [[lookup @name lowercase]].</p>
+          [[lookup @name lowercase]]{creature}.</p>
         chat: ''
       identifier: bound
       source:
@@ -674,7 +674,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] regains [[lookup @healing.formula
+          <p>The [[lookup @name lowercase]]{creature} regains [[lookup @healing.formula
           activity=5cGvjZJIJVicjJ3d]] Hit Points at the start of each of its
           turns if it has at least 1 Hit Point.</p>
         chat: ''
@@ -731,12 +731,12 @@ items:
       description:
         value: >-
           <p class="feature">A spellcaster who wears the [[lookup @name
-          lowercase]]'s amulet can cause the [[lookup @name lowercase]] to store
+          lowercase]]'s amulet can cause the [[lookup @name lowercase]]{creature} to store
           one spell of level 4 or lower. To do so, the wearer must cast the
-          spell on the [[lookup @name lowercase]] while within 5 feet of it. The
+          spell on the [[lookup @name lowercase]]{creature} while within 5 feet of it. The
           spell has no effect but is stored within the [[lookup @name
           lowercase]]. Any previously stored spell is lost when a new spell is
-          stored. The [[lookup @name lowercase]] can cast the spell stored with
+          stored. The [[lookup @name lowercase]]{creature} can cast the spell stored with
           any parameters set by the original caster, requiring no spell
           components and using the caster's spellcasting ability. The stored
           spell is then lost.</p>
@@ -825,7 +825,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item Fist]]
+          <p>The [[lookup @name lowercase]]{creature} makes two [[/item Fist]]
           attacks.</p>
         chat: ''
       identifier: multiattack
@@ -1089,11 +1089,11 @@ items:
       description:
         value: >-
           <p class="feature"><em>Trigger:</em> An attack roll hits the wearer of
-          the [[lookup @name lowercase]]'s amulet while the wearer is within 5
-          feet of the [[lookup @name lowercase]].</p><p
+          the [[lookup @name lowercase]]{creature}'s amulet while the wearer is within 5
+          feet of the [[lookup @name lowercase]]{creature}.</p><p
           class="feature"><em>Response:</em> The wearer gains a +5 bonus to AC,
           including against the triggering attack and possibly causing it to
-          miss, until the start of the [[lookup @name lowercase]]'s next
+          miss, until the start of the [[lookup @name lowercase]]{creature}'s next
           turn.</p>
         chat: ''
       identifier: protection
