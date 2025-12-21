@@ -205,6 +205,8 @@ export default class CharacterData extends CreatureTemplate {
     const rollData = this.parent.getRollData({ deterministic: true });
     const { originalSaves, originalSkills } = this.parent.getOriginalStats();
 
+    this.details.tier = Math.ceil((this.details.level - 4) / 6) + 1;
+
     AttributesFields.prepareExhaustionLevel.call(this);
     this.prepareAbilities({ rollData, originalSaves });
     this.prepareSkills({ rollData, originalSkills });
