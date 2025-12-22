@@ -2502,6 +2502,7 @@ DND5E.movementUnits = {
   ft: {
     label: "DND5E.UNITS.DISTANCE.Foot.Label",
     abbreviation: "DND5E.UNITS.DISTANCE.Foot.Abbreviation",
+    template: "DND5E.UNITS.DISTANCE.Foot.Template",
     conversion: 1,
     formattingUnit: "foot",
     type: "imperial",
@@ -2510,6 +2511,7 @@ DND5E.movementUnits = {
   mi: {
     label: "DND5E.UNITS.DISTANCE.Mile.Label",
     abbreviation: "DND5E.UNITS.DISTANCE.Mile.Abbreviation",
+    template: "DND5E.UNITS.DISTANCE.Mile.Template",
     conversion: 5_280,
     formattingUnit: "mile",
     type: "imperial",
@@ -2518,6 +2520,7 @@ DND5E.movementUnits = {
   m: {
     label: "DND5E.UNITS.DISTANCE.Meter.Label",
     abbreviation: "DND5E.UNITS.DISTANCE.Meter.Abbreviation",
+    template: "DND5E.UNITS.DISTANCE.Meter.Template",
     conversion: 10 / 3, // D&D uses a simplified 5ft -> 1.5m conversion.
     formattingUnit: "meter",
     type: "metric",
@@ -2526,13 +2529,14 @@ DND5E.movementUnits = {
   km: {
     label: "DND5E.UNITS.DISTANCE.Kilometer.Label",
     abbreviation: "DND5E.UNITS.DISTANCE.Kilometer.Abbreviation",
+    template: "DND5E.UNITS.DISTANCE.Kilometer.Template",
     conversion: 10_000 / 3, // Matching simplified conversion
     formattingUnit: "kilometer",
     type: "metric",
     travelResolution: "day"
   }
 };
-preLocalize("movementUnits", { keys: ["label", "abbreviation"] });
+preLocalize("movementUnits", { keys: ["label", "abbreviation", "template"] });
 
 /* -------------------------------------------- */
 

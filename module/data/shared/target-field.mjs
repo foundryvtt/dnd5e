@@ -46,12 +46,12 @@ export default class TargetField extends SchemaField {
       prepareFormulaValue(this, "target.affects.count", "DND5E.TARGET.FIELDS.target.affects.count.label", rollData);
     } else this.target.affects.count = null;
 
-    this.target.template.dimensions = TargetField.templateDimensions(this.target.template.type);
+    const dimensions = this.target.template.dimensions = TargetField.templateDimensions(this.target.template.type);
 
     if ( this.target.template.type ) {
       this.target.template.count ||= "1";
-      if ( this.target.template.dimensions.width ) this.target.template.width ||= "5";
-      if ( this.target.template.dimensions.height ) this.target.template.height ||= "5";
+      if ( dimensions.width ) this.target.template.width ||= "5";
+      if ( dimensions.height ) this.target.template.height ||= "5";
       prepareFormulaValue(this, "target.template.count", "DND5E.TARGET.FIELDS.target.template.count.label", rollData);
       prepareFormulaValue(this, "target.template.size", "DND5E.TARGET.FIELDS.target.template.size.label", rollData);
       prepareFormulaValue(this, "target.template.width", "DND5E.TARGET.FIELDS.target.template.width.label", rollData);
@@ -65,22 +65,55 @@ export default class TargetField extends SchemaField {
 
     const pr = getPluralRules();
 
-    // Generate the template label
+    // Generate the template labels
     const templateConfig = CONFIG.DND5E.areaTargetTypes[this.target.template.type];
+    this.target.template.labels = {};
     if ( templateConfig ) {
       const parts = [];
       if ( this.target.template.count > 1 ) parts.push(`${this.target.template.count} ×`);
       if ( this.target.template.units in CONFIG.DND5E.movementUnits ) {
         parts.push(formatLength(this.target.template.size, this.target.template.units));
       }
-      this.target.template.label = game.i18n.format(
+      this.target.template.labels.statblock = this.target.template.label = game.i18n.format(
         `${templateConfig.counted}.${pr.select(this.target.template.count || 1)}`, { number: parts.filterJoin(" ") }
       ).trim().capitalize();
+
+      const sizeUnit = CONFIG.DND5E.movementUnits[this.target.template.units]?.template ?? "";
+      if ( Object.keys(dimensions).length === 1 ) this.target.template.labels.size = game.i18n.format(
+        "DND5E.AreaOfEffect.Description.SizeSimple",
+        { number: formatNumber(this.target.template.size), unit: sizeUnit }
+      );
+      else this.target.template.labels.size = game.i18n.getListFormatter({ type: "unit" })
+        .format(Object.entries(dimensions).map(([k, l]) =>
+          game.i18n.format("DND5E.AreaOfEffect.Description.SizeType", {
+            number: formatNumber(this.target.template[k]), unit: sizeUnit,
+            type: game.i18n.localize(l.replace("DND5E.AreaOfEffect.Size.", "DND5E.AreaOfEffect.Description."))
+          })
+        ));
+
+      this.target.template.labels.description = game.i18n.format(
+        `${templateConfig.counted}.${pr.select(this.target.template.count || 1)}Sized`,
+        {
+          count: formatNumber(this.target.template.count, { words: true }),
+          sizes: this.target.template.labels.size
+        }
+      );
+
+      this.target.template.labels.type = templateConfig.label;
     } else this.target.template.label = "";
 
-    // Generate the affects label
+    // Generate the affects labels
     const affectsConfig = CONFIG.DND5E.individualTargetTypes[this.target.affects.type];
     this.target.affects.labels = {
+      description: game.i18n.format(
+        `${this.target.affects.special ? "DND5E.TARGET.Type.Special.Counted"
+          : affectsConfig?.counted ?? "DND5E.TARGET.Type.Target.Counted"}.${this.target.affects.count
+          ? pr.select(this.target.affects.count) : this.target.template.type ? "each" : "any"}`,
+        {
+          number: formatNumber(this.target.affects.count, { words: true }),
+          special: this.target.affects.special
+        }
+      ),
       sheet: affectsConfig?.counted ? game.i18n.format(
         `${affectsConfig.counted}.${this.target.affects.count ? pr.select(this.target.affects.count) : "other"}`, {
           number: this.target.affects.count ? formatNumber(this.target.affects.count)
@@ -93,7 +126,14 @@ export default class TargetField extends SchemaField {
       )
     };
 
-    if ( labels ) labels.target = this.target.template.label || this.target.affects.labels.sheet;
+    if ( labels ) {
+      labels.description ??= {};
+      labels.description.affects ||= this.target.affects.labels.description;
+      labels.description.template ||= this.target.template.labels.description;
+      labels.description.templateSize ||= this.target.template.labels.size;
+      labels.description.templateType ||= this.target.template.labels.type;
+      labels.target = this.target.template.label || this.target.affects.labels.sheet;
+    }
   }
 
   /* -------------------------------------------- */
@@ -107,14 +147,13 @@ export default class TargetField extends SchemaField {
     const sizes = CONFIG.DND5E.areaTargetTypes[type]?.sizes;
     const dimensions = { size: "DND5E.AreaOfEffect.Size.Label" };
     if ( sizes ) {
-      dimensions.width = sizes.includes("width") && (sizes.includes("length") || sizes.includes("radius"));
-      dimensions.height = sizes.includes("height");
       if ( sizes.includes("radius") ) dimensions.size = "DND5E.AreaOfEffect.Size.Radius";
       else if ( sizes.includes("length") ) dimensions.size = "DND5E.AreaOfEffect.Size.Length";
       else if ( sizes.includes("width") ) dimensions.size = "DND5E.AreaOfEffect.Size.Width";
+      const hasWidth = sizes.includes("width") && (sizes.includes("length") || sizes.includes("radius"));
       if ( sizes.includes("thickness") ) dimensions.width = "DND5E.AreaOfEffect.Size.Thickness";
-      else if ( dimensions.width ) dimensions.width = "DND5E.AreaOfEffect.Size.Width";
-      if ( dimensions.height ) dimensions.height = "DND5E.AreaOfEffect.Size.Height";
+      else if ( hasWidth ) dimensions.width = "DND5E.AreaOfEffect.Size.Width";
+      if ( sizes.includes("height") ) dimensions.height = "DND5E.AreaOfEffect.Size.Height";
     }
     return dimensions;
   }
