@@ -2,11 +2,6 @@
     <fieldset>
         <legend>
             <span>{{ localize "DND5E.ENCHANT.FIELDS.enchant.label" }}</span>
-            <button type="button" class="unbutton control-button" data-action="addEffect"
-                    data-tooltip="DND5E.ENCHANT.Enchantment.Action.Create"
-                    aria-label="{{ localize "DND5E.ENCHANT.Enchantment.Action.Create" }}">
-                <i class="fas fa-plus"></i>
-            </button>
         </legend>
         <multi-select name="appliedEffects" class="hidden-tags">
             {{ selectOptions allEnchantments }}
@@ -22,6 +17,10 @@
             </li>
             {{/each}}
         </ul>
+        <button type="button" class="unbutton control-button add-button" data-action="addEffect">
+            <i class="fas fa-plus"></i>
+            <span>{{ localize "DND5E.ENCHANT.Enchantment.Action.Create" }}</span>
+        </button>
     </fieldset>
 </section>
 

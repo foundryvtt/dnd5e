@@ -2,10 +2,6 @@
     <fieldset>
         <legend>
             <span>{{ localize "DND5E.SUMMON.FIELDS.profiles.label" }}</span>
-            <button type="button" class="unbutton control-button" data-action="addProfile"
-                    data-tooltip aria-label="{{ localize "DND5E.SUMMON.Profile.Action.Create" }}">
-                <i class="fas fa-plus" inert></i>
-            </button>
         </legend>
         {{#with fields.summon.fields as |fields|}}
         {{ formField fields.mode value=../source.summon.mode options=../profileModes rootId=@root.partId }}
@@ -22,6 +18,10 @@
             </li>
             {{/each}}
         </ul>
+        <button type="button" class="unbutton control-button add-button" data-action="addProfile">
+            <i class="fas fa-plus" inert></i>
+            <span>{{ localize "DND5E.SUMMON.Profile.Action.Create" }}</span>
+        </button>
     </fieldset>
 </section>
 

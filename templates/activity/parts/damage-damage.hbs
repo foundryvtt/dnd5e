@@ -1,10 +1,6 @@
 <fieldset>
     <legend>
         <span>{{ localize "DND5E.DAMAGE.FIELDS.damage.label" }}</span>
-        <button type="button" class="unbutton control-button" data-action="addDamagePart"
-                data-tooltip aria-label="{{ localize "DND5E.DAMAGE.Part.Action.Create" }}">
-            <i class="fas fa-plus" inert></i>
-        </button>
     </legend>
     {{#with fields.damage.fields.critical.fields as |fields|}}
     {{ formField fields.allow value=../source.damage.critical.allow input=@root.inputs.createCheckboxInput
@@ -14,4 +10,8 @@
     {{/if}}
     {{/with}}
     {{> "systems/dnd5e/templates/activity/parts/damage-parts.hbs" }}
+    <button type="button" class="unbutton control-button add-button" data-action="addDamagePart">
+        <i class="fas fa-plus" inert></i>
+        <span>{{ localize "DND5E.DAMAGE.Part.Action.Create" }}</span>
+    </button>
 </fieldset>
