@@ -1,7 +1,7 @@
 <div>
     <header>
         <input type="text" class="document-name uninput" name="name" value="{{ name }}" autofocus
-               placeholder="{{ localize 'Name' }}">
+               placeholder="{{ ifThen defaultName defaultName (localize 'Name') }}">
         {{#if hasFolders}}
         <select class="unselect" name="folder">
             {{ selectOptions folders selected=folder labelAttr="name" valueAttr="id" }}
@@ -15,7 +15,7 @@
             <label>
                 {{ dnd5e-icon icon alt=label }}
                 <span>{{ label }}</span>
-                <input type="radio" name="type" value="{{ type }}" required {{checked (eq type ../type)}}
+                <input type="radio" name="type" value="{{ type }}" required {{checked selected}}
                        {{ disabled disabled }}>
             </label>
         </li>
