@@ -1,6 +1,6 @@
 import RollConfigurationDialog from "../applications/dice/roll-configuration-dialog.mjs";
 
-const { DiceTerm, NumericTerm } = foundry.dice.terms;
+const { DiceTerm, NumericTerm, PoolTerm } = foundry.dice.terms;
 
 /**
  * @import {
@@ -340,20 +340,53 @@ export default class BasicRoll extends Roll {
   /* -------------------------------------------- */
 
   /**
-   * Replaces all dice terms that have modifiers with their maximum/minimum value.
+   * Replaces all dice or pool terms that have modifiers with their maximum/minimum value.
    *
    * @param {object} [options={}]            Extra optional arguments which describe or modify the BasicRoll.
    */
   preCalculateDiceTerms(options={}) {
     if ( this._evaluated || (!options.maximize && !options.minimize) ) return;
     this.terms = this.terms.map(term => {
-      if ( (term instanceof DiceTerm) && term.modifiers.length ) {
+      if ( (term instanceof DiceTerm || term instanceof PoolTerm) && term.modifiers.length ) {
         const minimize = !options.maximize;
-        const number = this.constructor.preCalculateTerm(term, { minimize });
+        const fn = term instanceof DiceTerm ? "preCalculateTerm" : "preCalculatePoolTerm";
+        const number = this.constructor[fn](term, { minimize });
         if ( Number.isFinite(number) ) return new NumericTerm({ number, options: term.options });
       }
       return term;
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Summarizes information about valid applicable modifiers for the term to be minimized or maximized.
+   *
+   * @param {DiceTerm|PoolTerm} term  PoolTerm to get the maximum/minimum value.
+   * @returns {BasicRollTermApplicableModifier[]}
+   * @internal
+   */
+  static _matchValidModifiers(term) {
+    const currentModifiers = foundry.utils.deepClone(term.modifiers);
+    const keep = new Set(["k", "kh", "kl"]);
+    const drop = new Set(["d", "dh", "dl"]);
+    const validModifiers = new Set([...keep, ...drop]);
+    let rgx = /([kd][hl]?)(\d+)?/i;
+    if ( term instanceof DiceTerm ) {
+      validModifiers.add("max").add("min");
+      rgx = /(m[ai][xn]|[kd][hl]?)(\d+)?/i;
+    }
+    let modifierCommands = [];
+    for ( const modifier of currentModifiers ) {
+      const match = modifier.match(rgx);
+      if ( !match ) continue;
+      if ( match[0].length < match.input.length ) currentModifiers.push(match.input.slice(match[0].length));
+      let [, command, value] = match;
+      command = command.toLowerCase();
+      if ( !validModifiers.has(command) ) continue;
+      modifierCommands.push({ command, value: value ?? "", keep: keep.has(command), drop: drop.has(command) });
+    }
+    return modifierCommands;
   }
 
   /* -------------------------------------------- */
@@ -370,32 +403,43 @@ export default class BasicRoll extends Roll {
   static preCalculateTerm(die, { minimize=false }={}) {
     let face = minimize ? 1 : die.faces;
     let number = die.number;
-    const currentModifiers = foundry.utils.deepClone(die.modifiers);
-    const keep = new Set(["k", "kh", "kl"]);
-    const drop = new Set(["d", "dh", "dl"]);
-    const validModifiers = new Set([...keep, ...drop, "max", "min"]);
-    let matchedModifier = false;
-
-    for ( const modifier of currentModifiers ) {
-      const rgx = /(m[ai][xn]|[kd][hl]?)(\d+)?/i;
-      const match = modifier.match(rgx);
-      if ( !match ) continue;
-      if ( match[0].length < match.input.length ) currentModifiers.push(match.input.slice(match[0].length));
-      let [, command, value] = match;
-      command = command.toLowerCase();
-      if ( !validModifiers.has(command) ) continue;
-
-      matchedModifier = true;
-      const amount = parseInt(value) || (command === "max" || command === "min" ? -1 : 1);
+    const modifiers = BasicRoll._matchValidModifiers(die);
+    if ( !modifiers.length ) return null;
+    for ( const modifier of modifiers ) {
+      const amount = parseInt(modifier.value) || (modifier.command === "max" || modifier.command === "min" ? -1 : 1);
       if ( amount > 0 ) {
-        if ( (command === "max" && minimize) || (command === "min" && !minimize) ) continue;
-        else if ( (command === "max" || command === "min") ) face = Math.min(die.faces, amount);
-        else if ( keep.has(command) ) number = Math.min(number, amount);
-        else if ( drop.has(command) ) number = Math.max(1, number - amount);
+        if ( (modifier.command === "max" && minimize) || (modifier.command === "min" && !minimize) ) continue;
+        else if ( (modifier.command === "max" || modifier.command === "min") ) face = Math.min(die.faces, amount);
+        else if ( modifier.keep ) number = Math.min(number, amount);
+        else if ( modifier.drop ) number = Math.max(1, number - amount);
       }
     }
 
-    return matchedModifier ? face * number : null;
+    return face * number;
+
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Gets information from passed die and calculates the maximum or minimum value that could be rolled.
+   *
+   * @param {PoolTerm} pool                           PoolTerm to get the maximum/minimum value.
+   * @param {object} [preCalculateOptions={}]         Additional options to modify preCalculate functionality.
+   * @param {boolean} [preCalculateOptions.minimize=false]  Calculate the minimum value instead of the maximum.
+   * @returns {number|null}                                 Maximum/Minimum value that could be rolled as an integer, or
+   *                                                        null if the modifiers could not be precalculated.
+   */
+  static preCalculatePoolTerm(pool, { minimize=false }={}) {
+    pool.evaluate({ maximize: !minimize, minimize });
+    const modifiers = BasicRoll._matchValidModifiers(pool);
+    if ( !modifiers.length ) return null;
+    for ( const modifier of modifiers ) {
+      if ( modifier.keep ) pool.keep(modifier.command + modifier.value);
+      else if ( modifier.drop ) pool.drop(modifier.command + modifier.value);
+    }
+
+    return pool.total;
   }
 
   /* -------------------------------------------- */
