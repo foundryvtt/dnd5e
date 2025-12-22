@@ -5,6 +5,7 @@ import FormulaField from "../fields/formula-field.mjs";
 import LocalDocumentField from "../fields/local-document-field.mjs";
 import CreatureTypeField from "../shared/creature-type-field.mjs";
 import RollConfigField from "../shared/roll-config-field.mjs";
+import SensesField from "../shared/senses-field.mjs";
 import SimpleTraitField from "./fields/simple-trait-field.mjs";
 import AttributesFields from "./templates/attributes.mjs";
 import CreatureTemplate from "./templates/creature.mjs";
@@ -175,6 +176,7 @@ export default class CharacterData extends CreatureTemplate {
 
     AttributesFields.prepareBaseArmorClass.call(this);
     AttributesFields.prepareBaseEncumbrance.call(this);
+    SensesField._shim(this.attributes.senses);
   }
 
   /* -------------------------------------------- */
@@ -191,7 +193,7 @@ export default class CharacterData extends CreatureTemplate {
       this.details.type = new CreatureTypeField({ swarm: false }).initialize({ value: "humanoid" }, this);
     }
     for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) this.attributes.movement[key] ??= 0;
-    for ( const key of Object.keys(CONFIG.DND5E.senses) ) this.attributes.senses[key] ??= 0;
+    for ( const key of Object.keys(CONFIG.DND5E.senses) ) this.attributes.senses.ranges[key] ??= 0;
     this.attributes.movement.units ??= defaultUnits("length");
     this.attributes.senses.units ??= defaultUnits("length");
   }

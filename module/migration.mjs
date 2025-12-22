@@ -836,7 +836,7 @@ function _migrateActorMovementSenses(actorData, updateData) {
       if ( foundry.utils.getProperty(actorData, keyPath) === 0 ) updateData[keyPath] = null;
     }
     for ( const key of Object.keys(CONFIG.DND5E.senses) ) {
-      const keyPath = `system.attributes.senses.${key}`;
+      const keyPath = `system.attributes.senses.ranges.${key}`;
       if ( foundry.utils.getProperty(actorData, keyPath) === 0 ) updateData[keyPath] = null;
     }
   }
