@@ -878,29 +878,35 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       }
 
       let damageMultiplier = multiplier;
+      let appliedDamage = Math.trunc(d.value * multiplier);
 
       // Apply type-specific damage resistance
       if ( !ignore("resistance", d.type) && hasEffect("dr", d.type, d.properties) ) {
         damageMultiplier /= 2;
+        appliedDamage = Math.trunc(appliedDamage / 2);
         d.active.resistance = true;
       }
 
       // Apply type-specific damage vulnerability
       if ( !ignore("vulnerability", d.type) && hasEffect("dv", d.type, d.properties) ) {
         damageMultiplier *= 2;
+        appliedDamage *= 2;
         d.active.vulnerability = true;
       }
 
       // Negate healing types
-      if ( (options.invertHealing !== false) && (d.type === "healing") ) damageMultiplier *= -1;
+      if ( (options.invertHealing !== false) && (d.type === "healing") ) {
+        appliedDamage *= -1;
+        damageMultiplier *= -1;
+      }
 
-      d.value = d.value * damageMultiplier;
+      d.value = appliedDamage;
       d.active.multiplier = (d.active.multiplier ?? 1) * damageMultiplier;
       if ( d.type === "temphp" ) damages.temp += d.value;
       else damages.amount += d.value;
     });
 
-    damages.amount = damages.amount > 0 ? Math.floor(damages.amount) : Math.ceil(damages.amount);
+    damages.amount = Math.trunc(damages.amount);
 
     // Apply damage threshold
     if ( ((damages.amount > 0) && (damages.amount < (this.system.attributes?.hp?.dt ?? -Infinity)))
