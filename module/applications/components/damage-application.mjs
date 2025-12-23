@@ -312,9 +312,11 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
    */
   async _onApplyDamage(event) {
     event.preventDefault();
+    const messageId = event.target?.closest?.('[data-message-id]')?.dataset?.messageId;
     for ( const target of this.targetList.querySelectorAll("[data-target-uuid]") ) {
       const token = fromUuidSync(target.dataset.targetUuid);
       const options = this.getTargetOptions(target.dataset.targetUuid);
+      options.messageId = messageId;
       await token?.applyDamage(this.damages, { ...options, isDelta: true });
     }
     if ( game.settings.get("dnd5e", "autoCollapseChatTrays") !== "manual" ) {
