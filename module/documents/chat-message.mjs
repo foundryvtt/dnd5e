@@ -81,7 +81,14 @@ export default class ChatMessage5e extends ChatMessage {
 
   /** @inheritDoc */
   static migrateData(source) {
+    if ( (source.type === "base") && foundry.utils.hasProperty(source, "flags.dnd5e.bastion") ) {
+      source.type = "orders" in source.flags.dnd5e.bastion ? "bastionTurn" : "bastionAttack";
+      source.system ??= source.flags.dnd5e.bastion;
+      delete source.flags.dnd5e.bastion;
+    }
+
     source = super.migrateData(source);
+
     if ( foundry.utils.hasProperty(source, "flags.dnd5e.itemData") ) {
       foundry.utils.setProperty(source, "flags.dnd5e.item.data", source.flags.dnd5e.itemData);
       delete source.flags.dnd5e.itemData;
@@ -132,7 +139,6 @@ export default class ChatMessage5e extends ChatMessage {
     await this._enrichChatCard(html);
     this._collapseTrays(html);
     this._activateActivityListeners(html);
-    dnd5e.bastion._activateChatListeners(this, html);
 
     /**
      * A hook event that fires after dnd5e-specific chat message modifications have completed.
