@@ -243,7 +243,9 @@ export default class CreatureTemplate extends CommonTemplate {
     skillData.effectValue = skillData.value;
     skillData.bonus = baseBonus + globalCheckBonus + checkBonusAbl + globalSkillBonus;
     skillData.mod = abilityData?.mod ?? 0;
-    const calculatedProf = this.calculateAbilityCheckProficiency(skillData.value, skillData.ability);
+    const calculatedProf = this.calculateAbilityCheckProficiency(
+      skillData.value, skillData.ability, { skill: skillId }
+    );
     skillData.prof = originalSkill?.prof?.multiplier > calculatedProf.multiplier
       ? originalSkill.prof.clone() : calculatedProf;
     skillData.value = skillData.proficient = skillData.prof.multiplier;
