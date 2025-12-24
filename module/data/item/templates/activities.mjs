@@ -322,19 +322,27 @@ export default class ActivitiesTemplate extends SystemDataModel {
 
   /**
    * Perform any item & activity uses recovery.
-   * @param {string[]} periods  Recovery periods to check.
-   * @param {object} rollData   Roll data to use when evaluating recover formulas.
+   * @param {Map<string, number>} periods  Recovery periods to check, mapped to the number of times occurred.
+   * @param {object} rollData              Roll data to use when evaluating recovery formulas.
    * @returns {Promise<{ updates: object, rolls: BasicRoll[], destroy: boolean }>}
    */
   async recoverUses(periods, rollData) {
+    if ( foundry.utils.getType(periods) === "Array" ) {
+      foundry.utils.logCompatibilityWarning(
+        "The periods parameter of `recoverUses` is now a mapping of periods to times triggered.",
+        { since: "DnD5e 5.2", until: "DnD5e 5.4" }
+      );
+      periods = new Map(periods.map(p => [p, 1]));
+    }
+
     const updates = {};
     const rolls = [];
     const autoRecharge = game.settings.get("dnd5e", "autoRecharge");
-    const shouldRecharge = periods.includes("turnStart") && (this.parent.actor.type === "npc")
-      && (autoRecharge !== "no");
+    const shouldRecharge = periods.has("turnStart") && (this.parent.actor.type === "npc") && (autoRecharge !== "no");
     const recharge = async doc => {
       const config = { apply: false };
       const message = { create: autoRecharge !== "silent" };
+      // TODO: Roll multiple times if multiple `turnStarts` are present
       const result = await UsesField.rollRecharge.call(doc, config, {}, message);
       if ( result ) {
         if ( doc instanceof Item ) foundry.utils.mergeObject(updates, result.updates);
