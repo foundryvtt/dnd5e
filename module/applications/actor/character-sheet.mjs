@@ -614,10 +614,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
 
   /** @inheritDoc */
   async _prepareTabsContext(context, options) {
-    const { basic, special } = CONFIG.DND5E.facilities.advancement;
-    const threshold = Math.min(...Object.keys(basic), ...Object.keys(special));
-    const showBastion = game.settings.get("dnd5e", "bastionConfiguration")?.enabled
-      && (this.actor.system.details.level >= threshold);
+    const showBastion = game.settings.get("dnd5e", "bastionConfiguration")?.availableForActor(this.actor);
     if ( !showBastion && (this.tabGroups.primary === "bastion") ) this.tabGroups.primary = "details";
 
     context = await super._prepareTabsContext(context, options);

@@ -8,6 +8,7 @@
  * @property {string} [order]             The order that was completed, if any.
  * @property {number} [gold]              Gold generated.
  * @property {BastionTurnItem[]} [items]  Items created.
+ * @property {object} updates             Updates applied to the facility.
  */
 
 /**
