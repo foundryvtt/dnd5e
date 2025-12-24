@@ -82,26 +82,29 @@ system:
           - healing
         custom:
           enabled: true
-          formula: '@scaling * 2'
+          formula: '@scaling + 2'
         scaling:
           number: 1
+          mode: ''
         bonus: ''
       name: ''
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
   enchant: {}
   identifier: blessed-healer
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.4
   createdTime: 1735866589552
-  modifiedTime: 1745256760626
+  modifiedTime: 1766595259786
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 100000
