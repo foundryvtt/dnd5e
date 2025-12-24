@@ -146,7 +146,7 @@ export default class CastActivity extends ActivityMixin(BaseCastActivityData) {
    * @returns {object[]}
    */
   getSpellChanges() {
-    const changes = [];
+    const changes = [{ key: "system.method", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: "spell" }];
     const source = this.toObject();
 
     // Override spell details
