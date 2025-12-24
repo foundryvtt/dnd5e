@@ -1347,8 +1347,6 @@ export default class CharacterActorSheet extends BaseActorSheet {
    * @returns {boolean}
    */
   static hasBastion(actor) {
-    const { basic, special } = CONFIG.DND5E.facilities.advancement;
-    const threshold = Math.min(...Object.keys(basic), ...Object.keys(special));
-    return game.settings.get("dnd5e", "bastionConfiguration")?.enabled && (actor.system.details.level >= threshold);
+    return dnd5e.settings.bastionConfiguration.availableForActor(actor);
   }
 }

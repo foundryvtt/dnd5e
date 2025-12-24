@@ -317,7 +317,7 @@ export default class CalendarData5e extends foundry.data.CalendarData {
       return 0;
     };
 
-    const days = CalendarData5e.#dayDifference(previousTime, nowTime);
+    const days = CalendarData5e.dayDifference(previousTime, nowTime);
     foundry.utils.setProperty(options, "dnd5e.deltas", {
       midnights: days,
       middays: days + passedHour(game.time.calendar.days.hoursPerDay / 2),
@@ -357,30 +357,47 @@ export default class CalendarData5e extends foundry.data.CalendarData {
 
     const changes = [];
     const rolls = [];
+    const operations = [];
 
-    if ( !dnd5e.settings.calendarConfig.manualRecovery && periods.size ) {
-      const operations = [];
+    const bastion = dnd5e.settings.bastionConfiguration;
+    const advanceFacilities = timePassageData.midnights > 0;
+    const recoverUses = !dnd5e.settings.calendarConfig.manualRecovery && periods.size;
+    if ( advanceFacilities || recoverUses ) {
       for ( const actor of game.actors ) {
         const deltas = { deleted: [], item: {} };
         const deleted = [];
         const updates = [];
-        for ( const item of actor.items ) {
-          const result = await item.system.recoverUses?.(periods) ?? {};
-          if ( result?.rolls ) rolls.push(...result.rolls);
-          if ( result?.destroy ) {
-            deltas.deleted.push(item.toObject());
-            deleted.push(item.id);
-          } else if ( !foundry.utils.isEmpty(result?.updates) ) {
-            deltas.item[item.id] = IndividualDeltaField.getDeltas(item, result.updates);
-            updates.push({ _id: item.id, ...result.updates });
+
+        // Advance bastion facilities
+        if ( advanceFacilities && bastion?.availableForActor(actor) && actor.itemTypes.facility.length ) {
+          const results = await dnd5e.bastion.advanceAllFacilities(actor, {
+            duration: null, performUpdates: false, summary: "auto"
+          });
+          updates.push(...results.updates);
+        }
+
+        // Recover item & activity uses
+        if ( recoverUses ) {
+          for ( const item of actor.items ) {
+            const result = await item.system.recoverUses?.(periods) ?? {};
+            if ( result?.rolls ) rolls.push(...result.rolls);
+            if ( result?.destroy ) {
+              deltas.deleted.push(item.toObject());
+              deleted.push(item.id);
+            } else if ( !foundry.utils.isEmpty(result?.updates) ) {
+              deltas.item[item.id] = IndividualDeltaField.getDeltas(item, result.updates);
+              updates.push({ _id: item.id, ...result.updates });
+            }
           }
         }
+
         if ( deleted.length ) operations.push({ action: "delete", documentName: "Item", ids: deleted, parent: actor });
         if ( updates.length ) operations.push({ action: "update", documentName: "Item", updates, parent: actor });
         if ( deltas.deleted.length || !foundry.utils.isEmpty(deltas.item) ) changes.push({ deltas, uuid: actor.uuid });
       }
-      await foundry.documents.modifyBatch(operations);
     }
+
+    if ( operations.length ) await foundry.documents.modifyBatch(operations);
 
     const messageConfig = {
       create: changes.length > 0,
@@ -449,7 +466,7 @@ export default class CalendarData5e extends foundry.data.CalendarData {
    * @param {Components} currentTime
    * @returns {number}
    */
-  static #dayDifference(previousTime, currentTime) {
+  static dayDifference(previousTime, currentTime) {
     // If years are the same, simple subtraction should work
     if ( previousTime.year === currentTime.year ) return currentTime.day - previousTime.day;
 
