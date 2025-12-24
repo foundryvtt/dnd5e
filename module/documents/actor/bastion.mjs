@@ -1,5 +1,6 @@
-import { formatNumber } from "../../utils.mjs";
 import Dialog5e from "../../applications/api/dialog.mjs";
+import CalendarData5e from "../../data/calendar/calendar-data.mjs";
+import { formatNumber } from "../../utils.mjs";
 
 /**
  * @import { BastionTurnItem, BastionTurnResult } from "../_types.mjs";
@@ -40,65 +41,85 @@ export default class Bastion {
 
   /**
    * Advance all the facilities of a given Actor by one bastion turn.
-   * @param {Actor5e} actor                   The actor.
+   * @param {Actor5e} actor                          The actor.
    * @param {object} [options]
-   * @param {number} [options.duration=7]     The number of days the bastion turn spanned.
-   * @param {boolean} [options.summary=true]  Print a chat message summary of the turn.
-   * @returns {Promise<void>}
+   * @param {number|null} [options.duration=7]       The number of days the bastion turn spanned or `null` for auto.
+   * @param {boolean} [options.performUpdates=true]  Update the actor's facilities.
+   * @param {boolean|"auto"} [options.summary=true]  Print a chat message summary of the turn. If set to "auto" then
+   *                                                 the message will only be created if an order is completed.
+   * @returns {Promise<{ [message]: ChatMessage5e, updates: object[] }>}
    */
-  async advanceAllFacilities(actor, { duration=7, summary=true }={}) {
+  async advanceAllFacilities(actor, { duration=7, performUpdates=true, summary=true }={}) {
     const results = { orders: [], items: [], gold: 0 };
+    const itemUpdates = [];
     for ( const facility of actor.itemTypes.facility ) {
-      const { order, gold, items } = await this.advanceTurn(facility, { duration });
+      const { order, gold, items, updates } = await this.advanceTurn(facility, { duration, performUpdates: false });
+      if ( !foundry.utils.isEmpty(updates) ) itemUpdates.push({ _id: facility.id, ...updates });
       if ( !order || (order === "maintain") ) continue;
       if ( gold ) results.gold += gold;
       if ( items ) results.items.push(...items);
       results.orders.push({ id: facility.id, order });
     }
+    if ( performUpdates ) await actor.updateEmbeddedDocuments("Item", updates);
 
-    if ( summary ) {
+    let message;
+    if ( (summary === true) || ((summary === "auto") && results.orders.length) ) {
       results.gold = { value: results.gold, claimed: false };
       const content = await this.#renderTurnSummary(actor, results);
-      await ChatMessage.implementation.create({
+      message = await ChatMessage.implementation.create({
         content,
         speaker: ChatMessage.implementation.getSpeaker({ actor }),
         flags: { dnd5e: { bastion: results } }
       });
     }
+
+    return { message, updates: itemUpdates };
   }
 
   /* -------------------------------------------- */
 
   /**
    * Advance the given facility by one bastion turn.
-   * @param {Item5e} facility              The facility.
+   * @param {Item5e} facility                        The facility.
    * @param {object} [options]
-   * @param {number} [options.duration=7]  The number of days the bastion turn spanned.
+   * @param {number|null} [options.duration=7]       The number of days the bastion turn spanned or `null` for auto.
+   * @param {boolean} [options.performUpdates=true]  Update the facility.
    * @returns {Promise<BastionTurnResult>}
    */
-  async advanceTurn(facility, { duration=7 }={}) {
+  async advanceTurn(facility, { duration=7, performUpdates=true }={}) {
     const { disabled, progress, type } = facility.system;
 
     // Case 1 - No order in progress.
     if ( !progress.max && !disabled ) {
-      await facility.update({ "system.progress.order": "" });
-      if ( type.value === "basic" ) return {}; // Basic facilities do nothing.
-      return { order: "maintain" }; // Special facilities are considered to have been issued the maintain order.
+      const updates = { "system.progress.order": "" };
+      if ( performUpdates ) await facility.update(updates);
+      if ( type.value === "basic" ) return { updates }; // Basic facilities do nothing.
+      return { order: "maintain", updates }; // Special facilities are considered to have been issued the maintain order.
+    }
+
+    // Calculate duration if automatic
+    if ( !duration && progress.updated ) {
+      const days = CalendarData5e.dayDifference(
+        game.time.calendar.timeToComponents(progress.updated),
+        game.time.components
+      );
+      if ( days > 0 ) duration = days;
     }
 
     const newProgress = Math.min(progress.value + duration, progress.max);
 
     // Case 2 - Order incomplete. Ongoing progress.
     if ( (newProgress < progress.max) && !disabled ) {
-      await facility.update({ "system.progress.value": newProgress });
-      return {};
+      const updates = { "system.progress": { value: newProgress, updated: game.time.worldTime } };
+      if ( performUpdates ) await facility.update(updates);
+      return { updates };
     }
 
     // Case 3 - Order complete.
-    const updates = { "system.progress": { value: 0, max: null, order: "" } };
+    const updates = { "system.progress": { value: 0, max: null, order: "", updated: null } };
     const { gold, items } = this.#evaluateOrder(facility, progress.order, updates);
-    await facility.update(updates);
-    return { gold, items, order: progress.order };
+    if ( performUpdates ) await facility.update(updates);
+    return { gold, items, order: progress.order, updates };
   }
 
   /* -------------------------------------------- */
@@ -169,7 +190,7 @@ export default class Bastion {
    * @param {Item5e} facility  The facility.
    * @param {string} order     The order that was completed.
    * @param {object} updates   Facility updates.
-   * @returns {Omit<BastionTurnResult, "order">}
+   * @returns {Omit<BastionTurnResult, "order"|"updates">}
    */
   #evaluateOrder(facility, order, updates) {
     switch ( order ) {
@@ -189,7 +210,7 @@ export default class Bastion {
    * Evaluate the completion of a build order.
    * @param {Item5e} facility  The facility.
    * @param {object} updates   Facility updates.
-   * @returns {Omit<BastionTurnResult, "order">}
+   * @returns {Omit<BastionTurnResult, "order"|"updates">}
    */
   #evaluateBuildOrder(facility, updates) {
     const { building } = facility.system;
@@ -204,7 +225,7 @@ export default class Bastion {
    * Evaluate the completion of a craft order.
    * @param {Item5e} facility          The facility.
    * @param {object} updates           Facility updates.
-   * @returns {Omit<BastionTurnResult, "order">}
+   * @returns {Omit<BastionTurnResult, "order"|"updates">}
    */
   #evaluateCraftOrder(facility, updates) {
     const { craft } = facility.system;
@@ -218,7 +239,7 @@ export default class Bastion {
    * Evaluate the completion of an enlarge order.
    * @param {Item5e} facility  The facility.
    * @param {object} updates   Facility updates.
-   * @returns {Omit<BastionTurnResult, "order">}
+   * @returns {Omit<BastionTurnResult, "order"|"updates">}
    */
   #evaluateEnlargeOrder(facility, updates) {
     const { size } = facility.system;
@@ -235,7 +256,7 @@ export default class Bastion {
    * Evaluate the completion of a harvest order.
    * @param {Item5e} facility  The facility.
    * @param {object} updates   Facility updates.
-   * @returns {Omit<BastionTurnResult, "order">}
+   * @returns {Omit<BastionTurnResult, "order"|"updates">}
    */
   #evaluateHarvestOrder(facility, updates) {
     const { craft } = facility.system;
@@ -248,7 +269,7 @@ export default class Bastion {
    * Evaluate the completion of a repair order.
    * @param {Item5e} facility  The facility.
    * @param {object} updates   Facility updates.
-   * @returns {Omit<BastionTurnResult, "order">}
+   * @returns {Omit<BastionTurnResult, "order"|"updates">}
    */
   #evaluateRepairOrder(facility, updates) {
     updates["system.disabled"] = false;
@@ -261,7 +282,7 @@ export default class Bastion {
    * Evaluate the completion of a trade order.
    * @param {Item5e} facility  The facility.
    * @param {object} updates   Facility updates.
-   * @returns {Omit<BastionTurnResult, "order">}
+   * @returns {Omit<BastionTurnResult, "order"|"updates">}
    */
   #evaluateTradeOrder(facility, updates) {
     const { trade } = facility.system;
