@@ -1,6 +1,6 @@
 /**
  * @import { BastionTurnItem } from "../../documents/_types.mjs";
- * @import { ActivationsData, ActorDeltasData } from "./fields/_types.mjs";
+ * @import { ActivationsData, ActorDeltasData, IndividualDeltaData } from "./fields/_types.mjs";
  */
 
 /**
@@ -56,6 +56,19 @@
  * @property {ActorDeltasData} deltas       Actor/item recovery from this turn change.
  * @property {ChatMessage5e} [request]      Rest request chat message for which this rest was performed.
  * @property {string} type                  Type of rest performed.
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef TimePassedMessageSystemData
+ * @property {DocumentDeltasData[]} changes  Item recovery from this time change.
+ */
+
+/**
+ * @typedef DocumentDeltasData
+ * @param {IndividualDeltaData} deltas  Data deltas for an document update.
+ * @param {string} uuid                 UUID of the document to which the deltas apply.
  */
 
 /* -------------------------------------------- */

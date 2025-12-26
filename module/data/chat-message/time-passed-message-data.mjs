@@ -6,19 +6,13 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
 const { ArrayField, DocumentUUIDField, SchemaField } = foundry.data.fields;
 
 /**
- * @import { IndividualDeltaData } from "./fields/deltas-field.mjs";
- */
-
-/**
- * @typedef DocumentDeltasData
- * @param {IndividualDeltaData} deltas  Data deltas for an document update.
- * @param {string} uuid                 UUID of the document to which the deltas apply.
+ * @import { TimePassedMessageSystemData } from "./_types.mjs";
  */
 
 /**
  * Data stored in a time passed chat message.
- *
- * @property {DocumentDeltasData[]} changes  Item recovery from this time change.
+ * @extends {ChatMessageDataModel<TimePassedMessageSystemData>}
+ * @mixes TimePassedMessageSystemData
  */
 export default class TimePassedMessageData extends ChatMessageDataModel {
 
