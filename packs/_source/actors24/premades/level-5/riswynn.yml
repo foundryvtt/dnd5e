@@ -1,11 +1,10 @@
 name: Riswynn
 type: character
-_id: RiswynnLv0100000
-img: null
+_id: RiswynnLv0500000
 system:
   currency:
     pp: 0
-    gp: 33
+    gp: 76
     ep: 0
     sp: 0
     cp: 0
@@ -28,7 +27,7 @@ system:
           max: null
           mode: 0
     dex:
-      value: 17
+      value: 19
       proficient: 1
       max: null
       bonuses:
@@ -392,7 +391,7 @@ system:
       max: null
       temp: null
       tempmax: 0
-      value: 11
+      value: 43
       bonuses: {}
     death:
       roll:
@@ -423,7 +422,7 @@ system:
     background: fIdcuKvDwKeVVyuT
     originalClass: CqmrnNL3Ah75KIAB
     xp:
-      value: 0
+      value: 6500
     appearance: ''
     trait: ''
     gender: ''
@@ -512,8 +511,14 @@ system:
       id: .Item.hpZHmGBuw1lyFZxO
       sort: 200000
     - type: item
-      id: .Item.0sOpkCaLkao7OFhW
+      id: .Item.iSK720h4AStmW1uw
       sort: 300000
+    - type: item
+      id: .Item.sS65CaD6oR2S1uig
+      sort: 50000
+    - type: item
+      id: .Item.0sOpkCaLkao7OFhW
+      sort: 400000
 prototypeToken:
   name: Riswynn
   displayName: 20
@@ -521,17 +526,17 @@ prototypeToken:
   width: 1
   height: 1
   texture:
-    src: systems/dnd5e/icons/svg/actors/character.svg
     anchorX: 0.5
     anchorY: 0.5
     offsetX: 0
     offsetY: 0
     fit: contain
-    scaleX: 1
-    scaleY: 1
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
+    src: systems/dnd5e/icons/svg/actors/character.svg
+    scaleX: 1
+    scaleY: 1
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -703,7 +708,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0100000.8pH6fGe86boFgbnP'
+    _key: '!actors.items!RiswynnLv0500000.8pH6fGe86boFgbnP'
   - _id: 2k0T89gikUZqXOhx
     name: Dwarven Resilience
     type: feat
@@ -759,7 +764,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0100000.2k0T89gikUZqXOhx'
+    _key: '!actors.items!RiswynnLv0500000.2k0T89gikUZqXOhx'
   - _id: 23hZYyQB2r7FYfDF
     name: Dwarven Toughness
     type: feat
@@ -832,7 +837,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!RiswynnLv0100000.23hZYyQB2r7FYfDF.Na7W3p67eT9YqW87
+          !actors.items.effects!RiswynnLv0500000.23hZYyQB2r7FYfDF.Na7W3p67eT9YqW87
     folder: R0KprZdOrRDNsTBv
     flags:
       dnd5e:
@@ -850,7 +855,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0100000.23hZYyQB2r7FYfDF'
+    _key: '!actors.items!RiswynnLv0500000.23hZYyQB2r7FYfDF'
   - name: Stonecunning
     system:
       description:
@@ -992,7 +997,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!RiswynnLv0100000.0sOpkCaLkao7OFhW.SAbuNo2AO3XXtkdv
+          !actors.items.effects!RiswynnLv0500000.0sOpkCaLkao7OFhW.SAbuNo2AO3XXtkdv
     sort: 100000
     flags:
       dnd5e:
@@ -1009,7 +1014,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0100000.0sOpkCaLkao7OFhW'
+    _key: '!actors.items!RiswynnLv0500000.0sOpkCaLkao7OFhW'
   - _id: CqmrnNL3Ah75KIAB
     name: Rogue
     type: class
@@ -1136,13 +1141,17 @@ items:
           group: H3jVZpWr5rfZX6BH
           sort: 1000000
       identifier: rogue
-      levels: 1
+      levels: 5
       advancement:
         - _id: 6zkx7K1uPW2IQ5JA
           type: HitPoints
           configuration: {}
           value:
             '1': max
+            '2': avg
+            '3': avg
+            '4': avg
+            '5': avg
         - _id: 4lvoA3fvGLv15lyc
           type: ItemGrant
           configuration:
@@ -1173,7 +1182,9 @@ items:
                 optional: false
             optional: false
             spell: null
-          value: {}
+          value:
+            added:
+              8D5MNyj6IOqJnc6L: Compendium.dnd5e.classes24.Item.phbrgeCunningAct
           level: 2
           title: Class Features
         - _id: py3wJiuRo9A5PlZb
@@ -1184,7 +1195,9 @@ items:
                 optional: false
             optional: false
             spell: null
-          value: {}
+          value:
+            added:
+              iSK720h4AStmW1uw: Compendium.dnd5e.classes24.Item.phbrgeSteadyAim0
           level: 3
           title: Class Features
         - _id: hsOIIBWwSrWJvTuc
@@ -1197,7 +1210,10 @@ items:
                 optional: false
             optional: false
             spell: null
-          value: {}
+          value:
+            added:
+              sS65CaD6oR2S1uig: Compendium.dnd5e.classes24.Item.phbrgeCunningStr
+              MZimHBVO8UCSFu5v: Compendium.dnd5e.classes24.Item.phbrgeUncannyDod
           level: 5
           title: Class Features
         - _id: 6lgPpApxgrLKsNdH
@@ -1284,6 +1300,8 @@ items:
             recommendation: null
           value:
             type: asi
+            assignments:
+              dex: 2
           level: 4
           title: ''
         - _id: mRSh9oUVjLU33e7p
@@ -1485,8 +1503,8 @@ items:
           type: Subclass
           configuration: {}
           value:
-            document: null
-            uuid: null
+            document: oYLm5eR9RCTgb6sv
+            uuid: Compendium.dnd5e.classes24.Item.phbrgeThief00000
           level: 3
           title: ''
           hint: ''
@@ -1678,7 +1696,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0100000.CqmrnNL3Ah75KIAB'
+    _key: '!actors.items!RiswynnLv0500000.CqmrnNL3Ah75KIAB'
   - _id: L6u99eYSlxnjEpWD
     name: Expertise
     type: feat
@@ -1736,7 +1754,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0100000.L6u99eYSlxnjEpWD'
+    _key: '!actors.items!RiswynnLv0500000.L6u99eYSlxnjEpWD'
   - _id: hpZHmGBuw1lyFZxO
     name: Sneak Attack
     type: feat
@@ -1884,7 +1902,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0100000.hpZHmGBuw1lyFZxO'
+    _key: '!actors.items!RiswynnLv0500000.hpZHmGBuw1lyFZxO'
   - _id: wA4ESRuMmrpxVN1M
     name: Thieves' Cant
     type: feat
@@ -1944,7 +1962,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0100000.wA4ESRuMmrpxVN1M'
+    _key: '!actors.items!RiswynnLv0500000.wA4ESRuMmrpxVN1M'
   - _id: jhV4pP4PyLLInuyZ
     name: Weapon Mastery
     type: feat
@@ -2001,7 +2019,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0100000.jhV4pP4PyLLInuyZ'
+    _key: '!actors.items!RiswynnLv0500000.jhV4pP4PyLLInuyZ'
   - name: Dagger
     system:
       description:
@@ -2170,7 +2188,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0100000.U8Yz9pYkHuczdPOm'
+    _key: '!actors.items!RiswynnLv0500000.U8Yz9pYkHuczdPOm'
   - name: Thieves' Tools
     system:
       description:
@@ -2292,79 +2310,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0100000.U7JmxdCmUcDgPcAy'
-  - name: Leather Armor
-    system:
-      description:
-        value: ''
-        chat: ''
-      price:
-        value: 10
-        denomination: gp
-      source:
-        custom: ''
-        rules: '2024'
-        license: CC-BY-4.0
-        book: ''
-        revision: 1
-      identified: true
-      unidentified:
-        description: ''
-      container: null
-      quantity: 1
-      weight:
-        value: 10
-        units: lb
-      rarity: ''
-      attunement: ''
-      cover: null
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      armor:
-        value: 11
-        magicalBonus: null
-        dex: null
-      hp:
-        value: null
-        max: null
-        dt: null
-        conditions: ''
-      type:
-        value: light
-        baseItem: leather
-      properties: []
-      speed:
-        value: null
-        conditions: ''
-        units: ft
-      strength: null
-      proficient: null
-      activities: {}
-      identifier: leather-armor
-      crew:
-        value: []
-      attuned: false
-      equipped: true
-    _id: Z1rIWt3lUcExXFpx
-    type: equipment
-    folder: G3X11BbtmEqLmEnK
-    img: icons/equipment/chest/breastplate-scale-leather.webp
-    effects: []
-    sort: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.equipment24.Item.phbarmLeatherArm
-      duplicateSource: null
-      exportSource: null
-      coreVersion: '13.351'
-      systemId: dnd5e
-      systemVersion: 5.2.4
-      lastModifiedBy: null
-    ownership:
-      default: 0
-    _key: '!actors.items!RiswynnLv0100000.Z1rIWt3lUcExXFpx'
+    _key: '!actors.items!RiswynnLv0500000.U7JmxdCmUcDgPcAy'
   - name: Shortsword
     system:
       description:
@@ -2532,7 +2478,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0100000.uvZ0LxGbkR11JQSQ'
+    _key: '!actors.items!RiswynnLv0500000.uvZ0LxGbkR11JQSQ'
   - name: Shortbow
     system:
       description:
@@ -2701,7 +2647,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0100000.htlOpTVSqn3kW1NF'
+    _key: '!actors.items!RiswynnLv0500000.htlOpTVSqn3kW1NF'
   - name: Quiver
     system:
       description:
@@ -2759,7 +2705,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0100000.YZtAjfw40D5om3Px'
+    _key: '!actors.items!RiswynnLv0500000.YZtAjfw40D5om3Px'
   - name: Arrows
     system:
       description:
@@ -2833,7 +2779,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0100000.PTv6UVNHAkt9ZU82'
+    _key: '!actors.items!RiswynnLv0500000.PTv6UVNHAkt9ZU82'
   - name: Burglar's Pack
     system:
       description:
@@ -2906,7 +2852,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0100000.Tk7xDq98Zy4XYPrW'
+    _key: '!actors.items!RiswynnLv0500000.Tk7xDq98Zy4XYPrW'
   - name: Bell
     system:
       description:
@@ -2980,7 +2926,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0100000.ygTMxMalYrb2TFB8'
+    _key: '!actors.items!RiswynnLv0500000.ygTMxMalYrb2TFB8'
   - name: Oil
     system:
       description:
@@ -3197,7 +3143,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0100000.dKGSyXXHSBUmbhNC'
+    _key: '!actors.items!RiswynnLv0500000.dKGSyXXHSBUmbhNC'
   - name: Ball Bearings
     system:
       description:
@@ -3421,7 +3367,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!RiswynnLv0100000.Dr5AjYshuykbP6Fx.zW4roNKVL8HcoNwV
+          !actors.items.effects!RiswynnLv0500000.Dr5AjYshuykbP6Fx.zW4roNKVL8HcoNwV
     sort: 0
     flags: {}
     _stats:
@@ -3434,7 +3380,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0100000.Dr5AjYshuykbP6Fx'
+    _key: '!actors.items!RiswynnLv0500000.Dr5AjYshuykbP6Fx'
   - name: Tinderbox
     system:
       description:
@@ -3563,7 +3509,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0100000.HaOwleDWSsqy62rk'
+    _key: '!actors.items!RiswynnLv0500000.HaOwleDWSsqy62rk'
   - name: Waterskin
     system:
       description:
@@ -3623,7 +3569,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0100000.LHNSwOOEMU1SPruk'
+    _key: '!actors.items!RiswynnLv0500000.LHNSwOOEMU1SPruk'
   - name: Water (Pint)
     type: consumable
     img: icons/magic/water/water-drop-swirl-blue.webp
@@ -3746,7 +3692,7 @@ items:
     sort: 100000
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0100000.Ty9z1HQR3ADbPeec'
+    _key: '!actors.items!RiswynnLv0500000.Ty9z1HQR3ADbPeec'
   - name: Rations
     system:
       description:
@@ -3815,7 +3761,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0100000.FALUE3tUvUxAbrmm'
+    _key: '!actors.items!RiswynnLv0500000.FALUE3tUvUxAbrmm'
   - name: Crowbar
     system:
       description:
@@ -3863,7 +3809,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0100000.kcayQe525xuJveTe'
+    _key: '!actors.items!RiswynnLv0500000.kcayQe525xuJveTe'
   - name: Candle
     system:
       description:
@@ -3988,7 +3934,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0100000.N96NKmCnkUBLznLv'
+    _key: '!actors.items!RiswynnLv0500000.N96NKmCnkUBLznLv'
   - name: Rope
     system:
       description:
@@ -4229,7 +4175,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0100000.AltGmBrWKBYiCmap'
+    _key: '!actors.items!RiswynnLv0500000.AltGmBrWKBYiCmap'
   - name: Bureaucrat
     type: background
     img: icons/skills/social/theft-pickpocket-bribery-brown.webp
@@ -4372,7 +4318,7 @@ items:
     _id: fIdcuKvDwKeVVyuT
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0100000.fIdcuKvDwKeVVyuT'
+    _key: '!actors.items!RiswynnLv0500000.fIdcuKvDwKeVVyuT'
   - name: Skilled
     system:
       description:
@@ -4445,7 +4391,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0100000.GqODy9HvCrGtwAvE'
+    _key: '!actors.items!RiswynnLv0500000.GqODy9HvCrGtwAvE'
   - name: Calligrapher's Supplies
     system:
       description:
@@ -4559,11 +4505,7 @@ items:
     img: icons/tools/scribal/pen-steel-grey-brown.webp
     effects: []
     sort: 150000
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -4574,7 +4516,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0100000.EPXrCaGXJmEpyHtl'
+    _key: '!actors.items!RiswynnLv0500000.EPXrCaGXJmEpyHtl'
   - name: Clothes, Fine
     system:
       description:
@@ -4638,11 +4580,7 @@ items:
     img: icons/equipment/back/cloak-collared-feathers-green.webp
     effects: []
     sort: 1200000
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -4653,7 +4591,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0100000.A2NnKHAAuJrUWe6n'
+    _key: '!actors.items!RiswynnLv0500000.A2NnKHAAuJrUWe6n'
   - name: Lantern, Hooded
     system:
       description:
@@ -4783,11 +4721,7 @@ items:
     img: icons/sundries/lights/lantern-steel.webp
     effects: []
     sort: 3400000
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -4798,9 +4732,2246 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0100000.OzUWeWjlfsazHJgb'
+    _key: '!actors.items!RiswynnLv0500000.OzUWeWjlfsazHJgb'
+  - _id: 8D5MNyj6IOqJnc6L
+    name: Cunning Action
+    type: feat
+    folder: ymTkGscp5QEOwDlv
+    img: icons/skills/movement/figure-running-gray.webp
+    system:
+      description:
+        value: >-
+          <p>Your quick thinking and agility allow you to move and act quickly.
+          On your turn, you can take one of the following actions as a Bonus
+          Action: &amp;Reference[Dash], &amp;Reference[Disengage], or
+          &amp;Reference[Hide].</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: class
+        subtype: ''
+      prerequisites:
+        level: 2
+        repeatable: false
+        items: []
+      properties: []
+      requirements: ''
+      activities:
+        NtS3iThuWWwm8O62:
+          type: utility
+          _id: NtS3iThuWWwm8O62
+          activation:
+            type: bonus
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: ''
+              type: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 100000
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          name: Dash
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+        AeCciDTvw3kS583a:
+          type: utility
+          name: Disengage
+          _id: AeCciDTvw3kS583a
+          activation:
+            type: bonus
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: ''
+              type: ''
+            override: false
+            prompt: false
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 300000
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+        NiI5qEhg9TepZxMh:
+          type: utility
+          _id: NiI5qEhg9TepZxMh
+          activation:
+            type: bonus
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects:
+            - _id: YLfpwyCVUObRTopP
+              level: {}
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: ''
+              type: self
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          name: Hide
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      enchant: {}
+      identifier: cunning-action
+      advancement: []
+      crewed: false
+    effects:
+      - name: Hiding
+        img: icons/skills/movement/figure-running-gray.webp
+        origin: Compendium.dnd5e.classes24.Item.phbrgeCunningAct
+        transfer: false
+        _id: YLfpwyCVUObRTopP
+        type: base
+        system: {}
+        changes: []
+        disabled: false
+        duration:
+          startTime: null
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        tint: '#ffffff'
+        statuses:
+          - hiding
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!RiswynnLv0500000.8D5MNyj6IOqJnc6L.YLfpwyCVUObRTopP
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        sourceId: Compendium.dnd5e.classes24.Item.phbrgeCunningAct
+        advancementOrigin: CqmrnNL3Ah75KIAB.MWgIb29krlDy6YW6
+        advancementRoot: CqmrnNL3Ah75KIAB.MWgIb29krlDy6YW6
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.classes24.Item.phbrgeCunningAct
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 0
+    ownership:
+      default: 0
+    _key: '!actors.items!RiswynnLv0500000.8D5MNyj6IOqJnc6L'
+  - _id: iSK720h4AStmW1uw
+    name: Steady Aim
+    type: feat
+    folder: ymTkGscp5QEOwDlv
+    img: icons/skills/ranged/arrow-flying-spiral-blue.webp
+    system:
+      description:
+        value: >-
+          <p>As a Bonus Action, you give yourself Advantage on your next attack
+          roll on the current turn. You can use this feature only if you haven't
+          moved during this turn, and after you use it, your Speed is 0 until
+          the end of the current turn.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: class
+        subtype: ''
+      prerequisites:
+        level: 3
+        repeatable: false
+        items: []
+      properties: []
+      requirements: ''
+      activities:
+        VGVYnecMRcu0f5Sq:
+          type: utility
+          name: Steady Aim
+          _id: VGVYnecMRcu0f5Sq
+          activation:
+            type: bonus
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: ''
+              type: self
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      enchant: {}
+      identifier: steady-aim
+      advancement: []
+      crewed: false
+    effects: []
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        sourceId: Compendium.dnd5e.classes24.Item.phbrgeSteadyAim0
+        advancementOrigin: CqmrnNL3Ah75KIAB.py3wJiuRo9A5PlZb
+        advancementRoot: CqmrnNL3Ah75KIAB.py3wJiuRo9A5PlZb
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.classes24.Item.phbrgeSteadyAim0
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 0
+    ownership:
+      default: 0
+    _key: '!actors.items!RiswynnLv0500000.iSK720h4AStmW1uw'
+  - _id: oYLm5eR9RCTgb6sv
+    name: Thief
+    type: subclass
+    folder: JBKpeqLQWPp9Wt59
+    img: systems/dnd5e/icons/classes/thief.webp
+    system:
+      description:
+        value: >-
+          <blockquote><p>Hunt for Treasure as a Classic
+          Adventurer</p></blockquote><p>A mix of burglar, treasure hunter, and
+          explorer, you are the epitome of an adventurer. In addition to
+          improving your agility and stealth, you gain abilities useful for
+          delving into ruins and getting maximum benefit from the magic items
+          you find there.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      identifier: thief
+      classIdentifier: rogue
+      advancement:
+        - _id: 52x82ltPXCgmrh1K
+          type: ItemGrant
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.classes24.Item.phbrgeFastHands0
+                optional: false
+              - uuid: Compendium.dnd5e.classes24.Item.phbrgeSecondstor
+                optional: false
+            optional: false
+            spell: null
+          value:
+            added:
+              dvry6eymRrZqugnb: Compendium.dnd5e.classes24.Item.phbrgeFastHands0
+              JukrDNT9DUQvhsCn: Compendium.dnd5e.classes24.Item.phbrgeSecondstor
+          level: 3
+          title: Subclass Features
+        - _id: MlEcUhyGRGitfiUJ
+          type: ItemGrant
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.classes24.Item.phbrgeSupremeSne
+                optional: false
+            optional: false
+            spell: null
+          value: {}
+          level: 9
+          title: Subclass Features
+        - _id: aNcqA4J0puHsYiyv
+          type: ItemGrant
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.classes24.Item.phbrgeUseMagicDe
+                optional: false
+            optional: false
+            spell: null
+          value: {}
+          level: 13
+          title: Subclass Features
+        - _id: Q45sJX4IS3NbsrtV
+          type: ItemGrant
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.classes24.Item.phbrgeThiefsRefl
+                optional: false
+            optional: false
+            spell: null
+          value: {}
+          level: 17
+          title: Subclass Features
+      spellcasting:
+        progression: none
+        ability: int
+        preparation:
+          formula: ''
+    effects: []
+    flags:
+      dnd5e:
+        sourceId: Compendium.dnd5e.classes24.Item.phbrgeThief00000
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.classes24.Item.phbrgeThief00000
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 500000
+    ownership:
+      default: 0
+    _key: '!actors.items!RiswynnLv0500000.oYLm5eR9RCTgb6sv'
+  - _id: dvry6eymRrZqugnb
+    name: Fast Hands
+    type: feat
+    folder: dnKXgPPMNF5Jbw2T
+    img: icons/skills/social/theft-pickpocket-bribery-brown.webp
+    system:
+      description:
+        value: >-
+          <p>As a Bonus Action, you can do one of the
+          following.</p><p><strong>Sleight of Hand.</strong> Make a Dexterity
+          (Sleight of Hand) check to pick a lock or disarm a trap with Thieves'
+          Tools or to pick a pocket.</p><p><strong>Use an Object.</strong> Take
+          the Utilize action, or take the Magic action to use a magic item that
+          requires that action.</p><section id="secret-jnQLm5F5Pq3fBPRp"
+          class="secret"><p><strong>Foundry Note</strong></p><p>The
+          <strong>Sleight of Hand</strong> and <strong>Thieves' Tools</strong>
+          activities include the relevant checks.</p><p>The <strong>Use an
+          Object</strong> activity can be used for tracking Bonus Action
+          use.</p></section>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: class
+        subtype: ''
+      prerequisites:
+        level: 3
+        repeatable: false
+        items: []
+      properties: []
+      requirements: ''
+      activities:
+        G2QVu7o56FSQvuhy:
+          type: check
+          name: Sleight of Hand
+          _id: G2QVu7o56FSQvuhy
+          activation:
+            type: bonus
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: ''
+              type: ''
+            override: false
+            prompt: false
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          check:
+            dc:
+              calculation: ''
+              formula: ''
+            associated:
+              - slt
+            ability: ''
+          img: systems/dnd5e/icons/svg/statuses/grappled.svg
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+        g6OUYMMm32iPjgCB:
+          type: check
+          name: Thieves' Tools
+          _id: g6OUYMMm32iPjgCB
+          activation:
+            type: bonus
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: ''
+              type: ''
+            override: false
+            prompt: false
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          check:
+            dc:
+              calculation: ''
+              formula: ''
+            associated:
+              - thief
+            ability: dex
+          img: systems/dnd5e/icons/svg/versatile.svg
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+        5pHgM0ZQStN6rIGE:
+          type: utility
+          name: Use an Object
+          _id: 5pHgM0ZQStN6rIGE
+          activation:
+            type: bonus
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: ''
+              type: ''
+            override: false
+            prompt: false
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      enchant: {}
+      identifier: fast-hands
+      advancement: []
+      crewed: false
+    effects: []
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        sourceId: Compendium.dnd5e.classes24.Item.phbrgeFastHands0
+        advancementOrigin: oYLm5eR9RCTgb6sv.52x82ltPXCgmrh1K
+        advancementRoot: oYLm5eR9RCTgb6sv.52x82ltPXCgmrh1K
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.classes24.Item.phbrgeFastHands0
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 0
+    ownership:
+      default: 0
+    _key: '!actors.items!RiswynnLv0500000.dvry6eymRrZqugnb'
+  - _id: JukrDNT9DUQvhsCn
+    name: Second-Story Work
+    type: feat
+    folder: dnKXgPPMNF5Jbw2T
+    img: icons/environment/settlement/stone-stairs.webp
+    system:
+      description:
+        value: >-
+          <p>You've trained to get into especially hard-to-reach places,
+          granting you these benefits.</p><p><strong>Climber.</strong> You gain
+          a Climb Speed equal to your Speed.</p><p><strong>Jumper.</strong> You
+          can determine your &amp;Reference[Jumping]{jump} distance using your
+          Dexterity rather than your Strength.</p><section class="secret"
+          id="secret-7BCLTkAFUjinYhJw"><p><strong>Foundry
+          Note</strong></p><p>This feature does not automatically add the Climb
+          Speed and will have to be added manually.</p></section>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: class
+        subtype: ''
+      prerequisites:
+        level: 3
+        repeatable: false
+        items: []
+      properties: []
+      requirements: ''
+      activities: {}
+      enchant: {}
+      identifier: second-story-work
+      advancement: []
+      crewed: false
+    effects: []
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        sourceId: Compendium.dnd5e.classes24.Item.phbrgeSecondstor
+        advancementOrigin: oYLm5eR9RCTgb6sv.52x82ltPXCgmrh1K
+        advancementRoot: oYLm5eR9RCTgb6sv.52x82ltPXCgmrh1K
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.classes24.Item.phbrgeSecondstor
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 0
+    ownership:
+      default: 0
+    _key: '!actors.items!RiswynnLv0500000.JukrDNT9DUQvhsCn'
+  - _id: sS65CaD6oR2S1uig
+    name: Cunning Strike
+    type: feat
+    folder: ymTkGscp5QEOwDlv
+    img: icons/skills/melee/blade-tip-acid-poison-green.webp
+    system:
+      description:
+        value: >-
+          <p>You've developed cunning ways to use your Sneak Attack. When you
+          deal Sneak Attack damage, you can add one of the following Cunning
+          Strike effects. Each effect has a die cost, which is the number of
+          Sneak Attack damage dice you must forgo to add the effect. You remove
+          the die before rolling, and the effect occurs immediately after the
+          attack's damage is dealt. For example, if you add the Poison effect,
+          remove 1d6 from the Sneak Attack's damage before rolling.</p><p>If a
+          Cunning Strike effect requires a saving throw, the DC equals 8 plus
+          your Dexterity modifier and Proficiency Bonus.</p><p><strong>Poison
+          (Cost: 1d6).</strong> You add a toxin to your strike, forcing the
+          target to make a Constitution saving throw. On a failed save, the
+          target has the &amp;Reference[Poisoned] condition for 1 minute. At the
+          end of each of its turns, the Poisoned target repeats the save, ending
+          the effect on itself on a success.</p><p>To use this effect, you must
+          have a Poisoner's Kit on your person.</p><p><strong>Trip (Cost:
+          1d6).</strong> If the target is Large or smaller, it must succeed on a
+          Dexterity saving throw or have the &amp;Reference[Prone]
+          condition.</p><p><strong>Withdraw (Cost: 1d6).</strong> Immediately
+          after the attack, you move up to half your Speed without provoking
+          Opportunity Attacks.</p><section class="secret"
+          id="secret-kCs7nMVrTvJRlkCy"><p><strong>Foundry
+          Note</strong></p><p>After using Cunning Strike effects use the
+          <strong>Cunning Sneak Attack</strong> activity on this feature. It
+          will prompt you to select how many dice you expended on effects and
+          deduct them from your Sneak Attack roll automatically.</p><p>You can
+          select the damage type in the damage roll dialog.</p><p>The
+          <strong>Poison</strong> activity includes an Active Effect that
+          applies the Poisoned condition.</p><p>The <strong>Trip</strong>
+          activity includes an Active Effect that applies the Prone condition or
+          you can use the inline condition above.</p></section>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: class
+        subtype: ''
+      prerequisites:
+        level: 2
+        repeatable: false
+        items: []
+      properties: []
+      requirements: ''
+      activities:
+        n64fvJMT9fPUy7DH:
+          type: save
+          name: Poison
+          _id: n64fvJMT9fPUy7DH
+          activation:
+            type: ''
+            value: null
+            override: false
+            condition: When you deal Sneak Attack damage
+          consumption:
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects:
+            - _id: RazTM6biKVtNtjEW
+              onSave: false
+              level: {}
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: '1'
+              type: creature
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 100000
+          damage:
+            parts: []
+            onSave: half
+          save:
+            ability:
+              - con
+            dc:
+              calculation: dex
+              formula: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+        dWcCw1vTWRMx4YzD:
+          type: save
+          name: Trip
+          _id: dWcCw1vTWRMx4YzD
+          activation:
+            type: ''
+            value: null
+            override: false
+            condition: When you deal Snack Attack damage
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects:
+            - _id: La47n2N3VtECtnA9
+              onSave: false
+              level: {}
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: '1'
+              type: creature
+              special: Larger or smaller
+            override: false
+            prompt: false
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 200000
+          damage:
+            parts: []
+            onSave: half
+          save:
+            ability:
+              - dex
+            dc:
+              calculation: dex
+              formula: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+        jR7KqMuPOZYUCDyO:
+          type: damage
+          name: Cunning Sneak Attack
+          _id: jR7KqMuPOZYUCDyO
+          activation:
+            type: ''
+            value: null
+            override: false
+            condition: When you deal Sneak Attack damage
+          consumption:
+            scaling:
+              allowed: true
+              max: '@scale.rogue.sneak-attack.number'
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: '1'
+              type: creature
+              special: ''
+            override: false
+            prompt: false
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 400000
+          damage:
+            critical:
+              allow: false
+              bonus: ''
+            parts:
+              - custom:
+                  enabled: true
+                  formula: (@scale.rogue.sneak-attack.number - @scaling)d6
+                number: null
+                denomination: 0
+                bonus: ''
+                types:
+                  - acid
+                  - bludgeoning
+                  - cold
+                  - fire
+                  - force
+                  - lightning
+                  - necrotic
+                  - piercing
+                  - poison
+                  - psychic
+                  - radiant
+                  - slashing
+                  - thunder
+                scaling:
+                  mode: ''
+                  number: 1
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+        m2bRZ1YeD3yf9nV7:
+          type: utility
+          name: Withdraw
+          _id: m2bRZ1YeD3yf9nV7
+          activation:
+            type: ''
+            value: null
+            override: false
+            condition: When you deal Sneak Attack damage
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: ''
+              type: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 300000
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      enchant: {}
+      identifier: cunning-strike
+      advancement: []
+      crewed: false
+    effects:
+      - name: 'Cunning Strike: Poisoned'
+        img: icons/skills/melee/blade-tip-acid-poison-green.webp
+        origin: Compendium.dnd5e.classes24.Item.phbrgeCunningStr
+        transfer: false
+        _id: RazTM6biKVtNtjEW
+        type: base
+        system: {}
+        changes: []
+        disabled: false
+        duration:
+          startTime: null
+          seconds: 60
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: >-
+          <p>On a failed save, the target has the Poisoned condition for 1
+          minute.</p>
+        tint: '#ffffff'
+        statuses:
+          - poisoned
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!RiswynnLv0500000.sS65CaD6oR2S1uig.RazTM6biKVtNtjEW
+      - name: 'Cunning Strike: Tripped'
+        img: icons/skills/melee/blade-tip-acid-poison-green.webp
+        origin: Compendium.dnd5e.classes24.Item.phbrgeCunningStr
+        transfer: false
+        _id: La47n2N3VtECtnA9
+        type: base
+        system: {}
+        changes: []
+        disabled: false
+        duration:
+          startTime: null
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        tint: '#ffffff'
+        statuses:
+          - prone
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!RiswynnLv0500000.sS65CaD6oR2S1uig.La47n2N3VtECtnA9
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        sourceId: Compendium.dnd5e.classes24.Item.phbrgeCunningStr
+        advancementOrigin: CqmrnNL3Ah75KIAB.hsOIIBWwSrWJvTuc
+        advancementRoot: CqmrnNL3Ah75KIAB.hsOIIBWwSrWJvTuc
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.classes24.Item.phbrgeCunningStr
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 0
+    ownership:
+      default: 0
+    _key: '!actors.items!RiswynnLv0500000.sS65CaD6oR2S1uig'
+  - _id: MZimHBVO8UCSFu5v
+    name: Uncanny Dodge
+    type: feat
+    folder: ymTkGscp5QEOwDlv
+    img: icons/skills/movement/feet-winged-sandals-tan.webp
+    system:
+      description:
+        value: "<p>When an attacker that you can see hits you with an attack roll, you can take a Reaction to halve the attack's damage against you (round down).</p><section class=\"secret\" id=\"secret-fLqTNntX7T0swRsu\"><p><strong>Foundry Note</strong></p><p>With your token selected you can either right click on the damage roll's chat card and select <span class=\"reference\"><em class=\"fas fa-user-shield\">\_</em>Apply Half Damage</span> or click the \"1/2\" button and then the <span class=\"reference\"><em class=\"fa-solid fa-reply-all\">\_</em>Apply</span> button.</p></section>"
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: class
+        subtype: ''
+      prerequisites:
+        level: 5
+        repeatable: false
+        items: []
+      properties: []
+      requirements: ''
+      activities:
+        7krJIcGhZl9RqzYl:
+          type: utility
+          name: Uncanny Dodge
+          _id: 7krJIcGhZl9RqzYl
+          activation:
+            type: reaction
+            value: null
+            override: false
+            condition: When an attacker that you can see hits you with an attack roll
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: ''
+              type: ''
+            override: false
+            prompt: false
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      enchant: {}
+      identifier: uncanny-dodge
+      advancement: []
+      crewed: false
+    effects: []
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        sourceId: Compendium.dnd5e.classes24.Item.phbrgeUncannyDod
+        advancementOrigin: CqmrnNL3Ah75KIAB.hsOIIBWwSrWJvTuc
+        advancementRoot: CqmrnNL3Ah75KIAB.hsOIIBWwSrWJvTuc
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.classes24.Item.phbrgeUncannyDod
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 0
+    ownership:
+      default: 0
+    _key: '!actors.items!RiswynnLv0500000.MZimHBVO8UCSFu5v'
+  - name: Studded Leather Armor
+    system:
+      description:
+        value: ''
+        chat: ''
+      price:
+        value: 45
+        denomination: gp
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 13
+        units: lb
+      rarity: ''
+      attunement: ''
+      cover: null
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      armor:
+        value: 12
+        magicalBonus: null
+        dex: null
+      hp:
+        value: null
+        max: null
+        dt: null
+        conditions: ''
+      type:
+        value: light
+        baseItem: studded
+      properties: []
+      speed:
+        value: null
+        conditions: ''
+        units: ft
+      strength: null
+      proficient: null
+      activities: {}
+      identifier: studded-leather-armor
+      crew:
+        value: []
+      attuned: false
+      equipped: true
+    _id: eaZGzzHyIG9PBGlT
+    type: equipment
+    folder: G3X11BbtmEqLmEnK
+    img: icons/equipment/chest/breastplate-rivited-red.webp
+    effects: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.equipment24.Item.phbarmStuddedLea
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!RiswynnLv0500000.eaZGzzHyIG9PBGlT'
+  - _id: Asleuzhulo3Eeejn
+    name: Gem of Brightness
+    type: equipment
+    folder: U4xmShLy19Ry54zl
+    img: icons/commodities/gems/gem-faceted-octagon-yellow.webp
+    system:
+      activities:
+        JqueOuWlVu4CcNRP:
+          type: utility
+          name: First Command Word
+          _id: JqueOuWlVu4CcNRP
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: ft
+            special: ''
+            value: '60'
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: '1'
+              type: object
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          visibility:
+            requireMagic: true
+            level:
+              min: null
+              max: null
+            identifier: ''
+            requireIdentification: true
+            requireAttunement: false
+          flags: {}
+        zSCMjUyMs03rTkuH:
+          type: save
+          name: Second Command Word
+          _id: zSCMjUyMs03rTkuH
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling: {}
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects:
+            - _id: 05Lok63szRXdAafx
+              onSave: false
+              level:
+                min: null
+                max: null
+          range:
+            override: false
+            units: ft
+            special: ''
+            value: '60'
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: '1'
+              type: creature
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          damage:
+            parts: []
+            onSave: half
+          save:
+            ability:
+              - con
+            dc:
+              calculation: ''
+              formula: '15'
+          visibility:
+            requireMagic: true
+            level:
+              min: null
+              max: null
+            identifier: ''
+            requireIdentification: true
+            requireAttunement: false
+          flags: {}
+        Hp7wMeMuSpJoTVd1:
+          type: save
+          name: Third Command Word
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets:
+              - type: itemUses
+                value: '5'
+                target: ''
+                scaling: {}
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects:
+            - _id: 05Lok63szRXdAafx
+              onSave: false
+              level:
+                min: null
+                max: null
+          range:
+            override: false
+            value: ''
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: cone
+              size: '30'
+              count: ''
+            affects:
+              choice: false
+              count: ''
+              type: creature
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          damage:
+            parts: []
+            onSave: half
+          save:
+            ability:
+              - con
+            dc:
+              calculation: ''
+              formula: '15'
+          _id: Hp7wMeMuSpJoTVd1
+          visibility:
+            requireMagic: true
+            level:
+              min: null
+              max: null
+            identifier: ''
+            requireIdentification: true
+            requireAttunement: false
+          flags: {}
+      uses:
+        spent: 0
+        recovery: []
+        max: '50'
+      description:
+        value: >-
+          <p><em>Wondrous Item, Uncommon</em></p><p>This prism has 50 charges.
+          While you are holding it, you can take a Magic action and use one of
+          three command words to cause one of the following
+          effects:</p><p><strong>First Command Word.</strong> The gem sheds
+          Bright Light in a 30-foot radius and Dim Light for an additional 30
+          feet. This effect doesn't expend a charge. It lasts until you take a
+          Bonus Action to repeat the command word or until you use another
+          function of the gem.</p><p><strong>Second Command Word.</strong> You
+          expend 1 charge and cause the gem to fire a brilliant beam of light at
+          one creature you can see within 60 feet of yourself. The creature must
+          succeed on a DC 15 Constitution saving throw or have the
+          &amp;Reference[Blinded apply=false] condition for 1 minute. The
+          creature repeats the save at the end of each of its turns, ending the
+          effect on itself on a success.</p><p><strong>Third Command
+          Word.</strong> You expend 5 charges and cause the gem to flare with
+          intense light in a 30-foot Cone. Each creature in the Cone makes a
+          saving throw as if struck by the beam created with the second command
+          word.</p><p>When all of the gem's charges are expended, the gem
+          becomes a nonmagical jewel worth 50 GP.</p>
+        chat: ''
+      identifier: gem-of-brightness
+      source:
+        revision: 1
+        rules: '2024'
+        book: ''
+        license: CC-BY-4.0
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 0
+        units: lb
+      price:
+        value: 200
+        denomination: gp
+      rarity: uncommon
+      attunement: ''
+      armor:
+        value: null
+        magicalBonus: null
+        dex: null
+      cover: null
+      hp:
+        value: null
+        max: null
+        dt: null
+        conditions: ''
+      type:
+        value: wondrous
+        baseItem: ''
+      properties:
+        - mgc
+      strength: null
+      proficient: null
+      crew:
+        value: []
+      attuned: false
+      equipped: false
+    effects:
+      - name: Blinded by Brilliance
+        img: icons/commodities/gems/gem-faceted-octagon-yellow.webp
+        origin: Compendium.dnd5e.equipment24.Item.dmgGemOfBrightne
+        transfer: false
+        _id: 05Lok63szRXdAafx
+        type: base
+        system: {}
+        changes: []
+        disabled: false
+        duration:
+          startTime: null
+          seconds: 60
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        tint: '#ffffff'
+        statuses:
+          - blinded
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!RiswynnLv0500000.Asleuzhulo3Eeejn.05Lok63szRXdAafx
+    flags: {}
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.equipment24.Item.dmgGemOfBrightne
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 15400000
+    ownership:
+      default: 0
+    _key: '!actors.items!RiswynnLv0500000.Asleuzhulo3Eeejn'
+  - _id: kIdGCeOaQIWUrlOH
+    name: Wand of Magic Missiles
+    type: equipment
+    img: icons/weapons/wands/wand-gem-pink.webp
+    system:
+      activities:
+        4pBEpvS3jgCIhpUi:
+          type: cast
+          spell:
+            uuid: Compendium.dnd5e.spells24.Item.phbsplMagicMissi
+            challenge:
+              attack: null
+              save: null
+              override: false
+            level: 1
+            properties:
+              - vocal
+              - somatic
+              - material
+            spellbook: true
+            ability: ''
+          _id: 4pBEpvS3jgCIhpUi
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            scaling:
+              allowed: true
+              max: min(@item.uses.value,3)
+            spellSlot: true
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling:
+                  mode: amount
+                  formula: ''
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          range:
+            override: false
+            units: self
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          name: ''
+          visibility:
+            requireIdentification: true
+            level:
+              min: null
+              max: null
+            identifier: ''
+            requireAttunement: false
+            requireMagic: false
+          flags: {}
+      uses:
+        spent: 0
+        recovery:
+          - period: dawn
+            type: formula
+            formula: 1d6 + 1
+        max: '7'
+      description:
+        value: >-
+          <p><em>Wand, Uncommon</em></p><p>This wand has 7 charges. While
+          holding it, you can expend no more than 3 charges to cast
+          @UUID[Compendium.dnd5e.spells24.Item.phbsplMagicMissi]{Magic Missile}
+          from it. For 1 charge, you cast the level 1 version of the spell. You
+          can increase the spell's level by 1 for each additional charge you
+          expend.</p><p><em><strong>Regaining Charges.</strong></em> The wand
+          regains 1d6 + 1 expended charges daily at dawn. If you expend the
+          wand's last charge, roll [[/r 1d20]]. On a 1, the wand crumbles into
+          ashes and is destroyed.</p>
+        chat: ''
+      identifier: wand-of-magic-missiles
+      source:
+        revision: 1
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 0
+        units: lb
+      price:
+        value: 400
+        denomination: gp
+      rarity: uncommon
+      attunement: ''
+      armor:
+        value: null
+        dex: null
+      cover: null
+      hp:
+        value: null
+        max: null
+        dt: null
+        conditions: ''
+      type:
+        value: wand
+        baseItem: ''
+      properties:
+        - foc
+        - mgc
+      proficient: null
+      crew:
+        value: []
+      strength: null
+      attuned: false
+      equipped: false
+    effects: []
+    folder: rLoBplj1TIznxeWI
+    flags: {}
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.equipment24.Item.dmgWandOfMagicMi
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: -200000
+    ownership:
+      default: 0
+    _key: '!actors.items!RiswynnLv0500000.kIdGCeOaQIWUrlOH'
+  - name: Magic Missile
+    system:
+      description:
+        value: >-
+          <p>You create three glowing darts of magical force. Each dart strikes
+          a creature of your choice that you can see within range. A dart deals
+          1d4 + 1 Force damage to its target. The darts all strike
+          simultaneously, and you can direct them to hit one creature or
+          several.</p><p><strong>Using a Higher-Level Spell Slot.</strong> The
+          spell creates one more dart for each spell slot level above
+          1.</p><p>[[2 + @item.level]]{Level [[lookup @item.level]] darts}</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: ''
+        units: inst
+      target:
+        affects:
+          type: creature
+          count: 2 + @item.level
+          choice: false
+          special: ''
+        template:
+          units: ft
+          contiguous: false
+          type: ''
+      range:
+        value: '120'
+        units: ft
+        special: ''
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: evo
+      properties:
+        - vocal
+        - somatic
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: damage
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects: []
+          range:
+            override: false
+            units: self
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          damage:
+            critical:
+              allow: false
+              bonus: ''
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
+                denomination: 4
+                bonus: '1'
+                types:
+                  - force
+                scaling:
+                  mode: ''
+                  number: 1
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          name: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: magic-missile
+      method: spell
+      prepared: 0
+    type: spell
+    img: icons/magic/light/projectiles-pink-purple.webp
+    effects:
+      - _id: dnd5espellchange
+        type: enchantment
+        name: Spell Changes
+        img: systems/dnd5e/icons/svg/activity/cast.svg
+        origin: >-
+          Compendium.dnd5e.actors24.Actor.RiswynnLv0500000.Item.kIdGCeOaQIWUrlOH.Activity.4pBEpvS3jgCIhpUi
+        changes:
+          - key: system.method
+            mode: 5
+            value: spell
+          - key: system.properties
+            mode: 2
+            value: '-vocal'
+          - key: system.properties
+            mode: 2
+            value: '-somatic'
+          - key: system.properties
+            mode: 2
+            value: '-material'
+        system: {}
+        disabled: false
+        duration:
+          startTime: 0
+          combat: null
+        description: ''
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!RiswynnLv0500000.3uB3R7H2njpxEdOx.dnd5espellchange
+    folder: pBaAAtXBCq9FVEnL
+    sort: 1100000
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        cachedFor: .Item.kIdGCeOaQIWUrlOH.Activity.4pBEpvS3jgCIhpUi
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplMagicMissi
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    _id: 3uB3R7H2njpxEdOx
+    ownership:
+      default: 0
+    _key: '!actors.items!RiswynnLv0500000.3uB3R7H2njpxEdOx'
+  - _id: Wiwj6UiMzuczXdi1
+    name: Potion of Healing
+    type: consumable
+    folder: s6eOjIBtoMiA5Usw
+    img: icons/consumables/potions/potion-tube-corked-red.webp
+    system:
+      activities:
+        ZyWmXem7zzQwFFcF:
+          type: heal
+          name: Consume
+          sort: 0
+          activation:
+            type: bonus
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling: {}
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: ''
+              type: creature
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          healing:
+            number: 2
+            denomination: 4
+            types:
+              - healing
+            custom:
+              enabled: false
+            scaling:
+              number: 1
+            bonus: '2'
+          _id: ZyWmXem7zzQwFFcF
+          visibility:
+            requireMagic: true
+            level:
+              min: null
+              max: null
+            identifier: ''
+            requireAttunement: false
+            requireIdentification: false
+          flags: {}
+      uses:
+        spent: 0
+        recovery: []
+        autoDestroy: true
+        max: '1'
+      description:
+        value: >-
+          <p><em>Potion, Common</em></p><p>You regain 2d4 + 2 Hit Points when
+          you drink this potion.</p><p>Whatever its potency, the potion's red
+          liquid glimmers when agitated.</p>
+        chat: ''
+      identifier: potion-of-healing
+      source:
+        revision: 1
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 5
+      weight:
+        value: 0.5
+        units: lb
+      price:
+        value: 50
+        denomination: gp
+      rarity: common
+      attunement: ''
+      type:
+        value: potion
+        subtype: ''
+      damage:
+        base:
+          number: null
+          denomination: null
+          types: []
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+        replace: false
+      magicalBonus: null
+      properties:
+        - mgc
+      attuned: false
+      equipped: false
+    effects: []
+    flags: {}
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.equipment24.Item.dmgPotionOfHeali
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 100000
+    ownership:
+      default: 0
+    _key: '!actors.items!RiswynnLv0500000.Wiwj6UiMzuczXdi1'
+  - name: Quiver
+    system:
+      description:
+        value: <p>A Quiver holds up to 20 Arrows.</p>
+        chat: ''
+      price:
+        value: 1
+        denomination: gp
+      quantity: 1
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      weight:
+        value: 1
+        units: lb
+      rarity: ''
+      attunement: ''
+      currency:
+        pp: 0
+        gp: 0
+        ep: 0
+        sp: 0
+        cp: 0
+      properties: []
+      capacity:
+        count: 20
+        volume:
+          units: cubicFoot
+        weight:
+          units: lb
+      identifier: quiver
+      attuned: false
+      equipped: false
+    _id: 17uwCNhIwzsvEJgE
+    type: container
+    folder: uDk4FBYfcP2JnX6t
+    img: icons/containers/ammunition/arrows-quiver-black.webp
+    effects: []
+    sort: 5100000
+    flags: {}
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.equipment24.Item.phbagQuiver00000
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!RiswynnLv0500000.17uwCNhIwzsvEJgE'
+  - name: Arrows
+    system:
+      description:
+        value: >-
+          <p><em><strong>Storage:</strong>
+          @UUID[Compendium.dnd5e.equipment24.Item.phbagQuiver00000]{Quiver}</em></p><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagAmmunitionV]{Ammunition}
+          is required by a weapon that has the Ammunition property. A weapon's
+          description specifies the type of ammunition used by the weapon. The
+          Ammunition table lists the different types and the amount you get when
+          you buy them. The table also lists the item that is typically used to
+          store each type; storage must be bought separately.</p>
+        chat: ''
+      price:
+        value: 1
+        denomination: gp
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      identified: true
+      unidentified:
+        description: ''
+      container: 17uwCNhIwzsvEJgE
+      quantity: 20
+      weight:
+        value: 0.05
+        units: lb
+      rarity: ''
+      attunement: ''
+      attuned: false
+      equipped: false
+      uses:
+        max: ''
+        autoDestroy: false
+        spent: 0
+        recovery: []
+      damage:
+        base:
+          number: null
+          denomination: 0
+          types: []
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+          bonus: ''
+        replace: false
+      type:
+        value: ammo
+        subtype: arrow
+      magicalBonus: null
+      properties: []
+      activities: {}
+      identifier: arrows
+    _id: D749tyVhyuBYYUUq
+    type: consumable
+    folder: EkXAWGxKr4wYpODe
+    img: icons/weapons/ammunition/arrows-broadhead-white.webp
+    effects: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.equipment24.Item.phbamoArrows0000
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!RiswynnLv0500000.D749tyVhyuBYYUUq'
 effects: []
-folder: Yg8rxL4JuMi44szP
 flags: {}
 _stats:
   duplicateSource: null
@@ -4808,10 +6979,12 @@ _stats:
   coreVersion: '13.351'
   systemId: dnd5e
   systemVersion: 5.2.4
-  createdTime: 1766969499719
-  modifiedTime: 1766969499719
+  createdTime: 1766970218550
+  modifiedTime: 1766972936197
   lastModifiedBy: dnd5ebuilder0000
+img: null
+folder: JRPsXXWuBa56FSZb
 ownership:
   default: 0
-sort: 0
-_key: '!actors!RiswynnLv0100000'
+sort: 500000
+_key: '!actors!RiswynnLv0500000'

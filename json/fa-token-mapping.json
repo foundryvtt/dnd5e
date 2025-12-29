@@ -2074,7 +2074,15 @@
       "actor": "systems/dnd5e/tokens/heroes/ClericDragonborn.webp",
       "token": "systems/dnd5e/tokens/heroes/ClericDragonborn.webp"
     },
+    "AkraLv0500000000": {
+      "actor": "systems/dnd5e/tokens/heroes/ClericDragonborn.webp",
+      "token": "systems/dnd5e/tokens/heroes/ClericDragonborn.webp"
+    },
     "AothLv0100000000": {
+      "actor": "systems/dnd5e/tokens/heroes/DruidStaff.webp",
+      "token": "systems/dnd5e/tokens/heroes/DruidStaff.webp"
+    },
+    "AothLv0500000000": {
       "actor": "systems/dnd5e/tokens/heroes/DruidStaff.webp",
       "token": "systems/dnd5e/tokens/heroes/DruidStaff.webp"
     },
@@ -2082,7 +2090,15 @@
       "actor": "systems/dnd5e/tokens/heroes/BardLute.webp",
       "token": "systems/dnd5e/tokens/heroes/BardLute.webp"
     },
+    "BeiroLv050000000": {
+      "actor": "systems/dnd5e/tokens/heroes/BardLute.webp",
+      "token": "systems/dnd5e/tokens/heroes/BardLute.webp"
+    },
     "KruskLv010000000": {
+      "actor": "systems/dnd5e/tokens/heroes/PaladinHammer.webp",
+      "token": "systems/dnd5e/tokens/heroes/PaladinHammer.webp"
+    },
+    "KruskLv050000000": {
       "actor": "systems/dnd5e/tokens/heroes/PaladinHammer.webp",
       "token": "systems/dnd5e/tokens/heroes/PaladinHammer.webp"
     },
@@ -2096,11 +2112,35 @@
         }
       }
     },
+    "MerricLv05000000": {
+      "actor": "systems/dnd5e/tokens/heroes/BarbarianMaul.webp",
+      "token": {
+        "texture": {
+          "src": "systems/dnd5e/tokens/heroes/BarbarianMaul.webp",
+          "scaleX": 1.25,
+          "scaleY": 1.25
+        }
+      }
+    },
     "MorthosLv0100000": {
       "actor": "systems/dnd5e/tokens/heroes/SorcererTiefling.webp",
       "token": "systems/dnd5e/tokens/heroes/SorcererTiefling.webp"
     },
+    "MorthosLv0500000": {
+      "actor": "systems/dnd5e/tokens/heroes/SorcererTiefling.webp",
+      "token": "systems/dnd5e/tokens/heroes/SorcererTiefling.webp"
+    },
     "PerrinLv01000000": {
+      "actor": "systems/dnd5e/tokens/heroes/MonkStaff.webp",
+      "token": {
+        "texture": {
+          "src": "systems/dnd5e/tokens/heroes/MonkStaff.webp",
+          "scaleX": 0.8,
+          "scaleY": 0.8
+        }
+      }
+    },
+    "PerrinLv05000000": {
       "actor": "systems/dnd5e/tokens/heroes/MonkStaff.webp",
       "token": {
         "texture": {
@@ -2120,7 +2160,21 @@
         }
       }
     },
+    "QuillatheLv05000": {
+      "actor": "systems/dnd5e/tokens/heroes/RangerBow.webp",
+      "token": {
+        "texture": {
+          "src": "systems/dnd5e/tokens/heroes/RangerBow.webp",
+          "scaleX": 0.9,
+          "scaleY": 0.9
+        }
+      }
+    },
     "RandalLv01000000": {
+      "actor": "systems/dnd5e/tokens/heroes/FighterShield.webp",
+      "token": "systems/dnd5e/tokens/heroes/FighterShield.webp"
+    },
+    "RandalLv05000000": {
       "actor": "systems/dnd5e/tokens/heroes/FighterShield.webp",
       "token": "systems/dnd5e/tokens/heroes/FighterShield.webp"
     },
@@ -2128,11 +2182,29 @@
       "actor": "systems/dnd5e/tokens/heroes/RogueHalfling.webp",
       "token": "systems/dnd5e/tokens/heroes/RogueHalfling.webp"
     },
+    "RiswynnLv0500000": {
+      "actor": "systems/dnd5e/tokens/heroes/RogueHalfling.webp",
+      "token": "systems/dnd5e/tokens/heroes/RogueHalfling.webp"
+    },
     "SefrisLv01000000": {
       "actor": "systems/dnd5e/tokens/heroes/WarlockStaff.webp",
       "token": "systems/dnd5e/tokens/heroes/WarlockStaff.webp"
     },
+    "SefrisLv05000000": {
+      "actor": "systems/dnd5e/tokens/heroes/WarlockStaff.webp",
+      "token": "systems/dnd5e/tokens/heroes/WarlockStaff.webp"
+    },
     "ZannaLv010000000": {
+      "actor": "systems/dnd5e/tokens/heroes/WizardTome.webp",
+      "token": {
+        "texture": {
+          "src": "systems/dnd5e/tokens/heroes/WizardTome.webp",
+          "scaleX": 0.7,
+          "scaleY": 0.7
+        }
+      }
+    },
+    "ZannaLv050000000": {
       "actor": "systems/dnd5e/tokens/heroes/WizardTome.webp",
       "token": {
         "texture": {
