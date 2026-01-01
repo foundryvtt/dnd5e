@@ -53,10 +53,10 @@ export default class MappingField extends foundry.data.fields.ObjectField {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _cleanType(value, options) {
+  _cleanType(value, options, _state) {
     Object.entries(value).forEach(([k, v]) => {
       if ( k.startsWith("-=") ) return;
-      value[k] = this.model.clean(v, options);
+      value[k] = this.model.clean(v, options, _state);
     });
     return value;
   }
