@@ -18,6 +18,7 @@ import Proficiency from "./proficiency.mjs";
 import SelectChoices from "./select-choices.mjs";
 import * as Trait from "./trait.mjs";
 import ConditionData from "../../data/active-effect/condition.mjs";
+import AttributesFields from "../../data/actor/templates/attributes.mjs";
 
 /**
  * @import { RequestOptions5e } from "../../_types.mjs";
@@ -345,6 +346,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( this.system.modelProvider === dnd5e ) {
       this.items.forEach(item => item.prepareFinalAttributes());
       this._prepareSpellcasting();
+      if ( this.system.isCreature ) AttributesFields.prepareSpellSlotData.call(this.system);
     }
   }
 
