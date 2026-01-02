@@ -496,4 +496,28 @@ export default class AttributesFields {
     this.attributes.spell.dc = ability ? ability.dc : 8 + this.attributes.prof;
     this.attributes.spell.mod = ability ? ability.mod : 0;
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare reference data for spell slots.
+   * @this {CharacterData|NPCData}
+   */
+  static prepareSpellSlotData() {
+    if (!this.attributes) return;
+    this.attributes.spell ??= {};
+    const slots = this.attributes.spell.slots = {};
+    Object.values(this.spells).forEach(spell => {
+      if (!spell.type || !spell.max || !spell.level) return;
+      const data = slots[spell.type] ??= { largest: 0, largestAvailable: 0 };
+      if ( spell.level > data.largest ) {
+        data.largest = spell.level;
+        if (spell.value) data.largestAvailable = spell.level;
+      }
+
+      // Largest slots overall.
+      slots.largest = Math.max(slots.largest ?? null, data.largest);
+      slots.largestAvailable = Math.max(slots.largestAvailable ?? null, data.largestAvailable);
+    });
+  }
 }
