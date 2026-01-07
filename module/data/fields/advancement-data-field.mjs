@@ -37,12 +37,12 @@ export default class AdvancementDataField extends foundry.data.fields.ObjectFiel
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _cleanType(value, options) {
+  _cleanType(value, options, _state) {
     if ( !(typeof value === "object") ) value = {};
 
     // Use a defined DataModel
     const cls = this.getModel();
-    if ( cls ) return cls.cleanData(value, options);
+    if ( cls ) return cls.cleanData(value, options, _state);
     if ( options.partial ) return value;
 
     // Use the defined defaults
