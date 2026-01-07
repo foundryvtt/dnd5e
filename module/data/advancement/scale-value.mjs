@@ -56,12 +56,12 @@ export class ScaleValueConfigurationData extends foundry.abstract.DataModel {
  */
 export class ScaleValueEntryField extends foundry.data.fields.ObjectField {
   /** @override */
-  _cleanType(value, options) {
+  _cleanType(value, options, _state) {
     if ( !(typeof value === "object") ) value = {};
 
     // Use a defined DataModel
     const cls = TYPES[options.source?.type];
-    if ( cls ) return cls.cleanData(value, options);
+    if ( cls ) return cls.cleanData(value, options, _state);
 
     return value;
   }

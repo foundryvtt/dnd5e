@@ -16,11 +16,11 @@ export default class AdvancementField extends foundry.data.fields.ObjectField {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _cleanType(value, options) {
+  _cleanType(value, options, _state) {
     if ( !(typeof value === "object") ) value = {};
 
     const cls = this.getModelForType(value.type);
-    if ( cls ) return cls.cleanData(value, options);
+    if ( cls ) return cls.cleanData(value, options, _state);
     return value;
   }
 
