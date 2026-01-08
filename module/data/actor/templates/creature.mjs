@@ -66,7 +66,7 @@ export default class CreatureTemplate extends CommonTemplate {
           nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SpellProgAvailable"
         }),
         override: new NumberField({
-          integer: true, min: 0, label: "DND5E.SpellProgOverride"
+          integer: true, min: 0, initial: null, label: "DND5E.SpellProgOverride"
         })
       }), { initialKeys: this._spellLevels, label: "DND5E.SpellLevels" })
     });
