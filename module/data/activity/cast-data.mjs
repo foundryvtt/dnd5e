@@ -1,4 +1,5 @@
 import BaseActivityData from "./base-activity.mjs";
+import FormulaField from "../fields/formula-field.mjs";
 
 const { BooleanField, DocumentUUIDField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
@@ -21,8 +22,8 @@ export default class BaseCastActivityData extends BaseActivityData {
       spell: new SchemaField({
         ability: new StringField(),
         challenge: new SchemaField({
-          attack: new NumberField(),
-          save: new NumberField(),
+          attack: new FormulaField({ deterministic: true }),
+          save: new FormulaField({ deterministic: true }),
           override: new BooleanField()
         }),
         level: new NumberField(),
