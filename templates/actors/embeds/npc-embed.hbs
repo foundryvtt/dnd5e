@@ -1,5 +1,5 @@
 <div class="statblock npc rules-{{ rulesVersion }}">
-    <h4 class="statblock-title">{{#if anchor}}{{{ anchor }}}{{else}}{{ name }}{{/if}}</h4>
+    <h4 class="statblock-title" data-no-toc>{{#if anchor}}{{{ anchor }}}{{else}}{{ name }}{{/if}}</h4>
     <span class="statblock-tags">{{ summary.tag }}</span>
     <div class="statblock-content">
         <div class="statblock-header">
@@ -39,7 +39,7 @@
         </div>
         {{#each actionSections}}
         <div class="statblock-actions {{ @key }}">
-            {{#unless hideLabel}}<h5 class="statblock-actions-title">{{ label }}</h5>{{/unless}}
+            {{#unless hideLabel}}<h5 class="statblock-actions-title" data-no-toc>{{ label }}</h5>{{/unless}}
             {{{ description }}}
             {{#each actions}}
             <div class="statblock-action" {{ dnd5e-dataset dataset }}>
