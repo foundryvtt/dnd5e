@@ -86,7 +86,7 @@ export default class AttributesFields {
         bonuses: new SchemaField({
           save: new FormulaField({ required: true, label: "DND5E.ConcentrationBonus" })
         }),
-        limit: new NumberField({ integer: true, min: 0, initial: 1, label: "DND5E.ConcentrationLimit" })
+        limit: new FormulaField({ deterministic: true, initial: "1", label: "DND5E.ConcentrationLimit" })
       }, { label: "DND5E.Concentration" }),
       loyalty: new SchemaField({
         value: new NumberField({ integer: true, min: 0, max: 20, label: "DND5E.Loyalty" })
@@ -246,6 +246,7 @@ export default class AttributesFields {
     const ability = this.abilities?.[abilityId] || {};
     const bonus = simplifyBonus(concentration.bonuses.save, rollData);
     concentration.save = (ability.save?.value ?? 0) + bonus;
+    concentration.limit = Math.max(0, dnd5e.utils.simplifyBonus(concentration.limit || "1", rollData));
   }
 
   /* -------------------------------------------- */
