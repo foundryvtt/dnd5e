@@ -41,7 +41,7 @@ export default class DamagesConfig extends TraitsConfig {
       if ( v.isPhysical ) obj[k] = {
         label: v.label,
         chosen: context.data.bypasses.includes(k),
-        icon: { src: k, svg: false }
+        icon: { src: `fa-solid ${k}` }
       };
       return obj;
     }, {}));
@@ -67,7 +67,7 @@ export default class DamagesConfig extends TraitsConfig {
   _processChoice(data, key, choice, categoryChosen=false) {
     super._processChoice(data, key, choice, categoryChosen);
     const config = CONFIG.DND5E.damageTypes[key];
-    if ( config ) choice.icon = { src: config.icon, svg: config.icon.endsWith(".svg") };
+    if ( config ) choice.icon = { src: config.icon };
   }
 
   /* -------------------------------------------- */
