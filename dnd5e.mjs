@@ -123,7 +123,7 @@ Hooks.once("init", function() {
   CONFIG.Dice.rolls = [dice.BasicRoll, dice.D20Roll, dice.DamageRoll];
 
   // Hook up system data types
-  CONFIG.ActiveEffect.dataModels = dataModels.activeEffect.config;
+  Object.assign(CONFIG.ActiveEffect.dataModels, dataModels.activeEffect.config);
   CONFIG.Actor.dataModels = dataModels.actor.config;
   CONFIG.ChatMessage.dataModels = dataModels.chatMessage.config;
   CONFIG.Item.dataModels = dataModels.item.config;

@@ -47,8 +47,8 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       type: new StringField({
         blank: false, required: true, readOnly: true, initial: () => this.metadata.type
       }),
-      name: new StringField({ initial: undefined }),
-      img: new FilePathField({ initial: undefined, categories: ["IMAGE"], base64: false }),
+      name: new StringField(),
+      img: new FilePathField({ blank: true, categories: ["IMAGE"], base64: false }),
       sort: new IntegerSortField(),
       activation: new ActivationField({
         override: new BooleanField()

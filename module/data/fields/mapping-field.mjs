@@ -2,6 +2,10 @@
  * @import { MappingFieldInitialValueBuilder, MappingFieldOptions } from "./_types.mjs";
  */
 
+const { DataFieldOperator, ForcedDeletion, ForcedReplacement } = foundry.data.operators ?? {};
+const { DataField, ObjectField, SchemaField } = foundry.data.fields;
+const { DataModelValidationFailure } = foundry.data.validation;
+
 /**
  * A subclass of ObjectField that represents a mapping of keys to the provided DataField type.
  *
@@ -12,9 +16,9 @@
  * @property {boolean} [initialKeysOnly=false]  Should the keys in the initialized data be limited to the keys provided
  *                                              by `options.initialKeys`?
  */
-export default class MappingField extends foundry.data.fields.ObjectField {
+export default class MappingField extends ObjectField {
   constructor(model, options) {
-    if ( !(model instanceof foundry.data.fields.DataField) ) {
+    if ( !(model instanceof DataField) ) {
       throw new Error("MappingField must have a DataField as its contained element");
     }
     super(options);
@@ -41,10 +45,19 @@ export default class MappingField extends foundry.data.fields.ObjectField {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _cleanType(value, options, _state) {
+  _cleanType(value, options, _state={}) {
     Object.entries(value).forEach(([k, v]) => {
       if ( k.startsWith("-=") ) return;
-      value[k] = this.model.clean(v, options, _state);
+      const _innerState = {..._state, source: _state.source?.[k]};
+      SchemaField.reconstructOperator?.(value, k, v);
+      v = value[k];
+      if ( (game.release.generation > 13) && (v instanceof DataFieldOperator) ) {
+        if ( v instanceof ForcedReplacement ) {
+          const cv = DataFieldOperator.get(v);
+          DataFieldOperator.set(v, this.model.clean(cv, {...options, partial: false}, _innerState));
+        }
+      }
+      else value[k] = this.model.clean(v, options, _innerState);
     });
     return value;
   }
@@ -100,9 +113,10 @@ export default class MappingField extends foundry.data.fields.ObjectField {
    */
   _validateValues(value, { phase: _phase, ...options }={}) {
     const isV13 = game.release.generation < 14;
-    const failure = new foundry.data.validation.DataModelValidationFailure();
+    const failure = new DataModelValidationFailure();
     for ( const [k, v] of Object.entries(value) ) {
       if ( k.startsWith("-=") ) continue;
+      if ( (game.release.generation > 13) && (v instanceof ForcedDeletion) ) continue;
       const error = this.model.validate(v, { ...options, strict: false, recursive: true });
       if ( error ) {
         failure.fields[k] = error;

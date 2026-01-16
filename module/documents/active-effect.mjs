@@ -229,7 +229,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /** @inheritDoc */
   static applyField(model, change, field) {
     field ??= model.schema.getField(change.key);
-    change = foundry.utils.deepClone(change);
     const current = foundry.utils.getProperty(model, change.key);
     const modes = CONST.ACTIVE_EFFECT_MODES;
 
@@ -372,6 +371,14 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   }
   /* -------------------------------------------- */
   /*  Lifecycle                                   */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareBaseData() {
+    this.origin = this.getFlag("core", "originText") ?? this.origin;
+    super.prepareBaseData();
+  }
+
   /* -------------------------------------------- */
 
   /** @inheritDoc */
