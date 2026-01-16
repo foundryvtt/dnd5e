@@ -1,12 +1,15 @@
 import { DamageData } from "../shared/damage-field.mjs";
 
+const { ActiveEffectTypeDataModel } = foundry.data;
+const { TypeDataModel } = foundry.abstract;
+
 /**
  * System data model for enchantment active effects.
  */
-export default class EnchantmentData extends foundry.abstract.TypeDataModel {
+export default class EnchantmentData extends (ActiveEffectTypeDataModel ?? TypeDataModel) {
   /** @override */
   static defineSchema() {
-    return {};
+    return ActiveEffectTypeDataModel ? super.defineSchema() : {};
   }
 
   /* -------------------------------------------- */
@@ -42,7 +45,7 @@ export default class EnchantmentData extends foundry.abstract.TypeDataModel {
       case "system.damage.parts":
         try {
           let damage;
-          const parsed = JSON.parse(change.value);
+          const parsed = typeof change.value === "string" ? JSON.parse(change.value) : change.value;
           if ( foundry.utils.getType(parsed) === "Object" ) damage = new DamageData(parsed);
           else damage = new DamageData({ custom: { enabled: true, formula: parsed[0][0] }, types: [parsed[0][1]] });
           for ( const activity of item.system.activities?.getByTypes("attack", "damage", "save") ?? [] ) {

@@ -455,6 +455,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       }));
     }
     changes.sort((a, b) => a.priority - b.priority);
+    if ( game.release.generation > 13 ) foundry.documents.ActiveEffect._shimChanges?.(changes);
 
     // Apply all changes
     for ( const change of changes ) {
@@ -933,7 +934,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const activity = this.system.activities?.get(id);
     if ( !activity ) return this;
     await Promise.allSettled(activity.constructor._apps.get(activity.uuid)?.map(a => a.close()) ?? []);
-    return this.update({ [`system.activities.-=${id}`]: null });
+    if ( game.release.generation < 14 ) return this.update({ [`system.activities.-=${id}`]: null });
+    return this.update({ [`system.activities.${id}`]: _del });
   }
 
   /* -------------------------------------------- */
