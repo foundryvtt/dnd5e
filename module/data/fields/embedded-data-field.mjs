@@ -4,7 +4,7 @@
  */
 export default class EmbeddedDataField5e extends foundry.data.fields.EmbeddedDataField {
   /** @override */
-  _castChangeDelta(delta) {
+  _castChangeDelta(delta, replacementData={}) {
     if ( delta instanceof this.model ) return delta;
     return this.initialize(this._cast(delta));
   }
