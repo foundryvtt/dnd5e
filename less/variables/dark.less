@@ -148,14 +148,14 @@
     --control-active-background-color: rgb(0 0 0 / 45%);
   }
 
-  input, textarea { --input-placeholder-color: var(--dnd5e-color-blue-gray-3); }
+  input, textarea, formula-input { --input-placeholder-color: var(--dnd5e-color-blue-gray-3); }
 
-  input, select {
+  input, select, formula-input {
     --input-background-color: var(--dnd5e-color-blue-gray-2);
     --input-disabled-background-color: var(--dnd5e-color-dark-gray);
   }
 
-  input:not([type=range]), select {
+  input:not([type=range]), select, formula-input {
     --input-border-color: var(--dnd5e-color-blue-gray-1);
     --input-hover-border-color: transparent;
   }

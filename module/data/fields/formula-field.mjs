@@ -28,6 +28,18 @@ export default class FormulaField extends foundry.data.fields.StringField {
   }
 
   /* -------------------------------------------- */
+  /*  Form Field Integration                      */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _toInput(config) {
+    const input = super._toInput(config);
+    if ( (input.tagName !== "INPUT") || (game.release.generation < 14) ) return input;
+    config.value ??= this.getInitialValue({}) ?? "";
+    return foundry.applications.elements.HTMLFormulaInputElement.create(config);
+  }
+
+  /* -------------------------------------------- */
   /*  Active Effect Integration                   */
   /* -------------------------------------------- */
 

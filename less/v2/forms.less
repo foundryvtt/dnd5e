@@ -429,7 +429,7 @@
   }
 
   /* Form Fields */
-  textarea, select, input[type="text"], input[type="number"], input[type="search"], input[type="file"] {
+  textarea, select, input[type="text"], input[type="number"], input[type="search"], input[type="file"], formula-input {
     --input-box-shadow: none;
     --input-text-color: var(--color-text-primary);
     transition: all 250ms ease, block-size, inline-size;
@@ -457,6 +457,30 @@
     padding: 6px;
     background: rgba(0, 0, 0, 0.1);
     font-size: var(--font-size-11);
+  }
+
+  formula-input {
+    &:focus-within { outline: none; }
+    &:enabled {
+      &:has(> input:focus-visible, > input:hover) {
+        border-color: var(--input-hover-border-color);
+        box-shadow: 0 0 6px var(--dnd5e-color-gold);
+      }
+      > input[type="text"] {
+        &:focus-visible, &:hover { box-shadow: none; }
+      }
+      > button {
+        &:focus-visible, &:hover {
+          box-shadow: none;
+          text-shadow: 0 0 5px var(--color-shadow-primary);
+        }
+      }
+    }
+    > input[type="text"] { background: none; }
+    > button {
+      background: none;
+      box-shadow: none;
+    }
   }
 
   :is(.form-group, fieldset) :is(select, input):not([type="range"]) {
