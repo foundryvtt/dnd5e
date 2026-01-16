@@ -18,6 +18,7 @@ import SystemDocumentMixin from "../mixins/document.mjs";
 import Proficiency from "./proficiency.mjs";
 import SelectChoices from "./select-choices.mjs";
 import * as Trait from "./trait.mjs";
+import AttributesFields from "../../data/actor/templates/attributes.mjs";
 
 /**
  * @import { RequestOptions5e } from "../../_types.mjs";
@@ -269,6 +270,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     super.prepareData();
     this.items.forEach(item => item.prepareFinalAttributes());
     this._prepareSpellcasting();
+    if ( ["character", "npc"].includes(this.type) ) AttributesFields.prepareSpellSlotData.call(this.system);
   }
 
   /* --------------------------------------------- */
