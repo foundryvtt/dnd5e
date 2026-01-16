@@ -27,7 +27,7 @@
 
 {{#*inline ".enchantment"}}
 <div class="details flexrow">
-    <img class="gold-icon" src="{{ effect.img }}" alt="{{ effect.name }}">
+    {{ dnd5e-icon effect.img alt=effect.name classes="gold-icon" }}
     {{{ contentLink }}}
     <div class="list-controls flexrow">
         <button type="button" class="unbutton control-button" data-action="dissociateEffect"
