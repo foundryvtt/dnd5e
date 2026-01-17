@@ -1,10 +1,10 @@
 name: Perrin
 type: character
-_id: PerrinLv05000000
+_id: PerrinLv11000000
 system:
   currency:
     pp: 0
-    gp: 57
+    gp: 217
     ep: 0
     sp: 5
     cp: 0
@@ -27,7 +27,7 @@ system:
           max: null
           mode: 0
     dex:
-      value: 18
+      value: 20
       proficient: 1
       max: null
       bonuses:
@@ -391,7 +391,7 @@ system:
       max: null
       temp: null
       tempmax: 0
-      value: 38
+      value: 80
       bonuses: {}
     death:
       roll:
@@ -420,7 +420,7 @@ system:
     background: sD185Jmjcgcc4WFa
     originalClass: ZKfK1Y5I79VK4U7P
     xp:
-      value: 6500
+      value: 85000
     appearance: ''
     trait: ''
     gender: ''
@@ -518,6 +518,9 @@ system:
     - type: item
       id: .Item.cn0U8qnWxapHJNpL
       sort: 31250
+    - type: item
+      id: .Item.6oJe8FAJ384bFvau
+      sort: 700000
 prototypeToken:
   name: Perrin
   displayName: 20
@@ -569,13 +572,13 @@ prototypeToken:
       max: 1
   sight:
     enabled: true
-    range: 0
+    range: 60
     angle: 360
-    visionMode: basic
+    visionMode: darkvision
     color: null
-    attenuation: 0.1
+    attenuation: 0
     brightness: 0
-    saturation: 0
+    saturation: -1
     contrast: 0
   detectionModes: []
   occludable:
@@ -693,7 +696,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.ER14IzcXYpPQASGF'
+    _key: '!actors.items!PerrinLv11000000.ER14IzcXYpPQASGF'
   - _id: RcF08cSDK7StWdRs
     name: Brave
     type: feat
@@ -745,7 +748,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.RcF08cSDK7StWdRs'
+    _key: '!actors.items!PerrinLv11000000.RcF08cSDK7StWdRs'
   - _id: aCgrRYGytAxWRmQA
     name: Halfling Nimbleness
     type: feat
@@ -818,7 +821,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!PerrinLv05000000.aCgrRYGytAxWRmQA.HtNoV5usxEadPbqp
+          !actors.items.effects!PerrinLv11000000.aCgrRYGytAxWRmQA.HtNoV5usxEadPbqp
     folder: zVLJosGQ7viZqH14
     flags:
       dnd5e:
@@ -836,7 +839,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.aCgrRYGytAxWRmQA'
+    _key: '!actors.items!PerrinLv11000000.aCgrRYGytAxWRmQA'
   - _id: lTKsVrYfg4KsxgwB
     name: Luck
     type: feat
@@ -906,7 +909,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!PerrinLv05000000.lTKsVrYfg4KsxgwB.k1FDpZEBCHzRsFSA
+          !actors.items.effects!PerrinLv11000000.lTKsVrYfg4KsxgwB.k1FDpZEBCHzRsFSA
     folder: zVLJosGQ7viZqH14
     flags:
       dnd5e:
@@ -924,7 +927,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.lTKsVrYfg4KsxgwB'
+    _key: '!actors.items!PerrinLv11000000.lTKsVrYfg4KsxgwB'
   - _id: 0BGnNJA5jW2u9lY5
     name: Naturally Stealthy
     type: feat
@@ -977,7 +980,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.0BGnNJA5jW2u9lY5'
+    _key: '!actors.items!PerrinLv11000000.0BGnNJA5jW2u9lY5'
   - name: Priest
     type: background
     img: icons/sundries/documents/document-torn-diagram-tan.webp
@@ -1138,7 +1141,7 @@ items:
     _id: sD185Jmjcgcc4WFa
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.sD185Jmjcgcc4WFa'
+    _key: '!actors.items!PerrinLv11000000.sD185Jmjcgcc4WFa'
   - name: Magic Initiate
     system:
       description:
@@ -1278,7 +1281,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.CLID7YMmNSTnRl3Q'
+    _key: '!actors.items!PerrinLv11000000.CLID7YMmNSTnRl3Q'
   - name: Bless
     system:
       description:
@@ -1652,7 +1655,7 @@ items:
         system: {}
         sort: 0
         _key: >-
-          !actors.items.effects!PerrinLv05000000.ty1DDQFrn6nI28QD.1dzvDffEh8wZ0oQy
+          !actors.items.effects!PerrinLv11000000.ty1DDQFrn6nI28QD.1dzvDffEh8wZ0oQy
     folder: pBaAAtXBCq9FVEnL
     sort: 5200000
     flags:
@@ -1670,7 +1673,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.ty1DDQFrn6nI28QD'
+    _key: '!actors.items!PerrinLv11000000.ty1DDQFrn6nI28QD'
   - name: Guidance
     system:
       description:
@@ -1847,7 +1850,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!PerrinLv05000000.cxCZExWeurAuJh0n.GezMMzvZhWXEYyGm
+          !actors.items.effects!PerrinLv11000000.cxCZExWeurAuJh0n.GezMMzvZhWXEYyGm
       - name: Animal Handling Guidance
         img: systems/dnd5e/icons/svg/activity/check.svg
         origin: Compendium.dnd5e.spells24.Item.phbsplGuidance00
@@ -1883,7 +1886,7 @@ items:
           lastModifiedBy: null
         _id: y6aODSkiubtFt6Ap
         _key: >-
-          !actors.items.effects!PerrinLv05000000.cxCZExWeurAuJh0n.y6aODSkiubtFt6Ap
+          !actors.items.effects!PerrinLv11000000.cxCZExWeurAuJh0n.y6aODSkiubtFt6Ap
       - name: Arcana Guidance
         img: systems/dnd5e/icons/svg/activity/check.svg
         origin: Compendium.dnd5e.spells24.Item.phbsplGuidance00
@@ -1919,7 +1922,7 @@ items:
           lastModifiedBy: null
         _id: Vlfh8IFOezrSpeBZ
         _key: >-
-          !actors.items.effects!PerrinLv05000000.cxCZExWeurAuJh0n.Vlfh8IFOezrSpeBZ
+          !actors.items.effects!PerrinLv11000000.cxCZExWeurAuJh0n.Vlfh8IFOezrSpeBZ
       - name: Athletic Guidance
         img: systems/dnd5e/icons/svg/activity/check.svg
         origin: Compendium.dnd5e.spells24.Item.phbsplGuidance00
@@ -1955,7 +1958,7 @@ items:
           lastModifiedBy: null
         _id: sPkLWVpkJ7NqDQT0
         _key: >-
-          !actors.items.effects!PerrinLv05000000.cxCZExWeurAuJh0n.sPkLWVpkJ7NqDQT0
+          !actors.items.effects!PerrinLv11000000.cxCZExWeurAuJh0n.sPkLWVpkJ7NqDQT0
       - name: Deception Guidance
         img: systems/dnd5e/icons/svg/activity/check.svg
         origin: Compendium.dnd5e.spells24.Item.phbsplGuidance00
@@ -1991,7 +1994,7 @@ items:
           lastModifiedBy: null
         _id: Je4xWElmaiSDsOjU
         _key: >-
-          !actors.items.effects!PerrinLv05000000.cxCZExWeurAuJh0n.Je4xWElmaiSDsOjU
+          !actors.items.effects!PerrinLv11000000.cxCZExWeurAuJh0n.Je4xWElmaiSDsOjU
       - name: History Guidance
         img: systems/dnd5e/icons/svg/activity/check.svg
         origin: Compendium.dnd5e.spells24.Item.phbsplGuidance00
@@ -2027,7 +2030,7 @@ items:
           lastModifiedBy: null
         _id: cw02ZbuiRn6GyoEv
         _key: >-
-          !actors.items.effects!PerrinLv05000000.cxCZExWeurAuJh0n.cw02ZbuiRn6GyoEv
+          !actors.items.effects!PerrinLv11000000.cxCZExWeurAuJh0n.cw02ZbuiRn6GyoEv
       - name: Insight Guidance
         img: systems/dnd5e/icons/svg/activity/check.svg
         origin: Compendium.dnd5e.spells24.Item.phbsplGuidance00
@@ -2063,7 +2066,7 @@ items:
           lastModifiedBy: null
         _id: VsU5vUhMioT9pCwG
         _key: >-
-          !actors.items.effects!PerrinLv05000000.cxCZExWeurAuJh0n.VsU5vUhMioT9pCwG
+          !actors.items.effects!PerrinLv11000000.cxCZExWeurAuJh0n.VsU5vUhMioT9pCwG
       - name: Investigation Guidance
         img: systems/dnd5e/icons/svg/activity/check.svg
         origin: Compendium.dnd5e.spells24.Item.phbsplGuidance00
@@ -2099,7 +2102,7 @@ items:
           lastModifiedBy: null
         _id: UQixxmOdHUDjVYNh
         _key: >-
-          !actors.items.effects!PerrinLv05000000.cxCZExWeurAuJh0n.UQixxmOdHUDjVYNh
+          !actors.items.effects!PerrinLv11000000.cxCZExWeurAuJh0n.UQixxmOdHUDjVYNh
       - name: Intimidation Guidance
         img: systems/dnd5e/icons/svg/activity/check.svg
         origin: Compendium.dnd5e.spells24.Item.phbsplGuidance00
@@ -2135,7 +2138,7 @@ items:
           lastModifiedBy: null
         _id: Cpte6tynFFJbraX2
         _key: >-
-          !actors.items.effects!PerrinLv05000000.cxCZExWeurAuJh0n.Cpte6tynFFJbraX2
+          !actors.items.effects!PerrinLv11000000.cxCZExWeurAuJh0n.Cpte6tynFFJbraX2
       - name: Medicine Guidance
         img: systems/dnd5e/icons/svg/activity/check.svg
         origin: Compendium.dnd5e.spells24.Item.phbsplGuidance00
@@ -2171,7 +2174,7 @@ items:
           lastModifiedBy: null
         _id: Vl1YSG1DlZvx9nSI
         _key: >-
-          !actors.items.effects!PerrinLv05000000.cxCZExWeurAuJh0n.Vl1YSG1DlZvx9nSI
+          !actors.items.effects!PerrinLv11000000.cxCZExWeurAuJh0n.Vl1YSG1DlZvx9nSI
       - name: Nature Guidance
         img: systems/dnd5e/icons/svg/activity/check.svg
         origin: Compendium.dnd5e.spells24.Item.phbsplGuidance00
@@ -2207,7 +2210,7 @@ items:
           lastModifiedBy: null
         _id: IqxGXju1tYDWoda6
         _key: >-
-          !actors.items.effects!PerrinLv05000000.cxCZExWeurAuJh0n.IqxGXju1tYDWoda6
+          !actors.items.effects!PerrinLv11000000.cxCZExWeurAuJh0n.IqxGXju1tYDWoda6
       - name: Persuasion Guidance
         img: systems/dnd5e/icons/svg/activity/check.svg
         origin: Compendium.dnd5e.spells24.Item.phbsplGuidance00
@@ -2243,7 +2246,7 @@ items:
           lastModifiedBy: null
         _id: fCdLUO5DoSIT4wVK
         _key: >-
-          !actors.items.effects!PerrinLv05000000.cxCZExWeurAuJh0n.fCdLUO5DoSIT4wVK
+          !actors.items.effects!PerrinLv11000000.cxCZExWeurAuJh0n.fCdLUO5DoSIT4wVK
       - name: Perception Guidance
         img: systems/dnd5e/icons/svg/activity/check.svg
         origin: Compendium.dnd5e.spells24.Item.phbsplGuidance00
@@ -2279,7 +2282,7 @@ items:
           lastModifiedBy: null
         _id: qPowjrduxnzKpH8x
         _key: >-
-          !actors.items.effects!PerrinLv05000000.cxCZExWeurAuJh0n.qPowjrduxnzKpH8x
+          !actors.items.effects!PerrinLv11000000.cxCZExWeurAuJh0n.qPowjrduxnzKpH8x
       - name: Performance Guidance
         img: systems/dnd5e/icons/svg/activity/check.svg
         origin: Compendium.dnd5e.spells24.Item.phbsplGuidance00
@@ -2315,7 +2318,7 @@ items:
           lastModifiedBy: null
         _id: E4BqoCkyoKLJbGmb
         _key: >-
-          !actors.items.effects!PerrinLv05000000.cxCZExWeurAuJh0n.E4BqoCkyoKLJbGmb
+          !actors.items.effects!PerrinLv11000000.cxCZExWeurAuJh0n.E4BqoCkyoKLJbGmb
       - name: Religion Guidance
         img: systems/dnd5e/icons/svg/activity/check.svg
         origin: Compendium.dnd5e.spells24.Item.phbsplGuidance00
@@ -2351,7 +2354,7 @@ items:
           lastModifiedBy: null
         _id: jVKWknHHFuMwvTct
         _key: >-
-          !actors.items.effects!PerrinLv05000000.cxCZExWeurAuJh0n.jVKWknHHFuMwvTct
+          !actors.items.effects!PerrinLv11000000.cxCZExWeurAuJh0n.jVKWknHHFuMwvTct
       - name: Sleight of Hand Guidance
         img: systems/dnd5e/icons/svg/activity/check.svg
         origin: Compendium.dnd5e.spells24.Item.phbsplGuidance00
@@ -2387,7 +2390,7 @@ items:
           lastModifiedBy: null
         _id: pwFahx7uqM4DOgnu
         _key: >-
-          !actors.items.effects!PerrinLv05000000.cxCZExWeurAuJh0n.pwFahx7uqM4DOgnu
+          !actors.items.effects!PerrinLv11000000.cxCZExWeurAuJh0n.pwFahx7uqM4DOgnu
       - name: Stealth Guidance
         img: systems/dnd5e/icons/svg/activity/check.svg
         origin: Compendium.dnd5e.spells24.Item.phbsplGuidance00
@@ -2423,7 +2426,7 @@ items:
           lastModifiedBy: null
         _id: Vb4iRJ73Nw78UUMW
         _key: >-
-          !actors.items.effects!PerrinLv05000000.cxCZExWeurAuJh0n.Vb4iRJ73Nw78UUMW
+          !actors.items.effects!PerrinLv11000000.cxCZExWeurAuJh0n.Vb4iRJ73Nw78UUMW
       - name: Survival Guidance
         img: systems/dnd5e/icons/svg/activity/check.svg
         origin: Compendium.dnd5e.spells24.Item.phbsplGuidance00
@@ -2459,7 +2462,7 @@ items:
           lastModifiedBy: null
         _id: A1T0X0DUFIxx3qhE
         _key: >-
-          !actors.items.effects!PerrinLv05000000.cxCZExWeurAuJh0n.A1T0X0DUFIxx3qhE
+          !actors.items.effects!PerrinLv11000000.cxCZExWeurAuJh0n.A1T0X0DUFIxx3qhE
     folder: 4FhsY9FJQd7h7MZb
     sort: 1200000
     flags:
@@ -2477,7 +2480,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.cxCZExWeurAuJh0n'
+    _key: '!actors.items!PerrinLv11000000.cxCZExWeurAuJh0n'
   - name: Sacred Flame
     system:
       description:
@@ -2618,7 +2621,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.frw6HUP04mmhzeJO'
+    _key: '!actors.items!PerrinLv11000000.frw6HUP04mmhzeJO'
   - _id: ZKfK1Y5I79VK4U7P
     name: Monk
     type: class
@@ -2718,7 +2721,7 @@ items:
           group: z3xcULs5Q70zNQ2D
           sort: 800000
       identifier: monk
-      levels: 5
+      levels: 11
       advancement:
         - _id: LfwDqrjK9TQZpwDU
           type: HitPoints
@@ -2729,6 +2732,12 @@ items:
             '3': avg
             '4': avg
             '5': avg
+            '6': avg
+            '7': avg
+            '8': avg
+            '9': avg
+            '10': avg
+            '11': avg
         - _id: IeCvD9wvP0cOa6kt
           type: ItemGrant
           configuration:
@@ -2817,7 +2826,9 @@ items:
                 optional: false
             optional: false
             spell: null
-          value: {}
+          value:
+            added:
+              wdoB52K9u7WmYZxe: Compendium.dnd5e.classes24.Item.phbmnkEmpoweredS
           level: 6
           title: Class Features
         - _id: Rfq6ZXQhdFm3Zmjx
@@ -2828,7 +2839,9 @@ items:
                 optional: false
             optional: false
             spell: null
-          value: {}
+          value:
+            added:
+              YAfvhSQNsUX4fWTM: Compendium.dnd5e.classes24.Item.phbmnkEvasion000
           level: 7
           title: Class Features
         - _id: 26AlznyWcDuaFTCY
@@ -2839,7 +2852,9 @@ items:
                 optional: false
             optional: false
             spell: null
-          value: {}
+          value:
+            added:
+              qu9m4wRpcBUWB2v4: Compendium.dnd5e.classes24.Item.phbmnkAcrobaticM
           level: 9
           title: Class Features
         - _id: H32KYn1ozuG9jgYH
@@ -2852,7 +2867,9 @@ items:
                 optional: false
             optional: false
             spell: null
-          value: {}
+          value:
+            added:
+              aYSrdeFnbTdlIVT6: Compendium.dnd5e.classes24.Item.phbmnkHeightened
           level: 10
           title: Class Features
         - _id: p4M4GK8yYVPY4Nsc
@@ -2946,6 +2963,8 @@ items:
             recommendation: null
           value:
             type: asi
+            assignments:
+              dex: 2
           level: 8
           title: ''
         - _id: mhZh3LfLMa15tXee
@@ -3234,12 +3253,11 @@ items:
       coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 5.2.4
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1767911004041
+      lastModifiedBy: null
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.ZKfK1Y5I79VK4U7P'
+    _key: '!actors.items!PerrinLv11000000.ZKfK1Y5I79VK4U7P'
   - _id: IeOEr4EVKRNjPiyB
     name: Martial Arts
     type: feat
@@ -3488,7 +3506,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!PerrinLv05000000.IeOEr4EVKRNjPiyB.VnV6opO1b3apq6wt
+          !actors.items.effects!PerrinLv11000000.IeOEr4EVKRNjPiyB.VnV6opO1b3apq6wt
     flags:
       dnd5e:
         riders:
@@ -3508,7 +3526,7 @@ items:
     sort: 1100000
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.IeOEr4EVKRNjPiyB'
+    _key: '!actors.items!PerrinLv11000000.IeOEr4EVKRNjPiyB'
   - _id: aGKnnVyo9ZkmmgD4
     name: Unarmored Defense
     type: feat
@@ -3584,7 +3602,7 @@ items:
         system: {}
         sort: 0
         _key: >-
-          !actors.items.effects!PerrinLv05000000.aGKnnVyo9ZkmmgD4.m2RCcVkc0YkCXNEb
+          !actors.items.effects!PerrinLv11000000.aGKnnVyo9ZkmmgD4.m2RCcVkc0YkCXNEb
     flags:
       dnd5e:
         sourceId: Compendium.dnd5e.classes24.Item.phbmnkUnarmoredD
@@ -3601,7 +3619,7 @@ items:
     sort: 1900000
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.aGKnnVyo9ZkmmgD4'
+    _key: '!actors.items!PerrinLv11000000.aGKnnVyo9ZkmmgD4'
   - _id: H5R0sZ2jeK8P2Zrt
     name: Unarmed Strike
     type: weapon
@@ -3845,7 +3863,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!PerrinLv05000000.H5R0sZ2jeK8P2Zrt.OM3Rt1nQv3WKS0pc
+          !actors.items.effects!PerrinLv11000000.H5R0sZ2jeK8P2Zrt.OM3Rt1nQv3WKS0pc
       - name: Prone
         img: systems/dnd5e/icons/svg/statuses/prone.svg
         origin: Compendium.dnd5e.classes24.Item.phbmnkUnarmedStr
@@ -3881,7 +3899,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!PerrinLv05000000.H5R0sZ2jeK8P2Zrt.OgkonP6JL0AdFtQN
+          !actors.items.effects!PerrinLv11000000.H5R0sZ2jeK8P2Zrt.OgkonP6JL0AdFtQN
     folder: kK77WX8hVJHRQRda
     flags:
       dnd5e:
@@ -3899,7 +3917,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.H5R0sZ2jeK8P2Zrt'
+    _key: '!actors.items!PerrinLv11000000.H5R0sZ2jeK8P2Zrt'
   - name: Holy Symbol (Varies)
     system:
       description:
@@ -3957,7 +3975,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.DuVy6ymBoajg2Z6o'
+    _key: '!actors.items!PerrinLv11000000.DuVy6ymBoajg2Z6o'
   - name: Book (prayers)
     system:
       description:
@@ -4007,7 +4025,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.BFN4y4b5hEfAFDIR'
+    _key: '!actors.items!PerrinLv11000000.BFN4y4b5hEfAFDIR'
   - name: Parchment
     system:
       description:
@@ -4053,7 +4071,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.F4pDiePi03rrYVlt'
+    _key: '!actors.items!PerrinLv11000000.F4pDiePi03rrYVlt'
   - name: Calligrapher's Supplies
     system:
       description:
@@ -4178,7 +4196,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.MkJ5tWrgBlulguhz'
+    _key: '!actors.items!PerrinLv11000000.MkJ5tWrgBlulguhz'
   - name: Explorer's Pack
     system:
       description:
@@ -4248,7 +4266,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.ZTwm4XXpYZegg0PS'
+    _key: '!actors.items!PerrinLv11000000.ZTwm4XXpYZegg0PS'
   - name: Tinderbox
     system:
       description:
@@ -4377,7 +4395,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.p7TCsWsYMATWCp4B'
+    _key: '!actors.items!PerrinLv11000000.p7TCsWsYMATWCp4B'
   - name: Rope
     system:
       description:
@@ -4618,7 +4636,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.JJFP1Nsrn3nq70gP'
+    _key: '!actors.items!PerrinLv11000000.JJFP1Nsrn3nq70gP'
   - name: Bedroll
     system:
       description:
@@ -4668,7 +4686,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.sWOP3ONMdCCYnLjb'
+    _key: '!actors.items!PerrinLv11000000.sWOP3ONMdCCYnLjb'
   - name: Waterskin
     system:
       description:
@@ -4728,7 +4746,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.fGeXsgt152tvS0cV'
+    _key: '!actors.items!PerrinLv11000000.fGeXsgt152tvS0cV'
   - name: Water (Pint)
     type: consumable
     img: icons/magic/water/water-drop-swirl-blue.webp
@@ -4851,7 +4869,7 @@ items:
     sort: 100000
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.Wbw779J9zugOBFBK'
+    _key: '!actors.items!PerrinLv11000000.Wbw779J9zugOBFBK'
   - name: Torch
     system:
       description:
@@ -5004,7 +5022,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.8RrJ5Rw9AsjMad65'
+    _key: '!actors.items!PerrinLv11000000.8RrJ5Rw9AsjMad65'
   - name: Oil
     system:
       description:
@@ -5221,7 +5239,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.D4ietl0U9spTkKBT'
+    _key: '!actors.items!PerrinLv11000000.D4ietl0U9spTkKBT'
   - name: Rations
     system:
       description:
@@ -5290,7 +5308,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.lc1VSWAvGGr5jJkl'
+    _key: '!actors.items!PerrinLv11000000.lc1VSWAvGGr5jJkl'
   - name: Brewer's Supplies
     system:
       description:
@@ -5459,7 +5477,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.qYT5xWpBTgpc3hKy'
+    _key: '!actors.items!PerrinLv11000000.qYT5xWpBTgpc3hKy'
   - _id: Uvv9h5AlYPlE9o3Y
     name: Monk's Focus
     type: feat
@@ -5793,7 +5811,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!PerrinLv05000000.Uvv9h5AlYPlE9o3Y.UYHRNxrU74xiUJAy
+          !actors.items.effects!PerrinLv11000000.Uvv9h5AlYPlE9o3Y.UYHRNxrU74xiUJAy
       - name: Disengaged
         img: systems/dnd5e/icons/svg/items/feature.svg
         origin: Compendium.dnd5e.classes24.Item.phbmnkMonksFocus
@@ -5825,7 +5843,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!PerrinLv05000000.Uvv9h5AlYPlE9o3Y.92bFICMzRpJmnO56
+          !actors.items.effects!PerrinLv11000000.Uvv9h5AlYPlE9o3Y.92bFICMzRpJmnO56
     flags:
       dnd5e:
         sourceId: Compendium.dnd5e.classes24.Item.phbmnkMonksFocus
@@ -5842,7 +5860,7 @@ items:
     sort: 1200000
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.Uvv9h5AlYPlE9o3Y'
+    _key: '!actors.items!PerrinLv11000000.Uvv9h5AlYPlE9o3Y'
   - _id: lKFs8tnb0WANpc4Y
     name: Unarmored Movement
     type: feat
@@ -5920,7 +5938,7 @@ items:
         system: {}
         sort: 0
         _key: >-
-          !actors.items.effects!PerrinLv05000000.lKFs8tnb0WANpc4Y.OEYjH4cLYd0VPaKm
+          !actors.items.effects!PerrinLv11000000.lKFs8tnb0WANpc4Y.OEYjH4cLYd0VPaKm
     flags:
       dnd5e:
         sourceId: Compendium.dnd5e.classes24.Item.phbmnkUnarmoredM
@@ -5933,12 +5951,11 @@ items:
       coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 5.2.4
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1767911004041
+      lastModifiedBy: null
     sort: 1800000
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.lKFs8tnb0WANpc4Y'
+    _key: '!actors.items!PerrinLv11000000.lKFs8tnb0WANpc4Y'
   - _id: eM5kVyp3egKL3XTJ
     name: Uncanny Metabolism
     type: feat
@@ -6062,12 +6079,11 @@ items:
       coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 5.2.4
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1767911004041
+      lastModifiedBy: null
     sort: 2000000
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.eM5kVyp3egKL3XTJ'
+    _key: '!actors.items!PerrinLv11000000.eM5kVyp3egKL3XTJ'
   - _id: fDcv3lLhU8KsKm95
     name: Deflect Attacks
     type: feat
@@ -6267,12 +6283,11 @@ items:
       coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 5.2.4
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1767911004041
+      lastModifiedBy: null
     sort: 300000
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.fDcv3lLhU8KsKm95'
+    _key: '!actors.items!PerrinLv11000000.fDcv3lLhU8KsKm95'
   - _id: wzv8mX9oLqc12CYJ
     name: Warrior of the Open Hand
     type: subclass
@@ -6316,7 +6331,9 @@ items:
                 optional: false
             optional: false
             spell: null
-          value: {}
+          value:
+            added:
+              6oJe8FAJ384bFvau: Compendium.dnd5e.classes24.Item.phbmnkWholenessO
           level: 6
           title: Subclass Features
         - _id: M7cvHrnI6p0Yo150
@@ -6327,7 +6344,9 @@ items:
                 optional: false
             optional: false
             spell: null
-          value: {}
+          value:
+            added:
+              tVFLJOhEm7rI6syf: Compendium.dnd5e.classes24.Item.phbmnkFleetStep0
           level: 11
           title: Subclass Features
         - _id: 1kqB8Z5f6UcgmGjY
@@ -6361,7 +6380,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.wzv8mX9oLqc12CYJ'
+    _key: '!actors.items!PerrinLv11000000.wzv8mX9oLqc12CYJ'
   - _id: xscYzaz6cIe5obYq
     name: Open Hand Technique
     type: feat
@@ -6618,7 +6637,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!PerrinLv05000000.xscYzaz6cIe5obYq.uQ474o5Wsv3sEAJK
+          !actors.items.effects!PerrinLv11000000.xscYzaz6cIe5obYq.uQ474o5Wsv3sEAJK
       - name: Toppled
         img: systems/dnd5e/icons/svg/items/feature.svg
         origin: Compendium.dnd5e.classes24.Item.phbmnkOpenHandTe
@@ -6651,7 +6670,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!PerrinLv05000000.xscYzaz6cIe5obYq.E1A8QE6kPsLgqTAP
+          !actors.items.effects!PerrinLv11000000.xscYzaz6cIe5obYq.E1A8QE6kPsLgqTAP
     flags:
       dnd5e:
         sourceId: Compendium.dnd5e.classes24.Item.phbmnkOpenHandTe
@@ -6664,12 +6683,11 @@ items:
       coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 5.2.4
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1767911004041
+      lastModifiedBy: null
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.xscYzaz6cIe5obYq'
+    _key: '!actors.items!PerrinLv11000000.xscYzaz6cIe5obYq'
   - _id: RaqV8f6nk9AV7qGD
     name: Slow Fall
     type: feat
@@ -6782,12 +6800,11 @@ items:
       coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 5.2.4
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1767911004041
+      lastModifiedBy: null
     sort: 1500000
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.RaqV8f6nk9AV7qGD'
+    _key: '!actors.items!PerrinLv11000000.RaqV8f6nk9AV7qGD'
   - _id: 5J2hGwPDLVPbdvr5
     name: Extra Attack
     type: feat
@@ -6836,12 +6853,11 @@ items:
       coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 5.2.4
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1767911004041
+      lastModifiedBy: null
     sort: 900000
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.5J2hGwPDLVPbdvr5'
+    _key: '!actors.items!PerrinLv11000000.5J2hGwPDLVPbdvr5'
   - _id: 6N0sKuWybMWsYN9w
     name: Stunning Strike
     type: feat
@@ -6990,7 +7006,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!PerrinLv05000000.6N0sKuWybMWsYN9w.vofnieSTB0l8rpRg
+          !actors.items.effects!PerrinLv11000000.6N0sKuWybMWsYN9w.vofnieSTB0l8rpRg
       - name: Slowed
         img: icons/magic/control/debuff-energy-snare-purple-pink.webp
         origin: Compendium.dnd5e.classes24.Item.phbmnkStunningSt
@@ -7022,7 +7038,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!PerrinLv05000000.6N0sKuWybMWsYN9w.cj9HhBNKtF6iOsH4
+          !actors.items.effects!PerrinLv11000000.6N0sKuWybMWsYN9w.cj9HhBNKtF6iOsH4
     flags:
       dnd5e:
         sourceId: Compendium.dnd5e.classes24.Item.phbmnkStunningSt
@@ -7035,12 +7051,11 @@ items:
       coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 5.2.4
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1767911004041
+      lastModifiedBy: null
     sort: 1600000
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.6N0sKuWybMWsYN9w'
+    _key: '!actors.items!PerrinLv11000000.6N0sKuWybMWsYN9w'
   - _id: dw2v1bcwjfQvlUw2
     name: Winged Boots
     type: equipment
@@ -7207,7 +7222,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!PerrinLv05000000.dw2v1bcwjfQvlUw2.jKz5xLbftW2r0f3P
+          !actors.items.effects!PerrinLv11000000.dw2v1bcwjfQvlUw2.jKz5xLbftW2r0f3P
     flags: {}
     _stats:
       duplicateSource: null
@@ -7220,7 +7235,7 @@ items:
     sort: 37900000
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.dw2v1bcwjfQvlUw2'
+    _key: '!actors.items!PerrinLv11000000.dw2v1bcwjfQvlUw2'
   - _id: mio6aIiykDQOpexz
     name: Efficient Quiver
     type: container
@@ -7285,12 +7300,11 @@ items:
       coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 5.2.4
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1768261760190
+      lastModifiedBy: null
     sort: 1000000
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.mio6aIiykDQOpexz'
+    _key: '!actors.items!PerrinLv11000000.mio6aIiykDQOpexz'
   - name: Long Compartment
     type: container
     _id: F1tgHUPCIiHaVzxa
@@ -7349,7 +7363,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.F1tgHUPCIiHaVzxa'
+    _key: '!actors.items!PerrinLv11000000.F1tgHUPCIiHaVzxa'
   - name: Short Compartment
     type: container
     _id: BhI44v7Y7nFc00oH
@@ -7412,7 +7426,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.BhI44v7Y7nFc00oH'
+    _key: '!actors.items!PerrinLv11000000.BhI44v7Y7nFc00oH'
   - name: Midsize Compartment
     type: container
     _id: iFWRqFJvwCHmZX6C
@@ -7475,7 +7489,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.iFWRqFJvwCHmZX6C'
+    _key: '!actors.items!PerrinLv11000000.iFWRqFJvwCHmZX6C'
   - name: Javelin
     system:
       description:
@@ -7691,7 +7705,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!PerrinLv05000000.cn0U8qnWxapHJNpL.gAr5tbw5xB9oKXrc
+          !actors.items.effects!PerrinLv11000000.cn0U8qnWxapHJNpL.gAr5tbw5xB9oKXrc
     sort: 0
     flags: {}
     _stats:
@@ -7702,10 +7716,10 @@ items:
       systemId: dnd5e
       systemVersion: 5.2.4
       lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1767911004041
+      modifiedTime: 1768590929437
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.cn0U8qnWxapHJNpL'
+    _key: '!actors.items!PerrinLv11000000.cn0U8qnWxapHJNpL'
   - _id: 4UDncKQVy806t2oa
     name: Potion of Healing
     type: consumable
@@ -7799,7 +7813,7 @@ items:
       unidentified:
         description: ''
       container: null
-      quantity: 5
+      quantity: 6
       weight:
         value: 0.5
         units: lb
@@ -7839,7 +7853,7 @@ items:
     sort: 100000
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.4UDncKQVy806t2oa'
+    _key: '!actors.items!PerrinLv11000000.4UDncKQVy806t2oa'
   - name: Grappler
     system:
       description:
@@ -7925,13 +7939,1422 @@ items:
       coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 5.2.4
-      createdTime: 1767911003986
-      modifiedTime: 1767911003986
-      lastModifiedBy: dnd5ebuilder0000
+      lastModifiedBy: null
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!PerrinLv05000000.UFqgPHEH5ooAXUcf'
+    _key: '!actors.items!PerrinLv11000000.UFqgPHEH5ooAXUcf'
+  - _id: wdoB52K9u7WmYZxe
+    name: Empowered Strikes
+    type: feat
+    folder: kK77WX8hVJHRQRda
+    img: icons/magic/control/buff-strength-muscle-damage-orange.webp
+    system:
+      description:
+        value: >-
+          <p>Whenever you deal damage with your Unarmed Strike, it can deal your
+          choice of Force damage or its normal damage type.</p><section
+          class="secret" id="secret-Hg8UeaCyLgncM7iJ"><p><strong>Foundry
+          Note</strong></p><p>The <strong>Empowered Strike</strong> activity on
+          this feature can allows you to choose between Force and Bludgeoning
+          damage in the roll dialog. It will remember your choice going
+          forward.</p><p>It uses your Martial Arts Die (currently [[lookup
+          @scale.monk.die]] for damage and will automatically update as you
+          level up.</p></section>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: class
+        subtype: ''
+      prerequisites:
+        level: 6
+        repeatable: false
+        items: []
+      properties: []
+      requirements: ''
+      activities:
+        fBW26ceybofkx8Ua:
+          type: attack
+          name: Empowered Strike
+          _id: fBW26ceybofkx8Ua
+          activation:
+            type: action
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: '1'
+              type: creature
+              special: ''
+            override: false
+            prompt: false
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          attack:
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: melee
+              classification: unarmed
+            ability: dex
+            bonus: ''
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts:
+              - custom:
+                  enabled: true
+                  formula: '@scale.monk.die + @mod'
+                number: null
+                denomination: 0
+                bonus: ''
+                types:
+                  - bludgeoning
+                  - force
+                scaling:
+                  number: 1
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      enchant: {}
+      identifier: empowered-strikes
+      advancement: []
+      crewed: false
+    effects: []
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        sourceId: Compendium.dnd5e.classes24.Item.phbmnkEmpoweredS
+        advancementOrigin: ZKfK1Y5I79VK4U7P.TIzNw6t61wYmtj6V
+        advancementRoot: ZKfK1Y5I79VK4U7P.TIzNw6t61wYmtj6V
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.classes24.Item.phbmnkEmpoweredS
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 600000
+    ownership:
+      default: 0
+    _key: '!actors.items!PerrinLv11000000.wdoB52K9u7WmYZxe'
+  - _id: 6oJe8FAJ384bFvau
+    name: Wholeness of Body
+    type: feat
+    folder: 8keksVDATj5D9vYl
+    img: icons/magic/life/heart-glowing-red.webp
+    system:
+      description:
+        value: >-
+          <p>You gain the ability to heal yourself. As a Bonus Action, you can
+          roll your Martial Arts die. You regain a number of Hit Points equal to
+          the number rolled plus your Wisdom modifier (minimum of 1 Hit Point
+          regained).</p><p>You can use this feature a number of times equal to
+          your Wisdom modifier (minimum of once), and you regain all expended
+          uses when you finish a Long Rest.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      uses:
+        max: max(1,@abilities.wis.mod)
+        spent: 0
+        recovery:
+          - period: lr
+            type: recoverAll
+      type:
+        value: class
+        subtype: ''
+      prerequisites:
+        level: 6
+        repeatable: false
+        items: []
+      properties: []
+      requirements: ''
+      activities:
+        CoatPmjognJHbfZ6:
+          type: heal
+          _id: CoatPmjognJHbfZ6
+          activation:
+            type: bonus
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling: {}
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: ''
+              type: self
+              special: ''
+            override: false
+            prompt: false
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          healing:
+            number: null
+            denomination: 0
+            types:
+              - healing
+            custom:
+              enabled: true
+              formula: '@scale.monk.die + @abilities.wis.mod'
+            scaling:
+              number: 1
+            bonus: ''
+          name: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      enchant: {}
+      identifier: wholeness-of-body
+      advancement: []
+      crewed: false
+    effects: []
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        sourceId: Compendium.dnd5e.classes24.Item.phbmnkWholenessO
+        advancementOrigin: wzv8mX9oLqc12CYJ.KKc6VtzWsSGh2NnC
+        advancementRoot: wzv8mX9oLqc12CYJ.KKc6VtzWsSGh2NnC
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.classes24.Item.phbmnkWholenessO
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 0
+    ownership:
+      default: 0
+    _key: '!actors.items!PerrinLv11000000.6oJe8FAJ384bFvau'
+  - _id: YAfvhSQNsUX4fWTM
+    name: Evasion
+    type: feat
+    folder: kK77WX8hVJHRQRda
+    img: icons/skills/movement/arrow-down-pink.webp
+    system:
+      description:
+        value: >-
+          <p>When you're subjected to an effect that allows you to make a
+          Dexterity saving throw to take only half damage, you instead take no
+          damage if you succeed on the saving throw and only half damage if you
+          fail.</p><p>You don't benefit from this feature if you have the
+          Incapacitated condition.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: class
+        subtype: ''
+      prerequisites:
+        level: 7
+        repeatable: false
+        items: []
+      properties: []
+      requirements: ''
+      activities: {}
+      enchant: {}
+      identifier: evasion
+      advancement: []
+      crewed: false
+    effects: []
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        sourceId: Compendium.dnd5e.classes24.Item.phbmnkEvasion000
+        advancementOrigin: ZKfK1Y5I79VK4U7P.Rfq6ZXQhdFm3Zmjx
+        advancementRoot: ZKfK1Y5I79VK4U7P.Rfq6ZXQhdFm3Zmjx
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.classes24.Item.phbmnkEvasion000
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 800000
+    ownership:
+      default: 0
+    _key: '!actors.items!PerrinLv11000000.YAfvhSQNsUX4fWTM'
+  - _id: qu9m4wRpcBUWB2v4
+    name: Acrobatic Movement
+    type: feat
+    folder: kK77WX8hVJHRQRda
+    img: icons/skills/movement/arrow-upward-yellow.webp
+    system:
+      description:
+        value: >-
+          <p>While you aren't wearing armor or wielding a Shield, you gain the
+          ability to move along vertical surfaces and across liquids on your
+          turn without falling during the movement.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: class
+        subtype: ''
+      prerequisites:
+        level: 9
+        repeatable: false
+        items: []
+      properties: []
+      requirements: ''
+      activities: {}
+      enchant: {}
+      identifier: acrobatic-movement
+      advancement: []
+      crewed: false
+    effects: []
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        sourceId: Compendium.dnd5e.classes24.Item.phbmnkAcrobaticM
+        advancementOrigin: ZKfK1Y5I79VK4U7P.26AlznyWcDuaFTCY
+        advancementRoot: ZKfK1Y5I79VK4U7P.26AlznyWcDuaFTCY
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.classes24.Item.phbmnkAcrobaticM
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 100000
+    ownership:
+      default: 0
+    _key: '!actors.items!PerrinLv11000000.qu9m4wRpcBUWB2v4'
+  - _id: aYSrdeFnbTdlIVT6
+    name: Heightened Focus
+    type: feat
+    folder: kK77WX8hVJHRQRda
+    img: icons/skills/movement/arrows-up-trio-red.webp
+    system:
+      description:
+        value: >-
+          <p>Your Flurry of Blows, Patient Defense, and Step of the Wind gain
+          the following benefits.</p><p><strong>Flurry of Blows.</strong> You
+          can expend 1 Focus Point to use Flurry of Blows and make three Unarmed
+          Strikes with it instead of two.</p><p><strong>Patient
+          Defense.</strong> When you expend a Focus Point to use Patient
+          Defense, you gain a number of Temporary Hit Points equal to two rolls
+          of your Martial Arts die.</p><p><strong>Step of the Wind.</strong>
+          When you expend a Focus Point to use Step of the Wind, you can choose
+          a willing creature within 5 feet of yourself that is Large or smaller.
+          You move the creature with you until the end of your turn. The
+          creature's movement doesn't provoke Opportunity Attacks.</p><section
+          class="secret" id="secret-OnZBuksoGlTtaJJC"><p><strong>Foundry
+          Note</strong></p><p>The <strong>Flurry of Blows</strong> activity will
+          expend 1 Focus Point and you can then make three Unarmed
+          Strikes.</p><p>The <strong>Patient Defense</strong> activity will roll
+          the Temporary Hit Points for you.</p></section>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: class
+        subtype: ''
+      prerequisites:
+        level: 10
+        repeatable: false
+        items: []
+      properties: []
+      requirements: ''
+      activities:
+        XLma1NEOJNEBD6mH:
+          type: utility
+          name: Flurry of Blows
+          _id: XLma1NEOJNEBD6mH
+          activation:
+            type: ''
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets:
+              - type: itemUses
+                value: '1'
+                target: Compendium.dnd5e.classes24.Item.phbmnkMonksFocus
+                scaling: {}
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: ''
+              type: ''
+              special: ''
+            override: false
+            prompt: false
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+        x5fBC7ybAnr79AxK:
+          type: heal
+          name: Patient Defense
+          _id: x5fBC7ybAnr79AxK
+          activation:
+            type: ''
+            value: null
+            override: false
+            condition: When you expend a Focus Point to use Patient Defense
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: ''
+              type: self
+              special: ''
+            override: false
+            prompt: false
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          healing:
+            number: null
+            denomination: 0
+            types:
+              - healing
+            custom:
+              enabled: true
+              formula: 2@scale.monk.die
+            scaling:
+              number: 1
+            bonus: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      enchant: {}
+      identifier: heightened-focus
+      advancement: []
+      crewed: false
+    effects: []
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        sourceId: Compendium.dnd5e.classes24.Item.phbmnkHeightened
+        advancementOrigin: ZKfK1Y5I79VK4U7P.H32KYn1ozuG9jgYH
+        advancementRoot: ZKfK1Y5I79VK4U7P.H32KYn1ozuG9jgYH
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.classes24.Item.phbmnkHeightened
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 1000000
+    ownership:
+      default: 0
+    _key: '!actors.items!PerrinLv11000000.aYSrdeFnbTdlIVT6'
+  - _id: tVFLJOhEm7rI6syf
+    name: Fleet Step
+    type: feat
+    folder: 8keksVDATj5D9vYl
+    img: icons/skills/movement/feet-winged-boots-brown.webp
+    system:
+      description:
+        value: >-
+          <p>When you take a Bonus Action other than Step of the Wind, you can
+          also use Step of the Wind immediately after that Bonus Action.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: class
+        subtype: ''
+      prerequisites:
+        level: 11
+        repeatable: false
+        items: []
+      properties: []
+      requirements: ''
+      activities: {}
+      enchant: {}
+      identifier: fleet-step
+      advancement: []
+      crewed: false
+    effects: []
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        sourceId: Compendium.dnd5e.classes24.Item.phbmnkFleetStep0
+        advancementOrigin: wzv8mX9oLqc12CYJ.M7cvHrnI6p0Yo150
+        advancementRoot: wzv8mX9oLqc12CYJ.M7cvHrnI6p0Yo150
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.classes24.Item.phbmnkFleetStep0
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 0
+    ownership:
+      default: 0
+    _key: '!actors.items!PerrinLv11000000.tVFLJOhEm7rI6syf'
+  - _id: C5v2VPuxqt83E1F6
+    name: Bracers of Defense
+    type: equipment
+    folder: U4xmShLy19Ry54zl
+    img: icons/equipment/wrist/bracer-yellow-fancy.webp
+    system:
+      activities: {}
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      description:
+        value: >-
+          <div><p><em>Wondrous Item, Rare (Requires
+          Attunement)</em></p></div><p>While wearing these bracers, you gain a
+          +2 bonus to Armor Class if you are wearing no armor and using no
+          Shield.</p>
+        chat: ''
+      identifier: bracers-of-defense
+      source:
+        revision: 1
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 1
+        units: lb
+      price:
+        value: 4000
+        denomination: gp
+      rarity: rare
+      attunement: required
+      armor:
+        value: null
+        magicalBonus: null
+        dex: null
+      cover: null
+      hp:
+        value: null
+        max: null
+        dt: null
+        conditions: ''
+      type:
+        value: wondrous
+        baseItem: ''
+      properties:
+        - mgc
+      strength: null
+      proficient: null
+      crew:
+        value: []
+      attuned: true
+      equipped: true
+    effects:
+      - name: Bonus AC (Unarmored)
+        img: icons/skills/melee/shield-block-bash-blue.webp
+        _id: ycuTEJoi9a8BO6xg
+        type: base
+        system: {}
+        changes:
+          - key: system.attributes.ac.bonus
+            mode: 2
+            value: '2'
+            priority: null
+        disabled: false
+        duration:
+          startTime: 0
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        origin: null
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!PerrinLv11000000.C5v2VPuxqt83E1F6.ycuTEJoi9a8BO6xg
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.equipment24.Item.dmgBracersOfDefe
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 4500000
+    ownership:
+      default: 0
+    _key: '!actors.items!PerrinLv11000000.C5v2VPuxqt83E1F6'
+  - _id: Zd7FMs7pVu32eDmq
+    name: Goggles of Night
+    type: equipment
+    folder: U4xmShLy19Ry54zl
+    img: icons/equipment/head/goggles-leather-blue.webp
+    system:
+      activities: {}
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      description:
+        value: >-
+          <p><em>Wondrous Item, Uncommon</em></p><p>While wearing these dark
+          lenses, you have Darkvision out to 60 feet. If you already have
+          Darkvision, wearing the goggles increases its range by 60 feet.</p>
+        chat: ''
+      identifier: goggles-of-night
+      source:
+        revision: 1
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 0
+        units: lb
+      price:
+        value: 400
+        denomination: gp
+      rarity: uncommon
+      attunement: ''
+      armor:
+        value: null
+        magicalBonus: null
+        dex: null
+      cover: null
+      hp:
+        value: null
+        max: null
+        dt: null
+        conditions: ''
+      type:
+        value: wondrous
+        baseItem: ''
+      properties:
+        - mgc
+      strength: null
+      proficient: null
+      crew:
+        value: []
+      attuned: false
+      equipped: true
+    effects:
+      - name: Goggles On
+        img: systems/dnd5e/icons/items/goggles-of-night.webp
+        _id: KB0ZoPGBRIrkXbHW
+        type: base
+        system: {}
+        changes:
+          - key: system.attributes.senses.darkvision
+            mode: 2
+            value: '60'
+            priority: null
+        disabled: false
+        duration:
+          startTime: 0
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        origin: null
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!PerrinLv11000000.Zd7FMs7pVu32eDmq.KB0ZoPGBRIrkXbHW
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.equipment24.Item.dmgGogglesOfNigh
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 17200000
+    ownership:
+      default: 0
+    _key: '!actors.items!PerrinLv11000000.Zd7FMs7pVu32eDmq'
+  - _id: 9dPUzCzwiYblGOLs
+    name: Necklace of Fireballs
+    type: equipment
+    folder: U4xmShLy19Ry54zl
+    img: icons/equipment/neck/pendant-faceted-red.webp
+    system:
+      activities:
+        EhXO2nrkALoZagWG:
+          type: utility
+          name: Determine Number of Beads
+          _id: EhXO2nrkALoZagWG
+          sort: 0
+          activation:
+            type: ''
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets:
+              - type: itemUses
+                value: '-1d6 - 3'
+                target: ''
+                scaling: {}
+              - type: activityUses
+                value: '1'
+                scaling: {}
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: ''
+              type: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: '1'
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+        v2sP2OkYkHfhR8hu:
+          type: cast
+          spell:
+            uuid: Compendium.dnd5e.spells24.Item.phbsplFireball00
+            challenge:
+              attack: null
+              save: 15
+              override: true
+            level: 3
+            properties:
+              - vocal
+              - somatic
+              - material
+            spellbook: true
+            ability: ''
+          _id: v2sP2OkYkHfhR8hu
+          sort: -100000
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            scaling:
+              allowed: true
+              max: min(5, @item.uses.value)
+            spellSlot: true
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling:
+                  mode: amount
+                  formula: ''
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          range:
+            override: true
+            units: ft
+            special: ''
+            value: '60'
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          name: Throw Bead
+          visibility:
+            requireIdentification: true
+            level:
+              min: null
+              max: null
+            identifier: ''
+            requireAttunement: false
+            requireMagic: false
+          flags: {}
+      uses:
+        spent: 3
+        recovery: []
+        max: '9'
+      description:
+        value: >-
+          <p><em>Wondrous Item, Rare</em></p><p>This necklace has 1d6 + 3 beads
+          hanging from it. You can take a Magic action to detach a bead and
+          throw it up to 60 feet away. When it reaches the end of its
+          trajectory, the bead detonates as a level 3
+          @UUID[Compendium.dnd5e.spells24.Item.phbsplFireball00]{Fireball} (save
+          DC 15).</p><p>You can hurl multiple beads, or even the whole necklace,
+          at one time. When you do so, increase the damage of the
+          <em>Fireball</em> by 1d6 for each bead after the first (maximum
+          12d6).</p><section class="secret"
+          id="secret-sVvONZCjIbxSR0Xs"><p><strong>Foundry
+          Note</strong></p><p>This item includes 9 limited uses. The
+          <strong>Determine Number of Beads</strong> activity can be used to
+          determine how many beads (equivalent to 1d6 + 3) are on the
+          necklace.</p><p>The <strong>Throw Bead</strong> activity allows you to
+          scale the Fireball up to a max of 12d6.</p></section>
+        chat: ''
+      identifier: necklace-of-fireballs
+      source:
+        revision: 1
+        rules: '2024'
+        book: ''
+        license: CC-BY-4.0
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 0
+        units: lb
+      price:
+        value: 2000
+        denomination: gp
+      rarity: rare
+      attunement: ''
+      armor:
+        value: null
+        magicalBonus: null
+        dex: null
+      cover: null
+      hp:
+        value: null
+        max: null
+        dt: null
+        conditions: ''
+      type:
+        value: wondrous
+        baseItem: ''
+      properties:
+        - mgc
+      strength: null
+      proficient: null
+      crew:
+        value: []
+      attuned: false
+      equipped: true
+    effects: []
+    flags: {}
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.equipment24.Item.dmgNecklaceOfFir
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 22700000
+    ownership:
+      default: 0
+    _key: '!actors.items!PerrinLv11000000.9dPUzCzwiYblGOLs'
+  - name: Fireball
+    system:
+      description:
+        value: >-
+          <p>A bright streak flashes from you to a point you choose within range
+          and then blossoms with a low roar into a fiery explosion. Each
+          creature in a 20-foot-radius Sphere centered on that point makes a
+          Dexterity saving throw, taking 8d6 Fire damage on a failed save or
+          half as much damage on a successful one.</p><p>Flammable objects in
+          the area that aren't being worn or carried start
+          burning.</p><p><strong>Using a Higher-Level Spell Slot.</strong> The
+          damage increases by 1d6 for each spell slot level above 3.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: ''
+        units: inst
+      target:
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        template:
+          units: ft
+          type: sphere
+          size: '20'
+          contiguous: false
+          count: ''
+      range:
+        value: '150'
+        units: ft
+        special: ''
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 3
+      school: evo
+      properties:
+        - vocal
+        - somatic
+        - material
+      materials:
+        value: a ball of bat guano and sulfur
+        consumed: false
+        cost: 0
+        supply: 0
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects: []
+          range:
+            override: false
+            units: self
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          damage:
+            onSave: half
+            parts:
+              - number: 8
+                denomination: 6
+                bonus: ''
+                types:
+                  - fire
+                custom:
+                  enabled: false
+                  formula: ''
+                scaling:
+                  mode: whole
+                  number: 1
+                  formula: ''
+          save:
+            ability:
+              - dex
+            dc:
+              calculation: spellcasting
+              formula: ''
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: fireball
+      method: spell
+      prepared: 0
+    type: spell
+    img: icons/magic/fire/barrier-shield-explosion-yellow.webp
+    effects:
+      - _id: dnd5espellchange
+        type: enchantment
+        name: Spell Changes
+        img: systems/dnd5e/icons/svg/activity/cast.svg
+        origin: >-
+          Compendium.dnd5e.actors24.Actor.PerrinLv11000000.Item.9dPUzCzwiYblGOLs.Activity.v2sP2OkYkHfhR8hu
+        changes:
+          - key: system.method
+            mode: 5
+            value: spell
+          - key: system.range
+            mode: 5
+            value: '{"units":"ft","special":"","value":"60"}'
+          - key: system.properties
+            mode: 2
+            value: '-vocal'
+          - key: system.properties
+            mode: 2
+            value: '-somatic'
+          - key: system.properties
+            mode: 2
+            value: '-material'
+          - key: activities[save].save.dc.calculation
+            mode: 5
+            value: ''
+          - key: activities[save].save.dc.formula
+            mode: 5
+            value: '15'
+          - key: activities[summon].flat.save
+            mode: 5
+            value: '15'
+        system: {}
+        disabled: false
+        duration:
+          startTime: 0
+          combat: null
+        description: ''
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!PerrinLv11000000.F73b5RQv44Vlk3n3.dnd5espellchange
+    folder: HCovEE4VoPGlIbKi
+    sort: 2100000
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        cachedFor: .Item.9dPUzCzwiYblGOLs.Activity.v2sP2OkYkHfhR8hu
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplFireball00
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    _id: F73b5RQv44Vlk3n3
+    ownership:
+      default: 0
+    _key: '!actors.items!PerrinLv11000000.F73b5RQv44Vlk3n3'
+  - _id: e1DbLf5Ki5QCtIJK
+    name: Ring
+    type: equipment
+    img: icons/equipment/finger/ring-band-copper.webp
+    system:
+      activities: {}
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      description:
+        value: ''
+        chat: ''
+      identifier: sup-ring-of-resistance
+      source:
+        revision: 1
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 0
+        units: lb
+      price:
+        value: 0
+        denomination: gp
+      rarity: ''
+      attunement: ''
+      armor:
+        value: null
+        magicalBonus: null
+        dex: null
+      cover: null
+      hp:
+        value: null
+        max: null
+        dt: null
+        conditions: ''
+      type:
+        value: ring
+        baseItem: ''
+      properties: []
+      strength: null
+      proficient: null
+      crew:
+        value: []
+      attuned: false
+      equipped: true
+    effects:
+      - type: enchantment
+        name: Ring of Resistance (Necrotic)
+        img: systems/dnd5e/icons/spell-tiers/spell3.webp
+        disabled: false
+        system: {}
+        changes:
+          - key: name
+            mode: 5
+            value: Ring of Resistance (jet)
+            priority: null
+          - key: img
+            mode: 5
+            value: icons/equipment/finger/ring-faceted-gold-purple.webp
+            priority: null
+          - key: system.rarity
+            mode: 5
+            value: rare
+            priority: null
+          - key: system.description.value
+            mode: 5
+            value: >-
+              {}<p><em>See:
+              @UUID[Compendium.dnd5e.equipment24.Item.dmgRingOfResista]</em></p>
+              <p>You have Resistance to one damage type while wearing this ring.
+              The gemstone in the ring indicates the type.</p>
+            priority: null
+          - key: system.properties
+            mode: 2
+            value: mgc
+            priority: null
+        duration:
+          startTime: null
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        origin: Compendium.dnd5e.equipment24.Item.dmgRingOfResista
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: >-
+            Compendium.dnd5e.equipment24.Item.dmgRingOfResista.ActiveEffect.9r8SX6QYbeLa780J
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _id: qbr8uf77euUBD00C
+        _key: >-
+          !actors.items.effects!PerrinLv11000000.e1DbLf5Ki5QCtIJK.qbr8uf77euUBD00C
+      - name: Necrotic Resistance
+        img: systems/dnd5e/icons/svg/damage/necrotic.svg
+        type: base
+        system: {}
+        changes:
+          - key: system.traits.dr.value
+            mode: 2
+            value: necrotic
+            priority: null
+        disabled: false
+        duration:
+          startTime: null
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        origin: Compendium.dnd5e.equipment24.Item.dmgRingOfResista
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags:
+          dnd5e:
+            dependentOn: qbr8uf77euUBD00C
+        _stats:
+          compendiumSource: >-
+            Compendium.dnd5e.equipment24.Item.dmgArmorOfResist.ActiveEffect.OVh17qutRZ4vceWw
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _id: 50SGcSGc5IUJi5u2
+        _key: >-
+          !actors.items.effects!PerrinLv11000000.e1DbLf5Ki5QCtIJK.50SGcSGc5IUJi5u2
+    folder: TDK7YU58V9y3Kqjo
+    flags: {}
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.equipment24.Item.dmgsupRingofResi
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 0
+    ownership:
+      default: 0
+    _key: '!actors.items!PerrinLv11000000.e1DbLf5Ki5QCtIJK'
 effects: []
 flags: {}
 _stats:
@@ -7940,12 +9363,12 @@ _stats:
   coreVersion: '13.351'
   systemId: dnd5e
   systemVersion: 5.2.4
-  createdTime: 1766963615531
-  modifiedTime: 1767911004048
+  createdTime: 1768269132961
+  modifiedTime: 1768688235803
   lastModifiedBy: dnd5ebuilder0000
 img: null
-folder: JRPsXXWuBa56FSZb
+folder: 1EDP5HqqwXarG88N
 ownership:
   default: 0
-sort: 300000
-_key: '!actors!PerrinLv05000000'
+sort: 600000
+_key: '!actors!PerrinLv11000000'

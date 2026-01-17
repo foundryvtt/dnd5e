@@ -1,10 +1,10 @@
 name: Zanna
 type: character
-_id: ZannaLv050000000
+_id: ZannaLv110000000
 system:
   currency:
     pp: 0
-    gp: 2
+    gp: 60
     ep: 0
     sp: 0
     cp: 0
@@ -27,7 +27,7 @@ system:
           max: null
           mode: 0
     dex:
-      value: 14
+      value: 15
       proficient: 0
       max: null
       bonuses:
@@ -61,7 +61,7 @@ system:
           max: null
           mode: 0
     int:
-      value: 19
+      value: 20
       proficient: 1
       max: null
       bonuses:
@@ -327,13 +327,13 @@ system:
     spell2:
       value: 3
     spell3:
-      value: 2
+      value: 3
     spell4:
-      value: 0
+      value: 3
     spell5:
-      value: 0
+      value: 2
     spell6:
-      value: 0
+      value: 1
     spell7:
       value: 0
     spell8:
@@ -382,7 +382,7 @@ system:
       max: null
       temp: null
       tempmax: 0
-      value: 32
+      value: 90
       bonuses: {}
     death:
       roll:
@@ -412,7 +412,7 @@ system:
     background: T06z1NrdygayWPur
     originalClass: gB0al25v0g0uEJRA
     xp:
-      value: 6500
+      value: 85000
     appearance: ''
     trait: ''
     gender: ''
@@ -507,6 +507,9 @@ system:
     - type: item
       id: .Item.BhsYgCJ7pZsu9tth
       sort: 275000
+    - type: item
+      id: .Item.382D4NSFY0ip0wlR
+      sort: 225000
 prototypeToken:
   name: Zanna
   displayName: 20
@@ -762,7 +765,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.T06z1NrdygayWPur'
+    _key: '!actors.items!ZannaLv110000000.T06z1NrdygayWPur'
   - name: Magic Initiate
     system:
       description:
@@ -902,7 +905,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.EaVz1VJdKEmUW5HR'
+    _key: '!actors.items!ZannaLv110000000.EaVz1VJdKEmUW5HR'
   - name: True Strike
     system:
       description:
@@ -1197,7 +1200,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!ZannaLv050000000.BVE93k9mxU6OGqYj.SouQfUgwb9LlUraq
+          !actors.items.effects!ZannaLv110000000.BVE93k9mxU6OGqYj.SouQfUgwb9LlUraq
       - type: enchantment
         name: Ranged Weapon
         img: icons/skills/ranged/arrow-strike-glowing-teal.webp
@@ -1241,7 +1244,7 @@ items:
           lastModifiedBy: null
         _id: Zsx8UvC9DmdrA1E1
         _key: >-
-          !actors.items.effects!ZannaLv050000000.BVE93k9mxU6OGqYj.Zsx8UvC9DmdrA1E1
+          !actors.items.effects!ZannaLv110000000.BVE93k9mxU6OGqYj.Zsx8UvC9DmdrA1E1
     folder: 4FhsY9FJQd7h7MZb
     sort: 100025
     flags:
@@ -1263,7 +1266,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.BVE93k9mxU6OGqYj'
+    _key: '!actors.items!ZannaLv110000000.BVE93k9mxU6OGqYj'
   - name: Minor Illusion
     system:
       description:
@@ -1433,7 +1436,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.IKrZjCTOG7us5OD0'
+    _key: '!actors.items!ZannaLv110000000.IKrZjCTOG7us5OD0'
   - _id: 3cuY3CKpetascw6F
     name: Gnome, Rock
     type: race
@@ -1566,7 +1569,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.3cuY3CKpetascw6F'
+    _key: '!actors.items!ZannaLv110000000.3cuY3CKpetascw6F'
   - _id: gAKclcRLKyBxUZWM
     name: Gnomish Cunning
     type: feat
@@ -1649,7 +1652,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!ZannaLv050000000.gAKclcRLKyBxUZWM.KNWLGPsZSHtINp6L
+          !actors.items.effects!ZannaLv110000000.gAKclcRLKyBxUZWM.KNWLGPsZSHtINp6L
     folder: e9Bx86LUj7rJMszu
     flags:
       dnd5e:
@@ -1667,7 +1670,7 @@ items:
     sort: 100000
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.gAKclcRLKyBxUZWM'
+    _key: '!actors.items!ZannaLv110000000.gAKclcRLKyBxUZWM'
   - _id: KPdTQUwe41GCAEv9
     name: Gnomish Lineage, Rock
     type: feat
@@ -1734,7 +1737,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.KPdTQUwe41GCAEv9'
+    _key: '!actors.items!ZannaLv110000000.KPdTQUwe41GCAEv9'
   - name: Mending
     system:
       description:
@@ -1860,7 +1863,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.JOj1MfWvkud0OidO'
+    _key: '!actors.items!ZannaLv110000000.JOj1MfWvkud0OidO'
   - name: Prestidigitation
     system:
       description:
@@ -1992,7 +1995,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.lOq93B1wBnQtgGdJ'
+    _key: '!actors.items!ZannaLv110000000.lOq93B1wBnQtgGdJ'
   - _id: gB0al25v0g0uEJRA
     name: Wizard
     type: class
@@ -2110,7 +2113,7 @@ items:
           group: zcKhKDfR6l9mjjo0
           sort: 700000
       identifier: wizard
-      levels: 5
+      levels: 11
       advancement:
         - _id: a16u6wgnJQq8HMoq
           type: HitPoints
@@ -2121,6 +2124,12 @@ items:
             '3': avg
             '4': avg
             '5': avg
+            '6': avg
+            '7': avg
+            '8': avg
+            '9': avg
+            '10': avg
+            '11': avg
         - _id: 2whBHO3s8fBYBEWi
           type: ItemGrant
           configuration:
@@ -2224,6 +2233,9 @@ items:
             recommendation: null
           value:
             type: asi
+            assignments:
+              dex: 1
+              int: 1
           level: 8
           title: ''
         - _id: mhZh3LfLMa15tXee
@@ -2465,7 +2477,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.gB0al25v0g0uEJRA'
+    _key: '!actors.items!ZannaLv110000000.gB0al25v0g0uEJRA'
   - _id: IQIKFPuEyZ75irLw
     name: Spellcasting
     type: feat
@@ -2577,7 +2589,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.IQIKFPuEyZ75irLw'
+    _key: '!actors.items!ZannaLv110000000.IQIKFPuEyZ75irLw'
   - _id: QxVCr4oYKHSGQj7i
     name: Ritual Adept
     type: feat
@@ -2633,7 +2645,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.QxVCr4oYKHSGQj7i'
+    _key: '!actors.items!ZannaLv110000000.QxVCr4oYKHSGQj7i'
   - _id: 7VbQOdC6RaGoLPgQ
     name: Arcane Recovery
     type: feat
@@ -2700,7 +2712,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.7VbQOdC6RaGoLPgQ'
+    _key: '!actors.items!ZannaLv110000000.7VbQOdC6RaGoLPgQ'
   - name: Light
     system:
       description:
@@ -2845,7 +2857,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.p1AjTd3qevw5SS3i'
+    _key: '!actors.items!ZannaLv110000000.p1AjTd3qevw5SS3i'
   - name: Mage Hand
     system:
       description:
@@ -2992,7 +3004,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.hvak4LOykRa7Kxf4'
+    _key: '!actors.items!ZannaLv110000000.hvak4LOykRa7Kxf4'
   - name: Ray of Frost
     system:
       description:
@@ -3067,7 +3079,9 @@ items:
             override: false
           effects:
             - _id: 7dnnwBMWLykrVJub
-              level: {}
+              level:
+                min: null
+                max: null
           range:
             override: false
             units: self
@@ -3102,16 +3116,19 @@ items:
                   formula: ''
                 number: 1
                 denomination: 8
-                bonus: ''
+                bonus: '@abilities.int.mod'
                 types:
                   - cold
                 scaling:
                   mode: whole
                   number: 1
+                  formula: ''
           name: ''
           flags: {}
           visibility:
-            level: {}
+            level:
+              min: null
+              max: null
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
@@ -3176,7 +3193,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!ZannaLv050000000.5WhEhiI9asypGgTa.7dnnwBMWLykrVJub
+          !actors.items.effects!ZannaLv110000000.5WhEhiI9asypGgTa.7dnnwBMWLykrVJub
     folder: 4FhsY9FJQd7h7MZb
     sort: 200000
     flags: {}
@@ -3190,7 +3207,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.5WhEhiI9asypGgTa'
+    _key: '!actors.items!ZannaLv110000000.5WhEhiI9asypGgTa'
   - name: Detect Magic
     system:
       description:
@@ -3338,7 +3355,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!ZannaLv050000000.DoNQdEOLEZK9Mxu4.BHw91lQmVgdx39WZ
+          !actors.items.effects!ZannaLv110000000.DoNQdEOLEZK9Mxu4.BHw91lQmVgdx39WZ
     folder: pBaAAtXBCq9FVEnL
     sort: 4100000
     flags: {}
@@ -3352,7 +3369,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.DoNQdEOLEZK9Mxu4'
+    _key: '!actors.items!ZannaLv110000000.DoNQdEOLEZK9Mxu4'
   - name: Feather Fall
     system:
       description:
@@ -3468,7 +3485,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.alpUuhweRxL5phS5'
+    _key: '!actors.items!ZannaLv110000000.alpUuhweRxL5phS5'
   - name: Magic Missile
     system:
       description:
@@ -3603,7 +3620,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.PZpyWhzyGWpOAv35'
+    _key: '!actors.items!ZannaLv110000000.PZpyWhzyGWpOAv35'
   - name: Sleep
     system:
       description:
@@ -3759,7 +3776,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!ZannaLv050000000.GPO8YbozCjLwfyNv.04Wa4xUzjA31kPno
+          !actors.items.effects!ZannaLv110000000.GPO8YbozCjLwfyNv.04Wa4xUzjA31kPno
     folder: pBaAAtXBCq9FVEnL
     sort: 400000
     flags: {}
@@ -3773,7 +3790,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.GPO8YbozCjLwfyNv'
+    _key: '!actors.items!ZannaLv110000000.GPO8YbozCjLwfyNv'
   - name: Thunderwave
     system:
       description:
@@ -3864,14 +3881,14 @@ items:
           damage:
             onSave: half
             parts:
-              - number: 2
-                denomination: 8
-                bonus: ''
-                types:
-                  - thunder
-                custom:
+              - custom:
                   enabled: false
                   formula: ''
+                number: 2
+                denomination: 8
+                bonus: '@abilities.int.mod'
+                types:
+                  - thunder
                 scaling:
                   mode: whole
                   number: 1
@@ -3885,13 +3902,17 @@ items:
           uses:
             spent: 0
             recovery: []
+            max: ''
           sort: 0
           flags: {}
           visibility:
-            level: {}
+            level:
+              min: null
+              max: null
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          name: ''
       identifier: thunderwave
       method: spell
       sourceClass: wizard
@@ -3913,7 +3934,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.xZMpwcnN7hhATRq4'
+    _key: '!actors.items!ZannaLv110000000.xZMpwcnN7hhATRq4'
   - name: Shield
     system:
       description:
@@ -4095,7 +4116,7 @@ items:
         system: {}
         sort: 0
         _key: >-
-          !actors.items.effects!ZannaLv050000000.spkqsJM7E9gVctFw.Bv3EoHGfYCprLdG1
+          !actors.items.effects!ZannaLv110000000.spkqsJM7E9gVctFw.Bv3EoHGfYCprLdG1
     folder: pBaAAtXBCq9FVEnL
     sort: 700000
     flags:
@@ -4113,7 +4134,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.spkqsJM7E9gVctFw'
+    _key: '!actors.items!ZannaLv110000000.spkqsJM7E9gVctFw'
   - name: Mage Armor
     system:
       description:
@@ -4257,7 +4278,7 @@ items:
         system: {}
         sort: 0
         _key: >-
-          !actors.items.effects!ZannaLv050000000.ZFg2zsIa9FCO7anY.I59O22yjAwzqZOhN
+          !actors.items.effects!ZannaLv110000000.ZFg2zsIa9FCO7anY.I59O22yjAwzqZOhN
     folder: pBaAAtXBCq9FVEnL
     sort: 1200000
     flags: {}
@@ -4271,7 +4292,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.ZFg2zsIa9FCO7anY'
+    _key: '!actors.items!ZannaLv110000000.ZFg2zsIa9FCO7anY'
   - name: Calligrapher's Supplies
     system:
       description:
@@ -4396,7 +4417,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.FZHJyyTIWGvAmSNk'
+    _key: '!actors.items!ZannaLv110000000.FZHJyyTIWGvAmSNk'
   - name: Book (history)
     system:
       description:
@@ -4446,7 +4467,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.uNHPEZDH3QLrz1ef'
+    _key: '!actors.items!ZannaLv110000000.uNHPEZDH3QLrz1ef'
   - name: Parchment
     system:
       description:
@@ -4465,7 +4486,7 @@ items:
       unidentified:
         description: ''
       container: Z73k3PkQ4o6y2MRc
-      quantity: 8
+      quantity: 10
       weight:
         value: 0
         units: lb
@@ -4492,7 +4513,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.z4x5UJEoRlikfbVH'
+    _key: '!actors.items!ZannaLv110000000.z4x5UJEoRlikfbVH'
   - name: Robe
     system:
       description:
@@ -4567,7 +4588,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.kZ1n3DOWfNb3zcG4'
+    _key: '!actors.items!ZannaLv110000000.kZ1n3DOWfNb3zcG4'
   - name: Dagger
     system:
       description:
@@ -4736,7 +4757,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.8iXaJxDwrqHOqmE8'
+    _key: '!actors.items!ZannaLv110000000.8iXaJxDwrqHOqmE8'
   - name: Quarterstaff
     system:
       description:
@@ -4998,7 +5019,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!ZannaLv050000000.S2e8tae7wGZYdZrc.t1sUGLWW24lTptGM
+          !actors.items.effects!ZannaLv110000000.S2e8tae7wGZYdZrc.t1sUGLWW24lTptGM
     sort: 200000
     flags: {}
     _stats:
@@ -5011,7 +5032,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.S2e8tae7wGZYdZrc'
+    _key: '!actors.items!ZannaLv110000000.S2e8tae7wGZYdZrc'
   - _id: er9owSqI76wOGNe4
     name: Spellbook
     type: loot
@@ -5062,7 +5083,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.er9owSqI76wOGNe4'
+    _key: '!actors.items!ZannaLv110000000.er9owSqI76wOGNe4'
   - name: Scholar's Pack
     system:
       description:
@@ -5132,7 +5153,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.CEsUF6QH03UfvYC9'
+    _key: '!actors.items!ZannaLv110000000.CEsUF6QH03UfvYC9'
   - name: Parchment
     system:
       description:
@@ -5178,7 +5199,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.rDCV9R3lTBpAY9M6'
+    _key: '!actors.items!ZannaLv110000000.rDCV9R3lTBpAY9M6'
   - name: Lamp
     system:
       description:
@@ -5319,7 +5340,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.7YL1ghahe7sFvo9k'
+    _key: '!actors.items!ZannaLv110000000.7YL1ghahe7sFvo9k'
   - name: Ink
     system:
       description:
@@ -5387,7 +5408,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.i8CbmavXSHwkuZuQ'
+    _key: '!actors.items!ZannaLv110000000.i8CbmavXSHwkuZuQ'
   - name: Oil
     system:
       description:
@@ -5604,7 +5625,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.D0QuV5jGMKK1FXJ3'
+    _key: '!actors.items!ZannaLv110000000.D0QuV5jGMKK1FXJ3'
   - name: Tinderbox
     system:
       description:
@@ -5733,7 +5754,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.muNRelVsGbgER2RU'
+    _key: '!actors.items!ZannaLv110000000.muNRelVsGbgER2RU'
   - name: Book
     system:
       description:
@@ -5783,7 +5804,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.Qq29yDl8ROC6f3NH'
+    _key: '!actors.items!ZannaLv110000000.Qq29yDl8ROC6f3NH'
   - name: Ink Pen
     system:
       description:
@@ -5855,7 +5876,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.r3q4U5e2ZJZNbwpg'
+    _key: '!actors.items!ZannaLv110000000.r3q4U5e2ZJZNbwpg'
   - _id: fay375sv2fCUNuaa
     name: Scholar
     type: feat
@@ -5896,9 +5917,6 @@ items:
     effects: []
     flags:
       dnd5e:
-        riders:
-          activity: []
-          effect: []
         sourceId: Compendium.dnd5e.classes24.Item.phbwzdScholar000
         advancementOrigin: gB0al25v0g0uEJRA.JTCSb4dfm8Auy6WD
         advancementRoot: gB0al25v0g0uEJRA.JTCSb4dfm8Auy6WD
@@ -5913,7 +5931,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.fay375sv2fCUNuaa'
+    _key: '!actors.items!ZannaLv110000000.fay375sv2fCUNuaa'
   - _id: ghJUmu2RAdpyjeqJ
     name: Evoker
     type: subclass
@@ -5963,7 +5981,9 @@ items:
                 optional: false
             optional: false
             spell: null
-          value: {}
+          value:
+            added:
+              MqRd8GY40WInmKoE: Compendium.dnd5e.classes24.Item.phbwzdSculptSpel
           level: 6
           title: Subclass Features
         - _id: vyrvNKiCAYyJcR9l
@@ -5974,7 +5994,9 @@ items:
                 optional: false
             optional: false
             spell: null
-          value: {}
+          value:
+            added:
+              382D4NSFY0ip0wlR: Compendium.dnd5e.classes24.Item.phbwzdEmpoweredE
           level: 10
           title: Subclass Features
         - _id: GeBj8GgEaEGUkxxL
@@ -6008,7 +6030,7 @@ items:
     sort: 400000
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.ghJUmu2RAdpyjeqJ'
+    _key: '!actors.items!ZannaLv110000000.ghJUmu2RAdpyjeqJ'
   - _id: nNwPyTgPWOOkpMFM
     name: Evocation Savant
     type: feat
@@ -6053,9 +6075,6 @@ items:
     effects: []
     flags:
       dnd5e:
-        riders:
-          activity: []
-          effect: []
         sourceId: Compendium.dnd5e.classes24.Item.phbwzdEvocationS
         advancementOrigin: ghJUmu2RAdpyjeqJ.NElqwo5qeP2KjewN
         advancementRoot: ghJUmu2RAdpyjeqJ.NElqwo5qeP2KjewN
@@ -6070,7 +6089,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.nNwPyTgPWOOkpMFM'
+    _key: '!actors.items!ZannaLv110000000.nNwPyTgPWOOkpMFM'
   - _id: yBOj0FT4ICnXeqOT
     name: Potent Cantrip
     type: feat
@@ -6107,9 +6126,6 @@ items:
     effects: []
     flags:
       dnd5e:
-        riders:
-          activity: []
-          effect: []
         sourceId: Compendium.dnd5e.classes24.Item.phbwzdPotentCant
         advancementOrigin: ghJUmu2RAdpyjeqJ.NElqwo5qeP2KjewN
         advancementRoot: ghJUmu2RAdpyjeqJ.NElqwo5qeP2KjewN
@@ -6124,7 +6140,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.yBOj0FT4ICnXeqOT'
+    _key: '!actors.items!ZannaLv110000000.yBOj0FT4ICnXeqOT'
   - _id: uTfYl4gZ8qBl1eIi
     name: Memorize Spell
     type: feat
@@ -6164,9 +6180,6 @@ items:
     effects: []
     flags:
       dnd5e:
-        riders:
-          activity: []
-          effect: []
         sourceId: Compendium.dnd5e.classes24.Item.phbwzdMemorizeSp
         advancementOrigin: gB0al25v0g0uEJRA.tQSiUAW1DhfY3Idi
         advancementRoot: gB0al25v0g0uEJRA.tQSiUAW1DhfY3Idi
@@ -6181,7 +6194,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.uTfYl4gZ8qBl1eIi'
+    _key: '!actors.items!ZannaLv110000000.uTfYl4gZ8qBl1eIi'
   - name: Alarm
     system:
       description:
@@ -6354,11 +6367,7 @@ items:
     effects: []
     folder: pBaAAtXBCq9FVEnL
     sort: 100000
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -6369,7 +6378,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.BCv1P0h6v1PjtVZ7'
+    _key: '!actors.items!ZannaLv110000000.BCv1P0h6v1PjtVZ7'
   - name: Find Familiar
     system:
       description:
@@ -6549,7 +6558,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.yiQwZcHcVHW9Khgh'
+    _key: '!actors.items!ZannaLv110000000.yiQwZcHcVHW9Khgh'
   - name: Misty Step
     system:
       description:
@@ -6650,11 +6659,7 @@ items:
     effects: []
     folder: 3SjcO2acsFnWegp4
     sort: 1700000
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -6665,7 +6670,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.TLKZKW1bjlLjbmQH'
+    _key: '!actors.items!ZannaLv110000000.TLKZKW1bjlLjbmQH'
   - name: Web
     system:
       description:
@@ -6806,11 +6811,7 @@ items:
     effects: []
     folder: 3SjcO2acsFnWegp4
     sort: 106250
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -6821,7 +6822,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.KQvzFBPWaOzHxugd'
+    _key: '!actors.items!ZannaLv110000000.KQvzFBPWaOzHxugd'
   - name: Mirror Image
     system:
       description:
@@ -6971,7 +6972,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!ZannaLv050000000.evZPcnHU6tlxfN7P.VUqQIaiZoIzxUdf1
+          !actors.items.effects!ZannaLv110000000.evZPcnHU6tlxfN7P.VUqQIaiZoIzxUdf1
       - name: Duplicate B
         origin: Compendium.dnd5e.spells24.Item.phbsplMirrorImag
         duration:
@@ -7007,7 +7008,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!ZannaLv050000000.evZPcnHU6tlxfN7P.XcTQl9DhT9lC3bxI
+          !actors.items.effects!ZannaLv110000000.evZPcnHU6tlxfN7P.XcTQl9DhT9lC3bxI
       - name: Duplicate C
         origin: Compendium.dnd5e.spells24.Item.phbsplMirrorImag
         duration:
@@ -7043,14 +7044,10 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!ZannaLv050000000.evZPcnHU6tlxfN7P.uMsGEsbEZ2hckOKW
+          !actors.items.effects!ZannaLv110000000.evZPcnHU6tlxfN7P.uMsGEsbEZ2hckOKW
     folder: 3SjcO2acsFnWegp4
     sort: 5700000
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -7061,7 +7058,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.evZPcnHU6tlxfN7P'
+    _key: '!actors.items!ZannaLv110000000.evZPcnHU6tlxfN7P'
   - name: Enlarge/Reduce
     system:
       description:
@@ -7247,7 +7244,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!ZannaLv050000000.BP6ROKi3jfIQvhyj.Wi2E10l7n6Ka8k6u
+          !actors.items.effects!ZannaLv110000000.BP6ROKi3jfIQvhyj.Wi2E10l7n6Ka8k6u
       - name: Reduced
         origin: Compendium.dnd5e.spells24.Item.phbsplEnlargeRed
         duration:
@@ -7303,7 +7300,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!ZannaLv050000000.BP6ROKi3jfIQvhyj.NXdtOxX4HvPeodml
+          !actors.items.effects!ZannaLv110000000.BP6ROKi3jfIQvhyj.NXdtOxX4HvPeodml
     folder: 3SjcO2acsFnWegp4
     sort: 3700000
     flags: {}
@@ -7317,7 +7314,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.BP6ROKi3jfIQvhyj'
+    _key: '!actors.items!ZannaLv110000000.BP6ROKi3jfIQvhyj'
   - name: Scorching Ray
     system:
       description:
@@ -7443,11 +7440,7 @@ items:
     effects: []
     folder: 3SjcO2acsFnWegp4
     sort: 900000
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -7458,7 +7451,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.WMVzVxIl9K7hg7aB'
+    _key: '!actors.items!ZannaLv110000000.WMVzVxIl9K7hg7aB'
   - name: Chromatic Orb
     system:
       description:
@@ -7603,11 +7596,7 @@ items:
     effects: []
     folder: pBaAAtXBCq9FVEnL
     sort: 4900000
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -7618,7 +7607,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.iwg9KqCjJJDaoDff'
+    _key: '!actors.items!ZannaLv110000000.iwg9KqCjJJDaoDff'
   - name: Fireball
     system:
       description:
@@ -7711,14 +7700,14 @@ items:
           damage:
             onSave: half
             parts:
-              - number: 8
-                denomination: 6
-                bonus: ''
-                types:
-                  - fire
-                custom:
+              - custom:
                   enabled: false
                   formula: ''
+                number: 8
+                denomination: 6
+                bonus: '@abilities.int.mod'
+                types:
+                  - fire
                 scaling:
                   mode: whole
                   number: 1
@@ -7732,13 +7721,17 @@ items:
           uses:
             spent: 0
             recovery: []
+            max: ''
           sort: 0
           flags: {}
           visibility:
-            level: {}
+            level:
+              min: null
+              max: null
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          name: ''
       identifier: fireball
       method: spell
       sourceClass: wizard
@@ -7749,11 +7742,7 @@ items:
     effects: []
     folder: HCovEE4VoPGlIbKi
     sort: 2100000
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -7764,7 +7753,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.BhsYgCJ7pZsu9tth'
+    _key: '!actors.items!ZannaLv110000000.BhsYgCJ7pZsu9tth'
   - name: Tiny Hut
     system:
       description:
@@ -7886,11 +7875,7 @@ items:
     effects: []
     folder: HCovEE4VoPGlIbKi
     sort: 1400000
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -7901,7 +7886,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.FaPZdbKn5XoCvGJe'
+    _key: '!actors.items!ZannaLv110000000.FaPZdbKn5XoCvGJe'
   - name: Slow
     system:
       description:
@@ -8100,14 +8085,10 @@ items:
         system: {}
         sort: 0
         _key: >-
-          !actors.items.effects!ZannaLv050000000.8p8X2ChcgO9vy5LK.z1lkguBohjqXRSHm
+          !actors.items.effects!ZannaLv110000000.8p8X2ChcgO9vy5LK.z1lkguBohjqXRSHm
     folder: HCovEE4VoPGlIbKi
     sort: 112500
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -8118,7 +8099,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.8p8X2ChcgO9vy5LK'
+    _key: '!actors.items!ZannaLv110000000.8p8X2ChcgO9vy5LK'
   - name: Fire Bolt
     system:
       description:
@@ -8226,17 +8207,20 @@ items:
                   formula: ''
                 number: 1
                 denomination: 10
-                bonus: ''
+                bonus: '@abilities.int.mod'
                 types:
                   - fire
                 scaling:
                   mode: whole
                   number: 1
+                  formula: ''
           name: ''
           img: systems/dnd5e/icons/svg/damage/force.svg
           flags: {}
           visibility:
-            level: {}
+            level:
+              min: null
+              max: null
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
@@ -8250,11 +8234,7 @@ items:
     effects: []
     folder: 4FhsY9FJQd7h7MZb
     sort: 1400000
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -8265,7 +8245,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.cqQl5yhGs5n8bn6q'
+    _key: '!actors.items!ZannaLv110000000.cqQl5yhGs5n8bn6q'
   - _id: jxbjEKWxbjCIWpEQ
     name: Pearl of Power
     type: equipment
@@ -8408,7 +8388,7 @@ items:
     sort: 24500000
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.jxbjEKWxbjCIWpEQ'
+    _key: '!actors.items!ZannaLv110000000.jxbjEKWxbjCIWpEQ'
   - _id: QXkK1rXW0sFkmqWK
     name: Potion of Healing
     type: consumable
@@ -8502,7 +8482,7 @@ items:
       unidentified:
         description: ''
       container: null
-      quantity: 1
+      quantity: 2
       weight:
         value: 0.5
         units: lb
@@ -8542,7 +8522,7 @@ items:
     sort: 100000
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.QXkK1rXW0sFkmqWK'
+    _key: '!actors.items!ZannaLv110000000.QXkK1rXW0sFkmqWK'
   - name: 'Component: Incense'
     type: loot
     _id: 97fxNYRfyUMxf0e9
@@ -8576,17 +8556,16 @@ items:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: null
+      compendiumSource: Compendium.dnd5e.actors24.Actor.ZannaLv110000000.Item.97fxNYRfyUMxf0e9
       duplicateSource: null
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 5.2.4
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1768263415924
+      lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.97fxNYRfyUMxf0e9'
+    _key: '!actors.items!ZannaLv110000000.97fxNYRfyUMxf0e9'
   - name: 'Component: Diamond'
     type: loot
     _id: V0vJ52J6jLBNB5CJ
@@ -8629,7 +8608,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.V0vJ52J6jLBNB5CJ'
+    _key: '!actors.items!ZannaLv110000000.V0vJ52J6jLBNB5CJ'
   - name: Case, Map or Scroll
     system:
       description:
@@ -8689,7 +8668,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.Z73k3PkQ4o6y2MRc'
+    _key: '!actors.items!ZannaLv110000000.Z73k3PkQ4o6y2MRc'
   - name: Components & Fine Inks
     type: loot
     _id: DFvO01dSMjnGU5Yd
@@ -8706,7 +8685,7 @@ items:
       unidentified:
         description: ''
       container: null
-      quantity: 10
+      quantity: 18
       weight:
         value: 0
         units: lb
@@ -8729,11 +8708,4163 @@ items:
       coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 5.2.4
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1768263430596
+      lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!ZannaLv050000000.DFvO01dSMjnGU5Yd'
+    _key: '!actors.items!ZannaLv110000000.DFvO01dSMjnGU5Yd'
+  - _id: MqRd8GY40WInmKoE
+    name: Sculpt Spells
+    type: feat
+    folder: ZHJ6ibjd1J4CSyNw
+    img: icons/creatures/slimes/slime-movement-dripping-pseudopods-green.webp
+    system:
+      description:
+        value: >-
+          <p>You can create pockets of relative safety within the effects of
+          your evocations. When you cast an Evocation spell that affects other
+          creatures that you can see, you can choose a number of them equal to 1
+          plus the spell's level. The chosen creatures automatically succeed on
+          their saving throws against the spell, and they take no damage if they
+          would normally take half damage on a successful save.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: class
+        subtype: ''
+      prerequisites:
+        level: 6
+        repeatable: false
+        items: []
+      properties: []
+      requirements: ''
+      activities: {}
+      enchant: {}
+      identifier: sculpt-spells
+      advancement: []
+      crewed: false
+    effects: []
+    flags:
+      dnd5e:
+        sourceId: Compendium.dnd5e.classes24.Item.phbwzdSculptSpel
+        advancementOrigin: ghJUmu2RAdpyjeqJ.MnGUHDUfl1pqbwJK
+        advancementRoot: ghJUmu2RAdpyjeqJ.MnGUHDUfl1pqbwJK
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.classes24.Item.phbwzdSculptSpel
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 0
+    ownership:
+      default: 0
+    _key: '!actors.items!ZannaLv110000000.MqRd8GY40WInmKoE'
+  - _id: 382D4NSFY0ip0wlR
+    name: Empowered Evocation
+    type: feat
+    folder: ZHJ6ibjd1J4CSyNw
+    img: icons/magic/fire/explosion-mushroom-nuke-orange.webp
+    system:
+      description:
+        value: >-
+          <p>Whenever you cast a Wizard spell from the Evocation school, you can
+          add your Intelligence modifier to one damage roll of that
+          spell.</p><section class="secret"
+          id="secret-3cdT0RlurgG5XV4o"><p><strong>Foundry
+          Note</strong></p><p>You can add your Intelligence modifier to the
+          spell's Situational Bonus in the damage dialog or use this feature's
+          <strong>Damage</strong> activity which allows you to select the type
+          in the damage dialog.</p></section>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 2
+        license: CC-BY-4.0
+        book: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: class
+        subtype: ''
+      prerequisites:
+        level: 10
+        repeatable: false
+        items: []
+      properties: []
+      requirements: ''
+      activities:
+        24lZHflqzcwoBev5:
+          type: damage
+          _id: 24lZHflqzcwoBev5
+          activation:
+            type: ''
+            value: null
+            override: false
+            condition: Whenever you cast a Wizard spell from the Evocation school
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: ''
+              type: creature
+              special: ''
+            override: false
+            prompt: false
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          damage:
+            critical:
+              allow: false
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: null
+                denomination: 0
+                bonus: '@abilities.int.mod'
+                types:
+                  - acid
+                  - bludgeoning
+                  - cold
+                  - fire
+                  - force
+                  - lightning
+                  - necrotic
+                  - piercing
+                  - poison
+                  - psychic
+                  - radiant
+                  - slashing
+                  - thunder
+                scaling:
+                  number: 1
+          name: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      enchant: {}
+      identifier: empowered-evocation
+      advancement: []
+      crewed: false
+    effects: []
+    flags:
+      dnd5e:
+        sourceId: Compendium.dnd5e.classes24.Item.phbwzdEmpoweredE
+        advancementOrigin: ghJUmu2RAdpyjeqJ.vyrvNKiCAYyJcR9l
+        advancementRoot: ghJUmu2RAdpyjeqJ.vyrvNKiCAYyJcR9l
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.classes24.Item.phbwzdEmpoweredE
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 0
+    ownership:
+      default: 0
+    _key: '!actors.items!ZannaLv110000000.382D4NSFY0ip0wlR'
+  - name: Shocking Grasp
+    system:
+      description:
+        value: >-
+          <p>Lightning springs from you to a creature that you try to touch.
+          Make a melee spell attack against the target. On a hit, the target
+          takes 1d8 Lightning damage, and it can't make Opportunity Attacks
+          until the start of its next turn.</p><p><strong>Cantrip
+          Upgrade.</strong> The damage increases by 1d8 when you reach levels 5
+          (2d8), 11 (3d8), and 17 (4d8).</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: ''
+        units: inst
+      target:
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        template:
+          units: ft
+          contiguous: false
+          type: ''
+      range:
+        units: touch
+        special: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      level: 0
+      school: evo
+      properties:
+        - vocal
+        - somatic
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      activities:
+        x1A2tC9t6R5uxBG0:
+          type: attack
+          _id: x1A2tC9t6R5uxBG0
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects:
+            - _id: DQCAm67ck1GEKHtE
+              level:
+                min: null
+                max: null
+          range:
+            override: false
+            units: self
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          attack:
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: melee
+              classification: ''
+            ability: ''
+            bonus: ''
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
+                denomination: 8
+                bonus: '@abilities.int.mod'
+                types:
+                  - lightning
+                scaling:
+                  mode: whole
+                  number: 1
+                  formula: ''
+          name: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: shocking-grasp
+      method: spell
+      sourceClass: wizard
+      prepared: 1
+    _id: znbnsnAjIFfvyjEy
+    type: spell
+    img: icons/magic/lightning/claws-unarmed-strike-teal.webp
+    effects:
+      - name: Shocked
+        img: icons/magic/lightning/bolt-strike-wide-white.webp
+        origin: Compendium.dnd5e.spells24.Item.phbsplShockingGr
+        transfer: false
+        _id: DQCAm67ck1GEKHtE
+        type: base
+        system: {}
+        changes: []
+        disabled: false
+        duration:
+          startTime: null
+          seconds: null
+          combat: null
+          rounds: null
+          turns: 1
+          startRound: null
+          startTurn: null
+        description: >-
+          <p>The target can’t make Opportunity Attacks until the start of its
+          next turn.</p>
+        tint: '#ffffff'
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!ZannaLv110000000.znbnsnAjIFfvyjEy.DQCAm67ck1GEKHtE
+    folder: 4FhsY9FJQd7h7MZb
+    sort: 106250
+    flags: {}
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplShockingGr
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!ZannaLv110000000.znbnsnAjIFfvyjEy'
+  - name: Fly
+    system:
+      description:
+        value: >-
+          <p>You touch a willing creature. For the duration, the target gains a
+          Fly Speed of 60 feet and can hover. When the spell ends, the target
+          falls if it is still aloft unless it can stop the
+          fall.</p><p><strong>Using a Higher-Level Spell Slot.</strong> You can
+          target one additional creature for each spell slot level above 3.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: '10'
+        units: minute
+      target:
+        affects:
+          type: willing
+          count: '@item.level - 2'
+          choice: false
+          special: ''
+        template:
+          units: ft
+          contiguous: false
+          type: ''
+      range:
+        units: touch
+        special: ''
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 3
+      school: trs
+      properties:
+        - vocal
+        - somatic
+        - material
+        - concentration
+      materials:
+        value: a feather
+        consumed: false
+        cost: 0
+        supply: 0
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects:
+            - _id: EHFLuTHqI6cXn1zb
+              level: {}
+          range:
+            override: false
+            units: self
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: fly
+      method: spell
+      sourceClass: wizard
+      prepared: 0
+    _id: Rqit0olv1DHM046d
+    type: spell
+    img: icons/creatures/birds/songbird-yellow-flying.webp
+    effects:
+      - name: Flight
+        origin: Compendium.dnd5e.spells24.Item.phbsplFly0000000
+        duration:
+          rounds: null
+          startTime: null
+          seconds: 600
+          combat: null
+          turns: null
+          startRound: null
+          startTurn: null
+        disabled: false
+        flags: {}
+        img: icons/creatures/abilities/wings-birdlike-blue.webp
+        _id: EHFLuTHqI6cXn1zb
+        type: base
+        system: {}
+        changes:
+          - key: system.attributes.movement.fly
+            mode: 4
+            value: '60'
+            priority: null
+          - key: system.attributes.movement.hover
+            mode: 5
+            value: 'true'
+            priority: null
+        description: ''
+        tint: '#ffffff'
+        transfer: false
+        statuses: []
+        sort: 0
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!ZannaLv110000000.Rqit0olv1DHM046d.EHFLuTHqI6cXn1zb
+    folder: HCovEE4VoPGlIbKi
+    sort: 2000000
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplFly0000000
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!ZannaLv110000000.Rqit0olv1DHM046d'
+  - name: Water Breathing
+    system:
+      description:
+        value: >-
+          <p>This spell grants up to ten willing creatures of your choice within
+          range the ability to breathe underwater until the spell ends. Affected
+          creatures also retain their normal mode of respiration.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: '24'
+        units: hour
+      target:
+        affects:
+          type: willing
+          count: '10'
+          choice: false
+          special: ''
+        template:
+          units: ft
+          contiguous: false
+          type: ''
+      range:
+        value: '30'
+        units: ft
+        special: ''
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 3
+      school: trs
+      properties:
+        - vocal
+        - somatic
+        - material
+        - ritual
+      materials:
+        value: a short reed
+        consumed: false
+        cost: 0
+        supply: 0
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects:
+            - _id: hyFupFam9XIbim0U
+              level: {}
+          range:
+            override: false
+            units: self
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: water-breathing
+      method: spell
+      sourceClass: wizard
+      prepared: 0
+    _id: SWYKZGPEdcF3qEeS
+    type: spell
+    img: icons/magic/water/bubbles-air-water-blue.webp
+    effects:
+      - name: Water Breathing
+        origin: Compendium.dnd5e.spells24.Item.phbsplWaterBreat
+        duration:
+          rounds: null
+          startTime: null
+          seconds: 86400
+          combat: null
+          turns: null
+          startRound: null
+          startTurn: null
+        disabled: false
+        flags: {}
+        img: icons/creatures/fish/crab-blue-purple.webp
+        _id: hyFupFam9XIbim0U
+        type: base
+        system: {}
+        changes: []
+        description: ''
+        tint: '#ffffff'
+        transfer: false
+        statuses: []
+        sort: 0
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!ZannaLv110000000.SWYKZGPEdcF3qEeS.hyFupFam9XIbim0U
+    folder: HCovEE4VoPGlIbKi
+    sort: 100025
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplWaterBreat
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!ZannaLv110000000.SWYKZGPEdcF3qEeS'
+  - name: Fire Shield
+    system:
+      description:
+        value: >-
+          <p>Wispy flames wreathe your body for the duration, shedding Bright
+          Light in a 10-foot radius and Dim Light for an additional 10
+          feet.</p><p>The flames provide you with a warm shield or a chill
+          shield, as you choose. The warm shield grants you Resistance to Cold
+          damage, and the chill shield grants you Resistance to Fire
+          damage.</p><p>In addition, whenever a creature within 5 feet of you
+          hits you with a melee attack roll, the shield erupts with flame. The
+          attacker takes [[/damage 2d8 type=fire]] damage from a warm shield or
+          [[/damage 2d8 type=cold]] damage from a chill shield.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: '10'
+        units: minute
+      target:
+        affects:
+          choice: false
+        template:
+          units: ft
+          contiguous: false
+      range:
+        units: self
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 4
+      school: evo
+      properties:
+        - vocal
+        - somatic
+        - material
+      materials:
+        value: a bit of phosphorus or a firefly
+        consumed: false
+        cost: 0
+        supply: 0
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects:
+            - _id: YbUr13GTnMrootmf
+              level: {}
+            - _id: CMEUOmIT16kjGT5J
+              level: {}
+          range:
+            override: false
+            units: self
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: fire-shield
+      method: spell
+      sourceClass: wizard
+      prepared: 0
+    _id: aDK5qkBEGuLKWsP9
+    type: spell
+    img: icons/equipment/shield/heater-stone-orange.webp
+    effects:
+      - name: Warm Shield
+        origin: Compendium.dnd5e.spells24.Item.phbsplFireShield
+        duration:
+          rounds: null
+          startTime: null
+          seconds: 600
+          combat: null
+          turns: null
+          startRound: null
+          startTurn: null
+        disabled: false
+        flags: {}
+        img: icons/equipment/shield/heater-steel-crystal-red.webp
+        _id: YbUr13GTnMrootmf
+        type: base
+        system: {}
+        changes:
+          - key: system.traits.dr.value
+            mode: 2
+            value: cold
+            priority: null
+        description: >-
+          <p>Whenever a creature within 5 feet of you hits you with a melee
+          attack roll, the attacker takes [[/damage 2d8 type=fire]] damage.</p>
+        tint: '#ffffff'
+        transfer: false
+        statuses: []
+        sort: 0
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!ZannaLv110000000.aDK5qkBEGuLKWsP9.YbUr13GTnMrootmf
+      - name: Chill Shield
+        origin: Compendium.dnd5e.spells24.Item.phbsplFireShield
+        duration:
+          rounds: null
+          startTime: null
+          seconds: 600
+          combat: null
+          turns: null
+          startRound: null
+          startTurn: null
+        disabled: false
+        flags: {}
+        img: icons/equipment/shield/heater-crystal-blue.webp
+        _id: CMEUOmIT16kjGT5J
+        type: base
+        system: {}
+        changes:
+          - key: system.traits.dr.value
+            mode: 2
+            value: fire
+            priority: null
+        description: >-
+          <p>Whenever a creature within 5 feet of you hits you with a melee
+          attack roll, the attacker takes [[/damage 2d8 type=cold]] damage.</p>
+        tint: '#ffffff'
+        transfer: false
+        statuses: []
+        sort: 0
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!ZannaLv110000000.aDK5qkBEGuLKWsP9.CMEUOmIT16kjGT5J
+    folder: qi3IbnEwap7mRw4b
+    sort: 2200000
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplFireShield
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!ZannaLv110000000.aDK5qkBEGuLKWsP9'
+  - name: Banishment
+    system:
+      description:
+        value: >-
+          <p>One creature that you can see within range must succeed on a
+          Charisma saving throw or be transported to a harmless demiplane for
+          the duration. While there, the target has the
+          &amp;Reference[Incapacitated apply=false] condition. When the spell
+          ends, the target reappears in the space it left or in the nearest
+          unoccupied space if that space is occupied.</p><p>If the target is an
+          Aberration, a Celestial, an Elemental, a Fey, or a Fiend, the target
+          doesn't return if the spell lasts for 1 minute. The target is instead
+          transported to a random location on a plane (DM's choice) associated
+          with its creature type.</p><p><strong>Using a Higher-Level Spell
+          Slot.</strong> You can target one additional creature for each spell
+          slot level above 4.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: '1'
+        units: minute
+      target:
+        affects:
+          type: creature
+          count: '@item.level - 3'
+          choice: false
+        template:
+          units: ft
+          contiguous: false
+      range:
+        value: '30'
+        units: ft
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 4
+      school: abj
+      properties:
+        - vocal
+        - somatic
+        - material
+        - concentration
+      materials:
+        value: a pentacle
+        consumed: false
+        cost: 0
+        supply: 0
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects:
+            - _id: nwne4bDtD4pSWWPM
+              onSave: false
+              level: {}
+          range:
+            override: false
+            units: self
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          damage:
+            onSave: half
+            parts: []
+          save:
+            ability:
+              - cha
+            dc:
+              calculation: spellcasting
+              formula: ''
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: banishment
+      method: spell
+      sourceClass: wizard
+      prepared: 1
+    _id: s26frCk4tVhXrbC8
+    type: spell
+    img: icons/magic/unholy/barrier-fire-pink.webp
+    effects:
+      - name: Banished
+        origin: Compendium.dnd5e.spells24.Item.phbsplBanishment
+        duration:
+          rounds: null
+          startTime: null
+          seconds: 60
+          combat: null
+          turns: null
+          startRound: null
+          startTurn: null
+        disabled: false
+        flags: {}
+        img: icons/creatures/unholy/demon-fire-horned-clawed.webp
+        _id: nwne4bDtD4pSWWPM
+        type: base
+        system: {}
+        changes: []
+        description: >-
+          <p>While there, the target has the &amp;Reference[Incapacitated
+          apply=false] condition. When the spell ends, the target reappears in
+          the space it left or in the nearest unoccupied space if that space is
+          occupied.</p><p>If the target is an Aberration, a Celestial, an
+          Elemental, a Fey, or a Fiend, the target doesn’t return if the spell
+          lasts for 1 minute. The target is instead transported to a random
+          location on a plane (DM’s choice) associated with its creature
+          type.</p>
+        tint: '#ffffff'
+        transfer: false
+        statuses:
+          - incapacitated
+        sort: 0
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!ZannaLv110000000.s26frCk4tVhXrbC8.nwne4bDtD4pSWWPM
+    folder: qi3IbnEwap7mRw4b
+    sort: 3600000
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplBanishment
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!ZannaLv110000000.s26frCk4tVhXrbC8'
+  - name: Divination
+    system:
+      description:
+        value: >-
+          <p>This spell puts you in contact with a god or a god's servants. You
+          ask one question about a specific goal, event, or activity to occur
+          within 7 days. The DM offers a truthful reply, which might be a short
+          phrase or cryptic rhyme. The spell doesn't account for circumstances
+          that might change the answer, such as the casting of other
+          spells.</p><p>If you cast the spell more than once before finishing a
+          Long Rest, there is a cumulative 25 percent chance for each casting
+          after the first that you get no answer.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: ''
+        units: inst
+      target:
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        template:
+          units: ft
+          contiguous: false
+          type: ''
+      range:
+        units: self
+        special: ''
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 4
+      school: div
+      properties:
+        - vocal
+        - somatic
+        - material
+        - ritual
+      materials:
+        value: incense worth 25+ GP, which the spell consumes
+        consumed: true
+        cost: 25
+        supply: 4
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects: []
+          range:
+            override: false
+            units: self
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          name: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: divination
+      method: spell
+      sourceClass: wizard
+      prepared: 0
+      ability: ''
+    _id: bL4ZaTVroq3AKStu
+    type: spell
+    img: icons/magic/perception/orb-crystal-ball-scrying.webp
+    effects: []
+    folder: qi3IbnEwap7mRw4b
+    sort: 2600000
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDivination
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!ZannaLv110000000.bL4ZaTVroq3AKStu'
+  - name: Dimension Door
+    system:
+      description:
+        value: >-
+          <p>You teleport to a location within range. You arrive at exactly the
+          spot desired. It can be a place you can see, one you can visualize, or
+          one you can describe by stating distance and direction, such as "200
+          feet straight downward" or "300 feet upward to the northwest at a
+          45-degree angle."</p><p>You can also teleport one willing creature.
+          The creature must be within 5 feet of you when you teleport, and it
+          teleports to a space within 5 feet of your destination space.</p><p>If
+          you, the other creature, or both would arrive in a space occupied by a
+          creature or completely filled by one or more objects, you and any
+          creature traveling with you each take 4d6 Force damage, and the
+          teleportation fails.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: ''
+        units: inst
+      target:
+        affects:
+          type: willing
+          count: '2'
+          choice: false
+          special: ''
+        template:
+          units: ft
+          contiguous: false
+          type: ''
+      range:
+        value: '500'
+        units: ft
+        special: ''
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 4
+      school: con
+      properties:
+        - vocal
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: damage
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects: []
+          range:
+            override: false
+            units: self
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          damage:
+            critical:
+              allow: false
+              bonus: ''
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 4
+                denomination: 6
+                bonus: ''
+                types:
+                  - force
+                scaling:
+                  mode: ''
+                  number: 1
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          name: ''
+          img: systems/dnd5e/icons/svg/trait-saves.svg
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: dimension-door
+      method: spell
+      sourceClass: wizard
+      prepared: 1
+    _id: V3lm0BKNpe8w7EAs
+    type: spell
+    img: icons/environment/wilderness/portal.webp
+    effects: []
+    folder: qi3IbnEwap7mRw4b
+    sort: 2700000
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDimensionD
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!ZannaLv110000000.V3lm0BKNpe8w7EAs'
+  - name: Polymorph
+    system:
+      description:
+        value: >-
+          <p>You attempt to transform a creature that you can see within range
+          into a Beast. The target must succeed on a Wisdom saving throw or
+          shape-shift into a Beast form for the duration. That form can be any
+          Beast you choose that has a Challenge Rating equal to or less than the
+          target's (or the target's level if it doesn't have a Challenge
+          Rating). The target's game statistics are replaced by the stat block
+          of the chosen Beast, but the target retains its alignment,
+          personality, creature type, Hit Points, and Hit Point Dice. See
+          appendix B for a sample of Beast stat blocks.</p><p>The target gains a
+          number of Temporary Hit Points equal to the Hit Points of the Beast
+          form. These Temporary Hit Points vanish if any remain when the spell
+          ends. The spell ends early on the target if it has no Temporary Hit
+          Points left.</p><p>The target is limited in the actions it can perform
+          by the anatomy of its new form, and it can't speak or cast
+          spells.</p><p>The target's gear melds into the new form. The creature
+          can't use or otherwise benefit from any of that equipment.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: '1'
+        units: hour
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+          special: ''
+        template:
+          units: ft
+          contiguous: false
+          type: ''
+      range:
+        value: '60'
+        units: ft
+        special: ''
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 4
+      school: trs
+      properties:
+        - vocal
+        - somatic
+        - material
+        - concentration
+      materials:
+        value: a caterpillar cocoon
+        consumed: false
+        cost: 0
+        supply: 0
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects: []
+          range:
+            override: false
+            units: self
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          damage:
+            onSave: half
+            parts: []
+          save:
+            ability:
+              - wis
+            dc:
+              calculation: spellcasting
+              formula: ''
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: polymorph
+      method: spell
+      sourceClass: wizard
+      prepared: 1
+    _id: qmprmVEbmiHa4RZt
+    type: spell
+    img: icons/creatures/amphibians/frog-confused-green-blue.webp
+    effects: []
+    folder: qi3IbnEwap7mRw4b
+    sort: 1000000
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplPolymorph0
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!ZannaLv110000000.qmprmVEbmiHa4RZt'
+  - name: Wall of Force
+    system:
+      description:
+        value: >-
+          <p>An Invisible wall of force springs into existence at a point you
+          choose within range. The wall appears in any orientation you choose,
+          as a horizontal or vertical barrier or at an angle. It can be free
+          floating or resting on a solid surface. You can form it into a
+          hemispherical dome or a globe with a radius of up to 10 feet, or you
+          can shape a flat surface made up of ten 10-foot-by-10-foot panels.
+          Each panel must be contiguous with another panel. In any form, the
+          wall is 1/4 inch thick and lasts for the duration. If the wall cuts
+          through a creature's space when it appears, the creature is pushed to
+          one side of the wall (you choose which side).</p><p>Nothing can
+          physically pass through the wall. It is immune to all damage and can't
+          be dispelled by
+          <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDispelMagi]{Dispel
+          Magic}.</em> A
+          <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDisintegra]{Disintegrate}</em>
+          spell destroys the wall instantly, however. The wall also extends into
+          the Ethereal Plane and blocks ethereal travel through the wall.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: '10'
+        units: minute
+      target:
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        template:
+          units: ft
+          contiguous: false
+          type: ''
+      range:
+        units: ft
+        special: ''
+        value: '120'
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      level: 5
+      school: evo
+      properties:
+        - vocal
+        - somatic
+        - material
+        - concentration
+      materials:
+        value: a shard of glass
+        consumed: false
+        cost: 0
+        supply: 0
+      activities:
+        obcyQX0IlwinXINV:
+          type: utility
+          _id: obcyQX0IlwinXINV
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: sphere
+              size: '10'
+              count: ''
+            affects:
+              choice: false
+              count: ''
+              type: ''
+            override: true
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          name: Sphere or Globe
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+        O3uhE0OLzsAhHoAg:
+          type: utility
+          _id: O3uhE0OLzsAhHoAg
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+          target:
+            template:
+              contiguous: true
+              units: ft
+              type: wall
+              size: '10'
+              count: '10'
+              width: 1/12
+              height: '10'
+            affects:
+              choice: false
+              count: ''
+              type: ''
+              special: ''
+            override: true
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          name: Panels
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: wall-of-force
+      method: spell
+      sourceClass: wizard
+      prepared: 1
+    _id: pYErqk0ZFwt0bby8
+    type: spell
+    img: icons/magic/defensive/barrier-shield-dome-deflect-blue.webp
+    effects: []
+    folder: beZ8MTpWY2cMEUlp
+    sort: 100391
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplWallofForc
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!ZannaLv110000000.pYErqk0ZFwt0bby8'
+  - name: Arcane Hand
+    system:
+      description:
+        value: >-
+          <p>You create a Large hand of shimmering magical energy in an
+          unoccupied space that you can see within range. The hand lasts for the
+          duration, and it moves at your command, mimicking the movements of
+          your own hand.</p><p>The hand is an object that has AC 20 and Hit
+          Points equal to your Hit Point maximum. If it drops to 0 Hit Points,
+          the spell ends. The hand doesn't occupy its space.</p><p>When you cast
+          the spell and as a Bonus Action on your later turns, you can move the
+          hand up to 60 feet and then cause one of the following
+          effects:</p><p><strong>Clenched Fist
+          </strong>@Embed[Compendium.dnd5e.actors24.Actor.phbsplBigbysHand.Item.phbaoiClenchedFi
+          inline]</p><p><strong>Forceful Hand</strong>
+          @Embed[Compendium.dnd5e.actors24.Actor.phbsplBigbysHand.Item.phbaoiForcefulHa
+          inline]</p><p><strong>Grasping Hand</strong>
+          @Embed[Compendium.dnd5e.actors24.Actor.phbsplBigbysHand.Item.phbaoiGraspingHa
+          inline classes="no-secrets"]</p><p><strong>Interposing Hand
+          </strong>@Embed[Compendium.dnd5e.actors24.Actor.phbsplBigbysHand.Item.phbaoiInterposin
+          inline]</p><p><strong>Using a Higher-Level Spell Slot.</strong> The
+          damage of the Clenched Fist increases by 2d8 and the damage of the
+          Grasping Hand increases by 2d6 for each spell slot level above 5.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        page: ''
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: '1'
+        units: minute
+      target:
+        affects:
+          type: space
+          count: '1'
+          choice: false
+          special: ''
+        template:
+          units: ft
+          contiguous: false
+          type: ''
+      range:
+        value: '120'
+        units: ft
+        special: ''
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 5
+      school: evo
+      properties:
+        - vocal
+        - somatic
+        - material
+        - concentration
+      materials:
+        value: an eggshell and a glove
+        consumed: false
+        cost: 0
+        supply: 0
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: summon
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          range:
+            override: false
+            units: self
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          bonuses:
+            ac: ''
+            hd: ''
+            hp: '@attributes.hp.effectiveMax'
+            attackDamage: ''
+            saveDamage: ''
+            healing: ''
+          creatureSizes: []
+          creatureTypes: []
+          match:
+            proficiency: true
+            attacks: true
+            saves: true
+            disposition: false
+          profiles:
+            - count: ''
+              name: ''
+              _id: vQGgSbSWhF45U93e
+              uuid: Compendium.dnd5e.actors24.Actor.phbsplBigbysHand
+              level:
+                min: null
+                max: null
+              types: []
+          summon:
+            mode: ''
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+          effects: []
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: arcane-hand
+      method: spell
+      sourceClass: wizard
+      prepared: 1
+    _id: lUmT0wuFFoG2f9u9
+    type: spell
+    img: icons/magic/earth/strike-fist-stone.webp
+    effects: []
+    folder: beZ8MTpWY2cMEUlp
+    sort: 3500000
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplBigbysHand
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!ZannaLv110000000.lUmT0wuFFoG2f9u9'
+  - name: Telepathic Bond
+    system:
+      description:
+        value: >-
+          <p>You forge a telepathic link among up to eight willing creatures of
+          your choice within range, psychically linking each creature to all the
+          others for the duration. Creatures that can't communicate in any
+          languages aren't affected by this spell.</p><p>Until the spell ends,
+          the targets can communicate telepathically through the bond whether or
+          not they share a language. The communication is possible over any
+          distance, though it can't extend to other planes of existence.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        page: ''
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: '1'
+        units: hour
+      target:
+        affects:
+          choice: false
+          count: '8'
+          type: willing
+          special: ''
+        template:
+          units: ft
+          contiguous: false
+          type: ''
+      range:
+        units: ft
+        special: ''
+        value: '30'
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      level: 5
+      school: div
+      properties:
+        - vocal
+        - somatic
+        - material
+        - ritual
+      materials:
+        value: two eggs
+        consumed: false
+        cost: 0
+        supply: 0
+      activities:
+        6dIvsmkPQ0vMSjRK:
+          type: utility
+          _id: 6dIvsmkPQ0vMSjRK
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects:
+            - _id: 6DciPRMecBWvJCZq
+              level: {}
+          range:
+            override: false
+            units: self
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          name: Forge Telepathic Link
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: telepathic-bond
+      method: spell
+      sourceClass: wizard
+      prepared: 0
+    _id: 7bzDCjuS6Y9fR202
+    type: spell
+    img: icons/skills/social/diplomacy-handshake-gray.webp
+    effects:
+      - name: Bonded Telepathy
+        img: icons/skills/social/diplomacy-handshake-gray.webp
+        origin: Compendium.dnd5e.spells24.Item.phbsplRarysTelep
+        transfer: false
+        _id: 6DciPRMecBWvJCZq
+        type: base
+        system: {}
+        changes:
+          - key: system.traits.languages.custom
+            mode: 2
+            value: ;Bonded telepathy
+            priority: null
+        disabled: false
+        duration:
+          startTime: null
+          seconds: 3600
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        tint: '#ffffff'
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!ZannaLv110000000.7bzDCjuS6Y9fR202.6DciPRMecBWvJCZq
+    folder: beZ8MTpWY2cMEUlp
+    sort: 600000
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplRarysTelep
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!ZannaLv110000000.7bzDCjuS6Y9fR202'
+  - name: Scrying
+    system:
+      description:
+        value: >-
+          <p>You can see and hear a creature you choose that is on the same
+          plane of existence as you. The target makes a Wisdom saving throw,
+          which is modified (see the tables below) by how well you know the
+          target and the sort of physical connection you have to it. The target
+          doesn't know what it is making the save against, only that it feels
+          uneasy.</p><table><thead><tr><td>Your Knowledge of the Target Is
+          …</td><td>Save Modifier</td></tr></thead><tbody><tr><td>Secondhand
+          (heard of the target)</td><td>+5</td></tr><tr><td>Firsthand (met the
+          target)</td><td>+0</td></tr><tr><td>Extensive (know the target
+          well)</td><td>−5</td></tr></tbody></table><table><thead><tr><td>You
+          Have the Target's …</td><td>Save
+          Modifier</td></tr></thead><tbody><tr><td>Picture or other
+          likeness</td><td>−2</td></tr><tr><td>Garment or other
+          possession</td><td>−4</td></tr><tr><td>Body part, lock of hair, or bit
+          of nail</td><td>−10</td></tr></tbody></table><p>On a successful save,
+          the target isn't affected, and you can't use this spell on it again
+          for 24 hours.</p><p>On a failed save, the spell creates an Invisible,
+          intangible sensor within 10 feet of the target. You can see and hear
+          through the sensor as if you were there. The sensor moves with the
+          target, remaining within 10 feet of it for the duration. If something
+          can see the sensor, it appears as a luminous orb about the size of
+          your fist.</p><p>Instead of targeting a creature, you can target a
+          location you have seen. When you do so, the sensor appears at that
+          location and doesn't move.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 2
+      activation:
+        type: minute
+        condition: ''
+        value: 10
+      duration:
+        value: '10'
+        units: minute
+      target:
+        affects:
+          choice: false
+          count: '1'
+          type: any
+          special: creature on same plane of existence or a location you have seen
+        template:
+          units: ft
+          contiguous: false
+          type: ''
+      range:
+        units: self
+        special: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      level: 5
+      school: div
+      properties:
+        - vocal
+        - somatic
+        - material
+        - concentration
+      materials:
+        value: >-
+          a focus worth 1,000+ GP, such as a crystal ball, mirror, or
+          water-filled font
+        consumed: false
+        cost: 0
+        supply: 0
+      activities:
+        NeUDDgmX3BdnFGH4:
+          type: save
+          _id: NeUDDgmX3BdnFGH4
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects: []
+          range:
+            override: false
+            units: self
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          damage:
+            parts: []
+            onSave: half
+          save:
+            ability:
+              - wis
+            dc:
+              calculation: spellcasting
+              formula: '@attributes.spell.dc - 5 + 2'
+          name: Secondhand and Picture
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+        2CjCuSPwb4erFwZC:
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects: []
+          range:
+            override: false
+            units: self
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          damage:
+            parts: []
+            onSave: half
+          save:
+            ability:
+              - wis
+            dc:
+              calculation: custom
+              formula: '@attributes.spell.dc - 5 + 4'
+          name: Secondhand and Garment
+          _id: 2CjCuSPwb4erFwZC
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+        AwH5PhQZyU2ryO7X:
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects: []
+          range:
+            override: false
+            units: self
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          damage:
+            parts: []
+            onSave: half
+          save:
+            ability:
+              - wis
+            dc:
+              calculation: custom
+              formula: '@attributes.spell.dc - 5 + 10'
+          name: Secondhand and Body Part
+          _id: AwH5PhQZyU2ryO7X
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+        L9ejQXxfSH0qg8bB:
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects: []
+          range:
+            override: false
+            units: self
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          damage:
+            parts: []
+            onSave: half
+          save:
+            ability:
+              - wis
+            dc:
+              calculation: custom
+              formula: '@attributes.spell.dc - 0 + 2'
+          name: Firsthand and Picture
+          _id: L9ejQXxfSH0qg8bB
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+        QUv35ZZBe3gVvEzK:
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects: []
+          range:
+            override: false
+            units: self
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          damage:
+            parts: []
+            onSave: half
+          save:
+            ability:
+              - wis
+            dc:
+              calculation: custom
+              formula: '@attributes.spell.dc - 0 + 4'
+          name: Firsthand and Garment
+          _id: QUv35ZZBe3gVvEzK
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+        xhhjJb25roNtpn8g:
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects: []
+          range:
+            override: false
+            units: self
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          damage:
+            parts: []
+            onSave: half
+          save:
+            ability:
+              - wis
+            dc:
+              calculation: custom
+              formula: '@attributes.spell.dc - 0 + 10'
+          name: Firsthand and Body Part
+          _id: xhhjJb25roNtpn8g
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+        7wBprDveLHpbu6Z0:
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects: []
+          range:
+            override: false
+            units: self
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          damage:
+            parts: []
+            onSave: half
+          save:
+            ability:
+              - wis
+            dc:
+              calculation: custom
+              formula: '@attributes.spell.dc + 5 + 2'
+          name: Extensive and Picture
+          _id: 7wBprDveLHpbu6Z0
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+        QUhtomQ1kgxShABi:
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects: []
+          range:
+            override: false
+            units: self
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          damage:
+            parts: []
+            onSave: half
+          save:
+            ability:
+              - wis
+            dc:
+              calculation: custom
+              formula: '@attributes.spell.dc + 5 + 4'
+          name: Extensive and Garment
+          _id: QUhtomQ1kgxShABi
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+        LwyHxV46sddf89rc:
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects: []
+          range:
+            override: false
+            units: self
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          damage:
+            parts: []
+            onSave: half
+          save:
+            ability:
+              - wis
+            dc:
+              calculation: custom
+              formula: '@attributes.spell.dc + 5 + 10'
+          name: Extensive and Body Part
+          _id: LwyHxV46sddf89rc
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+        aeMjBXbdsC7SxTTv:
+          type: summon
+          _id: aeMjBXbdsC7SxTTv
+          activation:
+            type: ''
+            value: null
+            override: true
+            condition: ''
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          range:
+            override: false
+            units: self
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: '1'
+              type: space
+              special: at target location or within 10 feet of target creature
+            override: true
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          bonuses:
+            ac: ''
+            hd: ''
+            hp: ''
+            attackDamage: ''
+            saveDamage: ''
+            healing: ''
+          creatureSizes: []
+          creatureTypes: []
+          match:
+            attacks: false
+            proficiency: false
+            saves: false
+            disposition: false
+          profiles:
+            - count: ''
+              name: ''
+              _id: qLrzNj7kNKH7AlO9
+              uuid: Compendium.dnd5e.actors24.Actor.phbInvisibleSens
+              level:
+                min: null
+                max: null
+              types: []
+          summon:
+            prompt: true
+            mode: ''
+          name: Create Sensor
+          effects: []
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: scrying
+      method: spell
+      sourceClass: wizard
+      prepared: 0
+    _id: TEIyR7GWrDtqxMIX
+    type: spell
+    img: icons/magic/perception/orb-crystal-ball-scrying-blue.webp
+    effects: []
+    folder: beZ8MTpWY2cMEUlp
+    sort: 400000
+    flags: {}
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplScrying000
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!ZannaLv110000000.TEIyR7GWrDtqxMIX'
+  - name: Teleportation Circle
+    system:
+      description:
+        value: >-
+          <p>As you cast the spell, you draw a 5-foot-radius circle on the
+          ground inscribed with sigils that link your location to a permanent
+          teleportation circle of your choice whose sigil sequence you know and
+          that is on the same plane of existence as you. A shimmering portal
+          opens within the circle you drew and remains open until the end of
+          your next turn. Any creature that enters the portal instantly appears
+          within 5 feet of the destination circle or in the nearest unoccupied
+          space if that space is occupied.</p><p>Many major temples, guildhalls,
+          and other important places have permanent teleportation circles. Each
+          circle includes a unique sigil sequence—a string of runes arranged in
+          a particular pattern.</p><p>When you first gain the ability to cast
+          this spell, you learn the sigil sequences for two destinations on the
+          Material Plane, determined by the DM. You might learn additional sigil
+          sequences during your adventures. You can commit a new sigil sequence
+          to memory after studying it for 1 minute.</p><p>You can create a
+          permanent teleportation circle by casting this spell in the same
+          location every day for 365 days.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      activation:
+        type: minute
+        condition: ''
+        value: 1
+      duration:
+        value: '1'
+        units: round
+      target:
+        affects:
+          choice: false
+          count: ''
+          type: space
+          special: ''
+        template:
+          units: ft
+          contiguous: false
+          type: circle
+          size: '5'
+          count: ''
+          height: ''
+      range:
+        units: ft
+        special: ''
+        value: '10'
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      level: 5
+      school: con
+      properties:
+        - vocal
+        - material
+      materials:
+        value: rare inks worth 50+ GP, which the spell consumes
+        consumed: true
+        cost: 50
+        supply: 4
+      activities:
+        naWXNn0rMcVvKOi2:
+          type: utility
+          name: ''
+          _id: naWXNn0rMcVvKOi2
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description: {}
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+          roll:
+            prompt: false
+            visible: false
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: teleportation-circle
+      method: spell
+      sourceClass: wizard
+      prepared: 0
+      ability: ''
+    _id: aBtCCoP6iQvnacud
+    type: spell
+    img: icons/magic/symbols/runes-carved-stone-yellow.webp
+    effects: []
+    folder: beZ8MTpWY2cMEUlp
+    sort: 101563
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplTeleportat
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!ZannaLv110000000.aBtCCoP6iQvnacud'
+  - name: Chain Lightning
+    system:
+      description:
+        value: >-
+          <p>You launch a lightning bolt toward a target you can see within
+          range. Three bolts then leap from that target to as many as three
+          other targets of your choice, each of which must be within 30 feet of
+          the first target. A target can be a creature or an object and can be
+          targeted by only one of the bolts.</p><p>Each target makes a Dexterity
+          saving throw, taking 10d8 Lightning damage on a failed save or half as
+          much damage on a successful one.</p><p><strong>Using a Higher-Level
+          Spell Slot.</strong> One additional bolt leaps from the first target
+          to another target for each spell slot level above 6.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: ''
+        units: inst
+      target:
+        affects:
+          choice: false
+          count: '@item.level - 2'
+          type: creatureOrObject
+          special: secondary targets must be within 30 feet of initial target
+        template:
+          units: ft
+          contiguous: false
+          type: ''
+      range:
+        units: ft
+        special: ''
+        value: '150'
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      level: 6
+      school: evo
+      properties:
+        - vocal
+        - somatic
+        - material
+      materials:
+        value: three silver pins
+        consumed: false
+        cost: 0
+        supply: 0
+      activities:
+        3bSNutM8zsXK1UgP:
+          type: save
+          _id: 3bSNutM8zsXK1UgP
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          damage:
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 10
+                denomination: 8
+                bonus: '@abilities.int.mod'
+                types:
+                  - lightning
+                scaling:
+                  mode: ''
+                  number: 1
+            onSave: half
+          save:
+            ability:
+              - dex
+            dc:
+              calculation: spellcasting
+              formula: ''
+          name: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: chain-lightning
+      method: spell
+      sourceClass: wizard
+      prepared: 1
+    _id: vRzitFCQLEKTUFR5
+    type: spell
+    img: icons/magic/lightning/bolt-strike-sparks-teal.webp
+    effects: []
+    folder: 8WmlLARx1Df3Ii9v
+    sort: 2000000
+    flags: {}
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplChainLight
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!ZannaLv110000000.vRzitFCQLEKTUFR5'
+  - name: Mass Suggestion
+    system:
+      description:
+        value: >-
+          <p>You suggest a course of activity—described in no more than 25
+          words—to twelve or fewer creatures you can see within range that can
+          hear and understand you. The suggestion must sound achievable and not
+          involve anything that would obviously deal damage to any of the
+          targets or their allies. For example, you could say, "Walk to the
+          village down that road, and help the villagers there harvest crops
+          until sunset." Or you could say, "Now is not the time for violence.
+          Drop your weapons, and dance! Stop in an hour."</p><p>Each target must
+          succeed on a Wisdom saving throw or have the &amp;Reference[Charmed
+          apply=false] condition for the duration or until you or your allies
+          deal damage to the target. Each Charmed target pursues the suggestion
+          to the best of its ability. The suggested activity can continue for
+          the entire duration, but if the suggested activity can be completed in
+          a shorter time, the spell ends for a target upon completing
+          it.</p><p><strong>Using a Higher-Level Spell Slot.</strong> The
+          duration is longer with a spell slot of level 7 (10 days), 8 (30
+          days), or 9 (366 days).</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: '24'
+        units: hour
+        special: ''
+      target:
+        affects:
+          choice: false
+          count: '12'
+          type: creature
+          special: ''
+        template:
+          units: ft
+          contiguous: false
+          type: ''
+      range:
+        units: ft
+        special: ''
+        value: '60'
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      level: 6
+      school: enc
+      properties:
+        - vocal
+        - material
+      materials:
+        value: a snake’s tongue
+        consumed: false
+        cost: 0
+        supply: 0
+      activities:
+        OLcbp8SQOX4EwM13:
+          type: save
+          _id: OLcbp8SQOX4EwM13
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects:
+            - _id: kkxX701wci61fEvH
+              level: {}
+              onSave: false
+          range:
+            override: false
+            units: self
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          damage:
+            parts: []
+            onSave: none
+          save:
+            ability:
+              - wis
+            dc:
+              calculation: spellcasting
+              formula: ''
+          name: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: mass-suggestion
+      method: spell
+      sourceClass: wizard
+      prepared: 1
+    _id: r58FkxeVcprI1yop
+    type: spell
+    img: icons/environment/people/charge.webp
+    effects:
+      - name: Charmed
+        img: systems/dnd5e/icons/svg/statuses/charmed.svg
+        origin: Compendium.dnd5e.spells24.Item.phbsplMassSugges
+        transfer: false
+        _id: kkxX701wci61fEvH
+        type: base
+        system: {}
+        changes: []
+        disabled: false
+        duration:
+          startTime: null
+          seconds: 86400
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: >-
+          <p>The target has the &amp;Reference[Charmed apply=false] condition
+          for the duration or until you or your allies deal damage to the
+          target. Each Charmed target pursues the suggestion to the best of its
+          ability.</p>
+        tint: '#ffffff'
+        statuses:
+          - charmed
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!ZannaLv110000000.r58FkxeVcprI1yop.kkxX701wci61fEvH
+    folder: 8WmlLARx1Df3Ii9v
+    sort: 300000
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplMassSugges
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!ZannaLv110000000.r58FkxeVcprI1yop'
+  - _id: pGFxB8KK1zKPvxkf
+    name: Bracers of Defense
+    type: equipment
+    folder: U4xmShLy19Ry54zl
+    img: icons/equipment/wrist/bracer-yellow-fancy.webp
+    system:
+      activities: {}
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      description:
+        value: >-
+          <div><p><em>Wondrous Item, Rare (Requires
+          Attunement)</em></p></div><p>While wearing these bracers, you gain a
+          +2 bonus to Armor Class if you are wearing no armor and using no
+          Shield.</p>
+        chat: ''
+      identifier: bracers-of-defense
+      source:
+        revision: 1
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 1
+        units: lb
+      price:
+        value: 4000
+        denomination: gp
+      rarity: rare
+      attunement: required
+      armor:
+        value: null
+        magicalBonus: null
+        dex: null
+      cover: null
+      hp:
+        value: null
+        max: null
+        dt: null
+        conditions: ''
+      type:
+        value: wondrous
+        baseItem: ''
+      properties:
+        - mgc
+      strength: null
+      proficient: null
+      crew:
+        value: []
+      attuned: true
+      equipped: true
+    effects:
+      - name: Bonus AC (Unarmored)
+        img: icons/skills/melee/shield-block-bash-blue.webp
+        _id: ycuTEJoi9a8BO6xg
+        type: base
+        system: {}
+        changes:
+          - key: system.attributes.ac.bonus
+            mode: 2
+            value: '2'
+            priority: null
+        disabled: false
+        duration:
+          startTime: 0
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        origin: null
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!ZannaLv110000000.pGFxB8KK1zKPvxkf.ycuTEJoi9a8BO6xg
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.equipment24.Item.dmgBracersOfDefe
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 4500000
+    ownership:
+      default: 0
+    _key: '!actors.items!ZannaLv110000000.pGFxB8KK1zKPvxkf'
+  - _id: 0BiqNIUs9Epb5jTH
+    name: Decanter of Endless Water
+    type: equipment
+    folder: U4xmShLy19Ry54zl
+    img: icons/consumables/potions/potion-flask-corked-blue.webp
+    system:
+      activities:
+        kqYptkTCtiFTlZJV:
+          type: utility
+          _id: kqYptkTCtiFTlZJV
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+              max: '5'
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: 1 gallon of water
+          duration:
+            units: round
+            concentration: false
+            override: false
+            value: '1'
+          effects: []
+          range:
+            override: false
+            units: touch
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: '1'
+              type: object
+              special: The Decanter of Endless Water
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          name: Splash
+          visibility:
+            requireMagic: true
+            level:
+              min: null
+              max: null
+            identifier: ''
+            requireIdentification: true
+            requireAttunement: false
+          flags: {}
+        PdtjMpg7Bcqa1AVp:
+          type: utility
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+              max: '5'
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: 5 gallon of water
+          duration:
+            units: round
+            concentration: false
+            override: false
+            value: '1'
+          effects: []
+          range:
+            override: false
+            units: touch
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: '1'
+              type: object
+              special: The Decanter of Endless Water
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          roll:
+            prompt: false
+            visible: false
+            formula: ''
+            name: ''
+          name: Fountain
+          _id: PdtjMpg7Bcqa1AVp
+          visibility:
+            requireMagic: true
+            level:
+              min: null
+              max: null
+            identifier: ''
+            requireIdentification: true
+            requireAttunement: false
+          flags: {}
+        QObmaE8dWI8pIXFE:
+          type: save
+          name: Geyser
+          _id: QObmaE8dWI8pIXFE
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: 30 gallons; save vs &Reference[prone]
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: line
+              size: '30'
+              width: '1'
+              count: ''
+            affects:
+              choice: true
+              count: '1'
+              type: creatureOrObject
+              special: One creature or object of your choice in the Line
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          damage:
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
+                denomination: 4
+                bonus: ''
+                types:
+                  - bludgeoning
+                scaling:
+                  number: 1
+            onSave: none
+          save:
+            ability:
+              - str
+            dc:
+              calculation: ''
+              formula: '13'
+          visibility:
+            requireMagic: true
+            level:
+              min: null
+              max: null
+            identifier: ''
+            requireIdentification: true
+            requireAttunement: false
+          flags: {}
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      description:
+        value: >-
+          <div><p><em>Wondrous Item, Uncommon</em></p></div><p>This stoppered
+          flask sloshes when shaken, as if it contains water. The decanter
+          weighs 2 pounds.</p><p>You can take a Magic action to remove the
+          stopper and issue one of three command words, whereupon an amount of
+          @UUID[Compendium.dnd5e.equipment24.Item.dmgspWaterfresh0]{fresh water}
+          or @UUID[Compendium.dnd5e.equipment24.Item.dmgspWatersalt00]{salt
+          water} (your choice) pours out of the flask. The water stops pouring
+          out at the start of your next turn. Choose from the following command
+          words:</p><div class="def-block"><p><strong>Splash.</strong> The
+          decanter produces 1 gallon of water.</p><p><strong>Fountain.</strong>
+          The decanter produces 5 gallons of
+          water.</p><p><strong>Geyser.</strong> The decanter produces 30 gallons
+          of water that gushes forth in a Line 30 feet long and 1 foot wide. If
+          you're holding the decanter, you can aim the geyser in one direction
+          (no action required). One creature of your choice in the Line must
+          succeed on a DC 13 Strength saving throw or take 1d4 Bludgeoning
+          damage and have the &amp;Reference[Prone] condition. Instead of a
+          creature, you can target one object in the Line that isn't being worn
+          or carried and that weighs no more than 200 pounds. The object is
+          knocked over by the geyser.</p></div>
+        chat: ''
+      identifier: decanter-of-endless-water
+      source:
+        revision: 1
+        rules: '2024'
+        book: ''
+        license: CC-BY-4.0
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 2
+        units: lb
+      price:
+        value: 400
+        denomination: gp
+      rarity: uncommon
+      attunement: ''
+      type:
+        value: wondrous
+        baseItem: ''
+      properties:
+        - mgc
+      crew:
+        value: []
+      armor:
+        value: null
+        dex: null
+      proficient: null
+      strength: null
+      attuned: false
+      equipped: false
+    effects: []
+    flags: {}
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.equipment24.Item.dmgDecanterOfEnd
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 38300000
+    ownership:
+      default: 0
+    _key: '!actors.items!ZannaLv110000000.0BiqNIUs9Epb5jTH'
+  - _id: DD55foUO84XTkLcZ
+    name: Immovable Rod
+    type: equipment
+    folder: XVIITMl9kCCSjZQz
+    img: icons/commodities/tech/pipe-lead-closed.webp
+    system:
+      activities:
+        a9ZLyGvSKD1k33nC:
+          type: utility
+          name: Make Immovable
+          _id: a9ZLyGvSKD1k33nC
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            special: ''
+            units: self
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          visibility:
+            requireMagic: true
+            level:
+              min: null
+              max: null
+            identifier: ''
+            requireAttunement: false
+            requireIdentification: false
+          flags: {}
+        PweONVtDaHGqDRnZ:
+          type: check
+          name: Attempt to Move
+          _id: PweONVtDaHGqDRnZ
+          sort: 0
+          activation:
+            type: ''
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: ''
+              type: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          check:
+            associated:
+              - ath
+            dc:
+              calculation: ''
+              formula: '30'
+            ability: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      description:
+        value: >-
+          <p><em>Rod, Uncommon</em></p><p>This iron rod has a button on one end.
+          You can take a Utilize action to press the button, which causes the
+          rod to become magically fixed in place. Until you or another creature
+          takes a Utilize action to push the button again, the rod doesn't move,
+          even if it defies gravity. The rod can hold up to 8,000 pounds of
+          weight. More weight causes the rod to deactivate and fall. A creature
+          can take a Utilize action to make a DC 30 Strength (Athletics) check,
+          moving the fixed rod up to 10 feet on a successful check.</p>
+        chat: ''
+      identifier: immovable-rod
+      source:
+        revision: 1
+        rules: '2024'
+        book: ''
+        license: CC-BY-4.0
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 0
+        units: lb
+      price:
+        value: 0
+        denomination: gp
+      rarity: uncommon
+      attunement: ''
+      armor:
+        value: null
+        magicalBonus: null
+        dex: null
+      cover: null
+      hp:
+        value: null
+        max: null
+        dt: null
+        conditions: ''
+      type:
+        value: rod
+        baseItem: ''
+      properties:
+        - foc
+        - mgc
+      strength: null
+      proficient: null
+      crew:
+        value: []
+      attuned: false
+      equipped: false
+    effects: []
+    flags: {}
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.equipment24.Item.dmgImmovableRod0
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 300000
+    ownership:
+      default: 0
+    _key: '!actors.items!ZannaLv110000000.DD55foUO84XTkLcZ'
+  - _id: ipZ7TVni2ovogdWT
+    name: Amulet of Health
+    type: equipment
+    folder: U4xmShLy19Ry54zl
+    img: icons/equipment/neck/pendant-faceted-red.webp
+    system:
+      activities: {}
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      description:
+        value: >-
+          <p><em>Wondrous Item, Rare (Requires Attunement)</em></p><p>Your
+          Constitution is 19 while you wear this amulet. It has no effect on you
+          if your Constitution is 19 or higher without it.</p>
+        chat: ''
+      identifier: amulet-of-health
+      source:
+        revision: 1
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 0
+        units: lb
+      price:
+        value: 4000
+        denomination: gp
+      rarity: rare
+      attunement: required
+      armor:
+        value: null
+        magicalBonus: null
+        dex: null
+      cover: null
+      hp:
+        value: null
+        max: null
+        dt: null
+        conditions: ''
+      type:
+        value: wondrous
+        baseItem: ''
+      properties:
+        - mgc
+      strength: null
+      proficient: null
+      crew:
+        value: []
+      attuned: true
+      equipped: true
+    effects:
+      - name: Upgraded Constitution
+        img: icons/magic/life/heart-shadow-red.webp
+        _id: ObtXWapsou2jYoip
+        type: base
+        system: {}
+        changes:
+          - key: system.abilities.con.value
+            mode: 4
+            value: '19'
+            priority: null
+        disabled: false
+        duration:
+          startTime: 0
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        origin: null
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!ZannaLv110000000.ipZ7TVni2ovogdWT.ObtXWapsou2jYoip
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.equipment24.Item.dmgAmuletOfHealt
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 1500000
+    ownership:
+      default: 0
+    _key: '!actors.items!ZannaLv110000000.ipZ7TVni2ovogdWT'
+  - name: 'Component: Incense'
+    type: loot
+    _id: 8PodvhALV9sD7qCm
+    img: icons/commodities/materials/bowl-powder-gold.webp
+    system:
+      description:
+        value: ''
+        chat: ''
+      identifier: component-incense
+      source:
+        revision: 1
+        rules: '2024'
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 4
+      weight:
+        value: 0
+        units: lb
+      price:
+        value: 25
+        denomination: gp
+      rarity: ''
+      properties: []
+      type:
+        value: material
+        subtype: ''
+    effects: []
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.actors24.Actor.ZannaLv110000000.Item.97fxNYRfyUMxf0e9
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!ZannaLv110000000.8PodvhALV9sD7qCm'
+  - name: 'Component: Crystal Ball'
+    type: loot
+    _id: vz2Z7NAsB26gnI3p
+    img: icons/commodities/materials/glass-orb.webp
+    system:
+      description:
+        value: ''
+        chat: ''
+      identifier: component-crystal-ball
+      source:
+        revision: 1
+        rules: '2024'
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 0
+        units: lb
+      price:
+        value: 1000
+        denomination: gp
+      rarity: ''
+      properties: []
+      type:
+        value: ''
+        subtype: ''
+    effects: []
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!ZannaLv110000000.vz2Z7NAsB26gnI3p'
+  - name: 'Component: Rare Inks'
+    type: loot
+    _id: 5aqYMghPdrSHeD3f
+    img: icons/tools/scribal/ink-quill-red.webp
+    system:
+      description:
+        value: ''
+        chat: ''
+      identifier: component-rare-inks
+      source:
+        revision: 1
+        rules: '2024'
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 4
+      weight:
+        value: 0
+        units: lb
+      price:
+        value: 50
+        denomination: gp
+      rarity: ''
+      properties: []
+      type:
+        value: ''
+        subtype: ''
+    effects: []
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!ZannaLv110000000.5aqYMghPdrSHeD3f'
+  - name: Sending
+    system:
+      description:
+        value: >-
+          <p>You send a short message of 25 words or fewer to a creature you
+          have met or a creature described to you by someone who has met it. The
+          target hears the message in its mind, recognizes you as the sender if
+          it knows you, and can answer in a like manner immediately. The spell
+          enables targets to understand the meaning of your message.</p><p>You
+          can send the message across any distance and even to other planes of
+          existence, but if the target is on a different plane than you, there
+          is a 5 percent chance that the message doesn't arrive. You know if the
+          delivery fails.</p><p>Upon receiving your message, a creature can
+          block your ability to reach it again with this spell for 8 hours. If
+          you try to send another message during that time, you learn that you
+          are blocked, and the spell fails.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: ''
+        units: inst
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+        template:
+          units: ft
+          contiguous: false
+      range:
+        units: any
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 3
+      school: div
+      properties:
+        - vocal
+        - somatic
+        - material
+      materials:
+        value: a copper wire
+        consumed: false
+        cost: 0
+        supply: 0
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects: []
+          range:
+            override: false
+            units: self
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          roll:
+            formula: 1d20cs>1
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: sending
+      method: spell
+      sourceClass: wizard
+      prepared: 0
+    _id: M0JYwJnw6g8PHGHY
+    type: spell
+    img: icons/skills/social/diplomacy-writing-letter.webp
+    effects: []
+    folder: HCovEE4VoPGlIbKi
+    sort: 150000
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplSending000
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!ZannaLv110000000.M0JYwJnw6g8PHGHY'
+  - name: Case, Map or Scroll
+    system:
+      description:
+        value: >-
+          <p>A Map or Scroll Case holds up to 10 sheets of paper or 5 sheets of
+          parchment.</p>
+        chat: ''
+      price:
+        value: 1
+        denomination: gp
+      quantity: 1
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      weight:
+        value: 1
+        units: lb
+      rarity: ''
+      attunement: ''
+      currency:
+        pp: 0
+        gp: 0
+        ep: 0
+        sp: 0
+        cp: 0
+      properties: []
+      capacity:
+        count: 10
+        volume:
+          units: cubicFoot
+        weight:
+          units: lb
+      identifier: case-map-or-scroll
+      attuned: false
+      equipped: false
+    _id: aPrpsxvxXaDAI9xo
+    type: container
+    folder: uDk4FBYfcP2JnX6t
+    img: icons/containers/bags/case-leather-tan.webp
+    effects: []
+    sort: 800000
+    flags: {}
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.equipment24.Item.phbagCaseMaporSc
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!ZannaLv110000000.aPrpsxvxXaDAI9xo'
+  - name: Parchment
+    system:
+      description:
+        value: <p>One sheet of Parchment can hold about 250 handwritten words.</p>
+        chat: ''
+      price:
+        value: 1
+        denomination: sp
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      identified: true
+      unidentified:
+        description: ''
+      container: aPrpsxvxXaDAI9xo
+      quantity: 10
+      weight:
+        value: 0
+        units: lb
+      rarity: ''
+      properties: []
+      type:
+        value: gear
+        subtype: ''
+      identifier: parchment
+    _id: 8Z34nyKAROvXUs0q
+    type: loot
+    folder: null
+    img: icons/sundries/scrolls/scroll-plain-tan.webp
+    effects: []
+    sort: 4300000
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.actors24.Actor.ZannaLv110000000.Item.z4x5UJEoRlikfbVH
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!ZannaLv110000000.8Z34nyKAROvXUs0q'
 effects: []
 flags: {}
 _stats:
@@ -8742,12 +12873,12 @@ _stats:
   coreVersion: '13.351'
   systemId: dnd5e
   systemVersion: 5.2.4
-  createdTime: 1766974634761
-  modifiedTime: 1766974634761
+  createdTime: 1768692442899
+  modifiedTime: 1768692442899
   lastModifiedBy: dnd5ebuilder0000
 img: null
-folder: JRPsXXWuBa56FSZb
+folder: 1EDP5HqqwXarG88N
 ownership:
   default: 0
 sort: 0
-_key: '!actors!ZannaLv050000000'
+_key: '!actors!ZannaLv110000000'

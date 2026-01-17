@@ -1,12 +1,12 @@
 name: Quillathe
 type: character
-_id: QuillatheLv05000
+_id: QuillatheLv11000
 system:
   currency:
     pp: 0
-    gp: 133
+    gp: 326
     ep: 0
-    sp: 5
+    sp: 0
     cp: 0
   abilities:
     str:
@@ -27,7 +27,7 @@ system:
           max: null
           mode: 0
     dex:
-      value: 19
+      value: 20
       proficient: 1
       max: null
       bonuses:
@@ -78,7 +78,7 @@ system:
           max: null
           mode: 0
     wis:
-      value: 14
+      value: 15
       proficient: 0
       max: null
       bonuses:
@@ -297,7 +297,7 @@ system:
         min: null
         max: null
         mode: 0
-      value: 1
+      value: 2
       bonuses:
         check: ''
         passive: ''
@@ -307,7 +307,7 @@ system:
         min: null
         max: null
         mode: 0
-      value: 1
+      value: 2
       bonuses:
         check: ''
         passive: ''
@@ -325,9 +325,9 @@ system:
     spell1:
       value: 4
     spell2:
-      value: 2
+      value: 3
     spell3:
-      value: 0
+      value: 3
     spell4:
       value: 0
     spell5:
@@ -382,7 +382,7 @@ system:
       max: null
       temp: null
       tempmax: 0
-      value: 44
+      value: 92
       bonuses: {}
     death:
       roll:
@@ -412,7 +412,7 @@ system:
     background: WSfqg4qp13LFdc3N
     originalClass: NuNBKjUuSNIRsF9M
     xp:
-      value: 6500
+      value: 85000
     appearance: ''
     trait: ''
     gender: ''
@@ -500,6 +500,9 @@ system:
     - type: activity
       id: .Item.xge2yOOVa1Iql8ni.Activity.Ek6m8ZY5Df7Mp6DO
       sort: 200000
+    - type: item
+      id: .Item.RX3hooTuvzz4gMZN
+      sort: 275000
 prototypeToken:
   name: Quillathe
   displayName: 20
@@ -742,7 +745,7 @@ items:
     _id: WSfqg4qp13LFdc3N
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.WSfqg4qp13LFdc3N'
+    _key: '!actors.items!QuillatheLv11000.WSfqg4qp13LFdc3N'
   - name: Alert
     system:
       description:
@@ -824,7 +827,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!QuillatheLv05000.6156HtS7RvjQ7nhJ.uvZy4Zzi0oPd54qs
+          !actors.items.effects!QuillatheLv11000.6156HtS7RvjQ7nhJ.uvZy4Zzi0oPd54qs
     folder: d5jrO8A6QpjEV9rn
     sort: 100000
     flags:
@@ -842,7 +845,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.6156HtS7RvjQ7nhJ'
+    _key: '!actors.items!QuillatheLv11000.6156HtS7RvjQ7nhJ'
   - _id: tFVkCkuuFo4ucCrc
     name: Elf, Wood
     type: race
@@ -1041,7 +1044,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.tFVkCkuuFo4ucCrc'
+    _key: '!actors.items!QuillatheLv11000.tFVkCkuuFo4ucCrc'
   - _id: OrvIOpUeM5cG1Wv4
     name: Fey Ancestry
     type: feat
@@ -1093,7 +1096,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.OrvIOpUeM5cG1Wv4'
+    _key: '!actors.items!QuillatheLv11000.OrvIOpUeM5cG1Wv4'
   - _id: Qx4tiV5PQRuSITm0
     name: Keen Senses
     type: feat
@@ -1147,7 +1150,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.Qx4tiV5PQRuSITm0'
+    _key: '!actors.items!QuillatheLv11000.Qx4tiV5PQRuSITm0'
   - _id: QlqvrqI45M73gIf1
     name: Trance
     type: feat
@@ -1200,7 +1203,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.QlqvrqI45M73gIf1'
+    _key: '!actors.items!QuillatheLv11000.QlqvrqI45M73gIf1'
   - _id: yZDehDwaUdd4HT1b
     name: Elven Lineage, Wood Elf
     type: feat
@@ -1269,7 +1272,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.yZDehDwaUdd4HT1b'
+    _key: '!actors.items!QuillatheLv11000.yZDehDwaUdd4HT1b'
   - _id: NuNBKjUuSNIRsF9M
     name: Ranger
     type: class
@@ -1398,7 +1401,7 @@ items:
           group: WFIcVPxUX9AVm6Bi
           sort: 1000000
       identifier: ranger
-      levels: 5
+      levels: 11
       advancement:
         - _id: tGf0hPcdu2TIQdgN
           type: HitPoints
@@ -1409,6 +1412,12 @@ items:
             '3': avg
             '4': avg
             '5': avg
+            '6': avg
+            '7': avg
+            '8': avg
+            '9': avg
+            '10': avg
+            '11': avg
         - _id: R77BAIzMfcPq0urg
           type: ItemGrant
           configuration:
@@ -1465,7 +1474,9 @@ items:
                 optional: false
             optional: false
             spell: null
-          value: {}
+          value:
+            added:
+              FQhcgSTOwqlAuxp2: Compendium.dnd5e.classes24.Item.phbrgrRoving0000
           level: 6
           title: Class Features
         - _id: fy2LFc8UC9PTq4aF
@@ -1476,7 +1487,9 @@ items:
                 optional: false
             optional: false
             spell: null
-          value: {}
+          value:
+            added:
+              J30mto68q7fsbZAG: Compendium.dnd5e.classes24.Item.phbrgrExpertise0
           level: 9
           title: Class Features
         - _id: Yscwm2LPBUNjW0pk
@@ -1490,7 +1503,9 @@ items:
                 pool:
                   - skills:*
           value:
-            chosen: []
+            chosen:
+              - skills:ste
+              - skills:sur
           level: 9
           title: Expertise
         - _id: tfv4CeK2F4fdZMMi
@@ -1501,7 +1516,9 @@ items:
                 optional: false
             optional: false
             spell: null
-          value: {}
+          value:
+            added:
+              RX3hooTuvzz4gMZN: Compendium.dnd5e.classes24.Item.phbrgrTireless00
           level: 10
           title: Class Features
         - _id: yMKZmo7nE6oSFMD0
@@ -1595,6 +1612,9 @@ items:
             recommendation: null
           value:
             type: asi
+            assignments:
+              dex: 1
+              wis: 1
           level: 8
           title: ''
         - _id: mhZh3LfLMa15tXee
@@ -1980,7 +2000,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.NuNBKjUuSNIRsF9M'
+    _key: '!actors.items!QuillatheLv11000.NuNBKjUuSNIRsF9M'
   - name: Druidcraft
     system:
       description:
@@ -2117,7 +2137,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.kEjBWiTMcmhrI5w4'
+    _key: '!actors.items!QuillatheLv11000.kEjBWiTMcmhrI5w4'
   - _id: HAXlit2SO8luWUtO
     name: Spellcasting
     type: feat
@@ -2201,7 +2221,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.HAXlit2SO8luWUtO'
+    _key: '!actors.items!QuillatheLv11000.HAXlit2SO8luWUtO'
   - _id: o0bC09CnUpZ4wvDt
     name: Favored Enemy
     type: feat
@@ -2263,7 +2283,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.o0bC09CnUpZ4wvDt'
+    _key: '!actors.items!QuillatheLv11000.o0bC09CnUpZ4wvDt'
   - _id: uHY0uPusihtnVQkp
     name: Weapon Mastery
     type: feat
@@ -2320,7 +2340,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.uHY0uPusihtnVQkp'
+    _key: '!actors.items!QuillatheLv11000.uHY0uPusihtnVQkp'
   - name: Hunter's Mark
     system:
       description:
@@ -2608,7 +2628,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!QuillatheLv05000.iCf450qECu1PRkAZ.vPkln6UeePHnbLr4
+          !actors.items.effects!QuillatheLv11000.iCf450qECu1PRkAZ.vPkln6UeePHnbLr4
     folder: pBaAAtXBCq9FVEnL
     sort: 1900000
     flags:
@@ -2626,7 +2646,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.iCf450qECu1PRkAZ'
+    _key: '!actors.items!QuillatheLv11000.iCf450qECu1PRkAZ'
   - name: Cure Wounds
     system:
       description:
@@ -2752,7 +2772,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.2KxozSkbJhhPD7Zb'
+    _key: '!actors.items!QuillatheLv11000.2KxozSkbJhhPD7Zb'
   - name: Ensnaring Strike
     system:
       description:
@@ -2988,7 +3008,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!QuillatheLv05000.EBgpZ648SEfydQRq.tFGMG3cjQTEeAhv2
+          !actors.items.effects!QuillatheLv11000.EBgpZ648SEfydQRq.tFGMG3cjQTEeAhv2
     folder: pBaAAtXBCq9FVEnL
     sort: 3500000
     flags: {}
@@ -3002,7 +3022,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.EBgpZ648SEfydQRq'
+    _key: '!actors.items!QuillatheLv11000.EBgpZ648SEfydQRq'
   - name: Herbalism Kit
     system:
       description:
@@ -3129,7 +3149,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.unYsJXqTKiLwFGEu'
+    _key: '!actors.items!QuillatheLv11000.unYsJXqTKiLwFGEu'
   - name: Clothes, Traveler's
     system:
       description:
@@ -3203,7 +3223,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.8OhoDlMp6n7S6vkp'
+    _key: '!actors.items!QuillatheLv11000.8OhoDlMp6n7S6vkp'
   - _id: C9uK2B5CpCVfyrnm
     name: Net
     type: equipment
@@ -3360,7 +3380,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!QuillatheLv05000.C9uK2B5CpCVfyrnm.67ofG0FVqrrkAHKa
+          !actors.items.effects!QuillatheLv11000.C9uK2B5CpCVfyrnm.67ofG0FVqrrkAHKa
     folder: uDk4FBYfcP2JnX6t
     flags: {}
     _stats:
@@ -3374,7 +3394,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.C9uK2B5CpCVfyrnm'
+    _key: '!actors.items!QuillatheLv11000.C9uK2B5CpCVfyrnm'
   - name: Studded Leather Armor
     system:
       description:
@@ -3433,7 +3453,66 @@ items:
     type: equipment
     folder: G3X11BbtmEqLmEnK
     img: icons/equipment/chest/breastplate-rivited-red.webp
-    effects: []
+    effects:
+      - type: enchantment
+        name: Armor +1
+        img: systems/dnd5e/icons/spell-tiers/spell3.webp
+        disabled: false
+        _id: Ia22qJNjjPZu6Ecu
+        system: {}
+        changes:
+          - key: name
+            mode: 5
+            value: '{} +1'
+            priority: null
+          - key: system.rarity
+            mode: 5
+            value: rare
+            priority: null
+          - key: system.description.value
+            mode: 5
+            value: >-
+              {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgArmor12or3000
+              caption=false]</p>
+            priority: null
+          - key: system.properties
+            mode: 2
+            value: mgc
+            priority: null
+          - key: system.armor.magicalBonus
+            mode: 4
+            value: '1'
+            priority: null
+          - key: system.price.value
+            mode: 2
+            value: '4000'
+            priority: null
+        duration:
+          startTime: null
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        origin: Compendium.dnd5e.equipment24.Item.dmgArmor12or3000
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: >-
+            Compendium.dnd5e.equipment24.Item.dmgArmor12or3000.ActiveEffect.6JbAzK6YBkyx73iy
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!QuillatheLv11000.zLB9qhJw8z2FSbCO.Ia22qJNjjPZu6Ecu
     sort: 0
     flags: {}
     _stats:
@@ -3446,7 +3525,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.zLB9qhJw8z2FSbCO'
+    _key: '!actors.items!QuillatheLv11000.zLB9qhJw8z2FSbCO'
   - name: Scimitar
     system:
       description:
@@ -3614,7 +3693,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.D3zED6xcDPkysnuj'
+    _key: '!actors.items!QuillatheLv11000.D3zED6xcDPkysnuj'
   - name: Shortsword
     system:
       description:
@@ -3782,7 +3861,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.lERu2Skz1q5s9egL'
+    _key: '!actors.items!QuillatheLv11000.lERu2Skz1q5s9egL'
   - name: Longbow
     system:
       description:
@@ -3939,7 +4018,70 @@ items:
     type: weapon
     folder: 0qKr1rbesCSNE0MA
     img: icons/weapons/bows/longbow-recurve-leather-brown.webp
-    effects: []
+    effects:
+      - type: enchantment
+        name: Vicious Weapon
+        img: systems/dnd5e/icons/spell-tiers/spell3.webp
+        disabled: false
+        _id: gqyFZ7nuMpEXPwbz
+        system: {}
+        changes:
+          - key: name
+            mode: 5
+            value: Vicious {}
+            priority: null
+          - key: system.rarity
+            mode: 5
+            value: rare
+            priority: null
+          - key: system.description.value
+            mode: 5
+            value: >-
+              {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgViciousWeapon
+              caption=false]</p>
+            priority: null
+          - key: system.properties
+            mode: 2
+            value: mgc
+            priority: null
+          - key: system.damage.base.bonus
+            mode: 2
+            value: 2d6
+            priority: null
+          - key: system.price.value
+            mode: 2
+            value: '4000'
+            priority: null
+          - key: system.price.denomination
+            mode: 5
+            value: gp
+            priority: null
+        duration:
+          startTime: null
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        origin: Compendium.dnd5e.equipment24.Item.dmgViciousWeapon
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: >-
+            Compendium.dnd5e.equipment24.Item.dmgViciousWeapon.ActiveEffect.CzJMRNHYWlVNvnJN
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!QuillatheLv11000.qdxxGDu9tguu68Fu.gqyFZ7nuMpEXPwbz
     sort: 0
     flags: {}
     _stats:
@@ -3952,7 +4094,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.qdxxGDu9tguu68Fu'
+    _key: '!actors.items!QuillatheLv11000.qdxxGDu9tguu68Fu'
   - name: Arrows
     system:
       description:
@@ -4026,7 +4168,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.WiXfB8xRlPdC7kiB'
+    _key: '!actors.items!QuillatheLv11000.WiXfB8xRlPdC7kiB'
   - name: Sprig of mistletoe
     system:
       description:
@@ -4102,7 +4244,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.pie1jETwfFOgm3Ea'
+    _key: '!actors.items!QuillatheLv11000.pie1jETwfFOgm3Ea'
   - name: Explorer's Pack
     system:
       description:
@@ -4172,7 +4314,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.friHHTqUU9vmohfg'
+    _key: '!actors.items!QuillatheLv11000.friHHTqUU9vmohfg'
   - name: Tinderbox
     system:
       description:
@@ -4301,7 +4443,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.hc8MggfBaxwCzCHA'
+    _key: '!actors.items!QuillatheLv11000.hc8MggfBaxwCzCHA'
   - name: Rope
     system:
       description:
@@ -4542,7 +4684,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.NQXrw78HaPfjDwCR'
+    _key: '!actors.items!QuillatheLv11000.NQXrw78HaPfjDwCR'
   - name: Bedroll
     system:
       description:
@@ -4592,7 +4734,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.lSEr732XDGJKNopc'
+    _key: '!actors.items!QuillatheLv11000.lSEr732XDGJKNopc'
   - name: Waterskin
     system:
       description:
@@ -4652,7 +4794,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.KaPzoh8WPLzQEWMu'
+    _key: '!actors.items!QuillatheLv11000.KaPzoh8WPLzQEWMu'
   - name: Water (Pint)
     type: consumable
     img: icons/magic/water/water-drop-swirl-blue.webp
@@ -4775,7 +4917,7 @@ items:
     sort: 100000
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.6kKffxM60Oq7uyzV'
+    _key: '!actors.items!QuillatheLv11000.6kKffxM60Oq7uyzV'
   - name: Torch
     system:
       description:
@@ -4928,7 +5070,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.sMFxms44gxWpPEzK'
+    _key: '!actors.items!QuillatheLv11000.sMFxms44gxWpPEzK'
   - name: Oil
     system:
       description:
@@ -5145,7 +5287,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.IllhigPdXlPBx5Mu'
+    _key: '!actors.items!QuillatheLv11000.IllhigPdXlPBx5Mu'
   - name: Rations
     system:
       description:
@@ -5214,7 +5356,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.biyQChEtJrhkkj9X'
+    _key: '!actors.items!QuillatheLv11000.biyQChEtJrhkkj9X'
   - _id: padaCeg3MLRlkB6g
     name: Deft Explorer
     type: feat
@@ -5259,9 +5401,6 @@ items:
     effects: []
     flags:
       dnd5e:
-        riders:
-          activity: []
-          effect: []
         sourceId: Compendium.dnd5e.classes24.Item.phbrgrDeftExplor
         advancementOrigin: NuNBKjUuSNIRsF9M.0XJhkNDTm9P3K5n3
         advancementRoot: NuNBKjUuSNIRsF9M.0XJhkNDTm9P3K5n3
@@ -5276,7 +5415,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.padaCeg3MLRlkB6g'
+    _key: '!actors.items!QuillatheLv11000.padaCeg3MLRlkB6g'
   - _id: bKau79M7hBe1pUBa
     name: Fighting Style
     type: feat
@@ -5319,9 +5458,6 @@ items:
     effects: []
     flags:
       dnd5e:
-        riders:
-          activity: []
-          effect: []
         sourceId: Compendium.dnd5e.classes24.Item.phbrgrFightingSt
         advancementOrigin: NuNBKjUuSNIRsF9M.0XJhkNDTm9P3K5n3
         advancementRoot: NuNBKjUuSNIRsF9M.0XJhkNDTm9P3K5n3
@@ -5336,7 +5472,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.bKau79M7hBe1pUBa'
+    _key: '!actors.items!QuillatheLv11000.bKau79M7hBe1pUBa'
   - name: Archery
     system:
       description:
@@ -5411,14 +5547,11 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!QuillatheLv05000.1eURR2YWZ0hqplDM.kigkIjyf2OGWqdVU
+          !actors.items.effects!QuillatheLv11000.1eURR2YWZ0hqplDM.kigkIjyf2OGWqdVU
     folder: O942K0m1gZMIIoMB
     sort: 100000
     flags:
       dnd5e:
-        riders:
-          activity: []
-          effect: []
         sourceId: Compendium.dnd5e.feats24.Item.phbfstArchery000
         advancementOrigin: NuNBKjUuSNIRsF9M.AtKKnCoTLBqSxhCh
         advancementRoot: NuNBKjUuSNIRsF9M.AtKKnCoTLBqSxhCh
@@ -5432,7 +5565,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.1eURR2YWZ0hqplDM'
+    _key: '!actors.items!QuillatheLv11000.1eURR2YWZ0hqplDM'
   - name: Longstrider
     system:
       description:
@@ -5609,14 +5742,11 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!QuillatheLv05000.XtHfUCHDXdBgFfic.I746neZVrgJFkRco
+          !actors.items.effects!QuillatheLv11000.XtHfUCHDXdBgFfic.I746neZVrgJFkRco
     folder: pBaAAtXBCq9FVEnL
     sort: 1300000
     flags:
       dnd5e:
-        riders:
-          activity: []
-          effect: []
         sourceId: Compendium.dnd5e.spells24.Item.phbsplLongstride
         advancementOrigin: tFVkCkuuFo4ucCrc.FRJszO7cYchbaGzt
         advancementRoot: tFVkCkuuFo4ucCrc.FRJszO7cYchbaGzt
@@ -5630,7 +5760,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.XtHfUCHDXdBgFfic'
+    _key: '!actors.items!QuillatheLv11000.XtHfUCHDXdBgFfic'
   - _id: BOFrG8LewBiASB6i
     name: Hunter
     type: subclass
@@ -5677,7 +5807,9 @@ items:
                 optional: false
             optional: false
             spell: null
-          value: {}
+          value:
+            added:
+              JDKf3MYdULCfvE8u: Compendium.dnd5e.classes24.Item.phbrgrDefensiveT
           level: 7
           title: Subclass Features
         - _id: gBE1JZA0jf6dglQu
@@ -5688,7 +5820,9 @@ items:
                 optional: false
             optional: false
             spell: null
-          value: {}
+          value:
+            added:
+              OejUB8AXLOYYiReZ: Compendium.dnd5e.classes24.Item.phbrgrSuperiorHu
           level: 11
           title: Subclass Features
         - _id: 1P4RbYyrzFoutFrj
@@ -5722,7 +5856,7 @@ items:
     sort: 500000
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.BOFrG8LewBiASB6i'
+    _key: '!actors.items!QuillatheLv11000.BOFrG8LewBiASB6i'
   - _id: gvp9JRcDrYxKf98j
     name: Hunter's Lore
     type: feat
@@ -5764,9 +5898,6 @@ items:
     effects: []
     flags:
       dnd5e:
-        riders:
-          activity: []
-          effect: []
         sourceId: Compendium.dnd5e.classes24.Item.phbrgrHuntersLor
         advancementOrigin: BOFrG8LewBiASB6i.wacj6x75L5ZaZUky
         advancementRoot: BOFrG8LewBiASB6i.wacj6x75L5ZaZUky
@@ -5781,7 +5912,7 @@ items:
     sort: 300000
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.gvp9JRcDrYxKf98j'
+    _key: '!actors.items!QuillatheLv11000.gvp9JRcDrYxKf98j'
   - _id: xge2yOOVa1Iql8ni
     name: Hunter's Prey
     type: feat
@@ -5926,7 +6057,7 @@ items:
     sort: 400000
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.xge2yOOVa1Iql8ni'
+    _key: '!actors.items!QuillatheLv11000.xge2yOOVa1Iql8ni'
   - name: Pass without Trace
     system:
       description:
@@ -6101,14 +6232,11 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!QuillatheLv05000.fG9QhmaWPRLmAgpi.MDdoug4Lfu8klZRO
+          !actors.items.effects!QuillatheLv11000.fG9QhmaWPRLmAgpi.MDdoug4Lfu8klZRO
     folder: 3SjcO2acsFnWegp4
     sort: 1400000
     flags:
       dnd5e:
-        riders:
-          activity: []
-          effect: []
         sourceId: Compendium.dnd5e.spells24.Item.phbsplPasswithou
         advancementOrigin: tFVkCkuuFo4ucCrc.zFsEPXauTgmYxqiJ
         advancementRoot: tFVkCkuuFo4ucCrc.zFsEPXauTgmYxqiJ
@@ -6122,7 +6250,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.fG9QhmaWPRLmAgpi'
+    _key: '!actors.items!QuillatheLv11000.fG9QhmaWPRLmAgpi'
   - _id: 4K2NOTWvmj1Fm4Zf
     name: Extra Attack
     type: feat
@@ -6161,9 +6289,6 @@ items:
     effects: []
     flags:
       dnd5e:
-        riders:
-          activity: []
-          effect: []
         sourceId: Compendium.dnd5e.classes24.Item.phbrgrExtraAttac
         advancementOrigin: NuNBKjUuSNIRsF9M.onoWzEIWhrrG4QJt
         advancementRoot: NuNBKjUuSNIRsF9M.onoWzEIWhrrG4QJt
@@ -6178,7 +6303,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.4K2NOTWvmj1Fm4Zf'
+    _key: '!actors.items!QuillatheLv11000.4K2NOTWvmj1Fm4Zf'
   - _id: Px3TIzuYqwF0x8wB
     name: Bracers of Archery
     type: equipment
@@ -6282,7 +6407,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!QuillatheLv05000.Px3TIzuYqwF0x8wB.qoOJIw0gTdN8DBKB
+          !actors.items.effects!QuillatheLv11000.Px3TIzuYqwF0x8wB.qoOJIw0gTdN8DBKB
       - name: 'Bonus Damage: Bows'
         img: icons/weapons/ammunition/arrow-broadhead-glowing-orange.webp
         _id: PSGGfFEy4CjBVzyX
@@ -6320,12 +6445,8 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!QuillatheLv05000.Px3TIzuYqwF0x8wB.PSGGfFEy4CjBVzyX
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+          !actors.items.effects!QuillatheLv11000.Px3TIzuYqwF0x8wB.PSGGfFEy4CjBVzyX
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -6337,7 +6458,7 @@ items:
     sort: 4400000
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.Px3TIzuYqwF0x8wB'
+    _key: '!actors.items!QuillatheLv11000.Px3TIzuYqwF0x8wB'
   - _id: RszTpiic2OnFx4Yh
     name: Efficient Quiver
     type: container
@@ -6406,7 +6527,7 @@ items:
     sort: 1000000
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.RszTpiic2OnFx4Yh'
+    _key: '!actors.items!QuillatheLv11000.RszTpiic2OnFx4Yh'
   - name: Long Compartment
     type: container
     _id: fj90XA0PYmbUpym3
@@ -6465,7 +6586,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.fj90XA0PYmbUpym3'
+    _key: '!actors.items!QuillatheLv11000.fj90XA0PYmbUpym3'
   - name: Short Compartment
     type: container
     _id: W80ByYTQXyznvRPq
@@ -6528,7 +6649,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.W80ByYTQXyznvRPq'
+    _key: '!actors.items!QuillatheLv11000.W80ByYTQXyznvRPq'
   - name: Midsize Compartment
     type: container
     _id: KdY2pwORMXFr6Y0B
@@ -6591,7 +6712,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.KdY2pwORMXFr6Y0B'
+    _key: '!actors.items!QuillatheLv11000.KdY2pwORMXFr6Y0B'
   - name: Aid
     system:
       description:
@@ -6776,7 +6897,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!QuillatheLv05000.AmZK3JT82HiCjW57.XyGKCCrIhrFlixG8
+          !actors.items.effects!QuillatheLv11000.AmZK3JT82HiCjW57.XyGKCCrIhrFlixG8
       - name: 'Level 3: +10 Max HP'
         img: icons/magic/life/cross-flared-green.webp
         origin: Compendium.dnd5e.spells24.Item.phbsplAid0000000
@@ -6813,7 +6934,7 @@ items:
           lastModifiedBy: null
         _id: cTNQ2KRJLj4CRpQJ
         _key: >-
-          !actors.items.effects!QuillatheLv05000.AmZK3JT82HiCjW57.cTNQ2KRJLj4CRpQJ
+          !actors.items.effects!QuillatheLv11000.AmZK3JT82HiCjW57.cTNQ2KRJLj4CRpQJ
       - name: 'Level 4: +15 Max HP'
         img: icons/magic/life/cross-flared-green.webp
         origin: Compendium.dnd5e.spells24.Item.phbsplAid0000000
@@ -6850,7 +6971,7 @@ items:
           lastModifiedBy: null
         _id: 6hOGzq87iQntkHE5
         _key: >-
-          !actors.items.effects!QuillatheLv05000.AmZK3JT82HiCjW57.6hOGzq87iQntkHE5
+          !actors.items.effects!QuillatheLv11000.AmZK3JT82HiCjW57.6hOGzq87iQntkHE5
       - name: 'Level 5: +20 Max HP'
         img: icons/magic/life/cross-flared-green.webp
         origin: Compendium.dnd5e.spells24.Item.phbsplAid0000000
@@ -6887,7 +7008,7 @@ items:
           lastModifiedBy: null
         _id: Fs7zeTW4u9SvteWO
         _key: >-
-          !actors.items.effects!QuillatheLv05000.AmZK3JT82HiCjW57.Fs7zeTW4u9SvteWO
+          !actors.items.effects!QuillatheLv11000.AmZK3JT82HiCjW57.Fs7zeTW4u9SvteWO
       - name: 'Level 6: +25 Max HP'
         img: icons/magic/life/cross-flared-green.webp
         origin: Compendium.dnd5e.spells24.Item.phbsplAid0000000
@@ -6924,7 +7045,7 @@ items:
           lastModifiedBy: null
         _id: o1Gvp7nIrEHqdn3g
         _key: >-
-          !actors.items.effects!QuillatheLv05000.AmZK3JT82HiCjW57.o1Gvp7nIrEHqdn3g
+          !actors.items.effects!QuillatheLv11000.AmZK3JT82HiCjW57.o1Gvp7nIrEHqdn3g
       - name: 'Level 7: +30 Max HP'
         img: icons/magic/life/cross-flared-green.webp
         origin: Compendium.dnd5e.spells24.Item.phbsplAid0000000
@@ -6961,7 +7082,7 @@ items:
           lastModifiedBy: null
         _id: n4jjrd9bNOaDkos7
         _key: >-
-          !actors.items.effects!QuillatheLv05000.AmZK3JT82HiCjW57.n4jjrd9bNOaDkos7
+          !actors.items.effects!QuillatheLv11000.AmZK3JT82HiCjW57.n4jjrd9bNOaDkos7
       - name: 'Level 8: +35 Max HP'
         img: icons/magic/life/cross-flared-green.webp
         origin: Compendium.dnd5e.spells24.Item.phbsplAid0000000
@@ -6998,7 +7119,7 @@ items:
           lastModifiedBy: null
         _id: EHMDA2J47jwUUTKu
         _key: >-
-          !actors.items.effects!QuillatheLv05000.AmZK3JT82HiCjW57.EHMDA2J47jwUUTKu
+          !actors.items.effects!QuillatheLv11000.AmZK3JT82HiCjW57.EHMDA2J47jwUUTKu
       - name: 'Level 9: +40 Max HP'
         img: icons/magic/life/cross-flared-green.webp
         origin: Compendium.dnd5e.spells24.Item.phbsplAid0000000
@@ -7035,7 +7156,7 @@ items:
           lastModifiedBy: null
         _id: YnQP5Rd6w5NwZVLN
         _key: >-
-          !actors.items.effects!QuillatheLv05000.AmZK3JT82HiCjW57.YnQP5Rd6w5NwZVLN
+          !actors.items.effects!QuillatheLv11000.AmZK3JT82HiCjW57.YnQP5Rd6w5NwZVLN
     folder: 3SjcO2acsFnWegp4
     sort: 100000
     flags: {}
@@ -7049,7 +7170,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.AmZK3JT82HiCjW57'
+    _key: '!actors.items!QuillatheLv11000.AmZK3JT82HiCjW57'
   - name: Goodberry
     system:
       description:
@@ -7161,11 +7282,7 @@ items:
     effects: []
     folder: pBaAAtXBCq9FVEnL
     sort: 2700000
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -7176,7 +7293,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.EIeR4p90ul518qTq'
+    _key: '!actors.items!QuillatheLv11000.EIeR4p90ul518qTq'
   - name: Magic Weapon
     system:
       description:
@@ -7359,7 +7476,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!QuillatheLv05000.IvRfwU6y7Jd3myjn.IMt1nMPrWppyRYMT
+          !actors.items.effects!QuillatheLv11000.IvRfwU6y7Jd3myjn.IMt1nMPrWppyRYMT
       - name: Magic Weapon +2
         flags:
           dnd5e:
@@ -7413,7 +7530,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!QuillatheLv05000.IvRfwU6y7Jd3myjn.9zA6SFF8HKk9xNn2
+          !actors.items.effects!QuillatheLv11000.IvRfwU6y7Jd3myjn.9zA6SFF8HKk9xNn2
       - name: Magic Weapon +3
         flags:
           dnd5e:
@@ -7467,14 +7584,10 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!QuillatheLv05000.IvRfwU6y7Jd3myjn.AJQwm1dgXz7D333k
+          !actors.items.effects!QuillatheLv11000.IvRfwU6y7Jd3myjn.AJQwm1dgXz7D333k
     folder: 3SjcO2acsFnWegp4
     sort: 2000000
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -7485,7 +7598,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.IvRfwU6y7Jd3myjn'
+    _key: '!actors.items!QuillatheLv11000.IvRfwU6y7Jd3myjn'
   - name: Spike Growth
     system:
       description:
@@ -7616,11 +7729,7 @@ items:
     effects: []
     folder: 3SjcO2acsFnWegp4
     sort: 300000
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -7631,7 +7740,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.HkKCPTwzsExcVcTc'
+    _key: '!actors.items!QuillatheLv11000.HkKCPTwzsExcVcTc'
   - name: Case, Map or Scroll
     system:
       description:
@@ -7693,7 +7802,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.6k1oSbzdfLUgU6DB'
+    _key: '!actors.items!QuillatheLv11000.6k1oSbzdfLUgU6DB'
   - name: 'Spell Scroll: Detect Poison and Disease'
     type: consumable
     img: icons/sundries/scrolls/scroll-bound-black-tan.webp
@@ -7801,11 +7910,7 @@ items:
       equipped: false
     effects: []
     folder: null
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -7818,7 +7923,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.QBcSv9jLpl0ySf5L'
+    _key: '!actors.items!QuillatheLv11000.QBcSv9jLpl0ySf5L'
   - name: Detect Poison and Disease
     system:
       description:
@@ -7965,7 +8070,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!QuillatheLv05000.jpgUr2RWhFZ7fH8o.zSS8rmsXm5JCaM5x
+          !actors.items.effects!QuillatheLv11000.jpgUr2RWhFZ7fH8o.zSS8rmsXm5JCaM5x
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
@@ -8023,14 +8128,11 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!QuillatheLv05000.jpgUr2RWhFZ7fH8o.dnd5espellchange
+          !actors.items.effects!QuillatheLv11000.jpgUr2RWhFZ7fH8o.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
     sort: 4000000
     flags:
       dnd5e:
-        riders:
-          activity: []
-          effect: []
         cachedFor: .Item.QBcSv9jLpl0ySf5L.Activity.dnd5escrollspell
     _stats:
       duplicateSource: null
@@ -8043,7 +8145,7 @@ items:
     _id: jpgUr2RWhFZ7fH8o
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.jpgUr2RWhFZ7fH8o'
+    _key: '!actors.items!QuillatheLv11000.jpgUr2RWhFZ7fH8o'
   - _id: 9SKBTfr7czOhqNux
     name: Potion of Healing
     type: consumable
@@ -8137,7 +8239,7 @@ items:
       unidentified:
         description: ''
       container: null
-      quantity: 2
+      quantity: 3
       weight:
         value: 0.5
         units: lb
@@ -8177,7 +8279,3157 @@ items:
     sort: 100000
     ownership:
       default: 0
-    _key: '!actors.items!QuillatheLv05000.9SKBTfr7czOhqNux'
+    _key: '!actors.items!QuillatheLv11000.9SKBTfr7czOhqNux'
+  - _id: FQhcgSTOwqlAuxp2
+    name: Roving
+    type: feat
+    folder: h5OUzaJcZzsNsOGc
+    img: icons/skills/movement/feet-winged-sandals-tan.webp
+    system:
+      description:
+        value: >-
+          <p>Your Speed increases by 10 feet while you aren't wearing Heavy
+          armor. You also have a Climb Speed and a Swim Speed equal to your
+          Speed.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: class
+        subtype: ''
+      prerequisites:
+        level: 6
+        items: []
+        repeatable: false
+      properties: []
+      requirements: ''
+      activities: {}
+      enchant: {}
+      identifier: roving
+      advancement: []
+      crewed: false
+    effects:
+      - name: Roving
+        img: icons/skills/movement/feet-winged-sandals-tan.webp
+        _id: J9RWCSmYGnP0fkn1
+        type: base
+        system: {}
+        changes:
+          - key: system.attributes.movement.walk
+            mode: 2
+            value: '10'
+            priority: null
+          - key: system.attributes.movement.climb
+            mode: 4
+            value: '@attributes.movement.walk'
+            priority: null
+          - key: system.attributes.movement.swim
+            mode: 4
+            value: '@attributes.movement.walk'
+            priority: null
+        disabled: false
+        duration:
+          startTime: 0
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        origin: null
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!QuillatheLv11000.FQhcgSTOwqlAuxp2.J9RWCSmYGnP0fkn1
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        sourceId: Compendium.dnd5e.classes24.Item.phbrgrRoving0000
+        advancementOrigin: NuNBKjUuSNIRsF9M.fEmkkyi2Z6qGfYOZ
+        advancementRoot: NuNBKjUuSNIRsF9M.fEmkkyi2Z6qGfYOZ
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrRoving0000
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 0
+    ownership:
+      default: 0
+    _key: '!actors.items!QuillatheLv11000.FQhcgSTOwqlAuxp2'
+  - _id: JDKf3MYdULCfvE8u
+    name: Defensive Tactics
+    type: feat
+    folder: GWWL7NqfCEyqwfhZ
+    img: icons/skills/melee/shield-block-gray-yellow.webp
+    system:
+      description:
+        value: >-
+          <p>You gain one of the following feature options of your choice.
+          Whenever you finish a Short or Long Rest, you can replace the chosen
+          option with the other one.</p><p><strong>Escape the Horde.</strong>
+          Opportunity Attacks have Disadvantage against
+          you.</p><p><strong>Multiattack Defense.</strong> When a creature hits
+          you with an attack roll, that creature has Disadvantage on all other
+          attack rolls against you this turn.</p><section class="secret"
+          id="secret-5BXeADNIjwRdwzBf"><p><strong>Foundry
+          Note</strong></p><p>This feature includes a <strong>Multiattack
+          Defense</strong> activity with an Active Effect which can be used to
+          track a creature that has Disadvantage against you but it does not
+          automate the effect.</p></section>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: class
+        subtype: ''
+      prerequisites:
+        level: 7
+        repeatable: false
+        items: []
+      properties: []
+      requirements: ''
+      activities:
+        ioagLQG0o1axCBtr:
+          type: utility
+          name: Multiattack Defense
+          _id: ioagLQG0o1axCBtr
+          activation:
+            type: ''
+            value: null
+            override: false
+            condition: When a creature hits you with an attack roll
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects:
+            - _id: oviiTMxQRTnne9oc
+              level:
+                min: null
+                max: null
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: '1'
+              type: creature
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          img: icons/skills/melee/shield-block-gray-yellow.webp
+      enchant: {}
+      identifier: defensive-tactics
+      advancement: []
+      crewed: false
+    effects:
+      - name: Multiattack Defense
+        img: icons/skills/melee/strikes-sword-scimitar.webp
+        _id: oviiTMxQRTnne9oc
+        type: base
+        system: {}
+        changes: []
+        disabled: false
+        duration:
+          startTime: null
+          seconds: null
+          combat: null
+          rounds: null
+          turns: 1
+          startRound: null
+          startTurn: null
+        description: ''
+        origin: null
+        tint: '#ffffff'
+        transfer: false
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!QuillatheLv11000.JDKf3MYdULCfvE8u.oviiTMxQRTnne9oc
+    flags:
+      dnd5e:
+        sourceId: Compendium.dnd5e.classes24.Item.phbrgrDefensiveT
+        advancementOrigin: BOFrG8LewBiASB6i.4nA7C6uQhBJBtWdS
+        advancementRoot: BOFrG8LewBiASB6i.4nA7C6uQhBJBtWdS
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrDefensiveT
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 100000
+    ownership:
+      default: 0
+    _key: '!actors.items!QuillatheLv11000.JDKf3MYdULCfvE8u'
+  - _id: J30mto68q7fsbZAG
+    name: Expertise
+    type: feat
+    folder: h5OUzaJcZzsNsOGc
+    img: icons/magic/symbols/chevron-elipse-circle-blue.webp
+    system:
+      description:
+        value: >-
+          <p>Choose two of your skill proficiencies with which you lack
+          Expertise. You gain Expertise in those skills.</p><section
+          class="secret" id="secret-8Sp7JCTIzt2U5K6u"><p><strong>Foundry
+          Note</strong></p><p>You will be prompted with a choice when you reach
+          this level.</p></section>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: class
+        subtype: ''
+      prerequisites:
+        level: 9
+        items: []
+        repeatable: false
+      properties: []
+      requirements: ''
+      activities: {}
+      enchant: {}
+      identifier: expertise
+      advancement: []
+      crewed: false
+    effects: []
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        sourceId: Compendium.dnd5e.classes24.Item.phbrgrExpertise0
+        advancementOrigin: NuNBKjUuSNIRsF9M.fy2LFc8UC9PTq4aF
+        advancementRoot: NuNBKjUuSNIRsF9M.fy2LFc8UC9PTq4aF
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrExpertise0
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 0
+    ownership:
+      default: 0
+    _key: '!actors.items!QuillatheLv11000.J30mto68q7fsbZAG'
+  - _id: RX3hooTuvzz4gMZN
+    name: Tireless
+    type: feat
+    folder: h5OUzaJcZzsNsOGc
+    img: icons/magic/life/cross-worn-green.webp
+    system:
+      description:
+        value: >-
+          <p>Primal forces now help fuel you on your journeys, granting you the
+          following benefits.</p><p><strong>Temporary Hit Points.</strong> As a
+          Magic action, you can give yourself a number of Temporary Hit Points
+          equal to 1d8 plus your Wisdom modifier (minimum of 1). You can use
+          this action a number of times equal to your Wisdom modifier (minimum
+          of once), and you regain all expended uses when you finish a Long
+          Rest.</p><p><strong>Decrease Exhaustion.</strong> Whenever you finish
+          a Short Rest, your Exhaustion level, if any, decreases by
+          1.</p><section id="secret-wlhwV2MDwGKQ8plw"
+          class="secret"><p><strong>Foundry Note</strong></p><p>The
+          <strong>Temporary Hit Points</strong> activity can apply the Temporary
+          Hit Points to you.</p><p>The <strong>Decrease Exhaustion</strong>
+          activity will decrease your Exhaustion.</p></section>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: class
+        subtype: ''
+      prerequisites:
+        level: 10
+        items: []
+        repeatable: false
+      properties: []
+      requirements: ''
+      activities:
+        T17ZXCxvxeDwPoz5:
+          type: heal
+          name: Temporary Hit Points
+          _id: T17ZXCxvxeDwPoz5
+          activation:
+            type: action
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets:
+              - type: activityUses
+                value: '1'
+                scaling: {}
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: ''
+              type: self
+              special: ''
+            override: false
+            prompt: false
+          uses:
+            spent: 0
+            recovery:
+              - period: lr
+                type: recoverAll
+            max: (max(1,@abilities.wis.mod))
+          sort: 0
+          healing:
+            number: 1
+            denomination: 8
+            types:
+              - temphp
+            custom:
+              enabled: false
+            scaling:
+              number: 1
+            bonus: (max(1,@abilities.wis.mod))
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+        y2cSZJxteG7Yew0u:
+          type: utility
+          name: Decrease Exhaustion
+          _id: y2cSZJxteG7Yew0u
+          activation:
+            type: ''
+            value: null
+            override: false
+            condition: Whenever you finish a Short Rest
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets:
+              - type: attribute
+                value: '1'
+                target: attributes.exhaustion
+                scaling: {}
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: ''
+              type: self
+              special: ''
+            override: false
+            prompt: false
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      enchant: {}
+      identifier: tireless
+      advancement: []
+      crewed: false
+    effects: []
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        sourceId: Compendium.dnd5e.classes24.Item.phbrgrTireless00
+        advancementOrigin: NuNBKjUuSNIRsF9M.tfv4CeK2F4fdZMMi
+        advancementRoot: NuNBKjUuSNIRsF9M.tfv4CeK2F4fdZMMi
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrTireless00
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 0
+    ownership:
+      default: 0
+    _key: '!actors.items!QuillatheLv11000.RX3hooTuvzz4gMZN'
+  - _id: OejUB8AXLOYYiReZ
+    name: Superior Hunter's Prey
+    type: feat
+    folder: GWWL7NqfCEyqwfhZ
+    img: icons/skills/ranged/arrows-flying-triple-blue.webp
+    system:
+      description:
+        value: >-
+          <p>Once per turn when you deal damage to a creature marked by your
+          <em>Hunter's Mark</em>, you can also deal that spell's extra damage to
+          a different creature that you can see within 30 feet of the first
+          creature.</p><section id="secret-AuiRnxdHXs9cXvQV"
+          class="secret"><p><strong>Foundry Note</strong></p><p>You can apply
+          the damage from Hunter's Mark or use the <strong>Damage</strong>
+          activity on this feature.</p></section>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: class
+        subtype: ''
+      prerequisites:
+        level: 11
+        repeatable: false
+        items: []
+      properties: []
+      requirements: ''
+      activities:
+        yqOAxbsX16RkOx06:
+          type: damage
+          _id: yqOAxbsX16RkOx06
+          activation:
+            type: ''
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: ft
+            special: Of the damaged creature
+            value: '30'
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: '1'
+              type: creature
+              special: ''
+            override: false
+            prompt: false
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          damage:
+            critical:
+              allow: false
+            parts:
+              - custom:
+                  enabled: true
+                  formula: '@scale.ranger.mark'
+                number: null
+                denomination: 0
+                bonus: ''
+                types:
+                  - force
+                scaling:
+                  number: 1
+          name: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      enchant: {}
+      identifier: superior-hunters-prey
+      advancement: []
+      crewed: false
+    effects: []
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        sourceId: Compendium.dnd5e.classes24.Item.phbrgrSuperiorHu
+        advancementOrigin: BOFrG8LewBiASB6i.gBE1JZA0jf6dglQu
+        advancementRoot: BOFrG8LewBiASB6i.gBE1JZA0jf6dglQu
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrSuperiorHu
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 500000
+    ownership:
+      default: 0
+    _key: '!actors.items!QuillatheLv11000.OejUB8AXLOYYiReZ'
+  - name: Conjure Animals
+    system:
+      description:
+        value: >-
+          <p>You conjure nature spirits that appear as a Large pack of spectral,
+          intangible animals in an unoccupied space you can see within range.
+          The pack lasts for the duration, and you choose the spirits' animal
+          form, such as wolves, serpents, or birds.</p><p>You have Advantage on
+          Strength saving throws while you're within 5 feet of the pack, and
+          when you move on your turn, you can also move the pack up to 30 feet
+          to an unoccupied space you can see.</p><p>Whenever the pack moves
+          within 10 feet of a creature you can see and whenever a creature you
+          can see enters a space within 10 feet of the pack or ends its turn
+          there, you can force that creature to make a Dexterity saving throw.
+          On a failed save, the creature takes 3d10 Slashing damage. A creature
+          makes this save only once per turn.</p><p><strong>Using a Higher-Level
+          Spell Slot.</strong> The damage increases by 1d10 for each spell slot
+          level above 3.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: '10'
+        units: minute
+      target:
+        affects:
+          type: space
+          count: '1'
+          choice: false
+          special: ''
+        template:
+          units: ft
+          contiguous: false
+          type: ''
+      range:
+        value: '60'
+        units: ft
+        special: ''
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 3
+      school: con
+      properties:
+        - vocal
+        - somatic
+        - concentration
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: summon
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          range:
+            override: false
+            units: self
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          bonuses:
+            ac: ''
+            hd: ''
+            hp: ''
+            attackDamage: ''
+            saveDamage: (@item.level - 3)d10
+            healing: ''
+          creatureSizes: []
+          creatureTypes: []
+          match:
+            saves: true
+            attacks: false
+            proficiency: false
+            disposition: false
+          profiles:
+            - count: ''
+              name: ''
+              _id: 8Ccc4gDx0Cf63Lk0
+              uuid: Compendium.dnd5e.actors24.Actor.phbSpectralAnima
+              level:
+                min: null
+                max: null
+              types: []
+          summon:
+            mode: ''
+            prompt: false
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+          effects: []
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+        dnd5eactivity100:
+          _id: dnd5eactivity100
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects: []
+          range:
+            override: false
+            units: self
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          damage:
+            onSave: half
+            parts:
+              - number: 3
+                denomination: 10
+                bonus: ''
+                types:
+                  - slashing
+                custom:
+                  enabled: false
+                  formula: ''
+                scaling:
+                  mode: whole
+                  number: 1
+                  formula: ''
+          save:
+            ability:
+              - dex
+            dc:
+              calculation: spellcasting
+              formula: ''
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: conjure-animals
+      method: spell
+      sourceClass: ranger
+      prepared: 1
+    _id: oYAmk1jbUd7U1vSK
+    type: spell
+    img: icons/creatures/abilities/wolf-heads-swirl-purple.webp
+    effects: []
+    folder: HCovEE4VoPGlIbKi
+    sort: 3100000
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplConjureAni
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!QuillatheLv11000.oYAmk1jbUd7U1vSK'
+  - name: Revivify
+    system:
+      description:
+        value: >-
+          <p>You touch a creature that has died within the last minute. That
+          creature revives with 1 Hit Point. This spell can't revive a creature
+          that has died of old age, nor does it restore any missing body
+          parts.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: ''
+        units: inst
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+          special: ''
+        template:
+          units: ft
+          contiguous: false
+          type: ''
+      range:
+        units: touch
+        special: ''
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 3
+      school: nec
+      properties:
+        - vocal
+        - somatic
+        - material
+      materials:
+        value: a diamond worth 300+ GP, which the spell consumes
+        consumed: true
+        cost: 300
+        supply: 3
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: damage
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects: []
+          range:
+            override: false
+            units: self
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          damage:
+            critical:
+              allow: false
+              bonus: ''
+            parts:
+              - number: null
+                denomination: null
+                bonus: ''
+                types:
+                  - healing
+                custom:
+                  enabled: true
+                  formula: '1'
+                scaling:
+                  mode: ''
+                  number: null
+                  formula: ''
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: revivify
+      method: spell
+      sourceClass: ranger
+      prepared: 1
+      ability: ''
+    _id: DNZTeQjm6FkjOu0N
+    type: spell
+    img: icons/magic/holy/chalice-glowing-gold-water.webp
+    effects: []
+    folder: HCovEE4VoPGlIbKi
+    sort: 200000
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplRevivify00
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!QuillatheLv11000.DNZTeQjm6FkjOu0N'
+  - name: Jump
+    system:
+      description:
+        value: >-
+          <p>You touch a willing creature. Once on each of its turns until the
+          spell ends, that creature can jump up to 30 feet by spending 10 feet
+          of movement.</p><p><strong>Using a Higher-Level Spell
+          Slot.</strong>You can target one additional creature for each spell
+          slot level above 1.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      activation:
+        type: bonus
+        condition: ''
+        value: null
+      duration:
+        value: '1'
+        units: minute
+      target:
+        affects:
+          type: willing
+          count: '1'
+          choice: false
+          special: ''
+        template:
+          units: ft
+          contiguous: false
+          type: ''
+      range:
+        units: touch
+        special: ''
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: trs
+      properties:
+        - vocal
+        - somatic
+        - material
+      materials:
+        value: a grasshopper’s hind leg
+        consumed: false
+        cost: 0
+        supply: 0
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects:
+            - _id: Esyd01OZ3NCv8gtp
+              level: {}
+          range:
+            override: false
+            units: self
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: jump
+      method: spell
+      sourceClass: ranger
+      prepared: 1
+    _id: wA3SrliOxfMNxk4K
+    type: spell
+    img: icons/creatures/mammals/deer-movement-leap-green.webp
+    effects:
+      - name: Jump
+        origin: Compendium.dnd5e.spells24.Item.phbsplJump000000
+        duration:
+          rounds: 1
+          startTime: null
+          seconds: 60
+          combat: null
+          turns: null
+          startRound: null
+          startTurn: null
+        disabled: false
+        flags: {}
+        img: icons/skills/movement/feet-winged-boots-blue.webp
+        _id: Esyd01OZ3NCv8gtp
+        type: base
+        system: {}
+        changes: []
+        description: >-
+          <p>Once on each of its turns until the spell ends, that creature can
+          jump up to 30 feet by spending 10 feet of movement.</p>
+        tint: '#ffffff'
+        transfer: false
+        statuses: []
+        sort: 0
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!QuillatheLv11000.wA3SrliOxfMNxk4K.Esyd01OZ3NCv8gtp
+    folder: pBaAAtXBCq9FVEnL
+    sort: 1400000
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplJump000000
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!QuillatheLv11000.wA3SrliOxfMNxk4K'
+  - name: Plant Growth
+    system:
+      description:
+        value: >-
+          <p><strong>Casting Time:</strong> Action (Overgrowth) or 8 hours
+          (Enrichment)</p><p>This spell channels vitality into plants. The
+          casting time you use determines whether the spell has the Overgrowth
+          or the Enrichment effect below.</p><p><strong>Overgrowth.</strong>
+          Choose a point within range. All normal plants in a 100-foot-radius
+          Sphere centered on that point become thick and overgrown. A creature
+          moving through that area must spend 4 feet of movement for every 1
+          foot it moves. You can exclude one or more areas of any size within
+          the spell's area from being affected.</p><p><strong>Enrichment.
+          </strong>All plants in a half-mile radius centered on a point within
+          range become enriched for 365 days. The plants yield twice the normal
+          amount of food when harvested. They can benefit from only one
+          <em>Plant Growth</em> per year.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      activation:
+        type: special
+        condition: ''
+        value: null
+      duration:
+        value: ''
+        units: inst
+      target:
+        affects:
+          choice: false
+          count: ''
+          type: space
+          special: ''
+        template:
+          units: ft
+          type: ''
+          size: '100'
+          contiguous: false
+          count: ''
+      range:
+        value: '150'
+        units: ft
+        special: ''
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 3
+      school: trs
+      properties:
+        - vocal
+        - somatic
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects: []
+          range:
+            override: false
+            units: self
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+              type: sphere
+              size: '100'
+              count: ''
+            affects:
+              choice: false
+              count: ''
+              type: space
+              special: ''
+            override: true
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          name: Overgrowth
+          img: icons/magic/nature/plant-undersea-glow-green.webp
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+        IrJvud8Qz62PeeIQ:
+          type: utility
+          _id: IrJvud8Qz62PeeIQ
+          activation:
+            type: hour
+            value: 8
+            override: true
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          name: Enrichment
+          img: icons/skills/trades/farming-wheat-circle-yellow.webp
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: plant-growth
+      method: spell
+      sourceClass: ranger
+      prepared: 1
+    _id: HGL0BpVEzCKL2oJy
+    type: spell
+    img: icons/magic/nature/plant-sproud-hands-dirt-green.webp
+    effects: []
+    folder: HCovEE4VoPGlIbKi
+    sort: 400000
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplPlantGrowt
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!QuillatheLv11000.HGL0BpVEzCKL2oJy'
+  - name: 'Component: Diamond'
+    type: loot
+    _id: 2VAKB4eAj5aqjEEr
+    img: icons/commodities/gems/gem-faceted-radiant-teal.webp
+    system:
+      description:
+        value: ''
+        chat: ''
+      identifier: component-diamond
+      source:
+        revision: 1
+        rules: '2024'
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 3
+      weight:
+        value: 0
+        units: lb
+      price:
+        value: 300
+        denomination: gp
+      rarity: ''
+      properties: []
+      type:
+        value: material
+        subtype: ''
+    effects: []
+    folder: null
+    sort: 200000
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.actors24.Actor.AkraLv1100000000.Item.RPp29n5xcp561IN9
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _key: '!actors.items!QuillatheLv11000.2VAKB4eAj5aqjEEr'
+  - _id: YSOKmqFKv3L5CjDC
+    name: Cloak of Protection
+    type: equipment
+    folder: U4xmShLy19Ry54zl
+    img: icons/equipment/back/cloak-heavy-fur-blue.webp
+    system:
+      activities: {}
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      description:
+        value: >-
+          <div><p><em>Wondrous Item, Uncommon (Requires
+          Attunement)</em></p></div><p>You gain a +1 bonus to Armor Class and
+          saving throws while you wear this cloak.</p>
+        chat: ''
+      identifier: cloak-of-protection
+      source:
+        revision: 1
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 2
+        units: lb
+      price:
+        value: 400
+        denomination: gp
+      rarity: uncommon
+      attunement: required
+      armor:
+        value: null
+        magicalBonus: null
+        dex: null
+      cover: null
+      hp:
+        value: null
+        max: null
+        dt: null
+        conditions: ''
+      type:
+        value: wondrous
+        baseItem: ''
+      properties:
+        - mgc
+      strength: null
+      proficient: null
+      crew:
+        value: []
+      attuned: true
+      equipped: true
+    effects:
+      - name: 'Bonus AC/Saves: +1'
+        img: icons/equipment/chest/breastplate-helmet-metal.webp
+        _id: LsvHisOX7EGZ8oQg
+        type: base
+        system: {}
+        changes:
+          - key: system.attributes.ac.bonus
+            mode: 2
+            value: '1'
+            priority: null
+          - key: system.bonuses.abilities.save
+            mode: 2
+            value: '1'
+            priority: null
+        disabled: false
+        duration:
+          startTime: 0
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        origin: null
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!QuillatheLv11000.YSOKmqFKv3L5CjDC.LsvHisOX7EGZ8oQg
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.equipment24.Item.dmgCloakOfProtec
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 8100000
+    ownership:
+      default: 0
+    _key: '!actors.items!QuillatheLv11000.YSOKmqFKv3L5CjDC'
+  - name: 'Spell Scroll: Daylight'
+    type: consumable
+    img: icons/sundries/scrolls/scroll-bound-orange-tan.webp
+    system:
+      activities:
+        dnd5escrollspell:
+          _id: dnd5escrollspell
+          type: cast
+          consumption:
+            targets:
+              - type: itemUses
+                value: '1'
+                scaling: {}
+            scaling:
+              allowed: false
+            spellSlot: true
+          spell:
+            challenge:
+              attack: 7
+              save: 15
+              override: true
+            level: 3
+            uuid: Compendium.dnd5e.spells24.Item.phbsplDaylight00
+            properties:
+              - vocal
+              - somatic
+              - material
+            spellbook: true
+          sort: 0
+          activation:
+            type: action
+            override: false
+          description: {}
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          flags: {}
+          range:
+            units: self
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      uses:
+        spent: 0
+        recovery: []
+        autoDestroy: true
+        max: '1'
+      description:
+        value: >-
+          <p><em>3rd Level &amp;Reference[Spell
+          Scroll]</em></p><p>@Embed[Compendium.dnd5e.spells24.Item.phbsplDaylight00
+          inline]</p>
+        chat: ''
+      identifier: spell-scroll
+      source:
+        revision: 1
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+      identified: true
+      unidentified:
+        description: ''
+      container: 6k1oSbzdfLUgU6DB
+      quantity: 1
+      weight:
+        value: 0
+        units: lb
+      price:
+        value: 300
+        denomination: gp
+      rarity: uncommon
+      attunement: ''
+      attuned: false
+      equipped: false
+      type:
+        value: scroll
+        subtype: ''
+      damage:
+        base:
+          number: null
+          denomination: null
+          types: []
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+        replace: false
+      magicalBonus: null
+      properties:
+        - mgc
+    effects: []
+    folder: a2UFIyuviRp94dzx
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.equipment24.Item.dmgSpellScroll3r
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    _id: HNapttFM9XtXh3yZ
+    sort: 0
+    ownership:
+      default: 0
+    _key: '!actors.items!QuillatheLv11000.HNapttFM9XtXh3yZ'
+  - name: Daylight
+    system:
+      description:
+        value: >-
+          <p>For the duration, sunlight spreads from a point within range and
+          fills a 60-foot-radius Sphere. The sunlight's area is Bright Light and
+          sheds Dim Light for an additional 60 feet.</p><p>Alternatively, you
+          cast the spell on an object that isn't being worn or carried, causing
+          the sunlight to fill a 60-foot Emanation originating from that object.
+          Covering that object with something opaque, such as a bowl or helm,
+          blocks the sunlight.</p><p>If any of this spell's area overlaps with
+          an area of Darkness created by a spell of level 3 or lower, that other
+          spell is dispelled.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: '1'
+        units: hour
+      target:
+        affects:
+          choice: false
+        template:
+          units: ft
+          type: sphere
+          size: '60'
+          contiguous: false
+      range:
+        value: '60'
+        units: ft
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 3
+      school: evo
+      properties:
+        - vocal
+        - somatic
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects: []
+          range:
+            override: false
+            units: self
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: daylight
+      method: spell
+      prepared: 0
+      sourceClass: ranger
+    type: spell
+    img: icons/magic/light/orb-beams-green.webp
+    effects:
+      - _id: dnd5espellchange
+        type: enchantment
+        name: Spell Changes
+        img: systems/dnd5e/icons/svg/activity/cast.svg
+        origin: >-
+          Compendium.dnd5e.actors24.Actor.QuillatheLv11000.Item.HNapttFM9XtXh3yZ.Activity.dnd5escrollspell
+        changes:
+          - key: system.method
+            mode: 5
+            value: spell
+          - key: system.properties
+            mode: 2
+            value: '-vocal'
+          - key: system.properties
+            mode: 2
+            value: '-somatic'
+          - key: system.properties
+            mode: 2
+            value: '-material'
+          - key: activities[attack].attack.bonus
+            mode: 5
+            value: '7'
+          - key: activities[attack].attack.flat
+            mode: 5
+            value: 'true'
+          - key: activities[summon].flat.attack
+            mode: 5
+            value: '7'
+          - key: activities[save].save.dc.calculation
+            mode: 5
+            value: ''
+          - key: activities[save].save.dc.formula
+            mode: 5
+            value: '15'
+          - key: activities[summon].flat.save
+            mode: 5
+            value: '15'
+        system: {}
+        disabled: false
+        duration:
+          startTime: 0
+          combat: null
+        description: ''
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!QuillatheLv11000.BAH8d6zDklJLKUKW.dnd5espellchange
+    folder: HCovEE4VoPGlIbKi
+    sort: 2600000
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        cachedFor: .Item.HNapttFM9XtXh3yZ.Activity.dnd5escrollspell
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDaylight00
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    _id: BAH8d6zDklJLKUKW
+    ownership:
+      default: 0
+    _key: '!actors.items!QuillatheLv11000.BAH8d6zDklJLKUKW'
+  - name: 'Spell Scroll: Silence'
+    type: consumable
+    img: icons/sundries/scrolls/scroll-bound-blue-tan.webp
+    system:
+      activities:
+        dnd5escrollspell:
+          _id: dnd5escrollspell
+          type: cast
+          consumption:
+            targets:
+              - type: itemUses
+                value: '1'
+                scaling: {}
+            scaling:
+              allowed: false
+            spellSlot: true
+          spell:
+            challenge:
+              attack: 5
+              save: 13
+              override: true
+            level: 2
+            uuid: Compendium.dnd5e.spells24.Item.phbsplSilence000
+            properties:
+              - vocal
+              - somatic
+              - material
+            spellbook: true
+          sort: 0
+          activation:
+            type: action
+            override: false
+          description: {}
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          flags: {}
+          range:
+            units: self
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      uses:
+        spent: 0
+        recovery: []
+        autoDestroy: true
+        max: '1'
+      description:
+        value: >-
+          <p><em>2nd Level &amp;Reference[Spell Scroll], Requires
+          Concentration</em></p><p>@Embed[Compendium.dnd5e.spells24.Item.phbsplSilence000
+          inline]</p>
+        chat: ''
+      identifier: spell-scroll
+      source:
+        revision: 1
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+      identified: true
+      unidentified:
+        description: ''
+      container: 6k1oSbzdfLUgU6DB
+      quantity: 1
+      weight:
+        value: 0
+        units: lb
+      price:
+        value: 200
+        denomination: gp
+      rarity: uncommon
+      attunement: ''
+      attuned: false
+      equipped: false
+      type:
+        value: scroll
+        subtype: ''
+      damage:
+        base:
+          number: null
+          denomination: null
+          types: []
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+        replace: false
+      magicalBonus: null
+      properties:
+        - mgc
+    effects: []
+    folder: a2UFIyuviRp94dzx
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.equipment24.Item.dmgSpellScroll2n
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    _id: sQxo9ZuqIBneBxrb
+    sort: 0
+    ownership:
+      default: 0
+    _key: '!actors.items!QuillatheLv11000.sQxo9ZuqIBneBxrb'
+  - name: Silence
+    system:
+      description:
+        value: >-
+          <p>For the duration, no sound can be created within or pass through a
+          20-foot-radius Sphere centered on a point you choose within range. Any
+          creature or object entirely inside the Sphere has Immunity to Thunder
+          damage, and creatures have the &amp;Reference[deafened apply=false]
+          condition while entirely inside it. Casting a spell that includes a
+          Verbal component is impossible there.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: '10'
+        units: minute
+      target:
+        affects:
+          choice: false
+        template:
+          units: ft
+          type: sphere
+          size: '20'
+          contiguous: false
+      range:
+        value: '120'
+        units: ft
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 2
+      school: ill
+      properties:
+        - vocal
+        - somatic
+        - concentration
+        - ritual
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects:
+            - _id: kjbKMAk1y5VUyEoT
+              level: {}
+          range:
+            override: false
+            units: self
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: silence
+      method: spell
+      prepared: 0
+      sourceClass: ranger
+    type: spell
+    img: icons/magic/control/debuff-chains-orb-movement-blue.webp
+    effects:
+      - name: Silenced
+        origin: Compendium.dnd5e.spells24.Item.phbsplSilence000
+        duration:
+          rounds: null
+          startTime: null
+          seconds: 600
+          combat: null
+          turns: null
+          startRound: null
+          startTurn: null
+        disabled: false
+        flags: {}
+        img: icons/magic/control/encase-creature-humanoid-hold.webp
+        _id: kjbKMAk1y5VUyEoT
+        type: base
+        system: {}
+        changes:
+          - key: system.traits.di.value
+            mode: 2
+            value: thunder
+            priority: null
+        description: >-
+          <p>Any creature or object entirely inside the Sphere has Immunity to
+          Thunder damage, and creatures have the Deafened condition while
+          entirely inside it. Casting a spell that includes a Verbal component
+          is impossible there.</p>
+        tint: '#ffffff'
+        transfer: false
+        statuses:
+          - deafened
+          - silenced
+        sort: 0
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!QuillatheLv11000.uxOMNRcu2iOeylo6.kjbKMAk1y5VUyEoT
+      - _id: dnd5espellchange
+        type: enchantment
+        name: Spell Changes
+        img: systems/dnd5e/icons/svg/activity/cast.svg
+        origin: >-
+          Compendium.dnd5e.actors24.Actor.QuillatheLv11000.Item.sQxo9ZuqIBneBxrb.Activity.dnd5escrollspell
+        changes:
+          - key: system.method
+            mode: 5
+            value: spell
+          - key: system.properties
+            mode: 2
+            value: '-vocal'
+          - key: system.properties
+            mode: 2
+            value: '-somatic'
+          - key: system.properties
+            mode: 2
+            value: '-material'
+          - key: activities[attack].attack.bonus
+            mode: 5
+            value: '5'
+          - key: activities[attack].attack.flat
+            mode: 5
+            value: 'true'
+          - key: activities[summon].flat.attack
+            mode: 5
+            value: '5'
+          - key: activities[save].save.dc.calculation
+            mode: 5
+            value: ''
+          - key: activities[save].save.dc.formula
+            mode: 5
+            value: '13'
+          - key: activities[summon].flat.save
+            mode: 5
+            value: '13'
+        system: {}
+        disabled: false
+        duration:
+          startTime: 0
+          combat: null
+        description: ''
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!QuillatheLv11000.uxOMNRcu2iOeylo6.dnd5espellchange
+    folder: 3SjcO2acsFnWegp4
+    sort: 500000
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        cachedFor: .Item.sQxo9ZuqIBneBxrb.Activity.dnd5escrollspell
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplSilence000
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    _id: uxOMNRcu2iOeylo6
+    ownership:
+      default: 0
+    _key: '!actors.items!QuillatheLv11000.uxOMNRcu2iOeylo6'
+  - name: 'Spell Scroll: Protection from Poison'
+    type: consumable
+    img: icons/sundries/scrolls/scroll-bound-blue-tan.webp
+    system:
+      activities:
+        dnd5escrollspell:
+          _id: dnd5escrollspell
+          type: cast
+          consumption:
+            targets:
+              - type: itemUses
+                value: '1'
+                scaling: {}
+            scaling:
+              allowed: false
+            spellSlot: true
+          spell:
+            challenge:
+              attack: 5
+              save: 13
+              override: true
+            level: 2
+            uuid: Compendium.dnd5e.spells24.Item.phbsplProtection
+            properties:
+              - vocal
+              - somatic
+              - material
+            spellbook: true
+          sort: 0
+          activation:
+            type: action
+            override: false
+          description: {}
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          flags: {}
+          range:
+            units: self
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      uses:
+        spent: 0
+        recovery: []
+        autoDestroy: true
+        max: '1'
+      description:
+        value: >-
+          <p><em>2nd Level &amp;Reference[Spell
+          Scroll]</em></p><p>@Embed[Compendium.dnd5e.spells24.Item.phbsplProtection
+          inline]</p>
+        chat: ''
+      identifier: spell-scroll
+      source:
+        revision: 1
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+      identified: true
+      unidentified:
+        description: ''
+      container: 6k1oSbzdfLUgU6DB
+      quantity: 1
+      weight:
+        value: 0
+        units: lb
+      price:
+        value: 200
+        denomination: gp
+      rarity: uncommon
+      attunement: ''
+      attuned: false
+      equipped: false
+      type:
+        value: scroll
+        subtype: ''
+      damage:
+        base:
+          number: null
+          denomination: null
+          types: []
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+        replace: false
+      magicalBonus: null
+      properties:
+        - mgc
+    effects: []
+    folder: a2UFIyuviRp94dzx
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.equipment24.Item.dmgSpellScroll2n
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    _id: pc1OhjXAcaglfiFO
+    sort: 0
+    ownership:
+      default: 0
+    _key: '!actors.items!QuillatheLv11000.pc1OhjXAcaglfiFO'
+  - name: Protection from Poison
+    system:
+      description:
+        value: >-
+          <p>You touch a creature and end the &amp;Reference[poisoned] condition
+          on it. For the duration, the target has Advantage on saving throws to
+          avoid or end the Poisoned condition, and it has Resistance to Poison
+          damage.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: '1'
+        units: hour
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+        template:
+          units: ft
+          contiguous: false
+      range:
+        units: touch
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 2
+      school: abj
+      properties:
+        - vocal
+        - somatic
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects:
+            - _id: zTci2V6Iij0r0IIg
+              level: {}
+          range:
+            override: false
+            units: self
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: protection-from-poison
+      method: spell
+      prepared: 0
+      sourceClass: ranger
+    type: spell
+    img: icons/skills/toxins/cup-glass-poisoned-held.webp
+    effects:
+      - name: Poison Protection
+        origin: Compendium.dnd5e.spells24.Item.phbsplProtection
+        duration:
+          rounds: null
+          startTime: null
+          seconds: 3600
+          combat: null
+          turns: null
+          startRound: null
+          startTurn: null
+        disabled: false
+        flags: {}
+        img: icons/equipment/head/mask-plague-leather-brown.webp
+        _id: zTci2V6Iij0r0IIg
+        type: base
+        system: {}
+        changes:
+          - key: system.traits.dr.value
+            mode: 2
+            value: poison
+            priority: null
+        description: >-
+          <p><span style="font-family:Signika, sans-serif">For the duration, the
+          target has Advantage on saving throws to avoid or end the Poisoned
+          condition, and it has Resistance to Poison damage.</span></p>
+        tint: '#ffffff'
+        transfer: false
+        statuses: []
+        sort: 0
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!QuillatheLv11000.gRtGvsb8FEvgcJfy.zTci2V6Iij0r0IIg
+      - _id: dnd5espellchange
+        type: enchantment
+        name: Spell Changes
+        img: systems/dnd5e/icons/svg/activity/cast.svg
+        origin: >-
+          Compendium.dnd5e.actors24.Actor.QuillatheLv11000.Item.pc1OhjXAcaglfiFO.Activity.dnd5escrollspell
+        changes:
+          - key: system.method
+            mode: 5
+            value: spell
+          - key: system.properties
+            mode: 2
+            value: '-vocal'
+          - key: system.properties
+            mode: 2
+            value: '-somatic'
+          - key: system.properties
+            mode: 2
+            value: '-material'
+          - key: activities[attack].attack.bonus
+            mode: 5
+            value: '5'
+          - key: activities[attack].attack.flat
+            mode: 5
+            value: 'true'
+          - key: activities[summon].flat.attack
+            mode: 5
+            value: '5'
+          - key: activities[save].save.dc.calculation
+            mode: 5
+            value: ''
+          - key: activities[save].save.dc.formula
+            mode: 5
+            value: '13'
+          - key: activities[summon].flat.save
+            mode: 5
+            value: '13'
+        system: {}
+        disabled: false
+        duration:
+          startTime: 0
+          combat: null
+        description: ''
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!QuillatheLv11000.gRtGvsb8FEvgcJfy.dnd5espellchange
+    folder: 3SjcO2acsFnWegp4
+    sort: 1200000
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        cachedFor: .Item.pc1OhjXAcaglfiFO.Activity.dnd5escrollspell
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplProtection
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    _id: gRtGvsb8FEvgcJfy
+    ownership:
+      default: 0
+    _key: '!actors.items!QuillatheLv11000.gRtGvsb8FEvgcJfy'
+  - _id: WyVga5iUa1gmsOHD
+    name: Potion of Growth
+    type: consumable
+    folder: 4NjJfCbRAVhw8ESv
+    img: icons/consumables/potions/bottle-bulb-corked-glowing-red.webp
+    system:
+      activities:
+        o9I0OYuD6EkLaGCR:
+          type: cast
+          spell:
+            uuid: Compendium.dnd5e.spells24.Item.phbsplEnlargeRed
+            challenge:
+              attack: null
+              save: null
+              override: false
+            level: 2
+            properties:
+              - vocal
+              - somatic
+              - material
+              - concentration
+            spellbook: true
+          _id: o9I0OYuD6EkLaGCR
+          sort: 0
+          activation:
+            type: bonus
+            value: null
+            override: true
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling: {}
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          range:
+            override: false
+            units: self
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          name: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      uses:
+        spent: 0
+        recovery: []
+        autoDestroy: true
+        max: '1'
+      description:
+        value: >-
+          <p><em>Potion, Uncommon</em></p><p>When you drink this potion, you
+          gain the "enlarge" effect of the
+          @UUID[Compendium.dnd5e.spells24.Item.phbsplEnlargeRed]{Enlarge/Reduce}
+          spell for 10 minutes (no Concentration required).</p><p>The red in the
+          potion's liquid continuously expands from a tiny bead to color the
+          clear liquid around it and then contracts. Shaking the bottle fails to
+          interrupt this process.</p>
+        chat: ''
+      identifier: potion-of-growth
+      source:
+        revision: 1
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 0.5
+        units: lb
+      price:
+        value: 200
+        denomination: gp
+      rarity: uncommon
+      attunement: ''
+      type:
+        value: potion
+        subtype: ''
+      damage:
+        base:
+          number: null
+          denomination: null
+          types: []
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+        replace: false
+      magicalBonus: null
+      properties:
+        - mgc
+      attuned: false
+      equipped: false
+    effects: []
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.equipment24.Item.dmgPotionOfGrowt
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 0
+    ownership:
+      default: 0
+    _key: '!actors.items!QuillatheLv11000.WyVga5iUa1gmsOHD'
+  - name: Enlarge/Reduce
+    system:
+      description:
+        value: >-
+          <p>For the duration, the spell enlarges or reduces a creature or an
+          object you can see within range (see the chosen effect below). A
+          targeted object must be neither worn nor carried. If the target is an
+          unwilling creature, it can make a Constitution saving throw. On a
+          successful save, the spell has no effect.</p><p>Everything that a
+          targeted creature is wearing and carrying changes size with it. Any
+          item it drops returns to normal size at once. A thrown weapon or piece
+          of ammunition returns to normal size immediately after it hits or
+          misses a target.</p><p><strong>Enlarge.</strong> The target's size
+          increases by one category—from Medium to Large, for example. The
+          target also has Advantage on Strength checks and Strength saving
+          throws. The target's attacks with its enlarged weapons or Unarmed
+          Strikes deal an extra 1d4 damage on a
+          hit.</p><p><strong>Reduce.</strong> The target's size decreases by one
+          category—from Medium to Small, for example. The target also has
+          Disadvantage on Strength checks and Strength saving throws. The
+          target's attacks with its reduced weapons or Unarmed Strikes deal 1d4
+          less damage on a hit (this can't reduce the damage below 1).</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 2
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: '1'
+        units: minute
+      target:
+        affects:
+          type: creatureOrObject
+          count: '1'
+          choice: false
+          special: ''
+        template:
+          units: ft
+          contiguous: false
+          type: ''
+      range:
+        value: '30'
+        units: ft
+        special: ''
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 2
+      school: trs
+      properties:
+        - vocal
+        - somatic
+        - material
+        - concentration
+      materials:
+        value: a pinch of powdered iron
+        consumed: false
+        cost: 0
+        supply: 0
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects:
+            - _id: Wi2E10l7n6Ka8k6u
+              onSave: false
+              level: {}
+            - _id: NXdtOxX4HvPeodml
+              onSave: false
+              level: {}
+          range:
+            override: false
+            units: self
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          damage:
+            onSave: half
+            parts: []
+          save:
+            ability:
+              - con
+            dc:
+              calculation: spellcasting
+              formula: ''
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: enlarge-reduce
+      method: spell
+      prepared: 0
+      sourceClass: ranger
+    type: spell
+    img: icons/consumables/mushrooms/mushroom-spotted-red.webp
+    effects:
+      - name: Enlarged
+        origin: Compendium.dnd5e.spells24.Item.phbsplEnlargeRed
+        duration:
+          rounds: null
+          startTime: null
+          seconds: 60
+          combat: null
+          turns: null
+          startRound: null
+          startTurn: null
+        disabled: false
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        img: icons/magic/control/silhouette-grow-shrink-tan.webp
+        _id: Wi2E10l7n6Ka8k6u
+        type: base
+        system: {}
+        changes:
+          - key: system.bonuses.mwak.damage
+            mode: 2
+            value: 1d4
+            priority: null
+          - key: system.bonuses.rwak.damage
+            mode: 2
+            value: 1d4
+            priority: null
+          - key: system.abilities.str.check.roll.mode
+            mode: 2
+            value: '1'
+            priority: null
+          - key: system.abilities.str.save.roll.mode
+            mode: 2
+            value: '1'
+            priority: null
+        description: >-
+          <p>The target’s size increases by one category—from Medium to Large,
+          for example. The target also has Advantage on Strength checks and
+          Strength saving throws. The target’s attacks with its enlarged weapons
+          or Unarmed Strikes deal an extra 1d4 damage on a hit.</p>
+        tint: '#ffffff'
+        transfer: false
+        statuses: []
+        sort: 0
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!QuillatheLv11000.1AjUB13d58Xc0f1I.Wi2E10l7n6Ka8k6u
+      - name: Reduced
+        origin: Compendium.dnd5e.spells24.Item.phbsplEnlargeRed
+        duration:
+          rounds: null
+          startTime: null
+          seconds: 60
+          combat: null
+          turns: null
+          startRound: null
+          startTurn: null
+        disabled: false
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        img: icons/magic/control/silhouette-grow-shrink-blue.webp
+        _id: NXdtOxX4HvPeodml
+        type: base
+        system: {}
+        changes:
+          - key: system.bonuses.mwak.damage
+            mode: 2
+            value: '- 1d4'
+            priority: null
+          - key: system.bonuses.rwak.damage
+            mode: 2
+            value: '- 1d4'
+            priority: null
+          - key: system.abilities.str.check.roll.mode
+            mode: 2
+            value: '-1'
+            priority: null
+          - key: system.abilities.str.save.roll.mode
+            mode: 2
+            value: '-1'
+            priority: null
+        description: >-
+          <p>The target’s size decreases by one category—from Medium to Small,
+          for example. The target also has Disadvantage on Strength checks and
+          Strength saving throws. The target’s attacks with its reduced weapons
+          or Unarmed Strikes deal 1d4 less damage on a hit (this can’t reduce
+          the damage below 1).</p>
+        tint: '#ffffff'
+        transfer: false
+        statuses: []
+        sort: 0
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!QuillatheLv11000.1AjUB13d58Xc0f1I.NXdtOxX4HvPeodml
+      - _id: dnd5espellchange
+        type: enchantment
+        name: Spell Changes
+        img: systems/dnd5e/icons/svg/activity/cast.svg
+        origin: >-
+          Compendium.dnd5e.actors24.Actor.QuillatheLv11000.Item.WyVga5iUa1gmsOHD.Activity.o9I0OYuD6EkLaGCR
+        changes:
+          - key: system.method
+            mode: 5
+            value: spell
+          - key: system.activation
+            mode: 5
+            value: '{"type":"bonus","value":null,"condition":""}'
+          - key: system.properties
+            mode: 2
+            value: '-vocal'
+          - key: system.properties
+            mode: 2
+            value: '-somatic'
+          - key: system.properties
+            mode: 2
+            value: '-material'
+          - key: system.properties
+            mode: 2
+            value: '-concentration'
+        system: {}
+        disabled: false
+        duration:
+          startTime: 0
+          combat: null
+        description: ''
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!QuillatheLv11000.1AjUB13d58Xc0f1I.dnd5espellchange
+    folder: 3SjcO2acsFnWegp4
+    sort: 3700000
+    flags:
+      dnd5e:
+        cachedFor: .Item.WyVga5iUa1gmsOHD.Activity.o9I0OYuD6EkLaGCR
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplEnlargeRed
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    _id: 1AjUB13d58Xc0f1I
+    ownership:
+      default: 0
+    _key: '!actors.items!QuillatheLv11000.1AjUB13d58Xc0f1I'
+  - _id: yaCDtthLiWjvYRwT
+    name: Potion of Fire Resistance
+    type: consumable
+    img: >-
+      icons/consumables/potions/potion-bottle-labeled-medicine-capped-red-black.webp
+    system:
+      activities:
+        n52xzzYU7CI8sywr:
+          type: utility
+          name: Drink Potion
+          _id: n52xzzYU7CI8sywr
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling: {}
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects:
+            - _id: rp68qDxzWquL4KsY
+              level:
+                min: null
+                max: null
+            - _id: En6oT73Shu6Alr46
+              level:
+                min: null
+                max: null
+            - _id: UI7peFQB9vCGuwpG
+              level:
+                min: null
+                max: null
+            - _id: CuxyOkR4W9VP8KOM
+              level:
+                min: null
+                max: null
+            - _id: ZPdhGzt0bhaZyVd2
+              level:
+                min: null
+                max: null
+            - _id: 29M8rjINOWKcHek6
+              level:
+                min: null
+                max: null
+            - _id: VAndQR2Hu88gg4NF
+              level:
+                min: null
+                max: null
+            - _id: 4YWphFJwC5ojd6Ib
+              level:
+                min: null
+                max: null
+            - _id: SH3poodOtfaaAiv8
+              level:
+                min: null
+                max: null
+            - _id: hSarjVpqNwhqKOB1
+              level:
+                min: null
+                max: null
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: ''
+              type: self
+              special: ''
+            override: false
+            prompt: false
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          visibility:
+            requireMagic: true
+            level:
+              min: null
+              max: null
+            identifier: ''
+            requireAttunement: false
+            requireIdentification: false
+          flags: {}
+      uses:
+        spent: 0
+        recovery: []
+        autoDestroy: true
+        max: '1'
+      description:
+        value: >-
+          <p><em>Potion, Uncommon</em></p><p>When you drink this potion, you
+          have Resistance to one type of damage for 1 hour. The GM chooses the
+          type or determines it randomly by rolling on the following
+          table.</p><p>@Embed[Compendium.dnd5e.tables24.RollTable.dmgPotionOfResis
+          caption=false rollable]</p><section class="secret"
+          id="secret-yI26znYuybVCz6iX"><p><strong>Foundry
+          Note</strong></p><p>This item includes Active Effects for each type of
+          resistance. Use the AE for the type of damage chosen by your
+          DM.</p></section>
+        chat: ''
+      identifier: potion-of-resistance
+      source:
+        revision: 1
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 0.5
+        units: lb
+      price:
+        value: 200
+        denomination: gp
+      rarity: uncommon
+      attunement: ''
+      type:
+        value: potion
+        subtype: ''
+      damage:
+        base:
+          number: null
+          denomination: null
+          types: []
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+        replace: false
+      magicalBonus: null
+      properties:
+        - mgc
+      attuned: false
+      equipped: false
+    effects:
+      - name: Fire Resistance
+        img: systems/dnd5e/icons/svg/damage/fire.svg
+        type: base
+        system: {}
+        changes:
+          - key: system.traits.dr.value
+            mode: 2
+            value: fire
+            priority: null
+        disabled: false
+        duration:
+          startTime: null
+          seconds: 3600
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        origin: null
+        tint: '#ffffff'
+        transfer: false
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _id: UI7peFQB9vCGuwpG
+        _key: >-
+          !actors.items.effects!QuillatheLv11000.yaCDtthLiWjvYRwT.UI7peFQB9vCGuwpG
+    folder: 4NjJfCbRAVhw8ESv
+    flags: {}
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.equipment24.Item.dmgPotionOfResis
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 0
+    ownership:
+      default: 0
+    _key: '!actors.items!QuillatheLv11000.yaCDtthLiWjvYRwT'
 effects: []
 flags: {}
 _stats:
@@ -8186,12 +11438,12 @@ _stats:
   coreVersion: '13.351'
   systemId: dnd5e
   systemVersion: 5.2.4
-  createdTime: 1768269774466
-  modifiedTime: 1768270107592
+  createdTime: 1768271913659
+  modifiedTime: 1768688235803
   lastModifiedBy: dnd5ebuilder0000
+img: null
+folder: 1EDP5HqqwXarG88N
 ownership:
   default: 0
-sort: 200000
-img: ''
-folder: JRPsXXWuBa56FSZb
-_key: '!actors!QuillatheLv05000'
+sort: 700000
+_key: '!actors!QuillatheLv11000'

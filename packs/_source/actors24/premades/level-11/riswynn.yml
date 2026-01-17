@@ -1,10 +1,10 @@
 name: Riswynn
 type: character
-_id: RiswynnLv0500000
+_id: RiswynnLv1100000
 system:
   currency:
     pp: 0
-    gp: 76
+    gp: 226
     ep: 0
     sp: 0
     cp: 0
@@ -27,7 +27,7 @@ system:
           max: null
           mode: 0
     dex:
-      value: 19
+      value: 20
       proficient: 1
       max: null
       bonuses:
@@ -61,7 +61,7 @@ system:
           max: null
           mode: 0
     int:
-      value: 14
+      value: 17
       proficient: 1
       max: null
       bonuses:
@@ -177,7 +177,7 @@ system:
         min: null
         max: null
         mode: 0
-      value: 1
+      value: 2
       bonuses:
         check: ''
         passive: ''
@@ -247,7 +247,7 @@ system:
         min: null
         max: null
         mode: 0
-      value: 1
+      value: 2
       bonuses:
         check: ''
         passive: ''
@@ -391,7 +391,7 @@ system:
       max: null
       temp: null
       tempmax: 0
-      value: 43
+      value: 91
       bonuses: {}
     death:
       roll:
@@ -708,7 +708,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.8pH6fGe86boFgbnP'
+    _key: '!actors.items!RiswynnLv1100000.8pH6fGe86boFgbnP'
   - _id: 2k0T89gikUZqXOhx
     name: Dwarven Resilience
     type: feat
@@ -764,7 +764,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.2k0T89gikUZqXOhx'
+    _key: '!actors.items!RiswynnLv1100000.2k0T89gikUZqXOhx'
   - _id: 23hZYyQB2r7FYfDF
     name: Dwarven Toughness
     type: feat
@@ -837,7 +837,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!RiswynnLv0500000.23hZYyQB2r7FYfDF.Na7W3p67eT9YqW87
+          !actors.items.effects!RiswynnLv1100000.23hZYyQB2r7FYfDF.Na7W3p67eT9YqW87
     folder: R0KprZdOrRDNsTBv
     flags:
       dnd5e:
@@ -855,7 +855,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.23hZYyQB2r7FYfDF'
+    _key: '!actors.items!RiswynnLv1100000.23hZYyQB2r7FYfDF'
   - name: Stonecunning
     system:
       description:
@@ -997,7 +997,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!RiswynnLv0500000.0sOpkCaLkao7OFhW.SAbuNo2AO3XXtkdv
+          !actors.items.effects!RiswynnLv1100000.0sOpkCaLkao7OFhW.SAbuNo2AO3XXtkdv
     sort: 100000
     flags:
       dnd5e:
@@ -1014,7 +1014,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.0sOpkCaLkao7OFhW'
+    _key: '!actors.items!RiswynnLv1100000.0sOpkCaLkao7OFhW'
   - _id: CqmrnNL3Ah75KIAB
     name: Rogue
     type: class
@@ -1141,7 +1141,7 @@ items:
           group: H3jVZpWr5rfZX6BH
           sort: 1000000
       identifier: rogue
-      levels: 5
+      levels: 11
       advancement:
         - _id: 6zkx7K1uPW2IQ5JA
           type: HitPoints
@@ -1152,6 +1152,12 @@ items:
             '3': avg
             '4': avg
             '5': avg
+            '6': avg
+            '7': avg
+            '8': avg
+            '9': avg
+            '10': avg
+            '11': avg
         - _id: 4lvoA3fvGLv15lyc
           type: ItemGrant
           configuration:
@@ -1226,7 +1232,10 @@ items:
                 optional: false
             optional: false
             spell: null
-          value: {}
+          value:
+            added:
+              Ez1rZavPKr89JLNu: Compendium.dnd5e.classes24.Item.phbrgeEvasion000
+              w6dnHDbB4EJfyadL: Compendium.dnd5e.classes24.Item.phbrgeReliableTa
           level: 7
           title: Class Features
         - _id: G8gk2pfQ2FIn6lX9
@@ -1237,7 +1246,9 @@ items:
                 optional: false
             optional: false
             spell: null
-          value: {}
+          value:
+            added:
+              r6AKb88Uu6pXwmmd: Compendium.dnd5e.classes24.Item.phbrgeImprovedCu
           level: 11
           title: Class Features
         - _id: bUBIV36rJZHw5GKr
@@ -1320,6 +1331,9 @@ items:
             recommendation: null
           value:
             type: asi
+            assignments:
+              dex: 1
+              int: 1
           level: 8
           title: ''
         - _id: mhZh3LfLMa15tXee
@@ -1374,6 +1388,8 @@ items:
             recommendation: null
           value:
             type: asi
+            assignments:
+              int: 2
           level: 10
           title: ''
         - _id: 4doj2kFD8sIYiX8X
@@ -1407,7 +1423,9 @@ items:
                 pool:
                   - skills:*
           value:
-            chosen: []
+            chosen:
+              - skills:prc
+              - skills:dec
           level: 6
           title: Expertise
           hint: ''
@@ -1693,11 +1711,11 @@ items:
       systemId: dnd5e
       systemVersion: 5.2.4
       lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1768612558083
+      modifiedTime: 1768613161290
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.CqmrnNL3Ah75KIAB'
+    _key: '!actors.items!RiswynnLv1100000.CqmrnNL3Ah75KIAB'
   - _id: L6u99eYSlxnjEpWD
     name: Expertise
     type: feat
@@ -1755,7 +1773,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.L6u99eYSlxnjEpWD'
+    _key: '!actors.items!RiswynnLv1100000.L6u99eYSlxnjEpWD'
   - _id: hpZHmGBuw1lyFZxO
     name: Sneak Attack
     type: feat
@@ -1903,7 +1921,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.hpZHmGBuw1lyFZxO'
+    _key: '!actors.items!RiswynnLv1100000.hpZHmGBuw1lyFZxO'
   - _id: wA4ESRuMmrpxVN1M
     name: Thieves' Cant
     type: feat
@@ -1963,7 +1981,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.wA4ESRuMmrpxVN1M'
+    _key: '!actors.items!RiswynnLv1100000.wA4ESRuMmrpxVN1M'
   - _id: jhV4pP4PyLLInuyZ
     name: Weapon Mastery
     type: feat
@@ -2020,7 +2038,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.jhV4pP4PyLLInuyZ'
+    _key: '!actors.items!RiswynnLv1100000.jhV4pP4PyLLInuyZ'
   - name: Dagger
     system:
       description:
@@ -2189,7 +2207,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.U8Yz9pYkHuczdPOm'
+    _key: '!actors.items!RiswynnLv1100000.U8Yz9pYkHuczdPOm'
   - name: Thieves' Tools
     system:
       description:
@@ -2311,7 +2329,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.U7JmxdCmUcDgPcAy'
+    _key: '!actors.items!RiswynnLv1100000.U7JmxdCmUcDgPcAy'
   - name: Shortsword
     system:
       description:
@@ -2479,7 +2497,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.uvZ0LxGbkR11JQSQ'
+    _key: '!actors.items!RiswynnLv1100000.uvZ0LxGbkR11JQSQ'
   - name: Shortbow
     system:
       description:
@@ -2635,7 +2653,72 @@ items:
     type: weapon
     folder: atG8UGtcNyNweUOt
     img: icons/weapons/bows/shortbow-leather.webp
-    effects: []
+    effects:
+      - type: enchantment
+        name: Weapon +1
+        img: systems/dnd5e/icons/spell-tiers/spell2.webp
+        disabled: false
+        _id: LxJN1IlHlntnYxP9
+        system: {}
+        changes:
+          - key: name
+            mode: 5
+            value: '{} +1'
+            priority: null
+          - key: system.magicalBonus
+            mode: 4
+            value: '1'
+            priority: null
+          - key: system.rarity
+            mode: 5
+            value: uncommon
+            priority: null
+          - key: system.description.value
+            mode: 5
+            value: >-
+              {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgWeapon12or300
+              caption=false]</p>
+            priority: null
+          - key: system.properties
+            mode: 2
+            value: mgc
+            priority: null
+          - key: system.price.value
+            mode: 2
+            value: '400'
+            priority: null
+          - key: system.price.denomination
+            mode: 5
+            value: gp
+            priority: null
+        duration:
+          startTime: null
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        origin: Compendium.dnd5e.equipment24.Item.dmgWeapon12or300
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: >-
+            Compendium.dnd5e.equipment24.Item.dmgWeapon12or300.ActiveEffect.8Fd1n2gyqFB5lLKd
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          createdTime: 1768614434581
+          modifiedTime: 1768614434581
+          lastModifiedBy: dnd5ebuilder0000
+        _key: >-
+          !actors.items.effects!RiswynnLv1100000.htlOpTVSqn3kW1NF.LxJN1IlHlntnYxP9
     sort: 0
     flags: {}
     _stats:
@@ -2648,65 +2731,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.htlOpTVSqn3kW1NF'
-  - name: Quiver
-    system:
-      description:
-        value: <p>A Quiver holds up to 20 Arrows.</p>
-        chat: ''
-      price:
-        value: 1
-        denomination: gp
-      quantity: 1
-      source:
-        custom: ''
-        rules: '2024'
-        license: CC-BY-4.0
-        book: ''
-        revision: 1
-      identified: true
-      unidentified:
-        description: ''
-      container: null
-      weight:
-        value: 1
-        units: lb
-      rarity: ''
-      attunement: ''
-      currency:
-        pp: 0
-        gp: 0
-        ep: 0
-        sp: 0
-        cp: 0
-      properties: []
-      capacity:
-        count: 20
-        volume:
-          units: cubicFoot
-        weight:
-          units: lb
-      identifier: quiver
-      attuned: false
-      equipped: false
-    _id: YZtAjfw40D5om3Px
-    type: container
-    folder: uDk4FBYfcP2JnX6t
-    img: icons/containers/ammunition/arrows-quiver-black.webp
-    effects: []
-    sort: 5100000
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.equipment24.Item.phbagQuiver00000
-      duplicateSource: null
-      exportSource: null
-      coreVersion: '13.351'
-      systemId: dnd5e
-      systemVersion: 5.2.4
-      lastModifiedBy: null
-    ownership:
-      default: 0
-    _key: '!actors.items!RiswynnLv0500000.YZtAjfw40D5om3Px'
+    _key: '!actors.items!RiswynnLv1100000.htlOpTVSqn3kW1NF'
   - name: Arrows
     system:
       description:
@@ -2731,8 +2756,8 @@ items:
       identified: true
       unidentified:
         description: ''
-      container: YZtAjfw40D5om3Px
-      quantity: 20
+      container: iUrp3OhD5nffgQL2
+      quantity: 60
       weight:
         value: 0.05
         units: lb
@@ -2765,7 +2790,7 @@ items:
       identifier: arrows
     _id: PTv6UVNHAkt9ZU82
     type: consumable
-    folder: EkXAWGxKr4wYpODe
+    folder: null
     img: icons/weapons/ammunition/arrows-broadhead-white.webp
     effects: []
     sort: 0
@@ -2777,10 +2802,11 @@ items:
       coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 5.2.4
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1768615109050
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.PTv6UVNHAkt9ZU82'
+    _key: '!actors.items!RiswynnLv1100000.PTv6UVNHAkt9ZU82'
   - name: Burglar's Pack
     system:
       description:
@@ -2853,7 +2879,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.Tk7xDq98Zy4XYPrW'
+    _key: '!actors.items!RiswynnLv1100000.Tk7xDq98Zy4XYPrW'
   - name: Bell
     system:
       description:
@@ -2927,7 +2953,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.ygTMxMalYrb2TFB8'
+    _key: '!actors.items!RiswynnLv1100000.ygTMxMalYrb2TFB8'
   - name: Oil
     system:
       description:
@@ -3144,7 +3170,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.dKGSyXXHSBUmbhNC'
+    _key: '!actors.items!RiswynnLv1100000.dKGSyXXHSBUmbhNC'
   - name: Ball Bearings
     system:
       description:
@@ -3368,7 +3394,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!RiswynnLv0500000.Dr5AjYshuykbP6Fx.zW4roNKVL8HcoNwV
+          !actors.items.effects!RiswynnLv1100000.Dr5AjYshuykbP6Fx.zW4roNKVL8HcoNwV
     sort: 0
     flags: {}
     _stats:
@@ -3381,7 +3407,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.Dr5AjYshuykbP6Fx'
+    _key: '!actors.items!RiswynnLv1100000.Dr5AjYshuykbP6Fx'
   - name: Tinderbox
     system:
       description:
@@ -3510,7 +3536,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.HaOwleDWSsqy62rk'
+    _key: '!actors.items!RiswynnLv1100000.HaOwleDWSsqy62rk'
   - name: Waterskin
     system:
       description:
@@ -3570,7 +3596,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.LHNSwOOEMU1SPruk'
+    _key: '!actors.items!RiswynnLv1100000.LHNSwOOEMU1SPruk'
   - name: Water (Pint)
     type: consumable
     img: icons/magic/water/water-drop-swirl-blue.webp
@@ -3693,7 +3719,7 @@ items:
     sort: 100000
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.Ty9z1HQR3ADbPeec'
+    _key: '!actors.items!RiswynnLv1100000.Ty9z1HQR3ADbPeec'
   - name: Rations
     system:
       description:
@@ -3762,7 +3788,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.FALUE3tUvUxAbrmm'
+    _key: '!actors.items!RiswynnLv1100000.FALUE3tUvUxAbrmm'
   - name: Crowbar
     system:
       description:
@@ -3810,7 +3836,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.kcayQe525xuJveTe'
+    _key: '!actors.items!RiswynnLv1100000.kcayQe525xuJveTe'
   - name: Candle
     system:
       description:
@@ -3935,7 +3961,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.N96NKmCnkUBLznLv'
+    _key: '!actors.items!RiswynnLv1100000.N96NKmCnkUBLznLv'
   - name: Rope
     system:
       description:
@@ -4176,7 +4202,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.AltGmBrWKBYiCmap'
+    _key: '!actors.items!RiswynnLv1100000.AltGmBrWKBYiCmap'
   - name: Calligrapher's Supplies
     system:
       description:
@@ -4301,7 +4327,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.EPXrCaGXJmEpyHtl'
+    _key: '!actors.items!RiswynnLv1100000.EPXrCaGXJmEpyHtl'
   - name: Clothes, Fine
     system:
       description:
@@ -4376,7 +4402,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.A2NnKHAAuJrUWe6n'
+    _key: '!actors.items!RiswynnLv1100000.A2NnKHAAuJrUWe6n'
   - name: Lantern, Hooded
     system:
       description:
@@ -4517,7 +4543,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.OzUWeWjlfsazHJgb'
+    _key: '!actors.items!RiswynnLv1100000.OzUWeWjlfsazHJgb'
   - _id: 8D5MNyj6IOqJnc6L
     name: Cunning Action
     type: feat
@@ -4746,7 +4772,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!RiswynnLv0500000.8D5MNyj6IOqJnc6L.YLfpwyCVUObRTopP
+          !actors.items.effects!RiswynnLv1100000.8D5MNyj6IOqJnc6L.YLfpwyCVUObRTopP
     flags:
       dnd5e:
         sourceId: Compendium.dnd5e.classes24.Item.phbrgeCunningAct
@@ -4759,12 +4785,11 @@ items:
       coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 5.2.4
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1768612387232
+      lastModifiedBy: null
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.8D5MNyj6IOqJnc6L'
+    _key: '!actors.items!RiswynnLv1100000.8D5MNyj6IOqJnc6L'
   - _id: iSK720h4AStmW1uw
     name: Steady Aim
     type: feat
@@ -4867,12 +4892,11 @@ items:
       coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 5.2.4
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1768612387232
+      lastModifiedBy: null
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.iSK720h4AStmW1uw'
+    _key: '!actors.items!RiswynnLv1100000.iSK720h4AStmW1uw'
   - _id: oYLm5eR9RCTgb6sv
     name: Thief
     type: subclass
@@ -4921,7 +4945,9 @@ items:
                 optional: false
             optional: false
             spell: null
-          value: {}
+          value:
+            added:
+              9GTfEAzsMJ3c9fiF: Compendium.dnd5e.classes24.Item.phbrgeSupremeSne
           level: 9
           title: Subclass Features
         - _id: aNcqA4J0puHsYiyv
@@ -4962,11 +4988,12 @@ items:
       coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 5.2.4
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1768613161290
     sort: 500000
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.oYLm5eR9RCTgb6sv'
+    _key: '!actors.items!RiswynnLv1100000.oYLm5eR9RCTgb6sv'
   - _id: dvry6eymRrZqugnb
     name: Fast Hands
     type: feat
@@ -5186,12 +5213,11 @@ items:
       coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 5.2.4
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1768612387232
+      lastModifiedBy: null
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.dvry6eymRrZqugnb'
+    _key: '!actors.items!RiswynnLv1100000.dvry6eymRrZqugnb'
   - _id: JukrDNT9DUQvhsCn
     name: Second-Story Work
     type: feat
@@ -5236,8 +5262,8 @@ items:
     effects:
       - name: Second-Story Work
         img: icons/environment/settlement/stone-stairs.webp
-        origin: Compendium.dnd5e.actors24.Actor.RiswynnLv0500000.Item.JukrDNT9DUQvhsCn
-        _id: 169TouW3fJ1ZAdy6
+        origin: Compendium.dnd5e.actors24.Actor.RiswynnLv1100000.Item.JukrDNT9DUQvhsCn
+        _id: 21BvmyRzw5hrEFEr
         type: base
         system: {}
         changes:
@@ -5270,11 +5296,11 @@ items:
           coreVersion: '13.351'
           systemId: dnd5e
           systemVersion: 5.2.4
-          createdTime: 1768613399804
-          modifiedTime: 1768613657269
+          createdTime: 1768613675126
+          modifiedTime: 1768613698796
           lastModifiedBy: dnd5ebuilder0000
         _key: >-
-          !actors.items.effects!RiswynnLv0500000.JukrDNT9DUQvhsCn.169TouW3fJ1ZAdy6
+          !actors.items.effects!RiswynnLv1100000.JukrDNT9DUQvhsCn.21BvmyRzw5hrEFEr
     flags:
       dnd5e:
         sourceId: Compendium.dnd5e.classes24.Item.phbrgeSecondstor
@@ -5287,12 +5313,11 @@ items:
       coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 5.2.4
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1768612387232
+      lastModifiedBy: null
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.JukrDNT9DUQvhsCn'
+    _key: '!actors.items!RiswynnLv1100000.JukrDNT9DUQvhsCn'
   - _id: sS65CaD6oR2S1uig
     name: Cunning Strike
     type: feat
@@ -5641,7 +5666,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!RiswynnLv0500000.sS65CaD6oR2S1uig.RazTM6biKVtNtjEW
+          !actors.items.effects!RiswynnLv1100000.sS65CaD6oR2S1uig.RazTM6biKVtNtjEW
       - name: 'Cunning Strike: Tripped'
         img: icons/skills/melee/blade-tip-acid-poison-green.webp
         origin: Compendium.dnd5e.classes24.Item.phbrgeCunningStr
@@ -5674,7 +5699,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!RiswynnLv0500000.sS65CaD6oR2S1uig.La47n2N3VtECtnA9
+          !actors.items.effects!RiswynnLv1100000.sS65CaD6oR2S1uig.La47n2N3VtECtnA9
     flags:
       dnd5e:
         sourceId: Compendium.dnd5e.classes24.Item.phbrgeCunningStr
@@ -5687,12 +5712,11 @@ items:
       coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 5.2.4
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1768612387232
+      lastModifiedBy: null
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.sS65CaD6oR2S1uig'
+    _key: '!actors.items!RiswynnLv1100000.sS65CaD6oR2S1uig'
   - _id: MZimHBVO8UCSFu5v
     name: Uncanny Dodge
     type: feat
@@ -5791,12 +5815,11 @@ items:
       coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 5.2.4
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1768612387232
+      lastModifiedBy: null
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.MZimHBVO8UCSFu5v'
+    _key: '!actors.items!RiswynnLv1100000.MZimHBVO8UCSFu5v'
   - name: Studded Leather Armor
     system:
       description:
@@ -5855,7 +5878,68 @@ items:
     type: equipment
     folder: G3X11BbtmEqLmEnK
     img: icons/equipment/chest/breastplate-rivited-red.webp
-    effects: []
+    effects:
+      - type: enchantment
+        name: Armor +1
+        img: systems/dnd5e/icons/spell-tiers/spell3.webp
+        disabled: false
+        _id: MCISan1Qn5JX0FMM
+        system: {}
+        changes:
+          - key: name
+            mode: 5
+            value: '{} +1'
+            priority: null
+          - key: system.rarity
+            mode: 5
+            value: rare
+            priority: null
+          - key: system.description.value
+            mode: 5
+            value: >-
+              {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgArmor12or3000
+              caption=false]</p>
+            priority: null
+          - key: system.properties
+            mode: 2
+            value: mgc
+            priority: null
+          - key: system.armor.magicalBonus
+            mode: 4
+            value: '1'
+            priority: null
+          - key: system.price.value
+            mode: 2
+            value: '4000'
+            priority: null
+        duration:
+          startTime: null
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        origin: Compendium.dnd5e.equipment24.Item.dmgArmor12or3000
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: >-
+            Compendium.dnd5e.equipment24.Item.dmgArmor12or3000.ActiveEffect.6JbAzK6YBkyx73iy
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          createdTime: 1768614396413
+          modifiedTime: 1768614396413
+          lastModifiedBy: dnd5ebuilder0000
+        _key: >-
+          !actors.items.effects!RiswynnLv1100000.eaZGzzHyIG9PBGlT.MCISan1Qn5JX0FMM
     sort: 0
     flags: {}
     _stats:
@@ -5865,11 +5949,10 @@ items:
       coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 5.2.4
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1768612387232
+      lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.eaZGzzHyIG9PBGlT'
+    _key: '!actors.items!RiswynnLv1100000.eaZGzzHyIG9PBGlT'
   - _id: Asleuzhulo3Eeejn
     name: Gem of Brightness
     type: equipment
@@ -6175,7 +6258,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!RiswynnLv0500000.Asleuzhulo3Eeejn.05Lok63szRXdAafx
+          !actors.items.effects!RiswynnLv1100000.Asleuzhulo3Eeejn.05Lok63szRXdAafx
     flags: {}
     _stats:
       duplicateSource: null
@@ -6188,7 +6271,7 @@ items:
     sort: 15400000
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.Asleuzhulo3Eeejn'
+    _key: '!actors.items!RiswynnLv1100000.Asleuzhulo3Eeejn'
   - _id: kIdGCeOaQIWUrlOH
     name: Wand of Magic Missiles
     type: equipment
@@ -6332,7 +6415,7 @@ items:
     sort: -200000
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.kIdGCeOaQIWUrlOH'
+    _key: '!actors.items!RiswynnLv1100000.kIdGCeOaQIWUrlOH'
   - name: Magic Missile
     system:
       description:
@@ -6491,7 +6574,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!RiswynnLv0500000.3uB3R7H2njpxEdOx.dnd5espellchange
+          !actors.items.effects!RiswynnLv1100000.3uB3R7H2njpxEdOx.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
     sort: 1100000
     flags:
@@ -6504,12 +6587,11 @@ items:
       coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 5.2.4
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1768612387232
+      lastModifiedBy: null
     _id: 3uB3R7H2njpxEdOx
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.3uB3R7H2njpxEdOx'
+    _key: '!actors.items!RiswynnLv1100000.3uB3R7H2njpxEdOx'
   - _id: Wiwj6UiMzuczXdi1
     name: Potion of Healing
     type: consumable
@@ -6603,7 +6685,7 @@ items:
       unidentified:
         description: ''
       container: null
-      quantity: 5
+      quantity: 6
       weight:
         value: 0.5
         units: lb
@@ -6639,144 +6721,12 @@ items:
       coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 5.2.4
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1768613751397
     sort: 100000
     ownership:
       default: 0
-    _key: '!actors.items!RiswynnLv0500000.Wiwj6UiMzuczXdi1'
-  - name: Quiver
-    system:
-      description:
-        value: <p>A Quiver holds up to 20 Arrows.</p>
-        chat: ''
-      price:
-        value: 1
-        denomination: gp
-      quantity: 1
-      source:
-        custom: ''
-        rules: '2024'
-        license: CC-BY-4.0
-        book: ''
-        revision: 1
-      identified: true
-      unidentified:
-        description: ''
-      container: null
-      weight:
-        value: 1
-        units: lb
-      rarity: ''
-      attunement: ''
-      currency:
-        pp: 0
-        gp: 0
-        ep: 0
-        sp: 0
-        cp: 0
-      properties: []
-      capacity:
-        count: 20
-        volume:
-          units: cubicFoot
-        weight:
-          units: lb
-      identifier: quiver
-      attuned: false
-      equipped: false
-    _id: 17uwCNhIwzsvEJgE
-    type: container
-    folder: uDk4FBYfcP2JnX6t
-    img: icons/containers/ammunition/arrows-quiver-black.webp
-    effects: []
-    sort: 5100000
-    flags: {}
-    _stats:
-      duplicateSource: null
-      exportSource: null
-      compendiumSource: Compendium.dnd5e.equipment24.Item.phbagQuiver00000
-      coreVersion: '13.351'
-      systemId: dnd5e
-      systemVersion: 5.2.4
-      lastModifiedBy: null
-    ownership:
-      default: 0
-    _key: '!actors.items!RiswynnLv0500000.17uwCNhIwzsvEJgE'
-  - name: Arrows
-    system:
-      description:
-        value: >-
-          <p><em><strong>Storage:</strong>
-          @UUID[Compendium.dnd5e.equipment24.Item.phbagQuiver00000]{Quiver}</em></p><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagAmmunitionV]{Ammunition}
-          is required by a weapon that has the Ammunition property. A weapon's
-          description specifies the type of ammunition used by the weapon. The
-          Ammunition table lists the different types and the amount you get when
-          you buy them. The table also lists the item that is typically used to
-          store each type; storage must be bought separately.</p>
-        chat: ''
-      price:
-        value: 1
-        denomination: gp
-      source:
-        custom: ''
-        rules: '2024'
-        license: CC-BY-4.0
-        book: ''
-        revision: 1
-      identified: true
-      unidentified:
-        description: ''
-      container: 17uwCNhIwzsvEJgE
-      quantity: 20
-      weight:
-        value: 0.05
-        units: lb
-      rarity: ''
-      attunement: ''
-      attuned: false
-      equipped: false
-      uses:
-        max: ''
-        autoDestroy: false
-        spent: 0
-        recovery: []
-      damage:
-        base:
-          number: null
-          denomination: 0
-          types: []
-          custom:
-            enabled: false
-          scaling:
-            number: 1
-          bonus: ''
-        replace: false
-      type:
-        value: ammo
-        subtype: arrow
-      magicalBonus: null
-      properties: []
-      activities: {}
-      identifier: arrows
-    _id: D749tyVhyuBYYUUq
-    type: consumable
-    folder: EkXAWGxKr4wYpODe
-    img: icons/weapons/ammunition/arrows-broadhead-white.webp
-    effects: []
-    sort: 0
-    flags: {}
-    _stats:
-      duplicateSource: null
-      exportSource: null
-      compendiumSource: Compendium.dnd5e.equipment24.Item.phbamoArrows0000
-      coreVersion: '13.351'
-      systemId: dnd5e
-      systemVersion: 5.2.4
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1768612387232
-    ownership:
-      default: 0
-    _key: '!actors.items!RiswynnLv0500000.D749tyVhyuBYYUUq'
+    _key: '!actors.items!RiswynnLv1100000.Wiwj6UiMzuczXdi1'
   - name: Bureaucrat
     type: background
     img: icons/skills/social/theft-pickpocket-bribery-brown.webp
@@ -6917,13 +6867,11 @@ items:
       coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 5.2.4
-      createdTime: 1768612489524
-      modifiedTime: 1768612489524
-      lastModifiedBy: dnd5ebuilder0000
+      lastModifiedBy: null
     ownership:
       default: 0
     _id: U9zW5tZLNMSn6vTJ
-    _key: '!actors.items!RiswynnLv0500000.U9zW5tZLNMSn6vTJ'
+    _key: '!actors.items!RiswynnLv1100000.U9zW5tZLNMSn6vTJ'
   - name: Skilled
     system:
       description:
@@ -6995,10 +6943,2015 @@ items:
       coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 5.2.4
-      createdTime: 1768612489524
-      modifiedTime: 1768612558083
+      lastModifiedBy: null
+    _key: '!actors.items!RiswynnLv1100000.zOwXg8hDdq4Lm4DF'
+  - _id: Ez1rZavPKr89JLNu
+    name: Evasion
+    type: feat
+    folder: ymTkGscp5QEOwDlv
+    img: icons/skills/movement/feet-winged-boots-brown.webp
+    system:
+      description:
+        value: "<p>You can nimbly dodge out of the way of certain dangers. When you're subjected to an effect that allows you to make a Dexterity saving throw to take only half damage, you instead take no damage if you succeed on the saving throw and only half damage if you fail. You can't use this feature if you have the Incapacitated condition.</p><section class=\"secret\" id=\"secret-mJSoikZHwVq6UUDf\"><p><strong>Foundry Note</strong></p><p>With your token selected you can either right click on the damage roll's chat card and select <span class=\"reference\"><em class=\"fas fa-user-shield\">\_</em>Apply Half Damage</span> or click the \"1/2\" button and then the <span class=\"reference\"><em class=\"fa-solid fa-reply-all\">\_</em>Apply</span> button.</p></section>"
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: class
+        subtype: ''
+      prerequisites:
+        level: 7
+        repeatable: false
+        items: []
+      properties: []
+      requirements: ''
+      activities: {}
+      enchant: {}
+      identifier: evasion
+      advancement: []
+      crewed: false
+    effects: []
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        sourceId: Compendium.dnd5e.classes24.Item.phbrgeEvasion000
+        advancementOrigin: CqmrnNL3Ah75KIAB.6lgPpApxgrLKsNdH
+        advancementRoot: CqmrnNL3Ah75KIAB.6lgPpApxgrLKsNdH
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.classes24.Item.phbrgeEvasion000
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      createdTime: 1768613161258
+      modifiedTime: 1768613161258
       lastModifiedBy: dnd5ebuilder0000
-    _key: '!actors.items!RiswynnLv0500000.zOwXg8hDdq4Lm4DF'
+    sort: 0
+    ownership:
+      default: 0
+    _key: '!actors.items!RiswynnLv1100000.Ez1rZavPKr89JLNu'
+  - _id: w6dnHDbB4EJfyadL
+    name: Reliable Talent
+    type: feat
+    folder: ymTkGscp5QEOwDlv
+    img: icons/skills/ranged/target-bullseye-arrow-glowing.webp
+    system:
+      description:
+        value: >-
+          <p>Whenever you make an ability check that uses one of your skill or
+          tool proficiencies, you can treat a d20 roll of 9 or lower as a
+          10.</p><section class="secret"
+          id="secret-FOATC0HOce35kD20"><p><strong>Foundry
+          Note</strong></p><p>This feature includes an Active Effect which
+          automates the minimum roll of 10 on your skill and tool
+          proficiencies.</p></section>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: class
+        subtype: ''
+      prerequisites:
+        level: 7
+        repeatable: false
+        items: []
+      properties: []
+      requirements: ''
+      activities: {}
+      enchant: {}
+      identifier: reliable-talent
+      advancement: []
+      crewed: false
+    effects:
+      - _id: TIw25thHBYEPdKR1
+        changes:
+          - key: flags.dnd5e.reliableTalent
+            mode: 5
+            value: 'true'
+            priority: null
+        disabled: false
+        duration:
+          startTime: 0
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        origin: Compendium.dnd5e.classes24.Item.phbrgeReliableTa
+        transfer: true
+        flags: {}
+        tint: '#ffffff'
+        name: Reliable Talent
+        description: ''
+        statuses: []
+        _stats:
+          compendiumSource: >-
+            Compendium.dnd5e.classfeatures.Item.YN9xm6MCvse4Y60u.ActiveEffect.vMMZHZQ0qT7MT4I4
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        img: icons/skills/ranged/target-bullseye-arrow-glowing.webp
+        type: base
+        system: {}
+        sort: 0
+        _key: >-
+          !actors.items.effects!RiswynnLv1100000.w6dnHDbB4EJfyadL.TIw25thHBYEPdKR1
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        sourceId: Compendium.dnd5e.classes24.Item.phbrgeReliableTa
+        advancementOrigin: CqmrnNL3Ah75KIAB.6lgPpApxgrLKsNdH
+        advancementRoot: CqmrnNL3Ah75KIAB.6lgPpApxgrLKsNdH
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.classes24.Item.phbrgeReliableTa
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      createdTime: 1768613161258
+      modifiedTime: 1768613161258
+      lastModifiedBy: dnd5ebuilder0000
+    sort: 0
+    ownership:
+      default: 0
+    _key: '!actors.items!RiswynnLv1100000.w6dnHDbB4EJfyadL'
+  - _id: 9GTfEAzsMJ3c9fiF
+    name: Supreme Sneak
+    type: feat
+    folder: dnKXgPPMNF5Jbw2T
+    img: icons/magic/perception/shadow-stealth-eyes-purple.webp
+    system:
+      description:
+        value: >-
+          <p>You gain the following Cunning Strike option.</p><p><strong>Stealth
+          Attack (Cost: 1d6).</strong> If you have the &amp;Reference[Hide]
+          action's Invisible condition, this attack doesn't end that condition
+          on you if you end the turn behind &amp;Reference[Three-Quarters Cover]
+          or &amp;Reference[Total Cover].</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: class
+        subtype: ''
+      prerequisites:
+        level: 9
+        repeatable: false
+        items: []
+      properties: []
+      requirements: ''
+      activities: {}
+      enchant: {}
+      identifier: supreme-sneak
+      advancement: []
+      crewed: false
+    effects: []
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        sourceId: Compendium.dnd5e.classes24.Item.phbrgeSupremeSne
+        advancementOrigin: oYLm5eR9RCTgb6sv.MlEcUhyGRGitfiUJ
+        advancementRoot: oYLm5eR9RCTgb6sv.MlEcUhyGRGitfiUJ
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.classes24.Item.phbrgeSupremeSne
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      createdTime: 1768613161258
+      modifiedTime: 1768613161258
+      lastModifiedBy: dnd5ebuilder0000
+    sort: 0
+    ownership:
+      default: 0
+    _key: '!actors.items!RiswynnLv1100000.9GTfEAzsMJ3c9fiF'
+  - _id: r6AKb88Uu6pXwmmd
+    name: Improved Cunning Strike
+    type: feat
+    folder: ymTkGscp5QEOwDlv
+    img: icons/skills/melee/blade-tip-smoke-green.webp
+    system:
+      description:
+        value: >-
+          <p>You can use up to two Cunning Strike effects when you deal Sneak
+          Attack damage, paying the die cost for each effect.</p><section
+          class="secret" id="secret-8yelsP7k8fXkEA5W"><p><strong>Foundry
+          Note</strong></p><p>After using Cunning Strike effects use the [[/item
+          Cunning Strike activity=Cunning Sneak Attack]]{Cunning Sneak Attack}
+          activity. It will prompt you to select how many dice you expended on
+          effects and deduct them from your Sneak Attack roll
+          automatically.</p><p>You can control the damage type in the damage
+          roll dialog box.</p></section>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: class
+        subtype: ''
+      prerequisites:
+        level: 11
+        repeatable: false
+        items: []
+      properties: []
+      requirements: ''
+      activities: {}
+      enchant: {}
+      identifier: improved-cunning-strike
+      advancement: []
+      crewed: false
+    effects: []
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        sourceId: Compendium.dnd5e.classes24.Item.phbrgeImprovedCu
+        advancementOrigin: CqmrnNL3Ah75KIAB.G8gk2pfQ2FIn6lX9
+        advancementRoot: CqmrnNL3Ah75KIAB.G8gk2pfQ2FIn6lX9
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.classes24.Item.phbrgeImprovedCu
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      createdTime: 1768613161258
+      modifiedTime: 1768613161258
+      lastModifiedBy: dnd5ebuilder0000
+    sort: 0
+    ownership:
+      default: 0
+    _key: '!actors.items!RiswynnLv1100000.r6AKb88Uu6pXwmmd'
+  - _id: JVBm2kFymbWzGHOI
+    name: Wand of Fireballs
+    type: equipment
+    img: icons/weapons/staves/staff-obsidian.webp
+    system:
+      activities:
+        sKJAqxMR2KArEp0o:
+          type: cast
+          spell:
+            uuid: Compendium.dnd5e.spells24.Item.phbsplFireball00
+            challenge:
+              attack: null
+              save: 15
+              override: true
+            level: 3
+            properties:
+              - vocal
+              - somatic
+              - material
+            spellbook: true
+            ability: ''
+          _id: sKJAqxMR2KArEp0o
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            scaling:
+              allowed: true
+              max: min(@item.uses.value,3)
+            spellSlot: true
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling:
+                  mode: amount
+                  formula: ''
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          range:
+            override: false
+            units: self
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          name: ''
+          visibility:
+            requireIdentification: true
+            level:
+              min: null
+              max: null
+            identifier: ''
+            requireAttunement: false
+            requireMagic: false
+          flags: {}
+      uses:
+        spent: 0
+        recovery:
+          - period: dawn
+            type: formula
+            formula: 1d6 + 1
+        max: '7'
+      description:
+        value: >-
+          <p><em>Wand, Rare (Requires Attunement by a
+          Spellcaster)</em></p><p>This wand has 7 charges. While holding it, you
+          can expend no more than 3 charges to cast
+          @UUID[Compendium.dnd5e.spells24.Item.phbsplFireball00]{Fireball} (save
+          DC 15) from it. For 1 charge, you cast the level 3 version of the
+          spell. You can increase the spell's level by 1 for each additional
+          charge you expend.</p><p><em><strong>Regaining Charges.</strong></em>
+          The wand regains 1d6 + 1 expended charges daily at dawn. If you expend
+          the wand's last charge, roll [[/r 1d20]]. On a 1, the wand crumbles
+          into ashes and is destroyed.</p>
+        chat: ''
+      identifier: wand-of-fireballs
+      source:
+        revision: 1
+        rules: '2024'
+        book: ''
+        license: CC-BY-4.0
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 0
+        units: lb
+      price:
+        value: 4000
+        denomination: gp
+      rarity: rare
+      attunement: required
+      armor:
+        value: null
+        dex: null
+      cover: null
+      hp:
+        value: null
+        max: null
+        dt: null
+        conditions: ''
+      type:
+        value: wand
+        baseItem: ''
+      properties:
+        - foc
+        - mgc
+      proficient: null
+      crew:
+        value: []
+      strength: null
+      attuned: true
+      equipped: false
+    effects: []
+    folder: rLoBplj1TIznxeWI
+    flags: {}
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.equipment24.Item.dmgWandOfFirebal
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      createdTime: 1768614099014
+      modifiedTime: 1768614106849
+      lastModifiedBy: dnd5ebuilder0000
+    sort: -25000
+    ownership:
+      default: 0
+    _key: '!actors.items!RiswynnLv1100000.JVBm2kFymbWzGHOI'
+  - name: Fireball
+    system:
+      description:
+        value: >-
+          <p>A bright streak flashes from you to a point you choose within range
+          and then blossoms with a low roar into a fiery explosion. Each
+          creature in a 20-foot-radius Sphere centered on that point makes a
+          Dexterity saving throw, taking 8d6 Fire damage on a failed save or
+          half as much damage on a successful one.</p><p>Flammable objects in
+          the area that aren't being worn or carried start
+          burning.</p><p><strong>Using a Higher-Level Spell Slot.</strong> The
+          damage increases by 1d6 for each spell slot level above 3.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: ''
+        units: inst
+      target:
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        template:
+          units: ft
+          type: sphere
+          size: '20'
+          contiguous: false
+          count: ''
+      range:
+        value: '150'
+        units: ft
+        special: ''
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 3
+      school: evo
+      properties:
+        - vocal
+        - somatic
+        - material
+      materials:
+        value: a ball of bat guano and sulfur
+        consumed: false
+        cost: 0
+        supply: 0
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects: []
+          range:
+            override: false
+            units: self
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          damage:
+            onSave: half
+            parts:
+              - number: 8
+                denomination: 6
+                bonus: ''
+                types:
+                  - fire
+                custom:
+                  enabled: false
+                  formula: ''
+                scaling:
+                  mode: whole
+                  number: 1
+                  formula: ''
+          save:
+            ability:
+              - dex
+            dc:
+              calculation: spellcasting
+              formula: ''
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: fireball
+      method: spell
+      prepared: 0
+    type: spell
+    img: icons/magic/fire/barrier-shield-explosion-yellow.webp
+    effects:
+      - _id: dnd5espellchange
+        type: enchantment
+        name: Spell Changes
+        img: systems/dnd5e/icons/svg/activity/cast.svg
+        origin: >-
+          Compendium.dnd5e.actors24.Actor.RiswynnLv1100000.Item.JVBm2kFymbWzGHOI.Activity.sKJAqxMR2KArEp0o
+        changes:
+          - key: system.method
+            mode: 5
+            value: spell
+          - key: system.properties
+            mode: 2
+            value: '-vocal'
+          - key: system.properties
+            mode: 2
+            value: '-somatic'
+          - key: system.properties
+            mode: 2
+            value: '-material'
+          - key: activities[save].save.dc.calculation
+            mode: 5
+            value: ''
+          - key: activities[save].save.dc.formula
+            mode: 5
+            value: '15'
+          - key: activities[summon].flat.save
+            mode: 5
+            value: '15'
+        system: {}
+        disabled: false
+        duration:
+          startTime: 0
+          combat: null
+        description: ''
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!RiswynnLv1100000.BXatZajQo42dsk8i.dnd5espellchange
+    folder: HCovEE4VoPGlIbKi
+    sort: 2100000
+    ownership:
+      default: 0
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        cachedFor: .Item.JVBm2kFymbWzGHOI.Activity.sKJAqxMR2KArEp0o
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplFireball00
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      createdTime: 1768614099111
+      modifiedTime: 1768614099111
+      lastModifiedBy: dnd5ebuilder0000
+    _id: BXatZajQo42dsk8i
+    _key: '!actors.items!RiswynnLv1100000.BXatZajQo42dsk8i'
+  - _id: 8m9Xf8GphQEDwE1E
+    name: Ring of Mind Shielding
+    type: equipment
+    folder: DC1x1wAm0NLFudA6
+    img: icons/equipment/finger/ring-cabochon-gold-purple.webp
+    system:
+      activities: {}
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      description:
+        value: >-
+          <p><em>Ring, Uncommon (Requires Attunement)</em></p><p>While wearing
+          this ring, you are immune to magic that allows other creatures to read
+          your thoughts, determine whether you are lying, know your alignment,
+          or know your creature type. Creatures can telepathically communicate
+          with you only if you allow it.</p><p>You can take a Magic action to
+          cause the ring to become imperceptible until you take another Magic
+          action to make it perceptible, until you remove the ring, or until you
+          die.</p><p>If you die while wearing the ring, your soul enters it,
+          unless it already houses a soul. You can remain in the ring or depart
+          for the afterlife. As long as your soul is in the ring, you can
+          telepathically communicate with any creature wearing it. A wearer
+          can't prevent this telepathic communication.</p>
+        chat: ''
+      identifier: ring-of-mind-shielding
+      source:
+        revision: 1
+        rules: '2024'
+        book: ''
+        license: CC-BY-4.0
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 0
+        units: lb
+      price:
+        value: 400
+        denomination: gp
+      rarity: uncommon
+      attunement: required
+      armor:
+        value: null
+        magicalBonus: null
+        dex: null
+      cover: null
+      hp:
+        value: null
+        max: null
+        dt: null
+        conditions: ''
+      type:
+        value: ring
+        baseItem: ''
+      properties:
+        - mgc
+      strength: null
+      proficient: null
+      crew:
+        value: []
+      attuned: true
+      equipped: true
+    effects: []
+    flags: {}
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.equipment24.Item.dmgRingOfMindShi
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      createdTime: 1768615022507
+      modifiedTime: 1768615025632
+      lastModifiedBy: dnd5ebuilder0000
+    sort: 1000000
+    ownership:
+      default: 0
+    _key: '!actors.items!RiswynnLv1100000.8m9Xf8GphQEDwE1E'
+  - _id: lTlUBjufCGIWD8We
+    name: Efficient Quiver
+    type: container
+    folder: CXJsbhXV9uLcWcfH
+    img: icons/containers/ammunition/arrows-quiver-brown-grey.webp
+    system:
+      description:
+        value: >-
+          <p><em>Wondrous Item, Uncommon</em></p><p>Each of the quiver's three
+          compartments connects to an extradimensional space that allows the
+          quiver to hold numerous items while never weighing more than 2 pounds.
+          The shortest compartment can hold up to 60 Arrows, Bolts, or similar
+          objects. The midsize compartment holds up to 18 Javelins or similar
+          objects. The longest compartment holds up to 6 long objects, such as
+          bows, Quarterstaffs, or Spears.</p><p>You can draw any item the quiver
+          contains as if doing so from a regular quiver or scabbard.</p>
+        chat: ''
+      identifier: efficient-quiver
+      source:
+        revision: 1
+        rules: '2024'
+        book: ''
+        license: CC-BY-4.0
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 2
+        units: lb
+      price:
+        value: 400
+        denomination: gp
+      rarity: uncommon
+      attunement: ''
+      currency:
+        pp: 0
+        gp: 0
+        ep: 0
+        sp: 0
+        cp: 0
+      properties:
+        - mgc
+        - weightlessContents
+      capacity:
+        count: null
+        volume:
+          units: cubicFoot
+          value: null
+        weight:
+          units: lb
+          value: null
+      attuned: false
+      equipped: false
+    effects: []
+    flags: {}
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.equipment24.Item.dmgQuiverOfEhlon
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      createdTime: 1768615068699
+      modifiedTime: 1768615068699
+      lastModifiedBy: dnd5ebuilder0000
+    sort: 1000000
+    ownership:
+      default: 0
+    _key: '!actors.items!RiswynnLv1100000.lTlUBjufCGIWD8We'
+  - name: Long Compartment
+    type: container
+    _id: 7eWtELy21MPydeGV
+    img: icons/containers/bags/case-leather-tan.webp
+    system:
+      description:
+        value: >-
+          <p>The longest compartment holds up to 6 long objects, such as bows,
+          Quarterstaffs, or Spears.</p>
+        chat: ''
+      identifier: long-compartment
+      source:
+        revision: 1
+        rules: '2024'
+      identified: true
+      unidentified:
+        description: ''
+      container: lTlUBjufCGIWD8We
+      quantity: 1
+      weight:
+        value: 0
+        units: lb
+      price:
+        value: 0
+        denomination: gp
+      rarity: ''
+      attunement: ''
+      attuned: false
+      equipped: false
+      currency:
+        pp: 0
+        gp: 0
+        ep: 0
+        sp: 0
+        cp: 0
+      capacity:
+        volume:
+          units: cubicFoot
+          value: null
+        weight:
+          units: lb
+          value: null
+        count: 6
+      properties: []
+    effects: []
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.actors24.Actor.RandalLv11000000.Item.AuCF5eUD8VFijSkI
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      createdTime: 1768615068699
+      modifiedTime: 1768615068699
+      lastModifiedBy: dnd5ebuilder0000
+    ownership:
+      default: 0
+    _key: '!actors.items!RiswynnLv1100000.7eWtELy21MPydeGV'
+  - name: Short Compartment
+    type: container
+    _id: iUrp3OhD5nffgQL2
+    img: icons/containers/bags/pouch-leather-gold-tan.webp
+    system:
+      description:
+        value: >-
+          <p>The shortest compartment can hold up to 60 Arrows, Bolts, or
+          similar objects.</p>
+        chat: ''
+      identifier: short-compartment
+      source:
+        revision: 1
+        rules: '2024'
+        book: ''
+        page: ''
+        custom: ''
+        license: ''
+      identified: true
+      unidentified:
+        description: ''
+      container: lTlUBjufCGIWD8We
+      quantity: 1
+      weight:
+        value: 0
+        units: lb
+      price:
+        value: 0
+        denomination: gp
+      rarity: ''
+      attunement: ''
+      attuned: false
+      equipped: false
+      currency:
+        pp: 0
+        gp: 0
+        ep: 0
+        sp: 0
+        cp: 0
+      capacity:
+        volume:
+          units: cubicFoot
+          value: null
+        weight:
+          units: lb
+          value: null
+        count: 60
+      properties: []
+    effects: []
+    folder: null
+    sort: -100000
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.actors24.Actor.RandalLv11000000.Item.X9XjJUVnhQsCTVhH
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      createdTime: 1768615068699
+      modifiedTime: 1768615068699
+      lastModifiedBy: dnd5ebuilder0000
+    ownership:
+      default: 0
+    _key: '!actors.items!RiswynnLv1100000.iUrp3OhD5nffgQL2'
+  - name: Midsize Compartment
+    type: container
+    _id: 81uLRuzxEsONQiQR
+    img: icons/containers/bags/case-simple-brown.webp
+    system:
+      description:
+        value: >-
+          <p>The midsize compartment holds up to 18 Javelins or similar
+          objects.</p>
+        chat: ''
+      identifier: midsize-compartment
+      source:
+        revision: 1
+        rules: '2024'
+        book: ''
+        page: ''
+        custom: ''
+        license: ''
+      identified: true
+      unidentified:
+        description: ''
+      container: lTlUBjufCGIWD8We
+      quantity: 1
+      weight:
+        value: 0
+        units: lb
+      price:
+        value: 0
+        denomination: gp
+      rarity: ''
+      attunement: ''
+      attuned: false
+      equipped: false
+      currency:
+        pp: 0
+        gp: 0
+        ep: 0
+        sp: 0
+        cp: 0
+      capacity:
+        volume:
+          units: cubicFoot
+          value: null
+        weight:
+          units: lb
+          value: null
+        count: 18
+      properties: []
+    effects: []
+    folder: null
+    sort: -50000
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.actors24.Actor.RandalLv11000000.Item.2SBBlpq6wFm1ckjW
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      createdTime: 1768615068699
+      modifiedTime: 1768615068699
+      lastModifiedBy: dnd5ebuilder0000
+    ownership:
+      default: 0
+    _key: '!actors.items!RiswynnLv1100000.81uLRuzxEsONQiQR'
+  - _id: jd5hdzttIePr6VtF
+    name: Pipes of Haunting
+    type: equipment
+    folder: U4xmShLy19Ry54zl
+    img: icons/tools/instruments/flute-simple-wood.webp
+    system:
+      activities:
+        2gz7mHPq8WUcYonN:
+          type: save
+          name: Play Pipes
+          _id: 2gz7mHPq8WUcYonN
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling: {}
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects:
+            - _id: 29Rm9ru4fP60YFj3
+              onSave: false
+              level:
+                min: null
+                max: null
+          range:
+            override: false
+            units: self
+            special: ''
+            value: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: radius
+              size: '30'
+              count: ''
+            affects:
+              choice: true
+              count: ''
+              type: creature
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          damage:
+            parts: []
+            onSave: half
+          save:
+            ability:
+              - wis
+            dc:
+              calculation: ''
+              formula: '15'
+          visibility:
+            requireMagic: true
+            level:
+              min: null
+              max: null
+            identifier: ''
+            requireAttunement: false
+            requireIdentification: false
+          flags: {}
+      uses:
+        spent: 0
+        recovery:
+          - period: dawn
+            type: formula
+            formula: 1d3
+        max: '3'
+      description:
+        value: >-
+          <p><em>Wondrous Item, Uncommon</em></p><p>These pipes have 3 charges
+          and regain 1d3 expended charges daily at dawn. You can take a Magic
+          action to play them and expend 1 charge to create an eerie,
+          spellbinding tune. Each creature of your choice within 30 feet of you
+          must succeed on a DC 15 Wisdom saving throw or have the
+          &amp;Reference[Frightened apply=false] condition for 1 minute. A
+          creature that fails the save repeats it at the end of each of its
+          turns, ending the effect on itself on a success. A creature that
+          succeeds on its save is immune to the effect of these pipes for 24
+          hours.</p>
+        chat: ''
+      identifier: pipes-of-haunting
+      source:
+        revision: 1
+        rules: '2024'
+        book: ''
+        license: CC-BY-4.0
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 0
+        units: lb
+      price:
+        value: 400
+        denomination: gp
+      rarity: uncommon
+      attunement: ''
+      armor:
+        value: null
+        magicalBonus: null
+        dex: null
+      cover: null
+      hp:
+        value: null
+        max: null
+        dt: null
+        conditions: ''
+      type:
+        value: wondrous
+        baseItem: ''
+      properties:
+        - mgc
+      strength: null
+      proficient: null
+      crew:
+        value: []
+      attuned: false
+      equipped: false
+    effects:
+      - name: Frightened
+        img: icons/magic/control/fear-fright-white.webp
+        origin: Compendium.dnd5e.equipment24.Item.dmgPipesOfHaunti
+        transfer: false
+        _id: 29Rm9ru4fP60YFj3
+        type: base
+        system: {}
+        changes: []
+        disabled: false
+        duration:
+          startTime: null
+          seconds: 60
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        tint: '#ffffff'
+        statuses:
+          - frightened
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!RiswynnLv1100000.jd5hdzttIePr6VtF.29Rm9ru4fP60YFj3
+    flags: {}
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.equipment24.Item.dmgPipesOfHaunti
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      createdTime: 1768615645289
+      modifiedTime: 1768615645289
+      lastModifiedBy: dnd5ebuilder0000
+    sort: 25000000
+    ownership:
+      default: 0
+    _key: '!actors.items!RiswynnLv1100000.jd5hdzttIePr6VtF'
+  - _id: lMheeamVpa3rDNCV
+    name: Bag of Holding
+    type: container
+    folder: CXJsbhXV9uLcWcfH
+    img: icons/containers/bags/pack-engraved-leather-tan.webp
+    system:
+      description:
+        value: >-
+          <div><p>This bag has an interior space considerably larger than its
+          outside dimensions—roughly 2 feet square and 4 feet deep on the
+          inside. The bag can hold up to 500 pounds, not exceeding a volume of
+          64 <span class="no-break">cubic</span> feet. The bag weighs 5 pounds,
+          regardless of its contents. Retrieving an item from the bag requires a
+          Utilize action.</p><p>If the bag is overloaded, pierced, or torn, it
+          is destroyed, and its contents are scattered in the Astral Plane. If
+          the bag is turned inside out, its contents spill forth unharmed, but
+          the bag must be put right before it can be used again. The bag holds
+          enough air for 10 minutes of breathing, divided by the number of
+          breathing creatures inside.</p><p>Placing a <em>Bag of Holding</em>
+          inside an extradimensional space created by a
+          <em>@UUID[Compendium.dnd5e.equipment24.Item.dmgHewardsHandyH]{Handy
+          Haversack}</em>,
+          <em>@UUID[Compendium.dnd5e.equipment24.Item.dmgPortableHole0]{Portable
+          Hole}</em>, or similar item instantly destroys both items and opens a
+          gate to the Astral Plane. The gate originates where the one item was
+          placed inside the other. Any creature within a 10-foot-radius Sphere
+          centered on the gate is sucked through it to a random location on the
+          Astral Plane. The gate then closes. The gate is one-way and can't be
+          reopened.</p></div>
+        chat: ''
+      identifier: bag-of-holding
+      source:
+        revision: 1
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 5
+        units: lb
+      price:
+        value: 400
+        denomination: gp
+      rarity: uncommon
+      attunement: ''
+      currency:
+        pp: 0
+        gp: 0
+        ep: 0
+        sp: 0
+        cp: 0
+      properties:
+        - mgc
+        - weightlessContents
+      capacity:
+        weight:
+          value: 500
+          units: lb
+        volume:
+          units: cubicFoot
+      attuned: false
+      equipped: false
+    effects: []
+    flags: {}
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.equipment24.Item.dmgBagOfHolding0
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      createdTime: 1768615655482
+      modifiedTime: 1768615655482
+      lastModifiedBy: dnd5ebuilder0000
+    sort: 300000
+    ownership:
+      default: 0
+    _key: '!actors.items!RiswynnLv1100000.lMheeamVpa3rDNCV'
+  - _id: fb89Fh4dNtjBYQQ1
+    name: Oil of Slipperiness
+    type: consumable
+    folder: guHYjt0gjPLU2wCs
+    img: icons/consumables/potions/bottle-circular-corked-labeled-green.webp
+    system:
+      description:
+        value: >-
+          <p><em>Potion, Uncommon</em></p><p>One vial of this oil can cover one
+          Medium or smaller creature, along with the equipment it's wearing and
+          carrying (one additional vial is required for each size category above
+          Medium). Applying the oil takes 10 minutes. The affected creature then
+          gains the effect of the
+          @UUID[Compendium.dnd5e.spells24.Item.phbsplFreedomofM]{Freedom of
+          Movement} spell for 8 hours.</p><p>Alternatively, the oil can be
+          poured on the ground as a Magic action, where it covers a 10-foot
+          square, duplicating the effect of the
+          @UUID[Compendium.dnd5e.spells24.Item.phbsplGrease0000]{Grease} spell
+          in that area for 8 hours.</p><p>This sticky, black unguent is thick
+          and heavy, but it flows quickly when poured.</p>
+        chat: ''
+      identifier: oil-of-slipperiness
+      source:
+        revision: 1
+        rules: '2024'
+        book: ''
+        license: CC-BY-4.0
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 0
+        units: lb
+      price:
+        value: 200
+        denomination: gp
+      rarity: uncommon
+      attunement: ''
+      properties:
+        - mgc
+      uses:
+        max: '1'
+        autoDestroy: true
+        spent: 0
+        recovery: []
+      type:
+        value: potion
+        subtype: ''
+      activities:
+        dgp4czAiBiwgDJ2X:
+          type: cast
+          spell:
+            uuid: Compendium.dnd5e.spells24.Item.phbsplFreedomofM
+            challenge:
+              attack: null
+              save: null
+              override: false
+            level: 4
+            properties:
+              - vocal
+              - somatic
+              - material
+            spellbook: false
+          _id: dgp4czAiBiwgDJ2X
+          sort: 0
+          activation:
+            type: minute
+            value: 10
+            override: true
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling: {}
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          range:
+            override: true
+            units: touch
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          name: Cover Creature
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+        IQsAg45adQPcbS86:
+          type: cast
+          spell:
+            uuid: Compendium.dnd5e.spells24.Item.phbsplGrease0000
+            challenge:
+              attack: null
+              save: null
+              override: false
+            level: 1
+            properties:
+              - vocal
+              - somatic
+              - material
+            spellbook: false
+          _id: IQsAg45adQPcbS86
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          range:
+            override: false
+            units: self
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          name: Pour on Ground
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      damage:
+        base:
+          types: []
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+        replace: false
+      attuned: false
+      equipped: false
+    effects: []
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.equipment24.Item.dmgOilOfSlipperi
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      createdTime: 1768615828748
+      modifiedTime: 1768615828748
+      lastModifiedBy: dnd5ebuilder0000
+    sort: 1250000
+    ownership:
+      default: 0
+    _key: '!actors.items!RiswynnLv1100000.fb89Fh4dNtjBYQQ1'
+  - name: Freedom of Movement
+    system:
+      description:
+        value: >-
+          <p>You touch a willing creature. For the duration, the target's
+          movement is unaffected by &amp;Reference[DifficultTerrain], and spells
+          and other magical effects can neither reduce the target's Speed nor
+          cause the target to have the &amp;Reference[Paralyzed apply=false] or
+          &amp;Reference[Restrained apply=false] conditions. The target also has
+          a Swim Speed equal to its Speed.</p><p>In addition, the target can
+          spend 5 feet of movement to automatically escape from nonmagical
+          restraints, such as manacles or a creature imposing the
+          &amp;Reference[Grappled apply=false] condition on
+          it.</p><p><strong>Using a Higher-Level Spell Slot.</strong> You can
+          target one additional creature for each spell slot level above 4.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: '1'
+        units: hour
+      target:
+        affects:
+          type: willing
+          count: '@item.level - 3'
+          choice: false
+          special: ''
+        template:
+          units: ft
+          contiguous: false
+          type: ''
+      range:
+        units: touch
+        special: ''
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 4
+      school: abj
+      properties:
+        - vocal
+        - somatic
+        - material
+      materials:
+        value: a leather strap
+        consumed: false
+        cost: 0
+        supply: 0
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects:
+            - _id: bcTPZ6dJ4kHwaBRD
+              level: {}
+          range:
+            override: false
+            units: self
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          name: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: freedom-of-movement
+      method: spell
+      prepared: 0
+    type: spell
+    img: icons/magic/water/elemental-water.webp
+    effects:
+      - name: Unrestricted Movement
+        origin: Compendium.dnd5e.spells24.Item.phbsplFreedomofM
+        duration:
+          rounds: null
+          startTime: null
+          seconds: 3600
+          combat: null
+          turns: null
+          startRound: null
+          startTurn: null
+        disabled: false
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        img: icons/skills/movement/feet-bladed-boots-fire.webp
+        _id: bcTPZ6dJ4kHwaBRD
+        type: base
+        system: {}
+        changes:
+          - key: system.traits.ci.value
+            mode: 2
+            value: paralyzed
+            priority: null
+          - key: system.traits.ci.value
+            mode: 2
+            value: restrained
+            priority: null
+          - key: system.attributes.movement.swim
+            mode: 4
+            value: '@attributes.movement.walk'
+            priority: null
+          - key: system.attributes.movement.ignoredDifficultTerrain
+            mode: 2
+            value: all
+            priority: null
+        description: ''
+        tint: '#ffffff'
+        transfer: false
+        statuses: []
+        sort: 0
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!RiswynnLv1100000.y9XJG87tUdZ6vegx.bcTPZ6dJ4kHwaBRD
+      - _id: dnd5espellchange
+        type: enchantment
+        name: Spell Changes
+        img: systems/dnd5e/icons/svg/activity/cast.svg
+        origin: >-
+          Compendium.dnd5e.actors24.Actor.RiswynnLv1100000.Item.fb89Fh4dNtjBYQQ1.Activity.dgp4czAiBiwgDJ2X
+        changes:
+          - key: system.method
+            mode: 5
+            value: spell
+          - key: system.activation
+            mode: 5
+            value: '{"type":"minute","value":10,"condition":""}'
+          - key: system.range
+            mode: 5
+            value: '{"units":"touch","special":""}'
+          - key: system.properties
+            mode: 2
+            value: '-vocal'
+          - key: system.properties
+            mode: 2
+            value: '-somatic'
+          - key: system.properties
+            mode: 2
+            value: '-material'
+        system: {}
+        disabled: false
+        duration:
+          startTime: 0
+          combat: null
+        description: ''
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!RiswynnLv1100000.y9XJG87tUdZ6vegx.dnd5espellchange
+    folder: qi3IbnEwap7mRw4b
+    sort: 2000000
+    ownership:
+      default: 0
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        cachedFor: .Item.fb89Fh4dNtjBYQQ1.Activity.dgp4czAiBiwgDJ2X
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplFreedomofM
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      createdTime: 1768615828851
+      modifiedTime: 1768615828851
+      lastModifiedBy: dnd5ebuilder0000
+    _id: y9XJG87tUdZ6vegx
+    _key: '!actors.items!RiswynnLv1100000.y9XJG87tUdZ6vegx'
+  - name: Grease
+    system:
+      description:
+        value: >-
+          <p>Nonflammable grease covers the ground in a 10-foot square centered
+          on a point within range and turns it into
+          &amp;Reference[difficultterrain] for the duration.</p><p>When the
+          grease appears, each creature standing in its area must succeed on a
+          Dexterity saving throw or have the &amp;Reference[prone] condition. A
+          creature that enters the area or ends its turn there must also succeed
+          on that save or fall Prone.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: '1'
+        units: minute
+      target:
+        affects:
+          choice: false
+        template:
+          units: ft
+          type: square
+          size: '10'
+          contiguous: false
+      range:
+        value: '60'
+        units: ft
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: con
+      properties:
+        - vocal
+        - somatic
+        - material
+      materials:
+        value: a bit of pork rind or butter
+        consumed: false
+        cost: 0
+        supply: 0
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects: []
+          range:
+            override: false
+            units: self
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          damage:
+            onSave: half
+            parts: []
+          save:
+            ability:
+              - dex
+            dc:
+              calculation: spellcasting
+              formula: ''
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: grease
+      method: spell
+      prepared: 0
+    type: spell
+    img: icons/commodities/materials/liquid-purple.webp
+    effects:
+      - _id: dnd5espellchange
+        type: enchantment
+        name: Spell Changes
+        img: systems/dnd5e/icons/svg/activity/cast.svg
+        origin: >-
+          Compendium.dnd5e.actors24.Actor.RiswynnLv1100000.Item.fb89Fh4dNtjBYQQ1.Activity.IQsAg45adQPcbS86
+        changes:
+          - key: system.method
+            mode: 5
+            value: spell
+          - key: system.properties
+            mode: 2
+            value: '-vocal'
+          - key: system.properties
+            mode: 2
+            value: '-somatic'
+          - key: system.properties
+            mode: 2
+            value: '-material'
+        system: {}
+        disabled: false
+        duration:
+          startTime: 0
+          combat: null
+        description: ''
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!RiswynnLv1100000.4Zru2ZHQbm75Ny1e.dnd5espellchange
+    folder: pBaAAtXBCq9FVEnL
+    sort: 2600000
+    ownership:
+      default: 0
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        cachedFor: .Item.fb89Fh4dNtjBYQQ1.Activity.IQsAg45adQPcbS86
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplGrease0000
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      createdTime: 1768615828851
+      modifiedTime: 1768615828851
+      lastModifiedBy: dnd5ebuilder0000
+    _id: 4Zru2ZHQbm75Ny1e
+    _key: '!actors.items!RiswynnLv1100000.4Zru2ZHQbm75Ny1e'
+  - _id: QA9Ij5A1IfrotrS1
+    name: Potion of Water Breathing
+    type: consumable
+    folder: 4NjJfCbRAVhw8ESv
+    img: icons/consumables/potions/potion-bottle-corked-labeled-green.webp
+    system:
+      activities:
+        21kmAfoqMj4fSwrH:
+          type: utility
+          name: Drink
+          _id: 21kmAfoqMj4fSwrH
+          sort: 0
+          activation:
+            type: bonus
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling: {}
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects:
+            - _id: FuzyfcWOcC3IXsDB
+              level:
+                min: null
+                max: null
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: ''
+              type: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          visibility:
+            requireMagic: true
+            level:
+              min: null
+              max: null
+            identifier: ''
+            requireAttunement: false
+            requireIdentification: false
+          flags: {}
+      uses:
+        spent: 0
+        recovery: []
+        autoDestroy: true
+        max: '1'
+      description:
+        value: >-
+          <p><em>Potion, Uncommon</em></p><p>You can breathe underwater for 24
+          hours after drinking this potion.</p><p>This potion's cloudy green
+          fluid smells of the sea and has a jellyfish-like bubble floating in
+          it.</p><section class="secret"
+          id="secret-Hak8pdfo1Rbwhrgv"><p><strong>Foundry
+          Note</strong></p><p>The <strong>Water Breather</strong> Active Effect
+          can be used for tracking.</p></section>
+        chat: ''
+      identifier: potion-of-water-breathing
+      source:
+        revision: 1
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 0.5
+        units: lb
+      price:
+        value: 200
+        denomination: gp
+      rarity: uncommon
+      attunement: ''
+      type:
+        value: potion
+        subtype: ''
+      damage:
+        base:
+          number: null
+          denomination: null
+          types: []
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+        replace: false
+      magicalBonus: null
+      properties:
+        - mgc
+      attuned: false
+      equipped: false
+    effects:
+      - name: Water Breather
+        img: systems/dnd5e/icons/items/potion-of-water-breathing.webp
+        origin: Compendium.dnd5e.equipment24.Item.dmgPotionOfWater
+        transfer: false
+        _id: FuzyfcWOcC3IXsDB
+        type: base
+        system: {}
+        changes: []
+        disabled: false
+        duration:
+          startTime: null
+          seconds: 86400
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        tint: '#ffffff'
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: >-
+            Compendium.dnd5e.equipment24.Item.dmgPotionOfVital.ActiveEffect.GxutU47JS0FNfeoM
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!RiswynnLv1100000.QA9Ij5A1IfrotrS1.FuzyfcWOcC3IXsDB
+    flags: {}
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.equipment24.Item.dmgPotionOfWater
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      createdTime: 1768615833014
+      modifiedTime: 1768615833014
+      lastModifiedBy: dnd5ebuilder0000
+    sort: 0
+    ownership:
+      default: 0
+    _key: '!actors.items!RiswynnLv1100000.QA9Ij5A1IfrotrS1'
 effects: []
 flags: {}
 _stats:
@@ -7007,12 +8960,12 @@ _stats:
   coreVersion: '13.351'
   systemId: dnd5e
   systemVersion: 5.2.4
-  createdTime: 1766970218550
-  modifiedTime: 1768612558089
+  createdTime: 1768612873104
+  modifiedTime: 1768688235803
   lastModifiedBy: dnd5ebuilder0000
-img: null
-folder: JRPsXXWuBa56FSZb
 ownership:
   default: 0
-sort: 500000
-_key: '!actors!RiswynnLv0500000'
+sort: 100000
+img: systems/dnd5e/icons/svg/actors/character.svg
+folder: 1EDP5HqqwXarG88N
+_key: '!actors!RiswynnLv1100000'
