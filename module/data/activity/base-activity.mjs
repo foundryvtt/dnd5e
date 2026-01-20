@@ -120,7 +120,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @type {object|null}
    */
   get activationLabels() {
-    if ( !this.activation.type || this.isSpell ) return null;
+    if ( !this.activation?.type || this.isSpell ) return null;
     const { activation, duration, range, reach, target } = this.labels;
     return { activation, duration, range, reach, target };
   }

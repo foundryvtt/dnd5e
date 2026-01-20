@@ -75,8 +75,8 @@ export default class ForwardSheet extends ActivitySheet {
         label: "DND5E.ACTIVITY.SECTIONS.Identity"
       },
       activation: {
-        id: "activation", group: "sheet", icon: "fa-solid fa-boxes-stacked",
-        label: "DND5E.CONSUMPTION.FIELDS.consumption.label"
+        id: "activation", group: "sheet", icon: "fa-solid fa-clapperboard",
+        label: "DND5E.ACTIVITY.SECTIONS.Activation"
       },
       effect: {
         id: "effect", group: "sheet", icon: "fa-solid fa-sun",

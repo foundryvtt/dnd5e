@@ -26,4 +26,22 @@ export default class BaseForwardActivityData extends BaseActivityData {
       })
     };
   }
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareFinalData(rollData) {
+    const activity = this.item.system.activities.get(this.activity.id);
+    if ( activity && activity.activation.override ) this.activation = activity.toObject().activation;
+
+    super.prepareFinalData(rollData);
+
+    Object.defineProperty(this.activation, "canOverride", {
+      value: true,
+      configurable: true,
+      enumerable: false
+    });
+  }
 }
