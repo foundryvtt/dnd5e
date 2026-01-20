@@ -144,6 +144,19 @@ system:
         - cr: '0.25'
           name: CR ¼
           _id: xUPf0uISOwKy3mhO
+          uuid: ''
+          sizes: []
+          types:
+            - beast
+          movement:
+            - fly
+          level:
+            min: null
+            max: 3
+        - cr: '0.5'
+          name: CR ½
+          _id: yu86xk21fVzHg9r5
+          uuid: ''
           sizes: []
           types:
             - beast
@@ -151,21 +164,11 @@ system:
             - fly
           level:
             min: 4
-            max: 5
-        - cr: '0.5'
-          name: CR ½
-          _id: yu86xk21fVzHg9r5
-          sizes: []
-          types:
-            - beast
-          movement:
-            - fly
-          level:
-            min: 6
             max: 7
         - cr: '1'
           name: CR 1
           _id: ZFqKHYlY9JhLYnx0
+          uuid: ''
           sizes: []
           types:
             - beast
@@ -180,21 +183,21 @@ system:
         preset: wildshape
       name: ''
       img: systems/dnd5e/icons/svg/abilities/intelligence.svg
+      visibility:
+        level:
+          min: null
+          max: null
   enchant: {}
   identifier: wild-shape
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.4
   createdTime: 1735866366918
-  modifiedTime: 1751411542968
+  modifiedTime: 1768923594518
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1200000

@@ -502,9 +502,6 @@ system:
       id: .Item.s6Pq6rmBtZEyNeRs
       sort: 300000
     - type: item
-      id: .Item.2S811nEAELQ2oSNc
-      sort: 400000
-    - type: item
       id: .Item.eTQlzMLdqIOiq4a5
       sort: 200000
     - type: item
@@ -519,6 +516,9 @@ system:
     - type: item
       id: .Item.13KeNgoeriSW45ZW
       sort: 0
+    - type: item
+      id: .Item.g7kaXftRjiAjFI7r
+      sort: 400000
 prototypeToken:
   name: Aoth
   displayName: 20
@@ -1390,7 +1390,7 @@ items:
             spell: null
           value:
             added:
-              2S811nEAELQ2oSNc: Compendium.dnd5e.classes24.Item.phbdrdWildShape0
+              g7kaXftRjiAjFI7r: Compendium.dnd5e.classes24.Item.phbdrdWildShape0
               s6Pq6rmBtZEyNeRs: Compendium.dnd5e.classes24.Item.phbdrdWildCompan
           level: 2
           title: Class Features
@@ -4435,228 +4435,6 @@ items:
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.13KeNgoeriSW45ZW'
-  - _id: 2S811nEAELQ2oSNc
-    name: Wild Shape
-    type: feat
-    folder: EXYmwRGoNyMbByN1
-    img: icons/creatures/mammals/bull-horns-eyes-glowin-orange.webp
-    system:
-      description:
-        value: >-
-          <p>The power of nature allows you to assume the form of an animal. As
-          a Bonus Action, you shape-shift into a Beast form that you have
-          learned for this feature (see "Known Forms" below). You stay in that
-          form for a number of hours equal to half your Druid level (currently
-          [[lookup @classes.druid.levels]]) or until you use Wild Shape again,
-          have the Incapacitated condition, or die. You can also leave the form
-          early as a Bonus Action.</p><p><strong>Number of Uses.</strong> You
-          can use Wild Shape twice. You regain one expended use when you finish
-          a Short Rest, and you regain all expended uses when you finish a Long
-          Rest.</p><p>You gain additional uses when you reach certain Druid
-          levels, as shown in the Wild Shape column of the
-          @UUID[Compendium.dnd5e.content24.JournalEntry.phbDruid00000000.JournalEntryPage.UCOh3zlvGxyk5jLr#class-features]{Druid
-          Features} table.</p><p><strong>Current Number of Uses:</strong>
-          [[lookup @scale.druid.wild-shape-uses]]</p><p><strong>Known Forms.
-          </strong>You know four Beast forms for this feature, chosen from among
-          Beast stat blocks that have a maximum Challenge Rating of 1/4 and that
-          lack a Fly Speed. The
-          @UUID[Compendium.dnd5e.actors24.Actor.mmRat00000000000]{Rat},
-          @UUID[Compendium.dnd5e.actors24.Actor.mmRidingHorse000]{Riding Horse},
-          @UUID[Compendium.dnd5e.actors24.Actor.mmSpider00000000]{Spider}, and
-          @UUID[Compendium.dnd5e.actors24.Actor.mmWolf0000000000]{Wolf} are
-          recommended. Whenever you finish a Long Rest, you can replace one of
-          your known forms with another eligible form.</p><section class="fvtt
-          advice"><figure class="icon"><img src="icons/vtt-512.png"
-          /></figure><article><h3>Wild Shape Automation</h3><p>When you've
-          selected the creature you would like to wild shape into you can drag
-          it onto your character sheet, select the Wild Shape option, and
-          Foundry will automatically update your sheet. You can revert the
-          transformation at the top of your sheet or by right clicking on your
-          Actor in the sidebar.</p></article></section><p>When you reach certain
-          Druid levels, your number of known forms and the maximum Challenge
-          Rating for those forms increases, as shown in the Beast Shapes table.
-          In addition, starting at level 8, you can adopt a form that has a Fly
-          Speed.</p><p><strong>Current Known Forms Limit:</strong> [[lookup
-          @scale.druid.known-forms]]</p><p><strong>Current CR Limit:</strong>
-          [[lookup @scale.druid.wild-shape]]</p><p>When choosing known forms,
-          you may look in the <em>Monster Manual</em> or elsewhere for eligible
-          Beasts if the Dungeon Master permits you to do
-          so.</p><table><caption>Beast Shapes</caption><thead><tr><td>Druid
-          Level</td><td>Known Forms</td><td>Max CR</td><td>Fly
-          Speed</td></tr></thead><tbody><tr><td>2</td><td>4</td><td>1/4</td><td>No</td></tr><tr><td>4</td><td>6</td><td>1/2</td><td>No</td></tr><tr><td>8</td><td>8</td><td>1</td><td>Yes</td></tr></tbody></table><p><strong>Rules
-          While Shape-Shifted.</strong> While in a form, you retain your
-          personality, memories, and ability to speak, and the following rules
-          apply:</p><p><strong>Temporary Hit Points. </strong>When you assume a
-          Wild Shape form, you gain a number of Temporary Hit Points equal to
-          your Druid level.</p><p><strong>Game Statistics.</strong> Your game
-          statistics are replaced by the Beast's stat block, but you retain your
-          creature type; Hit Points; Hit Point Dice; Intelligence, Wisdom, and
-          Charisma scores; class features; languages; and feats. You also retain
-          your skill and saving throw proficiencies and use your Proficiency
-          Bonus for them, in addition to gaining the proficiencies of the
-          creature. If a skill or saving throw modifier in the Beast's stat
-          block is higher than yours, use the one in the stat
-          block.</p><p><strong>No Spellcasting.</strong> You can't cast spells,
-          but shape-shifting doesn't break your Concentration or otherwise
-          interfere with a spell you've already cast.</p><p><strong>Objects.
-          </strong>Your ability to handle objects is determined by the form's
-          limbs rather than your own. In addition, you choose whether your
-          equipment falls in your space, merges into your new form, or is worn
-          by it. Worn equipment functions as normal, but the DM decides whether
-          it's practical for the new form to wear a piece of equipment based on
-          the creature's size and shape. Your equipment doesn't change size or
-          shape to match the new form, and any equipment that the new form can't
-          wear must either fall to the ground or merge with the form. Equipment
-          that merges with the form has no effect while you're in that
-          form.</p><section class="secret"
-          id="secret-FZNGONDktXDnwY0x"><p><strong>Foundry
-          Note</strong></p><p>You can activate this feature to track uses of
-          your Wild Shape.</p><p>It will automatically restore a use on a Short
-          Rest and all uses on a Long Rest.</p></section>
-        chat: ''
-      source:
-        custom: ''
-        revision: 1
-        rules: '2024'
-        license: CC-BY-4.0
-        book: ''
-      uses:
-        max: '@scale.druid.wild-shape-uses'
-        recovery:
-          - period: lr
-            type: recoverAll
-          - period: sr
-            type: formula
-            formula: '1'
-        spent: 0
-      type:
-        value: class
-        subtype: ''
-      prerequisites:
-        level: 2
-        repeatable: false
-        items: []
-      properties: []
-      requirements: Druid
-      activities:
-        FsDnynyqno8XNHgf:
-          type: transform
-          _id: FsDnynyqno8XNHgf
-          sort: 0
-          activation:
-            type: bonus
-            override: false
-            condition: ''
-          consumption:
-            scaling:
-              allowed: false
-            spellSlot: true
-            targets:
-              - type: itemUses
-                value: '1'
-                target: ''
-                scaling: {}
-          description:
-            chatFlavor: ''
-          duration:
-            units: inst
-            concentration: false
-            override: false
-          effects: []
-          range:
-            units: self
-            override: false
-            special: ''
-          target:
-            template:
-              contiguous: false
-              units: ft
-              type: ''
-            affects:
-              choice: false
-              type: self
-              special: ''
-            override: false
-            prompt: true
-          uses:
-            spent: 0
-            recovery: []
-            max: ''
-          profiles:
-            - cr: '0.25'
-              name: CR ¼
-              _id: xUPf0uISOwKy3mhO
-              sizes: []
-              types:
-                - beast
-              movement:
-                - fly
-              level:
-                min: 4
-                max: 5
-              uuid: null
-            - cr: '0.5'
-              name: CR ½
-              _id: yu86xk21fVzHg9r5
-              sizes: []
-              types:
-                - beast
-              movement:
-                - fly
-              level:
-                min: 6
-                max: 7
-              uuid: null
-            - cr: '1'
-              name: CR 1
-              _id: ZFqKHYlY9JhLYnx0
-              sizes: []
-              types:
-                - beast
-              movement: []
-              level:
-                min: 8
-                max: null
-              uuid: null
-          settings: null
-          transform:
-            customize: false
-            preset: wildshape
-            mode: cr
-          name: ''
-          img: systems/dnd5e/icons/svg/abilities/intelligence.svg
-          visibility:
-            identifier: druid
-            level: {}
-            requireAttunement: false
-            requireIdentification: false
-            requireMagic: false
-          flags: {}
-      enchant: {}
-      identifier: wild-shape
-      advancement: []
-      crewed: false
-    effects: []
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
-        sourceId: Compendium.dnd5e.classes24.Item.phbdrdWildShape0
-        advancementOrigin: PC4BrUcf3LeplS7g.hmO24ovOBpmXAb4U
-        advancementRoot: PC4BrUcf3LeplS7g.hmO24ovOBpmXAb4U
-    _stats:
-      duplicateSource: null
-      exportSource: null
-      compendiumSource: Compendium.dnd5e.classes24.Item.phbdrdWildShape0
-      coreVersion: '13.351'
-      systemId: dnd5e
-      systemVersion: 5.2.4
-      lastModifiedBy: null
-    sort: 1200000
-    ownership:
-      default: 0
-    _key: '!actors.items!AothLv0500000000.2S811nEAELQ2oSNc'
   - _id: s6Pq6rmBtZEyNeRs
     name: Wild Companion
     type: feat
@@ -4886,9 +4664,6 @@ items:
     folder: EXYmwRGoNyMbByN1
     flags:
       dnd5e:
-        riders:
-          activity: []
-          effect: []
         sourceId: Compendium.dnd5e.classes24.Item.phbdrdWildCompan
         advancementOrigin: PC4BrUcf3LeplS7g.hmO24ovOBpmXAb4U
         advancementRoot: PC4BrUcf3LeplS7g.hmO24ovOBpmXAb4U
@@ -5094,9 +4869,6 @@ items:
     folder: WJ4IXskgADlprLEA
     flags:
       dnd5e:
-        riders:
-          activity: []
-          effect: []
         sourceId: Compendium.dnd5e.classes24.Item.phbdrdLandSpells
         advancementOrigin: BcSLhpQ8EHH0YtWg.amRVULpFLpOQ2gPC
         advancementRoot: BcSLhpQ8EHH0YtWg.amRVULpFLpOQ2gPC
@@ -5303,9 +5075,6 @@ items:
     effects: []
     flags:
       dnd5e:
-        riders:
-          activity: []
-          effect: []
         sourceId: Compendium.dnd5e.classes24.Item.phbdrdLandsAid00
         advancementOrigin: BcSLhpQ8EHH0YtWg.amRVULpFLpOQ2gPC
         advancementRoot: BcSLhpQ8EHH0YtWg.amRVULpFLpOQ2gPC
@@ -5515,9 +5284,6 @@ items:
     effects: []
     flags:
       dnd5e:
-        riders:
-          activity: []
-          effect: []
         sourceId: Compendium.dnd5e.classes24.Item.phbdrdWildResurg
         advancementOrigin: PC4BrUcf3LeplS7g.J2JpbQEZhVD3Dnjz
         advancementRoot: PC4BrUcf3LeplS7g.J2JpbQEZhVD3Dnjz
@@ -5660,11 +5426,7 @@ items:
     effects: []
     folder: HCovEE4VoPGlIbKi
     sort: 1200000
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -5780,11 +5542,7 @@ items:
     effects: []
     folder: 3SjcO2acsFnWegp4
     sort: 1700000
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -5958,11 +5716,7 @@ items:
           !actors.items.effects!AothLv0500000000.BEfDOU3fod1g2mXZ.04Wa4xUzjA31kPno
     folder: pBaAAtXBCq9FVEnL
     sort: 400000
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -6141,11 +5895,7 @@ items:
           !actors.items.effects!AothLv0500000000.0yKtuDmblHthSHBC.DQCAm67ck1GEKHtE
     folder: 4FhsY9FJQd7h7MZb
     sort: 106250
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -6948,11 +6698,7 @@ items:
           !actors.items.effects!AothLv0500000000.vypxLIVJ7z7lS6qF.A1T0X0DUFIxx3qhE
     folder: 4FhsY9FJQd7h7MZb
     sort: 1200000
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -7132,11 +6878,7 @@ items:
           !actors.items.effects!AothLv0500000000.eTQlzMLdqIOiq4a5.T9kBIL7LS3j0Upwz
     folder: 4FhsY9FJQd7h7MZb
     sort: 100782
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -7622,11 +7364,7 @@ items:
           !actors.items.effects!AothLv0500000000.dwMaTtPq9jnWmVLG.X9xoN8qHUiCc4SZR
     folder: 4FhsY9FJQd7h7MZb
     sort: 112500
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -8239,11 +7977,7 @@ items:
           !actors.items.effects!AothLv0500000000.CJPKs70OC8R9cUBg.ZWNC1jxea2RuIRVc
     folder: 3SjcO2acsFnWegp4
     sort: 4100000
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -8366,11 +8100,7 @@ items:
     effects: []
     folder: pBaAAtXBCq9FVEnL
     sort: 2700000
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -8484,11 +8214,7 @@ items:
     effects: []
     folder: 3SjcO2acsFnWegp4
     sort: 2500000
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -8647,11 +8373,7 @@ items:
           !actors.items.effects!AothLv0500000000.DSt1Z1RmUpA0AUiS.I746neZVrgJFkRco
     folder: pBaAAtXBCq9FVEnL
     sort: 1300000
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -8795,11 +8517,7 @@ items:
     effects: []
     folder: 3SjcO2acsFnWegp4
     sort: 1600000
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -8931,11 +8649,7 @@ items:
     effects: []
     folder: HCovEE4VoPGlIbKi
     sort: 200000
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -8943,8 +8657,7 @@ items:
       coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 5.2.4
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766619299577
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.9rwOfsb7o56Bd8Ir'
@@ -9078,11 +8791,7 @@ items:
     effects: []
     folder: 3SjcO2acsFnWegp4
     sort: 300000
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -9198,11 +8907,7 @@ items:
     img: icons/equipment/chest/breastplate-banded-steel.webp
     effects: []
     sort: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -9455,11 +9160,7 @@ items:
       equipped: false
     effects: []
     folder: null
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -9467,8 +9168,7 @@ items:
       coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 5.2.4
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1767758207244
+      lastModifiedBy: null
     _id: 4PRqCmv0J7XYfEuk
     sort: 0
     ownership:
@@ -9684,9 +9384,6 @@ items:
     folder: pBaAAtXBCq9FVEnL
     flags:
       dnd5e:
-        riders:
-          activity: []
-          effect: []
         cachedFor: .Item.4PRqCmv0J7XYfEuk.Activity.dnd5escrollspell
     _stats:
       duplicateSource: null
@@ -9808,11 +9505,7 @@ items:
       equipped: false
     effects: []
     folder: null
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -9820,8 +9513,7 @@ items:
       coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 5.2.4
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1767758207244
+      lastModifiedBy: null
     _id: i2guMiFsRbXTalfg
     sort: 0
     ownership:
@@ -9997,9 +9689,6 @@ items:
     sort: 4400000
     flags:
       dnd5e:
-        riders:
-          activity: []
-          effect: []
         cachedFor: .Item.i2guMiFsRbXTalfg.Activity.dnd5escrollspell
     _stats:
       duplicateSource: null
@@ -10120,11 +9809,7 @@ items:
       equipped: false
     effects: []
     folder: null
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -10132,8 +9817,7 @@ items:
       coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 5.2.4
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1767758207244
+      lastModifiedBy: null
     _id: jflCe3EvlJMoKU01
     sort: 0
     ownership:
@@ -10349,9 +10033,6 @@ items:
     sort: 4100000
     flags:
       dnd5e:
-        riders:
-          activity: []
-          effect: []
         cachedFor: .Item.jflCe3EvlJMoKU01.Activity.dnd5escrollspell
     _stats:
       duplicateSource: null
@@ -10472,11 +10153,7 @@ items:
       equipped: false
     effects: []
     folder: null
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -10484,8 +10161,7 @@ items:
       coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 5.2.4
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1767758207244
+      lastModifiedBy: null
     _id: r7p7IwwuFaHcpaD9
     sort: 0
     ownership:
@@ -10700,9 +10376,6 @@ items:
     sort: 4000000
     flags:
       dnd5e:
-        riders:
-          activity: []
-          effect: []
         cachedFor: .Item.r7p7IwwuFaHcpaD9.Activity.dnd5escrollspell
     _stats:
       duplicateSource: null
@@ -10716,6 +10389,227 @@ items:
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.LQM6ZCftddbBdBKY'
+  - _id: g7kaXftRjiAjFI7r
+    name: Wild Shape
+    type: feat
+    folder: EXYmwRGoNyMbByN1
+    img: icons/creatures/mammals/bull-horns-eyes-glowin-orange.webp
+    system:
+      description:
+        value: >-
+          <p>The power of nature allows you to assume the form of an animal. As
+          a Bonus Action, you shape-shift into a Beast form that you have
+          learned for this feature (see "Known Forms" below). You stay in that
+          form for a number of hours equal to half your Druid level (currently
+          [[lookup @classes.druid.levels]]) or until you use Wild Shape again,
+          have the Incapacitated condition, or die. You can also leave the form
+          early as a Bonus Action.</p><p><strong>Number of Uses.</strong> You
+          can use Wild Shape twice. You regain one expended use when you finish
+          a Short Rest, and you regain all expended uses when you finish a Long
+          Rest.</p><p>You gain additional uses when you reach certain Druid
+          levels, as shown in the Wild Shape column of the
+          @UUID[Compendium.dnd5e.content24.JournalEntry.phbDruid00000000.JournalEntryPage.UCOh3zlvGxyk5jLr#class-features]{Druid
+          Features} table.</p><p><strong>Current Number of Uses:</strong>
+          [[lookup @scale.druid.wild-shape-uses]]</p><p><strong>Known Forms.
+          </strong>You know four Beast forms for this feature, chosen from among
+          Beast stat blocks that have a maximum Challenge Rating of 1/4 and that
+          lack a Fly Speed. The
+          @UUID[Compendium.dnd5e.actors24.Actor.mmRat00000000000]{Rat},
+          @UUID[Compendium.dnd5e.actors24.Actor.mmRidingHorse000]{Riding Horse},
+          @UUID[Compendium.dnd5e.actors24.Actor.mmSpider00000000]{Spider}, and
+          @UUID[Compendium.dnd5e.actors24.Actor.mmWolf0000000000]{Wolf} are
+          recommended. Whenever you finish a Long Rest, you can replace one of
+          your known forms with another eligible form.</p><section class="fvtt
+          advice"><figure class="icon"><img src="icons/vtt-512.png"
+          /></figure><article><h3>Wild Shape Automation</h3><p>When you've
+          selected the creature you would like to wild shape into you can drag
+          it onto your character sheet, select the Wild Shape option, and
+          Foundry will automatically update your sheet. You can revert the
+          transformation at the top of your sheet or by right clicking on your
+          Actor in the sidebar.</p></article></section><p>When you reach certain
+          Druid levels, your number of known forms and the maximum Challenge
+          Rating for those forms increases, as shown in the Beast Shapes table.
+          In addition, starting at level 8, you can adopt a form that has a Fly
+          Speed.</p><p><strong>Current Known Forms Limit:</strong> [[lookup
+          @scale.druid.known-forms]]</p><p><strong>Current CR Limit:</strong>
+          [[lookup @scale.druid.wild-shape]]</p><p>When choosing known forms,
+          you may look in the <em>Monster Manual</em> or elsewhere for eligible
+          Beasts if the Dungeon Master permits you to do
+          so.</p><table><caption>Beast Shapes</caption><thead><tr><td>Druid
+          Level</td><td>Known Forms</td><td>Max CR</td><td>Fly
+          Speed</td></tr></thead><tbody><tr><td>2</td><td>4</td><td>1/4</td><td>No</td></tr><tr><td>4</td><td>6</td><td>1/2</td><td>No</td></tr><tr><td>8</td><td>8</td><td>1</td><td>Yes</td></tr></tbody></table><p><strong>Rules
+          While Shape-Shifted.</strong> While in a form, you retain your
+          personality, memories, and ability to speak, and the following rules
+          apply:</p><p><strong>Temporary Hit Points. </strong>When you assume a
+          Wild Shape form, you gain a number of Temporary Hit Points equal to
+          your Druid level.</p><p><strong>Game Statistics.</strong> Your game
+          statistics are replaced by the Beast's stat block, but you retain your
+          creature type; Hit Points; Hit Point Dice; Intelligence, Wisdom, and
+          Charisma scores; class features; languages; and feats. You also retain
+          your skill and saving throw proficiencies and use your Proficiency
+          Bonus for them, in addition to gaining the proficiencies of the
+          creature. If a skill or saving throw modifier in the Beast's stat
+          block is higher than yours, use the one in the stat
+          block.</p><p><strong>No Spellcasting.</strong> You can't cast spells,
+          but shape-shifting doesn't break your Concentration or otherwise
+          interfere with a spell you've already cast.</p><p><strong>Objects.
+          </strong>Your ability to handle objects is determined by the form's
+          limbs rather than your own. In addition, you choose whether your
+          equipment falls in your space, merges into your new form, or is worn
+          by it. Worn equipment functions as normal, but the DM decides whether
+          it's practical for the new form to wear a piece of equipment based on
+          the creature's size and shape. Your equipment doesn't change size or
+          shape to match the new form, and any equipment that the new form can't
+          wear must either fall to the ground or merge with the form. Equipment
+          that merges with the form has no effect while you're in that
+          form.</p><section class="secret"
+          id="secret-FZNGONDktXDnwY0x"><p><strong>Foundry
+          Note</strong></p><p>You can activate this feature to track uses of
+          your Wild Shape.</p><p>It will automatically restore a use on a Short
+          Rest and all uses on a Long Rest.</p></section>
+        chat: ''
+      source:
+        custom: ''
+        revision: 1
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+      uses:
+        max: '@scale.druid.wild-shape-uses'
+        recovery:
+          - period: lr
+            type: recoverAll
+          - period: sr
+            type: formula
+            formula: '1'
+        spent: 0
+      type:
+        value: class
+        subtype: ''
+      prerequisites:
+        level: 2
+        repeatable: false
+        items: []
+      properties: []
+      requirements: Druid
+      activities:
+        FsDnynyqno8XNHgf:
+          type: transform
+          _id: FsDnynyqno8XNHgf
+          sort: 0
+          activation:
+            type: bonus
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling: {}
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            units: self
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: self
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          profiles:
+            - cr: '0.25'
+              name: CR ¼
+              _id: xUPf0uISOwKy3mhO
+              uuid: null
+              sizes: []
+              types:
+                - beast
+              movement:
+                - fly
+              level:
+                min: null
+                max: 3
+            - cr: '0.5'
+              name: CR ½
+              _id: yu86xk21fVzHg9r5
+              uuid: null
+              sizes: []
+              types:
+                - beast
+              movement:
+                - fly
+              level:
+                min: 4
+                max: 7
+            - cr: '1'
+              name: CR 1
+              _id: ZFqKHYlY9JhLYnx0
+              uuid: null
+              sizes: []
+              types:
+                - beast
+              movement: []
+              level:
+                min: 8
+                max: null
+          settings: null
+          transform:
+            customize: false
+            preset: wildshape
+            mode: cr
+          name: ''
+          img: systems/dnd5e/icons/svg/abilities/intelligence.svg
+          visibility:
+            identifier: druid
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          flags: {}
+      enchant: {}
+      identifier: wild-shape
+      advancement: []
+      crewed: false
+    effects: []
+    flags:
+      dnd5e:
+        sourceId: Compendium.dnd5e.classes24.Item.phbdrdWildShape0
+        advancementOrigin: PC4BrUcf3LeplS7g.hmO24ovOBpmXAb4U
+        advancementRoot: PC4BrUcf3LeplS7g.hmO24ovOBpmXAb4U
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.classes24.Item.phbdrdWildShape0
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 1200000
+    ownership:
+      default: 0
+    _key: '!actors.items!AothLv0500000000.g7kaXftRjiAjFI7r'
 effects: []
 flags: {}
 _stats:
@@ -10724,12 +10618,12 @@ _stats:
   coreVersion: '13.351'
   systemId: dnd5e
   systemVersion: 5.2.4
-  createdTime: 1766614885512
-  modifiedTime: 1766972936197
+  createdTime: 1768923763536
+  modifiedTime: 1768923763536
   lastModifiedBy: dnd5ebuilder0000
 img: null
 folder: JRPsXXWuBa56FSZb
 ownership:
   default: 0
-sort: 1100000
+sort: 0
 _key: '!actors!AothLv0500000000'
