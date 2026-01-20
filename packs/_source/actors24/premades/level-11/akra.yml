@@ -5633,7 +5633,6 @@ items:
               - type: itemUses
                 value: '1'
                 target: ''
-                scaling: {}
           description:
             chatFlavor: ''
           duration:
@@ -5670,17 +5669,21 @@ items:
               - healing
             custom:
               enabled: true
-              formula: (@scale.channel-divinity.spark)d8 + @abilities.wis.mod
+              formula: (@scale.channel-divinity-cleric.spark)d8 + @abilities.wis.mod
             scaling:
               number: 1
             bonus: ''
           name: 'Divine Spark: Heal'
           flags: {}
           visibility:
-            level: {}
+            level:
+              min: null
+              max: null
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+            identifier: ''
+          img: ''
         OY9UrTXvlRL0JUoI:
           type: save
           name: 'Divine Spark: Save'
@@ -5698,7 +5701,6 @@ items:
               - type: itemUses
                 value: '1'
                 target: ''
-                scaling: {}
           description:
             chatFlavor: ''
           duration:
@@ -5732,15 +5734,15 @@ items:
             parts:
               - custom:
                   enabled: true
-                  formula: (@scale.channel-divinity.spark)d8 + @abilities.wis.mod
+                  formula: >-
+                    (@scale.channel-divinity-cleric.spark)d8 +
+                    @abilities.wis.mod
                 number: null
                 denomination: null
                 bonus: ''
                 types:
                   - necrotic
                   - radiant
-                scaling:
-                  number: 1
             onSave: half
           save:
             ability:
@@ -5750,10 +5752,14 @@ items:
               formula: ''
           flags: {}
           visibility:
-            level: {}
+            level:
+              min: null
+              max: null
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+            identifier: ''
+          img: ''
         aOptL5pMaj3WtR8S:
           type: save
           name: Turn Undead
@@ -5896,7 +5902,8 @@ items:
       coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 5.2.4
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1768782561531
     sort: 200000
     ownership:
       default: 0

@@ -1,12 +1,12 @@
 name: Merric
 type: character
-_id: MerricLv11000000
+_id: MerricLv17000000
 system:
   currency:
     pp: 0
-    gp: 195
+    gp: 1807
     ep: 0
-    sp: 0
+    sp: 5
     cp: 0
   abilities:
     str:
@@ -27,7 +27,7 @@ system:
           max: null
           mode: 0
     dex:
-      value: 14
+      value: 15
       proficient: 0
       max: null
       bonuses:
@@ -44,7 +44,7 @@ system:
           max: null
           mode: 0
     con:
-      value: 15
+      value: 18
       proficient: 1
       max: null
       bonuses:
@@ -382,7 +382,7 @@ system:
       max: null
       temp: null
       tempmax: 0
-      value: 115
+      value: 209
       bonuses: {}
     death:
       roll:
@@ -413,7 +413,7 @@ system:
     background: nv4C6lqP8VYdEcVb
     originalClass: 7nHPYFob0vjlhbfL
     xp:
-      value: 85000
+      value: 225000
     appearance: ''
     trait: ''
     gender: ''
@@ -497,7 +497,7 @@ system:
       sort: 0
     - type: item
       id: .Item.uutn0AywiHRocja8
-      sort: 150000
+      sort: 675000
     - type: item
       id: .Item.sg8BynPATjwYrzFW
       sort: 187500
@@ -512,13 +512,19 @@ system:
       sort: 800000
     - type: item
       id: .Item.5uJReYt5U8OW2vyb
-      sort: 262500
+      sort: 737500
     - type: item
       id: .Item.eW8v01W2jt2oNMRs
       sort: -100000
     - type: item
+      id: .Item.z6NsdVKZKoXYPbH8
+      sort: 37500
+    - type: item
       id: .Item.blGBP7JzOOrDn9Qw
       sort: 550000
+    - type: item
+      id: .Item.Zoy98jtfNBKPsDSb
+      sort: 131250
 prototypeToken:
   name: Merric
   displayName: 20
@@ -535,8 +541,8 @@ prototypeToken:
     tint: '#ffffff'
     alphaThreshold: 0.75
     src: systems/dnd5e/icons/svg/actors/character.svg
-    scaleX: 1.25
-    scaleY: 1.25
+    scaleX: 1
+    scaleY: 1
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -747,7 +753,7 @@ items:
     _id: nv4C6lqP8VYdEcVb
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.nv4C6lqP8VYdEcVb'
+    _key: '!actors.items!MerricLv17000000.nv4C6lqP8VYdEcVb'
   - name: Savage Attacker
     system:
       description:
@@ -801,7 +807,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.VIG2RzkTclty6LSQ'
+    _key: '!actors.items!MerricLv17000000.VIG2RzkTclty6LSQ'
   - _id: 7nHPYFob0vjlhbfL
     name: Barbarian
     type: class
@@ -851,7 +857,7 @@ items:
           group: 0Yx0DOCxeeNYZw7n
           sort: 700000
       identifier: barbarian
-      levels: 11
+      levels: 17
       advancement:
         - _id: JsGU20wwFmwSQ5He
           type: ScaleValue
@@ -1054,6 +1060,9 @@ items:
             recommendation: null
           value:
             type: asi
+            assignments:
+              dex: 1
+              con: 1
           level: 12
           title: ''
         - _id: zqXib0MKbaqrTTVR
@@ -1064,7 +1073,9 @@ items:
                 optional: false
             optional: false
             spell: null
-          value: {}
+          value:
+            added:
+              Zoy98jtfNBKPsDSb: Compendium.dnd5e.classes24.Item.phbbrbImpBrutalS
           level: 13
           title: Class Features
         - _id: YYXyPXHTKRgnPswF
@@ -1075,7 +1086,9 @@ items:
                 optional: false
             optional: false
             spell: null
-          value: {}
+          value:
+            added:
+              wXxfq0JRg8n8EZuv: Compendium.dnd5e.classes24.Item.phbbrbPersistent
           level: 15
           title: Class Features
         - _id: SI7lbuRXd2YfXXEi
@@ -1094,6 +1107,8 @@ items:
             recommendation: null
           value:
             type: asi
+            assignments:
+              con: 2
           level: 16
           title: ''
         - _id: e5XIkDQYhqNDImgs
@@ -1104,7 +1119,9 @@ items:
                 optional: false
             optional: false
             spell: null
-          value: {}
+          value:
+            added:
+              AQJfvEXh217lOwTz: Compendium.dnd5e.classes24.Item.phbbrbImp2Brutal
           level: 17
           title: Class Features
         - _id: WlOoBbYeEoCTcD0t
@@ -1144,6 +1161,12 @@ items:
             '9': avg
             '10': avg
             '11': avg
+            '12': avg
+            '13': avg
+            '14': avg
+            '15': avg
+            '16': avg
+            '17': avg
           title: ''
         - _id: n7u8pfM928PJ8Mkd
           type: Trait
@@ -1425,7 +1448,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.7nHPYFob0vjlhbfL'
+    _key: '!actors.items!MerricLv17000000.7nHPYFob0vjlhbfL'
   - _id: 4RXzjEOjPViC4Kiy
     name: Rage
     type: feat
@@ -1619,7 +1642,7 @@ items:
         system: {}
         sort: 0
         _key: >-
-          !actors.items.effects!MerricLv11000000.4RXzjEOjPViC4Kiy.G5XZTi4zYTFiHVll
+          !actors.items.effects!MerricLv17000000.4RXzjEOjPViC4Kiy.G5XZTi4zYTFiHVll
     folder: p6WDpW0gzmKfhGad
     flags:
       dnd5e:
@@ -1637,7 +1660,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.4RXzjEOjPViC4Kiy'
+    _key: '!actors.items!MerricLv17000000.4RXzjEOjPViC4Kiy'
   - _id: 1T98zoTehp7uwXgc
     name: Unarmored Defense
     type: feat
@@ -1709,7 +1732,7 @@ items:
         system: {}
         sort: 0
         _key: >-
-          !actors.items.effects!MerricLv11000000.1T98zoTehp7uwXgc.2nOM7nl6sd6UAxA1
+          !actors.items.effects!MerricLv17000000.1T98zoTehp7uwXgc.2nOM7nl6sd6UAxA1
     folder: p6WDpW0gzmKfhGad
     flags:
       dnd5e:
@@ -1727,7 +1750,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.1T98zoTehp7uwXgc'
+    _key: '!actors.items!MerricLv17000000.1T98zoTehp7uwXgc'
   - _id: J5caKdFt1XAv3FVv
     name: Weapon Mastery
     type: feat
@@ -1786,7 +1809,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.J5caKdFt1XAv3FVv'
+    _key: '!actors.items!MerricLv17000000.J5caKdFt1XAv3FVv'
   - _id: XAeeijNBGJzmMrWR
     name: Unarmed Strike
     type: weapon
@@ -2022,7 +2045,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!MerricLv11000000.XAeeijNBGJzmMrWR.bdG1d6kwc7F8Gbfg
+          !actors.items.effects!MerricLv17000000.XAeeijNBGJzmMrWR.bdG1d6kwc7F8Gbfg
       - name: Prone
         img: systems/dnd5e/icons/svg/statuses/prone.svg
         origin: Compendium.dnd5e.equipment24.Item.phbUnarmedStrike
@@ -2058,7 +2081,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!MerricLv11000000.XAeeijNBGJzmMrWR.SfM8X3xktY0PR0Kz
+          !actors.items.effects!MerricLv17000000.XAeeijNBGJzmMrWR.SfM8X3xktY0PR0Kz
     folder: 3gGfshno9bSHH0Dh
     flags:
       dnd5e:
@@ -2076,7 +2099,7 @@ items:
     sort: 400000
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.XAeeijNBGJzmMrWR'
+    _key: '!actors.items!MerricLv17000000.XAeeijNBGJzmMrWR'
   - name: Clothes, Traveler's
     system:
       description:
@@ -2150,7 +2173,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.POI4JmJ3h5VNycfM'
+    _key: '!actors.items!MerricLv17000000.POI4JmJ3h5VNycfM'
   - name: Mason's Tools
     system:
       description:
@@ -2274,7 +2297,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.YkehZJiA2wq3x6T5'
+    _key: '!actors.items!MerricLv17000000.YkehZJiA2wq3x6T5'
   - name: Explorer's Pack
     system:
       description:
@@ -2344,7 +2367,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.kxbrpB9Gs13Lq4Lk'
+    _key: '!actors.items!MerricLv17000000.kxbrpB9Gs13Lq4Lk'
   - name: Tinderbox
     system:
       description:
@@ -2473,7 +2496,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.smLPuzpKpefUXjrb'
+    _key: '!actors.items!MerricLv17000000.smLPuzpKpefUXjrb'
   - name: Rope
     system:
       description:
@@ -2714,7 +2737,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.cRzJKLl7icKo2JN3'
+    _key: '!actors.items!MerricLv17000000.cRzJKLl7icKo2JN3'
   - name: Bedroll
     system:
       description:
@@ -2764,7 +2787,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.9ahSQrUkGfSNAxNb'
+    _key: '!actors.items!MerricLv17000000.9ahSQrUkGfSNAxNb'
   - name: Waterskin
     system:
       description:
@@ -2824,7 +2847,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.JUacPDDU1O4jjAvD'
+    _key: '!actors.items!MerricLv17000000.JUacPDDU1O4jjAvD'
   - name: Water (Pint)
     type: consumable
     img: icons/magic/water/water-drop-swirl-blue.webp
@@ -2947,7 +2970,7 @@ items:
     sort: 100000
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.L5sUY8yeKrg5eDVV'
+    _key: '!actors.items!MerricLv17000000.L5sUY8yeKrg5eDVV'
   - name: Torch
     system:
       description:
@@ -3100,7 +3123,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.kpNjeHxTmzlgIXVu'
+    _key: '!actors.items!MerricLv17000000.kpNjeHxTmzlgIXVu'
   - name: Oil
     system:
       description:
@@ -3317,7 +3340,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.gDJAtu3CiECMqmUL'
+    _key: '!actors.items!MerricLv17000000.gDJAtu3CiECMqmUL'
   - name: Rations
     system:
       description:
@@ -3386,7 +3409,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.TNkyxQdEiyoBEBLg'
+    _key: '!actors.items!MerricLv17000000.TNkyxQdEiyoBEBLg'
   - name: Goliath
     system:
       description:
@@ -3540,7 +3563,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.fkicaQa81kNeBqbg'
+    _key: '!actors.items!MerricLv17000000.fkicaQa81kNeBqbg'
   - _id: vYJD8S5kZvt92Wlv
     name: Giant Ancestry
     type: feat
@@ -3612,7 +3635,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.vYJD8S5kZvt92Wlv'
+    _key: '!actors.items!MerricLv17000000.vYJD8S5kZvt92Wlv'
   - _id: 8CEaMaS7Vid4oDBk
     name: Powerful Build
     type: feat
@@ -3688,7 +3711,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!MerricLv11000000.8CEaMaS7Vid4oDBk.ge1u3EIFvsoj3jZu
+          !actors.items.effects!MerricLv17000000.8CEaMaS7Vid4oDBk.ge1u3EIFvsoj3jZu
     folder: 4KZykhQTGVAuVo1I
     flags:
       dnd5e:
@@ -3706,7 +3729,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.8CEaMaS7Vid4oDBk'
+    _key: '!actors.items!MerricLv17000000.8CEaMaS7Vid4oDBk'
   - _id: npsc7dPPaXNpQKuN
     name: Cloud's Jaunt
     type: feat
@@ -3819,7 +3842,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.npsc7dPPaXNpQKuN'
+    _key: '!actors.items!MerricLv17000000.npsc7dPPaXNpQKuN'
   - _id: Ps7i72sPNtyxLB0U
     name: Danger Sense
     type: feat
@@ -3901,7 +3924,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!MerricLv11000000.Ps7i72sPNtyxLB0U.lTOwmIJoE8GLm1oy
+          !actors.items.effects!MerricLv17000000.Ps7i72sPNtyxLB0U.lTOwmIJoE8GLm1oy
     folder: p6WDpW0gzmKfhGad
     flags:
       dnd5e:
@@ -3919,7 +3942,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.Ps7i72sPNtyxLB0U'
+    _key: '!actors.items!MerricLv17000000.Ps7i72sPNtyxLB0U'
   - _id: 4Iftgmi1Bkp9EpaZ
     name: Reckless Attack
     type: feat
@@ -3993,7 +4016,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!MerricLv11000000.4Iftgmi1Bkp9EpaZ.XA0GhXVB54U2IuRP
+          !actors.items.effects!MerricLv17000000.4Iftgmi1Bkp9EpaZ.XA0GhXVB54U2IuRP
     folder: p6WDpW0gzmKfhGad
     flags:
       dnd5e:
@@ -4011,7 +4034,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.4Iftgmi1Bkp9EpaZ'
+    _key: '!actors.items!MerricLv17000000.4Iftgmi1Bkp9EpaZ'
   - _id: 32AkX6in3z423w8o
     name: Primal Knowledge
     type: feat
@@ -4111,7 +4134,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!MerricLv11000000.32AkX6in3z423w8o.ufbJRsGGW3REMmJm
+          !actors.items.effects!MerricLv17000000.32AkX6in3z423w8o.ufbJRsGGW3REMmJm
     folder: p6WDpW0gzmKfhGad
     flags:
       dnd5e:
@@ -4129,7 +4152,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.32AkX6in3z423w8o'
+    _key: '!actors.items!MerricLv17000000.32AkX6in3z423w8o'
   - _id: 85fZf2zLD7YHkSeW
     name: Path of the Berserker
     type: subclass
@@ -4199,7 +4222,9 @@ items:
                 optional: false
             optional: false
             spell: null
-          value: {}
+          value:
+            added:
+              QWGwlXJnTU8zcApB: Compendium.dnd5e.classes24.Item.phbbrbIntimidati
           level: 14
           title: Subclass Features
       spellcasting:
@@ -4223,7 +4248,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.85fZf2zLD7YHkSeW'
+    _key: '!actors.items!MerricLv17000000.85fZf2zLD7YHkSeW'
   - _id: D42wuXFU5NazZQyU
     name: Frenzy
     type: feat
@@ -4359,7 +4384,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.D42wuXFU5NazZQyU'
+    _key: '!actors.items!MerricLv17000000.D42wuXFU5NazZQyU'
   - name: Large Form
     system:
       description:
@@ -4512,7 +4537,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!MerricLv11000000.8louMIYOZitZ4JgG.QI7POclNlvX9a8VD
+          !actors.items.effects!MerricLv17000000.8louMIYOZitZ4JgG.QI7POclNlvX9a8VD
     sort: 100000
     flags:
       dnd5e:
@@ -4529,7 +4554,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.8louMIYOZitZ4JgG'
+    _key: '!actors.items!MerricLv17000000.8louMIYOZitZ4JgG'
   - _id: n3ovx2K1PFbvMBOt
     name: Extra Attack
     type: feat
@@ -4582,7 +4607,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.n3ovx2K1PFbvMBOt'
+    _key: '!actors.items!MerricLv17000000.n3ovx2K1PFbvMBOt'
   - _id: dWr5mroqfd4OtTjQ
     name: Fast Movement
     type: feat
@@ -4658,7 +4683,7 @@ items:
         system: {}
         sort: 0
         _key: >-
-          !actors.items.effects!MerricLv11000000.dWr5mroqfd4OtTjQ.Ln2upWfCALSwthX1
+          !actors.items.effects!MerricLv17000000.dWr5mroqfd4OtTjQ.Ln2upWfCALSwthX1
     folder: p6WDpW0gzmKfhGad
     flags:
       dnd5e:
@@ -4676,7 +4701,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.dWr5mroqfd4OtTjQ'
+    _key: '!actors.items!MerricLv17000000.dWr5mroqfd4OtTjQ'
   - name: Javelin
     system:
       description:
@@ -4843,7 +4868,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.sg8BynPATjwYrzFW'
+    _key: '!actors.items!MerricLv17000000.sg8BynPATjwYrzFW'
   - _id: DInLEK5GoeELchQ2
     name: Potion of Healing
     type: consumable
@@ -4977,7 +5002,7 @@ items:
     sort: 100000
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.DInLEK5GoeELchQ2'
+    _key: '!actors.items!MerricLv17000000.DInLEK5GoeELchQ2'
   - name: Halberd
     system:
       description:
@@ -5135,37 +5160,37 @@ items:
     img: icons/weapons/polearms/halberd-engraved-black.webp
     effects:
       - type: enchantment
-        name: Weapon +1
-        img: systems/dnd5e/icons/spell-tiers/spell2.webp
+        name: Vicious Weapon
+        img: systems/dnd5e/icons/spell-tiers/spell3.webp
         disabled: false
-        _id: AfQGizmQFysSt4Y6
+        _id: 8amzL1ozqzk0XqE4
         system: {}
         changes:
           - key: name
             mode: 5
-            value: '{} +1'
-            priority: null
-          - key: system.magicalBonus
-            mode: 4
-            value: '1'
+            value: Vicious {}
             priority: null
           - key: system.rarity
             mode: 5
-            value: uncommon
+            value: rare
             priority: null
           - key: system.description.value
             mode: 5
             value: >-
-              {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgWeapon12or300
+              {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgViciousWeapon
               caption=false]</p>
             priority: null
           - key: system.properties
             mode: 2
             value: mgc
             priority: null
+          - key: system.damage.base.bonus
+            mode: 2
+            value: 2d6
+            priority: null
           - key: system.price.value
             mode: 2
-            value: '400'
+            value: '4000'
             priority: null
           - key: system.price.denomination
             mode: 5
@@ -5180,7 +5205,7 @@ items:
           startRound: null
           startTurn: null
         description: ''
-        origin: Compendium.dnd5e.equipment24.Item.dmgWeapon12or300
+        origin: Compendium.dnd5e.equipment24.Item.dmgViciousWeapon
         tint: '#ffffff'
         transfer: true
         statuses: []
@@ -5188,7 +5213,7 @@ items:
         flags: {}
         _stats:
           compendiumSource: >-
-            Compendium.dnd5e.equipment24.Item.dmgWeapon12or300.ActiveEffect.8Fd1n2gyqFB5lLKd
+            Compendium.dnd5e.equipment24.Item.dmgViciousWeapon.ActiveEffect.CzJMRNHYWlVNvnJN
           duplicateSource: null
           exportSource: null
           coreVersion: '13.351'
@@ -5196,7 +5221,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!MerricLv11000000.uutn0AywiHRocja8.AfQGizmQFysSt4Y6
+          !actors.items.effects!MerricLv17000000.uutn0AywiHRocja8.8amzL1ozqzk0XqE4
     sort: 0
     flags: {}
     _stats:
@@ -5209,7 +5234,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.uutn0AywiHRocja8'
+    _key: '!actors.items!MerricLv17000000.uutn0AywiHRocja8'
   - _id: MKUkpuQzjKnwhWJP
     name: Winged Boots
     type: equipment
@@ -5376,7 +5401,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!MerricLv11000000.MKUkpuQzjKnwhWJP.jKz5xLbftW2r0f3P
+          !actors.items.effects!MerricLv17000000.MKUkpuQzjKnwhWJP.jKz5xLbftW2r0f3P
     flags: {}
     _stats:
       duplicateSource: null
@@ -5389,7 +5414,7 @@ items:
     sort: 37900000
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.MKUkpuQzjKnwhWJP'
+    _key: '!actors.items!MerricLv17000000.MKUkpuQzjKnwhWJP'
   - name: Pike
     system:
       description:
@@ -5547,37 +5572,37 @@ items:
     img: icons/weapons/polearms/spear-hooked-spike.webp
     effects:
       - type: enchantment
-        name: Weapon +1
-        img: systems/dnd5e/icons/spell-tiers/spell2.webp
+        name: Vicious Weapon
+        img: systems/dnd5e/icons/spell-tiers/spell3.webp
         disabled: false
-        _id: dR2daxwceZLQxDoU
+        _id: fTrpNyCvsnIC4jUG
         system: {}
         changes:
           - key: name
             mode: 5
-            value: '{} +1'
-            priority: null
-          - key: system.magicalBonus
-            mode: 4
-            value: '1'
+            value: Vicious {}
             priority: null
           - key: system.rarity
             mode: 5
-            value: uncommon
+            value: rare
             priority: null
           - key: system.description.value
             mode: 5
             value: >-
-              {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgWeapon12or300
+              {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgViciousWeapon
               caption=false]</p>
             priority: null
           - key: system.properties
             mode: 2
             value: mgc
             priority: null
+          - key: system.damage.base.bonus
+            mode: 2
+            value: 2d6
+            priority: null
           - key: system.price.value
             mode: 2
-            value: '400'
+            value: '4000'
             priority: null
           - key: system.price.denomination
             mode: 5
@@ -5592,7 +5617,7 @@ items:
           startRound: null
           startTurn: null
         description: ''
-        origin: Compendium.dnd5e.equipment24.Item.dmgWeapon12or300
+        origin: Compendium.dnd5e.equipment24.Item.dmgViciousWeapon
         tint: '#ffffff'
         transfer: true
         statuses: []
@@ -5600,7 +5625,7 @@ items:
         flags: {}
         _stats:
           compendiumSource: >-
-            Compendium.dnd5e.equipment24.Item.dmgWeapon12or300.ActiveEffect.8Fd1n2gyqFB5lLKd
+            Compendium.dnd5e.equipment24.Item.dmgViciousWeapon.ActiveEffect.CzJMRNHYWlVNvnJN
           duplicateSource: null
           exportSource: null
           coreVersion: '13.351'
@@ -5608,7 +5633,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!MerricLv11000000.5uJReYt5U8OW2vyb.dR2daxwceZLQxDoU
+          !actors.items.effects!MerricLv17000000.5uJReYt5U8OW2vyb.fTrpNyCvsnIC4jUG
     sort: 0
     flags: {}
     _stats:
@@ -5621,7 +5646,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.5uJReYt5U8OW2vyb'
+    _key: '!actors.items!MerricLv17000000.5uJReYt5U8OW2vyb'
   - _id: Sz16f3WnSduxpVic
     name: Mindless Rage
     type: feat
@@ -5702,13 +5727,10 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!MerricLv11000000.Sz16f3WnSduxpVic.Y9LOXK6Q4vot2cxi
+          !actors.items.effects!MerricLv17000000.Sz16f3WnSduxpVic.Y9LOXK6Q4vot2cxi
     folder: bEMqmmgGROsTGe0J
     flags:
       dnd5e:
-        riders:
-          activity: []
-          effect: []
         sourceId: Compendium.dnd5e.classes24.Item.phbbrbMindlessRa
         advancementOrigin: 85fZf2zLD7YHkSeW.2AGvW4P2FHYxDTmU
         advancementRoot: 85fZf2zLD7YHkSeW.2AGvW4P2FHYxDTmU
@@ -5723,7 +5745,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.Sz16f3WnSduxpVic'
+    _key: '!actors.items!MerricLv17000000.Sz16f3WnSduxpVic'
   - _id: i7XggxrY5X2tYq8v
     name: Feral Instinct
     type: feat
@@ -5795,13 +5817,10 @@ items:
         system: {}
         sort: 0
         _key: >-
-          !actors.items.effects!MerricLv11000000.i7XggxrY5X2tYq8v.CaV1VYMaVjjPceJs
+          !actors.items.effects!MerricLv17000000.i7XggxrY5X2tYq8v.CaV1VYMaVjjPceJs
     folder: p6WDpW0gzmKfhGad
     flags:
       dnd5e:
-        riders:
-          activity: []
-          effect: []
         sourceId: Compendium.dnd5e.classes24.Item.phbbrbFeralInsti
         advancementOrigin: 7nHPYFob0vjlhbfL.ALO7yStJ7IHDxOss
         advancementRoot: 7nHPYFob0vjlhbfL.ALO7yStJ7IHDxOss
@@ -5816,7 +5835,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.i7XggxrY5X2tYq8v'
+    _key: '!actors.items!MerricLv17000000.i7XggxrY5X2tYq8v'
   - _id: e8bTMqFNE7nyhGyU
     name: Instinctive Pounce
     type: feat
@@ -5855,9 +5874,6 @@ items:
     folder: p6WDpW0gzmKfhGad
     flags:
       dnd5e:
-        riders:
-          activity: []
-          effect: []
         sourceId: Compendium.dnd5e.classes24.Item.phbbrbInstinctiv
         advancementOrigin: 7nHPYFob0vjlhbfL.ALO7yStJ7IHDxOss
         advancementRoot: 7nHPYFob0vjlhbfL.ALO7yStJ7IHDxOss
@@ -5872,7 +5888,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.e8bTMqFNE7nyhGyU'
+    _key: '!actors.items!MerricLv17000000.e8bTMqFNE7nyhGyU'
   - _id: eW8v01W2jt2oNMRs
     name: Brutal Strike
     type: feat
@@ -6039,13 +6055,10 @@ items:
         system: {}
         sort: 0
         _key: >-
-          !actors.items.effects!MerricLv11000000.eW8v01W2jt2oNMRs.bg9jWpPRIJ0Q2vPY
+          !actors.items.effects!MerricLv17000000.eW8v01W2jt2oNMRs.bg9jWpPRIJ0Q2vPY
     folder: p6WDpW0gzmKfhGad
     flags:
       dnd5e:
-        riders:
-          activity: []
-          effect: []
         sourceId: Compendium.dnd5e.classes24.Item.phbbrbBrutalStri
         advancementOrigin: 7nHPYFob0vjlhbfL.JNtXQqEZhCUM1NLJ
         advancementRoot: 7nHPYFob0vjlhbfL.JNtXQqEZhCUM1NLJ
@@ -6060,7 +6073,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.eW8v01W2jt2oNMRs'
+    _key: '!actors.items!MerricLv17000000.eW8v01W2jt2oNMRs'
   - _id: OYcKmqEvFyeM9GqP
     name: Retaliation
     type: feat
@@ -6161,9 +6174,6 @@ items:
     folder: bEMqmmgGROsTGe0J
     flags:
       dnd5e:
-        riders:
-          activity: []
-          effect: []
         sourceId: Compendium.dnd5e.classes24.Item.phbbrbRetaliatio
         advancementOrigin: 85fZf2zLD7YHkSeW.HPirEn8oG5KFLosG
         advancementRoot: 85fZf2zLD7YHkSeW.HPirEn8oG5KFLosG
@@ -6178,7 +6188,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.OYcKmqEvFyeM9GqP'
+    _key: '!actors.items!MerricLv17000000.OYcKmqEvFyeM9GqP'
   - _id: VMRNVQ8MYVhNWl70
     name: Relentless Rage
     type: feat
@@ -6355,9 +6365,6 @@ items:
     folder: p6WDpW0gzmKfhGad
     flags:
       dnd5e:
-        riders:
-          activity: []
-          effect: []
         sourceId: Compendium.dnd5e.classes24.Item.phbbrbRelentless
         advancementOrigin: 7nHPYFob0vjlhbfL.5S7821U8Dtg9egZu
         advancementRoot: 7nHPYFob0vjlhbfL.5S7821U8Dtg9egZu
@@ -6372,7 +6379,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.VMRNVQ8MYVhNWl70'
+    _key: '!actors.items!MerricLv17000000.VMRNVQ8MYVhNWl70'
   - name: Half Plate Armor
     system:
       description:
@@ -6499,13 +6506,9 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!MerricLv11000000.QdjkvubednXLv56c.XPjzwj1Ysjp5uAvH
+          !actors.items.effects!MerricLv17000000.QdjkvubednXLv56c.XPjzwj1Ysjp5uAvH
     sort: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -6516,7 +6519,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.QdjkvubednXLv56c'
+    _key: '!actors.items!MerricLv17000000.QdjkvubednXLv56c'
   - _id: T056luaakdcdq0M9
     name: Efficient Quiver
     type: container
@@ -6585,7 +6588,7 @@ items:
     sort: 1000000
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.T056luaakdcdq0M9'
+    _key: '!actors.items!MerricLv17000000.T056luaakdcdq0M9'
   - name: Long Compartment
     type: container
     _id: xjnQ1FiM4pVOCpsg
@@ -6644,7 +6647,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.xjnQ1FiM4pVOCpsg'
+    _key: '!actors.items!MerricLv17000000.xjnQ1FiM4pVOCpsg'
   - name: Short Compartment
     type: container
     _id: uLsGjdYMfZmCmTNo
@@ -6707,7 +6710,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.uLsGjdYMfZmCmTNo'
+    _key: '!actors.items!MerricLv17000000.uLsGjdYMfZmCmTNo'
   - name: Midsize Compartment
     type: container
     _id: 3nuskKNDs1MHTgkg
@@ -6770,7 +6773,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.3nuskKNDs1MHTgkg'
+    _key: '!actors.items!MerricLv17000000.3nuskKNDs1MHTgkg'
   - name: Trident
     system:
       description:
@@ -6927,11 +6930,7 @@ items:
     img: icons/weapons/polearms/trident-silver-blue.webp
     effects: []
     sort: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -6942,7 +6941,7 @@ items:
       lastModifiedBy: null
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.blGBP7JzOOrDn9Qw'
+    _key: '!actors.items!MerricLv17000000.blGBP7JzOOrDn9Qw'
   - _id: diqvClpJVK6uz86m
     name: Belt of Dwarvenkind
     type: equipment
@@ -7077,12 +7076,8 @@ items:
           lastModifiedBy: null
         _id: HNruvcSEl25DRvjj
         _key: >-
-          !actors.items.effects!MerricLv11000000.diqvClpJVK6uz86m.HNruvcSEl25DRvjj
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+          !actors.items.effects!MerricLv17000000.diqvClpJVK6uz86m.HNruvcSEl25DRvjj
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -7094,7 +7089,7 @@ items:
     sort: 3100000
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.diqvClpJVK6uz86m'
+    _key: '!actors.items!MerricLv17000000.diqvClpJVK6uz86m'
   - _id: y0wShLLzoS9SlomM
     name: Ring
     type: equipment
@@ -7204,7 +7199,7 @@ items:
           lastModifiedBy: null
         _id: Ur80RmvAVXmDzA14
         _key: >-
-          !actors.items.effects!MerricLv11000000.y0wShLLzoS9SlomM.Ur80RmvAVXmDzA14
+          !actors.items.effects!MerricLv17000000.y0wShLLzoS9SlomM.Ur80RmvAVXmDzA14
       - name: Fire Resistance
         img: systems/dnd5e/icons/svg/damage/fire.svg
         type: base
@@ -7243,7 +7238,7 @@ items:
           lastModifiedBy: null
         _id: B2uQNNThMxI72JUU
         _key: >-
-          !actors.items.effects!MerricLv11000000.y0wShLLzoS9SlomM.B2uQNNThMxI72JUU
+          !actors.items.effects!MerricLv17000000.y0wShLLzoS9SlomM.B2uQNNThMxI72JUU
     folder: TDK7YU58V9y3Kqjo
     flags: {}
     _stats:
@@ -7257,7 +7252,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.y0wShLLzoS9SlomM'
+    _key: '!actors.items!MerricLv17000000.y0wShLLzoS9SlomM'
   - _id: 3zvgIpoNT6h9xGS2
     name: Potion of Growth
     type: consumable
@@ -7349,7 +7344,7 @@ items:
       unidentified:
         description: ''
       container: null
-      quantity: 3
+      quantity: 5
       weight:
         value: 0.5
         units: lb
@@ -7377,11 +7372,7 @@ items:
       attuned: false
       equipped: false
     effects: []
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       duplicateSource: null
       exportSource: null
@@ -7393,7 +7384,7 @@ items:
     sort: 0
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.3zvgIpoNT6h9xGS2'
+    _key: '!actors.items!MerricLv17000000.3zvgIpoNT6h9xGS2'
   - name: Enlarge/Reduce
     system:
       description:
@@ -7577,7 +7568,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!MerricLv11000000.yKVySOY8W7KMZyWU.Wi2E10l7n6Ka8k6u
+          !actors.items.effects!MerricLv17000000.yKVySOY8W7KMZyWU.Wi2E10l7n6Ka8k6u
       - name: Reduced
         origin: Compendium.dnd5e.spells24.Item.phbsplEnlargeRed
         duration:
@@ -7633,7 +7624,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!MerricLv11000000.yKVySOY8W7KMZyWU.NXdtOxX4HvPeodml
+          !actors.items.effects!MerricLv17000000.yKVySOY8W7KMZyWU.NXdtOxX4HvPeodml
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
@@ -7679,7 +7670,7 @@ items:
           systemVersion: 5.2.4
           lastModifiedBy: null
         _key: >-
-          !actors.items.effects!MerricLv11000000.yKVySOY8W7KMZyWU.dnd5espellchange
+          !actors.items.effects!MerricLv17000000.yKVySOY8W7KMZyWU.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
     sort: 3700000
     flags:
@@ -7696,7 +7687,7 @@ items:
     _id: yKVySOY8W7KMZyWU
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.yKVySOY8W7KMZyWU'
+    _key: '!actors.items!MerricLv17000000.yKVySOY8W7KMZyWU'
   - _id: iazQNZdaJcCbiCL2
     name: Potion of Healing (Greater)
     type: consumable
@@ -7830,7 +7821,1502 @@ items:
     sort: 200000
     ownership:
       default: 0
-    _key: '!actors.items!MerricLv11000000.iazQNZdaJcCbiCL2'
+    _key: '!actors.items!MerricLv17000000.iazQNZdaJcCbiCL2'
+  - _id: Zoy98jtfNBKPsDSb
+    name: Improved Brutal Strike
+    type: feat
+    img: icons/skills/melee/strike-axe-blood-red.webp
+    system:
+      description:
+        value: >-
+          <p>You have honed new ways to attack furiously. The following effects
+          are now among your Brutal Strike options.</p><p><strong>Staggering
+          Blow.</strong> The target has Disadvantage on the next saving throw it
+          makes, and it can't make Opportunity Attacks until the start of your
+          next turn.</p><p><strong>Sundering Blow.</strong> Before the start of
+          your next turn, the next attack roll made by another creature against
+          the target gains a +5 bonus to the roll. An attack roll can gain only
+          one Sundering Blow bonus.</p><section class="secret"
+          id="secret-5KFPx8fyh5NldmJp"><p><strong>Foundry
+          Note</strong></p><p>This feature includes an activity for each option
+          which includes an Active Effect for tracking the Staggering and
+          Sundering Blows but does not automate their effects.</p></section>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: class
+        subtype: ''
+      prerequisites:
+        level: 13
+        repeatable: false
+        items: []
+      properties: []
+      requirements: Barbarian
+      activities:
+        UmRlsf4QWW98I4FS:
+          type: utility
+          _id: UmRlsf4QWW98I4FS
+          activation:
+            type: ''
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects:
+            - _id: tUyuyTQGmpUqMcFe
+              level: {}
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: '1'
+              type: creature
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          name: Sundering Blow
+          img: systems/dnd5e/icons/svg/properties/magical.svg
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+        I30qGlPDcyKwz65H:
+          type: utility
+          name: Staggering Blow
+          _id: I30qGlPDcyKwz65H
+          activation:
+            type: ''
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects:
+            - _id: L9N4evZo1jt46dap
+              level: {}
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: '1'
+              type: creature
+              special: ''
+            override: false
+            prompt: false
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: -100000
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          img: systems/dnd5e/icons/svg/damage/bludgeoning.svg
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      enchant: {}
+      identifier: improved-brutal-strike
+      advancement: []
+      crewed: false
+    effects:
+      - name: Staggered
+        origin: Compendium.dnd5e.classes24.Item.phbbrbImpBrutalS
+        duration:
+          rounds: null
+          startTime: null
+          seconds: null
+          combat: null
+          turns: 1
+          startRound: null
+          startTurn: null
+        disabled: false
+        flags: {}
+        img: systems/dnd5e/icons/svg/items/feature.svg
+        _id: L9N4evZo1jt46dap
+        type: base
+        system: {}
+        changes: []
+        description: >-
+          <p>Hit by a staggering blow, this character has Disadvantage on the
+          next Saving Throw it makes, and it can't make Opportunity Attacks
+          until the start of the attacker's next turn.</p>
+        tint: '#ffffff'
+        transfer: false
+        statuses: []
+        sort: 0
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!MerricLv17000000.Zoy98jtfNBKPsDSb.L9N4evZo1jt46dap
+      - name: Sundered
+        origin: Compendium.dnd5e.classes24.Item.phbbrbImpBrutalS
+        duration:
+          rounds: null
+          startTime: null
+          seconds: null
+          combat: null
+          turns: 1
+          startRound: null
+          startTurn: null
+        disabled: false
+        flags: {}
+        img: systems/dnd5e/icons/svg/items/feature.svg
+        _id: tUyuyTQGmpUqMcFe
+        type: base
+        system: {}
+        changes: []
+        description: >-
+          <p>Hit by a sundering blow, the next attack roll made by another
+          creature against the target gains a +5 bonus to the roll.</p>
+        tint: '#ffffff'
+        transfer: false
+        statuses: []
+        sort: 0
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!MerricLv17000000.Zoy98jtfNBKPsDSb.tUyuyTQGmpUqMcFe
+    folder: p6WDpW0gzmKfhGad
+    flags:
+      dnd5e:
+        sourceId: Compendium.dnd5e.classes24.Item.phbbrbImpBrutalS
+        advancementOrigin: 7nHPYFob0vjlhbfL.zqXib0MKbaqrTTVR
+        advancementRoot: 7nHPYFob0vjlhbfL.zqXib0MKbaqrTTVR
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.classes24.Item.phbbrbImpBrutalS
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 0
+    ownership:
+      default: 0
+    _key: '!actors.items!MerricLv17000000.Zoy98jtfNBKPsDSb'
+  - _id: QWGwlXJnTU8zcApB
+    name: Intimidating Presence
+    type: feat
+    img: icons/creatures/magical/construct-iron-stomping-yellow.webp
+    system:
+      description:
+        value: >-
+          <p>As a Bonus Action, you can strike terror into others with your
+          menacing presence and primal power. When you do so, each creature of
+          your choice in a 30-foot Emanation originating from you must make a
+          Wisdom saving throw (DC 8 plus your Strength modifier and Proficiency
+          Bonus). On a failed save, a creature has the Frightened condition for
+          1 minute. At the end of each of the &amp;Reference[Frightened]
+          creature's turns, the creature repeats the save, ending the effect on
+          itself on a success.</p><p>Once you use this feature, you can't use it
+          again until you finish a Long Rest unless you expend a use of your
+          Rage (no action required) to restore your use of it.</p><section
+          class="secret" id="secret-vRQdGrtACAbxH4Tm"><p><strong>Foundry
+          Note</strong></p><p>The <strong>Save</strong> activity includes an
+          Active Effect which adds the Frightened condition.</p><p>The
+          <strong>Recharge</strong> activity consumes a use of Rage and
+          recharges your use of Intimidating Presence.</p></section>
+        chat: ''
+      source:
+        custom: ''
+        revision: 1
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+      uses:
+        max: '1'
+        recovery:
+          - period: lr
+            type: recoverAll
+        spent: 0
+      type:
+        value: class
+        subtype: ''
+      prerequisites:
+        level: 14
+        repeatable: false
+        items: []
+      properties: []
+      requirements: Path of the Berserker
+      activities:
+        ZRHT8mOlea6T8XpP:
+          type: save
+          _id: ZRHT8mOlea6T8XpP
+          activation:
+            type: bonus
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            targets:
+              - type: itemUses
+                value: '1'
+                scaling: {}
+            scaling:
+              allowed: false
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects:
+            - _id: 3LofAPFLZJMQJirN
+              onSave: false
+              level: {}
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: radius
+              size: '30'
+              count: ''
+            affects:
+              choice: true
+              count: ''
+              type: creature
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          damage:
+            parts: []
+            onSave: half
+          save:
+            ability:
+              - wis
+            dc:
+              calculation: custom
+              formula: 8 + @abilities.str.mod + @prof
+          name: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+        Qr0vi4CEDfbdMNMa:
+          type: utility
+          _id: Qr0vi4CEDfbdMNMa
+          activation:
+            type: ''
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            targets:
+              - type: itemUses
+                value: '1'
+                target: Compendium.dnd5e.classes24.Item.phbbrbRage000000
+                scaling: {}
+              - type: itemUses
+                value: '-1'
+                target: ''
+                scaling: {}
+            scaling:
+              allowed: false
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects: []
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: ''
+              type: ''
+            override: false
+            prompt: false
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          name: Recharge with Rage
+          img: systems/dnd5e/icons/svg/trait-damage-immunities.svg
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      enchant: {}
+      identifier: intimidating-presence
+      advancement: []
+      crewed: false
+    effects:
+      - name: Intimidated
+        origin: Compendium.dnd5e.classes24.Item.phbbrbIntimidati
+        duration:
+          rounds: 1
+          startTime: null
+          seconds: null
+          combat: null
+          turns: null
+          startRound: null
+          startTurn: null
+        disabled: false
+        flags: {}
+        img: icons/creatures/magical/construct-iron-stomping-yellow.webp
+        _id: 3LofAPFLZJMQJirN
+        type: base
+        system: {}
+        changes: []
+        description: ''
+        tint: '#ffffff'
+        transfer: false
+        statuses:
+          - frightened
+        sort: 0
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!MerricLv17000000.QWGwlXJnTU8zcApB.3LofAPFLZJMQJirN
+    folder: bEMqmmgGROsTGe0J
+    flags:
+      dnd5e:
+        sourceId: Compendium.dnd5e.classes24.Item.phbbrbIntimidati
+        advancementOrigin: 85fZf2zLD7YHkSeW.GouI4YrjO1nFz4uM
+        advancementRoot: 85fZf2zLD7YHkSeW.GouI4YrjO1nFz4uM
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.classes24.Item.phbbrbIntimidati
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 0
+    ownership:
+      default: 0
+    _key: '!actors.items!MerricLv17000000.QWGwlXJnTU8zcApB'
+  - _id: wXxfq0JRg8n8EZuv
+    name: Persistent Rage
+    type: feat
+    img: icons/skills/social/intimidation-impressing.webp
+    system:
+      description:
+        value: >-
+          <p>When you roll Initiative, you can regain all expended uses of Rage.
+          After you regain uses of Rage in this way, you can't do so again until
+          you finish a Long Rest.</p><p>In addition, your Rage is so fierce that
+          it now lasts for 10 minutes without you needing to do anything to
+          extend it from round to round. Your Rage ends early if you have the
+          &amp;Reference[Unconscious] condition (not just the
+          &amp;Reference[Incapacitated] condition) or don Heavy
+          armor.</p><section class="secret"
+          id="secret-3IS0iUbWZ04tp74k"><p><strong>Foundry
+          Note</strong></p><p>This feature includes an activity which can be
+          used when you roll Initiative which will recharge all of your Rage
+          uses.</p></section>
+        chat: ''
+      source:
+        custom: ''
+        revision: 1
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+      uses:
+        max: '1'
+        recovery:
+          - period: lr
+            type: recoverAll
+        spent: 0
+      type:
+        value: class
+        subtype: ''
+      prerequisites:
+        level: 15
+        repeatable: false
+        items: []
+      properties: []
+      requirements: Barbarian
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: ''
+            value: null
+            condition: When you roll initiative
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling: {}
+              - type: itemUses
+                value: '-@scale.barbarian.rage'
+                target: Compendium.dnd5e.classes24.Item.phbbrbRage000000
+                scaling: {}
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            value: ''
+            units: inst
+            special: ''
+            override: false
+            concentration: false
+          effects: []
+          range:
+            units: self
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+            affects:
+              count: ''
+              type: self
+              choice: false
+              special: ''
+            prompt: false
+            override: false
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery:
+              - period: lr
+                type: recoverAll
+            max: ''
+          sort: 0
+          name: Recharge Rage on Initiative
+          img: systems/dnd5e/icons/svg/trait-damage-immunities.svg
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      enchant: {}
+      identifier: persistent-rage
+      advancement: []
+      crewed: false
+    effects: []
+    folder: p6WDpW0gzmKfhGad
+    flags:
+      dnd5e:
+        sourceId: Compendium.dnd5e.classes24.Item.phbbrbPersistent
+        advancementOrigin: 7nHPYFob0vjlhbfL.YYXyPXHTKRgnPswF
+        advancementRoot: 7nHPYFob0vjlhbfL.YYXyPXHTKRgnPswF
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.classes24.Item.phbbrbPersistent
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 0
+    ownership:
+      default: 0
+    _key: '!actors.items!MerricLv17000000.wXxfq0JRg8n8EZuv'
+  - _id: AQJfvEXh217lOwTz
+    name: Improved Brutal Strike (2)
+    type: feat
+    img: icons/skills/melee/strike-axe-blood-red.webp
+    system:
+      description:
+        value: >-
+          <p>The extra damage of your Brutal Strike increases to 2d10. In
+          addition, you can use two different Brutal Strike effects whenever you
+          use your Brutal Strike feature.</p><section
+          id="secret-XCUecJBPB6amtvj9" class="secret"><p><strong>Foundry
+          Note</strong></p><p>The damage roll in Brutal Strike will
+          automatically scale to use this new value.</p></section>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        license: CC-BY-4.0
+        book: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: class
+        subtype: ''
+      prerequisites:
+        level: 17
+        repeatable: false
+        items: []
+      properties: []
+      requirements: Barbarian
+      activities: {}
+      enchant: {}
+      identifier: improved-brutal-strike-2
+      advancement: []
+      crewed: false
+    effects: []
+    folder: p6WDpW0gzmKfhGad
+    flags:
+      dnd5e:
+        sourceId: Compendium.dnd5e.classes24.Item.phbbrbImp2Brutal
+        advancementOrigin: 7nHPYFob0vjlhbfL.e5XIkDQYhqNDImgs
+        advancementRoot: 7nHPYFob0vjlhbfL.e5XIkDQYhqNDImgs
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.classes24.Item.phbbrbImp2Brutal
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 0
+    ownership:
+      default: 0
+    _key: '!actors.items!MerricLv17000000.AQJfvEXh217lOwTz'
+  - _id: z6NsdVKZKoXYPbH8
+    name: Dwarven Thrower
+    type: weapon
+    img: icons/weapons/hammers/hammer-double-engraved-gold.webp
+    system:
+      activities:
+        bd1kKOncfoLha8CT:
+          type: attack
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: true
+            units: ft
+            special: ''
+            value: '5'
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: ''
+              type: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          attack:
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: ''
+              classification: ''
+            ability: ''
+            bonus: ''
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
+                denomination: 8
+                bonus: '0'
+                types:
+                  - force
+                scaling:
+                  number: 1
+          name: Attack
+          _id: bd1kKOncfoLha8CT
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+        w3ATyMSroDLch6Re:
+          type: attack
+          name: Throw
+          _id: w3ATyMSroDLch6Re
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: 'Bonus Damage: 1d8 Force vs Giant'
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: ''
+              type: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          attack:
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: ranged
+              classification: ''
+            ability: ''
+            bonus: ''
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
+                denomination: 8
+                bonus: ''
+                types:
+                  - force
+                scaling:
+                  number: 1
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      description:
+        value: >-
+          <div><p><em>Weapon
+          (@UUID[Compendium.dnd5e.equipment24.Item.phbwepWarhammer0]{Warhammer}),
+          Very Rare (Requires Attunement by a Dwarf or a Creature Attuned to a
+          @UUID[Compendium.dnd5e.equipment24.Item.dmgBeltOfDwarven]{Belt of
+          Dwarvenkind})</em></p></div><p>You gain a +3 bonus to attack rolls and
+          damage rolls made with this magic weapon. It has the Thrown property
+          with a normal range of 20 feet and a long range of 60 feet. When you
+          hit with a ranged attack using this weapon, it deals an extra
+          [[/damage 1d8 type=force]] damage, or an extra [[/damage 2d8
+          type=force]] damage if the target is a Giant. Immediately after
+          hitting or missing, the weapon flies back to your hand.</p>
+        chat: ''
+      identifier: dwarven-thrower
+      source:
+        revision: 1
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 5
+        units: lb
+      price:
+        value: 40015
+        denomination: gp
+      rarity: veryRare
+      attunement: required
+      armor:
+        value: null
+      cover: null
+      hp:
+        value: null
+        max: null
+        dt: null
+        conditions: ''
+      type:
+        value: martialM
+        baseItem: warhammer
+      ammunition: {}
+      damage:
+        base:
+          number: 1
+          denomination: 8
+          types:
+            - bludgeoning
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+          bonus: ''
+        versatile:
+          number: null
+          denomination: null
+          types: []
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+          bonus: ''
+      magicalBonus: 3
+      properties:
+        - mgc
+        - ret
+        - thr
+        - ver
+      proficient: null
+      range:
+        value: 20
+        long: 60
+        reach: 5
+        units: ft
+      mastery: push
+      crew:
+        value: []
+      attuned: true
+      equipped: false
+    effects: []
+    folder: kie870i5kr7yuxO8
+    flags: {}
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.equipment24.Item.dmgDwarvenThrowe
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 7500000
+    ownership:
+      default: 0
+    _key: '!actors.items!MerricLv17000000.z6NsdVKZKoXYPbH8'
+  - _id: M6bcfSPITo5cH1H4
+    name: Bag of Holding
+    type: container
+    folder: CXJsbhXV9uLcWcfH
+    img: icons/containers/bags/pack-engraved-leather-tan.webp
+    system:
+      description:
+        value: >-
+          <div><p>This bag has an interior space considerably larger than its
+          outside dimensions—roughly 2 feet square and 4 feet deep on the
+          inside. The bag can hold up to 500 pounds, not exceeding a volume of
+          64 <span class="no-break">cubic</span> feet. The bag weighs 5 pounds,
+          regardless of its contents. Retrieving an item from the bag requires a
+          Utilize action.</p><p>If the bag is overloaded, pierced, or torn, it
+          is destroyed, and its contents are scattered in the Astral Plane. If
+          the bag is turned inside out, its contents spill forth unharmed, but
+          the bag must be put right before it can be used again. The bag holds
+          enough air for 10 minutes of breathing, divided by the number of
+          breathing creatures inside.</p><p>Placing a <em>Bag of Holding</em>
+          inside an extradimensional space created by a
+          <em>@UUID[Compendium.dnd5e.equipment24.Item.dmgHewardsHandyH]{Handy
+          Haversack}</em>,
+          <em>@UUID[Compendium.dnd5e.equipment24.Item.dmgPortableHole0]{Portable
+          Hole}</em>, or similar item instantly destroys both items and opens a
+          gate to the Astral Plane. The gate originates where the one item was
+          placed inside the other. Any creature within a 10-foot-radius Sphere
+          centered on the gate is sucked through it to a random location on the
+          Astral Plane. The gate then closes. The gate is one-way and can't be
+          reopened.</p></div>
+        chat: ''
+      identifier: bag-of-holding
+      source:
+        revision: 1
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 5
+        units: lb
+      price:
+        value: 400
+        denomination: gp
+      rarity: uncommon
+      attunement: ''
+      currency:
+        pp: 0
+        gp: 0
+        ep: 0
+        sp: 0
+        cp: 0
+      properties:
+        - mgc
+        - weightlessContents
+      capacity:
+        weight:
+          value: 500
+          units: lb
+        volume:
+          units: cubicFoot
+      attuned: false
+      equipped: false
+    effects: []
+    flags: {}
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.equipment24.Item.dmgBagOfHolding0
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 300000
+    ownership:
+      default: 0
+    _key: '!actors.items!MerricLv17000000.M6bcfSPITo5cH1H4'
+  - _id: 2m1nXOrOoSL1lRkt
+    name: Ring
+    type: equipment
+    img: icons/equipment/finger/ring-band-copper.webp
+    system:
+      activities: {}
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      description:
+        value: ''
+        chat: ''
+      identifier: sup-ring-of-resistance
+      source:
+        revision: 1
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 0
+        units: lb
+      price:
+        value: 0
+        denomination: gp
+      rarity: ''
+      attunement: ''
+      armor:
+        value: null
+        magicalBonus: null
+        dex: null
+      cover: null
+      hp:
+        value: null
+        max: null
+        dt: null
+        conditions: ''
+      type:
+        value: ring
+        baseItem: ''
+      properties: []
+      strength: null
+      proficient: null
+      crew:
+        value: []
+      attuned: false
+      equipped: true
+    effects:
+      - type: enchantment
+        name: Ring of Resistance (Cold)
+        img: systems/dnd5e/icons/spell-tiers/spell3.webp
+        disabled: false
+        system: {}
+        changes:
+          - key: name
+            mode: 5
+            value: Ring of Resistance (tourmaline)
+            priority: null
+          - key: img
+            mode: 5
+            value: icons/equipment/finger/ring-faceted-gold-purple.webp
+            priority: null
+          - key: system.rarity
+            mode: 5
+            value: rare
+            priority: null
+          - key: system.description.value
+            mode: 5
+            value: >-
+              {}<p><em>See:
+              @UUID[Compendium.dnd5e.equipment24.Item.dmgRingOfResista]</em></p>
+              <p>You have Resistance to one damage type while wearing this ring.
+              The gemstone in the ring indicates the type.</p>
+            priority: null
+          - key: system.properties
+            mode: 2
+            value: mgc
+            priority: null
+        duration:
+          startTime: null
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        origin: Compendium.dnd5e.equipment24.Item.dmgRingOfResista
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: >-
+            Compendium.dnd5e.equipment24.Item.dmgRingOfResista.ActiveEffect.P5fYc9OEg5GKGgkR
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _id: 3JThseaxyBbwm4Az
+        _key: >-
+          !actors.items.effects!MerricLv17000000.2m1nXOrOoSL1lRkt.3JThseaxyBbwm4Az
+      - name: Cold Resistance
+        img: systems/dnd5e/icons/svg/damage/cold.svg
+        type: base
+        system: {}
+        changes:
+          - key: system.traits.dr.value
+            mode: 2
+            value: cold
+            priority: null
+        disabled: false
+        duration:
+          startTime: null
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        origin: Compendium.dnd5e.equipment24.Item.dmgRingOfResista
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags:
+          dnd5e:
+            dependentOn: 3JThseaxyBbwm4Az
+        _stats:
+          compendiumSource: >-
+            Compendium.dnd5e.equipment24.Item.dmgArmorOfResist.ActiveEffect.ACmdUQgMzhh6BiJs
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _id: Eg83R2X7i8SmIML0
+        _key: >-
+          !actors.items.effects!MerricLv17000000.2m1nXOrOoSL1lRkt.Eg83R2X7i8SmIML0
+    folder: TDK7YU58V9y3Kqjo
+    flags: {}
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.equipment24.Item.dmgsupRingofResi
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 0
+    ownership:
+      default: 0
+    _key: '!actors.items!MerricLv17000000.2m1nXOrOoSL1lRkt'
+  - _id: BQebx9KOSOhNkdWP
+    name: Stone of Controlling Earth Elementals
+    type: equipment
+    folder: U4xmShLy19Ry54zl
+    img: icons/commodities/stone/engraved-symbol-water-grey.webp
+    system:
+      activities:
+        EmSYvUIhbX2sGbZx:
+          type: summon
+          name: Summon Elemental
+          _id: EmSYvUIhbX2sGbZx
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling: {}
+          description:
+            chatFlavor: ''
+          duration:
+            units: hour
+            concentration: false
+            override: false
+            value: '1'
+          effects: []
+          range:
+            override: false
+            units: ft
+            special: ''
+            value: '30'
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: '1'
+              type: space
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          bonuses:
+            ac: ''
+            hd: ''
+            hp: ''
+            attackDamage: ''
+            saveDamage: ''
+            healing: ''
+          creatureSizes: []
+          creatureTypes: []
+          match:
+            attacks: false
+            proficiency: false
+            saves: false
+            ability: ''
+            disposition: false
+          profiles:
+            - count: ''
+              name: ''
+              _id: 8QN8fOmja2sLY3eX
+              uuid: Compendium.dnd5e.actors24.Actor.mmEarthElemental
+              level:
+                min: null
+                max: null
+              types: []
+          summon:
+            prompt: true
+            mode: ''
+          visibility:
+            requireMagic: true
+            level:
+              min: null
+              max: null
+            identifier: ''
+            requireIdentification: true
+            requireAttunement: false
+          flags: {}
+      uses:
+        spent: 0
+        recovery:
+          - period: dawn
+            type: recoverAll
+        max: '1'
+      description:
+        value: >-
+          <p><em>Wondrous Item, Rare</em></p><p>While touching this 5-pound
+          stone to the ground, you can take a Magic action to summon an
+          <strong>@UUID[Compendium.dnd5e.actors24.Actor.mmEarthElemental]{Earth
+          Elemental}</strong>. The elemental appears in an unoccupied space you
+          choose within 30 feet of yourself, obeys your commands, and takes its
+          turn immediately after you on your Initiative count. The elemental
+          disappears after 1 hour, when it dies, or when you dismiss it as a
+          Bonus Action. The stone can't be used this way again until the next
+          dawn.</p>
+        chat: ''
+      identifier: stone-of-controlling-earth-elementals
+      source:
+        revision: 1
+        rules: '2024'
+        book: ''
+        license: CC-BY-4.0
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 0
+        units: lb
+      price:
+        value: 4000
+        denomination: gp
+      rarity: rare
+      attunement: ''
+      armor:
+        value: null
+        magicalBonus: null
+        dex: null
+      cover: null
+      hp:
+        value: null
+        max: null
+        dt: null
+        conditions: ''
+      type:
+        value: wondrous
+        baseItem: ''
+      properties:
+        - mgc
+      strength: null
+      proficient: null
+      crew:
+        value: []
+      attuned: false
+      equipped: false
+    effects: []
+    flags: {}
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.equipment24.Item.dmgStoneOfContro
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 34700000
+    ownership:
+      default: 0
+    _key: '!actors.items!MerricLv17000000.BQebx9KOSOhNkdWP'
+  - _id: WlPzdiosnojixTEt
+    name: Potion of Giant Strength (Fire)
+    type: consumable
+    folder: AVm8ks2DssHSDe7u
+    img: icons/consumables/potions/bottle-round-corked-yellow.webp
+    system:
+      activities:
+        ISezTtXY6UwOC6kD:
+          type: utility
+          name: Drink Potion
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling: {}
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects:
+            - _id: Men77BWldNXaCmrA
+              level:
+                min: null
+                max: null
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: ''
+              type: creature
+              special: ''
+            override: false
+            prompt: false
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          roll:
+            prompt: false
+            visible: false
+            formula: ''
+            name: ''
+          _id: ISezTtXY6UwOC6kD
+          visibility:
+            requireMagic: true
+            level:
+              min: null
+              max: null
+            identifier: ''
+            requireAttunement: false
+            requireIdentification: false
+          flags: {}
+      uses:
+        spent: 0
+        recovery: []
+        autoDestroy: true
+        max: '1'
+      description:
+        value: >-
+          <p><em>Potion, Rare</em></p><p>When you drink this potion, your
+          Strength score changes for 1 hour to 25. The type of giant determines
+          the score. The potion has no effect on you if your Strength is equal
+          to or greater than that score.</p><p>This potion's transparent liquid
+          has floating in it a sliver of light resembling a giant's
+          fingernail.</p>
+        chat: ''
+      identifier: fire-potion-of-giant-strength
+      source:
+        revision: 1
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 3
+      weight:
+        value: 0.5
+        units: lb
+      price:
+        value: 2000
+        denomination: gp
+      rarity: rare
+      attunement: ''
+      type:
+        value: potion
+        subtype: ''
+      damage:
+        base:
+          number: null
+          denomination: null
+          types: []
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+        replace: false
+      magicalBonus: null
+      properties:
+        - mgc
+      attuned: false
+      equipped: false
+    effects:
+      - name: Strength of Fire
+        img: icons/consumables/potions/bottle-corked-empty.webp
+        origin: Compendium.dnd5e.equipment24.Item.dmgFirePotionOfG
+        transfer: false
+        _id: Men77BWldNXaCmrA
+        type: base
+        system: {}
+        changes:
+          - key: system.abilities.str.value
+            mode: 4
+            value: '25'
+            priority: null
+        disabled: false
+        duration:
+          startTime: null
+          seconds: 3600
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        tint: '#ffffff'
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: >-
+            Compendium.dnd5e.equipment24.Item.dmgStonePotionOf.ActiveEffect.ja1TakW2VVvY8HW3
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.2.4
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!MerricLv17000000.WlPzdiosnojixTEt.Men77BWldNXaCmrA
+    flags: {}
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.equipment24.Item.dmgFirePotionOfG
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      lastModifiedBy: null
+    sort: 100000
+    ownership:
+      default: 0
+    _key: '!actors.items!MerricLv17000000.WlPzdiosnojixTEt'
 effects: []
 flags: {}
 _stats:
@@ -7839,12 +9325,12 @@ _stats:
   coreVersion: '13.351'
   systemId: dnd5e
   systemVersion: 5.2.4
-  createdTime: 1768853153777
-  modifiedTime: 1768853153777
+  createdTime: 1768853106461
+  modifiedTime: 1768869916929
   lastModifiedBy: dnd5ebuilder0000
 img: null
-folder: 1EDP5HqqwXarG88N
+folder: mxujixfhj5hEnENw
 ownership:
   default: 0
-sort: 0
-_key: '!actors!MerricLv11000000'
+sort: 100000
+_key: '!actors!MerricLv17000000'
