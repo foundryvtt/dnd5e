@@ -807,17 +807,18 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * Add an `canOverride` property to the provided object and, if `override` is `false`, replace the data on the
    * activity with data from the item.
    * @param {string} keyPath  Path of the property to set on the activity.
+   * @param {Item5e} [item]   Item to act as the source of the override.
    * @internal
    */
-  _setOverride(keyPath) {
+  _setOverride(keyPath, item=this.item) {
     const obj = foundry.utils.getProperty(this, keyPath);
     Object.defineProperty(obj, "canOverride", {
-      value: safePropertyExists(this.item.system, keyPath),
+      value: safePropertyExists(item.system, keyPath),
       configurable: true,
       enumerable: false
     });
     if ( obj.canOverride && !obj.override && !this.isRider ) {
-      foundry.utils.mergeObject(obj, foundry.utils.getProperty(this.item.system, keyPath));
+      foundry.utils.mergeObject(obj, foundry.utils.getProperty(item.system, keyPath));
     }
   }
 }
