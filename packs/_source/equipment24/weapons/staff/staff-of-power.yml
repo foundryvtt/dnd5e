@@ -795,7 +795,59 @@ system:
     reach: null
     units: ''
   mastery: topple
-effects: []
+effects:
+  - name: Staff of Power
+    img: icons/weapons/staves/staff-ornate-banded-purple.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgStaffOfPower0
+    _id: ufvqeQlTyGeTjKYq
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.ac.bonus
+        mode: 2
+        value: '2'
+        priority: null
+      - key: system.bonuses.abilities.save
+        mode: 2
+        value: '2'
+        priority: null
+      - key: system.bonuses.msak.attack
+        mode: 2
+        value: '2'
+        priority: null
+      - key: system.bonuses.rsak.attack
+        mode: 2
+        value: '2'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      createdTime: 1768924369736
+      modifiedTime: 1768924441052
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!dmgStaffOfPower0.ufvqeQlTyGeTjKYq'
 folder: 5p9KrkF39e6vFO4g
 flags: {}
 _stats:
