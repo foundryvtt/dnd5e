@@ -29,7 +29,47 @@ system:
   activities: {}
   enchant: {}
   identifier: eldritch-mind
-effects: []
+effects:
+  - name: Eldritch Mind
+    img: icons/magic/unholy/silhouette-robe-evil-power.webp
+    origin: Compendium.dnd5e.classes24.Item.phbinvEldritchMi
+    _id: yiLpNgz92fezlhAG
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.concentration.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      createdTime: 1768927362062
+      modifiedTime: 1768927382155
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!phbinvEldritchMi.yiLpNgz92fezlhAG'
 folder: BjeMHiqnKNWkWhox
 flags:
   dnd5e:

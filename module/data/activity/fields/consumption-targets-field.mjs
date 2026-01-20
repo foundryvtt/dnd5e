@@ -153,9 +153,10 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
     const keyPath = `system.${this.target}`;
     const cost = (await this.resolveCost({ config, delta: { keyPath }, rolls: updates.rolls })).total;
 
+    const attribute = getHumanReadableAttributeLabel(this.target, { actor: this.actor });
     if ( !foundry.utils.hasProperty(this.actor, keyPath) ) throw new ConsumptionError(
       game.i18n.format("DND5E.CONSUMPTION.Warning.MissingAttribute", {
-        activity: this.activity.name, attribute: this.target, item: this.item.name
+        activity: this.activity.name, attribute, item: this.item.name
       })
     );
     let current = foundry.utils.getProperty(this.actor, keyPath);
@@ -165,7 +166,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
     else if ( current < cost ) warningMessage = "DND5E.CONSUMPTION.Warning.NotEnough";
     if ( warningMessage ) throw new ConsumptionError(game.i18n.format(warningMessage, {
       available: formatNumber(current), cost: formatNumber(cost),
-      type: game.i18n.format("DND5E.CONSUMPTION.Type.Attribute.Warning", { attribute: this.target })
+      type: game.i18n.format("DND5E.CONSUMPTION.Type.Attribute.Warning", { attribute })
     }));
 
     const adjustedKeyPath = keyPath.replace(/\.value$/, ".spent");

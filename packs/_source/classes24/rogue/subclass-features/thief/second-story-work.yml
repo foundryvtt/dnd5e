@@ -36,7 +36,47 @@ system:
   activities: {}
   enchant: {}
   identifier: second-story-work
-effects: []
+effects:
+  - name: Second-Story Work
+    img: icons/environment/settlement/stone-stairs.webp
+    origin: Compendium.dnd5e.classes24.Item.phbrgeSecondstor
+    _id: qPdh1z9RMd6oBcoj
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.movement.climb
+        mode: 4
+        value: '@attributes.movement.speed'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      createdTime: 1768932179578
+      modifiedTime: 1768932200375
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!phbrgeSecondstor.qPdh1z9RMd6oBcoj'
 flags:
   dnd5e:
     riders:

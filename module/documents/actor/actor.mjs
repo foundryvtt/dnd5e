@@ -3679,10 +3679,10 @@ class SourcedItemsMap extends Map {
    * Adjust keys once compendium UUID redirects have been initialized.
    */
   _redirectKeys() {
-    for ( const [key, value] of this.entries() ) {
+    for ( const [key, set] of this.entries() ) {
       const { uuid } = foundry.utils.parseUuid(key);
       if ( key !== uuid ) {
-        this.set(uuid, value);
+        for ( const item of set ) this.set(uuid, item);
         this.delete(key);
       }
     }

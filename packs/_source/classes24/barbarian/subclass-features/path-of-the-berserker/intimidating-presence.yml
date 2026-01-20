@@ -97,7 +97,7 @@ system:
         ability:
           - wis
         dc:
-          calculation: custom
+          calculation: ''
           formula: 8 + @abilities.str.mod + @prof
       name: ''
     Qr0vi4CEDfbdMNMa:

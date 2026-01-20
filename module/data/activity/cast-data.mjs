@@ -28,7 +28,14 @@ export default class BaseCastActivityData extends BaseActivityData {
         level: new NumberField(),
         properties: new SetField(new StringField(), { initial: ["vocal", "somatic", "material"] }),
         spellbook: new BooleanField({ initial: true }),
-        uuid: new DocumentUUIDField({ type: "Item" })
+        uuid: new DocumentUUIDField({
+          type: "Item",
+          validate: uuid => {
+            const item = fromUuidSync(uuid, { strict: false });
+            return !item || (item.type === "spell");
+          },
+          validationError: "must be a spell item"
+        })
       })
     };
   }

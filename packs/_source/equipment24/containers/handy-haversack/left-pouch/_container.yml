@@ -1,0 +1,59 @@
+_id: dmgLeftPouch0000
+name: Left Pouch
+type: container
+img: icons/containers/bags/pack-engraved-leather-tan.webp
+system:
+  description:
+    value: ''
+    chat: ''
+  identifier: left-pouch
+  source:
+    revision: 1
+    rules: '2024'
+  identified: true
+  unidentified:
+    description: ''
+  container: dmgHewardsHandyH
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  currency:
+    pp: 0
+    gp: 0
+    ep: 0
+    sp: 0
+    cp: 0
+  capacity:
+    volume:
+      units: cubicFoot
+      value: 25
+    weight:
+      units: lb
+      value: 200
+    count: null
+  properties:
+    - weightlessContents
+effects: []
+folder: CXJsbhXV9uLcWcfH
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.2.4
+  createdTime: 1768926690837
+  modifiedTime: 1768927029293
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!dmgLeftPouch0000'

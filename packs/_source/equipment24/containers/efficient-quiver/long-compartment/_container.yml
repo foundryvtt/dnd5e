@@ -1,0 +1,63 @@
+_id: dmgLongCompartme
+name: Long Compartment
+type: container
+flags:
+  dnd5e:
+    persistSourceMigration: true
+img: icons/containers/bags/case-leather-tan.webp
+system:
+  description:
+    value: >-
+      <p>The long compartment holds up to 6 long objects, such as bows,
+      Quarterstaffs, or Spears.</p>
+    chat: ''
+  identifier: long-compartment
+  source:
+    revision: 1
+    rules: '2024'
+  identified: true
+  unidentified:
+    description: ''
+  container: dmgQuiverOfEhlon
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  currency:
+    pp: 0
+    gp: 0
+    ep: 0
+    sp: 0
+    cp: 0
+  properties:
+    - weightlessContents
+  capacity:
+    count: 6
+    volume:
+      value: null
+      units: cubicFoot
+    weight:
+      value: null
+      units: lb
+effects: []
+folder: CXJsbhXV9uLcWcfH
+_stats:
+  duplicateSource: null
+  exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.2.4
+  createdTime: 1768928938798
+  modifiedTime: 1768928962195
+  lastModifiedBy: dnd5ebuilder0000
+sort: 850000
+ownership:
+  default: 0
+_key: '!items!dmgLongCompartme'

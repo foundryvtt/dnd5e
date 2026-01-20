@@ -54,7 +54,46 @@ system:
     - mgc
   strength: null
   proficient: null
-effects: []
+effects:
+  - name: Boots of Elvenkind
+    img: icons/equipment/feet/boots-pointed-cloth-green.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgBootsOfElvenk
+    _id: gHyJQGFKkZJ2rbUe
+    type: base
+    system: {}
+    changes:
+      - key: ''
+        value: ''
+        mode: 2
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      createdTime: 1768925670296
+      modifiedTime: 1768925673220
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!dmgBootsOfElvenk.gHyJQGFKkZJ2rbUe'
 flags: {}
 _stats:
   duplicateSource: null

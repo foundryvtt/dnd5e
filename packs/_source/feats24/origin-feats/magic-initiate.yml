@@ -94,12 +94,12 @@ system:
             - int
             - wis
             - cha
-          method: ''
+          method: spell
           uses:
             max: '1'
             per: lr
             requireSlot: false
-          prepared: 0
+          prepared: 2
         type: spell
       value:
         added: {}
@@ -122,11 +122,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.4
   createdTime: 1735866663151
-  modifiedTime: 1753301671211
+  modifiedTime: 1768925036754
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbftMagicInitia'

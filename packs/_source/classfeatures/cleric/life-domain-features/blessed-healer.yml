@@ -11,8 +11,8 @@ system:
       hit points to a creature other than you, you regain hit points equal to 2
       + the spell's level.</p><section class="secret foundry-note"
       id="secret-8pxfORAMtA2mWG44"><p><strong>Foundry Note</strong></p><p>The
-      healing formula is set to 2. Please add the additional from the spell
-      level manually.</p></section>
+      feature includes a healing activity. Set the scale to the spell slot level
+      you cast and it will provide a healing roll for you.</p></section>
     chat: ''
   source:
     custom: ''
@@ -41,8 +41,8 @@ system:
       consumption:
         targets: []
         scaling:
-          allowed: false
-          max: ''
+          allowed: true
+          max: '9'
         spellSlot: true
       description:
         chatFlavor: ''
@@ -81,15 +81,23 @@ system:
           - healing
         custom:
           enabled: true
-          formula: '2'
+          formula: '@scaling + 2'
         scaling:
-          mode: whole
+          mode: ''
           number: null
           formula: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
   enchant: {}
   prerequisites:
     level: null
@@ -101,11 +109,11 @@ folder: CTZ7zZ8ESNtr2IKz
 sort: 0
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.2.4
   createdTime: 1725037390462
-  modifiedTime: 1725992290589
+  modifiedTime: 1766595373709
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!yv49QN6Bzqs0ecCs'
