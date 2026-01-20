@@ -89,27 +89,32 @@ system:
       damage:
         onSave: half
         parts:
-          - number: 6
+          - custom:
+              enabled: false
+              formula: ''
+            number: 6
             denomination: 6
             bonus: ''
             types:
               - psychic
-            custom:
-              enabled: false
-              formula: ''
             scaling:
               mode: ''
-              number: null
-              formula: ''
       save:
         ability: int
         dc:
-          calculation: custom
+          calculation: ''
           formula: '15'
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: contact-other-plane
 _id: phbsplContactOth
 type: spell
@@ -119,18 +124,14 @@ folder: beZ8MTpWY2cMEUlp
 sort: 2700000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.4
   createdTime: 1724425947349
-  modifiedTime: 1745256789006
+  modifiedTime: 1768927860985
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplContactOth'

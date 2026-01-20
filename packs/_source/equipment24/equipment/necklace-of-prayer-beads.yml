@@ -23,9 +23,10 @@ system:
       _id: SEwmmaZFABa5L61F
       sort: 0
       activation:
-        type: action
+        type: bonus
         value: null
-        override: false
+        override: true
+        condition: ''
       consumption:
         scaling:
           allowed: false
@@ -81,9 +82,10 @@ system:
       _id: i1xNzPeIb7VkHrh6
       sort: 0
       activation:
-        type: action
+        type: bonus
         value: null
-        override: false
+        override: true
+        condition: ''
       consumption:
         scaling:
           allowed: false
@@ -139,9 +141,10 @@ system:
       _id: yiGuTjneUv0F9NnC
       sort: 0
       activation:
-        type: action
+        type: bonus
         value: null
-        override: false
+        override: true
+        condition: ''
       consumption:
         scaling:
           allowed: false
@@ -255,9 +258,10 @@ system:
       _id: FGwlSZAUgTaknnt1
       sort: 0
       activation:
-        type: action
+        type: bonus
         value: null
-        override: false
+        override: true
+        condition: ''
       consumption:
         scaling:
           allowed: false
@@ -313,9 +317,10 @@ system:
       _id: VBwVZg8g1vPZ1xep
       sort: 0
       activation:
-        type: action
+        type: bonus
         value: null
-        override: false
+        override: true
+        condition: ''
       consumption:
         scaling:
           allowed: false
@@ -394,7 +399,7 @@ system:
     value: 0
     units: lb
   price:
-    value: 2000
+    value: 4000
     denomination: gp
   rarity: rare
   attunement: required
@@ -424,9 +429,9 @@ _stats:
   duplicateSource: null
   coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 5.2.4
   createdTime: 1727883376108
-  modifiedTime: 1764617231138
+  modifiedTime: 1768926079302
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 22800000

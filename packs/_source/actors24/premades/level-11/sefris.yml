@@ -11461,12 +11461,11 @@ items:
                   - psychic
                 scaling:
                   mode: ''
-                  number: 1
           save:
             ability:
               - int
             dc:
-              calculation: spellcasting
+              calculation: ''
               formula: '15'
           uses:
             spent: 0
@@ -11482,6 +11481,7 @@ items:
             requireIdentification: false
             requireMagic: false
           name: ''
+          img: ''
         hvbnLJmpHL7GwZ28:
           _id: hvbnLJmpHL7GwZ28
           type: forward
@@ -11533,7 +11533,8 @@ items:
       coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 5.2.4
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1768928377723
     ownership:
       default: 0
     _key: '!actors.items!SefrisLv11000000.aQrK3HyAv1vcDjRe'

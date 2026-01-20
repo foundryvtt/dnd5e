@@ -39,10 +39,10 @@ system:
       type: enchant
       _id: Ew70lNTD8dR3vREt
       activation:
-        type: action
+        type: special
         value: null
         override: false
-        condition: ''
+        condition: when taking the Attack action
       consumption:
         scaling:
           allowed: false
@@ -100,6 +100,11 @@ system:
       img: ''
       appliedEffects:
         - sEWDFOuWn47L5860
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
   enchant: {}
   identifier: sacred-weapon
 effects:
@@ -151,11 +156,11 @@ effects:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.348'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.10
+  systemVersion: 5.2.4
   createdTime: 1735866569467
-  modifiedTime: 1759426576827
+  modifiedTime: 1768925775689
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

@@ -61,17 +61,20 @@ system:
           - custom:
               enabled: false
               formula: ''
-            number: null
-            denomination: 0
-            bonus: '0'
+            number: 1
+            denomination: 8
+            bonus: ''
             types:
               - force
-            scaling:
-              number: 1
       name: Attack
       _id: bd1kKOncfoLha8CT
       img: ''
       appliedEffects: []
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
     w3ATyMSroDLch6Re:
       type: attack
       name: Throw
@@ -170,7 +173,7 @@ system:
     value: 5
     units: lb
   price:
-    value: 0
+    value: 40015
     denomination: gp
   rarity: veryRare
   attunement: required
@@ -202,7 +205,7 @@ system:
       bonus: ''
     versatile:
       number: null
-      denomination: 0
+      denomination: null
       types: []
       custom:
         enabled: false
@@ -224,18 +227,14 @@ system:
   mastery: push
 effects: []
 folder: kie870i5kr7yuxO8
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.4
   createdTime: 1727883376108
-  modifiedTime: 1745431704598
+  modifiedTime: 1768930395389
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 7500000

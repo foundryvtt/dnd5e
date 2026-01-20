@@ -83,7 +83,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -120,13 +119,18 @@ system:
           - healing
         custom:
           enabled: true
-          formula: (@scale.channel-divinity.spark)d8 + @abilities.wis.mod
+          formula: (@scale.channel-divinity-cleric.spark)d8 + @abilities.wis.mod
         scaling:
           number: 1
         bonus: ''
       name: 'Divine Spark: Heal'
       img: ''
       appliedEffects: []
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
     OY9UrTXvlRL0JUoI:
       type: save
       name: 'Divine Spark: Save'
@@ -177,7 +181,7 @@ system:
         parts:
           - custom:
               enabled: true
-              formula: (@scale.channel-divinity.spark)d8 + @abilities.wis.mod
+              formula: (@scale.channel-divinity-cleric.spark)d8 + @abilities.wis.mod
             number: null
             denomination: null
             bonus: ''
@@ -192,6 +196,11 @@ system:
           formula: ''
       img: ''
       appliedEffects: []
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
     aOptL5pMaj3WtR8S:
       type: save
       name: Turn Undead
@@ -317,18 +326,14 @@ effects:
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!phbclcChannelDiv.iUeSbfduM7K8XrCF'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.348'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.10
+  systemVersion: 5.2.4
   createdTime: 1735866373481
-  modifiedTime: 1759426486254
+  modifiedTime: 1768929683855
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 200000

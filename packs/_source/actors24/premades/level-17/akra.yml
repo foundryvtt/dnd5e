@@ -402,7 +402,10 @@ system:
       value: >-
         <p>A devout follower of her deity and of her society's customs, Akra
         feels somewhat out of place adventuring in foreign lands. But she feels
-        bound to do everything in her power to bring peace to the region.</p>
+        bound to do everything in her power to bring peace to the
+        region.</p><p><em>Token artwork by </em><a
+        href="https://www.forgotten-adventures.net/" target="_blank"
+        rel="noopener"><em>Forgotten Adventures</em></a><em>.</em></p>
       public: ''
     alignment: Lawful Good
     ideal: ''
@@ -16050,6 +16053,10 @@ items:
             mode: 2
             value: mgc
             priority: null
+          - key: system.price.value
+            mode: 2
+            value: '4000'
+            priority: null
         duration:
           startTime: 0
           seconds: null
@@ -16064,7 +16071,10 @@ items:
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
         _stats:
           compendiumSource: >-
             Compendium.dnd5e.equipment24.Item.dmgRingOfResista.ActiveEffect.8IIAYzI3gqAJIBYo
@@ -16073,7 +16083,8 @@ items:
           coreVersion: '13.351'
           systemId: dnd5e
           systemVersion: 5.2.4
-          lastModifiedBy: null
+          lastModifiedBy: dnd5ebuilder0000
+          modifiedTime: 1768930668330
         _id: Ur80RmvAVXmDzA14
         _key: >-
           !actors.items.effects!AkraLv1700000000.I909kpdhG0oZFOWz.Ur80RmvAVXmDzA14
@@ -16362,7 +16373,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 5.2.4
   createdTime: 1768781581131
-  modifiedTime: 1768869916929
+  modifiedTime: 1768930659171
   lastModifiedBy: dnd5ebuilder0000
 ownership:
   default: 0

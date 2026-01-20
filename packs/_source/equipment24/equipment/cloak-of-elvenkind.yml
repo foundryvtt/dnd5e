@@ -55,7 +55,46 @@ system:
     - mgc
   strength: null
   proficient: null
-effects: []
+effects:
+  - name: Cloak of Elvenkind
+    img: icons/equipment/back/cloak-collared-feathers-green.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgCloakOfElvenk
+    _id: hyU6mHq6YNhLZlTY
+    type: base
+    system: {}
+    changes:
+      - key: ''
+        value: ''
+        mode: 2
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      createdTime: 1768925573821
+      modifiedTime: 1768925652026
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!dmgCloakOfElvenk.hyU6mHq6YNhLZlTY'
 flags: {}
 _stats:
   duplicateSource: null

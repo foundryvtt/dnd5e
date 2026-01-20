@@ -9982,7 +9982,7 @@ items:
         value: 0
         units: lb
       price:
-        value: 2000
+        value: 4000
         denomination: gp
       rarity: rare
       attunement: required
@@ -10016,7 +10016,8 @@ items:
       coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 5.2.4
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1768926267265
     sort: 22800000
     ownership:
       default: 0
@@ -13854,6 +13855,10 @@ items:
             mode: 2
             value: mgc
             priority: null
+          - key: system.price.value
+            mode: 2
+            value: '4000'
+            priority: null
         duration:
           startTime: null
           seconds: null
@@ -13868,7 +13873,10 @@ items:
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
         _stats:
           compendiumSource: >-
             Compendium.dnd5e.equipment24.Item.dmgRingOfResista.ActiveEffect.dBl3gfYXWn7YguDb
@@ -13877,7 +13885,8 @@ items:
           coreVersion: '13.351'
           systemId: dnd5e
           systemVersion: 5.2.4
-          lastModifiedBy: null
+          lastModifiedBy: dnd5ebuilder0000
+          modifiedTime: 1768930749076
         _id: YlrEU2FMxzQIPmXo
         _key: >-
           !actors.items.effects!KruskLv170000000.jqcKy2xfIFoVRyi9.YlrEU2FMxzQIPmXo

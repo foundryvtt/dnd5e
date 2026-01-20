@@ -7173,6 +7173,10 @@ items:
             mode: 2
             value: mgc
             priority: null
+          - key: system.price.value
+            mode: 2
+            value: '4000'
+            priority: null
         duration:
           startTime: null
           seconds: null
@@ -7187,7 +7191,10 @@ items:
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
         _stats:
           compendiumSource: >-
             Compendium.dnd5e.equipment24.Item.dmgRingOfResista.ActiveEffect.8IIAYzI3gqAJIBYo
@@ -7196,7 +7203,8 @@ items:
           coreVersion: '13.351'
           systemId: dnd5e
           systemVersion: 5.2.4
-          lastModifiedBy: null
+          lastModifiedBy: dnd5ebuilder0000
+          modifiedTime: 1768930770992
         _id: Ur80RmvAVXmDzA14
         _key: >-
           !actors.items.effects!MerricLv17000000.y0wShLLzoS9SlomM.Ur80RmvAVXmDzA14
@@ -8167,7 +8175,7 @@ items:
             ability:
               - wis
             dc:
-              calculation: custom
+              calculation: ''
               formula: 8 + @abilities.str.mod + @prof
           name: ''
           flags: {}
@@ -8901,6 +8909,10 @@ items:
             mode: 2
             value: mgc
             priority: null
+          - key: system.price.value
+            mode: 2
+            value: '4000'
+            priority: null
         duration:
           startTime: null
           seconds: null
@@ -8915,7 +8927,10 @@ items:
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
         _stats:
           compendiumSource: >-
             Compendium.dnd5e.equipment24.Item.dmgRingOfResista.ActiveEffect.P5fYc9OEg5GKGgkR
@@ -8924,7 +8939,8 @@ items:
           coreVersion: '13.351'
           systemId: dnd5e
           systemVersion: 5.2.4
-          lastModifiedBy: null
+          lastModifiedBy: dnd5ebuilder0000
+          modifiedTime: 1768930786489
         _id: 3JThseaxyBbwm4Az
         _key: >-
           !actors.items.effects!MerricLv17000000.2m1nXOrOoSL1lRkt.3JThseaxyBbwm4Az

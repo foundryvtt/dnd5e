@@ -11349,12 +11349,11 @@ items:
                   - psychic
                 scaling:
                   mode: ''
-                  number: 1
           save:
             ability:
               - int
             dc:
-              calculation: spellcasting
+              calculation: ''
               formula: '15'
           uses:
             spent: 0
@@ -11370,6 +11369,7 @@ items:
             requireIdentification: false
             requireMagic: false
           name: ''
+          img: ''
         hvbnLJmpHL7GwZ28:
           _id: hvbnLJmpHL7GwZ28
           type: forward
@@ -11421,7 +11421,8 @@ items:
       coreVersion: '13.351'
       systemId: dnd5e
       systemVersion: 5.2.4
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1768928838798
     ownership:
       default: 0
     _key: '!actors.items!SefrisLv17000000.aQrK3HyAv1vcDjRe'
@@ -16976,7 +16977,7 @@ items:
             ability:
               - wis
             dc:
-              calculation: custom
+              calculation: ''
               formula: '@attributes.spell.dc - 5 + 2'
           name: Secondhand and Picture
           flags: {}
@@ -17026,7 +17027,7 @@ items:
             ability:
               - wis
             dc:
-              calculation: custom
+              calculation: ''
               formula: '@attributes.spell.dc - 5 + 4'
           name: Secondhand and Garment
           _id: 2CjCuSPwb4erFwZC
@@ -17077,7 +17078,7 @@ items:
             ability:
               - wis
             dc:
-              calculation: custom
+              calculation: ''
               formula: '@attributes.spell.dc - 5 + 10'
           name: Secondhand and Body Part
           _id: AwH5PhQZyU2ryO7X
@@ -17128,7 +17129,7 @@ items:
             ability:
               - wis
             dc:
-              calculation: custom
+              calculation: ''
               formula: '@attributes.spell.dc - 0 + 2'
           name: Firsthand and Picture
           _id: L9ejQXxfSH0qg8bB
@@ -17179,7 +17180,7 @@ items:
             ability:
               - wis
             dc:
-              calculation: custom
+              calculation: ''
               formula: '@attributes.spell.dc - 0 + 4'
           name: Firsthand and Garment
           _id: QUv35ZZBe3gVvEzK
@@ -17230,7 +17231,7 @@ items:
             ability:
               - wis
             dc:
-              calculation: custom
+              calculation: ''
               formula: '@attributes.spell.dc - 0 + 10'
           name: Firsthand and Body Part
           _id: xhhjJb25roNtpn8g
@@ -17281,7 +17282,7 @@ items:
             ability:
               - wis
             dc:
-              calculation: custom
+              calculation: ''
               formula: '@attributes.spell.dc + 5 + 2'
           name: Extensive and Picture
           _id: 7wBprDveLHpbu6Z0
@@ -17332,7 +17333,7 @@ items:
             ability:
               - wis
             dc:
-              calculation: custom
+              calculation: ''
               formula: '@attributes.spell.dc + 5 + 4'
           name: Extensive and Garment
           _id: QUhtomQ1kgxShABi
@@ -17383,7 +17384,7 @@ items:
             ability:
               - wis
             dc:
-              calculation: custom
+              calculation: ''
               formula: '@attributes.spell.dc + 5 + 10'
           name: Extensive and Body Part
           _id: LwyHxV46sddf89rc
@@ -18190,6 +18191,10 @@ items:
             mode: 2
             value: mgc
             priority: null
+          - key: system.price.value
+            mode: 2
+            value: '4000'
+            priority: null
         duration:
           startTime: 0
           seconds: null
@@ -18204,7 +18209,10 @@ items:
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
         _stats:
           compendiumSource: >-
             Compendium.dnd5e.equipment24.Item.dmgRingOfResista.ActiveEffect.P5fYc9OEg5GKGgkR
@@ -18213,7 +18221,8 @@ items:
           coreVersion: '13.351'
           systemId: dnd5e
           systemVersion: 5.2.4
-          lastModifiedBy: null
+          lastModifiedBy: dnd5ebuilder0000
+          modifiedTime: 1768931005809
         _id: xylzeRnr18XBQiMM
         _key: >-
           !actors.items.effects!SefrisLv17000000.smKcJQ7LDQWqhXK1.xylzeRnr18XBQiMM

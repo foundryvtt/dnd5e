@@ -186,7 +186,47 @@ system:
     - mgc
   strength: null
   proficient: null
-effects: []
+effects:
+  - name: Robe of Stars
+    img: icons/equipment/back/cloak-plain-blue.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgRobeOfStars00
+    _id: pRyM6fY5UQ1QiSpV
+    type: base
+    system: {}
+    changes:
+      - key: system.bonuses.abilities.save
+        mode: 2
+        value: '1'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.2.4
+      createdTime: 1768931983148
+      modifiedTime: 1768931996617
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!dmgRobeOfStars00.pRyM6fY5UQ1QiSpV'
 flags: {}
 _stats:
   duplicateSource: null

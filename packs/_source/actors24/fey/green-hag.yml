@@ -1801,7 +1801,7 @@ items:
             ability:
               - wis
             dc:
-              calculation: custom
+              calculation: ''
               formula: '@attributes.spell.dc - 5 + 2'
           name: Secondhand and Picture
         2CjCuSPwb4erFwZC:
@@ -1844,7 +1844,7 @@ items:
             ability:
               - wis
             dc:
-              calculation: custom
+              calculation: ''
               formula: '@attributes.spell.dc - 5 + 4'
           name: Secondhand and Garment
           _id: 2CjCuSPwb4erFwZC
@@ -1888,7 +1888,7 @@ items:
             ability:
               - wis
             dc:
-              calculation: custom
+              calculation: ''
               formula: '@attributes.spell.dc - 5 + 10'
           name: Secondhand and Body Part
           _id: AwH5PhQZyU2ryO7X
@@ -1932,7 +1932,7 @@ items:
             ability:
               - wis
             dc:
-              calculation: custom
+              calculation: ''
               formula: '@attributes.spell.dc - 0 + 2'
           name: Firsthand and Picture
           _id: L9ejQXxfSH0qg8bB
@@ -1976,7 +1976,7 @@ items:
             ability:
               - wis
             dc:
-              calculation: custom
+              calculation: ''
               formula: '@attributes.spell.dc - 0 + 4'
           name: Firsthand and Garment
           _id: QUv35ZZBe3gVvEzK
@@ -2020,7 +2020,7 @@ items:
             ability:
               - wis
             dc:
-              calculation: custom
+              calculation: ''
               formula: '@attributes.spell.dc - 0 + 10'
           name: Firsthand and Body Part
           _id: xhhjJb25roNtpn8g
@@ -2064,7 +2064,7 @@ items:
             ability:
               - wis
             dc:
-              calculation: custom
+              calculation: ''
               formula: '@attributes.spell.dc + 5 + 2'
           name: Extensive and Picture
           _id: 7wBprDveLHpbu6Z0
@@ -2108,7 +2108,7 @@ items:
             ability:
               - wis
             dc:
-              calculation: custom
+              calculation: ''
               formula: '@attributes.spell.dc + 5 + 4'
           name: Extensive and Garment
           _id: QUhtomQ1kgxShABi
@@ -2152,7 +2152,7 @@ items:
             ability:
               - wis
             dc:
-              calculation: custom
+              calculation: ''
               formula: '@attributes.spell.dc + 5 + 10'
           name: Extensive and Body Part
           _id: LwyHxV46sddf89rc

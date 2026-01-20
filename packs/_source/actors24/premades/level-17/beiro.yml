@@ -14359,6 +14359,10 @@ items:
             mode: 2
             value: mgc
             priority: null
+          - key: system.price.value
+            mode: 2
+            value: '4000'
+            priority: null
         duration:
           startTime: null
           seconds: null
@@ -14373,7 +14377,10 @@ items:
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
         _stats:
           compendiumSource: >-
             Compendium.dnd5e.equipment24.Item.dmgRingOfResista.ActiveEffect.P5fYc9OEg5GKGgkR
@@ -14383,7 +14390,7 @@ items:
           systemId: dnd5e
           systemVersion: 5.2.4
           createdTime: 1768849150553
-          modifiedTime: 1768849150553
+          modifiedTime: 1768930725468
           lastModifiedBy: dnd5ebuilder0000
         _id: xylzeRnr18XBQiMM
         _key: >-
