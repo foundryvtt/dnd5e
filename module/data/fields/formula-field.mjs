@@ -50,7 +50,7 @@ export default class FormulaField extends foundry.data.fields.StringField {
 
   /** @override */
   _applyChangeSubtract(value, delta, model, change) {
-    if ( !value ) return delta;
+    if ( !value ) return `-(${delta})`;
     return `${value} - (${delta})`;
   }
 
