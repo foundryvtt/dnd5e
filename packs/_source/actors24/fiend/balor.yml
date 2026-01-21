@@ -650,11 +650,11 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] explodes when it
+          <p class="feature">The [[lookup @name lowercase]]{creature} explodes when it
           dies.</p><p class="feature"><em>Dexterity Saving Throw:</em> DC
           [[lookup @save.dc.value activity=jTq2czA8KQITUK4c]], each creature in
           a [[lookup @target.template.size activity=jTq2czA8KQITUK4c]]-foot
-          Emanation originating from the [[lookup @name lowercase]].</p><p
+          Emanation originating from the [[lookup @name lowercase]]{creature}.</p><p
           class="feature"><em>Failure:</em> [[/damage average]] damage.</p><p
           class="feature"><em>Failure or Success:</em> If the [[lookup @name
           lowercase]] dies outside the Abyss, it gains a new body instantly,
@@ -770,11 +770,11 @@ items:
         max: ''
       description:
         value: >-
-          <p>At the end of each of the [[lookup @name lowercase]]'s turns, each
+          <p>At the end of each of the [[lookup @name lowercase]]{creature}'s turns, each
           [[lookup @target.affects.type activity=15VgJKVXwYBOFSqJ]] of the
-          [[lookup @name lowercase]]'s choice in a [[lookup
+          [[lookup @name lowercase]]{creature}'s choice in a [[lookup
           @target.template.size activity=15VgJKVXwYBOFSqJ]]-foot Emanation
-          originating from the [[lookup @name lowercase]] takes [[/damage
+          originating from the [[lookup @name lowercase]]{creature} takes [[/damage
           average]] damage.</p>
         chat: ''
       identifier: fire-aura
@@ -877,7 +877,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] fails a saving throw, it can
+          <p>If the [[lookup @name lowercase]]{creature} fails a saving throw, it can
           choose to succeed instead.</p>
         chat: ''
       identifier: legendary-resistance
@@ -935,7 +935,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] has Advantage on saving throws
+          <p>The [[lookup @name lowercase]]{creature} has Advantage on saving throws
           against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
@@ -1032,7 +1032,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes one [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes one [[/item
           .mmFlameWhip00000]] attack and one [[/item .mmLightningBlade]]
           attack.</p>
         chat: ''
@@ -1339,10 +1339,10 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] teleports [[lookup
+          <p>The [[lookup @name lowercase]]{creature} teleports [[lookup
           @target.affects.special activity=dnoRMdFzhUUku26D]] of itself up to
           [[lookup @range.value activity=dnoRMdFzhUUku26D]] feet to an
-          unoccupied space the  [[lookup @name lowercase]] can see.</p>
+          unoccupied space the  [[lookup @name lowercase]]{creature} can see.</p>
         chat: ''
       identifier: teleport
       source:
@@ -1457,7 +1457,7 @@ items:
         value: >-
           <p class="feature">[[/attack extended]]. [[/damage average extended]],
           and the target can't take &amp;Reference[Reaction] until the start of
-          the [[lookup @name lowercase]]'s next turn.</p>
+          the [[lookup @name lowercase]]{creature}'s next turn.</p>
         chat: ''
       identifier: lightning-blade
       source:

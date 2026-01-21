@@ -611,7 +611,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] fails a saving throw, it can
+          <p>If the [[lookup @name lowercase]]{creature} fails a saving throw, it can
           choose to succeed instead.</p>
         chat: ''
       identifier: legendary-resistance
@@ -705,7 +705,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes three [[/item Rend]] attacks.
+          <p>The [[lookup @name lowercase]]{creature} makes three [[/item Rend]] attacks.
           It can replace one attack with a use of (A) [[/item Sleep Breath]] or
           (B) [[/item Spellcasting]] to cast
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplScorchingR]{Scorching
@@ -1602,7 +1602,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts one of the
           following spells, requiring no Material components and using Charisma
           as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]]):</p><p class="feature-trait"><strong>At
@@ -2941,7 +2941,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] uses [[/item Spellcasting]] to cast
+          <p>The [[lookup @name lowercase]]{creature} uses [[/item Spellcasting]] to cast
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplScorchingR]{Scorching
           Ray}.</em></p>
         chat: ''
@@ -3047,7 +3047,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] moves up to half its Speed, and it
+          <p>The [[lookup @name lowercase]]{creature} moves up to half its Speed, and it
           makes one [[/item Rend]] attack.</p>
         chat: ''
       identifier: pounce
@@ -3169,7 +3169,7 @@ items:
           <p class="feature"><em>Dexterity Saving Throw:</em> DC [[lookup
           @save.dc.value activity=g5fxAWhrpwohtETl]], [[lookup
           @target.affects.labels.statblock activity=g5fxAWhrpwohtETl]] the
-          [[lookup @name lowercase]] can see within [[lookup @range.value
+          [[lookup @name lowercase]]{creature} can see within [[lookup @range.value
           activity=g5fxAWhrpwohtETl]] feet.</p><p
           class="feature"><em>Failure:</em> [[/damage average]] damage, and the
           target's Speed is halved until the end of its next turn.</p><p

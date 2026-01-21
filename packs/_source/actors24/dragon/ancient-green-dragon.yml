@@ -577,7 +577,7 @@ items:
         recovery: []
         max: ''
       description:
-        value: <p>The [[lookup @name lowercase]] can breathe air and water.</p>
+        value: <p>The [[lookup @name lowercase]]{creature} can breathe air and water.</p>
         chat: ''
       identifier: amphibious
       source:
@@ -675,7 +675,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] fails a saving throw, it can
+          <p>If the [[lookup @name lowercase]]{creature} fails a saving throw, it can
           choose to succeed instead.</p>
         chat: ''
       identifier: legendary-resistance
@@ -768,7 +768,7 @@ items:
         recovery: []
         max: ''
       description:
-        value: "<p><span style=\"font-family:'Roboto Condensed', sans-serif\">The </span>[[lookup @name lowercase]]<span style=\"font-family:'Roboto Condensed', sans-serif\"> makes three </span><span class=\"Apple-converted-space\">\_</span>[[/item .mmRend0000000000]]<span style=\"font-family:'Roboto Condensed', sans-serif\"> attacks. It can replace one attack with a use of Spellcasting to cast </span><em>[[/item .mmSpellcasting00.Activity.hHQiQYfo3AV5ZW6F]]</em><span style=\"font-family:'Roboto Condensed', sans-serif\"> (level 5 version).</span></p>"
+        value: "<p><span style=\"font-family:'Roboto Condensed', sans-serif\">The </span>[[lookup @name lowercase]]{creature}<span style=\"font-family:'Roboto Condensed', sans-serif\"> makes three </span><span class=\"Apple-converted-space\">\_</span>[[/item .mmRend0000000000]]<span style=\"font-family:'Roboto Condensed', sans-serif\"> attacks. It can replace one attack with a use of Spellcasting to cast </span><em>[[/item .mmSpellcasting00.Activity.hHQiQYfo3AV5ZW6F]]</em><span style=\"font-family:'Roboto Condensed', sans-serif\"> (level 5 version).</span></p>"
         chat: ''
       identifier: multiattack
       source:
@@ -1301,7 +1301,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts one of the
           following spells, requiring no Material components and using Charisma
           as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]]):</p><p class="feature-trait"><strong>At
@@ -1753,7 +1753,7 @@ items:
           @save.dc.value activity=Blm8nddvCOH69bL8]], each [[lookup
           @target.affects.type activity=Blm8nddvCOH69bL8]] in a [[lookup
           @target.template.size activity=Blm8nddvCOH69bL8]]-foot-radius Sphere
-          centered on a point the [[lookup @name lowercase]] can see within
+          centered on a point the [[lookup @name lowercase]]{creature} can see within
           [[lookup @range.value activity=Blm8nddvCOH69bL8]] feet.</p><p
           class="feature"><em>Failure:</em> [[/damage average]] damage, and the
           target takes a −2 penalty to AC until the end of its next turn.</p><p
@@ -1912,7 +1912,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] moves up to half its Speed, and it
+          <p>The [[lookup @name lowercase]]{creature} moves up to half its Speed, and it
           makes one [[/item Rend]] attack.</p>
         chat: ''
       identifier: pounce

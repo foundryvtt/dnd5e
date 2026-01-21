@@ -583,7 +583,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] can see 60 feet into
+          <p class="feature">The [[lookup @name lowercase]]{creature} can see 60 feet into
           the Ethereal Plane when it is on the Material Plane.</p>
         chat: ''
       identifier: ethereal-sight
@@ -634,7 +634,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] can move through other creatures and
+          <p>The [[lookup @name lowercase]]{creature} can move through other creatures and
           objects as if they were &amp;Reference[Difficult Terrain]. It takes
           [[/damage 1d10 average type=force]] damage if it ends its turn inside
           an object.</p>
@@ -727,7 +727,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes two [[/item
           .yf1Nf7oPWS4arOOL]] attacks.</p>
         chat: ''
       identifier: multiattack
@@ -978,10 +978,10 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts the
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts the
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplEtherealne]{Etherealness}</em>
           spell, requiring no spell components and using Charisma as the
-          spellcasting ability. The [[lookup @name lowercase]] is visible on the
+          spellcasting ability. The [[lookup @name lowercase]]{creature} is visible on the
           Material Plane while on the Border Ethereal and vice versa, but it
           can't affect or be affected by anything on the other plane.</p>
         chat: ''
@@ -1323,10 +1323,10 @@ items:
           <p class="feature"><em>Wisdom Saving Throw:</em> DC [[lookup
           @save.dc.value activity=v8KiqUloIE5eocSu]], each creature in a
           [[lookup @target.template.size activity=v8KiqUloIE5eocSu]]-foot Cone
-          that can see the [[lookup @name lowercase]] and isn't an
+          that can see the [[lookup @name lowercase]]{creature} and isn't an
           Undead.</p><p><em>Failure:</em> [[/damage average]] damage, and the
           target has the &amp;Reference[Frightened apply=false] condition until
-          the start of the [[lookup @name lowercase]]'s next
+          the start of the [[lookup @name lowercase]]{creature}'s next
           turn.</p><p><em>Success:</em> The target is immune to this [[lookup
           @name lowercase]]'s Horrifying Visage for 24 hours.</p>
         chat: ''
@@ -1476,21 +1476,21 @@ items:
           lowercase]] can see within [[lookup @range.value
           activity=7gmNBVjwuYTyANMe]] feet.</p><p
           class="feature"><em>Failure:</em> The target is possessed by the
-          [[lookup @name lowercase]]; the [[lookup @name lowercase]] disappears,
+          [[lookup @name lowercase]]{creature}; the [[lookup @name lowercase]]{creature} disappears,
           and the target has the &amp;Reference[Incapacitated apply=false]
           condition and loses control of its body. The [[lookup @name
           lowercase]] now controls the body, but the target retains awareness.
-          The [[lookup @name lowercase]] can't be targeted by any attack, spell,
+          The [[lookup @name lowercase]]{creature} can't be targeted by any attack, spell,
           or other effect, except ones that specifically target Undead. The
-          [[lookup @name lowercase]]'s game statistics are the same, except it
+          [[lookup @name lowercase]]{creature}'s game statistics are the same, except it
           uses the possessed target's Speed, as well as the target's Strength,
           Dexterity, and Constitution modifiers.</p><p class="feature">The
           possession lasts until the body drops to 0 Hit Points or the [[lookup
           @name lowercase]] leaves as a Bonus Action. When the possession ends,
-          the [[lookup @name lowercase]] appears in an unoccupied space within 5
+          the [[lookup @name lowercase]]{creature} appears in an unoccupied space within 5
           feet of the target, and the target is immune to this ghost's
           Possession for 24 hours.</p><p class="feature"><em>Success:</em> The
-          target is immune to this [[lookup @name lowercase]]'s Possession for
+          target is immune to this [[lookup @name lowercase]]{creature}'s Possession for
           24 hours.</p>
         chat: ''
       identifier: possession

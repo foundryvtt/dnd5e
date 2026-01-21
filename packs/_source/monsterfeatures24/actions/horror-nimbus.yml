@@ -90,14 +90,14 @@ system:
       @target.affects.type activity=GP5MnIyXCVZ4ZMTQ]] in a [[lookup
       @target.template.size activity=GP5MnIyXCVZ4ZMTQ]]-<span
       style="font-family:'Roboto Condensed', sans-serif">foot</span> Emanation
-      originating from the [[lookup @name lowercase]].</p><p
+      originating from the [[lookup @name lowercase]]{creature}.</p><p
       class="feature"><em>Failure:</em> [[/damage average]] damage, and the
       target has the &amp;Reference[Frightened apply=false] condition for
       [[lookup @duration.value activity=GP5MnIyXCVZ4ZMTQ]] [[lookup
       @duration.units activity=GP5MnIyXCVZ4ZMTQ]], until it takes damage, or
-      until it ends its turn with the [[lookup @name lowercase]] out of line of
+      until it ends its turn with the [[lookup @name lowercase]]{creature} out of line of
       sight.</p><p class="feature"><em>Success:</em> The target is immune to
-      this [[lookup @name lowercase]]'s Horror Nimbus for 24 hours.</p>
+      this [[lookup @name lowercase]]{creature}'s Horror Nimbus for 24 hours.</p>
     chat: ''
   identifier: horror-nimbus
   source:

@@ -570,7 +570,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">Whenever the [[lookup @name lowercase]] is
+          <p class="feature">Whenever the [[lookup @name lowercase]]{creature} is
           subjected to Fire damage, it regains a number of Hit Points equal to
           the Fire damage dealt.</p>
         chat: ''
@@ -622,7 +622,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] can't
+          <p class="feature">The [[lookup @name lowercase]]{creature} can't
           shape-shift.</p>
         chat: ''
       identifier: immutable-form
@@ -673,7 +673,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] has Advantage on saving throws
+          <p>The [[lookup @name lowercase]]{creature} has Advantage on saving throws
           against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
@@ -760,7 +760,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two attack, using [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes two attack, using [[/item
           Bladed Arm]] or [[/item Fiery Bolt]] in any combination.</p>
         chat: ''
       identifier: multiattack

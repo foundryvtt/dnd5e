@@ -135,7 +135,7 @@ system:
       <p class="feature"><em>Constitution Saving Throw:</em> DC [[lookup
       @save.dc.value activity=voqQeTnihpy3BTFf]], each creature in a [[lookup
       @target.template.size activity=voqQeTnihpy3BTFf]]-foot Emanation
-      originating from the [[lookup @name lowercase]].</p><p
+      originating from the [[lookup @name lowercase]]{creature}.</p><p
       class="feature"><em>Failure:</em> The target has the
       &amp;Reference[Poisoned apply=false] condition and repeats the save at the
       end of each of its turns, ending the effect on itself on a success. While

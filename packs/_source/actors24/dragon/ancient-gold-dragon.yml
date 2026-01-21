@@ -567,7 +567,7 @@ items:
         recovery: []
         max: ''
       description:
-        value: <p>The [[lookup @name lowercase]] can breathe air and water.</p>
+        value: <p>The [[lookup @name lowercase]]{creature} can breathe air and water.</p>
         chat: ''
       identifier: amphibious
       source:
@@ -665,7 +665,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] fails a saving throw, it can
+          <p>If the [[lookup @name lowercase]]{creature} fails a saving throw, it can
           choose to succeed instead.</p>
         chat: ''
       identifier: legendary-resistance
@@ -759,7 +759,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes {count} [[/item]] attacks and
+          <p>The [[lookup @name lowercase]]{creature} makes {count} [[/item]] attacks and
           uses [[/item]].</p>
         chat: ''
       identifier: multiattack
@@ -1389,7 +1389,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts one of the
           following spells, requiring no Material components and using Charisma
           as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]]):</p><p class="feature-trait"><strong>At
@@ -1700,7 +1700,7 @@ items:
           activity=kWKwiAYgyeKBLMNJ]] feet.</p><p><em>Failure:</em> [[/damage
           average]] damage, and the target has the &amp;Reference[Incapacitated
           apply=false] condition and is transported to a harmless demiplane
-          until the start of the [[lookup @name lowercase]]'s next turn, at
+          until the start of the [[lookup @name lowercase]]{creature}'s next turn, at
           which point it re­appears in an unoccupied space of the [[lookup @name
           lowercase]]'s choice within [[lookup @range.value
           activity=kWKwiAYgyeKBLMNJ]] feet of the [[lookup @name
@@ -1843,7 +1843,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] uses Spellcasting to
+          <p class="feature">The [[lookup @name lowercase]]{creature} uses Spellcasting to
           cast
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplGuidingBol]{Guiding
           Bolt}</em> (level 2 version).</p>
@@ -2167,7 +2167,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] moves up to half its Speed, and it
+          <p>The [[lookup @name lowercase]]{creature} moves up to half its Speed, and it
           makes one [[/item Rend]] attack.</p>
         chat: ''
       identifier: pounce

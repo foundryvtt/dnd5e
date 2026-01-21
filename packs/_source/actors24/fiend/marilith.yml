@@ -575,7 +575,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] has Advantage on saving throws
+          <p>The [[lookup @name lowercase]]{creature} has Advantage on saving throws
           against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
@@ -626,7 +626,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] dies outside the Abyss, its body
+          <p>If the [[lookup @name lowercase]]{creature} dies outside the Abyss, its body
           dissolves into ichor, and it gains a new body instantly, reviving with
           all its Hit Points somewhere in the Abyss.</p>
         chat: ''
@@ -677,7 +677,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] can take one
+          <p class="feature">The [[lookup @name lowercase]]{creature} can take one
           &amp;Reference[Reaction] on every turn of combat.</p>
         chat: ''
       identifier: reactive
@@ -774,7 +774,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes six [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes six [[/item
           .mmPactBlade00000]] attacks and uses [[/item .mmConstrict00000]].</p>
         chat: ''
       identifier: multiattack
@@ -1105,7 +1105,7 @@ items:
           <p><em>Strength Saving Throw:</em><span class="Heading-4"> </span>DC
           [[lookup @save.dc.value activity=IgOMjRxAt7UISkJq]], one [[lookup
           @target.affects.special activity=IgOMjRxAt7UISkJq]] creature the
-          [[lookup @name lowercase]] can see within [[lookup @range.value
+          [[lookup @name lowercase]]{creature} can see within [[lookup @range.value
           activity=IgOMjRxAt7UISkJq]] feet.</p><p><em>Failure:</em> [[/damage
           average]] damage. The target has the &amp;Reference[Grappled
           apply=false] condition (escape DC [[lookup @skills.ath.passive]]), and
@@ -1259,7 +1259,7 @@ items:
         max: '1'
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] teleports up to
+          <p class="feature">The [[lookup @name lowercase]]{creature} teleports up to
           [[lookup @range.value activity=dnoRMdFzhUUku26D]] feet to an
           unoccupied space it can see.</p>
         chat: ''
@@ -1360,9 +1360,9 @@ items:
         max: ''
       description:
         value: >-
-          <p><em>Trigger:</em> The [[lookup @name lowercase]] is [[lookup
+          <p><em>Trigger:</em> The [[lookup @name lowercase]]{creature} is [[lookup
           @activation.condition activity=aLG3BRZL7P6OEjwd]]. <em>Response:</em>
-          The [[lookup @name lowercase]] adds [[lookup @roll.formula
+          The [[lookup @name lowercase]]{creature} adds [[lookup @roll.formula
           activity=aLG3BRZL7P6OEjwd]] to its AC against that attack, possibly
           causing it to miss.</p>
         chat: ''

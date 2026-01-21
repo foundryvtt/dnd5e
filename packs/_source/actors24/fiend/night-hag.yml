@@ -875,7 +875,7 @@ items:
       description:
         value: >-
           <p class="feature">While within 30 feet of at least two hag allies,
-          the [[lookup @name lowercase]] can cast one of the following spells,
+          the [[lookup @name lowercase]]{creature} can cast one of the following spells,
           requiring no Material components, using the spell's normal casting
           time, and using Intelligence as the spellcasting ability (spell save
           DC [[lookup @abilities.int.dc]]):
@@ -887,7 +887,7 @@ items:
           Object}</em>,
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplScrying000]{Scrying}</em>,
           or <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplUnseenServ]{Unseen
-          Servant}</em>. The [[lookup @name lowercase]] must finish a Long Rest
+          Servant}</em>. The [[lookup @name lowercase]]{creature} must finish a Long Rest
           before using this trait to cast that spell again.</p>
         chat: ''
       identifier: coven-magic
@@ -2454,7 +2454,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] has Advantage on saving throws
+          <p>The [[lookup @name lowercase]]{creature} has Advantage on saving throws
           against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
@@ -2505,12 +2505,12 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] has a soul bag.
-          While holding or carrying the bag, the [[lookup @name lowercase]] can
+          <p class="feature">The [[lookup @name lowercase]]{creature} has a soul bag.
+          While holding or carrying the bag, the [[lookup @name lowercase]]{creature} can
           use its Nightmare Haunting action.</p><p class="feature">The bag has
           AC 15, HP 20, and Resistance to all damage. The bag turns to dust if
           reduced to 0 Hit Points. If the bag is destroyed, any souls the bag is
-          holding are released. The [[lookup @name lowercase]] can create a new
+          holding are released. The [[lookup @name lowercase]]{creature} can create a new
           bag after 7 days.</p>
         chat: ''
       identifier: soul-bag
@@ -2597,7 +2597,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes two [[/item
           .mmClaw0000000000]] attacks.</p>
         chat: ''
       identifier: multiattack
@@ -3019,7 +3019,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts one of the
           following spells, requiring no Material components and using
           Intelligence as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]]):</p><p class="feature-trait"><strong>At
@@ -3134,7 +3134,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] shape-shifts into a
+          <p class="feature">The [[lookup @name lowercase]]{creature} shape-shifts into a
           Small or Medium Humanoid, or it returns to its true form. Other than
           its size, its game statistics are the same in each form. Any equipment
           it is wearing or carrying isn't transformed.</p>
@@ -3248,7 +3248,7 @@ items:
           using the same spellcasting ability as Spellcasting. Only the [[lookup
           @name lowercase]] can serve as the spell's messenger, and the target
           must be a [[lookup @target.affects.type activity=4GGGVhvLSrHgHdb9]]
-          the [[lookup @name lowercase]] can see [[lookup
+          the [[lookup @name lowercase]]{creature} can see [[lookup
           @target.affects.special activity=4GGGVhvLSrHgHdb9]]. The spell fails
           and is wasted if the target is under the effect of the
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbEvilAndGoodPr]{Protection
@@ -3257,7 +3257,7 @@ items:
           Circle}</em> spell.</p><p class="feature">If the target takes damage
           from the <em>Dream</em> spell, the target's Hit Point maximum
           decreases by an amount equal to that damage. If the spell kills the
-          target, its soul is trapped in the [[lookup @name lowercase]]'s soul
+          target, its soul is trapped in the [[lookup @name lowercase]]{creature}'s soul
           bag, and the target can't be raised from the dead until its soul is
           released.</p>
         chat: ''

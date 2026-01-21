@@ -559,7 +559,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] can breathe only underwater. It can
+          <p>The [[lookup @name lowercase]]{creature} can breathe only underwater. It can
           hold its breath for {duration} outside water.</p>
         chat: ''
       identifier: water-breathing
@@ -646,7 +646,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes two [[/item
           .mmBite0000000000]] attacks.</p>
         chat: ''
       identifier: multiattack

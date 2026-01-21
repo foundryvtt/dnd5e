@@ -569,7 +569,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] takes Fire damage, it has
+          <p>If the [[lookup @name lowercase]]{creature} takes Fire damage, it has
           Disadvantage on attack rolls and ability checks until the end of its
           next turn.</p>
         chat: ''
@@ -754,16 +754,16 @@ items:
         max: ''
       description:
         value: >-
-          <p>Whenever the [[lookup @name lowercase]] starts its turn
+          <p>Whenever the [[lookup @name lowercase]]{creature} starts its turn
           &amp;Reference[Bloodied], roll [[/r 1d6]]. On a 6, the [[lookup @name
           lowercase]] goes berserk. On each of its turns while berserk, the
-          [[lookup @name lowercase]] attacks the nearest creature it can see. If
+          [[lookup @name lowercase]]{creature} attacks the nearest creature it can see. If
           no creature is near enough to move to and attack, the [[lookup @name
-          lowercase]] attacks an object. Once the [[lookup @name lowercase]]
+          lowercase]] attacks an object. Once the [[lookup @name lowercase]]{creature}
           goes berserk, it remains so until it is destroyed or it is no longer
-          Bloodied.</p><p>The [[lookup @name lowercase]]'s creator, if within
+          Bloodied.</p><p>The [[lookup @name lowercase]]{creature}'s creator, if within
           [[lookup @range.value activity=tnkOsrSwEElO2kZM]] feet of the berserk
-          [[lookup @name lowercase]], can try to calm it by taking an action to
+          [[lookup @name lowercase]]{creature}, can try to calm it by taking an action to
           make a [[/check ability=cha skill=per dc=@abilities.str.dc]] DC 15
           Charisma (Persuasion) check; the golem must be able to hear its
           creator. If this check succeeds, the golem ceases being berserk until
@@ -861,7 +861,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] can't
+          <p class="feature">The [[lookup @name lowercase]]{creature} can't
           shape-shift.</p>
         chat: ''
       identifier: immutable-form
@@ -912,7 +912,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">Whenever the [[lookup @name lowercase]] is
+          <p class="feature">Whenever the [[lookup @name lowercase]]{creature} is
           subjected to Lightning damage, it regains a number of Hit Points equal
           to the Lightning damage dealt.</p>
         chat: ''
@@ -964,7 +964,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] has Advantage on saving throws
+          <p>The [[lookup @name lowercase]]{creature} has Advantage on saving throws
           against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
@@ -1051,7 +1051,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item Slam]]
+          <p>The [[lookup @name lowercase]]{creature} makes two [[/item Slam]]
           attacks.</p>
         chat: ''
       identifier: multiattack

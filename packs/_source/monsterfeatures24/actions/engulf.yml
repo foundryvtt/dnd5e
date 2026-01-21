@@ -124,15 +124,15 @@ system:
     max: ''
   description:
     value: >-
-      <p class="feature">The [[lookup @name lowercase]] moves up to its Speed
+      <p class="feature">The [[lookup @name lowercase]]{creature} moves up to its Speed
       and can move through the spaces of Huge or smaller creatures and
       objects.</p><p class="feature"><em>Strength Saving Throw:</em> DC [[lookup
       @save.dc.value activity=5o0Bh8PQaojx5XMx]], each creature or object whose
-      space the [[lookup @name lowercase]] enters for the first time during this
+      space the [[lookup @name lowercase]]{creature} enters for the first time during this
       move.</p><p class="feature"><em>Failure:</em> The target is engulfed.
       While engulfed, a target has &amp;Reference[Total Cover] against attacks
-      and other effects outside the [[lookup @name lowercase]], and when the
-      [[lookup @name lowercase]] moves, the engulfed target moves with it. A
+      and other effects outside the [[lookup @name lowercase]]{creature}, and when the
+      [[lookup @name lowercase]]{creature} moves, the engulfed target moves with it. A
       nonmagical object is destroyed after spending 1 minute engulfed.</p><p
       class="feature">While engulfed, a creature takes [[/damage average
       activity=Exfa4q7O4SvXjGt7]] damage at the start of each of its turns, is

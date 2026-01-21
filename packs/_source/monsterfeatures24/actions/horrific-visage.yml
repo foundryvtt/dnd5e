@@ -81,11 +81,11 @@ system:
       <p class="feature"><em>Wisdom Saving Throw:</em> DC [[lookup
       @save.dc.value activity=v8KiqUloIE5eocSu]], each creature in a [[lookup
       @target.template.size activity=v8KiqUloIE5eocSu]]-foot Cone that can see
-      the [[lookup @name lowercase]] and isn't an Undead. <em>Failure:</em>
+      the [[lookup @name lowercase]]{creature} and isn't an Undead. <em>Failure:</em>
       [[/damage average]] damage, and the target has the
       &amp;Reference[Frightened apply=false] condition until the start of the
-      [[lookup @name lowercase]]'s next turn. <em>Success:</em> The target is
-      immune to this [[lookup @name lowercase]]'s Horrifying Visage for 24
+      [[lookup @name lowercase]]{creature}'s next turn. <em>Success:</em> The target is
+      immune to this [[lookup @name lowercase]]{creature}'s Horrifying Visage for 24
       hours.</p>
     chat: ''
   identifier: horrific-visage

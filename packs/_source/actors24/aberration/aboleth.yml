@@ -561,7 +561,7 @@ items:
         recovery: []
         max: ''
       description:
-        value: <p>The [[lookup @name lowercase]] can breathe air and water.</p>
+        value: <p>The [[lookup @name lowercase]]{creature} can breathe air and water.</p>
         chat: ''
       identifier: amphibious
       source:
@@ -656,7 +656,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">If destroyed, the [[lookup @name lowercase]] gains
+          <p class="feature">If destroyed, the [[lookup @name lowercase]]{creature} gains
           a new body in [[/r 5d10]] days, reviving with all its Hit Points in
           the Far Realm or another location chosen by the DM.</p>
         chat: ''
@@ -760,7 +760,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] fails a saving throw, it can
+          <p>If the [[lookup @name lowercase]]{creature} fails a saving throw, it can
           choose to succeed instead.</p>
         chat: ''
       identifier: legendary-resistance
@@ -927,13 +927,13 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">While underwater, the [[lookup @name lowercase]] is
+          <p class="feature">While underwater, the [[lookup @name lowercase]]{creature} is
           surrounded by mucus.</p><p class="feature"><em>Constitution Saving
           Throw:</em> DC 14, each [[lookup @target.affects.type
           activity=clFFG8uDBSFzxIo8]] in a [[lookup @target.template.size
           activity=clFFG8uDBSFzxIo8]]-[[lookup @target.template.units
           activity=clFFG8uDBSFzxIo8]] Emanation originating from the [[lookup
-          @name lowercase]] at the end of the [[lookup @name lowercase]]'s
+          @name lowercase]] at the end of the [[lookup @name lowercase]]{creature}'s
           turn.</p><p><em>Failure:</em> The target is cursed. Until the curse
           ends, the target's skin becomes slimy, the target can breathe air and
           water, and it can't regain Hit Points unless it is underwater.</p><p
@@ -1033,9 +1033,9 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">If a creature the [[lookup @name lowercase]] can
-          see communicates telepathically with the [[lookup @name lowercase]],
-          the [[lookup @name lowercase]] learns the creature's greatest
+          <p class="feature">If a creature the [[lookup @name lowercase]]{creature} can
+          see communicates telepathically with the [[lookup @name lowercase]]{creature},
+          the [[lookup @name lowercase]]{creature} learns the creature's greatest
           desires.</p>
         chat: ''
       identifier: probing-telepathy
@@ -1365,7 +1365,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes two [[/item
           .mmTentacle000000]] attacks and uses either [[/item
           .7gP0oX3L1RKRaBGH]] or [[/item .yiiKNaJ2svcUWqLi]] if available.</p>
         chat: ''
@@ -1480,7 +1480,7 @@ items:
         value: >-
           <p><em>Wisdom Saving Throw:</em> DC [[lookup @save.dc.value
           activity=zdXAMnjaOcsVmLZP]], one [[lookup @target.affects.type
-          activity=zdXAMnjaOcsVmLZP]] the [[lookup @name lowercase]] can see
+          activity=zdXAMnjaOcsVmLZP]] the [[lookup @name lowercase]]{creature} can see
           within [[lookup @range.value activity=zdXAMnjaOcsVmLZP]]
           feet.</p><p><em>Failure:</em> The target has the
           &amp;Reference[Charmed apply=false] condition until the [[lookup @name
@@ -1488,11 +1488,11 @@ items:
           target. While Charmed, the target acts as an ally to the [[lookup
           @name lowercase]] and is under its control while within [[lookup
           @target.template.size activity=zdXAMnjaOcsVmLZP]] feet of it. In
-          addition, the [[lookup @name lowercase]] and the target can
+          addition, the [[lookup @name lowercase]]{creature} and the target can
           communicate telepathically with each other over any
           distance.</p><p>The target repeats the save whenever it takes damage
           as well as after every 24 hours it spends at least 1 mile away from
-          the [[lookup @name lowercase]], ending the effect on itself on a
+          the [[lookup @name lowercase]]{creature}, ending the effect on itself on a
           success.</p>
         chat: ''
       identifier: dominate-mind
@@ -1657,7 +1657,7 @@ items:
           @name lowercase]].</p><p><em>Failure:</em> [[/damage average]]
           damage.</p><p><em>Success:</em> [[lookup @damage.onSave capitalize
           activity=uI3HDQ1grN123Or3]] damage.</p><p><em>Failure or Success:</em>
-          The [[lookup @name lowercase]] gains the target's memories if the
+          The [[lookup @name lowercase]]{creature} gains the target's memories if the
           target is a Humanoid and is reduced to 0 Hit Points by this
           action.</p>
         chat: ''
@@ -1758,7 +1758,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] makes one Tentacle
+          <p class="feature">The [[lookup @name lowercase]]{creature} makes one Tentacle
           attack.</p>
         chat: ''
       identifier: lash
@@ -1864,7 +1864,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">If the [[lookup @name lowercase]] has at least one
+          <p class="feature">If the [[lookup @name lowercase]]{creature} has at least one
           creature Charmed or Grappled, it uses [[/item .7gP0oX3L1RKRaBGH]] and
           regains [[/healing average]].</p>
         chat: ''

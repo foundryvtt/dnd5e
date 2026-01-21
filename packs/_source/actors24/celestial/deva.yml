@@ -564,7 +564,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">If the [[lookup @name lowercase]] dies outside
+          <p class="feature">If the [[lookup @name lowercase]]{creature} dies outside
           Mount Celestia, its body disappears, and it gains a new body
           instantly, reviving with all its Hit Points somewhere in Mount
           Celestia.</p>
@@ -617,7 +617,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] has Advantage on saving throws
+          <p>The [[lookup @name lowercase]]{creature} has Advantage on saving throws
           against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
@@ -704,7 +704,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item Holy Mace]]
+          <p>The [[lookup @name lowercase]]{creature} makes two [[/item Holy Mace]]
           attacks.</p>
         chat: ''
       identifier: multiattack
@@ -1109,7 +1109,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts one of the
           following spells, requiring no Material components and using Charisma
           as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]]):</p><p class="feature-trait"><strong>At

@@ -79,7 +79,7 @@ system:
     max: ''
   description:
     value: >-
-      <p class="feature">The [[lookup @name lowercase]] spends 5 feet of
+      <p class="feature">The [[lookup @name lowercase]]{creature} spends 5 feet of
       movement to jump to a space within 15 feet that contains one or more Large
       or smaller creatures.</p><p class="feature"><em>Dexterity Saving
       Throw:</em> DC [[lookup @save.dc.value activity=IPCXEQoTuaAG5l52]], each
@@ -88,7 +88,7 @@ system:
       class="feature"><em>Failure:</em> [[/damage average]] damage, and the
       target has the &amp;Reference[Prone apply=false] condition.</p><p
       class="feature"><em>Success:</em> Half damage, and the target is pushed 5
-      feet straight away from the [[lookup @name lowercase]].</p>
+      feet straight away from the [[lookup @name lowercase]]{creature}.</p>
     chat: ''
   identifier: deadly-leap
   source:

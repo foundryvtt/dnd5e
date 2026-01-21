@@ -61,9 +61,9 @@ system:
     max: ''
   description:
     value: >-
-      <p class="feature">The [[lookup @name lowercase]] uses Spellcasting to
+      <p class="feature">The [[lookup @name lowercase]]{creature} uses Spellcasting to
       cast <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplMindSpike0]{Mind
-      Spike}</em> (level 4 version). The [[lookup @name lowercase]] can't take
+      Spike}</em> (level 4 version). The [[lookup @name lowercase]]{creature} can't take
       this action again until the start of its next turn.</p>
     chat: ''
   identifier: mind-jolt

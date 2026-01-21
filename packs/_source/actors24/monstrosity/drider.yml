@@ -566,7 +566,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] can climb difficult surfaces,
+          <p>The [[lookup @name lowercase]]{creature} can climb difficult surfaces,
           including along ceilings, without needing to make an ability
           check.</p>
         chat: ''
@@ -618,7 +618,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>While in sunlight, the [[lookup @name lowercase]] has Disadvantage
+          <p>While in sunlight, the [[lookup @name lowercase]]{creature} has Disadvantage
           on ability checks and attack rolls.</p>
         chat: ''
       identifier: sunlight-sensitivity
@@ -669,8 +669,8 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] ignores movement
-          restrictions caused by webs, and the [[lookup @name lowercase]] knows
+          <p class="feature">The [[lookup @name lowercase]]{creature} ignores movement
+          restrictions caused by webs, and the [[lookup @name lowercase]]{creature} knows
           the location of any other creature in contact with the same web.</p>
         chat: ''
       identifier: web-walker
@@ -768,7 +768,7 @@ items:
       description:
         value: >-
           <p><span style="font-family:'Roboto Condensed', sans-serif">The
-          </span>[[lookup @name lowercase]]<span style="font-family:'Roboto
+          </span>[[lookup @name lowercase]]{creature}<span style="font-family:'Roboto
           Condensed', sans-serif"> makes three attacks, using </span>[[/item
           .mmForeleg0000000]] <span style="font-family:'Roboto Condensed',
           sans-serif">or </span>[[/item .mmPoisonBurst000]] <span
@@ -1285,7 +1285,7 @@ items:
         max: '1'
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDarkness00]{Darkness}</em>,
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplFaerieFire]{Faerie
           Fire}</em>, or

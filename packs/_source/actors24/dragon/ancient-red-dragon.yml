@@ -618,7 +618,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] fails a saving throw, it can
+          <p>If the [[lookup @name lowercase]]{creature} fails a saving throw, it can
           choose to succeed instead.</p>
         chat: ''
       identifier: legendary-resistance
@@ -712,7 +712,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes three [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes three [[/item
           .mmRend0000000000]] attacks. It can replace one attack with a use of
           Spellcasting to cast [[/item
           .mmSpellcasting00.Activity.bXJvvKCoI0uVBG4W]] (level 3 version).</p>
@@ -1289,7 +1289,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts one of the
           following spells, requiring no Material components and using Charisma
           as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]], +15 to hit with spell attacks):</p><p
@@ -1401,13 +1401,13 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] uses [[/item
+          <p class="feature">The [[lookup @name lowercase]]{creature} uses [[/item
           Spellcasting]] to cast <em>[[/item
           .mmSpellcasting00.Activity.yT3FKrXFGNmp9LYe]]</em> (level 2 version).
-          The [[lookup @name lowercase]] can't take this action again until the
+          The [[lookup @name lowercase]]{creature} can't take this action again until the
           start of its next turn.</p>
         chat: >-
-          <p class="feature">The [[lookup @name lowercase]] uses Spellcasting to
+          <p class="feature">The [[lookup @name lowercase]]{creature} uses Spellcasting to
           cast <em>Command</em> (level 2 version). The [[lookup @name
           lowercase]] can’t take this action again until the start of its next
           turn.</p>
@@ -1677,7 +1677,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] uses [[/item
+          <p class="feature">The [[lookup @name lowercase]]{creature} uses [[/item
           Spellcasting]] to cast <em>[[/item
           .mmSpellcasting00.Activity.bXJvvKCoI0uVBG4W]]. </em>The [[lookup @name
           lowercase]] can't take this action again until the start of its next
@@ -1962,7 +1962,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] moves up to half its Speed, and it
+          <p>The [[lookup @name lowercase]]{creature} moves up to half its Speed, and it
           makes one [[/item Rend]] attack.</p>
         chat: ''
       identifier: pounce

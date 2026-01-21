@@ -574,7 +574,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] dies outside the Nine Hells, its
+          <p>If the [[lookup @name lowercase]]{creature} dies outside the Nine Hells, its
           body disappears in sulfurous smoke, and it gains a new body instantly,
           reviving with all its Hit Points somewhere in the Nine Hells.</p>
         chat: ''
@@ -625,7 +625,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] has Advantage on saving throws
+          <p>The [[lookup @name lowercase]]{creature} has Advantage on saving throws
           against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
@@ -676,13 +676,13 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] has a magic rope.
-          While bearing it, the [[lookup @name lowercase]] can use the [[/item
+          <p class="feature">The [[lookup @name lowercase]]{creature} has a magic rope.
+          While bearing it, the [[lookup @name lowercase]]{creature} can use the [[/item
           .mmEntanglingRope]] action. The rope has AC 20, HP 90, and Immunity to
           Poison and Psychic damage. The rope turns to dust if reduced to 0 Hit
-          Points, if it is 5+ feet away from the [[lookup @name lowercase]] for
-          1 hour or more, or if the [[lookup @name lowercase]] dies. If the rope
-          is damaged or destroyed, the [[lookup @name lowercase]] can fully
+          Points, if it is 5+ feet away from the [[lookup @name lowercase]]{creature} for
+          1 hour or more, or if the [[lookup @name lowercase]]{creature} dies. If the rope
+          is damaged or destroyed, the [[lookup @name lowercase]]{creature} can fully
           restore it when finishing a Short or Long Rest.</p>
         chat: ''
       identifier: magic-rope
@@ -779,7 +779,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes three [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes three [[/item
           .mmWitheringSword]] attacks and can use [[/item
           .mmEntanglingRope]].</p>
         chat: ''
@@ -880,9 +880,9 @@ items:
         max: ''
       description:
         value: >-
-          <p><em>Trigger:</em> The [[lookup @name lowercase]] is [[lookup
+          <p><em>Trigger:</em> The [[lookup @name lowercase]]{creature} is [[lookup
           @activation.condition activity=aLG3BRZL7P6OEjwd]]. <em>Response:</em>
-          The [[lookup @name lowercase]] adds [[lookup @roll.formula
+          The [[lookup @name lowercase]]{creature} adds [[lookup @roll.formula
           activity=aLG3BRZL7P6OEjwd]] to its AC against that attack, possibly
           causing it to miss.</p>
         chat: ''
@@ -1165,8 +1165,8 @@ items:
           activity=n8nEah4vbrEPphNF]] feet. </p><p
           class="feature"><em>Failure:</em> [[/damage average]] damage, and the
           target has the &amp;Reference[Restrained apply=false] condition until
-          the rope is destroyed, the [[lookup @name lowercase]] uses a Bonus
-          Action to release the target, or the [[lookup @name lowercase]] uses
+          the rope is destroyed, the [[lookup @name lowercase]]{creature} uses a Bonus
+          Action to release the target, or the [[lookup @name lowercase]]{creature} uses
           Entangling Rope again.</p>
         chat: ''
       identifier: entangling-rope

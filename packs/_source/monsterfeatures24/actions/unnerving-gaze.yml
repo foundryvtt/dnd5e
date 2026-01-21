@@ -70,16 +70,16 @@ system:
   description:
     value: >-
       <p class="feature"><em>Trigger:</em> A [[lookup @target.affects.type
-      activity=btp6NZvx465nxWTF]] the [[lookup @name lowercase]] can see starts
+      activity=btp6NZvx465nxWTF]] the [[lookup @name lowercase]]{creature} can see starts
       its turn within [[lookup @target.template.size activity=btp6NZvx465nxWTF]]
-      feet of the [[lookup @name lowercase]] and can see the [[lookup @name
+      feet of the [[lookup @name lowercase]]{creature} and can see the [[lookup @name
       lowercase]].</p><p class="feature"><em>Response—Wisdom Saving Throw:</em>
       DC [[lookup @save.dc.value activity=btp6NZvx465nxWTF]], the triggering
       [[lookup @target.affects.type activity=btp6NZvx465nxWTF]].</p><p
       class="feature"><em>Failure:</em> The target has the
       &amp;Reference[Frightened apply=false] condition until the end of its
       turn.</p><p class="feature"><em>Success:</em> The target is immune to this
-      [[lookup @name lowercase]]'s Unnerving Gaze for 24 hours.</p>
+      [[lookup @name lowercase]]{creature}'s Unnerving Gaze for 24 hours.</p>
     chat: ''
   identifier: unnerving-gaze
   source:

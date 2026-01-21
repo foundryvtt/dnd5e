@@ -569,7 +569,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] knows if it hears a
+          <p class="feature">The [[lookup @name lowercase]]{creature} knows if it hears a
           lie.</p>
         chat: ''
       identifier: divine-awareness
@@ -620,7 +620,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">If the [[lookup @name lowercase]] dies outside
+          <p class="feature">If the [[lookup @name lowercase]]{creature} dies outside
           Mount Celestia, its body disappears, and it gains a new body
           instantly, reviving with all its Hit Points somewhere in Mount
           Celestia.</p>
@@ -721,7 +721,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] fails a saving throw, it can
+          <p>If the [[lookup @name lowercase]]{creature} fails a saving throw, it can
           choose to succeed instead.</p>
         chat: ''
       identifier: legendary-resistance
@@ -779,7 +779,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] has Advantage on saving throws
+          <p>The [[lookup @name lowercase]]{creature} has Advantage on saving throws
           against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
@@ -866,7 +866,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item Flying Sword]]
+          <p>The [[lookup @name lowercase]]{creature} makes two [[/item Flying Sword]]
           attacks. It can replace one attack with a use of [[/item Slaying
           Bow]].</p>
         chat: ''
@@ -1461,7 +1461,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts one of the
           following spells, requiring no Material components and using Charisma
           as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]]):</p><p class="feature-trait"><strong>At
@@ -3134,13 +3134,13 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] teleports up to
+          <p class="feature">The [[lookup @name lowercase]]{creature} teleports up to
           [[lookup @range.value activity=HtsFBK1PYKjvy9mn]] feet to an
           unoccupied space it can see.</p><p class="feature"><em>Dexterity
           Saving Throw:</em> DC [[lookup @save.dc.value
           activity=HtsFBK1PYKjvy9mn]], each creature in a [[lookup
           @target.template.size activity=HtsFBK1PYKjvy9mn]]-foot Emanation
-          originating from the [[lookup @name lowercase]] at its destination
+          originating from the [[lookup @name lowercase]]{creature} at its destination
           space.</p><p class="feature"><em>Failure:</em> [[/damage average]]
           damage.</p><p class="feature"><em>Success:</em> Half damage.</p>
         chat: ''
@@ -3342,7 +3342,7 @@ items:
         max: '3'
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplCureWounds]{Cure
           Wounds}</em> (level 2 version),
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplLesserRest]{Lesser

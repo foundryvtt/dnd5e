@@ -8,25 +8,25 @@ system:
     value: >-
       <section class="secret">
 
-      <p>the [[lookup @name lowercase]] makes one bite attack against a
+      <p>the [[lookup @name lowercase]]{creature} makes one bite attack against a
       <strong>Medium or smaller target it is grappling</strong>. If the attack
       hits, the target is also swallowed, and the grapple ends. While swallowed,
       the target is blinded and restrained, it has total cover against attacks
-      and other effects outside the [[lookup @name lowercase]], and it takes
+      and other effects outside the [[lookup @name lowercase]]{creature}, and it takes
       <strong>21 (6d6) <em>acid damage</em></strong> at the start of each of the
-      [[lookup @name lowercase]]'s turns. A [[lookup @name lowercase]] can have
+      [[lookup @name lowercase]]{creature}'s turns. A [[lookup @name lowercase]]{creature} can have
       only one creature swallowed at a time.</p><p>If the [[lookup @name
       lowercase]] takes 30 damage or more on a single turn from the swallowed
-      creature, the [[lookup @name lowercase]] must succeed on a  <strong>DC 14
+      creature, the [[lookup @name lowercase]]{creature} must succeed on a  <strong>DC 14
       Constitution</strong> saving throw at the end of that turn or regurgitate
       the creature, which falls prone in a space within 10 ft. of the [[lookup
-      @name lowercase]]. If the [[lookup @name lowercase]] dies, a swallowed
+      @name lowercase]]. If the [[lookup @name lowercase]]{creature} dies, a swallowed
       creature is no longer restrained by it and can escape from the corpse by
       using 15 ft. of movement, exiting prone.</p>
 
       </section>
 
-      <p>the [[lookup @name lowercase]] attacks with its Swallow.</p>
+      <p>the [[lookup @name lowercase]]{creature} attacks with its Swallow.</p>
     chat: ''
   source:
     custom: ''

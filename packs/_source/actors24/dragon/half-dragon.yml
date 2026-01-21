@@ -562,7 +562,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] is related to a type
+          <p class="feature">The [[lookup @name lowercase]]{creature} is related to a type
           of dragon associated with one of the following damage types (DM's
           choice): Acid, Cold, Fire, Lightning, or Poison. This choice affects
           other aspects of the stat block.</p><section class="secret"
@@ -854,7 +854,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes two [[/item
           .mmClaw0000000000]] attacks.</p>
         chat: ''
       identifier: multiattack
@@ -1251,7 +1251,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] jumps up to [[lookup @range.value
+          <p>The [[lookup @name lowercase]]{creature} jumps up to [[lookup @range.value
           activity=C28C43DeD8iFtZMe]] feet by [[lookup @activation.condition
           activity=C28C43DeD8iFtZMe]].</p>
         chat: ''

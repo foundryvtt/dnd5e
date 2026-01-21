@@ -575,7 +575,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] dies outside the Abyss, its body
+          <p>If the [[lookup @name lowercase]]{creature} dies outside the Abyss, its body
           dissolves into ichor, and it gains a new body instantly, reviving with
           all its Hit Points somewhere in the Abyss.</p>
         chat: ''
@@ -626,7 +626,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] has Advantage on saving throws
+          <p>The [[lookup @name lowercase]]{creature} has Advantage on saving throws
           against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
@@ -734,13 +734,13 @@ items:
         value: >-
           <p class="feature"><em>Constitution Saving Throw:</em> DC [[lookup
           @save.dc.value activity=mJbwhj3beOIB3Jgj]], any creature (other than a
-          [[lookup @name lowercase]]) that starts its turn in a [[lookup
+          [[lookup @name lowercase]]{creature}) that starts its turn in a [[lookup
           @target.template.size activity=mJbwhj3beOIB3Jgj]]-foot Emanation
           originating from the [[lookup @name
           lowercase]].</p><p><em>Failure:</em> The target has the
           &amp;Reference[Poisoned apply=false] condition until the start of its
           next turn.</p><p><em>Success:</em> The target is immune to the Stench
-          of all [[lookup @name lowercase]] for 1 hour.</p>
+          of all [[lookup @name lowercase]]{creature} for 1 hour.</p>
         chat: ''
       identifier: stench
       source:
@@ -877,7 +877,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes three [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes three [[/item
           .mmRend0000000000]] attacks.</p>
         chat: ''
       identifier: multiattack
@@ -1137,7 +1137,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] jumps up to [[lookup @range.value
+          <p>The [[lookup @name lowercase]]{creature} jumps up to [[lookup @range.value
           activity=C28C43DeD8iFtZMe]] feet by [[lookup @activation.condition
           activity=C28C43DeD8iFtZMe]].</p>
         chat: ''

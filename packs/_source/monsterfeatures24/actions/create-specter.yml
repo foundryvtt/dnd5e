@@ -83,13 +83,13 @@ system:
     max: ''
   description:
     value: >-
-      <p class="feature">The [[lookup @name lowercase]] targets a Humanoid
+      <p class="feature">The [[lookup @name lowercase]]{creature} targets a Humanoid
       corpse within [[lookup @range.value activity=ypIQdXr13u7LATUP]] feet of
       itself that has been dead for no longer than 1 minute. The target's spirit
       rises as a
       <strong>@UUID[Compendium.dnd5e.actors24.Actor.mmSpecter0000000]{Specter}</strong>
       in the space of its corpse or in the nearest unoccupied space. The specter
-      is under the [[lookup @name lowercase]]'s control. The [[lookup @name
+      is under the [[lookup @name lowercase]]{creature}'s control. The [[lookup @name
       lowercase]] can have no more than seven specters under its control at a
       time.</p>
     chat: ''

@@ -581,7 +581,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] can't wear or carry
+          <p class="feature">The [[lookup @name lowercase]]{creature} can't wear or carry
           anything.</p>
         chat: ''
       identifier: ephemeral
@@ -632,7 +632,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] sheds Bright Light in a 20-foot
+          <p>The [[lookup @name lowercase]]{creature} sheds Bright Light in a 20-foot
           radius and Dim Light for an additional 20 feet.</p>
         chat: ''
       identifier: illumination
@@ -683,7 +683,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] can move through other creatures and
+          <p>The [[lookup @name lowercase]]{creature} can move through other creatures and
           objects as if they were &amp;Reference[Difficult Terrain]. It takes
           [[/damage 1d10 average type=force]] damage if it ends its turn inside
           an object.</p>
@@ -787,10 +787,10 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] and its light have
+          <p class="feature">The [[lookup @name lowercase]]{creature} and its light have
           the &amp;Reference[Invisible apply=false] condition until the [[lookup
           @name lowercase]]'s &amp;Reference[Concentration] ends on this effect,
-          which ends early immediately after the [[lookup @name lowercase]]
+          which ends early immediately after the [[lookup @name lowercase]]{creature}
           makes an attack roll or uses Consume Life.</p>
         chat: ''
       identifier: vanish

@@ -995,7 +995,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts one of the
           following spells, using Wisdom as the spellcasting ability:</p><p
           class="feature-trait"><strong>At Will:</strong>
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplLight00000]{Light}</em>,
@@ -1198,7 +1198,7 @@ items:
         max: '1'
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplBless00000]{Bless}</em>,
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDispelMagi]{Dispel
           Magic}</em>,

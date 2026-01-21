@@ -87,7 +87,7 @@ system:
       @save.dc.value activity=YVri6iuieFUUiO1d]], each creature in a [[lookup
       @target.template.size activity=YVri6iuieFUUiO1d]]-foot-radius, [[lookup
       @target.template.height activity=YVri6iuieFUUiO1d]]-feet-high Cylinder
-      originating from a point the [[lookup @name lowercase]] can see within
+      originating from a point the [[lookup @name lowercase]]{creature} can see within
       [[lookup @range.value activity=YVri6iuieFUUiO1d]] feet.</p><p
       class="feature"><em>Failure:</em> [[/damage average]] damage.</p><p
       class="feature"><em>Success:</em> Half damage.</p>

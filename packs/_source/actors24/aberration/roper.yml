@@ -560,7 +560,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] can climb difficult surfaces,
+          <p>The [[lookup @name lowercase]]{creature} can climb difficult surfaces,
           including along ceilings, without needing to make an ability
           check.</p>
         chat: ''
@@ -648,7 +648,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item Tentacle]]
+          <p>The [[lookup @name lowercase]]{creature} makes two [[/item Tentacle]]
           attacks, uses [[/item Reel]], and makes two [[/item Bite]]
           attacks.</p>
         chat: ''
@@ -951,7 +951,7 @@ items:
           Grappled when destroyed (AC 20, HP 10, Immunity to Poison and Psychic
           damage). Damaging the tentacle deals no damage to the [[lookup @name
           lowercase]], and a destroyed tentacle regrows at the start of the
-          [[lookup @name lowercase]]'s next turn.</p>
+          [[lookup @name lowercase]]{creature}'s next turn.</p>
         chat: ''
       identifier: tentacle
       source:
@@ -1138,7 +1138,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] pulls each creature Grappled by it
+          <p>The [[lookup @name lowercase]]{creature} pulls each creature Grappled by it
           up to 30 feet straight toward it.</p>
         chat: ''
       identifier: reel

@@ -568,7 +568,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">If the [[lookup @name lowercase]] dies outside the
+          <p class="feature">If the [[lookup @name lowercase]]{creature} dies outside the
           Elemental Plane of Air, its body dissolves into dirt, and it gains a
           new body in [[/r 1d4#Days]] days, reviving with all its Hit Points
           somewhere on the Plane of Air.</p>
@@ -625,7 +625,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] has Advantage on saving throws
+          <p>The [[lookup @name lowercase]]{creature} has Advantage on saving throws
           against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
@@ -726,16 +726,16 @@ items:
         max: '3'
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] has a [[/r
+          <p class="feature">The [[lookup @name lowercase]]{creature} has a [[/r
           1d100cs&lt;31#Knows Wish on 1]]{30 percent} chance of knowing the
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplWish000000]{Wish}</em>
-          spell. If the [[lookup @name lowercase]] knows it, the [[lookup @name
+          spell. If the [[lookup @name lowercase]]{creature} knows it, the [[lookup @name
           lowercase]] can cast it only on behalf of a non-genie creature who
-          communicates a wish in a way the [[lookup @name lowercase]] can
-          understand. If the [[lookup @name lowercase]] casts the spell for the
-          creature, the [[lookup @name lowercase]] suffers none of the spell's
-          stress. Once the [[lookup @name lowercase]] has cast it three times,
-          the [[lookup @name lowercase]] can't do so again for 365 days.</p>
+          communicates a wish in a way the [[lookup @name lowercase]]{creature} can
+          understand. If the [[lookup @name lowercase]]{creature} casts the spell for the
+          creature, the [[lookup @name lowercase]]{creature} suffers none of the spell's
+          stress. Once the [[lookup @name lowercase]]{creature} has cast it three times,
+          the [[lookup @name lowercase]]{creature} can't do so again for 365 days.</p>
         chat: <p>[[/r 1d100cs&lt;31#Knows Wish on 1]]{30 percent}</p>
       identifier: wishes
       source:
@@ -1083,7 +1083,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes three attacks, using [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes three attacks, using [[/item
           .mmStormBlade0000]] or [[/item .mmStormBolt00000]] in any
           combination.</p>
         chat: ''
@@ -1640,7 +1640,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts one of the
           following spells, requiring no Material components and using Charisma
           as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]]):</p><p class="feature-trait"><strong>At
@@ -3873,20 +3873,20 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] conjures a whirlwind
+          <p class="feature">The [[lookup @name lowercase]]{creature} conjures a whirlwind
           at a point it can see within 120 feet. The whirlwind fills a [[lookup
           @target.template.size activity=TYNKL0QDItFpbR2G]]-foot-radius,
           [[lookup @target.template.height activity=TYNKL0QDItFpbR2G]]-foot-high
           [[lookup @target.template.type capitalize activity=TYNKL0QDItFpbR2G]]
           centered on that point. The whirlwind lasts until the [[lookup @name
-          lowercase]]'s Concentration on it ends. The [[lookup @name lowercase]]
+          lowercase]]'s Concentration on it ends. The [[lookup @name lowercase]]{creature}
           can move the whirlwind up to 20 feet at the start of each of its
           turns.</p><p class="feature">Whenever the whirlwind enters a
           creature's space or a creature enters the whirlwind, that creature is
           subjected to the following effect.</p><p class="feature"><em>Strength
           Saving Throw:</em> DC [[lookup @save.dc.value
           activity=TYNKL0QDItFpbR2G]] (a creature makes this save only once per
-          turn, and the [[lookup @name lowercase]] is unaffected).</p><p
+          turn, and the [[lookup @name lowercase]]{creature} is unaffected).</p><p
           class="feature"><em>Failure:</em> While in the whirlwind, the target
           has the &amp;Reference[Restrained apply=false] condition and moves
           with the whirlwind. At the start of each of its turns, the Restrained

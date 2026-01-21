@@ -577,7 +577,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] can enter a creature's space and
+          <p>The [[lookup @name lowercase]]{creature} can enter a creature's space and
           stop there. It can move through a space as narrow as 1 inch without
           expending extra movement to do so.</p>
         chat: ''
@@ -815,7 +815,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes two [[/item
           .mmThunderousSlam]] attacks.</p>
         chat: ''
       identifier: multiattack
@@ -946,9 +946,9 @@ items:
           <p class="feature"><em>Strength Saving Throw:</em> DC [[lookup
           @save.dc.value activity=GQzr4EMMm6kkZVdC]], each Medium or smaller
           [[lookup @target.affects.type activity=GQzr4EMMm6kkZVdC]] in the
-          [[lookup @name lowercase]]'s space.</p><p><em>Failure:</em> [[/damage
+          [[lookup @name lowercase]]{creature}'s space.</p><p><em>Failure:</em> [[/damage
           average]] damage, and the target is pushed up to 20 feet straight away
-          from the [[lookup @name lowercase]] and has the &amp;Reference[Prone
+          from the [[lookup @name lowercase]]{creature} and has the &amp;Reference[Prone
           apply=false] condition.</p><p><em>Success:</em> Half damage only.</p>
         chat: ''
       identifier: whirlwind

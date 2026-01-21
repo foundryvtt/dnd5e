@@ -565,7 +565,7 @@ items:
         recovery: []
         max: ''
       description:
-        value: <p>The [[lookup @name lowercase]] can breathe air and water.</p>
+        value: <p>The [[lookup @name lowercase]]{creature} can breathe air and water.</p>
         chat: ''
       identifier: amphibious
       source:
@@ -661,7 +661,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two attacks, using [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes two attacks, using [[/item
           .mmStormSword0000]] or [[/item .mmThunderbolt000]] in any
           combination.</p>
         chat: ''
@@ -932,7 +932,7 @@ items:
           <p class="feature">[[/attack extended]]. [[/damage average extended]],
           and the target has the &amp;Reference[Blinded apply=false] and
           &amp;Reference[Deafened apply=false] conditions until the start of the
-          [[lookup @name lowercase]]'s next turn.</p>
+          [[lookup @name lowercase]]{creature}'s next turn.</p>
         chat: ''
       identifier: thunderbolt
       source:
@@ -1145,7 +1145,7 @@ items:
           [[lookup @target.template.size
           activity=YVri6iuieFUUiO1d]]-foot-radius, [[lookup
           @target.template.height activity=YVri6iuieFUUiO1d]]-feet-high Cylinder
-          originating from a point the [[lookup @name lowercase]] can see within
+          originating from a point the [[lookup @name lowercase]]{creature} can see within
           [[lookup @range.value activity=YVri6iuieFUUiO1d]] feet.</p><p
           class="feature"><em>Failure:</em> [[/damage average]] damage.</p><p
           class="feature"><em>Success:</em> Half damage.</p>
@@ -1341,7 +1341,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts one of the
           following spells, requiring no Material components and using Wisdom as
           the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]]):</p><p class="feature-trait"><strong>At

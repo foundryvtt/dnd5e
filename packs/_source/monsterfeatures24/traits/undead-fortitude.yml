@@ -12,10 +12,10 @@ system:
     max: ''
   description:
     value: >-
-      <p class="feature">If damage reduces the [[lookup @name lowercase]] to 0
+      <p class="feature">If damage reduces the [[lookup @name lowercase]]{creature} to 0
       Hit Points, it makes a Constitution saving throw (DC 5 plus the damage
       taken) unless the damage is Radiant or from a Critical Hit. On a
-      successful save, the [[lookup @name lowercase]] drops to 1 Hit Point
+      successful save, the [[lookup @name lowercase]]{creature} drops to 1 Hit Point
       instead.</p>
     chat: ''
   identifier: undead-fortitude

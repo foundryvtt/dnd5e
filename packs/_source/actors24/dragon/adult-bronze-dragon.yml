@@ -562,7 +562,7 @@ items:
         recovery: []
         max: ''
       description:
-        value: <p>The [[lookup @name lowercase]] can breathe air and water.</p>
+        value: <p>The [[lookup @name lowercase]]{creature} can breathe air and water.</p>
         chat: ''
       identifier: amphibious
       source:
@@ -660,7 +660,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] fails a saving throw, it can
+          <p>If the [[lookup @name lowercase]]{creature} fails a saving throw, it can
           choose to succeed instead.</p>
         chat: ''
       identifier: legendary-resistance
@@ -754,7 +754,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes three [[/item Rend]] attacks.
+          <p>The [[lookup @name lowercase]]{creature} makes three [[/item Rend]] attacks.
           It can replace one attack with a use of (A) [[/item Repulsion Breath]]
           or (B) [[/item Spellcasting]] to cast
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplGuidingBol]{Guiding
@@ -1160,7 +1160,7 @@ items:
           @target.template.size activity=zuf9EEVj4nI1joaH]]-foot [[lookup
           @target.template.type activity=zuf9EEVj4nI1joaH]].</p><p
           class="feature"><em>Failure:</em> The target is pushed up to 60 feet
-          straight away from the [[lookup @name lowercase]] and has the
+          straight away from the [[lookup @name lowercase]]{creature} and has the
           &amp;Reference[Prone apply=false] condition.</p>
         chat: ''
       identifier: repulsion-breath
@@ -1586,7 +1586,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts one of the
           following spells, requiring no Material components and using Charisma
           as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]], +10 to hit with spell attacks):</p><p
@@ -3086,7 +3086,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] uses [[/item
+          <p class="feature">The [[lookup @name lowercase]]{creature} uses [[/item
           Spellcasting]] to cast
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplGuidingBol]{Guiding
           Bolt}</em> (level 2 version).</p>
@@ -3422,7 +3422,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] moves up to half its Speed, and it
+          <p>The [[lookup @name lowercase]]{creature} moves up to half its Speed, and it
           makes one [[/item Rend]] attack.</p>
         chat: ''
       identifier: pounce
@@ -3548,7 +3548,7 @@ items:
           @save.dc.value activity=Lq6GexegvlEVB6Dh]], each [[lookup
           @target.affects.type activity=Lq6GexegvlEVB6Dh]] in a [[lookup
           @target.template.size activity=Lq6GexegvlEVB6Dh]]-foot-radius Sphere
-          centered on a point the [[lookup @name lowercase]] can see within
+          centered on a point the [[lookup @name lowercase]]{creature} can see within
           [[lookup @range.value activity=Lq6GexegvlEVB6Dh]] feet.</p><p
           class="feature"><em>Failure:</em> [[/damage average]] damage, and the
           target has the &amp;Reference[Deafened apply=false] condition until

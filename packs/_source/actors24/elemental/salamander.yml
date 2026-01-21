@@ -623,11 +623,11 @@ items:
         max: ''
       description:
         value: >-
-          <p>At the end of each of the [[lookup @name lowercase]]'s turns, each
+          <p>At the end of each of the [[lookup @name lowercase]]{creature}'s turns, each
           [[lookup @target.affects.type activity=15VgJKVXwYBOFSqJ]] of the
-          [[lookup @name lowercase]]'s choice in a [[lookup
+          [[lookup @name lowercase]]{creature}'s choice in a [[lookup
           @target.template.size activity=15VgJKVXwYBOFSqJ]]-foot Emanation
-          originating from the [[lookup @name lowercase]] takes [[/damage
+          originating from the [[lookup @name lowercase]]{creature} takes [[/damage
           average]] damage.</p>
         chat: ''
       identifier: fire-aura
@@ -882,7 +882,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes two [[/item
           .mmFlameSpear0000]] attacks. It can replace one attack with a use of
           [[/item .mmConstrict00000]].</p>
         chat: ''
@@ -1062,7 +1062,7 @@ items:
           <p><em>Strength Saving Throw:</em><span class="Heading-4"> </span>DC
           [[lookup @save.dc.value activity=IgOMjRxAt7UISkJq]], one [[lookup
           @target.affects.special activity=IgOMjRxAt7UISkJq]] creature the
-          [[lookup @name lowercase]] can see within [[lookup @range.value
+          [[lookup @name lowercase]]{creature} can see within [[lookup @range.value
           activity=IgOMjRxAt7UISkJq]] feet.</p><p><em>Failure:</em> [[/damage
           average]] damage. The target has the &amp;Reference[Grappled
           apply=false] condition (escape DC [[lookup @skills.ath.passive]]), and

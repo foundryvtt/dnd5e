@@ -608,7 +608,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two attacks, using [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes two attacks, using [[/item
           .mmStoneClub00000]] or [[/item .mmBoulder0000000]] in any
           combination.</p>
         chat: ''
@@ -1124,11 +1124,11 @@ items:
         max: '1'
       description:
         value: >-
-          <p class="feature"><em>Trigger:</em> The [[lookup @name lowercase]] is
+          <p class="feature"><em>Trigger:</em> The [[lookup @name lowercase]]{creature} is
           [[lookup @activation.condition activity=9T8cNbSBVACrrmRI]].</p><p
-          class="feature"><em>Response:</em> The [[lookup @name lowercase]]
+          class="feature"><em>Response:</em> The [[lookup @name lowercase]]{creature}
           reduces the damage it takes from the attack by [[/healing average]],
-          and if that damage is reduced to 0, the [[lookup @name lowercase]] can
+          and if that damage is reduced to 0, the [[lookup @name lowercase]]{creature} can
           redirect some of the attack's force.</p><p
           class="feature"><em>Dexterity Saving Throw:</em> DC [[lookup
           @save.dc.value activity=x0MjUmnv2OPAbm6y]], one [[lookup

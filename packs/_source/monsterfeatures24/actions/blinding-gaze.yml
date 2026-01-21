@@ -70,7 +70,7 @@ system:
   description:
     value: >-
       <p><em>Constitution Saving Throw:</em> DC [[lookup @save.dc.value
-      activity=B6xM8C2pABIb5o7y]], one creature the [[lookup @name lowercase]]
+      activity=B6xM8C2pABIb5o7y]], one creature the [[lookup @name lowercase]]{creature}
       can see within [[lookup @range.value activity=B6xM8C2pABIb5o7y]] feet.
       <em>Failure:</em> The target has the &amp;Reference[Blinded apply=false]
       condition for 1 minute. <em>Failure or Success:</em> The [[lookup @name

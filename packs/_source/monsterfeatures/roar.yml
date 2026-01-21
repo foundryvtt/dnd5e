@@ -8,10 +8,10 @@ system:
     value: >-
       <section class="secret">
 
-      <p>the [[lookup @name lowercase]] emits a magical roar. Each time it roars
+      <p>the [[lookup @name lowercase]]{creature} emits a magical roar. Each time it roars
       before finishing a long rest, the roar is louder and the effect is
       different, as detailed below. Each creature within 500 feet of the
-      [[lookup @name lowercase]] and able to hear the roar must make a saving
+      [[lookup @name lowercase]]{creature} and able to hear the roar must make a saving
       throw.</p><p>**First Roar.** Each creature that fails a <strong>DC 18
       Wisdom</strong> saving throw is frightened for 1 minute. A frightened
       creature can repeat the saving throw at the end of each of its turns,
@@ -27,9 +27,9 @@ system:
 
       </section>
 
-      <p>the [[lookup @name lowercase]] emits a magical roar. Each time it roars
+      <p>the [[lookup @name lowercase]]{creature} emits a magical roar. Each time it roars
       before finishing a long rest, the roar is louder and the effect is
-      different. Each creature within 500 feet of the [[lookup @name lowercase]]
+      different. Each creature within 500 feet of the [[lookup @name lowercase]]{creature}
       and able to hear the roar must make a saving throw.</p>
     chat: ''
   source:
