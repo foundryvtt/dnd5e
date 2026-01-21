@@ -141,16 +141,6 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
       }
     }
 
-    // If concentration is required, ensure it is still being maintained & GM is present
-    if ( !game.user.isGM && concentration && !concentration.isOwner ) {
-      if ( strict ) {
-        ui.notifications.error("DND5E.EffectApplyWarningConcentration", { console: false, localize: true });
-        return null;
-      } else {
-        concentration = null;
-      }
-    }
-
     const flags = { enchantmentProfile: profile };
     if ( concentration ) flags.dependentOn = concentration.uuid;
     const enchantmentData = effect.clone({ origin: this.uuid, "flags.dnd5e": flags }).toObject();
