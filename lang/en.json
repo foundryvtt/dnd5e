@@ -488,7 +488,8 @@
       },
       "restriction": {
         "level": {
-          "Available": "Any Available Level",
+          "Available": "Any Available Level (Including Cantrips)",
+          "AvailableNoCantrips": "Any Available Level (Excluding Cantrips)",
           "hint": "Only allow choices from spells of this level.",
           "label": "Spell Level"
         },
