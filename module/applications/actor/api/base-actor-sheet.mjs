@@ -241,12 +241,18 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       conditionIds.add(id);
       const existing = this.actor.effects.get(id);
       const { disabled } = existing ?? {};
-      arr.push({
+      const condition = {
         name, reference,
         id: k,
         img: existing?.img ?? img,
         disabled: existing ? disabled : true
-      });
+      };
+      // Add exhaustion level for exhaustion condition
+      if ( k === "exhaustion" ) {
+        condition.isExhaustion = true;
+        condition.exhaustionLevel = this.actor.system.attributes?.exhaustion ?? 0;
+      }
+      arr.push(condition);
       return arr;
     }, []);
 
