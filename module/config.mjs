@@ -4314,6 +4314,7 @@ DND5E.characterFlags = {
     name: "DND5E.FlagsRemarkableAthlete",
     hint: "DND5E.FlagsRemarkableAthleteHint",
     abilities: ["str", "dex", "con"],
+    skills: ["ath"],
     section: "DND5E.Feats",
     type: Boolean
   },
