@@ -128,6 +128,16 @@ export default class AttributesFields {
   /* -------------------------------------------- */
 
   /**
+   * Prepare the bloodied threshold.
+   * @this {CharacterData|NPCData}
+   */
+  static prepareBaseBloodied() {
+    this.attributes.bloodiedThreshold = CONFIG.DND5E.bloodied.threshold;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Initialize base encumbrance fields to be targeted by active effects.
    * @this {CharacterData|NPCData|VehicleData}
    */
