@@ -3,6 +3,7 @@ import FormulaField from "../../fields/formula-field.mjs";
 import MappingField from "../../fields/mapping-field.mjs";
 import DamageTraitField from "../fields/damage-trait-field.mjs";
 import SimpleTraitField from "../fields/simple-trait-field.mjs";
+import SizeField from "../fields/size-field.mjs";
 
 const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
@@ -20,7 +21,7 @@ export default class TraitsField {
    */
   static get common() {
     return {
-      size: new StringField({ required: true, initial: "med", label: "DND5E.Size" }),
+      size: new SizeField({ required: true, initial: "med", label: "DND5E.Size" }),
       di: new DamageTraitField({}, { label: "DND5E.DamImm" }),
       dr: new DamageTraitField({}, { label: "DND5E.DamRes" }),
       dv: new DamageTraitField({}, { label: "DND5E.DamVuln" }),
