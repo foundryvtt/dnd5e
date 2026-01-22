@@ -1141,8 +1141,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
     // Display warnings
     const warnings = this.element.querySelector(".window-header .preparation-warnings");
-    warnings?.toggleAttribute("hidden", (!game.user.isGM && this.actor.limited)
-      || !this.actor._preparationWarnings?.length);
+    warnings?.toggleAttribute("hidden", (!game.user.isGM && this.actor.limited) || !context.warnings?.length);
 
     if ( this.isEditable ) {
       // Class level changes
