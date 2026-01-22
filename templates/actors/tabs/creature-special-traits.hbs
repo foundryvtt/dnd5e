@@ -19,13 +19,15 @@
             <label>{{ localize label }}</label>
             <div class="form-fields">
                 {{#each fields}}
-                {{ formInput field name=name value=value choices=choices input=input disabled=@root.flags.disabled }}
+                {{ formInput field name=name value=value choices=choices placeholder=placeholder input=input
+                             disabled=@root.flags.disabled }}
                 {{/each}}
             </div>
             {{#if hint}}<p class="hint">{{ localize hint }}</p>{{/if}}
         </div>
         {{else}}
-        {{ formField field name=name value=value choices=choices input=input disabled=@root.flags.disabled }}
+        {{ formField field name=name value=value choices=choices placeholder=placeholder input=input
+                     disabled=@root.flags.disabled rootId=@root.partId }}
         {{/if}}
         {{/each}}
     </fieldset>
