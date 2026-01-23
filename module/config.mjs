@@ -4800,7 +4800,8 @@ DND5E.rules = {
   bloodied: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.shZaSIlFPpHufPFn",
   jumping: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.aaJOlRhI1H6vAxt9",
   resistance: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.Uk3xhCTvEfx8BN1O",
-  stable: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.klXWp4c90n7Kt5LB"
+  stable: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.klXWp4c90n7Kt5LB",
+  dead: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.OP0YhS6iOm4yfPIt"
 };
 
 /* -------------------------------------------- */
