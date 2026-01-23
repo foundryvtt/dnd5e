@@ -86,7 +86,9 @@ export default class VehicleData extends CommonTemplate {
         }, { label: "DND5E.VEHICLE.FIELDS.attributes.capacity.label" }),
         price: new SchemaField({
           value: new NumberField({ initial: null, min: 0, label: "DND5E.Price" }),
-          denomination: new StringField({ required: true, blank: false, initial: "gp", label: "DND5E.Currency" })
+          denomination: new StringField({
+            required: true, blank: false, initial: () => CONFIG.DND5E.defaultCurrency, label: "DND5E.Currency"
+          })
         }, { label: "DND5E.Price" }),
         quality: new SchemaField({
           value: new NumberField({ required: true, nullable: false, integer: true, min: -10, max: 10, initial: 4 })

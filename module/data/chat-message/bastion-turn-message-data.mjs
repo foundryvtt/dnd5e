@@ -135,9 +135,9 @@ export default class BastionTurnMessageData extends ChatMessageDataModel {
    * @param {HTMLElement} target  Button that was clicked.
    */
   static async #onClaimGold(event, target) {
-    const { gp } = this.actor?.system.currency ?? {};
+    const gp = this.actor?.system.currency?.[CONFIG.DND5E.defaultCurrency];
     if ( !this.gold.value || this.gold.claimed || (gp === undefined) ) return;
-    await this.actor.update({ "system.currency.gp": gp + this.gold.value });
+    await this.actor.update({ [`system.currency.${CONFIG.DND5E.defaultCurrency}`]: gp + this.gold.value });
     this.parent.update({ "system.gold.claimed": true });
   }
 

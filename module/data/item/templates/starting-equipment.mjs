@@ -61,7 +61,9 @@ export default class StartingEquipmentTemplate extends SystemDataModel {
       || (!this.source.rules && (dnd5e.settings.rulesVersion === "modern"));
     if ( modernStyle ) {
       const entries = topLevel[0].type === "OR" ? topLevel[0].children : topLevel;
-      if ( this.wealth ) entries.push(new EquipmentEntryData({ type: "currency", key: "gp", count: this.wealth }));
+      if ( this.wealth ) entries.push(new EquipmentEntryData({
+        type: "currency", key: CONFIG.DND5E.defaultCurrency, count: this.wealth
+      }));
       if ( entries.length > 1 ) {
         const usedPrefixes = [];
         const choices = EquipmentEntryData.prefixOrEntries(
