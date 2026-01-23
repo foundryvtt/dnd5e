@@ -74,7 +74,7 @@ export default class NPCData extends CreatureTemplate {
         }, { label: "DND5E.DeathSave" }),
         price: new SchemaField({
           value: new NumberField({ initial: null, min: 0 }),
-          denomination: new StringField({ required: true, blank: false, initial: "gp" })
+          denomination: new StringField({ required: true, blank: false, initial: () => CONFIG.DND5E.defaultCurrency })
         }),
         spell: new SchemaField({
           level: new NumberField({

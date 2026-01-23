@@ -2107,6 +2107,14 @@ preLocalize("currencies", { keys: ["label", "abbreviation"] });
 /* -------------------------------------------- */
 
 /**
+ * Default currency used for data model defaults, starting wealth, and facility prices.
+ * @enum {string}
+ */
+DND5E.defaultCurrency = "gp";
+
+/* -------------------------------------------- */
+
+/**
  * Configuration data for crafting costs.
  * @type {CraftingConfiguration}
  */
