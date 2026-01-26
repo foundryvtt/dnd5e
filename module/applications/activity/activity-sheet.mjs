@@ -302,7 +302,10 @@ export default class ActivitySheet extends PseudoDocumentSheet {
       ];
       let typeOptions = Object.entries(CONFIG.DND5E.damageTypes).map(([value, config]) => ({ ...config, value }));
       const [other, physical] = typeOptions.partition(config => !!config.isPhysical);
-      typeOptions = [...physical, { rule: true }, ...other];
+      typeOptions = [
+        ...physical, { rule: true }, ...other, { rule: true },
+        { value: "maximum", label: "DND5E.HEAL.Type.Maximum" }
+      ];
       const makePart = (data, index) => this._prepareDamagePartContext(context, {
         data, index, scalingOptions, typeOptions,
         locked: data.locked || (index === undefined),

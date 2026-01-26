@@ -555,7 +555,10 @@ export default class WeaponData extends ItemDataModel.mixin(
       };
     });
     const [other, physical] = typeOptions.partition(config => !!config.isPhysical);
-    context.damageTypes = [...physical, { rule: true }, ...other];
+    context.damageTypes = [
+      ...physical, { rule: true }, ...other, { rule: true },
+      { value: "maximum", label: "DND5E.HEAL.Type.Maximum" }
+    ];
     const makeDenominationOptions = placeholder => [
       { value: "", label: placeholder ? `d${placeholder}` : "" },
       { rule: true },
