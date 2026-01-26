@@ -757,11 +757,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     damages = this.calculateDamage(damages, options);
     if ( !damages ) return this;
 
-    const { amount, temp } = damages;
+    const { amount, temp, tempMax } = damages;
     const deltaTemp = amount > 0 ? Math.min(hp.temp, amount) : 0;
-    const deltaHP = Math.clamp(amount - deltaTemp, -hp.damage, hp.value);
+    const deltaHP = Math.clamp(amount - deltaTemp, -hp.damage + tempMax, hp.value - tempMax);
     const updates = {
       "system.attributes.hp.temp": hp.temp - deltaTemp,
+      "system.attributes.hp.tempmax": hp.tempmax - tempMax,
       "system.attributes.hp.value": hp.value - deltaHP
     };
 
@@ -816,6 +817,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     damages = foundry.utils.deepClone(damages);
     damages.amount = 0;
     damages.temp = 0;
+    damages.tempMax = 0;
 
     /**
      * A hook event that fires before damage amount is calculated for an actor.
@@ -829,8 +831,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( Hooks.call("dnd5e.preCalculateDamage", this, damages, options) === false ) return false;
 
     const multiplier = options.multiplier ?? 1;
+    const treatAs = options.originatingMessage?.flags?.dnd5e?.roll?.type
+      ? options.originatingMessage.flags.dnd5e.roll.type === "healing" ? "healing" : "damage"
+      : options.only ?? "damage";
 
     const skipped = type => {
+      if ( type === "maximum" ) return options.only ? options.only !== treatAs : false;
       if ( options.only === "damage" ) return type in CONFIG.DND5E.healingTypes;
       if ( options.only === "healing" ) return type in CONFIG.DND5E.damageTypes;
       return false;
@@ -885,10 +891,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       d.value = d.value * damageMultiplier;
       d.active.multiplier = (d.active.multiplier ?? 1) * damageMultiplier;
       if ( d.type === "temphp" ) damages.temp += d.value;
+      else if ( d.type === "maximum" ) damages.tempMax += d.value * (treatAs === "healing" ? -1 : 1);
       else damages.amount += d.value;
     });
 
     damages.amount = damages.amount > 0 ? Math.floor(damages.amount) : Math.ceil(damages.amount);
+    if ( damages.tempMax < 0 ) damages.amount += damages.tempMax;
 
     // Apply damage threshold
     if ( ((damages.amount > 0) && (damages.amount < (this.system.attributes?.hp?.dt ?? -Infinity)))

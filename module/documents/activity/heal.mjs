@@ -64,6 +64,18 @@ export default class HealActivity extends ActivityMixin(BaseHealActivityData) {
   }
 
   /* -------------------------------------------- */
+  /*  Rolling                                     */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async rollDamage(config={}, dialog={}, message={}) {
+    const messageConfig = foundry.utils.mergeObject({
+      ["data.flags.dnd5e.roll.type"]: "healing"
+    }, message);
+    return super.rollDamage(config, dialog, messageConfig);
+  }
+
+  /* -------------------------------------------- */
   /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 

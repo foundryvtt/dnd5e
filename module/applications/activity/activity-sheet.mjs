@@ -300,7 +300,11 @@ export default class ActivitySheet extends PseudoDocumentSheet {
         { value: "", label: game.i18n.localize("DND5E.DAMAGE.Scaling.None") },
         ...Object.entries(CONFIG.DND5E.damageScalingModes).map(([value, { [scaleKey]: label }]) => ({ value, label }))
       ];
-      const typeOptions = Object.entries(CONFIG.DND5E.damageTypes).map(([value, { label }]) => ({ value, label }));
+      const typeOptions = [
+        ...Object.entries(CONFIG.DND5E.damageTypes).map(([value, { label }]) => ({ value, label })),
+        { rule: true },
+        { value: "maximum", label: "DND5E.HEAL.Type.Maximum" }
+      ];
       const makePart = (data, index) => this._prepareDamagePartContext(context, {
         data, index, scalingOptions, typeOptions,
         locked: data.locked || (index === undefined),

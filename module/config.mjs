@@ -2334,6 +2334,11 @@ DND5E.healingTypes = {
     label: "DND5E.HealingTemp",
     icon: "systems/dnd5e/icons/svg/damage/temphp.svg",
     color: new Color(0x4B66DE)
+  },
+  maximum: {
+    label: "DND5E.HEAL.Type.Maximum",
+    icon: "systems/dnd5e/icons/svg/damage/maxhp.svg",
+    color: new Color(0x4BDEDE)
   }
 };
 preLocalize("healingTypes", { keys: ["label"] });
