@@ -170,16 +170,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       foundry.utils.setProperty(data, "flags.dnd5e.persistSourceMigration", true);
     }
 
-    else if ( (data.type === "base") && data.statuses.includes(CONFIG.specialStatusEffects.CONCENTRATING) ) {
-      // TODO: Hold concentration-based effects back to be migrated to activation-type effects
-      // See: https://github.com/foundryvtt/dnd5e/issues/4425
-    }
-
-    else if ( data.type === "base" ) {
-      data.type = "standard";
-      foundry.utils.setProperty(data, "flags.dnd5e.persistSourceMigration", true);
-    }
-
     return super._initializeSource(data, options);
   }
 

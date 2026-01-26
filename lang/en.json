@@ -22,9 +22,7 @@
 
 "TYPES.ActiveEffect": {
   "enchantment": "Enchantment",
-  "enchantmentPl": "Enchantments",
-  "standard": "Effect",
-  "standardPl": "Effects"
+  "enchantmentPl": "Enchantments"
 },
 
 "TYPES.ChatMessage": {
@@ -2224,6 +2222,14 @@
       "Ownership": "Effects cannot be applied to tokens you are not the owner of."
     }
   },
+  "BASE": {
+    "FIELDS": {
+      "magical": {
+        "hint": "This effect is from a magical source and should be disabled when magic isn't available.",
+        "label": "Magical"
+      }
+    }
+  },
   "Empty": "No associated effects. Use the <i class=\"fas fa-plus\"></i> button above to create one, or select an existing effect from the drop-down.",
   "Label": "Available Effects",
   "RIDER": {
@@ -2235,14 +2241,6 @@
           "hint": "When this Active Effect is applied, these additional status conditions will be applied separately.",
           "label": "Separate Status Conditions"
         }
-      }
-    }
-  },
-  "STANDARD": {
-    "FIELDS": {
-      "magical": {
-        "hint": "This effect is from a magical source and should be disabled when magic isn't available.",
-        "label": "Magical"
       }
     }
   },

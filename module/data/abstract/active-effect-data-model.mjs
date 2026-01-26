@@ -1,11 +1,8 @@
-const { ActiveEffectTypeDataModel } = foundry.data;
-const { TypeDataModel } = foundry.abstract;
-
 /**
  * Abstract base class to add some shared functionality to all of the system's custom active effect types.
  * @abstract
  */
-export default class ActiveEffectDataModel extends (ActiveEffectTypeDataModel ?? TypeDataModel) {
+export default class ActiveEffectDataModel extends foundry.data.ActiveEffectTypeDataModel {
   /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
