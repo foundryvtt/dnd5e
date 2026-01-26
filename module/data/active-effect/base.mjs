@@ -3,28 +3,28 @@ import ActiveEffectDataModel from "../abstract/active-effect-data-model.mjs";
 const { BooleanField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @import { StandardActiveEffectSystemData } from "./types.mjs";
+ * @import { baseActiveEffectSystemData } from "./types.mjs";
  */
 
 /**
- * System data model for standard active effects.
- * @extends {ActiveEffectDataModel<StandardActiveEffectSystemData>}
- * @mixes StandardActiveEffectSystemData
+ * System data model for base active effects.
+ * @extends {ActiveEffectDataModel<baseActiveEffectSystemData>}
+ * @mixes baseActiveEffectSystemData
  */
-export default class StandardEffectData extends ActiveEffectDataModel {
+export default class baseEffectData extends ActiveEffectDataModel {
   /* -------------------------------------------- */
   /*  Model Configuration                         */
   /* -------------------------------------------- */
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.EFFECT.STANDARD", "DND5E.EFFECT.RIDER"];
+  static LOCALIZATION_PREFIXES = ["DND5E.EFFECT.BASE", "DND5E.EFFECT.RIDER"];
 
   /* -------------------------------------------- */
 
   /** @override */
   static defineSchema() {
     return {
-      ...(foundry.data.ActiveEffectTypeDataModel ? super.defineSchema() : {}),
+      ...super.defineSchema(),
       magical: new BooleanField(),
       rider: new SchemaField({
         statuses: new SetField(new StringField())

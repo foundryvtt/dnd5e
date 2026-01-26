@@ -25,7 +25,7 @@ export default class EnchantmentData extends ActiveEffectDataModel {
   /** @override */
   static defineSchema() {
     return {
-      ...(foundry.data.ActiveEffectTypeDataModel ? super.defineSchema() : {}),
+      ...super.defineSchema(),
       magical: new BooleanField({ initial: true })
     };
   }
