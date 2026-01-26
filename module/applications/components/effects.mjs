@@ -282,7 +282,7 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
     const isActor = this.document instanceof Actor;
     const isEnchantment = li.dataset.effectType.startsWith("enchantment");
     return this.document.createEmbeddedDocuments("ActiveEffect", [{
-      type: isEnchantment ? "enchantment" : "standard",
+      type: isEnchantment ? "enchantment" : "base",
       name: isActor ? game.i18n.localize("DND5E.EffectNew") : this.document.name,
       icon: isActor ? "icons/svg/aura.svg" : this.document.img,
       origin: isEnchantment ? undefined : this.document.uuid,
