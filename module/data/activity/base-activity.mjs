@@ -576,7 +576,11 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
 
     if ( this.activation ) this._setOverride("activation");
     if ( this.duration ) this._setOverride("duration");
-    if ( this.range ) this._setOverride("range");
+    if ( this.range ) {
+      this._setOverride("range");
+      if ( this.range.long > this.range.value ) this.range.value = this.range.long;
+      else if ( this.range.reach && !this.range.value ) this.range.value = this.range.reach;
+    }
     if ( this.target ) this._setOverride("target");
 
     Object.defineProperty(this, "_inferredSource", {

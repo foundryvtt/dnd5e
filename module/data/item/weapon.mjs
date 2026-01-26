@@ -487,6 +487,7 @@ export default class WeaponData extends ItemDataModel.mixin(
     else if ( this.range.reach === null ) {
       this.range.reach = convertLength(this.properties.has("rch") ? 10 : 5, "ft", this.range.units, { strict: false });
     }
+    if ( !this.hasRange ) this.range.value = this.range.long = null;
   }
 
   /* -------------------------------------------- */
