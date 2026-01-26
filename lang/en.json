@@ -1997,6 +1997,7 @@
 "DND5E.Current": "Current",
 
 "DND5E.DAMAGE": {
+  "All": "All Damage",
   "FIELDS": {
     "damage": {
       "label": "Damage",
@@ -2070,6 +2071,12 @@
       "Delete": "Delete Damage Part"
     }
   },
+  "PhysicalBypass": {
+    "Description": "{damageTypes} from attacks that are not {bypassTypes}",
+    "DescriptionShort": "Bypassed by {type} Sources",
+    "Hint": "These weapon properties will bypass damage resistance for physical damage.",
+    "Label": "Physical Bypasses"
+  },
   "Scaling": {
     "Half": "Every Other Level",
     "HalfCantrip": "Half Cantrip Scaling",
@@ -2077,22 +2084,7 @@
     "Whole": "Every Level",
     "WholeCantrip": "Cantrip Scaling"
   },
-  "Title": "Damage"
-},
-
-"DND5E.DamImm": "Damage Immunities",
-"DND5E.DamMod": "Damage Modification",
-"DND5E.DamRes": "Damage Resistances",
-"DND5E.DamVuln": "Damage Vulnerabilities",
-
-"DND5E.DAMAGE": {
-  "All": "All Damage",
-  "PhysicalBypass": {
-    "Description": "{damageTypes} from attacks that are not {bypassTypes}",
-    "DescriptionShort": "Bypassed by {type} Sources",
-    "Hint": "These weapon properties will bypass damage resistance for physical damage.",
-    "Label": "Physical Bypasses"
-  },
+  "Title": "Damage",
   "Type": {
     "Acid": "Acid",
     "Bludgeoning": "Bludgeoning",
@@ -2109,6 +2101,11 @@
     "Thunder": "Thunder"
   }
 },
+
+"DND5E.DamImm": "Damage Immunities",
+"DND5E.DamMod": "Damage Modification",
+"DND5E.DamRes": "Damage Resistances",
+"DND5E.DamVuln": "Damage Vulnerabilities",
 
 "DND5E.Damage": "Damage",
 "DND5E.DamageApplication": {
