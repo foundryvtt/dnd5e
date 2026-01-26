@@ -4282,6 +4282,12 @@ DND5E.characterFlags = {
     section: "DND5E.RacialTraits",
     type: Boolean
   },
+  ignoreArmorSpeedReduction: {
+    name: "DND5E.FLAGS.IgnoreArmorSpeedReduction.Name",
+    hint: "DND5E.FLAGS.IgnoreArmorSpeedReduction.Hint",
+    section: "DND5E.RacialTraits",
+    type: Boolean
+  },
   initiativeAlert: {
     name: "DND5E.FlagsAlert",
     hint: "DND5E.FlagsAlertHint",
