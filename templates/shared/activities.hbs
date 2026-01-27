@@ -9,6 +9,7 @@
             {{!-- Section Header --}}
             <div class="items-header header">
                 <h3 class="item-name activity-name">{{ localize "DND5E.ACTIVITY.Title.other" }}</h3>
+                <div class="item-header item-uses">{{ localize "DND5E.Charges" }}</div>
                 <div class="item-header item-controls activity-controls"></div>
             </div>
 
@@ -65,6 +66,9 @@
     </div>
 
 </div>
+
+{{!-- Uses --}}
+{{> "systems/dnd5e/templates/inventory/columns/uses.hbs" ctx=this entry=this }}
 
 {{!-- Controls --}}
 <div class="item-detail item-controls activity-controls always-visible">
