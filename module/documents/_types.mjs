@@ -60,6 +60,7 @@
  * @property {boolean} [invertHealing=true]  Automatically invert healing types to it heals, rather than damages.
  * @property {"damage"|"healing"} [only]     Apply only damage or healing parts. Untyped rolls will always be applied.
  * @property {boolean} [isDelta]             Whether the damage is coming from a relative change.
+ * @property {ChatMessage5e} [originatingMessage]          The associated chat message.
  */
 
 /**
