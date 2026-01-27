@@ -4736,15 +4736,20 @@
         "label": "Customize",
         "hint": "Use custom transformation settings rather than the defaults provided by the selected preset."
       },
+      "formless": {
+        "hint": "Allow creature to remove all forms and return to a default state.",
+        "label": "Formless"
+      },
       "identifier": {
         "label": "Class Identifier",
         "hint": "Identifier used to determine whether the character level or a specific class level should be used for profile level limits."
       },
       "mode": {
         "label": "Mode",
-        "hint": "Sets how the transformation source creatures are selected.",
-        "CR": "By Challenge Rating",
-        "Direct": "By Direct Link"
+        "hint": "Sets how the transformation changes are determined.",
+        "CR": "Creature Stats (by Challenge Rating)",
+        "Direct": "Creature Stats (by Direct Link)",
+        "Form": "Select Form"
       },
       "preset": {
         "label": "Preset"
@@ -4752,6 +4757,7 @@
     }
   },
   "Hint": "Change an actor using the stats of another.",
+  "NoForm": "No Form",
   "Preset": {
     "Appearance": {
       "Label": "Appearance Only"

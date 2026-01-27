@@ -48,6 +48,7 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
    * @type {boolean}
    */
   get canTransform() {
+    if ( this.transform.mode === "form" ) return this.actor.isOwner;
     return game.user.can("ACTOR_CREATE") && (game.user.isGM || game.settings.get("dnd5e", "allowPolymorphing"));
   }
 
@@ -59,7 +60,7 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
   _prepareUsageConfig(config) {
     config = super._prepareUsageConfig(config);
     config.transform ??= {};
-    config.transform.profile ??= this.availableProfiles[0]?._id ?? null;
+    config.transform.profile ??= this.currentProfile ?? this.availableProfiles[0]?._id ?? null;
     return config;
   }
 
@@ -78,6 +79,7 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
     if ( usageConfig.transform?.profile ) {
       foundry.utils.setProperty(messageConfig.data, "flags.dnd5e.transform.profile", usageConfig.transform.profile);
     }
+    delete messageConfig.data.flags?.dnd5e?.use?.effects;
   }
 
   /* -------------------------------------------- */
@@ -85,8 +87,11 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
   /** @override */
   _usageChatButtons(message) {
     if ( !this.availableProfiles.length ) return super._usageChatButtons(message);
+    const form = this.transform.mode === "form"
+      ? this.effects.find(e => e._id === message.data?.flags?.dnd5e?.transform?.profile)?.effect?.name
+        ?? game.i18n.localize("DND5E.TRANSFORM.NoForm") : null;
     return [{
-      label: game.i18n.localize("DND5E.TRANSFORM.Action.Transform"),
+      label: form ?? game.i18n.localize("DND5E.TRANSFORM.Action.Transform"),
       icon: '<i class="fa-solid fa-frog" inert></i>',
       dataset: {
         action: "transformActor"
@@ -106,12 +111,14 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
 
   /** @inheritDoc */
   async _finalizeUsage(config, results) {
-    const profile = this.profiles.find(p => p._id === config.transform?.profile);
-    if ( profile ) {
-      const uuid = !this.transform.mode ? profile.uuid : await this.queryActor(profile);
-      if ( uuid ) {
-        if ( results.message instanceof ChatMessage ) results.message.setFlag("dnd5e", "transform.uuid", uuid);
-        else foundry.utils.setProperty(results.message, "flags.dnd5e.transform.uuid", uuid);
+    if ( this.transform.mode !== "form" ) {
+      const profile = this.profiles.find(p => p._id === config.transform?.profile);
+      if ( profile ) {
+        const uuid = !this.transform.mode ? profile.uuid : await this.queryActor(profile);
+        if ( uuid ) {
+          if ( results.message instanceof ChatMessage ) results.message.setFlag("dnd5e", "transform.uuid", uuid);
+          else foundry.utils.setProperty(results.message, "flags.dnd5e.transform.uuid", uuid);
+        }
       }
     }
     await super._finalizeUsage(config, results);
@@ -140,6 +147,16 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
   }
 
   /* -------------------------------------------- */
+
+  /** @override */
+  async _triggerSubsequentActions(config, results) {
+    if ( this.transform.mode !== "form" ) return;
+    const profile = results.message?.flags?.dnd5e?.transform?.profile
+      ?? results.message?.data?.flags?.dnd5e?.transform?.profile
+    this.#transformToForm(profile);
+  }
+
+  /* -------------------------------------------- */
   /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
@@ -151,6 +168,11 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
    * @param {ChatMessage5e} message  Message associated with the activation.
    */
   static async #transformActor(event, target, message) {
+    if ( this.transform.mode === "form" ) {
+      this.#transformToForm(message.getFlag("dnd5e", "transform.profile"));
+      return;
+    }
+
     const targets = getSceneTargets();
     if ( !targets.length && game.user.character ) targets.push(game.user.character);
     if ( !targets.length ) {
@@ -171,6 +193,29 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
       const actor = token instanceof Actor ? token : token.actor;
       await actor.transformInto(source, this.settings);
       // TODO: Create message for transformed actors
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle transforming the actor to a specific form.
+   * @param {string} [profileId]  ID of the profile into which to transform.
+   */
+  async #transformToForm(profileId) {
+    if ( this.transform.mode !== "form" ) return;
+    const profile = this.applicableEffects.find(e => e._id === profileId);
+    // TODO: Not sure this is the best actor selection logic
+    const targets = getSceneTargets(this.actor).map(t => t.actor);
+    if ( !targets.length ) targets.push(this.actor);
+    for ( const target of targets ) {
+      const item = target.items.get(this.item.id);
+      if ( !item ) continue;
+      await item.updateEmbeddedDocuments("ActiveEffect", this.effects
+        .map(e => e.effect
+          ? { _id: e.effect.id, disabled: e.effect.id !== profileId, transfer: e.effect.id === profileId } : null)
+        .filter(_ => _)
+      );
     }
   }
 }

@@ -1,11 +1,14 @@
 <fieldset>
     <legend>
-        <span>{{ localize "DND5E.ACTIVITY.FIELDS.effects.label" }}</span>
+        <span>{{ localize (ifThen effects.title effects.title "DND5E.ACTIVITY.FIELDS.effects.label") }}</span>
         <button type="button" class="unbutton control-button" data-action="addEffect"
                 data-tooltip aria-label="{{ localize "DND5E.EFFECT.Action.Create" }}">
             <i class="fas fa-plus" inert></i>
         </button>
     </legend>
+    {{#if effects.fields.length}}
+    {{> "dnd5e.fieldlist" effects.fields }}
+    {{/if}}
     <multi-select name="appliedEffects" class="hidden-tags">
         {{ selectOptions allEffects }}
     </multi-select>
