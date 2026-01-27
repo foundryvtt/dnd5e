@@ -661,6 +661,9 @@ export default class CharacterActorSheet extends BaseActorSheet {
       const favorite = await fromUuid(id, { relative: this.actor });
       if ( !favorite && ((type === "item") || (type === "effect") || (type === "activity")) ) return arr;
       if ( favorite?.dependentOrigin?.active === false ) return arr;
+      if ( ((type === "item") && this.actor.hiddenItems.has(favorite.id))
+        || ((type === "effect") && this.actor.hiddenItems.has(favorite.parent?.id))
+        || ((type === "activity") && this.actor.hiddenItems.has(favorite.item?.id)) ) return arr;
       arr = await arr;
 
       let data;
