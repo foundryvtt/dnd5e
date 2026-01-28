@@ -33,13 +33,22 @@ export default class RangeField extends SchemaField {
       prepareFormulaValue(this, "range.value", "DND5E.RANGE.FIELDS.range.value.label", rollData);
     } else this.range.value = null;
 
-    if ( labels && this.range.units ) {
+    this.range.labels ??= {};
+    if ( this.range.units ) {
       if ( this.range.scalar && this.range.value ) {
-        labels.range = formatLength(this.range.value, this.range.units);
-        labels.rangeParts = formatLength(this.range.value, this.range.units, { parts: true });
+        this.range.labels.range = formatLength(this.range.value, this.range.units);
+        this.range.labels.rangeParts = formatLength(this.range.value, this.range.units, { parts: true });
+        this.range.labels.description = formatLength(this.range.value, this.range.units, { unitDisplay: "long" });
       } else if ( !this.range.scalar ) {
-        labels.range = CONFIG.DND5E.distanceUnits[this.range.units];
+        this.range.labels.range = CONFIG.DND5E.distanceUnits[this.range.units];
       }
-    } else if ( labels ) labels.range = game.i18n.localize("DND5E.DistSelf");
+    } else this.range.labels.range = game.i18n.localize("DND5E.DistSelf");
+
+    if ( labels ) {
+      labels.description ??= {};
+      labels.description.range ||= this.range.labels.description;
+      labels.range ||= this.range.labels.range;
+      labels.rangeParts ||= this.range.labels.rangeParts;
+    }
   }
 }
