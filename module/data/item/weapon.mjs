@@ -1,6 +1,7 @@
 import { convertLength, defaultUnits, filteredKeys, formatLength, formatNumber } from "../../utils.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import BaseActivityData from "../activity/base-activity.mjs";
+import FormulaField from "../fields/formula-field.mjs";
 import DamageField from "../shared/damage-field.mjs";
 import ItemTypeField from "./fields/item-type-field.mjs";
 import ActivitiesTemplate from "./templates/activities.mjs";
@@ -64,7 +65,7 @@ export default class WeaponData extends ItemDataModel.mixin(
         base: new DamageField(),
         versatile: new DamageField()
       }),
-      magicalBonus: new NumberField({ min: 0, integer: true, label: "DND5E.MagicalBonus" }),
+      magicalBonus: new FormulaField({ deterministic: true, label: "DND5E.MagicalBonus" }),
       mastery: new StringField(),
       properties: new SetField(new StringField(), { label: "DND5E.ItemWeaponProperties" }),
       proficient: new NumberField({
