@@ -205,6 +205,7 @@ export default class ClassData extends ItemDataModel.mixin(
   prepareDerivedData() {
     super.prepareDerivedData();
     this.prepareDescriptionData();
+    this.tier = Math.ceil((this.levels - 4) / 6) + 1;
   }
 
   /* -------------------------------------------- */
