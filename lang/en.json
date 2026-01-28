@@ -826,22 +826,74 @@
   }
 },
 "DND5E.Armor": "Armor",
+
+"DND5E.ARMORCLASS": {
+  "Action": {
+    "Configure": "Configure Armor",
+    "CreateFormula": "Create Custom Formula",
+    "DeleteFormula": "Delete Custom Formula"
+  },
+  "Calculation": {
+    "Armored": "Equipped Armor",
+    "Draconic": "Draconic Resilience",
+    "Label": "Calculation",
+    "Mage": "Mage Armor",
+    "Natural": "Natural Armor",
+    "Unarmored": "Unarmored",
+    "UnarmoredBarbarian": "Unarmored Defense (Barbarian)",
+    "UnarmoredBard": "Unarmored Defense (Bard)",
+    "UnarmoredMonk": "Unarmored Defense (Monk)"
+  },
+  "Condition": {
+    "Positive": "Must have {type}",
+    "Negative": "Must not have {type}"
+  },
+  "Configuration": "Configuration",
+  "CurrentFormula": "Current Formula",
+  "CustomFormulas": {
+    "Empty": "No custom formulas. Use the <i class=\"fas fa-plus\"></i> button above to create one."
+  },
+  "FIELDS": {
+    "attributes": {
+      "ac": {
+        "flat": {
+          "hint": "Number that can be used in an armor class by using @attributes.ac.flat in the formula.",
+          "label": "Flat Value"
+        },
+        "formulas": {
+          "element": {
+            "armored": {
+              "label": "Armored"
+            },
+            "formula": {
+              "label": "Formula"
+            },
+            "label": {
+              "label": "Label"
+            },
+            "shielded": {
+              "label": "Shielded"
+            }
+          },
+          "label": "Formulas"
+        },
+        "label": "Armor Class",
+        "override": {
+          "hint": "Value that will be used in place of calulated armor class, ignoring cover, shield, and any other bonuses.",
+          "label": "Override"
+        },
+        "selectedFormulas": {
+          "hint": "These formulas will be used when calculating armor class.",
+          "label": "Selected Formulas"
+        }
+      }
+    }
+  },
+  "Flat": "Flat",
+  "Formula": "Formula"
+},
+
 "DND5E.ArmorClass": "Armor Class",
-"DND5E.ArmorClassEquipment": "Equipped Armor",
-"DND5E.ArmorClassFlat": "Flat",
-"DND5E.ArmorClassUnarmored": "Unarmored",
-"DND5E.ArmorClassNatural": "Natural Armor",
-"DND5E.ArmorClassMage": "Mage Armor",
-"DND5E.ArmorClassMotionless": "Armor Class while Motionless",
-"DND5E.ArmorClassDraconic": "Draconic Resilience",
-"DND5E.ArmorClassUnarmoredMonk": "Unarmored Defense (Monk)",
-"DND5E.ArmorClassUnarmoredBarbarian": "Unarmored Defense (Barbarian)",
-"DND5E.ArmorClassUnarmoredBard": "Unarmored Defense (Bard)",
-"DND5E.ArmorClassCustom": "Custom Formula",
-"DND5E.ArmorConfig": "Configure Armor",
-"DND5E.ArmorConfigHint": "Fill in the above box to override automatically calculated armor class.",
-"DND5E.ArmorClassCalculation": "Calculation",
-"DND5E.ArmorClassFormula": "Formula",
 "DND5E.ArmorHeavyProficiency": "Heavy",
 "DND5E.ArmorLightProficiency": "Light",
 "DND5E.ArmorMediumProficiency": "Medium",

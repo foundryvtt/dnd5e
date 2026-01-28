@@ -2593,51 +2593,36 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const cfg = CONFIG.DND5E.armorClasses[ac.calc];
     const attribution = [];
 
-    if ( ac.calc === "flat" ) {
+    if ( ac.override ) {
       attribution.push({
-        label: game.i18n.localize("DND5E.ArmorClassFlat"),
+        label: game.i18n.localize("DND5E.ARMORCLASS.Flat"),
         mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-        value: ac.flat
+        value: ac.override
       });
       return new PropertyAttribution(this, attribution, "attributes.ac", { title }).renderTooltip();
     }
 
     // Base AC Attribution
-    switch ( ac.calc ) {
-
-      // Natural armor
-      case "natural":
-        attribution.push({
-          label: game.i18n.localize("DND5E.ArmorClassNatural"),
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: ac.flat
-        });
-        break;
-
-      default:
-        const formula = ac.calc === "custom" ? ac.formula : cfg.formula;
-        let base = ac.base;
-        const dataRgx = new RegExp(/@([a-z.0-9_-]+)/gi);
-        for ( const [match, term] of formula.matchAll(dataRgx) ) {
-          const value = String(foundry.utils.getProperty(rollData, term));
-          if ( (term === "attributes.ac.armor") || (value === "0") ) continue;
-          if ( Number.isNumeric(value) ) base -= Number(value);
-          attribution.push({
-            label: match,
-            mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-            value
-          });
-        }
-        const armorInFormula = formula.includes("@attributes.ac.armor");
-        let label = game.i18n.localize("DND5E.PropertyBase");
-        if ( armorInFormula ) label = this.armor?.name ?? game.i18n.localize("DND5E.ArmorClassUnarmored");
-        attribution.unshift({
-          label,
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: base
-        });
-        break;
+    let base = ac.base;
+    const dataRgx = new RegExp(/@([a-z.0-9_-]+)/gi);
+    for ( const [match, term] of ac.formula.matchAll(dataRgx) ) {
+      const value = String(foundry.utils.getProperty(rollData, term));
+      if ( (term === "attributes.ac.armor") || (value === "0") ) continue;
+      if ( Number.isNumeric(value) ) base -= Number(value);
+      attribution.push({
+        label: match,
+        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        value
+      });
     }
+    const armorInFormula = ac.formula.includes("@attributes.ac.armor");
+    let label = ac.label || game.i18n.localize("DND5E.PropertyBase");
+    if ( armorInFormula ) label = this.armor?.name ?? game.i18n.localize("DND5E.ARMORCLASS.Calculation.Unarmored");
+    attribution.unshift({
+      label,
+      mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+      value: base
+    });
 
     // Shield
     if ( ac.shield !== 0 ) attribution.push({

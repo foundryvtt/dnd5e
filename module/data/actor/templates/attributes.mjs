@@ -23,15 +23,30 @@ export default class AttributesFields {
    */
   static get armorClass() {
     return {
-      flat: new NumberField({ required: true, integer: true, min: 0, label: "DND5E.ArmorClassFlat" }),
+      flat: new NumberField({
+        required: true, integer: true, min: 0, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.flat.label",
+        hint: "DND5E.ARMORCLASS.FIELDS.attributes.ac.flat.hint"
+      }),
       formulas: new ArrayField(new SchemaField({
-        armored: new BooleanField({ nullable: true, initial: null }),
-        formula: new FormulaField({ deterministic: true }),
-        label: new StringField(),
-        shielded: new BooleanField({ nullable: true, initial: null })
+        armored: new BooleanField({
+          nullable: true, initial: null, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.formulas.element.armored.label"
+        }),
+        formula: new FormulaField({
+          deterministic: true, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.formulas.element.formula.label"
+         }),
+        label: new StringField({ label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.formulas.element.label.label" }),
+        shielded: new BooleanField({
+          nullable: true, initial: null, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.formulas.element.shielded.label"
+        })
       })),
-      override: new NumberField({ min: 0, integer: true }),
-      selectedFormulas: new SetField(new StringField(), { initial: ["unarmored", "armored"] })
+      override: new NumberField({
+        min: 0, integer: true, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.override.label",
+        hint: "DND5E.ARMORCLASS.FIELDS.attributes.ac.override.hint"
+      }),
+      selectedFormulas: new SetField(new StringField(), {
+        initial: ["unarmored", "armored"], label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.selectedFormulas.label",
+        hint: "DND5E.ARMORCLASS.FIELDS.attributes.ac.selectedFormulas.hint"
+      })
     };
   }
 
@@ -120,7 +135,7 @@ export default class AttributesFields {
     switch ( ac.calc ) {
       case "custom":
         ac.formulas ??= [];
-        ac.formulas.push(ac.formula);
+        ac.formulas.push({ formula: ac.formula });
         break;
       case "flat":
         ac.override = ac.flat;
@@ -186,6 +201,7 @@ export default class AttributesFields {
    */
   static prepareArmorClass(rollData) {
     const ac = this.attributes.ac;
+    ac.flat ||= 0;
 
     // Add selected formulas
     const baseFormulas = Object.entries(CONFIG.DND5E.armorClasses)
@@ -231,6 +247,7 @@ export default class AttributesFields {
     ac.dex = ac.clamped.dex;
 
     const validFormulas = ac.formulas.filter(formula => {
+      if ( !formula.formula ) return false;
       if ( (typeof formula.armored === "boolean") && (formula.armored !== !!ac.equippedArmor) ) return false;
       if ( (typeof formula.shielded === "boolean") && (formula.shielded !== !!ac.equippedShield) ) return false;
       return true;
@@ -243,8 +260,9 @@ export default class AttributesFields {
         });
         const result = replaced ? new Roll(replaced).evaluateSync().total : 0;
         if ( result > ac.base ) {
+          ac.activeFormula = config;
           ac.base = result;
-          ac.calc = config.id;
+          ac.calc = config.id ?? "custom";
           ac.formula = config.formula;
           if ( config.id === "armored" ) ac.label = ac.equippedArmor.name;
           else ac.label = config.label ?? "";

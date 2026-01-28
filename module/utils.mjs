@@ -1245,8 +1245,8 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
   else if ( attr === "attributes.spell.dc" ) label = "DND5E.SpellDC";
 
   // Abilities.
-  else if ( attr.startsWith("abilities.") ) {
-    const [, key] = attr.split(".");
+  else if ( attr.startsWith("abilities.") || attr.startsWith("attributes.ac.clamped.") ) {
+    const key = attr.split(".")[attr.startsWith("abilities.") ? 1 : 3];
     label = game.i18n.format("DND5E.AbilityScoreL", { ability: CONFIG.DND5E.abilities[key].label });
   }
 

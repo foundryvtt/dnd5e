@@ -1,0 +1,50 @@
+<section class="flexcol">
+    <div class="final-value">{{ dnd5e-numberFormat data.value }}</div>
+    <fieldset class="card">
+        <legend>{{ localize "DND5E.ARMORCLASS.CurrentFormula" }}</legend>
+        <div class="form-group">
+            <label>{{ localize "DND5E.ARMORCLASS.Calculation.Label" }}</label>
+            <div class="form-fields">
+                {{ formulaLabel }}
+            </div>
+        </div>
+        <div class="form-group">
+            <label>{{ localize "DND5E.ARMORCLASS.Formula" }}</label>
+            <div class="form-fields">
+                <input type="text" value="{{ data.formula }}" readonly>
+            </div>
+        </div>
+        {{#if ability}}
+        <div class="form-group">
+            <label>{{ localize ability.label }}</label>
+            <div class="form-fields">
+                {{{ dnd5e-numberParts ability.value signDisplay="always" }}}
+            </div>
+        </div>
+        {{/if}}
+    </fieldset>
+    {{#if calculations.length}}
+    <fieldset class="card table equipped">
+        <legend>{{ localize "DND5E.ARMORCLASS.Calculation.Label" }}</legend>
+        <div class="header">
+            <div class="armor-value">
+                <i class="fa-solid fa-shield" data-tooltip aria-label="{{ localize 'DND5E.ArmorValue' }}"></i>
+            </div>
+            <div class="magical-bonus">
+                <i class="fa-solid fa-wand-sparkles" data-tooltip
+                aria-label="{{ localize 'DND5E.EquipmentBonus' }}"></i>
+            </div>
+        </div>
+        {{#each calculations}}
+        <div class="form-group">
+            <div class="name">
+                <img src="{{ img }}" class="gold-icon" alt="{{ name }}">
+                {{{ anchor }}}
+            </div>
+            <span class="armor-value {{#if (eq value "—")}}empty{{/if}}">{{ value }}</span>
+            <span class="magical-bonus {{#if (eq magicalBonus "—")}}empty{{/if}}">{{ magicalBonus }}</span>
+        </div>
+        {{/each}}
+    </fieldset>
+    {{/if}}
+</section>
