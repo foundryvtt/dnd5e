@@ -296,9 +296,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* --------------------------------------------- */
 
   /** @inheritDoc */
-  applyActiveEffects() {
+  applyActiveEffects(phase) {
     if ( this.system?.prepareEmbeddedData instanceof Function ) this.system.prepareEmbeddedData();
-    return super.applyActiveEffects();
+    return super.applyActiveEffects(phase);
   }
 
   /* -------------------------------------------- */
