@@ -3,6 +3,7 @@ import AdvantageModeField from "../../fields/advantage-mode-field.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 import MappingField from "../../fields/mapping-field.mjs";
 import RollConfigField from "../../shared/roll-config-field.mjs";
+import SensesField from "../../shared/senses-field.mjs";
 import CommonTemplate from "./common.mjs";
 
 const { NumberField, SchemaField } = foundry.data.fields;
@@ -129,9 +130,14 @@ export default class CreatureTemplate extends CommonTemplate {
    */
   static #migrateSensesData(source) {
     const original = source.traits?.senses;
-    if ( (original === undefined) || (typeof original !== "string") ) return;
+    if ( (original === undefined) || (typeof original !== "string") ) {
+      SensesField._migrate(source.attributes?.senses);
+      return;
+    }
+
     source.attributes ??= {};
     source.attributes.senses ??= {};
+    source.attributes.senses.ranges ??= {};
 
     // Try to match old senses with the format like "Darkvision 60 ft, Blindsight 30 ft"
     const pattern = /([A-z]+)\s?([0-9]+)\s?([A-z]+)?/;
@@ -144,7 +150,7 @@ export default class CreatureTemplate extends CommonTemplate {
       if ( !match ) continue;
       const type = match[1].toLowerCase();
       if ( (type in CONFIG.DND5E.senses) && !(type in source.attributes.senses) ) {
-        source.attributes.senses[type] = Number(match[2]).toNearest(0.5);
+        source.attributes.senses.ranges[type] = Number(match[2]).toNearest(0.5);
         wasMatched = true;
       }
     }

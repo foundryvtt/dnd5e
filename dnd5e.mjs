@@ -293,7 +293,7 @@ function _configureTrackableAttributes() {
     value: [
       ...common.value,
       ...Object.keys(DND5E.skills).map(skill => `skills.${skill}.passive`),
-      ...Object.keys(DND5E.senses).map(sense => `attributes.senses.${sense}`),
+      ...Object.keys(DND5E.senses).map(sense => `attributes.senses.ranges.${sense}`),
       "attributes.hp.temp", "attributes.spell.attack", "attributes.spell.dc"
     ]
   };
@@ -347,7 +347,7 @@ function _configureConsumableAttributes() {
     "attributes.ac.flat",
     "attributes.hp.value",
     "attributes.exhaustion",
-    ...Object.keys(DND5E.senses).map(sense => `attributes.senses.${sense}`),
+    ...Object.keys(DND5E.senses).map(sense => `attributes.senses.ranges.${sense}`),
     ...Object.keys(DND5E.movementTypes).map(type => `attributes.movement.${type}`),
     ...Object.keys(DND5E.currencies).map(denom => `currency.${denom}`),
     "details.xp.value",

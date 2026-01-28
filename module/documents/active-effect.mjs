@@ -53,7 +53,11 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * @type {Record<string, { key: string, [warning]: object }>}
    */
   static SHIM_FIELDS = {
-    "system.attributes.movement.speed": { key: "system.attributes.movement.walk" }
+    "system.attributes.movement.speed": { key: "system.attributes.movement.walk" },
+    "system.attributes.senses.darkvision": { key: "system.attributes.senses.ranges.darkvision" },
+    "system.attributes.senses.blindsight": { key: "system.attributes.senses.ranges.blindsight" },
+    "system.attributes.senses.tremorsense": { key: "system.attributes.senses.ranges.tremorsense" },
+    "system.attributes.senses.truesight": { key: "system.attributes.senses.ranges.truesight" }
   };
 
   /* -------------------------------------------- */
