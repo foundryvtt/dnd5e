@@ -72,7 +72,7 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
    * @returns {DamageApplicationOptions}
    */
   getTargetOptions(uuid) {
-    if ( !this.#targetOptions.has(uuid) ) this.#targetOptions.set(uuid, { multiplier: 1 });
+    if ( !this.#targetOptions.has(uuid) ) this.#targetOptions.set(uuid, { multiplier: 1, originatingMessage: this.chatMessage });
     return this.#targetOptions.get(uuid);
   }
 
