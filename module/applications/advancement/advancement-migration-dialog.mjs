@@ -56,7 +56,7 @@ export default class AdvancementMigrationDialog extends Dialog5e {
    */
   static async createDialog(item, advancements) {
     const advancementContext = advancements.map(a => ({
-      id: a.id, icon: a.icon, svg: a.icon?.endsWith(".svg"), title: a.title,
+      id: a.id, icon: a.icon, title: a.title,
       summary: a.levels.length === 1 ? a.summaryForLevel(a.levels[0]) : ""
     }));
     const { promise, resolve, reject } = Promise.withResolvers();

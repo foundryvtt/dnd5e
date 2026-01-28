@@ -1,3 +1,4 @@
+import { generateIcon } from "../../utils.mjs";
 import ContextMenu5e from "../context-menu.mjs";
 
 const { HandlebarsApplicationMixin } = foundry.applications.api;
@@ -163,10 +164,7 @@ export default function ApplicationV2Mixin(Base) {
       // Icon
       if ( (options.window?.icon ?? "").includes(".") ) {
         const icon = frame.querySelector(".window-icon");
-        const newIcon = document.createElement(options.window.icon?.endsWith(".svg") ? "dnd5e-icon" : "img");
-        newIcon.classList.add("window-icon");
-        newIcon.src = options.window.icon;
-        icon.replaceWith(newIcon);
+        icon.replaceWith(generateIcon(options.window.icon, { classes: "window-icon" }));
       }
 
       return frame;

@@ -56,8 +56,7 @@
 {{!-- Name & Icon --}}
 <div class="item-name activity-name">
 
-    {{#if img.svg}}<dnd5e-icon src="{{ img.src }}" class="item-image"></dnd5e-icon>
-    {{else}}<img src="{{ img.src }}" class="item-image gold-icon" alt="{{ name }}">{{/if}}
+    {{ dnd5e-icon img alt=name classes="item-image gold-icon" }}
 
     <div class="name name-stacked">
         <span class="title">{{ name }}</span>

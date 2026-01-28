@@ -791,14 +791,10 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     uses.prop = "uses.value";
 
     return {
-      _id, labels, name, range, uses,
+      _id, img, labels, name, range, uses,
       activation: activationAbbr
         ? `${activation.value ?? ""}${game.i18n.localize(activationAbbr)}`
         : labels.activation,
-      icon: {
-        src: img,
-        svg: img.endsWith(".svg")
-      },
       isSpell: activity.item.type === "spell",
       save: save ? {
         ...save,
