@@ -157,7 +157,7 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
       <div class="calculated damage">
         ${total}
       </div>
-      <div class="calculated temp" data-tooltip="DND5E.HitPointsTemp">
+      <div class="calculated temp" data-tooltip="DND5E.HEAL.Type.Temporary">
         ${temp}
       </div>
       <div class="calculated temp-max" data-tooltip="DND5E.HEAL.Type.Maximum">
@@ -285,7 +285,7 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
     calculatedDamage.innerText = formatNumber(-total, { signDisplay: "exceptZero" });
     calculatedDamage.classList.toggle("healing", total < 0);
     calculatedDamage.dataset.tooltip = `DND5E.${total < 0 ? "Healing" : "Damage"}`;
-    calculatedDamage.hidden = !total && !!temp && !!tempMax;
+    calculatedDamage.hidden = !total && (!!temp || !!tempMax);
     const calculatedTemp = entry.querySelector(".calculated.temp");
     calculatedTemp.innerText = temp;
     calculatedTemp.hidden = !temp;
