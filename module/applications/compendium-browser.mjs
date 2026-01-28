@@ -1,6 +1,6 @@
 import * as Filter from "../filter.mjs";
 import SourceField from "../data/shared/source-field.mjs";
-import { getPluralRules } from "../utils.mjs";
+import { getPluralLocalizationKey } from "../utils.mjs";
 import Application5e from "./api/application.mjs";
 import CompendiumBrowserSettingsConfig from "./settings/compendium-browser-settings.mjs";
 
@@ -439,10 +439,11 @@ export default class CompendiumBrowser extends Application5e {
     context.summary = suffix ? game.i18n.format(
       `DND5E.CompendiumBrowser.Selection.Summary.${suffix}`, { max, min, value }
     ) : value;
-    const pr = getPluralRules();
     context.invalidTooltip = game.i18n.format(`DND5E.CompendiumBrowser.Selection.Warning.${suffix}`, {
       max, min, value,
-      document: game.i18n.localize(`DND5E.CompendiumBrowser.Selection.Warning.Document.${pr.select(max || min)}`)
+      document: game.i18n.localize(getPluralLocalizationKey(max || min, pr =>
+        `DND5E.CompendiumBrowser.Selection.Warning.Document.${pr}`
+      ))
     });
     return context;
   }
@@ -954,10 +955,11 @@ export default class CompendiumBrowser extends Application5e {
     const { max, min } = this.options.selection;
     if ( (value < (min || -Infinity)) || (value > (max || Infinity)) ) {
       const suffix = this.#selectionLocalizationSuffix;
-      const pr = getPluralRules();
       throw new Error(game.i18n.format(`DND5E.CompendiumBrowser.Selection.Warning.${suffix}`, {
         max, min, value,
-        document: game.i18n.localize(`DND5E.CompendiumBrowser.Selection.Warning.Document.${pr.select(max || min)}`)
+        document: game.i18n.localize(getPluralLocalizationKey(max || min, pr =>
+          `DND5E.CompendiumBrowser.Selection.Warning.Document.${pr}`
+        ))
       }));
     }
 

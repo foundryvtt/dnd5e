@@ -1,4 +1,4 @@
-import { filteredKeys, formatNumber, simplifyBonus } from "../../utils.mjs";
+import { filteredKeys, formatNumber, getPluralLocalizationKey, simplifyBonus } from "../../utils.mjs";
 import Dialog5e from "../api/dialog.mjs";
 
 const { BooleanField, NumberField, StringField } = foundry.data.fields;
@@ -255,7 +255,6 @@ export default class ActivityUsageDialog extends Dialog5e {
       });
       const current = foundry.utils.getProperty(this.actor.system, property);
       if ( current && !containsConsumption ) {
-        const plurals = new Intl.PluralRules(game.i18n.lang);
         const value = (this.config.consume !== false) && (this.config.consume?.action !== false);
         const warn = (current.value < this.activity.activation.value) && value;
         context.fields.push({
@@ -265,12 +264,14 @@ export default class ActivityUsageDialog extends Dialog5e {
               type: activationConfig.label
             }),
             hint: game.i18n.format("DND5E.CONSUMPTION.Type.Action.PromptHint", {
-              available: game.i18n.format(`${activationConfig.counted}.${plurals.select(current.value)}`, {
-                number: `<strong>${formatNumber(current.value)}</strong>`
-              }),
-              cost: game.i18n.format(`${activationConfig.counted}.${plurals.select(this.activity.activation.value)}`, {
-                number: `<strong>${formatNumber(this.activity.activation.value)}</strong>`
-              })
+              available: game.i18n.format(
+                getPluralLocalizationKey(current.value, pr => `${activationConfig.counted}.${pr}`),
+                { number: `<strong>${formatNumber(current.value)}</strong>` }
+              ),
+              cost: game.i18n.format(
+                getPluralLocalizationKey(this.activity.activation.value, pr => `${activationConfig.counted}.${pr}`),
+                { number: `<strong>${formatNumber(this.activity.activation.value)}</strong>` }
+              )
             })
           }),
           input: context.inputs.createCheckboxInput,

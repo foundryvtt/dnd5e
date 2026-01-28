@@ -1,4 +1,4 @@
-import { formatNumber, getPluralRules } from "../../utils.mjs";
+import { formatNumber, getPluralLocalizationKey } from "../../utils.mjs";
 
 /**
  * @import { CombatGroupData } from "./_types.mjs";
@@ -67,7 +67,7 @@ export default class CombatTracker5e extends foundry.applications.sidebar.tabs.C
       for ( const [index, element] of children.entries() ) {
         if ( element.classList.contains("active") ) activeEntry = index;
       }
-      let count = game.i18n.format(`DND5E.COMBATANT.Counted.${getPluralRules().select(children.length)}`, {
+      let count = game.i18n.format(getPluralLocalizationKey(children.length, pr => `DND5E.COMBATANT.Counted.${pr}`), {
         number: formatNumber(children.length)
       });
       if ( activeEntry !== undefined ) {

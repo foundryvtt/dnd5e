@@ -442,9 +442,10 @@ export default class Bastion {
    */
   async #renderAttackSummary(actor, roll, { damaged, deaths, undefended, resolved }={}) {
     const context = {};
-    const plurals = new Intl.PluralRules(game.i18n.lang);
-    const key = undefended ? "Undefended" : deaths ? `Deaths.${plurals.select(deaths)}` : "NoDeaths";
-    context.description = game.i18n.format(`DND5E.Bastion.Attack.Result.${key}`, { deaths });
+    let key = undefended ? "Undefended" : deaths ? null : "NoDeaths";
+    if ( key ) key = `DND5E.Bastion.Attack.Result.${key}`;
+    else key = getPluralLocalizationKey(deaths, pr => `DND5E.Bastion.Attack.Result.${pr}`);
+    context.description = game.i18n.format(key, { deaths });
     context.roll = await roll.render();
     context.buttons = [];
     if ( !resolved && (deaths || undefended) ) {
