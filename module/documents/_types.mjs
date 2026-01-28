@@ -51,7 +51,6 @@
  * Options for damage application.
  *
  * @typedef DamageApplicationOptions
- * @property {"damage"|"healing"} [as]       Treat maximum hit points types as healing or damage.
  * @property {boolean|Set<string>} [downgrade]  Should this actor's resistances and immunities be downgraded by one
  *                                              step? A set of damage types to be downgraded or `true` to downgrade
  *                                              all damage types.

@@ -895,8 +895,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       else damages.amount += d.value;
     });
 
-    damages.amount = damages.amount > 0 ? Math.floor(damages.amount) : Math.ceil(damages.amount);
     if ( damages.tempMax < 0 ) damages.amount += damages.tempMax;
+    damages.amount = damages.amount > 0 ? Math.floor(damages.amount) : Math.ceil(damages.amount);
 
     // Apply damage threshold
     if ( ((damages.amount > 0) && (damages.amount < (this.system.attributes?.hp?.dt ?? -Infinity)))
