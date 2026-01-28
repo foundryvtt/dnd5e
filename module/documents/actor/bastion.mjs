@@ -341,9 +341,9 @@ export default class Bastion {
     const results = message.getFlag("dnd5e", "bastion");
     const { gold } = results;
     const actor = message.getAssociatedActor();
-    const { gp } = actor?.system?.currency ?? {};
+    const gp = actor?.system?.currency?.[CONFIG.DND5E.defaultCurrency];
     if ( !gold?.value || gold.claimed || (gp === undefined) ) return;
-    await actor.update({ "system.currency.gp": gp + gold.value });
+    await actor.update({ [`system.currency.${CONFIG.DND5E.defaultCurrency}`]: gp + gold.value });
     gold.claimed = true;
     const content = await this.#renderTurnSummary(actor, results);
     return message.update({ content, flags: { dnd5e: { bastion: results } } });

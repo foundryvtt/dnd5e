@@ -36,7 +36,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
           required: true, nullable: false, initial: 0, min: 0, label: "DND5E.Price"
         }),
         denomination: new StringField({
-          required: true, blank: false, initial: "gp", label: "DND5E.Currency"
+          required: true, blank: false, initial: () => CONFIG.DND5E.defaultCurrency, label: "DND5E.Currency"
         })
       }, { label: "DND5E.Price" }),
       rarity: new StringField({ required: true, blank: true, label: "DND5E.Rarity" })
@@ -184,12 +184,12 @@ export default class PhysicalItemTemplate extends SystemDataModel {
    * Prepare physical item properties.
    */
   preparePhysicalData() {
-    if ( !("gp" in CONFIG.DND5E.currencies) ) return;
+    if ( !(CONFIG.DND5E.defaultCurrency in CONFIG.DND5E.currencies) ) return;
     const { value, denomination } = this.price;
     const { conversion } = CONFIG.DND5E.currencies[denomination] ?? {};
-    const { gp } = CONFIG.DND5E.currencies;
+    const defaultCurrency = CONFIG.DND5E.currencies[CONFIG.DND5E.defaultCurrency];
     if ( conversion ) {
-      const multiplier = gp.conversion / conversion;
+      const multiplier = defaultCurrency.conversion / conversion;
       this.price.valueInGP = Math.floor(value * multiplier);
     }
   }
