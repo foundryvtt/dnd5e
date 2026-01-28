@@ -40,8 +40,9 @@ export default class SensesField extends foundry.data.fields.SchemaField {
    */
   static _migrate(senses) {
     if ( !senses ) return;
+    senses.ranges ??= {};
     for ( const key of SensesField.#DEFAULT_SENSES ) {
-      if ( !(key in senses) ) continue;
+      if ( !(key in senses) || (key in senses.ranges) ) continue;
       senses.ranges ??= {};
       senses.ranges[key] = senses[key];
       delete senses[key];

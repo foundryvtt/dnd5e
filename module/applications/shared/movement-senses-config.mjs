@@ -82,7 +82,8 @@ export default class MovementSensesConfig extends BaseConfigSheet {
   async _preparePartContext(partId, context, options) {
     context = await super._preparePartContext(partId, context, options);
     const source = this.document.system._source;
-    const placeholderData = this.document.system.details?.race?.system?.[this.options.type] ?? null;
+    let placeholderData = this.document.system.details?.race?.system?.[this.options.type] ?? null;
+    if ( this.subPath && placeholderData ) placeholderData = placeholderData[this.subPath];
 
     context.data = foundry.utils.getProperty(source, this.keyPath) ?? {};
     context.fields = this.document.system.schema.getField(this.keyPath)?.fields;
