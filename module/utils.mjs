@@ -1195,11 +1195,26 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
     return game.i18n.localize("DND5E.ExperiencePoints.Value");
   }
 
+  const getUnknownLabel = (attr, options) => {
+    /**
+     * A hook event that fires when a human readable attribute label couldn't be found.
+     * @function dnd5e.getUnknownAttributeLabel
+     * @memberof hookEvents
+     * @param {string} attribute  Attribute for which to generate a label.
+     * @param {object} options
+     * @param {Actor5e} [options.actor]  An optional reference actor.
+     * @param {Item5e} [options.item]    An optional reference item.
+     * @param {string} [options.label]   Label that can be set to define the label to use.
+     */
+    Hooks.callAll("dnd5e.getUnknownAttributeLabel", attr, options);
+    return options.label;
+  };
+
   if ( attr.startsWith(".") && actor ) {
     // TODO: Remove `strict: false` when https://github.com/foundryvtt/foundryvtt/issues/11214 is resolved
     // Only necessary when opening the token config for an actor in a compendium
     const item = fromUuidSync(attr, { relative: actor, strict: false });
-    return item?.name ?? attr;
+    return item?.name ?? getUnknownLabel(attr, { actor, item });
   }
 
   // Check if the attribute is already in cache.
@@ -1282,6 +1297,9 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
 
   // Attempt to find the attribute in a data model.
   if ( !label ) label = getSchemaLabel(attr, "Actor", actor);
+
+  // Call hook if no label is available
+  if ( !label ) label = getUnknownLabel(attr, { actor, item });
 
   if ( label ) {
     label = game.i18n.localize(label);
