@@ -62,7 +62,10 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     },
     activities: {
       template: "systems/dnd5e/templates/items/activities.hbs",
-      templates: ["systems/dnd5e/templates/shared/activities.hbs"],
+      templates: [
+        "systems/dnd5e/templates/inventory/columns/uses.hbs",
+        "systems/dnd5e/templates/shared/activities.hbs"
+      ],
       scrollable: [""]
     },
     advancement: {
