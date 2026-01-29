@@ -112,4 +112,17 @@ export default class EnchantmentData extends (ActiveEffectTypeDataModel ?? TypeD
         break;
     }
   }
+
+  /* -------------------------------------------- */
+  /*  Importing and Exporting                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Can an active effect of this type be added to the provided document?
+   * @param {Actor5e|Item5e} doc  Candidate document to which the active effect might be added.
+   * @returns {boolean}           Should this active effect be available?
+   */
+  static availableForItem(doc) {
+    return doc instanceof Item;
+  }
 }
