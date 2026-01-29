@@ -1,6 +1,34 @@
 /**
+ * @import { BastionTurnItem } from "../../documents/_types.mjs";
  * @import { ActivationsData, ActorDeltasData } from "./fields/_types.mjs";
  */
+
+/**
+ * @typedef BastionAttackMessageSystemData
+ * @property {string|null} damaged  Facility that was damage by the attack.
+ * @property {number} [deaths]      Number of defenders killed in the attack.
+ * @property {boolean} resolved     Have the effects of the attack been fully resolved?
+ * @property {boolean} undefended   Was the bastion undefended when it was attacked?
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef BastionTurnMessageSystemData
+ * @property {object} gold
+ * @property {boolean} gold.claimed  Has this gold been claimed by the actor?
+ * @property {number} gold.value     Amount of gold produced by this turn.
+ * @property {BastionTurnItem[]} items
+ * @property {BastionTurnOrder[]} orders
+ */
+
+/**
+ * @typedef BastionTurnOrder
+ * @property {string} id     ID of the facility that was issued the order.
+ * @property {string} order  Order that was issued.
+ */
+
+/* -------------------------------------------- */
 
 /**
  * @typedef RequestMessageSystemData
@@ -20,6 +48,8 @@
  *                                     the actor is able to handle it.
  */
 
+/* -------------------------------------------- */
+
 /**
  * @typedef RestMessageSystemData
  * @property {ActivationsData} activations  Activities that can be used after this rest, stored as relative UUIDs.
@@ -27,6 +57,8 @@
  * @property {ChatMessage5e} [request]      Rest request chat message for which this rest was performed.
  * @property {string} type                  Type of rest performed.
  */
+
+/* -------------------------------------------- */
 
 /**
  * @typedef TurnMessageSystemData

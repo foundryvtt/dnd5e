@@ -367,7 +367,7 @@ export default class OrderUsageDialog extends ActivityUsageDialog {
       submitData.costs.gold = 0;
     }
 
-    if ( ("stock" in submitData.trade) && !submitData.trade.sell ) {
+    if ( ("stock" in submitData.trade) && ("value" in submitData.trade.stock) && !submitData.trade.sell ) {
       submitData.costs.gold = submitData.trade.stock.value;
     }
 
