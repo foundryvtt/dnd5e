@@ -9,12 +9,14 @@ const { HandlebarsApplicationMixin } = foundry.applications.api;
 /**
  * Mixin method for ApplicationV2-based 5e applications.
  * @template {ApplicationV2} T
- * @param {typeof T} Base   Application class being extended.
+ * @param {typeof T} Base                      Application class being extended.
+ * @param {object} [options={}]
+ * @param {boolean} [options.handlebars=true]  Include HandlebarsApplicationMixin.
  * @returns {typeof BaseApplication5e}
  * @mixin
  */
-export default function ApplicationV2Mixin(Base) {
-  const _BaseApplication5e = "PARTS" in Base ? Base : HandlebarsApplicationMixin(Base);
+export default function ApplicationV2Mixin(Base, { handlebars=true }={}) {
+  const _BaseApplication5e = handlebars ? HandlebarsApplicationMixin(Base) : Base;
   class BaseApplication5e extends _BaseApplication5e {
     /** @override */
     static DEFAULT_OPTIONS = {
@@ -225,8 +227,8 @@ export default function ApplicationV2Mixin(Base) {
     /* -------------------------------------------- */
 
     /** @inheritDoc */
-    _onRender(context, options) {
-      super._onRender(context, options);
+    async _onRender(context, options) {
+      await super._onRender(context, options);
 
       this.element.querySelectorAll("[data-context-menu]").forEach(control =>
         control.addEventListener("click", dnd5e.applications.ContextMenu5e.triggerEvent)

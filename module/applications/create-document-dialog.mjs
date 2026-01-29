@@ -120,8 +120,8 @@ export default class CreateDocumentDialog extends Dialog5e {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _onRender(context, options) {
-    super._onRender(context, options);
+  async _onRender(context, options) {
+    await super._onRender(context, options);
     const folder = this.element.querySelector('[name="folder"]');
     if ( folder ) this.element.querySelector(".form-footer").prepend(folder);
   }

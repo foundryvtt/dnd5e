@@ -280,4 +280,25 @@
 
 .dnd5e2.roll-table-sheet {
   .sheet-header { --dnd5e-document-image-size: 4rem; }
+  table {
+    border-radius: 4px;
+    box-shadow: 0 0 6px var(--dnd5e-shadow-45);
+
+    thead {
+      border: none;
+      border-radius: 4px 4px 0 0;
+    }
+    tbody {
+      scrollbar-gutter: auto;
+    }
+
+    td.image > dnd5e-icon {
+      display: block;
+      --icon-size: 32px;
+      block-size: 32px;
+      inline-size: 32px;
+    }
+  }
+
+  &.edit-mode table .controls { flex: 0 0 90px; }
 }

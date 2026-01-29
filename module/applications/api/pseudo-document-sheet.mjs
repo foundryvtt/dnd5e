@@ -124,8 +124,8 @@ export default class PseudoDocumentSheet extends Application5e {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _onRender(context, options) {
-    super._onRender(context, options);
+  async _onRender(context, options) {
+    await super._onRender(context, options);
     if ( !this.isEditable ) this._disableFields();
   }
 
