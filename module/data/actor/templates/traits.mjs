@@ -118,4 +118,43 @@ export default class TraitsField {
       this.traits.ci.value.add("diseased");
     }
   }
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /**
+   * Update the prototype token size for newly created actors.
+   * @this {CharacterData|NPCData|VehicleData}
+   * @param {object} data     The initial data object provided to the document creation request.
+   * @param {object} options  Additional options which modify the creation request.
+   */
+  static async preCreateSize(data, options) {
+    if ( this.parent._stats?.compendiumSource?.startsWith("Compendium.") ) return;
+    const prototypeToken = {};
+    if ( "size" in (this.system.traits || {}) ) {
+      const size = CONFIG.DND5E.actorSizes[this.system.traits.size || "med"].token ?? 1;
+      if ( !foundry.utils.hasProperty(data, "prototypeToken.width") ) prototypeToken.width = size;
+      if ( !foundry.utils.hasProperty(data, "prototypeToken.height") ) prototypeToken.height = size;
+    }
+    this.parent.updateSource({ prototypeToken });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Update the prototype token size when the actor size is changed.
+   * @this {CharacterData|NPCData|VehicleData}
+   * @param {object} changes  The candidate changes to the Document.
+   * @param {object} options  Additional options which modify the update request.
+   */
+  static async preUpdateSize(changes, options) {
+    const newSize = foundry.utils.getProperty(changes, "system.traits.size");
+    if ( !newSize || (newSize === this.traits.size)
+      || foundry.utils.hasProperty(changes, "prototypeToken.width") ) return;
+    const size = CONFIG.DND5E.actorSizes[newSize].token ?? 1;
+    changes.prototypeToken ??= {};
+    changes.prototypeToken.height = size;
+    changes.prototypeToken.width = size;
+  }
 }

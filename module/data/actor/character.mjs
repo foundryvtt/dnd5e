@@ -235,6 +235,42 @@ export default class CharacterData extends CreatureTemplate {
   }
 
   /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preCreate(data, options, user) {
+    if ( (await super._preCreate(data, options, user)) === false ) return false;
+    await TraitsFields.preCreateSize.call(this, data, options, user);
+
+    if ( this.parent._stats?.compendiumSource?.startsWith("Compendium.") ) return;
+    this.parent.updateSource({
+      prototypeToken: {
+        actorLink: true,
+        disposition: CONST.TOKEN_DISPOSITIONS.FRIENDLY,
+        sight: { enabled: true }
+      }
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preUpdate(changes, options, user) {
+    if ( (await super._preUpdate(changes, options, user)) === false ) return false;
+    await AttributesFields.preUpdateHP.call(this, changes, options, user);
+    await TraitsFields.preUpdateSize.call(this, changes, options, user);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onUpdate(changed, options, userId) {
+    super._onUpdate(changed, options, userId);
+    AttributesFields.onUpdateHP.call(this, changed, options, userId);
+  }
+
+  /* -------------------------------------------- */
   /*  Helpers                                     */
   /* -------------------------------------------- */
 

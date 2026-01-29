@@ -215,7 +215,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   }
 
   /* -------------------------------------------- */
-  /*  Methods                                     */
+  /*  Data Preparation                            */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -260,6 +260,33 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /* -------------------------------------------- */
 
+  /**
+   * Format a type object into a string.
+   * @param {object} typeData          The type data to convert to a string.
+   * @returns {string}
+   */
+  static formatCreatureType(typeData) {
+    if ( typeof typeData === "string" ) return typeData; // Backwards compatibility
+    let localizedType;
+    if ( typeData.value === "custom" ) {
+      localizedType = typeData.custom;
+    } else if ( typeData.value in CONFIG.DND5E.creatureTypes ) {
+      const code = CONFIG.DND5E.creatureTypes[typeData.value];
+      localizedType = game.i18n.localize(typeData.swarm ? code.plural : code.label);
+    }
+    let type = localizedType;
+    if ( typeData.swarm ) {
+      type = game.i18n.format("DND5E.CreatureSwarmPhrase", {
+        size: game.i18n.localize(CONFIG.DND5E.actorSizes[typeData.swarm].label),
+        type: localizedType
+      });
+    }
+    if (typeData.subtype) type = `${type} (${typeData.subtype})`;
+    return type;
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   prepareData() {
     if ( this.system.modelProvider !== dnd5e ) return super.prepareData();
@@ -291,6 +318,19 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     this._embeddedPreparation = true;
     super.prepareEmbeddedDocuments();
     delete this._embeddedPreparation;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepares data for a specific skill.
+   * @param {string} skillId    The id of the skill to prepare data for.
+   * @param {object} [options]  Additional options passed to {@link CreatureTemplate#prepareSkill}.
+   * @returns {SkillData}
+   * @internal
+   */
+  _prepareSkill(skillId, options) {
+    return this.system.prepareSkill?.(skillId, options) ?? {};
   }
 
   /* --------------------------------------------- */
@@ -489,21 +529,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   }
 
   /* -------------------------------------------- */
-  /*  Data Preparation                            */
-  /* -------------------------------------------- */
-
-  /**
-   * Prepares data for a specific skill.
-   * @param {string} skillId    The id of the skill to prepare data for.
-   * @param {object} [options]  Additional options passed to {@link CreatureTemplate#prepareSkill}.
-   * @returns {SkillData}
-   * @internal
-   */
-  _prepareSkill(skillId, options) {
-    return this.system.prepareSkill?.(skillId, options) ?? {};
-  }
-
-  /* -------------------------------------------- */
   /*  Spellcasting Preparation                    */
   /* -------------------------------------------- */
 
@@ -642,79 +667,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     // Otherwise proceed with calculation.
     model.prepareSlots(spells, actor, progression);
-  }
-
-  /* -------------------------------------------- */
-  /*  Event Handlers                              */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async _preCreate(data, options, user) {
-    if ( (await super._preCreate(data, options, user)) === false ) return false;
-
-    const sourceId = this._stats?.compendiumSource;
-    if ( sourceId?.startsWith("Compendium.") ) return;
-
-    // Configure prototype token settings
-    const prototypeToken = {};
-    if ( "size" in (this.system.traits || {}) ) {
-      const size = CONFIG.DND5E.actorSizes[this.system.traits.size || "med"].token ?? 1;
-      if ( !foundry.utils.hasProperty(data, "prototypeToken.width") ) prototypeToken.width = size;
-      if ( !foundry.utils.hasProperty(data, "prototypeToken.height") ) prototypeToken.height = size;
-    }
-    if ( this.type === "character" ) Object.assign(prototypeToken, {
-      sight: { enabled: true }, actorLink: true, disposition: CONST.TOKEN_DISPOSITIONS.FRIENDLY
-    });
-    if ( this.type === "group" ) prototypeToken.actorLink = true;
-    this.updateSource({ prototypeToken });
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async _preUpdate(changed, options, user) {
-    if ( (await super._preUpdate(changed, options, user)) === false ) return false;
-
-    // Apply changes in Actor size to Token width/height
-    if ( "size" in (this.system.traits || {}) ) {
-      const newSize = foundry.utils.getProperty(changed, "system.traits.size");
-      if ( newSize && (newSize !== this.system.traits?.size) ) {
-        let size = CONFIG.DND5E.actorSizes[newSize].token ?? 1;
-        if ( !foundry.utils.hasProperty(changed, "prototypeToken.width") ) {
-          changed.prototypeToken ||= {};
-          changed.prototypeToken.height = size;
-          changed.prototypeToken.width = size;
-        }
-      }
-    }
-
-    // Reset death save counters and store hp
-    if ( "hp" in (this.system.attributes || {}) ) {
-      const isDead = this.system.attributes.hp.value <= 0;
-      if ( isDead && (foundry.utils.getProperty(changed, "system.attributes.hp.value") > 0) ) {
-        foundry.utils.setProperty(changed, "system.attributes.death.success", 0);
-        foundry.utils.setProperty(changed, "system.attributes.death.failure", 0);
-      }
-      foundry.utils.setProperty(options, "dnd5e.hp", { ...this.system.attributes.hp });
-    }
-
-    // Record previous exhaustion level.
-    if ( Number.isFinite(foundry.utils.getProperty(changed, "system.attributes.exhaustion")) ) {
-      foundry.utils.setProperty(options, "dnd5e.originalExhaustion", this.system.attributes.exhaustion);
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Assign a class item as the original class for the Actor based on which class has the most levels.
-   * @returns {Promise<Actor5e>}  Instance of the updated actor.
-   * @protected
-   */
-  _assignPrimaryClass() {
-    const classes = this.itemTypes.class.sort((a, b) => b.system.levels - a.system.levels);
-    const newPC = classes[0]?.id || "";
-    return this.update({"system.details.originalClass": newPC});
   }
 
   /* -------------------------------------------- */
@@ -3194,6 +3146,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   }
 
   /* -------------------------------------------- */
+  /*  Context Menus                               */
+  /* -------------------------------------------- */
 
   /**
    * Add additional system-specific sidebar directory context menu options for Actor documents
@@ -3257,34 +3211,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * Format a type object into a string.
-   * @param {object} typeData          The type data to convert to a string.
-   * @returns {string}
-   */
-  static formatCreatureType(typeData) {
-    if ( typeof typeData === "string" ) return typeData; // Backwards compatibility
-    let localizedType;
-    if ( typeData.value === "custom" ) {
-      localizedType = typeData.custom;
-    } else if ( typeData.value in CONFIG.DND5E.creatureTypes ) {
-      const code = CONFIG.DND5E.creatureTypes[typeData.value];
-      localizedType = game.i18n.localize(typeData.swarm ? code.plural : code.label);
-    }
-    let type = localizedType;
-    if ( typeData.swarm ) {
-      type = game.i18n.format("DND5E.CreatureSwarmPhrase", {
-        size: game.i18n.localize(CONFIG.DND5E.actorSizes[typeData.swarm].label),
-        type: localizedType
-      });
-    }
-    if (typeData.subtype) type = `${type} (${typeData.subtype})`;
-    return type;
-  }
-
-  /* -------------------------------------------- */
-  /*  Event Listeners and Handlers                */
+  /*  Socket Event Handlers                       */
   /* -------------------------------------------- */
 
   /** @override */
@@ -3296,47 +3223,39 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _onUpdate(data, options, userId) {
-    super._onUpdate(data, options, userId);
+  static async _preUpdateOperation(documents, operation, user) {
+    if ( (await super._preUpdateOperation(documents, operation, user)) === false ) return false;
 
-    const isHpUpdate = !!data.system?.attributes?.hp;
+    // Handle synching the Actor's exhaustion level with the ActiveEffect
+    for ( const [index, actor] of documents.entries() ) {
+      const originalExhaustion = foundry.utils.getProperty(actor, "system.attributes.exhaustion");
+      const level = foundry.utils.getProperty(operation.updates[index], "system.attributes.exhaustion");
+      if ( !Number.isFinite(level) ) continue;
+      const effect = actor.effects.get(ActiveEffect5e.ID.EXHAUSTION);
 
-    if ( userId === game.userId ) {
-      if ( isHpUpdate ) await this.updateBloodied(options);
-      await this.updateEncumbrance(options);
-      this._onUpdateExhaustion(data, options);
-    }
+      // Delete any existing effect is no exhaustion level
+      if ( level < 1 ) await effect?.delete();
 
-    const hp = options.dnd5e?.hp;
-    if ( isHpUpdate && hp && !options.isRest && !options.isAdvancement ) {
-      const curr = this.system.attributes.hp;
-      const changes = {
-        hp: curr.value - hp.value,
-        temp: curr.temp - hp.temp
-      };
-      changes.total = changes.hp + changes.temp;
+      // Adjust stored exhaustion value in existing effect
+      else if ( effect ) {
+        await effect.update({ "flags.dnd5e.exhaustionLevel": level }, { dnd5e: { originalExhaustion } });
+      }
 
-      if ( Number.isInteger(changes.total) && (changes.total !== 0) ) {
-        this._displayTokenEffect(changes);
-        if ( !game.settings.get("dnd5e", "disableConcentration") && (userId === game.userId)
-          && (options.dnd5e?.concentrationCheck !== false)
-          && (changes.total < 0) && ((changes.temp < 0) || (curr.value < curr.effectiveMax)) ) {
-          this.challengeConcentration({ dc: this.getConcentrationDC(-changes.total) });
-        }
-
-        /**
-         * A hook event that fires when an actor is damaged or healed by any means. The actual name
-         * of the hook will depend on the change in hit points.
-         * @function dnd5e.damageActor
-         * @memberof hookEvents
-         * @param {Actor5e} actor                                       The actor that had their hit points reduced.
-         * @param {{hp: number, temp: number, total: number}} changes   The changes to hit points.
-         * @param {object} update                                       The original update delta.
-         * @param {string} userId                                       Id of the user that performed the update.
-         */
-        Hooks.callAll(`dnd5e.${changes.total > 0 ? "heal" : "damage"}Actor`, this, changes, data, userId);
+      // No existing effect, create a new one
+      else {
+        const newEffect = await ActiveEffect.implementation.fromStatusEffect("exhaustion", { parent: actor });
+        newEffect.updateSource({ "flags.dnd5e.exhaustionLevel": level });
+        await ActiveEffect.implementation.create(newEffect, { parent: actor, keepId: true });
       }
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onUpdate(data, options, userId) {
+    super._onUpdate(data, options, userId);
+    if ( userId === game.userId ) this.updateEncumbrance(options);
   }
 
   /* -------------------------------------------- */
@@ -3392,6 +3311,36 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       await this._clearFavorites(documents);
     }
     super._onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId);
+  }
+
+  /* -------------------------------------------- */
+  /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
+
+  /**
+   * Assign a class item as the original class for the Actor based on which class has the most levels.
+   * @returns {Promise<Actor5e>}  Instance of the updated actor.
+   * @protected
+   */
+  _assignPrimaryClass() {
+    const classes = this.itemTypes.class.sort((a, b) => b.system.levels - a.system.levels);
+    const newPC = classes[0]?.id || "";
+    return this.update({ "system.details.originalClass": newPC });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle clearing favorited entries that were deleted.
+   * @param {Document[]} documents  The deleted Documents.
+   * @returns {Promise<Actor5e>|void}
+   * @protected
+   */
+  _clearFavorites(documents) {
+    if ( !("favorites" in this.system) ) return;
+    const ids = new Set(documents.map(d => d.getRelativeUUID(this)));
+    const favorites = this.system.favorites.filter(f => !ids.has(f.id));
+    return this.update({ "system.favorites": favorites });
   }
 
   /* -------------------------------------------- */
@@ -3459,31 +3408,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
-   * TODO: Perform this as part of Actor._preUpdateOperation instead when it becomes available in v12.
-   * Handle syncing the Actor's exhaustion level with the ActiveEffect.
-   * @param {object} data                          The Actor's update delta.
-   * @param {DocumentModificationContext} options  Additional options supplied with the update.
-   * @returns {Promise<ActiveEffect|void>}
-   * @protected
-   */
-  async _onUpdateExhaustion(data, options) {
-    const level = foundry.utils.getProperty(data, "system.attributes.exhaustion");
-    if ( !Number.isFinite(level) ) return;
-    let effect = this.effects.get(ActiveEffect5e.ID.EXHAUSTION);
-    if ( level < 1 ) return effect?.delete();
-    else if ( effect ) {
-      const originalExhaustion = foundry.utils.getProperty(options, "dnd5e.originalExhaustion");
-      return effect.update({ "flags.dnd5e.exhaustionLevel": level }, { dnd5e: { originalExhaustion } });
-    } else {
-      effect = await ActiveEffect.implementation.fromStatusEffect("exhaustion", { parent: this });
-      effect.updateSource({ "flags.dnd5e.exhaustionLevel": level });
-      return ActiveEffect.implementation.create(effect, { parent: this, keepId: true });
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Handle applying/removing the bloodied status.
    * @param {DocumentModificationContext} options  Additional options supplied with the update.
    * @returns {Promise<ActiveEffect>|void}
@@ -3533,21 +3457,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       { _id: ActiveEffect5e.ID.ENCUMBERED, ...effectData },
       { parent: this, keepId: true }
     );
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle clearing favorited entries that were deleted.
-   * @param {Document[]} documents  The deleted Documents.
-   * @returns {Promise<Actor5e>|void}
-   * @protected
-   */
-  _clearFavorites(documents) {
-    if ( !("favorites" in this.system) ) return;
-    const ids = new Set(documents.map(d => d.getRelativeUUID(this)));
-    const favorites = this.system.favorites.filter(f => !ids.has(f.id));
-    return this.update({ "system.favorites": favorites });
   }
 
   /* -------------------------------------------- */
