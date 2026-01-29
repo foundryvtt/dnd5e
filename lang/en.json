@@ -7,19 +7,23 @@
   }
 },
 
-"TYPES.Actor.character": "Player Character",
-"TYPES.Actor.characterPl": "Player Characters",
-"TYPES.Actor.encounter": "Encounter",
-"TYPES.Actor.encounterPl": "Encounters",
-"TYPES.Actor.group": "Group",
-"TYPES.Actor.groupPl": "Groups",
-"TYPES.Actor.npc": "Non-Player Character",
-"TYPES.Actor.npcPl": "Non-Player Characters",
-"TYPES.Actor.vehicle": "Vehicle",
-"TYPES.Actor.vehiclePl": "Vehicles",
+"TYPES.Actor": {
+  "character": "Player Character",
+  "characterPl": "Player Characters",
+  "encounter": "Encounter",
+  "encounterPl": "Encounters",
+  "group": "Group",
+  "groupPl": "Groups",
+  "npc": "Non-Player Character",
+  "npcPl": "Non-Player Characters",
+  "vehicle": "Vehicle",
+  "vehiclePl": "Vehicles"
+},
 
-"TYPES.ActiveEffect.enchantment": "Enchantment",
-"TYPES.ActiveEffect.enchantmentPl": "Enchantments",
+"TYPES.ActiveEffect": {
+  "enchantment": "Enchantment",
+  "enchantmentPl": "Enchantments"
+},
 
 "TYPES.ChatMessage": {
   "request": "Request Message",
@@ -27,34 +31,36 @@
   "turn": "Combat Turn Message"
 },
 
-"TYPES.Item.background": "Background",
-"TYPES.Item.backgroundPl": "Backgrounds",
-"TYPES.Item.container": "Container",
-"TYPES.Item.containerPl": "Containers",
-"TYPES.Item.class": "Class",
-"TYPES.Item.classPl": "Classes",
-"TYPES.Item.consumable": "Consumable",
-"TYPES.Item.consumablePl": "Consumables",
-"TYPES.Item.equipment": "Equipment",
-"TYPES.Item.equipmentPl": "Equipment",
-"TYPES.Item.facility": "Facility",
-"TYPES.Item.facilityPl": "Facilities",
-"TYPES.Item.feat": "Feature",
-"TYPES.Item.featurePl": "Features",
-"TYPES.Item.loot": "Loot",
-"TYPES.Item.lootPl": "Loot",
-"TYPES.Item.race": "Species",
-"TYPES.Item.racePl": "Species",
-"TYPES.Item.raceLegacy": "Race",
-"TYPES.Item.raceLegacyPl": "Races",
-"TYPES.Item.spell": "Spell",
-"TYPES.Item.spellPl": "Spells",
-"TYPES.Item.subclass": "Subclass",
-"TYPES.Item.subclassPl": "Subclasses",
-"TYPES.Item.tool": "Tool",
-"TYPES.Item.toolPl": "Tools",
-"TYPES.Item.weapon": "Weapon",
-"TYPES.Item.weaponPl": "Weapons",
+"TYPES.Item": {
+  "background": "Background",
+  "backgroundPl": "Backgrounds",
+  "container": "Container",
+  "containerPl": "Containers",
+  "class": "Class",
+  "classPl": "Classes",
+  "consumable": "Consumable",
+  "consumablePl": "Consumables",
+  "equipment": "Equipment",
+  "equipmentPl": "Equipment",
+  "facility": "Facility",
+  "facilityPl": "Facilities",
+  "feat": "Feature",
+  "featurePl": "Features",
+  "loot": "Loot",
+  "lootPl": "Loot",
+  "race": "Species",
+  "racePl": "Species",
+  "raceLegacy": "Race",
+  "raceLegacyPl": "Races",
+  "spell": "Spell",
+  "spellPl": "Spells",
+  "subclass": "Subclass",
+  "subclassPl": "Subclasses",
+  "tool": "Tool",
+  "toolPl": "Tools",
+  "weapon": "Weapon",
+  "weaponPl": "Weapons"
+},
 
 "TYPES.RegionBehavior": {
   "dnd5e.difficultTerrain": "Difficult Terrain",
@@ -1637,12 +1643,6 @@
 "DND5E.ConCharmed": "Charmed",
 "DND5E.ConDeafened": "Deafened",
 "DND5E.ConDiseased": "Diseased",
-"DND5E.CONDITIONS": {
-  "RiderConditions": {
-    "label": "Separate Status Conditions",
-    "hint": "When this Active Effect is applied, these additional status conditions will be applied separately."
-  }
-},
 "DND5E.ConExhaustion": "Exhaustion",
 "DND5E.ConFrightened": "Frightened",
 "DND5E.ConGrappled": "Grappled",
@@ -2213,25 +2213,51 @@
 "DND5E.DurationUnits": "Duration Units",
 "DND5E.DurationValue": "Duration Value",
 "DND5E.Dusk": "Dusk",
+
 "DND5E.Effect": "Effect",
-"DND5E.Effects": "Effects",
+
 "DND5E.EFFECT": {
   "Action": {
     "Create": "Create Effect",
     "Delete": "Delete Effect",
-    "Dissociate": "Dissociate Effect"
+    "Dissociate": "Dissociate Effect",
+    "Search": "Search effects"
+  },
+  "Application": {
+    "Action": {
+      "ApplyTokens": "Apply to selected tokens"
+    },
+    "Header": "Effects",
+    "Warning": {
+      "Concentration": "Applying an effect that is being concentrated on by another character requires GM permissions.",
+      "Ownership": "Effects cannot be applied to tokens you are not the owner of."
+    }
+  },
+  "BASE": {
+    "FIELDS": {
+      "magical": {
+        "hint": "This effect is from a magical source and should be disabled when magic isn't available.",
+        "label": "Magical"
+      }
+    }
   },
   "Empty": "No associated effects. Use the <i class=\"fas fa-plus\"></i> button above to create one, or select an existing effect from the drop-down.",
   "Label": "Available Effects",
   "RIDER": {
     "Activity": "Enchantment Rider Activity",
-    "Effect": "Enchantment Rider Effect"
-  }
+    "Effect": "Enchantment Rider Effect",
+    "FIELDS": {
+      "rider": {
+        "statuses": {
+          "hint": "When this Active Effect is applied, these additional status conditions will be applied separately.",
+          "label": "Separate Status Conditions"
+        }
+      }
+    }
+  },
+  "Tab": "Effects"
 },
-"DND5E.EffectsApplyTokens": "Apply to selected tokens",
-"DND5E.EffectApplyWarningConcentration": "Applying an effect that is being concentrated on by another character requires GM permissions.",
-"DND5E.EffectApplyWarningOwnership": "Effects cannot be applied to tokens you are not the owner of.",
-"DND5E.EffectsSearch": "Search effects",
+
 
 "DND5E.ENCHANT": {
   "FIELDS": {
@@ -2336,18 +2362,9 @@
     "Inactive": "Inactive Enchantments"
   },
   "FIELDS": {
-    "enchantment": {
-      "label": "Enchantment Configuration",
-      "items": {
-        "max": {
-          "label": "Item Limit",
-          "hint": "Formula for the maximum number of enchantments of this type that can be active at a time."
-        },
-        "period": {
-          "label": "Replacement Period",
-          "hint": "How frequently the enchantments of this type can be re-bound to different items."
-        }
-      }
+    "magical": {
+      "hint": "This enchantment is magical and should be disabled when magic isn't available.",
+      "label": "Magical"
     }
   },
   "Items": {
@@ -2707,6 +2724,19 @@
     "cover": {
       "label": "Cover",
       "hint": "Cover provided to crew by this vehicle feature."
+    },
+    "enchant": {
+      "label": "Enchantment Configuration",
+      "items": {
+        "max": {
+          "label": "Item Limit",
+          "hint": "Formula for the maximum number of enchantments of this type that can be active at a time."
+        },
+        "period": {
+          "label": "Replacement Period",
+          "hint": "How frequently the enchantments of this type can be re-bound to different items."
+        }
+      }
     },
     "properties": {
       "label": "Feature Properties"

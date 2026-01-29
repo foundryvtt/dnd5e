@@ -70,6 +70,16 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /* -------------------------------------------- */
 
   /**
+   * Document type to which this active effect should apply its changes.
+   * @type {string}
+   */
+  get applicableType() {
+    return this.system.applicableType ?? "Actor";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Another effect that granted this effect as a rider.
    * @type {ActiveEffect5e|null}
    */
@@ -85,7 +95,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * @type {boolean}
    */
   get isAppliedEnchantment() {
-    return (this.type === "enchantment") && !!this.origin && (this.origin !== this.parent.uuid);
+    return (this.type === "enchantment") && this.system.isApplied;
   }
 
   /* -------------------------------------------- */
@@ -95,6 +105,9 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * @type {boolean}
    */
   get isConcealed() {
+    if ( this.system.isConcealed ) return true;
+    if ( this.dependentOrigin?.active === false ) return true;
+    if ( (this.parent.system?.identified === false) && !game.user.isGM ) return true;
     if ( this.target?.testUserPermission(game.user, "OBSERVER") ) return false;
 
     // Hide bloodied status effect from players unless the token is friendly
@@ -110,6 +123,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /** @inheritDoc */
   get isSuppressed() {
     if ( super.isSuppressed ) return true;
+    if ( this.system.magical && this.parent.actor?.statuses.has("antimagic") ) return true;
     if ( this.type === "enchantment" ) return false;
     if ( this.parent instanceof dnd5e.documents.Item5e ) {
       if ( this.parent.areEffectsSuppressed ) return true;
@@ -168,6 +182,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /** @inheritDoc */
   static migrateData(data) {
     data = super.migrateData(data);
+
     for ( const change of data.changes ?? [] ) {
       if ( change.key === "flags.dnd5e.initiativeAdv" ) {
         change.key = "system.attributes.init.roll.mode";
@@ -175,6 +190,12 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
         change.value = 1;
       }
     }
+
+    if ( data.flags?.dnd5e?.riders?.statuses && !data.system?.rider?.statuses ) {
+      foundry.utils.setProperty(data, "system.rider.statuses", data.flags.dnd5e.riders.statuses);
+      delete data.flags.dnd5e.riders.statuses;
+    }
+
     return data;
   }
 
@@ -373,6 +394,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       { since: "DnD5e 5.1", until: "DnD5e 5.3" }
     );
   }
+
   /* -------------------------------------------- */
   /*  Lifecycle                                   */
   /* -------------------------------------------- */
@@ -389,7 +411,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   prepareDerivedData() {
     super.prepareDerivedData();
     if ( this.id === this.constructor.ID.EXHAUSTION ) this._prepareExhaustionLevel();
-    if ( this.isAppliedEnchantment && this.uuid ) dnd5e.registry.enchantments.track(this.origin, this.uuid);
   }
 
   /* -------------------------------------------- */
@@ -433,11 +454,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * @returns {Promise<ActiveEffect5e[]>}      Created rider effects.
    */
   async createRiderConditions() {
-    const riders = new Set();
-
-    for ( const status of this.getFlag("dnd5e", "riders.statuses") ?? [] ) {
-      riders.add(status);
-    }
+    const riders = new Set(this.system.riders?.statuses ?? []);
 
     for ( const status of this.statuses ) {
       const r = CONFIG.statusEffects.find(e => e.id === status)?.riders ?? [];
@@ -499,10 +516,9 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       foundry.utils.setProperty(activityData, "flags.dnd5e.dependentOn", this.id);
       riderActivities[activityData._id] = activityData;
     }
-    let createdActivities = [];
     if ( !foundry.utils.isEmpty(riderActivities) ) {
       await this.parent.update({ "system.activities": riderActivities });
-      createdActivities = Object.keys(riderActivities).map(id => this.parent.system.activities?.get(id));
+      const createdActivities = Object.keys(riderActivities).map(id => this.parent.system.activities?.get(id));
       createdActivities.forEach(a => a.effects?.forEach(e => {
         if ( !this.parent.effects.has(e._id) ) riderEffects.push(item.effects.get(e._id)?.toObject());
       }));
@@ -558,22 +574,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   async _preCreate(data, options, user) {
     if ( await super._preCreate(data, options, user) === false ) return false;
     if ( options.keepOrigin === false ) this.updateSource({ origin: this.parent.uuid });
-
-    // Enchantments cannot be added directly to actors
-    if ( (this.type === "enchantment") && (this.parent instanceof Actor) ) {
-      ui.notifications.error("DND5E.ENCHANTMENT.Warning.NotOnActor", { localize: true });
-      return false;
-    }
-
-    if ( this.isAppliedEnchantment ) {
-      const origin = await fromUuid(this.origin);
-      const errors = origin?.canEnchant?.(this.parent);
-      if ( errors?.length ) {
-        errors.forEach(err => console.error(err));
-        return false;
-      }
-      this.updateSource({ disabled: false });
-    }
   }
 
   /* -------------------------------------------- */
@@ -584,10 +584,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     if ( userId === game.userId ) {
       if ( this.active && (this.parent instanceof Actor) ) await this.createRiderConditions();
       if ( this.isAppliedEnchantment ) await this.createRiderEnchantments(options);
-    }
-    if ( options.chatMessageOrigin ) {
-      document.body.querySelectorAll(`[data-message-id="${options.chatMessageOrigin}"] enchantment-application`)
-        .forEach(element => element.buildItemList());
     }
   }
 
@@ -641,9 +637,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   _onDelete(options, userId) {
     super._onDelete(options, userId);
     if ( game.user === game.users.activeGM ) this.getDependents().forEach(e => e.delete());
-    if ( this.isAppliedEnchantment ) dnd5e.registry.enchantments.untrack(this.origin, this.uuid);
-    document.body.querySelectorAll(`enchantment-application:has([data-enchantment-uuid="${this.uuid}"]`)
-      .forEach(element => element.buildItemList());
   }
 
   /* -------------------------------------------- */
@@ -717,16 +710,25 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * @param {ApplicationRenderContext} context The app's rendering context.
    */
   static onRenderActiveEffectConfig(app, html, context) {
-    const element = new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {}).toFormGroup({
-      label: game.i18n.localize("DND5E.CONDITIONS.RiderConditions.label"),
-      hint: game.i18n.localize("DND5E.CONDITIONS.RiderConditions.hint")
-    }, {
-      name: "flags.dnd5e.riders.statuses",
-      value: app.document.getFlag("dnd5e", "riders.statuses") ?? [],
+    if ( app.document.system.onRenderActiveEffectConfig?.(app, html, context) === false ) return;
+    const fields = app.document.system.schema.fields;
+    const magicalField = fields.magical?.toFormGroup({}, {
+      value: app.document.system._source.magical,
+      disabled: !context.editable
+    });
+    const statusesField = fields.rider?.fields?.statuses?.toFormGroup({}, {
+      value: app.document.system._source.rider?.statuses ?? [],
       options: CONFIG.statusEffects.map(se => ({ value: se.id, label: se.name })),
       disabled: !context.editable
     });
-    html.querySelector("[data-tab=details] > .form-group:has([name=statuses])")?.after(element);
+    const detailsTab = html.querySelector("[data-application-part=details]");
+    const statuses = detailsTab.querySelector("& > .form-group:has([name=statuses])");
+    if ( statuses ) {
+      if ( magicalField ) statuses?.before(magicalField);
+      if ( statusesField ) statuses?.after(statusesField);
+    } else {
+      detailsTab.append(...[magicalField, statusesField].filter(_ => _));
+    }
 
     // Add tooltip with link to wiki for effects/enchantments
     const helpIconElement = document.createElement("i");

@@ -32,13 +32,13 @@
 
     {{!-- Max Enchantments --}}
     {{ formField fields.enchant.fields.max value=source.enchant.max localize=true
-                 label="DND5E.ENCHANTMENT.FIELDS.enchantment.items.max.label"
-                 hint="DND5E.ENCHANTMENT.FIELDS.enchantment.items.max.hint" rootId=partId }}
+                 label="DND5E.FEATURE.FIELDS.enchant.items.max.label"
+                 hint="DND5E.FEATURE.FIELDS.enchant.items.max.hint" rootId=partId }}
 
     {{!-- Enchantment Replacement --}}
     {{ formField fields.enchant.fields.period value=source.enchant.period localize=true
                  choices=CONFIG.enchantmentPeriods labelAttr="label" blank="DND5E.ENCHANTMENT.Period.Never"
-                 label="DND5E.ENCHANTMENT.FIELDS.enchantment.items.period.label"
-                 hint="DND5E.ENCHANTMENT.FIELDS.enchantment.items.period.hint" rootId=partId }}
+                 label="DND5E.FEATURE.FIELDS.enchant.items.period.label"
+                 hint="DND5E.FEATURE.FIELDS.enchant.items.period.hint" rootId=partId }}
 </fieldset>
 {{/if}}

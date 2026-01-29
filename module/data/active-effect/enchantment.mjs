@@ -1,17 +1,76 @@
+import ActiveEffectDataModel from "../abstract/active-effect-data-model.mjs";
 import { DamageData } from "../shared/damage-field.mjs";
 
-const { ActiveEffectTypeDataModel } = foundry.data;
-const { TypeDataModel } = foundry.abstract;
+const { BooleanField } = foundry.data.fields;
+
+/**
+ * @import { EnchantmentActiveEffectSystemData } from "./types.mjs";
+ */
 
 /**
  * System data model for enchantment active effects.
+ * @extends {ActiveEffectDataModel<EnchantmentActiveEffectSystemData>}
+ * @mixes EnchantmentActiveEffectSystemData
  */
-export default class EnchantmentData extends (ActiveEffectTypeDataModel ?? TypeDataModel) {
+export default class EnchantmentData extends ActiveEffectDataModel {
+  /* -------------------------------------------- */
+  /*  Model Configuration                         */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static LOCALIZATION_PREFIXES = ["DND5E.ENCHANTMENT"];
+
+  /* -------------------------------------------- */
+
   /** @override */
   static defineSchema() {
-    return ActiveEffectTypeDataModel ? super.defineSchema() : {};
+    return {
+      ...super.defineSchema(),
+      magical: new BooleanField({ initial: true })
+    };
   }
 
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /** @override */
+  get applicableType() {
+    return this.isApplied ? "Item" : "";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Has this enchantment been applied by another item, or was it directly created.
+   * @type {boolean}
+   */
+  get isApplied() {
+    return !!this.parent.origin && (this.parent.origin !== this.item?.uuid);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Item containing this enchantment.
+   * @type {Item5e|void}
+   */
+  get item() {
+    return this.parent.parent;
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    if ( this.isApplied && this.parent.uuid ) dnd5e.registry.enchantments.track(this.parent.origin, this.parent.uuid);
+  }
+
+  /* -------------------------------------------- */
+  /*  Effect Application                          */
   /* -------------------------------------------- */
 
   /**
@@ -111,5 +170,61 @@ export default class EnchantmentData extends (ActiveEffectTypeDataModel ?? TypeD
         change.key = "system.prepared";
         break;
     }
+  }
+
+  /* -------------------------------------------- */
+  /*  Event Listeners & Handlers                  */
+  /* -------------------------------------------- */
+
+  /** @override */
+  onRenderActiveEffectConfig(app, html, context) {
+    const toRemove = html.querySelectorAll('.form-group:has([name="transfer"], [name="statuses"])');
+    toRemove.forEach(f => f.remove());
+  }
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preCreate(data, options, user) {
+    if ((await super._preCreate(data, options, user)) === false) return false;
+
+    // Enchantments cannot be added directly to actors
+    if ( this.parent.parent instanceof Actor ) {
+      ui.notifications.error("DND5E.ENCHANTMENT.Warning.NotOnActor", { localize: true });
+      return false;
+    }
+
+    if ( this.isApplied ) {
+      const origin = await fromUuid(this.parent.origin);
+      const errors = origin?.canEnchant?.(this.item);
+      if ( errors?.length ) {
+        errors.forEach(err => console.error(err));
+        return false;
+      }
+      this.parent.updateSource({ disabled: false });
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onCreate(data, options, userId) {
+    super._onCreate(data, options, userId);
+    if ( options.chatMessageOrigin ) {
+      document.body.querySelectorAll(`[data-message-id="${options.chatMessageOrigin}"] enchantment-application`)
+        .forEach(element => element.buildItemList());
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onDelete(options, userId) {
+    super._onDelete(options, userId);
+    if ( this.isApplied ) dnd5e.registry.enchantments.untrack(this.origin, this.uuid);
+    document.body.querySelectorAll(`enchantment-application:has([data-enchantment-uuid="${this.parent.uuid}"]`)
+      .forEach(element => element.buildItemList());
   }
 }
