@@ -4376,6 +4376,37 @@
 "DND5E.Supply": "Supply",
 "DND5E.Suppressed": "Suppressed",
 
+"DND5E.TABLEOFCONTENTS": {
+  "Action": {
+    "Configure": "Configure Table of Contents"
+  },
+  "FIELDS": {
+    "position": {
+      "label": "Position"
+    },
+    "type": {
+      "label": "Type"
+    }
+  },
+  "JournalEntry": "Journal Entry",
+  "NoFolder": "No Folder",
+  "Special": {
+    "After": "After {chapter}",
+    "End": "End of Table of Contents"
+  },
+  "Title": "Table of Contents",
+  "Type": {
+    "Appendix": "Appendix",
+    "Chapter": "Chapter",
+    "Header": "Header",
+    "Special": "Special"
+  },
+  "Warning": {
+    "DuplicateHeader": "Only one entry can be set with the Header type.",
+    "DuplicatePosition": "Each Chapter and Appendix should have a unique position value."
+  }
+},
+
 "DND5E.TARGET": {
   "Action": {
     "PlaceTemplate": "Place Measured Template"
