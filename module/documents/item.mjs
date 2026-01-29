@@ -475,6 +475,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @type {boolean}
    */
   get areEffectsSuppressed() {
+    if ( this.parent?.hiddenItems?.has(this.id) ) return true;
     const requireEquipped = (this.type !== "consumable")
       || ["rod", "trinket", "wand"].includes(this.system.type.value);
     if ( requireEquipped && (this.system.equipped === false) ) return true;

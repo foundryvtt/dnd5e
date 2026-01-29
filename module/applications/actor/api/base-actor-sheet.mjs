@@ -454,6 +454,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     context.itemContext = {};
     context.items = Array.from(this.inventorySource.items).filter(i => !this.actor.items.has(i.system.container));
     await Promise.all(context.items.map(async item => {
+      if ( !this._isItemVisible(item) ) return;
+
       // Prepare item context
       const ctx = context.itemContext[item.id] ??= {};
       ctx.clickAction = "use";
@@ -751,12 +753,25 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @protected
    */
   _assignItemCategories(item) {
-    const origin = item.dependentOrigin;
-    if ( (origin?.active === false) && (origin.parent !== item) ) return [];
     if ( item.type === "container" ) return new Set(["containers", "inventory"]);
     if ( item.type === "spell" ) return new Set(["spells"]);
     if ( "inventorySection" in item.system.constructor ) return new Set(["inventory"]);
     return new Set(["features"]);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine whether an item should be displayed on the sheet.
+   * @param {Item5e} item    Item being prepared for display.
+   * @returns {boolean}
+   * @protected
+   */
+  _isItemVisible(item) {
+    const origin = item.dependentOrigin;
+    if ( this.actor.hiddenItems.has(item.id) ) return false;
+    if ( (origin?.active === false) && (origin.parent !== item) ) return false;
+    return true;
   }
 
   /* -------------------------------------------- */

@@ -200,6 +200,18 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     if ( (change.key.startsWith("activities[") || change.key.startsWith("system.activities."))
       && (doc instanceof Item) ) return this.applyActivity(doc, change);
 
+    // Handle hiding items
+    if ( change.key === "items.hidden" && (doc instanceof Actor) ) {
+      if ( change.mode === CONST.ACTIVE_EFFECT_MODES.ADD ) {
+        if ( doc.items.has(change.value) ) doc.hiddenItems.add(change.value);
+        else doc.identifiedItems.get(change.value)?.forEach(i => doc.hiddenItems.add(i.id));
+      } else if ( change.mode === CONST.ACTIVE_EFFECT_CHANGE_TYPES?.subtract ) {
+        if ( doc.items.has(change.value) ) doc.hiddenItems.delete(change.value);
+        else doc.identifiedItems.get(change.value)?.forEach(i => doc.hiddenItems.delete(i.id));
+      }
+      return;
+    }
+
     return super.apply(doc, change);
   }
 
