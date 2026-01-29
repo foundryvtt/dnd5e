@@ -1030,9 +1030,12 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     }
 
     // If no advancements need to be applied, just add them to the item
-    const advancementArray = this.item.system.toObject().advancement;
-    advancementArray.push(...advancements.map(a => a.toObject()));
-    this.item.update({"system.advancement": advancementArray});
+    this.item.update({
+      "system.advancement": advancements.reduce((obj, a) => {
+        obj[a.id] = a.toObject();
+        return obj;
+      }, {})
+    });
   }
 
   /* -------------------------------------------- */

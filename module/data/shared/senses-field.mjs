@@ -23,7 +23,7 @@ export default class SensesField extends foundry.data.fields.SchemaField {
   }
 
   /* -------------------------------------------- */
-  /*  Data Migrations                             */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /**
