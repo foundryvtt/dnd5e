@@ -646,7 +646,10 @@ Hooks.on("preCreateScene", (doc, createData, options, userId) => {
   if ( (units !== dnd5e.grid.units) && !foundry.utils.getProperty(createData, "grid.distance")
     && !foundry.utils.getProperty(createData, "grid.units") ) {
     doc.updateSource({
-      grid: { distance: utils.convertLength(dnd5e.grid.distance, dnd5e.grid.units, units, { strict: false }), units }
+      grid: {
+        distance: utils.convertLength( dnd5e.grid.distance, dnd5e.grid.units, { legacy: false, to: units }).value,
+        units
+      }
     });
   }
 });
