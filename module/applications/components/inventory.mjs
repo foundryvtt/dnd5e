@@ -2,6 +2,7 @@ import ContextMenu5e from "../context-menu.mjs";
 import UtilityActivity from "../../documents/activity/utility.mjs";
 import CurrencyManager from "../currency-manager.mjs";
 import ItemSheet5e from "../item/item-sheet.mjs";
+import SplitStackDialog from "../item/split-stack-dialog.mjs";
 import { parseInputDelta } from "../../utils.mjs";
 import Item5e from "../../documents/item.mjs";
 
@@ -369,6 +370,12 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
         const scroll = await Item.implementation.createScrollFromSpell(item);
         if ( scroll ) void Item.implementation.create(scroll, { parent: this.actor });
       },
+      group: "action"
+    }, {
+      name: "DND5E.SplitStack.Title",
+      icon: '<i class="fa-solid fa-arrows-split-up-and-left"></i>',
+      condition: () => item.isOwner && !compendiumLocked && ((item.system.quantity ?? 0) > 1),
+      callback: () => new SplitStackDialog({ document: item }).render({ force: true }),
       group: "action"
     }, {
       name: "DND5E.ConcentrationBreak",
