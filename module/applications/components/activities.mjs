@@ -119,7 +119,7 @@ export default class ActivitiesElement extends (foundry.applications.elements.Ad
       if ( activity && (input.dataset.name === "uses.value") ) {
         this.document.updateActivity(activityId, { "uses.spent": activity.uses.max - result });
       }
-      else this.document.update({ [input.dataset.name]: result });
+      else this.document.updateActivity(activityId, { [input.dataset.name]: result });
     }
   }
 
