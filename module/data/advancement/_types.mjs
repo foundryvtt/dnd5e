@@ -39,6 +39,7 @@
  * @property {Set<string>} restriction.list                   Spell lists from which a spell must be selected.
  * @property {string} restriction.subtype                     Item sub-type allowed.
  * @property {string} restriction.type                        Specific item type allowed.
+ * @property {string} sorting                                 Sorting mode for the item list.
  * @property {AdvancementSpellConfigurationData} spell        Mutations applied to spell items.
  * @property {string} type                                    Type of item allowed, if it should be restricted.
  */
@@ -51,6 +52,7 @@
 
 /**
  * @typedef ItemChoicePoolEntry
+ * @property {number} sort  Manual sorting value for the entry.
  * @property {string} uuid  UUID of the item to present as a choice.
  */
 
@@ -72,13 +74,15 @@
  * @typedef ItemGrantAdvancementConfigurationData
  * @property {ItemGrantItemConfiguration[]} items       Data for the items to be granted.
  * @property {boolean} optional                         Should user be able to de-select any individual option?
+ * @property {string} sorting                           Sorting mode for the item list.
  * @property {AdvancementSpellConfigurationData} spell  Data used to modify any granted spells.
  */
 
 /**
  * @typedef ItemGrantItemConfiguration
- * @property {string} uuid       UUID of the item to grant.
  * @property {boolean} optional  Is this item optional? Has no effect if whole advancement is optional.
+ * @property {number} sort       Manual sorting value for the entry.
+ * @property {string} uuid       UUID of the item to grant.
  */
 
 /**

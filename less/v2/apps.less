@@ -203,6 +203,7 @@
         line-height: 1;
       }
 
+      button, button:hover:not(:disabled) { color: currentcolor; }
       .radio-button {
         background: var(--dnd5e-background-alt-1);
         &[aria-pressed="true"]::before { background: var(--dnd5e-color-gold); }
@@ -260,6 +261,18 @@
         .sign { color: var(--color-text-tertiary); }
       }
     }
+  }
+
+  .drag-bar {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    inset-block: 0;
+    inset-inline-end: 0;
+    inline-size: 16px;
+    cursor: var(--cursor-grab);
+    color: var(--dnd5e-color-faint);
   }
 
   .unlist {
@@ -689,6 +702,7 @@
         > li {
           margin: 0 -.75em;
           padding: 6px .75em;
+          position: relative;
 
           &:nth-child(odd) { background: var(--dnd5e-color-table-row-odd); }
           &:nth-child(even) { background: var(--dnd5e-color-table-row-even); }
@@ -703,6 +717,7 @@
         text-align: right;
         flex-wrap: nowrap;
         gap: 4px;
+        &:has(> .drag-bar) { margin-inline-end: 8px; }
       }
 
       .name-header { padding-inline-start: 16px; }
