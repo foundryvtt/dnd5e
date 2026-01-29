@@ -2331,12 +2331,19 @@ DND5E.healingTypes = {
     color: new Color(0x46C252)
   },
   temphp: {
-    label: "DND5E.HealingTemp",
+    label: "DND5E.HEAL.Type.Temporary",
+    labelShort: "DND5E.HEAL.Type.TemporaryShort",
     icon: "systems/dnd5e/icons/svg/damage/temphp.svg",
     color: new Color(0x4B66DE)
+  },
+  maximum: {
+    label: "DND5E.HEAL.Type.Maximum",
+    labelShort: "DND5E.HEAL.Type.MaximumShort",
+    icon: "systems/dnd5e/icons/svg/damage/maxhp.svg",
+    color: new Color(0x4BDEDE)
   }
 };
-preLocalize("healingTypes", { keys: ["label"] });
+preLocalize("healingTypes", { keys: ["label", "labelShort"] });
 
 /* -------------------------------------------- */
 /*  Movement                                    */

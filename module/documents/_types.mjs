@@ -66,14 +66,15 @@
  * @property {boolean} [ignore.threshold]                  Should this actor's damage threshold be ignored?
  * @property {boolean} [invertHealing=true]  Automatically invert healing types to it heals, rather than damages.
  * @property {"damage"|"healing"} [only]     Apply only damage or healing parts. Untyped rolls will always be applied.
+ * @property {ChatMessage5e} [originatingMessage]  Chat message that holds the damage being applied.
  * @property {boolean} [isDelta]             Whether the damage is coming from a relative change.
- * @property {ChatMessage5e} [originatingMessage]          The associated chat message.
  */
 
 /**
  * @typedef {Array<DamageDescription>} DamageSummary
- * @property {number} amount  Total amount of damage/healing across all damage types.
- * @property {number} temp    Total amount of temp HP across all damage types.
+ * @property {number} amount   Total amount of damage/healing across all damage types.
+ * @property {number} temp     Total amount of temp HP across all damage types.
+ * @property {number} tempMax  Total amount of temp max HP across all damage types.
  */
 
 /* -------------------------------------------- */

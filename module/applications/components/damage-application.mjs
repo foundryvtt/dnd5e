@@ -72,7 +72,9 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
    * @returns {DamageApplicationOptions}
    */
   getTargetOptions(uuid) {
-    if ( !this.#targetOptions.has(uuid) ) this.#targetOptions.set(uuid, { multiplier: 1, originatingMessage: this.chatMessage });
+    if ( !this.#targetOptions.has(uuid) ) this.#targetOptions.set(uuid, {
+      multiplier: 1, originatingMessage: this.chatMessage
+    });
     return this.#targetOptions.get(uuid);
   }
 
@@ -125,7 +127,7 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
 
     // Calculate damage to apply
     const targetOptions = this.getTargetOptions(uuid);
-    const { temp, total, active } = this.calculateDamage(actor, targetOptions);
+    const { temp, tempMax, total, active } = this.calculateDamage(actor, targetOptions);
 
     const types = [];
     for ( const [change, values] of Object.entries(active) ) {
@@ -155,8 +157,11 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
       <div class="calculated damage">
         ${total}
       </div>
-      <div class="calculated temp" data-tooltip="DND5E.HitPointsTemp">
+      <div class="calculated temp" data-tooltip="DND5E.HEAL.Type.Temporary">
         ${temp}
+      </div>
+      <div class="calculated temp-max" data-tooltip="DND5E.HEAL.Type.Maximum">
+        ${tempMax}
       </div>
       <menu class="damage-multipliers unlist"></menu>
     `;
@@ -189,7 +194,7 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
    */
   calculateDamage(actor, options) {
     const damages = actor.calculateDamage(this.damages, options);
-    let { amount, temp } = damages;
+    let { amount, temp, tempMax } = damages;
 
     let active = {
       modification: new Set(), resistance: new Set(), vulnerability: new Set(), immunity: new Set(), threshold: false
@@ -219,7 +224,7 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
     }
     active.threshold ||= options.ignore?.threshold;
 
-    return { temp, total: amount, active };
+    return { temp, tempMax, total: amount, active };
   }
 
   /* -------------------------------------------- */
@@ -275,15 +280,19 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
    * @param {DamageApplicationOptions} options
    */
   refreshListEntry(token, entry, options) {
-    const { active, temp, total } = this.calculateDamage(token, options);
+    const { active, temp, tempMax, total } = this.calculateDamage(token, options);
     const calculatedDamage = entry.querySelector(".calculated.damage");
     calculatedDamage.innerText = formatNumber(-total, { signDisplay: "exceptZero" });
     calculatedDamage.classList.toggle("healing", total < 0);
     calculatedDamage.dataset.tooltip = `DND5E.${total < 0 ? "Healing" : "Damage"}`;
-    calculatedDamage.hidden = !total && !!temp;
+    calculatedDamage.hidden = !total && (!!temp || !!tempMax);
     const calculatedTemp = entry.querySelector(".calculated.temp");
     calculatedTemp.innerText = temp;
     calculatedTemp.hidden = !temp;
+    const calculatedTempMax = entry.querySelector(".calculated.temp-max");
+    calculatedTempMax.innerText = formatNumber(-tempMax, { signDisplay: "always" });
+    calculatedTempMax.classList.toggle("healing", tempMax < 0);
+    calculatedTempMax.hidden = !tempMax;
 
     const pressedMultiplier = entry.querySelector('.multiplier-button[aria-pressed="true"]');
     if ( Number(pressedMultiplier?.dataset.multiplier) !== options.multiplier ) {
@@ -323,7 +332,7 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
     for ( const target of this.targetList.querySelectorAll("[data-target-uuid]") ) {
       const token = fromUuidSync(target.dataset.targetUuid);
       const options = this.getTargetOptions(target.dataset.targetUuid);
-      await token?.applyDamage(this.damages, { ...options, isDelta: true });
+      await token?.applyDamage(this.damages, { ...options, isDelta: true, origin: this.chatMessage });
     }
     if ( game.settings.get("dnd5e", "autoCollapseChatTrays") !== "manual" ) {
       this.open = false;

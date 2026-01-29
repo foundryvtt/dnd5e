@@ -536,7 +536,7 @@ export default class ChatMessage5e extends ChatMessage {
             </ol>
             <div class="total">
               ${config ? `<img src="${config.icon}" alt="${config.label}">` : ""}
-              <span class="label">${config?.label ?? ""}</span>
+              <span class="label">${config?.labelShort ?? config?.label ?? ""}</span>
               <span class="value">${total}</span>
             </div>
           </div>
