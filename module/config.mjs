@@ -3837,6 +3837,11 @@ DND5E.statusEffects = {
     img: "systems/dnd5e/icons/svg/statuses/hovering.svg",
     special: "HOVER"
   },
+  magical: {
+    label: "EFFECT.DND5E.StatusMagical",
+    icon: "systems/dnd5e/icons/svg/statuses/magical.svg",
+    hud: false
+  },
   marked: {
     name: "EFFECT.DND5E.StatusMarked",
     img: "systems/dnd5e/icons/svg/statuses/marked.svg"
