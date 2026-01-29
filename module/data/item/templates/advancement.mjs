@@ -39,7 +39,7 @@ export default class AdvancementTemplate extends SystemDataModel {
    * @param {object} source  Candidate source data to migrate.
    */
   static #migrateStorage(source) {
-    if ( foundry.utils.getType(source.advancement) === "Array" ) {
+    if ( Array.isArray(source.advancement) ) {
       source.advancement = source.advancement.reduce((obj, advancement) => {
         obj[advancement._id] = advancement;
         return obj;
