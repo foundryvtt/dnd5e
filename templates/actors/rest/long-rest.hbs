@@ -3,10 +3,28 @@
         {{ localize (ifThen isGroup "DND5E.REST.Long.Hint.Group" "DND5E.REST.Long.Hint.Normal") }}
     </div>
 
-    {{#if fields.length}}
+    {{#if showFields}}
     <fieldset>
         <legend>{{ localize "DND5E.REST.Configuration" }}</legend>
         {{> "dnd5e.fieldlist" fields }}
+
+        {{!-- Rest Duration --}}
+        {{#if duration}}
+        <div class="form-group split-group">
+            <label>{{ localize "DND5E.REST.Duration.Label" }}</label>
+            <div class="form-fields">
+                {{> "dnd5e.fieldlist" duration.fields }}
+                {{#if duration.showSunriseButton}}
+                <button type="button" class="dice-button" data-action="setDurationSunrise" data-tooltip
+                        aria-label="{{ localize 'DND5E.REST.Duration.UntilSunrise' }}">
+                    <i class="fa-solid fa-sun" inert></i>
+                </button>
+                {{/if}}
+            </div>
+            <p class="hint">{{ localize "DND5E.REST.Duration.Hint" }}</p>
+        </div>
+        {{/if}}
+
     </fieldset>
     {{/if}}
 
