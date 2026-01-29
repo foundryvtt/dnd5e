@@ -104,6 +104,58 @@ system:
         spent: 0
         recovery: []
       sort: 0
+    wgyusQWRKY9gCTiu:
+      type: transform
+      _id: wgyusQWRKY9gCTiu
+      sort: 0
+      activation:
+        type: ''
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      profiles:
+        - cr: '@target.details.cr'
+          name: ''
+          _id: LHLfS5BSpourwoiO
+          sizes: []
+          types:
+            - beast
+          movement: []
+          level:
+            min: null
+            max: null
+      settings: null
+      transform:
+        customize: false
+        preset: polymorph
+      name: ''
+      img: ''
   identifier: polymorph
 _id: phbsplPolymorph0
 type: spell
@@ -120,11 +172,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.346'
   systemId: dnd5e
-  systemVersion: 4.4.2
+  systemVersion: 5.1.0
   createdTime: 1724425966419
-  modifiedTime: 1746119719866
+  modifiedTime: 1753221584794
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplPolymorph0'
