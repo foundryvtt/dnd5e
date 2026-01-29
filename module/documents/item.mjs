@@ -843,6 +843,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       data.item.flags = { ...this.flags };
       data.item.name = this.name;
     }
+    data.labels = this.labels;
     data.scaling = new Scaling(this.scalingIncrease);
     return data;
   }

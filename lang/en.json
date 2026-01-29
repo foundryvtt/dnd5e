@@ -815,6 +815,17 @@
 "DND5E.AttunementOverride": "Override attunement",
 "DND5E.Attuned": "Attuned",
 "DND5E.AreaOfEffect": {
+  "Description": {
+    "Full": "{sizes} {type}",
+    "FullCounted": "{count} {sizes} {type}",
+    "Height": "high",
+    "Length": "long",
+    "Radius": "radius",
+    "SizeSimple": "{number}-{unit}",
+    "SizeType": "{number}-{unit}-{type}",
+    "Thickness": "thick",
+    "Width": "wide"
+  },
   "Label": "Area of Effect",
   "Size": {
     "Label": "Size",
@@ -4442,6 +4453,7 @@
       "Label": "Ally",
       "Counted": {
         "any": "any allies",
+        "each": "each ally",
         "every": "every ally",
         "one": "{number} ally",
         "other": "{number} allies"
@@ -4454,20 +4466,25 @@
       "Label": "Circle",
       "Counted": {
         "one": "{number} circle",
-        "other": "{number} circles"
+        "other": "{number} circles",
+        "oneSized": "{sizes} Circle",
+        "otherSized": "{number} {sizes} Circles"
       }
     },
     "Cone": {
       "Label": "Cone",
       "Counted": {
         "one": "{number} cone",
-        "other": "{number} cones"
+        "other": "{number} cones",
+        "oneSized": "{sizes} Cone",
+        "otherSized": "{number} {sizes} Cones"
       }
     },
     "Creature": {
       "Label": "Creature",
       "Counted": {
         "any": "any creatures",
+        "each": "each creature",
         "every": "every creature",
         "one": "{number} creature",
         "other": "{number} creatures"
@@ -4477,6 +4494,7 @@
       "Label": "Creature or Object",
       "Counted": {
         "any": "any creatures or objects",
+        "each": "each creature or object",
         "every": "every creature or object",
         "one": "{number} creature or object",
         "other": "{number} creatures or objects"
@@ -4486,27 +4504,34 @@
       "Label": "Cube",
       "Counted": {
         "one": "{number} cube",
-        "other": "{number} cubes"
+        "other": "{number} cubes",
+        "oneSized": "{sizes} Cube",
+        "otherSized": "{number} {sizes} Cubes"
       }
     },
     "Cylinder": {
       "Label": "Cylinder",
       "Counted": {
         "one": "{number} cylinder",
-        "other": "{number} cylinders"
+        "other": "{number} cylinders",
+        "oneSized": "{sizes} Cylinder",
+        "otherSized": "{number} {sizes} Cylinders"
       }
     },
     "Emanation": {
       "Label": "Emanation",
       "Counted": {
         "one": "{number} emanation",
-        "other": "{number} emanations"
+        "other": "{number} emanations",
+        "oneSized": "{sizes} Emanation",
+        "otherSized": "{number} {sizes} Emanations"
       }
     },
     "Enemy": {
       "Label": "Enemy",
       "Counted": {
         "any": "any enemies",
+        "each": "each enemy",
         "every": "every enemy",
         "one": "{number} enemy",
         "other": "{number} enemies"
@@ -4516,13 +4541,16 @@
       "Label": "Line",
       "Counted": {
         "one": "{number} line",
-        "other": "{number} lines"
+        "other": "{number} lines",
+        "oneSized": "{sizes} Line",
+        "otherSized": "{number} {sizes} Lines"
       }
     },
     "Object": {
       "Label": "Object",
       "Counted": {
         "any": "any objects",
+        "each": "each object",
         "every": "every object",
         "one": "{number} object",
         "other": "{number} objects"
@@ -4532,39 +4560,57 @@
       "Label": "Radius",
       "Counted": {
         "one": "{number} radius",
-        "other": "{number} radii"
+        "other": "{number} radii",
+        "oneSized": "{sizes} Radius",
+        "otherSized": "{number} {sizes} Radii"
       }
     },
     "Self": {
       "Label": "Self"
     },
-    "Sphere": {
-      "Label": "Sphere",
-      "Counted": {
-        "one": "{number} sphere",
-        "other": "{number} spheres"
-      }
-    },
     "Space": {
       "Label": "Space",
       "Counted": {
         "any": "any spaces",
+        "each": "each space",
         "every": "every space",
-        "one": "{number} space",
-        "other": "{number} spaces"
+        "one": "{number} Space",
+        "other": "{number} Spaces"
+      }
+    },
+    "Sphere": {
+      "Label": "Sphere",
+      "Counted": {
+        "one": "{number} sphere",
+        "other": "{number} spheres",
+        "oneSized": "{sizes} Sphere",
+        "otherSized": "{number} {sizes} Spheres"
+      }
+    },
+    "Special": {
+      "Label": "{special}",
+      "Counted": {
+        "any": "any {special}",
+        "each": "each {special}",
+        "every": "every {special}",
+        "one": "{number} {special}",
+        "other": "{number} {special}"
       }
     },
     "Square": {
       "Label": "Square",
       "Counted": {
         "one": "{number} square",
-        "other": "{number} squares"
+        "other": "{number} squares",
+        "oneSized": "{sizes} Square",
+        "otherSized": "{number} {sizes} Squares"
       }
     },
     "Target": {
       "Label": "Target",
       "Counted": {
         "any": "any targets",
+        "each": "each target",
         "every": "every target",
         "one": "{number} target",
         "other": "{number} targets"
@@ -4574,13 +4620,16 @@
       "Label": "Wall",
       "Counted": {
         "one": "{number} wall",
-        "other": "{number} walls"
+        "other": "{number} walls",
+        "oneSized": "{sizes} Wall",
+        "otherSized": "{number} {sizes} Walls"
       }
     },
     "WillingCreature": {
       "Label": "Willing Creature",
       "Counted": {
         "any": "any willing creatures",
+        "each": "each willing creature",
         "every": "every willing creature",
         "one": "{number} willing creature",
         "other": "{number} willing creatures"
@@ -4992,21 +5041,25 @@
 "DND5E.UNITS": {
   "DISTANCE": {
     "Foot": {
+      "Abbreviation": "ft",
       "Label": "Feet",
-      "Abbreviation": "ft"
+      "Template": "foot"
     },
     "Kilometer": {
+      "Abbreviation": "km",
       "Label": "Kilometers",
-      "Abbreviation": "km"
+      "Template": "kilometer"
     },
     "Label": "Distance Unit",
     "Meter": {
+      "Abbreviation": "m",
       "Label": "Meters",
-      "Abbreviation": "m"
+      "Template": "meter"
     },
     "Mile": {
+      "Abbreviation": "mi",
       "Label": "Miles",
-      "Abbreviation": "mi"
+      "Template": "mile"
     }
   },
   "TIME": {
