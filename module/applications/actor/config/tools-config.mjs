@@ -44,8 +44,8 @@ export default class ToolsConfig extends TraitsConfig {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _onRender(context, options) {
-    super._onRender(context, options);
+  async _onRender(context, options) {
+    await super._onRender(context, options);
     this.element.querySelectorAll("proficiency-cycle").forEach(e => {
       e.addEventListener("change", event => this.submit());
     });

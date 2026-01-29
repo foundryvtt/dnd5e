@@ -17,6 +17,7 @@ export default function PrimarySheetMixin(Base) {
     /** @override */
     static DEFAULT_OPTIONS = {
       actions: {
+        changeMode: PrimarySheet5e.#changeMode,
         editDocument: PrimarySheet5e.#showDocument,
         deleteDocument: PrimarySheet5e.#deleteDocument,
         showDocument: PrimarySheet5e.#showDocument
@@ -73,6 +74,14 @@ export default function PrimarySheetMixin(Base) {
      */
     _mode = null;
 
+    /**
+     * Is the sheet in edit mode?
+     * @type {boolean}
+     */
+    get isEditMode() {
+      return this._mode === this.constructor.MODES.EDIT;
+    }
+
     /* -------------------------------------------- */
     /*  Rendering                                   */
     /* -------------------------------------------- */
@@ -111,32 +120,6 @@ export default function PrimarySheetMixin(Base) {
     /* -------------------------------------------- */
 
     /**
-     * Handle re-rendering the mode toggle on ownership changes.
-     * @protected
-     */
-    _renderModeToggle() {
-      const header = this.element.querySelector(".window-header");
-      const toggle = header.querySelector(".mode-slider");
-      if ( this.isEditable && !toggle ) {
-        const toggle = document.createElement("slide-toggle");
-        toggle.checked = this._mode === this.constructor.MODES.EDIT;
-        toggle.classList.add("mode-slider");
-        toggle.dataset.tooltip = "DND5E.SheetModeEdit";
-        toggle.setAttribute("aria-label", game.i18n.localize("DND5E.SheetModeEdit"));
-        toggle.addEventListener("change", this._onChangeSheetMode.bind(this));
-        toggle.addEventListener("dblclick", event => event.stopPropagation());
-        toggle.addEventListener("pointerdown", event => event.stopPropagation());
-        header.prepend(toggle);
-      } else if ( this.isEditable ) {
-        toggle.checked = this._mode === this.constructor.MODES.EDIT;
-      } else if ( !this.isEditable && toggle ) {
-        toggle.remove();
-      }
-    }
-
-    /* -------------------------------------------- */
-
-    /**
      * Render source information in the Document's title bar.
      * @param {HTMLElement} html  The outer frame HTML.
      * @protected
@@ -166,7 +149,7 @@ export default function PrimarySheetMixin(Base) {
       const elements = this.element.querySelector(".header-elements .source-book");
       const source = this.document?.system.source;
       if ( !elements || !source ) return;
-      const editable = this.isEditable && (this._mode === this.constructor.MODES.EDIT);
+      const editable = this.isEditable && this.isEditMode;
       elements.querySelector("button")?.toggleAttribute("hidden", !editable);
       elements.querySelector("span").innerText = editable
         ? (source.label || game.i18n.localize("DND5E.SOURCE.FIELDS.source.label"))
@@ -180,7 +163,7 @@ export default function PrimarySheetMixin(Base) {
       const context = await super._prepareContext(options);
       context.owner = this.document.isOwner;
       context.locked = !this.isEditable;
-      context.editable = this.isEditable && (this._mode === this.constructor.MODES.EDIT);
+      context.editable = this.isEditable && this.isEditMode;
       context.tabs = this._getTabs();
       return context;
     }
@@ -264,7 +247,7 @@ export default function PrimarySheetMixin(Base) {
 
       // Set toggle state and add status class to frame
       this._renderModeToggle();
-      this.element.classList.toggle("editable", this.isEditable && (this._mode === this.constructor.MODES.EDIT));
+      this.element.classList.toggle("editable", this.isEditable && this.isEditMode);
       this.element.classList.toggle("interactable", this.isEditable && (this._mode === this.constructor.MODES.PLAY));
       this.element.classList.toggle("locked", !this.isEditable);
 
@@ -329,6 +312,36 @@ export default function PrimarySheetMixin(Base) {
 
     /* -------------------------------------------- */
 
+    /**
+     * Handle changing the sheet mode.
+     * @this {PrimarySheet5e}
+     * @param {Event} event         Triggering click event.
+     * @param {HTMLElement} target  Button that was clicked.
+     */
+    static #changeMode(event, target) {
+      this._onChangeSheetMode(event, target);
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Handle the user toggling the sheet mode.
+     * @param {Event} event         Triggering click event.
+     * @param {HTMLElement} target  Button that was clicked.
+     * @protected
+     */
+    async _onChangeSheetMode(event, target=event.currentTarget) {
+      const { MODES } = this.constructor;
+      const label = game.i18n.localize(`DND5E.SheetMode${target.checked ? "Play" : "Edit"}`);
+      target.dataset.tooltip = label;
+      target.setAttribute("aria-label", label);
+      this._mode = target.checked ? MODES.EDIT : MODES.PLAY;
+      await this.submit();
+      this.render();
+    }
+
+    /* -------------------------------------------- */
+
     /** @inheritDoc */
     changeTab(tab, group, options) {
       super.changeTab(tab, group, options);
@@ -361,24 +374,6 @@ export default function PrimarySheetMixin(Base) {
      * @returns {any}               Return `false` to prevent default behavior.
      */
     async _deleteDocument(event, target) {}
-
-    /* -------------------------------------------- */
-
-    /**
-     * Handle the user toggling the sheet mode.
-     * @param {Event} event  The triggering event.
-     * @protected
-     */
-    async _onChangeSheetMode(event) {
-      const { MODES } = this.constructor;
-      const toggle = event.currentTarget;
-      const label = game.i18n.localize(`DND5E.SheetMode${toggle.checked ? "Play" : "Edit"}`);
-      toggle.dataset.tooltip = label;
-      toggle.setAttribute("aria-label", label);
-      this._mode = toggle.checked ? MODES.EDIT : MODES.PLAY;
-      await this.submit();
-      this.render();
-    }
 
     /* -------------------------------------------- */
 

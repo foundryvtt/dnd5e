@@ -164,8 +164,8 @@ export default class TransformDialog extends Dialog5e {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _onRender(context, options) {
-    super._onRender(context, options);
+  async _onRender(context, options) {
+    await super._onRender(context, options);
     this.#disableFields();
   }
 
