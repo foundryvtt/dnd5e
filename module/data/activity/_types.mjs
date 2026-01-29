@@ -171,6 +171,7 @@
  * @property {object} summon
  * @property {""|"cr"} summon.mode          Method of determining what type of creature is summoned.
  * @property {boolean} summon.prompt        Should the player be prompted to place the summons?
+ * @property {string} tempHP                Temporary HP granted to the summoned creature.
  */
 
 /**
