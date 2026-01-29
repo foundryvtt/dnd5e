@@ -1,5 +1,13 @@
 <section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+    {{#if (eq activity.transform.mode "form")}}
+
+    {{> "systems/dnd5e/templates/activity/parts/activity-effects.hbs" }}
+
+    {{else}}
+
     {{> "templates/generic/tab-navigation.hbs" tabs=tabs.effect.tabs }}
     {{> "systems/dnd5e/templates/activity/parts/transform-profiles.hbs" tab=tabs.effect.tabs.profiles }}
     {{> "systems/dnd5e/templates/activity/parts/transform-settings.hbs" tab=tabs.effect.tabs.settings }}
+
+    {{/if}}
 </section>

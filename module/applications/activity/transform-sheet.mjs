@@ -75,7 +75,9 @@ export default class TransformSheet extends ActivitySheet {
 
     context.profileModes = [
       { value: "", label: game.i18n.localize("DND5E.TRANSFORM.FIELDS.transform.mode.Direct") },
-      { value: "cr", label: game.i18n.localize("DND5E.TRANSFORM.FIELDS.transform.mode.CR") }
+      { value: "cr", label: game.i18n.localize("DND5E.TRANSFORM.FIELDS.transform.mode.CR") },
+      { rule: true },
+      { value: "form", label: game.i18n.localize("DND5E.TRANSFORM.FIELDS.transform.mode.Form") }
     ];
     context.profiles = context.source.profiles.map((data, index) => ({
       data, index,
@@ -85,6 +87,22 @@ export default class TransformSheet extends ActivitySheet {
       prefix: `profiles.${index}.`,
       source: context.source.profiles[index] ?? data
     })).sort((lhs, rhs) => (lhs.name || "").localeCompare(rhs.name || "", game.i18n.lang));
+
+    context.effects = {
+      title: game.i18n.localize("DND5E.TRANSFORM.FIELDS.profiles.label"),
+      fields: [
+        {
+          field: context.fields.transform.fields.mode,
+          options: context.profileModes,
+          value: context.source.transform.mode
+        },
+        {
+          field: context.fields.transform.fields.formless,
+          input: dnd5e.applications.fields.createCheckboxInput,
+          value: context.source.transform.formless
+        }
+      ]
+    };
 
     return context;
   }
@@ -116,7 +134,7 @@ export default class TransformSheet extends ActivitySheet {
   /** @inheritDoc */
   _onRender() {
     super._onRender();
-    this.element.querySelector(".activity-profiles").addEventListener("drop", this.#onDrop.bind(this));
+    this.element.querySelector(".activity-profiles")?.addEventListener("drop", this.#onDrop.bind(this));
   }
 
   /* -------------------------------------------- */

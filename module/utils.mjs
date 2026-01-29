@@ -624,7 +624,8 @@ export function getTargetDescriptors() {
  * @returns {Token5e[]}
  */
 export function getSceneTargets(actor) {
-  let targets = canvas.tokens?.controlled.filter(t => t.actor && (!actor || t.actor === actor)) ?? [];
+  let targets = canvas.tokens?.controlled
+    .filter(t => t.actor && (!actor || (t.actor === actor) || (t.document.baseActor === actor))) ?? [];
   if ( !targets.length && actor ) targets = actor.getActiveTokens();
   else if ( !targets.length && game.user.character ) targets = game.user.character.getActiveTokens();
   return targets;
