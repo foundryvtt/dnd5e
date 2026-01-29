@@ -68,7 +68,8 @@ export default class D20Die extends BasicDie {
    */
   applyAdvantage(advantageMode) {
     this.options.advantageMode = advantageMode;
-    this.modifiers.findSplice(m => m.startsWith("adv") || m.startsWith("dis"));
+    this.modifiers.findSplice(m => m.startsWith("adv") || m.startsWith("dis") || (m === kh) || (m === kl));
+    this.number = 1;
     if ( advantageMode === CONFIG.Dice.D20Roll.ADV_MODE.NORMAL ) return;
     const isAdvantage = advantageMode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE;
     this.modifiers.push(`${isAdvantage ? "adv" : "dis"}${isAdvantage && this.options.elvenAccuracy ? "2" : ""}`);
