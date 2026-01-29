@@ -547,7 +547,7 @@ export default class AdvancementManager extends Application5e {
 
   /** @inheritDoc */
   async _onRender(context, options) {
-    super._onRender(context, options);
+    await super._onRender(context, options);
     if ( !this.rendered || !this.step ) return;
     this.#visualizer?.render({ force: true });
 

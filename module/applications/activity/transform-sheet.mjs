@@ -114,8 +114,8 @@ export default class TransformSheet extends ActivitySheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _onRender() {
-    super._onRender();
+  async _onRender(context, options) {
+    await super._onRender(context, options);
     this.element.querySelector(".activity-profiles").addEventListener("drop", this.#onDrop.bind(this));
   }
 
