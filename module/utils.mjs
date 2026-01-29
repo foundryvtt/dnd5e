@@ -3,6 +3,34 @@
  */
 
 /* -------------------------------------------- */
+/*  Collections                                 */
+/* -------------------------------------------- */
+
+/**
+ * Create a list of options for all documents within a collection grouped by folders.
+ * @param {DirectoryCollection} collection          Directory collection to use when building the options.
+ * @param {object} [options={}]
+ * @param {(object => boolean)} [options.disabled]  Callback used to determine if an entry should be disabled.
+ * @returns {FormSelectOption[]}
+ */
+export function getCollectionDocumentOptions(collection, { disabled }={}) {
+  const options = [];
+  const traverse = node => {
+    if ( !node ) return;
+    let group;
+    if ( node.folder ) group = `${"─".repeat(node.folder.depth - 1)} ${node.folder.name}`.trim();
+    for ( const entry of node.entries ) {
+      const option = { value: entry._id, label: entry.name, group };
+      if ( disabled ) option.disabled = disabled(entry);
+      options.push(option);
+    }
+    node.children.forEach(traverse);
+  };
+  traverse(collection.tree);
+  return options;
+}
+
+/* -------------------------------------------- */
 /*  Formatters                                  */
 /* -------------------------------------------- */
 
