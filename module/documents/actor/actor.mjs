@@ -886,12 +886,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       }
 
       // Negate healing types
-      if ( (options.invertHealing !== false) && (d.type === "healing") ) damageMultiplier *= -1;
+      if ( (options.invertHealing !== false) && ((d.type === "healing")
+        || ((d.type === "maximum") && (treatAs === "healing"))) ) damageMultiplier *= -1;
 
       d.value = d.value * damageMultiplier;
       d.active.multiplier = (d.active.multiplier ?? 1) * damageMultiplier;
       if ( d.type === "temphp" ) damages.temp += d.value;
-      else if ( d.type === "maximum" ) damages.tempMax += d.value * (treatAs === "healing" ? -1 : 1);
+      else if ( d.type === "maximum" ) damages.tempMax += d.value;
       else damages.amount += d.value;
     });
 
