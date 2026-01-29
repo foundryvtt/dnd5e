@@ -126,8 +126,9 @@ slide-toggle {
 /*  Icon                              */
 /* ---------------------------------- */
 
-dnd5e-icon.fa-fw {
-  --icon-width: 1.25em;
+dnd5e-icon {
+  &[data-edit] { cursor: var(--cursor-pointer); }
+  &.fa-fw { --icon-width: 1.25em };
 }
 
 /* ---------------------------------- */

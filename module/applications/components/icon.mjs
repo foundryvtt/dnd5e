@@ -37,6 +37,11 @@ export default class IconElement extends AdoptedStyleSheetMixin(MaybeAdoptable) 
 
   /* -------------------------------------------- */
 
+  /** @override */
+  static observedAttributes = ["src"];
+
+  /* -------------------------------------------- */
+
   /**
    * Cached SVG files by SRC.
    * @type {Map<string, SVGElement|Promise<SVGElement>>}
@@ -85,16 +90,7 @@ export default class IconElement extends AdoptedStyleSheetMixin(MaybeAdoptable) 
   /** @inheritDoc */
   connectedCallback() {
     this._adoptStyleSheet(this._getStyleSheet());
-    const insertElement = element => {
-      if ( !element ) return;
-      const clone = element.cloneNode(true);
-      this.#shadowRoot.replaceChildren(clone);
-    };
-
-    // Insert element immediately if already available, otherwise wait for fetch
-    const element = this.constructor.fetch(this.src);
-    if ( element instanceof Promise ) element.then(insertElement);
-    else insertElement(element);
+    this.#setSVG(this.src);
   }
 
   /* -------------------------------------------- */
@@ -130,5 +126,45 @@ export default class IconElement extends AdoptedStyleSheetMixin(MaybeAdoptable) 
       if ( attr.name.startsWith("on") ) el.removeAttribute(attr.name);
       if ( attr.value && attr.value.trim().toLowerCase().startsWith("javascript:") ) el.removeAttribute(attr.name);
     }));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Set the internal contents to an SVG image at the provided path.
+   * @param {string} src  Path to the SVG image to display.
+   */
+  #setSVG(src) {
+    const insertElement = element => {
+      if ( !element ) return;
+      const clone = element.cloneNode(true);
+      this.#shadowRoot.replaceChildren(clone);
+    };
+
+    // Insert element immediately if already available, otherwise wait for fetch
+    const element = this.constructor.fetch(src);
+    if ( element instanceof Promise ) element.then(insertElement);
+    else insertElement(element);
+
+    // Add input if `data-edit` is set
+    let input = this.querySelector("input");
+    if ( this.dataset.edit ) {
+      if ( !input ) {
+        input = document.createElement("input");
+        input.name = this.dataset.edit;
+        input.type = "hidden";
+        this.append(input);
+      }
+      input.value = src;
+    } else if ( input ) input.remove();
+  }
+
+  /* -------------------------------------------- */
+  /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  attributeChangedCallback(name, oldValue, newValue) {
+    if ( name === "src" ) this.#setSVG(newValue);
   }
 }
