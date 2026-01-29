@@ -81,6 +81,7 @@ Hooks.once("init", function() {
   CONFIG.User.documentClass = documents.User5e;
   CONFIG.time.roundTime = 6;
   Roll.TOOLTIP_TEMPLATE = "systems/dnd5e/templates/chat/roll-breakdown.hbs";
+  CONFIG.Dice.BasicDie = CONFIG.Dice.terms.d = dice.BasicDie;
   CONFIG.Dice.BasicRoll = dice.BasicRoll;
   CONFIG.Dice.DamageRoll = dice.DamageRoll;
   CONFIG.Dice.D20Die = dice.D20Die;
