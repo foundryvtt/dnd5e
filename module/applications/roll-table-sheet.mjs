@@ -25,7 +25,6 @@ export default class RollTableSheet5e extends ApplicationV2Mixin(RollTableSheet,
     this.element.querySelector(".sheet-header [data-action=changeMode]")?.remove();
     this.element.querySelectorAll("tbody .inline-control").forEach(c => c.classList.add("unbutton", "control-button"));
     this._replaceElements("input[type=checkbox]", "dnd5e-checkbox");
-    this._replaceElements('table img[src$=".svg"]', "dnd5e-icon");
   }
 
   /* -------------------------------------------- */
