@@ -41,7 +41,7 @@ export default class VehicleData extends CommonTemplate {
         ...AttributesFields.common,
         ac: new SchemaField({
           ...AttributesFields.armorClass,
-          calc: new StringField({ initial: "flat", label: "DND5E.ArmorClassCalculation" })
+          calc: new StringField({ initial: "flat", label: "DND5E.ARMORCLASS.Calculation.Label" })
         }, { label: "DND5E.ArmorClass" }),
         hp: new SchemaField({
           ...AttributesFields.hitPoints,
@@ -149,6 +149,7 @@ export default class VehicleData extends CommonTemplate {
   /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
+    AttributesFields._migrateArmorClass(source.attributes);
     AttributesFields._migrateInitiative(source.attributes);
     VehicleData.#migrateSource(source);
     VehicleData.#migrateMovement(source);

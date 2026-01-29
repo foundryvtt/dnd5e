@@ -1588,43 +1588,48 @@ DND5E.shieldIds = {
 
 /**
  * Common armor class calculations.
- * @enum {{ label: string, [formula]: string }}
+ * @enum {{ label: string, [formula]: string, [armored]: boolean, [shielded]: boolean }}
  */
 DND5E.armorClasses = {
-  flat: {
-    label: "DND5E.ArmorClassFlat",
-    formula: "@attributes.ac.flat"
-  },
   natural: {
-    label: "DND5E.ArmorClassNatural",
+    label: "DND5E.ARMORCLASS.Calculation.Natural",
     formula: "@attributes.ac.flat"
   },
-  default: {
-    label: "DND5E.ArmorClassEquipment",
-    formula: "@attributes.ac.armor + @attributes.ac.dex"
+  armored: {
+    label: "DND5E.ARMORCLASS.Calculation.Armored",
+    formula: "@attributes.ac.armor + @attributes.ac.clamped.dex",
+    armored: true
+  },
+  unarmored: {
+    label: "DND5E.ARMORCLASS.Calculation.Unarmored",
+    formula: "10 + @abilities.dex.mod",
+    armored: false
   },
   mage: {
-    label: "DND5E.ArmorClassMage",
-    formula: "13 + @abilities.dex.mod"
+    label: "DND5E.ARMORCLASS.Calculation.Mage",
+    formula: "13 + @abilities.dex.mod",
+    armored: false
   },
   draconic: {
-    label: "DND5E.ArmorClassDraconic",
-    formula: "13 + @abilities.dex.mod"
+    label: "DND5E.ARMORCLASS.Calculation.Draconic",
+    formula: "13 + @abilities.dex.mod",
+    armored: false
   },
   unarmoredMonk: {
-    label: "DND5E.ArmorClassUnarmoredMonk",
-    formula: "10 + @abilities.dex.mod + @abilities.wis.mod"
+    label: "DND5E.ARMORCLASS.Calculation.UnarmoredMonk",
+    formula: "10 + @abilities.dex.mod + @abilities.wis.mod",
+    armored: false,
+    shielded: false
   },
   unarmoredBarb: {
-    label: "DND5E.ArmorClassUnarmoredBarbarian",
-    formula: "10 + @abilities.dex.mod + @abilities.con.mod"
+    label: "DND5E.ARMORCLASS.Calculation.UnarmoredBarbarian",
+    formula: "10 + @abilities.dex.mod + @abilities.con.mod",
+    armored: false
   },
   unarmoredBard: {
-    label: "DND5E.ArmorClassUnarmoredBard",
-    formula: "10 + @abilities.dex.mod + @abilities.cha.mod"
-  },
-  custom: {
-    label: "DND5E.ArmorClassCustom"
+    label: "DND5E.ARMORCLASS.Calculation.UnarmoredBard",
+    formula: "10 + @abilities.dex.mod + @abilities.cha.mod",
+    armored: false
   }
 };
 preLocalize("armorClasses", { key: "label" });

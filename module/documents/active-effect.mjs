@@ -60,9 +60,11 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /**
    * Active effect fields that should be redirected to another field, optionally with a compatibility warning.
    * Optional warning object contains options passed to `foundry.utils.logCompatibilityWarning`.
-   * @type {Record<string, { key: string, [warning]: object }>}
+   * @type {Record<string, { key: string, [mode]: CONST.ACTIVE_EFFECT_MODES, [warning]: object }>}
    */
   static SHIM_FIELDS = {
+    "system.attributes.ac.calc": { key: "system.attributes.ac.selectedFormulas", mode: CONST.ACTIVE_EFFECT_MODES.ADD },
+    "system.attributes.ac.formula": { key: "system.attributes.ac.formulas", mode: CONST.ACTIVE_EFFECT_MODES.ADD },
     "system.attributes.movement.speed": { key: "system.attributes.movement.walk" },
     "system.attributes.senses.darkvision": { key: "system.attributes.senses.ranges.darkvision" },
     "system.attributes.senses.blindsight": { key: "system.attributes.senses.ranges.blindsight" },
@@ -321,7 +323,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       `The active effect key "${change.key}" has been deprecated and should be changed to "${shim.key}".`,
       shim.warning
     );
-    return { ...change, key: shim.key };
+    return { ...change, key: shim.key, mode: shim.mode ?? change.mode };
   }
 
   /* -------------------------------------------- */

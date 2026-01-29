@@ -7,7 +7,7 @@ import MovementField from "../../shared/movement-field.mjs";
 import RollConfigField from "../../shared/roll-config-field.mjs";
 import SensesField from "../../shared/senses-field.mjs";
 
-const { NumberField, SchemaField, StringField } = foundry.data.fields;
+const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * @import { ArmorClassData, AttributesCommonData, AttributesCreatureData, HitPointsData } from "./_types.mjs";
@@ -23,9 +23,30 @@ export default class AttributesFields {
    */
   static get armorClass() {
     return {
-      calc: new StringField({ initial: "default", label: "DND5E.ArmorClassCalculation" }),
-      flat: new NumberField({ required: true, integer: true, min: 0, label: "DND5E.ArmorClassFlat" }),
-      formula: new FormulaField({ deterministic: true, label: "DND5E.ArmorClassFormula" })
+      flat: new NumberField({
+        required: true, integer: true, min: 0, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.flat.label",
+        hint: "DND5E.ARMORCLASS.FIELDS.attributes.ac.flat.hint"
+      }),
+      formulas: new ArrayField(new SchemaField({
+        armored: new BooleanField({
+          nullable: true, initial: null, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.formulas.element.armored.label"
+        }),
+        formula: new FormulaField({
+          deterministic: true, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.formulas.element.formula.label"
+         }),
+        label: new StringField({ label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.formulas.element.label.label" }),
+        shielded: new BooleanField({
+          nullable: true, initial: null, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.formulas.element.shielded.label"
+        })
+      })),
+      override: new NumberField({
+        min: 0, integer: true, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.override.label",
+        hint: "DND5E.ARMORCLASS.FIELDS.attributes.ac.override.hint"
+      }),
+      selectedFormulas: new SetField(new StringField(), {
+        initial: ["unarmored", "armored"], label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.selectedFormulas.label",
+        hint: "DND5E.ARMORCLASS.FIELDS.attributes.ac.selectedFormulas.hint"
+      })
     };
   }
 
@@ -99,8 +120,41 @@ export default class AttributesFields {
   /* -------------------------------------------- */
 
   /**
+   * Migrate the old single armor formula into formulas.
+   * @param {object} [source]  The source attributes object.
+   * @internal
+   */
+  static _migrateArmorClass(source) {
+    const ac = source?.ac ?? {};
+    if ( Number.isNumeric(ac.value) && !CONFIG.DND5E.armorClasses[ac.calc] ) {
+      ac.override = Number(ac.value);
+      delete ac.value;
+    }
+
+    if ( !ac.calc ) return;
+    switch ( ac.calc ) {
+      case "custom":
+        ac.formulas ??= [];
+        ac.formulas.push({ formula: ac.formula });
+        break;
+      case "flat":
+        ac.override = ac.flat;
+        break;
+      case "default": break;
+      default:
+        ac.selectedFormulas ??= ["unarmored", "armored"];
+        ac.selectedFormulas.push(ac.calc);
+        break;
+    }
+    delete ac.calc;
+    delete ac.formula;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Migrate the old init.value and incorporate it into init.bonus.
-   * @param {object} source  The source attributes object.
+   * @param {object} [source]  The source attributes object.
    * @internal
    */
   static _migrateInitiative(source) {
@@ -121,6 +175,7 @@ export default class AttributesFields {
   static prepareBaseArmorClass() {
     const ac = this.attributes.ac;
     ac.armor = 10;
+    ac.base = -Infinity;
     ac.shield = ac.cover = 0;
     ac.min = ac.bonus = "";
   }
@@ -146,14 +201,13 @@ export default class AttributesFields {
    */
   static prepareArmorClass(rollData) {
     const ac = this.attributes.ac;
+    ac.flat ||= 0;
 
-    // Apply automatic migrations for older data structures
-    let cfg = CONFIG.DND5E.armorClasses[ac.calc];
-    if ( !cfg ) {
-      ac.calc = "flat";
-      if ( Number.isNumeric(ac.value) ) ac.flat = Number(ac.value);
-      cfg = CONFIG.DND5E.armorClasses.flat;
-    }
+    // Add selected formulas
+    const baseFormulas = Object.entries(CONFIG.DND5E.armorClasses)
+      .filter(([id, data]) => ac.selectedFormulas.has(id))
+      .map(([id, data]) => ({ ...data, id, type: "base" }));
+    ac.formulas.unshift(...baseFormulas);
 
     // Identify Equipped Items
     const { armors, shields } = this.parent.itemTypes.equipment.reduce((obj, equip) => {
@@ -163,56 +217,16 @@ export default class AttributesFields {
       return obj;
     }, { armors: [], shields: [] });
 
-    // Set stealth disadvantage
-    if ( armors[0]?.system.properties.has("stealthDisadvantage") ) {
-      AdvantageModeField.setMode(this, "skills.ste.roll.mode", -1);
-    }
-
-    ac.label = !["custom", "flat"].includes(ac.calc) ? CONFIG.DND5E.armorClasses[ac.calc]?.label : null;
-
-    // Determine base AC
-    switch ( ac.calc ) {
-
-      // Flat AC (no additional bonuses)
-      case "flat":
-        ac.value = Number(ac.flat);
-        return;
-
-      // Natural AC (includes bonuses)
-      case "natural":
-        ac.base = Number(ac.flat);
-        break;
-
-      default:
-        let formula = ac.calc === "custom" ? ac.formula : cfg.formula;
-        if ( armors.length ) {
-          if ( armors.length > 1 ) this.parent._preparationWarnings.push({
-            message: game.i18n.localize("DND5E.WarnMultipleArmor"), type: "warning"
-          });
-          const armorData = armors[0].system.armor;
-          const isHeavy = armors[0].system.type.value === "heavy";
-          ac.armor = armorData.value ?? ac.armor;
-          ac.dex = isHeavy ? 0 : Math.min(armorData.dex ?? Infinity, this.abilities.dex?.mod ?? 0);
-          ac.equippedArmor = armors[0];
-        }
-        else ac.dex = this.abilities.dex?.mod ?? 0;
-
-        if ( !ac.equippedArmor ) ac.label = null;
-
-        rollData.attributes.ac = ac;
-        try {
-          const replaced = replaceFormulaData(formula, rollData, {
-            actor: this, missing: null, property: game.i18n.localize("DND5E.ArmorClass")
-          });
-          ac.base = replaced ? new Roll(replaced).evaluateSync().total : 0;
-        } catch(err) {
-          this.parent._preparationWarnings.push({
-            message: game.i18n.format("DND5E.WarnBadACFormula", { formula }), link: "armor", type: "error"
-          });
-          const replaced = Roll.replaceFormulaData(CONFIG.DND5E.armorClasses.default.formula, rollData);
-          ac.base = new Roll(replaced).evaluateSync().total;
-        }
-        break;
+    // Equipped Armor
+    if ( armors.length ) {
+      if ( armors.length > 1 ) this.parent._preparationWarnings.push({
+        message: game.i18n.localize("DND5E.WarnMultipleArmor"), type: "warning"
+      });
+      ac.equippedArmor = armors[0];
+      ac.armor = ac.equippedArmor.system.armor.value ?? ac.armor;
+      if ( ac.equippedArmor.system.properties.has("stealthDisadvantage") ) {
+        AdvantageModeField.setMode(this, "skills.ste.roll.mode", -1);
+      }
     }
 
     // Equipped Shield
@@ -220,17 +234,57 @@ export default class AttributesFields {
       if ( shields.length > 1 ) this.parent._preparationWarnings.push({
         message: game.i18n.localize("DND5E.WarnMultipleShields"), type: "warning"
       });
-      ac.shield = shields[0].system.armor.value ?? 0;
       ac.equippedShield = shields[0];
+      ac.shield = ac.equippedShield.system.armor.value ?? 0;
     }
 
-    // Compute cover.
-    ac.cover = Math.max(ac.cover, this.parent.coverBonus);
+    // If armor is equipped, prepare clamped abilities
+    const isHeavy = ac.equippedArmor?.system.type.value === "heavy";
+    ac.clamped = Object.entries(this.abilities).reduce((obj, [k, v]) => {
+      obj[k] = isHeavy ? 0 : Math.min(v.mod, ac.equippedArmor?.system.armor.dex ?? Infinity);
+      return obj;
+    }, {});
+    ac.dex = ac.clamped.dex;
 
-    // Compute total AC and return
+    const validFormulas = ac.formulas.filter(formula => {
+      if ( !formula.formula ) return false;
+      if ( (typeof formula.armored === "boolean") && (formula.armored !== !!ac.equippedArmor) ) return false;
+      if ( (typeof formula.shielded === "boolean") && (formula.shielded !== !!ac.equippedShield) ) return false;
+      return true;
+    });
+
+    for ( const [index, config] of validFormulas.entries() ) {
+      try {
+        const replaced = replaceFormulaData(config.formula, rollData, {
+          actor: this, missing: null, property: game.i18n.localize("DND5E.ArmorClass")
+        });
+        const result = replaced ? new Roll(replaced).evaluateSync().total : 0;
+        if ( result > ac.base ) {
+          ac.activeFormula = config;
+          ac.base = result;
+          ac.calc = config.id ?? "custom";
+          ac.formula = config.formula;
+          if ( config.id === "armored" ) ac.label = ac.equippedArmor.name;
+          else ac.label = config.label ?? "";
+        }
+      } catch(error) {
+        this.parent._preparationWarnings.push({
+          message: game.i18n.format("DND5E.WarnBadACFormula", { formula: config.formula }), link: "armor", type: "error"
+        });
+      }
+    }
+
+    if ( !Number.isFinite(ac.base) ) {
+      ac.base = ac.flat ?? 0;
+      ac.calc = "natural";
+      ac.formula = "@attributes.ac.flat";
+    }
+
+    ac.cover = Math.max(ac.cover, this.parent.coverBonus);
     ac.min = simplifyBonus(ac.min, rollData);
     ac.bonus = simplifyBonus(ac.bonus, rollData);
-    ac.value = Math.max(ac.min, ac.base + ac.shield + ac.bonus + ac.cover);
+    if ( ac.override ) ac.value = ac.override;
+    else ac.value = Math.max(ac.min, ac.base + ac.shield + ac.bonus + ac.cover);
   }
 
   /* -------------------------------------------- */
