@@ -37,6 +37,7 @@ export default class BaseTransformActivityData extends BaseActivityData {
       settings: new EmbeddedDataField(TransformationSetting, { nullable: true, initial: null }),
       transform: new SchemaField({
         customize: new BooleanField(),
+        formless: new BooleanField(),
         mode: new StringField({ initial: "cr" }),
         preset: new StringField()
       })
@@ -47,20 +48,25 @@ export default class BaseTransformActivityData extends BaseActivityData {
   /*  Properties                                  */
   /* -------------------------------------------- */
 
-  /** @override */
-  get applicableEffects() {
-    return null;
+  /**
+   * Transform profiles that can be performed based on spell/character/class level.
+   * @type {EffectApplicationData[]|TransformProfile[]}
+   */
+  get availableProfiles() {
+    if ( this.transform.mode === "form" ) return this.applicableEffects;
+    const level = this.relevantLevel;
+    return this.profiles.filter(e => ((e.level.min ?? -Infinity) <= level) && (level <= (e.level.max ?? Infinity)));
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Transform profiles that can be performed based on spell/character/class level.
-   * @type {TransformProfile[]}
+   * When using the form mode, what is the ID of the currently active form if any.
+   * @type {string|null}
    */
-  get availableProfiles() {
-    const level = this.relevantLevel;
-    return this.profiles.filter(e => ((e.level.min ?? -Infinity) <= level) && (level <= (e.level.max ?? Infinity)));
+  get currentProfile() {
+    if ( this.transform.mode !== "form" ) return null;
+    return this.effects.find(e => !e.effect?.disabled && e.effect?.transfer)?._id ?? "";
   }
 
   /* -------------------------------------------- */
