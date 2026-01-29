@@ -1555,6 +1555,15 @@ DND5E.armorProficienciesMap = {
 /* -------------------------------------------- */
 
 /**
+ * Amount of speed reduction caused by wearing armor but not meeting the strength requirement in feet.
+ * Value will be converted to the appropriate value to match the actor's speed unit.
+ * @type {number}
+ */
+DND5E.armorSpeedReduction = 10;
+
+/* -------------------------------------------- */
+
+/**
  * The basic armor types in 5e. This enables specific armor proficiencies,
  * automated AC calculation in NPCs, and starting equipment.
  * @enum {string}
@@ -4274,6 +4283,12 @@ DND5E.characterFlags = {
   halflingNimbleness: {
     name: "DND5E.FlagsHalflingNimbleness",
     hint: "DND5E.FlagsHalflingNimblenessHint",
+    section: "DND5E.RacialTraits",
+    type: Boolean
+  },
+  ignoreArmorSpeedReduction: {
+    name: "DND5E.FLAGS.IgnoreArmorSpeedReduction.Name",
+    hint: "DND5E.FLAGS.IgnoreArmorSpeedReduction.Hint",
     section: "DND5E.RacialTraits",
     type: Boolean
   },

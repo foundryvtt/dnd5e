@@ -44,8 +44,10 @@ system:
       id="secret-bkbaaEWqAGbU8ZgK"><p><strong>Foundry
       Note</strong></p><p>Dwarven Toughness should be configured by adding 1 to
       the "Per Level" bonus in HP configuration on your character sheet
-      (accessible using the cog next to your character's hit
-      points).</p></section>
+      (accessible using the cog next to your character's hit points).</p><p>The
+      "Ignore Armor Speed Reduction" flag in the Special Traits tab can be used
+      to prevent armor from reducing your speed if you don't have sufficient
+      strength.</p></section>
     chat: ''
   source:
     custom: ''
@@ -183,11 +185,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.2.0
   createdTime: 1725037392950
-  modifiedTime: 1725992703517
+  modifiedTime: 1769455937269
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
