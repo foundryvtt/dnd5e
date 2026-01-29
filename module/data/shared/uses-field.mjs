@@ -130,20 +130,31 @@ export default class UsesField extends SchemaField {
   /**
    * Determine uses recovery.
    * @this {ItemDataModel|BaseActivityData}
-   * @param {string[]} periods  Recovery periods to check.
-   * @param {object} rollData   Roll data to use when evaluating recover formulas.
+   * @param {Map<string, number>} periods  Recovery periods to check, mapped to the number of times occurred.
+   * @param {object} rollData              Roll data to use when evaluating recover formulas.
    * @returns {Promise<{ updates: object, rolls: BasicRoll[] }|false>}
    */
   static async recoverUses(periods, rollData) {
+    if ( foundry.utils.getType(periods) === "Array" ) {
+      foundry.utils.logCompatibilityWarning(
+        "The periods parameter of `recoverUses` is now a mapping of periods to times triggered.",
+        { since: "DnD5e 5.2", until: "DnD5e 5.4" }
+      );
+      periods = new Map(periods.map(p => [p, 1]));
+    }
+
     if ( !this.uses?.recovery.length ) return false;
 
     // Search the recovery profiles in order to find the first matching period,
     // and then find the first profile that uses that recovery period
+    let count;
     let profile;
     findPeriod: {
-      for ( const period of periods ) {
+      for ( const [period, periodCount] of periods.entries() ) {
+        if ( periodCount < 1 ) continue;
         for ( const recovery of this.uses.recovery ) {
           if ( recovery.period === period ) {
+            count = periodCount;
             profile = recovery;
             break findPeriod;
           }
@@ -156,19 +167,19 @@ export default class UsesField extends SchemaField {
     const rolls = [];
     const item = this.item ?? this.parent;
 
-    if ( profile.type === "recoverAll" ) updates.spent = 0;
-    else if ( profile.type === "loseAll" ) updates.spent = this.uses.max;
-    else if ( profile.formula ) {
+    if ( profile.type === "recoverAll" ) {
+      if ( this.uses.spent !== 0 ) updates.spent = 0;
+    } else if ( profile.type === "loseAll" ) {
+      if ( this.uses.spent !== this.uses.max ) updates.spent = this.uses.max;
+    } else if ( profile.formula ) {
       let roll;
       let total;
       try {
-        const delta = this.parent instanceof Item ? { item: this.parent.id, keyPath: "system.uses.spent" }
-          : { item: this.item.id, keyPath: `system.activities.${this.id}.uses.spent` };
+        const delta = this.parent instanceof Item
+          ? { item: this.parent.id, itemUuid: this.parent.uuid, keyPath: "system.uses.spent" }
+          : { item: this.item.id, itemUuid: this.item.uuid, keyPath: `system.activities.${this.id}.uses.spent` };
         roll = new CONFIG.Dice.BasicRoll(profile.formula, rollData, { delta });
-        if ( ["day", "dawn", "dusk"].includes(profile.period)
-          && (game.settings.get("dnd5e", "restVariant") === "gritty") ) {
-          roll.alter(7, 0, { multiplyNumeric: true });
-        }
+        if ( count > 1 ) roll.alter(count, 0, { multiplyNumeric: true });
         total = (await roll.evaluate()).total;
       } catch(err) {
         Hooks.onError("UsesField#recoverUses", err, {
@@ -188,7 +199,7 @@ export default class UsesField extends SchemaField {
       }
     }
 
-    return { updates, rolls };
+    return foundry.utils.isEmpty(updates) ? false : { updates, rolls };
   }
 
   /* -------------------------------------------- */

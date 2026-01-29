@@ -1,7 +1,8 @@
-import { formatNumber } from "../../utils.mjs";
+import { convertTime, formatNumber, formatTime, getPluralRules } from "../../utils.mjs";
+import { IndividualDeltaField } from "../chat-message/fields/deltas-field.mjs";
 
 /**
- * @import { CalendarFormattingContext, CalendarTimeDeltas } from "./_types.mjs";
+ * @import { CalendarFormattingContext, CalendarTimeDeltas, TimePassageData } from "./_types.mjs";
  */
 
 /**
@@ -325,6 +326,122 @@ export default class CalendarData5e extends foundry.data.CalendarData {
     });
   }
 
+  /* -------------------------------------------- */
+
+  /**
+   * Respond to time changes and trigger the handling of time passage. This hook is split off from
+   * `onUpdateWorldTime` and registered late to allow modules to modify the time deltas with their
+   * own entries before time passage is handled.
+   * @param {number} worldTime
+   * @param {number} deltaTime
+   * @param {object} options
+   * @param {string} userId
+   */
+  static onTimePassage(worldTime, deltaTime, options, userId) {
+    if ( !game.user.isActiveGM || (deltaTime <= 0) ) return;
+    const timePassageData = { worldTime, deltaTime, ...options.dnd5e.deltas };
+    CalendarData5e.handleTimePassage(timePassageData);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Trigger recovery for any world items based on the passage of time.
+   * @param {TimePassageData} timePassageData
+   */
+  static async handleTimePassage(timePassageData) {
+    const periods = new Map();
+    for ( const [d, p] of CONFIG.DND5E.calendarDeltasRecoveryMapping.entries() ) {
+      if ( timePassageData[d] ) periods.set(p, timePassageData[d]);
+    }
+
+    const deltas = [];
+    const rolls = [];
+
+    if ( !game.settings.get("dnd5e", "calendarConfig").manualRecovery ) {
+      const performItemUpdates = async (items, updates) => {
+        for ( const item of items ) {
+          const result = await item.system.recoverUses?.(periods, item.getRollData()) ?? {};
+          if ( !foundry.utils.isEmpty(result?.updates) ) {
+            deltas.push({ uuid: item.uuid, deltas: IndividualDeltaField.getDeltas(item, result.updates) });
+            updates.push({ _id: item.id, ...result.updates });
+            rolls.push(...result.rolls);
+          }
+        }
+      };
+
+      const itemUpdates = [];
+      await performItemUpdates(game.items, itemUpdates);
+      if ( itemUpdates.length ) await Item.updateDocuments(itemUpdates);
+
+      for ( const actor of game.actors ) {
+        const actorUpdates = [];
+        await performItemUpdates(actor.items, actorUpdates);
+        if ( actorUpdates.length ) await actor.updateEmbeddedDocuments("Item", actorUpdates);
+      }
+    }
+
+    const messageConfig = {
+      create: deltas.length > 0,
+      data: {
+        content: this.generateTimePassageMessage(timePassageData),
+        rolls,
+        system: {
+          changes: deltas
+        },
+        title: game.i18n.localize("DND5E.CALENDAR.TimePassage.Title"),
+        type: "timePassed"
+      }
+    };
+
+    /**
+     * A hook event that fires before a time passed chat message is created.
+     * @function dnd5e.preCreateTimePassedMessage
+     * @memberof hookEvents
+     * @param {object} messageConfig
+     * @param {boolean} messageConfig.create  Should the chat message be posted?
+     * @param {object} messageConfig.data     Data for the created chat message.
+     */
+    Hooks.callAll("dnd5e.preCreateTimePassedMessage", messageConfig);
+
+    if ( messageConfig.create ) return ChatMessage.implementation.create(messageConfig.data);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create the message displayed in a time passage message based on the amount of time passed.
+   * @param {TimePassageData} timePassageData
+   * @returns {string|void}
+   */
+  static generateTimePassageMessage(timePassageData) {
+    let message;
+
+    // X days have passed
+    if ( timePassageData.midnights > 1 ) {
+      const pr = getPluralRules();
+      const { value, unit } = convertTime(timePassageData.midnights, "day", { strict: false });
+      const number = formatTime(value, unit, { words: true });
+      message = game.i18n.format(`DND5E.CALENDAR.TimePassage.TimePassed.${pr.select(value)}`, {
+        number: number.capitalize(), numberLc: number
+      });
+    }
+
+    // Sun has set and risen again
+    else if ( timePassageData.sunsets && timePassageData.sunrises ) {
+      message = game.i18n.localize("DND5E.CALENDAR.TimePassage.SunsetSunrise");
+    }
+
+    // Sun has set, risen, or midnight has been passed
+    else if ( timePassageData.sunsets ) message = game.i18n.localize("DND5E.CALENDAR.TimePassage.Sunset");
+    else if ( timePassageData.sunrises ) message = game.i18n.localize("DND5E.CALENDAR.TimePassage.Sunrise");
+    else if ( timePassageData.midnights ) message = game.i18n.localize("DND5E.CALENDAR.TimePassage.Midnight");
+
+    return message ? `<p>${message}</p>` : undefined;
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
   /* -------------------------------------------- */
 
   /**
