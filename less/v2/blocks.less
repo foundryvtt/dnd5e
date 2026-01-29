@@ -208,4 +208,85 @@
       dd { margin-inline-start: 0; }
     }
   }
+
+  /* NPC Habitat and Treasure Blocks */
+  .habitat-treasure {
+    padding: 2px;
+    border-block-start: 1px solid var(--dnd5e-habitat-treasure-color-border);
+    background-color: var(--dnd5e-habitat-treasure-color-background);
+    display: table;
+  }
+
+  /* Big Quotes */
+  .quote-lg {
+    --size: 50%;
+    --side-gutter: 10%;
+    --vert-gutter: 1em;
+    --edge: 1em;
+    --overlap: calc(-0.6 * var(--edge));
+    --w: 2px;
+    --octogon: polygon(
+      0 70%,
+      15% 100%,
+      85% 100%,
+      100% 70%,
+      100% 30%,
+      85% 0,
+      15% 0,
+      0 30%,
+      var(--w) calc(30% + var(--w) / 2),
+      15% var(--w),
+      85% var(--w),
+      calc(100% - var(--w)) calc(30% + var(--w) / 2),
+      calc(100% - var(--w)) calc(70% - var(--w) / 2),
+      85% calc(100% - var(--w)),
+      15% calc(100% - var(--w)),
+      var(--w) calc(70% - var(--w) / 2),
+      var(--w) calc(30% + var(--w) / 2),
+      0 30%
+    );
+
+    position: relative;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    justify-self: center;
+
+    inline-size: var(--size);
+    margin: var(--edge);
+    border: calc(2 * var(--w)) solid var(--dnd5e-quote-color);
+    border-radius: 2em;
+
+    font-size: small;
+    font-size-adjust: cap-height 0.66;
+    text-wrap: pretty;
+
+    box-sizing: border-box;
+    color: var(--dnd5e-quote-color);
+    background: var(--dnd5e-quote-background);
+
+    break-inside: avoid;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: var(--overlap);
+      background: var(--dnd5e-quote-color);
+      clip-path: var(--octogon);
+    }
+
+    > p {
+      margin: 0 var(--side-gutter);
+      &:first-of-type { margin-block-start: var(--vert-gutter); }
+      &:last-of-type { margin-block-end: var(--vert-gutter); }
+    }
+
+    .quote-author {
+      margin-inline-start: calc(10% + var(--side-gutter));
+      text-wrap: pretty;
+      text-indent: 1em;
+      text-align: end;
+      justify-self: end;
+    }
+  }
 }
