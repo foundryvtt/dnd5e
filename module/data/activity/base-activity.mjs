@@ -690,7 +690,18 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @returns {object}
    */
   prepareSheetContext() {
-    return { ...this, _id: this._id };
+    const hasUses = !!this._source.uses?.max || !!this.uses?.max;
+    const hasRecharge = hasUses && (this.uses?.recovery[0]?.period === "recharge");
+    return {
+      ...this,
+      _id: this._id,
+      uses: this.uses ? {
+        ...this.uses, hasRecharge, hasUses,
+        isOnCooldown: hasRecharge && (this.uses.value < 1),
+        prop: "uses.value",
+        pct: this.uses.max ? Math.clamp((this.uses.value / this.uses.max) * 100, 0, 100) : 0
+      } : null
+    };
   }
 
   /* -------------------------------------------- */

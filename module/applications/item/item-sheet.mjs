@@ -258,9 +258,9 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
         }
       }
       if ( !activity.canConfigure ) return arr;
-      const { _id: id, name, img, labels, sort } = activity.prepareSheetContext();
+      const { _id: id, name, img, labels, sort, uses } = activity.prepareSheetContext();
       const descriptor = activityMap[id] = {
-        id, name, sort,
+        id, name, sort, uses,
         img: { src: img, svg: img?.endsWith(".svg") },
         riders: new Set(),
         subtitle: labels?.activation ?? "",
