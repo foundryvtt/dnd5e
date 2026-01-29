@@ -1450,10 +1450,13 @@
   },
   "REQUEST": {
     "Action": {
-      "Handle": "Handle Request"
+      "Handle": "Handle Request",
+      "Post": "Post Request"
     },
+    "AnyOwner": "Any Owner",
     "Complete": "Request Fulfilled",
-    "PartyMembers": "Party Members"
+    "PartyMembers": "Party Members",
+    "Title": "Request"
   },
   "TURN": {
     "NoCombatant": "Combatant no longer exists!"

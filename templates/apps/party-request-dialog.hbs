@@ -1,0 +1,14 @@
+<div class="recipients flexcol">
+    {{#each recipients}}
+    <div class="recipient flexrow" data-actor-id="{{ actor.id }}">
+        <label>
+            <dnd5e-checkbox name="{{ actor.id }}.request" {{ checked checked }}></dnd5e-checkbox>
+            {{{ icon }}}
+            <span class="name">{{ actor.name }}</span>
+        </label>
+        <select name="{{ actor.id}}.user">
+            {{ selectOptions users selected=defaultUser blank=(localize "DND5E.CHATMESSAGE.REQUEST.AnyOwner") }}
+        </select>
+    </div>
+    {{/each}}
+</div>
