@@ -12,8 +12,8 @@ import AppliedEffectField from "./fields/applied-effect-field.mjs";
 import ConsumptionTargetsField from "./fields/consumption-targets-field.mjs";
 
 const {
-  ArrayField, BooleanField, DocumentFlagsField, DocumentIdField,
-  FilePathField, IntegerSortField, NumberField, SchemaField, StringField
+  ArrayField, BooleanField, DocumentFlagsField, DocumentIdField, FilePathField,
+  HTMLField, IntegerSortField, NumberField, SchemaField, StringField
 } = foundry.data.fields;
 
 /**
@@ -62,7 +62,8 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         targets: new ConsumptionTargetsField()
       }),
       description: new SchemaField({
-        chatFlavor: new StringField()
+        chatFlavor: new StringField(),
+        value: new HTMLField()
       }),
       duration: new DurationField({
         concentration: new BooleanField(),

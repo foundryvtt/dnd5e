@@ -2,6 +2,8 @@ import { ConsumptionTargetData } from "../../data/activity/fields/consumption-ta
 import UsesField from "../../data/shared/uses-field.mjs";
 import PseudoDocumentSheet from "../api/pseudo-document-sheet.mjs";
 
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
+
 /**
  * Default sheet for activities.
  */
@@ -336,6 +338,9 @@ export default class ActivitySheet extends PseudoDocumentSheet {
       field: context.fields.target.fields.prompt,
       value: context.source.target.prompt,
       input: context.inputs.createCheckboxInput
+    });
+    context.enriched = await TextEditor.enrichHTML(this.activity.description.value, {
+      relativeTo: this.activity, rollData: this.activity.getRollData(), secrets: this.activity.item.isOwner
     });
     context.placeholder = {
       name: game.i18n.localize(this.activity.metadata.title),
