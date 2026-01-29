@@ -735,7 +735,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     );
     Object.assign(warnings.dataset, { action: "openWarnings", tooltip: "Warnings", tooltipDirection: "DOWN" });
     warnings.setAttribute("aria-label", game.i18n.localize("Warnings"));
-    html.querySelector(".window-header .window-subtitle").after(warnings);
+    this.window.subtitle.after(warnings);
 
     return html;
   }
