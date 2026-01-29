@@ -656,7 +656,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         const icons = value.icons = [];
         if ( data.bypasses?.size && CONFIG.DND5E.damageTypes[key]?.isPhysical ) icons.push(...data.bypasses.map(p => {
           const type = CONFIG.DND5E.itemProperties[p]?.label;
-          return { icon: p, label: game.i18n.format("DND5E.DamagePhysicalBypassesShort", { type }) };
+          return { icon: p, label: game.i18n.format("DND5E.DAMAGE.PhysicalBypass.DescriptionShort", { type }) };
         }));
         return value;
       });
@@ -666,7 +666,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
     // If petrified, display "All Damage" instead of all damage types separately
     if ( this.document.hasConditionEffect("petrification") ) {
-      traits.dr = [{ label: game.i18n.localize("DND5E.DamageAll") }];
+      traits.dr = [{ label: game.i18n.localize("DND5E.DAMAGE.All") }];
     }
 
     // Combine damage & condition immunities in play mode.
@@ -690,7 +690,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         const icons = value.icons = [];
         if ( dm.bypasses.size && CONFIG.DND5E.damageTypes[k]?.isPhysical ) icons.push(...dm.bypasses.map(p => {
           const type = CONFIG.DND5E.itemProperties[p]?.label;
-          return { icon: p, label: game.i18n.format("DND5E.DamagePhysicalBypassesShort", { type }) };
+          return { icon: p, label: game.i18n.format("DND5E.DAMAGE.PhysicalBypass.DescriptionShort", { type }) };
         }));
         return value;
       }).filter(f => f);

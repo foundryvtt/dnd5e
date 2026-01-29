@@ -1997,6 +1997,7 @@
 "DND5E.Current": "Current",
 
 "DND5E.DAMAGE": {
+  "All": "All Damage",
   "FIELDS": {
     "damage": {
       "label": "Damage",
@@ -2070,6 +2071,12 @@
       "Delete": "Delete Damage Part"
     }
   },
+  "PhysicalBypass": {
+    "Description": "{damageTypes} from attacks that are not {bypassTypes}",
+    "DescriptionShort": "Bypassed by {type} Sources",
+    "Hint": "These weapon properties will bypass damage resistance for physical damage.",
+    "Label": "Physical Bypasses"
+  },
   "Scaling": {
     "Half": "Every Other Level",
     "HalfCantrip": "Half Cantrip Scaling",
@@ -2077,16 +2084,30 @@
     "Whole": "Every Level",
     "WholeCantrip": "Cantrip Scaling"
   },
-  "Title": "Damage"
+  "Title": "Damage",
+  "Type": {
+    "Acid": "Acid",
+    "Bludgeoning": "Bludgeoning",
+    "Cold": "Cold",
+    "Fire": "Fire",
+    "Force": "Force",
+    "Lightning": "Lightning",
+    "Necrotic": "Necrotic",
+    "Piercing": "Piercing",
+    "Poison": "Poison",
+    "Psychic": "Psychic",
+    "Radiant": "Radiant",
+    "Slashing": "Slashing",
+    "Thunder": "Thunder"
+  }
 },
 
 "DND5E.DamImm": "Damage Immunities",
 "DND5E.DamMod": "Damage Modification",
 "DND5E.DamRes": "Damage Resistances",
 "DND5E.DamVuln": "Damage Vulnerabilities",
+
 "DND5E.Damage": "Damage",
-"DND5E.DamageAcid": "Acid",
-"DND5E.DamageAll": "All Damage",
 "DND5E.DamageApplication": {
   "Change": {
     "Modification": "{type} Modification",
@@ -2098,32 +2119,16 @@
   "Downgrading": "Downgrading {source} to Resistance",
   "Ignoring": "Ignoring {source}"
 },
-"DND5E.DamageBludgeoning": "Bludgeoning",
-"DND5E.DamageCold": "Cold",
-"DND5E.DamageFire": "Fire",
-"DND5E.DamageForce": "Force",
-"DND5E.DamageLightning": "Lightning",
 "DND5E.DamageModification": {
   "Label": "Damage Modification",
   "Hint": "Formulas for amounts that will be added to typed damage applied to this actor. Negative values will reduce the damage taken.",
   "BypassHint": "These weapon properties will bypass damage modification for physical damage."
 },
-"DND5E.DamageNecrotic": "Necrotic",
-"DND5E.DamagePiercing": "Piercing",
-"DND5E.DamagePhysical": "Non-Magical Physical",
-"DND5E.DamagePhysicalBypass": "Physical Bypasses",
-"DND5E.DamagePhysicalBypassHint": "These weapon properties will bypass damage resistance for physical damage.",
-"DND5E.DamagePhysicalBypasses": "{damageTypes} from attacks that are not {bypassTypes}",
-"DND5E.DamagePhysicalBypassesShort": "Bypassed by {type} Sources",
-"DND5E.DamagePoison": "Poison",
-"DND5E.DamagePsychic": "Psychic",
-"DND5E.DamageRadiant": "Radiant",
 "DND5E.DamageRoll": "Damage Roll",
-"DND5E.DamageSlashing": "Slashing",
 "DND5E.DamageThreshold": "Damage Threshold",
-"DND5E.DamageThunder": "Thunder",
 "DND5E.DamageType": "Damage Type",
 "DND5E.DamageTypes": "Damage Types",
+
 "DND5E.Dawn": "Dawn",
 "DND5E.Day": "Day",
 "DND5E.DeathSave": "Death Saves",

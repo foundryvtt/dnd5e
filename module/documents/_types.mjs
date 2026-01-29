@@ -29,15 +29,22 @@
  * Description of a source of damage.
  *
  * @typedef DamageDescription
- * @property {number} value            Amount of damage.
- * @property {string} type             Type of damage.
- * @property {Set<string>} properties  Physical properties that affect damage application.
+ * @property {number} value                          Amount of damage.
+ * @property {string} type                           Type of damage.
+ * @property {Set<string>} properties                Physical properties that affect damage application.
  * @property {object} [active]
- * @property {number} [active.multiplier]      Final calculated multiplier.
- * @property {boolean} [active.modifications]  Did modification affect this description?
- * @property {boolean} [active.resistance]     Did resistance affect this description?
- * @property {boolean} [active.vulnerability]  Did vulnerability affect this description?
- * @property {boolean} [active.immunity]       Did immunity affect this description?
+ * @property {DamageAffectDescription} [active.all]  How resistance/etc. targeting All Damage affected this total.
+ * @property {number} [active.multiplier]            Final calculated multiplier.
+ * @property {boolean} [active.threshold]            Did threshold affect this description?
+ * @property {DamageAffectDescription} [active.type] How resistance/etc. targeting this type affected this total.
+ */
+
+/**
+ * @typedef DamageAffectDescription
+ * @property {boolean} [modification]   Did modification affect this description?
+ * @property {boolean} [resistance]     Did resistance affect this description?
+ * @property {boolean} [vulnerability]  Did vulnerability affect this description?
+ * @property {boolean} [immunity]       Did immunity affect this description?
  */
 
 /**
