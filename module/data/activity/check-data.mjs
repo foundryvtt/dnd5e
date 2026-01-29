@@ -2,7 +2,7 @@ import { simplifyBonus } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import BaseActivityData from "./base-activity.mjs";
 
-const { SchemaField, SetField, StringField } = foundry.data.fields;
+const { BooleanField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * @import { CheckActivityData } from "./_types.mjs";
@@ -24,7 +24,8 @@ export default class BaseCheckActivityData extends BaseActivityData {
         dc: new SchemaField({
           calculation: new StringField(),
           formula: new FormulaField({ deterministic: true })
-        })
+        }),
+        visible: new BooleanField({ initial: true })
       })
     };
   }
