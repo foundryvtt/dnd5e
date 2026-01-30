@@ -475,6 +475,15 @@
           "types": ["feat", "weapon"]
         }
       }
+    },
+    {
+      "name": "effects",
+      "label": "Active EFfects",
+      "system": "dnd5e",
+      "path": "packs/effects",
+      "type": "ActiveEffect",
+      "private": false,
+      "flags": {}
     }
   ],
   "packFolders": [
@@ -491,7 +500,8 @@
         "tables24",
         "actors24",
         "equipment24",
-        "monsterfeatures24"
+        "monsterfeatures24",
+        "effects"
       ]
     },
     {
