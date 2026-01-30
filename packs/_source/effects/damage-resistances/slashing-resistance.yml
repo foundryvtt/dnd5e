@@ -1,0 +1,39 @@
+name: Slashing Resistance
+type: base
+img: systems/dnd5e/icons/svg/damage/slashing.svg
+system:
+  changes:
+    - key: system.traits.dr.value
+      type: add
+      value: slashing
+      phase: initial
+disabled: false
+start: null
+duration:
+  value: null
+  units: seconds
+  expiry: null
+  expired: false
+description: ''
+origin: null
+tint: '#ffffff'
+transfer: false
+statuses: []
+showIcon: 1
+folder: m7bI2qqrnUPGPIjj
+sort: 100000
+flags:
+  dnd5e:
+    riders:
+      statuses: []
+_stats:
+  coreVersion: '14.354'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+  createdTime: 1769815741197
+  modifiedTime: 1769815741197
+_id: cwurJ5JjwCud9ix8
+_key: '!effects!cwurJ5JjwCud9ix8'

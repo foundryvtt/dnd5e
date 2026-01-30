@@ -1,0 +1,36 @@
+folder: w70rfvAVNHLuTPv3
+name: Force Immunity
+type: base
+img: systems/dnd5e/icons/svg/damage/force.svg
+system:
+  changes:
+    - key: system.traits.di.value
+      type: add
+      value: force
+      phase: initial
+disabled: false
+start: null
+duration:
+  value: null
+  units: seconds
+  expiry: null
+  expired: false
+description: ''
+origin: null
+tint: '#ffffff'
+transfer: false
+statuses: []
+showIcon: 1
+sort: 0
+flags: {}
+_stats:
+  coreVersion: '14.354'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+  createdTime: 1769815804292
+  modifiedTime: 1769815804292
+_id: GFI67RamgYpG4nzW
+_key: '!effects!GFI67RamgYpG4nzW'

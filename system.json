@@ -2,14 +2,14 @@
   "id": "dnd5e",
   "title": "Dungeons & Dragons Fifth Edition",
   "description": "A system for playing the fifth edition of the world's most popular role-playing game in the Foundry Virtual Tabletop environment.",
-  "version": "5.3.0",
+  "version": "6.0.0",
   "compatibility": {
-    "minimum": "13.347",
-    "verified": "13"
+    "minimum": "14.354",
+    "verified": "14"
   },
   "url": "https://github.com/foundryvtt/dnd5e/",
   "manifest": "https://raw.githubusercontent.com/foundryvtt/dnd5e/master/system.json",
-  "download": "https://github.com/foundryvtt/dnd5e/releases/download/release-5.3.0/dnd5e-release-5.3.0.zip",
+  "download": "https://github.com/foundryvtt/dnd5e/releases/download/release-6.0.0/dnd5e-release-6.0.0.zip",
   "authors": [
     {
       "name": "Atropos",
@@ -475,6 +475,15 @@
           "types": ["feat", "weapon"]
         }
       }
+    },
+    {
+      "name": "effects",
+      "label": "Active EFfects",
+      "system": "dnd5e",
+      "path": "packs/effects",
+      "type": "ActiveEffect",
+      "private": false,
+      "flags": {}
     }
   ],
   "packFolders": [
@@ -491,7 +500,8 @@
         "tables24",
         "actors24",
         "equipment24",
-        "monsterfeatures24"
+        "monsterfeatures24",
+        "effects"
       ]
     },
     {

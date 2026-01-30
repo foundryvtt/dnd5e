@@ -1,0 +1,36 @@
+folder: tlwRMODOZMa8Cksf
+name: Falling Immunity
+type: base
+img: systems/dnd5e/icons/svg/statuses/falling.svg
+system:
+  changes:
+    - key: system.traits.ci.value
+      type: add
+      value: falling
+      phase: initial
+disabled: false
+start: null
+duration:
+  value: null
+  units: seconds
+  expiry: null
+  expired: false
+description: ''
+origin: null
+tint: '#ffffff'
+transfer: false
+statuses: []
+showIcon: 1
+sort: 0
+flags: {}
+_stats:
+  coreVersion: '14.354'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+  createdTime: 1769816707140
+  modifiedTime: 1769816707140
+_id: NoRthNkIU2NffeHh
+_key: '!effects!NoRthNkIU2NffeHh'
