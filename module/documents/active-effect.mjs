@@ -921,7 +921,9 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /** @override */
   static _createDialogTypes(parent) {
-    return ActiveEffect.TYPES.filter(t => CONFIG.ActiveEffect.dataModels[t]?.availableForItem?.(parent) ?? true);
+    return parent
+      ? ActiveEffect.TYPES.filter(t => CONFIG.ActiveEffect.dataModels[t]?.availableForItem?.(parent) ?? true)
+      : ActiveEffect.TYPES;
   }
 
   /* -------------------------------------------- */
