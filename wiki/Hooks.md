@@ -55,16 +55,6 @@ A hook event that fires after a roll config has been built using the roll prompt
 
 A hook event that fires while computing the spellcasting progression for each class on each actor. A different version of the hook will be fired for each spellcasting method defined in `CONFIG.DND5E.spellcasting`. Returning `false` will prevent additional computation of this progression.
 
-| Name        | Type         | Description                                                       |
-| ----------- | ------------ | ----------------------------------------------------------------- |
-| spells      | object       | The `data.spells` object within actor's data. *Will be mutated.*  |
-| actor       | Actor5e|void | Actor for whom the data is being prepared, if any.                |
-| progression | object       | Spellcasting progression data.                                    |
-
-### `dnd5e.prepare___Slots` (`dnd5e.prepareSpellSlots`, `dnd5e.preparePactSlots`)
-
-A hook event that fires to convert the provided spellcasting progression into spell slots. A different version of the hook will be fired for each spellcasting method defined in `CONFIG.DND5E.spellcasting`. Returning `false` will prevent additional preparation of this progression.
-
 | Name         | Type                    | Description                                        |
 | ------------ | ----------------------- | -------------------------------------------------- |
 | progression  | object                  | Spellcasting progression data. *Will be mutated.*  |
@@ -72,6 +62,16 @@ A hook event that fires to convert the provided spellcasting progression into sp
 | cls          | Item5e                  | Class for whom this progression is being computed. |
 | spellcasting | SpellcastingDescription | Spellcasting descriptive object.                   |
 | count        | number                  | Number of classes with this type of spellcasting.  |
+
+### `dnd5e.prepare___Slots` (`dnd5e.prepareSpellSlots`, `dnd5e.preparePactSlots`)
+
+A hook event that fires to convert the provided spellcasting progression into spell slots. A different version of the hook will be fired for each spellcasting method defined in `CONFIG.DND5E.spellcasting`. Returning `false` will prevent additional preparation of this progression.
+
+| Name        | Type         | Description                                                       |
+| ----------- | ------------ | ----------------------------------------------------------------- |
+| spells      | object       | The `data.spells` object within actor's data. *Will be mutated.*  |
+| actor       | Actor5e|void | Actor for whom the data is being prepared, if any.                |
+| progression | object       | Spellcasting progression data.                                    |
 
 ### `dnd5e.preRollAbilityCheck` & `dnd5e.preRollSavingThrow`
 
