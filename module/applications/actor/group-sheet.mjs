@@ -123,7 +123,7 @@ export default class GroupActorSheet extends MultiActorSheet {
       context.members.push(member);
     }
     context.members.sort((a, b) => a.type.compare(b.type) || a.name.localeCompare(b.name, game.i18n.lang));
-    if ( this.inventorySource.type === "vehicle" ) {
+    if ( this.inventorySource.system.isVehicle ) {
       context.encumbrance = await this.inventorySource.system.getEncumbrance();
     }
     return context;
@@ -244,7 +244,7 @@ export default class GroupActorSheet extends MultiActorSheet {
    * @protected
    */
   async _prepareMemberEncumbrance(actor, context) {
-    const encumbrance = actor.type === "vehicle"
+    const encumbrance = actor.system.isVehicle
       ? await actor.system.getEncumbrance()
       : actor.system.attributes.encumbrance;
     const { pct, max, value } = encumbrance;
@@ -362,7 +362,7 @@ export default class GroupActorSheet extends MultiActorSheet {
 
   /** @inheritDoc */
   _onChangeForm(formConfig, event) {
-    if ( event.target.dataset.name?.startsWith("system.currency.") && (this.inventorySource.type === "vehicle") ) {
+    if ( event.target.dataset.name?.startsWith("system.currency.") && this.inventorySource.system.isVehicle ) {
       return this.inventorySource.update({ [event.target.dataset.name]: event.target.value });
     }
     return super._onChangeForm(formConfig, event);
@@ -445,7 +445,7 @@ export default class GroupActorSheet extends MultiActorSheet {
       icon: '<i class="fa-solid fa-star"></i>',
       group: "state",
       condition: li => {
-        return (foundry.utils.fromUuidSync(li.dataset.uuid)?.type === "vehicle")
+        return foundry.utils.fromUuidSync(li.dataset.uuid)?.system.isVehicle
           && (this.actor.system.primaryVehicle?.uuid !== li.dataset.uuid);
       },
       callback: async li => this.actor.update({ "system.primaryVehicle": (await fromUuid(li.dataset.uuid))?.id })

@@ -92,7 +92,7 @@ export default class VehicleData extends CommonTemplate {
         quality: new SchemaField({
           value: new NumberField({ required: true, nullable: false, integer: true, min: -10, max: 10, initial: 4 })
         }),
-        travel: new TravelField({ pace: false, }, {
+        travel: new TravelField({ pace: false }, {
           initialTime: () => CONFIG.DND5E.travelTimes.vehicle, initialUnits: () => defaultUnits("travel")
         })
       }, { label: "DND5E.Attributes" }),
@@ -140,6 +140,18 @@ export default class VehicleData extends CommonTemplate {
         passengers: new ArrayField(makePassengerData())
       })
     });
+  }
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Whether this Actor type represents a vehicle.
+   * @returns {boolean}
+   */
+  get isVehicle() {
+    return true;
   }
 
   /* -------------------------------------------- */
@@ -271,6 +283,15 @@ export default class VehicleData extends CommonTemplate {
     TraitsFields.prepareResistImmune.call(this);
     TravelField.prepareData.call(this, rollData);
 
+    this._prepareActions();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Perform preparation steps for action stations.
+   */
+  _prepareActions() {
     const { actions } = this.attributes;
     const crew = this.crew.value.length;
 
@@ -338,7 +359,7 @@ export default class VehicleData extends CommonTemplate {
    */
   async getEncumbrance() {
     const encumbrance = foundry.utils.deepClone(this.attributes.encumbrance);
-    if ( Number.isFinite(encumbrance.max) || !this.draft.value.length ) return encumbrance; // Encumbrance already calculated.
+    if ( Number.isFinite(encumbrance.max) || !this.draft?.value.length ) return encumbrance; // Encumbrance already calculated.
     const { baseUnits, draftMultiplier } = CONFIG.DND5E.encumbrance;
     const unitSystem = game.settings.get("dnd5e", "metricWeightUnits") ? "metric" : "imperial";
     const units = baseUnits.default[unitSystem];

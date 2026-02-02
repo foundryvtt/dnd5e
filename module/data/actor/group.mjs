@@ -166,7 +166,7 @@ export default class GroupData extends GroupTemplate {
       enumerable: false,
       writable: false
     });
-    if ( !memberIds.has(this.primaryVehicle?.id) || (this.primaryVehicle?.type !== "vehicle") ) {
+    if ( !memberIds.has(this.primaryVehicle?.id) || !this.primaryVehicle?.system.isVehicle ) {
       Object.defineProperty(this, "primaryVehicle", { value: null });
     }
   }

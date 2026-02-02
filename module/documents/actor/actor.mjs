@@ -2088,7 +2088,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<RestResult>}                A Promise which resolves once the short rest workflow has completed.
    */
   async shortRest(config={}) {
-    if ( this.type === "vehicle" ) return;
+    if ( this.system.isVehicle ) return;
     if ( !game.user.isGM && !game.settings.get("dnd5e", "allowRests") && !config.request ) {
       ui.notifications.warn("DND5E.REST.Warning.OnlyByRequest", { localize: true, log: false });
       return;
@@ -2151,7 +2151,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<RestResult>}       A Promise which resolves once the long rest workflow has completed.
    */
   async longRest(config={}) {
-    if ( this.type === "vehicle" ) return;
+    if ( this.system.isVehicle ) return;
     if ( !game.user.isGM && !game.settings.get("dnd5e", "allowRests") && !config.request ) {
       ui.notifications.warn("DND5E.REST.Warning.OnlyByRequest", { localize: true, log: false });
       return;
