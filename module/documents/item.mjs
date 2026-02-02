@@ -1024,7 +1024,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const advancement = this.system.advancement?.get(id);
     if ( !advancement ) return this;
 
-    const update = { [`system.advancement.-=${id}`]: null };
+    const update = game.release.generation < 14
+      ? { [`system.advancement.-=${id}`]: null }
+      : { [`system.advancement.${id}`]: _del };
     if ( source ) return this.updateSource(update);
 
     Promise.allSettled(advancement.constructor._apps.get(advancement.uuid)?.map(a => a.close()) ?? []).then(() => {

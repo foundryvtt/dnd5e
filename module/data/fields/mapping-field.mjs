@@ -163,6 +163,9 @@ export default class MappingField extends ObjectField {
   migrateSource(sourceData, fieldData) {
     if ( !(this.model.migrateSource instanceof Function) ) return;
     if ( foundry.utils.getType(fieldData) !== "Object" ) return;
-    for ( const entry of Object.values(fieldData) ) this.model.migrateSource(sourceData, entry);
+    for ( const [key, entry] of Object.entries(fieldData) ) {
+      if ( foundry.utils.isDeletionKey(key) && (key[0] === "-") ) continue;
+      this.model.migrateSource(sourceData, entry);
+    }
   }
 }
