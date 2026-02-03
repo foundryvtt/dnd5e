@@ -41,7 +41,7 @@ export default class DamagesConfig extends TraitsConfig {
       if ( v.isPhysical ) obj[k] = {
         label: v.label,
         chosen: context.data.bypasses.includes(k),
-        icon: { src: `fa-solid ${k}` }
+        icon: { src: `fa-solid fa-fw ${k}` }
       };
       return obj;
     }, {}));
