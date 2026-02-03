@@ -111,13 +111,7 @@ export default class ActivityChoiceDialog extends Application5e {
    */
   _prepareActivityContext(activity) {
     const { id, name, img, sort } = activity;
-    return {
-      id, name, sort,
-      icon: {
-        src: img,
-        svg: img.endsWith(".svg")
-      }
-    };
+    return { id, name, img, sort };
   }
 
   /* -------------------------------------------- */

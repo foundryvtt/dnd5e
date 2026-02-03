@@ -4,13 +4,7 @@
         <li>
             <button type="button" data-action="choose" data-activity-id="{{ id }}">
                 <span class="icon">
-                    {{#with icon}}
-                    {{#if svg}}
-                    <dnd5e-icon src="{{ src }}"></dnd5e-icon>
-                    {{else}}
-                    <img src="{{ src }}" alt="{{ ../name }}" class="gold-icon">
-                    {{/if}}
-                    {{/with}}
+                    {{ dnd5e-icon img alt=name classes="gold-icon" }}
                 </span>
                 <span class="name">{{ name }}</span>
             </button>

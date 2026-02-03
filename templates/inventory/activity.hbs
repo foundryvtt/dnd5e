@@ -4,11 +4,7 @@
     <div class="activity-name item-name item-action {{ @root.rollableClass }}" role="button" aria-label="{{ name }}"
          data-action="activity-use">
 
-        {{#if icon.svg}}
-        <dnd5e-icon class="activity-image item-image" src="{{ icon.src }}"></dnd5e-icon>
-        {{else}}
-        <img class="activity-image item-image gold-icon" src="{{ icon.src }}" alt="{{ name }}">
-        {{/if}}
+        {{ dnd5e-icon img alt=name classes="activity-image item-image gold-icon" }}
 
         <div class="name name-stacked">
             <span class="title">{{ name }}</span>
