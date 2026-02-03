@@ -247,7 +247,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     const modes = CONST.ACTIVE_EFFECT_MODES;
 
     // Replace value when using string interpolation syntax
-    if ( (field instanceof StringField) && (change.mode === modes.OVERRIDE) && change.value.includes("{}") ) {
+    if ( (field instanceof StringField) && (change.mode === modes.OVERRIDE) && change.value.includes?.("{}") ) {
       change.value = change.value.replace("{}", current ?? "");
     }
 
