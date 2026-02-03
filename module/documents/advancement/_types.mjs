@@ -27,6 +27,26 @@
 /* -------------------------------------------- */
 
 /**
+ * @typedef AdvancementApplicationOptions
+ * @property {boolean} [automatic]  This application is part of an automatic application.
+ * @property {boolean} [initial]    This application is the initial application before the flow is first rendered.
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef AdvancementRestorationOptions
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef AdvancementReversalOptions
+ */
+
+/* -------------------------------------------- */
+
+/**
  * The advancement configuration is flattened into separate options for the user that are chosen step-by-step. Some
  * are automatically picked for them if they are 'grants' or if there is only one option after the character's
  * existing traits have been taken into account.
@@ -37,4 +57,19 @@
  *                                    came from.
  * @property {SelectChoices} choices  The available traits to pick from. Grants have only 0 or 1, depending on whether
  *                                    the character already has the granted trait.
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef TraitAdvancementApplicationData
+ * @property {string[]} [chosen]  Array of trait keys to add.
+ * @property {string} [key]       Key of a single trait to add.
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef {AdvancementReversalOptions} TraitAdvancementReversalOptions
+ * @property {string} [key]  Key of a single trait to remove.
  */

@@ -952,7 +952,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @returns {Promise<AdvancementConfig>|Item5e}  Promise for advancement config for new advancement if source
    *                                               is `false`, or item with newly added advancement.
    */
-  createAdvancement(type, data={}, { renderSheet, showConfig, source=false }={}) {
+  createAdvancement(type, data={}, { renderSheet=true, showConfig, source=false }={}) {
     if ( showConfig !== undefined ) {
       foundry.utils.logCompatibilityWarning(
         "The `showConfig` options in `createAdvancement` has been deprecated and replaced with `renderSheet`.",
@@ -978,7 +978,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const update = { [`system.advancement.${advancement.id}`]: advancement.toObject() };
     if ( source ) return this.updateSource(update);
     return this.update(update).then(() => {
-      if ( showConfig ) return this.system.advancement.get(advancement.id)?.sheet?.render({ force: true });
+      if ( renderSheet ) return this.system.advancement.get(advancement.id)?.sheet?.render({ force: true });
       return this;
     });
   }
@@ -1000,7 +1000,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const advancement = this.system.advancement.get(id);
     const update = { [`system.advancement.${id}`]: updates };
     if ( source ) {
-      this.updateSource(update);
+      advancement.updateSource(update);
       advancement.render();
       return this;
     }

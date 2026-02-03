@@ -112,7 +112,7 @@ export default class ScaleValueAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @override */
-  automaticApplicationValue(level) {
+  async automaticApplicationValue(level) {
     return {};
   }
 

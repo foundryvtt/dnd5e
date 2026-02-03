@@ -1,10 +1,12 @@
 import AdvancementConfig from "../../applications/advancement/advancement-config-v2.mjs";
-import AdvancementFlow from "../../applications/advancement/advancement-flow.mjs";
+import AdvancementFlow from "../../applications/advancement/advancement-flow-v2.mjs";
 import BaseAdvancementData from "../../data/advancement/base-advancement.mjs";
 import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
 
 /**
- * @import { AdvancementMetadata } from "./_types.mjs";
+ * @import {
+ *  AdvancementApplicationOptions, AdvancementMetadata, AdvancementRestorationOptions, AdvancementReversalOptions
+ * } from "./_types.mjs";
  */
 
 /**
@@ -250,21 +252,21 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancementData
 
   /**
    * Locally apply this advancement to the actor.
-   * @param {number} level   Level being advanced.
-   * @param {object} data    Data from the advancement form.
+   * @param {number} level                                Level being advanced.
+   * @param {object} data                                 Data from the advancement form.
+   * @param {AdvancementApplicationOptions} [options={}]  Additional options to guide the application process.
    * @abstract
    */
-  async apply(level, data) { }
-
+  async apply(level, data, options={}) { }
 
   /* -------------------------------------------- */
 
   /**
    * Retrieves the data to pass to the apply method in order to apply this advancement automatically, if possible.
-   * @param {number} level    Level being advanced.
-   * @returns {object|false}  Data to pass to the apply method, or `false` if advancement requirers user intervention.
+   * @param {number} level             Level being advanced.
+   * @returns {Promise<object|false>}  Data to pass to the apply method, or `false` if user intervention required.
    */
-  automaticApplicationValue(level) {
+  async automaticApplicationValue(level) {
     return false;
   }
 
@@ -273,21 +275,23 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancementData
   /**
    * Locally apply this advancement from stored data, if possible. If stored data can not be restored for any reason,
    * throw an AdvancementError to display the advancement flow UI.
-   * @param {number} level  Level being advanced.
-   * @param {object} data   Data from `Advancement#reverse` needed to restore this advancement.
+   * @param {number} level                                Level being advanced.
+   * @param {object} data                                 Data from `Advancement#reverse` needed to restore this advancement.
+   * @param {AdvancementRestorationOptions} [options={}]  Additional options to guide the restoration process.
    * @abstract
    */
-  async restore(level, data) { }
+  async restore(level, data, options={}) { }
 
   /* -------------------------------------------- */
 
   /**
    * Locally remove this advancement's changes from the actor.
-   * @param {number} level  Level being removed.
+   * @param {number} level                             Level being removed.
+   * @param {AdvancementReversalOptions} [options={}]  Additional options to guide the reverse process.
    * @returns {object}      Data that can be passed to the `Advancement#restore` method to restore this reversal.
    * @abstract
    */
-  async reverse(level) { }
+  async reverse(level, options={}) { }
 
   /* -------------------------------------------- */
 
