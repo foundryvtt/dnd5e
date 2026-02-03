@@ -147,7 +147,7 @@ export default class GroupActorSheet extends MultiActorSheet {
     for ( const { actor } of this.document.system.members ) {
       if ( !actor ) continue;
       const { id, type, img, name, system, uuid } = actor;
-      const section = context.sections[type];
+      const section = context.sections[system.groupSection];
       if ( !section ) continue;
       const member = { id, type, img, name, system, uuid };
       member.canView = actor.testUserPermission(game.user, "LIMITED");
@@ -156,7 +156,7 @@ export default class GroupActorSheet extends MultiActorSheet {
       await this._prepareMemberPortrait(actor, member);
       this._prepareMemberEncumbrance(actor, member);
       this._prepareMemberSkills(actor, member);
-      switch ( type ) {
+      switch ( system.groupSection ) {
         case "character": await this._prepareCharacterContext(actor, member, options); break;
         case "npc": await this._prepareNPCContext(actor, member, options); break;
         case "vehicle": await this._prepareVehicleContext(actor, member, options); break;
