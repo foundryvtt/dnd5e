@@ -247,6 +247,15 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancementData
   }
 
   /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  updateSource(updates) {
+    super.updateSource(updates);
+    this.prepareData();
+    return this;
+  }
+
+  /* -------------------------------------------- */
   /*  Application Methods                         */
   /* -------------------------------------------- */
 

@@ -64,9 +64,7 @@ export default class TraitAdvancement extends Advancement {
   /*  Preparation Methods                         */
   /* -------------------------------------------- */
 
-  /**
-   * Prepare data for the Advancement.
-   */
+  /** @override */
   prepareData() {
     const rep = this.representedTraits();
     const traitConfig = rep.size === 1 ? CONFIG.DND5E.traits[rep.first()] : null;
