@@ -174,8 +174,8 @@ export default class AdvancementFlow extends Application5e {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _onFirstRender(context, options) {
-    super._onFirstRender(context, options);
+  async _onFirstRender(context, options) {
+    await super._onFirstRender(context, options);
     Object.assign(this.element.dataset, {
       id: this.advancement.id,
       level: this.level,
@@ -186,8 +186,8 @@ export default class AdvancementFlow extends Application5e {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _onRender(context, options) {
-    super._onRender(context, options);
+  async _onRender(context, options) {
+    await super._onRender(context, options);
     if ( this.manager?.rendered ) this.manager?.setPosition();
   }
 
@@ -204,7 +204,7 @@ export default class AdvancementFlow extends Application5e {
   static async #viewItem(event, target) {
     const uuid = target.closest("[data-uuid]")?.dataset.uuid;
     const item = await fromUuid(uuid);
-    item?.sheet.render(true);
+    item?.sheet.render({ force: true });
   }
 
   /* -------------------------------------------- */

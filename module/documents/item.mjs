@@ -1000,7 +1000,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const advancement = this.system.advancement.get(id);
     const update = { [`system.advancement.${id}`]: updates };
     if ( source ) {
-      advancement.updateSource(update);
+      advancement.updateSource(updates);
       advancement.render();
       return this;
     }

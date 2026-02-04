@@ -33,7 +33,7 @@ export default class SubclassFlow extends AdvancementFlow {
   async _prepareContext(options) {
     const uuid = foundry.utils.getProperty(this.retainedData ?? {}, "flags.dnd5e.sourceId");
     if ( uuid ) await this.advancement.apply(this.level, { retainedData: this.retainedData, uuid });
-    return await super._prepareContext(options);
+    return super._prepareContext(options);
   }
 
   /* -------------------------------------------- */

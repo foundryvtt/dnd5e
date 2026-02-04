@@ -577,7 +577,6 @@ export default class AdvancementManager extends Application5e {
     } else {
       this.step.flow.manager ??= this;
       await this.step.flow.render({ force: true });
-      this.step.flow._insertElement(this.step.flow.element);
     }
     this.setPosition();
   }
