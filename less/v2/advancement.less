@@ -212,7 +212,7 @@
 
 .dnd5e2.advancement.manager.application {
   [data-application-part="manager"] {
-    gap: 12px;
+    gap: 8px;
 
     > .step {
       h3 {
@@ -221,6 +221,7 @@
         font-family: var(--dnd5e-font-roboto-condensed);
         font-size: var(--font-size-20);
         text-shadow: none;
+        margin-bottom: 8px;
       }
       &.dnd5e {
         h4 {
@@ -266,6 +267,29 @@
         &:hover { box-shadow: 0 0 12px var(--dnd5e-color-gold); }
       }
     }
+  }
+}
+
+/* ----------------------------------------- */
+/*  Advancement Flow                         */
+/* ----------------------------------------- */
+
+.dnd5e2.advancement.flow {
+  [data-application-part=header] {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-12);
+  }
+
+  .items-section {
+    .header .item-name {
+      font-weight: normal;
+      font-family: var(--dnd5e-font-roboto);
+      font-variant: all-small-caps;
+      padding: 4px 4px 6px 6px;
+    }
+
+    .item-name .title { font-size: var(--font-size-12); }
+    .gold-icon { --gold-icon-size: 24px; }
   }
 }
 

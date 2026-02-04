@@ -8,6 +8,7 @@ export default class SubclassFlow extends AdvancementFlow {
 
   /** @override */
   static DEFAULT_OPTIONS = {
+    classes: ["subclass"],
     actions: {
       browse: SubclassFlow.#browseCompendium,
       deleteItem: SubclassFlow.#deleteItem

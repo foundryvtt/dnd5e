@@ -1808,7 +1808,11 @@ dialog.dnd5e2.application {
       grid-template-columns: subgrid;
     }
     .name { grid-column: name; }
-    .trait-list { gap: 4px; }
+    .trait-list {
+      gap: 4px;
+      li ol.trait-list { margin-left: 1.5em; }
+      .category > label { font-weight: bold; }
+    }
     .proficiency {
       grid-column: proficiency;
       display: flex;
