@@ -42,18 +42,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * @type {Set<string>}
    */
   static FORMULA_FIELDS = new Set([
-    "system.attributes.ac.bonus",
-    "system.attributes.ac.min",
-    "system.attributes.encumbrance.bonuses.encumbered",
-    "system.attributes.encumbrance.bonuses.heavilyEncumbered",
-    "system.attributes.encumbrance.bonuses.maximum",
-    "system.attributes.encumbrance.bonuses.overall",
-    "system.attributes.encumbrance.multipliers.encumbered",
-    "system.attributes.encumbrance.multipliers.heavilyEncumbered",
-    "system.attributes.encumbrance.multipliers.maximum",
-    "system.attributes.encumbrance.multipliers.overall",
-    "system.damage.bonus",
-    "save.dc.bonus"
+    "system.damageBonus" // TODO: Remove once `system.damageBonus` shim is moved to `system.damage.bonus`
   ]);
 
   /* -------------------------------------------- */
