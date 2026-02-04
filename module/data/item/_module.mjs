@@ -54,7 +54,3 @@ export const config = {
   tool: ToolData,
   weapon: WeaponData
 };
-
-// Deprecated
-export {default as EnchantmentField, EnchantmentData, EnchantmentError} from "./fields/enchantment-field.mjs";
-export {default as SummonsField, SummonsData} from "./fields/summons-field.mjs";

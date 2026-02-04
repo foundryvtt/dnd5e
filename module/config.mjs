@@ -2405,7 +2405,6 @@ DND5E.movementTypes = {
   }
 };
 preLocalize("movementTypes", { key: "label" });
-patchConfig("movementTypes", "label", { since: "DnD5e 5.1", until: "DnD5e 5.3" });
 
 /* -------------------------------------------- */
 
@@ -3168,14 +3167,14 @@ DND5E.SPELL_LISTS = Object.freeze([
 DND5E.spellPreparationModes = new Proxy(DND5E.spellcasting, {
   get(target, prop, receiver) {
     foundry.utils.logCompatibilityWarning("CONFIG.DND5E.spellPreparationModes is deprecated, use CONFIG.DND5E.spellcasting"
-      + " instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+      + " instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
     if ( (prop === "prepared") || (prop === "always") ) prop = "spell";
     return Reflect.get(target, prop, receiver);
   },
 
   set(target, prop, value, receiver) {
     foundry.utils.logCompatibilityWarning("CONFIG.DND5E.spellPreparationModes is deprecated, use CONFIG.DND5E.spellcasting"
-      + " instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+      + " instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
     if ( (prop === "prepared") || (prop === "always") ) prop = "spell";
     return Reflect.set(target, prop, value, receiver);
   }
@@ -3190,14 +3189,14 @@ DND5E.spellPreparationModes = new Proxy(DND5E.spellcasting, {
 DND5E.spellcastingTypes = new Proxy(DND5E.spellcasting, {
   get(target, prop, receiver) {
     foundry.utils.logCompatibilityWarning("CONFIG.DND5E.spellcastingTypes is deprecated, use CONFIG.DND5E.spellcasting"
-      + " instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+      + " instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
     if ( prop === "leveled" ) prop = "spell";
     return Reflect.get(target, prop, receiver);
   },
 
   set(target, prop, value, receiver) {
     foundry.utils.logCompatibilityWarning("CONFIG.DND5E.spellcastingTypes is deprecated, use CONFIG.DND5E.spellcasting"
-      + " instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+      + " instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
     if ( prop === "leveled" ) prop = "spell";
     if ( !("type" in value) ) value.type = "single";
     if ( !("table" in value) ) value.table = DND5E.pactCastingProgression;
@@ -3214,7 +3213,7 @@ DND5E.spellcastingTypes = new Proxy(DND5E.spellcasting, {
 DND5E.spellProgression = new Proxy({}, {
   set() {
     foundry.utils.logCompatibilityWarning("CONFIG.DND5E.spellProgression is read-only. Spell progressions must be set "
-      + "on CONFIG.DND5E.spellcasting instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+      + "on CONFIG.DND5E.spellcasting instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
     return true;
   }
 });

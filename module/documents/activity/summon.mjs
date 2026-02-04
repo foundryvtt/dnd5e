@@ -595,21 +595,4 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
       Hooks.onError("SummonsActivity#placeSummons", err, { log: "error", notify: "error" });
     }
   }
-
-  /* -------------------------------------------- */
-  /*  Deprecations                                */
-  /* -------------------------------------------- */
-
-  /**
-   * @deprecated
-   * @since 5.1.0
-   * @ignore
-   */
-  fetchActor(uuid) {
-    foundry.utils.logCompatibilityWarning("SummonActivity#fetchActor is deprecated. "
-      + "Please use Actor5e.fetchExisting instead.", { since: "DnD5e 5.1", until: "DnD5e 5.3" });
-    return dnd5e.documents.Actor5e.fetchExisting(uuid, {
-      origin: { key: "flags.dnd5e.summon.origin", value: this.item?.uuid }
-    });
-  }
 }

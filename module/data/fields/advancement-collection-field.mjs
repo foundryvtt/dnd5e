@@ -48,7 +48,7 @@ class AdvancementCollection extends Collection {
   get length() {
     foundry.utils.logCompatibilityWarning(
       "Checking advancement on an item should no longer use `length` but `size`.",
-      { since: "DnD5e 5.2", until: "DnD5e 5.4" }
+      { since: "DnD5e 5.2", until: "DnD5e 6.0" }
     );
     return this.size;
   }

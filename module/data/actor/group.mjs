@@ -371,18 +371,3 @@ export default class GroupData extends GroupTemplate {
     return false;
   }
 }
-
-/* -------------------------------------------- */
-
-/**
- * @deprecated
- * @since 5.1.0
- */
-export class GroupActor extends GroupData {
-  constructor(...args) {
-    foundry.utils.logCompatibilityWarning("GroupActor is deprecated. Please use GroupData instead.", {
-      since: "DnD5e 5.1", until: "DnD5e 5.3"
-    });
-    super(...args);
-  }
-}

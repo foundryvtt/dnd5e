@@ -956,7 +956,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( showConfig !== undefined ) {
       foundry.utils.logCompatibilityWarning(
         "The `showConfig` options in `createAdvancement` has been deprecated and replaced with `renderSheet`.",
-        { since: "DnD5e 5.2", until: "DnD5e 5.4" }
+        { since: "DnD5e 5.2", until: "DnD5e 6.0" }
       );
       renderSheet = showConfig;
     }

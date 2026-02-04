@@ -371,18 +371,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     return change;
   }
 
-  /* --------------------------------------------- */
-
-  /**
-   * @deprecated
-   * @ignore
-   */
-  determineSuppression() {
-    foundry.utils.logCompatibilityWarning(
-      "The `ActiveEffect5e#determineSuppression` method has been deprecated and is no longer necessary to call.",
-      { since: "DnD5e 5.1", until: "DnD5e 5.3" }
-    );
-  }
   /* -------------------------------------------- */
   /*  Lifecycle                                   */
   /* -------------------------------------------- */
@@ -875,7 +863,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   addDependent(...dependent) {
     foundry.utils.logCompatibilityWarning(
       "Dependent documents are now tracked using the `dependentOn` flag on the document itself.",
-      { since: "DnD5e 5.2", until: "DnD5e 5.4", once: true }
+      { since: "DnD5e 5.2", until: "DnD5e 6.0", once: true }
     );
     return Promise.all(dependent.map(d => d.setFlag("dnd5e", "dependentOn", this.uuid))).then(() => this);
   }
