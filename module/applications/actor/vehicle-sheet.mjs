@@ -334,6 +334,14 @@ export default class VehicleActorSheet extends BaseActorSheet {
   }
 
   /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _prepareItems(context) {
+    await super._prepareItems(context);
+    context.itemCategories.features?.sort((lhs, rhs) => lhs.sort - rhs.sort);
+  }
+
+  /* -------------------------------------------- */
   /*  Item Preparation Helpers                    */
   /* -------------------------------------------- */
 
