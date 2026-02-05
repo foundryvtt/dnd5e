@@ -21,6 +21,7 @@
  * @property {ConsumptionTargetData[]} consumption.targets  Collection of consumption targets.
  * @property {object} description
  * @property {string} description.chatFlavor     Extra text displayed in the activation chat message.
+ * @property {string} description.value          Full activity description displayed in chat.
  * @property {DurationData} duration             Duration of the effect.
  * @property {boolean} duration.concentration    Does this effect require concentration?
  * @property {boolean} duration.override         Override duration values inferred from item.
