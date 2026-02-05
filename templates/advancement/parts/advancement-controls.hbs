@@ -35,7 +35,8 @@
 {{/if}}
 
 {{#if supportsHTMLHint}}
-<prose-mirror name="hint" value="{{ source.hint }}" compact></prose-mirror>
+<prose-mirror class="slim" name="hint" value="{{ source.hint }}" compact
+              {{#if default.hint}}placeholder="{{ default.hint }}"{{/if}}></prose-mirror>
 {{else}}
 <div class="form-group">
     <label>{{ localize "DND5E.AdvancementHint" }}</label>
