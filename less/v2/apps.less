@@ -1006,6 +1006,13 @@
   /* ---------------------------------- */
 
   .editor.prosemirror {
+    &.slim {
+      --menu-height: 32px;
+      gap: 0;
+      menu { padding: 0 2px; }
+      .editor-content { padding-inline: 8px; }
+    }
+
     .editor-content {
       font-family: var(--dnd5e-font-roboto-condensed);
       font-size: var(--font-size-13);
@@ -1037,6 +1044,18 @@
           border: none;
           background: var(--dnd5e-color-scrollbar);
         }
+      }
+    }
+
+    &[placeholder] {
+      --placeholder: attr(placeholder);
+      .editor-container:not(:focus-within):has(.editor-content > p:only-child > br:only-child)::after {
+        content: var(--placeholder, "");
+        position: absolute;
+        inset: 8px;
+        pointer-events: none;
+        font-style: italic;
+        color: var(--color-text-secondary);
       }
     }
   }
