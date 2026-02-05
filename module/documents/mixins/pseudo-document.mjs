@@ -204,6 +204,7 @@ export default function PseudoDocumentMixin(Base) {
      */
     updateSource(updates) {
       super.updateSource(updates);
+      this.prepareData?.();
       return this;
     }
 
