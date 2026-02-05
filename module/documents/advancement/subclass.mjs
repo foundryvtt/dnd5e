@@ -49,7 +49,7 @@ export default class SubclassAdvancement extends Advancement {
 
   /** @inheritDoc */
   static availableForItem(item) {
-    return !item.advancement.byType.Subclass?.length;
+    return !item.advancement.documentsByType.Subclass?.length;
   }
 
   /* -------------------------------------------- */

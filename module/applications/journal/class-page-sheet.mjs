@@ -125,7 +125,7 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
 
     if ( context.subclasses?.length ) {
       for ( const subclass of context.subclasses ) {
-        const initialLevel = parseInt(Object.entries(subclass.document.advancement.byLevel)
+        const initialLevel = parseInt(Object.entries(subclass.document.advancement.documentsByLevel)
           .find(([lvl, d]) => d.length)?.[0] ?? 1);
         subclass.table = await this._getTable(subclass.document, { initialLevel, modernStyle });
         subclass.features = await this._getFeatures(subclass.document, { modernStyle });
@@ -155,7 +155,7 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
   _getAdvancement(item, { modernStyle }) {
     const advancement = {};
 
-    const hp = item.advancement.byType.HitPoints?.[0];
+    const hp = item.advancement.documentsByType.HitPoints?.[0];
     if ( hp ) {
       advancement.hp = {
         hitDice: modernStyle ? hp.hitDie.toUpperCase() : `1${hp.hitDie}`,
@@ -164,7 +164,7 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
       };
     }
 
-    const traits = item.advancement.byType.Trait ?? [];
+    const traits = item.advancement.documentsByType.Trait ?? [];
     const makeTrait = type => {
       const advancement = traits.find(a => {
         const rep = a.representedTraits();
@@ -222,8 +222,8 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
    * @protected
    */
   async _getTable(item, { initialLevel=1, modernStyle }={}) {
-    const hasFeatures = !!item.advancement.byType.ItemGrant;
-    const scaleValues = (item.advancement.byType.ScaleValue ?? []);
+    const hasFeatures = !!item.advancement.documentsByType.ItemGrant;
+    const scaleValues = (item.advancement.documentsByType.ScaleValue ?? []);
     const spellProgression = await this._getSpellProgression(item);
 
     const headers = [[{content: game.i18n.localize("DND5E.Level")}]];
@@ -253,7 +253,7 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
     const rows = [];
     for ( const level of Array.fromRange((CONFIG.DND5E.maxLevel - (initialLevel - 1)), initialLevel) ) {
       let features = [];
-      for ( const advancement of item.advancement.byLevel[level] ) {
+      for ( const advancement of item.advancement.documentsByLevel[level] ) {
         switch ( advancement.constructor.typeName ) {
           case "AbilityScoreImprovement":
             features.push(advancement._defaultTitle);
@@ -408,7 +408,7 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
     const rows = [];
     for ( const level of Array.fromRange(CONFIG.DND5E.maxLevel, 1) ) {
       let features = [];
-      for ( const advancement of item.advancement.byLevel[level] ) {
+      for ( const advancement of item.advancement.documentsByLevel[level] ) {
         switch ( advancement.constructor.typeName ) {
           case "ItemGrant":
             if ( !advancement.configuration.optional ) continue;
@@ -458,13 +458,13 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
     };
 
     let features = [];
-    const itemGrants = Array.from(item.advancement.byType.ItemGrant ?? []);
+    const itemGrants = Array.from(item.advancement.documentsByType.ItemGrant ?? []);
     for ( const advancement of itemGrants ) {
       if ( !!advancement.configuration.optional !== optional ) continue;
       features.push(...advancement.configuration.items.map(f => prepareFeature(f, advancement.level)));
     }
 
-    const asi = (item.advancement.byType.AbilityScoreImprovement ?? []).reduce((obj, advancement) => {
+    const asi = (item.advancement.documentsByType.AbilityScoreImprovement ?? []).reduce((obj, advancement) => {
       if ( advancement.isEpicBoon ) obj.boons.push(advancement);
       else obj.levels.push(advancement.level);
       return obj;

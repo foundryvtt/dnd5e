@@ -1,7 +1,7 @@
 import CastActivity from "../../../documents/activity/cast.mjs";
 import SystemDataModel from "../../abstract/system-data-model.mjs";
-import { ActivitiesField } from "../../fields/activities-field.mjs";
 import UsesField from "../../shared/uses-field.mjs";
+import ActivitiesCollectionField from "../fields/activities-collection-field.mjs";
 
 /**
  * @import { ActivitiesTemplateData } from "./_types.mjs";
@@ -26,7 +26,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
   /** @inheritDoc */
   static defineSchema() {
     return {
-      activities: new ActivitiesField(),
+      activities: new ActivitiesCollectionField(),
       uses: new UsesField()
     };
   }
