@@ -1,8 +1,6 @@
 import SystemDataModel from "../../abstract/system-data-model.mjs";
 import AdvancementCollectionField from "../../fields/advancement-collection-field.mjs";
 
-const { ArrayField } = foundry.data.fields;
-
 /**
  * @import { AdvancementTemplateData } from "./_types.mjs";
  */

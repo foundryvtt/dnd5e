@@ -362,36 +362,6 @@
     span.none { font-style: italic; }
   }
 
-  form[data-type="Trait"] {
-    select {
-      min-width: min(20em, 100%);
-      margin-block-end: 0.25em;
-    }
-    .trait-slots {
-      counter-reset: trait-list;
-      list-style: none;
-      padding: 0;
-    }
-    .trait-slot {
-      min-height: 30px;
-      align-items: center;
-      font-size: var(--font-size-14);
-
-      &::before {
-        counter-increment: trait-list;
-        content: counter(trait-list);
-        width: 2em;
-        text-align: center;
-        font-size: var(--font-size-16);
-      }
-
-      a {
-        flex: 0;
-        padding-inline-end: 0.5em;
-      }
-    }
-  }
-
   form[data-type="Size"] {
     select {
       width: 100%;
@@ -399,8 +369,6 @@
       height: 2em;
     }
   }
-
-  form[data-type="Subclass"] .drop-target > button { width: 100%; }
 
   nav {
     display: flex;
