@@ -10,9 +10,9 @@
 
 /**
  * @typedef AbilityScoreImprovementAdvancementValueData
- * @property {string} type             When on a class, whether the player chose ASI or a Feat.
- * @property {Object<string, number>}  Points assigned to individual scores.
- * @property {Object<string, string>}  Feat that was selected.
+ * @property {string} type                         When on a class, whether the player chose ASI or a Feat.
+ * @property {Object<string, number>} assignments  Points assigned to individual scores.
+ * @property {Object<string, string>} feat         Feat that was selected.
  */
 
 /**
