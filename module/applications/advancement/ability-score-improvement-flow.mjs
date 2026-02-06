@@ -53,7 +53,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
     const points = {
       assigned: Object.keys(CONFIG.DND5E.abilities).reduce((assigned, key) => {
         if ( !this.advancement.canImprove(key) || configuration.locked.has(key) ) return assigned;
-        return assigned + (value.assignments?.[key] ?? 0) - (configuration.fixed[key] ?? 0);
+        return assigned + Math.max(0, (value.assignments?.[key] ?? 0) - (configuration.fixed[key] ?? 0));
       }, 0),
       cap: configuration.cap ?? Infinity,
       total: configuration.points
@@ -228,7 +228,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
 
   /** @override */
   async _handleForm(event, form, formData) {
-    switch (event.target?.name) {
+    switch ( event.target?.name ) {
       case "asi-selected":
         if ( event.target.checked ) await this.advancement.apply(this.level, { type: "asi" });
         else await this.advancement.reverse(this.level);
@@ -251,8 +251,10 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
       const abilityMax = Math.max(abilities[key]?.max ?? 20, this.advancement.configuration.max ?? -Infinity);
       const current = abilities[key]?.value ?? 0;
       const initial = current - (this.advancement.value.assignments?.[key] ?? 0);
-      const max = Math.min(current + available, initial + cap, abilityMax);
-      const min = Math.min(initial + (this.advancement.configuration.fixed[key] ?? 0), abilityMax);
+      const fixed = this.advancement.configuration.fixed[key] ?? 0;
+      const locked = this.advancement.configuration.locked.has(key);
+      const min = Math.min(initial + fixed, abilityMax);
+      const max = Math.max(Math.min(current + available, initial + fixed + (locked ? 0 : cap), abilityMax), min);
       const delta = Math.min(Math.clamp(value, min, max) - current, this.points.available);
       if ( delta ) obj[key] = delta;
       return obj;

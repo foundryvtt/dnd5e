@@ -53,6 +53,16 @@
 /* -------------------------------------------- */
 
 /**
+ * @typedef {AdvancementApplicationData} AbilityScoreImprovementAdvancementApplicationData
+ * @property {Record<string, number>} [assignments]    Changes to specific ability scores.
+ * @property {Record<string, object>} [retainedItems]  Item data grouped by UUID.
+ * @property {"asi"|"feat"} [type]                     Type of ASI being handled.
+ * @property {string} [uuid]                           UUID of the feat item to add.
+ */
+
+/* -------------------------------------------- */
+
+/**
  * @typedef {AdvancementApplicationData} SubclassAdvancementApplicationData
  * @property {object} [retainedData]  Retained data object for a previous subclass.
  * @property {string} [uuid]          UUID of subclass to add.

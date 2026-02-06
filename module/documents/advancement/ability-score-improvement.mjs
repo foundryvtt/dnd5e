@@ -7,6 +7,10 @@ import {
 } from "../../data/advancement/ability-score-improvement.mjs";
 
 /**
+ * @import { AbilityScoreImprovementAdvancementApplicationData } from "./_types.mjs";
+ */
+
+/**
  * Advancement that presents the player with the option of improving their ability scores or selecting a feat.
  */
 export default class AbilityScoreImprovementAdvancement extends Advancement {
@@ -168,14 +172,6 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
   /*  Application Methods                         */
   /* -------------------------------------------- */
 
-  /**
-   * @typedef SubclassAdvancementApplicationData
-   * @property {Record<string, number>} [assignments]    Changes to specific ability scores.
-   * @property {Record<string, object>} [retainedItems]  Item data grouped by UUID.
-   * @property {"asi"|"feat"} [type]                     Type of ASI being handled.
-   * @property {string} [uuid]                           UUID of the feat item to add.
-   */
-
   /** @inheritDoc */
   async apply(level, data, options={}) {
     const value = { type: data.type ?? this.value.type };
@@ -241,7 +237,6 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
         const ability = this.actor.system.toObject().abilities[key];
         if ( !ability || !this.canImprove(key) ) continue;
         updates[`system.abilities.${key}.value`] = ability.value - change;
-        source.assignments[key] -= (this.configuration.fixed[key] ?? 0);
       }
       this.actor.updateSource(updates);
     }
