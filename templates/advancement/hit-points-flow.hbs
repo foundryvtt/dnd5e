@@ -18,7 +18,7 @@
             </div>
             {{else if manual}}
             <div class="form-group label-top">
-                <label>value</label>
+                <label>{{ localize "DND5E.ADVANCEMENT.HitPoints.Breakdown.Roll" }}</label>
                 <div class="form-fields">
                     <input class="roll-result" type="number" name="value" value="{{ data.value }}">
                 </div>
@@ -59,7 +59,7 @@
 
         {{#if manual}}
         <button class="roll-button dice-button" type="button" data-action="rollHitPoints" data-tooltip
-                aria-label="{{ localize 'DND5E.ADVANCEMENT.HitPoints.Action.Roll' die=hitDie }}">
+                aria-label="{{ localize 'DND5E.ADVANCEMENT.HitPoints.Action.RollDie' die=hitDie }}">
             <dnd5e-icon src="systems/dnd5e/icons/svg/dice/{{ hitDie }}.svg" inert></dnd5e-icon>
         </button>
         {{/if}}

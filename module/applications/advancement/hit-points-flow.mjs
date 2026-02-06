@@ -1,5 +1,4 @@
 import AdvancementFlow from "./advancement-flow-v2.mjs";
-import Advancement from "../../documents/advancement/advancement.mjs";
 import { simplifyBonus } from "../../utils.mjs";
 
 /**
@@ -55,7 +54,7 @@ export default class HitPointsFlow extends AdvancementFlow {
           if ( parseInt(level) === this.level ) return total;
           return total + Math.max(this.advancement.valueForLevel(parseInt(level)) + mod, 1) + bonus;
         }, 0),
-        total: hp.max
+        total: value ? hp.max : "—"
       },
       hitDie: this.advancement.hitDie,
       isFirstClassLevel: (this.level === 1) && this.advancement.item.isOriginalClass,
