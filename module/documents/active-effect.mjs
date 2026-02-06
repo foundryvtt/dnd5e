@@ -153,7 +153,8 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /** @inheritDoc */
   static async _fromStatusEffect(statusId, { reference, ...effectData }, options) {
     if ( !("description" in effectData) && reference ) effectData.description = `@Embed[${reference} inline]`;
-    return super._fromStatusEffect?.(statusId, effectData, options) ?? new this(effectData, options);
+    foundry.utils.mergeObject(effectData, { type: "condition", "system.type": statusId });
+    return super._fromStatusEffect(statusId, effectData, options);
   }
 
   /* -------------------------------------------- */
@@ -168,6 +169,14 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       data.type = "enchantment";
       delete data.flags.dnd5e.type;
       foundry.utils.setProperty(data, "flags.dnd5e.persistSourceMigration", true);
+    }
+
+    else if ( CONFIG.statusEffects.some(e => e._id === data._id) ) {
+      foundry.utils.mergeObject(data, {
+        type: "condition",
+        "system.type": data.statuses[0],
+        "flags.dnd5e.persistSourceMigration": true
+      });
     }
 
     return super._initializeSource(data, options);
@@ -386,26 +395,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    if ( this.id === this.constructor.ID.EXHAUSTION ) this._prepareExhaustionLevel();
     if ( this.isAppliedEnchantment && this.uuid ) dnd5e.registry.enchantments.track(this.origin, this.uuid);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Modify the ActiveEffect's attributes based on the exhaustion level.
-   * @protected
-   */
-  _prepareExhaustionLevel() {
-    const config = CONFIG.DND5E.conditionTypes.exhaustion;
-    let level = this.getFlag("dnd5e", "exhaustionLevel");
-    if ( !Number.isFinite(level) ) level = 1;
-    this.img = this.constructor._getExhaustionImage(level);
-    this.name = `${game.i18n.localize("DND5E.Exhaustion")} ${level}`;
-    if ( level >= config.levels ) {
-      this.statuses.add("dead");
-      CONFIG.DND5E.statusEffects.dead.statuses?.forEach(s => this.statuses.add(s));
-    }
   }
 
   /* -------------------------------------------- */
@@ -594,24 +584,12 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /** @inheritDoc */
   _onUpdate(data, options, userId) {
     super._onUpdate(data, options, userId);
-    const originalLevel = foundry.utils.getProperty(options, "dnd5e.originalExhaustion");
-    const newLevel = foundry.utils.getProperty(data, "flags.dnd5e.exhaustionLevel");
     const originalEncumbrance = foundry.utils.getProperty(options, "dnd5e.originalEncumbrance");
     const newEncumbrance = data.statuses?.[0];
     const name = this.name;
 
-    // Display proper scrolling status effects for exhaustion
-    if ( (this.id === this.constructor.ID.EXHAUSTION) && Number.isFinite(newLevel) && Number.isFinite(originalLevel) ) {
-      if ( newLevel === originalLevel ) return;
-      // Temporarily set the name for the benefit of _displayScrollingTextStatus. We should improve this method to
-      // accept a name parameter instead.
-      if ( newLevel < originalLevel ) this.name = `Exhaustion ${originalLevel}`;
-      this._displayScrollingStatus(newLevel > originalLevel);
-      this.name = name;
-    }
-
     // Display proper scrolling status effects for encumbrance
-    else if ( (this.id === this.constructor.ID.ENCUMBERED) && originalEncumbrance && newEncumbrance ) {
+    if ( (this.id === this.constructor.ID.ENCUMBERED) && originalEncumbrance && newEncumbrance ) {
       if ( newEncumbrance === originalEncumbrance ) return;
       const increase = !originalEncumbrance || ((originalEncumbrance === "encumbered") && newEncumbrance)
         || (newEncumbrance === "exceedingCarryingCapacity");
@@ -653,7 +631,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   }
 
   /* -------------------------------------------- */
-  /*  Exhaustion and Concentration Handling       */
+  /*  Concentration Handling                      */
   /* -------------------------------------------- */
 
   /**
@@ -687,23 +665,15 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
         }
       },
       origin: item.uuid,
-      statuses: [statusEffect.id].concat(statusEffect.statuses ?? [])
+      statuses: [statusEffect.id].concat(statusEffect.statuses ?? []),
+      system: {
+        type: "concentrating"
+      }
     }, data, {inplace: false});
     delete effectData.id;
     if ( item.type === "spell" ) effectData["flags.dnd5e.spellLevel"] = item.system.level;
 
     return effectData;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Register listeners for custom handling in the TokenHUD.
-   */
-  static registerHUDListeners() {
-    Hooks.on("renderTokenHUD", this.onTokenHUDRender);
-    document.addEventListener("click", this.onClickTokenHUD.bind(this), { capture: true });
-    document.addEventListener("contextmenu", this.onClickTokenHUD.bind(this), { capture: true });
   }
 
   /* -------------------------------------------- */
@@ -742,96 +712,26 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /* -------------------------------------------- */
 
   /**
-   * Adjust exhaustion icon display to match current level.
-   * @param {Application} app   The TokenHUD application.
-   * @param {HTMLElement} html  The TokenHUD HTML.
-   */
-  static onTokenHUDRender(app, html) {
-    const actor = app.object.actor;
-    const level = foundry.utils.getProperty(actor, "system.attributes.exhaustion");
-    if ( Number.isFinite(level) && (level > 0) ) {
-      const img = ActiveEffect5e._getExhaustionImage(level);
-      const elem = html.querySelector('[data-status-id="exhaustion"]');
-      if ( elem ) {
-        elem.style.objectPosition = "-100px";
-        elem.style.background = `url('${img}') no-repeat center / contain`;
-      }
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Get the image used to represent exhaustion at this level.
-   * @param {number} level
-   * @returns {string}
-   */
-  static _getExhaustionImage(level) {
-    const { img } = CONFIG.DND5E.conditionTypes.exhaustion;
-    const split = img.split(".");
-    const ext = split.pop();
-    const path = split.join(".");
-    return `${path}-${level}.${ext}`;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Implement custom behavior for select conditions on the token HUD.
-   * @param {PointerEvent} event        The triggering event.
-   */
-  static onClickTokenHUD(event) {
-    const { target } = event;
-    if ( !target.classList?.contains("effect-control") ) return;
-
-    const actor = canvas.hud.token.object?.actor;
-    if ( !actor ) return;
-
-    const id = target.dataset?.statusId;
-    if ( id === "exhaustion" ) ActiveEffect5e._manageExhaustion(event, actor);
-    else if ( id === "concentrating" ) ActiveEffect5e._manageConcentration(event, actor);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Manage custom exhaustion cycling when interacting with the token HUD.
-   * @param {PointerEvent} event        The triggering event.
-   * @param {Actor5e} actor             The actor belonging to the token.
-   */
-  static _manageExhaustion(event, actor) {
-    let level = foundry.utils.getProperty(actor, "system.attributes.exhaustion");
-    if ( !Number.isFinite(level) ) return;
-    event.preventDefault();
-    event.stopPropagation();
-    if ( event.button === 0 ) level++;
-    else level--;
-    const max = CONFIG.DND5E.conditionTypes.exhaustion.levels;
-    actor.update({ "system.attributes.exhaustion": Math.clamp(level, 0, max) });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Manage custom concentration handling when interacting with the token HUD.
    * @param {PointerEvent} event        The triggering event.
    * @param {Actor5e} actor             The actor belonging to the token.
+   * @returns {boolean}                 Whether the status was resolved via this method.
    */
   static _manageConcentration(event, actor) {
     const { effects } = actor.concentration;
-    if ( effects.size < 1 ) return;
+    if ( effects.size < 1 ) return false;
     event.preventDefault();
     event.stopPropagation();
     if ( effects.size === 1 ) {
       actor.endConcentration(effects.first());
-      return;
+      return true;
     }
     const choices = effects.reduce((acc, effect) => {
       const data = effect.getFlag("dnd5e", "item");
       acc[effect.id] = data?.name ?? actor.items.get(data?.id)?.name ?? game.i18n.localize("DND5E.ConcentratingItemless");
       return acc;
     }, {});
-    const options = HandlebarsHelpers.selectOptions(choices, { hash: { sort: true } });
+    const options = foundry.applications.handlebars.selectOptions(choices, { hash: { sort: true } });
     const content = `
     <p>${game.i18n.localize("DND5E.ConcentratingEndChoice")}</p>
     <div class="form-group">
@@ -851,6 +751,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
         }
       }
     });
+    return true;
   }
 
   /* -------------------------------------------- */

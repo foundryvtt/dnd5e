@@ -18,6 +18,7 @@ import SystemDocumentMixin from "../mixins/document.mjs";
 import Proficiency from "./proficiency.mjs";
 import SelectChoices from "./select-choices.mjs";
 import * as Trait from "./trait.mjs";
+import ConditionData from "../../data/active-effect/condition.mjs";
 
 /**
  * @import { RequestOptions5e } from "../../_types.mjs";
@@ -461,9 +462,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     data.name = this.name;
     data.statuses = {};
     for ( const status of this.statuses ) {
-      data.statuses[status] = status === "exhaustion"
-        ? this.system.attributes?.exhaustion ?? 1
-        : status === "concentrating" ? this.concentration.effects.size : 1;
+      if ( ConditionData.hasLevels(status) ) data.statuses[status] = this.system.conditions[status];
+      else if ( status === "concentrating" ) data.statuses[status] = this.concentration.effects.size;
+      else data.statuses[status] = 1;
     }
     return data;
   }
@@ -471,21 +472,29 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
-   * Is this actor under the effect of this property from some status or due to its level of exhaustion?
+   * Is this actor under the effect of this property from some status or due to its level of a condition?
    * @param {string} key      A key in `DND5E.conditionEffects`.
    * @returns {boolean}       Whether the actor is affected.
    */
   hasConditionEffect(key) {
     const props = CONFIG.DND5E.conditionEffects[key] ?? new Set();
-    const level = this.system.attributes?.exhaustion ?? null;
+    const conditions = this.system.conditions ?? {};
     const imms = this.system.traits?.ci?.value ?? new Set();
-    const applyExhaustion = (level !== null) && !imms.has("exhaustion")
-      && (dnd5e.settings.rulesVersion === "legacy");
-    const statuses = this.statuses;
-    return props.some(k => {
-      const l = Number(k.split("-").pop());
-      return (statuses.has(k) && !imms.has(k)) || (applyExhaustion && Number.isInteger(l) && (level >= l));
-    });
+
+    const applyCondition = prop => {
+      let [status, level] = prop.split("-");
+
+      // If immune, naturally never applied.
+      if ( imms.has(status) ) return false;
+
+      // If not leveled, or not requiring a level, need only check if status is active.
+      if ( !ConditionData.hasLevels(status) || !level ) return this.statuses.has(status);
+
+      // If leveled condition, needs to be high enough.
+      return Number(level) <= conditions[status];
+    };
+
+    return props.some(applyCondition);
   }
 
   /* -------------------------------------------- */
@@ -3443,9 +3452,27 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  async toggleStatusEffect(statusId, options) {
-    const created = await super.toggleStatusEffect(statusId, options);
+  /**
+   * Toggle a configured status effect for the Actor.
+   * @override
+   * @param {string} statusId                 A status effect ID defined in CONFIG.statusEffects
+   * @param {object} [options={}]             Additional options which modify how the effect is created.
+   * @param {boolean} [options.active]        Force the effect to be active or inactive regardless of its current state.
+   * @param {boolean} [options.overlay=false] Display the toggled effect as an overlay.
+   * @param {number} [options.levels=1]       A potential level increase.
+   * @returns {Promise<ActiveEffect|boolean|undefined>}  A promise which resolves to one of the following values:
+   *                                 - ActiveEffect if a new effect need to be created or updated.
+   *                                 - true if was already an existing effect
+   *                                 - false if an existing effect needed to be removed
+   *                                 - undefined if no changes need to be made
+   */
+  async toggleStatusEffect(statusId, options={}) {
+    const hasLevels = ConditionData.hasLevels(statusId);
+    const ActiveEffect = getDocumentClass("ActiveEffect");
+    let created;
+
+    if ( hasLevels ) created = await ConditionData._applyDelta(statusId, this, { levels: options.levels ?? 1});
+    created ??= await super.toggleStatusEffect(statusId, options);
     const status = CONFIG.statusEffects.find(e => e.id === statusId);
     if ( !(created instanceof ActiveEffect) || !status.exclusiveGroup ) return created;
 
@@ -3467,18 +3494,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @protected
    */
   async _onUpdateExhaustion(data, options) {
+    const originalExhaustion = foundry.utils.getProperty(options, "dnd5e.originalExhaustion");
     const level = foundry.utils.getProperty(data, "system.attributes.exhaustion");
-    if ( !Number.isFinite(level) ) return;
-    let effect = this.effects.get(ActiveEffect5e.ID.EXHAUSTION);
-    if ( level < 1 ) return effect?.delete();
-    else if ( effect ) {
-      const originalExhaustion = foundry.utils.getProperty(options, "dnd5e.originalExhaustion");
-      return effect.update({ "flags.dnd5e.exhaustionLevel": level }, { dnd5e: { originalExhaustion } });
-    } else {
-      effect = await ActiveEffect.implementation.fromStatusEffect("exhaustion", { parent: this });
-      effect.updateSource({ "flags.dnd5e.exhaustionLevel": level });
-      return ActiveEffect.implementation.create(effect, { parent: this, keepId: true });
-    }
+    const delta = level - originalExhaustion;
+    if ( delta ) ConditionData._applyDelta("exhaustion", this, { levels: delta });
   }
 
   /* -------------------------------------------- */
