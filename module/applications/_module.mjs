@@ -7,6 +7,7 @@ export * as combat from "./combat/_module.mjs";
 export * as components from "./components/_module.mjs";
 export * as dice from "./dice/_module.mjs";
 export * as fields from "./fields.mjs";
+export * as hud from "./hud/_module.mjs";
 export * as item from "./item/_module.mjs";
 export * as journal from "./journal/_module.mjs";
 export * as regionBehavior from "./region-behavior/_module.mjs";
