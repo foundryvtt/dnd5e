@@ -25,9 +25,7 @@ export default class ItemGrantFlow extends AdvancementFlow {
     context.optional = this.advancement.configuration.optional;
 
     const config = this.advancement.configuration;
-    const added = this.retainedData?.items.map(i => foundry.utils.getProperty(i, "flags.dnd5e.sourceId"))
-      ?? this.advancement.value.added;
-    const checked = new Set(Object.values(added ?? {}));
+    const checked = new Set(Object.values(this.advancement.value.added ?? {}));
     context.items = config.items.map(i => {
       const item = foundry.utils.deepClone(fromUuidSync(i.uuid));
       if ( !item ) return null;
@@ -49,9 +47,7 @@ export default class ItemGrantFlow extends AdvancementFlow {
     const config = this.advancement.configuration;
     return config.spell?.ability.size > 1 ? {
       field: new StringField({ required: true, blank: false }),
-      options: config.spell?.ability.size > 1 ? config.spell.ability.map(value => ({
-        value, label: CONFIG.DND5E.abilities[value]?.label
-      })) : null,
+      options: config.spell.ability.map(value => ({ value, label: CONFIG.DND5E.abilities[value]?.label })),
       value: this.advancement.value.ability
     } : null;
   }

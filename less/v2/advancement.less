@@ -267,9 +267,12 @@
         &:hover { box-shadow: 0 0 12px var(--dnd5e-color-gold); }
       }
     }
-    :is(.pill-lg, .separated-list, .item-list) img[data-action] {
+    :is(.pill-lg, .separated-list, .item-list) .item-name[data-action] {
       cursor: var(--cursor-pointer);
-      &:hover { box-shadow: 0 0 12px var(--dnd5e-color-gold); }
+      &:hover {
+        img { box-shadow: 0 0 12px var(--dnd5e-color-gold); }
+        .name-stacked { text-shadow: 0 0 8px var(--color-shadow-primary); }
+      }
     }
   }
 }
