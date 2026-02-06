@@ -235,9 +235,9 @@ export default class VehicleActorSheet extends BaseActorSheet {
    * @returns {object}
    * @protected
    */
-  _prepareSidebarContext(context, options) {
+  async _prepareSidebarContext(context, options) {
     const { attributes } = this.actor.system;
-    const { actions } = attributes;
+    const { actions={} } = attributes;
     context.traits = this._prepareTraits(context);
     context.properties ??= {};
     context.properties.hp = [];
@@ -293,7 +293,7 @@ export default class VehicleActorSheet extends BaseActorSheet {
     if ( context.itemCategories.features?.length ) {
       context.features = Inventory.prepareSections(Object.values(sections));
     }
-    if ( context.system.draft.value.length ) context.drafted = await this._prepareDraftAnimals();
+    if ( context.system.draft?.value.length ) context.drafted = await this._prepareDraftAnimals();
     context.abilities = this._prepareAbilities(context);
     return context;
   }
@@ -331,6 +331,14 @@ export default class VehicleActorSheet extends BaseActorSheet {
       ].filterJoin(" • ");
       return { actor, capacity, subtitle, uuid };
     }));
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _prepareItems(context) {
+    await super._prepareItems(context);
+    context.itemCategories.features?.sort((lhs, rhs) => lhs.sort - rhs.sort);
   }
 
   /* -------------------------------------------- */
@@ -404,7 +412,7 @@ export default class VehicleActorSheet extends BaseActorSheet {
     const hasStations = context.editable
       || context.itemCategories.features?.length
       || context.itemCategories.stations?.length
-      || context.system.draft.value.length
+      || context.system.draft?.value.length
       || this.actor.getFlag("dnd5e", "showVehicleAbilities");
     this.element.classList.toggle("has-stations", !!hasStations);
   }

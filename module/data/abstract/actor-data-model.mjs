@@ -28,6 +28,16 @@ export default class ActorDataModel extends SystemDataModel {
   /* -------------------------------------------- */
 
   /**
+   * Section of the group sheet this actor will render within.
+   * @type {string}
+   */
+  get groupSection() {
+    return this.parent.type;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Other actors that are available for currency transfers from this actor.
    * @type {Actor5e[]}
    */

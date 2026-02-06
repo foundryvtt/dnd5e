@@ -298,7 +298,7 @@ export default class AttributesFields {
       let multiplier = simplifyBonus(encumbrance.multipliers[threshold], rollData)
         * simplifyBonus(encumbrance.multipliers.overall, rollData);
       if ( threshold === "maximum" ) maximumMultiplier = multiplier;
-      if ( this.parent.type === "vehicle" ) {
+      if ( this.isVehicle ) {
         const { cargo } = attributes.capacity;
         base = convertWeight(cargo.value || Infinity, cargo.units, baseUnits[unitSystem]);
       }
