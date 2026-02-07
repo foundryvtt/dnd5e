@@ -145,7 +145,7 @@
     {{else if toggleable}}
     {{!-- Toggling --}}
     <a class="effect-control item-control {{#unless disabled}}active{{/unless}}" data-action="toggle" data-tooltip
-       aria-label="{{ localize (ifThen disabled "DND5E.EffectEnabled" "DND5E.EffectDisable") }}">
+       aria-label="{{ localize (ifThen disabled "DND5E.EffectEnable" "DND5E.EffectDisable") }}">
         <i class="fa-solid fa-toggle-{{ ifThen disabled "off" "on" }}"></i>
     </a>
 
