@@ -273,21 +273,28 @@ export default class CurrencyManager extends Application5e {
    */
   static getActorCurrencyUpdates(actor, amount, denomination, { recursive=false, priority="low", exact=true }={}) {
     const { currency } = actor.system;
-    const updates = { system: { currency: { ...currency } }, remainder: amount, item: [] };
-    if ( amount <= 0 ) return updates;
+    if ( amount <= 0 ) return { system: { currency: { ...currency } }, remainder: amount, item: [] };
 
     const currencies = Object.entries(CONFIG.DND5E.currencies).map(([denom, { conversion }]) => {
       return [denom, conversion];
     }).sort(([, a], [, b]) => priority === "high" ? a - b : b - a);
     const baseConversion = CONFIG.DND5E.currencies[denomination].conversion;
-
     if ( exact ) currencies.unshift([denomination, baseConversion]);
-    for ( const [denom, conversion] of currencies ) {
-      const multiplier = conversion / baseConversion;
-      const deduct = Math.min(updates.system.currency[denom], Math.floor(updates.remainder * multiplier));
-      updates.remainder -= deduct / multiplier;
-      updates.system.currency[denom] -= deduct;
-      if ( !updates.remainder ) return updates;
+
+    let passes = currencies.length;
+    let updates;
+    while ( passes > 0 ) {
+      updates = { system: { currency: { ...currency } }, remainder: amount, item: [] };
+      for ( const [denom, conversion] of currencies ) {
+        const multiplier = conversion / baseConversion;
+        const deduct = Math.min(updates.system.currency[denom], Math.floor(updates.remainder * multiplier));
+        updates.remainder -= deduct / multiplier;
+        updates.system.currency[denom] -= deduct;
+        if ( !updates.remainder ) return updates;
+      }
+      if ( !updates.remainder ) break;
+      currencies.push(currencies.shift());
+      passes--;
     }
 
     return updates;
