@@ -1138,7 +1138,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       if ( manager.steps.length ) {
         try {
           const shouldRemoveAdvancements = await AdvancementConfirmationDialog.forDelete(this);
-          if ( shouldRemoveAdvancements ) return manager.render(true);
+          if ( shouldRemoveAdvancements ) return manager.render({ force: true });
           return this.delete({ shouldRemoveAdvancements });
         } catch(err) {
           return;

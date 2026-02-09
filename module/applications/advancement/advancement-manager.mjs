@@ -328,7 +328,9 @@ export default class AdvancementManager extends Application5e {
     advancement.levels
       .reverse()
       .filter(l => l <= currentLevel)
-      .map(l => new advancement.constructor.metadata.apps.flow(clonedItem, advancementId, l))
+      .map(level => advancement.constructor.metadata.apps.flow.prototype instanceof Application
+        ? new advancement.constructor.metadata.apps.flow(clonedItem, advancementId, level)
+        : new advancement.constructor.metadata.apps.flow({ document: advancement, level }))
       .forEach(flow => manager.steps.push({ type: "reverse", flow, automatic: true }));
 
     if ( manager.steps.length ) manager.steps.push({ type: "delete", advancement, automatic: true });

@@ -11,7 +11,7 @@ export default class AdvancementFlow extends Application5e {
         "`AdvancementFlowV2` instances should be created with the advancement and level passed to the options object.",
         { since: "DnD5e 5.2", until: "DnD5e 5.4" }
       );
-      options = { document: options.advancement?.get(advancementId), level, ..._options };
+      options = { document: options.advancement?.byId[advancementId], level, ..._options };
     }
     super(options);
   }
