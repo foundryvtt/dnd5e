@@ -647,6 +647,11 @@ export default class AdvancementManager extends Application5e {
           if ( this.previousStep ) await this.#restart(event);
           break;
         case "previous":
+          if ( this.step?.flow instanceof dnd5e.applications.advancement.AdvancementFlowV2 ) {
+            this.#preEmbeddedItems = Array.from(this.clone.items);
+            const flow = this.step.flow;
+            await flow.retainData(await flow.advancement.reverse(flow.level));
+          }
           if ( this.previousStep ) await this.#backward(event);
           break;
         case "next":
