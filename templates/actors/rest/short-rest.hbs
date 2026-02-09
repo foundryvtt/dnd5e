@@ -4,17 +4,11 @@
     </div>
 
     {{#if fields.length}}
-    <fieldset>
-        <legend>{{ localize "DND5E.REST.Configuration" }}</legend>
-        {{> "dnd5e.fieldlist" fields }}
-    </fieldset>
+    {{> "systems/dnd5e/templates/actors/rest/parts/fields.hbs" }}
     {{/if}}
 
     {{#if hitPoints.length}}
-    <fieldset>
-        <legend>{{ localize "DND5E.HitPoints" }}</legend>
-        {{> "dnd5e.fieldlist" hitPoints }}
-    </fieldset>
+    {{> "systems/dnd5e/templates/actors/rest/parts/hit-points.hbs" }}
     {{/if}}
 
     {{#if hitDice}}

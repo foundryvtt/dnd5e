@@ -15,6 +15,7 @@ export default class BaseRestDialog extends Dialog5e {
     super(options);
     this.actor = options.document;
     this.#config = options.config;
+    this.options.window.title = CONFIG.DND5E.restTypes[options.config.type]?.label;
   }
 
   /* -------------------------------------------- */
@@ -30,7 +31,22 @@ export default class BaseRestDialog extends Dialog5e {
     position: {
       width: 380
     },
-    templates: ["systems/dnd5e/templates/actors/rest/rest-request.hbs"]
+    templates: [
+      "systems/dnd5e/templates/actors/rest/parts/fields.hbs",
+      "systems/dnd5e/templates/actors/rest/parts/hit-dice.hbs",
+      "systems/dnd5e/templates/actors/rest/parts/hit-points.hbs",
+      "systems/dnd5e/templates/actors/rest/parts/rest-request.hbs"
+    ]
+  };
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static PARTS = {
+    ...super.PARTS,
+    content: {
+      template: "systems/dnd5e/templates/actors/rest/base-rest.hbs"
+    }
   };
 
   /* -------------------------------------------- */

@@ -397,6 +397,11 @@
  * @property {string} label                         Localized label for the rest type.
  * @property {string} icon                          Icon representing this rest type. Can be either a set of FontAwesome
  *                                                  classes or an image path.
+ * @property {boolean} dialog                       Present a dialog window which allows for rolling hit dice as part of
+ *                                                  the rest and selecting whether a new day has occurred.
+ * @property {typeof BaseRestDialog} [dialogClass]  A class for the dialog window.
+ * @property {string|boolean} [chat]                A chat message to be created to summarize the results of the rest,
+ *                                                  or a boolean indicating whether to create it or not.
  * @property {string[]} [activationPeriods]         Activation types that should be displayed in the chat card.
  * @property {number} [exhaustionDelta]             Delta exhaustion to apply to creatures undergoing the rest.
  * @property {boolean} [recoverHitDice]             Should hit dice be recovered during this rest?
@@ -405,6 +410,8 @@
  *                                                  ordering of the periods determines which is applied if more than one
  *                                                  recovery profile is found.
  * @property {Set<string>} [recoverSpellSlotTypes]  Types of spellcasting slots to recover during this rest.
+ * @property {boolean} [recoverTemp]                Reset temp HP to zero.
+ * @property {boolean} [recoverTempMax]             Reset temp max HP to zero.
  */
 
 /* -------------------------------------------- */
