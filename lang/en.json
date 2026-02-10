@@ -443,12 +443,21 @@
   },
   "HitPoints": {
     "Action": {
-      "Roll": "Roll {die}"
+      "RollClass": "Roll {class} Hit Points",
+      "RollDie": "Roll {die}"
     },
     "Average": "Average",
+    "Breakdown": {
+      "Average": "Avg.",
+      "Bonus": "Bonus",
+      "Final": "Final",
+      "Max": "Max",
+      "Previous": "Prev.",
+      "Roll": "Roll"
+    },
     "Hint": "Track the player's hit points for each level in the class.",
     "MaxAtFirstLevel": "Max at 1st Level: <strong>{max}</strong>",
-    "Roll": "Roll {class} Hit Points",
+    "Options": "Options",
     "Starting": "Hit Points at 1st Level",
     "TakeAverage": "Take Average",
     "Title": "Hit Points",

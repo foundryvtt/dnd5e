@@ -164,13 +164,19 @@ export default class HitPointsAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  apply(level, data) {
+  async apply(level, data, options={}) {
+    if ( options.initial ) {
+      if ( (level === 1) && this.item.isOriginalClass ) data[level] = "max";
+      else if ( this.value[level - 1] === "avg" ) data[level] = "avg";
+    }
+
     let value = this.constructor.valueForLevel(data, this.hitDieValue, level);
     if ( value === undefined ) return;
+    if ( this.value[level] !== undefined ) await this.reverse(level);
+    this.updateSource({ value: data });
     this.actor.updateSource({
       "system.attributes.hp.value": this.actor.system.attributes.hp.value + this.#getApplicableValue(value)
     });
-    this.updateSource({ value: data });
   }
 
   /* -------------------------------------------- */
@@ -185,21 +191,21 @@ export default class HitPointsAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  restore(level, data) {
-    this.apply(level, data);
+  async restore(level, data, options={}) {
+    await this.apply(level, data, options);
   }
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  reverse(level) {
+  async reverse(level, options={}) {
     let value = this.valueForLevel(level);
     if ( value === undefined ) return;
+    const source = { [level]: this.value[level] };
+    this.updateSource({ [`value.-=${level}`]: null });
     this.actor.updateSource({
       "system.attributes.hp.value": this.actor.system.attributes.hp.value - this.#getApplicableValue(value)
     });
-    const source = { [level]: this.value[level] };
-    this.updateSource({ [`value.-=${level}`]: null });
     return source;
   }
 }

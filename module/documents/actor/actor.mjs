@@ -1989,7 +1989,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       data: item.getRollData(),
       chatMessage
     };
-    const flavor = game.i18n.format("DND5E.ADVANCEMENT.HitPoints.Roll", { class: item.name });
+    const flavor = game.i18n.format("DND5E.ADVANCEMENT.HitPoints.Action.RollClass", { class: item.name });
     const messageData = {
       title: `${flavor}: ${this.name}`,
       flavor,
