@@ -107,8 +107,9 @@ export default class MappingField extends ObjectField {
 
   /**
    * Validate each value of the object.
-   * @param {object} value     The object to validate.
-   * @param {object} options   Validation options.
+   * @param {object} value          The object to validate.
+   * @param {object} options        Validation options.
+   * @param {string} options.phase  Current application phase.
    * @returns {DataModelValidationFailure|void}
    */
   _validateValues(value, { phase: _phase, ...options }={}) {

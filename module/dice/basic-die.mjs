@@ -1,4 +1,4 @@
-const { DiceTerm, Die } = foundry.dice.terms;
+const { Die } = foundry.dice.terms;
 
 /**
  * Add support for system-specific modifiers to the base die.

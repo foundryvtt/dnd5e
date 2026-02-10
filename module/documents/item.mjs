@@ -1031,9 +1031,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       : { [`system.advancement.${id}`]: _del };
     if ( source ) return this.updateSource(update);
 
-    Promise.allSettled(advancement.constructor._apps.get(advancement.uuid)?.map(a => a.close()) ?? []).then(() => {
-      return this.update(update);
-    });
+    return Promise.allSettled(advancement.constructor._apps.get(advancement.uuid)?.map(a => a.close()) ?? [])
+      .then(() => this.update(update));
   }
 
   /* -------------------------------------------- */

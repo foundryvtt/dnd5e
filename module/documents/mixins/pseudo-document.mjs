@@ -257,10 +257,10 @@ export default function PseudoDocumentMixin(Base) {
     /**
      * Spawn a dialog for creating a new Activity.
      * @param {object} [data]  Data to pre-populate the Activity with.
-     * @param {object} context
-     * @param {Item5e} context.parent        A parent for the Activity.
-     * @param {string[]|null} [context.types]  A list of types to restrict the choices to, or null for no restriction.
+     * @param {DatabaseCreateOperation} [createOptions={}]
+     * @param {object} [dialogOptions={}]
      * @returns {Promise<PseudoDocument|null>}
+     * @see {@link ClientDocument#createDialog}
      */
     static async createDialog(data={}, createOptions={}, dialogOptions={}) {
       CreateDocumentDialog.migrateOptions(createOptions, dialogOptions);

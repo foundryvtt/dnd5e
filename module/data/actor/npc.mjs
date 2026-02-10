@@ -439,7 +439,7 @@ export default class NPCData extends CreatureTemplate {
       const modernRules = (this.source?.rules
         || (dnd5e.settings.rulesVersion === "modern" ? "2024" : "2014")) === "2024";
       legendaryResistanceItem.system.uses.label = this.resources.lair.value && modernRules ? game.i18n.format(
-        "DND5E.LegendaryResistance.LairUses",  { normal: formatNumber(max), lair: formatNumber(max + 1) }
+        "DND5E.LegendaryResistance.LairUses", { normal: formatNumber(max), lair: formatNumber(max + 1) }
       ) : `${formatNumber(max)}/${CONFIG.DND5E.limitedUsePeriods.day?.label ?? ""}`;
     }
   }

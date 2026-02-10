@@ -96,7 +96,7 @@ export default class FeatData extends ItemDataModel.mixin(
               if ( anyNegative && (filters.additional.category[type] < 0) ) return obj;
               for ( const [key, label] of Object.entries(config.subtypes ?? {}) ) obj[key] = label;
               return obj;
-            }, {})
+            }, {});
           },
           keyPath: "system.type.subtype"
         }

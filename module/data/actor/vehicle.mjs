@@ -1,5 +1,4 @@
 import { convertWeight, defaultUnits, parseDelta } from "../../utils.mjs";
-import MovementField from "../shared/movement-field.mjs";
 import SourceField from "../shared/source-field.mjs";
 import TravelField from "./fields/travel-field.mjs";
 import AttributesFields from "./templates/attributes.mjs";

@@ -918,6 +918,10 @@ async function enrichDamage(configs, label, options) {
 
 /**
  * Enrich a language reference.
+ * @param {object} config              Configuration data.
+ * @param {string} [label]             Optional label to replace default text.
+ * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
+ * @returns {HTMLElement|null}         An HTML element if language link could be built, otherwise null.
  */
 function enrichLanguage(config, label, options) {
   for ( const value of config.values ) {

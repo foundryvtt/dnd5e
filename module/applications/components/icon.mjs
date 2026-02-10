@@ -128,6 +128,7 @@ export default class IconElement extends AdoptedStyleSheetMixin(MaybeAdoptable) 
     svg.querySelectorAll("script, foreignObject").forEach(el => el.remove());
     svg.querySelectorAll("*").forEach(el => Array.from(el.attributes).forEach(attr => {
       if ( attr.name.startsWith("on") ) el.removeAttribute(attr.name);
+      // eslint-disable-next-line no-script-url
       if ( attr.value && attr.value.trim().toLowerCase().startsWith("javascript:") ) el.removeAttribute(attr.name);
     }));
   }

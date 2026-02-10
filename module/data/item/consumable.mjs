@@ -12,7 +12,7 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
 
-const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { BooleanField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * @import { InventorySectionDescriptor } from "../../applications/components/_types.mjs";
