@@ -29,7 +29,7 @@ export default class HitPointsFlow extends AdvancementFlow {
 
   /** @inheritDoc */
   async _prepareContext(options) {
-    const source = this.retainedData ?? this.advancement.value;
+    const source = this.advancement.value;
     const value = source[this.level];
     const hp = this.advancement.actor.system.attributes.hp;
     const abilityId = CONFIG.DND5E.defaultAbilities.hitPoints || "con";
