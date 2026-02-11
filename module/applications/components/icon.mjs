@@ -151,8 +151,7 @@ export default class IconElement extends AdoptedStyleSheetMixin(MaybeAdoptable) 
     if ( this.dataset.edit ) {
       if ( !input ) {
         input = document.createElement("input");
-        input.name = this.dataset.edit;
-        input.type = "hidden";
+        Object.assign(input, { name: this.dataset.edit, type: "hidden" });
         this.append(input);
       }
       input.value = src;

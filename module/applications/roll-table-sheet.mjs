@@ -28,22 +28,23 @@ export default class RollTableSheet5e extends ApplicationV2Mixin(RollTableSheet,
     this.element.querySelector(".sheet-header [data-action=changeMode]")?.remove();
     this.element.querySelectorAll("tbody .inline-control").forEach(c => c.classList.add("unbutton", "control-button"));
     this._replaceElements("input[type=checkbox]", "dnd5e-checkbox");
-    this._replaceElements('table img[src$=".svg"]', "dnd5e-icon", icon => {
+    this._replaceElements('table td.image img[src$=".svg"]', "dnd5e-icon", icon => {
       if ( icon.src === "icons/svg/d20-black.svg" ) icon.src = "systems/dnd5e/icons/svg/dice/d20.svg";
     });
-    this.element.querySelectorAll("table img").forEach(icon => icon.classList.add("gold-icon"));
+    this.element.querySelectorAll("table td.image img").forEach(icon => icon.classList.add("gold-icon"));
   }
 
   /* -------------------------------------------- */
 
   /**
    * Replace all matching elements with a new tag, keeping all existing attributes.
-   * @param {string} selector      CSS selector to find elements to replace.
-   * @param {string} tagName       Tag name for the new element to use.
-   * @param {Function} [callback]  Method called for each new element before it replaces the old one.
+   * @param {string} selector              CSS selector to find elements to replace.
+   * @param {string} tagName               Tag name for the new element to use.
+   * @param {object} [options={}]
+   * @param {Function} [options.callback]  Method called for each new element before it replaces the old one.
    * @protected
    */
-  _replaceElements(selector, tagName, callback) {
+  _replaceElements(selector, tagName, { callback }={}) {
     for ( const oldElement of this.element.querySelectorAll(selector) ) {
       const newElement = document.createElement(tagName);
       for ( const attr of oldElement.attributes ) {
