@@ -1,6 +1,7 @@
 import { formatNumber, getPluralRules, simplifyBonus, splitSemicolons } from "../../utils.mjs";
 import { createCheckboxInput } from "../fields.mjs";
 import BaseActorSheet from "./api/base-actor-sheet.mjs";
+import GearConfig from "./config/gear-config.mjs";
 import HabitatConfig from "./config/habitat-config.mjs";
 import TreasureConfig from "./config/treasure-config.mjs";
 
@@ -322,6 +323,20 @@ export default class NPCActorSheet extends BaseActorSheet {
   async _prepareSidebarContext(context, options) {
     const { attributes, details } = context.system;
 
+    // Gear
+    if ( this.actor.system.details.treasure.gear.length ) {
+      context.gear = this.actor.system.details.treasure.gear
+        .map(({ quantity, uuid }) => {
+          const item = fromUuidSync(uuid, { relative: this.actor, strict: false });
+          if ( !item ) return null;
+          const data = { label: item.name, link: { action: "showDocument", uuid: item.uuid } };
+          if ( quantity > 1 ) data.value = quantity;
+          return data;
+        })
+        .filter(_ => _)
+        .sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang));
+    }
+
     // Habitat
     if ( details.habitat.value.length || details.habitat.custom ) {
       const { habitat } = details;
@@ -549,12 +564,9 @@ export default class NPCActorSheet extends BaseActorSheet {
     let app;
     const config = { document: this.actor };
     switch ( target.dataset.config ) {
-      case "habitat":
-        app = new HabitatConfig(config);
-        break;
-      case "treasure":
-        app = new TreasureConfig(config);
-        break;
+      case "gear": app = new GearConfig(config); break;
+      case "habitat": app = new HabitatConfig(config); break;
+      case "treasure": app = new TreasureConfig(config); break;
     }
     if ( app ) {
       app.render({ force: true });

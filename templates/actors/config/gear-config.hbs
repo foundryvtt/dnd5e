@@ -1,0 +1,39 @@
+<section class="flexcol">
+    <div class="items-section card">
+        <div class="items-header header">
+            <h4 class="item-name">{{ localize "DND5E.Gear.Label" }}</h4>
+            <div class="item-header item-quantity">{{ localize "DND5E.Quantity" }}</div>
+            <div class="item-header item-controls"></div>
+        </div>
+        <ul class="item-list unlist">
+            {{#each gear}}
+            <li class="item" data-index="{{ index }}" data-uuid="{{ uuid }}">
+                <div class="item-row">
+                    <div class="item-name flexrow" data-action="viewItem">
+                        {{ dnd5e-icon img alt=name classes="gold-icon" }}
+                        <div class="name-stacked">
+                            <div class="title">{{ name }}</div>
+                        </div>
+                    </div>
+                    <div class="item-detail item-quantity">
+                        <input type="number" name="{{ prefix }}quantity" value="{{ data.quantity }}" placeholder="1"
+                            step="1" min="1">
+                    </div>
+                    <div class="item-detail item-controls">
+                        <button class="unbutton config-button item-control item-action" type="button"
+                                data-action="deleteItem" data-tooltip
+                                aria-label="{{ localize 'DND5E.Gear.Configuration.Action.Remove' }}">
+                            <i class="fa-solid fa-trash" inert></i>
+                        </button>
+                    </div>
+                </div>
+                <input type="hidden" name="{{ prefix }}uuid" value="{{ data.uuid }}">
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+
+    <div class="drop-area drop-area-lg roboto-upper">
+        {{ localize "DND5E.Gear.Configuration.Drop" }}
+    </div>
+</section>

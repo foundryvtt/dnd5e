@@ -15,6 +15,7 @@ export {default as BaseProficiencyConfig} from "./config/base-proficiency-config
 export {default as ConcentrationConfig} from "./config/concentration-config.mjs";
 export {default as DamagesConfig} from "./config/damages-config.mjs";
 export {default as DeathConfig} from "./config/death-config.mjs";
+export {default as GearConfig} from "./config/gear-config.mjs";
 export {default as HabitatConfig} from "./config/habitat-config.mjs";
 export {default as HitDiceConfig} from "./config/hit-dice-config.mjs";
 export {default as HitPointsConfig} from "./config/hit-points-config.mjs";

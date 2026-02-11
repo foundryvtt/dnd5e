@@ -4,6 +4,7 @@ import * as Trait from "../../documents/actor/trait.mjs";
 import { getRulesVersion } from "../../enrichers.mjs";
 import { defaultUnits, formatCR, formatLength, formatNumber, getPluralRules, splitSemicolons } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
+import PhysicalItemTemplate from "../item/templates/physical-item.mjs";
 import CreatureTypeField from "../shared/creature-type-field.mjs";
 import RollConfigField from "../shared/roll-config-field.mjs";
 import SensesField from "../shared/senses-field.mjs";
@@ -98,6 +99,10 @@ export default class NPCData extends CreatureTemplate {
           required: true, nullable: true, min: 0, initial: 1, label: "DND5E.ChallengeRating"
         }),
         treasure: new SchemaField({
+          gear: new ArrayField(new SchemaField({
+            quantity: new NumberField({ nullable: true, initial: null, integer: true, min: 1 }),
+            uuid: new StringField() // TODO: Swap to DocumentUUIDField with `relative: true` in DnD5e 6.0
+          })),
           value: new SetField(new StringField())
         })
       }, { label: "DND5E.Details" }),
@@ -226,6 +231,30 @@ export default class NPCData extends CreatureTemplate {
   static #migrateEnvironment(source) {
     const custom = source.details?.environment;
     if ( (typeof custom === "string") && !("habitat" in source.details) ) source.details.habitat = { custom };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate gear list inferred from items to explicitly-defined list.
+   * @param {object} source  The item's candidate source data to migrate.
+   */
+  static _migrateGear(source) {
+    if ( source.system?.details?.treasure?.gear !== undefined ) return;
+    const gear = source.items?.values()
+      .filter(i =>
+        i.system?.quantity && (i.system?.type?.value !== "natural")
+        && (((i.type !== "weapon") && (i.type !== "equipment")) || i._stats?.compendiumSource)
+      )
+      .map(i => ({
+        quantity: i.system.quantity,
+        uuid: ((i.type === "weapon") || (i.type === "equipment")) ? i._stats.compendiumSource : `.Item.${i._id}`
+      }))
+      .toArray();
+    if ( gear?.length ) {
+      foundry.utils.setProperty(source, "flags.dnd5e.persistSourceMigration", true);
+      foundry.utils.setProperty(source, "system.details.treasure.gear", gear);
+    }
   }
 
   /* -------------------------------------------- */
@@ -463,6 +492,32 @@ export default class NPCData extends CreatureTemplate {
   /* -------------------------------------------- */
 
   /**
+   * Add an item to the gear list, automatically determining whether to link to the local copy or to
+   * the original compendium source.
+   * @param {Item5e} item  Item to add.
+   */
+  addGear(item) {
+    const isPhysical = item.system.constructor._schemaTemplates?.includes(PhysicalItemTemplate);
+    if ( !(item instanceof Item) || !isPhysical ) {
+      ui.notifications.error("DND5E.Gear.Warning.InvalidItem", { format: { name: item.name } });
+      return;
+    }
+
+    const useLocalCopy = !item._stats.compendiumSource || !["weapon", "equipment"].includes(item.type);
+    this.parent.update({
+      "system.details.treasure.gear": [
+        ...this.toObject().details.treasure.gear,
+        {
+          quantity: item.system.quantity > 1 ? item.system.quantity : null,
+          uuid: useLocalCopy ? item.getRelativeUUID(this.parent) : item._stats.compendiumSource
+        }
+      ]
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Level used to determine cantrip scaling.
    * @param {Item5e} spell  Spell for which to fetch the cantrip level.
    * @returns {number}
@@ -500,10 +555,12 @@ export default class NPCData extends CreatureTemplate {
    * Create a list of gear that can be collected from this NPC.
    * @type {Item5e[]}
    */
-  getGear() {
-    return this.parent.items
-      .filter(i => i.system.quantity && (i.system.type?.value !== "natural"))
-      .sort((lhs, rhs) => lhs.name.localeCompare(rhs.name, game.i18n.lang));
+  async getGear() {
+    return Promise.all(this.details.treasure.gear.map(async ({ quantity=1, uuid }) => {
+      const item = await fromUuid(uuid, { relative: this.parent, strict: false });
+      if ( !item ) return null;
+      return game.items.fromCompendium(item.clone({ "system.quantity": quantity }, { keepId: true }));
+    })).then(i => i.filter(_ => _));
   }
 
   /* -------------------------------------------- */
@@ -658,7 +715,14 @@ export default class NPCData extends CreatureTemplate {
 
         // Gear
         gear: o.gear ?? formatter.format(
-          this.getGear().map(i => i.system.quantity > 1 ? `${i.name} (${formatNumber(i.system.quantity)})` : i.name)
+          this.details.treasure.gear
+            .map(({ quantity, uuid }) => {
+              const item = fromUuidSync(uuid, { relative: this.parent, strict: false });
+              if ( !item ) return null;
+              return quantity > 1 ? `${item.name} (${formatNumber(quantity)})` : item.name;
+            })
+            .filter(_ => _)
+            .sort((lhs, rhs) => lhs.localeCompare(rhs, game.i18n.lang))
         ),
 
         // Initiative (e.g. `+0 (10)`)
@@ -761,7 +825,7 @@ export default class NPCData extends CreatureTemplate {
         summary.vulnerabilities ? { label: "DND5E.Vulnerabilities", definitions: [summary.vulnerabilities] } : null,
         summary.resistances ? { label: "DND5E.Resistances", definitions: [summary.resistances] } : null,
         summary.immunities ? { label: "DND5E.Immunities", definitions: [summary.immunities] } : null,
-        summary.gear ? { label: "DND5E.Gear", definitions: [summary.gear] } : null,
+        summary.gear ? { label: "DND5E.Gear.Label", definitions: [summary.gear] } : null,
         { label: "DND5E.Senses", definitions: [summary.senses] },
         { label: "DND5E.Languages", definitions: [summary.languages] },
         { label: "DND5E.AbbreviationCR", definitions: [summary.cr] }

@@ -1530,7 +1530,7 @@ dialog.dnd5e2.application {
       .integer { padding-inline-start: 4px; }
     }
   }
-  .header {
+  fieldset > .header {
     margin-inline: -10px;
     padding-block: 3px 2px;
     padding-inline: 10px;
@@ -1621,6 +1621,24 @@ dialog.dnd5e2.application {
     }
     input[type="radio"] { margin-block-end: 4px; }
     input[type="text"] { padding: 6px; }
+  }
+}
+
+/* ---------------------------------- */
+/*  Gear Config Sheet                 */
+/* ---------------------------------- */
+
+.dnd5e2.gear-config {
+  .items-section :is(.items-header, .item) .item-controls {
+    width: 30px;
+    padding-inline-end: 10px;
+  }
+  .item-name[data-action] {
+    cursor: var(--cursor-pointer);
+    &:hover {
+      img { box-shadow: 0 0 12px var(--dnd5e-color-gold); }
+      .name-stacked { text-shadow: 0 0 8px var(--color-shadow-primary); }
+    }
   }
 }
 
