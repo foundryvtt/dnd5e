@@ -1,7 +1,7 @@
 import SparseDataModel from "../abstract/sparse-data-model.mjs";
 import AdvancementDataField from "../fields/advancement-data-field.mjs";
 
-const { DocumentIdField, FilePathField, HTMLField, NumberField, StringField } = foundry.data.fields;
+const { DocumentFlagsField, DocumentIdField, FilePathField, HTMLField, NumberField, StringField } = foundry.data.fields;
 
 /**
  * @import { BaseAdvancementData } from "./_types.mjs";
@@ -34,6 +34,7 @@ export default class BaseAdvancementData extends SparseDataModel {
         validationError: `must be the same as the Advancement type name ${this.typeName}`
       }),
       configuration: new AdvancementDataField(this, { required: true }),
+      flags: new DocumentFlagsField(),
       value: new AdvancementDataField(this, { required: true }),
       level: new NumberField({
         integer: true, initial: this.metadata?.multiLevel ? undefined : 0, min: 0, label: "DND5E.Level"
