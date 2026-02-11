@@ -186,7 +186,7 @@ export async function categories(trait) {
 export async function choices(trait, { chosen=new Set(), prefixed=false, any=false }={}) {
   const traitConfig = CONFIG.DND5E.traits[trait];
   if ( !traitConfig ) return new SelectChoices();
-  if ( foundry.utils.getType(chosen) === "Array" ) chosen = new Set(chosen);
+  if ( Array.isArray(chosen) ) chosen = new Set(chosen);
   const categoryData = await categories(trait);
 
   let result = {};

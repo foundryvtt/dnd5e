@@ -109,7 +109,7 @@ export default class GroupData extends GroupTemplate {
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateMembers(source) {
-    if ( foundry.utils.getType(source.members) !== "Array" ) return;
+    if ( !Array.isArray(source.members) ) return;
     source.members = source.members.map(m => {
       if ( foundry.utils.getType(m) === "Object" ) return m;
       return { actor: m };
