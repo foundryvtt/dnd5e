@@ -4,7 +4,6 @@ import * as Trait from "../../documents/actor/trait.mjs";
 import { getRulesVersion } from "../../enrichers.mjs";
 import { defaultUnits, formatCR, formatLength, formatNumber, getPluralRules, splitSemicolons } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
-import PhysicalItemTemplate from "../item/templates/physical-item.mjs";
 import CreatureTypeField from "../shared/creature-type-field.mjs";
 import RollConfigField from "../shared/roll-config-field.mjs";
 import SensesField from "../shared/senses-field.mjs";
@@ -497,7 +496,7 @@ export default class NPCData extends CreatureTemplate {
    * @param {Item5e} item  Item to add.
    */
   addGear(item) {
-    const isPhysical = item.system.constructor._schemaTemplates?.includes(PhysicalItemTemplate);
+    const isPhysical = !!CONFIG.Item.dataModels[item.type]?.schema.fields.quantity;
     if ( !(item instanceof Item) || !isPhysical ) {
       ui.notifications.error("DND5E.Gear.Warning.InvalidItem", { format: { name: item.name } });
       return;

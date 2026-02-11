@@ -329,7 +329,10 @@ export default class NPCActorSheet extends BaseActorSheet {
         .map(({ quantity, uuid }) => {
           const item = fromUuidSync(uuid, { relative: this.actor, strict: false });
           if ( !item ) return null;
-          const data = { label: item.name, link: { action: "showDocument", uuid: item.uuid } };
+          const data = {
+            draggable: true, label: item.name,
+            link: { action: "showDocument", quantity, uuid: item.uuid }
+          };
           if ( quantity > 1 ) data.value = quantity;
           return data;
         })
@@ -592,5 +595,38 @@ export default class NPCActorSheet extends BaseActorSheet {
     }
 
     return submitData;
+  }
+
+  /* -------------------------------------------- */
+  /*  Drag & Drop                                 */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onDragStart(event) {
+    const target = event.currentTarget;
+    if ( target.classList.contains("pill") ) {
+      const dataset = target.querySelector("[data-uuid]")?.dataset ?? {};
+      const item = await fromUuid(dataset.uuid);
+      if ( item ) {
+        event.dataTransfer.setData("text/plain", JSON.stringify({
+          data: game.items.fromCompendium(item.clone({ "system.quantity": dataset.quantity || 1 }, { keepId: true })),
+          type: "Item"
+        }));
+        return;
+      }
+    }
+    return super._onDragStart(event);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onDropSingleItem(event, itemData) {
+    const result = await super._onDropSingleItem(event, itemData);
+    if ( !result ) return result;
+    if ( ("quantity" in (itemData.system ?? {})) && itemData._stats?.compendiumSource ) {
+      fromUuid(itemData._stats.compendiumSource).then(i => this.document.system.addGear(i));
+    }
+    return result;
   }
 }

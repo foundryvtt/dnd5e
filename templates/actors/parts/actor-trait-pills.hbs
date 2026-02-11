@@ -16,7 +16,7 @@
     </h3>
     <ul class="pills">
         {{#each values}}
-        <li class="pill {{ ../color }} {{ color }}">
+        <li class="pill {{ ../color }} {{ color }} {{~ifThen draggable ' draggable' ''}}">
             {{#if link}}
             <a class="{{ @root.rollableClass }}" {{ dnd5e-dataset link }}>
             {{/if}}
