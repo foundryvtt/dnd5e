@@ -616,7 +616,7 @@ export function migrateEffects(parent, migrationData, itemUpdateData, flags={}) 
  * @param {object} [options]             Additional options.
  * @param {string} [options.actorUuid]   UUID of the parent actor
  */
-export const migrateCopyActorTransferEffects = function(actor, effects, { actorUuid }={}) {
+export function migrateCopyActorTransferEffects(actor, effects, { actorUuid }={}) {
   if ( !actor.items ) return;
 
   for ( const item of actor.items ) {
@@ -632,7 +632,7 @@ export const migrateCopyActorTransferEffects = function(actor, effects, { actorU
       effects.push(newEffect);
     }
   }
-};
+}
 
 /* -------------------------------------------- */
 
@@ -644,7 +644,7 @@ export const migrateCopyActorTransferEffects = function(actor, effects, { actorU
  * @param {object} [options.parent]  Parent of this effect.
  * @returns {object}                 The updateData to apply.
  */
-export const migrateEffectData = function(effect, migrationData, { parent }={}) {
+export function migrateEffectData(effect, migrationData, { parent }={}) {
   const updateData = {};
   _migrateDocumentIcon(effect, updateData, {...migrationData, field: "img"});
   _migrateEffectArmorClass(effect, updateData);
@@ -652,7 +652,7 @@ export const migrateEffectData = function(effect, migrationData, { parent }={}) 
     _migrateTransferEffect(effect, parent, updateData);
   }
   return updateData;
-};
+}
 
 /* -------------------------------------------- */
 
@@ -662,12 +662,12 @@ export const migrateEffectData = function(effect, migrationData, { parent }={}) 
  * @param {object} [migrationData]  Additional data to perform the migration
  * @returns {object}                The updateData to apply
  */
-export const migrateMacroData = function(macro, migrationData) {
+export function migrateMacroData(macro, migrationData) {
   const updateData = {};
   _migrateDocumentIcon(macro, updateData, migrationData);
   _migrateMacroCommands(macro, updateData);
   return updateData;
-};
+}
 
 /* -------------------------------------------- */
 
@@ -703,7 +703,7 @@ export function migrateRollTableData(table, migrationData) {
  * @param {object} [migrationData]  Additional data to perform the migration
  * @returns {object}                The updateData to apply
  */
-export const migrateSceneData = function(scene, migrationData) {
+export function migrateSceneData(scene, migrationData) {
   const tokens = scene.tokens.reduce((arr, token) => {
     const t = token instanceof foundry.abstract.DataModel ? token.toObject() : token;
     const update = {};
@@ -714,7 +714,7 @@ export const migrateSceneData = function(scene, migrationData) {
   }, []);
   if ( tokens.length ) return { tokens };
   return {};
-};
+}
 
 /* -------------------------------------------- */
 
@@ -722,7 +722,7 @@ export const migrateSceneData = function(scene, migrationData) {
  * Fetch bundled data for large-scale migrations.
  * @returns {Promise<object>}  Object mapping original system icons to their core replacements.
  */
-export const getMigrationData = async function() {
+export async function getMigrationData() {
   const data = {};
   try {
     const icons = await fetch("systems/dnd5e/json/icon-migration.json");
@@ -732,7 +732,7 @@ export const getMigrationData = async function() {
     console.warn(`Failed to retrieve icon migration data: ${err.message}`);
   }
   return data;
-};
+}
 
 /* -------------------------------------------- */
 /*  Low level migration utilities
