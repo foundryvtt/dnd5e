@@ -61,7 +61,6 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   /** @override */
   static DEFAULT_OPTIONS = {
     actions: {
-      editImage: BaseActorSheet.#onEditImage,
       inspectWarning: BaseActorSheet.#inspectWarning,
       openWarnings: BaseActorSheet.#openWarnings,
       rest: BaseActorSheet.#rest,
@@ -493,7 +492,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       action: portraitData.isRandom ? "configurePrototypeToken" : "editImage",
       path: portraitData.isToken ? this.actor.isToken ? "token.texture.src" : "prototypeToken.texture.src" : "img",
       token: portraitData.isToken,
-      type: portraitData.token ? "imagevideo" : "image"
+      type: portraitData.isToken ? "imagevideo" : "image"
     };
   }
 
@@ -1308,47 +1307,6 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       }
       else target.update({ [input.dataset.name]: result });
     }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle editing an image via the file browser.
-   * @this {BaseActorSheet}
-   * @param {PointerEvent} event  The triggering event.
-   * @param {HTMLElement} target  The action target.
-   * @returns {Promise<void>}
-   */
-  static async #onEditImage(event, target) {
-    const attr = target.dataset.edit;
-    const current = foundry.utils.getProperty(this.document._source, attr);
-    const defaultArtwork = this.document.constructor.getDefaultArtwork?.(this.document._source) ?? {};
-    const defaultImage = foundry.utils.getProperty(defaultArtwork, attr);
-    const fp = new CONFIG.ux.FilePicker({
-      current,
-      type: target.dataset.type,
-      redirectToRoot: defaultImage ? [defaultImage] : [],
-      callback: path => {
-        const isVideo = foundry.helpers.media.VideoHelper.hasVideoExtension(path);
-        if ( ((target instanceof HTMLVideoElement) && isVideo) || ((target instanceof HTMLImageElement) && !isVideo) ) {
-          target.src = path;
-        } else {
-          const repl = document.createElement(isVideo ? "video" : "img");
-          Object.assign(repl.dataset, target.dataset);
-          if ( isVideo ) Object.assign(repl, {
-            autoplay: true, muted: true, disablePictureInPicture: true, loop: true, playsInline: true
-          });
-          repl.src = path;
-          target.replaceWith(repl);
-        }
-        this._onEditPortrait(attr, path);
-      },
-      position: {
-        top: this.position.top + 40,
-        left: this.position.left + 10
-      }
-    });
-    await fp.browse();
   }
 
   /* -------------------------------------------- */

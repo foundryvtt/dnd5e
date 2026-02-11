@@ -311,13 +311,28 @@ export default function ApplicationV2Mixin(Base, { handlebars=true }={}) {
       const defaultImage = foundry.utils.getProperty(defaultArtwork, attr);
       const fp = new foundry.applications.apps.FilePicker.implementation({
         current,
-        type: "image",
+        type: target.dataset.type || "image",
         redirectToRoot: defaultImage ? [defaultImage] : [],
         callback: path => {
-          target.src = path;
+          const isVideo = foundry.helpers.media.VideoHelper.hasVideoExtension(path);
+          if ( ((target instanceof HTMLVideoElement) && isVideo)
+            || ((target instanceof HTMLImageElement) && !isVideo) ) target.src = path;
+          else {
+            const repl = document.createElement(isVideo ? "video" : "img");
+            Object.assign(repl.dataset, target.dataset);
+            if ( isVideo ) Object.assign(repl, {
+              autoplay: true, muted: true, disablePictureInPicture: true, loop: true, playsInline: true
+            });
+            repl.src = path;
+            target.replaceWith(repl);
+          }
+
           if ( this.options.form.submitOnChange ) {
-            const submit = new Event("submit", {cancelable: true});
-            this.form.dispatchEvent(submit);
+            if ( attr.startsWith("token.") ) this.token.update({ [attr.slice(6)]: path });
+            else {
+              const submit = new Event("submit", { cancelable: true });
+              this.form.dispatchEvent(submit);
+            }
           }
         },
         position: {
