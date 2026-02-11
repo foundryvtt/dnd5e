@@ -28,8 +28,10 @@ export default class RollTableSheet5e extends ApplicationV2Mixin(RollTableSheet,
     this.element.querySelector(".sheet-header [data-action=changeMode]")?.remove();
     this.element.querySelectorAll("tbody .inline-control").forEach(c => c.classList.add("unbutton", "control-button"));
     this._replaceElements("input[type=checkbox]", "dnd5e-checkbox");
-    this._replaceElements('table td.image img[src$=".svg"]', "dnd5e-icon", icon => {
-      if ( icon.src === "icons/svg/d20-black.svg" ) icon.src = "systems/dnd5e/icons/svg/dice/d20.svg";
+    this._replaceElements('table td.image img[src$=".svg"]', "dnd5e-icon", {
+      callback: icon => {
+        if ( icon.src === "icons/svg/d20-black.svg" ) icon.src = "systems/dnd5e/icons/svg/dice/d20.svg";
+      }
     });
     this.element.querySelectorAll("table td.image img").forEach(icon => icon.classList.add("gold-icon"));
   }
