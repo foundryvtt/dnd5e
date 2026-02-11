@@ -19,6 +19,7 @@ export default function PrimarySheetMixin(Base) {
       actions: {
         changeMode: PrimarySheet5e.#changeMode,
         editDocument: PrimarySheet5e.#showDocument,
+        editImage: PrimarySheet5e._onEditImage,
         deleteDocument: PrimarySheet5e.#deleteDocument,
         showDocument: PrimarySheet5e.#showDocument
       }
