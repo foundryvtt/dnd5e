@@ -64,6 +64,10 @@ export default class ItemChoiceConfig extends AdvancementConfig {
         value: "available",
         label: game.i18n.localize("DND5E.ADVANCEMENT.ItemChoice.FIELDS.restriction.level.Available")
       },
+      {
+        value: "availableNoCantrips",
+        label: game.i18n.localize("DND5E.ADVANCEMENT.ItemChoice.FIELDS.restriction.level.AvailableNoCantrips")
+      },
       { rule: true },
       ...Object.entries(CONFIG.DND5E.spellLevels).map(([value, label]) => ({ value, label }))
     ];
