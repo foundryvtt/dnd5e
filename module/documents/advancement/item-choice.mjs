@@ -4,6 +4,12 @@ import { ItemChoiceConfigurationData, ItemChoiceValueData } from "../../data/adv
 import ItemGrantAdvancement from "./item-grant.mjs";
 
 /**
+ * @import {
+ *   ItemChoiceAdvancementReversalOptions, ItemChoiceAdvancementReversalOptions, ItemChoiceRetainedData
+ * } from "./_types.mjs";
+ */
+
+/**
  * Advancement that presents the player with a choice of multiple items that they can take. Keeps track of which
  * items were selected at which levels.
  */
@@ -80,7 +86,7 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
   getCounts(level) {
     const current = Object.keys(this.value.added[level] ?? {}).length;
     const replacement = !!this.configuration.choices[level]?.replacement && !!this.value.replaced[level];
-    const max = this.configuration.choices[level]?.count + (replacement ? 1 : 0);
+    const max = (this.configuration.choices[level]?.count ?? 0) + (replacement ? 1 : 0);
     return {
       current, max, replacement,
       full: current >= max
@@ -96,24 +102,12 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
 
   /* -------------------------------------------- */
 
-  /**
-   * @typedef {ItemGrantAdvancementApplicationData} ItemChoiceAdvancementApplicationData
-   * @property {Record<number, Record<string, Item5e>>} previousItems  Copies of items added at earlier levels.
-   * @property {string} [replace]                       Actor ID of the item being replaced.
-   * @property {ItemChoiceRetainedData} [retainedData]  Retained data including replacement data.
-   */
-
-  /**
-   * @typedef {ItemGrantRetainedData} ItemChoiceRetainedData
-   * @property {object} [replaced]  Details on item replacement.
-   */
-
   /** @inheritDoc */
   async apply(level, { previousItems, replace: original, retainedData={}, ...data }, options={}) {
     let replacement;
     if ( retainedData.replaced ) ({ original, replacement } = retainedData.replaced);
 
-    const updates = await super.apply(level, { ...data, retainedData }, options);
+    await super.apply(level, { ...data, retainedData }, options);
 
     if ( original ) {
       const replaced = this.value.replaced[level] ?? {};
@@ -121,7 +115,7 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
       const replacedLevel = Object.entries(this.value.added).reverse().reduce((level, [l, v]) => {
         if ( (original in v) && (Number(l) > level) ) return Number(l);
         return level;
-      }, 0);
+      }, -Infinity);
       if ( Number.isFinite(replacedLevel) ) {
         this.actor.items.delete(original);
         this.updateSource({ [`value.replaced.${level}`]: { level: replacedLevel, original } });
@@ -148,11 +142,11 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
   /** @inheritDoc */
   async restore(level, data, options={}) {
     const original = this.actor.items.get(data.replaced?.original);
-    if ( data.replaced && !original ) Object.entries(data.items).forEach(([uuid, i]) => {
+    if ( data.replaced && !original ) Object.entries(data.items ?? {}).forEach(([uuid, i]) => {
       if ( i._id !== data.replaced.replacement ) delete data.items[uuid];
     });
 
-    await super.restore(level, data, options={});
+    await super.restore(level, data, options);
 
     if ( data.replaced ) {
       if ( !original ) {
@@ -165,23 +159,15 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
 
   /* -------------------------------------------- */
 
-  /**
-   * @typedef {ItemGrantAdvancementReversalOptions} ItemChoiceAdvancementReversalOptions
-   * @property {boolean} [clearReplacement]  Clear the replacement and restore the original item.
-   * @property {Record<number, Record<string, Item5e>>} previousItems  Copies of items added at earlier levels.
-   * @property {boolean} [skipEvaluation]    Do not re-evaluate other item selected at this level.
-   */
-
   /** @inheritDoc */
   async reverse(level, { clearReplacement, previousItems, retainedData={}, skipEvaluation, ...options }={}) {
     const replaced = this.value.replaced[level];
     const restoreReplacedItem = replaced && (clearReplacement || foundry.utils.isEmpty(options));
-    const uuidIsReplacement = this.value.added[level]?.[replaced?.replacement] === options.uuid;
-    const retainedItems = retainedData.items ?? {};
+    const uuid = this.value.added[level]?.[replaced?.replacement];
+    const uuidIsReplacement = uuid === options.uuid;
 
     const counts = this.getCounts(level);
     if ( clearReplacement && counts.full ) {
-      const uuid = this.value.added[level]?.[replaced?.replacement];
       if ( uuid ) retainedData = (await super.reverse(level, { uuid })) ?? {};
     } else if ( !clearReplacement ) {
       retainedData = (await super.reverse(level, options)) ?? {};
@@ -219,7 +205,7 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
     const removed = replaced ? [replaced] : [];
 
     for ( let i = 0; i < 100; i++ ) {
-      const itemsBefore = Object.keys(this.value.added).length;
+      const itemsBefore = Object.keys(this.value.added[level] ?? {}).length;
       for ( const [id, uuid] of Object.entries(this.value.added[level] ?? {}) ) {
         const item = this.actor.items.get(id);
         if ( !item ) continue;
@@ -228,7 +214,7 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
         }) ?? true;
         if ( isValid !== true ) await this.reverse(level, { skipEvaluation: true, uuid });
       }
-      if ( itemsBefore === Object.keys(this.value.added).length ) break;
+      if ( itemsBefore === Object.keys(this.value.added[level] ?? {}).length ) break;
     }
   }
 
@@ -238,12 +224,12 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
    * Restore a previously replaced item that had been removed through the flow process.
    * @param {number} level       Level of the item that was replaced.
    * @param {string} originalId  ID of the item that was replaced.
-   * @param {Record<string, object>|Record<number, Record<string, Item5e>> retainedItems  Original item data.
+   * @param {object[]|Record<number, Record<string, Item5e>>} [retainedItems={}]  Original item data.
    */
   async _restoreReplacedItem(level, originalId, retainedItems={}) {
     const uuid = this.value.added[level]?.[originalId];
-    const itemData = retainedItems[level]?.[uuid]?.toObject() ?? retainedItems[uuid]
-      ?? await this.createItemData(uuid, originalId);
+    const itemData = (Array.isArray(retainedItems) ? retainedItems.find(i => i._id === originalId)
+      : retainedItems[level]?.[originalId]?.toObject()) ?? await this.createItemData(uuid, originalId);
     if ( itemData ) {
       if ( itemData.type === "spell" ) {
         this.configuration.spell?.applySpellChanges?.(itemData, { ability: this.value.ability });
@@ -277,8 +263,8 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
 
     // Type restriction is set and the item type does not match the selected type
     if ( type && (type !== item.type) ) {
-      type = game.i18n.localize(CONFIG.Item.typeLabels[restriction]);
-      return handleError("DND5E.ADVANCEMENT.ItemChoice.Warning.InvalidType", { type: typeLabel });
+      type = game.i18n.localize(CONFIG.Item.typeLabels[restriction.type]);
+      return handleError("DND5E.ADVANCEMENT.ItemChoice.Warning.InvalidType", { type });
     }
 
     // If additional type restrictions applied, make sure they are valid

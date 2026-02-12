@@ -63,6 +63,49 @@
 /* -------------------------------------------- */
 
 /**
+ * @typedef {ItemGrantAdvancementApplicationData} ItemChoiceAdvancementApplicationData
+ * @property {Record<number, Record<string, Item5e>>} previousItems  Copies of items added at earlier levels.
+ * @property {string} [replace]                       ID of the item being replaced.
+ * @property {ItemChoiceRetainedData} [retainedData]  Retained data including replacement data.
+ */
+
+/**
+ * @typedef {ItemGrantRetainedData} ItemChoiceRetainedData
+ * @property {object} [replaced]  Details on item replacement.
+ */
+
+/**
+ * @typedef {ItemGrantAdvancementReversalOptions} ItemChoiceAdvancementReversalOptions
+ * @property {boolean} [clearReplacement]  Clear the replacement and restore the original item.
+ * @property {Record<number, Record<string, Item5e>>} previousItems  Copies of items added at earlier levels.
+ * @property {boolean} [skipEvaluation]    Do not re-evaluate other item selected at this level.
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef {AdvancementApplicationData} ItemGrantAdvancementApplicationData
+ * @property {string} [ability]     Selected ability for added spells.
+ * @property {ItemGrantRetainedData} [retainedData]  Retained item data grouped by UUID and selected ability. If item
+ *                                  data is present, it will be used rather than fetching new data from the source.
+ * @property {string[]} [selected]  UUIDs of items to add. If none provided, then will fall back to the items
+ *                                  provided in the `items` object.
+ */
+
+/**
+ * @typedef ItemGrantRetainedData
+ * @property {string} [ability]  Selected ability.
+ * @property {object[]} [items]  Data for retained items.
+ */
+
+/**
+ * @typedef {AdvancementReversalOptions} ItemGrantAdvancementReversalOptions
+ * @property {string} [uuid]  UUID of a single item to remove.
+ */
+
+/* -------------------------------------------- */
+
+/**
  * @typedef {AdvancementApplicationData} SubclassAdvancementApplicationData
  * @property {object} [retainedData]  Retained data object for a previous subclass.
  * @property {string} [uuid]          UUID of subclass to add.

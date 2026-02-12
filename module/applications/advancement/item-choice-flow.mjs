@@ -71,8 +71,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
    */
   get selected() {
     return Object.values(this.advancement.value.added[this.level] ?? {}).reduce((map, uuid) => {
-      if ( !map.has(uuid) ) map.set(uuid, 1);
-      else map.set(uuid, map.get(uuid) + 1);
+      map.set(uuid, (map.get(uuid) ?? 0) + 1);
       return map;
     }, new Map());
   }
@@ -89,7 +88,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     const value = this.advancement.value;
     this.pool ??= (await Promise.all(config.pool.map(i => fromUuid(i.uuid)))).filter(_ => _);
     this.retained ??= Object.entries(value.added).reduce((obj, [level, added]) => {
-      obj[level] = Object.fromEntries(Object.entries(added).map(([id, uuid]) => [uuid, actor.items.get(id)]));
+      obj[level] = Object.fromEntries(Object.entries(added).map(([id]) => [id, actor.items.get(id)]));
       return obj;
     }, {});
 
@@ -112,7 +111,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
           previouslySelected.add(uuid);
           return {
             id, img, name, uuid,
-            checked: id === config.choices[this.level].replacement,
+            checked: id === value.replaced[this.level]?.original,
             previouslyReplaced: false,
             replaced: false
           };
@@ -143,9 +142,9 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
         if ( !this.pool.find(p => p.uuid === uuid) ) dropped.push(item);
       }
     }
-    const removed = counts.replaced ? actor.items.get(config.choices[this.level].replacement) : [];
+    const removed = counts.replaced ? actor.items.get(value.replaced[this.level]?.original) : [];
 
-    context.sections.set(this.level, {
+    if ( counts.max ) context.sections.set(this.level, {
       header: game.i18n.format("DND5E.ADVANCEMENT.ItemChoice.Chosen", counts),
       isCurrentLevel: true,
       items: [...this.pool, ...dropped].reduce((arr, item) => {
@@ -291,8 +290,6 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
 
   /** @override */
   async _handleForm(event, form, formData) {
-    const retainedData = { items: {} };
-
     if ( event.target?.name === "ability" ) {
       await this.advancement.apply(this.level, { ability: event.target.value });
     } else if ( event.target?.tagName === "DND5E-CHECKBOX" ) {

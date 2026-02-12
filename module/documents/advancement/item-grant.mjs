@@ -5,6 +5,12 @@ import ItemGrantConfigurationData from "../../data/advancement/item-grant.mjs";
 import Advancement from "./advancement.mjs";
 
 /**
+ * @import {
+ *   ItemGrantAdvancementApplicationData, ItemGrantAdvancementReversalOptions, ItemGrantRetainedData
+ * } from "./_types.mjs";
+ */
+
+/**
  * Advancement that automatically grants one or more items to the player. Presents the player with the option of
  * skipping any or all of the items.
  */
@@ -77,21 +83,6 @@ export default class ItemGrantAdvancement extends Advancement {
 
   /* -------------------------------------------- */
 
-  /**
-   * @typedef ItemGrantAdvancementApplicationData
-   * @property {string} [ability]     Selected ability for added spells.
-   * @property {ItemGrantRetainedData} [retainedData]  Retained item data grouped by UUID and selected ability. If item
-   *                                  data is present, it will be used rather than fetching new data from the source.
-   * @property {string[]} [selected]  UUIDs of items to add. If none provided, then will fall back to the items
-   *                                  provided in the `items` object.
-   */
-
-  /**
-   * @typedef ItemGrantRetainedData
-   * @property {string} [ability]                Selected ability.
-   * @property {Record<string, object>} [items]  Retained items grouped by source UUID.
-   */
-
   /** @override */
   async apply(level, { ability, retainedData={}, selected=Object.keys(retainedData), ...data }={}, options={}) {
     if ( !foundry.utils.isEmpty(data) ) {
@@ -121,7 +112,7 @@ export default class ItemGrantAdvancement extends Advancement {
     const items = [];
     const itemUpdates = {};
     for ( const uuid of selected ) {
-      let itemData = retainedData.items?.[uuid];
+      let itemData = retainedData.items?.find(i => i.flags?.dnd5e?.sourceId ?? i._stats?.compendiumSource);
       if ( !itemData ) {
         itemData = await this.createItemData(uuid);
         if ( !itemData ) continue;
@@ -164,7 +155,7 @@ export default class ItemGrantAdvancement extends Advancement {
   /** @inheritDoc */
   restore(level, data, options={}) {
     const updates = {};
-    for ( const item of Object.values(data.items) ) {
+    for ( const item of data.items ?? [] ) {
       this.actor.updateSource({ items: [item] });
       updates[item._id] = item.flags.dnd5e.sourceId;
     }
@@ -176,11 +167,6 @@ export default class ItemGrantAdvancement extends Advancement {
 
   /* -------------------------------------------- */
 
-  /**
-   * @typedef {AdvancementReversalOptions} ItemGrantAdvancementReversalOptions
-   * @property {string} [uuid]  UUID of a single item to remove.
-   */
-
   /** @inheritDoc */
   reverse(level, options={}) {
     const keyPath = this.storagePath(level);
@@ -189,10 +175,13 @@ export default class ItemGrantAdvancement extends Advancement {
       : Object.keys(added);
     if ( !ids.length ) return;
 
-    const items = {};
+    const items = [];
     for ( const id of ids ) {
       const item = this.actor.items.get(id);
-      if ( item ) items[item.flags.dnd5e?.sourceId ?? item._stats.compendiumSource ?? item.uuid] = item.toObject();
+      if ( item ) {
+        items.push(item.toObject());
+        items[item.flags.dnd5e?.sourceId ?? item._stats.compendiumSource ?? item.uuid] = item.toObject();
+      }
       this.actor.items.delete(id);
       added[`-=${id}`] = null;
     }
