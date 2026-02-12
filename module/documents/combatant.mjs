@@ -96,11 +96,12 @@ export default class Combatant5e extends Combatant {
     const results = { actor: {}, delete: [], item: [], rolls: [] };
     await this.actor?.system.recoverCombatUses?.(periods, results);
 
+    const recoveryPeriods = new Map(periods.map(p => [p, 1]));
     for ( const item of this.actor?.items ?? [] ) {
       if ( (item.dependentOrigin?.active === false)
         || (foundry.utils.getType(item.system.recoverUses) !== "function") ) continue;
       const rollData = item.getRollData();
-      const { updates, rolls, destroy } = await item.system.recoverUses(Array.from(periods), rollData);
+      const { updates, rolls, destroy } = await item.system.recoverUses(recoveryPeriods, rollData);
       if ( destroy ) {
         results.delete.push(item.id);
       } else if ( !foundry.utils.isEmpty(updates) ) {
