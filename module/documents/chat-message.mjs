@@ -88,7 +88,7 @@ export default class ChatMessage5e extends ChatMessage {
     }
     if ( foundry.utils.hasProperty(source, "flags.dnd5e.use") ) {
       const use = source.flags.dnd5e.use;
-      foundry.utils.setProperty(source, "flags.dnd5e.messageType", "usage");
+      if ( source.type !== "usage" ) foundry.utils.setProperty(source, "flags.dnd5e.messageType", "usage");
       if ( use.type ) foundry.utils.setProperty(source, "flags.dnd5e.item.type", use.type);
       if ( use.itemId ) foundry.utils.setProperty(source, "flags.dnd5e.item.id", use.itemId);
       if ( use.itemUuid ) foundry.utils.setProperty(source, "flags.dnd5e.item.uuid", use.itemUuid);
@@ -104,7 +104,7 @@ export default class ChatMessage5e extends ChatMessage {
   prepareData() {
     super.prepareData();
     if ( !this.flags.dnd5e?.item?.data && this.flags.dnd5e?.item?.id ) {
-      const itemData = this.getFlag("dnd5e", "use.consumed.deleted")?.find(i => i._id === this.flags.dnd5e.item.id);
+      const itemData = this.system.deltas?.deleted?.find(i => i._id === this.flags.dnd5e.item.id);
       if ( itemData ) Object.defineProperty(this.flags.dnd5e.item, "data", { value: itemData });
     }
     dnd5e.registry.messages.track(this);
@@ -131,7 +131,6 @@ export default class ChatMessage5e extends ChatMessage {
 
     await this._enrichChatCard(html);
     this._collapseTrays(html);
-    this._activateActivityListeners(html);
     dnd5e.bastion._activateChatListeners(this, html);
 
     /**
@@ -383,14 +382,10 @@ export default class ChatMessage5e extends ChatMessage {
       });
       this._enrichDamageTooltip(this.rolls.filter(r => r instanceof DamageRoll), html);
       this._enrichSaveTooltip(html);
-      this._enrichEnchantmentTooltip(html);
       html.querySelectorAll(".dice-roll").forEach(el => el.addEventListener("click", this._onClickDiceRoll.bind(this)));
     } else {
       html.querySelectorAll(".dice-roll").forEach(el => el.classList.add("secret-roll"));
     }
-
-    // Effects tray
-    this._enrichUsageEffects(html);
 
     avatar.addEventListener("click", this._onTargetMouseDown.bind(this));
     avatar.addEventListener("pointerover", this._onTargetHoverIn.bind(this));
@@ -636,28 +631,6 @@ export default class ChatMessage5e extends ChatMessage {
   /* -------------------------------------------- */
 
   /**
-   * Display the enrichment application interface if necessary.
-   * @param {HTMLLIElement} html   The chat card.
-   * @protected
-   */
-  _enrichEnchantmentTooltip(html) {
-    const enchantmentProfile = this.getFlag("dnd5e", "use.enchantmentProfile");
-    if ( !enchantmentProfile ) return;
-
-    // Ensure concentration is still being maintained
-    const concentrationId = this.getFlag("dnd5e", "use.concentrationId");
-    if ( concentrationId && !this.getAssociatedActor()?.effects.get(concentrationId) ) return;
-
-    // Create the enchantment tray
-    const enchantmentApplication = document.createElement("enchantment-application");
-    const afterElement = html.querySelector(".card-footer");
-    if ( afterElement ) afterElement.insertAdjacentElement("beforebegin", enchantmentApplication);
-    else html.querySelector(".chat-card")?.append(enchantmentApplication);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Display option to resist a failed save using a legendary resistance.
    * @param {HTMLLIElement} html  The chat card.
    * @protected
@@ -695,26 +668,6 @@ export default class ChatMessage5e extends ChatMessage {
     else return;
 
     html.querySelector(".message-content").append(content);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Display the effects tray with effects the user can apply.
-   * @param {HTMLLiElement} html  The chat card.
-   * @protected
-   */
-  _enrichUsageEffects(html) {
-    if ( this.getFlag("dnd5e", "messageType") !== "usage" ) return;
-    const item = this.getAssociatedItem();
-    const effects = this.getFlag("dnd5e", "use.effects")
-      ?.map(id => item?.effects.get(id))
-      .filter(e => e && (game.user.isGM || (e.transfer && (this.author?.id === game.user.id))));
-    if ( !effects?.length ) return;
-
-    const effectApplication = document.createElement("effect-application");
-    effectApplication.effects = effects;
-    html.querySelector(".message-content").appendChild(effectApplication);
   }
 
   /* -------------------------------------------- */
@@ -785,16 +738,6 @@ export default class ChatMessage5e extends ChatMessage {
       }
     );
     return options;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Add event listeners for chat messages created from activities.
-   * @param {HTMLElement} html  The chat message HTML.
-   */
-  _activateActivityListeners(html) {
-    this.getAssociatedActivity()?.activateChatListeners(this, html);
   }
 
   /* -------------------------------------------- */

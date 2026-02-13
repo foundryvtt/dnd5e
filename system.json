@@ -47,7 +47,8 @@
     "ChatMessage": {
       "request": {},
       "rest": {},
-      "turn": {}
+      "turn": {},
+      "usage": {}
     },
     "Item": {
       "weapon": {
@@ -575,7 +576,7 @@
         "SRD 5.2": "SOURCE.BOOK.SRD52"
       }
     },
-    "needsMigrationVersion": "5.2.0",
+    "needsMigrationVersion": "5.3.0",
     "compatibleMigrationVersion": "0.8",
     "hotReload": {
       "extensions": ["css", "hbs", "json"],

@@ -105,6 +105,20 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
     incrementProgress();
   }
 
+  // Migrate World Messages
+  for ( const m of game.messages ) {
+    try {
+      const updateData = migrateMessageData(m.toObject(), migrationData);
+      if ( !foundry.utils.isEmpty(updateData) ) {
+        log(`Migrating Message document ${m.id}`);
+        await m.update(updateData, { enforceTypes: false, render: false });
+      }
+    } catch(err) {
+      err.message = `Failed dnd5e system migration for Message ${m.id}: ${err.message}`;
+      console.error(err);
+    }
+  }
+
   // Migrate World Roll Tables
   for ( const table of game.tables ) {
     try {
@@ -666,6 +680,38 @@ export function migrateMacroData(macro, migrationData) {
   const updateData = {};
   _migrateDocumentIcon(macro, updateData, migrationData);
   _migrateMacroCommands(macro, updateData);
+  return updateData;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Migrate a single chat message document.
+ * @param {object} messageData  Message data to migrate.
+ * @returns {object}            The update data to apply.
+ */
+export function migrateMessageData(messageData) {
+  const updateData = {};
+  const { flags } = messageData;
+  if ( (flags?.dnd5e?.messageType === "usage") && (messageData.type !== "usage") ) {
+    const use = flags.dnd5e.use;
+    updateData.type = "usage";
+    updateData["==system"] = {
+      cause: use?.cause,
+      concentration: use?.concentrationId,
+      deltas: use?.consumed,
+      effects: use?.effects,
+      scaling: use?.scaling,
+      spellLevel: use?.spellLevel
+    };
+    updateData["flags.dnd5e.-=messageType"] = null;
+    updateData["flags.dnd5e.-=scaling"] = null;
+    updateData["flags.dnd5e.use.-=cause"] = null;
+    updateData["flags.dnd5e.use.-=concentrationId"] = null;
+    updateData["flags.dnd5e.use.-=consumed"] = null;
+    updateData["flags.dnd5e.use.-=effects"] = null;
+    updateData["flags.dnd5e.use.-=spellLevel"] = null;
+  }
   return updateData;
 }
 

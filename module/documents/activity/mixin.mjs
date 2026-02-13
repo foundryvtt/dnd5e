@@ -199,10 +199,10 @@ export default function ActivityMixin(Base) {
         create: true,
         data: {
           flags: {
-            dnd5e: {
-              ...this.messageFlags,
-              messageType: "usage"
-            }
+            dnd5e: this.messageFlags
+          },
+          system: {
+            effects: this.applicableEffects?.map(e => e.id)
           }
         },
         hasConsumption: usageConfig.hasConsumption
@@ -244,7 +244,7 @@ export default function ActivityMixin(Base) {
         if ( effect ) {
           results.effects ??= [];
           results.effects.push(effect);
-          foundry.utils.setProperty(messageConfig.data, "flags.dnd5e.use.concentrationId", effect.id);
+          foundry.utils.setProperty(messageConfig.data, "system.concentration", effect.id);
         }
         if ( usageConfig.concentration?.end ) {
           const deleted = await item.actor.endConcentration(usageConfig.concentration.end);
@@ -272,8 +272,7 @@ export default function ActivityMixin(Base) {
 
       // Trigger any primary action provided by this activity
       if ( usageConfig.subsequentActions !== false ) {
-        const deltas = results.message?.flags?.dnd5e?.use?.consumed
-          ?? results.message?.data?.flags?.dnd5e?.use?.consumed;
+        const deltas = results.message?.system?.deltas ?? results.message?.data?.system?.deltas;
         const consumed = this.createConsumedFlag(this.actor, deltas);
         if ( consumed ) item.updateSource({ "flags.dnd5e.consumed": consumed });
         activity._triggerSubsequentActions(usageConfig, results);
@@ -320,10 +319,10 @@ export default function ActivityMixin(Base) {
 
       const consumed = await this.#applyUsageUpdates(updates);
       if ( !foundry.utils.isEmpty(consumed) ) {
-        foundry.utils.setProperty(messageConfig, "data.flags.dnd5e.use.consumed", consumed);
+        foundry.utils.setProperty(messageConfig, "data.system.deltas", consumed);
       }
       if ( usageConfig.cause?.activity ) {
-        foundry.utils.setProperty(messageConfig, "data.flags.dnd5e.use.cause", usageConfig.cause.activity);
+        foundry.utils.setProperty(messageConfig, "data.system.cause", usageConfig.cause.activity);
       }
 
       /**
@@ -390,7 +389,7 @@ export default function ActivityMixin(Base) {
       updates.create = updates.create?.filter(i => !this.actor.items.has(i._id));
       updates.delete = updates.delete?.filter(i => this.actor.items.has(i));
 
-      // Create the consumed flag
+      // Create the consumed deltas
       const consumed = ActorDeltasField.getDeltas(this.actor, updates);
 
       // Update documents with consumption
@@ -504,12 +503,12 @@ export default function ActivityMixin(Base) {
         const level = this.actor.system.spells?.[usageConfig.spell?.slot]?.level;
         if ( level ) {
           usageConfig.scaling = level - item.system.level;
-          foundry.utils.setProperty(messageConfig, "data.flags.dnd5e.use.spellLevel", level);
+          foundry.utils.setProperty(messageConfig, "data.system.spellLevel", level);
         }
       }
 
       if ( usageConfig.scaling ) {
-        foundry.utils.setProperty(messageConfig, "data.flags.dnd5e.scaling", usageConfig.scaling);
+        foundry.utils.setProperty(messageConfig, "data.system.scaling", usageConfig.scaling);
         if ( usageConfig.scaling !== item.flags.dnd5e?.scaling ) {
           item.actor._embeddedPreparation = true;
           item.updateSource({ "flags.dnd5e.scaling": usageConfig.scaling });
@@ -688,7 +687,7 @@ export default function ActivityMixin(Base) {
 
       // Include spell level in the subtitle.
       if ( this.item.type === "spell" ) {
-        const spellLevel = foundry.utils.getProperty(message, "data.flags.dnd5e.use.spellLevel");
+        const spellLevel = foundry.utils.getProperty(message, "data.system.spellLevel");
         const { spellLevels, spellSchools } = CONFIG.DND5E;
         data.subtitle = [spellLevels[spellLevel], spellSchools[this.item.system.school]?.label].filterJoin(" &bull; ");
       }
@@ -718,7 +717,7 @@ export default function ActivityMixin(Base) {
     _finalizeMessageConfig(usageConfig, messageConfig, results) {
       messageConfig.data.rolls = (messageConfig.data.rolls ?? []).concat(results.updates.rolls);
       const effects = this.applicableEffects?.map(e => e.id);
-      if ( effects ) foundry.utils.setProperty(messageConfig.data, "flags.dnd5e.use.effects", effects);
+      if ( effects ) foundry.utils.setProperty(messageConfig.data, "system.effects", effects);
     }
 
     /* -------------------------------------------- */
@@ -766,10 +765,9 @@ export default function ActivityMixin(Base) {
      * @returns {boolean}
      */
     shouldHideChatButton(button, message) {
-      const flag = message.getFlag("dnd5e", "use.consumed");
       switch ( button.dataset.action ) {
-        case "consumeResource": return !!flag;
-        case "refundResource": return !flag;
+        case "consumeResource": return !!message.system.deltas;
+        case "refundResource": return !message.system.deltas;
         case "placeTemplate": return !game.user.can("TEMPLATE_CREATE") || !game.canvas.scene;
       }
       return false;
@@ -786,12 +784,16 @@ export default function ActivityMixin(Base) {
     async _createUsageMessage(message) {
       const context = await this._usageChatContext(message);
       const messageConfig = foundry.utils.mergeObject({
-        rollMode: game.settings.get("core", "rollMode"),
         data: {
           content: await foundry.applications.handlebars.renderTemplate(this.metadata.usage.chatCard, context),
-          speaker: ChatMessage.getSpeaker({ actor: this.item.actor }),
-          title: `${this.item.name} - ${this.name}`
-        }
+          flags: {
+            core: { canPopout: true }
+          },
+          speaker: ChatMessage.implementation.getSpeaker({ actor: this.item.actor }),
+          title: `${this.item.name} - ${this.name}`,
+          type: "usage"
+        },
+        rollMode: game.settings.get("core", "rollMode")
       }, message);
 
       /**
@@ -817,6 +819,16 @@ export default function ActivityMixin(Base) {
 
       return card;
     }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Apply any activity-type specific modifications to the rendered chat card.
+     * @param {ChatMessage} message  Associated chat message.
+     * @param {HTMLElement} element  Element in the chat log.
+     * @abstract
+     */
+    onRenderChatCard(message, element) {}
 
     /* -------------------------------------------- */
 
@@ -992,8 +1004,8 @@ export default function ActivityMixin(Base) {
      * @param {ChatMessage5e} message  Message associated with the activation.
      */
     async #onChatAction(event, target, message) {
-      const consumed = this.createConsumedFlag(message.getAssociatedActor(), message.getFlag("dnd5e", "use.consumed"));
-      const scaling = message.getFlag("dnd5e", "scaling") ?? 0;
+      const consumed = this.createConsumedFlag(message.getAssociatedActor(), message.system.deltas);
+      const scaling = message.system.scaling ?? 0;
       const item = (consumed || scaling) ? this.item.clone({
         "flags.dnd5e": { consumed, scaling }
       }, { keepId: true }) : this.item;
@@ -1062,9 +1074,9 @@ export default function ActivityMixin(Base) {
      */
     async #consumeResource(event, target, message) {
       const messageConfig = {};
-      const scaling = message.getFlag("dnd5e", "scaling");
+      const scaling = message.system.scaling;
       const usageConfig = { consume: true, event, scaling };
-      const linkedActivity = this.getLinkedActivity(message.getFlag("dnd5e", "use.cause"));
+      const linkedActivity = this.getLinkedActivity(message.system.cause);
       if ( linkedActivity ) usageConfig.cause = {
         activity: linkedActivity.relativeUUID, resources: linkedActivity.consumption.targets.length > 0
       };
@@ -1081,10 +1093,9 @@ export default function ActivityMixin(Base) {
      * @param {ChatMessage5e} message  Message associated with the activation.
      */
     async #refundResource(event, target, message) {
-      const consumed = message.getFlag("dnd5e", "use.consumed");
-      if ( !foundry.utils.isEmpty(consumed) ) {
-        await this.refund(consumed);
-        await message.unsetFlag("dnd5e", "use.consumed");
+      if ( message.system.deltas ) {
+        await this.refund(message.system.deltas);
+        await message.update({ "system.deltas": null });
       }
     }
 
