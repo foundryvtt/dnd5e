@@ -46,7 +46,7 @@ export class ActivityField extends foundry.data.fields.ObjectField {
   _cleanType(value, options, _state) {
     if ( !(typeof value === "object") ) value = {};
 
-    const cls = this.getModel(value);
+    const cls = this.getModel(value) ?? this.getModel(_state?.source);
     if ( cls ) return cls.cleanData(value, options, _state);
     return value;
   }
