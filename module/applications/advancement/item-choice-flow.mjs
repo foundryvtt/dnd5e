@@ -93,7 +93,6 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     }, {});
 
     const levelConfig = config.choices[this.level];
-    let max = levelConfig.count ?? 0;
     context.replaceable = levelConfig.replacement;
     context.noReplacement = !counts.replacement;
 
@@ -135,7 +134,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     const added = [];
     const dropped = [];
     const selected = this.selected;
-    for ( const [id, uuid] of Object.entries(value.added[this.level] ?? {}) ) {
+    for ( const [, uuid] of Object.entries(value.added[this.level] ?? {}) ) {
       const item = await fromUuid(uuid);
       if ( item ) {
         added.push(item);
@@ -310,6 +309,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
   /**
    * Handle dropping item onto the flow.
    * @param {DragEvent} event  The concluding drag event.
+   * @returns {false|null}
    * @protected
    */
   async _onDrop(event) {

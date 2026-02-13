@@ -118,6 +118,7 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
       }, -Infinity);
       if ( Number.isFinite(replacedLevel) ) {
         this.actor.items.delete(original);
+        this.actor.reset();
         this.updateSource({ [`value.replaced.${level}`]: { level: replacedLevel, original } });
       }
     }
@@ -153,6 +154,7 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
         throw new ItemChoiceAdvancement.ERROR(game.i18n.localize("DND5E.ADVANCEMENT.ItemChoice.Warning.NoOriginal"));
       }
       this.actor.items.delete(data.replaced.original);
+      this.actor.reset();
       this.updateSource({ [`value.replaced.${level}`]: data.replaced });
     }
   }
