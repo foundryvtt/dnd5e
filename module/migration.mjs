@@ -692,14 +692,18 @@ export function migrateMacroData(macro, migrationData) {
  */
 export function migrateMessageData(messageData) {
   const updateData = {};
-  if ( (messageData.flags?.dnd5e?.messageType === "usage") && (messageData.type !== "usage") ) {
+  const { flags } = messageData;
+  if ( (flags?.dnd5e?.messageType === "usage") && (messageData.type !== "usage") ) {
+    const use = flags.dnd5e.use;
     updateData.type = "usage";
+    updateData["==system"] = {
+      cause: use?.cause,
+      deltas: use?.consumed,
+      effects: use?.effects
+    };
     updateData["flags.dnd5e.-=messageType"] = null;
-    updateData["system.cause"] = messageData.flags?.dnd5e?.use?.cause;
     updateData["flags.dnd5e.use.-=cause"] = null;
-    updateData["system.effects"] = messageData.flags?.dnd5e?.use?.effects;
     updateData["flags.dnd5e.use.-=effects"] = null;
-    updateData["system.deltas"] = messageData.flags?.dnd5e?.use?.consumed;
     updateData["flags.dnd5e.use.-=consumed"] = null;
   }
   return updateData;

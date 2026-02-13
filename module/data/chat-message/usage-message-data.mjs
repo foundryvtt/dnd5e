@@ -105,7 +105,7 @@ export default class UsageMessageData extends ChatMessageDataModel {
   _displayChatActionButtons(element) {
     if ( this.parent.shouldDisplayChallenge ) element.dataset.displayChallenge = "";
 
-    const isCreator = game.user.isGM || this.actor?.isOwner || (this.parent.author.id === game.user.id);
+    const isCreator = game.user.isGM || this.actor?.isOwner || this.parent.isAuthor;
     for ( const button of element.querySelectorAll(".card-buttons button") ) {
       if ( button.dataset.visibility === "all" ) continue;
 

@@ -272,8 +272,7 @@ export default function ActivityMixin(Base) {
 
       // Trigger any primary action provided by this activity
       if ( usageConfig.subsequentActions !== false ) {
-        const deltas = results.message?.flags?.dnd5e?.use?.consumed
-          ?? results.message?.data?.flags?.dnd5e?.use?.consumed;
+        const deltas = results.message?.system?.deltas ?? results.message?.data?.system?.deltas;
         const consumed = this.createConsumedFlag(this.actor, deltas);
         if ( consumed ) item.updateSource({ "flags.dnd5e.consumed": consumed });
         activity._triggerSubsequentActions(usageConfig, results);
@@ -718,7 +717,7 @@ export default function ActivityMixin(Base) {
     _finalizeMessageConfig(usageConfig, messageConfig, results) {
       messageConfig.data.rolls = (messageConfig.data.rolls ?? []).concat(results.updates.rolls);
       const effects = this.applicableEffects?.map(e => e.id);
-      if ( effects ) foundry.utils.setProperty(messageConfig.data, "flags.dnd5e.use.effects", effects);
+      if ( effects ) foundry.utils.setProperty(messageConfig.data, "system.effects", effects);
     }
 
     /* -------------------------------------------- */
@@ -1005,7 +1004,7 @@ export default function ActivityMixin(Base) {
      * @param {ChatMessage5e} message  Message associated with the activation.
      */
     async #onChatAction(event, target, message) {
-      const consumed = this.createConsumedFlag(message.getAssociatedActor(), message.getFlag("dnd5e", "use.consumed"));
+      const consumed = this.createConsumedFlag(message.getAssociatedActor(), message.system.deltas);
       const scaling = message.getFlag("dnd5e", "scaling") ?? 0;
       const item = (consumed || scaling) ? this.item.clone({
         "flags.dnd5e": { consumed, scaling }
