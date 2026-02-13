@@ -81,14 +81,7 @@ export default class ChatMessage5e extends ChatMessage {
 
   /** @inheritDoc */
   static migrateData(source) {
-    if ( (source.type === "base") && foundry.utils.hasProperty(source, "flags.dnd5e.bastion") ) {
-      source.type = "orders" in source.flags.dnd5e.bastion ? "bastionTurn" : "bastionAttack";
-      source.system ??= source.flags.dnd5e.bastion;
-      delete source.flags.dnd5e.bastion;
-    }
-
     source = super.migrateData(source);
-
     if ( foundry.utils.hasProperty(source, "flags.dnd5e.itemData") ) {
       foundry.utils.setProperty(source, "flags.dnd5e.item.data", source.flags.dnd5e.itemData);
       delete source.flags.dnd5e.itemData;
