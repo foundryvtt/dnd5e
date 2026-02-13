@@ -547,12 +547,14 @@ export default class WeaponData extends ItemDataModel.mixin(
     }
 
     context.parts = ["dnd5e.details-weapon", "dnd5e.field-uses"];
-    context.damageTypes = Object.entries(CONFIG.DND5E.damageTypes).map(([value, { label }]) => {
+    const typeOptions = Object.entries(CONFIG.DND5E.damageTypes).map(([value, config]) => {
       return {
-        value, label,
+        ...config, value,
         selected: context.source.damage.base.types.includes?.(value) ?? context.source.damage.base.types.has(value)
       };
     });
+    const [other, physical] = typeOptions.partition(config => !!config.isPhysical);
+    context.damageTypes = [...physical, { rule: true }, ...other];
     const makeDenominationOptions = placeholder => [
       { value: "", label: placeholder ? `d${placeholder}` : "" },
       { rule: true },
