@@ -698,13 +698,19 @@ export function migrateMessageData(messageData) {
     updateData.type = "usage";
     updateData["==system"] = {
       cause: use?.cause,
+      concentration: use?.concentrationId,
       deltas: use?.consumed,
-      effects: use?.effects
+      effects: use?.effects,
+      scaling: use?.scaling,
+      spellLevel: use?.spellLevel
     };
     updateData["flags.dnd5e.-=messageType"] = null;
+    updateData["flags.dnd5e.-=scaling"] = null;
     updateData["flags.dnd5e.use.-=cause"] = null;
-    updateData["flags.dnd5e.use.-=effects"] = null;
+    updateData["flags.dnd5e.use.-=concentrationId"] = null;
     updateData["flags.dnd5e.use.-=consumed"] = null;
+    updateData["flags.dnd5e.use.-=effects"] = null;
+    updateData["flags.dnd5e.use.-=spellLevel"] = null;
   }
   return updateData;
 }

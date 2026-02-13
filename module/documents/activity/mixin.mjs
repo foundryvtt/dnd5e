@@ -244,7 +244,7 @@ export default function ActivityMixin(Base) {
         if ( effect ) {
           results.effects ??= [];
           results.effects.push(effect);
-          foundry.utils.setProperty(messageConfig.data, "flags.dnd5e.use.concentrationId", effect.id);
+          foundry.utils.setProperty(messageConfig.data, "system.concentration", effect.id);
         }
         if ( usageConfig.concentration?.end ) {
           const deleted = await item.actor.endConcentration(usageConfig.concentration.end);
@@ -503,12 +503,12 @@ export default function ActivityMixin(Base) {
         const level = this.actor.system.spells?.[usageConfig.spell?.slot]?.level;
         if ( level ) {
           usageConfig.scaling = level - item.system.level;
-          foundry.utils.setProperty(messageConfig, "data.flags.dnd5e.use.spellLevel", level);
+          foundry.utils.setProperty(messageConfig, "data.system.spellLevel", level);
         }
       }
 
       if ( usageConfig.scaling ) {
-        foundry.utils.setProperty(messageConfig, "data.flags.dnd5e.scaling", usageConfig.scaling);
+        foundry.utils.setProperty(messageConfig, "data.system.scaling", usageConfig.scaling);
         if ( usageConfig.scaling !== item.flags.dnd5e?.scaling ) {
           item.actor._embeddedPreparation = true;
           item.updateSource({ "flags.dnd5e.scaling": usageConfig.scaling });
@@ -687,7 +687,7 @@ export default function ActivityMixin(Base) {
 
       // Include spell level in the subtitle.
       if ( this.item.type === "spell" ) {
-        const spellLevel = foundry.utils.getProperty(message, "data.flags.dnd5e.use.spellLevel");
+        const spellLevel = foundry.utils.getProperty(message, "data.system.spellLevel");
         const { spellLevels, spellSchools } = CONFIG.DND5E;
         data.subtitle = [spellLevels[spellLevel], spellSchools[this.item.system.school]?.label].filterJoin(" &bull; ");
       }
@@ -1005,7 +1005,7 @@ export default function ActivityMixin(Base) {
      */
     async #onChatAction(event, target, message) {
       const consumed = this.createConsumedFlag(message.getAssociatedActor(), message.system.deltas);
-      const scaling = message.getFlag("dnd5e", "scaling") ?? 0;
+      const scaling = message.system.scaling ?? 0;
       const item = (consumed || scaling) ? this.item.clone({
         "flags.dnd5e": { consumed, scaling }
       }, { keepId: true }) : this.item;
@@ -1074,7 +1074,7 @@ export default function ActivityMixin(Base) {
      */
     async #consumeResource(event, target, message) {
       const messageConfig = {};
-      const scaling = message.getFlag("dnd5e", "scaling");
+      const scaling = message.system.scaling;
       const usageConfig = { consume: true, event, scaling };
       const linkedActivity = this.getLinkedActivity(message.system.cause);
       if ( linkedActivity ) usageConfig.cause = {

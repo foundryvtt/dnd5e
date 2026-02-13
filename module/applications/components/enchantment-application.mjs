@@ -81,7 +81,7 @@ export default class EnchantmentApplicationElement extends MaybeAdoptable {
 
     // Calculate the maximum targets
     let item = this.enchantmentItem;
-    const scaling = this.chatMessage.getFlag("dnd5e", "scaling");
+    const scaling = this.chatMessage.system.scaling;
     if ( scaling ) item = item.clone({ "flags.dnd5e.scaling": scaling });
     const activity = item.system.activities.get(this.enchantmentActivity.id);
     const maxTargets = activity.target?.affects?.count;
@@ -151,7 +151,7 @@ export default class EnchantmentApplicationElement extends MaybeAdoptable {
     if ( !droppedItem ) return;
 
     // If concentration is required, ensure it is still being maintained & GM is present
-    const concentrationId = this.chatMessage.getFlag("dnd5e", "use.concentrationId");
+    const concentrationId = this.chatMessage.system.concentration;
     const concentration = this.enchantmentActivity.actor.effects.get(concentrationId);
     if ( concentrationId && !concentration ) {
       ui.notifications.error("DND5E.ENCHANT.Warning.ConcentrationEnded", { console: false, localize: true });

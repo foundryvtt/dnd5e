@@ -180,8 +180,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
    * @protected
    */
   async _applyEffectToActor(effect, actor) {
-    const concentration = this.chatMessage.getAssociatedActor()?.effects
-      .get(this.chatMessage.getFlag("dnd5e", "use.concentrationId"));
+    const concentration = this.chatMessage.getAssociatedActor()?.effects.get(this.chatMessage.system.concentration);
     const origin = concentration ?? effect;
     if ( !game.user.isGM && !actor.isOwner ) {
       throw new Error(game.i18n.localize("DND5E.EffectApplyWarningOwnership"));
@@ -191,8 +190,8 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       flags: {
         dnd5e: {
           dependentOn: origin.uuid,
-          scaling: this.chatMessage.getFlag("dnd5e", "scaling"),
-          spellLevel: this.chatMessage.getFlag("dnd5e", "use.spellLevel")
+          scaling: this.chatMessage.system.scaling,
+          spellLevel: this.chatMessage.system.spellLevel
         }
       }
     };

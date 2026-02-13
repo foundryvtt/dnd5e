@@ -103,7 +103,7 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
     if ( !enchantmentProfile || !message.isContentVisible ) return;
 
     // Ensure concentration is still being maintained
-    const concentrationId = message.getFlag("dnd5e", "use.concentrationId");
+    const concentrationId = message.system.concentration;
     if ( concentrationId && !message.getAssociatedActor()?.effects.get(concentrationId) ) return;
 
     // Create the enchantment tray
