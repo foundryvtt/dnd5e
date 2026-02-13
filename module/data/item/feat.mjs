@@ -328,12 +328,8 @@ export default class FeatData extends ItemDataModel.mixin(
     const messages = [];
 
     // If a feature has item pre-requisites, make sure the other items exist on the actor
-    const pendingAddition = new Set(added.map(i => i.system.identifier ?? formatIdentifier(i.name)));
-    const pendingRemoval = new Set(removed.map(i => i.system.identifier ?? formatIdentifier(i.name)));
-    const someExist = !this.prerequisites.items.size || Array.from(this.prerequisites.items).some(i => {
-      return (actor.identifiedItems.get(i)?.size || pendingAddition.has(i)) && !pendingRemoval.has(i);
-    });
-    if ( !someExist ) {
+    if ( this.prerequisites.items.size
+      && !Array.from(this.prerequisites.items).some(i => actor.identifiedItems.get(i)?.size) ) {
       messages.push(game.i18n.format("DND5E.Prerequisites.Warning.MissingItem", {
         items: game.i18n.getListFormatter({ type: "disjunction" }).format(Array.from(this.prerequisites.items))
       }));
