@@ -64,9 +64,9 @@
 
 /**
  * @typedef ItemChoiceReplacement
- * @property {number} level        Level at which the original item was chosen.
- * @property {string} original     ID of the original item that was replaced.
- * @property {string} replacement  ID of the replacement item.
+ * @property {number} level          Level at which the original item was chosen.
+ * @property {string} original       ID of the original item that was replaced.
+ * @property {string} [replacement]  ID of the replacement item.
  */
 
 /**

@@ -46,7 +46,7 @@ export default class ItemGrantFlow extends AdvancementFlow {
   getSelectAbilities() {
     const config = this.advancement.configuration;
     return config.spell?.ability.size > 1 ? {
-      field: new StringField({ required: true, blank: false }),
+      field: new StringField({ required: true, blank: false, label: game.i18n.localize("DND5E.SpellAbility") }),
       options: config.spell.ability.map(value => ({ value, label: CONFIG.DND5E.abilities[value]?.label })),
       value: this.advancement.value.ability
     } : null;
