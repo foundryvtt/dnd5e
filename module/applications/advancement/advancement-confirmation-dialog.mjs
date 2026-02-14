@@ -32,8 +32,8 @@ export default class AdvancementConfirmationDialog extends Dialog5e {
   /* -------------------------------------------- */
 
   /**
-   * Result of the migration dialog.
-   * @type {Advancement[]|null}
+   * Result of the deletion dialog.
+   * @type {boolean|null}
    */
   result = null;
 
@@ -43,7 +43,7 @@ export default class AdvancementConfirmationDialog extends Dialog5e {
 
   /**
    * Handle clicking the migrate button.
-   * @this {AdvancementMigrationDialog}
+   * @this {AdvancementConfirmationDialog}
    * @param {Event} event         Triggering click event.
    * @param {HTMLElement} target  Button that was clicked.
    */
@@ -65,8 +65,8 @@ export default class AdvancementConfirmationDialog extends Dialog5e {
   static forDelete(item) {
     return this.createDialog(
       item,
-      game.i18n.localize("DND5E.AdvancementDeleteConfirmationTitle"),
-      game.i18n.localize("DND5E.AdvancementDeleteConfirmationMessage"),
+      game.i18n.localize("DND5E.ADVANCEMENT.Deletion.Delete.Title"),
+      game.i18n.localize("DND5E.ADVANCEMENT.Deletion.Delete.Message"),
       {
         icon: "fa-solid fa-trash",
         label: game.i18n.localize("Delete")
@@ -84,8 +84,8 @@ export default class AdvancementConfirmationDialog extends Dialog5e {
   static forLevelDown(item) {
     return this.createDialog(
       item,
-      game.i18n.localize("DND5E.AdvancementLevelDownConfirmationTitle"),
-      game.i18n.localize("DND5E.AdvancementLevelDownConfirmationMessage"),
+      game.i18n.localize("DND5E.ADVANCEMENT.Deletion.LevelDown.Title"),
+      game.i18n.localize("DND5E.ADVANCEMENT.Deletion.LevelDown.Message"),
       {
         icon: "fa-solid fa-sort-numeric-down-alt",
         label: game.i18n.localize("DND5E.LevelActionDecrease")

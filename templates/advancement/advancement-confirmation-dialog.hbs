@@ -1,9 +1,12 @@
 <section class="flexcol">
     <p class="note warn">{{ content }}</p>
-    <div class="form-group">
-        <label for="{{ partId }}-apply">{{ localize "DND5E.AdvancementDeleteConfirmationLabel" }}</label>
-        <div class="form-fields">
-            <dnd5e-checkbox id="{{ partId }}-apply" name="apply-advancement" checked></dnd5e-checkbox>
+    <fieldset>
+        <legend>{{ localize "DND5E.ADVANCEMENT.Deletion.Options" }}</legend>
+        <div class="form-group">
+            <label for="{{ partId }}-apply">{{ localize "DND5E.ADVANCEMENT.Deletion.Label" }}</label>
+            <div class="form-fields">
+                <dnd5e-checkbox id="{{ partId }}-apply" name="apply-advancement" checked></dnd5e-checkbox>
+            </div>
         </div>
-    </div>
+    </fieldset>
 </section>
