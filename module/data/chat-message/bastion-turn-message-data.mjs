@@ -138,7 +138,7 @@ export default class BastionTurnMessageData extends ChatMessageDataModel {
     const { gp } = this.actor?.system.currency ?? {};
     if ( !this.gold.value || this.gold.claimed || (gp === undefined) ) return;
     await this.actor.update({ "system.currency.gp": gp + this.gold.value });
-    this.parent.update({ "system.gold.claimed": true } } });
+    this.parent.update({ "system.gold.claimed": true });
   }
 
   /* -------------------------------------------- */
