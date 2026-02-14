@@ -693,6 +693,7 @@ export function migrateMacroData(macro, migrationData) {
 export function migrateMessageData(messageData) {
   const updateData = {};
   const { flags } = messageData;
+
   if ( (flags?.dnd5e?.messageType === "usage") && (messageData.type !== "usage") ) {
     const use = flags.dnd5e.use;
     updateData.type = "usage";
@@ -712,6 +713,14 @@ export function migrateMessageData(messageData) {
     updateData["flags.dnd5e.use.-=effects"] = null;
     updateData["flags.dnd5e.use.-=spellLevel"] = null;
   }
+
+  else if ( flags?.dnd5e?.bastion && (messageData.type === "base") ) {
+    const bastion = flags.dnd5e.bastion;
+    updateData.type = "orders" in bastion ? "bastionTurn" : "bastionAttack";
+    updateData["==system"] = bastion;
+    updateData["flags.dnd5e.-=bastion"] = null;
+  }
+
   return updateData;
 }
 
