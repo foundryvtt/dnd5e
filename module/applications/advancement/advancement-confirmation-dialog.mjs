@@ -1,16 +1,60 @@
+import Dialog5e from "../api/dialog.mjs";
+
 /**
  * Dialog to confirm the deletion of an embedded item with advancement or decreasing a class level.
  */
-export default class AdvancementConfirmationDialog extends Dialog {
+export default class AdvancementConfirmationDialog extends Dialog5e {
 
   /** @inheritDoc */
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      template: "systems/dnd5e/templates/advancement/advancement-confirmation-dialog.hbs",
-      jQuery: false
-    });
+  static DEFAULT_OPTIONS = {
+    actions: {
+      cancel: AdvancementConfirmationDialog.#onComplete,
+      complete: AdvancementConfirmationDialog.#onComplete
+    },
+    classes: ["advancement-deletion", "titlebar"],
+    position: {
+      width: 350
+    }
+  };
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  static PARTS = {
+    ...super.PARTS,
+    content: {
+      template: "systems/dnd5e/templates/advancement/advancement-confirmation-dialog.hbs"
+    }
+  };
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Result of the deletion dialog.
+   * @type {boolean|null}
+   */
+  result = null;
+
+  /* -------------------------------------------- */
+  /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
+
+  /**
+   * Handle clicking the migrate button.
+   * @this {AdvancementConfirmationDialog}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   */
+  static async #onComplete(event, target) {
+    this.result = target.dataset.action === "cancel" ? null
+      : this.element.querySelector('[name="apply-advancement"]').checked;
+    this.close();
   }
 
+  /* -------------------------------------------- */
+  /*  Factory Methods                             */
   /* -------------------------------------------- */
 
   /**
@@ -21,10 +65,10 @@ export default class AdvancementConfirmationDialog extends Dialog {
   static forDelete(item) {
     return this.createDialog(
       item,
-      game.i18n.localize("DND5E.AdvancementDeleteConfirmationTitle"),
-      game.i18n.localize("DND5E.AdvancementDeleteConfirmationMessage"),
+      game.i18n.localize("DND5E.ADVANCEMENT.Deletion.Delete.Title"),
+      game.i18n.localize("DND5E.ADVANCEMENT.Deletion.Delete.Message"),
       {
-        icon: '<i class="fas fa-trash"></i>',
+        icon: "fa-solid fa-trash",
         label: game.i18n.localize("Delete")
       }
     );
@@ -40,10 +84,10 @@ export default class AdvancementConfirmationDialog extends Dialog {
   static forLevelDown(item) {
     return this.createDialog(
       item,
-      game.i18n.localize("DND5E.AdvancementLevelDownConfirmationTitle"),
-      game.i18n.localize("DND5E.AdvancementLevelDownConfirmationMessage"),
+      game.i18n.localize("DND5E.ADVANCEMENT.Deletion.LevelDown.Title"),
+      game.i18n.localize("DND5E.ADVANCEMENT.Deletion.LevelDown.Message"),
       {
-        icon: '<i class="fas fa-sort-numeric-down-alt"></i>',
+        icon: "fa-solid fa-sort-numeric-down-alt",
         label: game.i18n.localize("DND5E.LevelActionDecrease")
       }
     );
@@ -62,25 +106,27 @@ export default class AdvancementConfirmationDialog extends Dialog {
   static createDialog(item, title, message, continueButton) {
     return new Promise((resolve, reject) => {
       const dialog = new this({
-        title: `${title}: ${item.name}`,
-        content: message,
-        buttons: {
-          continue: foundry.utils.mergeObject(continueButton, {
-            callback: html => {
-              const checkbox = html.querySelector('input[name="apply-advancement"]');
-              resolve(checkbox.checked);
-            }
+        buttons: [
+          foundry.utils.mergeObject(continueButton, {
+            action: "complete",
+            default: true,
+            type: "button"
           }),
-          cancel: {
-            icon: '<i class="fas fa-times"></i>',
+          {
+            action: "cancel",
+            icon: "fa-solid fa-times",
             label: game.i18n.localize("Cancel"),
-            callback: html => reject(null)
+            type: "button"
           }
-        },
-        default: "continue",
-        close: () => reject(null)
+        ],
+        content: message,
+        window: {
+          title: `${title}: ${item.name}`
+        }
       });
-      dialog.render(true);
+      dialog.addEventListener("close", () =>
+        dialog.result === null ? reject(null) : resolve(dialog.result), { once: true });
+      dialog.render({ force: true });
     });
   }
 
