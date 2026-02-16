@@ -1,7 +1,8 @@
 <section class="flexcol">
+    {{#if gear.length}}
     <div class="items-section card">
         <div class="items-header header">
-            <h4 class="item-name">{{ localize "DND5E.Gear.Label" }}</h4>
+            <h3 class="item-name">{{ localize "DND5E.Gear.Label" }}</h3>
             <div class="item-header item-quantity">{{ localize "DND5E.Quantity" }}</div>
             <div class="item-header item-controls"></div>
         </div>
@@ -13,6 +14,9 @@
                         {{ dnd5e-icon img alt=name classes="gold-icon" }}
                         <div class="name-stacked">
                             <div class="title">{{ name }}</div>
+                            {{#if subtitle}}
+                            <div class="subtitle">{{ subtitle }}</div>
+                            {{/if}}
                         </div>
                     </div>
                     <div class="item-detail item-quantity">
@@ -32,6 +36,7 @@
             {{/each}}
         </ul>
     </div>
+    {{/if}}
 
     <div class="drop-area drop-area-lg roboto-upper">
         {{ localize "DND5E.Gear.Configuration.Drop" }}

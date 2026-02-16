@@ -46,6 +46,7 @@ export default class GearConfig extends BaseConfigSheet {
       return {
         data, index,
         name: item.name ?? "", img: item.img, uuid: item.uuid,
+        subtitle: game.i18n.localize(CONFIG.Item.typeLabels[item.type] ?? ""),
         prefix: `system.details.treasure.gear.${index}.`
       };
     }).sort((lhs, rhs) => lhs.name.localeCompare(rhs.name, game.i18n.lang));

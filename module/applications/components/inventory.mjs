@@ -426,7 +426,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
       group: "state"
     }, {
       name: inGear ? "DND5E.Gear.Action.Remove" : "DND5E.Gear.Action.Add",
-      icon: '<i class="fa-solid fa-person-hiking fa-fw"></i>',
+      icon: '<i class="fa-solid fa-axe fa-fw"></i>',
       condition: () => !!this.actor.system.details?.treasure?.gear && item.isOwner && !compendiumLocked
         && !!CONFIG.Item.dataModels[item.type]?.schema.fields.quantity,
       callback: li => this._onAction(li, "toggleGear"),
