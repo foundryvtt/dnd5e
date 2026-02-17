@@ -71,6 +71,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+    compendiumGearSource: true,
     hasEffects: true,
     enchantable: true
   }, {inplace: false}));
@@ -342,6 +343,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
   async _preCreate(data, options, user) {
     if ( (await super._preCreate(data, options, user)) === false ) return false;
     await this.preCreateEquipped(data, options, user);
+    await this.preCreateGear(data, options, user);
   }
 
   /* -------------------------------------------- */

@@ -482,7 +482,9 @@ export function migrateActorData(actor, actorData, migrationData, flags={}, { ac
   const items = actor.items.reduce((arr, i) => {
     // Migrate the Owned Item
     const itemData = i instanceof CONFIG.Item.documentClass ? i.toObject() : i;
-    const itemFlags = { bypassVersionCheck: flags.bypassVersionCheck ?? false, persistSourceMigration: false };
+    const itemFlags = {
+      actorData, bypassVersionCheck: flags.bypassVersionCheck ?? false, persistSourceMigration: false
+    };
     let itemUpdate = migrateItemData(i, itemData, migrationData, itemFlags);
 
     if ( (itemData.type === "background") && (actorData.system?.details?.background !== itemData._id) ) {
@@ -565,6 +567,17 @@ export function migrateItemData(item, itemData, migrationData, flags={}) {
       .union(new Set(migratedProperties));
     updateData["system.properties"] = Array.from(properties);
     updateData["flags.dnd5e.-=migratedProperties"] = null;
+  }
+
+  // Migrate gear property
+  if ( (flags.actorData?.type === "npc") && item.system.quantity && (item.system.type?.value !== "natural")
+    && (!["equipment", "weapon"].includes(item.type) || item._stats.compendiumSource)
+    && !item._stats.compendiumSource?.startsWith("Compendium.dnd-monster-manual.features.")
+    && (flags.bypassVersionCheck || foundry.utils.isNewerVersion("5.3.0", item._stats.systemVersion)) ) {
+    if ( !("system.properties" in updateData) ) {
+      updateData["system.properties"] = foundry.utils.getProperty(itemData, "system.properties") ?? [];
+    }
+    updateData["system.properties"].push("gear");
   }
 
   if ( foundry.utils.getProperty(itemData, "flags.dnd5e.persistSourceMigration") ) {

@@ -1891,6 +1891,9 @@ DND5E.itemProperties = {
   foc: {
     label: "DND5E.ITEM.Property.Focus"
   },
+  gear: {
+    label: "DND5E.ITEM.Property.Gear"
+  },
   hvy: {
     label: "DND5E.ITEM.Property.Heavy"
   },

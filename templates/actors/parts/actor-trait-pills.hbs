@@ -4,12 +4,11 @@
         {{#if icon}}<i class="{{ icon }}"></i>
         {{~else if svg}}<dnd5e-icon src="systems/dnd5e/icons/svg/{{ svg }}.svg"></dnd5e-icon>{{/if}}
         <span class="roboto-upper">{{ localize label }}</span>
-        {{#if @root.editable}}
+        {{#if (and @root.editable (or configAction key))}}
         <button type="button" class="config-button unbutton"
                 {{~#if configAction}} data-action="showConfiguration" data-config="{{ configAction }}"
                 {{~else}} data-action="showConfiguration" data-trait="{{ key }}"{{/if}}
-                data-tooltip="{{ localize 'DND5E.TraitConfig' trait=(localize label) }}"
-                aria-label="{{ localize 'DND5E.TraitConfig' trait=(localize label) }}">
+                data-tooltip aria-label="{{ localize 'DND5E.TraitConfig' trait=(localize label) }}">
             <i class="fas fa-cog" inert></i>
         </button>
         {{/if}}
@@ -17,9 +16,7 @@
     <ul class="pills">
         {{#each values}}
         <li class="pill {{ ../color }} {{ color }} {{~ifThen draggable ' draggable' ''}}">
-            {{#if link}}
-            <a class="{{ @root.rollableClass }}" {{ dnd5e-dataset link }}>
-            {{/if}}
+            {{#if link}}<a class="{{ @root.rollableClass }}" {{ dnd5e-dataset link }}>{{/if}}
             {{#each icons}}
             <i class="{{ icon }}" data-tooltip="{{ label }}" aria-label="{{ label }}"></i>
             {{/each}}

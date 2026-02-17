@@ -36,7 +36,9 @@ export default class ItemDescriptionTemplate extends SystemDataModel {
    * @returns {Set<string>}
    */
   get validProperties() {
-    return new Set(CONFIG.DND5E.validProperties[this.parent.type] ?? []);
+    const valid = new Set(CONFIG.DND5E.validProperties[this.parent.type] ?? []);
+    if ( this.parent.actor?.system.isNPC && this.schema.has("quantity") ) valid.add("gear");
+    return valid;
   }
 
   /* -------------------------------------------- */

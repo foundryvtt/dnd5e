@@ -244,15 +244,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   }
 
   /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  static migrateData(source) {
-    source = super.migrateData(source);
-    if ( source.type === "npc" ) NPCData._migrateGear(source);
-    return source;
-  }
-
-  /* -------------------------------------------- */
   /*  Methods                                     */
   /* -------------------------------------------- */
 
@@ -3400,10 +3391,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       if ( (collection === "effects") && ids.includes(ActiveEffect5e.ID.EXHAUSTION) ) {
         await this.update({ "system.attributes.exhaustion": 0 });
       }
-      if ( collection === "items" ) {
-        await this._clearGear(documents);
-        await this.updateEncumbrance(options);
-      }
+      if ( collection === "items" ) await this.updateEncumbrance(options);
       await this._clearFavorites(documents);
     }
     super._onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId);
@@ -3563,22 +3551,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const ids = new Set(documents.map(d => d.getRelativeUUID(this)));
     const favorites = this.system.favorites.filter(f => !ids.has(f.id));
     return this.update({ "system.favorites": favorites });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle clearing gear entries when items are deleted.
-   * @param {Item5e[]} items  The deleted Items.
-   * @returns {Promise<Actor5e>|void}
-   * @protected
-   */
-  _clearGear(items) {
-    if ( !this.system.details?.treasure?.gear ) return;
-    const ids = new Set(items.map(d => ["equipment", "weapon"].includes(d.type) && d._stats.compendiumSource
-      ? d._stats.compendiumSource : d.getRelativeUUID(this)));
-    const gear = this.system.toObject().details.treasure.gear.filter(g => !ids.has(g.uuid));
-    return this.update({ "system.details.treasure.gear": gear });
   }
 
   /* -------------------------------------------- */

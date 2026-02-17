@@ -1,7 +1,6 @@
 import { formatNumber, getPluralRules, simplifyBonus, splitSemicolons } from "../../utils.mjs";
 import { createCheckboxInput } from "../fields.mjs";
 import BaseActorSheet from "./api/base-actor-sheet.mjs";
-import GearConfig from "./config/gear-config.mjs";
 import HabitatConfig from "./config/habitat-config.mjs";
 import TreasureConfig from "./config/treasure-config.mjs";
 
@@ -324,21 +323,18 @@ export default class NPCActorSheet extends BaseActorSheet {
     const { attributes, details } = context.system;
 
     // Gear
-    if ( this.actor.system.details.treasure.gear.length ) {
-      context.gear = this.actor.system.details.treasure.gear
-        .map(({ quantity, uuid }) => {
-          const item = fromUuidSync(uuid, { relative: this.actor, strict: false });
-          if ( !item ) return null;
-          const data = {
-            draggable: true, label: item.name,
-            link: { action: "showDocument", quantity, uuid: item.uuid }
-          };
-          if ( quantity > 1 ) data.value = quantity;
-          return data;
-        })
-        .filter(_ => _)
-        .sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang));
-    }
+    const gear = await this.actor.system.getGear();
+    if ( gear.length ) context.gear = gear.map(item => ({
+      draggable: true,
+      label: item.name,
+      link: {
+        action: "showDocument",
+        itemId: foundry.utils.parseUuid(item.getFlag("dnd5e", "gearSource"))?.id,
+        quantity: item.system.quantity,
+        uuid: item.uuid
+      },
+      value: item.system.quantity > 1 ? item.system.quantity : undefined
+    }));
 
     // Habitat
     if ( details.habitat.value.length || details.habitat.custom ) {
@@ -567,9 +563,12 @@ export default class NPCActorSheet extends BaseActorSheet {
     let app;
     const config = { document: this.actor };
     switch ( target.dataset.config ) {
-      case "gear": app = new GearConfig(config); break;
-      case "habitat": app = new HabitatConfig(config); break;
-      case "treasure": app = new TreasureConfig(config); break;
+      case "habitat":
+        app = new HabitatConfig(config);
+        break;
+      case "treasure":
+        app = new TreasureConfig(config);
+        break;
     }
     if ( app ) {
       app.render({ force: true });
@@ -605,28 +604,16 @@ export default class NPCActorSheet extends BaseActorSheet {
   async _onDragStart(event) {
     const target = event.currentTarget;
     if ( target.classList.contains("pill") ) {
-      const dataset = target.querySelector("[data-uuid]")?.dataset ?? {};
-      const item = await fromUuid(dataset.uuid);
+      const dataset = target.querySelector("[data-item-id]")?.dataset ?? {};
+      const item = await this.actor.items.get(dataset.itemId)?.system.asGear?.();
       if ( item ) {
         event.dataTransfer.setData("text/plain", JSON.stringify({
-          data: game.items.fromCompendium(item.clone({ "system.quantity": dataset.quantity || 1 }, { keepId: true })),
+          data: item.isEmbedded ? item.toObject() : game.items.fromCompendium(item),
           type: "Item"
         }));
         return;
       }
     }
     return super._onDragStart(event);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async _onDropSingleItem(event, itemData) {
-    const result = await super._onDropSingleItem(event, itemData);
-    if ( !result ) return result;
-    if ( ("quantity" in (itemData.system ?? {})) && itemData._stats?.compendiumSource ) {
-      fromUuid(itemData._stats.compendiumSource).then(i => this.document.system.addGear(i));
-    }
-    return result;
   }
 }

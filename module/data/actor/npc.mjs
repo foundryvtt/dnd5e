@@ -98,10 +98,6 @@ export default class NPCData extends CreatureTemplate {
           required: true, nullable: true, min: 0, initial: 1, label: "DND5E.ChallengeRating"
         }),
         treasure: new SchemaField({
-          gear: new ArrayField(new SchemaField({
-            quantity: new NumberField({ nullable: true, initial: null, integer: true, min: 1 }),
-            uuid: new StringField() // TODO: Swap to DocumentUUIDField with `relative: true` in DnD5e 6.0
-          })),
           value: new SetField(new StringField())
         })
       }, { label: "DND5E.Details" }),
@@ -206,6 +202,18 @@ export default class NPCData extends CreatureTemplate {
   }
 
   /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Whether this Actor type represents a non-player character.
+   * @returns {boolean}
+   */
+  get isNPC() {
+    return true;
+  }
+
+  /* -------------------------------------------- */
   /*  Data Migration                              */
   /* -------------------------------------------- */
 
@@ -230,30 +238,6 @@ export default class NPCData extends CreatureTemplate {
   static #migrateEnvironment(source) {
     const custom = source.details?.environment;
     if ( (typeof custom === "string") && !("habitat" in source.details) ) source.details.habitat = { custom };
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Migrate gear list inferred from items to explicitly-defined list.
-   * @param {object} source  The item's candidate source data to migrate.
-   */
-  static _migrateGear(source) {
-    if ( source.system?.details?.treasure?.gear !== undefined ) return;
-    const gear = source.items?.values()
-      .filter(i =>
-        i.system?.quantity && (i.system?.type?.value !== "natural")
-        && (((i.type !== "weapon") && (i.type !== "equipment")) || i._stats?.compendiumSource)
-      )
-      .map(i => ({
-        quantity: i.system.quantity,
-        uuid: ((i.type === "weapon") || (i.type === "equipment")) ? i._stats.compendiumSource : `.Item.${i._id}`
-      }))
-      .toArray();
-    if ( gear?.length ) {
-      foundry.utils.setProperty(source, "flags.dnd5e.persistSourceMigration", true);
-      foundry.utils.setProperty(source, "system.details.treasure.gear", gear);
-    }
   }
 
   /* -------------------------------------------- */
@@ -491,32 +475,6 @@ export default class NPCData extends CreatureTemplate {
   /* -------------------------------------------- */
 
   /**
-   * Add an item to the gear list, automatically determining whether to link to the local copy or to
-   * the original compendium source.
-   * @param {Item5e} item  Item to add.
-   */
-  addGear(item) {
-    const isPhysical = !!CONFIG.Item.dataModels[item.type]?.schema.fields.quantity;
-    if ( !(item instanceof Item) || !isPhysical ) {
-      ui.notifications.error("DND5E.Gear.Warning.InvalidItem", { format: { name: item.name } });
-      return;
-    }
-
-    const useLocalCopy = !item._stats.compendiumSource || !["weapon", "equipment"].includes(item.type);
-    this.parent.update({
-      "system.details.treasure.gear": [
-        ...this.toObject().details.treasure.gear,
-        {
-          quantity: item.system.quantity > 1 ? item.system.quantity : null,
-          uuid: useLocalCopy ? item.getRelativeUUID(this.parent) : item._stats.compendiumSource
-        }
-      ]
-    });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Level used to determine cantrip scaling.
    * @param {Item5e} spell  Spell for which to fetch the cantrip level.
    * @returns {number}
@@ -555,11 +513,13 @@ export default class NPCData extends CreatureTemplate {
    * @type {Item5e[]}
    */
   async getGear() {
-    return Promise.all(this.details.treasure.gear.map(async ({ quantity=1, uuid }) => {
-      const item = await fromUuid(uuid, { relative: this.parent, strict: false });
-      if ( !item ) return null;
-      return game.items.fromCompendium(item.clone({ "system.quantity": quantity }, { keepId: true }));
-    })).then(i => i.filter(_ => _));
+    const actorOld = foundry.utils.isNewerVersion("5.3", this.parent._stats.systemVersion);
+    return (await Promise.all(this.parent.items
+      .filter(i => i.system.quantity && (actorOld && foundry.utils.isNewerVersion("5.3", i._stats.systemVersion)
+        ? (i.system.type?.value !== "natural") : i.system.properties?.has("gear")))
+      .map(i => i.system.asGear?.())
+    )).filter(_ => _)
+      .toSorted((lhs, rhs) => lhs.name.localeCompare(rhs.name, game.i18n.lang));
   }
 
   /* -------------------------------------------- */
@@ -713,16 +673,9 @@ export default class NPCData extends CreatureTemplate {
         cr: `${o.cr ?? formatCR(this.details.cr, { narrow: false })} (${xp})`,
 
         // Gear
-        gear: o.gear ?? formatter.format(
-          this.details.treasure.gear
-            .map(({ quantity, uuid }) => {
-              const item = fromUuidSync(uuid, { relative: this.parent, strict: false });
-              if ( !item ) return null;
-              return quantity > 1 ? `${item.name} (${formatNumber(quantity)})` : item.name;
-            })
-            .filter(_ => _)
-            .sort((lhs, rhs) => lhs.localeCompare(rhs, game.i18n.lang))
-        ),
+        gear: o.gear ?? formatter.format((await this.getGear()).map(item =>
+          item.system.quantity > 1 ? `${item.name} (${formatNumber(item.system.quantity)})` : item.name
+        )),
 
         // Initiative (e.g. `+0 (10)`)
         initiative: o.initiative ?? `${formatNumber(this.attributes.init.total, { signDisplay: "always" })} (${

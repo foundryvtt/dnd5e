@@ -355,9 +355,6 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
     const favorited = this.actor.system.hasFavorite?.(item.getRelativeUUID(this.actor));
     const expanded = this.app.expandedSections ? this.app.expandedSections.get(item.id)
       : this.app._expanded.has(item.id); // TODO: Remove when V1 sheets are gone
-    const inGear = this.actor.system.details?.treasure?.gear?.find(i =>
-      (i.uuid === item._stats.compendiumSource) || (this.actor && (i.uuid === item.getRelativeUUID(this.actor)))
-    );
 
     // Owned item options.
     options.push({
@@ -425,10 +422,10 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
       callback: li => this._onAction(li, "toggleFavorite"),
       group: "state"
     }, {
-      name: inGear ? "DND5E.Gear.Action.Remove" : "DND5E.Gear.Action.Add",
+      name: item.system.properties?.has("gear") ? "DND5E.Gear.Action.Remove" : "DND5E.Gear.Action.Add",
       icon: '<i class="fa-solid fa-axe fa-fw"></i>',
-      condition: () => !!this.actor.system.details?.treasure?.gear && item.isOwner && !compendiumLocked
-        && !!CONFIG.Item.dataModels[item.type]?.schema.fields.quantity,
+      condition: () => !!this.actor.system.isNPC && item.isOwner && !compendiumLocked
+        && !!CONFIG.Item.dataModels[item.type]?.schema.has("quantity"),
       callback: li => this._onAction(li, "toggleGear"),
       group: "state"
     }, {
@@ -725,12 +722,9 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
    * @protected
    */
   _onToggleGear(item) {
-    const gearData = this.actor.system.toObject().details.treasure.gear;
-    const gearIndex = gearData.findIndex(i =>
-      (i.uuid === item._stats.compendiumSource) || (this.actor && (i.uuid === item.getRelativeUUID(this.actor)))
-    );
-    if ( gearIndex === -1 ) this.actor.system.addGear(item);
-    else this.actor.update({ "system.details.treasure.gear": gearData.toSpliced(gearIndex, 1) });
+    const properties = item.system.toObject().properties;
+    item.update({ "system.properties": item.system.properties.has("gear")
+      ? properties.filter(i => i !== "gear") : [...properties, "gear"] });
   }
 
   /* -------------------------------------------- */
