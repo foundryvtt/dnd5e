@@ -32,7 +32,7 @@ export default class FormulaField extends foundry.data.fields.StringField {
   /* -------------------------------------------- */
 
   /** @override */
-  _castChangeDelta(delta) {
+  _castChangeDelta(delta, replacementData={}) {
     return this._cast(delta).trim();
   }
 
@@ -44,6 +44,14 @@ export default class FormulaField extends foundry.data.fields.StringField {
     const operator = delta.startsWith("-") ? "-" : "+";
     delta = delta.replace(/^[+-]/, "").trim();
     return `${value} ${operator} ${delta}`;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _applyChangeSubtract(value, delta, model, change) {
+    if ( !value ) return `-(${delta})`;
+    return `${value} - (${delta})`;
   }
 
   /* -------------------------------------------- */
