@@ -349,6 +349,7 @@ export default class VehicleActorSheet extends BaseActorSheet {
   _assignItemCategories(item) {
     if ( item.type === "container" ) return new Set(["containers", "inventory"]);
     if ( item.type === "facility" ) return new Set(["facilities"]);
+    if ( item.type === "spell" ) return new Set([]);
     if ( item.system.isMountable ) return new Set(["stations"]);
     if ( "inventorySection" in item.system.constructor ) return new Set(["inventory"]);
     return new Set(["features"]);
