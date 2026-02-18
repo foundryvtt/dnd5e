@@ -346,7 +346,7 @@ export default class ContainerData extends ItemDataModel.mixin(
   /** @inheritDoc */
   async _preCreate(data, options, user) {
     if ( (await super._preCreate(data, options, user)) === false ) return false;
-    await this.preCreateGear(data, options, user);
+    this.preCreateGear(data, options, user);
   }
 
   /* -------------------------------------------- */

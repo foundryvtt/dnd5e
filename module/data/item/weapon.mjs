@@ -573,7 +573,7 @@ export default class WeaponData extends ItemDataModel.mixin(
   async _preCreate(data, options, user) {
     if ( (await super._preCreate(data, options, user)) === false ) return false;
     await this.preCreateEquipped(data, options, user);
-    await this.preCreateGear(data, options, user);
+    this.preCreateGear(data, options, user);
     if ( this.activities.size ) return;
 
     const activityData = new CONFIG.DND5E.activityTypes.attack.documentClass({}, { parent: this.parent }).toObject();

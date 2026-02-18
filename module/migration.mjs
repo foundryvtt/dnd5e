@@ -576,6 +576,7 @@ export function migrateItemData(item, itemData, migrationData, flags={}) {
   // Migrate gear property
   if ( (flags.actorData?.type === "npc") && item.system.quantity && (item.system.type?.value !== "natural")
     && (!["equipment", "weapon"].includes(item.type) || item._stats.compendiumSource)
+    && !item.system.properties?.has("gear")
     && !item._stats.compendiumSource?.startsWith("Compendium.dnd-monster-manual.features.")
     && (flags.bypassVersionCheck || foundry.utils.isNewerVersion("5.3.0", item._stats.systemVersion)) ) {
     if ( !("system.properties" in updateData) ) {

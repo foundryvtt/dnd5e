@@ -343,7 +343,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
   async _preCreate(data, options, user) {
     if ( (await super._preCreate(data, options, user)) === false ) return false;
     await this.preCreateEquipped(data, options, user);
-    await this.preCreateGear(data, options, user);
+    this.preCreateGear(data, options, user);
   }
 
   /* -------------------------------------------- */
