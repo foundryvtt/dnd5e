@@ -518,6 +518,8 @@
  *                                                           when using the modern rules. Speed reduction is measured
  *                                                           in the default imperial units and converted to metric
  *                                                           if necessary.
+ * @property {Record<number, string[]>} [conditions]  Additional statuses applied at given
+ *                                                    levels of a condition, e.g., 'dead' at Exhaustion 6.
  */
 
 /**

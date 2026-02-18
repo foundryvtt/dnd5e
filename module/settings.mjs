@@ -712,6 +712,15 @@ export function applyLegacyRules() {
   DND5E.conditionEffects.initiativeDisadvantage.delete("incapacitated");
   DND5E.conditionEffects.initiativeDisadvantage.delete("surprised");
 
+  // Add exhaustion effects.
+  DND5E.conditionEffects.noMovement.add("exhaustion-5");
+  DND5E.conditionEffects.halfMovement.add("exhaustion-2");
+  DND5E.conditionEffects.halfHealth.add("exhaustion-4");
+  DND5E.conditionEffects.abilityCheckDisadvantage.add("exhaustion-1");
+  DND5E.conditionEffects.abilitySaveDisadvantage.add("exhaustion-3");
+  DND5E.conditionEffects.attackDisadvantage.add("exhaustion-3");
+  delete DND5E.conditionTypes.exhaustion.reduction;
+
   // Incapacitated creatures within 2 size categories still cannot be moved through in legacy
   delete DND5E.conditionTypes.incapacitated.neverBlockMovement;
 

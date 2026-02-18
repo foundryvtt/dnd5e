@@ -75,6 +75,7 @@ Hooks.once("init", function() {
   CONFIG.Item.documentClass = documents.Item5e;
   CONFIG.JournalEntryPage.documentClass = documents.JournalEntryPage5e;
   CONFIG.Token.documentClass = documents.TokenDocument5e;
+  CONFIG.Token.hudClass = applications.hud.TokenHUD5e;
   CONFIG.Token.objectClass = canvas.Token5e;
   CONFIG.Token.rulerClass = canvas.TokenRuler5e;
   CONFIG.Token.movement.TerrainData = dataModels.TerrainData5e;
@@ -232,9 +233,6 @@ Hooks.once("init", function() {
 
   // Enrichers
   enrichers.registerCustomEnrichers();
-
-  // Exhaustion handling
-  documents.ActiveEffect5e.registerHUDListeners();
 
   // Set up token movement actions
   documents.TokenDocument5e.registerMovementActions();

@@ -524,7 +524,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
    * @protected
    */
   async _prepareSidebarContext(context, options) {
-    const { attributes } = this.actor.system;
+    const { attributes, conditions={} } = this.actor.system;
     context.portrait = await this._preparePortrait(context);
 
     // Death Saves
@@ -556,7 +556,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       context.exhaustion = Array.fromRange(max, 1).reduce((acc, n) => {
         const label = game.i18n.format("DND5E.ExhaustionLevel", { n });
         const classes = ["pip"];
-        const filled = attributes.exhaustion >= n;
+        const filled = conditions.exhaustion >= n;
         if ( filled ) classes.push("filled");
         if ( n === max ) classes.push("death");
         const pip = { n, label, filled, tooltip: label, classes: classes.join(" ") };

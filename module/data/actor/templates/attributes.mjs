@@ -2,6 +2,7 @@ import ActiveEffect5e from "../../../documents/active-effect.mjs";
 import Proficiency from "../../../documents/actor/proficiency.mjs";
 import { convertLength, convertWeight, defaultUnits, replaceFormulaData, simplifyBonus } from "../../../utils.mjs";
 import AdvantageModeField from "../../fields/advantage-mode-field.mjs";
+import ConditionData from "../../active-effect/condition.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 import MovementField from "../../shared/movement-field.mjs";
 import RollConfigField from "../../shared/roll-config-field.mjs";
@@ -334,9 +335,7 @@ export default class AttributesFields {
    * @this {CharacterData|NPCData}
    */
   static prepareExhaustionLevel() {
-    const exhaustion = this.parent.effects.get(ActiveEffect5e.ID.EXHAUSTION);
-    const level = exhaustion?.getFlag("dnd5e", "exhaustionLevel");
-    this.attributes.exhaustion = Number.isFinite(level) ? level : 0;
+    this.attributes.exhaustion = this.conditions?.exhaustion ?? 0;
   }
 
   /* -------------------------------------------- */
@@ -426,8 +425,14 @@ export default class AttributesFields {
     const heavilyEncumbered = statuses.has("heavilyEncumbered");
     const exceedingCarryingCapacity = statuses.has("exceedingCarryingCapacity");
     const units = this.attributes.movement.units ??= defaultUnits("length");
-    let reduction = dnd5e.settings.rulesVersion === "modern"
-      ? (this.attributes.exhaustion ?? 0) * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.speed ?? 0) : 0;
+
+    let reduction = statuses.reduce((acc, status) => {
+      const speed = CONFIG.DND5E.conditionTypes[status]?.reduction?.speed ?? 0;
+      const level = ConditionData.hasLevels(status)
+        ? this.parent.system.conditions?.[status] ?? 0
+        : Boolean(statuses.has(status));
+      return acc + (level * speed);
+    }, 0);
     reduction = convertLength(reduction, CONFIG.DND5E.defaultUnits.length.imperial, units);
     const bonus = simplifyBonus(this.attributes.movement.bonus, rollData);
     this.attributes.movement.max = 0;
