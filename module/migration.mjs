@@ -519,7 +519,11 @@ export function migrateActorData(actor, actorData, migrationData, flags={}, { ac
     }
     return foundry.utils.isEmpty(itemUpdate) ? null : { ...itemUpdate, _id: itemData._id };
   }).filter(_ => _);
-  if ( items.length > 0 ) updateData.items = items;
+  if ( items.length ) {
+    updateData.items = items;
+    // This update might not contain any system data, so we manually bump systemVersion since the server will not.
+    updateData._stats = { systemVersion: game.system.version };
+  }
 
   return updateData;
 }
