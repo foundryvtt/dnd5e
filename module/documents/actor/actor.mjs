@@ -1112,7 +1112,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @param {object} data     Roll data.
    */
   addRollExhaustion(parts, data) {
-    if ( (dnd5e.settings.rulesVersion !== "modern") || !this.system.attributes?.exhaustion ) return;
+    if ( (dnd5e.settings.rulesVersion !== "modern") || !this.system.attributes?.exhaustion
+      || this.system.traits?.ci?.value?.has("exhaustion") ) return;
     const amount = this.system.attributes.exhaustion * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.rolls ?? 0);
     if ( amount ) {
       parts.push("@exhaustion");
