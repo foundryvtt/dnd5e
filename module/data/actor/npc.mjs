@@ -487,6 +487,20 @@ export default class NPCData extends CreatureTemplate {
   /* -------------------------------------------- */
 
   /**
+   * Create a list of gear that can be collected from this NPC.
+   * @type {Item5e[]}
+   */
+  async getGear() {
+    return (await Promise.all(this.parent.items
+      .filter(i => i.system.quantity && i.system.properties?.has("gear"))
+      .map(i => i.system.asGear?.())
+    )).filter(_ => _)
+      .toSorted((lhs, rhs) => lhs.name.localeCompare(rhs.name, game.i18n.lang));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Auto-generate a description for the legendary actions block on the NPC stat block.
    * @param {string} name  Name of the actor to use in the text.
    * @returns {string}
@@ -504,22 +518,6 @@ export default class NPCData extends CreatureTemplate {
       }) : formatNumber(max),
       usesNamed: game.i18n.format(`DND5E.ACTIVATION.Type.Legendary.Counted.${pr}`, { number: formatNumber(max) })
     });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Create a list of gear that can be collected from this NPC.
-   * @type {Item5e[]}
-   */
-  async getGear() {
-    const actorOld = foundry.utils.isNewerVersion("5.3", this.parent._stats.systemVersion);
-    return (await Promise.all(this.parent.items
-      .filter(i => i.system.quantity && (actorOld && foundry.utils.isNewerVersion("5.3", i._stats.systemVersion)
-        ? (i.system.type?.value !== "natural") : i.system.properties?.has("gear")))
-      .map(i => i.system.asGear?.())
-    )).filter(_ => _)
-      .toSorted((lhs, rhs) => lhs.name.localeCompare(rhs.name, game.i18n.lang));
   }
 
   /* -------------------------------------------- */
