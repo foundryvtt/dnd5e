@@ -308,11 +308,24 @@ export default class PhysicalItemTemplate extends SystemDataModel {
    */
   async asGear() {
     const change = { "flags.dnd5e.gearSource": this.parent.uuid };
-    if ( this.metadata.compendiumGearSource && this.parent._stats.compendiumSource ) {
+    let clone;
+    if ( this.metadata.compendiumGearSource && this.parent._stats.compendiumSource
+      && !this.parent.getFlag("dnd5e", "preserveGear") ) {
       const item = await fromUuid(this.parent._stats.compendiumSource);
-      if ( item ) return item.clone({ ...change, "system.quantity": this.quantity }, { keepId: true });
+      if ( item ) clone = item.clone({ ...change, "system.quantity": this.quantity }, { keepId: true });
     }
-    return this.parent.clone(change, { keepId: true });
+    clone ??= this.parent.clone(change, { keepId: true });
+
+    /**
+     * A hook event that fires when retrieving an item as gear.
+     * @function dnd5e.getAsGear
+     * @memberof hookEvents
+     * @param {Item5e} item  Item on NPC being prepared as gear.
+     * @param {Item5e} gear  Non-saved clone of the item to be returned as gear.
+     */
+    Hooks.callAll("dnd5e.getAsGear", this.parent, clone);
+
+    return clone;
   }
 
   /* -------------------------------------------- */

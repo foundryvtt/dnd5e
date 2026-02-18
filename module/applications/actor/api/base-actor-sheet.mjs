@@ -1814,6 +1814,11 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     const containers = new Set(items.filter(i => i.type === "container").map(i => i._id));
     items = items.filter(i => !containers.has(i.system.container));
 
+    // Transform physical items from NPCs to their gear versions
+    items = await Promise.all(items.map(i =>
+      i.actor?.system.isNPC && (i.actor !== this.actor) && i.system.asGear ? i.system.asGear() : i
+    ));
+
     // Create the owned items & contents as normal
     const toCreate = await Item5e.createWithContents(items, {
       transformFirst: item => {
