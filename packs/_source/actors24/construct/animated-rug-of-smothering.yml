@@ -353,22 +353,20 @@ system:
         mode: 0
       bonus: '@prof'
     movement:
-      burrow: null
-      climb: null
-      fly: null
-      swim: null
-      walk: 10
+      walk: '10'
       units: null
       hover: false
+      ignoredDifficultTerrain: []
     attunement:
       max: 3
     senses:
-      darkvision: null
-      blindsight: 60
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: null
+        blindsight: 60
+        tremorsense: null
+        truesight: null
     spellcasting: ''
     exhaustion: 0
     concentration:
@@ -404,6 +402,9 @@ system:
       level: 0
     loyalty:
       value: null
+    price:
+      value: null
+      denomination: gp
   details:
     biography:
       value: >-
@@ -427,11 +428,11 @@ system:
       value: []
   resources:
     legact:
-      value: 0
       max: 0
+      spent: 0
     legres:
-      value: 0
       max: 0
+      spent: 0
     lair:
       value: false
       initiative: null
@@ -587,8 +588,10 @@ items:
             override: false
           effects:
             - _id: wfTA3WUcjBVzGa2H
+              level: {}
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -618,6 +621,13 @@ items:
             includeBase: true
             parts: []
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         Y1lxdDPzkSRnAUGz:
           type: damage
           _id: Y1lxdDPzkSRnAUGz
@@ -641,6 +651,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -669,6 +680,13 @@ items:
                 scaling:
                   number: 1
           name: 'Grappled: Damage'
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -709,11 +727,10 @@ items:
       rarity: ''
       attunement: ''
       attuned: false
-      equipped: false
+      equipped: true
       armor:
         value: null
       cover: null
-      crewed: false
       hp:
         value: null
         max: null
@@ -739,7 +756,6 @@ items:
             enabled: false
           scaling:
             number: 1
-      magicalBonus: null
       properties: []
       proficient: null
       range:
@@ -748,6 +764,8 @@ items:
         reach: 5
         units: ft
       mastery: ''
+      crew:
+        value: []
     folder: pSCWWdqMX9eUATRJ
     img: icons/commodities/cloth/cloth-bolt-embroidered-pink.webp
     effects:
@@ -786,13 +804,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmAnimatedRugOfS.mmSmother0000000.wfTA3WUcjBVzGa2H
     flags:
@@ -803,13 +819,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSmother0000000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712713004
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 0
@@ -819,13 +833,13 @@ folder: TYL2OiqdnUspYV8R
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
-  systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1745415490996
-  modifiedTime: 1745712713030
-  lastModifiedBy: dnd5ebuilder0000
   exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  createdTime: 1771452695977
+  modifiedTime: 1771452695977
+  lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:
   default: 0

@@ -353,22 +353,21 @@ system:
         mode: 0
       bonus: ''
     movement:
-      burrow: null
-      climb: null
-      fly: 20
-      swim: null
-      walk: 20
+      fly: '20'
+      walk: '20'
       units: null
       hover: false
+      ignoredDifficultTerrain: []
     attunement:
       max: 3
     senses:
-      darkvision: null
-      blindsight: 30
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: null
+        blindsight: 30
+        tremorsense: null
+        truesight: null
     spellcasting: str
     exhaustion: 0
     concentration:
@@ -404,6 +403,9 @@ system:
       level: 0
     loyalty:
       value: null
+    price:
+      value: null
+      denomination: gp
   details:
     biography:
       value: ''
@@ -432,11 +434,11 @@ system:
       value: []
   resources:
     legact:
-      value: 0
       max: 0
+      spent: 0
     legres:
-      value: 0
       max: 0
+      spent: 0
     lair:
       value: false
       initiative: null
@@ -592,10 +594,11 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties:
         - trait
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: L9Zgr8qAPc3ngKhb
@@ -605,13 +608,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSpiderClimb000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: 1737053630053
-      modifiedTime: 1745712728224
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 0
@@ -644,10 +645,11 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties:
         - trait
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: L9Zgr8qAPc3ngKhb
@@ -657,13 +659,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSwarm000000000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: 1737053632334
-      modifiedTime: 1745712728224
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 1
@@ -699,6 +699,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -728,6 +729,13 @@ items:
             includeBase: true
             parts: []
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         3Yo83eZUNwX51AcE:
           type: attack
           name: Bloodied Attack
@@ -751,6 +759,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -790,6 +799,13 @@ items:
                 scaling:
                   number: 1
           _id: 3Yo83eZUNwX51AcE
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -820,11 +836,10 @@ items:
       rarity: ''
       attunement: ''
       attuned: false
-      equipped: false
+      equipped: true
       armor:
         value: null
       cover: null
-      crewed: false
       hp:
         value: null
         max: null
@@ -850,7 +865,6 @@ items:
             enabled: false
           scaling:
             number: 1
-      magicalBonus: null
       properties:
         - spc
       proficient: null
@@ -860,6 +874,8 @@ items:
         reach: 5
         units: ft
       mastery: ''
+      crew:
+        value: []
     folder: pSCWWdqMX9eUATRJ
     img: icons/creatures/abilities/mouth-teeth-rows-white.webp
     effects: []
@@ -871,13 +887,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmBites000000000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: 1737053634033
-      modifiedTime: 1745712728224
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 2
@@ -887,13 +901,13 @@ folder: LK5iEx8W2Y5YxDHM
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
-  systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1732598129404
-  modifiedTime: 1745712728259
-  lastModifiedBy: dnd5ebuilder0000
   exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  createdTime: 1771452715501
+  modifiedTime: 1771452715501
+  lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:
   default: 0

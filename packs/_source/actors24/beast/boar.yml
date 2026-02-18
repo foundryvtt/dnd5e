@@ -351,22 +351,20 @@ system:
         mode: 0
       bonus: ''
     movement:
-      burrow: null
-      climb: null
-      fly: null
-      swim: null
-      walk: 40
+      walk: '40'
       units: null
       hover: false
+      ignoredDifficultTerrain: []
     attunement:
       max: 3
     senses:
-      darkvision: null
-      blindsight: null
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: null
+        blindsight: null
+        tremorsense: null
+        truesight: null
     spellcasting: str
     exhaustion: 0
     concentration:
@@ -402,6 +400,9 @@ system:
       level: 0
     loyalty:
       value: null
+    price:
+      value: null
+      denomination: gp
   details:
     biography:
       value: ''
@@ -424,11 +425,11 @@ system:
       value: []
   resources:
     legact:
-      value: 0
       max: 0
+      spent: 0
     legres:
-      value: 0
       max: 0
+      spent: 0
     lair:
       value: false
       initiative: null
@@ -574,10 +575,11 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties:
         - trait
       requirements: While Bloodied
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: L9Zgr8qAPc3ngKhb
@@ -587,13 +589,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmBloodiedFury00
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712714660
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 0
@@ -628,8 +628,10 @@ items:
             override: false
           effects:
             - _id: dgfff9ONKHAUcthM
+              level: {}
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -660,6 +662,13 @@ items:
             includeBase: true
             parts: []
           name: Attack
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         iBenqFiBu40bUxkH:
           type: attack
           name: Moving Attack
@@ -683,6 +692,7 @@ items:
             override: false
           effects:
             - _id: dgfff9ONKHAUcthM
+              level: {}
           range:
             override: false
             units: ft
@@ -728,6 +738,13 @@ items:
                   - piercing
                 scaling:
                   number: 1
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -767,7 +784,6 @@ items:
       armor:
         value: null
       cover: null
-      crewed: false
       hp:
         value: null
         max: null
@@ -793,7 +809,6 @@ items:
             enabled: false
           scaling:
             number: 1
-      magicalBonus: null
       properties: []
       proficient: null
       range:
@@ -802,6 +817,8 @@ items:
         reach: null
         units: ft
       mastery: ''
+      crew:
+        value: []
     folder: pSCWWdqMX9eUATRJ
     img: icons/skills/wounds/bone-broken-tooth-fang-red.webp
     effects:
@@ -833,13 +850,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmBoar0000000000.mmGore0000000000.dgfff9ONKHAUcthM
     flags:
@@ -850,13 +865,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmGore0000000000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712714660
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 1
@@ -869,11 +882,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
-  systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1740679132839
-  modifiedTime: 1745712714688
-  lastModifiedBy: dnd5ebuilder0000
   exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  createdTime: 1771452698065
+  modifiedTime: 1771452698065
+  lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!mmBoar0000000000'

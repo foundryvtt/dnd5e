@@ -353,22 +353,20 @@ system:
         mode: 0
       bonus: ''
     movement:
-      burrow: null
-      climb: null
-      fly: null
-      swim: null
-      walk: 15
+      walk: '15'
       units: null
       hover: false
+      ignoredDifficultTerrain: []
     attunement:
       max: 3
     senses:
-      darkvision: null
-      blindsight: 60
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: null
+        blindsight: 60
+        tremorsense: null
+        truesight: null
     spellcasting: ''
     exhaustion: 0
     concentration:
@@ -404,6 +402,9 @@ system:
       level: 0
     loyalty:
       value: null
+    price:
+      value: null
+      denomination: gp
   details:
     biography:
       value: >-
@@ -428,11 +429,11 @@ system:
         - any
   resources:
     legact:
-      value: 0
       max: 0
+      spent: 0
     legres:
-      value: 0
       max: 0
+      spent: 0
     lair:
       value: false
       initiative: null
@@ -586,6 +587,7 @@ items:
             override: false
           effects:
             - _id: Nqpxg74Yw9uEVMxQ
+              level: {}
           range:
             override: false
             units: self
@@ -610,6 +612,13 @@ items:
             name: ''
             formula: ''
           name: Total Cover
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         EcTOfXWsDJRHLydy:
           type: check
           _id: EcTOfXWsDJRHLydy
@@ -660,6 +669,13 @@ items:
               formula: '12'
             ability: ''
           name: Pull Check
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         PMCvyqxfUYiPzNK8:
           type: damage
           _id: PMCvyqxfUYiPzNK8
@@ -714,6 +730,13 @@ items:
                 scaling:
                   number: 1
           name: Puller Damage
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -745,10 +768,11 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties:
         - trait
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: L9Zgr8qAPc3ngKhb
@@ -780,13 +804,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.2.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmGelatinousCube.mmOozeCube000000.Nqpxg74Yw9uEVMxQ
     flags:
@@ -797,13 +819,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmOozeCube000000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: 1737041892076
-      modifiedTime: 1745712718004
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 0
@@ -863,6 +883,13 @@ items:
               formula: '15'
             ability: ''
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -885,10 +912,11 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties:
         - trait
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: L9Zgr8qAPc3ngKhb
@@ -902,13 +930,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmTransparent000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: 1737042770223
-      modifiedTime: 1745712718004
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 1
@@ -942,6 +968,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -962,6 +989,13 @@ items:
             critical: {}
             includeBase: true
             parts: []
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -991,11 +1025,10 @@ items:
       rarity: ''
       attunement: ''
       attuned: false
-      equipped: false
+      equipped: true
       armor:
         value: null
       cover: null
-      crewed: false
       hp:
         value: null
         max: null
@@ -1021,7 +1054,6 @@ items:
             enabled: false
           scaling:
             number: 1
-      magicalBonus: null
       properties: []
       proficient: null
       range:
@@ -1030,6 +1062,8 @@ items:
         reach: 5
         units: ft
       mastery: ''
+      crew:
+        value: []
     folder: pSCWWdqMX9eUATRJ
     img: icons/creatures/slimes/slime-movement-pseudopods-blue.webp
     effects: []
@@ -1037,13 +1071,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmPseudopod00000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: 1737042825026
-      modifiedTime: 1745712718004
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 2
@@ -1079,6 +1111,7 @@ items:
           effects:
             - _id: vsa7d6xWOAvWdOWM
               onSave: false
+              level: {}
           range:
             override: false
             units: self
@@ -1119,6 +1152,13 @@ items:
               calculation: str
               formula: '23'
           name: Save
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         0sTemtp4b2QnaOMR:
           type: check
           sort: 0
@@ -1169,6 +1209,13 @@ items:
             ability: ''
           name: Escape Check
           _id: 0sTemtp4b2QnaOMR
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -1208,9 +1255,10 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: 4T18pEvubPMQLzvD
@@ -1248,13 +1296,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.2.0
-          createdTime: null
-          modifiedTime: 1737043923086
-          lastModifiedBy: dnd5ebuilder0000
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmGelatinousCube.mmEngulf00000000.vsa7d6xWOAvWdOWM
     flags:
@@ -1265,13 +1311,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmEngulf00000000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: 1737042859050
-      modifiedTime: 1745712718004
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 3
@@ -1281,13 +1325,13 @@ folder: m38nAYWZbWqdnNHn
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
-  systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1732598129404
-  modifiedTime: 1745712718031
-  lastModifiedBy: dnd5ebuilder0000
   exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  createdTime: 1771452702408
+  modifiedTime: 1771452702408
+  lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:
   default: 0

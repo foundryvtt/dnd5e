@@ -351,22 +351,21 @@ system:
         mode: 0
       bonus: ''
     movement:
-      burrow: null
-      climb: null
-      fly: null
-      swim: 30
-      walk: 20
+      swim: '30'
+      walk: '20'
       units: null
       hover: false
+      ignoredDifficultTerrain: []
     attunement:
       max: 3
     senses:
-      darkvision: null
-      blindsight: null
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: null
+        blindsight: null
+        tremorsense: null
+        truesight: null
     spellcasting: str
     exhaustion: 0
     concentration:
@@ -402,6 +401,9 @@ system:
       level: 0
     loyalty:
       value: null
+    price:
+      value: null
+      denomination: gp
   details:
     biography:
       value: ''
@@ -424,11 +426,11 @@ system:
       value: []
   resources:
     legact:
-      value: 0
       max: 0
+      spent: 0
     legres:
-      value: 0
       max: 0
+      spent: 0
     lair:
       value: false
       initiative: null
@@ -574,10 +576,11 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties:
         - trait
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: L9Zgr8qAPc3ngKhb
@@ -591,13 +594,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmHoldBreath0000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712716035
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 0
@@ -632,8 +633,10 @@ items:
             override: false
           effects:
             - _id: DmAM7moVZNE5wb5i
+              level: {}
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -663,6 +666,13 @@ items:
             includeBase: true
             parts: []
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         kPgRugxvd6oDkyKw:
           type: check
           name: Escape Check
@@ -711,6 +721,13 @@ items:
               formula: '@skills.ath.passive'
             ability: ''
           _id: kPgRugxvd6oDkyKw
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -772,12 +789,12 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       ammunition: {}
       armor:
         value: null
-      magicalBonus: null
       proficient: null
+      crew:
+        value: []
     folder: pSCWWdqMX9eUATRJ
     img: icons/creatures/abilities/fangs-teeth-bite.webp
     effects:
@@ -815,13 +832,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmCrocodile00000.mmBite0000000000.DmAM7moVZNE5wb5i
     flags:
@@ -832,13 +847,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmBite0000000000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712716035
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 1
@@ -851,11 +864,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
-  systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1740679133446
-  modifiedTime: 1745712716060
-  lastModifiedBy: dnd5ebuilder0000
   exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  createdTime: 1771452699895
+  modifiedTime: 1771452699895
+  lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!mmCrocodile00000'

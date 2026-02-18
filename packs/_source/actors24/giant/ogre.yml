@@ -353,22 +353,20 @@ system:
         mode: 0
       bonus: ''
     movement:
-      burrow: null
-      climb: null
-      fly: null
-      swim: null
-      walk: 40
+      walk: '40'
       units: null
       hover: false
+      ignoredDifficultTerrain: []
     attunement:
       max: 3
     senses:
-      darkvision: 60
-      blindsight: null
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: 60
+        blindsight: null
+        tremorsense: null
+        truesight: null
     spellcasting: str
     exhaustion: 0
     concentration:
@@ -404,13 +402,13 @@ system:
       level: 0
     loyalty:
       value: null
+    price:
+      value: null
+      denomination: gp
   details:
     biography:
       value: >-
-        <div class="gear"><p><strong>Gear:</strong>
-        @UUID[Compendium.dnd5e.equipment24.Item.phbwepGreatclub0]{Greatclub},
-        @UUID[Compendium.dnd5e.equipment24.Item.phbwepJavelin000]{Javelins
-        (3)}</p></div><h1>Ogres</h1><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.1Hp2MOUaAODie8ex
+        <h1>Ogres</h1><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.1Hp2MOUaAODie8ex
         caption=false cite=false classes="no-embed
         mm"]</p><h2>Ogre</h2><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.kqE5GUlHs8pLCwvw
         caption=false cite=false classes="no-embed mm free-rules-embed"]</p>
@@ -439,11 +437,11 @@ system:
         - armaments
   resources:
     legact:
-      value: 0
       max: 0
+      spent: 0
     legres:
-      value: 0
       max: 0
+      spent: 0
     lair:
       value: false
       initiative: null
@@ -589,7 +587,6 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       range:
         value: null
         long: null
@@ -632,9 +629,9 @@ items:
       type:
         value: simpleM
         baseItem: greatclub
-      magicalBonus: null
       properties:
         - two
+        - gear
       proficient: null
       activities:
         amG8qOS4NKpbj2hY:
@@ -672,7 +669,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
               type: ''
@@ -701,9 +698,18 @@ items:
           sort: 0
           _id: amG8qOS4NKpbj2hY
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       ammunition: {}
       mastery: push
       identifier: greatclub
+      crew:
+        value: []
     _id: vNimS5BXJHo8AgMY
     type: weapon
     folder: FL1Jee9DzStc7vM3
@@ -720,13 +726,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepGreatclub0
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712724210
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!mmOgre0000000000.vNimS5BXJHo8AgMY'
   - name: Javelin
     system:
@@ -755,7 +759,6 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       range:
         value: 30
         long: 120
@@ -798,9 +801,9 @@ items:
       type:
         value: simpleM
         baseItem: javelin
-      magicalBonus: null
       properties:
         - thr
+        - gear
       proficient: null
       activities:
         r1hUkUrLD8kqx8X0:
@@ -838,7 +841,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
               type: ''
@@ -867,9 +870,18 @@ items:
           sort: 0
           _id: r1hUkUrLD8kqx8X0
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       ammunition: {}
       mastery: slow
       identifier: javelin
+      crew:
+        value: []
     _id: W6jP2bjUuNYdfktM
     type: weapon
     folder: FL1Jee9DzStc7vM3
@@ -886,13 +898,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepJavelin000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712724210
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!mmOgre0000000000.W6jP2bjUuNYdfktM'
 effects: []
 folder: uzfjTR3kDzzsWp3V
@@ -901,13 +911,13 @@ flags:
     showTokenPortrait: false
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
-  systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1732598129404
-  modifiedTime: 1745712724238
-  lastModifiedBy: dnd5ebuilder0000
   exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  createdTime: 1771452710339
+  modifiedTime: 1771452710339
+  lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:
   default: 0

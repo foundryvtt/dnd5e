@@ -353,22 +353,21 @@ system:
         mode: 0
       bonus: ''
     movement:
-      burrow: null
-      climb: null
-      fly: 80
-      swim: null
-      walk: 10
+      fly: '80'
+      walk: '10'
       units: null
       hover: false
+      ignoredDifficultTerrain: []
     attunement:
       max: 3
     senses:
-      darkvision: null
-      blindsight: null
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: null
+        blindsight: null
+        tremorsense: null
+        truesight: null
     spellcasting: str
     exhaustion: 0
     concentration:
@@ -404,6 +403,9 @@ system:
       level: 0
     loyalty:
       value: null
+    price:
+      value: null
+      denomination: gp
   details:
     biography:
       value: ''
@@ -427,11 +429,11 @@ system:
       value: []
   resources:
     legact:
-      value: 0
       max: 0
+      spent: 0
     legres:
-      value: 0
       max: 0
+      spent: 0
     lair:
       value: false
       initiative: null
@@ -581,6 +583,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -595,6 +598,13 @@ items:
           roll:
             prompt: false
             visible: false
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -614,9 +624,10 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: 4T18pEvubPMQLzvD
@@ -630,13 +641,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712718696
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 0
@@ -672,6 +681,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -711,6 +721,13 @@ items:
                 scaling:
                   number: 1
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -738,11 +755,10 @@ items:
       rarity: ''
       attunement: ''
       attuned: false
-      equipped: false
+      equipped: true
       armor:
         value: null
       cover: null
-      crewed: false
       hp:
         value: null
         max: null
@@ -768,7 +784,6 @@ items:
             enabled: false
           scaling:
             number: 1
-      magicalBonus: null
       properties: []
       proficient: null
       range:
@@ -777,6 +792,8 @@ items:
         reach: null
         units: ft
       mastery: ''
+      crew:
+        value: []
     folder: pSCWWdqMX9eUATRJ
     img: icons/skills/melee/shield-damaged-broken-orange.webp
     effects: []
@@ -788,13 +805,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmRend0000000000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712718696
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 1
@@ -804,13 +819,13 @@ folder: B4jgCSN5ycmyM4ak
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
-  systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1745415477323
-  modifiedTime: 1745712718724
-  lastModifiedBy: dnd5ebuilder0000
   exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  createdTime: 1771452703286
+  modifiedTime: 1771452703286
+  lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:
   default: 0

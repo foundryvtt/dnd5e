@@ -17,6 +17,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     dex:
       value: 15
       proficient: 1
@@ -24,6 +34,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     con:
       value: 18
       proficient: 0
@@ -31,6 +51,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     int:
       value: 8
       proficient: 0
@@ -38,6 +68,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     wis:
       value: 13
       proficient: 1
@@ -45,6 +85,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     cha:
       value: 8
       proficient: 1
@@ -52,6 +102,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
   bonuses:
     mwak:
       attack: ''
@@ -293,22 +353,21 @@ system:
         mode: 0
       bonus: ''
     movement:
-      burrow: null
-      climb: null
-      fly: 60
-      swim: null
-      walk: 40
+      fly: '60'
+      walk: '40'
       units: null
       hover: false
+      ignoredDifficultTerrain: []
     attunement:
       max: 3
     senses:
-      darkvision: 120
-      blindsight: null
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: 120
+        blindsight: null
+        tremorsense: null
+        truesight: null
     spellcasting: str
     exhaustion: 0
     concentration:
@@ -332,13 +391,20 @@ system:
       tempmax: null
       formula: 16d10 + 64
     death:
-      ability: ''
       roll:
         min: null
         max: null
         mode: 0
       success: 0
       failure: 0
+      bonuses:
+        save: ''
+    spell:
+      level: 0
+    loyalty: {}
+    price:
+      value: null
+      denomination: gp
   details:
     biography:
       value: >-
@@ -355,26 +421,26 @@ system:
       custom: ''
       subtype: Demon
       swarm: ''
-    environment: ''
     cr: 6
-    spellLevel: 0
     habitat:
       value:
         - type: planar
           subtype: abyss
+      custom: ''
     treasure:
       value:
         - armaments
   resources:
     legact:
-      value: 0
       max: 0
+      spent: 0
     legres:
-      value: 0
       max: 0
+      spent: 0
     lair:
       value: false
       initiative: null
+      inside: false
   source:
     revision: 1
     rules: '2024'
@@ -413,6 +479,7 @@ system:
         telepathy:
           value: 120
           units: ft
+    important: false
 prototypeToken:
   name: Vrock
   displayName: 20
@@ -523,9 +590,10 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: Dies outside the Abyss
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: L9Zgr8qAPc3ngKhb
@@ -535,13 +603,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmDemonicRestora
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: 1737674744803
-      modifiedTime: 1745712729458
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 0
@@ -573,10 +639,11 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties:
         - trait
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: L9Zgr8qAPc3ngKhb
@@ -586,13 +653,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMagicResistanc
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: 1737674747375
-      modifiedTime: 1745712729458
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 1
@@ -651,7 +716,12 @@ items:
             name: ''
             formula: ''
           img: systems/dnd5e/icons/svg/monster.svg
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -671,9 +741,10 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: 4T18pEvubPMQLzvD
@@ -687,13 +758,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: 1737674748688
-      modifiedTime: 1745712729458
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 2
@@ -729,6 +798,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -768,6 +838,13 @@ items:
                 scaling:
                   number: 1
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -801,7 +878,6 @@ items:
       armor:
         value: null
       cover: null
-      crewed: false
       hp:
         value: null
         max: null
@@ -827,7 +903,6 @@ items:
             enabled: false
           scaling:
             number: 1
-      magicalBonus: null
       properties: []
       proficient: null
       range:
@@ -836,6 +911,8 @@ items:
         reach: 5
         units: ft
       mastery: ''
+      crew:
+        value: []
     folder: pSCWWdqMX9eUATRJ
     img: icons/magic/unholy/strike-beam-blood-large-red-teal.webp
     effects: []
@@ -847,13 +924,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmShred000000000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: 1737674749995
-      modifiedTime: 1745712729458
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 3
@@ -883,6 +958,7 @@ items:
               - type: itemUses
                 value: '1'
                 target: ''
+                scaling: {}
           description:
             chatFlavor: ''
           duration:
@@ -892,6 +968,7 @@ items:
           effects:
             - _id: DeVYxc3BdGlZNeD9
               onSave: false
+              level: {}
           range:
             override: false
             units: self
@@ -925,8 +1002,12 @@ items:
               formula: 8 + @mod + @prof
           name: Save
           img: ''
-          appliedEffects:
-            - DeVYxc3BdGlZNeD9
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         ukZveNVmvvtwbDj0:
           type: damage
           _id: ukZveNVmvvtwbDj0
@@ -976,13 +1057,20 @@ items:
                   enabled: false
                   formula: ''
                 number: 1
-                denomination: '10'
+                denomination: 10
                 bonus: ''
                 types:
                   - poison
+                scaling:
+                  number: 1
           name: Damage While Poisoned
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery:
@@ -1014,9 +1102,10 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: 4T18pEvubPMQLzvD
@@ -1060,13 +1149,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.2.2
-          createdTime: null
-          modifiedTime: 1737920990479
-          lastModifiedBy: dnd5ebuilder0000
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmVrock000000000.mmSpores00000000.DeVYxc3BdGlZNeD9
     flags:
@@ -1077,13 +1164,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSpores00000000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: 1737674751341
-      modifiedTime: 1745712729458
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 4
@@ -1110,6 +1195,7 @@ items:
             targets:
               - type: itemUses
                 value: '1'
+                scaling: {}
           description:
             chatFlavor: ''
           duration:
@@ -1119,6 +1205,7 @@ items:
           effects:
             - _id: dQ635FV7U5Y5LUE7
               onSave: false
+              level: {}
           range:
             override: false
             units: self
@@ -1147,10 +1234,12 @@ items:
                   enabled: false
                   formula: ''
                 number: 3
-                denomination: '6'
+                denomination: 6
                 bonus: ''
                 types:
                   - thunder
+                scaling:
+                  number: 1
             onSave: none
           save:
             ability:
@@ -1160,8 +1249,12 @@ items:
               formula: 8 + @mod + @prof
           name: ''
           img: ''
-          appliedEffects:
-            - dQ635FV7U5Y5LUE7
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery:
@@ -1185,13 +1278,14 @@ items:
         rules: '2024'
         book: ''
         license: CC-BY-4.0
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
       enchant: {}
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
       type:
@@ -1226,13 +1320,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.2.2
-          createdTime: null
-          modifiedTime: 1737921114342
-          lastModifiedBy: dnd5ebuilder0000
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmVrock000000000.mmStunningScreec.dQ635FV7U5Y5LUE7
     folder: 4T18pEvubPMQLzvD
@@ -1244,13 +1336,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmStunningScreec
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: 1737674752570
-      modifiedTime: 1745712729458
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 5
@@ -1260,13 +1350,13 @@ folder: 3893ZA5FlQZHzMBd
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
-  systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1732598129404
-  modifiedTime: 1745712729487
-  lastModifiedBy: dnd5ebuilder0000
   exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  createdTime: 1771452717027
+  modifiedTime: 1771452717027
+  lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:
   default: 0

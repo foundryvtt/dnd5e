@@ -353,22 +353,20 @@ system:
         mode: 0
       bonus: '@prof'
     movement:
-      burrow: null
-      climb: null
-      fly: null
-      swim: null
-      walk: 40
+      walk: '40'
       units: null
       hover: false
+      ignoredDifficultTerrain: []
     attunement:
       max: 3
     senses:
-      darkvision: null
-      blindsight: null
-      tremorsense: null
-      truesight: 120
       units: null
       special: ''
+      ranges:
+        darkvision: null
+        blindsight: null
+        tremorsense: null
+        truesight: 120
     spellcasting: int
     exhaustion: 0
     concentration:
@@ -404,6 +402,9 @@ system:
       level: 0
     loyalty:
       value: null
+    price:
+      value: null
+      denomination: gp
   details:
     biography:
       value: >-
@@ -431,11 +432,11 @@ system:
         - relics
   resources:
     legact:
-      value: 0
       max: 0
+      spent: 0
     legres:
-      value: 0
       max: 0
+      spent: 0
     lair:
       value: false
       initiative: null
@@ -589,9 +590,10 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: Dies outside the Abyss
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: L9Zgr8qAPc3ngKhb
@@ -601,13 +603,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmDemonicRestora
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712719829
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 0
@@ -639,10 +639,11 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties:
         - trait
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: L9Zgr8qAPc3ngKhb
@@ -652,13 +653,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMagicResistanc
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712719829
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 1
@@ -717,6 +716,12 @@ items:
             name: ''
             formula: ''
           img: systems/dnd5e/icons/svg/monster.svg
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -737,9 +742,10 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: 4T18pEvubPMQLzvD
@@ -753,13 +759,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712719829
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 2
@@ -794,8 +798,10 @@ items:
             override: false
           effects:
             - _id: GCED8YlF6qXTgEkd
+              level: {}
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -825,6 +831,13 @@ items:
             includeBase: true
             parts: []
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         uVVP0skhv3PLMfnz:
           type: check
           name: Escape Check
@@ -873,6 +886,13 @@ items:
               formula: '@skills.ath.passive'
             ability: ''
           _id: uVVP0skhv3PLMfnz
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -910,7 +930,6 @@ items:
       armor:
         value: null
       cover: null
-      crewed: false
       hp:
         value: null
         max: null
@@ -936,7 +955,6 @@ items:
             enabled: false
           scaling:
             number: 1
-      magicalBonus: null
       properties: []
       proficient: null
       range:
@@ -945,6 +963,8 @@ items:
         reach: 10
         units: ft
       mastery: ''
+      crew:
+        value: []
     folder: pSCWWdqMX9eUATRJ
     img: icons/commodities/claws/claw-pincer-grey.webp
     effects:
@@ -977,13 +997,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmGlabrezu000000.mmPincer00000000.GCED8YlF6qXTgEkd
     flags:
@@ -994,13 +1012,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmPincer00000000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712719829
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 3
@@ -1074,6 +1090,13 @@ items:
               calculation: str
               formula: 8 + @mod + @prof
           name: Save
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -1097,9 +1120,10 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: 4T18pEvubPMQLzvD
@@ -1113,13 +1137,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmPummel00000000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712719829
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 4
@@ -1153,6 +1175,7 @@ items:
             override: false
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -1177,6 +1200,13 @@ items:
             uuid: Compendium.dnd5e.spells24.Item.phbsplDarkness00
             ability: ''
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         nEpDExWVANrXkUgp:
           type: cast
           spell:
@@ -1209,6 +1239,7 @@ items:
             override: false
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -1222,6 +1253,13 @@ items:
             recovery: []
             max: ''
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         7H7mdx9fpf9sLUrX:
           type: cast
           spell:
@@ -1254,6 +1292,7 @@ items:
             override: false
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -1267,6 +1306,13 @@ items:
             recovery: []
             max: ''
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         Dbj4GfTAMKDQ5t5m:
           type: cast
           spell:
@@ -1302,6 +1348,7 @@ items:
             override: false
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -1317,6 +1364,13 @@ items:
                 type: recoverAll
             max: '1'
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         3fZhewrQQ6C50wvL:
           type: cast
           spell:
@@ -1352,6 +1406,7 @@ items:
             override: false
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -1367,6 +1422,13 @@ items:
                 type: recoverAll
             max: '1'
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         OpOHkxXeeNLEeEaS:
           type: cast
           spell:
@@ -1402,6 +1464,7 @@ items:
             override: false
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -1417,6 +1480,13 @@ items:
                 type: recoverAll
             max: '1'
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -1448,9 +1518,10 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: 4T18pEvubPMQLzvD
@@ -1464,13 +1535,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSpellcasting00
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712719829
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 5
@@ -1529,9 +1598,6 @@ items:
         consumed: false
         cost: 0
         supply: 0
-      preparation:
-        mode: prepared
-        prepared: false
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
@@ -1555,6 +1621,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             prompt: true
             template:
@@ -1572,7 +1639,16 @@ items:
             spent: 0
             recovery: []
           sort: 0
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       identifier: darkness
+      method: spell
+      prepared: 0
     type: spell
     img: icons/magic/unholy/orb-rays-blue.webp
     effects:
@@ -1606,13 +1682,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmGlabrezu000000.OYJaCanfv7pQKr1j.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -1625,13 +1699,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDarkness00
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712719829
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: OYJaCanfv7pQKr1j
     _key: '!actors.items!mmGlabrezu000000.OYJaCanfv7pQKr1j'
   - name: Detect Magic
@@ -1691,9 +1763,6 @@ items:
         consumed: false
         cost: 0
         supply: 0
-      preparation:
-        mode: prepared
-        prepared: false
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
@@ -1716,8 +1785,10 @@ items:
             concentration: false
           effects:
             - _id: BHw91lQmVgdx39WZ
+              level: {}
           range:
             override: false
+            units: self
           target:
             prompt: false
             template:
@@ -1737,7 +1808,16 @@ items:
             max: ''
           sort: 0
           name: Cast
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       identifier: detect-magic
+      method: spell
+      prepared: 0
     type: spell
     img: icons/magic/symbols/runes-carved-stone-green.webp
     effects:
@@ -1767,13 +1847,11 @@ items:
           compendiumSource: >-
             Compendium.dnd5e.spells24.Item.phbsplDetectEvil.ActiveEffect.pOgbtXbKVGdbwjjE
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmGlabrezu000000.TyBg1ubPWzY9AqFZ.BHw91lQmVgdx39WZ
       - _id: dnd5espellchange
@@ -1806,13 +1884,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmGlabrezu000000.TyBg1ubPWzY9AqFZ.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -1828,13 +1904,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDetectMagi
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712719829
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: TyBg1ubPWzY9AqFZ
     _key: '!actors.items!mmGlabrezu000000.TyBg1ubPWzY9AqFZ'
   - name: Dispel Magic
@@ -1861,7 +1935,7 @@ items:
           count: ''
           choice: false
         template:
-          units: ''
+          units: ft
           contiguous: false
       range:
         value: '120'
@@ -1880,9 +1954,6 @@ items:
         consumed: false
         cost: 0
         supply: 0
-      preparation:
-        mode: prepared
-        prepared: false
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
@@ -1906,6 +1977,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             prompt: true
             template:
@@ -1923,7 +1995,16 @@ items:
             spent: 0
             recovery: []
           sort: 0
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       identifier: dispel-magic
+      method: spell
+      prepared: 0
     type: spell
     img: icons/skills/melee/sword-damaged-broken-purple.webp
     effects:
@@ -1957,13 +2038,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmGlabrezu000000.o9zHpjCrGZEcIJzZ.dnd5espellchange
     folder: HCovEE4VoPGlIbKi
@@ -1976,13 +2055,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDispelMagi
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712719829
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: o9zHpjCrGZEcIJzZ
     _key: '!actors.items!mmGlabrezu000000.o9zHpjCrGZEcIJzZ'
   - name: Confusion
@@ -2046,9 +2123,6 @@ items:
         consumed: false
         cost: 0
         supply: 0
-      preparation:
-        mode: prepared
-        prepared: false
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
@@ -2072,8 +2146,10 @@ items:
           effects:
             - _id: VxmsgUz9OIUet6WC
               onSave: false
+              level: {}
           range:
             override: false
+            units: self
           target:
             prompt: true
             template:
@@ -2095,7 +2171,16 @@ items:
             spent: 0
             recovery: []
           sort: 0
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       identifier: confusion
+      method: spell
+      prepared: 0
     type: spell
     img: icons/magic/symbols/question-stone-yellow.webp
     effects:
@@ -2132,13 +2217,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmGlabrezu000000.DJvVJd398Rul9PmN.VxmsgUz9OIUet6WC
       - _id: dnd5espellchange
@@ -2171,13 +2254,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmGlabrezu000000.DJvVJd398Rul9PmN.dnd5espellchange
     folder: qi3IbnEwap7mRw4b
@@ -2190,13 +2271,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplConfusion0
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712719829
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: DJvVJd398Rul9PmN
     _key: '!actors.items!mmGlabrezu000000.DJvVJd398Rul9PmN'
   - name: Fly
@@ -2229,7 +2308,7 @@ items:
           choice: false
           special: ''
         template:
-          units: ''
+          units: ft
           contiguous: false
           type: ''
       range:
@@ -2251,9 +2330,6 @@ items:
         consumed: false
         cost: 0
         supply: 0
-      preparation:
-        mode: prepared
-        prepared: false
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
@@ -2276,8 +2352,10 @@ items:
             concentration: false
           effects:
             - _id: EHFLuTHqI6cXn1zb
+              level: {}
           range:
             override: false
+            units: self
           target:
             prompt: true
             template:
@@ -2295,7 +2373,16 @@ items:
             spent: 0
             recovery: []
           sort: 0
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       identifier: fly
+      method: spell
+      prepared: 0
     type: spell
     img: icons/creatures/birds/songbird-yellow-flying.webp
     effects:
@@ -2332,13 +2419,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmGlabrezu000000.uMQdIP114kiMDwyZ.EHFLuTHqI6cXn1zb
       - _id: dnd5espellchange
@@ -2371,13 +2456,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmGlabrezu000000.uMQdIP114kiMDwyZ.dnd5espellchange
     folder: HCovEE4VoPGlIbKi
@@ -2390,13 +2473,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplFly0000000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712719829
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: uMQdIP114kiMDwyZ
     _key: '!actors.items!mmGlabrezu000000.uMQdIP114kiMDwyZ'
   - name: Power Word Stun
@@ -2430,7 +2511,7 @@ items:
           type: creature
           special: ''
         template:
-          units: ''
+          units: ft
           contiguous: false
           type: ''
       range:
@@ -2450,9 +2531,6 @@ items:
         consumed: false
         cost: 0
         supply: 0
-      preparation:
-        mode: prepared
-        prepared: false
       activities:
         Sy5x2VhhG7mcnPvF:
           type: utility
@@ -2474,9 +2552,12 @@ items:
             override: false
           effects:
             - _id: o7XJceFSBTiIIPFo
+              level: {}
             - _id: B5dLPDfw1fDtfRW1
+              level: {}
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -2496,7 +2577,16 @@ items:
             name: ''
             formula: ''
           name: Cast
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       identifier: power-word-stun
+      method: spell
+      prepared: 0
     type: spell
     img: icons/magic/unholy/strike-body-life-soul-purple.webp
     effects:
@@ -2529,13 +2619,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmGlabrezu000000.EsCIdlnqYCUbyDIm.o7XJceFSBTiIIPFo
       - name: No Movement
@@ -2583,13 +2671,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmGlabrezu000000.EsCIdlnqYCUbyDIm.B5dLPDfw1fDtfRW1
       - _id: dnd5espellchange
@@ -2622,13 +2708,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmGlabrezu000000.EsCIdlnqYCUbyDIm.dnd5espellchange
     folder: M5CvwK9zVtzx6Dnn
@@ -2641,13 +2725,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplPowerWordS
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712719829
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: EsCIdlnqYCUbyDIm
     _key: '!actors.items!mmGlabrezu000000.EsCIdlnqYCUbyDIm'
 effects: []
@@ -2655,13 +2737,13 @@ folder: 3893ZA5FlQZHzMBd
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
-  systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1745415564135
-  modifiedTime: 1745712719866
-  lastModifiedBy: dnd5ebuilder0000
   exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  createdTime: 1771452704843
+  modifiedTime: 1771452704843
+  lastModifiedBy: dnd5ebuilder0000
 sort: 131250
 ownership:
   default: 0

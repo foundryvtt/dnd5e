@@ -352,22 +352,20 @@ system:
         mode: 0
       bonus: ''
     movement:
-      burrow: null
-      climb: null
-      fly: null
-      swim: null
-      walk: 30
+      walk: '30'
       units: null
       hover: false
+      ignoredDifficultTerrain: []
     attunement:
       max: 3
     senses:
-      darkvision: 60
-      blindsight: null
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: 60
+        blindsight: null
+        tremorsense: null
+        truesight: null
     spellcasting: str
     exhaustion: 0
     concentration:
@@ -403,12 +401,13 @@ system:
       level: 0
     loyalty:
       value: null
+    price:
+      value: null
+      denomination: gp
   details:
     biography:
       value: >-
-        <div class="gear"><p><strong>Gear:</strong>
-        @UUID[Compendium.dnd5e.equipment24.Item.phbwepShortbow00]{Shortbow},
-        @UUID[Compendium.dnd5e.equipment24.Item.phbwepShortsword]{Shortsword}</p></div><h1>Skeletons</h1><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.w1RMyPzpjolhQMVX
+        <h1>Skeletons</h1><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.w1RMyPzpjolhQMVX
         caption=false cite=false classes="no-embed
         mm"]</p><h2>Skeleton</h2><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.pm1ZyudVsOl0ve5C
         caption=false cite=false classes="no-embed mm free-rules-embed"]</p>
@@ -432,11 +431,11 @@ system:
       value: []
   resources:
     legact:
-      value: 0
       max: 0
+      spent: 0
     legres:
-      value: 0
       max: 0
+      spent: 0
     lair:
       value: false
       initiative: null
@@ -588,7 +587,6 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       range:
         value: null
         long: null
@@ -631,10 +629,10 @@ items:
       type:
         value: martialM
         baseItem: shortsword
-      magicalBonus: null
       properties:
         - fin
         - lgt
+        - gear
       proficient: null
       activities:
         42jdrHDfDRCcYeL4:
@@ -672,7 +670,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
               type: ''
@@ -701,9 +699,18 @@ items:
           sort: 0
           _id: 42jdrHDfDRCcYeL4
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       ammunition: {}
       mastery: vex
       identifier: shortsword
+      crew:
+        value: []
     _id: vEXMIYtUBn1SxPZD
     type: weapon
     folder: fd3qxAXCv2FhExPp
@@ -720,13 +727,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepShortsword
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712727054
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!mmSkeleton000000.vEXMIYtUBn1SxPZD'
   - name: Shortbow
     system:
@@ -755,7 +760,6 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       range:
         value: 80
         long: 320
@@ -798,10 +802,10 @@ items:
       type:
         value: simpleR
         baseItem: shortbow
-      magicalBonus: null
       properties:
         - amm
         - two
+        - gear
       proficient: null
       activities:
         XTpNEcni4iwfmaeA:
@@ -839,7 +843,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
               type: ''
@@ -868,10 +872,19 @@ items:
           sort: 0
           _id: XTpNEcni4iwfmaeA
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       ammunition:
         type: arrow
       mastery: vex
       identifier: shortbow
+      crew:
+        value: []
     _id: kCpjX4Ys7VLJ25qi
     type: weapon
     folder: atG8UGtcNyNweUOt
@@ -888,26 +901,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepShortbow00
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712727054
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!mmSkeleton000000.kCpjX4Ys7VLJ25qi'
 effects: []
 folder: fSNeRtZ6WOSjk4f8
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
-  systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1732598129404
-  modifiedTime: 1745712727080
-  lastModifiedBy: dnd5ebuilder0000
   exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  createdTime: 1771452713996
+  modifiedTime: 1771452713996
+  lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:
   default: 0

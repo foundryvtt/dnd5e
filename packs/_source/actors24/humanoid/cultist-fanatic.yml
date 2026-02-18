@@ -353,22 +353,20 @@ system:
         mode: 0
       bonus: ''
     movement:
-      burrow: null
-      climb: null
-      fly: null
-      swim: null
-      walk: 30
+      walk: '30'
       units: null
       hover: false
+      ignoredDifficultTerrain: []
     attunement:
       max: 3
     senses:
-      darkvision: null
-      blindsight: null
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: null
+        blindsight: null
+        tremorsense: null
+        truesight: null
     spellcasting: wis
     exhaustion: 0
     concentration:
@@ -404,14 +402,13 @@ system:
       level: 0
     loyalty:
       value: null
+    price:
+      value: null
+      denomination: gp
   details:
     biography:
       value: >-
-        <div class="gear"><p><strong>Gear:</strong>
-        @UUID[Compendium.dnd5e.equipment24.Item.phbagHolySymbolV]{Holy Symbol
-        (Varies)},
-        @UUID[Compendium.dnd5e.equipment24.Item.phbarmLeatherArm]{Leather
-        Armor}</p></div><h1>Cultists</h1><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.VICfYukXoYkWJ1yn
+        <h1>Cultists</h1><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.VICfYukXoYkWJ1yn
         caption=false cite=false classes="no-embed mm
         free-rules-embed"]</p><h2>Cultist
         Fanatic</h2><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.DHw4tAz06WzLz07b
@@ -435,11 +432,11 @@ system:
         - relics
   resources:
     legact:
-      value: 0
       max: 0
+      spent: 0
     legres:
-      value: 0
       max: 0
+      spent: 0
     lair:
       value: false
       initiative: null
@@ -588,6 +585,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -627,6 +625,13 @@ items:
                 scaling:
                   number: 1
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -660,7 +665,6 @@ items:
       armor:
         value: null
       cover: null
-      crewed: false
       hp:
         value: null
         max: null
@@ -687,7 +691,6 @@ items:
           scaling:
             number: 1
           bonus: ''
-      magicalBonus: null
       properties:
         - ver
       proficient: null
@@ -697,6 +700,8 @@ items:
         reach: 5
         units: ft
       mastery: sap
+      crew:
+        value: []
     folder: pSCWWdqMX9eUATRJ
     img: icons/weapons/swords/sword-runed-glowing.webp
     effects: []
@@ -708,13 +713,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmPactBlade00000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712716143
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 0
@@ -748,6 +751,7 @@ items:
             override: false
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -771,6 +775,13 @@ items:
             uuid: Compendium.dnd5e.spells24.Item.phbsplLight00000
             ability: ''
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         onvTWamS398c51Rq:
           type: cast
           spell:
@@ -802,6 +813,7 @@ items:
             override: false
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -815,6 +827,13 @@ items:
             recovery: []
             max: ''
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         NsBX7tBXlDfi2BWV:
           type: cast
           spell:
@@ -849,6 +868,7 @@ items:
             override: false
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -864,6 +884,13 @@ items:
                 type: recoverAll
             max: '2'
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         RmN0E36r5loY1n21:
           type: cast
           spell:
@@ -898,6 +925,7 @@ items:
             override: false
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -913,6 +941,13 @@ items:
                 type: recoverAll
             max: '1'
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -941,9 +976,10 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: 4T18pEvubPMQLzvD
@@ -957,13 +993,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSpellcasting00
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712716143
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 1
@@ -1009,6 +1043,7 @@ items:
             override: false
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -1022,6 +1057,13 @@ items:
             recovery: []
             max: ''
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery:
@@ -1041,11 +1083,12 @@ items:
         rules: '2024'
         book: ''
         license: CC-BY-4.0
-      advancement: []
+      advancement: {}
       enchant: {}
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
       type:
@@ -1063,13 +1106,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSpiritualWeapo
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712716143
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 2
@@ -1131,9 +1172,6 @@ items:
         consumed: false
         cost: 0
         supply: 0
-      preparation:
-        mode: prepared
-        prepared: false
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
@@ -1156,6 +1194,7 @@ items:
             concentration: false
           range:
             override: false
+            units: self
           target:
             prompt: true
             template:
@@ -1178,6 +1217,7 @@ items:
             attacks: true
             saves: false
             ability: ''
+            disposition: false
           profiles:
             - count: ''
               name: ''
@@ -1188,7 +1228,6 @@ items:
                 max: null
               types: []
           summon:
-            identifier: ''
             mode: ''
             prompt: true
           uses:
@@ -1198,7 +1237,16 @@ items:
           sort: 0
           name: ''
           effects: []
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       identifier: spiritual-weapon
+      method: spell
+      prepared: 0
     type: spell
     img: icons/weapons/axes/axe-double-gold.webp
     effects:
@@ -1232,13 +1280,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmCultistFanatic.z817Et9IPt6qHawH.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -1254,13 +1300,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplSpiritualW
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712716143
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: z817Et9IPt6qHawH
     _key: '!actors.items!mmCultistFanatic.z817Et9IPt6qHawH'
   - name: Light
@@ -1293,7 +1337,7 @@ items:
           count: ''
           type: ''
         template:
-          units: ''
+          units: ft
           contiguous: false
           type: ''
       range:
@@ -1313,9 +1357,6 @@ items:
         consumed: false
         cost: 0
         supply: 0
-      preparation:
-        mode: always
-        prepared: false
       activities:
         EnaiVH67oUJzyHsF:
           type: summon
@@ -1338,6 +1379,7 @@ items:
             override: false
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -1367,6 +1409,7 @@ items:
             attacks: false
             proficiency: false
             saves: false
+            disposition: false
           profiles:
             - count: ''
               name: ''
@@ -1379,10 +1422,18 @@ items:
           summon:
             prompt: false
             mode: ''
-            identifier: ''
           name: Cast
           effects: []
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       identifier: light
+      method: spell
+      prepared: 2
     type: spell
     img: icons/sundries/lights/candle-pillar-lit-yellow.webp
     effects:
@@ -1412,13 +1463,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmCultistFanatic.7Hk3xmtV1lhTEMu6.dnd5espellchange
     folder: 4FhsY9FJQd7h7MZb
@@ -1431,13 +1480,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplLight00000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712716143
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: 7Hk3xmtV1lhTEMu6
     _key: '!actors.items!mmCultistFanatic.7Hk3xmtV1lhTEMu6'
   - name: Thaumaturgy
@@ -1479,7 +1526,7 @@ items:
           count: ''
           type: ''
         template:
-          units: ''
+          units: ft
           contiguous: false
           type: ''
       range:
@@ -1499,9 +1546,6 @@ items:
         consumed: false
         cost: 0
         supply: 0
-      preparation:
-        mode: always
-        prepared: false
       activities:
         q83milmNAKF9cymI:
           type: utility
@@ -1525,6 +1569,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -1543,7 +1588,16 @@ items:
             name: ''
             formula: ''
           name: Cast
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       identifier: thaumaturgy
+      method: spell
+      prepared: 2
     type: spell
     img: icons/environment/people/cleric-orange.webp
     effects:
@@ -1573,13 +1627,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmCultistFanatic.XLyCWW9vPAQwvaGr.dnd5espellchange
     folder: 4FhsY9FJQd7h7MZb
@@ -1595,13 +1647,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplThaumaturg
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712716143
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: XLyCWW9vPAQwvaGr
     _key: '!actors.items!mmCultistFanatic.XLyCWW9vPAQwvaGr'
   - name: Command
@@ -1644,7 +1694,7 @@ items:
           choice: false
           special: ''
         template:
-          units: ''
+          units: ft
           contiguous: false
           type: ''
       range:
@@ -1664,9 +1714,6 @@ items:
         consumed: false
         cost: 0
         supply: 0
-      preparation:
-        mode: prepared
-        prepared: false
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
@@ -1690,6 +1737,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             prompt: true
             template:
@@ -1711,7 +1759,16 @@ items:
             spent: 0
             recovery: []
           sort: 0
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       identifier: command
+      method: spell
+      prepared: 0
     type: spell
     img: icons/magic/sonic/scream-wail-shout-teal.webp
     effects:
@@ -1741,13 +1798,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmCultistFanatic.uW5SgMN0N4BGrkkl.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -1760,13 +1815,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplCommand000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712716143
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: uW5SgMN0N4BGrkkl
     _key: '!actors.items!mmCultistFanatic.uW5SgMN0N4BGrkkl'
   - name: Hold Person
@@ -1793,7 +1846,7 @@ items:
           count: '@item.level - 1'
           choice: false
         template:
-          units: ''
+          units: ft
           contiguous: false
       range:
         value: '60'
@@ -1814,9 +1867,6 @@ items:
         consumed: false
         cost: 0
         supply: 0
-      preparation:
-        mode: prepared
-        prepared: false
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
@@ -1840,8 +1890,10 @@ items:
           effects:
             - _id: PklwZi3SKQ3JU2M2
               onSave: false
+              level: {}
           range:
             override: false
+            units: self
           target:
             prompt: true
             template:
@@ -1863,7 +1915,16 @@ items:
             spent: 0
             recovery: []
           sort: 0
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       identifier: hold-person
+      method: spell
+      prepared: 0
     type: spell
     img: icons/magic/control/encase-creature-humanoid-hold.webp
     effects:
@@ -1895,13 +1956,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmCultistFanatic.usukVMEiBvOYV5GI.PklwZi3SKQ3JU2M2
       - _id: dnd5espellchange
@@ -1930,13 +1989,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmCultistFanatic.usukVMEiBvOYV5GI.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -1949,27 +2006,160 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplHoldPerson
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712716143
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: usukVMEiBvOYV5GI
     _key: '!actors.items!mmCultistFanatic.usukVMEiBvOYV5GI'
+  - name: Holy Symbol
+    system:
+      description:
+        value: >-
+          <p>A Holy Symbol takes one of the forms in the Holy Symbol table and
+          is bejeweled or painted to channel divine magic. A Cleric or Paladin
+          can use a Holy Symbol as a Spellcasting Focus.</p><p>The table
+          indicates whether a Holy Symbol needs to be held, worn, or borne on
+          fabric (such as a tabard or banner) or a
+          Shield.</p><table><caption>Holy
+          Symbols</caption><thead><tr><td>Symbol</td><td>Weight</td><td>Cost</td></tr></thead><tbody><tr><td>@UUID[Compendium.dnd5e.equipment24.Item.phbhsyAmuletworn]{Amulet}
+          (worn or held)</td><td>1 lb.</td><td>5
+          GP</td></tr><tr><td>@UUID[Compendium.dnd5e.equipment24.Item.phbhsyEmblemborn]{Emblem}
+          (borne on fabric or a Shield)</td><td>—</td><td>5
+          GP</td></tr><tr><td>@UUID[Compendium.dnd5e.equipment24.Item.phbhsyReliquaryh]{Reliquary}
+          (held)</td><td>2 lb.</td><td>5 GP</td></tr></tbody></table>
+        chat: ''
+      price:
+        value: 0
+        denomination: gp
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 0
+        units: lb
+      rarity: ''
+      type:
+        value: gear
+        subtype: ''
+      properties:
+        - gear
+      identifier: holy-symbol-varies
+    _id: mbdm4GtNbqQMnBWg
+    type: loot
+    folder: YKJofRdXHKeBKJ4C
+    img: icons/sundries/flags/banner-symbol-sun-gold-red.webp
+    effects: []
+    sort: 300000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd-players-handbook.equipment.Item.phbagHolySymbolV
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
+    _key: '!actors.items!mmCultistFanatic.mbdm4GtNbqQMnBWg'
+  - name: Leather Armor
+    system:
+      description:
+        value: ''
+        chat: ''
+      price:
+        value: 10
+        denomination: gp
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 10
+        units: lb
+      rarity: ''
+      attunement: ''
+      cover: null
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      armor:
+        value: 11
+        dex: null
+      hp:
+        value: null
+        max: null
+        dt: null
+        conditions: ''
+      type:
+        value: light
+        baseItem: leather
+      properties:
+        - gear
+      speed:
+        value: null
+        conditions: ''
+        units: ft
+      strength: null
+      proficient: null
+      activities: {}
+      identifier: leather-armor
+      crew:
+        value: []
+      attuned: false
+      equipped: true
+    _id: ypPPvrAxDJVPnmWQ
+    type: equipment
+    folder: G3X11BbtmEqLmEnK
+    img: icons/equipment/chest/breastplate-scale-leather.webp
+    effects: []
+    sort: 0
+    ownership:
+      default: 0
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd-players-handbook.equipment.Item.phbarmLeatherArm
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
+    _key: '!actors.items!mmCultistFanatic.ypPPvrAxDJVPnmWQ'
 effects: []
 folder: oq65o5ZsauMtb1JY
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
-  systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1745415931803
-  modifiedTime: 1745712716173
-  lastModifiedBy: dnd5ebuilder0000
   exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  createdTime: 1771452700040
+  modifiedTime: 1771452700040
+  lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:
   default: 0

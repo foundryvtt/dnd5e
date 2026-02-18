@@ -11,14 +11,15 @@ system:
     type:
       value: beast
     race: null
-    environment: ''
     cr: null
-    spellLevel: 0
-    source:
-      custom: ''
     ideal: ''
     bond: ''
     flaw: ''
+    habitat:
+      custom: ''
+      value: []
+    treasure:
+      value: []
   abilities:
     str:
       value: 17
@@ -27,6 +28,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     dex:
       value: 13
       proficient: 0
@@ -34,6 +45,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     con:
       value: 15
       proficient: 0
@@ -41,6 +62,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     int:
       value: 4
       proficient: 0
@@ -48,6 +79,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     wis:
       value: 14
       proficient: 0
@@ -55,6 +96,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     cha:
       value: 3
       proficient: 0
@@ -62,6 +113,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
   traits:
     size: lg
     di:
@@ -85,6 +146,8 @@ system:
     languages:
       value: []
       custom: Understands the languages you know
+      communication: {}
+    important: false
   currency:
     pp: 0
     gp: 0
@@ -332,22 +395,21 @@ system:
         mode: 0
       bonus: ''
     movement:
-      burrow: null
-      climb: 40
-      fly: null
-      swim: null
-      walk: 40
+      climb: '40'
+      walk: '40'
       units: null
       hover: false
+      ignoredDifficultTerrain: []
     attunement:
       max: 3
     senses:
-      darkvision: 60
-      blindsight: null
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: 60
+        blindsight: null
+        tremorsense: null
+        truesight: null
     spellcasting: int
     exhaustion: 0
     concentration:
@@ -371,27 +433,37 @@ system:
       tempmax: 0
       formula: '30'
     death:
-      ability: ''
       roll:
         min: null
         max: null
         mode: 0
       success: 0
       failure: 0
+      bonuses:
+        save: ''
+    spell:
+      level: 0
+    loyalty: {}
+    price:
+      value: null
+      denomination: gp
   resources:
     legact:
-      value: 0
       max: 0
+      spent: 0
     legres:
-      value: 0
       max: 0
+      spent: 0
     lair:
       value: false
       initiative: null
+      inside: false
   source:
     rules: '2024'
     license: CC-BY-4.0
     book: ''
+    custom: ''
+    revision: 1
 _id: phbmobGiantInsec
 img: ''
 prototypeToken:
@@ -499,12 +571,13 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
       activities: {}
       enchant: {}
       identifier: spider-climb
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     _id: phbaoiSpiderClim
@@ -519,13 +592,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1740680159368
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!phbmobGiantInsec.phbaoiSpiderClim'
   - name: Multiattack
     system:
@@ -551,6 +622,7 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
       activities:
@@ -589,7 +661,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
               type: ''
@@ -609,10 +681,15 @@ items:
           sort: 0
           name: Activate
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       enchant: {}
       identifier: multiattack
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     _id: phbaoiMultiattac
@@ -631,13 +708,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1740680159368
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!phbmobGiantInsec.phbaoiMultiattac'
   - name: Poison Jab
     system:
@@ -663,6 +738,7 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
       activities:
@@ -702,7 +778,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
               type: ''
@@ -751,10 +827,15 @@ items:
           sort: 0
           name: ''
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       enchant: {}
       identifier: poison-jab
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     _id: phbaoiPoisonJab0
@@ -773,13 +854,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1740680159368
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!phbmobGiantInsec.phbaoiPoisonJab0'
   - name: Web Bolt
     system:
@@ -806,6 +885,7 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: Spider Only
       activities:
@@ -827,12 +907,13 @@ items:
             chatFlavor: ''
           duration:
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
             concentration: false
           effects:
             - _id: Gvwt9wpCcJgC0yMl
+              level: {}
           range:
             value: '60'
             units: ft
@@ -846,7 +927,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
               type: ''
@@ -884,9 +965,16 @@ items:
             spent: 0
             recovery: []
           sort: 0
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       enchant: {}
       identifier: web-bolt
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     _id: phbaoiWebBoltSpi
@@ -940,13 +1028,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.0.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!phbmobGiantInsec.phbaoiWebBoltSpi.Gvwt9wpCcJgC0yMl
     folder: null
@@ -957,13 +1043,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1740680159368
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!phbmobGiantInsec.phbaoiWebBoltSpi'
   - name: Venomous Spew
     system:
@@ -990,6 +1074,7 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: Centipede Only
       activities:
@@ -1018,6 +1103,7 @@ items:
           effects:
             - _id: jVWtHTrlPNi4dpDi
               onSave: false
+              level: {}
           range:
             value: '10'
             units: ft
@@ -1031,7 +1117,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: '1'
               type: creature
@@ -1055,11 +1141,15 @@ items:
           sort: 0
           name: ''
           img: ''
-          appliedEffects:
-            - jVWtHTrlPNi4dpDi
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       enchant: {}
       identifier: venomous-spew
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     _id: phbaoiVenomousSp
@@ -1095,13 +1185,11 @@ items:
           compendiumSource: >-
             Compendium.dnd5e.actors24.Actor.phbginGiantCenti.Item.phbaoiVenomousSp.ActiveEffect.uUvxWKSj8qQRIbTK
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.0.0
-          createdTime: 1725916429627
-          modifiedTime: 1725916429627
-          lastModifiedBy: dnd5ebuilder0000
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!phbmobGiantInsec.phbaoiVenomousSp.jVWtHTrlPNi4dpDi
     folder: null
@@ -1116,13 +1204,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1740680159368
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!phbmobGiantInsec.phbaoiVenomousSp'
 effects: []
 folder: 4Lxoa4gitE28qJLk
@@ -1134,11 +1220,11 @@ flags:
     showTokenPortrait: false
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
-  systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425913370
-  modifiedTime: 1745256827644
-  lastModifiedBy: dnd5ebuilder0000
   exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  createdTime: 1771452720611
+  modifiedTime: 1771452720611
+  lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!phbmobGiantInsec'

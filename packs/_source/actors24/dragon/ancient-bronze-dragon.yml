@@ -353,22 +353,22 @@ system:
         mode: 0
       bonus: '@prof * 2'
     movement:
-      burrow: null
-      climb: null
-      fly: 80
-      swim: 40
-      walk: 40
+      fly: '80'
+      swim: '40'
+      walk: '40'
       units: null
       hover: false
+      ignoredDifficultTerrain: []
     attunement:
       max: 3
     senses:
-      darkvision: 120
-      blindsight: 60
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: 120
+        blindsight: 60
+        tremorsense: null
+        truesight: null
     spellcasting: cha
     exhaustion: 0
     concentration:
@@ -404,6 +404,9 @@ system:
       level: 0
     loyalty:
       value: null
+    price:
+      value: null
+      denomination: gp
   details:
     biography:
       value: ''
@@ -425,11 +428,11 @@ system:
         - implements
   resources:
     legact:
-      value: 3
       max: 3
+      spent: 0
     legres:
-      value: 4
       max: 4
+      spent: 0
     lair:
       value: true
       initiative: null
@@ -574,10 +577,11 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties:
         - trait
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: L9Zgr8qAPc3ngKhb
@@ -587,13 +591,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmAmphibious0000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712712311
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 0
@@ -654,6 +656,12 @@ items:
             formula: ''
           name: Expend Use
           img: systems/dnd5e/icons/svg/monster.svg
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -676,10 +684,11 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties:
         - trait
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: L9Zgr8qAPc3ngKhb
@@ -693,13 +702,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmLegendaryResis
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712712311
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 1
@@ -734,6 +741,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -748,6 +756,13 @@ items:
           roll:
             prompt: false
             visible: false
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -769,9 +784,10 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: 4T18pEvubPMQLzvD
@@ -785,13 +801,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712712311
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 2
@@ -827,6 +841,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -866,6 +881,13 @@ items:
                 scaling:
                   number: 1
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -893,11 +915,10 @@ items:
       rarity: ''
       attunement: ''
       attuned: false
-      equipped: false
+      equipped: true
       armor:
         value: null
       cover: null
-      crewed: false
       hp:
         value: null
         max: null
@@ -923,7 +944,6 @@ items:
             enabled: false
           scaling:
             number: 1
-      magicalBonus: null
       properties: []
       proficient: null
       range:
@@ -932,6 +952,8 @@ items:
         reach: 15
         units: ft
       mastery: ''
+      crew:
+        value: []
     folder: pSCWWdqMX9eUATRJ
     img: icons/skills/melee/shield-damaged-broken-orange.webp
     effects: []
@@ -943,13 +965,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmRend0000000000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712712311
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 3
@@ -985,6 +1005,7 @@ items:
           effects:
             - _id: HG9R2hTEqJ0G5urK
               onSave: false
+              level: {}
           range:
             override: false
             units: self
@@ -1017,6 +1038,13 @@ items:
               calculation: con
               formula: 8 + @mod + @prof
           name: Save
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -1041,9 +1069,10 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: 4T18pEvubPMQLzvD
@@ -1084,13 +1113,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmAncientBronzeD.mmRepulsionBreat.HG9R2hTEqJ0G5urK
     flags:
@@ -1101,13 +1128,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmRepulsionBreat
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712712311
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 4
@@ -1188,6 +1213,13 @@ items:
               calculation: con
               formula: ''
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery:
@@ -1216,9 +1248,10 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: 4T18pEvubPMQLzvD
@@ -1232,13 +1265,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmLightningBreat
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712712311
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 5
@@ -1283,6 +1314,7 @@ items:
             override: false
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -1296,6 +1328,13 @@ items:
             recovery: []
             max: ''
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         bKW0LQk0QApktLd5:
           type: cast
           spell:
@@ -1328,6 +1367,7 @@ items:
             override: false
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -1341,6 +1381,13 @@ items:
             recovery: []
             max: ''
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         zWGgEWpCjLKPnNmF:
           type: cast
           spell:
@@ -1374,6 +1421,7 @@ items:
             override: false
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -1387,6 +1435,13 @@ items:
             recovery: []
             max: ''
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         Du9LYdBM6PvuZbtT:
           type: cast
           spell:
@@ -1419,6 +1474,7 @@ items:
             override: false
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -1432,6 +1488,13 @@ items:
             recovery: []
             max: ''
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         wvkM0hifN0HRAjVc:
           type: cast
           spell:
@@ -1464,6 +1527,7 @@ items:
             override: false
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -1477,6 +1541,13 @@ items:
             recovery: []
             max: ''
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         p4haCdhv9jKddFiF:
           type: cast
           spell:
@@ -1512,6 +1583,7 @@ items:
             override: false
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -1527,6 +1599,13 @@ items:
                 type: recoverAll
             max: '1'
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         9gfYxIVBcw6i0ce2:
           type: cast
           spell:
@@ -1562,6 +1641,7 @@ items:
             override: false
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -1577,6 +1657,13 @@ items:
                 type: recoverAll
             max: '1'
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         yjvj2pLCok7FmH7n:
           type: cast
           spell:
@@ -1612,6 +1699,7 @@ items:
             override: false
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -1627,6 +1715,13 @@ items:
                 type: recoverAll
             max: '1'
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         m7YyaRxruYArQNI9:
           type: cast
           spell:
@@ -1662,6 +1757,7 @@ items:
             override: false
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -1677,6 +1773,13 @@ items:
                 type: recoverAll
             max: '1'
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -1718,9 +1821,10 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: 4T18pEvubPMQLzvD
@@ -1734,13 +1838,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSpellcasting00
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712712311
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 6
@@ -1802,9 +1904,6 @@ items:
         consumed: false
         cost: 0
         supply: 0
-      preparation:
-        mode: prepared
-        prepared: false
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
@@ -1827,8 +1926,10 @@ items:
             concentration: false
           effects:
             - _id: BHw91lQmVgdx39WZ
+              level: {}
           range:
             override: false
+            units: self
           target:
             prompt: false
             template:
@@ -1848,7 +1949,16 @@ items:
             max: ''
           sort: 0
           name: Cast
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       identifier: detect-magic
+      method: spell
+      prepared: 0
     type: spell
     img: icons/magic/symbols/runes-carved-stone-green.webp
     effects:
@@ -1878,13 +1988,11 @@ items:
           compendiumSource: >-
             Compendium.dnd5e.spells24.Item.phbsplDetectEvil.ActiveEffect.pOgbtXbKVGdbwjjE
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmAncientBronzeD.aS9fEQs26AaqVtkR.BHw91lQmVgdx39WZ
       - _id: dnd5espellchange
@@ -1917,13 +2025,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmAncientBronzeD.aS9fEQs26AaqVtkR.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -1939,13 +2045,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDetectMagi
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712712311
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: aS9fEQs26AaqVtkR
     _key: '!actors.items!mmAncientBronzeD.aS9fEQs26AaqVtkR'
   - name: Guiding Bolt
@@ -1979,7 +2083,7 @@ items:
           choice: false
           special: ''
         template:
-          units: ''
+          units: ft
           contiguous: false
           type: ''
       range:
@@ -2000,9 +2104,6 @@ items:
         consumed: false
         cost: 0
         supply: 0
-      preparation:
-        mode: prepared
-        prepared: false
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
@@ -2025,8 +2126,10 @@ items:
             concentration: false
           effects:
             - _id: rHzZCeXfdeTcYyk8
+              level: {}
           range:
             override: false
+            units: self
           target:
             prompt: true
             template:
@@ -2065,7 +2168,16 @@ items:
             spent: 0
             recovery: []
           sort: 0
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       identifier: guiding-bolt
+      method: spell
+      prepared: 0
     type: spell
     img: icons/magic/light/projectile-flare-blue.webp
     effects:
@@ -2098,13 +2210,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmAncientBronzeD.UPNvQdn6GdOP79du.rHzZCeXfdeTcYyk8
       - _id: dnd5espellchange
@@ -2137,13 +2247,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmAncientBronzeD.UPNvQdn6GdOP79du.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -2156,13 +2264,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplGuidingBol
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712712311
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: UPNvQdn6GdOP79du
     _key: '!actors.items!mmAncientBronzeD.UPNvQdn6GdOP79du'
   - name: Shapechange
@@ -2205,7 +2311,7 @@ items:
           type: self
           special: ''
         template:
-          units: ''
+          units: ft
           contiguous: false
           type: ''
       range:
@@ -2227,9 +2333,6 @@ items:
         consumed: false
         cost: 0
         supply: 0
-      preparation:
-        mode: prepared
-        prepared: false
       activities:
         xLGk73cwKfSx5rhK:
           type: utility
@@ -2252,6 +2355,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -2271,7 +2375,16 @@ items:
             name: ''
             formula: ''
           name: Cast
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       identifier: shapechange
+      method: spell
+      prepared: 0
     type: spell
     img: icons/magic/unholy/hand-fire-skeleton-pink.webp
     effects:
@@ -2309,13 +2422,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmAncientBronzeD.Wgz6pLYjVBAOvNf5.dnd5espellchange
     folder: iG0Zia8jh6uK39TB
@@ -2328,13 +2439,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplShapechang
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712712311
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: Wgz6pLYjVBAOvNf5
     _key: '!actors.items!mmAncientBronzeD.Wgz6pLYjVBAOvNf5'
   - name: Speak with Animals
@@ -2367,7 +2476,7 @@ items:
           count: ''
           type: ''
         template:
-          units: ''
+          units: ft
           contiguous: false
           type: ''
       range:
@@ -2388,9 +2497,6 @@ items:
         consumed: false
         cost: 0
         supply: 0
-      preparation:
-        mode: prepared
-        prepared: false
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
@@ -2413,8 +2519,10 @@ items:
             concentration: false
           effects:
             - _id: lHx55SIuimKR3ALR
+              level: {}
           range:
             override: false
+            units: self
           target:
             prompt: true
             template:
@@ -2432,7 +2540,16 @@ items:
             spent: 0
             recovery: []
           sort: 0
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       identifier: speak-with-animals
+      method: spell
+      prepared: 0
     type: spell
     img: icons/creatures/mammals/dog-husky-white-blue.webp
     effects:
@@ -2465,13 +2582,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmAncientBronzeD.b2F1edL1NKY3Yo0j.lHx55SIuimKR3ALR
       - _id: dnd5espellchange
@@ -2504,13 +2619,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmAncientBronzeD.b2F1edL1NKY3Yo0j.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -2523,13 +2636,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplSpeakwithA
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712712311
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: b2F1edL1NKY3Yo0j
     _key: '!actors.items!mmAncientBronzeD.b2F1edL1NKY3Yo0j'
   - name: Thaumaturgy
@@ -2571,7 +2682,7 @@ items:
           count: ''
           type: ''
         template:
-          units: ''
+          units: ft
           contiguous: false
           type: ''
       range:
@@ -2591,9 +2702,6 @@ items:
         consumed: false
         cost: 0
         supply: 0
-      preparation:
-        mode: always
-        prepared: false
       activities:
         q83milmNAKF9cymI:
           type: utility
@@ -2617,6 +2725,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -2635,7 +2744,16 @@ items:
             name: ''
             formula: ''
           name: Cast
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       identifier: thaumaturgy
+      method: spell
+      prepared: 2
     type: spell
     img: icons/environment/people/cleric-orange.webp
     effects:
@@ -2669,13 +2787,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmAncientBronzeD.nEBoPZejGFPgIfWu.dnd5espellchange
     folder: 4FhsY9FJQd7h7MZb
@@ -2691,13 +2807,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplThaumaturg
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712712311
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: nEBoPZejGFPgIfWu
     _key: '!actors.items!mmAncientBronzeD.nEBoPZejGFPgIfWu'
   - name: Detect Thoughts
@@ -2771,9 +2885,6 @@ items:
         consumed: false
         cost: 0
         supply: 0
-      preparation:
-        mode: prepared
-        prepared: false
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
@@ -2827,6 +2938,13 @@ items:
             max: ''
           sort: 0
           name: Probe Deeper
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         cNjNJvq5tlzmAjzM:
           type: utility
           name: Sense Thoughts
@@ -2850,6 +2968,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -2868,7 +2987,15 @@ items:
             name: ''
             formula: ''
           img: systems/dnd5e/icons/svg/damage/psychic.svg
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       identifier: detect-thoughts
+      method: spell
+      prepared: 0
     type: spell
     img: icons/skills/social/diplomacy-handshake-yellow.webp
     effects:
@@ -2902,13 +3029,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmAncientBronzeD.SUqCisgEYVYta6cz.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -2924,13 +3049,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDetectThou
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712712311
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: SUqCisgEYVYta6cz
     _key: '!actors.items!mmAncientBronzeD.SUqCisgEYVYta6cz'
   - name: Control Water
@@ -3021,9 +3144,6 @@ items:
         consumed: false
         cost: 0
         supply: 0
-      preparation:
-        mode: prepared
-        prepared: false
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
@@ -3047,6 +3167,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             prompt: true
             template:
@@ -3087,6 +3208,13 @@ items:
             max: ''
           sort: 0
           name: Create Whirlpool
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         uvlPi5Em9KSfKICT:
           type: utility
           name: Flood, Part, or Redirect
@@ -3109,6 +3237,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -3127,7 +3256,16 @@ items:
             visible: false
             name: 25% Capsize Chance
             formula: 1d100cs<26
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       identifier: control-water
+      method: spell
+      prepared: 0
     type: spell
     img: icons/magic/water/pseudopod-swirl-blue.webp
     effects:
@@ -3161,13 +3299,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmAncientBronzeD.weRr4SCAG9rNPGAp.dnd5espellchange
     folder: qi3IbnEwap7mRw4b
@@ -3180,13 +3316,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplControlWat
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712712311
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: weRr4SCAG9rNPGAp
     _key: '!actors.items!mmAncientBronzeD.weRr4SCAG9rNPGAp'
   - name: Scrying
@@ -3238,7 +3372,7 @@ items:
           type: any
           special: creature on same plane of existence or a location you have seen
         template:
-          units: ''
+          units: ft
           contiguous: false
           type: ''
       range:
@@ -3262,9 +3396,6 @@ items:
         consumed: false
         cost: 0
         supply: 0
-      preparation:
-        mode: prepared
-        prepared: false
       activities:
         NeUDDgmX3BdnFGH4:
           type: save
@@ -3287,6 +3418,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -3310,6 +3442,13 @@ items:
               calculation: ''
               formula: '@attributes.spell.dc - 5 + 2'
           name: Secondhand and Picture
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         2CjCuSPwb4erFwZC:
           type: save
           activation:
@@ -3330,6 +3469,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -3354,6 +3494,13 @@ items:
               formula: '@attributes.spell.dc - 5 + 4'
           name: Secondhand and Garment
           _id: 2CjCuSPwb4erFwZC
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         AwH5PhQZyU2ryO7X:
           type: save
           activation:
@@ -3374,6 +3521,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -3398,6 +3546,13 @@ items:
               formula: '@attributes.spell.dc - 5 + 10'
           name: Secondhand and Body Part
           _id: AwH5PhQZyU2ryO7X
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         L9ejQXxfSH0qg8bB:
           type: save
           activation:
@@ -3418,6 +3573,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -3442,6 +3598,13 @@ items:
               formula: '@attributes.spell.dc - 0 + 2'
           name: Firsthand and Picture
           _id: L9ejQXxfSH0qg8bB
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         QUv35ZZBe3gVvEzK:
           type: save
           activation:
@@ -3462,6 +3625,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -3486,6 +3650,13 @@ items:
               formula: '@attributes.spell.dc - 0 + 4'
           name: Firsthand and Garment
           _id: QUv35ZZBe3gVvEzK
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         xhhjJb25roNtpn8g:
           type: save
           activation:
@@ -3506,6 +3677,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -3530,6 +3702,13 @@ items:
               formula: '@attributes.spell.dc - 0 + 10'
           name: Firsthand and Body Part
           _id: xhhjJb25roNtpn8g
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         7wBprDveLHpbu6Z0:
           type: save
           activation:
@@ -3550,6 +3729,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -3574,6 +3754,13 @@ items:
               formula: '@attributes.spell.dc + 5 + 2'
           name: Extensive and Picture
           _id: 7wBprDveLHpbu6Z0
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         QUhtomQ1kgxShABi:
           type: save
           activation:
@@ -3594,6 +3781,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -3618,6 +3806,13 @@ items:
               formula: '@attributes.spell.dc + 5 + 4'
           name: Extensive and Garment
           _id: QUhtomQ1kgxShABi
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         LwyHxV46sddf89rc:
           type: save
           activation:
@@ -3638,6 +3833,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -3662,6 +3858,13 @@ items:
               formula: '@attributes.spell.dc + 5 + 10'
           name: Extensive and Body Part
           _id: LwyHxV46sddf89rc
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         aeMjBXbdsC7SxTTv:
           type: summon
           _id: aeMjBXbdsC7SxTTv
@@ -3683,6 +3886,7 @@ items:
             concentration: false
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -3713,6 +3917,7 @@ items:
             attacks: false
             proficiency: false
             saves: false
+            disposition: false
           profiles:
             - count: ''
               name: ''
@@ -3725,10 +3930,18 @@ items:
           summon:
             prompt: true
             mode: ''
-            identifier: ''
           name: Create Sensor
           effects: []
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       identifier: scrying
+      method: spell
+      prepared: 0
     type: spell
     img: icons/magic/perception/orb-crystal-ball-scrying-blue.webp
     effects:
@@ -3762,13 +3975,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmAncientBronzeD.ZOBi3WSp6rdFzHKV.dnd5espellchange
     folder: beZ8MTpWY2cMEUlp
@@ -3781,13 +3992,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplScrying000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712712311
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: ZOBi3WSp6rdFzHKV
     _key: '!actors.items!mmAncientBronzeD.ZOBi3WSp6rdFzHKV'
   - name: Water Breathing
@@ -3818,7 +4027,7 @@ items:
           choice: false
           special: ''
         template:
-          units: ''
+          units: ft
           contiguous: false
           type: ''
       range:
@@ -3841,9 +4050,6 @@ items:
         consumed: false
         cost: 0
         supply: 0
-      preparation:
-        mode: prepared
-        prepared: false
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
@@ -3866,8 +4072,10 @@ items:
             concentration: false
           effects:
             - _id: hyFupFam9XIbim0U
+              level: {}
           range:
             override: false
+            units: self
           target:
             prompt: true
             template:
@@ -3885,7 +4093,16 @@ items:
             spent: 0
             recovery: []
           sort: 0
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       identifier: water-breathing
+      method: spell
+      prepared: 0
     type: spell
     img: icons/magic/water/bubbles-air-water-blue.webp
     effects:
@@ -3914,13 +4131,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmAncientBronzeD.bTqY9xsP9FoWNRYo.hyFupFam9XIbim0U
       - _id: dnd5espellchange
@@ -3953,13 +4168,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmAncientBronzeD.bTqY9xsP9FoWNRYo.dnd5espellchange
     folder: HCovEE4VoPGlIbKi
@@ -3972,13 +4185,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplWaterBreat
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712712311
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: bTqY9xsP9FoWNRYo
     _key: '!actors.items!mmAncientBronzeD.bTqY9xsP9FoWNRYo'
   - _id: mmGuidingLight00
@@ -4011,6 +4222,7 @@ items:
             override: false
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -4035,6 +4247,13 @@ items:
             uuid: Compendium.dnd5e.spells24.Item.phbsplGuidingBol
             ability: ''
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -4056,9 +4275,10 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: aehE0L1ERkzYCvJW
@@ -4072,13 +4292,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmGuidingLight00
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712712311
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 7
@@ -4114,7 +4332,7 @@ items:
           choice: false
           special: ''
         template:
-          units: ''
+          units: ft
           contiguous: false
           type: ''
       range:
@@ -4135,9 +4353,6 @@ items:
         consumed: false
         cost: 0
         supply: 0
-      preparation:
-        mode: prepared
-        prepared: false
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
@@ -4160,8 +4375,10 @@ items:
             concentration: false
           effects:
             - _id: rHzZCeXfdeTcYyk8
+              level: {}
           range:
             override: false
+            units: self
           target:
             prompt: true
             template:
@@ -4200,7 +4417,16 @@ items:
             spent: 0
             recovery: []
           sort: 0
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       identifier: guiding-bolt
+      method: spell
+      prepared: 0
     type: spell
     img: icons/magic/light/projectile-flare-blue.webp
     effects:
@@ -4233,13 +4459,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmAncientBronzeD.cX5AzyoQwomRKH1I.rHzZCeXfdeTcYyk8
       - _id: dnd5espellchange
@@ -4276,13 +4500,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmAncientBronzeD.cX5AzyoQwomRKH1I.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -4295,13 +4517,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplGuidingBol
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712712311
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: cX5AzyoQwomRKH1I
     _key: '!actors.items!mmAncientBronzeD.cX5AzyoQwomRKH1I'
   - _id: mmPounce00000000
@@ -4363,6 +4583,12 @@ items:
           name: Expend Use
           img: systems/dnd5e/icons/svg/monster.svg
           _id: IzdTKthBAsB8MBfB
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -4382,9 +4608,10 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: aehE0L1ERkzYCvJW
@@ -4398,13 +4625,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmPounce00000000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712712311
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 8
@@ -4441,6 +4666,7 @@ items:
           effects:
             - _id: QyuBYDW1zznn0OS4
               onSave: false
+              level: {}
           range:
             override: false
             units: ft
@@ -4485,6 +4711,12 @@ items:
               formula: 8 + @mod + @prof
           name: Save
           img: systems/dnd5e/icons/svg/activity/save.svg
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -4511,9 +4743,10 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: aehE0L1ERkzYCvJW
@@ -4556,13 +4789,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmAncientBronzeD.mmThunderclap000.QyuBYDW1zznn0OS4
     flags:
@@ -4573,13 +4804,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmThunderclap000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712712311
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 9
@@ -4591,13 +4820,13 @@ flags:
     showTokenPortrait: false
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
-  systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1745415505941
-  modifiedTime: 1745712712356
-  lastModifiedBy: dnd5ebuilder0000
   exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  createdTime: 1771452695090
+  modifiedTime: 1771452695090
+  lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:
   default: 0

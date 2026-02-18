@@ -361,12 +361,13 @@ system:
     attunement:
       max: 3
     senses:
-      darkvision: null
-      blindsight: null
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: null
+        blindsight: null
+        tremorsense: null
+        truesight: null
     spellcasting: int
     exhaustion: 0
     concentration:
@@ -646,7 +647,8 @@ items:
           sort: 600000
       identifier: sage
       advancement:
-        - _id: 3O61L5uTy5jRCqJb
+        3O61L5uTy5jRCqJb:
+          _id: 3O61L5uTy5jRCqJb
           type: AbilityScoreImprovement
           configuration:
             cap: 2
@@ -675,7 +677,9 @@ items:
             Intelligence, and Wisdom scores; increase one of them by 2 and a
             different one by 1, or increase all three by 1. None of these
             increases can raise a score above 20.
-        - _id: DMd8rikwPlZdpP1l
+          flags: {}
+        DMd8rikwPlZdpP1l:
+          _id: DMd8rikwPlZdpP1l
           type: Trait
           configuration:
             mode: default
@@ -695,7 +699,9 @@ items:
           hint: >-
             Your background grants you proficiency in Arcana and History. It
             also grants you proficiency with Calligrapher's Supplies.
-        - _id: kKt7VMmZUuRr35dP
+          flags: {}
+        kKt7VMmZUuRr35dP:
+          _id: kKt7VMmZUuRr35dP
           type: ItemGrant
           configuration:
             items:
@@ -709,7 +715,9 @@ items:
           level: 0
           title: Background Feat
           hint: Your backgrounds grants you the Magic Initiate (Wizard) feat.
-        - _id: pLGiyOjTP7nwuwTl
+          flags: {}
+        pLGiyOjTP7nwuwTl:
+          _id: pLGiyOjTP7nwuwTl
           type: Trait
           configuration:
             mode: default
@@ -730,6 +738,7 @@ items:
           hint: >-
             Your character knows at least three languages: Common plus two
             languages you roll or choose from the Standard Languages table.
+          flags: {}
       wealth: '50'
     _id: T06z1NrdygayWPur
     type: background
@@ -743,9 +752,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 0
     ownership:
       default: 0
@@ -796,7 +804,8 @@ items:
       enchant: {}
       identifier: magic-initiate
       advancement:
-        - type: ItemChoice
+        ElkyDafWSUXOkPdJ:
+          type: ItemChoice
           _id: ElkyDafWSUXOkPdJ
           configuration:
             allowDrops: true
@@ -832,7 +841,9 @@ items:
             ability: int
           title: Two Cantrips
           hint: ''
-        - type: ItemChoice
+          flags: {}
+        ZbKHs2FVCkJVNW8p:
+          type: ItemChoice
           configuration:
             allowDrops: true
             choices:
@@ -867,6 +878,7 @@ items:
           title: Level 1 Spell
           hint: ''
           _id: ZbKHs2FVCkJVNW8p
+          flags: {}
       crewed: false
     _id: EaVz1VJdKEmUW5HR
     type: feat
@@ -885,9 +897,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!ZannaLv010000000.EaVz1VJdKEmUW5HR'
@@ -1011,6 +1022,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         CiLsaHBi9F6eIXUS:
           type: attack
           name: Spellcasting Attack
@@ -1181,7 +1193,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.3
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!ZannaLv010000000.BVE93k9mxU6OGqYj.SouQfUgwb9LlUraq
@@ -1224,7 +1236,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.3
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _id: Zsx8UvC9DmdrA1E1
         _key: >-
@@ -1246,9 +1258,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!ZannaLv010000000.BVE93k9mxU6OGqYj'
@@ -1396,6 +1407,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: minor-illusion
       method: spell
       prepared: 2
@@ -1417,9 +1429,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!ZannaLv010000000.IKrZjCTOG7us5OD0'
@@ -1467,7 +1478,8 @@ items:
         book: ''
         license: CC-BY-4.0
       advancement:
-        - _id: O7gYRGMSW3atQ2Yc
+        O7gYRGMSW3atQ2Yc:
+          _id: O7gYRGMSW3atQ2Yc
           type: Size
           configuration:
             sizes:
@@ -1477,7 +1489,9 @@ items:
           hint: Small (about 3-4 feet tall)
           value:
             size: sm
-        - _id: LcGnqnqKYFw0PcE9
+          flags: {}
+        LcGnqnqKYFw0PcE9:
+          _id: LcGnqnqKYFw0PcE9
           type: ItemGrant
           configuration:
             items:
@@ -1494,7 +1508,9 @@ items:
           level: 0
           title: Gnome Traits
           hint: ''
-        - _id: RNvJhB97kaJrZTfU
+          flags: {}
+        RNvJhB97kaJrZTfU:
+          _id: RNvJhB97kaJrZTfU
           type: ItemGrant
           configuration:
             items:
@@ -1524,18 +1540,20 @@ items:
           hint: >-
             Intelligence, Wisdom, or Charisma can be chosen for your
             spellcasting ability.
+          flags: {}
       movement:
         walk: '30'
         units: null
         hover: false
         ignoredDifficultTerrain: []
       senses:
-        darkvision: 60
-        blindsight: null
-        tremorsense: null
-        truesight: null
         units: null
         special: ''
+        ranges:
+          darkvision: 60
+          blindsight: null
+          tremorsense: null
+          truesight: null
       type:
         value: humanoid
         subtype: Gnome
@@ -1550,9 +1568,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 0
     ownership:
       default: 0
@@ -1588,7 +1605,7 @@ items:
       properties: []
       requirements: Gnome
       identifier: gnomish-cunning
-      advancement: []
+      advancement: {}
       crewed: false
     effects:
       - name: Gnomish Cunning
@@ -1636,7 +1653,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.3
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!ZannaLv010000000.gAKclcRLKyBxUZWM.KNWLGPsZSHtINp6L
@@ -1652,9 +1669,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 100000
     ownership:
       default: 0
@@ -1704,7 +1720,7 @@ items:
       properties: []
       requirements: Gnome (Rock)
       identifier: gnomish-lineage-rock
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     effects: []
@@ -1720,9 +1736,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 0
     ownership:
       default: 0
@@ -1827,6 +1842,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: mending
       method: spell
       prepared: 2
@@ -1848,9 +1864,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!ZannaLv010000000.JOj1MfWvkud0OidO'
@@ -1960,6 +1975,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: prestidigitation
       method: spell
       prepared: 2
@@ -1981,9 +1997,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!ZannaLv010000000.lOq93B1wBnQtgGdJ'
@@ -2106,12 +2121,16 @@ items:
       identifier: wizard
       levels: 1
       advancement:
-        - _id: a16u6wgnJQq8HMoq
+        a16u6wgnJQq8HMoq:
+          _id: a16u6wgnJQq8HMoq
           type: HitPoints
           configuration: {}
           value:
             '1': max
-        - _id: 2whBHO3s8fBYBEWi
+          flags: {}
+          hint: ''
+        2whBHO3s8fBYBEWi:
+          _id: 2whBHO3s8fBYBEWi
           type: ItemGrant
           configuration:
             items:
@@ -2130,7 +2149,10 @@ items:
               7VbQOdC6RaGoLPgQ: Compendium.dnd5e.classes24.Item.phbwzdArcaneReco
           level: 1
           title: Class Features
-        - _id: JTCSb4dfm8Auy6WD
+          flags: {}
+          hint: ''
+        JTCSb4dfm8Auy6WD:
+          _id: JTCSb4dfm8Auy6WD
           type: ItemGrant
           configuration:
             items:
@@ -2141,7 +2163,10 @@ items:
           value: {}
           level: 2
           title: Class Features
-        - _id: tQSiUAW1DhfY3Idi
+          flags: {}
+          hint: ''
+        tQSiUAW1DhfY3Idi:
+          _id: tQSiUAW1DhfY3Idi
           type: ItemGrant
           configuration:
             items:
@@ -2152,7 +2177,10 @@ items:
           value: {}
           level: 5
           title: Class Features
-        - _id: rZqSZS149KxDBwjI
+          flags: {}
+          hint: ''
+        rZqSZS149KxDBwjI:
+          _id: rZqSZS149KxDBwjI
           type: ItemGrant
           configuration:
             items:
@@ -2163,7 +2191,10 @@ items:
           value: {}
           level: 18
           title: Class Features
-        - _id: ssLPH7qn9DUncfJ1
+          flags: {}
+          hint: ''
+        ssLPH7qn9DUncfJ1:
+          _id: ssLPH7qn9DUncfJ1
           type: ItemGrant
           configuration:
             items:
@@ -2174,7 +2205,10 @@ items:
           value: {}
           level: 20
           title: Class Features
-        - _id: bwCLOdauuzoHofil
+          flags: {}
+          hint: ''
+        bwCLOdauuzoHofil:
+          _id: bwCLOdauuzoHofil
           type: AbilityScoreImprovement
           configuration:
             points: 2
@@ -2192,7 +2226,10 @@ items:
             type: asi
           level: 4
           title: ''
-        - _id: mRSh9oUVjLU33e7p
+          flags: {}
+          hint: ''
+        mRSh9oUVjLU33e7p:
+          _id: mRSh9oUVjLU33e7p
           type: AbilityScoreImprovement
           configuration:
             points: 2
@@ -2210,7 +2247,10 @@ items:
             type: asi
           level: 8
           title: ''
-        - _id: mhZh3LfLMa15tXee
+          flags: {}
+          hint: ''
+        mhZh3LfLMa15tXee:
+          _id: mhZh3LfLMa15tXee
           type: AbilityScoreImprovement
           configuration:
             points: 2
@@ -2228,7 +2268,10 @@ items:
             type: asi
           level: 12
           title: ''
-        - _id: FOf5CkGnSs0OlppY
+          flags: {}
+          hint: ''
+        FOf5CkGnSs0OlppY:
+          _id: FOf5CkGnSs0OlppY
           type: AbilityScoreImprovement
           configuration:
             points: 2
@@ -2246,7 +2289,10 @@ items:
             type: asi
           level: 16
           title: ''
-        - _id: EvuUhx2TrDAsAxgN
+          flags: {}
+          hint: ''
+        EvuUhx2TrDAsAxgN:
+          _id: EvuUhx2TrDAsAxgN
           type: ScaleValue
           configuration:
             identifier: max-prepared
@@ -2295,7 +2341,9 @@ items:
           value: {}
           title: Max Prepared Spells
           hint: ''
-        - _id: ZTnATJgznTj4W6ZG
+          flags: {}
+        ZTnATJgznTj4W6ZG:
+          _id: ZTnATJgznTj4W6ZG
           type: ScaleValue
           configuration:
             identifier: ''
@@ -2312,7 +2360,9 @@ items:
           value: {}
           title: Cantrips Known
           hint: ''
-        - _id: S1H3INPWaAiRkB6G
+          flags: {}
+        S1H3INPWaAiRkB6G:
+          _id: S1H3INPWaAiRkB6G
           type: Trait
           configuration:
             mode: expertise
@@ -2335,7 +2385,9 @@ items:
             While studying magic, you also specialized in another field of
             study. Choose one of the following skills in which you have
             proficiency. You have Expertise in the chosen skill.
-        - _id: KTYjh1MKLvOtrZ3u
+          flags: {}
+        KTYjh1MKLvOtrZ3u:
+          _id: KTYjh1MKLvOtrZ3u
           type: Subclass
           configuration: {}
           value:
@@ -2344,7 +2396,9 @@ items:
           level: 3
           title: ''
           hint: ''
-        - _id: 4ImCjedK6yWbC2ni
+          flags: {}
+        4ImCjedK6yWbC2ni:
+          _id: 4ImCjedK6yWbC2ni
           type: Trait
           configuration:
             mode: default
@@ -2361,7 +2415,9 @@ items:
           title: Saving Throw Proficiencies
           hint: ''
           classRestriction: primary
-        - _id: 73lag0NN0ElcSq94
+          flags: {}
+        73lag0NN0ElcSq94:
+          _id: 73lag0NN0ElcSq94
           type: Trait
           configuration:
             mode: default
@@ -2385,7 +2441,9 @@ items:
           title: Skill Proficiencies
           hint: ''
           classRestriction: primary
-        - _id: IxWyp7l1BPCaw3jl
+          flags: {}
+        IxWyp7l1BPCaw3jl:
+          _id: IxWyp7l1BPCaw3jl
           type: Trait
           configuration:
             mode: default
@@ -2400,7 +2458,9 @@ items:
           title: Weapon Proficiencies
           hint: ''
           classRestriction: primary
-        - type: AbilityScoreImprovement
+          flags: {}
+        ZIWoRmmzRs9v7AWv:
+          type: AbilityScoreImprovement
           _id: ZIWoRmmzRs9v7AWv
           configuration:
             cap: 2
@@ -2420,6 +2480,7 @@ items:
           level: 19
           title: ''
           hint: ''
+          flags: {}
       spellcasting:
         progression: full
         ability: int
@@ -2443,9 +2504,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 0
     ownership:
       default: 0
@@ -2542,7 +2602,7 @@ items:
       activities: {}
       enchant: {}
       identifier: spellcasting
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     flags:
@@ -2556,9 +2616,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 0
     ownership:
       default: 0
@@ -2599,7 +2658,7 @@ items:
       activities: {}
       enchant: {}
       identifier: ritual-adept
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     flags:
@@ -2613,9 +2672,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 0
     ownership:
       default: 0
@@ -2667,7 +2725,7 @@ items:
       activities: {}
       enchant: {}
       identifier: arcane-recovery
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     flags:
@@ -2681,9 +2739,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 0
     ownership:
       default: 0
@@ -2811,6 +2868,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: light
       method: spell
       sourceClass: wizard
@@ -2828,9 +2886,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!ZannaLv010000000.p1AjTd3qevw5SS3i'
@@ -2959,6 +3016,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: mage-hand
       method: spell
       sourceClass: wizard
@@ -2976,9 +3034,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!ZannaLv010000000.hvak4LOykRa7Kxf4'
@@ -3104,6 +3161,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: ray-of-frost
       method: spell
       sourceClass: wizard
@@ -3162,7 +3220,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.3
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!ZannaLv010000000.5WhEhiI9asypGgTa.7dnnwBMWLykrVJub
@@ -3175,9 +3233,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!ZannaLv010000000.5WhEhiI9asypGgTa'
@@ -3289,6 +3346,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: detect-magic
       method: spell
       sourceClass: wizard
@@ -3325,7 +3383,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.3
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!ZannaLv010000000.DoNQdEOLEZK9Mxu4.BHw91lQmVgdx39WZ
@@ -3338,9 +3396,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!ZannaLv010000000.DoNQdEOLEZK9Mxu4'
@@ -3438,6 +3495,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: feather-fall
       method: spell
       sourceClass: wizard
@@ -3455,9 +3513,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!ZannaLv010000000.alpUuhweRxL5phS5'
@@ -3574,6 +3631,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: magic-missile
       method: spell
       sourceClass: wizard
@@ -3591,9 +3649,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!ZannaLv010000000.PZpyWhzyGWpOAv35'
@@ -3706,6 +3763,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: sleep
       method: spell
       sourceClass: wizard
@@ -3749,7 +3807,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.3
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!ZannaLv010000000.GPO8YbozCjLwfyNv.04Wa4xUzjA31kPno
@@ -3762,9 +3820,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!ZannaLv010000000.GPO8YbozCjLwfyNv'
@@ -3886,6 +3943,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: thunderwave
       method: spell
       sourceClass: wizard
@@ -3903,9 +3961,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!ZannaLv010000000.xZMpwcnN7hhATRq4'
@@ -4014,6 +4071,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         OZARWlF9CGOxsY7n:
           _id: OZARWlF9CGOxsY7n
           type: forward
@@ -4043,6 +4101,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: shield
       method: spell
       prepared: 2
@@ -4083,7 +4142,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.3
+          systemVersion: 5.3.0
           lastModifiedBy: null
         img: icons/equipment/shield/heater-steel-crystal-red.webp
         type: base
@@ -4107,9 +4166,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!ZannaLv010000000.spkqsJM7E9gVctFw'
@@ -4213,6 +4271,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: mage-armor
       method: spell
       sourceClass: wizard
@@ -4249,7 +4308,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.3
+          systemVersion: 5.3.0
           lastModifiedBy: null
         img: icons/equipment/chest/breastplate-helmet-metal.webp
         type: base
@@ -4270,9 +4329,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!ZannaLv010000000.ZFg2zsIa9FCO7anY'
@@ -4380,6 +4438,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: calligraphers-supplies
       attuned: false
       equipped: false
@@ -4400,9 +4459,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!ZannaLv010000000.FZHJyyTIWGvAmSNk'
@@ -4451,9 +4509,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!ZannaLv010000000.uNHPEZDH3QLrz1ef'
@@ -4498,9 +4555,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!ZannaLv010000000.z4x5UJEoRlikfbVH'
@@ -4538,7 +4594,6 @@ items:
         recovery: []
       armor:
         value: null
-        magicalBonus: null
         dex: null
       hp:
         value: null
@@ -4578,9 +4633,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!ZannaLv010000000.kZ1n3DOWfNb3zcG4'
@@ -4651,7 +4705,6 @@ items:
       type:
         value: simpleM
         baseItem: dagger
-      magicalBonus: null
       properties:
         - fin
         - lgt
@@ -4728,6 +4781,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       ammunition: {}
       mastery: nick
       identifier: dagger
@@ -4752,9 +4806,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!ZannaLv010000000.8iXaJxDwrqHOqmE8'
@@ -4825,7 +4878,6 @@ items:
       type:
         value: simpleM
         baseItem: quarterstaff
-      magicalBonus: null
       properties:
         - ver
       proficient: null
@@ -4900,6 +4952,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         Z78TcyJsylS2pepn:
           type: attack
           name: Spellcasting Attack
@@ -5015,7 +5068,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.3
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!ZannaLv010000000.S2e8tae7wGZYdZrc.Bp7zpydxn7UteE38
@@ -5027,9 +5080,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!ZannaLv010000000.S2e8tae7wGZYdZrc'
@@ -5079,7 +5131,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -5149,9 +5201,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!ZannaLv010000000.CEsUF6QH03UfvYC9'
@@ -5196,9 +5247,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!ZannaLv010000000.rDCV9R3lTBpAY9M6'
@@ -5239,7 +5289,6 @@ items:
         recovery: []
       armor:
         value: null
-        magicalBonus: null
         dex: null
       hp:
         value: null
@@ -5342,9 +5391,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!ZannaLv010000000.7YL1ghahe7sFvo9k'
@@ -5394,7 +5442,6 @@ items:
       type:
         value: trinket
         subtype: ''
-      magicalBonus: null
       properties: []
       activities: {}
       identifier: ink
@@ -5415,9 +5462,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!ZannaLv010000000.i8CbmavXSHwkuZuQ'
@@ -5485,7 +5531,6 @@ items:
       type:
         value: potion
         subtype: ''
-      magicalBonus: null
       properties: []
       activities:
         FoeoumkYcnAsGCRo:
@@ -5550,6 +5595,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         mDj3jtAY6ICmi1ZL:
           type: damage
           name: Douse Space
@@ -5619,6 +5665,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: oil
     _id: D0QuV5jGMKK1FXJ3
     type: consumable
@@ -5637,9 +5684,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!ZannaLv010000000.D0QuV5jGMKK1FXJ3'
@@ -5681,7 +5727,6 @@ items:
         recovery: []
       armor:
         value: null
-        magicalBonus: null
         dex: null
       hp:
         value: null
@@ -5751,6 +5796,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: tinderbox
       crew:
         value: []
@@ -5771,9 +5817,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!ZannaLv010000000.muNRelVsGbgER2RU'
@@ -5822,9 +5867,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!ZannaLv010000000.Qq29yDl8ROC6f3NH'
@@ -5861,7 +5905,6 @@ items:
         recovery: []
       armor:
         value: null
-        magicalBonus: null
         dex: null
       hp:
         value: null
@@ -5899,9 +5942,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566609
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!ZannaLv010000000.r3q4U5e2ZJZNbwpg'
@@ -5913,9 +5955,9 @@ _stats:
   exportSource: null
   coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.2.3
-  createdTime: 1765941240846
-  modifiedTime: 1765941240846
+  systemVersion: 5.3.0
+  createdTime: 1771452691670
+  modifiedTime: 1771452691670
   lastModifiedBy: dnd5ebuilder0000
 ownership:
   default: 0

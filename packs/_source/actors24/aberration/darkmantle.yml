@@ -353,22 +353,21 @@ system:
         mode: 0
       bonus: '@prof'
     movement:
-      burrow: null
-      climb: null
-      fly: 30
-      swim: null
-      walk: 10
+      fly: '30'
+      walk: '10'
       units: null
       hover: false
+      ignoredDifficultTerrain: []
     attunement:
       max: 3
     senses:
-      darkvision: null
-      blindsight: 60
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: null
+        blindsight: 60
+        tremorsense: null
+        truesight: null
     spellcasting: ''
     exhaustion: 0
     concentration:
@@ -404,6 +403,9 @@ system:
       level: 0
     loyalty:
       value: null
+    price:
+      value: null
+      denomination: gp
   details:
     biography:
       value: >-
@@ -426,11 +428,11 @@ system:
       value: []
   resources:
     legact:
-      value: 0
       max: 0
+      spent: 0
     legres:
-      value: 0
       max: 0
+      spent: 0
     lair:
       value: false
       initiative: null
@@ -579,9 +581,12 @@ items:
             override: false
           effects:
             - _id: xoOyjbkZSz44HMbD
+              level: {}
             - _id: ca1RtYs4i9JuL9sV
+              level: {}
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -611,6 +616,13 @@ items:
             includeBase: true
             parts: []
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         PTD4UFW8HUU8fbd4:
           type: check
           _id: PTD4UFW8HUU8fbd4
@@ -634,6 +646,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -656,6 +669,13 @@ items:
               formula: '13'
             ability: ''
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -698,11 +718,10 @@ items:
       rarity: ''
       attunement: ''
       attuned: false
-      equipped: false
+      equipped: true
       armor:
         value: null
       cover: null
-      crewed: false
       hp:
         value: null
         max: null
@@ -728,7 +747,6 @@ items:
             enabled: false
           scaling:
             number: 1
-      magicalBonus: null
       properties: []
       proficient: null
       range:
@@ -737,6 +755,8 @@ items:
         reach: 5
         units: ft
       mastery: ''
+      crew:
+        value: []
     folder: pSCWWdqMX9eUATRJ
     img: icons/magic/unholy/strike-body-life-soul-purple.webp
     effects:
@@ -770,13 +790,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.2.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmDarkmantle0000.mmCrush000000000.xoOyjbkZSz44HMbD
       - name: 'Self: Attack Adv./0 Speed'
@@ -816,13 +834,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.2.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmDarkmantle0000.mmCrush000000000.ca1RtYs4i9JuL9sV
     flags:
@@ -833,13 +849,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmCrush000000000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: 1737056926443
-      modifiedTime: 1745712716212
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 0
@@ -903,6 +917,13 @@ items:
             formula: ''
             name: ''
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery:
@@ -924,11 +945,12 @@ items:
         rules: '2024'
         book: ''
         license: CC-BY-4.0
-      advancement: []
+      advancement: {}
       enchant: {}
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
       type:
@@ -946,13 +968,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmDarknessAura00
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: 1737057780508
-      modifiedTime: 1745712716212
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 0
     ownership:
       default: 0
@@ -962,13 +982,13 @@ folder: sUWhvnagivVASLJz
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
-  systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1732598129404
-  modifiedTime: 1745712716238
-  lastModifiedBy: dnd5ebuilder0000
   exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  createdTime: 1771452700121
+  modifiedTime: 1771452700121
+  lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:
   default: 0

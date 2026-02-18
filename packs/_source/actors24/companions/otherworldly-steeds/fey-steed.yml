@@ -14,13 +14,15 @@ system:
       swarm: ''
       custom: Celestial, Fey, or Fiend (Your Choice)
     race: null
-    environment: ''
     cr: null
-    spellLevel: 0
-    source: {}
     ideal: ''
     bond: ''
     flaw: ''
+    habitat:
+      custom: ''
+      value: []
+    treasure:
+      value: []
   abilities:
     str:
       value: 18
@@ -29,6 +31,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     dex:
       value: 12
       proficient: 0
@@ -36,6 +48,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     con:
       value: 14
       proficient: 0
@@ -43,6 +65,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     int:
       value: 6
       proficient: 0
@@ -50,6 +82,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     wis:
       value: 12
       proficient: 0
@@ -57,6 +99,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     cha:
       value: 8
       proficient: 0
@@ -64,6 +116,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
   traits:
     size: lg
     di:
@@ -87,6 +149,8 @@ system:
     languages:
       value: []
       custom: Telepathy 1 mile (works only with you)
+      communication: {}
+    important: false
   currency:
     pp: 0
     gp: 0
@@ -334,22 +398,20 @@ system:
         mode: 0
       bonus: ''
     movement:
-      burrow: null
-      climb: null
-      fly: null
-      swim: null
-      walk: 60
+      walk: '60'
       units: null
       hover: false
+      ignoredDifficultTerrain: []
     attunement:
       max: 3
     senses:
-      darkvision: null
-      blindsight: null
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: null
+        blindsight: null
+        tremorsense: null
+        truesight: null
     spellcasting: int
     exhaustion: 0
     concentration:
@@ -373,23 +435,31 @@ system:
       tempmax: 0
       formula: 0d10 + 5
     death:
-      ability: ''
       roll:
         min: null
         max: null
         mode: 0
       success: 0
       failure: 0
+      bonuses:
+        save: ''
+    spell:
+      level: 0
+    loyalty: {}
+    price:
+      value: null
+      denomination: gp
   resources:
     legact:
-      value: 0
       max: 0
+      spent: 0
     legres:
-      value: 0
       max: 0
+      spent: 0
     lair:
       value: false
       initiative: null
+      inside: false
   source:
     revision: 1
     rules: '2024'
@@ -503,12 +573,13 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: You regain Hit Points from a spell
       activities: {}
       enchant: {}
       identifier: life-bond
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     _id: phbaoiLifeBond00
@@ -527,13 +598,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1740680159770
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!phbostFey0000000.phbaoiLifeBond00'
   - name: Otherworldly Slam
     system:
@@ -559,6 +628,7 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
       activities:
@@ -580,7 +650,7 @@ items:
             chatFlavor: ''
           duration:
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
             concentration: false
@@ -598,7 +668,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
               type: ''
@@ -636,9 +706,16 @@ items:
             spent: 0
             recovery: []
           sort: 0
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       enchant: {}
       identifier: otherworldly-slam
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     _id: phbaoiOtherworld
@@ -653,13 +730,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1740680159770
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!phbostFey0000000.phbaoiOtherworld'
   - name: Fey Step
     system:
@@ -686,6 +761,7 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
       activities:
@@ -729,7 +805,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: '1'
               type: space
@@ -749,10 +825,15 @@ items:
           sort: 0
           name: Teleport
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       enchant: {}
       identifier: fey-step
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     _id: phbaoiFeyStepFey
@@ -771,13 +852,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1740680159770
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!phbostFey0000000.phbaoiFeyStepFey'
 effects: []
 folder: l9ar6UzbvIRDyYmA
@@ -789,11 +868,11 @@ flags:
     showTokenPortrait: false
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
-  systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425917694
-  modifiedTime: 1745256827880
-  lastModifiedBy: dnd5ebuilder0000
   exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  createdTime: 1771452721143
+  modifiedTime: 1771452721143
+  lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!phbostFey0000000'

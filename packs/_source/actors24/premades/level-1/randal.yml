@@ -361,12 +361,13 @@ system:
     attunement:
       max: 3
     senses:
-      darkvision: null
-      blindsight: null
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: null
+        blindsight: null
+        tremorsense: null
+        truesight: null
     spellcasting: ''
     exhaustion: 0
     concentration:
@@ -667,7 +668,8 @@ items:
           sort: 800000
       identifier: soldier
       advancement:
-        - _id: 5hLHlmqxzoAta0uf
+        5hLHlmqxzoAta0uf:
+          _id: 5hLHlmqxzoAta0uf
           type: AbilityScoreImprovement
           configuration:
             cap: 2
@@ -696,7 +698,9 @@ items:
             Constitution scores; increase one of them by 2 and a different one
             by 1, or increase all three by 1. None of these increases can raise
             a score above 20.
-        - _id: y4FZ4I6wU0F8DEjO
+          flags: {}
+        y4FZ4I6wU0F8DEjO:
+          _id: y4FZ4I6wU0F8DEjO
           type: Trait
           configuration:
             mode: default
@@ -718,7 +722,9 @@ items:
           hint: >-
             Your background grants you proficiency in Athletics and
             Intimidation. It also grants you proficiency with any Gaming Set.
-        - _id: tk8CFgIW7fXL0mlu
+          flags: {}
+        tk8CFgIW7fXL0mlu:
+          _id: tk8CFgIW7fXL0mlu
           type: ItemGrant
           configuration:
             items:
@@ -732,7 +738,9 @@ items:
           level: 0
           title: Background Feat
           hint: Your background grants you the Savage Attacker feat.
-        - _id: pLGiyOjTP7nwuwTl
+          flags: {}
+        pLGiyOjTP7nwuwTl:
+          _id: pLGiyOjTP7nwuwTl
           type: Trait
           configuration:
             mode: default
@@ -753,6 +761,7 @@ items:
           hint: >-
             Your character knows at least three languages: Common plus two
             languages you roll or choose from the Standard Languages table.
+          flags: {}
       wealth: '50'
     _id: WtW4C15JW74zrx7Y
     type: background
@@ -767,9 +776,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566347
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.WtW4C15JW74zrx7Y'
@@ -803,7 +811,7 @@ items:
       activities: {}
       enchant: {}
       identifier: savage-attacker
-      advancement: []
+      advancement: {}
       crewed: false
     _id: koSfOJmbYfPmiFzZ
     type: feat
@@ -822,9 +830,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566347
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.koSfOJmbYfPmiFzZ'
@@ -852,7 +859,8 @@ items:
         license: CC-BY-4.0
         book: ''
       advancement:
-        - _id: dLxv96vt2B2KOEe2
+        dLxv96vt2B2KOEe2:
+          _id: dLxv96vt2B2KOEe2
           type: Size
           configuration:
             sizes:
@@ -865,7 +873,9 @@ items:
             when you select this species
           value:
             size: med
-        - _id: 2H3yQa0PfjBgXw2W
+          flags: {}
+        2H3yQa0PfjBgXw2W:
+          _id: 2H3yQa0PfjBgXw2W
           type: ItemGrant
           configuration:
             items:
@@ -885,7 +895,9 @@ items:
           level: 0
           title: Human Traits
           hint: ''
-        - _id: xIdIaWtTj1cBERln
+          flags: {}
+        xIdIaWtTj1cBERln:
+          _id: xIdIaWtTj1cBERln
           type: Trait
           configuration:
             mode: default
@@ -901,7 +913,9 @@ items:
           level: 0
           title: Skillful
           hint: You gain proficiency in one skill of your choice.
-        - _id: KB8IQLwyuL6SOFnv
+          flags: {}
+        KB8IQLwyuL6SOFnv:
+          _id: KB8IQLwyuL6SOFnv
           type: ItemChoice
           configuration:
             choices:
@@ -927,18 +941,20 @@ items:
             replaced: {}
           title: Versatile
           hint: You gain an Origin feat of your choice. Skillful is recommended.
+          flags: {}
       movement:
         walk: '30'
         units: null
         hover: false
         ignoredDifficultTerrain: []
       senses:
-        darkvision: null
-        blindsight: null
-        tremorsense: null
-        truesight: null
         units: null
         special: ''
+        ranges:
+          darkvision: null
+          blindsight: null
+          tremorsense: null
+          truesight: null
       type:
         value: humanoid
         custom: ''
@@ -956,9 +972,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566347
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 0
     ownership:
       default: 0
@@ -992,7 +1007,7 @@ items:
       properties: []
       requirements: Human
       identifier: resourceful
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     folder: uCr9wkkriM8r4C9R
@@ -1007,9 +1022,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566347
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 100000
     ownership:
       default: 0
@@ -1047,7 +1061,7 @@ items:
       properties: []
       requirements: Human
       identifier: skillful
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     folder: uCr9wkkriM8r4C9R
@@ -1062,9 +1076,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566347
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 200000
     ownership:
       default: 0
@@ -1105,7 +1118,7 @@ items:
       properties: []
       requirements: Human
       identifier: versatile
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     folder: uCr9wkkriM8r4C9R
@@ -1120,9 +1133,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566347
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 150000
     ownership:
       default: 0
@@ -1158,7 +1170,8 @@ items:
       enchant: {}
       identifier: skilled
       advancement:
-        - type: Trait
+        Mm4MAeZK89zGqmyH:
+          type: Trait
           _id: Mm4MAeZK89zGqmyH
           configuration:
             allowReplacements: false
@@ -1177,6 +1190,7 @@ items:
               - skills:ins
               - skills:med
               - skills:per
+          flags: {}
       crewed: false
     _id: YT6kgAKAefkllIKx
     type: feat
@@ -1195,9 +1209,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566347
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.YT6kgAKAefkllIKx'
@@ -1333,12 +1346,16 @@ items:
       identifier: fighter
       levels: 1
       advancement:
-        - _id: zvm19nuuM9qRHGrR
+        zvm19nuuM9qRHGrR:
+          _id: zvm19nuuM9qRHGrR
           type: HitPoints
           configuration: {}
           value:
             '1': max
-        - _id: 15eBHWfn4f7qB8mA
+          flags: {}
+          hint: ''
+        15eBHWfn4f7qB8mA:
+          _id: 15eBHWfn4f7qB8mA
           type: ItemGrant
           configuration:
             items:
@@ -1357,7 +1374,10 @@ items:
               ce4rxJLeMuTfOzp7: Compendium.dnd5e.classes24.Item.phbftrWeaponMast
           level: 1
           title: Class Features
-        - _id: T2FovyKDjcIGMPCW
+          flags: {}
+          hint: ''
+        T2FovyKDjcIGMPCW:
+          _id: T2FovyKDjcIGMPCW
           type: ItemGrant
           configuration:
             items:
@@ -1370,7 +1390,10 @@ items:
           value: {}
           level: 2
           title: Class Features
-        - _id: 9UkcNtQ0HwJhmwKQ
+          flags: {}
+          hint: ''
+        9UkcNtQ0HwJhmwKQ:
+          _id: 9UkcNtQ0HwJhmwKQ
           type: ItemGrant
           configuration:
             items:
@@ -1383,7 +1406,10 @@ items:
           value: {}
           level: 5
           title: Class Features
-        - _id: wKoM6KOIKl1HWVpR
+          flags: {}
+          hint: ''
+        wKoM6KOIKl1HWVpR:
+          _id: wKoM6KOIKl1HWVpR
           type: ItemGrant
           configuration:
             items:
@@ -1396,7 +1422,10 @@ items:
           value: {}
           level: 9
           title: Class Features
-        - _id: gxbvTuKFKDsuzCmp
+          flags: {}
+          hint: ''
+        gxbvTuKFKDsuzCmp:
+          _id: gxbvTuKFKDsuzCmp
           type: ItemGrant
           configuration:
             items:
@@ -1407,7 +1436,10 @@ items:
           value: {}
           level: 11
           title: Class Features
-        - _id: pUT3XfEF6U1xeY18
+          flags: {}
+          hint: ''
+        pUT3XfEF6U1xeY18:
+          _id: pUT3XfEF6U1xeY18
           type: ItemGrant
           configuration:
             items:
@@ -1418,7 +1450,10 @@ items:
           value: {}
           level: 13
           title: Class Features
-        - _id: knLMZh9N1O50qEcV
+          flags: {}
+          hint: ''
+        knLMZh9N1O50qEcV:
+          _id: knLMZh9N1O50qEcV
           type: ItemGrant
           configuration:
             items:
@@ -1429,7 +1464,10 @@ items:
           value: {}
           level: 20
           title: Class Features
-        - _id: bwCLOdauuzoHofil
+          flags: {}
+          hint: ''
+        bwCLOdauuzoHofil:
+          _id: bwCLOdauuzoHofil
           type: AbilityScoreImprovement
           configuration:
             points: 2
@@ -1447,7 +1485,10 @@ items:
             type: asi
           level: 4
           title: ''
-        - _id: mRSh9oUVjLU33e7p
+          flags: {}
+          hint: ''
+        mRSh9oUVjLU33e7p:
+          _id: mRSh9oUVjLU33e7p
           type: AbilityScoreImprovement
           configuration:
             points: 2
@@ -1465,7 +1506,10 @@ items:
             type: asi
           level: 8
           title: ''
-        - _id: mhZh3LfLMa15tXee
+          flags: {}
+          hint: ''
+        mhZh3LfLMa15tXee:
+          _id: mhZh3LfLMa15tXee
           type: AbilityScoreImprovement
           configuration:
             points: 2
@@ -1483,7 +1527,10 @@ items:
             type: asi
           level: 12
           title: ''
-        - _id: FOf5CkGnSs0OlppY
+          flags: {}
+          hint: ''
+        FOf5CkGnSs0OlppY:
+          _id: FOf5CkGnSs0OlppY
           type: AbilityScoreImprovement
           configuration:
             points: 2
@@ -1501,7 +1548,10 @@ items:
             type: asi
           level: 16
           title: ''
-        - _id: 54UFgRZAnd1Qo9dp
+          flags: {}
+          hint: ''
+        54UFgRZAnd1Qo9dp:
+          _id: 54UFgRZAnd1Qo9dp
           type: AbilityScoreImprovement
           configuration:
             points: 2
@@ -1519,7 +1569,10 @@ items:
             type: asi
           level: 6
           title: ''
-        - _id: a70EF7pL9l3Y48QL
+          flags: {}
+          hint: ''
+        a70EF7pL9l3Y48QL:
+          _id: a70EF7pL9l3Y48QL
           type: AbilityScoreImprovement
           configuration:
             points: 2
@@ -1537,7 +1590,10 @@ items:
             type: asi
           level: 14
           title: ''
-        - _id: x1gr4ONIHZo6bjX8
+          flags: {}
+          hint: ''
+        x1gr4ONIHZo6bjX8:
+          _id: x1gr4ONIHZo6bjX8
           type: ScaleValue
           configuration:
             identifier: ''
@@ -1552,7 +1608,9 @@ items:
           value: {}
           title: Action Surge
           hint: ''
-        - _id: iJ9JidHgTldknGgK
+          flags: {}
+        iJ9JidHgTldknGgK:
+          _id: iJ9JidHgTldknGgK
           type: ScaleValue
           configuration:
             identifier: ''
@@ -1569,7 +1627,9 @@ items:
           value: {}
           title: Indomitable
           hint: ''
-        - _id: yEH3vVRip4nzxnN9
+          flags: {}
+        yEH3vVRip4nzxnN9:
+          _id: yEH3vVRip4nzxnN9
           type: ScaleValue
           configuration:
             identifier: ''
@@ -1586,7 +1646,9 @@ items:
           value: {}
           title: Second Wind
           hint: ''
-        - _id: mpkUwD60nPpNaKsg
+          flags: {}
+        mpkUwD60nPpNaKsg:
+          _id: mpkUwD60nPpNaKsg
           type: Subclass
           configuration: {}
           value:
@@ -1595,7 +1657,9 @@ items:
           level: 3
           title: ''
           hint: ''
-        - _id: B05A1ijLPQMNlb3m
+          flags: {}
+        B05A1ijLPQMNlb3m:
+          _id: B05A1ijLPQMNlb3m
           type: Trait
           configuration:
             mode: default
@@ -1612,7 +1676,9 @@ items:
           title: Saving Throw Proficiencies
           hint: ''
           classRestriction: primary
-        - _id: UaSYMl2io5kbXNOY
+          flags: {}
+        UaSYMl2io5kbXNOY:
+          _id: UaSYMl2io5kbXNOY
           type: Trait
           configuration:
             mode: default
@@ -1638,7 +1704,9 @@ items:
           title: Skill Proficiencies
           hint: ''
           classRestriction: primary
-        - _id: TsqDRDOepHDmgYjZ
+          flags: {}
+        TsqDRDOepHDmgYjZ:
+          _id: TsqDRDOepHDmgYjZ
           type: Trait
           configuration:
             mode: default
@@ -1655,7 +1723,9 @@ items:
           title: Weapon Proficiencies
           hint: ''
           classRestriction: primary
-        - _id: XNba1RiASLSxoS8e
+          flags: {}
+        XNba1RiASLSxoS8e:
+          _id: XNba1RiASLSxoS8e
           type: Trait
           configuration:
             mode: default
@@ -1676,7 +1746,9 @@ items:
           title: Armor Training
           hint: ''
           classRestriction: primary
-        - _id: fK62ORkG9cOsa3XL
+          flags: {}
+        fK62ORkG9cOsa3XL:
+          _id: fK62ORkG9cOsa3XL
           type: Trait
           configuration:
             mode: default
@@ -1690,7 +1762,9 @@ items:
           title: Weapon Proficiencies
           hint: ''
           classRestriction: secondary
-        - _id: Nl6NkDxsiWjv7MfC
+          flags: {}
+        Nl6NkDxsiWjv7MfC:
+          _id: Nl6NkDxsiWjv7MfC
           type: Trait
           configuration:
             mode: default
@@ -1706,7 +1780,9 @@ items:
           title: Armor Training
           hint: ''
           classRestriction: secondary
-        - _id: mJnrjhWpEz2lMDq4
+          flags: {}
+        mJnrjhWpEz2lMDq4:
+          _id: mJnrjhWpEz2lMDq4
           type: Trait
           configuration:
             mode: mastery
@@ -1725,7 +1801,9 @@ items:
           level: 1
           title: Weapon Mastery
           hint: ''
-        - _id: EmTANp6x6GfXFTmU
+          flags: {}
+        EmTANp6x6GfXFTmU:
+          _id: EmTANp6x6GfXFTmU
           type: ItemChoice
           configuration:
             choices:
@@ -1808,7 +1886,9 @@ items:
             replaced: {}
           title: Fighting Style
           hint: ''
-        - _id: n08OgNequzQOoUMV
+          flags: {}
+        n08OgNequzQOoUMV:
+          _id: n08OgNequzQOoUMV
           type: ScaleValue
           configuration:
             identifier: mastery
@@ -1827,7 +1907,9 @@ items:
           value: {}
           title: Weapon Masteries Known
           hint: ''
-        - type: Trait
+          flags: {}
+        oQeuiFaWAVOPtJPt:
+          type: Trait
           configuration:
             mode: mastery
             allowReplacements: false
@@ -1843,7 +1925,9 @@ items:
           title: Weapon Mastery
           hint: ''
           _id: oQeuiFaWAVOPtJPt
-        - type: Trait
+          flags: {}
+        4QKhDAuuM8x78quv:
+          type: Trait
           configuration:
             mode: mastery
             allowReplacements: false
@@ -1859,7 +1943,9 @@ items:
           title: Weapon Mastery
           hint: ''
           _id: 4QKhDAuuM8x78quv
-        - type: Trait
+          flags: {}
+        YSAbsXV9zn9eX9p7:
+          type: Trait
           configuration:
             mode: mastery
             allowReplacements: false
@@ -1875,7 +1961,9 @@ items:
           title: Weapon Mastery
           hint: ''
           _id: YSAbsXV9zn9eX9p7
-        - type: AbilityScoreImprovement
+          flags: {}
+        gf1iwlMYsK0HHV0X:
+          type: AbilityScoreImprovement
           _id: gf1iwlMYsK0HHV0X
           configuration:
             cap: 2
@@ -1895,6 +1983,7 @@ items:
           level: 19
           title: ''
           hint: ''
+          flags: {}
       spellcasting:
         progression: none
         ability: ''
@@ -1919,9 +2008,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566347
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 0
     ownership:
       default: 0
@@ -1963,7 +2051,7 @@ items:
       activities: {}
       enchant: {}
       identifier: fighting-style
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     flags:
@@ -1980,9 +2068,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566347
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 0
     ownership:
       default: 0
@@ -2096,9 +2183,10 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       enchant: {}
       identifier: second-wind
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     flags:
@@ -2115,9 +2203,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566347
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 0
     ownership:
       default: 0
@@ -2166,7 +2253,7 @@ items:
       activities: {}
       enchant: {}
       identifier: weapon-mastery
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     flags:
@@ -2183,9 +2270,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566347
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 0
     ownership:
       default: 0
@@ -2224,7 +2310,7 @@ items:
       activities: {}
       enchant: {}
       identifier: defense
-      advancement: []
+      advancement: {}
       crewed: false
     _id: 4YvKaXa9tyX9nkJQ
     type: feat
@@ -2262,7 +2348,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.3
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RandalLv01000000.4YvKaXa9tyX9nkJQ.W0ObItz7sS8ZJ09Y
@@ -2282,9 +2368,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566347
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.4YvKaXa9tyX9nkJQ'
@@ -2355,7 +2440,6 @@ items:
       type:
         value: simpleM
         baseItem: spear
-      magicalBonus: null
       properties:
         - thr
         - ver
@@ -2431,6 +2515,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       ammunition: {}
       mastery: sap
       identifier: spear
@@ -2455,9 +2540,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566347
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.ABxnTg4kyQm4Diix'
@@ -2528,7 +2612,6 @@ items:
       type:
         value: simpleR
         baseItem: shortbow
-      magicalBonus: null
       properties:
         - amm
         - two
@@ -2604,6 +2687,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       ammunition:
         type: arrow
       mastery: vex
@@ -2629,9 +2713,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566347
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.w1dZ8aHRtrLv2Xis'
@@ -2690,9 +2773,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566347
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.cXgmBRDhH9r07MvY'
@@ -2748,7 +2830,6 @@ items:
       type:
         value: ammo
         subtype: arrow
-      magicalBonus: null
       properties: []
       activities: {}
       identifier: arrows
@@ -2769,9 +2850,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566347
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.yUUJvmNXliRf9ibj'
@@ -2876,6 +2956,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         Xa5CnT6vqjbhgSpN:
           type: check
           activation:
@@ -2937,6 +3018,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: dice
       attuned: false
       equipped: false
@@ -2957,9 +3039,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566347
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.XVceuzIEPv1XoXE1'
@@ -3008,7 +3089,6 @@ items:
       type:
         value: trinket
         subtype: ''
-      magicalBonus: null
       properties: []
       activities:
         bsWqOT06BB3Vb2hg:
@@ -3068,6 +3148,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: healers-kit
       attuned: false
       equipped: false
@@ -3088,9 +3169,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566347
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.gC2x4yo5LFiBBppG'
@@ -3125,7 +3205,6 @@ items:
         recovery: []
       armor:
         value: 16
-        magicalBonus: null
         dex: 0
       hp:
         value: null
@@ -3166,9 +3245,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566347
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.E12bQ9fRznCAtAR5'
@@ -3239,7 +3317,6 @@ items:
       type:
         value: martialM
         baseItem: greatsword
-      magicalBonus: null
       properties:
         - hvy
         - two
@@ -3315,6 +3392,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       ammunition: {}
       mastery: graze
       identifier: greatsword
@@ -3339,9 +3417,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566347
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.SmNdnRugIBULpdn5'
@@ -3412,7 +3489,6 @@ items:
       type:
         value: martialM
         baseItem: flail
-      magicalBonus: null
       properties: []
       proficient: null
       activities:
@@ -3486,6 +3562,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       ammunition: {}
       mastery: sap
       identifier: flail
@@ -3510,9 +3587,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566347
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.1gtuPL2vbA6kS4mz'
@@ -3583,7 +3659,6 @@ items:
       type:
         value: simpleM
         baseItem: javelin
-      magicalBonus: null
       properties:
         - thr
       proficient: null
@@ -3658,6 +3733,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       ammunition: {}
       mastery: slow
       identifier: javelin
@@ -3682,9 +3758,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566347
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.hwwPjr6vwktmzl1r'
@@ -3754,9 +3829,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566347
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.rWs9nzYgtqvN8hRi'
@@ -3815,9 +3889,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566347
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.5dsQP0Q0Iv2BIoMI'
@@ -3882,6 +3955,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -3926,7 +4000,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties: []
     effects: []
     folder: uDk4FBYfcP2JnX6t
@@ -3941,9 +4014,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566347
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: lqWUZOp1h1fGECDv
     sort: 100000
     ownership:
@@ -3987,7 +4059,6 @@ items:
         recovery: []
       armor:
         value: null
-        magicalBonus: null
         dex: null
       hp:
         value: null
@@ -4057,6 +4128,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: tinderbox
       crew:
         value: []
@@ -4077,9 +4149,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566347
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.KHzgPiZSib4wqkfH'
@@ -4136,7 +4207,6 @@ items:
       type:
         value: trinket
         subtype: ''
-      magicalBonus: null
       properties: []
       activities:
         Y0LvyxjfVHNbp4CG:
@@ -4197,6 +4267,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         rYGOWDRcT5jBKvzq:
           type: check
           name: Burst Rope
@@ -4251,6 +4322,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         5q6tX1T7ONDvgJiA:
           type: check
           name: Escape Check
@@ -4305,6 +4377,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: rope
     _id: Y9lqVRRGZEGORx6K
     type: consumable
@@ -4323,9 +4396,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566347
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.Y9lqVRRGZEGORx6K'
@@ -4372,9 +4444,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566347
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.ees3hsi2VpHHPb2e'
@@ -4425,7 +4496,6 @@ items:
       type:
         value: food
         subtype: ''
-      magicalBonus: null
       properties: []
       activities: {}
       identifier: rations
@@ -4446,9 +4516,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566347
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.mVkUeHxmzigIP6uV'
@@ -4500,7 +4569,6 @@ items:
       type:
         value: trinket
         subtype: ''
-      magicalBonus: null
       properties: []
       activities:
         SouNhSdWdnznKCam:
@@ -4586,6 +4654,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: torch
     _id: tqBUkDPZlwJgcCYP
     type: consumable
@@ -4604,9 +4673,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566347
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.tqBUkDPZlwJgcCYP'
@@ -4660,7 +4728,6 @@ items:
       type:
         value: trinket
         subtype: ''
-      magicalBonus: null
       properties: []
       activities:
         G8upRnZw22jGWKWy:
@@ -4745,6 +4812,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: caltrops
     _id: xJ8XrkRzldsIbcV9
     type: consumable
@@ -4799,7 +4867,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.3
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RandalLv01000000.xJ8XrkRzldsIbcV9.HsbtDDdiWhk4d7WB
@@ -4815,9 +4883,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566347
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.xJ8XrkRzldsIbcV9'
@@ -4885,7 +4952,6 @@ items:
       type:
         value: potion
         subtype: ''
-      magicalBonus: null
       properties: []
       activities:
         FoeoumkYcnAsGCRo:
@@ -4950,6 +5016,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         mDj3jtAY6ICmi1ZL:
           type: damage
           name: Douse Space
@@ -5019,6 +5086,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: oil
     _id: xIRi7FOBGCPOAgMC
     type: consumable
@@ -5037,9 +5105,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1766014566347
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.xIRi7FOBGCPOAgMC'
@@ -5076,7 +5143,6 @@ items:
         recovery: []
       armor:
         value: null
-        magicalBonus: null
         dex: null
       hp:
         value: null
@@ -5118,10 +5184,8 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagClothesTrav
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: 1766014762728
-      modifiedTime: 1766014762728
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!RandalLv01000000.HCEzQyzrCHlQfFDo'
 effects: []
 folder: Yg8rxL4JuMi44szP
@@ -5131,9 +5195,9 @@ _stats:
   exportSource: null
   coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.2.3
-  createdTime: 1765855895282
-  modifiedTime: 1765941964054
+  systemVersion: 5.3.0
+  createdTime: 1771452688976
+  modifiedTime: 1771452688976
   lastModifiedBy: dnd5ebuilder0000
 ownership:
   default: 0

@@ -353,22 +353,20 @@ system:
         mode: 0
       bonus: ''
     movement:
-      burrow: null
-      climb: null
-      fly: null
-      swim: null
-      walk: 30
+      walk: '30'
       units: null
       hover: false
+      ignoredDifficultTerrain: []
     attunement:
       max: 3
     senses:
-      darkvision: null
-      blindsight: null
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: null
+        blindsight: null
+        tremorsense: null
+        truesight: null
     spellcasting: str
     exhaustion: 0
     concentration:
@@ -404,15 +402,13 @@ system:
       level: 0
     loyalty:
       value: null
+    price:
+      value: null
+      denomination: gp
   details:
     biography:
       value: >-
-        <div class="gear"><p><strong>Gear:</strong>
-        @UUID[Compendium.dnd5e.equipment24.Item.phbwepGreatsword]{Greatsword},
-        @UUID[Compendium.dnd5e.equipment24.Item.phbwepHeavyCross]{Heavy
-        Crossbow},
-        @UUID[Compendium.dnd5e.equipment24.Item.phbarmPlateArmor]{Plate
-        Armor}</p></div><h1>Knights</h1><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.G5uYpVQgKpPIkFQY
+        <h1>Knights</h1><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.G5uYpVQgKpPIkFQY
         caption=false cite=false classes="no-embed
         mm"]</p><h2>Knight</h2><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.8ypc00V48Je5p3JY
         caption=false cite=false classes="no-embed mm free-rules-embed"]</p>
@@ -435,11 +431,11 @@ system:
         - individual
   resources:
     legact:
-      value: 0
       max: 0
+      spent: 0
     legres:
-      value: 0
       max: 0
+      spent: 0
     lair:
       value: false
       initiative: null
@@ -586,7 +582,6 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       range:
         value: null
         long: null
@@ -629,10 +624,10 @@ items:
       type:
         value: martialM
         baseItem: greatsword
-      magicalBonus: null
       properties:
         - hvy
         - two
+        - gear
       proficient: null
       activities:
         zi3BW6RGO2ugOyXu:
@@ -670,7 +665,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
               type: ''
@@ -709,9 +704,18 @@ items:
           sort: 0
           _id: zi3BW6RGO2ugOyXu
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       ammunition: {}
       mastery: graze
       identifier: greatsword
+      crew:
+        value: []
     _id: qFzUqCv1LU1T2l9W
     type: weapon
     folder: fd3qxAXCv2FhExPp
@@ -728,13 +732,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepGreatsword
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712722277
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!mmKnight00000000.qFzUqCv1LU1T2l9W'
   - name: Heavy Crossbow
     system:
@@ -763,7 +765,6 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       range:
         value: 100
         long: 400
@@ -806,12 +807,12 @@ items:
       type:
         value: martialR
         baseItem: heavycrossbow
-      magicalBonus: null
       properties:
         - amm
         - hvy
         - lod
         - two
+        - gear
       proficient: null
       activities:
         bZgdThKc69XEv43i:
@@ -849,7 +850,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
               type: ''
@@ -888,10 +889,19 @@ items:
           sort: 0
           _id: bZgdThKc69XEv43i
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       ammunition:
         type: crossbowBolt
       mastery: push
       identifier: heavy-crossbow
+      crew:
+        value: []
     _id: iqOpigRADMF7BFDu
     type: weapon
     folder: 0qKr1rbesCSNE0MA
@@ -908,13 +918,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepHeavyCross
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712722277
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!mmKnight00000000.iqOpigRADMF7BFDu'
   - name: Plate Armor
     system:
@@ -943,14 +951,12 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       uses:
         max: ''
         spent: 0
         recovery: []
       armor:
         value: 18
-        magicalBonus: null
         dex: 0
       hp:
         value: null
@@ -962,13 +968,17 @@ items:
         baseItem: plate
       properties:
         - stealthDisadvantage
+        - gear
       speed:
         value: null
         conditions: ''
+        units: ft
       strength: 15
       proficient: null
       activities: {}
       identifier: plate-armor
+      crew:
+        value: []
     type: equipment
     folder: zqXSu2wOJljt7AsS
     img: icons/equipment/chest/breastplate-collared-steel.webp
@@ -979,13 +989,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbarmPlateArmor
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712722277
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: 78ddr9iMnLejcYIE
     sort: 0
     _key: '!actors.items!mmKnight00000000.78ddr9iMnLejcYIE'
@@ -1043,6 +1051,12 @@ items:
             name: ''
             formula: ''
           img: systems/dnd5e/icons/svg/monster.svg
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -1063,9 +1077,10 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: 4T18pEvubPMQLzvD
@@ -1079,13 +1094,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712722277
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 0
@@ -1144,6 +1157,13 @@ items:
             visible: false
             name: Bonus AC
             formula: '2'
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -1166,9 +1186,10 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: 4T18pEvubPMQLzvD
@@ -1182,13 +1203,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmParry000000000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712722277
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 1
@@ -1200,13 +1219,13 @@ flags:
     showTokenPortrait: false
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
-  systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1745415931803
-  modifiedTime: 1745712722309
-  lastModifiedBy: dnd5ebuilder0000
   exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  createdTime: 1771452707933
+  modifiedTime: 1771452707933
+  lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:
   default: 0

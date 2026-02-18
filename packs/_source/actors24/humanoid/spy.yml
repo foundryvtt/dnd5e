@@ -353,22 +353,21 @@ system:
         mode: 0
       bonus: '@prof'
     movement:
-      burrow: null
-      climb: 30
-      fly: null
-      swim: null
-      walk: 30
+      climb: '30'
+      walk: '30'
       units: null
       hover: false
+      ignoredDifficultTerrain: []
     attunement:
       max: 3
     senses:
-      darkvision: null
-      blindsight: null
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: null
+        blindsight: null
+        tremorsense: null
+        truesight: null
     spellcasting: str
     exhaustion: 0
     concentration:
@@ -404,15 +403,12 @@ system:
       level: 0
     loyalty:
       value: null
+    price:
+      value: null
+      denomination: gp
   details:
     biography:
-      value: >-
-        <div class="gear"><p><strong>Gear:</strong>
-        @UUID[Compendium.dnd5e.equipment24.Item.phbwepHandCrossb]{Hand
-        Crossbow},
-        @UUID[Compendium.dnd5e.equipment24.Item.phbwepShortsword]{Shortsword},
-        @UUID[Compendium.dnd5e.equipment24.Item.phbtulThievesToo]{Thieves'
-        Tools}</p></div>
+      value: ''
       public: ''
     alignment: Neutral
     ideal: ''
@@ -432,11 +428,11 @@ system:
         - individual
   resources:
     legact:
-      value: 0
       max: 0
+      spent: 0
     legres:
-      value: 0
       max: 0
+      spent: 0
     lair:
       value: false
       initiative: null
@@ -583,7 +579,6 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       range:
         value: null
         long: null
@@ -626,10 +621,10 @@ items:
       type:
         value: martialM
         baseItem: shortsword
-      magicalBonus: null
       properties:
         - fin
         - lgt
+        - gear
       proficient: null
       activities:
         42jdrHDfDRCcYeL4:
@@ -667,7 +662,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
               type: ''
@@ -706,9 +701,18 @@ items:
           sort: 0
           _id: 42jdrHDfDRCcYeL4
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       ammunition: {}
       mastery: vex
       identifier: shortsword
+      crew:
+        value: []
     _id: cZowYloP5f2fxbtI
     type: weapon
     folder: fd3qxAXCv2FhExPp
@@ -723,15 +727,13 @@ items:
           activity: []
           effect: []
     _stats:
-      compendiumSource: Compendium.dnd5e.equipment24.phbwepShortsword
+      compendiumSource: Compendium.dnd-players-handbook.equipment.phbwepShortsword
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712727675
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!mmSpy00000000000.cZowYloP5f2fxbtI'
   - name: Hand Crossbow
     system:
@@ -760,7 +762,6 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       range:
         value: 30
         long: 120
@@ -803,11 +804,11 @@ items:
       type:
         value: martialR
         baseItem: handcrossbow
-      magicalBonus: null
       properties:
         - amm
         - lgt
         - lod
+        - gear
       proficient: null
       activities:
         CJjRI7JX8tziGFSo:
@@ -845,7 +846,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
               type: ''
@@ -884,10 +885,19 @@ items:
           sort: 0
           _id: CJjRI7JX8tziGFSo
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       ammunition:
         type: crossbowBolt
       mastery: vex
       identifier: hand-crossbow
+      crew:
+        value: []
     _id: 8XNaqNwy1n0AUrl5
     type: weapon
     folder: 0qKr1rbesCSNE0MA
@@ -902,15 +912,13 @@ items:
           activity: []
           effect: []
     _stats:
-      compendiumSource: Compendium.dnd5e.equipment24.phbwepHandCrossb
+      compendiumSource: Compendium.dnd-players-handbook.equipment.phbwepHandCrossb
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712727675
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!mmSpy00000000000.8XNaqNwy1n0AUrl5'
   - _id: mmCunningAction0
     name: Cunning Action
@@ -966,6 +974,12 @@ items:
             name: ''
           name: Expend Use
           img: systems/dnd5e/icons/svg/monster.svg
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -986,9 +1000,10 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: 4T18pEvubPMQLzvD
@@ -1002,29 +1017,155 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmCunningAction0
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712727675
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 0
     _key: '!actors.items!mmSpy00000000000.mmCunningAction0'
+  - name: Thieves' Tools
+    system:
+      description:
+        value: >-
+          <p class="phb-meta"><strong>Ability:</strong> Dexterity</p><p
+          class="phb-meta"><strong>Utilize:</strong> Pick a lock (DC 15), or
+          disarm a trap (DC 15)</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 1
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 1
+        units: lb
+      price:
+        value: 25
+        denomination: gp
+      rarity: ''
+      attunement: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: ''
+        baseItem: thief
+      ability: dex
+      chatFlavor: ''
+      proficient: null
+      properties:
+        - gear
+      bonus: ''
+      activities:
+        4pIHxWxCdaF3Ieok:
+          type: check
+          activation:
+            type: action
+            value: null
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: self
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: false
+            override: false
+          check:
+            ability: dex
+            dc:
+              calculation: ''
+              formula: '15'
+            associated: []
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          _id: 4pIHxWxCdaF3Ieok
+          name: Pick a Lock/Disarm a Trap
+          img: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: thieves-tools
+      attuned: false
+      equipped: true
+    _id: NHMv5kWuMNacIv5i
+    type: tool
+    folder: GdxYMawvxybALCny
+    img: icons/tools/hand/lockpicks-steel-grey.webp
+    effects: []
+    sort: 0
+    ownership:
+      default: 0
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd-players-handbook.equipment.Item.phbtulThievesToo
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
+    _key: '!actors.items!mmSpy00000000000.NHMv5kWuMNacIv5i'
 effects: []
 folder: oq65o5ZsauMtb1JY
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
-  systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1745415931803
-  modifiedTime: 1745712727702
-  lastModifiedBy: dnd5ebuilder0000
   exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  createdTime: 1771452714815
+  modifiedTime: 1771452714815
+  lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:
   default: 0

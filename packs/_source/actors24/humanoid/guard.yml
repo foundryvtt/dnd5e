@@ -353,22 +353,20 @@ system:
         mode: 0
       bonus: ''
     movement:
-      burrow: null
-      climb: null
-      fly: null
-      swim: null
-      walk: 30
+      walk: '30'
       units: null
       hover: false
+      ignoredDifficultTerrain: []
     attunement:
       max: 3
     senses:
-      darkvision: null
-      blindsight: null
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: null
+        blindsight: null
+        tremorsense: null
+        truesight: null
     spellcasting: str
     exhaustion: 0
     concentration:
@@ -404,13 +402,13 @@ system:
       level: 0
     loyalty:
       value: null
+    price:
+      value: null
+      denomination: gp
   details:
     biography:
       value: >-
-        <div class="gear"><p><strong>Gear:</strong>
-        @UUID[Compendium.dnd5e.equipment24.Item.phbarmChainShirt]{Chain Shirt},
-        @UUID[Compendium.dnd5e.equipment24.Item.phbarmShield0000]{Shield},
-        @UUID[Compendium.dnd5e.equipment24.Item.phbwepSpear00000]{Spear}</p></div><h1>Guards</h1><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.Zh9j3VBgGnsvq9x4
+        <h1>Guards</h1><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.Zh9j3VBgGnsvq9x4
         caption=false cite=false classes="no-embed
         mm"]</p><h2>Guard</h2><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.IzCvcbHgZ8uPj9TU
         caption=false cite=false classes="no-embed mm free-rules-embed"]</p>
@@ -433,11 +431,11 @@ system:
         - individual
   resources:
     legact:
-      value: 0
       max: 0
+      spent: 0
     legres:
-      value: 0
       max: 0
+      spent: 0
     lair:
       value: false
       initiative: null
@@ -584,7 +582,6 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       range:
         value: 20
         long: 60
@@ -627,10 +624,10 @@ items:
       type:
         value: simpleM
         baseItem: spear
-      magicalBonus: null
       properties:
         - thr
         - ver
+        - gear
       proficient: null
       activities:
         HiR3FA2Uc0oOAHU9:
@@ -668,7 +665,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
               type: ''
@@ -697,9 +694,18 @@ items:
           sort: 0
           _id: HiR3FA2Uc0oOAHU9
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       ammunition: {}
       mastery: sap
       identifier: spear
+      crew:
+        value: []
     _id: aAcbmB8xbSuqUL9V
     type: weapon
     folder: FL1Jee9DzStc7vM3
@@ -716,13 +722,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepSpear00000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712720729
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!mmGuard000000000.aAcbmB8xbSuqUL9V'
   - name: Chain Shirt
     system:
@@ -751,14 +755,12 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       uses:
         max: ''
         spent: 0
         recovery: []
       armor:
         value: 13
-        magicalBonus: null
         dex: 2
       hp:
         value: null
@@ -768,14 +770,18 @@ items:
       type:
         value: medium
         baseItem: chainshirt
-      properties: []
+      properties:
+        - gear
       speed:
         value: null
         conditions: ''
+        units: ft
       strength: null
       proficient: null
       activities: {}
       identifier: chain-shirt
+      crew:
+        value: []
     type: equipment
     folder: tNySLDnz2qPVahU7
     img: icons/equipment/chest/breastplate-scale-grey.webp
@@ -786,13 +792,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbarmChainShirt
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712720729
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: 1MnlCW9tszC5MxMK
     sort: 0
     _key: '!actors.items!mmGuard000000000.1MnlCW9tszC5MxMK'
@@ -825,14 +829,12 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       uses:
         max: ''
         spent: 0
         recovery: []
       armor:
         value: 2
-        magicalBonus: null
         dex: null
       hp:
         value: null
@@ -842,14 +844,18 @@ items:
       type:
         value: shield
         baseItem: shield
-      properties: []
+      properties:
+        - gear
       speed:
         value: null
         conditions: ''
+        units: ft
       strength: null
       proficient: null
       activities: {}
       identifier: shield
+      crew:
+        value: []
     type: equipment
     folder: Iyyec8ij0PAfdLBd
     img: icons/equipment/shield/round-wooden-boss-steel-brown.webp
@@ -860,13 +866,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbarmShield0000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712720729
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: umFXCQvaIVnsc3iv
     sort: 0
     _key: '!actors.items!mmGuard000000000.umFXCQvaIVnsc3iv'
@@ -875,13 +879,13 @@ folder: oq65o5ZsauMtb1JY
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
-  systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1745415931803
-  modifiedTime: 1745712720755
-  lastModifiedBy: dnd5ebuilder0000
   exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  createdTime: 1771452705999
+  modifiedTime: 1771452705999
+  lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:
   default: 0

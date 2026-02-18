@@ -11,14 +11,15 @@ system:
     type:
       value: dragon
     race: null
-    environment: ''
     cr: null
-    spellLevel: 0
-    source:
-      custom: ''
     ideal: ''
     bond: ''
     flaw: ''
+    habitat:
+      custom: ''
+      value: []
+    treasure:
+      value: []
   abilities:
     str:
       value: 19
@@ -27,6 +28,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     dex:
       value: 14
       proficient: 0
@@ -34,6 +45,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     con:
       value: 17
       proficient: 0
@@ -41,6 +62,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     int:
       value: 10
       proficient: 0
@@ -48,6 +79,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     wis:
       value: 14
       proficient: 0
@@ -55,6 +96,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     cha:
       value: 14
       proficient: 0
@@ -62,6 +113,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
   traits:
     size: lg
     di:
@@ -94,6 +155,8 @@ system:
       value:
         - draconic
       custom: understands the languages you know
+      communication: {}
+    important: false
   currency:
     pp: 0
     gp: 0
@@ -341,22 +404,22 @@ system:
         mode: 0
       bonus: ''
     movement:
-      burrow: null
-      climb: null
-      fly: 60
-      swim: 30
-      walk: 30
+      fly: '60'
+      swim: '30'
+      walk: '30'
       units: null
       hover: false
+      ignoredDifficultTerrain: []
     attunement:
       max: 3
     senses:
-      darkvision: 60
-      blindsight: 30
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: 60
+        blindsight: 30
+        tremorsense: null
+        truesight: null
     spellcasting: int
     exhaustion: 0
     concentration:
@@ -380,27 +443,37 @@ system:
       tempmax: 0
       formula: '50'
     death:
-      ability: ''
       roll:
         min: null
         max: null
         mode: 0
       success: 0
       failure: 0
+      bonuses:
+        save: ''
+    spell:
+      level: 0
+    loyalty: {}
+    price:
+      value: null
+      denomination: gp
   resources:
     legact:
-      value: 0
       max: 0
+      spent: 0
     legres:
-      value: 0
       max: 0
+      spent: 0
     lair:
       value: false
       initiative: null
+      inside: false
   source:
     rules: '2024'
     license: CC-BY-4.0
     book: ''
+    custom: ''
+    revision: 1
 _id: phbmobDraconicSp
 img: ''
 prototypeToken:
@@ -518,6 +591,7 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties:
         - trait
       requirements: ''
@@ -543,6 +617,7 @@ items:
             concentration: false
           effects:
             - _id: 7cJTSbk7inXzZrgc
+              level: {}
           range:
             override: false
             units: any
@@ -571,8 +646,12 @@ items:
             formula: ''
           name: Share Acid Resistance
           img: icons/magic/acid/projectile-glowing-bubbles.webp
-          appliedEffects:
-            - 7cJTSbk7inXzZrgc
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         C4cUtbVLP3UV4Hs3:
           type: utility
           activation:
@@ -593,6 +672,7 @@ items:
             concentration: false
           effects:
             - _id: RhMVHKsPIntvMb9t
+              level: {}
           range:
             override: false
             units: any
@@ -622,8 +702,12 @@ items:
           name: Share Cold Resistance
           _id: C4cUtbVLP3UV4Hs3
           img: icons/magic/water/snowflake-ice-blue.webp
-          appliedEffects:
-            - RhMVHKsPIntvMb9t
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         gJEIvo5yMMyn5m3Z:
           type: utility
           activation:
@@ -644,6 +728,7 @@ items:
             concentration: false
           effects:
             - _id: 88nNini6vAbvuYpW
+              level: {}
           range:
             override: false
             units: any
@@ -673,8 +758,12 @@ items:
           name: Share Fire Resistance
           _id: gJEIvo5yMMyn5m3Z
           img: icons/magic/fire/flame-burning-yellow-orange.webp
-          appliedEffects:
-            - 88nNini6vAbvuYpW
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         1tEjIswvMncZjXLI:
           type: utility
           activation:
@@ -695,6 +784,7 @@ items:
             concentration: false
           effects:
             - _id: aM5KtLpDsfmHWiz2
+              level: {}
           range:
             override: false
             units: any
@@ -724,8 +814,12 @@ items:
           name: Share Lightning Resistance
           _id: 1tEjIswvMncZjXLI
           img: icons/magic/lightning/bolt-cloud-sky-white.webp
-          appliedEffects:
-            - aM5KtLpDsfmHWiz2
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         M9Fbgnnqeosilumb:
           type: utility
           activation:
@@ -746,6 +840,7 @@ items:
             concentration: false
           effects:
             - _id: C73Xnt0qigfb1tiy
+              level: {}
           range:
             override: false
             units: any
@@ -775,11 +870,15 @@ items:
           name: Share Poison Resistance
           _id: M9Fbgnnqeosilumb
           img: icons/skills/toxins/poison-bottle-corked-fire-green.webp
-          appliedEffects:
-            - C73Xnt0qigfb1tiy
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       enchant: {}
       identifier: shared-resistances
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     _id: phbaoiSharedResi
@@ -815,13 +914,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.0.0
-          createdTime: 1724444490482
-          modifiedTime: 1724445384271
-          lastModifiedBy: dnd5ebuilder0000
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!phbmobDraconicSp.phbaoiSharedResi.7cJTSbk7inXzZrgc
       - name: Shared Cold Resistance
@@ -852,13 +949,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.0.0
-          createdTime: 1724444536651
-          modifiedTime: 1724445449479
-          lastModifiedBy: dnd5ebuilder0000
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _id: RhMVHKsPIntvMb9t
         _key: >-
           !actors.items.effects!phbmobDraconicSp.phbaoiSharedResi.RhMVHKsPIntvMb9t
@@ -890,13 +985,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.0.0
-          createdTime: 1724444538538
-          modifiedTime: 1724445469278
-          lastModifiedBy: dnd5ebuilder0000
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _id: 88nNini6vAbvuYpW
         _key: >-
           !actors.items.effects!phbmobDraconicSp.phbaoiSharedResi.88nNini6vAbvuYpW
@@ -928,13 +1021,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.0.0
-          createdTime: 1724444539750
-          modifiedTime: 1724445481203
-          lastModifiedBy: dnd5ebuilder0000
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _id: aM5KtLpDsfmHWiz2
         _key: >-
           !actors.items.effects!phbmobDraconicSp.phbaoiSharedResi.aM5KtLpDsfmHWiz2
@@ -966,13 +1057,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.0.0
-          createdTime: 1724444540837
-          modifiedTime: 1724445492474
-          lastModifiedBy: dnd5ebuilder0000
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _id: C73Xnt0qigfb1tiy
         _key: >-
           !actors.items.effects!phbmobDraconicSp.phbaoiSharedResi.C73Xnt0qigfb1tiy
@@ -988,13 +1077,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.350'
-      systemId: dnd5e
-      systemVersion: 5.2.0
-      createdTime: null
-      modifiedTime: 1763150380582
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!phbmobDraconicSp.phbaoiSharedResi'
   - name: Multiattack
     system:
@@ -1022,6 +1109,7 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
       activities:
@@ -1060,7 +1148,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
               type: ''
@@ -1080,10 +1168,15 @@ items:
           sort: 0
           name: Activate
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       enchant: {}
       identifier: multiattack
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     _id: phbaoiMultiattac
@@ -1102,13 +1195,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.350'
-      systemId: dnd5e
-      systemVersion: 5.2.0
-      createdTime: null
-      modifiedTime: 1763150437643
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!phbmobDraconicSp.phbaoiMultiattac'
   - name: Rend
     system:
@@ -1134,6 +1225,7 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
       activities:
@@ -1173,7 +1265,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
               type: ''
@@ -1212,10 +1304,15 @@ items:
           sort: 0
           name: ''
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       enchant: {}
       identifier: rend
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     _id: phbaoiRend000000
@@ -1234,13 +1331,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1740680159247
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!phbmobDraconicSp.phbaoiRend000000'
   - name: Breath Weapon
     system:
@@ -1267,6 +1362,7 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
       activities:
@@ -1343,10 +1439,15 @@ items:
           sort: 0
           name: ''
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       enchant: {}
       identifier: breath-weapon
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     _id: phbaoiBreathWeap
@@ -1365,13 +1466,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1740680159247
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!phbmobDraconicSp.phbaoiBreathWeap'
 effects: []
 folder: UkOGmZEiXrlLv29I
@@ -1388,11 +1487,11 @@ flags:
       cr: None
 _stats:
   duplicateSource: null
-  coreVersion: '13.350'
-  systemId: dnd5e
-  systemVersion: 5.2.0
-  createdTime: 1724425912241
-  modifiedTime: 1763150332118
-  lastModifiedBy: dnd5ebuilder0000
   exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  createdTime: 1771452720419
+  modifiedTime: 1771452720419
+  lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!phbmobDraconicSp'

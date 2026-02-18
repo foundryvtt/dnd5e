@@ -353,22 +353,20 @@ system:
         mode: 0
       bonus: ''
     movement:
-      burrow: null
-      climb: null
-      fly: null
-      swim: null
-      walk: 30
+      walk: '30'
       units: null
       hover: false
+      ignoredDifficultTerrain: []
     attunement:
       max: 3
     senses:
-      darkvision: null
-      blindsight: null
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: null
+        blindsight: null
+        tremorsense: null
+        truesight: null
     spellcasting: str
     exhaustion: 0
     concentration:
@@ -404,12 +402,13 @@ system:
       level: 0
     loyalty:
       value: null
+    price:
+      value: null
+      denomination: gp
   details:
     biography:
       value: >-
-        <div class="gear"><p><strong>Gear:</strong>
-        @UUID[Compendium.dnd5e.equipment24.Item.phbarmBreastplat]{Breastplate},
-        @UUID[Compendium.dnd5e.equipment24.Item.phbwepRapier0000]{Rapier}</p></div><h1>Nobles</h1><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.TVskfAu471arcBTq
+        <h1>Nobles</h1><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.TVskfAu471arcBTq
         caption=false cite=false classes="no-embed
         mm"]</p><h2>Noble</h2><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.mZUN05Y3B77gCkk6
         caption=false cite=false classes="no-embed mm free-rules-embed"]</p>
@@ -431,11 +430,11 @@ system:
         - individual
   resources:
     legact:
-      value: 0
       max: 0
+      spent: 0
     legres:
-      value: 0
       max: 0
+      spent: 0
     lair:
       value: false
       initiative: null
@@ -582,7 +581,6 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       range:
         value: null
         long: null
@@ -625,9 +623,9 @@ items:
       type:
         value: martialM
         baseItem: rapier
-      magicalBonus: null
       properties:
         - fin
+        - gear
       proficient: null
       activities:
         0PGNisis4CVkSml5:
@@ -665,7 +663,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
               type: ''
@@ -694,9 +692,18 @@ items:
           sort: 0
           _id: 0PGNisis4CVkSml5
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       ammunition: {}
       mastery: vex
       identifier: rapier
+      crew:
+        value: []
     _id: H6tdFfNcvLwgZx0I
     type: weapon
     folder: fd3qxAXCv2FhExPp
@@ -713,13 +720,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepRapier0000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712724068
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!mmNoble000000000.H6tdFfNcvLwgZx0I'
   - name: Breastplate
     system:
@@ -748,14 +753,12 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       uses:
         max: ''
         spent: 0
         recovery: []
       armor:
         value: 14
-        magicalBonus: null
         dex: 2
       hp:
         value: null
@@ -765,14 +768,18 @@ items:
       type:
         value: medium
         baseItem: breastplate
-      properties: []
+      properties:
+        - gear
       speed:
         value: null
         conditions: ''
+        units: ft
       strength: null
       proficient: null
       activities: {}
       identifier: breastplate
+      crew:
+        value: []
     type: equipment
     folder: tNySLDnz2qPVahU7
     img: icons/equipment/chest/breastplate-collared-steel-grey.webp
@@ -783,13 +790,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbarmBreastplat
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712724068
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: fytfUlVaPy0set0a
     sort: 0
     _key: '!actors.items!mmNoble000000000.fytfUlVaPy0set0a'
@@ -847,6 +852,13 @@ items:
             visible: false
             name: Bonus AC
             formula: '2'
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -869,9 +881,10 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: 4T18pEvubPMQLzvD
@@ -885,13 +898,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmParry000000000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712724068
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 0
@@ -903,13 +914,13 @@ flags:
     showTokenPortrait: false
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
-  systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1745415931803
-  modifiedTime: 1745712724106
-  lastModifiedBy: dnd5ebuilder0000
   exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  createdTime: 1771452710132
+  modifiedTime: 1771452710132
+  lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:
   default: 0

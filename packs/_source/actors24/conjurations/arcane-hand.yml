@@ -17,6 +17,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     dex:
       value: 0
       proficient: 0
@@ -24,6 +34,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     con:
       value: 0
       proficient: 0
@@ -31,6 +51,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     int:
       value: 0
       proficient: 0
@@ -38,6 +68,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     wis:
       value: 0
       proficient: 0
@@ -45,6 +85,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     cha:
       value: 0
       proficient: 0
@@ -52,6 +102,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
   bonuses:
     mwak:
       attack: ''
@@ -293,22 +353,20 @@ system:
         mode: 0
       bonus: ''
     movement:
-      burrow: null
-      climb: null
-      fly: null
-      swim: null
-      walk: 60
+      walk: '60'
       units: null
       hover: false
+      ignoredDifficultTerrain: []
     attunement:
       max: 3
     senses:
-      darkvision: null
-      blindsight: null
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: null
+        blindsight: null
+        tremorsense: null
+        truesight: null
     spellcasting: int
     exhaustion: 0
     concentration:
@@ -332,13 +390,20 @@ system:
       tempmax: 0
       formula: '0'
     death:
-      ability: ''
       roll:
         min: null
         max: null
         mode: 0
       success: 0
       failure: 0
+      bonuses:
+        save: ''
+    spell:
+      level: 0
+    loyalty: {}
+    price:
+      value: null
+      denomination: gp
   details:
     biography:
       value: >-
@@ -355,20 +420,23 @@ system:
       subtype: ''
       swarm: ''
       custom: Shimmering Energy
-    environment: ''
     cr: null
-    spellLevel: 0
-    source: {}
+    habitat:
+      custom: ''
+      value: []
+    treasure:
+      value: []
   resources:
     legact:
-      value: 0
       max: 0
+      spent: 0
     legres:
-      value: 0
       max: 0
+      spent: 0
     lair:
       value: false
       initiative: null
+      inside: false
   traits:
     size: lg
     di:
@@ -392,10 +460,13 @@ system:
     languages:
       value: []
       custom: ''
+      communication: {}
+    important: false
   source:
     rules: '2024'
     license: CC-BY-4.0
     book: ''
+    revision: 1
 prototypeToken:
   name: Bigby's Hand
   displayName: 20
@@ -504,6 +575,7 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties:
         - mgc
       requirements: ''
@@ -544,7 +616,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
               type: ''
@@ -574,6 +646,8 @@ items:
                 bonus: ''
                 types:
                   - force
+                scaling:
+                  number: 1
           uses:
             spent: 0
             recovery: []
@@ -581,15 +655,18 @@ items:
           sort: 0
           name: ''
           img: ''
-          appliedEffects: []
           visibility:
             level:
               min: null
               max: null
             identifier: ''
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          flags: {}
       enchant: {}
       identifier: clenched-fist
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     _id: phbaoiClenchedFi
@@ -604,13 +681,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
+      exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.0
-      createdTime: null
-      modifiedTime: 1764613618689
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!phbsplBigbysHand.phbaoiClenchedFi'
   - name: Forceful Hand
     system:
@@ -638,6 +713,7 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties:
         - mgc
       requirements: ''
@@ -678,7 +754,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: '1'
               type: creature
@@ -702,10 +778,15 @@ items:
           sort: 0
           name: ''
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       enchant: {}
       identifier: forceful-hand
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     _id: phbaoiForcefulHa
@@ -724,13 +805,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1740680160054
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!phbsplBigbysHand.phbaoiForcefulHa'
   - name: Grasping Hand
     system:
@@ -763,6 +842,7 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties:
         - mgc
       requirements: ''
@@ -803,7 +883,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: '1'
               type: creature
@@ -836,7 +916,12 @@ items:
           sort: 0
           name: Grapple
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         oVvdrmP4wv1oKWar:
           type: damage
           name: Crush
@@ -897,10 +982,15 @@ items:
                 scaling:
                   number: 1
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       enchant: {}
       identifier: grasping-hand
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     _id: phbaoiGraspingHa
@@ -919,13 +1009,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1740680160054
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!phbsplBigbysHand.phbaoiGraspingHa'
   - name: Interposing Hand
     system:
@@ -952,6 +1040,7 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties:
         - mgc
       requirements: ''
@@ -980,7 +1069,9 @@ items:
             concentration: false
           effects:
             - _id: wDcd4bpCErQfW0To
+              level: {}
             - _id: 7kq0juDjYR7wlwee
+              level: {}
           range:
             units: self
             special: ''
@@ -993,7 +1084,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
               type: ''
@@ -1013,12 +1104,15 @@ items:
           sort: 0
           name: Interpose
           img: ''
-          appliedEffects:
-            - wDcd4bpCErQfW0To
-            - 7kq0juDjYR7wlwee
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       enchant: {}
       identifier: interposing-hand
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     _id: phbaoiInterposin
@@ -1059,13 +1153,11 @@ items:
           compendiumSource: >-
             Actor.phbsplBigbysHand.Item.phbaoiInterposin.ActiveEffect.wDcd4bpCErQfW0To
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.0.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!phbsplBigbysHand.phbaoiInterposin.wDcd4bpCErQfW0To
       - name: Interposed
@@ -1095,13 +1187,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.0.0
-          createdTime: 1725985592766
-          modifiedTime: 1725985869321
-          lastModifiedBy: dnd5ebuilder0000
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!phbsplBigbysHand.phbaoiInterposin.7kq0juDjYR7wlwee
     folder: null
@@ -1116,13 +1206,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1740680160054
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!phbsplBigbysHand.phbaoiInterposin'
 effects: []
 folder: 9mmdDqYZFLIJBacj
@@ -1134,13 +1222,13 @@ flags:
     showTokenPortrait: false
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
-  systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425918173
-  modifiedTime: 1745256829944
-  lastModifiedBy: dnd5ebuilder0000
   exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  createdTime: 1771452721416
+  modifiedTime: 1771452721416
+  lastModifiedBy: dnd5ebuilder0000
 sort: 100000
 ownership:
   default: 0

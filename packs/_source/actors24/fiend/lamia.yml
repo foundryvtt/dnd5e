@@ -353,22 +353,20 @@ system:
         mode: 0
       bonus: ''
     movement:
-      burrow: null
-      climb: null
-      fly: null
-      swim: null
-      walk: 40
+      walk: '40'
       units: null
       hover: false
+      ignoredDifficultTerrain: []
     attunement:
       max: 3
     senses:
-      darkvision: 60
-      blindsight: null
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: 60
+        blindsight: null
+        tremorsense: null
+        truesight: null
     spellcasting: cha
     exhaustion: 0
     concentration:
@@ -404,6 +402,9 @@ system:
       level: 0
     loyalty:
       value: null
+    price:
+      value: null
+      denomination: gp
   details:
     biography:
       value: >-
@@ -427,11 +428,11 @@ system:
         - arcana
   resources:
     legact:
-      value: 0
       max: 0
+      spent: 0
     legres:
-      value: 0
       max: 0
+      spent: 0
     lair:
       value: false
       initiative: null
@@ -604,6 +605,12 @@ items:
             formula: ''
           name: Expend Use
           img: systems/dnd5e/icons/svg/monster.svg
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -624,9 +631,10 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: 4T18pEvubPMQLzvD
@@ -640,13 +648,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712722471
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 0
@@ -682,6 +688,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -723,6 +730,13 @@ items:
                 scaling:
                   number: 1
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -754,7 +768,6 @@ items:
       armor:
         value: null
       cover: null
-      crewed: false
       hp:
         value: null
         max: null
@@ -780,7 +793,6 @@ items:
             enabled: false
           scaling:
             number: 1
-      magicalBonus: null
       properties: []
       proficient: null
       range:
@@ -789,6 +801,8 @@ items:
         reach: null
         units: ft
       mastery: ''
+      crew:
+        value: []
     folder: pSCWWdqMX9eUATRJ
     img: icons/skills/melee/blood-slash-foam-red.webp
     effects: []
@@ -800,13 +814,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmClaw0000000000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712722471
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 1
@@ -842,6 +854,7 @@ items:
           effects:
             - _id: SuBPepD5ynNLNy8h
               onSave: false
+              level: {}
           range:
             override: true
             units: ft
@@ -883,6 +896,13 @@ items:
               calculation: str
               formula: 8 + @mod + @prof
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -907,7 +927,7 @@ items:
       properties: []
       mastery: ''
       range:
-        units: ''
+        units: ft
         value: null
         long: null
         reach: null
@@ -945,12 +965,12 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       ammunition: {}
       armor:
         value: null
-      magicalBonus: null
       proficient: null
+      crew:
+        value: []
     folder: pSCWWdqMX9eUATRJ
     img: icons/magic/death/hand-withered-gray.webp
     effects:
@@ -983,13 +1003,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmLamia000000000.mmCorruptingTouc.SuBPepD5ynNLNy8h
     flags:
@@ -1000,13 +1018,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmCorruptingTouc
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712722471
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 2
@@ -1040,6 +1056,7 @@ items:
             override: false
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -1064,6 +1081,13 @@ items:
             uuid: Compendium.dnd5e.spells24.Item.phbsplDisguiseSe
             ability: ''
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         KQenmPwveGFdDTl4:
           type: cast
           spell:
@@ -1096,6 +1120,7 @@ items:
             override: false
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -1109,6 +1134,13 @@ items:
             recovery: []
             max: ''
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         EEQKe7QUHksJRZCn:
           type: cast
           spell:
@@ -1144,6 +1176,7 @@ items:
             override: false
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -1159,6 +1192,13 @@ items:
                 type: recoverAll
             max: '1'
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         QOd5ZmnhW1loMD5H:
           type: cast
           spell:
@@ -1194,6 +1234,7 @@ items:
             override: false
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -1209,6 +1250,13 @@ items:
                 type: recoverAll
             max: '1'
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         UipKtGZRaCQEBS4Y:
           type: cast
           spell:
@@ -1244,6 +1292,7 @@ items:
             override: false
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -1259,6 +1308,13 @@ items:
                 type: recoverAll
             max: '1'
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -1290,9 +1346,10 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: 4T18pEvubPMQLzvD
@@ -1306,13 +1363,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSpellcasting00
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712722471
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 3
@@ -1373,6 +1428,12 @@ items:
             name: ''
             formula: ''
           img: systems/dnd5e/icons/svg/monster.svg
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -1393,9 +1454,10 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: 4T18pEvubPMQLzvD
@@ -1409,13 +1471,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmLeap0000000000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712722471
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 4
@@ -1456,7 +1516,7 @@ items:
           count: ''
           type: ''
         template:
-          units: ''
+          units: ft
           contiguous: false
           type: ''
       range:
@@ -1476,9 +1536,6 @@ items:
         consumed: false
         cost: 0
         supply: 0
-      preparation:
-        mode: prepared
-        prepared: false
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
@@ -1501,8 +1558,10 @@ items:
             concentration: false
           effects:
             - _id: SrIb7dbaZs5F4zi9
+              level: {}
           range:
             override: false
+            units: self
           target:
             prompt: true
             template:
@@ -1522,7 +1581,16 @@ items:
             max: ''
           sort: 0
           name: Cast
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       identifier: disguise-self
+      method: spell
+      prepared: 0
     type: spell
     img: icons/equipment/head/mask-carved-bird-grey-pink.webp
     effects:
@@ -1555,13 +1623,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmLamia000000000.6APauftroqjmXvbd.SrIb7dbaZs5F4zi9
       - _id: dnd5espellchange
@@ -1594,13 +1660,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmLamia000000000.6APauftroqjmXvbd.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -1613,13 +1677,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDisguiseSe
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712722471
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: 6APauftroqjmXvbd
     _key: '!actors.items!mmLamia000000000.6APauftroqjmXvbd'
   - name: Minor Illusion
@@ -1665,7 +1727,7 @@ items:
           type: space
           special: ''
         template:
-          units: ''
+          units: ft
           contiguous: false
           type: ''
       range:
@@ -1686,9 +1748,6 @@ items:
         consumed: false
         cost: 0
         supply: 0
-      preparation:
-        mode: always
-        prepared: false
       activities:
         XkQLfFVopYW3SasN:
           type: summon
@@ -1711,6 +1770,7 @@ items:
             override: false
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -1739,6 +1799,7 @@ items:
             attacks: false
             proficiency: false
             saves: false
+            disposition: false
           profiles:
             - count: ''
               name: Image
@@ -1759,10 +1820,18 @@ items:
           summon:
             prompt: true
             mode: ''
-            identifier: ''
           name: Create Illusion
           effects: []
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       identifier: minor-illusion
+      method: spell
+      prepared: 2
     type: spell
     img: icons/sundries/gaming/playing-cards.webp
     effects:
@@ -1796,13 +1865,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmLamia000000000.A0QXzcxFPhHh38Ki.dnd5espellchange
     folder: 4FhsY9FJQd7h7MZb
@@ -1815,13 +1882,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplMinorIllus
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712722471
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: A0QXzcxFPhHh38Ki
     _key: '!actors.items!mmLamia000000000.A0QXzcxFPhHh38Ki'
   - name: Geas
@@ -1869,7 +1934,7 @@ items:
           choice: false
           special: ''
         template:
-          units: ''
+          units: ft
           contiguous: false
           type: ''
       range:
@@ -1889,9 +1954,6 @@ items:
         consumed: false
         cost: 0
         supply: 0
-      preparation:
-        mode: prepared
-        prepared: false
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
@@ -1915,8 +1977,10 @@ items:
           effects:
             - _id: TXwfzpj9bERo0X1r
               onSave: false
+              level: {}
           range:
             override: false
+            units: self
           target:
             prompt: true
             template:
@@ -1951,7 +2015,16 @@ items:
             max: ''
           sort: 0
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       identifier: geas
+      method: spell
+      prepared: 0
     type: spell
     img: icons/equipment/head/hat-pointed-leather-black-glowing.webp
     effects:
@@ -1985,13 +2058,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmLamia000000000.2M6IcnU5z2CDUmR9.TXwfzpj9bERo0X1r
       - _id: dnd5espellchange
@@ -2024,13 +2095,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmLamia000000000.2M6IcnU5z2CDUmR9.dnd5espellchange
     folder: beZ8MTpWY2cMEUlp
@@ -2046,13 +2115,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplGeas000000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712722471
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: 2M6IcnU5z2CDUmR9
     _key: '!actors.items!mmLamia000000000.2M6IcnU5z2CDUmR9'
   - name: Major Image
@@ -2102,7 +2169,7 @@ items:
           count: '1'
           choice: false
         template:
-          units: ''
+          units: ft
           contiguous: false
       range:
         value: '120'
@@ -2123,9 +2190,6 @@ items:
         consumed: false
         cost: 0
         supply: 0
-      preparation:
-        mode: prepared
-        prepared: false
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
@@ -2148,6 +2212,7 @@ items:
             concentration: false
           range:
             override: false
+            units: self
           target:
             prompt: true
             template:
@@ -2175,6 +2240,7 @@ items:
             proficiency: false
             attacks: false
             saves: false
+            disposition: false
           profiles:
             - count: ''
               name: ''
@@ -2201,7 +2267,6 @@ items:
                 max: null
               types: []
           summon:
-            identifier: ''
             mode: ''
             prompt: true
           uses:
@@ -2209,7 +2274,16 @@ items:
             recovery: []
           sort: 0
           effects: []
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       identifier: major-image
+      method: spell
+      prepared: 0
     type: spell
     img: icons/magic/light/orbs-smoke-pink.webp
     effects:
@@ -2243,13 +2317,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmLamia000000000.nCkhRnrrGKCLIAOG.dnd5espellchange
     folder: HCovEE4VoPGlIbKi
@@ -2262,13 +2334,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplMajorImage
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712722471
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: nCkhRnrrGKCLIAOG
     _key: '!actors.items!mmLamia000000000.nCkhRnrrGKCLIAOG'
   - name: Scrying
@@ -2320,7 +2390,7 @@ items:
           type: any
           special: creature on same plane of existence or a location you have seen
         template:
-          units: ''
+          units: ft
           contiguous: false
           type: ''
       range:
@@ -2344,9 +2414,6 @@ items:
         consumed: false
         cost: 0
         supply: 0
-      preparation:
-        mode: prepared
-        prepared: false
       activities:
         NeUDDgmX3BdnFGH4:
           type: save
@@ -2369,6 +2436,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -2392,6 +2460,13 @@ items:
               calculation: ''
               formula: '@attributes.spell.dc - 5 + 2'
           name: Secondhand and Picture
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         2CjCuSPwb4erFwZC:
           type: save
           activation:
@@ -2412,6 +2487,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -2436,6 +2512,13 @@ items:
               formula: '@attributes.spell.dc - 5 + 4'
           name: Secondhand and Garment
           _id: 2CjCuSPwb4erFwZC
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         AwH5PhQZyU2ryO7X:
           type: save
           activation:
@@ -2456,6 +2539,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -2480,6 +2564,13 @@ items:
               formula: '@attributes.spell.dc - 5 + 10'
           name: Secondhand and Body Part
           _id: AwH5PhQZyU2ryO7X
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         L9ejQXxfSH0qg8bB:
           type: save
           activation:
@@ -2500,6 +2591,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -2524,6 +2616,13 @@ items:
               formula: '@attributes.spell.dc - 0 + 2'
           name: Firsthand and Picture
           _id: L9ejQXxfSH0qg8bB
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         QUv35ZZBe3gVvEzK:
           type: save
           activation:
@@ -2544,6 +2643,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -2568,6 +2668,13 @@ items:
               formula: '@attributes.spell.dc - 0 + 4'
           name: Firsthand and Garment
           _id: QUv35ZZBe3gVvEzK
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         xhhjJb25roNtpn8g:
           type: save
           activation:
@@ -2588,6 +2695,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -2612,6 +2720,13 @@ items:
               formula: '@attributes.spell.dc - 0 + 10'
           name: Firsthand and Body Part
           _id: xhhjJb25roNtpn8g
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         7wBprDveLHpbu6Z0:
           type: save
           activation:
@@ -2632,6 +2747,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -2656,6 +2772,13 @@ items:
               formula: '@attributes.spell.dc + 5 + 2'
           name: Extensive and Picture
           _id: 7wBprDveLHpbu6Z0
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         QUhtomQ1kgxShABi:
           type: save
           activation:
@@ -2676,6 +2799,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -2700,6 +2824,13 @@ items:
               formula: '@attributes.spell.dc + 5 + 4'
           name: Extensive and Garment
           _id: QUhtomQ1kgxShABi
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         LwyHxV46sddf89rc:
           type: save
           activation:
@@ -2720,6 +2851,7 @@ items:
           effects: []
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -2744,6 +2876,13 @@ items:
               formula: '@attributes.spell.dc + 5 + 10'
           name: Extensive and Body Part
           _id: LwyHxV46sddf89rc
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         aeMjBXbdsC7SxTTv:
           type: summon
           _id: aeMjBXbdsC7SxTTv
@@ -2765,6 +2904,7 @@ items:
             concentration: false
           range:
             override: false
+            units: self
           target:
             template:
               contiguous: false
@@ -2795,6 +2935,7 @@ items:
             attacks: false
             proficiency: false
             saves: false
+            disposition: false
           profiles:
             - count: ''
               name: ''
@@ -2807,10 +2948,18 @@ items:
           summon:
             prompt: true
             mode: ''
-            identifier: ''
           name: Create Sensor
           effects: []
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       identifier: scrying
+      method: spell
+      prepared: 0
     type: spell
     img: icons/magic/perception/orb-crystal-ball-scrying-blue.webp
     effects:
@@ -2844,13 +2993,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmLamia000000000.3oOYV59b2uhAfvFI.dnd5espellchange
     folder: beZ8MTpWY2cMEUlp
@@ -2863,13 +3010,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplScrying000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712722471
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: 3oOYV59b2uhAfvFI
     _key: '!actors.items!mmLamia000000000.3oOYV59b2uhAfvFI'
 effects: []
@@ -2879,13 +3024,13 @@ flags:
     showTokenPortrait: false
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
-  systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1745415564135
-  modifiedTime: 1745712722508
-  lastModifiedBy: dnd5ebuilder0000
   exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  createdTime: 1771452708183
+  modifiedTime: 1771452708183
+  lastModifiedBy: dnd5ebuilder0000
 sort: 150782
 ownership:
   default: 0

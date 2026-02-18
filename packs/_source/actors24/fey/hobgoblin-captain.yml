@@ -353,22 +353,20 @@ system:
         mode: 0
       bonus: '@prof'
     movement:
-      burrow: null
-      climb: null
-      fly: null
-      swim: null
-      walk: 30
+      walk: '30'
       units: null
       hover: false
+      ignoredDifficultTerrain: []
     attunement:
       max: 3
     senses:
-      darkvision: 60
-      blindsight: null
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: 60
+        blindsight: null
+        tremorsense: null
+        truesight: null
     spellcasting: str
     exhaustion: 0
     concentration:
@@ -404,14 +402,13 @@ system:
       level: 0
     loyalty:
       value: null
+    price:
+      value: null
+      denomination: gp
   details:
     biography:
       value: >-
-        <div class="gear"><p><strong>Gear:</strong>
-        @UUID[Compendium.dnd5e.equipment24.Item.phbwepGreatsword]{Greatsword},
-        @UUID[Compendium.dnd5e.equipment24.Item.phbarmHalfPlateA]{Half Plate
-        Armor},
-        @UUID[Compendium.dnd5e.equipment24.Item.phbwepLongbow000]{Longbow}</p></div><h1>Hobgoblins</h1><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.eFGs6u803PtWG5k7
+        <h1>Hobgoblins</h1><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.eFGs6u803PtWG5k7
         caption=false cite=false classes="no-embed mm
         free-rules-embed"]</p><h2>Hobgoblin
         Captain</h2><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.kr2tx1DFAcwGmzKR
@@ -445,11 +442,11 @@ system:
         - individual
   resources:
     legact:
-      value: 0
       max: 0
+      spent: 0
     legres:
-      value: 0
       max: 0
+      spent: 0
     lair:
       value: false
       initiative: null
@@ -595,7 +592,6 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       range:
         value: null
         long: null
@@ -638,10 +634,10 @@ items:
       type:
         value: martialM
         baseItem: greatsword
-      magicalBonus: null
       properties:
         - hvy
         - two
+        - gear
       proficient: null
       activities:
         zi3BW6RGO2ugOyXu:
@@ -679,7 +675,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
               type: ''
@@ -718,9 +714,18 @@ items:
           sort: 0
           _id: zi3BW6RGO2ugOyXu
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       ammunition: {}
       mastery: graze
       identifier: greatsword
+      crew:
+        value: []
     _id: OZvhmmUFMgHZWnGB
     type: weapon
     folder: fd3qxAXCv2FhExPp
@@ -737,13 +742,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepGreatsword
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712721374
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!mmHobgoblinCapta.OZvhmmUFMgHZWnGB'
   - name: Longbow
     system:
@@ -772,7 +775,6 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       range:
         value: 150
         long: 600
@@ -815,11 +817,11 @@ items:
       type:
         value: martialR
         baseItem: longbow
-      magicalBonus: null
       properties:
         - amm
         - hvy
         - two
+        - gear
       proficient: null
       activities:
         b04WToYLVtgE03Dm:
@@ -857,7 +859,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
               type: ''
@@ -896,10 +898,19 @@ items:
           sort: 0
           _id: b04WToYLVtgE03Dm
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       ammunition:
         type: arrow
       mastery: slow
       identifier: longbow
+      crew:
+        value: []
     _id: cryc72bvanyjmNdX
     type: weapon
     folder: 0qKr1rbesCSNE0MA
@@ -916,13 +927,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepLongbow000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712721374
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!mmHobgoblinCapta.cryc72bvanyjmNdX'
   - name: Half Plate Armor
     system:
@@ -951,14 +960,12 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       uses:
         max: ''
         spent: 0
         recovery: []
       armor:
         value: 15
-        magicalBonus: null
         dex: 2
       hp:
         value: null
@@ -970,13 +977,17 @@ items:
         baseItem: halfplate
       properties:
         - stealthDisadvantage
+        - gear
       speed:
         value: null
         conditions: ''
+        units: ft
       strength: null
       proficient: null
       activities: {}
       identifier: half-plate-armor
+      crew:
+        value: []
     type: equipment
     folder: tNySLDnz2qPVahU7
     img: icons/equipment/chest/breastplate-cuirass-steel-grey.webp
@@ -987,13 +998,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbarmHalfPlateA
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712721374
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: 4IaMfmULefcQh28J
     sort: 0
     _key: '!actors.items!mmHobgoblinCapta.4IaMfmULefcQh28J'
@@ -1055,6 +1064,12 @@ items:
             formula: ''
           name: Expend Use
           img: systems/dnd5e/icons/svg/monster.svg
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -1078,10 +1093,11 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties:
         - trait
       requirements: Not Incapacitated
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: L9Zgr8qAPc3ngKhb
@@ -1095,13 +1111,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmAuraOfAuthorit
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: 1737741432178
-      modifiedTime: 1745712721374
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 0
@@ -1160,6 +1174,12 @@ items:
             name: ''
             formula: ''
           img: systems/dnd5e/icons/svg/monster.svg
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -1180,9 +1200,10 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: 4T18pEvubPMQLzvD
@@ -1196,13 +1217,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: 1737741434277
-      modifiedTime: 1745712721374
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: -100000
@@ -1214,13 +1233,13 @@ flags:
     showTokenPortrait: false
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
-  systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1732598129404
-  modifiedTime: 1745712721402
-  lastModifiedBy: dnd5ebuilder0000
   exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  createdTime: 1771452706837
+  modifiedTime: 1771452706837
+  lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:
   default: 0

@@ -353,22 +353,20 @@ system:
         mode: 0
       bonus: ''
     movement:
-      burrow: null
-      climb: null
-      fly: null
-      swim: null
-      walk: 30
+      walk: '30'
       units: null
       hover: false
+      ignoredDifficultTerrain: []
     attunement:
       max: 3
     senses:
-      darkvision: 60
-      blindsight: null
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: 60
+        blindsight: null
+        tremorsense: null
+        truesight: null
     spellcasting: str
     exhaustion: 0
     concentration:
@@ -404,13 +402,13 @@ system:
       level: 0
     loyalty:
       value: null
+    price:
+      value: null
+      denomination: gp
   details:
     biography:
       value: >-
-        <div class="gear"><p><strong>Gear:</strong>
-        @UUID[Compendium.dnd5e.equipment24.Item.phbarmChainShirt]{Chain Shirt},
-        @UUID[Compendium.dnd5e.equipment24.Item.phbwepJavelin000]{Javelins (6)},
-        @UUID[Compendium.dnd5e.equipment24.Item.phbwepMorningsta]{Morningstar}</p></div><h1>Bugbears</h1><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.gzTUYPi9wHg0WMP0
+        <h1>Bugbears</h1><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.gzTUYPi9wHg0WMP0
         caption=false cite=false classes="no-embed mm
         free-rules-embed"]</p><h2>Bugbear
         Stalker</h2><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.lMvm5fxnuHBDhxD2
@@ -441,11 +439,11 @@ system:
         - individual
   resources:
     legact:
-      value: 0
       max: 0
+      spent: 0
     legres:
-      value: 0
       max: 0
+      spent: 0
     lair:
       value: false
       initiative: null
@@ -591,7 +589,6 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       range:
         value: 30
         long: 120
@@ -634,9 +631,9 @@ items:
       type:
         value: simpleM
         baseItem: javelin
-      magicalBonus: null
       properties:
         - thr
+        - gear
       proficient: null
       activities:
         r1hUkUrLD8kqx8X0:
@@ -674,7 +671,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
               type: ''
@@ -703,9 +700,18 @@ items:
           sort: 0
           _id: r1hUkUrLD8kqx8X0
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       ammunition: {}
       mastery: slow
       identifier: javelin
+      crew:
+        value: []
     _id: dN1CML4smcRrUkzD
     type: weapon
     folder: FL1Jee9DzStc7vM3
@@ -722,13 +728,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepJavelin000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712714944
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!mmBugbearStalker.dN1CML4smcRrUkzD'
   - name: Morningstar
     system:
@@ -761,7 +765,6 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       range:
         value: null
         long: null
@@ -804,8 +807,8 @@ items:
       type:
         value: martialM
         baseItem: morningstar
-      magicalBonus: null
-      properties: []
+      properties:
+        - gear
       proficient: null
       activities:
         QIpweawAzbt4xw5h:
@@ -843,7 +846,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: '1'
               type: creature
@@ -872,9 +875,18 @@ items:
           sort: 0
           _id: QIpweawAzbt4xw5h
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       ammunition: {}
       mastery: sap
       identifier: morningstar
+      crew:
+        value: []
     _id: YFpjAATelvlz5oyb
     type: weapon
     folder: fd3qxAXCv2FhExPp
@@ -891,13 +903,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepMorningsta
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712714944
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!mmBugbearStalker.YFpjAATelvlz5oyb'
   - name: Chain Shirt
     system:
@@ -926,14 +936,12 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       uses:
         max: ''
         spent: 0
         recovery: []
       armor:
         value: 13
-        magicalBonus: null
         dex: 2
       hp:
         value: null
@@ -943,14 +951,18 @@ items:
       type:
         value: medium
         baseItem: chainshirt
-      properties: []
+      properties:
+        - gear
       speed:
         value: null
         conditions: ''
+        units: ft
       strength: null
       proficient: null
       activities: {}
       identifier: chain-shirt
+      crew:
+        value: []
     type: equipment
     folder: tNySLDnz2qPVahU7
     img: icons/equipment/chest/breastplate-scale-grey.webp
@@ -961,13 +973,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbarmChainShirt
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712714944
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: RukSxq7bGcIprKdM
     sort: 0
     _key: '!actors.items!mmBugbearStalker.RukSxq7bGcIprKdM'
@@ -998,10 +1008,11 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties:
         - trait
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: L9Zgr8qAPc3ngKhb
@@ -1011,13 +1022,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmAbduct00000000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: 1737680658024
-      modifiedTime: 1745712714944
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 0
@@ -1076,6 +1085,12 @@ items:
             formula: ''
           name: Expend Use
           img: systems/dnd5e/icons/svg/monster.svg
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -1095,9 +1110,10 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: 4T18pEvubPMQLzvD
@@ -1111,13 +1127,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: 1737680660013
-      modifiedTime: 1745712714944
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: -100000
@@ -1153,6 +1167,7 @@ items:
           effects:
             - _id: 5yLzwp2Gu803QgI9
               onSave: false
+              level: {}
           range:
             override: false
             units: self
@@ -1186,6 +1201,13 @@ items:
               calculation: dex
               formula: 8 + @mod + @prof
           name: Save
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         UHSu9DkjmhXJAoWD:
           type: check
           name: Escape Check
@@ -1234,6 +1256,13 @@ items:
               formula: '@skills.ath.passive'
             ability: ''
           _id: UHSu9DkjmhXJAoWD
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -1259,9 +1288,10 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: 4T18pEvubPMQLzvD
@@ -1305,13 +1335,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.2.2
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmBugbearStalker.mmQuickGrapple00.5yLzwp2Gu803QgI9
     flags:
@@ -1322,13 +1350,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmQuickGrapple00
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: 1737680661239
-      modifiedTime: 1745712714944
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 2
@@ -1340,13 +1366,13 @@ flags:
     showTokenPortrait: false
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
-  systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1732598129404
-  modifiedTime: 1745712714974
-  lastModifiedBy: dnd5ebuilder0000
   exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  createdTime: 1771452698481
+  modifiedTime: 1771452698481
+  lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:
   default: 0

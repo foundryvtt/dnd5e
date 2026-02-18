@@ -17,6 +17,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     dex:
       value: 10
       proficient: 0
@@ -24,6 +34,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     con:
       value: 10
       proficient: 0
@@ -31,6 +51,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     int:
       value: 0
       proficient: 0
@@ -38,6 +68,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     wis:
       value: 0
       proficient: 0
@@ -45,6 +85,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     cha:
       value: 0
       proficient: 0
@@ -52,7 +102,16 @@ system:
       bonuses:
         check: ''
         save: ''
-  vehicleType: water
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
   attributes:
     init:
       ability: ''
@@ -62,17 +121,12 @@ system:
         mode: 0
       bonus: ''
     movement:
-      burrow: null
-      climb: null
-      fly: null
-      swim: 2
-      walk: null
-      units: mi
+      units: null
       hover: false
+      ignoredDifficultTerrain: []
     ac:
       flat: 15
       calc: default
-      motionless: ''
     hp:
       value: 300
       max: 300
@@ -82,14 +136,27 @@ system:
       mt: null
     actions:
       stations: false
-      value: 0
       thresholds:
         '0': null
         '1': null
         '2': null
+      max: 0
+      spent: 0
     capacity:
       creature: '40'
-      cargo: 100
+      cargo:
+        value: 100
+        units: tn
+    travel:
+      units: mph
+      paces: {}
+      speeds: {}
+      time: 24
+    price:
+      value: null
+      denomination: gp
+    quality:
+      value: 4
   details:
     biography:
       value: >-
@@ -99,6 +166,7 @@ system:
         15</p><p><strong>HP:</strong> 300</p><p><strong>Damage
         Threshold:</strong> 15</p><p><strong>Cost:</strong> 10,000 GP</p>
       public: ''
+    type: water
   source:
     revision: 1
     rules: '2024'
@@ -136,9 +204,21 @@ system:
         - unconscious
       custom: ''
     dimensions: ''
+    weight:
+      units: lb
+    keel:
+      units: ft
+    beam:
+      units: ft
   cargo:
     crew: []
     passengers: []
+  crew:
+    value: []
+  draft:
+    value: []
+  passengers:
+    value: []
 prototypeToken:
   name: Sailing Ship
   displayName: 20
@@ -226,13 +306,13 @@ folder: YRCjFZLqErBv0VKJ
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
-  systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1726019825747
-  modifiedTime: 1740679895166
-  lastModifiedBy: dnd5ebuilder0000
   exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  createdTime: 1771452720918
+  modifiedTime: 1771452720918
+  lastModifiedBy: dnd5ebuilder0000
 sort: 106250
 ownership:
   default: 0

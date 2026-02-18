@@ -353,22 +353,20 @@ system:
         mode: 0
       bonus: ''
     movement:
-      burrow: null
-      climb: null
-      fly: null
-      swim: null
-      walk: 30
+      walk: '30'
       units: null
       hover: false
+      ignoredDifficultTerrain: []
     attunement:
       max: 3
     senses:
-      darkvision: null
-      blindsight: null
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: null
+        blindsight: null
+        tremorsense: null
+        truesight: null
     spellcasting: str
     exhaustion: 0
     concentration:
@@ -404,14 +402,13 @@ system:
       level: 0
     loyalty:
       value: null
+    price:
+      value: null
+      denomination: gp
   details:
     biography:
       value: >-
-        <div class="gear"><p><strong>Gear:</strong>
-        @UUID[Compendium.dnd5e.equipment24.Item.phbarmChainMail0]{Chain Mail},
-        @UUID[Compendium.dnd5e.equipment24.Item.phbwepHeavyCross]{Heavy
-        Crossbow},
-        @UUID[Compendium.dnd5e.equipment24.Item.phbwepWarhammer0]{Warhammer}</p></div><h1>Toughs</h1><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.UqOqk409VNapbgEM
+        <h1>Toughs</h1><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.UqOqk409VNapbgEM
         caption=false cite=false classes="no-embed mm
         free-rules-embed"]</p><h2>Tough
         Boss</h2><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.T47eTnRd4tadGFU9
@@ -434,11 +431,11 @@ system:
         - armaments
   resources:
     legact:
-      value: 0
       max: 0
+      spent: 0
     legres:
-      value: 0
       max: 0
+      spent: 0
     lair:
       value: false
       initiative: null
@@ -588,7 +585,6 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       range:
         value: null
         long: null
@@ -631,9 +627,9 @@ items:
       type:
         value: martialM
         baseItem: warhammer
-      magicalBonus: null
       properties:
         - ver
+        - gear
       proficient: null
       activities:
         jf99rIxqlwX1YLPc:
@@ -671,7 +667,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
               type: ''
@@ -700,9 +696,18 @@ items:
           sort: 0
           _id: jf99rIxqlwX1YLPc
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       ammunition: {}
       mastery: push
       identifier: warhammer
+      crew:
+        value: []
     _id: iD5121TXziB6ZcSt
     type: weapon
     folder: fd3qxAXCv2FhExPp
@@ -719,13 +724,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepWarhammer0
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712728706
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!mmToughBoss00000.iD5121TXziB6ZcSt'
   - name: Heavy Crossbow
     system:
@@ -754,7 +757,6 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       range:
         value: 100
         long: 400
@@ -797,12 +799,12 @@ items:
       type:
         value: martialR
         baseItem: heavycrossbow
-      magicalBonus: null
       properties:
         - amm
         - hvy
         - lod
         - two
+        - gear
       proficient: null
       activities:
         bZgdThKc69XEv43i:
@@ -840,7 +842,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
               type: ''
@@ -869,10 +871,19 @@ items:
           sort: 0
           _id: bZgdThKc69XEv43i
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       ammunition:
         type: crossbowBolt
       mastery: push
       identifier: heavy-crossbow
+      crew:
+        value: []
     _id: 7MS7v84QoTYESVax
     type: weapon
     folder: 0qKr1rbesCSNE0MA
@@ -889,13 +900,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepHeavyCross
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712728706
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!mmToughBoss00000.7MS7v84QoTYESVax'
   - name: Chain Mail
     system:
@@ -924,14 +933,12 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       uses:
         max: ''
         spent: 0
         recovery: []
       armor:
         value: 16
-        magicalBonus: null
         dex: 0
       hp:
         value: null
@@ -943,13 +950,17 @@ items:
         baseItem: chainmail
       properties:
         - stealthDisadvantage
+        - gear
       speed:
         value: null
         conditions: ''
+        units: ft
       strength: 13
       proficient: null
       activities: {}
       identifier: chain-mail
+      crew:
+        value: []
     type: equipment
     folder: zqXSu2wOJljt7AsS
     img: icons/equipment/chest/breastplate-metal-scaled-grey.webp
@@ -960,13 +971,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbarmChainMail0
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712728706
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: upFFa0po60XRIROc
     sort: 0
     _key: '!actors.items!mmToughBoss00000.upFFa0po60XRIROc'
@@ -999,10 +1008,11 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties:
         - trait
       requirements: Ally within 5 feet of attack target
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: L9Zgr8qAPc3ngKhb
@@ -1012,13 +1022,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmPackTactics000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712728706
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 0
@@ -1077,6 +1085,12 @@ items:
             name: ''
             formula: ''
           img: systems/dnd5e/icons/svg/monster.svg
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -1097,9 +1111,10 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: 4T18pEvubPMQLzvD
@@ -1113,13 +1128,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712728706
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: -100000
@@ -1129,13 +1142,13 @@ folder: oq65o5ZsauMtb1JY
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
-  systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1745415931803
-  modifiedTime: 1745712728732
-  lastModifiedBy: dnd5ebuilder0000
   exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  createdTime: 1771452716092
+  modifiedTime: 1771452716092
+  lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:
   default: 0

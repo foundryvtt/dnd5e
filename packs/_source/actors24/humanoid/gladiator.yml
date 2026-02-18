@@ -17,6 +17,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     dex:
       value: 15
       proficient: 1
@@ -24,6 +34,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     con:
       value: 16
       proficient: 1
@@ -31,6 +51,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     int:
       value: 10
       proficient: 0
@@ -38,6 +68,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     wis:
       value: 12
       proficient: 1
@@ -45,6 +85,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     cha:
       value: 15
       proficient: 0
@@ -52,6 +102,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
   bonuses:
     mwak:
       attack: ''
@@ -293,22 +353,20 @@ system:
         mode: 0
       bonus: '@prof'
     movement:
-      burrow: null
-      climb: null
-      fly: null
-      swim: null
-      walk: 30
+      walk: '30'
       units: null
       hover: false
+      ignoredDifficultTerrain: []
     attunement:
       max: 3
     senses:
-      darkvision: null
-      blindsight: null
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: null
+        blindsight: null
+        tremorsense: null
+        truesight: null
     spellcasting: str
     exhaustion: 0
     concentration:
@@ -332,21 +390,23 @@ system:
       tempmax: null
       formula: 15d8 + 45
     death:
-      ability: ''
       roll:
         min: null
         max: null
         mode: 0
       success: 0
       failure: 0
+      bonuses:
+        save: ''
+    spell:
+      level: 0
+    loyalty: {}
+    price:
+      value: null
+      denomination: gp
   details:
     biography:
-      value: >-
-        <div class="gear"><p><strong>Gear:</strong>
-        @UUID[Compendium.dnd5e.equipment24.Item.phbarmShield0000]{Shield},
-        @UUID[Compendium.dnd5e.equipment24.Item.phbwepSpear00000]{Spears (3)},
-        @UUID[Compendium.dnd5e.equipment24.Item.phbarmStuddedLea]{Studded
-        Leather Armor}</p></div>
+      value: ''
       public: ''
     alignment: Neutral
     ideal: ''
@@ -355,26 +415,26 @@ system:
     race: null
     type:
       value: humanoid
-    environment: ''
     cr: 5
-    spellLevel: 0
     habitat:
       value:
         - type: any
+      custom: ''
     treasure:
       value:
         - armaments
         - individual
   resources:
     legact:
-      value: 0
       max: 0
+      spent: 0
     legres:
-      value: 0
       max: 0
+      spent: 0
     lair:
       value: false
       initiative: null
+      inside: false
   source:
     revision: 2
     rules: '2024'
@@ -406,6 +466,8 @@ system:
       value:
         - common
       custom: ''
+      communication: {}
+    important: false
 prototypeToken:
   name: Gladiator
   displayName: 20
@@ -515,7 +577,6 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       range:
         value: 20
         long: 60
@@ -558,10 +619,10 @@ items:
       type:
         value: simpleM
         baseItem: spear
-      magicalBonus: null
       properties:
         - thr
         - ver
+        - gear
       proficient: null
       activities:
         HiR3FA2Uc0oOAHU9:
@@ -599,7 +660,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
               type: ''
@@ -629,10 +690,17 @@ items:
           _id: HiR3FA2Uc0oOAHU9
           name: ''
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       ammunition: {}
       mastery: sap
       identifier: spear
+      crew:
+        value: []
     _id: vTZW4dSRGXTDWvRd
     type: weapon
     folder: FL1Jee9DzStc7vM3
@@ -649,13 +717,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepSpear00000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712719901
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!mmGladiator00000.vTZW4dSRGXTDWvRd'
   - name: Shield
     system:
@@ -686,14 +752,12 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       uses:
         max: ''
         spent: 0
         recovery: []
       armor:
         value: 2
-        magicalBonus: null
         dex: null
       hp:
         value: null
@@ -703,14 +767,18 @@ items:
       type:
         value: shield
         baseItem: shield
-      properties: []
+      properties:
+        - gear
       speed:
         value: null
         conditions: ''
+        units: ft
       strength: null
       proficient: null
       activities: {}
       identifier: shield
+      crew:
+        value: []
     type: equipment
     folder: Iyyec8ij0PAfdLBd
     img: icons/equipment/shield/round-wooden-boss-steel-brown.webp
@@ -721,13 +789,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbarmShield0000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712719901
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: eRJSN5Dx2heS3x6S
     sort: 0
     _key: '!actors.items!mmGladiator00000.eRJSN5Dx2heS3x6S'
@@ -758,14 +824,12 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       uses:
         max: ''
         spent: 0
         recovery: []
       armor:
         value: 12
-        magicalBonus: null
         dex: null
       hp:
         value: null
@@ -775,14 +839,18 @@ items:
       type:
         value: light
         baseItem: studded
-      properties: []
+      properties:
+        - gear
       speed:
         value: null
         conditions: ''
+        units: ft
       strength: null
       proficient: null
       activities: {}
       identifier: studded-leather-armor
+      crew:
+        value: []
     type: equipment
     folder: G3X11BbtmEqLmEnK
     img: icons/equipment/chest/breastplate-rivited-red.webp
@@ -793,13 +861,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbarmStuddedLea
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712719901
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: cvN4WB1RPKCP6I7V
     sort: 0
     _key: '!actors.items!mmGladiator00000.cvN4WB1RPKCP6I7V'
@@ -857,7 +923,12 @@ items:
             name: ''
             formula: ''
           img: systems/dnd5e/icons/svg/monster.svg
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -878,9 +949,11 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
-      advancement: []
+      advancement: {}
+      crewed: false
     folder: 4T18pEvubPMQLzvD
     img: icons/skills/melee/strike-weapons-orange.webp
     effects: []
@@ -892,13 +965,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: 1737491607485
-      modifiedTime: 1745712719901
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 0
@@ -934,6 +1005,7 @@ items:
           effects:
             - _id: tlJPRZtTipMsmBRa
               onSave: false
+              level: {}
           range:
             override: false
             units: ft
@@ -961,10 +1033,12 @@ items:
                   enabled: false
                   formula: ''
                 number: 2
-                denomination: '4'
+                denomination: 4
                 bonus: '@mod'
                 types:
                   - bludgeoning
+                scaling:
+                  number: 1
             onSave: none
           save:
             ability:
@@ -974,8 +1048,12 @@ items:
               formula: 8 + @mod + @prof
           name: Save
           img: ''
-          appliedEffects:
-            - tlJPRZtTipMsmBRa
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -1001,9 +1079,11 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
-      advancement: []
+      advancement: {}
+      crewed: false
     folder: 4T18pEvubPMQLzvD
     img: icons/equipment/shield/buckler-iron-cross-gray.webp
     effects:
@@ -1044,13 +1124,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.2.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmGladiator00000.mmShieldBash0000.tlJPRZtTipMsmBRa
     flags:
@@ -1061,13 +1139,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmShieldBash0000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: 1737491609570
-      modifiedTime: 1745712719901
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 300000
@@ -1127,7 +1203,12 @@ items:
             name: Bonus AC
             formula: '3'
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -1150,9 +1231,11 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
-      advancement: []
+      advancement: {}
+      crewed: false
     folder: 4T18pEvubPMQLzvD
     img: icons/skills/melee/swords-parry-block-blue.webp
     effects: []
@@ -1164,13 +1247,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmParry000000000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: 1737491610880
-      modifiedTime: 1745712719901
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 2
@@ -1180,13 +1261,13 @@ folder: oq65o5ZsauMtb1JY
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
-  systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1732598129404
-  modifiedTime: 1745712719931
-  lastModifiedBy: dnd5ebuilder0000
   exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  createdTime: 1771452704930
+  modifiedTime: 1771452704930
+  lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:
   default: 0

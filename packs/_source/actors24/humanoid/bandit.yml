@@ -353,22 +353,20 @@ system:
         mode: 0
       bonus: ''
     movement:
-      burrow: null
-      climb: null
-      fly: null
-      swim: null
-      walk: 30
+      walk: '30'
       units: null
       hover: false
+      ignoredDifficultTerrain: []
     attunement:
       max: 3
     senses:
-      darkvision: null
-      blindsight: null
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: null
+        blindsight: null
+        tremorsense: null
+        truesight: null
     spellcasting: str
     exhaustion: 0
     concentration:
@@ -404,14 +402,13 @@ system:
       level: 0
     loyalty:
       value: null
+    price:
+      value: null
+      denomination: gp
   details:
     biography:
       value: >-
-        <div class="gear"><p><strong>Gear:</strong>
-        @UUID[Compendium.dnd5e.equipment24.Item.phbarmLeatherArm]{Leather
-        Armor}, @UUID[Compendium.dnd5e.equipment24.Item.phbwepLightCross]{Light
-        Crossbow},
-        @UUID[Compendium.dnd5e.equipment24.Item.phbwepScimitar00]{Scimitar}</p></div><h1>Bandits</h1><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.ORyQoMthsD5YZa49
+        <h1>Bandits</h1><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.ORyQoMthsD5YZa49
         caption=false cite=false classes="no-embed
         mm"]</p><h2>Bandit</h2><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.BOqXIilnnBRsQabZ
         caption=false cite=false classes="no-embed mm free-rules-embed"]</p>
@@ -433,11 +430,11 @@ system:
         - any
   resources:
     legact:
-      value: 0
       max: 0
+      spent: 0
     legres:
-      value: 0
       max: 0
+      spent: 0
     lair:
       value: false
       initiative: null
@@ -583,7 +580,6 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       range:
         value: null
         long: null
@@ -626,10 +622,10 @@ items:
       type:
         value: martialM
         baseItem: scimitar
-      magicalBonus: null
       properties:
         - fin
         - lgt
+        - gear
       proficient: null
       activities:
         YOx3cikY6oPu6Ojh:
@@ -667,7 +663,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
               type: ''
@@ -696,9 +692,18 @@ items:
           sort: 0
           _id: YOx3cikY6oPu6Ojh
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       ammunition: {}
       mastery: nick
       identifier: scimitar
+      crew:
+        value: []
     _id: otGT32geRnrgVe3j
     type: weapon
     folder: fd3qxAXCv2FhExPp
@@ -715,13 +720,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepScimitar00
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712713831
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!mmBandit00000000.otGT32geRnrgVe3j'
   - name: Light Crossbow
     system:
@@ -750,7 +753,6 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       range:
         value: 80
         long: 320
@@ -793,11 +795,11 @@ items:
       type:
         value: simpleR
         baseItem: lightcrossbow
-      magicalBonus: null
       properties:
         - amm
         - lod
         - two
+        - gear
       proficient: null
       activities:
         UYlAFnNzdcc3L81u:
@@ -835,7 +837,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
               type: ''
@@ -864,10 +866,19 @@ items:
           sort: 0
           _id: UYlAFnNzdcc3L81u
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       ammunition:
         type: crossbowBolt
       mastery: slow
       identifier: light-crossbow
+      crew:
+        value: []
     _id: 0qG1ZLUPB2MrHV8B
     type: weapon
     folder: atG8UGtcNyNweUOt
@@ -884,13 +895,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepLightCross
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712713831
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!mmBandit00000000.0qG1ZLUPB2MrHV8B'
   - name: Leather Armor
     system:
@@ -919,14 +928,12 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       uses:
         max: ''
         spent: 0
         recovery: []
       armor:
         value: 11
-        magicalBonus: null
         dex: null
       hp:
         value: null
@@ -936,14 +943,18 @@ items:
       type:
         value: light
         baseItem: leather
-      properties: []
+      properties:
+        - gear
       speed:
         value: null
         conditions: ''
+        units: ft
       strength: null
       proficient: null
       activities: {}
       identifier: leather-armor
+      crew:
+        value: []
     type: equipment
     folder: G3X11BbtmEqLmEnK
     img: icons/equipment/chest/breastplate-scale-leather.webp
@@ -954,13 +965,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbarmLeatherArm
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712713831
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: sD8cJZJSn1z2RKhf
     sort: 0
     _key: '!actors.items!mmBandit00000000.sD8cJZJSn1z2RKhf'
@@ -969,13 +978,13 @@ folder: oq65o5ZsauMtb1JY
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
-  systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1745415931803
-  modifiedTime: 1745712713858
-  lastModifiedBy: dnd5ebuilder0000
   exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  createdTime: 1771452697023
+  modifiedTime: 1771452697023
+  lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:
   default: 0
