@@ -353,7 +353,8 @@ export default class AttributesFields {
   static prepareHitPoints(hp, { advancement=[], mod=0, bonus=0 }={}) {
     const base = advancement.reduce((total, advancement) => total + advancement.getAdjustedTotal(mod), 0);
     hp.max = (hp.max ?? 0) + base + bonus;
-    if ( this.parent.hasConditionEffect("halfHealth") ) hp.max = Math.floor(hp.max * 0.5);
+    if ( this.parent.hasConditionEffect("halfHealth") ) hp.max *= 0.5;
+    hp.max = Math.floor(hp.max);
 
     hp.effectiveMax = Math.max(hp.max + (hp.tempmax ?? 0), 0);
     hp.value = Math.min(hp.value, hp.effectiveMax);
