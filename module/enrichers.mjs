@@ -41,7 +41,7 @@ export function registerCustomEnrichers() {
  * @returns {Promise<HTMLElement|null>}  An HTML element to insert in place of the matched text or null to
  *                                       indicate that no replacement should be made.
  */
-async function enrichString(match, options) {
+export async function enrichString(match, options) {
   let { type, config, label } = match.groups;
   config = parseConfig(config, { multiple: ["damage", "heal", "healing"].includes(type) });
   config._input = match[0];
@@ -76,7 +76,7 @@ async function enrichString(match, options) {
  *                                            If set to `true` then an array of configs will be returned.
  * @returns {object|object[]}
  */
-function parseConfig(match="", { multiple=false }={}) {
+export function parseConfig(match="", { multiple=false }={}) {
   if ( multiple ) return match.split("&").map(s => parseConfig(s));
   const config = { _config: match, values: [] };
   for ( const part of match.match(/(?:[^\s"]+|"[^"]*")+/g) ?? [] ) {
@@ -157,7 +157,7 @@ export function getRulesVersion(config={}, options={}) {
  * </span>
  * ```
  */
-async function enrichAttack(config, label, options) {
+export async function enrichAttack(config, label, options) {
   if ( config.activity && config.formula ) {
     console.warn(`Activity ID and formula found while enriching ${config._input}, only one is supported.`);
     return null;
@@ -243,7 +243,7 @@ async function enrichAttack(config, label, options) {
  * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
  * @returns {HTMLElement|null}         An HTML link if the check could be built, otherwise null.
  */
-async function enrichAward(config, label, options) {
+export async function enrichAward(config, label, options) {
   const command = config._config;
   let parsed;
   try {
@@ -394,7 +394,7 @@ async function enrichAward(config, label, options) {
  * </span>
  * ```
  */
-async function enrichCheck(config, label, options) {
+export async function enrichCheck(config, label, options) {
   config.skill = config.skill?.replaceAll("/", "|").split("|") ?? [];
   config.tool = config.tool?.replaceAll("/", "|").split("|") ?? [];
   for ( let value of config.values ) {
@@ -628,7 +628,7 @@ function createCheckRequestButtons(dataset) {
  * </span>
  * ```
  */
-async function enrichSave(config, label, options) {
+export async function enrichSave(config, label, options) {
   config.ability = config.ability?.replace("/", "|").split("|") ?? [];
   for ( let value of config.values ) {
     const slug = foundry.utils.getType(value) === "string" ? slugify(value) : value;
@@ -789,7 +789,7 @@ function createSaveRequestButtons(dataset) {
  * </span>
  * ````
  */
-async function enrichDamage(configs, label, options) {
+export async function enrichDamage(configs, label, options) {
   const config = { type: "damage", formulas: [], damageTypes: [], rollType: configs._isHealing ? "healing" : "damage" };
   for ( const c of configs ) {
     const formulaParts = [];
@@ -923,7 +923,7 @@ async function enrichDamage(configs, label, options) {
  * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
  * @returns {HTMLElement|null}         An HTML element if language link could be built, otherwise null.
  */
-function enrichLanguage(config, label, options) {
+export function enrichLanguage(config, label, options) {
   for ( const value of config.values ) {
     const slug = foundry.utils.getType(value) === "string" ? slugify(value) : value;
     if ( slug in CONFIG.DND5E.enrichmentLookup.languages ) config.language = slug;
@@ -964,7 +964,7 @@ function enrichLanguage(config, label, options) {
  * <span class="lookup-value">120</span>
  * ```
  */
-function enrichLookup(config, fallback, options) {
+export function enrichLookup(config, fallback, options) {
   let keyPath = config.path;
   let style = config.style;
   for ( const value of config.values ) {
@@ -1031,7 +1031,7 @@ function enrichLookup(config, fallback, options) {
  * </span>
  * ```
  */
-async function enrichReference(config, label, options) {
+export async function enrichReference(config, label, options) {
   let key;
   let source;
   let type = Object.keys(config).find(k => k in CONFIG.DND5E.ruleTypes);
@@ -1129,7 +1129,7 @@ async function enrichReference(config, label, options) {
  * </a>
  * ```
  */
-async function enrichItem(config, label, options) {
+export async function enrichItem(config, label, options) {
   const givenItem = config.values.join(" ");
   let parsed = foundry.utils.parseUuid(givenItem);
 
