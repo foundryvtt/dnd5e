@@ -537,6 +537,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       baseAbility: baseAbility(key),
       hover: CONFIG.DND5E.proficiencyLevels[entry.value],
       label: (property === "skills") ? CONFIG.DND5E.skills[key]?.label : Trait.keyLabel(key, { trait: "tool" }),
+      link: { action: "roll", key, type: property === "skills" ? "skill" : "tool" },
       source: context.source[property]?.[key]
     })).sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang));
   }
@@ -1770,6 +1771,11 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     // Filter out items already in containers to avoid creating duplicates
     const containers = new Set(items.filter(i => i.type === "container").map(i => i._id));
     items = items.filter(i => !containers.has(i.system.container));
+
+    // Transform physical items from NPCs to their gear versions
+    items = await Promise.all(items.map(i =>
+      i.actor?.system.isNPC && (i.actor !== this.actor) && i.system.asGear ? i.system.asGear() : i
+    ));
 
     // Create the owned items & contents as normal
     const toCreate = await Item5e.createWithContents(items, {

@@ -284,6 +284,14 @@ export default class ConsumableData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  async _preCreate(data, options, user) {
+    if ( (await super._preCreate(data, options, user)) === false ) return false;
+    this.preCreateGear(data, options, user);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async _preUpdate(changed, options, user) {
     if ( (await super._preUpdate(changed, options, user)) === false ) return false;
     await this.preUpdateIdentifiable(changed, options, user);

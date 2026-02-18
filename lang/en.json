@@ -2905,7 +2905,15 @@
 "DND5E.Formula": "Formula",
 "DND5E.FormulaMalformedError": "Problem preparing the {property} formula within {name}.",
 "DND5E.FormulaMissingReferenceWarn": "The {property} formula within {name} has references to missing data: {references}",
-"DND5E.Gear": "Gear",
+
+"DND5E.Gear": {
+  "Action": {
+    "Add": "Add to Gear",
+    "Remove": "Remove from Gear"
+  },
+  "Label": "Gear"
+},
+
 "DND5E.Gender": "Gender",
 "DND5E.GlobalBonus": "Global Bonus",
 "DND5E.GrantedAbilities": "Granted Abilities",
@@ -3216,6 +3224,7 @@
     "Finesse": "Finesse",
     "Firearm": "Firearm",
     "Focus": "Focus",
+    "Gear": "Gear",
     "Heavy": "Heavy",
     "Light": "Light",
     "Loading": "Loading",

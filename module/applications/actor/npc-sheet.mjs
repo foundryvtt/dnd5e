@@ -322,6 +322,20 @@ export default class NPCActorSheet extends BaseActorSheet {
   async _prepareSidebarContext(context, options) {
     const { attributes, details } = context.system;
 
+    // Gear
+    const gear = await this.actor.system.getGear();
+    if ( gear.length ) context.gear = gear.map(item => ({
+      draggable: true,
+      label: item.name,
+      link: {
+        action: "showDocument",
+        itemId: foundry.utils.parseUuid(item.getFlag("dnd5e", "gearSource"))?.id,
+        quantity: item.system.quantity,
+        uuid: item.uuid
+      },
+      value: item.system.quantity > 1 ? item.system.quantity : undefined
+    }));
+
     // Habitat
     if ( details.habitat.value.length || details.habitat.custom ) {
       const { habitat } = details;
@@ -580,5 +594,26 @@ export default class NPCActorSheet extends BaseActorSheet {
     }
 
     return submitData;
+  }
+
+  /* -------------------------------------------- */
+  /*  Drag & Drop                                 */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onDragStart(event) {
+    const target = event.currentTarget;
+    if ( target.classList.contains("pill") ) {
+      const dataset = target.querySelector("[data-item-id]")?.dataset ?? {};
+      const item = await this.actor.items.get(dataset.itemId)?.system.asGear?.();
+      if ( item ) {
+        event.dataTransfer.setData("text/plain", JSON.stringify({
+          data: item.isEmbedded ? item.toObject() : game.items.fromCompendium(item),
+          type: "Item"
+        }));
+        return;
+      }
+    }
+    return super._onDragStart(event);
   }
 }

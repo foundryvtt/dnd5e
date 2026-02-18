@@ -202,6 +202,18 @@ export default class NPCData extends CreatureTemplate {
   }
 
   /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Whether this Actor type represents a non-player character.
+   * @returns {boolean}
+   */
+  get isNPC() {
+    return true;
+  }
+
+  /* -------------------------------------------- */
   /*  Data Migration                              */
   /* -------------------------------------------- */
 
@@ -475,6 +487,20 @@ export default class NPCData extends CreatureTemplate {
   /* -------------------------------------------- */
 
   /**
+   * Create a list of gear that can be collected from this NPC.
+   * @type {Item5e[]}
+   */
+  async getGear() {
+    return (await Promise.all(this.parent.items
+      .filter(i => i.system.quantity && i.system.properties?.has("gear"))
+      .map(i => i.system.asGear?.())
+    )).filter(_ => _)
+      .toSorted((lhs, rhs) => lhs.name.localeCompare(rhs.name, game.i18n.lang));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Auto-generate a description for the legendary actions block on the NPC stat block.
    * @param {string} name  Name of the actor to use in the text.
    * @returns {string}
@@ -492,18 +518,6 @@ export default class NPCData extends CreatureTemplate {
       }) : formatNumber(max),
       usesNamed: game.i18n.format(`DND5E.ACTIVATION.Type.Legendary.Counted.${pr}`, { number: formatNumber(max) })
     });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Create a list of gear that can be collected from this NPC.
-   * @type {Item5e[]}
-   */
-  getGear() {
-    return this.parent.items
-      .filter(i => i.system.quantity && (i.system.type?.value !== "natural"))
-      .sort((lhs, rhs) => lhs.name.localeCompare(rhs.name, game.i18n.lang));
   }
 
   /* -------------------------------------------- */
@@ -657,9 +671,9 @@ export default class NPCData extends CreatureTemplate {
         cr: `${o.cr ?? formatCR(this.details.cr, { narrow: false })} (${xp})`,
 
         // Gear
-        gear: o.gear ?? formatter.format(
-          this.getGear().map(i => i.system.quantity > 1 ? `${i.name} (${formatNumber(i.system.quantity)})` : i.name)
-        ),
+        gear: o.gear ?? formatter.format((await this.getGear()).map(item =>
+          item.system.quantity > 1 ? `${item.name} (${formatNumber(item.system.quantity)})` : item.name
+        )),
 
         // Initiative (e.g. `+0 (10)`)
         initiative: o.initiative ?? `${formatNumber(this.attributes.init.total, { signDisplay: "always" })} (${
@@ -761,7 +775,7 @@ export default class NPCData extends CreatureTemplate {
         summary.vulnerabilities ? { label: "DND5E.Vulnerabilities", definitions: [summary.vulnerabilities] } : null,
         summary.resistances ? { label: "DND5E.Resistances", definitions: [summary.resistances] } : null,
         summary.immunities ? { label: "DND5E.Immunities", definitions: [summary.immunities] } : null,
-        summary.gear ? { label: "DND5E.Gear", definitions: [summary.gear] } : null,
+        summary.gear ? { label: "DND5E.Gear.Label", definitions: [summary.gear] } : null,
         { label: "DND5E.Senses", definitions: [summary.senses] },
         { label: "DND5E.Languages", definitions: [summary.languages] },
         { label: "DND5E.AbbreviationCR", definitions: [summary.cr] }

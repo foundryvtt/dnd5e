@@ -422,6 +422,13 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
       callback: li => this._onAction(li, "toggleFavorite"),
       group: "state"
     }, {
+      name: item.system.properties?.has("gear") ? "DND5E.Gear.Action.Remove" : "DND5E.Gear.Action.Add",
+      icon: '<i class="fa-solid fa-axe fa-fw"></i>',
+      condition: () => !!this.actor.system.isNPC && item.isOwner && !compendiumLocked
+        && !!CONFIG.Item.dataModels[item.type]?.schema.has("quantity"),
+      callback: li => this._onAction(li, "toggleGear"),
+      group: "state"
+    }, {
       name: expanded ? "Collapse" : "Expand",
       icon: `<i class="fa-solid fa-${expanded ? "compress" : "expand"}"></i>`,
       condition: () => "canExpand" in this.app ? this.app.canExpand(item) : true,
@@ -474,6 +481,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
       case "toggleCharge": return this._onToggleCharge(item);
       case "toggleExpand": return this._onToggleExpand(target, { item });
       case "toggleFavorite": return this._onToggleFavorite(item);
+      case "toggleGear": return this._onToggleGear(item);
       case "use": return this._onUseItem(item, { event });
       case "view": return this._onViewItem(item);
     }
@@ -704,6 +712,19 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
    */
   _onToggleEquipped(item) {
     return item.update({ "system.equipped": !item.system.equipped });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle toggling an item's presence in an NPC's gear list.
+   * @param {Item5e} item  The item.
+   * @protected
+   */
+  _onToggleGear(item) {
+    const properties = item.system.toObject().properties;
+    item.update({ "system.properties": item.system.properties.has("gear")
+      ? properties.filter(i => i !== "gear") : [...properties, "gear"] });
   }
 
   /* -------------------------------------------- */

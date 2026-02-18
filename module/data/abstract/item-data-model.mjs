@@ -14,6 +14,7 @@ export default class ItemDataModel extends SystemDataModel {
 
   /** @type {ItemDataModelMetadata} */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+    compendiumGearSource: false,
     enchantable: false,
     hasEffects: false,
     singleton: false

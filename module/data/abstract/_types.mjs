@@ -15,9 +15,11 @@
 
 /**
  * @typedef {SystemDataModelMetadata} ItemDataModelMetadata
- * @property {boolean} enchantable    Can this item be modified by enchantment effects?
- * @property {boolean} hasEffects     Display the effects tab on this item's sheet.
- * @property {boolean} singleton      Should only a single item of this type be allowed on an actor?
+ * @property {boolean} compendiumGearSource            Only for physical items. When fetching item as gear from a NPC,
+ *                                                     prefer the compendium source over the embedded version.
+ * @property {boolean} enchantable                     Can this item be modified by enchantment effects?
+ * @property {boolean} hasEffects                      Display the effects tab on this item's sheet.
+ * @property {boolean} singleton                       Should only a single item of this type be allowed on an actor?
  * @property {InventorySectionDescriptor} [inventory]  Configuration for displaying this item type in its own section
  *                                                     in creature inventories.
  */
