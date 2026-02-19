@@ -3507,7 +3507,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       _id: ActiveEffect5e.ID.BLOODIED,
       name: game.i18n.localize(CONFIG.DND5E.bloodied.name),
       img: CONFIG.DND5E.bloodied.img,
-      statuses: ["bloodied"]
+      statuses: ["bloodied"],
+      showIcon: CONST.ACTIVE_EFFECT_SHOW_ICON?.ALWAYS
     }, { parent: this, keepId: true });
   }
 

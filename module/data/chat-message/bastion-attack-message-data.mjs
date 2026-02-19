@@ -69,7 +69,7 @@ export default class BastionAttackMessageData extends ChatMessageDataModel {
       });
     }
     if ( this.damaged ) {
-      const facility = this.actor.items.get(this.damaged);
+      const facility = this.actor?.items.get(this.damaged);
       if ( facility ) context.damaged = game.i18n.format("DND5E.Bastion.Attack.Result.Damaged", {
         link: facility.toAnchor().outerHTML
       });

@@ -78,7 +78,7 @@ export default class BastionTurnMessageData extends ChatMessageDataModel {
 
     const actor = this.actor;
     context.orders = this.orders.map(({ id, order }) => {
-      const facility = actor.items.get(id);
+      const facility = actor?.items.get(id);
       return facility ? {
         name: facility.name,
         contentLink: facility.toAnchor().outerHTML,
