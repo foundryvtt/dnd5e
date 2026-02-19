@@ -535,7 +535,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
 
   /** @override */
   static onDropCreate(event, actor, itemData) {
-    if ( !this.parent.actor?.system.isCreature ) return;
+    if ( !actor?.system.isCreature ) return;
 
     // Determine the section it is dropped on, if any.
     let header = event.target.closest(".items-header"); // Dropped directly on the header.
