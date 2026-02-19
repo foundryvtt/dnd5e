@@ -29,7 +29,7 @@ export default class Combat5e extends Combat {
   /** @inheritDoc */
   async endCombat() {
     await super.endCombat();
-    this._recoverUses({ turn: true, turnEnd: true, turnStart: true });
+    if ( this !== game.combat ) this._recoverUses({ turn: true, turnEnd: true, turnStart: true });
     return this;
   }
 
