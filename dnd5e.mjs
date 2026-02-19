@@ -101,7 +101,7 @@ Hooks.once("init", function() {
   CONFIG.ux.DragDrop = DragDrop5e;
 
   if ( game.release.generation < 14 ) CONFIG.Token.layerClass = canvas.layers.TokenLayer5e;
-  else CONFIG.Canvas.layers.tokens.layerClass = canvas.layers.TokenLayer5e;
+  CONFIG.Canvas.layers.tokens.layerClass = canvas.layers.TokenLayer5e;
 
   // Register System Settings
   registerSystemSettings();
