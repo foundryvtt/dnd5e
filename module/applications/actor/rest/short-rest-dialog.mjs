@@ -49,7 +49,7 @@ export default class ShortRestDialog extends BaseRestDialog {
       hint: game.i18n.localize("DND5E.REST.HitDice.AutoSpend.Hint")
     });
 
-    if ( this.actor.type === "npc" ) {
+    if ( this.actor.system.isNPC ) {
       const hd = this.actor.system.attributes.hd;
       context.hitDice = {
         canRoll: hd.value > 0,

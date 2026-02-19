@@ -142,8 +142,7 @@ export default class EquippableItemTemplate extends SystemDataModel {
    * @param {User} user       The User requesting the document creation.
    */
   preCreateEquipped(data, options, user) {
-    if ( ["character", "npc"].includes(this.parent.actor?.type)
-      && !foundry.utils.hasProperty(data, "system.equipped") ) {
+    if ( this.parent.actor?.system.isCreature && !foundry.utils.hasProperty(data, "system.equipped") ) {
       this.updateSource({ equipped: this.parent.actor.system.isNPC });
     }
   }

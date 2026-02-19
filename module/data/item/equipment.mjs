@@ -178,7 +178,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
     if ( Number.isFinite(this.proficient) ) return this.proficient;
     const actor = this.parent.actor;
     if ( !actor ) return 0;
-    if ( actor.type === "npc" ) return 1; // NPCs are always considered proficient with any armor in their stat block.
+    if ( actor.system.isNPC ) return 1; // NPCs are always considered proficient with any armor in their stat block.
     const config = CONFIG.DND5E.armorProficienciesMap;
     const itemProf = config[this.type.value];
     const actorProfs = actor.system.traits?.armorProf?.value ?? new Set();

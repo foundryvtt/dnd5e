@@ -300,6 +300,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /** @inheritDoc */
   applyActiveEffects(phase) {
+    if ( game.release.generation < 14 ) phase ??= "initial";
     if ( (this.system?.prepareEmbeddedData instanceof Function) && (phase === "initial") ) {
       this.system.prepareEmbeddedData();
     }
@@ -539,7 +540,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       this.constructor.computeClassProgression(progression, cls, { actor: this, count: types[cls.spellcasting.type] });
     }
 
-    if ( this.type === "npc" ) {
+    if ( this.system.isNPC && ("spell" in (this.system.attributes ?? {})) ) {
       const level = Object.values(progression).find(_ => _);
       if ( level ) this.system.attributes.spell.level = level;
       else progression.spell = this.system.attributes.spell.level ?? 0;
@@ -1767,7 +1768,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     // Fixed initiative score
     const scoreMode = game.settings.get("dnd5e", "initiativeScore");
-    const useScore = (scoreMode === "all") || ((scoreMode === "npcs") && game.user.isGM && (this.type === "npc"));
+    const useScore = (scoreMode === "all") || ((scoreMode === "npcs") && game.user.isGM && this.system.isNPC);
 
     options = foundry.utils.mergeObject({
       advantage, disadvantage,
@@ -1878,7 +1879,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     let cls = null;
 
     // NPCs only have one denomination
-    if ( this.type === "npc" ) {
+    if ( this.system.isNPC ) {
       config.denomination = `d${this.system.attributes.hd.denomination}`;
 
       // If no hit dice are available, display an error notification
@@ -2042,7 +2043,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @see {@link dnd5e.preRollNPCHitPoints}
    */
   async rollNPCHitPoints({ chatMessage=true }={}) {
-    if ( this.type !== "npc" ) throw new Error("NPC hit points can only be rolled for NPCs");
+    if ( !this.system.isNPC ) throw new Error("NPC hit points can only be rolled for NPCs");
     const rollData = {
       formula: this.system.attributes.hp.formula,
       data: this.getRollData(),
@@ -2413,7 +2414,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     fraction ??= dnd5e.settings.rulesVersion === "modern" ? 1 : 0.5;
 
     // Handle simpler HD recovery for NPCs
-    if ( this.type === "npc" ) {
+    if ( this.system.isNPC ) {
       const hd = this.system.attributes.hd;
       const recovered = Math.min(
         Math.max(1, Math.floor(hd.max * fraction)), hd.spent, maxHitDice ?? Infinity

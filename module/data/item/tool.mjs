@@ -153,7 +153,7 @@ export default class ToolData extends ItemDataModel.mixin(
     if ( Number.isFinite(this.proficient) ) return this.proficient;
     const actor = this.parent.actor;
     if ( !actor ) return 0;
-    if ( actor.type === "npc" ) return 1;
+    if ( actor.system.isNPC ) return 1;
     const baseItemProf = actor.system.tools?.[this.type.baseItem];
     const categoryProf = actor.system.tools?.[this.type.value];
     return Math.max(baseItemProf?.value ?? 0, categoryProf?.value ?? 0);

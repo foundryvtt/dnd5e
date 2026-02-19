@@ -199,7 +199,7 @@ export default class RaceData extends ItemDataModel.mixin(AdvancementTemplate, I
   /** @inheritDoc */
   _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
-    if ( (game.user.id !== userId) || !["character", "npc"].includes(this.parent.actor?.type) ) return;
+    if ( (game.user.id !== userId) || !this.parent.actor?.system.isCreature ) return;
     this.parent.actor.update({ "system.details.race": this.parent.id });
   }
 
@@ -208,7 +208,7 @@ export default class RaceData extends ItemDataModel.mixin(AdvancementTemplate, I
   /** @inheritDoc */
   async _preDelete(options, user) {
     if ( (await super._preDelete(options, user)) === false ) return false;
-    if ( !["character", "npc"].includes(this.parent.actor?.type) ) return;
+    if ( !this.parent.actor?.system.isCreature ) return;
     await this.parent.actor.update({ "system.details.race": null });
   }
 }

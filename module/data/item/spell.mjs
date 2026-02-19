@@ -535,7 +535,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
 
   /** @override */
   static onDropCreate(event, actor, itemData) {
-    if ( !["npc", "character"].includes(actor.type) ) return;
+    if ( !this.parent.actor?.system.isCreature ) return;
 
     // Determine the section it is dropped on, if any.
     let header = event.target.closest(".items-header"); // Dropped directly on the header.
@@ -656,8 +656,8 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     const system = data.system ?? {};
 
     // Set as prepared for NPCs, and not prepared for PCs
-    if ( ["character", "npc"].includes(this.parent.actor.type) && !("prepared" in system) ) {
-      this.updateSource({ prepared: Number(this.parent.actor.type === "npc" || (this.level < 1)) });
+    if ( this.parent.actor?.system.isCreature && !("prepared" in system) ) {
+      this.updateSource({ prepared: Number(this.parent.actor.system.isNPC || (this.level < 1)) });
     }
 
     if ( ["atwill", "innate"].includes(system.method) || this.sourceClass ) return;

@@ -99,7 +99,7 @@ export default class MovementSensesConfig extends BaseConfigSheet {
 
       context.unitsOptions = Object.entries(CONFIG.DND5E.movementUnits).map(([value, { label }]) => ({ value, label }));
       context.unitsOptions.blank = false;
-      if ( (this.document.type === "character") || ((this.document.type === "npc") && placeholderData) ) {
+      if ( (this.document.type === "character") || (this.document.system.isNPC && placeholderData) ) {
         const automaticUnit = CONFIG.DND5E.movementUnits[placeholderData?.units ?? defaultUnits("length")]?.label ?? "";
         context.unitsOptions.blank = true;
         context.unitsOptions.unshift(

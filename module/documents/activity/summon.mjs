@@ -317,7 +317,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
     }
 
     // Add bonus to HD
-    if ( this.bonuses.hd && (actor.type === "npc") ) {
+    if ( this.bonuses.hd && actor.system.isNPC ) {
       const hdBonus = new Roll(this.bonuses.hd, rollData);
       await hdBonus.evaluate();
       if ( hdBonus.total ) {

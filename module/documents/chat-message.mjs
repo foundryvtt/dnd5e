@@ -637,7 +637,7 @@ export default class ChatMessage5e extends ChatMessage {
   _enrichSaveTooltip(html) {
     const actor = this.getAssociatedActor();
     const roll = this.getFlag("dnd5e", "roll");
-    if ( (actor?.type !== "npc") || (roll?.type !== "save") || this.rolls.some(r => r.isSuccess) ) return;
+    if ( !actor?.system.isNPC || (roll?.type !== "save") || this.rolls.some(r => r.isSuccess) ) return;
 
     const content = document.createElement("div");
     content.classList.add("chat-card");

@@ -153,7 +153,7 @@ export default class BaseRestDialog extends Dialog5e {
           value: restSettings.autoRest
         },
         ...this.actor.system.members
-          .filter(m => ["character", "npc"].includes(m.actor?.type))
+          .filter(m => m.actor?.system.isCreature)
           .map(m => ({
             field: new BooleanField({
               label: m.actor.name

@@ -1221,7 +1221,7 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
     if ( resource?.label ) return resource.label;
   }
 
-  if ( (attr === "details.xp.value") && (actor?.type === "npc") ) {
+  if ( (attr === "details.xp.value") && actor?.system.isNPC ) {
     return game.i18n.localize("DND5E.ExperiencePoints.Value");
   }
 
