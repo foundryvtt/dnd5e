@@ -280,7 +280,7 @@ export default class ClassData extends ItemDataModel.mixin(
     const actor = this.parent.actor;
     if ( !actor || (userId !== game.user.id) ) return;
 
-    if ( actor.type === "character" ) {
+    if ( actor.system.isCharacter ) {
       const pc = actor.items.get(actor.system.details.originalClass);
       if ( !pc ) await actor._assignPrimaryClass();
     }
@@ -309,7 +309,7 @@ export default class ClassData extends ItemDataModel.mixin(
       changed.system.levels = CONFIG.DND5E.maxLevel;
     }
 
-    if ( this.parent.actor?.type !== "character" ) return;
+    if ( !this.parent.actor?.system.isCharacter ) return;
 
     // Check to ensure the updated character doesn't exceed level cap
     const newCharacterLevel = this.parent.actor.system.details.level + (changed.system.levels - this.levels);

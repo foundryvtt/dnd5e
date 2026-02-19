@@ -262,7 +262,7 @@ export default class Award extends Application5e {
    * @param {Map<Actor5e|Item5e, object>} [config.results]  Results of the award operation.
    */
   static async awardXP(amount, destinations, { each=false, origin, results=new Map() }={}) {
-    destinations = destinations.filter(d => ["character", "group"].includes(d.type));
+    destinations = destinations.filter(d => d.system.isCharacter || d.system.isGroup);
     if ( !amount || !destinations.length ) return;
 
     const xp = origin?.system.details?.xp;

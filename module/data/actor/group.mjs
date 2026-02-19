@@ -74,7 +74,7 @@ export default class GroupData extends GroupTemplate {
    */
   get playerCharacters() {
     return this.members.reduce((acc, { actor }) => {
-      if ( actor?.type === "character" ) acc.push(actor);
+      if ( actor?.system.isCharacter ) acc.push(actor);
       return acc;
     }, []);
   }

@@ -668,7 +668,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       if ( !foundry.utils.hasProperty(data, "prototypeToken.width") ) prototypeToken.width = size;
       if ( !foundry.utils.hasProperty(data, "prototypeToken.height") ) prototypeToken.height = size;
     }
-    if ( this.type === "character" ) Object.assign(prototypeToken, {
+    if ( this.system.isCharacter ) Object.assign(prototypeToken, {
       sight: { enabled: true }, actorLink: true, disposition: CONST.TOKEN_DISPOSITIONS.FRIENDLY
     });
     if ( this.type === "group" ) prototypeToken.actorLink = true;

@@ -131,6 +131,18 @@ export default class CharacterData extends CreatureTemplate {
   }
 
   /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Whether this Actor type represents a player character.
+   * @returns {boolean}
+   */
+  get isCharacter() {
+    return true;
+  }
+
+  /* -------------------------------------------- */
   /*  Data Migration                              */
   /* -------------------------------------------- */
 

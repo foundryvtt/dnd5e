@@ -21,7 +21,7 @@ export default class Bastion {
   async advanceAllBastions() {
     // TODO: Should this advance game.time?
     const { duration } = game.settings.get("dnd5e", "bastionConfiguration");
-    const haveBastions = game.actors.filter(a => (a.type === "character") && a.itemTypes.facility.length);
+    const haveBastions = game.actors.filter(a => a.system.isCharacter && a.itemTypes.facility.length);
     for ( const actor of haveBastions ) await this.advanceAllFacilities(actor, { duration });
   }
 
