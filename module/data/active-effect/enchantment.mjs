@@ -22,11 +22,14 @@ export default class EnchantmentData extends (ActiveEffectTypeDataModel ?? TypeD
    * @returns {boolean|void}             Return false to prevent normal application from occurring.
    */
   _applyLegacy(item, change, changes) {
+    const applyField = (game.release.generation > 13)
+      ? (model, c) => ActiveEffect.implementation.applyChangeField(model, c)
+      : (model, c) => ActiveEffect.implementation.applyField(model, c);
     let key = change.key.replace("system.", "");
     switch ( change.key ) {
       case "system.ability":
         for ( const activity of item.system.activities?.getByTypes("attack") ?? [] ) {
-          changes[`system.activities.${activity.id}.attack.ability`] = ActiveEffect.implementation.applyField(
+          changes[`system.activities.${activity.id}.attack.ability`] = applyField(
             activity, { ...change, key: "attack.ability" }
           );
         }
@@ -34,7 +37,7 @@ export default class EnchantmentData extends (ActiveEffectTypeDataModel ?? TypeD
       case "system.attack.bonus":
       case "system.attack.flat":
         for ( const activity of item.system.activities?.getByTypes("attack") ?? [] ) {
-          changes[`system.activities.${activity.id}.${key}`] = ActiveEffect.implementation.applyField(
+          changes[`system.activities.${activity.id}.${key}`] = applyField(
             activity, { ...change, key }
           );
         }
@@ -52,14 +55,14 @@ export default class EnchantmentData extends (ActiveEffectTypeDataModel ?? TypeD
             const value = damage.clone();
             value.enchantment = true;
             value.locked = true;
-            changes[`system.activities.${activity.id}.damage.parts`] = ActiveEffect.implementation.applyField(
+            changes[`system.activities.${activity.id}.damage.parts`] = applyField(
               activity, { ...change, key, value }
             );
           }
           for ( const activity of item.system.activities?.getByTypes("heal") ?? [] ) {
             const value = damage.formula;
             const keyPath = `healing.${activity.healing.custom.enabled ? "custom.formula" : "bonus"}`;
-            changes[`system.activities.${activity.id}.${keyPath}`] = ActiveEffect.implementation.applyField(
+            changes[`system.activities.${activity.id}.${keyPath}`] = applyField(
               activity, { ...change, key: keyPath, value }
             );
           }
@@ -67,7 +70,7 @@ export default class EnchantmentData extends (ActiveEffectTypeDataModel ?? TypeD
         return false;
       case "system.damage.types":
         const adjust = (damage, keyPath) =>
-          ActiveEffect.implementation.applyField(damage, { ...change, key: "types", value: change.value });
+          applyField(damage, { ...change, key: "types", value: change.value });
         if ( item.system.damage?.base ) {
           changes["system.damage.base.types"] = adjust(item.system.damage.base, "system.damage.base");
         }
@@ -86,7 +89,7 @@ export default class EnchantmentData extends (ActiveEffectTypeDataModel ?? TypeD
           else if ( (value === "") && (item.type === "spell") ) value = "spellcasting";
         }
         for ( const activity of item.system.activities?.getByTypes("save") ?? [] ) {
-          changes[`system.activities.${activity.id}.${key}`] = ActiveEffect.implementation.applyField(
+          changes[`system.activities.${activity.id}.${key}`] = applyField(
             activity, { ...change, key, value }
           );
         }

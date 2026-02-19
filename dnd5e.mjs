@@ -58,6 +58,14 @@ Hooks.once("init", function() {
   globalThis.dnd5e = game.dnd5e = Object.assign(game.system, globalThis.dnd5e);
   utils.log(`Initializing the D&D Fifth Game System - Version ${dnd5e.version}\n${DND5E.ASCII}`);
 
+  /**
+   * Suppress some known deprecations.
+   * @deprecated
+   * @since 5.3.0
+   */
+  CONFIG.compatibility.excludePatterns.push(/numeric #mode/, /CONST\.ACTIVE_EFFECT_MODES/,
+    /foundry\.data\.operators\.ForcedDeletion/, /foundry\.utils\.buildRelativeUuid/);
+
   // Record Configuration Values
   CONFIG.DND5E = DND5E;
   CONFIG.ActiveEffect.documentClass = documents.ActiveEffect5e;
@@ -65,7 +73,6 @@ Hooks.once("init", function() {
   CONFIG.Actor.collection = dataModels.collection.Actors5e;
   CONFIG.Actor.documentClass = documents.Actor5e;
   CONFIG.Adventure.documentClass = documents.Adventure5e;
-  CONFIG.Canvas.layers.tokens.layerClass = CONFIG.Token.layerClass = canvas.layers.TokenLayer5e;
   CONFIG.ChatMessage.documentClass = documents.ChatMessage5e;
   CONFIG.Combat.documentClass = documents.Combat5e;
   CONFIG.Combatant.documentClass = documents.Combatant5e;
@@ -92,6 +99,9 @@ Hooks.once("init", function() {
   CONFIG.ui.combat = applications.combat.CombatTracker5e;
   CONFIG.ui.items = applications.item.ItemDirectory5e;
   CONFIG.ux.DragDrop = DragDrop5e;
+
+  if ( game.release.generation < 14 ) CONFIG.Token.layerClass = canvas.layers.TokenLayer5e;
+  else CONFIG.Canvas.layers.tokens.layerClass = canvas.layers.TokenLayer5e;
 
   // Register System Settings
   registerSystemSettings();

@@ -462,7 +462,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Apply all changes
     for ( const change of changes ) {
       if ( !change.key ) continue;
-      const changes = change.effect.apply(this, change);
+      const changes = (game.release.generation > 13)
+        ? change.effect.constructor.applyChange(this, change)
+        : change.effect.apply(this, change);
       Object.assign(overrides, changes);
     }
 
