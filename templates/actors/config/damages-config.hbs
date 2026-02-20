@@ -8,7 +8,7 @@
     </fieldset>
     {{/each}}
     <fieldset class="traits bypasses card">
-        <legend>{{ localize "DND5E.DamagePhysicalBypass" }}</legend>
+        <legend>{{ localize "DND5E.DAMAGE.PhysicalBypass.Label" }}</legend>
         <p class="hint">{{ localize bypassHint }}</p>
         {{> "dnd5e.traits-list" choices=bypasses keyPath=(concat @root.keyPath ".bypasses.")
             field=@root.checkbox input=@root.inputs.createCheckboxInput }}
