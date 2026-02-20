@@ -329,7 +329,7 @@ export default class Award extends Application5e {
    * Regular expression used to match the /award command in chat messages.
    * @type {RegExp}
    */
-  static COMMAND_PATTERN = new RegExp(/^\/award(?:\s|$)/i);
+  static COMMAND_PATTERN = new RegExp(/^(?:<p>)?\/award(?:\s|<\/p>$|$)/i);
 
   /* -------------------------------------------- */
 
@@ -402,7 +402,7 @@ export default class Award extends Application5e {
    * @returns {{currency: Record<string, number>, xp: number, party: boolean}}
    */
   static parseAwardCommand(message) {
-    const command = message.replace(this.COMMAND_PATTERN, "").toLowerCase();
+    const command = message.replace(/^<p>|<\/p>$/gi, "").replace(this.COMMAND_PATTERN, "").toLowerCase();
 
     const currency = {};
     let each = false;
