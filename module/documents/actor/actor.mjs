@@ -31,7 +31,8 @@ import * as Trait from "./trait.mjs";
  *   SkillToolRollDialogConfiguration, SkillToolRollProcessConfiguration
  * } from "../../dice/_types.mjs";
  * @import {
- *   DamageApplicationOptions, DamageDescription, DamageSummary, RestConfiguration, RestResult, SpellcastingDescription
+ *   DamageAffectCategory, DamageApplicationOptions, DamageDescription, DamageSummary,
+ *   RestConfiguration, RestResult, SpellcastingDescription
  * } from "../_types.mjs";
  */
 
@@ -862,7 +863,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       }
 
       // Apply damage modification
-      if ( !dm.bypasses.intersection(d.properties).size ) {
+      if ( !dm.bypasses?.intersection(d.properties).size ) {
         applyModification(d);
         applyModification(d, "ALL");
       }
@@ -919,7 +920,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * Determine whether a specific type of change to a damage value will have an effect.
-   * @param {string} category                                Type of change that should be considered (e.g. resistance).
+   * @param {DamageAffectCategory} category                  Type of change that should be considered.
    * @param {DamageDescription|string} damage                Damage description to consider or a specific type.
    * @param {object} [options={}]
    * @param {DamageApplicationOptions} [options.options={}]  Damage application options.
@@ -936,7 +937,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       }
       return true;
     };
-    const type = foundry.utils.getType(damage) === "string" ? damage : damage.type;
+    const type = typeof damage === "string" ? damage : damage.type;
 
     // If category is resistance, check for downgraded immunities
     if ( category === "resistance" ) {
@@ -950,7 +951,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     // If damage type is physical and bypass present in properties, skip further checks
     if ( CONFIG.DND5E.damageTypes[type]?.isPhysical && damage.properties?.size
-      && config.bypasses?.intersection(damage.properties)?.size ) return false;
+      && config?.bypasses?.intersection(damage.properties)?.size ) return false;
 
     // If all damage resistance is present and not ignored
     if ( !this.#changeIsIgnored(category, "ALL", { options, skipDowngrade }) && config?.value.has("ALL") ) {
@@ -969,7 +970,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * Determine whether a specific damage change type should be ignored.
-   * @param {string} category                                Type of change that should be considered (e.g. resistance).
+   * @param {DamageAffectCategory} category                  Type of change that should be considered.
    * @param {string} type                                    Specific damage type to consider.
    * @param {object} [options={}]
    * @param {DamageApplicationOptions} [options.options={}]  Damage application options.

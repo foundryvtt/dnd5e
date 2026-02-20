@@ -48,6 +48,10 @@
  */
 
 /**
+ * @typedef {"modification"|"resistance"|"vulnerability"|"immunity"} DamageAffectCategory
+ */
+
+/**
  * Options for damage application.
  *
  * @typedef DamageApplicationOptions
