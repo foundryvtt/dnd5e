@@ -253,6 +253,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
       const abilityMax = Math.max(abilities[key]?.max ?? 20, this.advancement.configuration.max ?? -Infinity);
       const current = abilities[key]?.value ?? 0;
       const initial = current - (this.advancement.value.assignments?.[key] ?? 0);
+      if ( initial > abilityMax ) return obj;
       const fixed = this.advancement.configuration.fixed[key] ?? 0;
       const locked = this.advancement.configuration.locked.has(key);
       const min = Math.min(initial + fixed, abilityMax);
