@@ -543,7 +543,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( this.system.isNPC && ("spell" in (this.system.attributes ?? {})) ) {
       const level = Object.values(progression).find(_ => _);
       if ( level ) this.system.attributes.spell.level = level;
-      else progression.spell = this.system.attributes.spell.level ?? 0;
+      else if ( this.system.attributes.spell.level > 0 ) {
+        const methods = this.itemTypes.spell.reduce((m, s) => {
+          if ( s.system.level && CONFIG.DND5E.spellcasting[s.system.method]?.slots ) m.add(s.system.method);
+          return m;
+        }, new Set());
+        if ( methods.size ) methods.forEach(k => progression[k] = this.system.attributes.spell.level);
+        else progression.spell = this.system.attributes.spell.level;
+      }
     }
 
     for ( const [type, model] of Object.entries(CONFIG.DND5E.spellcasting) ) {
