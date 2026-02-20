@@ -90,27 +90,29 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
     context.abilities = Object.entries(CONFIG.DND5E.abilities).reduce((obj, [key, data]) => {
       if ( !this.advancement.canImprove(key) ) return obj;
       const ability = actor.system.abilities[key];
+      const sourceValue = actor.system._source.abilities[key]?.value ?? ability.value;
       const assignment = value.assignments?.[key] ?? 0;
       const fixed = configuration.fixed[key] ?? 0;
       const locked = configuration.locked.has(key);
-      const initial = ability.value - assignment;
+      const initial = sourceValue - assignment;
       const abilityMax = Math.max(ability.max, configuration.max ?? -Infinity);
-      const max = locked ? (initial + fixed) : Math.min(ability.value + context.points.available, abilityMax);
+      const max = locked ? (initial + fixed) : Math.min(sourceValue + context.points.available, abilityMax);
       const min = Math.min(initial + fixed, abilityMax);
       obj[key] = {
         key, max, min,
-        value: ability.value,
+        value: sourceValue,
         name: `abilities.${key}`,
         label: data.label,
-        initial: ability.value + fixed,
-        delta: (ability.value - initial) ? formatter.format(ability.value - initial) : null,
+        initial: sourceValue + fixed,
+        delta: (sourceValue - initial) ? formatter.format(sourceValue - initial) : null,
         showDelta: true,
         isDisabled: context.lockImprovement,
-        isFixed: !!locked || (ability.value >= abilityMax),
+        isFixed: !!locked || (sourceValue >= abilityMax),
         isLocked: locked,
-        canIncrease: (ability.value < max) && (assignment < context.points.cap) && !locked
+        canIncrease: (sourceValue < max) && (assignment < context.points.cap) && !locked
           && !context.lockImprovement,
-        canDecrease: (ability.value > (initial + fixed)) && !locked && !context.lockImprovement
+        canDecrease: (sourceValue > (initial + fixed)) && !locked && !context.lockImprovement,
+        effectedValue: actor.overrides.system?.abilities?.[key]?.value !== undefined ? ability.value : null
       };
       return obj;
     }, {});
