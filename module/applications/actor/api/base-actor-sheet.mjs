@@ -570,7 +570,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       const label = config?.getLabel({ level }) ?? game.i18n.localize("DND5E.CAST.SECTIONS.Spellbook");
       const method = config?.key ?? key;
       const order = level === 0 ? 0 : (config?.order ?? 1000);
-      const usesSlots = config?.slots && level;
+      const usesSlots = config?.slots && (level !== 0);
       const section = spellbook[key] = {
         label, columns, order, usesSlots,
         id: method,
@@ -611,7 +611,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       let method = spell.system.method;
       if ( !(method in CONFIG.DND5E.spellcasting) ) method = "innate";
       const spellcasting = CONFIG.DND5E.spellcasting[method];
-      const level = spell.system.level || 0;
+      const level = spellcasting instanceof dnd5e.dataModels.spellcasting.SingleLevelSpellcasting
+        ? null : (spell.system.level || 0);
       method = spellcasting?.getSpellSlotKey?.(level) ?? method;
 
       // Spells from items
@@ -1032,7 +1033,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     for ( const { usesSlots, pips, slot, dataset } of Object.values(context.spellbook) ) {
       if ( !usesSlots ) continue;
       const query = `[data-application-part="spells"] .items-section[data-level="${
-        dataset.level}"][data-method="${dataset.method}"] .items-header`;
+        dataset.level ?? ""}"][data-method="${dataset.method}"] .items-header`;
       const header = this.element.querySelector(query);
       if ( !header ) continue;
       if ( context.editable ) {
