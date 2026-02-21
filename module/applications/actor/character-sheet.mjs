@@ -361,12 +361,12 @@ export default class CharacterActorSheet extends BaseActorSheet {
     // Skills & Tools
     context.skills = this._prepareSkillsTools(context, "skills");
     context.tools = this._prepareSkillsTools(context, "tools");
-    context.skills.concat(context.tools).forEach(entry => {
+    for ( const entry of context.skills.concat(context.tools) ) {
       const key = entry.key;
       entry.class = this.constructor.PROFICIENCY_CLASSES[context.editable ? entry.baseValue : entry.value];
       if ( key in CONFIG.DND5E.skills ) entry.reference = CONFIG.DND5E.skills[key].reference;
       else if ( key in CONFIG.DND5E.tools ) entry.reference = Trait.getBaseItemUUID(CONFIG.DND5E.tools[key].id);
-    })
+    }
 
     // Traits
     context.traits = this._prepareTraits(context);
