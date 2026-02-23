@@ -309,12 +309,22 @@ export default class PhysicalItemTemplate extends SystemDataModel {
   async asGear() {
     const change = { "flags.dnd5e.gearSource": this.parent.uuid };
     let clone;
-    if ( this.metadata.compendiumGearSource && this.parent._stats.compendiumSource
-      && !this.parent.getFlag("dnd5e", "gear.preserve") ) {
+    const flags = this.parent.getFlag("dnd5e", "gear") ?? {};
+    if ( this.metadata.compendiumGearSource && this.parent._stats.compendiumSource && (flags.preserve !== true) ) {
       const item = await fromUuid(this.parent._stats.compendiumSource);
-      if ( item ) clone = item.clone({ ...change, "system.quantity": this.quantity }, { keepId: true });
+      const name = (flags.preserveName === true ? this.parent._source.name : flags.preserveName) ?? item.name;
+      if ( item ) clone = item.clone({ ...change, name, "system.quantity": this.quantity }, { keepId: true });
     }
     clone ??= this.parent.clone(change, { keepId: true });
+
+    let enchantment = this.parent.effects.get(flags.effectId);
+    if ( enchantment ) {
+      if ( !flags.preserveEffect ) enchantment = await fromUuid(enchantment._stats.compendiumSource) ?? enchantment;
+      clone.updateSource({
+        effects: [{ ...enchantment.toObject(), disabled: false, origin: enchantment.parent.uuid }]
+      });
+      // TODO: Add rider activities & effects once https://github.com/foundryvtt/dnd5e/issues/6357 is merged
+    }
 
     /**
      * A hook event that fires when retrieving an item as gear.
@@ -326,6 +336,47 @@ export default class PhysicalItemTemplate extends SystemDataModel {
     Hooks.callAll("dnd5e.getAsGear", this.parent, clone);
 
     return clone;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Retrieve information needed to present this item's name as gear on sheets and in embeds.
+   * @returns {{ name: string, nameHTML: string, uuid: string }}
+   */
+  gearPresentationData() {
+    const compendiumSrc = fromUuidSync(this.parent._stats.compendiumSource);
+    const flags = this.parent.getFlag("dnd5e", "gear") ?? {};
+    const useCompendiumCopy = this.metadata.compendiumGearSource && compendiumSrc && (flags.preserve !== true);
+    const enchantment = this.parent.effects.get(flags.effectId);
+
+    const data = { uuid: useCompendiumCopy ? this.parent._stats.compendiumSource : this.parent.uuid };
+    const magical = this.properties.has("mgc");
+
+    // If nothing specified, just display base weapon name (e.g. "Longsword")
+    const name = data.name = data.nameHTML = useCompendiumCopy ? compendiumSrc.name : this.parent._source.name;
+
+    // If persevered name specified, display preserved name outside with special name(?) inside
+    //   (e.g. "Stacy (Longsword +1)")
+    if ( flags.preserveName ) {
+      const namePattern = enchantment?.flags.dnd5e?.namePattern;
+      const nameOuter = flags.preserveName === true ? this.parent._source.name : flags.preserveName;
+      const nameInner = namePattern ? namePattern.replace("{}", name) : name;
+      if ( nameOuter !== nameInner ) {
+        data.name = data.nameHTML = `${nameOuter} (${nameInner})`;
+        if ( magical && namePattern ) data.nameHTML = `<em>${nameOuter}</em> (<em>${nameInner}</em>)`;
+        else if ( magical ) data.nameHTML = `<em>${nameOuter}</em> (${nameInner})`;
+      }
+    }
+
+    // If enchantment is specified, display enchantment name outside with base name inside
+    //   (e.g. "Silvered Weapon (Longsword)", "Weapon +1 (Longsword)")
+    else if ( enchantment ) {
+      data.name = data.nameHTML = `${enchantment.name} (${name})`;
+      if ( magical ) data.nameHTML = `<em>${enchantment.name}</em> (${name})`;
+    }
+
+    return data;
   }
 
   /* -------------------------------------------- */

@@ -492,10 +492,9 @@ export default class NPCData extends CreatureTemplate {
    */
   async getGear() {
     return (await Promise.all(this.parent.items
-      .filter(i => i.system.quantity && i.system.properties?.has("gear"))
-      .map(i => i.system.asGear?.())
-    )).filter(_ => _)
-      .toSorted((lhs, rhs) => lhs.name.localeCompare(rhs.name, game.i18n.lang));
+      .filter(i => i.system.quantity && i.system.properties?.has("gear") && i.system.asGear)
+      .map(i => i.system.asGear())
+    )).toSorted((lhs, rhs) => lhs.name.localeCompare(rhs.name, game.i18n.lang));
   }
 
   /* -------------------------------------------- */
@@ -671,9 +670,13 @@ export default class NPCData extends CreatureTemplate {
         cr: `${o.cr ?? formatCR(this.details.cr, { narrow: false })} (${xp})`,
 
         // Gear
-        gear: o.gear ?? formatter.format((await this.getGear()).map(item =>
-          item.system.quantity > 1 ? `${item.name} (${formatNumber(item.system.quantity)})` : item.name
-        )),
+        gear: o.gear ?? formatter.format(this.parent.items
+          .filter(item => item.system.quantity && item.system.properties?.has("gear"))
+          .map(item => {
+            const { nameHTML } = item.system.gearPresentationData();
+            return item.system.quantity > 1 ? `${nameHTML} (${formatNumber(item.system.quantity)})` : nameHTML;
+          })
+        ),
 
         // Initiative (e.g. `+0 (10)`)
         initiative: o.initiative ?? `${formatNumber(this.attributes.init.total, { signDisplay: "always" })} (${
@@ -775,7 +778,7 @@ export default class NPCData extends CreatureTemplate {
         summary.vulnerabilities ? { label: "DND5E.Vulnerabilities", definitions: [summary.vulnerabilities] } : null,
         summary.resistances ? { label: "DND5E.Resistances", definitions: [summary.resistances] } : null,
         summary.immunities ? { label: "DND5E.Immunities", definitions: [summary.immunities] } : null,
-        summary.gear ? { label: "DND5E.Gear.Label", definitions: [summary.gear] } : null,
+        summary.gear ? { label: "DND5E.Gear.Label", definitions: [summary.gear], allowHTML: !o.gear } : null,
         { label: "DND5E.Senses", definitions: [summary.senses] },
         { label: "DND5E.Languages", definitions: [summary.languages] },
         { label: "DND5E.AbbreviationCR", definitions: [summary.cr] }

@@ -323,18 +323,21 @@ export default class NPCActorSheet extends BaseActorSheet {
     const { attributes, details } = context.system;
 
     // Gear
-    const gear = await this.actor.system.getGear();
-    if ( gear.length ) context.gear = gear.map(item => ({
-      draggable: true,
-      label: item.name,
-      link: {
-        action: "showDocument",
-        itemId: foundry.utils.parseUuid(item.getFlag("dnd5e", "gearSource"))?.id,
-        quantity: item.system.quantity,
-        uuid: item.uuid
-      },
-      value: item.system.quantity > 1 ? item.system.quantity : undefined
-    }));
+    const gear = await this.actor.items.filter(i => i.system.quantity && i.system.properties?.has("gear"));
+    if ( gear.length ) context.gear = gear.map(item => {
+      const { name, uuid } = item.system.gearPresentationData();
+      return {
+        draggable: true,
+        label: name,
+        link: {
+          action: "showDocument",
+          itemId: item.id,
+          quantity: item.system.quantity,
+          uuid
+        },
+        value: item.system.quantity > 1 ? item.system.quantity : undefined
+      };
+    });
 
     // Habitat
     if ( details.habitat.value.length || details.habitat.custom ) {
