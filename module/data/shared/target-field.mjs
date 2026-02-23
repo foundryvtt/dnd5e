@@ -94,7 +94,7 @@ export default class TargetField extends SchemaField {
       this.target.template.labels.description = game.i18n.format(
         `${templateConfig.counted}.${pr.select(this.target.template.count || 1)}Sized`,
         {
-          count: formatNumber(this.target.template.count, { words: true }),
+          number: formatNumber(this.target.template.count, { words: true }),
           sizes: this.target.template.labels.size
         }
       );
