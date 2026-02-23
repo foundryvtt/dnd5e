@@ -1,0 +1,40 @@
+folder: m7bI2qqrnUPGPIjj
+name: Damage Resistance
+type: base
+_id: 3S76svPJwDlQqpO7
+img: systems/dnd5e/icons/svg/damage/all.svg
+system:
+  changes:
+    - key: system.traits.dr.value
+      type: add
+      value: ALL
+      priority: null
+      phase: initial
+disabled: false
+start: null
+duration:
+  value: null
+  units: seconds
+  expiry: null
+  expired: false
+description: ''
+origin: null
+tint: '#ffffff'
+transfer: false
+statuses: []
+showIcon: 1
+sort: 0
+flags:
+  dnd5e:
+    riders:
+      statuses: []
+_stats:
+  coreVersion: '14.354'
+  systemId: dnd5e
+  systemVersion: 6.0.0
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+  createdTime: 1771883945028
+  modifiedTime: 1771883965761
+_key: '!effects!3S76svPJwDlQqpO7'
