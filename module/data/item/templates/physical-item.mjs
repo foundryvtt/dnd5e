@@ -310,7 +310,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
     const change = { "flags.dnd5e.gearSource": this.parent.uuid };
     let clone;
     if ( this.metadata.compendiumGearSource && this.parent._stats.compendiumSource
-      && !this.parent.getFlag("dnd5e", "preserveGear") ) {
+      && !this.parent.getFlag("dnd5e", "gear.preserve") ) {
       const item = await fromUuid(this.parent._stats.compendiumSource);
       if ( item ) clone = item.clone({ ...change, "system.quantity": this.quantity }, { keepId: true });
     }
