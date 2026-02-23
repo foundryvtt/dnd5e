@@ -4915,7 +4915,7 @@ function patchConfig(key, fallbackKey, options) {
   /** @override */
   function toString() {
     const message = `The value of CONFIG.DND5E.${key} has been changed to an object.`
-      +` The former value can be acccessed from .${fallbackKey}.`;
+      +` The former value can be accessed from .${fallbackKey}.`;
     foundry.utils.logCompatibilityWarning(message, options);
     return this[fallbackKey];
   }
