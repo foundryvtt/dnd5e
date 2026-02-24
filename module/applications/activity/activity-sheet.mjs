@@ -1,4 +1,6 @@
+import CreateDocumentDialog from "../create-document-dialog.mjs";
 import { ConsumptionTargetData } from "../../data/activity/fields/consumption-targets-field.mjs";
+import BaseActivityBehavior from "../../data/region-behavior/base-activity-behavior.mjs";
 import UsesField from "../../data/shared/uses-field.mjs";
 import PseudoDocumentSheet from "../api/pseudo-document-sheet.mjs";
 
@@ -13,10 +15,12 @@ export default class ActivitySheet extends PseudoDocumentSheet {
       icon: "fa-solid fa-gauge"
     },
     actions: {
+      addBehavior: ActivitySheet.#addBehavior,
       addConsumption: ActivitySheet.#addConsumption,
       addDamagePart: ActivitySheet.#addDamagePart,
       addEffect: ActivitySheet.#addEffect,
       addRecovery: ActivitySheet.#addRecovery,
+      deleteBehavior: ActivitySheet.#deleteBehavior,
       deleteConsumption: ActivitySheet.#deleteConsumption,
       deleteDamagePart: ActivitySheet.#deleteDamagePart,
       deleteEffect: ActivitySheet.#deleteEffect,
@@ -54,6 +58,9 @@ export default class ActivitySheet extends PseudoDocumentSheet {
     effect: {
       template: "systems/dnd5e/templates/activity/effect.hbs",
       templates: [
+        "systems/dnd5e/templates/activity/parts/activity-behaviors.hbs",
+        "systems/dnd5e/templates/activity/parts/activity-behavior-level-limit.hbs",
+        "systems/dnd5e/templates/activity/parts/activity-behavior-settings.hbs",
         "systems/dnd5e/templates/activity/parts/activity-effects.hbs",
         "systems/dnd5e/templates/activity/parts/activity-effect-level-limit.hbs",
         "systems/dnd5e/templates/activity/parts/activity-effect-settings.hbs"
@@ -231,6 +238,19 @@ export default class ActivitySheet extends PseudoDocumentSheet {
   /* -------------------------------------------- */
 
   /**
+   * Prepare a specific applied behavior if present in the activity data.
+   * @param {ApplicationRenderContext} context  Context being prepared.
+   * @param {object} behavior                   Applied behavior context being prepared.
+   * @returns {object}
+   * @protected
+   */
+  _prepareAppliedBehaviorContext(context, behavior) {
+    return behavior;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Prepare a specific applied effect if present in the activity data.
    * @param {ApplicationRenderContext} context  Context being prepared.
    * @param {object} effect                     Applied effect context being prepared.
@@ -265,6 +285,26 @@ export default class ActivitySheet extends PseudoDocumentSheet {
    */
   async _prepareEffectContext(context, options) {
     context.tab = context.tabs.effect;
+
+    if ( context.activity.behaviors && (context.activity.target?.template?.type || this.activity.isRider) ) {
+      context.appliedBehaviors = context.activity.behaviors.values()
+        .filter(d => d.type in CONFIG.DND5E.activityBehaviorTypes)
+        .map(data => {
+          const source = context.source.behaviors[data._index];
+          if ( !source ) return null;
+          const instance = new CONFIG.DND5E.activityBehaviorTypes[source.type].model(source.config);
+          const ctx = {
+            data, source,
+            additionalFields: instance.generateFields(source.config, { prefix: `behaviors.${data._index}.config.` }),
+            additionalSettings: "systems/dnd5e/templates/activity/parts/activity-behavior-settings.hbs",
+            collapsed: this.expandedSections.get(`behavior.${data._id}`) ? "" : "collapsed",
+            config: CONFIG.DND5E.activityBehaviorTypes[data.type],
+            fields: this.activity.schema.fields.behaviors.element.fields,
+            prefix: `behaviors.${data._index}.`
+          };
+          return this._prepareAppliedBehaviorContext(context, ctx);
+        });
+    }
 
     if ( context.activity.effects ) {
       const appliedEffects = new Set(context.activity.effects?.map(e => e._id) ?? []);
@@ -463,6 +503,21 @@ export default class ActivitySheet extends PseudoDocumentSheet {
   /* -------------------------------------------- */
 
   /**
+   * Handle adding a new entry to the behaviors list.
+   * @this {ActivitySheet}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   */
+  static async #addBehavior(event, target) {
+    if ( !this.activity.behaviors ) return;
+    const createData = await CreateDocumentDialog.prompt(BaseActivityBehavior, {}, { parent: this.activity });
+    if ( !createData?.type ) return;
+    this.activity.update({ behaviors: [...this.activity.toObject().behaviors, createData] });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Handle adding a new entry to the consumption list.
    * @this {ActivitySheet}
    * @param {Event} event         Triggering click event.
@@ -547,6 +602,20 @@ export default class ActivitySheet extends PseudoDocumentSheet {
         { period: filteredPeriods.first() ?? periods.first() }
       ]
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle removing an entry from the behaviors list.
+   * @this {ActivitySheet}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   */
+  static #deleteBehavior(event, target) {
+    if ( !this.activity.behaviors ) return;
+    const behaviors = this.activity.toObject().behaviors;
+    this.activity.update({ behaviors: behaviors.toSpliced(target.closest("[data-index]").dataset.index, 1) });
   }
 
   /* -------------------------------------------- */

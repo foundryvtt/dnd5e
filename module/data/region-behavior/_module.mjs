@@ -1,10 +1,12 @@
-import {default as DifficultTerrainRegionBehaviorType} from "./difficult-terrain.mjs";
+import {default as DifficultTerrainRegionBehaviorType, DifficultTerrainActivityBehavior} from "./difficult-terrain.mjs";
 import {default as RotateAreaRegionBehaviorType} from "./rotate-area.mjs";
 
 export {
+  DifficultTerrainActivityBehavior,
   DifficultTerrainRegionBehaviorType,
   RotateAreaRegionBehaviorType
 };
+export {default as BaseActivityBehavior} from "./base-activity-behavior.mjs";
 
 export const config = {
   "dnd5e.difficultTerrain": DifficultTerrainRegionBehaviorType,

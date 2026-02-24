@@ -1,7 +1,9 @@
+import BaseActivityBehavior from "./base-activity-behavior.mjs";
+
 const { BooleanField, NumberField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @import { DifficultTerrainRegionBehaviorSystemData } from "./_types.mjs";
+ * @import { DifficultTerrainActivityBehaviorData, DifficultTerrainRegionBehaviorSystemData } from "./_types.mjs";
  */
 
 /**
@@ -14,7 +16,7 @@ export default class DifficultTerrainRegionBehaviorType extends foundry.data.reg
   /** @override */
   static LOCALIZATION_PREFIXES = ["DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN"];
 
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
 
   /** @override */
   static defineSchema() {
@@ -27,7 +29,7 @@ export default class DifficultTerrainRegionBehaviorType extends foundry.data.reg
     };
   }
 
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
 
   /**
    * Called when the difficult terrain behavior is viewed.
@@ -38,7 +40,7 @@ export default class DifficultTerrainRegionBehaviorType extends foundry.data.reg
     canvas.tokens.recalculatePlannedMovementPaths();
   }
 
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
 
   /**
    * Called when the difficult terrain behavior is unviewed.
@@ -49,7 +51,7 @@ export default class DifficultTerrainRegionBehaviorType extends foundry.data.reg
     canvas.tokens.recalculatePlannedMovementPaths();
   }
 
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
 
   /**
    * Called when the boundary of an event has changed.
@@ -61,7 +63,7 @@ export default class DifficultTerrainRegionBehaviorType extends foundry.data.reg
     canvas.tokens.recalculatePlannedMovementPaths();
   }
 
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
 
   /** @override */
   static events = {
@@ -70,7 +72,7 @@ export default class DifficultTerrainRegionBehaviorType extends foundry.data.reg
     [CONST.REGION_EVENTS.REGION_BOUNDARY]: this.#onRegionBoundary
   };
 
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
 
   /** @inheritDoc */
   _onUpdate(changed, options, userId) {
@@ -79,7 +81,7 @@ export default class DifficultTerrainRegionBehaviorType extends foundry.data.reg
     canvas.tokens.recalculatePlannedMovementPaths();
   }
 
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
 
   /** @override */
   _getTerrainEffects(token, segment) {
@@ -89,5 +91,54 @@ export default class DifficultTerrainRegionBehaviorType extends foundry.data.reg
       || (ignoredTypes.has("magical") && this.magical)
       || (ignoredTypes.has("nonmagical") && !this.magical) ) return [];
     return [{ name: "difficultTerrain" }];
+  }
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Data model representing the difficult terrain activity behavior configuration.
+ * @extends {foundry.abstract.DataModel<DifficultTerrainActivityBehaviorData>}
+ * @mixes DifficultTerrainActivityBehaviorData
+ */
+export class DifficultTerrainActivityBehavior extends BaseActivityBehavior {
+
+  /** @override */
+  static LOCALIZATION_PREFIXES = ["DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN"];
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  static defineSchema() {
+    return {
+      types: new SetField(new StringField())
+    };
+  }
+
+  /* -------------------------------------------- */
+  /*  Methods                                     */
+  /* -------------------------------------------- */
+
+  /** @override */
+  createBehaviorData(activity, options={}) {
+    return {
+      system: {
+        magical: activity.isSpell || activity.item?.system.properties?.has("mgc"),
+        types: Array.from(this.types)
+        // TODO: Set "ignoredDispositions" based on target affects settings
+      },
+      type: "dnd5e.difficultTerrain"
+    };
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /** @override */
+  customizeField(field, data) {
+    if ( field.name === "types" ) {
+      data.options = Object.entries(CONFIG.DND5E.difficultTerrainTypes).map(([value, { label }]) => ({ value, label }));
+    }
   }
 }
