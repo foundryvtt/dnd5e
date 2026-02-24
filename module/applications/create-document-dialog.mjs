@@ -120,6 +120,8 @@ export default class CreateDocumentDialog extends Dialog5e {
 
       // Apply default name of documents.
       context.defaultName = this.documentType.defaultName({ type: defaultType, pack, parent });
+    } else if ( (TYPES?.length === 1) && !this.options.createData.type ) {
+      this.options.createData.type = defaultType ?? TYPES[0];
     }
 
     return context;
@@ -184,7 +186,7 @@ export default class CreateDocumentDialog extends Dialog5e {
    * @param {object} [dialogOptions={}]                           Options forwarded to dialog.
    * @param {object} [dialogOptions.ok={}]                        Options for the OK button.
    * @param {DocumentSheet} [dialogOptions.sheet]                 Document sheet to display as detached child.
-   * @returns {Promise<Document>}
+   * @returns {Promise<Document|PseudoDocument|object|void>}
    */
   static async prompt(documentType, data={}, { folders, types, ...createOptions }={}, { ok={}, sheet, ...config }={}) {
     const label = _loc(documentType.metadata.label ?? `DOCUMENT.DND5E.${documentType.documentName}`);
@@ -217,8 +219,10 @@ export default class CreateDocumentDialog extends Dialog5e {
       createOptions.renderSheet ??= true;
       if ( foundry.utils.isSubclass(documentType, foundry.abstract.Document) ) {
         resolve(documentType.create(createData, createOptions));
-      } else {
+      } else if ( createOptions.parent?.[`create${documentType.documentName}`] ) {
         resolve(createOptions.parent[`create${documentType.documentName}`](createData.type, createData, createOptions));
+      } else {
+        resolve(createData);
       }
     });
     if ( sheet ) sheet._renderChild(dialog);

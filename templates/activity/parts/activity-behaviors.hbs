@@ -1,0 +1,48 @@
+{{#if appliedBehaviors}}
+<fieldset>
+    <legend>
+        <span>{{ localize "DND5E.ACTIVITY.FIELDS.behaviors.label" }}</span>
+        <button type="button" class="unbutton control-button" data-action="addBehavior"
+                data-tooltip aria-label="{{ localize 'DND5E.BEHAVIOR.Action.Create' }}">
+            <i class="fa-solid fa-plus" inert></i>
+        </button>
+    </legend>
+    <p class="hint">{{ localize "DND5E.BEHAVIOR.Hint" }}</p>
+    <ul class="separated-list behaviors-list flexcol unlist">
+        {{#each appliedBehaviors}}
+        <li data-index="{{ data.index }}" data-behavior-id="{{ data._id }}" data-expand-id="behaviors.{{ data._id }}">
+            {{> ".behavior" }}
+        </li>
+        {{/each}}
+    </ul>
+</fieldset>
+{{/if}}
+
+{{#*inline ".behavior"}}
+<div class="details flexrow">
+    {{ dnd5e-icon config.icon alt=config.label classes="gold-icon" }}
+    {{ formInput fields.name name=(concat prefix "name") value=source.name placeholder=config.label }}
+    <div class="list-controls flexrow">
+        <button type="button" class="unbutton control-button" data-action="deleteBehavior"
+                data-tooltip aria-label="{{ localize 'DND5E.BEHAVIOR.Action.Delete' }}">
+            <i class="fa-solid fa-trash" inert></i>
+        </button>
+    </div>
+</div>
+<input type="hidden" name="{{ prefix }}_id" value="{{ source._id }}">
+<input type="hidden" name="{{ prefix }}type" value="{{ source.type }}">
+{{#if additionalSettings}}
+<div class="additional-tray collapsible {{ collapsed }}" data-action="toggleCollapsed">
+    <label class="roboto-upper">
+        <i class="fa-solid fa-gears" inert></i>
+        <span>{{ localize "DND5E.AdditionalSettings" }}</span>
+        <i class="fa-solid fa-caret-down" inert></i>
+    </label>
+    <div class="collapsible-content">
+        <div class="wrapper">
+            {{> (lookup . "additionalSettings") }}
+        </div>
+    </div>
+</div>
+{{/if}}
+{{/inline}}
