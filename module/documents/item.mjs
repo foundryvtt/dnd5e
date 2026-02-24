@@ -1264,13 +1264,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     const values = {};
     if ( (spell instanceof Item5e) && spell.isOwned && (dnd5e.settings.rulesVersion === "modern") ) {
-      const sourceItem = spell.system.spellSource
-        ? spell.actor.identifiedItems.get(spell.system.spellSource)?.first()
-        : null;
-      let classIdentifier;
-      if ( sourceItem?.type === "class" ) classIdentifier = spell.system.spellSource;
-      else if ( sourceItem?.type === "subclass" ) classIdentifier = sourceItem.system.classIdentifier;
-      const spellcastingClass = spell.actor.spellcastingClasses?.[classIdentifier];
+      const spellcastingClass = spell.actor.spellcastingClasses?.[spell.system.classIdentifier];
       if ( spellcastingClass ) {
         values.bonus = spellcastingClass.spellcasting.attack;
         values.dc = spellcastingClass.spellcasting.save;

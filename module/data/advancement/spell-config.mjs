@@ -80,9 +80,7 @@ export default class SpellConfigurationData extends foundry.abstract.DataModel {
     }
 
     // Set spell source based on the item identifier.
-    if ( this.item ) {
-      foundry.utils.setProperty(itemData, "system.spellSource", this.item.identifier);
-    }
+    if ( this.item ) foundry.utils.setProperty(itemData, "system.spellSource", `${this.item.type}:${this.item.identifier}`);
 
     if ( this.uses.max && this.uses.per ) {
       foundry.utils.setProperty(itemData, "system.uses.max", this.uses.max);

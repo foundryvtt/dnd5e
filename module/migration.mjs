@@ -1,4 +1,4 @@
-import { log } from "./utils.mjs";
+import { formatIdentifier, log } from "./utils.mjs";
 
 /**
  * Perform a system migration for the entire World, applying migrations for Actors, Items, and Compendium packs.
@@ -597,6 +597,29 @@ export function migrateItemData(item, itemData, migrationData, flags={}) {
       updateData["system.properties"] = foundry.utils.getProperty(itemData, "system.properties") ?? [];
     }
     updateData["system.properties"].push("gear");
+  }
+
+  // Backfill spellSource for spells granted by non-class items (species, backgrounds, etc.)
+  if ( (itemData.type === "spell") && !itemData.system?.spellSource && flags.actorData?.items ) {
+    // Try to identify the granting item from advancement or cast-activity flags.
+    let grantingItemData;
+    const advancementOrigin = item.getFlag("dnd5e", "advancementOrigin");
+    if ( advancementOrigin ) {
+      const [itemId] = advancementOrigin.split(".");
+      grantingItemData = flags.actorData.items.find(i => i._id === itemId);
+    }
+    if ( !grantingItemData ) {
+      const cachedFor = item.getFlag("dnd5e", "cachedFor");
+      if ( cachedFor ) {
+        const { embedded } = foundry.utils.parseUuid(cachedFor, { relative: item.parent }) ?? {};
+        const [, itemId] = embedded ?? [];
+        if ( itemId ) grantingItemData = flags.actorData.items.find(i => i._id === itemId);
+      }
+    }
+    if ( grantingItemData ) {
+      const identifier = grantingItemData.system?.identifier || formatIdentifier(grantingItemData.name);
+      updateData["system.spellSource"] = `${grantingItemData.type}:${identifier}`;
+    }
   }
 
   if ( foundry.utils.getProperty(itemData, "flags.dnd5e.persistSourceMigration") ) {
