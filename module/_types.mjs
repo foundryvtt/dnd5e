@@ -110,6 +110,7 @@
  * @property {string} abbreviation            Localized abbreviation.
  * @property {number} hitDie                  Default hit die denomination for NPCs of this size.
  * @property {number} [token=1]               Default token size.
+ * @property {number} [dynamicTokenScale=1]   Token scale multiplier applied to dynamic token rings.
  * @property {number} [capacityMultiplier=1]  Multiplier used to calculate carrying capacities.
  * @property {number} numerical               Numerical representation of size.
  */
