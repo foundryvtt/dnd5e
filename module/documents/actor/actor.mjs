@@ -882,7 +882,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       }
 
       // Apply damage modification
-      if ( !dm.bypasses?.intersection(d.properties).size ) {
+      if ( !CONFIG.DND5E.damageTypes[d.type]?.isPhysical || !d.properties?.size
+        || !dm.bypasses?.intersection(d.properties).size ) {
         applyModification(d);
         applyModification(d, "ALL");
       }
@@ -890,14 +891,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       let damageMultiplier = multiplier;
 
       // Apply damage resistance
-      if ( this.#changeHasEffect("resistance", d, { options }) ) {
-        damageMultiplier /= 2;
-      }
+      if ( this.#changeHasEffect("resistance", d, { options }) ) damageMultiplier /= 2;
 
       // Apply damage vulnerability
-      if ( this.#changeHasEffect("vulnerability", d, { options }) ) {
-        damageMultiplier *= 2;
-      }
+      if ( this.#changeHasEffect("vulnerability", d, { options }) ) damageMultiplier *= 2;
 
       // Negate healing types
       if ( (options.invertHealing !== false) && ((d.type === "healing")
