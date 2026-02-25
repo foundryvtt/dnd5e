@@ -1003,6 +1003,52 @@ items:
               calculation: ''
               formula: '12'
           sort: 0
+        LMPyxWOrUotM7OLs:
+          type: check
+          name: Escape Check
+          _id: LMPyxWOrUotM7OLs
+          sort: 0
+          activation:
+            type: ''
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          check:
+            associated: []
+            dc:
+              calculation: ''
+              formula: '12'
+            ability: str
+          img: ''
+          appliedEffects: []
         sDRiVB3bhk4S5XZI:
           type: damage
           _id: sDRiVB3bhk4S5XZI
