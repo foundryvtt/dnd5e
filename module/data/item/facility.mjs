@@ -162,7 +162,7 @@ export default class FacilityData extends ItemDataModel.mixin(ActivitiesTemplate
     // Price
     if ( this.type.value === "basic" ) {
       const { value, days } = CONFIG.DND5E.facilities.sizes[this.size];
-      this.price = { value, days, denomination: "gp" };
+      this.price = { value, days, denomination: CONFIG.DND5E.defaultCurrency };
     }
 
     // Squares
@@ -203,6 +203,7 @@ export default class FacilityData extends ItemDataModel.mixin(ActivitiesTemplate
       { label: this.type.label },
       { label: CONFIG.DND5E.facilities.sizes[this.size].label }
     ];
+    context.currency = { ...CONFIG.DND5E.currencies[CONFIG.DND5E.defaultCurrency], key: CONFIG.DND5E.defaultCurrency };
 
     context.parts = ["dnd5e.details-facility"];
     context.facilitySubtypes = CONFIG.DND5E.facilities.types[this.type.value]?.subtypes ?? {};

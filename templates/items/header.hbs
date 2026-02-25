@@ -93,7 +93,7 @@
         {{#if (eq system.type.value "basic")}}
         <div class="price">
             <span class="value">{{ dnd5e-numberFormat system.price.value }}</span>
-            <i class="currency gp" aria-label="{{ CONFIG.currencies.gp.label }}"></i>
+            <i class="currency {{ currency.key }}" aria-label="{{ currency.label }}"></i>
         </div>
         {{/if}}
         {{/if}}
