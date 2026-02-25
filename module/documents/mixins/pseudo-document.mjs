@@ -100,7 +100,7 @@ export default function PseudoDocumentMixin(Base) {
      * @type {string}
      */
     get uuid() {
-      return `${this.item.uuid}.${this.documentName}.${this.id}`;
+      return `${this.item.uuid}.${this.documentName}.${this.id ?? this._source._id}`;
     }
 
     /* -------------------------------------------- */
