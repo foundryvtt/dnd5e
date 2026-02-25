@@ -63,8 +63,9 @@ Hooks.once("init", function() {
    * @deprecated
    * @since 5.3.0
    */
-  CONFIG.compatibility.excludePatterns.push(/numeric #mode/, /CONST\.ACTIVE_EFFECT_MODES/,
-    /foundry\.data\.operators\.ForcedDeletion/, /foundry\.utils\.buildRelativeUuid/);
+  CONFIG.compatibility.excludePatterns.push(/numeric #mode/, /CONST\.ACTIVE_EFFECT_MODES/, /ContextMenuEntry#/,
+    /foundry\.data\.operators\.ForcedDeletion/, /foundry\.utils\.buildRelativeUuid/, /CONFIG.ChatMessage.modes/,
+    /core\.rollMode/, /ChatMessage\.applyRollMode/);
 
   // Record Configuration Values
   CONFIG.DND5E = DND5E;
