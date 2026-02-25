@@ -63,9 +63,9 @@
 
     {{!-- Spell Source --}}
     {{#if isEmbedded}}
-    {{ formField fields.spellSource value=source.spellSource localize=true
-                 options=spellcastingClasses blank="" label="DND5E.SpellSource.Label" rootId=partId
-                 disabled=spellSourceLocked hint=spellSourceHint }}
+    {{ formField fields.sourceItem value=source.sourceItem localize=true
+                 options=spellcastingClasses blank="" label="DND5E.SourceItem.Label" rootId=partId
+                 disabled=sourceItemLocked hint=sourceItemHint }}
 
     {{ formField fields.ability value=source.ability localize=true choices=CONFIG.abilities
                  labelAttr="label" blank=defaultAbility rootId=partId }}

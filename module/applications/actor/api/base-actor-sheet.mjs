@@ -965,8 +965,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     // Subtitle
     let sourceLabel;
     if ( linked ) sourceLabel = linked.name;
-    else if ( item.system.spellSource ) {
-      const grantingItem = item.parent.identifiedItems.get(item.system.spellSource)?.first();
+    else if ( item.system.sourceItem ) {
+      const grantingItem = item.parent.identifiedItems.get(item.system.sourceItem)?.first();
       sourceLabel = grantingItem?.name;
     } else {
       // Check spells added from advancements

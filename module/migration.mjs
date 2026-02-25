@@ -599,8 +599,8 @@ export function migrateItemData(item, itemData, migrationData, flags={}) {
     updateData["system.properties"].push("gear");
   }
 
-  // Backfill spellSource for spells granted by non-class items (species, backgrounds, etc.)
-  if ( (itemData.type === "spell") && !itemData.system?.spellSource && flags.actorData?.items ) {
+  // Backfill sourceItem for spells granted by non-class items (species, backgrounds, etc.)
+  if ( (itemData.type === "spell") && !itemData.system?.sourceItem && flags.actorData?.items ) {
     // Try to identify the granting item from advancement or cast-activity flags.
     let grantingItemData;
     const advancementOrigin = item.getFlag("dnd5e", "advancementOrigin");
@@ -618,7 +618,7 @@ export function migrateItemData(item, itemData, migrationData, flags={}) {
     }
     if ( grantingItemData ) {
       const identifier = grantingItemData.system?.identifier || formatIdentifier(grantingItemData.name);
-      updateData["system.spellSource"] = `${grantingItemData.type}:${identifier}`;
+      updateData["system.sourceItem"] = `${grantingItemData.type}:${identifier}`;
     }
   }
 
