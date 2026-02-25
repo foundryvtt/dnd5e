@@ -1,7 +1,19 @@
+import TemplatePlacement from "./template-placement.mjs";
+
 /**
  * A helper class for building MeasuredTemplates for 5e spells and abilities
  */
 export default class AbilityTemplate extends foundry.canvas.placeables.MeasuredTemplate {
+
+  constructor(...args) {
+    super(...args);
+    foundry.utils.logCompatibilityWarning(
+      "The `AbilityTemplate` class has been deprecated in favor of the `TemplatePlacement` API.",
+      { since: "DnD5e 6.0", until: "DnD5e 6.2" }
+    );
+  }
+
+  /* -------------------------------------------- */
 
   /**
    * Track the timestamp when the last mouse move event was captured.
@@ -50,6 +62,11 @@ export default class AbilityTemplate extends foundry.canvas.placeables.MeasuredT
    * @returns {AbilityTemplate[]|null}  The template objects, or null if the item does not produce a template.
    */
   static fromActivity(activity, options={}) {
+    foundry.utils.logCompatibilityWarning(
+      "`AbilityTemplate.fromActivity` has been deprecated in favor of `TemplatePlacement.fromActivity`.",
+      { since: "DnD5e 6.0", until: "DnD5e 6.2" }
+    );
+
     const target = activity.target?.template ?? {};
     const templateShape = dnd5e.config.areaTargetTypes[target.type]?.template;
     if ( !templateShape ) return null;
