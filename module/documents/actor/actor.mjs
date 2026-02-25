@@ -358,7 +358,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( localActor ) return localActor;
 
     // Check permissions to create actors.
-    if ( !game.user.can("ACTOR_CREATE") ) throw new Error("DND5E.ACTOR.Warning.CreateActor");
+    if ( !game.user.can("ACTOR_CREATE") ) throw new Error(game.i18n.localize("DND5E.ACTOR.Warning.CreateActor"));
 
     // No suitable world actor was found, create one.
     if ( actor.pack ) {
