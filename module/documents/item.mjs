@@ -1264,7 +1264,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     const values = {};
     if ( (spell instanceof Item5e) && spell.isOwned && (dnd5e.settings.rulesVersion === "modern") ) {
-      const spellcastingClass = spell.actor.spellcastingClasses?.[spell.system.sourceClass];
+      const spellcastingClass = spell.actor.spellcastingClasses?.[spell.system.classIdentifier];
       if ( spellcastingClass ) {
         values.bonus = spellcastingClass.spellcasting.attack;
         values.dc = spellcastingClass.spellcasting.save;

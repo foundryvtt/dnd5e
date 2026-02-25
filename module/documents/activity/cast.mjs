@@ -135,6 +135,7 @@ export default class CastActivity extends ActivityMixin(BaseCastActivityData) {
           cachedFor: this.relativeUUID
         }
       },
+      "system.sourceItem": `${this.item.type}:${this.item.identifier}`,
       _stats: { compendiumSource: this.spell.uuid }
     }).toObject();
   }

@@ -4053,6 +4053,10 @@
   }
 },
 
+"DND5E.SourceItem": {
+  "Label": "Source Item",
+  "LockedHint": "This item's source is automatically determined by the granting item and cannot be changed."
+},
 "DND5E.Special": "Special",
 "DND5E.SpecialHint": "Special values separated by semi-colons.",
 "DND5E.SpecialTraits": "Special Traits",
@@ -4196,7 +4200,6 @@
   "Formula": "Preparation Formula",
   "Method": "Spellcasting Method"
 },
-"DND5E.SpellSourceClass": "Source Class",
 "DND5E.SpellPrepared": "Prepared",
 "DND5E.SpellProgArt": "Artificer",
 "DND5E.SpellProgAvailable": "Available slots",

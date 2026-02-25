@@ -61,10 +61,11 @@
         </div>
     </div>
 
-    {{!-- Source Class --}}
+    {{!-- Spell Source --}}
     {{#if isEmbedded}}
-    {{ formField fields.sourceClass value=source.sourceClass localize=true options=spellcastingClasses blank=""
-                 rootId=partId }}
+    {{ formField fields.sourceItem value=source.sourceItem localize=true
+                 options=spellcastingClasses blank="" label="DND5E.SourceItem.Label" rootId=partId
+                 disabled=sourceItemLocked hint=sourceItemHint }}
 
     {{ formField fields.ability value=source.ability localize=true choices=CONFIG.abilities
                  labelAttr="label" blank=defaultAbility rootId=partId }}
