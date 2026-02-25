@@ -275,15 +275,16 @@ export default class CurrencyManager extends Application5e {
     const { currency } = actor.system;
     if ( amount <= 0 ) return { system: { currency: { ...currency } }, remainder: amount, item: [] };
 
-    const currencies = Object.entries(CONFIG.DND5E.currencies).map(([denom, { conversion }]) => {
-      return [denom, conversion];
-    }).sort(([, a], [, b]) => priority === "high" ? a - b : b - a);
+    const currencies = Object.entries(CONFIG.DND5E.currencies)
+      .filter(([denom]) => !exact || (denom !== denomination))
+      .map(([denom, { conversion }]) => [denom, conversion])
+      .sort(([, a], [, b]) => priority === "high" ? a - b : b - a);
     const baseConversion = CONFIG.DND5E.currencies[denomination].conversion;
     if ( exact ) currencies.unshift([denomination, baseConversion]);
 
     let passes = currencies.length;
     let updates;
-    while ( passes > 0 ) {
+    while ( passes ) {
       updates = { system: { currency: { ...currency } }, remainder: amount, item: [] };
       for ( const [denom, conversion] of currencies ) {
         const multiplier = conversion / baseConversion;
@@ -292,7 +293,6 @@ export default class CurrencyManager extends Application5e {
         updates.system.currency[denom] -= deduct;
         if ( !updates.remainder ) return updates;
       }
-      if ( !updates.remainder ) break;
       currencies.push(currencies.shift());
       passes--;
     }
