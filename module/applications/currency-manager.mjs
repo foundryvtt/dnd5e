@@ -3,6 +3,10 @@ import Award from "./award.mjs";
 import Application5e from "./api/application.mjs";
 
 /**
+ * @import { CurrencyUpdateOptions } from "./_types.mjs";
+ */
+
+/**
  * Application for performing currency conversions & transfers.
  */
 export default class CurrencyManager extends Application5e {
@@ -236,13 +240,10 @@ export default class CurrencyManager extends Application5e {
 
   /**
    * Deduct a certain amount of currency from a given Actor.
-   * @param {Actor5e} actor                          The actor.
-   * @param {number} amount                          The amount of currency.
-   * @param {string} denomination                    The currency's denomination.
-   * @param {object} [options]
-   * @param {boolean} [options.recursive=false]      Deduct currency from containers as well as the base Actor. TODO
-   * @param {"high"|"low"} [options.priority="low"]  Prioritize higher denominations before lower, or vice-versa.
-   * @param {boolean} [options.exact=true]           Prioritize deducting the requested denomination first.
+   * @param {Actor5e} actor                   The actor.
+   * @param {number} amount                   The amount of currency.
+   * @param {string} denomination             The currency's denomination.
+   * @param {CurrencyUpdateOptions} [options]
    * @throws {Error} If the Actor does not have sufficient currency.
    * @returns {Promise<Actor5e>|void}
    */
@@ -262,18 +263,15 @@ export default class CurrencyManager extends Application5e {
 
   /**
    * Determine model updates for deducting a certain amount of currency from a given Actor.
-   * @param {Actor5e} actor                          The actor.
-   * @param {number} amount                          The amount of currency.
-   * @param {string} denomination                    The currency's denomination.
-   * @param {object} [options]
-   * @param {boolean} [options.recursive=false]      Deduct currency from containers as well as the base Actor. TODO
-   * @param {"high"|"low"} [options.priority="low"]  Prioritize higher denominations before lower, or vice-versa.
-   * @param {boolean} [options.exact=true]           Prioritize deducting the requested denomination first.
-   * @param {boolean} [options.makeChange=false]     Convert higher denominations to fulfill the request if needed.
+   * @param {Actor5e} actor                   The actor.
+   * @param {number} amount                   The amount of currency.
+   * @param {string} denomination             The currency's denomination.
+   * @param {CurrencyUpdateOptions} [options]
    * @returns {{ item: object[], remainder: number, [p: string]: any }}
    */
-  static getActorCurrencyUpdates(actor, amount, denomination, { recursive=false, priority="low", exact=true,
-    makeChange=false }={}) {
+  static getActorCurrencyUpdates(
+    actor, amount, denomination, { recursive=false, priority="low", exact=true, makeChange=true }={}
+  ) {
     const { currency } = actor.system;
     if ( amount <= 0 ) return { system: { currency: { ...currency } }, remainder: amount, item: [] };
 
