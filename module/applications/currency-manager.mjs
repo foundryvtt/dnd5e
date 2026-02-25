@@ -288,16 +288,19 @@ export default class CurrencyManager extends Application5e {
       updates = { system: { currency: { ...currency } }, remainder: amount, item: [] };
       for ( const [denom, conversion] of currencies ) {
         const multiplier = conversion / baseConversion;
-        let deduct = Math.min(updates.system.currency[denom], Math.floor(updates.remainder * multiplier));
-        if ( !deduct && makeChange && (conversion < baseConversion) && updates.system.currency[denom] ) {
-          updates.system.currency[denom] -= 1;
-          updates.system.currency[denomination] += Math.floor(baseConversion / conversion);
-          deduct = Math.min(updates.system.currency[denomination], updates.remainder);
-          updates.remainder -= deduct;
-          updates.system.currency[denomination] -= deduct;
-        } else {
-          updates.remainder -= deduct / multiplier;
-          updates.system.currency[denom] -= deduct;
+        const deduct = Math.min(updates.system.currency[denom], Math.floor(updates.remainder * multiplier));
+        // Handle normal deduction first.
+        updates.remainder -= deduct / multiplier;
+        updates.system.currency[denom] -= deduct;
+        // If there's still a remainder, break the denomination into change.
+        if ( updates.remainder && makeChange && (conversion < baseConversion) && updates.system.currency[denom] ) {
+          const rate = Math.floor(baseConversion / conversion);
+          const breaks = Math.min(updates.system.currency[denom], Math.ceil(updates.remainder / rate));
+          updates.system.currency[denom] -= breaks;
+          updates.system.currency[denomination] += breaks * rate;
+          const change = Math.min(updates.system.currency[denomination], updates.remainder);
+          updates.remainder -= change;
+          updates.system.currency[denomination] -= change;
         }
         if ( !updates.remainder ) return updates;
       }
