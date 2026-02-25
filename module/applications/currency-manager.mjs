@@ -269,9 +269,11 @@ export default class CurrencyManager extends Application5e {
    * @param {boolean} [options.recursive=false]      Deduct currency from containers as well as the base Actor. TODO
    * @param {"high"|"low"} [options.priority="low"]  Prioritize higher denominations before lower, or vice-versa.
    * @param {boolean} [options.exact=true]           Prioritize deducting the requested denomination first.
+   * @param {boolean} [options.makeChange=false]     Convert higher denominations to fulfill the request if needed.
    * @returns {{ item: object[], remainder: number, [p: string]: any }}
    */
-  static getActorCurrencyUpdates(actor, amount, denomination, { recursive=false, priority="low", exact=true }={}) {
+  static getActorCurrencyUpdates(actor, amount, denomination, { recursive=false, priority="low", exact=true,
+    makeChange=false }={}) {
     const { currency } = actor.system;
     if ( amount <= 0 ) return { system: { currency: { ...currency } }, remainder: amount, item: [] };
 
@@ -288,9 +290,17 @@ export default class CurrencyManager extends Application5e {
       updates = { system: { currency: { ...currency } }, remainder: amount, item: [] };
       for ( const [denom, conversion] of currencies ) {
         const multiplier = conversion / baseConversion;
-        const deduct = Math.min(updates.system.currency[denom], Math.floor(updates.remainder * multiplier));
-        updates.remainder -= deduct / multiplier;
-        updates.system.currency[denom] -= deduct;
+        let deduct = Math.min(updates.system.currency[denom], Math.floor(updates.remainder * multiplier));
+        if ( !deduct && makeChange && (conversion < baseConversion) && updates.system.currency[denom] ) {
+          updates.system.currency[denom] -= 1;
+          updates.system.currency[denomination] += Math.floor(baseConversion / conversion);
+          deduct = Math.min(updates.system.currency[denomination], updates.remainder);
+          updates.remainder -= deduct;
+          updates.system.currency[denomination] -= deduct;
+        } else {
+          updates.remainder -= deduct / multiplier;
+          updates.system.currency[denom] -= deduct;
+        }
         if ( !updates.remainder ) return updates;
       }
       currencies.push(currencies.shift());
