@@ -338,7 +338,7 @@ export default class FeatData extends ItemDataModel.mixin(
     // Check to ensure the item doesn't already exist on actor if it is not repeatable
     if ( !this.prerequisites.repeatable && actor.sourcedItems?.get(this.parent.uuid)?.size
       && !added.find(a => a.uuid === this.parent.uuid) ) {
-      messages.push(game.i18n.localize("DND5E.Prerequisites.Warning.NotRepeatable"));
+      messages.push(game.i18n.format("DND5E.Prerequisites.Warning.NotRepeatable", { name: this.parent.name }));
     }
 
     // If a feature has a level pre-requisite, make sure it is less than or equal to current level

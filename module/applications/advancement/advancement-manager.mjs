@@ -461,14 +461,12 @@ export default class AdvancementManager extends Application5e {
       .filter(advancement => advancement.appliesToClass)
       .map(advancement => {
         const existing = findExisting?.find(s => match(advancement, s))?.flow;
+        const isV1App = advancement.constructor.metadata.apps.flow.prototype instanceof Application;
         if ( !existing ) {
-          if ( advancement.constructor.metadata.apps.flow.prototype instanceof Application ) {
-            return new advancement.constructor.metadata.apps.flow(item, advancement.id, level);
-          } else {
-            return new advancement.constructor.metadata.apps.flow({ document: advancement, level });
-          }
+          if ( isV1App ) return new advancement.constructor.metadata.apps.flow(item, advancement.id, level);
+          else return new advancement.constructor.metadata.apps.flow({ document: advancement, level });
         }
-        existing.item = item;
+        if ( isV1App ) existing.item = item;
         return existing;
       });
   }

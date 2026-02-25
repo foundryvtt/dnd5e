@@ -147,6 +147,21 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
       if ( i._id !== data.replaced.replacement ) delete data.items[uuid];
     });
 
+    const items = [];
+    const messages = [];
+    for ( const item of data.items ?? [] ) {
+      const original = await fromUuid(item.flags.dnd5e.sourceId);
+      try {
+        original?.system.validatePrerequisites?.(this.actor, {
+          level: level || this.actor.system.details?.level, throwError: true
+        });
+        items.push(item);
+      } catch(err) {
+        messages.push(err.message);
+      }
+    }
+    data.items = items;
+
     await super.restore(level, data, options);
 
     if ( data.replaced ) {
@@ -157,6 +172,7 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
       this.actor.reset();
       this.updateSource({ [`value.replaced.${level}`]: data.replaced });
     }
+    if ( messages.length ) throw new ItemChoiceAdvancement.ERROR(messages.join(" "));
   }
 
   /* -------------------------------------------- */
