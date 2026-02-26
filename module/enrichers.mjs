@@ -869,9 +869,8 @@ export async function enrichDamage(configs, label, options) {
     const types = type?.split("|")
       .map(t => CONFIG.DND5E.damageTypes[t]?.label ?? CONFIG.DND5E.healingTypes[t]?.label)
       .filter(_ => _);
-    const rollLink = createRollLink(formula, {}, { tag: "span" }).outerHTML;
     const localizationData = {
-      formula: rollLink,
+      formula: createRollLink(formula, {}, { tag: "span" }).outerHTML,
       type: game.i18n.getListFormatter({ type: "disjunction" }).format(types)
     };
     if ( configs._rules === "2014" ) localizationData.type = localizationData.type.toLowerCase();
@@ -890,10 +889,6 @@ export async function enrichDamage(configs, label, options) {
       }
       if ( String(localizationData.average) === formula ) localizationType = "Short";
     }
-    if ( localizationType === "Long" ) {
-      localizationData.formula = `<span class="formula-group">(${rollLink})</span>`;
-    }
-
     parts.push(game.i18n.format(`EDITOR.DND5E.Inline.Damage${localizationType}`, localizationData));
   }
 
