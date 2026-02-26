@@ -889,7 +889,6 @@ export async function enrichDamage(configs, label, options) {
       }
       if ( String(localizationData.average) === formula ) localizationType = "Short";
     }
-
     parts.push(game.i18n.format(`EDITOR.DND5E.Inline.Damage${localizationType}`, localizationData));
   }
 
