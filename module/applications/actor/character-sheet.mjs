@@ -351,7 +351,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
         class: "colspan concentration",
         label: game.i18n.localize("DND5E.Concentration"),
         abbr: game.i18n.localize("DND5E.Concentration"),
-        save: context.system.attributes.concentration.save
+        save: { value: context.system.attributes.concentration.save }
       };
     }
 
