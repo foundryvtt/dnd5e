@@ -405,22 +405,6 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * Prepare rendering context for the tabs.
-   * @param {ApplicationRenderContext} context  Context being prepared.
-   * @param {HandlebarsRenderOptions} options   Options which configure application rendering behavior.
-   * @returns {Promise<ApplicationRenderContext>}
-   * @protected
-   */
-  async _prepareTabsContext(context, options) {
-    context.tabs = foundry.utils.deepClone(this.constructor.TABS);
-    const activeTab = context.tabs.find(t => t.tab === this.tabGroups.primary) ?? context.tabs[0];
-    activeTab.active = true;
-    return context;
-  }
-
-  /* -------------------------------------------- */
   /*  Actor Preparation Helpers                   */
   /* -------------------------------------------- */
 

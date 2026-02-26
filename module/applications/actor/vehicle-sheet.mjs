@@ -24,7 +24,7 @@ export default class VehicleActorSheet extends BaseActorSheet {
       uncrew: VehicleActorSheet.#onUncrew,
       useItem: VehicleActorSheet.#onUseItem
     },
-    classes: ["vehicle"],
+    classes: ["vehicle", "vertical-tabs"],
     position: {
       width: 700,
       height: 800
@@ -65,8 +65,8 @@ export default class VehicleActorSheet extends BaseActorSheet {
       scrollable: [""]
     },
     tabs: {
-      template: "systems/dnd5e/templates/shared/horizontal-tabs.hbs",
-      templates: ["templates/generic/tab-navigation.hbs"]
+      classes: ["tabs-right"],
+      template: "systems/dnd5e/templates/shared/sidebar-tabs.hbs"
     },
     inventory: {
       container: { classes: ["tab-body"], id: "tabs" },
@@ -98,10 +98,11 @@ export default class VehicleActorSheet extends BaseActorSheet {
 
   /** @override */
   static TABS = [
-    { tab: "inventory", label: "DND5E.VEHICLE.Tabs.Cargo" },
-    { tab: "crew", label: "DND5E.VEHICLE.Tabs.CrewPassengers", condition: this.vehicleHasCrew },
-    { tab: "effects", label: "DND5E.Effects" },
-    { tab: "description", label: "DND5E.Description" }
+    { tab: "inventory", label: "DND5E.VEHICLE.Tabs.Cargo", svg: "systems/dnd5e/icons/svg/backpack.svg" },
+    { tab: "crew", label: "DND5E.VEHICLE.Tabs.CrewPassengers", icon: "fa-solid fa-users",
+      condition: this.vehicleHasCrew },
+    { tab: "effects", label: "DND5E.Effects", icon: "fas fa-bolt" },
+    { tab: "description", label: "DND5E.Description", icon: "fas fa-feather" }
   ];
 
   /* -------------------------------------------- */

@@ -28,7 +28,31 @@
     padding: var(--header-height) 0 0;
   }
 
-  nav.tabs { top: 90px; }
+  /* ---------------------------------- */
+  /*  Sheet Tabs                        */
+  /* ---------------------------------- */
+
+  [data-application-part=tabs] { padding: 4px 12px 0; }
+
+  nav.tabs {
+    [data-tab] {
+      text-align: center;
+      span { padding-bottom: 1px; }
+    }
+  }
+
+  .tab-body {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+
+    > .tab {
+      position: absolute;
+      inset: 0;
+      overflow: hidden auto;
+      scrollbar-gutter: stable;
+    }
+  }
 
   /* ---------------------------------- */
   /*  Sheet Header                      */
@@ -190,7 +214,7 @@
     gap: 0;
 
     h3 { padding-left: 12px; }
-    > section:first-child h3 { padding-top: 8px; }
+    > section:first-child h3 { display: none; }
   }
 
   menu.members {

@@ -8,7 +8,7 @@ import Award from "../award.mjs";
 export default class GroupActorSheet extends MultiActorSheet {
   /** @override */
   static DEFAULT_OPTIONS = {
-    classes: ["group", "vertical-tabs"],
+    classes: ["group"],
     position: {
       width: 700,
       height: 700
@@ -29,6 +29,10 @@ export default class GroupActorSheet extends MultiActorSheet {
     header: {
       template: "systems/dnd5e/templates/actors/group/header.hbs"
     },
+    tabs: {
+      template: "systems/dnd5e/templates/shared/horizontal-tabs.hbs",
+      templates: ["templates/generic/tab-navigation.hbs"]
+    },
     members: {
       container: { classes: ["tab-body"], id: "tabs" },
       template: "systems/dnd5e/templates/actors/group/members.hbs",
@@ -48,11 +52,6 @@ export default class GroupActorSheet extends MultiActorSheet {
       container: { classes: ["tab-body"], id: "tabs" },
       template: "systems/dnd5e/templates/actors/group/biography.hbs",
       scrollable: [""]
-    },
-    tabs: {
-      id: "tabs",
-      classes: ["tabs-right"],
-      template: "systems/dnd5e/templates/shared/sidebar-tabs.hbs"
     }
   };
 
@@ -60,9 +59,9 @@ export default class GroupActorSheet extends MultiActorSheet {
 
   /** @override */
   static TABS = [
-    { tab: "members", label: "DND5E.Group.Member.other", icon: "fa-solid fa-users"},
-    { tab: "inventory", label: "DND5E.Inventory", svg: "systems/dnd5e/icons/svg/backpack.svg" },
-    { tab: "biography", label: "DND5E.Biography", icon: "fa-solid fa-feather" }
+    { tab: "members", label: "DND5E.Group.Member.other" },
+    { tab: "inventory", label: "DND5E.Inventory" },
+    { tab: "biography", label: "DND5E.Biography" }
   ];
 
   /* -------------------------------------------- */
@@ -179,7 +178,6 @@ export default class GroupActorSheet extends MultiActorSheet {
       case "header": return this._prepareHeaderContext(context, options);
       case "inventory": return this._prepareInventoryContext(context, options);
       case "members": return this._prepareMembersContext(context, options);
-      case "tabs": return this._prepareTabsContext(context, options);
     }
     return context;
   }

@@ -29,25 +29,14 @@
     --sidebar-size: calc(var(--dnd5e-sheet-sidebar-width) + var(--sidebar-padding) * 2);
     --stations-size: 332px;
     display: grid;
-    grid-template:
-      "a c" auto
-      "a d" 1fr
-      / calc(var(--sidebar-size) + var(--sidebar-margin)) 1fr;
+    grid-template-columns: calc(var(--sidebar-size) + var(--sidebar-margin)) 1fr;
     gap: 0;
     transition: grid-template-columns 450ms ease;
   }
 
   &.has-stations .window-content {
-    grid-template:
-      "a b c" auto
-      "a b d" 1fr
-      / calc(var(--sidebar-size) + var(--sidebar-margin)) var(--stations-size) 1fr;
+    grid-template-columns: calc(var(--sidebar-size) + var(--sidebar-margin)) var(--stations-size) 1fr;
   }
-
-  .sheet-sidebar { grid-area: a; }
-  .sheet-stations { grid-area: b; }
-  [data-application-part=tabs] { grid-area: c; }
-  .sheet-body { grid-area: d; }
 
   &:not(.has-stations) .sheet-stations { display: none; }
 
@@ -238,6 +227,7 @@
   /* -------------------------------------------- */
 
   .sheet-tabs [data-tab=crew] { flex: none; }
+  nav.tabs { top: calc(var(--header-height) + 10px); }
 
   /* -------------------------------------------- */
   /*  Stations                                    */

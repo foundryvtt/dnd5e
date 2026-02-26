@@ -72,27 +72,27 @@
     }
 
     nav.tabs {
-      --tab-full-width: 44px;
-      --tab-inactive-width: 38px;
+      --tab-full-width: 41px;
+      width: var(--tab-full-width); /* back compat */
       position: absolute;
       display: flex;
       flex-direction: column;
-      gap: .25rem;
+      align-items: stretch;
+      gap: 0;
       z-index: -1;
-      border: none;
+      background: var(--dnd5e-color-black);
+      border: 1px solid var(--dnd5e-color-gold);
 
       > .item {
         --icon-size: 14px;
-        width: var(--tab-full-width);
-        height: 40px;
-        position: relative;
         align-items: center;
-        background: var(--dnd5e-color-black);
+        justify-content: center;
         color: var(--dnd5e-color-gold);
         --icon-fill: var(--dnd5e-color-gold);
-        border: 1px solid transparent;
+        flex: 0 0 30px;
         transition: all 250ms ease;
-        flex: none;
+        margin: 5px;
+        border-radius: 4px;
 
         &:not([hidden]) { display: flex; }
 
@@ -103,58 +103,24 @@
 
         &.active, &:hover {
           text-shadow: none;
-          border-color: var(--dnd5e-color-gold);
-          box-shadow: 0 0 6px var(--dnd5e-color-gold);
-        }
-
-        &::after {
-          content: "";
-          position: absolute;
-          border: 1px solid var(--dnd5e-color-gold);
-          pointer-events: none;
+          background: var(--dnd5e-color-gold);
+          color: var(--dnd5e-color-black);
+          --icon-fill: var(--dnd5e-color-black);
         }
       }
 
       &.tabs-left {
         contain: content;
         right: 100%;
-        align-items: flex-end;
-
-        > .item {
-          padding-inline-start: 12px;
-          justify-content: start;
-          border-radius: 8px 0 0 8px;
-          margin-inline-end: calc((var(--tab-full-width) - var(--tab-inactive-width)) * -1);
-
-          &::after {
-            inset: 4px 0 4px 4px;
-            border-radius: 5px 0 0 5px;
-            border-inline-end: none;
-          }
-
-          &.active, &:hover { margin: 0; }
-        }
+        border-right: none;
+        border-radius: 6px 0 0 6px;
       }
 
       &.tabs-right {
         contain: content;
         left: 100%;
-        align-items: flex-start;
-
-        > .item {
-          padding-inline-end: 12px;
-          justify-content: end;
-          border-radius: 0 8px 8px 0;
-          margin-inline-start: calc((var(--tab-full-width) - var(--tab-inactive-width)) * -1);
-
-          &::after {
-            inset: 4px 4px 4px 0;
-            border-radius: 0 5px 5px 0;
-            border-inline-start: none;
-          }
-
-          &.active, &:hover { margin: 0; }
-        }
+        border-left: none;
+        border-radius: 0 6px 6px 0;
       }
     }
   }

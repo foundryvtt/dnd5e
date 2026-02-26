@@ -159,7 +159,6 @@ export default class NPCActorSheet extends BaseActorSheet {
       case "sidebar": return this._prepareSidebarContext(context, options);
       case "specialTraits": return this._prepareSpecialTraitsContext(context, options);
       case "spells": return this._prepareSpellsContext(context, options);
-      case "tabs": return this._prepareTabsContext(context, options);
       default: return context;
     }
   }

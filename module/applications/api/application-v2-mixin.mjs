@@ -216,6 +216,25 @@ export default function ApplicationV2Mixin(Base, { handlebars=true }={}) {
     /* -------------------------------------------- */
 
     /** @inheritDoc */
+    _updatePosition(position) {
+      const pos = super._updatePosition(position);
+      const leftOverhang = this.element?.querySelector("nav.tabs.tabs-left")?.offsetWidth ?? 0;
+      const rightOverhang = this.element?.querySelector("nav.tabs.tabs-right")?.offsetWidth ?? 0;
+      if ( !leftOverhang && !rightOverhang ) return pos;
+      const { clientWidth } = this.element.ownerDocument.documentElement;
+      const sheetWidth = typeof pos.width === "number" ? pos.width : (this.element?.offsetWidth ?? 0);
+      // Clamp left to prevent tabs being moved off-screen when dragged.
+      pos.left = Math.clamp(pos.left, leftOverhang, Math.max(clientWidth - sheetWidth - rightOverhang, leftOverhang));
+      // Clamp width to prevent tabs being moved off-screen when resized.
+      if ( rightOverhang && (typeof pos.width === "number") ) {
+        pos.width = Math.min(pos.width, Math.max(clientWidth - pos.left - rightOverhang, 0));
+      }
+      return pos;
+    }
+
+    /* -------------------------------------------- */
+
+    /** @inheritDoc */
     _updateFrame(options) {
       super._updateFrame(options);
       if ( options.window && ("subtitle" in options.window) ) {

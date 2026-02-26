@@ -132,7 +132,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
     { tab: "spells", label: "TYPES.Item.spellPl", icon: "fas fa-book" },
     { tab: "effects", label: "DND5E.Effects", icon: "fas fa-bolt" },
     { tab: "biography", label: "DND5E.Biography", icon: "fas fa-feather" },
-    { tab: "bastion", label: "DND5E.Bastion.Label", icon: "fas fa-chess-rook" },
+    { tab: "bastion", label: "DND5E.Bastion.Label", icon: "fas fa-chess-rook", condition: this.hasBastion },
     { tab: "specialTraits", label: "DND5E.SpecialTraits", icon: "fas fa-star" }
   ];
 
@@ -208,7 +208,6 @@ export default class CharacterActorSheet extends BaseActorSheet {
       case "sidebar": return this._prepareSidebarContext(context, options);
       case "specialTraits": return this._prepareSpecialTraitsContext(context, options);
       case "spells": return this._prepareSpellsContext(context, options);
-      case "tabs": return this._prepareTabsContext(context, options);
       default: return context;
     }
   }
@@ -608,22 +607,6 @@ export default class CharacterActorSheet extends BaseActorSheet {
       context.listControls.filters.push({ key, label: name });
     }
 
-    return context;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async _prepareTabsContext(context, options) {
-    const { basic, special } = CONFIG.DND5E.facilities.advancement;
-    const threshold = Math.min(...Object.keys(basic), ...Object.keys(special));
-    const showBastion = game.settings.get("dnd5e", "bastionConfiguration")?.enabled
-      && (this.actor.system.details.level >= threshold);
-    if ( !showBastion && (this.tabGroups.primary === "bastion") ) this.tabGroups.primary = "details";
-
-    context = await super._prepareTabsContext(context, options);
-
-    if ( !showBastion ) context.tabs.findSplice(t => t.tab === "bastion");
     return context;
   }
 
@@ -1347,5 +1330,18 @@ export default class CharacterActorSheet extends BaseActorSheet {
   /** @inheritDoc */
   canExpand(item) {
     return !["background", "race", "facility"].includes(item.type) && super.canExpand(item);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine if the sheet should show a bastion tab.
+   * @param {Actor5e} actor
+   * @returns {boolean}
+   */
+  static hasBastion(actor) {
+    const { basic, special } = CONFIG.DND5E.facilities.advancement;
+    const threshold = Math.min(...Object.keys(basic), ...Object.keys(special));
+    return game.settings.get("dnd5e", "bastionConfiguration")?.enabled && (actor.system.details.level >= threshold);
   }
 }
