@@ -319,6 +319,50 @@ E.g. A Feature or Spell which increases all movement speeds by a certain amount.
 ------------------------
 
 
+## Senses
+
+```
+system.attributes.senses.[senseType]
+                         units
+                         special
+```
+
+> [!Note]
+> Modifying senses via Active Effects changes the values on the actor's sheet but does not automatically configure token vision settings.
+
+> <details>
+> <summary>Sense Types</summary>
+>
+> | Sense Type  | Value         |
+> | ----------- | ------------- |
+> | Blindsight  | `blindsight`  |
+> | Darkvision  | `darkvision`  |
+> | Tremorsense | `tremorsense` |
+> | Truesight   | `truesight`   |
+>
+> Source: `CONFIG.DND5E.senses`
+> </details>
+
+
+### Set or Upgrade a Sense
+E.g. A Feature or Spell which grants or upgrades darkvision.
+
+| Attribute Key                            | Change Mode | Effect Value | Roll Data? |
+| ---------------------------------------- | ----------- | ------------ | ---------- |
+| `system.attributes.senses.[senseType]`   | Upgrade     | `[number]`   | No         |
+
+
+### Override a Sense
+E.g. A Feature which sets a sense to an exact value.
+
+| Attribute Key                            | Change Mode | Effect Value | Roll Data? |
+| ---------------------------------------- | ----------- | ------------ | ---------- |
+| `system.attributes.senses.[senseType]`   | Override    | `[number]`   | No         |
+
+
+------------------------
+
+
 ## Armor Class
 
 ```
