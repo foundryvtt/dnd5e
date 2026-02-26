@@ -41,8 +41,22 @@
     <legend>{{ localize "DND5E.TargetTypeArea" }}</legend>
 
     {{!-- Template Type --}}
-    {{ formField fields.template.fields.type value=data.template.type label="DND5E.Shape" localize=true hint=false
-                 options=CONFIG.areaTargetOptions rootId=partId }}
+    <div class="form-group split-group">
+        <label>{{ localize "DND5E.Shape" }}</label>
+        <div class="form-fields">
+
+            {{!-- Type --}}
+            {{ formField fields.template.fields.type value=data.template.type label="DND5E.Type" localize=true
+                         hint=false classes="label-top" options=CONFIG.areaTargetOptions rootId=partId }}
+
+            {{!-- Stationary --}}
+            {{#if (eq data.template.type "radius")}}
+            {{ formField fields.template.fields.stationary value=data.template.stationary localize=true
+                         hint=false input=inputs.createCheckboxInput classes="checkbox" rootId=partId }}
+            {{/if}}
+
+        </div>
+    </div>
 
     {{!-- Dimensions --}}
     {{#if data.template.type}}
