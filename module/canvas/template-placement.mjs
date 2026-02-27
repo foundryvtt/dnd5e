@@ -20,6 +20,7 @@ export default class TemplatePlacement extends BasePlacement {
   /** @override */
   async _place() {
     const results = [];
+    const attachToToken = this.config.shapes.some(s => s.type === "emanation");
     await canvas.regions.placeRegion({
       name: RegionDocument.implementation.defaultName({ parent: canvas.scene }),
       color: this.config.color,
@@ -28,12 +29,11 @@ export default class TemplatePlacement extends BasePlacement {
       shapes: this.config.shapes.map(s => this.#createShapeData(s)),
       "flags.core.MeasuredTemplate": true
     }, {
-      // TODO: `attachToToken: true` if emanation
+      attachToToken,
       create: false,
       preConfirm: ({ document, index }) => {
         const obj = document.toObject();
-        results.push({ ...obj.shapes.at(-1) });
-        // TODO: Set token ID if emanation attached to token
+        results.push({ ...obj.shapes.at(-1), token: obj.attachment.token });
       }
     });
     return results;
@@ -54,7 +54,10 @@ export default class TemplatePlacement extends BasePlacement {
     switch ( type ) {
       case "circle": return { ...data, radius: size };
       case "cone": return { ...data, angle: CONFIG.MeasuredTemplate.defaults.angle, radius: size };
-      case "emanation": return { base: { ...data }, radius: size }; // TODO: Make this work properly
+      case "emanation": return {
+        base: { ...data, width: 1, height: 1, shape: 4, type: "token" },
+        radius: size, type: "emanation"
+      };
       case "ray":
       case "line": return { ...data, length: size, width, type: "line" };
       case "rect":
@@ -102,18 +105,27 @@ export default class TemplatePlacement extends BasePlacement {
      */
     if ( Hooks.call("dnd5e.preCreateMeasuredTemplate", activity, config) === false ) return null;
 
-    const shapes = await TemplatePlacement.place(config);
-    if ( !shapes?.length ) return null;
+    const placements = await TemplatePlacement.place(config);
+    if ( !placements?.length ) return null;
 
-    // TODO: If type=emanation and stationary=false, create multiple templates
-    // Otherwise only a single template is created with multiple shapes
+    const combinedShapes = [];
+    const splitShapes = [];
+    for ( const placement of placements ) {
+      if ( placement.token ) {
+        const { x, y, width, height, shape } = canvas.scene.tokens.get(placement.token);
+        Object.assign(placement.base, { x, y, width, height, shape });
+      }
+      if ( !placement.token || target.stationary ) combinedShapes.push(placement);
+      else splitShapes.push([placement]);
+    }
 
     const rollData = activity.getRollData();
-    const regionData = [foundry.utils.mergeObject({
+    const regionData = [combinedShapes, ...splitShapes].map(shapes => shapes.length ? foundry.utils.mergeObject({
       // TODO: Should the activity name be included?
+      // TODO: Include count if more than one created?
       name: `${activity.item.name} [${game.user.name}]`,
       color: game.user.color,
-      shapes: shapes.map(({ index, ...data }) => data),
+      shapes: shapes.map(({ index, token, ...data }) => data),
       // TODO: Set elevation based on shape's height
       levels: [canvas.level.id],
       restriction: {
@@ -122,7 +134,9 @@ export default class TemplatePlacement extends BasePlacement {
         // TODO: What about templates like Fireball that flow around walls?
         type: "move"
       },
-      // TODO: Set attachedToken if type=emanation and stationary=false and token clicked on
+      attachment: {
+        token: target.stationary ? undefined : shapes[0].token
+      },
       visibility: CONST.REGION_VISIBILITY.ALWAYS,
       highlightMode: "coverage",
       flags: {
@@ -138,7 +152,7 @@ export default class TemplatePlacement extends BasePlacement {
           spellLevel: rollData.item.level
         }
       }
-    }, createData)];
+    }, createData) : null).filter(_ => _);
 
     /**
      * A hook event that fires after templates have been placed by the player but before they have been created.
