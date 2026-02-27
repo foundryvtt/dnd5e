@@ -25,11 +25,10 @@ export default class TemplatePlacement extends BasePlacement {
     const gridMultiplier = canvas.scene.grid.size / canvas.scene.grid.distance;
     const size = baseSizes.size * gridMultiplier;
     const width = baseSizes.width * gridMultiplier;
-    const height = baseSizes.height * gridMultiplier;
     const data = { x: 0, y: 0, rotation: 0, type };
     switch ( type ) {
       case "circle": return { ...data, radius: size };
-      case "cone": return { ...data, angle: 0, radius: size };
+      case "cone": return { ...data, angle: CONFIG.MeasuredTemplate.defaults.angle, radius: size };
       case "emanation": return { base: { ...data }, radius: size }; // TODO: Make this work properly
       case "ray":
       case "line": return { ...data, length: size, width, type: "line" };
@@ -64,6 +63,17 @@ export default class TemplatePlacement extends BasePlacement {
     const dest = !event.shiftKey ? this.layer.getSnappedPoint(local) : local;
     placement.x = shape.x = dest.x;
     placement.y = shape.y = dest.y;
+    preview.updateSource({ shapes: [shape] });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _onRotatePlacement(event, preview, placement) {
+    if ( ["circle", "emanation", "ring"].includes(placement.type) ) return;
+    const snap = event.shiftKey ? 5 : canvas.grid.type > CONST.GRID_TYPES.SQUARE ? 30 : 15;
+    const shape = preview.shapes[0].toObject();
+    placement.rotation = shape.rotation += snap * Math.sign(event.deltaY || event.deltaX);
     preview.updateSource({ shapes: [shape] });
   }
 
