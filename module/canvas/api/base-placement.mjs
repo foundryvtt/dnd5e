@@ -135,7 +135,7 @@ export default class BasePlacement {
           uniquePlacements.set(uniqueId, (uniquePlacements.get(uniqueId) ?? -1) + 1);
           placement.index = { total: total++, unique: uniquePlacements.get(uniqueId) };
           placements.push(placement);
-        } else obj.destroy();
+        } else obj.destroy({ children: true });
       }
       return placements;
     } finally {
@@ -191,7 +191,7 @@ export default class BasePlacement {
    */
   #destroyPreviews() {
     this.#previews.forEach(p => {
-      if ( p.object && !p.object.destroyed ) p.object.destroy();
+      if ( p.object && !p.object.destroyed ) p.object.destroy({ children: true });
     });
   }
 
@@ -219,18 +219,16 @@ export default class BasePlacement {
   #requestPlacement() {
     return new Promise((resolve, reject) => {
       this.#events = {
-        confirm: this.#onConfirmPlacement.bind(this),
+        down: this.#onPointerDown.bind(this),
         move: this.#onMovePlacement.bind(this),
         resolve,
         reject,
-        rotate: this.#onRotatePlacement.bind(this),
-        skip: this.#onSkipPlacement.bind(this)
+        rotate: this.#onRotatePlacement.bind(this)
       };
 
       // Activate listeners
-      canvas.stage.on("mousemove", this.#events.move);
-      canvas.stage.on("mousedown", this.#events.confirm);
-      canvas.app.view.oncontextmenu = this.#events.skip;
+      canvas.stage.on("pointermove", this.#events.move);
+      canvas.stage.on("pointerdown", this.#events.down);
       canvas.app.view.onwheel = this.#events.rotate;
     });
   }
@@ -242,9 +240,8 @@ export default class BasePlacement {
    * @param {Event} event  Triggering event that ended the placement.
    */
   #finishPlacement(event) {
-    canvas.stage.off("mousemove", this.#events.move);
-    canvas.stage.off("mousedown", this.#events.confirm);
-    canvas.app.view.oncontextmenu = null;
+    canvas.stage.off("pointermove", this.#events.move);
+    canvas.stage.off("pointerdown", this.#events.down);
     canvas.app.view.onwheel = null;
   }
 
@@ -252,7 +249,7 @@ export default class BasePlacement {
 
   /**
    * Move the preview when the mouse moves.
-   * @param {Event} event  Triggering mouse event.
+   * @param {PointerEvent} event  Triggering mouse event.
    */
   #onMovePlacement(event) {
     event.stopPropagation();
@@ -267,7 +264,7 @@ export default class BasePlacement {
 
   /**
    * Handle updating the preview and placement position based on mouse movement.
-   * @param {Event} event              Triggering mouse event.
+   * @param {PointerEvent} event       Triggering mouse event.
    * @param {CanvasDocument} preview   The preview document.
    * @param {PlacementData} placement  Data for the placement to update.
    * @protected
@@ -285,8 +282,19 @@ export default class BasePlacement {
   /* -------------------------------------------- */
 
   /**
+   * Handle mouse clicks on the canvas.
+   * @param {PointerEvent} event  Triggering mouse event.
+   */
+  #onPointerDown(event) {
+    if ( event.button === 0 ) this.#onConfirmPlacement(event);
+    else this.#onSkipPlacement(event);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Rotate the preview by 3˚ increments when the mouse wheel is rotated.
-   * @param {Event} event  Triggering mouse event.
+   * @param {PointEvent} event  Triggering mouse event.
    */
   #onRotatePlacement(event) {
     if ( event.ctrlKey ) event.preventDefault(); // Avoid zooming the browser window
@@ -299,7 +307,7 @@ export default class BasePlacement {
 
   /**
    * Handle updating the preview and placement rotation based on mouse wheel.
-   * @param {Event} event              Triggering mouse event.
+   * @param {PointerEvent} event       Triggering mouse event.
    * @param {CanvasDocument} preview   The preview document.
    * @param {PlacementData} placement  Data for the placement to update.
    * @protected
@@ -315,7 +323,7 @@ export default class BasePlacement {
 
   /**
    * Confirm placement when the left mouse button is clicked.
-   * @param {Event} event  Triggering mouse event.
+   * @param {PointerEvent} event  Triggering mouse event.
    */
   #onConfirmPlacement(event) {
     this.#finishPlacement(event);
@@ -327,7 +335,7 @@ export default class BasePlacement {
 
   /**
    * Handle any actions required when placement is confirmed.
-   * @param {Event} event              Triggering mouse event.
+   * @param {PointerEvent} event       Triggering mouse event.
    * @param {CanvasDocument} preview   The preview document.
    * @param {PlacementData} placement  Data for the finished placement.
    * @protected
@@ -338,7 +346,7 @@ export default class BasePlacement {
 
   /**
    * Skip placement when the right mouse button is clicked.
-   * @param {Event} event  Triggering mouse event.
+   * @param {PointerEvent} event  Triggering mouse event.
    */
   #onSkipPlacement(event) {
     this.#finishPlacement(event);
@@ -350,7 +358,7 @@ export default class BasePlacement {
 
   /**
    * Handle any actions required when placement is skipped.
-   * @param {Event} event              Triggering mouse event.
+   * @param {PointerEvent} event       Triggering mouse event.
    * @param {CanvasDocument} preview   The preview document.
    * @param {PlacementData} placement  Data for the finished placement.
    * @protected
