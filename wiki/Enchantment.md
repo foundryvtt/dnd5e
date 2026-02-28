@@ -1,4 +1,4 @@
-![Up to date as of 5.1.0](https://img.shields.io/static/v1?label=dnd5e&message=5.1.0&color=informational)
+![Up to date as of 5.3.0](https://img.shields.io/static/v1?label=dnd5e&message=5.3.0&color=informational)
 
 Enchantments are a special type of Active Effect that makes changes on the item to which they are added, rather than the actor like normal Active Effects. They are configured in much the same way as normal Active Effects, but rely on different attribute keys that are documented below.
 

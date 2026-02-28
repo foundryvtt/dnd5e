@@ -1,4 +1,4 @@
-![Up to date as of 5.2.0](https://img.shields.io/static/v1?label=dnd5e&message=5.2.0&color=informational)
+![Up to date as of 5.3.0](https://img.shields.io/static/v1?label=dnd5e&message=5.3.0&color=informational)
 
 The Enchant activity allows for applying [enchantments](Enchantment.md) to items. These enchantments can modify the stats of an item (such as *Magic Weapon* giving a mundane weapon a +1 magical bonus), carry effects that apply to an actor (such as the *Fire Rune* granting a player double proficiency on tool checks), and carry items that are added to the actor (such as the *Arcane Propulsive Armor* give the player a set of gauntlets that can be used to attack).
 

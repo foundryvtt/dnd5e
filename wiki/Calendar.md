@@ -1,4 +1,4 @@
-![Up to date as of 5.2.0](https://img.shields.io/static/v1?label=dnd5e&message=5.2.0&color=informational)
+![Up to date as of 5.3.0](https://img.shields.io/static/v1?label=dnd5e&message=5.3.0&color=informational)
 
 The DnD5e system extends Foundry's calendar system with a new HUD to display the date & time, various configuration options to customize how the calendar is presented, an application for jumping to a specific date, several built-in calendars for prominent 5e game settings, and an API to allow module authors to contribute their own calendars.
 

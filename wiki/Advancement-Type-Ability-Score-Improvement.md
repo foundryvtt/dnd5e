@@ -1,4 +1,4 @@
-![Up to date as of 5.1.0](https://img.shields.io/static/v1?label=dnd5e&message=4.2.0&color=informational)
+![Up to date as of 5.3.0](https://img.shields.io/static/v1?label=dnd5e&message=5.3.0&color=informational)
 
 The Ability Score Improvement allows a player to improve one or more their their ability scores, either a fixed amount or using a certain number of points, or to optionally take a feat when used on a class.
 

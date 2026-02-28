@@ -1,4 +1,4 @@
-![Up to date as of 5.2.0](https://img.shields.io/static/v1?label=dnd5e&message=5.2.0&color=informational)
+![Up to date as of 5.3.0](https://img.shields.io/static/v1?label=dnd5e&message=5.3.0&color=informational)
 
 The Transform activity is designed to change one or more actors using the stats of another. It is based on the same transformation system that has been long supported by dragging one actor onto another, but with the activity the transformation settings can be pre-configured and a compendium browser can be shown to make it easy to select which creature to transform into.
 
