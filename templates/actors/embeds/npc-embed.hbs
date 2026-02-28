@@ -58,7 +58,9 @@
     {{#each entries}}
     <div {{~#if classes}} class="{{ classes }}"{{/if}}>
         <dt>{{ localize label }}</dt>
-        {{~#each definitions}}{{#unless (eq this undefined)}}<dd>{{ this }}</dd>{{/unless}}{{/each}}
+        {{~#each definitions}}{{#unless (eq this undefined)~}}
+        <dd>{{#if ../allowHTML}}{{{ this }}}{{else}}{{ this }}{{/if}}</dd>
+        {{~/unless}}{{/each}}
     </div>
     {{/each}}
 </dl>
