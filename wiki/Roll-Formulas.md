@@ -1,4 +1,4 @@
-![Up to date as of 5.2.0](https://img.shields.io/static/v1?label=dnd5e&message=5.2.0&color=informational)
+![Up to date as of 5.3.0](https://img.shields.io/static/v1?label=dnd5e&message=5.3.0&color=informational)
 
 > <details><summary>To explore the data model within Foundry to find the properties detailed below, here are a few approaches:</summary>
 >
@@ -176,6 +176,8 @@
 
 `@classes.*.hd.spent` - How many hit dice this class has expended.
 
+`@classes.*.tier` - Current tier for just this class (e.g. `1` for levels 1–4, `2` for 5–10, etc).
+
 `@subclasses.*.levels` - The current level of the class to which a certain subclass belongs.
 
 ### Currency
@@ -187,6 +189,8 @@
 `@details.level` - Overall character level.
 
 `@details.cr` - Challenge rating.
+
+`@details.tier` - Current character tier (e.g. `1` for levels 1–4, `2` for 5–10, etc).
 
 `@details.xp.value` - Actor's total XP earned (or the XP a monster is worth).
 
@@ -348,6 +352,32 @@ The most common `@item` properties are:
 
 `@item.levels` - The class level of this item (for classes only).
 
+### Labels
+
+Spells as well as activities have a number of useful properties when used with the [[lookup enricher]](Enrichers.md#lookup-enrichers). These can be used directly on a spell, or by using the `activity=` option to fetch them from an activity on an item.
+
+`@labels.activation` - "Action"
+
+`@labels.description.affects` -  "each creature"
+
+`@labels.description.range` -  "120 feet"
+
+`@labels.description.template` - "20-foot Sphere"
+
+`@labels.description.templateSize` - "20-foot"
+
+`@labels.description.templateType` - "Sphere"
+
+`@level` - "1st Level"
+
 ### Flags
 
 `@flags.*` - An arbitrary object added to the roll data object for convenience. There are no rules regarding the properties held here, as they are added as needed by the system, modules, or macros.
+
+## Special Roll Modifiers
+
+### `adv` and `dis`
+
+The system includes two special modifiers that are used to provide advantage and disadvantage to a roll: `adv` and `dis`. These modifiers will be used automatically when selecting the Advantage or Disadvantage options in the rolling dialog, but they can also be used in other roll formulas. The benefit of these modifiers over the conventional `2dXkh` format is that they properly handle larger die pools. For example, if you wanted to roll `3d6` twice and take whatever set was higher you could use `3d6adv` and the system would properly roll 6 dice and select the set of 3 with the largest total.
+
+Both of these modifiers also accept a number to increase the number of dice rolled for an advantage. For example, using `1d20adv2` would be equivalent of rolling `3d20kh`. This is used automatically in the system when rolling with Elven Accuracy in the 2014 rules.
