@@ -515,15 +515,17 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       if ( property === "skills" ) src = CONFIG.DND5E.skills[key]?.ability;
       return src ?? "int";
     };
-    return Object.entries(context.system[property] ?? {}).map(([key, entry]) => ({
-      ...entry, key,
-      abbreviation: CONFIG.DND5E.abilities[entry.ability]?.abbreviation,
-      baseAbility: baseAbility(key),
-      hover: CONFIG.DND5E.proficiencyLevels[entry.value],
-      label: (property === "skills") ? CONFIG.DND5E.skills[key]?.label : Trait.keyLabel(key, { trait: "tool" }),
-      link: { action: "roll", key, type: property === "skills" ? "skill" : "tool" },
-      source: context.source[property]?.[key]
-    })).sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang));
+    return Object.entries(context.system[property] ?? {})
+      .filter(([key]) => key in CONFIG.DND5E[property])
+      .map(([key, entry]) => ({
+        ...entry, key,
+        abbreviation: CONFIG.DND5E.abilities[entry.ability]?.abbreviation,
+        baseAbility: baseAbility(key),
+        hover: CONFIG.DND5E.proficiencyLevels[entry.value],
+        label: (property === "skills") ? CONFIG.DND5E.skills[key]?.label : Trait.keyLabel(key, { trait: "tool" }),
+        link: { action: "roll", key, type: property === "skills" ? "skill" : "tool" },
+        source: context.source[property]?.[key]
+      })).sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang));
   }
 
   /* -------------------------------------------- */
