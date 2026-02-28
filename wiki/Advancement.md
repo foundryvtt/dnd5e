@@ -1,4 +1,4 @@
-![Up to date as of 5.1.0](https://img.shields.io/static/v1?label=dnd5e&message=5.1.0&color=informational)
+![Up to date as of 5.3.0](https://img.shields.io/static/v1?label=dnd5e&message=5.3.0&color=informational)
 
 ## Advancement System
 
@@ -87,9 +87,9 @@ When subclassing the config app, the default `config` part should always be incl
   };
 ```
 
-#### `AdvancementFlow` Class
+#### `AdvancementFlowV2` Class
 
-The controls presented within the advancement process are defined within a subclass of `AdvancementFlow`. This will always be rendered as a sub-application of the surrounding `AdvancementManager`.
+The controls presented within the advancement process are defined within a subclass of `AdvancementFlowV2`. This will always be rendered as a sub-application of the surrounding `AdvancementManager`.
 
 #### Namespacing
 

@@ -1,4 +1,4 @@
-![Up to date as of 3.3.0](https://img.shields.io/static/v1?label=dnd5e&message=3.0.0&color=informational)
+![Up to date as of 5.3.0](https://img.shields.io/static/v1?label=dnd5e&message=5.3.0&color=informational)
 
 The award system can be used by DMs to grant their players currency and XP rewards. It can be accessed in three ways, the `/award` command in chat, `[[/award]]` enrichers in journal entries, and the `"Award"` button in group actors.
 

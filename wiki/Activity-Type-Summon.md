@@ -1,4 +1,4 @@
-![Up to date as of 5.2.0](https://img.shields.io/static/v1?label=dnd5e&message=5.2.0&color=informational)
+![Up to date as of 5.3.0](https://img.shields.io/static/v1?label=dnd5e&message=5.3.0&color=informational)
 
 The Summon activity is designed to automatically bring summoned creatures into your world. This allows for summoning based on a pre-determined list of creatures or allowing the player to select a creature to summon based on CR and creature type. This activity can modify the summoned creatures before they are brought into the world and includes an interface for players to place them as desired in the scene.
 
@@ -91,6 +91,7 @@ The "Creature Changes" section defines changes to the creature itself:
 - *Bonus Armor Class*: Bonus to the armor class on top of what is specified in the stat block
 - *Bonus Hit Dice*: Number of hit dice to add to those on the summoned creature, based on the hit dice details inferred from the HP formula or creature size
 - *Bonus Hit Points*: Additional hit points on top of those specified in the stat block
+- *Temp HP*: Grant a number of temporary hit points to the summoned creature
 - *Creature Sizes* & *Creature Types*: Change the summoned creature’s size and type when summoning. If more than one option is selected, then the player will be able to choose in the summoning dialog
 
 The example above shows the "Summon Beast" spell from *Tasha’s Cauldron of Everything* which matches the caster’s proficiency, gives a bonus to armor class based on spell level, and an extra 5 hit points for each level cast above the base level.

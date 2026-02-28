@@ -1,4 +1,4 @@
-![Up to date as of 5.1.0](https://img.shields.io/static/v1?label=dnd5e&message=5.1.0&color=informational)
+![Up to date as of 5.3.0](https://img.shields.io/static/v1?label=dnd5e&message=5.3.0&color=informational)
 
 The Choose Items advancement is designed for any feature that gives the player a choice of options to add to their character at a certain level. This covers features with a limited set of options such as Fighting Style and more open ended features such as Magical Secrets.
 

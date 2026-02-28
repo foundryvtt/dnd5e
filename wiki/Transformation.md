@@ -1,4 +1,4 @@
-![Up to date as of 5.1.0](https://img.shields.io/static/v1?label=dnd5e&message=5.1.0&color=informational)
+![Up to date as of 5.3.0](https://img.shields.io/static/v1?label=dnd5e&message=5.3.0&color=informational)
 
 The transformation system allows for modifying an actor using the stats of another. This is useful for features like Wild Shape and spells like Polymorph and Disguise Self. The changes performed can be simple cosmetic changes that alter the token and portrait artwork, or large changes that replaces the altered actors stats and features.
 
