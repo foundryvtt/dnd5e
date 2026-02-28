@@ -166,7 +166,8 @@ export default class AdvancementFlow extends Application5e {
   async _prepareHeaderContext(context, options) {
     context.title = this.title;
     context.hint = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
-      this.advancement.hint ?? "",
+      this.advancement.hint && !this.advancement.hint.includes("<p>")
+        ? `<p>${this.advancement.hint}</p>` : this.advancement.hint ?? "",
       { relativeTo: this.advancement.item, rollData: this.advancement.item.getRollData() }
     );
     return context;
