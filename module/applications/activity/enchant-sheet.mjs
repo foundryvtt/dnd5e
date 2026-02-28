@@ -69,7 +69,7 @@ export default class EnchantSheet extends ActivitySheet {
         .map(value => ({ value, label: game.i18n.localize(CONFIG.Item.typeLabels[value]) }))
     ];
     context.isTypePhysical = !context.source.restrictions.type
-      || !!CONFIG.Item.dataModels[context.source.restrictions.type]?.schema.fields.quantity;
+      || !!CONFIG.Item.dataModels[context.source.restrictions.type]?.schema.has("quantity");
 
     const type = context.source.restrictions.type;
     const typeDataModel = CONFIG.Item.dataModels[type];

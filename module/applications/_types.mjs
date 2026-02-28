@@ -13,6 +13,16 @@
  */
 
 /**
+ * @typedef CurrencyUpdateOptions
+ * @property {boolean} [exact=true]           Prioritize deducting the requested denomination first.
+ * @property {boolean} [makeChange=true]      Convert higher denominations to fulfill the request if needed.
+ * @property {"high"|"low"} [priority="low"]  Prioritize higher denominations before lower, or vice-versa.
+ * @property {boolean} [recursive=false]      Deduct currency from containers as well as the base Actor. TODO
+ */
+
+/* -------------------------------------------- */
+
+/**
  * @typedef {ApplicationConfiguration} CompendiumBrowserConfiguration
  * @property {{locked: CompendiumBrowserFilters, initial: CompendiumBrowserFilters}} filters  Filters to set to start.
  *                                              Locked filters won't be able to be changed by the user. Initial filters

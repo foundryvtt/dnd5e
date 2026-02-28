@@ -104,6 +104,8 @@
     --filter-range-label-color: var(--color-text-primary);
   }
 
+  .items-section .item-name { --icon-fill: var(--dnd5e-color-black); }
+
   .items-section .item .tags {
     --icon-fill: var(--dnd5e-color-black);
     --tag-opacity: .25;
@@ -119,6 +121,10 @@
 
   .currency .distribution slide-toggle { --slide-toggle-track-color-unchecked: var(--dnd5e-color-olive); }
   &.actor.character .window-header slide-toggle { --slide-toggle-track-color-unchecked: var(--dnd5e-color-light-gray); }
+
+  &.roll-table-sheet {
+    table { --icon-fill: var(--color-text-dark-primary); }
+  }
 
   section.secret {
     --color-secret-bg: rgb(53 0 121 / 5%);
@@ -184,8 +190,12 @@
   --dnd5e-color-table-header-2: var(--dnd5e-color-hd-2);
   --dnd5e-block-background: var(--dnd5e-color-card);
   --dnd5e-block-border-color: var(--dnd5e-color-gold);
+  --dnd5e-habitat-treasure-color-background: oklch(0.941 0.0197 87.52);
+  --dnd5e-habitat-treasure-color-border: oklch(0.7781 0.0671 84.33);
   --dnd5e-roll-icon-filter: none;
   --dnd5e-notable-filter: none;
+  --dnd5e-quote-color: var(--dnd5e-color-maroon);
+  --dnd5e-quote-background: var(--dnd5e-color-card);
 
   .notable {
     --dnd5e-block-background: rgb(216 227 227);

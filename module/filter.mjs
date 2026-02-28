@@ -10,7 +10,7 @@
  * @throws
  */
 export function performCheck(data, filter=[]) {
-  if ( foundry.utils.getType(filter) === "Array" ) return AND(data, filter);
+  if ( Array.isArray(filter) ) return AND(data, filter);
   return _check(data, filter.k, filter.v, filter.o);
 }
 
@@ -26,7 +26,7 @@ export function uniqueKeys(filter=[]) {
   const _uniqueKeys = filters => {
     for ( const f of filters ) {
       const operator = f.o in OPERATOR_FUNCTIONS;
-      if ( operator && (foundry.utils.getType(f.v) === "Array") ) _uniqueKeys(f.v);
+      if ( operator && Array.isArray(f.v) ) _uniqueKeys(f.v);
       else if ( f.o === "NOT" ) _uniqueKeys([f.v]);
       else if ( !operator ) keys.add(f.k);
     }

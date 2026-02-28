@@ -1,3 +1,4 @@
+import { generateIcon } from "../../utils.mjs";
 import ContextMenu5e from "../context-menu.mjs";
 
 const { HandlebarsApplicationMixin } = foundry.applications.api;
@@ -9,12 +10,15 @@ const { HandlebarsApplicationMixin } = foundry.applications.api;
 /**
  * Mixin method for ApplicationV2-based 5e applications.
  * @template {ApplicationV2} T
- * @param {typeof T} Base   Application class being extended.
+ * @param {typeof T} Base                      Application class being extended.
+ * @param {object} [options={}]
+ * @param {boolean} [options.handlebars=true]  Include HandlebarsApplicationMixin.
  * @returns {typeof BaseApplication5e}
  * @mixin
  */
-export default function ApplicationV2Mixin(Base) {
-  class BaseApplication5e extends HandlebarsApplicationMixin(Base) {
+export default function ApplicationV2Mixin(Base, { handlebars=true }={}) {
+  const _BaseApplication5e = handlebars ? HandlebarsApplicationMixin(Base) : Base;
+  class BaseApplication5e extends _BaseApplication5e {
     /** @override */
     static DEFAULT_OPTIONS = {
       actions: {
@@ -31,7 +35,7 @@ export default function ApplicationV2Mixin(Base) {
     /**
      * @type {Record<string, HandlebarsTemplatePart & ApplicationContainerParts>}
      */
-    static PARTS = {};
+    static PARTS = Base.PARTS ?? {};
 
     /* -------------------------------------------- */
     /*  Properties                                  */
@@ -154,6 +158,7 @@ export default function ApplicationV2Mixin(Base) {
     /** @inheritDoc */
     async _renderFrame(options) {
       const frame = await super._renderFrame(options);
+      if ( !this.hasFrame ) return frame;
 
       // Subtitles
       const subtitle = document.createElement("h2");
@@ -163,13 +168,36 @@ export default function ApplicationV2Mixin(Base) {
       // Icon
       if ( (options.window?.icon ?? "").includes(".") ) {
         const icon = frame.querySelector(".window-icon");
-        const newIcon = document.createElement(options.window.icon?.endsWith(".svg") ? "dnd5e-icon" : "img");
-        newIcon.classList.add("window-icon");
-        newIcon.src = options.window.icon;
-        icon.replaceWith(newIcon);
+        icon.replaceWith(generateIcon(options.window.icon, { classes: "window-icon" }));
       }
 
       return frame;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Handle re-rendering the mode toggle on ownership changes.
+     * @protected
+     */
+    _renderModeToggle() {
+      const header = this.element.querySelector(".window-header");
+      const toggle = header.querySelector(".mode-slider");
+      if ( this.isEditable && !toggle ) {
+        const toggle = document.createElement("slide-toggle");
+        toggle.checked = this.isEditMode;
+        toggle.classList.add("mode-slider");
+        toggle.dataset.action = "changeMode";
+        toggle.dataset.tooltip = "DND5E.SheetModeEdit";
+        toggle.setAttribute("aria-label", game.i18n.localize("DND5E.SheetModeEdit"));
+        toggle.addEventListener("dblclick", event => event.stopPropagation());
+        toggle.addEventListener("pointerdown", event => event.stopPropagation());
+        header.prepend(toggle);
+      } else if ( this.isEditable ) {
+        toggle.checked = this.isEditMode;
+      } else if ( !this.isEditable && toggle ) {
+        toggle.remove();
+      }
     }
 
     /* -------------------------------------------- */
@@ -188,6 +216,25 @@ export default function ApplicationV2Mixin(Base) {
     /* -------------------------------------------- */
 
     /** @inheritDoc */
+    _updatePosition(position) {
+      const pos = super._updatePosition(position);
+      const leftOverhang = this.element?.querySelector("nav.tabs.tabs-left")?.offsetWidth ?? 0;
+      const rightOverhang = this.element?.querySelector("nav.tabs.tabs-right")?.offsetWidth ?? 0;
+      if ( !leftOverhang && !rightOverhang ) return pos;
+      const { clientWidth } = this.element.ownerDocument.documentElement;
+      const sheetWidth = typeof pos.width === "number" ? pos.width : (this.element?.offsetWidth ?? 0);
+      // Clamp left to prevent tabs being moved off-screen when dragged.
+      pos.left = Math.clamp(pos.left, leftOverhang, Math.max(clientWidth - sheetWidth - rightOverhang, leftOverhang));
+      // Clamp width to prevent tabs being moved off-screen when resized.
+      if ( rightOverhang && (typeof pos.width === "number") ) {
+        pos.width = Math.min(pos.width, Math.max(clientWidth - pos.left - rightOverhang, 0));
+      }
+      return pos;
+    }
+
+    /* -------------------------------------------- */
+
+    /** @inheritDoc */
     _updateFrame(options) {
       super._updateFrame(options);
       if ( options.window && ("subtitle" in options.window) ) {
@@ -198,8 +245,8 @@ export default function ApplicationV2Mixin(Base) {
     /* -------------------------------------------- */
 
     /** @inheritDoc */
-    _onRender(context, options) {
-      super._onRender(context, options);
+    async _onRender(context, options) {
+      await super._onRender(context, options);
 
       this.element.querySelectorAll("[data-context-menu]").forEach(control =>
         control.addEventListener("click", dnd5e.applications.ContextMenu5e.triggerEvent)
@@ -266,6 +313,54 @@ export default function ApplicationV2Mixin(Base) {
     _onConfigurePlugins(event) {
       event.plugins.highlightDocumentMatches =
         ProseMirror.ProseMirrorHighlightMatchesPlugin.build(ProseMirror.defaultSchema);
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Edit a Document image. Not restricted to `<img>` elements to allow editing `<dnd5e-icon>` elements.
+     * @this {DocumentSheetV2}
+     * @param {Event} event         Triggering click event.
+     * @param {HTMLElement} target  Button that was clicked.
+     */
+    static async _onEditImage(_event, target) {
+      const attr = target.dataset.edit;
+      const current = foundry.utils.getProperty(this.document._source, attr);
+      const defaultArtwork = this.document.constructor.getDefaultArtwork?.(this.document._source) ?? {};
+      const defaultImage = foundry.utils.getProperty(defaultArtwork, attr);
+      const fp = new foundry.applications.apps.FilePicker.implementation({
+        current,
+        type: target.dataset.type || "image",
+        redirectToRoot: defaultImage ? [defaultImage] : [],
+        callback: path => {
+          const isVideo = foundry.helpers.media.VideoHelper.hasVideoExtension(path);
+          if ( ((target instanceof HTMLVideoElement) && isVideo)
+            || ((target instanceof HTMLImageElement) && !isVideo) ) target.src = path;
+          else {
+            const repl = document.createElement(isVideo ? "video" : "img");
+            Object.assign(repl.dataset, target.dataset);
+            if ( isVideo ) Object.assign(repl, {
+              autoplay: true, muted: true, disablePictureInPicture: true, loop: true, playsInline: true
+            });
+            repl.src = path;
+            target.replaceWith(repl);
+          }
+
+          if ( this.options.form.submitOnChange ) {
+            if ( attr.startsWith("token.") ) this.token.update({ [attr.slice(6)]: path });
+            else {
+              const submit = new Event("submit", { cancelable: true });
+              this.form.dispatchEvent(submit);
+            }
+          }
+        },
+        position: {
+          top: this.position.top + 40,
+          left: this.position.left + 10
+        },
+        document: this.document
+      });
+      await fp.browse();
     }
 
     /* -------------------------------------------- */

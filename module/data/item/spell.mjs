@@ -1,5 +1,7 @@
-import { filteredKeys } from "../../utils.mjs";
+import { getRulesVersion } from "../../enrichers.mjs";
+import { filteredKeys, formatNumber } from "../../utils.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
+import IdentifierField from "../fields/identifier-field.mjs";
 import ActivationField from "../shared/activation-field.mjs";
 import DurationField from "../shared/duration-field.mjs";
 import RangeField from "../shared/range-field.mjs";
@@ -52,7 +54,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
       properties: new SetField(new StringField(), { label: "DND5E.SpellComponents" }),
       range: new RangeField(),
       school: new StringField({ required: true, label: "DND5E.SpellSchool" }),
-      sourceClass: new StringField({ label: "DND5E.SpellSourceClass" }),
+      sourceItem: new IdentifierField({ allowType: true, label: "DND5E.SourceItem.Label" }),
       target: new TargetField()
     });
   }
@@ -132,10 +134,38 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
 
   /* -------------------------------------------- */
 
+  /**
+   * The identifier of the spellcasting class associated with this spell, resolved through subclass parentage where
+   * necessary. Returns an empty string if the spell was not granted by a class or subclass item.
+   * @type {string}
+   */
+  get classIdentifier() {
+    if ( !this.sourceItem ) return "";
+    const sourceItem = this.parent?.actor?.identifiedItems.get(this.sourceItem)?.first();
+    if ( sourceItem?.type === "class" ) return sourceItem.identifier;
+    if ( sourceItem?.type === "subclass" ) return sourceItem.system.classIdentifier ?? "";
+    return "";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * @deprecated since 5.3
+   * @ignore
+   */
+  get sourceClass() {
+    foundry.utils.logCompatibilityWarning("SpellData#sourceClass is deprecated. Please use SpellData#sourceItem "
+      + "instead.", { since: "DnD5e 5.3", until: "DnD5e 6.0" });
+    return this.classIdentifier ?? "";
+  }
+
+  /* -------------------------------------------- */
+
   /** @override */
   get availableAbilities() {
     if ( this.ability ) return new Set([this.ability]);
-    const spellcasting = this.parent?.actor?.spellcastingClasses[this.sourceClass]?.spellcasting.ability
+
+    const spellcasting = this.parent?.actor?.spellcastingClasses[this.classIdentifier]?.spellcasting.ability
       ?? this.parent?.actor?.system.attributes?.spellcasting;
     return new Set(spellcasting ? [spellcasting] : []);
   }
@@ -265,7 +295,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   get preparation() {
     foundry.utils.logCompatibilityWarning("SpellData#preparation is deprecated. Please use SpellData#method in "
       + "place of preparation.mode and SpellData#prepared in place of preparation.prepared.",
-    { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+    { since: "DnD5e 5.1", until: "DnD5e 6.0" });
     if ( this.prepared === 2 ) return { mode: "always", prepared: 1 };
     if ( this.method === "spell" ) return { mode: "prepared", prepared: Boolean(this.prepared) };
     return { mode: this.method, prepared: Boolean(this.prepared) };
@@ -280,6 +310,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     SpellData.#migrateActivation(source);
     SpellData.#migrateTarget(source);
     SpellData.#migratePreparation(source);
+    SpellData.#migrateSourceItem(source);
   }
 
   /* -------------------------------------------- */
@@ -356,6 +387,20 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Migrate sourceClass to sourceItem.
+   * @since 5.3.0
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateSourceItem(source) {
+    if ( "sourceClass" in source ) {
+      if ( source.sourceClass ) source.sourceItem = `class:${source.sourceClass}`;
+      delete source.sourceClass;
+    }
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
@@ -389,6 +434,9 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
       return obj;
     }, { all: [], vsm: [], tags: [] });
     labels.components.vsm = game.i18n.getListFormatter({ style: "narrow" }).format(labels.components.vsm);
+    labels.components.full = labels.materials ? game.i18n.format("DND5E.SpellComponentsMaterial", {
+      components: labels.components.vsm, materials: labels.materials
+    }) : labels.components.vsm;
 
     const uuid = this.parent._stats.compendiumSource ?? this.parent.uuid;
     Object.defineProperty(labels, "classes", {
@@ -415,8 +463,8 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     TargetField.prepareData.call(this, rollData, labels);
 
     // Count preparations.
-    if ( this.parent.isOwned && this.sourceClass && this.countsPrepared ) {
-      const sourceClass = this.parent.actor.spellcastingClasses[this.sourceClass];
+    if ( this.classIdentifier && this.countsPrepared ) {
+      const sourceClass = this.parent.actor.spellcastingClasses[this.classIdentifier];
       const sourceSubclass = sourceClass?.subclass;
       if ( sourceClass ) sourceClass.system.spellcasting.preparation.value++;
       if ( sourceSubclass ) sourceSubclass.system.spellcasting.preparation.value++;
@@ -459,17 +507,53 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     ];
 
     context.parts = ["dnd5e.details-spell", "dnd5e.field-uses"];
+    context.sourceItemLocked = false;
 
     // Default Ability & Spellcasting Classes
     if ( this.parent.actor ) {
+      // Get spell source item.
+      const sourceItem = this.sourceItem
+        ? this.parent.actor.identifiedItems.get(this.sourceItem)?.first()
+        : null;
+
       const ability = CONFIG.DND5E.abilities[
-        this.parent.actor.spellcastingClasses[this.sourceClass]?.spellcasting.ability
+        this.parent.actor.spellcastingClasses[this.classIdentifier]?.spellcasting.ability
           ?? this.parent.actor.system.attributes?.spellcasting
       ]?.label?.toLowerCase();
       if ( ability ) context.defaultAbility = game.i18n.format("DND5E.DefaultSpecific", { default: ability });
       else context.defaultAbility = game.i18n.localize("DND5E.Default");
       context.spellcastingClasses = Object.entries(this.parent.actor.spellcastingClasses ?? {})
-        .map(([value, cls]) => ({ value, label: cls.name }));
+        .map(([value, cls]) => ({ value: `class:${value}`, label: cls.name }));
+
+      // Spells granted by non-class Items are locked.
+      if ( sourceItem?.type !== "class" ) {
+        let grantingItem = sourceItem;
+
+        // Fallback to detecting from flags.
+        if ( !grantingItem ) {
+          // Check for advancement-granted spells.
+          const advancementOrigin = this.parent.getFlag("dnd5e", "advancementOrigin");
+          if ( advancementOrigin ) {
+            const [itemId] = advancementOrigin.split(".");
+            grantingItem = this.parent.actor.items.get(itemId);
+          }
+
+          // Check for item-granted spells.
+          grantingItem ??= this.linkedActivity?.item;
+        }
+
+        if ( grantingItem ) {
+          context.spellcastingClasses.push({
+            value: `${grantingItem.type}:${grantingItem.identifier}`,
+            label: grantingItem.name
+          });
+
+          if ( !this.sourceItem ) context.source.sourceItem = `${grantingItem.type}:${grantingItem.identifier}`;
+
+          context.sourceItemLocked = true;
+          context.sourceItemHint = "DND5E.SourceItem.LockedHint";
+        }
+      }
     }
 
     // Activation
@@ -531,7 +615,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
 
   /** @override */
   static onDropCreate(event, actor, itemData) {
-    if ( !["npc", "character"].includes(actor.type) ) return;
+    if ( !actor?.system.isCreature ) return;
 
     // Determine the section it is dropped on, if any.
     let header = event.target.closest(".items-header"); // Dropped directly on the header.
@@ -568,6 +652,80 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   }
 
   /* -------------------------------------------- */
+
+  /** @override */
+  async toEmbed(config, options={}) {
+    const description = await super.toEmbed(config, options);
+    config.details ??= config.values.includes("details");
+    if ( !config.details ) return description;
+
+    const details = document.createElement("div");
+    details.classList.add("item-entry-details");
+    const labels = this.parent.labels;
+    const rulesVersion = getRulesVersion(config, { ...options, relativeTo: this.parent });
+
+    const tag = document.createElement("p");
+    tag.classList.add("item-entry-tag");
+    const classes = labels.classes;
+    tag.innerText = game.i18n.format(
+      `DND5E.SPELL.Embed.Tag.${!this.level ? "Cantrip" : "Leveled"}${rulesVersion === "2014" ? "Legacy" : ""}`,
+      {
+        level: formatNumber(this.level),
+        levelOrdinal: formatNumber(this.level, { ordinal: true }),
+        school: CONFIG.DND5E.spellSchools[this.school]?.label ?? ""
+      }
+    );
+    if ( (rulesVersion === "2014") && this.properties.has("ritual") ) {
+      tag.innerText = game.i18n.format("DND5E.SPELL.Embed.Tag.Ritual", { levelSchool: tag.innerText });
+    } else if ( (rulesVersion === "2024") && classes?.length ) {
+      tag.innerText = game.i18n.format("DND5E.SPELL.Embed.Tag.Classes", {
+        classes: game.i18n.getListFormatter({ type: "unit" }).format(classes),
+        levelSchool: tag.innerText
+      });
+    }
+    details.append(tag);
+
+    let castingTime = rulesVersion === "2014" ? labels.legacyActivation : labels.ritualActivation;
+    if ( (this.activation.type === "reaction") && this.activation.condition ) castingTime = game.i18n.format(
+      "DND5E.SPELL.Embed.CastingTimeTrigger", { castingTime, trigger: this.activation.condition }
+    );
+    const specifics = [
+      ["DND5E.SpellCastTime", castingTime],
+      ["DND5E.SpellHeader.Range", labels.description.range || labels.range],
+      ["DND5E.Components", labels.components.full],
+      ["DND5E.Duration", labels.concentrationDuration]
+    ];
+    const dl = document.createElement("dl");
+    dl.classList.add("item-entry-specifics");
+    for ( const [label, description] of specifics ) {
+      const div = document.createElement("div");
+      const dt = document.createElement("dt");
+      dt.innerText = game.i18n.localize(label);
+      const dd = document.createElement("dd");
+      dd.innerText = description;
+      div.append(dt, dd);
+      dl.append(div);
+    }
+    details.append(dl);
+
+    const template = document.createElement("template");
+    template.append(details, ...description);
+
+    /**
+     * A hook event that fires after an embedded spell with details is rendered.
+     * @function dnd5e.renderEmbeddedSpell
+     * @memberof hookEvents
+     * @param {Item5e} item                     Spell being embedded.
+     * @param {HTMLTemplateElement} template    Template whose children will be embedded.
+     * @param {DocumentHTMLEmbedConfig} config  Configuration for embedding behavior.
+     * @param {EnrichmentOptions} options       Original enrichment options.
+     */
+    Hooks.call("dnd5e.renderEmbeddedSpell", this.parent, template, config, options);
+
+    return template.children;
+  }
+
+  /* -------------------------------------------- */
   /*  Socket Event Handlers                       */
   /* -------------------------------------------- */
 
@@ -578,17 +736,17 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     const system = data.system ?? {};
 
     // Set as prepared for NPCs, and not prepared for PCs
-    if ( ["character", "npc"].includes(this.parent.actor.type) && !("prepared" in system) ) {
-      this.updateSource({ prepared: Number(this.parent.actor.type === "npc" || (this.level < 1)) });
+    if ( this.parent.actor?.system.isCreature && !("prepared" in system) ) {
+      this.updateSource({ prepared: Number(this.parent.actor.system.isNPC || (this.level < 1)) });
     }
 
-    if ( ["atwill", "innate"].includes(system.method) || this.sourceClass ) return;
+    if ( ["atwill", "innate"].includes(system.method) || this.sourceItem ) return;
     const classes = new Set(Object.keys(this.parent.actor.spellcastingClasses));
     if ( !classes.size ) return;
 
     // Set the source class, and ensure the preparation mode matches if adding a prepared spell to an alt class
     const setClass = cls => {
-      this.updateSource({ sourceClass: cls, method: this.parent.actor.classes[cls].spellcasting.type });
+      this.updateSource({ sourceItem: `class:${cls}`, method: this.parent.actor.classes[cls].spellcasting.type });
     };
 
     // If preparation mode matches an alt spellcasting type and matching class exists, set as that class

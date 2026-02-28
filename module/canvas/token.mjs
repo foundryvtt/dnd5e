@@ -67,7 +67,7 @@ export default class Token5e extends foundry.canvas.placeables.Token {
       if ( ignoreDifficult ) return cost;
 
       // Check difficult due to occupied tokens
-      if ( !this.layer.isOccupiedGridSpaceDifficult(to, this, {preview}) ) return cost;
+      if ( !this.layer.isOccupiedGridSpaceDifficult(to, this, { preview }) ) return cost;
 
       // Difficult terrain due to occupied grid space
       return cost + distance;

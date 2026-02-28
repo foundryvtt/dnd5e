@@ -136,8 +136,8 @@ export default class Award extends Application5e {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _onRender(context, options) {
-    super._onRender(context, options);
+  async _onRender(context, options) {
+    await super._onRender(context, options);
     this._validateForm();
   }
 
@@ -262,7 +262,7 @@ export default class Award extends Application5e {
    * @param {Map<Actor5e|Item5e, object>} [config.results]  Results of the award operation.
    */
   static async awardXP(amount, destinations, { each=false, origin, results=new Map() }={}) {
-    destinations = destinations.filter(d => ["character", "group"].includes(d.type));
+    destinations = destinations.filter(d => d.system.isCharacter || d.system.isGroup);
     if ( !amount || !destinations.length ) return;
 
     const xp = origin?.system.details?.xp;
@@ -329,7 +329,7 @@ export default class Award extends Application5e {
    * Regular expression used to match the /award command in chat messages.
    * @type {RegExp}
    */
-  static COMMAND_PATTERN = new RegExp(/^\/award(?:\s|$)/i);
+  static COMMAND_PATTERN = new RegExp(/^(?:<p>)?\/award(?:\s|<\/p>$|$)/i);
 
   /* -------------------------------------------- */
 
@@ -402,7 +402,7 @@ export default class Award extends Application5e {
    * @returns {{currency: Record<string, number>, xp: number, party: boolean}}
    */
   static parseAwardCommand(message) {
-    const command = message.replace(this.COMMAND_PATTERN, "").toLowerCase();
+    const command = message.replace(/^<p>|<\/p>$/gi, "").replace(this.COMMAND_PATTERN, "").toLowerCase();
 
     const currency = {};
     let each = false;

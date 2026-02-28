@@ -58,6 +58,16 @@ Hooks.once("init", function() {
   globalThis.dnd5e = game.dnd5e = Object.assign(game.system, globalThis.dnd5e);
   utils.log(`Initializing the D&D Fifth Game System - Version ${dnd5e.version}\n${DND5E.ASCII}`);
 
+  /**
+   * Suppress some known deprecations.
+   * @deprecated
+   * @since 5.3.0
+   */
+  CONFIG.compatibility.excludePatterns.push(/numeric #mode/, /CONST\.ACTIVE_EFFECT_MODES/, /ContextMenuEntry#/,
+    /foundry\.data\.operators\.ForcedDeletion/, /foundry\.utils\.buildRelativeUuid/, /CONFIG.ChatMessage.modes/,
+    /core\.rollMode/, /ChatMessage\.applyRollMode/, /Scene#templates/, /MeasuredTemplate/, /MeasuredTemplateDocument/,
+    /core\.gridTemplates/, /core\.coneTemplateType/, /ControlIcon#refresh/);
+
   // Record Configuration Values
   CONFIG.DND5E = DND5E;
   CONFIG.ActiveEffect.documentClass = documents.ActiveEffect5e;
@@ -65,7 +75,6 @@ Hooks.once("init", function() {
   CONFIG.Actor.collection = dataModels.collection.Actors5e;
   CONFIG.Actor.documentClass = documents.Actor5e;
   CONFIG.Adventure.documentClass = documents.Adventure5e;
-  CONFIG.Canvas.layers.tokens.layerClass = CONFIG.Token.layerClass = canvas.layers.TokenLayer5e;
   CONFIG.ChatMessage.documentClass = documents.ChatMessage5e;
   CONFIG.Combat.documentClass = documents.Combat5e;
   CONFIG.Combatant.documentClass = documents.Combatant5e;
@@ -81,6 +90,7 @@ Hooks.once("init", function() {
   CONFIG.User.documentClass = documents.User5e;
   CONFIG.time.roundTime = 6;
   Roll.TOOLTIP_TEMPLATE = "systems/dnd5e/templates/chat/roll-breakdown.hbs";
+  CONFIG.Dice.BasicDie = CONFIG.Dice.terms.d = dice.BasicDie;
   CONFIG.Dice.BasicRoll = dice.BasicRoll;
   CONFIG.Dice.DamageRoll = dice.DamageRoll;
   CONFIG.Dice.D20Die = dice.D20Die;
@@ -91,6 +101,9 @@ Hooks.once("init", function() {
   CONFIG.ui.combat = applications.combat.CombatTracker5e;
   CONFIG.ui.items = applications.item.ItemDirectory5e;
   CONFIG.ux.DragDrop = DragDrop5e;
+
+  if ( game.release.generation < 14 ) CONFIG.Token.layerClass = canvas.layers.TokenLayer5e;
+  CONFIG.Canvas.layers.tokens.layerClass = canvas.layers.TokenLayer5e;
 
   // Register System Settings
   registerSystemSettings();
@@ -110,7 +123,7 @@ Hooks.once("init", function() {
   if ( !game.settings.get("dnd5e", "sanityScore") ) delete DND5E.abilities.san;
 
   // Legacy rules.
-  if ( game.settings.get("dnd5e", "rulesVersion") === "legacy" ) applyLegacyRules();
+  if ( dnd5e.settings.rulesVersion === "legacy" ) applyLegacyRules();
 
   // Register system
   DND5E.SPELL_LISTS.forEach(uuid => dnd5e.registry.spellLists.register(uuid));
@@ -123,7 +136,7 @@ Hooks.once("init", function() {
   CONFIG.Dice.rolls = [dice.BasicRoll, dice.D20Roll, dice.DamageRoll];
 
   // Hook up system data types
-  CONFIG.ActiveEffect.dataModels = dataModels.activeEffect.config;
+  Object.assign(CONFIG.ActiveEffect.dataModels, dataModels.activeEffect.config);
   CONFIG.Actor.dataModels = dataModels.actor.config;
   CONFIG.ChatMessage.dataModels = dataModels.chatMessage.config;
   CONFIG.Item.dataModels = dataModels.item.config;
@@ -214,6 +227,11 @@ Hooks.once("init", function() {
     types: ["dnd5e.rotateArea"]
   });
 
+  DocumentSheetConfig.registerSheet(RollTable, "dnd5e", applications.RollTableSheet5e, {
+    makeDefault: true,
+    label: "DND5E.SheetClass.RollTable"
+  });
+
   CONFIG.Token.prototypeSheetClass = applications.PrototypeTokenConfig5e;
   DocumentSheetConfig.unregisterSheet(TokenDocument, "core", foundry.applications.sheets.TokenConfig);
   DocumentSheetConfig.registerSheet(TokenDocument, "dnd5e", applications.TokenConfig5e, {
@@ -293,7 +311,7 @@ function _configureTrackableAttributes() {
     value: [
       ...common.value,
       ...Object.keys(DND5E.skills).map(skill => `skills.${skill}.passive`),
-      ...Object.keys(DND5E.senses).map(sense => `attributes.senses.${sense}`),
+      ...Object.keys(DND5E.senses).map(sense => `attributes.senses.ranges.${sense}`),
       "attributes.hp.temp", "attributes.spell.attack", "attributes.spell.dc"
     ]
   };
@@ -347,7 +365,7 @@ function _configureConsumableAttributes() {
     "attributes.ac.flat",
     "attributes.hp.value",
     "attributes.exhaustion",
-    ...Object.keys(DND5E.senses).map(sense => `attributes.senses.${sense}`),
+    ...Object.keys(DND5E.senses).map(sense => `attributes.senses.ranges.${sense}`),
     ...Object.keys(DND5E.movementTypes).map(type => `attributes.movement.${type}`),
     ...Object.keys(DND5E.currencies).map(denom => `currency.${denom}`),
     "details.xp.value",
@@ -483,7 +501,7 @@ Hooks.once("i18nInit", () => {
   // Set up status effects. Explicitly performed after init and before prelocalization.
   _configureStatusEffects();
 
-  if ( game.settings.get("dnd5e", "rulesVersion") === "legacy" ) {
+  if ( dnd5e.settings.rulesVersion === "legacy" ) {
     const { translations, _fallback } = game.i18n;
     foundry.utils.mergeObject(translations, {
       "TYPES.Item": {

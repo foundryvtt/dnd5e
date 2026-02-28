@@ -330,8 +330,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
     const updates = {};
     const rolls = [];
     const autoRecharge = game.settings.get("dnd5e", "autoRecharge");
-    const shouldRecharge = periods.includes("turnStart") && (this.parent.actor.type === "npc")
-      && (autoRecharge !== "no");
+    const shouldRecharge = periods.includes("turnStart") && this.parent.actor.system.isNPC && (autoRecharge !== "no");
     const recharge = async doc => {
       const config = { apply: false };
       const message = { create: autoRecharge !== "silent" };

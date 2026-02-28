@@ -62,7 +62,10 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     },
     activities: {
       template: "systems/dnd5e/templates/items/activities.hbs",
-      templates: ["systems/dnd5e/templates/shared/activities.hbs"],
+      templates: [
+        "systems/dnd5e/templates/inventory/columns/uses.hbs",
+        "systems/dnd5e/templates/shared/activities.hbs"
+      ],
       scrollable: [""]
     },
     advancement: {
@@ -258,10 +261,9 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
         }
       }
       if ( !activity.canConfigure ) return arr;
-      const { _id: id, name, img, labels, sort } = activity.prepareSheetContext();
+      const { _id: id, name, img, labels, sort, uses } = activity.prepareSheetContext();
       const descriptor = activityMap[id] = {
-        id, name, sort,
-        img: { src: img, svg: img?.endsWith(".svg") },
+        id, img, name, sort, uses,
         riders: new Set(),
         subtitle: labels?.activation ?? "",
         uuid: activity.uuid
@@ -288,7 +290,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
    * @protected
    */
   async _prepareAdvancementContext(context, options) {
-    context.advancement = this._getAdvancement();
+    context.advancement = await this._getAdvancement();
     return context;
   }
 
@@ -342,7 +344,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
 
     // If using modern rules, do not show redundant artificer progression unless it is already selected.
     context.spellProgression = { ...CONFIG.DND5E.spellProgression };
-    if ( (game.settings.get("dnd5e", "rulesVersion") === "modern")
+    if ( (dnd5e.settings.rulesVersion === "modern")
       && (this.item.system.spellcasting?.progression !== "artificer") ) delete context.spellProgression.artificer;
     context.spellProgression = Object.entries(context.spellProgression).map(([value, config]) => {
       const group = CONFIG.DND5E.spellcasting[config.type]?.label ?? "";
@@ -455,13 +457,13 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
 
   /**
    * Get the display object used to show the advancement tab.
-   * @returns {object}     Object with advancement data grouped by levels.
+   * @returns {Promise<object>}  Object with advancement data grouped by levels.
    */
-  _getAdvancement() {
+  async _getAdvancement() {
     if ( !this.item.system.advancement ) return {};
 
     const advancement = {};
-    const configMode = !this.item.parent || (this._mode === ItemSheet5e.MODES.EDIT);
+    const configMode = !this.item.parent || this.isEditMode;
     const legacyDisplay = this.options.legacyDisplay;
     const maxLevel = this.item.parent ? (this.item.system.levels ?? this.item.class?.system.levels
       ?? this.item.parent.system.details?.level ?? -1) : -1;
@@ -487,19 +489,19 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     // All other advancements by level
     for ( let [level, advancements] of Object.entries(this.item.advancement.byLevel) ) {
       if ( !configMode ) advancements = advancements.filter(a => a.appliesToClass);
-      const items = advancements.map(advancement => ({
+      const items = await Promise.all(advancements.map(async advancement => ({
         id: advancement.id,
         uuid: advancement.uuid,
         order: advancement.sortingValueForLevel(level),
         title: advancement.titleForLevel(level, { configMode, legacyDisplay }),
         icon: advancement.icon,
         classRestriction: advancement.classRestriction,
-        summary: advancement.summaryForLevel(level, { configMode, legacyDisplay }),
+        summary: await advancement.summaryForLevel(level, { configMode, legacyDisplay }),
         configured: advancement.configuredForLevel(level),
         tags: this._getAdvancementTags(advancement),
         value: advancement.valueForLevel?.(level),
         classes: [advancement.icon?.endsWith(".svg") ? "svg" : ""].filterJoin(" ")
-      }));
+      })));
       if ( !items.length ) continue;
       advancement[level] = {
         items: items.sort((a, b) => a.order.localeCompare(b.order, game.i18n.lang)),
@@ -518,7 +520,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
    * @protected
    */
   _getAdvancementTags(advancement) {
-    if ( this.item.isEmbedded && (this._mode !== this.constructor.MODES.EDIT) ) return [];
+    if ( this.item.isEmbedded && !this.isEditMode ) return [];
     const tags = [];
     if ( advancement.classRestriction === "primary" ) {
       tags.push({
@@ -539,7 +541,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
   /**
    * Get the base weapons and tools based on the selected type.
    * @param {ApplicationRenderContext} context  Context being prepared.
-   * @returns {Promise<FormSelectOptions[]|null>}
+   * @returns {Promise<FormSelectOption[]|null>}
    * @protected
    */
   async _getBaseItemOptions(context) {
@@ -669,7 +671,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     }
 
     if ( this.tabGroups.primary === "effects" ) {
-      return ActiveEffect.implementation.create({
+      return ActiveEffect.implementation.createDialog({
         name: this.document.name,
         img: this.document.img,
         origin: this.document.uuid
@@ -1030,9 +1032,12 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     }
 
     // If no advancements need to be applied, just add them to the item
-    const advancementArray = this.item.system.toObject().advancement;
-    advancementArray.push(...advancements.map(a => a.toObject()));
-    this.item.update({"system.advancement": advancementArray});
+    this.item.update({
+      "system.advancement": advancements.reduce((obj, a) => {
+        obj[a.id] = a.toObject();
+        return obj;
+      }, {})
+    });
   }
 
   /* -------------------------------------------- */

@@ -2,7 +2,7 @@ import BaseActivityData from "./base-activity.mjs";
 import AppliedEffectField from "./fields/applied-effect-field.mjs";
 
 const {
-  ArrayField, BooleanField, DocumentIdField, DocumentUUIDField, NumberField, SchemaField, SetField, StringField
+  ArrayField, BooleanField, DocumentIdField, DocumentUUIDField, SchemaField, SetField, StringField
 } = foundry.data.fields;
 
 /**

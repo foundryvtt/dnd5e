@@ -179,7 +179,8 @@ export default class AbilityTemplate extends foundry.canvas.placeables.MeasuredT
    * @param {Event} event  Triggering event that ended the placement.
    */
   async _finishPlacement(event) {
-    this.layer._onDragLeftCancel(event);
+    if ( game.release.generation < 14 ) this.layer._onDragLeftCancel(event);
+    else this.layer.clearPreviewContainer();
     canvas.stage.off("mousemove", this.#events.move);
     canvas.stage.off("mouseup", this.#events.confirm);
     canvas.app.view.oncontextmenu = null;

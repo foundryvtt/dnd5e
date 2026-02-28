@@ -290,7 +290,7 @@ export default class ActivityUsageDialog extends Dialog5e {
     if ( this._shouldDisplay("consume.resources") ) {
       const addResources = (targets, keyPath) => {
         const consume = foundry.utils.getProperty(this.config, keyPath);
-        const isArray = foundry.utils.getType(consume) === "Array";
+        const isArray = Array.isArray(consume);
         for ( const [index, target] of targets.entries() ) {
           const value = (isArray && consume.includes(index))
             || (!isArray && (consume !== false) && (this.config.consume !== false));

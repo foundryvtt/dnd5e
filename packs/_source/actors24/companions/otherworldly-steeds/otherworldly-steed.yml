@@ -14,13 +14,15 @@ system:
       subtype: ''
       swarm: ''
     race: null
-    environment: ''
     cr: null
-    spellLevel: 0
-    source: {}
     ideal: ''
     bond: ''
     flaw: ''
+    habitat:
+      custom: ''
+      value: []
+    treasure:
+      value: []
   abilities:
     str:
       value: 18
@@ -29,6 +31,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     dex:
       value: 12
       proficient: 0
@@ -36,6 +48,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     con:
       value: 14
       proficient: 0
@@ -43,6 +65,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     int:
       value: 6
       proficient: 0
@@ -50,6 +82,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     wis:
       value: 12
       proficient: 0
@@ -57,6 +99,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     cha:
       value: 8
       proficient: 0
@@ -64,6 +116,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
   traits:
     size: lg
     di:
@@ -87,6 +149,8 @@ system:
     languages:
       value: []
       custom: Telepathy 1 mile (works only with you)
+      communication: {}
+    important: false
   currency:
     pp: 0
     gp: 0
@@ -334,22 +398,20 @@ system:
         mode: 0
       bonus: ''
     movement:
-      burrow: null
-      climb: null
-      fly: null
-      swim: null
-      walk: 60
+      walk: '60'
       units: null
       hover: false
+      ignoredDifficultTerrain: []
     attunement:
       max: 3
     senses:
-      darkvision: null
-      blindsight: null
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: null
+        blindsight: null
+        tremorsense: null
+        truesight: null
     spellcasting: int
     exhaustion: 0
     concentration:
@@ -373,23 +435,31 @@ system:
       tempmax: 0
       formula: 0d10 + 5
     death:
-      ability: ''
       roll:
         min: null
         max: null
         mode: 0
       success: 0
       failure: 0
+      bonuses:
+        save: ''
+    spell:
+      level: 0
+    loyalty: {}
+    price:
+      value: null
+      denomination: gp
   resources:
     legact:
-      value: 0
       max: 0
+      spent: 0
     legres:
-      value: 0
       max: 0
+      spent: 0
     lair:
       value: false
       initiative: null
+      inside: false
   source:
     revision: 1
     rules: '2024'
@@ -399,7 +469,7 @@ _id: phbmobOtherworld
 img: ''
 prototypeToken:
   name: Otherworldly Steed
-  displayName: 0
+  displayName: 20
   actorLink: true
   appendNumber: false
   prependAdjective: false
@@ -421,7 +491,7 @@ prototypeToken:
   rotation: 0
   alpha: 1
   disposition: 1
-  displayBars: 0
+  displayBars: 20
   bar1:
     attribute: attributes.hp
   bar2:
@@ -503,12 +573,13 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: you regain Hit Points from a spell
       activities: {}
       enchant: {}
       identifier: life-bond
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     _id: phbaoiLifeBond00
@@ -527,13 +598,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1740680159533
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!phbmobOtherworld.phbaoiLifeBond00'
   - name: Otherworldly Slam
     system:
@@ -559,6 +628,7 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
       activities:
@@ -598,7 +668,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
               type: ''
@@ -639,10 +709,15 @@ items:
           sort: 0
           name: ''
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       enchant: {}
       identifier: otherworldly-slam
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     _id: phbaoiOtherworld
@@ -661,13 +736,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1740680159533
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!phbmobOtherworld.phbaoiOtherworld'
   - name: Fell Glare
     system:
@@ -696,6 +769,7 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: Fiend Only
       activities:
@@ -723,13 +797,14 @@ items:
             chatFlavor: ''
           duration:
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
             concentration: false
           effects:
             - _id: mvCvu3ezA2FV5IeR
               onSave: false
+              level: {}
           range:
             value: '60'
             units: ft
@@ -743,7 +818,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: '1'
               type: creature
@@ -764,9 +839,16 @@ items:
             spent: 0
             recovery: []
           sort: 0
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       enchant: {}
       identifier: fell-glare
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     _id: phbaoiFellGlareF
@@ -799,13 +881,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.0.0
-          createdTime: 1725918190159
-          modifiedTime: 1725984124938
-          lastModifiedBy: dnd5ebuilder0000
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!phbmobOtherworld.phbaoiFellGlareF.mvCvu3ezA2FV5IeR
     folder: null
@@ -820,13 +900,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1740680159533
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!phbmobOtherworld.phbaoiFellGlareF'
   - name: Fey Step
     system:
@@ -853,6 +931,7 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: Fey Only
       activities:
@@ -896,7 +975,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: '1'
               type: space
@@ -916,10 +995,15 @@ items:
           sort: 0
           name: Teleport
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       enchant: {}
       identifier: fey-step
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     _id: phbaoiFeyStepFey
@@ -938,13 +1022,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1740680159533
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!phbmobOtherworld.phbaoiFeyStepFey'
   - name: Healing Touch
     system:
@@ -971,6 +1053,7 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: Celestial Only
       activities:
@@ -998,7 +1081,7 @@ items:
             chatFlavor: ''
           duration:
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
             concentration: false
@@ -1016,7 +1099,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: '1'
               type: creature
@@ -1041,9 +1124,16 @@ items:
             spent: 0
             recovery: []
           sort: 0
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       enchant: {}
       identifier: healing-touch
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     _id: phbaoiHealingTou
@@ -1058,13 +1148,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1740680159533
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!phbmobOtherworld.phbaoiHealingTou'
 effects: []
 folder: l9ar6UzbvIRDyYmA
@@ -1076,11 +1164,11 @@ flags:
     showTokenPortrait: false
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
-  systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425914720
-  modifiedTime: 1745256827723
-  lastModifiedBy: dnd5ebuilder0000
   exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  createdTime: 1771452720797
+  modifiedTime: 1771452720797
+  lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!phbmobOtherworld'

@@ -72,7 +72,9 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
    * @returns {DamageApplicationOptions}
    */
   getTargetOptions(uuid) {
-    if ( !this.#targetOptions.has(uuid) ) this.#targetOptions.set(uuid, { multiplier: 1 });
+    if ( !this.#targetOptions.has(uuid) ) this.#targetOptions.set(uuid, {
+      multiplier: 1, originatingMessage: this.chatMessage
+    });
     return this.#targetOptions.get(uuid);
   }
 
@@ -125,16 +127,20 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
 
     // Calculate damage to apply
     const targetOptions = this.getTargetOptions(uuid);
-    const { temp, total, active } = this.calculateDamage(actor, targetOptions);
+    const { temp, tempMax, total, active } = this.calculateDamage(actor, targetOptions);
 
     const types = [];
     for ( const [change, values] of Object.entries(active) ) {
       if ( foundry.utils.getType(values) !== "Set" ) continue;
       for ( const type of values ) {
-        const config = CONFIG.DND5E.damageTypes[type] ?? CONFIG.DND5E.healingTypes[type];
-        if ( !config ) continue;
-        const data = { type, change, icon: config.icon };
-        types.push(data);
+        if ( type === "ALL" ) {
+          types.push({ type, change, icon: "systems/dnd5e/icons/svg/damage/all.svg" });
+        } else {
+          const config = CONFIG.DND5E.damageTypes[type] ?? CONFIG.DND5E.healingTypes[type];
+          if ( !config ) continue;
+          const data = { type, change, icon: config.icon };
+          types.push(data);
+        }
       }
     }
     const changeSources = types.reduce((acc, config) => acc + this.getChangeSourceButton(config, targetOptions), "");
@@ -151,8 +157,11 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
       <div class="calculated damage">
         ${total}
       </div>
-      <div class="calculated temp" data-tooltip="DND5E.HitPointsTemp">
+      <div class="calculated temp" data-tooltip="DND5E.HEAL.Type.Temporary">
         ${temp}
+      </div>
+      <div class="calculated temp-max" data-tooltip="DND5E.HEAL.Type.Maximum">
+        ${tempMax}
       </div>
       <menu class="damage-multipliers unlist"></menu>
     `;
@@ -185,17 +194,20 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
    */
   calculateDamage(actor, options) {
     const damages = actor.calculateDamage(this.damages, options);
-    let { amount, temp } = damages;
+    let { amount, temp, tempMax } = damages;
 
     let active = {
       modification: new Set(), resistance: new Set(), vulnerability: new Set(), immunity: new Set(), threshold: false
     };
     for ( const damage of damages ) {
-      if ( damage.active.modification ) active.modification.add(damage.type);
-      if ( damage.active.resistance ) active.resistance.add(damage.type);
-      if ( damage.active.vulnerability ) active.vulnerability.add(damage.type);
-      if ( damage.active.immunity ) active.immunity.add(damage.type);
-      if ( damage.active.threshold ) active.threshold = true;
+      for ( const category of Object.keys(active) ) {
+        if ( category === "threshold" ) {
+          if ( damage.active.threshold ) active.threshold = true;
+          continue;
+        }
+        if ( damage.active.all?.[category] ) active[category].add("ALL");
+        if ( damage.active.type?.[category] ) active[category].add(damage.type);
+      }
     }
     temp = Math.floor(Math.max(0, temp));
 
@@ -212,7 +224,7 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
     }
     active.threshold ||= options.ignore?.threshold;
 
-    return { temp, total: amount, active };
+    return { temp, tempMax, total: amount, active };
   }
 
   /* -------------------------------------------- */
@@ -250,7 +262,8 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
     else if ( (change === "immunity") && options.downgrade?.has(type) ) mode = "downgrade";
 
     let label = game.i18n.format(`DND5E.DamageApplication.Change.${change.capitalize()}`, {
-      type: CONFIG.DND5E.damageTypes[type]?.label ?? CONFIG.DND5E.healingTypes[type]?.label
+      type: type === "ALL" ? game.i18n.localize("DND5E.DAMAGE.All")
+        : CONFIG.DND5E.damageTypes[type]?.label ?? CONFIG.DND5E.healingTypes[type]?.label
     });
     if ( mode === "ignore" ) label = game.i18n.format("DND5E.DamageApplication.Ignoring", { source: label });
     if ( mode === "downgrade" ) label = game.i18n.format("DND5E.DamageApplication.Downgrading", { source: label });
@@ -267,15 +280,19 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
    * @param {DamageApplicationOptions} options
    */
   refreshListEntry(token, entry, options) {
-    const { active, temp, total } = this.calculateDamage(token, options);
+    const { active, temp, tempMax, total } = this.calculateDamage(token, options);
     const calculatedDamage = entry.querySelector(".calculated.damage");
     calculatedDamage.innerText = formatNumber(-total, { signDisplay: "exceptZero" });
     calculatedDamage.classList.toggle("healing", total < 0);
     calculatedDamage.dataset.tooltip = `DND5E.${total < 0 ? "Healing" : "Damage"}`;
-    calculatedDamage.hidden = !total && !!temp;
+    calculatedDamage.hidden = !total && (!!temp || !!tempMax);
     const calculatedTemp = entry.querySelector(".calculated.temp");
     calculatedTemp.innerText = temp;
     calculatedTemp.hidden = !temp;
+    const calculatedTempMax = entry.querySelector(".calculated.temp-max");
+    calculatedTempMax.innerText = formatNumber(-tempMax, { signDisplay: "always" });
+    calculatedTempMax.classList.toggle("healing", tempMax < 0);
+    calculatedTempMax.hidden = !tempMax;
 
     const pressedMultiplier = entry.querySelector('.multiplier-button[aria-pressed="true"]');
     if ( Number(pressedMultiplier?.dataset.multiplier) !== options.multiplier ) {
@@ -315,7 +332,7 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
     for ( const target of this.targetList.querySelectorAll("[data-target-uuid]") ) {
       const token = fromUuidSync(target.dataset.targetUuid);
       const options = this.getTargetOptions(target.dataset.targetUuid);
-      await token?.applyDamage(this.damages, { ...options, isDelta: true });
+      await token?.applyDamage(this.damages, { ...options, isDelta: true, origin: this.chatMessage });
     }
     if ( game.settings.get("dnd5e", "autoCollapseChatTrays") !== "manual" ) {
       this.open = false;

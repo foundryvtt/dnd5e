@@ -136,22 +136,23 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  static cleanData(source, options) {
-    this._cleanData(source, options);
-    return super.cleanData(source, options);
+  static cleanData(source, options, _state) {
+    this._cleanData(source, options, _state);
+    return super.cleanData(source, options, _state);
   }
 
   /* -------------------------------------------- */
 
   /**
    * Performs cleaning without calling DataModel.cleanData.
-   * @param {object} [source]         The source data
-   * @param {object} [options={}]     Additional options (see DataModel.cleanData)
+   * @param {object} [source]                           The source data
+   * @param {object} [options={}]                       Additional options (see DataModel.cleanData)
+   * @param {Partial<DataFieldCleaningState>} [_state]  Internal options used during cleaning recursion
    * @protected
    */
-  static _cleanData(source, options) {
+  static _cleanData(source, options, _state) {
     for ( const template of this._schemaTemplates ) {
-      template._cleanData(source, options);
+      template._cleanData(source, options, _state);
     }
   }
 
@@ -188,7 +189,7 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
    */
   async _preCreate(data, options, user) {
     const actor = this.parent.actor;
-    if ( (actor?.type !== "character") || !this.metadata?.singleton ) return;
+    if ( !actor?.system.isCharacter || !this.metadata?.singleton ) return;
     if ( actor.itemTypes[data.type]?.length ) {
       ui.notifications.error("DND5E.ACTOR.Warning.Singleton", {
         format: {

@@ -126,7 +126,7 @@ export default class EncounterActorSheet extends MultiActorSheet {
     const formatter = new Intl.NumberFormat(game.i18n.lang);
     const members = await this.actor.system.getMembers();
     context.members = await Promise.all(members.map(async ({ actor, quantity }, index) => {
-      if ( actor.type !== "npc" ) return null;
+      if ( !actor.system.isNPC ) return null;
       const { name, system, uuid } = actor;
       const member = { index, name, quantity, uuid };
       member.cr = system.details.cr;

@@ -24,7 +24,8 @@
 "TYPES.ChatMessage": {
   "request": "Request Message",
   "rest": "Rest Message",
-  "turn": "Combat Turn Message"
+  "turn": "Combat Turn Message",
+  "usage": "Usage Message"
 },
 
 "TYPES.Item.background": "Background",
@@ -371,6 +372,7 @@
       "other": "Max {points} points per score"
     },
     "Details": "Improvement Details",
+    "EffectTargetHint": "This score is being modified by an Active Effect. Its final value will be {value}.",
     "Feat": {
       "ASIName": "Ability Score Improvement Feat",
       "Hint": "Drop a feat here to choose one instead of an ability score improvement."
@@ -441,14 +443,35 @@
     "BackgroundProficiencies": "Background Proficiencies",
     "ChooseLanguages": "Choose Languages"
   },
+  "Deletion": {
+    "Delete": {
+      "Message": "Deleting this item will also delete all advancement choices made for it. These changes will be removed from your character as long as the checkbox below is checked.",
+      "Title": "Confirm Deletion"
+    },
+    "LevelDown": {
+      "Message": "Decreasing the level for this class will also delete all advancement choice made for it. These changes will be removed from your character as long as the checkbox below is checked.",
+      "Title": "Decrease Level"
+    },
+    "Label": "Remove Changes",
+    "Options": "Options"
+  },
   "HitPoints": {
     "Action": {
-      "Roll": "Roll {die}"
+      "RollClass": "Roll {class} Hit Points",
+      "RollDie": "Roll {die}"
     },
     "Average": "Average",
+    "Breakdown": {
+      "Average": "Avg.",
+      "Bonus": "Bonus",
+      "Final": "Final",
+      "Max": "Max",
+      "Previous": "Prev.",
+      "Roll": "Roll"
+    },
     "Hint": "Track the player's hit points for each level in the class.",
     "MaxAtFirstLevel": "Max at 1st Level: <strong>{max}</strong>",
-    "Roll": "Roll {class} Hit Points",
+    "Options": "Options",
     "Starting": "Hit Points at 1st Level",
     "TakeAverage": "Take Average",
     "Title": "Hit Points",
@@ -510,6 +533,7 @@
       }
     },
     "Hint": "Present the player with a choice of items (such as equipment, features, or spells) that they can choose for their character at one or more levels.",
+    "Options": "Options",
     "Replacement": {
       "None": "No Replacement",
       "Title": "replace"
@@ -646,6 +670,9 @@
     }
   },
   "Size": {
+    "Action": {
+      "SelectSize": "Select Size"
+    },
     "DefaultHint": {
       "Multiple": "Choose your size from either {sizes}.",
       "Single": "Your size is {size}."
@@ -700,7 +727,9 @@
   "Trait": {
     "Action": {
       "AddChoice": "Add Choice",
-      "RemoveChoice": "Remove Choice"
+      "RemoveChoice": "Remove Choice",
+      "RemoveTrait": "Remove Trait",
+      "SelectTrait": "Select Trait"
     },
     "ChoicesRemaining": "Select {count} more {type}",
     "Details": "Trait Details",
@@ -774,9 +803,6 @@
 "DND5E.AdvancementConfiguredIncomplete": "Not Configured",
 "DND5E.AdvancementCustomIcon": "Custom Icon",
 "DND5E.AdvancementCustomTitle": "Custom Title",
-"DND5E.AdvancementDeleteConfirmationLabel": "Remove advancement changes",
-"DND5E.AdvancementDeleteConfirmationMessage": "Deleting this item will also delete all advancement choices made for it. These changes will be removed from your character as long as the checkbox below is checked.",
-"DND5E.AdvancementDeleteConfirmationTitle": "Confirm Deletion",
 "DND5E.AdvancementFlowDropAreaHint": "Drop an Item here to choose it.",
 "DND5E.AdvancementHint": "Hint",
 "DND5E.AdvancementItemTypeInvalidWarning": "{type} items cannot be added with this advancement type.",
@@ -815,6 +841,15 @@
 "DND5E.AttunementOverride": "Override attunement",
 "DND5E.Attuned": "Attuned",
 "DND5E.AreaOfEffect": {
+  "Description": {
+    "Height": "high",
+    "Length": "long",
+    "Radius": "radius",
+    "SizeSimple": "{number}-{unit}",
+    "SizeType": "{number}-{unit}-{type}",
+    "Thickness": "thick",
+    "Width": "wide"
+  },
   "Label": "Area of Effect",
   "Size": {
     "Label": "Size",
@@ -1986,6 +2021,7 @@
 "DND5E.Current": "Current",
 
 "DND5E.DAMAGE": {
+  "All": "All Damage",
   "FIELDS": {
     "damage": {
       "label": "Damage",
@@ -2059,6 +2095,12 @@
       "Delete": "Delete Damage Part"
     }
   },
+  "PhysicalBypass": {
+    "Description": "{damageTypes} from attacks that are not {bypassTypes}",
+    "DescriptionShort": "Bypassed by {type} Sources",
+    "Hint": "These weapon properties will bypass damage resistance for physical damage.",
+    "Label": "Physical Bypasses"
+  },
   "Scaling": {
     "Half": "Every Other Level",
     "HalfCantrip": "Half Cantrip Scaling",
@@ -2066,16 +2108,30 @@
     "Whole": "Every Level",
     "WholeCantrip": "Cantrip Scaling"
   },
-  "Title": "Damage"
+  "Title": "Damage",
+  "Type": {
+    "Acid": "Acid",
+    "Bludgeoning": "Bludgeoning",
+    "Cold": "Cold",
+    "Fire": "Fire",
+    "Force": "Force",
+    "Lightning": "Lightning",
+    "Necrotic": "Necrotic",
+    "Piercing": "Piercing",
+    "Poison": "Poison",
+    "Psychic": "Psychic",
+    "Radiant": "Radiant",
+    "Slashing": "Slashing",
+    "Thunder": "Thunder"
+  }
 },
 
 "DND5E.DamImm": "Damage Immunities",
 "DND5E.DamMod": "Damage Modification",
 "DND5E.DamRes": "Damage Resistances",
 "DND5E.DamVuln": "Damage Vulnerabilities",
+
 "DND5E.Damage": "Damage",
-"DND5E.DamageAcid": "Acid",
-"DND5E.DamageAll": "All Damage",
 "DND5E.DamageApplication": {
   "Change": {
     "Modification": "{type} Modification",
@@ -2087,32 +2143,16 @@
   "Downgrading": "Downgrading {source} to Resistance",
   "Ignoring": "Ignoring {source}"
 },
-"DND5E.DamageBludgeoning": "Bludgeoning",
-"DND5E.DamageCold": "Cold",
-"DND5E.DamageFire": "Fire",
-"DND5E.DamageForce": "Force",
-"DND5E.DamageLightning": "Lightning",
 "DND5E.DamageModification": {
   "Label": "Damage Modification",
   "Hint": "Formulas for amounts that will be added to typed damage applied to this actor. Negative values will reduce the damage taken.",
   "BypassHint": "These weapon properties will bypass damage modification for physical damage."
 },
-"DND5E.DamageNecrotic": "Necrotic",
-"DND5E.DamagePiercing": "Piercing",
-"DND5E.DamagePhysical": "Non-Magical Physical",
-"DND5E.DamagePhysicalBypass": "Physical Bypasses",
-"DND5E.DamagePhysicalBypassHint": "These weapon properties will bypass damage resistance for physical damage.",
-"DND5E.DamagePhysicalBypasses": "{damageTypes} from attacks that are not {bypassTypes}",
-"DND5E.DamagePhysicalBypassesShort": "Bypassed by {type} Sources",
-"DND5E.DamagePoison": "Poison",
-"DND5E.DamagePsychic": "Psychic",
-"DND5E.DamageRadiant": "Radiant",
 "DND5E.DamageRoll": "Damage Roll",
-"DND5E.DamageSlashing": "Slashing",
 "DND5E.DamageThreshold": "Damage Threshold",
-"DND5E.DamageThunder": "Thunder",
 "DND5E.DamageType": "Damage Type",
 "DND5E.DamageTypes": "Damage Types",
+
 "DND5E.Dawn": "Dawn",
 "DND5E.Day": "Day",
 "DND5E.DeathSave": "Death Saves",
@@ -2869,7 +2909,15 @@
 "DND5E.Formula": "Formula",
 "DND5E.FormulaMalformedError": "Problem preparing the {property} formula within {name}.",
 "DND5E.FormulaMissingReferenceWarn": "The {property} formula within {name} has references to missing data: {references}",
-"DND5E.Gear": "Gear",
+
+"DND5E.Gear": {
+  "Action": {
+    "Add": "Add to Gear",
+    "Remove": "Remove from Gear"
+  },
+  "Label": "Gear"
+},
+
 "DND5E.Gender": "Gender",
 "DND5E.GlobalBonus": "Global Bonus",
 "DND5E.GrantedAbilities": "Granted Abilities",
@@ -3006,13 +3054,20 @@
       }
     }
   },
+  "HealingButton": "Healing",
+  "HealingRoll": "Healing Roll",
   "Hint": "Heal a creature",
-  "Title": "Heal"
+  "Title": "Heal",
+  "Type": {
+    "Healing": "Hit Points",
+    "HealingShort": "Healing",
+    "Maximum": "Maximum Hit Points",
+    "MaximumShort": "Max HP",
+    "Temporary": "Temporary Hit Points",
+    "TemporaryShort": "Temp HP"
+  }
 },
 
-"DND5E.Healing": "Healing",
-"DND5E.HealingRoll": "Healing Roll",
-"DND5E.HealingTemp": "Temporary Hit Points",
 "DND5E.Height": "Height",
 
 "DND5E.HITPOINTS": {
@@ -3180,6 +3235,7 @@
     "Finesse": "Finesse",
     "Firearm": "Firearm",
     "Focus": "Focus",
+    "Gear": "Gear",
     "Heavy": "Heavy",
     "Light": "Light",
     "Loading": "Loading",
@@ -3214,9 +3270,13 @@
 "DND5E.JackOfAllTrades": "Jack of all Trades",
 
 "DND5E.JOURNALENTRY": {
+  "Action": {
+    "ConfigureNavigation": "Configure Navigation"
+  },
   "Navigation": {
     "Next": "Next",
     "Previous": "Previous",
+    "Title": "Navigation",
     "Up": "Up"
   }
 },
@@ -3450,7 +3510,7 @@
     "InvalidLevel": "must be at least level {level}",
     "Message": "{actor} {requirements} in order to take this {type}.",
     "MissingItem": "must have previously taken {items}",
-    "NotRepeatable": "must not have taken this before"
+    "NotRepeatable": "must not have taken {name} before"
   }
 },
 "DND5E.Price": "Price",
@@ -3853,22 +3913,23 @@
 "DND5E.Shape": "Shape",
 
 "DND5E.SheetClass": {
-  "Character": "Default 5e Character Sheet",
-  "ClassSummary": "Default 5e Class Summary Sheet",
-  "Container": "Default 5e Container Sheet",
-  "DifficultTerrain": "Default 5e Difficult Terrain Sheet",
-  "Encounter": "Default 5e Encounter Sheet",
-  "Group": "Default 5e Group Sheet",
-  "Item": "Default 5e Item Sheet",
-  "JournalEntry": "Default 5e Journal Entry Sheet",
-  "JournalEntryLegacy": "Legacy 5e Journal Entry Sheet",
-  "MapLocation": "Default 5e Map Location Sheet",
-  "NPC": "Default 5e NPC Sheet",
-  "RotateArea": "Default 5e Rotate Area Sheet",
-  "Rule": "Default 5e Rule Sheet",
-  "SpellList": "Default 5e Spell List Sheet",
-  "Token": "Default 5e Token Sheet",
-  "Vehicle": "Default 5e Vehicle Sheet"
+  "Character": "D&D 5e Character Sheet",
+  "ClassSummary": "D&D 5e Class Summary Sheet",
+  "Container": "D&D 5e Container Sheet",
+  "DifficultTerrain": "D&D 5e Difficult Terrain Sheet",
+  "Encounter": "D&D 5e Encounter Sheet",
+  "Group": "D&D 5e Group Sheet",
+  "Item": "D&D 5e Item Sheet",
+  "JournalEntry": "D&D 5e Journal Entry Sheet",
+  "JournalEntryLegacy": "Legacy D&D 5e Journal Entry Sheet",
+  "MapLocation": "D&D 5e Map Location Sheet",
+  "NPC": "D&D 5e NPC Sheet",
+  "RollTable": "D&D 5e Roll Table Sheet",
+  "RotateArea": "D&D 5e Rotate Area Sheet",
+  "Rule": "D&D 5e Rule Sheet",
+  "SpellList": "D&D 5e Spell List Sheet",
+  "Token": "D&D 5e Token Sheet",
+  "Vehicle": "D&D 5e Vehicle Sheet"
 },
 
 "DND5E.SheetModeEdit": "Edit",
@@ -3994,6 +4055,10 @@
   }
 },
 
+"DND5E.SourceItem": {
+  "Label": "Source Item",
+  "LockedHint": "This item's source is automatically determined by the granting item and cannot be changed."
+},
 "DND5E.Special": "Special",
 "DND5E.SpecialHint": "Special values separated by semi-colons.",
 "DND5E.SpecialTraits": "Special Traits",
@@ -4007,6 +4072,21 @@
 },
 "DND5E.Speed": "Speed",
 "DND5E.SpeedSpecial": "Special Movement",
+
+"DND5E.SPELL": {
+  "Embed": {
+    "CastingTimeTrigger": "{castingTime}, which you take {trigger}",
+    "Tag": {
+      "Cantrip": "{school} Cantrip",
+      "CantripLegacy": "{school} cantrip",
+      "Classes": "{levelSchool} ({classes})",
+      "Leveled": "Level {level} {school}",
+      "LeveledLegacy": "{levelOrdinal}-level {school}",
+      "Ritual": "{levelSchool} (ritual)"
+    }
+  }
+},
+
 "DND5E.SpellAbility": "Spellcasting Ability",
 "DND5E.SpellAbilitySet": "Set as Primary Spellcasting Ability",
 "DND5E.SpellAdd": "Add Spell",
@@ -4078,6 +4158,7 @@
 "DND5E.SpellcastingClass": "{class} Spellcasting",
 "DND5E.SpellComponent": "Spell Component",
 "DND5E.SpellComponents": "Spell Components",
+"DND5E.SpellComponentsMaterial": "{components} ({materials})",
 "DND5E.SpellCreate": "Create Spell",
 "DND5E.SpellDC": "Spell DC",
 "DND5E.SpellDetails": "Spell Details",
@@ -4121,7 +4202,6 @@
   "Formula": "Preparation Formula",
   "Method": "Spellcasting Method"
 },
-"DND5E.SpellSourceClass": "Source Class",
 "DND5E.SpellPrepared": "Prepared",
 "DND5E.SpellProgArt": "Artificer",
 "DND5E.SpellProgAvailable": "Available slots",
@@ -4303,6 +4383,10 @@
         "label": "Summon Prompt",
         "hint": "Should the player be prompted to place the summons? Players will still be able to summon from the chat card if prompt is disabled."
       }
+    },
+    "tempHP": {
+      "label": "Temp HP",
+      "hint": "Grant the summoned creature temp HP, replacing any existing temp HP."
     }
   },
   "Action": {
@@ -4426,6 +4510,7 @@
       "Label": "Ally",
       "Counted": {
         "any": "any allies",
+        "each": "each ally",
         "every": "every ally",
         "one": "{number} ally",
         "other": "{number} allies"
@@ -4438,20 +4523,25 @@
       "Label": "Circle",
       "Counted": {
         "one": "{number} circle",
-        "other": "{number} circles"
+        "other": "{number} circles",
+        "oneSized": "{sizes} Circle",
+        "otherSized": "{number} {sizes} Circles"
       }
     },
     "Cone": {
       "Label": "Cone",
       "Counted": {
         "one": "{number} cone",
-        "other": "{number} cones"
+        "other": "{number} cones",
+        "oneSized": "{sizes} Cone",
+        "otherSized": "{number} {sizes} Cones"
       }
     },
     "Creature": {
       "Label": "Creature",
       "Counted": {
         "any": "any creatures",
+        "each": "each creature",
         "every": "every creature",
         "one": "{number} creature",
         "other": "{number} creatures"
@@ -4461,6 +4551,7 @@
       "Label": "Creature or Object",
       "Counted": {
         "any": "any creatures or objects",
+        "each": "each creature or object",
         "every": "every creature or object",
         "one": "{number} creature or object",
         "other": "{number} creatures or objects"
@@ -4470,27 +4561,34 @@
       "Label": "Cube",
       "Counted": {
         "one": "{number} cube",
-        "other": "{number} cubes"
+        "other": "{number} cubes",
+        "oneSized": "{sizes} Cube",
+        "otherSized": "{number} {sizes} Cubes"
       }
     },
     "Cylinder": {
       "Label": "Cylinder",
       "Counted": {
         "one": "{number} cylinder",
-        "other": "{number} cylinders"
+        "other": "{number} cylinders",
+        "oneSized": "{sizes} Cylinder",
+        "otherSized": "{number} {sizes} Cylinders"
       }
     },
     "Emanation": {
       "Label": "Emanation",
       "Counted": {
         "one": "{number} emanation",
-        "other": "{number} emanations"
+        "other": "{number} emanations",
+        "oneSized": "{sizes} Emanation",
+        "otherSized": "{number} {sizes} Emanations"
       }
     },
     "Enemy": {
       "Label": "Enemy",
       "Counted": {
         "any": "any enemies",
+        "each": "each enemy",
         "every": "every enemy",
         "one": "{number} enemy",
         "other": "{number} enemies"
@@ -4500,13 +4598,16 @@
       "Label": "Line",
       "Counted": {
         "one": "{number} line",
-        "other": "{number} lines"
+        "other": "{number} lines",
+        "oneSized": "{sizes} Line",
+        "otherSized": "{number} {sizes} Lines"
       }
     },
     "Object": {
       "Label": "Object",
       "Counted": {
         "any": "any objects",
+        "each": "each object",
         "every": "every object",
         "one": "{number} object",
         "other": "{number} objects"
@@ -4516,39 +4617,57 @@
       "Label": "Radius",
       "Counted": {
         "one": "{number} radius",
-        "other": "{number} radii"
+        "other": "{number} radii",
+        "oneSized": "{sizes} Radius",
+        "otherSized": "{number} {sizes} Radii"
       }
     },
     "Self": {
       "Label": "Self"
     },
-    "Sphere": {
-      "Label": "Sphere",
-      "Counted": {
-        "one": "{number} sphere",
-        "other": "{number} spheres"
-      }
-    },
     "Space": {
       "Label": "Space",
       "Counted": {
         "any": "any spaces",
+        "each": "each space",
         "every": "every space",
-        "one": "{number} space",
-        "other": "{number} spaces"
+        "one": "{number} Space",
+        "other": "{number} Spaces"
+      }
+    },
+    "Sphere": {
+      "Label": "Sphere",
+      "Counted": {
+        "one": "{number} sphere",
+        "other": "{number} spheres",
+        "oneSized": "{sizes} Sphere",
+        "otherSized": "{number} {sizes} Spheres"
+      }
+    },
+    "Special": {
+      "Label": "{special}",
+      "Counted": {
+        "any": "any {special}",
+        "each": "each {special}",
+        "every": "every {special}",
+        "one": "{number} {special}",
+        "other": "{number} {special}"
       }
     },
     "Square": {
       "Label": "Square",
       "Counted": {
         "one": "{number} square",
-        "other": "{number} squares"
+        "other": "{number} squares",
+        "oneSized": "{sizes} Square",
+        "otherSized": "{number} {sizes} Squares"
       }
     },
     "Target": {
       "Label": "Target",
       "Counted": {
         "any": "any targets",
+        "each": "each target",
         "every": "every target",
         "one": "{number} target",
         "other": "{number} targets"
@@ -4558,13 +4677,16 @@
       "Label": "Wall",
       "Counted": {
         "one": "{number} wall",
-        "other": "{number} walls"
+        "other": "{number} walls",
+        "oneSized": "{sizes} Wall",
+        "otherSized": "{number} {sizes} Walls"
       }
     },
     "WillingCreature": {
       "Label": "Willing Creature",
       "Counted": {
         "any": "any willing creatures",
+        "each": "each willing creature",
         "every": "every willing creature",
         "one": "{number} willing creature",
         "other": "{number} willing creatures"
@@ -4976,21 +5098,25 @@
 "DND5E.UNITS": {
   "DISTANCE": {
     "Foot": {
+      "Abbreviation": "ft",
       "Label": "Feet",
-      "Abbreviation": "ft"
+      "Template": "foot"
     },
     "Kilometer": {
+      "Abbreviation": "km",
       "Label": "Kilometers",
-      "Abbreviation": "km"
+      "Template": "kilometer"
     },
     "Label": "Distance Unit",
     "Meter": {
+      "Abbreviation": "m",
       "Label": "Meters",
-      "Abbreviation": "m"
+      "Template": "meter"
     },
     "Mile": {
+      "Abbreviation": "mi",
       "Label": "Miles",
-      "Abbreviation": "mi"
+      "Template": "mile"
     }
   },
   "TIME": {
@@ -5495,7 +5621,7 @@
   "DamageExtended": "<em>Hit:</em> {damage} damage",
   "DamageDouble": "{first} plus {second}",
   "DamageShort": "{formula} {type}",
-  "DamageLong": "{average} ({formula}) {type}",
+  "DamageLong": "{average} <span class=\"formula-group\">({formula})</span> {type}",
   "DC": "DC {dc} {check}",
   "DCPassiveShort": "DC {dc} passive {check}",
   "DCPassiveLong": "passive {check} score of {dc} or higher",

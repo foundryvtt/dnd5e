@@ -298,7 +298,7 @@ export default class AttributesFields {
       let multiplier = simplifyBonus(encumbrance.multipliers[threshold], rollData)
         * simplifyBonus(encumbrance.multipliers.overall, rollData);
       if ( threshold === "maximum" ) maximumMultiplier = multiplier;
-      if ( this.parent.type === "vehicle" ) {
+      if ( this.isVehicle ) {
         const { cargo } = attributes.capacity;
         base = convertWeight(cargo.value || Infinity, cargo.units, baseUnits[unitSystem]);
       }
@@ -353,7 +353,8 @@ export default class AttributesFields {
   static prepareHitPoints(hp, { advancement=[], mod=0, bonus=0 }={}) {
     const base = advancement.reduce((total, advancement) => total + advancement.getAdjustedTotal(mod), 0);
     hp.max = (hp.max ?? 0) + base + bonus;
-    if ( this.parent.hasConditionEffect("halfHealth") ) hp.max = Math.floor(hp.max * 0.5);
+    if ( this.parent.hasConditionEffect("halfHealth") ) hp.max *= 0.5;
+    hp.max = Math.floor(hp.max);
 
     hp.effectiveMax = Math.max(hp.max + (hp.tempmax ?? 0), 0);
     hp.value = Math.min(hp.value, hp.effectiveMax);
@@ -379,7 +380,7 @@ export default class AttributesFields {
     init.mod = ability.mod ?? 0;
 
     // Initiative proficiency
-    const isLegacy = game.settings.get("dnd5e", "rulesVersion") === "legacy";
+    const isLegacy = dnd5e.settings.rulesVersion === "legacy";
     const prof = this.attributes.prof ?? 0;
     const joat = flags.jackOfAllTrades && isLegacy;
     const ra = this.parent._isRemarkableAthlete(abilityId);
@@ -426,7 +427,7 @@ export default class AttributesFields {
     const heavilyEncumbered = statuses.has("heavilyEncumbered");
     const exceedingCarryingCapacity = statuses.has("exceedingCarryingCapacity");
     const units = this.attributes.movement.units ??= defaultUnits("length");
-    let reduction = game.settings.get("dnd5e", "rulesVersion") === "modern"
+    let reduction = dnd5e.settings.rulesVersion === "modern" && !this.traits?.ci?.value?.has("exhaustion")
       ? (this.attributes.exhaustion ?? 0) * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.speed ?? 0) : 0;
     reduction = convertLength(reduction, CONFIG.DND5E.defaultUnits.length.imperial, units);
     const bonus = simplifyBonus(this.attributes.movement.bonus, rollData);
@@ -474,8 +475,8 @@ export default class AttributesFields {
     else this.attributes.movement.units ??= race.system.movement.units;
 
     for ( const key of Object.keys(CONFIG.DND5E.senses) ) {
-      if ( !race.system.senses[key] || (!force && (this.attributes.senses[key] !== null)) ) continue;
-      this.attributes.senses[key] = race.system.senses[key];
+      if ( !race.system.senses.ranges[key] || (!force && (this.attributes.senses.ranges[key] !== null)) ) continue;
+      this.attributes.senses.ranges[key] = race.system.senses.ranges[key];
     }
     this.attributes.senses.special = [this.attributes.senses.special, race.system.senses.special].filterJoin(";");
     if ( force && race.system.senses.units ) this.attributes.senses.units = race.system.senses.units;

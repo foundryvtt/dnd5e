@@ -215,7 +215,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   async _preCreate(data, options, user) {
     if ( (await super._preCreate(data, options, user)) === false ) return false;
 
-    if ( (this.actor?.type === "npc") && !this.actorLink
+    if ( this.actor?.system.isNPC && !this.actorLink
       && foundry.utils.getProperty(this.actor, "system.attributes.hp.formula")?.trim().length ) {
       const autoRoll = options.dnd5e?.autoRollNPCHP ?? game.settings.get("dnd5e", "autoRollNPCHP");
       if ( autoRoll === "no" ) return;

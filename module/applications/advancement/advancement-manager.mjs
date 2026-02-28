@@ -30,7 +30,7 @@ export default class AdvancementManager extends Application5e {
 
   /** @override */
   static DEFAULT_OPTIONS = {
-    classes: ["advancement", "manager", "themed", "theme-light"], // TODO: Remove when flows converted to App V2.
+    classes: ["advancement", "manager"],
     window: {
       icon: "fa-solid fa-forward",
       title: "DND5E.ADVANCEMENT.Manager.Title.Default"
@@ -145,6 +145,14 @@ export default class AdvancementManager extends Application5e {
   /* -------------------------------------------- */
 
   /**
+   * Items collection from before a step is applied.
+   * @param {Item5e[]|null}
+   */
+  #preEmbeddedItems;
+
+  /* -------------------------------------------- */
+
+  /**
    * Get the step before the current one.
    * @type {object|null}
    */
@@ -199,14 +207,14 @@ export default class AdvancementManager extends Application5e {
     oldFlows.reverse().forEach(flow => manager.steps.push({ type: "reverse", flow, automatic: true }));
 
     // Add new advancements
-    const advancementArray = clonedItem.toObject().system.advancement;
-    advancementArray.push(...advancements.map(a => {
-      const obj = a.toObject();
-      if ( obj.constructor.dataModels?.value ) a.value = (new a.constructor.metadata.dataModels.value()).toObject();
-      else obj.value = foundry.utils.deepClone(a.constructor.metadata.defaults?.value ?? {});
+    const advancementData = advancements.reduce((obj, a) => {
+      const data = a.toObject();
+      if ( data.constructor.dataModels?.value ) a.value = (new a.constructor.metadata.dataModels.value()).toObject();
+      else data.value = foundry.utils.deepClone(a.constructor.metadata.defaults?.value ?? {});
+      obj[data._id] = data;
       return obj;
-    }));
-    clonedItem.updateSource({"system.advancement": advancementArray});
+    }, {});
+    clonedItem.updateSource({ "system.advancement": advancementData });
 
     const newFlows = Array.fromRange(currentLevel + 1).slice(minimumLevel)
       .flatMap(l => this.flowsForLevel(clonedItem, l));
@@ -320,7 +328,9 @@ export default class AdvancementManager extends Application5e {
     advancement.levels
       .reverse()
       .filter(l => l <= currentLevel)
-      .map(l => new advancement.constructor.metadata.apps.flow(clonedItem, advancementId, l))
+      .map(level => advancement.constructor.metadata.apps.flow.prototype instanceof Application
+        ? new advancement.constructor.metadata.apps.flow(clonedItem, advancementId, level)
+        : new advancement.constructor.metadata.apps.flow({ document: advancement, level }))
       .forEach(flow => manager.steps.push({ type: "reverse", flow, automatic: true }));
 
     if ( manager.steps.length ) manager.steps.push({ type: "delete", advancement, automatic: true });
@@ -447,12 +457,16 @@ export default class AdvancementManager extends Application5e {
     const match = (advancement, step) => (step.flow?.item.id === item.id)
       && (step.flow?.advancement.id === advancement.id)
       && (step.flow?.level === level);
-    return (item?.advancement.byLevel[level] ?? [])
-      .filter(a => a.appliesToClass)
-      .map(a => {
-        const existing = findExisting?.find(s => match(a, s))?.flow;
-        if ( !existing ) return new a.constructor.metadata.apps.flow(item, a.id, level);
-        existing.item = item;
+    return (item?.advancement?.byLevel[level] ?? [])
+      .filter(advancement => advancement.appliesToClass)
+      .map(advancement => {
+        const existing = findExisting?.find(s => match(advancement, s))?.flow;
+        const isV1App = advancement.constructor.metadata.apps.flow.prototype instanceof Application;
+        if ( !existing ) {
+          if ( isV1App ) return new advancement.constructor.metadata.apps.flow(item, advancement.id, level);
+          else return new advancement.constructor.metadata.apps.flow({ document: advancement, level });
+        }
+        if ( isV1App ) existing.item = item;
         return existing;
       });
   }
@@ -509,7 +523,7 @@ export default class AdvancementManager extends Application5e {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  render(forced=false, options={}) {
+  async render(forced=false, options={}) {
     if ( this.steps.length && (this.#stepIndex === null) ) this.#stepIndex = 0;
 
     // Ensure the level on the class item matches the specified level
@@ -526,18 +540,22 @@ export default class AdvancementManager extends Application5e {
      * @memberof hookEvents
      * @param {AdvancementManager} advancementManager The advancement manager about to be rendered
      */
-    const allowed = Hooks.call("dnd5e.preAdvancementManagerRender", this);
-
-    // Abort if not allowed
-    if ( allowed === false ) return this;
+    if ( Hooks.call("dnd5e.preAdvancementManagerRender", this) === false ) return;
 
     const automaticData = (this.options.automaticApplication && (options.direction !== "backward"))
-      ? this.step?.flow?.getAutomaticApplicationValue() : false;
+      ? await this.step?.flow?.getAutomaticApplicationValue() : false;
 
     if ( this.step?.automatic || (automaticData !== false) ) {
       if ( this.#advancing ) return this;
       this.#forward({ automaticData });
       return this;
+    }
+
+    if ( this.step?.flow instanceof dnd5e.applications.advancement.AdvancementFlowV2 ) {
+      this.#preEmbeddedItems = Array.from(this.clone.items);
+      const flow = this.step.flow;
+      if ( flow.retainedData && !this.step.error ) await flow.advancement.restore(flow.level, flow.retainedData);
+      else await flow.advancement.apply(flow.level, {}, { initial: true });
     }
 
     return super.render(forced, options);
@@ -547,14 +565,20 @@ export default class AdvancementManager extends Application5e {
 
   /** @inheritDoc */
   async _onRender(context, options) {
-    super._onRender(context, options);
+    await super._onRender(context, options);
     if ( !this.rendered || !this.step ) return;
     this.#visualizer?.render({ force: true });
 
     // Render the step
-    this.step.flow._element = null;
-    this.step.flow.options.manager ??= this;
-    await this.step.flow._render(true, options);
+    if ( this.step.flow instanceof Application ) {
+      this.step.flow._element = null;
+      this.step.flow.options.manager ??= this;
+      await this.step.flow._render(true, options);
+    } else {
+      this.step.flow.manager ??= this;
+      await this.step.flow.render({ force: true });
+      this.step.flow._insertElement(this.step.flow.element);
+    }
     this.setPosition();
   }
 
@@ -595,6 +619,14 @@ export default class AdvancementManager extends Application5e {
   }
 
   /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onClose(options) {
+    super._onClose(options);
+    this.steps.forEach(s => s.flow?.close());
+  }
+
+  /* -------------------------------------------- */
   /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
@@ -613,6 +645,11 @@ export default class AdvancementManager extends Application5e {
           if ( this.previousStep ) await this.#restart(event);
           break;
         case "previous":
+          if ( this.step?.flow instanceof dnd5e.applications.advancement.AdvancementFlowV2 ) {
+            this.#preEmbeddedItems = Array.from(this.clone.items);
+            const flow = this.step.flow;
+            await flow.retainData(await flow.advancement.reverse(flow.level));
+          }
           if ( this.previousStep ) await this.#backward(event);
           break;
         case "next":
@@ -642,7 +679,7 @@ export default class AdvancementManager extends Application5e {
       do {
         const flow = this.step.flow;
         const type = this.step.type;
-        const preEmbeddedItems = Array.from(this.clone.items);
+        this.#preEmbeddedItems ??= Array.from(this.clone.items);
 
         // Apply changes based on step type
         if ( (type === "delete") && this.step.item ) {
@@ -655,10 +692,13 @@ export default class AdvancementManager extends Application5e {
         }
         else if ( type === "restore" ) await flow.advancement.restore(flow.level, flow.retainedData);
         else if ( type === "reverse" ) await flow.retainData(await flow.advancement.reverse(flow.level));
-        else if ( automaticData && flow ) await flow.advancement.apply(flow.level, automaticData);
-        else if ( flow ) await flow._updateObject(event, flow._getSubmitData());
+        else if ( automaticData && flow ) await flow.advancement.apply(flow.level, automaticData, { automatic: true });
+        else if ( flow instanceof Application ) await flow._updateObject(event, flow._getSubmitData());
+        else if ( flow ) await flow.submit(event);
 
-        this.#synthesizeSteps(preEmbeddedItems);
+        delete this.step.error;
+        this.#synthesizeSteps();
+        this.#preEmbeddedItems = null;
         this.#stepIndex++;
 
         // Ensure the level on the class item matches the specified level
@@ -673,6 +713,7 @@ export default class AdvancementManager extends Application5e {
       if ( !(error instanceof Advancement.ERROR) ) throw error;
       ui.notifications.error(error.message);
       this.step.automatic = false;
+      this.step.error = error;
       if ( this.step.type === "restore" ) this.step.type = "forward";
     } finally {
       this.#advancing = false;
@@ -686,9 +727,8 @@ export default class AdvancementManager extends Application5e {
 
   /**
    * Add synthetic steps for any added or removed items with advancement.
-   * @param {Item5e[]} preEmbeddedItems  Items present before the current step was applied.
    */
-  #synthesizeSteps(preEmbeddedItems) {
+  #synthesizeSteps() {
     // Build a set of item IDs for non-synthetic steps
     const initialIds = this.steps.reduce((ids, step) => {
       if ( step.synthetic || !step.flow?.item ) return ids;
@@ -696,7 +736,7 @@ export default class AdvancementManager extends Application5e {
       return ids;
     }, new Set());
 
-    const preIds = new Set(preEmbeddedItems.map(i => i.id));
+    const preIds = new Set(this.#preEmbeddedItems.map(i => i.id));
     const postIds = new Set(this.clone.items.map(i => i.id));
     const addedIds = postIds.difference(preIds).difference(initialIds);
     const deletedIds = preIds.difference(postIds).difference(initialIds);
@@ -730,7 +770,7 @@ export default class AdvancementManager extends Application5e {
 
     if ( (this.step.type === "delete") && this.step.synthetic ) return;
     for ( const deletedId of deletedIds ) {
-      let item = preEmbeddedItems.find(i => i.id === deletedId);
+      let item = this.#preEmbeddedItems.find(i => i.id === deletedId);
       if ( !item?.hasAdvancement ) continue;
 
       // Temporarily add the item back
@@ -770,7 +810,7 @@ export default class AdvancementManager extends Application5e {
         if ( !this.step ) break;
         const flow = this.step.flow;
         const type = this.step.type;
-        const preEmbeddedItems = Array.from(this.clone.items);
+        this.#preEmbeddedItems ??= Array.from(this.clone.items);
 
         // Reverse step based on step type
         if ( (type === "delete") && this.step.item ) this.clone.updateSource({items: [this.step.item]});
@@ -780,7 +820,8 @@ export default class AdvancementManager extends Application5e {
         else if ( type === "reverse" ) await flow.advancement.restore(flow.level, flow.retainedData);
         else if ( flow ) await flow.retainData(await flow.advancement.reverse(flow.level));
 
-        this.#clearSyntheticSteps(preEmbeddedItems);
+        this.#clearSyntheticSteps();
+        this.#preEmbeddedItems = null;
         this.clone.reset();
       } while ( this.step?.automatic );
     } catch(error) {
@@ -800,11 +841,10 @@ export default class AdvancementManager extends Application5e {
 
   /**
    * Remove synthetic steps for any added or removed items.
-   * @param {Item5e[]} preEmbeddedItems  Items present before the current step was applied.
    */
-  #clearSyntheticSteps(preEmbeddedItems) {
+  #clearSyntheticSteps() {
     // Create a disjoint union of the before and after items
-    const preIds = new Set(preEmbeddedItems.map(i => i.id));
+    const preIds = new Set(this.#preEmbeddedItems.map(i => i.id));
     const postIds = new Set(this.clone.items.map(i => i.id));
     const modifiedIds = postIds.symmetricDifference(preIds);
 
@@ -878,7 +918,7 @@ export default class AdvancementManager extends Application5e {
     await Promise.all([
       this.actor.update(updates, { isAdvancement: true }),
       this.actor.createEmbeddedDocuments("Item", toCreate, { keepId: true, isAdvancement: true }),
-      this.actor.updateEmbeddedDocuments("Item", toUpdate, { isAdvancement: true }),
+      this.actor.updateEmbeddedDocuments("Item", toUpdate, { diff: false, recursive: false, isAdvancement: true }),
       this.actor.deleteEmbeddedDocuments("Item", toDelete, { isAdvancement: true })
     ]);
 

@@ -85,6 +85,7 @@ export default class ClassData extends ItemDataModel.mixin(
   /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
+    AdvancementTemplate.migrateAdvancement(source);
     ClassData.#migrateHitDice(source);
     ClassData.#migrateLevels(source);
     ClassData.#migrateSpellcastingData(source);
@@ -146,7 +147,7 @@ export default class ClassData extends ItemDataModel.mixin(
    */
   static _migrateTraitAdvancement(source) {
     const system = source.system;
-    if ( !system?.advancement || system.advancement.find(a => a.type === "Trait") ) return;
+    if ( !system?.advancement || Object.values(system.advancement).find(a => a?.type === "Trait") ) return;
     let needsMigration = false;
 
     if ( system.saves?.length ) {
@@ -160,7 +161,8 @@ export default class ClassData extends ItemDataModel.mixin(
       savesData.value = {
         chosen: savesData.configuration.grants
       };
-      system.advancement.push(new TraitAdvancement(savesData).toObject());
+      const created = new TraitAdvancement(savesData);
+      system.advancement[created.id] = created.toObject();
       delete system.saves;
       needsMigration = true;
     }
@@ -181,7 +183,8 @@ export default class ClassData extends ItemDataModel.mixin(
           chosen: system.skills.value.map(t => `skills:${t}`)
         };
       }
-      system.advancement.push(new TraitAdvancement(skillsData).toObject());
+      const created = new TraitAdvancement(skillsData);
+      system.advancement[created.id] = created.toObject();
       delete system.skills;
       needsMigration = true;
     }
@@ -205,6 +208,7 @@ export default class ClassData extends ItemDataModel.mixin(
   prepareDerivedData() {
     super.prepareDerivedData();
     this.prepareDescriptionData();
+    this.tier = Math.ceil((this.levels - 4) / 6) + 1;
   }
 
   /* -------------------------------------------- */
@@ -276,7 +280,7 @@ export default class ClassData extends ItemDataModel.mixin(
     const actor = this.parent.actor;
     if ( !actor || (userId !== game.user.id) ) return;
 
-    if ( actor.type === "character" ) {
+    if ( actor.system.isCharacter ) {
       const pc = actor.items.get(actor.system.details.originalClass);
       if ( !pc ) await actor._assignPrimaryClass();
     }
@@ -305,7 +309,7 @@ export default class ClassData extends ItemDataModel.mixin(
       changed.system.levels = CONFIG.DND5E.maxLevel;
     }
 
-    if ( this.parent.actor?.type !== "character" ) return;
+    if ( !this.parent.actor?.system.isCharacter ) return;
 
     // Check to ensure the updated character doesn't exceed level cap
     const newCharacterLevel = this.parent.actor.system.details.level + (changed.system.levels - this.levels);

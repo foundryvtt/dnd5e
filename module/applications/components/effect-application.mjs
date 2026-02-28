@@ -69,6 +69,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
   /*  Rendering                                   */
   /* -------------------------------------------- */
 
+  /** @override */
   connectedCallback() {
     // Fetch the associated chat message
     const messageId = this.closest("[data-message-id]")?.dataset.messageId;
@@ -77,6 +78,11 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
 
     // Build the frame HTML only once
     if ( !this.effectsList || !this.targetList ) {
+      if ( !this.effects.length ) {
+        const item = this.chatMessage.getAssociatedItem();
+        this.effects = Array.from(this.querySelectorAll("option")).map(o => item?.effects.get(o.value)).filter(_ => _);
+      }
+
       const div = document.createElement("div");
       div.classList.add("card-tray", "effects-tray", "collapsible");
       if ( !this.open ) div.classList.add("collapsed");
@@ -174,8 +180,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
    * @protected
    */
   async _applyEffectToActor(effect, actor) {
-    const concentration = this.chatMessage.getAssociatedActor()?.effects
-      .get(this.chatMessage.getFlag("dnd5e", "use.concentrationId"));
+    const concentration = this.chatMessage.getAssociatedActor()?.effects.get(this.chatMessage.system.concentration);
     const origin = concentration ?? effect;
     if ( !game.user.isGM && !actor.isOwner ) {
       throw new Error(game.i18n.localize("DND5E.EffectApplyWarningOwnership"));
@@ -185,8 +190,8 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       flags: {
         dnd5e: {
           dependentOn: origin.uuid,
-          scaling: this.chatMessage.getFlag("dnd5e", "scaling"),
-          spellLevel: this.chatMessage.getFlag("dnd5e", "use.spellLevel")
+          scaling: this.chatMessage.system.scaling,
+          spellLevel: this.chatMessage.system.spellLevel
         }
       }
     };

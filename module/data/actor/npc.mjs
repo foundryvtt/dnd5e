@@ -6,6 +6,7 @@ import { defaultUnits, formatCR, formatLength, formatNumber, getPluralRules, spl
 import FormulaField from "../fields/formula-field.mjs";
 import CreatureTypeField from "../shared/creature-type-field.mjs";
 import RollConfigField from "../shared/roll-config-field.mjs";
+import SensesField from "../shared/senses-field.mjs";
 import SourceField from "../shared/source-field.mjs";
 import AttributesFields from "./templates/attributes.mjs";
 import CreatureTemplate from "./templates/creature.mjs";
@@ -74,7 +75,7 @@ export default class NPCData extends CreatureTemplate {
         }, { label: "DND5E.DeathSave" }),
         price: new SchemaField({
           value: new NumberField({ initial: null, min: 0 }),
-          denomination: new StringField({ required: true, blank: false, initial: "gp" })
+          denomination: new StringField({ required: true, blank: false, initial: () => CONFIG.DND5E.defaultCurrency })
         }),
         spell: new SchemaField({
           level: new NumberField({
@@ -198,6 +199,18 @@ export default class NPCData extends CreatureTemplate {
         }
       }]
     ]);
+  }
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Whether this Actor type represents a non-player character.
+   * @returns {boolean}
+   */
+  get isNPC() {
+    return true;
   }
 
   /* -------------------------------------------- */
@@ -374,6 +387,7 @@ export default class NPCData extends CreatureTemplate {
 
     AttributesFields.prepareBaseArmorClass.call(this);
     AttributesFields.prepareBaseEncumbrance.call(this);
+    SensesField._shim(this.attributes.senses);
   }
 
   /* -------------------------------------------- */
@@ -388,7 +402,7 @@ export default class NPCData extends CreatureTemplate {
       this.details.type = this.details.race.system.type;
     }
     for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) this.attributes.movement[key] ??= 0;
-    for ( const key of Object.keys(CONFIG.DND5E.senses) ) this.attributes.senses[key] ??= 0;
+    for ( const key of Object.keys(CONFIG.DND5E.senses) ) this.attributes.senses.ranges[key] ??= 0;
     this.attributes.movement.units ??= defaultUnits("length");
     this.attributes.senses.units ??= defaultUnits("length");
   }
@@ -435,9 +449,9 @@ export default class NPCData extends CreatureTemplate {
     if ( legres.max && legendaryResistanceItem ) {
       const max = this._source.resources.legres.max;
       const modernRules = (this.source?.rules
-        || (game.settings.get("dnd5e", "rulesVersion") === "modern" ? "2024" : "2014")) === "2024";
+        || (dnd5e.settings.rulesVersion === "modern" ? "2024" : "2014")) === "2024";
       legendaryResistanceItem.system.uses.label = this.resources.lair.value && modernRules ? game.i18n.format(
-        "DND5E.LegendaryResistance.LairUses",  { normal: formatNumber(max), lair: formatNumber(max + 1) }
+        "DND5E.LegendaryResistance.LairUses", { normal: formatNumber(max), lair: formatNumber(max + 1) }
       ) : `${formatNumber(max)}/${CONFIG.DND5E.limitedUsePeriods.day?.label ?? ""}`;
     }
   }
@@ -473,6 +487,20 @@ export default class NPCData extends CreatureTemplate {
   /* -------------------------------------------- */
 
   /**
+   * Create a list of gear that can be collected from this NPC.
+   * @type {Item5e[]}
+   */
+  async getGear() {
+    return (await Promise.all(this.parent.items
+      .filter(i => i.system.quantity && i.system.properties?.has("gear"))
+      .map(i => i.system.asGear?.())
+    )).filter(_ => _)
+      .toSorted((lhs, rhs) => lhs.name.localeCompare(rhs.name, game.i18n.lang));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Auto-generate a description for the legendary actions block on the NPC stat block.
    * @param {string} name  Name of the actor to use in the text.
    * @returns {string}
@@ -482,7 +510,7 @@ export default class NPCData extends CreatureTemplate {
     if ( !max ) return "";
     const pr = getPluralRules().select(max);
     const rulesVersion = this.source?.rules
-      || (game.settings.get("dnd5e", "rulesVersion") === "modern" ? "2024" : "2014");
+      || (dnd5e.settings.rulesVersion === "modern" ? "2024" : "2014");
     return game.i18n.format(`DND5E.LegendaryAction.Description${rulesVersion === "2014" ? "Legacy" : ""}`, {
       name: name.toLowerCase(),
       uses: this.resources.lair.value ? game.i18n.format("DND5E.LegendaryAction.LairUses", {
@@ -490,18 +518,6 @@ export default class NPCData extends CreatureTemplate {
       }) : formatNumber(max),
       usesNamed: game.i18n.format(`DND5E.ACTIVATION.Type.Legendary.Counted.${pr}`, { number: formatNumber(max) })
     });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Create a list of gear that can be collected from this NPC.
-   * @type {Item5e[]}
-   */
-  getGear() {
-    return this.parent.items
-      .filter(i => i.system.quantity && (i.system.type?.value !== "natural"))
-      .sort((lhs, rhs) => lhs.name.localeCompare(rhs.name, game.i18n.lang));
   }
 
   /* -------------------------------------------- */
@@ -655,9 +671,9 @@ export default class NPCData extends CreatureTemplate {
         cr: `${o.cr ?? formatCR(this.details.cr, { narrow: false })} (${xp})`,
 
         // Gear
-        gear: o.gear ?? formatter.format(
-          this.getGear().map(i => i.system.quantity > 1 ? `${i.name} (${formatNumber(i.system.quantity)})` : i.name)
-        ),
+        gear: o.gear ?? formatter.format((await this.getGear()).map(item =>
+          item.system.quantity > 1 ? `${item.name} (${formatNumber(item.system.quantity)})` : item.name
+        )),
 
         // Initiative (e.g. `+0 (10)`)
         initiative: o.initiative ?? `${formatNumber(this.attributes.init.total, { signDisplay: "always" })} (${
@@ -682,8 +698,10 @@ export default class NPCData extends CreatureTemplate {
         senses: o.senses ?? [
           formatter.format([
             ...Object.entries(CONFIG.DND5E.senses)
-              .filter(([k]) => this.attributes.senses[k])
-              .map(([k, label]) => prepareMeasured(this.attributes.senses[k], this.attributes.senses.units, label)),
+              .filter(([k]) => this.attributes.senses.ranges[k])
+              .map(([k, label]) =>
+                prepareMeasured(this.attributes.senses.ranges[k], this.attributes.senses.units, label)
+              ),
             ...splitSemicolons(this.attributes.senses.special)
           ].sort((lhs, rhs) => lhs.localeCompare(rhs, game.i18n.lang))),
           `${game.i18n.localize("DND5E.PassivePerception")} ${formatNumber(this.skills.prc.passive)}`
@@ -726,7 +744,7 @@ export default class NPCData extends CreatureTemplate {
         }, { value: [], physical: [] });
         const list = prepareTrait({ value, custom: data.custom }, trait);
         if ( list ) entries.push(list);
-        if ( physical.length ) entries.push(game.i18n.format("DND5E.DamagePhysicalBypasses", {
+        if ( physical.length ) entries.push(game.i18n.format("DND5E.DAMAGE.PhysicalBypass.Description", {
           damageTypes: game.i18n.getListFormatter({ style: "long", type: "conjunction" }).format(
             physical.map(t => CONFIG.DND5E.damageTypes[t].label)
           ),
@@ -757,7 +775,7 @@ export default class NPCData extends CreatureTemplate {
         summary.vulnerabilities ? { label: "DND5E.Vulnerabilities", definitions: [summary.vulnerabilities] } : null,
         summary.resistances ? { label: "DND5E.Resistances", definitions: [summary.resistances] } : null,
         summary.immunities ? { label: "DND5E.Immunities", definitions: [summary.immunities] } : null,
-        summary.gear ? { label: "DND5E.Gear", definitions: [summary.gear] } : null,
+        summary.gear ? { label: "DND5E.Gear.Label", definitions: [summary.gear] } : null,
         { label: "DND5E.Senses", definitions: [summary.senses] },
         { label: "DND5E.Languages", definitions: [summary.languages] },
         { label: "DND5E.AbbreviationCR", definitions: [summary.cr] }

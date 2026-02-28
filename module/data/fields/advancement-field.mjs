@@ -16,11 +16,11 @@ export default class AdvancementField extends foundry.data.fields.ObjectField {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _cleanType(value, options) {
+  _cleanType(value, options, _state) {
     if ( !(typeof value === "object") ) value = {};
 
-    const cls = this.getModelForType(value.type);
-    if ( cls ) return cls.cleanData(value, options);
+    const cls = this.getModelForType(value.type ?? _state?.source?.type);
+    if ( cls ) return cls.cleanData(value, options, _state);
     return value;
   }
 
@@ -35,13 +35,22 @@ export default class AdvancementField extends foundry.data.fields.ObjectField {
 
   /* -------------------------------------------- */
 
-  /**
-   * Migrate this field's candidate source data.
-   * @param {object} sourceData   Candidate source data of the root model
-   * @param {any} fieldData       The value of this field within the source data
-   */
-  migrateSource(sourceData, fieldData) {
+  /** @inheritDoc */
+  _migrate(value, options, _state) {
+    const cls = this.getModelForType(value.type);
+    if ( cls ) cls.migrateDataSafe(value);
+    return value;
+  }
+}
+
+/**
+ * @deprecated
+ * @since 5.3.0
+ */
+if ( !("_migrate" in foundry.data.fields.DataField.prototype) ) {
+  /** @ignore */
+  AdvancementField.prototype.migrateSource = function(sourceData, fieldData) {
     const cls = this.getModelForType(fieldData.type);
     if ( cls ) cls.migrateDataSafe(fieldData);
-  }
+  };
 }

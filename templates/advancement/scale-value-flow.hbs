@@ -1,12 +1,7 @@
-<form id="{{appId}}" data-level="{{level}}" data-id="{{advancement.id}}" data-type="{{type}}">
-    <h3>{{{this.title}}}</h3>
-    {{#if advancement.hint}}<p>{{ advancement.hint }}</p>{{/if}}
-
-    <p>
-        <span class="initial-scale-value {{#unless initial}}none{{/unless}}">
-            {{#if initial}}{{{initial}}}{{else}}{{localize "DND5E.None"}}{{/if}}
-        </span>
-        &#x27A1;
-        <span class="new-scale-value">{{{final}}}</span>
-    </p>
-</form>
+<div>
+    <span class="initial-scale-value {{#unless initial}}none{{/unless}}">
+        {{#if initial}}{{{ initial }}}{{else}}{{ localize "DND5E.None" }}{{/if}}
+    </span>
+    <span class="arrow">&#x27A1;</span>
+    <span class="new-scale-value">{{{ final }}}</span>
+</div>

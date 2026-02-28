@@ -353,22 +353,20 @@ system:
         mode: 0
       bonus: ''
     movement:
-      burrow: null
-      climb: null
-      fly: null
-      swim: null
-      walk: 50
+      walk: '50'
       units: null
       hover: false
+      ignoredDifficultTerrain: []
     attunement:
       max: 3
     senses:
-      darkvision: null
-      blindsight: null
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: null
+        blindsight: null
+        tremorsense: null
+        truesight: null
     spellcasting: str
     exhaustion: 0
     concentration:
@@ -404,13 +402,12 @@ system:
       level: 0
     loyalty:
       value: null
+    price:
+      value: null
+      denomination: gp
   details:
     biography:
-      value: >-
-        <div class="gear"><p><strong>Gear:</strong>
-        @UUID[Compendium.dnd5e.equipment24.Item.phbarmBreastplat]{Breastplate},
-        @UUID[Compendium.dnd5e.equipment24.Item.phbwepLongbow000]{Longbow},
-        @UUID[Compendium.dnd5e.equipment24.Item.phbwepPike000000]{Pike}</p></div>
+      value: ''
       public: ''
     alignment: Neutral Good
     ideal: ''
@@ -433,11 +430,11 @@ system:
         - individual
   resources:
     legact:
-      value: 0
       max: 0
+      spent: 0
     legres:
-      value: 0
       max: 0
+      spent: 0
     lair:
       value: false
       initiative: null
@@ -476,7 +473,7 @@ system:
     important: false
 prototypeToken:
   name: Centaur Trooper
-  displayName: 0
+  displayName: 20
   actorLink: false
   appendNumber: false
   prependAdjective: false
@@ -498,7 +495,7 @@ prototypeToken:
   rotation: 0
   alpha: 1
   disposition: -1
-  displayBars: 0
+  displayBars: 20
   bar1:
     attribute: attributes.hp
   bar2:
@@ -583,7 +580,6 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       range:
         value: null
         long: null
@@ -626,11 +622,11 @@ items:
       type:
         value: martialM
         baseItem: pike
-      magicalBonus: null
       properties:
         - hvy
         - rch
         - two
+        - gear
       proficient: null
       activities:
         HjEJjclqCeGjAymL:
@@ -668,7 +664,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
               type: ''
@@ -697,9 +693,18 @@ items:
           sort: 0
           _id: HjEJjclqCeGjAymL
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       ammunition: {}
       mastery: push
       identifier: pike
+      crew:
+        value: []
     _id: XMKFiS5XUEC4fLCr
     type: weapon
     folder: fd3qxAXCv2FhExPp
@@ -716,13 +721,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepPike000000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712715234
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!mmCentaurTrooper.XMKFiS5XUEC4fLCr'
   - name: Longbow
     system:
@@ -751,7 +754,6 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       range:
         value: 150
         long: 600
@@ -794,11 +796,11 @@ items:
       type:
         value: martialR
         baseItem: longbow
-      magicalBonus: null
       properties:
         - amm
         - hvy
         - two
+        - gear
       proficient: null
       activities:
         b04WToYLVtgE03Dm:
@@ -836,7 +838,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
               type: ''
@@ -865,10 +867,19 @@ items:
           sort: 0
           _id: b04WToYLVtgE03Dm
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       ammunition:
         type: arrow
       mastery: slow
       identifier: longbow
+      crew:
+        value: []
     _id: 4C5jy0VkmoTdrbTC
     type: weapon
     folder: 0qKr1rbesCSNE0MA
@@ -885,13 +896,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepLongbow000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712715234
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!mmCentaurTrooper.4C5jy0VkmoTdrbTC'
   - name: Breastplate
     system:
@@ -920,14 +929,12 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       uses:
         max: ''
         spent: 0
         recovery: []
       armor:
         value: 14
-        magicalBonus: null
         dex: 2
       hp:
         value: null
@@ -937,14 +944,18 @@ items:
       type:
         value: medium
         baseItem: breastplate
-      properties: []
+      properties:
+        - gear
       speed:
         value: null
         conditions: ''
+        units: ft
       strength: null
       proficient: null
       activities: {}
       identifier: breastplate
+      crew:
+        value: []
     type: equipment
     folder: tNySLDnz2qPVahU7
     img: icons/equipment/chest/breastplate-collared-steel-grey.webp
@@ -955,13 +966,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbarmBreastplat
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712715234
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: ScvKIKAAfCx7iPGQ
     sort: 0
     _key: '!actors.items!mmCentaurTrooper.ScvKIKAAfCx7iPGQ'
@@ -1019,6 +1028,12 @@ items:
             name: ''
             formula: ''
           img: systems/dnd5e/icons/svg/monster.svg
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -1039,9 +1054,10 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: 4T18pEvubPMQLzvD
@@ -1055,13 +1071,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712715234
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 0
@@ -1101,6 +1115,7 @@ items:
           effects:
             - _id: OY3B1NBPgGcFmHGi
               onSave: false
+              level: {}
           range:
             override: false
             units: self
@@ -1141,6 +1156,13 @@ items:
               calculation: str
               formula: 8 + @mod + @prof
           name: Save
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery:
@@ -1172,9 +1194,10 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: 4T18pEvubPMQLzvD
@@ -1205,25 +1228,16 @@ items:
           - prone
         sort: 0
         flags:
-          dae:
-            enableCondition: ''
-            disableCondition: ''
-            stackable: multi
-            showIcon: false
-            durationExpression: ''
-            specialDuration: []
           core:
             overlay: false
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmCentaurTrooper.mmTramplingCharg.OY3B1NBPgGcFmHGi
     flags:
@@ -1234,13 +1248,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmTramplingCharg
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712715234
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 1
@@ -1250,13 +1262,13 @@ folder: EypLbRzz5Hphlv5M
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
-  systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1745415541848
-  modifiedTime: 1745712715262
-  lastModifiedBy: dnd5ebuilder0000
   exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  createdTime: 1771452698855
+  modifiedTime: 1771452698855
+  lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:
   default: 0

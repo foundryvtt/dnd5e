@@ -45,7 +45,7 @@ function registerSourceBooks(manifest) {
  * @returns {string|void}                 Description of the data registered.
  */
 function registerSpellLists(manifest) {
-  if ( foundry.utils.getType(manifest.flags.dnd5e?.spellLists) !== "Array" ) return;
+  if ( !Array.isArray(manifest.flags.dnd5e?.spellLists) ) return;
   manifest.flags.dnd5e.spellLists.forEach(uuid => dnd5e.registry.spellLists.register(uuid));
   return "spell lists";
 }

@@ -51,7 +51,8 @@ export default class BaseSummonActivityData extends BaseActivityData {
       summon: new SchemaField({
         mode: new StringField(),
         prompt: new BooleanField({ initial: true })
-      })
+      }),
+      tempHP: new FormulaField()
     };
   }
 

@@ -1891,6 +1891,9 @@ DND5E.itemProperties = {
   foc: {
     label: "DND5E.ITEM.Property.Focus"
   },
+  gear: {
+    label: "DND5E.ITEM.Property.Gear"
+  },
   hvy: {
     label: "DND5E.ITEM.Property.Heavy"
   },
@@ -2107,6 +2110,14 @@ preLocalize("currencies", { keys: ["label", "abbreviation"] });
 /* -------------------------------------------- */
 
 /**
+ * Default currency used for data model defaults, starting wealth, and facility prices.
+ * @enum {string}
+ */
+DND5E.defaultCurrency = "gp";
+
+/* -------------------------------------------- */
+
+/**
  * Configuration data for crafting costs.
  * @type {CraftingConfiguration}
  */
@@ -2227,82 +2238,82 @@ preLocalize("damageScalingModes", { keys: ["label", "labelCantrip"] });
  */
 DND5E.damageTypes = {
   acid: {
-    label: "DND5E.DamageAcid",
+    label: "DND5E.DAMAGE.Type.Acid",
     icon: "systems/dnd5e/icons/svg/damage/acid.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.IQhbKRPe1vCPdh8v",
     color: new Color(0x839D50)
   },
   bludgeoning: {
-    label: "DND5E.DamageBludgeoning",
+    label: "DND5E.DAMAGE.Type.Bludgeoning",
     icon: "systems/dnd5e/icons/svg/damage/bludgeoning.svg",
     isPhysical: true,
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.39LFrlef94JIYO8m",
     color: new Color(0x0000A0)
   },
   cold: {
-    label: "DND5E.DamageCold",
+    label: "DND5E.DAMAGE.Type.Cold",
     icon: "systems/dnd5e/icons/svg/damage/cold.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.4xsFUooHDEdfhw6g",
     color: new Color(0xADD8E6)
   },
   fire: {
-    label: "DND5E.DamageFire",
+    label: "DND5E.DAMAGE.Type.Fire",
     icon: "systems/dnd5e/icons/svg/damage/fire.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.f1S66aQJi4PmOng6",
     color: new Color(0xFF4500)
   },
   force: {
-    label: "DND5E.DamageForce",
+    label: "DND5E.DAMAGE.Type.Force",
     icon: "systems/dnd5e/icons/svg/damage/force.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.eFTWzngD8dKWQuUR",
     color: new Color(0x800080)
   },
   lightning: {
-    label: "DND5E.DamageLightning",
+    label: "DND5E.DAMAGE.Type.Lightning",
     icon: "systems/dnd5e/icons/svg/damage/lightning.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.9SaxFJ9bM3SutaMC",
     color: new Color(0x1E90FF)
   },
   necrotic: {
-    label: "DND5E.DamageNecrotic",
+    label: "DND5E.DAMAGE.Type.Necrotic",
     icon: "systems/dnd5e/icons/svg/damage/necrotic.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.klOVUV5G1U7iaKoG",
     color: new Color(0x006400)
   },
   piercing: {
-    label: "DND5E.DamagePiercing",
+    label: "DND5E.DAMAGE.Type.Piercing",
     icon: "systems/dnd5e/icons/svg/damage/piercing.svg",
     isPhysical: true,
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.95agSnEGTdAmKhyC",
     color: new Color(0xC0C0C0)
   },
   poison: {
-    label: "DND5E.DamagePoison",
+    label: "DND5E.DAMAGE.Type.Poison",
     icon: "systems/dnd5e/icons/svg/damage/poison.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.k5wOYXdWPzcWwds1",
     color: new Color(0x8A2BE2)
   },
   psychic: {
-    label: "DND5E.DamagePsychic",
+    label: "DND5E.DAMAGE.Type.Psychic",
     icon: "systems/dnd5e/icons/svg/damage/psychic.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.YIKbDv4zYqbE5teJ",
     color: new Color(0xFF1493)
   },
   radiant: {
-    label: "DND5E.DamageRadiant",
+    label: "DND5E.DAMAGE.Type.Radiant",
     icon: "systems/dnd5e/icons/svg/damage/radiant.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.5tcK9buXWDOw8yHH",
     color: new Color(0xFFD700)
   },
   slashing: {
-    label: "DND5E.DamageSlashing",
+    label: "DND5E.DAMAGE.Type.Slashing",
     icon: "systems/dnd5e/icons/svg/damage/slashing.svg",
     isPhysical: true,
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.sz2XKQ5lgsdPEJOa",
     color: new Color(0x8B0000)
   },
   thunder: {
-    label: "DND5E.DamageThunder",
+    label: "DND5E.DAMAGE.Type.Thunder",
     icon: "systems/dnd5e/icons/svg/damage/thunder.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.iqsmMHk7FSpiNkQy",
     color: new Color(0x708090)
@@ -2326,17 +2337,25 @@ DND5E.aggregateDamageDisplay = true;
  */
 DND5E.healingTypes = {
   healing: {
-    label: "DND5E.Healing",
+    label: "DND5E.HEAL.Type.Healing",
+    labelShort: "DND5E.HEAL.Type.HealingShort",
     icon: "systems/dnd5e/icons/svg/damage/healing.svg",
     color: new Color(0x46C252)
   },
   temphp: {
-    label: "DND5E.HealingTemp",
+    label: "DND5E.HEAL.Type.Temporary",
+    labelShort: "DND5E.HEAL.Type.TemporaryShort",
     icon: "systems/dnd5e/icons/svg/damage/temphp.svg",
     color: new Color(0x4B66DE)
+  },
+  maximum: {
+    label: "DND5E.HEAL.Type.Maximum",
+    labelShort: "DND5E.HEAL.Type.MaximumShort",
+    icon: "systems/dnd5e/icons/svg/damage/maxhp.svg",
+    color: new Color(0x4BDEDE)
   }
 };
-preLocalize("healingTypes", { keys: ["label"] });
+preLocalize("healingTypes", { keys: ["label", "labelShort"] });
 
 /* -------------------------------------------- */
 /*  Movement                                    */
@@ -2405,7 +2424,6 @@ DND5E.movementTypes = {
   }
 };
 preLocalize("movementTypes", { key: "label" });
-patchConfig("movementTypes", "label", { since: "DnD5e 5.1", until: "DnD5e 5.3" });
 
 /* -------------------------------------------- */
 
@@ -2502,6 +2520,7 @@ DND5E.movementUnits = {
   ft: {
     label: "DND5E.UNITS.DISTANCE.Foot.Label",
     abbreviation: "DND5E.UNITS.DISTANCE.Foot.Abbreviation",
+    template: "DND5E.UNITS.DISTANCE.Foot.Template",
     conversion: 1,
     formattingUnit: "foot",
     type: "imperial",
@@ -2510,6 +2529,7 @@ DND5E.movementUnits = {
   mi: {
     label: "DND5E.UNITS.DISTANCE.Mile.Label",
     abbreviation: "DND5E.UNITS.DISTANCE.Mile.Abbreviation",
+    template: "DND5E.UNITS.DISTANCE.Mile.Template",
     conversion: 5_280,
     formattingUnit: "mile",
     type: "imperial",
@@ -2518,6 +2538,7 @@ DND5E.movementUnits = {
   m: {
     label: "DND5E.UNITS.DISTANCE.Meter.Label",
     abbreviation: "DND5E.UNITS.DISTANCE.Meter.Abbreviation",
+    template: "DND5E.UNITS.DISTANCE.Meter.Template",
     conversion: 10 / 3, // D&D uses a simplified 5ft -> 1.5m conversion.
     formattingUnit: "meter",
     type: "metric",
@@ -2526,13 +2547,14 @@ DND5E.movementUnits = {
   km: {
     label: "DND5E.UNITS.DISTANCE.Kilometer.Label",
     abbreviation: "DND5E.UNITS.DISTANCE.Kilometer.Abbreviation",
+    template: "DND5E.UNITS.DISTANCE.Kilometer.Template",
     conversion: 10_000 / 3, // Matching simplified conversion
     formattingUnit: "kilometer",
     type: "metric",
     travelResolution: "day"
   }
 };
-preLocalize("movementUnits", { keys: ["label", "abbreviation"] });
+preLocalize("movementUnits", { keys: ["label", "abbreviation", "template"] });
 
 /* -------------------------------------------- */
 
@@ -3164,14 +3186,14 @@ DND5E.SPELL_LISTS = Object.freeze([
 DND5E.spellPreparationModes = new Proxy(DND5E.spellcasting, {
   get(target, prop, receiver) {
     foundry.utils.logCompatibilityWarning("CONFIG.DND5E.spellPreparationModes is deprecated, use CONFIG.DND5E.spellcasting"
-      + " instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+      + " instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
     if ( (prop === "prepared") || (prop === "always") ) prop = "spell";
     return Reflect.get(target, prop, receiver);
   },
 
   set(target, prop, value, receiver) {
     foundry.utils.logCompatibilityWarning("CONFIG.DND5E.spellPreparationModes is deprecated, use CONFIG.DND5E.spellcasting"
-      + " instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+      + " instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
     if ( (prop === "prepared") || (prop === "always") ) prop = "spell";
     return Reflect.set(target, prop, value, receiver);
   }
@@ -3186,14 +3208,14 @@ DND5E.spellPreparationModes = new Proxy(DND5E.spellcasting, {
 DND5E.spellcastingTypes = new Proxy(DND5E.spellcasting, {
   get(target, prop, receiver) {
     foundry.utils.logCompatibilityWarning("CONFIG.DND5E.spellcastingTypes is deprecated, use CONFIG.DND5E.spellcasting"
-      + " instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+      + " instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
     if ( prop === "leveled" ) prop = "spell";
     return Reflect.get(target, prop, receiver);
   },
 
   set(target, prop, value, receiver) {
     foundry.utils.logCompatibilityWarning("CONFIG.DND5E.spellcastingTypes is deprecated, use CONFIG.DND5E.spellcasting"
-      + " instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+      + " instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
     if ( prop === "leveled" ) prop = "spell";
     if ( !("type" in value) ) value.type = "single";
     if ( !("table" in value) ) value.table = DND5E.pactCastingProgression;
@@ -3210,7 +3232,7 @@ DND5E.spellcastingTypes = new Proxy(DND5E.spellcasting, {
 DND5E.spellProgression = new Proxy({}, {
   set() {
     foundry.utils.logCompatibilityWarning("CONFIG.DND5E.spellProgression is read-only. Spell progressions must be set "
-      + "on CONFIG.DND5E.spellcasting instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+      + "on CONFIG.DND5E.spellcasting instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
     return true;
   }
 });
@@ -4164,7 +4186,8 @@ DND5E.traits = {
   di: {
     labels: {
       title: "DND5E.DamImm",
-      localization: "DND5E.TraitDIPlural"
+      localization: "DND5E.TraitDIPlural",
+      all: "DND5E.DAMAGE.All"
     },
     icon: "systems/dnd5e/icons/svg/trait-damage-immunities.svg",
     configKey: "damageTypes"
@@ -4172,7 +4195,8 @@ DND5E.traits = {
   dr: {
     labels: {
       title: "DND5E.DamRes",
-      localization: "DND5E.TraitDRPlural"
+      localization: "DND5E.TraitDRPlural",
+      all: "DND5E.DAMAGE.All"
     },
     icon: "systems/dnd5e/icons/svg/trait-damage-resistances.svg",
     configKey: "damageTypes"
@@ -4180,7 +4204,8 @@ DND5E.traits = {
   dv: {
     labels: {
       title: "DND5E.DamVuln",
-      localization: "DND5E.TraitDVPlural"
+      localization: "DND5E.TraitDVPlural",
+      all: "DND5E.DAMAGE.All"
     },
     icon: "systems/dnd5e/icons/svg/trait-damage-vulnerabilities.svg",
     configKey: "damageTypes"
@@ -4188,7 +4213,8 @@ DND5E.traits = {
   dm: {
     labels: {
       title: "DND5E.DamMod",
-      localization: "DND5E.TraitDMPlural"
+      localization: "DND5E.TraitDMPlural",
+      all: "DND5E.DAMAGE.All"
     },
     configKey: "damageTypes",
     dataType: Number
@@ -4455,6 +4481,10 @@ DND5E.advancementTypes = {
  * @enum {Record<string, string>}
  */
 DND5E.defaultArtwork = {
+  ActiveEffect: {
+    base: "systems/dnd5e/icons/svg/active-effects/base.svg",
+    enchantment: "systems/dnd5e/icons/svg/active-effects/enchantment.svg"
+  },
   Actor: {
     character: "systems/dnd5e/icons/svg/actors/character.svg",
     encounter: "systems/dnd5e/icons/svg/actors/encounter.svg",
@@ -4800,7 +4830,8 @@ DND5E.rules = {
   bloodied: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.shZaSIlFPpHufPFn",
   jumping: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.aaJOlRhI1H6vAxt9",
   resistance: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.Uk3xhCTvEfx8BN1O",
-  stable: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.klXWp4c90n7Kt5LB"
+  stable: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.klXWp4c90n7Kt5LB",
+  dead: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.OP0YhS6iOm4yfPIt"
 };
 
 /* -------------------------------------------- */
@@ -4864,7 +4895,7 @@ Object.defineProperty(DND5E, "enrichmentLookup", {
  * @param {object} config
  * @param {object} [options={}]
  * @param {string} [options.labelKey]        If provided, simplify all included objects to just the label.
- * @param {Function} [options.skipCategory]  Callback passed the key and data that should return a boolean to skip a
+ * @param {Function} [options.skipEntry]     Callback passed the key and data that should return a boolean to skip a
  *                                           category but not its children when creating flattened object.
  * @returns {object}
  */
@@ -4893,7 +4924,7 @@ function patchConfig(key, fallbackKey, options) {
   /** @override */
   function toString() {
     const message = `The value of CONFIG.DND5E.${key} has been changed to an object.`
-      +` The former value can be acccessed from .${fallbackKey}.`;
+      +` The former value can be accessed from .${fallbackKey}.`;
     foundry.utils.logCompatibilityWarning(message, options);
     return this[fallbackKey];
   }

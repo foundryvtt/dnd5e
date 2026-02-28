@@ -17,6 +17,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     dex:
       value: 10
       proficient: 0
@@ -24,6 +34,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     con:
       value: 10
       proficient: 0
@@ -31,6 +51,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     int:
       value: 0
       proficient: 0
@@ -38,6 +68,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     wis:
       value: 0
       proficient: 0
@@ -45,6 +85,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     cha:
       value: 0
       proficient: 0
@@ -52,7 +102,16 @@ system:
       bonuses:
         check: ''
         save: ''
-  vehicleType: water
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
   attributes:
     init:
       ability: ''
@@ -62,17 +121,14 @@ system:
         mode: 0
       bonus: ''
     movement:
-      burrow: null
-      climb: null
-      fly: null
-      swim: 30
-      walk: 30
+      swim: '30'
+      walk: '30'
       units: ft
       hover: false
+      ignoredDifficultTerrain: []
     ac:
       flat: 20
       calc: default
-      motionless: ''
     hp:
       value: 200
       max: 200
@@ -82,14 +138,27 @@ system:
       mt: null
     actions:
       stations: true
-      value: 0
       thresholds:
         '0': null
         '1': null
         '2': null
+      max: 0
+      spent: 0
     capacity:
       creature: '2'
-      cargo: 0
+      cargo:
+        value: 0
+        units: tn
+    price:
+      value: null
+      denomination: gp
+    quality:
+      value: 4
+    travel:
+      paces: {}
+      speeds: {}
+      time: 24
+      units: mph
   details:
     biography:
       value: >-
@@ -133,6 +202,7 @@ system:
         rear hatch unseals and opens.</td><td>The rear hatch closes and
         seals.</td></tr></tbody></table>
       public: ''
+    type: water
   source:
     revision: 1
     rules: '2024'
@@ -162,12 +232,24 @@ system:
       value: []
       custom: ''
     dimensions: 10 x 5 x 5 feet
+    weight:
+      units: lb
+    keel:
+      units: ft
+    beam:
+      units: ft
   cargo:
     crew: []
     passengers: []
+  crew:
+    value: []
+  draft:
+    value: []
+  passengers:
+    value: []
 prototypeToken:
   name: Apparatus of the Crab
-  displayName: 0
+  displayName: 20
   actorLink: true
   appendNumber: false
   prependAdjective: false
@@ -189,7 +271,7 @@ prototypeToken:
   rotation: 0
   alpha: 1
   disposition: 0
-  displayBars: 0
+  displayBars: 20
   bar1:
     attribute: attributes.hp
   bar2:
@@ -320,7 +402,12 @@ items:
                   number: 1
           name: ''
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -342,9 +429,13 @@ items:
         subtype: ''
       prerequisites:
         level: null
+        items: []
+        repeatable: false
       properties:
         - mgc
       requirements: 'Lever 4: Up'
+      advancement: {}
+      crewed: false
     _id: fmdWz6RQsUCHneZF
     img: icons/commodities/tech/metal-jaws.webp
     effects: []
@@ -360,13 +451,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712710795
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!dmgApparatusofKw.fmdWz6RQsUCHneZF'
   - name: Grapple Attack
     type: feat
@@ -429,6 +518,13 @@ items:
             includeBase: true
             parts: []
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         uXBW1AMdcFYJ3bqQ:
           type: check
           _id: uXBW1AMdcFYJ3bqQ
@@ -478,6 +574,13 @@ items:
               formula: '15'
             ability: ''
           name: Grapple Escape Check
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -500,9 +603,13 @@ items:
         subtype: ''
       prerequisites:
         level: null
+        items: []
+        repeatable: false
       properties:
         - mgc
       requirements: 'Lever 4: Down'
+      advancement: {}
+      crewed: false
     img: icons/commodities/tech/metal-jaws.webp
     effects: []
     folder: null
@@ -517,13 +624,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712710795
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: tgIjCBtGCZvMu8ij
     _key: '!actors.items!dmgApparatusofKw.tgIjCBtGCZvMu8ij'
 effects:
@@ -561,13 +666,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.4
-      createdTime: null
-      modifiedTime: 1728508865121
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.effects!dmgApparatusofKw.D6TOlFQbOM6V0Jv8'
   - type: base
     name: Claws Extended
@@ -595,13 +698,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.4
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.effects!dmgApparatusofKw.9Sxe5orNBLhYpDwz'
   - type: base
     name: Forward Shutter Open
@@ -628,13 +729,11 @@ effects:
     _stats:
       compendiumSource: Actor.dmgApparatusofKw.ActiveEffect.xIiZeSr9KPqMrDFq
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.4
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: xIiZeSr9KPqMrDFq
     _key: '!actors.effects!dmgApparatusofKw.xIiZeSr9KPqMrDFq'
   - type: base
@@ -662,13 +761,11 @@ effects:
     _stats:
       compendiumSource: Actor.dmgApparatusofKw.ActiveEffect.xIiZeSr9KPqMrDFq
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.4
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: sj7HGYh5KeLlZhfr
     _key: '!actors.effects!dmgApparatusofKw.sj7HGYh5KeLlZhfr'
   - type: base
@@ -696,13 +793,11 @@ effects:
     _stats:
       compendiumSource: Actor.dmgApparatusofKw.ActiveEffect.xIiZeSr9KPqMrDFq
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.4
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: pvJazR3MqOCj5fq8
     _key: '!actors.effects!dmgApparatusofKw.pvJazR3MqOCj5fq8'
   - type: base
@@ -732,25 +827,23 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.4
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.effects!dmgApparatusofKw.rBFF2F7IQteiU8kL'
 folder: 2AjZvlZWDCwSd0ry
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
-  systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1728507975227
-  modifiedTime: 1745712710820
-  lastModifiedBy: dnd5ebuilder0000
   exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  createdTime: 1771452692857
+  modifiedTime: 1771452692857
+  lastModifiedBy: dnd5ebuilder0000
 sort: 100000
 ownership:
   default: 0

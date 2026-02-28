@@ -47,8 +47,8 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       type: new StringField({
         blank: false, required: true, readOnly: true, initial: () => this.metadata.type
       }),
-      name: new StringField({ initial: undefined }),
-      img: new FilePathField({ initial: undefined, categories: ["IMAGE"], base64: false }),
+      name: new StringField(),
+      img: new FilePathField({ blank: true, categories: ["IMAGE"], base64: false }),
       sort: new IntegerSortField(),
       activation: new ActivationField({
         override: new BooleanField()
@@ -576,12 +576,16 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
 
     if ( this.activation ) this._setOverride("activation");
     if ( this.duration ) this._setOverride("duration");
-    if ( this.range ) this._setOverride("range");
+    if ( this.range ) {
+      this._setOverride("range");
+      if ( this.range.long > this.range.value ) this.range.value = this.range.long;
+      else if ( this.range.reach && !this.range.value ) this.range.value = this.range.reach;
+    }
     if ( this.target ) this._setOverride("target");
 
     Object.defineProperty(this, "_inferredSource", {
       value: Object.freeze(this.toObject(false)),
-      configurable: false,
+      configurable: true,
       enumerable: false,
       writable: false
     });
@@ -686,7 +690,18 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @returns {object}
    */
   prepareSheetContext() {
-    return { ...this, _id: this._id };
+    const hasUses = !!this._source.uses?.max || !!this.uses?.max;
+    const hasRecharge = hasUses && (this.uses?.recovery[0]?.period === "recharge");
+    return {
+      ...this,
+      _id: this._id,
+      uses: this.uses ? {
+        ...this.uses, hasRecharge, hasUses,
+        isOnCooldown: hasRecharge && (this.uses.value < 1),
+        prop: "uses.value",
+        pct: this.uses.max ? Math.clamp((this.uses.value / this.uses.max) * 100, 0, 100) : 0
+      } : null
+    };
   }
 
   /* -------------------------------------------- */

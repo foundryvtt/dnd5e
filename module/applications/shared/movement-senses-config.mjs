@@ -39,6 +39,16 @@ export default class MovementSensesConfig extends BaseConfigSheet {
 
   /* -------------------------------------------- */
 
+  /**
+   * Location of the specific distances within the data.
+   * @type {string|null}
+   */
+  get subPath() {
+    return this.options.type === "movement" ? null : "ranges";
+  }
+
+  /* -------------------------------------------- */
+
   /** @override */
   get title() {
     return game.i18n.localize(this.options.type === "movement" ? "DND5E.Movement" : "DND5E.Senses");
@@ -72,21 +82,24 @@ export default class MovementSensesConfig extends BaseConfigSheet {
   async _preparePartContext(partId, context, options) {
     context = await super._preparePartContext(partId, context, options);
     const source = this.document.system._source;
-    const placeholderData = this.document.system.details?.race?.system?.[this.options.type] ?? null;
+    let placeholderData = this.document.system.details?.race?.system?.[this.options.type] ?? null;
+    if ( this.subPath && placeholderData ) placeholderData = placeholderData[this.subPath];
 
     context.data = foundry.utils.getProperty(source, this.keyPath) ?? {};
     context.fields = this.document.system.schema.getField(this.keyPath)?.fields;
     if ( context.fields ) {
       context.extras = this._prepareExtraFields(context);
       context.types = this.types.map(key => ({
-        field: context.fields[key],
-        value: context.data[key],
+        field: this.subPath ? context.fields[this.subPath].model : context.fields[key],
+        label: this.options.type === "movement" ? CONFIG.DND5E.movementTypes[key].label : CONFIG.DND5E.senses[key],
+        name: this.subPath ? `system.${this.keyPath}.${this.subPath}.${key}` : `system.${this.keyPath}.${key}`,
+        value: this.subPath ? context.data[this.subPath][key] : context.data[key],
         placeholder: placeholderData?.[key] ?? ""
       }));
 
       context.unitsOptions = Object.entries(CONFIG.DND5E.movementUnits).map(([value, { label }]) => ({ value, label }));
       context.unitsOptions.blank = false;
-      if ( (this.document.type === "character") || ((this.document.type === "npc") && placeholderData) ) {
+      if ( this.document.system.isCharacter || (this.document.system.isNPC && placeholderData) ) {
         const automaticUnit = CONFIG.DND5E.movementUnits[placeholderData?.units ?? defaultUnits("length")]?.label ?? "";
         context.unitsOptions.blank = true;
         context.unitsOptions.unshift(

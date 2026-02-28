@@ -78,7 +78,7 @@ export default class SizeAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async apply(level, data) {
+  async apply(level, data, options={}) {
     this.actor.updateSource({ "system.traits.size": data.size ?? this.configuration.sizes.first() ?? "med" });
     this.updateSource({ value: data });
   }
@@ -86,7 +86,7 @@ export default class SizeAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @override */
-  automaticApplicationValue(level) {
+  async automaticApplicationValue(level) {
     if ( this.configuration.sizes > 1 ) return false;
     return this.configuration.sizes.first() ?? "med";
   }
@@ -94,15 +94,17 @@ export default class SizeAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async restore(level, data) {
-    this.apply(level, data);
+  async restore(level, data, options={}) {
+    this.apply(level, data, options);
   }
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async reverse(level) {
-    this.actor.updateSource({"system.traits.size": "med"});
+  async reverse(level, options={}) {
+    const data = { ...this.value };
+    this.actor.updateSource({ "system.traits.size": "med" });
     this.updateSource({ "value.size": null });
+    return data;
   }
 }

@@ -74,7 +74,7 @@ export default class GroupData extends GroupTemplate {
    */
   get playerCharacters() {
     return this.members.reduce((acc, { actor }) => {
-      if ( actor?.type === "character" ) acc.push(actor);
+      if ( actor?.system.isCharacter ) acc.push(actor);
       return acc;
     }, []);
   }
@@ -109,7 +109,7 @@ export default class GroupData extends GroupTemplate {
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateMembers(source) {
-    if ( foundry.utils.getType(source.members) !== "Array" ) return;
+    if ( !Array.isArray(source.members) ) return;
     source.members = source.members.map(m => {
       if ( foundry.utils.getType(m) === "Object" ) return m;
       return { actor: m };
@@ -166,7 +166,7 @@ export default class GroupData extends GroupTemplate {
       enumerable: false,
       writable: false
     });
-    if ( !memberIds.has(this.primaryVehicle?.id) || (this.primaryVehicle?.type !== "vehicle") ) {
+    if ( !memberIds.has(this.primaryVehicle?.id) || !this.primaryVehicle?.system.isVehicle ) {
       Object.defineProperty(this, "primaryVehicle", { value: null });
     }
   }
@@ -369,20 +369,5 @@ export default class GroupData extends GroupTemplate {
     }
 
     return false;
-  }
-}
-
-/* -------------------------------------------- */
-
-/**
- * @deprecated
- * @since 5.1.0
- */
-export class GroupActor extends GroupData {
-  constructor(...args) {
-    foundry.utils.logCompatibilityWarning("GroupActor is deprecated. Please use GroupData instead.", {
-      since: "DnD5e 5.1", until: "DnD5e 5.3"
-    });
-    super(...args);
   }
 }

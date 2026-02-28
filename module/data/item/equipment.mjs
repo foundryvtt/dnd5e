@@ -1,4 +1,6 @@
+import { simplifyBonus } from "../../utils.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
+import FormulaField from "../fields/formula-field.mjs";
 import ActivitiesTemplate from "./templates/activities.mjs";
 import EquippableItemTemplate from "./templates/equippable-item.mjs";
 import IdentifiableTemplate from "./templates/identifiable.mjs";
@@ -53,7 +55,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
     return this.mergeSchema(super.defineSchema(), {
       armor: new SchemaField({
         value: new NumberField({ required: true, integer: true, min: 0, label: "DND5E.ArmorClass" }),
-        magicalBonus: new NumberField({ min: 0, integer: true, label: "DND5E.MagicalBonus" }),
+        magicalBonus: new FormulaField({ deterministic: true, label: "DND5E.MagicalBonus" }),
         dex: new NumberField({ required: true, integer: true, label: "DND5E.ItemEquipmentDexMod" })
       }),
       proficient: new NumberField({
@@ -69,6 +71,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+    compendiumGearSource: true,
     hasEffects: true,
     enchantable: true
   }, {inplace: false}));
@@ -175,7 +178,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
     if ( Number.isFinite(this.proficient) ) return this.proficient;
     const actor = this.parent.actor;
     if ( !actor ) return 0;
-    if ( actor.type === "npc" ) return 1; // NPCs are always considered proficient with any armor in their stat block.
+    if ( actor.system.isNPC ) return 1; // NPCs are always considered proficient with any armor in their stat block.
     const config = CONFIG.DND5E.armorProficienciesMap;
     const itemProf = config[this.type.value];
     const actorProfs = actor.system.traits?.armorProf?.value ?? new Set();
@@ -277,7 +280,8 @@ export default class EquipmentData extends ItemDataModel.mixin(
     this.prepareIdentifiable();
     this.preparePhysicalData();
     this.prepareMountableData();
-    if ( this.magicAvailable && this.armor.magicalBonus ) this.armor.value += this.armor.magicalBonus;
+    const magicalBonus = simplifyBonus(this.armor.magicalBonus, this.parent.getRollData());
+    if ( this.magicAvailable && magicalBonus ) this.armor.value += magicalBonus;
     this.type.label = CONFIG.DND5E.equipmentTypes[this.type.value]
       ?? game.i18n.localize(CONFIG.Item.typeLabels.equipment);
     this.type.identifier = this.type.value === "shield"
@@ -339,6 +343,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
   async _preCreate(data, options, user) {
     if ( (await super._preCreate(data, options, user)) === false ) return false;
     await this.preCreateEquipped(data, options, user);
+    this.preCreateGear(data, options, user);
   }
 
   /* -------------------------------------------- */

@@ -353,22 +353,20 @@ system:
         mode: 0
       bonus: ''
     movement:
-      burrow: null
-      climb: null
-      fly: null
-      swim: null
-      walk: 30
+      walk: '30'
       units: null
       hover: false
+      ignoredDifficultTerrain: []
     attunement:
       max: 3
     senses:
-      darkvision: 60
-      blindsight: null
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: 60
+        blindsight: null
+        tremorsense: null
+        truesight: null
     spellcasting: str
     exhaustion: 0
     concentration:
@@ -404,15 +402,13 @@ system:
       level: 0
     loyalty:
       value: null
+    price:
+      value: null
+      denomination: gp
   details:
     biography:
       value: >-
-        <div class="gear"><p><strong>Gear:</strong>
-        @UUID[Compendium.dnd5e.equipment24.Item.phbarmLeatherArm]{Leather
-        Armor},
-        @UUID[Compendium.dnd5e.equipment24.Item.phbwepScimitar00]{Scimitar},
-        @UUID[Compendium.dnd5e.equipment24.Item.phbarmShield0000]{Shield},
-        @UUID[Compendium.dnd5e.equipment24.Item.phbwepShortbow00]{Shortbow}</p></div><h1>Goblins</h1><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.TwMrfWrYo0ZAnWB3
+        <h1>Goblins</h1><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.TwMrfWrYo0ZAnWB3
         caption=false cite=false classes="no-embed mm
         free-rules-embed"]</p><h2>Goblin
         Warrior</h2><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.ktLVwvt2KkJVB9eS
@@ -444,11 +440,11 @@ system:
         - individual
   resources:
     legact:
-      value: 0
       max: 0
+      spent: 0
     legres:
-      value: 0
       max: 0
+      spent: 0
     lair:
       value: false
       initiative: null
@@ -487,7 +483,7 @@ system:
     important: false
 prototypeToken:
   name: Goblin Warrior
-  displayName: 0
+  displayName: 20
   actorLink: false
   appendNumber: false
   prependAdjective: false
@@ -509,7 +505,7 @@ prototypeToken:
   rotation: 0
   alpha: 1
   disposition: -1
-  displayBars: 0
+  displayBars: 20
   bar1:
     attribute: attributes.hp
   bar2:
@@ -594,9 +590,8 @@ items:
       rarity: ''
       attunement: ''
       attuned: false
-      equipped: false
+      equipped: true
       cover: null
-      crewed: false
       range:
         value: null
         long: null
@@ -639,10 +634,10 @@ items:
       type:
         value: martialM
         baseItem: scimitar
-      magicalBonus: null
       properties:
         - fin
         - lgt
+        - gear
       proficient: null
       activities:
         YOx3cikY6oPu6Ojh:
@@ -680,7 +675,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
               type: ''
@@ -709,6 +704,13 @@ items:
           sort: 0
           _id: YOx3cikY6oPu6Ojh
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         U2GucmlwJ3rhKAz6:
           type: attack
           activation:
@@ -744,7 +746,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
               type: ''
@@ -783,9 +785,18 @@ items:
           sort: 0
           name: Attack with Advantage
           _id: U2GucmlwJ3rhKAz6
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       ammunition: {}
       mastery: nick
       identifier: scimitar
+      crew:
+        value: []
     _id: 9RULzqhnPi3lqw1u
     type: weapon
     folder: fd3qxAXCv2FhExPp
@@ -802,13 +813,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepScimitar00
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712720198
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!mmGoblinWarrior0.9RULzqhnPi3lqw1u'
   - name: Shortbow
     system:
@@ -837,9 +846,8 @@ items:
       rarity: ''
       attunement: ''
       attuned: false
-      equipped: false
+      equipped: true
       cover: null
-      crewed: false
       range:
         value: 80
         long: 320
@@ -882,10 +890,10 @@ items:
       type:
         value: simpleR
         baseItem: shortbow
-      magicalBonus: null
       properties:
         - amm
         - two
+        - gear
       proficient: null
       activities:
         XTpNEcni4iwfmaeA:
@@ -923,7 +931,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
               type: ''
@@ -952,6 +960,13 @@ items:
           sort: 0
           _id: XTpNEcni4iwfmaeA
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
         emYvANeuJFZF7Zh7:
           type: attack
           activation:
@@ -987,7 +1002,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
               type: ''
@@ -1026,10 +1041,19 @@ items:
           sort: 0
           name: Attack with Advantage
           _id: emYvANeuJFZF7Zh7
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       ammunition:
         type: arrow
       mastery: vex
       identifier: shortbow
+      crew:
+        value: []
     _id: wKUi0YkXW5KapyxP
     type: weapon
     folder: atG8UGtcNyNweUOt
@@ -1046,13 +1070,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepShortbow00
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712720198
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!mmGoblinWarrior0.wKUi0YkXW5KapyxP'
   - name: Leather Armor
     system:
@@ -1081,14 +1103,12 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       uses:
         max: ''
         spent: 0
         recovery: []
       armor:
         value: 11
-        magicalBonus: null
         dex: null
       hp:
         value: null
@@ -1098,14 +1118,18 @@ items:
       type:
         value: light
         baseItem: leather
-      properties: []
+      properties:
+        - gear
       speed:
         value: null
         conditions: ''
+        units: ft
       strength: null
       proficient: null
       activities: {}
       identifier: leather-armor
+      crew:
+        value: []
     type: equipment
     folder: G3X11BbtmEqLmEnK
     img: icons/equipment/chest/breastplate-scale-leather.webp
@@ -1116,13 +1140,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbarmLeatherArm
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712720198
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: mW9S8ntOw3ORgPwd
     sort: 0
     _key: '!actors.items!mmGoblinWarrior0.mW9S8ntOw3ORgPwd'
@@ -1155,14 +1177,12 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       uses:
         max: ''
         spent: 0
         recovery: []
       armor:
         value: 2
-        magicalBonus: null
         dex: null
       hp:
         value: null
@@ -1172,14 +1192,18 @@ items:
       type:
         value: shield
         baseItem: shield
-      properties: []
+      properties:
+        - gear
       speed:
         value: null
         conditions: ''
+        units: ft
       strength: null
       proficient: null
       activities: {}
       identifier: shield
+      crew:
+        value: []
     type: equipment
     folder: Iyyec8ij0PAfdLBd
     img: icons/equipment/shield/round-wooden-boss-steel-brown.webp
@@ -1190,13 +1214,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbarmShield0000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712720198
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: 4VduzMc1QjJxGesu
     sort: 0
     _key: '!actors.items!mmGoblinWarrior0.4VduzMc1QjJxGesu'
@@ -1230,6 +1252,7 @@ items:
             override: false
           effects:
             - _id: 7U7Pe61lsMZgN7qh
+              level: {}
           range:
             override: false
             units: self
@@ -1255,6 +1278,12 @@ items:
             formula: ''
           name: Expend Use
           img: systems/dnd5e/icons/svg/monster.svg
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -1274,9 +1303,10 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: 4T18pEvubPMQLzvD
@@ -1305,24 +1335,16 @@ items:
           - hiding
         sort: 0
         flags:
-          dae:
-            disableCondition: ''
-            stackable: multi
-            showIcon: false
-            durationExpression: ''
-            specialDuration: []
           core:
             overlay: false
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.2.2
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmGoblinWarrior0.mmNimbleEscape00.7U7Pe61lsMZgN7qh
     flags:
@@ -1333,13 +1355,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmNimbleEscape00
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: 1737740362979
-      modifiedTime: 1745712720198
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 0
@@ -1349,13 +1369,13 @@ folder: EypLbRzz5Hphlv5M
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
-  systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1732598129404
-  modifiedTime: 1745712720229
-  lastModifiedBy: dnd5ebuilder0000
   exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  createdTime: 1771452705301
+  modifiedTime: 1771452705301
+  lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:
   default: 0

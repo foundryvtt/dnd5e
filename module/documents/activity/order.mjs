@@ -242,7 +242,7 @@ export default class OrderActivity extends ActivityMixin(BaseOrderActivityData) 
     if ( trade?.stock?.value && trade.sell ) supplements.push(`
       <strong>${game.i18n.localize("DND5E.FACILITY.Trade.Sell.Supplement")}</strong>
       ${formatNumber(trade.stock.value)}
-      ${CONFIG.DND5E.currencies.gp?.abbreviation ?? ""}
+      ${CONFIG.DND5E.currencies[CONFIG.DND5E.defaultCurrency]?.abbreviation ?? ""}
     `);
     if ( trade?.creatures ) {
       const creatures = [];
@@ -289,7 +289,7 @@ export default class OrderActivity extends ActivityMixin(BaseOrderActivityData) 
     const config = foundry.utils.expandObject({ "data.flags.dnd5e.order": order });
     if ( method === "automatic" ) {
       try {
-        await CurrencyManager.deductActorCurrency(this.actor, order.costs.gold, "gp", {
+        await CurrencyManager.deductActorCurrency(this.actor, order.costs.gold, CONFIG.DND5E.defaultCurrency, {
           recursive: true,
           priority: "high"
         });

@@ -361,12 +361,13 @@ system:
     attunement:
       max: 3
     senses:
-      darkvision: null
-      blindsight: null
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: null
+        blindsight: null
+        tremorsense: null
+        truesight: null
     spellcasting: cha
     exhaustion: 0
     concentration:
@@ -624,7 +625,8 @@ items:
         book: ''
         license: CC-BY-4.0
       advancement:
-        - _id: lskxIeib6rIreZ1h
+        lskxIeib6rIreZ1h:
+          _id: lskxIeib6rIreZ1h
           type: Size
           configuration:
             sizes:
@@ -635,7 +637,9 @@ items:
           hint: Meidum (about 4-7 feet tall) or Small (about 3-4 feet tall)
           value:
             size: med
-        - _id: T8T6H9TudTleafUL
+          flags: {}
+        T8T6H9TudTleafUL:
+          _id: T8T6H9TudTleafUL
           type: ItemGrant
           configuration:
             items:
@@ -652,7 +656,9 @@ items:
           level: 0
           title: Tiefling Traits
           hint: ''
-        - _id: bD2XFMWGPkFJLr2w
+          flags: {}
+        bD2XFMWGPkFJLr2w:
+          _id: bD2XFMWGPkFJLr2w
           type: ItemGrant
           configuration:
             items:
@@ -676,7 +682,9 @@ items:
           level: 0
           title: Otherworldly Presence
           hint: ''
-        - _id: 9V9xGP0Fsqh3NDsB
+          flags: {}
+        9V9xGP0Fsqh3NDsB:
+          _id: 9V9xGP0Fsqh3NDsB
           type: Trait
           configuration:
             mode: default
@@ -690,7 +698,9 @@ items:
           level: 1
           title: Infernal Tiefling Traits
           hint: You have Resistance to Fire damage.
-        - _id: gMovXMwHeD9cCL99
+          flags: {}
+        gMovXMwHeD9cCL99:
+          _id: gMovXMwHeD9cCL99
           type: ItemGrant
           configuration:
             items:
@@ -716,7 +726,9 @@ items:
           hint: >-
             Intelligence, Wisdom, or Charisma is your spellcasting ability for
             the spells you cast with this trait.
-        - _id: ol3SWLw2FTNEiXrb
+          flags: {}
+        ol3SWLw2FTNEiXrb:
+          _id: ol3SWLw2FTNEiXrb
           type: ItemGrant
           configuration:
             items:
@@ -740,7 +752,9 @@ items:
           hint: >-
             Intelligence, Wisdom, or Charisma is your spellcasting ability for
             the spells you cast with this trait.
-        - _id: cj8h25IH0Zvdy3Bm
+          flags: {}
+        cj8h25IH0Zvdy3Bm:
+          _id: cj8h25IH0Zvdy3Bm
           type: ItemGrant
           configuration:
             items:
@@ -764,18 +778,20 @@ items:
           hint: >-
             Intelligence, Wisdom, or Charisma is your spellcasting ability for
             the spells you cast with this trait.
+          flags: {}
       movement:
         walk: '30'
         units: null
         hover: false
         ignoredDifficultTerrain: []
       senses:
-        darkvision: 60
-        blindsight: null
-        tremorsense: null
-        truesight: null
         units: null
         special: ''
+        ranges:
+          darkvision: 60
+          blindsight: null
+          tremorsense: null
+          truesight: null
       type:
         value: humanoid
         subtype: Tiefling
@@ -790,7 +806,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -905,6 +921,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: thaumaturgy
       method: spell
       prepared: 2
@@ -951,7 +968,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!MorthosLv0100000.1g0GtSr1z1YTUCSZ.WUkq6HS8v9DK6fQz
@@ -968,7 +985,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -1010,7 +1027,7 @@ items:
       properties: []
       requirements: Tiefling
       identifier: otherworldly-presence
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     effects: []
@@ -1026,7 +1043,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -1086,7 +1103,7 @@ items:
       properties: []
       requirements: Tiefling
       identifier: fiendish-legacy-infernal
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     effects: []
@@ -1102,7 +1119,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -1207,12 +1224,16 @@ items:
       identifier: sorcerer
       levels: 1
       advancement:
-        - _id: wu4INYdfnMUSeDqH
+        wu4INYdfnMUSeDqH:
+          _id: wu4INYdfnMUSeDqH
           type: HitPoints
           configuration: {}
           value:
             '1': max
-        - _id: preISmaDhLpsoWqy
+          flags: {}
+          hint: ''
+        preISmaDhLpsoWqy:
+          _id: preISmaDhLpsoWqy
           type: ItemGrant
           configuration:
             items:
@@ -1228,7 +1249,10 @@ items:
               5IUWvD0SSYmmqsvO: Compendium.dnd5e.classes24.Item.phbscrInnateSorc
           level: 1
           title: Class Features
-        - _id: c5fRAxTbRHamZM7M
+          flags: {}
+          hint: ''
+        c5fRAxTbRHamZM7M:
+          _id: c5fRAxTbRHamZM7M
           type: ItemGrant
           configuration:
             items:
@@ -1241,7 +1265,10 @@ items:
           value: {}
           level: 2
           title: Class Features
-        - _id: SihgGDvXjAktGkt1
+          flags: {}
+          hint: ''
+        SihgGDvXjAktGkt1:
+          _id: SihgGDvXjAktGkt1
           type: ItemGrant
           configuration:
             items:
@@ -1252,7 +1279,10 @@ items:
           value: {}
           level: 5
           title: Class Features
-        - _id: vGoDRNITjHNqxW1z
+          flags: {}
+          hint: ''
+        vGoDRNITjHNqxW1z:
+          _id: vGoDRNITjHNqxW1z
           type: ItemGrant
           configuration:
             items:
@@ -1263,7 +1293,10 @@ items:
           value: {}
           level: 7
           title: Class Features
-        - _id: g3PLJU1zYyUrHCY0
+          flags: {}
+          hint: ''
+        g3PLJU1zYyUrHCY0:
+          _id: g3PLJU1zYyUrHCY0
           type: ItemGrant
           configuration:
             items:
@@ -1274,7 +1307,10 @@ items:
           value: {}
           level: 20
           title: Class Features
-        - _id: bwCLOdauuzoHofil
+          flags: {}
+          hint: ''
+        bwCLOdauuzoHofil:
+          _id: bwCLOdauuzoHofil
           type: AbilityScoreImprovement
           configuration:
             points: 2
@@ -1292,7 +1328,10 @@ items:
             type: asi
           level: 4
           title: ''
-        - _id: mRSh9oUVjLU33e7p
+          flags: {}
+          hint: ''
+        mRSh9oUVjLU33e7p:
+          _id: mRSh9oUVjLU33e7p
           type: AbilityScoreImprovement
           configuration:
             points: 2
@@ -1310,7 +1349,10 @@ items:
             type: asi
           level: 8
           title: ''
-        - _id: mhZh3LfLMa15tXee
+          flags: {}
+          hint: ''
+        mhZh3LfLMa15tXee:
+          _id: mhZh3LfLMa15tXee
           type: AbilityScoreImprovement
           configuration:
             points: 2
@@ -1328,7 +1370,10 @@ items:
             type: asi
           level: 12
           title: ''
-        - _id: FOf5CkGnSs0OlppY
+          flags: {}
+          hint: ''
+        FOf5CkGnSs0OlppY:
+          _id: FOf5CkGnSs0OlppY
           type: AbilityScoreImprovement
           configuration:
             points: 2
@@ -1346,7 +1391,10 @@ items:
             type: asi
           level: 16
           title: ''
-        - _id: DUHZI0oND7OQ6lox
+          flags: {}
+          hint: ''
+        DUHZI0oND7OQ6lox:
+          _id: DUHZI0oND7OQ6lox
           type: ScaleValue
           configuration:
             identifier: max-prepared
@@ -1391,7 +1439,9 @@ items:
           value: {}
           title: Max Prepared Spells
           hint: ''
-        - _id: zMjMi0B3XrcQMqAS
+          flags: {}
+        zMjMi0B3XrcQMqAS:
+          _id: zMjMi0B3XrcQMqAS
           type: ScaleValue
           configuration:
             identifier: ''
@@ -1408,7 +1458,9 @@ items:
           value: {}
           title: Cantrips Known
           hint: ''
-        - _id: nIaa61I4SSnwAQvz
+          flags: {}
+        nIaa61I4SSnwAQvz:
+          _id: nIaa61I4SSnwAQvz
           type: ItemChoice
           configuration:
             choices:
@@ -1446,7 +1498,9 @@ items:
           hint: >-
             Because your magic flows from within, you can alter your spells to
             suit your needs; you gain two Metamagic options.
-        - _id: q7N6Am8hFSq15JTl
+          flags: {}
+        q7N6Am8hFSq15JTl:
+          _id: q7N6Am8hFSq15JTl
           type: Subclass
           configuration: {}
           value:
@@ -1455,7 +1509,9 @@ items:
           level: 3
           title: ''
           hint: ''
-        - _id: XzTd1a6iGhCAqMs3
+          flags: {}
+        XzTd1a6iGhCAqMs3:
+          _id: XzTd1a6iGhCAqMs3
           type: Trait
           configuration:
             mode: default
@@ -1472,7 +1528,9 @@ items:
           title: Saving Throw Proficiencies
           hint: ''
           classRestriction: primary
-        - _id: 7xtY4ilruYHMPFfM
+          flags: {}
+        7xtY4ilruYHMPFfM:
+          _id: 7xtY4ilruYHMPFfM
           type: Trait
           configuration:
             mode: default
@@ -1495,7 +1553,9 @@ items:
           title: Skill Proficiencies
           hint: ''
           classRestriction: primary
-        - _id: nFvwOhQGBMwm07Fa
+          flags: {}
+        nFvwOhQGBMwm07Fa:
+          _id: nFvwOhQGBMwm07Fa
           type: Trait
           configuration:
             mode: default
@@ -1510,7 +1570,9 @@ items:
           title: Weapon Proficiencies
           hint: ''
           classRestriction: primary
-        - _id: mQyTV3LMkMQT1zfO
+          flags: {}
+        mQyTV3LMkMQT1zfO:
+          _id: mQyTV3LMkMQT1zfO
           type: ScaleValue
           configuration:
             identifier: points
@@ -1559,7 +1621,9 @@ items:
           value: {}
           title: Sorcery Points
           hint: ''
-        - type: AbilityScoreImprovement
+          flags: {}
+        EgWvwpbMp6gDqqiT:
+          type: AbilityScoreImprovement
           _id: EgWvwpbMp6gDqqiT
           configuration:
             cap: 2
@@ -1579,6 +1643,7 @@ items:
           level: 19
           title: ''
           hint: ''
+          flags: {}
       spellcasting:
         progression: full
         ability: cha
@@ -1602,7 +1667,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -1750,7 +1815,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -1830,7 +1895,7 @@ items:
       activities: {}
       enchant: {}
       identifier: spellcasting
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     flags:
@@ -1844,7 +1909,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -1951,9 +2016,10 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       enchant: {}
       identifier: innate-sorcery
-      advancement: []
+      advancement: {}
       crewed: false
     effects:
       - name: Innate Sorcery
@@ -1991,7 +2057,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!MorthosLv0100000.5IUWvD0SSYmmqsvO.WtiHwWONdmCOeSDR
@@ -2006,7 +2072,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -2135,6 +2201,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: light
       method: spell
       sourceClass: sorcerer
@@ -2152,7 +2219,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -2263,6 +2330,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: prestidigitation
       method: spell
       sourceClass: sorcerer
@@ -2280,7 +2348,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -2407,6 +2475,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: shocking-grasp
       method: spell
       sourceClass: sorcerer
@@ -2445,7 +2514,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!MorthosLv0100000.XYLne6GZXTGtHTTB.DQCAm67ck1GEKHtE
@@ -2458,7 +2527,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -2593,6 +2662,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: sorcerous-burst
       method: spell
       sourceClass: sorcerer
@@ -2610,7 +2680,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -2733,6 +2803,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: burning-hands
       method: spell
       sourceClass: sorcerer
@@ -2750,7 +2821,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -2863,6 +2934,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: detect-magic
       method: spell
       sourceClass: sorcerer
@@ -2899,7 +2971,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!MorthosLv0100000.UOwWtGZZDAyxIwjL.BHw91lQmVgdx39WZ
@@ -2912,7 +2984,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -2951,7 +3023,6 @@ items:
         recovery: []
       armor:
         value: null
-        magicalBonus: null
         dex: null
       hp:
         value: null
@@ -2987,7 +3058,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -3023,7 +3094,6 @@ items:
         recovery: []
       armor:
         value: null
-        magicalBonus: null
         dex: null
       hp:
         value: null
@@ -3059,7 +3129,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -3108,7 +3178,6 @@ items:
       type:
         value: trinket
         subtype: ''
-      magicalBonus: null
       properties: []
       activities: {}
       identifier: ink
@@ -3127,7 +3196,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -3173,7 +3242,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -3223,7 +3292,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -3295,7 +3364,6 @@ items:
       type:
         value: simpleM
         baseItem: spear
-      magicalBonus: null
       properties:
         - thr
         - ver
@@ -3371,6 +3439,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         PugJrCiRWKHdxxdd:
           type: attack
           name: Spellcasting Attack
@@ -3486,7 +3555,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!MorthosLv0100000.rj4CRsEDJ6yuq7vO.wVhLRCuAlahPa1o9
@@ -3498,7 +3567,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -3570,7 +3639,6 @@ items:
       type:
         value: simpleM
         baseItem: dagger
-      magicalBonus: null
       properties:
         - fin
         - lgt
@@ -3647,6 +3715,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       ammunition: {}
       mastery: nick
       identifier: dagger
@@ -3667,7 +3736,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -3706,7 +3775,6 @@ items:
         recovery: []
       armor:
         value: null
-        magicalBonus: null
         dex: null
       hp:
         value: null
@@ -3742,7 +3810,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -3813,7 +3881,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -3873,7 +3941,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -3939,6 +4007,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -3983,7 +4052,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties: []
     effects: []
     folder: uDk4FBYfcP2JnX6t
@@ -3994,7 +4062,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     _id: IZpxAkJKiGOSeSqj
     sort: 100000
@@ -4039,7 +4107,6 @@ items:
         recovery: []
       armor:
         value: null
-        magicalBonus: null
         dex: null
       hp:
         value: null
@@ -4109,6 +4176,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: tinderbox
       crew:
         value: []
@@ -4125,7 +4193,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -4183,7 +4251,6 @@ items:
       type:
         value: trinket
         subtype: ''
-      magicalBonus: null
       properties: []
       activities:
         Y0LvyxjfVHNbp4CG:
@@ -4244,6 +4311,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         rYGOWDRcT5jBKvzq:
           type: check
           name: Burst Rope
@@ -4298,6 +4366,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         5q6tX1T7ONDvgJiA:
           type: check
           name: Escape Check
@@ -4352,6 +4421,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: rope
     _id: HkBQSbP9KO6JuMRl
     type: consumable
@@ -4366,7 +4436,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -4414,7 +4484,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -4466,7 +4536,6 @@ items:
       type:
         value: food
         subtype: ''
-      magicalBonus: null
       properties: []
       activities: {}
       identifier: rations
@@ -4483,7 +4552,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -4536,7 +4605,6 @@ items:
       type:
         value: trinket
         subtype: ''
-      magicalBonus: null
       properties: []
       activities:
         SouNhSdWdnznKCam:
@@ -4622,6 +4690,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: torch
     _id: 9Cy0JL47AfQCxnpk
     type: consumable
@@ -4636,7 +4705,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -4691,7 +4760,6 @@ items:
       type:
         value: trinket
         subtype: ''
-      magicalBonus: null
       properties: []
       activities:
         G8upRnZw22jGWKWy:
@@ -4776,6 +4844,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: caltrops
     _id: M0Tra8pMyE32Bm48
     type: consumable
@@ -4830,7 +4899,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!MorthosLv0100000.M0Tra8pMyE32Bm48.HsbtDDdiWhk4d7WB
@@ -4842,7 +4911,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -4911,7 +4980,6 @@ items:
       type:
         value: potion
         subtype: ''
-      magicalBonus: null
       properties: []
       activities:
         FoeoumkYcnAsGCRo:
@@ -4976,6 +5044,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         mDj3jtAY6ICmi1ZL:
           type: damage
           name: Douse Space
@@ -5045,6 +5114,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: oil
     _id: Y80MDYRd7egi5twt
     type: consumable
@@ -5059,7 +5129,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -5069,7 +5139,8 @@ items:
     img: icons/magic/symbols/star-inverted-yellow.webp
     system:
       advancement:
-        - type: AbilityScoreImprovement
+        1Q3sqDL4PWsaE5Fh:
+          type: AbilityScoreImprovement
           _id: 1Q3sqDL4PWsaE5Fh
           configuration:
             cap: 2
@@ -5095,7 +5166,9 @@ items:
           level: 0
           title: ''
           hint: ''
-        - type: Trait
+          flags: {}
+        6RFYDHZ7mhTG2GRG:
+          type: Trait
           title: Background Proficiencies
           _id: 6RFYDHZ7mhTG2GRG
           configuration:
@@ -5113,7 +5186,9 @@ items:
               - skills:arc
               - skills:his
               - tool:art:alchemist
-        - type: Trait
+          flags: {}
+        Dvp6RDUrsnOEi9ql:
+          type: Trait
           _id: Dvp6RDUrsnOEi9ql
           configuration:
             allowReplacements: false
@@ -5132,7 +5207,9 @@ items:
               - languages:standard:common
               - languages:standard:sign
               - languages:standard:draconic
-        - type: ItemGrant
+          flags: {}
+        bWWDnIBdVmwOwqHc:
+          type: ItemGrant
           _id: bWWDnIBdVmwOwqHc
           configuration:
             items:
@@ -5146,6 +5223,7 @@ items:
           level: 0
           title: Background Feat
           hint: ''
+          flags: {}
       description:
         value: >-
           <p><strong>Ability Scores:</strong> Charisma, Constitution,
@@ -5227,7 +5305,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     _id: 54kCbZAOM89Nbgt0
     ownership:
@@ -5279,7 +5357,8 @@ items:
       enchant: {}
       identifier: magic-initiate
       advancement:
-        - type: ItemChoice
+        ElkyDafWSUXOkPdJ:
+          type: ItemChoice
           _id: ElkyDafWSUXOkPdJ
           configuration:
             allowDrops: true
@@ -5315,7 +5394,9 @@ items:
             ability: cha
           title: Two Cantrips
           hint: ''
-        - type: ItemChoice
+          flags: {}
+        ZbKHs2FVCkJVNW8p:
+          type: ItemChoice
           configuration:
             allowDrops: true
             choices:
@@ -5350,6 +5431,7 @@ items:
           title: Level 1 Spell
           hint: ''
           _id: ZbKHs2FVCkJVNW8p
+          flags: {}
       crewed: false
     _id: oMloF4w4cPpWDyhb
     type: feat
@@ -5368,7 +5450,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -5477,6 +5559,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         a3yQkJtUNS6monjO:
           _id: a3yQkJtUNS6monjO
           type: forward
@@ -5506,6 +5589,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: mage-armor
       method: spell
       prepared: 2
@@ -5543,7 +5627,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         img: icons/equipment/chest/breastplate-helmet-metal.webp
         type: base
@@ -5564,7 +5648,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -5689,6 +5773,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         CiLsaHBi9F6eIXUS:
           type: attack
           name: Spellcasting Attack
@@ -5860,7 +5945,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!MorthosLv0100000.h3hReeIPbbhRhuEH.SouQfUgwb9LlUraq
@@ -5903,7 +5988,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _id: Zsx8UvC9DmdrA1E1
         _key: >-
@@ -5925,7 +6010,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -6055,6 +6140,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: mage-hand
       method: spell
       prepared: 2
@@ -6077,7 +6163,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -6090,9 +6176,9 @@ _stats:
   exportSource: null
   coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.2.4
-  createdTime: 1766959014097
-  modifiedTime: 1766959014097
+  systemVersion: 5.3.0
+  createdTime: 1771452686143
+  modifiedTime: 1771452686143
   lastModifiedBy: dnd5ebuilder0000
 ownership:
   default: 0

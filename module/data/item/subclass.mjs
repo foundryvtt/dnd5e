@@ -65,6 +65,16 @@ export default class SubclassData extends ItemDataModel.mixin(AdvancementTemplat
   }
 
   /* -------------------------------------------- */
+  /*  Data Migration                              */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static _migrateData(source) {
+    super._migrateData(source);
+    AdvancementTemplate.migrateAdvancement(source);
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 

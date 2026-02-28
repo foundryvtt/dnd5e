@@ -37,17 +37,17 @@ export class ActivityField extends foundry.data.fields.ObjectField {
    * @returns {typeof Activity|null}  Activity document type.
    */
   getModel(value) {
-    return CONFIG.DND5E.activityTypes[value.type]?.documentClass ?? null;
+    return CONFIG.DND5E.activityTypes[value?.type]?.documentClass ?? null;
   }
 
   /* -------------------------------------------- */
 
   /** @override */
-  _cleanType(value, options) {
+  _cleanType(value, options, _state) {
     if ( !(typeof value === "object") ) value = {};
 
-    const cls = this.getModel(value);
-    if ( cls ) return cls.cleanData(value, options);
+    const cls = this.getModel(value) ?? this.getModel(_state?.source);
+    if ( cls ) return cls.cleanData(value, options, _state);
     return value;
   }
 
@@ -62,15 +62,24 @@ export class ActivityField extends foundry.data.fields.ObjectField {
 
   /* -------------------------------------------- */
 
-  /**
-   * Migrate this field's candidate source data.
-   * @param {object} sourceData  Candidate source data of the root model.
-   * @param {any} fieldData      The value of this field within the source data.
-   */
-  migrateSource(sourceData, fieldData) {
+  /** @inheritDoc */
+  _migrate(value, options, _state) {
+    const cls = this.getModel(value);
+    if ( cls ) cls.migrateDataSafe(value);
+    return value;
+  }
+}
+
+/**
+ * @deprecated
+ * @since 5.3.0
+ */
+if ( !("_migrate" in foundry.data.fields.DataField.prototype) ) {
+  /** @ignore */
+  ActivityField.prototype.migrateSource = function(sourceData, fieldData) {
     const cls = this.getModel(fieldData);
     if ( cls ) cls.migrateDataSafe(fieldData);
-  }
+  };
 }
 
 /* -------------------------------------------- */

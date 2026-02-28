@@ -11,11 +11,7 @@
         {{#each advancements}}
         <li class="advancement-item item flexrow">
             <div class="item-name flexrow">
-                {{#if svg}}
-                <dnd5e-icon src="{{ icon }}"></dnd5e-icon>
-                {{else}}
-                <img class="gold-icon" src="{{ icon }}" alt="{{ title }}">
-                {{/if}}
+                {{ dnd5e-icon icon alt=title classes="gold-icon" }}
                 <span class="name">{{ title }}</span>
             </div>
             <div class="item-controls flexrow">

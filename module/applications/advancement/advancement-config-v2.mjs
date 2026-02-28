@@ -5,18 +5,6 @@ import PseudoDocumentSheet from "../api/pseudo-document-sheet.mjs";
  * editing interfaces.
  */
 export default class AdvancementConfig extends PseudoDocumentSheet {
-  constructor(advancement={}, options={}) {
-    if ( advancement instanceof dnd5e.documents.advancement.Advancement ) {
-      foundry.utils.logCompatibilityWarning(
-        "`AdvancementConfig` should be constructed by passing the Advancement as `options.document`, not as separate parameter.",
-        { since: "DnD5e 5.1", until: "DnD5e 5.3" }
-      );
-      options.document = advancement;
-    } else options = { ...advancement, ...options };
-    super(options);
-  }
-
-  /* -------------------------------------------- */
 
   /** @override */
   static DEFAULT_OPTIONS = {
@@ -91,7 +79,8 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
         { value: "secondary", label: game.i18n.localize("DND5E.AdvancementClassRestrictionSecondary") }
       ],
       showClassRestrictions: this.item.type === "class",
-      showLevelSelector: !this.advancement.constructor.metadata.multiLevel
+      showLevelSelector: !this.advancement.metadata.multiLevel,
+      supportsHTMLHint: this.advancement.supportsHTMLHint
     };
     return context;
   }
@@ -103,6 +92,7 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
+    if ( !this.isEditable ) return;
     new CONFIG.ux.DragDrop({
       dragSelector: ".draggable",
       dropSelector: null,

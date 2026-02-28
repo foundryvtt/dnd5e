@@ -1,6 +1,6 @@
 import Dialog5e from "../api/dialog.mjs";
 
-const { NumberField, StringField } = foundry.data.fields;
+const { NumberField } = foundry.data.fields;
 
 /**
  * Dialog that allows setting the current date.

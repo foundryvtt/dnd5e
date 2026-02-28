@@ -1,5 +1,5 @@
 import simplifyRollFormula from "../../dice/simplify-roll-formula.mjs";
-import { convertLength, formatLength, formatNumber } from "../../utils.mjs";
+import { convertLength, formatLength, formatNumber, simplifyBonus } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import DamageField from "../shared/damage-field.mjs";
 import BaseActivityData from "./base-activity.mjs";
@@ -76,7 +76,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
   get activationLabels() {
     const labels = super.activationLabels;
     if ( labels && (this.item.type === "weapon") && !this.range.override ) {
-      if ( this.item.labels?.range ) labels.range = this.item.labels.range;
+      labels.range = this.item.labels?.range ? this.item.labels.range : null;
       if ( this.item.labels?.reach ) labels.reach = this.item.labels.reach;
     }
     return labels;
@@ -232,7 +232,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
     }
     const actionType = this.getActionType(attackMode);
     let actionTypeLabel = game.i18n.localize(`DND5E.Action${actionType.toUpperCase()}`);
-    const isLegacy = game.settings.get("dnd5e", "rulesVersion") === "legacy";
+    const isLegacy = dnd5e.settings.rulesVersion === "legacy";
     const isUnarmed = this.attack.type.classification === "unarmed";
     if ( isUnarmed ) attackModeLabel = game.i18n.localize("DND5E.ATTACK.Classification.Unarmed");
     const isSpell = (actionType === "rsak") || (actionType === "msak");
@@ -323,7 +323,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
       }
     }
 
-    if ( this.damage.critical.bonus && !rollConfig.rolls[0]?.options?.critical?.bonusDamage ) {
+    if ( this.damage.critical.bonus && rollConfig.rolls[0] && !rollConfig.rolls[0].options?.critical?.bonusDamage ) {
       foundry.utils.setProperty(rollConfig.rolls[0], "options.critical.bonusDamage", this.damage.critical.bonus);
     }
 
@@ -392,16 +392,18 @@ export default class BaseAttackActivityData extends BaseActivityData {
       if ( includeMod && !roll.parts.some(p => p.includes("@mod")) ) roll.parts.push("@mod");
 
       // Add magical bonus
-      if ( this.item.system.magicalBonus && this.item.system.magicAvailable ) {
+      const magicalBonus = simplifyBonus(this.item.system.magicalBonus, rollData);
+      if ( magicalBonus && this.item.system.magicAvailable ) {
         roll.parts.push("@magicalBonus");
-        roll.data.magicalBonus = this.item.system.magicalBonus;
+        roll.data.magicalBonus = magicalBonus;
       }
 
       // Add ammunition bonus
       const ammo = rollConfig.ammunition?.system;
-      if ( ammo?.magicAvailable && ammo.magicalBonus ) {
+      const ammoMagicalBonus = simplifyBonus(ammo?.magicalBonus, rollData);
+      if ( ammo?.magicAvailable && ammoMagicalBonus ) {
         roll.parts.push("@ammoBonus");
-        roll.data.ammoBonus = ammo.magicalBonus;
+        roll.data.ammoBonus = ammoMagicalBonus;
       }
     }
 

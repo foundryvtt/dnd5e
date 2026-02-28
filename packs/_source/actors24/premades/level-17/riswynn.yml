@@ -369,12 +369,13 @@ system:
     attunement:
       max: 3
     senses:
-      darkvision: null
-      blindsight: null
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: null
+        blindsight: null
+        tremorsense: null
+        truesight: null
     spellcasting: ''
     exhaustion: 0
     concentration:
@@ -630,7 +631,8 @@ items:
         license: CC-BY-4.0
         book: ''
       advancement:
-        - _id: 6HdONjMD4UozXSfC
+        6HdONjMD4UozXSfC:
+          _id: 6HdONjMD4UozXSfC
           type: Size
           configuration:
             sizes:
@@ -640,7 +642,9 @@ items:
           hint: Medium (about 4–5 feet tall)
           value:
             size: med
-        - _id: PphNMhWLl5mEgAZf
+          flags: {}
+        PphNMhWLl5mEgAZf:
+          _id: PphNMhWLl5mEgAZf
           type: ItemGrant
           configuration:
             items:
@@ -660,7 +664,9 @@ items:
           level: 0
           title: Dwarf Traits
           hint: ''
-        - _id: S3kro3b0bq0Ks6Y8
+          flags: {}
+        S3kro3b0bq0Ks6Y8:
+          _id: S3kro3b0bq0Ks6Y8
           type: Trait
           configuration:
             mode: default
@@ -674,18 +680,20 @@ items:
           level: 0
           title: Dwarven Resilience
           hint: You have Resistance to Poison damage.
+          flags: {}
       movement:
         walk: '30'
         units: null
         hover: false
         ignoredDifficultTerrain: []
       senses:
-        darkvision: 120
-        blindsight: null
-        tremorsense: null
-        truesight: null
         units: null
         special: ''
+        ranges:
+          darkvision: 120
+          blindsight: null
+          tremorsense: null
+          truesight: null
       type:
         value: humanoid
         custom: ''
@@ -703,7 +711,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -744,7 +752,7 @@ items:
       properties: []
       requirements: Dwarf
       identifier: dwarven-resilience
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     folder: R0KprZdOrRDNsTBv
@@ -759,7 +767,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -799,7 +807,7 @@ items:
       properties: []
       requirements: Dwarf
       identifier: dwarven-toughness
-      advancement: []
+      advancement: {}
       crewed: false
     effects:
       - name: Dwarven Toughness
@@ -834,7 +842,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.23hZYyQB2r7FYfDF.Na7W3p67eT9YqW87
@@ -850,7 +858,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -955,7 +963,7 @@ items:
             requireMagic: false
       enchant: {}
       identifier: stonecunning
-      advancement: []
+      advancement: {}
       crewed: false
     _id: 0sOpkCaLkao7OFhW
     type: feat
@@ -994,7 +1002,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.0sOpkCaLkao7OFhW.SAbuNo2AO3XXtkdv
@@ -1010,7 +1018,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -1143,7 +1151,8 @@ items:
       identifier: rogue
       levels: 17
       advancement:
-        - _id: 6zkx7K1uPW2IQ5JA
+        6zkx7K1uPW2IQ5JA:
+          _id: 6zkx7K1uPW2IQ5JA
           type: HitPoints
           configuration: {}
           value:
@@ -1164,7 +1173,10 @@ items:
             '15': avg
             '16': avg
             '17': avg
-        - _id: 4lvoA3fvGLv15lyc
+          flags: {}
+          hint: ''
+        4lvoA3fvGLv15lyc:
+          _id: 4lvoA3fvGLv15lyc
           type: ItemGrant
           configuration:
             items:
@@ -1186,7 +1198,10 @@ items:
               jhV4pP4PyLLInuyZ: Compendium.dnd5e.classes24.Item.phbrgeWeaponMast
           level: 1
           title: Class Features
-        - _id: MWgIb29krlDy6YW6
+          flags: {}
+          hint: ''
+        MWgIb29krlDy6YW6:
+          _id: MWgIb29krlDy6YW6
           type: ItemGrant
           configuration:
             items:
@@ -1199,7 +1214,10 @@ items:
               8D5MNyj6IOqJnc6L: Compendium.dnd5e.classes24.Item.phbrgeCunningAct
           level: 2
           title: Class Features
-        - _id: py3wJiuRo9A5PlZb
+          flags: {}
+          hint: ''
+        py3wJiuRo9A5PlZb:
+          _id: py3wJiuRo9A5PlZb
           type: ItemGrant
           configuration:
             items:
@@ -1212,7 +1230,10 @@ items:
               iSK720h4AStmW1uw: Compendium.dnd5e.classes24.Item.phbrgeSteadyAim0
           level: 3
           title: Class Features
-        - _id: hsOIIBWwSrWJvTuc
+          flags: {}
+          hint: ''
+        hsOIIBWwSrWJvTuc:
+          _id: hsOIIBWwSrWJvTuc
           type: ItemGrant
           configuration:
             items:
@@ -1228,7 +1249,10 @@ items:
               MZimHBVO8UCSFu5v: Compendium.dnd5e.classes24.Item.phbrgeUncannyDod
           level: 5
           title: Class Features
-        - _id: 6lgPpApxgrLKsNdH
+          flags: {}
+          hint: ''
+        6lgPpApxgrLKsNdH:
+          _id: 6lgPpApxgrLKsNdH
           type: ItemGrant
           configuration:
             items:
@@ -1244,7 +1268,10 @@ items:
               w6dnHDbB4EJfyadL: Compendium.dnd5e.classes24.Item.phbrgeReliableTa
           level: 7
           title: Class Features
-        - _id: G8gk2pfQ2FIn6lX9
+          flags: {}
+          hint: ''
+        G8gk2pfQ2FIn6lX9:
+          _id: G8gk2pfQ2FIn6lX9
           type: ItemGrant
           configuration:
             items:
@@ -1257,7 +1284,10 @@ items:
               r6AKb88Uu6pXwmmd: Compendium.dnd5e.classes24.Item.phbrgeImprovedCu
           level: 11
           title: Class Features
-        - _id: bUBIV36rJZHw5GKr
+          flags: {}
+          hint: ''
+        bUBIV36rJZHw5GKr:
+          _id: bUBIV36rJZHw5GKr
           type: ItemGrant
           configuration:
             items:
@@ -1270,7 +1300,10 @@ items:
               Mipk9J0AlnHBlKHJ: Compendium.dnd5e.classes24.Item.phbrgeDeviousStr
           level: 14
           title: Class Features
-        - _id: mC2Y1MpLlQ7uSnvk
+          flags: {}
+          hint: ''
+        mC2Y1MpLlQ7uSnvk:
+          _id: mC2Y1MpLlQ7uSnvk
           type: ItemGrant
           configuration:
             items:
@@ -1283,7 +1316,10 @@ items:
               u1FBccZKf8R4Hiy6: Compendium.dnd5e.classes24.Item.phbrgeSlipperyMi
           level: 15
           title: Class Features
-        - _id: n1IVdZzKh3PPG915
+          flags: {}
+          hint: ''
+        n1IVdZzKh3PPG915:
+          _id: n1IVdZzKh3PPG915
           type: ItemGrant
           configuration:
             items:
@@ -1294,7 +1330,10 @@ items:
           value: {}
           level: 18
           title: Class Features
-        - _id: Rb7qWhNRuua2brG0
+          flags: {}
+          hint: ''
+        Rb7qWhNRuua2brG0:
+          _id: Rb7qWhNRuua2brG0
           type: ItemGrant
           configuration:
             items:
@@ -1305,7 +1344,10 @@ items:
           value: {}
           level: 20
           title: Class Features
-        - _id: bwCLOdauuzoHofil
+          flags: {}
+          hint: ''
+        bwCLOdauuzoHofil:
+          _id: bwCLOdauuzoHofil
           type: AbilityScoreImprovement
           configuration:
             points: 2
@@ -1325,7 +1367,10 @@ items:
               dex: 2
           level: 4
           title: ''
-        - _id: mRSh9oUVjLU33e7p
+          flags: {}
+          hint: ''
+        mRSh9oUVjLU33e7p:
+          _id: mRSh9oUVjLU33e7p
           type: AbilityScoreImprovement
           configuration:
             points: 2
@@ -1346,7 +1391,10 @@ items:
               int: 1
           level: 8
           title: ''
-        - _id: mhZh3LfLMa15tXee
+          flags: {}
+          hint: ''
+        mhZh3LfLMa15tXee:
+          _id: mhZh3LfLMa15tXee
           type: AbilityScoreImprovement
           configuration:
             points: 2
@@ -1366,7 +1414,10 @@ items:
               int: 2
           level: 12
           title: ''
-        - _id: FOf5CkGnSs0OlppY
+          flags: {}
+          hint: ''
+        FOf5CkGnSs0OlppY:
+          _id: FOf5CkGnSs0OlppY
           type: AbilityScoreImprovement
           configuration:
             points: 2
@@ -1387,7 +1438,10 @@ items:
               int: 1
           level: 16
           title: ''
-        - _id: PbZFa8JfPdQcvr1Q
+          flags: {}
+          hint: ''
+        PbZFa8JfPdQcvr1Q:
+          _id: PbZFa8JfPdQcvr1Q
           type: AbilityScoreImprovement
           configuration:
             points: 2
@@ -1407,7 +1461,10 @@ items:
               int: 2
           level: 10
           title: ''
-        - _id: 4doj2kFD8sIYiX8X
+          flags: {}
+          hint: ''
+        4doj2kFD8sIYiX8X:
+          _id: 4doj2kFD8sIYiX8X
           type: Trait
           configuration:
             mode: expertise
@@ -1427,7 +1484,9 @@ items:
             You gain Expertise in two of your skill proficiencies of your
             choice. Sleight of Hand and Stealth are recommended if you have
             proficiency in them.
-        - _id: sqWH6tnUg7jiGaEj
+          flags: {}
+        sqWH6tnUg7jiGaEj:
+          _id: sqWH6tnUg7jiGaEj
           type: Trait
           configuration:
             mode: expertise
@@ -1444,7 +1503,9 @@ items:
           level: 6
           title: Expertise
           hint: ''
-        - _id: 4uOxepnMxb2TYDY4
+          flags: {}
+        4uOxepnMxb2TYDY4:
+          _id: 4uOxepnMxb2TYDY4
           type: ScaleValue
           configuration:
             identifier: ''
@@ -1495,7 +1556,9 @@ items:
           value: {}
           title: Sneak Attack
           hint: ''
-        - _id: IHbn6EXoBfxHdj7c
+          flags: {}
+        IHbn6EXoBfxHdj7c:
+          _id: IHbn6EXoBfxHdj7c
           type: Trait
           configuration:
             mode: default
@@ -1516,7 +1579,9 @@ items:
             You picked up various languages in the communities where you plied
             your roguish talents. You know Thieves’ Cant and one other language
             of your choice, which you can choose from the languages below.
-        - _id: FiaNLovfP6tnY4tD
+          flags: {}
+        FiaNLovfP6tnY4tD:
+          _id: FiaNLovfP6tnY4tD
           type: Trait
           configuration:
             mode: default
@@ -1534,7 +1599,9 @@ items:
           hint: >-
             Your cunning mind is exceptionally difficult to control. You gain
             proficiency in Wisdom and Charisma saving throws.
-        - _id: YW6yxOO45ACMgnJT
+          flags: {}
+        YW6yxOO45ACMgnJT:
+          _id: YW6yxOO45ACMgnJT
           type: Subclass
           configuration: {}
           value:
@@ -1543,7 +1610,9 @@ items:
           level: 3
           title: ''
           hint: ''
-        - _id: yp6ZCsT10nGs4J4q
+          flags: {}
+        yp6ZCsT10nGs4J4q:
+          _id: yp6ZCsT10nGs4J4q
           type: Trait
           configuration:
             mode: mastery
@@ -1560,7 +1629,9 @@ items:
           level: 1
           title: Weapon Mastery
           hint: ''
-        - _id: OJXVOKQhi05P672u
+          flags: {}
+        OJXVOKQhi05P672u:
+          _id: OJXVOKQhi05P672u
           type: Trait
           configuration:
             mode: default
@@ -1577,7 +1648,9 @@ items:
           title: Saving Throw Proficiencies
           hint: ''
           classRestriction: primary
-        - _id: xE00qAIjMdw63Kja
+          flags: {}
+        xE00qAIjMdw63Kja:
+          _id: xE00qAIjMdw63Kja
           type: Trait
           configuration:
             mode: default
@@ -1606,7 +1679,9 @@ items:
           title: Skill Proficiencies
           hint: ''
           classRestriction: primary
-        - _id: q22sm4VsezAltuqE
+          flags: {}
+        q22sm4VsezAltuqE:
+          _id: q22sm4VsezAltuqE
           type: Trait
           configuration:
             mode: default
@@ -1631,7 +1706,9 @@ items:
           title: Weapon Proficiencies
           hint: ''
           classRestriction: primary
-        - _id: N5TGZDRu7NwVSaq6
+          flags: {}
+        N5TGZDRu7NwVSaq6:
+          _id: N5TGZDRu7NwVSaq6
           type: Trait
           configuration:
             mode: default
@@ -1645,7 +1722,9 @@ items:
           level: 1
           title: Tool Proficiencies
           hint: ''
-        - _id: UH1CrcBv6JRJJxsQ
+          flags: {}
+        UH1CrcBv6JRJJxsQ:
+          _id: UH1CrcBv6JRJJxsQ
           type: Trait
           configuration:
             mode: default
@@ -1659,7 +1738,9 @@ items:
           level: 1
           title: Armor Training
           hint: ''
-        - _id: tSxdQdTxlNVE1kdD
+          flags: {}
+        tSxdQdTxlNVE1kdD:
+          _id: tSxdQdTxlNVE1kdD
           type: Trait
           configuration:
             mode: default
@@ -1683,7 +1764,9 @@ items:
           title: Skill Proficiencies
           hint: ''
           classRestriction: secondary
-        - type: AbilityScoreImprovement
+          flags: {}
+        8tx2HViuTjfSr4D9:
+          type: AbilityScoreImprovement
           _id: 8tx2HViuTjfSr4D9
           configuration:
             cap: 2
@@ -1703,6 +1786,7 @@ items:
           level: 19
           title: ''
           hint: ''
+          flags: {}
       spellcasting:
         progression: none
         ability: ''
@@ -1726,9 +1810,8 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1768863888765
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 0
     ownership:
       default: 0
@@ -1771,7 +1854,7 @@ items:
       activities: {}
       enchant: {}
       identifier: expertise
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     flags:
@@ -1785,7 +1868,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -1917,9 +2000,10 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       enchant: {}
       identifier: sneak-attack
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     flags:
@@ -1933,7 +2017,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -1979,7 +2063,7 @@ items:
       activities: {}
       enchant: {}
       identifier: thieves-cant
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     flags:
@@ -1993,7 +2077,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -2036,7 +2120,7 @@ items:
       activities: {}
       enchant: {}
       identifier: weapon-mastery
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     flags:
@@ -2050,7 +2134,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -2123,7 +2207,6 @@ items:
       type:
         value: simpleM
         baseItem: dagger
-      magicalBonus: null
       properties:
         - fin
         - lgt
@@ -2200,6 +2283,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       ammunition: {}
       mastery: nick
       identifier: dagger
@@ -2220,7 +2304,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -2326,6 +2410,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: thieves-tools
       attuned: false
       equipped: false
@@ -2342,7 +2427,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -2414,7 +2499,6 @@ items:
       type:
         value: martialM
         baseItem: shortsword
-      magicalBonus: null
       properties:
         - fin
         - lgt
@@ -2490,6 +2574,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       ammunition: {}
       mastery: vex
       identifier: shortsword
@@ -2510,7 +2595,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -2582,7 +2667,6 @@ items:
       type:
         value: simpleR
         baseItem: shortbow
-      magicalBonus: null
       properties:
         - amm
         - two
@@ -2658,6 +2742,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       ammunition:
         type: arrow
       mastery: vex
@@ -2730,7 +2815,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.htlOpTVSqn3kW1NF.LxJN1IlHlntnYxP9
@@ -2742,7 +2827,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -2799,7 +2884,6 @@ items:
       type:
         value: ammo
         subtype: arrow
-      magicalBonus: null
       properties: []
       activities: {}
       identifier: arrows
@@ -2816,7 +2900,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -2889,7 +2973,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -2929,7 +3013,6 @@ items:
         recovery: []
       armor:
         value: null
-        magicalBonus: null
         dex: null
       hp:
         value: null
@@ -2963,7 +3046,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -3032,7 +3115,6 @@ items:
       type:
         value: potion
         subtype: ''
-      magicalBonus: null
       properties: []
       activities:
         FoeoumkYcnAsGCRo:
@@ -3097,6 +3179,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         mDj3jtAY6ICmi1ZL:
           type: damage
           name: Douse Space
@@ -3166,6 +3249,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: oil
     _id: dKGSyXXHSBUmbhNC
     type: consumable
@@ -3180,7 +3264,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -3239,7 +3323,6 @@ items:
       type:
         value: trinket
         subtype: ''
-      magicalBonus: null
       properties: []
       activities:
         FCoYqKd4jqXjHFNN:
@@ -3314,6 +3397,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         IKk7iQcYsjxDfnmk:
           type: utility
           name: Recover Ball Bearings
@@ -3370,6 +3454,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: ball-bearings
     _id: Dr5AjYshuykbP6Fx
     type: consumable
@@ -3405,7 +3490,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.Dr5AjYshuykbP6Fx.zW4roNKVL8HcoNwV
@@ -3417,7 +3502,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -3460,7 +3545,6 @@ items:
         recovery: []
       armor:
         value: null
-        magicalBonus: null
         dex: null
       hp:
         value: null
@@ -3530,6 +3614,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: tinderbox
       crew:
         value: []
@@ -3546,7 +3631,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -3606,7 +3691,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -3672,6 +3757,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -3716,7 +3802,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties: []
     effects: []
     folder: uDk4FBYfcP2JnX6t
@@ -3727,7 +3812,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     _id: Ty9z1HQR3ADbPeec
     sort: 100000
@@ -3781,7 +3866,6 @@ items:
       type:
         value: food
         subtype: ''
-      magicalBonus: null
       properties: []
       activities: {}
       identifier: rations
@@ -3798,7 +3882,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -3846,7 +3930,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -3897,7 +3981,6 @@ items:
       type:
         value: trinket
         subtype: ''
-      magicalBonus: null
       properties: []
       activities:
         8kldn9CuzuAz7dVb:
@@ -3971,7 +4054,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -4029,7 +4112,6 @@ items:
       type:
         value: trinket
         subtype: ''
-      magicalBonus: null
       properties: []
       activities:
         Y0LvyxjfVHNbp4CG:
@@ -4090,6 +4172,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         rYGOWDRcT5jBKvzq:
           type: check
           name: Burst Rope
@@ -4144,6 +4227,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         5q6tX1T7ONDvgJiA:
           type: check
           name: Escape Check
@@ -4198,6 +4282,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: rope
     _id: AltGmBrWKBYiCmap
     type: consumable
@@ -4212,7 +4297,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -4321,6 +4406,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: calligraphers-supplies
       attuned: false
       equipped: false
@@ -4337,7 +4423,7 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbtulCalligraph
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -4376,7 +4462,6 @@ items:
         recovery: []
       armor:
         value: null
-        magicalBonus: null
         dex: null
       hp:
         value: null
@@ -4412,7 +4497,7 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagClothesFine
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -4454,7 +4539,6 @@ items:
         recovery: []
       armor:
         value: null
-        magicalBonus: null
         dex: null
       hp:
         value: null
@@ -4553,7 +4637,7 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagLanternHood
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -4643,6 +4727,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         AeCciDTvw3kS583a:
           type: utility
           name: Disengage
@@ -4695,6 +4780,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         NiI5qEhg9TepZxMh:
           type: utility
           _id: NiI5qEhg9TepZxMh
@@ -4749,9 +4835,10 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       enchant: {}
       identifier: cunning-action
-      advancement: []
+      advancement: {}
       crewed: false
     effects:
       - name: Hiding
@@ -4783,7 +4870,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.8D5MNyj6IOqJnc6L.YLfpwyCVUObRTopP
@@ -4798,7 +4885,7 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbrgeCunningAct
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -4889,9 +4976,10 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       enchant: {}
       identifier: steady-aim
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     flags:
@@ -4905,7 +4993,7 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbrgeSteadyAim0
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -4935,7 +5023,8 @@ items:
       identifier: thief
       classIdentifier: rogue
       advancement:
-        - _id: 52x82ltPXCgmrh1K
+        52x82ltPXCgmrh1K:
+          _id: 52x82ltPXCgmrh1K
           type: ItemGrant
           configuration:
             items:
@@ -4951,7 +5040,10 @@ items:
               JukrDNT9DUQvhsCn: Compendium.dnd5e.classes24.Item.phbrgeSecondstor
           level: 3
           title: Subclass Features
-        - _id: MlEcUhyGRGitfiUJ
+          flags: {}
+          hint: ''
+        MlEcUhyGRGitfiUJ:
+          _id: MlEcUhyGRGitfiUJ
           type: ItemGrant
           configuration:
             items:
@@ -4964,7 +5056,10 @@ items:
               9GTfEAzsMJ3c9fiF: Compendium.dnd5e.classes24.Item.phbrgeSupremeSne
           level: 9
           title: Subclass Features
-        - _id: aNcqA4J0puHsYiyv
+          flags: {}
+          hint: ''
+        aNcqA4J0puHsYiyv:
+          _id: aNcqA4J0puHsYiyv
           type: ItemGrant
           configuration:
             items:
@@ -4977,7 +5072,10 @@ items:
               NcvB5ZBaRIwo2FpU: Compendium.dnd5e.classes24.Item.phbrgeUseMagicDe
           level: 13
           title: Subclass Features
-        - _id: Q45sJX4IS3NbsrtV
+          flags: {}
+          hint: ''
+        Q45sJX4IS3NbsrtV:
+          _id: Q45sJX4IS3NbsrtV
           type: ItemGrant
           configuration:
             items:
@@ -4990,6 +5088,8 @@ items:
               CvnqzkUsELqkpJem: Compendium.dnd5e.classes24.Item.phbrgeThiefsRefl
           level: 17
           title: Subclass Features
+          flags: {}
+          hint: ''
       spellcasting:
         progression: none
         ability: int
@@ -5005,9 +5105,8 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbrgeThief00000
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1768863888765
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 500000
     ownership:
       default: 0
@@ -5214,9 +5313,10 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       enchant: {}
       identifier: fast-hands
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     flags:
@@ -5230,7 +5330,7 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbrgeFastHands0
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -5272,7 +5372,7 @@ items:
       activities: {}
       enchant: {}
       identifier: second-story-work
-      advancement: []
+      advancement: {}
       crewed: false
     effects:
       - name: Second-Story Work
@@ -5310,7 +5410,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.JukrDNT9DUQvhsCn.21BvmyRzw5hrEFEr
@@ -5325,9 +5425,8 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbrgeSecondstor
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1768932291009
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 0
     ownership:
       default: 0
@@ -5452,6 +5551,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         dWcCw1vTWRMx4YzD:
           type: save
           name: Trip
@@ -5512,6 +5612,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         jR7KqMuPOZYUCDyO:
           type: damage
           name: Cunning Sneak Attack
@@ -5589,6 +5690,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         m2bRZ1YeD3yf9nV7:
           type: utility
           name: Withdraw
@@ -5641,9 +5743,10 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       enchant: {}
       identifier: cunning-strike
-      advancement: []
+      advancement: {}
       crewed: false
     effects:
       - name: 'Cunning Strike: Poisoned'
@@ -5677,7 +5780,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.sS65CaD6oR2S1uig.RazTM6biKVtNtjEW
@@ -5710,7 +5813,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.sS65CaD6oR2S1uig.La47n2N3VtECtnA9
@@ -5725,7 +5828,7 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbrgeCunningStr
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -5812,9 +5915,10 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       enchant: {}
       identifier: uncanny-dodge
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     flags:
@@ -5828,7 +5932,7 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbrgeUncannyDod
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -5865,7 +5969,6 @@ items:
         recovery: []
       armor:
         value: 12
-        magicalBonus: null
         dex: null
       hp:
         value: null
@@ -5948,7 +6051,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.eaZGzzHyIG9PBGlT.MCISan1Qn5JX0FMM
@@ -5960,7 +6063,7 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbarmStuddedLea
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -6029,6 +6132,7 @@ items:
             requireIdentification: true
             requireAttunement: false
           flags: {}
+          img: null
         zSCMjUyMs03rTkuH:
           type: save
           name: Second Command Word
@@ -6099,6 +6203,7 @@ items:
             requireIdentification: true
             requireAttunement: false
           flags: {}
+          img: null
         Hp7wMeMuSpJoTVd1:
           type: save
           name: Third Command Word
@@ -6171,6 +6276,7 @@ items:
             requireIdentification: true
             requireAttunement: false
           flags: {}
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -6218,7 +6324,6 @@ items:
       attunement: ''
       armor:
         value: null
-        magicalBonus: null
         dex: null
       cover: null
       hp:
@@ -6267,7 +6372,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.Asleuzhulo3Eeejn.05Lok63szRXdAafx
@@ -6278,7 +6383,7 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgGemOfBrightne
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 15400000
     ownership:
@@ -6354,6 +6459,7 @@ items:
             requireAttunement: false
             requireMagic: false
           flags: {}
+          img: null
       uses:
         spent: 0
         recovery:
@@ -6422,7 +6528,7 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgWandOfMagicMi
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: -200000
     ownership:
@@ -6541,6 +6647,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: magic-missile
       method: spell
       prepared: 0
@@ -6583,7 +6690,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.3uB3R7H2njpxEdOx.dnd5espellchange
@@ -6598,7 +6705,7 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplMagicMissi
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     _id: 3uB3R7H2njpxEdOx
     ownership:
@@ -6676,6 +6783,7 @@ items:
             requireAttunement: false
             requireIdentification: false
           flags: {}
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -6719,7 +6827,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties:
         - mgc
       attuned: false
@@ -6732,7 +6839,7 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgPotionOfHeali
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 100000
     ownership:
@@ -6743,7 +6850,8 @@ items:
     img: icons/skills/social/theft-pickpocket-bribery-brown.webp
     system:
       advancement:
-        - type: AbilityScoreImprovement
+        1Q3sqDL4PWsaE5Fh:
+          type: AbilityScoreImprovement
           _id: 1Q3sqDL4PWsaE5Fh
           configuration:
             cap: 2
@@ -6769,7 +6877,9 @@ items:
           level: 0
           title: ''
           hint: ''
-        - type: Trait
+          flags: {}
+        6RFYDHZ7mhTG2GRG:
+          type: Trait
           title: Background Proficiencies
           _id: 6RFYDHZ7mhTG2GRG
           configuration:
@@ -6787,7 +6897,9 @@ items:
               - tool:art:calligrapher
               - skills:ins
               - skills:per
-        - type: Trait
+          flags: {}
+        Dvp6RDUrsnOEi9ql:
+          type: Trait
           _id: Dvp6RDUrsnOEi9ql
           configuration:
             allowReplacements: false
@@ -6806,7 +6918,9 @@ items:
               - languages:standard:common
               - languages:standard:dwarvish
               - languages:standard:halfling
-        - type: ItemGrant
+          flags: {}
+        bWWDnIBdVmwOwqHc:
+          type: ItemGrant
           _id: bWWDnIBdVmwOwqHc
           configuration:
             items:
@@ -6820,6 +6934,7 @@ items:
           level: 0
           title: Background Feat
           hint: ''
+          flags: {}
       description:
         value: >-
           <p><strong>Ability Scores:</strong> Dexterity, Intelligence,
@@ -6877,7 +6992,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -6914,7 +7029,8 @@ items:
       enchant: {}
       identifier: skilled
       advancement:
-        - type: Trait
+        Mm4MAeZK89zGqmyH:
+          type: Trait
           _id: Mm4MAeZK89zGqmyH
           configuration:
             allowReplacements: false
@@ -6933,6 +7049,7 @@ items:
               - skills:arc
               - skills:dec
               - skills:prc
+          flags: {}
       crewed: false
     _id: zOwXg8hDdq4Lm4DF
     type: feat
@@ -6953,7 +7070,7 @@ items:
       compendiumSource: Compendium.dnd5e.feats24.Item.phbftSkilled0000
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     _key: '!actors.items!RiswynnLv1700000.zOwXg8hDdq4Lm4DF'
   - _id: Ez1rZavPKr89JLNu
@@ -6987,7 +7104,7 @@ items:
       activities: {}
       enchant: {}
       identifier: evasion
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     flags:
@@ -7001,9 +7118,8 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbrgeEvasion000
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1768863888765
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 0
     ownership:
       default: 0
@@ -7046,7 +7162,7 @@ items:
       activities: {}
       enchant: {}
       identifier: reliable-talent
-      advancement: []
+      advancement: {}
       crewed: false
     effects:
       - _id: TIw25thHBYEPdKR1
@@ -7078,7 +7194,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         img: icons/skills/ranged/target-bullseye-arrow-glowing.webp
         type: base
@@ -7097,9 +7213,8 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbrgeReliableTa
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1768863888765
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 0
     ownership:
       default: 0
@@ -7140,7 +7255,7 @@ items:
       activities: {}
       enchant: {}
       identifier: supreme-sneak
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     flags:
@@ -7154,9 +7269,8 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbrgeSupremeSne
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1768863888765
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 0
     ownership:
       default: 0
@@ -7201,7 +7315,7 @@ items:
       activities: {}
       enchant: {}
       identifier: improved-cunning-strike
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     flags:
@@ -7215,9 +7329,8 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbrgeImprovedCu
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1768863888765
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 0
     ownership:
       default: 0
@@ -7292,6 +7405,7 @@ items:
             requireAttunement: false
             requireMagic: false
           flags: {}
+          img: null
       uses:
         spent: 0
         recovery:
@@ -7361,7 +7475,7 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgWandOfFirebal
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: -25000
     ownership:
@@ -7487,6 +7601,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: fireball
       method: spell
       prepared: 0
@@ -7538,7 +7653,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.BXatZajQo42dsk8i.dnd5espellchange
@@ -7555,9 +7670,8 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplFireball00
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1768863888765
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: BXatZajQo42dsk8i
     _key: '!actors.items!RiswynnLv1700000.BXatZajQo42dsk8i'
   - _id: 8m9Xf8GphQEDwE1E
@@ -7607,7 +7721,6 @@ items:
       attunement: required
       armor:
         value: null
-        magicalBonus: null
         dex: null
       cover: null
       hp:
@@ -7634,7 +7747,7 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgRingOfMindShi
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 1000000
     ownership:
@@ -7703,7 +7816,7 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgQuiverOfEhlon
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 1000000
     ownership:
@@ -7763,7 +7876,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -7826,7 +7939,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -7889,7 +8002,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -7973,6 +8086,7 @@ items:
             requireAttunement: false
             requireIdentification: false
           flags: {}
+          img: null
       uses:
         spent: 0
         recovery:
@@ -8014,7 +8128,6 @@ items:
       attunement: ''
       armor:
         value: null
-        magicalBonus: null
         dex: null
       cover: null
       hp:
@@ -8063,7 +8176,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.jd5hdzttIePr6VtF.29Rm9ru4fP60YFj3
@@ -8074,7 +8187,7 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgPipesOfHaunti
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 25000000
     ownership:
@@ -8154,7 +8267,7 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgBagOfHolding0
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 300000
     ownership:
@@ -8270,6 +8383,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         IQsAg45adQPcbS86:
           type: cast
           spell:
@@ -8323,6 +8437,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       damage:
         base:
           types: []
@@ -8341,9 +8456,8 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgOilOfSlipperi
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1768863888765
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 1250000
     ownership:
       default: 0
@@ -8456,6 +8570,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: freedom-of-movement
       method: spell
       prepared: 0
@@ -8509,7 +8624,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.y9XJG87tUdZ6vegx.bcTPZ6dJ4kHwaBRD
@@ -8555,7 +8670,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.y9XJG87tUdZ6vegx.dnd5espellchange
@@ -8572,9 +8687,8 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplFreedomofM
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1768863888765
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: y9XJG87tUdZ6vegx
     _key: '!actors.items!RiswynnLv1700000.y9XJG87tUdZ6vegx'
   - name: Grease
@@ -8679,6 +8793,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: grease
       method: spell
       prepared: 0
@@ -8721,7 +8836,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.4Zru2ZHQbm75Ny1e.dnd5espellchange
@@ -8738,9 +8853,8 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplGrease0000
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1768863888765
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: 4Zru2ZHQbm75Ny1e
     _key: '!actors.items!RiswynnLv1700000.4Zru2ZHQbm75Ny1e'
   - _id: QA9Ij5A1IfrotrS1
@@ -8813,6 +8927,7 @@ items:
             requireAttunement: false
             requireIdentification: false
           flags: {}
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -8860,7 +8975,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties:
         - mgc
       attuned: false
@@ -8895,7 +9009,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.QA9Ij5A1IfrotrS1.FuzyfcWOcC3IXsDB
@@ -8906,7 +9020,7 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgPotionOfWater
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -8960,7 +9074,7 @@ items:
       activities: {}
       enchant: {}
       identifier: use-magic-device
-      advancement: []
+      advancement: {}
       crewed: false
     effects:
       - name: Attunement Bonus
@@ -8997,7 +9111,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.NcvB5ZBaRIwo2FpU.FZWFvTtuOvMIj003
@@ -9015,10 +9129,8 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbrgeUseMagicDe
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768863888705
-      modifiedTime: 1768863888705
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 0
     ownership:
       default: 0
@@ -9138,6 +9250,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         3eq7lcmpkJJBU2KO:
           type: save
           name: Knock Out
@@ -9198,6 +9311,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         ki4lIPVGNA0HjEzH:
           type: save
           name: Obscure
@@ -9258,9 +9372,10 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       enchant: {}
       identifier: devious-strikes
-      advancement: []
+      advancement: {}
       crewed: false
     effects:
       - name: 'Devious Strikes: Dazed'
@@ -9293,7 +9408,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.Mipk9J0AlnHBlKHJ.wWFV1p8u9C1TUPg5
@@ -9329,7 +9444,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.Mipk9J0AlnHBlKHJ.C2IGgt4PnRMxZVey
@@ -9364,7 +9479,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.Mipk9J0AlnHBlKHJ.Fb1n6Yk2MlOAckf0
@@ -9382,10 +9497,8 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbrgeDeviousStr
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768863888705
-      modifiedTime: 1768863888705
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 0
     ownership:
       default: 0
@@ -9426,7 +9539,7 @@ items:
       activities: {}
       enchant: {}
       identifier: slippery-mind
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     flags:
@@ -9443,10 +9556,8 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbrgeSlipperyMi
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768863888705
-      modifiedTime: 1768863888705
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 0
     ownership:
       default: 0
@@ -9486,7 +9597,7 @@ items:
       activities: {}
       enchant: {}
       identifier: thiefs-reflexes
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     flags:
@@ -9503,10 +9614,8 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbrgeThiefsRefl
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768863888705
-      modifiedTime: 1768863888705
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 0
     ownership:
       default: 0
@@ -9579,6 +9688,7 @@ items:
             requireAttunement: false
             requireMagic: false
           flags: {}
+          img: null
         s1lUHgJWF8CUIedO:
           type: utility
           name: Enter/Exit Astral Plane
@@ -9637,6 +9747,7 @@ items:
             requireIdentification: true
             requireAttunement: false
           flags: {}
+          img: null
       uses:
         spent: 0
         recovery:
@@ -9686,7 +9797,6 @@ items:
       attunement: required
       armor:
         value: null
-        magicalBonus: null
         dex: null
       cover: null
       hp:
@@ -9741,10 +9851,8 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
-          createdTime: 1768864437540
-          modifiedTime: 1768864449682
-          lastModifiedBy: dnd5ebuilder0000
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.4VOdQEmDnYDOL2Ae.mneHoH6lSqPy00Lx
     flags: {}
@@ -9754,10 +9862,8 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgRobeOfStars00
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768864185519
-      modifiedTime: 1768864187982
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 32500000
     ownership:
       default: 0
@@ -9875,6 +9981,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: magic-missile
       method: spell
       prepared: 0
@@ -9917,7 +10024,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.dgn20RnEEdlusOfe.dnd5espellchange
@@ -9937,10 +10044,8 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplMagicMissi
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768864185612
-      modifiedTime: 1768864185612
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: dgn20RnEEdlusOfe
     _key: '!actors.items!RiswynnLv1700000.dgn20RnEEdlusOfe'
   - _id: 0PCFGpdhDj9JMKEy
@@ -10008,6 +10113,7 @@ items:
             requireAttunement: false
             requireMagic: false
           flags: {}
+          img: null
         ZtRR3jrinUNMIEvU:
           type: cast
           _id: ZtRR3jrinUNMIEvU
@@ -10066,6 +10172,7 @@ items:
             requireAttunement: false
             requireMagic: false
           flags: {}
+          img: null
         tCJJNlbzPWFK6X2m:
           type: cast
           _id: tCJJNlbzPWFK6X2m
@@ -10124,6 +10231,7 @@ items:
             requireAttunement: false
             requireMagic: false
           flags: {}
+          img: null
         KRhYoWhmZNWAmv1i:
           type: cast
           _id: KRhYoWhmZNWAmv1i
@@ -10182,6 +10290,7 @@ items:
             requireAttunement: false
             requireMagic: false
           flags: {}
+          img: null
         N5Y0YZKK2llU4HXf:
           type: cast
           _id: N5Y0YZKK2llU4HXf
@@ -10240,6 +10349,7 @@ items:
             requireAttunement: false
             requireMagic: false
           flags: {}
+          img: null
         ZIMYDxhyS56bcRQE:
           type: cast
           _id: ZIMYDxhyS56bcRQE
@@ -10298,6 +10408,7 @@ items:
             requireAttunement: false
             requireMagic: false
           flags: {}
+          img: null
       uses:
         spent: 0
         recovery:
@@ -10344,7 +10455,6 @@ items:
       attunement: required
       armor:
         value: null
-        magicalBonus: null
         dex: null
       cover: null
       hp:
@@ -10371,10 +10481,8 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgCubeOfForce00
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768864488130
-      modifiedTime: 1768864491393
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 9900000
     ownership:
       default: 0
@@ -10479,6 +10587,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: mage-armor
       method: spell
       prepared: 0
@@ -10514,7 +10623,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         img: icons/equipment/chest/breastplate-helmet-metal.webp
         type: base
@@ -10549,7 +10658,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.3EekIh2yBjivvzkY.dnd5espellchange
@@ -10569,10 +10678,8 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplMageArmor0
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768864488242
-      modifiedTime: 1768864488242
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: 3EekIh2yBjivvzkY
     _key: '!actors.items!RiswynnLv1700000.3EekIh2yBjivvzkY'
   - name: Shield
@@ -10678,6 +10785,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: shield
       method: spell
       prepared: 0
@@ -10716,7 +10824,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         img: icons/equipment/shield/heater-steel-crystal-red.webp
         type: base
@@ -10751,7 +10859,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.bR7bb3hMg8iYtqrq.dnd5espellchange
@@ -10771,10 +10879,8 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplShield0000
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768864488242
-      modifiedTime: 1768864488242
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: bR7bb3hMg8iYtqrq
     _key: '!actors.items!RiswynnLv1700000.bR7bb3hMg8iYtqrq'
   - name: Tiny Hut
@@ -10888,6 +10994,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: tiny-hut
       method: spell
       prepared: 0
@@ -10921,7 +11028,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.1AIdlX7OSVGYRgBz.dnd5espellchange
@@ -10941,10 +11048,8 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplLeomundsTi
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768864488242
-      modifiedTime: 1768864488242
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: 1AIdlX7OSVGYRgBz
     _key: '!actors.items!RiswynnLv1700000.1AIdlX7OSVGYRgBz'
   - name: Private Sanctum
@@ -11060,6 +11165,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: private-sanctum
       method: spell
       prepared: 0
@@ -11091,7 +11197,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.QHrgmLWdOJIys5WN.dnd5espellchange
@@ -11108,10 +11214,8 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbPrivateSanctu
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768864488242
-      modifiedTime: 1768864488242
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 50000
     ownership:
       default: 0
@@ -11236,6 +11340,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: resilient-sphere
       method: spell
       prepared: 0
@@ -11273,7 +11378,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.FJzJOvGtYG1rKvwj.U5UciD171a5jcc7s
@@ -11313,7 +11418,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.FJzJOvGtYG1rKvwj.dnd5espellchange
@@ -11333,10 +11438,8 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplOtilukesRe
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768864488242
-      modifiedTime: 1768864488242
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: FJzJOvGtYG1rKvwj
     _key: '!actors.items!RiswynnLv1700000.FJzJOvGtYG1rKvwj'
   - name: Wall of Force
@@ -11456,6 +11559,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         O3uhE0OLzsAhHoAg:
           type: utility
           _id: O3uhE0OLzsAhHoAg
@@ -11511,6 +11615,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: wall-of-force
       method: spell
       prepared: 0
@@ -11544,7 +11649,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.8v01mb3tM2oNYNpt.dnd5espellchange
@@ -11564,10 +11669,8 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplWallofForc
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768864488242
-      modifiedTime: 1768864488242
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: 8v01mb3tM2oNYNpt
     _key: '!actors.items!RiswynnLv1700000.8v01mb3tM2oNYNpt'
   - _id: p5w0gbnmvc3j8H0C
@@ -11635,6 +11738,7 @@ items:
             requireIdentification: true
             requireAttunement: false
           flags: {}
+          img: null
         PdtjMpg7Bcqa1AVp:
           type: utility
           sort: 0
@@ -11693,6 +11797,7 @@ items:
             requireIdentification: true
             requireAttunement: false
           flags: {}
+          img: null
         QObmaE8dWI8pIXFE:
           type: save
           name: Geyser
@@ -11766,6 +11871,7 @@ items:
             requireIdentification: true
             requireAttunement: false
           flags: {}
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -11834,10 +11940,8 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgDecanterOfEnd
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768864725641
-      modifiedTime: 1768864725641
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 38300000
     ownership:
       default: 0
@@ -11927,6 +12031,7 @@ items:
             requireAttunement: false
             requireIdentification: false
           flags: {}
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -11994,10 +12099,8 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgBeadOfForce00
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768864762475
-      modifiedTime: 1768864770844
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 650000
     ownership:
       default: 0
@@ -12073,6 +12176,7 @@ items:
             requireAttunement: false
             requireMagic: false
           flags: {}
+          img: null
       uses:
         spent: 0
         recovery:
@@ -12111,7 +12215,6 @@ items:
       attunement: ''
       armor:
         value: null
-        magicalBonus: null
         dex: null
       cover: null
       hp:
@@ -12138,10 +12241,8 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgCapeOfTheMoun
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768864800092
-      modifiedTime: 1768864809910
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 5300000
     ownership:
       default: 0
@@ -12303,7 +12404,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.IziwlvYo1dHEsTaX.dnd5espellchange
@@ -12323,10 +12424,8 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDimensionD
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768864800207
-      modifiedTime: 1768864800207
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: IziwlvYo1dHEsTaX
     _key: '!actors.items!RiswynnLv1700000.IziwlvYo1dHEsTaX'
   - _id: ro5DlUYJFS7p1KoL
@@ -12406,6 +12505,7 @@ items:
             requireAttunement: false
             requireIdentification: false
           flags: {}
+          img: null
         2FSMsnJsj8zfMx85:
           type: check
           name: Break Check
@@ -12460,6 +12560,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -12505,7 +12606,6 @@ items:
       attunement: ''
       armor:
         value: null
-        magicalBonus: null
         dex: null
       cover: null
       hp:
@@ -12554,7 +12654,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.ro5DlUYJFS7p1KoL.IgRS1gR2uBlWZnIK
@@ -12565,10 +12665,8 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgIronBandsOfBi
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768864865239
-      modifiedTime: 1768864865239
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 19300000
     ownership:
       default: 0
@@ -12630,6 +12728,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -12675,7 +12774,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties:
         - mgc
     effects: []
@@ -12691,10 +12789,8 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgSpellScroll1s
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866725541
-      modifiedTime: 1768866729209
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _id: J5OrtfocjcQZwf5Z
@@ -12803,6 +12899,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: comprehend-languages
       method: spell
       prepared: 0
@@ -12844,7 +12941,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.eA1WjeMDIbv6CQ2F.ANhwNb9xKRpWs4Q2
@@ -12902,7 +12999,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.eA1WjeMDIbv6CQ2F.dnd5espellchange
@@ -12922,10 +13019,8 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplComprehend
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866725697
-      modifiedTime: 1768866725697
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: eA1WjeMDIbv6CQ2F
     _key: '!actors.items!RiswynnLv1700000.eA1WjeMDIbv6CQ2F'
   - name: 'Spell Scroll: Create or Destroy Water'
@@ -12985,6 +13080,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -13030,7 +13126,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties:
         - mgc
     effects: []
@@ -13046,10 +13141,8 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgSpellScroll1s
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866735256
-      modifiedTime: 1768866737432
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _id: 9f50dSxDF0rlvZLi
@@ -13156,6 +13249,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: create-or-destroy-water
       method: spell
       prepared: 0
@@ -13216,7 +13310,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.tzftEjmtfI4Ji4nE.dnd5espellchange
@@ -13236,10 +13330,8 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplCreateorDe
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866735385
-      modifiedTime: 1768866735385
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: tzftEjmtfI4Ji4nE
     _key: '!actors.items!RiswynnLv1700000.tzftEjmtfI4Ji4nE'
   - name: 'Spell Scroll: Detect Magic'
@@ -13299,6 +13391,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -13344,7 +13437,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties:
         - mgc
     effects: []
@@ -13360,10 +13452,8 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgSpellScroll1s
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866743489
-      modifiedTime: 1768866745386
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _id: 1LZE7cIzMqiU7OEJ
@@ -13477,6 +13567,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: detect-magic
       method: spell
       prepared: 0
@@ -13512,7 +13603,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.avdzcjwD75vdhJdI.BHw91lQmVgdx39WZ
@@ -13570,7 +13661,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.avdzcjwD75vdhJdI.dnd5espellchange
@@ -13590,10 +13681,8 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDetectMagi
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866743613
-      modifiedTime: 1768866743613
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: avdzcjwD75vdhJdI
     _key: '!actors.items!RiswynnLv1700000.avdzcjwD75vdhJdI'
   - name: 'Spell Scroll: Disguise Self'
@@ -13653,6 +13742,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -13698,7 +13788,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties:
         - mgc
     effects: []
@@ -13714,10 +13803,8 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgSpellScroll1s
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866754019
-      modifiedTime: 1768866756951
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _id: 0thwavw8XyMkT5K7
@@ -13830,6 +13917,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: disguise-self
       method: spell
       prepared: 0
@@ -13868,7 +13956,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.oIzNgKtqgqtmdo6Q.SrIb7dbaZs5F4zi9
@@ -13926,7 +14014,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.oIzNgKtqgqtmdo6Q.dnd5espellchange
@@ -13946,10 +14034,8 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDisguiseSe
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866754144
-      modifiedTime: 1768866754144
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: oIzNgKtqgqtmdo6Q
     _key: '!actors.items!RiswynnLv1700000.oIzNgKtqgqtmdo6Q'
   - name: 'Spell Scroll: Find Familiar'
@@ -14009,6 +14095,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -14054,7 +14141,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties:
         - mgc
     effects: []
@@ -14070,10 +14156,8 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgSpellScroll1s
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866762089
-      modifiedTime: 1768866764272
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _id: rVqFNCLuciMYNcWZ
@@ -14236,6 +14320,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: find-familiar
       method: spell
       prepared: 0
@@ -14296,7 +14381,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.ThrLWOggdnH991dP.dnd5espellchange
@@ -14313,10 +14398,8 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplFindFamili
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866762221
-      modifiedTime: 1768866762221
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: ThrLWOggdnH991dP
     _key: '!actors.items!RiswynnLv1700000.ThrLWOggdnH991dP'
   - name: 'Spell Scroll: Fog Cloud'
@@ -14376,6 +14459,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -14421,7 +14505,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties:
         - mgc
     effects: []
@@ -14437,10 +14520,8 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgSpellScroll1s
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866769780
-      modifiedTime: 1768866772803
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _id: TyMXH9OOUpmXvCQs
@@ -14544,6 +14625,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: fog-cloud
       method: spell
       prepared: 0
@@ -14604,7 +14686,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.aEzkHhQnl2v08EaI.dnd5espellchange
@@ -14624,10 +14706,8 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplFogCloud00
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866769911
-      modifiedTime: 1768866769911
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: aEzkHhQnl2v08EaI
     _key: '!actors.items!RiswynnLv1700000.aEzkHhQnl2v08EaI'
   - name: 'Spell Scroll: Goodberry'
@@ -14687,6 +14767,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -14732,7 +14813,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties:
         - mgc
     effects: []
@@ -14748,10 +14828,8 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgSpellScroll1s
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866778166
-      modifiedTime: 1768866780564
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _id: Ji0WqjiGJEdPQiw0
@@ -14918,7 +14996,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.TPqrpbbP1mQ91w55.dnd5espellchange
@@ -14938,10 +15016,8 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplGoodberry0
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866778307
-      modifiedTime: 1768866778307
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: TPqrpbbP1mQ91w55
     _key: '!actors.items!RiswynnLv1700000.TPqrpbbP1mQ91w55'
   - name: 'Spell Scroll: Heroism'
@@ -15001,6 +15077,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -15046,7 +15123,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties:
         - mgc
     effects: []
@@ -15062,10 +15138,8 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgSpellScroll1s
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866788139
-      modifiedTime: 1768866790306
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _id: SERYRijaSUFBmrz2
@@ -15177,6 +15251,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: heroism
       method: spell
       prepared: 0
@@ -15218,7 +15293,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.dBPeeCeBfPY8o7lv.zCpsdUyNz8bL3LF5
@@ -15276,7 +15351,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.dBPeeCeBfPY8o7lv.dnd5espellchange
@@ -15296,10 +15371,8 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplHeroism000
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866788271
-      modifiedTime: 1768866788271
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: dBPeeCeBfPY8o7lv
     _key: '!actors.items!RiswynnLv1700000.dBPeeCeBfPY8o7lv'
   - name: 'Spell Scroll: Jump'
@@ -15359,6 +15432,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -15404,7 +15478,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties:
         - mgc
     effects: []
@@ -15420,10 +15493,8 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgSpellScroll1s
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866795880
-      modifiedTime: 1768866797967
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _id: AtG3UnA0jRHLlX9a
@@ -15529,6 +15600,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: jump
       method: spell
       prepared: 0
@@ -15565,7 +15637,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.pUZw9wgyjQtZqybw.Esyd01OZ3NCv8gtp
@@ -15623,7 +15695,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.pUZw9wgyjQtZqybw.dnd5espellchange
@@ -15643,10 +15715,8 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplJump000000
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866796017
-      modifiedTime: 1768866796017
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: pUZw9wgyjQtZqybw
     _key: '!actors.items!RiswynnLv1700000.pUZw9wgyjQtZqybw'
   - name: 'Spell Scroll: Longstrider'
@@ -15706,6 +15776,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -15751,7 +15822,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties:
         - mgc
     effects: []
@@ -15767,10 +15837,8 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgSpellScroll1s
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866802918
-      modifiedTime: 1768866804860
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _id: v37U2zyWIuoqAu8o
@@ -15877,6 +15945,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: longstrider
       method: spell
       prepared: 0
@@ -15915,7 +15984,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.AaSBMttMcHy4wyJG.I746neZVrgJFkRco
@@ -15973,7 +16042,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.AaSBMttMcHy4wyJG.dnd5espellchange
@@ -15993,10 +16062,8 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplLongstride
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866803053
-      modifiedTime: 1768866803053
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: AaSBMttMcHy4wyJG
     _key: '!actors.items!RiswynnLv1700000.AaSBMttMcHy4wyJG'
   - name: 'Spell Scroll: Protection from Evil and Good'
@@ -16056,6 +16123,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -16101,7 +16169,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties:
         - mgc
     effects: []
@@ -16117,10 +16184,8 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgSpellScroll1s
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866810314
-      modifiedTime: 1768866812321
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _id: 7mBuqiSdS6QKu0iE
@@ -16234,6 +16299,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: protection-from-evil-and-good
       method: spell
       prepared: 0
@@ -16270,7 +16336,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.cfSL82zIyxM3yVt8.0WW6DMPuabIZh1Tv
@@ -16328,7 +16394,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.cfSL82zIyxM3yVt8.dnd5espellchange
@@ -16345,10 +16411,8 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbEvilAndGoodPr
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866810452
-      modifiedTime: 1768866810452
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     sort: 100782
     ownership:
       default: 0
@@ -16411,6 +16475,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -16456,7 +16521,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties:
         - mgc
     effects: []
@@ -16472,10 +16536,8 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgSpellScroll1s
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866819229
-      modifiedTime: 1768866821307
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _id: x86TxwUkZW3JsOD3
@@ -16611,6 +16673,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: unseen-servant
       method: spell
       prepared: 0
@@ -16671,7 +16734,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.8KBXiIXxWGSL0RFr.dnd5espellchange
@@ -16691,10 +16754,8 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplUnseenServ
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866819362
-      modifiedTime: 1768866819362
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: 8KBXiIXxWGSL0RFr
     _key: '!actors.items!RiswynnLv1700000.8KBXiIXxWGSL0RFr'
   - name: 'Spell Scroll: Detect Thoughts'
@@ -16754,6 +16815,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -16799,7 +16861,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties:
         - mgc
     effects: []
@@ -16815,10 +16876,8 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgSpellScroll2n
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866845244
-      modifiedTime: 1768866848439
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _id: 2pgu73bjpLfSUvJW
@@ -16954,6 +17013,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         cNjNJvq5tlzmAjzM:
           type: utility
           name: Sense Thoughts
@@ -17062,7 +17122,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.cOIRzobv3I96Ioua.dnd5espellchange
@@ -17082,10 +17142,8 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDetectThou
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866845421
-      modifiedTime: 1768866845421
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: cOIRzobv3I96Ioua
     _key: '!actors.items!RiswynnLv1700000.cOIRzobv3I96Ioua'
   - name: 'Spell Scroll: Enlarge/Reduce'
@@ -17145,6 +17203,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -17190,7 +17249,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties:
         - mgc
     effects: []
@@ -17206,10 +17264,8 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgSpellScroll2n
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866854413
-      modifiedTime: 1768866857300
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _id: qjVhgYsqNRzvt7wQ
@@ -17338,6 +17394,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: enlarge-reduce
       method: spell
       prepared: 0
@@ -17395,7 +17452,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.c6fQYRpp5VgqWpzz.Wi2E10l7n6Ka8k6u
@@ -17451,7 +17508,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.c6fQYRpp5VgqWpzz.NXdtOxX4HvPeodml
@@ -17509,7 +17566,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.c6fQYRpp5VgqWpzz.dnd5espellchange
@@ -17526,10 +17583,8 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplEnlargeRed
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866854561
-      modifiedTime: 1768866854561
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: c6fQYRpp5VgqWpzz
     _key: '!actors.items!RiswynnLv1700000.c6fQYRpp5VgqWpzz'
   - name: 'Spell Scroll: Locate Object'
@@ -17589,6 +17644,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -17634,7 +17690,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties:
         - mgc
     effects: []
@@ -17650,10 +17705,8 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgSpellScroll2n
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866865537
-      modifiedTime: 1768866868389
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _id: UG9pEInbuIZ1Hhgk
@@ -17763,6 +17816,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: locate-object
       method: spell
       prepared: 0
@@ -17823,7 +17877,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.d1uBS9cvIhg7yf4O.dnd5espellchange
@@ -17843,10 +17897,8 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplLocateObje
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866865709
-      modifiedTime: 1768866865709
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: d1uBS9cvIhg7yf4O
     _key: '!actors.items!RiswynnLv1700000.d1uBS9cvIhg7yf4O'
   - name: 'Spell Scroll: Mirror Image'
@@ -17906,6 +17958,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -17951,7 +18004,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties:
         - mgc
     effects: []
@@ -17967,10 +18019,8 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgSpellScroll2n
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866873731
-      modifiedTime: 1768866878084
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _id: SNknQARSGXt7utBa
@@ -18082,6 +18132,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: mirror-image
       method: spell
       prepared: 0
@@ -18120,7 +18171,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.yN6zvbhp1NfacJCO.VUqQIaiZoIzxUdf1
@@ -18156,7 +18207,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.yN6zvbhp1NfacJCO.XcTQl9DhT9lC3bxI
@@ -18192,7 +18243,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.yN6zvbhp1NfacJCO.uMsGEsbEZ2hckOKW
@@ -18250,7 +18301,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.yN6zvbhp1NfacJCO.dnd5espellchange
@@ -18270,10 +18321,8 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplMirrorImag
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866873889
-      modifiedTime: 1768866873889
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: yN6zvbhp1NfacJCO
     _key: '!actors.items!RiswynnLv1700000.yN6zvbhp1NfacJCO'
   - name: 'Spell Scroll: Prayer of Healing'
@@ -18333,6 +18382,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -18378,7 +18428,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties:
         - mgc
     effects: []
@@ -18394,10 +18443,8 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgSpellScroll2n
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866936720
-      modifiedTime: 1768866943575
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _id: GhYTaVrucJdTFYbe
@@ -18508,6 +18555,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: prayer-of-healing
       method: spell
       prepared: 0
@@ -18545,7 +18593,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.CZM7nURWE3kSeJQ6.BrBVse9ezicC6IVW
@@ -18603,7 +18651,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.CZM7nURWE3kSeJQ6.dnd5espellchange
@@ -18623,10 +18671,8 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplPrayerofHe
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866936910
-      modifiedTime: 1768866936910
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: CZM7nURWE3kSeJQ6
     _key: '!actors.items!RiswynnLv1700000.CZM7nURWE3kSeJQ6'
   - name: 'Spell Scroll: See Invisibility'
@@ -18686,6 +18732,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -18731,7 +18778,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties:
         - mgc
     effects: []
@@ -18747,10 +18793,8 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgSpellScroll2n
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866952110
-      modifiedTime: 1768866955475
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _id: W5pPb7ZqCXMXCqzV
@@ -18855,6 +18899,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: see-invisibility
       method: spell
       prepared: 0
@@ -18897,7 +18942,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.G5osQNNRvObzwA2p.BRwB0T8buWhJAuDx
@@ -18955,7 +19000,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.G5osQNNRvObzwA2p.dnd5espellchange
@@ -18975,10 +19020,8 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplSeeInvisib
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866952272
-      modifiedTime: 1768866952272
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: G5osQNNRvObzwA2p
     _key: '!actors.items!RiswynnLv1700000.G5osQNNRvObzwA2p'
   - name: 'Spell Scroll: Suggestion'
@@ -19038,6 +19081,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -19083,7 +19127,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties:
         - mgc
     effects: []
@@ -19099,10 +19142,8 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgSpellScroll2n
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866962004
-      modifiedTime: 1768866965912
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _id: ut1drnQ5z0Sucu30
@@ -19222,6 +19263,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: suggestion
       method: spell
       prepared: 0
@@ -19261,7 +19303,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.Qc4TXJI59jXL07GK.aXT1HK2a1XbyabMK
@@ -19319,7 +19361,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.Qc4TXJI59jXL07GK.dnd5espellchange
@@ -19339,10 +19381,8 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplSuggestion
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866962161
-      modifiedTime: 1768866962161
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: Qc4TXJI59jXL07GK
     _key: '!actors.items!RiswynnLv1700000.Qc4TXJI59jXL07GK'
   - name: 'Spell Scroll: Web'
@@ -19402,6 +19442,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -19447,7 +19488,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties:
         - mgc
     effects: []
@@ -19463,10 +19503,8 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgSpellScroll2n
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866973349
-      modifiedTime: 1768866976881
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _id: PoBpyNVl6E5NOhBq
@@ -19602,6 +19640,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: web
       method: spell
       prepared: 0
@@ -19662,7 +19701,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.fz3YY1K0SzxrjEwE.dnd5espellchange
@@ -19682,10 +19721,8 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplWeb0000000
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866973520
-      modifiedTime: 1768866973520
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: fz3YY1K0SzxrjEwE
     _key: '!actors.items!RiswynnLv1700000.fz3YY1K0SzxrjEwE'
   - name: 'Spell Scroll: Fly'
@@ -19745,6 +19782,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -19790,7 +19828,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties:
         - mgc
     effects: []
@@ -19806,10 +19843,8 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgSpellScroll3r
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866988677
-      modifiedTime: 1768867036104
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _id: lkYy5NAG1WWlUk4P
@@ -19916,6 +19951,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: fly
       method: spell
       prepared: 0
@@ -19958,7 +19994,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.vaNRSucrFdZAxGza.EHFLuTHqI6cXn1zb
@@ -20016,7 +20052,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.vaNRSucrFdZAxGza.dnd5espellchange
@@ -20036,10 +20072,8 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplFly0000000
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866988869
-      modifiedTime: 1768866988869
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: vaNRSucrFdZAxGza
     _key: '!actors.items!RiswynnLv1700000.vaNRSucrFdZAxGza'
   - name: 'Spell Scroll: Revivify'
@@ -20099,6 +20133,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -20144,7 +20179,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties:
         - mgc
     effects: []
@@ -20160,10 +20194,8 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgSpellScroll3r
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866999496
-      modifiedTime: 1768866999496
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _id: 5lhvg8TtIuiSZQFX
@@ -20278,6 +20310,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: revivify
       method: spell
       prepared: 0
@@ -20338,7 +20371,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.xQ9Evo9SPV0YxpUI.dnd5espellchange
@@ -20358,10 +20391,8 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplRevivify00
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768866999661
-      modifiedTime: 1768866999661
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: xQ9Evo9SPV0YxpUI
     _key: '!actors.items!RiswynnLv1700000.xQ9Evo9SPV0YxpUI'
   - name: 'Spell Scroll: Gaseous Form'
@@ -20421,6 +20452,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -20466,7 +20498,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties:
         - mgc
     effects: []
@@ -20482,10 +20513,8 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgSpellScroll3r
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768867011688
-      modifiedTime: 1768867011688
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     _id: VeXH9sqiMnhqZE1w
@@ -20601,6 +20630,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: gaseous-form
       method: spell
       prepared: 0
@@ -20690,7 +20720,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.a3ZvMBIcLqBEDAEB.QeYsfnjEj2T9A3C8
@@ -20748,7 +20778,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!RiswynnLv1700000.a3ZvMBIcLqBEDAEB.dnd5espellchange
@@ -20765,10 +20795,8 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplGaseousFor
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
-      createdTime: 1768867011961
-      modifiedTime: 1768867011961
-      lastModifiedBy: dnd5ebuilder0000
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _id: a3ZvMBIcLqBEDAEB
     _key: '!actors.items!RiswynnLv1700000.a3ZvMBIcLqBEDAEB'
 effects: []
@@ -20778,9 +20806,9 @@ _stats:
   exportSource: null
   coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.2.4
-  createdTime: 1768863717348
-  modifiedTime: 1768869916929
+  systemVersion: 5.3.0
+  createdTime: 1771452690269
+  modifiedTime: 1771452690269
   lastModifiedBy: dnd5ebuilder0000
 ownership:
   default: 0

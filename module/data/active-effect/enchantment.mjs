@@ -1,12 +1,15 @@
 import { DamageData } from "../shared/damage-field.mjs";
 
+const { ActiveEffectTypeDataModel } = foundry.data;
+const { TypeDataModel } = foundry.abstract;
+
 /**
  * System data model for enchantment active effects.
  */
-export default class EnchantmentData extends foundry.abstract.TypeDataModel {
+export default class EnchantmentData extends (ActiveEffectTypeDataModel ?? TypeDataModel) {
   /** @override */
   static defineSchema() {
-    return {};
+    return ActiveEffectTypeDataModel ? super.defineSchema() : {};
   }
 
   /* -------------------------------------------- */
@@ -19,11 +22,14 @@ export default class EnchantmentData extends foundry.abstract.TypeDataModel {
    * @returns {boolean|void}             Return false to prevent normal application from occurring.
    */
   _applyLegacy(item, change, changes) {
+    const applyField = (game.release.generation > 13)
+      ? (model, c) => ActiveEffect.implementation.applyChangeField(model, c)
+      : (model, c) => ActiveEffect.implementation.applyField(model, c);
     let key = change.key.replace("system.", "");
     switch ( change.key ) {
       case "system.ability":
         for ( const activity of item.system.activities?.getByTypes("attack") ?? [] ) {
-          changes[`system.activities.${activity.id}.attack.ability`] = ActiveEffect.implementation.applyField(
+          changes[`system.activities.${activity.id}.attack.ability`] = applyField(
             activity, { ...change, key: "attack.ability" }
           );
         }
@@ -31,7 +37,7 @@ export default class EnchantmentData extends foundry.abstract.TypeDataModel {
       case "system.attack.bonus":
       case "system.attack.flat":
         for ( const activity of item.system.activities?.getByTypes("attack") ?? [] ) {
-          changes[`system.activities.${activity.id}.${key}`] = ActiveEffect.implementation.applyField(
+          changes[`system.activities.${activity.id}.${key}`] = applyField(
             activity, { ...change, key }
           );
         }
@@ -42,21 +48,21 @@ export default class EnchantmentData extends foundry.abstract.TypeDataModel {
       case "system.damage.parts":
         try {
           let damage;
-          const parsed = JSON.parse(change.value);
+          const parsed = typeof change.value === "string" ? JSON.parse(change.value) : change.value;
           if ( foundry.utils.getType(parsed) === "Object" ) damage = new DamageData(parsed);
           else damage = new DamageData({ custom: { enabled: true, formula: parsed[0][0] }, types: [parsed[0][1]] });
           for ( const activity of item.system.activities?.getByTypes("attack", "damage", "save") ?? [] ) {
             const value = damage.clone();
             value.enchantment = true;
             value.locked = true;
-            changes[`system.activities.${activity.id}.damage.parts`] = ActiveEffect.implementation.applyField(
+            changes[`system.activities.${activity.id}.damage.parts`] = applyField(
               activity, { ...change, key, value }
             );
           }
           for ( const activity of item.system.activities?.getByTypes("heal") ?? [] ) {
             const value = damage.formula;
             const keyPath = `healing.${activity.healing.custom.enabled ? "custom.formula" : "bonus"}`;
-            changes[`system.activities.${activity.id}.${keyPath}`] = ActiveEffect.implementation.applyField(
+            changes[`system.activities.${activity.id}.${keyPath}`] = applyField(
               activity, { ...change, key: keyPath, value }
             );
           }
@@ -64,7 +70,7 @@ export default class EnchantmentData extends foundry.abstract.TypeDataModel {
         return false;
       case "system.damage.types":
         const adjust = (damage, keyPath) =>
-          ActiveEffect.implementation.applyField(damage, { ...change, key: "types", value: change.value });
+          applyField(damage, { ...change, key: "types", value: change.value });
         if ( item.system.damage?.base ) {
           changes["system.damage.base.types"] = adjust(item.system.damage.base, "system.damage.base");
         }
@@ -83,7 +89,7 @@ export default class EnchantmentData extends foundry.abstract.TypeDataModel {
           else if ( (value === "") && (item.type === "spell") ) value = "spellcasting";
         }
         for ( const activity of item.system.activities?.getByTypes("save") ?? [] ) {
-          changes[`system.activities.${activity.id}.${key}`] = ActiveEffect.implementation.applyField(
+          changes[`system.activities.${activity.id}.${key}`] = applyField(
             activity, { ...change, key, value }
           );
         }
@@ -93,7 +99,7 @@ export default class EnchantmentData extends foundry.abstract.TypeDataModel {
       case "system.preparation.mode":
         foundry.utils.logCompatibilityWarning("system.preparation.mode is deprecated. Please instead use "
           + "system.method to set the spellcasting method, or system.prepared to set the preparation state.",
-        { since: "DnD5e 5.1", until: "DnD5e 5.4", once: true });
+        { since: "DnD5e 5.1", until: "DnD5e 6.0", once: true });
         change.key = "system.method";
         if ( change.value === "always" ) {
           change.key = "system.prepared";
@@ -104,9 +110,22 @@ export default class EnchantmentData extends foundry.abstract.TypeDataModel {
       /** @deprecated since 5.1 */
       case "system.preparation.prepared":
         foundry.utils.logCompatibilityWarning("system.preparation.prepared is deprecated. "
-          + "Please use system.prepared instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4", once: true });
+          + "Please use system.prepared instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0", once: true });
         change.key = "system.prepared";
         break;
     }
+  }
+
+  /* -------------------------------------------- */
+  /*  Importing and Exporting                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Can an active effect of this type be added to the provided document?
+   * @param {Actor5e|Item5e} doc  Candidate document to which the active effect might be added.
+   * @returns {boolean}           Should this active effect be available?
+   */
+  static availableForItem(doc) {
+    return doc instanceof Item;
   }
 }

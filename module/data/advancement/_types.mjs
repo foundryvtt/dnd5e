@@ -10,23 +10,24 @@
 
 /**
  * @typedef AbilityScoreImprovementAdvancementValueData
- * @property {string} type             When on a class, whether the player chose ASI or a Feat.
- * @property {Object<string, number>}  Points assigned to individual scores.
- * @property {Object<string, string>}  Feat that was selected.
+ * @property {string} type                         When on a class, whether the player chose ASI or a Feat.
+ * @property {Object<string, number>} assignments  Points assigned to individual scores.
+ * @property {Object<string, string>} feat         Feat that was selected.
  */
 
 /**
  * @typedef AdvancementData
- * @property {string} _id               The advancement's ID.
- * @property {string} type              Type of advancement.
- * @property {*} configuration          Type-specific configuration data.
- * @property {*} value                  Type-specific value data after the advancement is applied.
- * @property {number} level             For single-level advancement, the level at which it should apply.
- * @property {string} title             Optional custom title.
- * @property {string} hint              Brief description of what the advancement does or guidance for the player.
- * @property {string} icon              Optional custom icon.
- * @property {string} classRestriction  Should this advancement apply at all times, only when on the first class on
- *                                      an actor, or only on a class that is multi-classing?
+ * @property {string} _id                    The advancement's ID.
+ * @property {string} type                   Type of advancement.
+ * @property {*} configuration               Type-specific configuration data.
+ * @property {Record<string, object>} flags  Arbitrary flag data for this advancement.
+ * @property {*} value                       Type-specific value data after the advancement is applied.
+ * @property {number} level                  For single-level advancement, the level at which it should apply.
+ * @property {string} title                  Optional custom title.
+ * @property {string} hint                   Brief description of what the advancement does or guidance for the player.
+ * @property {string} icon                   Optional custom icon.
+ * @property {string} classRestriction       Should this advancement apply at all times, only when on the first class
+ *                                           on an actor, or only on a class that is multi-classing?
  */
 
 /**
@@ -63,9 +64,9 @@
 
 /**
  * @typedef ItemChoiceReplacement
- * @property {number} level        Level at which the original item was chosen.
- * @property {string} original     ID of the original item that was replaced.
- * @property {string} replacement  ID of the replacement item.
+ * @property {number} level          Level at which the original item was chosen.
+ * @property {string} original       ID of the original item that was replaced.
+ * @property {string} [replacement]  ID of the replacement item.
  */
 
 /**

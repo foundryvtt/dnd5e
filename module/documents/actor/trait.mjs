@@ -186,7 +186,7 @@ export async function categories(trait) {
 export async function choices(trait, { chosen=new Set(), prefixed=false, any=false }={}) {
   const traitConfig = CONFIG.DND5E.traits[trait];
   if ( !traitConfig ) return new SelectChoices();
-  if ( foundry.utils.getType(chosen) === "Array" ) chosen = new Set(chosen);
+  if ( Array.isArray(chosen) ) chosen = new Set(chosen);
   const categoryData = await categories(trait);
 
   let result = {};
@@ -353,6 +353,37 @@ export function traitLabel(trait, count) {
   const pluralRule = (count !== undefined) ? new Intl.PluralRules(game.i18n.lang).select(count) : "other";
   if ( !traitConfig ) return game.i18n.localize(`DND5E.TraitGenericPlural.${pluralRule}`);
   return game.i18n.localize(`${traitConfig.labels.localization}.${pluralRule}`);
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Retrieve the representative icon for a specific trait.
+ * @param {string} key             Key for which to generate the icon.
+ * @param {object} [config={}]
+ * @param {string} [config.trait]  Trait as defined in `CONFIG.DND5E.traits` if not using a prefixed key.
+ * @returns {string|null}
+ */
+export function keyIcon(key, { trait }={}) {
+  let parts = key.split(":");
+  if ( !trait ) trait = parts.shift();
+
+  // For simple traits, retrieve from config directly
+  const traitConfig = CONFIG.DND5E.traits[trait];
+  const traitIcon = CONFIG.DND5E[traitConfig?.configKey ?? trait]?.[parts[0]]?.icon;
+  if ( traitIcon ) return traitIcon;
+
+  // For other traits, try to find base item
+  const lastKey = parts.pop();
+  for ( const idsKey of traitConfig?.subtypes?.ids ?? [] ) {
+    let baseItemId = CONFIG.DND5E[idsKey]?.[lastKey];
+    if ( !baseItemId ) continue;
+    if ( foundry.utils.getType(baseItemId) === "Object" ) baseItemId = baseItemId.id;
+    const index = getBaseItem(baseItemId, { indexOnly: true });
+    if ( index ) return index.img;
+  }
+
+  return traitConfig?.icon ?? null;
 }
 
 /* -------------------------------------------- */

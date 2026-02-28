@@ -300,7 +300,12 @@ export default class ActivitySheet extends PseudoDocumentSheet {
         { value: "", label: game.i18n.localize("DND5E.DAMAGE.Scaling.None") },
         ...Object.entries(CONFIG.DND5E.damageScalingModes).map(([value, { [scaleKey]: label }]) => ({ value, label }))
       ];
-      const typeOptions = Object.entries(CONFIG.DND5E.damageTypes).map(([value, { label }]) => ({ value, label }));
+      let typeOptions = Object.entries(CONFIG.DND5E.damageTypes).map(([value, config]) => ({ ...config, value }));
+      const [other, physical] = typeOptions.partition(config => !!config.isPhysical);
+      typeOptions = [
+        ...physical, { rule: true }, ...other, { rule: true },
+        { value: "maximum", label: "DND5E.HEAL.Type.Maximum" }
+      ];
       const makePart = (data, index) => this._prepareDamagePartContext(context, {
         data, index, scalingOptions, typeOptions,
         locked: data.locked || (index === undefined),
@@ -427,8 +432,8 @@ export default class ActivitySheet extends PseudoDocumentSheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _onRender(context, options) {
-    super._onRender(context, options);
+  async _onRender(context, options) {
+    await super._onRender(context, options);
     this.#toggleNestedTabs();
   }
 
@@ -468,7 +473,7 @@ export default class ActivitySheet extends PseudoDocumentSheet {
     const existingTypes = new Set(this.activity.consumption.targets.map(t => t.type));
     const filteredTypes = types.difference(existingTypes);
     let type = filteredTypes.first() ?? types.first();
-    if ( (type === "activityUses") && !this.activity.uses.max && this.activity.item.system.uses.max
+    if ( (type === "activityUses") && !this.activity._source.uses.max && this.activity.item.system._source.uses.max
       && filteredTypes.has("itemUses") ) type="itemUses";
     this.activity.update({
       "consumption.targets": [

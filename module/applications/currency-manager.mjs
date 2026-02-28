@@ -3,6 +3,10 @@ import Award from "./award.mjs";
 import Application5e from "./api/application.mjs";
 
 /**
+ * @import { CurrencyUpdateOptions } from "./_types.mjs";
+ */
+
+/**
  * Application for performing currency conversions & transfers.
  */
 export default class CurrencyManager extends Application5e {
@@ -236,13 +240,10 @@ export default class CurrencyManager extends Application5e {
 
   /**
    * Deduct a certain amount of currency from a given Actor.
-   * @param {Actor5e} actor                          The actor.
-   * @param {number} amount                          The amount of currency.
-   * @param {string} denomination                    The currency's denomination.
-   * @param {object} [options]
-   * @param {boolean} [options.recursive=false]      Deduct currency from containers as well as the base Actor. TODO
-   * @param {"high"|"low"} [options.priority="low"]  Prioritize higher denominations before lower, or vice-versa.
-   * @param {boolean} [options.exact=true]           Prioritize deducting the requested denomination first.
+   * @param {Actor5e} actor                   The actor.
+   * @param {number} amount                   The amount of currency.
+   * @param {string} denomination             The currency's denomination.
+   * @param {CurrencyUpdateOptions} [options]
    * @throws {Error} If the Actor does not have sufficient currency.
    * @returns {Promise<Actor5e>|void}
    */
@@ -262,32 +263,49 @@ export default class CurrencyManager extends Application5e {
 
   /**
    * Determine model updates for deducting a certain amount of currency from a given Actor.
-   * @param {Actor5e} actor                          The actor.
-   * @param {number} amount                          The amount of currency.
-   * @param {string} denomination                    The currency's denomination.
-   * @param {object} [options]
-   * @param {boolean} [options.recursive=false]      Deduct currency from containers as well as the base Actor. TODO
-   * @param {"high"|"low"} [options.priority="low"]  Prioritize higher denominations before lower, or vice-versa.
-   * @param {boolean} [options.exact=true]           Prioritize deducting the requested denomination first.
+   * @param {Actor5e} actor                   The actor.
+   * @param {number} amount                   The amount of currency.
+   * @param {string} denomination             The currency's denomination.
+   * @param {CurrencyUpdateOptions} [options]
    * @returns {{ item: object[], remainder: number, [p: string]: any }}
    */
-  static getActorCurrencyUpdates(actor, amount, denomination, { recursive=false, priority="low", exact=true }={}) {
+  static getActorCurrencyUpdates(
+    actor, amount, denomination, { recursive=false, priority="low", exact=true, makeChange=true }={}
+  ) {
     const { currency } = actor.system;
-    const updates = { system: { currency: { ...currency } }, remainder: amount, item: [] };
-    if ( amount <= 0 ) return updates;
+    if ( amount <= 0 ) return { system: { currency: { ...currency } }, remainder: amount, item: [] };
 
-    const currencies = Object.entries(CONFIG.DND5E.currencies).map(([denom, { conversion }]) => {
-      return [denom, conversion];
-    }).sort(([, a], [, b]) => priority === "high" ? a - b : b - a);
+    const currencies = Object.entries(CONFIG.DND5E.currencies)
+      .filter(([denom]) => !exact || (denom !== denomination))
+      .map(([denom, { conversion }]) => [denom, conversion])
+      .sort(([, a], [, b]) => priority === "high" ? a - b : b - a);
     const baseConversion = CONFIG.DND5E.currencies[denomination].conversion;
-
     if ( exact ) currencies.unshift([denomination, baseConversion]);
-    for ( const [denom, conversion] of currencies ) {
-      const multiplier = conversion / baseConversion;
-      const deduct = Math.min(updates.system.currency[denom], Math.floor(updates.remainder * multiplier));
-      updates.remainder -= deduct / multiplier;
-      updates.system.currency[denom] -= deduct;
-      if ( !updates.remainder ) return updates;
+
+    let passes = currencies.length;
+    let updates;
+    while ( passes ) {
+      updates = { system: { currency: { ...currency } }, remainder: amount, item: [] };
+      for ( const [denom, conversion] of currencies ) {
+        const multiplier = conversion / baseConversion;
+        const deduct = Math.min(updates.system.currency[denom], Math.floor(updates.remainder * multiplier));
+        // Handle normal deduction first.
+        updates.remainder -= deduct / multiplier;
+        updates.system.currency[denom] -= deduct;
+        // If there's still a remainder, break the denomination into change.
+        if ( updates.remainder && makeChange && (conversion < baseConversion) && updates.system.currency[denom] ) {
+          const rate = Math.floor(baseConversion / conversion);
+          const breaks = Math.min(updates.system.currency[denom], Math.ceil(updates.remainder / rate));
+          updates.system.currency[denom] -= breaks;
+          updates.system.currency[denomination] += breaks * rate;
+          const change = Math.min(updates.system.currency[denomination], updates.remainder);
+          updates.remainder -= change;
+          updates.system.currency[denomination] -= change;
+        }
+        if ( !updates.remainder ) return updates;
+      }
+      currencies.push(currencies.shift());
+      passes--;
     }
 
     return updates;

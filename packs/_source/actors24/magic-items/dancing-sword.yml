@@ -17,6 +17,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     dex:
       value: 10
       proficient: 0
@@ -24,6 +34,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     con:
       value: 0
       proficient: 0
@@ -31,6 +51,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     int:
       value: 0
       proficient: 0
@@ -38,6 +68,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     wis:
       value: 0
       proficient: 0
@@ -45,6 +85,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     cha:
       value: 0
       proficient: 0
@@ -52,6 +102,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
   bonuses:
     mwak:
       attack: ''
@@ -293,22 +353,19 @@ system:
         mode: 0
       bonus: ''
     movement:
-      burrow: null
-      climb: null
-      fly: null
-      swim: null
-      walk: null
       units: null
       hover: false
+      ignoredDifficultTerrain: []
     attunement:
       max: 3
     senses:
-      darkvision: null
-      blindsight: null
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: null
+        blindsight: null
+        tremorsense: null
+        truesight: null
     spellcasting: str
     exhaustion: 0
     concentration:
@@ -332,13 +389,20 @@ system:
       tempmax: 0
       formula: ''
     death:
-      ability: ''
       roll:
         min: null
         max: null
         mode: 0
       success: 0
       failure: 0
+      bonuses:
+        save: ''
+    spell:
+      level: 0
+    loyalty: {}
+    price:
+      value: null
+      denomination: gp
   details:
     biography:
       value: ''
@@ -353,19 +417,23 @@ system:
       subtype: ''
       swarm: ''
       custom: Magic Item
-    environment: ''
     cr: null
-    spellLevel: 0
+    habitat:
+      custom: ''
+      value: []
+    treasure:
+      value: []
   resources:
     legact:
-      value: 0
       max: 0
+      spent: 0
     legres:
-      value: 0
       max: 0
+      spent: 0
     lair:
       value: false
       initiative: null
+      inside: false
   source:
     revision: 1
     rules: '2024'
@@ -394,9 +462,11 @@ system:
     languages:
       value: []
       custom: ''
+      communication: {}
+    important: false
 prototypeToken:
   name: Dancing Sword
-  displayName: 0
+  displayName: 20
   actorLink: false
   appendNumber: false
   prependAdjective: false
@@ -418,7 +488,7 @@ prototypeToken:
   rotation: 0
   alpha: 1
   disposition: -2
-  displayBars: 0
+  displayBars: 20
   bar1:
     attribute: attributes.hp
   bar2:
@@ -501,7 +571,6 @@ items:
       rarity: ''
       attunement: ''
       cover: null
-      crewed: false
       range:
         value: null
         long: null
@@ -544,7 +613,6 @@ items:
       type:
         value: martialM
         baseItem: greatsword
-      magicalBonus: null
       properties:
         - hvy
         - mgc
@@ -589,7 +657,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: '1'
               type: creature
@@ -618,11 +686,20 @@ items:
           sort: 0
           _id: zi3BW6RGO2ugOyXu
           name: 'Command: Move and Attack'
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       ammunition: {}
       mastery: graze
       identifier: greatsword
       attuned: false
       equipped: true
+      crew:
+        value: []
     _id: W8EZZZznFN8X4gGD
     type: weapon
     folder: fd3qxAXCv2FhExPp
@@ -639,13 +716,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbwepGreatsword
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1740680148749
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!dmggwsDancingSwo.W8EZZZznFN8X4gGD'
   - name: Longsword
     system:
@@ -672,7 +747,6 @@ items:
       rarity: ''
       attunement: ''
       cover: null
-      crewed: false
       range:
         value: null
         long: null
@@ -715,7 +789,6 @@ items:
       type:
         value: martialM
         baseItem: longsword
-      magicalBonus: null
       properties:
         - mgc
         - ver
@@ -759,7 +832,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: '1'
               type: creature
@@ -788,11 +861,20 @@ items:
           sort: 0
           name: 'Command: Move and Attack'
           _id: 2VMTyJ3LuoNhPQSU
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       ammunition: {}
       mastery: sap
       identifier: longsword
       attuned: false
       equipped: true
+      crew:
+        value: []
     _id: DPH6ngFfFJHdxMYe
     type: weapon
     folder: fd3qxAXCv2FhExPp
@@ -809,13 +891,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbwepLongsword0
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: 1730836861247
-      modifiedTime: 1740680148749
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!dmggwsDancingSwo.DPH6ngFfFJHdxMYe'
   - name: Rapier
     system:
@@ -842,7 +922,6 @@ items:
       rarity: ''
       attunement: ''
       cover: null
-      crewed: false
       range:
         value: null
         long: null
@@ -885,7 +964,6 @@ items:
       type:
         value: martialM
         baseItem: rapier
-      magicalBonus: null
       properties:
         - fin
         - mgc
@@ -929,7 +1007,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: '1'
               type: creature
@@ -958,11 +1036,20 @@ items:
           sort: 0
           name: 'Command: Move and Attack'
           _id: 5YyLN6QHuNx2LmSf
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       ammunition: {}
       mastery: vex
       identifier: rapier
       attuned: false
       equipped: true
+      crew:
+        value: []
     _id: dlSKamvVAPMCCTbC
     type: weapon
     folder: fd3qxAXCv2FhExPp
@@ -979,13 +1066,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbwepRapier0000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: 1730836867431
-      modifiedTime: 1740680148749
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!dmggwsDancingSwo.dlSKamvVAPMCCTbC'
   - name: Scimitar
     system:
@@ -1012,7 +1097,6 @@ items:
       rarity: ''
       attunement: ''
       cover: null
-      crewed: false
       range:
         value: null
         long: null
@@ -1055,7 +1139,6 @@ items:
       type:
         value: martialM
         baseItem: scimitar
-      magicalBonus: null
       properties:
         - fin
         - lgt
@@ -1100,7 +1183,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: '1'
               type: creature
@@ -1129,11 +1212,20 @@ items:
           sort: 0
           name: 'Command: Move and Attack'
           _id: jwAfMNhqIPnzBFIB
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       ammunition: {}
       mastery: nick
       identifier: scimitar
       attuned: false
       equipped: true
+      crew:
+        value: []
     _id: aYun8JFJxhdpFw14
     type: weapon
     folder: fd3qxAXCv2FhExPp
@@ -1150,13 +1242,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbwepScimitar00
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: 1730836873868
-      modifiedTime: 1740680148749
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!dmggwsDancingSwo.aYun8JFJxhdpFw14'
   - name: Shortsword
     system:
@@ -1183,7 +1273,6 @@ items:
       rarity: ''
       attunement: ''
       cover: null
-      crewed: false
       range:
         value: null
         long: null
@@ -1226,7 +1315,6 @@ items:
       type:
         value: martialM
         baseItem: shortsword
-      magicalBonus: null
       properties:
         - fin
         - lgt
@@ -1271,7 +1359,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: '1'
               type: creature
@@ -1300,11 +1388,20 @@ items:
           sort: 0
           name: 'Command: Move and Attack'
           _id: 8pj5nN1PsQDJq8AV
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       ammunition: {}
       mastery: vex
       identifier: shortsword
       attuned: false
       equipped: true
+      crew:
+        value: []
     _id: 237FLmvncdVOhDKY
     type: weapon
     folder: fd3qxAXCv2FhExPp
@@ -1321,13 +1418,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbwepShortsword
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: 1730836879715
-      modifiedTime: 1740680148749
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!dmggwsDancingSwo.237FLmvncdVOhDKY'
 effects: []
 folder: 2AjZvlZWDCwSd0ry
@@ -1336,13 +1431,13 @@ flags:
     showTokenPortrait: false
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
-  systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1729105570783
-  modifiedTime: 1745256817271
-  lastModifiedBy: dnd5ebuilder0000
   exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  createdTime: 1771452693207
+  modifiedTime: 1771452693207
+  lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:
   default: 0

@@ -36,7 +36,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
           required: true, nullable: false, initial: 0, min: 0, label: "DND5E.Price"
         }),
         denomination: new StringField({
-          required: true, blank: false, initial: "gp", label: "DND5E.Currency"
+          required: true, blank: false, initial: () => CONFIG.DND5E.defaultCurrency, label: "DND5E.Currency"
         })
       }, { label: "DND5E.Price" }),
       rarity: new StringField({ required: true, blank: true, label: "DND5E.Rarity" })
@@ -184,12 +184,12 @@ export default class PhysicalItemTemplate extends SystemDataModel {
    * Prepare physical item properties.
    */
   preparePhysicalData() {
-    if ( !("gp" in CONFIG.DND5E.currencies) ) return;
+    if ( !(CONFIG.DND5E.defaultCurrency in CONFIG.DND5E.currencies) ) return;
     const { value, denomination } = this.price;
     const { conversion } = CONFIG.DND5E.currencies[denomination] ?? {};
-    const { gp } = CONFIG.DND5E.currencies;
+    const defaultCurrency = CONFIG.DND5E.currencies[CONFIG.DND5E.defaultCurrency];
     if ( conversion ) {
-      const multiplier = gp.conversion / conversion;
+      const multiplier = defaultCurrency.conversion / conversion;
       this.price.valueInGP = Math.floor(value * multiplier);
     }
   }
@@ -225,6 +225,23 @@ export default class PhysicalItemTemplate extends SystemDataModel {
       const former = await fromUuid(formerContainer);
       former.render(false, { ...rendering });
       former.system._renderContainers(rendering);
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Set gear property for NPCs automatically, remove if created elsewhere.
+   * @param {object} data     The initial data object provided to the document creation request.
+   * @param {object} options  Additional options which modify the creation request.
+   * @param {User} user       The User requesting the document creation.
+   */
+  preCreateGear(data, options, user) {
+    const properties = this.toObject().properties;
+    if ( this.parent.actor?.system.isNPC && (this.type?.value !== "natural") ) {
+      this.updateSource({ properties: [...properties, "gear"] });
+    } else {
+      this.updateSource({ properties: properties.filter(g => g !== "gear") });
     }
   }
 
@@ -281,6 +298,34 @@ export default class PhysicalItemTemplate extends SystemDataModel {
       depth++;
     }
     return containers;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Perform any necessary transformations on this item when claiming it as gear from an NPC.
+   * @returns {Promise<Item5e>}
+   */
+  async asGear() {
+    const change = { "flags.dnd5e.gearSource": this.parent.uuid };
+    let clone;
+    if ( this.metadata.compendiumGearSource && this.parent._stats.compendiumSource
+      && !this.parent.getFlag("dnd5e", "gear.preserve") ) {
+      const item = await fromUuid(this.parent._stats.compendiumSource);
+      if ( item ) clone = item.clone({ ...change, "system.quantity": this.quantity }, { keepId: true });
+    }
+    clone ??= this.parent.clone(change, { keepId: true });
+
+    /**
+     * A hook event that fires when retrieving an item as gear.
+     * @function dnd5e.getAsGear
+     * @memberof hookEvents
+     * @param {Item5e} item  Item on NPC being prepared as gear.
+     * @param {Item5e} gear  Non-saved clone of the item to be returned as gear.
+     */
+    Hooks.callAll("dnd5e.getAsGear", this.parent, clone);
+
+    return clone;
   }
 
   /* -------------------------------------------- */

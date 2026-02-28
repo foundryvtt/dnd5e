@@ -3,13 +3,14 @@ system:
   description:
     value: >-
       <p>A bright streak flashes from you to a point you choose within range and
-      then blossoms with a low roar into a fiery explosion. Each creature in a
-      20-foot-radius Sphere centered on that point makes a Dexterity saving
-      throw, taking 8d6 Fire damage on a failed save or half as much damage on a
-      successful one.</p><p>Flammable objects in the area that aren't being worn
-      or carried start burning.</p><p><strong>Using a Higher-Level Spell
-      Slot.</strong> The damage increases by 1d6 for each spell slot level above
-      3.</p>
+      then blossoms with a low roar into a fiery explosion. [[lookup
+      @labels.description.affects capitalize]] in a [[lookup
+      @labels.description.template]] centered on that point makes a Dexterity
+      saving throw, taking 8d6 Fire damage on a failed save or half as much
+      damage on a successful one.</p><p>Flammable objects in the area that
+      aren't being worn or carried start burning.</p><p><strong>Using a
+      Higher-Level Spell Slot.</strong> The damage increases by 1d6 for each
+      spell slot level above 3.</p>
     chat: ''
   source:
     custom: ''
@@ -126,11 +127,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.2
   createdTime: 1724425954119
-  modifiedTime: 1745256793145
+  modifiedTime: 1765235810166
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplFireball00'

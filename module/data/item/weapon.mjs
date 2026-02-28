@@ -1,6 +1,7 @@
 import { convertLength, defaultUnits, filteredKeys, formatLength, formatNumber } from "../../utils.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import BaseActivityData from "../activity/base-activity.mjs";
+import FormulaField from "../fields/formula-field.mjs";
 import DamageField from "../shared/damage-field.mjs";
 import ItemTypeField from "./fields/item-type-field.mjs";
 import ActivitiesTemplate from "./templates/activities.mjs";
@@ -64,7 +65,7 @@ export default class WeaponData extends ItemDataModel.mixin(
         base: new DamageField(),
         versatile: new DamageField()
       }),
-      magicalBonus: new NumberField({ min: 0, integer: true, label: "DND5E.MagicalBonus" }),
+      magicalBonus: new FormulaField({ deterministic: true, label: "DND5E.MagicalBonus" }),
       mastery: new StringField(),
       properties: new SetField(new StringField(), { label: "DND5E.ItemWeaponProperties" }),
       proficient: new NumberField({
@@ -84,6 +85,7 @@ export default class WeaponData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+    compendiumGearSource: true,
     hasEffects: true,
     enchantable: true
   }, {inplace: false}));
@@ -358,7 +360,7 @@ export default class WeaponData extends ItemDataModel.mixin(
     if ( Number.isFinite(this.proficient) ) return this.proficient;
     const actor = this.parent.actor;
     if ( !actor ) return 0;
-    if ( actor.type === "npc" ) return 1; // NPCs are always considered proficient with any weapon in their stat block.
+    if ( actor.system.isNPC ) return 1; // NPCs are always considered proficient with any weapon in their stat block.
     const config = CONFIG.DND5E.weaponProficienciesMap;
     const itemProf = config[this.type.value];
     const actorProfs = actor.system.traits?.weaponProf?.value ?? new Set();
@@ -487,6 +489,7 @@ export default class WeaponData extends ItemDataModel.mixin(
     else if ( this.range.reach === null ) {
       this.range.reach = convertLength(this.properties.has("rch") ? 10 : 5, "ft", this.range.units, { strict: false });
     }
+    if ( !this.hasRange ) this.range.value = this.range.long = null;
   }
 
   /* -------------------------------------------- */
@@ -545,12 +548,17 @@ export default class WeaponData extends ItemDataModel.mixin(
     }
 
     context.parts = ["dnd5e.details-weapon", "dnd5e.field-uses"];
-    context.damageTypes = Object.entries(CONFIG.DND5E.damageTypes).map(([value, { label }]) => {
+    const typeOptions = Object.entries(CONFIG.DND5E.damageTypes).map(([value, config]) => {
       return {
-        value, label,
+        ...config, value,
         selected: context.source.damage.base.types.includes?.(value) ?? context.source.damage.base.types.has(value)
       };
     });
+    const [other, physical] = typeOptions.partition(config => !!config.isPhysical);
+    context.damageTypes = [
+      ...physical, { rule: true }, ...other, { rule: true },
+      { value: "maximum", label: "DND5E.HEAL.Type.Maximum" }
+    ];
     const makeDenominationOptions = placeholder => [
       { value: "", label: placeholder ? `d${placeholder}` : "" },
       { rule: true },
@@ -570,6 +578,7 @@ export default class WeaponData extends ItemDataModel.mixin(
   async _preCreate(data, options, user) {
     if ( (await super._preCreate(data, options, user)) === false ) return false;
     await this.preCreateEquipped(data, options, user);
+    this.preCreateGear(data, options, user);
     if ( this.activities.size ) return;
 
     const activityData = new CONFIG.DND5E.activityTypes.attack.documentClass({}, { parent: this.parent }).toObject();

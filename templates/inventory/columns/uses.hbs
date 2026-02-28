@@ -13,7 +13,7 @@
     {{#if @root.locked}}
     <span class="value">{{ ctx.uses.value }}</span>
     {{else}}
-    <input type="text" value="{{ ctx.uses.value }}" placeholder="0" data-dtype="Number"
+    <input class="always-interactive" type="text" value="{{ ctx.uses.value }}" placeholder="0" data-dtype="Number"
            data-name="{{ ctx.uses.prop }}" inputmode="numeric" pattern="[+=\-]?\d*"
            aria-label="{{ localize "DND5E.Remaining" }}">
     {{/if}}

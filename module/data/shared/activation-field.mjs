@@ -1,3 +1,5 @@
+import { formatNumber, formatTime, getPluralRules } from "../../utils.mjs";
+
 const { NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
@@ -25,16 +27,34 @@ export default class ActivationField extends SchemaField {
    * @param {object} [labels]  Object in which to insert generated labels.
    */
   static prepareData(rollData, labels) {
-    this.activation.scalar = CONFIG.DND5E.activityActivationTypes[this.activation.type]?.scalar ?? false;
+    const config = CONFIG.DND5E.activityActivationTypes[this.activation.type];
+    this.activation.scalar = config?.scalar ?? false;
     if ( !this.activation.scalar ) this.activation.value = null;
 
-    if ( labels && this.activation.type ) {
-      labels.activation = [
-        this.activation.value, CONFIG.DND5E.activityActivationTypes[this.activation.type]?.label
-      ].filterJoin(" ");
+    this.activation.labels ??= {};
+    if ( this.activation.type ) {
+      let scalar;
+      if ( this.activation.type in CONFIG.DND5E.timeUnits ) {
+        scalar = formatTime(this.activation.value ?? 1, this.activation.type);
+      }
+      else if ( config?.counted ) scalar = game.i18n.format(
+        `${config.counted}.${getPluralRules().select(this.activation.value ?? 1)}`,
+        { number: formatNumber(this.activation.value ?? 1) }
+      );
+      else scalar = `${formatNumber(this.activation.value ?? 1)} ${config?.label ?? ""}`;
+
+      this.activation.labels.simple = this.activation.scalar && this.activation.value ? scalar : config?.label ?? "";
+      this.activation.labels.legacy = scalar.toLowerCase();
       const formatter = game.i18n.getListFormatter({ type: "disjunction" });
-      labels.ritualActivation = this.properties?.has?.("ritual")
-        ? formatter.format([labels.activation, game.i18n.localize("DND5E.Ritual")]) : labels.activation;
+      this.activation.labels.ritual = this.properties?.has?.("ritual")
+        ? formatter.format([this.activation.labels.simple, game.i18n.localize("DND5E.Ritual")])
+        : this.activation.labels.simple;
+    }
+
+    if ( labels ) {
+      labels.activation ||= this.activation.labels.simple;
+      labels.legacyActivation ||= this.activation.labels.legacy;
+      labels.ritualActivation ||= this.activation.labels.ritual;
     }
   }
 }

@@ -3,6 +3,34 @@
  */
 
 /* -------------------------------------------- */
+/*  Collections                                 */
+/* -------------------------------------------- */
+
+/**
+ * Create a list of options for all documents within a collection grouped by folders.
+ * @param {DirectoryCollection} collection          Directory collection to use when building the options.
+ * @param {object} [options={}]
+ * @param {(object => boolean)} [options.disabled]  Callback used to determine if an entry should be disabled.
+ * @returns {FormSelectOption[]}
+ */
+export function getCollectionDocumentOptions(collection, { disabled }={}) {
+  const options = [];
+  const traverse = node => {
+    if ( !node ) return;
+    let group;
+    if ( node.folder ) group = `${"─".repeat(node.folder.depth - 1)} ${node.folder.name}`.trim();
+    for ( const entry of node.entries ) {
+      const option = { value: entry._id, label: entry.name, group };
+      if ( disabled ) option.disabled = disabled(entry);
+      options.push(option);
+    }
+    node.children.forEach(traverse);
+  };
+  traverse(collection.tree);
+  return options;
+}
+
+/* -------------------------------------------- */
 /*  Formatters                                  */
 /* -------------------------------------------- */
 
@@ -869,7 +897,6 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/activity/parts/activity-usage-notes.hbs",
 
     // Advancement Partials
-    "systems/dnd5e/templates/advancement/parts/advancement-ability-score-control.hbs",
     "systems/dnd5e/templates/advancement/parts/advancement-controls.hbs",
     "systems/dnd5e/templates/advancement/parts/advancement-spell-config.hbs"
   ];
@@ -906,23 +933,26 @@ function dataset(object, options) {
 /**
  * Create an icon element dynamically based on the provided icon string, supporting FontAwesome class strings
  * or paths to SVG or other image types.
- * @param {string} icon           Icon class or path.
+ * @param {string} icon               Icon class or path.
  * @param {object} [options={}]
- * @param {string} [options.alt]  Alt text for the icon.
+ * @param {string} [options.alt]      Alt text for the icon.
+ * @param {string} [options.classes]  Classes to add to the icon.
  * @returns {HTMLElement|null}
  */
-export function generateIcon(icon, { alt }={}) {
+export function generateIcon(icon, { alt, classes }={}) {
   let element;
   if ( icon?.startsWith("fa") ) {
     element = document.createElement("i");
     element.className = icon;
   } else if ( icon ) {
     element = document.createElement(icon.endsWith(".svg") ? "dnd5e-icon" : "img");
+    element.draggable = false;
     element.src = icon;
   } else {
     return null;
   }
   if ( alt ) element[element.tagName === "IMG" ? "alt" : "ariaLabel"] = alt;
+  if ( classes ) element.classList.add(...classes.split(" "));
   return element;
 }
 
@@ -1115,7 +1145,7 @@ export function performPreLocalization(config) {
   CONFIG.statusEffects.forEach(s => s.name = game.i18n.localize(s.name));
   if ( game.release.generation < 14 ) {
     CONFIG.statusEffects.sort((lhs, rhs) =>
-      lhs.order || rhs.order ? (lhs.order ?? Infinity) - (rhs.order ?? Infinity)
+      Number.isFinite(lhs.order) || Number.isFinite(rhs.order) ? (lhs.order ?? Infinity) - (rhs.order ?? Infinity)
         : lhs.name.localeCompare(rhs.name, game.i18n.lang)
     );
   }
@@ -1191,15 +1221,30 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
     if ( resource?.label ) return resource.label;
   }
 
-  if ( (attr === "details.xp.value") && (actor?.type === "npc") ) {
+  if ( (attr === "details.xp.value") && actor?.system.isNPC ) {
     return game.i18n.localize("DND5E.ExperiencePoints.Value");
   }
+
+  const getUnknownLabel = (attr, options) => {
+    /**
+     * A hook event that fires when a human readable attribute label couldn't be found.
+     * @function dnd5e.getUnknownAttributeLabel
+     * @memberof hookEvents
+     * @param {string} attribute  Attribute for which to generate a label.
+     * @param {object} options
+     * @param {Actor5e} [options.actor]  An optional reference actor.
+     * @param {Item5e} [options.item]    An optional reference item.
+     * @param {string} [options.label]   Label that can be set to define the label to use.
+     */
+    Hooks.callAll("dnd5e.getUnknownAttributeLabel", attr, options);
+    return options.label;
+  };
 
   if ( attr.startsWith(".") && actor ) {
     // TODO: Remove `strict: false` when https://github.com/foundryvtt/foundryvtt/issues/11214 is resolved
     // Only necessary when opening the token config for an actor in a compendium
     const item = fromUuidSync(attr, { relative: actor, strict: false });
-    return item?.name ?? attr;
+    return item?.name ?? getUnknownLabel(attr, { actor, item });
   }
 
   // Check if the attribute is already in cache.
@@ -1250,6 +1295,12 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
     label = game.i18n.format("DND5E.AbilityScoreL", { ability: CONFIG.DND5E.abilities[key].label });
   }
 
+  // Senses
+  else if ( attr.startsWith("attributes.senses.ranges.") ) {
+    const key = attr.split(".")[3];
+    label = CONFIG.DND5E.senses[key];
+  }
+
   // Resources
   else if ( attr === "resources.legact.spent" ) label = "DND5E.LegendaryAction.LabelPl";
   else if ( attr === "resources.legact.value" ) label = "DND5E.LegendaryAction.Remaining";
@@ -1282,6 +1333,9 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
 
   // Attempt to find the attribute in a data model.
   if ( !label ) label = getSchemaLabel(attr, "Actor", actor);
+
+  // Call hook if no label is available
+  if ( !label ) label = getUnknownLabel(attr, { actor, item });
 
   if ( label ) {
     label = game.i18n.localize(label);

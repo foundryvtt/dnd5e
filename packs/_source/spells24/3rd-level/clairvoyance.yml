@@ -23,8 +23,8 @@ system:
     condition: ''
     value: 10
   duration:
-    value: ''
-    units: inst
+    value: '10'
+    units: minute
   target:
     affects:
       type: space

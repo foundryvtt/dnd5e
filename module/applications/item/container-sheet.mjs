@@ -228,7 +228,7 @@ export default class ContainerSheet extends ItemSheet5e {
    */
   async _onDropItem(event, data) {
     const behavior = this._dropBehavior(event, data);
-    const item = await Item.implementation.fromDropData(data);
+    let item = await Item.implementation.fromDropData(data);
     if ( !this.item.isOwner || !item || (behavior === "none") ) return false;
 
     // If item already exists in this container, just adjust its sorting
@@ -246,6 +246,11 @@ export default class ContainerSheet extends ItemSheet5e {
     // If item already exists in same DocumentCollection, just adjust its container property
     if ( (behavior === "move") && (item.actor === this.item.actor) && (item.pack === this.item.pack) ) {
       return item.update({ folder: this.item.folder, "system.container": this.item.id });
+    }
+
+    // Transform physical item from NPCs to its gear version
+    if ( this.item.actor && item.actor?.system.isNPC && (item.actor !== this.item.actor) && item.system.asGear ) {
+      item = await item.system.asGear();
     }
 
     // Otherwise, create a new item & contents in this context

@@ -29,15 +29,26 @@
  * Description of a source of damage.
  *
  * @typedef DamageDescription
- * @property {number} value            Amount of damage.
- * @property {string} type             Type of damage.
- * @property {Set<string>} properties  Physical properties that affect damage application.
+ * @property {number} value                          Amount of damage.
+ * @property {string} type                           Type of damage.
+ * @property {Set<string>} properties                Physical properties that affect damage application.
  * @property {object} [active]
- * @property {number} [active.multiplier]      Final calculated multiplier.
- * @property {boolean} [active.modifications]  Did modification affect this description?
- * @property {boolean} [active.resistance]     Did resistance affect this description?
- * @property {boolean} [active.vulnerability]  Did vulnerability affect this description?
- * @property {boolean} [active.immunity]       Did immunity affect this description?
+ * @property {DamageAffectDescription} [active.all]  How resistance/etc. targeting All Damage affected this total.
+ * @property {number} [active.multiplier]            Final calculated multiplier.
+ * @property {boolean} [active.threshold]            Did threshold affect this description?
+ * @property {DamageAffectDescription} [active.type] How resistance/etc. targeting this type affected this total.
+ */
+
+/**
+ * @typedef DamageAffectDescription
+ * @property {boolean} [modification]   Did modification affect this description?
+ * @property {boolean} [resistance]     Did resistance affect this description?
+ * @property {boolean} [vulnerability]  Did vulnerability affect this description?
+ * @property {boolean} [immunity]       Did immunity affect this description?
+ */
+
+/**
+ * @typedef {"modification"|"resistance"|"vulnerability"|"immunity"} DamageAffectCategory
  */
 
 /**
@@ -59,13 +70,15 @@
  * @property {boolean} [ignore.threshold]                  Should this actor's damage threshold be ignored?
  * @property {boolean} [invertHealing=true]  Automatically invert healing types to it heals, rather than damages.
  * @property {"damage"|"healing"} [only]     Apply only damage or healing parts. Untyped rolls will always be applied.
+ * @property {ChatMessage5e} [originatingMessage]  Chat message that holds the damage being applied.
  * @property {boolean} [isDelta]             Whether the damage is coming from a relative change.
  */
 
 /**
  * @typedef {Array<DamageDescription>} DamageSummary
- * @property {number} amount  Total amount of damage/healing across all damage types.
- * @property {number} temp    Total amount of temp HP across all damage types.
+ * @property {number} amount   Total amount of damage/healing across all damage types.
+ * @property {number} temp     Total amount of temp HP across all damage types.
+ * @property {number} tempMax  Total amount of temp max HP across all damage types.
  */
 
 /* -------------------------------------------- */

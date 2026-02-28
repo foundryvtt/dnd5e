@@ -43,7 +43,7 @@ export default class MovementField extends foundry.data.fields.SchemaField {
   static getTravelPaceMode(pace, skill) {
     foundry.utils.logCompatibilityWarning(
       "The `MovementField#getTravelPaceMode` has been moved to `TravelField#getTravelPaceMode.",
-      { since: "DnD5e 5.2", until: "DnD5e 5.4", once: true }
+      { since: "DnD5e 5.2", until: "DnD5e 6.0", once: true }
     );
     return dnd5e.dataModels.actor.TravelField.getTravelPaceMode(pace, skill);
   }
@@ -58,7 +58,7 @@ export default class MovementField extends foundry.data.fields.SchemaField {
   static prepareData(field) {
     foundry.utils.logCompatibilityWarning(
       "The `MovementField#prepareData` is now handled through `TravelField#prepareData`.",
-      { since: "DnD5e 5.2", until: "DnD5e 5.4", once: true }
+      { since: "DnD5e 5.2", until: "DnD5e 6.0", once: true }
     );
   }
 }

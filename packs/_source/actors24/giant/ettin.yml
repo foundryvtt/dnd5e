@@ -353,22 +353,20 @@ system:
         mode: 0
       bonus: ''
     movement:
-      burrow: null
-      climb: null
-      fly: null
-      swim: null
-      walk: 40
+      walk: '40'
       units: null
       hover: false
+      ignoredDifficultTerrain: []
     attunement:
       max: 3
     senses:
-      darkvision: 60
-      blindsight: null
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: 60
+        blindsight: null
+        tremorsense: null
+        truesight: null
     spellcasting: ''
     exhaustion: 0
     concentration:
@@ -404,12 +402,12 @@ system:
       level: 0
     loyalty:
       value: null
+    price:
+      value: null
+      denomination: gp
   details:
     biography:
-      value: >-
-        <div class="gear"><p><strong>Gear:</strong>
-        @UUID[Compendium.dnd5e.equipment24.Item.phbwepBattleaxe0]{Battleaxe},
-        @UUID[Compendium.dnd5e.equipment24.Item.phbwepMorningsta]{Morningstar}</p></div>
+      value: ''
       public: ''
     alignment: Chaotic Evil
     ideal: ''
@@ -430,11 +428,11 @@ system:
         - individual
   resources:
     legact:
-      value: 0
       max: 0
+      spent: 0
     legres:
-      value: 0
       max: 0
+      spent: 0
     lair:
       value: false
       initiative: null
@@ -472,7 +470,7 @@ system:
     important: false
 prototypeToken:
   name: Ettin
-  displayName: 0
+  displayName: 20
   actorLink: false
   appendNumber: false
   prependAdjective: false
@@ -494,7 +492,7 @@ prototypeToken:
   rotation: 0
   alpha: 1
   disposition: -1
-  displayBars: 0
+  displayBars: 20
   bar1:
     attribute: attributes.hp
   bar2:
@@ -582,7 +580,6 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       range:
         value: null
         long: null
@@ -625,9 +622,9 @@ items:
       type:
         value: martialM
         baseItem: battleaxe
-      magicalBonus: null
       properties:
         - ver
+        - gear
       proficient: null
       activities:
         WkTYphqhrW8RuuUm:
@@ -653,6 +650,7 @@ items:
             override: false
           effects:
             - _id: caDkLzcCdCR8vwlw
+              level: {}
           range:
             value: '5'
             units: ft
@@ -666,7 +664,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
               type: ''
@@ -695,9 +693,18 @@ items:
           sort: 0
           _id: WkTYphqhrW8RuuUm
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       ammunition: {}
       mastery: topple
       identifier: battleaxe
+      crew:
+        value: []
     _id: 2zUJENAN0VZgqxYm
     type: weapon
     folder: fd3qxAXCv2FhExPp
@@ -731,13 +738,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmEttin000000000.2zUJENAN0VZgqxYm.caDkLzcCdCR8vwlw
     sort: 100000
@@ -751,13 +756,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepBattleaxe0
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712717532
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!mmEttin000000000.2zUJENAN0VZgqxYm'
   - name: Morningstar
     system:
@@ -789,7 +792,6 @@ items:
       attuned: false
       equipped: true
       cover: null
-      crewed: false
       range:
         value: null
         long: null
@@ -832,8 +834,8 @@ items:
       type:
         value: martialM
         baseItem: morningstar
-      magicalBonus: null
-      properties: []
+      properties:
+        - gear
       proficient: null
       activities:
         QIpweawAzbt4xw5h:
@@ -859,6 +861,7 @@ items:
             override: false
           effects:
             - _id: 1SUTrOeGym7HuWxB
+              level: {}
           range:
             value: '5'
             units: ft
@@ -872,7 +875,7 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
               type: ''
@@ -901,9 +904,18 @@ items:
           sort: 0
           _id: QIpweawAzbt4xw5h
           name: ''
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       ammunition: {}
       mastery: sap
       identifier: morningstar
+      crew:
+        value: []
     _id: 5LN8JEIko2tgE2WO
     type: weapon
     folder: fd3qxAXCv2FhExPp
@@ -936,13 +948,11 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
-          systemId: dnd5e
-          systemVersion: 4.4.0
-          createdTime: null
-          modifiedTime: null
-          lastModifiedBy: null
           exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _key: >-
           !actors.items.effects!mmEttin000000000.5LN8JEIko2tgE2WO.1SUTrOeGym7HuWxB
     sort: 300000
@@ -956,13 +966,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepMorningsta
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712717532
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     _key: '!actors.items!mmEttin000000000.5LN8JEIko2tgE2WO'
   - _id: mmMultiattack000
     name: Multiattack
@@ -1018,6 +1026,12 @@ items:
             name: ''
             formula: ''
           img: systems/dnd5e/icons/svg/monster.svg
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
       uses:
         spent: 0
         recovery: []
@@ -1038,9 +1052,10 @@ items:
       prerequisites:
         level: null
         repeatable: false
+        items: []
       properties: []
       requirements: ''
-      advancement: []
+      advancement: {}
       cover: null
       crewed: false
     folder: 4T18pEvubPMQLzvD
@@ -1054,13 +1069,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745712717532
-      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      lastModifiedBy: null
     ownership:
       default: 0
     sort: 0
@@ -1070,13 +1083,13 @@ folder: uzfjTR3kDzzsWp3V
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
-  systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1745600173872
-  modifiedTime: 1745712717559
-  lastModifiedBy: dnd5ebuilder0000
   exportSource: null
+  coreVersion: '13.351'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  createdTime: 1771452701840
+  modifiedTime: 1771452701840
+  lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:
   default: 0

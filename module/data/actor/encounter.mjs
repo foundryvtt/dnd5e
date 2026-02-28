@@ -81,7 +81,7 @@ export default class EncounterData extends GroupTemplate {
   async addMember(...actors) {
     const members = this.toObject().members;
     for ( const actor of actors ) {
-      if ( actor.type !== "npc" ) throw new Error("Only NPC actors can be part of encounters.");
+      if ( !actor.system.isNPC ) throw new Error("Only NPC actors can be part of encounters.");
       let existing = false;
       for ( const member of members ) {
         if ( (member.uuid === actor.uuid) && member.quantity?.value ) {

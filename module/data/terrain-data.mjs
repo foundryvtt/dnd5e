@@ -23,9 +23,11 @@ export default class TerrainData5e extends foundry.data.TerrainData {
 
   /** @inheritDoc */
   static getMovementCostFunction(token, options) {
-    return token.actor?.system.isCreature
-      ? super.getMovementCostFunction(token, options)
-      : (_from, _to, distance) => distance;
+    return token.actor?.system.isCreature ? (_from, _to, distance, segment) => {
+      let difficulty = segment.terrain?.difficulty;
+      if ( Number.isFinite(difficulty) && segment.terrain.difficultTerrain && segment.teleport ) difficulty -= 1;
+      return distance * (difficulty ?? 1);
+    } : (_from, _to, distance) => distance;
   }
 
   /* -------------------------------------------- */

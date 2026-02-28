@@ -1,0 +1,60 @@
+import ApplicationV2Mixin from "./api/application-v2-mixin.mjs";
+
+const { RollTableSheet } = foundry.applications.sheets;
+
+/**
+ * Extension of the default roll table sheet to add dnd5e styling.
+ */
+export default class RollTableSheet5e extends ApplicationV2Mixin(RollTableSheet, { handlebars: false }) {
+
+  /** @override */
+  static DEFAULT_OPTIONS = {
+    actions: {
+      editImage: RollTableSheet5e._onEditImage
+    },
+    classes: ["titlebar"]
+  };
+
+  /* -------------------------------------------- */
+  /*  Life-Cycle Handlers                         */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+
+    this._renderModeToggle();
+    this.element.querySelector(".sheet-header img")?.classList.add("document-image");
+    this.element.querySelector(".sheet-header [data-action=changeMode]")?.remove();
+    this.element.querySelectorAll("tbody .inline-control").forEach(c => c.classList.add("unbutton", "control-button"));
+    this._replaceElements("input[type=checkbox]", "dnd5e-checkbox");
+    this._replaceElements('table td.image img[src$=".svg"]', "dnd5e-icon", {
+      callback: icon => {
+        if ( icon.src === "icons/svg/d20-black.svg" ) icon.src = "systems/dnd5e/icons/svg/dice/d20.svg";
+      }
+    });
+    this.element.querySelectorAll("table td.image img").forEach(icon => icon.classList.add("gold-icon"));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Replace all matching elements with a new tag, keeping all existing attributes.
+   * @param {string} selector              CSS selector to find elements to replace.
+   * @param {string} tagName               Tag name for the new element to use.
+   * @param {object} [options={}]
+   * @param {Function} [options.callback]  Method called for each new element before it replaces the old one.
+   * @protected
+   */
+  _replaceElements(selector, tagName, { callback }={}) {
+    for ( const oldElement of this.element.querySelectorAll(selector) ) {
+      const newElement = document.createElement(tagName);
+      for ( const attr of oldElement.attributes ) {
+        newElement.setAttribute(attr.name, attr.value);
+      }
+      newElement.innerHTML = oldElement.innerHTML;
+      if ( callback ) callback(newElement);
+      oldElement.replaceWith(newElement);
+    }
+  }
+}

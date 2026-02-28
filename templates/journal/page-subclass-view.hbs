@@ -9,8 +9,7 @@
 <section class="journal-page-content">
     {{{ enriched.value }}}
 
-    {{> "dnd5e.journal-table" table=table level=title.level3
-        caption=(localize "JOURNALENTRYPAGE.DND5E.Class.TableCaption" class=linked.name) }}
+    {{> "dnd5e.journal-table" table=table level=title.level3 caption=linked.name }}
 
     {{#each features}}
     <h{{ @root.title.level4 }}>{{ this.name }}</h{{ @root.title.level4 }}>

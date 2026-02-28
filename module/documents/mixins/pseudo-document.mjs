@@ -1,7 +1,7 @@
 import CreateDocumentDialog from "../../applications/create-document-dialog.mjs";
 
 /**
- * A mixin which extends a DataModel to provide behavior shared between activities & advancements.
+ * A mixin which extends a DataModel to provide behavior shared between activities & advancement.
  * @template {DataModel} T
  * @param {typeof T} Base  The base DataModel to be mixed.
  * @returns {typeof PseudoDocument}
@@ -100,7 +100,7 @@ export default function PseudoDocumentMixin(Base) {
      * @type {string}
      */
     get uuid() {
-      return `${this.item.uuid}.${this.documentName}.${this.id}`;
+      return `${this.item.uuid}.${this.documentName}.${this.id ?? this._source._id}`;
     }
 
     /* -------------------------------------------- */
@@ -204,6 +204,7 @@ export default function PseudoDocumentMixin(Base) {
      */
     updateSource(updates) {
       super.updateSource(updates);
+      this.prepareData?.();
       return this;
     }
 
@@ -256,10 +257,10 @@ export default function PseudoDocumentMixin(Base) {
     /**
      * Spawn a dialog for creating a new Activity.
      * @param {object} [data]  Data to pre-populate the Activity with.
-     * @param {object} context
-     * @param {Item5e} context.parent        A parent for the Activity.
-     * @param {string[]|null} [context.types]  A list of types to restrict the choices to, or null for no restriction.
+     * @param {DatabaseCreateOperation} [createOptions={}]
+     * @param {object} [dialogOptions={}]
      * @returns {Promise<PseudoDocument|null>}
+     * @see {@link ClientDocument#createDialog}
      */
     static async createDialog(data={}, createOptions={}, dialogOptions={}) {
       CreateDocumentDialog.migrateOptions(createOptions, dialogOptions);

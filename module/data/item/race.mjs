@@ -88,7 +88,7 @@ export default class RaceData extends ItemDataModel.mixin(AdvancementTemplate, I
   get sensesLabels() {
     const units = this.senses.units || defaultUnits("length");
     return Object.entries(CONFIG.DND5E.senses).reduce((arr, [k, label]) => {
-      const value = this.senses[k];
+      const value = this.senses.ranges[k];
       if ( value ) arr.push(`${label} ${formatLength(value, units)}`);
       return arr;
     }, []).concat(splitSemicolons(this.senses.special));
@@ -105,6 +105,17 @@ export default class RaceData extends ItemDataModel.mixin(AdvancementTemplate, I
   }
 
   /* -------------------------------------------- */
+  /*  Data Migration                              */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static _migrateData(source) {
+    super._migrateData(source);
+    AdvancementTemplate.migrateAdvancement(source);
+    SensesField._migrate(source.senses);
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
@@ -112,6 +123,7 @@ export default class RaceData extends ItemDataModel.mixin(AdvancementTemplate, I
   prepareDerivedData() {
     super.prepareDerivedData();
     this.prepareDescriptionData();
+    SensesField._shim(this.senses);
   }
 
   /* -------------------------------------------- */
@@ -149,7 +161,7 @@ export default class RaceData extends ItemDataModel.mixin(AdvancementTemplate, I
       config: "senses",
       tooltip: "DND5E.SensesConfig",
       value: Object.entries(CONFIG.DND5E.senses).reduce((str, [k, label]) => {
-        const value = this.senses[k];
+        const value = this.senses.ranges[k];
         if ( !value ) return str;
         return `${str}
           <span class="key">${label}</span>
@@ -165,7 +177,7 @@ export default class RaceData extends ItemDataModel.mixin(AdvancementTemplate, I
 
   /** @override */
   _advancementToCreate(options) {
-    if ( game.settings.get("dnd5e", "rulesVersion") === "legacy" ) return [
+    if ( dnd5e.settings.rulesVersion === "legacy" ) return [
       { type: "AbilityScoreImprovement" },
       { type: "Size" },
       { type: "Trait", configuration: { grants: ["languages:standard:common"] } }
@@ -187,7 +199,7 @@ export default class RaceData extends ItemDataModel.mixin(AdvancementTemplate, I
   /** @inheritDoc */
   _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
-    if ( (game.user.id !== userId) || !["character", "npc"].includes(this.parent.actor?.type) ) return;
+    if ( (game.user.id !== userId) || !this.parent.actor?.system.isCreature ) return;
     this.parent.actor.update({ "system.details.race": this.parent.id });
   }
 
@@ -196,7 +208,7 @@ export default class RaceData extends ItemDataModel.mixin(AdvancementTemplate, I
   /** @inheritDoc */
   async _preDelete(options, user) {
     if ( (await super._preDelete(options, user)) === false ) return false;
-    if ( !["character", "npc"].includes(this.parent.actor?.type) ) return;
+    if ( !this.parent.actor?.system.isCreature ) return;
     await this.parent.actor.update({ "system.details.race": null });
   }
 }

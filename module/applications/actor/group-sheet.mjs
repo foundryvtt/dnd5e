@@ -8,7 +8,7 @@ import Award from "../award.mjs";
 export default class GroupActorSheet extends MultiActorSheet {
   /** @override */
   static DEFAULT_OPTIONS = {
-    classes: ["group", "vertical-tabs"],
+    classes: ["group"],
     position: {
       width: 700,
       height: 700
@@ -29,6 +29,10 @@ export default class GroupActorSheet extends MultiActorSheet {
     header: {
       template: "systems/dnd5e/templates/actors/group/header.hbs"
     },
+    tabs: {
+      template: "systems/dnd5e/templates/shared/horizontal-tabs.hbs",
+      templates: ["templates/generic/tab-navigation.hbs"]
+    },
     members: {
       container: { classes: ["tab-body"], id: "tabs" },
       template: "systems/dnd5e/templates/actors/group/members.hbs",
@@ -48,11 +52,6 @@ export default class GroupActorSheet extends MultiActorSheet {
       container: { classes: ["tab-body"], id: "tabs" },
       template: "systems/dnd5e/templates/actors/group/biography.hbs",
       scrollable: [""]
-    },
-    tabs: {
-      id: "tabs",
-      classes: ["tabs-right"],
-      template: "systems/dnd5e/templates/shared/sidebar-tabs.hbs"
     }
   };
 
@@ -60,9 +59,9 @@ export default class GroupActorSheet extends MultiActorSheet {
 
   /** @override */
   static TABS = [
-    { tab: "members", label: "DND5E.Group.Member.other", icon: "fa-solid fa-users"},
-    { tab: "inventory", label: "DND5E.Inventory", svg: "systems/dnd5e/icons/svg/backpack.svg" },
-    { tab: "biography", label: "DND5E.Biography", icon: "fa-solid fa-feather" }
+    { tab: "members", label: "DND5E.Group.Member.other" },
+    { tab: "inventory", label: "DND5E.Inventory" },
+    { tab: "biography", label: "DND5E.Biography" }
   ];
 
   /* -------------------------------------------- */
@@ -123,7 +122,7 @@ export default class GroupActorSheet extends MultiActorSheet {
       context.members.push(member);
     }
     context.members.sort((a, b) => a.type.compare(b.type) || a.name.localeCompare(b.name, game.i18n.lang));
-    if ( this.inventorySource.type === "vehicle" ) {
+    if ( this.inventorySource.system.isVehicle ) {
       context.encumbrance = await this.inventorySource.system.getEncumbrance();
     }
     return context;
@@ -147,7 +146,7 @@ export default class GroupActorSheet extends MultiActorSheet {
     for ( const { actor } of this.document.system.members ) {
       if ( !actor ) continue;
       const { id, type, img, name, system, uuid } = actor;
-      const section = context.sections[type];
+      const section = context.sections[system.groupSection];
       if ( !section ) continue;
       const member = { id, type, img, name, system, uuid };
       member.canView = actor.testUserPermission(game.user, "LIMITED");
@@ -156,7 +155,7 @@ export default class GroupActorSheet extends MultiActorSheet {
       await this._prepareMemberPortrait(actor, member);
       this._prepareMemberEncumbrance(actor, member);
       this._prepareMemberSkills(actor, member);
-      switch ( type ) {
+      switch ( system.groupSection ) {
         case "character": await this._prepareCharacterContext(actor, member, options); break;
         case "npc": await this._prepareNPCContext(actor, member, options); break;
         case "vehicle": await this._prepareVehicleContext(actor, member, options); break;
@@ -179,7 +178,6 @@ export default class GroupActorSheet extends MultiActorSheet {
       case "header": return this._prepareHeaderContext(context, options);
       case "inventory": return this._prepareInventoryContext(context, options);
       case "members": return this._prepareMembersContext(context, options);
-      case "tabs": return this._prepareTabsContext(context, options);
     }
     return context;
   }
@@ -244,7 +242,7 @@ export default class GroupActorSheet extends MultiActorSheet {
    * @protected
    */
   async _prepareMemberEncumbrance(actor, context) {
-    const encumbrance = actor.type === "vehicle"
+    const encumbrance = actor.system.isVehicle
       ? await actor.system.getEncumbrance()
       : actor.system.attributes.encumbrance;
     const { pct, max, value } = encumbrance;
@@ -362,7 +360,7 @@ export default class GroupActorSheet extends MultiActorSheet {
 
   /** @inheritDoc */
   _onChangeForm(formConfig, event) {
-    if ( event.target.dataset.name?.startsWith("system.currency.") && (this.inventorySource.type === "vehicle") ) {
+    if ( event.target.dataset.name?.startsWith("system.currency.") && this.inventorySource.system.isVehicle ) {
       return this.inventorySource.update({ [event.target.dataset.name]: event.target.value });
     }
     return super._onChangeForm(formConfig, event);
@@ -445,7 +443,7 @@ export default class GroupActorSheet extends MultiActorSheet {
       icon: '<i class="fa-solid fa-star"></i>',
       group: "state",
       condition: li => {
-        return (foundry.utils.fromUuidSync(li.dataset.uuid)?.type === "vehicle")
+        return foundry.utils.fromUuidSync(li.dataset.uuid)?.system.isVehicle
           && (this.actor.system.primaryVehicle?.uuid !== li.dataset.uuid);
       },
       callback: async li => this.actor.update({ "system.primaryVehicle": (await fromUuid(li.dataset.uuid))?.id })

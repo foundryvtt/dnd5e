@@ -61,7 +61,6 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   /** @override */
   static DEFAULT_OPTIONS = {
     actions: {
-      editImage: BaseActorSheet.#onEditImage,
       inspectWarning: BaseActorSheet.#inspectWarning,
       openWarnings: BaseActorSheet.#openWarnings,
       rest: BaseActorSheet.#rest,
@@ -204,7 +203,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       limited: this.actor.limited,
       modernRules: this.actor.system.source?.rules
         ? this.actor.system.source.rules === "2024"
-        : game.settings.get("dnd5e", "rulesVersion") === "modern",
+        : dnd5e.settings.rulesVersion === "modern",
       rollableClass: this.isEditable ? "rollable" : "",
       sidebarCollapsed: !!game.user.getFlag("dnd5e", this._sidebarCollapsedKeyPath),
       system: this.actor.system,
@@ -406,22 +405,6 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * Prepare rendering context for the tabs.
-   * @param {ApplicationRenderContext} context  Context being prepared.
-   * @param {HandlebarsRenderOptions} options   Options which configure application rendering behavior.
-   * @returns {Promise<ApplicationRenderContext>}
-   * @protected
-   */
-  async _prepareTabsContext(context, options) {
-    context.tabs = foundry.utils.deepClone(this.constructor.TABS);
-    const activeTab = context.tabs.find(t => t.tab === this.tabGroups.primary) ?? context.tabs[0];
-    activeTab.active = true;
-    return context;
-  }
-
-  /* -------------------------------------------- */
   /*  Actor Preparation Helpers                   */
   /* -------------------------------------------- */
 
@@ -493,7 +476,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       action: portraitData.isRandom ? "configurePrototypeToken" : "editImage",
       path: portraitData.isToken ? this.actor.isToken ? "token.texture.src" : "prototypeToken.texture.src" : "img",
       token: portraitData.isToken,
-      type: portraitData.token ? "imagevideo" : "image"
+      type: portraitData.isToken ? "imagevideo" : "image"
     };
   }
 
@@ -508,7 +491,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   _prepareSenses(context) {
     return [
       ...Object.entries(CONFIG.DND5E.senses).map(([k, label]) => {
-        const value = context.system.attributes.senses[k];
+        const value = context.system.attributes.senses.ranges[k];
         return value ? { label, value } : null;
       }, {}).filter(_ => _),
       ...splitSemicolons(context.system.attributes.senses.special)
@@ -538,6 +521,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       baseAbility: baseAbility(key),
       hover: CONFIG.DND5E.proficiencyLevels[entry.value],
       label: (property === "skills") ? CONFIG.DND5E.skills[key]?.label : Trait.keyLabel(key, { trait: "tool" }),
+      link: { action: "roll", key, type: property === "skills" ? "skill" : "tool" },
       source: context.source[property]?.[key]
     })).sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang));
   }
@@ -570,7 +554,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       const label = config?.getLabel({ level }) ?? game.i18n.localize("DND5E.CAST.SECTIONS.Spellbook");
       const method = config?.key ?? key;
       const order = level === 0 ? 0 : (config?.order ?? 1000);
-      const usesSlots = config?.slots && level;
+      const usesSlots = config?.slots && (level !== 0);
       const section = spellbook[key] = {
         label, columns, order, usesSlots,
         id: method,
@@ -611,7 +595,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       let method = spell.system.method;
       if ( !(method in CONFIG.DND5E.spellcasting) ) method = "innate";
       const spellcasting = CONFIG.DND5E.spellcasting[method];
-      const level = spell.system.level || 0;
+      const level = spellcasting instanceof dnd5e.dataModels.spellcasting.SingleLevelSpellcasting
+        ? null : (spell.system.level || 0);
       method = spellcasting?.getSpellSlotKey?.(level) ?? method;
 
       // Spells from items
@@ -656,7 +641,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         const icons = value.icons = [];
         if ( data.bypasses?.size && CONFIG.DND5E.damageTypes[key]?.isPhysical ) icons.push(...data.bypasses.map(p => {
           const type = CONFIG.DND5E.itemProperties[p]?.label;
-          return { icon: p, label: game.i18n.format("DND5E.DamagePhysicalBypassesShort", { type }) };
+          return { icon: p, label: game.i18n.format("DND5E.DAMAGE.PhysicalBypass.DescriptionShort", { type }) };
         }));
         return value;
       });
@@ -666,7 +651,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
     // If petrified, display "All Damage" instead of all damage types separately
     if ( this.document.hasConditionEffect("petrification") ) {
-      traits.dr = [{ label: game.i18n.localize("DND5E.DamageAll") }];
+      traits.dr = [{ label: game.i18n.localize("DND5E.DAMAGE.All") }];
     }
 
     // Combine damage & condition immunities in play mode.
@@ -690,7 +675,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         const icons = value.icons = [];
         if ( dm.bypasses.size && CONFIG.DND5E.damageTypes[k]?.isPhysical ) icons.push(...dm.bypasses.map(p => {
           const type = CONFIG.DND5E.itemProperties[p]?.label;
-          return { icon: p, label: game.i18n.format("DND5E.DamagePhysicalBypassesShort", { type }) };
+          return { icon: p, label: game.i18n.format("DND5E.DAMAGE.PhysicalBypass.DescriptionShort", { type }) };
         }));
         return value;
       }).filter(f => f);
@@ -791,14 +776,10 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     uses.prop = "uses.value";
 
     return {
-      _id, labels, name, range, uses,
+      _id, img, labels, name, range, uses,
       activation: activationAbbr
         ? `${activation.value ?? ""}${game.i18n.localize(activationAbbr)}`
         : labels.activation,
-      icon: {
-        src: img,
-        svg: img.endsWith(".svg")
-      },
       isSpell: activity.item.type === "spell",
       save: save ? {
         ...save,
@@ -966,10 +947,21 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     else ctx.preparation = { applicable: false };
 
     // Subtitle
-    ctx.subtitle = [
-      linked ? linked.name : item.parent.classes[item.system.sourceClass]?.name,
-      item.labels.components.vsm
-    ].filterJoin(" • ");
+    let sourceLabel;
+    if ( linked ) sourceLabel = linked.name;
+    else if ( item.system.sourceItem ) {
+      const grantingItem = item.parent.identifiedItems.get(item.system.sourceItem)?.first();
+      sourceLabel = grantingItem?.name;
+    } else {
+      // Check spells added from advancements
+      const advancementOrigin = item.getFlag("dnd5e", "advancementOrigin");
+      if ( advancementOrigin ) {
+        const [itemId] = advancementOrigin.split(".");
+        const grantingItem = item.parent.items.get(itemId);
+        if ( grantingItem ) sourceLabel = grantingItem.name;
+      }
+    }
+    ctx.subtitle = [sourceLabel, item.labels.components.vsm].filterJoin(" • ");
   }
 
   /* -------------------------------------------- */
@@ -1036,7 +1028,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     for ( const { usesSlots, pips, slot, dataset } of Object.values(context.spellbook) ) {
       if ( !usesSlots ) continue;
       const query = `[data-application-part="spells"] .items-section[data-level="${
-        dataset.level}"][data-method="${dataset.method}"] .items-header`;
+        dataset.level ?? ""}"][data-method="${dataset.method}"] .items-header`;
       const header = this.element.querySelector(query);
       if ( !header ) continue;
       if ( context.editable ) {
@@ -1141,8 +1133,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
     // Display warnings
     const warnings = this.element.querySelector(".window-header .preparation-warnings");
-    warnings?.toggleAttribute("hidden", (!game.user.isGM && this.actor.limited)
-      || !this.actor._preparationWarnings?.length);
+    warnings?.toggleAttribute("hidden", (!game.user.isGM && this.actor.limited) || !context.warnings?.length);
 
     if ( this.isEditable ) {
       // Class level changes
@@ -1313,47 +1304,6 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       }
       else target.update({ [input.dataset.name]: result });
     }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle editing an image via the file browser.
-   * @this {BaseActorSheet}
-   * @param {PointerEvent} event  The triggering event.
-   * @param {HTMLElement} target  The action target.
-   * @returns {Promise<void>}
-   */
-  static async #onEditImage(event, target) {
-    const attr = target.dataset.edit;
-    const current = foundry.utils.getProperty(this.document._source, attr);
-    const defaultArtwork = this.document.constructor.getDefaultArtwork?.(this.document._source) ?? {};
-    const defaultImage = foundry.utils.getProperty(defaultArtwork, attr);
-    const fp = new CONFIG.ux.FilePicker({
-      current,
-      type: target.dataset.type,
-      redirectToRoot: defaultImage ? [defaultImage] : [],
-      callback: path => {
-        const isVideo = foundry.helpers.media.VideoHelper.hasVideoExtension(path);
-        if ( ((target instanceof HTMLVideoElement) && isVideo) || ((target instanceof HTMLImageElement) && !isVideo) ) {
-          target.src = path;
-        } else {
-          const repl = document.createElement(isVideo ? "video" : "img");
-          Object.assign(repl.dataset, target.dataset);
-          if ( isVideo ) Object.assign(repl, {
-            autoplay: true, muted: true, disablePictureInPicture: true, loop: true, playsInline: true
-          });
-          repl.src = path;
-          target.replaceWith(repl);
-        }
-        this._onEditPortrait(attr, path);
-      },
-      position: {
-        top: this.position.top + 40,
-        left: this.position.left + 10
-      }
-    });
-    await fp.browse();
   }
 
   /* -------------------------------------------- */
@@ -1807,7 +1757,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    */
   async _onDropCreateItems(event, items, behavior) {
     behavior ??= event._behavior;
-    const itemsWithoutAdvancement = items.filter(i => !i.system.advancement?.length);
+    const itemsWithoutAdvancement = items.filter(i => !i.system.advancement?.size);
     const multipleAdvancements = (items.length - itemsWithoutAdvancement.length) > 1;
     if ( multipleAdvancements && !game.settings.get("dnd5e", "disableAdvancements") ) {
       ui.notifications.warn(game.i18n.format("DND5E.WarnCantAddMultipleAdvancements"));
@@ -1817,6 +1767,11 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     // Filter out items already in containers to avoid creating duplicates
     const containers = new Set(items.filter(i => i.type === "container").map(i => i._id));
     items = items.filter(i => !containers.has(i.system.container));
+
+    // Transform physical items from NPCs to their gear versions
+    items = await Promise.all(items.map(i =>
+      i.actor?.system.isNPC && (i.actor !== this.actor) && i.system.asGear ? i.system.asGear() : i
+    ));
 
     // Create the owned items & contents as normal
     const toCreate = await Item5e.createWithContents(items, {
@@ -1869,7 +1824,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     if ( stacked ) return false;
 
     // Bypass normal creation flow for any items with advancement
-    if ( actor.system.metadata?.supportsAdvancement && itemData.system.advancement?.length
+    if ( actor.system.metadata?.supportsAdvancement && !foundry.utils.isEmpty(itemData.system.advancement)
         && !game.settings.get("dnd5e", "disableAdvancements") ) {
       // Ensure that this item isn't violating the singleton rule
       const dataModel = CONFIG.Item.dataModels[itemData.type];
@@ -2032,7 +1987,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       if ( filters.has("ritual") && !item.system.properties?.has("ritual") ) return false;
       if ( filters.has("concentration") && !item.system.properties?.has("concentration") ) return false;
       if ( schoolFilter.size && !schoolFilter.has(item.system.school) ) return false;
-      if ( classFilter.size && !classFilter.has(item.system.sourceClass) ) return false;
+      if ( classFilter.size && !classFilter.has(item.system.classIdentifier) ) return false;
       if ( filters.has("prepared") ) return item.system.canPrepare && item.system.prepared;
 
       // Equipment-specific filters

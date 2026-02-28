@@ -35,13 +35,18 @@
     color: var(--dnd5e-color-maroon);
     font-weight: bold;
   }
+
+  .editor.prosemirror.slim {
+    margin-inline: -10px;
+    menu { border-radius: 0; }
+  }
 }
 
 /* ----------------------------------------- */
 /*  Ability Score Improvement                */
 /* ----------------------------------------- */
 
-.dnd5e2.advancement.ability-score-improvement {
+.dnd5e2.advancement.ability-score-improvement, .advancement.flow[data-type="AbilityScoreImprovement"] {
   .ability-scores {
     contain: layout;
     display: grid;
@@ -71,6 +76,11 @@
       > button {
         padding: 0.5em;
         font-size: var(--font-size-16);
+        &:not([data-action]) {
+          opacity: 33%;
+          cursor: var(--cursor-default);
+          &:hover { text-shadow: none; }
+        }
         &.minus { grid-area: minus; }
         &.plus { grid-area: plus; }
       }
@@ -97,6 +107,40 @@
     }
   }
 }
+.advancement.flow[data-type="AbilityScoreImprovement"] {
+  .ability-scores {
+    margin-block-end: 0;
+
+    & > label {
+      grid-area: auto / span 3;
+      margin-block: 0.5em 0;
+      padding: 0;
+      font-size: var(--font-size-18);
+
+      > .cap {
+        margin-block: 0;
+        font-size: var(--font-size-13);
+      }
+    }
+
+    li {
+      .delta {
+        grid-area: delta;
+        font-size: var(--font-size-16);
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 4px;
+        i { font-size: var(--font-size-12); }
+      }
+      .locked {
+        margin: 0;
+      }
+    }
+  }
+  .feat-section { gap: 8px; }
+}
 
 /* ----------------------------------------- */
 /*  Choose Items Advancement                 */
@@ -116,6 +160,21 @@
     }
   }
 }
+.advancement.flow[data-type="ItemChoice"] {
+  [data-application-part="content"] { gap: 12px; }
+  .item-list {
+    .item-controls {
+      flex: 0 0 50px;
+      align-items: center;
+      padding: 0;
+
+      .item-control { font-size: var(--font-size-12); }
+    }
+    .replaced .title {
+      text-decoration: rgb(200 0 0) line-through 2px;
+    }
+  }
+}
 
 /* ----------------------------------------- */
 /*  Grant Items Advancement                  */
@@ -125,6 +184,32 @@
   .card.items {
     grid-template-columns: [optional] 1fr [name] 3fr [controls] 20px;
     .item-optional { grid-column: optional; }
+  }
+}
+
+/* ----------------------------------------- */
+/*  Hit Points Advancement                   */
+/* ----------------------------------------- */
+
+.advancement.flow[data-type="HitPoints"] {
+  [data-application-part="content"] { gap: 8px; }
+  .breakdown > .form-fields {
+    justify-content: center;
+    font-size: var(--font-size-18);
+
+    .form-group, .separator {
+      align-items: center;
+      flex: 0 0 max-content;
+    }
+    .separator {
+      padding-top: 10px;
+      color: var(--color-text-secondary);
+    }
+    input { width: 4em; }
+  }
+  button {
+    --icon-fill: var(--color-text-secondary);
+    flex: 0;
   }
 }
 
@@ -164,6 +249,19 @@
   }
 }
 
+.advancement.flow[data-type="ScaleValue"] {
+  [data-application-part="content"] {
+    display: grid;
+    grid-template-columns: 1fr min-content 1fr;
+    gap: 8px;
+    font-size: var(--font-size-18);
+  }
+  .initial-scale-value {
+    text-align: end;
+    &.none { font-style: italic; }
+  }
+}
+
 /* ----------------------------------------- */
 /*  Size Advancement                         */
 /* ----------------------------------------- */
@@ -172,89 +270,6 @@
   .trait-list {
     column-gap: 24px;
     row-gap: 6px;
-  }
-}
-
-/* ----------------------------------------- */
-/*  Advancement Manager                      */
-/* ----------------------------------------- */
-
-.dnd5e2.advancement.manager.application {
-  [data-application-part="manager"] {
-    gap: 12px;
-
-    > .step {
-      h3 {
-        padding-block-end: 0;
-        color: var(--color-text-primary);
-        font-family: var(--dnd5e-font-roboto-condensed);
-        font-size: var(--font-size-20);
-        text-shadow: none;
-      }
-      &.dnd5e {
-        h4 {
-          color: var(--color-text-primary);
-          font-family: var(--dnd5e-font-roboto);
-          text-shadow: none;
-        }
-      }
-    }
-
-    nav { gap: 6px; }
-
-    /* V1 Compatibility */
-    button { height: var(--input-height); }
-
-    label > span {
-      font-family: var(--dnd5e-font-roboto-slab);
-      font-weight: bold;
-      font-size: var(--font-size-12);
-    }
-
-    input[type=checkbox] {
-      &:hover, &:focus {
-        box-shadow: none;
-        border: none;
-      }
-    }
-
-    .pill-lg {
-      max-width: unset;
-      &.locked { opacity: .7; }
-      .name-stacked { flex: 1; }
-      .control-button { padding-inline: 4px; }
-      img[data-action] {
-        cursor: var(--cursor-pointer);
-        &:hover { box-shadow: 0 0 12px var(--dnd5e-color-gold); }
-      }
-    }
-  }
-}
-
-/* ----------------------------------------- */
-/*  Visualizer                               */
-/* ----------------------------------------- */
-
-.advancement-visualizer {
-  .step {
-    position: relative;
-    padding: 4px;
-
-    &.current {
-      border-color: rebeccapurple;
-      &::before {
-        content: "➧";
-        position: absolute;
-        inset-inline-start: -12px;
-        inset-block: 0;
-        align-content: center;
-        color: rebeccapurple;
-        font-size: 18px;
-      }
-    }
-    .icons {
-      i:not(.enabled) { opacity: 15%; }
-    }
   }
 }
 
@@ -287,6 +302,135 @@
     > .form-group { grid-column: 1 / -1; }
     .traits li.category { gap: 0; }
   }
+}
+
+/* ----------------------------------------- */
+/*  Advancement Manager                      */
+/* ----------------------------------------- */
+
+.dnd5e2.advancement.manager.application {
+  [data-application-part="manager"] {
+    gap: 8px;
+
+    > .step {
+      h3 {
+        padding-block-end: 0;
+        color: var(--color-text-primary);
+        font-family: var(--dnd5e-font-roboto-condensed);
+        font-size: var(--font-size-20);
+        text-shadow: none;
+        margin-bottom: 8px;
+      }
+      &.dnd5e {
+        h4 {
+          color: var(--color-text-primary);
+          font-family: var(--dnd5e-font-roboto);
+          text-shadow: none;
+        }
+      }
+      [data-application-part="content"].standard-form { gap: 12px; }
+      .item-list .item-controls {
+        flex: 0 0 50px;
+        align-items: center;
+        padding: 0;
+        .item-control { font-size: var(--font-size-12); }
+      }
+    }
+
+    nav { gap: 6px; }
+
+    /* V1 Compatibility */
+    button { height: var(--input-height); }
+
+    label > span {
+      font-family: var(--dnd5e-font-roboto-slab);
+      font-weight: bold;
+      font-size: var(--font-size-12);
+    }
+
+    input[type=checkbox] {
+      &:hover, &:focus {
+        box-shadow: none;
+        border: none;
+      }
+    }
+
+    .pill-lg {
+      max-width: unset;
+      &.locked { opacity: .7; }
+      .name-stacked { flex: 1; }
+      .control-button { padding-inline: 4px; }
+      img[data-action] {
+        cursor: var(--cursor-pointer);
+        &:hover { box-shadow: 0 0 12px var(--dnd5e-color-gold); }
+      }
+    }
+    :is(.pill-lg, .separated-list, .item-list) .item-name[data-action] {
+      cursor: var(--cursor-pointer);
+      &:hover {
+        img { box-shadow: 0 0 12px var(--dnd5e-color-gold); }
+        .name-stacked { text-shadow: 0 0 8px var(--color-shadow-primary); }
+      }
+    }
+  }
+}
+
+/* ----------------------------------------- */
+/*  Advancement Flow                         */
+/* ----------------------------------------- */
+
+.dnd5e2.advancement.flow {
+  [data-application-part=header] {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-12);
+  }
+
+  .items-section {
+    .header .item-name {
+      font-weight: normal;
+      font-family: var(--dnd5e-font-roboto);
+      font-variant: all-small-caps;
+      padding: 4px 4px 6px 6px;
+    }
+
+    .item-name .title { font-size: var(--font-size-12); }
+    .gold-icon { --gold-icon-size: 24px; }
+  }
+}
+
+/* ----------------------------------------- */
+/*  Visualizer                               */
+/* ----------------------------------------- */
+
+.advancement-visualizer {
+  .step {
+    position: relative;
+    padding: 4px;
+
+    &.current {
+      border-color: rebeccapurple;
+      &::before {
+        content: "➧";
+        position: absolute;
+        inset-inline-start: -12px;
+        inset-block: 0;
+        align-content: center;
+        color: rebeccapurple;
+        font-size: 18px;
+      }
+    }
+    .icons {
+      i:not(.enabled) { opacity: 15%; }
+    }
+  }
+}
+
+/* ----------------------------------------- */
+/*  Advancement Deletion                     */
+/* ----------------------------------------- */
+
+.dnd5e2.advancement-deletion {
+  .window-content > section { gap: 8px; }
 }
 
 /* ----------------------------------------- */

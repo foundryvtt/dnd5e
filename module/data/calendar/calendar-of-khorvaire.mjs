@@ -103,7 +103,7 @@ export const CALENDAR_OF_KHORVAIRE = {
   },
   seasons: {
     values: [
-      { name: "DND5E.CALENDAR.Khorvaire.Season.Spring", monthStart: 3,  monthEnd: 5 }, // Therendor–Dravago
+      { name: "DND5E.CALENDAR.Khorvaire.Season.Spring", monthStart: 3, monthEnd: 5 }, // Therendor–Dravago
       { name: "DND5E.CALENDAR.Khorvaire.Season.Summer", monthStart: 6, monthEnd: 8 }, // Nymm–Barrakas
       { name: "DND5E.CALENDAR.Khorvaire.Season.Autumn", monthStart: 9, monthEnd: 11 }, // Rhaan–Aryth
       { name: "DND5E.CALENDAR.Khorvaire.Season.Winter", monthStart: 12, monthEnd: 2 } // Vult–Olarune

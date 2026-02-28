@@ -35,6 +35,16 @@ export default class BackgroundData extends ItemDataModel.mixin(
   }, {inplace: false}));
 
   /* -------------------------------------------- */
+  /*  Data Migration                              */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static _migrateData(source) {
+    super._migrateData(source);
+    AdvancementTemplate.migrateAdvancement(source);
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
@@ -59,7 +69,7 @@ export default class BackgroundData extends ItemDataModel.mixin(
 
   /** @override */
   _advancementToCreate(options) {
-    if ( game.settings.get("dnd5e", "rulesVersion") === "legacy" ) return [
+    if ( dnd5e.settings.rulesVersion === "legacy" ) return [
       { type: "Trait", title: game.i18n.localize("DND5E.ADVANCEMENT.Defaults.BackgroundProficiencies") },
       { type: "ItemGrant", title: game.i18n.localize("DND5E.ADVANCEMENT.Defaults.BackgroundFeature") }
     ];
@@ -89,7 +99,7 @@ export default class BackgroundData extends ItemDataModel.mixin(
   /** @inheritDoc */
   _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
-    if ( (game.user.id !== userId) || this.parent.actor?.type !== "character" ) return;
+    if ( (game.user.id !== userId) || !this.parent.actor?.system.isCharacter ) return;
     this.parent.actor.update({"system.details.background": this.parent.id});
   }
 
@@ -98,7 +108,7 @@ export default class BackgroundData extends ItemDataModel.mixin(
   /** @inheritDoc */
   async _preDelete(options, user) {
     if ( (await super._preDelete(options, user)) === false ) return false;
-    if ( this.parent.actor?.type !== "character" ) return;
+    if ( !this.parent.actor?.system.isCharacter ) return;
     await this.parent.actor.update({"system.details.background": null});
   }
 }

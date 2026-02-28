@@ -4,6 +4,7 @@ import CreateDocumentDialog from "../../applications/create-document-dialog.mjs"
 import SkillToolRollConfigurationDialog from "../../applications/dice/skill-tool-configuration-dialog.mjs";
 import PropertyAttribution from "../../applications/property-attribution.mjs";
 import TravelField from "../../data/actor/fields/travel-field.mjs";
+import NPCData from "../../data/actor/npc.mjs";
 import ActivationsField from "../../data/chat-message/fields/activations-field.mjs";
 import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
 import AdvantageModeField from "../../data/fields/advantage-mode-field.mjs";
@@ -31,7 +32,8 @@ import * as Trait from "./trait.mjs";
  *   SkillToolRollDialogConfiguration, SkillToolRollProcessConfiguration
  * } from "../../dice/_types.mjs";
  * @import {
- *   DamageApplicationOptions, DamageDescription, DamageSummary, RestConfiguration, RestResult, SpellcastingDescription
+ *   DamageAffectCategory, DamageApplicationOptions, DamageDescription, DamageSummary,
+ *   RestConfiguration, RestResult, SpellcastingDescription
  * } from "../_types.mjs";
  */
 
@@ -215,7 +217,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   }
 
   /* -------------------------------------------- */
-  /*  Methods                                     */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -242,6 +244,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     return source;
   }
 
+  /* -------------------------------------------- */
+  /*  Methods                                     */
   /* -------------------------------------------- */
 
   /**
@@ -280,14 +284,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   _clearCachedValues() {
     this._lazy = {};
     this._preferredArtwork = null;
+    this.identifiedItems = new IdentifiedItemsMap();
+    this.sourcedItems = new SourcedItemsMap();
   }
 
   /* --------------------------------------------- */
 
   /** @inheritDoc */
   prepareEmbeddedDocuments() {
-    this.identifiedItems = new IdentifiedItemsMap();
-    this.sourcedItems = new SourcedItemsMap();
     this._embeddedPreparation = true;
     super.prepareEmbeddedDocuments();
     delete this._embeddedPreparation;
@@ -296,9 +300,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* --------------------------------------------- */
 
   /** @inheritDoc */
-  applyActiveEffects() {
-    if ( this.system?.prepareEmbeddedData instanceof Function ) this.system.prepareEmbeddedData();
-    return super.applyActiveEffects();
+  applyActiveEffects(phase) {
+    if ( game.release.generation < 14 ) phase ??= "initial";
+    if ( (this.system?.prepareEmbeddedData instanceof Function) && (phase === "initial") ) {
+      this.system.prepareEmbeddedData();
+    }
+    return super.applyActiveEffects(phase);
   }
 
   /* -------------------------------------------- */
@@ -351,7 +358,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( localActor ) return localActor;
 
     // Check permissions to create actors.
-    if ( !game.user.can("ACTOR_CREATE") ) throw new Error("DND5E.ACTOR.Warning.CreateActor");
+    if ( !game.user.can("ACTOR_CREATE") ) throw new Error(game.i18n.localize("DND5E.ACTOR.Warning.CreateActor"));
 
     // No suitable world actor was found, create one.
     if ( actor.pack ) {
@@ -416,7 +423,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   getConcentrationDC(damage) {
     return Math.clamp(
-      Math.floor(damage / 2), 10, game.settings.get("dnd5e", "rulesVersion") === "modern" ? 30 : Infinity
+      Math.floor(damage / 2), 10, dnd5e.settings.rulesVersion === "modern" ? 30 : Infinity
     );
   }
 
@@ -480,7 +487,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const level = this.system.attributes?.exhaustion ?? null;
     const imms = this.system.traits?.ci?.value ?? new Set();
     const applyExhaustion = (level !== null) && !imms.has("exhaustion")
-      && (game.settings.get("dnd5e", "rulesVersion") === "legacy");
+      && (dnd5e.settings.rulesVersion === "legacy");
     const statuses = this.statuses;
     return props.some(k => {
       const l = Number(k.split("-").pop());
@@ -534,10 +541,17 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       this.constructor.computeClassProgression(progression, cls, { actor: this, count: types[cls.spellcasting.type] });
     }
 
-    if ( this.type === "npc" ) {
+    if ( this.system.isNPC && ("spell" in (this.system.attributes ?? {})) ) {
       const level = Object.values(progression).find(_ => _);
       if ( level ) this.system.attributes.spell.level = level;
-      else progression.spell = this.system.attributes.spell.level ?? 0;
+      else if ( this.system.attributes.spell.level > 0 ) {
+        const methods = this.itemTypes.spell.reduce((m, s) => {
+          if ( s.system.level && CONFIG.DND5E.spellcasting[s.system.method]?.slots ) m.add(s.system.method);
+          return m;
+        }, new Set());
+        if ( methods.size ) methods.forEach(k => progression[k] = this.system.attributes.spell.level);
+        else progression.spell = this.system.attributes.spell.level;
+      }
     }
 
     for ( const [type, model] of Object.entries(CONFIG.DND5E.spellcasting) ) {
@@ -585,13 +599,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( model.isSingleLevel ) {
       if ( foundry.utils.getDefiningClass(this, "computePactProgression") !== Actor5e ) {
         foundry.utils.logCompatibilityWarning("Actor5e.computePactProgression is deprecated. Please use "
-          + "SpellcastingModel#computeProgression instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+          + "SpellcastingModel#computeProgression instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
         this.computePactProgression(progression, actor, cls, spellcasting, count);
         return;
       }
     } else if ( foundry.utils.getDefiningClass(this, "computeLeveledProgression") !== Actor5e ) {
       foundry.utils.logCompatibilityWarning("Actor5e.computeLeveledProgression is deprecated. Please use "
-        + "SpellcastingModel#computeProgression instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+        + "SpellcastingModel#computeProgression instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
       this.computeLeveledProgression(progression, actor, cls, spellcasting, count);
       return;
     }
@@ -629,13 +643,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( model.isSingleLevel ) {
       if ( foundry.utils.getDefiningClass(this, "preparePactSlots") !== Actor5e ) {
         foundry.utils.logCompatibilityWarning("Actor5e.preparePactSlots is deprecated. Please use "
-          + "SpellcastingModel#prepareSlots instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+          + "SpellcastingModel#prepareSlots instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
         this.preparePactSlots(spells, actor, progression);
         return;
       }
     } else if ( foundry.utils.getDefiningClass(this, "prepareLeveledSlots") !== Actor5e ) {
       foundry.utils.logCompatibilityWarning("Actor5e.prepareLeveledSlots is deprecated. Please use "
-        + "SpellcastingModel#prepareSlots instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+        + "SpellcastingModel#prepareSlots instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
       this.prepareLeveledSlots(spells, actor, progression);
       return;
     }
@@ -662,7 +676,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       if ( !foundry.utils.hasProperty(data, "prototypeToken.width") ) prototypeToken.width = size;
       if ( !foundry.utils.hasProperty(data, "prototypeToken.height") ) prototypeToken.height = size;
     }
-    if ( this.type === "character" ) Object.assign(prototypeToken, {
+    if ( this.system.isCharacter ) Object.assign(prototypeToken, {
       sight: { enabled: true }, actorLink: true, disposition: CONST.TOKEN_DISPOSITIONS.FRIENDLY
     });
     if ( this.type === "group" ) prototypeToken.actorLink = true;
@@ -757,11 +771,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     damages = this.calculateDamage(damages, options);
     if ( !damages ) return this;
 
-    const { amount, temp } = damages;
+    const { amount, temp, tempMax } = damages;
     const deltaTemp = amount > 0 ? Math.min(hp.temp, amount) : 0;
-    const deltaHP = Math.clamp(amount - deltaTemp, -hp.damage, hp.value);
+    const deltaHP = Math.clamp(amount - deltaTemp, -hp.damage + tempMax, hp.value - tempMax);
     const updates = {
       "system.attributes.hp.temp": hp.temp - deltaTemp,
+      "system.attributes.hp.tempmax": hp.tempmax - tempMax,
       "system.attributes.hp.value": hp.value - deltaHP
     };
 
@@ -816,6 +831,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     damages = foundry.utils.deepClone(damages);
     damages.amount = 0;
     damages.temp = 0;
+    damages.tempMax = 0;
 
     /**
      * A hook event that fires before damage amount is calculated for an actor.
@@ -829,77 +845,69 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( Hooks.call("dnd5e.preCalculateDamage", this, damages, options) === false ) return false;
 
     const multiplier = options.multiplier ?? 1;
-
-    const downgrade = type => options.downgrade === true || options.downgrade?.has?.(type);
-    const ignore = (category, type, skipDowngrade) => {
-      return options.ignore === true
-        || options.ignore?.[category] === true
-        || options.ignore?.[category]?.has?.(type)
-        || ((category === "immunity") && downgrade(type) && !skipDowngrade)
-        || ((category === "resistance") && downgrade(type) && !hasEffect("di", type));
-    };
-
-    const traits = this.system.traits ?? {};
-    const hasEffect = (category, type, properties) => {
-      if ( (category === "dr") && downgrade(type) && hasEffect("di", type, properties)
-        && !ignore("immunity", type, true) ) return true;
-      const config = traits[category];
-      if ( !config?.value.has(type) ) return false;
-      if ( !CONFIG.DND5E.damageTypes[type]?.isPhysical || !properties?.size ) return true;
-      return !config.bypasses?.intersection(properties)?.size;
-    };
+    const treatAs = options.originatingMessage?.flags?.dnd5e?.roll?.type
+      ? options.originatingMessage.flags.dnd5e.roll.type === "healing" ? "healing" : "damage"
+      : options.only ?? "damage";
 
     const skipped = type => {
+      if ( type === "maximum" ) return options.only ? options.only !== treatAs : false;
       if ( options.only === "damage" ) return type in CONFIG.DND5E.healingTypes;
       if ( options.only === "healing" ) return type in CONFIG.DND5E.damageTypes;
       return false;
     };
 
-    const rollData = this.getRollData({deterministic: true});
+    const dm = this.system.traits?.dm ?? {};
+    const rollData = this.getRollData({ deterministic: true });
+    const modifications = Object.entries(dm.amount ?? {}).reduce((obj, [type, formula]) => {
+      obj[type] = simplifyBonus(formula, rollData);
+      return obj;
+    }, {});
+    const applyModification = (d, type=d.type) => {
+      if ( !modifications[type] || this.#changeIsIgnored("modification", type, { options }) ) return;
+      const originalValue = d.value;
+      if ( Math.sign(d.value) !== Math.sign(d.value + modifications[type]) ) d.value = 0;
+      else d.value += modifications[type];
+      (d.active[type === "ALL" ? "all" : "type"] ??= {}).modification = true;
+      modifications[type] += originalValue - d.value;
+    };
 
     damages.forEach(d => {
       d.active ??= {};
 
       // Skip damage types with immunity
-      if ( skipped(d.type) || (!ignore("immunity", d.type) && hasEffect("di", d.type, d.properties)) ) {
+      if ( skipped(d.type) || this.#changeHasEffect("immunity", d, { options }) ) {
         d.value = 0;
         d.active.multiplier = 0;
-        d.active.immunity = true;
         return;
       }
 
-      // Apply type-specific damage reduction
-      if ( !ignore("modification", d.type) && traits.dm?.amount[d.type]
-        && !traits.dm.bypasses.intersection(d.properties).size ) {
-        const modification = simplifyBonus(traits.dm.amount[d.type], rollData);
-        if ( Math.sign(d.value) !== Math.sign(d.value + modification) ) d.value = 0;
-        else d.value += modification;
-        d.active.modification = true;
+      // Apply damage modification
+      if ( !CONFIG.DND5E.damageTypes[d.type]?.isPhysical || !d.properties?.size
+        || !dm.bypasses?.intersection(d.properties).size ) {
+        applyModification(d);
+        applyModification(d, "ALL");
       }
 
       let damageMultiplier = multiplier;
 
-      // Apply type-specific damage resistance
-      if ( !ignore("resistance", d.type) && hasEffect("dr", d.type, d.properties) ) {
-        damageMultiplier /= 2;
-        d.active.resistance = true;
-      }
+      // Apply damage resistance
+      if ( this.#changeHasEffect("resistance", d, { options }) ) damageMultiplier /= 2;
 
-      // Apply type-specific damage vulnerability
-      if ( !ignore("vulnerability", d.type) && hasEffect("dv", d.type, d.properties) ) {
-        damageMultiplier *= 2;
-        d.active.vulnerability = true;
-      }
+      // Apply damage vulnerability
+      if ( this.#changeHasEffect("vulnerability", d, { options }) ) damageMultiplier *= 2;
 
       // Negate healing types
-      if ( (options.invertHealing !== false) && (d.type === "healing") ) damageMultiplier *= -1;
+      if ( (options.invertHealing !== false) && ((d.type === "healing")
+        || ((d.type === "maximum") && (treatAs === "healing"))) ) damageMultiplier *= -1;
 
       d.value = d.value * damageMultiplier;
       d.active.multiplier = (d.active.multiplier ?? 1) * damageMultiplier;
       if ( d.type === "temphp" ) damages.temp += d.value;
+      else if ( d.type === "maximum" ) damages.tempMax += d.value;
       else damages.amount += d.value;
     });
 
+    if ( damages.tempMax < 0 ) damages.amount += damages.tempMax;
     damages.amount = damages.amount > 0 ? Math.floor(damages.amount) : Math.ceil(damages.amount);
 
     // Apply damage threshold
@@ -925,6 +933,85 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( Hooks.call("dnd5e.calculateDamage", this, damages, options) === false ) return false;
 
     return damages;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine whether a specific type of change to a damage value will have an effect.
+   * @param {DamageAffectCategory} category                  Type of change that should be considered.
+   * @param {DamageDescription|string} damage                Damage description to consider or a specific type.
+   * @param {object} [options={}]
+   * @param {DamageApplicationOptions} [options.options={}]  Damage application options.
+   * @param {boolean} [options.skipDowngrade=false]          Should downgrades be skipped?
+   * @returns {boolean}
+   */
+  #changeHasEffect(category, damage, { options={}, skipDowngrade=false }={}) {
+    const config = this.system.traits?.[`d${category.slice(0, 1)}`];
+    const downgrade = type => options.downgrade === true || options.downgrade?.has?.(type);
+    const setActive = type => {
+      if ( damage.active ) {
+        damage.active[type] ??= {};
+        damage.active[type][category] = true;
+      }
+      return true;
+    };
+    const type = typeof damage === "string" ? damage : damage.type;
+
+    // If category is resistance, check for downgraded immunities
+    if ( category === "resistance" ) {
+      if ( downgrade("ALL") && this.#changeHasEffect("immunity", "ALL", { skipDowngrade: true }) ) {
+        return setActive("all");
+      }
+      if ( downgrade(type) && this.#changeHasEffect("immunity", type, { skipDowngrade: true }) ) {
+        return setActive("type");
+      }
+    }
+
+    // If damage type is physical and bypass present in properties, skip further checks
+    if ( CONFIG.DND5E.damageTypes[type]?.isPhysical && damage.properties?.size
+      && config?.bypasses?.intersection(damage.properties)?.size ) return false;
+
+    // If all damage resistance is present and not ignored
+    if ( !this.#changeIsIgnored(category, "ALL", { options, skipDowngrade }) && config?.value.has("ALL") ) {
+      return setActive("all");
+    }
+
+    // If specific type damage resistance is present and not ignored
+    if ( !this.#changeIsIgnored(category, type, { options, skipDowngrade }) && config?.value.has(type) ) {
+      return setActive("type");
+    }
+
+    return false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine whether a specific damage change type should be ignored.
+   * @param {DamageAffectCategory} category                  Type of change that should be considered.
+   * @param {string} type                                    Specific damage type to consider.
+   * @param {object} [options={}]
+   * @param {DamageApplicationOptions} [options.options={}]  Damage application options.
+   * @param {boolean} [options.skipDowngrade=false]          Should downgrades not be taken into account?
+   * @returns {boolean}
+   */
+  #changeIsIgnored(category, type, { options={}, skipDowngrade=false }={}) {
+    const downgrade = type => options.downgrade === true || options.downgrade?.has?.(type);
+
+    // All categories are ignored
+    if ( options.ignore === true ) return true;
+
+    // Specific category is ignored, or specific category has this type in its ignore list
+    if ( (options.ignore?.[category] === true) || (options.ignore?.[category]?.has?.(type)) ) return true;
+
+    // When downgrading, always ignore immunities unless `skipDowngrade` option is set
+    if ( (category === "immunity") && downgrade(type) && !skipDowngrade ) return true;
+
+    // When downgrading, resistances should be decided by whether immunity is applied
+    if ( (category === "resistance") && downgrade(type) && !this.#changeHasEffect("immunity", type) ) return true;
+
+    return false;
   }
 
   /* -------------------------------------------- */
@@ -1098,7 +1185,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @private
    */
   _isRemarkableAthlete(ability) {
-    return (game.settings.get("dnd5e", "rulesVersion") === "legacy") && this.getFlag("dnd5e", "remarkableAthlete")
+    return (dnd5e.settings.rulesVersion === "legacy") && this.getFlag("dnd5e", "remarkableAthlete")
       && CONFIG.DND5E.characterFlags.remarkableAthlete.abilities.includes(ability);
   }
 
@@ -1112,7 +1199,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @param {object} data     Roll data.
    */
   addRollExhaustion(parts, data) {
-    if ( (game.settings.get("dnd5e", "rulesVersion") !== "modern") || !this.system.attributes?.exhaustion ) return;
+    if ( (dnd5e.settings.rulesVersion !== "modern") || !this.system.attributes?.exhaustion
+      || this.system.traits?.ci?.value?.has("exhaustion") ) return;
     const amount = this.system.attributes.exhaustion * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.rolls ?? 0);
     if ( amount ) {
       parts.push("@exhaustion");
@@ -1744,7 +1832,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       initiativeBonus: init.bonus,
       [`${abilityId}AbilityCheckBonus`]: ability?.bonuses?.check,
       abilityCheckBonus: this.system.bonuses?.abilities?.check,
-      alert: flags.initiativeAlert && (game.settings.get("dnd5e", "rulesVersion") === "legacy") ? 5 : null
+      alert: flags.initiativeAlert && (dnd5e.settings.rulesVersion === "legacy") ? 5 : null
     }, rollData);
 
     const { advantage, disadvantage } = AdvantageModeField.combineFields(this.system, [
@@ -1761,7 +1849,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     // Fixed initiative score
     const scoreMode = game.settings.get("dnd5e", "initiativeScore");
-    const useScore = (scoreMode === "all") || ((scoreMode === "npcs") && game.user.isGM && (this.type === "npc"));
+    const useScore = (scoreMode === "all") || ((scoreMode === "npcs") && game.user.isGM && this.system.isNPC);
 
     options = foundry.utils.mergeObject({
       advantage, disadvantage,
@@ -1872,7 +1960,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     let cls = null;
 
     // NPCs only have one denomination
-    if ( this.type === "npc" ) {
+    if ( this.system.isNPC ) {
       config.denomination = `d${this.system.attributes.hd.denomination}`;
 
       // If no hit dice are available, display an error notification
@@ -1902,7 +1990,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         return null;
       }
     }
-    const rulesVersion = game.settings.get("dnd5e", "rulesVersion");
+    const rulesVersion = dnd5e.settings.rulesVersion;
     const minimumValue = rulesVersion === "modern" ? 1 : 0;
     formula ??= `max(${minimumValue}, 1${config.denomination} + @abilities.con.mod)`;
     const rollConfig = foundry.utils.deepClone(config);
@@ -1989,7 +2077,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       data: item.getRollData(),
       chatMessage
     };
-    const flavor = game.i18n.format("DND5E.ADVANCEMENT.HitPoints.Roll", { class: item.name });
+    const flavor = game.i18n.format("DND5E.ADVANCEMENT.HitPoints.Action.RollClass", { class: item.name });
     const messageData = {
       title: `${flavor}: ${this.name}`,
       flavor,
@@ -2036,7 +2124,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @see {@link dnd5e.preRollNPCHitPoints}
    */
   async rollNPCHitPoints({ chatMessage=true }={}) {
-    if ( this.type !== "npc" ) throw new Error("NPC hit points can only be rolled for NPCs");
+    if ( !this.system.isNPC ) throw new Error("NPC hit points can only be rolled for NPCs");
     const rollData = {
       formula: this.system.attributes.hp.formula,
       data: this.getRollData(),
@@ -2088,7 +2176,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<RestResult>}                A Promise which resolves once the short rest workflow has completed.
    */
   async shortRest(config={}) {
-    if ( this.type === "vehicle" ) return;
+    if ( this.system.isVehicle ) return;
     if ( !game.user.isGM && !game.settings.get("dnd5e", "allowRests") && !config.request ) {
       ui.notifications.warn("DND5E.REST.Warning.OnlyByRequest", { localize: true, log: false });
       return;
@@ -2151,7 +2239,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<RestResult>}       A Promise which resolves once the long rest workflow has completed.
    */
   async longRest(config={}) {
-    if ( this.type === "vehicle" ) return;
+    if ( this.system.isVehicle ) return;
     if ( !game.user.isGM && !game.settings.get("dnd5e", "allowRests") && !config.request ) {
       ui.notifications.warn("DND5E.REST.Warning.OnlyByRequest", { localize: true, log: false });
       return;
@@ -2404,10 +2492,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   _getRestHitDiceRecovery({ maxHitDice, fraction, ...config }={}, result={}) {
     const restConfig = CONFIG.DND5E.restTypes[config.type];
     if ( !this.system.attributes.hd || !restConfig?.recoverHitDice ) return;
-    fraction ??= game.settings.get("dnd5e", "rulesVersion") === "modern" ? 1 : 0.5;
+    fraction ??= dnd5e.settings.rulesVersion === "modern" ? 1 : 0.5;
 
     // Handle simpler HD recovery for NPCs
-    if ( this.type === "npc" ) {
+    if ( this.system.isNPC ) {
       const hd = this.system.attributes.hd;
       const recovered = Math.min(
         Math.max(1, Math.floor(hd.max * fraction)), hd.spent, maxHitDice ?? Infinity
@@ -3500,7 +3588,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       _id: ActiveEffect5e.ID.BLOODIED,
       name: game.i18n.localize(CONFIG.DND5E.bloodied.name),
       img: CONFIG.DND5E.bloodied.img,
-      statuses: ["bloodied"]
+      statuses: ["bloodied"],
+      showIcon: CONST.ACTIVE_EFFECT_SHOW_ICON?.ALWAYS
     }, { parent: this, keepId: true });
   }
 
@@ -3568,7 +3657,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   static computeLeveledProgression(progression, actor, cls, spellcasting, count) {
     foundry.utils.logCompatibilityWarning("Actor5e.computeLeveledProgression is deprecated. Please use "
-      + "SpellcastingModel#computeProgression instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+      + "SpellcastingModel#computeProgression instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
     CONFIG.DND5E.spellcasting.spell.computeProgression(progression, actor, cls, spellcasting, count);
   }
 
@@ -3580,7 +3669,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   static computePactProgression(progression, actor, cls, spellcasting, count) {
     foundry.utils.logCompatibilityWarning("Actor5e.computePactProgression is deprecated. Please use "
-      + "SpellcastingModel#computeProgression instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+      + "SpellcastingModel#computeProgression instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
     CONFIG.DND5E.spellcasting.pact.computeProgression(progression, actor, cls, spellcasting, count);
   }
 
@@ -3592,7 +3681,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   static prepareAltSlots(spells, actor, progression, key, table) {
     foundry.utils.logCompatibilityWarning("Actor.prepareAltSlots is deprecated. Please use "
-      + "SpellcastingModel#prepareSlots instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+      + "SpellcastingModel#prepareSlots instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
     const model = CONFIG.DND5E.spellcasting[key];
     if ( !model ) return;
     if ( table ) model.table = table;
@@ -3607,7 +3696,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   static prepareLeveledSlots(spells, actor, progression) {
     foundry.utils.logCompatibilityWarning("Actor.prepareLeveledSlots is deprecated. Please use "
-      + "SpellcastingModel#prepareSlots instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+      + "SpellcastingModel#prepareSlots instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
     CONFIG.DND5E.spellcasting.spell.prepareSlots(spells, actor, progression);
   }
 
@@ -3619,7 +3708,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   static preparePactSlots(spells, actor, progression) {
     foundry.utils.logCompatibilityWarning("Actor.preparePactSlots is deprecated. Please use "
-      + "SpellcastingModel#prepareSlots instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+      + "SpellcastingModel#prepareSlots instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
     CONFIG.DND5E.spellcasting.pact.prepareSlots(spells, actor, progression);
   }
 }

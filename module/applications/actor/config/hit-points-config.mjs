@@ -75,7 +75,7 @@ export default class HitPointsConfig extends BaseConfigSheet {
       <span class="multiplier"><span class="times">&times;</span> ${formatNumber(context.levels)}</span>
     `;
     context.showCalculation = context.classes.length || context.fields.bonuses;
-    context.showMaxInCalculation = context.showCalculation && (this.document.type === "npc");
+    context.showMaxInCalculation = context.showCalculation && this.document.system.isNPC;
 
     // Additional fields
     context.otherFields = ["dt", "mt"].flatMap(p => {

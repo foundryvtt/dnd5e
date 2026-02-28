@@ -98,8 +98,7 @@
                                aria-label="{{ localize "DND5E.Concentration" }}"></i>
                             {{/if}}
 
-                            <img class="item-image gold-icon" src="{{ item.img }}" alt="{{ item.name }}"
-                                 draggable="false">
+                            {{ dnd5e-icon item.img alt=item.name classes="item-image gold-icon" }}
 
                             <div class="name name-stacked">
                                 <span class="title">{{ item.name }}</span>

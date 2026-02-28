@@ -249,12 +249,6 @@ effects:
       - restrained
     sort: 0
     flags:
-      dae:
-        disableCondition: ''
-        stackable: multi
-        showIcon: false
-        durationExpression: ''
-        specialDuration: []
       core:
         overlay: false
     _stats:
@@ -293,13 +287,6 @@ effects:
       - prone
     sort: 0
     flags:
-      dae:
-        disableCondition: ''
-        stackable: multi
-        showIcon: false
-        durationExpression: ''
-        specialDuration: []
-        enableCondition: ''
       core:
         overlay: false
     _stats:

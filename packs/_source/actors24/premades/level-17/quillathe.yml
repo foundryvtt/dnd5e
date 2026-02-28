@@ -360,12 +360,13 @@ system:
     attunement:
       max: 3
     senses:
-      darkvision: null
-      blindsight: null
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: null
+        blindsight: null
+        tremorsense: null
+        truesight: null
     spellcasting: wis
     exhaustion: 0
     concentration:
@@ -599,7 +600,8 @@ items:
     img: icons/magic/light/explosion-beam-impact-silhouette.webp
     system:
       advancement:
-        - type: AbilityScoreImprovement
+        1Q3sqDL4PWsaE5Fh:
+          type: AbilityScoreImprovement
           _id: 1Q3sqDL4PWsaE5Fh
           configuration:
             cap: 2
@@ -625,7 +627,9 @@ items:
           level: 0
           title: ''
           hint: ''
-        - type: Trait
+          flags: {}
+        6RFYDHZ7mhTG2GRG:
+          type: Trait
           title: Background Proficiencies
           _id: 6RFYDHZ7mhTG2GRG
           configuration:
@@ -643,7 +647,9 @@ items:
               - skills:inv
               - skills:nat
               - tool:herb
-        - type: Trait
+          flags: {}
+        Dvp6RDUrsnOEi9ql:
+          type: Trait
           _id: Dvp6RDUrsnOEi9ql
           configuration:
             allowReplacements: false
@@ -662,7 +668,9 @@ items:
               - languages:standard:common
               - languages:standard:elvish
               - languages:standard:gnomish
-        - type: ItemGrant
+          flags: {}
+        bWWDnIBdVmwOwqHc:
+          type: ItemGrant
           _id: bWWDnIBdVmwOwqHc
           configuration:
             items:
@@ -676,6 +684,7 @@ items:
           level: 0
           title: Background Feat
           hint: ''
+          flags: {}
       description:
         value: >-
           <p><strong>Ability Scores:</strong> Constitution, Dexterity,
@@ -749,7 +758,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     _id: WSfqg4qp13LFdc3N
     ownership:
@@ -792,7 +801,7 @@ items:
       activities: {}
       enchant: {}
       identifier: alert
-      advancement: []
+      advancement: {}
       crewed: false
     _id: 6156HtS7RvjQ7nhJ
     type: feat
@@ -833,7 +842,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!QuillatheLv17000.6156HtS7RvjQ7nhJ.uvZy4Zzi0oPd54qs
@@ -850,7 +859,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -901,7 +910,8 @@ items:
         license: CC-BY-4.0
         book: ''
       advancement:
-        - _id: 5w2FaHXRKiN7v1rE
+        5w2FaHXRKiN7v1rE:
+          _id: 5w2FaHXRKiN7v1rE
           type: Size
           configuration:
             sizes:
@@ -911,7 +921,9 @@ items:
           hint: Medium (about 5–6 feet tall)
           value:
             size: med
-        - _id: boHzoT53gYPvJ9o2
+          flags: {}
+        boHzoT53gYPvJ9o2:
+          _id: boHzoT53gYPvJ9o2
           type: ItemGrant
           configuration:
             items:
@@ -934,7 +946,9 @@ items:
           level: 0
           title: Elf Traits
           hint: ''
-        - _id: YFS9oEa9Iw1molNm
+          flags: {}
+        YFS9oEa9Iw1molNm:
+          _id: YFS9oEa9Iw1molNm
           type: ItemGrant
           configuration:
             items:
@@ -954,7 +968,9 @@ items:
           level: 1
           title: Wood Elf Traits
           hint: ''
-        - _id: FRJszO7cYchbaGzt
+          flags: {}
+        FRJszO7cYchbaGzt:
+          _id: FRJszO7cYchbaGzt
           type: ItemGrant
           configuration:
             items:
@@ -981,7 +997,9 @@ items:
           hint: >-
             Intelligence, Wisdom, or Charisma can be chosen for your
             spellcasting ability.
-        - _id: zFsEPXauTgmYxqiJ
+          flags: {}
+        zFsEPXauTgmYxqiJ:
+          _id: zFsEPXauTgmYxqiJ
           type: ItemGrant
           configuration:
             items:
@@ -1004,7 +1022,9 @@ items:
           hint: >-
             Intelligence, Wisdom, or Charisma can be chosen for your
             spellcasting ability.
-        - _id: RwuXccrKfMuuWLKr
+          flags: {}
+        RwuXccrKfMuuWLKr:
+          _id: RwuXccrKfMuuWLKr
           type: Trait
           configuration:
             mode: default
@@ -1022,18 +1042,20 @@ items:
           level: 0
           title: Keen Senses
           hint: You have proficiency in the Insight, Perception, or Survival skill.
+          flags: {}
       movement:
         walk: '35'
         units: null
         hover: false
         ignoredDifficultTerrain: []
       senses:
-        darkvision: 60
-        blindsight: null
-        tremorsense: null
-        truesight: null
         units: null
         special: ''
+        ranges:
+          darkvision: 60
+          blindsight: null
+          tremorsense: null
+          truesight: null
       type:
         value: humanoid
         custom: ''
@@ -1048,7 +1070,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -1085,7 +1107,7 @@ items:
       properties: []
       requirements: Elf
       identifier: fey-ancestry
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     folder: 3uafOaOCZJQeUNtw
@@ -1100,7 +1122,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -1139,7 +1161,7 @@ items:
       properties: []
       requirements: Elf
       identifier: keen-senses
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     folder: 3uafOaOCZJQeUNtw
@@ -1154,7 +1176,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -1192,7 +1214,7 @@ items:
       properties: []
       requirements: Elf
       identifier: trance
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     folder: 3uafOaOCZJQeUNtw
@@ -1207,7 +1229,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -1261,7 +1283,7 @@ items:
       properties: []
       requirements: Elf (Wood)
       identifier: elven-lineage-wood-elf
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     folder: 3uafOaOCZJQeUNtw
@@ -1276,7 +1298,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -1412,7 +1434,8 @@ items:
       identifier: ranger
       levels: 17
       advancement:
-        - _id: tGf0hPcdu2TIQdgN
+        tGf0hPcdu2TIQdgN:
+          _id: tGf0hPcdu2TIQdgN
           type: HitPoints
           configuration: {}
           value:
@@ -1433,7 +1456,10 @@ items:
             '15': avg
             '16': avg
             '17': avg
-        - _id: R77BAIzMfcPq0urg
+          flags: {}
+          hint: ''
+        R77BAIzMfcPq0urg:
+          _id: R77BAIzMfcPq0urg
           type: ItemGrant
           configuration:
             items:
@@ -1452,7 +1478,10 @@ items:
               uHY0uPusihtnVQkp: Compendium.dnd5e.classes24.Item.phbrgrWeaponMast
           level: 1
           title: Class Features
-        - _id: 0XJhkNDTm9P3K5n3
+          flags: {}
+          hint: ''
+        0XJhkNDTm9P3K5n3:
+          _id: 0XJhkNDTm9P3K5n3
           type: ItemGrant
           configuration:
             items:
@@ -1468,7 +1497,10 @@ items:
               bKau79M7hBe1pUBa: Compendium.dnd5e.classes24.Item.phbrgrFightingSt
           level: 2
           title: Class Features
-        - _id: onoWzEIWhrrG4QJt
+          flags: {}
+          hint: ''
+        onoWzEIWhrrG4QJt:
+          _id: onoWzEIWhrrG4QJt
           type: ItemGrant
           configuration:
             items:
@@ -1481,7 +1513,10 @@ items:
               4K2NOTWvmj1Fm4Zf: Compendium.dnd5e.classes24.Item.phbrgrExtraAttac
           level: 5
           title: Class Features
-        - _id: fEmkkyi2Z6qGfYOZ
+          flags: {}
+          hint: ''
+        fEmkkyi2Z6qGfYOZ:
+          _id: fEmkkyi2Z6qGfYOZ
           type: ItemGrant
           configuration:
             items:
@@ -1494,7 +1529,10 @@ items:
               FQhcgSTOwqlAuxp2: Compendium.dnd5e.classes24.Item.phbrgrRoving0000
           level: 6
           title: Class Features
-        - _id: fy2LFc8UC9PTq4aF
+          flags: {}
+          hint: ''
+        fy2LFc8UC9PTq4aF:
+          _id: fy2LFc8UC9PTq4aF
           type: ItemGrant
           configuration:
             items:
@@ -1507,7 +1545,10 @@ items:
               J30mto68q7fsbZAG: Compendium.dnd5e.classes24.Item.phbrgrExpertise0
           level: 9
           title: Class Features
-        - _id: Yscwm2LPBUNjW0pk
+          flags: {}
+          hint: ''
+        Yscwm2LPBUNjW0pk:
+          _id: Yscwm2LPBUNjW0pk
           type: Trait
           configuration:
             mode: expertise
@@ -1523,7 +1564,10 @@ items:
               - skills:sur
           level: 9
           title: Expertise
-        - _id: tfv4CeK2F4fdZMMi
+          flags: {}
+          hint: ''
+        tfv4CeK2F4fdZMMi:
+          _id: tfv4CeK2F4fdZMMi
           type: ItemGrant
           configuration:
             items:
@@ -1536,7 +1580,10 @@ items:
               RX3hooTuvzz4gMZN: Compendium.dnd5e.classes24.Item.phbrgrTireless00
           level: 10
           title: Class Features
-        - _id: yMKZmo7nE6oSFMD0
+          flags: {}
+          hint: ''
+        yMKZmo7nE6oSFMD0:
+          _id: yMKZmo7nE6oSFMD0
           type: ItemGrant
           configuration:
             items:
@@ -1549,7 +1596,10 @@ items:
               vWPeWb0I9Tq7o0lP: Compendium.dnd5e.classes24.Item.phbrgrRelentless
           level: 13
           title: Class Features
-        - _id: zurYQjBBNQW92SAz
+          flags: {}
+          hint: ''
+        zurYQjBBNQW92SAz:
+          _id: zurYQjBBNQW92SAz
           type: ItemGrant
           configuration:
             items:
@@ -1562,7 +1612,10 @@ items:
               10WHYbMxQT3Pkvvn: Compendium.dnd5e.classes24.Item.phbrgrNaturesVei
           level: 14
           title: Class Features
-        - _id: c3CqyzFeTFA5Yq8u
+          flags: {}
+          hint: ''
+        c3CqyzFeTFA5Yq8u:
+          _id: c3CqyzFeTFA5Yq8u
           type: ItemGrant
           configuration:
             items:
@@ -1575,7 +1628,10 @@ items:
               wzJ0YugyMSGoLfUG: Compendium.dnd5e.classes24.Item.phbrgrPreciseHun
           level: 17
           title: Class Features
-        - _id: e1EWIvBos04kIm4n
+          flags: {}
+          hint: ''
+        e1EWIvBos04kIm4n:
+          _id: e1EWIvBos04kIm4n
           type: ItemGrant
           configuration:
             items:
@@ -1586,7 +1642,10 @@ items:
           value: {}
           level: 18
           title: Class Features
-        - _id: M9VOxnHqo0qYtwGb
+          flags: {}
+          hint: ''
+        M9VOxnHqo0qYtwGb:
+          _id: M9VOxnHqo0qYtwGb
           type: ItemGrant
           configuration:
             items:
@@ -1597,7 +1656,10 @@ items:
           value: {}
           level: 20
           title: Class Features
-        - _id: bwCLOdauuzoHofil
+          flags: {}
+          hint: ''
+        bwCLOdauuzoHofil:
+          _id: bwCLOdauuzoHofil
           type: AbilityScoreImprovement
           configuration:
             points: 2
@@ -1617,7 +1679,10 @@ items:
               dex: 2
           level: 4
           title: ''
-        - _id: mRSh9oUVjLU33e7p
+          flags: {}
+          hint: ''
+        mRSh9oUVjLU33e7p:
+          _id: mRSh9oUVjLU33e7p
           type: AbilityScoreImprovement
           configuration:
             points: 2
@@ -1638,7 +1703,10 @@ items:
               wis: 1
           level: 8
           title: ''
-        - _id: mhZh3LfLMa15tXee
+          flags: {}
+          hint: ''
+        mhZh3LfLMa15tXee:
+          _id: mhZh3LfLMa15tXee
           type: AbilityScoreImprovement
           configuration:
             points: 2
@@ -1658,7 +1726,10 @@ items:
               wis: 2
           level: 12
           title: ''
-        - _id: FOf5CkGnSs0OlppY
+          flags: {}
+          hint: ''
+        FOf5CkGnSs0OlppY:
+          _id: FOf5CkGnSs0OlppY
           type: AbilityScoreImprovement
           configuration:
             points: 2
@@ -1678,7 +1749,10 @@ items:
               wis: 2
           level: 16
           title: ''
-        - _id: DOENALOWWjAUHzb7
+          flags: {}
+          hint: ''
+        DOENALOWWjAUHzb7:
+          _id: DOENALOWWjAUHzb7
           type: ItemGrant
           configuration:
             items:
@@ -1699,7 +1773,9 @@ items:
           level: 1
           title: Favored Enemy
           hint: ''
-        - _id: FksFWNV4X4lTFlvO
+          flags: {}
+        FksFWNV4X4lTFlvO:
+          _id: FksFWNV4X4lTFlvO
           type: ScaleValue
           configuration:
             identifier: ''
@@ -1720,7 +1796,9 @@ items:
           value: {}
           title: Favored Enemy
           hint: ''
-        - _id: PLqssMc398jEsEW4
+          flags: {}
+        PLqssMc398jEsEW4:
+          _id: PLqssMc398jEsEW4
           type: Trait
           configuration:
             mode: expertise
@@ -1736,7 +1814,9 @@ items:
           level: 2
           title: Deft Explorer
           hint: ''
-        - _id: wzh6lW4bOlQy4geS
+          flags: {}
+        wzh6lW4bOlQy4geS:
+          _id: wzh6lW4bOlQy4geS
           type: Trait
           configuration:
             mode: default
@@ -1754,7 +1834,9 @@ items:
           level: 2
           title: Deft Explorer
           hint: ''
-        - _id: 2Wma1d7xii6GUWC9
+          flags: {}
+        2Wma1d7xii6GUWC9:
+          _id: 2Wma1d7xii6GUWC9
           type: ScaleValue
           configuration:
             identifier: mark
@@ -1773,7 +1855,9 @@ items:
           value: {}
           title: Hunter's Mark Damage
           hint: ''
-        - _id: iYdu1uOqAnHGWIZY
+          flags: {}
+        iYdu1uOqAnHGWIZY:
+          _id: iYdu1uOqAnHGWIZY
           type: ScaleValue
           configuration:
             identifier: max-prepared
@@ -1808,7 +1892,9 @@ items:
           value: {}
           title: Max Prepared Spells
           hint: ''
-        - _id: eJTiCO9yVqCP1Ptd
+          flags: {}
+        eJTiCO9yVqCP1Ptd:
+          _id: eJTiCO9yVqCP1Ptd
           type: Subclass
           configuration: {}
           value:
@@ -1817,7 +1903,9 @@ items:
           level: 3
           title: ''
           hint: ''
-        - _id: 3trTn2JpXbZ6X24q
+          flags: {}
+        3trTn2JpXbZ6X24q:
+          _id: 3trTn2JpXbZ6X24q
           type: Trait
           configuration:
             mode: default
@@ -1834,7 +1922,9 @@ items:
           title: Saving Throw Proficiencies
           hint: ''
           classRestriction: primary
-        - _id: H1iv8RH9TOVH30qO
+          flags: {}
+        H1iv8RH9TOVH30qO:
+          _id: H1iv8RH9TOVH30qO
           type: Trait
           configuration:
             mode: default
@@ -1860,7 +1950,9 @@ items:
           title: Skill Proficiencies
           hint: ''
           classRestriction: primary
-        - _id: knFte4PvZAtHAcFJ
+          flags: {}
+        knFte4PvZAtHAcFJ:
+          _id: knFte4PvZAtHAcFJ
           type: Trait
           configuration:
             mode: default
@@ -1877,7 +1969,9 @@ items:
           title: Weapon Proficiencies
           hint: ''
           classRestriction: primary
-        - _id: TehnIJlh1drGLjpj
+          flags: {}
+        TehnIJlh1drGLjpj:
+          _id: TehnIJlh1drGLjpj
           type: Trait
           configuration:
             mode: default
@@ -1895,7 +1989,9 @@ items:
           level: 1
           title: Armor Training
           hint: ''
-        - _id: 491B9spyMvoNt2ij
+          flags: {}
+        491B9spyMvoNt2ij:
+          _id: 491B9spyMvoNt2ij
           type: Trait
           configuration:
             mode: default
@@ -1918,7 +2014,9 @@ items:
           title: Skill Proficiencies
           hint: ''
           classRestriction: secondary
-        - _id: AtKKnCoTLBqSxhCh
+          flags: {}
+        AtKKnCoTLBqSxhCh:
+          _id: AtKKnCoTLBqSxhCh
           type: ItemChoice
           configuration:
             choices:
@@ -1945,7 +2043,9 @@ items:
             replaced: {}
           title: Fighting Style
           hint: ''
-        - _id: cvPNAaphQTdoQqAb
+          flags: {}
+        cvPNAaphQTdoQqAb:
+          _id: cvPNAaphQTdoQqAb
           type: Trait
           configuration:
             mode: mastery
@@ -1962,7 +2062,9 @@ items:
           level: 1
           title: Weapon Mastery
           hint: ''
-        - _id: wXbfWOQp62GRMMlZ
+          flags: {}
+        wXbfWOQp62GRMMlZ:
+          _id: wXbfWOQp62GRMMlZ
           type: Trait
           configuration:
             mode: default
@@ -1976,7 +2078,9 @@ items:
           title: Weapon Proficiencies
           hint: ''
           classRestriction: secondary
-        - type: AbilityScoreImprovement
+          flags: {}
+        Fu3uIg8onmQ45JBX:
+          type: AbilityScoreImprovement
           _id: Fu3uIg8onmQ45JBX
           configuration:
             cap: 2
@@ -1996,6 +2100,7 @@ items:
           level: 19
           title: ''
           hint: ''
+          flags: {}
       spellcasting:
         progression: half
         ability: wis
@@ -2020,7 +2125,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -2138,6 +2243,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: druidcraft
       method: spell
       prepared: 2
@@ -2158,7 +2264,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -2227,7 +2333,7 @@ items:
       activities: {}
       enchant: {}
       identifier: spellcasting
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     flags:
@@ -2241,7 +2347,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -2289,7 +2395,7 @@ items:
       activities: {}
       enchant: {}
       identifier: favored-enemy
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     flags:
@@ -2303,7 +2409,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -2346,7 +2452,7 @@ items:
       activities: {}
       enchant: {}
       identifier: weapon-mastery
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     flags:
@@ -2360,7 +2466,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -2478,6 +2584,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         vxr2JKuQ3jyMDTwb:
           type: utility
           _id: vxr2JKuQ3jyMDTwb
@@ -2527,6 +2634,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         NQtVK0T5uwfMPGQL:
           type: utility
           activation:
@@ -2578,6 +2686,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         72GB8kfgMJgPVbY0:
           _id: 72GB8kfgMJgPVbY0
           type: forward
@@ -2607,6 +2716,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: hunters-mark
       method: spell
       prepared: 2
@@ -2650,7 +2760,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!QuillatheLv17000.iCf450qECu1PRkAZ.vPkln6UeePHnbLr4
@@ -2667,7 +2777,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -2776,6 +2886,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: cure-wounds
       method: spell
       sourceClass: ranger
@@ -2793,7 +2904,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -2921,6 +3032,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         ZWId9mbOE9zFnP6f:
           type: damage
           _id: ZWId9mbOE9zFnP6f
@@ -2985,6 +3097,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: ensnaring-strike
       method: spell
       sourceClass: ranger
@@ -3030,7 +3143,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!QuillatheLv17000.EBgpZ648SEfydQRq.tFGMG3cjQTEeAhv2
@@ -3043,7 +3156,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -3154,6 +3267,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: herbalism-kit
       attuned: false
       equipped: false
@@ -3170,7 +3284,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -3208,7 +3322,6 @@ items:
         recovery: []
       armor:
         value: null
-        magicalBonus: null
         dex: null
       hp:
         value: null
@@ -3244,7 +3357,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -3316,6 +3429,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -3354,7 +3468,6 @@ items:
       attunement: ''
       armor:
         value: null
-        magicalBonus: null
         dex: null
       cover: null
       hp:
@@ -3402,7 +3515,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!QuillatheLv17000.C9uK2B5CpCVfyrnm.67ofG0FVqrrkAHKa
@@ -3414,7 +3527,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -3451,7 +3564,6 @@ items:
         recovery: []
       armor:
         value: 12
-        magicalBonus: null
         dex: null
       hp:
         value: null
@@ -3534,7 +3646,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!QuillatheLv17000.zLB9qhJw8z2FSbCO.Ia22qJNjjPZu6Ecu
@@ -3546,7 +3658,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -3618,7 +3730,6 @@ items:
       type:
         value: martialM
         baseItem: shortsword
-      magicalBonus: null
       properties:
         - fin
         - lgt
@@ -3694,6 +3805,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       ammunition: {}
       mastery: vex
       identifier: shortsword
@@ -3764,7 +3876,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _id: gLccFyt5Ads895EF
         _key: >-
@@ -3777,7 +3889,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -3849,7 +3961,6 @@ items:
       type:
         value: martialR
         baseItem: longbow
-      magicalBonus: null
       properties:
         - amm
         - hvy
@@ -3926,6 +4037,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       ammunition:
         type: arrow
       mastery: slow
@@ -3998,7 +4110,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!QuillatheLv17000.qdxxGDu9tguu68Fu.gqyFZ7nuMpEXPwbz
@@ -4010,7 +4122,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -4067,7 +4179,6 @@ items:
       type:
         value: ammo
         subtype: arrow
-      magicalBonus: null
       properties: []
       activities: {}
       identifier: arrows
@@ -4130,7 +4241,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!QuillatheLv17000.WiXfB8xRlPdC7kiB.ZRYrh1jfIMsjyDZC
@@ -4142,7 +4253,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -4182,7 +4293,6 @@ items:
         recovery: []
       armor:
         value: null
-        magicalBonus: null
         dex: null
       hp:
         value: null
@@ -4218,7 +4328,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -4288,7 +4398,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -4331,7 +4441,6 @@ items:
         recovery: []
       armor:
         value: null
-        magicalBonus: null
         dex: null
       hp:
         value: null
@@ -4401,6 +4510,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: tinderbox
       crew:
         value: []
@@ -4417,7 +4527,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -4475,7 +4585,6 @@ items:
       type:
         value: trinket
         subtype: ''
-      magicalBonus: null
       properties: []
       activities:
         Y0LvyxjfVHNbp4CG:
@@ -4536,6 +4645,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         rYGOWDRcT5jBKvzq:
           type: check
           name: Burst Rope
@@ -4590,6 +4700,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         5q6tX1T7ONDvgJiA:
           type: check
           name: Escape Check
@@ -4644,6 +4755,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: rope
     _id: NQXrw78HaPfjDwCR
     type: consumable
@@ -4658,7 +4770,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -4708,7 +4820,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -4768,7 +4880,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -4834,6 +4946,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -4878,7 +4991,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties: []
     effects: []
     folder: uDk4FBYfcP2JnX6t
@@ -4889,7 +5001,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     _id: 6kKffxM60Oq7uyzV
     sort: 100000
@@ -4944,7 +5056,6 @@ items:
       type:
         value: trinket
         subtype: ''
-      magicalBonus: null
       properties: []
       activities:
         SouNhSdWdnznKCam:
@@ -5030,6 +5141,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: torch
     _id: sMFxms44gxWpPEzK
     type: consumable
@@ -5044,7 +5156,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -5113,7 +5225,6 @@ items:
       type:
         value: potion
         subtype: ''
-      magicalBonus: null
       properties: []
       activities:
         FoeoumkYcnAsGCRo:
@@ -5178,6 +5289,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         mDj3jtAY6ICmi1ZL:
           type: damage
           name: Douse Space
@@ -5247,6 +5359,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: oil
     _id: IllhigPdXlPBx5Mu
     type: consumable
@@ -5261,7 +5374,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -5313,7 +5426,6 @@ items:
       type:
         value: food
         subtype: ''
-      magicalBonus: null
       properties: []
       activities: {}
       identifier: rations
@@ -5330,7 +5442,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -5374,7 +5486,7 @@ items:
       activities: {}
       enchant: {}
       identifier: deft-explorer
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     flags:
@@ -5388,7 +5500,7 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrDeftExplor
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -5431,7 +5543,7 @@ items:
       activities: {}
       enchant: {}
       identifier: fighting-style
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     flags:
@@ -5445,7 +5557,7 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrFightingSt
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -5484,7 +5596,7 @@ items:
       activities: {}
       enchant: {}
       identifier: archery
-      advancement: []
+      advancement: {}
       crewed: false
     _id: 1eURR2YWZ0hqplDM
     type: feat
@@ -5522,7 +5634,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!QuillatheLv17000.1eURR2YWZ0hqplDM.kigkIjyf2OGWqdVU
@@ -5539,7 +5651,7 @@ items:
       compendiumSource: Compendium.dnd5e.feats24.Item.phbfstArchery000
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -5647,6 +5759,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         AT2HMo0pCz5YWc9e:
           _id: AT2HMo0pCz5YWc9e
           type: forward
@@ -5676,6 +5789,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: longstrider
       method: spell
       prepared: 2
@@ -5717,7 +5831,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!QuillatheLv17000.XtHfUCHDXdBgFfic.I746neZVrgJFkRco
@@ -5734,7 +5848,7 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplLongstride
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -5761,7 +5875,8 @@ items:
       identifier: hunter
       classIdentifier: ranger
       advancement:
-        - _id: wacj6x75L5ZaZUky
+        wacj6x75L5ZaZUky:
+          _id: wacj6x75L5ZaZUky
           type: ItemGrant
           configuration:
             items:
@@ -5777,7 +5892,10 @@ items:
               xge2yOOVa1Iql8ni: Compendium.dnd5e.classes24.Item.phbrgrHuntersPre
           level: 3
           title: Subclass Features
-        - _id: 4nA7C6uQhBJBtWdS
+          flags: {}
+          hint: ''
+        4nA7C6uQhBJBtWdS:
+          _id: 4nA7C6uQhBJBtWdS
           type: ItemGrant
           configuration:
             items:
@@ -5790,7 +5908,10 @@ items:
               JDKf3MYdULCfvE8u: Compendium.dnd5e.classes24.Item.phbrgrDefensiveT
           level: 7
           title: Subclass Features
-        - _id: gBE1JZA0jf6dglQu
+          flags: {}
+          hint: ''
+        gBE1JZA0jf6dglQu:
+          _id: gBE1JZA0jf6dglQu
           type: ItemGrant
           configuration:
             items:
@@ -5803,7 +5924,10 @@ items:
               OejUB8AXLOYYiReZ: Compendium.dnd5e.classes24.Item.phbrgrSuperiorHu
           level: 11
           title: Subclass Features
-        - _id: 1P4RbYyrzFoutFrj
+          flags: {}
+          hint: ''
+        1P4RbYyrzFoutFrj:
+          _id: 1P4RbYyrzFoutFrj
           type: ItemGrant
           configuration:
             items:
@@ -5816,6 +5940,8 @@ items:
               wvR8ITunA6O5rhTG: Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe
           level: 15
           title: Subclass Features
+          flags: {}
+          hint: ''
       spellcasting:
         progression: none
         ability: ''
@@ -5831,7 +5957,7 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrHunter0000
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 500000
     ownership:
@@ -5873,7 +5999,7 @@ items:
       activities: {}
       enchant: {}
       identifier: hunters-lore
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     flags:
@@ -5887,7 +6013,7 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrHuntersLor
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 300000
     ownership:
@@ -6018,7 +6144,7 @@ items:
           img: icons/creatures/magical/construct-iron-stomping-yellow.webp
       enchant: {}
       identifier: hunters-prey
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     flags:
@@ -6032,7 +6158,7 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrHuntersPre
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 400000
     ownership:
@@ -6137,6 +6263,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         XWwiEoCo98SksV6N:
           _id: XWwiEoCo98SksV6N
           type: forward
@@ -6166,6 +6293,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: pass-without-trace
       method: spell
       prepared: 2
@@ -6209,7 +6337,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!QuillatheLv17000.fG9QhmaWPRLmAgpi.MDdoug4Lfu8klZRO
@@ -6226,7 +6354,7 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplPasswithou
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -6264,7 +6392,7 @@ items:
       activities: {}
       enchant: {}
       identifier: extra-attack
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     flags:
@@ -6278,7 +6406,7 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrExtraAttac
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -6328,7 +6456,6 @@ items:
       attunement: required
       armor:
         value: null
-        magicalBonus: null
         dex: null
       cover: null
       hp:
@@ -6384,7 +6511,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!QuillatheLv17000.Px3TIzuYqwF0x8wB.qoOJIw0gTdN8DBKB
@@ -6422,7 +6549,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!QuillatheLv17000.Px3TIzuYqwF0x8wB.PSGGfFEy4CjBVzyX
@@ -6433,7 +6560,7 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgBracersOfArch
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 4400000
     ownership:
@@ -6502,7 +6629,7 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgQuiverOfEhlon
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 1000000
     ownership:
@@ -6562,7 +6689,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -6625,7 +6752,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -6688,7 +6815,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -6834,6 +6961,7 @@ items:
             requireIdentification: false
             requireMagic: false
           flags: {}
+          img: null
       identifier: aid
       method: spell
       sourceClass: ranger
@@ -6874,7 +7002,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!QuillatheLv17000.AmZK3JT82HiCjW57.XyGKCCrIhrFlixG8
@@ -6910,7 +7038,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _id: cTNQ2KRJLj4CRpQJ
         _key: >-
@@ -6947,7 +7075,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _id: 6hOGzq87iQntkHE5
         _key: >-
@@ -6984,7 +7112,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _id: Fs7zeTW4u9SvteWO
         _key: >-
@@ -7021,7 +7149,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _id: o1Gvp7nIrEHqdn3g
         _key: >-
@@ -7058,7 +7186,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _id: n4jjrd9bNOaDkos7
         _key: >-
@@ -7095,7 +7223,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _id: EHMDA2J47jwUUTKu
         _key: >-
@@ -7132,7 +7260,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _id: YnQP5Rd6w5NwZVLN
         _key: >-
@@ -7146,7 +7274,7 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplAid0000000
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -7269,7 +7397,7 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplGoodberry0
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -7395,6 +7523,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: magic-weapon
       method: spell
       sourceClass: ranger
@@ -7453,7 +7582,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!QuillatheLv17000.IvRfwU6y7Jd3myjn.IMt1nMPrWppyRYMT
@@ -7507,7 +7636,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!QuillatheLv17000.IvRfwU6y7Jd3myjn.9zA6SFF8HKk9xNn2
@@ -7561,7 +7690,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!QuillatheLv17000.IvRfwU6y7Jd3myjn.AJQwm1dgXz7D333k
@@ -7574,7 +7703,7 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplMagicWeapo
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -7699,6 +7828,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: spike-growth
       method: spell
       sourceClass: ranger
@@ -7716,7 +7846,7 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplSpikeGrowt
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -7778,7 +7908,7 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagCaseMaporSc
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -7840,6 +7970,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -7883,7 +8014,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties:
         - mgc
       attuned: false
@@ -7897,7 +8027,7 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgSpellScroll1s
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     _id: QBcSv9jLpl0ySf5L
     sort: 0
@@ -8011,6 +8141,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: detect-poison-and-disease
       method: spell
       prepared: 0
@@ -8047,7 +8178,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!QuillatheLv17000.jpgUr2RWhFZ7fH8o.zSS8rmsXm5JCaM5x
@@ -8105,7 +8236,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!QuillatheLv17000.jpgUr2RWhFZ7fH8o.dnd5espellchange
@@ -8120,7 +8251,7 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDetectPois
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     _id: jpgUr2RWhFZ7fH8o
     ownership:
@@ -8198,6 +8329,7 @@ items:
             requireAttunement: false
             requireIdentification: false
           flags: {}
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -8241,7 +8373,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties:
         - mgc
       attuned: false
@@ -8254,7 +8385,7 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgPotionOfHeali
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 100000
     ownership:
@@ -8294,7 +8425,7 @@ items:
       activities: {}
       enchant: {}
       identifier: roving
-      advancement: []
+      advancement: {}
       crewed: false
     effects:
       - name: Roving
@@ -8340,7 +8471,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!QuillatheLv17000.FQhcgSTOwqlAuxp2.J9RWCSmYGnP0fkn1
@@ -8355,7 +8486,7 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrRoving0000
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -8465,7 +8596,7 @@ items:
           img: icons/skills/melee/shield-block-gray-yellow.webp
       enchant: {}
       identifier: defensive-tactics
-      advancement: []
+      advancement: {}
       crewed: false
     effects:
       - name: Multiattack Defense
@@ -8496,7 +8627,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!QuillatheLv17000.JDKf3MYdULCfvE8u.oviiTMxQRTnne9oc
@@ -8511,7 +8642,7 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrDefensiveT
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 100000
     ownership:
@@ -8553,7 +8684,7 @@ items:
       activities: {}
       enchant: {}
       identifier: expertise
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     flags:
@@ -8567,7 +8698,7 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrExpertise0
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -8678,6 +8809,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         y2cSZJxteG7Yew0u:
           type: utility
           name: Decrease Exhaustion
@@ -8735,9 +8867,10 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       enchant: {}
       identifier: tireless
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     flags:
@@ -8751,7 +8884,7 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrTireless00
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -8856,9 +8989,10 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       enchant: {}
       identifier: superior-hunters-prey
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     flags:
@@ -8872,7 +9006,7 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrSuperiorHu
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 500000
     ownership:
@@ -9007,6 +9141,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         dnd5eactivity100:
           _id: dnd5eactivity100
           type: save
@@ -9069,6 +9204,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: conjure-animals
       method: spell
       sourceClass: ranger
@@ -9087,7 +9223,7 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplConjureAni
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -9201,6 +9337,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: revivify
       method: spell
       sourceClass: ranger
@@ -9219,7 +9356,7 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplRevivify00
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -9324,6 +9461,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: jump
       method: spell
       sourceClass: ranger
@@ -9362,7 +9500,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!QuillatheLv17000.wA3SrliOxfMNxk4K.Esyd01OZ3NCv8gtp
@@ -9375,7 +9513,7 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplJump000000
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -9563,7 +9701,7 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplPlantGrowt
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -9606,7 +9744,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -9649,7 +9787,6 @@ items:
       attunement: required
       armor:
         value: null
-        magicalBonus: null
         dex: null
       cover: null
       hp:
@@ -9705,7 +9842,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!QuillatheLv17000.YSOKmqFKv3L5CjDC.LsvHisOX7EGZ8oQg
@@ -9716,7 +9853,7 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgCloakOfProtec
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 8100000
     ownership:
@@ -9779,6 +9916,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -9824,7 +9962,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties:
         - mgc
     effects: []
@@ -9836,7 +9973,7 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgSpellScroll3r
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     _id: HNapttFM9XtXh3yZ
     sort: 0
@@ -9942,6 +10079,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: daylight
       method: spell
       prepared: 0
@@ -10003,7 +10141,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!QuillatheLv17000.BAH8d6zDklJLKUKW.dnd5espellchange
@@ -10018,7 +10156,7 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDaylight00
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     _id: BAH8d6zDklJLKUKW
     ownership:
@@ -10081,6 +10219,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -10126,7 +10265,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties:
         - mgc
     effects: []
@@ -10138,7 +10276,7 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgSpellScroll2n
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     _id: sQxo9ZuqIBneBxrb
     sort: 0
@@ -10245,6 +10383,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: silence
       method: spell
       prepared: 0
@@ -10290,7 +10429,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!QuillatheLv17000.uxOMNRcu2iOeylo6.kjbKMAk1y5VUyEoT
@@ -10348,7 +10487,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!QuillatheLv17000.uxOMNRcu2iOeylo6.dnd5espellchange
@@ -10363,7 +10502,7 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplSilence000
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     _id: uxOMNRcu2iOeylo6
     ownership:
@@ -10426,6 +10565,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -10471,7 +10611,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties:
         - mgc
     effects: []
@@ -10483,7 +10622,7 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgSpellScroll2n
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     _id: pc1OhjXAcaglfiFO
     sort: 0
@@ -10585,6 +10724,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: protection-from-poison
       method: spell
       prepared: 0
@@ -10627,7 +10767,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!QuillatheLv17000.gRtGvsb8FEvgcJfy.zTci2V6Iij0r0IIg
@@ -10685,7 +10825,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!QuillatheLv17000.gRtGvsb8FEvgcJfy.dnd5espellchange
@@ -10700,7 +10840,7 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplProtection
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     _id: gRtGvsb8FEvgcJfy
     ownership:
@@ -10772,6 +10912,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -10819,7 +10960,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties:
         - mgc
       attuned: false
@@ -10832,7 +10972,7 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgPotionOfGrowt
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -10961,6 +11101,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: enlarge-reduce
       method: spell
       prepared: 0
@@ -11019,7 +11160,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!QuillatheLv17000.1AjUB13d58Xc0f1I.Wi2E10l7n6Ka8k6u
@@ -11075,7 +11216,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!QuillatheLv17000.1AjUB13d58Xc0f1I.NXdtOxX4HvPeodml
@@ -11121,7 +11262,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!QuillatheLv17000.1AjUB13d58Xc0f1I.dnd5espellchange
@@ -11136,7 +11277,7 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplEnlargeRed
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     _id: 1AjUB13d58Xc0f1I
     ownership:
@@ -11249,6 +11390,7 @@ items:
             requireAttunement: false
             requireIdentification: false
           flags: {}
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -11298,7 +11440,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties:
         - mgc
       attuned: false
@@ -11335,7 +11476,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _id: UI7peFQB9vCGuwpG
         _key: >-
@@ -11348,7 +11489,7 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgPotionOfResis
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -11385,7 +11526,7 @@ items:
       activities: {}
       enchant: {}
       identifier: relentless-hunter
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     flags:
@@ -11402,7 +11543,7 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrRelentless
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -11506,9 +11647,10 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       enchant: {}
       identifier: natures-veil
-      advancement: []
+      advancement: {}
       crewed: false
     effects:
       - name: Veiled
@@ -11540,7 +11682,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!QuillatheLv17000.10WHYbMxQT3Pkvvn.NOSQczI2MCQ5Ha8F
@@ -11558,7 +11700,7 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrNaturesVei
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -11683,7 +11825,7 @@ items:
             requireMagic: false
       enchant: {}
       identifier: superior-hunters-defense
-      advancement: []
+      advancement: {}
       crewed: false
     effects:
       - name: 'Hunter''s Defense: Acid'
@@ -11718,7 +11860,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!QuillatheLv17000.wvR8ITunA6O5rhTG.jZGIulxQFLY7uRDe
@@ -11753,7 +11895,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _id: HybTLXiZgGa3t61e
         _key: >-
@@ -11789,7 +11931,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _id: 6z5fLOHiOiHHcuac
         _key: >-
@@ -11825,7 +11967,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _id: DW6JJBsbBtR1Z75R
         _key: >-
@@ -11861,7 +12003,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _id: 2kTlaPSpacxduIm7
         _key: >-
@@ -11897,7 +12039,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _id: 5ZizSWuVy8cy77K1
         _key: >-
@@ -11933,7 +12075,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _id: fcFLysPw4llFTQsg
         _key: >-
@@ -11969,7 +12111,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _id: 8Uf0Dw8A3l7CI8Fd
         _key: >-
@@ -12005,7 +12147,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _id: PpWYucbhugNEIBJ7
         _key: >-
@@ -12041,7 +12183,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _id: BbvC3rh4RDmi06XI
         _key: >-
@@ -12077,7 +12219,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _id: IFg9ae4ZyhMDPa3m
         _key: >-
@@ -12113,7 +12255,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _id: 30KWef6vBjF8RChr
         _key: >-
@@ -12149,7 +12291,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _id: P7YUT6Y1NXGpo5Er
         _key: >-
@@ -12169,7 +12311,7 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 200000
     ownership:
@@ -12208,7 +12350,7 @@ items:
       activities: {}
       enchant: {}
       identifier: precise-hunter
-      advancement: []
+      advancement: {}
       crewed: false
     effects: []
     flags:
@@ -12225,7 +12367,7 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrPreciseHun
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -12354,6 +12496,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
         GAQKUmYcWR3SjxiV:
           type: utility
           name: Disengage
@@ -12499,7 +12642,7 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplConjureWoo
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -12612,6 +12755,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: freedom-of-movement
       method: spell
       sourceClass: ranger
@@ -12667,7 +12811,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!QuillatheLv17000.49e3TnqIESzb2GJO.bcTPZ6dJ4kHwaBRD
@@ -12684,7 +12828,7 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplFreedomofM
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -12796,6 +12940,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: commune-with-nature
       method: spell
       sourceClass: ranger
@@ -12817,7 +12962,7 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplCommunewit
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -12919,6 +13064,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       identifier: greater-restoration
       method: spell
       sourceClass: ranger
@@ -12940,7 +13086,7 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplGreaterRes
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -13011,6 +13157,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -13074,7 +13221,7 @@ items:
             enabled: false
           scaling:
             number: 1
-      magicalBonus: 2
+      magicalBonus: '2'
       properties:
         - fin
         - lgt
@@ -13103,7 +13250,7 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgScimitarOfSpe
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 10300000
     ownership:
@@ -13143,7 +13290,6 @@ items:
       attunement: ''
       armor:
         value: null
-        magicalBonus: null
         dex: null
       cover: null
       hp:
@@ -13221,9 +13367,8 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
-          lastModifiedBy: dnd5ebuilder0000
-          modifiedTime: 1768930955891
+          systemVersion: 5.3.0
+          lastModifiedBy: null
         _id: hSWVhzFL2QHiPTM7
         _key: >-
           !actors.items.effects!QuillatheLv17000.h4Q2QymTfaHU0ab9.hSWVhzFL2QHiPTM7
@@ -13261,7 +13406,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _id: qIbBbG37LJtqFZrn
         _key: >-
@@ -13274,7 +13419,7 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgsupRingofResi
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -13371,6 +13516,7 @@ items:
             requireIdentification: true
             requireAttunement: false
           flags: {}
+          img: null
       uses:
         spent: 0
         recovery:
@@ -13410,7 +13556,6 @@ items:
       attunement: ''
       armor:
         value: null
-        magicalBonus: null
         dex: null
       cover: null
       hp:
@@ -13437,7 +13582,7 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgBrazierOfComm
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 4700000
     ownership:
@@ -13517,7 +13662,7 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgBagOfHolding0
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 300000
     ownership:
@@ -13575,7 +13720,6 @@ items:
       type:
         value: ammo
         subtype: arrow
-      magicalBonus: null
       properties: []
       activities: {}
       identifier: arrows
@@ -13638,7 +13782,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!QuillatheLv17000.gFkeCeFDSffdlH3p.tptcsnQAGMErdXAT
@@ -13654,7 +13798,7 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbamoArrows0000
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -13730,6 +13874,7 @@ items:
             requireAttunement: false
             requireIdentification: false
           flags: {}
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -13776,7 +13921,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties:
         - mgc
       attuned: false
@@ -13829,7 +13973,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         img: icons/magic/holy/chalice-glowing-gold-water.webp
         type: base
@@ -13844,7 +13988,7 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgPotionOfHeroi
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -13920,6 +14064,7 @@ items:
             requireAttunement: false
             requireIdentification: false
           flags: {}
+          img: null
       uses:
         spent: 0
         recovery: []
@@ -13967,7 +14112,6 @@ items:
           scaling:
             number: 1
         replace: false
-      magicalBonus: null
       properties:
         - mgc
       attuned: false
@@ -14002,7 +14146,7 @@ items:
           exportSource: null
           coreVersion: '13.351'
           systemId: dnd5e
-          systemVersion: 5.2.4
+          systemVersion: 5.3.0
           lastModifiedBy: null
         _key: >-
           !actors.items.effects!QuillatheLv17000.cobOKdYKDb23oIax.FuzyfcWOcC3IXsDB
@@ -14013,7 +14157,7 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgPotionOfWater
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     sort: 0
     ownership:
@@ -14057,7 +14201,7 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 5.3.0
       lastModifiedBy: null
     ownership:
       default: 0
@@ -14069,9 +14213,9 @@ _stats:
   exportSource: null
   coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.2.4
-  createdTime: 1768861298481
-  modifiedTime: 1768869916929
+  systemVersion: 5.3.0
+  createdTime: 1771452688753
+  modifiedTime: 1771452688753
   lastModifiedBy: dnd5ebuilder0000
 img: null
 folder: mxujixfhj5hEnENw

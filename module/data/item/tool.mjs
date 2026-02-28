@@ -153,7 +153,7 @@ export default class ToolData extends ItemDataModel.mixin(
     if ( Number.isFinite(this.proficient) ) return this.proficient;
     const actor = this.parent.actor;
     if ( !actor ) return 0;
-    if ( actor.type === "npc" ) return 1;
+    if ( actor.system.isNPC ) return 1;
     const baseItemProf = actor.system.tools?.[this.type.baseItem];
     const categoryProf = actor.system.tools?.[this.type.value];
     return Math.max(baseItemProf?.value ?? 0, categoryProf?.value ?? 0);
@@ -230,6 +230,7 @@ export default class ToolData extends ItemDataModel.mixin(
   /** @inheritDoc */
   async _preCreate(data, options, user) {
     if ( (await super._preCreate(data, options, user)) === false ) return false;
+    this.preCreateGear(data, options, user);
     if ( this.activities.size ) return;
 
     const activityData = new CONFIG.DND5E.activityTypes.check.documentClass({}, { parent: this.parent }).toObject();

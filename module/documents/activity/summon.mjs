@@ -78,7 +78,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
   /** @inheritDoc */
   _finalizeMessageConfig(usageConfig, messageConfig, results) {
     super._finalizeMessageConfig(usageConfig, messageConfig, results);
-    delete messageConfig.data.flags?.dnd5e?.use?.effects;
+    delete messageConfig.data.system?.effects;
   }
 
   /* -------------------------------------------- */
@@ -317,7 +317,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
     }
 
     // Add bonus to HD
-    if ( this.bonuses.hd && (actor.type === "npc") ) {
+    if ( this.bonuses.hd && actor.system.isNPC ) {
       const hdBonus = new Roll(this.bonuses.hd, rollData);
       await hdBonus.evaluate();
       if ( hdBonus.total ) {
@@ -372,6 +372,13 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
           actorUpdates["system.attributes.hp.value"] = actor.system.attributes.hp.value + hpBonus.total;
         }
       }
+    }
+
+    // Add temp HP
+    if ( this.tempHP ) {
+      const tempHP = new Roll(this.tempHP, rollData);
+      await tempHP.evaluate();
+      actorUpdates["system.attributes.hp.temp"] = tempHP.total;
     }
 
     // Change creature size
@@ -587,22 +594,5 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
     } catch(err) {
       Hooks.onError("SummonsActivity#placeSummons", err, { log: "error", notify: "error" });
     }
-  }
-
-  /* -------------------------------------------- */
-  /*  Deprecations                                */
-  /* -------------------------------------------- */
-
-  /**
-   * @deprecated
-   * @since 5.1.0
-   * @ignore
-   */
-  fetchActor(uuid) {
-    foundry.utils.logCompatibilityWarning("SummonActivity#fetchActor is deprecated. "
-      + "Please use Actor5e.fetchExisting instead.", { since: "DnD5e 5.1", until: "DnD5e 5.3" });
-    return dnd5e.documents.Actor5e.fetchExisting(uuid, {
-      origin: { key: "flags.dnd5e.summon.origin", value: this.item?.uuid }
-    });
   }
 }

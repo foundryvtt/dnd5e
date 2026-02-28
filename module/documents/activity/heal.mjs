@@ -37,7 +37,7 @@ export default class HealActivity extends ActivityMixin(BaseHealActivityData) {
 
   /** @override */
   get damageFlavor() {
-    return game.i18n.localize("DND5E.HealingRoll");
+    return game.i18n.localize("DND5E.HEAL.HealingRoll");
   }
 
   /* -------------------------------------------- */
@@ -48,7 +48,7 @@ export default class HealActivity extends ActivityMixin(BaseHealActivityData) {
   _usageChatButtons(message) {
     if ( !this.healing.formula ) return super._usageChatButtons(message);
     return [{
-      label: game.i18n.localize("DND5E.Healing"),
+      label: game.i18n.localize("DND5E.HEAL.HealingButton"),
       icon: '<i class="dnd5e-icon" data-src="systems/dnd5e/icons/svg/damage/healing.svg"></i>',
       dataset: {
         action: "rollHealing"
@@ -61,6 +61,18 @@ export default class HealActivity extends ActivityMixin(BaseHealActivityData) {
   /** @override */
   async _triggerSubsequentActions(config, results) {
     this.rollDamage({ event: config.event }, {}, { data: { "flags.dnd5e.originatingMessage": results.message?.id } });
+  }
+
+  /* -------------------------------------------- */
+  /*  Rolling                                     */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async rollDamage(config={}, dialog={}, message={}) {
+    const messageConfig = foundry.utils.mergeObject({
+      ["data.flags.dnd5e.roll.type"]: "healing"
+    }, message);
+    return super.rollDamage(config, dialog, messageConfig);
   }
 
   /* -------------------------------------------- */
