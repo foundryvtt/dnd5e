@@ -1,4 +1,4 @@
-![Up to date as of 5.2.0](https://img.shields.io/static/v1?label=dnd5e&message=5.2.0&color=informational)
+![Up to date as of 5.3.0](https://img.shields.io/static/v1?label=dnd5e&message=5.3.0&color=informational)
 
 This document only covers Active Effects available to the Core dnd5e System.
 
@@ -26,7 +26,8 @@ Useful examples:
 
 | Change Mode | Description |
 |------------ | ------------|
-| Add         | Adds the provided value to the specified attribute. For numerical attributes, this can be used to both add and subtract from a particular value by specifying `1` or `-1` as the value to add. For sets such as an item's properties or character's damage resistances this can be used to add or remove and entry (e.g. `mgc` to add the magical property, or `-mgc` to remove it).  |
+| Add         | Adds the provided value to the specified attribute. For numerical attributes, this can be used to both add and subtract from a particular value by specifying `1` or `-1` as the value to add. For sets such as an item's properties or character's damage resistances this can be used to add or remove an entry (e.g. `mgc` to add the magical property, or `-mgc` to remove it).  |
+| Subtract    | **V14 or higher.** Subtracts the provided value from the specified attribute. For sets such as an item's properties or character's damage reisistances this can be used to remove an entry. |
 | Multiply    | Multiplies the defined attribute by the numeric value in the Effect Value field. |
 | Override    | Replaces the defined attribute with the value provided in the Effect Value field. If applied to a text value such as a name or description a pair of curly brackets like `{}` can be used to include the value being overriden in the final output. So overriding on the name of "Breastplate" with `Arcane Propulsive {}` will result in the final name of "Arcane Propulsive Breastplate". |
 | Downgrade   | Reduces the defined attribute only in cases where the current value of that attribute would be greater than value specified in the Effect Value field.|
@@ -322,7 +323,7 @@ E.g. A Feature or Spell which increases all movement speeds by a certain amount.
 ## Senses
 
 ```
-system.attributes.senses.[senseType]
+system.attributes.senses.ranges.[senseType]
                          units
                          special
 ```
@@ -347,17 +348,17 @@ system.attributes.senses.[senseType]
 ### Set or Upgrade a Sense
 E.g. A Feature or Spell which grants or upgrades darkvision.
 
-| Attribute Key                            | Change Mode | Effect Value | Roll Data? |
-| ---------------------------------------- | ----------- | ------------ | ---------- |
-| `system.attributes.senses.[senseType]`   | Upgrade     | `[number]`   | No         |
+| Attribute Key                                    | Change Mode | Effect Value | Roll Data? |
+| ------------------------------------------------ | ----------- | ------------ | ---------- |
+| `system.attributes.senses..ranges.[senseType]`   | Upgrade     | `[number]`   | No         |
 
 
 ### Override a Sense
 E.g. A Feature which sets a sense to an exact value.
 
-| Attribute Key                            | Change Mode | Effect Value | Roll Data? |
-| ---------------------------------------- | ----------- | ------------ | ---------- |
-| `system.attributes.senses.[senseType]`   | Override    | `[number]`   | No         |
+| Attribute Key                                   | Change Mode | Effect Value | Roll Data? |
+| ----------------------------------------------- | ----------- | ------------ | ---------- |
+| `system.attributes.senses.ranges.[senseType]`   | Override    | `[number]`   | No         |
 
 
 ------------------------
@@ -554,6 +555,7 @@ system.traits.ci.value
 >
 > | Damage Type | Value         |
 > | ----------- | ------------- |
+> | All Types   | `ALL`         |
 > | Acid        | `acid`        |
 > | Bludgeoning | `bludgeoning` |
 > | Cold        | `cold`        |
