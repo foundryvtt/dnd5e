@@ -1134,7 +1134,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async deleteDialog(options={}) {
+  async deleteDialog(dialogOptions={}, operation={}) {
     // If item has advancement, handle it separately
     if ( this.actor?.system.metadata?.supportsAdvancement && !game.settings.get("dnd5e", "disableAdvancements") ) {
       const manager = AdvancementManager.forDeletedItem(this.actor, this.id);
@@ -1152,23 +1152,26 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Display custom delete dialog when deleting a container with contents
     const count = await this.system.contentsCount;
     if ( count ) {
-      return Dialog.confirm({
-        title: `${game.i18n.format("DOCUMENT.Delete", {type: game.i18n.localize("DND5E.Container")})}: ${this.name}`,
-        content: `<h4>${game.i18n.localize("AreYouSure")}</h4>
-          <p>${game.i18n.format("DND5E.ContainerDeleteMessage", {count})}</p>
-          <label>
-            <input type="checkbox" name="deleteContents">
-            ${game.i18n.localize("DND5E.ContainerDeleteContents")}
-          </label>`,
-        yes: html => {
-          const deleteContents = html.querySelector('[name="deleteContents"]').checked;
-          this.delete({ deleteContents });
-        },
-        options: { ...options, jQuery: false }
-      });
+      const type = game.i18n.localize("DND5E.Container");
+      return foundry.applications.api.DialogV2.confirm(foundry.utils.mergeObject({
+        window: { title: `${game.i18n.format("DOCUMENT.Delete", { type })}: ${this.name}` },
+        position: { width: 400 },
+        content: `
+          <p><strong>${game.i18n.localize("AreYouSure")}</strong></p>
+          <p>${game.i18n.format("DND5E.ContainerDeleteMessage", { count })}</p>
+          <div class="form-group">
+            <label for="deleteContents">${game.i18n.localize("DND5E.ContainerDeleteContents")}</label>
+            <input type="checkbox" id="deleteContents" name="deleteContents">
+          </div>
+        `,
+        yes: { callback: (event, button) => {
+          const deleteContents = button.form.elements.deleteContents.checked;
+          this.delete({ ...operation, deleteContents });
+        }}
+      }, dialogOptions));
     }
 
-    return super.deleteDialog(options);
+    return super.deleteDialog(dialogOptions, operation);
   }
 
   /* -------------------------------------------- */
