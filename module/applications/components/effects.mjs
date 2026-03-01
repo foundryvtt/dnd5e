@@ -12,7 +12,10 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
 
     for ( const control of this.querySelectorAll("[data-action]") ) {
       control.addEventListener("click", event => {
-        this._onAction(event.currentTarget, event.currentTarget.dataset.action);
+        this._onAction(event.currentTarget, event.currentTarget.dataset.action, event);
+      });
+      control.addEventListener("contextmenu", event => {
+        this._onAction(event.currentTarget, event.currentTarget.dataset.action, event);
       });
     }
 
@@ -217,21 +220,22 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
 
   /**
    * Handle effects actions.
-   * @param {Element} target  Button or context menu entry that triggered this action.
-   * @param {string} action   Action being triggered.
+   * @param {Element} target         Button or context menu entry that triggered this action.
+   * @param {string} action          Action being triggered.
+   * @param {PointerEvent} [event]   Original pointer event if available.
    * @returns {Promise}
    * @protected
    */
-  async _onAction(target, action) {
-    const event = new CustomEvent("effect", {
+  async _onAction(target, action, event) {
+    const customEvent = new CustomEvent("effect", {
       bubbles: true,
       cancelable: true,
       detail: action
     });
-    if ( target.dispatchEvent(event) === false ) return;
+    if ( target.dispatchEvent(customEvent) === false ) return;
 
     if ( action === "toggleCondition" ) {
-      return this._onToggleCondition(target.closest("[data-condition-id]")?.dataset.conditionId);
+      return this._onToggleCondition(target.closest("[data-condition-id]")?.dataset.conditionId, event);
     }
 
     const dataset = target.closest("[data-effect-id]")?.dataset;
@@ -261,11 +265,21 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
 
   /**
    * Handle toggling a condition.
-   * @param {string} conditionId  The condition identifier.
+   * @param {string} conditionId       The condition identifier.
+   * @param {PointerEvent} [event]     Original pointer event if available.
    * @returns {Promise}
    * @protected
    */
-  async _onToggleCondition(conditionId) {
+  async _onToggleCondition(conditionId, event) {
+    // Handle exhaustion specially - increment/decrement level
+    if ( conditionId === "exhaustion" ) {
+      // Initialize exhaustion to 0 if not set
+      let level = foundry.utils.getProperty(this.document, "system.attributes.exhaustion");
+      if ( !Number.isFinite(level) ) await this.document.update({ "system.attributes.exhaustion": 0 });
+      return ActiveEffect.implementation._manageExhaustion(event, this.document);
+    }
+
+    // Handle other conditions normally
     const existing = this.document.effects.get(staticID(`dnd5e${conditionId}`));
     if ( existing ) return existing.delete();
     const effect = await ActiveEffect.implementation.fromStatusEffect(conditionId);
