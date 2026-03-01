@@ -1779,11 +1779,18 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       return item.update({ "system.container": container.id });
     }
 
+    // Transform physical items from NPCs to their gear versions
+    if ( item.actor?.system.isNPC && (item.actor !== this.actor) && item.system.asGear ) {
+      item = await item.system.asGear();
+    }
+
     // Otherwise, create a new copy inside the container
     const toCreate = await Item5e.createWithContents([item], {
       container,
       transformFirst: itemData => {
         if ( itemData instanceof foundry.abstract.Document ) itemData = itemData.toObject();
+        const stacked = this._onDropStackConsumables(event, itemData, { container: container.id });
+        if ( stacked ) return false;
         return this._onDropSingleItem(event, itemData);
       }
     });
