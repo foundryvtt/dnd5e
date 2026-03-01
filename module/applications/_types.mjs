@@ -39,6 +39,9 @@
 
 /**
  * @typedef CompendiumBrowserFilters
+ * @property {boolean} [exclusive]    When used in locked filters, locks all choices within filter categories that have
+ *                                     explicit values, preventing additional selections. Categories without values
+ *                                     remain unlocked.
  * @property {string} [documentClass]  Document type to fetch (e.g. Actor or Item).
  * @property {Set<string>} [types]     Individual document subtypes to filter upon (e.g. "loot", "class", "npc").
  * @property {object} [additional]     Additional type-specific filters applied.
