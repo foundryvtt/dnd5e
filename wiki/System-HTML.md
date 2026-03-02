@@ -1,4 +1,4 @@
-![Up to date as of 5.1.0](https://img.shields.io/static/v1?label=dnd5e&message=5.1.0&color=informational)
+![Up to date as of 5.3.0](https://img.shields.io/static/v1?label=dnd5e&message=5.3.0&color=informational)
 
 The D&D system provides several new CSS classes for formatting text. These styles can be applied to any text field by editing the Source HTML </> and following the examples below.
 
@@ -17,7 +17,8 @@ Specify the image using the img src attribute within the figure block and the te
     </article>
 </div>
 ```
-![](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/styles/fvttadvice.png)
+
+![Advice Block](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/styles/fvttadvice.png)
 
 ## Narrative
 The `fvtt narrative` class creates a text box for read-aloud text.
@@ -27,7 +28,8 @@ The `fvtt narrative` class creates a text box for read-aloud text.
     <p>The horses’ saddlebags have been looted. An empty leather map case lies nearby.</p>
 </div>
 ```
-![](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/styles/fvttnarrative.png)
+
+![Narrative Block](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/styles/fvttnarrative.png)
 
 ## Notable
 The `notable` class is used within an aside tag to create a callout box for additional information.
@@ -38,4 +40,28 @@ The `notable` class is used within an aside tag to create a callout box for addi
     <p>If the party helps Steve, the thief privately approaches certain members of the group and urges them to join the Secret Society of Stealing.</p>
 </aside>
 ```
-![](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/styles/fvttnotable.png)
+
+![Notable Block](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/styles/fvttnotable.png)
+
+## Habitat & Treasure
+
+The `habitat-treasure` style can be used to apply the styling used in the Monster Manual at the top of a monster's description to indicate what its habitat is and what treasure it provides.
+
+```html
+<p class="habitat-treasure">
+  <strong>Habitat:</strong> Underdark; <strong>Treasure:</strong> Arcana
+</p>
+```
+
+![Habitat & Treasure Block and Pull Quote](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/styles/habitat-treasure-quote.jpg)
+
+## Pull Quotes
+
+The combination of `quote-lg` class with `float-right` or `float-left` can produce a large pull quote set aside from the text. If the author for a quote is provided, then the `quote-author` class can be used to set it apart from the quote itself.
+
+```html
+<aside class="quote-lg float-right">
+  <p><q>I don't know half of you half as well as I should like; and I like less than half of you half as well as you deserve.</q></p>
+  <p class="quote-author">—Bilbo Baggins, <em>The Fellowship of the Rings</em></p>
+</aside>
+```

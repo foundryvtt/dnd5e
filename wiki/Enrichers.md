@@ -1,4 +1,4 @@
-![Up to date as of 5.1.0](https://img.shields.io/static/v1?label=dnd5e&message=5.1.0&color=informational)
+![Up to date as of 5.3.0](https://img.shields.io/static/v1?label=dnd5e&message=5.3.0&color=informational)
 
 The dnd5e system adds a number of useful enrichers that can be used within journals or in item or actor descriptions. These enrichers will generate text based on the standard formatting used throughout 5e releases and provide rolls and related behavior that properly hooks into the system.
 
@@ -392,6 +392,12 @@ A few additional parameters are available to transform the resulting text:
 
 // Example: Lookup a value from an activity
 [[lookup @save.dc.value activity=jdRTb04FngE1B8cF]]
+
+// Example: Display DC, targets, template, and range for an activity description
+// Results in "DC 14, each creature in a 10-foot-radius Sphere centered on a point within 30 feet."
+DC [[lookup @save.dc.value activity=jdRTb04FngE1B8cF]], [[lookup @labels.description.affects
+activity=jdRTb04FngE1B8cF]] in a [[lookup @labels.description.template activity=jdRTb04FngE1B8cF]]
+centered on a point within [[lookup @labels.description.range activity=jdRTb04FngE1B8cF]].
 ```
 
 #### Options

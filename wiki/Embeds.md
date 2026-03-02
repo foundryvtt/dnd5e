@@ -1,4 +1,4 @@
-![Up to date as of 5.2.0](https://img.shields.io/static/v1?label=dnd5e&message=5.2.0&color=informational)
+![Up to date as of 5.3.0](https://img.shields.io/static/v1?label=dnd5e&message=5.3.0&color=informational)
 
 Foundry provides an [enricher](Enrichers) that allows embedding a document within a journal page or description on an item or actor. The DnD5e system extends this functionality in several useful ways.
 
@@ -84,6 +84,16 @@ There are some situations where a value in a stat block from a book might not cl
 ```
 
 Keys are available to override everything in the upper section of the stat block (except the ability scores) using the following keys: `tag` (itself composed of `size`, `type`, and `alignment`), `ac`, `hp`, `speed`, `senses`, `cr`, `xp`, `pb`, `gear`, `languages`, `vulnerabilities`, `resistances`, `immunities`, `conditionImmunities`, `initiative`, and `skills`. Not all of these will be used depending on the rules version used when embedding.
+
+### Spells
+
+Spell items support an extra option when embedded, `details`. When used, this adds a new section above the description that includes the spells level, school, spell lists (in 2024 rules), casting time, range, components, and duration. This is formatted to match the presentation of spells in core rulebooks.
+
+![Spell Details](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/embeds/spell-details.jpg)
+
+```
+@Embed[Compendium.dnd5e.spells24.Item.phbsplMelfsAcidA details]
+```
 
 ## Roll Tables
 
