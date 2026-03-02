@@ -6,9 +6,9 @@ type: feat
 system:
   description:
     value: >-
-      <p>One creature charmed by the [[lookup @name lowercase]] takes <strong>10
+      <p>One creature charmed by the [[lookup @name lowercase]]{monster} takes <strong>10
       (3d6)</strong> <strong>psychic </strong>damage, and the [[lookup @name
-      lowercase]] regains hit points equal to the damage the creature takes.</p>
+      lowercase]]{monster} regains hit points equal to the damage the creature takes.</p>
     chat: ''
   source:
     custom: ''

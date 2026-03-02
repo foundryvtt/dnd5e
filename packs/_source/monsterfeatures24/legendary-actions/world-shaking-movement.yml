@@ -65,14 +65,14 @@ system:
     max: ''
   description:
     value: >-
-      <p class="feature">The [[lookup @name lowercase]] moves up to its Speed.
-      At the end of this movement, the [[lookup @name lowercase]] creates an
+      <p class="feature">The [[lookup @name lowercase]]{monster} moves up to its Speed.
+      At the end of this movement, the [[lookup @name lowercase]]{monster} creates an
       instantaneous shock wave in a [[lookup @target.template.size
       activity=g4W0ovZxBeUrZKb8]]-[[lookup @target.template.units
       activity=g4W0ovZxBeUrZKb8]]. Emanation originating from itself. Creatures
       in that area lose &amp;Reference[Concentration] and, if Medium or smaller,
       have the &amp;Reference[Prone apply=false] condition. The [[lookup @name
-      lowercase]] can't take this action again until the start of its next
+      lowercase]]{monster} can't take this action again until the start of its next
       turn.</p>
     chat: ''
   identifier: world-shaking-movement

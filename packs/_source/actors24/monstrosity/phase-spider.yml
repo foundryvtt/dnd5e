@@ -571,7 +571,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] can see 60 feet into
+          <p class="feature">The [[lookup @name lowercase]]{monster} can see 60 feet into
           the Ethereal Plane when it is on the Material Plane.</p>
         chat: ''
       identifier: ethereal-sight
@@ -621,7 +621,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] can climb difficult surfaces,
+          <p>The [[lookup @name lowercase]]{monster} can climb difficult surfaces,
           including along ceilings, without needing to make an ability
           check.</p>
         chat: ''
@@ -672,8 +672,8 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] ignores movement
-          restrictions caused by webs, and the [[lookup @name lowercase]] knows
+          <p class="feature">The [[lookup @name lowercase]]{monster} ignores movement
+          restrictions caused by webs, and the [[lookup @name lowercase]]{monster} knows
           the location of any other creature in contact with the same web.</p>
         chat: ''
       identifier: web-walker
@@ -776,7 +776,7 @@ items:
       description:
         value: >-
           <p><span style="font-family:'Roboto Condensed', sans-serif">The
-          </span>[[lookup @name lowercase]]<span style="font-family:'Roboto
+          </span>[[lookup @name lowercase]]{monster}<span style="font-family:'Roboto
           Condensed', sans-serif"> makes two </span>[[/item
           .mmBite0000000000]]<span style="font-family:'Roboto Condensed',
           sans-serif"> attacks.</span></p>
@@ -1093,7 +1093,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] teleports from the
+          <p class="feature">The [[lookup @name lowercase]]{monster} teleports from the
           Material Plane to the Ethereal Plane or vice versa.</p>
         chat: ''
       identifier: ethereal-jaunt

@@ -87,7 +87,7 @@ system:
       <p class="feature"><em>Wisdom Saving Throw:</em> DC [[lookup
       @save.dc.value activity=Y9H9ImnMcffBZlH3]], one [[lookup
       @target.affects.type activity=Y9H9ImnMcffBZlH3]] the [[lookup @name
-      lowercase]] can see within [[lookup @range.value
+      lowercase]]{monster} can see within [[lookup @range.value
       activity=Y9H9ImnMcffBZlH3]] feet. <em>Failure:</em> If the target has 20
       Hit Points or fewer, it has the &amp;Reference[Unconscious apply=false]
       condition for [[lookup @duration.value activity=Y9H9ImnMcffBZlH3]]

@@ -631,7 +631,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">If the [[lookup @name lowercase]] takes Cold
+          <p class="feature">If the [[lookup @name lowercase]]{monster} takes Cold
           damage, its Speed decreases by 20 feet until the end of its next
           turn.</p>
         chat: ''
@@ -728,7 +728,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] can enter an enemy's
+          <p class="feature">The [[lookup @name lowercase]]{monster} can enter an enemy's
           space and stop there. It can move through a space as narrow as 1 inch
           without expending extra movement to do so.</p>
         chat: ''
@@ -827,7 +827,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item
+          <p>The [[lookup @name lowercase]]{monster} makes two [[/item
           .mmSlam0000000000]] attacks.</p>
         chat: ''
       identifier: multiattack
@@ -1228,7 +1228,7 @@ items:
           <p class="feature"><em>Strength Saving Throw:</em> DC [[lookup
           @save.dc.value activity=TQchFj2VXXJgU7Lq]], each [[lookup
           @target.affects.type activity=TQchFj2VXXJgU7Lq]] in the [[lookup @name
-          lowercase]]'s space.</p><p class="feature"><em>Failure:</em> [[/damage
+          lowercase]]{monster}'s space.</p><p class="feature"><em>Failure:</em> [[/damage
           average activity=TQchFj2VXXJgU7Lq]] damage. If the target is a Large
           or smaller creature, it has the &amp;Reference[Grappled apply=false]
           condition (escape DC [[lookup @skills.ath.passive]]). Until the
@@ -1236,10 +1236,10 @@ items:
           apply=false] condition, is &amp;Reference[suffocating]{suffocating}
           unless it can breathe water, and takes [[/damage average
           activity=khxVwH3AB0sx1qRG]] damage at the start of each of the
-          [[lookup @name lowercase]]'s turns. The [[lookup @name lowercase]] can
+          [[lookup @name lowercase]]{monster}'s turns. The [[lookup @name lowercase]]{monster} can
           grapple one Large creature or up to two Medium or smaller creatures at
           a time with Whelm.</p><p class="feature">As an action, a creature
-          within 5 feet of the [[lookup @name lowercase]] can pull a creature
+          within 5 feet of the [[lookup @name lowercase]]{monster} can pull a creature
           out of it by succeeding on a [[/check ath dc=@skills.ath.passive
           format=long]].</p><p class="feature"><em>Success:</em> Half damage
           only.</p>

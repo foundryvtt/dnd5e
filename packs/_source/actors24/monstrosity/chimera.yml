@@ -619,7 +619,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes one [[/item
+          <p>The [[lookup @name lowercase]]{monster} makes one [[/item
           .mmRam00000000000]] attack, one [[/item .mmBite0000000000]] attack,
           and one  [[/item .mmClaw0000000000]] attack. It can replace the Claw
           attack with a use of [[/item .mmFireBreath0000]] if available.</p>
@@ -795,7 +795,7 @@ items:
         value: >-
           <p>[[/attack extended]]. [[/damage average extended]], or [[/damage
           average activity=HN2sfAtHqDMjMLXF]] damage if the [[lookup @name
-          lowercase]] had Advantage on the attack roll.</p>
+          lowercase]]{monster} had Advantage on the attack roll.</p>
         chat: ''
       identifier: bite
       source:

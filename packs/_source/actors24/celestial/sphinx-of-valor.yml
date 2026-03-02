@@ -573,7 +573,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">No magic can observe the [[lookup @name lowercase]]
+          <p class="feature">No magic can observe the [[lookup @name lowercase]]{monster}
           remotely or detect its thoughts without its permission. Wisdom
           (Insight) checks made to ascertain its intentions or sincerity are
           made with Disadvantage.</p>
@@ -679,7 +679,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] fails a saving throw, it can
+          <p>If the [[lookup @name lowercase]]{monster} fails a saving throw, it can
           choose to succeed instead.</p>
         chat: ''
       identifier: legendary-resistance
@@ -780,7 +780,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item Claw]] attacks and
+          <p>The [[lookup @name lowercase]]{monster} makes two [[/item Claw]] attacks and
           uses [[/item Roar]].</p>
         chat: ''
       identifier: multiattack
@@ -1196,7 +1196,7 @@ items:
           activity=Igeu89TALGlNPXDg]], each enemy in a [[lookup
           @target.template.size activity=Igeu89TALGlNPXDg]]-foot Emanation
           originating from the [[lookup @name
-          lowercase]].</p><p><em>Failure:</em> The target has the
+          lowercase]]{monster}.</p><p><em>Failure:</em> The target has the
           &amp;Reference[Frightened apply=false] condition for [[lookup
           @duration.value activity=Igeu89TALGlNPXDg]] [[lookup @duration.units
           activity=Igeu89TALGlNPXDg]].</p><p
@@ -1205,7 +1205,7 @@ items:
           activity=uFTndQPvULZVHT9R]], each [[lookup @target.affects.type
           activity=uFTndQPvULZVHT9R]] in a [[lookup @target.template.size
           activity=uFTndQPvULZVHT9R]]-foot Emanation originating from the
-          [[lookup @name lowercase]].</p><p><em>Failure:</em> The target has the
+          [[lookup @name lowercase]]{monster}.</p><p><em>Failure:</em> The target has the
           &amp;Reference[Paralyzed apply=false] condition, and it repeats the
           save at the end of each of its turns, ending the effect on itself on a
           success. After [[lookup @duration.value activity=uFTndQPvULZVHT9R]]
@@ -1216,7 +1216,7 @@ items:
           @target.affects.type activity=Td8ArIMDfxWDLbE9]] in a [[lookup
           @target.template.size activity=Td8ArIMDfxWDLbE9]]-foot Emanation
           originating from the [[lookup @name
-          lowercase]].</p><p><em>Failure:</em> [[/damage average]] damage, and
+          lowercase]]{monster}.</p><p><em>Failure:</em> [[/damage average]] damage, and
           the target has the &amp;Reference[Prone apply=false]
           condition.</p><p><em>Success:</em> [[lookup @damage.onSave capitalize
           activity=Td8ArIMDfxWDLbE9]] damage only.</p>
@@ -1778,7 +1778,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
+          <p class="feature">The [[lookup @name lowercase]]{monster} casts one of the
           following spells, requiring no Material components and using Wisdom as
           the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]]):</p><p class="feature-trait"><strong>At
@@ -3285,7 +3285,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] can teleport up to [[lookup
+          <p>The [[lookup @name lowercase]]{monster} can teleport up to [[lookup
           @range.value activity=a3RqyzU0UqzLJif0]] feet to an unoccupied space
           it can see, and it makes one [[/item Claw]] attack.</p>
         chat: ''
@@ -3454,12 +3454,12 @@ items:
           <p class="feature"><em>Constitution Saving Throw:</em> DC [[lookup
           @save.dc.value activity=xZul1ImCP658OBv3]], one [[lookup
           @target.affects.type activity=xZul1ImCP658OBv3]] the [[lookup @name
-          lowercase]] can see within [[lookup @range.value
+          lowercase]]{monster} can see within [[lookup @range.value
           activity=xZul1ImCP658OBv3]] feet.</p><p><em>Failure:</em> The target
           gains 1 &amp;Reference[Exhaustion apply=false] level. While the target
           has any Exhaustion levels, it appears [[/r 3d10]] years
           older.</p><p><em>Failure or Success:</em> The [[lookup @name
-          lowercase]] can't take this action again until the start of its next
+          lowercase]]{monster} can't take this action again until the start of its next
           turn.</p>
         chat: ''
       identifier: weight-of-years

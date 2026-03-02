@@ -575,7 +575,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] can enter an enemy's space and stop
+          <p>The [[lookup @name lowercase]]{monster} can enter an enemy's space and stop
           there. It can move through a space as narrow as 1 inch without
           expending extra movement to do so.</p>
         chat: ''
@@ -626,7 +626,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] has the
+          <p class="feature">The [[lookup @name lowercase]]{monster} has the
           &amp;Reference[Invisible apply=false] condition.</p>
         chat: ''
       identifier: invisibility
@@ -724,7 +724,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes three [[/item
+          <p>The [[lookup @name lowercase]]{monster} makes three [[/item
           .mmWindSwipe00000]] attacks. It can replace one attack with a use of
           [[/item .mmVortex00000000]].</p>
         chat: ''
@@ -1125,13 +1125,13 @@ items:
           <p class="feature"><em>Constitution Saving Throw:</em> DC [[lookup
           @save.dc.value activity=cZy0VYbCVY8aRB4z]], one [[lookup
           @target.affects.special activity=cZy0VYbCVY8aRB4z]] in the [[lookup
-          @name lowercase]]'s space.</p><p><em>Failure:</em> [[/damage average
+          @name lowercase]]{monster}'s space.</p><p><em>Failure:</em> [[/damage average
           activity=cZy0VYbCVY8aRB4z]] damage, and the target has the
           &amp;Reference[Grappled apply=false] condition (escape DC [[lookup
           @skills.ath.passive]]). Until the grapple ends, the target can't cast
           spells with a Verbal component and takes [[/damage average
           activity=kDz92inkRCjGrPiz]] damage at the start of each of the
-          [[lookup @name lowercase]]'s turns.</p>
+          [[lookup @name lowercase]]{monster}'s turns.</p>
         chat: ''
       identifier: vortex
       source:

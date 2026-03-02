@@ -70,11 +70,11 @@ system:
   description:
     value: >-
       <p><em>Constitution Saving Throw:</em> DC [[lookup @save.dc.value
-      activity=B6xM8C2pABIb5o7y]], one creature the [[lookup @name lowercase]]
+      activity=B6xM8C2pABIb5o7y]], one creature the [[lookup @name lowercase]]{monster}
       can see within [[lookup @range.value activity=B6xM8C2pABIb5o7y]] feet.
       <em>Failure:</em> The target has the &amp;Reference[Blinded apply=false]
       condition for 1 minute. <em>Failure or Success:</em> The [[lookup @name
-      lowercase]] can't take this action again until the start of its next
+      lowercase]]{monster} can't take this action again until the start of its next
       turn.</p>
     chat: ''
   identifier: blinding-gaze

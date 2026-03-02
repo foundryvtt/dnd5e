@@ -131,7 +131,7 @@ system:
       <p><em>Strength Saving Throw:</em><span class="Heading-4"> </span>DC
       [[lookup @save.dc.value activity=IgOMjRxAt7UISkJq]], one [[lookup
       @target.affects.special activity=IgOMjRxAt7UISkJq]] creature the [[lookup
-      @name lowercase]] can see within [[lookup @range.value
+      @name lowercase]]{monster} can see within [[lookup @range.value
       activity=IgOMjRxAt7UISkJq]] feet. <em>Failure:</em> [[/damage average]]
       damage. The target has the &amp;Reference[Grappled apply=false] condition
       (escape DC [[lookup @skills.ath.passive]]), and it has the

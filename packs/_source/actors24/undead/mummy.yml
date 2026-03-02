@@ -998,11 +998,11 @@ items:
           <p class="feature"><em>Wisdom Saving Throw:</em> DC [[lookup
           @save.dc.value activity=8LmlZfevSQkOxGSN]], one [[lookup
           @target.affects.type activity=8LmlZfevSQkOxGSN]] the [[lookup @name
-          lowercase]] can see within [[lookup @range.value
+          lowercase]]{monster} can see within [[lookup @range.value
           activity=8LmlZfevSQkOxGSN]] feet.</p><p><em>Failure:</em> The target
           has the &amp;Reference[Frightened apply=false] condition until the end
-          of the [[lookup @name lowercase]]'s next turn.</p><p><em>Success:</em>
-          The target is immune to this [[lookup @name lowercase]]'s Dreadful
+          of the [[lookup @name lowercase]]{monster}'s next turn.</p><p><em>Success:</em>
+          The target is immune to this [[lookup @name lowercase]]{monster}'s Dreadful
           Glare for 24 hours.</p>
         chat: ''
       identifier: dreadful-glare

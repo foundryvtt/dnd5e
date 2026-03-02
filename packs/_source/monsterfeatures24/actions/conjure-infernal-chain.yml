@@ -84,11 +84,11 @@ system:
       creature.</p><p class="feature"><em>Dexterity Saving Throw:</em> DC
       [[lookup @save.dc.value activity=9vCVJrzUZL0ra4w2]], [[lookup
       @target.affects.labels.statblock activity=9vCVJrzUZL0ra4w2]] the [[lookup
-      @name lowercase]] can see within [[lookup @range.value
+      @name lowercase]]{monster} can see within [[lookup @range.value
       activity=9vCVJrzUZL0ra4w2]] feet.</p><p class="feature"><em>Failure:</em>
       [[/damage average]] damage, and the target has the
       &amp;Reference[Restrained apply=false] condition until the end of the
-      [[lookup @name lowercase]]'s next turn, at which point the chain
+      [[lookup @name lowercase]]{monster}'s next turn, at which point the chain
       disappears. If the target is Large or smaller, the devil moves the target
       up to 30 feet straight toward itself.</p><p
       class="feature"><em>Success:</em> The chain disappears.</p>
