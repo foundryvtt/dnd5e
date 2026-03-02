@@ -1157,8 +1157,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         window: { title: `${game.i18n.format("DOCUMENT.Delete", { type })}: ${this.name}` },
         position: { width: 400 },
         content: `
-          <p><strong>${game.i18n.localize("AreYouSure")}</strong></p>
-          <p>${game.i18n.format("DND5E.ContainerDeleteMessage", { count })}</p>
+          <p>
+            <strong>${game.i18n.localize("AreYouSure")}</strong>
+            ${game.i18n.format("DND5E.ContainerDeleteMessage", { count })}
+          </p>
           <div class="form-group">
             <label for="deleteContents">${game.i18n.localize("DND5E.ContainerDeleteContents")}</label>
             <input type="checkbox" id="deleteContents" name="deleteContents">
