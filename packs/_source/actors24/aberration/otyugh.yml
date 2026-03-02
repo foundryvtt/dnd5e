@@ -605,7 +605,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{creature} makes one [[/item Bite]] attack and
+          <p>The [[lookup @name lowercase]]{monster} makes one [[/item Bite]] attack and
           two [[/item Tentacle]] attacks.</p>
         chat: ''
       identifier: multiattack
@@ -1245,7 +1245,7 @@ items:
           activity=VC2iSwNPNaZ7M2bT]] by the [[lookup @name
           lowercase]].</p><p><em>Failure:</em> [[/damage average]] damage, and
           the target has the &amp;Reference[Stunned apply=false] condition until
-          the start of the [[lookup @name lowercase]]{creature}'s next
+          the start of the [[lookup @name lowercase]]{monster}'s next
           turn.</p><p><em>Success:</em> Half damage only.</p>
         chat: ''
       identifier: tentacle-slam

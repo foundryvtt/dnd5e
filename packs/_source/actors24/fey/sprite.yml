@@ -799,7 +799,7 @@ items:
         value: >-
           <p class="feature">[[/attack extended]]. [[/damage average extended]],
           and the target has the &amp;Reference[Charmed apply=false] condition
-          until the start of the [[lookup @name lowercase]]{creature}'s next turn.</p>
+          until the start of the [[lookup @name lowercase]]{monster}'s next turn.</p>
         chat: ''
       identifier: enchanting-bow
       source:
@@ -992,9 +992,9 @@ items:
           @target.affects.type activity=NqVrZShDV1L3zBA3]] within [[lookup
           @range.value activity=NqVrZShDV1L3zBA3]] <span
           style="font-family:'Roboto Condensed', sans-serif">feet </span>the
-          [[lookup @name lowercase]]{creature} can see (Celestials, Fiends, and Undead
+          [[lookup @name lowercase]]{monster} can see (Celestials, Fiends, and Undead
           automatically fail the save).</p><p class="feature"><em>Failure:</em>
-          The [[lookup @name lowercase]]{creature} knows the target's emotions and
+          The [[lookup @name lowercase]]{monster} knows the target's emotions and
           alignment.</p>
         chat: ''
       identifier: heart-sight
@@ -1102,7 +1102,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]]{creature} casts
+          <p class="feature">The [[lookup @name lowercase]]{monster} casts
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplInvisibili]{Invisibility}</em>
           on itself, requiring no spell components and using Charisma as the
           spellcasting ability.</p>

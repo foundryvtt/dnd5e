@@ -570,8 +570,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{creature} has Advantage on an attack roll
-          against a creature if at least one of the [[lookup @name lowercase]]{creature}'s
+          <p>The [[lookup @name lowercase]]{monster} has Advantage on an attack roll
+          against a creature if at least one of the [[lookup @name lowercase]]{monster}'s
           allies is within 5 feet of the creature and the ally doesn't have the
           Incapacitated condition.</p>
         chat: ''
@@ -674,7 +674,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{creature} makes two [[/item
+          <p>The [[lookup @name lowercase]]{monster} makes two [[/item
           .mmBite0000000000]] attacks.</p>
         chat: ''
       identifier: multiattack

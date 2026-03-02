@@ -561,8 +561,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{creature} has Advantage on an attack roll
-          against a creature if at least one of the [[lookup @name lowercase]]{creature}'s
+          <p>The [[lookup @name lowercase]]{monster} has Advantage on an attack roll
+          against a creature if at least one of the [[lookup @name lowercase]]{monster}'s
           allies is within 5 feet of the creature and the ally doesn't have the
           Incapacitated condition.</p>
         chat: ''
@@ -612,7 +612,7 @@ items:
         recovery: []
         max: ''
       description:
-        value: <p>The [[lookup @name lowercase]]{creature} can breathe only underwater.</p>
+        value: <p>The [[lookup @name lowercase]]{monster} can breathe only underwater.</p>
         chat: ''
       identifier: water-breathing
       source:

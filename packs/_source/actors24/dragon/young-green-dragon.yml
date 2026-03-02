@@ -569,7 +569,7 @@ items:
         recovery: []
         max: ''
       description:
-        value: <p>The [[lookup @name lowercase]]{creature} can breathe air and water.</p>
+        value: <p>The [[lookup @name lowercase]]{monster} can breathe air and water.</p>
         chat: ''
       identifier: amphibious
       source:
@@ -662,7 +662,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{creature} makes three [[/item
+          <p>The [[lookup @name lowercase]]{monster} makes three [[/item
           .mmRend0000000000]] attacks.</p>
         chat: ''
       identifier: multiattack
