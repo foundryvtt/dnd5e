@@ -58,12 +58,14 @@
 "TYPES.Item.weaponPl": "Weapons",
 
 "TYPES.RegionBehavior": {
+  "dnd5e.applyActiveEffect": "Apply Active Effect (5e)",
   "dnd5e.difficultTerrain": "Difficult Terrain",
   "dnd5e.rotateArea": "Rotate Area"
 },
 
 "TYPES.HINTS": {
   "RegionBehavior": {
+    "dnd5e.applyActiveEffect": "Apply Active Effects to Tokens while they are within the Region and meet certain criteria.",
     "dnd5e.difficultTerrain": "Mark a region as being difficult terrain and set its type and who it affects.",
     "dnd5e.rotateArea": "Rotate tokens, tiles, walls, and other objects around a central pivot point."
   }
@@ -3592,6 +3594,26 @@
 "DND5E.RecoveryFormula": "Recovery Formula",
 
 "DND5E.REGIONBEHAVIORS": {
+  "APPLYACTIVEEFFECT": {
+    "FIELDS": {
+      "dispositions": {
+        "hint": "If set, only apply effects to Tokens with these dispositions.",
+        "label": "Dispositions"
+      },
+      "effects": {
+        "hint": "The effects that are applied to Tokens within the Region.",
+        "label": "Effects"
+      },
+      "sizes": {
+        "hint": "If set, only apply effects to Tokens that are these sizes.",
+        "label": "Sizes"
+      },
+      "types": {
+        "hint": "If set, only apply effects to Tokens that are these creature types.",
+        "label": "Types"
+      }
+    }
+  },
   "DIFFICULTTERRAIN": {
     "FIELDS": {
       "ignoredDispositions": {
