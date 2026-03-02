@@ -1,53 +1,244 @@
-![Up to date as of 5.2.0](https://img.shields.io/static/v1?label=dnd5e&message=5.2.0&color=informational)
+![Up to date as of 5.3.0](https://img.shields.io/static/v1?label=dnd5e&message=5.3.0&color=informational)
 
-## Rolling Process
+[Activities](#activities) | [Actor](#actor) | [Calendar](#calendar) | [Chat Messages](#chat-messages) | [Compendium Browser](#compendium-browser) | [Combat](#combat) | [Items](#items) | [Journal Pages](#journal-pages) | [Movement Automation](#movement-automation) | [Rolls](#rolls) | [Sheets](#sheets)
 
-The rolling process includes a number of standard hooks that are called by most rolls performed by the system.
 
-### `dnd5e.preRoll`
+## Activities
 
-A hook event that fires before a roll is performed. Multiple hooks may be called depending on the rolling method (e.g. `dnd5e.preRollSkill`, `dnd5e.preRollAbilityCheck`, `dnd5e.preRoll`). Exact contents of the configuration object will also change based on the roll type, but the same objects will always be present. Returning `false` will prevent the normal rolling process.
+### `dnd5e.preUseActivity`
 
-| Name    | Type                           | Description                             |
-| ------- | ------------------------------ | --------------------------------------- |
-| config  | BasicRollProcessConfiguration  | Configuration information for the roll. |
-| dialog  | BasicRollDialogConfiguration   | Configuration for the roll dialog.      |
-| message | BasicRollMessageConfiguration  | Configuration for the roll message.     |
+Fires before an activity usage is configured. Returning `false` will prevent activity from being used.
 
-### `dnd5e.postRollConfiguration`
+| Name          | Type                         | Description                                      |
+| ------------- | ---------------------------- | ------------------------------------------------ |
+| activity      | Activity                     | Activity being used.                             |
+| usageConfig   | ActivityUseConfiguration     | Configuration info for the activation.           |
+| dialogConfig  | ActivityDialogConfiguration  | Configuration info for the usage dialog.         |
+| messageConfig | ActivityMessageConfiguration | Configuration info for the created chat message. |
 
-A hook event that fires after roll configuration is complete, but before the roll is evaluated. Multiple hooks may be called depending on the rolling method (e.g. `dnd5e.postSkillCheckRollConfiguration`, `dnd5e.postAbilityTestRollConfiguration`, and `dnd5e.postRollConfiguration` for skill checks). Exact contents of the configuration object will also change based on the roll type, but the same objects will always be present. Returning `false` will prevent the normal rolling process.
+### `dnd5e.postUseActivity`
 
-| Name    | Type                           | Description                                         |
-| ------- | ------------------------------ | --------------------------------------------------- |
-| rolls   | BasicRoll[]                    | Rolls that have been constructed but not evaluated. |
-| config  | BasicRollProcessConfiguration  | Configuration information for the roll.             |
-| dialog  | BasicRollDialogConfiguration   | Configuration for the roll dialog.                  |
-| message | BasicRollMessageConfiguration  | Configuration for the roll message.                 |
+Fires when an activity is activated.
 
-### `dnd5e.buildRollConfig`
+| Name          | Type                     | Description                            |
+| ------------- | ------------------------ | -------------------------------------- |
+| activity      | Activity                 | Activity being used.                   |
+| usageConfig   | ActivityUseConfiguration | Configuration info for the activation. |
+| results       | ActivityUsageResults     | Final details on the activation.       |
 
-A hook event that fires when a roll config is built using the roll prompt. Multiple hooks may be called depending on the rolling method (e.g. `dnd5e.buildSkillRollConfig`, `dnd5e.buildAbilityCheckRollConfig`, `dnd5e.buildRollConfig`).
+### `dnd5e.preUseLinkedSpell`
 
-| Name     | Type                           | Description                                         |
-| -------- | ------------------------------ | --------------------------------------------------- |
-| app      | RollConfigurationDialog        | Roll configuration dialog.                          |
-| config   | BasicRollConfiguration         | Roll configuration data.                            |
-| formData | [FormDataExtended]             | Any data entered into the rolling prompt.           |
-| index    | number                         | Index of the roll within all rolls being prepared.  |
+A hook event that fires before a linked spell is used by a Cast activity. Returning `false` will prevent activity from being used.
 
-### `dnd5e.postBuildRollConfiguration`
+| Name          | Type                         | Description                                      |
+| ------------- | ---------------------------- | ------------------------------------------------ |
+| activity      | CastActivity                 | Activity being used.                             |
+| usageConfig   | ActivityUseConfiguration     | Configuration info for the activation.           |
+| dialogConfig  | ActivityDialogConfiguration  | Configuration info for the usage dialog.         |
+| messageConfig | ActivityMessageConfiguration | Configuration info for the created chat message. |
 
-A hook event that fires after a roll config has been built using the roll prompt. Multiple hooks may be called  depending on the rolling method (e.g. `dnd5e.postBuildSkillRollConfig`, `dnd5e.postBuildAbilityCheckRollConfig`, `dnd5e.postBuildRollConfig`).
+### `dnd5e.postUseLinkedSpell`
 
-| Name             | Type                           | Description                                         |
-| ---------------- | ------------------------------ | --------------------------------------------------- |
-| process          | BasicRollProcessConfiguration  | Full process configuration data.                    |
-| config           | BasicRollConfiguration         | Roll configuration data.                            |
-| index            | number                         | Index of the roll within all rolls being prepared.  |
-| options          | [object]                       |                                                     |
-| options.app      | [RollConfigurationDialog]      | Roll configuration dialog.                          |
-| options.formData | [FormDataExtended]             | Any data entered into the rolling prompt.           |
+A hook event that fires after a linked spell is used by a Cast activity.
+
+| Name          | Type                     | Description                            |
+| ------------- | ------------------------ | -------------------------------------- |
+| activity      | CastActivity             | Activity being used.                   |
+| usageConfig   | ActivityUseConfiguration | Configuration info for the activation. |
+| results       | ActivityUsageResults     | Final details on the activation.       |
+
+### `dnd5e.preActivityConsumption`
+
+Fires before an item's resource consumption is calculated. Returning `false` will prevent activity from being used.
+
+| Name          | Type                         | Description                                      |
+| ------------- | ---------------------------- | ------------------------------------------------ |
+| activity      | Activity                     | Activity being used.                             |
+| usageConfig   | ActivityUseConfiguration     | Configuration info for the activation.           |
+| messageConfig | ActivityMessageConfiguration | Configuration info for the created chat message. |
+
+### `dnd5e.activityConsumption`
+
+Fires after an item's resource consumption is calculated, but before any updates are performed. Returning `false` will prevent activity from being used.
+
+| Name          | Type                         | Description                                        |
+| ------------- | ---------------------------- | -------------------------------------------------- |
+| activity      | Activity                     | Activity being used.                               |
+| usageConfig   | ActivityUseConfiguration     | Configuration info for the activation.             |
+| messageConfig | ActivityMessageConfiguration | Configuration info for the created chat message.   |
+| updates       | ActivityUsageUpdates         | Updates to apply to the actor and other documents. |
+
+### `dnd5e.postActivityConsumption`
+
+Fires after an item's resource consumption is calculated and applied. Returning `false` will prevent activity from being used.
+
+| Name          | Type                         | Description                                        |
+| ------------- | ---------------------------- | -------------------------------------------------- |
+| activity      | Activity                     | Activity being used.                               |
+| usageConfig   | ActivityUseConfiguration     | Configuration info for the activation.             |
+| messageConfig | ActivityMessageConfiguration | Configuration info for the created chat message.   |
+| updates       | ActivityUsageUpdates         | Updates to apply to the actor and other documents. |
+
+### `dnd5e.preCreateUsageMessage`
+
+Fires before an activity usage card is created.
+
+| Name          | Type                         | Description                                        |
+| ------------- | ---------------------------- | -------------------------------------------------- |
+| activity      | Activity                     | Activity being used.                               |
+| messageConfig | ActivityMessageConfiguration | Configuration info for the created chat message.   |
+
+### `dnd5e.postCreateUsageMessage`
+
+Fires after an activity usage card is created.
+
+| Name          | Type                | Description                                        |
+| ------------- | ------------------- | -------------------------------------------------- |
+| activity      | Activity            | Activity being used.                               |
+| card          | ChatMessage\|object | The created ChatMessage instance or ChatMessageData depending on whether options.createMessage was set to `true`. |
+
+### `dnd5e.preCreateActivityTemplate`
+
+Fires before a template is created for an Activity. Returning `false` will prevent template from being created.
+
+| Name         | Type     | Description                                      |
+| ------------ | -------- | ------------------------------------------------ |
+| activity     | Activity | Activity for which the template is being placed. |
+| templateData | object   | Data used to create the new template.            |
+
+### `dnd5e.createActivityTemplate`
+
+Fires after a template are created for an Activity.
+
+| Name      | Type              | Description                                      |
+| --------- | ----------------- | ------------------------------------------------ |
+| activity  | Activity          | Activity for which the template is being placed. |
+| templates | AbilityTemplate[] | The templates being placed.                      |
+
+### `dnd5e.preRollAttack`
+
+See `dnd5e.preRoll` for more details. Passes `AttackRollProcessConfiguration` for the `config` parameter and `AttackRollDialogConfiguration` for the `dialog` parameter.
+
+### `dnd5e.rollAttack`
+
+Fires after an attack has been rolled but before any ammunition is consumed.
+
+| Name            | Type                   | Description                                              |
+| --------------- | ---------------------- | -------------------------------------------------------- |
+| rolls           | D20Roll[]              | The resulting rolls.                                     |
+| data            | object                 |                                                          |
+| data.subject    | AttackActivity         | The activity that performed the attack.                  |
+| data.ammoUpdate | AmmunitionUpdate\|null | Any updates related to ammo consumption for this attack. |
+
+### `dnd5e.postRollAttack`
+
+Fires after an attack has been rolled and ammunition has been consumed.
+
+| Name         | Type                   | Description                             |
+| ------------ | ---------------------- | --------------------------------------- |
+| rolls        | D20Roll[]              | The resulting rolls.                    |
+| data         | object                 |                                         |
+| data.subject | AttackActivity         | The activity that performed the attack. |
+
+### `dnd5e.preRollDamage`
+
+See `dnd5e.preRoll` for more details. Passes `DamageRollProcessConfiguration` for the `config` parameter.
+
+### `dnd5e.rollDamage`
+
+Fires after damage has been rolled.
+
+| Name         | Type         | Description                           |
+| ------------ | ------------ | ------------------------------------- |
+| rolls        | DamageRoll[] | The resulting rolls.                  |
+| data         | object       |                                       |
+| data.subject | Activity     | The activity that performed the roll. |
+
+### `dnd5e.preRollFormula`
+
+Fires before a formula is rolled for a Utility activity. Returning `false` will prevent the formula from being rolled.
+
+| Name    | Type                          | Description                                |
+| ------- | ----------------------------- | ------------------------------------------ |
+| config  | BasicRollProcessConfiguration | Configuration data for the pending roll.   |
+| dialog  | BasicRollDialogConfiguration  | Configuration for the roll dialog.         |
+| message | BasicRollMessageConfiguration | Configuration data for the roll's message. |
+
+### `dnd5e.rollFormula`
+
+Fires after a formula has been rolled for a Utility activity.
+
+| Name         | Type            | Description                           |
+| ------------ | --------------- | ------------------------------------- |
+| rolls        | BasicRoll[]     | The resulting rolls.                  |
+| data         | object          |                                       |
+| data.subject | UtilityActivity | The activity that performed the roll. |
+
+### `dnd5e.preApplyEnchantment`
+
+Fires before an enchantment is applied to an item. Returning `false` will prevent enchantment from being applied.
+
+| Name             | Type     | Description                                            |
+| ---------------- | -------- | ------------------------------------------------------ |
+| item             | Item5e   | Item to which the enchantment will be applied.         |
+| enchantmentData  | object   | Data for the enchantment effect that will be created.  |
+| options          | object   |                                                        |
+| options.activity | Activity | Enchant activity applied the enchantment.              |
+
+### `dnd5e.applyEnchantment`
+
+Fires after an enchantment has been applied to an item.
+
+| Name             | Type           | Description                                   |
+| ---------------- | -------------- | --------------------------------------------- |
+| item             | Item5e         | Item to which the enchantment was be applied. |
+| enchantment      | ActiveEffect5e | The enchantment effect that was be created.   |
+| options          | object         |                                               |
+| options.activity | Activity       | Enchant activity applied the enchantment.     |
+
+### `dnd5e.preSummon`
+
+Fires before summoning is performed. Returning `false` will prevent summoning from occurring.
+
+| Name     | Type                   | Description                                    |
+| -------- | ---------------------- | ---------------------------------------------- |
+| activity | Activity               | The activity that is performing the summoning. |
+| profile  | SummonsProfile         | Profile used for summoning.                    |
+| options  | SummoningConfiguration | Configuration data for summoning behavior.     |
+
+### `dnd5e.preSummonToken`
+
+Fires before a specific token is summoned. After placement has been determined but before the final token data is constructed. Returning `false` will prevent this token from being summoned.
+
+| Name     | Type                   | Description                                      |
+| -------- | ---------------------- | ------------------------------------------------ |
+| activity | Activity               | The activity that is performing the summoning.   |
+| profile  | SummonsProfile         | Profile used for summoning.                      |
+| config   | TokenUpdateData        | Configuration for creating a modified token.     |
+| options  | SummoningConfiguration | Configuration data for summoning behavior.       |
+
+### `dnd5e.summonToken`
+
+Fires after token creation data is prepared, but before summoning occurs.
+
+| Name      | Type                  | Description                                    |
+| --------- | --------------------- | ---------------------------------------------- |
+| activity  | Activity              | The activity that is performing the summoning. |
+| profile   | SummonsProfile        | Profile used for summoning.                    |
+| tokenData | object                | Data for creating a token.                     |
+| options  | SummoningConfiguration | Configuration data for summoning behavior.     |
+
+### `dnd5e.postSummon`
+
+Fires when summoning is complete.
+
+| Name     | Type                   | Description                                    |
+| -------- | ---------------------- | ---------------------------------------------- |
+| activity | Activity               | The activity that is performing the summoning. |
+| profile  | SummonsProfile         | Profile used for summoning.                    |
+| tokens   | Token5e[]              | Tokens that have been created.                 |
+| options  | SummoningConfiguration | Configuration data for summoning behavior.     |
+
 
 ## Actor
 
@@ -415,33 +606,6 @@ Fires to convert the provided spellcasting progression into spell slots. A diffe
 | progression | object  | Spellcasting progression data.                |
 
 
-## Actor Sheets
-
-### `dnd5e.filterItem`
-
-Fires when a sheet filters an item. Returning `false` will prevent item from being displayed.
-
-| Name     | Type                          | Description                              |
-| -------- | ----------------------------- | ---------------------------------------- |
-| sheet    | BaseActorSheet|ContainerSheet | The sheet the item is being rendered on. |
-| item     | Item5e                        | The item being filtered.                 |
-| filters  | Set<string>                   | Filters applied to the Item.             |
-
-
-## Actor & Item Sheets
-
-### `dnd5e.prepareSheetContext`
-
-Fires during preparation of sheet parts.
-
-| Name     | Type                     | Description                                 |
-| -------- | ------------------------ | ------------------------------------------- |
-| sheet    | BaseActorSheet           | Sheet being rendered.                       |
-| partId   | string                   | The ID of the part being prepared.          |
-| context  | object                   | Preparation context that should be mutated. |
-| options  | object                   | Render options.                             |
-
-
 ## Advancement
 
 ### `dnd5e.preAdvancementManagerRender`
@@ -482,6 +646,18 @@ Hooks.on('updateActor', (actor, change, options) => {
 })
 ```
 
+
+## Calendar
+
+### `dnd5e.setupCalendar`
+
+Fires during the `init` step to give modules a chance to customize the calendar configuration before loading the world calendar. Returning `false` will prevent the system from setting up the calendar.
+
+### `updateWorldTime`
+
+The system introduces a few extra options to the normal `updateWorldTime` hook to track when certain points in time have passed. The `options` object for that hook has a `dnd5e.deltas` object that contains `midnights`, `middays`, `sunrises`, and `sunsets`, each of which is a number indicating how many of those times have been passed during the current time change. Positive numbers indicate a forward time advancement while negative ones indicate a reverse.
+
+
 ## Chat Messages
 
 ### `dnd5e.renderChatMessage`
@@ -504,254 +680,6 @@ Fires when a compendium browser is submitted with selected items.
 | -------- | ----------------- | ----------------------------------------------- |
 | browser  | CompendiumBrowser | Compendium Browser application being submitted. |
 | selected | Set<string>       | Set of document UUIDs that are selected.        |
-
-
-## Activities
-
-### `dnd5e.preUseActivity`
-
-Fires before an activity usage is configured. Returning `false` will prevent activity from being used.
-
-| Name          | Type                         | Description                                      |
-| ------------- | ---------------------------- | ------------------------------------------------ |
-| activity      | Activity                     | Activity being used.                             |
-| usageConfig   | ActivityUseConfiguration     | Configuration info for the activation.           |
-| dialogConfig  | ActivityDialogConfiguration  | Configuration info for the usage dialog.         |
-| messageConfig | ActivityMessageConfiguration | Configuration info for the created chat message. |
-
-### `dnd5e.postUseActivity`
-
-Fires when an activity is activated.
-
-| Name          | Type                     | Description                            |
-| ------------- | ------------------------ | -------------------------------------- |
-| activity      | Activity                 | Activity being used.                   |
-| usageConfig   | ActivityUseConfiguration | Configuration info for the activation. |
-| results       | ActivityUsageResults     | Final details on the activation.       |
-
-### `dnd5e.preUseLinkedSpell`
-
-A hook event that fires before a linked spell is used by a Cast activity. Returning `false` will prevent activity from being used.
-
-| Name          | Type                         | Description                                      |
-| ------------- | ---------------------------- | ------------------------------------------------ |
-| activity      | CastActivity                 | Activity being used.                             |
-| usageConfig   | ActivityUseConfiguration     | Configuration info for the activation.           |
-| dialogConfig  | ActivityDialogConfiguration  | Configuration info for the usage dialog.         |
-| messageConfig | ActivityMessageConfiguration | Configuration info for the created chat message. |
-
-### `dnd5e.postUseLinkedSpell`
-
-A hook event that fires after a linked spell is used by a Cast activity.
-
-| Name          | Type                     | Description                            |
-| ------------- | ------------------------ | -------------------------------------- |
-| activity      | CastActivity             | Activity being used.                   |
-| usageConfig   | ActivityUseConfiguration | Configuration info for the activation. |
-| results       | ActivityUsageResults     | Final details on the activation.       |
-
-### `dnd5e.preActivityConsumption`
-
-Fires before an item's resource consumption is calculated. Returning `false` will prevent activity from being used.
-
-| Name          | Type                         | Description                                      |
-| ------------- | ---------------------------- | ------------------------------------------------ |
-| activity      | Activity                     | Activity being used.                             |
-| usageConfig   | ActivityUseConfiguration     | Configuration info for the activation.           |
-| messageConfig | ActivityMessageConfiguration | Configuration info for the created chat message. |
-
-### `dnd5e.activityConsumption`
-
-Fires after an item's resource consumption is calculated, but before any updates are performed. Returning `false` will prevent activity from being used.
-
-| Name          | Type                         | Description                                        |
-| ------------- | ---------------------------- | -------------------------------------------------- |
-| activity      | Activity                     | Activity being used.                               |
-| usageConfig   | ActivityUseConfiguration     | Configuration info for the activation.             |
-| messageConfig | ActivityMessageConfiguration | Configuration info for the created chat message.   |
-| updates       | ActivityUsageUpdates         | Updates to apply to the actor and other documents. |
-
-### `dnd5e.postActivityConsumption`
-
-Fires after an item's resource consumption is calculated and applied. Returning `false` will prevent activity from being used.
-
-| Name          | Type                         | Description                                        |
-| ------------- | ---------------------------- | -------------------------------------------------- |
-| activity      | Activity                     | Activity being used.                               |
-| usageConfig   | ActivityUseConfiguration     | Configuration info for the activation.             |
-| messageConfig | ActivityMessageConfiguration | Configuration info for the created chat message.   |
-| updates       | ActivityUsageUpdates         | Updates to apply to the actor and other documents. |
-
-### `dnd5e.preCreateUsageMessage`
-
-Fires before an activity usage card is created.
-
-| Name          | Type                         | Description                                        |
-| ------------- | ---------------------------- | -------------------------------------------------- |
-| activity      | Activity                     | Activity being used.                               |
-| messageConfig | ActivityMessageConfiguration | Configuration info for the created chat message.   |
-
-### `dnd5e.postCreateUsageMessage`
-
-Fires after an activity usage card is created.
-
-| Name          | Type                | Description                                        |
-| ------------- | ------------------- | -------------------------------------------------- |
-| activity      | Activity            | Activity being used.                               |
-| card          | ChatMessage\|object | The created ChatMessage instance or ChatMessageData depending on whether options.createMessage was set to `true`. |
-
-### `dnd5e.preCreateActivityTemplate`
-
-Fires before a template is created for an Activity. Returning `false` will prevent template from being created.
-
-| Name         | Type     | Description                                      |
-| ------------ | -------- | ------------------------------------------------ |
-| activity     | Activity | Activity for which the template is being placed. |
-| templateData | object   | Data used to create the new template.            |
-
-### `dnd5e.createActivityTemplate`
-
-Fires after a template are created for an Activity.
-
-| Name      | Type              | Description                                      |
-| --------- | ----------------- | ------------------------------------------------ |
-| activity  | Activity          | Activity for which the template is being placed. |
-| templates | AbilityTemplate[] | The templates being placed.                      |
-
-### `dnd5e.preRollAttack`
-
-See `dnd5e.preRoll` for more details. Passes `AttackRollProcessConfiguration` for the `config` parameter and `AttackRollDialogConfiguration` for the `dialog` parameter.
-
-### `dnd5e.rollAttack`
-
-Fires after an attack has been rolled but before any ammunition is consumed.
-
-| Name            | Type                   | Description                                              |
-| --------------- | ---------------------- | -------------------------------------------------------- |
-| rolls           | D20Roll[]              | The resulting rolls.                                     |
-| data            | object                 |                                                          |
-| data.subject    | AttackActivity         | The activity that performed the attack.                  |
-| data.ammoUpdate | AmmunitionUpdate\|null | Any updates related to ammo consumption for this attack. |
-
-### `dnd5e.postRollAttack`
-
-Fires after an attack has been rolled and ammunition has been consumed.
-
-| Name         | Type                   | Description                             |
-| ------------ | ---------------------- | --------------------------------------- |
-| rolls        | D20Roll[]              | The resulting rolls.                    |
-| data         | object                 |                                         |
-| data.subject | AttackActivity         | The activity that performed the attack. |
-
-### `dnd5e.preRollDamage`
-
-See `dnd5e.preRoll` for more details. Passes `DamageRollProcessConfiguration` for the `config` parameter.
-
-### `dnd5e.rollDamage`
-
-Fires after damage has been rolled.
-
-| Name         | Type         | Description                           |
-| ------------ | ------------ | ------------------------------------- |
-| rolls        | DamageRoll[] | The resulting rolls.                  |
-| data         | object       |                                       |
-| data.subject | Activity     | The activity that performed the roll. |
-
-### `dnd5e.preRollFormula`
-
-Fires before a formula is rolled for a Utility activity. Returning `false` will prevent the formula from being rolled.
-
-| Name    | Type                          | Description                                |
-| ------- | ----------------------------- | ------------------------------------------ |
-| config  | BasicRollProcessConfiguration | Configuration data for the pending roll.   |
-| dialog  | BasicRollDialogConfiguration  | Configuration for the roll dialog.         |
-| message | BasicRollMessageConfiguration | Configuration data for the roll's message. |
-
-### `dnd5e.rollFormula`
-
-Fires after a formula has been rolled for a Utility activity.
-
-| Name         | Type            | Description                           |
-| ------------ | --------------- | ------------------------------------- |
-| rolls        | BasicRoll[]     | The resulting rolls.                  |
-| data         | object          |                                       |
-| data.subject | UtilityActivity | The activity that performed the roll. |
-
-### `dnd5e.preApplyEnchantment`
-
-Fires before an enchantment is applied to an item. Returning `false` will prevent enchantment from being applied.
-
-| Name             | Type     | Description                                            |
-| ---------------- | -------- | ------------------------------------------------------ |
-| item             | Item5e   | Item to which the enchantment will be applied.         |
-| enchantmentData  | object   | Data for the enchantment effect that will be created.  |
-| options          | object   |                                                        |
-| options.activity | Activity | Enchant activity applied the enchantment.              |
-
-### `dnd5e.applyEnchantment`
-
-Fires after an enchantment has been applied to an item.
-
-| Name             | Type           | Description                                   |
-| ---------------- | -------------- | --------------------------------------------- |
-| item             | Item5e         | Item to which the enchantment was be applied. |
-| enchantment      | ActiveEffect5e | The enchantment effect that was be created.   |
-| options          | object         |                                               |
-| options.activity | Activity       | Enchant activity applied the enchantment.     |
-
-### `dnd5e.preSummon`
-
-Fires before summoning is performed. Returning `false` will prevent summoning from occurring.
-
-| Name     | Type                   | Description                                    |
-| -------- | ---------------------- | ---------------------------------------------- |
-| activity | Activity               | The activity that is performing the summoning. |
-| profile  | SummonsProfile         | Profile used for summoning.                    |
-| options  | SummoningConfiguration | Configuration data for summoning behavior.     |
-
-### `dnd5e.preSummonToken`
-
-Fires before a specific token is summoned. After placement has been determined but before the final token data is constructed. Returning `false` will prevent this token from being summoned.
-
-| Name     | Type                   | Description                                      |
-| -------- | ---------------------- | ------------------------------------------------ |
-| activity | Activity               | The activity that is performing the summoning.   |
-| profile  | SummonsProfile         | Profile used for summoning.                      |
-| config   | TokenUpdateData        | Configuration for creating a modified token.     |
-| options  | SummoningConfiguration | Configuration data for summoning behavior.       |
-
-### `dnd5e.summonToken`
-
-Fires after token creation data is prepared, but before summoning occurs.
-
-| Name      | Type                  | Description                                    |
-| --------- | --------------------- | ---------------------------------------------- |
-| activity  | Activity              | The activity that is performing the summoning. |
-| profile   | SummonsProfile        | Profile used for summoning.                    |
-| tokenData | object                | Data for creating a token.                     |
-| options  | SummoningConfiguration | Configuration data for summoning behavior.     |
-
-### `dnd5e.postSummon`
-
-Fires when summoning is complete.
-
-| Name     | Type                   | Description                                    |
-| -------- | ---------------------- | ---------------------------------------------- |
-| activity | Activity               | The activity that is performing the summoning. |
-| profile  | SummonsProfile         | Profile used for summoning.                    |
-| tokens   | Token5e[]              | Tokens that have been created.                 |
-| options  | SummoningConfiguration | Configuration data for summoning behavior.     |
-
-
-## Calendar
-
-### `dnd5e.setupCalendar`
-
-Fires during the `init` step to give modules a chance to customize the calendar configuration before loading the world calendar. Returning `false` will prevent the system from setting up the calendar.
-
-### `updateWorldTime`
-
-The system introduces a few extra options to the normal `updateWorldTime` hook to track when certain points in time have passed. The `options` object for that hook has a `dnd5e.deltas` object that contains `midnights`, `middays`, `sunrises`, and `sunsets`, each of which is a number indicating how many of those times have been passed during the current time change. Positive numbers indicate a forward time advancement while negative ones indicate a reverse.
 
 
 ## Combat
@@ -857,19 +785,6 @@ Fires after the item data for a scroll is created but before the item is returne
 | spellScrollData | object         | The final item data used to make the scroll.     |
 
 
-## Item Sheet
-
-### `dnd5e.dropItemSheetData`
-
-Fires when some useful data is dropped onto an `ItemSheet5e`. Returning `false` will prevent the normal drop handling.
-
-| Name  | Type       | Description                                    |
-| ----- | ---------- | ---------------------------------------------- |
-| item  | Item5e     | The Item5e.                                    |
-| sheet | ItemShee5e | The ItemSheet5e application.                   |
-| data  | object     | The data that has been dropped onto the sheet. |
-
-
 ## Journal Pages
 
 ### `dnd5e.build___SpellcastingTable` (`dnd5e.buildSpellSpellcastingTable` & `dnd5e.buildPactSpellcastingTable` by default)
@@ -893,11 +808,13 @@ Fires after an embedded NPC stat block is rendered.
 | config   | DocumentHTMLEmbedConfig | Configuration for embedding behavior.     |
 | options  | EnrichmentOptions       | Original enrichment options.              |
 
+
 ## Movement Automation
 
 ### `dnd5e.determineOccupiedGridSpaceBlocking`
 
 Fires when determining whether a grid space is occupied by a token which should block movement for a provided token.
+
 | Name            | Type         | Description                                                            |
 | --------------- | ------------ | ---------------------------------------------------------------------- |
 | gridSpace       | GridOffset3D | The grid space being checked.                                          |
@@ -909,6 +826,7 @@ Fires when determining whether a grid space is occupied by a token which should 
 ### `dnd5e.determineOccupiedGridSpaceDifficult`
 
 Fires when determining whether a grid space is occupied by a token which should cause difficult terrain for a provided token.
+
 | Name            | Type         | Description                                                                     |
 | --------------- | ------------ | ------------------------------------------------------------------------------- |
 | gridSpace       | GridOffset3D | The grid space being checked.                                                   |
@@ -918,3 +836,85 @@ Fires when determining whether a grid space is occupied by a token which should 
 | found           | Set<Token5e> | The found set of tokens which would cause difficult terrain. *Will be mutated.* |
 
 
+## Rolls
+
+The rolling process includes a number of standard hooks that are called by most rolls performed by the system.
+
+### `dnd5e.preRoll`
+
+A hook event that fires before a roll is performed. Multiple hooks may be called depending on the rolling method (e.g. `dnd5e.preRollSkill`, `dnd5e.preRollAbilityCheck`, `dnd5e.preRoll`). Exact contents of the configuration object will also change based on the roll type, but the same objects will always be present. Returning `false` will prevent the normal rolling process.
+
+| Name    | Type                           | Description                             |
+| ------- | ------------------------------ | --------------------------------------- |
+| config  | BasicRollProcessConfiguration  | Configuration information for the roll. |
+| dialog  | BasicRollDialogConfiguration   | Configuration for the roll dialog.      |
+| message | BasicRollMessageConfiguration  | Configuration for the roll message.     |
+
+### `dnd5e.postRollConfiguration`
+
+A hook event that fires after roll configuration is complete, but before the roll is evaluated. Multiple hooks may be called depending on the rolling method (e.g. `dnd5e.postSkillCheckRollConfiguration`, `dnd5e.postAbilityTestRollConfiguration`, and `dnd5e.postRollConfiguration` for skill checks). Exact contents of the configuration object will also change based on the roll type, but the same objects will always be present. Returning `false` will prevent the normal rolling process.
+
+| Name    | Type                           | Description                                         |
+| ------- | ------------------------------ | --------------------------------------------------- |
+| rolls   | BasicRoll[]                    | Rolls that have been constructed but not evaluated. |
+| config  | BasicRollProcessConfiguration  | Configuration information for the roll.             |
+| dialog  | BasicRollDialogConfiguration   | Configuration for the roll dialog.                  |
+| message | BasicRollMessageConfiguration  | Configuration for the roll message.                 |
+
+### `dnd5e.buildRollConfig`
+
+A hook event that fires when a roll config is built using the roll prompt. Multiple hooks may be called depending on the rolling method (e.g. `dnd5e.buildSkillRollConfig`, `dnd5e.buildAbilityCheckRollConfig`, `dnd5e.buildRollConfig`).
+
+| Name     | Type                           | Description                                         |
+| -------- | ------------------------------ | --------------------------------------------------- |
+| app      | RollConfigurationDialog        | Roll configuration dialog.                          |
+| config   | BasicRollConfiguration         | Roll configuration data.                            |
+| formData | [FormDataExtended]             | Any data entered into the rolling prompt.           |
+| index    | number                         | Index of the roll within all rolls being prepared.  |
+
+### `dnd5e.postBuildRollConfiguration`
+
+A hook event that fires after a roll config has been built using the roll prompt. Multiple hooks may be called  depending on the rolling method (e.g. `dnd5e.postBuildSkillRollConfig`, `dnd5e.postBuildAbilityCheckRollConfig`, `dnd5e.postBuildRollConfig`).
+
+| Name             | Type                           | Description                                         |
+| ---------------- | ------------------------------ | --------------------------------------------------- |
+| process          | BasicRollProcessConfiguration  | Full process configuration data.                    |
+| config           | BasicRollConfiguration         | Roll configuration data.                            |
+| index            | number                         | Index of the roll within all rolls being prepared.  |
+| options          | [object]                       |                                                     |
+| options.app      | [RollConfigurationDialog]      | Roll configuration dialog.                          |
+| options.formData | [FormDataExtended]             | Any data entered into the rolling prompt.           |
+
+
+## Sheets
+
+### `dnd5e.dropItemSheetData` (all item sheets)
+
+Fires when some useful data is dropped onto an `ItemSheet5e`. Returning `false` will prevent the normal drop handling.
+
+| Name  | Type       | Description                                    |
+| ----- | ---------- | ---------------------------------------------- |
+| item  | Item5e     | The Item5e.                                    |
+| sheet | ItemShee5e | The ItemSheet5e application.                   |
+| data  | object     | The data that has been dropped onto the sheet. |
+
+### `dnd5e.filterItem` (all actor sheets & container item sheet)
+
+Fires when a sheet filters an item. Returning `false` will prevent item from being displayed.
+
+| Name     | Type                          | Description                              |
+| -------- | ----------------------------- | ---------------------------------------- |
+| sheet    | BaseActorSheet|ContainerSheet | The sheet the item is being rendered on. |
+| item     | Item5e                        | The item being filtered.                 |
+| filters  | Set<string>                   | Filters applied to the Item.             |
+
+### `dnd5e.prepareSheetContext` (all actor & item sheets)
+
+Fires during preparation of sheet parts.
+
+| Name     | Type                     | Description                                 |
+| -------- | ------------------------ | ------------------------------------------- |
+| sheet    | BaseActorSheet           | Sheet being rendered.                       |
+| partId   | string                   | The ID of the part being prepared.          |
+| context  | object                   | Preparation context that should be mutated. |
+| options  | object                   | Render options.                             |
