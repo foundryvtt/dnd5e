@@ -1789,9 +1789,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       container,
       transformFirst: itemData => {
         if ( itemData instanceof foundry.abstract.Document ) itemData = itemData.toObject();
-        const stacked = this._onDropStackConsumables(event, itemData, { container: container.id });
-        if ( stacked ) return false;
-        return this._onDropSingleItem(event, itemData);
+        return this._onDropSingleItem(event, itemData, { container: container.id });
       }
     });
     const created = await Item5e.createDocuments(toCreate, { parent: this.inventorySource, keepId: true });
@@ -1857,13 +1855,15 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
   /**
    * Handles dropping of a single item onto this character sheet.
-   * @param {DragEvent} event            The concluding DragEvent which provided the drop data.
-   * @param {object} itemData            The item data to create.
-   * @returns {Promise<object|boolean>}  The item data to create after processing, or false if the item should not be
-   *                                     created or creation has been otherwise handled.
+   * @param {DragEvent} event                  The concluding DragEvent which provided the drop data.
+   * @param {object} itemData                  The item data to create.
+   * @param {object} [options={}]
+   * @param {string} [options.container=null]  ID of the container into which this item is being dropped.
+   * @returns {Promise<object|boolean>}        The item data to create after processing, or false if the item should
+   *                                           not be created or creation has been otherwise handled.
    * @protected
    */
-  async _onDropSingleItem(event, itemData) {
+  async _onDropSingleItem(event, itemData, { container=null }={}) {
     const actor = this.inventorySource;
 
     // Check to make sure items of this type are allowed on this actor
@@ -1888,7 +1888,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     this._onDropResetData(event, itemData);
 
     // Stack identical consumables
-    const stacked = this._onDropStackConsumables(event, itemData);
+    const stacked = this._onDropStackConsumables(event, itemData, { container });
     if ( stacked ) return false;
 
     // Bypass normal creation flow for any items with advancement
