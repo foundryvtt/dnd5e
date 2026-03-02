@@ -1154,7 +1154,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( count ) {
       const type = game.i18n.localize("DND5E.Container");
       return foundry.applications.api.DialogV2.confirm(foundry.utils.mergeObject({
-        window: { title: `${game.i18n.format("DOCUMENT.Delete", { type })}: ${this.name}` },
+        window: {
+          icon: "fa-solid fa-trash",
+          title: `${game.i18n.format("DOCUMENT.Delete", { type })}: ${this.name}`
+        },
         position: { width: 400 },
         content: `
           <p>
