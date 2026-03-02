@@ -12,6 +12,7 @@ export default class TargetField extends SchemaField {
       template: new SchemaField({
         count: new FormulaField({ deterministic: true }),
         contiguous: new BooleanField(),
+        stationary: new BooleanField(),
         type: new StringField(),
         size: new FormulaField({ deterministic: true }),
         width: new FormulaField({ deterministic: true }),
