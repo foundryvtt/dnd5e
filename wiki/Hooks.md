@@ -1,6 +1,6 @@
 ![Up to date as of 5.3.0](https://img.shields.io/static/v1?label=dnd5e&message=5.3.0&color=informational)
 
-[Activities](#activities) | [Actor](#actor) | [Calendar](#calendar) | [Chat Messages](#chat-messages) | [Compendium Browser](#compendium-browser) | [Combat](#combat) | [Items](#items) | [Journal Pages](#journal-pages) | [Movement Automation](#movement-automation) | [Rolls](#rolls) | [Sheets](#sheets)
+[Activities](#activities) | [Actor](#actor) | [Calendar](#calendar) | [Chat Messages](#chat-messages) | [Compendium Browser](#compendium-browser) | [Combat](#combat) | [Items](#items) | [Journal Pages](#journal-pages) | [Movement Automation](#movement-automation) | [Rolls](#rolls) | [Sheets](#sheets) | [Other](#other)
 
 
 ## Activities
@@ -745,6 +745,15 @@ Fires after an item chat card is created.
 | item | Item5e              | Item for which the chat card is being displayed.       |
 | card | ChatMessage\|object | The created ChatMessage instance or ChatMessageData depending on whether options.createMessage was set to `true`. |
 
+### `dnd5e.getAsGear`
+
+Fires when retrieving an item as gear.
+
+| Name       | Type      | Description                                         |
+| ---------- | --------- | --------------------------------------------------- |
+| item       | Item5e    | Item on NPC being prepared as gear.                 |
+| gear       | Item5e    | Non-saved clone of the item to be returned as gear. |
+
 ### `dnd5e.preRollRecharge`
 
 Fires before recharge is rolled for an Item or Activity. Returning `false` will prevent the recharge from being rolled.
@@ -918,3 +927,18 @@ Fires during preparation of sheet parts.
 | partId   | string                   | The ID of the part being prepared.          |
 | context  | object                   | Preparation context that should be mutated. |
 | options  | object                   | Render options.                             |
+
+
+## Other
+
+### `dnd5e.getUnknownAttributeLabel`
+
+Fires when a human readable attribute label couldn't be found.
+
+| Name            | Type         | Description                                        |
+| --------------- | ------------ | -------------------------------------------------- |
+| attribute       | string       | Attribute for which to generate a label.           |
+| options         | object       | Additional options.                                |
+| options.actor   | string       | An optional reference actor.                       |
+| options.item    | string       | An optional reference item.                        |
+| options.label   | string       | Label that can be set to define the label to use.  |
