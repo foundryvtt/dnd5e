@@ -715,7 +715,7 @@ export default class CompendiumBrowser extends Application5e {
     if ( !sources.length ) return;
     const lockExclusive = this.options.filters?.locked?.exclusive === true;
     const lockedSource = this.options.filters?.locked?.additional?.source;
-    const locked = (lockExclusive && lockedSource !== undefined)
+    const locked = lockExclusive && (lockedSource !== undefined)
       ? Object.fromEntries(Object.keys(this.#sources).map(k => [k, true]))
       : Object.entries(lockedSource ?? {}).reduce((obj, [k, v]) => {
         obj[k.slugify({ strict: true })] = v;
@@ -725,7 +725,7 @@ export default class CompendiumBrowser extends Application5e {
       "systems/dnd5e/templates/compendium/browser-sidebar-filter-set.hbs",
       {
         locked,
-        value: (lockExclusive && lockedSource !== undefined) ? {} : locked,
+        value: lockExclusive && (lockedSource !== undefined) ? {} : locked,
         key: "source",
         expandId: "source",
         label: "DND5E.SOURCE.FIELDS.source.label",

@@ -39,7 +39,7 @@
 
 /**
  * @typedef CompendiumBrowserFilters
- * @property {boolean} [exclusive]    When used in locked filters, locks all choices within filter categories that have
+ * @property {boolean} [exclusive]     When used in locked filters, locks all choices within filter categories that have
  *                                     explicit values, preventing additional selections. Categories without values
  *                                     remain unlocked.
  * @property {string} [documentClass]  Document type to fetch (e.g. Actor or Item).
