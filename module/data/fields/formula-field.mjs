@@ -59,8 +59,8 @@ export default class FormulaField extends foundry.data.fields.StringField {
   /** @override */
   _applyChangeMultiply(value, delta, model, change) {
     if ( !value ) return value;
-    if (new Roll(value).terms.length > 1) value = `(${value})`;
-    if (new Roll(delta).terms.length > 1) delta = `(${delta})`;
+    if ( new Roll(value).terms.length > 1 ) value = `(${value})`;
+    if ( new Roll(delta).terms.length > 1 ) delta = `(${delta})`;
     return `${value} * ${delta}`;
   }
 
