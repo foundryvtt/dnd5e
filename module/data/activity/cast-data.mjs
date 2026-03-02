@@ -51,6 +51,12 @@ export default class BaseCastActivityData extends BaseActivityData {
       this.name = this._source.name || spell.name || this.name;
       this.img = this._source.img || spell.img || this.img;
     }
+    if ( this.cachedSpell ) {
+      this._setOverride("activation", this.cachedSpell);
+      this._setOverride("duration", this.cachedSpell);
+      this._setOverride("range", this.cachedSpell);
+      this._setOverride("target", this.cachedSpell);
+    }
 
     this.visibility.requireMagic = true;
     super.prepareFinalData(rollData);
