@@ -1161,10 +1161,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
             <strong>${game.i18n.localize("AreYouSure")}</strong>
             ${game.i18n.format("DND5E.ContainerDeleteMessage", { count })}
           </p>
-          <div class="form-group">
-            <label for="deleteContents">${game.i18n.localize("DND5E.ContainerDeleteContents")}</label>
-            <input type="checkbox" id="deleteContents" name="deleteContents">
-          </div>
+          <label class="checkbox">
+            <span>${game.i18n.localize("DND5E.ContainerDeleteContents")}</span>
+            <input type="checkbox" name="deleteContents">
+          </label>
         `,
         yes: { callback: (event, button) => {
           const deleteContents = button.form.elements.deleteContents.checked;
