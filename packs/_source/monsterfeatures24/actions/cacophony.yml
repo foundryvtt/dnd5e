@@ -77,7 +77,7 @@ system:
     value: >-
       <p><em>Wisdom Saving Throw:</em> DC [[lookup @save.dc.value
       activity=pyvvXqoxJsjkkP38]], one creature in the [[lookup @name
-      lowercase]]'s space. <em>Failure:</em> The target has the
+      lowercase]]{monster}'s space. <em>Failure:</em> The target has the
       &amp;Reference[Deafened apply=false] condition until the start of the
       [[lookup @name lowercase]]{monster}'s next turn. While Deafened, the target also
       has Disadvantage on ability checks and attack rolls.</p>

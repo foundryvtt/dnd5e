@@ -565,7 +565,7 @@ items:
       description:
         value: >-
           <p class="feature">While in Bright Light, the [[lookup @name
-          lowercase]] has Disadvantage on attack rolls.</p>
+          lowercase]]{monster} has Disadvantage on attack rolls.</p>
         chat: ''
       identifier: light-sensitivity
       source:
@@ -1166,7 +1166,7 @@ items:
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplMirrorImag]{Mirror
           Image}</em> spell, requiring no spell components and using Wisdom as
           the spellcasting ability. The spell ends early if the [[lookup @name
-          lowercase]] starts or ends its turn in Bright Light.</p>
+          lowercase]]{monster} starts or ends its turn in Bright Light.</p>
         chat: ''
       identifier: phantasms
       source:
@@ -1579,7 +1579,7 @@ items:
           @target.template.size activity=Mng39fcFDc4I1AzY]]-[[lookup
           @target.template.units activity=Mng39fcFDc4I1AzY]]. Emanation
           originating from the [[lookup @name
-          lowercase]].</p><p><em>Failure:</em> The target has the
+          lowercase]]{monster}.</p><p><em>Failure:</em> The target has the
           &amp;Reference[Frightened apply=false] condition until the end of the
           [[lookup @name lowercase]]{monster}'s next turn.</p><p><em>Success:</em> The
           target is immune to this [[lookup @name lowercase]]{monster}'s Moan for the

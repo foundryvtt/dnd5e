@@ -959,7 +959,7 @@ items:
           activity=clFFG8uDBSFzxIo8]] in a [[lookup @target.template.size
           activity=clFFG8uDBSFzxIo8]]-[[lookup @target.template.units
           activity=clFFG8uDBSFzxIo8]] Emanation originating from the [[lookup
-          @name lowercase]] at the end of the [[lookup @name lowercase]]{monster}'s
+          @name lowercase]]{monster} at the end of the [[lookup @name lowercase]]{monster}'s
           turn.</p><p><em>Failure:</em> The target is cursed. Until the curse
           ends, the target's skin becomes slimy, the target can breathe air and
           water, and it can't regain Hit Points unless it is underwater.</p><p
@@ -1532,9 +1532,9 @@ items:
           within [[lookup @range.value activity=zdXAMnjaOcsVmLZP]]
           feet.</p><p><em>Failure:</em> The target has the
           &amp;Reference[Charmed apply=false] condition until the [[lookup @name
-          lowercase]] dies or is on a different plane of existence from the
+          lowercase]]{monster} dies or is on a different plane of existence from the
           target. While Charmed, the target acts as an ally to the [[lookup
-          @name lowercase]] and is under its control while within [[lookup
+          @name lowercase]]{monster} and is under its control while within [[lookup
           @target.template.size activity=zdXAMnjaOcsVmLZP]] feet of it. In
           addition, the [[lookup @name lowercase]]{monster} and the target can
           communicate telepathically with each other over any
@@ -1706,7 +1706,7 @@ items:
           @target.affects.labels.statblock activity=uI3HDQ1grN123Or3]] within
           [[lookup @range.value activity=uI3HDQ1grN123Or3]] feet. [[lookup
           @target.affects.special activity=uI3HDQ1grN123Or3]] by the [[lookup
-          @name lowercase]].</p><p><em>Failure:</em> [[/damage average]]
+          @name lowercase]]{monster}.</p><p><em>Failure:</em> [[/damage average]]
           damage.</p><p><em>Success:</em> [[lookup @damage.onSave capitalize
           activity=uI3HDQ1grN123Or3]] damage.</p><p><em>Failure or Success:</em>
           The [[lookup @name lowercase]]{monster} gains the target's memories if the

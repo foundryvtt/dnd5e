@@ -8,7 +8,7 @@ system:
     value: >-
       <section class="secret">
 
-      <p>**Cold Breath.** The [[lookup @details.type.config.label lowercase]]
+      <p>**Cold Breath.** The [[lookup @details.type.config.label lowercase]]{monster}
       exhales an icy blast in a 60-foot cone. Each creature in that area must
       make a  <strong>DC 20 Constitution</strong> saving throw, taking
       <strong>58 (13d8) <em>cold damage</em></strong> on a failed save, or half
@@ -16,7 +16,7 @@ system:
 
       </section>
 
-      <p>The [[lookup @details.type.config.label lowercase]] exhales an icy
+      <p>The [[lookup @details.type.config.label lowercase]]{monster} exhales an icy
       blast in a 60-foot cone. Each creature in that area must make a
       <strong>Constitution</strong> saving throw.</p>
     chat: ''

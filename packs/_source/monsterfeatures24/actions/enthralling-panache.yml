@@ -72,7 +72,7 @@ system:
       <p class="feature"><em>Wisdom Saving Throw:</em> DC [[lookup
       @save.dc.value activity=66IPjaLIJqqwvmrL]], [[lookup
       @target.affects.labels.statblock activity=66IPjaLIJqqwvmrL]] the [[lookup
-      @name lowercase]] can see within [[lookup @range.value
+      @name lowercase]]{monster} can see within [[lookup @range.value
       activity=66IPjaLIJqqwvmrL]] feet.</p><p class="feature"><em>Failure:</em>
       The target has the &amp;Reference[Charmed apply=false] condition until the
       start of the [[lookup @name lowercase]]{monster}'s next turn.</p>

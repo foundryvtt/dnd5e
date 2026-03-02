@@ -943,7 +943,7 @@ items:
           <p class="feature"><em>Dexterity Saving Throw:</em> DC [[lookup
           @save.dc.value activity=Ln5NXBaHGKlwdoiP]], one Large or smaller
           [[lookup @target.affects.type activity=Ln5NXBaHGKlwdoiP]] the [[lookup
-          @name lowercase]] can see within [[lookup @range.value
+          @name lowercase]]{monster} can see within [[lookup @range.value
           activity=Ln5NXBaHGKlwdoiP]] feet.</p><p
           class="feature"><em>Failure:</em> The target has the
           &amp;Reference[Restrained apply=false] condition until the web is

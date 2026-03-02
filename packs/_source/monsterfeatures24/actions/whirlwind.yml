@@ -89,9 +89,9 @@ system:
       <p class="feature"><em>Strength Saving Throw:</em> DC [[lookup
       @save.dc.value activity=GQzr4EMMm6kkZVdC]], each Medium or smaller
       [[lookup @target.affects.type activity=GQzr4EMMm6kkZVdC]] in the [[lookup
-      @name lowercase]]'s space. <em>Failure:</em> [[/damage average]] damage,
+      @name lowercase]]{monster}'s space. <em>Failure:</em> [[/damage average]] damage,
       and the target is pushed up to 20 feet straight away from the [[lookup
-      @name lowercase]] and has the &amp;Reference[Prone apply=false] condition.
+      @name lowercase]]{monster} and has the &amp;Reference[Prone apply=false] condition.
       <em>Success:</em> Half damage only.</p>
     chat: ''
   identifier: whirlwind

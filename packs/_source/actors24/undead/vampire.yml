@@ -1408,7 +1408,7 @@ items:
           activity=ngPzlEI5pVSdBv86]].</p><p><em>Failure:</em> [[/damage
           average]] damage. The target's Hit Point maximum decreases by an
           amount equal to the Necrotic damage taken, and the [[lookup @name
-          lowercase]] regains Hit Points equal to that amount. A Humanoid
+          lowercase]]{monster} regains Hit Points equal to that amount. A Humanoid
           reduced to 0 Hit Points by this damage and then buried rises the
           following sunset as a
           <strong>@UUID[Compendium.dnd5e.actors24.Actor.mmVampireSpawn00]{Vampire
@@ -1580,7 +1580,7 @@ items:
           the [[lookup @name lowercase]]{monster}'s [[/item .mmBite0000000000]]{Bite},
           the damage of which doesn't end the spell. When the spell ends, the
           target is unaware it was Charmed by the [[lookup @name
-          lowercase]].</p>
+          lowercase]]{monster}.</p>
         chat: ''
       identifier: charm
       source:
@@ -2057,7 +2057,7 @@ items:
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplCommand000]</em>,
           requiring no spell components and using Charisma as the spellcasting
           ability (spell save DC [[lookup @abilities.cha.dc]]). The [[lookup
-          @name lowercase]] can't take this action again until the start of its
+          @name lowercase]]{monster} can't take this action again until the start of its
           next turn.</p>
         chat: ''
       identifier: beguile
@@ -2585,14 +2585,14 @@ items:
           The [[lookup @name lowercase]]{monster} can't enter a residence without an
           invitation from an occupant.</p><p
           class="feature-trait"><strong>Running Water.</strong> The [[lookup
-          @name lowercase]] takes 20 Acid damage if it ends its turn in running
+          @name lowercase]]{monster} takes 20 Acid damage if it ends its turn in running
           water.</p><p class="feature-trait"><strong>Stake to the
           Heart.</strong> The [[lookup @name lowercase]]{monster} is destroyed if a
           weapon that deals Piercing damage is driven into the [[lookup @name
-          lowercase]]'s heart while the [[lookup @name lowercase]]{monster} has the
+          lowercase]]{monster}'s heart while the [[lookup @name lowercase]]{monster} has the
           Incapacitated condition.</p><p
           class="feature-trait"><strong>Sunlight.</strong> The [[lookup @name
-          lowercase]] takes 20 Radiant damage if it starts its turn in sunlight.
+          lowercase]]{monster} takes 20 Radiant damage if it starts its turn in sunlight.
           While in sunlight, it has Disadvantage on attack rolls and ability
           checks.</p>
         chat: ''

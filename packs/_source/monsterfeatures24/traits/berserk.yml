@@ -116,14 +116,14 @@ system:
     value: >-
       <p>Whenever the [[lookup @name lowercase]]{monster} starts its turn
       &amp;Reference[Bloodied], roll [[/r 1d6]]. On a 6, the [[lookup @name
-      lowercase]] goes berserk. On each of its turns while berserk, the [[lookup
-      @name lowercase]] attacks the nearest creature it can see. If no creature
+      lowercase]]{monster} goes berserk. On each of its turns while berserk, the [[lookup
+      @name lowercase]]{monster} attacks the nearest creature it can see. If no creature
       is near enough to move to and attack, the [[lookup @name lowercase]]{monster}
       attacks an object. Once the [[lookup @name lowercase]]{monster} goes berserk, it
       remains so until it is destroyed or it is no longer Bloodied.</p><p>The
       [[lookup @name lowercase]]{monster}'s creator, if within [[lookup @range.value
       activity=tnkOsrSwEElO2kZM]] feet of the berserk [[lookup @name
-      lowercase]], can try to calm it by taking an action to make a [[/check
+      lowercase]]{monster}, can try to calm it by taking an action to make a [[/check
       ability=cha skill=per dc=@abilities.str.dc]] DC 15 Charisma (Persuasion)
       check; the golem must be able to hear its creator. If this check succeeds,
       the golem ceases being berserk until the start of its next turn, at which

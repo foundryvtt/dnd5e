@@ -1395,7 +1395,7 @@ items:
           <p class="feature"><em>Dexterity Saving Throw:</em> DC [[lookup
           @save.dc.value activity=v39JwGqgfaKiA4vc]], one [[lookup
           @target.affects.type activity=v39JwGqgfaKiA4vc]] the [[lookup @name
-          lowercase]] can see within [[lookup @range.value
+          lowercase]]{monster} can see within [[lookup @range.value
           activity=v39JwGqgfaKiA4vc]] feet.</p><p><em>Failure:</em> [[/damage
           average]] damage.</p><p><em>Success:</em> Half damage.</p>
         chat: ''
@@ -2100,7 +2100,7 @@ items:
           underwater.</p><p class="feature"><em>Failure:</em> The target has the
           &amp;Reference[Blinded apply=false] and &amp;Reference[Poisoned
           apply=false] conditions until the end of the [[lookup @name
-          lowercase]]'s next turn. The [[lookup @name lowercase]]{monster} then moves up
+          lowercase]]{monster}'s next turn. The [[lookup @name lowercase]]{monster} then moves up
           to its Speed.</p><p class="feature"><em>Failure or Success:</em> The
           [[lookup @name lowercase]]{monster} can't take this action again until the
           start of its next turn.</p>

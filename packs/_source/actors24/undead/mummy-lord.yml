@@ -690,7 +690,7 @@ items:
           <p>If destroyed, the  [[lookup @name lowercase]]{monster} gains a new body in
           24 hours if its heart is intact, reviving with all its Hit Points. The
           new body appears in an unoccupied space within the  [[lookup @name
-          lowercase]]'s lair. The heart is a Tiny object that has AC 17, HP 10,
+          lowercase]]{monster}'s lair. The heart is a Tiny object that has AC 17, HP 10,
           and Immunity to all damage except Fire.</p>
         chat: ''
       identifier: undead-restoration
@@ -2712,7 +2712,7 @@ items:
         value: >-
           <p class="feature"><em>Trigger:</em> The [[lookup @name lowercase]]{monster} is
           hit by an attack roll. <em>Response:</em> The [[lookup @name
-          lowercase]] adds 2 to its AC against the attack, possibly causing the
+          lowercase]]{monster} adds 2 to its AC against the attack, possibly causing the
           attack to miss, and the [[lookup @name lowercase]]{monster} teleports up to
           [[lookup @range.value activity=EsBmMUQMO4b0g6Yw]] [[lookup
           @range.units activity=EsBmMUQMO4b0g6Yw]]. [[lookup
@@ -3313,11 +3313,11 @@ items:
           <p class="feature"><em>Wisdom Saving Throw:</em> DC [[lookup
           @save.dc.value activity=8LmlZfevSQkOxGSN]], one [[lookup
           @target.affects.type activity=8LmlZfevSQkOxGSN]] the [[lookup @name
-          lowercase]] can see within [[lookup @range.value
+          lowercase]]{monster} can see within [[lookup @range.value
           activity=8LmlZfevSQkOxGSN]] feet.</p><p><em>Failure:</em> [[/damage
           average]] damage, and the target has the &amp;Reference[Paralyzed
           apply=false] condition until the end of the [[lookup @name
-          lowercase]]'s next turn.</p>
+          lowercase]]{monster}'s next turn.</p>
         chat: ''
       identifier: dreadful-glare
       source:

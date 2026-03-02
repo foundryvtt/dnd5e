@@ -12,13 +12,13 @@ system:
       ONE TYPE OF BREATH WEAPON, AND CONTAINS THE CHARGES FOR THOSE BREATH
       WEAPONS. EACH BREATH WEAPON ITSELF SHOULD ALSO BE
       ADDED.</strong>)</p><p><br />The [[lookup @details.type.config.label
-      lowercase]] uses one of the following breath weapons.</p><p>**Fire
-      Breath.** The [[lookup @details.type.config.label lowercase]] exhales fire
+      lowercase]]{monster} uses one of the following breath weapons.</p><p>**Fire
+      Breath.** The [[lookup @details.type.config.label lowercase]]{monster} exhales fire
       in an 60-foot line that is 5 feet wide. Each creature in that line must
       make a <strong>DC 18 Dexterity</strong> saving throw, taking <strong>45
       (13d6) <em>fire damage</em></strong> on a failed save, or half as much
       damage on a successful one.</p><p>**Sleep Breath.** The [[lookup
-      @details.type.config.label lowercase]] exhales sleep gas in a 60-foot
+      @details.type.config.label lowercase]]{monster} exhales sleep gas in a 60-foot
       cone. Each creature in that area must succeed on a <strong>DC 18
       Constitution</strong> saving throw or fall unconscious for 10 minutes.
       This effect ends for a creature if the creature takes damage or someone
@@ -26,7 +26,7 @@ system:
 
       </section>
 
-      <p>The [[lookup @details.type.config.label lowercase]] breathes in!</p>
+      <p>The [[lookup @details.type.config.label lowercase]]{monster} breathes in!</p>
     chat: ''
   source:
     custom: ''

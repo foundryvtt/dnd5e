@@ -753,8 +753,8 @@ items:
           itself at a time.</p><p class="feature">As an action, a creature
           within [[lookup @range.value activity=EcTOfXWsDJRHLydy]] [[lookup
           @range.units activity=EcTOfXWsDJRHLydy]]. of the [[lookup @name
-          lowercase]] can pull a creature or an object out of the [[lookup @name
-          lowercase]] by succeeding on a [[/check dc=12 ability=str skill=ath
+          lowercase]]{monster} can pull a creature or an object out of the [[lookup @name
+          lowercase]]{monster} by succeeding on a [[/check dc=12 ability=str skill=ath
           format=long]], and the puller takes [[/damage average
           activity=PMCvyqxfUYiPzNK8]] damage.</p>
         chat: ''
@@ -1224,18 +1224,18 @@ items:
         value: >-
           <p class="feature">The [[lookup @name lowercase]]{monster} moves up to its
           Speed without provoking Opportunity Attacks. The [[lookup @name
-          lowercase]] can move through the spaces of Large or smaller creatures
+          lowercase]]{monster} can move through the spaces of Large or smaller creatures
           if it has room inside itself to contain them (see the
           @UUID[.mmOozeCube000000] trait).</p><p class="feature"><em>Dexterity
           Saving Throw:</em> DC [[lookup @save.dc.value
           activity=5o0Bh8PQaojx5XMx]], each creature whose space the [[lookup
-          @name lowercase]] enters for the first time during this move.</p><p
+          @name lowercase]]{monster} enters for the first time during this move.</p><p
           class="feature"><em>Failure:</em> [[/damage average]] damage, and the
           target is engulfed. An engulfed target is &amp;Reference[suffocating],
           can't cast spells with a Verbal component, has the
           &amp;Reference[Restrained apply=false] condition, and takes [[/damage
           average]] damage at the start of each of the [[lookup @name
-          lowercase]]'s turns. When the [[lookup @name lowercase]]{monster} moves, the
+          lowercase]]{monster}'s turns. When the [[lookup @name lowercase]]{monster} moves, the
           engulfed target moves with it. An engulfed target can try to escape by
           taking an action to make a [[/check ability=str skill=ath
           dc=@abilities.str.dc]] check. On a successful check, the target

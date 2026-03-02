@@ -1243,7 +1243,7 @@ items:
           <p><em>Constitution Saving Throw:</em> DC [[lookup @save.dc.value
           activity=VC2iSwNPNaZ7M2bT]], [[lookup @target.affects.special
           activity=VC2iSwNPNaZ7M2bT]] by the [[lookup @name
-          lowercase]].</p><p><em>Failure:</em> [[/damage average]] damage, and
+          lowercase]]{monster}.</p><p><em>Failure:</em> [[/damage average]] damage, and
           the target has the &amp;Reference[Stunned apply=false] condition until
           the start of the [[lookup @name lowercase]]{monster}'s next
           turn.</p><p><em>Success:</em> Half damage only.</p>

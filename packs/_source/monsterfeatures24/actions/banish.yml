@@ -84,11 +84,11 @@ system:
       feet.</p><p><em>Failure:</em> [[/damage average]] damage, and the target
       has the &amp;Reference[Incapacitated apply=false] condition and is
       transported to a harmless demiplane until the start of the [[lookup @name
-      lowercase]]'s next turn, at which point it re­appears in an unoccupied
+      lowercase]]{monster}'s next turn, at which point it re­appears in an unoccupied
       space of the [[lookup @name lowercase]]{monster}'s choice within [[lookup
       @range.value activity=kWKwiAYgyeKBLMNJ]] feet of the [[lookup @name
-      lowercase]].</p><p><em>Failure or Success:</em> The [[lookup @name
-      lowercase]] can't take this action again [[lookup @duration.special
+      lowercase]]{monster}.</p><p><em>Failure or Success:</em> The [[lookup @name
+      lowercase]]{monster} can't take this action again [[lookup @duration.special
       activity=kWKwiAYgyeKBLMNJ]].</p>
     chat: ''
   identifier: banish

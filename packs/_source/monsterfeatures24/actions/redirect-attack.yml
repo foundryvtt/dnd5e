@@ -62,7 +62,7 @@ system:
   description:
     value: >-
       <p class="feature"><em>Trigger:</em> A creature the [[lookup @name
-      lowercase]] can see makes an attack roll against it.</p><p
+      lowercase]]{monster} can see makes an attack roll against it.</p><p
       class="feature"><em>Response:</em> The [[lookup @name lowercase]]{monster} chooses
       [[lookup @target.affects.special activity=pIlCmuPw8YUqAISY]] within
       [[lookup @range.value activity=pIlCmuPw8YUqAISY]] feet of itself. The

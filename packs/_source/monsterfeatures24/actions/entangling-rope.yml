@@ -76,7 +76,7 @@ system:
     value: >-
       <p class="feature"><em>Strength Saving Throw:</em> DC [[lookup
       @save.dc.value activity=n8nEah4vbrEPphNF]], one creature the [[lookup
-      @name lowercase]] can see within [[lookup @range.value
+      @name lowercase]]{monster} can see within [[lookup @range.value
       activity=n8nEah4vbrEPphNF]] feet. <em>Failure:</em> [[/damage average]]
       damage, and the target has the &amp;Reference[Restrained apply=false]
       condition until the rope is destroyed, the [[lookup @name lowercase]]{monster} uses

@@ -795,7 +795,7 @@ items:
         value: >-
           <p class="feature">The [[lookup @name lowercase]]{monster} and its light have
           the &amp;Reference[Invisible apply=false] condition until the [[lookup
-          @name lowercase]]'s &amp;Reference[Concentration] ends on this effect,
+          @name lowercase]]{monster}'s &amp;Reference[Concentration] ends on this effect,
           which ends early immediately after the [[lookup @name lowercase]]{monster}
           makes an attack roll or uses Consume Life.</p>
         chat: ''
@@ -1011,10 +1011,10 @@ items:
           <p class="feature"><em>Constitution Saving Throw:</em> DC [[lookup
           @save.dc.value activity=1Hy8CdhpwQlLxDPq]], [[lookup
           @target.affects.special activity=1Hy8CdhpwQlLxDPq]] the [[lookup @name
-          lowercase]] can see within [[lookup @range.value
+          lowercase]]{monster} can see within [[lookup @range.value
           activity=1Hy8CdhpwQlLxDPq]] feet. that has 0 Hit
           Points.</p><p><em>Failure:</em> The target dies, and the [[lookup
-          @name lowercase]] regains [[/healing average
+          @name lowercase]]{monster} regains [[/healing average
           activity=1waYTjY3NAIGZgrI]].</p>
         chat: ''
       identifier: consume-life

@@ -773,7 +773,7 @@ items:
         value: >-
           <p class="feature">[[/attack extended]]. [[/damage average extended]],
           and the target is cursed for 24 hours or until the [[lookup @name
-          lowercase]] dies. Until the curse ends, the target gains no benefit
+          lowercase]]{monster} dies. Until the curse ends, the target gains no benefit
           from finishing Short Rests.</p>
         chat: ''
       identifier: restless-touch
@@ -1378,7 +1378,7 @@ items:
           <p class="feature"><em>Wisdom Saving Throw:</em> DC [[lookup
           @save.dc.value activity=Y9H9ImnMcffBZlH3]], one [[lookup
           @target.affects.type activity=Y9H9ImnMcffBZlH3]] the [[lookup @name
-          lowercase]] can see within [[lookup @range.value
+          lowercase]]{monster} can see within [[lookup @range.value
           activity=Y9H9ImnMcffBZlH3]] feet.</p><p><em>Failure:</em> If the
           target has 20 Hit Points or fewer, it has the
           &amp;Reference[Unconscious apply=false] condition for [[lookup

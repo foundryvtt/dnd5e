@@ -619,7 +619,7 @@ items:
         value: >-
           <p>The ground in a [[lookup @target.template.size
           activity=zVznqPXgYjETqpQz]]-foot Emanation originating from the
-          [[lookup @name]] is &amp;Reference[Difficult Terrain].</p>
+          [[lookup @name]]{monster} is &amp;Reference[Difficult Terrain].</p>
         chat: ''
       identifier: aberrant-ground
       source:
@@ -790,7 +790,7 @@ items:
           activity=PyGOI84k0PPYrru8]], any [[lookup @target.affects.type
           activity=PyGOI84k0PPYrru8]] that starts its turn within [[lookup
           @target.template.size activity=PyGOI84k0PPYrru8]] feet of the [[lookup
-          @name lowercase]] while it is babbling.</p><p><em>Failure:</em> The
+          @name lowercase]]{monster} while it is babbling.</p><p><em>Failure:</em> The
           target rolls [[/r 1d8]] to determine what it does during the current
           turn:</p><p class="feature-trait"><strong>1–4.</strong> The target
           does nothing.</p><p class="feature-trait"><strong>5–6.</strong> The
@@ -906,7 +906,7 @@ items:
           is a Medium or smaller creature, it has the &amp;Reference[Prone
           apply=false] condition. The target dies if it is reduced to 0 Hit
           Points by this attack. Its body is then absorbed into the [[lookup
-          @name]], leaving only equipment behind.</p>
+          @name]]{monster}, leaving only equipment behind.</p>
         chat: ''
       identifier: bite
       source:
@@ -1122,7 +1122,7 @@ items:
           activity=JfU8KFZkAJxWtrhk]] feet.</p><p><em>Failure:</em> [[/damage
           average]] damage, and the target has the &amp;Reference[Blinded
           apply=false] condition until the end of the [[lookup @name
-          lowercase]]'s next turn.</p>
+          lowercase]]{monster}'s next turn.</p>
         chat: ''
       identifier: blinding-spittle
       source:

@@ -1336,7 +1336,7 @@ items:
           <p class="feature"><em>Strength Saving Throw:</em> DC [[lookup
           @save.dc.value activity=YorssyWMumAsvzx3]], [[lookup
           @target.affects.special activity=YorssyWMumAsvzx3]] by the [[lookup
-          @name lowercase]] (it can have up to three creatures swallowed at a
+          @name lowercase]]{monster} (it can have up to three creatures swallowed at a
           time).</p><p class="feature"><em>Failure:</em> The target is swallowed
           by the [[lookup @name lowercase]]{monster}, and the Grappled conditions end. A
           swallowed creature has the &amp;Reference[Blinded apply=false] and
@@ -1352,7 +1352,7 @@ items:
           in a space within [[lookup @range.value activity=rGeGukkm2t2fXsoy]]
           feet of the [[lookup @name lowercase]]{monster} and has the
           &amp;Reference[Prone apply=false] condition. If the [[lookup @name
-          lowercase]] dies, any swallowed creature no longer has the Restrained
+          lowercase]]{monster} dies, any swallowed creature no longer has the Restrained
           and can escape from the corpse by using 20 feet of movement, exiting
           Prone.</p>
         chat: ''

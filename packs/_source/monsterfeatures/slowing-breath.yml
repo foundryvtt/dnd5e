@@ -8,7 +8,7 @@ system:
     value: >-
       <section class="secret">
 
-      <p>**Slowing Breath.** The [[lookup @details.type.config.label lowercase]]
+      <p>**Slowing Breath.** The [[lookup @details.type.config.label lowercase]]{monster}
       exhales gas in a 60-foot cone. Each creature in that area must succeed on
       a  <strong>DC 18 Constitution</strong> saving throw. On a failed save, the
       creature can't use reactions, its speed is halved, and it can't make more
@@ -19,7 +19,7 @@ system:
 
       </section>
 
-      <p>The [[lookup @details.type.config.label lowercase]] exhales gas in a
+      <p>The [[lookup @details.type.config.label lowercase]]{monster} exhales gas in a
       60-foot cone. Each creature in that area must make a
       <strong>Constitution</strong> saving throw.</p>
     chat: ''

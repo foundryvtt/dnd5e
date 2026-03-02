@@ -1014,7 +1014,7 @@ items:
           <p class="feature"><em>Dexterity Saving Throw:</em> DC [[lookup
           @save.dc.value activity=C7BMf8hIfCjxRSWC]], one [[lookup
           @target.affects.type activity=C7BMf8hIfCjxRSWC]] the [[lookup @name
-          lowercase]] can see within [[lookup @range.value
+          lowercase]]{monster} can see within [[lookup @range.value
           activity=C7BMf8hIfCjxRSWC]] [[lookup @range.units
           activity=C7BMf8hIfCjxRSWC]].</p><p><em>Failure:</em> If the [[lookup
           @target.affects.type activity=C7BMf8hIfCjxRSWC]] has 100 Hit Points or
@@ -1142,8 +1142,8 @@ items:
         value: >-
           <p class="feature">[[/attack extended]]. [[/damage average extended]].
           <em>Hit or Miss:</em> The sword magically returns to the [[lookup
-          @name lowercase]]'s hand or hovers within 5 feet of the [[lookup @name
-          lowercase]] immediately after a ranged attack.</p>
+          @name lowercase]]{monster}'s hand or hovers within 5 feet of the [[lookup @name
+          lowercase]]{monster} immediately after a ranged attack.</p>
         chat: ''
       identifier: flying-sword
       source:
@@ -3088,11 +3088,11 @@ items:
         value: >-
           <p><em>Constitution Saving Throw:</em> DC [[lookup @save.dc.value
           activity=B6xM8C2pABIb5o7y]], one creature the [[lookup @name
-          lowercase]] can see within [[lookup @range.value
+          lowercase]]{monster} can see within [[lookup @range.value
           activity=B6xM8C2pABIb5o7y]] feet.</p><p><em>Failure:</em> The target
           has the &amp;Reference[Blinded apply=false] condition for 1
           minute.</p><p><em>Failure or Success:</em> The [[lookup @name
-          lowercase]] can't take this action again until the start of its next
+          lowercase]]{monster} can't take this action again until the start of its next
           turn.</p>
         chat: ''
       identifier: blinding-gaze
