@@ -742,7 +742,7 @@ export function migrateMessageData(messageData) {
       cause: use?.cause,
       concentration: use?.concentrationId,
       deltas: use?.consumed,
-      effects: use?.effects,
+      effects: use?.effects?.map?.(id => `.ActiveEffect.${id}`),
       scaling: use?.scaling,
       spellLevel: use?.spellLevel
     };

@@ -74,5 +74,5 @@
  * @typedef UsageMessageSystemData
  * @property {string} [cause]          Relative ID of the activity that caused this one on the same actor.
  * @property {ActorDeltasData} deltas  Actor/item consumption from this turn change.
- * @property {string[]} effects        Effects that can be applied.
+ * @property {string[]} effects        Relative UUIDs of effects that can be applied.
  */
