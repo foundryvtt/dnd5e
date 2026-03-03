@@ -1,4 +1,11 @@
 /**
+ * @typedef ApplyActiveEffectActivityBehaviorData
+ * @property {Set<string>} effects  UUIDs of effects to apply.
+ */
+
+/* -------------------------------------------- */
+
+/**
  * @typedef DifficultTerrainRegionBehaviorSystemData
  * @property {boolean} magical                  This difficult terrain is caused by magic.
  * @property {Set<string>} types                Types of difficult terrain represented.
