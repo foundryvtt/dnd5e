@@ -6,6 +6,7 @@ export {
   DifficultTerrainRegionBehaviorType,
   RotateAreaRegionBehaviorType
 };
+export * from "./apply-active-effect.mjs";
 export {default as BaseActivityBehavior} from "./base-activity-behavior.mjs";
 
 export const config = {
