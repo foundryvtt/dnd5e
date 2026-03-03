@@ -6,12 +6,12 @@
             <i class="fas fa-plus" inert></i>
         </button>
     </legend>
-    <multi-select name="appliedEffects" class="hidden-tags">
-        {{ selectOptions allEffects }}
-    </multi-select>
+    <multi-select name="appliedLocalEffects" class="hidden-tags">{{ selectOptions allEffects }}</multi-select>
+    <document-tags name="appliedRemoteEffects" class="hidden-tags" type="ActiveEffect"></document-tags>
     <ul class="separated-list effects-list flexcol unlist">
         {{#each appliedEffects}}
-        <li data-index="{{ @index }}" data-effect-id="{{ effect.id }}" data-expand-id="effects.{{ effect.id }}">
+        <li data-index="{{ @index }}" data-profile-id="{{ data._id }}" data-effect-id="{{ effect.id }}"
+            data-expand-id="effects.{{ data._id }}">
             {{> ".effect" }}
         </li>
         {{else}}
@@ -31,10 +31,12 @@
                 data-tooltip aria-label="{{ localize 'DND5E.EFFECT.Action.Dissociate' }}">
             <i class="fa-solid fa-minus" inert></i>
         </button>
+        {{#unless data.uuid}}
         <button type="button" class="unbutton control-button" data-action="deleteEffect"
                 data-tooltip aria-label="{{ localize 'DND5E.EFFECT.Action.Delete' }}">
             <i class="fa-solid fa-trash" inert></i>
         </button>
+        {{/unless}}
     </div>
 </div>
 <input type="hidden" name="{{ prefix }}_id" value="{{ data._id }}">

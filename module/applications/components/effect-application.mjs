@@ -70,7 +70,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
   /* -------------------------------------------- */
 
   /** @override */
-  connectedCallback() {
+  async connectedCallback() {
     // Fetch the associated chat message
     const messageId = this.closest("[data-message-id]")?.dataset.messageId;
     this.chatMessage = game.messages.get(messageId);
@@ -80,7 +80,8 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
     if ( !this.effectsList || !this.targetList ) {
       if ( !this.effects.length ) {
         const item = this.chatMessage.getAssociatedItem();
-        this.effects = Array.from(this.querySelectorAll("option")).map(o => item?.effects.get(o.value)).filter(_ => _);
+        this.effects = (await Promise.all(Array.from(this.querySelectorAll("option")).map(o => fromUuid(o.value))))
+          .filter(_ => _);
       }
 
       const div = document.createElement("div");
@@ -120,7 +121,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       effect.updateDuration();
       const li = document.createElement("li");
       li.classList.add("effect");
-      li.dataset.id = effect.id;
+      li.dataset.uuid = effect.uuid;
       li.innerHTML = `
         <img class="gold-icon">
         <div class="name-stacked">
@@ -181,7 +182,8 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
    */
   async _applyEffectToActor(effect, actor) {
     const concentration = this.chatMessage.getAssociatedActor()?.effects.get(this.chatMessage.system.concentration);
-    const origin = concentration ?? effect;
+    const item = this.chatMessage.getAssociatedItem() ?? {};
+    const origin = concentration ?? (effect.inCompendium && item ? item : effect);
     if ( !game.user.isGM && !actor.isOwner ) {
       throw new Error(game.i18n.localize("DND5E.EffectApplyWarningOwnership"));
     }
@@ -200,7 +202,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
     const existingEffect = actor.effects.find(e => e.origin === origin.uuid);
     if ( existingEffect ) {
       return existingEffect.update(foundry.utils.mergeObject({
-        ...effect.constructor.getInitialDuration(),
+        ...effect.constructor.getEffectStart(),
         disabled: false
       }, effectFlags));
     }
@@ -214,7 +216,11 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       ...effect.toObject(),
       disabled: false,
       transfer: false,
-      origin: origin.uuid
+      origin: origin.uuid,
+      _stats: {
+        [effect.inCompendium ? "compendiumSource" : "duplicateSource"]: effect.uuid,
+        [effect.inCompendium ? "duplicateSource" : "compendiumSource"]: null
+      }
     }, effectFlags);
     return await ActiveEffect.implementation.create(effectData, { parent: actor });
   }
@@ -227,7 +233,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
    */
   async _onApplyEffect(event) {
     event.preventDefault();
-    const effect = this.chatMessage.getAssociatedItem()?.effects.get(event.target.closest("[data-id]")?.dataset.id);
+    const effect = await fromUuid(event.target.closest("[data-uuid]")?.dataset.uuid);
     if ( !effect ) return;
     for ( const target of this.targetList.querySelectorAll("[data-target-uuid]") ) {
       const actor = fromUuidSync(target.dataset.targetUuid);
