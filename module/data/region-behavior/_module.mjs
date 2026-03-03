@@ -1,8 +1,11 @@
-import {default as ApplyActiveEffect5eRegionBehaviorType} from "./apply-active-effect.mjs";
+import {
+  default as ApplyActiveEffect5eRegionBehaviorType, ApplyActiveEffectActivityBehavior
+} from "./apply-active-effect.mjs";
 import {default as DifficultTerrainRegionBehaviorType, DifficultTerrainActivityBehavior} from "./difficult-terrain.mjs";
 import {default as RotateAreaRegionBehaviorType} from "./rotate-area.mjs";
 
 export {
+  ApplyActiveEffectActivityBehavior,
   ApplyActiveEffect5eRegionBehaviorType,
   DifficultTerrainActivityBehavior,
   DifficultTerrainRegionBehaviorType,
