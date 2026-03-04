@@ -577,6 +577,12 @@ export function migrateItemData(item, itemData, migrationData, flags={}) {
     }
   }
 
+  // Commit advancement data structure change
+  if ( itemData.system?.advancement
+    && (foundry.utils.isNewerVersion("5.3.0", itemData._stats?.systemVersion) || flags.bypassVersionCheck) ) {
+    updateData["system.==advancement"] = itemData.system.advancement;
+  }
+
   // Migrate properties
   const migratedProperties = foundry.utils.getProperty(itemData, "flags.dnd5e.migratedProperties");
   if ( migratedProperties?.length ) {
