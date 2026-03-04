@@ -1724,6 +1724,13 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   async _onDropItem(event, item) {
     if ( !this.inventorySource.isOwner || (event._behavior === "none") ) return;
 
+    // Handle dropping onto a container icon
+    const containerTarget = event.target.closest(".container[data-item-id]");
+    if ( containerTarget ) {
+      const container = this.inventorySource.items.get(containerTarget.dataset.itemId);
+      if ( container ) return this._onDropItemContainer(event, item, container);
+    }
+
     // Handle moving out of container & item sorting
     if ( (event._behavior === "move") && (this.inventorySource.uuid === item.parent?.uuid) ) {
       if ( item.system.container !== null ) await item.update({ "system.container": null });
@@ -1731,6 +1738,49 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     }
 
     return this._onDropCreateItems(event, [item]);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle dropping an item onto a container icon on the actor sheet.
+   * @param {DragEvent} event      The concluding DragEvent which provided the drop data.
+   * @param {Item5e} item          The dropped item.
+   * @param {Item5e} container     The target container.
+   * @returns {Promise}
+   * @protected
+   */
+  async _onDropItemContainer(event, item, container) {
+    // Prevent dropping a container into itself or its children
+    if ( item.type === "container" ) {
+      const parentContainers = await container.system.allContainers();
+      if ( (container.id === item.id) || parentContainers.includes(item) ) {
+        ui.notifications.error("DND5E.ContainerRecursiveError", { localize: true });
+        return;
+      }
+    }
+
+    // If the item is from the same actor, move it into the container
+    if ( (event._behavior === "move") && (this.inventorySource.uuid === item.parent?.uuid) ) {
+      return item.update({ "system.container": container.id });
+    }
+
+    // Transform physical items from NPCs to their gear versions
+    if ( item.actor?.system.isNPC && (item.actor !== this.actor) && item.system.asGear ) {
+      item = await item.system.asGear();
+    }
+
+    // Otherwise, create a new copy inside the container
+    const toCreate = await Item5e.createWithContents([item], {
+      container,
+      transformFirst: itemData => {
+        if ( itemData instanceof foundry.abstract.Document ) itemData = itemData.toObject();
+        return this._onDropSingleItem(event, itemData, { container: container.id });
+      }
+    });
+    const created = await Item5e.createDocuments(toCreate, { parent: this.inventorySource, keepId: true });
+    if ( event._behavior === "move" ) item.delete({ deleteContents: true });
+    return created;
   }
 
   /* -------------------------------------------- */
@@ -1791,13 +1841,15 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
   /**
    * Handles dropping of a single item onto this character sheet.
-   * @param {DragEvent} event            The concluding DragEvent which provided the drop data.
-   * @param {object} itemData            The item data to create.
-   * @returns {Promise<object|boolean>}  The item data to create after processing, or false if the item should not be
-   *                                     created or creation has been otherwise handled.
+   * @param {DragEvent} event                  The concluding DragEvent which provided the drop data.
+   * @param {object} itemData                  The item data to create.
+   * @param {object} [options={}]
+   * @param {string} [options.container=null]  ID of the container into which this item is being dropped.
+   * @returns {Promise<object|boolean>}        The item data to create after processing, or false if the item should
+   *                                           not be created or creation has been otherwise handled.
    * @protected
    */
-  async _onDropSingleItem(event, itemData) {
+  async _onDropSingleItem(event, itemData, { container=null }={}) {
     const actor = this.inventorySource;
 
     // Check to make sure items of this type are allowed on this actor
@@ -1822,7 +1874,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     this._onDropResetData(event, itemData);
 
     // Stack identical consumables
-    const stacked = this._onDropStackConsumables(event, itemData);
+    const stacked = this._onDropStackConsumables(event, itemData, { container });
     if ( stacked ) return false;
 
     // Bypass normal creation flow for any items with advancement

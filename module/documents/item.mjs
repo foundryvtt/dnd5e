@@ -1225,10 +1225,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @returns {Promise<object[]>}                Data for items to be created.
    */
   static async createWithContents(items, { container, keepId=false, transformAll, transformFirst }={}) {
-    let depth = 0;
+    let initialDepth = 0;
     if ( container ) {
-      depth = 1 + (await container.system.allContainers()).length;
-      if ( depth > PhysicalItemTemplate.MAX_DEPTH ) {
+      initialDepth = 1 + (await container.system.allContainers()).length;
+      if ( initialDepth > PhysicalItemTemplate.MAX_DEPTH ) {
         ui.notifications.warn(game.i18n.format("DND5E.ContainerMaxDepth", { depth: PhysicalItemTemplate.MAX_DEPTH }));
         return;
       }
@@ -1237,7 +1237,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const createItemData = async (item, containerId, depth) => {
       const o = { container: containerId, depth };
       let newItemData = transformAll ? await transformAll(item, o) : item;
-      if ( transformFirst && (depth === 0) ) newItemData = await transformFirst(newItemData, o);
+      if ( transformFirst && (depth === initialDepth) ) newItemData = await transformFirst(newItemData, o);
       if ( !newItemData ) return;
       if ( newItemData instanceof Item ) newItemData = game.items.fromCompendium(newItemData, {
         clearSort: false, keepId: true, clearOwnership: false
@@ -1254,7 +1254,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     };
 
     const created = [];
-    for ( const item of items ) await createItemData(item, container?.id, depth);
+    for ( const item of items ) await createItemData(item, container?.id, initialDepth);
     return created;
   }
 
