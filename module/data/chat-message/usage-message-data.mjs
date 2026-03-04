@@ -24,7 +24,7 @@ export default class UsageMessageData extends ChatMessageDataModel {
       cause: new StringField(), // TODO: Replace with DocumentUUIDField with `relative: true` in DnD5e 6.0
       concentration: new DocumentIdField({ required: false }),
       deltas: new ActorDeltasField({}, { initial: null, nullable: true }),
-      effects: new ArrayField(new DocumentIdField()),
+      effects: new ArrayField(new StringField()),
       scaling: new NumberField({ integer: true, min: 0, initial: 0 }),
       spellLevel: new NumberField({ integer: true, min: 0 })
     };
@@ -79,8 +79,7 @@ export default class UsageMessageData extends ChatMessageDataModel {
       content: await foundry.applications.ux.TextEditor.implementation.enrichHTML(
         this.parent.content, { rollData: this.parent.getRollData() }
       ),
-      effects: this.effects
-        .map(id => this.item?.effects.get(id))
+      effects: (await Promise.all(this.effects.map(uuid => fromUuid(uuid, { relative: this.item }))))
         .filter(e => e && (game.user.isGM || (e.transfer & (this.parent.author?.id === game.user.id))))
     };
   }

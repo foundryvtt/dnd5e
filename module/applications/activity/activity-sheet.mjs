@@ -273,19 +273,20 @@ export default class ActivitySheet extends PseudoDocumentSheet {
         .map(effect => ({
           value: effect.id, label: effect.name, selected: appliedEffects.has(effect.id)
         }));
-      context.appliedEffects = context.activity.effects.reduce((arr, data) => {
-        if ( !data.effect ) return arr;
+      context.appliedEffects = await context.activity.effects.reduce(async (arr, data) => {
+        const effectDocument = await data.getEffect();
+        if ( !effectDocument ) return arr;
         const effect = {
           data,
           collapsed: this.expandedSections.get(`effects.${data._id}`) ? "" : "collapsed",
-          effect: data.effect,
+          effect: effectDocument,
           fields: this.activity.schema.fields.effects.element.fields,
           prefix: `effects.${data._index}.`,
           source: context.source.effects[data._index] ?? data,
-          contentLink: data.effect.toAnchor().outerHTML,
+          contentLink: effectDocument.toAnchor().outerHTML,
           additionalSettings: "systems/dnd5e/templates/activity/parts/activity-effect-settings.hbs"
         };
-        arr.push(this._prepareAppliedEffectContext(context, effect));
+        (await arr).push(this._prepareAppliedEffectContext(context, effect));
         return arr;
       }, []);
     }
@@ -588,7 +589,7 @@ export default class ActivitySheet extends PseudoDocumentSheet {
    */
   static async #deleteEffect(event, target) {
     if ( !this.activity.effects ) return;
-    const effectId = target.closest("[data-effect-id]")?.dataset.effectId;
+    const { effectId } = target.closest("[data-effect-id]")?.dataset ?? {};
     const result = await this.item.effects.get(effectId)?.deleteDialog({}, { render: false });
     if ( result instanceof ActiveEffect ) {
       const effects = this.activity.toObject().effects.filter(e => e._id !== effectId);
@@ -619,9 +620,9 @@ export default class ActivitySheet extends PseudoDocumentSheet {
    * @param {HTMLElement} target  The button that was clicked.
    */
   static #dissociateEffect(event, target) {
-    const { effectId } = target.closest("[data-effect-id]")?.dataset ?? {};
-    if ( !this.activity.effects || !effectId ) return;
-    const effects = this.activity.toObject().effects.filter(e => e._id !== effectId);
+    const { profileId } = target.closest("[data-profile-id]")?.dataset ?? {};
+    if ( !this.activity.effects || !profileId ) return;
+    const effects = this.activity.toObject().effects.filter(e => e._id !== profileId);
     this.activity.update({ effects });
   }
 
@@ -636,14 +637,19 @@ export default class ActivitySheet extends PseudoDocumentSheet {
       const data = foundry.utils.getProperty(submitData, keyPath);
       if ( data ) foundry.utils.setProperty(submitData, keyPath, Object.values(data));
     }
-    if ( foundry.utils.hasProperty(submitData, "appliedEffects") ) {
-      const effects = submitData.effects ?? this.activity.toObject().effects;
-      submitData.effects = effects.filter(e => submitData.appliedEffects.includes(e._id));
-      for ( const _id of submitData.appliedEffects ) {
+    if ( foundry.utils.hasProperty(submitData, "appliedLocalEffects")
+      || foundry.utils.hasProperty(submitData, "appliedRemoteEffects") ) {
+      submitData.effects ??= this.activity.toObject().effects;
+      for ( const _id of submitData.appliedLocalEffects ?? [] ) {
         if ( submitData.effects.find(e => e._id === _id) ) continue;
         submitData.effects.push({ _id });
       }
-      delete submitData.appliedEffects;
+      for ( const uuid of submitData.appliedRemoteEffects ?? [] ) {
+        if ( submitData.effects.find(e => e.uuid === uuid) ) continue;
+        submitData.effects.push({ _id: `${foundry.utils.randomID(10)}REMOTE`, uuid });
+      }
+      delete submitData.appliedLocalEffects;
+      delete submitData.appliedRemoteEffects;
     }
     return submitData;
   }
