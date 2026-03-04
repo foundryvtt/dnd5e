@@ -573,8 +573,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{monster} has Advantage on saving throws
-          against spells and other magical effects.</p>
+          <p>The [[lookup @name lowercase]]{monster} has Advantage on saving
+          throws against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
       source:
@@ -769,7 +769,8 @@ items:
           startTurn: null
         description: >-
           <p> The target has the &amp;Reference[Poisoned apply=false] condition
-          until the start of the [[lookup @name lowercase]]{monster}’s next turn.</p>
+          until the start of the [[lookup @name lowercase]]{monster}’s next
+          turn.</p>
         tint: '#ffffff'
         transfer: false
         statuses:
@@ -1196,11 +1197,12 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]]{monster} shape-shifts to
-          resemble a bat (Speed 10 ft., Fly 40 ft.), a centipede (40 ft., Climb
-          40 ft.), or a toad (40 ft., Swim 40 ft.), or it returns to its true
-          form. Its game statistics are the same in each form, except for its
-          Speed. Any equipment it is wearing or carrying isn't transformed.</p>
+          <p class="feature">The [[lookup @name lowercase]]{monster}
+          shape-shifts to resemble a bat (Speed 10 ft., Fly 40 ft.), a centipede
+          (40 ft., Climb 40 ft.), or a toad (40 ft., Swim 40 ft.), or it returns
+          to its true form. Its game statistics are the same in each form,
+          except for its Speed. Any equipment it is wearing or carrying isn't
+          transformed.</p>
         chat: ''
       identifier: shape-shift
       source:

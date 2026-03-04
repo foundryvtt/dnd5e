@@ -652,8 +652,8 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">When the [[lookup @name lowercase]]{monster} finishes a Long
-          Rest, it can shape-shift into a
+          <p class="feature">When the [[lookup @name lowercase]]{monster}
+          finishes a Long Rest, it can shape-shift into a
           <strong>@UUID[Compendium.dnd5e.actors24.Actor.mmSuccubus000000]{Succubus}</strong>,
           using that stat block instead of this one. Any equipment it is wearing
           or carrying isn't transformed.</p>
@@ -773,8 +773,8 @@ items:
         value: >-
           <p class="feature">[[/attack extended]]. [[/damage average extended]],
           and the target is cursed for 24 hours or until the [[lookup @name
-          lowercase]]{monster} dies. Until the curse ends, the target gains no benefit
-          from finishing Short Rests.</p>
+          lowercase]]{monster} dies. Until the curse ends, the target gains no
+          benefit from finishing Short Rests.</p>
         chat: ''
       identifier: restless-touch
       source:
@@ -1232,9 +1232,9 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]]{monster} casts one of the
-          following spells, requiring no Material components and using Charisma
-          as the spellcasting ability (spell save DC [[lookup
+          <p class="feature">The [[lookup @name lowercase]]{monster} casts one
+          of the following spells, requiring no Material components and using
+          Charisma as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]]):</p><p class="feature-trait"><strong>At
           Will:</strong>
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDisguiseSe]{Disguise

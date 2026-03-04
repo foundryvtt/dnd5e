@@ -6,15 +6,16 @@ type: feat
 system:
   description:
     value: >-
-      <p>A spellcaster who wears the [[lookup @name lowercase]]{monster}'s amulet can
-      cause the [[lookup @name lowercase]]{monster} to store one spell of 4th level or
-      lower. To do so, the wearer must cast the spell on the [[lookup @name
-      lowercase]]{monster}. The spell has no effect but is stored within the [[lookup
-      @name lowercase]]{monster}. When commanded to do so by the wearer or when a
-      situation arises that was predefined by the spellcaster, the [[lookup
-      @name lowercase]]{monster} casts the stored spell with any parameters set by the
-      original caster, requiring no components. When the spell is cast or a new
-      spell is stored, any previously stored spell is lost.</p>
+      <p>A spellcaster who wears the [[lookup @name lowercase]]{monster}'s
+      amulet can cause the [[lookup @name lowercase]]{monster} to store one
+      spell of 4th level or lower. To do so, the wearer must cast the spell on
+      the [[lookup @name lowercase]]{monster}. The spell has no effect but is
+      stored within the [[lookup @name lowercase]]{monster}. When commanded to
+      do so by the wearer or when a situation arises that was predefined by the
+      spellcaster, the [[lookup @name lowercase]]{monster} casts the stored
+      spell with any parameters set by the original caster, requiring no
+      components. When the spell is cast or a new spell is stored, any
+      previously stored spell is lost.</p>
     chat: ''
   source:
     custom: ''

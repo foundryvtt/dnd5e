@@ -576,9 +576,10 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]]{monster} dies outside the Nine Hells, its
-          body disappears in sulfurous smoke, and it gains a new body instantly,
-          reviving with all its Hit Points somewhere in the Nine Hells.</p>
+          <p>If the [[lookup @name lowercase]]{monster} dies outside the Nine
+          Hells, its body disappears in sulfurous smoke, and it gains a new body
+          instantly, reviving with all its Hit Points somewhere in the Nine
+          Hells.</p>
         chat: ''
       identifier: diabolical-restoration
       source:
@@ -626,8 +627,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{monster} has Advantage on saving throws
-          against spells and other magical effects.</p>
+          <p>The [[lookup @name lowercase]]{monster} has Advantage on saving
+          throws against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
       source:
@@ -676,14 +677,15 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]]{monster} has a magic rope.
-          While bearing it, the [[lookup @name lowercase]]{monster} can use the [[/item
-          .mmEntanglingRope]] action. The rope has AC 20, HP 90, and Immunity to
-          Poison and Psychic damage. The rope turns to dust if reduced to 0 Hit
-          Points, if it is 5+ feet away from the [[lookup @name lowercase]]{monster} for
-          1 hour or more, or if the [[lookup @name lowercase]]{monster} dies. If the rope
-          is damaged or destroyed, the [[lookup @name lowercase]]{monster} can fully
-          restore it when finishing a Short or Long Rest.</p>
+          <p class="feature">The [[lookup @name lowercase]]{monster} has a magic
+          rope. While bearing it, the [[lookup @name lowercase]]{monster} can
+          use the [[/item .mmEntanglingRope]] action. The rope has AC 20, HP 90,
+          and Immunity to Poison and Psychic damage. The rope turns to dust if
+          reduced to 0 Hit Points, if it is 5+ feet away from the [[lookup @name
+          lowercase]]{monster} for 1 hour or more, or if the [[lookup @name
+          lowercase]]{monster} dies. If the rope is damaged or destroyed, the
+          [[lookup @name lowercase]]{monster} can fully restore it when
+          finishing a Short or Long Rest.</p>
         chat: ''
       identifier: magic-rope
       source:
@@ -891,11 +893,11 @@ items:
         max: ''
       description:
         value: >-
-          <p><em>Trigger:</em> The [[lookup @name lowercase]]{monster} is [[lookup
-          @activation.condition activity=aLG3BRZL7P6OEjwd]]. <em>Response:</em>
-          The [[lookup @name lowercase]]{monster} adds [[lookup @roll.formula
-          activity=aLG3BRZL7P6OEjwd]] to its AC against that attack, possibly
-          causing it to miss.</p>
+          <p><em>Trigger:</em> The [[lookup @name lowercase]]{monster} is
+          [[lookup @activation.condition activity=aLG3BRZL7P6OEjwd]].
+          <em>Response:</em> The [[lookup @name lowercase]]{monster} adds
+          [[lookup @roll.formula activity=aLG3BRZL7P6OEjwd]] to its AC against
+          that attack, possibly causing it to miss.</p>
         chat: ''
       identifier: parry
       source:
@@ -1189,9 +1191,9 @@ items:
           activity=n8nEah4vbrEPphNF]] feet. </p><p
           class="feature"><em>Failure:</em> [[/damage average]] damage, and the
           target has the &amp;Reference[Restrained apply=false] condition until
-          the rope is destroyed, the [[lookup @name lowercase]]{monster} uses a Bonus
-          Action to release the target, or the [[lookup @name lowercase]]{monster} uses
-          Entangling Rope again.</p>
+          the rope is destroyed, the [[lookup @name lowercase]]{monster} uses a
+          Bonus Action to release the target, or the [[lookup @name
+          lowercase]]{monster} uses Entangling Rope again.</p>
         chat: ''
       identifier: entangling-rope
       source:

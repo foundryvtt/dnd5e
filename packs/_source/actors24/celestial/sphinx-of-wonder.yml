@@ -574,8 +574,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{monster} has Advantage on saving throws
-          against spells and other magical effects.</p>
+          <p>The [[lookup @name lowercase]]{monster} has Advantage on saving
+          throws against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
       source:
@@ -847,8 +847,8 @@ items:
         max: '2'
       description:
         value: >-
-          <p><em>Trigger:</em> The [[lookup @name]]{monster} or another creature within
-          [[lookup @range.value activity=AyYipNx3cFaXA0LU]] feet makes an
+          <p><em>Trigger:</em> The [[lookup @name]]{monster} or another creature
+          within [[lookup @range.value activity=AyYipNx3cFaXA0LU]] feet makes an
           ability check or a saving throw. <em>Response:</em> The sphinx adds 2
           to the roll.</p>
         chat: ''

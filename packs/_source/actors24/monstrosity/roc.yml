@@ -619,12 +619,12 @@ items:
       description:
         value: >-
           <p><span style="font-family:'Roboto Condensed', sans-serif">The
-          </span>[[lookup @name lowercase]]{monster} <span style="font-family:'Roboto
-          Condensed', sans-serif"> makes two </span> [[/item
-          .mmBeak0000000000]]<span style="font-family:'Roboto Condensed',
-          sans-serif"> attacks. It can replace one attack with a </span> [[/item
-          .mmTalons00000000]]<span style="font-family:'Roboto Condensed',
-          sans-serif"> attack.</span></p>
+          </span>[[lookup @name lowercase]]{monster} <span
+          style="font-family:'Roboto Condensed', sans-serif"> makes two </span>
+          [[/item .mmBeak0000000000]]<span style="font-family:'Roboto
+          Condensed', sans-serif"> attacks. It can replace one attack with a
+          </span> [[/item .mmTalons00000000]]<span style="font-family:'Roboto
+          Condensed', sans-serif"> attack.</span></p>
         chat: ''
       identifier: multiattack
       source:
@@ -1135,10 +1135,10 @@ items:
         max: '1'
       description:
         value: >-
-          <p class="feature">If the [[lookup @name lowercase]]{monster} has a creature
-          Grappled, the [[lookup @name lowercase]]{monster} flies up to half its Fly
-          Speed without provoking &amp;Reference[OpportunityAttacks] and drops
-          that creature.</p>
+          <p class="feature">If the [[lookup @name lowercase]]{monster} has a
+          creature Grappled, the [[lookup @name lowercase]]{monster} flies up to
+          half its Fly Speed without provoking
+          &amp;Reference[OpportunityAttacks] and drops that creature.</p>
         chat: ''
       identifier: swoop
       source:

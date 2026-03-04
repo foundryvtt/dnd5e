@@ -566,8 +566,8 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">If the [[lookup @name lowercase]]{monster} dies outside
-          Mount Celestia, its body disappears, and it gains a new body
+          <p class="feature">If the [[lookup @name lowercase]]{monster} dies
+          outside Mount Celestia, its body disappears, and it gains a new body
           instantly, reviving with all its Hit Points somewhere in Mount
           Celestia.</p>
         chat: ''
@@ -618,8 +618,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{monster} has Advantage on saving throws
-          against spells and other magical effects.</p>
+          <p>The [[lookup @name lowercase]]{monster} has Advantage on saving
+          throws against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
       source:
@@ -712,8 +712,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{monster} makes two [[/item Holy Mace]]
-          attacks.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes two [[/item Holy
+          Mace]] attacks.</p>
         chat: ''
       identifier: multiattack
       source:
@@ -1154,9 +1154,9 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]]{monster} casts one of the
-          following spells, requiring no Material components and using Charisma
-          as the spellcasting ability (spell save DC [[lookup
+          <p class="feature">The [[lookup @name lowercase]]{monster} casts one
+          of the following spells, requiring no Material components and using
+          Charisma as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]]):</p><p class="feature-trait"><strong>At
           Will:</strong>
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDetectEvil]{Detect Evil

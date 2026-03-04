@@ -1048,11 +1048,12 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">If the [[lookup @name lowercase]]{monster} is subjected to
-          an effect that allows it to make a Dexterity saving throw to take only
-          half damage, the [[lookup @name lowercase]]{monster} instead takes no damage if
-          it succeeds on the save and only half damage if it fails. It can't use
-          this trait if it has the Incapacitated condition.</p>
+          <p class="feature">If the [[lookup @name lowercase]]{monster} is
+          subjected to an effect that allows it to make a Dexterity saving throw
+          to take only half damage, the [[lookup @name lowercase]]{monster}
+          instead takes no damage if it succeeds on the save and only half
+          damage if it fails. It can't use this trait if it has the
+          Incapacitated condition.</p>
         chat: ''
       identifier: evasion
       source:
@@ -1153,8 +1154,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{monster} makes three attacks, using [[/item
-          .jLa5l9pntsTVrMKH]] or [[/item .dL4668G7zXeC5zyY]] in any
+          <p>The [[lookup @name lowercase]]{monster} makes three attacks, using
+          [[/item .jLa5l9pntsTVrMKH]] or [[/item .dL4668G7zXeC5zyY]] in any
           combination.</p>
         chat: ''
       identifier: multiattack

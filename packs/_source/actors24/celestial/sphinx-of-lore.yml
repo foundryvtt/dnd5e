@@ -573,10 +573,10 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">No magic can observe the [[lookup @name lowercase]]{monster}
-          remotely or detect its thoughts without its permission. Wisdom
-          (Insight) checks made to ascertain its intentions or sincerity are
-          made with Disadvantage.</p>
+          <p class="feature">No magic can observe the [[lookup @name
+          lowercase]]{monster} remotely or detect its thoughts without its
+          permission. Wisdom (Insight) checks made to ascertain its intentions
+          or sincerity are made with Disadvantage.</p>
         chat: ''
       identifier: inscrutable
       source:
@@ -679,8 +679,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]]{monster} fails a saving throw, it can
-          choose to succeed instead.</p>
+          <p>If the [[lookup @name lowercase]]{monster} fails a saving throw, it
+          can choose to succeed instead.</p>
         chat: ''
       identifier: legendary-resistance
       source:
@@ -1058,9 +1058,10 @@ items:
           @target.affects.type activity=zPMfwwIoTFzIrN5H]] in a [[lookup
           @target.template.size activity=zPMfwwIoTFzIrN5H]]-foot Emanation
           originating from the [[lookup @name
-          lowercase]]{monster}.</p><p><em>Failure:</em> [[/damage average]] damage, and
-          the target has the &amp;Reference[Incapacitated apply=false] condition
-          until the start of the [[lookup @name lowercase]]{monster}'s next turn.</p>
+          lowercase]]{monster}.</p><p><em>Failure:</em> [[/damage average]]
+          damage, and the target has the &amp;Reference[Incapacitated
+          apply=false] condition until the start of the [[lookup @name
+          lowercase]]{monster}'s next turn.</p>
         chat: ''
       identifier: mind-rending-roar
       source:
@@ -1760,8 +1761,8 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]]{monster} casts one of the
-          following spells, requiring no Material components and using
+          <p class="feature">The [[lookup @name lowercase]]{monster} casts one
+          of the following spells, requiring no Material components and using
           Intelligence as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]]):</p><p class="feature-trait"><strong>At
           Will:</strong>
@@ -3991,8 +3992,8 @@ items:
           gains 1 &amp;Reference[Exhaustion apply=false] level. While the target
           has any Exhaustion levels, it appears [[/r 3d10]] years
           older.</p><p><em>Failure or Success:</em> The [[lookup @name
-          lowercase]]{monster} can't take this action again until the start of its next
-          turn.</p>
+          lowercase]]{monster} can't take this action again until the start of
+          its next turn.</p>
         chat: ''
       identifier: weight-of-years
       source:

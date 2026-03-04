@@ -61,10 +61,11 @@ system:
     max: ''
   description:
     value: >-
-      <p class="feature">Even when the [[lookup @name lowercase]]{monster} is in plain
-      sight, a creature must succeed on a [[/check dc=15 ability=wis skill=prc
-      format=long]] to notice the [[lookup @name lowercase]]{monster} if the creature
-      hasn't witnessed the [[lookup @name lowercase]]{monster} move or otherwise act.</p>
+      <p class="feature">Even when the [[lookup @name lowercase]]{monster} is in
+      plain sight, a creature must succeed on a [[/check dc=15 ability=wis
+      skill=prc format=long]] to notice the [[lookup @name lowercase]]{monster}
+      if the creature hasn't witnessed the [[lookup @name lowercase]]{monster}
+      move or otherwise act.</p>
     chat: ''
   identifier: transparent
   source:

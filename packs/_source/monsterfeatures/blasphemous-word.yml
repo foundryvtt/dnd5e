@@ -9,17 +9,19 @@ system:
       <section class="secret">
 
       <p>the [[lookup @name lowercase]]{monster} utters a blasphemous word. Each
-      non-[[lookup @details.type.config.label lowercase]]{monster} creature within 10
-      feet of the [[lookup @name lowercase]]{monster} that can hear the magical utterance
-      must succeed on a  <strong>DC 16 Constitution</strong> saving throw or be
-      stunned until the end of the [[lookup @name lowercase]]{monster}'s next turn.</p>
+      non-[[lookup @details.type.config.label lowercase]]{monster} creature
+      within 10 feet of the [[lookup @name lowercase]]{monster} that can hear
+      the magical utterance must succeed on a  <strong>DC 16
+      Constitution</strong> saving throw or be stunned until the end of the
+      [[lookup @name lowercase]]{monster}'s next turn.</p>
 
       </section>
 
       <p>the [[lookup @name lowercase]]{monster} utters a blasphemous word. Each
-      non-[[lookup @details.type.config.label lowercase]]{monster} creature within 10
-      feet of the [[lookup @name lowercase]]{monster} that can hear the magical utterance
-      must make a <strong>Constitution</strong> saving throw.</p>
+      non-[[lookup @details.type.config.label lowercase]]{monster} creature
+      within 10 feet of the [[lookup @name lowercase]]{monster} that can hear
+      the magical utterance must make a <strong>Constitution</strong> saving
+      throw.</p>
     chat: ''
   source:
     custom: ''

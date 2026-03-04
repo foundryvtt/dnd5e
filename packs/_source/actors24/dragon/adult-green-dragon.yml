@@ -568,7 +568,9 @@ items:
         recovery: []
         max: ''
       description:
-        value: <p>The [[lookup @name lowercase]]{monster} can breathe air and water.</p>
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} can breathe air and
+          water.</p>
         chat: ''
       identifier: amphibious
       source:
@@ -671,8 +673,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]]{monster} fails a saving throw, it can
-          choose to succeed instead.</p>
+          <p>If the [[lookup @name lowercase]]{monster} fails a saving throw, it
+          can choose to succeed instead.</p>
         chat: ''
       identifier: legendary-resistance
       source:
@@ -772,8 +774,9 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{monster} makes three [[/item Rend]] attacks.
-          It can replace one attack with a use of [[/item Spellcasting]] to cast
+          <p>The [[lookup @name lowercase]]{monster} makes three [[/item Rend]]
+          attacks. It can replace one attack with a use of [[/item
+          Spellcasting]] to cast
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplMindSpike0]{Mind
           Spike}</em> (level 3 version).</p>
         chat: ''
@@ -1291,9 +1294,9 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]]{monster} casts one of the
-          following spells, requiring no Material components and using Charisma
-          as the spellcasting ability (spell save DC [[lookup
+          <p class="feature">The [[lookup @name lowercase]]{monster} casts one
+          of the following spells, requiring no Material components and using
+          Charisma as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]]):</p><p class="feature-trait"><strong>At
           Will:</strong>
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDetectMagi]{Detect
@@ -2428,13 +2431,13 @@ items:
           @save.dc.value activity=Blm8nddvCOH69bL8]], each [[lookup
           @target.affects.type activity=Blm8nddvCOH69bL8]] in a [[lookup
           @target.template.size activity=Blm8nddvCOH69bL8]]-foot-Radius Sphere
-          centered on a point the [[lookup @name lowercase]]{monster} can see within
-          [[lookup @range.value activity=Blm8nddvCOH69bL8]] feet.</p><p
+          centered on a point the [[lookup @name lowercase]]{monster} can see
+          within [[lookup @range.value activity=Blm8nddvCOH69bL8]] feet.</p><p
           class="feature"><em>Failure:</em> [[/damage average]] damage, and the
           target takes a −2 penalty to AC until the end of its next turn.</p><p
           class="feature"><em>Failure or Success:</em> The [[lookup @name
-          lowercase]]{monster} can't take this action again until the start of its next
-          turn.</p>
+          lowercase]]{monster} can't take this action again until the start of
+          its next turn.</p>
         chat: ''
       identifier: noxious-miasma
       source:
@@ -2583,8 +2586,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{monster} moves up to half its Speed, and it
-          makes one [[/item Rend]] attack.</p>
+          <p>The [[lookup @name lowercase]]{monster} moves up to half its Speed,
+          and it makes one [[/item Rend]] attack.</p>
         chat: ''
       identifier: pounce
       source:

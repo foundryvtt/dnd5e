@@ -695,19 +695,22 @@ items:
           <p class="feature">[[/attack extended]]. [[/damage average extended]].
           If the target is a creature<span style="font-family:'Roboto
           Condensed', sans-serif">, and the </span>[[lookup @name
-          lowercase]]{monster}<span style="font-family:'Roboto Condensed', sans-serif">
-          attaches to the target. While attached, the </span>[[lookup @name
-          lowercase]]{monster}<span style="font-family:'Roboto Condensed', sans-serif">
-          can't make Proboscis attacks, and the target takes [[/damage average
+          lowercase]]{monster}<span style="font-family:'Roboto Condensed',
+          sans-serif"> attaches to the target. While attached, the
+          </span>[[lookup @name lowercase]]{monster}<span
+          style="font-family:'Roboto Condensed', sans-serif"> can't make
+          Proboscis attacks, and the target takes [[/damage average
           activity=5xwoPMBiaRBqjFav]] damage at the start of each of the
-          </span>[[lookup @name lowercase]]{monster}'s<span style="font-family:'Roboto
-          Condensed', sans-serif"> turns.</span></p><p class="feature"><span
-          style="font-family:'Roboto Condensed', sans-serif">The </span>[[lookup
-          @name lowercase]]{monster}<span style="font-family:'Roboto Condensed',
+          </span>[[lookup @name lowercase]]{monster}'s<span
+          style="font-family:'Roboto Condensed', sans-serif">
+          turns.</span></p><p class="feature"><span style="font-family:'Roboto
+          Condensed', sans-serif">The </span>[[lookup @name
+          lowercase]]{monster}<span style="font-family:'Roboto Condensed',
           sans-serif"> can detach itself by spending 5 feet of its movement. The
           target or a creature within 5 feet of it can detach the
-          </span>[[lookup @name lowercase]]{monster}<span style="font-family:'Roboto
-          Condensed', sans-serif"> as an action.</span></p>
+          </span>[[lookup @name lowercase]]{monster}<span
+          style="font-family:'Roboto Condensed', sans-serif"> as an
+          action.</span></p>
         chat: ''
       identifier: proboscis
       source:

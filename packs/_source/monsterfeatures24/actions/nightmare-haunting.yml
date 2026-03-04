@@ -68,19 +68,19 @@ system:
       lowercase]]{monster} casts
       <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDream00000]{Dream}</em>,
       using the same spellcasting ability as Spellcasting. Only the [[lookup
-      @name lowercase]]{monster} can serve as the spell's messenger, and the target must
-      be a [[lookup @target.affects.type activity=4GGGVhvLSrHgHdb9]] the
-      [[lookup @name lowercase]]{monster} can see [[lookup @target.affects.special
-      activity=4GGGVhvLSrHgHdb9]]. The spell fails and is wasted if the target
-      is under the effect of the
+      @name lowercase]]{monster} can serve as the spell's messenger, and the
+      target must be a [[lookup @target.affects.type activity=4GGGVhvLSrHgHdb9]]
+      the [[lookup @name lowercase]]{monster} can see [[lookup
+      @target.affects.special activity=4GGGVhvLSrHgHdb9]]. The spell fails and
+      is wasted if the target is under the effect of the
       <em>@UUID[Compendium.dnd5e.spells24.Item.phbEvilAndGoodPr]{Protection from
       Evil and Good}</em> spell or within a
       <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplMagicCircl]{Magic
       Circle}</em> spell.</p><p class="feature">If the target takes damage from
       the <em>Dream</em> spell, the target's Hit Point maximum decreases by an
       amount equal to that damage. If the spell kills the target, its soul is
-      trapped in the [[lookup @name lowercase]]{monster}'s soul bag, and the target can't
-      be raised from the dead until its soul is released.</p>
+      trapped in the [[lookup @name lowercase]]{monster}'s soul bag, and the
+      target can't be raised from the dead until its soul is released.</p>
     chat: ''
   identifier: nightmare-haunting
   source:

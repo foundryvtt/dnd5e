@@ -692,8 +692,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{monster} makes two attacks, using [[/item
-          .mmVineStaff00000]] or [[/item .mmVerdantWisp000]] in any
+          <p>The [[lookup @name lowercase]]{monster} makes two attacks, using
+          [[/item .mmVineStaff00000]] or [[/item .mmVerdantWisp000]] in any
           combination.</p>
         chat: ''
       identifier: multiattack
@@ -1465,9 +1465,9 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]]{monster} casts one of the
-          following spells, using Wisdom as the spellcasting ability (spell save
-          DC [[lookup @attributes.spell.dc]]):</p><p
+          <p class="feature">The [[lookup @name lowercase]]{monster} casts one
+          of the following spells, using Wisdom as the spellcasting ability
+          (spell save DC [[lookup @attributes.spell.dc]]):</p><p
           class="feature-trait"><strong>At Will:</strong>
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDruidcraft]{Druidcraft}</em>,
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplSpeakwithA]{Speak with

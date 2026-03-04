@@ -794,10 +794,10 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{monster} makes two attacks, using [[/item
-          .hhfnX7eT1ZFun8oQ]]{Javelin} or [[/item .mmTusk0000000000]]{Tusk} in
-          any combination. It can replace one attack with a [[/item
-          .mmGore0000000000]]{Gore} attack.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes two attacks, using
+          [[/item .hhfnX7eT1ZFun8oQ]]{Javelin} or [[/item
+          .mmTusk0000000000]]{Tusk} in any combination. It can replace one
+          attack with a [[/item .mmGore0000000000]]{Gore} attack.</p>
         chat: ''
       identifier: multiattack
       source:
@@ -1049,8 +1049,8 @@ items:
           instead becomes a
           <strong>@UUID[Compendium.dnd5e.actors24.Actor.mmWereboar000000]{Wereboar}</strong>
           under the DM's control and has 10 Hit Points.</p><p><em>Success:</em>
-          The target is immune to this [[lookup @name lowercase]]{monster}'s curse for 24
-          hours.</p>
+          The target is immune to this [[lookup @name lowercase]]{monster}'s
+          curse for 24 hours.</p>
         chat: ''
       identifier: gore
       source:
@@ -1497,11 +1497,11 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]]{monster} shape-shifts into a
-          Medium boar-humanoid hybrid form or a Medium boar, or it returns to
-          its true humanoid form, or it returns to its true form. Its game
-          statistics, other than its size, are the same in each form. Any
-          equipment it is wearing or carrying isn't transformed.</p>
+          <p class="feature">The [[lookup @name lowercase]]{monster}
+          shape-shifts into a Medium boar-humanoid hybrid form or a Medium boar,
+          or it returns to its true humanoid form, or it returns to its true
+          form. Its game statistics, other than its size, are the same in each
+          form. Any equipment it is wearing or carrying isn't transformed.</p>
         chat: ''
       identifier: shape-shift
       source:

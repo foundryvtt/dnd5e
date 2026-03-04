@@ -8,20 +8,21 @@ system:
     value: >-
       <section class="secret">
 
-      <p>the [[lookup @name lowercase]]{monster} targets one creature it can see within
-      60 ft. of it. If the target can see the [[lookup @name lowercase]]{monster}, it
-      must succeed on a <strong>DC 11 Wisdom</strong> saving throw against this
-      magic or become frightened until the end of the [[lookup @name
-      lowercase]]{monster}'s next turn.</p><p>If the target fails the saving throw by 5
-      or more, it is also paralyzed for the same duration. A target that
-      succeeds on the saving throw is immune to the Dreadful Glare of all
-      mummies (but not mummy lords) for the next 24 hours.</p>
+      <p>the [[lookup @name lowercase]]{monster} targets one creature it can see
+      within 60 ft. of it. If the target can see the [[lookup @name
+      lowercase]]{monster}, it must succeed on a <strong>DC 11 Wisdom</strong>
+      saving throw against this magic or become frightened until the end of the
+      [[lookup @name lowercase]]{monster}'s next turn.</p><p>If the target fails
+      the saving throw by 5 or more, it is also paralyzed for the same duration.
+      A target that succeeds on the saving throw is immune to the Dreadful Glare
+      of all mummies (but not mummy lords) for the next 24 hours.</p>
 
       </section>
 
-      <p>the [[lookup @name lowercase]]{monster} targets one creature it can see within
-      60 ft. of it. If the target can see the [[lookup @name lowercase]]{monster}, it
-      must make a <strong>Wisdom</strong> saving throw against this magic.</p>
+      <p>the [[lookup @name lowercase]]{monster} targets one creature it can see
+      within 60 ft. of it. If the target can see the [[lookup @name
+      lowercase]]{monster}, it must make a <strong>Wisdom</strong> saving throw
+      against this magic.</p>
     chat: ''
   source:
     custom: ''

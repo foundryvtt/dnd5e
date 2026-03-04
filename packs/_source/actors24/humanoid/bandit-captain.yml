@@ -1036,8 +1036,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{monster} makes two attacks, using [[/item
-          .w3cX0piuU875Hc2M]] and [[/item .2TB9ZSIbtbi4UtSv]] in any
+          <p>The [[lookup @name lowercase]]{monster} makes two attacks, using
+          [[/item .w3cX0piuU875Hc2M]] and [[/item .2TB9ZSIbtbi4UtSv]] in any
           combination.</p>
         chat: ''
       identifier: multiattack
@@ -1143,11 +1143,11 @@ items:
         max: ''
       description:
         value: >-
-          <p><em>Trigger:</em> The [[lookup @name lowercase]]{monster} is [[lookup
-          @activation.condition activity=aLG3BRZL7P6OEjwd]]. <em>Response:</em>
-          The [[lookup @name lowercase]]{monster} adds [[lookup @roll.formula
-          activity=aLG3BRZL7P6OEjwd]] to its AC against that attack, possibly
-          causing it to miss.</p>
+          <p><em>Trigger:</em> The [[lookup @name lowercase]]{monster} is
+          [[lookup @activation.condition activity=aLG3BRZL7P6OEjwd]].
+          <em>Response:</em> The [[lookup @name lowercase]]{monster} adds
+          [[lookup @roll.formula activity=aLG3BRZL7P6OEjwd]] to its AC against
+          that attack, possibly causing it to miss.</p>
         chat: ''
       identifier: parry
       source:

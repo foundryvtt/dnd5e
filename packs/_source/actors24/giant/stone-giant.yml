@@ -615,8 +615,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{monster} makes two attacks, using [[/item
-          .mmStoneClub00000]] or [[/item .mmBoulder0000000]] in any
+          <p>The [[lookup @name lowercase]]{monster} makes two attacks, using
+          [[/item .mmStoneClub00000]] or [[/item .mmBoulder0000000]] in any
           combination.</p>
         chat: ''
       identifier: multiattack
@@ -1155,14 +1155,14 @@ items:
         max: '1'
       description:
         value: >-
-          <p class="feature"><em>Trigger:</em> The [[lookup @name lowercase]]{monster} is
-          [[lookup @activation.condition activity=9T8cNbSBVACrrmRI]].</p><p
-          class="feature"><em>Response:</em> The [[lookup @name lowercase]]{monster}
-          reduces the damage it takes from the attack by [[/healing average]],
-          and if that damage is reduced to 0, the [[lookup @name lowercase]]{monster} can
-          redirect some of the attack's force.</p><p
-          class="feature"><em>Dexterity Saving Throw:</em> DC [[lookup
-          @save.dc.value activity=x0MjUmnv2OPAbm6y]], one [[lookup
+          <p class="feature"><em>Trigger:</em> The [[lookup @name
+          lowercase]]{monster} is [[lookup @activation.condition
+          activity=9T8cNbSBVACrrmRI]].</p><p class="feature"><em>Response:</em>
+          The [[lookup @name lowercase]]{monster} reduces the damage it takes
+          from the attack by [[/healing average]], and if that damage is reduced
+          to 0, the [[lookup @name lowercase]]{monster} can redirect some of the
+          attack's force.</p><p class="feature"><em>Dexterity Saving Throw:</em>
+          DC [[lookup @save.dc.value activity=x0MjUmnv2OPAbm6y]], one [[lookup
           @target.affects.type activity=x0MjUmnv2OPAbm6y]] the [[lookup @name
           lowercase]]{monster} can see within [[lookup @range.value
           activity=x0MjUmnv2OPAbm6y]] feet. </p><p

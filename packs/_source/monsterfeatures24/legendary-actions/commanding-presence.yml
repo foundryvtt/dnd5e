@@ -62,12 +62,13 @@ system:
       <p class="feature">The [[lookup @name lowercase]]{monster} uses [[/item
       Spellcasting]] to cast
       <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplCommand000]{Command}</em>
-      (level 2 version). The [[lookup @name lowercase]]{monster} can't take this action
-      again until the start of its next turn.</p>
+      (level 2 version). The [[lookup @name lowercase]]{monster} can't take this
+      action again until the start of its next turn.</p>
     chat: >-
-      <p class="feature">The [[lookup @name lowercase]]{monster} uses Spellcasting to
-      cast <em>Command</em> (level 2 version). The [[lookup @name lowercase]]{monster}
-      can’t take this action again until the start of its next turn.</p>
+      <p class="feature">The [[lookup @name lowercase]]{monster} uses
+      Spellcasting to cast <em>Command</em> (level 2 version). The [[lookup
+      @name lowercase]]{monster} can’t take this action again until the start of
+      its next turn.</p>
   identifier: commanding-presence
   source:
     revision: 1

@@ -787,8 +787,9 @@ items:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage average extended]]. If the target
-          is a Medium or smaller creature, the [[lookup @name lowercase]]{monster} pulls
-          the target 5 feet straight toward itself.</p>
+          is a Medium or smaller creature, the [[lookup @name
+          lowercase]]{monster} pulls the target 5 feet straight toward
+          itself.</p>
         chat: ''
       identifier: charged-tendril
       source:
@@ -1073,9 +1074,10 @@ items:
           &amp;Reference[Blinded apply=false] and &amp;Reference[Restrained
           apply=false] conditions, and it takes [[/damage average
           activity=Exfa4q7O4SvXjGt7]] damage at the start of each of its turns.
-          When the [[lookup @name lowercase]]{monster} moves, the Grappled target moves
-          with it, costing it no extra movement. The [[lookup @name lowercase]]{monster}
-          can have only one creature Grappled by this action at a time.</p>
+          When the [[lookup @name lowercase]]{monster} moves, the Grappled
+          target moves with it, costing it no extra movement. The [[lookup @name
+          lowercase]]{monster} can have only one creature Grappled by this
+          action at a time.</p>
         chat: ''
       identifier: engulf
       source:

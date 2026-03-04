@@ -67,10 +67,10 @@ system:
     max: '1'
   description:
     value: >-
-      <p class="feature">If the [[lookup @name lowercase]]{monster} has a creature
-      Grappled, the [[lookup @name lowercase]]{monster} flies up to half its Fly Speed
-      without provoking &amp;Reference[OpportunityAttacks] and drops that
-      creature.</p>
+      <p class="feature">If the [[lookup @name lowercase]]{monster} has a
+      creature Grappled, the [[lookup @name lowercase]]{monster} flies up to
+      half its Fly Speed without provoking &amp;Reference[OpportunityAttacks]
+      and drops that creature.</p>
     chat: ''
   identifier: swoop
   source:

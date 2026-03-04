@@ -629,8 +629,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]]{monster} fails a saving throw, it can
-          choose to succeed instead.</p>
+          <p>If the [[lookup @name lowercase]]{monster} fails a saving throw, it
+          can choose to succeed instead.</p>
         chat: ''
       identifier: legendary-resistance
       source:
@@ -686,8 +686,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{monster} has Advantage on saving throws
-          against spells and other magical effects.</p>
+          <p>The [[lookup @name lowercase]]{monster} has Advantage on saving
+          throws against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
       source:
@@ -788,13 +788,15 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">If the [[lookup @name lowercase]]{monster} is targeted by a
+          <p class="feature">If the [[lookup @name lowercase]]{monster} is
+          targeted by a
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplMagicMissi]{Magic
           Missile}</em> spell or a spell that requires a ranged attack roll,
           roll [[/r 1d6]].</p><p class="feature">On a <strong>1–5</strong>, the
-          [[lookup @name lowercase]]{monster} is unaffected.</p><p class="feature">On a
-          <strong>6</strong>, the [[lookup @name lowercase]]{monster} is unaffected and
-          reflects the spell, turning the caster into the target.</p>
+          [[lookup @name lowercase]]{monster} is unaffected.</p><p
+          class="feature">On a <strong>6</strong>, the [[lookup @name
+          lowercase]]{monster} is unaffected and reflects the spell, turning the
+          caster into the target.</p>
         chat: ''
       identifier: reflective-carapace
       source:
@@ -1917,25 +1919,26 @@ items:
           <p class="feature"><em>Strength Saving Throw:</em> DC [[lookup
           @save.dc.value activity=YorssyWMumAsvzx3]], [[lookup
           @target.affects.special activity=YorssyWMumAsvzx3]] by the [[lookup
-          @name lowercase]]{monster} (it can have up to six creatures swallowed at a
-          time).</p><p class="feature"><em>Failure:</em> The target is
+          @name lowercase]]{monster} (it can have up to six creatures swallowed
+          at a time).</p><p class="feature"><em>Failure:</em> The target is
           swallowed, and the Grappled condition ends. A swallowed creature has
           the &amp;Reference[Blinded apply=false] and &amp;Reference[Restrained
           apply=false] conditions and can't teleport, it has
           &amp;Reference[Total Cover] against attacks and other effects outside
           the [[lookup @name lowercase]]{monster}, and takes [[/damage average
           activity=zrWNjO9mkbN28spL]] damage at the start of each of the
-          [[lookup @name lowercase]]{monster}'s turns.</p><p class="feature">If the
-          [[lookup @name lowercase]]{monster} takes 60 damage or more on a single turn
-          from a creature inside it, the [[lookup @name lowercase]]{monster} must succeed
-          on a [[/save format=long activity=rGeGukkm2t2fXsoy]] at the end of
-          that turn or regurgitate all swallowed creatures, each of which falls
-          in a space within [[lookup @range.value activity=rGeGukkm2t2fXsoy]]
-          feet of the [[lookup @name lowercase]]{monster} and has the
-          &amp;Reference[Prone apply=false] condition. If the [[lookup @name
-          lowercase]]{monster} dies, any swallowed creature no longer has the Restrained
-          condition and can escape from the corpse by using 20 feet of movement,
-          exiting Prone.</p>
+          [[lookup @name lowercase]]{monster}'s turns.</p><p class="feature">If
+          the [[lookup @name lowercase]]{monster} takes 60 damage or more on a
+          single turn from a creature inside it, the [[lookup @name
+          lowercase]]{monster} must succeed on a [[/save format=long
+          activity=rGeGukkm2t2fXsoy]] at the end of that turn or regurgitate all
+          swallowed creatures, each of which falls in a space within [[lookup
+          @range.value activity=rGeGukkm2t2fXsoy]] feet of the [[lookup @name
+          lowercase]]{monster} and has the &amp;Reference[Prone apply=false]
+          condition. If the [[lookup @name lowercase]]{monster} dies, any
+          swallowed creature no longer has the Restrained condition and can
+          escape from the corpse by using 20 feet of movement, exiting
+          Prone.</p>
         chat: ''
       identifier: swallow
       source:
@@ -2116,9 +2119,9 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]]{monster} moves up to half its
-          Speed, and it makes one [[/item .mmClaw0000000000]] or [[/item
-          .mmTail0000000000]] attack.</p>
+          <p class="feature">The [[lookup @name lowercase]]{monster} moves up to
+          half its Speed, and it makes one [[/item .mmClaw0000000000]] or
+          [[/item .mmTail0000000000]] attack.</p>
         chat: ''
       identifier: onslaught
       source:
@@ -2228,16 +2231,16 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]]{monster} moves up to its
-          Speed. At the end of this movement, the [[lookup @name lowercase]]{monster}
-          creates an instantaneous shock wave in a [[lookup
+          <p class="feature">The [[lookup @name lowercase]]{monster} moves up to
+          its Speed. At the end of this movement, the [[lookup @name
+          lowercase]]{monster} creates an instantaneous shock wave in a [[lookup
           @target.template.size activity=g4W0ovZxBeUrZKb8]]-[[lookup
           @target.template.units activity=g4W0ovZxBeUrZKb8]]. Emanation
           originating from itself. Creatures in that area lose
           &amp;Reference[Concentration] and, if Medium or smaller, have the
           &amp;Reference[Prone apply=false] condition. The [[lookup @name
-          lowercase]]{monster} can't take this action again until the start of its next
-          turn.</p>
+          lowercase]]{monster} can't take this action again until the start of
+          its next turn.</p>
         chat: ''
       identifier: world-shaking-movement
       source:
@@ -2327,8 +2330,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{monster} deals double damage to objects and
-          structures.</p>
+          <p>The [[lookup @name lowercase]]{monster} deals double damage to
+          objects and structures.</p>
         chat: ''
       identifier: siege-monster
       source:

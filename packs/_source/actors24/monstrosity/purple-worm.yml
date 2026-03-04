@@ -668,9 +668,9 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]]{monster} can burrow through
-          solid rock at half its Burrow Speed and leaves a 10-foot-diameter
-          tunnel in its wake.</p>
+          <p class="feature">The [[lookup @name lowercase]]{monster} can burrow
+          through solid rock at half its Burrow Speed and leaves a
+          10-foot-diameter tunnel in its wake.</p>
         chat: ''
       identifier: tunneler
       source:
@@ -1336,25 +1336,26 @@ items:
           <p class="feature"><em>Strength Saving Throw:</em> DC [[lookup
           @save.dc.value activity=YorssyWMumAsvzx3]], [[lookup
           @target.affects.special activity=YorssyWMumAsvzx3]] by the [[lookup
-          @name lowercase]]{monster} (it can have up to three creatures swallowed at a
-          time).</p><p class="feature"><em>Failure:</em> The target is swallowed
-          by the [[lookup @name lowercase]]{monster}, and the Grappled conditions end. A
-          swallowed creature has the &amp;Reference[Blinded apply=false] and
-          &amp;Reference[Restrained apply=false] conditions, has
-          &amp;Reference[Total Cover] against attacks and other effects outside
-          the [[lookup @name lowercase]]{monster}, and takes [[/damage average
+          @name lowercase]]{monster} (it can have up to three creatures
+          swallowed at a time).</p><p class="feature"><em>Failure:</em> The
+          target is swallowed by the [[lookup @name lowercase]]{monster}, and
+          the Grappled conditions end. A swallowed creature has the
+          &amp;Reference[Blinded apply=false] and &amp;Reference[Restrained
+          apply=false] conditions, has &amp;Reference[Total Cover] against
+          attacks and other effects outside the [[lookup @name
+          lowercase]]{monster}, and takes [[/damage average
           activity=zrWNjO9mkbN28spL]] damage at the start of each of the
-          [[lookup @name lowercase]]{monster}'s turns.</p><p class="feature">If the
-          [[lookup @name lowercase]]{monster} takes 30 damage or more on a single turn
-          from a creature inside it, the [[lookup @name lowercase]]{monster} must succeed
-          on a [[/save format=long activity=rGeGukkm2t2fXsoy]] at the end of
-          that turn or regurgitate all swallowed creatures, each of which falls
-          in a space within [[lookup @range.value activity=rGeGukkm2t2fXsoy]]
-          feet of the [[lookup @name lowercase]]{monster} and has the
-          &amp;Reference[Prone apply=false] condition. If the [[lookup @name
-          lowercase]]{monster} dies, any swallowed creature no longer has the Restrained
-          and can escape from the corpse by using 20 feet of movement, exiting
-          Prone.</p>
+          [[lookup @name lowercase]]{monster}'s turns.</p><p class="feature">If
+          the [[lookup @name lowercase]]{monster} takes 30 damage or more on a
+          single turn from a creature inside it, the [[lookup @name
+          lowercase]]{monster} must succeed on a [[/save format=long
+          activity=rGeGukkm2t2fXsoy]] at the end of that turn or regurgitate all
+          swallowed creatures, each of which falls in a space within [[lookup
+          @range.value activity=rGeGukkm2t2fXsoy]] feet of the [[lookup @name
+          lowercase]]{monster} and has the &amp;Reference[Prone apply=false]
+          condition. If the [[lookup @name lowercase]]{monster} dies, any
+          swallowed creature no longer has the Restrained and can escape from
+          the corpse by using 20 feet of movement, exiting Prone.</p>
         chat: ''
       identifier: swallow
       source:

@@ -562,8 +562,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>While &amp;Reference[Bloodied], the [[lookup @name lowercase]]{monster} has
-          Advantage on attack rolls.</p>
+          <p>While &amp;Reference[Bloodied], the [[lookup @name
+          lowercase]]{monster} has Advantage on attack rolls.</p>
         chat: ''
       identifier: bloodied-fury
       source:
@@ -751,9 +751,9 @@ items:
         value: >-
           <p>[[/attack extended]]. [[/damage extended average]]. If the target
           is a [[lookup @target.affects.special activity=iBenqFiBu40bUxkH]]
-          creature and the [[lookup @name lowercase]]{monster} moved 20+ feet straight
-          toward it immediately before the hit, the target takes an extra
-          [[/damage 2d6 average type=piercing]] damage and has the
+          creature and the [[lookup @name lowercase]]{monster} moved 20+ feet
+          straight toward it immediately before the hit, the target takes an
+          extra [[/damage 2d6 average type=piercing]] damage and has the
           &amp;Reference[Prone apply=false] condition.</p>
         chat: ''
       identifier: gore

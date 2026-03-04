@@ -564,8 +564,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{monster} can climb difficult surfaces,
-          including along ceilings, without needing to make an ability
+          <p>The [[lookup @name lowercase]]{monster} can climb difficult
+          surfaces, including along ceilings, without needing to make an ability
           check.</p>
         chat: ''
       identifier: spider-climb
@@ -772,7 +772,8 @@ items:
           startTurn: null
         description: >-
           <p>The target has the &amp;Reference[Poisoned apply=false] condition
-          until the start of the [[lookup @name lowercase]]{monster}'s next turn.</p>
+          until the start of the [[lookup @name lowercase]]{monster}'s next
+          turn.</p>
         tint: '#ffffff'
         transfer: false
         statuses:
@@ -820,9 +821,10 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]]{monster} ignores movement
-          restrictions caused by webs, and the [[lookup @name lowercase]]{monster} knows
-          the location of any other creature in contact with the same web.</p>
+          <p class="feature">The [[lookup @name lowercase]]{monster} ignores
+          movement restrictions caused by webs, and the [[lookup @name
+          lowercase]]{monster} knows the location of any other creature in
+          contact with the same web.</p>
         chat: ''
       identifier: web-walker
       source:
@@ -1090,11 +1092,12 @@ items:
       description:
         value: >-
           <p><span style="font-family:'Roboto Condensed', sans-serif">The
-          </span>[[lookup @name lowercase]]{monster}<span style="font-family:'Roboto
-          Condensed', sans-serif"> makes one </span>[[/item
-          .mmBite0000000000]]<span style="font-family:'Roboto Condensed',
-          sans-serif"> attack and one </span>[[/item .mmClaw0000000000]]<span
-          style="font-family:'Roboto Condensed', sans-serif"> attack.</span></p>
+          </span>[[lookup @name lowercase]]{monster}<span
+          style="font-family:'Roboto Condensed', sans-serif"> makes one
+          </span>[[/item .mmBite0000000000]]<span style="font-family:'Roboto
+          Condensed', sans-serif"> attack and one </span>[[/item
+          .mmClaw0000000000]]<span style="font-family:'Roboto Condensed',
+          sans-serif"> attack.</span></p>
         chat: ''
       identifier: multiattack
       source:
@@ -1343,11 +1346,11 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]]{monster} pulls [[lookup
-          @target.affects.labels.statblock activity=jWkEQYHBd7aht1kG]] within
-          [[lookup @range.value activity=jWkEQYHBd7aht1kG]] feet of itself that
-          is Restrained by its Web Strand up to 25 feet straight toward
-          itself.</p>
+          <p class="feature">The [[lookup @name lowercase]]{monster} pulls
+          [[lookup @target.affects.labels.statblock activity=jWkEQYHBd7aht1kG]]
+          within [[lookup @range.value activity=jWkEQYHBd7aht1kG]] feet of
+          itself that is Restrained by its Web Strand up to 25 feet straight
+          toward itself.</p>
         chat: ''
       identifier: reel
       source:

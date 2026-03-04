@@ -583,8 +583,8 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]]{monster} can't wear or carry
-          anything.</p>
+          <p class="feature">The [[lookup @name lowercase]]{monster} can't wear
+          or carry anything.</p>
         chat: ''
       identifier: ephemeral
       source:
@@ -633,8 +633,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{monster} sheds Bright Light in a 20-foot
-          radius and Dim Light for an additional 20 feet.</p>
+          <p>The [[lookup @name lowercase]]{monster} sheds Bright Light in a
+          20-foot radius and Dim Light for an additional 20 feet.</p>
         chat: ''
       identifier: illumination
       source:
@@ -683,10 +683,10 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{monster} can move through other creatures and
-          objects as if they were &amp;Reference[Difficult Terrain]. It takes
-          [[/damage 1d10 average type=force]] damage if it ends its turn inside
-          an object.</p>
+          <p>The [[lookup @name lowercase]]{monster} can move through other
+          creatures and objects as if they were &amp;Reference[Difficult
+          Terrain]. It takes [[/damage 1d10 average type=force]] damage if it
+          ends its turn inside an object.</p>
         chat: ''
       identifier: incorporeal-movement
       source:
@@ -793,11 +793,12 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]]{monster} and its light have
-          the &amp;Reference[Invisible apply=false] condition until the [[lookup
-          @name lowercase]]{monster}'s &amp;Reference[Concentration] ends on this effect,
-          which ends early immediately after the [[lookup @name lowercase]]{monster}
-          makes an attack roll or uses Consume Life.</p>
+          <p class="feature">The [[lookup @name lowercase]]{monster} and its
+          light have the &amp;Reference[Invisible apply=false] condition until
+          the [[lookup @name lowercase]]{monster}'s
+          &amp;Reference[Concentration] ends on this effect, which ends early
+          immediately after the [[lookup @name lowercase]]{monster} makes an
+          attack roll or uses Consume Life.</p>
         chat: ''
       identifier: vanish
       source:

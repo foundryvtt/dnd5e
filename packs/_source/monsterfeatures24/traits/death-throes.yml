@@ -83,15 +83,15 @@ system:
     max: ''
   description:
     value: >-
-      <p class="feature">The [[lookup @name lowercase]]{monster} explodes when it
-      dies.</p><p class="feature"><em>Dexterity Saving Throw:</em> DC [[lookup
-      @save.dc.value activity=jTq2czA8KQITUK4c]], each creature in a [[lookup
-      @target.template.size activity=jTq2czA8KQITUK4c]]-foot Emanation
+      <p class="feature">The [[lookup @name lowercase]]{monster} explodes when
+      it dies.</p><p class="feature"><em>Dexterity Saving Throw:</em> DC
+      [[lookup @save.dc.value activity=jTq2czA8KQITUK4c]], each creature in a
+      [[lookup @target.template.size activity=jTq2czA8KQITUK4c]]-foot Emanation
       originating from the [[lookup @name lowercase]]{monster}.</p><p
       class="feature"><em>Failure:</em> [[/damage average]] damage.</p><p
       class="feature"><em>Failure or Success:</em> If the [[lookup @name
-      lowercase]]{monster} dies outside the Abyss, it gains a new body instantly,
-      reviving with all its Hit Points somewhere in the Abyss.</p>
+      lowercase]]{monster} dies outside the Abyss, it gains a new body
+      instantly, reviving with all its Hit Points somewhere in the Abyss.</p>
     chat: ''
   identifier: death-throes
   source:

@@ -61,9 +61,10 @@ system:
     max: ''
   description:
     value: >-
-      <p class="feature">The [[lookup @name lowercase]]{monster} can mimic simple sounds
-      it has heard, such as a whisper or chitter. A hearer can discern the
-      sounds are imitations with a successful [[/check format=long]].</p>
+      <p class="feature">The [[lookup @name lowercase]]{monster} can mimic
+      simple sounds it has heard, such as a whisper or chitter. A hearer can
+      discern the sounds are imitations with a successful [[/check
+      format=long]].</p>
     chat: ''
   identifier: mimicry
   source:

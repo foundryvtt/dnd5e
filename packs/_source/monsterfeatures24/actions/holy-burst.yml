@@ -80,9 +80,9 @@ system:
       @save.dc.value activity=HrgMO1rsQla47fff]], each [[lookup
       @target.affects.type activity=HrgMO1rsQla47fff]] in a [[lookup
       @target.template.size activity=HrgMO1rsQla47fff]]-foot-radius Sphere
-      centered on a point the [[lookup @name lowercase]]{monster} can see within [[lookup
-      @range.value activity=HrgMO1rsQla47fff]] feet. <em>Failure:</em> [[/damage
-      average]] damage. <em>Success:</em> Half damage.</p>
+      centered on a point the [[lookup @name lowercase]]{monster} can see within
+      [[lookup @range.value activity=HrgMO1rsQla47fff]] feet. <em>Failure:</em>
+      [[/damage average]] damage. <em>Success:</em> Half damage.</p>
     chat: ''
   identifier: holy-burst
   source:

@@ -924,10 +924,10 @@ items:
       description:
         value: >-
           <p class="feature">While within 30 feet of at least two hag allies,
-          the [[lookup @name lowercase]]{monster} can cast one of the following spells,
-          requiring no Material components, using the spell's normal casting
-          time, and using Intelligence as the spellcasting ability (spell save
-          DC [[lookup @abilities.int.dc]]):
+          the [[lookup @name lowercase]]{monster} can cast one of the following
+          spells, requiring no Material components, using the spell's normal
+          casting time, and using Intelligence as the spellcasting ability
+          (spell save DC [[lookup @abilities.int.dc]]):
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplAugury0000]{Augury}</em>,
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplFindFamili]{Find
           Familiar}</em>,
@@ -936,8 +936,8 @@ items:
           Object}</em>,
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplScrying000]{Scrying}</em>,
           or <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplUnseenServ]{Unseen
-          Servant}</em>. The [[lookup @name lowercase]]{monster} must finish a Long Rest
-          before using this trait to cast that spell again.</p>
+          Servant}</em>. The [[lookup @name lowercase]]{monster} must finish a
+          Long Rest before using this trait to cast that spell again.</p>
         chat: ''
       identifier: coven-magic
       source:
@@ -2592,8 +2592,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{monster} has Advantage on saving throws
-          against spells and other magical effects.</p>
+          <p>The [[lookup @name lowercase]]{monster} has Advantage on saving
+          throws against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
       source:
@@ -2642,13 +2642,13 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]]{monster} has a soul bag.
-          While holding or carrying the bag, the [[lookup @name lowercase]]{monster} can
-          use its Nightmare Haunting action.</p><p class="feature">The bag has
-          AC 15, HP 20, and Resistance to all damage. The bag turns to dust if
-          reduced to 0 Hit Points. If the bag is destroyed, any souls the bag is
-          holding are released. The [[lookup @name lowercase]]{monster} can create a new
-          bag after 7 days.</p>
+          <p class="feature">The [[lookup @name lowercase]]{monster} has a soul
+          bag. While holding or carrying the bag, the [[lookup @name
+          lowercase]]{monster} can use its Nightmare Haunting action.</p><p
+          class="feature">The bag has AC 15, HP 20, and Resistance to all
+          damage. The bag turns to dust if reduced to 0 Hit Points. If the bag
+          is destroyed, any souls the bag is holding are released. The [[lookup
+          @name lowercase]]{monster} can create a new bag after 7 days.</p>
         chat: ''
       identifier: soul-bag
       source:
@@ -3208,8 +3208,8 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]]{monster} casts one of the
-          following spells, requiring no Material components and using
+          <p class="feature">The [[lookup @name lowercase]]{monster} casts one
+          of the following spells, requiring no Material components and using
           Intelligence as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]]):</p><p class="feature-trait"><strong>At
           Will:</strong>
@@ -3328,10 +3328,11 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]]{monster} shape-shifts into a
-          Small or Medium Humanoid, or it returns to its true form. Other than
-          its size, its game statistics are the same in each form. Any equipment
-          it is wearing or carrying isn't transformed.</p>
+          <p class="feature">The [[lookup @name lowercase]]{monster}
+          shape-shifts into a Small or Medium Humanoid, or it returns to its
+          true form. Other than its size, its game statistics are the same in
+          each form. Any equipment it is wearing or carrying isn't
+          transformed.</p>
         chat: ''
       identifier: shape-shift
       source:
@@ -3447,20 +3448,20 @@ items:
           lowercase]]{monster} casts
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDream00000]{Dream}</em>,
           using the same spellcasting ability as Spellcasting. Only the [[lookup
-          @name lowercase]]{monster} can serve as the spell's messenger, and the target
-          must be a [[lookup @target.affects.type activity=4GGGVhvLSrHgHdb9]]
-          the [[lookup @name lowercase]]{monster} can see [[lookup
-          @target.affects.special activity=4GGGVhvLSrHgHdb9]]. The spell fails
-          and is wasted if the target is under the effect of the
+          @name lowercase]]{monster} can serve as the spell's messenger, and the
+          target must be a [[lookup @target.affects.type
+          activity=4GGGVhvLSrHgHdb9]] the [[lookup @name lowercase]]{monster}
+          can see [[lookup @target.affects.special activity=4GGGVhvLSrHgHdb9]].
+          The spell fails and is wasted if the target is under the effect of the
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbEvilAndGoodPr]{Protection
           from Evil and Good}</em> spell or within a
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplMagicCircl]{Magic
           Circle}</em> spell.</p><p class="feature">If the target takes damage
           from the <em>Dream</em> spell, the target's Hit Point maximum
           decreases by an amount equal to that damage. If the spell kills the
-          target, its soul is trapped in the [[lookup @name lowercase]]{monster}'s soul
-          bag, and the target can't be raised from the dead until its soul is
-          released.</p>
+          target, its soul is trapped in the [[lookup @name
+          lowercase]]{monster}'s soul bag, and the target can't be raised from
+          the dead until its soul is released.</p>
         chat: ''
       identifier: nightmare-haunting
       source:

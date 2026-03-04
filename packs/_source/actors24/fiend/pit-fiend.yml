@@ -577,9 +577,10 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]]{monster} dies outside the Nine Hells, its
-          body disappears in sulfurous smoke, and it gains a new body instantly,
-          reviving with all its Hit Points somewhere in the Nine Hells.</p>
+          <p>If the [[lookup @name lowercase]]{monster} dies outside the Nine
+          Hells, its body disappears in sulfurous smoke, and it gains a new body
+          instantly, reviving with all its Hit Points somewhere in the Nine
+          Hells.</p>
         chat: ''
       identifier: diabolical-restoration
       source:
@@ -690,16 +691,17 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]]{monster} emanates an aura in
-          a [[lookup @target.template.size activity=oT8238p9jXwVy76c]]-foot
-          Emanation while it doesn't have the Incapacitated condition.</p><p
-          class="feature"><em>Wisdom Saving Throw:</em> DC [[lookup
-          @save.dc.value activity=oT8238p9jXwVy76c]], [[lookup
-          @target.affects.special activity=oT8238p9jXwVy76c]].</p><p
+          <p class="feature">The [[lookup @name lowercase]]{monster} emanates an
+          aura in a [[lookup @target.template.size
+          activity=oT8238p9jXwVy76c]]-foot Emanation while it doesn't have the
+          Incapacitated condition.</p><p class="feature"><em>Wisdom Saving
+          Throw:</em> DC [[lookup @save.dc.value activity=oT8238p9jXwVy76c]],
+          [[lookup @target.affects.special activity=oT8238p9jXwVy76c]].</p><p
           class="feature"><em>Failure:</em> The target has the
           &amp;Reference[Frightened apply=false] condition until the start of
           its next turn.</p><p class="feature"><em>Success:</em> The target is
-          immune to this [[lookup @name lowercase]]{monster}'s aura for 24 hours.</p>
+          immune to this [[lookup @name lowercase]]{monster}'s aura for 24
+          hours.</p>
         chat: ''
       identifier: fear-aura
       source:
@@ -787,8 +789,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{monster} has Advantage on saving throws
-          against spells and other magical effects.</p>
+          <p>The [[lookup @name lowercase]]{monster} has Advantage on saving
+          throws against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
       source:
@@ -997,8 +999,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]]{monster} fails a saving throw, it can
-          choose to succeed instead.</p>
+          <p>If the [[lookup @name lowercase]]{monster} fails a saving throw, it
+          can choose to succeed instead.</p>
         chat: ''
       identifier: legendary-resistance
       source:

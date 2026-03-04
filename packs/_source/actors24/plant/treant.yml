@@ -569,8 +569,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{monster} deals double damage to objects and
-          structures.</p>
+          <p>The [[lookup @name lowercase]]{monster} deals double damage to
+          objects and structures.</p>
         chat: ''
       identifier: siege-monster
       source:
@@ -663,8 +663,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{monster} makes two [[/item mmSlam0000000000]]
-          attacks.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes two [[/item
+          mmSlam0000000000]] attacks.</p>
         chat: ''
       identifier: multiattack
       source:
@@ -1093,14 +1093,14 @@ items:
         max: '1'
       description:
         value: >-
-          <p>The [[lookup @name]]{monster} magically animates up to two trees it can see
-          within [[lookup @range.value activity=EceTNjzjKWdrMNAy]] feet of
-          itself. Each tree uses the <strong>Treant</strong> stat block, except
-          it has Intelligence and Charisma scores of 1, it can't speak, and it
-          lacks this action. The tree takes its turn immediately after the
-          treant on the same initiative count, and it obeys the treant. A tree
-          remains animate for 1 day or until it dies, the treant dies, or it is
-          more than 120 feet from the treant. The tree then takes root if
+          <p>The [[lookup @name]]{monster} magically animates up to two trees it
+          can see within [[lookup @range.value activity=EceTNjzjKWdrMNAy]] feet
+          of itself. Each tree uses the <strong>Treant</strong> stat block,
+          except it has Intelligence and Charisma scores of 1, it can't speak,
+          and it lacks this action. The tree takes its turn immediately after
+          the treant on the same initiative count, and it obeys the treant. A
+          tree remains animate for 1 day or until it dies, the treant dies, or
+          it is more than 120 feet from the treant. The tree then takes root if
           possible.</p>
         chat: ''
       identifier: animate-trees

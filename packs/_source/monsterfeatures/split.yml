@@ -8,18 +8,20 @@ system:
     value: >-
       <section class="secret">
 
-      <p>When a [[lookup @name lowercase]]{monster} that is Medium or larger is subjected
-      to lightning or <em>slashing damage</em>, it splits into two new [[lookup
-      @name lowercase]]{monster}s if it has at least 10 Hit Points. Each new [[lookup
-      @name lowercase]]{monster} has Hit Points equal to half the original [[lookup @name
-      lowercase]]{monster}'s, rounded down. New [[lookup @name lowercase]]{monster}s are one size
-      smaller than the original pudding.</p>
+      <p>When a [[lookup @name lowercase]]{monster} that is Medium or larger is
+      subjected to lightning or <em>slashing damage</em>, it splits into two new
+      [[lookup @name lowercase]]{monster}s if it has at least 10 Hit Points.
+      Each new [[lookup @name lowercase]]{monster} has Hit Points equal to half
+      the original [[lookup @name lowercase]]{monster}'s, rounded down. New
+      [[lookup @name lowercase]]{monster}s are one size smaller than the
+      original pudding.</p>
 
       </section>
 
-      <p>the [[lookup @name lowercase]]{monster} splits into two new [[lookup @name
-      lowercase]]{monster}s. New [[lookup @name lowercase]]{monster}s are one size smaller than
-      the original [[lookup @name lowercase]]{monster}.</p>
+      <p>the [[lookup @name lowercase]]{monster} splits into two new [[lookup
+      @name lowercase]]{monster}s. New [[lookup @name lowercase]]{monster}s are
+      one size smaller than the original [[lookup @name
+      lowercase]]{monster}.</p>
     chat: ''
   source:
     custom: ''

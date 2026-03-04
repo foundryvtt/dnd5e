@@ -784,21 +784,21 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]]{monster} babbles incoherently
-          while it doesn't have the Incapacitated condition.</p><p><em>Wisdom
-          Saving Throw:</em> DC [[lookup @save.dc.value
-          activity=PyGOI84k0PPYrru8]], any [[lookup @target.affects.type
-          activity=PyGOI84k0PPYrru8]] that starts its turn within [[lookup
-          @target.template.size activity=PyGOI84k0PPYrru8]] feet of the [[lookup
-          @name lowercase]]{monster} while it is babbling.</p><p><em>Failure:</em> The
-          target rolls [[/r 1d8]] to determine what it does during the current
-          turn:</p><p class="feature-trait"><strong>1–4.</strong> The target
-          does nothing.</p><p class="feature-trait"><strong>5–6.</strong> The
-          target takes no action or Bonus Action and uses all its movement to
-          move in a random direction.</p><p
-          class="feature-trait"><strong>7–8.</strong> The target makes a melee
-          attack against a randomly determined creature within its reach or does
-          nothing if it can't make such an attack.</p>
+          <p class="feature">The [[lookup @name lowercase]]{monster} babbles
+          incoherently while it doesn't have the Incapacitated
+          condition.</p><p><em>Wisdom Saving Throw:</em> DC [[lookup
+          @save.dc.value activity=PyGOI84k0PPYrru8]], any [[lookup
+          @target.affects.type activity=PyGOI84k0PPYrru8]] that starts its turn
+          within [[lookup @target.template.size activity=PyGOI84k0PPYrru8]] feet
+          of the [[lookup @name lowercase]]{monster} while it is
+          babbling.</p><p><em>Failure:</em> The target rolls [[/r 1d8]] to
+          determine what it does during the current turn:</p><p
+          class="feature-trait"><strong>1–4.</strong> The target does
+          nothing.</p><p class="feature-trait"><strong>5–6.</strong> The target
+          takes no action or Bonus Action and uses all its movement to move in a
+          random direction.</p><p class="feature-trait"><strong>7–8.</strong>
+          The target makes a melee attack against a randomly determined creature
+          within its reach or does nothing if it can't make such an attack.</p>
         chat: ''
       identifier: gibbering
       source:

@@ -620,8 +620,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]]{monster} fails a saving throw, it can
-          choose to succeed instead.</p>
+          <p>If the [[lookup @name lowercase]]{monster} fails a saving throw, it
+          can choose to succeed instead.</p>
         chat: ''
       identifier: legendary-resistance
       source:
@@ -721,9 +721,9 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{monster} makes three [[/item Rend]] attacks.
-          It can replace one attack with a use of (A) [[/item Sleep Breath]] or
-          (B) [[/item Spellcasting]] to cast
+          <p>The [[lookup @name lowercase]]{monster} makes three [[/item Rend]]
+          attacks. It can replace one attack with a use of (A) [[/item Sleep
+          Breath]] or (B) [[/item Spellcasting]] to cast
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplScorchingR]{Scorching
           Ray}</em>.</p>
         chat: ''
@@ -1674,9 +1674,9 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]]{monster} casts one of the
-          following spells, requiring no Material components and using Charisma
-          as the spellcasting ability (spell save DC [[lookup
+          <p class="feature">The [[lookup @name lowercase]]{monster} casts one
+          of the following spells, requiring no Material components and using
+          Charisma as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]]):</p><p class="feature-trait"><strong>At
           Will:</strong>
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDetectMagi]{Detect
@@ -3047,7 +3047,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{monster} uses [[/item Spellcasting]] to cast
+          <p>The [[lookup @name lowercase]]{monster} uses [[/item Spellcasting]]
+          to cast
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplScorchingR]{Scorching
           Ray}.</em></p>
         chat: ''
@@ -3158,8 +3159,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{monster} moves up to half its Speed, and it
-          makes one [[/item Rend]] attack.</p>
+          <p>The [[lookup @name lowercase]]{monster} moves up to half its Speed,
+          and it makes one [[/item Rend]] attack.</p>
         chat: ''
       identifier: pounce
       source:
@@ -3287,13 +3288,13 @@ items:
           <p class="feature"><em>Dexterity Saving Throw:</em> DC [[lookup
           @save.dc.value activity=g5fxAWhrpwohtETl]], [[lookup
           @target.affects.labels.statblock activity=g5fxAWhrpwohtETl]] the
-          [[lookup @name lowercase]]{monster} can see within [[lookup @range.value
-          activity=g5fxAWhrpwohtETl]] feet.</p><p
+          [[lookup @name lowercase]]{monster} can see within [[lookup
+          @range.value activity=g5fxAWhrpwohtETl]] feet.</p><p
           class="feature"><em>Failure:</em> [[/damage average]] damage, and the
           target's Speed is halved until the end of its next turn.</p><p
           class="feature"><em>Failure or Success:</em> The [[lookup @name
-          lowercase]]{monster} can't take this action again until the start of its next
-          turn.</p>
+          lowercase]]{monster} can't take this action again until the start of
+          its next turn.</p>
         chat: ''
       identifier: scorching-sands
       source:

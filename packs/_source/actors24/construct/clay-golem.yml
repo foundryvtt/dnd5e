@@ -682,12 +682,12 @@ items:
         value: >-
           <p>Whenever the [[lookup @name lowercase]]{monster} starts its turn
           &amp;Reference[Bloodied], roll [[/r 1d6]]. On a 6, the [[lookup @name
-          lowercase]]{monster} goes berserk. On each of its turns while berserk, the
-          [[lookup @name lowercase]]{monster} attacks the nearest creature it can see. If
-          no creature is near enough to move to and attack, the [[lookup @name
-          lowercase]]{monster} attacks an object. Once the [[lookup @name lowercase]]{monster}
-          goes berserk, it remains so until it is destroyed or it is no longer
-          Bloodied.</p>
+          lowercase]]{monster} goes berserk. On each of its turns while berserk,
+          the [[lookup @name lowercase]]{monster} attacks the nearest creature
+          it can see. If no creature is near enough to move to and attack, the
+          [[lookup @name lowercase]]{monster} attacks an object. Once the
+          [[lookup @name lowercase]]{monster} goes berserk, it remains so until
+          it is destroyed or it is no longer Bloodied.</p>
         chat: ''
       identifier: berserk
       source:
@@ -827,8 +827,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{monster} has Advantage on saving throws
-          against spells and other magical effects.</p>
+          <p>The [[lookup @name lowercase]]{monster} has Advantage on saving
+          throws against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
       source:
@@ -921,8 +921,9 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{monster} makes two [[/item Slam]] attacks, or
-          it makes three Slam attacks if it used Hasten this turn.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes two [[/item Slam]]
+          attacks, or it makes three Slam attacks if it used Hasten this
+          turn.</p>
         chat: ''
       identifier: multiattack
       source:

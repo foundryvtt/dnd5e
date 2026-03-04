@@ -566,7 +566,9 @@ items:
         recovery: []
         max: ''
       description:
-        value: <p>The [[lookup @name lowercase]]{monster} can breathe air and water.</p>
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} can breathe air and
+          water.</p>
         chat: ''
       identifier: amphibious
       source:
@@ -964,10 +966,10 @@ items:
       description:
         value: >-
           <p class="feature">While within 30 feet of at least two hag allies,
-          the [[lookup @name lowercase]]{monster} can cast one of the following spells,
-          requiring no Material components, using the spell's normal casting
-          time, and using Intelligence as the spellcasting ability (spell save
-          DC [[lookup @abilities.int.dc]]):
+          the [[lookup @name lowercase]]{monster} can cast one of the following
+          spells, requiring no Material components, using the spell's normal
+          casting time, and using Intelligence as the spellcasting ability
+          (spell save DC [[lookup @abilities.int.dc]]):
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplAugury0000]{Augury}</em>,
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplFindFamili]{Find
           Familiar}</em>,
@@ -976,8 +978,8 @@ items:
           Object}</em>,
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplScrying000]{Scrying}</em>,
           or <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplUnseenServ]{Unseen
-          Servant}</em>. The [[lookup @name lowercase]]{monster} must finish a Long Rest
-          before using this trait to cast that spell again.</p>
+          Servant}</em>. The [[lookup @name lowercase]]{monster} must finish a
+          Long Rest before using this trait to cast that spell again.</p>
         chat: ''
       identifier: coven-magic
       source:
@@ -2686,9 +2688,10 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]]{monster} can mimic animal
-          sounds and humanoid voices. A creature that hears the sounds can tell
-          they are imitations only with a successful [[/check format=long]].</p>
+          <p class="feature">The [[lookup @name lowercase]]{monster} can mimic
+          animal sounds and humanoid voices. A creature that hears the sounds
+          can tell they are imitations only with a successful [[/check
+          format=long]].</p>
         chat: ''
       identifier: mimicry
       source:
@@ -3275,9 +3278,9 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]]{monster} casts one of the
-          following spells, requiring no Material components and using Wisdom as
-          the spellcasting ability (spell save DC [[lookup
+          <p class="feature">The [[lookup @name lowercase]]{monster} casts one
+          of the following spells, requiring no Material components and using
+          Wisdom as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]], +4 to hit with spell attacks):</p><p
           class="feature-trait"><strong>At Will:</strong>
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDancingLig]{Dancing

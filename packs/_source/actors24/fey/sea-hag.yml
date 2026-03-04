@@ -565,7 +565,9 @@ items:
         recovery: []
         max: ''
       description:
-        value: <p>The [[lookup @name lowercase]]{monster} can breathe air and water.</p>
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} can breathe air and
+          water.</p>
         chat: ''
       identifier: amphibious
       source:
@@ -963,10 +965,10 @@ items:
       description:
         value: >-
           <p class="feature">While within 30 feet of at least two hag allies,
-          the [[lookup @name lowercase]]{monster} can cast one of the following spells,
-          requiring no Material components, using the spell's normal casting
-          time, and using Intelligence as the spellcasting ability (spell save
-          DC [[lookup @abilities.int.dc]]):
+          the [[lookup @name lowercase]]{monster} can cast one of the following
+          spells, requiring no Material components, using the spell's normal
+          casting time, and using Intelligence as the spellcasting ability
+          (spell save DC [[lookup @abilities.int.dc]]):
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplAugury0000]{Augury}</em>,
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplFindFamili]{Find
           Familiar}</em>,
@@ -975,8 +977,8 @@ items:
           Object}</em>,
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplScrying000]{Scrying}</em>,
           or <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplUnseenServ]{Unseen
-          Servant}</em>. The [[lookup @name lowercase]]{monster} must finish a Long Rest
-          before using this trait to cast that spell again.</p>
+          Servant}</em>. The [[lookup @name lowercase]]{monster} must finish a
+          Long Rest before using this trait to cast that spell again.</p>
         chat: ''
       identifier: coven-magic
       source:
@@ -2698,10 +2700,11 @@ items:
           @target.affects.special activity=FR0ETDHBas1Z5LfF]] that starts its
           turn within [[lookup @range.value activity=FR0ETDHBas1Z5LfF]] feet of
           the [[lookup @name lowercase]]{monster} and can see the [[lookup @name
-          lowercase]]{monster}'s true form.</p><p class="feature"><em>Failure:</em> The
-          target has the &amp;Reference[Frightened apply=false] condition until
-          the start of its next turn.</p><p class="feature"><em>Success:</em>
-          The target is immune to this [[lookup @name lowercase]]{monster}'s Horrific
+          lowercase]]{monster}'s true form.</p><p
+          class="feature"><em>Failure:</em> The target has the
+          &amp;Reference[Frightened apply=false] condition until the start of
+          its next turn.</p><p class="feature"><em>Success:</em> The target is
+          immune to this [[lookup @name lowercase]]{monster}'s Horrific
           Appearance for 24 hours.</p>
         chat: ''
       identifier: vile-appearance

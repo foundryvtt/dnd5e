@@ -95,10 +95,10 @@ system:
     max: '4'
   description:
     value: >-
-      <p class="feature">If the [[lookup @name lowercase]]{monster} ends any turn
-      Bloodied and took 15+ Slashing damage during that turn, one of the
-      [[lookup @name lowercase]]{monster}l's limbs is severed, falls into the [[lookup
-      @name lowercase]]{monster}'s space, and becomes a
+      <p class="feature">If the [[lookup @name lowercase]]{monster} ends any
+      turn Bloodied and took 15+ Slashing damage during that turn, one of the
+      [[lookup @name lowercase]]{monster}l's limbs is severed, falls into the
+      [[lookup @name lowercase]]{monster}'s space, and becomes a
       <strong>@UUID[Compendium.dnd5e.actors24.Actor.mmTrollLimb00000]{Troll
       Limb}</strong>. The limb acts immediately after the [[lookup @name
       lowercase]]{monster}'s turn. The [[lookup @name lowercase]]{monster} has 1

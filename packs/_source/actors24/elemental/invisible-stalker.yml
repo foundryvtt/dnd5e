@@ -575,9 +575,9 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{monster} can enter an enemy's space and stop
-          there. It can move through a space as narrow as 1 inch without
-          expending extra movement to do so.</p>
+          <p>The [[lookup @name lowercase]]{monster} can enter an enemy's space
+          and stop there. It can move through a space as narrow as 1 inch
+          without expending extra movement to do so.</p>
         chat: ''
       identifier: air-form
       source:
@@ -1125,8 +1125,8 @@ items:
           <p class="feature"><em>Constitution Saving Throw:</em> DC [[lookup
           @save.dc.value activity=cZy0VYbCVY8aRB4z]], one [[lookup
           @target.affects.special activity=cZy0VYbCVY8aRB4z]] in the [[lookup
-          @name lowercase]]{monster}'s space.</p><p><em>Failure:</em> [[/damage average
-          activity=cZy0VYbCVY8aRB4z]] damage, and the target has the
+          @name lowercase]]{monster}'s space.</p><p><em>Failure:</em> [[/damage
+          average activity=cZy0VYbCVY8aRB4z]] damage, and the target has the
           &amp;Reference[Grappled apply=false] condition (escape DC [[lookup
           @skills.ath.passive]]). Until the grapple ends, the target can't cast
           spells with a Verbal component and takes [[/damage average

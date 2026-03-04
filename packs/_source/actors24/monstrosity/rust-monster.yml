@@ -616,8 +616,8 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]]{monster} can pinpoint the
-          location of [[lookup @target.affects.special
+          <p class="feature">The [[lookup @name lowercase]]{monster} can
+          pinpoint the location of [[lookup @target.affects.special
           activity=I1ppxiVO5CS6tKj0]] within [[lookup @target.template.size
           activity=I1ppxiVO5CS6tKj0]] feet of itself.</p>
         chat: ''
@@ -725,11 +725,12 @@ items:
       description:
         value: >-
           <p><span style="font-family:'Roboto Condensed', sans-serif">The
-          </span>[[lookup @name lowercase]]{monster}<span style="font-family:'Roboto
-          Condensed', sans-serif"> makes one </span>[[/item
-          .mmBite0000000000]]<span style="font-family:'Roboto Condensed',
-          sans-serif"> attack and uses </span>[[/item .mmAntennae000000]]<span
-          style="font-family:'Roboto Condensed', sans-serif"> twice.</span></p>
+          </span>[[lookup @name lowercase]]{monster}<span
+          style="font-family:'Roboto Condensed', sans-serif"> makes one
+          </span>[[/item .mmBite0000000000]]<span style="font-family:'Roboto
+          Condensed', sans-serif"> attack and uses </span>[[/item
+          .mmAntennae000000]]<span style="font-family:'Roboto Condensed',
+          sans-serif"> twice.</span></p>
         chat: ''
       identifier: multiattack
       source:
@@ -1269,8 +1270,8 @@ items:
       description:
         value: >-
           <p class="feature"><em>Trigger:</em> An attack roll hits the [[lookup
-          @name lowercase]]{monster}. <em>Response:</em> The [[lookup @name lowercase]]{monster}
-          uses [[/item .mmAntennae000000]].</p>
+          @name lowercase]]{monster}. <em>Response:</em> The [[lookup @name
+          lowercase]]{monster} uses [[/item .mmAntennae000000]].</p>
         chat: ''
       identifier: reflexive-antennae
       source:

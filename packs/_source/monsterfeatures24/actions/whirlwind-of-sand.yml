@@ -65,10 +65,11 @@ system:
     max: ''
   description:
     value: >-
-      <p class="feature"><em>Trigger:</em> The [[lookup @name lowercase]]{monster} is hit
-      by an attack roll. <em>Response:</em> The [[lookup @name lowercase]]{monster} adds
-      2 to its AC against the attack, possibly causing the attack to miss, and
-      the [[lookup @name lowercase]]{monster} teleports up to [[lookup @range.value
+      <p class="feature"><em>Trigger:</em> The [[lookup @name
+      lowercase]]{monster} is hit by an attack roll. <em>Response:</em> The
+      [[lookup @name lowercase]]{monster} adds 2 to its AC against the attack,
+      possibly causing the attack to miss, and the [[lookup @name
+      lowercase]]{monster} teleports up to [[lookup @range.value
       activity=EsBmMUQMO4b0g6Yw]] [[lookup @range.units
       activity=EsBmMUQMO4b0g6Yw]]. [[lookup @target.affects.special
       activity=EsBmMUQMO4b0g6Yw]]. Each creature of its choice that it can see

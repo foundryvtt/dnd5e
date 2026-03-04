@@ -74,9 +74,9 @@ system:
       save DC [[lookup @abilities.cha.dc]]), and the duration is [[lookup
       @duration.value activity=fcRXSTOlFJShCl52]] hours. The
       &amp;Reference[Charmed apply=false] target is a willing recipient of the
-      [[lookup @name lowercase]]{monster}'s [[/item Bite]], the damage of which doesn't
-      end the spell. When the spell ends, the target is unaware it was Charmed
-      by the [[lookup @name lowercase]]{monster}.</p>
+      [[lookup @name lowercase]]{monster}'s [[/item Bite]], the damage of which
+      doesn't end the spell. When the spell ends, the target is unaware it was
+      Charmed by the [[lookup @name lowercase]]{monster}.</p>
     chat: ''
   identifier: charm
   source:

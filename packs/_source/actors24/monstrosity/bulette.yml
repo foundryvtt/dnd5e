@@ -886,16 +886,18 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]]{monster} spends 5 feet of
-          movement to jump to a space within 15 feet that contains one or more
-          Large or smaller creatures.</p><p class="feature"><em>Dexterity Saving
-          Throw:</em> DC [[lookup @save.dc.value activity=IPCXEQoTuaAG5l52]],
-          each [[lookup @target.affects.type activity=IPCXEQoTuaAG5l52]] in the
-          [[lookup @name lowercase]]{monster}'s destination space.</p><p
+          <p class="feature">The [[lookup @name lowercase]]{monster} spends 5
+          feet of movement to jump to a space within 15 feet that contains one
+          or more Large or smaller creatures.</p><p
+          class="feature"><em>Dexterity Saving Throw:</em> DC [[lookup
+          @save.dc.value activity=IPCXEQoTuaAG5l52]], each [[lookup
+          @target.affects.type activity=IPCXEQoTuaAG5l52]] in the [[lookup @name
+          lowercase]]{monster}'s destination space.</p><p
           class="feature"><em>Failure:</em> [[/damage average]] damage, and the
           target has the &amp;Reference[Prone apply=false] condition.</p><p
           class="feature"><em>Success:</em> Half damage, and the target is
-          pushed 5 feet straight away from the [[lookup @name lowercase]]{monster}.</p>
+          pushed 5 feet straight away from the [[lookup @name
+          lowercase]]{monster}.</p>
         chat: ''
       identifier: deadly-leap
       source:
@@ -1034,9 +1036,9 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{monster} jumps up to [[lookup @range.value
-          activity=C28C43DeD8iFtZMe]] feet by [[lookup @activation.condition
-          activity=C28C43DeD8iFtZMe]].</p>
+          <p>The [[lookup @name lowercase]]{monster} jumps up to [[lookup
+          @range.value activity=C28C43DeD8iFtZMe]] feet by [[lookup
+          @activation.condition activity=C28C43DeD8iFtZMe]].</p>
         chat: ''
       identifier: leap
       source:

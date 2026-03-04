@@ -577,8 +577,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{monster} has Advantage on saving throws
-          against spells and other magical effects.</p>
+          <p>The [[lookup @name lowercase]]{monster} has Advantage on saving
+          throws against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
       source:
@@ -786,8 +786,8 @@ items:
         value: >-
           <p>[[/attack extended]]. [[/damage average extended]], and the target
           has the &amp;Reference[Poisoned apply=false] condition until the start
-          of the [[lookup @name lowercase]]{monster}'s next turn. Until this poison ends,
-          the target can't regain Hit Points.</p>
+          of the [[lookup @name lowercase]]{monster}'s next turn. Until this
+          poison ends, the target can't regain Hit Points.</p>
         chat: ''
       identifier: beard
       source:

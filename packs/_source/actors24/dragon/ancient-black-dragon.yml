@@ -570,7 +570,9 @@ items:
         recovery: []
         max: ''
       description:
-        value: <p>The [[lookup @name lowercase]]{monster} can breathe air and water.</p>
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} can breathe air and
+          water.</p>
         chat: ''
       identifier: amphibious
       source:
@@ -673,8 +675,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]]{monster} fails a saving throw, it can
-          choose to succeed instead.</p>
+          <p>If the [[lookup @name lowercase]]{monster} fails a saving throw, it
+          can choose to succeed instead.</p>
         chat: ''
       identifier: legendary-resistance
       source:
@@ -774,8 +776,9 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{monster} makes three [[/item Rend]] attacks.
-          It can replace one attack with a use of [[/item Spellcasting]] to cast
+          <p>The [[lookup @name lowercase]]{monster} makes three [[/item Rend]]
+          attacks. It can replace one attack with a use of [[/item
+          Spellcasting]] to cast
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplMelfsAcidA]{Melf's Acid
           Arrow}</em> (level 4 version).</p>
         chat: ''
@@ -1466,9 +1469,9 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]]{monster} casts one of the
-          following spells, requiring no Material components and using Charisma
-          as the spellcasting ability (spell save DC [[lookup
+          <p class="feature">The [[lookup @name lowercase]]{monster} casts one
+          of the following spells, requiring no Material components and using
+          Charisma as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]], +13 to hit with spell attacks):</p><p
           class="feature-trait"><strong>At Will:</strong>
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDetectMagi]{Detect
@@ -3115,8 +3118,8 @@ items:
           average]] damage, and the target has Disadvantage on saving throws to
           maintain &amp;Reference[Concentration} until the end of its next
           turn.</p><p><em>Failure or Success:</em> The [[lookup @name
-          lowercase]]{monster} can't take this action again until the start of its next
-          turn.</p>
+          lowercase]]{monster} can't take this action again until the start of
+          its next turn.</p>
         chat: ''
       identifier: cloud-of-insects
       source:
@@ -3260,8 +3263,8 @@ items:
         value: >-
           <p class="feature">The [[lookup @name lowercase]]{monster} casts
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplFear000000]{Fear}</em>.
-          The [[lookup @name lowercase]]{monster} can't take this action again until the
-          start of its next turn.</p>
+          The [[lookup @name lowercase]]{monster} can't take this action again
+          until the start of its next turn.</p>
         chat: ''
       identifier: frightful-presence
       source:
@@ -3593,8 +3596,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{monster} moves up to half its Speed, and it
-          makes one [[/item Rend]] attack.</p>
+          <p>The [[lookup @name lowercase]]{monster} moves up to half its Speed,
+          and it makes one [[/item Rend]] attack.</p>
         chat: ''
       identifier: pounce
       source:

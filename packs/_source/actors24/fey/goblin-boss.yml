@@ -1290,8 +1290,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{monster} makes two attacks, using [[/item
-          .8gwXLDcYj3mk6Kr3]] or [[/item .XbNHC5OBGT6VQF40]] in any
+          <p>The [[lookup @name lowercase]]{monster} makes two attacks, using
+          [[/item .8gwXLDcYj3mk6Kr3]] or [[/item .XbNHC5OBGT6VQF40]] in any
           combination.</p>
         chat: ''
       identifier: multiattack
@@ -1543,13 +1543,14 @@ items:
         value: >-
           <p class="feature"><em>Trigger:</em> A creature the [[lookup @name
           lowercase]]{monster} can see makes an attack roll against it.</p><p
-          class="feature"><em>Response:</em> The [[lookup @name lowercase]]{monster}
-          chooses [[lookup @target.affects.special activity=pIlCmuPw8YUqAISY]]
-          within [[lookup @range.value activity=pIlCmuPw8YUqAISY]] feet of
-          itself. The [[lookup @name lowercase]]{monster} and that [[lookup
-          @target.affects.type activity=pIlCmuPw8YUqAISY]] swap places, and the
-          [[lookup @target.affects.type activity=pIlCmuPw8YUqAISY]] becomes the
-          target of the attack instead.</p>
+          class="feature"><em>Response:</em> The [[lookup @name
+          lowercase]]{monster} chooses [[lookup @target.affects.special
+          activity=pIlCmuPw8YUqAISY]] within [[lookup @range.value
+          activity=pIlCmuPw8YUqAISY]] feet of itself. The [[lookup @name
+          lowercase]]{monster} and that [[lookup @target.affects.type
+          activity=pIlCmuPw8YUqAISY]] swap places, and the [[lookup
+          @target.affects.type activity=pIlCmuPw8YUqAISY]] becomes the target of
+          the attack instead.</p>
         chat: ''
       identifier: redirect-attack
       source:

@@ -585,8 +585,8 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]]{monster} can see 60 feet into
-          the Ethereal Plane when it is on the Material Plane.</p>
+          <p class="feature">The [[lookup @name lowercase]]{monster} can see 60
+          feet into the Ethereal Plane when it is on the Material Plane.</p>
         chat: ''
       identifier: ethereal-sight
       source:
@@ -635,10 +635,10 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]{monster} can move through other creatures and
-          objects as if they were &amp;Reference[Difficult Terrain]. It takes
-          [[/damage 1d10 average type=force]] damage if it ends its turn inside
-          an object.</p>
+          <p>The [[lookup @name lowercase]]{monster} can move through other
+          creatures and objects as if they were &amp;Reference[Difficult
+          Terrain]. It takes [[/damage 1d10 average type=force]] damage if it
+          ends its turn inside an object.</p>
         chat: ''
       identifier: incorporeal-movement
       source:
@@ -1002,9 +1002,10 @@ items:
           <p class="feature">The [[lookup @name lowercase]]{monster} casts the
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplEtherealne]{Etherealness}</em>
           spell, requiring no spell components and using Charisma as the
-          spellcasting ability. The [[lookup @name lowercase]]{monster} is visible on the
-          Material Plane while on the Border Ethereal and vice versa, but it
-          can't affect or be affected by anything on the other plane.</p>
+          spellcasting ability. The [[lookup @name lowercase]]{monster} is
+          visible on the Material Plane while on the Border Ethereal and vice
+          versa, but it can't affect or be affected by anything on the other
+          plane.</p>
         chat: ''
       identifier: etherealness
       source:
@@ -1510,22 +1511,23 @@ items:
           lowercase]]{monster} can see within [[lookup @range.value
           activity=7gmNBVjwuYTyANMe]] feet.</p><p
           class="feature"><em>Failure:</em> The target is possessed by the
-          [[lookup @name lowercase]]{monster}; the [[lookup @name lowercase]]{monster} disappears,
-          and the target has the &amp;Reference[Incapacitated apply=false]
-          condition and loses control of its body. The [[lookup @name
-          lowercase]]{monster} now controls the body, but the target retains awareness.
-          The [[lookup @name lowercase]]{monster} can't be targeted by any attack, spell,
-          or other effect, except ones that specifically target Undead. The
-          [[lookup @name lowercase]]{monster}'s game statistics are the same, except it
+          [[lookup @name lowercase]]{monster}; the [[lookup @name
+          lowercase]]{monster} disappears, and the target has the
+          &amp;Reference[Incapacitated apply=false] condition and loses control
+          of its body. The [[lookup @name lowercase]]{monster} now controls the
+          body, but the target retains awareness. The [[lookup @name
+          lowercase]]{monster} can't be targeted by any attack, spell, or other
+          effect, except ones that specifically target Undead. The [[lookup
+          @name lowercase]]{monster}'s game statistics are the same, except it
           uses the possessed target's Speed, as well as the target's Strength,
           Dexterity, and Constitution modifiers.</p><p class="feature">The
           possession lasts until the body drops to 0 Hit Points or the [[lookup
-          @name lowercase]]{monster} leaves as a Bonus Action. When the possession ends,
-          the [[lookup @name lowercase]]{monster} appears in an unoccupied space within 5
-          feet of the target, and the target is immune to this ghost's
-          Possession for 24 hours.</p><p class="feature"><em>Success:</em> The
-          target is immune to this [[lookup @name lowercase]]{monster}'s Possession for
-          24 hours.</p>
+          @name lowercase]]{monster} leaves as a Bonus Action. When the
+          possession ends, the [[lookup @name lowercase]]{monster} appears in an
+          unoccupied space within 5 feet of the target, and the target is immune
+          to this ghost's Possession for 24 hours.</p><p
+          class="feature"><em>Success:</em> The target is immune to this
+          [[lookup @name lowercase]]{monster}'s Possession for 24 hours.</p>
         chat: ''
       identifier: possession
       source:

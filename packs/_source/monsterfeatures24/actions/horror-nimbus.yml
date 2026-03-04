@@ -95,9 +95,10 @@ system:
       target has the &amp;Reference[Frightened apply=false] condition for
       [[lookup @duration.value activity=GP5MnIyXCVZ4ZMTQ]] [[lookup
       @duration.units activity=GP5MnIyXCVZ4ZMTQ]], until it takes damage, or
-      until it ends its turn with the [[lookup @name lowercase]]{monster} out of line of
-      sight.</p><p class="feature"><em>Success:</em> The target is immune to
-      this [[lookup @name lowercase]]{monster}'s Horror Nimbus for 24 hours.</p>
+      until it ends its turn with the [[lookup @name lowercase]]{monster} out of
+      line of sight.</p><p class="feature"><em>Success:</em> The target is
+      immune to this [[lookup @name lowercase]]{monster}'s Horror Nimbus for 24
+      hours.</p>
     chat: ''
   identifier: horror-nimbus
   source:
