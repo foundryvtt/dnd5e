@@ -1254,7 +1254,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  async _onDropSingleItem(event, itemData) {
+  async _onDropSingleItem(event, itemData, options={}) {
     // Increment the number of class levels a character instead of creating a new item
     if ( itemData.type === "class" ) {
       const charLevel = this.actor.system.details.level;
@@ -1296,7 +1296,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       }
     }
 
-    return super._onDropSingleItem(event, itemData);
+    return super._onDropSingleItem(event, itemData, options);
   }
 
   /* -------------------------------------------- */
