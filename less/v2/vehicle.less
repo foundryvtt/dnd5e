@@ -45,6 +45,7 @@
   /* -------------------------------------------- */
 
   .sidebar-collapser { z-index: 1; }
+  &.minimized .sidebar-collapser { display: none; }
 
   &.sidebar-collapsed {
     .window-content { grid-template-columns: var(--sidebar-margin) 1fr; }
