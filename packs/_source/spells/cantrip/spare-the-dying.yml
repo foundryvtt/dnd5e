@@ -7,7 +7,8 @@ system:
   description:
     value: >-
       <p>You touch a living creature that has 0 hit points. The creature becomes
-      stable. This spell has no effect on undead or constructs.</p>
+      &amp;reference[stable]. This spell has no effect on undead or
+      constructs.</p>
     chat: ''
   source:
     custom: ''
@@ -27,11 +28,14 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -99,16 +103,16 @@ system:
   identifier: spare-the-dying
 sort: 0
 flags: {}
-img: icons/magic/life/heart-cross-blue.webp
+img: icons/magic/life/heart-area-circle-red-green.webp
 effects: []
 folder: Z8kZlnggh1PtuF3Y
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037349188
-  modifiedTime: 1725992717556
+  modifiedTime: 1772661496490
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!8zT7njvqbpXs4Cel'

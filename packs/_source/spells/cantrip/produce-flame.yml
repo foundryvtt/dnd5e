@@ -8,14 +8,15 @@ system:
     value: >-
       <p>A flickering flame appears in your hand. The flame remains there for
       the Duration and harms neither you nor your Equipment. The flame sheds
-      bright light in a 10-foot radius and dim light for an additional 10 feet.
-      The spell ends if you dismiss it as an action or if you cast it
-      again.</p><p>You can also Attack with the flame, although doing so ends
-      the spell. When you cast this spell, or as an action on a later turn, you
-      can hurl the flame at a creature within 30 feet of you. Make a ranged
-      spell Attack. On a hit, the target takes 1d8 fire damage.</p><p>This
-      spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level
-      (3d8), and 17th level (4d8).</p>
+      &amp;reference[brightlight] in a 10-foot radius and
+      &amp;reference[dimlight] for an additional 10 feet. The spell ends if you
+      dismiss it as an action or if you cast it again.</p><p>You can also Attack
+      with the flame, although doing so ends the spell. When you cast this
+      spell, or as an action on a later turn, you can hurl the flame at a
+      creature within 30 feet of you. Make a ranged spell Attack. On a hit, the
+      target takes 1d8 fire damage.</p><p>This spell's damage increases by 1d8
+      when you reach 5th level (2d8), 11th level (3d8), and 17th level
+      (4d8).</p>
     chat: ''
   source:
     custom: ''
@@ -34,12 +35,15 @@ system:
     affects:
       type: self
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -96,7 +100,7 @@ system:
         flat: false
         type:
           value: ranged
-          classification: spell
+          classification: ''
       damage:
         critical:
           bonus: ''
@@ -117,20 +121,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast Spell
+      img: icons/magic/fire/flame-burning-embers-orange.webp
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: produce-flame
 sort: 0
 flags: {}
-img: icons/magic/fire/explosion-fireball-medium-orange.webp
+img: icons/magic/fire/flame-burning-hand-orange.webp
 effects: []
 folder: Z8kZlnggh1PtuF3Y
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037361524
-  modifiedTime: 1725992721594
+  modifiedTime: 1772661837342
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!eCPQuQkIabFKTl9u'

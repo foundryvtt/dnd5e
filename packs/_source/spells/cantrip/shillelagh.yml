@@ -109,9 +109,13 @@ system:
         properties: []
         type: weapon
       name: Imbue Weapon
-      img: ''
+      img: icons/magic/nature/hand-weapon-wood-bark-brown.webp
       appliedEffects:
         - QPsqj6jfS0iXSrTs
+      visibility:
+        level:
+          min: null
+          max: null
     ONVab5lmTqJwwMBC:
       type: attack
       activation:
@@ -184,12 +188,11 @@ flags:
     riders:
       activity:
         - ONVab5lmTqJwwMBC
-      effect: []
-img: icons/magic/fire/dagger-rune-enchant-teal.webp
+img: icons/commodities/wood/kindling-stick-brown.webp
 effects:
   - type: enchantment
     name: Shillelagh
-    img: icons/magic/fire/dagger-rune-enchant-teal.webp
+    img: icons/commodities/wood/kindling-stick-brown.webp
     disabled: false
     _id: QPsqj6jfS0iXSrTs
     system: {}
@@ -218,32 +221,40 @@ effects:
       turns: null
       startRound: null
       startTurn: null
-    description: ''
+    description: >-
+      <p>For the duration, you can use your spellcasting ability instead of
+      Strength for the attack and damage rolls of melee attacks using this
+      weapon, and the weapon's damage die becomes a d8. The weapon also becomes
+      magical, if it isn't already. The spell ends if you cast it again or if
+      you let go of the weapon.</p>
     origin: null
     tint: '#ffffff'
     transfer: false
     statuses: []
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.3.0
       createdTime: 1725554262842
-      modifiedTime: 1730833877207
+      modifiedTime: 1772662100321
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!VzgFzcmocr1X1cp4.QPsqj6jfS0iXSrTs'
 folder: Z8kZlnggh1PtuF3Y
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.1.0
+  systemVersion: 5.3.0
   createdTime: 1725037357582
-  modifiedTime: 1730833889711
+  modifiedTime: 1772662055865
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!VzgFzcmocr1X1cp4'

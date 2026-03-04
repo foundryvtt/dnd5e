@@ -29,11 +29,14 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -73,7 +76,11 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: cK52KOkDDsZveNI2
+          level:
+            min: null
+            max: null
       range:
         override: false
       target:
@@ -85,27 +92,73 @@ system:
           choice: false
         override: false
       roll:
-        formula: 1d4
+        formula: ''
         name: ''
         prompt: false
         visible: false
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast Spell
+      img: icons/magic/defensive/armor-stone-skin.webp
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: resistance
 sort: 0
 flags: {}
-img: icons/magic/defensive/shield-barrier-glowing-triangle-orange.webp
-effects: []
+img: icons/magic/defensive/armor-shield-barrier-steel.webp
+effects:
+  - name: Resistance
+    img: icons/magic/defensive/armor-shield-barrier-steel.webp
+    origin: Compendium.dnd5e.spells.Item.dl8YwvMboBqX2OC4
+    transfer: false
+    _id: cK52KOkDDsZveNI2
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: 60
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>Once before the spell ends, you can roll a [[/r d4]] and add the number
+      rolled to one saving throw of your choice. You can roll the die before or
+      after making the saving throw. The spell then ends.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      createdTime: 1772661922111
+      modifiedTime: 1772661956146
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!dl8YwvMboBqX2OC4.cK52KOkDDsZveNI2'
 folder: Z8kZlnggh1PtuF3Y
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037361325
-  modifiedTime: 1725992721545
+  modifiedTime: 1772661961372
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!dl8YwvMboBqX2OC4'

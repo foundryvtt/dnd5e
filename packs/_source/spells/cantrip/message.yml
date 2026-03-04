@@ -33,12 +33,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '120'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -96,20 +99,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast Spell
+      img: icons/sundries/documents/document-official-capital.webp
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: message
 sort: 0
 flags: {}
-img: icons/commodities/currency/coin-engraved-sun-smile-copper.webp
+img: icons/commodities/materials/parchment-secrets.webp
 effects: []
 folder: Z8kZlnggh1PtuF3Y
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037363340
-  modifiedTime: 1725992722192
+  modifiedTime: 1772660847005
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!icZokbgV1jIMpNCv'

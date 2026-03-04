@@ -31,11 +31,14 @@ system:
       type: object
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -93,20 +96,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast Spell
+      img: icons/commodities/cloth/cloth-bolt-gold-pink.webp
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: mending
 sort: 0
 flags: {}
-img: icons/magic/air/wind-stream-purple-blue.webp
+img: icons/commodities/cloth/thread-spindle-white.webp
 effects: []
 folder: Z8kZlnggh1PtuF3Y
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037363912
-  modifiedTime: 1725992722377
+  modifiedTime: 1772660804831
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!kjmjY0zlE6IEiQVL'

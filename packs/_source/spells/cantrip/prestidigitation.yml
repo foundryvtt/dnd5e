@@ -52,12 +52,15 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '10'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -114,20 +117,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast Spell
+      img: icons/magic/fire/explosion-fireball-medium-purple-orange.webp
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: prestidigitation
 sort: 0
 flags: {}
-img: icons/magic/fire/explosion-fireball-small-purple-orange.webp
+img: icons/weapons/wands/wand-gem-pink.webp
 effects: []
 folder: Z8kZlnggh1PtuF3Y
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037366250
-  modifiedTime: 1725992723271
+  modifiedTime: 1772661892587
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!udsLtG0BugXHR2JQ'
