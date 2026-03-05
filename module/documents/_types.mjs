@@ -31,7 +31,7 @@
  * @typedef DamageDescription
  * @property {number} value                          Amount of damage.
  * @property {string} type                           Type of damage.
- * @property {Set<string>} properties                Physical properties that affect damage application.
+ * @property {Set<string>} [properties]              Physical properties that affect damage application.
  * @property {object} [active]
  * @property {DamageAffectDescription} [active.all]  How resistance/etc. targeting All Damage affected this total.
  * @property {number} [active.multiplier]            Final calculated multiplier.
