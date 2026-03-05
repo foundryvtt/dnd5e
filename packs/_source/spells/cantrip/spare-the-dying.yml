@@ -99,7 +99,14 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: spare-the-dying
 sort: 0
 flags: {}
@@ -112,7 +119,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 5.3.0
   createdTime: 1725037349188
-  modifiedTime: 1772661496490
+  modifiedTime: 1772738702242
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!8zT7njvqbpXs4Cel'

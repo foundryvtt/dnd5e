@@ -116,9 +116,9 @@ system:
           formula: ''
     x3oDVP0hPkb9fAa1:
       type: utility
-      name: Cast Spell
+      name: Cast
       _id: x3oDVP0hPkb9fAa1
-      img: null
+      img: ''
       sort: 100000
       activation:
         type: action
@@ -128,7 +128,8 @@ system:
           allowed: false
         spellSlot: true
         targets: []
-      description: {}
+      description:
+        chatFlavor: ''
       duration:
         units: inst
         concentration: false
@@ -150,14 +151,19 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       visibility:
-        level: {}
+        level:
+          min: null
+          max: null
         requireAttunement: false
         requireIdentification: false
         requireMagic: false
       roll:
         prompt: false
         visible: false
+        name: ''
+        formula: ''
   identifier: light
 sort: 0
 flags: {}
@@ -170,7 +176,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 5.3.0
   createdTime: 1725037350708
-  modifiedTime: 1772737800297
+  modifiedTime: 1772738764145
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!Bnn9Nzajixvow9xi'

@@ -78,6 +78,9 @@ system:
         override: false
       effects:
         - _id: ZlBjKmRbz1cyezIt
+          level:
+            min: null
+            max: null
       range:
         override: false
       target:
@@ -119,7 +122,7 @@ system:
         recovery: []
         max: ''
       sort: 0
-      name: Cast Spell
+      name: Cast
       img: ''
       visibility:
         level:
@@ -195,7 +198,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 5.3.0
   createdTime: 1725037360652
-  modifiedTime: 1772661617339
+  modifiedTime: 1772738726225
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!ctW81uiX56xZR2c5'
