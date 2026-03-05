@@ -885,7 +885,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       if ( !CONFIG.DND5E.damageTypes[d.type]?.isPhysical || !d.properties?.size
         || !dm.bypasses?.intersection(d.properties).size ) {
         applyModification(d);
-        applyModification(d, "ALL");
+        if ( !(d.type in CONFIG.DND5E.healingTypes) ) applyModification(d, "ALL");
       }
 
       let damageMultiplier = multiplier;
@@ -957,10 +957,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       return true;
     };
     const type = typeof damage === "string" ? damage : damage.type;
+    const isHealingType = type in CONFIG.DND5E.healingTypes;
 
     // If category is resistance, check for downgraded immunities
     if ( category === "resistance" ) {
-      if ( downgrade("ALL") && this.#changeHasEffect("immunity", "ALL", { skipDowngrade: true }) ) {
+      if ( !isHealingType && downgrade("ALL") && this.#changeHasEffect("immunity", "ALL", { skipDowngrade: true }) ) {
         return setActive("all");
       }
       if ( downgrade(type) && this.#changeHasEffect("immunity", type, { skipDowngrade: true }) ) {
@@ -972,8 +973,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( CONFIG.DND5E.damageTypes[type]?.isPhysical && damage.properties?.size
       && config?.bypasses?.intersection(damage.properties)?.size ) return false;
 
-    // If all damage resistance is present and not ignored
-    if ( !this.#changeIsIgnored(category, "ALL", { options, skipDowngrade }) && config?.value.has("ALL") ) {
+    // If all damage resistance is present and not ignored (healing types are excluded from "All Damage")
+    if ( !isHealingType
+      && !this.#changeIsIgnored(category, "ALL", { options, skipDowngrade })
+      && config?.value.has("ALL") ) {
       return setActive("all");
     }
 
