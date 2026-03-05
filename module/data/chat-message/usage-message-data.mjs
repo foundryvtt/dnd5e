@@ -1,7 +1,7 @@
 import ChatMessageDataModel from "../abstract/chat-message-data-model.mjs";
 import { ActorDeltasField } from "./fields/deltas-field.mjs";
 
-const { ArrayField, DocumentIdField, NumberField, ObjectField, StringField } = foundry.data.fields;
+const { ArrayField, DocumentIdField, NumberField, StringField } = foundry.data.fields;
 
 /**
  * @import { UsageMessageSystemData } from "./_types.mjs";
@@ -21,10 +21,10 @@ export default class UsageMessageData extends ChatMessageDataModel {
   /** @override */
   static defineSchema() {
     return {
-      cause: new StringField(),
+      cause: new StringField(), // TODO: Replace with DocumentUUIDField with `relative: true` in DnD5e 6.0
       concentration: new DocumentIdField({ required: false }),
       deltas: new ActorDeltasField({}, { initial: null, nullable: true }),
-      effects: new ArrayField(new StringField()),
+      effects: new ArrayField(new StringField({ blank: false })), // TODO: Replace with UUID field in DnD5e 6.0
       scaling: new NumberField({ integer: true, min: 0, initial: 0 }),
       spellLevel: new NumberField({ integer: true, min: 0 })
     };
