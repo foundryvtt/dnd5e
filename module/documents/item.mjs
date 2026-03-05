@@ -122,6 +122,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       }), options);
     }
 
+    Object.defineProperty(this, "_needsAdvancementMigration", { value: Array.isArray(data.system?.advancement) });
+
     return super._initializeSource(data, options);
   }
 
@@ -979,7 +981,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const advancement = new cls(data, { parent: this });
     if ( advancement._preCreate(createData) === false ) return;
 
-    const update = { [`system.advancement.${advancement.id}`]: advancement.toObject() };
+    let update = { [`system.advancement.${advancement.id}`]: advancement.toObject() };
+    if ( !source && this._needsAdvancementMigration ) update = {
+      "system.==advancement": foundry.utils.mergeObject(
+        this.system.toObject().advancement, { [advancement.id]: advancement.toObject() }
+      )
+    };
     if ( source ) return this.updateSource(update);
     return this.update(update).then(() => {
       if ( renderSheet ) return this.system.advancement.get(advancement.id)?.sheet?.render({ force: true });
@@ -1002,7 +1009,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( !this.system.advancement.has(id) ) throw new Error(`Advancement of ID ${id} could not be found to update`);
 
     const advancement = this.system.advancement.get(id);
-    const update = { [`system.advancement.${id}`]: updates };
+    let update = { [`system.advancement.${id}`]: updates };
+    if ( !source && this._needsAdvancementMigration ) update = {
+      "system.==advancement": foundry.utils.mergeObject(
+        this.system.toObject().advancement, { [id]: updates }, { performDeletions: true }
+      )
+    };
     if ( source ) {
       advancement.updateSource(updates);
       advancement.render();
@@ -1028,9 +1040,14 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const advancement = this.system.advancement?.get(id);
     if ( !advancement ) return this;
 
-    const update = game.release.generation < 14
+    let update = game.release.generation < 14
       ? { [`system.advancement.-=${id}`]: null }
       : { [`system.advancement.${id}`]: _del };
+    if ( !source && this._needsAdvancementMigration ) {
+      const data = this.system.toObject().advancement;
+      delete data[id];
+      update = { "system.==advancement": data };
+    }
     if ( source ) return this.updateSource(update);
 
     return Promise.allSettled(advancement.constructor._apps.get(advancement.uuid)?.map(a => a.close()) ?? [])
