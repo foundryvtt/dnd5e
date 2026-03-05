@@ -1358,19 +1358,19 @@ export async function enrichItem(config, label, options) {
 
 /**
  * Use an Item from an Item enricher.
- * @param {object} [config={}]
+ * @param {object} config
  * @param {string} [config.rollActivityUuid]  Lookup the Activity by UUID.
  * @param {string} [config.rollActivityName]  Lookup the Activity by name.
  * @param {string} [config.rollItemUuid]      Lookup the Item by UUID.
  * @param {string} [config.rollItemName]      Lookup the Item by name.
  * @param {string} [config.rollItemActor]     The UUID of a specific Actor that should use the Item.
- * @param {Event} [event]                     The click event triggering the action.
+ * @param {Event} event                       The click event triggering the action.
  * @returns {Promise}
  */
-async function useItem({ rollActivityUuid, rollActivityName, rollItemUuid, rollItemName, rollItemActor }={}) {
+async function useItem({ rollActivityUuid, rollActivityName, rollItemUuid, rollItemName, rollItemActor }, event) {
   // If UUID is provided, always roll that item directly
-  if ( rollActivityUuid ) return (await fromUuid(rollActivityUuid))?.use();
-  if ( rollItemUuid ) return (await fromUuid(rollItemUuid))?.use({ legacy: false });
+  if ( rollActivityUuid ) return (await fromUuid(rollActivityUuid))?.use({ event });
+  if ( rollItemUuid ) return (await fromUuid(rollItemUuid))?.use({ event });
 
   if ( !rollItemName ) return;
   const actor = rollItemActor ? await fromUuid(rollItemActor) : null;
@@ -1397,7 +1397,7 @@ async function useItem({ rollActivityUuid, rollActivityName, rollItemUuid, rollI
   if ( item ) {
     if ( rollActivityName ) {
       const activity = item.system.activities?.getName(rollActivityName);
-      if ( activity ) return activity.use();
+      if ( activity ) return activity.use({ event });
 
       // If no activity could be found at all, display a warning
       else ui.notifications.warn(game.i18n.format("EDITOR.DND5E.Inline.Warning.NoActivityOnItem", {
@@ -1405,7 +1405,7 @@ async function useItem({ rollActivityUuid, rollActivityName, rollItemUuid, rollI
       }));
     }
 
-    else return item.use({ legacy: false });
+    else return item.use({ event });
   }
 
   // If no item could be found at all, display a warning
@@ -1555,9 +1555,6 @@ function createRollLink(label, dataset={}, { classes="roll-link", tag="a" }={}) 
 /*  Actions                                     */
 /* -------------------------------------------- */
 
-const _addListeners = (buttons, handler) =>
-  buttons.forEach(button => button.addEventListener("click", event => handler(event, event.currentTarget)));
-
 /**
  * Attach actions to chat message for requested rolls.
  * @param {ChatMessage5e} message
@@ -1676,6 +1673,7 @@ function createRequestButton(dataset) {
  * Handle performing a roll.
  * @param {Event} event         Triggering click event.
  * @param {HTMLElement} target  Button that was clicked.
+ * @returns {Promise}
  */
 async function handleRoll(event, target) {
   const dataset = getRollActionDataset(target);
@@ -1708,6 +1706,25 @@ function _addDataset(element, dataset) {
   for ( const [key, value] of Object.entries(dataset) ) {
     if ( !key.startsWith("_") && (key !== "values") && value ) element.dataset[key] = value;
   }
+}
+
+/* -------------------------------------------- */
+
+const LISTENER = Symbol("enricher listener");
+
+/**
+ * Add click listeners for each of the provided buttons, passing the event and target to the handler.
+ * @param {HTMLButtonElement[]} buttons  Buttons to attach the listeners to.
+ * @param {Function} handler             Click handler to call.
+ * @private
+ */
+function _addListeners(buttons, handler) {
+  buttons.forEach(button => {
+    // TODO: Remove this fix in DnD5e 6.0 when https://github.com/foundryvtt/foundryvtt/issues/13558 is fixed
+    button.removeEventListener("click", button[LISTENER]);
+    button[LISTENER] = event => handler(event, event.currentTarget);
+    button.addEventListener("click", button[LISTENER]);
+  });
 }
 
 /* -------------------------------------------- */
