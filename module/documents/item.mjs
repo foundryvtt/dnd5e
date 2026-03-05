@@ -122,6 +122,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       }), options);
     }
 
+    Object.defineProperty(this, "_needsAdvancementMigration", { value: Array.isArray(data.system?.advancement) });
+
     return super._initializeSource(data, options);
   }
 
@@ -980,7 +982,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( advancement._preCreate(createData) === false ) return;
 
     let update = { [`system.advancement.${advancement.id}`]: advancement.toObject() };
-    if ( !source && foundry.utils.isNewerVersion("5.3.0", this._stats.systemVersion) ) update = {
+    if ( !source && this._needsAdvancementMigration ) update = {
       "system.==advancement": foundry.utils.mergeObject(
         this.system.toObject().advancement, { [advancement.id]: advancement.toObject() }
       )
@@ -1008,8 +1010,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     const advancement = this.system.advancement.get(id);
     let update = { [`system.advancement.${id}`]: updates };
-    if ( !source && foundry.utils.isNewerVersion("5.3.0", this._stats.systemVersion) ) update = {
-      "system.==advancement": foundry.utils.mergeObject(this.system.toObject().advancement, { [id]: updates })
+    if ( !source && this._needsAdvancementMigration ) update = {
+      "system.==advancement": foundry.utils.mergeObject(
+        this.system.toObject().advancement, { [id]: updates }, { performDeletions: true }
+      )
     };
     if ( source ) {
       advancement.updateSource(updates);
@@ -1039,7 +1043,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     let update = game.release.generation < 14
       ? { [`system.advancement.-=${id}`]: null }
       : { [`system.advancement.${id}`]: _del };
-    if ( !source && foundry.utils.isNewerVersion("5.3.0", this._stats.systemVersion) ) {
+    if ( !source && this._needsAdvancementMigration ) {
       const data = this.system.toObject().advancement;
       delete data[id];
       update = { "system.==advancement": data };
