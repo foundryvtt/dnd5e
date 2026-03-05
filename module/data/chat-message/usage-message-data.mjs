@@ -1,7 +1,7 @@
 import ChatMessageDataModel from "../abstract/chat-message-data-model.mjs";
 import { ActorDeltasField } from "./fields/deltas-field.mjs";
 
-const { ArrayField, DocumentIdField, NumberField, ObjectField, StringField } = foundry.data.fields;
+const { ArrayField, DocumentIdField, NumberField, StringField } = foundry.data.fields;
 
 /**
  * @import { UsageMessageSystemData } from "./_types.mjs";
@@ -24,7 +24,7 @@ export default class UsageMessageData extends ChatMessageDataModel {
       cause: new StringField(), // TODO: Replace with DocumentUUIDField with `relative: true` in DnD5e 6.0
       concentration: new DocumentIdField({ required: false }),
       deltas: new ActorDeltasField({}, { initial: null, nullable: true }),
-      effects: new ArrayField(new DocumentIdField()),
+      effects: new ArrayField(new StringField({ blank: false })), // TODO: Replace with UUID field in DnD5e 6.0
       scaling: new NumberField({ integer: true, min: 0, initial: 0 }),
       spellLevel: new NumberField({ integer: true, min: 0 })
     };
@@ -80,7 +80,8 @@ export default class UsageMessageData extends ChatMessageDataModel {
         this.parent.content, { rollData: this.parent.getRollData() }
       ),
       effects: this.effects
-        .map(id => this.item?.effects.get(id))
+        .map(uuid => uuid.length === 16 ? this.item?.effects.get(uuid)
+          : fromUuidSync(uuid, { relative: this.item, strict: false }))
         .filter(e => e && (game.user.isGM || (e.transfer & (this.parent.author?.id === game.user.id))))
     };
   }
