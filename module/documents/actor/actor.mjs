@@ -2024,7 +2024,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
     const hp = this.system.attributes.hp;
     if ( rollConfig.modifyHitPoints !== false ) {
-      const dhp = Math.min(Math.max(0, hp.effectiveMax) - hp.value, rolls.reduce((t, r) => t + r.total, 0));
+      const total = rolls.reduce((t, r) => t + r.total, 0);
+      const calculated = this.calculateDamage([{ type: "healing", value: total }], { invertHealing: false });
+      const dhp = Math.min(Math.max(0, hp.effectiveMax) - hp.value, calculated ? calculated.amount : total);
       updates.actor["system.attributes.hp.value"] = hp.value + dhp;
     }
 
