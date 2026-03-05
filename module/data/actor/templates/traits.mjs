@@ -142,8 +142,8 @@ export default class TraitsField {
   static async preCreateSize(data, options) {
     if ( this.parent._stats?.compendiumSource?.startsWith("Compendium.") ) return;
     const prototypeToken = {};
-    if ( "size" in (this.system.traits || {}) ) {
-      const size = CONFIG.DND5E.actorSizes[this.system.traits.size || "med"].token ?? 1;
+    if ( "size" in this.traits ) {
+      const size = CONFIG.DND5E.actorSizes[this.traits.size || "med"].token ?? 1;
       if ( !foundry.utils.hasProperty(data, "prototypeToken.width") ) prototypeToken.width = size;
       if ( !foundry.utils.hasProperty(data, "prototypeToken.height") ) prototypeToken.height = size;
     }

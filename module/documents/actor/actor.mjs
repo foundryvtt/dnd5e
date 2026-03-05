@@ -272,9 +272,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   static formatCreatureType(typeData) {
     if ( typeof typeData === "string" ) return typeData; // Backwards compatibility
     let localizedType;
-    if ( typeData.value === "custom" ) {
-      localizedType = typeData.custom;
-    } else if ( typeData.value in CONFIG.DND5E.creatureTypes ) {
+    if ( typeData.value === "custom" ) localizedType = typeData.custom;
+    else if ( typeData.value in CONFIG.DND5E.creatureTypes ) {
       const code = CONFIG.DND5E.creatureTypes[typeData.value];
       localizedType = game.i18n.localize(typeData.swarm ? code.plural : code.label);
     }
@@ -285,7 +284,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         type: localizedType
       });
     }
-    if (typeData.subtype) type = `${type} (${typeData.subtype})`;
+    if ( typeData.subtype ) type = `${type} (${typeData.subtype})`;
     return type;
   }
 
@@ -3314,39 +3313,24 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  static async _preUpdateOperation(documents, operation, user) {
-    if ( (await super._preUpdateOperation(documents, operation, user)) === false ) return false;
+  async _preUpdate(changed, options, user) {
+    if ( (await super._preUpdate(changed, options, user)) === false ) return false;
 
-    // Handle synching the Actor's exhaustion level with the ActiveEffect
-    for ( const [index, actor] of documents.entries() ) {
-      const originalExhaustion = foundry.utils.getProperty(actor, "system.attributes.exhaustion");
-      const level = foundry.utils.getProperty(operation.updates[index], "system.attributes.exhaustion");
-      if ( !Number.isFinite(level) ) continue;
-      const effect = actor.effects.get(ActiveEffect5e.ID.EXHAUSTION);
-
-      // Delete any existing effect is no exhaustion level
-      if ( level < 1 ) await effect?.delete();
-
-      // Adjust stored exhaustion value in existing effect
-      else if ( effect ) {
-        await effect.update({ "flags.dnd5e.exhaustionLevel": level }, { dnd5e: { originalExhaustion } });
-      }
-
-      // No existing effect, create a new one
-      else {
-        const newEffect = await ActiveEffect.implementation.fromStatusEffect("exhaustion", { parent: actor });
-        newEffect.updateSource({ "flags.dnd5e.exhaustionLevel": level });
-        await ActiveEffect.implementation.create(newEffect, { parent: actor, keepId: true });
-      }
+    // Record previous exhaustion level.
+    if ( Number.isFinite(foundry.utils.getProperty(changed, "system.attributes.exhaustion")) ) {
+      foundry.utils.setProperty(options, "dnd5e.originalExhaustion", this.system.attributes.exhaustion);
     }
   }
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _onUpdate(data, options, userId) {
+  async _onUpdate(data, options, userId) {
     super._onUpdate(data, options, userId);
-    if ( userId === game.userId ) this.updateEncumbrance(options);
+    if ( userId === game.userId ) {
+      await this.updateEncumbrance(options);
+      this._onUpdateExhaustion(data, options);
+    }
   }
 
   /* -------------------------------------------- */
@@ -3494,6 +3478,31 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( others.length ) await this.deleteEmbeddedDocuments("ActiveEffect", others.map(e => e._id));
 
     return created;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * TODO: Perform this as part of Actor._preUpdateOperation instead when it becomes available in v12.
+   * Handle syncing the Actor's exhaustion level with the ActiveEffect.
+   * @param {object} data                          The Actor's update delta.
+   * @param {DocumentModificationContext} options  Additional options supplied with the update.
+   * @returns {Promise<ActiveEffect|void>}
+   * @protected
+   */
+  async _onUpdateExhaustion(data, options) {
+    const level = foundry.utils.getProperty(data, "system.attributes.exhaustion");
+    if ( !Number.isFinite(level) ) return;
+    let effect = this.effects.get(ActiveEffect5e.ID.EXHAUSTION);
+    if ( level < 1 ) return effect?.delete();
+    else if ( effect ) {
+      const originalExhaustion = foundry.utils.getProperty(options, "dnd5e.originalExhaustion");
+      return effect.update({ "flags.dnd5e.exhaustionLevel": level }, { dnd5e: { originalExhaustion } });
+    } else {
+      effect = await ActiveEffect.implementation.fromStatusEffect("exhaustion", { parent: this });
+      effect.updateSource({ "flags.dnd5e.exhaustionLevel": level });
+      return ActiveEffect.implementation.create(effect, { parent: this, keepId: true });
+    }
   }
 
   /* -------------------------------------------- */

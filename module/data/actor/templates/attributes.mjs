@@ -521,9 +521,9 @@ export default class AttributesFields {
   /* -------------------------------------------- */
 
   /**
-   * Display concentration challenge if necessary, set bloodied status, and throw damage hook.
+   * Display concentration challenge if necessary, set bloodied status, and fire damage hook.
    * @this {CharacterData|NPCData|VehicleData}
-   * @param {object} changed  The differential data that was changed relative to the documents prior values.
+   * @param {object} changed  The differential data that was changed relative to the document's prior values.
    * @param {object} options  Additional options which modify the update request.
    * @param {string} userId   The id of the User requesting the document update.
    */
@@ -532,34 +532,33 @@ export default class AttributesFields {
     if ( userId === game.userId ) await this.parent.updateBloodied(options);
 
     const hp = options.dnd5e?.hp;
-    if ( hp && !options.isRest && !options.isAdvancement ) {
-      const curr = this.attributes.hp;
-      const changes = {
-        hp: curr.value - hp.value,
-        temp: curr.temp - hp.temp
-      };
-      changes.total = changes.hp + changes.temp;
+    if ( !hp || options.isRest || options.isAdvancement ) return;
 
-      if ( Number.isInteger(changes.total) && (changes.total !== 0) ) {
-        this.parent._displayTokenEffect(changes);
-        if ( !game.settings.get("dnd5e", "disableConcentration") && (userId === game.userId)
-          && (options.dnd5e?.concentrationCheck !== false)
-          && (changes.total < 0) && ((changes.temp < 0) || (curr.value < curr.effectiveMax)) ) {
-          this.parent.challengeConcentration({ dc: this.parent.getConcentrationDC(-changes.total) });
-        }
+    const curr = this.attributes.hp;
+    const changes = {
+      hp: curr.value - hp.value,
+      temp: curr.temp - hp.temp
+    };
+    changes.total = changes.hp + changes.temp;
+    if ( !Number.isInteger(changes.total) || (changes.total === 0) ) return;
 
-        /**
-         * A hook event that fires when an actor is damaged or healed by any means. The actual name
-         * of the hook will depend on the change in hit points.
-         * @function dnd5e.damageActor
-         * @memberof hookEvents
-         * @param {Actor5e} actor                                       The actor that had their hit points reduced.
-         * @param {{hp: number, temp: number, total: number}} changes   The changes to hit points.
-         * @param {object} update                                       The original update delta.
-         * @param {string} userId                                       Id of the user that performed the update.
-         */
-        Hooks.callAll(`dnd5e.${changes.total > 0 ? "heal" : "damage"}Actor`, this.parent, changes, changed, userId);
-      }
+    this.parent._displayTokenEffect(changes);
+    if ( !game.settings.get("dnd5e", "disableConcentration") && (userId === game.userId)
+      && (options.dnd5e?.concentrationCheck !== false)
+      && (changes.total < 0) && ((changes.temp < 0) || (curr.value < curr.effectiveMax)) ) {
+      this.parent.challengeConcentration({ dc: this.parent.getConcentrationDC(-changes.total) });
     }
+
+    /**
+     * A hook event that fires when an actor is damaged or healed by any means. The actual name
+     * of the hook will depend on the change in hit points.
+     * @function dnd5e.damageActor
+     * @memberof hookEvents
+     * @param {Actor5e} actor                                       The actor that had their hit points reduced.
+     * @param {{hp: number, temp: number, total: number}} changes   The changes to hit points.
+     * @param {object} update                                       The original update delta.
+     * @param {string} userId                                       Id of the user that performed the update.
+     */
+    Hooks.callAll(`dnd5e.${changes.total > 0 ? "heal" : "damage"}Actor`, this.parent, changes, changed, userId);
   }
 }
