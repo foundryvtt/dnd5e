@@ -7,9 +7,9 @@ system:
   description:
     value: >-
       <p>You touch one object that is no larger than 10 feet in any dimension.
-      Until the spell ends, the object sheds &amp;reference[brightlight] in a
-      20-foot radius and &amp;reference[dimlight] for an additional 20 feet. The
-      light can be colored as you like. Completely covering the object with
+      Until the spell ends, the object sheds &amp;reference[bright light] in a
+      20-foot radius and &amp;reference[dim light] for an additional 20 feet.
+      The light can be colored as you like. Completely covering the object with
       something opaque blocks the light. The spell ends if you cast it again or
       dismiss it as an action.</p><p>If you target an object held or worn by a
       hostile creature, that creature must succeed on a Dexterity saving throw
@@ -59,61 +59,12 @@ system:
     - vocal
     - material
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: save
-      activation:
-        type: action
-        value: null
-        override: false
-      consumption:
-        targets: []
-        scaling:
-          allowed: false
-          max: ''
-        spellSlot: true
-      description:
-        chatFlavor: ''
-      duration:
-        units: inst
-        concentration: false
-        override: false
-      effects: []
-      range:
-        override: false
-      target:
-        prompt: true
-        template:
-          contiguous: false
-          units: ft
-        affects:
-          choice: false
-        override: false
-      damage:
-        onSave: none
-        parts: []
-      save:
-        ability: dex
-        dc:
-          calculation: spellcasting
-          formula: ''
-      uses:
-        spent: 0
-        recovery: []
-        max: ''
-      sort: 0
-      name: Cast Spell
-      img: icons/magic/light/explosion-star-glow-yellow.webp
-      visibility:
-        level:
-          min: null
-          max: null
     A0r24ncbAuYRHrRX:
       type: save
       name: Avoid Light Save
       _id: A0r24ncbAuYRHrRX
-      img: icons/magic/fire/orb-lightning-sun.webp
-      sort: 0
+      img: ''
+      sort: 200000
       activation:
         type: special
         override: true
@@ -163,6 +114,50 @@ system:
         dc:
           calculation: spellcasting
           formula: ''
+    x3oDVP0hPkb9fAa1:
+      type: utility
+      name: Cast Spell
+      _id: x3oDVP0hPkb9fAa1
+      img: null
+      sort: 100000
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
   identifier: light
 sort: 0
 flags: {}
@@ -175,7 +170,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 5.3.0
   createdTime: 1725037350708
-  modifiedTime: 1772662167242
+  modifiedTime: 1772737800297
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!Bnn9Nzajixvow9xi'

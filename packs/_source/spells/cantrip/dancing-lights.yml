@@ -10,7 +10,7 @@ system:
       appear as torches, lanterns, or glowing orbs that hover in the air for the
       duration. You can also combine the four lights into one glowing vaguely
       humanoid form of Medium size. Whichever form you choose, each light sheds
-      &amp;reference[dimlight] in a 10-foot radius.</p><p>As a bonus action on
+      &amp;reference[dim light] in a 10-foot radius.</p><p>As a bonus action on
       your turn, you can move the lights up to 60 feet to a new spot within
       range. A light must be within 20 feet of another light created by this
       spell, and a light winks out if it exceeds the spell's range.</p>
@@ -130,7 +130,7 @@ system:
         max: ''
       sort: 0
       name: Conjure Lights
-      img: icons/magic/light/orbs-smoke-pink.webp
+      img: ''
       visibility:
         level:
           min: null
@@ -148,7 +148,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 5.3.0
   createdTime: 1725037350862
-  modifiedTime: 1772660278689
+  modifiedTime: 1772737580134
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!CAxSzHWizrafT033'
