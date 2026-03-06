@@ -1,0 +1,40 @@
+<div class="item-detail effect-controls always-visible" data-column-id="controls">
+
+    {{#if isEffect}}
+    {{#if @root.editable}}
+    {{!-- Editing --}}
+    <button type="button" class="unbutton config-button effect-control item-control item-action" data-action="edit"
+            data-tooltip aria-label="{{ localize 'DND5E.EffectEdit' }}">
+        <i class="fa-solid fa-pen-to-square" inert></i>
+    </button>
+
+    {{!-- Deleting --}}
+    <button type="button" class="unbutton config-button effect-control item-control item-action" data-action="delete"
+            data-tooltip aria-label="{{ localize 'DND5E.EffectDelete' }}">
+        <i class="fa-solid fa-trash" inert></i>
+    </button>
+
+    {{else if ctx.toggleable}}
+    {{!-- Toggling --}}
+    <button type="button" class="unbutton config-button effect-control item-control item-action
+            {{~#unless ctx.disabled}} active{{/unless}}" data-action="toggle" data-tooltip
+            aria-label="{{ localize (ifThen ctx.disabled 'DND5E.EffectEnable' 'DND5E.EffectDisable') }}">
+        <i class="fa-solid fa-toggle-{{ ifThen disabled 'off' 'on' }}" inert></i>
+    </button>
+
+    {{/if}}
+
+    {{!-- Expand/Collapse --}}
+    <button type="button" class="unbutton config-button effect-control item-control item-action always-interactive"
+            data-toggle-description data-action="toggleExpand" aria-label="{{ localize 'DND5E.ToggleDescription' }}">
+        <i class="fa-solid fa-{{ ifThen ctx.isExpanded 'compress' 'expand' }}" inert></i>
+    </button>
+
+    {{!-- Context Menu --}}
+    <button type="button" class="unbutton config-button effect-control item-control always-interactive"
+            data-context-menu aria-label="{{ localize 'DND5E.AdditionalControls' }}">
+        <i class="fa-solid fa-ellipsis-vertical" inert></i>
+    </button>
+    {{/if}}
+
+</div>

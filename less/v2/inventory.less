@@ -361,8 +361,13 @@
         &.item-detail { color: var(--color-text-secondary); }
       }
 
+      /* Effect Value */
+      .effect-value {
+        width: 70px;
+      }
+
       /* Item Controls */
-      .item-controls {
+      .item-controls, .effect-controls {
         width: 70px;
         align-items: stretch;
         justify-content: center;
@@ -474,6 +479,36 @@
         min-height: 24px;
         border-width: 1px;
         border-radius: 3px;
+      }
+
+      .item-name .title { font-size: var(--font-size-12); }
+    }
+
+    .changes .change-row {
+      position: relative;
+      border-top: var(--activity-row-border);
+      padding-left: 20px;
+      min-block-size: 32px;
+
+      &:last-child { border-bottom: var(--activity-row-border); }
+
+      &::before {
+        content: "\f192";
+        position: absolute;
+        inset: 8px auto auto 5px;
+        font-family: var(--font-awesome);
+        font-size: var(--font-size-14);
+        font-weight: 900;
+        color: var(--activity-row-indent-color);
+      }
+      &[data-change-type="multiply"]::before { content: "\f057"; }
+      &[data-change-type="add"]::before { content: "\f055"; }
+      &[data-change-type="subtract"]::before { content: "\f056"; }
+      &[data-change-type="downgrade"]::before { content: "\f358"; }
+      &[data-change-type="upgrade"]::before { content: "\f35b"; }
+      &[data-change-type="override"]::before {
+        content: "\f28b";
+        rotate: 90deg;
       }
 
       .item-name .title { font-size: var(--font-size-12); }
