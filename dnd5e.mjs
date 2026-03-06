@@ -632,10 +632,7 @@ Hooks.on("renderChatLog", (app, html, data) => {
 });
 Hooks.on("renderChatPopout", (app, html, data) => documents.Item5e.chatListeners(html));
 
-Hooks.on("chatMessage", (app, message, data) => {
-  if ( applications.Award.chatMessage(message) === false ) return false;
-  return enrichers.chatMessage(message);
-});
+Hooks.on("chatMessage", (app, message, data) => enrichers.chatMessage(message));
 Hooks.on("createChatMessage", dataModels.chatMessage.RequestMessageData.onCreateMessage);
 Hooks.on("updateChatMessage", dataModels.chatMessage.RequestMessageData.onUpdateResultMessage);
 

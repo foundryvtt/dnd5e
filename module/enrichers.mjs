@@ -7,8 +7,10 @@ import { rollItem } from "./documents/macro.mjs";
 
 const slugify = value => value?.slugify().replaceAll("-", "").replaceAll("(", "").replaceAll(")", "");
 
-const VALID_CHAT_COMMANDS = ["attack", "check", "concentration", "damage", "heal", "healing", "save", "skill", "tool"];
-const VALID_COMMANDS = [...VALID_CHAT_COMMANDS, "award", "item"];
+const VALID_CHAT_COMMANDS = [
+  "attack", "award", "check", "concentration", "damage", "heal", "healing", "save", "skill", "tool"
+];
+const VALID_COMMANDS = [...VALID_CHAT_COMMANDS, "item"];
 const makeCommandPattern = commands => `/(?<type>${commands.join("|")})(?<config> .*?)?`;
 const CHAT_REGEX = new RegExp(`^${makeCommandPattern(VALID_CHAT_COMMANDS)}$`, "i");
 
@@ -49,6 +51,7 @@ export function chatMessage(message) {
   config = parseConfig(config, { multiple: ["damage", "heal", "healing"].includes(type) });
   switch (type) {
     case "attack": handleAttackCommand(config); break;
+    case "award": Award.handleAward(message); break;
     case "heal":
     case "healing": config._isHealing = true;
     case "damage": handleDamageCommand(config); break;
