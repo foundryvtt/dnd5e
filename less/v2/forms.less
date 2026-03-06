@@ -404,6 +404,8 @@
       padding-right: 20px;
     }
 
+    &.split-group .form-group.formula-input { flex: 1 1 min-content; }
+
     /* Full-Width Groups */
     &.full-width {
       padding: 6px;
@@ -460,9 +462,10 @@
   }
 
   formula-input {
+    overflow: hidden;
     &:focus-within { outline: none; }
     &:enabled {
-      &:has(> input:focus-visible, > input:hover) {
+      &:focus-within, &:hover {
         border-color: var(--input-hover-border-color);
         box-shadow: 0 0 6px var(--dnd5e-color-gold);
       }
@@ -480,6 +483,7 @@
     > button {
       background: none;
       box-shadow: none;
+      color: var(--formula-input-icon-color);
     }
   }
 

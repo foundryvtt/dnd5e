@@ -32,6 +32,15 @@ export default class FormulaField extends foundry.data.fields.StringField {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  toFormGroup(groupConfig={}, inputConfig={}) {
+    groupConfig.classes ||= [];
+    groupConfig.classes.push("formula-input");
+    return super.toFormGroup(groupConfig, inputConfig);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   _toInput(config) {
     const input = super._toInput(config);
     if ( (input.tagName !== "INPUT") || (game.release.generation < 14) ) return input;
