@@ -674,7 +674,10 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
       return ActiveEffect.implementation.createDialog({
         name: this.document.name,
         img: this.document.img,
-        origin: this.document.uuid
+        origin: this.document.uuid,
+        system: {
+          magical: this.document.system.properties?.has("mgc")
+        }
       }, { parent: this.document, renderSheet: true });
     }
   }

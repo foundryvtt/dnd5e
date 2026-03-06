@@ -125,9 +125,7 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
 
     // Iterate over active effects, classifying them into categories
     for ( const e of effects ) {
-      if ( (e.dependentOrigin?.active === false) || ((e.parent.system?.identified === false) && !game.user.isGM) ) {
-        continue;
-      }
+      if ( e.isConcealed ) continue;
       if ( e.isAppliedEnchantment ) {
         if ( e.disabled ) categories.enchantmentInactive.effects.push(e);
         else categories.enchantmentActive.effects.push(e);
@@ -289,7 +287,10 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
       icon: isActor ? "icons/svg/aura.svg" : this.document.img,
       origin: isEnchantment ? undefined : this.document.uuid,
       "duration.rounds": li.dataset.effectType === "temporary" ? 1 : undefined,
-      disabled: ["inactive", "enchantmentInactive"].includes(li.dataset.effectType)
+      disabled: ["inactive", "enchantmentInactive"].includes(li.dataset.effectType),
+      system: {
+        magical: !isActor && this.document.system.properties?.has("mgc")
+      }
     }]);
   }
 
