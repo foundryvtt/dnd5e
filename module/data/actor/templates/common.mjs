@@ -31,23 +31,30 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
     return this.mergeSchema(super.defineSchema(), {
       abilities: new MappingField(new SchemaField({
         value: new NumberField({
-          required: true, nullable: false, integer: true, min: 0, initial: 10, label: "DND5E.AbilityScore"
+          required: true, nullable: false, integer: true, min: 0, initial: 10, label: "DND5E.AbilityScore",
+          labelFormatter: "DND5E.ABILITY.Formatter.Score"
         }),
         proficient: new NumberField({
-          required: true, integer: true, min: 0, max: 1, initial: 0, label: "DND5E.ProficiencyLevel"
+          required: true, integer: true, min: 0, max: 1, initial: 0, label: "DND5E.ProficiencyLevel",
+          labelFormatter: "DND5E.ABILITY.Formatter.SaveProficiency"
         }),
         max: new NumberField({
-          required: true, integer: true, nullable: true, min: 0, initial: null, label: "DND5E.AbilityScoreMax"
+          required: true, integer: true, nullable: true, min: 0, initial: null, label: "DND5E.AbilityScoreMax",
+          labelFormatter: "DND5E.ABILITY.Formatter.Maxmimum"
         }),
         bonuses: new SchemaField({
-          check: new FormulaField({ required: true, label: "DND5E.AbilityCheckBonus" }),
-          save: new FormulaField({ required: true, label: "DND5E.SaveBonus" })
+          check: new FormulaField({
+            required: true, label: "DND5E.AbilityCheckBonus", labelFormatter: "DND5E.ABILITY.Formatter.CheckBonus"
+          }),
+          save: new FormulaField({
+            required: true, label: "DND5E.SaveBonus", labelFormatter: "DND5E.ABILITY.Formatter.SaveBonus"
+          })
         }, { label: "DND5E.AbilityBonuses" }),
-        check: new RollConfigField({ ability: false }),
-        save: new RollConfigField({ ability: false })
+        check: new RollConfigField({ ability: false, labelFormatterPrefix: "DND5E.ABILITY.Formatter.Check" }),
+        save: new RollConfigField({ ability: false, labelFormatterPrefix: "DND5E.ABILITY.Formatter.Save" })
       }), {
         initialKeys: CONFIG.DND5E.abilities, initialValue: this._initialAbilityValue.bind(this),
-        initialKeysOnly: true, label: "DND5E.Abilities"
+        initialKeysOnly: true, label: "DND5E.Abilities", entryLabel: key => CONFIG.DND5E.abilities[key]?.label
       })
     });
   }

@@ -85,6 +85,19 @@
     "SaveLabel": "{ability} Save",
     "Title": "Configure {ability}"
   },
+  "Formatter": {
+    "CheckAdvantageMode": "{name} Check Advantage Mode",
+    "CheckBonus": "{name} Check Bonus",
+    "CheckMaximum": "Maximum {name} Check Roll",
+    "CheckMinimum": "Minimum {name} Check Roll",
+    "Maximum": "Maximum {name}",
+    "SaveAdvantageMode": "{name} Save Advantage Mode",
+    "SaveBonus": "{name} Save Bonus",
+    "SaveMaximum": "Maximum {name} Save Roll",
+    "SaveMinimum": "Minimum {name} Save Roll",
+    "SaveProficiency": "{name} Save Proficiency",
+    "Score": "{name} Score"
+  },
   "SECTIONS": {
     "Bonuses": {
       "Label": "{ability} Bonuses",
@@ -1008,6 +1021,11 @@
 "DND5E.BackgroundAdd": "Add Background",
 "DND5E.BackgroundName": "Background Name",
 
+"DND5E.BASE": {
+  "Image": "Image",
+  "Name": "Name"
+},
+
 "DND5E.Bastion": {
   "Action": {
     "BastionTurn": "Advance Bastion Turn"
@@ -1461,6 +1479,24 @@
 },
 "DND5E.Challenge": "Challenge",
 "DND5E.ChallengeRating": "Challenge Rating",
+
+"DND5E.CHARACTER": {
+  "FIELDS": {
+    "traits": {
+      "weaponProf": {
+        "mastery": {
+          "bonus": {
+            "label": "Bonus Weapon Masteries"
+          },
+          "value": {
+            "label": "Weapon Masteries"
+          }
+        }
+      }
+    }
+  }
+},
+
 "DND5E.Charged": "Charged",
 "DND5E.Charges": "Charges",
 "DND5E.ChatContextDamage": "Apply As Damage",
@@ -1730,6 +1766,39 @@
 "DND5E.CONSUMABLE": {
   "FIELDS": {
     "damage": {
+      "base": {
+        "bonus": {
+          "label": "Base Damage Bonus"
+        },
+        "custom": {
+          "enabled": {
+            "label": "Use Custom Base Damage Formula"
+          },
+          "formula": {
+            "label": "Custom Base Damage Formula"
+          }
+        },
+        "denomination": {
+          "label": "Base Damage Denomination"
+        },
+        "number": {
+          "label": "Base Damage Die Count"
+        },
+        "scaling": {
+          "formula": {
+            "label": "Base Damage Scaling Formula"
+          },
+          "mode": {
+            "label": "Base Damage Scaling Mode"
+          },
+          "number": {
+            "label": "Base Damage Scaling Value"
+          }
+        },
+        "types": {
+          "label": "Base Damage Types"
+        }
+      },
       "label": "Ammunition Damage",
       "replace": {
         "label": "Replace Weapon Damage",
@@ -3779,6 +3848,12 @@
 "DND5E.RitualAbbr": "R",
 
 "DND5E.ROLL": {
+  "Formatter": {
+    "AdvantageMode": "{name} Advantage Mode",
+    "Maximum": "Maximum {name} Roll",
+    "Minimum": "Minimum {name} Roll",
+    "ModifierAbility": "{name} Modifier Ability"
+  },
   "Range": {
     "Label": "Roll Range",
     "Maximum": "Maximum Roll",
@@ -3974,6 +4049,11 @@
 "DND5E.SizeTinyAbbr": "Tn",
 
 "DND5E.SKILL": {
+  "Formatter": {
+    "CheckBonus": "{name} Check Bonus",
+    "PassiveBonus": "Passive {name} Bonus",
+    "Proficiency": "{name} Proficiency"
+  },
   "SECTIONS": {
     "Details": "{label} Details",
     "Bonuses": {
@@ -4746,6 +4826,10 @@
 "DND5E.ToggleDescription": "Toggle Description",
 
 "DND5E.TOOL": {
+  "Formatter": {
+    "CheckBonus": "{name} Check Bonus",
+    "Proficiency": "{name} Proficiency"
+  },
   "SECTIONS": {
     "Details": "{label} Details",
     "Bonuses": {
@@ -5580,6 +5664,39 @@
       }
     },
     "damage": {
+      "base": {
+        "bonus": {
+          "label": "Base Damage Bonus"
+        },
+        "custom": {
+          "enabled": {
+            "label": "Use Custom Base Damage Formula"
+          },
+          "formula": {
+            "label": "Custom Base Damage Formula"
+          }
+        },
+        "denomination": {
+          "label": "Base Damage Denomination"
+        },
+        "number": {
+          "label": "Base Damage Die Count"
+        },
+        "scaling": {
+          "formula": {
+            "label": "Base Damage Scaling Formula"
+          },
+          "mode": {
+            "label": "Base Damage Scaling Mode"
+          },
+          "number": {
+            "label": "Base Damage Scaling Value"
+          }
+        },
+        "types": {
+          "label": "Base Damage Types"
+        }
+      },
       "hint": "Intrinsic damage dice from the weapon. Ability modifier and additional damage parts will be provided automatically when attacking."
     },
     "mastery": {

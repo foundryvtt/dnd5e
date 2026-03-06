@@ -1,0 +1,19 @@
+<li class="change-row item-row" data-change-type="{{ type }}">
+
+    {{!-- Name --}}
+    <div class="change-name item-name" role="button" aria-label="{{ name }}">
+
+        <div class="name name-stacked">
+            <span class="title">{{ name }}</span>
+            <span class="subtitle"
+                  {{~#if (ne key displayKey)}} data-tooltip aria-label="{{ key }}"{{/if}}>{{ displayKey }}</span>
+        </div>
+
+    </div>
+
+    {{!-- Columns --}}
+    {{#each columns}}
+        {{> (lookup . "template") ctx=.. entry=.. effect=../effect isChange=true }}
+    {{/each}}
+
+</li>

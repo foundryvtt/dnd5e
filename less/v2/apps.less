@@ -2034,16 +2034,21 @@ dialog.dnd5e2.application {
 /* ---------------------------------- */
 
 .dnd5e2 .collapsible, .collapsible.dnd5e2-collapsible {
-  &.collapsed {
-    .fa-caret-down { transform: rotate(-90deg); }
-    .collapsible-content { grid-template-rows: 0fr; }
-  }
   .fa-caret-down { transition: transform 250ms ease; }
   .collapsible-content {
     display: grid;
-    grid-template-rows: 1fr;
     transition: grid-template-rows 250ms ease;
     > .wrapper { overflow: hidden; }
+  }
+}
+
+@scope (.dnd5e2 .collapsible, .dnd5e2-collapsible.collapsible) to (.collapsible) {
+  :scope:not(.collapsed) {
+    .collapsible-content { grid-template-rows: 1fr; }
+  }
+  :scope.collapsed {
+    .fa-caret-down { transform: rotate(-90deg); }
+    .collapsible-content { grid-template-rows: 0fr; }
   }
 }
 

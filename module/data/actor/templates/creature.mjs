@@ -1,3 +1,4 @@
+import * as Trait from "../../../documents/actor/trait.mjs";
 import { simplifyBonus } from "../../../utils.mjs";
 import AdvantageModeField from "../../fields/advantage-mode-field.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
@@ -42,26 +43,34 @@ export default class CreatureTemplate extends CommonTemplate {
       }),
       skills: new MappingField(new RollConfigField({
         value: new NumberField({
-          required: true, nullable: false, min: 0, max: 2, step: 0.5, initial: 0, label: "DND5E.ProficiencyLevel"
+          required: true, nullable: false, min: 0, max: 2, step: 0.5, initial: 0, label: "DND5E.ProficiencyLevel",
+          labelFormatter: "DND5E.SKILL.Formatter.Proficiency"
         }),
         ability: "dex",
         bonuses: new SchemaField({
-          check: new FormulaField({ required: true, label: "DND5E.SkillBonusCheck" }),
-          passive: new FormulaField({ required: true, label: "DND5E.SkillBonusPassive" })
+          check: new FormulaField({
+            required: true, label: "DND5E.SkillBonusCheck", labelFormatter: "DND5E.SKILL.Formatter.CheckBonus"
+          }),
+          passive: new FormulaField({
+            required: true, label: "DND5E.SkillBonusPassive", labelFormatter: "DND5E.SKILL.Formatter.PassiveBonus"
+          })
         }, { label: "DND5E.SkillBonuses" })
       }), {
         initialKeys: CONFIG.DND5E.skills, initialValue: this._initialSkillValue,
-        initialKeysOnly: true, label: "DND5E.Skills"
+        initialKeysOnly: true, label: "DND5E.Skills", entryLabel: key => CONFIG.DND5E.skills[key]?.label
       }),
       tools: new MappingField(new RollConfigField({
         value: new NumberField({
-          required: true, nullable: false, min: 0, max: 2, step: 0.5, initial: 0, label: "DND5E.ProficiencyLevel"
+          required: true, nullable: false, min: 0, max: 2, step: 0.5, initial: 0, label: "DND5E.ProficiencyLevel",
+          labelFormatter: "DND5E.TOOL.Formatter.Proficiency"
         }),
         ability: "int",
         bonuses: new SchemaField({
-          check: new FormulaField({ required: true, label: "DND5E.CheckBonus" })
+          check: new FormulaField({
+            required: true, label: "DND5E.CheckBonus", labelFormatter: "DND5E.TOOL.Formatter.CheckBonus"
+          })
         }, { label: "DND5E.ToolBonuses" })
-      })),
+      }), { entryLabel: key => Trait.keyLabel(key, { trait: "tool" }) }),
       spells: new MappingField(new SchemaField({
         value: new NumberField({
           nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SpellProgAvailable"

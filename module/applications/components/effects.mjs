@@ -3,34 +3,46 @@ import {staticID} from "../../utils.mjs";
 import ContextMenu5e from "../context-menu.mjs";
 
 /**
+ * @import { InventoryColumnDescriptor } from "./_types.mjs";
+ */
+
+/**
  * Custom element that handles displaying active effects lists.
  */
 export default class EffectsElement extends (foundry.applications.elements.AdoptableHTMLElement ?? HTMLElement) {
-  connectedCallback() {
-    if ( this.#app ) return;
-    this.#app = foundry.applications.instances.get(this.closest(".application")?.id);
+  /* -------------------------------------------- */
+  /*  Configuration                               */
+  /* -------------------------------------------- */
 
-    for ( const control of this.querySelectorAll("[data-action]") ) {
-      control.addEventListener("click", event => {
-        this._onAction(event.currentTarget, event.currentTarget.dataset.action);
-      });
+  /**
+   * Well-known effects columns.
+   * @type {Record<string, InventoryColumnDescriptor>}
+   */
+  static COLUMNS = {
+    controls: {
+      id: "controls",
+      width: 70,
+      order: 1000,
+      priority: 1000,
+      template: "systems/dnd5e/templates/effects/columns/controls.hbs"
+    },
+    source: {
+      id: "source",
+      width: 150,
+      order: 100,
+      priority: 600,
+      label: "DND5E.SOURCE.FIELDS.source.label",
+      template: "systems/dnd5e/templates/effects/columns/source.hbs"
+    },
+    value: {
+      id: "value",
+      width: 70,
+      order: 200,
+      priority: 500,
+      label: "DND5E.Value",
+      template: "systems/dnd5e/templates/effects/columns/value.hbs"
     }
-
-    for ( const source of this.querySelectorAll(".effect-source a") ) {
-      source.addEventListener("click", this._onClickEffectSource.bind(this));
-    }
-
-    for ( const control of this.querySelectorAll("[data-context-menu]") ) {
-      control.addEventListener("click", ContextMenu5e.triggerEvent);
-    }
-
-    new ContextMenu5e(this, "[data-effect-id]", [], { onOpen: element => {
-      const effect = this.getEffect(element.dataset);
-      if ( !effect ) return;
-      ui.context.menuItems = this._getContextOptions(effect);
-      Hooks.call("dnd5e.getActiveEffectContextOptions", effect, ui.context.menuItems);
-    }, jQuery: false });
-  }
+  };
 
   /* -------------------------------------------- */
   /*  Properties                                  */
@@ -65,6 +77,47 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
    */
   get document() {
     return this.app.document;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Retrieve the templates needed to render the effects.
+   * @type {string[]}
+   */
+  static get templates() {
+    return Object.values(this.COLUMNS).map(c => c.template);
+  }
+
+  /* -------------------------------------------- */
+  /*  Lifecycle                                   */
+  /* -------------------------------------------- */
+
+  /** @override */
+  connectedCallback() {
+    if ( this.#app ) return;
+    this.#app = foundry.applications.instances.get(this.closest(".application")?.id);
+
+    for ( const control of this.querySelectorAll("[data-action]") ) {
+      control.addEventListener("click", event => {
+        this._onAction(event.currentTarget, event.currentTarget.dataset.action);
+      });
+    }
+
+    for ( const source of this.querySelectorAll(".effect-source a") ) {
+      source.addEventListener("click", this._onClickEffectSource.bind(this));
+    }
+
+    for ( const control of this.querySelectorAll("[data-context-menu]") ) {
+      control.addEventListener("click", ContextMenu5e.triggerEvent);
+    }
+
+    new ContextMenu5e(this, "[data-effect-id]", [], { onOpen: element => {
+      const effect = this.getEffect(element.dataset);
+      if ( !effect ) return;
+      ui.context.menuItems = this._getContextOptions(effect);
+      Hooks.call("dnd5e.getActiveEffectContextOptions", effect, ui.context.menuItems);
+    }, jQuery: false });
   }
 
   /* -------------------------------------------- */
@@ -162,6 +215,7 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
    */
   _getContextOptions(effect) {
     const isConcentrationEffect = (this.document instanceof Actor5e) && this.app._concentration?.effects.has(effect);
+    const expanded = this.app.expandedSections.get(`effects.${effect.id}`);
     const options = [
       {
         name: "DND5E.ContextMenuActionEdit",
@@ -194,6 +248,13 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
         condition: () => isConcentrationEffect,
         callback: () => this.document.endConcentration(effect),
         group: "state"
+      },
+      {
+        name: expanded ? "Collapse" : "Expand",
+        icon: `<i class="fa-solid fa-${expanded ? "compress" : "expand"}"></i>`,
+        condition: () => "canExpand" in this.app ? this.app.canExpand(effect) : true,
+        callback: li => this._onAction(li, "toggleExpand"),
+        group: "collapsible"
       }
     ];
 
@@ -252,6 +313,8 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
         return this.document.system.addFavorite({type: "effect", id: effect.getRelativeUUID(this.document)});
       case "toggle":
         return effect.update({disabled: !effect.disabled});
+      case "toggleExpand":
+        return this._onToggleExpand(target, { effect });
       case "unfavorite":
         return this.document.system.removeFavorite(effect.getRelativeUUID(this.document));
     }
@@ -270,6 +333,44 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
     if ( existing ) return existing.delete();
     const effect = await ActiveEffect.implementation.fromStatusEffect(conditionId);
     return ActiveEffect.implementation.create(effect, { parent: this.document, keepId: true });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle toggling an effects's in-line description.
+   * @param {HTMLElement} target               The action target.
+   * @param {object} [options]
+   * @param {ActiveEffect5e} [options.effect]  The effect instance, otherwise it will be inferred from the target.
+   * @protected
+   */
+  async _onToggleExpand(target, { effect }={}) {
+    const row = target.closest("[data-uuid]");
+    const icon = row.querySelector('[data-action="toggleExpand"] > i');
+    const summary = row.querySelector(":scope > .item-description > .wrapper");
+    const { uuid } = row.dataset;
+    effect ??= await fromUuid(uuid);
+    if ( !effect ) return;
+
+    const expanded = this.app.expandedSections.get(`effects.${effect.id}`);
+    if ( expanded ) {
+      summary.parentElement.addEventListener("transitionend", () => {
+        if ( row.classList.contains("collapsed") ) summary.querySelector(".item-summary")?.remove();
+      }, { once: true });
+      this.app.expandedSections.set(`effects.${effect.id}`, false);
+    } else {
+      const context = await effect.getPreviewContext();
+      const template = "systems/dnd5e/templates/effects/parts/effect-summary.hbs";
+      const content = await foundry.applications.handlebars.renderTemplate(template, context);
+      summary.querySelectorAll(".item-summary").forEach(el => el.remove());
+      summary.insertAdjacentHTML("beforeend", content);
+      await new Promise(resolve => requestAnimationFrame(resolve));
+      this.app.expandedSections.set(`effects.${effect.id}`, true);
+    }
+
+    row.classList.toggle("collapsed", expanded);
+    icon.classList.toggle("fa-compress", !expanded);
+    icon.classList.toggle("fa-expand", expanded);
   }
 
   /* -------------------------------------------- */

@@ -353,8 +353,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
 
     if ( !this.actor || this.actor.system.isGroup ) return options;
     const favorited = this.actor.system.hasFavorite?.(item.getRelativeUUID(this.actor));
-    const expanded = this.app.expandedSections ? this.app.expandedSections.get(item.id)
-      : this.app._expanded.has(item.id); // TODO: Remove when V1 sheets are gone
+    const expanded = this.app.expandedSections.get(item.id);
 
     // Owned item options.
     options.push({
@@ -749,38 +748,19 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
    * @protected
    */
   async _onToggleExpand(target, { item }={}) {
-    // TODO: Remove when V1 sheets are gone
-    if ( !this.app.expandedSections ) {
-      const li = target.closest("[data-item-id]");
-      if ( this.app._expanded.has(item.id) ) {
-        const summary = $(li.querySelector(".item-summary"));
-        summary.slideUp(200, () => summary.remove());
-        this.app._expanded.delete(item.id);
-      } else {
-        const chatData = await item.getChatData({secrets: item.isOwner});
-        const summary = $(await foundry.applications.handlebars.renderTemplate(
-          "systems/dnd5e/templates/items/parts/item-summary.hbs", chatData
-        ));
-        $(li).append(summary.hide());
-        summary.slideDown(200);
-        this.app._expanded.add(item.id);
-      }
-      return;
-    }
-
-    const icon = target.querySelector(":scope > i");
     const row = target.closest("[data-uuid]");
+    const icon = row.querySelector('[data-action="toggleExpand"] > i');
     const summary = row.querySelector(":scope > .item-description > .wrapper");
     const { uuid } = row.dataset;
     item ??= await fromUuid(uuid);
     if ( !item ) return;
 
-    const expanded = this.app.expandedSections.get(item.id);
+    const expanded = this.app.expandedSections.get(`items.${item.id}`);
     if ( expanded ) {
       summary.parentElement.addEventListener("transitionend", () => {
         if ( row.classList.contains("collapsed") ) summary.querySelector(".item-summary")?.remove();
       }, { once: true });
-      this.app.expandedSections.set(item.id, false);
+      this.app.expandedSections.set(`items.${item.id}`, false);
     } else {
       const context = await item.getChatData({ secrets: item.isOwner });
       const template = "systems/dnd5e/templates/items/parts/item-summary.hbs";
@@ -788,7 +768,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
       summary.querySelectorAll(".item-summary").forEach(el => el.remove());
       summary.insertAdjacentHTML("beforeend", content);
       await new Promise(resolve => requestAnimationFrame(resolve));
-      this.app.expandedSections.set(item.id, true);
+      this.app.expandedSections.set(`items.${item.id}`, true);
     }
 
     row.classList.toggle("collapsed", expanded);
