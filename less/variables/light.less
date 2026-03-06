@@ -141,6 +141,7 @@
   --multi-select-tag-background: var(--dnd5e-color-card);
   --multi-select-tag-border: var(--dnd5e-color-gold);
   --radio-list-hover: var(--dnd5e-color-parchment);
+  --formula-input-icon-color: var(--color-text-primary);
 
   button {
     --button-border-color: var(--color-border-light-2);
@@ -150,14 +151,14 @@
     --control-active-background-color: rgb(0 0 0 / 20%);
   }
 
-  input, textarea { --input-placeholder-color: var(--color-text-light-6); }
+  input, textarea, formula-input { --input-placeholder-color: var(--color-text-light-6); }
 
-  input, textarea, select {
+  input, textarea, select, formula-input {
     --input-background-color: rgb(0 0 0 / 10%);
     --input-disabled-background-color: rgb(0 0 0 / 20%);
   }
 
-  input:not([type=range]), textarea, select {
+  input:not([type=range]), textarea, select, formula-input {
     --input-border-color: transparent;
     --input-hover-border-color: var(--dnd5e-color-gold);
   }
