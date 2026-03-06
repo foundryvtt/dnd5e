@@ -268,7 +268,7 @@ function handleAttackCommand(config) {
  * @param {EnrichmentOptions} [options={}]  Options provided to customize text enrichment.
  * @returns {object}
  */
-function parseAttackConfig(config, options={}) {
+export function parseAttackConfig(config, options={}) {
   const formulaParts = [];
   if ( config.formula ) formulaParts.push(config.formula);
   for ( const value of config.values ) {
@@ -685,7 +685,7 @@ function createCheckRequestButtons(dataset) {
  * @param {EnrichmentOptions} [options={}]  Options provided to customize text enrichment.
  * @returns {object}
  */
-function parseCheckConfig(config, options={}) {
+export function parseCheckConfig(config, options={}) {
   config.skill = config.skill?.replaceAll("/", "|").split("|") ?? [];
   config.tool = config.tool?.replaceAll("/", "|").split("|") ?? [];
   for ( let value of config.values ) {
@@ -848,7 +848,7 @@ function createSaveRequestButtons(dataset) {
  * @param {EnrichmentOptions} [options={}]  Options provided to customize text enrichment.
  * @returns {object}
  */
-function parseSaveConfig(config, options={}) {
+export function parseSaveConfig(config, options={}) {
   config.ability = config.ability?.replace("/", "|").split("|") ?? [];
   for ( let value of config.values ) {
     const slug = foundry.utils.getType(value) === "string" ? slugify(value) : value;
@@ -1107,7 +1107,7 @@ function handleDamageCommand(configs) {
  * @param {EnrichmentOptions} [options={}]  Options provided to customize text enrichment.
  * @returns {object}
  */
-function parseDamageConfig(configs, options={}) {
+export function parseDamageConfig(configs, options={}) {
   const config = { type: "damage", formulas: [], damageTypes: [], rollType: configs._isHealing ? "healing" : "damage" };
 
   for ( const c of configs ) {
