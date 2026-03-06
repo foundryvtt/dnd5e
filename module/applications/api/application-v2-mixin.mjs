@@ -129,6 +129,20 @@ export default function ApplicationV2Mixin(Base, { handlebars=true }={}) {
     /* -------------------------------------------- */
 
     /**
+     * Render an application as a child of this one, moving with it when detached.
+     * @param {ApplicationV2} app        The application to render.
+     * @param {RenderOptions} [options]  Options passed to render.
+     * @returns {Promise<ApplicationV2>}
+     */
+    _renderChild(app, options={}) {
+      if ( game.release.generation < 14 ) return app.render({ force: true, ...options });
+      if ( this.parent ) return this.parent.renderChild(app, options);
+      return this.renderChild(app, options);
+    }
+
+    /* -------------------------------------------- */
+
+    /**
      * Lazily create containers and place parts appropriately.
      * @param {object} context  Render context.
      * @param {object} options  Render options.

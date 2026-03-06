@@ -612,7 +612,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
    * @protected
    */
   _onEditItem(item) {
-    return item.sheet.render(true, { mode: ItemSheet5e.MODES.EDIT });
+    return this.app._openDocumentSheet(item, { mode: ItemSheet5e.MODES.EDIT });
   }
 
   /* -------------------------------------------- */
@@ -860,7 +860,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
    * @protected
    */
   _onViewItem(item) {
-    return item.sheet.render(true, { mode: ItemSheet5e.MODES.PLAY });
+    return this.app._openDocumentSheet(item, { mode: ItemSheet5e.MODES.PLAY });
   }
 
   /* -------------------------------------------- */

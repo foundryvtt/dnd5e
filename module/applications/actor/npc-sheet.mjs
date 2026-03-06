@@ -573,7 +573,7 @@ export default class NPCActorSheet extends BaseActorSheet {
         break;
     }
     if ( app ) {
-      app.render({ force: true });
+      this._renderChild(app);
       return false;
     }
   }

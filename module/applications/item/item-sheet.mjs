@@ -569,6 +569,18 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
 
   /* -------------------------------------------- */
 
+  /** @override */
+  _renderChild(app, options={}) {
+    if ( game.release.generation < 14 ) return app.render({ force: true, ...options });
+    if ( this.parent ) return this.parent.renderChild(app, options);
+    if ( this.window?.windowId ) return app.render({
+      force: true, window: { detached: true, windowId: this.window.windowId }, ...options
+    });
+    return app.render({ force: true, ...options });
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   async _renderFrame(options) {
     const html = await super._renderFrame(options);
@@ -773,13 +785,13 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     switch ( target.dataset.config ) {
       case "movement":
       case "senses":
-        return new MovementSensesConfig({ document: this.item, type: target.dataset.config }).render({ force: true });
+        return this._renderChild(new MovementSensesConfig({ document: this.item, type: target.dataset.config }));
       case "source":
-        return new SourceConfig({ document: this.item, keyPath: "system.source" }).render({ force: true });
+        return this._renderChild(new SourceConfig({ document: this.item, keyPath: "system.source" }));
       case "starting-equipment":
-        return new StartingEquipmentConfig({ document: this.item }).render({ force: true });
+        return this._renderChild(new StartingEquipmentConfig({ document: this.item }));
       case "type":
-        return new CreatureTypeConfig({ document: this.item, keyPath: "type" }).render({ force: true });
+        return this._renderChild(new CreatureTypeConfig({ document: this.item, keyPath: "type" }));
     }
   }
 

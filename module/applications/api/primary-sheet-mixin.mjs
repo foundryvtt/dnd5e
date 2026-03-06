@@ -378,6 +378,18 @@ export default function PrimarySheetMixin(Base) {
 
     /* -------------------------------------------- */
 
+    /**
+     * Open a document's sheet, rendering it as a child of this application if supported.
+     * @param {Document} doc             The document whose sheet should be opened.
+     * @param {RenderOptions} [options]  Options passed to render.
+     * @protected
+     */
+    _openDocumentSheet(doc, options={}) {
+      if ( doc?.sheet ) this._renderChild(doc.sheet, options);
+    }
+
+    /* -------------------------------------------- */
+
     /** @inheritDoc */
     _onClickAction(event, target) {
       if ( target.dataset.action === "addDocument" ) this._addDocument(event, target);
@@ -410,7 +422,7 @@ export default function PrimarySheetMixin(Base) {
       const uuid = target.closest("[data-uuid]")?.dataset.uuid;
       const doc = await fromUuid(uuid);
       const mode = target.dataset.action === "showDocument" ? "PLAY" : "EDIT";
-      doc?.sheet?.render({ force: true, mode: ItemSheet5e.MODES[mode] });
+      this._openDocumentSheet(doc, { mode: ItemSheet5e.MODES[mode] });
     }
 
     /* -------------------------------------------- */
