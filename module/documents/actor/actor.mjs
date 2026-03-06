@@ -2093,12 +2093,15 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const clone = this.clone();
     const restConfig = CONFIG.DND5E.restTypes[type];
     config = foundry.utils.mergeObject({
-      type, dialog: true, dialogClass: restConfig.dialogClass ?? BaseRestDialog, chat: !!restConfig.chat,
+      type, dialog: true, chat: !!restConfig.chat,
       newDay: false, advanceTime: false,
       duration: restConfig.duration[game.settings.get("dnd5e", "restVariant")],
       recoverTemp: restConfig.recoverTemp, recoverTempMax: restConfig.recoverTempMax,
       exhaustionDelta: restConfig.exhaustionDelta
     }, config);
+    if ( !Object.hasOwn(config, "dialogClass") ) {
+      config.dialogClass = restConfig.dialogClass ?? BaseRestDialog;
+    }
 
     /**
      * A hook event that fires before a rest is started.
