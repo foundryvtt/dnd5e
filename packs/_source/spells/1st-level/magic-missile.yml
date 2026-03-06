@@ -25,12 +25,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '120'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -48,21 +51,21 @@ system:
   properties:
     - vocal
     - somatic
-    - mgc
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
       type: damage
       activation:
-        type: action
+        type: ''
         value: null
-        override: false
+        override: true
+        condition: ''
       consumption:
         targets: []
         scaling:
           allowed: false
           max: ''
-        spellSlot: true
+        spellSlot: false
       description:
         chatFlavor: ''
       duration:
@@ -85,35 +88,92 @@ system:
           allow: false
           bonus: ''
         parts:
-          - number: 1
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
             denomination: 4
             bonus: '1'
             types:
               - force
-            custom:
-              enabled: false
-              formula: ''
             scaling:
               mode: ''
-              number: null
-              formula: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
+      sort: 100000
+      name: Missile Damage
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    Qvwpe9jeR1u5xjC6:
+      type: utility
+      name: Cast
+      _id: Qvwpe9jeR1u5xjC6
+      img: ''
       sort: 0
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: Missiles Created
+        formula: '@item.level + 2'
   identifier: magic-missile
 sort: 0
 flags: {}
-img: icons/magic/fire/projectile-meteor-salvo-light-pink.webp
+img: icons/magic/lightning/projectiles-tendril-salvo-pink.webp
 effects: []
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037346851
-  modifiedTime: 1725992716835
+  modifiedTime: 1772821642268
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!41JIhpDyM9Anm7cs'

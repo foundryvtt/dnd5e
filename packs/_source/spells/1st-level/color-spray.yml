@@ -1,10 +1,10 @@
 _id: LWTUqKkUQdMAmOe0
 name: Color Spray
 type: spell
-img: icons/magic/air/fog-gas-smoke-dense-pink.webp
+img: icons/magic/light/projectile-beams-salvo-yellow.webp
 system:
   description:
-    value: "<p>A dazzling array of flashing, colored light springs from your hand. Roll 6d10; the total is how many hit points of creatures this spell can effect. Creatures in a 15-foot cone originating from you are affected in ascending order of their current hit points (ignoring unconscious creatures and creatures that can't see).</p><p>Starting with the creature that has the lowest current hit points, each creature affected by this spell is blinded until the spell ends. Subtract each creature's hit points from the total before moving on to the creature with the next lowest hit points. A creature's hit points must be equal to or less than the remaining total for that creature to be affected.</p><p><strong>Higher Levels.\_</strong>When you cast this spell using a spell slot of 2nd level or higher, roll an additional 2d10 for each slot level above 1st.</p>"
+    value: "<p>A dazzling array of flashing, colored light springs from your hand. Roll 6d10; the total is how many hit points of creatures this spell can effect. Creatures in a 15-foot cone originating from you are affected in ascending order of their current hit points (ignoring &amp;reference[unconscious apply=false] creatures and creatures that can't see).</p><p>Starting with the creature that has the lowest current hit points, each creature affected by this spell is &amp;reference[blinded] until the spell ends. Subtract each creature's hit points from the total before moving on to the creature with the next lowest hit points. A creature's hit points must be equal to or less than the remaining total for that creature to be affected.</p><p><strong>Higher Levels.\_</strong>When you cast this spell using a spell slot of 2nd level or higher, roll an additional 2d10 for each slot level above 1st.</p>"
     chat: ''
   source:
     custom: ''
@@ -22,13 +22,16 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: cone
       size: '15'
       contiguous: false
+      count: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -48,58 +51,103 @@ system:
     - somatic
     - material
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: damage
+    xX5MvhvLpIkLVxdX:
+      type: utility
+      name: Cast
+      _id: xX5MvhvLpIkLVxdX
+      img: ''
+      sort: 0
       activation:
         type: action
-        value: null
         override: false
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: eDXjhC3F3I0x2fUd
+          level:
+            min: null
+            max: null
+      flags: {}
       range:
+        units: self
         override: false
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
+          type: cone
+          size: '15'
+          count: ''
         affects:
           choice: false
-        override: false
-      damage:
-        critical:
-          allow: false
-          bonus: ''
-        parts:
-          - number: 6
-            denomination: 10
-            bonus: ''
-            types: []
-            custom:
-              enabled: false
-              formula: ''
-            scaling:
-              mode: whole
-              number: 2
-              formula: ''
+          type: creature
+        override: true
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: 6d10 + ((@item.level - 1) * 2)d10
   identifier: color-spray
-effects: []
+effects:
+  - name: Color Spray
+    img: icons/magic/light/projectile-beams-salvo-yellow.webp
+    origin: Compendium.dnd5e.spells.Item.LWTUqKkUQdMAmOe0
+    transfer: false
+    _id: eDXjhC3F3I0x2fUd
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: 6
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: <p>You are &amp;reference[blinded apply=false] until the spell ends.</p>
+    tint: '#ffffff'
+    statuses:
+      - blinded
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      createdTime: 1772825813074
+      modifiedTime: 1772825848818
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!LWTUqKkUQdMAmOe0.eDXjhC3F3I0x2fUd'
 folder: ERuXllkhTQF51rDJ
 sort: 0
 ownership:
@@ -107,11 +155,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037354037
-  modifiedTime: 1725992719127
+  modifiedTime: 1772828184635
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!LWTUqKkUQdMAmOe0'

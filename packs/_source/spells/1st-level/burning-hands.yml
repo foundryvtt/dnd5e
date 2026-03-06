@@ -31,13 +31,16 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: cone
       size: '15'
       contiguous: false
+      count: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -109,20 +112,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: burning-hands
 sort: 0
 flags: {}
-img: icons/magic/air/fog-gas-smoke-dense-orange.webp
+img: icons/magic/fire/projectile-wave-arrow.webp
 effects: []
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037347369
-  modifiedTime: 1725992716983
+  modifiedTime: 1772827388350
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!5SuJewoa1CRWaj1F'

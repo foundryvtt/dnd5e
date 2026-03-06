@@ -32,12 +32,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '120'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -75,7 +78,8 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: hf1g2XNPqQFMw35j
       range:
         override: false
       target:
@@ -94,7 +98,7 @@ system:
         flat: false
         type:
           value: ranged
-          classification: spell
+          classification: ''
       damage:
         critical:
           bonus: ''
@@ -115,20 +119,66 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: guiding-bolt
 sort: 0
 flags: {}
-img: icons/magic/fire/projectile-fireball-smoke-large-blue.webp
-effects: []
+img: icons/magic/light/projectile-flare-expliosion-yellow.webp
+effects:
+  - name: Guiding Bolt
+    img: icons/magic/light/projectile-flare-expliosion-yellow.webp
+    origin: Compendium.dnd5e.spells.Item.7buEm5KhI5lP8m1z
+    transfer: false
+    _id: hf1g2XNPqQFMw35j
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: 6
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The next attack roll made against you before the end of the caster's
+      next turn has advantage thanks to the mystical dim light glittering on
+      you.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      createdTime: 1772820147280
+      modifiedTime: 1772820189168
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!7buEm5KhI5lP8m1z.hf1g2XNPqQFMw35j'
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037348213
-  modifiedTime: 1725992717280
+  modifiedTime: 1772820147307
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!7buEm5KhI5lP8m1z'

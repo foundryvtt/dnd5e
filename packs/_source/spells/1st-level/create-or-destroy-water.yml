@@ -23,14 +23,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: cube
-      size: '30'
+      size: 30 + ((@item.level - 1) * 5)
       contiguous: false
+      count: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -52,19 +55,20 @@ system:
     - somatic
     - material
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    YLVe1YsiyNBUxjXx:
       type: utility
+      name: Create Water
+      _id: YLVe1YsiyNBUxjXx
+      img: ''
+      sort: 0
       activation:
         type: action
-        value: null
         override: false
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
         chatFlavor: ''
       duration:
@@ -72,38 +76,142 @@ system:
         concentration: false
         override: false
       effects: []
+      flags: {}
       range:
+        units: self
         override: false
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: Gallons of Water Conjured
+        formula: '@item.level * 10'
+    irIydyXyiUPVWhfg:
+      type: utility
+      name: Destroy Water
+      _id: irIydyXyiUPVWhfg
+      img: ''
+      sort: 0
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: Gallons of Water Destroyed
+        formula: '@item.level * 10'
+    HOXAFi1SQnPzdJ6E:
+      type: utility
+      name: Destroy Fog
+      _id: HOXAFi1SQnPzdJ6E
+      img: null
+      sort: 0
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
           units: ft
         affects:
           choice: false
         override: false
-      roll:
-        formula: ''
-        name: ''
-        prompt: false
-        visible: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
   identifier: create-or-destroy-water
 sort: 0
 flags: {}
-img: icons/magic/air/wind-swirl-purple-blue.webp
+img: icons/magic/water/water-drop-swirl-blue.webp
 effects: []
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037359605
-  modifiedTime: 1725992720937
+  modifiedTime: 1772827717716
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!a3XtAO5n2GrqiAh5'

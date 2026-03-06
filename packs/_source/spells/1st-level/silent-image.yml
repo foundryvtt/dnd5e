@@ -37,14 +37,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: cube
       size: '15'
       contiguous: false
+      count: ''
   range:
     value: '60'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -103,20 +106,85 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    Pc1AwWaBJEJi253E:
+      type: check
+      name: Investigate Illusion Check
+      img: ''
+      sort: 0
+      activation:
+        type: ''
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      check:
+        associated:
+          - inv
+        dc:
+          calculation: spellcasting
+          formula: ''
+        ability: ''
+      _id: Pc1AwWaBJEJi253E
   identifier: silent-image
 sort: 0
 flags: {}
-img: icons/magic/air/air-burst-spiral-teal-green.webp
+img: icons/magic/control/encase-creature-spider-hold.webp
 effects: []
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037350777
-  modifiedTime: 1725992718054
+  modifiedTime: 1772823806828
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!BrBZdCCrJRIVg7YX'

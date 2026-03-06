@@ -26,14 +26,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: sphere
       size: '5'
       contiguous: false
+      count: ''
   range:
     value: '10'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -91,20 +94,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: purify-food-and-drink
 sort: 0
 flags: {}
-img: icons/magic/light/explosion-star-small-teal.webp
+img: icons/consumables/food/cooked-ribs-rack-glazed-bones-brown-white.webp
 effects: []
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037353735
-  modifiedTime: 1725992719051
+  modifiedTime: 1772823334060
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!Kn7K5PtYUJAKZTTp'

@@ -33,13 +33,16 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: cube
       size: '15'
       contiguous: false
+      count: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -111,20 +114,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: thunderwave
 sort: 0
 flags: {}
-img: icons/magic/lightning/bolt-forked-teal.webp
+img: icons/magic/sonic/explosion-shock-wave-teal.webp
 effects: []
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037357792
-  modifiedTime: 1725992720358
+  modifiedTime: 1772821425566
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!WTbOQBsarsL1LuXJ'

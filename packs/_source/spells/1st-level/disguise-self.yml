@@ -38,11 +38,14 @@ system:
     affects:
       type: self
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -99,20 +102,147 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast Spell
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    rCQqPBOppeksLx7t:
+      type: transform
+      name: Change Appearance
+      _id: rCQqPBOppeksLx7t
+      img: ''
+      sort: 0
+      activation:
+        type: ''
+        override: true
+        condition: When you cast this spell.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      profiles:
+        - cr: '30'
+          name: ''
+          _id: 4wlJxshCkHQPHyXl
+          uuid: ''
+          sizes: []
+          types: []
+          movement: []
+          level:
+            min: null
+            max: null
+      settings: null
+      transform:
+        customize: false
+        mode: cr
+        preset: polymorphSelf
+    Hoxd25EbU2m3KI6U:
+      type: check
+      name: Investigate Disguise Check
+      img: ''
+      sort: 0
+      activation:
+        type: ''
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      check:
+        associated:
+          - inv
+        dc:
+          calculation: spellcasting
+          formula: ''
+        ability: ''
+      _id: Hoxd25EbU2m3KI6U
   identifier: disguise-self
 sort: 0
 flags: {}
-img: icons/magic/control/debuff-energy-hold-teal-blue.webp
+img: icons/equipment/head/mask-carved-bird-grey-pink.webp
 effects: []
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037349706
-  modifiedTime: 1725992717737
+  modifiedTime: 1772820546103
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!A3q2gTNqG6fvNGrv'

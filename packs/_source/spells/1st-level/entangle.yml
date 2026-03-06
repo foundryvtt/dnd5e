@@ -1,17 +1,18 @@
 name: Entangle
 type: spell
-img: icons/magic/nature/vines-thorned-curled-glow-green.webp
+img: icons/magic/nature/root-vine-entangle-foot-green.webp
 system:
   description:
     value: >-
       <p>Grasping weeds and vines sprout from the ground in a 20-foot square
       starting from a point within range. For the Duration, these Plants turn
-      the ground in the area into difficult terrain.</p><p>A creature in the
-      area when you cast the spell must succeed on a Strength saving throw or be
-      &amp;Reference[Restrained] by the entangling Plants until the spell ends.
-      A creature restrained by the plants can use its action to make a Strength
-      check against your spell save DC. On a success, it frees
-      itself.</p><p>When the spell ends, the conjured Plants wilt away.</p>
+      the ground in the area into &amp;reference[difficult terrain].</p><p>A
+      creature in the area when you cast the spell must succeed on a Strength
+      saving throw or be &amp;Reference[Restrained] by the entangling Plants
+      until the spell ends. A creature restrained by the plants can use its
+      action to make a Strength check against your spell save DC. On a success,
+      it frees itself.</p><p>When the spell ends, the conjured Plants wilt
+      away.</p>
     chat: ''
   source:
     custom: ''
@@ -29,14 +30,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: square
       size: '20'
       contiguous: false
+      count: ''
   range:
     value: '90'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -78,6 +82,9 @@ system:
       effects:
         - _id: fO14IutGR3Hrepun
           onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
       target:
@@ -99,7 +106,71 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
+      sort: 100000
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    rh7ciGbrgpnnZ3B2:
+      type: check
+      name: Escape Plants Check
+      _id: rh7ciGbrgpnnZ3B2
+      img: ''
       sort: 0
+      activation:
+        type: ''
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      check:
+        associated: []
+        dc:
+          calculation: spellcasting
+          formula: ''
+        ability: str
   identifier: entangle
 effects:
   - name: Entangle
@@ -116,26 +187,29 @@ effects:
     _id: fO14IutGR3Hrepun
     changes: []
     description: >-
-      <p>A creature in the area is Restrained by the entangling Plants until the
-      spell ends. A creature restrained by the plants can use its action to make
-      a Strength check against your spell save DC. On a success, it frees
-      itself.</p>
+      <p>You are &amp;reference[Restrained apply=false] by the entangling Plants
+      until the spell ends. While restrained by the plants, you can use your
+      action to make a [[/check str]] against the caster's spell save DC. On a
+      success, you free yourself.</p>
     transfer: false
     statuses:
       - restrained
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     tint: '#ffffff'
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.3.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1772827930363
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    img: icons/magic/nature/vines-thorned-curled-glow-green.webp
+    img: icons/magic/nature/root-vine-entangle-foot-green.webp
     type: base
     system: {}
     sort: 0
@@ -148,11 +222,11 @@ ownership:
   default: 0
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037362549
-  modifiedTime: 1725992721946
+  modifiedTime: 1772827991132
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!gMrWeG8fMDPRFiVe'

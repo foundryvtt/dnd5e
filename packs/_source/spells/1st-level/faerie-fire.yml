@@ -9,10 +9,11 @@ system:
       <p>Each object in a 20-foot cube within range is outlined in blue, green,
       or violet light (your choice). Any creature in the area when the spell is
       cast is also outlined in light if it fails a Dexterity saving throw. For
-      the duration, objects and affected creatures shed dim light in a 10-foot
-      radius.</p><p>Any attack roll against an affected creature or object has
-      advantage if the attacker can see it, and the affected creature or object
-      can't benefit from being invisible.</p>
+      the duration, objects and affected creatures shed &amp;reference[dim
+      light] in a 10-foot radius.</p><p>Any attack roll against an affected
+      creature or object has advantage if the attacker can see it, and the
+      affected creature or object can't benefit from being
+      &amp;reference[invisible apply=false].</p>
     chat: ''
   source:
     custom: ''
@@ -30,14 +31,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: cube
       size: '20'
       contiguous: false
+      count: ''
   range:
     value: '60'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -75,7 +79,8 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: 4A91A48gBwBPPRwO
       range:
         override: false
       target:
@@ -87,7 +92,7 @@ system:
           choice: false
         override: false
       damage:
-        onSave: half
+        onSave: none
         parts: []
       save:
         ability: dex
@@ -97,20 +102,71 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: faerie-fire
 sort: 0
 flags: {}
-img: icons/magic/fire/projectile-meteor-salvo-strong-teal.webp
-effects: []
+img: icons/magic/light/orbs-smoke-pink.webp
+effects:
+  - name: Faerie Fire
+    img: icons/magic/light/orbs-smoke-pink.webp
+    origin: Compendium.dnd5e.spells.Item.nqBDWkVOfcGZt4YU
+    transfer: false
+    _id: 4A91A48gBwBPPRwO
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.ci.value
+        mode: 2
+        value: invisible
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: 60
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>You are outlined in light, shedding &amp;reference[dim light] in a
+      10-foot radius.</p><p>Any attack roll against you has advantage if the
+      attacker can see you, and you can't benefit from being
+      &amp;reference[invisible apply=false].</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      createdTime: 1772822415961
+      modifiedTime: 1772822480845
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!nqBDWkVOfcGZt4YU.4A91A48gBwBPPRwO'
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037364768
-  modifiedTime: 1725992722629
+  modifiedTime: 1772822415986
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!nqBDWkVOfcGZt4YU'
