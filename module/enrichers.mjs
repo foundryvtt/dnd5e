@@ -1710,7 +1710,7 @@ function _addDataset(element, dataset) {
 
 /* -------------------------------------------- */
 
-const LISTENER = Symbol("enricher listener");
+const LISTENER = Symbol("enricherListener");
 
 /**
  * Add click listeners for each of the provided buttons, passing the event and target to the handler.
