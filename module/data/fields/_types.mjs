@@ -30,6 +30,12 @@
  */
 
 /**
+ * @callback MappingFieldEntryLabelBuilder
+ * @param {string} key       The key within the object.
+ * @returns {object}         Label used to describe this entry.
+ */
+
+/**
  * @callback MappingFieldInitialValueBuilder
  * @param {string} key       The key within the object where this new value is being generated.
  * @param {*} initial        The generic initial data provided by the contained model.

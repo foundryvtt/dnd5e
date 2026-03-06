@@ -184,6 +184,10 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       parts.features.templates ??= [];
       parts.features.templates.push(...customElements.get(this.options.elements.inventory).templates);
     }
+    if ( "effects" in parts ) {
+      parts.effects.templates ??= [];
+      parts.effects.templates.push(...customElements.get(this.options.elements.effects).templates);
+    }
     return parts;
   }
 
@@ -249,25 +253,27 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       return arr;
     }, []);
 
+    const columns = [EffectsElement.COLUMNS.source, EffectsElement.COLUMNS.value, EffectsElement.COLUMNS.controls];
     for ( const category of Object.values(context.effects) ) {
+      category.columns = columns;
       category.effects = await category.effects.reduce(async (arr, effect) => {
-        effect.updateDuration();
         if ( conditionIds.has(effect.id) && !effect.duration.remaining ) return arr;
-        const { id, name, img, disabled, duration } = effect;
         const toggleable = !this._concentration?.effects.has(effect);
-        let source = await effect.getSource();
+        const isExpanded = this.expandedSections.get(`effects.${effect.id}`) === true;
+        const context = {
+          ...(await effect.getSheetContext()), toggleable, isExpanded,
+          parentId: effect.target === effect.parent ? null : effect.parent.id,
+          expanded: isExpanded ? await effect.getPreviewContext({ secrets: effect.isOwner }) : null
+        };
         // If the source is an ActiveEffect from another Actor, note the source as that Actor instead.
-        if ( source instanceof ActiveEffect ) {
-          source = source.target;
-          if ( (source instanceof Item) && source.parent && (source.parent !== this.object) ) source = source.parent;
+        context.hasTooltip = context.source instanceof dnd5e.documents.Item5e;
+        if ( context.source instanceof ActiveEffect ) {
+          const src = context.source;
+          context.source = src.target;
+          if ( (src instanceof Item) && src.parent && (src.parent !== this.object) ) context.source = src.parent;
         }
         arr = await arr;
-        arr.push({
-          id, name, img, disabled, duration, source, toggleable,
-          parentId: effect.target === effect.parent ? null : effect.parent.id,
-          durationParts: duration.remaining ? duration.label.split(", ") : [],
-          hasTooltip: source instanceof dnd5e.documents.Item5e
-        });
+        arr.push(context);
         return arr;
       }, []);
     }
@@ -448,7 +454,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       else await this._prepareItemFeature(item, ctx);
 
       // Handle expanded data
-      ctx.isExpanded = this.expandedSections.get(item.id) === true;
+      ctx.isExpanded = this.expandedSections.get(`items.${item.id}`) === true;
       if ( ctx.isExpanded ) ctx.expanded = await item.getChatData({ secrets: item.isOwner });
 
       // Place the item into specific categories.

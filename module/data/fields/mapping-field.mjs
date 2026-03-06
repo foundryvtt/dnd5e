@@ -1,5 +1,5 @@
 /**
- * @import { MappingFieldInitialValueBuilder, MappingFieldOptions } from "./_types.mjs";
+ * @import { MappingFieldEntryLabelBuilder, MappingFieldInitialValueBuilder, MappingFieldOptions } from "./_types.mjs";
  */
 
 const { DataField } = foundry.data.fields;
@@ -11,6 +11,7 @@ const { DataField } = foundry.data.fields;
  * @param {MappingFieldOptions} [options={}]   Options which configure the behavior of the field.
  * @property {string[]} [initialKeys]          Keys that will be created if no data is provided.
  * @property {MappingFieldInitialValueBuilder} [initialValue]  Function to calculate the initial value for a key.
+ * @property {MappingFieldEntryLabelBuilder} [entryLabel]      Function to calculate the label for a key.
  * @property {boolean} [initialKeysOnly=false]  Should the keys in the initialized data be limited to the keys provided
  *                                              by `options.initialKeys`?
  */
@@ -36,6 +37,7 @@ export default class MappingField extends foundry.data.fields.TypedObjectField {
       initialKeys: null,
       initialValue: null,
       initialKeysOnly: false,
+      entryLabel: null,
       expandKeys: false
     });
   }
@@ -88,5 +90,22 @@ export default class MappingField extends foundry.data.fields.TypedObjectField {
     if ( game.release.generation < 14 ) path.shift();
     else path.pop();
     return this.element._getField(path, options);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the formatted label for the specified field within the element of the provided key.
+   * @param {string} key     Key of the entry listing in the `MappingField` (e.g. `dex`, `str`).
+   * @param {string[]} path  Path parts to a field within the field's element (e.g. `["mode", "roll", "save"]`).
+   * @returns {string|void}  Formatted name for the field if a formatter is provided. Falls back to the field's generic
+   *                         label if no formatter is provided, or nothing if field isn't found or it isn't labeled.
+   */
+  getFieldLabel(key, path) {
+    const field = this.element._getField(path);
+    if ( !field ) return;
+    const name = this.entryLabel?.(key);
+    if ( !field.options.labelFormatter || !name ) return field.label;
+    return game.i18n.format(field.options.labelFormatter, { name });
   }
 }

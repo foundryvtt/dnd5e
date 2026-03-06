@@ -14,14 +14,12 @@
             {{!-- Section Header --}}
             <div class="items-header header {{#if disabled}}disabled{{/if}}">
                 <h3 class="item-name effect-name">{{ localize label }}</h3>
-                <div class="item-header effect-source">{{ localize "DND5E.SOURCE.FIELDS.source.label" }}</div>
-                <div class="item-header item-controls effect-controls">
-                    {{#if info}}
-                    <a class="info-control" data-tooltip aria-label="{{ info }}">
-                        <i class="fas fa-circle-question" inert></i>
-                    </a>
-                    {{/if}}
+                {{#each columns}}
+                <div class="item-header effect-{{ id }}" data-column-id="{{ id }}" data-column-width="{{ width }}"
+                     data-column-priority="{{ priority }}">
+                    {{~#if label}}{{ localize label }}{{/if~}}
                 </div>
+                {{/each}}
             </div>
 
             {{!-- Section Contents --}}
@@ -29,29 +27,34 @@
                 {{#each effects}}
 
                 {{!-- Effects --}}
-                <li class="item effect" data-effect-id="{{ id }}" data-entry-id="{{ id }}"
-                    data-item-name="{{ name }}" {{#if parentId}}data-parent-id="{{ parentId }}"{{/if}}>
+                <li class="item effect collapsible {{~#unless isExpanded}} collapsed{{/unless}}"
+                    data-uuid="{{ uuid }}" data-effect-id="{{ id }}" data-entry-id="{{ id }}"
+                    data-item-name="{{ name }}" {{~#if parentId}} data-parent-id="{{ parentId }}"{{/if}}>
 
                     {{!-- Primary Effect --}}
                     <div class="item-row draggable">
-                        {{> ".effect" }}
+                        {{> ".effect" columns=../columns }}
                     </div>
+
+                    {{> ".expanded" columns=../columns }}
 
                     {{!-- Rider Effects --}}
-                    <div class="item-description collapsible-content">
-                        <div class="wrapper">
+                    <ol class="activities riders unlist">
+                        {{#each riders}}
 
-                            <ol class="activities riders unlist">
-                                {{#each riders}}
-                                <li class="activity-row item-row" data-effect-id="{{ id }}" data-entry-id="{{ id }}"
-                                    {{#if parentId}}data-parent-id="{{ parentId }}"{{/if}}>
-                                    {{> ".effect" }}
-                                </li>
-                                {{/each}}
-                            </ol>
+                        <li class="collapsible {{~#unless isExpanded}} collapsed{{/unless}}"
+                            data-uuid="{{ uuid }}" data-effect-id="{{ id }}" data-entry-id="{{ id }}"
+                            {{~#if parentId}} data-parent-id="{{ parentId }}"{{/if}}>
 
-                        </div>
-                    </div>
+                            <div class="activity-row item-row">
+                                {{> ".effect" columns=../../columns }}
+                            </div>
+
+                            {{> ".expanded" columns=../../columns }}
+                        </li>
+
+                        {{/each}}
+                    </ol>
 
                 </li>
 
@@ -103,7 +106,7 @@
     <div class="name name-stacked">
         <span class="title">{{ name }}</span>
     </div>
-    {{#if duration.remaining}}
+    {{#if durationParts.length}}
     <div class="duration">
         <i class="fa-solid fa-clock" inert></i>
         <span class="most-significant">{{ durationParts.[0] }}</span>
@@ -115,48 +118,34 @@
     {{/if}}
 </div>
 
-{{!-- Effect Source --}}
-<div class="item-detail effect-source {{#unless source}}empty{{/unless}}">
-    {{#if source}}
-    {{#if hasTooltip}}
-    <a class="item-tooltip" data-uuid="{{ source.uuid }}" data-tooltip-direction="RIGHT">{{ source.name }}</a>
-    {{else}}
-    {{ source.name }}
-    {{/if}}
-    {{/if}}
-</div>
+{{!-- Columns --}}
+{{#each columns}}
+{{> (lookup . "template") ctx=.. entry=.. effect=../effect isEffect=true }}
+{{/each}}
 
-{{!-- Effect Status --}}
-<div class="item-detail item-controls effect-controls">
+{{/inline}}
 
-    {{#if @root.editable}}
-    {{!-- Editing --}}
-    <a class="effect-control item-control" data-action="edit" data-tooltip
-       aria-label="{{ localize "DND5E.EffectEdit" }}">
-        <i class="fa-solid fa-pen-to-square"></i>
-    </a>
+{{#*inline ".expanded"}}
 
-    {{!-- Deleting --}}
-    <a class="effect-control item-control" data-action="delete" data-tooltip
-       aria-label="{{ localize "DND5E.EffectDelete" }}">
-        <i class="fa-solid fa-trash"></i>
-    </a>
+{{!-- Extended Description & Changes --}}
+<div class="item-description collapsible-content">
+    <div class="wrapper">
 
-    {{else if toggleable}}
-    {{!-- Toggling --}}
-    <a class="effect-control item-control {{#unless disabled}}active{{/unless}}" data-action="toggle" data-tooltip
-       aria-label="{{ localize (ifThen disabled "DND5E.EffectEnable" "DND5E.EffectDisable") }}">
-        <i class="fa-solid fa-toggle-{{ ifThen disabled "off" "on" }}"></i>
-    </a>
+        {{!-- Changes --}}
+        {{#if changes.length}}
+        <ol class="changes unlist">
+            {{#each changes}}
+            {{> "dnd5e.effect-change-row" columns=../columns effect=../effect }}
+            {{/each}}
+        </ol>
+        {{/if}}
 
-    {{/if}}
+        {{!-- Effect Description --}}
+        {{#if isExpanded}}
+        {{> "dnd5e.effect-summary" expanded }}
+        {{/if}}
 
-    {{!-- Context Menu --}}
-    <a class="effect-control item-control always-interactive" data-context-menu
-       aria-label="{{ localize "DND5E.AdditionalControls" }}">
-        <i class="fa-solid fa-ellipsis-vertical"></i>
-    </a>
-
+    </div>
 </div>
 
 {{/inline}}
