@@ -969,12 +969,16 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * @returns {Promise<{content: string, classes: string[]}>}
    */
   async richTooltip(enrichmentOptions={}) {
-    const properties = [];
+    let properties = [];
     if ( this.isSuppressed ) properties.push("DND5E.EffectType.Unavailable");
     else if ( this.disabled ) properties.push("DND5E.EffectType.Inactive");
     else if ( this.isTemporary ) properties.push("DND5E.EffectType.Temporary");
     else properties.push("DND5E.EffectType.Passive");
     if ( this.type === "enchantment" ) properties.push("DND5E.ENCHANTMENT.Label");
+    properties = properties.map(p => game.i18n.localize(p));
+    properties.unshift(...this.statuses.map(id => game.release.generation < 14
+      ? CONFIG.statusEffects.find(s => s.id === id)?.name
+      : CONFIG.statusEffects[id]?.name))
 
     return {
       content: await foundry.applications.handlebars.renderTemplate(
@@ -982,7 +986,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
           effect: this,
           description: await TextEditor.enrichHTML(this.description ?? "", { relativeTo: this, ...enrichmentOptions }),
           durationParts: this.duration.remaining ? this.duration.label.split(", ") : [],
-          properties: properties.map(p => game.i18n.localize(p))
+          properties
         }
       ),
       classes: ["dnd5e2", "dnd5e-tooltip", "effect-tooltip", "themed", "theme-light"]
