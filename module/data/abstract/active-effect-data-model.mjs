@@ -57,4 +57,15 @@ export default class ActiveEffectDataModel extends foundry.data.ActiveEffectType
    * @param {ApplicationRenderContext} context  The app's rendering context.
    */
   onRenderActiveEffectConfig(app, html, context) {}
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare type-specific data for the Active Effect config sheet.
+   * @param {ApplicationRenderContext} context  Sheet context data.
+   * @returns {Promise<void>}
+   */
+  async getSheetData(context) {}
 }

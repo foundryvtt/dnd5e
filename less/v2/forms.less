@@ -683,6 +683,7 @@
   /* Control buttons */
   button.control-button, button.config-button {
     padding: 0;
+    flex: none;
     width: unset;
     display: inline-block;
     color: var(--color-text-secondary);
@@ -691,6 +692,9 @@
       box-shadow: none;
       text-shadow: 0 0 5px var(--color-shadow-primary);
       background: none;
+    }
+    &.icon {
+      height: unset;
     }
   }
 

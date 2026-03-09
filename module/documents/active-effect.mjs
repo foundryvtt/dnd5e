@@ -223,6 +223,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /** @inheritDoc */
   static applyChange(model, change, options={}) {
+    // Apply shims to moved fields
     change = change.effect._applyChangeShim(change);
 
     // Handle special actor flags
@@ -236,7 +237,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
     // Handle activity-targeted changes
     if ( (change.key.startsWith("activities[") || change.key.startsWith("system.activities."))
-      && (model instanceof Item) ) return change.effect.applyActivity(model, change);
+      && (model instanceof Item) ) return change.effect.applyActivity(model, change, options);
 
     // Handle hiding items
     if ( (change.key === "items.hidden") && (model instanceof Actor) ) {
@@ -259,12 +260,13 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * Apply a change to activities on this item.
    * @param {Item5e} item              The Item to whom this change should be applied.
    * @param {EffectChangeData} change  The change data being applied.
+   * @param {object} [options]         Options passed through to `ActiveEffect#applyChange`.
    * @returns {Record<string, *>}      An object of property paths and their updated values.
    */
-  applyActivity(item, change) {
+  applyActivity(item, change, options) {
     const changes = {};
     const apply = (activity, key) => {
-      const c = this.constructor.applyChange(activity, { ...change, key });
+      const c = this.constructor.applyChange(activity, { ...change, key }, options);
       Object.entries(c).forEach(([k, v]) => changes[`system.activities.${activity.id}.${k}`] = v);
     };
     if ( change.key.startsWith("system.activities.") ) {
@@ -718,37 +720,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * @param {ApplicationRenderContext} context The app's rendering context.
    */
   static onRenderActiveEffectConfig(app, html, context) {
-    if ( app.document.system.onRenderActiveEffectConfig?.(app, html, context) === false ) return;
-    const fields = app.document.system.schema.fields;
-    const magicalField = fields.magical?.toFormGroup({}, {
-      value: app.document.system._source.magical,
-      disabled: !context.editable
-    });
-    const statusesField = fields.rider?.fields?.statuses?.toFormGroup({}, {
-      value: app.document.system._source.rider?.statuses ?? [],
-      options: Object.values(CONFIG.statusEffects).map(se => ({ value: se.id, label: se.name })),
-      disabled: !context.editable
-    });
-    const detailsTab = html.querySelector("[data-application-part=details]");
-    const statuses = detailsTab.querySelector("& > .form-group:has([name=statuses])");
-    if ( statuses ) {
-      if ( magicalField ) statuses?.before(magicalField);
-      if ( statusesField ) statuses?.after(statusesField);
-    } else {
-      detailsTab.append(...[magicalField, statusesField].filter(_ => _));
-    }
-
-    // Add tooltip with link to wiki for effects/enchantments
-    const helpIconElement = document.createElement("i");
-    helpIconElement.classList.add("fa-solid", "fa-circle-question");
-    const tooltipText = _loc("DND5E.ACTIVEEFFECT.AttributeKeyTooltip", {
-      url: app.document.type === "enchantment"
-        ? "https://github.com/foundryvtt/dnd5e/wiki/Enchantment"
-        : "https://github.com/foundryvtt/dnd5e/wiki/Active-Effect-Guide"
-    });
-    Object.assign(helpIconElement.dataset, { tooltip: tooltipText, tooltipDirection: "RIGHT", locked: "" });
-    const targetElement = html.querySelector("section:is([data-tab='effects'], [data-tab='changes']) .key");
-    if ( targetElement ) targetElement.insertAdjacentElement("beforeend", helpIconElement);
+    app.document.system.onRenderActiveEffectConfig?.(app, html, context);
   }
 
   /* -------------------------------------------- */
