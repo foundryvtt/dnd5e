@@ -978,7 +978,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     properties = properties.map(p => game.i18n.localize(p));
     properties.unshift(...this.statuses.map(id => game.release.generation < 14
       ? CONFIG.statusEffects.find(s => s.id === id)?.name
-      : CONFIG.statusEffects[id]?.name))
+      : CONFIG.statusEffects[id]?.name).filter(_ => _));
 
     return {
       content: await foundry.applications.handlebars.renderTemplate(
