@@ -976,6 +976,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     else if ( this.isTemporary ) properties.push("DND5E.EffectType.Temporary");
     else properties.push("DND5E.EffectType.Passive");
     if ( this.type === "enchantment" ) properties.push("DND5E.ENCHANTMENT.Label");
+    if ( this.system.magical ) properties.push("DND5E.ITEM.Property.Magical");
     properties = properties.map(p => game.i18n.localize(p));
     properties.unshift(...this.statuses.map(id => game.release.generation < 14
       ? CONFIG.statusEffects.find(s => s.id === id)?.name
