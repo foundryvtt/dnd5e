@@ -447,33 +447,32 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * Apply any transformation to the Item data which are caused by enchantment Effects.
    */
   applyActiveEffects() {
-    const overrides = {};
-
     // Organize non-disabled effects by their application priority
     const changes = [];
     for ( const effect of this.allApplicableEffects() ) {
       if ( !effect.active ) continue;
-      changes.push(...effect.changes.map(change => {
-        const c = foundry.utils.deepClone(change);
-        c.effect = effect;
-        c.priority ??= c.mode * 10;
-        return c;
-      }));
+      for ( const change of effect.system.changes ) {
+        // TODO: Ensure works with core once https://github.com/foundryvtt/foundryvtt/issues/13931 is implemented
+        if ( (change.key === "") || !effect.shouldApplyChange(change) ) continue;
+        const copy = foundry.utils.deepClone(change);
+        copy.effect = effect;
+        changes.push(copy);
+      }
     }
     changes.sort((a, b) => a.priority - b.priority);
-    if ( game.release.generation > 13 ) foundry.documents.ActiveEffect._shimChanges?.(changes);
+    foundry.documents.ActiveEffect._shimChanges?.(changes);
 
     // Apply all changes
+    const overrides = {};
+    const replacementData = this.getRollData();
     for ( const change of changes ) {
-      if ( !change.key ) continue;
-      const changes = (game.release.generation > 13)
-        ? change.effect.constructor.applyChange(this, change)
-        : change.effect.apply(this, change);
-      Object.assign(overrides, changes);
+      const result = ActiveEffect.CHANGE_TYPES[change.type].handler?.(this, change)
+        ?? change.effect.constructor.applyChange(this, change, { replacementData });
+      if ( foundry.utils.isPlainObject(result) ) Object.assign(overrides, result);
     }
 
     // Expand the set of final overrides
-    this.overrides = foundry.utils.expandObject(overrides);
+    foundry.utils.mergeObject(this.overrides, foundry.utils.expandObject(overrides));
   }
 
   /* -------------------------------------------- */

@@ -32,7 +32,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
       showIcon: ItemSheet5e.#showIcon,
       toggleState: ItemSheet5e.#toggleState
     },
-    classes: ["item"],
+    classes: ["item", "hidden-title"],
     editingDescriptionTarget: null,
     elements: {
       activities: "dnd5e-activities",

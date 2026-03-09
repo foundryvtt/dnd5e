@@ -1,6 +1,7 @@
 <div class="item-detail effect-controls always-visible" data-column-id="controls">
 
     {{#if isEffect}}
+
     {{#if @root.editable}}
     {{!-- Editing --}}
     <button type="button" class="unbutton config-button effect-control item-control item-action" data-action="edit"
@@ -35,6 +36,14 @@
             data-context-menu aria-label="{{ localize 'DND5E.AdditionalControls' }}">
         <i class="fa-solid fa-ellipsis-vertical" inert></i>
     </button>
+
+    {{else if isChange}}
+
+    <span class="application-status">
+        <i class="fa-solid fa-{{ifThen entry.applied 'check' 'xmark' }}" inert></i>
+    </span>
+    {{!-- TODO: Include tooltip with reason change wasn't applied --}}
+
     {{/if}}
 
 </div>

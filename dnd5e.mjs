@@ -149,6 +149,11 @@ Hooks.once("init", function() {
 
   // Register sheet application classes
   const DocumentSheetConfig = foundry.applications.apps.DocumentSheetConfig;
+  DocumentSheetConfig.registerSheet(ActiveEffect, "dnd5e", applications.ActiveEffectConfig5e, {
+    makeDefault: true,
+    label: "DND5E.SheetClass.ActiveEffect"
+  });
+
   DocumentSheetConfig.unregisterSheet(Actor, "core", foundry.appv1.sheets.ActorSheet);
   DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.CharacterActorSheet, {
     types: ["character"],

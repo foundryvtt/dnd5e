@@ -71,7 +71,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       togglePip: BaseActorSheet.#togglePip,
       toggleSidebar: BaseActorSheet.#toggleSidebar
     },
-    classes: ["actor", "standard-form"],
+    classes: ["actor", "standard-form", "hidden-title"],
     elements: {
       effects: "dnd5e-effects",
       inventory: "dnd5e-inventory"

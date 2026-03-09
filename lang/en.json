@@ -2323,11 +2323,14 @@
 
 "DND5E.EFFECT": {
   "Action": {
-    "Create": "Create Effect",
-    "Delete": "Delete Effect",
-    "Dissociate": "Dissociate Effect",
+    "AddChange": "Add Change",
+    "CreateEffect": "Create Effect",
+    "DeleteEffect": "Delete Effect",
+    "DeleteChange": "Delete Change",
+    "DissociateEffect": "Dissociate Effect",
     "Search": "Search effects"
   },
+  "AdditionalChanges": "Additional Changes",
   "Application": {
     "Action": {
       "ApplyTokens": "Apply to selected tokens"
@@ -2340,6 +2343,34 @@
   },
   "BASE": {
     "FIELDS": {
+      "changes": {
+        "element": {
+          "conditions": {
+            "hint": "Condition that must be met for this change to apply.",
+            "label": "Change Conditions"
+          },
+          "key": {
+            "label": "Attribute Key"
+          },
+          "phase": {
+            "hint": "The point in data preparation or another event a change is to be applied.",
+            "label": "Phase"
+          },
+          "priority": {
+            "label": "Priority"
+          },
+          "type": {
+            "label": "Type"
+          },
+          "value": {
+            "label": "Value"
+          }
+        }
+      },
+      "conditions": {
+        "hint": "Conditions that control when the effect will be applied.",
+        "label": "Effect Conditions"
+      },
       "magical": {
         "hint": "This effect is from a magical source and should be disabled when magic isn't available.",
         "label": "Magical"
@@ -4025,6 +4056,7 @@
 "DND5E.Shape": "Shape",
 
 "DND5E.SheetClass": {
+  "ActiveEffect": "D&D 5e Active Effect Sheet",
   "Character": "D&D 5e Character Sheet",
   "ClassSummary": "D&D 5e Class Summary Sheet",
   "Container": "D&D 5e Container Sheet",

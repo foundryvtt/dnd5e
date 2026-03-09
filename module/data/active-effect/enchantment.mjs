@@ -18,7 +18,7 @@ export default class EnchantmentData extends ActiveEffectDataModel {
   /* -------------------------------------------- */
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.ENCHANTMENT"];
+  static LOCALIZATION_PREFIXES = ["DND5E.EFFECT.BASE", "DND5E.ENCHANTMENT"];
 
   /* -------------------------------------------- */
 
@@ -181,7 +181,7 @@ export default class EnchantmentData extends ActiveEffectDataModel {
 
   /** @override */
   onRenderActiveEffectConfig(app, html, context) {
-    const toRemove = html.querySelectorAll('.form-group:has([name="transfer"], [name="statuses"])');
+    const toRemove = html.querySelectorAll('.form-group:has([name="transfer"], [name="statuses"], [name="showIcon"])');
     toRemove.forEach(f => f.remove());
   }
 

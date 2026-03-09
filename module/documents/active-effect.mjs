@@ -214,38 +214,23 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  apply(doc, change) {
+  static applyChange(model, change, options={}) {
     // Apply shims to moved fields
-    change = this._applyChangeShim(change);
+    change = change.effect._applyChangeShim(change);
 
     // Ensure changes targeting flags use the proper types
-    if ( change.key.startsWith("flags.dnd5e.") ) change = this._prepareFlagChange(doc, change);
+    if ( change.key.startsWith("flags.dnd5e.") ) change = change.effect._prepareFlagChange(model, change);
 
     // Properly handle formulas that don't exist as part of the data model
     if ( ActiveEffect5e.FORMULA_FIELDS.has(change.key) ) {
       const field = new FormulaField({ deterministic: true });
-      return { [change.key]: this.constructor.applyField(doc, change, field) };
+      return { [change.key]: this.applyChangeField(model, change, { field }) };
     }
 
     // Handle activity-targeted changes
     if ( (change.key.startsWith("activities[") || change.key.startsWith("system.activities."))
-      && (doc instanceof Item) ) return this.applyActivity(doc, change);
+      && (model instanceof Item) ) return change.effect.applyActivity(model, change, options);
 
-    return super.apply(doc, change);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  static applyChange(model, change, options={}) {
-    change = change.effect._applyChangeShim(change);
-    if ( change.key.startsWith("flags.dnd5e.") ) change = change.effect._prepareFlagChange(model, change);
-    if ( ActiveEffect5e.FORMULA_FIELDS.has(change.key) ) {
-      const field = new FormulaField({ deterministic: true });
-      return { [change.key]: this.applyChangeField(model, change, { field }) };
-    }
-    if ( (change.key.startsWith("activities[") || change.key.startsWith("system.activities."))
-      && (model instanceof Item) ) return change.effect.applyActivity(model, change);
     return super.applyChange(model, change, options);
   }
 
@@ -255,14 +240,13 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * Apply a change to activities on this item.
    * @param {Item5e} item              The Item to whom this change should be applied.
    * @param {EffectChangeData} change  The change data being applied.
+   * @param {object} [options]         Options passed through to `ActiveEffect#applyChange`.
    * @returns {Record<string, *>}      An object of property paths and their updated values.
    */
-  applyActivity(item, change) {
+  applyActivity(item, change, options) {
     const changes = {};
     const apply = (activity, key) => {
-      const c = (game.release.generation > 13)
-        ? this.constructor.applyChange(activity, { ...change, key })
-        : this.apply(activity, { ...change, key });
+      const c = this.constructor.applyChange(activity, { ...change, key }, options);
       Object.entries(c).forEach(([k, v]) => changes[`system.activities.${activity.id}.${k}`] = v);
     };
     if ( change.key.startsWith("system.activities.") ) {
@@ -279,7 +263,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  static applyChangeField(model, change, {field, replacementData}={}) {
+  static applyChangeField(model, change, { field, replacementData }={}) {
     const current = foundry.utils.getProperty(model, change.key);
 
     // Replace value when using string interpolation syntax
@@ -376,6 +360,21 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     return super._applyChangeUpgrade(actor, change, current, delta, changes);
   }
 
+  /* -------------------------------------------- */
+
+  /**
+   * Evaluate the conditions to see if the effect or change should be applied.
+   * @param {Filter} [conditions]  Filter definition to evaluate.
+   * @returns {boolean}
+   */
+  evaluateConditions(conditions) {
+    if ( !conditions ) return true;
+    const rollData = (this.system.applicableType === "Actor") && this.actor
+      ? this.actor.getRollData({ deterministic: true })
+      : this.item.getRollData({ deterministic: true });
+    return conditions.check(rollData);
+  }
+
   /* --------------------------------------------- */
 
   /**
@@ -405,6 +404,24 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       else change.value = Boolean(value);
     }
     return change;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  shouldApplyChange(change, { phase }={}) {
+    // TODO: Adapt when core implements, if it does
+    if ( change.phase !== phase ) return false;
+
+    const targetDoc = this.applicableType === "Actor" ? this.actor : this.applicableType === "Item" ? this.item : null;
+    const conditionData = targetDoc?.getRollData?.();
+    if ( conditionData ) {
+      if ( change.effect.system.conditions?.check(conditionData) === false ) return false;
+      if ( change.conditions?.check(conditionData) === false ) return false;
+    }
+
+    change.applied = true;
+    return true;
   }
 
   /* -------------------------------------------- */
@@ -723,36 +740,18 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    */
   static onRenderActiveEffectConfig(app, html, context) {
     if ( app.document.system.onRenderActiveEffectConfig?.(app, html, context) === false ) return;
-    const fields = app.document.system.schema.fields;
-    const magicalField = fields.magical?.toFormGroup({}, {
-      value: app.document.system._source.magical,
-      disabled: !context.editable
-    });
-    const statusesField = fields.rider?.fields?.statuses?.toFormGroup({}, {
-      value: app.document.system._source.rider?.statuses ?? [],
-      options: CONFIG.statusEffects.map(se => ({ value: se.id, label: se.name })),
-      disabled: !context.editable
-    });
-    const detailsTab = html.querySelector("[data-application-part=details]");
-    const statuses = detailsTab.querySelector("& > .form-group:has([name=statuses])");
-    if ( statuses ) {
-      if ( magicalField ) statuses?.before(magicalField);
-      if ( statusesField ) statuses?.after(statusesField);
-    } else {
-      detailsTab.append(...[magicalField, statusesField].filter(_ => _));
-    }
 
-    // Add tooltip with link to wiki for effects/enchantments
-    const helpIconElement = document.createElement("i");
-    helpIconElement.classList.add("fa-solid", "fa-circle-question");
-    const tooltipText = game.i18n.format("DND5E.ACTIVEEFFECT.AttributeKeyTooltip", {
-      url: app.document.type === "enchantment"
-        ? "https://github.com/foundryvtt/dnd5e/wiki/Enchantment"
-        : "https://github.com/foundryvtt/dnd5e/wiki/Active-Effect-Guide"
-    });
-    Object.assign(helpIconElement.dataset, { tooltip: tooltipText, tooltipDirection: "RIGHT", locked: "" });
-    const targetElement = html.querySelector("section:is([data-tab='effects'], [data-tab='changes']) .key");
-    if ( targetElement ) targetElement.insertAdjacentElement("beforeend", helpIconElement);
+//     // Add tooltip with link to wiki for effects/enchantments
+//     const helpIconElement = document.createElement("i");
+//     helpIconElement.classList.add("fa-solid", "fa-circle-question");
+//     const tooltipText = game.i18n.format("DND5E.ACTIVEEFFECT.AttributeKeyTooltip", {
+//       url: app.document.type === "enchantment"
+//         ? "https://github.com/foundryvtt/dnd5e/wiki/Enchantment"
+//         : "https://github.com/foundryvtt/dnd5e/wiki/Active-Effect-Guide"
+//     });
+//     Object.assign(helpIconElement.dataset, { tooltip: tooltipText, tooltipDirection: "RIGHT", locked: "" });
+//     const targetElement = html.querySelector("section:is([data-tab='effects'], [data-tab='changes']) .key");
+//     if ( targetElement ) targetElement.insertAdjacentElement("beforeend", helpIconElement);
   }
 
   /* -------------------------------------------- */
@@ -1062,80 +1061,4 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     if ( sheet ) return sheet._confirmDialog(config);
     return foundry.applications.api.DialogV2.confirm(config);
   }
-}
-
-/**
- * @deprecated
- * @since 5.3.0
- */
-if ( !("applyChange" in ActiveEffect) ) {
-  const original = {
-    applyField: ActiveEffect.applyField,
-    _applyLegacy: ActiveEffect.prototype._applyLegacy,
-    _applyAdd: ActiveEffect.prototype._applyAdd,
-    _applyUpgrade: ActiveEffect.prototype._applyUpgrade
-  };
-
-  /** @ignore */
-  ActiveEffect5e.applyField = function(model, change, field) {
-    field ??= model.schema?.getField?.(change.key);
-    const current = foundry.utils.getProperty(model, change.key);
-    const modes = CONST.ACTIVE_EFFECT_MODES;
-    if ( (field instanceof StringField) && (change.mode === modes.OVERRIDE) && change.value.includes?.("{}") ) {
-      change.value = change.value.replace("{}", current ?? "");
-    }
-    if ( (current === null) && [modes.UPGRADE, modes.DOWNGRADE].includes(change.mode) ) change.mode = modes.OVERRIDE;
-    if ( (field instanceof SetField) && (change.mode === modes.ADD) && (foundry.utils.getType(current) === "Set") ) {
-      for ( const value of field._castChangeDelta(change.value) ) {
-        const neg = value.replace(/^\s*-\s*/, "");
-        if ( neg !== value ) current.delete(neg);
-        else current.add(value);
-      }
-      return current;
-    }
-    if ( (current === undefined) && change.key.startsWith("system.") ) {
-      let keyPath = change.key;
-      let mappingField = field;
-      while ( !(mappingField instanceof MappingField) && mappingField ) {
-        if ( mappingField.name ) keyPath = keyPath.substring(0, keyPath.length - mappingField.name.length - 1);
-        mappingField = mappingField.parent;
-      }
-      if ( mappingField && (foundry.utils.getProperty(model, keyPath) === undefined) ) {
-        const created = mappingField.model.initialize(mappingField.model.getInitialValue(), mappingField);
-        foundry.utils.setProperty(model, keyPath, created);
-      }
-    }
-    if ( (field instanceof ObjectField) || (field instanceof SchemaField) ) {
-      change = { ...change, value: parseOrString(change.value) };
-    }
-    return original.applyField.call(this, model, change, field);
-  };
-
-  /** @ignore */
-  ActiveEffect5e.prototype._applyLegacy = function(actor, change, changes) {
-    if ( this.system._applyLegacy?.(actor, change, changes) === false ) return;
-    original._applyLegacy.call(this, actor, change, changes);
-  };
-
-  /** @ignore */
-  ActiveEffect5e.prototype._applyAdd = function(actor, change, current, delta, changes) {
-    if ( current instanceof Set ) {
-      const handle = v => {
-        const neg = v.replace(/^\s*-\s*/, "");
-        if ( neg !== v ) current.delete(neg);
-        else current.add(v);
-      };
-      if ( Array.isArray(delta) ) delta.forEach(item => handle(item));
-      else if ( delta instanceof Set ) for ( const item of delta ) handle(item);
-      else handle(delta);
-      return;
-    }
-    original._applyAdd.call(this, actor, change, current, delta, changes);
-  };
-
-  /** @ignore */
-  ActiveEffect5e.prototype._applyUpgrade = function(actor, change, current, delta, changes) {
-    if ( current === null ) return this._applyOverride(actor, change, current, delta, changes);
-    original._applyUpgrade.call(this, actor, change, current, delta, changes);
-  };
 }

@@ -349,11 +349,68 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /** @inheritDoc */
   applyActiveEffects(phase) {
-    if ( game.release.generation < 14 ) phase ??= "initial";
     if ( (this.system?.prepareEmbeddedData instanceof Function) && (phase === "initial") ) {
       this.system.prepareEmbeddedData();
     }
-    return super.applyActiveEffects(phase);
+
+    const ActiveEffect = foundry.documents.ActiveEffect.implementation;
+    if ( typeof phase !== "string" ) {
+      phase = this._completedActiveEffectPhases.has("initial") ? "final" : "initial";
+      const message = 'Actor#applyActiveEffects must be called with a string phase identifier, with "initial"'
+        + " as the first phase.";
+      foundry.utils.logCompatibilityWarning(message, {since: 14, until: 16, once: true});
+    }
+    else if ( !(phase in ActiveEffect.CHANGE_PHASES) ) {
+      const error = new Error(`"${phase}" is not a registered ActiveEffect application phase.`);
+      Hooks.onError("Actor#applyActiveEffects", error, {log: "error"});
+    }
+    if ( this._completedActiveEffectPhases.has(phase) ) {
+      const error = new Error(`ActiveEffect application phase "${phase}" has already completed and cannot be run again`
+        + " in this Actor's data-preparation cycle.");
+      Hooks.onError("Actor#applyActiveEffects", error, {log: "error"});
+      return;
+    }
+    this._completedActiveEffectPhases.add(phase);
+
+    // Pre-collect statuses so they can be reliably used for conditions
+    if ( phase === "initial" ) {
+      for ( const effect of this.allApplicableEffects() ) {
+        if ( effect.active ) for ( const statusId of effect.statuses ) this.statuses.add(statusId);
+      }
+    }
+
+    // Organize non-disabled effects by their application priority
+    /** @type {ActiveEffectChangeData[]} */
+    const changes = [];
+    /** @type {ActiveEffectChangeData[]} */
+    const tokenChanges = [];
+    for ( const effect of this.allApplicableEffects() ) {
+      if ( !effect.active ) continue;
+      for ( const change of effect.system.changes ) {
+        if ( (change.key === "") || !effect.shouldApplyChange(change, { phase }) ) continue;
+        const copy = foundry.utils.deepClone(change);
+        copy.effect = effect;
+        if ( copy.key?.startsWith("token.") ) { // Keep Token changes separate for later application
+          copy.key = copy.key.slice(6);
+          tokenChanges.push(copy);
+        }
+        else changes.push(copy);
+      }
+    }
+    changes.sort((a, b) => a.priority - b.priority);
+    ActiveEffect._shimChanges(changes);
+    this.tokenActiveEffectChanges[phase] = tokenChanges;
+
+    // Apply all changes
+    const overrides = {};
+    const replacementData = this.getRollData();
+    for ( const change of changes ) {
+      const result = ActiveEffect.applyChange(this, change, {replacementData});
+      if ( foundry.utils.isPlainObject(result) ) Object.assign(overrides, result);
+    }
+
+    // Expand the set of final overrides
+    foundry.utils.mergeObject(this.overrides, foundry.utils.expandObject(overrides));
   }
 
   /* -------------------------------------------- */

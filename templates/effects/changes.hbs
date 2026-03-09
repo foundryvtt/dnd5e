@@ -1,0 +1,26 @@
+<section class="tab scrollable changes {{~#if tab.active}} active{{/if}}" data-group="{{ tab.group }}" data-tab="{{ tab.id }}">
+    <fieldset>
+        <legend>
+            <span>{{ localize "EFFECT.TABS.changes" }}</span>
+            <button type="button" class="unbutton control-button" data-action="addChange"
+                    data-tooltip aria-label="{{ localize 'DND5E.EFFECT.Action.AddChange' }}">
+                <i class="fa-solid fa-plus" inert></i>
+            </button>
+        </legend>
+        <ul class="separated-list changes-list flexcol unlist">
+            {{#each changes}}
+            {{{ this }}}
+            {{else}}
+            <li class="empty">
+                {{{ localize "DND5E.EFFECT.Empty" }}}
+            </li>
+            {{/each}}
+        </ul>
+    </fieldset>
+    {{#if additionalChangesFields.length}}
+    <fieldset>
+        <legend>{{ localize "DND5E.EFFECT.AdditionalChanges" }}</legend>
+        {{> "dnd5e.fieldlist" additionalChangesFields}}
+    </fieldset>
+    {{/if}}
+</section>

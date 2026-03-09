@@ -1,0 +1,33 @@
+<li class="flexcol" data-index="{{ index }}" data-expand-id="changes.{{ index }}">
+    <div class="change-fields flexrow">
+        {{ formField fields.key name=(concat prefix "key") value=change.key classes="field-key label-top"
+                     rootId=@root.partId }}
+        <div class="list-controls flexrow">
+            <button type="button" class="unbutton control-button icon fa-solid fa-minus" data-action="deleteChange"
+                    data-tooltip aria-label="{{ localize 'DND5E.EFFECT.Action.DeleteChange' }}"></button>
+        </div>
+    </div>
+    <div class="change-fields flexrow">
+        {{ formField fields.type name=(concat prefix "type") value=change.type choices=changeTypes
+                     classes="field-type label-top" rootId=@root.partId }}
+        {{ formField fields.value name=(concat prefix "value") value=change.value elementType="input"
+                     classes="field-value label-top" rootId=@root.partId }}
+    </div>
+    <div class="additional-tray collapsible {{ collapsed }}" data-action="toggleCollapsed">
+        <label class="roboto-upper">
+            <i class="fa-solid fa-gears" inert></i>
+            <span>{{ localize "DND5E.AdditionalSettings" }}</span>
+            <i class="fa-solid fa-caret-down" inert></i>
+        </label>
+        <div class="collapsible-content">
+            <div class="wrapper flexcol">
+                {{ formField fields.priority name=(concat prefix "priority") value=change.priority
+                             placeholder=defaultPriority rootId=@root.partId }}
+                {{#if fields.conditions}}
+                {{ formField fields.conditions name=(concat prefix "conditions") value=change.conditions
+                             rootId=@root.partId }}
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</li>

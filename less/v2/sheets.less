@@ -49,13 +49,11 @@
   }
 }
 
-.dnd5e2.sheet:is(.item, .actor, .roll-table-sheet) {
+.dnd5e2.sheet:is(.item, .actor) {
   &:where(:not(.minimized)) > header {
     background: transparent;
     position: relative;
     z-index: 1;
-
-    .window-title { visibility: hidden; }
   }
 }
 
@@ -278,6 +276,27 @@ body.detached .dnd5e2.sheet .tab { max-height: unset; }
   }
 
   &:not(.locked) .rollable.draggable { cursor: var(--cursor-pointer); }
+}
+
+/* ---------------------------------- */
+/*  Active Effect Sheets              */
+/* ---------------------------------- */
+
+.dnd5e2.active-effect-config {
+  .sheet-header {
+    --dnd5e-document-image-size: 96px;
+  }
+  .tab.changes { overflow-y: auto; }
+  .changes-list li {
+    &, .change-fields { gap: 4px; }
+    .field-value { flex: 2; }
+  }
+  .document-name {
+    text-align: center;
+    font-size: var(--font-size-32);
+    font-family: var(--dnd5e-font-modesto);
+    font-weight: bold;
+  }
 }
 
 /* ---------------------------------- */

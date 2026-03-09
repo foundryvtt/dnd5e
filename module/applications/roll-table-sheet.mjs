@@ -12,7 +12,7 @@ export default class RollTableSheet5e extends ApplicationV2Mixin(RollTableSheet,
     actions: {
       editImage: RollTableSheet5e._onEditImage
     },
-    classes: ["titlebar"]
+    classes: ["titlebar", "hidden-title"]
   };
 
   /* -------------------------------------------- */
@@ -34,27 +34,5 @@ export default class RollTableSheet5e extends ApplicationV2Mixin(RollTableSheet,
       }
     });
     this.element.querySelectorAll("table td.image img").forEach(icon => icon.classList.add("gold-icon"));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Replace all matching elements with a new tag, keeping all existing attributes.
-   * @param {string} selector              CSS selector to find elements to replace.
-   * @param {string} tagName               Tag name for the new element to use.
-   * @param {object} [options={}]
-   * @param {Function} [options.callback]  Method called for each new element before it replaces the old one.
-   * @protected
-   */
-  _replaceElements(selector, tagName, { callback }={}) {
-    for ( const oldElement of this.element.querySelectorAll(selector) ) {
-      const newElement = document.createElement(tagName);
-      for ( const attr of oldElement.attributes ) {
-        newElement.setAttribute(attr.name, attr.value);
-      }
-      newElement.innerHTML = oldElement.innerHTML;
-      if ( callback ) callback(newElement);
-      oldElement.replaceWith(newElement);
-    }
   }
 }

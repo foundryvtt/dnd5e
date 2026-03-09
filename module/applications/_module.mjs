@@ -14,6 +14,7 @@ export * as settings from "./settings/_module.mjs";
 export * as shared from "./shared/_module.mjs";
 
 export {default as Accordion} from "./accordion.mjs";
+export {default as ActiveEffectConfig5e} from "./active-effect-config.mjs";
 export {default as Award} from "./award.mjs";
 export {default as ChatLog5e} from "./chat-log.mjs";
 export {default as CompendiumBrowser} from "./compendium-browser.mjs";

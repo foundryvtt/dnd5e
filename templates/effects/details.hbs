@@ -1,0 +1,21 @@
+<section class="tab scrollable {{~#if tab.active}} active{{/if}}" data-group="{{ tab.group }}" data-tab="{{ tab.id }}">
+    {{ formGroup fields.tint value=source.tint rootId=rootId placeholder="#ffffff" }}
+    {{ formGroup fields.description value=source.description rootId=rootId }}
+    {{ formGroup fields.disabled value=source.disabled input=inputs.createCheckboxInput rootId=rootId }}
+
+    {{#if systemFields.conditions}}
+    {{ formGroup systemFields.conditions value=source.system.conditions rootId=partId }}
+    {{/if}}
+
+    {{#if isActorEffect}}
+    {{ formGroup fields.origin value=source.origin rootId=rootId disabled=true }}
+    {{else if isItemEffect}}
+    {{ formGroup fields.transfer value=source.transfer input=inputs.createCheckboxInput rootId=rootId }}
+    {{/if}}
+
+    {{#if systemFields.magical}}
+    {{ formGroup systemFields.magical value=source.system.magical input=inputs.createCheckboxInput rootId=partId }}
+    {{/if}}
+    {{ formGroup fields.statuses value=source.statuses options=statuses sort=true rootId=rootId classes="statuses" }}
+    {{ formGroup fields.showIcon value=source.showIcon options=showIconOptions rootId=rootId }}
+</section>
