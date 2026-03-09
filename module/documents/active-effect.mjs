@@ -129,7 +129,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /** @inheritDoc */
   get isSuppressed() {
-    if ( super.isSuppressed ) return true;
+    if ( super.isSuppressed || this.system.isSuppressed ) return true;
     if ( this.system.magical && this.actor?.statuses.has("antimagic") ) return true;
     if ( this.type === "enchantment" ) return false;
     if ( this.type === "condition" ) return false;
@@ -388,6 +388,21 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     return super._applyChangeUpgrade(actor, change, current, delta, changes);
   }
 
+  /* -------------------------------------------- */
+
+  /**
+   * Evaluate the conditions to see if the effect or change should be applied.
+   * @param {Filter} [conditions]  Filter definition to evaluate.
+   * @returns {boolean}
+   */
+  evaluateConditions(conditions) {
+    if ( !conditions ) return true;
+    const rollData = (this.system.applicableType === "Actor") && this.actor
+      ? this.actor.getRollData({ deterministic: true })
+      : this.item.getRollData({ deterministic: true });
+    return conditions.check(rollData);
+  }
+
   /* --------------------------------------------- */
 
   /**
@@ -417,6 +432,24 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       else change.value = Boolean(value);
     }
     return change;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  shouldApplyChange(change, { phase }={}) {
+    // TODO: Adapt when core implements https://github.com/foundryvtt/foundryvtt/issues/13931, if it does
+    if ( change.phase !== phase ) return false;
+
+    const targetDoc = this.applicableType === "Actor" ? this.actor : this.applicableType === "Item" ? this.item : null;
+    const conditionData = targetDoc?.getRollData?.();
+    if ( conditionData ) {
+      if ( change.effect.system.conditions?.check(conditionData) === false ) return false;
+      if ( change.conditions?.check(conditionData) === false ) return false;
+    }
+
+    change.applied = true;
+    return true;
   }
 
   /* -------------------------------------------- */

@@ -1,4 +1,5 @@
 import ActiveEffectDataModel from "../abstract/active-effect-data-model.mjs";
+import FiltersField from "../fields/filters-field.mjs";
 
 const { BooleanField, SchemaField, SetField, StringField } = foundry.data.fields;
 
@@ -25,6 +26,7 @@ export default class BaseEffectData extends ActiveEffectDataModel {
   static defineSchema() {
     return {
       ...super.defineSchema(),
+      conditions: new FiltersField(),
       magical: new BooleanField(),
       rider: new SchemaField({
         statuses: new SetField(new StringField())

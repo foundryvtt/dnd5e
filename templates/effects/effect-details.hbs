@@ -3,6 +3,10 @@
     {{ formGroup fields.description value=source.description rootId=rootId }}
     {{ formGroup fields.disabled value=source.disabled input=inputs.createCheckboxInput rootId=rootId }}
 
+    {{#if systemFields.conditions}}
+    {{ formGroup systemFields.conditions value=source.system.conditions rootId=partId }}
+    {{/if}}
+
     {{#if isActorEffect}}
     {{ formGroup fields.origin value=source.origin rootId=rootId disabled=true }}
     {{else if isItemEffect}}
