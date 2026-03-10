@@ -7,6 +7,7 @@ import EffectApplicationElement from "./effect-application.mjs";
 import EffectsElement from "./effects.mjs";
 import EnchantmentApplicationElement from "./enchantment-application.mjs";
 import FiligreeBoxElement from "./filigree-box.mjs";
+import FiltersInputElement from "./filters-input.mjs";
 import FilterStateElement from "./filter-state.mjs";
 import IconElement from "./icon.mjs";
 import InventoryElement from "./inventory.mjs";
@@ -19,6 +20,7 @@ window.customElements.define(DamageApplicationElement.tagName, DamageApplication
 window.customElements.define(ActivitiesElement.tagName, ActivitiesElement);
 window.customElements.define(CheckboxElement.tagName, CheckboxElement);
 window.customElements.define(EffectsElement.tagName, EffectsElement);
+window.customElements.define(FiltersInputElement.tagName, FiltersInputElement);
 window.customElements.define(IconElement.tagName, IconElement);
 window.customElements.define(InventoryElement.tagName, InventoryElement);
 window.customElements.define(EffectApplicationElement.tagName, EffectApplicationElement);
@@ -31,6 +33,7 @@ window.customElements.define(SlideToggleElement.tagName, SlideToggleElement);
 
 export {
   ActivitiesElement, AdoptedStyleSheetMixin, CopyableTextElement, CheckboxElement, DamageApplicationElement,
-  EffectApplicationElement, EffectsElement, EnchantmentApplicationElement, FiligreeBoxElement, FilterStateElement,
-  IconElement, InventoryElement, ItemListControlsElement, ProficiencyCycleElement, SlideToggleElement
+  EffectApplicationElement, EffectsElement, EnchantmentApplicationElement, FiligreeBoxElement,
+  FiltersInputElement, FilterStateElement, IconElement, InventoryElement, ItemListControlsElement,
+  ProficiencyCycleElement, SlideToggleElement
 };
