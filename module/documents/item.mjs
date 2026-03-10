@@ -911,7 +911,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const activity = new cls({ type, ...data }, { parent: this });
     if ( activity._preCreate(createData) === false ) return;
 
-    await this.update({ [`system.activities.${activity.id}`]: activity.toObject() });
+    const sort = this.system.activities.size
+      ? Math.max(...this.system.activities.map(a => a.sort)) + CONST.SORT_INTEGER_DENSITY
+      : 0;
+    await this.update({ [`system.activities.${activity.id}`]: { ...activity.toObject(), sort } });
     const created = this.system.activities.get(activity.id);
     if ( renderSheet ) return created.sheet?.render({ force: true });
   }
