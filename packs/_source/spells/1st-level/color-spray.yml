@@ -108,7 +108,7 @@ system:
         prompt: false
         visible: false
         name: ''
-        formula: 6d10 + ((@item.level - 1) * 2)d10
+        formula: 6d10 + (@scaling.increase * 2)d10
   identifier: color-spray
 effects:
   - name: Color Spray
