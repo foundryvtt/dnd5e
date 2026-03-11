@@ -141,23 +141,7 @@ effects:
     type: base
     system: {}
     changes:
-      - key: system.attributes.movement.walk
-        mode: 2
-        value: '-10'
-        priority: null
-      - key: system.attributes.movement.fly
-        mode: 2
-        value: '-10'
-        priority: null
-      - key: system.attributes.movement.swim
-        mode: 2
-        value: '-10'
-        priority: null
-      - key: system.attributes.movement.burrow
-        mode: 2
-        value: '-10'
-        priority: null
-      - key: system.attributes.movement.climb
+      - key: system.attributes.movement.bonus
         mode: 2
         value: '-10'
         priority: null
