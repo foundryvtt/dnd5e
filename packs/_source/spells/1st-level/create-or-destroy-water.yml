@@ -27,7 +27,7 @@ system:
     template:
       units: ft
       type: cube
-      size: 30 + ((@item.level - 1) * 5)
+      size: 30 + (@scaling.increase * 5)
       contiguous: false
       count: ''
   range:
