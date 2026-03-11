@@ -32,11 +32,14 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -74,7 +77,11 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: nmcuBi3UW1cZJqut
+          level:
+            min: null
+            max: null
       range:
         override: false
       target:
@@ -93,7 +100,7 @@ system:
         flat: false
         type:
           value: melee
-          classification: spell
+          classification: ''
       damage:
         critical:
           bonus: ''
@@ -114,20 +121,63 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: shocking-grasp
 sort: 0
 flags: {}
-img: icons/magic/lightning/bolt-forked-blue.webp
-effects: []
+img: icons/magic/lightning/projectile-orb-blue.webp
+effects:
+  - name: Shocking Grasp
+    img: icons/magic/lightning/projectile-orb-blue.webp
+    origin: Compendium.dnd5e.spells.Item.XvbiNhNqXXIFisIy
+    transfer: false
+    _id: nmcuBi3UW1cZJqut
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: 6
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: <p>You can't take reactions until the start of your next turn.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      createdTime: 1772661549478
+      modifiedTime: 1772661585465
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!XvbiNhNqXXIFisIy.nmcuBi3UW1cZJqut'
 folder: Z8kZlnggh1PtuF3Y
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037358692
-  modifiedTime: 1725992720660
+  modifiedTime: 1772738707451
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!XvbiNhNqXXIFisIy'

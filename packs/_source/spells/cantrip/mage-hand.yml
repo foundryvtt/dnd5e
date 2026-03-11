@@ -34,12 +34,15 @@ system:
       type: space
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -57,7 +60,6 @@ system:
   properties:
     - vocal
     - somatic
-    - mgc
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -94,20 +96,22 @@ system:
         attackDamage: ''
         saveDamage: ''
         healing: ''
+        hd: ''
       creatureSizes: []
       creatureTypes: []
       match:
         attacks: false
         proficiency: false
         saves: false
+        ability: ''
       profiles:
-        - name: ''
+        - count: ''
+          name: ''
           _id: H4LmY7OuwtEQFipO
           uuid: Compendium.dnd5e.monsters.Actor.zwT2WjWo7cTm2631
           level:
             min: null
             max: null
-          types: []
       summon:
         identifier: ''
         mode: ''
@@ -115,20 +119,78 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Conjure Mage Hand
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+      tempHP: ''
+    EDuPcfsfb5cGEpiI:
+      type: utility
+      name: Control Mage Hand
+      _id: EDuPcfsfb5cGEpiI
+      img: ''
+      sort: 0
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
   identifier: mage-hand
 sort: 0
 flags: {}
-img: icons/magic/water/water-hand.webp
+img: icons/magic/unholy/strike-hand-glow-pink.webp
 effects: []
 folder: Z8kZlnggh1PtuF3Y
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037357436
-  modifiedTime: 1725992720244
+  modifiedTime: 1772737672341
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!Utk1OQRwYkMkFRD3'

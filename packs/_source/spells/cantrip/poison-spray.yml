@@ -30,12 +30,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '10'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -107,20 +110,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: poison-spray
 sort: 0
 flags: {}
-img: icons/magic/fire/projectile-fireball-smoke-large-green.webp
+img: icons/skills/toxins/cauldron-bubbles-overflow-green.webp
 effects: []
 folder: Z8kZlnggh1PtuF3Y
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037362481
-  modifiedTime: 1725992721917
+  modifiedTime: 1772738740163
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!g2u9PYfqWQAyg9OI'
