@@ -117,6 +117,14 @@ export default class Combat5e extends Combat {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  async _onStartRound(combatant) {
+    await super._onStartRound(combatant);
+    this._recoverUses({ round: true });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async _onStartTurn(combatant) {
     await super._onStartTurn(combatant);
     this._recoverUses({ turn: true, turnStart: combatant });
