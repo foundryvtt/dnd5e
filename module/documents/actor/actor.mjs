@@ -4,7 +4,6 @@ import CreateDocumentDialog from "../../applications/create-document-dialog.mjs"
 import SkillToolRollConfigurationDialog from "../../applications/dice/skill-tool-configuration-dialog.mjs";
 import PropertyAttribution from "../../applications/property-attribution.mjs";
 import TravelField from "../../data/actor/fields/travel-field.mjs";
-import NPCData from "../../data/actor/npc.mjs";
 import ActivationsField from "../../data/chat-message/fields/activations-field.mjs";
 import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
 import AdvantageModeField from "../../data/fields/advantage-mode-field.mjs";
@@ -223,6 +222,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /** @inheritDoc */
   _initializeSource(source, options={}) {
     if ( source instanceof foundry.abstract.DataModel ) source = source.toObject();
+
+    /**
+     * A hook event that fires before source data is initialized for an Actor in a compendium.
+     * @function dnd5e.initializeActorSource
+     * @memberof hookEvents
+     * @param {Actor5e} actor   Actor for which the data is being initialized.
+     * @param {object} source   Source data being initialized.
+     * @param {object} options  Additional data initialization options.
+     */
+    if ( options.pack ) Hooks.callAll("dnd5e.initializeActorSource", this, source, options);
 
     // Migrate encounter groups to their own Actor type.
     if ( (source.type === "group") && (source.system?.type?.value === "encounter") ) {

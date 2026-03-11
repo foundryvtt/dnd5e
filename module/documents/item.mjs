@@ -103,7 +103,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
      * @function dnd5e.initializeItemSource
      * @memberof hookEvents
      * @param {Item5e} item     Item for which the data is being initialized.
-     * @param {object} data     Source data being initialized.
+     * @param {object} source   Source data being initialized.
      * @param {object} options  Additional data initialization options.
      */
     if ( options.pack || options.parent?.pack ) Hooks.callAll("dnd5e.initializeItemSource", this, data, options);
