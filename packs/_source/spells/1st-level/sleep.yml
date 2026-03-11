@@ -117,7 +117,7 @@ system:
         prompt: false
         visible: false
         name: Affected Hit Points
-        formula: 5d8 + ((@item.level - 1) * 2)d8
+        formula: 5d8 + (@scaling.increase * 2)d8
   identifier: sleep
 effects:
   - name: Sleep
