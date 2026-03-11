@@ -6,19 +6,20 @@ type: spell
 system:
   description:
     value: >-
-      <p>This spell creates an &amp;Reference[Invisible], mindless, shapeless,
-      Medium force that performs simple tasks at your command until the spell
-      ends. The servant springs into existence in an unoccupied space on the
-      ground within range. It has AC 10, 1 hit point, and a Strength of 2, and
-      it can't attack. If it drops to 0 hit points, the spell ends.</p><p>Once
-      on each of your turns as a Bonus Action, you can mentally command the
-      servant to move up to 15 feet and interact with an object. The servant can
-      perform simple tasks that a human servant could do, such as fetching
-      things, cleaning, mending, folding clothes, lighting fires, serving food,
-      and pouring wine. Once you give the command, the servant performs the task
-      to the best of its ability until it completes the task, then waits for
-      your next command.</p><p>If you command the servant to perform a task that
-      would move it more than 60 feet away from you, the spell ends.</p>
+      <p>This spell creates an &amp;Reference[Invisible apply=false], mindless,
+      shapeless, Medium force that performs simple tasks at your command until
+      the spell ends. The servant springs into existence in an unoccupied space
+      on the ground within range. It has AC 10, 1 hit point, and a Strength of
+      2, and it can't attack. If it drops to 0 hit points, the spell
+      ends.</p><p>Once on each of your turns as a Bonus Action, you can mentally
+      command the servant to move up to 15 feet and interact with an object. The
+      servant can perform simple tasks that a human servant could do, such as
+      fetching things, cleaning, mending, folding clothes, lighting fires,
+      serving food, and pouring wine. Once you give the command, the servant
+      performs the task to the best of its ability until it completes the task,
+      then waits for your next command.</p><p>If you command the servant to
+      perform a task that would move it more than 60 feet away from you, the
+      spell ends.</p>
     chat: ''
   source:
     custom: ''
@@ -38,12 +39,15 @@ system:
       type: space
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '60'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -63,7 +67,6 @@ system:
     - somatic
     - material
     - ritual
-    - mgc
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -100,20 +103,22 @@ system:
         attackDamage: ''
         saveDamage: ''
         healing: ''
+        hd: ''
       creatureSizes: []
       creatureTypes: []
       match:
         attacks: false
         proficiency: false
         saves: false
+        ability: ''
       profiles:
-        - name: ''
+        - count: ''
+          name: ''
           _id: vmeSKU0Wnzs5TfPn
           uuid: Compendium.dnd5e.monsters.Actor.BTQz2q4JJVQn8W5W
           level:
             min: null
             max: null
-          types: []
       summon:
         identifier: ''
         mode: ''
@@ -121,20 +126,79 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Summon Servant
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+      tempHP: ''
+    SlwRW3UBZCWl4WB4:
+      type: utility
+      name: Command Servant
+      _id: SlwRW3UBZCWl4WB4
+      img: ''
+      sort: 0
+      activation:
+        type: bonus
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
   identifier: unseen-servant
 sort: 0
 flags: {}
-img: icons/magic/control/debuff-energy-hold-blue-yellow.webp
+img: icons/creatures/magical/spirit-undead-masked-blue.webp
 effects: []
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037360383
-  modifiedTime: 1725992721193
+  modifiedTime: 1772821388707
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!ccduLIvutyNqvkgv'

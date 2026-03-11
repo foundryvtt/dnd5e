@@ -1,7 +1,7 @@
 _id: CKZTpZlxj7hjjo2H
 name: Mage Armor
 type: spell
-img: icons/magic/defensive/shield-barrier-glowing-triangle-blue.webp
+img: icons/equipment/chest/robe-layered-blue.webp
 system:
   description:
     value: >-
@@ -28,11 +28,14 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -73,6 +76,9 @@ system:
         override: false
       effects:
         - _id: cfwMU7LuOJ619Lny
+          level:
+            min: null
+            max: null
       range:
         override: false
       target:
@@ -91,7 +97,14 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: mage-armor
 effects:
   - _id: cfwMU7LuOJ619Lny
@@ -111,22 +124,29 @@ effects:
       startTurn: null
     origin: Compendium.dnd5e.spells.CKZTpZlxj7hjjo2H
     transfer: false
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     tint: '#ffffff'
     name: Mage Armor
-    description: <p>The target's base AC becomes 13 + its Dexterity modifier.</p>
+    description: >-
+      <p>A protective magical force surrounds it until the spell
+      ends.</p><p>Your base AC becomes 13 + your Dexterity modifier. The spell
+      ends if you don armor or if the caster dismisses the spell as an
+      action.</p>
     statuses: []
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.3.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1772821793284
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    img: icons/magic/defensive/shield-barrier-glowing-triangle-blue.webp
+    img: icons/equipment/chest/robe-layered-blue.webp
     type: base
     system: {}
     sort: 0
@@ -138,11 +158,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037350935
-  modifiedTime: 1725992718089
+  modifiedTime: 1772821788012
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!CKZTpZlxj7hjjo2H'

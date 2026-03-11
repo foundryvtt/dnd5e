@@ -5,7 +5,7 @@ ownership:
 type: spell
 system:
   description:
-    value: "<p>Slick grease covers the ground in a 10-foot square centered on a point within range and turns it into difficult terrain for the duration.</p><p>When the grease appears, each creature standing in its area must succeed on a Dexterity saving throw or fall prone. A creature that enters the area or ends its turn there must also succeed on a\_Dexterity saving throw or fall prone.</p>"
+    value: "<p>Slick grease covers the ground in a 10-foot square centered on a point within range and turns it into &amp;reference[difficult terrain] for the duration.</p><p>When the grease appears, each creature standing in its area must succeed on a Dexterity saving throw or fall &amp;reference[prone]. A creature that enters the area or ends its turn there must also succeed on a Dexterity saving throw or fall prone.</p>"
     chat: ''
   source:
     custom: ''
@@ -23,14 +23,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: square
       size: '10'
       contiguous: false
+      count: ''
   range:
     value: '60'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -81,7 +84,7 @@ system:
           choice: false
         override: false
       damage:
-        onSave: half
+        onSave: none
         parts: []
       save:
         ability: dex
@@ -91,20 +94,87 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    OiCc4lVFXS0vkFhf:
+      type: save
+      name: Enter / End Turn in Grease Save
+      _id: OiCc4lVFXS0vkFhf
+      img: ''
+      sort: 0
+      activation:
+        type: special
+        override: true
+        condition: When a creature enters the area or ends its turn there.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        onSave: none
+        parts: []
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: spellcasting
+          formula: ''
   identifier: grease
 sort: 0
 flags: {}
-img: icons/magic/air/fog-gas-smoke-orange.webp
+img: icons/commodities/materials/slime-white.webp
 effects: []
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037362051
-  modifiedTime: 1725992721768
+  modifiedTime: 1772823267887
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!etgcR9wqmrhyZ0tx'

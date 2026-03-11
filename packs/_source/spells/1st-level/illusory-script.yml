@@ -16,7 +16,7 @@ system:
       different message, written in a different hand and language, though the
       language must be one you know.</p><p>Should the spell be dispelled, the
       original script and the Illusion both disappear.</p><p>A creature with
-      Truesight can read the hidden message.</p>
+      &amp;reference[Truesight] can read the hidden message.</p>
     chat: ''
   source:
     custom: ''
@@ -34,11 +34,14 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -96,20 +99,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: illusory-script
 sort: 0
 flags: {}
-img: icons/magic/air/fog-gas-smoke-purple.webp
+img: icons/sundries/documents/document-writing-pink.webp
 effects: []
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037348639
-  modifiedTime: 1725992717406
+  modifiedTime: 1772821993460
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!82jM6qD9axLJsTrH'

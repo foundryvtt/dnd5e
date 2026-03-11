@@ -8,7 +8,7 @@ system:
     value: >-
       <p>This spell allows you to move at an incredible pace. When you cast this
       spell, and then as a bonus action on each of your turns until the spell
-      ends, you can take the Dash action.</p>
+      ends, you can take the &amp;reference[Dash] action.</p>
     chat: ''
   source:
     custom: ''
@@ -27,11 +27,14 @@ system:
     affects:
       type: self
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -70,7 +73,8 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: Tpa22WViLoIQHfDe
       range:
         override: false
       target:
@@ -89,20 +93,65 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: expeditious-retreat
 sort: 0
 flags: {}
-img: icons/magic/air/wind-stream-blue-gray.webp
-effects: []
+img: icons/magic/air/air-wave-gust-smoke-yellow.webp
+effects:
+  - name: Expeditious Retreat
+    img: icons/magic/air/air-wave-gust-smoke-yellow.webp
+    origin: Compendium.dnd5e.spells.Item.zPGohqJRir6MyQ3U
+    transfer: false
+    _id: Tpa22WViLoIQHfDe
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: 600
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>As a bonus action on each of your turns until the spell ends, you can
+      take the &amp;reference[Dash] action.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      createdTime: 1772824023961
+      modifiedTime: 1772824045865
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!zPGohqJRir6MyQ3U.Tpa22WViLoIQHfDe'
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037367294
-  modifiedTime: 1725992723715
+  modifiedTime: 1772824023987
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!zPGohqJRir6MyQ3U'

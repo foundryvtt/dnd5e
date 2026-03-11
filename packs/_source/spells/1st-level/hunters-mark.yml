@@ -36,12 +36,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '90'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -64,9 +67,12 @@ system:
       _id: dnd5eactivity000
       type: damage
       activation:
-        type: action
+        type: special
         value: null
-        override: false
+        override: true
+        condition: >-
+          When you hit a creature under the effects of this spell with a weapon
+          attack.
       consumption:
         targets: []
         scaling:
@@ -79,94 +85,148 @@ system:
         units: inst
         concentration: false
         override: false
-      effects:
-        - _id: maRUYUv77W8IGST3
+      effects: []
       range:
-        override: false
+        override: true
+        units: spec
+        special: ''
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          type: ''
         affects:
           choice: false
+          type: ''
         override: false
       damage:
         critical:
           allow: true
           bonus: ''
         parts:
-          - number: 1
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
             denomination: 6
             bonus: ''
             types: []
-            custom:
-              enabled: false
-              formula: ''
             scaling:
-              mode: whole
+              mode: ''
               number: null
               formula: ''
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 100000
+      name: Bonus Mark Damage
       img: ''
       appliedEffects:
         - maRUYUv77W8IGST3
+      visibility:
+        level:
+          min: null
+          max: null
+    B3ZCe8XzV7wJ2YiL:
+      type: utility
+      name: Cast
+      _id: B3ZCe8XzV7wJ2YiL
+      img: null
+      sort: 0
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: kvWA9VXTXLNvjBIn
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
   identifier: hunters-mark
 sort: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
-img: icons/magic/perception/eye-ringed-glow-angry-small-red.webp
+flags: {}
+img: icons/skills/targeting/target-strike-gray.webp
 effects:
   - name: Hunter's Mark
+    img: icons/skills/targeting/target-strike-gray.webp
     origin: Compendium.dnd5e.spells.Item.0xmXiPiuYws1OGcX
+    transfer: false
+    _id: kvWA9VXTXLNvjBIn
+    type: base
+    system: {}
+    changes: []
+    disabled: false
     duration:
       startTime: null
-      seconds: 3600
       combat: null
+      seconds: 3600
       rounds: null
       turns: null
       startRound: null
       startTurn: null
-    disabled: true
-    _id: maRUYUv77W8IGST3
-    changes: []
-    description: ''
-    transfer: false
-    statuses:
-      - marked
-    flags: {}
+    description: >-
+      <p>You have been mystically marked as the caster's quarry. Until the spell
+      ends, they deal an extra 1d6 damage to you whenever they hit you with a
+      weapon attack, and they have advantage on any Wisdom (Perception) or
+      Wisdom (Survival) check they make to find you.</p>
     tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
       exportSource: null
-    img: icons/magic/perception/eye-ringed-glow-angry-small-red.webp
-    type: base
-    system: {}
-    sort: 0
-    _key: '!items.effects!0xmXiPiuYws1OGcX.maRUYUv77W8IGST3'
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      createdTime: 1772822066856
+      modifiedTime: 1772822167647
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!0xmXiPiuYws1OGcX.kvWA9VXTXLNvjBIn'
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.3.0
   createdTime: 1725037345248
-  modifiedTime: 1750441443962
+  modifiedTime: 1772822241828
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!0xmXiPiuYws1OGcX'

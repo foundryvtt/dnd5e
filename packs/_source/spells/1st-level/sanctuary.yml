@@ -11,8 +11,10 @@ system:
       spell must first make a Wisdom saving throw. On a failed save, the
       creature must choose a new target or lose the attack or spell. This spell
       doesn't protect the warded creature from area effects, such as the
-      explosion of a Fireball.</p><p>If the warded creature makes an attack or
-      casts a spell that affects an enemy creature, this spell ends.</p>
+      explosion of a
+      @UUID[Compendium.dnd5e.spells.Item.ztgcdrWPshKRpFd0]{Fireball}.</p><p>If the warded
+      creature makes an attack or casts a spell that affects an enemy creature,
+      this spell ends.</p>
     chat: ''
   source:
     custom: ''
@@ -32,12 +34,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -61,15 +66,16 @@ system:
       _id: dnd5eactivity000
       type: save
       activation:
-        type: action
+        type: special
         value: null
-        override: false
+        override: true
+        condition: When a creature targets you with an attack or a harmful spell.
       consumption:
         targets: []
         scaling:
           allowed: false
           max: ''
-        spellSlot: true
+        spellSlot: false
       description:
         chatFlavor: ''
       duration:
@@ -78,17 +84,23 @@ system:
         override: false
       effects: []
       range:
-        override: false
+        override: true
+        units: spec
+        special: ''
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          type: ''
         affects:
           choice: false
-        override: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
       damage:
-        onSave: half
+        onSave: none
         parts: []
       save:
         ability: wis
@@ -98,20 +110,116 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
+      sort: 100000
+      name: Ward Save
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    zkVd0Ys2ky4ygeSY:
+      type: utility
+      name: Cast
+      _id: zkVd0Ys2ky4ygeSY
+      img: null
       sort: 0
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: DxExOr8qiUQ1RQbF
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
   identifier: sanctuary
 sort: 0
 flags: {}
-img: icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp
-effects: []
+img: icons/magic/holy/barrier-shield-winged-blue.webp
+effects:
+  - name: Sanctuary
+    img: icons/magic/holy/barrier-shield-winged-blue.webp
+    origin: Compendium.dnd5e.spells.Item.gvdA9nPuWLck4tBl
+    transfer: false
+    _id: DxExOr8qiUQ1RQbF
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: 60
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>You have been warded against attack. Until the spell ends, any creature
+      who targets you with an attack or a harmful spell must first make a Wisdom
+      saving throw. On a failed save, the creature must choose a new target or
+      lose the attack or spell. This spell doesn't protect you from area
+      effects, such as the explosion of a
+      @UUID[Compendium.dnd5e.spells.Item.ztgcdrWPshKRpFd0]{Fireball}.</p><p>If you make an
+      attack or casts a spell that affects an enemy creature, this spell
+      ends.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      createdTime: 1772823386664
+      modifiedTime: 1772823437650
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!gvdA9nPuWLck4tBl.DxExOr8qiUQ1RQbF'
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037362927
-  modifiedTime: 1725992722059
+  modifiedTime: 1772823486877
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!gvdA9nPuWLck4tBl'

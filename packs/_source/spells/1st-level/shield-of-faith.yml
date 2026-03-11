@@ -27,12 +27,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '60'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -74,6 +77,9 @@ system:
         override: false
       effects:
         - _id: FKDbXBUs6VJlf8ZY
+          level:
+            min: null
+            max: null
       range:
         override: false
       target:
@@ -92,11 +98,18 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: shield-of-faith
 sort: 0
 flags: {}
-img: icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp
+img: icons/magic/defensive/shield-barrier-deflect-gold.webp
 effects:
   - name: Shield of Faith
     origin: Compendium.dnd5e.spells.Item.jZ6JNykRtdQ90MOo
@@ -115,22 +128,27 @@ effects:
         mode: 2
         value: '2'
         priority: null
-    description: <p>The target gains it a +2 bonus to AC for the duration.</p>
+    description: >-
+      <p>A shimmering field appears and surrounds you, granting you a +2 bonus
+      to AC for the duration of this spell.</p>
     transfer: false
     statuses: []
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     tint: '#ffffff'
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.3.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1772821161910
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    img: icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp
+    img: icons/magic/defensive/shield-barrier-deflect-gold.webp
     type: base
     system: {}
     sort: 0
@@ -138,11 +156,11 @@ effects:
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037363559
-  modifiedTime: 1725992722266
+  modifiedTime: 1772821165498
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!jZ6JNykRtdQ90MOo'

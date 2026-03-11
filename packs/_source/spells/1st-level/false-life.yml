@@ -29,11 +29,14 @@ system:
     affects:
       type: self
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -72,7 +75,11 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: fYF3Na2tHtDcgC6j
+          level:
+            min: null
+            max: null
       range:
         override: false
       target:
@@ -95,24 +102,67 @@ system:
         scaling:
           mode: whole
           number: null
-          formula: (@item.level - 1) * 5
+          formula: '5'
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: false-life
 sort: 0
 flags: {}
-img: icons/magic/life/heart-cross-purple-orange.webp
-effects: []
+img: icons/magic/unholy/barrier-shield-glowing-pink.webp
+effects:
+  - name: False Life
+    img: icons/magic/unholy/barrier-shield-glowing-pink.webp
+    origin: Compendium.dnd5e.spells.Item.7e3QXF10hLNDEdr6
+    transfer: false
+    _id: fYF3Na2tHtDcgC6j
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: 3600
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: <p>You gain Temporary Hit Points for the duration of this spell.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      createdTime: 1772823002091
+      modifiedTime: 1772823056766
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!7e3QXF10hLNDEdr6.fYF3Na2tHtDcgC6j'
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037348285
-  modifiedTime: 1725992717308
+  modifiedTime: 1772823295743
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!7e3QXF10hLNDEdr6'

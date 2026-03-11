@@ -29,12 +29,15 @@ system:
       type: creature
       count: '5'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '60'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -72,7 +75,8 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: gMdi8F2ylxkgG58U
       range:
         override: false
       target:
@@ -91,20 +95,66 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: feather-fall
 sort: 0
 flags: {}
-img: icons/magic/air/wind-swirl-pink-purple.webp
-effects: []
+img: icons/commodities/materials/feather-blue-glowing.webp
+effects:
+  - name: Feather Fall
+    img: icons/commodities/materials/feather-blue-glowing.webp
+    origin: Compendium.dnd5e.spells.Item.pub0OWVEB71XQx1n
+    transfer: false
+    _id: gMdi8F2ylxkgG58U
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: 60
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>Your rate of descent slows to 60 feet per round until the spell ends.
+      If you land before the spell ends, you take no falling damage and can land
+      on your feet, and the spell ends for you.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      createdTime: 1772822823602
+      modifiedTime: 1772823074092
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!pub0OWVEB71XQx1n.gMdi8F2ylxkgG58U'
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037365567
-  modifiedTime: 1725992722930
+  modifiedTime: 1772823067450
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!pub0OWVEB71XQx1n'

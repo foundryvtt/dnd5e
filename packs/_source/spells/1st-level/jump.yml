@@ -6,8 +6,8 @@ type: spell
 system:
   description:
     value: >-
-      <p>You touch a creature. The creature's jump distance is tripled until the
-      spell ends.</p>
+      <p>You touch a creature. The creature's &amp;reference[jumping]{jump}
+      distance is tripled until the spell ends.</p>
     chat: ''
   source:
     custom: ''
@@ -27,11 +27,14 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -70,7 +73,8 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: 8ikEvNdNDRE9VJss
       range:
         override: false
       target:
@@ -89,20 +93,65 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: jump
 sort: 0
 flags: {}
-img: icons/magic/control/debuff-energy-hold-blue-yellow.webp
-effects: []
+img: icons/skills/movement/arrow-upward-blue.webp
+effects:
+  - name: Jump
+    img: icons/skills/movement/arrow-upward-blue.webp
+    origin: Compendium.dnd5e.spells.Item.ZrTc23tToJ0JpH2h
+    transfer: false
+    _id: 8ikEvNdNDRE9VJss
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: 60
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>Your &amp;reference[jumping]{jump} distance is tripled until the spell
+      ends.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      createdTime: 1772821819160
+      modifiedTime: 1772821881992
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!ZrTc23tToJ0JpH2h.8ikEvNdNDRE9VJss'
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037359465
-  modifiedTime: 1725992720888
+  modifiedTime: 1772821864122
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!ZrTc23tToJ0JpH2h'

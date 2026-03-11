@@ -33,9 +33,10 @@ system:
       can communicate with it telepathically. Additionally, as an action, you
       can see through your familiar's eyes and hear what it hears until the
       start of your next turn, gaining the benefits of any special senses that
-      the familiar has. During this time, you are deaf and blind with regard to
-      your own senses.</p><p>As an action, you can temporarily dismiss your
-      familiar. It disappears into a pocket dimension where it awaits your
+      the familiar has. During this time, you are &amp;reference[deafened
+      apply=false]{Deaf} and &amp;reference[blinded apply=false]{Blind} with
+      regard to your own senses.</p><p>As an action, you can temporarily dismiss
+      your familiar. It disappears into a pocket dimension where it awaits your
       summons. Alternatively, you can dismiss it forever. As an action while it
       is temporarily dismissed, you can cause it to reappear in any unoccupied
       space within 30 feet of you.</p><p>You can't have more than one familiar
@@ -65,12 +66,16 @@ system:
     affects:
       type: space
       choice: false
+      count: ''
+      special: ''
     template:
       units: any
       contiguous: false
+      type: ''
   range:
     value: '10'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -92,7 +97,6 @@ system:
     - somatic
     - material
     - ritual
-    - mgc
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -259,19 +263,64 @@ system:
       name: ''
       img: ''
       appliedEffects: []
+      effects:
+        - _id: ElS7F2Oh06jeZtpi
   identifier: find-familiar
 sort: 0
 flags: {}
-img: icons/magic/nature/wolf-paw-glow-purple-teal.webp
-effects: []
+img: icons/creatures/birds/corvid-flying-wings-purple.webp
+effects:
+  - name: Familiar
+    img: icons/creatures/birds/corvid-flying-wings-purple.webp
+    origin: Compendium.dnd5e.spells.Item.JGT5bNqu9REL7Fuz
+    transfer: false
+    _id: ElS7F2Oh06jeZtpi
+    type: base
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: '{} Familiar'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>This creature is a
+      @UUID[Compendium.dnd5e.spells.Item.JGT5bNqu9REL7Fuz]{Familiar}. A familiar
+      can't attack, but it can take other actions as normal.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      createdTime: 1772822662813
+      modifiedTime: 1772822776833
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!JGT5bNqu9REL7Fuz.ElS7F2Oh06jeZtpi'
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.350'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 5.3.0
   createdTime: 1725037352867
-  modifiedTime: 1760981511022
+  modifiedTime: 1772822662841
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!JGT5bNqu9REL7Fuz'
