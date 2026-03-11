@@ -52,69 +52,12 @@ system:
     - vocal
     - somatic
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    rttaq2XQZpjYRPc8:
       type: damage
-      activation:
-        type: ''
-        value: null
-        override: true
-        condition: ''
-      consumption:
-        targets: []
-        scaling:
-          allowed: false
-          max: ''
-        spellSlot: false
-      description:
-        chatFlavor: ''
-      duration:
-        units: inst
-        concentration: false
-        override: false
-      effects: []
-      range:
-        override: false
-      target:
-        prompt: true
-        template:
-          contiguous: false
-          units: ft
-        affects:
-          choice: false
-        override: false
-      damage:
-        critical:
-          allow: false
-          bonus: ''
-        parts:
-          - custom:
-              enabled: false
-              formula: ''
-            number: 1
-            denomination: 4
-            bonus: '1'
-            types:
-              - force
-            scaling:
-              mode: ''
-      uses:
-        spent: 0
-        recovery: []
-        max: ''
-      sort: 100000
-      name: Missile Damage
-      img: ''
-      visibility:
-        level:
-          min: null
-          max: null
-    Qvwpe9jeR1u5xjC6:
-      type: utility
       name: Cast
-      _id: Qvwpe9jeR1u5xjC6
+      _id: rttaq2XQZpjYRPc8
       img: ''
-      sort: 0
+      sort: 200000
       activation:
         type: action
         override: false
@@ -139,11 +82,9 @@ system:
           contiguous: false
           stationary: false
           units: ft
-          type: ''
         affects:
           choice: false
-          type: creature
-        override: true
+        override: false
         prompt: true
       uses:
         spent: 0
@@ -156,11 +97,20 @@ system:
         requireAttunement: false
         requireIdentification: false
         requireMagic: false
-      roll:
-        prompt: false
-        visible: false
-        name: Missiles Created
-        formula: '@item.level + 2'
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 4
+            bonus: '1'
+            types:
+              - force
+            scaling:
+              mode: ''
   identifier: magic-missile
 sort: 0
 flags: {}
@@ -173,7 +123,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 5.3.0
   createdTime: 1725037346851
-  modifiedTime: 1772821642268
+  modifiedTime: 1773254596223
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!41JIhpDyM9Anm7cs'
