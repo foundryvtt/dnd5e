@@ -1,26 +1,8 @@
 /**
- * @typedef BasePlacementConfiguration
- * @property {TokenDocument} [origin]   Token that is the origin point of the placement.
- * @property {object[]} placements      Configuration data for individual placements.
- */
-
-/**
- * @typedef BasePlacementData
- * @property {object} index
- * @property {number} index.total             Index of the placement across all placements.
- * @property {number} index.unique            Index of the placement across placements with the same unique data.
- * @property {number} x
- * @property {number} y
- * @property {number} elevation
- * @property {number} rotation
- */
-
-/* -------------------------------------------- */
-
-/**
- * @typedef {BasePlacementConfiguration} TemplatePlacementConfiguration
- * @property {number} color                                      Color to use when creating the template.
- * @property {TemplatePlacementShapeConfiguration[]} placements  Configuration data for individual placements.
+ * @typedef TemplatePlacementConfiguration
+ * @property {number} color                                  Color to use when creating the template.
+ * @property {TokenDocument} [origin]                        Token that is the origin point of the placement.
+ * @property {TemplatePlacementShapeConfiguration[]} shapes  Configuration data for individual placements.
  */
 
 /**
@@ -38,11 +20,19 @@
 /* -------------------------------------------- */
 
 /**
- * @typedef {Omit<BasePlacementConfiguration, "placements">} TokenPlacementConfiguration
+ * @typedef TokenPlacementConfiguration
+ * @property {TokenDocument} [origin]   Token that is the origin point of the placement.
  * @property {PrototypeToken[]} tokens  Prototype token information for rendering.
  */
 
 /**
- * @typedef {BasePlacementData} TokenPlacementData
+ * @typedef TokenPlacementData
  * @property {PrototypeToken} prototypeToken
+ * @property {object} index
+ * @property {number} index.total             Index of the placement across all placements.
+ * @property {number} index.unique            Index of the placement across placements with the same original token.
+ * @property {number} x
+ * @property {number} y
+ * @property {number} elevation
+ * @property {number} rotation
  */
