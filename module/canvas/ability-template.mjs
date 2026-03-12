@@ -1,5 +1,3 @@
-import TemplatePlacement from "./template-placement.mjs";
-
 /**
  * A helper class for building MeasuredTemplates for 5e spells and abilities
  */

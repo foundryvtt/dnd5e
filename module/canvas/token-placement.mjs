@@ -1,58 +1,63 @@
-import BasePlacement from "./api/base-placement.mjs";
-
 /**
  * @import { TokenPlacementConfiguration, TokenPlacementData } from "./types.mjs";
  */
 
 /**
  * Class responsible for placing one or more tokens onto the scene.
- * @extends BasePlacement<TokenPlacementConfiguration, TokenPlacementData>
  */
-export default class TokenPlacement extends BasePlacement {
-
-  /** @override */
-  static get placeableLayer() {
-    return canvas.tokens;
+export default class TokenPlacement {
+  /**
+   * Initialize the placement system using configuration information.
+   * @param {TokenPlacementConfiguration} config  Configuration information for placement.
+   */
+  constructor(config) {
+    this.config = config;
   }
 
   /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
 
-  /** @override */
-  get _placementConfigs() {
-    return this.config.tokens;
-  }
+  /**
+   * Configuration information for the placements.
+   * @type {TokenPlacementConfiguration}
+   */
+  config;
 
   /* -------------------------------------------- */
   /*  Placement                                   */
   /* -------------------------------------------- */
 
-  /** @override */
-  _createPlacementData(prototypeToken) {
-    return {
-      prototypeToken, x: 0, y: 0,
-      elevation: this.config.origin?.elevation ?? 0,
-      rotation: prototypeToken.rotation ?? 0
-    };
+  /**
+   * Perform the placement, asking player guidance when necessary.
+   * @param {TokenPlacementConfiguration} config
+   * @returns {Promise<TokenPlacementData[]>}
+   */
+  static place(config) {
+    const placement = new this(config);
+    return placement.place();
   }
 
-  /* -------------------------------------------- */
-
-  /** @override */
-  _createPreviewData(prototypeToken) {
-    const tokenData = prototypeToken.toObject();
-    tokenData.sight.enabled = false;
-    tokenData._id = foundry.utils.randomID();
-    if ( tokenData.randomImg ) tokenData.texture.src = prototypeToken.actor.img;
-    return tokenData;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  _getUniqueId(placementData) {
-    return placementData.prototypeToken.parent.id;
+  /**
+   * Perform the placement, asking player guidance when necessary.
+   * @returns {Promise<TokenPlacementData[]>}
+   */
+  async place() {
+    const results = [];
+    const uniqueTokens = new Map();
+    await canvas.tokens.placeTokens(this.config.tokens, {
+      create: false,
+      preConfirm: ({ document, index }) => {
+        const actorId = this.config.tokens[index].parent.id;
+        uniqueTokens.set(actorId, (uniqueTokens.get(actorId) ?? -1) + 1);
+        results.push({
+          x: document.x, y: document.y, elevation: document.elevation, rotation: document.rotation,
+          prototypeToken: this.config.tokens[index],
+          index: { total: index, unique: uniqueTokens.get(actorId) }
+        });
+      }
+    });
+    return results;
   }
 
   /* -------------------------------------------- */

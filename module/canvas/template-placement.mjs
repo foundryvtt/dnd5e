@@ -1,27 +1,80 @@
 import { convertLength } from "../utils.mjs";
-import BasePlacement from "./api/base-placement.mjs";
 
 /**
- * @import { TemplatePlacementConfiguration, TemplatePlacementData } from "./types.mjs";
+ * @import {
+ *   TemplatePlacementConfiguration, TemplatePlacementData, TemplatePlacementShapeConfiguration
+ * } from "./types.mjs";
  */
 
 /**
- * Class responsible for placing one or more tokens onto the scene.
- * @extends BasePlacement<TemplatePlacementConfiguration, TemplatePlacementData>
+ * Class responsible for placing templates onto the scene.
  */
-export default class TemplatePlacement extends BasePlacement {
-
-  /** @override */
-  static get placeableLayer() {
-    return canvas.regions;
+export default class TemplatePlacement {
+  /**
+   * Initialize the placement system using configuration information.
+   * @param {TemplatePlacementConfiguration} config  Configuration information for placement.
+   */
+  constructor(config) {
+    this.config = config;
   }
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Configuration information for the placements.
+   * @type {TemplatePlacementConfiguration}
+   */
+  config;
 
   /* -------------------------------------------- */
   /*  Placement                                   */
   /* -------------------------------------------- */
 
-  /** @override */
-  _createPlacementData({ type, ...baseSizes }) {
+  /**
+   * Perform the placement, asking player guidance when necessary.
+   * @param {TemplatePlacementConfiguration} config
+   * @returns {Promise<TemplatePlacementData[]>}
+   */
+  static place(config) {
+    const placement = new this(config);
+    return placement.place();
+  }
+
+  /**
+   * Perform the placement, asking player guidance when necessary.
+   * @returns {Promise<TemplatePlacementData[]>}
+   */
+  async place() {
+    const results = [];
+    await canvas.regions.placeRegion({
+      name: RegionDocument.implementation.defaultName({ parent: canvas.scene }),
+      color: this.config.color,
+      displayMeasurements: true,
+      highlightMode: "coverage",
+      shapes: this.config.shapes.map(s => this.#createShapeData(s)),
+      "flags.core.MeasuredTemplate": true
+    }, {
+      // TODO: `attachToToken: true` if emanation
+      create: false,
+      preConfirm: ({ document, index }) => {
+        const obj = document.toObject();
+        results.push({ ...obj.shapes.at(-1) });
+        // TODO: Set token ID if emanation attached to token
+      }
+    });
+    return results;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create data for each shape using the standard config.
+   * @param {TemplatePlacementShapeConfiguration}
+   * @returns {Partial<BaseShapeData>}
+   */
+  #createShapeData({ type, ...baseSizes }) {
     const gridMultiplier = canvas.scene.grid.size / canvas.scene.grid.distance;
     const size = baseSizes.size * gridMultiplier;
     const width = baseSizes.width * gridMultiplier;
@@ -36,45 +89,6 @@ export default class TemplatePlacement extends BasePlacement {
       case "rectangle": return { ...data, width: size, height: size, type: "rectangle" };
       case "ring": return { ...data, radius: size, outerWidth: width };
     }
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  _createPreviewData(placementConfig, placementData) {
-    return {
-      name: RegionDocument.implementation.defaultName({ parent: canvas.scene }),
-      color: this.config.color,
-      displayMeasurements: true,
-      highlightMode: "coverage",
-      shapes: [foundry.utils.deepClone(placementData)],
-      "flags.core.MeasuredTemplate": true
-    };
-  }
-
-  /* -------------------------------------------- */
-  /*  Event Handlers                              */
-  /* -------------------------------------------- */
-
-  /** @override */
-  _onMovePlacement(event, preview, placement) {
-    const shape = preview.shapes[0].toObject();
-    const local = event.data.getLocalPosition(this.layer);
-    const dest = !event.shiftKey ? this.layer.getSnappedPoint(local) : local;
-    placement.x = shape.x = dest.x;
-    placement.y = shape.y = dest.y;
-    preview.updateSource({ shapes: [shape] });
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  _onRotatePlacement(event, preview, placement) {
-    if ( ["circle", "emanation", "ring"].includes(placement.type) ) return;
-    const snap = event.shiftKey ? 5 : canvas.grid.type > CONST.GRID_TYPES.SQUARE ? 30 : 15;
-    const shape = preview.shapes[0].toObject();
-    placement.rotation = shape.rotation += snap * Math.sign(event.deltaY || event.deltaX);
-    preview.updateSource({ shapes: [shape] });
   }
 
   /* -------------------------------------------- */
@@ -103,7 +117,7 @@ export default class TemplatePlacement extends BasePlacement {
 
     const config = foundry.utils.mergeObject({
       color: game.user.color,
-      placements: Array.fromRange(target.count || 1).map(() => foundry.utils.deepClone(templateData))
+      shapes: Array.fromRange(target.count || 1).map(() => foundry.utils.deepClone(templateData))
     }, placementConfig);
 
     /**
