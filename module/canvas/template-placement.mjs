@@ -47,24 +47,29 @@ export default class TemplatePlacement {
    * @returns {Promise<TemplatePlacementData[]>}
    */
   async place() {
-    const results = [];
-    await canvas.regions.placeRegion({
-      name: RegionDocument.implementation.defaultName({ parent: canvas.scene }),
-      color: this.config.color,
-      displayMeasurements: true,
-      highlightMode: "coverage",
-      shapes: this.config.shapes.map(s => this.#createShapeData(s)),
-      "flags.core.MeasuredTemplate": true
-    }, {
-      // TODO: `attachToToken: true` if emanation
-      create: false,
-      preConfirm: ({ document, index }) => {
-        const obj = document.toObject();
-        results.push({ ...obj.shapes.at(-1) });
-        // TODO: Set token ID if emanation attached to token
-      }
-    });
-    return results;
+    const activeLayer = canvas.activeLayer;
+    try {
+      const results = [];
+      await canvas.regions.placeRegion({
+        name: RegionDocument.implementation.defaultName({ parent: canvas.scene }),
+        color: this.config.color,
+        displayMeasurements: true,
+        highlightMode: "coverage",
+        shapes: this.config.shapes.map(s => this.#createShapeData(s)),
+        "flags.core.MeasuredTemplate": true
+      }, {
+        // TODO: `attachToToken: true` if emanation
+        create: false,
+        preConfirm: ({ document, index }) => {
+          const obj = document.toObject();
+          results.push({ ...obj.shapes.at(-1) });
+          // TODO: Set token ID if emanation attached to token
+        }
+      });
+      return results;
+    } finally {
+      if ( activeLayer !== canvas.activeLayer ) activeLayer.activate();
+    }
   }
 
   /* -------------------------------------------- */
