@@ -43,21 +43,26 @@ export default class TokenPlacement {
    * @returns {Promise<TokenPlacementData[]>}
    */
   async place() {
-    const results = [];
-    const uniqueTokens = new Map();
-    await canvas.tokens.placeTokens(this.config.tokens, {
-      create: false,
-      preConfirm: ({ document, index }) => {
-        const actorId = this.config.tokens[index].parent.id;
-        uniqueTokens.set(actorId, (uniqueTokens.get(actorId) ?? -1) + 1);
-        results.push({
-          x: document.x, y: document.y, elevation: document.elevation, rotation: document.rotation,
-          prototypeToken: this.config.tokens[index],
-          index: { total: index, unique: uniqueTokens.get(actorId) }
-        });
-      }
-    });
-    return results;
+    const activeLayer = canvas.activeLayer;
+    try {
+      const results = [];
+      const uniqueTokens = new Map();
+      await canvas.tokens.placeTokens(this.config.tokens, {
+        create: false,
+        preConfirm: ({ document, index }) => {
+          const actorId = this.config.tokens[index].parent.id;
+          uniqueTokens.set(actorId, (uniqueTokens.get(actorId) ?? -1) + 1);
+          results.push({
+            x: document.x, y: document.y, elevation: document.elevation, rotation: document.rotation,
+            prototypeToken: this.config.tokens[index],
+            index: { total: index, unique: uniqueTokens.get(actorId) }
+          });
+        }
+      });
+      return results;
+    } finally {
+      if ( activeLayer !== canvas.activeLayer ) activeLayer.activate();
+    }
   }
 
   /* -------------------------------------------- */
