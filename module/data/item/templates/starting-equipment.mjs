@@ -7,7 +7,7 @@ const {
 } = foundry.data.fields;
 
 /**
- * @import { StartingEquipmentTemplate } from "./_types.mjs";
+ * @import { StartingEquipmentTemplateData } from "./_types.mjs";
  */
 
 /**
