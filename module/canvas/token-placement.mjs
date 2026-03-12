@@ -47,7 +47,7 @@ export default class TokenPlacement {
     try {
       const results = [];
       const uniqueTokens = new Map();
-      await canvas.tokens.placeTokens(this.config.tokens, {
+      await canvas.tokens.placeTokens(this.config.tokens.map(t => t.toObject()), {
         create: false,
         preConfirm: ({ document, index }) => {
           const actorId = this.config.tokens[index].parent.id;
