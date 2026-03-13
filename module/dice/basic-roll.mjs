@@ -103,6 +103,7 @@ export default class BasicRoll extends Roll {
     }
 
     this.applyKeybindings(config, dialog, message);
+    dialog.sheet ??= foundry.applications.instances.get(config.event?.target?.closest(".application")?.id);
 
     let rolls;
     if ( dialog.configure === false ) {

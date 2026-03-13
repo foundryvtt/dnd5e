@@ -1383,24 +1383,22 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   static #roll(event, target) {
     if ( !target.classList.contains("rollable") ) return;
     if ( this._roll(event, target) === false ) return;
-    const sheet = foundry.applications.instances.get(event?.target?.closest(".application")?.id) ?? this;
-    const dialog = { sheet };
     switch ( target.dataset.type ) {
       case "ability":
         const ability = target.closest("[data-ability]")?.dataset.ability;
-        if ( ability === "concentration" ) return this.actor.rollConcentration({ event, legacy: false }, dialog);
+        if ( ability === "concentration" ) return this.actor.rollConcentration({ event, legacy: false });
         else if ( target.classList.contains("saving-throw") ) {
-          return this.actor.rollSavingThrow({ ability, event }, dialog);
+          return this.actor.rollSavingThrow({ ability, event });
         }
-        else return this.actor.rollAbilityCheck({ ability, event }, dialog);
+        else return this.actor.rollAbilityCheck({ ability, event });
       case "deathSave":
-        return this.actor.rollDeathSave({ event, legacy: false }, dialog);
+        return this.actor.rollDeathSave({ event, legacy: false });
       case "initiative":
-        return this.actor.rollInitiativeDialog({ event }, dialog);
+        return this.actor.rollInitiativeDialog({ event });
       case "skill":
-        return this.actor.rollSkill({ event, skill: target.closest("[data-key]")?.dataset.key }, dialog);
+        return this.actor.rollSkill({ event, skill: target.closest("[data-key]")?.dataset.key });
       case "tool":
-        return this.actor.rollToolCheck({ event, tool: target.closest("[data-key]")?.dataset.key }, dialog);
+        return this.actor.rollToolCheck({ event, tool: target.closest("[data-key]")?.dataset.key });
     }
   }
 

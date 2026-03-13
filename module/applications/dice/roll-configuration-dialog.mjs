@@ -416,7 +416,7 @@ export default class RollConfigurationDialog extends Dialog5e {
     return new Promise(resolve => {
       const app = new this(config, message, dialog.options);
       app.addEventListener("close", () => resolve(app.rolls), { once: true });
-      if ( dialog.sheet ) dialog.sheet._renderChild(app);
+      if ( dialog.sheet?._renderChild ) dialog.sheet._renderChild(app);
       else app.render({ force: true });
     });
   }
