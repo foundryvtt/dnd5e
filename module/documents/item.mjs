@@ -707,7 +707,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       let messageConfig = message;
       let activity = activities[0];
       if ( ((activities.length > 1) || chooseActivity) && !event?.shiftKey ) {
-        activity = await ActivityChoiceDialog.create(this);
+        activity = await ActivityChoiceDialog.create(this, { sheet: dialog.options?.sheet });
       }
       if ( !activity ) return;
       return activity.use(usageConfig, dialogConfig, messageConfig);

@@ -834,7 +834,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
    * @protected
    */
   _onUseActivity(activity, { event }={}) {
-    return activity?.use({ event });
+    return activity?.use({ event }, { options: { sheet: this.#app } });
   }
 
   /* -------------------------------------------- */
@@ -848,7 +848,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
    * @protected
    */
   _onUseItem(item, { event }={}) {
-    return item.use({ event });
+    return item.use({ event }, { options: { sheet: this.#app } });
   }
 
   /* -------------------------------------------- */

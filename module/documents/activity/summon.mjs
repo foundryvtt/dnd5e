@@ -159,8 +159,10 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
     }
 
     const tokensData = [];
-    const minimized = !this.actor?.sheet._minimized;
-    await this.actor?.sheet.minimize();
+    const sheet = this.actor?.sheet;
+    const { windowId } = (sheet?.parent ?? sheet)?.window ?? {};
+    const minimize = (game.release.generation < 14 || !windowId) && !sheet?._minimized;
+    if ( minimize ) await sheet?.minimize();
     try {
       // Figure out where to place the summons
       const placements = await this.getPlacement(actor.prototypeToken, profile, options);
@@ -203,7 +205,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
         tokensData.push(tokenData);
       }
     } finally {
-      if ( minimized ) this.actor?.sheet.maximize();
+      if ( minimize ) sheet?.maximize();
     }
 
     const createdTokens = await canvas.scene.createEmbeddedDocuments("Token", tokensData, {

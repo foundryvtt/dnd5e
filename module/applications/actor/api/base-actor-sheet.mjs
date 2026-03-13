@@ -1383,7 +1383,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   static #roll(event, target) {
     if ( !target.classList.contains("rollable") ) return;
     if ( this._roll(event, target) === false ) return;
-    const dialog = { sheet: this };
+    const sheet = foundry.applications.instances.get(event?.target?.closest(".application")?.id) ?? this;
+    const dialog = { sheet };
     switch ( target.dataset.type ) {
       case "ability":
         const ability = target.closest("[data-ability]")?.dataset.ability;

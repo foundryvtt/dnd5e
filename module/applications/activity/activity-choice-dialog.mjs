@@ -138,13 +138,15 @@ export default class ActivityChoiceDialog extends Application5e {
    * Display the activity choice dialog.
    * @param {Item5e} item                         The Item whose activities are being chosen.
    * @param {ApplicationConfiguration} [options]  Application configuration options.
+   * @param {ApplicationV2} [options.sheet]       The sheet to render this dialog a child of.
    * @returns {Promise<Activity|null>}            The chosen activity, or null if the dialog was dismissed.
    */
-  static create(item, options) {
+  static create(item, { sheet, ...options }={}) {
     return new Promise(resolve => {
       const dialog = new this(item, options);
       dialog.addEventListener("close", () => resolve(dialog.activity), { once: true });
-      dialog.render({ force: true });
+      if ( sheet ) sheet._renderChild(dialog);
+      else dialog.render({ force: true });
     });
   }
 }

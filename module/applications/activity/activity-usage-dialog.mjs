@@ -545,18 +545,19 @@ export default class ActivityUsageDialog extends Dialog5e {
    * @param {Activity} activity                Activity to use.
    * @param {ActivityUseConfiguration} config  Configuration data for the usage.
    * @param {object} options                   Additional options for the application.
+   * @param {ApplicationV2} [options.sheet]    The sheet to render this dialog a child of.
    * @returns {Promise<object|null>}           Form data object with results of the activation.
    */
-  static async create(activity, config, options) {
+  static async create(activity, config, { sheet, ...options }={}) {
     if ( !activity.item.isOwned ) throw new Error("Cannot activate an activity that is not owned.");
-
     return new Promise((resolve, reject) => {
       const dialog = new this({ activity, config, ...options });
-      dialog.addEventListener("close", event => {
+      dialog.addEventListener("close", () => {
         if ( dialog.used ) resolve(dialog.config);
         else reject();
       }, { once: true });
-      dialog.render({ force: true });
+      if ( sheet ) sheet._renderChild(dialog);
+      else dialog.render({ force: true });
     });
   }
 }

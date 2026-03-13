@@ -243,10 +243,13 @@ export async function enrichAttack(config, label, options) {
  */
 async function rollAttack(config, event) {
   const { activityUuid, attackMode, formula, scaling } = config;
+  let sheet;
+  const app = foundry.applications.instances.get(event?.target?.closest(".application")?.id);
+  if ( app?._renderChild ) sheet = app;
 
   if ( activityUuid ) {
     const activity = await _fetchActivity(activityUuid, Number(scaling ?? 0));
-    if ( activity ) return activity.rollAttack({ attackMode, event });
+    if ( activity ) return activity.rollAttack({ attackMode, event }, { sheet });
   }
 
   const targets = getTargetDescriptors();
@@ -261,9 +264,7 @@ async function rollAttack(config, event) {
     }]
   };
 
-  const dialogConfig = {
-    applicationClass: AttackRollConfigurationDialog
-  };
+  const dialogConfig = { applicationClass: AttackRollConfigurationDialog, sheet };
 
   const messageConfig = {
     data: {
@@ -774,22 +775,24 @@ async function rollCheckSave(config, event) {
     return;
   }
 
+  const app = foundry.applications.instances.get(event?.target?.closest(".application")?.id);
+  const dialog = app?._renderChild ? { sheet: app } : {};
   for ( const actor of actors ) {
     switch ( type ) {
       case "check":
-        await actor.rollAbilityCheck(options);
+        await actor.rollAbilityCheck(options, dialog);
         break;
       case "concentration":
-        await actor.rollConcentration(options);
+        await actor.rollConcentration(options, dialog);
         break;
       case "save":
-        await actor.rollSavingThrow(options);
+        await actor.rollSavingThrow(options, dialog);
         break;
       case "skill":
-        await actor.rollSkill({ skill, tool: config.usingTool, ...options });
+        await actor.rollSkill({ skill, tool: config.usingTool, ...options }, dialog);
         break;
       case "tool":
-        await actor.rollToolCheck({ tool, ...options });
+        await actor.rollToolCheck({ tool, ...options }, dialog);
         break;
     }
   }
@@ -1019,10 +1022,13 @@ export async function enrichDamage(configs, label, options) {
  */
 async function rollDamage(config, event) {
   let { activityUuid, attackMode, formulas, damageTypes, rollType, scaling } = config;
+  let sheet;
+  const app = foundry.applications.instances.get(event?.target?.closest(".application")?.id);
+  if ( app?._renderChild ) sheet = app;
 
   if ( activityUuid ) {
     const activity = await _fetchActivity(activityUuid, Number(scaling ?? 0));
-    if ( activity ) return activity.rollDamage({ attackMode, event });
+    if ( activity ) return activity.rollDamage({ attackMode, event }, { sheet });
   }
 
   formulas = formulas?.split("&") ?? [];
@@ -1055,7 +1061,7 @@ async function rollDamage(config, event) {
     }
   };
 
-  const rolls = await CONFIG.Dice.DamageRoll.build(rollConfig, {}, messageConfig);
+  const rolls = await CONFIG.Dice.DamageRoll.build(rollConfig, { sheet }, messageConfig);
   if ( !rolls?.length ) return;
   Hooks.callAll("dnd5e.rollDamage", rolls);
   Hooks.callAll("dnd5e.rollDamageV2", rolls);
