@@ -957,7 +957,7 @@ export default function ActivityMixin(Base) {
         entries.push({
           name: "DND5E.ContextMenuActionEdit",
           icon: '<i class="fas fa-pen-to-square fa-fw"></i>',
-          callback: () => this.sheet.render({ force: true })
+          callback: () => this.item.sheet._renderChild(this.sheet)
         }, {
           name: "DND5E.ContextMenuActionDuplicate",
           icon: '<i class="fas fa-copy fa-fw"></i>',
@@ -969,13 +969,13 @@ export default function ActivityMixin(Base) {
         }, {
           name: "DND5E.ContextMenuActionDelete",
           icon: '<i class="fas fa-trash fa-fw"></i>',
-          callback: () => this.deleteDialog()
+          callback: () => this.deleteDialog({ sheet: this.item.sheet })
         });
       } else {
         entries.push({
           name: "DND5E.ContextMenuActionView",
           icon: '<i class="fas fa-eye fa-fw"></i>',
-          callback: () => this.sheet.render({ force: true })
+          callback: () => this.item.sheet._renderChild(this.sheet)
         });
       }
 

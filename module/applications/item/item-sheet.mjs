@@ -675,11 +675,11 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
   /** @override */
   _addDocument() {
     if ( this.tabGroups.primary === "activities" ) {
-      return dnd5e.documents.activity.UtilityActivity.createDialog({}, { parent: this.item });
+      return dnd5e.documents.activity.UtilityActivity.createDialog({}, { parent: this.item }, { sheet: this });
     }
 
     if ( this.tabGroups.primary === "advancement" ) {
-      return dnd5e.documents.advancement.Advancement.createDialog({}, { parent: this.item });
+      return dnd5e.documents.advancement.Advancement.createDialog({}, { parent: this.item }, { sheet: this });
     }
 
     if ( this.tabGroups.primary === "effects" ) {
@@ -687,7 +687,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
         name: this.document.name,
         img: this.document.img,
         origin: this.document.uuid
-      }, { parent: this.document, renderSheet: true });
+      }, { parent: this.document, renderSheet: true }, { sheet: this });
     }
   }
 
@@ -715,7 +715,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
   static async #deleteDocument(event, target) {
     const uuid = target.closest("[data-uuid]").dataset?.uuid;
     const doc = await fromUuid(uuid);
-    doc?.deleteDialog();
+    doc?.deleteDialog({ sheet: this });
   }
 
   /* -------------------------------------------- */
@@ -769,7 +769,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
   static #modifyAdvancementChoices(event, target) {
     const level = target.closest("[data-level]")?.dataset.level;
     const manager = AdvancementManager.forModifyChoices(this.actor, this.item.id, Number(level));
-    if ( manager.steps.length ) manager.render({ force: true });
+    if ( manager.steps.length ) this._renderChild(manager);
   }
 
   /* -------------------------------------------- */
@@ -806,7 +806,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
   static async #showDocument(event, target) {
     const uuid = target.closest("[data-uuid]")?.dataset.uuid;
     const doc = await fromUuid(uuid);
-    doc?.sheet?.render({ force: true });
+    if ( doc?.sheet ) this._renderChild(doc.sheet);
   }
 
   /* -------------------------------------------- */
@@ -1040,7 +1040,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     if ( !advancements.length ) return false;
     if ( this.item.actor?.system.metadata?.supportsAdvancement && !game.settings.get("dnd5e", "disableAdvancements") ) {
       const manager = AdvancementManager.forNewAdvancement(this.item.actor, this.item.id, advancements);
-      if ( manager.steps.length ) return manager.render(true);
+      if ( manager.steps.length ) return this._renderChild(manager);
     }
 
     // If no advancements need to be applied, just add them to the item

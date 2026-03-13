@@ -586,7 +586,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
    * @protected
    */
   _onDeleteItem(item) {
-    return item.deleteDialog();
+    return item.deleteDialog({ sheet: this.app });
   }
 
   /* -------------------------------------------- */

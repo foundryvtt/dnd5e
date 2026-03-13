@@ -363,7 +363,7 @@ export default function PrimarySheetMixin(Base) {
       if ( await this._deleteDocument(event, target) === false ) return;
       const uuid = target.closest("[data-uuid]")?.dataset.uuid;
       const doc = await fromUuid(uuid);
-      doc?.deleteDialog();
+      doc?.deleteDialog({ sheet: this });
     }
 
     /* -------------------------------------------- */

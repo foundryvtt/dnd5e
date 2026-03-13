@@ -226,16 +226,19 @@ export default function PseudoDocumentMixin(Base) {
      * @param {object} [options]           Positioning and sizing options for the resulting dialog.
      * @returns {Promise<PseudoDocument>}  A Promise which resolves to the deleted PseudoDocument.
      */
-    async deleteDialog(options={}) {
+    async deleteDialog({ sheet, ...options }={}) {
       const type = game.i18n.localize(this.metadata.label);
-      return foundry.applications.api.Dialog.confirm({
+      const config = foundry.utils.mergeObject({
         window: { title: `${game.i18n.format("DOCUMENT.Delete", { type })}: ${this.name || this.title}` },
-        content: `<p><strong>${game.i18n.localize("AreYouSure")}</strong> ${game.i18n.format("SIDEBAR.DeleteWarning", {
-          type
-        })}</p>`,
-        yes: { callback: this.delete.bind(this) },
-        ...options
-      });
+        content: `
+          <p>
+            <strong>${game.i18n.localize("AreYouSure")}</strong> ${game.i18n.format("SIDEBAR.DeleteWarning", { type })}
+          </p>
+        `,
+        yes: { callback: this.delete.bind(this) }
+      }, options);
+      if ( sheet ) return sheet._confirmDialog(config);
+      return foundry.applications.api.DialogV2.confirm(config);
     }
 
     /* -------------------------------------------- */

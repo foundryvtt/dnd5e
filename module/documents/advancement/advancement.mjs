@@ -340,7 +340,7 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancementData
       {
         name: "DND5E.ADVANCEMENT.Action.Edit",
         icon: "<i class='fas fa-edit fa-fw'></i>",
-        callback: () => this.sheet?.render(true)
+        callback: () => this.item.sheet._renderChild(this.sheet)
       },
       {
         name: "DND5E.ADVANCEMENT.Action.Duplicate",
@@ -362,7 +362,7 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancementData
     return [{
       name: "DND5E.ADVANCEMENT.Action.View",
       icon: "<i class='fas fa-eye fa-fw'></i>",
-      callback: () => this.sheet?.render(true)
+      callback: () => this.item.sheet._renderChild(this.sheet)
     }];
   }
 

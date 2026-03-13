@@ -161,9 +161,11 @@
  * Configuration data for the roll prompt.
  *
  * @typedef BasicRollDialogConfiguration
- * @property {boolean} [configure=true]  Display a configuration dialog for the rolling process.
+ * @property {boolean} [configure=true]                           Display a configuration dialog for the rolling
+ *                                                                process.
  * @property {typeof RollConfigurationDialog} [applicationClass]  Alternate configuration application to use.
  * @property {BasicRollConfigurationDialogOptions} [options]      Additional options passed to the dialog.
+ * @property {ApplicationV2} [sheet]                              Sheet to render the dialog as a child of.
  */
 
 /**

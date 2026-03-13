@@ -258,7 +258,7 @@ export default class TransformDialog extends Dialog5e {
    */
   static async promptSettings(host, source, options={}) {
     return new Promise(resolve => {
-      const { detached, ...dialogOptions } = options;
+      const { windowId, ...dialogOptions } = options;
       dialogOptions.transform ??= {};
       dialogOptions.transform.host = host;
       dialogOptions.transform.source = source;
@@ -266,7 +266,7 @@ export default class TransformDialog extends Dialog5e {
       dialog.addEventListener("close", event =>
         resolve(dialog.shouldTransform ? dialog.settings : null)
       , { once: true });
-      dialog.render({ force: true, ...(detached ? { window: { detached: true } } : {}) });
+      dialog.render({ force: true, ...(windowId ? { window: { windowId, detached: true } } : {}) });
     });
   }
 }

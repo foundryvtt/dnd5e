@@ -1157,15 +1157,16 @@ export default class CompendiumBrowser extends Application5e {
   /**
    * Factory method used to spawn a compendium browser and wait for the results of a selection.
    * @param {Partial<CompendiumBrowserConfiguration>} [options]
+   * @param {object} [renderOptions]  Options passed to render.
    * @returns {Promise<Set<string>|null>}
    */
-  static async select(options={}) {
-    return new Promise((resolve, reject) => {
+  static async select(options={}, renderOptions={}) {
+    return new Promise(resolve => {
       const browser = new CompendiumBrowser(options);
-      browser.addEventListener("close", event => {
+      browser.addEventListener("close", () => {
         resolve(browser.selected?.size ? browser.selected : null);
       }, { once: true });
-      browser.render({ force: true });
+      browser.render({ force: true, ...renderOptions });
     });
   }
 
@@ -1174,11 +1175,13 @@ export default class CompendiumBrowser extends Application5e {
   /**
    * Factory method used to spawn a compendium browser and return a single selected item or null if canceled.
    * @param {Partial<CompendiumBrowserConfiguration>} [options]
+   * @param {object} [renderOptions]  Options passed to render.
    * @returns {Promise<string|null>}
    */
-  static async selectOne(options={}) {
+  static async selectOne(options={}, renderOptions={}) {
     const result = await this.select(
-      foundry.utils.mergeObject(options, { selection: { min: 1, max: 1 } }, { inplace: false })
+      foundry.utils.mergeObject(options, { selection: { min: 1, max: 1 } }, { inplace: false }),
+      renderOptions
     );
     return result?.size ? result.first() : null;
   }

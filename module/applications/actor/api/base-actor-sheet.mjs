@@ -1178,7 +1178,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     const actor = this.inventorySource;
     const types = this._addDocumentItemTypes(this.tabGroups.primary)
       .filter(type => !CONFIG.Item.dataModels[type].metadata?.singleton || !actor.itemTypes[type].length);
-    if ( types.length > 1 ) return Item.implementation.createDialog({}, { types, parent: actor });
+    if ( types.length > 1 ) return Item.implementation.createDialog({}, { types, parent: actor }, { sheet: this });
 
     const type = types[0];
     return Item.implementation.create({
@@ -1220,10 +1220,12 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     if ( !game.settings.get("dnd5e", "disableAdvancements") ) {
       const manager = AdvancementManager.forLevelChange(this.actor, classId, delta);
       if ( manager.steps.length ) {
-        if ( delta > 0 ) return manager.render({ force: true });
+        if ( delta > 0 ) return this._renderChild(manager);
         try {
-          const shouldRemoveAdvancements = await AdvancementConfirmationDialog.forLevelDown(classItem);
-          if ( shouldRemoveAdvancements ) return manager.render({ force: true });
+          const shouldRemoveAdvancements = await AdvancementConfirmationDialog.forLevelDown(classItem, {
+            sheet: this
+          });
+          if ( shouldRemoveAdvancements ) return this._renderChild(manager);
         }
         catch(err) {
           return;
@@ -1381,20 +1383,23 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   static #roll(event, target) {
     if ( !target.classList.contains("rollable") ) return;
     if ( this._roll(event, target) === false ) return;
+    const dialog = { sheet: this };
     switch ( target.dataset.type ) {
       case "ability":
         const ability = target.closest("[data-ability]")?.dataset.ability;
-        if ( ability === "concentration" ) return this.actor.rollConcentration({ event, legacy: false });
-        else if ( target.classList.contains("saving-throw") ) return this.actor.rollSavingThrow({ ability, event });
-        else return this.actor.rollAbilityCheck({ ability, event });
+        if ( ability === "concentration" ) return this.actor.rollConcentration({ event, legacy: false }, dialog);
+        else if ( target.classList.contains("saving-throw") ) {
+          return this.actor.rollSavingThrow({ ability, event }, dialog);
+        }
+        else return this.actor.rollAbilityCheck({ ability, event }, dialog);
       case "deathSave":
-        return this.actor.rollDeathSave({ event, legacy: false });
+        return this.actor.rollDeathSave({ event, legacy: false }, dialog);
       case "initiative":
-        return this.actor.rollInitiativeDialog({ event });
+        return this.actor.rollInitiativeDialog({ event }, dialog);
       case "skill":
-        return this.actor.rollSkill({ event, skill: target.closest("[data-key]")?.dataset.key });
+        return this.actor.rollSkill({ event, skill: target.closest("[data-key]")?.dataset.key }, dialog);
       case "tool":
-        return this.actor.rollToolCheck({ event, tool: target.closest("[data-key]")?.dataset.key });
+        return this.actor.rollToolCheck({ event, tool: target.closest("[data-key]")?.dataset.key }, dialog);
     }
   }
 
@@ -1713,7 +1718,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     // Configure the transformation
     const settings = await TransformDialog.promptSettings(this.actor, actor, {
       transform: { settings: game.settings.get("dnd5e", "transformationSettings") },
-      detached: !!this.window?.windowId
+      windowId: this.window?.windowId
     });
     if ( !settings ) return;
     await game.settings.set("dnd5e", "transformationSettings", settings.toObject());
