@@ -403,9 +403,10 @@ export default function ApplicationV2Mixin(Base, { handlebars=true }={}) {
           foundry.utils.mergeObject(
             { action: "no", icon: "fa-solid fa-xmark", label: game.i18n.localize("No") }, no
           )
-        ]
+        ],
+        submit: result => resolve(result)
       });
-      app.addEventListener("close", () => resolve(app.result), { once: true });
+      app.addEventListener("close", () => resolve(null), { once: true });
       this._renderChild(app);
       return promise;
     }

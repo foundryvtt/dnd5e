@@ -179,7 +179,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
         types: new Set(["feat"])
       }
     };
-    const result = await CompendiumBrowser.selectOne({ filters, tab: "feats" });
+    const result = await CompendiumBrowser.selectOne({ filters, tab: "feats" }, this.manager?._detachOptions());
     if ( !result ) return;
 
     // TODO: Remove this unnecessary check when https://github.com/foundryvtt/dnd5e/issues/5139 is implemented

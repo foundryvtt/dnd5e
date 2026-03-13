@@ -577,7 +577,10 @@ export default class AdvancementManager extends Application5e {
     } else {
       this.step.flow.manager ??= this;
       await this.step.flow.render({ force: true });
-      this.step.flow._insertElement(this.step.flow.element);
+      const doc = this.element.ownerDocument;
+      const existing = doc.getElementById(this.step.flow.element.id);
+      if ( existing ) existing.replaceWith(this.step.flow.element);
+      else this.step.flow._insertElement(this.step.flow.element);
     }
     this.setPosition();
   }
@@ -589,30 +592,22 @@ export default class AdvancementManager extends Application5e {
   /** @inheritDoc */
   async close(options={}) {
     if ( !options.skipConfirmation ) {
-      return new foundry.applications.api.Dialog({
+      const result = await this._confirmDialog({
         window: {
           title: `${game.i18n.localize("DND5E.ADVANCEMENT.Manager.ClosePrompt.Title")}: ${this.actor.name}`
         },
         position: { width: 400 },
         content: game.i18n.localize("DND5E.ADVANCEMENT.Manager.ClosePrompt.Message"),
-        buttons: [
-          {
-            action: "stop",
-            icon: "fas fa-times",
-            label: game.i18n.localize("DND5E.ADVANCEMENT.Manager.ClosePrompt.Action.Stop"),
-            default: true,
-            callback: () => {
-              this.#visualizer?.close();
-              super.close(options);
-            }
-          },
-          {
-            action: "continue",
-            icon: "fas fa-chevron-right",
-            label: game.i18n.localize("DND5E.ADVANCEMENT.Manager.ClosePrompt.Action.Continue")
-          }
-        ]
-      }).render({ force: true });
+        yes: {
+          icon: "fas fa-times",
+          label: game.i18n.localize("DND5E.ADVANCEMENT.Manager.ClosePrompt.Action.Stop")
+        },
+        no: {
+          icon: "fas fa-chevron-right",
+          label: game.i18n.localize("DND5E.ADVANCEMENT.Manager.ClosePrompt.Action.Continue")
+        }
+      });
+      if ( result !== "yes" ) return;
     }
     this.#visualizer?.close();
     await super.close(options);
@@ -863,11 +858,11 @@ export default class AdvancementManager extends Application5e {
    * @returns {Promise}
    */
   async #restart(event) {
-    const restart = await foundry.applications.api.Dialog.confirm({
+    const result = await this._confirmDialog({
       window: { title: game.i18n.localize("DND5E.ADVANCEMENT.Manager.RestartPrompt.Title") },
       content: `<p>${game.i18n.localize("DND5E.ADVANCEMENT.Manager.RestartPrompt.Message")}</p>`
     });
-    if ( !restart ) return;
+    if ( result !== "yes" ) return;
     // While there is still a renderable step.
     while ( this.steps.slice(0, this.#stepIndex).some(s => !s.automatic) ) {
       await this.#backward(event, {render: false});

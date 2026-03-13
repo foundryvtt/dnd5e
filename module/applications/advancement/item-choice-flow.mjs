@@ -260,7 +260,9 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
       }, {});
     }
 
-    const result = await CompendiumBrowser.select({ filters, selection: { min: 1, max: max - current } });
+    const result = await CompendiumBrowser.select({
+      filters, selection: { min: 1, max: max - current }
+    }, this.manager?._detachOptions());
     if ( !result?.size ) return;
 
     const selected = Array.from(result).filter(uuid => !this.selected.has(uuid));

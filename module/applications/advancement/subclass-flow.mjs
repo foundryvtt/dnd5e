@@ -77,7 +77,7 @@ export default class SubclassFlow extends AdvancementFlow {
         types: new Set(["subclass"])
       }
     };
-    const result = await CompendiumBrowser.selectOne({ filters });
+    const result = await CompendiumBrowser.selectOne({ filters }, this.manager?._detachOptions());
     if ( result ) {
       await this.advancement.apply(this.level, { uuid: result });
       this.render();
