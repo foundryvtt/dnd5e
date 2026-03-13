@@ -102,6 +102,22 @@ export default class JournalEntrySheet5e extends foundry.applications.sheets.jou
   }
 
   /* -------------------------------------------- */
+  /*  Detached Windows                            */
+  /* -------------------------------------------- */
+
+  /**
+   * Render an application in the same workspace as this one.
+   * @param {ApplicationV2} app        The application to render.
+   * @param {RenderOptions} [options]  Options passed to render.
+   * @returns {Promise<ApplicationV2>}
+   */
+  _renderChild(app, options={}) {
+    if ( game.release.generation < 14 ) return app.render({ force: true, ...options });
+    if ( this.parent ) return this.parent.renderChild(app, options);
+    return this.renderChild(app, options);
+  }
+
+  /* -------------------------------------------- */
   /*  Helpers                                     */
   /* -------------------------------------------- */
 

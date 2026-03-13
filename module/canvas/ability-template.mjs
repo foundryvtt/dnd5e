@@ -28,6 +28,14 @@ export default class AbilityTemplate extends foundry.canvas.placeables.MeasuredT
   /* -------------------------------------------- */
 
   /**
+   * Whether the actor sheet was minimized when template placement began.
+   * @type {boolean}
+   */
+  #sheetMinimized = false;
+
+  /* -------------------------------------------- */
+
+  /**
    * Track the bound event handlers so they can be properly canceled later.
    * @type {object}
    */
@@ -139,7 +147,10 @@ export default class AbilityTemplate extends foundry.canvas.placeables.MeasuredT
     this.layer.preview.addChild(this);
 
     // Hide the sheet that originated the preview
-    this.actorSheet?.minimize();
+    const sheet = this.actorSheet;
+    const { windowId } = (sheet?.parent ?? sheet)?.window ?? {};
+    this.#sheetMinimized = (game.release.generation < 14 || !windowId) && !sheet?._minimized;
+    if ( this.#sheetMinimized ) sheet?.minimize();
 
     // Activate interactivity
     return this.activatePreviewListeners(initialLayer);
@@ -190,7 +201,7 @@ export default class AbilityTemplate extends foundry.canvas.placeables.MeasuredT
       this.#hoveredToken = null;
     }
     this.#initialLayer.activate();
-    await this.actorSheet?.maximize();
+    if ( this.#sheetMinimized ) await this.actorSheet?.maximize();
   }
 
   /* -------------------------------------------- */

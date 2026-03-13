@@ -996,9 +996,9 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /* -------------------------------------------- */
 
   /** @override */
-  async deleteDialog(dialogOptions={}, operation={}) {
+  async deleteDialog({ sheet, ...dialogOptions }={}, operation={}) {
     const type = game.i18n.localize(this.constructor.metadata.label);
-    return foundry.applications.api.DialogV2.confirm(foundry.utils.mergeObject({
+    const config = foundry.utils.mergeObject({
       window: { title: `${game.i18n.format("DOCUMENT.Delete", { type })}: ${this.name}` },
       position: { width: 400 },
       content: `
@@ -1007,7 +1007,9 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
         </p>
       `,
       yes: { callback: () => this.delete(operation) }
-    }, dialogOptions));
+    }, dialogOptions);
+    if ( sheet ) return sheet._confirmDialog(config);
+    return foundry.applications.api.DialogV2.confirm(config);
   }
 }
 

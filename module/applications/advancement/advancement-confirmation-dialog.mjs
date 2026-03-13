@@ -59,51 +59,70 @@ export default class AdvancementConfirmationDialog extends Dialog5e {
 
   /**
    * A helper function that displays the dialog prompting for an item deletion.
-   * @param {Item5e} item  Item to be deleted.
+   * @param {Item5e} item                         Item to be deleted.
+   * @param {object} [options={}]
+   * @param {ApplicationV2} [options.sheet]       Sheet to render the dialog as a child of.
    * @returns {Promise<boolean|null>}  Resolves with whether advancements should be unapplied. Rejects with null.
    */
-  static forDelete(item) {
-    return this.createDialog(
-      item,
-      game.i18n.localize("DND5E.ADVANCEMENT.Deletion.Delete.Title"),
-      game.i18n.localize("DND5E.ADVANCEMENT.Deletion.Delete.Message"),
-      {
+  static forDelete(item, { sheet }={}) {
+    return this.createDialog({
+      item, sheet,
+      title: game.i18n.localize("DND5E.ADVANCEMENT.Deletion.Delete.Title"),
+      message: game.i18n.localize("DND5E.ADVANCEMENT.Deletion.Delete.Message"),
+      continueButton: {
         icon: "fa-solid fa-trash",
         label: game.i18n.localize("Delete")
       }
-    );
+    });
   }
 
   /* -------------------------------------------- */
 
   /**
    * A helper function that displays the dialog prompting for leveling down.
-   * @param {Item5e} item  The class whose level is being changed.
+   * @param {Item5e} item                         The class whose level is being changed.
+   * @param {object} [options={}]
+   * @param {ApplicationV2} [options.sheet]       Sheet to render the dialog as a child of.
    * @returns {Promise<boolean|null>}  Resolves with whether advancements should be unapplied. Rejects with null.
    */
-  static forLevelDown(item) {
-    return this.createDialog(
-      item,
-      game.i18n.localize("DND5E.ADVANCEMENT.Deletion.LevelDown.Title"),
-      game.i18n.localize("DND5E.ADVANCEMENT.Deletion.LevelDown.Message"),
-      {
+  static forLevelDown(item, { sheet }={}) {
+    return this.createDialog({
+      item, sheet,
+      title: game.i18n.localize("DND5E.ADVANCEMENT.Deletion.LevelDown.Title"),
+      message: game.i18n.localize("DND5E.ADVANCEMENT.Deletion.LevelDown.Message"),
+      continueButton: {
         icon: "fa-solid fa-sort-numeric-down-alt",
         label: game.i18n.localize("DND5E.LevelActionDecrease")
       }
-    );
+    });
   }
 
   /* -------------------------------------------- */
 
   /**
    * A helper constructor function which displays the confirmation dialog.
-   * @param {Item5e} item              Item to be changed.
-   * @param {string} title             Localized dialog title.
-   * @param {string} message           Localized dialog message.
-   * @param {object} continueButton    Object containing label and icon for the action button.
+   * @param {object} config
+   * @param {Item5e} config.item              Item to be changed.
+   * @param {string} config.title             Localized dialog title.
+   * @param {string} config.message           Localized dialog message.
+   * @param {object} config.continueButton    Object containing label and icon for the action button.
+   * @param {ApplicationV2} [config.sheet]    Sheet to render the dialog as a child of.
    * @returns {Promise<boolean|null>}  Resolves with whether advancements should be unapplied. Rejects with null.
    */
-  static createDialog(item, title, message, continueButton) {
+  static createDialog(config, _title, _message, _continueButton) {
+    if ( config instanceof Item ) {
+      foundry.utils.logCompatibilityWarning(
+        "AdvancementConfirmationDialog.createDialog now takes a single config object rather than positional arguments.",
+        { since: "DnD5e 5.3", until: "DnD5e 6.0" }
+      );
+      config = {
+        item: config,
+        title: _title,
+        message: _message,
+        continueButton: _continueButton
+      };
+    }
+    const { item, title, message, continueButton, sheet } = config;
     return new Promise((resolve, reject) => {
       const dialog = new this({
         buttons: [
@@ -126,7 +145,8 @@ export default class AdvancementConfirmationDialog extends Dialog5e {
       });
       dialog.addEventListener("close", () =>
         dialog.result === null ? reject(null) : resolve(dialog.result), { once: true });
-      dialog.render({ force: true });
+      if ( sheet ) sheet._renderChild(dialog);
+      else dialog.render({ force: true });
     });
   }
 

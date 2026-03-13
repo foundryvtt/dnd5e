@@ -345,6 +345,20 @@ export default class GroupActorSheet extends MultiActorSheet {
   /*  Event Listeners & Handlers                  */
   /* -------------------------------------------- */
 
+  /** @override */
+  _openDocumentSheet(doc, options={}) {
+    // Actor sheets are too large to render as children of the group sheet window.
+    // If the group sheet is detached, open the actor sheet in its own detached window.
+    if ( doc instanceof Actor ) {
+      const { windowId } = this.window ?? {};
+      const windowOptions = windowId ? { window: { detached: true, windowId } } : {};
+      doc?.sheet?.render({ force: true, ...windowOptions, ...options });
+    }
+    else super._openDocumentSheet(doc, options);
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Handle distributing XP & currency.
    * @this {GroupActorSheet}

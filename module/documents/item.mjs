@@ -707,7 +707,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       let messageConfig = message;
       let activity = activities[0];
       if ( ((activities.length > 1) || chooseActivity) && !event?.shiftKey ) {
-        activity = await ActivityChoiceDialog.create(this);
+        activity = await ActivityChoiceDialog.create(this, { sheet: dialog.options?.sheet });
       }
       if ( !activity ) return;
       return activity.use(usageConfig, dialogConfig, messageConfig);
@@ -1154,14 +1154,18 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async deleteDialog(dialogOptions={}, operation={}) {
+  async deleteDialog({ sheet, ...dialogOptions }={}, operation={}) {
     // If item has advancement, handle it separately
     if ( this.actor?.system.metadata?.supportsAdvancement && !game.settings.get("dnd5e", "disableAdvancements") ) {
       const manager = AdvancementManager.forDeletedItem(this.actor, this.id);
       if ( manager.steps.length ) {
         try {
-          const shouldRemoveAdvancements = await AdvancementConfirmationDialog.forDelete(this);
-          if ( shouldRemoveAdvancements ) return manager.render({ force: true });
+          const shouldRemoveAdvancements = await AdvancementConfirmationDialog.forDelete(this, { sheet });
+          if ( shouldRemoveAdvancements ) {
+            if ( sheet ) sheet._renderChild(manager);
+            else manager.render({ force: true });
+            return;
+          }
           return this.delete({ shouldRemoveAdvancements });
         } catch(err) {
           return;
@@ -1173,7 +1177,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const count = await this.system.contentsCount;
     if ( count ) {
       const type = game.i18n.localize("DND5E.Container");
-      return foundry.applications.api.DialogV2.confirm(foundry.utils.mergeObject({
+      const config = foundry.utils.mergeObject({
         window: {
           icon: "fa-solid fa-trash",
           title: `${game.i18n.format("DOCUMENT.Delete", { type })}: ${this.name}`
@@ -1193,9 +1197,24 @@ export default class Item5e extends SystemDocumentMixin(Item) {
           const deleteContents = button.form.elements.deleteContents.checked;
           this.delete({ ...operation, deleteContents });
         }}
-      }, dialogOptions));
+      }, dialogOptions);
+      if ( sheet ) return sheet._confirmDialog(config);
+      return foundry.applications.api.DialogV2.confirm(config);
     }
 
+    if ( sheet ) {
+      const type = game.i18n.localize(this.constructor.metadata.label);
+      return sheet._confirmDialog(foundry.utils.mergeObject({
+        window: { title: `${game.i18n.format("DOCUMENT.Delete", { type })}: ${this.name}` },
+        position: { width: 400 },
+        content: `
+          <p>
+            <strong>${game.i18n.localize("AreYouSure")}</strong> ${game.i18n.format("SIDEBAR.DeleteWarning", { type })}
+          </p>
+        `,
+        yes: { callback: () => this.delete(operation) }
+      }, dialogOptions));
+    }
     return super.deleteDialog(dialogOptions, operation);
   }
 

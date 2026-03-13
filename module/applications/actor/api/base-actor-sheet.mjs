@@ -1178,7 +1178,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     const actor = this.inventorySource;
     const types = this._addDocumentItemTypes(this.tabGroups.primary)
       .filter(type => !CONFIG.Item.dataModels[type].metadata?.singleton || !actor.itemTypes[type].length);
-    if ( types.length > 1 ) return Item.implementation.createDialog({}, { types, parent: actor });
+    if ( types.length > 1 ) return Item.implementation.createDialog({}, { types, parent: actor }, { sheet: this });
 
     const type = types[0];
     return Item.implementation.create({
@@ -1220,10 +1220,12 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     if ( !game.settings.get("dnd5e", "disableAdvancements") ) {
       const manager = AdvancementManager.forLevelChange(this.actor, classId, delta);
       if ( manager.steps.length ) {
-        if ( delta > 0 ) return manager.render({ force: true });
+        if ( delta > 0 ) return this._renderChild(manager);
         try {
-          const shouldRemoveAdvancements = await AdvancementConfirmationDialog.forLevelDown(classItem);
-          if ( shouldRemoveAdvancements ) return manager.render({ force: true });
+          const shouldRemoveAdvancements = await AdvancementConfirmationDialog.forLevelDown(classItem, {
+            sheet: this
+          });
+          if ( shouldRemoveAdvancements ) return this._renderChild(manager);
         }
         catch(err) {
           return;
@@ -1263,11 +1265,11 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     if ( this._inspectWarning(event, target) === false ) return;
     switch ( target.dataset.target ) {
       case "armor":
-        new ArmorClassConfig({ document: this.actor }).render({ force: true });
+        this._renderChild(new ArmorClassConfig({ document: this.actor }));
         break;
       default:
         const item = await fromUuid(target.dataset.target);
-        item?.sheet.render({ force: true });
+        if ( item?.sheet ) this._renderChild(item.sheet);
         break;
     }
   }
@@ -1385,7 +1387,9 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       case "ability":
         const ability = target.closest("[data-ability]")?.dataset.ability;
         if ( ability === "concentration" ) return this.actor.rollConcentration({ event, legacy: false });
-        else if ( target.classList.contains("saving-throw") ) return this.actor.rollSavingThrow({ ability, event });
+        else if ( target.classList.contains("saving-throw") ) {
+          return this.actor.rollSavingThrow({ ability, event });
+        }
         else return this.actor.rollAbilityCheck({ ability, event });
       case "deathSave":
         return this.actor.rollDeathSave({ event, legacy: false });
@@ -1461,47 +1465,47 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         case "di":
         case "dm":
         case "dr":
-        case "dv": return new DamagesConfig(config).render({ force: true });
-        case "languages": return new LanguagesConfig(config).render({ force: true });
-        case "tool": return new ToolsConfig(config).render({ force: true });
-        case "weapon": return new WeaponsConfig(config).render({ force: true });
-        default: return new TraitsConfig(config).render({ force: true });
+        case "dv": return this._renderChild(new DamagesConfig(config));
+        case "languages": return this._renderChild(new LanguagesConfig(config));
+        case "tool": return this._renderChild(new ToolsConfig(config));
+        case "weapon": return this._renderChild(new WeaponsConfig(config));
+        default: return this._renderChild(new TraitsConfig(config));
       }
     }
 
     switch ( target.dataset.config ) {
       case "ability":
         const ability = target.closest("[data-ability]")?.dataset.ability;
-        if ( ability === "concentration" ) return new ConcentrationConfig(config).render({ force: true });
-        return new AbilityConfig({ ...config, key: ability }).render({ force: true });
+        if ( ability === "concentration" ) return this._renderChild(new ConcentrationConfig(config));
+        return this._renderChild(new AbilityConfig({ ...config, key: ability }));
       case "armorClass":
-        return new ArmorClassConfig(config).render({ force: true });
+        return this._renderChild(new ArmorClassConfig(config));
       case "creatureType":
-        return new CreatureTypeConfig(this.actor.system.details.race?.id
-          ? { document: this.actor.system.details.race, keyPath: "type" } : config).render({ force: true });
+        return this._renderChild(new CreatureTypeConfig(this.actor.system.details.race?.id
+          ? { document: this.actor.system.details.race, keyPath: "type" } : config));
       case "death":
-        return new DeathConfig(config).render({ force: true });
+        return this._renderChild(new DeathConfig(config));
       case "hitDice":
-        return new HitDiceConfig(config).render({ force: true });
+        return this._renderChild(new HitDiceConfig(config));
       case "hitPoints":
-        return new HitPointsConfig(config).render({ force: true });
+        return this._renderChild(new HitPointsConfig(config));
       case "initiative":
-        return new InitiativeConfig(config).render({ force: true });
+        return this._renderChild(new InitiativeConfig(config));
       case "movement":
       case "senses":
-        return new MovementSensesConfig({ ...config, type: target.dataset.config }).render({ force: true });
+        return this._renderChild(new MovementSensesConfig({ ...config, type: target.dataset.config }));
       case "skill":
         const skill = target.closest("[data-key]").dataset.key;
-        return new SkillToolConfig({ ...config, trait: "skills", key: skill }).render({ force: true });
+        return this._renderChild(new SkillToolConfig({ ...config, trait: "skills", key: skill }));
       case "tool":
         const tool = target.closest("[data-key]").dataset.key;
-        return new SkillToolConfig({ ...config, trait: "tool", key: tool }).render({ force: true });
+        return this._renderChild(new SkillToolConfig({ ...config, trait: "tool", key: tool }));
       case "skills":
-        return new SkillsConfig(config).render({ force: true });
+        return this._renderChild(new SkillsConfig(config));
       case "source":
-        return new SourceConfig(config).render({ force: true });
+        return this._renderChild(new SourceConfig(config));
       case "spellSlots":
-        return new SpellSlotsConfig(config).render({ force: true });
+        return this._renderChild(new SpellSlotsConfig(config));
     }
   }
 
@@ -1712,7 +1716,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
     // Configure the transformation
     const settings = await TransformDialog.promptSettings(this.actor, actor, {
-      transform: { settings: game.settings.get("dnd5e", "transformationSettings") }
+      transform: { settings: game.settings.get("dnd5e", "transformationSettings") },
+      windowId: this.window?.windowId
     });
     if ( !settings ) return;
     await game.settings.set("dnd5e", "transformationSettings", settings.toObject());

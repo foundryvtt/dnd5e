@@ -261,9 +261,7 @@ async function rollAttack(config, event) {
     }]
   };
 
-  const dialogConfig = {
-    applicationClass: AttackRollConfigurationDialog
-  };
+  const dialogConfig = { applicationClass: AttackRollConfigurationDialog };
 
   const messageConfig = {
     data: {

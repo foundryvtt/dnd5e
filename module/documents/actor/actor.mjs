@@ -1842,9 +1842,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /**
    * Roll initiative for this Actor with a dialog that provides an opportunity to elect advantage or other bonuses.
    * @param {Partial<InitiativeRollOptions>} [rollOptions={}]  Options forwarded to the Actor#getInitiativeRoll method.
+   * @param {object} [dialog]                                  Options forwarded to the dialog configuration.
    * @returns {Promise<void>}           A promise which resolves once initiative has been rolled for the Actor.
    */
-  async rollInitiativeDialog(rollOptions={}) {
+  async rollInitiativeDialog(rollOptions={}, dialog={}) {
     const config = {
       evaluate: false,
       event: rollOptions.event,
@@ -1857,8 +1858,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Display the roll configuration dialog
     const messageOptions = { rollMode: game.settings.get("core", "rollMode") };
     if ( config.rolls[0].options?.fixed === undefined ) {
-      const dialog = { options: { title: game.i18n.localize("DND5E.InitiativeRoll") } };
-      const rolls = await CONFIG.Dice.D20Roll.build(config, dialog, messageOptions);
+      const dialogConfig = foundry.utils.mergeObject({
+        options: { title: game.i18n.localize("DND5E.InitiativeRoll") }
+      }, dialog);
+      const rolls = await CONFIG.Dice.D20Roll.build(config, dialogConfig, messageOptions);
       if ( !rolls.length ) return;
       this._cachedInitiativeRoll = rolls[0];
     }

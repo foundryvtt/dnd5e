@@ -586,7 +586,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
    * @protected
    */
   _onDeleteItem(item) {
-    return item.deleteDialog();
+    return item.deleteDialog({ sheet: this.app });
   }
 
   /* -------------------------------------------- */
@@ -612,7 +612,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
    * @protected
    */
   _onEditItem(item) {
-    return item.sheet.render(true, { mode: ItemSheet5e.MODES.EDIT });
+    return this.app._openDocumentSheet(item, { mode: ItemSheet5e.MODES.EDIT });
   }
 
   /* -------------------------------------------- */
@@ -834,7 +834,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
    * @protected
    */
   _onUseActivity(activity, { event }={}) {
-    return activity?.use({ event });
+    return activity?.use({ event }, { options: { sheet: this.#app } });
   }
 
   /* -------------------------------------------- */
@@ -848,7 +848,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
    * @protected
    */
   _onUseItem(item, { event }={}) {
-    return item.use({ event });
+    return item.use({ event }, { options: { sheet: this.#app } });
   }
 
   /* -------------------------------------------- */
@@ -860,7 +860,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
    * @protected
    */
   _onViewItem(item) {
-    return item.sheet.render(true, { mode: ItemSheet5e.MODES.PLAY });
+    return this.app._openDocumentSheet(item, { mode: ItemSheet5e.MODES.PLAY });
   }
 
   /* -------------------------------------------- */

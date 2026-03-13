@@ -242,12 +242,12 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
       case "create":
         return this._onCreate(target);
       case "delete":
-        await effect.deleteDialog({}, { render: false });
+        await effect.deleteDialog({ sheet: this.#app }, { render: false });
         return this.#app.render();
       case "duplicate":
         return effect.clone({name: game.i18n.format("DOCUMENT.CopyOf", {name: effect.name})}, {save: true});
       case "edit":
-        return effect.sheet.render(true);
+        return this.#app._openDocumentSheet(effect);
       case "favorite":
         return this.document.system.addFavorite({type: "effect", id: effect.getRelativeUUID(this.document)});
       case "toggle":

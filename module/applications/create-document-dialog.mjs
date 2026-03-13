@@ -161,7 +161,7 @@ export default class CreateDocumentDialog extends Dialog5e {
    * @param {object} [dialogOptions.ok={}]                        Options for the OK button.
    * @returns {Promise<Document>}
    */
-  static async prompt(documentType, data={}, { folders, types, ...createOptions }={}, { ok={}, ...config }={}) {
+  static async prompt(documentType, data={}, { folders, types, ...createOptions }={}, { ok={}, sheet, ...config }={}) {
     const label = game.i18n.localize(documentType.metadata.label ?? `DOCUMENT.DND5E.${documentType.documentName}`);
     const title = game.i18n.format("DOCUMENT.Create", { type: label });
 
@@ -194,7 +194,8 @@ export default class CreateDocumentDialog extends Dialog5e {
         resolve(createOptions.parent[`create${documentType.documentName}`](createData.type, createData, createOptions));
       }
     });
-    dialog.render({ force: true });
+    if ( sheet ) sheet._renderChild(dialog);
+    else dialog.render({ force: true });
     return promise;
   }
 
