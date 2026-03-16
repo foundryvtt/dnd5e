@@ -1,5 +1,5 @@
 /**
- * @typedef baseActiveEffectSystemData
+ * @typedef BaseActiveEffectSystemData
  * @property {EffectChangeData[]} changes  Changes to apply to the actor.
  * @property {boolean} magic               Does this effect originate from a magical source?
  * @property {object} rider
