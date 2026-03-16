@@ -35,6 +35,10 @@
 </div>
 {{/unless}}
 
+{{!-- Modifiers --}}
+{{ formField fields.modifiers name=(concat prefix "modifiers") value=source.modifiers label="DND5E.RollModifiers"
+             localize=true rootId=@root.partId }}
+
 {{!-- Types --}}
 {{#if types}}
 {{ formField fields.types name=(concat prefix "types") value=source.types options=types label="DND5E.Type"

@@ -2065,6 +2065,10 @@
             "label": "Die Denomination",
             "hint": "Denomination of the dice to roll."
           },
+          "modifiers": {
+            "label": "Modifiers",
+            "hint": "Roll modifiers added to the base die."
+          },
           "number": {
             "label": "Die Number",
             "hint": "Number of dice to roll."
@@ -3796,6 +3800,7 @@
 },
 "DND5E.RollExample": "e.g. 1d4",
 "DND5E.RollMode": "Roll Mode",
+"DND5E.RollModifiers": "Modifiers",
 "DND5E.RollSituationalBonus": "Situational Bonus?",
 "DND5E.Rule": {
   "Tooltip": "Tooltip",
