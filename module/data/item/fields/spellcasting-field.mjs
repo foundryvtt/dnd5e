@@ -4,6 +4,10 @@ import FormulaField from "../../fields/formula-field.mjs";
 const { SchemaField, StringField } = foundry.data.fields;
 
 /**
+ * @import { ItemRollData } from "../../../documents/_types.mjs";
+ */
+
+/**
  * Data field for class & subclass spellcasting information.
  */
 export default class SpellcastingField extends SchemaField {
@@ -32,7 +36,7 @@ export default class SpellcastingField extends SchemaField {
   /**
    * Prepare data for this field. Should be called during the `prepareFinalData` stage.
    * @this {ItemDataModel}
-   * @param {object} rollData  Roll data used for formula replacements.
+   * @param {ItemRollData} rollData  Roll data used for formula replacements.
    */
   static prepareData(rollData) {
     this.spellcasting.preparation.max = simplifyBonus(this.spellcasting.preparation.formula, rollData);

@@ -1,5 +1,6 @@
 /**
  * @import { TargetDescriptor5e, UnitConfiguration } from "./_types.mjs";
+ * @import { RollData } from "./documents/_types.mjs";
  */
 
 /* -------------------------------------------- */
@@ -361,7 +362,7 @@ export function parseInputDelta(input, target) {
  * @param {ItemDataModel|BaseActivityData} model  Model for which the value is being prepared.
  * @param {string} keyPath                        Path to the field within the model.
  * @param {string} label                          Label to use in preparation warnings.
- * @param {object} rollData                       Roll data to use when replacing formula values.
+ * @param {RollData} rollData                     Roll data to use when replacing formula values.
  */
 export function prepareFormulaValue(model, keyPath, label, rollData) {
   const value = foundry.utils.getProperty(model, keyPath);

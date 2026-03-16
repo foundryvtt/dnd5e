@@ -4,6 +4,7 @@ import SystemDataModel from "./system-data-model.mjs";
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
+ * @import { ItemRollData, RollDataOptions } from "../../documents/_types.mjs";
  * @import { FavoriteData5e, ItemDataModelMetadata } from "./_types.mjs";
  */
 
@@ -299,10 +300,8 @@ export default class ItemDataModel extends SystemDataModel {
 
   /**
    * Prepare a data object which defines the data schema used by dice roll commands against this Item.
-   * @param {object} [options]
-   * @param {boolean} [options.deterministic] Whether to force deterministic values for data properties that could be
-   *                                          either a die term or a flat term.
-   * @returns {object}
+   * @param {RollDataOptions} [options]
+   * @returns {ItemRollData}
    */
   getRollData({ deterministic=false }={}) {
     const actorRollData = this.parent.actor?.getRollData({ deterministic }) ?? {};

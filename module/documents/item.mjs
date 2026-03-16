@@ -21,7 +21,9 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
  * @import { D20RollConfiguration } from "../dice/_types.mjs";
- * @import { ItemContentsTransformer, SpellcastingDescription, SpellScrollConfiguration } from "./_types.mjs";
+ * @import {
+ *  ItemContentsTransformer, ItemRollData, RollDataOptions, SpellcastingDescription, SpellScrollConfiguration
+ * } from "./_types.mjs";
  * @import {
  *   ActivityDialogConfiguration, ActivityMessageConfiguration, ActivityUsageResults, ActivityUseConfiguration
  * } from "./activity/_types.mjs";
@@ -837,9 +839,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /**
    * @inheritdoc
-   * @param {object} [options]
-   * @param {boolean} [options.deterministic] Whether to force deterministic values for data properties that could be
-   *                                          either a die term or a flat term.
+   * @param {RollDataOptions} [options]
+   * @returns {ItemRollData}
    */
   getRollData({ deterministic=false }={}) {
     let data;

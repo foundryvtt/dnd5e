@@ -10,6 +10,7 @@ import SensesField from "../../shared/senses-field.mjs";
 const { NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
+ * @import { ActorRollData } from "../../../documents/_types.mjs";
  * @import { ArmorClassData, AttributesCommonData, AttributesCreatureData, HitPointsData } from "./_types.mjs";
  */
 
@@ -142,7 +143,7 @@ export default class AttributesFields {
   /**
    * Prepare a character's AC value from their equipped armor and shield.
    * @this {CharacterData|NPCData|VehicleData}
-   * @param {object} rollData  The Actor's roll data.
+   * @param {ActorRollData} rollData  The Actor's roll data.
    */
   static prepareArmorClass(rollData) {
     const ac = this.attributes.ac;
@@ -238,7 +239,7 @@ export default class AttributesFields {
   /**
    * Prepare concentration data for an Actor.
    * @this {CharacterData|NPCData}
-   * @param {object} rollData  The Actor's roll data.
+   * @param {ActorRollData} rollData  The Actor's roll data.
    */
   static prepareConcentration(rollData) {
     const { concentration } = this.attributes;
@@ -253,7 +254,7 @@ export default class AttributesFields {
   /**
    * Calculate encumbrance details for an Actor.
    * @this {CharacterData|NPCData|VehicleData}
-   * @param {object} rollData  The Actor's roll data.
+   * @param {ActorRollData} rollData           The Actor's roll data.
    * @param {object} [options]
    * @param {Function} [options.validateItem]  Determine whether an item's weight should count toward encumbrance.
    */
@@ -367,7 +368,7 @@ export default class AttributesFields {
   /**
    * Prepare the initiative data for an actor.
    * @this {CharacterData|NPCData|VehicleData}
-   * @param {object} rollData  The Actor's roll data.
+   * @param {ActorRollData} rollData  The Actor's roll data.
    */
   static prepareInitiative(rollData) {
     const init = this.attributes.init ??= {};
@@ -410,7 +411,7 @@ export default class AttributesFields {
   /**
    * Modify movement speeds taking exhaustion and any other conditions into account.
    * @this {CharacterData|NPCData}
-   * @param {object} rollData  The Actor's roll data.
+   * @param {ActorRollData} rollData  The Actor's roll data.
    */
   static prepareMovement(rollData=this.parent.getRollData()) {
     const statuses = this.parent.statuses;

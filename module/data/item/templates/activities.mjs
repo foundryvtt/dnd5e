@@ -4,6 +4,7 @@ import { ActivitiesField } from "../../fields/activities-field.mjs";
 import UsesField from "../../shared/uses-field.mjs";
 
 /**
+ * @import { ItemRollData } from "../../../documents/_types.mjs";
  * @import { ActivitiesTemplateData } from "./_types.mjs";
  */
 
@@ -298,7 +299,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
 
   /**
    * Prepare final data for the activities & uses.
-   * @param {object} rollData
+   * @param {ItemRollData} rollData
    */
   prepareFinalActivityData(rollData) {
     const labels = this.parent.labels;
@@ -322,8 +323,8 @@ export default class ActivitiesTemplate extends SystemDataModel {
 
   /**
    * Perform any item & activity uses recovery.
-   * @param {string[]} periods  Recovery periods to check.
-   * @param {object} rollData   Roll data to use when evaluating recover formulas.
+   * @param {string[]} periods       Recovery periods to check.
+   * @param {ItemRollData} rollData  Roll data to use when evaluating recovery formulas.
    * @returns {Promise<{ updates: object, rolls: BasicRoll[], destroy: boolean }>}
    */
   async recoverUses(periods, rollData) {

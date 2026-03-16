@@ -31,8 +31,8 @@ import * as Trait from "./trait.mjs";
  *   SkillToolRollDialogConfiguration, SkillToolRollProcessConfiguration
  * } from "../../dice/_types.mjs";
  * @import {
- *   DamageAffectCategory, DamageApplicationOptions, DamageDescription, DamageSummary,
- *   RestConfiguration, RestResult, SpellcastingDescription
+ *   ActorRollData, DamageAffectCategory, DamageApplicationOptions, DamageDescription, DamageSummary,
+ *   RestConfiguration, RestResult, RollDataOptions, SpellcastingDescription
  * } from "../_types.mjs";
  */
 
@@ -504,9 +504,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * @inheritdoc
-   * @param {object} [options]
-   * @param {boolean} [options.deterministic] Whether to force deterministic values for data properties that could be
-   *                                          either a die term or a flat term.
+   * @param {RollDataOptions} [options]
+   * @returns {ActorRollData}
    */
   getRollData({ deterministic=false }={}) {
     let data;
@@ -2040,7 +2039,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   async rollClassHitPoints(item, { chatMessage=true }={}) {
     if ( item.type !== "class" ) throw new Error("Hit points can only be rolled for a class item.");
-    const rollData = {
+    const config = {
       formula: `1${item.system.hd.denomination}`,
       data: item.getRollData(),
       chatMessage
@@ -2059,14 +2058,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * @memberof hookEvents
      * @param {Actor5e} actor            Actor for which the hit points are being rolled.
      * @param {Item5e} item              The class item whose hit dice will be rolled.
-     * @param {object} rollData
-     * @param {string} rollData.formula  The string formula to parse.
-     * @param {object} rollData.data     The data object against which to parse attributes within the formula.
+     * @param {object} config
+     * @param {string} config.formula    The string formula to parse.
+     * @param {object} config.data       The data object against which to parse attributes within the formula.
      * @param {object} messageData       The data object to use when creating the message.
      */
-    Hooks.callAll("dnd5e.preRollClassHitPoints", this, item, rollData, messageData);
+    Hooks.callAll("dnd5e.preRollClassHitPoints", this, item, config, messageData);
 
-    const roll = new Roll(rollData.formula, rollData.data);
+    const roll = new Roll(config.formula, config.data);
     await roll.evaluate();
 
     /**
@@ -2078,7 +2077,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      */
     Hooks.callAll("dnd5e.rollClassHitPoints", this, roll);
 
-    if ( rollData.chatMessage ) await roll.toMessage(messageData);
+    if ( config.chatMessage ) await roll.toMessage(messageData);
     return roll;
   }
 
@@ -2093,7 +2092,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   async rollNPCHitPoints({ chatMessage=true }={}) {
     if ( !this.system.isNPC ) throw new Error("NPC hit points can only be rolled for NPCs");
-    const rollData = {
+    const config = {
       formula: this.system.attributes.hp.formula,
       data: this.getRollData(),
       chatMessage
@@ -2111,14 +2110,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * @function dnd5e.preRollNPCHitPoints
      * @memberof hookEvents
      * @param {Actor5e} actor            Actor for which the hit points are being rolled.
-     * @param {object} rollData
-     * @param {string} rollData.formula  The string formula to parse.
-     * @param {object} rollData.data     The data object against which to parse attributes within the formula.
+     * @param {object} config
+     * @param {string} config.formula    The string formula to parse.
+     * @param {object} config.data       The data object against which to parse attributes within the formula.
      * @param {object} messageData       The data object to use when creating the message.
      */
-    Hooks.callAll("dnd5e.preRollNPCHitPoints", this, rollData, messageData);
+    Hooks.callAll("dnd5e.preRollNPCHitPoints", this, config, messageData);
 
-    const roll = new Roll(rollData.formula, rollData.data);
+    const roll = new Roll(config.formula, config.data);
     await roll.evaluate();
 
     /**
@@ -2130,7 +2129,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      */
     Hooks.callAll("dnd5e.rollNPCHitPoints", this, roll);
 
-    if ( rollData.chatMessage ) await roll.toMessage(messageData);
+    if ( config.chatMessage ) await roll.toMessage(messageData);
     return roll;
   }
 

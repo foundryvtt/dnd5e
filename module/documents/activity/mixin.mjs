@@ -13,6 +13,7 @@ import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
  * @import {
  *   BasicRollDialogConfiguration, BasicRollMessageConfiguration, DamageRollProcessConfiguration
  * } from "../../dice/_types.mjs";
+ * @import { ActivityRollData, RollDataOptions } from "../_types.mjs";
  * @import {
  *   ActivityConsumptionDescriptor, ActivityDialogConfiguration, ActivityMessageConfiguration, ActivityMetadata,
  *   ActivityUsageChatButton, ActivityUsageResults, ActivityUsageUpdates, ActivityUseConfiguration
@@ -1180,10 +1181,8 @@ export default function ActivityMixin(Base) {
 
     /**
      * Prepare a data object which defines the data schema used by dice roll commands against this Activity.
-     * @param {object} [options]
-     * @param {boolean} [options.deterministic]  Whether to force deterministic values for data properties that could
-     *                                           be either a die term or a flat term.
-     * @returns {object}
+     * @param {RollDataOptions} [options]
+     * @returns {ActivityRollData}
      */
     getRollData(options) {
       const rollData = this.item.getRollData(options);

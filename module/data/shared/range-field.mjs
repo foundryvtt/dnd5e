@@ -4,6 +4,10 @@ import FormulaField from "../fields/formula-field.mjs";
 const { SchemaField, StringField } = foundry.data.fields;
 
 /**
+ * @import { ActivityRollData, ItemRollData } from "../../documents/_types.mjs";
+ */
+
+/**
  * Field for storing range data.
  */
 export default class RangeField extends SchemaField {
@@ -24,8 +28,8 @@ export default class RangeField extends SchemaField {
   /**
    * Prepare data for this field. Should be called during the `prepareFinalData` stage.
    * @this {ItemDataModel|BaseActivityData}
-   * @param {object} rollData  Roll data used for formula replacements.
-   * @param {object} [labels]  Object in which to insert generated labels.
+   * @param {ItemRollData|ActivityRollData} rollData  Roll data used for formula replacements.
+   * @param {object} [labels]                         Object in which to insert generated labels.
    */
   static prepareData(rollData, labels) {
     this.range.scalar = this.range.units in CONFIG.DND5E.movementUnits;
