@@ -695,6 +695,7 @@ export default class NPCData extends CreatureTemplate {
             const { nameHTML } = item.system.gearPresentationData();
             return item.system.quantity > 1 ? `${nameHTML} (${formatNumber(item.system.quantity)})` : nameHTML;
           })
+          .sort((lhs, rhs) => lhs.localeCompare(rhs, game.i18n.lang))
         ),
 
         // Initiative (e.g. `+0 (10)`)

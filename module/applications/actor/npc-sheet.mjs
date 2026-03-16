@@ -336,7 +336,7 @@ export default class NPCActorSheet extends BaseActorSheet {
         },
         value: item.system.quantity > 1 ? item.system.quantity : undefined
       };
-    });
+    }).sort((lhs, rhs) => lhs.label.localeCompare(rhs.label, game.i18n.lang));
 
     // Habitat
     if ( details.habitat.value.length || details.habitat.custom ) {
