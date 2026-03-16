@@ -1,7 +1,7 @@
-import { filteredKeys } from "../../../utils.mjs";
+import { convertTime, filteredKeys } from "../../../utils.mjs";
 import Dialog5e from "../../api/dialog.mjs";
 
-const { BooleanField } = foundry.data.fields;
+const { BooleanField, NumberField, StringField } = foundry.data.fields;
 
 /**
  * @import { RestConfiguration } from "../../../documents/_types.mjs";
@@ -21,6 +21,9 @@ export default class BaseRestDialog extends Dialog5e {
 
   /** @override */
   static DEFAULT_OPTIONS = {
+    actions: {
+      setDurationSunrise: BaseRestDialog.#onSetDurationSunrise
+    },
     classes: ["rest"],
     config: null,
     document: null,
@@ -58,6 +61,17 @@ export default class BaseRestDialog extends Dialog5e {
   /* -------------------------------------------- */
 
   /**
+   * Duration of the rest in minutes.
+   * @type {number}
+   */
+  get duration() {
+    return this.config.duration ?? CONFIG.DND5E.restTypes[this.config.type]
+      ?.duration?.[game.settings.get("dnd5e", "restVariant")] ?? 0;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Is the resting actor a party?
    * @type {boolean}
    */
@@ -72,10 +86,8 @@ export default class BaseRestDialog extends Dialog5e {
    * @type {boolean}
    */
   get promptNewDay() {
-    const duration = CONFIG.DND5E.restTypes[this.config.type]
-      ?.duration?.[game.settings.get("dnd5e", "restVariant")] ?? 0;
     // Only prompt if rest is longer than 10 minutes and less than 24 hours
-    return (duration > 10) && (duration < 1440);
+    return (this.duration > 10) && (this.duration < 1440);
   }
 
   /* -------------------------------------------- */
@@ -105,7 +117,7 @@ export default class BaseRestDialog extends Dialog5e {
       result: this.result,
       hd: this.actor.system.attributes?.hd,
       hp: this.actor.system.attributes?.hp,
-      isGroup: this.actor.type === "group",
+      isGroup: this.isPartyGroup,
       variant: game.settings.get("dnd5e", "restVariant")
     };
     if ( this.promptNewDay ) context.fields.push({
@@ -118,6 +130,28 @@ export default class BaseRestDialog extends Dialog5e {
       name: "newDay",
       value: context.config.newDay
     });
+
+    if ( context.isGroup && game.settings.get("dnd5e", "calendarConfig").enabled ) {
+      const duration = convertTime(this.duration, "minute", { strict: false });
+      context.duration = {
+        fields: [
+          {
+            field: new NumberField({ min: 0 }),
+            name: "duration.value",
+            value: duration.value
+          },
+          {
+            field: new StringField({ required: true, blank: false }),
+            name: "duration.unit",
+            options: Object.entries(CONFIG.DND5E.timeUnits)
+              .filter(([, c]) => !c.combat)
+              .map(([value, { label }]) => ({ value, label })),
+            value: duration.unit
+          }
+        ],
+        showSunriseButton: "sunrise" in game.time.calendar
+      };
+    }
 
     const rest = CONFIG.DND5E.restTypes[this.config.type];
     if ( "recoverTemp" in rest ) context.hitPoints.push({
@@ -165,6 +199,8 @@ export default class BaseRestDialog extends Dialog5e {
       ];
     }
 
+    context.showFields = context.fields.length || !!context.duration;
+
     return context;
   }
 
@@ -185,9 +221,28 @@ export default class BaseRestDialog extends Dialog5e {
       data.targets = filteredKeys(data.targets ?? {});
       this.actor.setFlag("dnd5e", "restSettings", data);
     }
+    if ( foundry.utils.getType(data.duration) === "Object" ) {
+      data.duration = convertTime(data.duration.value, data.duration.unit, { strict: false, to: "minute" }).value;
+    }
     foundry.utils.mergeObject(this.config, data);
     this.#rested = true;
     await this.close();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle setting the rest duration to end at the next sunrise.
+   * @this {BaseRestDialog}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   */
+  static #onSetDurationSunrise(event, target) {
+    const sunrise = Math.round(game.time.calendar.sunrise());
+    const now = game.time.components.hour;
+    const hoursUntilSunrise = sunrise - now + (now > sunrise ? game.time.calendar.days.hoursPerDay : 0);
+    this.element.querySelector('[name="duration.value"]').value = hoursUntilSunrise;
+    this.element.querySelector('[name="duration.unit"]').value = "hour";
   }
 
   /* -------------------------------------------- */

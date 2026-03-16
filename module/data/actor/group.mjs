@@ -317,6 +317,8 @@ export default class GroupData extends GroupTemplate {
       .map(({ actor }) => !config.targets || config.targets.includes(actor.id) ? actor : null)
       .filter(_ => _);
 
+    config.advanceTime = game.settings.get("dnd5e", "calendarConfig").enabled;
+
     // Create a rest chat message
     if ( !config.autoRest ) {
       const restConfig = CONFIG.DND5E.restTypes[config.type];
