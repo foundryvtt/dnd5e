@@ -283,6 +283,24 @@
     "other": "Activities"
   },
   "FIELDS": {
+    "behaviors": {
+      "element": {
+        "level": {
+          "label": "Level Limit",
+          "hint": "Range of levels required to apply this behavior.",
+          "max": {
+            "label": "Maximum Level"
+          },
+          "min": {
+            "label": "Minimum Level"
+          }
+        },
+        "name": {
+          "label": "Name"
+        }
+      },
+      "label": "Applied Behaviors"
+    },
     "description": {
       "label": "Description",
       "chatFlavor": {
@@ -1061,6 +1079,15 @@
     "Invalid": "Removing a pending trade will invalidate your trade order.",
     "Pending": "Pending trade"
   }
+},
+
+"DND5E.BEHAVIOR": {
+  "Action": {
+    "Create": "Create Behavior",
+    "Delete": "Delete Behavior"
+  },
+  "Hint": "These behaviors will apply to any area of effect placed by this activity.",
+  "Label": "Behavior"
 },
 
 "DND5E.Biography": "Biography",

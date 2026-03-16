@@ -4,6 +4,7 @@ import { ConsumptionTargetData } from "./data/activity/fields/consumption-target
 import { CalendarGreyhawk, CALENDAR_OF_GREYHAWK } from "./data/calendar/calendar-of-greyhawk.mjs";
 import { CalendarHarptos, CALENDAR_OF_HARPTOS } from "./data/calendar/calendar-of-harptos.mjs";
 import { CalendarKhorvaire, CALENDAR_OF_KHORVAIRE } from "./data/calendar/calendar-of-khorvaire.mjs";
+import * as regionBehaviors from "./data/region-behavior/_module.mjs";
 import * as activities from "./documents/activity/_module.mjs";
 import Actor5e from "./documents/actor/actor.mjs";
 import * as advancement from "./documents/advancement/_module.mjs";
@@ -1090,6 +1091,21 @@ DND5E.activityActivationTypes = {
   }
 };
 preLocalize("activityActivationTypes", { key: "label" });
+
+/* -------------------------------------------- */
+
+/**
+ * Types of behaviors that can be attached to regions through activities.
+ * @enum {ActivityBehaviorConfiguration}
+ */
+DND5E.activityBehaviorTypes = {
+  difficultTerrain: {
+    label: "TYPES.RegionBehavior.dnd5e.difficultTerrain",
+    icon: "systems/dnd5e/icons/svg/behaviors/difficult-terrain.svg",
+    model: regionBehaviors.DifficultTerrainActivityBehavior
+  }
+};
+preLocalize("activityBehaviorTypes", { key: "label" });
 
 /* -------------------------------------------- */
 

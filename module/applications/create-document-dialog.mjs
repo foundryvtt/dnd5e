@@ -92,8 +92,6 @@ export default class CreateDocumentDialog extends Dialog5e {
       if ( this.options.types?.length === 0 ) throw new Error("The array of sub-types to restrict to must not be empty");
 
       for ( const type of TYPES ) {
-        // TODO: When `standard` AE type replaces `base`, remove this check for active effect
-        // See https://github.com/foundryvtt/dnd5e/pull/5941
         if ( (this.documentName !== "ActiveEffect") && (type === CONST.BASE_DOCUMENT_TYPE) ) continue;
         if ( this.options.types && !this.options.types.includes(type) ) continue;
         const typeData = { selected: type === defaultType, type };
@@ -112,6 +110,8 @@ export default class CreateDocumentDialog extends Dialog5e {
 
       context.types.sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang));
       context.hasTypes = true;
+    } else if ( (TYPES?.length === 1) && !this.options.createData.type ) {
+      this.options.createData.type = defaultType ?? TYPES[0];
     }
 
     return context;
@@ -159,7 +159,7 @@ export default class CreateDocumentDialog extends Dialog5e {
    * @param {DatabaseCreateOperation} [createOptions={}]          Document creation options.
    * @param {object} [dialogOptions={}]                           Options forwarded to dialog.
    * @param {object} [dialogOptions.ok={}]                        Options for the OK button.
-   * @returns {Promise<Document>}
+   * @returns {Promise<Document|PseudoDocument|object|void>}
    */
   static async prompt(documentType, data={}, { folders, types, ...createOptions }={}, { ok={}, sheet, ...config }={}) {
     const label = game.i18n.localize(documentType.metadata.label ?? `DOCUMENT.DND5E.${documentType.documentName}`);
@@ -190,8 +190,10 @@ export default class CreateDocumentDialog extends Dialog5e {
       createOptions.renderSheet ??= true;
       if ( foundry.utils.isSubclass(documentType, foundry.abstract.Document) ) {
         resolve(documentType.create(createData, createOptions));
-      } else {
+      } else if ( createOptions.parent?.[`create${documentType.documentName}`] ) {
         resolve(createOptions.parent[`create${documentType.documentName}`](createData.type, createData, createOptions));
+      } else {
+        resolve(createData);
       }
     });
     if ( sheet ) sheet._renderChild(dialog);

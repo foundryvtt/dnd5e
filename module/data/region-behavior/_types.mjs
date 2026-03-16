@@ -6,6 +6,13 @@
  */
 
 /**
+ * @typedef DifficultTerrainActivityBehaviorData
+ * @property {Set<string>} types  Types of difficult terrain represented.
+ */
+
+/* -------------------------------------------- */
+
+/**
  * @typedef RotateAreaRegionBehaviorSystemData
  * @property {object} time
  * @property {number} time.value                      Amount of time over which rotation occurs.
