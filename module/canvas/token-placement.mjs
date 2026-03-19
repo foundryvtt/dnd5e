@@ -1,68 +1,36 @@
+import BasePlacement from "./api/base-placement.mjs";
+
 /**
  * @import { TokenPlacementConfiguration, TokenPlacementData } from "./types.mjs";
  */
 
 /**
  * Class responsible for placing one or more tokens onto the scene.
+ * @extends BasePlacement<TokenPlacementConfiguration, TokenPlacementData>
  */
-export default class TokenPlacement {
-  /**
-   * Initialize the placement system using configuration information.
-   * @param {TokenPlacementConfiguration} config  Configuration information for placement.
-   */
-  constructor(config) {
-    this.config = config;
-  }
-
-  /* -------------------------------------------- */
-  /*  Properties                                  */
-  /* -------------------------------------------- */
-
-  /**
-   * Configuration information for the placements.
-   * @type {TokenPlacementConfiguration}
-   */
-  config;
+export default class TokenPlacement extends BasePlacement {
 
   /* -------------------------------------------- */
   /*  Placement                                   */
   /* -------------------------------------------- */
 
-  /**
-   * Perform the placement, asking player guidance when necessary.
-   * @param {TokenPlacementConfiguration} config
-   * @returns {Promise<TokenPlacementData[]>}
-   */
-  static place(config) {
-    const placement = new this(config);
-    return placement.place();
-  }
-
-  /**
-   * Perform the placement, asking player guidance when necessary.
-   * @returns {Promise<TokenPlacementData[]>}
-   */
-  async place() {
-    const activeLayer = canvas.activeLayer;
-    try {
-      const results = [];
-      const uniqueTokens = new Map();
-      await canvas.tokens.placeTokens(this.config.tokens.map(t => t.toObject()), {
-        create: false,
-        preConfirm: ({ document, index }) => {
-          const actorId = this.config.tokens[index].parent.id;
-          uniqueTokens.set(actorId, (uniqueTokens.get(actorId) ?? -1) + 1);
-          results.push({
-            x: document.x, y: document.y, elevation: document.elevation, rotation: document.rotation,
-            prototypeToken: this.config.tokens[index],
-            index: { total: index, unique: uniqueTokens.get(actorId) }
-          });
-        }
-      });
-      return results;
-    } finally {
-      if ( activeLayer !== canvas.activeLayer ) activeLayer.activate();
-    }
+  /** @override*/
+  async _place() {
+    const results = [];
+    const uniqueTokens = new Map();
+    await canvas.tokens.placeTokens(this.config.tokens.map(t => t.toObject()), {
+      create: false,
+      preConfirm: ({ document, index }) => {
+        const actorId = this.config.tokens[index].parent.id;
+        uniqueTokens.set(actorId, (uniqueTokens.get(actorId) ?? -1) + 1);
+        results.push({
+          x: document.x, y: document.y, elevation: document.elevation, rotation: document.rotation,
+          prototypeToken: this.config.tokens[index],
+          index: { total: index, unique: uniqueTokens.get(actorId) }
+        });
+      }
+    });
+    return results;
   }
 
   /* -------------------------------------------- */
