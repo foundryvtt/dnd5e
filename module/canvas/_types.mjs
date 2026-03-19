@@ -1,5 +1,13 @@
 /**
- * @typedef TemplatePlacementConfiguration
+ * @typedef BasePlacementConfiguration
+ * @property {boolean} [minimizeWindows=true]  Minimize windows to reveal the canvas.
+ * @property {boolean} [restoreLayer=true]     Return to original canvas layer after placement.
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef {BasePlacementConfiguration} TemplatePlacementConfiguration
  * @property {number} color                                  Color to use when creating the template.
  * @property {TokenDocument} [origin]                        Token that is the origin point of the placement.
  * @property {TemplatePlacementShapeConfiguration[]} shapes  Configuration data for individual placements.
@@ -20,7 +28,7 @@
 /* -------------------------------------------- */
 
 /**
- * @typedef TokenPlacementConfiguration
+ * @typedef {BasePlacementConfiguration} TokenPlacementConfiguration
  * @property {TokenDocument} [origin]   Token that is the origin point of the placement.
  * @property {PrototypeToken[]} tokens  Prototype token information for rendering.
  */
