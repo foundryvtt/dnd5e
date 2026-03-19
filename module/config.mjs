@@ -2833,6 +2833,12 @@ DND5E.areaTargetTypes = {
     template: "circle",
     standard: true
   },
+  ring: {
+    label: "DND5E.TARGET.Type.Ring.Label",
+    counted: "DND5E.TARGET.Type.Wall.Counted",
+    template: "ring",
+    sizes: ["radius", "thickness", "height"]
+  },
   sphere: {
     label: "DND5E.TARGET.Type.Sphere.Label",
     counted: "DND5E.TARGET.Type.Sphere.Counted",
