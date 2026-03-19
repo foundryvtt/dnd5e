@@ -89,16 +89,16 @@
  * @property {string} type                          Type of rest to perform.
  * @property {boolean} dialog                       Present a dialog window which allows for rolling hit dice
  *                                                  as part of the rest and selecting whether a new day has occurred.
+ * @property {typeof BaseRestDialog} [dialogClass]  A class for the dialog window.
  * @property {boolean} chat                         Should a chat message be created to summarize the results
  *                                                  of the rest?
  * @property {number} duration                      Amount of time passed during the rest in minutes.
  * @property {boolean} newDay                       Does this rest carry over to a new day?
- * @property {typeof BaseRestDialog} [dialogClass]  A class for the dialog window.
  * @property {boolean} [advanceBastionTurn]         Should a bastion turn be advanced for all players?
  * @property {boolean} [advanceTime]                Should the game clock be advanced by the rest duration?
- * @property {boolean} [autoHD]                     Should hit dice be spent automatically during a short rest?
+ * @property {boolean} [autoHD]                     Should hit dice be spent automatically during the rest?
  * @property {number} [autoHDThreshold]             How many hit points should be missing before hit dice are
- *                                                  automatically spent during a short rest.
+ *                                                  automatically spent during the rest.
  * @property {boolean} [recoverTemp]                Reset temp HP to zero.
  * @property {boolean} [recoverTempMax]             Reset temp max HP to zero.
  * @property {number} [exhaustionDelta]             A delta exhaustion to apply to creatures undergoing this rest.

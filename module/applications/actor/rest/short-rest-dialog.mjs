@@ -72,12 +72,17 @@ export default class ShortRestDialog extends BaseRestDialog {
         ? this.#denom : context.hitDice.options.find(o => o.number > 0)?.value;
     }
 
-    else context.fields.unshift({
-      field: context.autoRoll,
-      input: context.inputs.createCheckboxInput,
-      name: "autoHD",
-      value: context.config.autoHD
-    });
+    else {
+      if ( !context.fields.length ) {
+        context.formSections.unshift({ legend: "DND5E.REST.Configuration", fields: context.fields });
+      }
+      context.fields.unshift({
+        field: context.autoRoll,
+        input: context.inputs.createCheckboxInput,
+        name: "autoHD",
+        value: context.config.autoHD
+      });
+    }
 
     return context;
   }

@@ -346,7 +346,7 @@ export default class GroupData extends GroupTemplate {
     for ( const actor of targets ) {
       results.set(
         actor,
-        config.autoRest ? await actor.initiateRest(config.type, {
+        config.autoRest ? await actor.initiateRest({
           ...config, dialog: false, advanceBastionTurn: false, advanceTime: false
         }) ?? null : null
       );

@@ -1,6 +1,4 @@
 import BaseRestDialog from "../../applications/actor/rest/base-rest-dialog.mjs";
-import ShortRestDialog from "../../applications/actor/rest/short-rest-dialog.mjs";
-import LongRestDialog from "../../applications/actor/rest/long-rest-dialog.mjs";
 import CreateDocumentDialog from "../../applications/create-document-dialog.mjs";
 import SkillToolRollConfigurationDialog from "../../applications/dice/skill-tool-configuration-dialog.mjs";
 import PropertyAttribution from "../../applications/property-attribution.mjs";
@@ -2083,7 +2081,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /*  Resting                                     */
   /* -------------------------------------------- */
 
-  async initiateRest(type, config={}) {
+  /**
+   * Initiate a rest, spending or recovering hit dice, resources, item uses and spell slots according to configuration.
+   * @param {Partial<RestConfiguration>} [config]  Configuration options for the rest.
+   * @returns {Promise<RestResult>}                A Promise which resolves once the rest workflow has completed.
+   */
+  async initiateRest(config={}) {
     if ( this.system.isVehicle ) return;
     if ( !game.user.isGM && !game.settings.get("dnd5e", "allowRests") && !config.request ) {
       ui.notifications.warn("DND5E.REST.Warning.OnlyByRequest", { localize: true, log: false });
@@ -2091,11 +2094,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     const clone = this.clone();
-    const restConfig = CONFIG.DND5E.restTypes[type];
+    const restConfig = CONFIG.DND5E.restTypes[config.type];
     config = foundry.utils.mergeObject({
-      type, dialog: true, chat: !!restConfig.chat,
-      newDay: false, advanceTime: false,
+      type: restConfig.type, dialog: true, chat: restConfig.chat !== false,
       duration: restConfig.duration[game.settings.get("dnd5e", "restVariant")],
+      newDay: restConfig.newDay === true,
+      advanceBastionTurn: restConfig.advanceBastionTurn === true, advanceTime: restConfig.advanceTime === true,
+      autoHD: restConfig.autoHD === true, autoHDThreshold: 3,
       recoverTemp: restConfig.recoverTemp, recoverTempMax: restConfig.recoverTempMax,
       exhaustionDelta: restConfig.exhaustionDelta
     }, config);
@@ -2104,15 +2109,15 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     /**
-     * A hook event that fires before a rest is started.
-     * The actual name of the hook will depend on the rest type.
-     * @function dnd5e.preGenericRest
+     * A hook event that fires before a rest is started. The actual name of the hook will depend on the rest type
+     * (e.g. `dnd5e.preShortRest` or `dnd5e.preLongRest`).
+     * @function dnd5e.preRest
      * @memberof hookEvents
      * @param {Actor5e} actor             The actor that is being rested.
      * @param {RestConfiguration} config  Configuration options for the rest.
      * @returns {boolean}                 Explicitly return `false` to prevent the rest from being started.
      */
-    if ( Hooks.call(`dnd5e.pre${type.capitalize()}Rest`, this, config) === false ) return;
+    if ( Hooks.call(`dnd5e.pre${config.type.capitalize()}Rest`, this, config) === false ) return;
 
     // Take note of the initial hit points and number of hit dice the Actor has
     const hd0 = foundry.utils.getProperty(this, "system.attributes.hd.value");
@@ -2127,13 +2132,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     /**
      * A hook event that fires after a rest has started, after the configuration is complete.
-     * @function dnd5e.genericRest
+     * @function dnd5e.rest
      * @memberof hookEvents
      * @param {Actor5e} actor             The actor that is being rested.
      * @param {RestConfiguration} config  Configuration options for the rest.
      * @returns {boolean}                 Explicitly return `false` to prevent the rest from being continued.
      */
-    if ( Hooks.call(`dnd5e.${type}Rest`, this, config) === false ) return;
+    if ( Hooks.call(`dnd5e.${config.type}Rest`, this, config) === false ) return;
 
     // Automatically spend hit dice
     if ( config.autoHD ) await this.autoSpendHitDice({ threshold: config.autoHDThreshold });
@@ -2144,13 +2149,15 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     return this._rest(config, { clone, dhd, dhp });
   }
 
+  /* -------------------------------------------- */
+
   /**
    * Take a short rest, possibly spending hit dice and recovering resources, item uses, and relevant spell slots.
    * @param {Partial<RestConfiguration>} [config]  Configuration options for a short rest.
    * @returns {Promise<RestResult>}                A Promise which resolves once the short rest workflow has completed.
    */
   async shortRest(config={}) {
-    return this.initiateRest("short", { dialogClass: ShortRestDialog, chat: true, autoHD: false, autoHDThreshold: 3, ...config });
+    return this.initiateRest({ ...config, type: "short" });
   }
 
   /* -------------------------------------------- */
@@ -2161,7 +2168,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<RestResult>}       A Promise which resolves once the long rest workflow has completed.
    */
   async longRest(config={}) {
-    return this.initiateRest("long", { dialogClass: LongRestDialog, chat: true, newDay: true, ...config });
+    return this.initiateRest({ ...config, type: "long" });
   }
 
   /* -------------------------------------------- */
@@ -2174,7 +2181,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<ChatMessage5e|null>}
    */
   static async handleRestRequest(actor, request, config) {
-    const result = await actor.initiateRest(config.type, {
+    const result = await actor.initiateRest({
       ...config, request, advanceBastionTurn: false, advanceTime: false
     });
     return result?.message ?? null;
@@ -2288,8 +2295,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     // Determine the chat message to display
     let message;
-    if (typeof typeConfig.chat === "string") message = typeConfig.chat;
-    if (!message) {
+    if ( typeof typeConfig.chat === "string" ) message = typeConfig.chat;
+    if ( !message ) {
       if ( diceRestored && healthRestored ) message = `DND5E.REST.${length}.Result.Full`;
       else if ( longRest && !diceRestored && healthRestored ) message = "DND5E.REST.Long.Result.HitPoints";
       else if ( longRest && diceRestored && !healthRestored ) message = "DND5E.REST.Long.Result.HitDice";

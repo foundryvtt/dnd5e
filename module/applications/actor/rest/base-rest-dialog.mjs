@@ -32,9 +32,7 @@ export default class BaseRestDialog extends Dialog5e {
       width: 380
     },
     templates: [
-      "systems/dnd5e/templates/actors/rest/parts/fields.hbs",
       "systems/dnd5e/templates/actors/rest/parts/hit-dice.hbs",
-      "systems/dnd5e/templates/actors/rest/parts/hit-points.hbs",
       "systems/dnd5e/templates/actors/rest/parts/rest-request.hbs"
     ]
   };
@@ -118,6 +116,7 @@ export default class BaseRestDialog extends Dialog5e {
       config: this.config,
       fields: [],
       hitPoints: [],
+      formSections: [],
       result: this.result,
       hd: this.actor.system.attributes?.hd,
       hp: this.actor.system.attributes?.hp,
@@ -155,6 +154,13 @@ export default class BaseRestDialog extends Dialog5e {
       name: "recoverTempMax",
       value: context.config.recoverTempMax
     });
+
+    if ( context.fields.length ) {
+      context.formSections.push({ legend: "DND5E.REST.Configuration", fields: context.fields });
+    }
+    if ( context.hitPoints.length ) {
+      context.formSections.push({ legend: "DND5E.HitPoints", fields: context.hitPoints });
+    }
 
     if ( this.isPartyGroup ) {
       const restSettings = this.actor.getFlag("dnd5e", "restSettings") ?? {};

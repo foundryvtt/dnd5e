@@ -397,11 +397,14 @@
  * @property {string} label                         Localized label for the rest type.
  * @property {string} icon                          Icon representing this rest type. Can be either a set of FontAwesome
  *                                                  classes or an image path.
- * @property {boolean} dialog                       Present a dialog window which allows for rolling hit dice as part of
- *                                                  the rest and selecting whether a new day has occurred.
  * @property {typeof BaseRestDialog} [dialogClass]  A class for the dialog window.
- * @property {string|boolean} [chat]                A chat message to be created to summarize the results of the rest,
- *                                                  or a boolean indicating whether to create it or not.
+ * @property {string|boolean} [chat=true]           A localization string for the chat text created to summarize the
+ *                                                  results of the rest, or a boolean indicating whether to create it
+ *                                                  or not.
+ * @property {boolean} [newDay=false]               Does this rest carry over to a new day?
+ * @property {boolean} [advanceBastionTurn=false]   Should a bastion turn be advanced for all players?
+ * @property {boolean} [advanceTime=false]          Should the game clock be advanced by the rest duration?
+ * @property {boolean} [autoHD=false]               Should hit dice be spent automatically during the rest?
  * @property {string[]} [activationPeriods]         Activation types that should be displayed in the chat card.
  * @property {number} [exhaustionDelta]             Delta exhaustion to apply to creatures undergoing the rest.
  * @property {boolean} [recoverHitDice]             Should hit dice be recovered during this rest?

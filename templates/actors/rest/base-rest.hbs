@@ -1,11 +1,5 @@
 <section class="flexcol">
-    {{#if fields.length}}
-    {{> "systems/dnd5e/templates/actors/rest/parts/fields.hbs" }}
-    {{/if}}
-
-    {{#if hitPoints.length}}
-    {{> "systems/dnd5e/templates/actors/rest/parts/hit-points.hbs" }}
-    {{/if}}
+    {{> "dnd5e.formlist" formSections}}
 
     {{#if request}}
     {{> "systems/dnd5e/templates/actors/rest/parts/rest-request.hbs" }}

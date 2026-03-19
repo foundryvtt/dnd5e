@@ -253,9 +253,9 @@
                         {{#if showRests}}
                         {{#each CONFIG.restTypes}}
                             <button type="button" class="gold-button" data-action="rest" data-type="{{ @key }}"
-                                data-tooltip="{{ label }}"
-                                aria-label="{{ localize label }}">
-                            <i class="{{ icon }}" inert></i>
+                                    data-tooltip aria-label="{{ localize label }}">
+                                <i class="{{ icon }}" inert></i>
+                            </button>
                         {{/each}}
                         {{/if}}
                     </div>

@@ -10,6 +10,8 @@ import * as advancement from "./documents/advancement/_module.mjs";
 import { preLocalize } from "./utils.mjs";
 import MappingField from "./data/fields/mapping-field.mjs";
 import VehicleData from "./data/actor/vehicle.mjs";
+import ShortRestDialog from "./applications/actor/rest/short-rest-dialog.mjs";
+import LongRestDialog from "./applications/actor/rest/long-rest-dialog.mjs";
 
 /**
  * @import {
@@ -2884,6 +2886,7 @@ DND5E.restTypes = {
     },
     label: "DND5E.REST.Short.Label",
     icon: "fa-solid fa-utensils",
+    dialogClass: ShortRestDialog,
     activationPeriods: ["shortRest"],
     recoverPeriods: ["sr"],
     recoverSpellSlotTypes: new Set(["pact"])
@@ -2897,6 +2900,8 @@ DND5E.restTypes = {
     exhaustionDelta: -1,
     label: "DND5E.REST.Long.Label",
     icon: "fa-solid fa-campground",
+    dialogClass: LongRestDialog,
+    newDay: true,
     activationPeriods: ["longRest"],
     recoverHitDice: true,
     recoverHitPoints: true,
