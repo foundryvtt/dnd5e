@@ -1,4 +1,5 @@
 import { convertLength } from "../utils.mjs";
+import BasePlacement from "./api/base-placement.mjs";
 
 /**
  * @import {
@@ -8,75 +9,41 @@ import { convertLength } from "../utils.mjs";
 
 /**
  * Class responsible for placing templates onto the scene.
+ * @extends BasePlacement<TemplatePlacementConfiguration, TemplatePlacementData>
  */
-export default class TemplatePlacement {
-  /**
-   * Initialize the placement system using configuration information.
-   * @param {TemplatePlacementConfiguration} config  Configuration information for placement.
-   */
-  constructor(config) {
-    this.config = config;
-  }
-
-  /* -------------------------------------------- */
-  /*  Properties                                  */
-  /* -------------------------------------------- */
-
-  /**
-   * Configuration information for the placements.
-   * @type {TemplatePlacementConfiguration}
-   */
-  config;
+export default class TemplatePlacement extends BasePlacement {
 
   /* -------------------------------------------- */
   /*  Placement                                   */
   /* -------------------------------------------- */
 
-  /**
-   * Perform the placement, asking player guidance when necessary.
-   * @param {TemplatePlacementConfiguration} config
-   * @returns {Promise<TemplatePlacementData[]>}
-   */
-  static place(config) {
-    const placement = new this(config);
-    return placement.place();
-  }
-
-  /**
-   * Perform the placement, asking player guidance when necessary.
-   * @returns {Promise<TemplatePlacementData[]>}
-   */
-  async place() {
-    const activeLayer = canvas.activeLayer;
-    try {
-      const results = [];
-      await canvas.regions.placeRegion({
-        name: RegionDocument.implementation.defaultName({ parent: canvas.scene }),
-        color: this.config.color,
-        displayMeasurements: true,
-        highlightMode: "coverage",
-        shapes: this.config.shapes.map(s => this.#createShapeData(s)),
-        "flags.core.MeasuredTemplate": true
-      }, {
-        // TODO: `attachToToken: true` if emanation
-        create: false,
-        preConfirm: ({ document, index }) => {
-          const obj = document.toObject();
-          results.push({ ...obj.shapes.at(-1) });
-          // TODO: Set token ID if emanation attached to token
-        }
-      });
-      return results;
-    } finally {
-      if ( activeLayer !== canvas.activeLayer ) activeLayer.activate();
-    }
+  /** @override */
+  async _place() {
+    const results = [];
+    await canvas.regions.placeRegion({
+      name: RegionDocument.implementation.defaultName({ parent: canvas.scene }),
+      color: this.config.color,
+      displayMeasurements: true,
+      highlightMode: "coverage",
+      shapes: this.config.shapes.map(s => this.#createShapeData(s)),
+      "flags.core.MeasuredTemplate": true
+    }, {
+      // TODO: `attachToToken: true` if emanation
+      create: false,
+      preConfirm: ({ document, index }) => {
+        const obj = document.toObject();
+        results.push({ ...obj.shapes.at(-1) });
+        // TODO: Set token ID if emanation attached to token
+      }
+    });
+    return results;
   }
 
   /* -------------------------------------------- */
 
   /**
    * Create data for each shape using the standard config.
-   * @param {TemplatePlacementShapeConfiguration}
+   * @param {TemplatePlacementShapeConfiguration} configuration
    * @returns {Partial<BaseShapeData>}
    */
   #createShapeData({ type, ...baseSizes }) {

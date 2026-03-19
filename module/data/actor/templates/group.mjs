@@ -91,8 +91,6 @@ export default class GroupTemplate extends ActorDataModel.mixin(CurrencyTemplate
         log: "error",
         notify: "error"
       });
-    } finally {
-      if ( minimized ) this.parent.sheet.maximize();
     }
 
     return canvas.scene.createEmbeddedDocuments("Token", tokensData);
