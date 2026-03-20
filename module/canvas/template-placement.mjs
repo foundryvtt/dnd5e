@@ -21,14 +21,14 @@ export default class TemplatePlacement extends BasePlacement {
   async _place() {
     const results = [];
     const attachToToken = this.config.shapes.some(s => s.type === "emanation");
-    await canvas.regions.placeRegion({
+    await canvas.regions.placeRegions(this.config.shapes.map(s => ({
       name: RegionDocument.implementation.defaultName({ parent: canvas.scene }),
       color: this.config.color,
       displayMeasurements: true,
       highlightMode: "coverage",
-      shapes: this.config.shapes.map(s => this.#createShapeData(s)),
+      shapes: [this.#createShapeData(s)],
       "flags.core.MeasuredTemplate": true
-    }, {
+    })), {
       attachToToken,
       create: false,
       preConfirm: ({ document, index }) => {
