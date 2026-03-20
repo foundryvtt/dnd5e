@@ -23,6 +23,7 @@
 
 /**
  * @typedef {BaseShapeData} TemplatePlacementData
+ * @property {string} [token]  ID of attached token.
  */
 
 /* -------------------------------------------- */
