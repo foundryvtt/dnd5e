@@ -2083,8 +2083,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * Initiate a rest, spending or recovering hit dice, resources, item uses and spell slots according to configuration.
-   * @param {Partial<RestConfiguration>} [config]  Configuration options for the rest.
-   * @returns {Promise<RestResult>}                A Promise which resolves once the rest workflow has completed.
+   * @param {Partial<RestConfiguration>} config  Configuration options for the rest. Must include the rest type.
+   * @returns {Promise<RestResult>}              A Promise which resolves once the rest workflow has completed.
    */
   async initiateRest(config={}) {
     if ( this.system.isVehicle ) return;
@@ -2096,7 +2096,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const clone = this.clone();
     const restConfig = CONFIG.DND5E.restTypes[config.type];
     config = foundry.utils.mergeObject({
-      type: restConfig.type, dialog: true, chat: restConfig.chat !== false,
+      dialog: true, chat: restConfig.chat !== false,
       duration: restConfig.duration[game.settings.get("dnd5e", "restVariant")],
       newDay: restConfig.newDay === true,
       advanceBastionTurn: restConfig.advanceBastionTurn === true, advanceTime: restConfig.advanceTime === true,
@@ -2104,9 +2104,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       recoverTemp: restConfig.recoverTemp, recoverTempMax: restConfig.recoverTempMax,
       exhaustionDelta: restConfig.exhaustionDelta
     }, config);
-    if ( !Object.hasOwn(config, "dialogClass") ) {
-      config.dialogClass = restConfig.dialogClass ?? BaseRestDialog;
-    }
+    config.dialogClass ??= restConfig.dialogClass ?? BaseRestDialog;
 
     /**
      * A hook event that fires before a rest is started. The actual name of the hook will depend on the rest type
