@@ -3,19 +3,7 @@
         {{ localize (ifThen isGroup "DND5E.REST.Short.Hint.Group" "DND5E.REST.Short.Hint.Normal") }}
     </div>
 
-    {{#if fields.length}}
-    <fieldset>
-        <legend>{{ localize "DND5E.REST.Configuration" }}</legend>
-        {{> "dnd5e.fieldlist" fields }}
-    </fieldset>
-    {{/if}}
-
-    {{#if hitPoints.length}}
-    <fieldset>
-        <legend>{{ localize "DND5E.HitPoints" }}</legend>
-        {{> "dnd5e.fieldlist" hitPoints }}
-    </fieldset>
-    {{/if}}
+    {{> "dnd5e.formlist" formSections }}
 
     {{#if hitDice}}
     {{#if hitDice.canRoll}}
@@ -40,6 +28,6 @@
     {{/if}}
 
     {{#if request}}
-    {{> "systems/dnd5e/templates/actors/rest/rest-request.hbs" }}
+    {{> "systems/dnd5e/templates/actors/rest/parts/rest-request.hbs" }}
     {{/if}}
 </section>

@@ -1355,8 +1355,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @param {HTMLElement} target  Button that was clicked.
    */
   static #rest(event, target) {
-    if ( target.dataset.type === "short" ) this.actor.shortRest();
-    else this.actor.longRest();
+    this.actor.initiateRest({ type: target.dataset.type });
   }
 
   /* -------------------------------------------- */
