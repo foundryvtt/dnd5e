@@ -264,12 +264,19 @@
 
 "DND5E.ACTIVEEFFECT": {
   "AttributeKeyTooltip": "For a list of common keys, see <a href=\"{url}\">the wiki</a>.",
+  "EXPIRIES": {
+    "sourceStart": "Start of Source's Next Turn",
+    "sourceEnd": "End of Source's Next Turn",
+    "targetStart": "Start of Target's Next Turn",
+    "targetEnd": "End of Target's Next Turn"
+  },
   "FIELDS": {
     "statuses": {
       "label": "Status Conditions",
       "hint": "While affected by this Active Effect, the target will be treated as having these additional status conditions."
     }
-  }
+  },
+  "SystemExpiries": "5e-Specific Expiries"
 },
 
 "DND5E.ACTIVITY": {
