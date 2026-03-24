@@ -2775,7 +2775,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     if ( settings.keep.has("self") ) {
       o.img = sourceData.img;
-      o.name = o.prototypeToken.name = `${o.name} (${game.i18n.localize("DND5E.TRANSFORM.Preset.Appearance.Label")})`;
+      o.name = `${o.name} (${game.i18n.localize("DND5E.TRANSFORM.Preset.Appearance.Label")})`;
     }
 
     // Prepare new data to merge from the source
@@ -2789,7 +2789,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       ownership: o.ownership, // Use the original actor permissions
       folder: o.folder, // Be displayed in the same sidebar folder
       flags: o.flags, // Use the original actor flags
-      prototypeToken: { name: `${o.name} (${sourceData.name})`, texture: {}, sight: {}, detectionModes: [] } // Set a new empty token
+      prototypeToken: { texture: {}, sight: {}, detectionModes: [] } // Set a new empty token
     }), settings.keep.has("self") ? o : {}); // Keeps most of original actor
 
     // Specifically delete some data attributes
@@ -2813,7 +2813,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const tokenPropsFromSource = ["width", "height", "alpha", "lockRotation", "ring"];
     const tokenTexturePropsFromSource = ["offsetX", "offsetY", "scaleX", "scaleY", "src", "tint"];
     const tokenPropsFromSelf = [
-      "bar1", "bar2", "displayBars", "displayName", "disposition", "rotation", "elevation", "hidden"
+      "bar1", "bar2", "displayBars", "displayName", "actorLink", "disposition", "rotation", "elevation", "hidden"
     ];
 
     for ( const k of tokenPropsFromSource ) {
@@ -3021,6 +3021,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       for ( const k of tokenPropsFromSelf ) {
         tokenData[k] = this.token[k];
       }
+      if ( settings.keep.has("self") ) {
+        tokenData.name = `${this.token.name} (${game.i18n.localize("DND5E.TRANSFORM.Preset.Appearance.Label")})`;
+      } else {
+        tokenData.name = `${this.token.name} (${sourceData.name})`;
+      }
+
       if ( !this.token.flags.dnd5e?.previousActorData ) {
         const previousActorData = this.token.delta.toObject();
         const previousTokenData = { texture: {} };
@@ -3081,6 +3087,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       newTokenData.actorLink = true;
       for ( const k of tokenPropsFromSelf ) {
         newTokenData[k] = t.document[k];
+      }
+      if ( settings.keep.has("self") ) {
+        newTokenData.name = `${t.document.name} (${game.i18n.localize("DND5E.TRANSFORM.Preset.Appearance.Label")})`;
+      } else {
+        newTokenData.name = `${t.document.name} (${sourceData.name})`;
       }
 
       const dOriginalActor = foundry.utils.getProperty(d, "flags.dnd5e.originalActor");
