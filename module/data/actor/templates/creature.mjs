@@ -2,6 +2,7 @@ import { simplifyBonus } from "../../../utils.mjs";
 import AdvantageModeField from "../../fields/advantage-mode-field.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 import MappingField from "../../fields/mapping-field.mjs";
+import { DamageData } from "../../shared/damage-field.mjs";
 import RollConfigField from "../../shared/roll-config-field.mjs";
 import SensesField from "../../shared/senses-field.mjs";
 import CommonTemplate from "./common.mjs";
@@ -347,56 +348,12 @@ function makeAttackBonuses(schemaOptions={}) {
 
 /* -------------------------------------------- */
 
-class UnarmedStrikeDamageData extends foundry.abstract.DataModel {
+class UnarmedStrikeDamageData extends DamageData {
   /** @inheritDoc */
   static defineSchema() {
-    return {
-      faces: new NumberField({ initial: 0, integer: true, nullable: false, min: 0 }),
-      modifiers: new SetField(new StringField()),
-      number: new NumberField({ initial: 0, integer: true, nullable: false, min: 0 })
-    };
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * The die value to be rolled with the leading "d" (e.g. "d4").
-   * @type {string}
-   */
-  get denom() {
-    return `d${this.faces}`;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * The entire die, with leading "d" and any modifiers, e.g., "d4" or "d4r1".
-   * @type {string}
-   */
-  get die() {
-    return `d${this.faces}${this.mods}`;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Formula representation of an unarmed strike's damage.
-   * @type {string}
-   */
-  get formula() {
-    return [
-      this.faces && this.number ? `${this.number}${this.die}` : "1"
-    ].filterJoin(" + ");
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * The die modifiers.
-   * @type {string}
-   */
-  get mods() {
-    return Array.from(this.modifiers).filter(dnd5e.utils.isValidDieModifier).join("");
+    return Object.assign(super.defineSchema(), {
+      types: new SetField(new StringField(), { initial: ["bludgeoning"] })
+    });
   }
 
   /* -------------------------------------------- */
