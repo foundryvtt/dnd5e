@@ -273,8 +273,10 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
 
   /** @inheritDoc */
   get scalingIncrease() {
-    if ( this.level !== 0 ) return null;
-    return Math.floor(((this.parent.actor?.system.cantripLevel?.(this.parent) ?? 0) + 1) / 6);
+    if ( this.level === 0 ) return Math.floor(((this.parent.actor?.system.cantripLevel?.(this.parent) ?? 0) + 1) / 6);
+    const activity = this.linkedActivity;
+    if ( !activity?.spell?.level || (activity.spell.level <= this.level) ) return null;
+    return activity.spell.level - this.level;
   }
 
   /* -------------------------------------------- */
@@ -647,7 +649,8 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   /** @inheritDoc */
   getRollData(...options) {
     const data = super.getRollData(...options);
-    data.item.level = data.item.level + (this.parent.getFlag("dnd5e", "scaling") ?? 0);
+    data.item.level = data.item.level + (this.parent.getFlag("dnd5e", "scaling")
+      ?? (this.level !== 0 ? this.scalingIncrease : 0));
     return data;
   }
 
