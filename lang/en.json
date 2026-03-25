@@ -5818,9 +5818,19 @@
 "MACRO.5eNoActorSelected": "No selected or assigned actor could be found to target with macro.",
 "MACRO.5eUnownedWarn": "You can only create macro buttons for owned Items",
 
-"MIGRATION.5eBegin": "Applying D&D 5e System Migration for version {version}. Please be patient and do not close your game or shut down your server.",
-"MIGRATION.5eComplete": "D&D 5e System Migration to version {version} completed!",
-"MIGRATION.5eVersionTooOldWarning": "Your D&D 5e system data is from too old a Foundry version and cannot be reliably migrated to the latest version. The process will be attempted, but errors may occur.",
+"MIGRATION.DND5E": {
+  "Compendium": {
+    "Migrate": "Migrating compendium {compendium} for version {version}.",
+    "Refresh": "Refreshing compendium {compendium}."
+  },
+  "World": {
+    "Begin": "Applying D&D 5e System Migration for version {version}. Please be patient and do not close your game or shut down your server.",
+    "Complete": "D&D 5e System Migration to version {version} completed!"
+  },
+  "Warning": {
+    "VersionTooOld": "Your D&D 5e system data is from too old a Foundry version and cannot be reliably migrated to the latest version. The process will be attempted, but errors may occur."
+  }
+},
 
 "SETTINGS.5eAutoCollapseCardL": "Automatically collapse Item Card descriptions in the Chat Log",
 "SETTINGS.5eAutoCollapseCardN": "Collapse Item Cards in Chat",
