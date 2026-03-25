@@ -183,7 +183,7 @@
 {{#*inline ".skill-prof"}}
 <li data-key="{{ key }}" {{~#if reference}} data-reference-tooltip="{{ reference }}"{{/if}}>
     <proficiency-cycle type="skill" name="{{ path }}.value" data-tooltip="{{ hover }}"
-                       value="{{#if @root.editable}}{{ source.value }}{{else}}{{ value }}{{/if}}"
+                       value="{{#if @root.editable}}{{ source.value }}{{else}}{{ prof.multiplier }}{{/if}}"
                        aria-label="{{ localize hover }}" {{disabled (not @root.editable)}}></proficiency-cycle>
     {{#if @root.editable}}
     <select name="{{ path }}.ability" class="ability roboto-upper unselect">
