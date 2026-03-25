@@ -231,6 +231,11 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     }
   }
 
+  /** @override */
+  async _onOverrideSize(changes) {
+    this.update(changes);
+  }
+
   /* -------------------------------------------- */
   /*  Socket Event Handlers                       */
   /* -------------------------------------------- */

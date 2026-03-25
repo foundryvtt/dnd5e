@@ -218,7 +218,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /** @inheritDoc */
   static applyChange(model, change, options={}) {
-    change = change.effect._applyChangeShim(change);
+    change = change.effect?._applyChangeShim(change) ?? change;
     if ( change.key.startsWith("flags.dnd5e.") ) change = change.effect._prepareFlagChange(model, change);
     if ( ActiveEffect5e.FORMULA_FIELDS.has(change.key) ) {
       const field = new FormulaField({ deterministic: true });
@@ -270,16 +270,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
     // If current value is `null`, UPGRADE & DOWNGRADE should always just set the value
     if ( (current === null) && ["upgrade", "downgrade"].includes(change.type) ) change.type = "override";
-
-    // Handle removing entries from sets
-    if ( (field instanceof SetField) && (change.type === "add") && (foundry.utils.getType(current) === "Set") ) {
-      for ( const value of field._castChangeDelta(change.value) ) {
-        const neg = value.replace(/^\s*-\s*/, "");
-        if ( neg !== value ) current.delete(neg);
-        else current.add(value);
-      }
-      return current;
-    }
 
     // If attempting to apply active effect to empty MappingField entry, create it
     if ( (current === undefined) && change.key.startsWith("system.") ) {
