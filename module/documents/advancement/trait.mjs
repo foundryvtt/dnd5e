@@ -3,7 +3,7 @@ import SelectChoices from "../actor/select-choices.mjs";
 import * as Trait from "../actor/trait.mjs";
 import TraitConfig from "../../applications/advancement/trait-config.mjs";
 import TraitFlow from "../../applications/advancement/trait-flow.mjs";
-import {TraitConfigurationData, TraitValueData} from "../../data/advancement/trait.mjs";
+import {TraitConfigurationData, TraitValueData} from "../../data/advancement/trait-data.mjs";
 import { filteredKeys, localizeSchema } from "../../utils.mjs";
 
 /**

@@ -1,5 +1,5 @@
 import SubclassFlow from "../../applications/advancement/subclass-flow.mjs";
-import { SubclassValueData } from "../../data/advancement/subclass.mjs";
+import { SubclassValueData } from "../../data/advancement/subclass-data.mjs";
 import Advancement from "./advancement.mjs";
 
 /**

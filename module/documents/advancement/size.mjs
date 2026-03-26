@@ -1,7 +1,7 @@
 import Advancement from "./advancement.mjs";
 import SizeConfig from "../../applications/advancement/size-config.mjs";
 import SizeFlow from "../../applications/advancement/size-flow.mjs";
-import { SizeConfigurationData, SizeValueData } from "../../data/advancement/size.mjs";
+import { SizeConfigurationData, SizeValueData } from "../../data/advancement/size-data.mjs";
 
 /**
  * Advancement that handles player size.

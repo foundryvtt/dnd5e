@@ -610,6 +610,32 @@
     "Selection": "Advancement Selection",
     "Title": "Migrate Advancement"
   },
+  "ModifyItem": {
+    "Action": {
+      "AddChange": "Add Change",
+      "DeleteChange": "Delete Change"
+    },
+    "Empty": {
+      "WithDropdown": "No changes. Use the <i class=\"fa-solid fa-plus\"></i> button above to create one, or select an existing effect from the drop-down.",
+      "WithoutDropdown": "No changes. Use the <i class=\"fa-solid fa-plus\"></i> button above to create one."
+    },
+    "FIELDS": {
+      "changes": {
+        "element": {
+          "enchantment": {
+            "label": "Applied Enchantment"
+          },
+          "identifiers": {
+            "hint": "Identifiers for items that will be modified by this enchantment. Identifiers can be prefixed using the item type (e.g. \"spell:mage-hand\").",
+            "label": "Modified Items"
+          }
+        },
+        "label": "Item Changes"
+      }
+    },
+    "Hint": "Modify existing items using an enchantment.",
+    "Title": "Modify Items"
+  },
   "ScaleValue": {
     "Action": {
       "CopyFormula": "Copy Formula"
