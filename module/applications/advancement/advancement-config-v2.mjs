@@ -117,10 +117,11 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
     const uuidToDelete = target.closest("[data-item-uuid]")?.dataset.itemUuid;
     if ( !uuidToDelete ) return;
     const items = foundry.utils.getProperty(this.advancement.configuration, this.options.dropKeyPath);
-    const updates = { configuration: await this.prepareConfigurationUpdate({
-      [this.options.dropKeyPath]: items.filter(i => i.uuid !== uuidToDelete)
-    }) };
-    await this.advancement.update(updates);
+    await this.submit({
+      updateData: {
+        [`configuration.${this.options.dropKeyPath}`]: items.filter(i => i.uuid !== uuidToDelete)
+      }
+    });
   }
 
   /* -------------------------------------------- */
@@ -213,9 +214,11 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
       return;
     }
 
-    await this.advancement.update({[`configuration.${this.options.dropKeyPath}`]: [
-      ...existingItems, { uuid: item.uuid }
-    ]});
+    await this.submit({
+      updateData: {
+        [`configuration.${this.options.dropKeyPath}`]: [...existingItems, { uuid: item.uuid }]
+      }
+    });
   }
 
   /* -------------------------------------------- */
