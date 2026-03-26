@@ -366,7 +366,7 @@ export default class NPCActorSheet extends BaseActorSheet {
     // Skills & Tools
     const skillSetting = game.settings.get("dnd5e", "defaultSkills");
     context.skills = this._prepareSkillsTools(context, "skills")
-      .filter(v => v.value || skillSetting.has(v.key) || v.bonuses.check || v.bonuses.passive);
+      .filter(v => v.prof.multiplier || skillSetting.has(v.key) || v.bonuses.check || v.bonuses.passive);
     context.tools = this._prepareSkillsTools(context, "tools");
 
     // Speed
