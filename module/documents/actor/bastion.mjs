@@ -252,7 +252,8 @@ export default class Bastion {
     if ( !game.user.isGM ) return;
     const proceed = await foundry.applications.api.DialogV2.confirm({
       content: game.i18n.localize("DND5E.Bastion.Confirm"),
-      rejectClose: false
+      rejectClose: false,
+      window: { icon: "fa-solid fa-chess-rook", title: "DND5E.Bastion.Action.BastionTurn" }
     });
     if ( proceed ) return this.advanceAllBastions();
   }
