@@ -291,7 +291,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
     // Currency
     context.currency = Object.fromEntries(
-      Object.keys(CONFIG.DND5E.currencies).map(k => [k, this.inventorySource.system._source.currency[k] ?? 0])
+      Object.keys(CONFIG.DND5E.currencies).map(k => [k, this.inventorySource.system.currency[k] ?? 0])
     );
 
     // Containers

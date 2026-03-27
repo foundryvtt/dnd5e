@@ -272,6 +272,7 @@ export default class VehicleData extends CommonTemplate {
     const { originalSaves } = this.parent.getOriginalStats();
 
     this.prepareAbilities({ rollData, originalSaves });
+    this.prepareCurrency();
     AttributesFields.prepareArmorClass.call(this, rollData);
     if ( this.attributes.ac.value ) {
       this.attributes.ac.motionless = this.attributes.ac.value - Math.max(0, this.abilities.dex?.mod ?? 0);

@@ -306,6 +306,7 @@ export default class ContainerData extends ItemDataModel.mixin(
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
+    this.prepareCurrency();
     this.prepareDescriptionData();
     this.prepareIdentifiable();
     this.preparePhysicalData();

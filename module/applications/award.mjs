@@ -1,4 +1,4 @@
-import { filteredKeys, formatNumber } from "../utils.mjs";
+import { filteredKeys, formatNumber, roundCurrency } from "../utils.mjs";
 import Application5e from "./api/application.mjs";
 
 /**
@@ -231,7 +231,7 @@ export default class Award extends Application5e {
         if ( !amount ) continue;
         amount = Math.clamp(
           // Divide amount between remaining destinations
-          Math.floor(amount / remainingDestinations),
+          roundCurrency(amount / remainingDestinations, key),
           // Ensure negative amounts aren't more than is contained in destination
           -destination.system.currency[key],
           // Ensure positive amounts aren't more than is contained in origin
