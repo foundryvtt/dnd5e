@@ -160,8 +160,8 @@
     {{!-- Speed --}}
     {{#if showCombatSpeed}}
     {{> "systems/dnd5e/templates/actors/parts/actor-trait-line.hbs" icon="fa-solid fa-shoe-prints"
-        label="DND5E.Speed" configAction="movement" configLabel="DND5E.MOVEMENT.Action.Configure" unitsConfig=CONFIG.movementUnits formatted=(dnd5e-formatLength system.attributes.movement.max
-        unit=system.attributes.movement.units parts=true) }}
+        label="DND5E.Speed" configAction="movement" configLabel="DND5E.MOVEMENT.Action.Configure"
+        unitsConfig=CONFIG.movementUnits formatted=combatSpeed }}
     {{/if}}
     {{#if showTravelSpeed}}
     {{> "systems/dnd5e/templates/actors/parts/actor-trait-line.hbs" icon="fa-solid fa-sailboat"

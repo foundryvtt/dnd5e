@@ -623,7 +623,7 @@ export default class NPCData extends CreatureTemplate {
           .map(([k, { label }]) => {
             let prepared = prepareMeasured(this.attributes.movement[k], this.attributes.movement.units, label);
             if ( (k === "fly") && this.attributes.movement.hover ) {
-              prepared = `${prepared} (${game.i18n.localize("DND5E.MOVEMENT.Hover").toLowerCase()})`;
+              prepared = game.i18n.format("DND5E.MOVEMENT.HoverSpeed", { speed: prepared });
             }
             return prepared;
           })
