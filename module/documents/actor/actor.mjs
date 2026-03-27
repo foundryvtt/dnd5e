@@ -847,18 +847,28 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       }
 
       let damageMultiplier = multiplier;
+      let appliedDamage = d.value * multiplier;
 
       // Apply damage resistance
-      if ( this.#changeHasEffect("resistance", d, { options }) ) damageMultiplier /= 2;
+      if ( this.#changeHasEffect("resistance", d, { options }) ) {
+        damageMultiplier /= 2;
+        appliedDamage = Math.trunc(appliedDamage / 2);
+      }
 
       // Apply damage vulnerability
-      if ( this.#changeHasEffect("vulnerability", d, { options }) ) damageMultiplier *= 2;
+      if ( this.#changeHasEffect("vulnerability", d, { options }) ) {
+        damageMultiplier *= 2;
+        appliedDamage *= 2;
+      }
 
       // Negate healing types
       if ( (options.invertHealing !== false) && ((d.type === "healing")
-        || ((d.type === "maximum") && (treatAs === "healing"))) ) damageMultiplier *= -1;
+        || ((d.type === "maximum") && (treatAs === "healing"))) ) {
+        damageMultiplier *= -1;
+        appliedDamage *= -1;
+      }
 
-      d.value = d.value * damageMultiplier;
+      d.value = appliedDamage;
       d.active.multiplier = (d.active.multiplier ?? 1) * damageMultiplier;
       if ( d.type === "temphp" ) damages.temp += d.value;
       else if ( d.type === "maximum" ) damages.tempMax += d.value;
@@ -866,7 +876,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     });
 
     if ( damages.tempMax < 0 ) damages.amount += damages.tempMax;
-    damages.amount = damages.amount > 0 ? Math.floor(damages.amount) : Math.ceil(damages.amount);
+    damages.amount = Math.trunc(damages.amount);
 
     // Apply damage threshold
     if ( ((damages.amount > 0) && (damages.amount < (this.system.attributes?.hp?.dt ?? -Infinity)))
