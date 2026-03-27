@@ -246,10 +246,14 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     if ( config.type === "feat" ) {
       filters.locked.arbitrary = [{ k: "system.prerequisites.level", o: "lte", v: this.featureLevel }];
     } else if ( (config.type === "spell") && (config.restriction.level !== "") ) {
-      filters.locked.additional.level = {
-        min: config.restriction.level === "available" ? undefined : Number(config.restriction.level),
-        max: config.restriction.level === "available" ? this._maxSpellSlotLevel() : Number(config.restriction.level)
-      };
+      if ( config.restriction.level === "available" ) {
+        filters.locked.additional.level = { max: this._maxSpellSlotLevel() };
+      } else {
+        filters.locked.additional.level = {
+          min: Number(config.restriction.level),
+          max: Number(config.restriction.level)
+        };
+      }
     }
 
     // Apply restrictions based on spell list
