@@ -508,14 +508,15 @@ export async function enrichCheck(config, label, options) {
   for ( const tool of config.tool ) {
     const toolConfig = CONFIG.DND5E.tools[slugify(tool)];
     const toolUUID = CONFIG.DND5E.enrichmentLookup.tools[slugify(tool)];
-    const toolIndex = toolUUID ? Trait.getBaseItem(toolUUID.id, { indexOnly: true }) : null;
-    if ( toolIndex ) {
+    const toolIndex = toolUUID?.id ? Trait.getBaseItem(toolUUID.id, { indexOnly: true }) : null;
+    const toolLabel = toolIndex?.name ?? toolUUID?.label;
+    if ( toolLabel ) {
       const ability = config.ability || toolConfig?.ability;
       if ( config.skill.length && (config.tool.length === 1) && (config._rules === "2024") ) {
-        usingTool = { key: tool, label: toolIndex.name };
+        usingTool = { key: tool, label: toolLabel };
       } else if ( ability ) {
         if ( !groups.has(ability) ) groups.set(ability, []);
-        groups.get(ability).push({ key: tool, type: "tool", label: toolIndex.name });
+        groups.get(ability).push({ key: tool, type: "tool", label: toolLabel });
       } else {
         console.warn(`Tool "${tool}" found without specified or default ability while enriching ${config._input}.`);
         invalid = true;
@@ -1446,7 +1447,7 @@ export function createRollLabel(config) {
   const { label: ability, abbreviation } = CONFIG.DND5E.abilities[config.ability] ?? {};
   const skill = CONFIG.DND5E.skills[config.skill]?.label;
   const toolUUID = CONFIG.DND5E.enrichmentLookup.tools[config.tool];
-  const tool = toolUUID ? Trait.getBaseItem(toolUUID.id, { indexOnly: true })?.name : null;
+  const tool = toolUUID?.id ? Trait.getBaseItem(toolUUID.id, { indexOnly: true })?.name : toolUUID?.label ?? null;
   const longSuffix = config.format === "long" ? "Long" : "Short";
   const showDC = config.dc && !config.hideDC;
 

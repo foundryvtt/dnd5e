@@ -4886,6 +4886,7 @@ Object.defineProperty(DND5E, "enrichmentLookup", {
       addFullKeys("abilities");
       addFullKeys("skills");
       addFullKeys("spellSchools");
+      Object.entries(DND5E.vehicleTypes).forEach(([k, label]) => _enrichmentLookup.tools[k] = { label });
     }
     return _enrichmentLookup;
   },
