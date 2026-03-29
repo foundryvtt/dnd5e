@@ -120,18 +120,17 @@ export default class ChatMessage5e extends ChatMessage {
 
     if ( foundry.utils.getType(this.system?.getHTML) === "function" ) {
       await this.system.getHTML(html, options);
-      return html;
-    }
+    } else {
+      this._displayChatActionButtons(html);
+      this._highlightCriticalSuccessFailure(html);
+      if ( game.settings.get("dnd5e", "autoCollapseItemCards") ) {
+        html.querySelectorAll(".description.collapsible").forEach(el => el.classList.add("collapsed"));
+      }
 
-    this._displayChatActionButtons(html);
-    this._highlightCriticalSuccessFailure(html);
-    if ( game.settings.get("dnd5e", "autoCollapseItemCards") ) {
-      html.querySelectorAll(".description.collapsible").forEach(el => el.classList.add("collapsed"));
+      await this._enrichChatCard(html);
+      this._collapseTrays(html);
+      dnd5e.enrichers.activateChatListeners(this, html);
     }
-
-    await this._enrichChatCard(html);
-    this._collapseTrays(html);
-    dnd5e.enrichers.activateChatListeners(this, html);
 
     /**
      * A hook event that fires after dnd5e-specific chat message modifications have completed.
