@@ -258,8 +258,9 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  static applyChangeField(model, change, {field, replacementData}={}) {
+  static applyChangeField(model, change, options={}) {
     const current = foundry.utils.getProperty(model, change.key);
+    const { field } = options;
 
     // Replace value when using string interpolation syntax
     if ( (field instanceof StringField) && (change.type === "override") && change.value.includes?.("{}") ) {
@@ -298,7 +299,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       change = { ...change, value: parseOrString(change.value) };
     }
 
-    return super.applyChangeField(model, change, {field, replacementData});
+    return super.applyChangeField(model, change, options);
   }
 
   /* -------------------------------------------- */
