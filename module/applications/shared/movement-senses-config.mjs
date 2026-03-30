@@ -95,7 +95,7 @@ export default class MovementSensesConfig extends BaseConfigSheet {
         name: this.subPath ? `system.${this.keyPath}.${this.subPath}.${key}` : `system.${this.keyPath}.${key}`,
         value: this.subPath ? context.data[this.subPath][key] : context.data[key],
         placeholder: placeholderData?.[key] ?? ""
-      }));
+      })).filter(type => type.field);
 
       context.unitsOptions = Object.entries(CONFIG.DND5E.movementUnits).map(([value, { label }]) => ({ value, label }));
       context.unitsOptions.blank = false;

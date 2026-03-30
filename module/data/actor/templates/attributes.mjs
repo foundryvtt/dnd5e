@@ -453,6 +453,7 @@ export default class AttributesFields {
     }
     const baseSpeed = this._source.attributes.movement.walk || this.attributes.movement.fromSpecies?.walk;
     this.attributes.movement.slowed = this.attributes.movement.walk <= (simplifyBonus(baseSpeed, rollData) / 2);
+    this.attributes.movement.jump = (this.abilities?.str.value ?? 0) / 2;
   }
 
   /* -------------------------------------------- */
