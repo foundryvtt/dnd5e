@@ -424,16 +424,19 @@ export function replaceFormulaData(formula, data, { actor, item, missing="0", pr
  * Convert a bonus value to a simple integer for displaying on the sheet.
  * @param {number|string|null} bonus  Bonus formula.
  * @param {object} [data={}]          Data to use for replacing @ strings.
+ * @param {object} [options={}]
+ * @param {boolean} [option.strict]   Throw error if evaluation fails.
  * @returns {number}                  Simplified bonus as an integer.
  * @protected
  */
-export function simplifyBonus(bonus, data={}) {
+export function simplifyBonus(bonus, data={}, { strict }={}) {
   if ( !bonus ) return 0;
   if ( Number.isNumeric(bonus) ) return Number(bonus);
   try {
     const roll = new Roll(bonus, data);
     return roll.isDeterministic ? roll.evaluateSync().total : 0;
   } catch(error) {
+    if ( strict ) throw error;
     console.error(error);
     return 0;
   }

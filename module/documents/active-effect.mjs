@@ -1,12 +1,12 @@
 import CreateDocumentDialog from "../applications/create-document-dialog.mjs";
 import FormulaField from "../data/fields/formula-field.mjs";
 import MappingField from "../data/fields/mapping-field.mjs";
-import { parseOrString, staticID } from "../utils.mjs";
+import { parseOrString, simplifyBonus, staticID } from "../utils.mjs";
 import Item5e from "./item.mjs";
 import DependentDocumentMixin from "./mixins/dependent.mjs";
 
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
-const { ObjectField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { NumberField, ObjectField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * @import { FavoriteData5e } from "../data/abstract/_types.mjs";
@@ -258,12 +258,37 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  static applyChangeField(model, change, {field, replacementData}={}) {
+  static applyChangeField(model, change, options={}) {
     const current = foundry.utils.getProperty(model, change.key);
+    const { field, replacementData } = options;
 
     // Replace value when using string interpolation syntax
     if ( (field instanceof StringField) && (change.type === "override") && change.value.includes?.("{}") ) {
       change.value = change.value.replace("{}", current ?? "");
+    }
+
+    // Handle `<=` when adding and `>=` when subtracting from number fields
+    if ( (field instanceof NumberField)
+      && (((change.type === "add") && change.value.includes?.("<="))
+      || ((change.type === "subtract") && change.value.includes?.(">="))) ) {
+      let [value, limit] = change.value.split(/<=|>=/);
+      try {
+        limit = simplifyBonus(field._replaceDataRefs(limit, replacementData), {}, { strict: true });
+      } catch(err) {
+        const warningHeader = change.effect ? `Active Effect (${change.effect.uuid}) | ` : "";
+        console.warn(`${warningHeader} "${change.type}" change to ${change.key} failed to resolve: ${err.message}`);
+        return current;
+      }
+      const newValue = super.applyChangeField(
+        model, { ...change, value }, { field, ...options, modifyTarget: false }
+      );
+      if ( (change.type === "add") && (newValue > limit) ) {
+        change.value = `max(0, ${value} - ${newValue - limit})`;
+      } else if ( (change.type === "subtract") && (newValue < limit) ) {
+        change.value = `min(0, ${value} + ${limit - newValue})`;
+      } else {
+        change.value = value;
+      }
     }
 
     // If current value is `null`, UPGRADE & DOWNGRADE should always just set the value
@@ -298,7 +323,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       change = { ...change, value: parseOrString(change.value) };
     }
 
-    return super.applyChangeField(model, change, {field, replacementData});
+    return super.applyChangeField(model, change, options);
   }
 
   /* -------------------------------------------- */
