@@ -100,6 +100,11 @@ export default class TokenRuler5e extends foundry.canvas.placeables.tokens.Token
       currActionSpeed = Math.max(currActionSpeed, movement.walk);
     }
 
+    // If current action has a derived speed, use that instead
+    if ( CONFIG.DND5E.movementTypes[waypoint.action]?.deriveSpeed ) {
+      currActionSpeed = CONFIG.DND5E.movementTypes[waypoint.action].deriveSpeed(this.token);
+    }
+
     // Color `normal` if <= max speed, else `double` if <= double max speed, else `triple`
     const { normal, double, triple } = CONFIG.DND5E.tokenRulerColors;
     const increment = (waypoint.measurement.cost - .1) / currActionSpeed;
