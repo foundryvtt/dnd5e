@@ -67,6 +67,9 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
   // Migrate World Items
   const items = game.items.map(i => [i, true])
     .concat(Array.from(game.items.invalidDocumentIds).map(id => [game.items.getInvalid(id), false]));
+  const mergeOptions = game.release.generation > 13
+    ? { inplace: false, applyOperators: true }
+    : { inplace: false, performDeletions: true };
   for ( const [item, valid] of items ) {
     try {
       const flags = { bypassVersionCheck, persistSourceMigration: false };
@@ -76,9 +79,9 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
         log(`Migrating Item document ${item.name}`);
         if ( flags.persistSourceMigration ) {
           if ( "effects" in updateData ) updateData.effects = source.effects.map(effect => foundry.utils.mergeObject(
-            effect, updateData.effects.find(e => e._id === effect._id) ?? {}, { inplace: false, performDeletions: true }
+            effect, updateData.effects.find(e => e._id === effect._id) ?? {}, mergeOptions
           ));
-          updateData = foundry.utils.mergeObject(source, updateData, { inplace: false, performDeletions: true });
+          updateData = foundry.utils.mergeObject(source, updateData, mergeOptions);
         }
         await item.update(updateData, {
           enforceTypes: false, diff: valid && !flags.persistSourceMigration,
@@ -493,6 +496,9 @@ export function migrateActorData(actor, actorData, migrationData, flags={}, { ac
 
   // Migrate Owned Items
   if ( !actorData.items ) return updateData;
+  const mergeOptions = game.release.generation > 13
+    ? { inplace: false, applyOperators: true }
+    : { inplace: false, performDeletions: true };
   const items = actor.items.reduce((arr, i) => {
     // Migrate the Owned Item
     const itemData = i instanceof CONFIG.Item.documentClass ? i.toObject() : i;
@@ -527,9 +533,9 @@ export function migrateActorData(actor, actorData, migrationData, flags={}, { ac
   }, []).map(({ itemData, itemUpdate }) => {
     if ( flags.persistSourceMigration ) {
       if ( "effects" in itemUpdate ) itemUpdate.effects = itemData.effects.map(effect => foundry.utils.mergeObject(
-        effect, itemUpdate.effects.find(e => e._id === effect._id) ?? {}, { inplace: false, performDeletions: true }
+        effect, itemUpdate.effects.find(e => e._id === effect._id) ?? {}, mergeOptions
       ));
-      itemUpdate = foundry.utils.mergeObject(itemData, itemUpdate, { inplace: false, performDeletions: true });
+      itemUpdate = foundry.utils.mergeObject(itemData, itemUpdate, mergeOptions);
     }
     return foundry.utils.isEmpty(itemUpdate) ? null : { ...itemUpdate, _id: itemData._id };
   }).filter(_ => _);
