@@ -69,15 +69,16 @@ system:
     max: ''
   description:
     value: >-
-      <p class="feature">The [[lookup @name lowercase]] emanates an aura in a
-      [[lookup @target.template.size activity=oT8238p9jXwVy76c]]-foot Emanation
-      while it doesn't have the Incapacitated condition.</p><p
+      <p class="feature">The [[lookup @name lowercase]]{monster} emanates an
+      aura in a [[lookup @target.template.size activity=oT8238p9jXwVy76c]]-foot
+      Emanation while it doesn't have the Incapacitated condition.</p><p
       class="feature"><em>Wisdom Saving Throw:</em> DC [[lookup @save.dc.value
       activity=oT8238p9jXwVy76c]], [[lookup @target.affects.special
       activity=oT8238p9jXwVy76c]].</p><p class="feature"><em>Failure:</em> The
       target has the &amp;Reference[Frightened apply=false] condition until the
       start of its next turn.</p><p class="feature"><em>Success:</em> The target
-      is immune to this [[lookup @name lowercase]]'s aura for 24 hours.</p>
+      is immune to this [[lookup @name lowercase]]{monster}'s aura for 24
+      hours.</p>
     chat: ''
   identifier: fear-aura
   source:

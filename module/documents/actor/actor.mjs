@@ -1,10 +1,8 @@
-import ShortRestDialog from "../../applications/actor/rest/short-rest-dialog.mjs";
-import LongRestDialog from "../../applications/actor/rest/long-rest-dialog.mjs";
+import BaseRestDialog from "../../applications/actor/rest/base-rest-dialog.mjs";
 import CreateDocumentDialog from "../../applications/create-document-dialog.mjs";
 import SkillToolRollConfigurationDialog from "../../applications/dice/skill-tool-configuration-dialog.mjs";
 import PropertyAttribution from "../../applications/property-attribution.mjs";
 import TravelField from "../../data/actor/fields/travel-field.mjs";
-import NPCData from "../../data/actor/npc.mjs";
 import ActivationsField from "../../data/chat-message/fields/activations-field.mjs";
 import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
 import AdvantageModeField from "../../data/fields/advantage-mode-field.mjs";
@@ -32,8 +30,8 @@ import * as Trait from "./trait.mjs";
  *   SkillToolRollDialogConfiguration, SkillToolRollProcessConfiguration
  * } from "../../dice/_types.mjs";
  * @import {
- *   DamageAffectCategory, DamageApplicationOptions, DamageDescription, DamageSummary,
- *   RestConfiguration, RestResult, SpellcastingDescription
+ *   ActorRollData, DamageAffectCategory, DamageApplicationOptions, DamageDescription, DamageSummary,
+ *   RestConfiguration, RestResult, RollDataOptions, SpellcastingDescription
  * } from "../_types.mjs";
  */
 
@@ -224,6 +222,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   _initializeSource(source, options={}) {
     if ( source instanceof foundry.abstract.DataModel ) source = source.toObject();
 
+    /**
+     * A hook event that fires before source data is initialized for an Actor in a compendium.
+     * @function dnd5e.initializeActorSource
+     * @memberof hookEvents
+     * @param {Actor5e} actor   Actor for which the data is being initialized.
+     * @param {object} source   Source data being initialized.
+     * @param {object} options  Additional data initialization options.
+     */
+    if ( options.pack ) Hooks.callAll("dnd5e.initializeActorSource", this, source, options);
+
     // Migrate encounter groups to their own Actor type.
     if ( (source.type === "group") && (source.system?.type?.value === "encounter") ) {
       source.type = "encounter";
@@ -264,6 +272,32 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /* -------------------------------------------- */
 
+  /**
+   * Format a type object into a string.
+   * @param {object} typeData          The type data to convert to a string.
+   * @returns {string}
+   */
+  static formatCreatureType(typeData) {
+    if ( typeof typeData === "string" ) return typeData; // Backwards compatibility
+    let localizedType;
+    if ( typeData.value === "custom" ) localizedType = typeData.custom;
+    else if ( typeData.value in CONFIG.DND5E.creatureTypes ) {
+      const code = CONFIG.DND5E.creatureTypes[typeData.value];
+      localizedType = game.i18n.localize(typeData.swarm ? code.plural : code.label);
+    }
+    let type = localizedType;
+    if ( typeData.swarm ) {
+      type = game.i18n.format("DND5E.CreatureSwarmPhrase", {
+        size: game.i18n.localize(CONFIG.DND5E.actorSizes[typeData.swarm].label),
+        type: localizedType
+      });
+    }
+    if ( typeData.subtype ) type = `${type} (${typeData.subtype})`;
+    return type;
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   prepareData() {
     if ( this.system.modelProvider !== dnd5e ) return super.prepareData();
@@ -295,6 +329,19 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     this._embeddedPreparation = true;
     super.prepareEmbeddedDocuments();
     delete this._embeddedPreparation;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepares data for a specific skill.
+   * @param {string} skillId    The id of the skill to prepare data for.
+   * @param {object} [options]  Additional options passed to {@link CreatureTemplate#prepareSkill}.
+   * @returns {SkillData}
+   * @internal
+   */
+  _prepareSkill(skillId, options) {
+    return this.system.prepareSkill?.(skillId, options) ?? {};
   }
 
   /* --------------------------------------------- */
@@ -456,9 +503,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * @inheritdoc
-   * @param {object} [options]
-   * @param {boolean} [options.deterministic] Whether to force deterministic values for data properties that could be
-   *                                          either a die term or a flat term.
+   * @param {RollDataOptions} [options]
+   * @returns {ActorRollData}
    */
   getRollData({ deterministic=false }={}) {
     let data;
@@ -493,21 +539,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       const l = Number(k.split("-").pop());
       return (statuses.has(k) && !imms.has(k)) || (applyExhaustion && Number.isInteger(l) && (level >= l));
     });
-  }
-
-  /* -------------------------------------------- */
-  /*  Data Preparation                            */
-  /* -------------------------------------------- */
-
-  /**
-   * Prepares data for a specific skill.
-   * @param {string} skillId    The id of the skill to prepare data for.
-   * @param {object} [options]  Additional options passed to {@link CreatureTemplate#prepareSkill}.
-   * @returns {SkillData}
-   * @internal
-   */
-  _prepareSkill(skillId, options) {
-    return this.system.prepareSkill?.(skillId, options) ?? {};
   }
 
   /* -------------------------------------------- */
@@ -656,79 +687,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     // Otherwise proceed with calculation.
     model.prepareSlots(spells, actor, progression);
-  }
-
-  /* -------------------------------------------- */
-  /*  Event Handlers                              */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async _preCreate(data, options, user) {
-    if ( (await super._preCreate(data, options, user)) === false ) return false;
-
-    const sourceId = this._stats?.compendiumSource;
-    if ( sourceId?.startsWith("Compendium.") ) return;
-
-    // Configure prototype token settings
-    const prototypeToken = {};
-    if ( "size" in (this.system.traits || {}) ) {
-      const size = CONFIG.DND5E.actorSizes[this.system.traits.size || "med"].token ?? 1;
-      if ( !foundry.utils.hasProperty(data, "prototypeToken.width") ) prototypeToken.width = size;
-      if ( !foundry.utils.hasProperty(data, "prototypeToken.height") ) prototypeToken.height = size;
-    }
-    if ( this.system.isCharacter ) Object.assign(prototypeToken, {
-      sight: { enabled: true }, actorLink: true, disposition: CONST.TOKEN_DISPOSITIONS.FRIENDLY
-    });
-    if ( this.type === "group" ) prototypeToken.actorLink = true;
-    this.updateSource({ prototypeToken });
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async _preUpdate(changed, options, user) {
-    if ( (await super._preUpdate(changed, options, user)) === false ) return false;
-
-    // Apply changes in Actor size to Token width/height
-    if ( "size" in (this.system.traits || {}) ) {
-      const newSize = foundry.utils.getProperty(changed, "system.traits.size");
-      if ( newSize && (newSize !== this.system.traits?.size) ) {
-        let size = CONFIG.DND5E.actorSizes[newSize].token ?? 1;
-        if ( !foundry.utils.hasProperty(changed, "prototypeToken.width") ) {
-          changed.prototypeToken ||= {};
-          changed.prototypeToken.height = size;
-          changed.prototypeToken.width = size;
-        }
-      }
-    }
-
-    // Reset death save counters and store hp
-    if ( "hp" in (this.system.attributes || {}) ) {
-      const isDead = this.system.attributes.hp.value <= 0;
-      if ( isDead && (foundry.utils.getProperty(changed, "system.attributes.hp.value") > 0) ) {
-        foundry.utils.setProperty(changed, "system.attributes.death.success", 0);
-        foundry.utils.setProperty(changed, "system.attributes.death.failure", 0);
-      }
-      foundry.utils.setProperty(options, "dnd5e.hp", { ...this.system.attributes.hp });
-    }
-
-    // Record previous exhaustion level.
-    if ( Number.isFinite(foundry.utils.getProperty(changed, "system.attributes.exhaustion")) ) {
-      foundry.utils.setProperty(options, "dnd5e.originalExhaustion", this.system.attributes.exhaustion);
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Assign a class item as the original class for the Actor based on which class has the most levels.
-   * @returns {Promise<Actor5e>}  Instance of the updated actor.
-   * @protected
-   */
-  _assignPrimaryClass() {
-    const classes = this.itemTypes.class.sort((a, b) => b.system.levels - a.system.levels);
-    const newPC = classes[0]?.id || "";
-    return this.update({"system.details.originalClass": newPC});
   }
 
   /* -------------------------------------------- */
@@ -885,22 +843,32 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       if ( !CONFIG.DND5E.damageTypes[d.type]?.isPhysical || !d.properties?.size
         || !dm.bypasses?.intersection(d.properties).size ) {
         applyModification(d);
-        applyModification(d, "ALL");
+        if ( !(d.type in CONFIG.DND5E.healingTypes) ) applyModification(d, "ALL");
       }
 
       let damageMultiplier = multiplier;
+      let appliedDamage = d.value * multiplier;
 
       // Apply damage resistance
-      if ( this.#changeHasEffect("resistance", d, { options }) ) damageMultiplier /= 2;
+      if ( this.#changeHasEffect("resistance", d, { options }) ) {
+        damageMultiplier /= 2;
+        appliedDamage = Math.trunc(appliedDamage / 2);
+      }
 
       // Apply damage vulnerability
-      if ( this.#changeHasEffect("vulnerability", d, { options }) ) damageMultiplier *= 2;
+      if ( this.#changeHasEffect("vulnerability", d, { options }) ) {
+        damageMultiplier *= 2;
+        appliedDamage *= 2;
+      }
 
       // Negate healing types
       if ( (options.invertHealing !== false) && ((d.type === "healing")
-        || ((d.type === "maximum") && (treatAs === "healing"))) ) damageMultiplier *= -1;
+        || ((d.type === "maximum") && (treatAs === "healing"))) ) {
+        damageMultiplier *= -1;
+        appliedDamage *= -1;
+      }
 
-      d.value = d.value * damageMultiplier;
+      d.value = appliedDamage;
       d.active.multiplier = (d.active.multiplier ?? 1) * damageMultiplier;
       if ( d.type === "temphp" ) damages.temp += d.value;
       else if ( d.type === "maximum" ) damages.tempMax += d.value;
@@ -908,7 +876,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     });
 
     if ( damages.tempMax < 0 ) damages.amount += damages.tempMax;
-    damages.amount = damages.amount > 0 ? Math.floor(damages.amount) : Math.ceil(damages.amount);
+    damages.amount = Math.trunc(damages.amount);
 
     // Apply damage threshold
     if ( ((damages.amount > 0) && (damages.amount < (this.system.attributes?.hp?.dt ?? -Infinity)))
@@ -957,10 +925,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       return true;
     };
     const type = typeof damage === "string" ? damage : damage.type;
+    const isHealingType = type in CONFIG.DND5E.healingTypes;
 
     // If category is resistance, check for downgraded immunities
     if ( category === "resistance" ) {
-      if ( downgrade("ALL") && this.#changeHasEffect("immunity", "ALL", { skipDowngrade: true }) ) {
+      if ( !isHealingType && downgrade("ALL") && this.#changeHasEffect("immunity", "ALL", { skipDowngrade: true }) ) {
         return setActive("all");
       }
       if ( downgrade(type) && this.#changeHasEffect("immunity", type, { skipDowngrade: true }) ) {
@@ -972,8 +941,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( CONFIG.DND5E.damageTypes[type]?.isPhysical && damage.properties?.size
       && config?.bypasses?.intersection(damage.properties)?.size ) return false;
 
-    // If all damage resistance is present and not ignored
-    if ( !this.#changeIsIgnored(category, "ALL", { options, skipDowngrade }) && config?.value.has("ALL") ) {
+    // If all damage resistance is present and not ignored (healing types are excluded from "All Damage")
+    if ( !isHealingType
+      && !this.#changeIsIgnored(category, "ALL", { options, skipDowngrade })
+      && config?.value.has("ALL") ) {
       return setActive("all");
     }
 
@@ -1879,9 +1850,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /**
    * Roll initiative for this Actor with a dialog that provides an opportunity to elect advantage or other bonuses.
    * @param {Partial<InitiativeRollOptions>} [rollOptions={}]  Options forwarded to the Actor#getInitiativeRoll method.
+   * @param {object} [dialog]                                  Options forwarded to the dialog configuration.
    * @returns {Promise<void>}           A promise which resolves once initiative has been rolled for the Actor.
    */
-  async rollInitiativeDialog(rollOptions={}) {
+  async rollInitiativeDialog(rollOptions={}, dialog={}) {
     const config = {
       evaluate: false,
       event: rollOptions.event,
@@ -1894,8 +1866,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Display the roll configuration dialog
     const messageOptions = { rollMode: game.settings.get("core", "rollMode") };
     if ( config.rolls[0].options?.fixed === undefined ) {
-      const dialog = { options: { title: game.i18n.localize("DND5E.InitiativeRoll") } };
-      const rolls = await CONFIG.Dice.D20Roll.build(config, dialog, messageOptions);
+      const dialogConfig = foundry.utils.mergeObject({
+        options: { title: game.i18n.localize("DND5E.InitiativeRoll") }
+      }, dialog);
+      const rolls = await CONFIG.Dice.D20Roll.build(config, dialogConfig, messageOptions);
       if ( !rolls.length ) return;
       this._cachedInitiativeRoll = rolls[0];
     }
@@ -2024,7 +1998,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
     const hp = this.system.attributes.hp;
     if ( rollConfig.modifyHitPoints !== false ) {
-      const dhp = Math.min(Math.max(0, hp.effectiveMax) - hp.value, rolls.reduce((t, r) => t + r.total, 0));
+      const total = rolls.reduce((t, r) => t + r.total, 0);
+      const calculated = this.calculateDamage([{ type: "healing", value: total }], { invertHealing: false });
+      const dhp = Math.min(Math.max(0, hp.effectiveMax) - hp.value, calculated ? calculated.amount : total);
       updates.actor["system.attributes.hp.value"] = hp.value + dhp;
     }
 
@@ -2072,7 +2048,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   async rollClassHitPoints(item, { chatMessage=true }={}) {
     if ( item.type !== "class" ) throw new Error("Hit points can only be rolled for a class item.");
-    const rollData = {
+    const config = {
       formula: `1${item.system.hd.denomination}`,
       data: item.getRollData(),
       chatMessage
@@ -2091,14 +2067,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * @memberof hookEvents
      * @param {Actor5e} actor            Actor for which the hit points are being rolled.
      * @param {Item5e} item              The class item whose hit dice will be rolled.
-     * @param {object} rollData
-     * @param {string} rollData.formula  The string formula to parse.
-     * @param {object} rollData.data     The data object against which to parse attributes within the formula.
+     * @param {object} config
+     * @param {string} config.formula    The string formula to parse.
+     * @param {object} config.data       The data object against which to parse attributes within the formula.
      * @param {object} messageData       The data object to use when creating the message.
      */
-    Hooks.callAll("dnd5e.preRollClassHitPoints", this, item, rollData, messageData);
+    Hooks.callAll("dnd5e.preRollClassHitPoints", this, item, config, messageData);
 
-    const roll = new Roll(rollData.formula, rollData.data);
+    const roll = new Roll(config.formula, config.data);
     await roll.evaluate();
 
     /**
@@ -2110,7 +2086,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      */
     Hooks.callAll("dnd5e.rollClassHitPoints", this, roll);
 
-    if ( rollData.chatMessage ) await roll.toMessage(messageData);
+    if ( config.chatMessage ) await roll.toMessage(messageData);
     return roll;
   }
 
@@ -2125,7 +2101,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   async rollNPCHitPoints({ chatMessage=true }={}) {
     if ( !this.system.isNPC ) throw new Error("NPC hit points can only be rolled for NPCs");
-    const rollData = {
+    const config = {
       formula: this.system.attributes.hp.formula,
       data: this.getRollData(),
       chatMessage
@@ -2143,14 +2119,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * @function dnd5e.preRollNPCHitPoints
      * @memberof hookEvents
      * @param {Actor5e} actor            Actor for which the hit points are being rolled.
-     * @param {object} rollData
-     * @param {string} rollData.formula  The string formula to parse.
-     * @param {object} rollData.data     The data object against which to parse attributes within the formula.
+     * @param {object} config
+     * @param {string} config.formula    The string formula to parse.
+     * @param {object} config.data       The data object against which to parse attributes within the formula.
      * @param {object} messageData       The data object to use when creating the message.
      */
-    Hooks.callAll("dnd5e.preRollNPCHitPoints", this, rollData, messageData);
+    Hooks.callAll("dnd5e.preRollNPCHitPoints", this, config, messageData);
 
-    const roll = new Roll(rollData.formula, rollData.data);
+    const roll = new Roll(config.formula, config.data);
     await roll.evaluate();
 
     /**
@@ -2162,7 +2138,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      */
     Hooks.callAll("dnd5e.rollNPCHitPoints", this, roll);
 
-    if ( rollData.chatMessage ) await roll.toMessage(messageData);
+    if ( config.chatMessage ) await roll.toMessage(messageData);
     return roll;
   }
 
@@ -2171,11 +2147,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
-   * Take a short rest, possibly spending hit dice and recovering resources, item uses, and relevant spell slots.
-   * @param {Partial<RestConfiguration>} [config]  Configuration options for a short rest.
-   * @returns {Promise<RestResult>}                A Promise which resolves once the short rest workflow has completed.
+   * Initiate a rest, spending or recovering hit dice, resources, item uses and spell slots according to configuration.
+   * @param {Partial<RestConfiguration>} config  Configuration options for the rest. Must include the rest type.
+   * @returns {Promise<RestResult>}              A Promise which resolves once the rest workflow has completed.
    */
-  async shortRest(config={}) {
+  async initiateRest(config={}) {
     if ( this.system.isVehicle ) return;
     if ( !game.user.isGM && !game.settings.get("dnd5e", "allowRests") && !config.request ) {
       ui.notifications.warn("DND5E.REST.Warning.OnlyByRequest", { localize: true, log: false });
@@ -2183,23 +2159,28 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     const clone = this.clone();
-    const restConfig = CONFIG.DND5E.restTypes.short;
+    const restConfig = CONFIG.DND5E.restTypes[config.type];
     config = foundry.utils.mergeObject({
-      type: "short", dialog: true, chat: true, newDay: false, advanceTime: false, autoHD: false, autoHDThreshold: 3,
-      duration: CONFIG.DND5E.restTypes.short.duration[game.settings.get("dnd5e", "restVariant")],
+      dialog: true, chat: restConfig.chat !== false,
+      duration: restConfig.duration[game.settings.get("dnd5e", "restVariant")],
+      newDay: restConfig.newDay === true,
+      advanceBastionTurn: restConfig.advanceBastionTurn === true, advanceTime: restConfig.advanceTime === true,
+      autoHD: restConfig.autoHD === true, autoHDThreshold: 3,
       recoverTemp: restConfig.recoverTemp, recoverTempMax: restConfig.recoverTempMax,
       exhaustionDelta: restConfig.exhaustionDelta
     }, config);
+    config.dialogClass ??= restConfig.dialogClass ?? BaseRestDialog;
 
     /**
-     * A hook event that fires before a short rest is started.
-     * @function dnd5e.preShortRest
+     * A hook event that fires before a rest is started. The actual name of the hook will depend on the rest type
+     * (e.g. `dnd5e.preShortRest` or `dnd5e.preLongRest`).
+     * @function dnd5e.preRest
      * @memberof hookEvents
      * @param {Actor5e} actor             The actor that is being rested.
      * @param {RestConfiguration} config  Configuration options for the rest.
      * @returns {boolean}                 Explicitly return `false` to prevent the rest from being started.
      */
-    if ( Hooks.call("dnd5e.preShortRest", this, config) === false ) return;
+    if ( Hooks.call(`dnd5e.pre${config.type.capitalize()}Rest`, this, config) === false ) return;
 
     // Take note of the initial hit points and number of hit dice the Actor has
     const hd0 = foundry.utils.getProperty(this, "system.attributes.hd.value");
@@ -2208,19 +2189,19 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Display a Dialog for rolling hit dice
     if ( config.dialog ) {
       try {
-        Object.assign(config, await ShortRestDialog.configure(this, config));
+        Object.assign(config, await config.dialogClass.configure(this, config));
       } catch(err) { return; }
     }
 
     /**
-     * A hook event that fires after a short rest has started, after the configuration is complete.
-     * @function dnd5e.shortRest
+     * A hook event that fires after a rest has started, after the configuration is complete.
+     * @function dnd5e.rest
      * @memberof hookEvents
      * @param {Actor5e} actor             The actor that is being rested.
      * @param {RestConfiguration} config  Configuration options for the rest.
      * @returns {boolean}                 Explicitly return `false` to prevent the rest from being continued.
      */
-    if ( Hooks.call("dnd5e.shortRest", this, config) === false ) return;
+    if ( Hooks.call(`dnd5e.${config.type}Rest`, this, config) === false ) return;
 
     // Automatically spend hit dice
     if ( config.autoHD ) await this.autoSpendHitDice({ threshold: config.autoHDThreshold });
@@ -2234,53 +2215,23 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
+   * Take a short rest, possibly spending hit dice and recovering resources, item uses, and relevant spell slots.
+   * @param {Partial<RestConfiguration>} [config]  Configuration options for a short rest.
+   * @returns {Promise<RestResult>}                A Promise which resolves once the short rest workflow has completed.
+   */
+  async shortRest(config={}) {
+    return this.initiateRest({ ...config, type: "short" });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Take a long rest, recovering hit points, hit dice, resources, item uses, and spell slots.
    * @param {Partial<RestConfiguration>} [config]  Configuration options for a long rest.
    * @returns {Promise<RestResult>}       A Promise which resolves once the long rest workflow has completed.
    */
   async longRest(config={}) {
-    if ( this.system.isVehicle ) return;
-    if ( !game.user.isGM && !game.settings.get("dnd5e", "allowRests") && !config.request ) {
-      ui.notifications.warn("DND5E.REST.Warning.OnlyByRequest", { localize: true, log: false });
-      return;
-    }
-
-    const clone = this.clone();
-    const restConfig = CONFIG.DND5E.restTypes.long;
-    config = foundry.utils.mergeObject({
-      type: "long", dialog: true, chat: true, newDay: true, advanceTime: false,
-      duration: restConfig.duration[game.settings.get("dnd5e", "restVariant")],
-      recoverTemp: restConfig.recoverTemp, recoverTempMax: restConfig.recoverTempMax,
-      exhaustionDelta: restConfig.exhaustionDelta
-    }, config);
-
-    /**
-     * A hook event that fires before a long rest is started.
-     * @function dnd5e.preLongRest
-     * @memberof hookEvents
-     * @param {Actor5e} actor             The actor that is being rested.
-     * @param {RestConfiguration} config  Configuration options for the rest.
-     * @returns {boolean}                 Explicitly return `false` to prevent the rest from being started.
-     */
-    if ( Hooks.call("dnd5e.preLongRest", this, config) === false ) return;
-
-    if ( config.dialog ) {
-      try {
-        Object.assign(config, await LongRestDialog.configure(this, config));
-      } catch(err) { return; }
-    }
-
-    /**
-     * A hook event that fires after a long rest has started, after the configuration is complete.
-     * @function dnd5e.longRest
-     * @memberof hookEvents
-     * @param {Actor5e} actor             The actor that is being rested.
-     * @param {RestConfiguration} config  Configuration options for the rest.
-     * @returns {boolean}                 Explicitly return `false` to prevent the rest from being continued.
-     */
-    if ( Hooks.call("dnd5e.longRest", this, config) === false ) return;
-
-    return this._rest(config, { clone });
+    return this.initiateRest({ ...config, type: "long" });
   }
 
   /* -------------------------------------------- */
@@ -2293,7 +2244,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<ChatMessage5e|null>}
    */
   static async handleRestRequest(actor, request, config) {
-    const result = await actor[config.type === "short" ? "shortRest" : "longRest"]({
+    const result = await actor.initiateRest({
       ...config, request, advanceBastionTurn: false, advanceTime: false
     });
     return result?.message ?? null;
@@ -2407,10 +2358,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     // Determine the chat message to display
     let message;
-    if ( diceRestored && healthRestored ) message = `DND5E.REST.${length}.Result.Full`;
-    else if ( longRest && !diceRestored && healthRestored ) message = "DND5E.REST.Long.Result.HitPoints";
-    else if ( longRest && diceRestored && !healthRestored ) message = "DND5E.REST.Long.Result.HitDice";
-    else message = `DND5E.REST.${length}.Result.Short`;
+    if ( typeof typeConfig.chat === "string" ) message = typeConfig.chat;
+    if ( !message ) {
+      if ( diceRestored && healthRestored ) message = `DND5E.REST.${length}.Result.Full`;
+      else if ( longRest && !diceRestored && healthRestored ) message = "DND5E.REST.Long.Result.HitPoints";
+      else if ( longRest && diceRestored && !healthRestored ) message = "DND5E.REST.Long.Result.HitDice";
+      else message = `DND5E.REST.${length}.Result.Short`;
+    }
 
     // Create a chat message
     const pr = new Intl.PluralRules(game.i18n.lang);
@@ -2653,8 +2607,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       unit ? formatLength(value ?? 0, unit, { parts: true })
         : `${value ?? 0} <span class="units">${units}</span>`
     }</span>`;
-    return Object.entries(CONFIG.DND5E.movementTypes).reduce((html, [k, { label }]) => {
+    return Object.entries(CONFIG.DND5E.movementTypes).reduce((html, [k, { hidden, label }]) => {
+      if ( hidden ) return html;
       const value = movement[k];
+      if ( (k === "fly") && movement.hover ) label = game.i18n.format("DND5E.MOVEMENT.HoverSpeed", { speed: label });
       if ( value || (k === "walk") ) html += `
         <div class="row">
           <i class="fas ${k}"></i>
@@ -2831,7 +2787,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     if ( settings.keep.has("self") ) {
       o.img = sourceData.img;
-      o.name = o.prototypeToken.name = `${o.name} (${game.i18n.localize("DND5E.TRANSFORM.Preset.Appearance.Label")})`;
+      o.name = `${o.name} (${game.i18n.localize("DND5E.TRANSFORM.Preset.Appearance.Label")})`;
     }
 
     // Prepare new data to merge from the source
@@ -2845,7 +2801,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       ownership: o.ownership, // Use the original actor permissions
       folder: o.folder, // Be displayed in the same sidebar folder
       flags: o.flags, // Use the original actor flags
-      prototypeToken: { name: `${o.name} (${sourceData.name})`, texture: {}, sight: {}, detectionModes: [] } // Set a new empty token
+      prototypeToken: { texture: {}, sight: {}, detectionModes: [] } // Set a new empty token
     }), settings.keep.has("self") ? o : {}); // Keeps most of original actor
 
     // Specifically delete some data attributes
@@ -2869,7 +2825,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const tokenPropsFromSource = ["width", "height", "alpha", "lockRotation", "ring"];
     const tokenTexturePropsFromSource = ["offsetX", "offsetY", "scaleX", "scaleY", "src", "tint"];
     const tokenPropsFromSelf = [
-      "bar1", "bar2", "displayBars", "displayName", "disposition", "rotation", "elevation", "hidden"
+      "bar1", "bar2", "displayBars", "displayName", "actorLink", "disposition", "rotation", "elevation", "hidden"
     ];
 
     for ( const k of tokenPropsFromSource ) {
@@ -3077,6 +3033,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       for ( const k of tokenPropsFromSelf ) {
         tokenData[k] = this.token[k];
       }
+      if ( settings.keep.has("self") ) {
+        tokenData.name = `${this.token.name} (${game.i18n.localize("DND5E.TRANSFORM.Preset.Appearance.Label")})`;
+      } else {
+        tokenData.name = `${this.token.name} (${sourceData.name})`;
+      }
+
       if ( !this.token.flags.dnd5e?.previousActorData ) {
         const previousActorData = this.token.delta.toObject();
         const previousTokenData = { texture: {} };
@@ -3137,6 +3099,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       newTokenData.actorLink = true;
       for ( const k of tokenPropsFromSelf ) {
         newTokenData[k] = t.document[k];
+      }
+      if ( settings.keep.has("self") ) {
+        newTokenData.name = `${t.document.name} (${game.i18n.localize("DND5E.TRANSFORM.Preset.Appearance.Label")})`;
+      } else {
+        newTokenData.name = `${t.document.name} (${sourceData.name})`;
       }
 
       const dOriginalActor = foundry.utils.getProperty(d, "flags.dnd5e.originalActor");
@@ -3282,6 +3249,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   }
 
   /* -------------------------------------------- */
+  /*  Context Menus                               */
+  /* -------------------------------------------- */
 
   /**
    * Add additional system-specific sidebar directory context menu options for Actor documents
@@ -3345,34 +3314,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * Format a type object into a string.
-   * @param {object} typeData          The type data to convert to a string.
-   * @returns {string}
-   */
-  static formatCreatureType(typeData) {
-    if ( typeof typeData === "string" ) return typeData; // Backwards compatibility
-    let localizedType;
-    if ( typeData.value === "custom" ) {
-      localizedType = typeData.custom;
-    } else if ( typeData.value in CONFIG.DND5E.creatureTypes ) {
-      const code = CONFIG.DND5E.creatureTypes[typeData.value];
-      localizedType = game.i18n.localize(typeData.swarm ? code.plural : code.label);
-    }
-    let type = localizedType;
-    if ( typeData.swarm ) {
-      type = game.i18n.format("DND5E.CreatureSwarmPhrase", {
-        size: game.i18n.localize(CONFIG.DND5E.actorSizes[typeData.swarm].label),
-        type: localizedType
-      });
-    }
-    if (typeData.subtype) type = `${type} (${typeData.subtype})`;
-    return type;
-  }
-
-  /* -------------------------------------------- */
-  /*  Event Listeners and Handlers                */
+  /*  Socket Event Handlers                       */
   /* -------------------------------------------- */
 
   /** @override */
@@ -3384,46 +3326,23 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  async _preUpdate(changed, options, user) {
+    if ( (await super._preUpdate(changed, options, user)) === false ) return false;
+
+    // Record previous exhaustion level.
+    if ( Number.isFinite(foundry.utils.getProperty(changed, "system.attributes.exhaustion")) ) {
+      foundry.utils.setProperty(options, "dnd5e.originalExhaustion", this.system.attributes.exhaustion);
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async _onUpdate(data, options, userId) {
     super._onUpdate(data, options, userId);
-
-    const isHpUpdate = !!data.system?.attributes?.hp;
-
     if ( userId === game.userId ) {
-      if ( isHpUpdate ) await this.updateBloodied(options);
       await this.updateEncumbrance(options);
       this._onUpdateExhaustion(data, options);
-    }
-
-    const hp = options.dnd5e?.hp;
-    if ( isHpUpdate && hp && !options.isRest && !options.isAdvancement ) {
-      const curr = this.system.attributes.hp;
-      const changes = {
-        hp: curr.value - hp.value,
-        temp: curr.temp - hp.temp
-      };
-      changes.total = changes.hp + changes.temp;
-
-      if ( Number.isInteger(changes.total) && (changes.total !== 0) ) {
-        this._displayTokenEffect(changes);
-        if ( !game.settings.get("dnd5e", "disableConcentration") && (userId === game.userId)
-          && (options.dnd5e?.concentrationCheck !== false)
-          && (changes.total < 0) && ((changes.temp < 0) || (curr.value < curr.effectiveMax)) ) {
-          this.challengeConcentration({ dc: this.getConcentrationDC(-changes.total) });
-        }
-
-        /**
-         * A hook event that fires when an actor is damaged or healed by any means. The actual name
-         * of the hook will depend on the change in hit points.
-         * @function dnd5e.damageActor
-         * @memberof hookEvents
-         * @param {Actor5e} actor                                       The actor that had their hit points reduced.
-         * @param {{hp: number, temp: number, total: number}} changes   The changes to hit points.
-         * @param {object} update                                       The original update delta.
-         * @param {string} userId                                       Id of the user that performed the update.
-         */
-        Hooks.callAll(`dnd5e.${changes.total > 0 ? "heal" : "damage"}Actor`, this, changes, data, userId);
-      }
     }
   }
 
@@ -3480,6 +3399,36 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       await this._clearFavorites(documents);
     }
     super._onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId);
+  }
+
+  /* -------------------------------------------- */
+  /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
+
+  /**
+   * Assign a class item as the original class for the Actor based on which class has the most levels.
+   * @returns {Promise<Actor5e>}  Instance of the updated actor.
+   * @protected
+   */
+  _assignPrimaryClass() {
+    const classes = this.itemTypes.class.sort((a, b) => b.system.levels - a.system.levels);
+    const newPC = classes[0]?.id || "";
+    return this.update({ "system.details.originalClass": newPC });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle clearing favorited entries that were deleted.
+   * @param {Document[]} documents  The deleted Documents.
+   * @returns {Promise<Actor5e>|void}
+   * @protected
+   */
+  _clearFavorites(documents) {
+    if ( !("favorites" in this.system) ) return;
+    const ids = new Set(documents.map(d => d.getRelativeUUID(this)));
+    const favorites = this.system.favorites.filter(f => !ids.has(f.id));
+    return this.update({ "system.favorites": favorites });
   }
 
   /* -------------------------------------------- */
@@ -3622,21 +3571,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       { _id: ActiveEffect5e.ID.ENCUMBERED, ...effectData },
       { parent: this, keepId: true }
     );
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle clearing favorited entries that were deleted.
-   * @param {Document[]} documents  The deleted Documents.
-   * @returns {Promise<Actor5e>|void}
-   * @protected
-   */
-  _clearFavorites(documents) {
-    if ( !("favorites" in this.system) ) return;
-    const ids = new Set(documents.map(d => d.getRelativeUUID(this)));
-    const favorites = this.system.favorites.filter(f => !ids.has(f.id));
-    return this.update({ "system.favorites": favorites });
   }
 
   /* -------------------------------------------- */

@@ -9,11 +9,12 @@ system:
       <p>This spell lets you convince a beast that you mean it no harm. Choose a
       beast that you can see within range. It must see and hear you. If the
       beast's Intelligence is 4 or higher, the spell fails. Otherwise, the beast
-      must succeed on a Wisdom saving throw or be charmed by you for the spell's
-      duration. If you or one of your companions harms the target, the spell
-      ends.</p><p><strong>At Higher Levels.</strong> When you cast this spell
-      using a spell slot of 2nd level or higher, you can affect one additional
-      beast for each slot level above 1st.</p>
+      must succeed on a Wisdom saving throw or be &amp;reference[charmed
+      apply=false] by you for the spell's duration. If you or one of your
+      companions harms the target, the spell ends.</p><p><strong>At Higher
+      Levels.</strong> When you cast this spell using a spell slot of 2nd level
+      or higher, you can affect one additional beast for each slot level above
+      1st.</p>
     chat: ''
   source:
     custom: ''
@@ -33,12 +34,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -77,7 +81,12 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: nxfOXuxeCg02WVId
+          onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
       target:
@@ -89,7 +98,7 @@ system:
           choice: false
         override: false
       damage:
-        onSave: half
+        onSave: none
         parts: []
       save:
         ability: wis
@@ -99,20 +108,67 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: animal-friendship
 sort: 0
 flags: {}
-img: icons/magic/nature/wolf-paw-glow-teal-blue.webp
-effects: []
+img: icons/creatures/abilities/paw-print-yellow.webp
+effects:
+  - name: Animal Friendship
+    img: icons/creatures/abilities/paw-print-yellow.webp
+    origin: Compendium.dnd5e.spells.Item.hDOENzjuj5WpLq7B
+    transfer: false
+    _id: nxfOXuxeCg02WVId
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: 86400
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>You are &amp;reference[charmed apply=false] by the caster for the
+      duration of the spell. If the caster or one of their allies harms you, the
+      spell ends.</p>
+    tint: '#ffffff'
+    statuses:
+      - charmed
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      createdTime: 1772819953767
+      modifiedTime: 1772820008420
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!hDOENzjuj5WpLq7B.nxfOXuxeCg02WVId'
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037363056
-  modifiedTime: 1725992722095
+  modifiedTime: 1772820011233
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!hDOENzjuj5WpLq7B'

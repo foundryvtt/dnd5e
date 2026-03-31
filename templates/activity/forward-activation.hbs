@@ -1,3 +1,19 @@
 <section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+    <fieldset {{ disabled disabled.activation }}>
+        <legend>
+            <label class="checkbox">
+                {{ localize "DND5E.ACTIVATION.FIELDS.activation.label" }}
+                {{#if (or activity.activation.canOverride activity.isRider)}}
+                {{ formInput fields.activation.fields.override value=source.activation.override
+                             input=inputs.createCheckboxInput
+                             dataset=(dnd5e-object tooltip="DND5E.ACTIVATION.FIELDS.activation.override.hint")
+                             ariaLabel=(localize "DND5E.ACTIVATION.FIELDS.activation.override.hint") }}
+                {{/if}}
+            </label>
+        </legend>
+        {{> "dnd5e.field-activation" activation=activity.activation fields=fields.activation.fields data=data.activation
+            activationTypes=activationTypes inputs=inputs label="DND5E.ACTIVATION.FIELDS.activation.type.label" }}
+    </fieldset>
+
     {{> "systems/dnd5e/templates/activity/parts/activity-consumption.hbs" }}
 </section>

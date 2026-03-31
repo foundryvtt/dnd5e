@@ -571,8 +571,8 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] knows if it hears a
-          lie.</p>
+          <p class="feature">The [[lookup @name lowercase]]{monster} knows if it
+          hears a lie.</p>
         chat: ''
       identifier: divine-awareness
       source:
@@ -621,8 +621,8 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">If the [[lookup @name lowercase]] dies outside
-          Mount Celestia, its body disappears, and it gains a new body
+          <p class="feature">If the [[lookup @name lowercase]]{monster} dies
+          outside Mount Celestia, its body disappears, and it gains a new body
           instantly, reviving with all its Hit Points somewhere in Mount
           Celestia.</p>
         chat: ''
@@ -727,8 +727,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] fails a saving throw, it can
-          choose to succeed instead.</p>
+          <p>If the [[lookup @name lowercase]]{monster} fails a saving throw, it
+          can choose to succeed instead.</p>
         chat: ''
       identifier: legendary-resistance
       source:
@@ -784,8 +784,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] has Advantage on saving throws
-          against spells and other magical effects.</p>
+          <p>The [[lookup @name lowercase]]{monster} has Advantage on saving
+          throws against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
       source:
@@ -878,9 +878,9 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item Flying Sword]]
-          attacks. It can replace one attack with a use of [[/item Slaying
-          Bow]].</p>
+          <p>The [[lookup @name lowercase]]{monster} makes two [[/item Flying
+          Sword]] attacks. It can replace one attack with a use of [[/item
+          Slaying Bow]].</p>
         chat: ''
       identifier: multiattack
       source:
@@ -1014,7 +1014,7 @@ items:
           <p class="feature"><em>Dexterity Saving Throw:</em> DC [[lookup
           @save.dc.value activity=C7BMf8hIfCjxRSWC]], one [[lookup
           @target.affects.type activity=C7BMf8hIfCjxRSWC]] the [[lookup @name
-          lowercase]] can see within [[lookup @range.value
+          lowercase]]{monster} can see within [[lookup @range.value
           activity=C7BMf8hIfCjxRSWC]] [[lookup @range.units
           activity=C7BMf8hIfCjxRSWC]].</p><p><em>Failure:</em> If the [[lookup
           @target.affects.type activity=C7BMf8hIfCjxRSWC]] has 100 Hit Points or
@@ -1142,8 +1142,9 @@ items:
         value: >-
           <p class="feature">[[/attack extended]]. [[/damage average extended]].
           <em>Hit or Miss:</em> The sword magically returns to the [[lookup
-          @name lowercase]]'s hand or hovers within 5 feet of the [[lookup @name
-          lowercase]] immediately after a ranged attack.</p>
+          @name lowercase]]{monster}'s hand or hovers within 5 feet of the
+          [[lookup @name lowercase]]{monster} immediately after a ranged
+          attack.</p>
         chat: ''
       identifier: flying-sword
       source:
@@ -1524,9 +1525,9 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
-          following spells, requiring no Material components and using Charisma
-          as the spellcasting ability (spell save DC [[lookup
+          <p class="feature">The [[lookup @name lowercase]]{monster} casts one
+          of the following spells, requiring no Material components and using
+          Charisma as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]]):</p><p class="feature-trait"><strong>At
           Will:</strong>
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDetectEvil]{Detect Evil
@@ -3088,12 +3089,12 @@ items:
         value: >-
           <p><em>Constitution Saving Throw:</em> DC [[lookup @save.dc.value
           activity=B6xM8C2pABIb5o7y]], one creature the [[lookup @name
-          lowercase]] can see within [[lookup @range.value
+          lowercase]]{monster} can see within [[lookup @range.value
           activity=B6xM8C2pABIb5o7y]] feet.</p><p><em>Failure:</em> The target
           has the &amp;Reference[Blinded apply=false] condition for 1
           minute.</p><p><em>Failure or Success:</em> The [[lookup @name
-          lowercase]] can't take this action again until the start of its next
-          turn.</p>
+          lowercase]]{monster} can't take this action again until the start of
+          its next turn.</p>
         chat: ''
       identifier: blinding-gaze
       source:
@@ -3248,15 +3249,16 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] teleports up to
-          [[lookup @range.value activity=HtsFBK1PYKjvy9mn]] feet to an
+          <p class="feature">The [[lookup @name lowercase]]{monster} teleports
+          up to [[lookup @range.value activity=HtsFBK1PYKjvy9mn]] feet to an
           unoccupied space it can see.</p><p class="feature"><em>Dexterity
           Saving Throw:</em> DC [[lookup @save.dc.value
           activity=HtsFBK1PYKjvy9mn]], each creature in a [[lookup
           @target.template.size activity=HtsFBK1PYKjvy9mn]]-foot Emanation
-          originating from the [[lookup @name lowercase]] at its destination
-          space.</p><p class="feature"><em>Failure:</em> [[/damage average]]
-          damage.</p><p class="feature"><em>Success:</em> Half damage.</p>
+          originating from the [[lookup @name lowercase]]{monster} at its
+          destination space.</p><p class="feature"><em>Failure:</em> [[/damage
+          average]] damage.</p><p class="feature"><em>Success:</em> Half
+          damage.</p>
         chat: ''
       identifier: radiant-teleport
       source:
@@ -3479,7 +3481,7 @@ items:
         max: '3'
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts
+          <p class="feature">The [[lookup @name lowercase]]{monster} casts
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplCureWounds]{Cure
           Wounds}</em> (level 2 version),
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplLesserRest]{Lesser

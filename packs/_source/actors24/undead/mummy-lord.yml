@@ -630,8 +630,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] fails a saving throw, it can
-          choose to succeed instead.</p>
+          <p>If the [[lookup @name lowercase]]{monster} fails a saving throw, it
+          can choose to succeed instead.</p>
         chat: ''
       identifier: legendary-resistance
       source:
@@ -687,11 +687,11 @@ items:
         max: ''
       description:
         value: >-
-          <p>If destroyed, the  [[lookup @name lowercase]] gains a new body in
-          24 hours if its heart is intact, reviving with all its Hit Points. The
-          new body appears in an unoccupied space within the  [[lookup @name
-          lowercase]]'s lair. The heart is a Tiny object that has AC 17, HP 10,
-          and Immunity to all damage except Fire.</p>
+          <p>If destroyed, the  [[lookup @name lowercase]]{monster} gains a new
+          body in 24 hours if its heart is intact, reviving with all its Hit
+          Points. The new body appears in an unoccupied space within the 
+          [[lookup @name lowercase]]{monster}'s lair. The heart is a Tiny object
+          that has AC 17, HP 10, and Immunity to all damage except Fire.</p>
         chat: ''
       identifier: undead-restoration
       source:
@@ -744,8 +744,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] has Advantage on saving throws
-          against spells and other magical effects.</p>
+          <p>The [[lookup @name lowercase]]{monster} has Advantage on saving
+          throws against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
       source:
@@ -1102,7 +1102,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes one [[/item
+          <p>The [[lookup @name lowercase]]{monster} makes one [[/item
           .mmRottingFist000]] or [[/item .d6GVHcFrHv83C7eS]] attack, and it uses
           [[/item .mmDreadfulGlare0]].</p>
         chat: ''
@@ -1436,9 +1436,9 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
-          following spells, requiring no Material components and using Wisdom as
-          the spellcasting ability (spell save DC [[lookup
+          <p class="feature">The [[lookup @name lowercase]]{monster} casts one
+          of the following spells, requiring no Material components and using
+          Wisdom as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]], +9 to hit with spell attacks):</p><p
           class="feature-trait"><strong>At Will:</strong>
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDispelMagi]{Dispel
@@ -2596,8 +2596,8 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] uses [[/item
-          .mmDreadfulGlare0]].</p>
+          <p class="feature">The [[lookup @name lowercase]]{monster} uses
+          [[/item .mmDreadfulGlare0]].</p>
         chat: ''
       identifier: glare
       source:
@@ -2710,18 +2710,19 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature"><em>Trigger:</em> The [[lookup @name lowercase]] is
-          hit by an attack roll. <em>Response:</em> The [[lookup @name
-          lowercase]] adds 2 to its AC against the attack, possibly causing the
-          attack to miss, and the [[lookup @name lowercase]] teleports up to
-          [[lookup @range.value activity=EsBmMUQMO4b0g6Yw]] [[lookup
-          @range.units activity=EsBmMUQMO4b0g6Yw]]. [[lookup
-          @target.affects.special activity=EsBmMUQMO4b0g6Yw]]. Each creature of
-          its choice that it can see within [[lookup @target.template.size
-          activity=EsBmMUQMO4b0g6Yw]] [[lookup @target.template.units
-          activity=EsBmMUQMO4b0g6Yw]]. of its destination space has the
-          &amp;Reference[Blinded apply=false] condition until the end of the
-          [[lookup @name lowercase]]'s next turn.</p>
+          <p class="feature"><em>Trigger:</em> The [[lookup @name
+          lowercase]]{monster} is hit by an attack roll. <em>Response:</em> The
+          [[lookup @name lowercase]]{monster} adds 2 to its AC against the
+          attack, possibly causing the attack to miss, and the [[lookup @name
+          lowercase]]{monster} teleports up to [[lookup @range.value
+          activity=EsBmMUQMO4b0g6Yw]] [[lookup @range.units
+          activity=EsBmMUQMO4b0g6Yw]]. [[lookup @target.affects.special
+          activity=EsBmMUQMO4b0g6Yw]]. Each creature of its choice that it can
+          see within [[lookup @target.template.size activity=EsBmMUQMO4b0g6Yw]]
+          [[lookup @target.template.units activity=EsBmMUQMO4b0g6Yw]]. of its
+          destination space has the &amp;Reference[Blinded apply=false]
+          condition until the end of the [[lookup @name lowercase]]{monster}'s
+          next turn.</p>
         chat: ''
       identifier: whirlwind-of-sand
       source:
@@ -2905,11 +2906,11 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts
+          <p class="feature">The [[lookup @name lowercase]]{monster} casts
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplCommand000]{Command}</em>
           (level 2 version), using the same spellcasting ability as
-          Spellcasting. The [[lookup @name lowercase]] can't take this action
-          again until the start of its next turn.</p>
+          Spellcasting. The [[lookup @name lowercase]]{monster} can't take this
+          action again until the start of its next turn.</p>
         chat: ''
       identifier: dread-command
       source:
@@ -3185,8 +3186,8 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] makes one [[/item
-          .mmRottingFist000]] or [[/item .d6GVHcFrHv83C7eS]] attack.</p>
+          <p class="feature">The [[lookup @name lowercase]]{monster} makes one
+          [[/item .mmRottingFist000]] or [[/item .d6GVHcFrHv83C7eS]] attack.</p>
         chat: ''
       identifier: necrotic-strike
       source:
@@ -3313,11 +3314,11 @@ items:
           <p class="feature"><em>Wisdom Saving Throw:</em> DC [[lookup
           @save.dc.value activity=8LmlZfevSQkOxGSN]], one [[lookup
           @target.affects.type activity=8LmlZfevSQkOxGSN]] the [[lookup @name
-          lowercase]] can see within [[lookup @range.value
+          lowercase]]{monster} can see within [[lookup @range.value
           activity=8LmlZfevSQkOxGSN]] feet.</p><p><em>Failure:</em> [[/damage
           average]] damage, and the target has the &amp;Reference[Paralyzed
           apply=false] condition until the end of the [[lookup @name
-          lowercase]]'s next turn.</p>
+          lowercase]]{monster}'s next turn.</p>
         chat: ''
       identifier: dreadful-glare
       source:

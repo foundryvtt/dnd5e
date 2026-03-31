@@ -5,7 +5,7 @@ ownership:
 type: spell
 system:
   description:
-    value: "<p>You hurl a bubble of acid. Choose one creature you can see within range, or choose two creatures you can see within range that are within 5 feet of each other. A target must succeed on a Dexterity saving throw or take\_1d6acid damage.</p><p>This spell's damage increases by\_1d6\_when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).</p>"
+    value: "<p>You hurl a bubble of acid. Choose one creature you can see within range, or choose two creatures you can see within range that are within 5 feet of each other. A target must succeed on a Dexterity saving throw or take 1d6 acid damage.</p><p>This spell's damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).</p>"
     chat: ''
   source:
     custom: ''
@@ -25,12 +25,15 @@ system:
       type: creature
       count: '2'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '60'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -102,20 +105,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: acid-splash
 sort: 0
 flags: {}
-img: icons/magic/fire/projectile-fireball-smoke-green.webp
+img: icons/magic/acid/projectile-faceted-glob.webp
 effects: []
 folder: Z8kZlnggh1PtuF3Y
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037352941
-  modifiedTime: 1725992718767
+  modifiedTime: 1772738794222
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!JLTQyqXEaJDrTXyW'

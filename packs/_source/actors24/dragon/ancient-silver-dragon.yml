@@ -616,7 +616,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes three [[/item
+          <p>The [[lookup @name lowercase]]{monster} makes three [[/item
           .mmRend0000000000]] attacks. It can replace one attack with a use of
           (A) [[/item .mmParalyzingBrea]] or (B) Spellcasting to cast [[/item
           .mmSpellcasting00.Activity.DJGcakjcAlCCOOFg]] (level 2 version).</p>
@@ -725,8 +725,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] fails a saving throw, it can
-          choose to succeed instead.</p>
+          <p>If the [[lookup @name lowercase]]{monster} fails a saving throw, it
+          can choose to succeed instead.</p>
         chat: ''
       identifier: legendary-resistance
       source:
@@ -1730,9 +1730,9 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
-          following spells, requiring no Material components and using Charisma
-          as the spellcasting ability (spell save DC [[lookup
+          <p class="feature">The [[lookup @name lowercase]]{monster} casts one
+          of the following spells, requiring no Material components and using
+          Charisma as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]], +15 to hit with spell attacks):</p><p
           class="feature-trait"><strong>At Will:</strong>
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDetectMagi]{Detect
@@ -1857,10 +1857,10 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] uses [[/item Spellcasting]] to cast
-          <em>[[/item .mmSpellcasting00.Activity.2CC68ooxyWo6GXU4]]</em>. The
-          dragon can't take this action again until the start of its next
-          turn.</p>
+          <p>The [[lookup @name lowercase]]{monster} uses [[/item Spellcasting]]
+          to cast <em>[[/item
+          .mmSpellcasting00.Activity.2CC68ooxyWo6GXU4]]</em>. The dragon can't
+          take this action again until the start of its next turn.</p>
         chat: ''
       identifier: chill
       source:
@@ -1991,10 +1991,10 @@ items:
           @target.template.width activity=pVs8BTVDNh54CZ0a]]-foot-wide
           Line.</p><p><em>Failure:</em> [[/damage average]] damage, and the
           target is pushed up to 30 feet straight away from the [[lookup @name
-          lowercase]].</p><p><em>Success:</em> Half damage
+          lowercase]]{monster}.</p><p><em>Success:</em> Half damage
           only.</p><p><em>Failure or Success:</em> The [[lookup @name
-          lowercase]] can't take this action again until the start of its next
-          turn.</p>
+          lowercase]]{monster} can't take this action again until the start of
+          its next turn.</p>
         chat: ''
       identifier: cold-gale
       source:
@@ -2103,8 +2103,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] moves up to half its Speed, and it
-          makes one [[/item Rend]] attack.</p>
+          <p>The [[lookup @name lowercase]]{monster} moves up to half its Speed,
+          and it makes one [[/item Rend]] attack.</p>
         chat: ''
       identifier: pounce
       source:

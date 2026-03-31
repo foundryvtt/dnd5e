@@ -9,12 +9,12 @@ system:
       <p>A creature of your choice that you can see within range perceives
       everything as hilariously funny and falls into fits of laughter if this
       spell affects it. The target must succeed on a Wisdom saving throw or fall
-      prone, becoming Incapacitated and unable to stand up for the Duration. A
-      creature with an Intelligence score of 4 or less isn't affected.</p><p>At
-      the end of each of its turns, and each time it takes damage, the target
-      can make another Wisdom saving throw. The target has advantage on the
-      saving throw if it's triggered by damage. On a success, the spell
-      ends.</p>
+      prone, becoming &amp;reference[Incapacitated] and unable to stand up for
+      the Duration. A creature with an Intelligence score of 4 or less isn't
+      affected.</p><p>At the end of each of its turns, and each time it takes
+      damage, the target can make another Wisdom saving throw. The target has
+      advantage on the saving throw if it's triggered by damage. On a success,
+      the spell ends.</p>
     chat: ''
   source:
     custom: ''
@@ -34,12 +34,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -79,7 +82,8 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: 58BFwcwzLrqeODxs
       range:
         override: false
       target:
@@ -91,7 +95,7 @@ system:
           choice: false
         override: false
       damage:
-        onSave: half
+        onSave: none
         parts: []
       save:
         ability: wis
@@ -101,20 +105,71 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: hideous-laughter
 sort: 0
 flags: {}
-img: icons/magic/fire/explosion-fireball-medium-purple-pink.webp
-effects: []
+img: icons/magic/control/mouth-smile-deception-purple.webp
+effects:
+  - name: Hideous Laughter
+    img: icons/magic/control/mouth-smile-deception-purple.webp
+    origin: Compendium.dnd5e.spells.Item.BQk5Row4NymMnUQl
+    transfer: false
+    _id: 58BFwcwzLrqeODxs
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: 60
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>You perceives everything as hilariously funny and fall into fits of
+      laughter. You are &amp;reference[Incapacitated apply=false] and unable to
+      stand up for the Duration.</p><p>At the end of each of your turns, and
+      each time you take damage, you can make another Wisdom saving throw. You
+      have advantage on the saving throw if it's triggered by damage. On a
+      success, the spell ends.</p>
+    tint: '#ffffff'
+    statuses:
+      - incapacitated
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses:
+            - prone
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      createdTime: 1772823870087
+      modifiedTime: 1772823985589
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!BQk5Row4NymMnUQl.58BFwcwzLrqeODxs'
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037350497
-  modifiedTime: 1725992717971
+  modifiedTime: 1772823963000
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!BQk5Row4NymMnUQl'

@@ -275,6 +275,7 @@ export default class CompendiumBrowser extends Application5e {
       this.options.filters.locked,
       { inplace: false }
     );
+    delete filters.exclusive;
     filters.documentClass ??= "Item";
     if ( filters.additional?.source ) {
       filters.additional.source = Object.entries(filters.additional.source).reduce((obj, [k, v]) => {
@@ -474,6 +475,7 @@ export default class CompendiumBrowser extends Application5e {
    */
   async _prepareSidebarContext(partId, context, options) {
     context.isLocked = {};
+    const lockExclusive = this.options.filters.locked.exclusive === true;
     context.isLocked.filters = ("additional" in this.options.filters.locked);
     context.isLocked.types = ("types" in this.options.filters.locked) || context.isLocked.filters;
     context.isLocked.documentClass = ("documentClass" in this.options.filters.locked) || context.isLocked.types;
@@ -517,7 +519,14 @@ export default class CompendiumBrowser extends Application5e {
           case "set": sort = 3; break;
         }
 
-        const generateLocked = data => {
+        const generateLocked = (data, filterDef) => {
+          if ( lockExclusive && (data !== undefined) ) {
+            if ( filterDef?.type === "range" ) return { min: true, max: true };
+            if ( filterDef?.type === "set" ) {
+              return Object.fromEntries(Object.keys(filterDef.config.choices).map(k => [k, true]));
+            }
+            return true;
+          }
           if ( foundry.utils.getType(data) === "Object" ) {
             return Object.fromEntries(Object.entries(data).map(([k, v]) => [k, generateLocked(v)]));
           }
@@ -527,7 +536,7 @@ export default class CompendiumBrowser extends Application5e {
         const pushFilter = data => arr.push(foundry.utils.mergeObject(data, {
           key, sort,
           value: context.filters.additional?.[key],
-          locked: generateLocked(this.options.filters.locked?.additional?.[key])
+          locked: generateLocked(this.options.filters.locked?.additional?.[key], data)
         }, { inplace: false }));
 
         data.expandId = key;
@@ -704,15 +713,19 @@ export default class CompendiumBrowser extends Application5e {
     const filters = this.element.querySelector('[data-application-part="filters"]');
     filters.querySelector('[data-filter-id="source"]')?.remove();
     if ( !sources.length ) return;
-    const locked = Object.entries(this.options.filters?.locked?.additional?.source ?? {}).reduce((obj, [k, v]) => {
-      obj[k.slugify({ strict: true })] = v;
-      return obj;
-    }, {});
+    const lockExclusive = this.options.filters?.locked?.exclusive === true;
+    const lockedSource = this.options.filters?.locked?.additional?.source;
+    const locked = lockExclusive && (lockedSource !== undefined)
+      ? Object.fromEntries(Object.keys(this.#sources).map(k => [k, true]))
+      : Object.entries(lockedSource ?? {}).reduce((obj, [k, v]) => {
+        obj[k.slugify({ strict: true })] = v;
+        return obj;
+      }, {});
     const filter = await foundry.applications.handlebars.renderTemplate(
       "systems/dnd5e/templates/compendium/browser-sidebar-filter-set.hbs",
       {
         locked,
-        value: locked,
+        value: lockExclusive && (lockedSource !== undefined) ? {} : locked,
         key: "source",
         expandId: "source",
         label: "DND5E.SOURCE.FIELDS.source.label",
@@ -1144,15 +1157,16 @@ export default class CompendiumBrowser extends Application5e {
   /**
    * Factory method used to spawn a compendium browser and wait for the results of a selection.
    * @param {Partial<CompendiumBrowserConfiguration>} [options]
+   * @param {object} [renderOptions]  Options passed to render.
    * @returns {Promise<Set<string>|null>}
    */
-  static async select(options={}) {
-    return new Promise((resolve, reject) => {
+  static async select(options={}, renderOptions={}) {
+    return new Promise(resolve => {
       const browser = new CompendiumBrowser(options);
-      browser.addEventListener("close", event => {
+      browser.addEventListener("close", () => {
         resolve(browser.selected?.size ? browser.selected : null);
       }, { once: true });
-      browser.render({ force: true });
+      browser.render({ force: true, ...renderOptions });
     });
   }
 
@@ -1161,11 +1175,13 @@ export default class CompendiumBrowser extends Application5e {
   /**
    * Factory method used to spawn a compendium browser and return a single selected item or null if canceled.
    * @param {Partial<CompendiumBrowserConfiguration>} [options]
+   * @param {object} [renderOptions]  Options passed to render.
    * @returns {Promise<string|null>}
    */
-  static async selectOne(options={}) {
+  static async selectOne(options={}, renderOptions={}) {
     const result = await this.select(
-      foundry.utils.mergeObject(options, { selection: { min: 1, max: 1 } }, { inplace: false })
+      foundry.utils.mergeObject(options, { selection: { min: 1, max: 1 } }, { inplace: false }),
+      renderOptions
     );
     return result?.size ? result.first() : null;
   }

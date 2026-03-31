@@ -563,10 +563,10 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] is related to a type
-          of dragon associated with one of the following damage types (DM's
-          choice): Acid, Cold, Fire, Lightning, or Poison. This choice affects
-          other aspects of the stat block.</p><section class="secret"
+          <p class="feature">The [[lookup @name lowercase]]{monster} is related
+          to a type of dragon associated with one of the following damage types
+          (DM's choice): Acid, Cold, Fire, Lightning, or Poison. This choice
+          affects other aspects of the stat block.</p><section class="secret"
           id="secret-9qS4XvlccQjIsypM"><p><strong>Foundry
           Note</strong></p><p>This feature provides an Active Effect to manage
           <strong>Damage Resistances</strong> in the character sheet's Effects
@@ -852,7 +852,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item
+          <p>The [[lookup @name lowercase]]{monster} makes two [[/item
           .mmClaw0000000000]] attacks.</p>
         chat: ''
       identifier: multiattack
@@ -1266,9 +1266,9 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] jumps up to [[lookup @range.value
-          activity=C28C43DeD8iFtZMe]] feet by [[lookup @activation.condition
-          activity=C28C43DeD8iFtZMe]].</p>
+          <p>The [[lookup @name lowercase]]{monster} jumps up to [[lookup
+          @range.value activity=C28C43DeD8iFtZMe]] feet by [[lookup
+          @activation.condition activity=C28C43DeD8iFtZMe]].</p>
         chat: ''
       identifier: leap
       source:

@@ -568,7 +568,9 @@ items:
         recovery: []
         max: ''
       description:
-        value: <p>The [[lookup @name lowercase]] can breathe air and water.</p>
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} can breathe air and
+          water.</p>
         chat: ''
       identifier: amphibious
       source:
@@ -669,8 +671,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two attacks, using [[/item
-          .mmStormSword0000]] or [[/item .mmThunderbolt000]] in any
+          <p>The [[lookup @name lowercase]]{monster} makes two attacks, using
+          [[/item .mmStormSword0000]] or [[/item .mmThunderbolt000]] in any
           combination.</p>
         chat: ''
       identifier: multiattack
@@ -954,7 +956,7 @@ items:
           <p class="feature">[[/attack extended]]. [[/damage average extended]],
           and the target has the &amp;Reference[Blinded apply=false] and
           &amp;Reference[Deafened apply=false] conditions until the start of the
-          [[lookup @name lowercase]]'s next turn.</p>
+          [[lookup @name lowercase]]{monster}'s next turn.</p>
         chat: ''
       identifier: thunderbolt
       source:
@@ -1170,10 +1172,10 @@ items:
           [[lookup @target.template.size
           activity=YVri6iuieFUUiO1d]]-foot-radius, [[lookup
           @target.template.height activity=YVri6iuieFUUiO1d]]-feet-high Cylinder
-          originating from a point the [[lookup @name lowercase]] can see within
-          [[lookup @range.value activity=YVri6iuieFUUiO1d]] feet.</p><p
-          class="feature"><em>Failure:</em> [[/damage average]] damage.</p><p
-          class="feature"><em>Success:</em> Half damage.</p>
+          originating from a point the [[lookup @name lowercase]]{monster} can
+          see within [[lookup @range.value activity=YVri6iuieFUUiO1d]]
+          feet.</p><p class="feature"><em>Failure:</em> [[/damage average]]
+          damage.</p><p class="feature"><em>Success:</em> Half damage.</p>
         chat: ''
       identifier: lightning-storm
       source:
@@ -1389,9 +1391,9 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
-          following spells, requiring no Material components and using Wisdom as
-          the spellcasting ability (spell save DC [[lookup
+          <p class="feature">The [[lookup @name lowercase]]{monster} casts one
+          of the following spells, requiring no Material components and using
+          Wisdom as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]]):</p><p class="feature-trait"><strong>At
           Will:</strong>
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDetectMagi]{Detect

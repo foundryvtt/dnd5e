@@ -29,11 +29,14 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -72,7 +75,11 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: KsQdGorCuwDjaUGF
+          level:
+            min: null
+            max: null
       range:
         override: false
       target:
@@ -84,27 +91,73 @@ system:
           choice: false
         override: false
       roll:
-        formula: 1d4
+        formula: ''
         name: ''
         prompt: false
         visible: false
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: guidance
 sort: 0
 flags: {}
-img: icons/magic/control/buff-flight-wings-blue.webp
-effects: []
+img: icons/magic/sonic/explosion-impact-shock-wave.webp
+effects:
+  - name: Guidance
+    img: icons/magic/sonic/explosion-impact-shock-wave.webp
+    origin: Compendium.dnd5e.spells.Item.P7mF2MxSuVJwHRRY
+    transfer: false
+    _id: KsQdGorCuwDjaUGF
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: 60
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>Once before the spell ends, you can roll a [[/r d4]] and add the number
+      rolled to one ability check of your choice. You can roll the die before or
+      after making the ability check. The spell then ends.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      createdTime: 1772660540103
+      modifiedTime: 1772660584253
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!P7mF2MxSuVJwHRRY.KsQdGorCuwDjaUGF'
 folder: Z8kZlnggh1PtuF3Y
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037355518
-  modifiedTime: 1725992719639
+  modifiedTime: 1772738768074
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!P7mF2MxSuVJwHRRY'

@@ -573,9 +573,9 @@ items:
         max: ''
       description:
         value: >-
-          <p>Attack rolls against the [[lookup @name lowercase]] are made with
-          Disadvantage unless the [[lookup @name lowercase]] has the
-          Incapacitated condition.</p>
+          <p>Attack rolls against the [[lookup @name lowercase]]{monster} are
+          made with Disadvantage unless the [[lookup @name lowercase]]{monster}
+          has the Incapacitated condition.</p>
         chat: ''
       identifier: blurred-form
       source:
@@ -694,13 +694,13 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] explodes [[lookup
+          <p>The [[lookup @name lowercase]]{monster} explodes [[lookup
           @activation.condition activity=1SfqWSp7RSyHgG4b]].</p><p><em>Dexterity
           Saving Throw: </em>DC [[lookup @save.dc.value
           activity=1SfqWSp7RSyHgG4b]], each [[lookup @target.affects.type
           activity=1SfqWSp7RSyHgG4b]] in a [[lookup @target.template.size
           activity=1SfqWSp7RSyHgG4b]]-foot Emanation originating from the
-          [[lookup @name lowercase]].</p><p><em>Failure: </em>[[/damage
+          [[lookup @name lowercase]]{monster}.</p><p><em>Failure: </em>[[/damage
           average]] damage.</p><p><em>Success:</em> Half damage.</p>
         chat: ''
       identifier: death-burst
@@ -1004,9 +1004,10 @@ items:
           [[lookup @target.template.size activity=5iI1KQRWrdMGh9sy]]-foot
           Cone.</p><p><em>Failure:</em> [[/damage average]] damage, and the
           target's Speed decreases by 10 feet until the end of the [[lookup
-          @name lowercase]] next turn.. </p><p class="feature"><em>Success:</em>
-          Half damage.</p><p><em>Failure or Success:</em> Being underwater
-          doesn't grant Resistance to this Fire damage.</p>
+          @name lowercase]]{monster} next turn.. </p><p
+          class="feature"><em>Success:</em> Half damage.</p><p><em>Failure or
+          Success:</em> Being underwater doesn't grant Resistance to this Fire
+          damage.</p>
         chat: ''
       identifier: steam-breath
       source:

@@ -68,11 +68,11 @@ system:
     max: ''
   description:
     value: >-
-      <p class="feature">At the end of each of the [[lookup @name lowercase]]'s
-      turns, each [[lookup @target.affects.type activity=LDcQJj3oXyPCuCaT]] in a
-      [[lookup @target.template.size activity=LDcQJj3oXyPCuCaT]]-foot Emanation
-      originating from the [[lookup @name lowercase]] takes [[/damage average]]
-      damage.</p>
+      <p class="feature">At the end of each of the [[lookup @name
+      lowercase]]{monster}'s turns, each [[lookup @target.affects.type
+      activity=LDcQJj3oXyPCuCaT]] in a [[lookup @target.template.size
+      activity=LDcQJj3oXyPCuCaT]]-foot Emanation originating from the [[lookup
+      @name lowercase]]{monster} takes [[/damage average]] damage.</p>
     chat: ''
   identifier: heat-aura
   source:

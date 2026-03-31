@@ -3,6 +3,10 @@ import { formatNumber, formatTime, getPluralRules } from "../../utils.mjs";
 const { NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
+ * @import { ActivityRollData, ItemRollData } from "../../documents/_types.mjs";
+ */
+
+/**
  * Field for storing activation data.
  */
 export default class ActivationField extends SchemaField {
@@ -23,8 +27,8 @@ export default class ActivationField extends SchemaField {
   /**
    * Prepare data for this field. Should be called during the `prepareFinalData` stage.
    * @this {ItemDataModel|BaseActivityData}
-   * @param {object} rollData  Roll data used for formula replacements.
-   * @param {object} [labels]  Object in which to insert generated labels.
+   * @param {ItemRollData|ActivityRollData} rollData  Roll data used for formula replacements.
+   * @param {object} [labels]                         Object in which to insert generated labels.
    */
   static prepareData(rollData, labels) {
     const config = CONFIG.DND5E.activityActivationTypes[this.activation.type];

@@ -81,12 +81,12 @@ system:
       <p class="feature"><em>Dexterity Saving Throw:</em> DC [[lookup
       @save.dc.value activity=g5fxAWhrpwohtETl]], [[lookup
       @target.affects.labels.statblock activity=g5fxAWhrpwohtETl]] the [[lookup
-      @name lowercase]] can see within [[lookup @range.value
+      @name lowercase]]{monster} can see within [[lookup @range.value
       activity=g5fxAWhrpwohtETl]] feet.</p><p class="feature"><em>Failure:</em>
       [[/damage average]] damage, and the target's Speed is halved until the end
       of its next turn.</p><p class="feature"><em>Failure or Success:</em> The
-      [[lookup @name lowercase]] can't take this action again until the start of
-      its next turn.</p>
+      [[lookup @name lowercase]]{monster} can't take this action again until the
+      start of its next turn.</p>
     chat: ''
   identifier: scorching-sands
   source:

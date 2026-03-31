@@ -625,8 +625,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] fails a saving throw, it can
-          choose to succeed instead.</p>
+          <p>If the [[lookup @name lowercase]]{monster} fails a saving throw, it
+          can choose to succeed instead.</p>
         chat: ''
       identifier: legendary-resistance
       source:
@@ -736,16 +736,16 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">If the [[lookup @name lowercase]] drops to 0 Hit
-          Points outside its resting place, the [[lookup @name lowercase]] uses
-          Shape-Shift to become mist (no action required). If it can't use
-          Shape-Shift, it is destroyed.</p><p class="feature">While it has 0 Hit
-          Points in mist form, it can't return to its vampire form, and it must
-          reach its resting place within 2 hours or be destroyed. Once in its
-          resting place, it returns to its vampire form and has the
-          &amp;Reference[Paralyzed apply=false] condition until it regains any
-          Hit Points, and it regains 1 Hit Point after spending 1 hour
-          there.</p>
+          <p class="feature">If the [[lookup @name lowercase]]{monster} drops to
+          0 Hit Points outside its resting place, the [[lookup @name
+          lowercase]]{monster} uses Shape-Shift to become mist (no action
+          required). If it can't use Shape-Shift, it is destroyed.</p><p
+          class="feature">While it has 0 Hit Points in mist form, it can't
+          return to its vampire form, and it must reach its resting place within
+          2 hours or be destroyed. Once in its resting place, it returns to its
+          vampire form and has the &amp;Reference[Paralyzed apply=false]
+          condition until it regains any Hit Points, and it regains 1 Hit Point
+          after spending 1 hour there.</p>
         chat: ''
       identifier: misty-escape
       source:
@@ -835,8 +835,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] can climb difficult surfaces,
-          including along ceilings, without needing to make an ability
+          <p>The [[lookup @name lowercase]]{monster} can climb difficult
+          surfaces, including along ceilings, without needing to make an ability
           check.</p>
         chat: ''
       identifier: spider-climb
@@ -930,7 +930,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item
+          <p>The [[lookup @name lowercase]]{monster} makes two [[/item
           .mmGraveStrike000]]{Grave Strike} attacks and uses [[/item
           .mmBite0000000000]]{Bite}.</p>
         chat: ''
@@ -1408,11 +1408,12 @@ items:
           activity=ngPzlEI5pVSdBv86]].</p><p><em>Failure:</em> [[/damage
           average]] damage. The target's Hit Point maximum decreases by an
           amount equal to the Necrotic damage taken, and the [[lookup @name
-          lowercase]] regains Hit Points equal to that amount. A Humanoid
-          reduced to 0 Hit Points by this damage and then buried rises the
-          following sunset as a
+          lowercase]]{monster} regains Hit Points equal to that amount. A
+          Humanoid reduced to 0 Hit Points by this damage and then buried rises
+          the following sunset as a
           <strong>@UUID[Compendium.dnd5e.actors24.Actor.mmVampireSpawn00]{Vampire
-          Spawn}</strong> under the [[lookup @name lowercase]]'s control.</p>
+          Spawn}</strong> under the [[lookup @name lowercase]]{monster}'s
+          control.</p>
         chat: ''
       identifier: bite
       source:
@@ -1571,16 +1572,16 @@ items:
         max: '1'
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] casts
+          <p>The [[lookup @name lowercase]]{monster} casts
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplCharmPerso]</em>,
           requiring no spell components and using Charisma as the spellcasting
           ability (spell save DC [[lookup @abilities.cha.dc]]), and the duration
           is [[lookup @duration.value activity=fcRXSTOlFJShCl52]] hours. The
           &amp;Reference[Charmed apply=false] target is a willing recipient of
-          the [[lookup @name lowercase]]'s [[/item .mmBite0000000000]]{Bite},
-          the damage of which doesn't end the spell. When the spell ends, the
-          target is unaware it was Charmed by the [[lookup @name
-          lowercase]].</p>
+          the [[lookup @name lowercase]]{monster}'s [[/item
+          .mmBite0000000000]]{Bite}, the damage of which doesn't end the spell.
+          When the spell ends, the target is unaware it was Charmed by the
+          [[lookup @name lowercase]]{monster}.</p>
         chat: ''
       identifier: charm
       source:
@@ -1932,20 +1933,20 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">If the [[lookup @name lowercase]] isn't in sunlight
-          or running water, it shape-shifts into a Tiny
+          <p class="feature">If the [[lookup @name lowercase]]{monster} isn't in
+          sunlight or running water, it shape-shifts into a Tiny
           @UUID[Compendium.dnd5e.actors24.Actor.mmBat00000000000]{bat} (Speed 5
           ft., Fly Speed 30 ft.) or a Medium cloud of mist (Speed 5 ft., Fly
           Speed 20 ft. [hover]), or it returns to its vampire form. Anything it
           is wearing transforms with it.</p><p class="feature">While in bat
-          form, the [[lookup @name lowercase]] can't speak. Its game statistics,
-          other than its size and Speed, are unchanged.</p><p
-          class="feature">While in mist form, the [[lookup @name lowercase]]
-          can't take any actions, speak, or manipulate objects. It is weightless
-          and can enter an enemy's space and stop there. If air can pass through
-          a space, the mist can do so, but it can't pass through liquid. It has
-          Resistance to all damage, except the damage it takes from
-          sunlight.</p>
+          form, the [[lookup @name lowercase]]{monster} can't speak. Its game
+          statistics, other than its size and Speed, are unchanged.</p><p
+          class="feature">While in mist form, the [[lookup @name
+          lowercase]]{monster} can't take any actions, speak, or manipulate
+          objects. It is weightless and can enter an enemy's space and stop
+          there. If air can pass through a space, the mist can do so, but it
+          can't pass through liquid. It has Resistance to all damage, except the
+          damage it takes from sunlight.</p>
         chat: ''
       identifier: shape-shift
       source:
@@ -2053,12 +2054,12 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] casts
+          <p>The [[lookup @name lowercase]]{monster} casts
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplCommand000]</em>,
           requiring no spell components and using Charisma as the spellcasting
           ability (spell save DC [[lookup @abilities.cha.dc]]). The [[lookup
-          @name lowercase]] can't take this action again until the start of its
-          next turn.</p>
+          @name lowercase]]{monster} can't take this action again until the
+          start of its next turn.</p>
         chat: ''
       identifier: beguile
       source:
@@ -2350,9 +2351,9 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] moves up to half its
-          Speed, and it makes one [[/item .mmGraveStrike000]]{Grave Strike}
-          attack.</p>
+          <p class="feature">The [[lookup @name lowercase]]{monster} moves up to
+          half its Speed, and it makes one [[/item .mmGraveStrike000]]{Grave
+          Strike} attack.</p>
         chat: ''
       identifier: deathless-strike
       source:
@@ -2580,21 +2581,21 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] has these
+          <p class="feature">The [[lookup @name lowercase]]{monster} has these
           weaknesses:</p><p class="feature-trait"><strong>Forbiddance.</strong>
-          The [[lookup @name lowercase]] can't enter a residence without an
-          invitation from an occupant.</p><p
+          The [[lookup @name lowercase]]{monster} can't enter a residence
+          without an invitation from an occupant.</p><p
           class="feature-trait"><strong>Running Water.</strong> The [[lookup
-          @name lowercase]] takes 20 Acid damage if it ends its turn in running
-          water.</p><p class="feature-trait"><strong>Stake to the
-          Heart.</strong> The [[lookup @name lowercase]] is destroyed if a
-          weapon that deals Piercing damage is driven into the [[lookup @name
-          lowercase]]'s heart while the [[lookup @name lowercase]] has the
-          Incapacitated condition.</p><p
+          @name lowercase]]{monster} takes 20 Acid damage if it ends its turn in
+          running water.</p><p class="feature-trait"><strong>Stake to the
+          Heart.</strong> The [[lookup @name lowercase]]{monster} is destroyed
+          if a weapon that deals Piercing damage is driven into the [[lookup
+          @name lowercase]]{monster}'s heart while the [[lookup @name
+          lowercase]]{monster} has the Incapacitated condition.</p><p
           class="feature-trait"><strong>Sunlight.</strong> The [[lookup @name
-          lowercase]] takes 20 Radiant damage if it starts its turn in sunlight.
-          While in sunlight, it has Disadvantage on attack rolls and ability
-          checks.</p>
+          lowercase]]{monster} takes 20 Radiant damage if it starts its turn in
+          sunlight. While in sunlight, it has Disadvantage on attack rolls and
+          ability checks.</p>
         chat: ''
       identifier: vampire-weakness
       source:

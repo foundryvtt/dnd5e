@@ -5,6 +5,7 @@ import MappingField from "../../fields/mapping-field.mjs";
 const { NumberField, StringField } = foundry.data.fields;
 
 /**
+ * @import { ActorRollData } from "../../../documents/_types.mjs";
  * @import { TravelPace5e } from "./_types.mjs";
  */
 
@@ -44,7 +45,7 @@ export default class TravelField extends foundry.data.fields.SchemaField {
   /**
    * Prepare travel data.
    * @this {ActorDataModel}
-   * @param {object} rollData  Actor's roll data.
+   * @param {ActorRollData} rollData  Actor's roll data.
    */
   static prepareData(rollData) {
     const { movement, travel } = this.attributes;

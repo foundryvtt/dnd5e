@@ -577,9 +577,10 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] dies outside the Nine Hells, its
-          body disappears in sulfurous smoke, and it gains a new body instantly,
-          reviving with all its Hit Points somewhere in the Nine Hells.</p>
+          <p>If the [[lookup @name lowercase]]{monster} dies outside the Nine
+          Hells, its body disappears in sulfurous smoke, and it gains a new body
+          instantly, reviving with all its Hit Points somewhere in the Nine
+          Hells.</p>
         chat: ''
       identifier: diabolical-restoration
       source:
@@ -627,8 +628,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] has Advantage on saving throws
-          against spells and other magical effects.</p>
+          <p>The [[lookup @name lowercase]]{monster} has Advantage on saving
+          throws against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
       source:
@@ -729,7 +730,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item
+          <p>The [[lookup @name lowercase]]{monster} makes two [[/item
           .mmClaw0000000000]] attacks and one [[/item .mmInfernalSting0]]
           attack.</p>
         chat: ''
@@ -996,8 +997,8 @@ items:
         value: >-
           <p class="feature">[[/attack extended]]. [[/damage average extended]],
           and the target has the &amp;Reference[Poisoned apply=false] condition
-          until the start of the [[lookup @name lowercase]]'s next turn. While
-          Poisoned, the target can't regain Hit Points.</p>
+          until the start of the [[lookup @name lowercase]]{monster}'s next
+          turn. While Poisoned, the target can't regain Hit Points.</p>
         chat: ''
       identifier: infernal-sting
       source:

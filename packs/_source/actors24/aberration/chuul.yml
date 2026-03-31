@@ -566,7 +566,9 @@ items:
         recovery: []
         max: ''
       description:
-        value: <p>The [[lookup @name lowercase]] can breathe air and water.</p>
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} can breathe air and
+          water.</p>
         chat: ''
       identifier: amphibious
       source:
@@ -614,8 +616,8 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] senses magic within
-          120 feet of itself. This trait otherwise works like the
+          <p class="feature">The [[lookup @name lowercase]]{monster} senses
+          magic within 120 feet of itself. This trait otherwise works like the
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDetectMagi]{Detect
           Magic}</em> spell but isn't itself magical.</p>
         chat: ''
@@ -710,8 +712,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes 2 [[/item Pincer]] attacks and
-          uses [[/item Paralyzing Tentacles]].</p>
+          <p>The [[lookup @name lowercase]]{monster} makes 2 [[/item Pincer]]
+          attacks and uses [[/item Paralyzing Tentacles]].</p>
         chat: ''
       identifier: multiattack
       source:
@@ -830,11 +832,11 @@ items:
           <p class="feature"><em>Constitution Saving Throw:</em> DC [[lookup
           @save.dc.value activity=p157Iqz8s0M0VilW]], one [[lookup
           @target.affects.type activity=p157Iqz8s0M0VilW]] Grappled by the
-          [[lookup @name lowercase]].</p><p><em>Failure:</em> The target has the
-          &amp;Reference[Poisoned apply=false] condition and repeats the save at
-          the end of each of its turns, ending the effect on itself on a
-          success. After 1 minute, it succeeds automatically. While Poisoned,
-          the target has the &amp;Reference[Paralyzed apply=false]
+          [[lookup @name lowercase]]{monster}.</p><p><em>Failure:</em> The
+          target has the &amp;Reference[Poisoned apply=false] condition and
+          repeats the save at the end of each of its turns, ending the effect on
+          itself on a success. After 1 minute, it succeeds automatically. While
+          Poisoned, the target has the &amp;Reference[Paralyzed apply=false]
           condition.</p>
         chat: ''
       identifier: paralyzing-tentacles

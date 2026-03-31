@@ -626,9 +626,9 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] regains [[lookup @healing.formula
-          activity=5cGvjZJIJVicjJ3d]] Hit Points at the start of each of its
-          turns if it has at least 1 Hit Point.</p>
+          <p>The [[lookup @name lowercase]]{monster} regains [[lookup
+          @healing.formula activity=5cGvjZJIJVicjJ3d]] Hit Points at the start
+          of each of its turns if it has at least 1 Hit Point.</p>
         chat: ''
       identifier: regeneration
       source:
@@ -733,7 +733,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item
+          <p>The [[lookup @name lowercase]]{monster} makes two [[/item
           .mmClaw0000000000]] or [[/item .mmNightmareRay00]] attacks. It can
           replace one attack with a use of [[/item .mmSpellcasting00]].</p>
         chat: ''
@@ -1015,8 +1015,8 @@ items:
         value: >-
           <p class="feature">[[/attack extended]]. [[/damage average extended]],
           and the target has the &amp;Reference[Frightened apply=false]
-          condition until the start of the [[lookup @name lowercase]]'s next
-          turn.</p>
+          condition until the start of the [[lookup @name lowercase]]{monster}'s
+          next turn.</p>
         chat: ''
       identifier: nightmare-ray
       source:
@@ -1200,10 +1200,11 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] shape-shifts into a
-          Small or Medium Humanoid or a Large Giant, or it returns to its true
-          form. Other than its size, its game statistics are the same in each
-          form. Any equipment it is wearing or carrying isn't transformed.</p>
+          <p class="feature">The [[lookup @name lowercase]]{monster}
+          shape-shifts into a Small or Medium Humanoid or a Large Giant, or it
+          returns to its true form. Other than its size, its game statistics are
+          the same in each form. Any equipment it is wearing or carrying isn't
+          transformed.</p>
         chat: ''
       identifier: shape-shift
       source:
@@ -1487,9 +1488,9 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
-          following spells, requiring no Material components and using Charisma
-          as the spellcasting ability (spell save DC [[lookup
+          <p class="feature">The [[lookup @name lowercase]]{monster} casts one
+          of the following spells, requiring no Material components and using
+          Charisma as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]]):</p><p class="feature-trait"><strong>1/Day
           Each:</strong>
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplCharmPerso]{Charm
@@ -1605,7 +1606,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts
+          <p class="feature">The [[lookup @name lowercase]]{monster} casts
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplInvisibili]{Invisibility}</em>
           on itself, requiring no spell components and using Charisma as the
           spellcasting ability.</p>

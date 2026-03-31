@@ -4,6 +4,10 @@ import ActivityUsageDialog from "./activity-usage-dialog.mjs";
 const { StringField } = foundry.data.fields;
 
 /**
+ * @import { ActivityRollData } from "../../documents/_types.mjs";
+ */
+
+/**
  * Dialog for configuring the usage of the transform activity.
  */
 export default class TransformUsageDialog extends ActivityUsageDialog {
@@ -50,8 +54,8 @@ export default class TransformUsageDialog extends ActivityUsageDialog {
 
   /**
    * Determine the label for a profile in the ability use dialog.
-   * @param {SummonsProfile} profile  Profile for which to generate the label.
-   * @param {object} rollData         Roll data used to prepare the count.
+   * @param {SummonsProfile} profile     Profile for which to generate the label.
+   * @param {ActivityRollData} rollData  Roll data used to prepare the count.
    * @returns {string}
    */
   getProfileLabel(profile, rollData) {

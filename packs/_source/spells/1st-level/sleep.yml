@@ -1,7 +1,7 @@
 _id: KhwiSi9fwVfUPtku
 name: Sleep
 type: spell
-img: icons/magic/light/explosion-star-small-pink.webp
+img: icons/magic/control/sleep-bubble-purple.webp
 system:
   description:
     value: >-
@@ -37,14 +37,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: sphere
       size: '20'
       contiguous: false
+      count: ''
   range:
     value: '90'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -64,19 +67,20 @@ system:
     - somatic
     - material
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: damage
+    R4kjwJNQwDLhvlPw:
+      type: utility
+      name: Cast
+      _id: R4kjwJNQwDLhvlPw
+      img: ''
+      sort: 0
       activation:
         type: action
-        value: null
         override: false
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
         chatFlavor: ''
       duration:
@@ -85,36 +89,35 @@ system:
         override: false
       effects:
         - _id: MowBnXpRu2aG48i9
+      flags: {}
       range:
+        units: self
         override: false
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
         affects:
           choice: false
         override: false
-      damage:
-        critical:
-          allow: false
-          bonus: ''
-        parts:
-          - number: 5
-            denomination: 8
-            bonus: ''
-            types: []
-            custom:
-              enabled: false
-              formula: ''
-            scaling:
-              mode: whole
-              number: 2
-              formula: ''
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: Affected Hit Points
+        formula: 5d8 + (@scaling.increase * 2)d8
   identifier: sleep
 effects:
   - name: Sleep
@@ -127,30 +130,33 @@ effects:
       turns: null
       startRound: null
       startTurn: null
-    disabled: true
+    disabled: false
     _id: MowBnXpRu2aG48i9
     changes: []
     description: >-
-      <p>The creature affected by this spell falls Unconscious until the spell
-      ends, the sleeper takes damage, or someone uses an action to shake or slap
-      the sleeper awake.</p>
+      <p>You have fallen &amp;reference[Unconscious apply=faklse] until the
+      spell ends, you take damage, or someone uses an action to shake or slap
+      you awake.</p>
     transfer: false
     statuses:
-      - unconscious
       - incapacitated
-    flags: {}
+      - unconscious
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     tint: '#ffffff'
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.3.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1772828206618
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    img: icons/magic/light/explosion-star-small-pink.webp
+    img: icons/magic/control/sleep-bubble-purple.webp
     type: base
     system: {}
     sort: 0
@@ -162,11 +168,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037353656
-  modifiedTime: 1725992719021
+  modifiedTime: 1772828323722
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!KhwiSi9fwVfUPtku'

@@ -573,10 +573,10 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">No magic can observe the [[lookup @name lowercase]]
-          remotely or detect its thoughts without its permission. Wisdom
-          (Insight) checks made to ascertain its intentions or sincerity are
-          made with Disadvantage.</p>
+          <p class="feature">No magic can observe the [[lookup @name
+          lowercase]]{monster} remotely or detect its thoughts without its
+          permission. Wisdom (Insight) checks made to ascertain its intentions
+          or sincerity are made with Disadvantage.</p>
         chat: ''
       identifier: inscrutable
       source:
@@ -679,8 +679,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] fails a saving throw, it can
-          choose to succeed instead.</p>
+          <p>If the [[lookup @name lowercase]]{monster} fails a saving throw, it
+          can choose to succeed instead.</p>
         chat: ''
       identifier: legendary-resistance
       source:
@@ -780,7 +780,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes three [[/item Claw]]
+          <p>The [[lookup @name lowercase]]{monster} makes three [[/item Claw]]
           attacks.</p>
         chat: ''
       identifier: multiattack
@@ -1058,9 +1058,10 @@ items:
           @target.affects.type activity=zPMfwwIoTFzIrN5H]] in a [[lookup
           @target.template.size activity=zPMfwwIoTFzIrN5H]]-foot Emanation
           originating from the [[lookup @name
-          lowercase]].</p><p><em>Failure:</em> [[/damage average]] damage, and
-          the target has the &amp;Reference[Incapacitated apply=false] condition
-          until the start of the [[lookup @name lowercase]]'s next turn.</p>
+          lowercase]]{monster}.</p><p><em>Failure:</em> [[/damage average]]
+          damage, and the target has the &amp;Reference[Incapacitated
+          apply=false] condition until the start of the [[lookup @name
+          lowercase]]{monster}'s next turn.</p>
         chat: ''
       identifier: mind-rending-roar
       source:
@@ -1760,8 +1761,8 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
-          following spells, requiring no Material components and using
+          <p class="feature">The [[lookup @name lowercase]]{monster} casts one
+          of the following spells, requiring no Material components and using
           Intelligence as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]]):</p><p class="feature-trait"><strong>At
           Will:</strong>
@@ -3817,7 +3818,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] can teleport up to [[lookup
+          <p>The [[lookup @name lowercase]]{monster} can teleport up to [[lookup
           @range.value activity=a3RqyzU0UqzLJif0]] feet to an unoccupied space
           it can see, and it makes one [[/item Claw]] attack.</p>
         chat: ''
@@ -3986,13 +3987,13 @@ items:
           <p class="feature"><em>Constitution Saving Throw:</em> DC [[lookup
           @save.dc.value activity=xZul1ImCP658OBv3]], one [[lookup
           @target.affects.type activity=xZul1ImCP658OBv3]] the [[lookup @name
-          lowercase]] can see within [[lookup @range.value
+          lowercase]]{monster} can see within [[lookup @range.value
           activity=xZul1ImCP658OBv3]] feet.</p><p><em>Failure:</em> The target
           gains 1 &amp;Reference[Exhaustion apply=false] level. While the target
           has any Exhaustion levels, it appears [[/r 3d10]] years
           older.</p><p><em>Failure or Success:</em> The [[lookup @name
-          lowercase]] can't take this action again until the start of its next
-          turn.</p>
+          lowercase]]{monster} can't take this action again until the start of
+          its next turn.</p>
         chat: ''
       identifier: weight-of-years
       source:

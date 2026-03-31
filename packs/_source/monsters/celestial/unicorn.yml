@@ -1265,10 +1265,10 @@ items:
     system:
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] touches another creature. The target
-          magically regains 30 ([[/heal]]{2d8 + 2}) hit points. In addition, the
-          touch removes all diseases and neutralizes all poisons afflicting the
-          target.</p>
+          <p>The [[lookup @name lowercase]]{monster} touches another creature.
+          The target magically regains 30 ([[/heal]]{2d8 + 2}) hit points. In
+          addition, the touch removes all diseases and neutralizes all poisons
+          afflicting the target.</p>
         chat: >-
           <section class="secret"><p></p></section><p>The unicorn touches
           another creature with its horn. The target magically regains 11 (2d8 +

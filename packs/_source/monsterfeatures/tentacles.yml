@@ -8,18 +8,18 @@ system:
     value: >-
       <section class="secret">
 
-      <p>One creature grappled by the [[lookup @name lowercase]] must succeed on
-      a  <strong>DC 13 Constitution</strong> saving throw or be poisoned for 1
-      minute.</p><p>Until this poison ends, the target is paralyzed. The target
-      can repeat the saving throw at the end of each of its turns, ending the
-      effect on itself on a success.</p>
+      <p>One creature grappled by the [[lookup @name lowercase]]{monster} must
+      succeed on a  <strong>DC 13 Constitution</strong> saving throw or be
+      poisoned for 1 minute.</p><p>Until this poison ends, the target is
+      paralyzed. The target can repeat the saving throw at the end of each of
+      its turns, ending the effect on itself on a success.</p>
 
       </section>
 
-      <p>One creature grappled by the [[lookup @name lowercase]] must make a
-      <strong>Constitution</strong> saving throw. The target can repeat the
-      saving throw at the end of each of its turns, ending the effect on itself
-      on a success.</p>
+      <p>One creature grappled by the [[lookup @name lowercase]]{monster} must
+      make a <strong>Constitution</strong> saving throw. The target can repeat
+      the saving throw at the end of each of its turns, ending the effect on
+      itself on a success.</p>
     chat: ''
   source:
     custom: ''

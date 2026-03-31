@@ -322,18 +322,21 @@ export default class NPCActorSheet extends BaseActorSheet {
     const { attributes, details } = context.system;
 
     // Gear
-    const gear = await this.actor.system.getGear();
-    if ( gear.length ) context.gear = gear.map(item => ({
-      draggable: true,
-      label: item.name,
-      link: {
-        action: "showDocument",
-        itemId: foundry.utils.parseUuid(item.getFlag("dnd5e", "gearSource"))?.id,
-        quantity: item.system.quantity,
-        uuid: item.uuid
-      },
-      value: item.system.quantity > 1 ? item.system.quantity : undefined
-    }));
+    const gear = await this.actor.items.filter(i => i.system.quantity && i.system.properties?.has("gear"));
+    if ( gear.length ) context.gear = gear.map(item => {
+      const { name, uuid } = item.system.gearPresentationData();
+      return {
+        draggable: true,
+        label: name,
+        link: {
+          action: "showDocument",
+          itemId: item.id,
+          quantity: item.system.quantity,
+          uuid
+        },
+        value: item.system.quantity > 1 ? item.system.quantity : undefined
+      };
+    }).sort((lhs, rhs) => lhs.label.localeCompare(rhs.label, game.i18n.lang));
 
     // Habitat
     if ( details.habitat.value.length || details.habitat.custom ) {
@@ -363,12 +366,12 @@ export default class NPCActorSheet extends BaseActorSheet {
     // Skills & Tools
     const skillSetting = game.settings.get("dnd5e", "defaultSkills");
     context.skills = this._prepareSkillsTools(context, "skills")
-      .filter(v => v.value || skillSetting.has(v.key) || v.bonuses.check || v.bonuses.passive);
+      .filter(v => v.prof.multiplier || skillSetting.has(v.key) || v.bonuses.check || v.bonuses.passive);
     context.tools = this._prepareSkillsTools(context, "tools");
 
     // Speed
     context.speed = [
-      ...Object.entries(CONFIG.DND5E.movementTypes).map(([k, { label }]) => {
+      ...Object.entries(CONFIG.DND5E.movementTypes).filter(([, m]) => !m.hidden).map(([k, { label }]) => {
         const value = attributes.movement[k];
         if ( !value ) return null;
         const data = { label, value };
@@ -570,7 +573,7 @@ export default class NPCActorSheet extends BaseActorSheet {
         break;
     }
     if ( app ) {
-      app.render({ force: true });
+      this._renderChild(app);
       return false;
     }
   }

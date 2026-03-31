@@ -30,12 +30,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '60'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -99,20 +102,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: healing-word
 sort: 0
 flags: {}
-img: icons/magic/life/heart-cross-green.webp
+img: icons/magic/life/cross-area-circle-green-white.webp
 effects: []
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037364895
-  modifiedTime: 1725992722679
+  modifiedTime: 1772820785894
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!o8Dh7fblk1d16tnO'

@@ -693,8 +693,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] fails a saving throw, it can
-          choose to succeed instead.</p>
+          <p>If the [[lookup @name lowercase]]{monster} fails a saving throw, it
+          can choose to succeed instead.</p>
         chat: ''
       identifier: legendary-resistance
       source:
@@ -802,10 +802,11 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">If destroyed, the [[lookup @name lowercase]]
-          reforms in [[/r 1d10]] days if it has a spirit jar, reviving with all
-          its Hit Points. The new body appears in an unoccupied space within the
-          [[lookup @name lowercase]]'s lair.</p>
+          <p class="feature">If destroyed, the [[lookup @name
+          lowercase]]{monster} reforms in [[/r 1d10]] days if it has a spirit
+          jar, reviving with all its Hit Points. The new body appears in an
+          unoccupied space within the [[lookup @name lowercase]]{monster}'s
+          lair.</p>
         chat: ''
       identifier: spirit-jar
       source:
@@ -902,8 +903,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes three attacks, using [[/item
-          .6qvUZeTimud7ekV8]] or [[/item .9p8yotv4r7nt3NWl]] in any
+          <p>The [[lookup @name lowercase]]{monster} makes three attacks, using
+          [[/item .6qvUZeTimud7ekV8]] or [[/item .9p8yotv4r7nt3NWl]] in any
           combination.</p>
         chat: ''
       identifier: multiattack
@@ -1771,9 +1772,9 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
-          following spells, using Intelligence as the spellcasting ability
-          (spell save DC [[lookup @attributes.spell.dc]]):</p><p
+          <p class="feature">The [[lookup @name lowercase]]{monster} casts one
+          of the following spells, using Intelligence as the spellcasting
+          ability (spell save DC [[lookup @attributes.spell.dc]]):</p><p
           class="feature-trait"><strong>At Will:</strong>
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDetectMagi]{Detect
           Magic}</em>,
@@ -5228,7 +5229,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts
+          <p class="feature">The [[lookup @name lowercase]]{monster} casts
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplCounterspe]{Counterspell}</em>
           or
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplShield0000]{Shield}</em>
@@ -5716,8 +5717,8 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] teleports up to
-          [[lookup @range.value activity=zvj61Na7MlcIN2xw]] [[lookup
+          <p class="feature">The [[lookup @name lowercase]]{monster} teleports
+          up to [[lookup @range.value activity=zvj61Na7MlcIN2xw]] [[lookup
           @range.units activity=zvj61Na7MlcIN2xw]]. [[lookup @range.special
           activity=zvj61Na7MlcIN2xw]], and each [[lookup @target.affects.type
           activity=zvj61Na7MlcIN2xw]] within [[lookup @target.template.size
@@ -5849,12 +5850,12 @@ items:
           @save.dc.value activity=qSz7l1czwIc5j9gP]], each [[lookup
           @target.affects.type activity=qSz7l1czwIc5j9gP]] that isn't an Undead
           in a [[lookup @target.template.size activity=qSz7l1czwIc5j9gP]]-foot
-          Emanation originating from the [[lookup @name lowercase]].</p><p
-          class="feature"><em>Failure:</em> [[/damage average]] damage.</p><p
-          class="feature"><em>Success:</em> Half damage.</p><p
-          class="feature"><em>Failure or Success:</em> The [[lookup @name
-          lowercase]] can't take this action again until the start of its next
-          turn.</p>
+          Emanation originating from the [[lookup @name
+          lowercase]]{monster}.</p><p class="feature"><em>Failure:</em>
+          [[/damage average]] damage.</p><p class="feature"><em>Success:</em>
+          Half damage.</p><p class="feature"><em>Failure or Success:</em> The
+          [[lookup @name lowercase]]{monster} can't take this action again until
+          the start of its next turn.</p>
         chat: ''
       identifier: disrupt-life
       source:
@@ -5959,11 +5960,11 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts
+          <p class="feature">The [[lookup @name lowercase]]{monster} casts
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplFear000000]{Fear}</em>,
           using the same spellcasting ability as Spellcasting. The [[lookup
-          @name lowercase]] can't take this action again until the start of its
-          next turn.</p>
+          @name lowercase]]{monster} can't take this action again until the
+          start of its next turn.</p>
         chat: ''
       identifier: frightening-gaze
       source:
@@ -6442,7 +6443,8 @@ items:
         value: >-
           <p class="feature">[[/attack extended]]. [[/damage average extended]],
           and the target has the &amp;Reference[Paralyzed apply=false] condition
-          until the start of the [[lookup @name lowercase]]'s next turn.</p>
+          until the start of the [[lookup @name lowercase]]{monster}'s next
+          turn.</p>
         chat: ''
       identifier: paralyzing-touch
       source:

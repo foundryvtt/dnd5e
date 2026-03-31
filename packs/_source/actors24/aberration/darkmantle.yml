@@ -683,20 +683,20 @@ items:
       description:
         value: >-
           <p class="feature">[[/attack extended]]. [[/damage average extended]],
-          and the [[lookup @name lowercase]] attaches to the target. If the
-          target is a Medium or smaller creature and the [[lookup @name
-          lowercase]] had Advantage on the attack roll, it covers the target,
-          which has the &amp;Reference[Blinded apply=false] condition and is
-          &amp;Reference[suffocating apply=false]{suffocating} while the
-          [[lookup @name lowercase]] is attached in this way.</p><p
+          and the [[lookup @name lowercase]]{monster} attaches to the target. If
+          the target is a Medium or smaller creature and the [[lookup @name
+          lowercase]]{monster} had Advantage on the attack roll, it covers the
+          target, which has the &amp;Reference[Blinded apply=false] condition
+          and is &amp;Reference[suffocating apply=false]{suffocating} while the
+          [[lookup @name lowercase]]{monster} is attached in this way.</p><p
           class="feature">While attached to a target, the [[lookup @name
-          lowercase]] can attack only the target but has Advantage on its attack
-          rolls. Its Speed becomes 0, it can't benefit from any bonus to its
-          Speed, and it moves with the target.</p><p class="feature">A creature
-          can take an action to try to detach the [[lookup @name lowercase]]
-          from itself, doing so with a successful [[/check format=long]]. On its
-          turn, the [[lookup @name lowercase]] can detach itself by using 5 feet
-          of movement.</p>
+          lowercase]]{monster} can attack only the target but has Advantage on
+          its attack rolls. Its Speed becomes 0, it can't benefit from any bonus
+          to its Speed, and it moves with the target.</p><p class="feature">A
+          creature can take an action to try to detach the [[lookup @name
+          lowercase]]{monster} from itself, doing so with a successful [[/check
+          format=long]]. On its turn, the [[lookup @name lowercase]]{monster}
+          can detach itself by using 5 feet of movement.</p>
         chat: ''
       identifier: crush
       source:
@@ -822,8 +822,8 @@ items:
           startRound: null
           startTurn: null
         description: >-
-          <p>While attached to a target, the [[lookup @name lowercase]] can
-          attack only the target but has Advantage on its attack rolls. Its
+          <p>While attached to a target, the [[lookup @name lowercase]]{monster}
+          can attack only the target but has Advantage on its attack rolls. Its
           Speed becomes 0, it can’t benefit from any bonus to its Speed, and it
           moves with the target.</p>
         tint: '#ffffff'
@@ -934,10 +934,10 @@ items:
         value: >-
           <p>Magical Darkness fills a [[lookup @target.template.size
           activity=amat5Ii4NydseA0h]]-foot Emanation originating from the
-          [[lookup @name]]. This effect lasts while the [[lookup @name]]
-          maintains Concentration on it, up to [[lookup @duration.value
-          activity=amat5Ii4NydseA0h]] minutes. Darkvision can't penetrate this
-          area, and no light can illuminate it.</p>
+          [[lookup @name]]{monster}. This effect lasts while the [[lookup
+          @name]]{monster} maintains Concentration on it, up to [[lookup
+          @duration.value activity=amat5Ii4NydseA0h]] minutes. Darkvision can't
+          penetrate this area, and no light can illuminate it.</p>
         chat: ''
       identifier: darkness-aura
       source:

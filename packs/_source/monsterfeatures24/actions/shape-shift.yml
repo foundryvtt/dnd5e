@@ -41,7 +41,7 @@ system:
           choice: false
           count: ''
           type: self
-          special: '{Size} {creature}-humanoid hybrid form or a {Size} {creature}'
+          special: '{Size} {monster}-humanoid hybrid form or a {Size} {monster}'
         override: false
         prompt: true
       uses:
@@ -61,8 +61,8 @@ system:
     max: ''
   description:
     value: >-
-      <p class="feature">The [[lookup @name lowercase]] shape-shifts into a
-      [[lookup @target.affects.special activity=EU2q25V5hIaM1ZlR]], or it
+      <p class="feature">The [[lookup @name lowercase]]{monster} shape-shifts
+      into a [[lookup @target.affects.special activity=EU2q25V5hIaM1ZlR]], or it
       returns to its true humanoid form, or it returns to its true form. Its
       game statistics, other than its size, are the same in each form. Any
       equipment it is wearing or carrying isn't transformed.</p>

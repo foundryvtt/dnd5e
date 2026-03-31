@@ -35,13 +35,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
-      type: sphere
+      type: radius
       size: '10'
       contiguous: false
+      count: ''
+      stationary: true
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -109,11 +113,11 @@ effects: []
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037355072
-  modifiedTime: 1725992719492
+  modifiedTime: 1772145870594
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!NXWWWgHtWb7Nv21F'

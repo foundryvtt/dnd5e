@@ -1102,9 +1102,9 @@ items:
     system:
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] touches another creature. The target
-          magically regains 30 ([[/heal]]{6d8 + 3}) hit points and is freed from
-          any curse, disease, poison, blindness, or deafness.</p>
+          <p>The [[lookup @name lowercase]]{monster} touches another creature.
+          The target magically regains 30 ([[/heal]]{6d8 + 3}) hit points and is
+          freed from any curse, disease, poison, blindness, or deafness.</p>
         chat: >-
           <section class="secret"><p></p></section><p>The planetar touches
           another creature. The target magically regains 30 (6d8 + 3) hit points

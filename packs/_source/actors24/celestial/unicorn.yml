@@ -624,8 +624,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] fails a saving throw, it can
-          choose to succeed instead.</p>
+          <p>If the [[lookup @name lowercase]]{monster} fails a saving throw, it
+          can choose to succeed instead.</p>
         chat: ''
       identifier: legendary-resistance
       source:
@@ -681,8 +681,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] has Advantage on saving throws
-          against spells and other magical effects.</p>
+          <p>The [[lookup @name lowercase]]{monster} has Advantage on saving
+          throws against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
       source:
@@ -775,8 +775,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes one [[/item Hooves]] attack
-          and one [[/item Radiant Horn]] attack.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes one [[/item Hooves]]
+          attack and one [[/item Radiant Horn]] attack.</p>
         chat: ''
       identifier: multiattack
       source:
@@ -1510,9 +1510,9 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
-          following spells, requiring no spell components and using Charisma as
-          the spellcasting ability (spell save DC [[lookup
+          <p class="feature">The [[lookup @name lowercase]]{monster} casts one
+          of the following spells, requiring no spell components and using
+          Charisma as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]]):</p><p class="feature-trait"><strong>At
           Will:</strong>
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDetectEvil]{Detect Evil
@@ -3255,9 +3255,9 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] moves up to half its Speed without
-          provoking &amp;Reference[Opportunity Attacks], and it makes one
-          [[/item Radiant Horn]] attack.</p>
+          <p>The [[lookup @name lowercase]]{monster} moves up to half its Speed
+          without provoking &amp;Reference[Opportunity Attacks], and it makes
+          one [[/item Radiant Horn]] attack.</p>
         chat: ''
       identifier: charging-horn
       source:
@@ -3371,13 +3371,14 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] targets itself or one [[lookup
-          @target.affects.type activity=sl8NoPhB0e5z6jmK]] it can see within
-          [[lookup @range.value activity=sl8NoPhB0e5z6jmK]] feet of itself. The
-          target gains [[/healing average temp]], and its AC increases by 2
-          until the end of the [[lookup @name lowercase]]'s' next turn. The
-          [[lookup @name lowercase]] can't take this action again until the
-          start of its next turn.</p>
+          <p>The [[lookup @name lowercase]]{monster} targets itself or one
+          [[lookup @target.affects.type activity=sl8NoPhB0e5z6jmK]] it can see
+          within [[lookup @range.value activity=sl8NoPhB0e5z6jmK]] feet of
+          itself. The target gains [[/healing average temp]], and its AC
+          increases by 2 until the end of the [[lookup @name
+          lowercase]]{monster}'s' next turn. The [[lookup @name
+          lowercase]]{monster} can't take this action again until the start of
+          its next turn.</p>
         chat: ''
       identifier: shimmering-shield
       source:
@@ -3585,8 +3586,9 @@ items:
         max: '3'
       description:
         value: >-
-          <p>The [[lookup @name]] touches another creature with its horn and
-          casts <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplCureWounds]{Cure
+          <p>The [[lookup @name]]{monster} touches another creature with its
+          horn and casts
+          <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplCureWounds]{Cure
           Wounds}</em> or
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplLesserRest]{Lesser
           Restoration}</em> on that creature, using the same spellcasting

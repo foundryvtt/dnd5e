@@ -32,14 +32,17 @@ system:
   target:
     affects:
       type: creature
-      count: '3'
+      count: '@item.level + 2'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -82,6 +85,9 @@ system:
       effects:
         - _id: potjmpJPeUA1U4oe
           onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
       target:
@@ -93,7 +99,7 @@ system:
           choice: false
         override: false
       damage:
-        onSave: half
+        onSave: none
         parts: []
       save:
         ability: cha
@@ -103,14 +109,24 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: bane
 sort: 0
 flags: {}
-img: icons/magic/unholy/strike-beam-blood-red-purple.webp
+img: icons/magic/symbols/rune-sigil-white-pink.webp
 effects:
   - _id: potjmpJPeUA1U4oe
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     changes:
       - key: system.bonuses.abilities.save
         mode: 2
@@ -146,21 +162,21 @@ effects:
     transfer: false
     name: Bane
     description: >-
-      <p>Whenever the target makes an attack roll or a saving throw before the
-      spell ends, the target must roll a d4 and subtract the number rolled from
-      the attack roll or saving throw.</p>
+      <p>Whenever you make an attack roll or a saving throw before the spell
+      ends, you must roll a d4 and subtract the number rolled from the attack
+      roll or saving throw.</p>
     statuses: []
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.3.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1772827465482
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    img: icons/magic/unholy/strike-beam-blood-red-purple.webp
+    img: icons/magic/symbols/rune-sigil-white-pink.webp
     type: base
     system: {}
     sort: 0
@@ -168,11 +184,11 @@ effects:
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037349329
-  modifiedTime: 1725992717608
+  modifiedTime: 1772827559442
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!95K2aUhAGV9qXjnf'

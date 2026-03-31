@@ -568,7 +568,9 @@ items:
         recovery: []
         max: ''
       description:
-        value: <p>The [[lookup @name lowercase]] can breathe air and water.</p>
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} can breathe air and
+          water.</p>
         chat: ''
       identifier: amphibious
       source:
@@ -661,7 +663,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes three [[/item
+          <p>The [[lookup @name lowercase]]{monster} makes three [[/item
           .mmRend0000000000]] attacks.It can replace one attack with a use of
           [[/item .mmRepulsionBreat]].</p>
         chat: ''
@@ -1059,7 +1061,7 @@ items:
           @target.affects.type activity=zuf9EEVj4nI1joaH]] in a [[lookup
           @target.template.size activity=zuf9EEVj4nI1joaH]]-foot Cone.</p><p
           class="feature"><em>Failure:</em> The target is pushed up to 40 feet
-          straight away from the [[lookup @name lowercase]] and has the
+          straight away from the [[lookup @name lowercase]]{monster} and has the
           &amp;Reference[Prone apply=false] condition.</p>
         chat: ''
       identifier: repulsion-breath

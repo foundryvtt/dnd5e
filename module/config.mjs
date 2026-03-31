@@ -1,15 +1,17 @@
+import LongRestDialog from "./applications/actor/rest/long-rest-dialog.mjs";
+import ShortRestDialog from "./applications/actor/rest/short-rest-dialog.mjs";
 import CalenderHUD from "./applications/calendar/calendar-hud.mjs";
 import MapLocationControlIcon from "./canvas/map-location-control-icon.mjs";
 import { ConsumptionTargetData } from "./data/activity/fields/consumption-targets-field.mjs";
+import VehicleData from "./data/actor/vehicle.mjs";
 import { CalendarGreyhawk, CALENDAR_OF_GREYHAWK } from "./data/calendar/calendar-of-greyhawk.mjs";
 import { CalendarHarptos, CALENDAR_OF_HARPTOS } from "./data/calendar/calendar-of-harptos.mjs";
 import { CalendarKhorvaire, CALENDAR_OF_KHORVAIRE } from "./data/calendar/calendar-of-khorvaire.mjs";
+import MappingField from "./data/fields/mapping-field.mjs";
 import * as activities from "./documents/activity/_module.mjs";
 import Actor5e from "./documents/actor/actor.mjs";
 import * as advancement from "./documents/advancement/_module.mjs";
 import { preLocalize } from "./utils.mjs";
-import MappingField from "./data/fields/mapping-field.mjs";
-import VehicleData from "./data/actor/vehicle.mjs";
 
 /**
  * @import {
@@ -2417,6 +2419,10 @@ DND5E.movementTypes = {
     label: "DND5E.MOVEMENT.Type.Fly",
     travel: "air"
   },
+  jump: {
+    label: "DND5E.MOVEMENT.Type.Jump",
+    hidden: true
+  },
   swim: {
     label: "DND5E.MOVEMENT.Type.Swim",
     travel: "water",
@@ -2903,6 +2909,7 @@ DND5E.restTypes = {
     },
     label: "DND5E.REST.Short.Label",
     icon: "fa-solid fa-utensils",
+    dialogClass: ShortRestDialog,
     activationPeriods: ["shortRest"],
     recoverPeriods: ["sr"],
     recoverSpellSlotTypes: new Set(["pact"])
@@ -2916,6 +2923,8 @@ DND5E.restTypes = {
     exhaustionDelta: -1,
     label: "DND5E.REST.Long.Label",
     icon: "fa-solid fa-campground",
+    dialogClass: LongRestDialog,
+    newDay: true,
     activationPeriods: ["longRest"],
     recoverHitDice: true,
     recoverHitPoints: true,
@@ -4881,6 +4890,7 @@ Object.defineProperty(DND5E, "enrichmentLookup", {
       addFullKeys("abilities");
       addFullKeys("skills");
       addFullKeys("spellSchools");
+      Object.entries(DND5E.vehicleTypes).forEach(([k, label]) => _enrichmentLookup.tools[k] = { label });
     }
     return _enrichmentLookup;
   },

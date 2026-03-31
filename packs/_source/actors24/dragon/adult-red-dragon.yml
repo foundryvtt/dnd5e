@@ -624,8 +624,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] fails a saving throw, it can
-          choose to succeed instead.</p>
+          <p>If the [[lookup @name lowercase]]{monster} fails a saving throw, it
+          can choose to succeed instead.</p>
         chat: ''
       identifier: legendary-resistance
       source:
@@ -725,8 +725,9 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes three [[/item Rend]] attacks.
-          It can replace one attack with a use of [[/item Spellcasting]] to cast
+          <p>The [[lookup @name lowercase]]{monster} makes three [[/item Rend]]
+          attacks. It can replace one attack with a use of [[/item
+          Spellcasting]] to cast
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplScorchingR]{Scorching
           Ray}</em>.</p>
         chat: ''
@@ -1135,16 +1136,16 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] uses [[/item
-          Spellcasting]] to cast
+          <p class="feature">The [[lookup @name lowercase]]{monster} uses
+          [[/item Spellcasting]] to cast
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplCommand000]{Command}</em>
-          (level 2 version). The [[lookup @name lowercase]] can't take this
-          action again until the start of its next turn.</p>
+          (level 2 version). The [[lookup @name lowercase]]{monster} can't take
+          this action again until the start of its next turn.</p>
         chat: >-
-          <p class="feature">The [[lookup @name lowercase]] uses Spellcasting to
-          cast <em>Command</em> (level 2 version). The [[lookup @name
-          lowercase]] can’t take this action again until the start of its next
-          turn.</p>
+          <p class="feature">The [[lookup @name lowercase]]{monster} uses
+          Spellcasting to cast <em>Command</em> (level 2 version). The [[lookup
+          @name lowercase]]{monster} can’t take this action again until the
+          start of its next turn.</p>
       identifier: commanding-presence
       source:
         revision: 1
@@ -1596,9 +1597,9 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
-          following spells, requiring no Material components and using Charisma
-          as the spellcasting ability (spell save DC [[lookup
+          <p class="feature">The [[lookup @name lowercase]]{monster} casts one
+          of the following spells, requiring no Material components and using
+          Charisma as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]], +12 to hit with spell attacks):</p><p
           class="feature-trait"><strong>At Will:</strong>
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplCommand000]{Command}</em>
@@ -2449,11 +2450,11 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] uses [[/item
-          Spellcasting]] to cast
+          <p class="feature">The [[lookup @name lowercase]]{monster} uses
+          [[/item Spellcasting]] to cast
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplScorchingR]{Scorching
-          Ray}</em>. The [[lookup @name lowercase]] can't take this action again
-          until the start of its next turn.</p>
+          Ray}</em>. The [[lookup @name lowercase]]{monster} can't take this
+          action again until the start of its next turn.</p>
         chat: ''
       identifier: fiery-rays
       source:
@@ -2750,8 +2751,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] moves up to half its Speed, and it
-          makes one [[/item Rend]] attack.</p>
+          <p>The [[lookup @name lowercase]]{monster} moves up to half its Speed,
+          and it makes one [[/item Rend]] attack.</p>
         chat: ''
       identifier: pounce
       source:

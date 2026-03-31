@@ -371,11 +371,12 @@
 
 /**
  * @typedef MovementTypeConfiguration
- * @property {string} label            Localized label for the movement type.
- * @property {string} [travel]         Travel type in `CONFIG.DND5E.travelTypes` to map this movement speed to. If not
- *                                     provided, then `land` is assumed.
- * @property {boolean} [walkFallback]  When this special movement type runs out, can the actor fall back to using their
- *                                     walk speed at 2x cost?
+ * @property {boolean} [hidden=false]             Whether this movement speed is displayed in the actor's sheet.
+ * @property {string} label                       Localized label for the movement type.
+ * @property {string} [travel]                    Travel type in `CONFIG.DND5E.travelTypes` to map this movement
+ *                                                speed to. If not provided, then `land` is assumed.
+ * @property {boolean} [walkFallback]             When this special movement type runs out, can the actor fall back
+ *                                                to using their walk speed at 2x cost?
  */
 
 /* -------------------------------------------- */
@@ -398,6 +399,14 @@
  * @property {string} label                         Localized label for the rest type.
  * @property {string} icon                          Icon representing this rest type. Can be either a set of FontAwesome
  *                                                  classes or an image path.
+ * @property {typeof BaseRestDialog} [dialogClass]  A class for the dialog window.
+ * @property {string|boolean} [chat=true]           A localization string for the chat text created to summarize the
+ *                                                  results of the rest, or a boolean indicating whether to create it
+ *                                                  or not.
+ * @property {boolean} [newDay=false]               Does this rest carry over to a new day?
+ * @property {boolean} [advanceBastionTurn=false]   Should a bastion turn be advanced for all players?
+ * @property {boolean} [advanceTime=false]          Should the game clock be advanced by the rest duration?
+ * @property {boolean} [autoHD=false]               Should hit dice be spent automatically during the rest?
  * @property {string[]} [activationPeriods]         Activation types that should be displayed in the chat card.
  * @property {number} [exhaustionDelta]             Delta exhaustion to apply to creatures undergoing the rest.
  * @property {boolean} [recoverHitDice]             Should hit dice be recovered during this rest?
@@ -406,6 +415,8 @@
  *                                                  ordering of the periods determines which is applied if more than one
  *                                                  recovery profile is found.
  * @property {Set<string>} [recoverSpellSlotTypes]  Types of spellcasting slots to recover during this rest.
+ * @property {boolean} [recoverTemp]                Reset temp HP to zero.
+ * @property {boolean} [recoverTempMax]             Reset temp max HP to zero.
  */
 
 /* -------------------------------------------- */

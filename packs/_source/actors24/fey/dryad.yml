@@ -563,8 +563,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] has Advantage on saving throws
-          against spells and other magical effects.</p>
+          <p>The [[lookup @name lowercase]]{monster} has Advantage on saving
+          throws against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
       source:
@@ -613,8 +613,8 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] can communicate with
-          Beasts and Plants as if they shared a language.</p>
+          <p class="feature">The [[lookup @name lowercase]]{monster} can
+          communicate with Beasts and Plants as if they shared a language.</p>
         chat: ''
       identifier: speak-with-beasts-and-plants
       source:
@@ -715,7 +715,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes one [[/item
+          <p>The [[lookup @name lowercase]]{monster} makes one [[/item
           .mmVineLash000000]] or [[/item .mmThornBurst0000]] attack, and it can
           use Spellcasting to cast [[/item
           .mmSpellcasting00.Activity.bAmZSyK4cn33HwwI]].</p>
@@ -1355,9 +1355,9 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
-          following spells, requiring no Material components and using Charisma
-          as the spellcasting ability (spell save DC [[lookup
+          <p class="feature">The [[lookup @name lowercase]]{monster} casts one
+          of the following spells, requiring no Material components and using
+          Charisma as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]]):</p><p class="feature-trait"><strong>At
           Will:</strong>
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplAnimalFrie]{Animal
@@ -1478,10 +1478,10 @@ items:
         value: >-
           <p>If within [[lookup @range.value activity=8av8Lh1jNLCrOJny]] feet of
           a [[lookup @range.special activity=8av8Lh1jNLCrOJny]], the [[lookup
-          @name lowercase]] teleports to an unoccupied space within [[lookup
-          @range.value activity=8av8Lh1jNLCrOJny]] feet of a second [[lookup
-          @target.affects.special activity=8av8Lh1jNLCrOJny]] that is within 60
-          feet of the previous tree.</p>
+          @name lowercase]]{monster} teleports to an unoccupied space within
+          [[lookup @range.value activity=8av8Lh1jNLCrOJny]] feet of a second
+          [[lookup @target.affects.special activity=8av8Lh1jNLCrOJny]] that is
+          within 60 feet of the previous tree.</p>
         chat: ''
       identifier: tree-stride
       source:

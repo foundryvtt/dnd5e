@@ -29,11 +29,14 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -99,20 +102,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: goodberry
 sort: 0
 flags: {}
-img: icons/magic/nature/leaf-glow-green.webp
+img: icons/consumables/fruit/apple-red-tree-green.webp
 effects: []
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037355872
-  modifiedTime: 1725992719746
+  modifiedTime: 1772820231026
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!Qf6CAZkc7ms4ZY3e'

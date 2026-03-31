@@ -12,9 +12,10 @@ system:
     max: ''
   description:
     value: >-
-      <p class="feature">If a creature the [[lookup @name lowercase]] can see
-      communicates telepathically with the [[lookup @name lowercase]], the
-      [[lookup @name lowercase]] learns the creature's greatest desires.</p>
+      <p class="feature">If a creature the [[lookup @name lowercase]]{monster}
+      can see communicates telepathically with the [[lookup @name
+      lowercase]]{monster}, the [[lookup @name lowercase]]{monster} learns the
+      creature's greatest desires.</p>
     chat: ''
   identifier: probing-telepathy
   source:

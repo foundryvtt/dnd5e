@@ -9,6 +9,7 @@ import CommonTemplate from "./common.mjs";
 const { NumberField, SchemaField } = foundry.data.fields;
 
 /**
+ * @import { ActorRollData } from "../../../documents/_types.mjs";
  * @import { AttackBonusesData, CreatureTemplateData, SkillData } from "./_types.mjs";
  */
 
@@ -187,8 +188,8 @@ export default class CreatureTemplate extends CommonTemplate {
   /**
    * Prepare modifiers and other values for skills.
    * @param {object} [options={}]
-   * @param {object} [options.rollData={}]     Roll data used to calculate bonuses.
-   * @param {object} [options.originalSkills]  Original skills data for transformed actors.
+   * @param {ActorRollData} [options.rollData={}]  Roll data used to calculate bonuses.
+   * @param {object} [options.originalSkills]      Original skills data for transformed actors.
    */
   prepareSkills({ rollData={}, originalSkills }={}) {
     const globalBonuses = this.bonuses.abilities;
@@ -207,7 +208,7 @@ export default class CreatureTemplate extends CommonTemplate {
    * @param {object} [options]                   Additional options.
    * @param {SkillData} [options.skillData]      The base skill data for this skill.
    *                                             If undefined, `this.system.skill[skillId]` is used.
-   * @param {object} [options.rollData]          RollData for this actor, used to evaluate dice terms in bonuses.
+   * @param {ActorRollData} [options.rollData]   RollData for this actor, used to evaluate dice terms in bonuses.
    *                                             If undefined, `this.getRollData()` is used.
    * @param {object} [options.originalSkills]    Original skills if actor is polymorphed.
    *                                             If undefined, the skills of the actor identified by
@@ -283,7 +284,7 @@ export default class CreatureTemplate extends CommonTemplate {
   /**
    * Prepare tool checks. Mutates the values of system.tools.
    * @param {object} [options={}]
-   * @param {object} [options.rollData={}]     Roll data used to calculate bonuses.
+   * @param {ActorRollData} [options.rollData={}]  Roll data used to calculate bonuses.
    */
   prepareTools({ rollData={} }={}) {
     const globalCheckBonus = simplifyBonus(this.bonuses.abilities.check, rollData);

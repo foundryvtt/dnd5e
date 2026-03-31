@@ -77,14 +77,14 @@ system:
       <p class="feature"><em>Charisma Saving Throw:</em> DC [[lookup
       @save.dc.value activity=Ttrajc4RC5Ut7pkj]], [[lookup
       @target.affects.labels.statblock activity=Ttrajc4RC5Ut7pkj]] the [[lookup
-      @name lowercase]] can see within [[lookup @range.value
+      @name lowercase]]{monster} can see within [[lookup @range.value
       activity=Ttrajc4RC5Ut7pkj]] feet.</p><p class="feature"><em>Failure:</em>
       [[/damage average]] damage. Until the end of its next turn, the target
       rolls [[/r 1d6]] whenever it makes an ability check or attack roll and
       subtracts the number rolled from the D20 Test.</p><p
       class="feature"><em>Failure or Success:</em> The [[lookup @name
-      lowercase]] can't take this action again until the start of its next
-      turn.</p>
+      lowercase]]{monster} can't take this action again until the start of its
+      next turn.</p>
     chat: ''
   identifier: giggling-magic
   source:

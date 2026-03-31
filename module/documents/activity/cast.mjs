@@ -185,6 +185,17 @@ export default class CastActivity extends ActivityMixin(BaseCastActivityData) {
   }
 
   /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  getRollData(...options) {
+    const data = super.getRollData(...options);
+    if ( this.cachedSpell ) data.item.level = Math.max(this.cachedSpell.system.level, this.spell.level ?? -Infinity);
+    return data;
+  }
+
+  /* -------------------------------------------- */
   /*  Importing and Exporting                     */
   /* -------------------------------------------- */
 

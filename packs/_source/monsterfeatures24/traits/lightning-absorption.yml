@@ -12,9 +12,9 @@ system:
     max: ''
   description:
     value: >-
-      <p class="feature">Whenever the [[lookup @name lowercase]] is subjected to
-      Lightning damage, it regains a number of Hit Points equal to the Lightning
-      damage dealt.</p>
+      <p class="feature">Whenever the [[lookup @name lowercase]]{monster} is
+      subjected to Lightning damage, it regains a number of Hit Points equal to
+      the Lightning damage dealt.</p>
     chat: ''
   identifier: lightning-absorption
   source:

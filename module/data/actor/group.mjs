@@ -346,7 +346,7 @@ export default class GroupData extends GroupTemplate {
     for ( const actor of targets ) {
       results.set(
         actor,
-        config.autoRest ? await actor[config.type === "short" ? "shortRest" : "longRest"]({
+        config.autoRest ? await actor.initiateRest({
           ...config, dialog: false, advanceBastionTurn: false, advanceTime: false
         }) ?? null : null
       );
@@ -369,5 +369,16 @@ export default class GroupData extends GroupTemplate {
     }
 
     return false;
+  }
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preCreate(data, options, user) {
+    if ( (await super._preCreate(data, options, user)) === false ) return false;
+    if ( this.parent._stats?.compendiumSource?.startsWith("Compendium.") ) return;
+    this.parent.updateSource({ "prototypeToken.actorLink": true });
   }
 }

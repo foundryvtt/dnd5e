@@ -33,12 +33,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '120'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -76,7 +79,11 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: 6Hdp1jf98UcJrEkD
+          level:
+            min: null
+            max: null
       range:
         override: false
       target:
@@ -95,7 +102,7 @@ system:
         flat: false
         type:
           value: ranged
-          classification: spell
+          classification: ''
       damage:
         critical:
           bonus: ''
@@ -116,20 +123,65 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: chill-touch
 sort: 0
 flags: {}
-img: icons/magic/water/projectile-ice-faceted-blue.webp
-effects: []
+img: icons/magic/unholy/hand-claw-fire-blue.webp
+effects:
+  - name: Chill Touch
+    img: icons/magic/unholy/hand-claw-fire-blue.webp
+    origin: Compendium.dnd5e.spells.Item.vrN18tbTw7io5MWd
+    transfer: false
+    _id: 6Hdp1jf98UcJrEkD
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: 6
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>You cannot regain hit points until the start of the caster's next
+      turn.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      createdTime: 1772660185086
+      modifiedTime: 1772660203990
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!vrN18tbTw7io5MWd.6Hdp1jf98UcJrEkD'
 folder: Z8kZlnggh1PtuF3Y
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037366315
-  modifiedTime: 1725992723297
+  modifiedTime: 1772738789053
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!vrN18tbTw7io5MWd'

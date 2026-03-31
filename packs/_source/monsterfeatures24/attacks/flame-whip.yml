@@ -79,9 +79,10 @@ system:
   description:
     value: >-
       <p class="feature">[[/attack extended]]. [[/damage average extended]]. If
-      the target is a Huge or smaller creature, the [[lookup @name lowercase]]
-      pulls the target up to 25 feet straight toward itself, and the target has
-      the &amp;Reference[Prone apply=false] condition.</p>
+      the target is a Huge or smaller creature, the [[lookup @name
+      lowercase]]{monster} pulls the target up to 25 feet straight toward
+      itself, and the target has the &amp;Reference[Prone apply=false]
+      condition.</p>
     chat: ''
   identifier: flame-whip
   source:

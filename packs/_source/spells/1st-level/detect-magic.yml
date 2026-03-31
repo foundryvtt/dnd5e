@@ -29,13 +29,16 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: radius
       size: '30'
       contiguous: false
+      count: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -53,8 +56,8 @@ system:
   properties:
     - vocal
     - somatic
-    - ritual
     - concentration
+    - ritual
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -75,7 +78,8 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: aECXb2lVtpxEieFy
       range:
         override: false
       target:
@@ -94,20 +98,69 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: detect-magic
 sort: 0
 flags: {}
-img: icons/magic/light/explosion-star-blue.webp
-effects: []
+img: icons/creatures/eyes/humanoid-single-purple-blue.webp
+effects:
+  - name: Detect Magic
+    img: icons/creatures/eyes/humanoid-single-purple-blue.webp
+    origin: Compendium.dnd5e.spells.Item.ghXTfe7sgCbgf1Q8
+    transfer: false
+    _id: aECXb2lVtpxEieFy
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: 600
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>For the duration, you sense the presence of magic within 30 feet of
+      you. If you sense magic in this way, you can use your action to see a
+      faint aura around any visible creature or object in the area that bears
+      magic, and you learn its school of magic, if any.</p><p>The spell can
+      penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of
+      common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      createdTime: 1772820702763
+      modifiedTime: 1772820708942
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!ghXTfe7sgCbgf1Q8.aECXb2lVtpxEieFy'
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037362782
-  modifiedTime: 1725992722005
+  modifiedTime: 1772820702789
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!ghXTfe7sgCbgf1Q8'

@@ -81,11 +81,11 @@ system:
       @target.affects.labels.statblock activity=uI3HDQ1grN123Or3]] within
       [[lookup @range.value activity=uI3HDQ1grN123Or3]] feet. [[lookup
       @target.affects.special activity=uI3HDQ1grN123Or3]] by the [[lookup @name
-      lowercase]]. <em>Failure:</em> [[/damage average]] damage.
+      lowercase]]{monster}. <em>Failure:</em> [[/damage average]] damage.
       <em>Success:</em> [[lookup @damage.onSave capitalize
       activity=uI3HDQ1grN123Or3]] damage. <em>Failure or Success:</em> The
-      [[lookup @name lowercase]] gains the target's memories if the target is a
-      Humanoid and is reduced to 0 Hit Points by this action.</p>
+      [[lookup @name lowercase]]{monster} gains the target's memories if the
+      target is a Humanoid and is reduced to 0 Hit Points by this action.</p>
     chat: ''
   identifier: consume-memories
   source:

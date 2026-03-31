@@ -251,16 +251,12 @@
 
                     <div class="sheet-header-buttons">
                         {{#if showRests}}
-                        <button type="button" class="gold-button" data-action="rest" data-type="short"
-                                data-tooltip="DND5E.REST.Short.Label"
-                                aria-label="{{ localize 'DND5E.REST.Short.Label' }}">
-                            <i class="fas fa-utensils" inert></i>
-                        </button>
-                        <button type="button" class="gold-button" data-action="rest" data-type="long"
-                                data-tooltip="DND5E.REST.Long.Label"
-                                aria-label="{{ localize 'DND5E.REST.Long.Label' }}">
-                            <i class="fas fa-campground" inert></i>
-                        </button>
+                        {{#each CONFIG.restTypes}}
+                            <button type="button" class="gold-button" data-action="rest" data-type="{{ @key }}"
+                                    data-tooltip aria-label="{{ localize label }}">
+                                <i class="{{ icon }}" inert></i>
+                            </button>
+                        {{/each}}
                         {{/if}}
                     </div>
 

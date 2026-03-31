@@ -77,7 +77,7 @@ system:
       <p class="feature"><em>Wisdom Saving Throw:</em> DC [[lookup
       @save.dc.value activity=s5CMus4LOXBkt1Wn]], [[lookup
       @target.affects.labels.statblock activity=s5CMus4LOXBkt1Wn]] the [[lookup
-      @name lowercase]] can see within [[lookup @range.value
+      @name lowercase]]{monster} can see within [[lookup @range.value
       activity=s5CMus4LOXBkt1Wn]] <span style="font-family:'Roboto Condensed',
       sans-serif">feet.</span> <em>Failure:</em> [[/damage average]] damage.</p>
     chat: ''

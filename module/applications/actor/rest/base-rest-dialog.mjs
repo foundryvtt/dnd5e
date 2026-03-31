@@ -15,6 +15,7 @@ export default class BaseRestDialog extends Dialog5e {
     super(options);
     this.actor = options.document;
     this.#config = options.config;
+    this.options.window.title = CONFIG.DND5E.restTypes[options.config.type]?.label;
   }
 
   /* -------------------------------------------- */
@@ -30,7 +31,20 @@ export default class BaseRestDialog extends Dialog5e {
     position: {
       width: 380
     },
-    templates: ["systems/dnd5e/templates/actors/rest/rest-request.hbs"]
+    templates: [
+      "systems/dnd5e/templates/actors/rest/parts/hit-dice.hbs",
+      "systems/dnd5e/templates/actors/rest/parts/rest-request.hbs"
+    ]
+  };
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static PARTS = {
+    ...super.PARTS,
+    content: {
+      template: "systems/dnd5e/templates/actors/rest/base-rest.hbs"
+    }
   };
 
   /* -------------------------------------------- */
@@ -102,6 +116,7 @@ export default class BaseRestDialog extends Dialog5e {
       config: this.config,
       fields: [],
       hitPoints: [],
+      formSections: [],
       result: this.result,
       hd: this.actor.system.attributes?.hd,
       hp: this.actor.system.attributes?.hp,
@@ -139,6 +154,13 @@ export default class BaseRestDialog extends Dialog5e {
       name: "recoverTempMax",
       value: context.config.recoverTempMax
     });
+
+    if ( context.fields.length ) {
+      context.formSections.push({ legend: "DND5E.REST.Configuration", fields: context.fields });
+    }
+    if ( context.hitPoints.length ) {
+      context.formSections.push({ legend: "DND5E.HitPoints", fields: context.hitPoints });
+    }
 
     if ( this.isPartyGroup ) {
       const restSettings = this.actor.getFlag("dnd5e", "restSettings") ?? {};

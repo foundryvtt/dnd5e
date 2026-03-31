@@ -1040,8 +1040,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two attacks, using [[/item
-          .XMKFiS5XUEC4fLCr]] or [[/item .4C5jy0VkmoTdrbTC]] in any
+          <p>The [[lookup @name lowercase]]{monster} makes two attacks, using
+          [[/item .XMKFiS5XUEC4fLCr]] or [[/item .4C5jy0VkmoTdrbTC]] in any
           combination.</p>
         chat: ''
       identifier: multiattack
@@ -1171,14 +1171,14 @@ items:
         max: '1'
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] moves up to its
-          Speed without provoking &amp;Reference[OpportunityAttacks] and can
+          <p class="feature">The [[lookup @name lowercase]]{monster} moves up to
+          its Speed without provoking &amp;Reference[OpportunityAttacks] and can
           move through the spaces of [[lookup @target.affects.special
           activity=FG9rAj3Q8UTxbGLF]]. Each [[lookup @target.affects.type
-          activity=FG9rAj3Q8UTxbGLF]] whose space the [[lookup @name lowercase]]
-          enters is targeted once by the following effect.</p><p
-          class="feature"><em>Strength Saving Throw:</em> DC [[lookup
-          @save.dc.value activity=FG9rAj3Q8UTxbGLF]].</p><p
+          activity=FG9rAj3Q8UTxbGLF]] whose space the [[lookup @name
+          lowercase]]{monster} enters is targeted once by the following
+          effect.</p><p class="feature"><em>Strength Saving Throw:</em> DC
+          [[lookup @save.dc.value activity=FG9rAj3Q8UTxbGLF]].</p><p
           class="feature"><em>Failure:</em> [[/damage average]] damage, and the
           target has the &amp;Reference[Prone apply=false] condition.</p>
         chat: ''

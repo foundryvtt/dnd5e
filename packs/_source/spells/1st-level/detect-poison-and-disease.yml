@@ -78,7 +78,8 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: sU0iSYHVDqfwDwMs
       range:
         override: false
       target:
@@ -97,20 +98,68 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: detect-poison-and-disease
 sort: 0
 flags: {}
-img: icons/magic/air/air-burst-spiral-teal-green.webp
-effects: []
+img: icons/skills/wounds/blood-cells-disease-green.webp
+effects:
+  - name: Detect Poison and Disease
+    img: icons/skills/wounds/blood-cells-disease-green.webp
+    origin: Compendium.dnd5e.spells.Item.2skfDtglk1mGrb3l
+    transfer: false
+    _id: sU0iSYHVDqfwDwMs
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: 600
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>For the duration, you can sense the presence and location of poisons,
+      poisonous creatures, and diseases within 30 feet of you. You also identify
+      the kind of poison, poisonous creature, or disease in each case.</p><p>The
+      spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1
+      inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      createdTime: 1772820618639
+      modifiedTime: 1772820634057
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!2skfDtglk1mGrb3l.sU0iSYHVDqfwDwMs'
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.348'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 5.3.0
   createdTime: 1725037346191
-  modifiedTime: 1757447024779
+  modifiedTime: 1772820618672
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!2skfDtglk1mGrb3l'

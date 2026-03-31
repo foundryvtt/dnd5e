@@ -31,7 +31,7 @@
  * @typedef DamageDescription
  * @property {number} value                          Amount of damage.
  * @property {string} type                           Type of damage.
- * @property {Set<string>} properties                Physical properties that affect damage application.
+ * @property {Set<string>} [properties]              Physical properties that affect damage application.
  * @property {object} [active]
  * @property {DamageAffectDescription} [active.all]  How resistance/etc. targeting All Damage affected this total.
  * @property {number} [active.multiplier]            Final calculated multiplier.
@@ -98,21 +98,23 @@
  * Configuration options for a rest.
  *
  * @typedef RestConfiguration
- * @property {string} type                   Type of rest to perform.
- * @property {boolean} dialog                Present a dialog window which allows for rolling hit dice as part of the
- *                                           Short Rest and selecting whether a new day has occurred.
- * @property {boolean} chat                  Should a chat message be created to summarize the results of the rest?
- * @property {number} duration               Amount of time passed during the rest in minutes.
- * @property {boolean} newDay                Does this rest carry over to a new day?
- * @property {boolean} [advanceBastionTurn]  Should a bastion turn be advanced for all players?
- * @property {boolean} [advanceTime]         Should the game clock be advanced by the rest duration?
- * @property {boolean} [autoHD]              Should hit dice be spent automatically during a short rest?
- * @property {number} [autoHDThreshold]      How many hit points should be missing before hit dice are
- *                                           automatically spent during a short rest.
- * @property {boolean} [recoverTemp]         Reset temp HP to zero.
- * @property {boolean} [recoverTempMax]      Reset temp max HP to zero.
- * @property {number} [exhaustionDelta]      A delta exhaustion to apply to creatures undergoing this rest.
- * @property {ChatMessage5e} [request]       Rest request chat message for which this rest was performed.
+ * @property {string} type                          Type of rest to perform.
+ * @property {boolean} dialog                       Present a dialog window which allows for rolling hit dice
+ *                                                  as part of the rest and selecting whether a new day has occurred.
+ * @property {typeof BaseRestDialog} [dialogClass]  A class for the dialog window.
+ * @property {boolean} chat                         Should a chat message be created to summarize the results
+ *                                                  of the rest?
+ * @property {number} duration                      Amount of time passed during the rest in minutes.
+ * @property {boolean} newDay                       Does this rest carry over to a new day?
+ * @property {boolean} [advanceBastionTurn]         Should a bastion turn be advanced for all players?
+ * @property {boolean} [advanceTime]                Should the game clock be advanced by the rest duration?
+ * @property {boolean} [autoHD]                     Should hit dice be spent automatically during the rest?
+ * @property {number} [autoHDThreshold]             How many hit points should be missing before hit dice are
+ *                                                  automatically spent during the rest.
+ * @property {boolean} [recoverTemp]                Reset temp HP to zero.
+ * @property {boolean} [recoverTempMax]             Reset temp max HP to zero.
+ * @property {number} [exhaustionDelta]             A delta exhaustion to apply to creatures undergoing this rest.
+ * @property {ChatMessage5e} [request]              Rest request chat message for which this rest was performed.
  */
 
 /**
@@ -130,6 +132,52 @@
  * @property {Roll[]} rolls             Any rolls that occurred during the rest process, not including hit dice.
  * @property {object} updateData        Updates applied to the actor.
  * @property {object[]} updateItems     Updates applied to actor's items.
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef {ItemRollData & Maybe<ActorRollData>} ActivityRollData
+ * @property {object} activity    Object containing the activity's data.
+ * @property {object} [consumed]  Information on what resources the activity's activation consumed.
+ * @property {number} mod         The ability modifier value used by the activity.
+ */
+
+/**
+ * @typedef {RollData} ActorRollData
+ * @property {object} flags                     Flags set on the actor.
+ * @property {string} name                      Name of the actor.
+ * @property {Proficiency} prof                 Actor's proficiency data.
+ * @property {Record<string, number>} statuses  Status effects applied to the actor with a value of 1 if the effect is
+ *                                              applied (or a higher number of statuses that have numeric value).
+ */
+
+/**
+ * @typedef {RollData & Maybe<ActorRollData>} ItemRollData
+ * @property {object} item        Object containing the item's system data.
+ * @property {object} item.flags  Flags set on the item.
+ * @property {string} item.name   Name of the item.
+ * @property {object} labels      Human-readable labels generated by the item.
+ * @property {Scaling} scaling    Scaling data.
+ */
+
+/**
+ * @typedef {RollData} JournalEntryPageRollData
+ * @param {object} flags          Flags set on the journal entry.
+ * @param {string} name           Name of the journal entry.
+ * @property {object} page        Object containing the page's system data.
+ * @property {object} page.flags  Flags set on the page.
+ * @property {string} page.name   Name of the page.
+ */
+
+/**
+ * @typedef RollData
+ */
+
+/**
+ * @typedef RollDataOptions
+ * @property {boolean} [deterministic]  Whether to force deterministic values for data properties that could
+ *                                      be either a die term or a flat term.
  */
 
 /* -------------------------------------------- */

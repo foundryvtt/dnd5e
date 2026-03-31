@@ -27,7 +27,7 @@ system:
   target:
     affects:
       type: creature
-      count: '1'
+      count: '@item.level'
       choice: false
       special: ''
     template:
@@ -75,7 +75,8 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: hfN31FqOkSYoQVz3
       range:
         override: false
       target:
@@ -94,20 +95,67 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: longstrider
 sort: 0
 flags: {}
-img: icons/magic/air/wind-stream-blue-gray.webp
-effects: []
+img: icons/skills/movement/feet-winged-boots-brown.webp
+effects:
+  - name: Longstrider
+    img: icons/skills/movement/feet-winged-boots-brown.webp
+    origin: Compendium.dnd5e.spells.Item.B0pnIcc52O6G8hi8
+    transfer: false
+    _id: hfN31FqOkSYoQVz3
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.movement.bonus
+        mode: 2
+        value: '10'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: <p>Your speed increases by 10 feet until the spell ends.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      createdTime: 1772823676300
+      modifiedTime: 1772823702800
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!B0pnIcc52O6G8hi8.hfN31FqOkSYoQVz3'
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.347'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.1.1
+  systemVersion: 5.3.0
   createdTime: 1725037350256
-  modifiedTime: 1755196895154
+  modifiedTime: 1772823676326
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!B0pnIcc52O6G8hi8'

@@ -7,12 +7,13 @@ system:
   description:
     value: >-
       <p>A willing creature you touch is imbued with bravery. Until the spell
-      ends, the creature is immune to being Frightened and gains Temporary Hit
-      Points equal to your Spellcasting ability modifier at the start of each of
-      its turns. When the spell ends, the target loses any remaining temporary
-      hit points from this spell.</p><p><strong>At Higher Levels.</strong> When
-      you cast this spell using a spell slot of 2nd level or higher, you can
-      target one additional creature for each slot level above 1st.</p>
+      ends, the creature is immune to being &amp;reference[Frightened
+      apply=false] and gains Temporary Hit Points equal to your Spellcasting
+      ability modifier at the start of each of its turns. When the spell ends,
+      the target loses any remaining temporary hit points from this
+      spell.</p><p><strong>At Higher Levels.</strong> When you cast this spell
+      using a spell slot of 2nd level or higher, you can target one additional
+      creature for each slot level above 1st.</p>
     chat: ''
   source:
     custom: ''
@@ -32,11 +33,14 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -60,15 +64,16 @@ system:
       _id: dnd5eactivity000
       type: heal
       activation:
-        type: action
+        type: special
         value: null
-        override: false
+        override: true
+        condition: When a creature under the effects of this spell starts their turn.
       consumption:
         targets: []
         scaling:
           allowed: false
           max: ''
-        spellSlot: true
+        spellSlot: false
       description:
         chatFlavor: ''
       duration:
@@ -77,7 +82,9 @@ system:
         override: false
       effects: []
       range:
-        override: false
+        override: true
+        units: spec
+        special: ''
       target:
         prompt: true
         template:
@@ -102,20 +109,117 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
+      sort: 100000
+      name: Grant Temporary Hit Points
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    s8S50epEPffDG1NB:
+      type: utility
+      name: Cast
+      _id: s8S50epEPffDG1NB
+      img: null
       sort: 0
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: c4iy2EIj29eRA2qq
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
   identifier: heroism
 sort: 0
 flags: {}
-img: icons/magic/life/heart-cross-strong-blue.webp
-effects: []
+img: icons/sundries/flags/banner-sword-blue.webp
+effects:
+  - name: Heroism
+    img: icons/sundries/flags/banner-sword-blue.webp
+    origin: Compendium.dnd5e.spells.Item.ge3Saet9zPTDyaoL
+    transfer: false
+    _id: c4iy2EIj29eRA2qq
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.ci.value
+        mode: 2
+        value: frightened
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: 60
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>You have been imbued with bravery. Until the spell ends, you are immune
+      to being &amp;reference[Frightened apply=false] and gain Temporary Hit
+      Points equal to the caster's Spellcasting ability modifier at the start of
+      each of your turns. When the spell ends, you lose any remaining temporary
+      hit points from this spell.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      createdTime: 1772820835373
+      modifiedTime: 1772820976503
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!ge3Saet9zPTDyaoL.c4iy2EIj29eRA2qq'
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037362699
-  modifiedTime: 1725992721988
+  modifiedTime: 1772821013361
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!ge3Saet9zPTDyaoL'

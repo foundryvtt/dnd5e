@@ -169,19 +169,21 @@ system:
     max: ''
   description:
     value: >-
-      <p class="feature">The [[lookup @name lowercase]] fills its entire space
-      and is transparent. Other creatures can enter that space, but a creature
-      that does so is subjected to the [[lookup @name lowercase]]'s Engulf and
-      has Disadvantage on the saving throw.</p><p class="feature">Creatures
-      inside the [[lookup @name lowercase]] have &amp;Reference[Total Cover],
-      and the [[lookup @name lowercase]] can hold one Large creature or up to
-      four Medium or Small creatures inside itself at a time.</p><p
+      <p class="feature">The [[lookup @name lowercase]]{monster} fills its
+      entire space and is transparent. Other creatures can enter that space, but
+      a creature that does so is subjected to the [[lookup @name
+      lowercase]]{monster}'s Engulf and has Disadvantage on the saving
+      throw.</p><p class="feature">Creatures inside the [[lookup @name
+      lowercase]]{monster} have &amp;Reference[Total Cover], and the [[lookup
+      @name lowercase]]{monster} can hold one Large creature or up to four
+      Medium or Small creatures inside itself at a time.</p><p
       class="feature">As an action, a creature within [[lookup @range.value
       activity=EcTOfXWsDJRHLydy]] [[lookup @range.units
-      activity=EcTOfXWsDJRHLydy]]. of the [[lookup @name lowercase]] can pull a
-      creature or an object out of the [[lookup @name lowercase]] by succeeding
-      on a [[/check dc=12 ability=str skill=ath format=long]], and the puller
-      takes [[/damage average activity=PMCvyqxfUYiPzNK8]] damage.</p>
+      activity=EcTOfXWsDJRHLydy]]. of the [[lookup @name lowercase]]{monster}
+      can pull a creature or an object out of the [[lookup @name
+      lowercase]]{monster} by succeeding on a [[/check dc=12 ability=str
+      skill=ath format=long]], and the puller takes [[/damage average
+      activity=PMCvyqxfUYiPzNK8]] damage.</p>
     chat: ''
   identifier: ooze-cube
   source:

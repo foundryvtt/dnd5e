@@ -258,8 +258,9 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  static applyChangeField(model, change, {field, replacementData}={}) {
+  static applyChangeField(model, change, options={}) {
     const current = foundry.utils.getProperty(model, change.key);
+    const { field } = options;
 
     // Replace value when using string interpolation syntax
     if ( (field instanceof StringField) && (change.type === "override") && change.value.includes?.("{}") ) {
@@ -298,7 +299,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       change = { ...change, value: parseOrString(change.value) };
     }
 
-    return super.applyChangeField(model, change, {field, replacementData});
+    return super.applyChangeField(model, change, options);
   }
 
   /* -------------------------------------------- */
@@ -969,12 +970,16 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * @returns {Promise<{content: string, classes: string[]}>}
    */
   async richTooltip(enrichmentOptions={}) {
-    const properties = [];
+    let properties = [];
     if ( this.isSuppressed ) properties.push("DND5E.EffectType.Unavailable");
     else if ( this.disabled ) properties.push("DND5E.EffectType.Inactive");
     else if ( this.isTemporary ) properties.push("DND5E.EffectType.Temporary");
     else properties.push("DND5E.EffectType.Passive");
     if ( this.type === "enchantment" ) properties.push("DND5E.ENCHANTMENT.Label");
+    properties = properties.map(p => game.i18n.localize(p));
+    properties.unshift(...this.statuses.map(id => game.release.generation < 14
+      ? CONFIG.statusEffects.find(s => s.id === id)?.name
+      : CONFIG.statusEffects[id]?.name).filter(_ => _));
 
     return {
       content: await foundry.applications.handlebars.renderTemplate(
@@ -982,7 +987,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
           effect: this,
           description: await TextEditor.enrichHTML(this.description ?? "", { relativeTo: this, ...enrichmentOptions }),
           durationParts: this.duration.remaining ? this.duration.label.split(", ") : [],
-          properties: properties.map(p => game.i18n.localize(p))
+          properties
         }
       ),
       classes: ["dnd5e2", "dnd5e-tooltip", "effect-tooltip", "themed", "theme-light"]
@@ -992,9 +997,9 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /* -------------------------------------------- */
 
   /** @override */
-  async deleteDialog(dialogOptions={}, operation={}) {
+  async deleteDialog({ sheet, ...dialogOptions }={}, operation={}) {
     const type = game.i18n.localize(this.constructor.metadata.label);
-    return foundry.applications.api.DialogV2.confirm(foundry.utils.mergeObject({
+    const config = foundry.utils.mergeObject({
       window: { title: `${game.i18n.format("DOCUMENT.Delete", { type })}: ${this.name}` },
       position: { width: 400 },
       content: `
@@ -1003,7 +1008,9 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
         </p>
       `,
       yes: { callback: () => this.delete(operation) }
-    }, dialogOptions));
+    }, dialogOptions);
+    if ( sheet ) return sheet._confirmDialog(config);
+    return foundry.applications.api.DialogV2.confirm(config);
   }
 }
 

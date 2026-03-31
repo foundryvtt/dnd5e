@@ -78,8 +78,8 @@ system:
     value: >-
       <p class="feature">[[/attack extended]]. [[/damage average extended]], and
       the target has the &amp;Reference[Poisoned apply=false] condition until
-      the start of the [[lookup @name lowercase]]'s next turn. While Poisoned,
-      the target can't regain Hit Points.</p>
+      the start of the [[lookup @name lowercase]]{monster}'s next turn. While
+      Poisoned, the target can't regain Hit Points.</p>
     chat: ''
   identifier: infernal-sting
   source:

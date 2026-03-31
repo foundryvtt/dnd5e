@@ -29,12 +29,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -72,7 +75,11 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: 9R2Z2PZW9U03QFhW
+          level:
+            min: null
+            max: null
       range:
         override: false
       target:
@@ -91,20 +98,65 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: true-strike
 sort: 0
 flags: {}
-img: icons/magic/fire/dagger-rune-enchant-blue-gray.webp
-effects: []
+img: icons/skills/melee/strike-weapon-polearm-ice-blue.webp
+effects:
+  - name: True Strike
+    img: icons/skills/melee/strike-weapon-polearm-ice-blue.webp
+    origin: Compendium.dnd5e.spells.Item.mGGlcLdggHwcL7MG
+    transfer: false
+    _id: 9R2Z2PZW9U03QFhW
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: 60
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The caster has advantage on the first attack roll they make against
+      you.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      createdTime: 1772661143939
+      modifiedTime: 1772661262015
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!mGGlcLdggHwcL7MG.9R2Z2PZW9U03QFhW'
 folder: Z8kZlnggh1PtuF3Y
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037364383
-  modifiedTime: 1725992722510
+  modifiedTime: 1772738691311
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!mGGlcLdggHwcL7MG'

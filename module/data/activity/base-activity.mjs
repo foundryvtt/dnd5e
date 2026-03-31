@@ -18,6 +18,7 @@ const {
 
 /**
  * @import { DamageRollConfiguration, DamageRollProcessConfiguration } from "../../dice/_types.mjs";
+ * @import { ActivityRollData } from "../../documents/_types.mjs";
  * @import { ActivityData } from "./_types.mjs";
  */
 
@@ -120,7 +121,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @type {object|null}
    */
   get activationLabels() {
-    if ( !this.activation.type || this.isSpell ) return null;
+    if ( !this.activation?.type || this.isSpell ) return null;
     const { activation, duration, range, reach, target } = this.labels;
     return { activation, duration, range, reach, target };
   }
@@ -569,7 +570,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
 
   /**
    * Perform final preparation after containing item is prepared.
-   * @param {object} [rollData]  Deterministic roll data from the activity.
+   * @param {ActivityRollData} [rollData]  Deterministic roll data from the activity.
    */
   prepareFinalData(rollData) {
     rollData ??= this.getRollData({ deterministic: true });
@@ -642,7 +643,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
 
   /**
    * Prepare the label for a compiled and simplified damage formula.
-   * @param {object} rollData  Deterministic roll data from the item.
+   * @param {ActivityRollData} rollData  Deterministic roll data from the item.
    */
   prepareDamageLabel(rollData) {
     const config = this.getDamageConfig({}, { rollData });
@@ -737,7 +738,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * Get the roll parts used to create the damage rolls.
    * @param {Partial<DamageRollProcessConfiguration>} [config={}]  Existing damage configuration to merge into this one.
    * @param {object} [options]                                     Damage configuration options.
-   * @param {object} [options.rollData]                            Use pre-existing roll data.
+   * @param {ActivityRollData} [options.rollData]                  Use pre-existing roll data.
    * @returns {DamageRollProcessConfiguration}
    */
   getDamageConfig(config={}, { rollData }={}) {
@@ -759,7 +760,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * Process a single damage part into a roll configuration.
    * @param {DamageData} damage                                   Damage to prepare for the roll.
    * @param {Partial<DamageRollProcessConfiguration>} rollConfig  Roll configuration being built.
-   * @param {object} rollData                                     Roll data to populate with damage data.
+   * @param {ActivityRollData} rollData                           Roll data to populate with damage data.
    * @param {number} [index=0]                                    Index of the damage part.
    * @returns {DamageRollConfiguration}
    * @protected
@@ -822,17 +823,18 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * Add an `canOverride` property to the provided object and, if `override` is `false`, replace the data on the
    * activity with data from the item.
    * @param {string} keyPath  Path of the property to set on the activity.
+   * @param {Item5e} [item]   Item to act as the source of the override.
    * @internal
    */
-  _setOverride(keyPath) {
+  _setOverride(keyPath, item=this.item) {
     const obj = foundry.utils.getProperty(this, keyPath);
     Object.defineProperty(obj, "canOverride", {
-      value: safePropertyExists(this.item.system, keyPath),
+      value: safePropertyExists(item.system, keyPath),
       configurable: true,
       enumerable: false
     });
     if ( obj.canOverride && !obj.override && !this.isRider ) {
-      foundry.utils.mergeObject(obj, foundry.utils.getProperty(this.item.system, keyPath));
+      foundry.utils.mergeObject(obj, foundry.utils.getProperty(item.system, keyPath));
     }
   }
 }

@@ -569,7 +569,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">If the [[lookup @name lowercase]] [[lookup
+          <p class="feature">If the [[lookup @name lowercase]]{monster} [[lookup
           @item.requirements]], its body dissolves into dirt, and it gains a new
           body in [[/r 1d4#Days]] days, reviving with all its Hit Points
           somewhere on the Plane of Fire.</p>
@@ -625,8 +625,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] has Advantage on saving throws
-          against spells and other magical effects.</p>
+          <p>The [[lookup @name lowercase]]{monster} has Advantage on saving
+          throws against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
       source:
@@ -733,16 +733,18 @@ items:
         max: '3'
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] has a [[/r
+          <p class="feature">The [[lookup @name lowercase]]{monster} has a [[/r
           1d100cs&lt;31#Knows Wish on 1]]{30 percent} chance of knowing the
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplWish000000]{Wish}</em>
-          spell. If the [[lookup @name lowercase]] knows it, the [[lookup @name
-          lowercase]] can cast it only on behalf of a non-genie creature who
-          communicates a wish in a way the [[lookup @name lowercase]] can
-          understand. If the [[lookup @name lowercase]] casts the spell for the
-          creature, the [[lookup @name lowercase]] suffers none of the spell's
-          stress. Once the [[lookup @name lowercase]] has cast it three times,
-          the [[lookup @name lowercase]] can't do so again for 365 days.</p>
+          spell. If the [[lookup @name lowercase]]{monster} knows it, the
+          [[lookup @name lowercase]]{monster} can cast it only on behalf of a
+          non-genie creature who communicates a wish in a way the [[lookup @name
+          lowercase]]{monster} can understand. If the [[lookup @name
+          lowercase]]{monster} casts the spell for the creature, the [[lookup
+          @name lowercase]]{monster} suffers none of the spell's stress. Once
+          the [[lookup @name lowercase]]{monster} has cast it three times, the
+          [[lookup @name lowercase]]{monster} can't do so again for 365
+          days.</p>
         chat: <p>[[/r 1d100cs&lt;31#Knows Wish on 1]]{30 percent}</p>
       identifier: wishes
       source:
@@ -1099,8 +1101,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes three attacks, using [[/item
-          .mmHeatedBlade000]] or [[/item .mmHurlFlame00000]] in any
+          <p>The [[lookup @name lowercase]]{monster} makes three attacks, using
+          [[/item .mmHeatedBlade000]] or [[/item .mmHurlFlame00000]] in any
           combination.</p>
         chat: ''
       identifier: multiattack
@@ -1939,9 +1941,9 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
-          following spells, requiring no Material components and using Charisma
-          as the spellcasting ability (spell save DC [[lookup
+          <p class="feature">The [[lookup @name lowercase]]{monster} casts one
+          of the following spells, requiring no Material components and using
+          Charisma as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]]):</p><p class="feature-trait"><strong>At
           Will:</strong>
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDetectMagi]{Detect

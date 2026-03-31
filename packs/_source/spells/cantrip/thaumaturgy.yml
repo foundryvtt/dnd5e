@@ -6,30 +6,16 @@ type: spell
 system:
   description:
     value: >-
-      <p>You create one of the following magical effects within range:</p>
-
-      <ul>
-
-      <li>Your voice booms up to three times as loud as normal for 1
-      minute.</li>
-
-      <li>You cause flames to flicker, brighten, dim, or change color for 1
-      minute.</li>
-
-      <li>You cause harmless tremors in the ground for 1 minute.</li>
-
-      <li>You create a sound that originates from a point of your choice within
-      range.</li>
-
-      <li>You cause an unlocked door or window to fly open or slam shut.</li>
-
-      <li>You alter the appearance of your eyes for 1 minute.</li>
-
-      </ul>
-
-      <p>If you cast this spell multiple times, you can have up to three of its
-      1-minute effects active at a time, and you can dismiss such an effect as
-      an action.</p>
+      <p>You create one of the following magical effects within
+      range:</p><ul><li>Your voice booms up to three times as loud as normal for
+      1 minute.</li><li>You cause flames to flicker, brighten, dim, or change
+      color for 1 minute.</li><li>You cause harmless tremors in the ground for 1
+      minute.</li><li>You create a sound that originates from a point of your
+      choice within range.</li><li>You cause an unlocked door or window to fly
+      open or slam shut.</li><li>You alter the appearance of your eyes for 1
+      minute.</li></ul><p>If you cast this spell multiple times, you can have up
+      to three of its 1-minute effects active at a time, and you can dismiss
+      such an effect as an action.</p>
     chat: ''
   source:
     custom: ''
@@ -47,12 +33,15 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -108,20 +97,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: thaumaturgy
 sort: 0
 flags: {}
-img: icons/magic/fire/explosion-fireball-small-purple-orange.webp
+img: icons/magic/light/torch-fire-hand-orange.webp
 effects: []
 folder: Z8kZlnggh1PtuF3Y
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037354805
-  modifiedTime: 1725992719394
+  modifiedTime: 1772738697205
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!MUO1uYN7JR1hm4dR'

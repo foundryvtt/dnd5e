@@ -563,10 +563,10 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] has Advantage on an attack roll
-          against a creature if at least one of the [[lookup @name lowercase]]'s
-          allies is within 5 feet of the creature and the ally doesn't have the
-          Incapacitated condition.</p>
+          <p>The [[lookup @name lowercase]]{monster} has Advantage on an attack
+          roll against a creature if at least one of the [[lookup @name
+          lowercase]]{monster}'s allies is within 5 feet of the creature and the
+          ally doesn't have the Incapacitated condition.</p>
         chat: ''
       identifier: pack-tactics
       source:
@@ -616,7 +616,7 @@ items:
       description:
         value: >-
           <p class="feature">With a 10-foot running start, the [[lookup @name
-          lowercase]] can Long Jump up to 25 feet.</p>
+          lowercase]]{monster} can Long Jump up to 25 feet.</p>
         chat: ''
       identifier: running-leap
       source:
@@ -709,7 +709,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item
+          <p>The [[lookup @name lowercase]]{monster} makes two [[/item
           .mmRend0000000000]] attacks. It can replace one attack with a use of
           [[/item .mmRoar0000000000]].</p>
         chat: ''
@@ -972,7 +972,7 @@ items:
           [[lookup @range.value activity=Igeu89TALGlNPXDg]] feet.</p><p
           class="feature"><em>Failure</em>: The target has the
           &amp;Reference[Frightened apply=false] condition until the start of
-          the [[lookup @name lowercase]]'s next turn.</p>
+          the [[lookup @name lowercase]]{monster}'s next turn.</p>
         chat: ''
       identifier: roar
       source:

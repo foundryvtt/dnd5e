@@ -10,6 +10,7 @@ import RollConfigField from "../../shared/roll-config-field.mjs";
 const { NumberField, SchemaField } = foundry.data.fields;
 
 /**
+ * @import { ActorRollData } from "../../../documents/_types.mjs";
  * @import { CurrencyTemplateData } from "../../shared/_types.mjs";
  * @import { CommonTemplateData } from "./_types.mjs";
  */
@@ -127,8 +128,8 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
   /**
    * Prepare modifiers and other values for abilities.
    * @param {object} [options={}]
-   * @param {object} [options.rollData={}]    Roll data used to calculate bonuses.
-   * @param {object} [options.originalSaves]  Original ability data for transformed actors.
+   * @param {ActorRollData} [options.rollData={}]  Roll data used to calculate bonuses.
+   * @param {object} [options.originalSaves]       Original ability data for transformed actors.
    */
   prepareAbilities({ rollData={}, originalSaves }={}) {
     const flags = this.parent.flags.dnd5e ?? {};

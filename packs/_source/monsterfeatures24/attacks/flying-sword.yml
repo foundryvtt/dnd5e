@@ -76,8 +76,8 @@ system:
     value: >-
       <p class="feature">[[/attack extended]]. [[/damage average extended]].
       <em>Hit or Miss:</em> The sword magically returns to the [[lookup @name
-      lowercase]]'s hand or hovers within 5 feet of the [[lookup @name
-      lowercase]] immediately after a ranged attack.</p>
+      lowercase]]{monster}'s hand or hovers within 5 feet of the [[lookup @name
+      lowercase]]{monster} immediately after a ranged attack.</p>
     chat: ''
   identifier: flying-sword
   source:

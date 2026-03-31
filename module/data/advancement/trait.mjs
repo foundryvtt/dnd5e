@@ -53,7 +53,11 @@ export class TraitConfigurationData extends foundry.abstract.DataModel {
     const version = dnd5e.settings.rulesVersion;
     const languageMap = LANGUAGE_MAP[version] ?? {};
     if ( source.grants?.length ) source.grants = source.grants.map(t => languageMap[t] ?? t);
-    if ( source.choices?.length ) source.choices.forEach(c => c.pool = c.pool.map(t => languageMap[t] ?? t));
+    if ( source.choices?.length ) source.choices.forEach(c => {
+      if ( !c.pool ) c.pool = [];
+      if ( !Array.isArray(c.pool) ) c.pool = Object.values(c.pool);
+      c.pool = c.pool.map(t => languageMap[t] ?? t);
+    });
     return source;
   }
 }

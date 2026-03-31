@@ -30,12 +30,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '60'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -73,7 +76,11 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: ZlBjKmRbz1cyezIt
+          level:
+            min: null
+            max: null
       range:
         override: false
       target:
@@ -92,7 +99,7 @@ system:
         flat: false
         type:
           value: ranged
-          classification: spell
+          classification: ''
       damage:
         critical:
           bonus: ''
@@ -113,20 +120,69 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: ray-of-frost
 sort: 0
 flags: {}
-img: icons/magic/light/beam-rays-blue-small.webp
-effects: []
+img: icons/magic/water/projectile-icecicle-glowing.webp
+effects:
+  - name: Chilled
+    img: icons/magic/water/projectile-icecicle-glowing.webp
+    origin: Compendium.dnd5e.spells.Item.ctW81uiX56xZR2c5
+    transfer: false
+    _id: ZlBjKmRbz1cyezIt
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.movement.bonus
+        mode: 2
+        value: '-10'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: 6
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>Your speed is reduced by 10 feet until the start of the caster's next
+      turn.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      createdTime: 1772661617313
+      modifiedTime: 1772661710255
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!ctW81uiX56xZR2c5.ZlBjKmRbz1cyezIt'
 folder: Z8kZlnggh1PtuF3Y
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037360652
-  modifiedTime: 1725992721294
+  modifiedTime: 1772738726225
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!ctW81uiX56xZR2c5'

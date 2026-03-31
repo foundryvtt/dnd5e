@@ -80,16 +80,16 @@ system:
     max: ''
   description:
     value: >-
-      <p class="feature">The [[lookup @name lowercase]] throws a [[lookup
-      @target.affects.special activity=E7YKnUIWsavrnNzK]] Grappled by it to a
-      space it can see within [[lookup @range.value activity=E7YKnUIWsavrnNzK]]
-      feet of itself [[lookup @range.special activity=E7YKnUIWsavrnNzK]].</p><p
-      class="feature"><em>Dexterity Saving Throw:</em> DC [[lookup
-      @save.dc.value activity=E7YKnUIWsavrnNzK]], the creature thrown and each
-      creature in the destination space.</p><p class="feature"><em>Failure:</em>
-      [[/damage average]] damage, and the target has the &amp;Reference[Prone
-      apply=false] condition.</p><p class="feature"><em>Success:</em> Half
-      damage.</p>
+      <p class="feature">The [[lookup @name lowercase]]{monster} throws a
+      [[lookup @target.affects.special activity=E7YKnUIWsavrnNzK]] Grappled by
+      it to a space it can see within [[lookup @range.value
+      activity=E7YKnUIWsavrnNzK]] feet of itself [[lookup @range.special
+      activity=E7YKnUIWsavrnNzK]].</p><p class="feature"><em>Dexterity Saving
+      Throw:</em> DC [[lookup @save.dc.value activity=E7YKnUIWsavrnNzK]], the
+      creature thrown and each creature in the destination space.</p><p
+      class="feature"><em>Failure:</em> [[/damage average]] damage, and the
+      target has the &amp;Reference[Prone apply=false] condition.</p><p
+      class="feature"><em>Success:</em> Half damage.</p>
     chat: ''
   identifier: fling
   source:

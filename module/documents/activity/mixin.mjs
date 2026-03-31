@@ -13,6 +13,7 @@ import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
  * @import {
  *   BasicRollDialogConfiguration, BasicRollMessageConfiguration, DamageRollProcessConfiguration
  * } from "../../dice/_types.mjs";
+ * @import { ActivityRollData, RollDataOptions } from "../_types.mjs";
  * @import {
  *   ActivityConsumptionDescriptor, ActivityDialogConfiguration, ActivityMessageConfiguration, ActivityMetadata,
  *   ActivityUsageChatButton, ActivityUsageResults, ActivityUsageUpdates, ActivityUseConfiguration
@@ -202,7 +203,7 @@ export default function ActivityMixin(Base) {
             dnd5e: this.messageFlags
           },
           system: {
-            effects: this.applicableEffects?.map(e => e.id)
+            effects: this.applicableEffects?.map(e => `.ActiveEffect.${e.id}`)
           }
         },
         hasConsumption: usageConfig.hasConsumption
@@ -716,7 +717,7 @@ export default function ActivityMixin(Base) {
      */
     _finalizeMessageConfig(usageConfig, messageConfig, results) {
       messageConfig.data.rolls = (messageConfig.data.rolls ?? []).concat(results.updates.rolls);
-      const effects = this.applicableEffects?.map(e => e.id);
+      const effects = this.applicableEffects?.map(e => `.ActiveEffect.${e.id}`);
       if ( effects ) foundry.utils.setProperty(messageConfig.data, "system.effects", effects);
     }
 
@@ -957,7 +958,7 @@ export default function ActivityMixin(Base) {
         entries.push({
           name: "DND5E.ContextMenuActionEdit",
           icon: '<i class="fas fa-pen-to-square fa-fw"></i>',
-          callback: () => this.sheet.render({ force: true })
+          callback: () => this.item.sheet._renderChild(this.sheet)
         }, {
           name: "DND5E.ContextMenuActionDuplicate",
           icon: '<i class="fas fa-copy fa-fw"></i>',
@@ -969,13 +970,13 @@ export default function ActivityMixin(Base) {
         }, {
           name: "DND5E.ContextMenuActionDelete",
           icon: '<i class="fas fa-trash fa-fw"></i>',
-          callback: () => this.deleteDialog()
+          callback: () => this.deleteDialog({ sheet: this.item.sheet })
         });
       } else {
         entries.push({
           name: "DND5E.ContextMenuActionView",
           icon: '<i class="fas fa-eye fa-fw"></i>',
-          callback: () => this.sheet.render({ force: true })
+          callback: () => this.item.sheet._renderChild(this.sheet)
         });
       }
 
@@ -1180,10 +1181,8 @@ export default function ActivityMixin(Base) {
 
     /**
      * Prepare a data object which defines the data schema used by dice roll commands against this Activity.
-     * @param {object} [options]
-     * @param {boolean} [options.deterministic]  Whether to force deterministic values for data properties that could
-     *                                           be either a die term or a flat term.
-     * @returns {object}
+     * @param {RollDataOptions} [options]
+     * @returns {ActivityRollData}
      */
     getRollData(options) {
       const rollData = this.item.getRollData(options);

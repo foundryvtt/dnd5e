@@ -17,7 +17,7 @@ const {
 export default class BaseSummonActivityData extends BaseActivityData {
   /** @inheritDoc */
   static defineSchema() {
-    return {
+    const schema = {
       ...super.defineSchema(),
       bonuses: new SchemaField({
         ac: new FormulaField(),
@@ -54,6 +54,11 @@ export default class BaseSummonActivityData extends BaseActivityData {
       }),
       tempHP: new FormulaField()
     };
+    if ( game.release.generation > 13 ) schema.flat = new SchemaField({
+      attack: new NumberField({ nullable: true, initial: null }),
+      save: new NumberField({ nullable: true, initial: null })
+    }, { persisted: false });
+    return schema;
   }
 
   /* -------------------------------------------- */

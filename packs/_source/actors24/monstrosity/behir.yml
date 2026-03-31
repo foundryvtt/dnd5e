@@ -616,7 +616,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes one [[/item
+          <p>The [[lookup @name lowercase]]{monster} makes one [[/item
           .mmBite0000000000]] attack and uses [[/item .mmConstrict00000]].</p>
         chat: ''
       identifier: multiattack
@@ -965,7 +965,7 @@ items:
           [[lookup @save.dc.value activity=IgOMjRxAt7UISkJq]], one [[lookup
           @target.affects.special activity=IgOMjRxAt7UISkJq]] [[lookup
           @target.affects.type activity=IgOMjRxAt7UISkJq]] the [[lookup @name
-          lowercase]] can see within [[lookup @range.value
+          lowercase]]{monster} can see within [[lookup @range.value
           activity=IgOMjRxAt7UISkJq]] [[lookup @range.units
           activity=IgOMjRxAt7UISkJq]].</p><p><em>Failure:</em> [[/damage
           average]] damage. The target has the &amp;Reference[Grappled
@@ -1253,25 +1253,27 @@ items:
           <p class="feature"><em>Dexterity Saving Throw:</em> DC [[lookup
           @save.dc.value activity=YorssyWMumAsvzx3]], [[lookup
           @target.affects.special activity=YorssyWMumAsvzx3]] by the [[lookup
-          @name lowercase]] (the [[lookup @name lowercase]] can have only one
-          creature swallowed at a time).</p><p class="feature"><em>Failure:</em>
-          The [[lookup @name lowercase]] swallows the target, which is no longer
+          @name lowercase]]{monster} (the [[lookup @name lowercase]]{monster}
+          can have only one creature swallowed at a time).</p><p
+          class="feature"><em>Failure:</em> The [[lookup @name
+          lowercase]]{monster} swallows the target, which is no longer
           &amp;Reference[Grappled apply=false]. While swallowed, a creature has
           the &amp;Reference[Blinded apply=false] and &amp;Reference[Restrained
           apply=false] conditions, has Total Cover against attacks and other
-          effects outside the [[lookup @name lowercase]], and takes [[/damage
-          average activity=zrWNjO9mkbN28spL]] damage at the start of each of the
-          [[lookup @name lowercase]]'s turns.</p><p class="feature">If the
-          [[lookup @name lowercase]] takes 30 damage or more on a single turn
-          from the swallowed creature, the [[lookup @name lowercase]] must
-          succeed on a [[/save format=long activity=rGeGukkm2t2fXsoy]] at the
-          end of that turn or regurgitate the creature, which falls in a space
-          within [[lookup @range.value activity=rGeGukkm2t2fXsoy]] [[lookup
-          @range.units activity=rGeGukkm2t2fXsoy]]. of the [[lookup @name
-          lowercase]] and has the &amp;Reference[Prone apply=false] condition.
-          If the [[lookup @name lowercase]] dies, a swallowed creature is no
-          longer Restrained and can escape from the corpse by using 15 feet of
-          movement, exiting Prone.</p>
+          effects outside the [[lookup @name lowercase]]{monster}, and takes
+          [[/damage average activity=zrWNjO9mkbN28spL]] damage at the start of
+          each of the [[lookup @name lowercase]]{monster}'s turns.</p><p
+          class="feature">If the [[lookup @name lowercase]]{monster} takes 30
+          damage or more on a single turn from the swallowed creature, the
+          [[lookup @name lowercase]]{monster} must succeed on a [[/save
+          format=long activity=rGeGukkm2t2fXsoy]] at the end of that turn or
+          regurgitate the creature, which falls in a space within [[lookup
+          @range.value activity=rGeGukkm2t2fXsoy]] [[lookup @range.units
+          activity=rGeGukkm2t2fXsoy]]. of the [[lookup @name
+          lowercase]]{monster} and has the &amp;Reference[Prone apply=false]
+          condition. If the [[lookup @name lowercase]]{monster} dies, a
+          swallowed creature is no longer Restrained and can escape from the
+          corpse by using 15 feet of movement, exiting Prone.</p>
         chat: ''
       identifier: swallow
       source:

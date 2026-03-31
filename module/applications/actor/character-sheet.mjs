@@ -571,11 +571,15 @@ export default class CharacterActorSheet extends BaseActorSheet {
     context.favorites = await this._prepareFavorites();
 
     // Speed
-    context.speed = Object.entries(CONFIG.DND5E.movementTypes).reduce((obj, [k, { label }]) => {
+    context.speed = Object.entries(CONFIG.DND5E.movementTypes).reduce((obj, [k, { hidden, label }]) => {
+      if ( hidden ) return obj;
       const value = attributes.movement[k];
-      if ( value > obj.value ) Object.assign(obj, { value, label });
+      if ( (k === "fly") && attributes.movement.hover ) {
+        label = game.i18n.format("DND5E.MOVEMENT.HoverSpeed", { speed: label });
+      }
+      if ( value > obj.value ) Object.assign(obj, { label, value });
       return obj;
-    }, { value: 0, label: CONFIG.DND5E.movementTypes.walk?.label });
+    }, { label: CONFIG.DND5E.movementTypes.walk?.label, value: 0 });
 
     return context;
   }
@@ -1011,7 +1015,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       };
     }
 
-    const result = await CompendiumBrowser.selectOne({ filters });
+    const result = await CompendiumBrowser.selectOne({ filters }, this._detachOptions());
     if ( result ) this._onDropCreateItems(event, [game.items.fromCompendium(await fromUuid(result), { keepId: true })]);
   }
 
@@ -1237,7 +1241,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  async _onDropSingleItem(event, itemData) {
+  async _onDropSingleItem(event, itemData, options={}) {
     // Increment the number of class levels a character instead of creating a new item
     if ( itemData.type === "class" ) {
       const charLevel = this.actor.system.details.level;
@@ -1279,7 +1283,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       }
     }
 
-    return super._onDropSingleItem(event, itemData);
+    return super._onDropSingleItem(event, itemData, options);
   }
 
   /* -------------------------------------------- */

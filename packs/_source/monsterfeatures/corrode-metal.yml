@@ -9,17 +9,19 @@ system:
       <section class="secret">
 
       <p>Any nonmagical weapon made of metal that hits the [[lookup
-      @details.type.config.label lowercase]] corrodes. After <strong>dealing
-      damage</strong>, the weapon takes a permanent and cumulative -1 penalty to
-      damage rolls.</p><p>If its penalty drops to -5, the weapon is destroyed.
-      Nonmagical ammunition made of metal that hits the [[lookup
-      @details.type.config.label lowercase]] is destroyed after dealing damage.
-      The [[lookup @details.type.config.label lowercase]] can eat through
-      2-inch-thick, nonmagical metal in 1 round.</p>
+      @details.type.config.label lowercase]]{monster} corrodes. After
+      <strong>dealing damage</strong>, the weapon takes a permanent and
+      cumulative -1 penalty to damage rolls.</p><p>If its penalty drops to -5,
+      the weapon is destroyed. Nonmagical ammunition made of metal that hits the
+      [[lookup @details.type.config.label lowercase]]{monster} is destroyed
+      after dealing damage. The [[lookup @details.type.config.label
+      lowercase]]{monster} can eat through 2-inch-thick, nonmagical metal in 1
+      round.</p>
 
       </section>
 
-      <p>The [[lookup @details.type.config.label lowercase]] corrodes metal.</p>
+      <p>The [[lookup @details.type.config.label lowercase]]{monster} corrodes
+      metal.</p>
     chat: ''
   source:
     custom: ''

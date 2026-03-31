@@ -30,11 +30,14 @@ system:
     affects:
       type: self
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -74,7 +77,8 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: 57Vv8uBIE8YRcDPc
       range:
         override: false
       target:
@@ -93,20 +97,69 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: comprehend-languages
 sort: 0
 flags: {}
-img: icons/magic/symbols/runes-triangle-orange-purple.webp
-effects: []
+img: icons/sundries/documents/document-letter-blue.webp
+effects:
+  - name: Comprehend Languages
+    img: icons/sundries/documents/document-letter-blue.webp
+    origin: Compendium.dnd5e.spells.Item.4dSvfvTy2ZIJ3K4k
+    transfer: false
+    _id: 57Vv8uBIE8YRcDPc
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: 3600
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>For the duration, you understand the literal meaning of any spoken
+      language that you hear. You also understand any written language that you
+      see, but you must be touching the surface on which the words are written.
+      It takes about 1 minute to read one page of text.</p><p>This spell doesn't
+      decode secret messages in a text or a glyph, such as an arcane sigil, that
+      isn't part of a written language.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      createdTime: 1772824084150
+      modifiedTime: 1772824099218
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!4dSvfvTy2ZIJ3K4k.57Vv8uBIE8YRcDPc'
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037347081
-  modifiedTime: 1725992716907
+  modifiedTime: 1772824084174
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!4dSvfvTy2ZIJ3K4k'

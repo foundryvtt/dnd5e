@@ -26,11 +26,14 @@ system:
     affects:
       type: self
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -50,70 +53,110 @@ system:
     - somatic
     - concentration
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: damage
+    6haTLhSgUrZEZzir:
+      type: utility
+      name: Cast
+      _id: 6haTLhSgUrZEZzir
+      img: null
+      sort: 0
       activation:
         type: action
-        value: null
         override: false
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
-      description:
-        chatFlavor: ''
+        targets: []
+      description: {}
       duration:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: YNlbHxIwut5swF2d
+      flags: {}
       range:
+        units: self
         override: false
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
         affects:
           choice: false
         override: false
-      damage:
-        critical:
-          allow: false
-          bonus: ''
-        parts:
-          - number: 1
-            denomination: 4
-            bonus: ''
-            types:
-              - radiant
-            custom:
-              enabled: false
-              formula: ''
-            scaling:
-              mode: ''
-              number: null
-              formula: ''
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
   identifier: divine-favor
 sort: 0
 flags: {}
-img: icons/magic/fire/dagger-rune-enchant-flame-blue-yellow.webp
-effects: []
+img: icons/weapons/axes/axe-double-gold.webp
+effects:
+  - name: Divine Favor
+    img: icons/weapons/axes/axe-double-gold.webp
+    origin: Compendium.dnd5e.spells.Item.8MICCMeOXT3aJUy9
+    transfer: false
+    _id: YNlbHxIwut5swF2d
+    type: base
+    system: {}
+    changes:
+      - key: system.bonuses.rwak.damage
+        mode: 2
+        value: 1d4[radiant]
+        priority: null
+      - key: system.bonuses.rsak.damage
+        mode: 2
+        value: 1d4[radiant]
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: 60
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>Your prayer empowers you with divine radiance. Until the spell ends,
+      your weapon attacks deal an extra 1d4 radiant damage on a hit.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      createdTime: 1772820368056
+      modifiedTime: 1772820409886
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!8MICCMeOXT3aJUy9.YNlbHxIwut5swF2d'
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037348703
-  modifiedTime: 1725992717422
+  modifiedTime: 1772820368080
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!8MICCMeOXT3aJUy9'

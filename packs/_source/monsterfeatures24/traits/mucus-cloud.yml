@@ -126,20 +126,20 @@ system:
     max: ''
   description:
     value: >-
-      <p class="feature">While underwater, the [[lookup @name lowercase]] is
-      surrounded by mucus.</p><p class="feature"><em>Constitution Saving
-      Throw:</em> DC 14, each [[lookup @target.affects.type
-      activity=clFFG8uDBSFzxIo8]] in a [[lookup @target.template.size
-      activity=clFFG8uDBSFzxIo8]]-[[lookup @target.template.units
-      activity=clFFG8uDBSFzxIo8]] Emanation originating from the [[lookup @name
-      lowercase]] at the end of the [[lookup @name lowercase]]'s turn.
-      <em>Failure:</em> The target is cursed. Until the curse ends, the target's
-      skin becomes slimy, the target can breathe air and water, and it can't
-      regain Hit Points unless it is underwater.</p><p class="feature">While the
-      cursed creature is outside a body of water, the creature takes [[/damage
-      average activity=JrxCVyCOsBAMVZS7]] damage at the end of every 10 minutes
-      unless moisture is applied to its skin before those minutes have
-      passed.</p>
+      <p class="feature">While underwater, the [[lookup @name
+      lowercase]]{monster} is surrounded by mucus.</p><p
+      class="feature"><em>Constitution Saving Throw:</em> DC 14, each [[lookup
+      @target.affects.type activity=clFFG8uDBSFzxIo8]] in a [[lookup
+      @target.template.size activity=clFFG8uDBSFzxIo8]]-[[lookup
+      @target.template.units activity=clFFG8uDBSFzxIo8]] Emanation originating
+      from the [[lookup @name lowercase]]{monster} at the end of the [[lookup
+      @name lowercase]]{monster}'s turn. <em>Failure:</em> The target is cursed.
+      Until the curse ends, the target's skin becomes slimy, the target can
+      breathe air and water, and it can't regain Hit Points unless it is
+      underwater.</p><p class="feature">While the cursed creature is outside a
+      body of water, the creature takes [[/damage average
+      activity=JrxCVyCOsBAMVZS7]] damage at the end of every 10 minutes unless
+      moisture is applied to its skin before those minutes have passed.</p>
     chat: ''
   identifier: mucus-cloud
   source:

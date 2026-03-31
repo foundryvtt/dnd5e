@@ -567,8 +567,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] can climb difficult surfaces,
-          including along ceilings, without needing to make an ability
+          <p>The [[lookup @name lowercase]]{monster} can climb difficult
+          surfaces, including along ceilings, without needing to make an ability
           check.</p>
         chat: ''
       identifier: spider-climb
@@ -618,9 +618,10 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] ignores movement
-          restrictions caused by webs, and the [[lookup @name lowercase]] knows
-          the location of any other creature in contact with the same web.</p>
+          <p class="feature">The [[lookup @name lowercase]]{monster} ignores
+          movement restrictions caused by webs, and the [[lookup @name
+          lowercase]]{monster} knows the location of any other creature in
+          contact with the same web.</p>
         chat: ''
       identifier: web-walker
       source:
@@ -900,7 +901,7 @@ items:
         value: >-
           <p class="feature"><em>Dexterity Saving Throw</em>: DC [[lookup
           @save.dc.value activity=6iMoUgxwYlvfKTXr]], one creature the [[lookup
-          @name lowercase]] can see within [[lookup @range.value
+          @name lowercase]]{monster} can see within [[lookup @range.value
           activity=6iMoUgxwYlvfKTXr]] feet.</p><p
           class="feature"><em>Failure</em>: The target has the
           &amp;Reference[Restrained apply=false] condition until the web is

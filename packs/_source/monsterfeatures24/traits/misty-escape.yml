@@ -61,15 +61,15 @@ system:
     max: ''
   description:
     value: >-
-      <p class="feature">If the [[lookup @name lowercase]] drops to 0 Hit Points
-      outside its resting place, the [[lookup @name lowercase]] uses Shape-Shift
-      to become mist (no action required). If it can't use Shape-Shift, it is
-      destroyed.</p><p class="feature">While it has 0 Hit Points in mist form,
-      it can't return to its vampire form, and it must reach its resting place
-      within 2 hours or be destroyed. Once in its resting place, it returns to
-      its vampire form and has the &amp;Reference[Paralyzed apply=false]
-      condition until it regains any Hit Points, and it regains 1 Hit Point
-      after spending 1 hour there.</p>
+      <p class="feature">If the [[lookup @name lowercase]]{monster} drops to 0
+      Hit Points outside its resting place, the [[lookup @name
+      lowercase]]{monster} uses Shape-Shift to become mist (no action required).
+      If it can't use Shape-Shift, it is destroyed.</p><p class="feature">While
+      it has 0 Hit Points in mist form, it can't return to its vampire form, and
+      it must reach its resting place within 2 hours or be destroyed. Once in
+      its resting place, it returns to its vampire form and has the
+      &amp;Reference[Paralyzed apply=false] condition until it regains any Hit
+      Points, and it regains 1 Hit Point after spending 1 hour there.</p>
     chat: ''
   identifier: misty-escape
   source:

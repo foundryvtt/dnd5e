@@ -576,9 +576,10 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] dies outside the Nine Hells, its
-          body disappears in sulfurous smoke, and it gains a new body instantly,
-          reviving with all its Hit Points somewhere in the Nine Hells.</p>
+          <p>If the [[lookup @name lowercase]]{monster} dies outside the Nine
+          Hells, its body disappears in sulfurous smoke, and it gains a new body
+          instantly, reviving with all its Hit Points somewhere in the Nine
+          Hells.</p>
         chat: ''
       identifier: diabolical-restoration
       source:
@@ -626,8 +627,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] has Advantage on saving throws
-          against spells and other magical effects.</p>
+          <p>The [[lookup @name lowercase]]{monster} has Advantage on saving
+          throws against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
       source:
@@ -728,7 +729,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes three [[/item
+          <p>The [[lookup @name lowercase]]{monster} makes three [[/item
           .mmIceSpear000000]] attacks. It can replace one attack with a [[/item
           .mmTail0000000000]] attack.</p>
         chat: ''
@@ -1010,7 +1011,7 @@ items:
         max: '1'
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts
+          <p class="feature">The [[lookup @name lowercase]]{monster} casts
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplWallofIce0]{Wall of
           Ice}</em> (level 8 version), requiring no spell components and using
           Intelligence as the spellcasting ability (spell save DC [[lookup
@@ -1492,8 +1493,8 @@ items:
           Action] or &amp;Reference[Reaction], its Speed decreases by 10 feet,
           and it can move or take one action on its turn, not both.</p><p
           class="feature"><em>Hit or Miss:</em> The spear magically returns to
-          the [[lookup @name lowercase]]'s hand immediately after a ranged
-          attack.</p>
+          the [[lookup @name lowercase]]{monster}'s hand immediately after a
+          ranged attack.</p>
         chat: ''
       identifier: ice-spear
       source:

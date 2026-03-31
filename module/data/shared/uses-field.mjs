@@ -7,6 +7,7 @@ const { ArrayField, NumberField, SchemaField, StringField } = foundry.data.field
  * @import {
  *   BasicRollDialogConfiguration, BasicRollMessageConfiguration, RechargeRollProcessConfiguration
  * } from "../../dice/_types.mjs";
+ * @import { ActivityRollData, ActorRollData, ItemRollData } from "../../documents/_types.mjs";
  */
 
 /**
@@ -36,8 +37,8 @@ export default class UsesField extends SchemaField {
   /**
    * Prepare data for this field. Should be called during the `prepareFinalData` stage.
    * @this {ItemDataModel|BaseActivityData}
-   * @param {object} rollData  Roll data used for formula replacements.
-   * @param {object} [labels]  Object in which to insert generated labels.
+   * @param {ItemRollData|ActivityRollData} rollData  Roll data used for formula replacements.
+   * @param {object} [labels]                         Object in which to insert generated labels.
    */
   static prepareData(rollData, labels) {
     prepareFormulaValue(this, "uses.max", "DND5E.USES.FIELDS.uses.max.label", rollData);
@@ -130,8 +131,8 @@ export default class UsesField extends SchemaField {
   /**
    * Determine uses recovery.
    * @this {ItemDataModel|BaseActivityData}
-   * @param {string[]} periods  Recovery periods to check.
-   * @param {object} rollData   Roll data to use when evaluating recover formulas.
+   * @param {string[]} periods                     Recovery periods to check.
+   * @param {ActorRollData|ItemRollData} rollData  Roll data to use when evaluating recovery formulas.
    * @returns {Promise<{ updates: object, rolls: BasicRoll[] }|false>}
    */
   static async recoverUses(periods, rollData) {

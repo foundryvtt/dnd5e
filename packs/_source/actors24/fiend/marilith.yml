@@ -577,8 +577,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] has Advantage on saving throws
-          against spells and other magical effects.</p>
+          <p>The [[lookup @name lowercase]]{monster} has Advantage on saving
+          throws against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
       source:
@@ -627,9 +627,9 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] dies outside the Abyss, its body
-          dissolves into ichor, and it gains a new body instantly, reviving with
-          all its Hit Points somewhere in the Abyss.</p>
+          <p>If the [[lookup @name lowercase]]{monster} dies outside the Abyss,
+          its body dissolves into ichor, and it gains a new body instantly,
+          reviving with all its Hit Points somewhere in the Abyss.</p>
         chat: ''
       identifier: demonic-restoration
       source:
@@ -677,8 +677,8 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] can take one
-          &amp;Reference[Reaction] on every turn of combat.</p>
+          <p class="feature">The [[lookup @name lowercase]]{monster} can take
+          one &amp;Reference[Reaction] on every turn of combat.</p>
         chat: ''
       identifier: reactive
       source:
@@ -779,7 +779,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes six [[/item
+          <p>The [[lookup @name lowercase]]{monster} makes six [[/item
           .mmPactBlade00000]] attacks and uses [[/item .mmConstrict00000]].</p>
         chat: ''
       identifier: multiattack
@@ -1130,9 +1130,9 @@ items:
           <p><em>Strength Saving Throw:</em><span class="Heading-4"> </span>DC
           [[lookup @save.dc.value activity=IgOMjRxAt7UISkJq]], one [[lookup
           @target.affects.special activity=IgOMjRxAt7UISkJq]] creature the
-          [[lookup @name lowercase]] can see within [[lookup @range.value
-          activity=IgOMjRxAt7UISkJq]] feet.</p><p><em>Failure:</em> [[/damage
-          average]] damage. The target has the &amp;Reference[Grappled
+          [[lookup @name lowercase]]{monster} can see within [[lookup
+          @range.value activity=IgOMjRxAt7UISkJq]] feet.</p><p><em>Failure:</em>
+          [[/damage average]] damage. The target has the &amp;Reference[Grappled
           apply=false] condition (escape DC [[lookup @skills.ath.passive]]), and
           it has the &amp;Reference[Restrained apply=false] condition until the
           grapple ends.</p>
@@ -1287,8 +1287,8 @@ items:
         max: '1'
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] teleports up to
-          [[lookup @range.value activity=dnoRMdFzhUUku26D]] feet to an
+          <p class="feature">The [[lookup @name lowercase]]{monster} teleports
+          up to [[lookup @range.value activity=dnoRMdFzhUUku26D]] feet to an
           unoccupied space it can see.</p>
         chat: ''
       identifier: teleport
@@ -1394,11 +1394,11 @@ items:
         max: ''
       description:
         value: >-
-          <p><em>Trigger:</em> The [[lookup @name lowercase]] is [[lookup
-          @activation.condition activity=aLG3BRZL7P6OEjwd]]. <em>Response:</em>
-          The [[lookup @name lowercase]] adds [[lookup @roll.formula
-          activity=aLG3BRZL7P6OEjwd]] to its AC against that attack, possibly
-          causing it to miss.</p>
+          <p><em>Trigger:</em> The [[lookup @name lowercase]]{monster} is
+          [[lookup @activation.condition activity=aLG3BRZL7P6OEjwd]].
+          <em>Response:</em> The [[lookup @name lowercase]]{monster} adds
+          [[lookup @roll.formula activity=aLG3BRZL7P6OEjwd]] to its AC against
+          that attack, possibly causing it to miss.</p>
         chat: ''
       identifier: parry
       source:

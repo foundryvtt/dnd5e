@@ -2,7 +2,7 @@ import Proficiency from "../../documents/actor/proficiency.mjs";
 import SystemDataModel from "./system-data-model.mjs";
 
 /**
- * @import { CombatRecoveryResults } from "../../documents/_types.mjs";
+ * @import { ActorRollData, CombatRecoveryResults, RollDataOptions } from "../../documents/_types.mjs";
  * @import { ActorDataModelMetadata } from "./_types.mjs";
  */
 
@@ -81,10 +81,8 @@ export default class ActorDataModel extends SystemDataModel {
 
   /**
    * Prepare a data object which defines the data schema used by dice roll commands against this Actor.
-   * @param {object} [options]
-   * @param {boolean} [options.deterministic] Whether to force deterministic values for data properties that could be
-   *                                          either a die term or a flat term.
-   * @returns {object}
+   * @param {RollDataOptions} [options]
+   * @returns {ActorRollData}
    */
   getRollData({ deterministic=false }={}) {
     const data = { ...this };

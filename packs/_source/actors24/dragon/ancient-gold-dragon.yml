@@ -579,7 +579,9 @@ items:
         recovery: []
         max: ''
       description:
-        value: <p>The [[lookup @name lowercase]] can breathe air and water.</p>
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} can breathe air and
+          water.</p>
         chat: ''
       identifier: amphibious
       source:
@@ -682,8 +684,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] fails a saving throw, it can
-          choose to succeed instead.</p>
+          <p>If the [[lookup @name lowercase]]{monster} fails a saving throw, it
+          can choose to succeed instead.</p>
         chat: ''
       identifier: legendary-resistance
       source:
@@ -783,8 +785,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes {count} [[/item]] attacks and
-          uses [[/item]].</p>
+          <p>The [[lookup @name lowercase]]{monster} makes {count} [[/item]]
+          attacks and uses [[/item]].</p>
         chat: ''
       identifier: multiattack
       source:
@@ -1472,9 +1474,9 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
-          following spells, requiring no Material components and using Charisma
-          as the spellcasting ability (spell save DC [[lookup
+          <p class="feature">The [[lookup @name lowercase]]{monster} casts one
+          of the following spells, requiring no Material components and using
+          Charisma as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]]):</p><p class="feature-trait"><strong>At
           Will:</strong>
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDetectMagi]{Detect
@@ -1784,17 +1786,17 @@ items:
         value: >-
           <p><em>Charisma Saving Throw:</em> DC [[lookup @save.dc.value
           activity=kWKwiAYgyeKBLMNJ]], one creature the [[lookup @name
-          lowercase]] can see within [[lookup @range.value
+          lowercase]]{monster} can see within [[lookup @range.value
           activity=kWKwiAYgyeKBLMNJ]] feet.</p><p><em>Failure:</em> [[/damage
           average]] damage, and the target has the &amp;Reference[Incapacitated
           apply=false] condition and is transported to a harmless demiplane
-          until the start of the [[lookup @name lowercase]]'s next turn, at
-          which point it re­appears in an unoccupied space of the [[lookup @name
-          lowercase]]'s choice within [[lookup @range.value
-          activity=kWKwiAYgyeKBLMNJ]] feet of the [[lookup @name
-          lowercase]].</p><p><em>Failure or Success:</em> The [[lookup @name
-          lowercase]] can't take this action again [[lookup @duration.special
-          activity=kWKwiAYgyeKBLMNJ]].</p>
+          until the start of the [[lookup @name lowercase]]{monster}'s next
+          turn, at which point it re­appears in an unoccupied space of the
+          [[lookup @name lowercase]]{monster}'s choice within [[lookup
+          @range.value activity=kWKwiAYgyeKBLMNJ]] feet of the [[lookup @name
+          lowercase]]{monster}.</p><p><em>Failure or Success:</em> The [[lookup
+          @name lowercase]]{monster} can't take this action again [[lookup
+          @duration.special activity=kWKwiAYgyeKBLMNJ]].</p>
         chat: ''
       identifier: banish
       source:
@@ -1936,8 +1938,8 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] uses Spellcasting to
-          cast
+          <p class="feature">The [[lookup @name lowercase]]{monster} uses
+          Spellcasting to cast
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplGuidingBol]{Guiding
           Bolt}</em> (level 2 version).</p>
         chat: ''
@@ -2267,8 +2269,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] moves up to half its Speed, and it
-          makes one [[/item Rend]] attack.</p>
+          <p>The [[lookup @name lowercase]]{monster} moves up to half its Speed,
+          and it makes one [[/item Rend]] attack.</p>
         chat: ''
       identifier: pounce
       source:

@@ -568,8 +568,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] can climb difficult surfaces,
-          including along ceilings, without needing to make an ability
+          <p>The [[lookup @name lowercase]]{monster} can climb difficult
+          surfaces, including along ceilings, without needing to make an ability
           check.</p>
         chat: ''
       identifier: spider-climb
@@ -663,7 +663,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item
+          <p>The [[lookup @name lowercase]]{monster} makes two [[/item
           .mmClaw0000000000]] attacks and uses [[/item .mmBite0000000000]].</p>
         chat: ''
       identifier: multiattack
@@ -1200,7 +1200,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] takes the
+          <p class="feature">The [[lookup @name lowercase]]{monster} takes the
           &amp;Reference[Dash] or &amp;Reference[Disengage] action.</p>
         chat: ''
       identifier: deathless-agility
@@ -1429,21 +1429,21 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] has these
+          <p class="feature">The [[lookup @name lowercase]]{monster} has these
           weaknesses:</p><p class="feature-trait"><strong>Forbiddance.</strong>
-          The [[lookup @name lowercase]] can't enter a residence without an
-          invitation from an occupant.</p><p
+          The [[lookup @name lowercase]]{monster} can't enter a residence
+          without an invitation from an occupant.</p><p
           class="feature-trait"><strong>Running Water.</strong> The [[lookup
-          @name lowercase]] takes 20 Acid damage if it ends its turn in running
-          water.</p><p class="feature-trait"><strong>Stake to the
-          Heart.</strong> The [[lookup @name lowercase]] is destroyed if a
-          weapon that deals Piercing damage is driven into the [[lookup @name
-          lowercase]]'s heart while the [[lookup @name lowercase]] has the
-          Incapacitated condition.</p><p
+          @name lowercase]]{monster} takes 20 Acid damage if it ends its turn in
+          running water.</p><p class="feature-trait"><strong>Stake to the
+          Heart.</strong> The [[lookup @name lowercase]]{monster} is destroyed
+          if a weapon that deals Piercing damage is driven into the [[lookup
+          @name lowercase]]{monster}'s heart while the [[lookup @name
+          lowercase]]{monster} has the Incapacitated condition.</p><p
           class="feature-trait"><strong>Sunlight.</strong> The [[lookup @name
-          lowercase]] takes 20 Radiant damage if it starts its turn in sunlight.
-          While in sunlight, it has Disadvantage on attack rolls and ability
-          checks.</p>
+          lowercase]]{monster} takes 20 Radiant damage if it starts its turn in
+          sunlight. While in sunlight, it has Disadvantage on attack rolls and
+          ability checks.</p>
         chat: ''
       identifier: vampire-weakness
       source:

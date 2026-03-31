@@ -10,10 +10,11 @@ system:
       against certain types of creatures: aberrations, celestials, elementals,
       fey, fiends, and undead.</p><p>The protection grants several benefits.
       Creatures of those types have disadvantage on attack rolls against the
-      target. The target also can't be charmed, frightened, or possessed by
-      them. If the target is already charmed, frightened, or possessed by such a
-      creature, the target has advantage on any new saving throw against the
-      relevant effect.</p>
+      target. The target also can't be &amp;reference[charmed apply=false],
+      &amp;reference[frightened apply=false], or possessed by them. If the
+      target is already charmed, frightened, or possessed by such a creature,
+      the target has advantage on any new saving throw against the relevant
+      effect.</p>
     chat: ''
   source:
     custom: ''
@@ -33,11 +34,14 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -77,7 +81,8 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: 6AM7tNmtE61BDJpv
       range:
         override: false
       target:
@@ -96,20 +101,71 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: protection-from-evil-and-good
 sort: 0
 flags: {}
-img: icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp
-effects: []
+img: icons/magic/light/orb-container-orange.webp
+effects:
+  - name: Protection from Evil and Good
+    img: icons/magic/light/orb-container-orange.webp
+    origin: Compendium.dnd5e.spells.Item.xmDBqZhRVrtLP8h2
+    transfer: false
+    _id: 6AM7tNmtE61BDJpv
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: 600
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>Until the spell ends, you are protected against certain types of
+      creatures: aberrations, celestials, elementals, fey, fiends, and
+      undead.</p><p>The protection grants several benefits. Creatures of those
+      types have disadvantage on attack rolls against you. You also can't be
+      &amp;reference[charmed apply=false], &amp;reference[frightened
+      apply=false], or possessed by them. If you are already charmed,
+      frightened, or possessed by such a creature, you have advantage on any new
+      saving throw against the relevant effect.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      createdTime: 1772823574800
+      modifiedTime: 1772823629154
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!xmDBqZhRVrtLP8h2.6AM7tNmtE61BDJpv'
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037366747
-  modifiedTime: 1725992723477
+  modifiedTime: 1772823623927
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!xmDBqZhRVrtLP8h2'

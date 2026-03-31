@@ -561,8 +561,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] can breathe only underwater. It can
-          hold its breath for 1 hour outside water.</p>
+          <p>The [[lookup @name lowercase]]{monster} can breathe only
+          underwater. It can hold its breath for 1 hour outside water.</p>
         chat: ''
       identifier: water-breathing
       source:
@@ -921,13 +921,13 @@ items:
         max: ''
       description:
         value: >-
-          <p><em>Trigger</em>: The [[lookup @name lowercase]] takes damage while
-          underwater. <em>Response</em>: The [[lookup @name lowercase]] releases
-          ink that fills a [[lookup @target.template.size
-          activity=1MiIPcVuCpfgBIkS]]-foot Cube centered on itself, and the
-          [[lookup @name lowercase]] moves up to its Swim Speed. The Cube is
-          Heavily Obscured for 1 minute or until a strong current or similar
-          effect disperses the ink.</p>
+          <p><em>Trigger</em>: The [[lookup @name lowercase]]{monster} takes
+          damage while underwater. <em>Response</em>: The [[lookup @name
+          lowercase]]{monster} releases ink that fills a [[lookup
+          @target.template.size activity=1MiIPcVuCpfgBIkS]]-foot Cube centered
+          on itself, and the [[lookup @name lowercase]]{monster} moves up to its
+          Swim Speed. The Cube is Heavily Obscured for 1 minute or until a
+          strong current or similar effect disperses the ink.</p>
         chat: ''
       identifier: ink-cloud
       source:

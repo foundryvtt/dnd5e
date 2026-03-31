@@ -87,13 +87,13 @@ system:
     max: '1'
   description:
     value: >-
-      <p>The [[lookup @name]] magically animates up to two trees it can see
-      within [[lookup @range.value activity=EceTNjzjKWdrMNAy]] feet of itself.
-      Each tree uses the <strong>Treant</strong> stat block, except it has
-      Intelligence and Charisma scores of 1, it can't speak, and it lacks this
-      action. The tree takes its turn immediately after the treant on the same
-      initiative count, and it obeys the treant. A tree remains animate for 1
-      day or until it dies, the treant dies, or it is more than 120 feet from
+      <p>The [[lookup @name]]{monster} magically animates up to two trees it can
+      see within [[lookup @range.value activity=EceTNjzjKWdrMNAy]] feet of
+      itself. Each tree uses the <strong>Treant</strong> stat block, except it
+      has Intelligence and Charisma scores of 1, it can't speak, and it lacks
+      this action. The tree takes its turn immediately after the treant on the
+      same initiative count, and it obeys the treant. A tree remains animate for
+      1 day or until it dies, the treant dies, or it is more than 120 feet from
       the treant. The tree then takes root if possible.</p>
     chat: ''
   identifier: animate-trees

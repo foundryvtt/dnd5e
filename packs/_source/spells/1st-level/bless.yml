@@ -1,7 +1,7 @@
 _id: 8dzaICjGy6mTUaUr
 name: Bless
 type: spell
-img: icons/magic/control/buff-flight-wings-blue.webp
+img: icons/magic/symbols/runes-carved-stone-yellow.webp
 system:
   description:
     value: >-
@@ -30,14 +30,17 @@ system:
   target:
     affects:
       type: creature
-      count: '3'
+      count: '@item.level + 2'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -79,6 +82,9 @@ system:
         override: false
       effects:
         - _id: 8rP3gwmXVTgZqYZE
+          level:
+            min: null
+            max: null
       range:
         override: false
       target:
@@ -90,18 +96,28 @@ system:
           choice: false
         override: false
       roll:
-        formula: 1d4
+        formula: ''
         name: ''
         prompt: false
         visible: false
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: bless
 effects:
   - _id: 8rP3gwmXVTgZqYZE
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     changes:
       - key: system.bonuses.abilities.save
         mode: 2
@@ -136,19 +152,22 @@ effects:
     tint: '#ffffff'
     transfer: false
     name: Bless
-    description: ''
+    description: >-
+      <p>Whenever you make an attack roll or a saving throw before the spell
+      ends, you can roll 1d4 and add the number rolled to the attack roll or
+      saving throw.</p>
     statuses: []
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.3.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1772827553614
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    img: icons/magic/control/buff-flight-wings-blue.webp
+    img: icons/magic/symbols/runes-carved-stone-yellow.webp
     type: base
     system: {}
     sort: 0
@@ -160,11 +179,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037349054
-  modifiedTime: 1725992717522
+  modifiedTime: 1772827566043
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!8dzaICjGy6mTUaUr'

@@ -31,13 +31,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: radius
       size: '30'
       contiguous: false
+      stationary: true
+      count: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -143,11 +147,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.3.0
   createdTime: 1724425971879
-  modifiedTime: 1745256798565
+  modifiedTime: 1772659286543
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplSpeakwithP'

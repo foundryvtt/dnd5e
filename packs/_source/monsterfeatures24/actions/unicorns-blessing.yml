@@ -112,8 +112,8 @@ system:
     max: '3'
   description:
     value: >-
-      <p>The [[lookup @name]] touches another creature with its horn and casts
-      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplCureWounds]{Cure
+      <p>The [[lookup @name]]{monster} touches another creature with its horn
+      and casts <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplCureWounds]{Cure
       Wounds}</em> or
       <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplLesserRest]{Lesser
       Restoration}</em> on that creature, using the same spellcasting ability as

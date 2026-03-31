@@ -30,13 +30,16 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: radius
       size: '30'
       contiguous: false
+      count: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -75,7 +78,8 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: FEls4EgTzNFVfue0
       range:
         override: false
       target:
@@ -94,20 +98,70 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: detect-evil-and-good
 sort: 0
 flags: {}
-img: icons/magic/air/air-burst-spiral-blue-gray.webp
-effects: []
+img: icons/creatures/unholy/demon-hairy-winged-pink.webp
+effects:
+  - name: Detect Evil and Good
+    img: icons/creatures/unholy/demon-hairy-winged-pink.webp
+    origin: Compendium.dnd5e.spells.Item.Mzh95utKDPIrjiH8
+    transfer: false
+    _id: FEls4EgTzNFVfue0
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: 600
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>For the duration, you know if there is an aberration, celestial,
+      elemental, fey, fiend, or undead within 30 feet of you, as well as where
+      the creature is located. Similarly, you know if there is a place or object
+      within 30 feet of you that has been magically consecrated or
+      desecrated.</p><p>The spell can penetrate most barriers, but it is blocked
+      by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3
+      feet of wood or dirt.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.0
+      createdTime: 1772820740346
+      modifiedTime: 1772820745402
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!Mzh95utKDPIrjiH8.FEls4EgTzNFVfue0'
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.3.0
   createdTime: 1725037354863
-  modifiedTime: 1725992719417
+  modifiedTime: 1772820740370
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!Mzh95utKDPIrjiH8'

@@ -186,9 +186,14 @@ export default class TraitConfig extends AdvancementConfig {
    * @param {HTMLElement} target  Button that was clicked.
    */
   static async #addChoice(event, target) {
-    this.config.choices.push({ count: 1 });
-    this.selected = this.config.choices.length - 1;
-    await this.advancement.update({ configuration: await this.prepareConfigurationUpdate() });
+    await this.submit({
+      updateData: {
+        configuration: {
+          choices: [...this.config.choices, { count: 1 }],
+          selected: this.config.choices.length
+        }
+      }
+    });
   }
 
   /* -------------------------------------------- */
@@ -202,9 +207,14 @@ export default class TraitConfig extends AdvancementConfig {
   static async #removeChoice(event, target) {
     const input = target.closest("li").querySelector("[name='selectedIndex']");
     const selectedIndex = Number(input.value);
-    this.config.choices.splice(selectedIndex, 1);
-    if ( selectedIndex <= this.selected ) this.selected -= 1;
-    await this.advancement.update({ configuration: await this.prepareConfigurationUpdate() });
+    await this.submit({
+      updateData: {
+        configuration: {
+          deleteChoice: selectedIndex,
+          selected: selectedIndex <= this.selected ? this.selected - 1 : undefined
+        }
+      }
+    });
   }
 
   /* -------------------------------------------- */
@@ -243,34 +253,47 @@ export default class TraitConfig extends AdvancementConfig {
 
   /** @inheritDoc */
   async prepareConfigurationUpdate(configuration={}) {
-    const choicesCollection = foundry.utils.deepClone(this.config.choices);
+    const choicesCollection = configuration.choices ?? foundry.utils.deepClone(this.config._source.choices);
+    const grantsCollection = configuration.grants ?? foundry.utils.deepClone(this.config._source.grants);
 
-    if ( configuration.checked ) {
+    // Remove choice
+    if ( configuration.deleteChoice !== undefined ) {
+      choicesCollection.splice(configuration.deleteChoice, 1);
+      delete configuration.checked;
+    }
+
+    if ( configuration.checked && (configuration.deleteChoice !== this.selected) ) {
       const prefix = `${this.trait}:`;
       const filteredSelected = filteredKeys(configuration.checked);
 
       // Update grants
       if ( this.selected === -1 ) {
-        const filteredPrevious = this.config.grants.filter(k => !k.startsWith(prefix));
+        const filteredPrevious = grantsCollection.filter(k => !k.startsWith(prefix));
         configuration.grants = [...filteredPrevious, ...filteredSelected];
       }
 
       // Update current choice pool
       else {
         const current = choicesCollection[this.selected];
-        const filteredPrevious = current.pool.filter(k => !k.startsWith(prefix));
+        const filteredPrevious = current.pool?.filter(k => !k.startsWith(prefix)) ?? [];
         current.pool = [...filteredPrevious, ...filteredSelected];
       }
+
       delete configuration.checked;
     }
 
     if ( configuration.count ) {
-      choicesCollection[this.selected].count = configuration.count;
+      if ( choicesCollection[this.selected] ) choicesCollection[this.selected].count = configuration.count;
       delete configuration.count;
     }
 
+    if ( configuration.selected !== undefined ) {
+      this.selected = configuration.selected;
+      delete configuration.selected;
+    }
+
     configuration.choices = choicesCollection;
-    configuration.grants ??= Array.from(this.config.grants);
+    configuration.grants ??= Array.from(grantsCollection);
 
     // If one of the expertise modes is selected, filter out any traits that are not of a valid type
     if ( (configuration.mode ?? this.config.mode) !== "default" ) {

@@ -62,6 +62,13 @@
   "dnd5e.rotateArea": "Rotate Area"
 },
 
+"TYPES.HINTS": {
+  "RegionBehavior": {
+    "dnd5e.difficultTerrain": "Mark a region as being difficult terrain and set its type and who it affects.",
+    "dnd5e.rotateArea": "Rotate tokens, tiles, walls, and other objects around a central pivot point."
+  }
+},
+
 "DND5E.title": "Dungeon & Dragons Fifth Edition",
 "DND5E.AbbreviationCR": "CR",
 "DND5E.AbbreviationConc": "Conc.",
@@ -3821,11 +3828,13 @@
     }
   },
   "Hover": "Hover",
+  "HoverSpeed": "{speed} (hover)",
   "Speed": "Combat Speed",
   "Type": {
     "Burrow": "Burrow",
     "Climb": "Climb",
     "Fly": "Fly",
+    "Jump": "Jump",
     "Speed": "Speed",
     "Swim": "Swim",
     "Walk": "Walk"
@@ -4488,6 +4497,10 @@
         "size": {
           "label": "Area Size",
           "hint": "Size of the area of effect on its primary axis."
+        },
+        "stationary": {
+          "label": "Stationary",
+          "hint": "Emanation cannot be moved once placed."
         },
         "type": {
           "label": "Area Type",

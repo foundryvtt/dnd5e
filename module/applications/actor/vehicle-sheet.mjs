@@ -1,4 +1,4 @@
-import { formatCR, formatWeight, getPluralRules, parseDelta } from "../../utils.mjs";
+import { defaultUnits, formatCR, formatLength, formatWeight, getPluralRules, parseDelta } from "../../utils.mjs";
 import CompendiumBrowser from "../compendium-browser.mjs";
 import ContextMenu5e from "../context-menu.mjs";
 import BaseActorSheet from "./api/base-actor-sheet.mjs";
@@ -264,6 +264,13 @@ export default class VehicleActorSheet extends BaseActorSheet {
     context.showTravelSpeed = !!context.system.attributes.travel.speeds.max;
     context.showCombatSpeed = !!context.system.attributes.movement.max
       || (context.editable && !context.showTravelPace && !context.showTravelSpeed);
+    const { movement } = context.system.attributes;
+    const units = movement.units || defaultUnits("length");
+    let combatSpeed = formatLength(movement.max, units, { parts: true });
+    if ( movement.hover && (movement.fly > 0) && (movement.fly >= movement.max) ) {
+      combatSpeed = game.i18n.format("DND5E.MOVEMENT.HoverSpeed", { speed: combatSpeed });
+    }
+    context.combatSpeed = combatSpeed;
     return context;
   }
 

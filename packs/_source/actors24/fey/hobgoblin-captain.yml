@@ -1078,10 +1078,11 @@ items:
         value: >-
           <p>While in a [[lookup @target.template.size
           activity=dE4lg9tZyXtoCb5x]]-foot Emanation originating from the
-          [[lookup @name lowercase]], the [[lookup @name lowercase]] and its
-          allies have Advantage on attack rolls and saving throws, provided the
-          [[lookup @name lowercase]] doesn't have the
-          &amp;Reference[Incapacitated apply=false] condition.</p>
+          [[lookup @name lowercase]]{monster}, the [[lookup @name
+          lowercase]]{monster} and its allies have Advantage on attack rolls and
+          saving throws, provided the [[lookup @name lowercase]]{monster}
+          doesn't have the &amp;Reference[Incapacitated apply=false]
+          condition.</p>
         chat: ''
       identifier: aura-of-authority
       source:
@@ -1186,8 +1187,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two attacks, using [[/item
-          .OZvhmmUFMgHZWnGB]] or [[/item .cryc72bvanyjmNdX]] in any
+          <p>The [[lookup @name lowercase]]{monster} makes two attacks, using
+          [[/item .OZvhmmUFMgHZWnGB]] or [[/item .cryc72bvanyjmNdX]] in any
           combination.</p>
         chat: ''
       identifier: multiattack

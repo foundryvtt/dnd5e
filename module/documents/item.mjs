@@ -21,7 +21,9 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
  * @import { D20RollConfiguration } from "../dice/_types.mjs";
- * @import { ItemContentsTransformer, SpellcastingDescription, SpellScrollConfiguration } from "./_types.mjs";
+ * @import {
+ *  ItemContentsTransformer, ItemRollData, RollDataOptions, SpellcastingDescription, SpellScrollConfiguration
+ * } from "./_types.mjs";
  * @import {
  *   ActivityDialogConfiguration, ActivityMessageConfiguration, ActivityUsageResults, ActivityUseConfiguration
  * } from "./activity/_types.mjs";
@@ -103,7 +105,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
      * @function dnd5e.initializeItemSource
      * @memberof hookEvents
      * @param {Item5e} item     Item for which the data is being initialized.
-     * @param {object} data     Source data being initialized.
+     * @param {object} source   Source data being initialized.
      * @param {object} options  Additional data initialization options.
      */
     if ( options.pack || options.parent?.pack ) Hooks.callAll("dnd5e.initializeItemSource", this, data, options);
@@ -121,6 +123,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         }
       }), options);
     }
+
+    Object.defineProperty(this, "_needsAdvancementMigration", { value: Array.isArray(data.system?.advancement) });
 
     return super._initializeSource(data, options);
   }
@@ -705,7 +709,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       let messageConfig = message;
       let activity = activities[0];
       if ( ((activities.length > 1) || chooseActivity) && !event?.shiftKey ) {
-        activity = await ActivityChoiceDialog.create(this);
+        activity = await ActivityChoiceDialog.create(this, { sheet: dialog.options?.sheet });
       }
       if ( !activity ) return;
       return activity.use(usageConfig, dialogConfig, messageConfig);
@@ -835,9 +839,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /**
    * @inheritdoc
-   * @param {object} [options]
-   * @param {boolean} [options.deterministic] Whether to force deterministic values for data properties that could be
-   *                                          either a die term or a flat term.
+   * @param {RollDataOptions} [options]
+   * @returns {ItemRollData}
    */
   getRollData({ deterministic=false }={}) {
     let data;
@@ -909,7 +912,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const activity = new cls({ type, ...data }, { parent: this });
     if ( activity._preCreate(createData) === false ) return;
 
-    await this.update({ [`system.activities.${activity.id}`]: activity.toObject() });
+    const sort = this.system.activities.size
+      ? Math.max(...this.system.activities.map(a => a.sort)) + CONST.SORT_INTEGER_DENSITY
+      : 0;
+    await this.update({ [`system.activities.${activity.id}`]: { ...activity.toObject(), sort } });
     const created = this.system.activities.get(activity.id);
     if ( renderSheet ) return created.sheet?.render({ force: true });
   }
@@ -979,7 +985,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const advancement = new cls(data, { parent: this });
     if ( advancement._preCreate(createData) === false ) return;
 
-    const update = { [`system.advancement.${advancement.id}`]: advancement.toObject() };
+    let update = { [`system.advancement.${advancement.id}`]: advancement.toObject() };
+    if ( !source && this._needsAdvancementMigration ) update = {
+      "system.==advancement": foundry.utils.mergeObject(
+        this.system.toObject().advancement, { [advancement.id]: advancement.toObject() }
+      )
+    };
     if ( source ) return this.updateSource(update);
     return this.update(update).then(() => {
       if ( renderSheet ) return this.system.advancement.get(advancement.id)?.sheet?.render({ force: true });
@@ -1002,7 +1013,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( !this.system.advancement.has(id) ) throw new Error(`Advancement of ID ${id} could not be found to update`);
 
     const advancement = this.system.advancement.get(id);
-    const update = { [`system.advancement.${id}`]: updates };
+    let update = { [`system.advancement.${id}`]: updates };
+    if ( !source && this._needsAdvancementMigration ) update = {
+      "system.==advancement": foundry.utils.mergeObject(
+        this.system.toObject().advancement, { [id]: updates }, { performDeletions: true }
+      )
+    };
     if ( source ) {
       advancement.updateSource(updates);
       advancement.render();
@@ -1028,9 +1044,14 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const advancement = this.system.advancement?.get(id);
     if ( !advancement ) return this;
 
-    const update = game.release.generation < 14
+    let update = game.release.generation < 14
       ? { [`system.advancement.-=${id}`]: null }
       : { [`system.advancement.${id}`]: _del };
+    if ( !source && this._needsAdvancementMigration ) {
+      const data = this.system.toObject().advancement;
+      delete data[id];
+      update = { "system.==advancement": data };
+    }
     if ( source ) return this.updateSource(update);
 
     return Promise.allSettled(advancement.constructor._apps.get(advancement.uuid)?.map(a => a.close()) ?? [])
@@ -1134,14 +1155,18 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async deleteDialog(options={}) {
+  async deleteDialog({ sheet, ...dialogOptions }={}, operation={}) {
     // If item has advancement, handle it separately
     if ( this.actor?.system.metadata?.supportsAdvancement && !game.settings.get("dnd5e", "disableAdvancements") ) {
       const manager = AdvancementManager.forDeletedItem(this.actor, this.id);
       if ( manager.steps.length ) {
         try {
-          const shouldRemoveAdvancements = await AdvancementConfirmationDialog.forDelete(this);
-          if ( shouldRemoveAdvancements ) return manager.render({ force: true });
+          const shouldRemoveAdvancements = await AdvancementConfirmationDialog.forDelete(this, { sheet });
+          if ( shouldRemoveAdvancements ) {
+            if ( sheet ) sheet._renderChild(manager);
+            else manager.render({ force: true });
+            return;
+          }
           return this.delete({ shouldRemoveAdvancements });
         } catch(err) {
           return;
@@ -1152,23 +1177,46 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Display custom delete dialog when deleting a container with contents
     const count = await this.system.contentsCount;
     if ( count ) {
-      return Dialog.confirm({
-        title: `${game.i18n.format("DOCUMENT.Delete", {type: game.i18n.localize("DND5E.Container")})}: ${this.name}`,
-        content: `<h4>${game.i18n.localize("AreYouSure")}</h4>
-          <p>${game.i18n.format("DND5E.ContainerDeleteMessage", {count})}</p>
-          <label>
-            <input type="checkbox" name="deleteContents">
-            ${game.i18n.localize("DND5E.ContainerDeleteContents")}
-          </label>`,
-        yes: html => {
-          const deleteContents = html.querySelector('[name="deleteContents"]').checked;
-          this.delete({ deleteContents });
+      const type = game.i18n.localize("DND5E.Container");
+      const config = foundry.utils.mergeObject({
+        window: {
+          icon: "fa-solid fa-trash",
+          title: `${game.i18n.format("DOCUMENT.Delete", { type })}: ${this.name}`
         },
-        options: { ...options, jQuery: false }
-      });
+        position: { width: 400 },
+        content: `
+          <p>
+            <strong>${game.i18n.localize("AreYouSure")}</strong>
+            ${game.i18n.format("DND5E.ContainerDeleteMessage", { count })}
+          </p>
+          <label class="checkbox">
+            <span>${game.i18n.localize("DND5E.ContainerDeleteContents")}</span>
+            <input type="checkbox" name="deleteContents">
+          </label>
+        `,
+        yes: { callback: (event, button) => {
+          const deleteContents = button.form.elements.deleteContents.checked;
+          this.delete({ ...operation, deleteContents });
+        }}
+      }, dialogOptions);
+      if ( sheet ) return sheet._confirmDialog(config);
+      return foundry.applications.api.DialogV2.confirm(config);
     }
 
-    return super.deleteDialog(options);
+    if ( sheet ) {
+      const type = game.i18n.localize(this.constructor.metadata.label);
+      return sheet._confirmDialog(foundry.utils.mergeObject({
+        window: { title: `${game.i18n.format("DOCUMENT.Delete", { type })}: ${this.name}` },
+        position: { width: 400 },
+        content: `
+          <p>
+            <strong>${game.i18n.localize("AreYouSure")}</strong> ${game.i18n.format("SIDEBAR.DeleteWarning", { type })}
+          </p>
+        `,
+        yes: { callback: () => this.delete(operation) }
+      }, dialogOptions));
+    }
+    return super.deleteDialog(dialogOptions, operation);
   }
 
   /* -------------------------------------------- */
@@ -1217,10 +1265,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @returns {Promise<object[]>}                Data for items to be created.
    */
   static async createWithContents(items, { container, keepId=false, transformAll, transformFirst }={}) {
-    let depth = 0;
+    let initialDepth = 0;
     if ( container ) {
-      depth = 1 + (await container.system.allContainers()).length;
-      if ( depth > PhysicalItemTemplate.MAX_DEPTH ) {
+      initialDepth = 1 + (await container.system.allContainers()).length;
+      if ( initialDepth > PhysicalItemTemplate.MAX_DEPTH ) {
         ui.notifications.warn(game.i18n.format("DND5E.ContainerMaxDepth", { depth: PhysicalItemTemplate.MAX_DEPTH }));
         return;
       }
@@ -1229,7 +1277,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const createItemData = async (item, containerId, depth) => {
       const o = { container: containerId, depth };
       let newItemData = transformAll ? await transformAll(item, o) : item;
-      if ( transformFirst && (depth === 0) ) newItemData = await transformFirst(newItemData, o);
+      if ( transformFirst && (depth === initialDepth) ) newItemData = await transformFirst(newItemData, o);
       if ( !newItemData ) return;
       if ( newItemData instanceof Item ) newItemData = game.items.fromCompendium(newItemData, {
         clearSort: false, keepId: true, clearOwnership: false
@@ -1246,7 +1294,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     };
 
     const created = [];
-    for ( const item of items ) await createItemData(item, container?.id, depth);
+    for ( const item of items ) await createItemData(item, container?.id, initialDepth);
     return created;
   }
 

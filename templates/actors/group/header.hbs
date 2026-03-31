@@ -6,14 +6,12 @@
                 aria-label="{{ localize "DND5E.Group.PlaceMembers" }}">
             <i class="fa-solid fa-location-dot" inert></i>
         </button>
-        <button type="button" class="short-rest gold-button" data-action="rest" data-type="short" data-tooltip
-                aria-label="{{ localize 'DND5E.REST.Short.Label' }}">
-            <i class="fas fa-utensils" inert></i>
+        {{#each CONFIG.restTypes}}
+        <button type="button" class="{{ @key }}-rest gold-button" data-action="rest" data-type="{{ @key }}" data-tooltip
+                aria-label="{{ localize label }}">
+            <i class="{{ icon }}" inert></i>
         </button>
-        <button type="button" class="long-rest gold-button" data-action="rest" data-type="long" data-tooltip
-                aria-label="{{ localize 'DND5E.REST.Long.Label' }}">
-            <i class="fas fa-campground" inert></i>
-        </button>
+        {{/each}}
     </div>
 
     {{!-- Portrait --}}

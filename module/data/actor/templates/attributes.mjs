@@ -10,6 +10,7 @@ import SensesField from "../../shared/senses-field.mjs";
 const { NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
+ * @import { ActorRollData } from "../../../documents/_types.mjs";
  * @import { ArmorClassData, AttributesCommonData, AttributesCreatureData, HitPointsData } from "./_types.mjs";
  */
 
@@ -142,7 +143,7 @@ export default class AttributesFields {
   /**
    * Prepare a character's AC value from their equipped armor and shield.
    * @this {CharacterData|NPCData|VehicleData}
-   * @param {object} rollData  The Actor's roll data.
+   * @param {ActorRollData} rollData  The Actor's roll data.
    */
   static prepareArmorClass(rollData) {
     const ac = this.attributes.ac;
@@ -238,7 +239,7 @@ export default class AttributesFields {
   /**
    * Prepare concentration data for an Actor.
    * @this {CharacterData|NPCData}
-   * @param {object} rollData  The Actor's roll data.
+   * @param {ActorRollData} rollData  The Actor's roll data.
    */
   static prepareConcentration(rollData) {
     const { concentration } = this.attributes;
@@ -253,7 +254,7 @@ export default class AttributesFields {
   /**
    * Calculate encumbrance details for an Actor.
    * @this {CharacterData|NPCData|VehicleData}
-   * @param {object} rollData  The Actor's roll data.
+   * @param {ActorRollData} rollData           The Actor's roll data.
    * @param {object} [options]
    * @param {Function} [options.validateItem]  Determine whether an item's weight should count toward encumbrance.
    */
@@ -367,7 +368,7 @@ export default class AttributesFields {
   /**
    * Prepare the initiative data for an actor.
    * @this {CharacterData|NPCData|VehicleData}
-   * @param {object} rollData  The Actor's roll data.
+   * @param {ActorRollData} rollData  The Actor's roll data.
    */
   static prepareInitiative(rollData) {
     const init = this.attributes.init ??= {};
@@ -410,7 +411,7 @@ export default class AttributesFields {
   /**
    * Modify movement speeds taking exhaustion and any other conditions into account.
    * @this {CharacterData|NPCData}
-   * @param {object} rollData  The Actor's roll data.
+   * @param {ActorRollData} rollData  The Actor's roll data.
    */
   static prepareMovement(rollData=this.parent.getRollData()) {
     const statuses = this.parent.statuses;
@@ -452,6 +453,7 @@ export default class AttributesFields {
     }
     const baseSpeed = this._source.attributes.movement.walk || this.attributes.movement.fromSpecies?.walk;
     this.attributes.movement.slowed = this.attributes.movement.walk <= (simplifyBonus(baseSpeed, rollData) / 2);
+    this.attributes.movement.jump = (this.abilities?.str.value ?? 0) / 2;
   }
 
   /* -------------------------------------------- */
@@ -496,5 +498,69 @@ export default class AttributesFields {
     this.attributes.spell.attack = ability ? ability.attack : this.attributes.prof;
     this.attributes.spell.dc = ability ? ability.dc : 8 + this.attributes.prof;
     this.attributes.spell.mod = ability ? ability.mod : 0;
+  }
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /**
+   * Track changes to HP when updated and set death save status.
+   * @this {CharacterData|NPCData|VehicleData}
+   * @param {object} changes  The candidate changes to the Document.
+   * @param {object} options  Additional options which modify the update request.
+   * @param {BaseUser} user   The User requesting the document update.
+   */
+  static async preUpdateHP(changes, options, user) {
+    const isDead = this.attributes.hp.value <= 0;
+    if ( isDead && (foundry.utils.getProperty(changes, "system.attributes.hp.value") > 0) ) {
+      foundry.utils.setProperty(changes, "system.attributes.death.success", 0);
+      foundry.utils.setProperty(changes, "system.attributes.death.failure", 0);
+    }
+    foundry.utils.setProperty(options, "dnd5e.hp", { ...this.attributes.hp });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Display concentration challenge if necessary, set bloodied status, and fire damage hook.
+   * @this {CharacterData|NPCData|VehicleData}
+   * @param {object} changed  The differential data that was changed relative to the document's prior values.
+   * @param {object} options  Additional options which modify the update request.
+   * @param {string} userId   The id of the User requesting the document update.
+   */
+  static async onUpdateHP(changed, options, userId) {
+    if ( !changed.system?.attributes?.hp ) return;
+    if ( userId === game.userId ) await this.parent.updateBloodied(options);
+
+    const hp = options.dnd5e?.hp;
+    if ( !hp || options.isRest || options.isAdvancement ) return;
+
+    const curr = this.attributes.hp;
+    const changes = {
+      hp: curr.value - hp.value,
+      temp: curr.temp - hp.temp
+    };
+    changes.total = changes.hp + changes.temp;
+    if ( !Number.isInteger(changes.total) || (changes.total === 0) ) return;
+
+    this.parent._displayTokenEffect(changes);
+    if ( !game.settings.get("dnd5e", "disableConcentration") && (userId === game.userId)
+      && (options.dnd5e?.concentrationCheck !== false)
+      && (changes.total < 0) && ((changes.temp < 0) || (curr.value < curr.effectiveMax)) ) {
+      this.parent.challengeConcentration({ dc: this.parent.getConcentrationDC(-changes.total) });
+    }
+
+    /**
+     * A hook event that fires when an actor is damaged or healed by any means. The actual name
+     * of the hook will depend on the change in hit points.
+     * @function dnd5e.damageActor
+     * @memberof hookEvents
+     * @param {Actor5e} actor                                       The actor that had their hit points reduced.
+     * @param {{hp: number, temp: number, total: number}} changes   The changes to hit points.
+     * @param {object} update                                       The original update delta.
+     * @param {string} userId                                       Id of the user that performed the update.
+     */
+    Hooks.callAll(`dnd5e.${changes.total > 0 ? "heal" : "damage"}Actor`, this.parent, changes, changed, userId);
   }
 }
