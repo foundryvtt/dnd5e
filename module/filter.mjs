@@ -3,6 +3,72 @@
  */
 
 /**
+ * Class for storing a filter definition for easy evaluation.
+ */
+export class Filter {
+  constructor(definition) {
+    this.#definition = definition;
+  }
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * The underlying filter definition.
+   * @type {FilterDescription|FilterDescription[]}
+   */
+  #definition;
+
+  /* -------------------------------------------- */
+
+  /**
+   * Cached result of the filter check.
+   * @type {boolean}
+   */
+  #result;
+
+  /* -------------------------------------------- */
+  /*  Methods                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Check some data against the filter to determine if it matches. Result will be cached between multiple calls.
+   * @param {object} data  Arbitrary data object to check.
+   * @returns {boolean}
+   * @throws
+   */
+  check(data) {
+    if ( this.#result !== undefined ) return this.#result;
+    try {
+      if ( foundry.utils.isEmpty(this.#definition) ) this.#result = true;
+      else this.#result = performCheck(data, this.#definition);
+      return this.#result;
+    } catch(err) {
+      console.error(err.message);
+      return false;
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Clear the cached result of the filter check and perform the check again.
+   * @param {object} data  Arbitrary data object to check.
+   * @returns {boolean}
+   * @throws
+   */
+  recheck(data) {
+    this.#result = undefined;
+    return this.check(data);
+  }
+}
+
+/* -------------------------------------------- */
+/*  Checking Functions                          */
+/* -------------------------------------------- */
+
+/**
  * Check some data against a filter to determine if it matches.
  * @param {object} data                                   Data to check.
  * @param {FilterDescription|FilterDescription[]} filter  Filter to compare against.
