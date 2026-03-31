@@ -2421,7 +2421,6 @@ DND5E.movementTypes = {
   },
   jump: {
     label: "DND5E.MOVEMENT.Type.Jump",
-    deriveSpeed: token => token.actor?.system.attributes?.movement.jump ?? 0,
     hidden: true
   },
   swim: {
