@@ -2607,7 +2607,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       unit ? formatLength(value ?? 0, unit, { parts: true })
         : `${value ?? 0} <span class="units">${units}</span>`
     }</span>`;
-    return Object.entries(CONFIG.DND5E.movementTypes).reduce((html, [k, { label }]) => {
+    return Object.entries(CONFIG.DND5E.movementTypes).reduce((html, [k, { hidden, label }]) => {
+      if ( hidden ) return html;
       const value = movement[k];
       if ( (k === "fly") && movement.hover ) label = game.i18n.format("DND5E.MOVEMENT.HoverSpeed", { speed: label });
       if ( value || (k === "walk") ) html += `

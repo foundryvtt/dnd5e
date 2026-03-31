@@ -2419,6 +2419,10 @@ DND5E.movementTypes = {
     label: "DND5E.MOVEMENT.Type.Fly",
     travel: "air"
   },
+  jump: {
+    label: "DND5E.MOVEMENT.Type.Jump",
+    hidden: true
+  },
   swim: {
     label: "DND5E.MOVEMENT.Type.Swim",
     travel: "water",

@@ -571,7 +571,8 @@ export default class CharacterActorSheet extends BaseActorSheet {
     context.favorites = await this._prepareFavorites();
 
     // Speed
-    context.speed = Object.entries(CONFIG.DND5E.movementTypes).reduce((obj, [k, { label }]) => {
+    context.speed = Object.entries(CONFIG.DND5E.movementTypes).reduce((obj, [k, { hidden, label }]) => {
+      if ( hidden ) return obj;
       const value = attributes.movement[k];
       if ( (k === "fly") && attributes.movement.hover ) {
         label = game.i18n.format("DND5E.MOVEMENT.HoverSpeed", { speed: label });
