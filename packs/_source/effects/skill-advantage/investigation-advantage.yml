@@ -1,0 +1,36 @@
+folder: iDHeF0EnK8tpVcgP
+name: Investigation Advantage
+type: base
+img: icons/tools/scribal/magnifying-glass.webp
+system:
+  changes:
+    - key: system.skills.inv.roll.mode
+      type: add
+      value: 1
+      phase: initial
+disabled: false
+start: null
+duration:
+  value: null
+  units: seconds
+  expiry: null
+  expired: false
+description: ''
+origin: null
+tint: '#ffffff'
+transfer: false
+statuses: []
+showIcon: 1
+sort: 0
+flags: {}
+_stats:
+  coreVersion: '14.354'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+  createdTime: 1769816839365
+  modifiedTime: 1769816839365
+_id: x6PgAFR4cn71cXUc
+_key: '!effects!x6PgAFR4cn71cXUc'
