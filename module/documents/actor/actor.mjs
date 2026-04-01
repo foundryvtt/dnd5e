@@ -3375,6 +3375,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         await this.update({ "system.attributes.exhaustion": 1 });
       }
       if ( collection === "items" ) await this.updateEncumbrance(options);
+      await this._syncTokenSenses();
     }
     super._onCreateDescendantDocuments(parent, collection, documents, data, options, userId);
   }
@@ -3383,7 +3384,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /** @inheritDoc */
   async _onUpdateDescendantDocuments(parent, collection, documents, changes, options, userId) {
-    if ( (userId === game.userId) && (collection === "items") ) await this.updateEncumbrance(options);
+    if ( userId === game.userId ) {
+      if ( collection === "items" ) await this.updateEncumbrance(options);
+      await this._syncTokenSenses();
+    }
     super._onUpdateDescendantDocuments(parent, collection, documents, changes, options, userId);
   }
 
@@ -3397,6 +3401,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       }
       if ( collection === "items" ) await this.updateEncumbrance(options);
       await this._clearFavorites(documents);
+      await this._syncTokenSenses();
     }
     super._onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId);
   }
@@ -3540,6 +3545,42 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       statuses: ["bloodied"],
       showIcon: CONST.ACTIVE_EFFECT_SHOW_ICON?.ALWAYS
     }, { parent: this, keepId: true });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Sync prototype token sight and detection modes to match the actor's current senses.
+   * Called from descendant document hooks when items or effects change.
+   * @returns {Promise<Actor5e>|void}
+   * @protected
+   */
+  async _syncTokenSenses() {
+    if ( !game.settings.get("dnd5e", "senseVisionSync") ) return;
+    if ( !this.system?.attributes?.senses ) return;
+
+    const TokenDocument5e = CONFIG.Token.documentClass;
+    const { sight, detectionModes } = TokenDocument5e.computeSenseOverrides(this.system.attributes.senses);
+
+    // Preserve non-sense detection modes from the stored prototype token
+    const userModes = (this.prototypeToken._source.detectionModes ?? [])
+      .filter(m => !TokenDocument5e.senseDetectionModeIds.has(m.id));
+    const mergedModes = [...userModes, ...detectionModes];
+
+    // Build the update, reset sight to defaults when no senses grant it
+    const update = { detectionModes: mergedModes };
+    update.sight = sight.enabled
+      ? { enabled: true, range: sight.range, visionMode: sight.visionMode }
+      : { range: 0, visionMode: "basic" };
+
+    // Diff check: skip update if nothing changed
+    const currentSource = this.prototypeToken._source;
+    const sightUnchanged = (currentSource.sight?.range === update.sight.range)
+      && (currentSource.sight?.visionMode === update.sight.visionMode)
+      && (!sight.enabled || (currentSource.sight?.enabled === update.sight.enabled));
+    if ( sightUnchanged && foundry.utils.objectsEqual(currentSource.detectionModes, mergedModes) ) return;
+
+    return this.update({ prototypeToken: update });
   }
 
   /* -------------------------------------------- */

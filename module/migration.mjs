@@ -479,6 +479,7 @@ export function migrateActorData(actor, actorData, migrationData, flags={}, { ac
   _migrateActorAC(actorData, updateData);
   _migrateActorFlags(actorData, updateData);
   _migrateActorMovementSenses(actorData, updateData);
+  _migrateActorTokenSenses(actorData, updateData);
 
   // Migrate embedded effects
   if ( actorData.effects ) {
@@ -947,6 +948,37 @@ function _migrateActorMovementSenses(actorData, updateData) {
       const keyPath = `system.attributes.senses.ranges.${key}`;
       if ( foundry.utils.getProperty(actorData, keyPath) === 0 ) updateData[keyPath] = null;
     }
+  }
+  return updateData;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Sync prototype token sight and detection modes from actor senses for existing actors.
+ * @param {object} actorData   Actor data being migrated.
+ * @param {object} updateData  Existing updates being applied to actor. *Will be mutated.*
+ * @returns {object}           Modified version of update data.
+ * @private
+ */
+function _migrateActorTokenSenses(actorData, updateData) {
+  if ( !foundry.utils.isNewerVersion("6.0.0", actorData._stats?.systemVersion) ) return updateData;
+  if ( !game.settings.get("dnd5e", "senseVisionSync") ) return updateData;
+  const ranges = actorData.system?.attributes?.senses?.ranges;
+  if ( !ranges ) return updateData;
+
+  const TokenDocument5e = CONFIG.Token.documentClass;
+  const { sight, detectionModes } = TokenDocument5e.computeSenseOverrides({ ranges });
+  if ( !sight.enabled && !detectionModes.length ) return updateData;
+
+  const existingModes = actorData.prototypeToken?.detectionModes ?? [];
+  const userModes = existingModes.filter(m => !TokenDocument5e.senseDetectionModeIds.has(m.id));
+
+  updateData["prototypeToken.detectionModes"] = [...userModes, ...detectionModes];
+  if ( sight.enabled ) {
+    updateData["prototypeToken.sight.enabled"] = true;
+    updateData["prototypeToken.sight.range"] = sight.range;
+    updateData["prototypeToken.sight.visionMode"] = sight.visionMode;
   }
   return updateData;
 }

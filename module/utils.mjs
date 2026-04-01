@@ -1299,7 +1299,7 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
   // Senses
   else if ( attr.startsWith("attributes.senses.ranges.") ) {
     const key = attr.split(".")[3];
-    label = CONFIG.DND5E.senses[key];
+    label = CONFIG.DND5E.senses[key]?.label;
   }
 
   // Resources

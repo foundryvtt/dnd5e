@@ -91,7 +91,7 @@ export default class MovementSensesConfig extends BaseConfigSheet {
       context.extras = this._prepareExtraFields(context);
       context.types = this.types.map(key => ({
         field: this.subPath ? context.fields[this.subPath].model : context.fields[key],
-        label: this.options.type === "movement" ? CONFIG.DND5E.movementTypes[key].label : CONFIG.DND5E.senses[key],
+        label: this.options.type === "movement" ? CONFIG.DND5E.movementTypes[key].label : CONFIG.DND5E.senses[key]?.label,
         name: this.subPath ? `system.${this.keyPath}.${this.subPath}.${key}` : `system.${this.keyPath}.${key}`,
         value: this.subPath ? context.data[this.subPath][key] : context.data[key],
         placeholder: placeholderData?.[key] ?? ""

@@ -501,6 +501,64 @@ export default class AttributesFields {
   }
 
   /* -------------------------------------------- */
+  /*  Sense-to-Token Sync                         */
+  /* -------------------------------------------- */
+
+  /**
+   * Set prototype token sight and detection modes for a newly created actor.
+   * @this {CharacterData|NPCData}
+   * @param {object} data     The initial data object provided to the document creation request.
+   * @param {object} options  Additional options which modify the creation request.
+   */
+  static async preCreateSenses(data, options) {
+    if ( this.parent._stats?.compendiumSource?.startsWith("Compendium.") ) return;
+    if ( !game.settings.get("dnd5e", "senseVisionSync") ) return;
+    const senses = this.attributes.senses;
+    if ( !senses ) return;
+    const TokenDocument5e = CONFIG.Token.documentClass;
+    const { sight, detectionModes } = TokenDocument5e.computeSenseOverrides(senses);
+    const prototypeToken = {};
+    if ( sight.enabled && !foundry.utils.hasProperty(data, "prototypeToken.sight.range") ) {
+      prototypeToken.sight = { enabled: true, range: sight.range, visionMode: sight.visionMode };
+    }
+    if ( detectionModes.length && !foundry.utils.hasProperty(data, "prototypeToken.detectionModes") ) {
+      prototypeToken.detectionModes = detectionModes;
+    }
+    if ( !foundry.utils.isEmpty(prototypeToken) ) this.parent.updateSource({ prototypeToken });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Update prototype token sight and detection modes when senses are directly edited.
+   * @this {CharacterData|NPCData}
+   * @param {object} changes  The candidate changes to the Document.
+   * @param {object} options  Additional options which modify the update request.
+   */
+  static async preUpdateSenses(changes, options) {
+    if ( !game.settings.get("dnd5e", "senseVisionSync") ) return;
+    const newSenses = foundry.utils.getProperty(changes, "system.attributes.senses");
+    if ( !newSenses?.ranges || foundry.utils.hasProperty(changes, "prototypeToken.detectionModes") ) return;
+
+    // Merge changed ranges with existing ranges to get the full picture
+    const currentRanges = this.attributes.senses.ranges;
+    const mergedRanges = { ...currentRanges, ...newSenses.ranges };
+
+    const TokenDocument5e = CONFIG.Token.documentClass;
+    const { sight, detectionModes } = TokenDocument5e.computeSenseOverrides({ ranges: mergedRanges });
+
+    // Preserve non-sense detection modes
+    const userModes = (this.parent.prototypeToken._source.detectionModes ?? [])
+      .filter(m => !TokenDocument5e.senseDetectionModeIds.has(m.id));
+
+    changes.prototypeToken ??= {};
+    changes.prototypeToken.detectionModes = [...userModes, ...detectionModes];
+    changes.prototypeToken.sight = sight.enabled
+      ? { enabled: true, range: sight.range, visionMode: sight.visionMode }
+      : { range: 0, visionMode: "basic" };
+  }
+
+  /* -------------------------------------------- */
   /*  Socket Event Handlers                       */
   /* -------------------------------------------- */
 
