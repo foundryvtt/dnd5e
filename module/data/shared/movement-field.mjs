@@ -31,34 +31,4 @@ export default class MovementField extends foundry.data.fields.SchemaField {
     Object.entries(fields).forEach(([k, v]) => !v ? delete fields[k] : null);
     super(fields, { label: "DND5E.Movement", ...options });
   }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Apply rules for travel pace to the given skill.
-   * @param {TravelPace5e} pace  The travel pace.
-   * @param {string} skill       The skill.
-   * @returns {{ advantage: boolean, disadvantage: boolean }}
-   */
-  static getTravelPaceMode(pace, skill) {
-    foundry.utils.logCompatibilityWarning(
-      "The `MovementField#getTravelPaceMode` has been moved to `TravelField#getTravelPaceMode.",
-      { since: "DnD5e 5.2", until: "DnD5e 6.0", once: true }
-    );
-    return dnd5e.dataModels.actor.TravelField.getTravelPaceMode(pace, skill);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare movement data.
-   * @this {MovementData}
-   * @param {DataField} field  The movement field.
-   */
-  static prepareData(field) {
-    foundry.utils.logCompatibilityWarning(
-      "The `MovementField#prepareData` is now handled through `TravelField#prepareData`.",
-      { since: "DnD5e 5.2", until: "DnD5e 6.0", once: true }
-    );
-  }
 }

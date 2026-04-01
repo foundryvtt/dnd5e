@@ -572,7 +572,6 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
 
   /** @override */
   _renderChild(app, options={}) {
-    if ( game.release.generation < 14 ) return app.render({ force: true, ...options });
     if ( this.parent ) return this.parent.renderChild(app, options);
     if ( this.window?.windowId ) return app.render({
       force: true, window: { detached: true, windowId: this.window.windowId }, ...options

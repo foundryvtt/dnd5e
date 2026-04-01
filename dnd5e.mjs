@@ -24,7 +24,6 @@ import * as documents from "./module/documents/_module.mjs";
 import * as enrichers from "./module/enrichers.mjs";
 import * as Filter from "./module/filter.mjs";
 import * as migrations from "./module/migration.mjs";
-import ModuleArt from "./module/module-art.mjs";
 import { registerModuleData, registerModuleRedirects, setupModulePacks } from "./module/module-registration.mjs";
 import { default as registry } from "./module/registry.mjs";
 import Tooltips5e from "./module/tooltips.mjs";
@@ -58,16 +57,6 @@ Hooks.once("init", function() {
   globalThis.dnd5e = game.dnd5e = Object.assign(game.system, globalThis.dnd5e);
   utils.log(`Initializing the D&D Fifth Game System - Version ${dnd5e.version}\n${DND5E.ASCII}`);
 
-  /**
-   * Suppress some known deprecations.
-   * @deprecated
-   * @since 5.3.0
-   */
-  CONFIG.compatibility.excludePatterns.push(/numeric #mode/, /CONST\.ACTIVE_EFFECT_MODES/, /ContextMenuEntry#/,
-    /foundry\.data\.operators\.ForcedDeletion/, /foundry\.utils\.buildRelativeUuid/, /CONFIG.ChatMessage.modes/,
-    /core\.rollMode/, /ChatMessage\.applyRollMode/, /Scene#templates/, /MeasuredTemplate/, /MeasuredTemplateDocument/,
-    /core\.gridTemplates/, /core\.coneTemplateType/, /ControlIcon#refresh/);
-
   // Record Configuration Values
   CONFIG.DND5E = DND5E;
   CONFIG.ActiveEffect.documentClass = documents.ActiveEffect5e;
@@ -75,6 +64,7 @@ Hooks.once("init", function() {
   CONFIG.Actor.collection = dataModels.collection.Actors5e;
   CONFIG.Actor.documentClass = documents.Actor5e;
   CONFIG.Adventure.documentClass = documents.Adventure5e;
+  CONFIG.Canvas.layers.tokens.layerClass = canvas.layers.TokenLayer5e;
   CONFIG.ChatMessage.documentClass = documents.ChatMessage5e;
   CONFIG.Combat.documentClass = documents.Combat5e;
   CONFIG.Combatant.documentClass = documents.Combatant5e;
@@ -102,15 +92,9 @@ Hooks.once("init", function() {
   CONFIG.ui.items = applications.item.ItemDirectory5e;
   CONFIG.ux.DragDrop = DragDrop5e;
 
-  if ( game.release.generation < 14 ) CONFIG.Token.layerClass = canvas.layers.TokenLayer5e;
-  CONFIG.Canvas.layers.tokens.layerClass = canvas.layers.TokenLayer5e;
-
   // Register System Settings
   registerSystemSettings();
   registerSystemKeybindings();
-
-  // Configure module art
-  game.dnd5e.moduleArt = new ModuleArt();
 
   // Configure bastions
   game.dnd5e.bastion = new documents.Bastion();
@@ -453,7 +437,6 @@ Hooks.once("setup", function() {
   _configureConsumableAttributes();
 
   CONFIG.DND5E.trackableAttributes = expandAttributeList(CONFIG.DND5E.trackableAttributes);
-  game.dnd5e.moduleArt.registerModuleArt();
   Tooltips5e.activateListeners();
   game.dnd5e.tooltips.observe();
 

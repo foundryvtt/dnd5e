@@ -17,7 +17,7 @@ export default class AdvancementCollectionField extends MappingField {
     // Advancements are created via updates to the parent Item. Update deltas that return from the server are not
     // cleaned as they are assumed to be good. For sparse data models, this means those sparse fields are not present
     // in the update delta since they do not survive serialization. Therefore, we must always clean sparse data models.
-    if ( game.release.generation > 13 ) options = { ...options, clean: { copy: false } };
+    options = { ...options, clean: { copy: false } };
     const advancement = Object.values(super.initialize(value, model, options));
     return new AdvancementCollection(model, advancement);
   }
@@ -42,17 +42,6 @@ class AdvancementCollection extends Collection {
 
   /* -------------------------------------------- */
   /*  Properties                                  */
-  /* -------------------------------------------- */
-
-  /** @deprecated */
-  get length() {
-    foundry.utils.logCompatibilityWarning(
-      "Checking advancement on an item should no longer use `length` but `size`.",
-      { since: "DnD5e 5.2", until: "DnD5e 6.0" }
-    );
-    return this.size;
-  }
-
   /* -------------------------------------------- */
 
   /**

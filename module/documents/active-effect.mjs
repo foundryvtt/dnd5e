@@ -242,9 +242,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   applyActivity(item, change) {
     const changes = {};
     const apply = (activity, key) => {
-      const c = (game.release.generation > 13)
-        ? this.constructor.applyChange(activity, { ...change, key })
-        : this.apply(activity, { ...change, key });
+      const c = this.constructor.applyChange(activity, { ...change, key });
       Object.entries(c).forEach(([k, v]) => changes[`system.activities.${activity.id}.${k}`] = v);
     };
     if ( change.key.startsWith("system.activities.") ) {
@@ -884,21 +882,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /* -------------------------------------------- */
 
   /**
-   * Record another effect as a dependent of this one.
-   * @param {...ActiveEffect5e} dependent  One or more dependent effects.
-   * @returns {Promise<ActiveEffect5e>}
-   */
-  addDependent(...dependent) {
-    foundry.utils.logCompatibilityWarning(
-      "Dependent documents are now tracked using the `dependentOn` flag on the document itself.",
-      { since: "DnD5e 5.2", until: "DnD5e 6.0", once: true }
-    );
-    return Promise.all(dependent.map(d => d.setFlag("dnd5e", "dependentOn", this.uuid))).then(() => this);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Retrieve a list of dependent effects.
    * @returns {Array<ActiveEffect5e|Item5e>}
    */
@@ -989,9 +972,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     else properties.push("DND5E.EffectType.Passive");
     if ( this.type === "enchantment" ) properties.push("DND5E.ENCHANTMENT.Label");
     properties = properties.map(p => game.i18n.localize(p));
-    properties.unshift(...this.statuses.map(id => game.release.generation < 14
-      ? CONFIG.statusEffects.find(s => s.id === id)?.name
-      : CONFIG.statusEffects[id]?.name).filter(_ => _));
+    properties.unshift(...this.statuses.map(id => CONFIG.statusEffects[id]?.name).filter(_ => _));
 
     return {
       content: await foundry.applications.handlebars.renderTemplate(
@@ -1026,87 +1007,4 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     if ( sheet ) return sheet._confirmDialog(config);
     return foundry.applications.api.DialogV2.confirm(config);
   }
-}
-
-/**
- * @deprecated
- * @since 5.3.0
- */
-if ( !("applyChange" in ActiveEffect) ) {
-  const original = {
-    applyField: ActiveEffect.applyField,
-    _applyLegacy: ActiveEffect.prototype._applyLegacy,
-    _applyAdd: ActiveEffect.prototype._applyAdd,
-    _applyUpgrade: ActiveEffect.prototype._applyUpgrade
-  };
-
-  /** @ignore */
-  ActiveEffect5e.applyField = function(model, change, field) {
-    field ??= model.schema?.getField?.(change.key);
-    const current = foundry.utils.getProperty(model, change.key);
-    const modes = CONST.ACTIVE_EFFECT_MODES;
-    if ( (field instanceof StringField) && (change.mode === modes.OVERRIDE) && change.value.includes?.("{}") ) {
-      change.value = change.value.replace("{}", current ?? "");
-    }
-    if ( (current === null) && [modes.UPGRADE, modes.DOWNGRADE].includes(change.mode) ) change.mode = modes.OVERRIDE;
-    if ( (field instanceof SetField) && (change.mode === modes.ADD) && (foundry.utils.getType(current) === "Set") ) {
-      for ( const value of field._castChangeDelta(change.value) ) {
-        const neg = value.replace(/^\s*-\s*/, "");
-        if ( neg !== value ) current.delete(neg);
-        else current.add(value);
-      }
-      return current;
-    }
-    if ( (current === undefined) && change.key.startsWith("system.") ) {
-      let keyPath = change.key;
-      let mappingField = field;
-      while ( !(mappingField instanceof MappingField) && mappingField ) {
-        if ( mappingField.name ) keyPath = keyPath.substring(0, keyPath.length - mappingField.name.length - 1);
-        mappingField = mappingField.parent;
-      }
-      if ( mappingField && (foundry.utils.getProperty(model, keyPath) === undefined) ) {
-        const created = mappingField.model.initialize(mappingField.model.getInitialValue(), mappingField);
-        foundry.utils.setProperty(model, keyPath, created);
-      }
-    }
-    if ( (field instanceof ObjectField) || (field instanceof SchemaField) ) {
-      change = { ...change, value: parseOrString(change.value) };
-    }
-    return original.applyField.call(this, model, change, field);
-  };
-
-  /** @ignore */
-  ActiveEffect5e.prototype._applyLegacy = function(actor, change, changes) {
-    if ( this.system._applyLegacy?.(actor, change, changes) === false ) return;
-
-    // Double-check whether the target should be treated as a formula if the key has been modified
-    if ( ActiveEffect5e.FORMULA_FIELDS.has(change.key) ) {
-      const field = new FormulaField({ deterministic: change.key !== "system.damageBonus" });
-      return { [change.key]: this.constructor.applyField(actor, change, field) };
-    }
-
-    original._applyLegacy.call(this, actor, change, changes);
-  };
-
-  /** @ignore */
-  ActiveEffect5e.prototype._applyAdd = function(actor, change, current, delta, changes) {
-    if ( current instanceof Set ) {
-      const handle = v => {
-        const neg = v.replace(/^\s*-\s*/, "");
-        if ( neg !== v ) current.delete(neg);
-        else current.add(v);
-      };
-      if ( Array.isArray(delta) ) delta.forEach(item => handle(item));
-      else if ( delta instanceof Set ) for ( const item of delta ) handle(item);
-      else handle(delta);
-      return;
-    }
-    original._applyAdd.call(this, actor, change, current, delta, changes);
-  };
-
-  /** @ignore */
-  ActiveEffect5e.prototype._applyUpgrade = function(actor, change, current, delta, changes) {
-    if ( current === null ) return this._applyOverride(actor, change, current, delta, changes);
-    original._applyUpgrade.call(this, actor, change, current, delta, changes);
-  };
 }

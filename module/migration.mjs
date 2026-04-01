@@ -67,9 +67,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
   // Migrate World Items
   const items = game.items.map(i => [i, true])
     .concat(Array.from(game.items.invalidDocumentIds).map(id => [game.items.getInvalid(id), false]));
-  const mergeOptions = game.release.generation > 13
-    ? { inplace: false, applyOperators: true }
-    : { inplace: false, performDeletions: true };
+  const mergeOptions = { inplace: false, applyOperators: true };
   for ( const [item, valid] of items ) {
     try {
       const flags = { bypassVersionCheck, persistSourceMigration: false };
@@ -496,9 +494,7 @@ export function migrateActorData(actor, actorData, migrationData, flags={}, { ac
 
   // Migrate Owned Items
   if ( !actorData.items ) return updateData;
-  const mergeOptions = game.release.generation > 13
-    ? { inplace: false, applyOperators: true }
-    : { inplace: false, performDeletions: true };
+  const mergeOptions = { inplace: false, applyOperators: true };
   const items = actor.items.reduce((arr, i) => {
     // Migrate the Owned Item
     const itemData = i instanceof CONFIG.Item.documentClass ? i.toObject() : i;
