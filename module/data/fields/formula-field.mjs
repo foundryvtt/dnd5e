@@ -43,7 +43,7 @@ export default class FormulaField extends foundry.data.fields.StringField {
   /** @inheritDoc */
   _toInput(config) {
     const input = super._toInput(config);
-    if ( (input.tagName !== "INPUT") || (game.release.generation < 14) ) return input;
+    if ( input.tagName !== "INPUT" ) return input;
     config.value ??= this.getInitialValue({}) ?? "";
     return foundry.applications.elements.HTMLFormulaInputElement.create(config);
   }

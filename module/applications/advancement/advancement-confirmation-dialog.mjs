@@ -109,19 +109,7 @@ export default class AdvancementConfirmationDialog extends Dialog5e {
    * @param {ApplicationV2} [config.sheet]    Sheet to render the dialog as a child of.
    * @returns {Promise<boolean|null>}  Resolves with whether advancements should be unapplied. Rejects with null.
    */
-  static createDialog(config, _title, _message, _continueButton) {
-    if ( config instanceof Item ) {
-      foundry.utils.logCompatibilityWarning(
-        "AdvancementConfirmationDialog.createDialog now takes a single config object rather than positional arguments.",
-        { since: "DnD5e 5.3", until: "DnD5e 6.0" }
-      );
-      config = {
-        item: config,
-        title: _title,
-        message: _message,
-        continueButton: _continueButton
-      };
-    }
+  static createDialog(config) {
     const { item, title, message, continueButton, sheet } = config;
     return new Promise((resolve, reject) => {
       const dialog = new this({

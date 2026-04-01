@@ -124,7 +124,6 @@ export default class JournalEntrySheet5e extends foundry.applications.sheets.jou
    * @returns {Promise<ApplicationV2>}
    */
   _renderChild(app, options={}) {
-    if ( game.release.generation < 14 ) return app.render({ force: true, ...options });
     if ( this.parent ) return this.parent.renderChild(app, options);
     return this.renderChild(app, options);
   }

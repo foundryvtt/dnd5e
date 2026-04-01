@@ -459,16 +459,14 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       }));
     }
     changes.sort((a, b) => a.priority - b.priority);
-    if ( game.release.generation > 13 ) foundry.documents.ActiveEffect._shimChanges?.(changes);
+    foundry.documents.ActiveEffect._shimChanges?.(changes);
 
     // Apply all changes
     const overrides = {};
     const replacementData = this.getRollData();
     for ( const change of changes ) {
       if ( !change.key ) continue;
-      const changes = (game.release.generation > 13)
-        ? change.effect.constructor.applyChange(this, change, { replacementData })
-        : change.effect.apply(this, change);
+      const changes = change.effect.constructor.applyChange(this, change, { replacementData });
       Object.assign(overrides, changes);
     }
 
@@ -956,7 +954,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const activity = this.system.activities?.get(id);
     if ( !activity ) return this;
     await Promise.allSettled(activity.constructor._apps.get(activity.uuid)?.map(a => a.close()) ?? []);
-    if ( game.release.generation < 14 ) return this.update({ [`system.activities.-=${id}`]: null });
     return this.update({ [`system.activities.${id}`]: _del });
   }
 
@@ -968,20 +965,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @param {object} [data]                        Data to use when creating the advancement.
    * @param {object} [options]
    * @param {boolean} [options.renderSheet]        Should the sheet be rendered after creation?
-   * @param {boolean} [options.showConfig]         Deprecated, use `renderSheet` instead.
    * @param {boolean} [options.source=false]       Should a source-only update be performed?
    * @returns {Promise<AdvancementConfig>|Item5e}  Promise for advancement config for new advancement if source
    *                                               is `false`, or item with newly added advancement.
    */
-  createAdvancement(type, data={}, { renderSheet=true, showConfig, source=false }={}) {
-    if ( showConfig !== undefined ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `showConfig` options in `createAdvancement` has been deprecated and replaced with `renderSheet`.",
-        { since: "DnD5e 5.2", until: "DnD5e 6.0" }
-      );
-      renderSheet = showConfig;
-    }
-
+  createAdvancement(type, data={}, { renderSheet=true, source=false }={}) {
     if ( !this.system.advancement ) return this;
 
     const config = CONFIG.DND5E.advancementTypes[type];
@@ -1055,9 +1043,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const advancement = this.system.advancement?.get(id);
     if ( !advancement ) return this;
 
-    let update = game.release.generation < 14
-      ? { [`system.advancement.-=${id}`]: null }
-      : { [`system.advancement.${id}`]: _del };
+    let update = { [`system.advancement.${id}`]: _del };
     if ( !source && this._needsAdvancementMigration ) {
       const data = this.system.toObject().advancement;
       delete data[id];

@@ -418,7 +418,6 @@ export default function ApplicationV2Mixin(Base, { handlebars=true }={}) {
      * @returns {object}
      */
     _detachOptions() {
-      if ( game.release.generation < 14 ) return {};
       const { windowId } = (this.parent ?? this).window ?? {};
       return windowId ? { window: { detached: true, windowId } } : {};
     }
@@ -432,7 +431,6 @@ export default function ApplicationV2Mixin(Base, { handlebars=true }={}) {
      * @returns {Promise<ApplicationV2>}
      */
     _renderChild(app, options={}) {
-      if ( game.release.generation < 14 ) return app.render({ force: true, ...options });
       if ( this.parent ) return this.parent.renderChild(app, options);
       return this.renderChild(app, options);
     }

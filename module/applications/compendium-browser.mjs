@@ -1111,10 +1111,7 @@ export default class CompendiumBrowser extends Application5e {
         && (!types.size || !p.metadata.flags.dnd5e?.types || new Set(p.metadata.flags.dnd5e.types).intersects(types)))
 
       // Generate an index based on the needed fields
-      .map(async p => await Promise.all((await p.getIndex({ fields: Array.from(indexFields) })
-
-        // Apply module art to the new index
-        .then(index => game.dnd5e.moduleArt.apply(index)))
+      .map(async p => await Promise.all((await p.getIndex({ fields: Array.from(indexFields) }))
 
         // Derive source values
         .map(i => {

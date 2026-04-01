@@ -238,18 +238,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       foundry.utils.setProperty(source, "flags.dnd5e.persistSourceMigration", true);
     }
 
-    source = super._initializeSource(source, options);
-    const pack = game.packs.get(options.pack);
-    if ( !source._id || !pack || !game.compendiumArt.enabled ) return source;
-    const uuid = pack.getUuid(source._id);
-    const art = game.dnd5e.moduleArt.map.get(uuid);
-    if ( art?.actor || art?.token ) {
-      if ( art.actor ) source.img = art.actor;
-      if ( typeof art.token === "string" ) source.prototypeToken.texture.src = art.token;
-      else if ( art.token ) foundry.utils.mergeObject(source.prototypeToken, art.token);
-      Actor5e.applyCompendiumArt(source, pack, art);
-    }
-    return source;
+    return super._initializeSource(source, options);
   }
 
   /* -------------------------------------------- */
@@ -348,7 +337,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /** @inheritDoc */
   applyActiveEffects(phase) {
-    if ( game.release.generation < 14 ) phase ??= "initial";
     if ( (this.system?.prepareEmbeddedData instanceof Function) && (phase === "initial") ) {
       this.system.prepareEmbeddedData();
     }
@@ -626,21 +614,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const model = CONFIG.DND5E.spellcasting[type];
     if ( (allowed === false) || !model.slots ) return;
 
-    // Check for deprecated overrides.
-    if ( model.isSingleLevel ) {
-      if ( foundry.utils.getDefiningClass(this, "computePactProgression") !== Actor5e ) {
-        foundry.utils.logCompatibilityWarning("Actor5e.computePactProgression is deprecated. Please use "
-          + "SpellcastingModel#computeProgression instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
-        this.computePactProgression(progression, actor, cls, spellcasting, count);
-        return;
-      }
-    } else if ( foundry.utils.getDefiningClass(this, "computeLeveledProgression") !== Actor5e ) {
-      foundry.utils.logCompatibilityWarning("Actor5e.computeLeveledProgression is deprecated. Please use "
-        + "SpellcastingModel#computeProgression instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
-      this.computeLeveledProgression(progression, actor, cls, spellcasting, count);
-      return;
-    }
-
     // Otherwise proceed with calculation.
     model.computeProgression(progression, actor, cls, spellcasting, count);
   }
@@ -669,21 +642,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const allowed = Hooks.call(`dnd5e.prepare${type.capitalize()}Slots`, spells, actor, progression);
     if ( allowed === false ) return;
     const model = CONFIG.DND5E.spellcasting[type];
-
-    // Check for deprecated overrides.
-    if ( model.isSingleLevel ) {
-      if ( foundry.utils.getDefiningClass(this, "preparePactSlots") !== Actor5e ) {
-        foundry.utils.logCompatibilityWarning("Actor5e.preparePactSlots is deprecated. Please use "
-          + "SpellcastingModel#prepareSlots instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
-        this.preparePactSlots(spells, actor, progression);
-        return;
-      }
-    } else if ( foundry.utils.getDefiningClass(this, "prepareLeveledSlots") !== Actor5e ) {
-      foundry.utils.logCompatibilityWarning("Actor5e.prepareLeveledSlots is deprecated. Please use "
-        + "SpellcastingModel#prepareSlots instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
-      this.prepareLeveledSlots(spells, actor, progression);
-      return;
-    }
 
     // Otherwise proceed with calculation.
     model.prepareSlots(spells, actor, progression);
@@ -3587,71 +3545,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   static getDefaultArtwork(actorData={}) {
     const img = CONFIG.DND5E.defaultArtwork.Actor[actorData.type];
     return img ? { img, texture: { src: img } } : super.getDefaultArtwork(actorData);
-  }
-
-  /* -------------------------------------------- */
-  /*  Deprecations                                */
-  /* -------------------------------------------- */
-
-  /**
-   * @deprecated since 5.1
-   * @ignore
-   */
-  static computeLeveledProgression(progression, actor, cls, spellcasting, count) {
-    foundry.utils.logCompatibilityWarning("Actor5e.computeLeveledProgression is deprecated. Please use "
-      + "SpellcastingModel#computeProgression instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
-    CONFIG.DND5E.spellcasting.spell.computeProgression(progression, actor, cls, spellcasting, count);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * @deprecated since 5.1
-   * @ignore
-   */
-  static computePactProgression(progression, actor, cls, spellcasting, count) {
-    foundry.utils.logCompatibilityWarning("Actor5e.computePactProgression is deprecated. Please use "
-      + "SpellcastingModel#computeProgression instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
-    CONFIG.DND5E.spellcasting.pact.computeProgression(progression, actor, cls, spellcasting, count);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * @deprecated since 5.1
-   * @ignore
-   */
-  static prepareAltSlots(spells, actor, progression, key, table) {
-    foundry.utils.logCompatibilityWarning("Actor.prepareAltSlots is deprecated. Please use "
-      + "SpellcastingModel#prepareSlots instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
-    const model = CONFIG.DND5E.spellcasting[key];
-    if ( !model ) return;
-    if ( table ) model.table = table;
-    model.prepareSlots(spells, actor, progression);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * @deprecated since 5.1
-   * @ignore
-   */
-  static prepareLeveledSlots(spells, actor, progression) {
-    foundry.utils.logCompatibilityWarning("Actor.prepareLeveledSlots is deprecated. Please use "
-      + "SpellcastingModel#prepareSlots instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
-    CONFIG.DND5E.spellcasting.spell.prepareSlots(spells, actor, progression);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * @deprecated since 5.1
-   * @ignore
-   */
-  static preparePactSlots(spells, actor, progression) {
-    foundry.utils.logCompatibilityWarning("Actor.preparePactSlots is deprecated. Please use "
-      + "SpellcastingModel#prepareSlots instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
-    CONFIG.DND5E.spellcasting.pact.prepareSlots(spells, actor, progression);
   }
 }
 

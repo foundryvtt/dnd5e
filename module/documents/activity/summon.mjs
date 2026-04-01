@@ -161,7 +161,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
     const tokensData = [];
     const sheet = this.actor?.sheet;
     const { windowId } = (sheet?.parent ?? sheet)?.window ?? {};
-    const minimize = (game.release.generation < 14 || !windowId) && !sheet?._minimized;
+    const minimize = !windowId && !sheet?._minimized;
     if ( minimize ) await sheet?.minimize();
     try {
       // Figure out where to place the summons

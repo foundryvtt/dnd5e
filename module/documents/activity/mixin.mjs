@@ -769,9 +769,7 @@ export default function ActivityMixin(Base) {
       switch ( button.dataset.action ) {
         case "consumeResource": return !!message.system.deltas;
         case "refundResource": return !message.system.deltas;
-        case "placeTemplate":
-          return !game.user.can(game.release.generation < 14 ? "TEMPLATE_CREATE" : "REGION_CREATE")
-            || !game.canvas.scene;
+        case "placeTemplate": return !game.user.can("REGION_CREATE") || !game.canvas.scene;
       }
       return false;
     }
