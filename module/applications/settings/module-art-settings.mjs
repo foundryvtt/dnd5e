@@ -84,6 +84,6 @@ export default class ModuleArtSettingsConfig extends FormApplication {
   /** @inheritDoc */
   async _updateObject(event, formData) {
     await game.settings.set("dnd5e", "moduleArtConfiguration", foundry.utils.expandObject(formData));
-    return SettingsConfig.reloadConfirm({world: true});
+    return foundry.applications.settings.SettingsConfig.reloadConfirm({world: true});
   }
 }
