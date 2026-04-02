@@ -345,7 +345,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
    * @returns {{ name: string, nameHTML: string, uuid: string }}
    */
   gearPresentationData() {
-    const compendiumSrc = fromUuidSync(this.parent._stats.compendiumSource);
+    const compendiumSrc = fromUuidSync(this.parent._stats.compendiumSource, { strict: false });
     const flags = this.parent.getFlag("dnd5e", "gear") ?? {};
     const useCompendiumCopy = this.metadata.compendiumGearSource && compendiumSrc && (flags.preserve !== true);
     const enchantment = this.parent.effects.get(flags.effectId);
