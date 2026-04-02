@@ -1720,7 +1720,7 @@ const LISTENER = Symbol("enricherListener");
  */
 function _addListeners(buttons, handler) {
   buttons.forEach(button => {
-    // TODO: Remove this fix in DnD5e 6.0 when https://github.com/foundryvtt/foundryvtt/issues/13558 is fixed
+    // TODO: Remove this fix when https://github.com/foundryvtt/foundryvtt/issues/13558 is fixed
     button.removeEventListener("click", button[LISTENER]);
     button[LISTENER] = event => handler(event, event.currentTarget);
     button.addEventListener("click", button[LISTENER]);
