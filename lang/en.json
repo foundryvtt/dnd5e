@@ -292,6 +292,10 @@
     },
     "effects": {
       "element": {
+        "applyDuration": {
+          "label": "Apply Activity Duration",
+          "hint": "Override this effect's duration with the activity's duration when applied to a target."
+        },
         "level": {
           "label": "Level Limit",
           "hint": "Range of levels required to apply this effect.",

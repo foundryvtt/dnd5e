@@ -1,9 +1,10 @@
 /**
  * @typedef EffectApplicationData
- * @property {string} _id  ID of the effect to apply.
+ * @property {string} _id              ID of the effect to apply.
+ * @property {boolean} applyDuration   Override effect's duration with the activity's duration when applied.
  * @property {object} level
- * @property {number} level.min  Minimum level at which this effect can be applied.
- * @property {number} level.max  Maximum level at which this effect can be applied.
+ * @property {number} level.min        Minimum level at which this effect can be applied.
+ * @property {number} level.max        Maximum level at which this effect can be applied.
  */
 
 /**
