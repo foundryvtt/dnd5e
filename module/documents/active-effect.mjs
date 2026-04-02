@@ -52,6 +52,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     "system.attributes.encumbrance.multipliers.heavilyEncumbered",
     "system.attributes.encumbrance.multipliers.maximum",
     "system.attributes.encumbrance.multipliers.overall",
+    "system.damageBonus",
     "save.dc.bonus"
   ]);
 
@@ -345,6 +346,13 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /** @inheritDoc */
   static _applyChangeUnguided(actor, change, changes, {replacementData}={}) {
     if ( change.effect.system._applyLegacy?.(actor, change, changes) === false ) return;
+
+    // Double-check whether the target should be treated as a formula if the key has been modified
+    if ( ActiveEffect5e.FORMULA_FIELDS.has(change.key) ) {
+      const field = new FormulaField({ deterministic: true });
+      return { [change.key]: this.applyField(actor, change, field) };
+    }
+
     super._applyChangeUnguided(actor, change, changes, {replacementData});
   }
 
