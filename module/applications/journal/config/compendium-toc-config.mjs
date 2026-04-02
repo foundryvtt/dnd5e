@@ -75,9 +75,7 @@ export default class CompendiumTOCConfig extends Application5e {
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
 
-    // TODO: Ideally this would be `getIndex({ fields: ["flags.dnd5e.type", "flags.dnd5e.position"] })`
-    // but that doesn't seem to properly update the flags when they are updated
-    const docs = await this.compendium.getDocuments();
+    const docs = await this.compendium.getIndex({ fields: ["flags.dnd5e.type", "flags.dnd5e.position"] });
     const counts = {};
     const chapterOptions = docs
       .reduce((arr, doc) => {
