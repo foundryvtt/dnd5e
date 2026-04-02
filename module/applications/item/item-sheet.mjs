@@ -950,7 +950,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     const options = { parent: this.item, keepOrigin: false };
 
     if ( effect.type === "enchantment" ) {
-      effectData.origin ??= effect.parent.uuid;
+      effectData.origin ??= effect.parent?.uuid;
       options.keepOrigin = true;
       options.dnd5e = {
         enchantmentProfile: effect.id,
