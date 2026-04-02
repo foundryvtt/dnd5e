@@ -1,5 +1,5 @@
 import LocalDocumentField from "../../fields/local-document-field.mjs";
-const { HTMLField, SchemaField, StringField } = foundry.data.fields;
+const { HTMLField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * @import { DetailsCommonData, DetailsCreatureData } from "./_types.mjs";
@@ -16,8 +16,8 @@ export default class DetailsField {
   static get common() {
     return {
       biography: new SchemaField({
-        value: new HTMLField({label: "DND5E.Biography"}),
-        public: new HTMLField({label: "DND5E.BiographyPublic"})
+        value: new HTMLField({ label: "DND5E.Biography" }),
+        public: new HTMLField({ label: "DND5E.BiographyPublic" })
       }, {label: "DND5E.Biography"})
     };
   }
@@ -30,10 +30,11 @@ export default class DetailsField {
    */
   static get creature() {
     return {
-      alignment: new StringField({required: true, label: "DND5E.Alignment"}),
-      ideal: new StringField({required: true, label: "DND5E.Ideals"}),
-      bond: new StringField({required: true, label: "DND5E.Bonds"}),
-      flaw: new StringField({required: true, label: "DND5E.Flaws"}),
+      alignment: new StringField({ required: true, label: "DND5E.Alignment" }),
+      ideal: new StringField({ required: true, label: "DND5E.Ideals" }),
+      level: new NumberField({ integer: true, min: 0, initial: 0, persisted: false }),
+      bond: new StringField({ required: true, label: "DND5E.Bonds" }),
+      flaw: new StringField({ required: true, label: "DND5E.Flaws" }),
       race: new LocalDocumentField(foundry.documents.BaseItem, {
         required: true, fallback: true, label: "DND5E.Species"
       })

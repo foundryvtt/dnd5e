@@ -24,9 +24,14 @@ export default class AttributesFields {
    */
   static get armorClass() {
     return {
+      armor: new NumberField({ integer: true, min: 0, initial: 10, persisted: false }),
+      bonus: new FormulaField({ deterministic: true, persisted: false }),
       calc: new StringField({ initial: "default", label: "DND5E.ArmorClassCalculation" }),
       flat: new NumberField({ required: true, integer: true, min: 0, label: "DND5E.ArmorClassFlat" }),
-      formula: new FormulaField({ deterministic: true, label: "DND5E.ArmorClassFormula" })
+      cover: new NumberField({ integer: true, min: 0, initial: 0, persisted: false }),
+      formula: new FormulaField({ deterministic: true, label: "DND5E.ArmorClassFormula" }),
+      min: new FormulaField({ deterministic: true, persisted: false }),
+      shield: new NumberField({ integer: true, min: 0, initial: 0, persisted: false })
     };
   }
 
@@ -56,6 +61,20 @@ export default class AttributesFields {
   static get common() {
     return {
       ac: new SchemaField(this.armorClass, { label: "DND5E.ArmorClass" }),
+      encumbrance: new SchemaField({
+        bonuses: new SchemaField({
+          encumbered: new FormulaField({ deterministic: true }),
+          heavilyEncumbered: new FormulaField({ deterministic: true }),
+          maximum: new FormulaField({ deterministic: true }),
+          overall: new FormulaField({ deterministic: true })
+        }),
+        multipliers: new SchemaField({
+          encumbered: new FormulaField({ deterministic: true, initial: "1" }),
+          heavilyEncumbered: new FormulaField({ deterministic: true, initial: "1" }),
+          maximum: new FormulaField({ deterministic: true, initial: "1" }),
+          overall: new FormulaField({ deterministic: true, initial: "1" })
+        })
+      }, { persisted: false }),
       init: new RollConfigField({
         ability: "",
         bonus: new FormulaField({ required: true, label: "DND5E.InitiativeBonus" })
@@ -75,9 +94,15 @@ export default class AttributesFields {
       attunement: new SchemaField({
         max: new NumberField({
           required: true, nullable: false, integer: true, min: 0, initial: 3, label: "DND5E.AttunementMax"
-        })
+        }),
+        value: new NumberField({ integer: true, min: 0, initial: 0, persisted: false })
       }, { label: "DND5E.Attunement" }),
       senses: new SensesField(),
+      spell: new SchemaField({
+        attack: new NumberField({ integer: true }),
+        dc: new NumberField({ integer: true }),
+        mod: new NumberField({ integer: true })
+      }, { persisted: false }),
       spellcasting: new StringField({ required: true, blank: true, label: "DND5E.SpellAbility" }),
       exhaustion: new NumberField({
         required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.Exhaustion"
@@ -119,12 +144,7 @@ export default class AttributesFields {
    * Initialize derived AC fields for Active Effects to target.
    * @this {CharacterData|NPCData|VehicleData}
    */
-  static prepareBaseArmorClass() {
-    const ac = this.attributes.ac;
-    ac.armor = 10;
-    ac.shield = ac.cover = 0;
-    ac.min = ac.bonus = "";
-  }
+  static prepareBaseArmorClass() {}
 
   /* -------------------------------------------- */
 
@@ -132,11 +152,7 @@ export default class AttributesFields {
    * Initialize base encumbrance fields to be targeted by active effects.
    * @this {CharacterData|NPCData|VehicleData}
    */
-  static prepareBaseEncumbrance() {
-    const encumbrance = this.attributes.encumbrance ??= {};
-    encumbrance.multipliers = { encumbered: "1", heavilyEncumbered: "1", maximum: "1", overall: "1" };
-    encumbrance.bonuses = { encumbered: "", heavilyEncumbered: "", maximum: "", overall: "" };
-  }
+  static prepareBaseEncumbrance() {}
 
   /* -------------------------------------------- */
 

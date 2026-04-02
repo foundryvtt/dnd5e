@@ -347,9 +347,6 @@ export default class NPCData extends CreatureTemplate {
 
   /** @inheritDoc */
   prepareBaseData() {
-    this.details.level = 0;
-    this.attributes.attunement.value = 0;
-
     // Determine hit dice denomination & max from hit points formula
     const [, max, denomination] = this.attributes.hp.formula?.match(/(\d*)d(\d+)/i) ?? [];
     this.attributes.hd.max = Number(max ?? 0);
