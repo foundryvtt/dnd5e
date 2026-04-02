@@ -97,10 +97,12 @@ export default function PseudoDocumentMixin(Base) {
 
     /**
      * Globally unique identifier for this PseudoDocument.
-     * @type {string}
+     * @type {string|null}
      */
     get uuid() {
-      return `${this.item.uuid}.${this.documentName}.${this.id ?? this._source._id}`;
+      const id = this.id ?? this._source._id;
+      if ( !this.item || !id ) return null;
+      return `${this.item.uuid}.${this.documentName}.${id}`;
     }
 
     /* -------------------------------------------- */
@@ -110,7 +112,7 @@ export default function PseudoDocumentMixin(Base) {
      * @type {Item5e}
      */
     get item() {
-      return this.parent.parent;
+      return this.parent?.parent;
     }
 
     /* -------------------------------------------- */
@@ -120,7 +122,7 @@ export default function PseudoDocumentMixin(Base) {
      * @type {Actor5e|null}
      */
     get actor() {
-      return this.item.parent ?? null;
+      return this.item?.parent ?? null;
     }
 
     /* -------------------------------------------- */
