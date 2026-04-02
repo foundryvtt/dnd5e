@@ -519,11 +519,11 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
    */
   async _getSubclasses(uuids) {
     const prepareSubclass = async uuid => {
-      const document = await fromUuid(uuid);
-      return this._getSubclass(document);
+      const doc = await fromUuid(uuid);
+      return doc ? this._getSubclass(doc) : null;
     };
 
-    const subclasses = await Promise.all(uuids.map(prepareSubclass));
+    const subclasses = (await Promise.all(uuids.map(prepareSubclass))).filter(_ => _);
     return subclasses.length ? subclasses : null;
   }
 
