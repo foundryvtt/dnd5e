@@ -1227,24 +1227,24 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   static addDirectoryContextOptions(app, entryOptions) {
     entryOptions.push({
-      name: "DND5E.Scroll.CreateScroll",
+      label: "DND5E.Scroll.CreateScroll",
       icon: '<i class="fa-solid fa-scroll"></i>',
-      callback: async li => {
-        let spell = game.items.get(li.dataset.entryId);
-        if ( app.collection instanceof foundry.documents.collections.CompendiumCollection ) {
-          spell = await app.collection.getDocument(li.dataset.entryId);
-        }
-        const scroll = await Item5e.createScrollFromSpell(spell);
-        if ( scroll ) Item5e.create(scroll);
-      },
-      condition: li => {
-        let item = game.items.get(li.dataset.documentId ?? li.dataset.entryId);
+      group: "system",
+      visible: li => {
+        let item = game.items.get(li.dataset.entryId);
         if ( app.collection instanceof foundry.documents.collections.CompendiumCollection ) {
           item = app.collection.index.get(li.dataset.entryId);
         }
         return (item.type === "spell") && game.user.hasPermission("ITEM_CREATE");
       },
-      group: "system"
+      onClick: async (_, target) => {
+        let spell = game.items.get(target.dataset.entryId);
+        if ( app.collection instanceof foundry.documents.collections.CompendiumCollection ) {
+          spell = await app.collection.getDocument(target.dataset.entryId);
+        }
+        const scroll = await Item5e.createScrollFromSpell(spell);
+        if ( scroll ) Item5e.create(scroll);
+      }
     });
   }
 

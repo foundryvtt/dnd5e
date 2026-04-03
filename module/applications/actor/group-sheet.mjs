@@ -453,20 +453,22 @@ export default class GroupActorSheet extends MultiActorSheet {
   /** @inheritDoc */
   _getEntryContextOptions() {
     return super._getEntryContextOptions().concat([{
-      name: "DND5E.Group.Action.SetPrimaryVehicle",
+      label: "DND5E.Group.Action.SetPrimaryVehicle",
       icon: '<i class="fa-solid fa-star"></i>',
       group: "state",
-      condition: li => {
+      visible: li => {
         return foundry.utils.fromUuidSync(li.dataset.uuid)?.system.isVehicle
           && (this.actor.system.primaryVehicle?.uuid !== li.dataset.uuid);
       },
-      callback: async li => this.actor.update({ "system.primaryVehicle": (await fromUuid(li.dataset.uuid))?.id })
+      onClick: async (_, target) => this.actor.update({
+        "system.primaryVehicle": (await fromUuid(target.dataset.uuid))?.id
+      })
     }, {
-      name: "DND5E.Group.Action.UnsetPrimaryVehicle",
+      label: "DND5E.Group.Action.UnsetPrimaryVehicle",
       icon: '<i class="fa-regular fa-star"></i>',
       group: "state",
-      condition: li => this.actor.system.primaryVehicle?.uuid === li.dataset.uuid,
-      callback: () => this.actor.update({ "system.primaryVehicle": null })
+      visible: li => this.actor.system.primaryVehicle?.uuid === li.dataset.uuid,
+      onClick: () => this.actor.update({ "system.primaryVehicle": null })
     }]);
   }
 }
