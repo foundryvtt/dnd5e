@@ -806,7 +806,7 @@ export default function ActivityMixin(Base) {
        */
       Hooks.callAll("dnd5e.preCreateUsageMessage", this, messageConfig);
 
-      ChatMessage.applyRollMode(messageConfig.data, messageConfig.rollMode);
+      ChatMessage.applyMode(messageConfig.data, messageConfig.rollMode);
       const card = messageConfig.create === false ? messageConfig.data : await ChatMessage.create(messageConfig.data);
 
       /**

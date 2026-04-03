@@ -1637,7 +1637,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         content: game.i18n.format(details.chatString, { name: this.name }),
         speaker: messageConfig.speaker ?? ChatMessage.getSpeaker({ actor: this })
       };
-      ChatMessage.applyRollMode(chatData, messageConfig.rollMode ?? CONFIG.Dice.BasicRoll.getMessageMode());
+      ChatMessage.applyMode(chatData, messageConfig.rollMode ?? CONFIG.Dice.BasicRoll.getMessageMode());
       resultsMessage = await ChatMessage.create(chatData);
     }
 
@@ -2349,7 +2349,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( config.request ) foundry.utils.setProperty(chatData, "flags.dnd5e.requestResult", {
       actorUuid: this.uuid, requestId: config.request.id
     });
-    ChatMessage.applyRollMode(chatData, CONFIG.Dice.BasicRoll.getMessageMode());
+    ChatMessage.applyMode(chatData, CONFIG.Dice.BasicRoll.getMessageMode());
     return ChatMessage.create(chatData);
   }
 
