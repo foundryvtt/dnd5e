@@ -357,9 +357,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     // Translate this Actor's size category into Token changes
     if ( isV14 && (phase === "initial") ) {
-      const actorSize = this.system.traits.size;
-      const sizeData = CONFIG.DND5E.actorSizes[actorSize];
-      if ( !actorSize || !sizeData ) return;
+      const sizeData = CONFIG.DND5E.actorSizes[this.system.traits?.size];
+      if ( !sizeData ) return;
       const tokenSize = sizeData.token ?? 1;
       this.tokenActiveEffectChanges[phase].push(...["width", "height", "depth"].map(key => ({
         type: "override",

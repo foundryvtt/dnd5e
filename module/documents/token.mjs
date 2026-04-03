@@ -233,7 +233,8 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
 
   /** @override */
   async _onOverrideSize(changes) {
-    this.update(changes);
+    if ( this.persisted ) this.update(changes);
+    else this.updateSource(changes);
   }
 
   /* -------------------------------------------- */
