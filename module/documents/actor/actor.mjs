@@ -2599,7 +2599,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( ac.calc === "flat" ) {
       attribution.push({
         label: game.i18n.localize("DND5E.ArmorClassFlat"),
-        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+        type: "override",
         value: ac.flat
       });
       return new PropertyAttribution(this, attribution, "attributes.ac", { title }).renderTooltip();
@@ -2612,7 +2612,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       case "natural":
         attribution.push({
           label: game.i18n.localize("DND5E.ArmorClassNatural"),
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          type: "override",
           value: ac.flat
         });
         break;
@@ -2627,7 +2627,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
           if ( Number.isNumeric(value) ) base -= Number(value);
           attribution.push({
             label: match,
-            mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+            type: "add",
             value
           });
         }
@@ -2636,7 +2636,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         if ( armorInFormula ) label = this.armor?.name ?? game.i18n.localize("DND5E.ArmorClassUnarmored");
         attribution.unshift({
           label,
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          type: "override",
           value: base
         });
         break;
@@ -2645,7 +2645,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Shield
     if ( ac.shield !== 0 ) attribution.push({
       label: this.shield?.name ?? game.i18n.localize("DND5E.EquipmentShield"),
-      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+      type: "add",
       value: ac.shield
     });
 
@@ -2655,7 +2655,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Cover
     if ( ac.cover !== 0 ) attribution.push({
       label: game.i18n.localize("DND5E.Cover"),
-      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+      type: "add",
       value: ac.cover
     });
 
@@ -2683,10 +2683,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       if ( !source || e.disabled || e.isSuppressed ) continue;
       const value = e.changes.reduce((n, change) => {
         if ( (ActiveEffect5e.SHIM_FIELDS[change.key]?.key ?? change.key) !== target ) return n;
-        if ( change.mode !== CONST.ACTIVE_EFFECT_MODES.ADD ) return n;
+        if ( change.type !== "add" ) return n;
         return n + simplifyBonus(change.value, rollData);
       }, 0);
-      if ( value ) attributions.push({ value, label: source, document: e, mode: CONST.ACTIVE_EFFECT_MODES.ADD });
+      if ( value ) attributions.push({ value, label: source, document: e, type: "add" });
     }
     return attributions;
   }
@@ -2881,7 +2881,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
           }).toObject();
           profOverride.changes = [{
             key: "system.attributes.prof",
-            mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+            type: "override",
             value: source.system.attributes.prof
           }];
           d.effects.push(profOverride);

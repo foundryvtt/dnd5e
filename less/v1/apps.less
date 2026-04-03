@@ -567,25 +567,15 @@ h5 {
     }
 
     // Arithmetic Operators
-    td::before {
-      opacity: 0.6;
-    }
-    td.mode-1::before { // Multiply
-      content: "×";
-    }
-    td.mode-2::before { // Add
-      content: "+";
-    }
-    td.mode-2.negative::before { // Subtract
+    td::before { opacity: 0.6; }
+    td[data-type="multiply"]::before { content: "×"; }
+    td[data-type="add"]::before { content: "+"; }
+    td[data-type="subtract"]::before {
       content: "−";
       margin-right: -1px;
     }
-    td.mode-3::before { // Downgrade
-      content: "↓";
-    }
-    td.mode-4::before { // Upgrade
-      content: "↑";
-    }
+    td[data-type="downgrade"]::before { content: "↓"; }
+    td[data-type="upgrade"]::before { content: "↑"; }
   }
 
   .row {

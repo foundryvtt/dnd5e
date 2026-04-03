@@ -279,7 +279,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
         _id: staticID("dnd5eMatchProficiency"),
         changes: [{
           key: "system.attributes.prof",
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          type: "override",
           value: prof
         }],
         disabled: false,
@@ -307,7 +307,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
             _id: staticID("dnd5eACBonus"),
             changes: [{
               key: "system.attributes.ac.bonus",
-              mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+              type: "add",
               value: acBonus.total
             }],
             disabled: false,
@@ -327,7 +327,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
           _id: staticID("dnd5eHDBonus"),
           changes: [{
             key: "system.attributes.hd.max",
-            mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+            type: "add",
             value: hdBonus.total
           }],
           disabled: false,
@@ -352,7 +352,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
             _id: staticID("dnd5eHPBonus"),
             changes: [{
               key: `system.attributes.hp.${hpField}`,
-              mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+              type: "add",
               value: hpBonus.total
             }],
             disabled: false,
@@ -428,11 +428,11 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
         }
         changes.push({
           key: "activities[attack].attack.bonus",
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          type: "override",
           value: attack
         }, {
           key: "activities[attack].attack.flat",
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          type: "override",
           value: true
         });
       }
@@ -441,11 +441,11 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
       if ( this.match.saves && item.hasSave ) {
         changes.push({
           key: "activities[save].save.dc.formula",
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          type: "override",
           value: this.flat?.save ?? rollData.abilities?.[this.ability]?.dc ?? rollData.attributes.spell.dc
         }, {
           key: "activities[save].save.dc.calculation",
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          type: "override",
           value: ""
         });
       }
@@ -458,7 +458,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
       if ( damageBonus && item.system.activities.find(a => a.damage?.parts?.length || a.healing?.formula) ) {
         changes.push({
           key: "system.damage.bonus",
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          type: "add",
           value: damageBonus
         });
       }
