@@ -191,8 +191,7 @@ export default class ItemGrantAdvancement extends Advancement {
 
     this.actor.reset();
     if ( options.uuid ) this.updateSource({ [keyPath]: added });
-    // TODO: Modify to use ForceDeletion in DnD5e 6.0
-    else this.updateSource({ [keyPath.replace(/\.([\w\d]+)$/, ".-=$1")]: null });
+    else this.updateSource({ [keyPath]: _del });
     return { ability: this.value?.ability, items };
   }
 
