@@ -1,7 +1,7 @@
 import CreateDocumentDialog from "../applications/create-document-dialog.mjs";
 import FormulaField from "../data/fields/formula-field.mjs";
 import MappingField from "../data/fields/mapping-field.mjs";
-import { parseOrString, staticID } from "../utils.mjs";
+import { getHumanReadableAttributeLabel, parseOrString, staticID } from "../utils.mjs";
 import Item5e from "./item.mjs";
 import DependentDocumentMixin from "./mixins/dependent.mjs";
 
@@ -973,11 +973,11 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /* -------------------------------------------- */
 
   /**
-   * Render a rich tooltip for this effect.
+   * Prepare an object of chat data used to display a card for the Item in the chat log.
    * @param {EnrichmentOptions} [enrichmentOptions={}]  Options for text enrichment.
-   * @returns {Promise<{content: string, classes: string[]}>}
+   * @returns {object}              An object of chat data to render.
    */
-  async richTooltip(enrichmentOptions={}) {
+  async getPreviewContext(enrichmentOptions={}) {
     let properties = [];
     if ( this.isSuppressed ) properties.push("DND5E.EffectType.Unavailable");
     else if ( this.disabled ) properties.push("DND5E.EffectType.Inactive");
@@ -990,13 +990,64 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       : CONFIG.statusEffects[id]?.name).filter(_ => _));
 
     return {
-      content: await foundry.applications.handlebars.renderTemplate(
-        "systems/dnd5e/templates/effects/parts/effect-tooltip.hbs", {
-          effect: this,
-          description: await TextEditor.enrichHTML(this.description ?? "", { relativeTo: this, ...enrichmentOptions }),
-          durationParts: this.duration.remaining ? this.duration.label.split(", ") : [],
-          properties
+      description: await TextEditor.enrichHTML(this.description ?? "", {
+        relativeTo: this
+        // TODO: Use this once https://github.com/foundryvtt/dnd5e/issues/5758 is resolved
+        // rollData: this.getRollData()
+      }),
+      effect: this,
+      properties
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare the context used to display an effect on an actor or item sheet.
+   * @param {object} [options={}]
+   * @param {number} [options.maxKeyLength=35]  Maximum length of the attribute key displayed.
+   * @returns {object}  An object of chat data to render.
+   */
+  async getSheetContext({ maxKeyLength=35 }={}) {
+    this.updateDuration();
+    const { id, name, img, disabled, duration } = this;
+    const source = await this.getSource();
+    const attributeCtx = this.type === "enchantment"
+      ? { item: this.isAppliedEnchantment ? this.item : true }
+      : { actor: this.actor };
+    return {
+      id, name, img, disabled, duration, source,
+      changes: this.changes.map(change => {
+        let displayKey = change.key;
+        if ( displayKey.length > (maxKeyLength + 5) ) {
+          displayKey = displayKey.replace(/^systems.|^flags.|^activities\[/, "");
+          if ( displayKey.length > maxKeyLength ) displayKey = displayKey.slice(1 - maxKeyLength);
+          displayKey = `…${displayKey}`;
         }
+        return {
+          ...change, displayKey,
+          name: getHumanReadableAttributeLabel(change.key, { ...attributeCtx, prefixItemName: false })
+        };
+      }),
+      durationParts: Number.isFinite(duration.remaining) ? duration.label.split(", ") : [],
+      effect: this
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Render a rich tooltip for this effect.
+   * @param {EnrichmentOptions} [enrichmentOptions={}]  Options for text enrichment.
+   * @returns {Promise<{content: string, classes: string[]}>}
+   */
+  async richTooltip(enrichmentOptions={}) {
+    const context = await this.getPreviewContext(enrichmentOptions);
+    context.durationParts = this.duration.remaining ? this.duration.label.split(", ") : [];
+
+    return {
+      content: await foundry.applications.handlebars.renderTemplate(
+        "systems/dnd5e/templates/effects/parts/effect-tooltip.hbs", context
       ),
       classes: ["dnd5e2", "dnd5e-tooltip", "effect-tooltip", "themed", "theme-light"]
     };

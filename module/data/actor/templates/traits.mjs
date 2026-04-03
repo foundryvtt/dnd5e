@@ -25,7 +25,9 @@ export default class TraitsField {
       dr: new DamageTraitField({}, { label: "DND5E.DamRes" }),
       dv: new DamageTraitField({}, { label: "DND5E.DamVuln" }),
       dm: new SchemaField({
-        amount: new MappingField(new FormulaField({ deterministic: true }), { label: "DND5E.DamMod" }),
+        amount: new MappingField(new FormulaField({ deterministic: true }), {
+          label: "DND5E.DamMod", labels: { value: "DND5E.DamMod" }
+        }),
         bypasses: new SetField(new StringField(), {
           label: "DND5E.DAMAGE.PhysicalBypass.Label", hint: "DND5E.DAMAGE.PhysicalBypass.Hint"
         })

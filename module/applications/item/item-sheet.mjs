@@ -165,6 +165,18 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  _configureRenderParts(options) {
+    const parts = super._configureRenderParts(options);
+    if ( "effects" in parts ) {
+      parts.effects.templates ??= [];
+      parts.effects.templates.push(...customElements.get(this.options.elements.effects).templates);
+    }
+    return parts;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   _disableFields() {
     this.element.querySelectorAll(":is(document-embed, secret-block) button").forEach(el => {
       el.classList.add("always-interactive");
@@ -390,19 +402,19 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     const riderIds = new Set(this.item.getFlag("dnd5e", "riders.effect") ?? []);
     context.tab = context.tabs.effects;
     context.effects = EffectsElement.prepareCategories(this.item.effects, { parent: this.item });
+    const columns = [EffectsElement.COLUMNS.source, EffectsElement.COLUMNS.value, EffectsElement.COLUMNS.controls];
     for ( const category of Object.values(context.effects) ) {
+      category.columns = columns;
       category.effects = await category.effects.reduce(async (arr, effect) => {
-        effect.updateDuration();
-        const { id, name, img, disabled, duration } = effect;
-        const source = await effect.getSource();
+        const isExpanded = this.expandedSections.get(`effects.${effect.id}`) === true;
         arr = await arr;
-        const ctx = effectMap[id] = {
-          id, name, img, disabled, duration, source, parent,
-          durationParts: duration.remaining ? duration.label.split(", ") : [],
+        const ctx = effectMap[effect.id] = {
+          ...(await effect.getSheetContext({ maxKeyLength: 25 })), parent, isExpanded,
+          expanded: isExpanded ? await effect.getPreviewContext({ secrets: effect.isOwner }) : null,
           hasTooltip: true,
           riders: []
         };
-        if ( riderIds.has(id) ) riders.push(ctx);
+        if ( riderIds.has(effect.id) ) riders.push(ctx);
         else arr.push(ctx);
         return arr;
       }, []);
