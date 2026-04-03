@@ -1014,9 +1014,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const advancement = this.system.advancement.get(id);
     let update = { [`system.advancement.${id}`]: updates };
     if ( !source && this._needsAdvancementMigration ) update = {
-      "system.==advancement": foundry.utils.mergeObject(
+      "system.advancement": _replace(foundry.utils.mergeObject(
         this.system.toObject().advancement, { [id]: updates }, { performDeletions: true }
-      )
+      ))
     };
     if ( source ) {
       advancement.updateSource(updates);
@@ -1047,7 +1047,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( !source && this._needsAdvancementMigration ) {
       const data = this.system.toObject().advancement;
       delete data[id];
-      update = { "system.==advancement": data };
+      update = { "system.advancement": _replace(data) };
     }
     if ( source ) return this.updateSource(update);
 
