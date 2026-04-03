@@ -353,7 +353,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
     }];
 
     if ( !this.actor || this.actor.system.isGroup ) return options;
-    const favorited = this.actor.system.hasFavorite?.(item.getRelativeUUID(this.actor));
+    const favorited = this.actor.system.hasFavorite?.(foundry.utils.buildRelativeUuid(item, this.actor));
     const expanded = this.app.expandedSections ? this.app.expandedSections.get(item.id)
       : this.app._expanded.has(item.id); // TODO: Remove when V1 sheets are gone
 
@@ -770,7 +770,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
    */
   async _onToggleFavorite(item) {
     if ( !this.actor ) return;
-    const uuid = item.getRelativeUUID(this.actor);
+    const uuid = foundry.utils.buildRelativeUuid(item, this.actor);
     if ( this.actor.system.hasFavorite(uuid) ) return this.actor.system.removeFavorite(uuid);
     return this.actor.system.addFavorite({ type: "item", id: uuid });
   }

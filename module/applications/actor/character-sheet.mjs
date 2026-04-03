@@ -1182,7 +1182,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
     if ( !event.target.closest(".favorites") || (effect.target !== this.actor) ) {
       return super._onDropActiveEffect(event, effect);
     }
-    const uuid = effect.getRelativeUUID(this.actor);
+    const uuid = foundry.utils.buildRelativeUuid(effect, this.actor);
     return this._onDropFavorite(event, { type: "effect", id: uuid });
   }
 
@@ -1197,7 +1197,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
    */
   async _onDropActivity(event, activity) {
     if ( !event.target.closest(".favorites") || (activity.actor !== this.actor) ) return;
-    const uuid = `${activity.item.getRelativeUUID(this.actor)}.Activity.${activity.id}`;
+    const uuid = `${foundry.utils.buildRelativeUuid(activity.item, this.actor)}.Activity.${activity.id}`;
     return this._onDropFavorite(event, { type: "activity", id: uuid });
   }
 
@@ -1234,7 +1234,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
   /** @inheritDoc */
   async _onDropItem(event, item) {
     if ( !event.target.closest(".favorites") || (item.parent !== this.actor) ) return super._onDropItem(event, item);
-    const uuid = item.getRelativeUUID(this.actor);
+    const uuid = foundry.utils.buildRelativeUuid(item, this.actor);
     return this._onDropFavorite(event, { type: "item", id: uuid });
   }
 
