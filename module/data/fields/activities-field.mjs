@@ -13,6 +13,7 @@ export class ActivitiesField extends MappingField {
 
   /** @inheritDoc */
   initialize(value, model, options) {
+    if ( game.release.generation > 13 ) options = { ...options, clean: { copy: false } };
     const activities = Object.values(super.initialize(value, model, options));
     activities.sort((a, b) => a.sort - b.sort);
     return new ActivityCollection(model, activities);
