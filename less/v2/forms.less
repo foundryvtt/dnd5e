@@ -427,7 +427,8 @@
   }
 
   /* Form Fields */
-  textarea, select, input[type="text"], input[type="number"], input[type="search"], input[type="file"], formula-input {
+  textarea, select, input[type="text"], input[type="number"], input[type="search"],
+  input[type="file"], file-picker, formula-input {
     --input-box-shadow: none;
     --input-text-color: var(--color-text-primary);
     transition: all 250ms ease, block-size, inline-size;
@@ -445,6 +446,10 @@
     &:disabled {
       background: var(--input-disabled-background-color);
     }
+  }
+  file-picker {
+    /* Temp fix for V13 */
+    background: var(--input-background-color);
   }
   select, input[type="text"], input[type="number"], input[type="search"], input[type="file"] {
     --input-height: var(--form-field-height);
@@ -475,7 +480,6 @@
         }
       }
     }
-    > input[type="text"] { background: none; }
     > button {
       background: none;
       box-shadow: none;
