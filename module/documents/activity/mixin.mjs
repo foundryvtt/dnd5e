@@ -979,7 +979,7 @@ export default function ActivityMixin(Base) {
       }
 
       if ( "favorites" in (this.actor?.system ?? {}) ) {
-        const uuid = `${this.item.getRelativeUUID(this.actor)}.Activity.${this.id}`;
+        const uuid = `${foundry.utils.buildRelativeUuid(this.item, this.actor)}.Activity.${this.id}`;
         const isFavorited = this.actor.system.hasFavorite(uuid);
         entries.push({
           label: isFavorited ? "DND5E.FavoriteRemove" : "DND5E.Favorite",

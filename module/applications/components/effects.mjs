@@ -199,7 +199,7 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
 
     // Toggle Favorite State
     if ( (this.document instanceof Actor5e) && ("favorites" in this.document.system) ) {
-      const uuid = effect.getRelativeUUID(this.document);
+      const uuid = foundry.utils.buildRelativeUuid(effect, this.document);
       const isFavorited = this.document.system.hasFavorite(uuid);
       options.push({
         label: isFavorited ? "DND5E.FavoriteRemove" : "DND5E.Favorite",
@@ -245,15 +245,17 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
         await effect.deleteDialog({ sheet: this.#app }, { render: false });
         return this.#app.render();
       case "duplicate":
-        return effect.clone({name: game.i18n.format("DOCUMENT.CopyOf", {name: effect.name})}, {save: true});
+        return effect.clone({ name: game.i18n.format("DOCUMENT.CopyOf", { name: effect.name }) }, { save: true });
       case "edit":
         return this.#app._openDocumentSheet(effect);
       case "favorite":
-        return this.document.system.addFavorite({type: "effect", id: effect.getRelativeUUID(this.document)});
+        return this.document.system.addFavorite({
+          type: "effect", id: foundry.utils.buildRelativeUuid(effect, this.document)
+        });
       case "toggle":
-        return effect.update({disabled: !effect.disabled});
+        return effect.update({ disabled: !effect.disabled });
       case "unfavorite":
-        return this.document.system.removeFavorite(effect.getRelativeUUID(this.document));
+        return this.document.system.removeFavorite(foundry.utils.buildRelativeUuid(effect, this.document));
     }
   }
 
