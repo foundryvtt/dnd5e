@@ -954,27 +954,27 @@ export default function ActivityMixin(Base) {
 
       if ( this.item.isOwner && !compendiumLocked ) {
         entries.push({
-          name: "DND5E.ContextMenuActionEdit",
+          label: "DND5E.ContextMenuActionEdit",
           icon: '<i class="fas fa-pen-to-square fa-fw"></i>',
-          callback: () => this.item.sheet._renderChild(this.sheet)
+          onClick: () => this.item.sheet._renderChild(this.sheet)
         }, {
-          name: "DND5E.ContextMenuActionDuplicate",
+          label: "DND5E.ContextMenuActionDuplicate",
           icon: '<i class="fas fa-copy fa-fw"></i>',
-          callback: () => {
+          onClick: () => {
             const createData = this.toObject();
             delete createData._id;
             this.item.createActivity(createData.type, createData, { renderSheet: false });
           }
         }, {
-          name: "DND5E.ContextMenuActionDelete",
+          label: "DND5E.ContextMenuActionDelete",
           icon: '<i class="fas fa-trash fa-fw"></i>',
-          callback: () => this.deleteDialog({ sheet: this.item.sheet })
+          onClick: () => this.deleteDialog({ sheet: this.item.sheet })
         });
       } else {
         entries.push({
-          name: "DND5E.ContextMenuActionView",
+          label: "DND5E.ContextMenuActionView",
           icon: '<i class="fas fa-eye fa-fw"></i>',
-          callback: () => this.item.sheet._renderChild(this.sheet)
+          onClick: () => this.item.sheet._renderChild(this.sheet)
         });
       }
 
@@ -982,14 +982,14 @@ export default function ActivityMixin(Base) {
         const uuid = `${this.item.getRelativeUUID(this.actor)}.Activity.${this.id}`;
         const isFavorited = this.actor.system.hasFavorite(uuid);
         entries.push({
-          name: isFavorited ? "DND5E.FavoriteRemove" : "DND5E.Favorite",
+          label: isFavorited ? "DND5E.FavoriteRemove" : "DND5E.Favorite",
           icon: '<i class="fas fa-bookmark fa-fw"></i>',
-          condition: () => this.item.isOwner && !compendiumLocked,
-          callback: () => {
+          group: "state",
+          visible: () => this.item.isOwner && !compendiumLocked,
+          onClick: () => {
             if ( isFavorited ) this.actor.system.removeFavorite(uuid);
             else this.actor.system.addFavorite({ type: "activity", id: uuid });
-          },
-          group: "state"
+          }
         });
       }
 

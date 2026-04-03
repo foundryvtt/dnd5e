@@ -3219,42 +3219,40 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   static addDirectoryContextOptions(app, entryOptions) {
     if ( app instanceof foundry.applications.sidebar.apps.Compendium ) return;
     entryOptions.push({
-      name: "DND5E.TRANSFORM.Action.Restore",
+      label: "DND5E.TRANSFORM.Action.Restore",
       icon: '<i class="fa-solid fa-backward"></i>',
-      callback: li => {
-        const actor = game.actors.get(li.dataset.documentId ?? li.dataset.entryId);
-        return actor.revertOriginalForm();
-      },
-      condition: li => {
+      group: "system",
+      visible: li => {
         const allowed = game.settings.get("dnd5e", "allowPolymorphing");
         if ( !allowed && !game.user.isGM ) return false;
-        const actor = game.actors.get(li.dataset.documentId ?? li.dataset.entryId);
+        const actor = game.actors.get(li.dataset.entryId);
         return actor && actor.isPolymorphed;
       },
-      group: "system"
+      onClick: (_, target) => {
+        const actor = game.actors.get(target.dataset.entryId);
+        return actor.revertOriginalForm();
+      }
     }, {
-      name: "DND5E.Group.Primary.Set",
+      label: "DND5E.Group.Primary.Set",
       icon: '<i class="fa-solid fa-star"></i>',
-      callback: li => {
-        game.settings.set("dnd5e", "primaryParty", { actor: game.actors.get(li.dataset.documentId ?? li.dataset.entryId) });
-      },
-      condition: li => {
-        const actor = game.actors.get(li.dataset.documentId ?? li.dataset.entryId);
+      group: "system",
+      visible: li => {
+        const actor = game.actors.get(li.dataset.entryId);
         const primary = game.actors.party;
         return game.user.isGM && (actor?.type === "group") && (actor !== primary);
       },
-      group: "system"
+      onClick: (_, target) => game.settings.set("dnd5e", "primaryParty", {
+        actor: game.actors.get(target.dataset.entryId)
+      })
     }, {
-      name: "DND5E.Group.Primary.Remove",
+      label: "DND5E.Group.Primary.Remove",
       icon: '<i class="fa-regular fa-star"></i>',
-      callback: li => {
-        game.settings.set("dnd5e", "primaryParty", { actor: null });
-      },
-      condition: li => {
-        const actor = game.actors.get(li.dataset.documentId ?? li.dataset.entryId);
+      group: "system",
+      visible: li => {
+        const actor = game.actors.get(li.dataset.entryId);
         return game.user.isGM && (actor === game.actors.party);
       },
-      group: "system"
+      onClick: () => game.settings.set("dnd5e", "primaryParty", { actor: null })
     });
   }
 

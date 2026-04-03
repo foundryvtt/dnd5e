@@ -687,53 +687,53 @@ export default class ChatMessage5e extends ChatMessage {
     const canTarget = li => game.messages.get(li.dataset.messageId)?.canSelectTargets;
     options.push(
       {
-        name: game.i18n.localize("DND5E.ChatContextDamage"),
+        label: game.i18n.localize("DND5E.ChatContextDamage"),
         icon: '<i class="fas fa-user-minus"></i>',
-        condition: canApply,
-        callback: li => game.messages.get(li.dataset.messageId)?.applyChatCardDamage(li, 1),
-        group: "damage"
+        group: "damage",
+        visible: canApply,
+        onClick: (_, target) => game.messages.get(target.dataset.messageId)?.applyChatCardDamage(target, 1)
       },
       {
-        name: game.i18n.localize("DND5E.ChatContextHealing"),
+        label: game.i18n.localize("DND5E.ChatContextHealing"),
         icon: '<i class="fas fa-user-plus"></i>',
-        condition: canApply,
-        callback: li => game.messages.get(li.dataset.messageId)?.applyChatCardDamage(li, -1),
-        group: "damage"
+        group: "damage",
+        visible: canApply,
+        onClick: (_, target) => game.messages.get(target.dataset.messageId)?.applyChatCardDamage(target, -1)
       },
       {
-        name: game.i18n.localize("DND5E.ChatContextTempHP"),
+        label: game.i18n.localize("DND5E.ChatContextTempHP"),
         icon: '<i class="fas fa-user-clock"></i>',
-        condition: canApply,
-        callback: li => game.messages.get(li.dataset.messageId)?.applyChatCardTemp(li),
-        group: "damage"
+        group: "damage",
+        visible: canApply,
+        onClick: (_, target) => game.messages.get(target.dataset.messageId)?.applyChatCardTemp(target)
       },
       {
-        name: game.i18n.localize("DND5E.ChatContextDoubleDamage"),
+        label: game.i18n.localize("DND5E.ChatContextDoubleDamage"),
         icon: '<i class="fas fa-user-injured"></i>',
-        condition: canApply,
-        callback: li => game.messages.get(li.dataset.messageId)?.applyChatCardDamage(li, 2),
-        group: "damage"
+        group: "damage",
+        visible: canApply,
+        onClick: (_, target) => game.messages.get(target.dataset.messageId)?.applyChatCardDamage(target, 2)
       },
       {
-        name: game.i18n.localize("DND5E.ChatContextHalfDamage"),
+        label: game.i18n.localize("DND5E.ChatContextHalfDamage"),
         icon: '<i class="fas fa-user-shield"></i>',
-        condition: canApply,
-        callback: li => game.messages.get(li.dataset.messageId)?.applyChatCardDamage(li, 0.5),
-        group: "damage"
+        group: "damage",
+        visible: canApply,
+        onClick: (_, target) => game.messages.get(target.dataset.messageId)?.applyChatCardDamage(target, 0.5)
       },
       {
-        name: game.i18n.localize("DND5E.ChatContextSelectHit"),
+        label: game.i18n.localize("DND5E.ChatContextSelectHit"),
         icon: '<i class="fas fa-bullseye"></i>',
-        condition: canTarget,
-        callback: li => game.messages.get(li.dataset.messageId)?.selectTargets(li, "hit"),
-        group: "attack"
+        group: "attack",
+        visible: canTarget,
+        onClick: (_, target) => game.messages.get(target.dataset.messageId)?.selectTargets(target, "hit")
       },
       {
-        name: game.i18n.localize("DND5E.ChatContextSelectMiss"),
+        label: game.i18n.localize("DND5E.ChatContextSelectMiss"),
         icon: '<i class="fas fa-bullseye"></i>',
-        condition: canTarget,
-        callback: li => game.messages.get(li.dataset.messageId)?.selectTargets(li, "miss"),
-        group: "attack"
+        group: "attack",
+        visible: canTarget,
+        onClick: (_, target) => game.messages.get(target.dataset.messageId)?.selectTargets(target, "miss")
       }
     );
     return options;
