@@ -429,7 +429,9 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
       callback: li => this._onAction(li, "toggleGear"),
       group: "state"
     }, {
-      name: expanded ? "Collapse" : "Expand",
+      name: game.release.generation < 14
+        ? expanded ? "Collapse" : "Expand"
+        : expanded ? "APPLICATION.ACTIONS.Collapse" : "APPLICATION.ACTIONS.Expand",
       icon: `<i class="fa-solid fa-${expanded ? "compress" : "expand"}"></i>`,
       condition: () => "canExpand" in this.app ? this.app.canExpand(item) : true,
       callback: li => this._onAction(li, "toggleExpand"),
