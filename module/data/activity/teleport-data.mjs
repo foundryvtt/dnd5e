@@ -1,4 +1,4 @@
-import { formatLength, prepareFormulaValue } from "../../utils.mjs";
+import { prepareFormulaValue } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import BaseActivityData from "./base-activity.mjs";
 
@@ -35,14 +35,8 @@ export default class BaseTeleportActivityData extends BaseActivityData {
     rollData ??= this.getRollData({ deterministic: true });
     super.prepareFinalData(rollData);
 
-    this.teleport.labels ??= {};
-    if ( this.teleport.unlimited ) {
-      this.teleport.labels.distance = game.i18n.localize("DND5E.Unlimited");
-      return;
+    if ( !this.teleport.unlimited ) {
+      prepareFormulaValue(this, "teleport.value", "DND5E.TELEPORT.FIELDS.teleport.value.label", rollData);
     }
-
-    prepareFormulaValue(this, "teleport.value", "DND5E.TELEPORT.FIELDS.teleport.value.label", rollData);
-    this.teleport.labels.distance = ((this.teleport.units in CONFIG.DND5E.movementUnits) && this.teleport.value)
-      ? formatLength(this.teleport.value, this.teleport.units) : "";
   }
 }

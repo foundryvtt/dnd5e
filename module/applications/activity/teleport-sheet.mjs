@@ -35,14 +35,6 @@ export default class TeleportSheet extends ActivitySheet {
 
   /* -------------------------------------------- */
 
-  /** @override */
-  tabGroups = {
-    sheet: "identity",
-    activation: "time"
-  };
-
-  /* -------------------------------------------- */
-
   /**
    * Prepare the tab information for the sheet.
    * @returns {Record<string, Partial<ApplicationTab>>}

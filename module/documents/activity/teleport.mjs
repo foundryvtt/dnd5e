@@ -53,31 +53,6 @@ export default class TeleportActivity extends ActivityMixin(TeleportActivityData
   prepareData() {
     super.prepareData();
     const source = this.toObject();
-    const currentTeleport = this._source.teleport;
-    const hasConfiguredTeleport = (currentTeleport?.units in CONFIG.DND5E.movementUnits)
-      && (((currentTeleport?.value ?? "") !== ""));
-    if ( !hasConfiguredTeleport ) {
-      if ( (currentTeleport?.units in CONFIG.DND5E.movementUnits)
-        && (((currentTeleport?.maxDistance ?? "") !== "")) ) {
-        this._source.teleport = {
-          ...source.teleport,
-          value: currentTeleport.maxDistance,
-          units: currentTeleport.units
-        };
-      } else {
-        const legacyRange = this._source.range;
-        const hasConfiguredRange = (legacyRange?.units in CONFIG.DND5E.movementUnits)
-          && (((legacyRange?.value ?? "") !== ""));
-        if ( hasConfiguredRange ) {
-          this._source.teleport = {
-            ...source.teleport,
-            value: legacyRange.value,
-            units: legacyRange.units
-          };
-          if ( this.isSpell && (this.item.system.range?.units === "self") ) this._source.range = { override: false };
-        }
-      }
-    }
     this._source.teleport = foundry.utils.mergeObject(source.teleport, this._source.teleport ?? {}, { inplace: false });
     for ( const field of ["activation", "duration", "range", "target", "uses"] ) {
       this._source[field] ??= source[field];
