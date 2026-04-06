@@ -1,8 +1,8 @@
 /**
  * Custom control icon used to display Map Location journal pages when pinned to the map.
  */
-export default class MapLocationControlIcon extends PIXI.Container {
-  constructor({code, size=40, ...style}={}, ...args) {
+export default class MapLocationControlIcon extends foundry.canvas.containers.ControlIcon {
+  constructor({ code, size=40, ...style }={}, ...args) {
     super(...args);
 
     this.code = code;
@@ -14,6 +14,18 @@ export default class MapLocationControlIcon extends PIXI.Container {
   }
 
   /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Code text to be rendered.
+   * @type {string}
+   */
+  code;
+
+  /* -------------------------------------------- */
+  /*  Drawing                                     */
+  /* -------------------------------------------- */
 
   /**
    * Perform the actual rendering of the marker.
@@ -22,7 +34,7 @@ export default class MapLocationControlIcon extends PIXI.Container {
     this.radius = this.size / 2;
     this.circle = [this.radius, this.radius, this.radius + 8];
     this.backgroundColor = this.style.backgroundColor;
-    this.borderColor = this.style.borderHoverColor;
+    this._borderColor = this.style.borderHoverColor;
 
     // Define hit area
     this.eventMode = "static";
@@ -62,25 +74,44 @@ export default class MapLocationControlIcon extends PIXI.Container {
     // Border
     this.border = this.addChild(new PIXI.Graphics());
     this.border.visible = false;
+
+    foundry.canvas.interaction.MouseInteractionManager.emulateMoveEvent();
   }
 
   /* -------------------------------------------- */
 
-  /**
-   * Code text to be rendered.
-   * @type {string}
-   */
-  code;
+  /** @inheritDoc */
+  async draw() {
+    if ( game.release.generation < 14 ) return;
+    return super.draw();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _clear() {
+    super._clear();
+    this.extrude.clear();
+    this.shadow.clear();
+  }
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
   refresh({ visible, iconColor, borderColor, borderVisible }={}) {
-    if ( borderColor ) this.borderColor = borderColor;
-    this.border.clear().lineStyle(2, this.borderColor, 1.0).drawCircle(...this.circle).endFill();
+    if ( game.release.generation > 13 ) return this.renderFlags.set({ refresh: true });
+    if ( borderColor ) this._borderColor = borderColor;
+    this.border.clear().lineStyle(2, this._borderColor, 1.0).drawCircle(...this.circle).endFill();
     if ( borderVisible !== undefined ) this.border.visible = borderVisible;
     if ( visible !== undefined ) this.visible = visible;
     return this;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _refresh() {
+    this.renderMarker();
   }
 
   /* -------------------------------------------- */
