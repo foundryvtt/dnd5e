@@ -719,6 +719,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   async applyDamage(damages, options={}) {
     const hp = this.system.attributes.hp;
+    const hpSource = this.system._source.attributes.hp;
     if ( !hp ) return this; // Group actors don't have HP at the moment
 
     if ( Number.isNumeric(damages) ) {
@@ -734,7 +735,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const deltaHP = Math.clamp(amount - deltaTemp, -hp.damage + tempMax, hp.value - tempMax);
     const updates = {
       "system.attributes.hp.temp": hp.temp - deltaTemp,
-      "system.attributes.hp.tempmax": hp.tempmax - tempMax,
+      "system.attributes.hp.tempmax": hpSource.tempmax - tempMax,
       "system.attributes.hp.value": hp.value - deltaHP
     };
 
