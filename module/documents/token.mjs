@@ -100,7 +100,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     if ( !this.hasDynamicRing ) return;
     let size = this.baseActor?.system.traits?.size;
     if ( !this.actorLink ) {
-      const deltaSize = this.delta.system.traits?.size;
+      const deltaSize = this.delta?.system.traits?.size;
       if ( deltaSize ) size = deltaSize;
     }
     if ( !size ) return;

@@ -204,7 +204,9 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     // Properly handle formulas that don't exist as part of the data model
     if ( ActiveEffect5e.FORMULA_FIELDS.has(change.key) ) {
       const field = new FormulaField({ deterministic: true });
-      return { [change.key]: this.constructor.applyField(doc, change, field) };
+      return { [change.key]: game.release.generation < 14
+        ? this.constructor.applyField(doc, change, field)
+        : this.constructor.applyChangeField(doc, change, { field }) };
     }
 
     // Handle activity-targeted changes
@@ -264,7 +266,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     const { field } = options;
 
     // Replace value when using string interpolation syntax
-    if ( (field instanceof StringField) && (change.type === "override") && change.value.includes?.("{}") ) {
+    if ( (field instanceof StringField) && (change.type === "override") && change.value?.includes?.("{}") ) {
       change.value = change.value.replace("{}", current ?? "");
     }
 
@@ -350,7 +352,9 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     // Double-check whether the target should be treated as a formula if the key has been modified
     if ( ActiveEffect5e.FORMULA_FIELDS.has(change.key) ) {
       const field = new FormulaField({ deterministic: true });
-      return { [change.key]: this.applyField(actor, change, field) };
+      return { [change.key]: game.release.generation < 14
+        ? this.applyField(actor, change, field)
+        : this.applyChangeField(actor, change, { field }) };
     }
 
     super._applyChangeUnguided(actor, change, changes, {replacementData});
