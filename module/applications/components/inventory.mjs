@@ -771,8 +771,8 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
       return;
     }
 
-    const icon = target.querySelector(":scope > i");
     const row = target.closest("[data-uuid]");
+    const icon = row.querySelector('[data-action="toggleExpand"] > i');
     const summary = row.querySelector(":scope > .item-description > .wrapper");
     const { uuid } = row.dataset;
     item ??= await fromUuid(uuid);
