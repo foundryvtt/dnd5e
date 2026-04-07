@@ -21,7 +21,7 @@ export default class BaseTeleportActivityData extends BaseActivityData {
       teleport: new SchemaField({
         unlimited: new BooleanField(),
         value: new FormulaField({ deterministic: true }),
-        units: new StringField({ required: true, blank: false, initial: "ft" })
+        units: new StringField({ required: true, blank: false, initial: () => defaultUnits("length") })
       })
     };
   }
