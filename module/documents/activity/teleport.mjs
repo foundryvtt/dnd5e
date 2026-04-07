@@ -1,6 +1,6 @@
 import TeleportSheet from "../../applications/activity/teleport-sheet.mjs";
 import TeleportActivityData from "../../data/activity/teleport-data.mjs";
-import { convertLength } from "../../utils.mjs";
+import { convertLength, getSceneTargets } from "../../utils.mjs";
 import ActivityMixin from "./mixin.mjs";
 
 /**
@@ -61,17 +61,17 @@ export default class TeleportActivity extends ActivityMixin(TeleportActivityData
     }].concat(super._usageChatButtons(message));
   }
 
-  /* -------------------------------------------- */
+  // /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  async _triggerSubsequentActions() {
-    if ( !this.canPlanTeleport ) return;
-    try {
-      await this.planTeleport();
-    } catch(err) {
-      Hooks.onError("TeleportActivity#planTeleport", err, { log: "error", notify: "error" });
-    }
-  }
+  // /** @inheritDoc */
+  // async _triggerSubsequentActions() {
+  //   if ( !this.canPlanTeleport ) return;
+  //   try {
+  //     await this.planTeleport();
+  //   } catch(err) {
+  //     Hooks.onError("TeleportActivity#planTeleport", err, { log: "error", notify: "error" });
+  //   }
+  // }
 
   /* -------------------------------------------- */
 
@@ -79,8 +79,8 @@ export default class TeleportActivity extends ActivityMixin(TeleportActivityData
   async planTeleport() {
     if ( !this.canPlanTeleport ) return null;
 
-    const token = this.getUsageToken();
-    if ( !token?.object ) {
+    const tokens = canvas.tokens?.controlled.length ? getSceneTargets() : [];
+    if ( !tokens.length ) {
       ui.notifications.warn("DND5E.ActionWarningNoToken", { localize: true });
       return null;
     }
@@ -91,15 +91,19 @@ export default class TeleportActivity extends ActivityMixin(TeleportActivityData
       return null;
     }
 
-    const plan = await token.object.planMovement({
-      allowedActions: ["blink"],
-      direct: true,
-      maxDistance,
-      preventDrop: true
-    });
-    if ( !plan ) return null;
+    let movement = null;
+    for ( const token of tokens ) {
+      const plan = await token.planMovement({
+        allowedActions: ["blink"],
+        direct: true,
+        maxDistance,
+        preventDrop: true
+      });
+      if ( !plan ) break;
+      movement = await token.document.startMovement(plan.id);
+    }
 
-    return token.startMovement(plan.id);
+    return movement;
   }
 
   /* -------------------------------------------- */
