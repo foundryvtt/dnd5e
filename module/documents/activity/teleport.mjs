@@ -105,7 +105,7 @@ export default class TeleportActivity extends ActivityMixin(TeleportActivityData
     }
 
     const maxDistance = this.#getSceneMaxDistance();
-    if ( !(maxDistance > 0) ) {
+    if ( maxDistance <= 0 ) {
       ui.notifications.warn("DND5E.TELEPORT.Warning.InvalidDistance", { localize: true });
       return null;
     }
