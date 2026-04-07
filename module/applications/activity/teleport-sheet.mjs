@@ -29,7 +29,6 @@ export default class TeleportSheet extends ActivitySheet {
   /** @inheritDoc */
   async _prepareEffectContext(context, options) {
     context = await super._prepareEffectContext(context, options);
-    context.source.teleport = this.activity._source.teleport ?? context.source.teleport;
     return context;
   }
 

@@ -46,20 +46,6 @@ export default class TeleportActivity extends ActivityMixin(TeleportActivityData
   }
 
   /* -------------------------------------------- */
-  /*  Data Preparation                            */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  prepareData() {
-    super.prepareData();
-    const source = this.toObject();
-    this._source.teleport = foundry.utils.mergeObject(source.teleport, this._source.teleport ?? {}, { inplace: false });
-    for ( const field of ["activation", "duration", "range", "target", "uses"] ) {
-      this._source[field] ??= source[field];
-    }
-  }
-
-  /* -------------------------------------------- */
   /*  Activation                                  */
   /* -------------------------------------------- */
 
@@ -68,7 +54,7 @@ export default class TeleportActivity extends ActivityMixin(TeleportActivityData
     if ( !this.canPlanTeleport ) return super._usageChatButtons(message);
     return [{
       label: game.i18n.localize("DND5E.TELEPORT.Action.Teleport"),
-      icon: '<i class="fa-solid fa-person-from-portal" inert></i>',
+      icon: '<i class="fa-solid fa-person-walking-dashed-line-arrow-right" inert></i>',
       dataset: {
         action: "planTeleport"
       }
@@ -96,11 +82,6 @@ export default class TeleportActivity extends ActivityMixin(TeleportActivityData
     const token = this.getUsageToken();
     if ( !token?.object ) {
       ui.notifications.warn("DND5E.ActionWarningNoToken", { localize: true });
-      return null;
-    }
-
-    if ( (typeof token.object.planMovement !== "function") || (typeof token.startMovement !== "function") ) {
-      ui.notifications.error("DND5E.TELEPORT.Warning.Unsupported", { localize: true });
       return null;
     }
 
