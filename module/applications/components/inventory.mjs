@@ -348,6 +348,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
     }, {
       name: "DND5E.DisplayCard",
       icon: '<i class="fa-solid fa-message"></i>',
+      condition: () => item.actor,
       callback: () => item.displayCard()
     }];
 
