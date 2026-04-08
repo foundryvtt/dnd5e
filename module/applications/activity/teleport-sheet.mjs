@@ -42,7 +42,7 @@ export default class TeleportSheet extends ActivitySheet {
   _getTabs() {
     const tabs = super._getTabs();
     tabs.effect.label = "DND5E.TELEPORT.SECTIONS.Teleport";
-    tabs.effect.icon = "fa-solid fa-person-rays";
+    tabs.effect.icon = "fa-solid fa-person-walking-dashed-line-arrow-right";
     return tabs;
   }
 }
