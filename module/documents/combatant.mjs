@@ -59,13 +59,27 @@ export default class Combatant5e extends Combatant {
   /* -------------------------------------------- */
 
   /**
-   * Key for the group to which this combatant should belong, or `null` if it can't be grouped.
+   * Key for the group to which this combatant should belong in the encounter tracker, or `null` if it can't be grouped.
    * @returns {string|null}
    */
   getGroupingKey() {
     if ( this.group ) return this.group.id;
-    if ( this.token?.actorLink || !this.token?.baseActor || (this.initiative === null) ) return null;
+    if ( this.token?.actorLink || !this.token?.baseActor || (this.initiative === null)
+      || !game.settings.get("dnd5e", "initiativeGroupCombatants") ) return null;
     return `${Math.floor(this.initiative).paddedString(4)}:${this.token.disposition}:${this.token.baseActor.id}`;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Key for the group to which this combatant should belong when rolling initiative, or `null` if it can't be grouped.
+   * @returns {string|null}
+   */
+  getInitiativeGroupingKey() {
+    if ( this.group ) return this.group.id;
+    if ( this.token?.actorLink || !this.token?.baseActor
+      || !game.settings.get("dnd5e", "initiativeGroupRoll") ) return null;
+    return `${this.getInitiativeRoll().formula}:${this.token.disposition}:${this.token.baseActor.id}`;
   }
 
   /* -------------------------------------------- */
