@@ -63,14 +63,11 @@ export default class TeleportActivity extends ActivityMixin(TeleportActivityData
 
   // /* -------------------------------------------- */
 
+  // TODO: triggerSubsequentActions only when the spell specifically targets "Self"
   // /** @inheritDoc */
   // async _triggerSubsequentActions() {
-  //   if ( !this.canPlanTeleport ) return;
-  //   try {
-  //     await this.planTeleport();
-  //   } catch(err) {
-  //     Hooks.onError("TeleportActivity#planTeleport", err, { log: "error", notify: "error" });
-  //   }
+  //   if ( !this.canPlanTeleport ) return;  
+  //   await this.planTeleport();  
   // }
 
   /* -------------------------------------------- */
