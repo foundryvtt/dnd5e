@@ -60,7 +60,8 @@ export default class GroupTemplate extends ActorDataModel.mixin(CurrencyTemplate
   /* -------------------------------------------- */
 
   /**
-   * Place all members in the group on the current scene.
+   * Place all members in the group on the current scene and return the associated token documents.
+   * @returns {Promise<TokenDocument[]>}
    */
   async placeMembers() {
     if ( !game.user.isGM || !canvas.scene ) return;
@@ -94,6 +95,6 @@ export default class GroupTemplate extends ActorDataModel.mixin(CurrencyTemplate
       if ( minimized ) this.parent.sheet.maximize();
     }
 
-    await canvas.scene.createEmbeddedDocuments("Token", tokensData);
+    return await canvas.scene.createEmbeddedDocuments("Token", tokensData);
   }
 }

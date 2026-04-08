@@ -5890,6 +5890,16 @@
     "Name": "Default Skills",
     "Hint": "The default skills that appear on NPC sheets regardless of level of proficiency."
   },
+  "ENCOUNTERS": {
+    "Name": "Encounters",
+    "EncounterPlacementBehavior": {
+      "Name": "Placement Options",
+      "Hint": "Configure whether to add encounter members to combat when placed on a scene.",
+      "CreateCombatants": "Add to Combat",
+      "None": "Do Nothing",
+      "RollInitiative": "Add to Combat and Roll Initiative"
+    }
+  },
   "General": "General",
   "LOYALTY": {
     "Hint": "Enable optional Loyalty tracking.",
