@@ -600,7 +600,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       let method = spell.system.method;
       if ( !(method in CONFIG.DND5E.spellcasting) ) method = "innate";
       const spellcasting = CONFIG.DND5E.spellcasting[method];
-      const level = spellcasting instanceof dnd5e.dataModels.spellcasting.SingleLevelSpellcasting
+      const level = spellcasting instanceof dnd5e.dataModels.spellcasting.SingleLevelSpellcasting && spell.system.level !== 0
         ? null : (spell.system.level || 0);
       method = spellcasting?.getSpellSlotKey?.(level) ?? method;
 
