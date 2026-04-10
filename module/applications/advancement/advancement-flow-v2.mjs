@@ -192,6 +192,9 @@ export default class AdvancementFlow extends Application5e {
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
+    if ( options.error?.selector ) {
+      for ( const el of this.element.querySelectorAll(options.error.selector) ) el.classList.add("error");
+    }
     if ( this.manager?.rendered ) this.manager?.setPosition();
   }
 

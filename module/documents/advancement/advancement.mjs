@@ -13,10 +13,19 @@ import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
  * Error that can be thrown during the advancement update preparation process.
  */
 class AdvancementError extends Error {
-  constructor(...args) {
-    super(...args);
+  constructor(message, { selector }={}) {
+    super(message);
     this.name = "AdvancementError";
+    this.selector = selector ?? null;
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * CSS selector for the element to highlight when this error is displayed in an advancement flow.
+   * @type {string|null}
+   */
+  selector;
 }
 
 /**

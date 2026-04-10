@@ -576,7 +576,7 @@ export default class AdvancementManager extends Application5e {
       await this.step.flow._render(true, options);
     } else {
       this.step.flow.manager ??= this;
-      await this.step.flow.render({ force: true });
+      await this.step.flow.render({ force: true, error: this.step.error });
       const doc = this.element.ownerDocument;
       const existing = doc.getElementById(this.step.flow.element.id);
       if ( existing ) existing.replaceWith(this.step.flow.element);
