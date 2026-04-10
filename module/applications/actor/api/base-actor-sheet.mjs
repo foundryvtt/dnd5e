@@ -540,6 +540,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @protected
    */
   _prepareSpellbook(context) {
+    const { SingleLevelSpellcasting } = dnd5e.dataModels.spellcasting;
     const spellbook = {};
     const columns = customElements.get(this.options.elements.inventory).mapColumns([
       "school", "time", "range", "target", "roll", { id: "uses", order: 650, priority: 300 },
@@ -600,7 +601,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       let method = spell.system.method;
       if ( !(method in CONFIG.DND5E.spellcasting) ) method = "innate";
       const spellcasting = CONFIG.DND5E.spellcasting[method];
-      const level = spellcasting instanceof dnd5e.dataModels.spellcasting.SingleLevelSpellcasting && spell.system.level !== 0
+      const level = spellcasting instanceof SingleLevelSpellcasting && spell.system.level !== 0
         ? null : (spell.system.level || 0);
       method = spellcasting?.getSpellSlotKey?.(level) ?? method;
 
