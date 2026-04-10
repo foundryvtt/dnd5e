@@ -307,8 +307,9 @@ export default class PhysicalItemTemplate extends SystemDataModel {
    * @returns {Promise<Item5e>}
    */
   async asGear() {
-    const change = { "flags.dnd5e.gearSource": this.parent.uuid };
+    if ( !this.properties?.has("gear") ) return this.parent;
     let clone;
+    const change = { "flags.dnd5e.gearSource": this.parent.uuid };
     const flags = this.parent.getFlag("dnd5e", "gear") ?? {};
     if ( this.metadata.compendiumGearSource && this.parent._stats.compendiumSource && (flags.preserve !== true) ) {
       const item = await fromUuid(this.parent._stats.compendiumSource);
