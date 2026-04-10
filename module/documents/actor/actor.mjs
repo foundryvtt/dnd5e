@@ -604,7 +604,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @param {SpellcastingDescription} [config.spellcasting]  Spellcasting descriptive object.
    * @param {number} [config.count=1]                        Number of classes with this type of spellcasting.
    */
-  static computeClassProgression(progression, cls, {actor, spellcasting, count=1}={}) {
+  static computeClassProgression(progression, cls, { actor, spellcasting, count=1 }={}) {
     const type = cls.spellcasting.type;
     spellcasting ??= cls.spellcasting;
 
@@ -655,7 +655,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @param {object} [config]
    * @param {Actor5e} [config.actor]  Actor for whom the data is being prepared.
    */
-  static prepareSpellcastingSlots(spells, type, progression, {actor}={}) {
+  static prepareSpellcastingSlots(spells, type, progression, { actor }={}) {
     /**
      * A hook event that fires to convert the provided spellcasting progression into spell slots.
      * The actual hook names include the spellcasting type (e.g. `dnd5e.prepareLeveledSlots`).
@@ -2505,7 +2505,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @param {RestResult} [result={}]                      Rest result being constructed.
    * @protected
    */
-  _getRestResourceRecovery({recoverShortRestResources, recoverLongRestResources, ...config}={}, result={}) {
+  _getRestResourceRecovery({ recoverShortRestResources, recoverLongRestResources, ...config }={}, result={}) {
     recoverShortRestResources ??= config.type === "short";
     recoverLongRestResources ??= config.type === "long";
     for ( let [k, r] of Object.entries(this.system.resources ?? {}) ) {

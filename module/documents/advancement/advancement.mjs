@@ -27,9 +27,9 @@ class AdvancementError extends Error {
  * @abstract
  */
 export default class Advancement extends PseudoDocumentMixin(BaseAdvancementData) {
-  constructor(data, {parent=null, ...options}={}) {
+  constructor(data, { parent=null, ...options }={}) {
     if ( parent instanceof Item ) parent = parent.system;
-    super(data, {parent, ...options});
+    super(data, { parent, ...options });
 
     /**
      * A collection of Application instances which should be re-rendered whenever this document is updated.

@@ -346,7 +346,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  static _applyChangeUnguided(actor, change, changes, {replacementData}={}) {
+  static _applyChangeUnguided(actor, change, changes, { replacementData }={}) {
     if ( change.effect.system._applyLegacy?.(actor, change, changes) === false ) return;
 
     // Double-check whether the target should be treated as a formula if the key has been modified
@@ -357,7 +357,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
         : this.applyChangeField(actor, change, { field }) };
     }
 
-    super._applyChangeUnguided(actor, change, changes, {replacementData});
+    super._applyChangeUnguided(actor, change, changes, { replacementData });
   }
 
   /* --------------------------------------------- */
