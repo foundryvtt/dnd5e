@@ -98,7 +98,7 @@ export default class HitPointsFlow extends AdvancementFlow {
       if ( form.querySelector("[name=value], [name=useAverage]") ) {
         const { useAverage, value } = formData.object;
         if ( !useAverage && !Number.isInteger(value) ) {
-          const errorType = value === undefined ? "Empty" : "Invalid";
+          const errorType = value === null ? "Empty" : "Invalid";
           throw new Advancement.ERROR(
             game.i18n.localize(`DND5E.ADVANCEMENT.HitPoints.Warning.${errorType}`),
             { selector: ".roll-result" }
