@@ -672,9 +672,12 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    * @returns {FormSelectOption[]}
    */
   static validMaterialTargets() {
-    return (this.actor?.items ?? [])
-      .filter(i => ["consumable", "loot"].includes(i.type))
-      .map(i => ({ value: i.id, label: `${i.name} (${formatNumber(i.system.quantity)})` }));
+    return [
+      { value: "", label: "" },
+      ...(this.actor?.items ?? [])
+        .filter(i => ["consumable", "loot"].includes(i.type))
+        .map(i => ({ value: i.id, label: `${i.name} (${formatNumber(i.system.quantity)})` }))
+    ];
   }
 
   /* -------------------------------------------- */
