@@ -1,5 +1,6 @@
-import AdvancementFlow from "./advancement-flow-v2.mjs";
+import Advancement from "../../documents/advancement/advancement.mjs";
 import { simplifyBonus } from "../../utils.mjs";
+import AdvancementFlow from "./advancement-flow-v2.mjs";
 
 /**
  * Inline application that presents hit points selection upon level up.
@@ -91,14 +92,25 @@ export default class HitPointsFlow extends AdvancementFlow {
       newValue = event.target.checked ? "avg" : null;
     } else if ( event.target?.name === "value" ) {
       newValue = Number.isInteger(event.target.valueAsNumber) ? event.target.valueAsNumber : null;
-    } else return;
+    } else {
+      // If neither the value input nor the useAverage checkbox is present, this is the first-class-level case where
+      // max HP is shown statically and no user input is required.
+      if ( form.querySelector("[name=value], [name=useAverage]") ) {
+        const { useAverage, value } = formData.object;
+        if ( !useAverage && !Number.isInteger(value) ) {
+          const errorType = value === null ? "Empty" : "Invalid";
+          throw new Advancement.ERROR(
+            game.i18n.localize(`DND5E.ADVANCEMENT.HitPoints.Warning.${errorType}`),
+            { selector: ".roll-result" }
+          );
+        }
+      }
+      return;
+    }
 
-    if ( newValue ) await this.advancement.apply(this.level, { [this.level]: newValue });
+    if ( ((typeof newValue === "string") && newValue) || Number.isInteger(newValue) ) {
+      await this.advancement.apply(this.level, { [this.level]: newValue });
+    }
     else await this.advancement.reverse(this.level);
-
-    // TODO: Re-implement advancement errors
-    // this.form.querySelector(".rollResult")?.classList.add("error");
-    // const errorType = formData.value ? "Invalid" : "Empty";
-    // throw new Advancement.ERROR(game.i18n.localize(`DND5E.ADVANCEMENT.HitPoints.Warning.${errorType}`));
   }
 }

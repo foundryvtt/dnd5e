@@ -1560,6 +1560,7 @@ function createRollLink(label, dataset={}, { classes="roll-link", tag="a" }={}) 
  * @param {HTMLElement} element
  */
 export function activateChatListeners(message, element) {
+  _addListeners(element.querySelectorAll('[data-action="concentration"]'), handleRoll);
   _addListeners(element.querySelectorAll('[data-action="rollRequest"]'), handleRoll);
 }
 

@@ -571,7 +571,8 @@ export default class CharacterActorSheet extends BaseActorSheet {
     context.favorites = await this._prepareFavorites();
 
     // Speed
-    context.speed = Object.entries(CONFIG.DND5E.movementTypes).reduce((obj, [k, { label }]) => {
+    context.speed = Object.entries(CONFIG.DND5E.movementTypes).reduce((obj, [k, { hidden, label }]) => {
+      if ( hidden ) return obj;
       const value = attributes.movement[k];
       if ( (k === "fly") && attributes.movement.hover ) {
         label = game.i18n.format("DND5E.MOVEMENT.HoverSpeed", { speed: label });
@@ -1099,11 +1100,11 @@ export default class CharacterActorSheet extends BaseActorSheet {
     const { favoriteId } = target.closest("[data-favorite-id]").dataset;
     const favorite = await fromUuid(favoriteId, { relative: this.actor });
     if ( (favorite instanceof dnd5e.documents.Item5e) || target.dataset.activityId ) {
-      if ( favorite.type === "container" ) favorite.sheet.render({ force: true });
-      else favorite.use({ event });
+      if ( favorite.type === "container" ) this._renderChild(favorite.sheet);
+      else favorite.use({ event }, { options: { sheet: this } });
     }
     else if ( favorite instanceof dnd5e.dataModels.activity.BaseActivityData ) {
-      if ( favorite.canUse ) favorite.use({ event });
+      if ( favorite.canUse ) favorite.use({ event }, { options: { sheet: this } });
     }
     else if ( favorite instanceof dnd5e.documents.ActiveEffect5e ) favorite.update({ disabled: !favorite.disabled });
     else {

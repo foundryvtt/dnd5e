@@ -284,7 +284,7 @@ export default function ApplicationV2Mixin(Base, { handlebars=true }={}) {
         "FORMULA-INPUT"
       ].join(", ")}):not(.always-interactive)`;
       for ( const element of this.element.querySelectorAll(selector) ) {
-        if ( element.closest("prose-mirror[open]") ) continue; // Skip active ProseMirror editors
+        if ( element.closest("prose-mirror")?.open ) continue; // Skip active ProseMirror editors
         if ( element.tagName === "TEXTAREA" ) element.readOnly = true;
         else element.disabled = true;
       }

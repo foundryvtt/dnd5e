@@ -100,7 +100,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     if ( !this.hasDynamicRing ) return;
     let size = this.baseActor?.system.traits?.size;
     if ( !this.actorLink ) {
-      const deltaSize = this.delta.system.traits?.size;
+      const deltaSize = this.delta?.system.traits?.size;
       if ( deltaSize ) size = deltaSize;
     }
     if ( !size ) return;
@@ -136,6 +136,8 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
         ? cost => cost
         : (cost, _from, _to, distance) => cost + distance;
     };
+    CONFIG.Token.movement.actions.jump.deriveTerrainDifficulty = () => 1;
+    CONFIG.Token.movement.actions.jump.getCostFunction = () => cost => cost;
   }
 
   /* -------------------------------------------- */

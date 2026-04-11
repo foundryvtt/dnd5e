@@ -371,11 +371,12 @@
 
 /**
  * @typedef MovementTypeConfiguration
- * @property {string} label            Localized label for the movement type.
- * @property {string} [travel]         Travel type in `CONFIG.DND5E.travelTypes` to map this movement speed to. If not
- *                                     provided, then `land` is assumed.
- * @property {boolean} [walkFallback]  When this special movement type runs out, can the actor fall back to using their
- *                                     walk speed at 2x cost?
+ * @property {boolean} [hidden=false]             Whether this movement speed is displayed in the actor's sheet.
+ * @property {string} label                       Localized label for the movement type.
+ * @property {string} [travel]                    Travel type in `CONFIG.DND5E.travelTypes` to map this movement
+ *                                                speed to. If not provided, then `land` is assumed.
+ * @property {boolean} [walkFallback]             When this special movement type runs out, can the actor fall back
+ *                                                to using their walk speed at 2x cost?
  */
 
 /* -------------------------------------------- */

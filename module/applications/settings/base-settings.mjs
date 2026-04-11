@@ -98,7 +98,7 @@ export default class BaseSettingsConfig extends Application5e {
       requiresWorldReload ||= (setting.scope === "world") && setting.requiresReload;
     }
     if ( requiresClientReload || requiresWorldReload ) {
-      return SettingsConfig.reloadConfirm({ world: requiresWorldReload });
+      return foundry.applications.settings.SettingsConfig.reloadConfirm({ world: requiresWorldReload });
     }
   }
 }

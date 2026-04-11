@@ -371,7 +371,7 @@ export default class NPCActorSheet extends BaseActorSheet {
 
     // Speed
     context.speed = [
-      ...Object.entries(CONFIG.DND5E.movementTypes).map(([k, { label }]) => {
+      ...Object.entries(CONFIG.DND5E.movementTypes).filter(([, m]) => !m.hidden).map(([k, { label }]) => {
         const value = attributes.movement[k];
         if ( !value ) return null;
         const data = { label, value };
