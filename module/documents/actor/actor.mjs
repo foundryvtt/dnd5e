@@ -3386,6 +3386,18 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   async _onUpdateDescendantDocuments(parent, collection, documents, changes, options, userId) {
     if ( (userId === game.userId) && (collection === "items") ) await this.updateEncumbrance(options);
     super._onUpdateDescendantDocuments(parent, collection, documents, changes, options, userId);
+
+    if ( collection === "items" ) {
+        let refreshBars = false;
+        for ( let i = 0; i < documents.length; i++ ) {
+            if ( documents[i].hasLimitedUses && changes[i]?.system?.uses?.hasOwnProperty("spent") ) {
+              refreshBars = true;
+              break;
+            }
+        }
+        
+        if (refreshBars) this.getActiveTokens().forEach(token => token.renderFlags.set({ refreshBars: true }));
+    }
   }
 
   /* -------------------------------------------- */
