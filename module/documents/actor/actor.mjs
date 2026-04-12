@@ -3396,7 +3396,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
             }
         }
         
-        if (refreshBars) this.getActiveTokens().forEach(token => token.renderFlags.set({ refreshBars: true }));
+        if ( refreshBars ) this.getActiveTokens().forEach(token => token.renderFlags.set({ refreshBars: true }));
     }
   }
 
