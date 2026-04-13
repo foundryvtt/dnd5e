@@ -151,7 +151,9 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
       tiles: docs.tiles.map(t => calculateRotationUpdate(t)),
       tokens: docs.tokens.map(t => calculateRotationUpdate(t)),
       lights: docs.lights.map(l => calculateRotationUpdate(l)),
-      regions: docs.regions.map(r => RotateAreaRegionBehaviorType.#rotateRegionShapes(r, angle, radians, pivot)),
+      regions: docs.regions.map(r =>
+        RotateAreaRegionBehaviorType.#rotateRegionShapes(r, angle, radians, pivot, this.scene.grid)
+      ),
       sounds: docs.sounds.map(s => calculateRotationUpdate(s)),
       walls: docs.walls.map(wall => {
         const first = RotateAreaRegionBehaviorType.#calculatePosition(radians, pivot, {
@@ -274,7 +276,9 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
    */
   static #placeableSize(doc) {
     if ( !(doc instanceof foundry.abstract.Document) ) doc = doc.document;
-    if ( doc instanceof TileDocument ) return { width: doc.width, height: doc.height };
+    if ( (doc instanceof TileDocument) && (game.release.generation < 14) ) {
+      return { width: doc.width, height: doc.height };
+    }
     if ( doc instanceof TokenDocument ) return doc.getSize();
     else return { width: 0, height: 0 };
   }
@@ -287,21 +291,23 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
    * @param {Degrees} angle    Rotation amount in degrees.
    * @param {Radians} radians  Rotation amount in radians.
    * @param {Point} pivot      Center point for the rotation.
+   * @param {Grid} [grid]      Grid for the current scene.
    * @returns {object}         Update data for the region.
    */
-  static #rotateRegionShapes(region, angle, radians, pivot) {
+  static #rotateRegionShapes(region, angle, radians, pivot, grid=Scene.defaultGrid) {
     const shapes = region.toObject().shapes;
-    for ( const shape of shapes ) {
-      const { x, y, width, height } = shape;
+    for ( let shape of shapes ) {
+      if ( shape.type === foundry.data.EmanationShapeData?.TYPE ) shape = shape.base;
+      let { x, y, width, height } = shape;
       switch ( shape.type ) {
         case foundry.data.RectangleShapeData.TYPE:
-          Object.assign(shape, this.#calculatePosition(
-            radians, pivot, { x: x + (width / 2), y: y + (height / 2) }, { width, height }
-          ));
-          break;
-        case foundry.data.CircleShapeData.TYPE:
-        case foundry.data.EllipseShapeData.TYPE:
-          Object.assign(shape, this.#calculatePosition(radians, pivot, { x, y }));
+          if ( game.release.generation < 14 ) {
+            Object.assign(shape, this.#calculatePosition(
+              radians, pivot, { x: x + (width / 2), y: y + (height / 2) }, { width, height }
+            ));
+          } else {
+            Object.assign(shape, this.#calculatePosition(radians, pivot, { x, y }));
+          }
           break;
         case foundry.data.PolygonShapeData.TYPE:
           const iterator = Iterator.from(shape.points);
@@ -312,8 +318,26 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
             shape.points.push(x, y);
           }
           break;
+        case foundry.data.TokenShapeData?.TYPE:
+          // Logic taken from `TokenDocument.getSize` since there isn't a similar method available for `TokenShapeData`
+          if ( grid.isHexagonal ) {
+            if ( grid.columns ) width = (0.75 * Math.floor(width)) + (0.5 * (width % 1)) + 0.25;
+            else height = (0.75 * Math.floor(height)) + (0.5 * (height % 1)) + 0.25;
+          }
+          width *= grid.sizeX;
+          height *= grid.sizeY;
+          Object.assign(shape, this.#calculatePosition(
+            radians, pivot, { x: x + (width / 2), y: y + (height / 2) }, { width, height }
+          ));
+          break;
+        case foundry.data.GridShapeData?.TYPE:
+          // Not sure it makes sense to rotate these, may lead to situations where rotation's isn't fully reversible
+          return;
+        default:
+          Object.assign(shape, this.#calculatePosition(radians, pivot, { x, y }));
+          break;
       }
-      shape.rotation += angle;
+      if ( "rotation" in shape ) shape.rotation += angle;
     }
     return { _id: region.id, shapes };
   }
@@ -429,15 +453,18 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
           doc.c = [first.x, first.y, second.x, second.y];
           doc.object.renderFlags.set({ refreshLine: true });
           if ( game.settings.get("core", "visionAnimation") ) {
-            doc.object.initializeEdge();
+            if ( game.release.generation < 14 ) doc.object.initializeEdge();
+            else doc.initializeEdge();
             canvas.perception.update({
-              refreshEdges: true, initializeLighting: true, initializeVision: true, initializeSounds: true
+              refreshEdges: game.release.generation < 14 ? true : undefined,
+              initializeLighting: true, initializeVision: true, initializeSounds: true
             });
           }
         } else {
           const updates = RotateAreaRegionBehaviorType.#calculatePosition(pr, pivot, center, size);
           updates.rotation = rotation + (angle * pa);
-          Object.assign(doc, updates);
+          if ( doc instanceof TileDocument && (game.release.generation > 13) ) Object.assign(doc.shape, updates);
+          else Object.assign(doc, updates);
           if ( doc instanceof AmbientLightDocument ) doc.object.initializeLightSource();
           else if ( doc instanceof AmbientSoundDocument ) doc.object.initializeSoundSource();
           else if ( doc instanceof TileDocument ) doc.object.renderFlags.set({ refreshTransform: true });
