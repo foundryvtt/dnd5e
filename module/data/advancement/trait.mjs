@@ -50,6 +50,7 @@ export class TraitConfigurationData extends foundry.abstract.DataModel {
   /** @inheritDoc */
   static migrateData(source) {
     super.migrateData(source);
+    if ( !source ) return source;
     const version = dnd5e.settings.rulesVersion;
     const languageMap = LANGUAGE_MAP[version] ?? {};
     if ( source.grants?.length ) source.grants = source.grants.map(t => languageMap[t] ?? t);
@@ -80,6 +81,7 @@ export class TraitValueData extends foundry.abstract.DataModel {
   /** @inheritDoc */
   static migrateData(source) {
     super.migrateData(source);
+    if ( !source ) return source;
     const version = dnd5e.settings.rulesVersion;
     const languageMap = LANGUAGE_MAP[version] ?? {};
     if ( source.chosen?.length ) source.chosen = source.chosen.map(t => languageMap[t] ?? t);

@@ -52,6 +52,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     "system.attributes.encumbrance.multipliers.heavilyEncumbered",
     "system.attributes.encumbrance.multipliers.maximum",
     "system.attributes.encumbrance.multipliers.overall",
+    "system.damageBonus",
     "save.dc.bonus"
   ]);
 
@@ -202,8 +203,10 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
     // Properly handle formulas that don't exist as part of the data model
     if ( ActiveEffect5e.FORMULA_FIELDS.has(change.key) ) {
-      const field = new FormulaField({ deterministic: true });
-      return { [change.key]: this.constructor.applyField(doc, change, field) };
+      const field = new FormulaField({ deterministic: change.key !== "system.damageBonus" });
+      return { [change.key]: game.release.generation < 14
+        ? this.constructor.applyField(doc, change, field)
+        : this.constructor.applyChangeField(doc, change, { field }) };
     }
 
     // Handle activity-targeted changes
@@ -220,7 +223,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     change = change.effect._applyChangeShim(change);
     if ( change.key.startsWith("flags.dnd5e.") ) change = change.effect._prepareFlagChange(model, change);
     if ( ActiveEffect5e.FORMULA_FIELDS.has(change.key) ) {
-      const field = new FormulaField({ deterministic: true });
+      const field = new FormulaField({ deterministic: change.key !== "system.damageBonus" });
       return { [change.key]: this.applyChangeField(model, change, { field }) };
     }
     if ( (change.key.startsWith("activities[") || change.key.startsWith("system.activities."))
@@ -263,7 +266,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     const { field } = options;
 
     // Replace value when using string interpolation syntax
-    if ( (field instanceof StringField) && (change.type === "override") && change.value.includes?.("{}") ) {
+    if ( (field instanceof StringField) && (change.type === "override") && change.value?.includes?.("{}") ) {
       change.value = change.value.replace("{}", current ?? "");
     }
 
@@ -343,9 +346,18 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  static _applyChangeUnguided(actor, change, changes, {replacementData}={}) {
+  static _applyChangeUnguided(actor, change, changes, { replacementData }={}) {
     if ( change.effect.system._applyLegacy?.(actor, change, changes) === false ) return;
-    super._applyChangeUnguided(actor, change, changes, {replacementData});
+
+    // Double-check whether the target should be treated as a formula if the key has been modified
+    if ( ActiveEffect5e.FORMULA_FIELDS.has(change.key) ) {
+      const field = new FormulaField({ deterministic: change.key !== "system.damageBonus" });
+      return { [change.key]: game.release.generation < 14
+        ? this.applyField(actor, change, field)
+        : this.applyChangeField(actor, change, { field }) };
+    }
+
+    super._applyChangeUnguided(actor, change, changes, { replacementData });
   }
 
   /* --------------------------------------------- */
@@ -1064,6 +1076,13 @@ if ( !("applyChange" in ActiveEffect) ) {
   /** @ignore */
   ActiveEffect5e.prototype._applyLegacy = function(actor, change, changes) {
     if ( this.system._applyLegacy?.(actor, change, changes) === false ) return;
+
+    // Double-check whether the target should be treated as a formula if the key has been modified
+    if ( ActiveEffect5e.FORMULA_FIELDS.has(change.key) ) {
+      const field = new FormulaField({ deterministic: change.key !== "system.damageBonus" });
+      return { [change.key]: this.constructor.applyField(actor, change, field) };
+    }
+
     original._applyLegacy.call(this, actor, change, changes);
   };
 

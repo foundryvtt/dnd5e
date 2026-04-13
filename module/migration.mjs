@@ -984,7 +984,7 @@ function _migrateTokenImage(actorData, updateData) {
  * @returns {object}                                        The updateData to apply
  * @private
  */
-function _migrateDocumentIcon(document, updateData, {iconMap, field="img"}={}) {
+function _migrateDocumentIcon(document, updateData, { iconMap, field="img" }={}) {
   let path = document?.[field];
   if ( path && iconMap ) {
     if ( path.startsWith("/") || path.startsWith("\\") ) path = path.substring(1);

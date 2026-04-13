@@ -176,6 +176,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
     const filters = {
       locked: {
         additional: { category: { feat: 1 } },
+        arbitrary: [{ k: "system.prerequisites.level", o: "lte", v: this.advancement.actor.system.details.level }],
         types: new Set(["feat"])
       }
     };

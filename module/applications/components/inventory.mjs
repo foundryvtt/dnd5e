@@ -348,6 +348,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
     }, {
       name: "DND5E.DisplayCard",
       icon: '<i class="fa-solid fa-message"></i>',
+      condition: () => item.actor,
       callback: () => item.displayCard()
     }];
 
@@ -429,7 +430,9 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
       callback: li => this._onAction(li, "toggleGear"),
       group: "state"
     }, {
-      name: expanded ? "Collapse" : "Expand",
+      name: game.release.generation < 14
+        ? expanded ? "Collapse" : "Expand"
+        : expanded ? "APPLICATION.ACTIONS.Collapse" : "APPLICATION.ACTIONS.Expand",
       icon: `<i class="fa-solid fa-${expanded ? "compress" : "expand"}"></i>`,
       condition: () => "canExpand" in this.app ? this.app.canExpand(item) : true,
       callback: li => this._onAction(li, "toggleExpand"),
@@ -768,8 +771,8 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
       return;
     }
 
-    const icon = target.querySelector(":scope > i");
     const row = target.closest("[data-uuid]");
+    const icon = row.querySelector('[data-action="toggleExpand"] > i');
     const summary = row.querySelector(":scope > .item-description > .wrapper");
     const { uuid } = row.dataset;
     item ??= await fromUuid(uuid);

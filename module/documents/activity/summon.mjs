@@ -414,7 +414,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
       // Match attacks
       if ( this.match.attacks && item.system.hasAttack ) {
         let attack = this.flat?.attack;
-        if ( attack === undefined ) {
+        if ( (attack === undefined) || (attack === null) ) {
           const actionType = item.system.activities.getByType("attack")[0].actionType;
           const typeMapping = { mwak: "msak", rwak: "rsak" };
           const parts = [

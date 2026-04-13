@@ -50,4 +50,15 @@ export default class BasicDie extends Die {
       });
     }
   }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _evaluateModifiers() {
+    // Since adv/dis internally calls roll and modifies the count, they must be evaluated first in order for subsequent
+    // modifiers to operate on the correct dice.
+    const [rest, selection] = this.modifiers.partition(m => /^(adv|dis)\d*/i.test(m));
+    if ( selection.length ) this.modifiers = selection.concat(rest);
+    return super._evaluateModifiers();
+  }
 }
