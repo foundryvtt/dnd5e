@@ -3388,15 +3388,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     super._onUpdateDescendantDocuments(parent, collection, documents, changes, options, userId);
 
     if ( collection === "items" ) {
-        let refreshBars = false;
-        for ( let i = 0; i < documents.length; i++ ) {
-            if ( documents[i].hasLimitedUses && changes[i]?.system?.uses?.hasOwnProperty("spent") ) {
-              refreshBars = true;
-              break;
-            }
-        }
-        
-        if ( refreshBars ) this.getActiveTokens().forEach(token => token.renderFlags.set({ refreshBars: true }));
+      const refreshBars = documents.some(
+        (doc, index) => doc.hasLimitedUses && changes[index]?.system?.uses?.hasOwnProperty("spent"));
+      if ( refreshBars ) this.getActiveTokens().forEach(token => token.renderFlags.set({ refreshBars: true }));
     }
   }
 
