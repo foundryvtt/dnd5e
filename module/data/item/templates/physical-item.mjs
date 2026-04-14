@@ -313,7 +313,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
     const flags = this.parent.getFlag("dnd5e", "gear") ?? {};
     if ( this.metadata.compendiumGearSource && this.parent._stats.compendiumSource && (flags.preserve !== true) ) {
       const item = await fromUuid(this.parent._stats.compendiumSource);
-      const name = (flags.preserveName === true ? this.parent._source.name : flags.preserveName) ?? item.name;
+      const name = (flags.preserveName === true ? this.parent._source.name : flags.preserveName) ?? item?.name;
       if ( item ) clone = item.clone({ ...change, name, "system.quantity": this.quantity }, { keepId: true });
     }
     clone ??= this.parent.clone(change, { keepId: true });
