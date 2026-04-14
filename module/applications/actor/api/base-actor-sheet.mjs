@@ -266,6 +266,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
           id, name, img, disabled, duration, source, toggleable,
           parentId: effect.target === effect.parent ? null : effect.parent.id,
           durationParts: duration.remaining ? duration.label.split(", ") : [],
+          showDuration: duration.remaining && Number.isFinite(duration.remaining),
           hasTooltip: source instanceof dnd5e.documents.Item5e
         });
         return arr;
