@@ -1,0 +1,61 @@
+<div class="standard-form scrollable">
+    {{~#if adventure.img}}
+    <figure class="adventure-banner">
+        <img src="{{ adventure.img }}" alt="{{ adventure.name }}">
+        {{#if adventure.caption}}<figcaption>{{{ adventure.caption }}}</figcaption>{{/if}}
+    </figure>
+    {{/if}}
+
+    <section class="adventure-contents">
+        <section class="adventure-overview">
+            <h2>{{ localize "ADVENTURE.ImportHeaderOverview" }}</h2>
+            {{{ description }}}
+        </section>
+        <section class="import-controls">
+            <h2>{{ localize "ADVENTURE.ImportHeaderContents" }}</h2>
+            {{#if loading}}
+            <p>
+                <i class="fa-solid fa-spinner fa-spin fa-spin-pulse" inert></i>
+                {{ localize "ADVENTURE.ImportLoading" }}
+            </p>
+            {{else if imported}}
+            <div class="form-group">
+                <label class="checkbox">
+                    <dnd5e-checkbox name="importFields" value="all" data-tooltip
+                                    aria-label="{{ localize 'ADVENTURE.ImportAll' }}" checked></dnd5e-checkbox>
+                    {{ localize "ADVENTURE.ImportAll" }}
+                </label>
+            </div>
+            {{#each contents}}
+            <div class="form-group">
+                <label class="checkbox">
+                    <dnd5e-checkbox name="importFields" value="{{ field }}" checked disabled data-tooltip
+                                    aria-label="{{ localize 'ADVENTURE.ImportContent' label=label }}"></dnd5e-checkbox>
+                    <i class="{{ icon }} fa-fw" inert></i>
+                    {{ count }} {{ label }}
+                </label>
+            </div>
+            {{/each}}
+            {{else}}
+            <ul class="plain">
+                {{#each contents}}
+                <li><i class="{{ icon }} fa-fw" inert></i> {{ count }} {{ label }}</li>
+                {{/each}}
+            </ul>
+            {{/if}}
+        </section>
+        {{#if optionsSchema}}
+        <section class="import-options">
+            <h2>{{ localize "ADVENTURE.ImportHeaderOptions" }}</h2>
+            {{#each optionsSchema.fields as |field|}}
+            <div class="form-group">
+                <label class="checkbox">
+                    {{ formInput field input=@root.inputs.createCheckboxInput value=field.initial }}
+                    {{ field.label }}
+                </label>
+            </div>
+            {{/each}}
+        </section>
+        {{/if}}
+    </section>
+</div>
