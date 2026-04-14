@@ -331,8 +331,8 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
           ));
           break;
         case foundry.data.GridShapeData?.TYPE:
-          // Not sure it makes sense to rotate these, may lead to situations where rotation's isn't fully reversible
-          return;
+          // Not sure it makes sense to rotate these, may lead to situations where rotation isn't fully reversible
+          continue;
         default:
           Object.assign(shape, this.#calculatePosition(radians, pivot, { x, y }));
           break;
