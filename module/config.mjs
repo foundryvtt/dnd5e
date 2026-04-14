@@ -12,12 +12,13 @@ import * as regionBehaviors from "./data/region-behavior/_module.mjs";
 import * as activities from "./documents/activity/_module.mjs";
 import Actor5e from "./documents/actor/actor.mjs";
 import * as advancement from "./documents/advancement/_module.mjs";
+import Adventure5e from "./documents/adventure.mjs";
 import { preLocalize } from "./utils.mjs";
 
 /**
  * @import {
  *   AbilityConfiguration, ActivityActivationTypeConfiguration, ActivityConsumptionTargetConfiguration,
- *   ActivityTypeConfiguration, ActorSizeConfiguration, AdvancementTypeConfiguration,
+ *   ActivityTypeConfiguration, ActorSizeConfiguration, AdvancementTypeConfiguration, AdventureImportAction,
  *   AreaTargetDefinition, CalendarHUDConfiguration, CharacterFlagConfiguration, ConditionConfiguration,
  *   CraftingConfiguration, CreatureTypeConfiguration, CurrencyConfiguration, DamageTypeConfiguration,
  *   EncumbranceConfiguration, FacilityConfiguration, HabitatConfiguration5e,
@@ -4522,6 +4523,39 @@ DND5E.defaultArtwork = {
     weapon: "systems/dnd5e/icons/svg/items/weapon.svg"
   }
 };
+
+/* -------------------------------------------- */
+/*  Adventures                                  */
+/* -------------------------------------------- */
+
+/**
+ * Configuration for adventure handling by the system.
+ * @type {{ importActions: Record<string, Omit<AdventureImportAction, "id">> }}
+ */
+DND5E.adventure = {
+  importActions: {
+    activateScene: {
+      label: "DND5E.ADVENTURE.ImportAction.ActivateScene",
+      default: true,
+      handler: Adventure5e.activateScene,
+      quickstartHandler: Adventure5e.activateSceneQuickstart,
+      lifecycle: "post"
+    },
+    customizeWorld: {
+      label: "DND5E.ADVENTURE.ImportAction.CustomizeWorld",
+      handler: Adventure5e.customizeWorld,
+      lifecycle: "post"
+    },
+    displayJournal: {
+      label: "DND5E.ADVENTURE.ImportAction.DisplayJournal",
+      default: true,
+      handler: Adventure5e.displayJournal,
+      quickstartHandler: Adventure5e.displayJournalQuickstart,
+      lifecycle: "post"
+    }
+  }
+};
+preLocalize("adventure.importActions", { key: "label" });
 
 /* -------------------------------------------- */
 /*  Calendar                                    */

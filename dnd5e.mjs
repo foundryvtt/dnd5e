@@ -161,6 +161,11 @@ Hooks.once("init", function() {
     label: "DND5E.SheetClass.Encounter"
   });
 
+  DocumentSheetConfig.registerSheet(Adventure, "dnd5e", applications.adventure.AdventureImporter5e, {
+    canBeDefault: false,
+    label: "DND5E.SheetClass.AdventureImporter"
+  });
+
   DocumentSheetConfig.unregisterSheet(Item, "core", foundry.appv1.sheets.ItemSheet);
   DocumentSheetConfig.registerSheet(Item, "dnd5e", applications.item.ItemSheet5e, {
     makeDefault: true,
@@ -566,8 +571,19 @@ Hooks.once("ready", function() {
     dnd5e.ui.calendar.render({ force: true });
   }
 
-  // Determine whether a system migration is required and feasible
+  // Run migrations & post-import actions for quickstarted adventures
+  _handleMigration()
+    .then(() => applications.adventure.AdventureQuickstartDialog.handleQuickstart());
+});
+
+/* -------------------------------------------- */
+
+/**
+ * Determine whether a system migration is required and feasible and run it.
+ */
+async function _handleMigration() {
   if ( !game.user.isGM ) return;
+
   const cv = game.settings.get("dnd5e", "systemMigrationVersion") || game.world.flags.dnd5e?.version;
   const totalDocuments = game.actors.size + game.scenes.size + game.items.size;
   if ( !cv && totalDocuments === 0 ) return game.settings.set("dnd5e", "systemMigrationVersion", game.system.version);
@@ -582,8 +598,9 @@ Hooks.once("ready", function() {
   if ( cv && foundry.utils.isNewerVersion(game.system.flags.compatibleMigrationVersion, cv) ) {
     ui.notifications.error("MIGRATION.DND5E.Warning.VersionTooOld", { permanent: true });
   }
-  migrations.migrateWorld();
-});
+
+  await migrations.migrateWorld();
+}
 
 /* -------------------------------------------- */
 /*  System Styling                              */
