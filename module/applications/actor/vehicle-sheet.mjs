@@ -427,7 +427,7 @@ export default class VehicleActorSheet extends BaseActorSheet {
   }
 
   /* -------------------------------------------- */
-  /*  Event Listeners & Handlers                  */
+  /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
   /**

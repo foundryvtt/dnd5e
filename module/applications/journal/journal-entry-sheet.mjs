@@ -66,7 +66,7 @@ export default class JournalEntrySheet5e extends foundry.applications.sheets.jou
   }
 
   /* -------------------------------------------- */
-  /*  Event Listeners & Handlers                  */
+  /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
   /** @inheritDoc */

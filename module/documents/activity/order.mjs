@@ -272,7 +272,7 @@ export default class OrderActivity extends ActivityMixin(BaseOrderActivityData) 
   }
 
   /* -------------------------------------------- */
-  /*  Event Listeners & Handlers                  */
+  /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
   /**

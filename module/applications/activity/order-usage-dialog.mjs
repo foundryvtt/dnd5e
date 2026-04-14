@@ -275,7 +275,7 @@ export default class OrderUsageDialog extends ActivityUsageDialog {
   }
 
   /* -------------------------------------------- */
-  /*  Event Listeners & Handlers                  */
+  /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
