@@ -35,17 +35,6 @@ export default class JournalEntrySheet5e extends foundry.applications.sheets.jou
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _onRender(context, options) {
-    await super._onRender(context, options);
-    this.element.querySelectorAll(".action-buttons :is(.previous, .next)").forEach(el => {
-      el.classList.add("inline-control");
-    });
-    if ( options.parts.includes("pages") ) this.constructor._injectNavigation(this.document, this.element);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
   _preparePageData() {
     const pages = super._preparePageData();
     this.constructor._adjustTOCNumbering(this.document, pages);
@@ -63,6 +52,29 @@ export default class JournalEntrySheet5e extends foundry.applications.sheets.jou
     if ( page.document.parent?.sheet instanceof JournalEntrySheet5e ) {
       element.classList.add("dnd5e2", "dnd5e2-journal", "titlebar", "dialog-lg");
     }
+  }
+
+  /* -------------------------------------------- */
+  /*  Life-Cycle Handlers                         */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onFirstRender(context, options) {
+    await super._onFirstRender(context, options);
+    const compendium = this.document.compendium
+      ?? foundry.utils.parseUuid(this.document._stats.compendiumSource)?.collection;
+    if ( compendium?.metadata ) this.element.dataset.compendiumId = compendium.metadata.id;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+    this.element.querySelectorAll(".action-buttons :is(.previous, .next)").forEach(el => {
+      el.classList.add("inline-control");
+    });
+    if ( options.parts.includes("pages") ) this.constructor._injectNavigation(this.document, this.element);
   }
 
   /* -------------------------------------------- */
