@@ -248,6 +248,8 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
    * @returns {Point}
    */
   static #placeableCenter(doc) {
+    if ( doc instanceof foundry.canvas.placeables.AmbientLight ) doc = doc.document;
+    if ( doc instanceof AmbientLightDocument ) return { x: doc.x, y: doc.y };
     if ( doc instanceof TokenDocument ) return doc.getCenterPoint();
     if ( doc instanceof foundry.abstract.Document ) {
       if ( doc.object ) doc = doc.object;
