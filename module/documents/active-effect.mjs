@@ -616,12 +616,11 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     if ( !this.constructor.PSEUDO_EXPIRIES.has(expiry) ) return;
     // TODO: Use data model instead of flag
     const effectUpdate = {"flags.dnd5e.specialDuration": expiry, duration: {}};
-    if ( ["targetEnd", "targetStart"].includes(expiry) ) {
-      const combatant = this.start.combat.getCombatantsByActor(actor)[0];
-      if ( combatant && (combatant.turnNumber !== null) ) effectUpdate.start = {combatant: combatant.id};
-      const decreaseDuration = combatant.turnNumber > this.start.combat.turn;
-      if ( decreaseDuration ) effectUpdate.duration.value = value - 1;
-    }
+    const relevantActor = expiry.startsWith("target") ? actor : fromUuidSync(this.origin).actor;
+    const combatant = this.start.combat.getCombatantsByActor(relevantActor)[0];
+    if ( combatant && (combatant.turnNumber !== null) ) effectUpdate.start = {combatant: combatant.id};
+    const decreaseDuration = combatant.turnNumber > this.start.combat.turn;
+    if ( decreaseDuration ) effectUpdate.duration.value = value - 1;
     if ( ["targetEnd", "sourceEnd"].includes(expiry) ) effectUpdate.duration.expiry = "turnEnd";
     else effectUpdate.duration.expiry = "turnStart";
     this.updateSource(effectUpdate);
