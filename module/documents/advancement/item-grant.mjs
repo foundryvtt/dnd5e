@@ -102,8 +102,9 @@ export default class ItemGrantAdvancement extends Advancement {
       }, []) ?? [];
     }
 
+    const added = foundry.utils.getProperty(this, this.storagePath(level)) ?? {};
     if ( ability && (ability !== this.value?.ability) ) {
-      for ( const id of Object.keys(foundry.utils.getProperty(this, this.storagePath(level)) ?? {}) ) {
+      for ( const id of Object.keys(added) ) {
         const item = this.actor.items.get(id);
         if ( item?.type === "spell" ) item.updateSource({ "system.ability": ability });
       }
@@ -111,7 +112,9 @@ export default class ItemGrantAdvancement extends Advancement {
 
     const items = [];
     const itemUpdates = {};
+    const existing = new Set(Object.values(added));
     for ( const uuid of selected ) {
+      if ( existing.has(uuid) ) continue;
       let itemData = retainedData.items?.find(i => i.flags?.dnd5e?.sourceId ?? i._stats?.compendiumSource);
       if ( !itemData ) {
         itemData = await this.createItemData(uuid);
