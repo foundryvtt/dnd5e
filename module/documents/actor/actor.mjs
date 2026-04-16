@@ -3543,10 +3543,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     return ActiveEffect.implementation.create({
       _id: ActiveEffect5e.ID.BLOODIED,
-      name: game.i18n.localize(CONFIG.DND5E.bloodied.name),
       img: CONFIG.DND5E.bloodied.img,
+      flags: { dnd5e: { isTemporary: true } },
+      name: game.i18n.localize(CONFIG.DND5E.bloodied.name),
       statuses: ["bloodied"],
-      showIcon: CONST.ACTIVE_EFFECT_SHOW_ICON?.ALWAYS
+      showIcon: CONST.ACTIVE_EFFECT_SHOW_ICON?.CONDITIONAL
     }, { parent: this, keepId: true });
   }
 
