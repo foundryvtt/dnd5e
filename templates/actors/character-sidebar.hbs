@@ -152,6 +152,7 @@
                             {{/if}}
                         </div>
                         <input type="text" name="system.attributes.hp.value" data-dtype="Number"
+                               data-max="{{ ifThen effectiveMax effectiveMax max }}"
                                placeholder="0" value="{{ value }}" hidden>
                     </div>
                     <div class="tmp">
