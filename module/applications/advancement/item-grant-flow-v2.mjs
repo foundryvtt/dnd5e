@@ -63,6 +63,11 @@ export default class ItemGrantFlow extends AdvancementFlow {
     } else if ( event.target?.tagName === "DND5E-CHECKBOX" ) {
       if ( event.target.checked ) await this.advancement.apply(this.level, { selected: [event.target.name] });
       else await this.advancement.reverse(this.level, { uuid: event.target.name });
+    } else {
+      const selected = this.advancement.configuration.items
+        .filter(i => !this.advancement.configuration.optional && !i.optional)
+        .map(i => i.uuid);
+      if ( selected.length ) await this.advancement.apply(this.level, { selected });
     }
   }
 }
