@@ -1,0 +1,52 @@
+.welcome.application {
+  [data-application-part="main"] {
+    .hero {
+      box-shadow: 0 3px 6px var(--dnd5e-shadow-45);
+    }
+    .message {
+      font-size: var(--font-size-14);
+    }
+  }
+
+  [data-application-part="modules"] {
+    h3 {
+      margin-block-start: 12px;
+      margin-block-end: 6px;
+      border: none;
+      font-family: var(--dnd5e-font-roboto-slab);
+    }
+    h4 {
+      margin: 0;
+      font-family: var(--dnd5e-font-roboto-condensed);
+      font-size: var(--font-size-20);
+      font-variant: small-caps;
+      line-height: 1;
+    }
+    .key-art {
+      align-content: center;
+      align-self: start;
+      box-shadow: 0 3px 6px var(--dnd5e-shadow-15);
+      max-inline-size: 240px;
+      text-align: center;
+    }
+    .status {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      font-weight: bold;
+    }
+    .module-list {
+      gap: 10px;
+
+      .module-entry {
+        align-items: stretch;
+        gap: 8px;
+      }
+      .module-content {
+        display: grid;
+        grid-template-rows: min-content auto min-content;
+      }
+      .status { gap: 8px; }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+<section class="tab scrollable {{~#if tab.active}} active{{/if}}" data-group="{{ tab.group }}" data-tab="{{ tab.id }}">
+    {{#each modules}}
+    {{> ".section" }}
+    {{/each}}
+</section>
+
+{{#*inline ".section"}}
+<div class="modules" data-section="{{ @key }}">
+    <h3>{{ localize (concat "DND5E.WELCOME.Section." @key) }}</h3>
+    <div class="module-list flexcol">
+        {{#each this}}
+        <div class="module-entry flexrow">
+            <img class="key-art" src="{{ img }}" alt="{{ name }}">
+            <div class="module-content">
+                <h4 class="title"><a href="https://foundryvtt.com/packages/{{ @key }}">{{ name }}</a></h4>
+                <div class="description">{{{ description }}}</div>
+                <div class="status">
+                    {{#if installed}}
+                    <label for="{{ @root.partId }}-{{ @key }}">
+                        {{ localize "DND5E.WELCOME.Module.Enabled" }}
+                    </label>
+                    <dnd5e-checkbox name="modules.{{ @key }}" id="{{ @root.partId }}-{{ @key }}" {{ checked enabled }}
+                        {{ disabled @root.disabled }}></dnd5e-checkbox>
+                    {{else}}
+                    <span class="not-installed">{{ localize "DND5E.WELCOME.Module.NotInstalled" }}</span>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </ul>
+</div>
+{{/inline}}

@@ -90,3 +90,11 @@
  * @property {number} value               Value of this step.
  * @property {ActiveEffect5e} [document]  Active effect applying this attribution, if any.
  */
+
+ /* -------------------------------------------- */
+
+ /**
+  * @typedef OfficialModuleListing
+  * @property {string} name         Display name in the interface.
+  * @property {string} description  Brief description in HTML.
+  */

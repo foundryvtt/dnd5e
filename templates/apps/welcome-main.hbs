@@ -1,0 +1,8 @@
+<section class="tab {{~#if tab.active}} active{{/if}}" data-group="{{ tab.group }}" data-tab="{{ tab.id }}">
+    <img class="hero" src="systems/dnd5e/ui/official/dnd5e-banner.webp">
+    <div class="message">{{{ message }}}</div>
+    <fieldset class="card">
+        <legend>{{ localize "DND5E.WELCOME.Settings.Label" }}</legend>
+        {{> "dnd5e.fieldlist" fields }}
+    </fieldset>
+</section>
