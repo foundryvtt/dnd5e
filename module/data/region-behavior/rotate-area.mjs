@@ -174,21 +174,24 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
     await new Promise(resolve => setTimeout(resolve, duration));
 
     // Update all rotated documents
-    await Promise.all([
-      this.parent.update({ "system.status.rotating": false }),
-      this.scene.updateEmbeddedDocuments("AmbientLight", updates.lights),
-      this.scene.updateEmbeddedDocuments("AmbientSound", updates.sounds),
-      this.scene.updateEmbeddedDocuments("Region", updates.regions),
-      this.scene.updateEmbeddedDocuments("Tile", updates.tiles),
-      game.release.generation >= 14
-        ? this.scene.moveTokens(updates.tokens.reduce((obj, { _id: id, ...destination }) => {
-          obj[id] = { destination };
-          return obj;
-        }, {}), {
-          constrainOptions: { ignoreWalls: true, ignoreCost: true },
-          animate: false
-        })
-        : this.scene.updateEmbeddedDocuments("Token", updates.tokens, {
+    if ( game.release.generation >= 14 ) {
+      await foundry.documents.modifyBatch([
+        { action: "update", documentName: "RegionBehavior",
+          updates: [{ _id: this.behavior.id, "system.status.rotating": false }], parent: this.region },
+        // Tokens must be updated before the region so they re-enter the rotated region after they briefly leave it
+        // when moved to the new position while the region shapes have not been updated yet
+        { action: "update", documentName: "Token", updates: updates.tokens, parent: this.scene,
+          animate: false, constrainOptions: { ignoreWalls: true, ignoreCost: true } },
+        { action: "update", documentName: "AmbientLight", updates: updates.lights, parent: this.scene },
+        { action: "update", documentName: "AmbientSound", updates: updates.sounds, parent: this.scene },
+        { action: "update", documentName: "Region", updates: updates.regions, parent: this.scene },
+        { action: "update", documentName: "Tile", updates: updates.tiles, parent: this.scene },
+        { action: "update", documentName: "Wall", updates: updates.walls, parent: this.scene }
+      ]);
+    } else {
+      await Promise.all([
+        this.parent.update({ "system.status.rotating": false }),
+        this.scene.updateEmbeddedDocuments("Token", updates.tokens, {
           animate: false,
           movement: updates.tokens.reduce((obj, { _id }) => {
             obj[_id] = {
@@ -198,8 +201,13 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
             return obj;
           }, {})
         }),
-      this.scene.updateEmbeddedDocuments("Wall", updates.walls)
-    ]);
+        this.scene.updateEmbeddedDocuments("AmbientLight", updates.lights),
+        this.scene.updateEmbeddedDocuments("AmbientSound", updates.sounds),
+        this.scene.updateEmbeddedDocuments("Region", updates.regions),
+        this.scene.updateEmbeddedDocuments("Tile", updates.tiles),
+        this.scene.updateEmbeddedDocuments("Wall", updates.walls)
+      ]);
+    }
   }
 
   /* ---------------------------------------- */
