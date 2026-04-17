@@ -1,3 +1,5 @@
+import WelcomeScreen from "../welcome-screen.mjs";
+
 /**
  * Generate sidebar links.
  * @returns {HTMLUListElement}
@@ -49,4 +51,10 @@ export function renderSettings(html) {
   section.append(_generateLinks());
   if ( pip ) section.querySelector(".system-info").insertAdjacentElement("beforeend", pip);
   html.querySelector(".info").insertAdjacentElement("afterend", section);
+
+  const welcomeLink = document.createElement("button");
+  welcomeLink.type = "button";
+  welcomeLink.innerHTML = `<i class="fa-solid fa-handshake"></i> ${game.i18n.localize("DND5E.WELCOME.Button")}`;
+  welcomeLink.addEventListener("click", () => new WelcomeScreen().render({ force: true }));
+  section.after(welcomeLink);
 }

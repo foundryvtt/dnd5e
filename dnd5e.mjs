@@ -575,9 +575,14 @@ Hooks.once("ready", function() {
     dnd5e.ui.calendar.render({ force: true });
   }
 
-  // Run migrations & post-import actions for quickstarted adventures
-  _handleMigration()
-    .then(() => applications.adventure.AdventureQuickstartDialog.handleQuickstart());
+  /**
+   * A hook event that fires after core's `ready` hook once any system migrations have completed.
+   * @function dnd5e.ready
+   * @memberof hookEvents
+   */
+
+  // Run migrations & trigger system ready hook once complete
+  _handleMigration().then(() => Hooks.callAll("dnd5e.ready"));
 });
 
 /* -------------------------------------------- */
@@ -605,6 +610,21 @@ async function _handleMigration() {
 
   await migrations.migrateWorld();
 }
+
+/* -------------------------------------------- */
+/*  Post-migration                              */
+/* -------------------------------------------- */
+
+Hooks.once("dnd5e.ready", () => {
+  // Present adventure quickstart dialog
+  applications.adventure.AdventureQuickstartDialog.handleQuickstart();
+
+  // Present welcome dialog to GMs
+  if ( game.user.isGM && game.settings.get("dnd5e", "firstRun") ) {
+    const welcome = new applications.WelcomeScreen();
+    welcome.render({ force: true });
+  }
+});
 
 /* -------------------------------------------- */
 /*  System Styling                              */

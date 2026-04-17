@@ -53,6 +53,17 @@ export default class BaseSettingsConfig extends Application5e {
    * @returns {object}
    */
   createSettingField(name) {
+    return BaseSettingsConfig.createSettingField(name);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create the field data for a specific setting.
+   * @param {string} name  Setting key within the dnd5e namespace.
+   * @returns {object}
+   */
+  static createSettingField(name) {
     const setting = game.settings.settings.get(`${this.options.namespace}.${name}`);
     if ( !setting ) throw new Error(`Setting \`${this.options.namespace}.${name}\` not registered.`);
     const isDataField = setting.type instanceof DataField;
@@ -87,19 +98,36 @@ export default class BaseSettingsConfig extends Application5e {
    * @returns {Promise<void>}            Resolves once the settings are updated, or prompts for a reload if required.
    */
   static async #onCommitChanges(event, form, formData) {
+    const changes = foundry.utils.expandObject(formData.object);
+    const { requiresClientReload, requiresWorldReload } = await BaseSettingsConfig.commitChanges(changes, {
+      namespace: this.options.namespace
+    });
+    if ( requiresClientReload || requiresWorldReload ) {
+      return foundry.applications.settings.SettingsConfig.reloadConfirm({ world: requiresWorldReload });
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Commit changes to various `dnd5e` settings and determine if a reload is required.
+   * @param {object} changes                      Changes to apply to settings within the dnd5e namespace.
+   * @param {object} [options={}]
+   * @param {string} [options.namespace="dnd5e"]  Namespace for the settings to change.
+   * @returns {{ requiresClientReload: boolean, requiresWorldReload: boolean }}
+   */
+  static async commitChanges(changes, { namespace="dnd5e" }={}) {
     let requiresClientReload = false;
     let requiresWorldReload = false;
-    for ( const [key, value] of Object.entries(foundry.utils.expandObject(formData.object)) ) {
-      const setting = game.settings.settings.get(`${this.options.namespace}.${key}`);
-      const current = game.settings.get(this.options.namespace, key, { document: true });
+    for ( const [key, value] of Object.entries(changes) ) {
+      const setting = game.settings.settings.get(`${namespace}.${key}`);
+      const current = game.settings.get(namespace, key, { document: true });
       const prior = current?._source?.value ?? current;
-      const updated = await game.settings.set(this.options.namespace, key, value, { document: true });
+      const updated = await game.settings.set(namespace, key, value, { document: true });
       if ( prior === (updated?._source?.value ?? updated) ) continue;
       requiresClientReload ||= (setting.scope !== "world") && setting.requiresReload;
       requiresWorldReload ||= (setting.scope === "world") && setting.requiresReload;
     }
-    if ( requiresClientReload || requiresWorldReload ) {
-      return foundry.applications.settings.SettingsConfig.reloadConfirm({ world: requiresWorldReload });
-    }
+    return { requiresClientReload, requiresWorldReload };
   }
 }
