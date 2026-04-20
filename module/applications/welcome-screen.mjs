@@ -100,8 +100,15 @@ export default class WelcomeScreen extends Application5e {
   async _prepareMainContext(context, options) {
     context.tab = context.tabs.main;
 
-    // TODO: Write welcome message and links
-    context.message = "<p>Welcome text</p><ul><li>Important</li><li>Links</li></ul>";
+    const links = {
+      discord: "https://discord.gg/foundryvtt",
+      issues: "https://github.com/foundryvtt/dnd5e/issues",
+      wiki: "https://github.com/foundryvtt/dnd5e/wiki"
+    };
+    const bullets = ["Documentation", "Content", "Bugs"]
+      .map(k => `<li>${_loc(`DND5E.WELCOME.Message.${k}`, links)}</li>`)
+      .join("");
+    context.message = `${_loc("DND5E.WELCOME.Message.Introduction")}<ul>${bullets}</ul>`;
 
     const calendar = BaseSettingsConfig.createSettingField("calendar");
     calendar.field.blank = true;
