@@ -768,7 +768,8 @@ items:
         base:
           number: 3
           denomination: 8
-          types: []
+          types:
+            - bludgeoning
           custom:
             enabled: false
           scaling:
@@ -842,8 +843,9 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 5.3.2
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1776704446105
     ownership:
       default: 0
     sort: 1

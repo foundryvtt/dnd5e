@@ -105,7 +105,8 @@ system:
     base:
       number: 3
       denomination: 8
-      types: []
+      types:
+        - bludgeoning
       custom:
         enabled: false
       scaling:
@@ -175,11 +176,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.2.0
+  systemVersion: 5.3.2
   createdTime: 1733432292956
-  modifiedTime: 1735949024843
+  modifiedTime: 1776704426059
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 21700000
