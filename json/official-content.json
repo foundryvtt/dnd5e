@@ -2,7 +2,8 @@
   "core": {
     "dnd-players-handbook": {
       "name": "Player's Handbook",
-      "description": "<p>Embark on an epic adventure 10 years in the making. This new and improved Player's Handbook® is the ultimate guide for fifth edition D&D players. Play your way with optimized rules for character creation and advancement, exploration, combat, equipment, spells, and much more. Create fantastic heroes from an expanded selection of character origins, classes, and subclasses, revised and balanced for maximum fun.</p>"
+      "description": "<p>Embark on an epic adventure 10 years in the making. This new and improved Player's Handbook® is the ultimate guide for fifth edition D&D players. Play your way with optimized rules for character creation and advancement, exploration, combat, equipment, spells, and much more. Create fantastic heroes from an expanded selection of character origins, classes, and subclasses, revised and balanced for maximum fun.</p>",
+      "disabledSources": ["classes24", "origins24", "feats24", "spells24"]
     },
     "dnd-dungeon-masters-guide": {
       "name": "Dungeon Master's Guide",
@@ -10,7 +11,8 @@
     },
     "dnd-monster-manual": {
       "name": "Monster Manual",
-      "description": "<p>Populate your worlds and adventures with the hundreds of monsters provided, and let their stories, illustrations, and easy-to-use stat blocks fuel your D&D® adventures for years to come. Encounter a monstrous menagerie of familiar favorites like dragons, giants, and mind flayers, plus a host of new monsters like the arch-hag, the blob of annihilation, and the vampire nightbringer.</p>"
+      "description": "<p>Populate your worlds and adventures with the hundreds of monsters provided, and let their stories, illustrations, and easy-to-use stat blocks fuel your D&D® adventures for years to come. Encounter a monstrous menagerie of familiar favorites like dragons, giants, and mind flayers, plus a host of new monsters like the arch-hag, the blob of annihilation, and the vampire nightbringer.</p>",
+      "disabledSources": ["actors24", "monsterfeatures24"]
     }
   },
   "expanded": {
