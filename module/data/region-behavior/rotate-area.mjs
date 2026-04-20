@@ -174,24 +174,40 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
     await new Promise(resolve => setTimeout(resolve, duration));
 
     // Update all rotated documents
-    await Promise.all([
-      this.parent.update({ "system.status.rotating": false }),
-      this.scene.updateEmbeddedDocuments("AmbientLight", updates.lights),
-      this.scene.updateEmbeddedDocuments("AmbientSound", updates.sounds),
-      this.scene.updateEmbeddedDocuments("Region", updates.regions),
-      this.scene.updateEmbeddedDocuments("Tile", updates.tiles),
-      this.scene.updateEmbeddedDocuments("Token", updates.tokens, {
-        animate: false,
-        movement: updates.tokens.reduce((obj, { _id }) => {
-          obj[_id] = {
-            constrainOptions: { ignoreWalls: true, ignoreCost: true },
-            showRuler: false
-          };
-          return obj;
-        }, {})
-      }),
-      this.scene.updateEmbeddedDocuments("Wall", updates.walls)
-    ]);
+    if ( game.release.generation >= 14 ) {
+      await foundry.documents.modifyBatch([
+        { action: "update", documentName: "RegionBehavior",
+          updates: [{ _id: this.behavior.id, "system.status.rotating": false }], parent: this.region },
+        // Tokens must be updated before the region so they re-enter the rotated region after they briefly leave it
+        // when moved to the new position while the region shapes have not been updated yet
+        { action: "update", documentName: "Token", updates: updates.tokens, parent: this.scene,
+          animate: false, constrainOptions: { ignoreWalls: true, ignoreCost: true } },
+        { action: "update", documentName: "AmbientLight", updates: updates.lights, parent: this.scene },
+        { action: "update", documentName: "AmbientSound", updates: updates.sounds, parent: this.scene },
+        { action: "update", documentName: "Region", updates: updates.regions, parent: this.scene },
+        { action: "update", documentName: "Tile", updates: updates.tiles, parent: this.scene },
+        { action: "update", documentName: "Wall", updates: updates.walls, parent: this.scene }
+      ]);
+    } else {
+      await Promise.all([
+        this.parent.update({ "system.status.rotating": false }),
+        this.scene.updateEmbeddedDocuments("Token", updates.tokens, {
+          animate: false,
+          movement: updates.tokens.reduce((obj, { _id }) => {
+            obj[_id] = {
+              constrainOptions: { ignoreWalls: true, ignoreCost: true },
+              showRuler: false
+            };
+            return obj;
+          }, {})
+        }),
+        this.scene.updateEmbeddedDocuments("AmbientLight", updates.lights),
+        this.scene.updateEmbeddedDocuments("AmbientSound", updates.sounds),
+        this.scene.updateEmbeddedDocuments("Region", updates.regions),
+        this.scene.updateEmbeddedDocuments("Tile", updates.tiles),
+        this.scene.updateEmbeddedDocuments("Wall", updates.walls)
+      ]);
+    }
   }
 
   /* ---------------------------------------- */
@@ -240,6 +256,8 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
    * @returns {Point}
    */
   static #placeableCenter(doc) {
+    if ( doc instanceof foundry.canvas.placeables.AmbientLight ) doc = doc.document;
+    if ( doc instanceof AmbientLightDocument ) return { x: doc.x, y: doc.y };
     if ( doc instanceof TokenDocument ) return doc.getCenterPoint();
     if ( doc instanceof foundry.abstract.Document ) {
       if ( doc.object ) doc = doc.object;
@@ -274,7 +292,9 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
    */
   static #placeableSize(doc) {
     if ( !(doc instanceof foundry.abstract.Document) ) doc = doc.document;
-    if ( doc instanceof TileDocument ) return { width: doc.width, height: doc.height };
+    if ( (doc instanceof TileDocument) && (game.release.generation < 14) ) {
+      return { width: doc.width, height: doc.height };
+    }
     if ( doc instanceof TokenDocument ) return doc.getSize();
     else return { width: 0, height: 0 };
   }
@@ -290,6 +310,15 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
    * @returns {object}         Update data for the region.
    */
   static #rotateRegionShapes(region, angle, radians, pivot) {
+    if ( game.release.generation >= 14 ) return {
+      _id: region.id,
+      shapes: region.shapes.map(shape => {
+        const clone = shape.clone();
+        clone.rotate(angle, { pivot });
+        return clone.toObject();
+      })
+    };
+
     const shapes = region.toObject().shapes;
     for ( const shape of shapes ) {
       const { x, y, width, height } = shape;
@@ -326,6 +355,7 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
    * @returns {Point}
    */
   static #shapeCenter(shape) {
+    if ( game.release.generation >= 14 ) return shape.origin;
     switch ( shape.type ) {
       case foundry.data.RectangleShapeData.TYPE:
         return { x: shape.x + (shape.width / 2), y: shape.y + (shape.width / 2) };
@@ -404,6 +434,23 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
       priority: PIXI.UPDATE_PRIORITY.OBJECTS + 1,
       ontick: (e, a) => RotateAreaRegionBehaviorType.#animateFrame(animatables, angle, pivot, e, a)
     });
+    const rad = Math.toRadians(angle);
+    for ( const [token, data] of animatables.entries().filter(([a]) => a instanceof TokenDocument) ) {
+      const { center, rotation, size } = data;
+      const finalPosition = RotateAreaRegionBehaviorType.#calculatePosition(rad, pivot, center, size);
+      token.object.animate(finalPosition, {
+        duration,
+        easing: foundry.canvas.animation.CanvasAnimation.easeInOutCosine,
+        ontick: (e, a, d) => {
+          const pt = a.time >= a.duration ? 1 : a.time / a.duration;
+          const pa = a.easing?.(pt) ?? pt;
+          const pr = Math.toRadians(angle * pa);
+          const updates = RotateAreaRegionBehaviorType.#calculatePosition(pr, pivot, center, size);
+          updates.rotation = rotation + (angle * pa);
+          foundry.utils.mergeObject(d, updates);
+        }
+      });
+    }
   }
 
   /* ---------------------------------------- */
@@ -429,19 +476,23 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
           doc.c = [first.x, first.y, second.x, second.y];
           doc.object.renderFlags.set({ refreshLine: true });
           if ( game.settings.get("core", "visionAnimation") ) {
-            doc.object.initializeEdge();
-            canvas.perception.update({
-              refreshEdges: true, initializeLighting: true, initializeVision: true, initializeSounds: true
-            });
+            if ( game.release.generation < 14 ) {
+              doc.object.initializeEdge();
+              canvas.perception.update({
+                refreshEdges: game.release.generation < 14 ? true : undefined,
+                initializeLighting: true, initializeVision: true, initializeSounds: true
+              });
+            }
+            else doc.initializeEdge();
           }
         } else {
           const updates = RotateAreaRegionBehaviorType.#calculatePosition(pr, pivot, center, size);
           updates.rotation = rotation + (angle * pa);
-          Object.assign(doc, updates);
+          if ( doc instanceof TileDocument && (game.release.generation > 13) ) Object.assign(doc.shape, updates);
+          else Object.assign(doc, updates);
           if ( doc instanceof AmbientLightDocument ) doc.object.initializeLightSource();
           else if ( doc instanceof AmbientSoundDocument ) doc.object.initializeSoundSource();
           else if ( doc instanceof TileDocument ) doc.object.renderFlags.set({ refreshTransform: true });
-          else if ( doc instanceof TokenDocument ) doc.object._onAnimationUpdate(updates);
         }
       }
     }
