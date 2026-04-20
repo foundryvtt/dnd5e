@@ -101,11 +101,12 @@ export default class WelcomeScreen extends Application5e {
     context.tab = context.tabs.main;
 
     const links = {
+      changes: "https://github.com/foundryvtt/dnd5e/releases/latest",
       discord: "https://discord.gg/foundryvtt",
       issues: "https://github.com/foundryvtt/dnd5e/issues",
       wiki: "https://github.com/foundryvtt/dnd5e/wiki"
     };
-    const bullets = ["Documentation", "Content", "Bugs"]
+    const bullets = ["Changes", "Documentation", "Content", "Bugs"]
       .map(k => `<li>${_loc(`DND5E.WELCOME.Message.${k}`, links)}</li>`)
       .join("");
     context.message = `${_loc("DND5E.WELCOME.Message.Introduction")}<ul>${bullets}</ul>`;
