@@ -757,7 +757,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         speaker: ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token }),
         title: this.name
       },
-      rollMode: game.settings.get("core", "rollMode")
+      rollMode: CONFIG.Dice.BasicRoll.getMessageMode()
     }, message);
 
     // Merge in the flags from options

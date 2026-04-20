@@ -242,7 +242,7 @@ export default class BasicRoll extends Roll {
       if ( !roll._evaluated ) await roll.evaluate({ allowInteractive: rollMode !== CONST.DICE_ROLL_MODES.BLIND });
       rollMode ??= roll.options.rollMode;
     }
-    rollMode ??= game.settings.get("core", "rollMode");
+    rollMode ??= BasicRoll.getMessageMode();
 
     // Prepare chat data
     messageData = foundry.utils.mergeObject({ sound: CONFIG.sounds.dice }, messageData);
@@ -423,6 +423,18 @@ export default class BasicRoll extends Roll {
 
   /* -------------------------------------------- */
   /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Retrieve the message mode to use, treating in-character as public by default.
+   * @param {boolean} [ignoreIC=true]  Ignore in-character message mode.
+   * @returns {string}}
+   */
+  static getMessageMode(ignoreIC=true) {
+    const mode = game.settings.get("core", game.release.generation < 14 ? "rollMode" : "messageMode");
+    return ignoreIC && (mode === "ic") ? "public" : mode;
+  }
+
   /* -------------------------------------------- */
 
   /**
