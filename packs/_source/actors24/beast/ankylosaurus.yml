@@ -728,9 +728,8 @@ items:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage average extended]]. If the target
-          is a {size} or smaller creature, it has the &amp;Reference[Prone
-          apply=false] condition. If the target is a Huge or smaller creature,
-          it has the &amp;Reference[Prone apply=false] condition.</p>
+          is a Huge or smaller creature, it has the &amp;Reference[Prone
+          apply=false] condition.</p>
         chat: ''
       identifier: tail
       source:
@@ -838,8 +837,9 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 5.3.2
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1776704793751
     ownership:
       default: 0
     sort: 1
