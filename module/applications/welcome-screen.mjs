@@ -226,8 +226,25 @@ export default class WelcomeScreen extends Application5e {
     }
 
     if ( dnd5e.settings.firstRun ) {
+      const sourceBook = settings.rulesVersion === "modern" ? "SRD 5.2" : "SRD 5.1";
+      const disabledSources = game.system.packs.reduce((sources, pack) => {
+        const book = pack.flags?.dnd5e?.sourceBook;
+        if ( book && (book !== sourceBook) ) sources.add(pack.id);
+        return sources;
+      }, new Set());
+      const moduleData = await this.getModules();
+      for ( const [id, enabled] of Object.entries(modules) ) {
+        if ( !enabled || !moduleData.core[id]?.disabledSources?.length ) continue;
+        moduleData.core[id].disabledSources.forEach(id => disabledSources.add(`dnd5e.${id}`));
+      }
+      if ( modules["dnd-players-handbook"] && modules["dnd-dungeon-masters-guide"] ) {
+        disabledSources.add("dnd5e.equipment24");
+      }
+      await game.settings.set("dnd5e", "packSourceConfiguration", {
+        ...dnd5e.settings.packSourceConfiguration,
+        ...Object.fromEntries(game.system.packs.map(p => [p.id, !disabledSources.has(p.id)]))
+      });
       await game.settings.set("dnd5e", "firstRun", false);
-      // TODO: If first run, adjust compendium browser filters to match rules version & enabled modules
     }
 
     if ( requiresClientReload || requiresWorldReload ) {

@@ -95,6 +95,7 @@
 
  /**
   * @typedef OfficialModuleListing
-  * @property {string} name         Display name in the interface.
-  * @property {string} description  Brief description in HTML.
+  * @property {string} name                Display name in the interface.
+  * @property {string} description         Brief description in HTML.
+  * @property {string[]} [disabledSource]  System compendium packs to disable in CB sources when module is enabled.
   */
