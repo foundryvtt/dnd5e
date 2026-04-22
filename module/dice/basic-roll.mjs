@@ -1,4 +1,5 @@
 import RollConfigurationDialog from "../applications/dice/roll-configuration-dialog.mjs";
+import BasicDie from "./basic-die.mjs";
 
 const { DiceTerm, NumericTerm } = foundry.dice.terms;
 
@@ -278,6 +279,9 @@ export default class BasicRoll extends Roll {
   /** @inheritDoc */
   async evaluate(options={}) {
     this.preCalculateDiceTerms(options);
+    for ( const term of this.terms ) {
+      if ( term instanceof BasicDie ) term.expandAdvantage();
+    }
     return super.evaluate(options);
   }
 
@@ -286,6 +290,9 @@ export default class BasicRoll extends Roll {
   /** @inheritDoc */
   evaluateSync(options={}) {
     this.preCalculateDiceTerms(options);
+    for ( const term of this.terms ) {
+      if ( term instanceof BasicDie ) term.expandAdvantage();
+    }
     return super.evaluateSync(options);
   }
 
