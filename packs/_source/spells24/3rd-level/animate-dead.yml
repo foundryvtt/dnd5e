@@ -41,7 +41,7 @@ system:
   target:
     affects:
       type: object
-      count: '1 + @scaling.increase * 2'
+      count: 1 + @scaling.increase * 2
       choice: false
       special: ''
     template:
@@ -114,14 +114,14 @@ system:
         saves: false
         ability: ''
       profiles:
-        - count: '1 + @scaling.increase * 2'
+        - count: 1 + @scaling.increase * 2
           name: Skeleton (bones)
           _id: l3jb6CSvoMCwcgt6
           uuid: Compendium.dnd5e.actors24.Actor.mmSkeleton000000
           level:
             min: null
             max: null
-        - count: '1 + @scaling.increase * 2'
+        - count: 1 + @scaling.increase * 2
           name: Zombie (corpse)
           _id: pZwDbNd78btaIk1A
           uuid: Compendium.dnd5e.actors24.Actor.mmZombie00000000

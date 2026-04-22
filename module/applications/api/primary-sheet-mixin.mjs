@@ -271,7 +271,7 @@ export default function PrimarySheetMixin(Base) {
     }
 
     /* -------------------------------------------- */
-    /*  Event Listeners & Handlers                  */
+    /*  Event Listeners and Handlers                */
     /* -------------------------------------------- */
 
     /**

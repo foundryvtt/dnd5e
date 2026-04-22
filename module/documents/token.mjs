@@ -222,12 +222,14 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
       const autoRoll = options.dnd5e?.autoRollNPCHP ?? game.settings.get("dnd5e", "autoRollNPCHP");
       if ( autoRoll === "no" ) return;
       const roll = await this.actor.rollNPCHitPoints({ chatMessage: autoRoll === "yes" });
-      this.delta.updateSource({
+      const update = {
         "system.attributes.hp": {
           max: roll.total,
           value: roll.total
         }
-      });
+      };
+      if ( game.release.generation > 13 ) this.updateSource({ delta: update });
+      else this.delta.updateSource(update);
     }
   }
 

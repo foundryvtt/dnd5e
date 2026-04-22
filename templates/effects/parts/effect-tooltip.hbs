@@ -4,7 +4,7 @@
             <img src="{{ effect.img }}" alt="{{ effect.name }}">
             <div class="name name-stacked">
                 <span class="title">{{ effect.name }}</span>
-                {{#if effect.duration.remaining}}
+                {{#if showDuration}}
                 <span class="subtitle duration">
                     <i class="fas fa-clock" inert></i>
                     <span class="most-significant">{{ durationParts.[0] }}</span>

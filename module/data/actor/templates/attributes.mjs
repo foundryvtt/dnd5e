@@ -512,11 +512,6 @@ export default class AttributesFields {
    * @param {BaseUser} user   The User requesting the document update.
    */
   static async preUpdateHP(changes, options, user) {
-    const value = foundry.utils.getProperty(changes, "system.attributes.hp.value");
-    if ( Number.isFinite(value) ) {
-      foundry.utils.setProperty(changes, "system.attributes.hp.value",
-        Math.clamp(value, 0, this.attributes.hp.effectiveMax));
-    }
     const isDead = this.attributes.hp.value <= 0;
     if ( isDead && (foundry.utils.getProperty(changes, "system.attributes.hp.value") > 0) ) {
       foundry.utils.setProperty(changes, "system.attributes.death.success", 0);

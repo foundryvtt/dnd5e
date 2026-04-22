@@ -133,6 +133,7 @@
             {{#with system.attributes.hp}}
             <span class="counter display">{{ value }} &sol; {{ max }}</span>
             <input type="text" class="value uninput" name="system.attributes.hp.value" data-dtype="Number"
+                   data-max="{{ ifThen effectiveMax effectiveMax max }}"
                    placeholder="0" pattern="^[+=\-]?\d*" value="{{ value }}" inputmode="numeric" hidden>
             {{/with}}
             {{/if}}

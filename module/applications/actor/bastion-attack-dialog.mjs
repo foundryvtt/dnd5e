@@ -86,7 +86,7 @@ export default class BastionAttackDialog extends Dialog5e {
   }
 
   /* -------------------------------------------- */
-  /*  Event Listeners & Handlers                  */
+  /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
   /**

@@ -1679,7 +1679,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         content: game.i18n.format(details.chatString, { name: this.name }),
         speaker: messageConfig.speaker ?? ChatMessage.getSpeaker({ actor: this })
       };
-      ChatMessage.applyRollMode(chatData, messageConfig.rollMode ?? game.settings.get("core", "rollMode"));
+      ChatMessage.applyRollMode(chatData, messageConfig.rollMode ?? CONFIG.Dice.BasicRoll.getMessageMode());
       resultsMessage = await ChatMessage.create(chatData);
     }
 
@@ -1865,7 +1865,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( !config.rolls[0] ) return;
 
     // Display the roll configuration dialog
-    const messageOptions = { rollMode: game.settings.get("core", "rollMode") };
+    const messageOptions = { rollMode: CONFIG.Dice.BasicRoll.getMessageMode() };
     if ( config.rolls[0].options?.fixed === undefined ) {
       const dialogConfig = foundry.utils.mergeObject({
         options: { title: game.i18n.localize("DND5E.InitiativeRoll") }
@@ -1979,7 +1979,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     const flavor = game.i18n.localize("DND5E.HitDiceRoll");
     const messageConfig = foundry.utils.mergeObject({
-      rollMode: game.settings.get("core", "rollMode"),
+      rollMode: CONFIG.Dice.BasicRoll.getMessageMode(),
       data: {
         speaker: ChatMessage.implementation.getSpeaker({actor: this}),
         flavor,
@@ -2391,7 +2391,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( config.request ) foundry.utils.setProperty(chatData, "flags.dnd5e.requestResult", {
       actorUuid: this.uuid, requestId: config.request.id
     });
-    ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
+    ChatMessage.applyRollMode(chatData, CONFIG.Dice.BasicRoll.getMessageMode());
     return ChatMessage.create(chatData);
   }
 
@@ -3386,6 +3386,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   async _onUpdateDescendantDocuments(parent, collection, documents, changes, options, userId) {
     if ( (userId === game.userId) && (collection === "items") ) await this.updateEncumbrance(options);
     super._onUpdateDescendantDocuments(parent, collection, documents, changes, options, userId);
+
+    if ( collection === "items" ) {
+      const refreshBars = documents.some((doc, index) => {
+        return doc.hasLimitedUses && foundry.utils.hasProperty(changes[index], "system.uses.spent");
+      });
+      if ( refreshBars ) this.getActiveTokens().forEach(token => token.renderFlags.set({ refreshBars: true }));
+    }
   }
 
   /* -------------------------------------------- */
@@ -3536,10 +3543,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     return ActiveEffect.implementation.create({
       _id: ActiveEffect5e.ID.BLOODIED,
-      name: game.i18n.localize(CONFIG.DND5E.bloodied.name),
       img: CONFIG.DND5E.bloodied.img,
+      flags: { dnd5e: { isTemporary: true } },
+      name: game.i18n.localize(CONFIG.DND5E.bloodied.name),
       statuses: ["bloodied"],
-      showIcon: CONST.ACTIVE_EFFECT_SHOW_ICON?.ALWAYS
+      showIcon: CONST.ACTIVE_EFFECT_SHOW_ICON?.CONDITIONAL
     }, { parent: this, keepId: true });
   }
 

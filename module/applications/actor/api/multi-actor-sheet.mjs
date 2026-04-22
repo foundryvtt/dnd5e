@@ -121,7 +121,7 @@ export default class MultiActorSheet extends BaseActorSheet {
   }
 
   /* -------------------------------------------- */
-  /*  Event Listeners & Handlers                  */
+  /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
   /** @override */

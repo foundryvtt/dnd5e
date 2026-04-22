@@ -229,7 +229,7 @@ export default class UsesField extends SchemaField {
       data: {
         speaker: ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token })
       },
-      rollMode: game.settings.get("core", "rollMode")
+      rollMode: CONFIG.Dice.BasicRoll.getMessageMode()
     }, message);
 
     const rolls = await CONFIG.Dice.BasicRoll.buildConfigure(rollConfig, dialogConfig, messageConfig);

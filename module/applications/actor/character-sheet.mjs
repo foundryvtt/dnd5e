@@ -364,7 +364,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       const key = entry.key;
       entry.class = this.constructor.PROFICIENCY_CLASSES[context.editable ? entry.baseValue : entry.value];
       if ( key in CONFIG.DND5E.skills ) entry.reference = CONFIG.DND5E.skills[key].reference;
-      else if ( key in CONFIG.DND5E.tools ) entry.reference = Trait.getBaseItemUUID(CONFIG.DND5E.tools[key].id);
+      else if ( key in CONFIG.DND5E.tools ) entry.reference = Trait.getBaseItemUUID(CONFIG.DND5E.tools[key].id ?? "");
     }
 
     // Traits
@@ -754,7 +754,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       let title;
       let reference;
       if ( type === "tool" ) {
-        reference = Trait.getBaseItemUUID(CONFIG.DND5E.tools[id]?.id);
+        reference = Trait.getBaseItemUUID(CONFIG.DND5E.tools[id]?.id ?? "");
         ({ img, name: title } = Trait.getBaseItem(reference, { indexOnly: true }));
       }
       else if ( type === "skill" ) ({ icon: img, label: title, reference } = CONFIG.DND5E.skills[id]);

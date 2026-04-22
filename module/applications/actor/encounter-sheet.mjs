@@ -201,7 +201,7 @@ export default class EncounterActorSheet extends MultiActorSheet {
   _saveSheetPosition() {}
 
   /* -------------------------------------------- */
-  /*  Event Listeners & Handlers                  */
+  /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
   /**

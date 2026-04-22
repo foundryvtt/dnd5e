@@ -311,7 +311,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
   }
 
   /* -------------------------------------------- */
-  /*  Event Listeners & Handlers                  */
+  /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
   /**

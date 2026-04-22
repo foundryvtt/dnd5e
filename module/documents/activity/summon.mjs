@@ -541,7 +541,8 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
       await tokenDocument.actor.updateEmbeddedDocuments("ActiveEffect", oldEffects);
       await tokenDocument.actor.createEmbeddedDocuments("ActiveEffect", newEffects, { keepId: true });
     } else {
-      tokenDocument.delta.updateSource(actorUpdates);
+      if ( game.release.generation > 13 ) tokenDocument.updateSource({ delta: actorUpdates });
+      else tokenDocument.delta.updateSource(actorUpdates);
       if ( actor.prototypeToken.appendNumber ) TokenPlacement.adjustAppendedNumber(tokenDocument, placement);
     }
 

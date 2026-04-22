@@ -133,7 +133,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /** @inheritDoc */
   get isTemporary() {
-    return super.isTemporary && !this.isConcealed;
+    return !this.isConcealed && (super.isTemporary || this.getFlag("dnd5e", "isTemporary"));
   }
 
   /* -------------------------------------------- */
@@ -999,6 +999,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
           effect: this,
           description: await TextEditor.enrichHTML(this.description ?? "", { relativeTo: this, ...enrichmentOptions }),
           durationParts: this.duration.remaining ? this.duration.label.split(", ") : [],
+          showDuration: this.duration.remaining && Number.isFinite(this.duration.remaining),
           properties
         }
       ),

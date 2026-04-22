@@ -427,7 +427,7 @@ export default class ItemListControlsElement extends MaybeAdoptable {
   }
 
   /* -------------------------------------------- */
-  /*  Event Listeners & Handlers                  */
+  /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
   /**
