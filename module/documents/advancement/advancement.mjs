@@ -341,7 +341,7 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancementData
   /* -------------------------------------------- */
 
   /**
-   * Construct context menu options for this Activity.
+   * Construct context menu options for this Advancement.
    * @returns {ContextMenuEntry[]}
    */
   getContextMenuOptions() {
@@ -378,8 +378,8 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancementData
   /* -------------------------------------------- */
 
   /**
-   * Handle context menu events on activities.
-   * @param {Item5e} item         The Item the Activity belongs to.
+   * Handle context menu events on advancement.
+   * @param {Item5e} item         The Item the Advancement belongs to.
    * @param {HTMLElement} target  The element the menu was triggered on.
    */
   static onContextMenu(item, target) {

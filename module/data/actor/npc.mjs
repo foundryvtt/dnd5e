@@ -706,7 +706,7 @@ export default class NPCData extends CreatureTemplate {
         languages: o.languages ?? ([
           formatter.format(this.traits.languages.labels.languages),
           formatter.format(this.traits.languages.labels.ranged.map(r => rulesVersion === "2024" ? r : r.toLowerCase()))
-        ].filterJoin("; ") || (rulesVersion === "2024" ? game.i18n.localize("None") : "—")),
+        ].filterJoin("; ") || (rulesVersion === "2024" ? game.i18n.localize("COMMON.None") : "—")),
 
         // Saves (e.g. `Dex +7, Con +15, Wis +10, Cha +12`)
         saves: formatter.format(

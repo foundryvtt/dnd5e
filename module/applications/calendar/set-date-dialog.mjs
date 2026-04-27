@@ -11,7 +11,7 @@ export default class SetDateDialog extends Dialog5e {
     buttons: [{
       default: true,
       icon: "fa-regular fa-calendar-check",
-      label: "Confirm",
+      label: "COMMON.Confirm",
       type: "submit"
     }],
     form: {

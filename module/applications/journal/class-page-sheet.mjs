@@ -171,7 +171,7 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
         if ( (rep.size > 1) || (rep.first() !== type) ) return false;
         return (a.classRestriction !== "secondary") && (a.level === 1) && (a.configuration.mode === "default");
       });
-      if ( !advancement ) return game.i18n.localize("None");
+      if ( !advancement ) return game.i18n.localize("COMMON.None");
       return advancement.hint || Trait.localizedList(advancement.configuration);
     };
     if ( traits.length ) {

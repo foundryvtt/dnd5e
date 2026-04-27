@@ -234,7 +234,8 @@ export default function PseudoDocumentMixin(Base) {
         window: { title: `${game.i18n.format("DOCUMENT.Delete", { type })}: ${this.name || this.title}` },
         content: `
           <p>
-            <strong>${game.i18n.localize("AreYouSure")}</strong> ${game.i18n.format("SIDEBAR.DeleteWarning", { type })}
+            <strong>${game.i18n.localize("COMMON.AreYouSure")}</strong> ${
+              game.i18n.format("SIDEBAR.DeleteWarning", { type })}
           </p>
         `,
         yes: { callback: this.delete.bind(this) }
