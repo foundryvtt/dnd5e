@@ -619,7 +619,7 @@ export default class NPCData extends CreatureTemplate {
       const standard = formatter.format([
         prepareMeasured(this.attributes.movement.walk, this.attributes.movement.units),
         ...Object.entries(CONFIG.DND5E.movementTypes)
-          .filter(([k]) => this.attributes.movement[k] && (k !== "walk"))
+          .filter(([k, { hidden }]) => this.attributes.movement[k] && (k !== "walk") && !hidden)
           .map(([k, { label }]) => {
             let prepared = prepareMeasured(this.attributes.movement[k], this.attributes.movement.units, label);
             if ( (k === "fly") && this.attributes.movement.hover ) {
