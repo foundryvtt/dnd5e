@@ -216,6 +216,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       transfer: false,
       origin: origin.uuid
     }, effectFlags);
+    effectData.changes = await effect.replaceChangeValues(effectData.changes, { target: actor });
     return await ActiveEffect.implementation.create(effectData, { parent: actor });
   }
 
