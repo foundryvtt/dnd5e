@@ -254,6 +254,7 @@ export default class CharacterData extends CreatureTemplate {
   async _preCreate(data, options, user) {
     if ( (await super._preCreate(data, options, user)) === false ) return false;
     await TraitsFields.preCreateSize.call(this, data, options, user);
+    await AttributesFields.preCreateSenses.call(this, data, options, user);
 
     if ( this.parent._stats?.compendiumSource?.startsWith("Compendium.") ) return;
     this.parent.updateSource({
@@ -272,6 +273,7 @@ export default class CharacterData extends CreatureTemplate {
     if ( (await super._preUpdate(changes, options, user)) === false ) return false;
     await AttributesFields.preUpdateHP.call(this, changes, options, user);
     await TraitsFields.preUpdateSize.call(this, changes, options, user);
+    await AttributesFields.preUpdateSenses.call(this, changes, options, user);
   }
 
   /* -------------------------------------------- */

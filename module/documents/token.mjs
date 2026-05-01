@@ -17,6 +17,14 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     return this.ring.enabled;
   }
 
+  /**
+   * The set of detection mode IDs that correspond to actor senses.
+   * @type {Set<string>}
+   */
+  static get senseDetectionModeIds() {
+    return new Set(Object.values(CONFIG.DND5E.senses).map(c => c.detectionMode).filter(Boolean));
+  }
+
   /* -------------------------------------------- */
   /*  Data Migration                              */
   /* -------------------------------------------- */
@@ -36,6 +44,91 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
 
   /* -------------------------------------------- */
   /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareBaseData() {
+    super.prepareBaseData();
+    this._prepareSenseOverrides();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Compute token sight and detection mode overrides from the actor's senses.
+   * @protected
+   */
+  _prepareSenseOverrides() {
+    if ( !game.settings.get("dnd5e", "senseVisionSync") ) return;
+    const actor = this.actor;
+    if ( !actor?.system?.attributes?.senses ) return;
+    TokenDocument5e.applySenseOverrides(actor.system.attributes.senses, this);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Compute sense-derived sight and detection mode data from actor senses.
+   * @param {object} senses                    Object containing sense ranges.
+   * @param {Record<string, number>} senses.ranges  Mapping of sense keys to their range values.
+   * @returns {{ sight: object, detectionModes: object[] }}
+   */
+  static computeSenseOverrides(senses) {
+    const result = { sight: {}, detectionModes: [] };
+    let maxSightRange = 0;
+    let sightVisionMode = null;
+
+    for ( const [key, config] of Object.entries(CONFIG.DND5E.senses) ) {
+      const range = senses.ranges[key];
+      if ( !range ) continue;
+
+      if ( config.detectionMode ) {
+        result.detectionModes.push({ id: config.detectionMode, enabled: true, range });
+      }
+
+      if ( config.grantsSight && (range > maxSightRange) ) {
+        maxSightRange = range;
+        sightVisionMode = config.visionMode ?? null;
+      }
+    }
+
+    if ( maxSightRange > 0 ) {
+      result.sight.enabled = true;
+      result.sight.range = maxSightRange;
+      result.sight.visionMode = sightVisionMode ?? "basic";
+    }
+
+    return result;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Apply sense-derived overrides to a token-like target's prepared data.
+   * @param {object} senses                    Object containing sense ranges.
+   * @param {Record<string, number>} senses.ranges  Mapping of sense keys to their range values.
+   * @param {object} target                    Target with `sight` and `detectionModes` properties.
+   */
+  static applySenseOverrides(senses, target) {
+    const { sight, detectionModes } = TokenDocument5e.computeSenseOverrides(senses);
+
+    for ( const mode of detectionModes ) {
+      const existing = target.detectionModes.find(m => m.id === mode.id);
+      if ( existing ) {
+        existing.range = Math.max(existing.range ?? 0, mode.range);
+        existing.enabled = true;
+      } else {
+        target.detectionModes.push(mode);
+      }
+    }
+
+    if ( sight.enabled ) {
+      target.sight.enabled = true;
+      target.sight.range = sight.range;
+      target.sight.visionMode = sight.visionMode;
+    }
+  }
+
   /* -------------------------------------------- */
 
   /** @inheritDoc */

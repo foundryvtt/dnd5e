@@ -96,6 +96,16 @@ export function registerSystemSettings() {
     }
   });
 
+  // Sense-to-token vision sync
+  game.settings.register("dnd5e", "senseVisionSync", {
+    name: "SETTINGS.DND5E.AUTOMATION.SenseVision.Name",
+    hint: "SETTINGS.DND5E.AUTOMATION.SenseVision.Hint",
+    scope: "world",
+    config: true,
+    default: true,
+    type: Boolean
+  });
+
   // Allow rotating square templates
   game.settings.register("dnd5e", "gridAlignedSquareTemplates", {
     name: "SETTINGS.5eGridAlignedSquareTemplatesN",

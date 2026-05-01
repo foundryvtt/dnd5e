@@ -464,6 +464,7 @@ export default class NPCData extends CreatureTemplate {
   async _preCreate(data, options, user) {
     if ( (await super._preCreate(data, options, user)) === false ) return false;
     await TraitsFields.preCreateSize.call(this, data, options, user);
+    await AttributesFields.preCreateSenses.call(this, data, options, user);
   }
 
   /* -------------------------------------------- */
@@ -473,6 +474,7 @@ export default class NPCData extends CreatureTemplate {
     if ( (await super._preUpdate(changes, options, user)) === false ) return false;
     await AttributesFields.preUpdateHP.call(this, changes, options, user);
     await TraitsFields.preUpdateSize.call(this, changes, options, user);
+    await AttributesFields.preUpdateSenses.call(this, changes, options, user);
 
     for ( const k of ["legact", "legres"] ) {
       if ( !foundry.utils.hasProperty(changes, `system.resources.${k}.value`) ) continue;
@@ -722,7 +724,7 @@ export default class NPCData extends CreatureTemplate {
           formatter.format([
             ...Object.entries(CONFIG.DND5E.senses)
               .filter(([k]) => this.attributes.senses.ranges[k])
-              .map(([k, label]) =>
+              .map(([k, { label }]) =>
                 prepareMeasured(this.attributes.senses.ranges[k], this.attributes.senses.units, label)
               ),
             ...splitSemicolons(this.attributes.senses.special)
