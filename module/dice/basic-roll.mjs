@@ -173,6 +173,8 @@ export default class BasicRoll extends Roll {
     const messageId = config.event?.target.closest("[data-message-id]")?.dataset.messageId;
     if ( messageId ) foundry.utils.setProperty(message.data, "flags.dnd5e.originatingMessage", messageId);
 
+    rolls?.forEach(r => r.getOriginatingMessage = () => messageId ? game.messages.get(messageId) : null);
+
     if ( rolls?.length && (config.evaluate !== false) ) {
       message[message.create !== false ? "document" : "data"] = await this.toMessage(
         rolls, message.data, { create: message.create, rollMode: message.rollMode }
