@@ -1,14 +1,39 @@
 /**
- * Configuration information for a token placement operation.
- *
- * @typedef TokenPlacementConfiguration
+ * @typedef BasePlacementConfiguration
+ * @property {boolean} [minimizeWindows=true]  Minimize windows to reveal the canvas.
+ * @property {boolean} [restoreLayer=true]     Return to original canvas layer after placement.
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef {BasePlacementConfiguration} TemplatePlacementConfiguration
+ * @property {number} color                                  Color to use when creating the template.
+ * @property {TokenDocument} [origin]                        Token that is the origin point of the placement.
+ * @property {TemplatePlacementShapeConfiguration[]} shapes  Configuration data for individual placements.
+ */
+
+/**
+ * @typedef TemplatePlacementShapeConfiguration
+ * @property {string} type      Shape type to use as the basis for the template.
+ * @property {number} size      Primary dimension of the template, converted into unit used for scene.
+ * @property {number} [width]   Width of the shape if relevant to shape type.
+ * @property {number} [height]  Height of the shape if relevant to shape type.
+ */
+
+/**
+ * @typedef {BaseShapeData} TemplatePlacementData
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef {BasePlacementConfiguration} TokenPlacementConfiguration
  * @property {TokenDocument} [origin]   Token that is the origin point of the placement.
  * @property {PrototypeToken[]} tokens  Prototype token information for rendering.
  */
 
 /**
- * Data for token placement on the scene.
- *
  * @typedef TokenPlacementData
  * @property {PrototypeToken} prototypeToken
  * @property {object} index
