@@ -404,7 +404,18 @@ system:
       value: >-
         <p>Quillathe cleanses monsters from her woods as a hobby, but now a new
         force menaces her land and she must band with adventurers to defeat
-        it.</p>
+        it.</p><p><em>Token artwork by </em><a
+        href="https://www.forgotten-adventures.net/" target="_blank"
+        rel="noopener"><em>Forgotten
+        Adventures</em></a><em>.</em></p><p><em>Token artwork by </em><a
+        href="https://www.forgotten-adventures.net/" target="_blank"
+        rel="noopener"><em>Forgotten
+        Adventures</em></a><em>.</em></p><p><em>Token artwork by </em><a
+        href="https://www.forgotten-adventures.net/" target="_blank"
+        rel="noopener"><em>Forgotten
+        Adventures</em></a><em>.</em></p><p><em>Token artwork by </em><a
+        href="https://www.forgotten-adventures.net/" target="_blank"
+        rel="noopener"><em>Forgotten Adventures</em></a><em>.</em></p>
       public: ''
     alignment: Chaotic Neutral
     ideal: ''
@@ -494,9 +505,6 @@ system:
     - type: item
       id: .Item.WiXfB8xRlPdC7kiB
       sort: 0
-    - type: item
-      id: .Item.iCf450qECu1PRkAZ
-      sort: 50000
 prototypeToken:
   name: Quillathe
   displayName: 20
@@ -742,8 +750,9 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 5.3.2
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1777923364225
     _id: WSfqg4qp13LFdc3N
     ownership:
       default: 0
@@ -843,8 +852,9 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 5.3.2
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1777923364225
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.6156HtS7RvjQ7nhJ'
@@ -1049,8 +1059,9 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 5.3.2
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1777923364225
     sort: 0
     ownership:
       default: 0
@@ -1101,8 +1112,9 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 5.3.2
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1777923364225
     sort: 0
     ownership:
       default: 0
@@ -1155,8 +1167,9 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 5.3.2
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1777923364225
     sort: 0
     ownership:
       default: 0
@@ -1208,8 +1221,9 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 5.3.2
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1777923364225
     sort: 0
     ownership:
       default: 0
@@ -1277,8 +1291,9 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 5.3.2
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1777923364225
     sort: 0
     ownership:
       default: 0
@@ -1338,9 +1353,10 @@ items:
       source:
         custom: ''
         rules: '2024'
-        revision: 1
+        revision: 2
         license: CC-BY-4.0
         book: ''
+        page: ''
       startingEquipment:
         - type: AND
           requiresProficiency: false
@@ -1437,8 +1453,8 @@ items:
           value:
             added:
               HAXlit2SO8luWUtO: Compendium.dnd5e.classes24.Item.phbrgrSpellcasti
-              o0bC09CnUpZ4wvDt: Compendium.dnd5e.classes24.Item.phbrgrFavoredEne
               uHY0uPusihtnVQkp: Compendium.dnd5e.classes24.Item.phbrgrWeaponMast
+              2p1sA50BWv2AdBYe: Compendium.dnd5e.classes24.Item.phbrgrFavoredEne
           level: 1
           title: Class Features
           flags: {}
@@ -1686,29 +1702,6 @@ items:
           title: ''
           flags: {}
           hint: ''
-        DOENALOWWjAUHzb7:
-          _id: DOENALOWWjAUHzb7
-          type: ItemGrant
-          configuration:
-            items:
-              - optional: false
-                uuid: Compendium.dnd5e.spells24.Item.phbsplHuntersMar
-            optional: false
-            spell:
-              ability: []
-              uses:
-                max: '@scale.ranger.favored-enemy'
-                per: lr
-                requireSlot: false
-              method: spell
-              prepared: 2
-          value:
-            added:
-              iCf450qECu1PRkAZ: Compendium.dnd5e.spells24.Item.phbsplHuntersMar
-          level: 1
-          title: Favored Enemy
-          hint: ''
-          flags: {}
         FksFWNV4X4lTFlvO:
           _id: FksFWNV4X4lTFlvO
           type: ScaleValue
@@ -2055,8 +2048,9 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 5.3.2
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1777923364225
     sort: 0
     ownership:
       default: 0
@@ -2101,6 +2095,7 @@ items:
           units: ft
           contiguous: false
           type: ''
+          stationary: false
       range:
         units: ft
         special: ''
@@ -2151,6 +2146,7 @@ items:
               type: cube
               size: '5'
               count: ''
+              stationary: false
             affects:
               choice: false
               count: '1'
@@ -2194,8 +2190,9 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 5.3.2
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1777923364225
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.kEjBWiTMcmhrI5w4'
@@ -2277,74 +2274,13 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 5.3.2
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1777923364225
     sort: 0
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.HAXlit2SO8luWUtO'
-  - _id: o0bC09CnUpZ4wvDt
-    name: Favored Enemy
-    type: feat
-    folder: h5OUzaJcZzsNsOGc
-    img: icons/creatures/abilities/dragon-breath-purple.webp
-    system:
-      description:
-        value: >-
-          <p>You always have the
-          @UUID[Compendium.dnd5e.spells24.Item.phbsplHuntersMar]{Hunter's Mark}
-          spell prepared. You can cast it twice without expending a spell slot,
-          and you regain all expended uses of this ability when you finish a
-          Long Rest.</p><p>The number of times you can cast the spell without a
-          spell slot increases when you reach certain Ranger levels, as shown in
-          the Favored Enemy column of the Ranger Features table.</p><section
-          id="secret-cyuZuzwxsQg01vVN" class="secret"><p><strong>Foundry
-          Note</strong></p><p>The spell is granted to you at this level and will
-          increase the number of free uses available automatically as you level
-          up.</p></section>
-        chat: ''
-      source:
-        custom: ''
-        rules: '2024'
-        revision: 1
-        license: CC-BY-4.0
-        book: ''
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: class
-        subtype: ''
-      prerequisites:
-        level: 1
-        items: []
-        repeatable: false
-      properties: []
-      requirements: ''
-      activities: {}
-      enchant: {}
-      identifier: favored-enemy
-      advancement: {}
-      crewed: false
-    effects: []
-    flags:
-      dnd5e:
-        sourceId: Compendium.dnd5e.classes24.Item.phbrgrFavoredEne
-        advancementOrigin: NuNBKjUuSNIRsF9M.R77BAIzMfcPq0urg
-        advancementRoot: NuNBKjUuSNIRsF9M.R77BAIzMfcPq0urg
-    _stats:
-      compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrFavoredEne
-      duplicateSource: null
-      exportSource: null
-      coreVersion: '13.351'
-      systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
-    sort: 0
-    ownership:
-      default: 0
-    _key: '!actors.items!QuillatheLv01000.o0bC09CnUpZ4wvDt'
   - _id: uHY0uPusihtnVQkp
     name: Weapon Mastery
     type: feat
@@ -2396,322 +2332,13 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 5.3.2
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1777923364225
     sort: 0
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.uHY0uPusihtnVQkp'
-  - name: Hunter's Mark
-    system:
-      description:
-        value: "<p>You magically mark one creature you can see within range as your quarry. Until the spell ends, you deal an extra [[/damage]] damage to the target whenever you hit it with an attack roll. You also have Advantage on any [[/check ability=wis skill=prc]] or [[/check ability=wis skill=sur]] check you make to find it.</p><p>If the target drops to 0 Hit Points before this spell ends, you can take a Bonus Action to move the mark to a new creature you can see within range.</p><p><strong>Using a Higher-Level Spell Slot.</strong>\_Your Concentration can last longer with a spell slot of level 3–4 (up to 8 hours) or 5+ (up to 24 hours).</p>"
-        chat: ''
-      source:
-        custom: ''
-        rules: '2024'
-        license: CC-BY-4.0
-        book: ''
-        revision: 2
-      activation:
-        type: bonus
-        condition: ''
-        value: null
-      duration:
-        value: '1'
-        units: hour
-      target:
-        affects:
-          type: creature
-          count: '1'
-          choice: false
-          special: ''
-        template:
-          units: ft
-          contiguous: false
-          type: ''
-      range:
-        value: '90'
-        units: ft
-        special: ''
-      uses:
-        max: '@scale.ranger.favored-enemy'
-        recovery:
-          - period: lr
-            type: recoverAll
-          - period: lr
-            type: recoverAll
-        spent: 0
-      level: 1
-      school: div
-      properties:
-        - vocal
-        - concentration
-      materials:
-        value: ''
-        consumed: false
-        cost: 0
-        supply: 0
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: damage
-          activation:
-            type: ''
-            value: null
-            override: true
-            condition: ''
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: false
-          description:
-            chatFlavor: ''
-          duration:
-            units: inst
-            override: true
-            concentration: false
-          effects: []
-          range:
-            override: true
-            units: any
-            special: ''
-          target:
-            prompt: true
-            template:
-              contiguous: false
-              units: ft
-            affects:
-              choice: false
-            override: false
-          damage:
-            critical:
-              allow: true
-              bonus: ''
-            parts:
-              - custom:
-                  enabled: false
-                  formula: ''
-                number: 1
-                denomination: 6
-                bonus: ''
-                types:
-                  - force
-                scaling:
-                  mode: ''
-                  number: 1
-          uses:
-            spent: 0
-            recovery: []
-            max: ''
-          sort: 200000
-          name: Bonus Mark Damage
-          flags: {}
-          visibility:
-            level: {}
-            requireAttunement: false
-            requireIdentification: false
-            requireMagic: false
-          img: null
-        vxr2JKuQ3jyMDTwb:
-          type: utility
-          _id: vxr2JKuQ3jyMDTwb
-          activation:
-            type: action
-            value: null
-            override: false
-          consumption:
-            scaling:
-              allowed: false
-            spellSlot: true
-            targets: []
-          description:
-            chatFlavor: ''
-          duration:
-            units: inst
-            concentration: false
-            override: false
-          effects:
-            - _id: vPkln6UeePHnbLr4
-              level: {}
-          range:
-            override: false
-            units: self
-          target:
-            template:
-              contiguous: false
-              units: ft
-            affects:
-              choice: false
-            override: false
-            prompt: true
-          uses:
-            spent: 0
-            recovery: []
-            max: ''
-          sort: 100000
-          roll:
-            prompt: false
-            visible: false
-            name: ''
-            formula: ''
-          name: Mark Creature
-          flags: {}
-          visibility:
-            level: {}
-            requireAttunement: false
-            requireIdentification: false
-            requireMagic: false
-          img: null
-        NQtVK0T5uwfMPGQL:
-          type: utility
-          activation:
-            type: bonus
-            value: null
-            override: true
-            condition: when the currently marked target drops to 0 Hit Points
-          consumption:
-            scaling:
-              allowed: false
-            spellSlot: false
-            targets: []
-          description:
-            chatFlavor: ''
-          duration:
-            units: inst
-            concentration: false
-            override: true
-          effects:
-            - _id: vPkln6UeePHnbLr4
-              level: {}
-          range:
-            override: true
-            units: any
-            special: ''
-          target:
-            template:
-              contiguous: false
-              units: ft
-            affects:
-              choice: false
-            override: false
-            prompt: true
-          uses:
-            spent: 0
-            recovery: []
-            max: ''
-          sort: 300000
-          roll:
-            prompt: false
-            visible: false
-            name: ''
-            formula: ''
-          name: Move Mark
-          _id: NQtVK0T5uwfMPGQL
-          flags: {}
-          visibility:
-            level: {}
-            requireAttunement: false
-            requireIdentification: false
-            requireMagic: false
-          img: null
-        72GB8kfgMJgPVbY0:
-          _id: 72GB8kfgMJgPVbY0
-          type: forward
-          name: Mark Creature (free casting)
-          sort: 100001
-          activity:
-            id: vxr2JKuQ3jyMDTwb
-          consumption:
-            targets:
-              - type: itemUses
-                target: ''
-                value: '1'
-                scaling: {}
-            scaling:
-              allowed: false
-            spellSlot: true
-          activation:
-            type: action
-            override: false
-          description: {}
-          flags: {}
-          uses:
-            spent: 0
-            recovery: []
-          visibility:
-            level: {}
-            requireAttunement: false
-            requireIdentification: false
-            requireMagic: false
-          img: null
-      identifier: hunters-mark
-      method: spell
-      prepared: 2
-      sourceClass: ranger
-    _id: iCf450qECu1PRkAZ
-    type: spell
-    img: icons/skills/targeting/crosshair-scope-sniper-green.webp
-    effects:
-      - name: Hunter's Mark
-        img: icons/skills/targeting/crosshair-scope-sniper-green.webp
-        origin: Compendium.dnd5e.spells24.Item.phbsplHuntersMar
-        transfer: false
-        _id: vPkln6UeePHnbLr4
-        type: base
-        system: {}
-        changes: []
-        disabled: false
-        duration:
-          startTime: null
-          combat: null
-          seconds: 3600
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
-        description: >-
-          <p>Until the spell ends, the caster deals an extra [[/damage 1d6
-          force]] damage to the target whenever they hit it with an attack
-          roll.</p>
-        tint: '#ffffff'
-        statuses:
-          - marked
-        sort: 0
-        flags:
-          dnd5e:
-            riders:
-              statuses: []
-        _stats:
-          compendiumSource: null
-          duplicateSource: null
-          exportSource: null
-          coreVersion: '13.351'
-          systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
-        _key: >-
-          !actors.items.effects!QuillatheLv01000.iCf450qECu1PRkAZ.vPkln6UeePHnbLr4
-    folder: pBaAAtXBCq9FVEnL
-    sort: 1900000
-    flags:
-      dnd5e:
-        sourceId: Compendium.dnd5e.spells24.Item.phbsplHuntersMar
-        advancementOrigin: NuNBKjUuSNIRsF9M.DOENALOWWjAUHzb7
-        advancementRoot: NuNBKjUuSNIRsF9M.DOENALOWWjAUHzb7
-    _stats:
-      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplHuntersMar
-      duplicateSource: null
-      exportSource: null
-      coreVersion: '13.351'
-      systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
-    ownership:
-      default: 0
-    _key: '!actors.items!QuillatheLv01000.iCf450qECu1PRkAZ'
   - name: Cure Wounds
     system:
       description:
@@ -2744,6 +2371,7 @@ items:
           units: ft
           contiguous: false
           type: ''
+          stationary: false
       range:
         units: touch
         special: ''
@@ -2790,6 +2418,7 @@ items:
             template:
               contiguous: false
               units: ft
+              stationary: false
             affects:
               choice: false
             override: false
@@ -2819,8 +2448,8 @@ items:
           img: null
       identifier: cure-wounds
       method: spell
-      sourceClass: ranger
       prepared: 1
+      sourceItem: class:ranger
     _id: 2KxozSkbJhhPD7Zb
     type: spell
     img: icons/magic/nature/leaf-drip-light-green.webp
@@ -2834,8 +2463,9 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 5.3.2
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1777923364225
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.2KxozSkbJhhPD7Zb'
@@ -2879,6 +2509,7 @@ items:
           units: ft
           contiguous: false
           type: ''
+          stationary: false
       range:
         units: self
         special: ''
@@ -2928,6 +2559,7 @@ items:
             template:
               contiguous: false
               units: ft
+              stationary: false
             affects:
               choice: false
             override: false
@@ -2992,6 +2624,7 @@ items:
               contiguous: false
               units: ft
               type: ''
+              stationary: false
             affects:
               choice: false
               count: '1'
@@ -3030,8 +2663,8 @@ items:
           img: null
       identifier: ensnaring-strike
       method: spell
-      sourceClass: ranger
       prepared: 1
+      sourceItem: class:ranger
     _id: EBgpZ648SEfydQRq
     type: spell
     img: icons/magic/nature/root-vines-grow-brown.webp
@@ -3086,8 +2719,9 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 5.3.2
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1777923364225
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.EBgpZ648SEfydQRq'
@@ -3171,6 +2805,7 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -3214,8 +2849,9 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 5.3.2
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1777923364225
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.unYsJXqTKiLwFGEu'
@@ -3287,8 +2923,9 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 5.3.2
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1777923364225
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.8OhoDlMp6n7S6vkp'
@@ -3381,6 +3018,7 @@ items:
               contiguous: false
               units: ft
               type: ''
+              stationary: false
             affects:
               choice: false
               count: '1'
@@ -3450,6 +3088,7 @@ items:
               contiguous: false
               units: ft
               type: ''
+              stationary: false
             affects:
               choice: false
               count: ''
@@ -3522,8 +3161,9 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 5.3.2
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1777923364225
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.kokZ2ulFQRGtAwaU'
@@ -3566,6 +3206,7 @@ items:
               contiguous: false
               units: ft
               type: ''
+              stationary: false
             affects:
               choice: false
               count: '1'
@@ -3692,8 +3333,9 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 5.3.2
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1777923364225
     sort: 0
     ownership:
       default: 0
@@ -3764,8 +3406,9 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 5.3.2
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1777923364225
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.zLB9qhJw8z2FSbCO'
@@ -3877,6 +3520,7 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -3932,8 +3576,9 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 5.3.2
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1777923364225
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.D3zED6xcDPkysnuj'
@@ -4045,6 +3690,7 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -4100,8 +3746,9 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 5.3.2
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1777923364225
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.lERu2Skz1q5s9egL'
@@ -4214,6 +3861,7 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -4270,8 +3918,9 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 5.3.2
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1777923364225
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.qdxxGDu9tguu68Fu'
@@ -4330,8 +3979,9 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 5.3.2
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1777923364225
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.nTW4gFU6HZR5aZXL'
@@ -4403,8 +4053,9 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 5.3.2
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1777923364225
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.WiXfB8xRlPdC7kiB'
@@ -4478,8 +4129,9 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 5.3.2
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1777923364225
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.pie1jETwfFOgm3Ea'
@@ -4548,8 +4200,9 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 5.3.2
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1777923364225
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.friHHTqUU9vmohfg'
@@ -4639,6 +4292,7 @@ items:
               contiguous: false
               units: ft
               type: ''
+              stationary: false
             affects:
               choice: false
               count: ''
@@ -4677,8 +4331,9 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 5.3.2
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1777923364225
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.hc8MggfBaxwCzCHA'
@@ -4772,6 +4427,7 @@ items:
               contiguous: false
               units: ft
               type: ''
+              stationary: false
             affects:
               choice: false
               count: ''
@@ -4827,6 +4483,7 @@ items:
               contiguous: false
               units: ft
               type: ''
+              stationary: false
             affects:
               choice: false
               count: ''
@@ -4882,6 +4539,7 @@ items:
               contiguous: false
               units: ft
               type: ''
+              stationary: false
             affects:
               choice: false
               count: ''
@@ -4920,8 +4578,9 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 5.3.2
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1777923364225
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.NQXrw78HaPfjDwCR'
@@ -4970,8 +4629,9 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 5.3.2
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1777923364225
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.lSEr732XDGJKNopc'
@@ -5030,8 +4690,9 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 5.3.2
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1777923364225
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.KaPzoh8WPLzQEWMu'
@@ -5074,6 +4735,7 @@ items:
               contiguous: false
               units: ft
               type: ''
+              stationary: false
             affects:
               choice: false
               count: ''
@@ -5151,8 +4813,9 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 5.3.2
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1777923364225
     _id: 6kKffxM60Oq7uyzV
     sort: 100000
     ownership:
@@ -5247,6 +4910,7 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -5306,8 +4970,9 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 5.3.2
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1777923364225
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.sMFxms44gxWpPEzK'
@@ -5413,6 +5078,7 @@ items:
               contiguous: false
               units: ft
               type: ''
+              stationary: false
             affects:
               choice: false
               count: '1'
@@ -5478,6 +5144,7 @@ items:
               type: square
               size: '5'
               count: ''
+              stationary: false
             affects:
               choice: false
               count: '1'
@@ -5524,8 +5191,9 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 5.3.2
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1777923364225
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.IllhigPdXlPBx5Mu'
@@ -5592,11 +5260,764 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 5.3.2
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1777923364225
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.biyQChEtJrhkkj9X'
+  - _id: 2p1sA50BWv2AdBYe
+    name: Favored Enemy
+    type: feat
+    folder: h5OUzaJcZzsNsOGc
+    img: icons/creatures/abilities/dragon-breath-purple.webp
+    system:
+      description:
+        value: >-
+          <p>You always have the
+          @UUID[Compendium.dnd5e.spells24.Item.phbsplHuntersMar]{Hunter's Mark}
+          spell prepared. You can cast it twice without expending a spell slot,
+          and you regain all expended uses of this ability when you finish a
+          Long Rest.</p><p>The number of times you can cast the spell without a
+          spell slot increases when you reach certain Ranger levels, as shown in
+          the Favored Enemy column of the Ranger Features table.</p><section
+          id="secret-cyuZuzwxsQg01vVN" class="secret"><p><strong>Foundry
+          Note</strong></p><p>The spell is granted to you at this level and will
+          increase the number of free uses available automatically as you level
+          up.</p></section>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 2
+        license: CC-BY-4.0
+        book: ''
+      uses:
+        max: '@scale.ranger.favored-enemy'
+        spent: 0
+        recovery:
+          - period: lr
+            type: recoverAll
+      type:
+        value: class
+        subtype: ''
+      prerequisites:
+        level: 1
+        items: []
+        repeatable: false
+      properties:
+        - mgc
+      requirements: ''
+      activities:
+        18OW4UKZ5cSPPLhC:
+          type: cast
+          spell:
+            uuid: Compendium.dnd5e.spells24.Item.phbsplHuntersMar
+            challenge:
+              override: false
+            properties: []
+            spellbook: true
+            ability: ''
+            level: 1
+          _id: 18OW4UKZ5cSPPLhC
+          img: ''
+          sort: 0
+          activation:
+            type: bonus
+            override: true
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling: {}
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          flags: {}
+          range:
+            units: self
+            override: false
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          name: Hunter's Mark (Free)
+      enchant: {}
+      identifier: favored-enemy
+      advancement:
+        DOENALOWWjAUHzb7:
+          _id: DOENALOWWjAUHzb7
+          type: ItemGrant
+          configuration:
+            items:
+              - optional: false
+                uuid: Compendium.dnd5e.spells24.Item.phbsplHuntersMar
+            optional: false
+            spell:
+              ability: []
+              uses:
+                max: ''
+                per: ''
+                requireSlot: false
+              method: spell
+              prepared: 2
+          value:
+            added:
+              YzOlWHzPeyRC3sDu: Compendium.dnd5e.spells24.Item.phbsplHuntersMar
+          level: 1
+          title: Favored Enemy
+          hint: ''
+          flags: {}
+      crewed: false
+    effects: []
+    flags:
+      dnd5e:
+        sourceId: Compendium.dnd5e.classes24.Item.phbrgrFavoredEne
+        advancementOrigin: NuNBKjUuSNIRsF9M.R77BAIzMfcPq0urg
+        advancementRoot: NuNBKjUuSNIRsF9M.R77BAIzMfcPq0urg
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrFavoredEne
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.2
+      createdTime: 1777923364210
+      modifiedTime: 1777923430706
+      lastModifiedBy: dnd5ebuilder0000
+    sort: 0
+    ownership:
+      default: 0
+    _key: '!actors.items!QuillatheLv01000.2p1sA50BWv2AdBYe'
+  - name: Hunter's Mark
+    system:
+      description:
+        value: "<p>You magically mark one creature you can see within range as your quarry. Until the spell ends, you deal an extra [[/damage]] damage to the target whenever you hit it with an attack roll. You also have Advantage on any [[/check ability=wis skill=prc]] or [[/check ability=wis skill=sur]] check you make to find it.</p><p>If the target drops to 0 Hit Points before this spell ends, you can take a Bonus Action to move the mark to a new creature you can see within range.</p><p><strong>Using a Higher-Level Spell Slot.</strong>\_Your Concentration can last longer with a spell slot of level 3–4 (up to 8 hours) or 5+ (up to 24 hours).</p>"
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 2
+      activation:
+        type: bonus
+        condition: ''
+        value: null
+      duration:
+        value: '1'
+        units: hour
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+          special: ''
+        template:
+          units: ft
+          contiguous: false
+          type: ''
+          stationary: false
+      range:
+        value: '90'
+        units: ft
+        special: ''
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: div
+      properties:
+        - vocal
+        - concentration
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: damage
+          activation:
+            type: ''
+            value: null
+            override: true
+            condition: ''
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: false
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: true
+            concentration: false
+          effects: []
+          range:
+            override: true
+            units: any
+            special: ''
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+              stationary: false
+            affects:
+              choice: false
+            override: false
+          damage:
+            critical:
+              allow: true
+              bonus: ''
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
+                denomination: 6
+                bonus: ''
+                types:
+                  - force
+                scaling:
+                  mode: ''
+                  number: 1
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 200000
+          name: Bonus Mark Damage
+          img: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+        vxr2JKuQ3jyMDTwb:
+          type: utility
+          _id: vxr2JKuQ3jyMDTwb
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects:
+            - _id: vPkln6UeePHnbLr4
+              level: {}
+          range:
+            override: false
+            units: self
+          target:
+            template:
+              contiguous: false
+              units: ft
+              stationary: false
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 100000
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          name: Mark Creature
+          img: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+        NQtVK0T5uwfMPGQL:
+          type: utility
+          activation:
+            type: bonus
+            value: null
+            override: true
+            condition: when the currently marked target drops to 0 Hit Points
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: false
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: true
+          effects:
+            - _id: vPkln6UeePHnbLr4
+              level: {}
+          range:
+            override: true
+            units: any
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              stationary: false
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 300000
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          name: Move Mark
+          _id: NQtVK0T5uwfMPGQL
+          img: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: hunters-mark
+      method: spell
+      prepared: 2
+      sourceItem: feat:favored-enemy
+    _id: YzOlWHzPeyRC3sDu
+    type: spell
+    img: icons/skills/targeting/crosshair-scope-sniper-green.webp
+    effects:
+      - name: Hunter's Mark
+        img: icons/skills/targeting/crosshair-scope-sniper-green.webp
+        origin: Compendium.dnd5e.spells24.Item.phbsplHuntersMar
+        transfer: false
+        _id: vPkln6UeePHnbLr4
+        type: base
+        system: {}
+        changes: []
+        disabled: false
+        duration:
+          startTime: null
+          combat: null
+          seconds: 3600
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: >-
+          <p>Until the spell ends, the caster deals an extra [[/damage 1d6
+          force]] damage to the target whenever they hit it with an attack
+          roll.</p>
+        tint: '#ffffff'
+        statuses:
+          - marked
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.2
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!QuillatheLv01000.YzOlWHzPeyRC3sDu.vPkln6UeePHnbLr4
+    folder: pBaAAtXBCq9FVEnL
+    sort: 1900000
+    ownership:
+      default: 0
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        sourceId: Compendium.dnd5e.spells24.Item.phbsplHuntersMar
+        advancementOrigin: 2p1sA50BWv2AdBYe.DOENALOWWjAUHzb7
+        advancementRoot: NuNBKjUuSNIRsF9M.R77BAIzMfcPq0urg
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplHuntersMar
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.2
+      createdTime: 1777923364210
+      modifiedTime: 1777923364210
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!actors.items!QuillatheLv01000.YzOlWHzPeyRC3sDu'
+  - name: Hunter's Mark
+    system:
+      description:
+        value: "<p>You magically mark one creature you can see within range as your quarry. Until the spell ends, you deal an extra [[/damage]] damage to the target whenever you hit it with an attack roll. You also have Advantage on any [[/check ability=wis skill=prc]] or [[/check ability=wis skill=sur]] check you make to find it.</p><p>If the target drops to 0 Hit Points before this spell ends, you can take a Bonus Action to move the mark to a new creature you can see within range.</p><p><strong>Using a Higher-Level Spell Slot.</strong>\_Your Concentration can last longer with a spell slot of level 3–4 (up to 8 hours) or 5+ (up to 24 hours).</p>"
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        license: CC-BY-4.0
+        book: ''
+        revision: 2
+      activation:
+        type: bonus
+        condition: ''
+        value: null
+      duration:
+        value: '1'
+        units: hour
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+          special: ''
+        template:
+          units: ft
+          contiguous: false
+          type: ''
+          stationary: false
+      range:
+        value: '90'
+        units: ft
+        special: ''
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: div
+      properties:
+        - vocal
+        - concentration
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: damage
+          activation:
+            type: ''
+            value: null
+            override: true
+            condition: ''
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: false
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: true
+            concentration: false
+          effects: []
+          range:
+            override: true
+            units: any
+            special: ''
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+              stationary: false
+            affects:
+              choice: false
+            override: false
+          damage:
+            critical:
+              allow: true
+              bonus: ''
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
+                denomination: 6
+                bonus: ''
+                types:
+                  - force
+                scaling:
+                  mode: ''
+                  number: 1
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 200000
+          name: Bonus Mark Damage
+          img: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+        vxr2JKuQ3jyMDTwb:
+          type: utility
+          _id: vxr2JKuQ3jyMDTwb
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects:
+            - _id: vPkln6UeePHnbLr4
+              level: {}
+          range:
+            override: false
+            units: self
+          target:
+            template:
+              contiguous: false
+              units: ft
+              stationary: false
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 100000
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          name: Mark Creature
+          img: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+        NQtVK0T5uwfMPGQL:
+          type: utility
+          activation:
+            type: bonus
+            value: null
+            override: true
+            condition: when the currently marked target drops to 0 Hit Points
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: false
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: true
+          effects:
+            - _id: vPkln6UeePHnbLr4
+              level: {}
+          range:
+            override: true
+            units: any
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              stationary: false
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 300000
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          name: Move Mark
+          _id: NQtVK0T5uwfMPGQL
+          img: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      identifier: hunters-mark
+      method: spell
+      prepared: 0
+      sourceItem: feat:favored-enemy
+    type: spell
+    img: icons/skills/targeting/crosshair-scope-sniper-green.webp
+    effects:
+      - name: Hunter's Mark
+        img: icons/skills/targeting/crosshair-scope-sniper-green.webp
+        origin: Compendium.dnd5e.spells24.Item.phbsplHuntersMar
+        transfer: false
+        _id: vPkln6UeePHnbLr4
+        type: base
+        system: {}
+        changes: []
+        disabled: false
+        duration:
+          startTime: null
+          combat: null
+          seconds: 3600
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: >-
+          <p>Until the spell ends, the caster deals an extra [[/damage 1d6
+          force]] damage to the target whenever they hit it with an attack
+          roll.</p>
+        tint: '#ffffff'
+        statuses:
+          - marked
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.2
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!QuillatheLv01000.WMKaTlBSGK1PCDTF.vPkln6UeePHnbLr4
+      - _id: dnd5espellchange
+        type: enchantment
+        name: Spell Changes
+        img: systems/dnd5e/icons/svg/activity/cast.svg
+        origin: >-
+          Compendium.dnd5e.actors24.Actor.QuillatheLv01000.Item.2p1sA50BWv2AdBYe.Activity.18OW4UKZ5cSPPLhC
+        changes:
+          - key: system.method
+            mode: 5
+            value: spell
+          - key: system.activation
+            mode: 5
+            value: '{"type":"bonus","condition":""}'
+        system: {}
+        disabled: false
+        duration:
+          startTime: 0
+          combat: null
+          startRound: 0
+          startTurn: 0
+        description: ''
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+          coreVersion: '13.351'
+          systemId: dnd5e
+          systemVersion: 5.3.2
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!QuillatheLv01000.WMKaTlBSGK1PCDTF.dnd5espellchange
+    folder: pBaAAtXBCq9FVEnL
+    sort: 1900000
+    ownership:
+      default: 0
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        cachedFor: .Item.2p1sA50BWv2AdBYe.Activity.18OW4UKZ5cSPPLhC
+    _stats:
+      duplicateSource: null
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplHuntersMar
+      coreVersion: '13.351'
+      systemId: dnd5e
+      systemVersion: 5.3.2
+      createdTime: 1777923364273
+      modifiedTime: 1777923364273
+      lastModifiedBy: dnd5ebuilder0000
+    _id: WMKaTlBSGK1PCDTF
+    _key: '!actors.items!QuillatheLv01000.WMKaTlBSGK1PCDTF'
 effects: []
 folder: Yg8rxL4JuMi44szP
 flags: {}
@@ -5605,9 +6026,9 @@ _stats:
   exportSource: null
   coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.3.0
+  systemVersion: 5.3.2
   createdTime: 1771452688099
-  modifiedTime: 1771452688099
+  modifiedTime: 1777923512420
   lastModifiedBy: dnd5ebuilder0000
 ownership:
   default: 0

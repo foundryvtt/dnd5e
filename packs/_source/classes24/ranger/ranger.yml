@@ -49,9 +49,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
+    revision: 2
     license: CC-BY-4.0
     book: ''
+    page: ''
   startingEquipment:
     - type: AND
       requiresProficiency: false
@@ -124,11 +125,15 @@ system:
   identifier: ranger
   levels: 1
   advancement:
-    - _id: tGf0hPcdu2TIQdgN
+    tGf0hPcdu2TIQdgN:
+      _id: tGf0hPcdu2TIQdgN
       type: HitPoints
       configuration: {}
       value: {}
-    - _id: R77BAIzMfcPq0urg
+      flags: {}
+      hint: ''
+    R77BAIzMfcPq0urg:
+      _id: R77BAIzMfcPq0urg
       type: ItemGrant
       configuration:
         items:
@@ -143,7 +148,10 @@ system:
       value: {}
       level: 1
       title: Class Features
-    - _id: 0XJhkNDTm9P3K5n3
+      flags: {}
+      hint: ''
+    0XJhkNDTm9P3K5n3:
+      _id: 0XJhkNDTm9P3K5n3
       type: ItemGrant
       configuration:
         items:
@@ -156,7 +164,10 @@ system:
       value: {}
       level: 2
       title: Class Features
-    - _id: onoWzEIWhrrG4QJt
+      flags: {}
+      hint: ''
+    onoWzEIWhrrG4QJt:
+      _id: onoWzEIWhrrG4QJt
       type: ItemGrant
       configuration:
         items:
@@ -167,7 +178,10 @@ system:
       value: {}
       level: 5
       title: Class Features
-    - _id: fEmkkyi2Z6qGfYOZ
+      flags: {}
+      hint: ''
+    fEmkkyi2Z6qGfYOZ:
+      _id: fEmkkyi2Z6qGfYOZ
       type: ItemGrant
       configuration:
         items:
@@ -178,7 +192,10 @@ system:
       value: {}
       level: 6
       title: Class Features
-    - _id: fy2LFc8UC9PTq4aF
+      flags: {}
+      hint: ''
+    fy2LFc8UC9PTq4aF:
+      _id: fy2LFc8UC9PTq4aF
       type: ItemGrant
       configuration:
         items:
@@ -189,7 +206,10 @@ system:
       value: {}
       level: 9
       title: Class Features
-    - _id: Yscwm2LPBUNjW0pk
+      flags: {}
+      hint: ''
+    Yscwm2LPBUNjW0pk:
+      _id: Yscwm2LPBUNjW0pk
       type: Trait
       configuration:
         mode: expertise
@@ -203,7 +223,10 @@ system:
         chosen: []
       level: 9
       title: Expertise
-    - _id: tfv4CeK2F4fdZMMi
+      flags: {}
+      hint: ''
+    tfv4CeK2F4fdZMMi:
+      _id: tfv4CeK2F4fdZMMi
       type: ItemGrant
       configuration:
         items:
@@ -214,7 +237,10 @@ system:
       value: {}
       level: 10
       title: Class Features
-    - _id: yMKZmo7nE6oSFMD0
+      flags: {}
+      hint: ''
+    yMKZmo7nE6oSFMD0:
+      _id: yMKZmo7nE6oSFMD0
       type: ItemGrant
       configuration:
         items:
@@ -225,7 +251,10 @@ system:
       value: {}
       level: 13
       title: Class Features
-    - _id: zurYQjBBNQW92SAz
+      flags: {}
+      hint: ''
+    zurYQjBBNQW92SAz:
+      _id: zurYQjBBNQW92SAz
       type: ItemGrant
       configuration:
         items:
@@ -236,7 +265,10 @@ system:
       value: {}
       level: 14
       title: Class Features
-    - _id: c3CqyzFeTFA5Yq8u
+      flags: {}
+      hint: ''
+    c3CqyzFeTFA5Yq8u:
+      _id: c3CqyzFeTFA5Yq8u
       type: ItemGrant
       configuration:
         items:
@@ -247,7 +279,10 @@ system:
       value: {}
       level: 17
       title: Class Features
-    - _id: e1EWIvBos04kIm4n
+      flags: {}
+      hint: ''
+    e1EWIvBos04kIm4n:
+      _id: e1EWIvBos04kIm4n
       type: ItemGrant
       configuration:
         items:
@@ -258,7 +293,10 @@ system:
       value: {}
       level: 18
       title: Class Features
-    - _id: M9VOxnHqo0qYtwGb
+      flags: {}
+      hint: ''
+    M9VOxnHqo0qYtwGb:
+      _id: M9VOxnHqo0qYtwGb
       type: ItemGrant
       configuration:
         items:
@@ -269,7 +307,10 @@ system:
       value: {}
       level: 20
       title: Class Features
-    - _id: bwCLOdauuzoHofil
+      flags: {}
+      hint: ''
+    bwCLOdauuzoHofil:
+      _id: bwCLOdauuzoHofil
       type: AbilityScoreImprovement
       configuration:
         points: 2
@@ -286,7 +327,10 @@ system:
       value: {}
       level: 4
       title: ''
-    - _id: mRSh9oUVjLU33e7p
+      flags: {}
+      hint: ''
+    mRSh9oUVjLU33e7p:
+      _id: mRSh9oUVjLU33e7p
       type: AbilityScoreImprovement
       configuration:
         points: 2
@@ -303,7 +347,10 @@ system:
       value: {}
       level: 8
       title: ''
-    - _id: mhZh3LfLMa15tXee
+      flags: {}
+      hint: ''
+    mhZh3LfLMa15tXee:
+      _id: mhZh3LfLMa15tXee
       type: AbilityScoreImprovement
       configuration:
         points: 2
@@ -320,7 +367,10 @@ system:
       value: {}
       level: 12
       title: ''
-    - _id: FOf5CkGnSs0OlppY
+      flags: {}
+      hint: ''
+    FOf5CkGnSs0OlppY:
+      _id: FOf5CkGnSs0OlppY
       type: AbilityScoreImprovement
       configuration:
         points: 2
@@ -337,26 +387,10 @@ system:
       value: {}
       level: 16
       title: ''
-    - _id: DOENALOWWjAUHzb7
-      type: ItemGrant
-      configuration:
-        items:
-          - optional: false
-            uuid: Compendium.dnd5e.spells24.Item.phbsplHuntersMar
-        optional: false
-        spell:
-          ability: []
-          uses:
-            max: '@scale.ranger.favored-enemy'
-            per: lr
-            requireSlot: false
-          method: spell
-          prepared: 2
-      value: {}
-      level: 1
-      title: Favored Enemy
+      flags: {}
       hint: ''
-    - _id: FksFWNV4X4lTFlvO
+    FksFWNV4X4lTFlvO:
+      _id: FksFWNV4X4lTFlvO
       type: ScaleValue
       configuration:
         identifier: ''
@@ -377,7 +411,9 @@ system:
       value: {}
       title: Favored Enemy
       hint: ''
-    - _id: PLqssMc398jEsEW4
+      flags: {}
+    PLqssMc398jEsEW4:
+      _id: PLqssMc398jEsEW4
       type: Trait
       configuration:
         mode: expertise
@@ -392,7 +428,9 @@ system:
       level: 2
       title: Deft Explorer
       hint: ''
-    - _id: wzh6lW4bOlQy4geS
+      flags: {}
+    wzh6lW4bOlQy4geS:
+      _id: wzh6lW4bOlQy4geS
       type: Trait
       configuration:
         mode: default
@@ -408,7 +446,9 @@ system:
       level: 2
       title: Deft Explorer
       hint: ''
-    - _id: 2Wma1d7xii6GUWC9
+      flags: {}
+    2Wma1d7xii6GUWC9:
+      _id: 2Wma1d7xii6GUWC9
       type: ScaleValue
       configuration:
         identifier: mark
@@ -427,7 +467,9 @@ system:
       value: {}
       title: Hunter's Mark Damage
       hint: ''
-    - _id: iYdu1uOqAnHGWIZY
+      flags: {}
+    iYdu1uOqAnHGWIZY:
+      _id: iYdu1uOqAnHGWIZY
       type: ScaleValue
       configuration:
         identifier: max-prepared
@@ -462,7 +504,9 @@ system:
       value: {}
       title: Max Prepared Spells
       hint: ''
-    - _id: eJTiCO9yVqCP1Ptd
+      flags: {}
+    eJTiCO9yVqCP1Ptd:
+      _id: eJTiCO9yVqCP1Ptd
       type: Subclass
       configuration: {}
       value:
@@ -471,7 +515,9 @@ system:
       level: 3
       title: ''
       hint: ''
-    - _id: 3trTn2JpXbZ6X24q
+      flags: {}
+    3trTn2JpXbZ6X24q:
+      _id: 3trTn2JpXbZ6X24q
       type: Trait
       configuration:
         mode: default
@@ -486,7 +532,9 @@ system:
       title: Saving Throw Proficiencies
       hint: ''
       classRestriction: primary
-    - _id: H1iv8RH9TOVH30qO
+      flags: {}
+    H1iv8RH9TOVH30qO:
+      _id: H1iv8RH9TOVH30qO
       type: Trait
       configuration:
         mode: default
@@ -509,7 +557,9 @@ system:
       title: Skill Proficiencies
       hint: ''
       classRestriction: primary
-    - _id: knFte4PvZAtHAcFJ
+      flags: {}
+    knFte4PvZAtHAcFJ:
+      _id: knFte4PvZAtHAcFJ
       type: Trait
       configuration:
         mode: default
@@ -524,7 +574,9 @@ system:
       title: Weapon Proficiencies
       hint: ''
       classRestriction: primary
-    - _id: TehnIJlh1drGLjpj
+      flags: {}
+    TehnIJlh1drGLjpj:
+      _id: TehnIJlh1drGLjpj
       type: Trait
       configuration:
         mode: default
@@ -539,7 +591,9 @@ system:
       level: 1
       title: Armor Training
       hint: ''
-    - _id: 491B9spyMvoNt2ij
+      flags: {}
+    491B9spyMvoNt2ij:
+      _id: 491B9spyMvoNt2ij
       type: Trait
       configuration:
         mode: default
@@ -562,7 +616,9 @@ system:
       title: Skill Proficiencies
       hint: ''
       classRestriction: secondary
-    - _id: AtKKnCoTLBqSxhCh
+      flags: {}
+    AtKKnCoTLBqSxhCh:
+      _id: AtKKnCoTLBqSxhCh
       type: ItemChoice
       configuration:
         choices:
@@ -587,7 +643,9 @@ system:
         replaced: {}
       title: Fighting Style
       hint: ''
-    - _id: cvPNAaphQTdoQqAb
+      flags: {}
+    cvPNAaphQTdoQqAb:
+      _id: cvPNAaphQTdoQqAb
       type: Trait
       configuration:
         mode: mastery
@@ -602,7 +660,9 @@ system:
       level: 1
       title: Weapon Mastery
       hint: ''
-    - _id: wXbfWOQp62GRMMlZ
+      flags: {}
+    wXbfWOQp62GRMMlZ:
+      _id: wXbfWOQp62GRMMlZ
       type: Trait
       configuration:
         mode: default
@@ -616,7 +676,9 @@ system:
       title: Weapon Proficiencies
       hint: ''
       classRestriction: secondary
-    - type: AbilityScoreImprovement
+      flags: {}
+    Fu3uIg8onmQ45JBX:
+      type: AbilityScoreImprovement
       _id: Fu3uIg8onmQ45JBX
       configuration:
         cap: 2
@@ -635,6 +697,7 @@ system:
       level: 19
       title: ''
       hint: ''
+      flags: {}
   spellcasting:
     progression: half
     ability: wis
@@ -654,11 +717,11 @@ effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.348'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 5.3.2
   createdTime: 1735932734523
-  modifiedTime: 1757541658137
+  modifiedTime: 1777921202246
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
