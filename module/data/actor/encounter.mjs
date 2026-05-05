@@ -4,6 +4,7 @@ import FormulaField from "../fields/formula-field.mjs";
 const { ArrayField, DocumentUUIDField, NumberField, SchemaField } = foundry.data.fields;
 
 /**
+ * @import { EncounterPlacementSettingData } from "../settings/_types.mjs";
  * @import { EncounterActorSystemData } from "./_types.mjs";
  */
 
@@ -157,6 +158,26 @@ export default class EncounterData extends GroupTemplate {
       }
       return member;
     }))).filter(m => m.quantity.value);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Place all members in the encounter on the current scene and return the associated token documents.
+   * @param {object} [config]                                        Configuration options for the encounter placement.
+   * @param {EncounterPlacementSettingData} [config.combatBehavior]  Combat tracker options for the placed tokens.
+   * @returns {Promise<TokenDocument[]>}
+   */
+  async placeMembers(config={}) {
+    const tokenDocuments = await super.placeMembers();
+    config.combatBehavior ??= game.settings.get("dnd5e", "encounterPlacementBehavior");
+    if ( tokenDocuments.length && config.combatBehavior !== "none" ) {
+      const combatants = await TokenDocument.implementation.createCombatants(tokenDocuments);
+      if ( config.combatBehavior === "rollInitiative" ) {
+        await game.combats.viewed.rollInitiative(combatants.map(c => c.id));
+      }
+    }
+    return tokenDocuments;
   }
 
   /* -------------------------------------------- */
