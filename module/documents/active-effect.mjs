@@ -73,6 +73,15 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /* -------------------------------------------- */
 
+  /**
+   * System-specific "expiry" choices which do not require registration or custom expiry events, and instead
+   * are transformed into standard expiries upon application.
+   * @type {Set<string>}
+   */
+  static PSEUDO_EXPIRIES = new Set(["sourceStart", "sourceEnd", "targetStart", "targetEnd"]);
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "DND5E.ACTIVEEFFECT"];
 
@@ -598,8 +607,36 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
         errors.forEach(err => console.error(err));
         return false;
       }
-      this.updateSource({ disabled: false });
+      const start = this.constructor.getEffectStart();
+      for ( const key of Object.keys(start) ) {
+        if ( data.start?.[key] !== undefined ) delete start[key]; // Prefer user-defined duration data
+      }
+      this.updateSource({ start, disabled: false });
     }
+    const actor = this.isAppliedEnchantment ? this.parent.parent : this.parent;
+    if ( !(actor instanceof Actor) || !this.start?.combat?.started ) return;
+    const {units, value, expiry} = this.duration;
+    if ( units !== "rounds" ) return;
+
+    // Default combat-duration expiry to turnStart to avoid effect expiry at round turnover
+    if ( !expiry ) {
+      this.updateSource({"duration.expiry": "turnStart"});
+      return;
+    }
+
+    // Convert start/end of source/target next turn expiries to start/end expiries with the proper combatant
+    // (default for source, combatant of actor it's applied to for target) and proper duration
+    if ( !this.constructor.PSEUDO_EXPIRIES.has(expiry) ) return;
+    // TODO: Use data model instead of flag
+    const effectUpdate = {"flags.dnd5e.specialDuration": expiry, duration: {}};
+    const relevantActor = expiry.startsWith("target") ? actor : fromUuidSync(this.origin).actor;
+    const combatant = this.start.combat.getCombatantsByActor(relevantActor)[0];
+    if ( combatant && (combatant.turnNumber !== null) ) effectUpdate.start = {combatant: combatant.id};
+    const decreaseDuration = combatant.turnNumber > this.start.combat.turn;
+    if ( decreaseDuration ) effectUpdate.duration.value = value - 1;
+    if ( ["targetEnd", "sourceEnd"].includes(expiry) ) effectUpdate.duration.expiry = "turnEnd";
+    else effectUpdate.duration.expiry = "turnStart";
+    this.updateSource(effectUpdate);
   }
 
   /* -------------------------------------------- */
@@ -620,6 +657,22 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  async _preUpdate(changed, options, user) {
+    if ( await super._preUpdate(changed, options, user) === false ) return false;
+    const newExpiry = foundry.utils.getProperty(changed, "duration.expiry");
+    if ( this.constructor.PSEUDO_EXPIRIES.has(newExpiry) ) {
+      foundry.utils.mergeObject(changed, {
+        duration: {
+          value: 1,
+          units: "rounds"
+        }
+      });
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   _onUpdate(data, options, userId) {
     super._onUpdate(data, options, userId);
     const originalLevel = foundry.utils.getProperty(options, "dnd5e.originalExhaustion");
@@ -627,6 +680,13 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     const originalEncumbrance = foundry.utils.getProperty(options, "dnd5e.originalEncumbrance");
     const newEncumbrance = data.statuses?.[0];
     const name = this.name;
+
+    // If out of combat & effect expires, delete it
+    if ( game.user.isActiveGM && data.duration?.expired ) {
+      const actor = this.isAppliedEnchantment ? this.parent.parent : this.parent;
+      const combat = this.start.combat ?? game.combat;
+      if ( !combat?.getCombatantsByActor(actor).length ) return this.delete()
+    }
 
     // Display proper scrolling status effects for exhaustion
     if ( (this.id === this.constructor.ID.EXHAUSTION) && Number.isFinite(newLevel) && Number.isFinite(originalLevel) ) {
@@ -765,6 +825,20 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     Object.assign(helpIconElement.dataset, { tooltip: tooltipText, tooltipDirection: "RIGHT", locked: "" });
     const targetElement = html.querySelector("section:is([data-tab='effects'], [data-tab='changes']) .key");
     if ( targetElement ) targetElement.insertAdjacentElement("beforeend", helpIconElement);
+
+    // Append to expiry dropdown
+    // TODO: Move all of this logic to a sheet extension
+    const optGroup = document.createElement("optgroup");
+    optGroup.label = _loc("DND5E.ACTIVEEFFECT.SystemExpiries");
+    for ( const expiry of ActiveEffect5e.PSEUDO_EXPIRIES ) {
+      optGroup.insertAdjacentHTML("beforeEnd", `<option ${expiry === app.document.duration.expiry ? "selected " : ""}value="${expiry}">${_loc(`DND5E.ACTIVEEFFECT.EXPIRIES.${expiry}`)}</option>`);
+    }
+    const expirySelect = html.querySelector("[name='duration.expiry']");
+    expirySelect?.insertAdjacentElement("beforeend", optGroup);
+    if ( ActiveEffect5e.PSEUDO_EXPIRIES.has(expirySelect?.value) ) {
+      html.querySelector("[name='duration.value']")?.setAttribute("disabled", "");
+      html.querySelector("[name='duration.units']")?.setAttribute("disabled", "");
+    }
   }
 
   /* -------------------------------------------- */

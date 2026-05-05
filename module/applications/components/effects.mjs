@@ -129,7 +129,7 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
         continue;
       }
       if ( e.isAppliedEnchantment ) {
-        if ( e.disabled ) categories.enchantmentInactive.effects.push(e);
+        if ( e.disabled || e.duration.expired ) categories.enchantmentInactive.effects.push(e);
         else categories.enchantmentActive.effects.push(e);
       }
       else if ( e.type === "enchantment" ) categories.enchantment.effects.push(e);
