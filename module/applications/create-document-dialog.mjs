@@ -86,7 +86,9 @@ export default class CreateDocumentDialog extends Dialog5e {
 
     context.types = [];
     context.hasTypes = false;
-    const defaultType = this.options.createData.type ?? CONFIG[this.documentName]?.defaultType;
+    let defaultType = this.options.createData.type
+      ?? this.documentType.defaultType
+      ?? CONFIG[this.documentName]?.defaultType;
     const TYPES = this.documentType._createDialogTypes?.(parent) ?? this.documentType.TYPES;
     if ( TYPES?.length > 1 ) {
       if ( this.options.types?.length === 0 ) throw new Error("The array of sub-types to restrict to must not be empty");
@@ -112,6 +114,15 @@ export default class CreateDocumentDialog extends Dialog5e {
 
       context.types.sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang));
       context.hasTypes = true;
+
+      // Some dialogs may restrict types, resulting in nothing pre-selected.
+      if ( !context.types.some(t => t.selected) ) {
+        context.types[0].selected = true;
+        defaultType = context.types[0].type;
+      }
+
+      // Apply default name of documents.
+      context.defaultName = this.documentType.defaultName({ type: defaultType, pack, parent });
     }
 
     return context;
@@ -129,6 +140,19 @@ export default class CreateDocumentDialog extends Dialog5e {
   }
 
   /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _onChangeForm(formConfig, event) {
+    super._onChangeForm(formConfig, event);
+
+    if ( event.target.name === "type" ) {
+      const name = this.element.querySelector('[name="name"]');
+      const { pack, parent } = this.options.createOptions;
+      name.placeholder = this.documentType.defaultName({ type: event.target.value, pack, parent });
+    }
+  }
+
+  /* -------------------------------------------- */
   /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
@@ -141,10 +165,12 @@ export default class CreateDocumentDialog extends Dialog5e {
    */
   static async #handleFormSubmission(event, form, formData) {
     if ( !form.checkValidity() ) throw new Error(game.i18n.format("DOCUMENT.DND5E.Warning.SelectType", {
-      name: game.i18n.localize(documentType.metadata.label ?? `DOCUMENT.DND5E.${documentType.documentName}`)
+      name: game.i18n.localize(this.documentType.metadata.label ?? `DOCUMENT.DND5E.${this.documentType.documentName}`)
     }));
     foundry.utils.mergeObject(this.options.createData, formData.object);
     this.#submitted = true;
+    if ( CONFIG[this.documentName] ) CONFIG[this.documentName].defaultType = this.options.createData.type;
+    else this.documentType.defaultType = this.options.createData.type;
     await this.close();
   }
 
