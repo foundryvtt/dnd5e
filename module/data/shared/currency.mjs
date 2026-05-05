@@ -1,3 +1,4 @@
+import { roundCurrency } from "../../utils.mjs";
 import SystemDataModel from "../abstract/system-data-model.mjs";
 import MappingField from "../fields/mapping-field.mjs";
 
@@ -10,8 +11,8 @@ export default class CurrencyTemplate extends SystemDataModel {
   static defineSchema() {
     return {
       currency: new MappingField(new foundry.data.fields.NumberField({
-        required: true, nullable: false, integer: true, min: 0, initial: 0
-      }), {initialKeys: CONFIG.DND5E.currencies, initialKeysOnly: true, label: "DND5E.Currency"})
+        required: true, nullable: false, min: 0, initial: 0
+      }), { initialKeys: CONFIG.DND5E.currencies, initialKeysOnly: true, label: "DND5E.Currency" })
     };
   }
 
@@ -30,5 +31,18 @@ export default class CurrencyTemplate extends SystemDataModel {
       ? CONFIG.DND5E.encumbrance.currencyPerWeight.metric
       : CONFIG.DND5E.encumbrance.currencyPerWeight.imperial;
     return count / currencyPerWeight;
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare currencies, rounding non-fractional currencies.
+   */
+  prepareCurrency() {
+    for ( const [key, value] of Object.entries(this.currency) ) {
+      this.currency[key] = roundCurrency(value, key);
+    }
   }
 }

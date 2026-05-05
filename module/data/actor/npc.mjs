@@ -415,6 +415,7 @@ export default class NPCData extends CreatureTemplate {
     const { originalSaves, originalSkills } = this.parent.getOriginalStats();
 
     this.prepareAbilities({ rollData, originalSaves });
+    this.prepareCurrency();
     this.prepareSkills({ rollData, originalSkills });
     this.prepareTools({ rollData });
     AttributesFields.prepareArmorClass.call(this, rollData);
