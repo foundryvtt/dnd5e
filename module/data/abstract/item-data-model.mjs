@@ -198,7 +198,7 @@ export default class ItemDataModel extends SystemDataModel {
     const rollData = (activity ?? this.parent).getRollData();
     const isIdentified = identified !== false;
     const chat = isIdentified ? description.chat || description.value : unidentified?.description;
-    description = game.user.isGM || isIdentified ? description.value : unidentified?.description;
+    const desc = game.user.isGM || isIdentified ? description.value : unidentified?.description;
     uses = this.hasLimitedUses && (game.user.isGM || identified) ? uses : null;
     price = game.user.isGM || identified ? price : null;
 
@@ -210,13 +210,13 @@ export default class ItemDataModel extends SystemDataModel {
       tags: this.parent.labels?.components?.tags,
       subtitle: this.tooltipSubtitle.filterJoin(" • "),
       description: {
-        value: await TextEditor.enrichHTML(description ?? "", {
+        value: await TextEditor.enrichHTML(desc ?? "", {
           rollData, relativeTo: this.parent, ...enrichmentOptions
         }),
         chat: await TextEditor.enrichHTML(chat ?? "", {
           rollData, relativeTo: this.parent, ...enrichmentOptions
         }),
-        concealed: game.user.isGM && game.settings.get("dnd5e", "concealItemDescriptions") && !chat
+        concealed: game.user.isGM && game.settings.get("dnd5e", "concealItemDescriptions") && !description.chat
       }
     };
 
