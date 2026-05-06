@@ -459,16 +459,14 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       }));
     }
     changes.sort((a, b) => a.priority - b.priority);
-    if ( game.release.generation > 13 ) foundry.documents.ActiveEffect._shimChanges?.(changes);
+    foundry.documents.ActiveEffect._shimChanges?.(changes);
 
     // Apply all changes
     const overrides = {};
     const replacementData = this.getRollData();
     for ( const change of changes ) {
       if ( !change.key ) continue;
-      const changes = (game.release.generation > 13)
-        ? change.effect.constructor.applyChange(this, change, { replacementData })
-        : change.effect.apply(this, change);
+      const changes = change.effect.constructor.applyChange(this, change, { replacementData });
       Object.assign(overrides, changes);
     }
 
@@ -777,7 +775,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( Hooks.call("dnd5e.preDisplayCard", this, messageConfig) === false ) return;
     if ( Hooks.call("dnd5e.preDisplayCardV2", this, messageConfig) === false ) return;
 
-    ChatMessage.applyRollMode(messageConfig.data, messageConfig.rollMode);
+    ChatMessage.applyMode(messageConfig.data, messageConfig.rollMode);
     const card = messageConfig.create === false ? messageConfig.data : await ChatMessage.create(messageConfig.data);
 
     /**
@@ -956,7 +954,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const activity = this.system.activities?.get(id);
     if ( !activity ) return this;
     await Promise.allSettled(activity.constructor._apps.get(activity.uuid)?.map(a => a.close()) ?? []);
-    if ( game.release.generation < 14 ) return this.update({ [`system.activities.-=${id}`]: null });
     return this.update({ [`system.activities.${id}`]: _del });
   }
 
@@ -968,20 +965,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @param {object} [data]                        Data to use when creating the advancement.
    * @param {object} [options]
    * @param {boolean} [options.renderSheet]        Should the sheet be rendered after creation?
-   * @param {boolean} [options.showConfig]         Deprecated, use `renderSheet` instead.
    * @param {boolean} [options.source=false]       Should a source-only update be performed?
    * @returns {Promise<AdvancementConfig>|Item5e}  Promise for advancement config for new advancement if source
    *                                               is `false`, or item with newly added advancement.
    */
-  createAdvancement(type, data={}, { renderSheet=true, showConfig, source=false }={}) {
-    if ( showConfig !== undefined ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `showConfig` options in `createAdvancement` has been deprecated and replaced with `renderSheet`.",
-        { since: "DnD5e 5.2", until: "DnD5e 6.0" }
-      );
-      renderSheet = showConfig;
-    }
-
+  createAdvancement(type, data={}, { renderSheet=true, source=false }={}) {
     if ( !this.system.advancement ) return this;
 
     const config = CONFIG.DND5E.advancementTypes[type];
@@ -1026,9 +1014,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const advancement = this.system.advancement.get(id);
     let update = { [`system.advancement.${id}`]: updates };
     if ( !source && this._needsAdvancementMigration ) update = {
-      "system.==advancement": foundry.utils.mergeObject(
+      "system.advancement": _replace(foundry.utils.mergeObject(
         this.system.toObject().advancement, { [id]: updates }, { performDeletions: true }
-      )
+      ))
     };
     if ( source ) {
       advancement.updateSource(updates);
@@ -1055,13 +1043,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const advancement = this.system.advancement?.get(id);
     if ( !advancement ) return this;
 
-    let update = game.release.generation < 14
-      ? { [`system.advancement.-=${id}`]: null }
-      : { [`system.advancement.${id}`]: _del };
+    let update = { [`system.advancement.${id}`]: _del };
     if ( !source && this._needsAdvancementMigration ) {
       const data = this.system.toObject().advancement;
       delete data[id];
-      update = { "system.==advancement": data };
+      update = { "system.advancement": _replace(data) };
     }
     if ( source ) return this.updateSource(update);
 
@@ -1241,24 +1227,24 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   static addDirectoryContextOptions(app, entryOptions) {
     entryOptions.push({
-      name: "DND5E.Scroll.CreateScroll",
+      label: "DND5E.Scroll.CreateScroll",
       icon: '<i class="fa-solid fa-scroll"></i>',
-      callback: async li => {
-        let spell = game.items.get(li.dataset.entryId);
-        if ( app.collection instanceof foundry.documents.collections.CompendiumCollection ) {
-          spell = await app.collection.getDocument(li.dataset.entryId);
-        }
-        const scroll = await Item5e.createScrollFromSpell(spell);
-        if ( scroll ) Item5e.create(scroll);
-      },
-      condition: li => {
-        let item = game.items.get(li.dataset.documentId ?? li.dataset.entryId);
+      group: "system",
+      visible: li => {
+        let item = game.items.get(li.dataset.entryId);
         if ( app.collection instanceof foundry.documents.collections.CompendiumCollection ) {
           item = app.collection.index.get(li.dataset.entryId);
         }
         return (item.type === "spell") && game.user.hasPermission("ITEM_CREATE");
       },
-      group: "system"
+      onClick: async (_, target) => {
+        let spell = game.items.get(target.dataset.entryId);
+        if ( app.collection instanceof foundry.documents.collections.CompendiumCollection ) {
+          spell = await app.collection.getDocument(target.dataset.entryId);
+        }
+        const scroll = await Item5e.createScrollFromSpell(spell);
+        if ( scroll ) Item5e.create(scroll);
+      }
     });
   }
 

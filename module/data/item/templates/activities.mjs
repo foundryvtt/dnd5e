@@ -407,7 +407,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
       return riders;
     }, { activity: new Set(), effect: new Set() });
     if ( !riders.activity.size && !riders.effect.size ) {
-      foundry.utils.setProperty(changed, "flags.dnd5e.-=riders", null);
+      foundry.utils.setProperty(changed, "flags.dnd5e.riders", _del);
     } else {
       foundry.utils.setProperty(changed, "flags.dnd5e.riders", Object.entries(riders)
         .reduce((updates, [key, value]) => {

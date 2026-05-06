@@ -3,7 +3,6 @@ import BastionSettingsConfig from "./applications/settings/bastion-settings.mjs"
 import CalendarSettingsConfig from "./applications/settings/calendar-settings.mjs";
 import CombatSettingsConfig from "./applications/settings/combat-settings.mjs";
 import CompendiumBrowserSettingsConfig from "./applications/settings/compendium-browser-settings.mjs";
-import ModuleArtSettingsConfig from "./applications/settings/module-art-settings.mjs";
 import VariantRulesSettingsConfig from "./applications/settings/variant-rules-settings.mjs";
 import VisibilitySettingsConfig from "./applications/settings/visibility-settings.mjs";
 import BastionSetting from "./data/settings/bastion-setting.mjs";
@@ -231,29 +230,6 @@ export function registerSystemSettings() {
     config: false,
     type: Boolean,
     default: true
-  });
-
-  // Dynamic art.
-  game.settings.registerMenu("dnd5e", "moduleArtConfiguration", {
-    name: "DND5E.ModuleArtConfigN",
-    label: "DND5E.ModuleArtConfigL",
-    hint: "DND5E.ModuleArtConfigH",
-    icon: "fa-solid fa-palette",
-    type: ModuleArtSettingsConfig,
-    restricted: true
-  });
-
-  game.settings.register("dnd5e", "moduleArtConfiguration", {
-    name: "Module Art Configuration",
-    scope: "world",
-    config: false,
-    type: Object,
-    default: {
-      dnd5e: {
-        portraits: true,
-        tokens: true
-      }
-    }
   });
 
   // Compendium Browser source exclusion

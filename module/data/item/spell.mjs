@@ -149,18 +149,6 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
 
   /* -------------------------------------------- */
 
-  /**
-   * @deprecated since 5.3
-   * @ignore
-   */
-  get sourceClass() {
-    foundry.utils.logCompatibilityWarning("SpellData#sourceClass is deprecated. Please use SpellData#sourceItem "
-      + "instead.", { since: "DnD5e 5.3", until: "DnD5e 6.0" });
-    return this.classIdentifier ?? "";
-  }
-
-  /* -------------------------------------------- */
-
   /** @override */
   get availableAbilities() {
     if ( this.ability ) return new Set([this.ability]);
@@ -288,21 +276,6 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
 
   /* -------------------------------------------- */
   /*  Data Migration                              */
-  /* -------------------------------------------- */
-
-  /**
-   * @deprecated since 5.1
-   * @ignore
-   */
-  get preparation() {
-    foundry.utils.logCompatibilityWarning("SpellData#preparation is deprecated. Please use SpellData#method in "
-      + "place of preparation.mode and SpellData#prepared in place of preparation.prepared.",
-    { since: "DnD5e 5.1", until: "DnD5e 6.0" });
-    if ( this.prepared === 2 ) return { mode: "always", prepared: 1 };
-    if ( this.method === "spell" ) return { mode: "prepared", prepared: Boolean(this.prepared) };
-    return { mode: this.method, prepared: Boolean(this.prepared) };
-  }
-
   /* -------------------------------------------- */
 
   /** @inheritDoc */

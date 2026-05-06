@@ -85,8 +85,7 @@ export default class MappingField extends foundry.data.fields.TypedObjectField {
   /** @override */
   _getField(path, options={}) {
     if ( path.length === 0 ) return this;
-    if ( game.release.generation < 14 ) path.shift();
-    else path.pop();
+    path.pop();
     return this.element._getField(path, options);
   }
 }

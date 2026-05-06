@@ -197,10 +197,10 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
     }
 
     if ( replaced && foundry.utils.isEmpty(options) ) {
-      this.updateSource({ [`value.replaced.-=${level}`]: null });
+      this.updateSource({ [`value.replaced.${level}`]: _del });
     } else if ( replaced && uuidIsReplacement ) {
       retainedData.replaced ??= replaced;
-      this.updateSource({ [`value.replaced.${level}.-=replacement`]: null });
+      this.updateSource({ [`value.replaced.${level}.replacement`]: _del });
     }
 
     if ( !skipEvaluation ) await this._evaluatePrerequisites(level);

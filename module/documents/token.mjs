@@ -228,8 +228,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
           value: roll.total
         }
       };
-      if ( game.release.generation > 13 ) this.updateSource({ delta: update });
-      else this.delta.updateSource(update);
+      this.updateSource({ delta: update });
     }
   }
 

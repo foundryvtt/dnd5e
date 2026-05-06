@@ -1148,12 +1148,6 @@ export function performPreLocalization(config) {
 
   // Localize & sort status effects
   CONFIG.statusEffects.forEach(s => s.name = game.i18n.localize(s.name));
-  if ( game.release.generation < 14 ) {
-    CONFIG.statusEffects.sort((lhs, rhs) =>
-      Number.isFinite(lhs.order) || Number.isFinite(rhs.order) ? (lhs.order ?? Infinity) - (rhs.order ?? Infinity)
-        : lhs.name.localeCompare(rhs.name, game.i18n.lang)
-    );
-  }
 }
 
 /* -------------------------------------------- */

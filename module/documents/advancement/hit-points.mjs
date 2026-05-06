@@ -202,7 +202,7 @@ export default class HitPointsAdvancement extends Advancement {
     let value = this.valueForLevel(level);
     if ( value === undefined ) return;
     const source = { [level]: this.value[level] };
-    this.updateSource({ [`value.-=${level}`]: null });
+    this.updateSource({ [`value.${level}`]: _del });
     this.actor.updateSource({
       "system.attributes.hp.value": this.actor.system.attributes.hp.value - this.#getApplicableValue(value)
     });

@@ -13,7 +13,6 @@ export * as regionBehavior from "./region-behavior/_module.mjs";
 export * as settings from "./settings/_module.mjs";
 export * as shared from "./shared/_module.mjs";
 
-export {default as Accordion} from "./accordion.mjs";
 export {default as Award} from "./award.mjs";
 export {default as ChatLog5e} from "./chat-log.mjs";
 export {default as CompendiumBrowser} from "./compendium-browser.mjs";
@@ -23,6 +22,8 @@ export {default as CurrencyManager} from "./currency-manager.mjs";
 export {default as DialogMixin} from "./dialog-mixin.mjs";
 export {default as PropertyAttribution} from "./property-attribution.mjs";
 export {default as RollTableSheet5e} from "./roll-table-sheet.mjs";
-export {default as SheetConfig} from "./sheet-config.mjs";
 export {default as Tabs5e} from "./tabs.mjs";
 export {PrototypeTokenConfig5e, TokenConfig5e} from "./token-config.mjs";
+
+// Deprecated
+export {default as SheetConfig} from "./sheet-config.mjs";

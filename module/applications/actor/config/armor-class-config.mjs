@@ -76,7 +76,7 @@ export default class ArmorClassConfig extends BaseConfigSheet {
     }
     if ( context.source.calc !== "flat" ) {
       for ( const bonus of this.document._prepareActiveEffectAttributions("system.attributes.ac.bonus") ) {
-        if ( bonus.mode !== CONST.ACTIVE_EFFECT_MODES.ADD ) continue;
+        if ( bonus.type !== "add" ) continue;
         context.calculations.push({
           anchor: bonus.document.toAnchor().outerHTML,
           img: bonus.document.img,

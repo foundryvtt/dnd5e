@@ -217,6 +217,6 @@
  * @typedef BasicRollMessageConfiguration
  * @property {boolean} [create=true]     Create a message when the rolling is complete.
  * @property {ChatMessage5e} [document]  Final created chat message document once process is completed.
- * @property {string} [rollMode]         The roll mode to apply to this message from `CONFIG.Dice.rollModes`.
+ * @property {string} [rollMode]         The roll mode to apply to this message from `CONFIG.ChatMessage.modes`.
  * @property {object} [data={}]          Additional data used when creating the message.
  */

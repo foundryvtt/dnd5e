@@ -67,9 +67,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
   // Migrate World Items
   const items = game.items.map(i => [i, true])
     .concat(Array.from(game.items.invalidDocumentIds).map(id => [game.items.getInvalid(id), false]));
-  const mergeOptions = game.release.generation > 13
-    ? { inplace: false, applyOperators: true }
-    : { inplace: false, performDeletions: true };
+  const mergeOptions = { inplace: false, applyOperators: true };
   for ( const [item, valid] of items ) {
     try {
       const flags = { bypassVersionCheck, persistSourceMigration: false };
@@ -496,9 +494,7 @@ export function migrateActorData(actor, actorData, migrationData, flags={}, { ac
 
   // Migrate Owned Items
   if ( !actorData.items ) return updateData;
-  const mergeOptions = game.release.generation > 13
-    ? { inplace: false, applyOperators: true }
-    : { inplace: false, performDeletions: true };
+  const mergeOptions = { inplace: false, applyOperators: true };
   const items = actor.items.reduce((arr, i) => {
     // Migrate the Owned Item
     const itemData = i instanceof CONFIG.Item.documentClass ? i.toObject() : i;
@@ -586,7 +582,7 @@ export function migrateItemData(item, itemData, migrationData, flags={}) {
   // Commit advancement data structure change
   if ( itemData.system?.advancement
     && (foundry.utils.isNewerVersion("5.3.0", itemData._stats?.systemVersion) || flags.bypassVersionCheck) ) {
-    updateData["system.==advancement"] = itemData.system.advancement;
+    updateData["system.advancement"] = _replace(itemData.system.advancement);
   }
 
   // Migrate properties
@@ -596,7 +592,7 @@ export function migrateItemData(item, itemData, migrationData, flags={}) {
     const properties = new Set(foundry.utils.getProperty(itemData, "system.properties") ?? [])
       .union(new Set(migratedProperties));
     updateData["system.properties"] = Array.from(properties);
-    updateData["flags.dnd5e.-=migratedProperties"] = null;
+    updateData["flags.dnd5e.migratedProperties"] = _del;
   }
 
   // Migrate gear property
@@ -636,7 +632,7 @@ export function migrateItemData(item, itemData, migrationData, flags={}) {
 
   if ( foundry.utils.getProperty(itemData, "flags.dnd5e.persistSourceMigration") ) {
     flags.persistSourceMigration = true;
-    updateData["flags.dnd5e.-=persistSourceMigration"] = null;
+    updateData["flags.dnd5e.persistSourceMigration"] = _del;
   }
 
   return updateData;
@@ -660,11 +656,11 @@ export function migrateEffects(parent, migrationData, itemUpdateData, flags={}) 
     if ( effectData.flags?.dnd5e?.rider ) {
       itemUpdateData["flags.dnd5e.riders.effect"] ??= [];
       itemUpdateData["flags.dnd5e.riders.effect"].push(effectData._id);
-      effectUpdate["flags.dnd5e.-=rider"] = null;
+      effectUpdate["flags.dnd5e.rider"] = _del;
     }
     if ( effectData.flags?.dnd5e?.persistSourceMigration ) {
       flags.persistSourceMigration = true;
-      effectUpdate["flags.dnd5e.-=persistSourceMigration"] = null;
+      effectUpdate["flags.dnd5e.persistSourceMigration"] = _del;
     }
     if ( !foundry.utils.isEmpty(effectUpdate) ) {
       effectUpdate._id = effectData._id;
@@ -750,28 +746,28 @@ export function migrateMessageData(messageData) {
   if ( (flags?.dnd5e?.messageType === "usage") && (messageData.type !== "usage") ) {
     const use = flags.dnd5e.use;
     updateData.type = "usage";
-    updateData["==system"] = {
+    updateData.system = _replace({
       cause: use?.cause,
       concentration: use?.concentrationId,
       deltas: use?.consumed,
       effects: use?.effects?.map?.(id => `.ActiveEffect.${id}`),
       scaling: use?.scaling,
       spellLevel: use?.spellLevel
-    };
-    updateData["flags.dnd5e.-=messageType"] = null;
-    updateData["flags.dnd5e.-=scaling"] = null;
-    updateData["flags.dnd5e.use.-=cause"] = null;
-    updateData["flags.dnd5e.use.-=concentrationId"] = null;
-    updateData["flags.dnd5e.use.-=consumed"] = null;
-    updateData["flags.dnd5e.use.-=effects"] = null;
-    updateData["flags.dnd5e.use.-=spellLevel"] = null;
+    });
+    updateData["flags.dnd5e.messageType"] = _del;
+    updateData["flags.dnd5e.scaling"] = _del;
+    updateData["flags.dnd5e.use.cause"] = _del;
+    updateData["flags.dnd5e.use.concentrationId"] = _del;
+    updateData["flags.dnd5e.use.consumed"] = _del;
+    updateData["flags.dnd5e.use.effects"] = _del;
+    updateData["flags.dnd5e.use.spellLevel"] = _del;
   }
 
   else if ( flags?.dnd5e?.bastion && (messageData.type === "base") ) {
     const bastion = flags.dnd5e.bastion;
     updateData.type = "orders" in bastion ? "bastionTurn" : "bastionAttack";
-    updateData["==system"] = bastion;
-    updateData["flags.dnd5e.-=bastion"] = null;
+    updateData.system = _replace(bastion);
+    updateData["flags.dnd5e.bastion"] = _del;
   }
 
   return updateData;
@@ -882,7 +878,7 @@ function _migrateActorAC(actorData, updateData) {
   if ( Number.isNumeric(ac?.value) ) {
     updateData["system.attributes.ac.flat"] = parseInt(ac.value);
     updateData["system.attributes.ac.calc"] = actorData.type === "npc" ? "natural" : "flat";
-    updateData["system.attributes.ac.-=value"] = null;
+    updateData["system.attributes.ac.value"] = _del;
     return updateData;
   }
 
@@ -923,7 +919,7 @@ function _migrateActorFlags(actorData, updateData) {
   if ( initiativeAdv ) {
     const key = "system.attributes.init.roll.mode";
     updateData[key] = Math.min(1, (foundry.utils.getProperty(actorData, key) ?? 0) + 1);
-    updateData["flags.dnd5e.-=initiativeAdv"] = null;
+    updateData["flags.dnd5e.initiativeAdv"] = _del;
   }
   return updateData;
 }
@@ -1030,7 +1026,7 @@ function _migrateItemUses(item, itemData, updateData, flags) {
     foundry.utils.setProperty(updateData, "system.uses.spent", parseInt(max) - parseInt(value));
     flags.persistSourceMigration = true;
   }
-  if ( value !== undefined ) updateData["flags.dnd5e.-=migratedUses"] = null;
+  if ( value !== undefined ) updateData["flags.dnd5e.migratedUses"] = _del;
 }
 
 /* -------------------------------------------- */

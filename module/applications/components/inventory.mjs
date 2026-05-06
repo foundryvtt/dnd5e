@@ -326,117 +326,115 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
 
     // Standard options.
     const options = [{
-      name: "DND5E.ItemView",
+      label: "DND5E.ItemView",
       icon: '<i class="fa-solid fa-eye fa-fw"></i>',
-      callback: li => this._onAction(li, "view")
+      onClick: (event, target) => this._onAction(target, "view", { event })
     }, {
-      name: "DND5E.ContextMenuActionEdit",
+      label: "DND5E.ContextMenuActionEdit",
       icon: '<i class="fa-solid fa-edit fa-fw"></i>',
-      condition: () => item.isOwner && !compendiumLocked,
-      callback: li => this._onAction(li, "edit")
+      visible: () => item.isOwner && !compendiumLocked,
+      onClick: (event, target) => this._onAction(target, "edit", { event })
     }, {
-      name: "DND5E.ContextMenuActionDuplicate",
+      label: "DND5E.ContextMenuActionDuplicate",
       icon: '<i class="fa-solid fa-copy fa-fw"></i>',
-      condition: () => item.canDuplicate && item.isOwner && !compendiumLocked,
-      callback: li => this._onAction(li, "duplicate")
+      visible: () => item.canDuplicate && item.isOwner && !compendiumLocked,
+      onClick: (event, target) => this._onAction(target, "duplicate", { event })
     }, {
       id: "delete",
-      name: "DND5E.ContextMenuActionDelete",
+      label: "DND5E.ContextMenuActionDelete",
       icon: '<i class="fa-solid fa-trash fa-fw"></i>',
-      condition: () => item.canDelete && item.isOwner && !compendiumLocked,
-      callback: li => this._onAction(li, "delete")
+      visible: () => item.canDelete && item.isOwner && !compendiumLocked,
+      onClick: (event, target) => this._onAction(target, "delete", { event })
     }, {
-      name: "DND5E.DisplayCard",
+      label: "DND5E.DisplayCard",
       icon: '<i class="fa-solid fa-message"></i>',
-      condition: () => item.actor,
-      callback: () => item.displayCard()
+      visible: () => item.actor,
+      onClick: () => item.displayCard()
     }];
 
     if ( !this.actor || this.actor.system.isGroup ) return options;
-    const favorited = this.actor.system.hasFavorite?.(item.getRelativeUUID(this.actor));
+    const favorited = this.actor.system.hasFavorite?.(foundry.utils.buildRelativeUuid(item, this.actor));
     const expanded = this.app.expandedSections ? this.app.expandedSections.get(item.id)
       : this.app._expanded.has(item.id); // TODO: Remove when V1 sheets are gone
 
     // Owned item options.
     options.push({
-      name: "DND5E.Scroll.CreateScroll",
+      label: "DND5E.Scroll.CreateScroll",
       icon: '<i class="fa-solid fa-scroll"></i>',
-      condition: () => {
+      group: "action",
+      visible: () => {
         const isSpell = (item.type === "spell") && !item.getFlag("dnd5e", "cachedFor");
         const canEdit = this.actor.isOwner && !this.actor.collection.locked;
         return isSpell && canEdit;
       },
-      callback: async () => {
+      onClick: async () => {
         const scroll = await Item.implementation.createScrollFromSpell(item);
         if ( scroll ) void Item.implementation.create(scroll, { parent: this.actor });
-      },
-      group: "action"
+      }
     }, {
-      name: "DND5E.ConcentrationBreak",
+      label: "DND5E.ConcentrationBreak",
       icon: '<dnd5e-icon src="systems/dnd5e/icons/svg/break-concentration.svg"></dnd5e-icon>',
-      condition: () => this.actor?.concentration?.items.has(item),
-      callback: () => this.actor?.endConcentration(item),
-      group: "state"
+      group: "state",
+      visible: () => this.actor?.concentration?.items.has(item),
+      onClick: () => this.actor?.endConcentration(item)
     }, {
-      name: `DND5E.ContextMenuAction${item.system.attuned ? "Unattune" : "Attune"}`,
+      label: `DND5E.ContextMenuAction${item.system.attuned ? "Unattune" : "Attune"}`,
       icon: '<i class="fa-solid fa-sun fa-fw"></i>',
-      condition: () => item.system.attunement && item.isOwner && !compendiumLocked,
-      callback: li => this._onAction(li, "attune"),
-      group: "state"
+      group: "state",
+      visible: () => item.system.attunement && item.isOwner && !compendiumLocked,
+      onClick: (event, target) => this._onAction(target, "attune", { event })
     }, {
-      name: `DND5E.ContextMenuAction${item.system.equipped ? "Unequip" : "Equip"}`,
+      label: `DND5E.ContextMenuAction${item.system.equipped ? "Unequip" : "Equip"}`,
       icon: '<i class="fa-solid fa-shield-alt fa-fw"></i>',
-      condition: () => ("equipped" in item.system) && item.isOwner && !compendiumLocked,
-      callback: li => this._onAction(li, "equip"),
-      group: "state"
+      group: "state",
+      visible: () => ("equipped" in item.system) && item.isOwner && !compendiumLocked,
+      onClick: (event, target) => this._onAction(target, "equip", { event })
     }, {
-      name: `DND5E.ContextMenuAction${item.isOnCooldown ? "Charge" : "ExpendCharge"}`,
+      label: `DND5E.ContextMenuAction${item.isOnCooldown ? "Charge" : "ExpendCharge"}`,
       icon: '<i class="fa-solid fa-bolt"></i>',
-      condition: () => item.hasRecharge && item.isOwner && !compendiumLocked,
-      callback: li => this._onAction(li, "toggleCharge"),
-      group: "state"
+      group: "state",
+      visible: () => item.hasRecharge && item.isOwner && !compendiumLocked,
+      onClick: (event, target) => this._onAction(target, "toggleCharge", { event })
     }, {
-      name: `DND5E.ContextMenuAction${item.system.prepared ? "Unprepare" : "Prepare"}`,
+      label: `DND5E.ContextMenuAction${item.system.prepared ? "Unprepare" : "Prepare"}`,
       icon: '<i class="fa-solid fa-sun fa-fw"></i>',
-      condition: () => {
+      group: "state",
+      visible: () => {
         const isPrepared = CONFIG.DND5E.spellcasting[item.system.method]?.prepares;
         const isAlways = item.system.prepared === CONFIG.DND5E.spellPreparationStates.always.value;
         const canEdit = item.isOwner && !compendiumLocked;
         return !item.hasRecharge && isPrepared && !isAlways && canEdit && !item.getFlag("dnd5e", "cachedFor");
       },
-      callback: li => this._onAction(li, "prepare"),
-      group: "state"
+      onClick: (event, target) => this._onAction(target, "prepare", { event })
     }, {
-      name: "DND5E.Identify",
+      label: "DND5E.Identify",
       icon: '<i class="fa-solid fa-magnifying-glass"></i>',
-      condition: () => {
+      group: "state",
+      visible: () => {
         const canIdentify = ("identified" in item.system) && !item.system.identified;
         const canEdit = item.isOwner && !compendiumLocked;
         return canIdentify && canEdit;
       },
-      callback: li => this._onAction(li, "identify"),
-      group: "state"
+      onClick: (event, target) => this._onAction(target, "identify", { event })
     }, {
-      name: favorited ? "DND5E.FavoriteRemove" : "DND5E.Favorite",
+      label: favorited ? "DND5E.FavoriteRemove" : "DND5E.Favorite",
       icon: '<i class="fa-solid fa-bookmark fa-fw"></i>',
-      condition: () => ("favorites" in this.actor.system) && item.isOwner && !compendiumLocked,
-      callback: li => this._onAction(li, "toggleFavorite"),
-      group: "state"
+      group: "state",
+      visible: () => ("favorites" in this.actor.system) && item.isOwner && !compendiumLocked,
+      onClick: (event, target) => this._onAction(target, "toggleFavorite", { event })
     }, {
-      name: item.system.properties?.has("gear") ? "DND5E.Gear.Action.Remove" : "DND5E.Gear.Action.Add",
+      label: item.system.properties?.has("gear") ? "DND5E.Gear.Action.Remove" : "DND5E.Gear.Action.Add",
       icon: '<i class="fa-solid fa-axe fa-fw"></i>',
-      condition: () => !!this.actor.system.isNPC && item.isOwner && !compendiumLocked
+      group: "state",
+      visible: () => !!this.actor.system.isNPC && item.isOwner && !compendiumLocked
         && !!CONFIG.Item.dataModels[item.type]?.schema.has("quantity"),
-      callback: li => this._onAction(li, "toggleGear"),
-      group: "state"
+      onClick: (event, target) => this._onAction(target, "toggleGear", { event })
     }, {
-      name: game.release.generation < 14
-        ? expanded ? "Collapse" : "Expand"
-        : expanded ? "APPLICATION.ACTIONS.Collapse" : "APPLICATION.ACTIONS.Expand",
+      label: expanded ? "APPLICATION.ACTIONS.Collapse" : "APPLICATION.ACTIONS.Expand",
       icon: `<i class="fa-solid fa-${expanded ? "compress" : "expand"}"></i>`,
-      condition: () => "canExpand" in this.app ? this.app.canExpand(item) : true,
-      callback: li => this._onAction(li, "toggleExpand"),
-      group: "collapsible"
+      group: "collapsible",
+      visible: () => "canExpand" in this.app ? this.app.canExpand(item) : true,
+      onClick: (event, target) => this._onAction(target, "toggleExpand", { event })
     });
 
     return options;
@@ -463,7 +461,6 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
     if ( inventoryEvent.defaultPrevented ) return;
 
     if ( action === "currency" ) return this._onManageCurrency();
-    if ( action === "create" ) return this._onCreateItem(event); // TODO: Remove once legacy sheets are removed.
 
     const { itemId } = target.closest("[data-item-id]")?.dataset ?? {};
     const { activityId } = target.closest("[data-activity-id]")?.dataset ?? {};
@@ -561,23 +558,6 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
       }
       else item.update({ [input.dataset.name]: result });
     }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Create an item on a legacy sheet.
-   * TODO: Remove once legacy sheets are removed.
-   * @param {Event} event
-   * @returns {Promise<Item5e>|void}
-   * @protected
-   */
-  _onCreateItem(event) {
-    const { type } = event?.target?.dataset ?? {};
-    if ( !type || !this.actor ) return;
-    return foundry.documents.Item.implementation.create({
-      type, name: game.i18n.format("DOCUMENT.New", { type: game.i18n.localize(CONFIG.Item.typeLabels[type]) })
-    }, { parent: this.actor });
   }
 
   /* -------------------------------------------- */
@@ -752,25 +732,6 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
    * @protected
    */
   async _onToggleExpand(target, { item }={}) {
-    // TODO: Remove when V1 sheets are gone
-    if ( !this.app.expandedSections ) {
-      const li = target.closest("[data-item-id]");
-      if ( this.app._expanded.has(item.id) ) {
-        const summary = $(li.querySelector(".item-summary"));
-        summary.slideUp(200, () => summary.remove());
-        this.app._expanded.delete(item.id);
-      } else {
-        const chatData = await item.getChatData({secrets: item.isOwner});
-        const summary = $(await foundry.applications.handlebars.renderTemplate(
-          "systems/dnd5e/templates/items/parts/item-summary.hbs", chatData
-        ));
-        $(li).append(summary.hide());
-        summary.slideDown(200);
-        this.app._expanded.add(item.id);
-      }
-      return;
-    }
-
     const row = target.closest("[data-uuid]");
     const icon = row.querySelector('[data-action="toggleExpand"] > i');
     const summary = row.querySelector(":scope > .item-description > .wrapper");
@@ -809,7 +770,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
    */
   async _onToggleFavorite(item) {
     if ( !this.actor ) return;
-    const uuid = item.getRelativeUUID(this.actor);
+    const uuid = foundry.utils.buildRelativeUuid(item, this.actor);
     if ( this.actor.system.hasFavorite(uuid) ) return this.actor.system.removeFavorite(uuid);
     return this.actor.system.addFavorite({ type: "item", id: uuid });
   }

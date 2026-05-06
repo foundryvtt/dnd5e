@@ -164,49 +164,49 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
     const isConcentrationEffect = (this.document instanceof Actor5e) && this.app._concentration?.effects.has(effect);
     const options = [
       {
-        name: "DND5E.ContextMenuActionEdit",
+        label: "DND5E.ContextMenuActionEdit",
         icon: "<i class='fas fa-edit fa-fw'></i>",
-        condition: () => effect.isOwner,
-        callback: li => this._onAction(li, "edit")
+        visible: () => effect.isOwner,
+        onClick: (_, target) => this._onAction(target, "edit")
       },
       {
-        name: "DND5E.ContextMenuActionDuplicate",
+        label: "DND5E.ContextMenuActionDuplicate",
         icon: "<i class='fas fa-copy fa-fw'></i>",
-        condition: () => effect.isOwner,
-        callback: li => this._onAction(li, "duplicate")
+        visible: () => effect.isOwner,
+        onClick: (_, target) => this._onAction(target, "duplicate")
       },
       {
-        name: "DND5E.ContextMenuActionDelete",
+        label: "DND5E.ContextMenuActionDelete",
         icon: "<i class='fas fa-trash fa-fw'></i>",
-        condition: () => effect.isOwner && !isConcentrationEffect,
-        callback: li => this._onAction(li, "delete")
+        visible: () => effect.isOwner && !isConcentrationEffect,
+        onClick: (_, target) => this._onAction(target, "delete")
       },
       {
-        name: effect.disabled ? "DND5E.ContextMenuActionEnable" : "DND5E.ContextMenuActionDisable",
+        label: effect.disabled ? "DND5E.ContextMenuActionEnable" : "DND5E.ContextMenuActionDisable",
         icon: effect.disabled ? "<i class='fas fa-check fa-fw'></i>" : "<i class='fas fa-times fa-fw'></i>",
         group: "state",
-        condition: () => effect.isOwner && !isConcentrationEffect,
-        callback: li => this._onAction(li, "toggle")
+        visible: () => effect.isOwner && !isConcentrationEffect,
+        onClick: (_, target) => this._onAction(target, "toggle")
       },
       {
-        name: "DND5E.ConcentrationBreak",
+        label: "DND5E.ConcentrationBreak",
         icon: '<dnd5e-icon src="systems/dnd5e/icons/svg/break-concentration.svg"></dnd5e-icon>',
-        condition: () => isConcentrationEffect,
-        callback: () => this.document.endConcentration(effect),
-        group: "state"
+        group: "state",
+        visible: () => isConcentrationEffect,
+        onClick: () => this.document.endConcentration(effect)
       }
     ];
 
     // Toggle Favorite State
     if ( (this.document instanceof Actor5e) && ("favorites" in this.document.system) ) {
-      const uuid = effect.getRelativeUUID(this.document);
+      const uuid = foundry.utils.buildRelativeUuid(effect, this.document);
       const isFavorited = this.document.system.hasFavorite(uuid);
       options.push({
-        name: isFavorited ? "DND5E.FavoriteRemove" : "DND5E.Favorite",
+        label: isFavorited ? "DND5E.FavoriteRemove" : "DND5E.Favorite",
         icon: "<i class='fas fa-bookmark fa-fw'></i>",
-        condition: () => effect.isOwner,
-        callback: li => this._onAction(li, isFavorited ? "unfavorite" : "favorite"),
-        group: "state"
+        group: "state",
+        visible: () => effect.isOwner,
+        onClick: (_, target) => this._onAction(target, isFavorited ? "unfavorite" : "favorite")
       });
     }
 
@@ -245,15 +245,17 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
         await effect.deleteDialog({ sheet: this.#app }, { render: false });
         return this.#app.render();
       case "duplicate":
-        return effect.clone({name: game.i18n.format("DOCUMENT.CopyOf", {name: effect.name})}, {save: true});
+        return effect.clone({ name: game.i18n.format("DOCUMENT.CopyOf", { name: effect.name }) }, { save: true });
       case "edit":
         return this.#app._openDocumentSheet(effect);
       case "favorite":
-        return this.document.system.addFavorite({type: "effect", id: effect.getRelativeUUID(this.document)});
+        return this.document.system.addFavorite({
+          type: "effect", id: foundry.utils.buildRelativeUuid(effect, this.document)
+        });
       case "toggle":
-        return effect.update({disabled: !effect.disabled});
+        return effect.update({ disabled: !effect.disabled });
       case "unfavorite":
-        return this.document.system.removeFavorite(effect.getRelativeUUID(this.document));
+        return this.document.system.removeFavorite(foundry.utils.buildRelativeUuid(effect, this.document));
     }
   }
 

@@ -399,7 +399,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
         const ctx = effectMap[id] = {
           id, name, img, disabled, duration, source, parent,
           durationParts: duration.remaining ? duration.label.split(", ") : [],
-          showDuration: game.release.generation < 14 ? !!duration.remaining : Number.isFinite(duration.value),
+          showDuration: Number.isFinite(duration.value),
           hasTooltip: true,
           riders: []
         };
@@ -572,7 +572,6 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
 
   /** @override */
   _renderChild(app, options={}) {
-    if ( game.release.generation < 14 ) return app.render({ force: true, ...options });
     if ( this.parent ) return this.parent.renderChild(app, options);
     if ( this.window?.windowId ) return app.render({
       force: true, window: { detached: true, windowId: this.window.windowId }, ...options
