@@ -131,11 +131,11 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
     const radians = Math.toRadians(angle);
     const duration = Math.max(this.time.mode === "fixed" ? this.time.value
       : this.time.value * (Math.abs(angle) / 90), 500);
-    const pivot = RotateAreaRegionBehaviorType.#shapeCenter(this.region.shapes[0]);
+    const pivot = this.region.shapes[0].origin;
 
     const calculateRotationUpdate = placeable => {
       if ( !placeable ) return null;
-      if ( (placeable instanceof TileDocument) && (game.release.generation > 13) ) {
+      if ( placeable instanceof TileDocument ) {
         const shape = placeable.shape.clone();
         shape.rotate(angle, { pivot });
         return { _id: placeable.id, x: shape.x, y: shape.y, rotation: placeable.rotation + angle };
@@ -179,40 +179,19 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
     await new Promise(resolve => setTimeout(resolve, duration));
 
     // Update all rotated documents
-    if ( game.release.generation >= 14 ) {
-      await foundry.documents.modifyBatch([
-        { action: "update", documentName: "RegionBehavior",
-          updates: [{ _id: this.behavior.id, "system.status.rotating": false }], parent: this.region },
-        // Tokens must be updated before the region so they re-enter the rotated region after they briefly leave it
-        // when moved to the new position while the region shapes have not been updated yet
-        { action: "update", documentName: "Token", updates: updates.tokens, parent: this.scene,
-          animate: false, constrainOptions: { ignoreWalls: true, ignoreCost: true } },
-        { action: "update", documentName: "AmbientLight", updates: updates.lights, parent: this.scene },
-        { action: "update", documentName: "AmbientSound", updates: updates.sounds, parent: this.scene },
-        { action: "update", documentName: "Region", updates: updates.regions, parent: this.scene },
-        { action: "update", documentName: "Tile", updates: updates.tiles, parent: this.scene },
-        { action: "update", documentName: "Wall", updates: updates.walls, parent: this.scene }
-      ]);
-    } else {
-      await Promise.all([
-        this.parent.update({ "system.status.rotating": false }),
-        this.scene.updateEmbeddedDocuments("Token", updates.tokens, {
-          animate: false,
-          movement: updates.tokens.reduce((obj, { _id }) => {
-            obj[_id] = {
-              constrainOptions: { ignoreWalls: true, ignoreCost: true },
-              showRuler: false
-            };
-            return obj;
-          }, {})
-        }),
-        this.scene.updateEmbeddedDocuments("AmbientLight", updates.lights),
-        this.scene.updateEmbeddedDocuments("AmbientSound", updates.sounds),
-        this.scene.updateEmbeddedDocuments("Region", updates.regions),
-        this.scene.updateEmbeddedDocuments("Tile", updates.tiles),
-        this.scene.updateEmbeddedDocuments("Wall", updates.walls)
-      ]);
-    }
+    await foundry.documents.modifyBatch([
+      { action: "update", documentName: "RegionBehavior",
+        updates: [{ _id: this.behavior.id, "system.status.rotating": false }], parent: this.region },
+      // Tokens must be updated before the region so they re-enter the rotated region after they briefly leave it
+      // when moved to the new position while the region shapes have not been updated yet
+      { action: "update", documentName: "Token", updates: updates.tokens, parent: this.scene,
+        animate: false, constrainOptions: { ignoreWalls: true, ignoreCost: true } },
+      { action: "update", documentName: "AmbientLight", updates: updates.lights, parent: this.scene },
+      { action: "update", documentName: "AmbientSound", updates: updates.sounds, parent: this.scene },
+      { action: "update", documentName: "Region", updates: updates.regions, parent: this.scene },
+      { action: "update", documentName: "Tile", updates: updates.tiles, parent: this.scene },
+      { action: "update", documentName: "Wall", updates: updates.walls, parent: this.scene }
+    ]);
   }
 
   /* ---------------------------------------- */
@@ -326,7 +305,7 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
    * @returns {object}         Update data for the region.
    */
   static #rotateRegionShapes(region, angle, radians, pivot) {
-    if ( game.release.generation >= 14 ) return {
+    return {
       _id: region.id,
       shapes: region.shapes.map(shape => {
         const clone = shape.clone();
@@ -334,55 +313,6 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
         return clone.toObject();
       })
     };
-
-    const shapes = region.toObject().shapes;
-    for ( const shape of shapes ) {
-      const { x, y, width, height } = shape;
-      switch ( shape.type ) {
-        case foundry.data.RectangleShapeData.TYPE:
-          Object.assign(shape, this.#calculatePosition(
-            radians, pivot, { x: x + (width / 2), y: y + (height / 2) }, { width, height }
-          ));
-          break;
-        case foundry.data.CircleShapeData.TYPE:
-        case foundry.data.EllipseShapeData.TYPE:
-          Object.assign(shape, this.#calculatePosition(radians, pivot, { x, y }));
-          break;
-        case foundry.data.PolygonShapeData.TYPE:
-          const iterator = Iterator.from(shape.points);
-          shape.points = [];
-          let frag;
-          while ( !(frag = iterator.next()).done ) {
-            const { x, y } = this.#calculatePosition(radians, pivot, { x: frag.value, y: iterator.next().value });
-            shape.points.push(x, y);
-          }
-          break;
-      }
-      shape.rotation += angle;
-    }
-    return { _id: region.id, shapes };
-  }
-
-  /* ---------------------------------------- */
-
-  /**
-   * Center of a specific region shape.
-   * @param {ShapeData} shape
-   * @returns {Point}
-   */
-  static #shapeCenter(shape) {
-    if ( game.release.generation >= 14 ) return shape.origin;
-    switch ( shape.type ) {
-      case foundry.data.RectangleShapeData.TYPE:
-        return { x: shape.x + (shape.width / 2), y: shape.y + (shape.width / 2) };
-      case foundry.data.CircleShapeData.TYPE:
-      case foundry.data.EllipseShapeData.TYPE:
-        return { x: shape.x, y: shape.y };
-      case foundry.data.PolygonShapeData.TYPE:
-        return foundry.utils.polygonCentroid(shape.points);
-      default:
-        throw new Error(`Unrecognized shape type: ${shape.type}.`);
-    }
   }
 
   /* ---------------------------------------- */
@@ -491,18 +421,9 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
           const second = RotateAreaRegionBehaviorType.#calculatePosition(pr, pivot, { x: points[2], y: points[3] });
           doc.c = [first.x, first.y, second.x, second.y];
           doc.object.renderFlags.set({ refreshLine: true });
-          if ( game.settings.get("core", "visionAnimation") ) {
-            if ( game.release.generation < 14 ) {
-              doc.object.initializeEdge();
-              canvas.perception.update({
-                refreshEdges: game.release.generation < 14 ? true : undefined,
-                initializeLighting: true, initializeVision: true, initializeSounds: true
-              });
-            }
-            else doc.initializeEdge();
-          }
+          if ( game.settings.get("core", "visionAnimation") ) doc.initializeEdge();
         } else {
-          if ( doc instanceof TileDocument && (game.release.generation > 13) ) {
+          if ( doc instanceof TileDocument ) {
             const shape = doc.shape.clone();
             shape.rotate(angle * pa, { pivot });
             const updates = { x: shape.x, y: shape.y, rotation: rotation + (angle * pa) };
