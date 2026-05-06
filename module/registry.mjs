@@ -2,8 +2,80 @@ import CompendiumBrowser from "./applications/compendium-browser.mjs";
 import { formatIdentifier } from "./utils.mjs";
 
 /**
- * @import { RegisteredItemData } from "./_types.mjs";
+ * @import { AdventureConfiguration, RegisteredItemData } from "./_types.mjs";
  */
+
+/* -------------------------------------------- */
+/*  Adventures                                  */
+/* -------------------------------------------- */
+
+class AdventureRegistry {
+  /**
+   * Registration of specific adventures by UUID with custom configuration.
+   * @type {Map<string, AdventureConfiguration>}
+   */
+  static #adventures = new Map();
+
+  /* -------------------------------------------- */
+
+  /**
+   * Registration of configurations shared across all adventures in a module.
+   * @type {Map<string, AdventureConfiguration>}
+   */
+  static #modules = new Map();
+
+  /* -------------------------------------------- */
+
+  /**
+   * Retrieve the configuration for a specific adventure. Prefers configuration registered to a specific
+   * adventure over configuration for a module.
+   * @param {string} uuid               UUID of the adventure.
+   * @returns {AdventureConfiguration}
+   */
+  static get(uuid) {
+    // Retrieve the config
+    let config;
+    if ( this.#adventures.has(uuid) ) config = this.#adventures.get(uuid);
+    else {
+      const packageName = foundry.utils.parseUuid(uuid)?.collection.metadata.packageName;
+      if ( this.#modules.has(packageName) ) config = this.#modules.get(packageName);
+    }
+    config ??= { importActions: [] };
+
+    // Transform any partial import actions into their full counterparts
+    config.importActions = config.importActions
+      .filter(a => a.id || (a in CONFIG.DND5E.adventure.importActions))
+      .map(a => {
+        if ( foundry.utils.getType(a) === "string" ) a = { id: a };
+        if ( !(a.id in CONFIG.DND5E.adventure.importActions) ) return { ...a, label: _loc(a.label) };
+        return { ...CONFIG.DND5E.adventure.importActions[a.id], ...a };
+      });
+
+    return config;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Register configuration for a specific adventure.
+   * @param {string} uuid                    UUID of the adventure.
+   * @param {AdventureConfiguration} config  Configuration for the adventure.
+   */
+  static setAdventure(uuid, config) {
+    this.#adventures.set(uuid, config);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Register configuration for all modules in a module.
+   * @param {string} name                    Name of the module.
+   * @param {AdventureConfiguration} config  Configuration for all adventures in the module.
+   */
+  static setModule(name, config) {
+    this.#modules.set(name, config);
+  }
+}
 
 /* -------------------------------------------- */
 /*  Dependents                                  */
@@ -712,6 +784,7 @@ const RegistryStatus = new class extends Map {
 /* -------------------------------------------- */
 
 export default {
+  adventures: AdventureRegistry,
   classes: new ItemRegistry("class"),
   dependents: DependentsRegistry,
   enchantments: EnchantmentRegisty,
