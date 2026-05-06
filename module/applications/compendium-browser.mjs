@@ -659,9 +659,7 @@ export default class CompendiumBrowser extends Application5e {
     const html = await foundry.applications.handlebars.renderTemplate(
       "systems/dnd5e/templates/compendium/browser-entry.hbs", context
     );
-    const template = document.createElement("template");
-    template.innerHTML = html;
-    const element = template.content.firstElementChild;
+    const element = foundry.utils.parseHTML(html);
     if ( documentClass !== "Item" ) return element;
     element.dataset.tooltip = `
       <section class="loading" data-uuid="${uuid}">
@@ -733,7 +731,7 @@ export default class CompendiumBrowser extends Application5e {
         partId: `${this.id}-filters`
       }
     );
-    filters.insertAdjacentHTML("beforeend", filter);
+    filters.insertAdjacentElement("beforeend", foundry.utils.parseHTML(filter));
   }
 
   /* -------------------------------------------- */
