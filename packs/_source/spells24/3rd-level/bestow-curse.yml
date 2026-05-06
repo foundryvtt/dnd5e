@@ -181,7 +181,7 @@ system:
         concentration: false
         override: false
       effects:
-        - _id: u7Yc7mxHYPDvipS1
+        - _id: T3x6XvQbSkg6kW6u
       range:
         override: false
       target:
@@ -210,6 +210,10 @@ system:
       img: ''
       appliedEffects:
         - u7Yc7mxHYPDvipS1
+      visibility:
+        level:
+          min: null
+          max: null
     fkQUKM8bxHgAUcg5:
       type: save
       activation:
@@ -654,18 +658,14 @@ folder: HCovEE4VoPGlIbKi
 sort: 3600000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.3.2
   createdTime: 1724425943234
-  modifiedTime: 1745256786773
+  modifiedTime: 1778086434998
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplBestowCurs'
