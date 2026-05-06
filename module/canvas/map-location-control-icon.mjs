@@ -1,16 +1,28 @@
+const { ControlIcon, PreciseText } = foundry.canvas.containers;
+
+/**
+ * @import { MapLocationMarkerStyle } from "../_types.mjs";
+ */
+
 /**
  * Custom control icon used to display Map Location journal pages when pinned to the map.
  */
-export default class MapLocationControlIcon extends foundry.canvas.containers.ControlIcon {
-  constructor({ code, size=40, ...style }={}, ...args) {
-    super(...args);
+export default class MapLocationControlIcon extends ControlIcon {
+  constructor({ code, ...options }={}) {
+    super(options);
 
     this.code = code;
-    this.size = size;
-    this.style = style;
+    this.style = options;
 
-    this.renderMarker();
-    this.refresh();
+    this.bg.alpha = 1;
+    this.bg.tint = 0xFFFFFF;
+
+    this.extrude = this.addChildAt(new PIXI.Graphics(), 0);
+
+    this.shadow = this.addChildAt(new PIXI.Graphics(), 0);
+    this.shadow.filters = [new PIXI.filters.BlurFilter(16)];
+
+    this.text = this.addChild(new PreciseText(this.code, this._getTextStyle(this.code.length, this.size)));
   }
 
   /* -------------------------------------------- */
@@ -24,68 +36,15 @@ export default class MapLocationControlIcon extends foundry.canvas.containers.Co
   code;
 
   /* -------------------------------------------- */
-  /*  Drawing                                     */
-  /* -------------------------------------------- */
 
   /**
-   * Perform the actual rendering of the marker.
+   * Styling options for the marker.
+   * @type {Omit<MapLocationMarkerStyle, "icon">}
    */
-  renderMarker() {
-    this.radius = this.size / 2;
-    this.circle = [this.radius, this.radius, this.radius + 8];
-    this.backgroundColor = this.style.backgroundColor;
-    this._borderColor = this.style.borderHoverColor;
-
-    // Define hit area
-    this.eventMode = "static";
-    this.interactiveChildren = false;
-    this.hitArea = new PIXI.Circle(...this.circle);
-    this.cursor = "pointer";
-
-    // Drop Shadow
-    this.shadow = this.addChild(new PIXI.Graphics());
-    this.shadow.clear()
-      .beginFill(this.style.shadowColor, 0.65)
-      .drawCircle(this.radius + 8, this.radius + 8, this.radius + 10)
-      .endFill();
-    this.shadow.filters = [new PIXI.filters.BlurFilter(16)];
-
-    // 3D Effect
-    this.extrude = this.addChild(new PIXI.Graphics());
-    this.extrude.clear()
-      .beginFill(this.style.borderColor, 1.0)
-      .drawCircle(this.radius + 2, this.radius + 2, this.radius + 9)
-      .endFill();
-
-    // Background
-    this.bg = this.addChild(new PIXI.Graphics());
-    this.bg.clear()
-      .beginFill(this.backgroundColor, 1.0)
-      .lineStyle(2, this.style.borderColor, 1.0)
-      .drawCircle(...this.circle)
-      .endFill();
-
-    // Text
-    this.text = new foundry.canvas.containers.PreciseText(this.code, this._getTextStyle(this.code.length, this.size));
-    this.text.anchor.set(0.5, 0.5);
-    this.text.position.set(this.radius, this.radius);
-    this.addChild(this.text);
-
-    // Border
-    this.border = this.addChild(new PIXI.Graphics());
-    this.border.visible = false;
-
-    foundry.canvas.interaction.MouseInteractionManager.emulateMoveEvent();
-  }
+  style;
 
   /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async draw() {
-    if ( game.release.generation < 14 ) return;
-    return super.draw();
-  }
-
+  /*  Drawing                                     */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -93,25 +52,61 @@ export default class MapLocationControlIcon extends foundry.canvas.containers.Co
     super._clear();
     this.extrude.clear();
     this.shadow.clear();
+    this.text.clear();
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  refresh({ visible, iconColor, borderColor, borderVisible }={}) {
-    if ( game.release.generation > 13 ) return this.renderFlags.set({ refresh: true });
-    if ( borderColor ) this._borderColor = borderColor;
-    this.border.clear().lineStyle(2, this._borderColor, 1.0).drawCircle(...this.circle).endFill();
-    if ( borderVisible !== undefined ) this.border.visible = borderVisible;
-    if ( visible !== undefined ) this.visible = visible;
-    return this;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
+  /** @override */
   _refresh() {
-    this.renderMarker();
+    this.radius = this.size / 2;
+    this.circle = [this.radius, this.radius, this.radius + 8];
+
+    // Define hit area
+    this.hitArea = new PIXI.Circle(...this.circle);
+    this.cursor = "pointer";
+
+    // Drop Shadow
+    this.shadow.clear()
+      .beginFill(this.style.shadowColor, 0.65)
+      .drawCircle(this.radius + 8, this.radius + 8, this.radius + 10)
+      .endFill();
+
+    // 3D Effect
+    this.extrude.clear()
+      .beginFill(this.style.borderColor, 1.0)
+      .drawCircle(this.radius + 2, this.radius + 2, this.radius + 9)
+      .endFill();
+
+    // Background
+    this.bg.clear()
+      .beginFill(this.style.backgroundColor, 1.0)
+      .lineStyle(2, this.style.borderColor, 1.0)
+      .drawCircle(...this.circle)
+      .endFill();
+
+    // Text
+    this.text.style = this._getTextStyle(this.code.length, this.size);
+    this.text.anchor.set(0.5, 0.5);
+    this.text.position.set(this.radius, this.radius);
+
+    // Border
+    this.border.visible = false;
+
+    foundry.canvas.interaction.MouseInteractionManager.emulateMoveEvent();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine the proper text size based on the character count and the size of the icon.
+   * @param {number} characterCount  Number of characters in the code.
+   * @param {number} size            Size of the icon in the Scene.
+   * @returns {number}
+   * @protected
+   */
+  _getTextSize(characterCount, size) {
+    return characterCount > 2 ? size * .5 : size * .6;
   }
 
   /* -------------------------------------------- */
@@ -130,7 +125,7 @@ export default class MapLocationControlIcon extends foundry.canvas.containers.Co
     style.strokeThickness = 0;
     style.fontFamily = ["Signika"];
     if ( this.style.fontFamily ) style.fontFamily.unshift(this.style.fontFamily);
-    style.fontSize = characterCount > 2 ? size * .5 : size * .6;
+    style.fontSize = this._getTextSize(characterCount, size);
     return style;
   }
 }
