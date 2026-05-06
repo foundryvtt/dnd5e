@@ -399,7 +399,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
         const ctx = effectMap[id] = {
           id, name, img, disabled, duration, source, parent,
           durationParts: duration.remaining ? duration.label.split(", ") : [],
-          showDuration: game.release.generation < 14 ? !!duration.remaining : Number.isFinite(duration.value),
+          showDuration: Number.isFinite(duration.value),
           hasTooltip: true,
           riders: []
         };
