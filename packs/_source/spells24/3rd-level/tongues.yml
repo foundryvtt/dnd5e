@@ -22,14 +22,17 @@ system:
     units: hour
   target:
     affects:
-      type: enemy
+      type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -139,11 +142,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.3.2
   createdTime: 1724425975847
-  modifiedTime: 1745256799290
+  modifiedTime: 1777481653177
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplTongues000'

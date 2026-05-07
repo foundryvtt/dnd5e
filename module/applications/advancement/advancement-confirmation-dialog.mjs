@@ -71,7 +71,7 @@ export default class AdvancementConfirmationDialog extends Dialog5e {
       message: game.i18n.localize("DND5E.ADVANCEMENT.Deletion.Delete.Message"),
       continueButton: {
         icon: "fa-solid fa-trash",
-        label: game.i18n.localize("Delete")
+        label: game.i18n.localize("COMMON.Delete")
       }
     });
   }
@@ -134,7 +134,7 @@ export default class AdvancementConfirmationDialog extends Dialog5e {
           {
             action: "cancel",
             icon: "fa-solid fa-times",
-            label: game.i18n.localize("Cancel"),
+            label: game.i18n.localize("COMMON.Cancel"),
             type: "button"
           }
         ],

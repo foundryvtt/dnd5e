@@ -161,7 +161,7 @@ system:
     reach: null
 effects:
   - name: War Mage +1
-    img: systems/dnd5e/icons/items/wand-of-the-war-mage.webp
+    img: icons/weapons/wands/wand-gem-blue.webp
     _id: 7Pcy0FgaAr30JUBV
     type: base
     system: {}
@@ -189,20 +189,23 @@ effects:
     transfer: true
     statuses: []
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 5.3.2
       createdTime: 1730911421903
-      modifiedTime: 1731109866962
+      modifiedTime: 1778013902839
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmg1WandOfTheWar.7Pcy0FgaAr30JUBV'
   - name: War Mage +2
-    img: systems/dnd5e/icons/items/wand-of-the-war-mage.webp
+    img: icons/weapons/wands/wand-gem-blue.webp
     _id: MFwYWOar805EHkdX
     type: base
     system: {}
@@ -230,21 +233,24 @@ effects:
     transfer: true
     statuses: []
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     _stats:
       compendiumSource: >-
         Compendium.dnd5e.equipment24.Item.dmg1WandOfTheWar.ActiveEffect.7Pcy0FgaAr30JUBV
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 5.3.2
       createdTime: 1731109827169
-      modifiedTime: 1731109875345
+      modifiedTime: 1778013906102
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmg1WandOfTheWar.MFwYWOar805EHkdX'
   - name: War Mage +3
-    img: systems/dnd5e/icons/items/wand-of-the-war-mage.webp
+    img: icons/weapons/wands/wand-gem-blue.webp
     _id: 5Z35lVoEDct7Ivx2
     type: base
     system: {}
@@ -272,16 +278,19 @@ effects:
     transfer: true
     statuses: []
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     _stats:
       compendiumSource: >-
         Compendium.dnd5e.equipment24.Item.dmg1WandOfTheWar.ActiveEffect.7Pcy0FgaAr30JUBV
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 5.3.2
       createdTime: 1731109847118
-      modifiedTime: 1731109884772
+      modifiedTime: 1778013909986
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmg1WandOfTheWar.5Z35lVoEDct7Ivx2'

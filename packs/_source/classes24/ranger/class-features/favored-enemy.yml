@@ -12,45 +12,119 @@ system:
       you regain all expended uses of this ability when you finish a Long
       Rest.</p><p>The number of times you can cast the spell without a spell
       slot increases when you reach certain Ranger levels, as shown in the
-      Favored Enemy column of the Ranger Features table.</p><section
-      id="secret-cyuZuzwxsQg01vVN" class="secret"><p><strong>Foundry
-      Note</strong></p><p>The spell is granted to you at this level and will
-      increase the number of free uses available automatically as you level
-      up.</p></section>
+      Favored Enemy column of the Ranger Features table.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
+    revision: 2
     license: CC-BY-4.0
     book: ''
   uses:
-    max: ''
+    max: '@scale.ranger.favored-enemy'
     spent: 0
-    recovery: []
+    recovery:
+      - period: lr
+        type: recoverAll
   type:
     value: class
     subtype: ''
   prerequisites:
     level: 1
-  properties: []
+  properties:
+    - mgc
   requirements: ''
-  activities: {}
+  activities:
+    18OW4UKZ5cSPPLhC:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplHuntersMar
+        challenge:
+          override: false
+        properties: []
+        spellbook: true
+        ability: ''
+        level: 1
+      _id: 18OW4UKZ5cSPPLhC
+      img: ''
+      sort: 0
+      activation:
+        type: bonus
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      name: ''
   enchant: {}
   identifier: favored-enemy
+  advancement:
+    DOENALOWWjAUHzb7:
+      _id: DOENALOWWjAUHzb7
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplHuntersMar
+        optional: false
+        spell:
+          ability: []
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+          method: spell
+          prepared: 2
+      value: {}
+      level: 1
+      title: Favored Enemy
+      hint: ''
+      flags: {}
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735932734523
-  modifiedTime: 1745256764837
+  systemVersion: 5.3.2
+  createdTime: 1724425982601
+  modifiedTime: 1778088166342
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

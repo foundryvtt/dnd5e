@@ -999,7 +999,8 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
           effect: this,
           description: await TextEditor.enrichHTML(this.description ?? "", { relativeTo: this, ...enrichmentOptions }),
           durationParts: this.duration.remaining ? this.duration.label.split(", ") : [],
-          showDuration: this.duration.remaining && Number.isFinite(this.duration.remaining),
+          showDuration: game.release.generation < 14
+            ? !!this.duration.remaining : Number.isFinite(this.duration.value),
           properties
         }
       ),

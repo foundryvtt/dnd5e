@@ -612,7 +612,7 @@ export function linkForUuid(uuid, { tooltip, renderBroken }={}) {
   if ( !doc ) {
     if ( renderBroken ) return `
       <a class="content-link broken" data-uuid="${uuid}">
-        <i class="fas fa-unlink"></i> ${game.i18n.localize("Unknown")}
+        <i class="fas fa-unlink"></i> ${game.i18n.localize("COMMON.Unknown")}
       </a>
     `;
     return "";
