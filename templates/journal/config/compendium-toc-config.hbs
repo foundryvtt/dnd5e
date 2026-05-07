@@ -1,0 +1,27 @@
+<section class="flexcol">
+    {{#each folders}}
+    <fieldset class="card">
+        <legend>{{ localize name }}</legend>
+        <div class="header">
+            <div class="form-group split-group">
+                <span>{{ localize "DND5E.TABLEOFCONTENTS.JournalEntry" }}</span>
+                <div class="form-fields">
+                    <span>{{ localize "DND5E.TABLEOFCONTENTS.FIELDS.type.label" }}</span>
+                    <span>{{ localize "DND5E.TABLEOFCONTENTS.FIELDS.position.label" }}</span>
+                </div>
+            </div>
+        </div>
+        {{#each entries}}
+        <div class="form-group split-group">
+            <label>{{ entry.name }}</label>
+            <div class="form-fields">
+                {{> "dnd5e.fieldlist" fields }}
+                {{#if warning}}
+                <i class="fa-solid fa-triangle-exclamation" data-tooltip aria-label="{{ warning }}"></i>
+                {{/if}}
+            </div>
+        </div>
+        {{/each}}
+    </fieldset>
+    {{/each}}
+</section>
