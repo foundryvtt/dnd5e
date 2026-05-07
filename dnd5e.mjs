@@ -552,7 +552,7 @@ Hooks.once("i18nInit", () => {
 /**
  * Once the entire VTT framework is initialized, check to see if we should perform a data migration
  */
-Hooks.once("ready", function() {
+Hooks.once("ready", async function() {
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on("hotbarDrop", (bar, data, slot) => {
     if ( ["ActiveEffect", "Activity", "Item"].includes(data.type) ) {
@@ -580,8 +580,24 @@ Hooks.once("ready", function() {
     dnd5e.ui.calendar.render({ force: true });
   }
 
-  // Determine whether a system migration is required and feasible
+  // Run migrations
+  await _handleMigration();
+
+  // Present welcome dialog to GMs
+  if ( game.user.isGM && game.settings.get("dnd5e", "firstRun") ) {
+    const welcome = new applications.WelcomeScreen();
+    welcome.render({ force: true });
+  }
+});
+
+/* -------------------------------------------- */
+
+/**
+ * Determine whether a system migration is required and feasible and run it.
+ */
+async function _handleMigration() {
   if ( !game.user.isGM ) return;
+
   const cv = game.settings.get("dnd5e", "systemMigrationVersion") || game.world.flags.dnd5e?.version;
   const totalDocuments = game.actors.size + game.scenes.size + game.items.size;
   if ( !cv && totalDocuments === 0 ) return game.settings.set("dnd5e", "systemMigrationVersion", game.system.version);
@@ -594,10 +610,10 @@ Hooks.once("ready", function() {
 
   // Perform the migration
   if ( cv && foundry.utils.isNewerVersion(game.system.flags.compatibleMigrationVersion, cv) ) {
-    ui.notifications.error("MIGRATION.5eVersionTooOldWarning", {localize: true, permanent: true});
+    ui.notifications.error("MIGRATION.5eVersionTooOldWarning", { localize: true, permanent: true });
   }
-  migrations.migrateWorld();
-});
+  await migrations.migrateWorld();
+}
 
 /* -------------------------------------------- */
 /*  System Styling                              */

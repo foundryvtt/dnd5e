@@ -52,6 +52,17 @@ export default class BaseSettingsConfig extends Application5e {
    * @returns {object}
    */
   createSettingField(name) {
+    return BaseSettingsConfig.createSettingField(name);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create the field data for a specific setting.
+   * @param {string} name  Setting key within the dnd5e namespace.
+   * @returns {object}
+   */
+  static createSettingField(name) {
     const setting = game.settings.settings.get(`dnd5e.${name}`);
     if ( !setting ) throw new Error(`Setting \`dnd5e.${name}\` not registered.`);
     const isDataField = setting.type instanceof DataField;
@@ -86,9 +97,24 @@ export default class BaseSettingsConfig extends Application5e {
    * @returns {Promise<void>}            Resolves once the settings are updated, or prompts for a reload if required.
    */
   static async #onCommitChanges(event, form, formData) {
+    const changes = foundry.utils.expandObject(formData.object);
+    const { requiresClientReload, requiresWorldReload } = await BaseSettingsConfig.commitChanges(changes);
+    if ( requiresClientReload || requiresWorldReload ) {
+      return foundry.applications.settings.SettingsConfig.reloadConfirm({ world: requiresWorldReload });
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Commit changes to various `dnd5e` settings and determine if a reload is required.
+   * @param {object} changes  Changes to apply to settings within the dnd5e namespace.
+   * @returns {{ requiresClientReload: boolean, requiresWorldReload: boolean }}
+   */
+  static async commitChanges(changes) {
     let requiresClientReload = false;
     let requiresWorldReload = false;
-    for ( const [key, value] of Object.entries(foundry.utils.expandObject(formData.object)) ) {
+    for ( const [key, value] of Object.entries(changes) ) {
       const setting = game.settings.settings.get(`dnd5e.${key}`);
       const current = game.settings.get("dnd5e", key, { document: true });
       const prior = current?._source?.value ?? current;
@@ -97,8 +123,6 @@ export default class BaseSettingsConfig extends Application5e {
       requiresClientReload ||= (setting.scope !== "world") && setting.requiresReload;
       requiresWorldReload ||= (setting.scope === "world") && setting.requiresReload;
     }
-    if ( requiresClientReload || requiresWorldReload ) {
-      return foundry.applications.settings.SettingsConfig.reloadConfirm({ world: requiresWorldReload });
-    }
+    return { requiresClientReload, requiresWorldReload };
   }
 }

@@ -59,6 +59,14 @@ export function registerSystemSettings() {
     default: ""
   });
 
+  // Track whether this the first time the GM has launched this world
+  game.settings.register("dnd5e", "firstRun", {
+    scope: "world",
+    config: false,
+    default: true,
+    type: Boolean
+  });
+
   // Polymorph Settings
   game.settings.register("dnd5e", "transformationSettings", {
     scope: "client",
