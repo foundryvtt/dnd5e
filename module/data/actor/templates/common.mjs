@@ -166,10 +166,16 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
       if ( !Number.isFinite(abl.max) ) abl.max = CONFIG.DND5E.maxAbilityScore;
 
       // Adjust rolling mode
-      if ( this.parent.hasConditionEffect("abilityCheckDisadvantage") ) {
+      const isPhysicalAbility = ["str", "dex", "con"].includes(id);
+      if ( this.parent.hasConditionEffect("abilityCheckDisadvantage")
+        || (isPhysicalAbility && this.parent.hasConditionEffect("strengthDexterityConstitutionCheckDisadvantage")) ) {
         AdvantageModeField.setMode(this, `abilities.${id}.check.roll.mode`, -1);
       }
+      if ( (id === "dex") && this.parent.hasConditionEffect("dexteritySaveAdvantage") ) {
+        AdvantageModeField.setMode(this, `abilities.${id}.save.roll.mode`, 1);
+      }
       if ( this.parent.hasConditionEffect("abilitySaveDisadvantage")
+        || (isPhysicalAbility && this.parent.hasConditionEffect("strengthDexterityConstitutionSaveDisadvantage"))
         || ((id === "dex") && this.parent.hasConditionEffect("dexteritySaveDisadvantage")) ) {
         AdvantageModeField.setMode(this, `abilities.${id}.save.roll.mode`, -1);
       }
