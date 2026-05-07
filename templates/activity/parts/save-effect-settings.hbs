@@ -2,5 +2,9 @@
     {{ formField fields.onSave name=(concat prefix "onSave") value=data.onSave localize=true
                  label="DND5E.SAVE.FIELDS.effects.onSave.label" hint="DND5E.SAVE.FIELDS.effects.onSave.hint"
                  input=@root.inputs.createCheckboxInput rootId=@root.partId }}
+    {{ formField fields.applyDuration name=(concat prefix "applyDuration") value=data.applyDuration localize=true
+                 label="DND5E.ACTIVITY.FIELDS.effects.element.applyDuration.label"
+                 hint="DND5E.ACTIVITY.FIELDS.effects.element.applyDuration.hint"
+                 input=@root.inputs.createCheckboxInput rootId=@root.partId }}
     {{> "systems/dnd5e/templates/activity/parts/activity-effect-level-limit.hbs" }}
 </div>

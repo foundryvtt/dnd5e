@@ -1,3 +1,7 @@
 <div>
+    {{ formField fields.applyDuration name=(concat prefix "applyDuration") value=data.applyDuration localize=true
+                 label="DND5E.ACTIVITY.FIELDS.effects.element.applyDuration.label"
+                 hint="DND5E.ACTIVITY.FIELDS.effects.element.applyDuration.hint"
+                 input=@root.inputs.createCheckboxInput rootId=@root.partId }}
     {{> "systems/dnd5e/templates/activity/parts/activity-effect-level-limit.hbs" }}
 </div>
