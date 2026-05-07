@@ -32,6 +32,24 @@ export function getCollectionDocumentOptions(collection, { disabled }={}) {
 }
 
 /* -------------------------------------------- */
+/*  Currencies                                  */
+/* -------------------------------------------- */
+
+/**
+ * Round a specific denomination to the number of digits specified in the configuration.
+ * @param {number} value         Currency value to round.
+ * @param {string} denomination  Denomination that the value represents.
+ * @returns {number}
+ */
+export function roundCurrency(value, denomination) {
+  const fractionalDigits = CONFIG.DND5E.currencies[denomination]?.fractionalDigits;
+  if ( !fractionalDigits ) return Math.floor(value);
+  if ( !Number.isFinite(fractionalDigits) ) return value;
+  const pow = Math.pow(10, fractionalDigits);
+  return Math.floor(value * pow) / pow;
+}
+
+/* -------------------------------------------- */
 /*  Formatters                                  */
 /* -------------------------------------------- */
 

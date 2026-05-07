@@ -176,6 +176,7 @@ export default class GroupData extends GroupTemplate {
   /** @inheritDoc */
   prepareDerivedData() {
     const rollData = this.parent.getRollData({ deterministic: true });
+    this.prepareCurrency();
     TravelField.prepareData.call(this, rollData);
   }
 

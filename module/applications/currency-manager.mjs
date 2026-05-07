@@ -1,4 +1,4 @@
-import { filteredKeys } from "../utils.mjs";
+import { filteredKeys, roundCurrency } from "../utils.mjs";
 import Award from "./award.mjs";
 import Application5e from "./api/application.mjs";
 
@@ -228,7 +228,7 @@ export default class CurrencyManager extends Application5e {
     // Convert base units into the highest denomination possible
     for ( const [denomination, config] of currencies) {
       const ratio = smallestConversion / config.conversion;
-      currency[denomination] = Math.floor(amount / ratio);
+      currency[denomination] = roundCurrency(amount / ratio, denomination);
       amount -= currency[denomination] * ratio;
     }
 
@@ -288,10 +288,10 @@ export default class CurrencyManager extends Application5e {
       updates = { system: { currency: { ...currency } }, remainder: amount, item: [] };
       for ( const [denom, conversion] of currencies ) {
         const multiplier = conversion / baseConversion;
-        const deduct = Math.min(updates.system.currency[denom], Math.floor(updates.remainder * multiplier));
+        const deduct = Math.min(updates.system.currency[denom], roundCurrency(updates.remainder * multiplier, denom));
         // Handle normal deduction first.
         updates.remainder -= deduct / multiplier;
-        updates.system.currency[denom] -= deduct;
+        updates.system.currency[denom] = roundCurrency(updates.system.currency[denom] - deduct, denom);
         // If there's still a remainder, break the denomination into change.
         if ( updates.remainder && makeChange && (conversion < baseConversion) && updates.system.currency[denom] ) {
           const rate = Math.floor(baseConversion / conversion);
@@ -300,7 +300,9 @@ export default class CurrencyManager extends Application5e {
           updates.system.currency[denomination] += breaks * rate;
           const change = Math.min(updates.system.currency[denomination], updates.remainder);
           updates.remainder -= change;
-          updates.system.currency[denomination] -= change;
+          updates.system.currency[denomination] = roundCurrency(
+            updates.system.currency[denomination] - change, denomination
+          );
         }
         if ( !updates.remainder ) return updates;
       }

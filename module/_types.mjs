@@ -227,6 +227,8 @@
  * @property {string} label         Localized label for the currency.
  * @property {string} abbreviation  Localized abbreviation for the currency.
  * @property {number} conversion    Number by which this currency should be multiplied to arrive at a standard value.
+ * @property {integer} [fractionalDigits=0]  Number of digits to round currency values of this denomination to. Set to
+ *                                           Infinity to prevent any rounding of the value.
  * @property {string} icon          Icon representing the currency in the interface.
  */
 
