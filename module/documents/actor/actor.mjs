@@ -47,7 +47,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * Lazily computed store of classes, subclasses, background, and species.
-   * @type {Record<string, Record<string, Item5e|Item5e[]>>}
+   * @type {Record<string, Record<string, Item5e|Item5e[]|string>>}
    */
   _lazy = {};
 
@@ -117,6 +117,21 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( this.statuses.has("coverThreeQuarters") ) return coverThreeQuarters?.coverBonus;
     else if ( this.statuses.has("coverHalf") ) return coverHalf?.coverBonus;
     return 0;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Highest ability associated with a spellcasting class.
+   * @type {string}
+   */
+  get spellcastingAbility() {
+    if ( this._lazy.spellcastingAbility !== undefined ) return this._lazy.spellcastingAbility;
+    return this._lazy.spellcastingAbility = Object.values(this.spellcastingClasses).reduce((o, c) => {
+      const ability = c.system.spellcasting.ability;
+      if ( this.system.abilities[ability]?.mod > o.mod ) return { ability, mod: this.system.abilities[ability].mod };
+      return o;
+    }, { ability: null, mod: -Infinity })?.ability ?? this.system.attributes?.spellcasting ?? "int";
   }
 
   /* -------------------------------------------- */
