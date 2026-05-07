@@ -1,43 +1,37 @@
-<section class="flexcol">
-    <div class="final-value">{{ dnd5e-numberFormat data.value }}</div>
-    <fieldset class="card">
-        <legend>{{ localize "DND5E.ArmorClassFormula" }}</legend>
-        {{ formField fields.calc value=source.calc options=calculationOptions localize=true blank=false }}
-        {{ formField fields.formula value=formula.value disabled=formula.disabled localize=true }}
-        {{#if dexterity}}
-        <div class="form-group">
-            <label>{{ localize CONFIG.abilities.dex.label }}</label>
-            <div class="form-fields">
-                {{{ dnd5e-numberParts dexterity signDisplay="always" }}}
+<fieldset>
+    <legend>
+        <span>{{ localize "DND5E.ARMORCLASS.Configuration" }}</span>
+        <button class="unbutton control-button" data-action="addFormula" data-tooltip
+                aria-label="{{ localize 'DND5E.ARMORCLASS.Action.CreateFormula' }}">
+            <i class="fa-solid fa-plus" inert></i>
+        </button>
+    </legend>
+
+    {{ formField fields.selectedFormulas value=source.selectedFormulas options=formulaOptions localize=true
+                 rootId=partId }}
+    {{ formField fields.flat value=source.flat localize=true rootId=partId }}
+    {{ formField fields.override value=source.override localize=true rootId=partId }}
+
+    {{#each customFormulas}}
+    <div class="form-group split-group full-width card" data-index="{{ @index }}">
+        <div class="form-fields field-groups">
+            <div class="field-group">
+                {{ formField fields.formula name=(concat "system.attributes.ac.formulas." @index ".formula")
+                             value=source.formula classes="label-top" localize=true rootId=@root.partId }}
+                <button class="unbutton control-button" type="button" data-action="deleteFormula" data-tooltip
+                        aria-label="{{ localize 'DND5E.ARMORCLASS.Action.DeleteFormula' }}">
+                    <i class="fa-solid fa-minus" inert></i>
+                </button>
+            </div>
+            <div class="field-group">
+                {{ formField fields.label name=(concat "system.attributes.ac.formulas." @index ".label")
+                             value=source.label classes="label-top" localize=true rootId=@root.partId }}
             </div>
         </div>
-        {{/if}}
-        {{#if formula.showFlat}}
-        {{ formField fields.flat value=source.flat localize=true }}
-        {{/if}}
-    </fieldset>
-    {{#if calculations.length}}
-    <fieldset class="card table equipped">
-        <legend>{{ localize "DND5E.ArmorClassCalculation" }}</legend>
-        <div class="header">
-            <div class="armor-value">
-                <i class="fa-solid fa-shield" data-tooltip aria-label="{{ localize 'DND5E.ArmorValue' }}"></i>
-            </div>
-            <div class="magical-bonus">
-                <i class="fa-solid fa-wand-sparkles" data-tooltip
-                   aria-label="{{ localize 'DND5E.EquipmentBonus' }}"></i>
-            </div>
-        </div>
-        {{#each calculations}}
-        <div class="form-group">
-            <div class="name">
-                <img src="{{ img }}" class="gold-icon" alt="{{ name }}">
-                {{{ anchor }}}
-            </div>
-            <span class="armor-value {{#if (eq value "—")}}empty{{/if}}">{{ value }}</span>
-            <span class="magical-bonus {{#if (eq magicalBonus "—")}}empty{{/if}}">{{ magicalBonus }}</span>
-        </div>
-        {{/each}}
-    </fieldset>
-    {{/if}}
-</section>
+    </div>
+    {{else}}
+    <div class="empty">
+        {{{ localize "DND5E.ARMORCLASS.CustomFormulas.Empty" }}}
+    </div>
+    {{/each}}
+</fieldset>
