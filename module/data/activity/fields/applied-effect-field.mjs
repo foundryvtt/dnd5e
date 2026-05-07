@@ -1,4 +1,4 @@
-const { DocumentIdField, NumberField, SchemaField } = foundry.data.fields;
+const { BooleanField, DocumentIdField, NumberField, SchemaField } = foundry.data.fields;
 
 /**
  * Field for storing an active effects applied by an activity.
@@ -7,6 +7,7 @@ export default class AppliedEffectField extends SchemaField {
   constructor(fields={}, options={}) {
     fields = {
       _id: new DocumentIdField(),
+      applyDuration: new BooleanField(),
       level: new SchemaField({
         min: new NumberField({ min: 0, integer: true }),
         max: new NumberField({ min: 0, integer: true })

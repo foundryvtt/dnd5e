@@ -196,11 +196,21 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       }
     };
 
+    // Override effect duration with the activity's duration if configured
+    const activity = this.chatMessage.system.activity;
+    const appliedConfig = activity?.effects?.find(e => e._id === effect.id);
+    let durationOverride = {};
+    if ( appliedConfig?.applyDuration && activity.duration?.getEffectData ) {
+      const effectDuration = activity.duration.getEffectData();
+      if ( !foundry.utils.isEmpty(effectDuration) ) durationOverride = { duration: effectDuration };
+    }
+
     // Enable an existing effect on the target if it originated from this effect
     const existingEffect = actor.effects.find(e => e.origin === origin.uuid);
     if ( existingEffect ) {
       return existingEffect.update(foundry.utils.mergeObject({
         ...effect.constructor.getInitialDuration(),
+        ...durationOverride,
         disabled: false
       }, effectFlags));
     }
@@ -212,6 +222,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
     // Otherwise, create a new effect on the target
     const effectData = foundry.utils.mergeObject({
       ...effect.toObject(),
+      ...durationOverride,
       disabled: false,
       transfer: false,
       origin: origin.uuid
