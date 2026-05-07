@@ -22,7 +22,8 @@ export default class BaseForwardActivityData extends BaseActivityData {
     return {
       ...schema,
       activity: new SchemaField({
-        id: new DocumentIdField()
+        id: new DocumentIdField(),
+        item: new DocumentIdField({ initial: null, nullable: true })
       })
     };
   }
@@ -33,7 +34,8 @@ export default class BaseForwardActivityData extends BaseActivityData {
 
   /** @inheritDoc */
   prepareFinalData(rollData) {
-    const activity = this.item.system.activities.get(this.activity.id);
+    const item = this.activity.item ? this.item.collection.get(this.activity.item) : this.item;
+    const activity = item?.system.activities.get(this.activity.id);
     if ( activity && activity.activation.override ) this.activation = activity.toObject().activation;
 
     super.prepareFinalData(rollData);

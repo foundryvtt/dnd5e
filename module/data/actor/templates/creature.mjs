@@ -2,11 +2,12 @@ import { simplifyBonus } from "../../../utils.mjs";
 import AdvantageModeField from "../../fields/advantage-mode-field.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 import MappingField from "../../fields/mapping-field.mjs";
+import { DamageData } from "../../shared/damage-field.mjs";
 import RollConfigField from "../../shared/roll-config-field.mjs";
 import SensesField from "../../shared/senses-field.mjs";
 import CommonTemplate from "./common.mjs";
 
-const { NumberField, SchemaField } = foundry.data.fields;
+const { EmbeddedDataField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * @import { ActorRollData } from "../../../documents/_types.mjs";
@@ -41,6 +42,14 @@ export default class CreatureTemplate extends CommonTemplate {
           dc: new FormulaField({ required: true, deterministic: true })
         })
       }),
+      combat: new SchemaField({
+        attacks: new SchemaField({
+          // Attacks per turn
+          amount: new NumberField({ initial: 1, integer: true, nullable: false, min: 0 })
+        }),
+        // Unarmed strikes
+        unarmed: new EmbeddedDataField(UnarmedStrikeDamageData)
+      }, { persisted: false }),
       skills: new MappingField(new RollConfigField({
         value: new NumberField({
           required: true, nullable: false, min: 0, max: 2, step: 0.5, initial: 0, label: "DND5E.ProficiencyLevel"
@@ -335,4 +344,22 @@ function makeAttackBonuses(schemaOptions={}) {
     attack: new FormulaField({required: true}),
     damage: new FormulaField({required: true})
   }, schemaOptions);
+}
+
+/* -------------------------------------------- */
+
+class UnarmedStrikeDamageData extends DamageData {
+  /** @inheritDoc */
+  static defineSchema() {
+    return Object.assign(super.defineSchema(), {
+      types: new SetField(new StringField(), { initial: ["bludgeoning"] })
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  toString() {
+    return this.formula;
+  }
 }

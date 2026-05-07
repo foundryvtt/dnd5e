@@ -27,8 +27,8 @@ export class DamageData extends foundry.abstract.DataModel {
   /** @override */
   static defineSchema() {
     return {
-      number: new NumberField({ min: 0, integer: true }),
-      denomination: new NumberField({ min: 0, integer: true }),
+      number: new NumberField({ min: 0, integer: true, required: true }),
+      denomination: new NumberField({ min: 0, integer: true, required: true }),
       bonus: new FormulaField(),
       types: new SetField(new StringField()),
       custom: new SchemaField({
