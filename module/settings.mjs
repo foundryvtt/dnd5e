@@ -408,6 +408,24 @@ export function registerSystemSettings() {
     type: Boolean
   });
 
+  game.settings.register("dnd5e", "initiativeGroupCombatants", {
+    name: "SETTINGS.DND5E.COMBAT.InitiativeGroupCombatants.Name",
+    hint: "SETTINGS.DND5E.COMBAT.InitiativeGroupCombatants.Hint",
+    scope: "world",
+    config: false,
+    default: true,
+    type: Boolean
+  });
+
+  game.settings.register("dnd5e", "initiativeGroupRoll", {
+    name: "SETTINGS.DND5E.COMBAT.InitiativeGroupRoll.Name",
+    hint: "SETTINGS.DND5E.COMBAT.InitiativeGroupRoll.Hint",
+    scope: "world",
+    config: false,
+    default: false,
+    type: Boolean
+  });
+
   game.settings.register("dnd5e", "initiativeScore", {
     name: "SETTINGS.DND5E.COMBAT.InitiativeScore.Name",
     hint: "SETTINGS.DND5E.COMBAT.InitiativeScore.Hint",
