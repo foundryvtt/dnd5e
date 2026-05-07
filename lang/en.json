@@ -837,6 +837,27 @@
 "DND5E.AdvancementTitle": "Advancement",
 "DND5E.Advantage": "Advantage",
 "DND5E.AdvantageMode": "Advantage Mode",
+
+"DND5E.ADVENTURE": {
+  "Action": {
+    "Configure": "Configure Adventure",
+    "Launch": "Launch Adventure"
+  },
+  "Finished": {
+    "one": "Finished preparing {adventure}.",
+    "other": "Finished preparing {number} adventures."
+  },
+  "ImportAction": {
+    "ActivateScene": "Activate Initial Scene",
+    "CustomizeWorld": "Customize World Details",
+    "DisplayJournal": "Display Getting Started Journal"
+  },
+  "Warning": {
+    "JournalMissing": "Journal entry `{id}` could not be found to display for {adventure}.",
+    "SceneMissing": "Scene `{id}` could not be found to activate for {adventure}."
+  }
+},
+
 "DND5E.Age": "Age",
 "DND5E.Alignment": "Alignment",
 "DND5E.AlignmentCE": "Chaotic Evil",
@@ -3934,6 +3955,7 @@
 "DND5E.Shape": "Shape",
 
 "DND5E.SheetClass": {
+  "AdventureImporter": "D&D 5e Adventure Importer",
   "Character": "D&D 5e Character Sheet",
   "ClassSummary": "D&D 5e Class Summary Sheet",
   "Container": "D&D 5e Container Sheet",

@@ -129,6 +129,56 @@
 /* -------------------------------------------- */
 
 /**
+ * @typedef AdventureConfiguration
+ * @param {AdventureImportAction[]} importActions  Actions performed when the adventure is imported.
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef AdventureImportAction
+ * @property {string} id                   Unique ID for this import action.
+ * @property {string} label                Localized label for the option.
+ * @property {AdventureImportPreHandler|AdventureImportPostHandler} handler  Handler function to call.
+ * @property {"pre"|"post"} lifecycle      Should this handler be called before or after importing.
+ * @property {boolean} [default=false]     Should this option be checked by default on the adventure importer?
+ * @property {AdventureImportQuickstartHandler} [quickstartHandler]  Handler called when after quickstarting a module.
+ *                                                                   Must be set to use an action during quickstart.
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @callback AdventureImportPostHandler
+ * @this {Adventure}
+ * @param {AdventureImportAction} config
+ * @param {AdventureImportResult} importResult
+ * @param {AdventureImportOptions} importOptions
+ * @returns {Promise<*>}
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @callback AdventureImportPreHandler
+ * @this {Adventure}
+ * @param {AdventureImportAction} config
+ * @param {AdventureImportData} importData
+ * @param {AdventureImportOptions} importOptions
+ * @returns {Promise<*>}
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @callback AdventureImportQuickstartHandler
+ * @param {{ adventure: Adventure, config: AdventureImportAction }[]} adventures
+ * @returns {Promise<*>}
+ */
+
+/* -------------------------------------------- */
+
+/**
  * Information needed to represent different area of effect target types.
  *
  * @typedef AreaTargetDefinition

@@ -176,6 +176,11 @@ Hooks.once("init", function() {
     label: "DND5E.SheetClass.Encounter"
   });
 
+  DocumentSheetConfig.registerSheet(Adventure, "dnd5e", applications.adventure.AdventureImporter5e, {
+    canBeDefault: false,
+    label: "DND5E.SheetClass.AdventureImporter"
+  });
+
   DocumentSheetConfig.unregisterSheet(Item, "core", foundry.appv1.sheets.ItemSheet);
   DocumentSheetConfig.registerSheet(Item, "dnd5e", applications.item.ItemSheet5e, {
     makeDefault: true,
@@ -552,7 +557,7 @@ Hooks.once("i18nInit", () => {
 /**
  * Once the entire VTT framework is initialized, check to see if we should perform a data migration
  */
-Hooks.once("ready", function() {
+Hooks.once("ready", async function() {
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on("hotbarDrop", (bar, data, slot) => {
     if ( ["ActiveEffect", "Activity", "Item"].includes(data.type) ) {
@@ -580,7 +585,19 @@ Hooks.once("ready", function() {
     dnd5e.ui.calendar.render({ force: true });
   }
 
-  // Determine whether a system migration is required and feasible
+  // Run migrations
+  await _handleMigration();
+
+  // Handle post-import actions for quickstarted adventures
+  applications.adventure.AdventureQuickstartDialog.handleQuickstart();
+});
+
+/* -------------------------------------------- */
+
+/**
+ * Determine whether a system migration is required and feasible and run it.
+ */
+async function _handleMigration() {
   if ( !game.user.isGM ) return;
   const cv = game.settings.get("dnd5e", "systemMigrationVersion") || game.world.flags.dnd5e?.version;
   const totalDocuments = game.actors.size + game.scenes.size + game.items.size;
@@ -596,8 +613,8 @@ Hooks.once("ready", function() {
   if ( cv && foundry.utils.isNewerVersion(game.system.flags.compatibleMigrationVersion, cv) ) {
     ui.notifications.error("MIGRATION.5eVersionTooOldWarning", {localize: true, permanent: true});
   }
-  migrations.migrateWorld();
-});
+  await migrations.migrateWorld();
+}
 
 /* -------------------------------------------- */
 /*  System Styling                              */
