@@ -61,6 +61,12 @@
 /* -------------------------------------------- */
 
 /**
+ * @typedef {"none"|"createCombatants"|"rollInitiative"} EncounterPlacementSettingData
+ */
+
+/* -------------------------------------------- */
+
+/**
  * @typedef PrimaryPartySettingData
  * @property {Actor5e} actor  Group actor representing the primary party.
  */
