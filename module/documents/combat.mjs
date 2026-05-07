@@ -131,6 +131,40 @@ export default class Combat5e extends Combat {
   }
 
   /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onExit(combatant) {
+    await super._onExit(combatant);
+    const actor = combatant.actor;
+    if ( !actor ) return;
+    // TODO: Use data model instead of flag
+    const batchDelete = [{
+      action: "delete",
+      documentName: "ActiveEffect",
+      ids: [],
+      parent: actor
+    }];
+    for ( const effect of actor.effects ) {
+      if ( effect.duration.expired || effect.flags.dnd5e?.specialDuration ) batchDelete[0].ids.push(effect.id);
+    }
+    for ( const item of actor.items ) {
+      const toDelete = [];
+      for ( const effect of item.effects ) {
+        if ( effect.isAppliedEnchantment && (effect.duration.expired || effect.flags.dnd5e?.specialDuration) ) {
+          toDelete.push(effect.id);
+        }
+      }
+      if ( toDelete.length ) batchDelete.push({
+        action: "delete",
+        documentName: "ActiveEffect",
+        ids: toDelete,
+        parent: item
+      });
+    }
+    foundry.documents.modifyBatch(batchDelete);
+  }
+
+  /* -------------------------------------------- */
   /*  Helpers                                     */
   /* -------------------------------------------- */
 

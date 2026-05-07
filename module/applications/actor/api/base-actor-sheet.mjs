@@ -249,6 +249,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       return arr;
     }, []);
 
+    // TODO: Account for v14's duration labels & our custom start/end of next turn expiries
     for ( const category of Object.values(context.effects) ) {
       category.effects = await category.effects.reduce(async (arr, effect) => {
         effect.updateDuration();
