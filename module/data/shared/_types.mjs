@@ -32,6 +32,7 @@
  * @property {object} custom
  * @property {boolean} custom.enabled  Should the custom formula be used?
  * @property {string} custom.formula   Custom damage formula.
+ * @property {Set<string>} modifiers   Modifiers to apply to damage roll.
  * @property {object} scaling
  * @property {string} scaling.mode     How the damage scales in relation with levels.
  * @property {number} scaling.number   Number of dice to add per scaling level.

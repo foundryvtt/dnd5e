@@ -35,6 +35,7 @@ export class DamageData extends foundry.abstract.DataModel {
         enabled: new BooleanField(),
         formula: new FormulaField()
       }),
+      modifiers: new SetField(new StringField()),
       scaling: new SchemaField({
         mode: new StringField(),
         number: new NumberField({ initial: 1, min: 0, integer: true }),
@@ -52,7 +53,7 @@ export class DamageData extends foundry.abstract.DataModel {
    * @type {string}
    */
   get formula() {
-    if ( this.custom.enabled ) return this.custom.formula ?? "";
+    if ( this.custom.enabled ) return this._manualFormula();
     return this._automaticFormula();
   }
 
@@ -61,15 +62,19 @@ export class DamageData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
-   * Produce the auto-generated formula from the `number`, `denomination`, and `bonus`.
-   * @param {number} [increase=0]  Amount to increase the die count.
+   * Produce the auto-generated formula from the `number`, `denomination`, `modifiers`, and `bonus`.
+   * @param {number} [increase=0]              Amount to increase the die count.
+   * @param {object} [options={}]
+   * @param {Set<string>} [options.modifiers]  Additional modifiers to apply to the formula, if possible.
    * @returns {string}
    * @protected
    */
-  _automaticFormula(increase=0) {
+  _automaticFormula(increase=0, { modifiers }={}) {
     let formula;
     const number = (this.number ?? 0) + increase;
-    if ( number && this.denomination ) formula = `${number}d${this.denomination}`;
+    if ( number && this.denomination ) {
+      formula = `${number}d${this.denomination}${Array.from(this.modifiers).concat(modifiers ?? []).join("")}`;
+    }
     if ( this.bonus ) formula = formula ? `${formula} + ${this.bonus}` : this.bonus;
     return formula ?? "";
   }
@@ -77,11 +82,28 @@ export class DamageData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
+   * Produce the manual formula from the `custom.formula` and `modifiers` (if possible).
+   * @param {object} [options={}]
+   * @param {Set<string>} [options.modifiers]  Additional modifiers to apply to the formula, if possible.
+   * @returns {string}
+   * @protected
+   */
+  _manualFormula({ modifiers }={}) {
+    if ( !this.custom.formula ) return "";
+    modifiers = Array.from(this.modifiers).concat(modifiers ?? []).join("");
+    return this.custom.formula.replace(/(?:\d|\))d(?:\d+\w*|\(.+\)\d*\w*)/, `$&${modifiers}`);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Scale the damage by a number of steps using its configured scaling configuration.
-   * @param {number|Scaling} increase  Number of steps above base damage to scaling.
+   * @param {number|Scaling} increase          Number of steps above base damage to scaling.
+   * @param {object} [options={}]
+   * @param {Set<string>} [options.modifiers]  Additional modifiers to apply to the formula, if possible.
    * @returns {string}
    */
-  scaledFormula(increase) {
+  scaledFormula(increase, { modifiers }={}) {
     if ( increase instanceof Scaling ) increase = increase.increase;
 
     switch ( this.scaling.mode ) {
@@ -89,16 +111,16 @@ export class DamageData extends foundry.abstract.DataModel {
       case "half": increase = Math.floor(increase * .5); break;
       default: increase = 0; break;
     }
-    if ( !increase ) return this.formula;
+    if ( !increase ) return this.custom.enabled ? this._manualFormula() : this._automaticFormula(0, { modifiers });
     let formula;
 
     // If dice count scaling, increase the count on the first die rolled
     const dieIncrease = (this.scaling.number ?? 0) * increase;
     if ( this.custom.enabled ) {
-      formula = this.custom.formula;
+      formula = this._manualFormula({ modifiers });
       formula = formula.replace(/^(\d)+d/, (match, number) => `${Number(number) + dieIncrease}d`);
     } else {
-      formula = this._automaticFormula(dieIncrease);
+      formula = this._automaticFormula(dieIncrease, { modifiers });
     }
 
     // If custom scaling included, modify to match increase and append for formula
