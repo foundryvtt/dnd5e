@@ -1,6 +1,6 @@
 import ActivitySheet from "../../applications/activity/activity-sheet.mjs";
 import ActivityUsageDialog from "../../applications/activity/activity-usage-dialog.mjs";
-import AbilityTemplate from "../../canvas/ability-template.mjs";
+import TemplatePlacement from "../../canvas/template-placement.mjs";
 import { ConsumptionError } from "../../data/activity/fields/consumption-targets-field.mjs";
 import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
 import { formatNumber, getSceneTargets, getTargetDescriptors, localizeSchema } from "../../utils.mjs";
@@ -1111,10 +1111,8 @@ export default function ActivityMixin(Base) {
     async #placeTemplate() {
       const templates = [];
       try {
-        for ( const template of AbilityTemplate.fromActivity(this) ) {
-          const result = await template.drawPreview();
-          if ( result ) templates.push(result);
-        }
+        const result = await TemplatePlacement.fromActivity(this);
+        if ( result ) templates.push(...result);
       } catch(err) {
         Hooks.onError("Activity#placeTemplate", err, {
           msg: game.i18n.localize("DND5E.TARGET.Warning.PlaceTemplate"),

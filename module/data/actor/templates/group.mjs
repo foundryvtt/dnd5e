@@ -66,8 +66,6 @@ export default class GroupTemplate extends ActorDataModel.mixin(CurrencyTemplate
     if ( !game.user.isGM || !canvas.scene ) return;
     const members = await this.getPlaceableMembers();
     if ( !members.length ) return;
-    const minimized = !this.parent.sheet.minimized;
-    await this.parent.sheet.minimize();
     const tokensData = [];
 
     try {
@@ -90,8 +88,6 @@ export default class GroupTemplate extends ActorDataModel.mixin(CurrencyTemplate
         log: "error",
         notify: "error"
       });
-    } finally {
-      if ( minimized ) this.parent.sheet.maximize();
     }
 
     await canvas.scene.createEmbeddedDocuments("Token", tokensData);

@@ -159,10 +159,6 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
     }
 
     const tokensData = [];
-    const sheet = this.actor?.sheet;
-    const { windowId } = (sheet?.parent ?? sheet)?.window ?? {};
-    const minimize = (game.release.generation < 14 || !windowId) && !sheet?._minimized;
-    if ( minimize ) await sheet?.minimize();
     try {
       // Figure out where to place the summons
       const placements = await this.getPlacement(actor.prototypeToken, profile, options);
@@ -204,8 +200,12 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
 
         tokensData.push(tokenData);
       }
-    } finally {
-      if ( minimize ) sheet?.maximize();
+    } catch(err) {
+      Hooks.onError("SummonActivity#placeSummons", err, {
+        msg: game.i18n.localize("DND5E.SUMMON.Warning.PlaceTokens"),
+        log: "error",
+        notify: "error"
+      });
     }
 
     const createdTokens = await canvas.scene.createEmbeddedDocuments("Token", tokensData, {
