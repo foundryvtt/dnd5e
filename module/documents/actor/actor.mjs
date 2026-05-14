@@ -1151,6 +1151,37 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
+   * Create a chat message for this actor with a prompt to end concentration.
+   * @returns {Promise<ChatMessage5e|null>}  A promise that resolves to the created chat message.
+   */
+  async promptConcentrationEnd() {
+    const isConcentrating = this.concentration.effects.size > 0;
+    if ( !isConcentrating ) return null;
+
+    const label = `<i class="fa-solid fa-ban" inert></i>${
+      game.i18n.localize("DND5E.ConcentrationBreak")
+    }`;
+
+    return ChatMessage.implementation.create({
+      content: await foundry.applications.handlebars.renderTemplate(
+        "systems/dnd5e/templates/chat/roll-request-card.hbs",
+        {
+          buttons: [{
+            dataset: { action: "endConcentration", actorUuid: this.uuid, visibility: "all" },
+            buttonLabel: label,
+            hiddenLabel: label
+          }]
+        }
+      ),
+      whisper: game.users.filter(user => this.testUserPermission(user, "OWNER")),
+      speaker: ChatMessage.implementation.getSpeaker({ actor: this })
+    });
+  }
+ 
+
+  /* -------------------------------------------- */
+
+  /**
    * Determine whether the provided ability is usable for remarkable athlete.
    * @param {string} ability  Ability type to check.
    * @returns {boolean}       Whether the actor has the remarkable athlete flag and the ability is physical.

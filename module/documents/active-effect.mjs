@@ -607,8 +607,11 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /** @inheritDoc */
   async _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
-    if ( userId === game.userId ) {
-      if ( this.active && (this.parent instanceof Actor) ) await this.createRiderConditions();
+    if ( userId === game.userId ) {       
+      if ( this.active && (this.parent instanceof Actor) ) {
+        await this.createRiderConditions();
+        if ( this._shouldPromptConcentrationEnd() ) await this.parent.promptConcentrationEnd();
+      }
       if ( this.isAppliedEnchantment ) await this.createRiderEnchantments(options);
     }
     if ( options.chatMessageOrigin ) {
@@ -721,6 +724,20 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     if ( item.type === "spell" ) effectData["flags.dnd5e.spellLevel"] = item.system.level;
 
     return effectData;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine whether this effect applies a status that should prompt concentration to end.
+   * @returns {boolean}
+   * @protected
+   */
+  _shouldPromptConcentrationEnd() {
+    if ( !this.active || !(this.parent instanceof Actor) ) return false;
+    if ( game.settings.get("dnd5e", "disableConcentration") || !this.parent.concentration.effects.size ) return false;
+
+    return this.statuses.has("dead") || this.statuses.has("incapacitated");
   }
 
   /* -------------------------------------------- */
