@@ -34,11 +34,7 @@ export default class TeleportSheet extends ActivitySheet {
 
   /* -------------------------------------------- */
 
-  /**
-   * Prepare the tab information for the sheet.
-   * @returns {Record<string, Partial<ApplicationTab>>}
-   * @protected
-   */
+  /** @inheritDoc */
   _getTabs() {
     const tabs = super._getTabs();
     tabs.effect.label = "DND5E.TELEPORT.SECTIONS.Teleport";
