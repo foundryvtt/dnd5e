@@ -2743,8 +2743,8 @@ items:
           one level 2 spell slot or two level 1 spell slots.</p><p>Once you use
           this feature, you can't do so again until you finish a Long
           Rest.</p><p><strong>Combined Level Available:</strong>
-          [[(@classes.wizard.levels / 2)]]</p><section
-          id="secret-cO6X083GFJ1W4071" class="secret"><p><strong>Foundry
+          [[ceil(@classes.wizard.levels / 2)]]</p><section class="secret"
+          id="secret-cO6X083GFJ1W4071"><p><strong>Foundry
           Note</strong></p><p>Since you can select the slots you will have to
           manually adjust your available slots. This feature can be used to
           track the one-time use though.</p></section>
@@ -2770,7 +2770,66 @@ items:
         items: []
       properties: []
       requirements: ''
-      activities: {}
+      activities:
+        eSo3M84A3t6rwozM:
+          type: utility
+          name: Recover
+          img: ''
+          sort: 0
+          activation:
+            type: shortRest
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling: {}
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: self
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          roll:
+            prompt: false
+            visible: false
+            formula: ceil(@classes.wizard.levels / 2)
+            name: Combined Spell Levels
+          _id: eSo3M84A3t6rwozM
       enchant: {}
       identifier: arcane-recovery
       advancement: {}
@@ -2787,8 +2846,9 @@ items:
       exportSource: null
       coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 5.3.2
+      lastModifiedBy: dnd5ebuilder0000
+      modifiedTime: 1778017247801
     sort: 0
     ownership:
       default: 0

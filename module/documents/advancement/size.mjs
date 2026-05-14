@@ -37,14 +37,16 @@ export default class SizeAdvancement extends Advancement {
    */
   get automaticHint() {
     if ( !this.configuration.sizes.size ) return "";
-    if ( this.configuration.sizes.size === 1 ) return game.i18n.format("DND5E.ADVANCEMENT.Size.DefaultHint.Single", {
-      size: CONFIG.DND5E.actorSizes[this.configuration.sizes.first()].label
-    });
+    if ( this.configuration.sizes.size === 1 ) {
+      return `<p>${game.i18n.format("DND5E.ADVANCEMENT.Size.DefaultHint.Single", {
+        size: CONFIG.DND5E.actorSizes[this.configuration.sizes.first()].label
+      })}</p>`;
+    }
 
     const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "disjunction" });
-    return game.i18n.format("DND5E.ADVANCEMENT.Size.DefaultHint.Multiple", {
+    return `<p>${game.i18n.format("DND5E.ADVANCEMENT.Size.DefaultHint.Multiple", {
       sizes: listFormatter.format(this.configuration.sizes.map(s => CONFIG.DND5E.actorSizes[s].label))
-    });
+    })}</p>`;
   }
 
   /* -------------------------------------------- */

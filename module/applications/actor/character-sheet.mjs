@@ -754,7 +754,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       let title;
       let reference;
       if ( type === "tool" ) {
-        reference = Trait.getBaseItemUUID(CONFIG.DND5E.tools[id]?.id);
+        reference = Trait.getBaseItemUUID(CONFIG.DND5E.tools[id]?.id ?? "");
         ({ img, name: title } = Trait.getBaseItem(reference, { indexOnly: true }));
       }
       else if ( type === "skill" ) ({ icon: img, label: title, reference } = CONFIG.DND5E.skills[id]);

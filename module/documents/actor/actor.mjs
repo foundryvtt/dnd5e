@@ -1710,7 +1710,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         content: game.i18n.format(details.chatString, { name: this.name }),
         speaker: messageConfig.speaker ?? ChatMessage.getSpeaker({ actor: this })
       };
-      ChatMessage.applyRollMode(chatData, messageConfig.rollMode ?? game.settings.get("core", "rollMode"));
+      ChatMessage.applyRollMode(chatData, messageConfig.rollMode ?? CONFIG.Dice.BasicRoll.getMessageMode());
       resultsMessage = await ChatMessage.create(chatData);
     }
 
@@ -1896,7 +1896,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( !config.rolls[0] ) return;
 
     // Display the roll configuration dialog
-    const messageOptions = { rollMode: game.settings.get("core", "rollMode") };
+    const messageOptions = { rollMode: CONFIG.Dice.BasicRoll.getMessageMode() };
     if ( config.rolls[0].options?.fixed === undefined ) {
       const dialogConfig = foundry.utils.mergeObject({
         options: { title: game.i18n.localize("DND5E.InitiativeRoll") }
@@ -2010,7 +2010,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     const flavor = game.i18n.localize("DND5E.HitDiceRoll");
     const messageConfig = foundry.utils.mergeObject({
-      rollMode: game.settings.get("core", "rollMode"),
+      rollMode: CONFIG.Dice.BasicRoll.getMessageMode(),
       data: {
         speaker: ChatMessage.implementation.getSpeaker({actor: this}),
         flavor,
@@ -2422,7 +2422,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( config.request ) foundry.utils.setProperty(chatData, "flags.dnd5e.requestResult", {
       actorUuid: this.uuid, requestId: config.request.id
     });
-    ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
+    ChatMessage.applyRollMode(chatData, CONFIG.Dice.BasicRoll.getMessageMode());
     return ChatMessage.create(chatData);
   }
 
@@ -3401,6 +3401,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /** @inheritDoc */
   async _onCreateDescendantDocuments(parent, collection, documents, data, options, userId) {
+    super._onCreateDescendantDocuments(parent, collection, documents, data, options, userId);
     if ( userId === game.userId ) {
       if ( (collection === "effects") && documents.find(d => d.id === ActiveEffect5e.ID.EXHAUSTION)
         && !this._source.system.attributes?.exhaustion ) {
@@ -3408,16 +3409,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       }
       if ( collection === "items" ) await this.updateEncumbrance(options);
     }
-    super._onCreateDescendantDocuments(parent, collection, documents, data, options, userId);
   }
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
   async _onUpdateDescendantDocuments(parent, collection, documents, changes, options, userId) {
-    if ( (userId === game.userId) && (collection === "items") ) await this.updateEncumbrance(options);
     super._onUpdateDescendantDocuments(parent, collection, documents, changes, options, userId);
-
+    if ( (userId === game.userId) && (collection === "items") ) await this.updateEncumbrance(options);
     if ( collection === "items" ) {
       const refreshBars = documents.some((doc, index) => {
         return doc.hasLimitedUses && foundry.utils.hasProperty(changes[index], "system.uses.spent");
@@ -3430,6 +3429,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /** @inheritDoc */
   async _onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId) {
+    super._onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId);
     if ( userId === game.userId ) {
       if ( (collection === "effects") && ids.includes(ActiveEffect5e.ID.EXHAUSTION) ) {
         await this.update({ "system.attributes.exhaustion": 0 });
@@ -3437,7 +3437,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       if ( collection === "items" ) await this.updateEncumbrance(options);
       await this._clearFavorites(documents);
     }
-    super._onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId);
   }
 
   /* -------------------------------------------- */

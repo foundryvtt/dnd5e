@@ -233,8 +233,9 @@ export default class RollConfigurationDialog extends Dialog5e {
         label: game.i18n.localize("DND5E.RollMode"), blank: false, required: true
       }),
       name: "rollMode",
-      value: this.message.rollMode ?? this.options.default?.rollMode ?? game.settings.get("core", "rollMode"),
-      options: Object.entries(CONFIG.Dice.rollModes)
+      value: this.message.rollMode ?? this.options.default?.rollMode ?? CONFIG.Dice.BasicRoll.getMessageMode(),
+      options: Object.entries(game.release.generation < 14 ? CONFIG.Dice.rollModes : CONFIG.ChatMessage.modes)
+        .filter(([k]) => k !== "ic")
         .map(([value, l]) => ({ value, label: game.i18n.localize(l.label) }))
     }];
     return context;

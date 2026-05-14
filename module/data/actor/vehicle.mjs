@@ -297,7 +297,7 @@ export default class VehicleData extends CommonTemplate {
     const crew = this.crew.value.length;
 
     if ( !actions.stations && actions.max ) {
-      for ( let i = actions; i--; actions.max-- ) {
+      for ( let i = actions.max; i--; actions.max-- ) {
         const threshold = actions.thresholds[i];
         if ( Number.isFinite(threshold) && (crew >= threshold) ) break;
       }

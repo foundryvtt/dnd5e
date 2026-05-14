@@ -1,4 +1,5 @@
 import RollConfigurationDialog from "../applications/dice/roll-configuration-dialog.mjs";
+import BasicDie from "./basic-die.mjs";
 
 const { DiceTerm, NumericTerm } = foundry.dice.terms;
 
@@ -242,7 +243,7 @@ export default class BasicRoll extends Roll {
       if ( !roll._evaluated ) await roll.evaluate({ allowInteractive: rollMode !== CONST.DICE_ROLL_MODES.BLIND });
       rollMode ??= roll.options.rollMode;
     }
-    rollMode ??= game.settings.get("core", "rollMode");
+    rollMode ??= BasicRoll.getMessageMode();
 
     // Prepare chat data
     messageData = foundry.utils.mergeObject({ sound: CONFIG.sounds.dice }, messageData);
@@ -278,6 +279,9 @@ export default class BasicRoll extends Roll {
   /** @inheritDoc */
   async evaluate(options={}) {
     this.preCalculateDiceTerms(options);
+    for ( const term of this.terms ) {
+      if ( term instanceof BasicDie ) term.expandAdvantage();
+    }
     return super.evaluate(options);
   }
 
@@ -286,6 +290,9 @@ export default class BasicRoll extends Roll {
   /** @inheritDoc */
   evaluateSync(options={}) {
     this.preCalculateDiceTerms(options);
+    for ( const term of this.terms ) {
+      if ( term instanceof BasicDie ) term.expandAdvantage();
+    }
     return super.evaluateSync(options);
   }
 
@@ -423,6 +430,18 @@ export default class BasicRoll extends Roll {
 
   /* -------------------------------------------- */
   /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Retrieve the message mode to use, treating in-character as public by default.
+   * @param {boolean} [ignoreIC=true]  Ignore in-character message mode.
+   * @returns {string}}
+   */
+  static getMessageMode(ignoreIC=true) {
+    const mode = game.settings.get("core", game.release.generation < 14 ? "rollMode" : "messageMode");
+    return ignoreIC && (mode === "ic") ? "public" : mode;
+  }
+
   /* -------------------------------------------- */
 
   /**

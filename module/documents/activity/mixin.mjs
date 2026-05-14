@@ -796,7 +796,7 @@ export default function ActivityMixin(Base) {
           title: `${this.item.name} - ${this.name}`,
           type: "usage"
         },
-        rollMode: game.settings.get("core", "rollMode")
+        rollMode: CONFIG.Dice.BasicRoll.getMessageMode()
       }, message);
 
       /**
