@@ -194,29 +194,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  apply(doc, change) {
-    // Apply shims to moved fields
-    change = this._applyChangeShim(change);
-
-    // Ensure changes targeting flags use the proper types
-    if ( change.key.startsWith("flags.dnd5e.") ) change = this._prepareFlagChange(doc, change);
-
-    // Properly handle formulas that don't exist as part of the data model
-    if ( ActiveEffect5e.FORMULA_FIELDS.has(change.key) ) {
-      const field = new FormulaField({ deterministic: change.key !== "system.damageBonus" });
-      return { [change.key]: this.constructor.applyChangeField(doc, change, { field }) };
-    }
-
-    // Handle activity-targeted changes
-    if ( (change.key.startsWith("activities[") || change.key.startsWith("system.activities."))
-      && (doc instanceof Item) ) return this.applyActivity(doc, change);
-
-    return super.apply(doc, change);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
   static applyChange(model, change, options={}) {
     change = change.effect._applyChangeShim(change);
     if ( change.key.startsWith("flags.dnd5e.") ) change = change.effect._prepareFlagChange(model, change);

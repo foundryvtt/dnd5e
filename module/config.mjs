@@ -3189,19 +3189,6 @@ DND5E.SPELL_LISTS = Object.freeze([
 /* -------------------------------------------- */
 
 /**
- * @ignore
- */
-DND5E.spellProgression = new Proxy({}, {
-  set() {
-    foundry.utils.logCompatibilityWarning("CONFIG.DND5E.spellProgression is read-only. Spell progressions must be set "
-      + "on CONFIG.DND5E.spellcasting instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
-    return true;
-  }
-});
-
-/* -------------------------------------------- */
-
-/**
  * Valid spell levels.
  * @enum {string}
  */
