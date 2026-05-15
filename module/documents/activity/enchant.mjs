@@ -173,6 +173,7 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
     const flags = { enchantmentProfile: profile };
     if ( concentration ) flags.dependentOn = concentration.uuid;
     const enchantmentData = effect.clone({ origin: this.uuid, "flags.dnd5e": flags }).toObject();
+    // TODO: mutate `enchantmentData.changes` for granter/grantee rolldata.
 
     /**
      * Hook that fires before an enchantment is applied to an item.
