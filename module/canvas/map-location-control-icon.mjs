@@ -52,7 +52,7 @@ export default class MapLocationControlIcon extends ControlIcon {
     super._clear();
     this.extrude.clear();
     this.shadow.clear();
-    this.text.clear();
+    this.text.text = "";
   }
 
   /* -------------------------------------------- */
@@ -86,6 +86,7 @@ export default class MapLocationControlIcon extends ControlIcon {
       .endFill();
 
     // Text
+    this.text.text = this.code;
     this.text.style = this._getTextStyle(this.code.length, this.size);
     this.text.anchor.set(0.5, 0.5);
     this.text.position.set(this.radius, this.radius);
