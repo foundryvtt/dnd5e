@@ -149,7 +149,7 @@ export default class ScaleValueConfig extends AdvancementConfig {
     if ( typeChange && (submitData.configuration.type !== this.advancement.configuration.type) ) {
       // Clear existing scale value data to prevent error during type update
       await this.advancement.update(Array.fromRange(CONFIG.DND5E.maxLevel, 1).reduce((obj, lvl) => {
-        obj[`configuration.scale.-=${lvl}`] = null;
+        obj[`configuration.scale.${lvl}`] = _del;
         return obj;
       }, {}));
       submitData.configuration.scale ??= {};

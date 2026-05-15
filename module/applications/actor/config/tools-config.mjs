@@ -76,7 +76,7 @@ export default class ToolsConfig extends TraitsConfig {
       const key = k.split(".")[2];
       const tool = this.document.system._source.tools[key];
       const config = CONFIG.DND5E.tools[key];
-      if ( tool && !value ) obj[`system.tools.-=${key}`] = null;
+      if ( tool && !value ) obj[`system.tools.${key}`] = _del;
       else if ( !tool && value ) obj[`system.tools.${key}`] = { value, ability: config?.ability || "int" };
       else if ( value ) obj[`system.tools.${key}.value`] = value;
       return obj;

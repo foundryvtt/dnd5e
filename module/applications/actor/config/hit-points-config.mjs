@@ -66,7 +66,7 @@ export default class HitPointsConfig extends BaseConfigSheet {
     };
     for ( const [key, value] of Object.entries(context.effects) ) {
       context.effects[key] = value
-        .filter(e => e.mode === CONST.ACTIVE_EFFECT_MODES.ADD)
+        .filter(e => e.type === "add")
         .map(e => ({ ...e, anchor: e.document.toAnchor().outerHTML}));
     }
 

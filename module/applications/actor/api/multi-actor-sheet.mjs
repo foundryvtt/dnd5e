@@ -194,13 +194,13 @@ export default class MultiActorSheet extends BaseActorSheet {
    */
   _getEntryContextOptions() {
     return [{
-      name: "DND5E.Group.Action.View",
+      label: "DND5E.Group.Action.View",
       icon: '<i class="fa-solid fa-eye"></i>',
-      callback: async li => (await fromUuid(li.dataset.uuid))?.sheet.render(true)
+      onClick: async (_, target) => (await fromUuid(target.dataset.uuid))?.sheet.render({ force: true })
     }, {
-      name: "DND5E.Group.Action.Remove",
+      label: "DND5E.Group.Action.Remove",
       icon: '<i class="fa-solid fa-xmark"></i>',
-      callback: async li => this.actor.system.removeMember(await fromUuid(li.dataset.uuid))
+      onClick: async (_, target) => this.actor.system.removeMember(await fromUuid(target.dataset.uuid))
     }];
   }
 

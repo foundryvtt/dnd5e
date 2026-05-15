@@ -36,9 +36,8 @@
 
 <div class="field-group">
     {{ formField fields.types name=(concat prefix "types") value=source.types options=typeOptions hint=false
-                 disabled=locked label="DND5E.Type" localize=true classes="label-top multi-select"
+                 label="DND5E.Type" localize=true classes="label-top multi-select"
                  rootId=@root.partId }}
-    <!-- TODO: This disabled is only necessary because of https://github.com/foundryvtt/foundryvtt/issues/11564 -->
 </div>
 
 {{#if canScale}}

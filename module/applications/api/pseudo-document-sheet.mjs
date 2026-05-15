@@ -145,8 +145,7 @@ export default class PseudoDocumentSheet extends Application5e {
     frame.autocomplete = "off";
 
     // Add document ID copy
-    const copyLabel = game.i18n.localize(game.release.generation < 14
-        ? "SHEETS.CopyUuid" : "APPLICATION.ACTIONS.CopyUuid");
+    const copyLabel = game.i18n.localize("APPLICATION.ACTIONS.CopyUuid");
     const copyId = `<button type="button" class="header-control fa-solid fa-passport icon" data-action="copyUuid"
                             data-tooltip aria-label="${copyLabel}" draggable="true"></button>`;
     this.window.close.insertAdjacentHTML("beforebegin", copyId);
@@ -213,12 +212,7 @@ export default class PseudoDocumentSheet extends Application5e {
    * @returns {object}
    */
   _prepareSubmitData(event, formData) {
-    const submitData = foundry.utils.expandObject(formData.object);
-    // Workaround for https://github.com/foundryvtt/foundryvtt/issues/11610
-    this.element.querySelectorAll("fieldset legend :is(input, select, dnd5e-checkbox)").forEach(input => {
-      foundry.utils.setProperty(submitData, input.name, input.value);
-    });
-    return submitData;
+    return foundry.utils.expandObject(formData.object);
   }
 
   /* -------------------------------------------- */

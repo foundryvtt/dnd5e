@@ -105,6 +105,8 @@ export class SpellcastingModel extends foundry.abstract.DataModel {
         CONFIG.DND5E.spellProgression[k] = { ...v, type: key };
       });
     });
+
+    Object.freeze(CONFIG.DND5E.spellProgression);
   }
 
   /* -------------------------------------------- */

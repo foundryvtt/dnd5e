@@ -238,18 +238,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       foundry.utils.setProperty(source, "flags.dnd5e.persistSourceMigration", true);
     }
 
-    source = super._initializeSource(source, options);
-    const pack = game.packs.get(options.pack);
-    if ( !source._id || !pack || !game.compendiumArt.enabled ) return source;
-    const uuid = pack.getUuid(source._id);
-    const art = game.dnd5e.moduleArt.map.get(uuid);
-    if ( art?.actor || art?.token ) {
-      if ( art.actor ) source.img = art.actor;
-      if ( typeof art.token === "string" ) source.prototypeToken.texture.src = art.token;
-      else if ( art.token ) foundry.utils.mergeObject(source.prototypeToken, art.token);
-      Actor5e.applyCompendiumArt(source, pack, art);
-    }
-    return source;
+    return super._initializeSource(source, options);
   }
 
   /* -------------------------------------------- */
@@ -348,7 +337,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /** @inheritDoc */
   applyActiveEffects(phase) {
-    if ( game.release.generation < 14 ) phase ??= "initial";
     if ( (this.system?.prepareEmbeddedData instanceof Function) && (phase === "initial") ) {
       this.system.prepareEmbeddedData();
     }
@@ -626,21 +614,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const model = CONFIG.DND5E.spellcasting[type];
     if ( (allowed === false) || !model.slots ) return;
 
-    // Check for deprecated overrides.
-    if ( model.isSingleLevel ) {
-      if ( foundry.utils.getDefiningClass(this, "computePactProgression") !== Actor5e ) {
-        foundry.utils.logCompatibilityWarning("Actor5e.computePactProgression is deprecated. Please use "
-          + "SpellcastingModel#computeProgression instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
-        this.computePactProgression(progression, actor, cls, spellcasting, count);
-        return;
-      }
-    } else if ( foundry.utils.getDefiningClass(this, "computeLeveledProgression") !== Actor5e ) {
-      foundry.utils.logCompatibilityWarning("Actor5e.computeLeveledProgression is deprecated. Please use "
-        + "SpellcastingModel#computeProgression instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
-      this.computeLeveledProgression(progression, actor, cls, spellcasting, count);
-      return;
-    }
-
     // Otherwise proceed with calculation.
     model.computeProgression(progression, actor, cls, spellcasting, count);
   }
@@ -669,21 +642,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const allowed = Hooks.call(`dnd5e.prepare${type.capitalize()}Slots`, spells, actor, progression);
     if ( allowed === false ) return;
     const model = CONFIG.DND5E.spellcasting[type];
-
-    // Check for deprecated overrides.
-    if ( model.isSingleLevel ) {
-      if ( foundry.utils.getDefiningClass(this, "preparePactSlots") !== Actor5e ) {
-        foundry.utils.logCompatibilityWarning("Actor5e.preparePactSlots is deprecated. Please use "
-          + "SpellcastingModel#prepareSlots instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
-        this.preparePactSlots(spells, actor, progression);
-        return;
-      }
-    } else if ( foundry.utils.getDefiningClass(this, "prepareLeveledSlots") !== Actor5e ) {
-      foundry.utils.logCompatibilityWarning("Actor5e.prepareLeveledSlots is deprecated. Please use "
-        + "SpellcastingModel#prepareSlots instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
-      this.prepareLeveledSlots(spells, actor, progression);
-      return;
-    }
 
     // Otherwise proceed with calculation.
     model.prepareSlots(spells, actor, progression);
@@ -1679,7 +1637,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         content: game.i18n.format(details.chatString, { name: this.name }),
         speaker: messageConfig.speaker ?? ChatMessage.getSpeaker({ actor: this })
       };
-      ChatMessage.applyRollMode(chatData, messageConfig.rollMode ?? CONFIG.Dice.BasicRoll.getMessageMode());
+      ChatMessage.applyMode(chatData, messageConfig.rollMode ?? CONFIG.Dice.BasicRoll.getMessageMode());
       resultsMessage = await ChatMessage.create(chatData);
     }
 
@@ -2391,7 +2349,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( config.request ) foundry.utils.setProperty(chatData, "flags.dnd5e.requestResult", {
       actorUuid: this.uuid, requestId: config.request.id
     });
-    ChatMessage.applyRollMode(chatData, CONFIG.Dice.BasicRoll.getMessageMode());
+    ChatMessage.applyMode(chatData, CONFIG.Dice.BasicRoll.getMessageMode());
     return ChatMessage.create(chatData);
   }
 
@@ -2641,7 +2599,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( ac.calc === "flat" ) {
       attribution.push({
         label: game.i18n.localize("DND5E.ArmorClassFlat"),
-        mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+        type: "override",
         value: ac.flat
       });
       return new PropertyAttribution(this, attribution, "attributes.ac", { title }).renderTooltip();
@@ -2654,7 +2612,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       case "natural":
         attribution.push({
           label: game.i18n.localize("DND5E.ArmorClassNatural"),
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          type: "override",
           value: ac.flat
         });
         break;
@@ -2669,7 +2627,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
           if ( Number.isNumeric(value) ) base -= Number(value);
           attribution.push({
             label: match,
-            mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+            type: "add",
             value
           });
         }
@@ -2678,7 +2636,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         if ( armorInFormula ) label = this.armor?.name ?? game.i18n.localize("DND5E.ArmorClassUnarmored");
         attribution.unshift({
           label,
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          type: "override",
           value: base
         });
         break;
@@ -2687,7 +2645,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Shield
     if ( ac.shield !== 0 ) attribution.push({
       label: this.shield?.name ?? game.i18n.localize("DND5E.EquipmentShield"),
-      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+      type: "add",
       value: ac.shield
     });
 
@@ -2697,7 +2655,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Cover
     if ( ac.cover !== 0 ) attribution.push({
       label: game.i18n.localize("DND5E.Cover"),
-      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+      type: "add",
       value: ac.cover
     });
 
@@ -2725,10 +2683,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       if ( !source || e.disabled || e.isSuppressed ) continue;
       const value = e.changes.reduce((n, change) => {
         if ( (ActiveEffect5e.SHIM_FIELDS[change.key]?.key ?? change.key) !== target ) return n;
-        if ( change.mode !== CONST.ACTIVE_EFFECT_MODES.ADD ) return n;
+        if ( change.type !== "add" ) return n;
         return n + simplifyBonus(change.value, rollData);
       }, 0);
-      if ( value ) attributions.push({ value, label: source, document: e, mode: CONST.ACTIVE_EFFECT_MODES.ADD });
+      if ( value ) attributions.push({ value, label: source, document: e, type: "add" });
     }
     return attributions;
   }
@@ -2923,7 +2881,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
           }).toObject();
           profOverride.changes = [{
             key: "system.attributes.prof",
-            mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+            type: "override",
             value: source.system.attributes.prof
           }];
           d.effects.push(profOverride);
@@ -3261,42 +3219,40 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   static addDirectoryContextOptions(app, entryOptions) {
     if ( app instanceof foundry.applications.sidebar.apps.Compendium ) return;
     entryOptions.push({
-      name: "DND5E.TRANSFORM.Action.Restore",
+      label: "DND5E.TRANSFORM.Action.Restore",
       icon: '<i class="fa-solid fa-backward"></i>',
-      callback: li => {
-        const actor = game.actors.get(li.dataset.documentId ?? li.dataset.entryId);
-        return actor.revertOriginalForm();
-      },
-      condition: li => {
+      group: "system",
+      visible: li => {
         const allowed = game.settings.get("dnd5e", "allowPolymorphing");
         if ( !allowed && !game.user.isGM ) return false;
-        const actor = game.actors.get(li.dataset.documentId ?? li.dataset.entryId);
+        const actor = game.actors.get(li.dataset.entryId);
         return actor && actor.isPolymorphed;
       },
-      group: "system"
+      onClick: (_, target) => {
+        const actor = game.actors.get(target.dataset.entryId);
+        return actor.revertOriginalForm();
+      }
     }, {
-      name: "DND5E.Group.Primary.Set",
+      label: "DND5E.Group.Primary.Set",
       icon: '<i class="fa-solid fa-star"></i>',
-      callback: li => {
-        game.settings.set("dnd5e", "primaryParty", { actor: game.actors.get(li.dataset.documentId ?? li.dataset.entryId) });
-      },
-      condition: li => {
-        const actor = game.actors.get(li.dataset.documentId ?? li.dataset.entryId);
+      group: "system",
+      visible: li => {
+        const actor = game.actors.get(li.dataset.entryId);
         const primary = game.actors.party;
         return game.user.isGM && (actor?.type === "group") && (actor !== primary);
       },
-      group: "system"
+      onClick: (_, target) => game.settings.set("dnd5e", "primaryParty", {
+        actor: game.actors.get(target.dataset.entryId)
+      })
     }, {
-      name: "DND5E.Group.Primary.Remove",
+      label: "DND5E.Group.Primary.Remove",
       icon: '<i class="fa-regular fa-star"></i>',
-      callback: li => {
-        game.settings.set("dnd5e", "primaryParty", { actor: null });
-      },
-      condition: li => {
-        const actor = game.actors.get(li.dataset.documentId ?? li.dataset.entryId);
+      group: "system",
+      visible: li => {
+        const actor = game.actors.get(li.dataset.entryId);
         return game.user.isGM && (actor === game.actors.party);
       },
-      group: "system"
+      onClick: () => game.settings.set("dnd5e", "primaryParty", { actor: null })
     });
   }
 
@@ -3433,7 +3389,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   _clearFavorites(documents) {
     if ( !("favorites" in this.system) ) return;
-    const ids = new Set(documents.map(d => d.getRelativeUUID(this)));
+    const ids = new Set(documents.map(d => foundry.utils.buildRelativeUuid(d, this)));
     const favorites = this.system.favorites.filter(f => !ids.has(f.id));
     return this.update({ "system.favorites": favorites });
   }
@@ -3587,71 +3543,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   static getDefaultArtwork(actorData={}) {
     const img = CONFIG.DND5E.defaultArtwork.Actor[actorData.type];
     return img ? { img, texture: { src: img } } : super.getDefaultArtwork(actorData);
-  }
-
-  /* -------------------------------------------- */
-  /*  Deprecations                                */
-  /* -------------------------------------------- */
-
-  /**
-   * @deprecated since 5.1
-   * @ignore
-   */
-  static computeLeveledProgression(progression, actor, cls, spellcasting, count) {
-    foundry.utils.logCompatibilityWarning("Actor5e.computeLeveledProgression is deprecated. Please use "
-      + "SpellcastingModel#computeProgression instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
-    CONFIG.DND5E.spellcasting.spell.computeProgression(progression, actor, cls, spellcasting, count);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * @deprecated since 5.1
-   * @ignore
-   */
-  static computePactProgression(progression, actor, cls, spellcasting, count) {
-    foundry.utils.logCompatibilityWarning("Actor5e.computePactProgression is deprecated. Please use "
-      + "SpellcastingModel#computeProgression instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
-    CONFIG.DND5E.spellcasting.pact.computeProgression(progression, actor, cls, spellcasting, count);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * @deprecated since 5.1
-   * @ignore
-   */
-  static prepareAltSlots(spells, actor, progression, key, table) {
-    foundry.utils.logCompatibilityWarning("Actor.prepareAltSlots is deprecated. Please use "
-      + "SpellcastingModel#prepareSlots instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
-    const model = CONFIG.DND5E.spellcasting[key];
-    if ( !model ) return;
-    if ( table ) model.table = table;
-    model.prepareSlots(spells, actor, progression);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * @deprecated since 5.1
-   * @ignore
-   */
-  static prepareLeveledSlots(spells, actor, progression) {
-    foundry.utils.logCompatibilityWarning("Actor.prepareLeveledSlots is deprecated. Please use "
-      + "SpellcastingModel#prepareSlots instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
-    CONFIG.DND5E.spellcasting.spell.prepareSlots(spells, actor, progression);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * @deprecated since 5.1
-   * @ignore
-   */
-  static preparePactSlots(spells, actor, progression) {
-    foundry.utils.logCompatibilityWarning("Actor.preparePactSlots is deprecated. Please use "
-      + "SpellcastingModel#prepareSlots instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
-    CONFIG.DND5E.spellcasting.pact.prepareSlots(spells, actor, progression);
   }
 }
 

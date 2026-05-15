@@ -149,7 +149,7 @@ export default class AbilityTemplate extends foundry.canvas.placeables.MeasuredT
     // Hide the sheet that originated the preview
     const sheet = this.actorSheet;
     const { windowId } = (sheet?.parent ?? sheet)?.window ?? {};
-    this.#sheetMinimized = (game.release.generation < 14 || !windowId) && !sheet?._minimized;
+    this.#sheetMinimized = !windowId && !sheet?._minimized;
     if ( this.#sheetMinimized ) sheet?.minimize();
 
     // Activate interactivity
@@ -190,8 +190,7 @@ export default class AbilityTemplate extends foundry.canvas.placeables.MeasuredT
    * @param {Event} event  Triggering event that ended the placement.
    */
   async _finishPlacement(event) {
-    if ( game.release.generation < 14 ) this.layer._onDragLeftCancel(event);
-    else this.layer.clearPreviewContainer();
+    this.layer.clearPreviewContainer();
     canvas.stage.off("mousemove", this.#events.move);
     canvas.stage.off("mouseup", this.#events.confirm);
     canvas.app.view.oncontextmenu = null;

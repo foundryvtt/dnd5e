@@ -40,7 +40,7 @@ export class TokenConfig5e extends foundry.applications.sheets.TokenConfig {
   _addItemAttributes(attributes) {
     const actor = this.actor ?? this.object?.actor;
     const items = actor?.items.reduce((arr, i) => {
-      if ( i.hasLimitedUses ) arr.push([i.getRelativeUUID(actor), i.name]);
+      if ( i.hasLimitedUses ) arr.push([foundry.utils.buildRelativeUuid(i, actor), i.name]);
       return arr;
     }, []) ?? [];
     if ( items.length ) {

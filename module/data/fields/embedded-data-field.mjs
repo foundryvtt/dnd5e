@@ -1,12 +1,12 @@
 /**
  * Version of embedded data field that properly initializes data models added via active effects.
- * TODO: Remove when we can fully rely on https://github.com/foundryvtt/foundryvtt/issues/12528
  */
 export default class EmbeddedDataField5e extends foundry.data.fields.EmbeddedDataField {
-  /** @override */
-  _castChangeDelta(delta, replacementData={}) {
-    if ( game.release.generation > 13 ) return super._castChangeDelta(delta, replacementData);
-    if ( delta instanceof this.model ) return delta;
-    return this.initialize(this._cast(delta));
+  constructor(...args) {
+    foundry.utils.logCompatibilityWarning(
+      "`EmbeddedDataField5e` has been deprecated and should be replaced with core's `EmbeddedDataField`.",
+      { since: "DnD5e 6.0", until: "DnD5e 6.2" }
+    );
+    super(...args);
   }
 }

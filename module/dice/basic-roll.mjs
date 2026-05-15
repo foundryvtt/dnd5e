@@ -232,7 +232,7 @@ export default class BasicRoll extends Roll {
    * @param {BasicRoll[]} rolls              Rolls to add to the message.
    * @param {object} messageData             The data object to use when creating the message.
    * @param {options} [options]              Additional options which modify the created message.
-   * @param {string} [options.rollMode]      The template roll mode to use for the message from CONFIG.Dice.rollModes
+   * @param {string} [options.rollMode]      The roll mode to use for the message from `CONFIG.ChatMessage.modes`.
    * @param {boolean} [options.create=true]  Whether to automatically create the chat message, or only return the
    *                                         prepared chatData object.
    * @returns {Promise<ChatMessage|object>}  A promise which resolves to the created ChatMessage document if create is
@@ -257,7 +257,7 @@ export default class BasicRoll extends Roll {
     // Either create or return the data
     if ( create ) return cls.create(msg.toObject(), { rollMode });
     else {
-      if ( rollMode ) msg.applyRollMode(rollMode);
+      if ( rollMode ) msg.applyMode(rollMode);
       return msg.toObject();
     }
   }
@@ -438,7 +438,7 @@ export default class BasicRoll extends Roll {
    * @returns {string}}
    */
   static getMessageMode(ignoreIC=true) {
-    const mode = game.settings.get("core", game.release.generation < 14 ? "rollMode" : "messageMode");
+    const mode = game.settings.get("core", "messageMode");
     return ignoreIC && (mode === "ic") ? "public" : mode;
   }
 
