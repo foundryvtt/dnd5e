@@ -32,6 +32,10 @@ export default class UtilitySheet extends ActivitySheet {
       field: context.fields.roll.fields.prompt,
       value: context.source.roll.prompt,
       input: context.inputs.createCheckboxInput
+    }, {
+      field: context.fields.roll.fields.visible,
+      value: context.source.roll.visible,
+      input: context.inputs.createCheckboxInput
     });
     return context;
   }
