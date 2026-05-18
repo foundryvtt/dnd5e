@@ -98,12 +98,14 @@ export default class CheckActivity extends ActivityMixin(BaseCheckActivityData) 
     let { ability, dc, skill, tool } = target.dataset;
     dc = parseInt(dc);
     const rollData = { event, target: Number.isFinite(dc) ? dc : this.check.dc.value };
+    const bonusData = CONFIG.Dice.BasicRoll.constructParts({ activityBonus: this.check.bonus }, this.getRollData());
     if ( ability in CONFIG.DND5E.abilities ) rollData.ability = ability;
 
     for ( const token of targets ) {
       const actor = token instanceof Actor ? token : token.actor;
       const speaker = ChatMessage.getSpeaker({ actor, scene: canvas.scene, token: token.document });
       const messageData = { data: { speaker } };
+      if ( bonusData.parts.length ) rollData.rolls = [bonusData];
       if ( skill ) await actor.rollSkill({ ...rollData, skill }, {}, messageData);
       else if ( tool ) {
         rollData.tool = tool;
