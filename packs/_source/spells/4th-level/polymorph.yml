@@ -115,9 +115,64 @@ system:
         spent: 0
         recovery: []
       sort: 0
+    X06AwuyyIsMYwCIh:
+      type: transform
+      sort: 0
+      activation:
+        type: ''
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      profiles:
+        - cr: '@target.details.cr'
+          name: ''
+          _id: LHLfS5BSpourwoiO
+          sizes: []
+          types:
+            - beast
+          movement: []
+          level:
+            min: null
+            max: null
+      settings: null
+      transform:
+        customize: false
+        preset: polymorph
+      name: ''
+      _id: X06AwuyyIsMYwCIh
   identifier: polymorph
 sort: 0
-flags: {}
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
 img: icons/magic/control/energy-stream-link-large-teal.webp
 effects:
   - name: Polymorph
@@ -157,11 +212,11 @@ effects:
 folder: 5auWSClKMDUIV5Ni
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.346'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.1.0
   createdTime: 1725037345165
-  modifiedTime: 1725992716313
+  modifiedTime: 1753221628672
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!04nMsTWkIFvkbXlY'
