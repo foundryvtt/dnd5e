@@ -25,13 +25,18 @@ export default class ItemGrantFlow extends AdvancementFlow {
     const checked = new Set(Object.values(added ?? {}));
     return {
       optional: this.advancement.configuration.optional,
-      items: config.items.map(i => {
-        const item = foundry.utils.deepClone(fromUuidSync(i.uuid));
-        if ( !item ) return null;
-        item.checked = added ? checked.has(item.uuid) : (config.optional && !i.optional);
-        item.optional = config.optional || i.optional;
-        return item;
-      }, []).filter(i => i),
+      items: config.items
+        .map(i => {
+          const item = foundry.utils.deepClone(fromUuidSync(i.uuid));
+          if ( !item ) return null;
+          item.checked = added ? checked.has(item.uuid) : (config.optional && !i.optional);
+          item.optional = config.optional || i.optional;
+          item.sort = i.sort;
+          return item;
+        }, [])
+        .filter(_ => _)
+        .sort((lhs, rhs) => this.advancement.configuration.sorting === "m"
+          ? lhs.sort - rhs.sort : lhs.name.localeCompare(rhs.name)),
       abilities: this.getSelectAbilities()
     };
   }

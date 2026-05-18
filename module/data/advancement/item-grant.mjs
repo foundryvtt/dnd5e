@@ -1,6 +1,6 @@
 import SpellConfigurationData from "./spell-config.mjs";
 
-const { ArrayField, BooleanField, EmbeddedDataField, SchemaField, StringField } = foundry.data.fields;
+const { ArrayField, BooleanField, EmbeddedDataField, IntegerSortField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * @import { ItemGrantAdvancementConfigurationData } from "./_types.mjs";
@@ -26,10 +26,12 @@ export default class ItemGrantConfigurationData extends foundry.abstract.DataMod
   static defineSchema() {
     return {
       items: new ArrayField(new SchemaField({
-        uuid: new StringField(),
-        optional: new BooleanField()
+        optional: new BooleanField(),
+        sort: new IntegerSortField(),
+        uuid: new StringField()
       }), { required: true }),
       optional: new BooleanField({ required: true }),
+      sorting: new StringField({ initial: "m", choices: Folder.SORTING_MODES }),
       spell: new EmbeddedDataField(SpellConfigurationData, { required: true, nullable: true, initial: null })
     };
   }
