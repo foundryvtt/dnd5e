@@ -868,6 +868,8 @@ export default function ActivityMixin(Base) {
      */
     async rollDamage(config={}, dialog={}, message={}) {
       const rollConfig = this.getDamageConfig(config);
+      if (!rollConfig?.rolls?.length) return;
+      
       rollConfig.hookNames = [...(config.hookNames ?? []), "damage"];
       rollConfig.subject = this;
 
