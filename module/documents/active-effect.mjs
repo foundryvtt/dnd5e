@@ -732,6 +732,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     Hooks.on("renderTokenHUD", this.onTokenHUDRender);
     document.addEventListener("click", this.onClickTokenHUD.bind(this), { capture: true });
     document.addEventListener("contextmenu", this.onClickTokenHUD.bind(this), { capture: true });
+    document.addEventListener("auxclick", this.onAuxClickTokenHUD.bind(this), { capture: true });
   }
 
   /* -------------------------------------------- */
@@ -818,6 +819,26 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     const id = target.dataset?.statusId;
     if ( id === "exhaustion" ) ActiveEffect5e._manageExhaustion(event, actor);
     else if ( id === "concentrating" ) ActiveEffect5e._manageConcentration(event, actor);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prevent core TokenHUD right-button effect toggle from also firing for exhaustion.
+   * @param {PointerEvent} event
+   */
+  static onAuxClickTokenHUD(event) {
+    if ( event.button !== 2 ) return;
+    const { target } = event;
+    if ( !target?.classList?.contains("effect-control") ) return;
+
+    const id = target.dataset?.statusId;
+    if ( id !== "exhaustion" ) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation?.();
+    return false;
   }
 
   /* -------------------------------------------- */
