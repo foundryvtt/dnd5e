@@ -149,7 +149,8 @@ export default class EncounterData extends GroupTemplate {
   /** @override */
   async getPlaceableMembers() {
     return (await Promise.all((await this.getMembers()).map(async member => {
-      member.actor = await dnd5e.documents.Actor5e.fetchExisting(member.actor.uuid);
+      const fetchOptions = { folderId: this.parent.folder?.id ?? null };
+      member.actor = await dnd5e.documents.Actor5e.fetchExisting(member.actor.uuid, fetchOptions);
       if ( (member.quantity.value === null) && member.quantity.formula ) {
         const roll = new Roll(member.quantity.formula);
         await roll.evaluate();

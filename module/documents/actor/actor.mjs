@@ -373,6 +373,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * version has already been imported before importing it again.
    * @param {string} uuid                  The Actor's UUID.
    * @param {object} [options]
+   * @param {object} [options.folderId]    Folder ID for importing the Actor from a compendium.
    * @param {object} [options.origin]      Optionally check if the Actor has a specific origin. If not supplied, any
    *                                       Actor that matches the criteria will be returned.
    * @param {string} [options.origin.key]  The origin property.
@@ -381,7 +382,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @throws {Error}                       If the Actor cannot be found, or cannot be imported.
    */
   static async fetchExisting(uuid, options={}) {
-    const { origin } = options;
+    const { origin, folderId } = options;
     const actor = await fromUuid(uuid);
     if ( !actor ) throw new Error(game.i18n.format("DND5E.ACTOR.Warning.NoActor", { uuid }));
 
@@ -411,7 +412,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( actor.pack ) {
       // Template actor resides only in a compendium, import the actor into the world.
       return game.actors.importFromCompendium(game.packs.get(actor.pack), actor.id, {
-        "flags.dnd5e.isAutoImported": true
+        "flags.dnd5e.isAutoImported": true,
+        folder: game.folders.get(folderId) ?? null
       });
     } else {
       // A linked world actor was found. Create a copy to avoid affecting the original.
