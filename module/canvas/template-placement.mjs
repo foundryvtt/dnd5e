@@ -82,9 +82,12 @@ export default class TemplatePlacement extends BasePlacement {
 
     const templateData = {
       type: templateShape,
-      size: convertLength(target.size, target.units, canvas.scene.grid.units, { strict: false }),
-      width: convertLength(target.width, target.units, canvas.scene.grid.units, { strict: false }),
-      height: convertLength(target.height, target.units, canvas.scene.grid.units, { strict: false })
+      size: target.size
+        ? convertLength(target.size, target.units, canvas.scene.grid.units, { strict: false }) : undefined,
+      width: target.width
+        ? convertLength(target.width, target.units, canvas.scene.grid.units, { strict: false }) : undefined,
+      height: target.height
+        ? convertLength(target.height, target.units, canvas.scene.grid.units, { strict: false }) : undefined
     };
 
     const config = foundry.utils.mergeObject({
