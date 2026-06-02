@@ -519,7 +519,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       return src ?? "int";
     };
     return Object.entries(context.system[property] ?? {})
-      .filter(([key]) => key in CONFIG.DND5E[property])
+      .filter(([key]) => key in CONFIG.DND5E[property] || ((property === "tools") && (key in CONFIG.DND5E.vehicleTypes)))
       .map(([key, entry]) => ({
         ...entry, key,
         abbreviation: CONFIG.DND5E.abilities[entry.ability]?.abbreviation,
