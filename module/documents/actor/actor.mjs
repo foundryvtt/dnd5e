@@ -373,7 +373,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * version has already been imported before importing it again.
    * @param {string} uuid                  The Actor's UUID.
    * @param {object} [options]
-   * @param {object} [options.folderId]    Folder ID for importing the Actor from a compendium.
+   * @param {string} [options.folderId]    Folder ID for importing the Actor from a compendium.
    * @param {object} [options.origin]      Optionally check if the Actor has a specific origin. If not supplied, any
    *                                       Actor that matches the criteria will be returned.
    * @param {string} [options.origin.key]  The origin property.
