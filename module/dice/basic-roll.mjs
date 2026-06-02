@@ -171,7 +171,7 @@ export default class BasicRoll extends Roll {
     const messageId = config.event?.target.closest("[data-message-id]")?.dataset.messageId;
     if ( messageId ) foundry.utils.setProperty(message.data, "flags.dnd5e.originatingMessage", messageId);
 
-    // Attack & Damage store originatingMessage directly on message.data and do no have a config.event. We retrieve
+    // Attack & Damage store originatingMessage directly on message.data and do not have a config.event. We retrieve
     // those here.
     const originatingMessage = foundry.utils.getProperty(message.data, "flags.dnd5e.originatingMessage");
     // Store in roll options so that it can be serialized.
