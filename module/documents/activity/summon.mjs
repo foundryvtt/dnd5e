@@ -149,9 +149,11 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
     // Fetch the actor that will be summoned
     const summonUuid = this.summon.mode === "cr" ? await this.queryActor(profile) : profile.uuid;
     if ( !summonUuid ) return;
-    const actor = await dnd5e.documents.Actor5e.fetchExisting(summonUuid, {
+    const fetchOptions = {
+      folderId: this.actor?.folder?.id ?? null,
       origin: { key: "flags.dnd5e.summon.origin", value: this.item?.uuid }
-    });
+    };
+    const actor = await dnd5e.documents.Actor5e.fetchExisting(summonUuid, fetchOptions);
 
     // Verify ownership of actor
     if ( !actor.isOwner ) {

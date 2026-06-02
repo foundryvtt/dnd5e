@@ -419,6 +419,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       // A linked world actor was found. Create a copy to avoid affecting the original.
       return actor.clone({
         "flags.dnd5e.isAutoImported": true,
+        folder: game.folders.get(folderId) ?? null,
         "_stats.compendiumSource": actor._stats.compendiumSource,
         "_stats.duplicateSource": actor.uuid
       }, { save: true });
