@@ -767,12 +767,12 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
 
   /**
    * Effects that can be applied from this activity.
-   * @type {Promise<ActiveEffect5e[]>|null}
+   * @returns {Promise<ActiveEffect5e[]>|null}
    */
   getApplicableEffects() {
     const applicableEffects = this.applicableEffects;
     return applicableEffects
-      ? Promise.all(this.applicableEffects.map(e => e.getEffect())).then(e => e.filter(_ => _))
+      ? Promise.all(applicableEffects.map(e => e.getEffect())).then(e => e.filter(_ => _))
       : null;
   }
 
