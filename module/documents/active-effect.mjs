@@ -702,7 +702,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   static registerHUDListeners() {
     Hooks.on("renderTokenHUD", this.onTokenHUDRender);
     document.addEventListener("click", this.onClickTokenHUD.bind(this), { capture: true });
-    document.addEventListener("contextmenu", this.onClickTokenHUD.bind(this), { capture: true });
+    document.addEventListener("auxclick", this.onClickTokenHUD.bind(this), { capture: true });
   }
 
   /* -------------------------------------------- */
@@ -780,6 +780,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * @param {PointerEvent} event        The triggering event.
    */
   static onClickTokenHUD(event) {
+    if ( (event.button !== 0) && (event.button !== 2) ) return;
     const { target } = event;
     if ( !target.classList?.contains("effect-control") ) return;
 
@@ -801,7 +802,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   static _manageExhaustion(event, actor) {
     let level = foundry.utils.getProperty(actor, "system.attributes.exhaustion");
     if ( !Number.isFinite(level) ) return;
-    event.preventDefault();
     event.stopPropagation();
     if ( event.button === 0 ) level++;
     else level--;
@@ -819,7 +819,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   static _manageConcentration(event, actor) {
     const { effects } = actor.concentration;
     if ( effects.size < 1 ) return;
-    event.preventDefault();
     event.stopPropagation();
     if ( effects.size === 1 ) {
       actor.endConcentration(effects.first());
