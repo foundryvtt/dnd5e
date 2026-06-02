@@ -173,6 +173,12 @@ export default class BasicRoll extends Roll {
     const messageId = config.event?.target.closest("[data-message-id]")?.dataset.messageId;
     if ( messageId ) foundry.utils.setProperty(message.data, "flags.dnd5e.originatingMessage", messageId);
 
+    // Attack & Damage store originatingMessage directly on message.data and do not have a config.event. We retrieve
+    // those here.
+    const originatingMessage = foundry.utils.getProperty(message.data, "flags.dnd5e.originatingMessage");
+    // Store in roll options so that it can be serialized.
+    if ( originatingMessage ) rolls?.forEach(r => r.options.originatingMessage ??= originatingMessage);
+
     if ( rolls?.length && (config.evaluate !== false) ) {
       message[message.create !== false ? "document" : "data"] = await this.toMessage(
         rolls, message.data, { create: message.create, rollMode: message.rollMode }
@@ -197,6 +203,16 @@ export default class BasicRoll extends Roll {
 
   /* -------------------------------------------- */
   /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Get the chat message that originated this roll (e.g. the item card that triggered it), if any.
+   * @returns {ChatMessage5e|null}
+   */
+  getOriginatingMessage() {
+    return game.messages.get(this.options.originatingMessage) ?? null;
+  }
+
   /* -------------------------------------------- */
 
   /**
