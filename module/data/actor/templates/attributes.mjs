@@ -165,7 +165,7 @@ export default class AttributesFields {
     }, { armors: [], shields: [] });
 
     // Set stealth disadvantage
-    if ( armors[0]?.system.properties.has("stealthDisadvantage") ) {
+    if ( armors[0]?.system.properties.has("stealthDisadvantage") && this.skills ) {
       AdvantageModeField.setMode(this, "skills.ste.roll.mode", -1);
     }
 
@@ -410,7 +410,7 @@ export default class AttributesFields {
 
   /**
    * Modify movement speeds taking exhaustion and any other conditions into account.
-   * @this {CharacterData|NPCData}
+   * @this {CharacterData|NPCData|VehicleData}
    * @param {ActorRollData} rollData  The Actor's roll data.
    */
   static prepareMovement(rollData=this.parent.getRollData()) {
