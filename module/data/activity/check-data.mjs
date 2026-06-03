@@ -64,8 +64,6 @@ export default class BaseCheckActivityData extends BaseActivityData {
     rollData ??= this.getRollData({ deterministic: true });
     super.prepareFinalData(rollData);
 
-    if ( this.check.ability === "spellcasting" ) this.check.ability = this.spellcastingAbility;
-
     let ability;
     if ( this.check.dc.calculation ) ability = this.ability;
     else this.check.dc.value = simplifyBonus(this.check.dc.formula, rollData);

@@ -1287,7 +1287,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       && (await this.system.rollSkill(config, dialog, message) === false) ) return null;
     if ( !this.system.skills ) return null;
     const skillLabel = CONFIG.DND5E.skills[config.skill]?.label ?? "";
-    const ability = config.ability ?? this.system.skills[config.skill]?.ability ?? CONFIG.DND5E.skills[config.skill]?.ability ?? "";
+    if ( config.ability === "spellcasting" ) config.ability = this.spellcastingAbility;
+    const ability = config.ability ?? this.system.skills[config.skill]?.ability
+      ?? CONFIG.DND5E.skills[config.skill]?.ability ?? "";
     const abilityLabel = CONFIG.DND5E.abilities[ability]?.label ?? "";
     const dialogConfig = foundry.utils.mergeObject({
       options: {
@@ -1310,6 +1312,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<D20Roll[]|null>}                          A Promise which resolves to the created Roll instance.
    */
   async rollToolCheck(config={}, dialog={}, message={}) {
+    if ( config.ability === "spellcasting" ) config.ability = this.spellcastingAbility;
     const toolLabel = Trait.keyLabel(config.tool, { trait: "tool" }) ?? "";
     const dialogConfig = foundry.utils.mergeObject({
       options: {
@@ -1520,6 +1523,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<D20Roll[]|null>}                        A Promise which resolves to the created Roll instance.
    */
   async rollAbilityCheck(config={}, dialog={}, message={}) {
+    if ( config.ability === "spellcasting" ) config.ability = this.spellcastingAbility;
     const abilityLabel = CONFIG.DND5E.abilities[config.ability]?.label ?? "";
     const dialogConfig = foundry.utils.mergeObject({
       options: {
@@ -1545,6 +1549,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( (typeof this.system.rollSavingThrow === "function")
       && (await this.system.rollSavingThrow(config, dialog, message) === false) ) return null;
     if ( !this.system.abilities ) return null;
+    if ( config.ability === "spellcasting" ) config.ability = this.spellcastingAbility;
     const abilityLabel = CONFIG.DND5E.abilities[config.ability]?.label ?? "";
     const dialogConfig = foundry.utils.mergeObject({
       options: {
