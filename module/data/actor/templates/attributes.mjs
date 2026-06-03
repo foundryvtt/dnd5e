@@ -165,7 +165,7 @@ export default class AttributesFields {
     }, { armors: [], shields: [] });
 
     // Set stealth disadvantage
-    if ( armors[0]?.system.properties.has("stealthDisadvantage") ) {
+    if ( armors[0]?.system.properties.has("stealthDisadvantage") && this.skills ) {
       AdvantageModeField.setMode(this, "skills.ste.roll.mode", -1);
     }
 
@@ -410,7 +410,7 @@ export default class AttributesFields {
 
   /**
    * Modify movement speeds taking exhaustion and any other conditions into account.
-   * @this {CharacterData|NPCData}
+   * @this {CharacterData|NPCData|VehicleData}
    * @param {ActorRollData} rollData  The Actor's roll data.
    */
   static prepareMovement(rollData=this.parent.getRollData()) {
@@ -430,6 +430,10 @@ export default class AttributesFields {
     const units = this.attributes.movement.units ??= defaultUnits("length");
     let reduction = dnd5e.settings.rulesVersion === "modern" && !this.traits?.ci?.value?.has("exhaustion")
       ? (this.attributes.exhaustion ?? 0) * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.speed ?? 0) : 0;
+    if ( ((this.attributes.ac?.equippedArmor?.system.strength ?? 0) > (this.abilities?.str?.value ?? Infinity))
+      && !this.parent.flags.dnd5e?.ignoreArmorSpeedReduction ) {
+      reduction += CONFIG.DND5E.armorSpeedReduction;
+    }
     reduction = convertLength(reduction, CONFIG.DND5E.defaultUnits.length.imperial, units);
     const bonus = simplifyBonus(this.attributes.movement.bonus, rollData);
     this.attributes.movement.max = 0;
