@@ -539,10 +539,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       const l = Number(k.split("-").pop());
       return (statuses.has(k) && !imms.has(k)) || (applyExhaustion && Number.isInteger(l) && (level >= l));
     };
-    const dodgingInactive = statuses.has("incapacitated")
-      || (CONFIG.DND5E.conditionEffects.noMovement?.some(isActiveSource) ?? false);
+    const applyDodging = !statuses.has("incapacitated")
+      && !(CONFIG.DND5E.conditionEffects.noMovement?.some(isActiveSource) ?? false);
     return props.some(k => {
-      if ( (key === "dexteritySaveAdvantage") && (k === "dodging") && dodgingInactive ) return false;
+      if ( (k === "dodging") && !applyDodging ) return false;
       return isActiveSource(k);
     });
   }
