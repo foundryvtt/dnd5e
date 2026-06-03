@@ -398,27 +398,26 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     super.applyActiveEffects(phase);
+    if ( phase !== "initial" ) return;
 
     // Translate this Actor's size category into Token changes
-    if ( phase === "initial" ) {
-      const sizeData = CONFIG.DND5E.actorSizes[this.system.traits?.size];
-      if ( !sizeData ) return;
-      const tokenSize = sizeData.token ?? 1;
-      this.tokenActiveEffectChanges[phase].push(...["width", "height", "depth"].map(key => ({
+    const sizeData = CONFIG.DND5E.actorSizes[this.system.traits?.size];
+    if ( !sizeData ) return;
+    const tokenSize = sizeData.token ?? 1;
+    this.tokenActiveEffectChanges[phase].push(...["width", "height", "depth"].map(key => ({
+      key, phase,
+      type: "override",
+      priority: 0,
+      value: tokenSize
+    })));
+    const tokenScale = sizeData.dynamicTokenScale ?? 1;
+    if ( tokenScale !== 1 ) {
+      this.tokenActiveEffectChanges[phase].push(...["texture.scaleX", "texture.scaleY"].map(key => ({
         key, phase,
-        type: "override",
+        type: "multiply",
         priority: 0,
-        value: tokenSize
+        value: tokenScale
       })));
-      const tokenScale = sizeData.dynamicTokenScale ?? 1;
-      if ( tokenScale !== 1 ) {
-        this.tokenActiveEffectChanges[phase].push(...["texture.scaleX", "texture.scaleY"].map(key => ({
-          key, phase,
-          type: "multiply",
-          priority: 0,
-          value: tokenScale
-        })));
-      }
     }
   }
 

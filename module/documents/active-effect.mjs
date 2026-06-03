@@ -418,6 +418,16 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     // If current value is `null`, UPGRADE & DOWNGRADE should always just set the value
     if ( (current === null) && ["upgrade", "downgrade"].includes(change.type) ) change.type = "override";
 
+    // Handle removing entries from sets
+    if ( (field instanceof SetField) && (change.type === "add") && (foundry.utils.getType(current) === "Set") ) {
+      for ( const value of field._castChangeDelta(change.value) ) {
+        const neg = value.replace(/^\s*-\s*/, "");
+        if ( neg !== value ) current.delete(neg);
+        else current.add(value);
+      }
+      return current;
+    }
+
     // If attempting to apply active effect to empty MappingField entry, create it
     if ( (current === undefined) && change.key.startsWith("system.") ) {
       let keyPath = change.key;
