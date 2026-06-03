@@ -71,18 +71,6 @@ export class ActivityField extends foundry.data.fields.ObjectField {
   }
 }
 
-/**
- * @deprecated
- * @since 5.3.0
- */
-if ( !("_migrate" in foundry.data.fields.DataField.prototype) ) {
-  /** @ignore */
-  ActivityField.prototype.migrateSource = function(sourceData, fieldData) {
-    const cls = this.getModel(fieldData);
-    if ( cls ) cls.migrateDataSafe(fieldData);
-  };
-}
-
 /* -------------------------------------------- */
 
 /**

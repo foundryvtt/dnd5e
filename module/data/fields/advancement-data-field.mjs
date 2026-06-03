@@ -68,15 +68,3 @@ export default class AdvancementDataField extends foundry.data.fields.ObjectFiel
     return value;
   }
 }
-
-/**
- * @deprecated
- * @since 5.3.0
- */
-if ( !("_migrate" in foundry.data.fields.DataField.prototype) ) {
-  /** @ignore */
-  AdvancementDataField.prototype.migrateSource = function(sourceData, fieldData) {
-    const cls = this.getModel();
-    if ( cls ) cls.migrateDataSafe(fieldData);
-  };
-}

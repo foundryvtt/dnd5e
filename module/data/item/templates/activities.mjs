@@ -412,7 +412,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
       foundry.utils.setProperty(changed, "flags.dnd5e.riders", Object.entries(riders)
         .reduce((updates, [key, value]) => {
           if ( value.size ) updates[key] = Array.from(value);
-          else updates[`-=${key}`] = null;
+          else updates[key] = _del;
           return updates;
         }, {})
       );
@@ -422,12 +422,8 @@ export default class ActivitiesTemplate extends SystemDataModel {
 
     // Track changes to cached spells on cast activities
     const removed = Object.entries(changed.system?.activities ?? {}).map(([key, data]) => {
-      if ( key.startsWith("-=") ) {
-        const id = key.replace("-=", "");
-        return this.activities.get(id).cachedSpell?.id;
-      } else if ( foundry.utils.hasProperty(data, "spell.uuid") ) {
-        return this.activities.get(key)?.cachedSpell?.id;
-      }
+      if ( (data instanceof foundry.data.operators.ForcedDeletion)
+        || foundry.utils.hasProperty(data, "spell.uuid") ) return this.activities.get(key)?.cachedSpell?.id;
       return null;
     }).filter(_ => _);
     if ( removed.length ) foundry.utils.setProperty(options, "dnd5e.removedCachedItems", removed);

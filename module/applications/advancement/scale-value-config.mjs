@@ -169,7 +169,7 @@ export default class ScaleValueConfig extends AdvancementConfig {
   static _cleanedObject(object) {
     return Object.entries(object).reduce((obj, [key, value]) => {
       if ( Object.keys(value ?? {}).some(k => value[k]) ) obj[key] = value;
-      else obj[`-=${key}`] = null;
+      else obj[key] = _del;
       return obj;
     }, {});
   }

@@ -1609,7 +1609,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
       delete submitData.flags.dnd5e[key];
       if ( foundry.utils.hasProperty(this.document._source, `flags.dnd5e.${key}`) ) {
-        submitData.flags.dnd5e[`-=${key}`] = null;
+        submitData.flags.dnd5e[key] = _del;
       }
     }
 

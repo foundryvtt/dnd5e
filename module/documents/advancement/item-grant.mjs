@@ -177,7 +177,7 @@ export default class ItemGrantAdvancement extends Advancement {
         items[item.flags.dnd5e?.sourceId ?? item._stats.compendiumSource ?? item.uuid] = item.toObject();
       }
       this.actor.items.delete(id);
-      added[`-=${id}`] = null;
+      added[id] = _del;
     }
 
     this.actor.reset();

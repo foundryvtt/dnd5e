@@ -3220,7 +3220,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     } else {
       // Remove the flags
       const actorUpdates = polymorphedActorIds.filter(id => game.actors.get(id).isOwner).map(p => {
-        return { _id: p, "flags.dnd5e": { "-=isPolymorphed": null, "-=previousActorIds": null } };
+        return { _id: p, "flags.dnd5e": { isPolymorphed: _del, previousActorIds: _del } };
       });
       await Actor.implementation.updateDocuments(actorUpdates);
 

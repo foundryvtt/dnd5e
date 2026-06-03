@@ -152,7 +152,7 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
    * Helper method to take an object and apply updates that remove any empty keys.
    * @param {object} object  Object to be cleaned.
    * @returns {object}       Copy of object with only non false-ish values included and others marked
-   *                         using `-=` syntax to be removed by update process.
+   *                         with ForcedDeletion to be removed by update process.
    * @protected
    */
   static _cleanedObject(object) {
@@ -161,7 +161,7 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
       if ( foundry.utils.getType(value) === "Object" ) keep = Object.values(value).some(v => v);
       else if ( value ) keep = true;
       if ( keep ) obj[key] = value;
-      else obj[`-=${key}`] = null;
+      else obj[key] = _del;
       return obj;
     }, {});
   }
