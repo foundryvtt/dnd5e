@@ -526,9 +526,15 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const applyExhaustion = (level !== null) && !imms.has("exhaustion")
       && (dnd5e.settings.rulesVersion === "legacy");
     const statuses = this.statuses;
-    return props.some(k => {
+    const isActiveSource = k => {
       const l = Number(k.split("-").pop());
       return (statuses.has(k) && !imms.has(k)) || (applyExhaustion && Number.isInteger(l) && (level >= l));
+    };
+    const applyDodging = !statuses.has("incapacitated")
+      && !(CONFIG.DND5E.conditionEffects.noMovement?.some(isActiveSource) ?? false);
+    return props.some(k => {
+      if ( (k === "dodging") && !applyDodging ) return false;
+      return isActiveSource(k);
     });
   }
 

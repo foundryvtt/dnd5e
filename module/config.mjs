@@ -3728,9 +3728,13 @@ DND5E.conditionEffects = {
   dehydrated: new Set(["dehydration"]),
   malnourished: new Set(["malnutrition"]),
   abilityCheckDisadvantage: new Set(["poisoned", "exhaustion-1"]),
+  physicalCheckDisadvantage: new Set(["heavilyEncumbered"]),
   abilitySaveDisadvantage: new Set(["exhaustion-3"]),
+  physicalSaveDisadvantage: new Set(["heavilyEncumbered"]),
+  physicalAttackDisadvantage: new Set(["heavilyEncumbered"]),
   attackDisadvantage: new Set(["poisoned", "exhaustion-3"]),
   dexteritySaveDisadvantage: new Set(["restrained"]),
+  dexteritySaveAdvantage: new Set(["dodging"]),
   initiativeAdvantage: new Set(["invisible"]),
   initiativeDisadvantage: new Set(["incapacitated", "surprised"])
 };
