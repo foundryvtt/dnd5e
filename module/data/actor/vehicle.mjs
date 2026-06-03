@@ -168,6 +168,7 @@ export default class VehicleData extends CommonTemplate {
     VehicleData.#migrateType(source);
     VehicleData.#migrateCargoCapacity(source);
     VehicleData.#migrateActions(source);
+    return source;
   }
 
   /* -------------------------------------------- */

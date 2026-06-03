@@ -42,6 +42,7 @@ export default class BackgroundData extends ItemDataModel.mixin(
   static _migrateData(source) {
     super._migrateData(source);
     AdvancementTemplate.migrateAdvancement(source);
+    return source;
   }
 
   /* -------------------------------------------- */

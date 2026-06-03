@@ -133,6 +133,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
     PhysicalItemTemplate.#migratePrice(source);
     PhysicalItemTemplate.#migrateRarity(source);
     PhysicalItemTemplate.#migrateWeight(source);
+    return source;
   }
 
   /* -------------------------------------------- */

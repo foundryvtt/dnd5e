@@ -177,16 +177,16 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  static migrateData(data) {
-    data = super.migrateData(data);
-    for ( const change of data.changes ?? [] ) {
+  static migrateData(source) {
+    source = super.migrateData(source);
+    for ( const change of source.changes ?? [] ) {
       if ( change.key === "flags.dnd5e.initiativeAdv" ) {
         change.key = "system.attributes.init.roll.mode";
         change.type = "add";
         change.value = 1;
       }
     }
-    return data;
+    return source;
   }
 
   /* -------------------------------------------- */

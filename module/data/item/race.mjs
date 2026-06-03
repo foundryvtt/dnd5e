@@ -113,6 +113,7 @@ export default class RaceData extends ItemDataModel.mixin(AdvancementTemplate, I
     super._migrateData(source);
     AdvancementTemplate.migrateAdvancement(source);
     SensesField._migrate(source.senses);
+    return source;
   }
 
   /* -------------------------------------------- */

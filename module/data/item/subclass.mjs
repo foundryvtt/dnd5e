@@ -72,6 +72,7 @@ export default class SubclassData extends ItemDataModel.mixin(AdvancementTemplat
   static _migrateData(source) {
     super._migrateData(source);
     AdvancementTemplate.migrateAdvancement(source);
+    return source;
   }
 
   /* -------------------------------------------- */

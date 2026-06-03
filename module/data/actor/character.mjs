@@ -150,6 +150,7 @@ export default class CharacterData extends CreatureTemplate {
   static _migrateData(source) {
     super._migrateData(source);
     AttributesFields._migrateInitiative(source.attributes);
+    return source;
   }
 
   /* -------------------------------------------- */

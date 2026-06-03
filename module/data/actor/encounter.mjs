@@ -34,6 +34,7 @@ export default class EncounterData extends GroupTemplate {
   static _migrateData(source) {
     super._migrateData(source);
     EncounterData.#migrateMembers(source);
+    return source;
   }
 
   /* -------------------------------------------- */

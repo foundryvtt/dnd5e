@@ -88,6 +88,7 @@ export default class EquippableItemTemplate extends SystemDataModel {
     super._migrateData(source);
     EquippableItemTemplate.#migrateAttunement(source);
     EquippableItemTemplate.#migrateEquipped(source);
+    return source;
   }
 
   /* -------------------------------------------- */

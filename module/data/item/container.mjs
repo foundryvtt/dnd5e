@@ -256,6 +256,7 @@ export default class ContainerData extends ItemDataModel.mixin(
     super._migrateData(source);
     ContainerData.#migrateCapacity(source);
     ContainerData.#migrateQuantity(source);
+    return source;
   }
 
   /* -------------------------------------------- */

@@ -186,6 +186,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
     ActivitiesTemplate.migrateActivities(source);
     ConsumableData.#migrateDamage(source);
     ConsumableData.#migratePropertiesData(source);
+    return source;
   }
 
   /* -------------------------------------------- */

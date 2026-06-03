@@ -198,6 +198,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
     EquipmentData.#migrateType(source);
     EquipmentData.#migrateStrength(source);
     EquipmentData.#migrateProficient(source);
+    return source;
   }
 
   /* -------------------------------------------- */

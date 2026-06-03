@@ -202,6 +202,7 @@ export default class FeatData extends ItemDataModel.mixin(
     AdvancementTemplate.migrateAdvancement(source);
     FeatData.#migrateType(source);
     FeatData.#migrateRecharge(source);
+    return source;
   }
 
   /* -------------------------------------------- */

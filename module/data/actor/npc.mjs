@@ -227,6 +227,7 @@ export default class NPCData extends CreatureTemplate {
     NPCData.#migrateSpellLevel(source);
     NPCData.#migrateTypeData(source);
     AttributesFields._migrateInitiative(source.attributes);
+    return source;
   }
 
   /* -------------------------------------------- */

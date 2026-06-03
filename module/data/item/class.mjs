@@ -89,6 +89,7 @@ export default class ClassData extends ItemDataModel.mixin(
     ClassData.#migrateHitDice(source);
     ClassData.#migrateLevels(source);
     ClassData.#migrateSpellcastingData(source);
+    return source;
   }
 
   /* -------------------------------------------- */

@@ -286,6 +286,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     SpellData.#migrateTarget(source);
     SpellData.#migratePreparation(source);
     SpellData.#migrateSourceItem(source);
+    return source;
   }
 
   /* -------------------------------------------- */

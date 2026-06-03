@@ -121,6 +121,7 @@ export default class CreatureTemplate extends CommonTemplate {
     super._migrateData(source);
     CreatureTemplate.#migrateSensesData(source);
     CreatureTemplate.#migrateToolData(source);
+    return source;
   }
 
   /* -------------------------------------------- */

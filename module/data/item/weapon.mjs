@@ -404,6 +404,7 @@ export default class WeaponData extends ItemDataModel.mixin(
     WeaponData.#migratePropertiesData(source);
     WeaponData.#migrateProficient(source);
     WeaponData.#migrateReach(source);
+    return source;
   }
 
   /* -------------------------------------------- */

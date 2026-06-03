@@ -100,6 +100,7 @@ export default class GroupData extends GroupTemplate {
     super._migrateData(source);
     GroupData.#migrateMembers(source);
     GroupData.#migrateTravel(source);
+    return source;
   }
 
   /* -------------------------------------------- */

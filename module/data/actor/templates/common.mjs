@@ -82,6 +82,7 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
     super._migrateData(source);
     CommonTemplate.#migrateACData(source);
     CommonTemplate.#migrateMovementData(source);
+    return source;
   }
 
   /* -------------------------------------------- */

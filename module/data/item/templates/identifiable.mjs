@@ -32,6 +32,7 @@ export default class IdentifiableTemplate extends SystemDataModel {
   static _migrateData(source) {
     super._migrateData(source);
     IdentifiableTemplate.#migrateUnidentified(source);
+    return source;
   }
 
   /* -------------------------------------------- */

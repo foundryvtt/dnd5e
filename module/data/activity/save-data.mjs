@@ -52,12 +52,14 @@ export default class BaseSaveActivityData extends BaseActivityData {
   /*  Data Migration                              */
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritDoc */
   static migrateData(source) {
+    super.migrateData(source);
     if ( foundry.utils.getType(source.save?.ability) === "string" ) {
       if ( source.save.ability ) source.save.ability = [source.save.ability];
       else source.save.ability = [];
     }
+    return source;
   }
 
   /* -------------------------------------------- */
