@@ -166,16 +166,19 @@ export default class Tooltips5e {
     const abilityConfig = CONFIG.DND5E.abilities[ability ?? skillConfig.ability];
 
     let label;
+    const isSpellcasting = ability === "spellcasting";
+    const abilityLabel = isSpellcasting ? _loc("DND5E.Spellcasting") : abilityConfig.label;
     if ( skillConfig ) {
-      label = _loc("DND5E.SkillPassiveSpecificHint", { skill: skillConfig.label, ability: abilityConfig.label });
+      label = _loc("DND5E.SkillPassiveSpecificHint", { skill: skillConfig.label, ability: abilityLabel });
     } else {
       // If no skill was provided, we're doing a passive ability check.
       // This isn't technically a thing in the rules, but we can support it anyway if people want to use it.
-      label = _loc("DND5E.SkillPassiveHint", { skill: abilityConfig.label });
+      label = _loc("DND5E.SkillPassiveHint", { skill: abilityLabel });
     }
 
     this._onHoverPassive({ label }, actor => {
       const systemData = actor.system;
+      if ( isSpellcasting ) ability = actor.spellcastingAbility;
       let passive;
       if ( skill && (!ability || (ability === skillConfig.ability)) ) {
         // Default passive skill check
