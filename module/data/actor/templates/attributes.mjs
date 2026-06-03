@@ -431,7 +431,7 @@ export default class AttributesFields {
     let reduction = dnd5e.settings.rulesVersion === "modern" && !this.traits?.ci?.value?.has("exhaustion")
       ? (this.attributes.exhaustion ?? 0) * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.speed ?? 0) : 0;
     if ( ((this.attributes.ac?.equippedArmor?.system.strength ?? 0) > (this.abilities?.str?.value ?? Infinity))
-      && !this.parent.flags.dnd5e?.ignoreArmorSpeedReduction ) {
+      && !this.parent.flags.dnd5e?.ignoreArmorSpeedReduction && this.isCreature ) {
       reduction += CONFIG.DND5E.armorSpeedReduction;
     }
     reduction = convertLength(reduction, CONFIG.DND5E.defaultUnits.length.imperial, units);
