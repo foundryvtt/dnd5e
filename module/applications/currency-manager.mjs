@@ -148,7 +148,7 @@ export default class CurrencyManager extends Application5e {
    */
   static #setTransferValue(event, target) {
     for ( let [key, value] of Object.entries(this.document.system.currency) ) {
-      if ( target.dataset.action === "setHalf" ) value = Math.floor(value / 2);
+      if ( target.dataset.action === "setHalf" ) value = roundCurrency(value / 2, key);
       const input = this.element.querySelector(`[name="amount.${key}"]`);
       if ( input && value ) input.value = value;
     }
@@ -293,7 +293,8 @@ export default class CurrencyManager extends Application5e {
         updates.remainder -= deduct / multiplier;
         updates.system.currency[denom] = roundCurrency(updates.system.currency[denom] - deduct, denom);
         // If there's still a remainder, break the denomination into change.
-        if ( updates.remainder && makeChange && (conversion < baseConversion) && updates.system.currency[denom] ) {
+        if ( !updates.remainder.almostEqual(0) && makeChange && (conversion < baseConversion)
+          && updates.system.currency[denom] ) {
           const rate = Math.floor(baseConversion / conversion);
           const breaks = Math.min(updates.system.currency[denom], Math.ceil(updates.remainder / rate));
           updates.system.currency[denom] -= breaks;
@@ -304,7 +305,7 @@ export default class CurrencyManager extends Application5e {
             updates.system.currency[denomination] - change, denomination
           );
         }
-        if ( !updates.remainder ) return updates;
+        if ( updates.remainder.almostEqual(0) ) return updates;
       }
       currencies.push(currencies.shift());
       passes--;
