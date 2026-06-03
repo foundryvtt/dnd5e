@@ -276,6 +276,19 @@ export default function PseudoDocumentMixin(Base) {
     /* -------------------------------------------- */
 
     /**
+     * The default display name of a pseudo-document of this type.
+     * @param {object} options
+     * @param {string} options.type
+     * @returns {string}
+     */
+    static defaultName({ type }) {
+      const title = this.documentConfig[type].documentClass.metadata.title;
+      return game.i18n.localize(title);
+    }
+
+    /* -------------------------------------------- */
+
+    /**
      * Prepare the data needed for the creation dialog.
      * @param {string} type  Specific type of the PseudoDocument to prepare.
      * @param {Item5e} parent  Parent document within which this PseudoDocument will be created.
