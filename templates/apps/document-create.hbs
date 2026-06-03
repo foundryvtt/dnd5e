@@ -1,7 +1,7 @@
 <div>
     <header>
         <input type="text" class="document-name uninput" name="name" value="{{ name }}" autofocus
-               placeholder="{{ localize 'Name' }}">
+               placeholder="{{ localize 'DOCUMENT.FIELDS.name.label' }}">
         {{#if hasFolders}}
         <select class="unselect" name="folder">
             {{ selectOptions folders selected=folder labelAttr="name" valueAttr="id" }}
