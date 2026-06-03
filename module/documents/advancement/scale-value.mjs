@@ -18,8 +18,8 @@ export default class ScaleValueAdvancement extends Advancement {
       order: 60,
       icon: "icons/sundries/gaming/dice-pair-white-green.webp",
       typeIcon: "systems/dnd5e/icons/svg/scale-value.svg",
-      title: game.i18n.localize("DND5E.ADVANCEMENT.ScaleValue.Title"),
-      hint: game.i18n.localize("DND5E.ADVANCEMENT.ScaleValue.Hint"),
+      title: _loc("DND5E.ADVANCEMENT.ScaleValue.Title"),
+      hint: _loc("DND5E.ADVANCEMENT.ScaleValue.Hint"),
       multiLevel: true,
       apps: {
         config: ScaleValueConfig,
@@ -130,7 +130,7 @@ export default class ScaleValueAdvancement extends Advancement {
       onClick: () => {
         const value = `@scale.${this.item.identifier}.${this.identifier}`;
         game.clipboard.copyPlainText(value);
-        ui.notifications.info(game.i18n.format("DND5E.Copied", { value }), { console: false });
+        ui.notifications.info(_loc("DND5E.Copied", { value }), { console: false });
       }
     });
     return options;

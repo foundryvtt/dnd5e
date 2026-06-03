@@ -42,7 +42,7 @@ export default class DurationField extends SchemaField {
         labels.duration = formatTime(this.duration.value, this.duration.units);
       } else labels.duration = CONFIG.DND5E.timePeriods[this.duration.units] ?? "";
       labels.concentrationDuration = this.duration.concentration || this.properties?.has("concentration")
-        ? game.i18n.format("DND5E.ConcentrationDuration", { duration: labels.duration }) : labels.duration;
+        ? _loc("DND5E.ConcentrationDuration", { duration: labels.duration }) : labels.duration;
     }
 
     Object.defineProperty(this.duration, "getEffectData", {

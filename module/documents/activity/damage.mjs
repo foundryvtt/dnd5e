@@ -39,7 +39,7 @@ export default class DamageActivity extends ActivityMixin(BaseDamageActivityData
   _usageChatButtons(message) {
     if ( !this.damage.parts.length ) return super._usageChatButtons(message);
     return [{
-      label: game.i18n.localize("DND5E.Damage"),
+      label: _loc("DND5E.Damage"),
       icon: '<i class="fa-solid fa-burst" inert></i>',
       dataset: {
         action: "rollDamage"

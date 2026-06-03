@@ -103,7 +103,7 @@ export default class SubclassData extends ItemDataModel.mixin(AdvancementTemplat
 
   /** @inheritDoc */
   async getSheetData(context) {
-    context.subtitles = [{ label: game.i18n.localize(CONFIG.Item.typeLabels.subclass) }];
+    context.subtitles = [{ label: _loc(CONFIG.Item.typeLabels.subclass) }];
     context.singleDescription = true;
     context.parts = ["dnd5e.details-subclass", "dnd5e.details-spellcasting"];
   }

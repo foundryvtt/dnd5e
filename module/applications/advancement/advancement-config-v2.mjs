@@ -57,7 +57,7 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
   async _prepareContext(options) {
     const levels = Array.fromRange(CONFIG.DND5E.maxLevel + 1).map(l => ({ value: l, label: l }));
     if ( ["class", "subclass"].includes(this.item.type) ) delete levels[0];
-    else levels[0].label = game.i18n.localize("DND5E.ADVANCEMENT.Config.AnyLevel");
+    else levels[0].label = _loc("DND5E.ADVANCEMENT.Config.AnyLevel");
     const context = {
       ...(await super._prepareContext(options)),
       advancement: this.advancement,
@@ -74,9 +74,9 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
       },
       levels,
       classRestrictionOptions: [
-        { value: "", label: game.i18n.localize("DND5E.AdvancementClassRestrictionNone") },
-        { value: "primary", label: game.i18n.localize("DND5E.AdvancementClassRestrictionPrimary") },
-        { value: "secondary", label: game.i18n.localize("DND5E.AdvancementClassRestrictionSecondary") }
+        { value: "", label: _loc("DND5E.AdvancementClassRestrictionNone") },
+        { value: "primary", label: _loc("DND5E.AdvancementClassRestrictionPrimary") },
+        { value: "secondary", label: _loc("DND5E.AdvancementClassRestrictionSecondary") }
       ],
       showClassRestrictions: this.item.type === "class",
       showLevelSelector: !this.advancement.metadata.multiLevel,

@@ -44,7 +44,7 @@ export class TokenConfig5e extends foundry.applications.sheets.TokenConfig {
       return arr;
     }, []) ?? [];
     if ( items.length ) {
-      const group = game.i18n.localize("DND5E.ConsumeCharges");
+      const group = _loc("DND5E.ConsumeCharges");
       items.sort(([, a], [, b]) => a.localeCompare(b, game.i18n.lang));
       attributes.push(...items.map(([value, label]) => ({ group, value, label })));
     }

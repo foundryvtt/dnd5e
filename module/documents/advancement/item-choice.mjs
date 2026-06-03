@@ -25,8 +25,8 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
       order: 50,
       icon: "icons/magic/symbols/cog-orange-red.webp",
       typeIcon: "systems/dnd5e/icons/svg/item-choice.svg",
-      title: game.i18n.localize("DND5E.ADVANCEMENT.ItemChoice.Title"),
-      hint: game.i18n.localize("DND5E.ADVANCEMENT.ItemChoice.Hint"),
+      title: _loc("DND5E.ADVANCEMENT.ItemChoice.Title"),
+      hint: _loc("DND5E.ADVANCEMENT.ItemChoice.Hint"),
       multiLevel: true,
       apps: {
         config: ItemChoiceConfig,
@@ -59,8 +59,8 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
   titleForLevel(level, { configMode=false }={}) {
     const data = this.configuration.choices[level] ?? {};
     let tag;
-    if ( data.count ) tag = game.i18n.format("DND5E.ADVANCEMENT.ItemChoice.Choose", { count: data.count });
-    else if ( data.replacement ) tag = game.i18n.localize("DND5E.ADVANCEMENT.ItemChoice.Replacement.Title");
+    if ( data.count ) tag = _loc("DND5E.ADVANCEMENT.ItemChoice.Choose", { count: data.count });
+    else if ( data.replacement ) tag = _loc("DND5E.ADVANCEMENT.ItemChoice.Replacement.Title");
     else return this.title;
     return `${this.title} <em>(${tag})</em>`;
   }
@@ -166,7 +166,7 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
 
     if ( data.replaced ) {
       if ( !original ) {
-        throw new ItemChoiceAdvancement.ERROR(game.i18n.localize("DND5E.ADVANCEMENT.ItemChoice.Warning.NoOriginal"));
+        throw new ItemChoiceAdvancement.ERROR(_loc("DND5E.ADVANCEMENT.ItemChoice.Warning.NoOriginal"));
       }
       this.actor.items.delete(data.replaced.original);
       this.actor.reset();
@@ -275,13 +275,13 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
     restriction ??= this.configuration.restriction;
 
     const handleError = (localizationKey, data) => {
-      if ( strict ) throw new Error(game.i18n.format(localizationKey, data));
+      if ( strict ) throw new Error(_loc(localizationKey, data));
       return false;
     };
 
     // Type restriction is set and the item type does not match the selected type
     if ( type && (type !== item.type) ) {
-      type = game.i18n.localize(CONFIG.Item.typeLabels[restriction.type]);
+      type = _loc(CONFIG.Item.typeLabels[restriction.type]);
       return handleError("DND5E.ADVANCEMENT.ItemChoice.Warning.InvalidType", { type });
     }
 

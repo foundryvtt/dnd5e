@@ -28,7 +28,7 @@ export class SpellcastingModel extends foundry.abstract.DataModel {
       img: new FilePathField({
         required: true, categories: ["IMAGE"], initial: "icons/magic/unholy/silhouette-robe-evil-power.webp"
       }),
-      label: new StringField({ required: true, initial: () => game.i18n.localize("DND5E.SPELLCASTING.Unlabeled") }),
+      label: new StringField({ required: true, initial: () => _loc("DND5E.SPELLCASTING.Unlabeled") }),
       order: new NumberField({ required: true, integer: true, nullable: false, initial: 0 }),
       type: new StringField({ required: true, readonly: true, initial: () => this.TYPE })
     };
@@ -88,7 +88,7 @@ export class SpellcastingModel extends foundry.abstract.DataModel {
     const { spellcasting } = CONFIG.DND5E;
 
     // Map progressions to spellcasting for faster lookup.
-    CONFIG.DND5E.spellProgression = { none: { label: game.i18n.localize("DND5E.SpellNone") } };
+    CONFIG.DND5E.spellProgression = { none: { label: _loc("DND5E.SpellNone") } };
 
     // Initialize models.
     Object.entries(spellcasting).forEach(([key, config]) => {
@@ -143,7 +143,7 @@ export class SlotSpellcasting extends SpellcastingModel {
       prepares: new BooleanField(),
       progression: new TypedObjectField(new SchemaField({
         divisor: new NumberField({ required: true, nullable: false, integer: true, positive: true, initial: 1 }),
-        label: new StringField({ required: true, initial: () => game.i18n.localize("DND5E.SPELLCASTING.Unlabeled") }),
+        label: new StringField({ required: true, initial: () => _loc("DND5E.SPELLCASTING.Unlabeled") }),
         roundUp: new BooleanField()
       }))
     };
@@ -413,7 +413,7 @@ export class MultiLevelSpellcasting extends SlotSpellcasting {
 
   /** @override */
   getLabel({ level }={}) {
-    return game.i18n.localize(`DND5E.SPELLCASTING.SLOTS.${this.getSpellSlotKey(level)}`);
+    return _loc(`DND5E.SPELLCASTING.SLOTS.${this.getSpellSlotKey(level)}`);
   }
 
   /* -------------------------------------------- */

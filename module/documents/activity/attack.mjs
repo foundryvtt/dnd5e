@@ -48,14 +48,14 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
   /** @override */
   _usageChatButtons(message) {
     const buttons = [{
-      label: game.i18n.localize("DND5E.Attack"),
+      label: _loc("DND5E.Attack"),
       icon: '<i class="dnd5e-icon" data-src="systems/dnd5e/icons/svg/trait-weapon-proficiencies.svg" inert></i>',
       dataset: {
         action: "rollAttack"
       }
     }];
     if ( this.damage.parts.length || this.item.system.properties?.has("amm") ) buttons.push({
-      label: game.i18n.localize("DND5E.Damage"),
+      label: _loc("DND5E.Damage"),
       icon: '<i class="fa-solid fa-burst" inert></i>',
       dataset: {
         action: "rollDamage"
@@ -139,7 +139,7 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
           left: window.innerWidth - 710
         },
         window: {
-          title: game.i18n.localize("DND5E.AttackRoll"),
+          title: _loc("DND5E.AttackRoll"),
           subtitle: this.item.name,
           icon: this.item.img
         }
@@ -149,7 +149,7 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
     const messageConfig = foundry.utils.mergeObject({
       create: true,
       data: {
-        flavor: `${this.item.name} - ${game.i18n.localize("DND5E.AttackRoll")}`,
+        flavor: `${this.item.name} - ${_loc("DND5E.AttackRoll")}`,
         flags: {
           dnd5e: {
             ...this.messageFlags,

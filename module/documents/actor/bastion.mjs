@@ -251,7 +251,7 @@ export default class Bastion {
   async confirmAdvance() {
     if ( !game.user.isGM ) return;
     const proceed = await foundry.applications.api.DialogV2.confirm({
-      content: game.i18n.localize("DND5E.Bastion.Confirm"),
+      content: _loc("DND5E.Bastion.Confirm"),
       rejectClose: false,
       window: { icon: "fa-solid fa-chess-rook", title: "DND5E.Bastion.Action.BastionTurn" }
     });
@@ -276,7 +276,7 @@ export default class Bastion {
       document.querySelector("#controls, #scene-controls")?.insertAdjacentHTML("afterend", `
         <button type="button" id="bastion-turn" data-action="bastionTurn" class="dnd5e2 faded-ui">
           <i class="fas fa-chess-rook"></i>
-          <span>${game.i18n.localize("DND5E.Bastion.Action.BastionTurn")}</span>
+          <span>${_loc("DND5E.Bastion.Action.BastionTurn")}</span>
         </button>
       `);
       document.getElementById("bastion-turn")?.addEventListener("click", this.confirmAdvance.bind(this));

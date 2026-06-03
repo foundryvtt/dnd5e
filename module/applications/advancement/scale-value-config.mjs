@@ -48,14 +48,14 @@ export default class ScaleValueConfig extends AdvancementConfig {
       placeholder: config.identifier
         || formatIdentifier(this.advancement.title || this.advancement.constructor.metadata.title)
     };
-    context.identifier.hint = game.i18n.format(type.metadata.identifier, {
+    context.identifier.hint = _loc(type.metadata.identifier, {
       class: this.item.identifier, identifier: context.identifier.placeholder
     });
     context.levels = this._prepareLevelData();
     context.type = {
       ...type.metadata,
       fields: type.schema.fields,
-      options: Object.entries(TYPES).map(([value, d]) => ({ value, label: game.i18n.localize(d.metadata.label )}))
+      options: Object.entries(TYPES).map(([value, d]) => ({ value, label: _loc(d.metadata.label )}))
     };
 
     return context;

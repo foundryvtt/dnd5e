@@ -234,13 +234,13 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
 
     if ( !this.restrictions.allowMagical && item.system.properties?.has("mgc")
       && ("quantity" in item.system) ) {
-      errors.push(new EnchantmentError(game.i18n.localize("DND5E.ENCHANT.Warning.NoMagicalItems")));
+      errors.push(new EnchantmentError(_loc("DND5E.ENCHANT.Warning.NoMagicalItems")));
     }
 
     if ( this.restrictions.type && (item.type !== this.restrictions.type) ) {
-      errors.push(new EnchantmentError(game.i18n.format("DND5E.ENCHANT.Warning.WrongType", {
-        incorrectType: game.i18n.localize(CONFIG.Item.typeLabels[item.type]),
-        allowedType: game.i18n.localize(CONFIG.Item.typeLabels[this.restrictions.type])
+      errors.push(new EnchantmentError(_loc("DND5E.ENCHANT.Warning.WrongType", {
+        incorrectType: _loc(CONFIG.Item.typeLabels[item.type]),
+        allowedType: _loc(CONFIG.Item.typeLabels[this.restrictions.type])
       })));
     }
 
@@ -251,7 +251,7 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
         if ( foundry.utils.getType(config) === "string" ) return config;
         return config.label;
       };
-      errors.push(new EnchantmentError(game.i18n.format(
+      errors.push(new EnchantmentError(_loc(
         `DND5E.ENCHANT.Warning.${item.system.type?.value ? "WrongType" : "NoSubtype"}`,
         {
           allowedType: game.i18n.getListFormatter({ type: "disjunction" }).format(
@@ -264,7 +264,7 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
 
     if ( this.restrictions.properties.size
       && !this.restrictions.properties.intersection(item.system.properties ?? new Set()).size ) {
-      errors.push(new EnchantmentError(game.i18n.format("DND5E.Enchantment.Warning.MissingProperty", {
+      errors.push(new EnchantmentError(_loc("DND5E.Enchantment.Warning.MissingProperty", {
         validProperties: game.i18n.getListFormatter({ type: "disjunction" }).format(
           Array.from(this.restrictions.properties).map(p => CONFIG.DND5E.itemProperties[p]?.label ?? p)
         )

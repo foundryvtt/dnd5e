@@ -32,7 +32,7 @@ export default class StartingEquipmentConfig extends DocumentSheet5e {
 
   /** @override */
   get title() {
-    return game.i18n.localize("DND5E.StartingEquipment.Action.Configure");
+    return _loc("DND5E.StartingEquipment.Action.Configure");
   }
 
   /* -------------------------------------------- */
@@ -187,8 +187,8 @@ export default class StartingEquipmentConfig extends DocumentSheet5e {
 
     // Validate that this is a physical item
     if ( !item.system.constructor._schemaTemplates?.includes(PhysicalItemTemplate) ) {
-      ui.notifications.error(game.i18n.format("DND5E.StartingEquipment.Warning.ItemTypeInvalid", {
-        type: game.i18n.localize(CONFIG.Item.typeLabels[item.type])
+      ui.notifications.error(_loc("DND5E.StartingEquipment.Warning.ItemTypeInvalid", {
+        type: _loc(CONFIG.Item.typeLabels[item.type])
       }));
       return null;
     }

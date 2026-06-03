@@ -229,13 +229,13 @@ export default function PseudoDocumentMixin(Base) {
      * @returns {Promise<PseudoDocument>}  A Promise which resolves to the deleted PseudoDocument.
      */
     async deleteDialog({ sheet, ...options }={}) {
-      const type = game.i18n.localize(this.metadata.label);
+      const type = _loc(this.metadata.label);
       const config = foundry.utils.mergeObject({
-        window: { title: `${game.i18n.format("DOCUMENT.Delete", { type })}: ${this.name || this.title}` },
+        window: { title: `${_loc("DOCUMENT.Delete", { type })}: ${this.name || this.title}` },
         content: `
           <p>
-            <strong>${game.i18n.localize("COMMON.AreYouSure")}</strong> ${
-              game.i18n.format("SIDEBAR.DeleteWarning", { type })}
+            <strong>${_loc("COMMON.AreYouSure")}</strong> ${
+              _loc("SIDEBAR.DeleteWarning", { type })}
           </p>
         `,
         yes: { callback: this.delete.bind(this) }
@@ -287,8 +287,8 @@ export default function PseudoDocumentMixin(Base) {
       const hint = this.documentConfig[type]?.documentClass?.metadata?.hint;
       return {
         type,
-        label: game.i18n.has(label) ? game.i18n.localize(label) : type,
-        hint: game.i18n.has(hint) ? game.i18n.localize(hint) : null,
+        label: game.i18n.has(label) ? _loc(label) : type,
+        hint: game.i18n.has(hint) ? _loc(hint) : null,
         icon: this.documentConfig[type]?.documentClass?.metadata?.img
       };
     }

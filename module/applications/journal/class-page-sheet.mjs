@@ -93,10 +93,10 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
     context.systemFields = this.document.system.schema.fields;
 
     context.styleOptions = [
-      { value: "", label: game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.Style.Inferred") },
+      { value: "", label: _loc("JOURNALENTRYPAGE.DND5E.Class.Style.Inferred") },
       { rule: true },
-      { value: "2024", label: game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.Style.Modern") },
-      { value: "2014", label: game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.Style.Legacy") }
+      { value: "2024", label: _loc("JOURNALENTRYPAGE.DND5E.Class.Style.Modern") },
+      { value: "2014", label: _loc("JOURNALENTRYPAGE.DND5E.Class.Style.Legacy") }
     ];
 
     context.title = {
@@ -171,7 +171,7 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
         if ( (rep.size > 1) || (rep.first() !== type) ) return false;
         return (a.classRestriction !== "secondary") && (a.level === 1) && (a.configuration.mode === "default");
       });
-      if ( !advancement ) return game.i18n.localize("COMMON.None");
+      if ( !advancement ) return _loc("COMMON.None");
       return advancement.hint || Trait.localizedList(advancement.configuration);
     };
     if ( traits.length ) {
@@ -226,9 +226,9 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
     const scaleValues = (item.advancement.byType.ScaleValue ?? []);
     const spellProgression = await this._getSpellProgression(item);
 
-    const headers = [[{content: game.i18n.localize("DND5E.Level")}]];
-    if ( item.type === "class" ) headers[0].push({content: game.i18n.localize("DND5E.ProficiencyBonus")});
-    if ( hasFeatures ) headers[0].push({content: game.i18n.localize("DND5E.Features")});
+    const headers = [[{content: _loc("DND5E.Level")}]];
+    if ( item.type === "class" ) headers[0].push({content: _loc("DND5E.ProficiencyBonus")});
+    if ( hasFeatures ) headers[0].push({content: _loc("DND5E.Features")});
     headers[0].push(...scaleValues.map(a => ({content: a.title})));
     if ( spellProgression?.headers?.length > 1 ) {
       headers[0].forEach(h => h.rowSpan = 2);
@@ -310,8 +310,8 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
       const spells = { [spellSlotKey]: {} };
 
       table.headers = [[
-        { content: game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.SpellSlots") },
-        { content: game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.SpellSlotLevel") }
+        { content: _loc("JOURNALENTRYPAGE.DND5E.Class.SpellSlots") },
+        { content: _loc("JOURNALENTRYPAGE.DND5E.Class.SpellSlotLevel") }
       ]];
       table.cols = [{class: "spellcasting", span: 2}];
 
@@ -357,7 +357,7 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
 
       // Prepare headers & columns
       table.headers = [
-        [{content: game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.SpellSlotsPerSpellLevel"), colSpan: largestSlot}],
+        [{content: _loc("JOURNALENTRYPAGE.DND5E.Class.SpellSlotsPerSpellLevel"), colSpan: largestSlot}],
         Array.fromRange(largestSlot, 1).map(spellLevel => ({content: spellLevel.ordinalString()}))
       ];
       table.cols = [{class: "spellcasting", span: largestSlot}];
@@ -390,8 +390,8 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
    */
   async _getOptionalTable(item, { modernStyle }) {
     const headers = [[
-      { content: game.i18n.localize("DND5E.Level") },
-      { content: game.i18n.localize("DND5E.Features") }
+      { content: _loc("DND5E.Level") },
+      { content: _loc("DND5E.Features") }
     ]];
 
     const cols = [
@@ -448,7 +448,7 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
       if ( document?.type !== "feat" ) return null;
       return {
         document, level,
-        name: modernStyle ? game.i18n.format("JOURNALENTRYPAGE.DND5E.Class.Features.Name", {
+        name: modernStyle ? _loc("JOURNALENTRYPAGE.DND5E.Class.Features.Name", {
           name: document.name, level: formatNumber(level)
         }) : document.name,
         description: await TextEditor.enrichHTML(document.system.description.value, {
@@ -471,9 +471,9 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
     }, { levels: [], boons: [] });
     if ( asi.levels.length ) {
       const [firstLevel, ...otherLevels] = asi.levels.sort((a, b) => a - b);
-      const name = game.i18n.localize("DND5E.ADVANCEMENT.AbilityScoreImprovement.Journal.Name");
+      const name = _loc("DND5E.ADVANCEMENT.AbilityScoreImprovement.Journal.Name");
       features.push({
-        description: game.i18n.format(
+        description: _loc(
           `DND5E.ADVANCEMENT.AbilityScoreImprovement.Journal.Description${modernStyle ? "Modern" : "Legacy"}`,
           {
             class: item.name,
@@ -486,7 +486,7 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
           }
         ),
         level: asi.levels[0],
-        name: modernStyle ? game.i18n.format("JOURNALENTRYPAGE.DND5E.Class.Features.Name", {
+        name: modernStyle ? _loc("JOURNALENTRYPAGE.DND5E.Class.Features.Name", {
           name: name, level: formatNumber(firstLevel)
         }) : name
       });
@@ -494,12 +494,12 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
     for ( const advancement of asi.boons ) {
       const recommendation = await fromUuid(advancement.configuration.recommendation);
       features.push({
-        description: game.i18n.format(
+        description: _loc(
           `DND5E.ADVANCEMENT.AbilityScoreImprovement.Journal.DescriptionEpic${recommendation ? "Recommendation" : ""}`,
           { recommendation: recommendation?.toAnchor().outerHTML }
         ),
         level: advancement.level,
-        name: game.i18n.format("JOURNALENTRYPAGE.DND5E.Class.Features.Name", {
+        name: _loc("JOURNALENTRYPAGE.DND5E.Class.Features.Name", {
           name: advancement._defaultTitle, level: formatNumber(advancement.level)
         })
       });

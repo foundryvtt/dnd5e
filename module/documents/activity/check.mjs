@@ -54,12 +54,12 @@ export default class CheckActivity extends ActivityMixin(BaseCheckActivityData) 
       let type;
       if ( checkType === "skill" ) type = CONFIG.DND5E.skills[associated]?.label;
       else if ( checkType === "tool" ) type = Trait.keyLabel(associated, { trait: "tool" });
-      if ( type ) label = game.i18n.format("EDITOR.DND5E.Inline.SpecificCheck", { ability, type });
+      if ( type ) label = _loc("EDITOR.DND5E.Inline.SpecificCheck", { ability, type });
       else label = ability;
 
       buttons.push({
         label: dc ? `
-          <span class="visible-dc">${game.i18n.format("EDITOR.DND5E.Inline.DC", { dc, check: wrap(label) })}</span>
+          <span class="visible-dc">${_loc("EDITOR.DND5E.Inline.DC", { dc, check: wrap(label) })}</span>
           <span class="hidden-dc">${wrap(label)}</span>
         ` : wrap(label),
         icon: checkType === "tool" ? '<i class="fa-solid fa-hammer" inert></i>'
@@ -67,7 +67,7 @@ export default class CheckActivity extends ActivityMixin(BaseCheckActivityData) 
         dataset
       });
     };
-    const wrap = check => game.i18n.format("EDITOR.DND5E.Inline.CheckShort", { check });
+    const wrap = check => _loc("EDITOR.DND5E.Inline.CheckShort", { check });
 
     const associated = Array.from(this.check.associated);
     if ( !associated.length && (this.item.type === "tool") ) associated.push(this.item.system.type.baseItem);

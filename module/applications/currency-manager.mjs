@@ -251,7 +251,7 @@ export default class CurrencyManager extends Application5e {
     if ( amount <= 0 ) return;
     // eslint-disable-next-line no-unused-vars
     const { item, remainder, ...updates } = this.getActorCurrencyUpdates(actor, amount, denomination, options);
-    if ( remainder ) throw new Error(game.i18n.format("DND5E.CurrencyManager.Error.InsufficientFunds", {
+    if ( remainder ) throw new Error(_loc("DND5E.CurrencyManager.Error.InsufficientFunds", {
       denomination,
       amount: new Intl.NumberFormat(game.i18n.lang).format(amount),
       name: actor.name

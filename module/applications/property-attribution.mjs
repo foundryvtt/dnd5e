@@ -76,7 +76,7 @@ export default class PropertyAttribution extends Application5e {
       );
     }
     return {
-      caption: game.i18n.localize(this.options.title),
+      caption: _loc(this.options.title),
       sources: sources.map(entry => {
         if ( entry.label.startsWith("@") ) entry.label = this.getPropertyLabel(entry.label.slice(1));
         if ( (entry.type === "add") && (entry.value < 0) ) {
@@ -105,7 +105,7 @@ export default class PropertyAttribution extends Application5e {
     } else if ( (property === "attributes.ac.dex") && CONFIG.DND5E.abilities.dex ) {
       return CONFIG.DND5E.abilities.dex.label;
     } else if ( (parts[0] === "prof") || (property === "attributes.prof") ) {
-      return game.i18n.localize("DND5E.Proficiency");
+      return _loc("DND5E.Proficiency");
     }
     return property;
   }

@@ -236,7 +236,7 @@ export default class ContainerData extends ItemDataModel.mixin(
     if ( this.capacity.count ) {
       context.value = await this.contentsCount;
       context.max = this.capacity.count;
-      context.units = game.i18n.localize("DND5E.Items");
+      context.units = _loc("DND5E.Items");
     } else if ( this.capacity.weight.value ) {
       context.value = await this.contentsWeight;
       context.max = this.capacity.weight.value;
@@ -333,7 +333,7 @@ export default class ContainerData extends ItemDataModel.mixin(
   /** @inheritDoc */
   async getSheetData(context) {
     context.subtitles = [
-      { label: game.i18n.localize(CONFIG.Item.typeLabels.container) },
+      { label: _loc(CONFIG.Item.typeLabels.container) },
       ...this.physicalItemSheetFields
     ];
     context.parts = ["dnd5e.details-container"];

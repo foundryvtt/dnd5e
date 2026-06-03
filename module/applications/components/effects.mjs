@@ -83,43 +83,43 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
     const categories = {
       enchantment: {
         type: "enchantment",
-        label: game.i18n.localize("DND5E.ENCHANTMENT.Category.General"),
+        label: _loc("DND5E.ENCHANTMENT.Category.General"),
         effects: [],
         isEnchantment: true
       },
       temporary: {
         type: "temporary",
-        label: game.i18n.localize("DND5E.EffectTemporary"),
+        label: _loc("DND5E.EffectTemporary"),
         effects: []
       },
       enchantmentActive: {
         type: "activeEnchantment",
-        label: game.i18n.localize("DND5E.ENCHANTMENT.Category.Active"),
+        label: _loc("DND5E.ENCHANTMENT.Category.Active"),
         effects: [],
         isEnchantment: true
       },
       passive: {
         type: "passive",
-        label: game.i18n.localize("DND5E.EffectPassive"),
+        label: _loc("DND5E.EffectPassive"),
         effects: []
       },
       enchantmentInactive: {
         type: "inactiveEnchantment",
-        label: game.i18n.localize("DND5E.ENCHANTMENT.Category.Inactive"),
+        label: _loc("DND5E.ENCHANTMENT.Category.Inactive"),
         effects: [],
         isEnchantment: true
       },
       inactive: {
         type: "inactive",
-        label: game.i18n.localize("DND5E.EffectInactive"),
+        label: _loc("DND5E.EffectInactive"),
         effects: []
       },
       suppressed: {
         type: "suppressed",
-        label: game.i18n.localize("DND5E.EffectUnavailable"),
+        label: _loc("DND5E.EffectUnavailable"),
         effects: [],
         disabled: true,
-        info: [game.i18n.localize("DND5E.EffectUnavailableInfo")]
+        info: [_loc("DND5E.EffectUnavailableInfo")]
       }
     };
 
@@ -245,7 +245,7 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
         await effect.deleteDialog({ sheet: this.#app }, { render: false });
         return this.#app.render();
       case "duplicate":
-        return effect.clone({ name: game.i18n.format("DOCUMENT.CopyOf", { name: effect.name }) }, { save: true });
+        return effect.clone({ name: _loc("DOCUMENT.CopyOf", { name: effect.name }) }, { save: true });
       case "edit":
         return this.#app._openDocumentSheet(effect);
       case "favorite":
@@ -287,7 +287,7 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
     const isEnchantment = li.dataset.effectType.startsWith("enchantment");
     return this.document.createEmbeddedDocuments("ActiveEffect", [{
       type: isEnchantment ? "enchantment" : "base",
-      name: isActor ? game.i18n.localize("DND5E.EffectNew") : this.document.name,
+      name: isActor ? _loc("DND5E.EffectNew") : this.document.name,
       icon: isActor ? "icons/svg/aura.svg" : this.document.img,
       origin: isEnchantment ? undefined : this.document.uuid,
       "duration.rounds": li.dataset.effectType === "temporary" ? 1 : undefined,

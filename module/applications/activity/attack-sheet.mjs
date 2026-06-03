@@ -45,21 +45,21 @@ export default class AttackSheet extends ActivitySheet {
     const availableAbilities = this.activity.availableAbilities;
     context.abilityOptions = [
       {
-        value: "", label: game.i18n.format("DND5E.DefaultSpecific", {
+        value: "", label: _loc("DND5E.DefaultSpecific", {
           default: this.activity.attack.type.classification === "spell"
-            ? game.i18n.localize("DND5E.Spellcasting").toLowerCase()
+            ? _loc("DND5E.Spellcasting").toLowerCase()
             : availableAbilities.size
               ? game.i18n.getListFormatter({ style: "short", type: "disjunction" }).format(
                 Array.from(availableAbilities).map(a => CONFIG.DND5E.abilities[a].label.toLowerCase())
               )
-              : game.i18n.localize("DND5E.None").toLowerCase()
+              : _loc("DND5E.None").toLowerCase()
         })
       },
       { rule: true },
-      { value: "none", label: game.i18n.localize("DND5E.None") },
-      { value: "spellcasting", label: game.i18n.localize("DND5E.Spellcasting") },
+      { value: "none", label: _loc("DND5E.None") },
+      { value: "spellcasting", label: _loc("DND5E.Spellcasting") },
       ...Object.entries(CONFIG.DND5E.abilities).map(([value, config]) => ({
-        value, label: config.label, group: game.i18n.localize("DND5E.Abilities")
+        value, label: config.label, group: _loc("DND5E.Abilities")
       }))
     ];
 
@@ -78,7 +78,7 @@ export default class AttackSheet extends ActivitySheet {
       .map(([value, config]) => ({ value, label: config.label }));
     if ( this.item.system.validAttackTypes?.size ) context.attackTypeOptions.unshift({
       value: "",
-      label: game.i18n.format("DND5E.DefaultSpecific", {
+      label: _loc("DND5E.DefaultSpecific", {
         default: game.i18n.getListFormatter({ type: "disjunction" }).format(
           Array.from(this.item.system.validAttackTypes).map(t => CONFIG.DND5E.attackTypes[t].label.toLowerCase())
         )
@@ -89,7 +89,7 @@ export default class AttackSheet extends ActivitySheet {
       .map(([value, config]) => ({ value, label: config.label }));
     if ( this.item.system.attackClassification ) context.attackClassificationOptions.unshift({
       value: "",
-      label: game.i18n.format("DND5E.DefaultSpecific", {
+      label: _loc("DND5E.DefaultSpecific", {
         default: CONFIG.DND5E.attackClassifications[this.item.system.attackClassification].label.toLowerCase()
       })
     });

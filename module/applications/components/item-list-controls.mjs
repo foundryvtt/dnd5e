@@ -230,7 +230,7 @@ export default class ItemListControlsElement extends MaybeAdoptable {
       <ul class="unlist controls">
         <li>
           <button type="button" class="unbutton filter-control always-interactive" data-action="clear"
-                  data-tooltip aria-label="${game.i18n.localize("DND5E.FilterClear")}">
+                  data-tooltip aria-label="${_loc("DND5E.FilterClear")}">
             <i class="fas fa-xmark"></i>
           </button>
         </li>
@@ -248,7 +248,7 @@ export default class ItemListControlsElement extends MaybeAdoptable {
       const item = document.createElement("li");
       item.innerHTML = `
         <button type="button" class="unbutton filter-control filter always-interactive" data-action="filter"
-                aria-label="${game.i18n.localize("DND5E.Filter")}">
+                aria-label="${_loc("DND5E.Filter")}">
           <i class="fa-solid fa-filter" inert></i>
         </button>
       `;

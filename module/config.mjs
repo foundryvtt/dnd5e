@@ -1481,9 +1481,9 @@ Object.defineProperty(DND5E.limitedUsePeriods, "recoveryOptions", {
       ...Object.entries(CONFIG.DND5E.limitedUsePeriods)
         .filter(([, config]) => !config.deprecated)
         .map(([value, { label, type }]) => ({
-          value, label, group: game.i18n.localize(`DND5E.USES.Recovery.${type?.capitalize() ?? "Time"}`)
+          value, label, group: _loc(`DND5E.USES.Recovery.${type?.capitalize() ?? "Time"}`)
         })),
-      { value: "recharge", label: game.i18n.localize("DND5E.USES.Recovery.Recharge.Label") }
+      { value: "recharge", label: _loc("DND5E.USES.Recovery.Recharge.Label") }
     ];
   }
 });

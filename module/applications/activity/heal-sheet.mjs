@@ -37,7 +37,7 @@ export default class HealSheet extends ActivitySheet {
     }));
     const scaleKey = (this.item.type === "spell" && this.item.system.level === 0) ? "labelCantrip" : "label";
     context.scalingOptions = [
-      { value: "", label: game.i18n.localize("DND5E.DAMAGE.Scaling.None") },
+      { value: "", label: _loc("DND5E.DAMAGE.Scaling.None") },
       ...Object.entries(CONFIG.DND5E.damageScalingModes).map(([value, { [scaleKey]: label }]) => ({ value, label }))
     ];
     return context;

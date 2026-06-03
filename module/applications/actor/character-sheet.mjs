@@ -348,8 +348,8 @@ export default class CharacterActorSheet extends BaseActorSheet {
       context.saves.concentration = {
         isConcentration: true,
         class: "colspan concentration",
-        label: game.i18n.localize("DND5E.Concentration"),
-        abbr: game.i18n.localize("DND5E.Concentration"),
+        label: _loc("DND5E.Concentration"),
+        abbr: _loc("DND5E.Concentration"),
         save: { value: context.system.attributes.concentration.save }
       };
     }
@@ -416,7 +416,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
         .map((cls, i) => {
           return {
             columns, id: cls.identifier, order: i * 100, groups: { origin: cls.identifier },
-            label: game.i18n.format("DND5E.FeaturesClass", { class: cls.name })
+            label: _loc("DND5E.FeaturesClass", { class: cls.name })
           };
         }),
       this.actor.system.details.race instanceof Item5e ? {
@@ -456,7 +456,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
     };
 
     // TODO: Add this warning during data preparation instead
-    // const message = game.i18n.format("DND5E.SubclassMismatchWarn", {
+    // const message = _loc("DND5E.SubclassMismatchWarn", {
     //   name: subclass.name, class: subclass.system.classIdentifier
     // });
     // context.warnings.push({ message, type: "warning" });
@@ -487,7 +487,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
     // Experience & Epic Boons
     if ( context.system.details.xp.boonsEarned !== undefined ) {
       const pluralRules = new Intl.PluralRules(game.i18n.lang);
-      context.epicBoonsEarned = game.i18n.format(
+      context.epicBoonsEarned = _loc(
         `DND5E.ExperiencePoints.Boons.${pluralRules.select(context.system.details.xp.boonsEarned ?? 0)}`,
         { number: formatNumber(context.system.details.xp.boonsEarned ?? 0, { signDisplay: "always" }) }
       );
@@ -544,7 +544,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
         context.death[deathSave].push({
           n, filled,
           tooltip: i18nKey,
-          label: game.i18n.localize(`${i18nKey}N.${plurals.select(n)}`),
+          label: _loc(`${i18nKey}N.${plurals.select(n)}`),
           classes: classes.join(" ")
         });
       }
@@ -554,7 +554,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
     if ( CONFIG.DND5E.conditionTypes.exhaustion ) {
       const max = CONFIG.DND5E.conditionTypes.exhaustion.levels;
       context.exhaustion = Array.fromRange(max, 1).reduce((acc, n) => {
-        const label = game.i18n.format("DND5E.ExhaustionLevel", { n });
+        const label = _loc("DND5E.ExhaustionLevel", { n });
         const classes = ["pip"];
         const filled = attributes.exhaustion >= n;
         if ( filled ) classes.push("filled");
@@ -575,7 +575,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       if ( hidden ) return obj;
       const value = attributes.movement[k];
       if ( (k === "fly") && attributes.movement.hover ) {
-        label = game.i18n.format("DND5E.MOVEMENT.HoverSpeed", { speed: label });
+        label = _loc("DND5E.MOVEMENT.HoverSpeed", { speed: label });
       }
       if ( value > obj.value ) Object.assign(obj, { label, value });
       return obj;
@@ -600,7 +600,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       const mod = ability?.mod ?? 0;
       const name = item.system.spellcasting.progression === sc.progression ? item.name : item.subclass?.name;
       context.spellcasting.push({
-        label: game.i18n.format("DND5E.SpellcastingClass", { class: name }),
+        label: _loc("DND5E.SpellcastingClass", { class: name }),
         ability: { mod, ability: sc.ability },
         attack: sc.attack,
         preparation: sc.preparation,
@@ -637,8 +637,8 @@ export default class CharacterActorSheet extends BaseActorSheet {
         css: "uses",
         title: label,
         subtitle: [
-          sr ? game.i18n.localize("DND5E.AbbreviationSR") : null,
-          lr ? game.i18n.localize("DND5E.AbbreviationLR") : null
+          sr ? _loc("DND5E.AbbreviationSR") : null,
+          lr ? _loc("DND5E.AbbreviationLR") : null
         ].filterJoin(" &bull; ")
       });
       return arr;
@@ -663,7 +663,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
 
       if ( foundry.utils.getType(save?.ability) === "Set" ) save = {
         ...save, ability: save.ability.size > 2
-          ? game.i18n.localize("DND5E.AbbreviationDC")
+          ? _loc("DND5E.AbbreviationDC")
           : Array.from(save.ability).map(k => CONFIG.DND5E.abilities[k]?.abbreviation).filterJoin(" / ")
       };
 
@@ -688,7 +688,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       if ( type === "skill" ) rollableClass.push("skill-name");
       else if ( type === "tool" ) rollableClass.push("tool-name");
 
-      if ( suppressed ) subtitle = game.i18n.localize("DND5E.Suppressed");
+      if ( suppressed ) subtitle = _loc("DND5E.Suppressed");
       const itemId = type === "item" ? favorite.id : type === "activity" ? favorite.item.id : null;
       arr.push({
         id, img, type, title, value, uses, sort, save, modifier, passive, range, reference, suppressed, level, itemId,
@@ -725,10 +725,10 @@ export default class CharacterActorSheet extends BaseActorSheet {
       const uses = { value, max, name: `system.spells.${id}.value` };
       if ( !model || model.isSingleLevel ) return {
         uses, level, method,
-        title: game.i18n.localize(`DND5E.SpellSlots${id.capitalize()}`),
+        title: _loc(`DND5E.SpellSlots${id.capitalize()}`),
         subtitle: [
-          game.i18n.localize(`DND5E.SpellLevel${level}`),
-          game.i18n.localize(`DND5E.Abbreviation${model?.isSR ? "SR" : "LR"}`)
+          _loc(`DND5E.SpellLevel${level}`),
+          _loc(`DND5E.Abbreviation${model?.isSR ? "SR" : "LR"}`)
         ],
         img: model?.img || CONFIG.DND5E.spellcasting.pact.img
       };
@@ -736,8 +736,8 @@ export default class CharacterActorSheet extends BaseActorSheet {
       const plurals = new Intl.PluralRules(game.i18n.lang, { type: "ordinal" });
       return {
         uses, level, method,
-        title: game.i18n.format(`DND5E.SpellSlotsN.${plurals.select(level)}`, { n: level }),
-        subtitle: game.i18n.localize(`DND5E.Abbreviation${model.isSR ? "SR" : "LR"}`),
+        title: _loc(`DND5E.SpellSlotsN.${plurals.select(level)}`, { n: level }),
+        subtitle: _loc(`DND5E.Abbreviation${model.isSR ? "SR" : "LR"}`),
         img: model.img.replace("{id}", id)
       };
     }
@@ -747,7 +747,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       const data = this.actor.system[`${type}s`]?.[id];
       if ( !data ) return;
       const { total, ability, passive } = data ?? {};
-      const subtitle = game.i18n.format("DND5E.AbilityPromptTitle", {
+      const subtitle = _loc("DND5E.AbilityPromptTitle", {
         ability: CONFIG.DND5E.abilities[ability].label
       });
       let img;
@@ -790,7 +790,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
     const { id, img, labels, name, system } = item;
     const { building, craft, defenders, disabled, free, hirelings, progress, size, trade, type } = system;
     const subtitle = [
-      building.built ? CONFIG.DND5E.facilities.sizes[size].label : game.i18n.localize("DND5E.FACILITY.Build.Unbuilt")
+      building.built ? CONFIG.DND5E.facilities.sizes[size].label : _loc("DND5E.FACILITY.Build.Unbuilt")
     ];
     if ( trade.stock.max ) subtitle.push(`${trade.stock.value ?? 0} &sol; ${trade.stock.max}`);
     Object.assign(ctx, {
@@ -961,7 +961,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       const result = await foundry.applications.api.DialogV2.confirm({
         content: `
           <p>
-            <strong>${game.i18n.localize("AreYouSure")}</strong> ${game.i18n.localize("DND5E.Bastion.Trade.Invalid")}
+            <strong>${_loc("AreYouSure")}</strong> ${_loc("DND5E.Bastion.Trade.Invalid")}
           </p>
         `,
         window: {
@@ -1057,7 +1057,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
     tray.classList.toggle("open", open);
     this._deathTrayOpen = tray.classList.contains("open");
     tab.dataset.tooltip = `DND5E.DeathSave${this._deathTrayOpen ? "Hide" : "Show"}`;
-    tab.setAttribute("aria-label", game.i18n.localize(tab.dataset.tooltip));
+    tab.setAttribute("aria-label", _loc(tab.dataset.tooltip));
   }
 
   /* -------------------------------------------- */
@@ -1247,7 +1247,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       const charLevel = this.actor.system.details.level;
       itemData.system.levels = Math.min(itemData.system.levels, CONFIG.DND5E.maxLevel - charLevel);
       if ( itemData.system.levels <= 0 ) {
-        const err = game.i18n.format("DND5E.MaxCharacterLevelExceededWarn", { max: CONFIG.DND5E.maxLevel });
+        const err = _loc("DND5E.MaxCharacterLevelExceededWarn", { max: CONFIG.DND5E.maxLevel });
         ui.notifications.error(err);
         return;
       }
@@ -1271,13 +1271,13 @@ export default class CharacterActorSheet extends BaseActorSheet {
     else if ( itemData.type === "subclass" ) {
       const other = this.actor.itemTypes.subclass.find(i => i.identifier === itemData.system.identifier);
       if ( other ) {
-        const err = game.i18n.format("DND5E.SubclassDuplicateError", { identifier: other.identifier });
+        const err = _loc("DND5E.SubclassDuplicateError", { identifier: other.identifier });
         ui.notifications.error(err);
         return;
       }
       const cls = this.actor.itemTypes.class.find(i => i.identifier === itemData.system.classIdentifier);
       if ( cls && cls.subclass ) {
-        const err = game.i18n.format("DND5E.SubclassAssignmentError", { class: cls.name, subclass: cls.subclass.name });
+        const err = _loc("DND5E.SubclassAssignmentError", { class: cls.name, subclass: cls.subclass.name });
         ui.notifications.error(err);
         return;
       }

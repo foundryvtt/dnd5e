@@ -50,7 +50,7 @@ export default class UsesField extends SchemaField {
         recovery.formula ??= "6";
         recovery.type = "recoverAll";
         recovery.recharge = { options: UsesField.rechargeOptions };
-        if ( labels ) labels.recharge ??= `${game.i18n.localize("DND5E.Recharge")} [${
+        if ( labels ) labels.recharge ??= `${_loc("DND5E.Recharge")} [${
           recovery.formula}${parseInt(recovery.formula) < 6 ? "+" : ""}]`;
       } else if ( recovery.period in CONFIG.DND5E.limitedUsePeriods ) {
         const config = CONFIG.DND5E.limitedUsePeriods[recovery.period];
@@ -76,7 +76,7 @@ export default class UsesField extends SchemaField {
   static get rechargeOptions() {
     return Array.fromRange(5, 2).reverse().map(min => ({
       value: min,
-      label: game.i18n.format("DND5E.USES.Recovery.Recharge.Range", {
+      label: _loc("DND5E.USES.Recovery.Recharge.Range", {
         range: min === 6 ? formatNumber(6) : formatRange(min, 6)
       })
     }));
@@ -95,7 +95,7 @@ export default class UsesField extends SchemaField {
     if ( (this.activation?.type === "legendary") || (this.activation?.type === "mythic") ) {
       if ( this.activation.value < 2 ) return "";
       const pr = getPluralRules();
-      return game.i18n.format(`DND5E.NPC.ActionCostCounted.${pr.select(this.activation.value)}`, {
+      return _loc(`DND5E.NPC.ActionCostCounted.${pr.select(this.activation.value)}`, {
         number: formatNumber(this.activation.value)
       });
     }
@@ -110,12 +110,12 @@ export default class UsesField extends SchemaField {
     // Recharge X–Y
     if ( recovery.period === "recharge" ) {
       const value = parseInt(recovery.formula);
-      return `${game.i18n.localize("DND5E.Recharge")} ${value === 6 ? "6" : `${value}–6`}`;
+      return `${_loc("DND5E.Recharge")} ${value === 6 ? "6" : `${value}–6`}`;
     }
 
     // Recharge after a Short or Long Rest
     if ( ["lr", "sr"].includes(recovery.period) && (this.uses.max === 1) ) {
-      return game.i18n.localize(`DND5E.Recharge${recovery.period === "sr" ? "Short" : "Long"}`);
+      return _loc(`DND5E.Recharge${recovery.period === "sr" ? "Short" : "Long"}`);
     }
 
     // X/Day
@@ -173,7 +173,7 @@ export default class UsesField extends SchemaField {
         total = (await roll.evaluate()).total;
       } catch(err) {
         Hooks.onError("UsesField#recoverUses", err, {
-          msg: game.i18n.format("DND5E.ItemRecoveryFormulaWarning", {
+          msg: _loc("DND5E.ItemRecoveryFormulaWarning", {
             name: item.name, formula: profile.formula, uuid: this.uuid ?? item.uuid
           }),
           log: "error",
@@ -235,9 +235,9 @@ export default class UsesField extends SchemaField {
     const rolls = await CONFIG.Dice.BasicRoll.buildConfigure(rollConfig, dialogConfig, messageConfig);
     await CONFIG.Dice.BasicRoll.buildEvaluate(rolls, rollConfig, messageConfig);
     if ( !rolls.length ) return;
-    messageConfig.data.flavor = game.i18n.format("DND5E.ItemRechargeCheck", {
+    messageConfig.data.flavor = _loc("DND5E.ItemRechargeCheck", {
       name: this.name,
-      result: game.i18n.localize(`DND5E.ItemRecharge${rolls[0].isSuccess ? "Success" : "Failure"}`)
+      result: _loc(`DND5E.ItemRecharge${rolls[0].isSuccess ? "Success" : "Failure"}`)
     });
     await CONFIG.Dice.BasicRoll.buildPost(rolls, rollConfig, messageConfig);
 

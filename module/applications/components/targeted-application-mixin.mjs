@@ -91,10 +91,10 @@ export default function TargetedApplicationMixin(Base) {
       this.targetSourceControl.classList.add("target-source-control");
       this.targetSourceControl.innerHTML = `
         <button type="button" class="unbutton" data-mode="targeted" aria-pressed="false">
-          <i class="fa-solid fa-bullseye" inert></i> ${game.i18n.localize("DND5E.Tokens.Targeted")}
+          <i class="fa-solid fa-bullseye" inert></i> ${_loc("DND5E.Tokens.Targeted")}
         </button>
         <button type="button" class="unbutton" data-mode="selected" aria-pressed="false">
-          <i class="fa-solid fa-expand" inert></i> ${game.i18n.localize("DND5E.Tokens.Selected")}
+          <i class="fa-solid fa-expand" inert></i> ${_loc("DND5E.Tokens.Selected")}
         </button>
       `;
       this.targetSourceControl.querySelectorAll("button").forEach(b =>
@@ -133,7 +133,7 @@ export default function TargetedApplicationMixin(Base) {
       else {
         const li = document.createElement("li");
         li.classList.add("none");
-        li.innerText = game.i18n.localize(`DND5E.Tokens.None${this.targetingMode.capitalize()}`);
+        li.innerText = _loc(`DND5E.Tokens.None${this.targetingMode.capitalize()}`);
         this.targetList.replaceChildren(li);
       }
     }

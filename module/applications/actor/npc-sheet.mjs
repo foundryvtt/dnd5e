@@ -281,7 +281,7 @@ export default class NPCActorSheet extends BaseActorSheet {
         return {
           n: max - n, filled,
           tooltip: `DND5E.${i18n}.Label`,
-          label: game.i18n.format(`DND5E.${i18n}.Ordinal.${plurals.select(n)}`, { n }),
+          label: _loc(`DND5E.${i18n}.Ordinal.${plurals.select(n)}`, { n }),
           classes: classes.join(" ")
         };
       });
@@ -346,7 +346,7 @@ export default class NPCActorSheet extends BaseActorSheet {
         ...habitat.value.map(({ type, subtype }) => {
           let { label } = CONFIG.DND5E.habitats[type] ?? {};
           if ( label && (!any || (type === "any")) ) {
-            if ( subtype ) label = game.i18n.format("DND5E.Habitat.Subtype", { type: label, subtype });
+            if ( subtype ) label = _loc("DND5E.Habitat.Subtype", { type: label, subtype });
             return { label };
           }
           return null;
@@ -359,7 +359,7 @@ export default class NPCActorSheet extends BaseActorSheet {
     context.senses = this._prepareSenses(context);
     if ( this.actor.system.skills.prc ) context.senses.push({
       key: "passivePerception",
-      label: game.i18n.localize("DND5E.PassivePerception"),
+      label: _loc("DND5E.PassivePerception"),
       value: this.actor.system.skills.prc.passive
     });
 
@@ -376,7 +376,7 @@ export default class NPCActorSheet extends BaseActorSheet {
         if ( !value ) return null;
         const data = { label, value };
         if ( (k === "fly") && attributes.movement.hover ) data.icons = [{
-          icon: "fas fa-cloud", label: game.i18n.localize("DND5E.MOVEMENT.Hover")
+          icon: "fas fa-cloud", label: _loc("DND5E.MOVEMENT.Hover")
         }];
         return data;
       }),
@@ -410,7 +410,7 @@ export default class NPCActorSheet extends BaseActorSheet {
 
     const { fields } = this.document.system.schema;
     context.flags.sections.unshift({
-      label: game.i18n.localize("DND5E.NPC.Label"),
+      label: _loc("DND5E.NPC.Label"),
       fields: [{
         field: fields.traits.fields.important,
         input: createCheckboxInput,
@@ -452,8 +452,8 @@ export default class NPCActorSheet extends BaseActorSheet {
     const mod = spellAbility?.mod ?? 0;
     const attackBonus = msak === rsak ? msak : 0;
     context.spellcasting.push({
-      label: game.i18n.format("DND5E.SpellcastingClass", {
-        class: spellcaster?.name ?? game.i18n.format("DND5E.NPC.Label")
+      label: _loc("DND5E.SpellcastingClass", {
+        class: spellcaster?.name ?? _loc("DND5E.NPC.Label")
       }),
       level: spellcaster?.system.levels ?? attributes.spell.level,
       ability: {
@@ -465,7 +465,7 @@ export default class NPCActorSheet extends BaseActorSheet {
       noSpellcaster: !spellcaster,
       concentration: {
         mod: attributes.concentration.save,
-        tooltip: game.i18n.format("DND5E.AbilityConfigure", { ability: game.i18n.localize("DND5E.Concentration") })
+        tooltip: _loc("DND5E.AbilityConfigure", { ability: _loc("DND5E.Concentration") })
       }
     });
 
@@ -521,7 +521,7 @@ export default class NPCActorSheet extends BaseActorSheet {
     const elements = this.element.querySelector(".header-elements .cr-xp");
     if ( !elements || this.actor.limited ) return;
     const xp = this.actor.system.details.xp.value;
-    elements.innerText = xp === null ? "" : game.i18n.format("DND5E.ExperiencePoints.Format", {
+    elements.innerText = xp === null ? "" : _loc("DND5E.ExperiencePoints.Format", {
       value: formatNumber(xp)
     });
 

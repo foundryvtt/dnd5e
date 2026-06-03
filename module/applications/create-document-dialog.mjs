@@ -79,7 +79,7 @@ export default class CreateDocumentDialog extends Dialog5e {
     }
     context.folders = this.options.folders ?? collection?._formatFolderSelectOptions() ?? [];
     context.hasFolders = !!context.folders.length;
-    context.folders.unshift({ id: "", name: game.i18n.localize("DOCUMENT.Folder"), rule: true });
+    context.folders.unshift({ id: "", name: _loc("DOCUMENT.Folder"), rule: true });
 
     context.name = this.options.createData.name;
     context.folder = this.options.createData.folder;
@@ -103,7 +103,7 @@ export default class CreateDocumentDialog extends Dialog5e {
           const label = CONFIG[this.documentName]?.typeLabels?.[type];
           Object.assign(typeData, {
             icon: this.documentType.getDefaultArtwork?.({ type })?.img ?? this.documentType.DEFAULT_ICON,
-            label: label && game.i18n.has(label) ? game.i18n.localize(label) : type
+            label: label && game.i18n.has(label) ? _loc(label) : type
           });
         }
         context.types.push(typeData);
@@ -140,8 +140,8 @@ export default class CreateDocumentDialog extends Dialog5e {
    * @param {FormDataExtended} formData  Data from the dialog.
    */
   static async #handleFormSubmission(event, form, formData) {
-    if ( !form.checkValidity() ) throw new Error(game.i18n.format("DOCUMENT.DND5E.Warning.SelectType", {
-      name: game.i18n.localize(documentType.metadata.label ?? `DOCUMENT.DND5E.${documentType.documentName}`)
+    if ( !form.checkValidity() ) throw new Error(_loc("DOCUMENT.DND5E.Warning.SelectType", {
+      name: _loc(documentType.metadata.label ?? `DOCUMENT.DND5E.${documentType.documentName}`)
     }));
     foundry.utils.mergeObject(this.options.createData, formData.object);
     this.#submitted = true;
@@ -162,8 +162,8 @@ export default class CreateDocumentDialog extends Dialog5e {
    * @returns {Promise<Document>}
    */
   static async prompt(documentType, data={}, { folders, types, ...createOptions }={}, { ok={}, sheet, ...config }={}) {
-    const label = game.i18n.localize(documentType.metadata.label ?? `DOCUMENT.DND5E.${documentType.documentName}`);
-    const title = game.i18n.format("DOCUMENT.Create", { type: label });
+    const label = _loc(documentType.metadata.label ?? `DOCUMENT.DND5E.${documentType.documentName}`);
+    const title = _loc("DOCUMENT.Create", { type: label });
 
     foundry.utils.mergeObject(config, {
       createOptions, documentType, folders, types,

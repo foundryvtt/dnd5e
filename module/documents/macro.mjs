@@ -80,13 +80,13 @@ function getMacroTarget(name, documentType) {
 
   // Find item in collection
   const documents = collection.filter(i => i._source.name === name);
-  const type = game.i18n.localize(`DOCUMENT.${documentType}`);
+  const type = _loc(`DOCUMENT.${documentType}`);
   if ( documents.length === 0 ) {
-    ui.notifications.warn(game.i18n.format("MACRO.5eMissingTargetWarn", { actor: actor.name, type, name }));
+    ui.notifications.warn(_loc("MACRO.5eMissingTargetWarn", { actor: actor.name, type, name }));
     return null;
   }
   if ( documents.length > 1 ) {
-    ui.notifications.warn(game.i18n.format("MACRO.5eMultipleTargetsWarn", { actor: actor.name, type, name }));
+    ui.notifications.warn(_loc("MACRO.5eMultipleTargetsWarn", { actor: actor.name, type, name }));
   }
   return documents[0];
 }

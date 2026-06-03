@@ -488,22 +488,22 @@ Hooks.once("i18nInit", () => {
     const { translations, _fallback } = game.i18n;
     foundry.utils.mergeObject(translations, {
       "TYPES.Item": {
-        race: game.i18n.localize("TYPES.Item.raceLegacy"),
-        racePl: game.i18n.localize("TYPES.Item.raceLegacyPl")
+        race: _loc("TYPES.Item.raceLegacy"),
+        racePl: _loc("TYPES.Item.raceLegacyPl")
       },
       DND5E: {
-        "Feature.Class.ArtificerPlan": game.i18n.localize("DND5E.Feature.Class.ArtificerInfusion"),
-        "Feature.Species": game.i18n.localize("DND5E.Feature.SpeciesLegacy"),
-        FlagsAlertHint: game.i18n.localize("DND5E.FlagsAlertHintLegacy"),
-        FlagsRemarkableAthleteHint: game.i18n.localize("DND5E.FlagsRemarkableAthleteHintLegacy"),
-        ItemSpeciesDetails: game.i18n.localize("DND5E.ItemSpeciesDetailsLegacy"),
-        "Language.Category.Rare": game.i18n.localize("DND5E.Language.Category.Exotic"),
-        "MOVEMENT.Type.Speed": game.i18n.localize("DND5E.MOVEMENT.Type.Walk"),
-        RacialTraits: game.i18n.localize("DND5E.RacialTraitsLegacy"),
-        "REST.Long.Hint.Normal": game.i18n.localize("DND5E.REST.Long.Hint.NormalLegacy"),
-        "REST.Long.Hint.Group": game.i18n.localize("DND5E.REST.Long.Hint.GroupLegacy"),
-        "Species.Add": game.i18n.localize("DND5E.Species.AddLegacy"),
-        "Species.Features": game.i18n.localize("DND5E.Species.FeaturesLegacy"),
+        "Feature.Class.ArtificerPlan": _loc("DND5E.Feature.Class.ArtificerInfusion"),
+        "Feature.Species": _loc("DND5E.Feature.SpeciesLegacy"),
+        FlagsAlertHint: _loc("DND5E.FlagsAlertHintLegacy"),
+        FlagsRemarkableAthleteHint: _loc("DND5E.FlagsRemarkableAthleteHintLegacy"),
+        ItemSpeciesDetails: _loc("DND5E.ItemSpeciesDetailsLegacy"),
+        "Language.Category.Rare": _loc("DND5E.Language.Category.Exotic"),
+        "MOVEMENT.Type.Speed": _loc("DND5E.MOVEMENT.Type.Walk"),
+        RacialTraits: _loc("DND5E.RacialTraitsLegacy"),
+        "REST.Long.Hint.Normal": _loc("DND5E.REST.Long.Hint.NormalLegacy"),
+        "REST.Long.Hint.Group": _loc("DND5E.REST.Long.Hint.GroupLegacy"),
+        "Species.Add": _loc("DND5E.Species.AddLegacy"),
+        "Species.Features": _loc("DND5E.Species.FeaturesLegacy"),
         "TARGET.Type.Emanation": foundry.utils.mergeObject(
           _fallback.DND5E?.TARGET?.Type?.Radius ?? {},
           translations.DND5E?.TARGET?.Type?.Radius ?? {},
@@ -514,7 +514,7 @@ Hooks.once("i18nInit", () => {
           translations.DND5E?.TraitArmorLegacyPlural ?? {},
           { inplace: false }
         ),
-        TraitArmorProf: game.i18n.localize("DND5E.TraitArmorLegacyProf")
+        TraitArmorProf: _loc("DND5E.TraitArmorLegacyProf")
       }
     });
   }

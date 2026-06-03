@@ -30,7 +30,7 @@ export default class AttackRollConfigurationDialog extends D20RollConfigurationD
     ];
     context.fields = [
       ...optionsFields.map(({ key, label, options }) => options.length ? {
-        field: new foundry.data.fields.StringField({ label: game.i18n.localize(label), blank: false, required: true }),
+        field: new foundry.data.fields.StringField({ label: _loc(label), blank: false, required: true }),
         name: key,
         options,
         value: this.config[key]

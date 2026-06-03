@@ -86,7 +86,7 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
   _usageChatButtons(message) {
     if ( !this.availableProfiles.length ) return super._usageChatButtons(message);
     return [{
-      label: game.i18n.localize("DND5E.TRANSFORM.Action.Transform"),
+      label: _loc("DND5E.TRANSFORM.Action.Transform"),
       icon: '<i class="fa-solid fa-frog" inert></i>',
       dataset: {
         action: "transformActor"

@@ -86,7 +86,7 @@ export default class GroupTemplate extends ActorDataModel.mixin(CurrencyTemplate
       }
     } catch(err) {
       Hooks.onError("GroupTemplate#placeMembers", err, {
-        msg: game.i18n.localize("DND5E.Group.Warning.PlaceMembers"),
+        msg: _loc("DND5E.Group.Warning.PlaceMembers"),
         log: "error",
         notify: "error"
       });

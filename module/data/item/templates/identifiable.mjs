@@ -88,7 +88,7 @@ export default class IdentifiableTemplate extends SystemDataModel {
     // If a base item is set, fetch that and use its name/description
     if ( baseItem ) {
       if ( fetchName ) {
-        foundry.utils.setProperty(changed, "system.unidentified.name", game.i18n.format(
+        foundry.utils.setProperty(changed, "system.unidentified.name", _loc(
           "DND5E.Unidentified.DefaultName", { name: baseItem.name }
         ));
       }
@@ -99,8 +99,8 @@ export default class IdentifiableTemplate extends SystemDataModel {
     }
 
     // Otherwise, set the name to match the item type
-    if ( fetchName ) foundry.utils.setProperty(changed, "system.unidentified.name", game.i18n.format(
-      "DND5E.Unidentified.DefaultName", { name: game.i18n.localize(CONFIG.Item.typeLabels[this.parent.type]) }
+    if ( fetchName ) foundry.utils.setProperty(changed, "system.unidentified.name", _loc(
+      "DND5E.Unidentified.DefaultName", { name: _loc(CONFIG.Item.typeLabels[this.parent.type]) }
     ));
   }
 }

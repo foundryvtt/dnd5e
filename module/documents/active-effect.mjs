@@ -400,7 +400,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     let level = this.getFlag("dnd5e", "exhaustionLevel");
     if ( !Number.isFinite(level) ) level = 1;
     this.img = this.constructor._getExhaustionImage(level);
-    this.name = `${game.i18n.localize("DND5E.Exhaustion")} ${level}`;
+    this.name = `${_loc("DND5E.Exhaustion")} ${level}`;
     if ( level >= config.levels ) {
       this.statuses.add("dead");
       CONFIG.DND5E.statusEffects.dead.statuses?.forEach(s => this.statuses.add(s));
@@ -670,10 +670,10 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     const statusEffect = CONFIG.statusEffects.find(e => e.id === CONFIG.specialStatusEffects.CONCENTRATING);
     const effectData = foundry.utils.mergeObject({
       ...statusEffect,
-      name: `${game.i18n.localize("EFFECT.DND5E.StatusConcentrating")}: ${item.name}`,
-      description: `<p>${game.i18n.format("DND5E.ConcentratingOn", {
+      name: `${_loc("EFFECT.DND5E.StatusConcentrating")}: ${item.name}`,
+      description: `<p>${_loc("DND5E.ConcentratingOn", {
         name: item.name,
-        type: game.i18n.localize(`TYPES.Item.${item.type}`)
+        type: _loc(`TYPES.Item.${item.type}`)
       })}</p><hr><p>@Embed[${item.uuid} inline]</p>`,
       duration: activity.duration.getEffectData(),
       "flags.dnd5e": {
@@ -715,8 +715,8 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    */
   static onRenderActiveEffectConfig(app, html, context) {
     const element = new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {}).toFormGroup({
-      label: game.i18n.localize("DND5E.CONDITIONS.RiderConditions.label"),
-      hint: game.i18n.localize("DND5E.CONDITIONS.RiderConditions.hint")
+      label: _loc("DND5E.CONDITIONS.RiderConditions.label"),
+      hint: _loc("DND5E.CONDITIONS.RiderConditions.hint")
     }, {
       name: "flags.dnd5e.riders.statuses",
       value: app.document.getFlag("dnd5e", "riders.statuses") ?? [],
@@ -728,7 +728,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     // Add tooltip with link to wiki for effects/enchantments
     const helpIconElement = document.createElement("i");
     helpIconElement.classList.add("fa-solid", "fa-circle-question");
-    const tooltipText = game.i18n.format("DND5E.ACTIVEEFFECT.AttributeKeyTooltip", {
+    const tooltipText = _loc("DND5E.ACTIVEEFFECT.AttributeKeyTooltip", {
       url: app.document.type === "enchantment"
         ? "https://github.com/foundryvtt/dnd5e/wiki/Enchantment"
         : "https://github.com/foundryvtt/dnd5e/wiki/Active-Effect-Guide"
@@ -826,23 +826,23 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     }
     const choices = effects.reduce((acc, effect) => {
       const data = effect.getFlag("dnd5e", "item");
-      acc[effect.id] = data?.name ?? actor.items.get(data?.id)?.name ?? game.i18n.localize("DND5E.ConcentratingItemless");
+      acc[effect.id] = data?.name ?? actor.items.get(data?.id)?.name ?? _loc("DND5E.ConcentratingItemless");
       return acc;
     }, {});
     const options = HandlebarsHelpers.selectOptions(choices, { hash: { sort: true } });
     const content = `
-    <p>${game.i18n.localize("DND5E.ConcentratingEndChoice")}</p>
+    <p>${_loc("DND5E.ConcentratingEndChoice")}</p>
     <div class="form-group">
-      <label>${game.i18n.localize("DND5E.SOURCE.FIELDS.source.label")}</label>
+      <label>${_loc("DND5E.SOURCE.FIELDS.source.label")}</label>
       <div class="form-fields">
         <select name="source">${options}</select>
       </div>
     </div>`;
     foundry.applications.api.Dialog.prompt({
       content,
-      window: { title: game.i18n.localize("DND5E.Concentration") },
+      window: { title: _loc("DND5E.Concentration") },
       ok: {
-        label: game.i18n.localize("DND5E.Confirm"),
+        label: _loc("DND5E.Confirm"),
         callback: (event, button, dialog) => {
           const source = new foundry.applications.ux.FormDataExtended(button.form).object.source;
           if ( source ) actor.endConcentration(source);
@@ -943,7 +943,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     else if ( this.isTemporary ) properties.push("DND5E.EffectType.Temporary");
     else properties.push("DND5E.EffectType.Passive");
     if ( this.type === "enchantment" ) properties.push("DND5E.ENCHANTMENT.Label");
-    properties = properties.map(p => game.i18n.localize(p));
+    properties = properties.map(p => _loc(p));
     properties.unshift(...this.statuses.map(id => CONFIG.statusEffects[id]?.name).filter(_ => _));
 
     return {
@@ -964,13 +964,13 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /** @override */
   async deleteDialog({ sheet, ...dialogOptions }={}, operation={}) {
-    const type = game.i18n.localize(this.constructor.metadata.label);
+    const type = _loc(this.constructor.metadata.label);
     const config = foundry.utils.mergeObject({
-      window: { title: `${game.i18n.format("DOCUMENT.Delete", { type })}: ${this.name}` },
+      window: { title: `${_loc("DOCUMENT.Delete", { type })}: ${this.name}` },
       position: { width: 400 },
       content: `
         <p>
-            <strong>${game.i18n.localize("AreYouSure")}</strong> ${game.i18n.format("SIDEBAR.DeleteWarning", { type })}
+            <strong>${_loc("AreYouSure")}</strong> ${_loc("SIDEBAR.DeleteWarning", { type })}
         </p>
       `,
       yes: { callback: () => this.delete(operation) }

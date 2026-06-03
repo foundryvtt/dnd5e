@@ -582,7 +582,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
    */
   _onDuplicateItem(item) {
     return item.clone({
-      name: game.i18n.format("DOCUMENT.CopyOf", { name: item.name })
+      name: _loc("DOCUMENT.CopyOf", { name: item.name })
     }, { save: true, addSource: true });
   }
 

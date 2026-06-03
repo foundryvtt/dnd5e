@@ -228,20 +228,20 @@ export default class BaseAttackActivityData extends BaseActivityData {
     let attackModeLabel;
     if ( attackMode ) {
       const key = attackMode.split("-").map(s => s.capitalize()).join("");
-      attackModeLabel = game.i18n.localize(`DND5E.ATTACK.Mode.${key}`);
+      attackModeLabel = _loc(`DND5E.ATTACK.Mode.${key}`);
     }
     const actionType = this.getActionType(attackMode);
-    let actionTypeLabel = game.i18n.localize(`DND5E.Action${actionType.toUpperCase()}`);
+    let actionTypeLabel = _loc(`DND5E.Action${actionType.toUpperCase()}`);
     const isLegacy = dnd5e.settings.rulesVersion === "legacy";
     const isUnarmed = this.attack.type.classification === "unarmed";
-    if ( isUnarmed ) attackModeLabel = game.i18n.localize("DND5E.ATTACK.Classification.Unarmed");
+    if ( isUnarmed ) attackModeLabel = _loc("DND5E.ATTACK.Classification.Unarmed");
     const isSpell = (actionType === "rsak") || (actionType === "msak");
     if ( isLegacy || isSpell ) return [actionTypeLabel, attackModeLabel].filterJoin(" • ");
-    actionTypeLabel = game.i18n.localize(`DND5E.ATTACK.Attack.${actionType}`);
+    actionTypeLabel = _loc(`DND5E.ATTACK.Attack.${actionType}`);
     if ( isUnarmed ) return [actionTypeLabel, attackModeLabel].filterJoin(" • ");
     const weaponType = CONFIG.DND5E.weaponTypeMap[this.item.system.type?.value];
     const weaponTypeLabel = weaponType
-      ? game.i18n.localize(`DND5E.ATTACK.Weapon.${weaponType.capitalize()}`)
+      ? _loc(`DND5E.ATTACK.Weapon.${weaponType.capitalize()}`)
       : CONFIG.DND5E.weaponTypes[this.item.system.type?.value];
     return [actionTypeLabel, weaponTypeLabel, attackModeLabel].filterJoin(" • ");
   }
@@ -345,7 +345,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
     if ( this.validAttackTypes.has("melee") ) {
       let { reach, units } = this.item.system.range;
       if ( !reach ) reach = convertLength(5, "ft", units);
-      parts.push(game.i18n.format("DND5E.RANGE.Formatted.Reach", {
+      parts.push(_loc("DND5E.RANGE.Formatted.Reach", {
         reach: formatLength(reach, units, { strict: false })
       }));
     }
@@ -359,7 +359,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
         range = !long || (long === value) ? formatLength(value, units)
           : `${formatNumber(value)}/${formatLength(long, units)}`;
       }
-      if ( range ) parts.push(game.i18n.format("DND5E.RANGE.Formatted.Range", { range }));
+      if ( range ) parts.push(_loc("DND5E.RANGE.Formatted.Range", { range }));
     }
 
     return game.i18n.getListFormatter({ type: "disjunction" }).format(parts.filter(_ => _));

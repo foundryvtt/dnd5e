@@ -35,7 +35,7 @@ export default class JournalNavigationConfig extends DocumentSheet5e {
 
   /** @override */
   get title() {
-    return game.i18n.localize(this.options.window.title);
+    return _loc(this.options.window.title);
   }
 
   /* --------------------------------------------- */
@@ -58,7 +58,7 @@ export default class JournalNavigationConfig extends DocumentSheet5e {
     });
     context.fields = ["previous", "up", "next"].map(name => ({
       field: new StringField(),
-      label: game.i18n.localize(`DND5E.JOURNALENTRY.Navigation.${name.capitalize()}`),
+      label: _loc(`DND5E.JOURNALENTRY.Navigation.${name.capitalize()}`),
       name: `flags.dnd5e.navigation.${name}`,
       options: entryOptions,
       value: data[name]

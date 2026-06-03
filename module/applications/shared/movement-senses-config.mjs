@@ -51,7 +51,7 @@ export default class MovementSensesConfig extends BaseConfigSheet {
 
   /** @override */
   get title() {
-    return game.i18n.localize(this.options.type === "movement" ? "DND5E.Movement" : "DND5E.Senses");
+    return _loc(this.options.type === "movement" ? "DND5E.Movement" : "DND5E.Senses");
   }
 
   /* -------------------------------------------- */
@@ -103,7 +103,7 @@ export default class MovementSensesConfig extends BaseConfigSheet {
         const automaticUnit = CONFIG.DND5E.movementUnits[placeholderData?.units ?? defaultUnits("length")]?.label ?? "";
         context.unitsOptions.blank = true;
         context.unitsOptions.unshift(
-          { value: "", label: game.i18n.format("DND5E.AutomaticValue", { value: automaticUnit.toLowerCase() }) },
+          { value: "", label: _loc("DND5E.AutomaticValue", { value: automaticUnit.toLowerCase() }) },
           { rule: true }
         );
       }
@@ -139,9 +139,9 @@ export default class MovementSensesConfig extends BaseConfigSheet {
       field: context.fields.ignoredDifficultTerrain,
       value: context.data.ignoredDifficultTerrain,
       options: [
-        { value: "all", label: game.i18n.localize("DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.All") },
-        { value: "magical", label: game.i18n.localize("DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Magical") },
-        { value: "nonmagical", label: game.i18n.localize("DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Nonmagical") },
+        { value: "all", label: _loc("DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.All") },
+        { value: "magical", label: _loc("DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Magical") },
+        { value: "nonmagical", label: _loc("DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Nonmagical") },
         { rule: true },
         ...Object.entries(CONFIG.DND5E.difficultTerrainTypes).map(([value, { label }]) => ({ value, label }))
       ],
@@ -194,6 +194,6 @@ export default class MovementSensesConfig extends BaseConfigSheet {
       localize: true,
       value: data.time
     });
-    if ( context.fields ) context.legend = game.i18n.localize("DND5E.MOVEMENT.Speed");
+    if ( context.fields ) context.legend = _loc("DND5E.MOVEMENT.Speed");
   }
 }

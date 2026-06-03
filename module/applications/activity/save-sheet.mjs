@@ -48,17 +48,17 @@ export default class SaveSheet extends ActivitySheet {
       value, label: config.label
     }));
     context.calculationOptions = [
-      { value: "", label: game.i18n.localize("DND5E.SAVE.FIELDS.save.dc.CustomFormula") },
+      { value: "", label: _loc("DND5E.SAVE.FIELDS.save.dc.CustomFormula") },
       { rule: true },
-      { value: "spellcasting", label: game.i18n.localize("DND5E.SpellAbility") },
+      { value: "spellcasting", label: _loc("DND5E.SpellAbility") },
       ...Object.entries(CONFIG.DND5E.abilities).map(([value, config]) => ({
-        value, label: config.label, group: game.i18n.localize("DND5E.Abilities")
+        value, label: config.label, group: _loc("DND5E.Abilities")
       }))
     ];
     context.onSaveOptions = [
-      { value: "none", label: game.i18n.localize("DND5E.SAVE.FIELDS.damage.onSave.None") },
-      { value: "half", label: game.i18n.localize("DND5E.SAVE.FIELDS.damage.onSave.Half") },
-      { value: "full", label: game.i18n.localize("DND5E.SAVE.FIELDS.damage.onSave.Full") }
+      { value: "none", label: _loc("DND5E.SAVE.FIELDS.damage.onSave.None") },
+      { value: "half", label: _loc("DND5E.SAVE.FIELDS.damage.onSave.Half") },
+      { value: "full", label: _loc("DND5E.SAVE.FIELDS.damage.onSave.Full") }
     ];
 
     return context;

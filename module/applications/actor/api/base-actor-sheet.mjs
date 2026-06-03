@@ -367,7 +367,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       else globals.push({ field, name: field.fieldPath, value: foundry.utils.getProperty(source, field.fieldPath) });
     };
     addBonus(this.document.system.schema.fields.bonuses);
-    if ( globals.length ) sections[game.i18n.localize("DND5E.BONUSES.FIELDS.bonuses.label")] = globals;
+    if ( globals.length ) sections[_loc("DND5E.BONUSES.FIELDS.bonuses.label")] = globals;
 
     flags.sections = Object.entries(sections).map(([label, fields]) => ({ label, fields }));
 
@@ -558,7 +558,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     const registerSection = (key, level, config) => {
       level = config?.slots ? level : 1;
       if ( key in spellbook ) return;
-      const label = config?.getLabel({ level }) ?? game.i18n.localize("DND5E.CAST.SECTIONS.Spellbook");
+      const label = config?.getLabel({ level }) ?? _loc("DND5E.CAST.SECTIONS.Spellbook");
       const method = config?.key ?? key;
       const order = level === 0 ? 0 : (config?.order ?? 1000);
       const usesSlots = config?.slots && (level !== 0);
@@ -578,10 +578,10 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         const filled = spells.value >= n;
         const temp = n > maxSlots;
         const label = temp
-          ? game.i18n.localize("DND5E.SpellSlotTemporary")
+          ? _loc("DND5E.SpellSlotTemporary")
           : filled
-            ? game.i18n.format(`DND5E.SpellSlotN.${getPluralRules({ type: "ordinal" }).select(n)}`, { n })
-            : game.i18n.localize("DND5E.SpellSlotExpended");
+            ? _loc(`DND5E.SpellSlotN.${getPluralRules({ type: "ordinal" }).select(n)}`, { n })
+            : _loc("DND5E.SpellSlotExpended");
         const classes = ["pip"];
         if ( filled ) classes.push("filled");
         if ( temp ) classes.push("tmp");
@@ -648,7 +648,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         const icons = value.icons = [];
         if ( data.bypasses?.size && CONFIG.DND5E.damageTypes[key]?.isPhysical ) icons.push(...data.bypasses.map(p => {
           const type = CONFIG.DND5E.itemProperties[p]?.label;
-          return { icon: p, label: game.i18n.format("DND5E.DAMAGE.PhysicalBypass.DescriptionShort", { type }) };
+          return { icon: p, label: _loc("DND5E.DAMAGE.PhysicalBypass.DescriptionShort", { type }) };
         }));
         return value;
       });
@@ -658,7 +658,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
     // If petrified, display "All Damage" instead of all damage types separately
     if ( this.document.hasConditionEffect("petrification") ) {
-      traits.dr = [{ label: game.i18n.localize("DND5E.DAMAGE.All") }];
+      traits.dr = [{ label: _loc("DND5E.DAMAGE.All") }];
     }
 
     // Combine damage & condition immunities in play mode.
@@ -682,7 +682,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         const icons = value.icons = [];
         if ( dm.bypasses.size && CONFIG.DND5E.damageTypes[k]?.isPhysical ) icons.push(...dm.bypasses.map(p => {
           const type = CONFIG.DND5E.itemProperties[p]?.label;
-          return { icon: p, label: game.i18n.format("DND5E.DAMAGE.PhysicalBypass.DescriptionShort", { type }) };
+          return { icon: p, label: _loc("DND5E.DAMAGE.PhysicalBypass.DescriptionShort", { type }) };
         }));
         return value;
       }).filter(f => f);
@@ -707,7 +707,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         traits.weapon ??= [];
         traits.weapon.push(value);
       }
-      value.icons.push({ icon: "mastery", label: game.i18n.format("DND5E.WEAPON.Mastery.Label") });
+      value.icons.push({ icon: "mastery", label: _loc("DND5E.WEAPON.Mastery.Label") });
     }
 
     return traits;
@@ -726,7 +726,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       "header-control", "preparation-warnings", "icon", "fa-solid", "fa-triangle-exclamation"
     );
     Object.assign(warnings.dataset, { action: "openWarnings", tooltip: "Warnings", tooltipDirection: "DOWN" });
-    warnings.setAttribute("aria-label", game.i18n.localize("Warnings"));
+    warnings.setAttribute("aria-label", _loc("Warnings"));
     html.querySelector(".window-header .window-subtitle").after(warnings);
 
     return html;
@@ -785,7 +785,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     return {
       _id, img, labels, name, range, uses,
       activation: activationAbbr
-        ? `${activation.value ?? ""}${game.i18n.localize(activationAbbr)}`
+        ? `${activation.value ?? ""}${_loc(activationAbbr)}`
         : labels.activation,
       isSpell: activity.item.type === "spell",
       save: save ? {
@@ -793,7 +793,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         ability: save.ability?.size
           ? save.ability.size === 1
             ? CONFIG.DND5E.abilities[save.ability.first()]?.abbreviation
-            : game.i18n.localize("DND5E.AbbreviationDC")
+            : _loc("DND5E.AbbreviationDC")
           : null
       } : null,
       toHit: Number.isNaN(toHit) ? null : toHit
@@ -827,7 +827,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     ctx.save = { ...item.system.activities?.getByType("save")[0]?.save };
     ctx.save.ability = ctx.save.ability?.size ? ctx.save.ability.size === 1
       ? CONFIG.DND5E.abilities[ctx.save.ability.first()]?.abbreviation
-      : game.i18n.localize("DND5E.AbbreviationDC") : null;
+      : _loc("DND5E.AbbreviationDC") : null;
 
     // Linked Uses
     const cachedFor = fromUuidSync(item.flags.dnd5e?.cachedFor, { relative: item.parent, strict: false });
@@ -924,7 +924,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       hour: "DND5E.TimeHourAbbr",
       day: "DND5E.TimeDayAbbr"
     }[item.system.activation.type];
-    ctx.activation = abbr ? `${cost}${game.i18n.localize(abbr)}` : item.labels.activation;
+    ctx.activation = abbr ? `${cost}${_loc(abbr)}` : item.labels.activation;
 
     // Range
     const units = item.system.range?.units;
@@ -985,7 +985,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     element.classList.add("attunement");
     element.innerHTML = `
       <i class="fa-solid fa-sun" data-tooltip="DND5E.Attunement"
-         aria-label="${game.i18n.localize("DND5E.Attunement")}"></i>
+         aria-label="${_loc("DND5E.Attunement")}"></i>
       <span class="value"></span>
       <span class="separator">&sol;</span>
     `;
@@ -1014,7 +1014,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     const button = document.createElement("button");
     Object.assign(button, {
       type: "button", className: "create-child gold-button",
-      ariaLabel: game.i18n.format("SIDEBAR.Create", { type: game.i18n.localize("DOCUMENT.Item") })
+      ariaLabel: _loc("SIDEBAR.Create", { type: _loc("DOCUMENT.Item") })
     });
     button.dataset.action = "addDocument";
     button.insertAdjacentHTML("beforeend", '<i class="fa-solid fa-plus" inert></i>');
@@ -1041,7 +1041,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       if ( context.editable ) {
         const config = document.createElement("button");
         Object.assign(config, {
-          type: "button", className: "unbutton config-button", ariaLabel: game.i18n.localize("DND5E.SpellSlotsConfig")
+          type: "button", className: "unbutton config-button", ariaLabel: _loc("DND5E.SpellSlotsConfig")
         });
         Object.assign(config.dataset, {
           action: "showConfiguration", config: "spellSlots", tooltip: "DND5E.SpellSlotsConfig"
@@ -1174,7 +1174,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   /** @override */
   _addDocument(event, target) {
     if ( this.tabGroups.primary === "effects" ) return ActiveEffect.implementation.create({
-      name: game.i18n.localize("DND5E.EffectNew"),
+      name: _loc("DND5E.EffectNew"),
       icon: "icons/svg/aura.svg"
     }, { parent: this.actor, renderSheet: true });
 
@@ -1185,7 +1185,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
     const type = types[0];
     return Item.implementation.create({
-      type, name: game.i18n.format("DOCUMENT.New", { type: game.i18n.format(CONFIG.Item.typeLabels[type]) })
+      type, name: _loc("DOCUMENT.New", { type: _loc(CONFIG.Item.typeLabels[type]) })
     }, { parent: actor, renderSheet: true });
   }
 
@@ -1247,8 +1247,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
     // Adjust create child tooltip
     const createChild = this.element.querySelector(".create-child");
-    createChild?.setAttribute("aria-label", game.i18n.format("SIDEBAR.Create", {
-      type: game.i18n.localize(`DOCUMENT.${tab === "effects" ? "ActiveEffect" : "Item"}`)
+    createChild?.setAttribute("aria-label", _loc("SIDEBAR.Create", {
+      type: _loc(`DOCUMENT.${tab === "effects" ? "ActiveEffect" : "Item"}`)
     }));
 
     // Toggle sidebar
@@ -1586,7 +1586,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     if ( !collapser ) return collapsed;
     const icon = collapser.querySelector("i");
     collapser.dataset.tooltip = `JOURNAL.View${collapsed ? "Expand" : "Collapse"}`;
-    collapser.setAttribute("aria-label", game.i18n.localize(collapser.dataset.tooltip));
+    collapser.setAttribute("aria-label", _loc(collapser.dataset.tooltip));
     icon.classList.remove("fa-caret-left", "fa-caret-right");
     icon.classList.add(`fa-caret-${collapsed ? "right" : "left"}`);
     return collapsed;
@@ -1821,7 +1821,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     const itemsWithoutAdvancement = items.filter(i => !i.system.advancement?.size);
     const multipleAdvancements = (items.length - itemsWithoutAdvancement.length) > 1;
     if ( multipleAdvancements && !game.settings.get("dnd5e", "disableAdvancements") ) {
-      ui.notifications.warn(game.i18n.format("DND5E.WarnCantAddMultipleAdvancements"));
+      ui.notifications.warn(_loc("DND5E.WarnCantAddMultipleAdvancements"));
       items = itemsWithoutAdvancement;
     }
 
@@ -1865,8 +1865,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     if ( this.constructor.unsupportedItemTypes.has(itemData.type) ) {
       ui.notifications.warn("DND5E.ACTOR.Warning.InvalidItem", {
         format: {
-          itemType: game.i18n.localize(CONFIG.Item.typeLabels[itemData.type]),
-          actorType: game.i18n.localize(CONFIG.Actor.typeLabels[actor.type])
+          itemType: _loc(CONFIG.Item.typeLabels[itemData.type]),
+          actorType: _loc(CONFIG.Actor.typeLabels[actor.type])
         }
       });
       return false;
@@ -1895,8 +1895,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       if ( singleton && actor.itemTypes[itemData.type].length ) {
         ui.notifications.error("DND5E.ACTOR.Warning.Singleton", {
           format: {
-            itemType: game.i18n.localize(CONFIG.Item.typeLabels[itemData.type]),
-            actorType: game.i18n.localize(CONFIG.Actor.typeLabels[actor.type])
+            itemType: _loc(CONFIG.Item.typeLabels[itemData.type]),
+            actorType: _loc(CONFIG.Actor.typeLabels[actor.type])
           }
         });
         return false;

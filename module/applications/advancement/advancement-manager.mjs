@@ -96,12 +96,12 @@ export default class AdvancementManager extends Application5e {
     // Class/Subclass level
     let level = this.step.flow.level;
     if ( this.step.class && ["class", "subclass"].includes(item.type) ) level = this.step.class.level;
-    if ( level ) parts.push(game.i18n.format("DND5E.AdvancementLevelHeader", { level }));
+    if ( level ) parts.push(_loc("DND5E.AdvancementLevelHeader", { level }));
 
     // Step Count
     const visibleSteps = this.steps.filter(s => !s.automatic);
     const visibleIndex = visibleSteps.indexOf(this.step);
-    if ( visibleIndex >= 0 ) parts.push(game.i18n.format("DND5E.ADVANCEMENT.Manager.Steps", {
+    if ( visibleIndex >= 0 ) parts.push(_loc("DND5E.ADVANCEMENT.Manager.Steps", {
       current: visibleIndex + 1,
       total: visibleSteps.length
     }));
@@ -594,17 +594,17 @@ export default class AdvancementManager extends Application5e {
     if ( !options.skipConfirmation ) {
       const result = await this._confirmDialog({
         window: {
-          title: `${game.i18n.localize("DND5E.ADVANCEMENT.Manager.ClosePrompt.Title")}: ${this.actor.name}`
+          title: `${_loc("DND5E.ADVANCEMENT.Manager.ClosePrompt.Title")}: ${this.actor.name}`
         },
         position: { width: 400 },
-        content: game.i18n.localize("DND5E.ADVANCEMENT.Manager.ClosePrompt.Message"),
+        content: _loc("DND5E.ADVANCEMENT.Manager.ClosePrompt.Message"),
         yes: {
           icon: "fas fa-times",
-          label: game.i18n.localize("DND5E.ADVANCEMENT.Manager.ClosePrompt.Action.Stop")
+          label: _loc("DND5E.ADVANCEMENT.Manager.ClosePrompt.Action.Stop")
         },
         no: {
           icon: "fas fa-chevron-right",
-          label: game.i18n.localize("DND5E.ADVANCEMENT.Manager.ClosePrompt.Action.Continue")
+          label: _loc("DND5E.ADVANCEMENT.Manager.ClosePrompt.Action.Continue")
         }
       });
       if ( result !== "yes" ) return;
@@ -859,8 +859,8 @@ export default class AdvancementManager extends Application5e {
    */
   async #restart(event) {
     const result = await this._confirmDialog({
-      window: { title: game.i18n.localize("DND5E.ADVANCEMENT.Manager.RestartPrompt.Title") },
-      content: `<p>${game.i18n.localize("DND5E.ADVANCEMENT.Manager.RestartPrompt.Message")}</p>`
+      window: { title: _loc("DND5E.ADVANCEMENT.Manager.RestartPrompt.Title") },
+      content: `<p>${_loc("DND5E.ADVANCEMENT.Manager.RestartPrompt.Message")}</p>`
     });
     if ( result !== "yes" ) return;
     // While there is still a renderable step.

@@ -136,7 +136,7 @@ export default class ItemDataModel extends SystemDataModel {
    * @type {string[]}
    */
   get tooltipSubtitle() {
-    return [this.type?.label ?? game.i18n.localize(CONFIG.Item.typeLabels[this.parent.type])];
+    return [this.type?.label ?? _loc(CONFIG.Item.typeLabels[this.parent.type])];
   }
 
   /* -------------------------------------------- */
@@ -283,7 +283,7 @@ export default class ItemDataModel extends SystemDataModel {
     return {
       img: this.parent.img,
       title: this.parent.name,
-      subtitle: game.i18n.localize(CONFIG.Item.typeLabels[this.parent.type])
+      subtitle: _loc(CONFIG.Item.typeLabels[this.parent.type])
     };
   }
 

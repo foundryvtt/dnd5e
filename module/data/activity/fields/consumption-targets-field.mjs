@@ -130,7 +130,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
   static async consumeActivityUses(config, updates) {
     const result = await this._usesConsumption(config, {
       uses: this.activity.uses,
-      type: game.i18n.format("DND5E.CONSUMPTION.Type.ActivityUses.Warning", {
+      type: _loc("DND5E.CONSUMPTION.Type.ActivityUses.Warning", {
         activity: this.activity.name, item: this.item.name
       }),
       rolls: updates.rolls,
@@ -154,7 +154,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 
     const attribute = getHumanReadableAttributeLabel(this.target, { actor: this.actor });
     if ( !foundry.utils.hasProperty(this.actor, keyPath) ) throw new ConsumptionError(
-      game.i18n.format("DND5E.CONSUMPTION.Warning.MissingAttribute", {
+      _loc("DND5E.CONSUMPTION.Warning.MissingAttribute", {
         activity: this.activity.name, attribute, item: this.item.name
       })
     );
@@ -163,9 +163,9 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
     let warningMessage;
     if ( (cost > 0) && !current ) warningMessage = "DND5E.CONSUMPTION.Warning.None";
     else if ( current < cost ) warningMessage = "DND5E.CONSUMPTION.Warning.NotEnough";
-    if ( warningMessage ) throw new ConsumptionError(game.i18n.format(warningMessage, {
+    if ( warningMessage ) throw new ConsumptionError(_loc(warningMessage, {
       available: formatNumber(current), cost: formatNumber(cost),
-      type: game.i18n.format("DND5E.CONSUMPTION.Type.Attribute.Warning", { attribute })
+      type: _loc("DND5E.CONSUMPTION.Type.Attribute.Warning", { attribute })
     }));
 
     const adjustedKeyPath = keyPath.replace(/\.value$/, ".spent");
@@ -206,9 +206,9 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
     else if ( total < cost ) warningMessage = "DND5E.CONSUMPTION.Warning.NotEnough";
     if ( warningMessage ) {
       const denomination = !["smallest", "largest"].includes(this.target) ? this.target : "";
-      throw new ConsumptionError(game.i18n.format(warningMessage, {
+      throw new ConsumptionError(_loc(warningMessage, {
         available: formatNumber(total), cost: formatNumber(cost), denomination,
-        type: game.i18n.format("DND5E.CONSUMPTION.Type.HitDice.Warning", { denomination })
+        type: _loc("DND5E.CONSUMPTION.Type.HitDice.Warning", { denomination })
       }));
     }
 
@@ -238,13 +238,13 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    */
   static async consumeItemUses(config, updates) {
     const item = this.target ? this.actor.items.get(this.target) : this.item;
-    if ( !item ) throw new ConsumptionError(game.i18n.format("DND5E.CONSUMPTION.Warning.MissingItem", {
+    if ( !item ) throw new ConsumptionError(_loc("DND5E.CONSUMPTION.Warning.MissingItem", {
       activity: this.activity.name, item: this.item.name
     }));
 
     const result = await this._usesConsumption(config, {
       uses: item.system.uses,
-      type: game.i18n.format("DND5E.CONSUMPTION.Type.ItemUses.Warning", { name: this.item.name }),
+      type: _loc("DND5E.CONSUMPTION.Type.ItemUses.Warning", { name: this.item.name }),
       rolls: updates.rolls,
       delta: { item: item.id, keyPath: "system.uses.spent" }
     });
@@ -280,7 +280,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    */
   static async consumeMaterial(config, updates) {
     const item = this.actor.items.get(this.target);
-    if ( !item ) throw new ConsumptionError(game.i18n.format("DND5E.CONSUMPTION.Warning.MissingItem", {
+    if ( !item ) throw new ConsumptionError(_loc("DND5E.CONSUMPTION.Warning.MissingItem", {
       activity: this.activity.name, item: this.item.name
     }));
 
@@ -290,9 +290,9 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
     let warningMessage;
     if ( cost > 0 && !item.system.quantity ) warningMessage = "DND5E.CONSUMPTION.Warning.None";
     else if ( cost > item.system.quantity ) warningMessage = "DND5E.CONSUMPTION.Warning.NotEnough";
-    if ( warningMessage ) throw new ConsumptionError(game.i18n.format(warningMessage, {
+    if ( warningMessage ) throw new ConsumptionError(_loc(warningMessage, {
       available: formatNumber(item.system.quantity), cost: formatNumber(cost),
-      type: game.i18n.format("DND5E.CONSUMPTION.Type.Material.Warning", { name: item.name })
+      type: _loc("DND5E.CONSUMPTION.Type.Material.Warning", { name: item.name })
     }));
 
     const newQuantity = item.system.quantity - cost;
@@ -331,8 +331,8 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
     else if ( newValue < 0 ) warningMessage = "DND5E.CONSUMPTION.Warning.NotEnough";
     if ( warningMessage ) {
       const level = CONFIG.DND5E.spellLevels[levelNumber];
-      const type = game.i18n.format("DND5E.CONSUMPTION.Type.SpellSlots.Warning", { level });
-      throw new ConsumptionError(game.i18n.format(warningMessage, {
+      const type = _loc("DND5E.CONSUMPTION.Type.SpellSlots.Warning", { level });
+      throw new ConsumptionError(_loc(warningMessage, {
         type, level, cost: formatNumber(cost), available: formatNumber(levelData.value)
       }));
     }
@@ -360,7 +360,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
     if ( cost > 0 && !uses.value ) warningMessage = "DND5E.CONSUMPTION.Warning.None";
     else if ( cost > uses.value ) warningMessage = "DND5E.CONSUMPTION.Warning.NotEnough";
     if ( warningMessage ) throw new ConsumptionError(
-      game.i18n.format(warningMessage, { type, cost: formatNumber(cost), available: formatNumber(uses.value) })
+      _loc(warningMessage, { type, cost: formatNumber(cost), available: formatNumber(uses.value) })
     );
 
     return { spent: uses.spent + cost };
@@ -398,14 +398,14 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
     const uses = this.activity.uses;
     const usesPluralRule = new Intl.PluralRules(game.i18n.lang).select(uses.value);
     return {
-      label: game.i18n.localize(`DND5E.CONSUMPTION.Type.ActivityUses.Prompt${increaseKey}`),
-      hint: game.i18n.format(
+      label: _loc(`DND5E.CONSUMPTION.Type.ActivityUses.Prompt${increaseKey}`),
+      hint: _loc(
         `DND5E.CONSUMPTION.Type.ActivityUses.PromptHint${increaseKey}`,
         {
           cost,
-          use: game.i18n.localize(`DND5E.CONSUMPTION.Type.Use.${pluralRule}`),
+          use: _loc(`DND5E.CONSUMPTION.Type.Use.${pluralRule}`),
           available: formatNumber(uses.value),
-          availableUse: game.i18n.localize(`DND5E.CONSUMPTION.Type.Use.${usesPluralRule}`)
+          availableUse: _loc(`DND5E.CONSUMPTION.Type.Use.${usesPluralRule}`)
         }
       ),
       warn: simplifiedCost > uses.value
@@ -426,8 +426,8 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
     const { cost, simplifiedCost, increaseKey } = this._resolveHintCost(config);
     const current = foundry.utils.getProperty(this.actor.system, this.target);
     return {
-      label: game.i18n.localize(`DND5E.CONSUMPTION.Type.Attribute.Prompt${increaseKey}`),
-      hint: game.i18n.format(
+      label: _loc(`DND5E.CONSUMPTION.Type.Attribute.Prompt${increaseKey}`),
+      hint: _loc(
         `DND5E.CONSUMPTION.Type.Attribute.PromptHint${increaseKey}`,
         {
           cost,
@@ -452,18 +452,18 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
   static consumptionLabelsHitDice(config, { consumed }={}) {
     const { cost, simplifiedCost, increaseKey, pluralRule } = this._resolveHintCost(config);
     let denomination;
-    if ( this.target === "smallest" ) denomination = game.i18n.localize("DND5E.ConsumeHitDiceSmallest");
-    else if ( this.target === "largest" ) denomination = game.i18n.localize("DND5E.ConsumeHitDiceLargest");
+    if ( this.target === "smallest" ) denomination = _loc("DND5E.ConsumeHitDiceSmallest");
+    else if ( this.target === "largest" ) denomination = _loc("DND5E.ConsumeHitDiceLargest");
     else denomination = this.target;
     const available = (["smallest", "largest"].includes(this.target)
       ? this.actor.system.attributes?.hd?.value : this.actor.system.attributes?.hd?.bySize?.[this.target]) ?? 0;
     return {
-      label: game.i18n.localize(`DND5E.CONSUMPTION.Type.HitDice.Prompt${increaseKey}`),
-      hint: game.i18n.format(
+      label: _loc(`DND5E.CONSUMPTION.Type.HitDice.Prompt${increaseKey}`),
+      hint: _loc(
         `DND5E.CONSUMPTION.Type.HitDice.PromptHint${increaseKey}`,
         {
           cost, denomination: denomination.toLowerCase(),
-          die: game.i18n.localize(`DND5E.CONSUMPTION.Type.HitDie.${pluralRule}`),
+          die: _loc(`DND5E.CONSUMPTION.Type.HitDie.${pluralRule}`),
           available: formatNumber(available)
         }
       ),
@@ -484,7 +484,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
   static consumptionLabelsItemUses(config, { consumed }={}) {
     const { cost, simplifiedCost, increaseKey, pluralRule } = this._resolveHintCost(config);
     const item = this.actor.items.get(this.target);
-    const itemName = item ? item.name : game.i18n.localize("DND5E.CONSUMPTION.Target.ThisItem").toLowerCase();
+    const itemName = item ? item.name : _loc("DND5E.CONSUMPTION.Target.ThisItem").toLowerCase();
     const uses = (item ?? this.item).system.uses;
     const usesPluralRule = new Intl.PluralRules(game.i18n.lang).select(uses.value);
 
@@ -493,18 +493,18 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
     if ( simplifiedCost > uses.value ) warn = true;
     else if ( (simplifiedCost > 0) && (uses.value - simplifiedCost === 0) && uses.autoDestroy ) notes.push({
       type: "warn",
-      message: game.i18n.format("DND5E.CONSUMPTION.Warning.WillDestroy", { item: itemName })
+      message: _loc("DND5E.CONSUMPTION.Warning.WillDestroy", { item: itemName })
     });
 
     return {
-      label: game.i18n.localize(`DND5E.CONSUMPTION.Type.ItemUses.Prompt${increaseKey}`),
-      hint: game.i18n.format(
+      label: _loc(`DND5E.CONSUMPTION.Type.ItemUses.Prompt${increaseKey}`),
+      hint: _loc(
         `DND5E.CONSUMPTION.Type.ItemUses.PromptHint${increaseKey}`,
         {
           cost,
-          use: game.i18n.localize(`DND5E.CONSUMPTION.Type.Use.${pluralRule}`),
+          use: _loc(`DND5E.CONSUMPTION.Type.Use.${pluralRule}`),
           available: formatNumber(uses.value),
-          availableUse: game.i18n.localize(`DND5E.CONSUMPTION.Type.Use.${usesPluralRule}`),
+          availableUse: _loc(`DND5E.CONSUMPTION.Type.Use.${usesPluralRule}`),
           item: item ? `<em>${itemName}</em>` : itemName
         }
       ),
@@ -528,13 +528,13 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
     const item = this.actor.items.get(this.target);
     const quantity = item?.system.quantity ?? 0;
     return {
-      label: game.i18n.localize(`DND5E.CONSUMPTION.Type.Material.Prompt${increaseKey}`),
-      hint: game.i18n.format(
+      label: _loc(`DND5E.CONSUMPTION.Type.Material.Prompt${increaseKey}`),
+      hint: _loc(
         `DND5E.CONSUMPTION.Type.Material.PromptHint${increaseKey}`,
         {
           cost,
           item: item ? `<em>${item.name}</em>`
-            : game.i18n.localize("DND5E.CONSUMPTION.Target.UnknownItem").toLowerCase(),
+            : _loc("DND5E.CONSUMPTION.Target.UnknownItem").toLowerCase(),
           quantity: formatNumber(quantity)
         }
       ),
@@ -558,12 +558,12 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
     const level = CONFIG.DND5E.spellLevels[levelNumber].toLowerCase();
     const available = this.actor.system.spells?.[`spell${levelNumber}`]?.value ?? 0;
     return {
-      label: game.i18n.localize(`DND5E.CONSUMPTION.Type.SpellSlots.Prompt${increaseKey}`),
-      hint: game.i18n.format(
+      label: _loc(`DND5E.CONSUMPTION.Type.SpellSlots.Prompt${increaseKey}`),
+      hint: _loc(
         `DND5E.CONSUMPTION.Type.SpellSlots.PromptHint${increaseKey}`,
         {
           cost,
-          slot: game.i18n.format(`DND5E.CONSUMPTION.Type.SpellSlot.${pluralRule}`, { level }),
+          slot: _loc(`DND5E.CONSUMPTION.Type.SpellSlot.${pluralRule}`, { level }),
           available: formatNumber(available)
         }
       ),
@@ -609,13 +609,13 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
     if ( !this.actor ) return [];
     return TokenDocument.implementation.getConsumedAttributes(this.actor.type).map(attr => {
       let group;
-      if ( attr.startsWith("abilities.") ) group = game.i18n.localize("DND5E.AbilityScorePl");
-      else if ( attr.startsWith("currency.") ) group = game.i18n.localize("DND5E.Currency");
-      else if ( attr.startsWith("spells.") ) group = game.i18n.localize("DND5E.CONSUMPTION.Type.SpellSlots.Label");
-      else if ( attr.startsWith("attributes.movement.") ) group = game.i18n.localize("DND5E.Speed");
-      else if ( attr.startsWith("attributes.senses.") ) group = game.i18n.localize("DND5E.Senses");
-      else if ( attr.startsWith("attributes.actions.") ) group = game.i18n.localize("DND5E.Vehicle");
-      else if ( attr.startsWith("resources.") ) group = game.i18n.localize("DND5E.Resources");
+      if ( attr.startsWith("abilities.") ) group = _loc("DND5E.AbilityScorePl");
+      else if ( attr.startsWith("currency.") ) group = _loc("DND5E.Currency");
+      else if ( attr.startsWith("spells.") ) group = _loc("DND5E.CONSUMPTION.Type.SpellSlots.Label");
+      else if ( attr.startsWith("attributes.movement.") ) group = _loc("DND5E.Speed");
+      else if ( attr.startsWith("attributes.senses.") ) group = _loc("DND5E.Senses");
+      else if ( attr.startsWith("attributes.actions.") ) group = _loc("DND5E.Vehicle");
+      else if ( attr.startsWith("resources.") ) group = _loc("DND5E.Resources");
       return { group, value: attr, label: getHumanReadableAttributeLabel(attr, { actor: this.actor }) || attr };
     });
   }
@@ -629,9 +629,9 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    */
   static validHitDiceTargets() {
     return [
-      { value: "smallest", label: game.i18n.localize("DND5E.ConsumeHitDiceSmallest") },
+      { value: "smallest", label: _loc("DND5E.ConsumeHitDiceSmallest") },
       ...CONFIG.DND5E.hitDieTypes.map(d => ({ value: d, label: d })),
-      { value: "largest", label: game.i18n.localize("DND5E.ConsumeHitDiceLargest") }
+      { value: "largest", label: _loc("DND5E.ConsumeHitDiceLargest") }
     ];
   }
 
@@ -649,13 +649,13 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
       if ( uses.max && (uses.recovery?.length === 1) && (uses.recovery[0].type === "recoverAll")
         && (uses.recovery[0].period !== "recharge") ) {
         const per = CONFIG.DND5E.limitedUsePeriods[uses.recovery[0].period]?.abbreviation;
-        label = game.i18n.format("DND5E.AbilityUseConsumableLabel", { max: uses.max, per });
+        label = _loc("DND5E.AbilityUseConsumableLabel", { max: uses.max, per });
       }
-      else label = game.i18n.format("DND5E.AbilityUseChargesLabel", { value: uses.value });
+      else label = _loc("DND5E.AbilityUseChargesLabel", { value: uses.value });
       return `${name} (${label})`;
     };
     return [
-      { value: "", label: makeLabel(game.i18n.localize("DND5E.CONSUMPTION.Target.ThisItem"), this.item) },
+      { value: "", label: makeLabel(_loc("DND5E.CONSUMPTION.Target.ThisItem"), this.item) },
       { rule: true },
       ...(this.actor?.items ?? [])
         .filter(i => i.system.uses?.max && (i !== this.item))

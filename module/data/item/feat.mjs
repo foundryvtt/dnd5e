@@ -256,17 +256,17 @@ export default class FeatData extends ItemDataModel.mixin(
     if ( this.type.value ) {
       const config = CONFIG.DND5E.featureTypes[this.type.value];
       if ( config ) this.type.label = config.subtypes?.[this.type.subtype] ?? null;
-      else this.type.label = game.i18n.localize(CONFIG.Item.typeLabels.feat);
+      else this.type.label = _loc(CONFIG.Item.typeLabels.feat);
     }
 
     let label;
     const activation = this.activities.contents[0]?.activation.type;
-    if ( activation === "legendary" ) label = game.i18n.localize("DND5E.LegendaryAction.Label");
-    if ( activation === "mythic" ) label = game.i18n.localize("DND5E.MythicActionLabel");
-    else if ( activation === "lair" ) label = game.i18n.localize("DND5E.LAIR.Action.Label");
-    else if ( activation === "action" && this.hasAttack ) label = game.i18n.localize("DND5E.Attack");
-    else if ( activation ) label = game.i18n.localize("DND5E.Action");
-    else label = game.i18n.localize("DND5E.Passive");
+    if ( activation === "legendary" ) label = _loc("DND5E.LegendaryAction.Label");
+    if ( activation === "mythic" ) label = _loc("DND5E.MythicActionLabel");
+    else if ( activation === "lair" ) label = _loc("DND5E.LAIR.Action.Label");
+    else if ( activation === "action" && this.hasAttack ) label = _loc("DND5E.Attack");
+    else if ( activation ) label = _loc("DND5E.Action");
+    else label = _loc("DND5E.Passive");
     this.parent.labels ??= {};
     this.parent.labels.featType = label;
   }
@@ -330,7 +330,7 @@ export default class FeatData extends ItemDataModel.mixin(
     // If a feature has item pre-requisites, make sure the other items exist on the actor
     if ( this.prerequisites.items.size
       && !Array.from(this.prerequisites.items).some(i => actor.identifiedItems.get(i)?.size) ) {
-      messages.push(game.i18n.format("DND5E.Prerequisites.Warning.MissingItem", {
+      messages.push(_loc("DND5E.Prerequisites.Warning.MissingItem", {
         items: game.i18n.getListFormatter({ type: "disjunction" }).format(Array.from(this.prerequisites.items))
       }));
     }
@@ -338,12 +338,12 @@ export default class FeatData extends ItemDataModel.mixin(
     // Check to ensure the item doesn't already exist on actor if it is not repeatable
     if ( !this.prerequisites.repeatable && actor.sourcedItems?.get(this.parent.uuid)?.size
       && !added.find(a => a.uuid === this.parent.uuid) ) {
-      messages.push(game.i18n.format("DND5E.Prerequisites.Warning.NotRepeatable", { name: this.parent.name }));
+      messages.push(_loc("DND5E.Prerequisites.Warning.NotRepeatable", { name: this.parent.name }));
     }
 
     // If a feature has a level pre-requisite, make sure it is less than or equal to current level
     if ( (this.prerequisites.level ?? -Infinity) > (level ?? Infinity) ) {
-      messages.push(game.i18n.format("DND5E.Prerequisites.Warning.InvalidLevel", {
+      messages.push(_loc("DND5E.Prerequisites.Warning.InvalidLevel", {
         level: this.prerequisites.level
       }));
     }
@@ -351,10 +351,10 @@ export default class FeatData extends ItemDataModel.mixin(
     if ( !messages.length ) return true;
 
     if ( showMessage || throwError ) {
-      const message = game.i18n.format("DND5E.Prerequisites.Warning.Message", {
+      const message = _loc("DND5E.Prerequisites.Warning.Message", {
         actor: actor.name,
         requirements: game.i18n.getListFormatter().format(messages),
-        type: game.i18n.localize(CONFIG.Item.typeLabels[this.parent.type]).toLowerCase()
+        type: _loc(CONFIG.Item.typeLabels[this.parent.type]).toLowerCase()
       });
       if ( showMessage ) ui.notifications.warn(message);
       if ( throwError ) throw new Error(message);

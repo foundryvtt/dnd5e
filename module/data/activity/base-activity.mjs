@@ -556,7 +556,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * Prepare data related to this activity.
    */
   prepareData() {
-    this.name = this.name || game.i18n.localize(this.metadata?.title);
+    this.name = this.name || _loc(this.metadata?.title);
     this.img = this.img || this.metadata?.img;
     this.labels ??= {};
     const addBaseIndices = data => data?.forEach((d, idx) => Object.defineProperty(d, "_index", { value: idx }));
@@ -620,7 +620,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
 
       // If targeted item isn't found, display preparation warning
       if ( !actor.items.has(target.target) ) {
-        const message = game.i18n.format("DND5E.CONSUMPTION.Warning.MissingItem", {
+        const message = _loc("DND5E.CONSUMPTION.Warning.MissingItem", {
           activity: this.name, item: this.item.name
         });
         actor._preparationWarnings.push({ message, link: this.uuid, type: "warning" });

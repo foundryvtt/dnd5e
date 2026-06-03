@@ -70,7 +70,7 @@ export default class StartingEquipmentTemplate extends SystemDataModel {
           entries.map(e => e.generateLabel({ modernStyle, depth: 2 })), { modernStyle, usedPrefixes }
         );
         const formatter = game.i18n.getListFormatter({ type: "disjunction" });
-        return `<p>${game.i18n.format("DND5E.StartingEquipment.ChooseList", {
+        return `<p>${_loc("DND5E.StartingEquipment.ChooseList", {
           prefixes: formatter.format(usedPrefixes), choices: formatter.format(choices)
         })}</p>`;
       }
@@ -204,7 +204,7 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
    * @type {string}
    */
   get blankLabel() {
-    return game.i18n.localize(this.constructor.CATEGORIES[this.type]?.label) ?? "";
+    return _loc(this.constructor.CATEGORIES[this.type]?.label) ?? "";
   }
 
   /* -------------------------------------------- */
@@ -218,7 +218,7 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
     let label = configEntry?.label ?? configEntry;
     if ( !label ) return this.blankLabel.toLowerCase();
 
-    if ( this.type === "weapon" ) label = game.i18n.format("DND5E.WeaponCategory", { category: label });
+    if ( this.type === "weapon" ) label = _loc("DND5E.WeaponCategory", { category: label });
     return label.toLowerCase();
   }
 
@@ -283,9 +283,9 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
     if ( !label ) return "";
     if ( this.type === "currency" ) return label;
     if ( this.count > 1 ) label = `${formatNumber(this.count)}&times; ${label}`;
-    else if ( this.type !== "linked" ) label = game.i18n.format("DND5E.TraitConfigChooseAnyUncounted", { type: label });
+    else if ( this.type !== "linked" ) label = _loc("DND5E.TraitConfigChooseAnyUncounted", { type: label });
     if ( (this.type === "linked") && this.requiresProficiency ) {
-      label += ` (${game.i18n.localize("DND5E.StartingEquipment.IfProficient").toLowerCase()})`;
+      label += ` (${_loc("DND5E.StartingEquipment.IfProficient").toLowerCase()})`;
     }
     return label;
   }
@@ -302,7 +302,7 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
    * @returns {string[]}
    */
   static prefixOrEntries(entries, { depth=1, modernStyle=true, usedPrefixes }={}) {
-    let letters = game.i18n.localize("DND5E.StartingEquipment.Prefixes");
+    let letters = _loc("DND5E.StartingEquipment.Prefixes");
     if ( !letters ) return entries;
     if ( (modernStyle && (depth === 1)) || (!modernStyle && (depth === 2)) ) letters = letters.toUpperCase();
     return entries.map((e, idx) => {

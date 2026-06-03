@@ -126,8 +126,8 @@ export default class BaseRestDialog extends Dialog5e {
     if ( this.promptNewDay ) context.fields.push({
       disabled: !!this.config.request,
       field: new BooleanField({
-        label: game.i18n.localize("DND5E.REST.NewDay.Label"),
-        hint: game.i18n.localize("DND5E.REST.NewDay.Hint")
+        label: _loc("DND5E.REST.NewDay.Label"),
+        hint: _loc("DND5E.REST.NewDay.Hint")
       }),
       input: context.inputs.createCheckboxInput,
       name: "newDay",
@@ -138,7 +138,7 @@ export default class BaseRestDialog extends Dialog5e {
     if ( "recoverTemp" in rest ) context.hitPoints.push({
       disabled: !!this.config.request,
       field: new BooleanField({
-        label: game.i18n.localize("DND5E.REST.RecoverTempHP.Label")
+        label: _loc("DND5E.REST.RecoverTempHP.Label")
       }),
       input: context.inputs.createCheckboxInput,
       name: "recoverTemp",
@@ -147,8 +147,8 @@ export default class BaseRestDialog extends Dialog5e {
     if ( "recoverTempMax" in rest ) context.hitPoints.push({
       disabled: !!this.config.request,
       field: new BooleanField({
-        label: game.i18n.localize("DND5E.REST.RecoverTempMaxHP.Label"),
-        hint: game.i18n.localize("DND5E.REST.RecoverTempMaxHP.Hint")
+        label: _loc("DND5E.REST.RecoverTempMaxHP.Label"),
+        hint: _loc("DND5E.REST.RecoverTempMaxHP.Hint")
       }),
       input: context.inputs.createCheckboxInput,
       name: "recoverTempMax",
@@ -167,8 +167,8 @@ export default class BaseRestDialog extends Dialog5e {
       context.request = [
         {
           field: new BooleanField({
-            label: game.i18n.localize("DND5E.REST.Request.AutoRest.Label"),
-            hint: game.i18n.localize("DND5E.REST.Request.AutoRest.Hint")
+            label: _loc("DND5E.REST.Request.AutoRest.Label"),
+            hint: _loc("DND5E.REST.Request.AutoRest.Hint")
           }),
           name: "autoRest",
           input: context.inputs.createCheckboxInput,
@@ -230,7 +230,7 @@ export default class BaseRestDialog extends Dialog5e {
           {
             default: true,
             icon: "fa-solid fa-bed",
-            label: game.i18n.localize("DND5E.REST.Label"),
+            label: _loc("DND5E.REST.Label"),
             name: "rest",
             type: "submit"
           }

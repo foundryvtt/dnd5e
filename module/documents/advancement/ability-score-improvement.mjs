@@ -25,8 +25,8 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
       order: 20,
       icon: "icons/magic/symbols/star-solid-gold.webp",
       typeIcon: "systems/dnd5e/icons/svg/ability-score-improvement.svg",
-      title: game.i18n.localize("DND5E.ADVANCEMENT.AbilityScoreImprovement.Title"),
-      hint: game.i18n.localize("DND5E.ADVANCEMENT.AbilityScoreImprovement.Hint"),
+      title: _loc("DND5E.ADVANCEMENT.AbilityScoreImprovement.Title"),
+      hint: _loc("DND5E.ADVANCEMENT.AbilityScoreImprovement.Hint"),
       apps: {
         config: AbilityScoreImprovementConfig,
         flow: AbilityScoreImprovementFlow
@@ -48,7 +48,7 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
 
   /** @inheritDoc */
   get _defaultTitle() {
-    if ( this.isEpicBoon ) return game.i18n.localize("DND5E.ADVANCEMENT.AbilityScoreImprovement.TitleEpic");
+    if ( this.isEpicBoon ) return _loc("DND5E.ADVANCEMENT.AbilityScoreImprovement.TitleEpic");
     return super._defaultTitle;
   }
 
@@ -126,7 +126,7 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
   /** @inheritDoc */
   titleForLevel(level, { configMode=false }={}) {
     if ( this.value.selected !== "feat" ) return this.title;
-    return game.i18n.localize("DND5E.Feature.Feat");
+    return _loc("DND5E.Feature.Feat");
   }
 
   /* -------------------------------------------- */
@@ -145,7 +145,7 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
         return `<span class="tag">${name} <strong>${formatter.format(value)}</strong></span>`;
       });
       if ( this.configuration.points ) entries.push(`<span class="tag">${
-        game.i18n.localize("DND5E.ADVANCEMENT.AbilityScoreImprovement.FIELDS.points.label")}: <strong>${
+        _loc("DND5E.ADVANCEMENT.AbilityScoreImprovement.FIELDS.points.label")}: <strong>${
         this.configuration.points}</strong></span>`
       );
       return entries.filterJoin("\n");

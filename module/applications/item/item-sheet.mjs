@@ -645,7 +645,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     if ( this._headerToggles.identified ) {
       const isIdentified = this.item.system.identified;
       const label = isIdentified ? "DND5E.Identified" : "DND5E.Unidentified.Title";
-      this._headerToggles.identified.setAttribute("aria-label", game.i18n.localize(label));
+      this._headerToggles.identified.setAttribute("aria-label", _loc(label));
       this._headerToggles.identified.dataset.tooltip = label;
       this._headerToggles.identified.classList.toggle("active", isIdentified);
     }
@@ -653,7 +653,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     if ( this._headerToggles.equipped ) {
       const isEquipped = this.item.system.equipped;
       const label = isEquipped ? "DND5E.Equipped" : "DND5E.Unequipped";
-      this._headerToggles.equipped.setAttribute("aria-label", game.i18n.localize(label));
+      this._headerToggles.equipped.setAttribute("aria-label", _loc(label));
       this._headerToggles.equipped.dataset.tooltip = label;
       this._headerToggles.equipped.classList.toggle("active", isEquipped);
     }

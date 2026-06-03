@@ -130,7 +130,7 @@ export default class RaceData extends ItemDataModel.mixin(AdvancementTemplate, I
 
   /** @inheritDoc */
   async getSheetData(context) {
-    context.subtitles = [{ label: game.i18n.localize(CONFIG.Item.typeLabels.race) }];
+    context.subtitles = [{ label: _loc(CONFIG.Item.typeLabels.race) }];
     context.singleDescription = true;
 
     context.parts = ["dnd5e.details-species"];

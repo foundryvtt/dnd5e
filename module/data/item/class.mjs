@@ -237,7 +237,7 @@ export default class ClassData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   async getSheetData(context) {
-    context.subtitles = [{ label: game.i18n.localize(CONFIG.Item.typeLabels.class) }];
+    context.subtitles = [{ label: _loc(CONFIG.Item.typeLabels.class) }];
     context.singleDescription = true;
 
     context.parts = ["dnd5e.details-class", "dnd5e.details-spellcasting", "dnd5e.details-starting-equipment"];
@@ -305,7 +305,7 @@ export default class ClassData extends ItemDataModel.mixin(
 
     // Check to make sure the updated class level doesn't exceed level cap
     if ( changed.system.levels > CONFIG.DND5E.maxLevel ) {
-      ui.notifications.warn(game.i18n.format("DND5E.MaxClassLevelExceededWarn", { max: CONFIG.DND5E.maxLevel }));
+      ui.notifications.warn(_loc("DND5E.MaxClassLevelExceededWarn", { max: CONFIG.DND5E.maxLevel }));
       changed.system.levels = CONFIG.DND5E.maxLevel;
     }
 
@@ -314,7 +314,7 @@ export default class ClassData extends ItemDataModel.mixin(
     // Check to ensure the updated character doesn't exceed level cap
     const newCharacterLevel = this.parent.actor.system.details.level + (changed.system.levels - this.levels);
     if ( newCharacterLevel > CONFIG.DND5E.maxLevel ) {
-      ui.notifications.warn(game.i18n.format("DND5E.MaxCharacterLevelExceededWarn", { max: CONFIG.DND5E.maxLevel }));
+      ui.notifications.warn(_loc("DND5E.MaxCharacterLevelExceededWarn", { max: CONFIG.DND5E.maxLevel }));
       changed.system.levels -= newCharacterLevel - CONFIG.DND5E.maxLevel;
     }
   }

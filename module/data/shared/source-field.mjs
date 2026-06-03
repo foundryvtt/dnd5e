@@ -44,8 +44,8 @@ export default class SourceField extends SchemaField {
     if ( this.custom ) this.label = this.custom;
     else {
       const page = Number.isNumeric(this.page)
-        ? game.i18n.format("DND5E.SOURCE.Display.Page", { page: this.page }) : (this.page ?? "");
-      this.label = game.i18n.format("DND5E.SOURCE.Display.Full", { book: this.book, page }).trim();
+        ? _loc("DND5E.SOURCE.Display.Page", { page: this.page }) : (this.page ?? "");
+      this.label = _loc("DND5E.SOURCE.Display.Full", { book: this.book, page }).trim();
     }
 
     this.value = this.book || (pkg?.title ?? "");

@@ -58,7 +58,7 @@ export default function ApplicationV2Mixin(Base, { handlebars=true }={}) {
      * @type {string}
      */
     get subtitle() {
-      return game.i18n.localize(this.options.window.subtitle ?? "");
+      return _loc(this.options.window.subtitle ?? "");
     }
 
     /* -------------------------------------------- */
@@ -189,7 +189,7 @@ export default function ApplicationV2Mixin(Base, { handlebars=true }={}) {
         toggle.classList.add("mode-slider");
         toggle.dataset.action = "changeMode";
         toggle.dataset.tooltip = "DND5E.SheetModeEdit";
-        toggle.setAttribute("aria-label", game.i18n.localize("DND5E.SheetModeEdit"));
+        toggle.setAttribute("aria-label", _loc("DND5E.SheetModeEdit"));
         toggle.addEventListener("dblclick", event => event.stopPropagation());
         toggle.addEventListener("pointerdown", event => event.stopPropagation());
         header.prepend(toggle);
@@ -398,10 +398,10 @@ export default function ApplicationV2Mixin(Base, { handlebars=true }={}) {
         ...rest,
         buttons: [
           foundry.utils.mergeObject(
-            { action: "yes", icon: "fa-solid fa-check", label: game.i18n.localize("COMMON.Yes"), default: true }, yes
+            { action: "yes", icon: "fa-solid fa-check", label: _loc("COMMON.Yes"), default: true }, yes
           ),
           foundry.utils.mergeObject(
-            { action: "no", icon: "fa-solid fa-xmark", label: game.i18n.localize("COMMON.No") }, no
+            { action: "no", icon: "fa-solid fa-xmark", label: _loc("COMMON.No") }, no
           )
         ],
         submit: result => resolve(result)

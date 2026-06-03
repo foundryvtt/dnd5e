@@ -104,7 +104,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     for ( const level of Array.fromRange(this.level) ) {
       const added = value.added[level];
       if ( added ) context.sections.set(level, {
-        header: game.i18n.format(`DND5E.AdvancementLevel${level === "0" ? "AnyHeader" : "Header"}`, { level }),
+        header: _loc(`DND5E.AdvancementLevel${level === "0" ? "AnyHeader" : "Header"}`, { level }),
         items: Object.entries(added).map(([id, uuid]) => {
           const { name, img } = actor.items.get(id) ?? fromUuidSync(uuid);
           previouslySelected.add(uuid);
@@ -144,7 +144,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     const removed = counts.replaced ? actor.items.get(value.replaced[this.level]?.original) : [];
 
     if ( counts.max ) context.sections.set(this.level, {
-      header: game.i18n.format("DND5E.ADVANCEMENT.ItemChoice.Chosen", counts),
+      header: _loc("DND5E.ADVANCEMENT.ItemChoice.Chosen", counts),
       isCurrentLevel: true,
       items: [...this.pool, ...dropped].reduce((arr, item) => {
         const { id, name, img } = item;
@@ -175,16 +175,16 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     if ( context.abilities ) context.abilities.disabled = this.level > firstLevel;
 
     if ( config.type ) {
-      let type = game.i18n.localize(CONFIG.Item.typeLabels[config.type]);
+      let type = _loc(CONFIG.Item.typeLabels[config.type]);
       if ( (config.type === "feat") && config.restriction.type ) {
         const typeConfig = CONFIG.DND5E.featureTypes[config.restriction.type];
         const subtype = typeConfig.subtypes?.[config.restriction.subtype];
         if ( subtype ) type = subtype;
         else type = typeConfig.label;
       }
-      context.selectLabel = game.i18n.format("DND5E.ADVANCEMENT.ItemChoice.Action.SelectSpecific", { type });
+      context.selectLabel = _loc("DND5E.ADVANCEMENT.ItemChoice.Action.SelectSpecific", { type });
     } else {
-      context.selectLabel = game.i18n.localize("DND5E.ADVANCEMENT.ItemChoice.Action.SelectGeneric");
+      context.selectLabel = _loc("DND5E.ADVANCEMENT.ItemChoice.Action.SelectGeneric");
     }
 
     context.showBrowseButton = config.allowDrops && !counts.full;
@@ -344,7 +344,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     if ( (this.advancement.configuration.type === "spell") && spellLevel === "available" ) {
       const maxSlot = this._maxSpellSlotLevel();
       if ( item.system.level > maxSlot ) {
-        ui.notifications.error(game.i18n.format("DND5E.ADVANCEMENT.ItemChoice.Warning.SpellLevelAvailable", {
+        ui.notifications.error(_loc("DND5E.ADVANCEMENT.ItemChoice.Warning.SpellLevelAvailable", {
           level: CONFIG.DND5E.spellLevels[maxSlot]
         }));
         return null;

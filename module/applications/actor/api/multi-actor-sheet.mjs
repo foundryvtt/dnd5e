@@ -217,14 +217,14 @@ export default class MultiActorSheet extends BaseActorSheet {
     const { document: doc } = app.options;
     const showTokenPortrait = doc.getFlag("dnd5e", "showTokenPortrait");
     const artOptions = {
-      false: game.i18n.localize("DND5E.Group.Config.Art.portraits"),
-      true: game.i18n.localize("DND5E.Group.Config.Art.tokens")
+      false: _loc("DND5E.Group.Config.Art.portraits"),
+      true: _loc("DND5E.Group.Config.Art.tokens")
     };
     const fieldset = document.createElement("fieldset");
     fieldset.innerHTML = `
-      <legend>${game.i18n.localize("DND5E.Group.Config.Legend")}</legend>
+      <legend>${_loc("DND5E.Group.Config.Legend")}</legend>
       <div class="form-group">
-        <label>${game.i18n.localize("DND5E.Group.Config.Art.Label")}</label>
+        <label>${_loc("DND5E.Group.Config.Art.Label")}</label>
         <div class="form-fields">
           <select name="flags.dnd5e.showTokenPortrait" data-dtype="Boolean">
             ${foundry.applications.handlebars.selectOptions(artOptions, { hash: { selected: showTokenPortrait } })}

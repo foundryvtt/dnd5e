@@ -28,7 +28,7 @@ export default class ArmorClassConfig extends BaseConfigSheet {
 
   /** @override */
   get title() {
-    return game.i18n.localize("DND5E.ArmorClass");
+    return _loc("DND5E.ArmorClass");
   }
 
   /* -------------------------------------------- */

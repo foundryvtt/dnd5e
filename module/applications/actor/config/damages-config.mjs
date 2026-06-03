@@ -27,7 +27,7 @@ export default class DamagesConfig extends TraitsConfig {
 
   /** @override */
   get otherLabel() {
-    return game.i18n.localize("DND5E.DamageTypes");
+    return _loc("DND5E.DamageTypes");
   }
 
   /* -------------------------------------------- */

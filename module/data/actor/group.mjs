@@ -283,12 +283,12 @@ export default class GroupData extends GroupTemplate {
     const skillLabel = skillConfig?.label ?? "";
     const abilityLabel = CONFIG.DND5E.abilities[ability]?.label ?? "";
     await foundry.documents.ChatMessage.implementation.create({
-      flavor: game.i18n.format("DND5E.SkillPromptTitle", { skill: skillLabel, ability: abilityLabel }),
+      flavor: _loc("DND5E.SkillPromptTitle", { skill: skillLabel, ability: abilityLabel }),
       speaker: ChatMessage.getSpeaker({ actor: this.parent, alias: this.parent.name }),
       system: {
         button: {
           icon: "fa-solid fa-dice-d20",
-          label: game.i18n.localize("DND5E.SkillRoll", { skill: skillLabel, ability: abilityLabel })
+          label: _loc("DND5E.SkillRoll", { skill: skillLabel, ability: abilityLabel })
         },
         data: { ...config },
         handler: "skill",

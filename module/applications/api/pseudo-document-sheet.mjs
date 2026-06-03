@@ -107,8 +107,8 @@ export default class PseudoDocumentSheet extends Application5e {
 
   /** @override */
   _canRender(options) {
-    if ( !this.isVisible ) throw new Error(game.i18n.format("SHEETS.DocumentSheetPrivate", {
-      type: game.i18n.localize(this.document.metadata.label)
+    if ( !this.isVisible ) throw new Error(_loc("SHEETS.DocumentSheetPrivate", {
+      type: _loc(this.document.metadata.label)
     }));
   }
 
@@ -145,7 +145,7 @@ export default class PseudoDocumentSheet extends Application5e {
     frame.autocomplete = "off";
 
     // Add document ID copy
-    const copyLabel = game.i18n.localize("APPLICATION.ACTIONS.CopyUuid");
+    const copyLabel = _loc("APPLICATION.ACTIONS.CopyUuid");
     const copyId = `<button type="button" class="header-control fa-solid fa-passport icon" data-action="copyUuid"
                             data-tooltip aria-label="${copyLabel}" draggable="true"></button>`;
     this.window.close.insertAdjacentHTML("beforebegin", copyId);
@@ -172,9 +172,9 @@ export default class PseudoDocumentSheet extends Application5e {
     if ( event.detail > 1 ) return;
     const id = event.button === 2 ? this.document.id : this.document.uuid;
     const type = event.button === 2 ? "id" : "uuid";
-    const label = game.i18n.localize(this.document.metadata.label);
+    const label = _loc(this.document.metadata.label);
     game.clipboard.copyPlainText(id);
-    ui.notifications.info(game.i18n.format("DOCUMENT.IdCopiedClipboard", { label, type, id }));
+    ui.notifications.info(_loc("DOCUMENT.IdCopiedClipboard", { label, type, id }));
   }
 
   /* -------------------------------------------- */

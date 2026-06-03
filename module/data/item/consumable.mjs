@@ -121,7 +121,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
   get chatProperties() {
     return [
       this.type.label,
-      this.hasLimitedUses ? `${this.uses.value}/${this.uses.max} ${game.i18n.localize("DND5E.Charges")}` : null,
+      this.hasLimitedUses ? `${this.uses.value}/${this.uses.max} ${_loc("DND5E.Charges")}` : null,
       this.priceLabel
     ];
   }
@@ -228,7 +228,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
     if ( config ) {
       this.type.label = config.subtypes?.[this.type.subtype] ?? config.label;
     } else {
-      this.type.label = game.i18n.localize(CONFIG.Item.typeLabels.consumable);
+      this.type.label = _loc(CONFIG.Item.typeLabels.consumable);
     }
   }
 

@@ -46,8 +46,8 @@ export default class SaveActivity extends ActivityMixin(BaseSaveActivityData) {
       const ability = CONFIG.DND5E.abilities[abilityId]?.label ?? "";
       buttons.push({
         label: `
-          <span class="visible-dc">${game.i18n.format("DND5E.SavingThrowDC", { dc, ability })}</span>
-          <span class="hidden-dc">${game.i18n.format("DND5E.SavePromptTitle", { ability })}</span>
+          <span class="visible-dc">${_loc("DND5E.SavingThrowDC", { dc, ability })}</span>
+          <span class="hidden-dc">${_loc("DND5E.SavePromptTitle", { ability })}</span>
         `,
         icon: '<i class="fa-solid fa-shield-heart" inert></i>',
         dataset: {
@@ -60,7 +60,7 @@ export default class SaveActivity extends ActivityMixin(BaseSaveActivityData) {
     }
 
     if ( this.damage.parts.length ) buttons.push({
-      label: game.i18n.localize("DND5E.Damage"),
+      label: _loc("DND5E.Damage"),
       icon: '<i class="fas fa-burst" inert></i>',
       dataset: {
         action: "rollDamage"

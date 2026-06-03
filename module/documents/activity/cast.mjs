@@ -124,7 +124,7 @@ export default class CastActivity extends ActivityMixin(BaseCastActivityData) {
         {
           _id: this.constructor.ENCHANTMENT_ID,
           type: "enchantment",
-          name: game.i18n.localize("DND5E.CAST.Enchantment.Name"),
+          name: _loc("DND5E.CAST.Enchantment.Name"),
           img: "systems/dnd5e/icons/svg/activity/cast.svg",
           origin: this.uuid,
           changes: this.getSpellChanges()

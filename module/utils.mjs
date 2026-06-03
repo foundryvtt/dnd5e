@@ -98,7 +98,7 @@ export function formatModifier(mod) {
  * @returns {string}
  */
 export function formatNumber(value, { blank, numerals, ordinal, words, ...options }={}) {
-  if ( words && game.i18n.has(`DND5E.NUMBER.${value}`, false) ) return game.i18n.localize(`DND5E.NUMBER.${value}`);
+  if ( words && game.i18n.has(`DND5E.NUMBER.${value}`, false) ) return _loc(`DND5E.NUMBER.${value}`);
   if ( !value && (typeof blank === "string") ) return blank;
   if ( numerals ) return _formatNumberAsNumerals(value);
   if ( ordinal ) return _formatNumberAsOrdinal(value, options);
@@ -141,7 +141,7 @@ function _formatNumberAsNumerals(n) {
 function _formatNumberAsOrdinal(n, options={}) {
   const pr = getPluralRules({ type: "ordinal" }).select(n);
   const number = formatNumber(n, options);
-  return game.i18n.has(`DND5E.ORDINAL.${pr}`) ? game.i18n.format(`DND5E.ORDINAL.${pr}`, { number }) : number;
+  return game.i18n.has(`DND5E.ORDINAL.${pr}`) ? _loc(`DND5E.ORDINAL.${pr}`, { number }) : number;
 }
 
 /* -------------------------------------------- */
@@ -214,10 +214,10 @@ export function formatTime(value, unit, options={}) {
   const config = CONFIG.DND5E.timeUnits[unit];
   if ( config?.counted ) {
     if ( (options.unitDisplay === "narrow") && game.i18n.has(`${config.counted}.narrow`) ) {
-      return game.i18n.format(`${config.counted}.narrow`, { number: formatNumber(value, options) });
+      return _loc(`${config.counted}.narrow`, { number: formatNumber(value, options) });
     } else {
       const pr = new Intl.PluralRules(game.i18n.lang);
-      return game.i18n.format(`${config.counted}.${pr.select(value)}`, { number: formatNumber(value, options) });
+      return _loc(`${config.counted}.${pr.select(value)}`, { number: formatNumber(value, options) });
     }
   }
   try {
@@ -268,7 +268,7 @@ function _formatSystemUnits(value, unit, config, { parts=false, ...options }={})
   options.unitDisplay ??= "short";
   if ( config?.counted ) {
     const localizationKey = `${config.counted}.${options.unitDisplay}.${getPluralRules().select(value)}`;
-    return game.i18n.format(localizationKey, { number: formatNumber(value, options) });
+    return _loc(localizationKey, { number: formatNumber(value, options) });
   }
   unit = config?.formattingUnit ?? unit;
   if ( isValidUnit(unit) ) {
@@ -372,14 +372,14 @@ export function prepareFormulaValue(model, keyPath, label, rollData) {
   const value = foundry.utils.getProperty(model, keyPath);
   if ( !value ) return;
   const item = model.item ?? model.parent;
-  const property = game.i18n.localize(label);
+  const property = _loc(label);
   try {
     const formula = replaceFormulaData(value, rollData, { item, property });
     const roll = new Roll(formula);
     foundry.utils.setProperty(model, keyPath, roll.evaluateSync().total);
   } catch(err) {
     if ( item.isEmbedded ) {
-      const message = game.i18n.format("DND5E.FormulaMalformedError", { property, name: model.name ?? item.name });
+      const message = _loc("DND5E.FormulaMalformedError", { property, name: model.name ?? item.name });
       item.actor._preparationWarnings.push({ message, link: item.uuid, type: "error" });
       console.error(message, err);
     }
@@ -414,7 +414,7 @@ export function replaceFormulaData(formula, data, { actor, item, missing="0", pr
   actor ??= item?.parent;
   if ( (missingReferences.size > 0) && actor && property ) {
     const listFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "conjunction" });
-    const message = game.i18n.format("DND5E.FormulaMissingReferenceWarn", {
+    const message = _loc("DND5E.FormulaMissingReferenceWarn", {
       property, name: item?.name ?? actor.name, references: listFormatter.format(missingReferences)
     });
     actor._preparationWarnings.push({ message, link: item?.uuid ?? actor.uuid, type: "warning" });
@@ -612,7 +612,7 @@ export function linkForUuid(uuid, { tooltip, renderBroken }={}) {
   if ( !doc ) {
     if ( renderBroken ) return `
       <a class="content-link broken" data-uuid="${uuid}">
-        <i class="fas fa-unlink"></i> ${game.i18n.localize("COMMON.Unknown")}
+        <i class="fas fa-unlink"></i> ${_loc("COMMON.Unknown")}
       </a>
     `;
     return "";
@@ -985,14 +985,14 @@ function groupedSelectOptions(choices, options) {
 
   // Create an option
   const option = (name, label, chosen) => {
-    if ( localize ) label = game.i18n.localize(label);
+    if ( localize ) label = _loc(label);
     html += `<option value="${name}" ${chosen ? "selected" : ""}>${label}</option>`;
   };
 
   // Create a group
   const group = category => {
     let label = category[labelAttr];
-    if ( localize ) game.i18n.localize(label);
+    if ( localize ) _loc(label);
     html += `<optgroup label="${label}">`;
     children(category[childrenAttr]);
     html += "</optgroup>";
@@ -1051,8 +1051,8 @@ function concealSection(conceal, options) {
   </div>
   <div class="unidentified-notice">
       <div>
-          <strong>${game.i18n.localize("DND5E.Unidentified.Title")}</strong>
-          <p>${game.i18n.localize("DND5E.Unidentified.Notice")}</p>
+          <strong>${_loc("DND5E.Unidentified.Title")}</strong>
+          <p>${_loc("DND5E.Unidentified.Notice")}</p>
       </div>
   </div>`;
   return content;
@@ -1147,7 +1147,7 @@ export function performPreLocalization(config) {
   }
 
   // Localize & sort status effects
-  CONFIG.statusEffects.forEach(s => s.name = game.i18n.localize(s.name));
+  CONFIG.statusEffects.forEach(s => s.name = _loc(s.name));
 }
 
 /* -------------------------------------------- */
@@ -1162,7 +1162,7 @@ function _localizeObject(obj, keys) {
   for ( const [k, v] of Object.entries(obj) ) {
     const type = typeof v;
     if ( type === "string" ) {
-      obj[k] = game.i18n.localize(v);
+      obj[k] = _loc(v);
       continue;
     }
 
@@ -1182,7 +1182,7 @@ function _localizeObject(obj, keys) {
     for ( const key of keys ) {
       const value = foundry.utils.getProperty(v, key);
       if ( !value ) continue;
-      foundry.utils.setProperty(v, key, game.i18n.localize(value));
+      foundry.utils.setProperty(v, key, _loc(value));
     }
   }
 }
@@ -1221,7 +1221,7 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
   }
 
   if ( (attr === "details.xp.value") && actor?.system.isNPC ) {
-    return game.i18n.localize("DND5E.ExperiencePoints.Value");
+    return _loc("DND5E.ExperiencePoints.Value");
   }
 
   const getUnknownLabel = (attr, options) => {
@@ -1291,7 +1291,7 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
   // Abilities.
   else if ( attr.startsWith("abilities.") ) {
     const [, key] = attr.split(".");
-    label = game.i18n.format("DND5E.AbilityScoreL", { ability: CONFIG.DND5E.abilities[key].label });
+    label = _loc("DND5E.AbilityScoreL", { ability: CONFIG.DND5E.abilities[key].label });
   }
 
   // Senses
@@ -1310,7 +1310,7 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
   // Skills.
   else if ( attr.startsWith("skills.") ) {
     const [, key] = attr.split(".");
-    label = game.i18n.format("DND5E.SkillPassiveScore", { skill: CONFIG.DND5E.skills[key].label });
+    label = _loc("DND5E.SkillPassiveScore", { skill: CONFIG.DND5E.skills[key].label });
   }
 
   // Spell slots.
@@ -1320,7 +1320,7 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
     else {
       const plurals = new Intl.PluralRules(game.i18n.lang, { type: "ordinal" });
       const level = Number(key.slice(5));
-      label = game.i18n.format(`DND5E.SpellSlotsN.${plurals.select(level)}`, { n: level });
+      label = _loc(`DND5E.SpellSlotsN.${plurals.select(level)}`, { n: level });
     }
   }
 
@@ -1337,7 +1337,7 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
   if ( !label ) label = getUnknownLabel(attr, { actor, item });
 
   if ( label ) {
-    label = game.i18n.localize(label);
+    label = _loc(label);
     _attributeLabelCache[type].set(attr, label);
     if ( name ) label = `${name} ${label}`;
   }

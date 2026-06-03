@@ -80,7 +80,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     }, {});
     const choices = makeChoices(generalTypes);
     choices.physical = {
-      label: game.i18n.localize("DND5E.ITEM.Category.Physical"),
+      label: _loc("DND5E.ITEM.Category.Physical"),
       children: makeChoices(physicalTypes, chosen.has("physical"))
     };
     return new SelectChoices(choices);
@@ -1174,20 +1174,20 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Display custom delete dialog when deleting a container with contents
     const count = await this.system.contentsCount;
     if ( count ) {
-      const type = game.i18n.localize("DND5E.Container");
+      const type = _loc("DND5E.Container");
       const config = foundry.utils.mergeObject({
         window: {
           icon: "fa-solid fa-trash",
-          title: `${game.i18n.format("DOCUMENT.Delete", { type })}: ${this.name}`
+          title: `${_loc("DOCUMENT.Delete", { type })}: ${this.name}`
         },
         position: { width: 400 },
         content: `
           <p>
-            <strong>${game.i18n.localize("AreYouSure")}</strong>
-            ${game.i18n.format("DND5E.ContainerDeleteMessage", { count })}
+            <strong>${_loc("AreYouSure")}</strong>
+            ${_loc("DND5E.ContainerDeleteMessage", { count })}
           </p>
           <label class="checkbox">
-            <span>${game.i18n.localize("DND5E.ContainerDeleteContents")}</span>
+            <span>${_loc("DND5E.ContainerDeleteContents")}</span>
             <input type="checkbox" name="deleteContents">
           </label>
         `,
@@ -1201,13 +1201,13 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     }
 
     if ( sheet ) {
-      const type = game.i18n.localize(this.constructor.metadata.label);
+      const type = _loc(this.constructor.metadata.label);
       return sheet._confirmDialog(foundry.utils.mergeObject({
-        window: { title: `${game.i18n.format("DOCUMENT.Delete", { type })}: ${this.name}` },
+        window: { title: `${_loc("DOCUMENT.Delete", { type })}: ${this.name}` },
         position: { width: 400 },
         content: `
           <p>
-            <strong>${game.i18n.localize("AreYouSure")}</strong> ${game.i18n.format("SIDEBAR.DeleteWarning", { type })}
+            <strong>${_loc("AreYouSure")}</strong> ${_loc("SIDEBAR.DeleteWarning", { type })}
           </p>
         `,
         yes: { callback: () => this.delete(operation) }
@@ -1266,7 +1266,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( container ) {
       initialDepth = 1 + (await container.system.allContainers()).length;
       if ( initialDepth > PhysicalItemTemplate.MAX_DEPTH ) {
-        ui.notifications.warn(game.i18n.format("DND5E.ContainerMaxDepth", { depth: PhysicalItemTemplate.MAX_DEPTH }));
+        ui.notifications.warn(_loc("DND5E.ContainerMaxDepth", { depth: PhysicalItemTemplate.MAX_DEPTH }));
         return;
       }
     }
@@ -1400,7 +1400,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     // Create the spell scroll data
     const spellScrollData = foundry.utils.mergeObject(scrollData, {
-      name: `${game.i18n.localize("DND5E.SpellScroll")}: ${itemData.name}`,
+      name: `${_loc("DND5E.SpellScroll")}: ${itemData.name}`,
       effects: itemData.effects ?? [],
       flags,
       system: {
@@ -1504,7 +1504,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     // Create the spell scroll data
     const spellScrollData = foundry.utils.mergeObject(scrollData, {
-      name: `${game.i18n.localize("DND5E.SpellScroll")}: ${spell.name}`,
+      name: `${_loc("DND5E.SpellScroll")}: ${spell.name}`,
       system: {
         activities: { ...(scrollData.system.activities ?? {}), [activity._id]: activity },
         description: {
@@ -1551,10 +1551,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         const scrollDetails = scrollDescription.slice(scrollIntroEnd + pdel.length);
         return [
           scrollDetails ? scrollIntro : null,
-          `<h3>${spell.name} (${game.i18n.format("DND5E.LevelNumber", { level })})</h3>`,
-          isConc ? `<p><em>${game.i18n.localize("DND5E.Scroll.RequiresConcentration")}</em></p>` : null,
+          `<h3>${spell.name} (${_loc("DND5E.LevelNumber", { level })})</h3>`,
+          isConc ? `<p><em>${_loc("DND5E.Scroll.RequiresConcentration")}</em></p>` : null,
           spellDescription,
-          `<h3>${game.i18n.localize("DND5E.Scroll.Details")}</h3>`,
+          `<h3>${_loc("DND5E.Scroll.Details")}</h3>`,
           scrollDetails || scrollIntro
         ].filterJoin("");
       case "reference":
@@ -1562,7 +1562,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
           "<p><em>",
           CONFIG.DND5E.spellLevels[level] ?? level,
           " &Reference[Spell Scroll]",
-          isConc ? `, ${game.i18n.localize("DND5E.Scroll.RequiresConcentration")}` : null,
+          isConc ? `, ${_loc("DND5E.Scroll.RequiresConcentration")}` : null,
           "</em></p>",
           spellDescription
         ].filterJoin("");

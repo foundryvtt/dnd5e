@@ -287,12 +287,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( typeData.value === "custom" ) localizedType = typeData.custom;
     else if ( typeData.value in CONFIG.DND5E.creatureTypes ) {
       const code = CONFIG.DND5E.creatureTypes[typeData.value];
-      localizedType = game.i18n.localize(typeData.swarm ? code.plural : code.label);
+      localizedType = _loc(typeData.swarm ? code.plural : code.label);
     }
     let type = localizedType;
     if ( typeData.swarm ) {
-      type = game.i18n.format("DND5E.CreatureSwarmPhrase", {
-        size: game.i18n.localize(CONFIG.DND5E.actorSizes[typeData.swarm].label),
+      type = _loc("DND5E.CreatureSwarmPhrase", {
+        size: _loc(CONFIG.DND5E.actorSizes[typeData.swarm].label),
         type: localizedType
       });
     }
@@ -387,7 +387,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   static async fetchExisting(uuid, options={}) {
     const { origin, folderId } = options;
     const actor = await fromUuid(uuid);
-    if ( !actor ) throw new Error(game.i18n.format("DND5E.ACTOR.Warning.NoActor", { uuid }));
+    if ( !actor ) throw new Error(_loc("DND5E.ACTOR.Warning.NoActor", { uuid }));
 
     const { actorLink } = actor.prototypeToken;
     const matchesOrigin = !origin || (foundry.utils.getProperty(actor, origin.key) === origin.value);
@@ -409,7 +409,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( localActor ) return localActor;
 
     // Check permissions to create actors.
-    if ( !game.user.can("ACTOR_CREATE") ) throw new Error(game.i18n.localize("DND5E.ACTOR.Warning.CreateActor"));
+    if ( !game.user.can("ACTOR_CREATE") ) throw new Error(_loc("DND5E.ACTOR.Warning.CreateActor"));
 
     // No suitable world actor was found, create one.
     if ( actor.pack ) {
@@ -1198,7 +1198,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const dialogConfig = foundry.utils.mergeObject({
       options: {
         window: {
-          title: game.i18n.format("DND5E.SkillPromptTitle", { skill: skillLabel, ability: abilityLabel }),
+          title: _loc("DND5E.SkillPromptTitle", { skill: skillLabel, ability: abilityLabel }),
           subtitle: this.name
         }
       }
@@ -1220,7 +1220,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const dialogConfig = foundry.utils.mergeObject({
       options: {
         window: {
-          title: game.i18n.format("DND5E.ToolPromptTitle", { tool: toolLabel }),
+          title: _loc("DND5E.ToolPromptTitle", { tool: toolLabel }),
           subtitle: this.name
         }
       }
@@ -1304,8 +1304,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
           }
         },
         flavor: type === "skill"
-          ? game.i18n.format("DND5E.SkillPromptTitle", { skill: skillConfig.label, ability: abilityLabel })
-          : game.i18n.format("DND5E.ToolPromptTitle", { tool: Trait.keyLabel(config.tool, { trait: "tool" }) ?? "" }),
+          ? _loc("DND5E.SkillPromptTitle", { skill: skillConfig.label, ability: abilityLabel })
+          : _loc("DND5E.ToolPromptTitle", { tool: Trait.keyLabel(config.tool, { trait: "tool" }) ?? "" }),
         speaker: ChatMessage.getSpeaker({ actor: this })
       }
     }, message);
@@ -1385,18 +1385,18 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const abilityId = config.ability;
     const label = CONFIG.DND5E.abilities[abilityId]?.label ?? "";
     new foundry.applications.api.Dialog({
-      window: { title: `${game.i18n.format("DND5E.AbilityPromptTitle", { ability: label })}: ${this.name}` },
+      window: { title: `${_loc("DND5E.AbilityPromptTitle", { ability: label })}: ${this.name}` },
       position: { width: 400 },
-      content: `<p>${game.i18n.format("DND5E.AbilityPromptText", { ability: label })}</p>`,
+      content: `<p>${_loc("DND5E.AbilityPromptText", { ability: label })}</p>`,
       buttons: [
         {
           action: "test",
-          label: game.i18n.localize("DND5E.ActionAbil"),
+          label: _loc("DND5E.ActionAbil"),
           callback: () => this.rollAbilityCheck(config, dialog, message)
         },
         {
           action: "save",
-          label: game.i18n.localize("DND5E.ActionSave"),
+          label: _loc("DND5E.ActionSave"),
           callback: () => this.rollSavingThrow(config, dialog, message)
         }
       ]
@@ -1417,7 +1417,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const dialogConfig = foundry.utils.mergeObject({
       options: {
         window: {
-          title: game.i18n.format("DND5E.AbilityPromptTitle", { ability: abilityLabel }),
+          title: _loc("DND5E.AbilityPromptTitle", { ability: abilityLabel }),
           subtitle: this.name
         }
       }
@@ -1439,7 +1439,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const dialogConfig = foundry.utils.mergeObject({
       options: {
         window: {
-          title: game.i18n.format("DND5E.SavePromptTitle", { ability: abilityLabel }),
+          title: _loc("DND5E.SavePromptTitle", { ability: abilityLabel }),
           subtitle: this.name
         }
       }
@@ -1503,7 +1503,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
             }
           }
         },
-        flavor: game.i18n.format(
+        flavor: _loc(
           `DND5E.${type === "check" ? "Ability" : "Save"}PromptTitle`, { ability: abilityConfig?.label ?? "" }
         ),
         speaker: ChatMessage.getSpeaker({ actor: this })
@@ -1588,7 +1588,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
             }
           }
         },
-        flavor: game.i18n.localize("DND5E.DeathSavingThrow")
+        flavor: _loc("DND5E.DeathSavingThrow")
       }
     }, message);
 
@@ -1658,7 +1658,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     let resultsMessage;
     if ( details.chatString ) {
       const chatData = {
-        content: game.i18n.format(details.chatString, { name: this.name }),
+        content: _loc(details.chatString, { name: this.name }),
         speaker: messageConfig.speaker ?? ChatMessage.getSpeaker({ actor: this })
       };
       ChatMessage.applyMode(chatData, messageConfig.rollMode ?? CONFIG.Dice.BasicRoll.getMessageMode());
@@ -1719,7 +1719,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const dialogConfig = foundry.utils.mergeObject({
       options: {
         window: {
-          title: game.i18n.format("DND5E.SavePromptTitle", { ability: game.i18n.localize("DND5E.Concentration") })
+          title: _loc("DND5E.SavePromptTitle", { ability: _loc("DND5E.Concentration") })
         }
       }
     }, dialog);
@@ -1808,7 +1808,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     options = foundry.utils.mergeObject({
       advantage, disadvantage,
       fixed: useScore ? init.score : undefined,
-      flavor: options.flavor ?? game.i18n.localize("DND5E.Initiative"),
+      flavor: options.flavor ?? _loc("DND5E.Initiative"),
       halflingLucky: flags.halflingLucky ?? false,
       maximum: Math.min(init.roll.max ?? Infinity, ability?.check.roll.max ?? Infinity),
       minimum: Math.max(init.roll.min ?? -Infinity, ability?.check.roll.min ?? -Infinity)
@@ -1850,7 +1850,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const messageOptions = { rollMode: CONFIG.Dice.BasicRoll.getMessageMode() };
     if ( config.rolls[0].options?.fixed === undefined ) {
       const dialogConfig = foundry.utils.mergeObject({
-        options: { title: game.i18n.localize("DND5E.InitiativeRoll") }
+        options: { title: _loc("DND5E.InitiativeRoll") }
       }, dialog);
       const rolls = await CONFIG.Dice.D20Roll.build(config, dialogConfig, messageOptions);
       if ( !rolls.length ) return;
@@ -1922,7 +1922,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
       // If no hit dice are available, display an error notification
       if ( !this.system.attributes.hd.value ) {
-        ui.notifications.error(game.i18n.format("DND5E.HitDiceNPCWarn", {name: this.name}));
+        ui.notifications.error(_loc("DND5E.HitDiceNPCWarn", {name: this.name}));
         return null;
       }
     }
@@ -1943,7 +1943,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
       // If no class is available, display an error notification
       if ( !cls ) {
-        ui.notifications.error(game.i18n.format("DND5E.HitDiceWarn", {name: this.name, formula: config.denomination}));
+        ui.notifications.error(_loc("DND5E.HitDiceWarn", {name: this.name, formula: config.denomination}));
         return null;
       }
     }
@@ -1959,7 +1959,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       configure: false
     }, dialog);
 
-    const flavor = game.i18n.localize("DND5E.HitDiceRoll");
+    const flavor = _loc("DND5E.HitDiceRoll");
     const messageConfig = foundry.utils.mergeObject({
       rollMode: CONFIG.Dice.BasicRoll.getMessageMode(),
       data: {
@@ -2036,7 +2036,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       data: item.getRollData(),
       chatMessage
     };
-    const flavor = game.i18n.format("DND5E.ADVANCEMENT.HitPoints.Action.RollClass", { class: item.name });
+    const flavor = _loc("DND5E.ADVANCEMENT.HitPoints.Action.RollClass", { class: item.name });
     const messageData = {
       title: `${flavor}: ${this.name}`,
       flavor,
@@ -2089,7 +2089,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       data: this.getRollData(),
       chatMessage
     };
-    const flavor = game.i18n.format("DND5E.HPFormulaRollMessage");
+    const flavor = _loc("DND5E.HPFormulaRollMessage");
     const messageData = {
       title: `${flavor}: ${this.name}`,
       flavor,
@@ -2352,10 +2352,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Create a chat message
     const pr = new Intl.PluralRules(game.i18n.lang);
     let chatData = {
-      content: game.i18n.format(message, {
+      content: _loc(message, {
         name: this.name,
-        dice: game.i18n.format(`DND5E.HITDICE.Counted.${pr.select(dhd)}`, { number: formatNumber(dhd) }),
-        health: game.i18n.format(`DND5E.HITPOINTS.Counted.${pr.select(dhp)}`, { number: formatNumber(dhp) })
+        dice: _loc(`DND5E.HITDICE.Counted.${pr.select(dhd)}`, { number: formatNumber(dhd) }),
+        health: _loc(`DND5E.HITPOINTS.Counted.${pr.select(dhp)}`, { number: formatNumber(dhp) })
       }),
       flavor: this.createRestFlavor(config, result),
       type: "rest",
@@ -2389,7 +2389,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const typeConfig = CONFIG.DND5E.restTypes[config.type] ?? {};
     const duration = convertTime(config.duration, "minute");
     const parts = [formatTime(duration.value, duration.unit)];
-    if ( result?.newDay ?? config.newDay ) parts.push(game.i18n.localize("DND5E.REST.NewDay.Label").toLowerCase());
+    if ( result?.newDay ?? config.newDay ) parts.push(_loc("DND5E.REST.NewDay.Label").toLowerCase());
     return `${typeConfig.label} (${game.i18n.getListFormatter({ type: "unit" }).format(parts)})`;
   }
 
@@ -2593,7 +2593,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     return Object.entries(CONFIG.DND5E.movementTypes).reduce((html, [k, { hidden, label }]) => {
       if ( hidden ) return html;
       const value = movement[k];
-      if ( (k === "fly") && movement.hover ) label = game.i18n.format("DND5E.MOVEMENT.HoverSpeed", { speed: label });
+      if ( (k === "fly") && movement.hover ) label = _loc("DND5E.MOVEMENT.HoverSpeed", { speed: label });
       if ( value || (k === "walk") ) html += `
         <div class="row">
           <i class="fas ${k}"></i>
@@ -2622,7 +2622,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     if ( ac.calc === "flat" ) {
       attribution.push({
-        label: game.i18n.localize("DND5E.ArmorClassFlat"),
+        label: _loc("DND5E.ArmorClassFlat"),
         type: "override",
         value: ac.flat
       });
@@ -2635,7 +2635,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       // Natural armor
       case "natural":
         attribution.push({
-          label: game.i18n.localize("DND5E.ArmorClassNatural"),
+          label: _loc("DND5E.ArmorClassNatural"),
           type: "override",
           value: ac.flat
         });
@@ -2656,8 +2656,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
           });
         }
         const armorInFormula = formula.includes("@attributes.ac.armor");
-        let label = game.i18n.localize("DND5E.PropertyBase");
-        if ( armorInFormula ) label = this.armor?.name ?? game.i18n.localize("DND5E.ArmorClassUnarmored");
+        let label = _loc("DND5E.PropertyBase");
+        if ( armorInFormula ) label = this.armor?.name ?? _loc("DND5E.ArmorClassUnarmored");
         attribution.unshift({
           label,
           type: "override",
@@ -2668,7 +2668,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     // Shield
     if ( ac.shield !== 0 ) attribution.push({
-      label: this.shield?.name ?? game.i18n.localize("DND5E.EquipmentShield"),
+      label: this.shield?.name ?? _loc("DND5E.EquipmentShield"),
       type: "add",
       value: ac.shield
     });
@@ -2678,7 +2678,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     // Cover
     if ( ac.cover !== 0 ) attribution.push({
-      label: game.i18n.localize("DND5E.Cover"),
+      label: _loc("DND5E.Cover"),
       type: "add",
       value: ac.cover
     });
@@ -2770,7 +2770,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     if ( settings.keep.has("self") ) {
       o.img = sourceData.img;
-      o.name = `${o.name} (${game.i18n.localize("DND5E.TRANSFORM.Preset.Appearance.Label")})`;
+      o.name = `${o.name} (${_loc("DND5E.TRANSFORM.Preset.Appearance.Label")})`;
     }
 
     // Prepare new data to merge from the source
@@ -2899,7 +2899,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
           let profOverride = d.effects.findSplice(e => e._id === staticID("dnd5eTransformProf"));
           if ( !profOverride ) profOverride = new ActiveEffect.implementation({
             _id: staticID("dnd5eTransformProf"),
-            name: game.i18n.localize("DND5E.Proficiency"),
+            name: _loc("DND5E.Proficiency"),
             img: "icons/skills/social/diplomacy-peace-alliance.webp",
             disabled: false
           }).toObject();
@@ -2913,7 +2913,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
           const cls = new dnd5e.dataModels.item.ClassData({ levels: d.system.details.cr });
           d.items.push({
             type: "class",
-            name: game.i18n.localize("DND5E.TRANSFORM.TemporaryClass"),
+            name: _loc("DND5E.TRANSFORM.TemporaryClass"),
             system: cls.toObject()
           });
         }
@@ -3017,7 +3017,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         tokenData[k] = this.token[k];
       }
       if ( settings.keep.has("self") ) {
-        tokenData.name = `${this.token.name} (${game.i18n.localize("DND5E.TRANSFORM.Preset.Appearance.Label")})`;
+        tokenData.name = `${this.token.name} (${_loc("DND5E.TRANSFORM.Preset.Appearance.Label")})`;
       } else {
         tokenData.name = `${this.token.name} (${sourceData.name})`;
       }
@@ -3084,7 +3084,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         newTokenData[k] = t.document[k];
       }
       if ( settings.keep.has("self") ) {
-        newTokenData.name = `${t.document.name} (${game.i18n.localize("DND5E.TRANSFORM.Preset.Appearance.Label")})`;
+        newTokenData.name = `${t.document.name} (${_loc("DND5E.TRANSFORM.Preset.Appearance.Label")})`;
       } else {
         newTokenData.name = `${t.document.name} (${sourceData.name})`;
       }
@@ -3160,7 +3160,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( this.isToken ) {
       const baseActor = original ? original : game.actors.get(this.token.actorId);
       if ( !baseActor ) {
-        ui.notifications.warn(game.i18n.format("DND5E.TRANSFORM.Warning.OriginalActor", {
+        ui.notifications.warn(_loc("DND5E.TRANSFORM.Warning.OriginalActor", {
           reference: this.getFlag("dnd5e", "originalActor")
         }));
         return;
@@ -3186,7 +3186,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     if ( !original ) {
-      ui.notifications.warn(game.i18n.format("DND5E.TRANSFORM.Warning.OriginalActor", {
+      ui.notifications.warn(_loc("DND5E.TRANSFORM.Warning.OriginalActor", {
         reference: this.getFlag("dnd5e", "originalActor")
       }));
       return;
@@ -3524,7 +3524,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       _id: ActiveEffect5e.ID.BLOODIED,
       img: CONFIG.DND5E.bloodied.img,
       flags: { dnd5e: { isTemporary: true } },
-      name: game.i18n.localize(CONFIG.DND5E.bloodied.name),
+      name: _loc(CONFIG.DND5E.bloodied.name),
       statuses: ["bloodied"],
       showIcon: CONST.ACTIVE_EFFECT_SHOW_ICON?.CONDITIONAL
     }, { parent: this, keepId: true });

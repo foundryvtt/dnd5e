@@ -135,7 +135,7 @@ export default class CalendarData5e extends foundry.data.CalendarData {
 
       // Month
       b: month.abbreviation,
-      B: game.i18n.localize(month.name),
+      B: _loc(month.name),
       m: month.ordinal,
       mm: month.ordinal.paddedString(2),
 
@@ -189,8 +189,8 @@ export default class CalendarData5e extends foundry.data.CalendarData {
     let formatter = "Mid";
     if ( seasonPercent <= 0.33 ) formatter = "Early";
     else if ( seasonPercent >= 0.66 ) formatter = "Late";
-    return game.i18n.format(`DND5E.CALENDAR.Formatters.ApproximateDate.${formatter}Season`, {
-      season: game.i18n.localize(season.name)
+    return _loc(`DND5E.CALENDAR.Formatters.ApproximateDate.${formatter}Season`, {
+      season: _loc(season.name)
     });
   }
 
@@ -217,7 +217,7 @@ export default class CalendarData5e extends foundry.data.CalendarData {
     else if ( (day > 0.5) && (day <= 0.85) ) formatter = "Afternoon";
     else if ( (day > 0.85) && (night < 0) ) formatter = "Evening";
     else formatter = "Night";
-    return game.i18n.localize(`DND5E.CALENDAR.Formatters.ApproximateTime.${formatter}`);
+    return _loc(`DND5E.CALENDAR.Formatters.ApproximateTime.${formatter}`);
   }
 
   /* -------------------------------------------- */
@@ -261,7 +261,7 @@ export default class CalendarData5e extends foundry.data.CalendarData {
    * @returns {string}                       The returned string format.
    */
   static formatLocalized(localizationKey, calendar, components, options) {
-    return game.i18n.format(localizationKey, CalendarData5e.dateFormattingParts(calendar, components));
+    return _loc(localizationKey, CalendarData5e.dateFormattingParts(calendar, components));
   }
 
   /* -------------------------------------------- */

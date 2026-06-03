@@ -475,11 +475,11 @@ export default class WeaponData extends ItemDataModel.mixin(
     this.prepareIdentifiable();
     this.preparePhysicalData();
     this.prepareMountableData();
-    this.type.label = CONFIG.DND5E.weaponTypes[this.type.value] ?? game.i18n.localize(CONFIG.Item.typeLabels.weapon);
+    this.type.label = CONFIG.DND5E.weaponTypes[this.type.value] ?? _loc(CONFIG.Item.typeLabels.weapon);
     this.type.identifier = CONFIG.DND5E.weaponIds[this.type.baseItem];
 
     const labels = this.parent.labels ??= {};
-    labels.armor = this.armor.value ? `${this.armor.value} ${game.i18n.localize("DND5E.AC")}` : "";
+    labels.armor = this.armor.value ? `${this.armor.value} ${_loc("DND5E.AC")}` : "";
     labels.damage = this.damage.base.formula;
     labels.damageTypes = game.i18n.getListFormatter({ style: "narrow" }).format(
       Array.from(this.damage.base.types).map(t => CONFIG.DND5E.damageTypes[t]?.label).filter(t => t)
@@ -504,7 +504,7 @@ export default class WeaponData extends ItemDataModel.mixin(
     units ??= defaultUnits("length");
     if ( this.hasRange ) labels.range = !long || (long === value) ? formatLength(value, units)
       : `${formatNumber(value)}/${formatLength(long, units)}`;
-    if ( reach ) labels.reach = game.i18n.format("DND5E.RANGE.Formatted.Reach", { reach: formatLength(reach, units) });
+    if ( reach ) labels.reach = _loc("DND5E.RANGE.Formatted.Reach", { reach: formatLength(reach, units) });
   }
 
   /* -------------------------------------------- */
@@ -523,7 +523,7 @@ export default class WeaponData extends ItemDataModel.mixin(
   /** @inheritDoc */
   async getSheetData(context) {
     context.subtitles = [
-      { label: game.i18n.localize(CONFIG.Item.typeLabels.weapon) },
+      { label: _loc(CONFIG.Item.typeLabels.weapon) },
       { label: this.type.label },
       ...this.physicalItemSheetFields
     ];
