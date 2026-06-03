@@ -51,6 +51,9 @@ export class ItemChoiceConfigurationData extends foundry.abstract.DataModel {
 
   /** @inheritDoc */
   static migrateData(source) {
+    super.migrateData(source);
+    if ( !source ) return source;
+
     if ( "choices" in source ) Object.entries(source.choices).forEach(([k, c]) => {
       if ( foundry.utils.getType(c) === "number" ) source.choices[k] = { count: c };
     });
@@ -58,6 +61,7 @@ export class ItemChoiceConfigurationData extends foundry.abstract.DataModel {
       source.pool = source.pool.map(i => foundry.utils.getType(i) === "string" ? { uuid: i } : i);
     }
     if ( source.spell ) SpellConfigurationData.migrateData(source.spell);
+
     return source;
   }
 }

@@ -44,6 +44,9 @@ export default class SpellConfigurationData extends foundry.abstract.DataModel {
 
   /** @inheritDoc */
   static migrateData(source) {
+    super.migrateData(source);
+    if ( !source ) return source;
+
     if ( foundry.utils.getType(source.ability) === "string" ) source.ability = source.ability ? [source.ability] : [];
     if ( !("preparation" in source) ) return;
     const { preparation } = source;
@@ -58,6 +61,8 @@ export default class SpellConfigurationData extends foundry.abstract.DataModel {
       if ( !("prepared" in source) ) source.prepared = 0;
     }
     delete source.preparation;
+
+    return source;
   }
 
   /* -------------------------------------------- */

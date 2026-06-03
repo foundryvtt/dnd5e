@@ -45,11 +45,15 @@ export class ScaleValueConfigurationData extends foundry.abstract.DataModel {
   /** @inheritDoc */
   static migrateData(source) {
     super.migrateData(source);
+    if ( !source ) return source;
+
     if ( source.type === "numeric" ) source.type = "number";
     for ( const [k, v] of Object.entries(source.scale ?? {}) ) {
       if ( foundry.utils.isDeletionKey(k) ) continue;
       TYPES[source.type].migrateData(v);
     }
+
+    return source;
   }
 }
 
