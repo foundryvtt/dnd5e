@@ -131,7 +131,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
   /** @inheritDoc */
   get _typeAbilityMod() {
     if ( this.type.value !== "scroll" ) return null;
-    return this.parent?.actor?.system.attributes.spellcasting || "int";
+    return this.parent?.actor?.spellcastingAbility ?? "int";
   }
 
   /* -------------------------------------------- */
