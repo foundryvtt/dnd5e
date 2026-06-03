@@ -142,7 +142,7 @@ export default class MultiActorSheet extends BaseActorSheet {
       }
       return true;
     });
-    if ( foundNonPhysical ) ui.notifications.warn("DND5E.Group.Warning.PhysicalItemOnly", { localize: true });
+    if ( foundNonPhysical ) ui.notifications.warn("DND5E.Group.Warning.PhysicalItemOnly");
     return super._onDropCreateItems(event, items, behavior);
   }
 

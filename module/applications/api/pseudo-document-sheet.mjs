@@ -174,7 +174,7 @@ export default class PseudoDocumentSheet extends Application5e {
     const type = event.button === 2 ? "id" : "uuid";
     const label = _loc(this.document.metadata.label);
     game.clipboard.copyPlainText(id);
-    ui.notifications.info(_loc("DOCUMENT.IdCopiedClipboard", { label, type, id }));
+    ui.notifications.info("DOCUMENT.IdCopiedClipboard", { format: { label, type, id } });
   }
 
   /* -------------------------------------------- */

@@ -1266,7 +1266,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( container ) {
       initialDepth = 1 + (await container.system.allContainers()).length;
       if ( initialDepth > PhysicalItemTemplate.MAX_DEPTH ) {
-        ui.notifications.warn(_loc("DND5E.ContainerMaxDepth", { depth: PhysicalItemTemplate.MAX_DEPTH }));
+        ui.notifications.warn("DND5E.ContainerMaxDepth", { format: { depth: PhysicalItemTemplate.MAX_DEPTH } });
         return;
       }
     }

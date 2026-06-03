@@ -10,7 +10,7 @@ export async function create5eMacro(dropData, slot) {
     case "Activity":
       const activity = await fromUuid(dropData.uuid);
       if ( !activity ) {
-        ui.notifications.warn("MACRO.5eUnownedWarn", { localize: true });
+        ui.notifications.warn("MACRO.5eUnownedWarn");
         return null;
       }
       foundry.utils.mergeObject(macroData, {
@@ -24,7 +24,7 @@ export async function create5eMacro(dropData, slot) {
     case "Item":
       const itemData = await Item.implementation.fromDropData(dropData);
       if ( !itemData ) {
-        ui.notifications.warn("MACRO.5eUnownedWarn", { localize: true });
+        ui.notifications.warn("MACRO.5eUnownedWarn");
         return null;
       }
       foundry.utils.mergeObject(macroData, {
@@ -37,7 +37,7 @@ export async function create5eMacro(dropData, slot) {
     case "ActiveEffect":
       const effectData = await ActiveEffect.implementation.fromDropData(dropData);
       if ( !effectData ) {
-        ui.notifications.warn("MACRO.5eUnownedWarn", { localize: true });
+        ui.notifications.warn("MACRO.5eUnownedWarn");
         return null;
       }
       foundry.utils.mergeObject(macroData, {
@@ -72,7 +72,7 @@ function getMacroTarget(name, documentType) {
   if ( speaker.token ) actor = game.actors.tokens[speaker.token];
   actor ??= game.actors.get(speaker.actor);
   if ( !actor ) {
-    ui.notifications.warn("MACRO.5eNoActorSelected", {localize: true});
+    ui.notifications.warn("MACRO.5eNoActorSelected");
     return null;
   }
 
@@ -82,11 +82,11 @@ function getMacroTarget(name, documentType) {
   const documents = collection.filter(i => i._source.name === name);
   const type = _loc(`DOCUMENT.${documentType}`);
   if ( documents.length === 0 ) {
-    ui.notifications.warn(_loc("MACRO.5eMissingTargetWarn", { actor: actor.name, type, name }));
+    ui.notifications.warn("MACRO.5eMissingTargetWarn", { format: { actor: actor.name, type, name } });
     return null;
   }
   if ( documents.length > 1 ) {
-    ui.notifications.warn(_loc("MACRO.5eMultipleTargetsWarn", { actor: actor.name, type, name }));
+    ui.notifications.warn("MACRO.5eMultipleTargetsWarn", { format: { actor: actor.name, type, name } });
   }
   return documents[0];
 }

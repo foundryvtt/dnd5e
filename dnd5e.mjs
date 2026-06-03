@@ -578,7 +578,7 @@ Hooks.once("ready", function() {
 
   // Perform the migration
   if ( cv && foundry.utils.isNewerVersion(game.system.flags.compatibleMigrationVersion, cv) ) {
-    ui.notifications.error("MIGRATION.5eVersionTooOldWarning", {localize: true, permanent: true});
+    ui.notifications.error("MIGRATION.5eVersionTooOldWarning", { permanent: true });
   }
   migrations.migrateWorld();
 });

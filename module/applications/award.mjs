@@ -360,7 +360,7 @@ export default class Award extends Application5e {
    */
   static async handleAward(message) {
     if ( !game.user.isGM ) {
-      ui.notifications.error("DND5E.Award.NotGMError", { localize: true });
+      ui.notifications.error("DND5E.Award.NotGMError");
       return;
     }
 

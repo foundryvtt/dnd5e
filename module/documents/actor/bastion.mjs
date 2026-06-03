@@ -303,7 +303,7 @@ export default class Bastion {
     if ( !actor && (ui.activeWindow instanceof ActorSheet) ) actor = ui.activeWindow.actor;
 
     if ( !actor ) {
-      ui.notifications.warn("DND5E.Bastion.Attack.NoActorWarning", { localize: true });
+      ui.notifications.warn("DND5E.Bastion.Attack.NoActorWarning");
       return;
     }
 

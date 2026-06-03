@@ -163,7 +163,7 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
     // If concentration is required, ensure it is still being maintained & GM is present
     if ( !game.user.isGM && concentration && !concentration.isOwner ) {
       if ( strict ) {
-        ui.notifications.error("DND5E.EffectApplyWarningConcentration", { console: false, localize: true });
+        ui.notifications.error("DND5E.EffectApplyWarningConcentration", { console: false });
         return null;
       } else {
         concentration = null;
@@ -191,7 +191,7 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
     if ( item.inCompendium ) {
       const actor = this.actor.isOwner ? this.actor : (getSceneTargets()[0]?.actor ?? game.user.character);
       if ( !actor ) {
-        ui.notifications.warn("DND5E.ENCHANT.Warning.NoTargetActor", { localize: true });
+        ui.notifications.warn("DND5E.ENCHANT.Warning.NoTargetActor");
         return null;
       }
       enchantmentData._id = foundry.utils.randomID();

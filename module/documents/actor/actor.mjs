@@ -1549,7 +1549,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     // Display a warning if we are not at zero HP or if we already have reached 3
     if ( (this.system.attributes.hp.value > 0) || (death.failure >= 3) || (death.success >= 3) ) {
-      ui.notifications.warn("DND5E.DeathSaveUnnecessary", { localize: true });
+      ui.notifications.warn("DND5E.DeathSaveUnnecessary");
       return null;
     }
 
@@ -1922,7 +1922,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
       // If no hit dice are available, display an error notification
       if ( !this.system.attributes.hd.value ) {
-        ui.notifications.error(_loc("DND5E.HitDiceNPCWarn", {name: this.name}));
+        ui.notifications.error("DND5E.HitDiceNPCWarn", { format: { name: this.name } });
         return null;
       }
     }
@@ -1943,7 +1943,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
       // If no class is available, display an error notification
       if ( !cls ) {
-        ui.notifications.error(_loc("DND5E.HitDiceWarn", {name: this.name, formula: config.denomination}));
+        ui.notifications.error("DND5E.HitDiceWarn", { format: { name: this.name, formula: config.denomination } });
         return null;
       }
     }
@@ -2137,7 +2137,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   async initiateRest(config={}) {
     if ( this.system.isVehicle ) return;
     if ( !game.user.isGM && !game.settings.get("dnd5e", "allowRests") && !config.request ) {
-      ui.notifications.warn("DND5E.REST.Warning.OnlyByRequest", { localize: true, log: false });
+      ui.notifications.warn("DND5E.REST.Warning.OnlyByRequest", { console: false });
       return;
     }
 
@@ -2753,7 +2753,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Ensure the player is allowed to polymorph
     const allowed = game.settings.get("dnd5e", "allowPolymorphing");
     if ( !allowed && !game.user.isGM ) {
-      ui.notifications.warn("DND5E.TRANSFORM.Warning.NoPermission", { localize: true });
+      ui.notifications.warn("DND5E.TRANSFORM.Warning.NoPermission");
       return null;
     }
 
@@ -3120,7 +3120,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   async revertOriginalForm(options={}) {
     if ( !this.isPolymorphed ) return;
     if ( !this.isOwner ) {
-      ui.notifications.warn("DND5E.TRANSFORM.Warning.NoOwnership", { localize: true });
+      ui.notifications.warn("DND5E.TRANSFORM.Warning.NoOwnership");
       return null;
     }
 
@@ -3160,9 +3160,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( this.isToken ) {
       const baseActor = original ? original : game.actors.get(this.token.actorId);
       if ( !baseActor ) {
-        ui.notifications.warn(_loc("DND5E.TRANSFORM.Warning.OriginalActor", {
-          reference: this.getFlag("dnd5e", "originalActor")
-        }));
+        ui.notifications.warn("DND5E.TRANSFORM.Warning.OriginalActor", {
+          format: { reference: this.getFlag("dnd5e", "originalActor") }
+        });
         return;
       }
       const prototypeTokenData = (await baseActor.getTokenDocument()).toObject();
@@ -3186,9 +3186,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     if ( !original ) {
-      ui.notifications.warn(_loc("DND5E.TRANSFORM.Warning.OriginalActor", {
-        reference: this.getFlag("dnd5e", "originalActor")
-      }));
+      ui.notifications.warn("DND5E.TRANSFORM.Warning.OriginalActor", {
+        format: { reference: this.getFlag("dnd5e", "originalActor") }
+      });
       return;
     }
 

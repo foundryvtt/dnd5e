@@ -769,7 +769,7 @@ async function rollCheckSave(config, event) {
   const actors = getSceneTargets().map(t => t.actor);
   if ( !actors.length && game.user.character ) actors.push(game.user.character);
   if ( !actors.length ) {
-    ui.notifications.warn("EDITOR.DND5E.Inline.Warning.NoActor", { localize: true });
+    ui.notifications.warn("EDITOR.DND5E.Inline.Warning.NoActor");
     return;
   }
 
@@ -1399,18 +1399,18 @@ async function useItem({ rollActivityUuid, rollActivityName, rollItemUuid, rollI
       if ( activity ) return activity.use({ event });
 
       // If no activity could be found at all, display a warning
-      else ui.notifications.warn(_loc("EDITOR.DND5E.Inline.Warning.NoActivityOnItem", {
-        activity: rollActivityName, actor: actor.name, item: rollItemName
-      }));
+      else ui.notifications.warn("EDITOR.DND5E.Inline.Warning.NoActivityOnItem", {
+        format: { activity: rollActivityName, actor: actor.name, item: rollItemName }
+      });
     }
 
     else return item.use({ event });
   }
 
   // If no item could be found at all, display a warning
-  else ui.notifications.warn(_loc("EDITOR.DND5E.Inline.Warning.NoItemOnActor", {
-    actor: actor.name, item: rollItemName
-  }));
+  else ui.notifications.warn("EDITOR.DND5E.Inline.Warning.NoItemOnActor", {
+    format: { actor: actor.name, item: rollItemName }
+  });
 }
 
 /* -------------------------------------------- */

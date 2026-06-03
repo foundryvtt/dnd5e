@@ -130,7 +130,7 @@ export default class ScaleValueAdvancement extends Advancement {
       onClick: () => {
         const value = `@scale.${this.item.identifier}.${this.identifier}`;
         game.clipboard.copyPlainText(value);
-        ui.notifications.info(_loc("DND5E.Copied", { value }), { console: false });
+        ui.notifications.info("DND5E.Copied", { console: false, format: { value } });
       }
     });
     return options;

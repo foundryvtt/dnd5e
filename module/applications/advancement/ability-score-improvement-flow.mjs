@@ -286,7 +286,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
     const item = await Item.implementation.fromDropData(data);
 
     if ( (item.type !== "feat") || (item.system.type.value !== "feat") ) {
-      ui.notifications.error("DND5E.ADVANCEMENT.AbilityScoreImprovement.Warning.Type", {localize: true});
+      ui.notifications.error("DND5E.ADVANCEMENT.AbilityScoreImprovement.Warning.Type");
       return null;
     }
 

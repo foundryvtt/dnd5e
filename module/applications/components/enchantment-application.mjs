@@ -154,7 +154,7 @@ export default class EnchantmentApplicationElement extends MaybeAdoptable {
     const concentrationId = this.chatMessage.system.concentration;
     const concentration = this.enchantmentActivity.actor.effects.get(concentrationId);
     if ( concentrationId && !concentration ) {
-      ui.notifications.error("DND5E.ENCHANT.Warning.ConcentrationEnded", { console: false, localize: true });
+      ui.notifications.error("DND5E.ENCHANT.Warning.ConcentrationEnded", { console: false });
       return;
     }
 

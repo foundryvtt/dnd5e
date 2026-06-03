@@ -223,7 +223,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     const config = this.advancement.configuration;
     const { current, max } = this.counts;
     if ( current >= max ) {
-      ui.notifications.warn("DND5E.ADVANCEMENT.ItemChoice.Warning.MaxSelected", { localize: true });
+      ui.notifications.warn("DND5E.ADVANCEMENT.ItemChoice.Warning.MaxSelected");
       return;
     }
 
@@ -344,9 +344,9 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     if ( (this.advancement.configuration.type === "spell") && spellLevel === "available" ) {
       const maxSlot = this._maxSpellSlotLevel();
       if ( item.system.level > maxSlot ) {
-        ui.notifications.error(_loc("DND5E.ADVANCEMENT.ItemChoice.Warning.SpellLevelAvailable", {
-          level: CONFIG.DND5E.spellLevels[maxSlot]
-        }));
+        ui.notifications.error("DND5E.ADVANCEMENT.ItemChoice.Warning.SpellLevelAvailable", {
+          format: { level: CONFIG.DND5E.spellLevels[maxSlot] }
+        });
         return null;
       }
     }

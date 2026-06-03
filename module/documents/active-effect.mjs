@@ -558,7 +558,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
     // Enchantments cannot be added directly to actors
     if ( (this.type === "enchantment") && (this.parent instanceof Actor) ) {
-      ui.notifications.error("DND5E.ENCHANTMENT.Warning.NotOnActor", { localize: true });
+      ui.notifications.error("DND5E.ENCHANTMENT.Warning.NotOnActor");
       return false;
     }
 
@@ -626,7 +626,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   async _preDelete(options, user) {
     const dependents = this.getDependents();
     if ( dependents.length && !game.users.activeGM ) {
-      ui.notifications.warn("DND5E.ConcentrationBreakWarning", { localize: true });
+      ui.notifications.warn("DND5E.ConcentrationBreakWarning");
       return false;
     }
     return super._preDelete(options, user);

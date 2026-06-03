@@ -187,9 +187,9 @@ export default class StartingEquipmentConfig extends DocumentSheet5e {
 
     // Validate that this is a physical item
     if ( !item.system.constructor._schemaTemplates?.includes(PhysicalItemTemplate) ) {
-      ui.notifications.error(_loc("DND5E.StartingEquipment.Warning.ItemTypeInvalid", {
-        type: _loc(CONFIG.Item.typeLabels[item.type])
-      }));
+      ui.notifications.error("DND5E.StartingEquipment.Warning.ItemTypeInvalid", {
+        format: { type: _loc(CONFIG.Item.typeLabels[item.type]) }
+      });
       return null;
     }
 
@@ -239,7 +239,7 @@ export default class StartingEquipmentConfig extends DocumentSheet5e {
         if ( dragEntry.children.some(c => c.type in EquipmentEntryData.GROUPING_TYPES) ) depth += 1;
       }
       if ( depth > 3 ) {
-        ui.notifications.warn("DND5E.StartingEquipment.Warning.Depth", { localize: true });
+        ui.notifications.warn("DND5E.StartingEquipment.Warning.Depth");
         return;
       }
       updateData = { [`startingEquipment.${dragEntry._id}.group`]: dropEntry._id };

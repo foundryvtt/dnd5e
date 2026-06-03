@@ -71,7 +71,7 @@ export default class CastActivity extends ActivityMixin(BaseCastActivityData) {
   async use(usage={}, dialog={}, message={}) {
     if ( !this.item.isEmbedded || this.item.pack ) return;
     if ( !this.item.isOwner ) {
-      ui.notifications.error("DND5E.DocumentUseWarn", { localize: true });
+      ui.notifications.error("DND5E.DocumentUseWarn");
       return;
     }
 

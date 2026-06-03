@@ -110,7 +110,7 @@ export default class SaveActivity extends ActivityMixin(BaseSaveActivityData) {
   static async #rollSave(event, target, message) {
     const targets = getSceneTargets();
     if ( !targets.length && game.user.character ) targets.push(game.user.character);
-    if ( !targets.length ) ui.notifications.warn("DND5E.ActionWarningNoToken", { localize: true });
+    if ( !targets.length ) ui.notifications.warn("DND5E.ActionWarningNoToken");
     const dc = parseInt(target.dataset.dc);
     for ( const token of targets ) {
       const actor = token instanceof Actor ? token : token.actor;

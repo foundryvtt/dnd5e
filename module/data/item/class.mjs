@@ -300,13 +300,13 @@ export default class ClassData extends ItemDataModel.mixin(
 
     // Check to make sure the updated class level isn't below zero
     if ( changed.system.levels <= 0 ) {
-      ui.notifications.warn("DND5E.MaxClassLevelMinimumWarn", { localize: true });
+      ui.notifications.warn("DND5E.MaxClassLevelMinimumWarn");
       changed.system.levels = 1;
     }
 
     // Check to make sure the updated class level doesn't exceed level cap
     if ( changed.system.levels > CONFIG.DND5E.maxLevel ) {
-      ui.notifications.warn(_loc("DND5E.MaxClassLevelExceededWarn", { max: CONFIG.DND5E.maxLevel }));
+      ui.notifications.warn("DND5E.MaxClassLevelExceededWarn", { format: { max: CONFIG.DND5E.maxLevel } });
       changed.system.levels = CONFIG.DND5E.maxLevel;
     }
 
@@ -315,7 +315,7 @@ export default class ClassData extends ItemDataModel.mixin(
     // Check to ensure the updated character doesn't exceed level cap
     const newCharacterLevel = this.parent.actor.system.details.level + (changed.system.levels - this.levels);
     if ( newCharacterLevel > CONFIG.DND5E.maxLevel ) {
-      ui.notifications.warn(_loc("DND5E.MaxCharacterLevelExceededWarn", { max: CONFIG.DND5E.maxLevel }));
+      ui.notifications.warn("DND5E.MaxCharacterLevelExceededWarn", { format: { max: CONFIG.DND5E.maxLevel } });
       changed.system.levels -= newCharacterLevel - CONFIG.DND5E.maxLevel;
     }
   }
