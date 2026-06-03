@@ -622,6 +622,14 @@ function cacheSettings() {
  * Register additional settings after modules have had a chance to initialize to give them a chance to modify choices.
  */
 export function registerDeferredSettings() {
+  game.settings.register("dnd5e", "defaultDocumentSubtypes", {
+    name: "Default Document Subtypes",
+    scope: "client",
+    config: false,
+    type: Object,
+    default: { Actor: game.user.isGM ? "npc" : "character", Item: "feat" }
+  });
+
   game.settings.register("dnd5e", "theme", {
     name: "SETTINGS.DND5E.THEME.Name",
     hint: "SETTINGS.DND5E.THEME.Hint",

@@ -32,14 +32,6 @@ export default function PseudoDocumentMixin(Base) {
     static _sheets = new Map();
 
     /* -------------------------------------------- */
-
-    /**
-     * The default type for the purpose of a creation dialog.
-     * @type {string|void}
-     */
-    static defaultType;
-
-    /* -------------------------------------------- */
     /*  Model Configuration                         */
     /* -------------------------------------------- */
 
