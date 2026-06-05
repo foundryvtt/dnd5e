@@ -568,6 +568,7 @@ export default function ActivityMixin(Base) {
           ? this.consumption.targets.keys() : config.consume.resources;
         for ( const index of indexes ) {
           const target = this.consumption.targets[index];
+          if ( target.hasZeroCost(config) ) continue;
           try {
             await target.consume(config, updates);
           } catch(err) {

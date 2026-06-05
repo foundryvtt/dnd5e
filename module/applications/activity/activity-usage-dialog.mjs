@@ -292,6 +292,7 @@ export default class ActivityUsageDialog extends Dialog5e {
         const consume = foundry.utils.getProperty(this.config, keyPath);
         const isArray = Array.isArray(consume);
         for ( const [index, target] of targets.entries() ) {
+          if ( target.hasZeroCost(this.config) ) continue;
           const value = (isArray && consume.includes(index))
             || (!isArray && (consume !== false) && (this.config.consume !== false));
           const { label, hint, notes, warn } = target.getConsumptionLabels(this.config, value);
