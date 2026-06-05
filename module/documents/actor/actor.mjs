@@ -3173,6 +3173,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       tokenUpdate.delta = actorData;
 
       foundry.utils.mergeObject(tokenUpdate, this.token.getFlag("dnd5e", "previousTokenData"));
+      tokenUpdate.elevation = this.token.elevation;
+      tokenUpdate.hidden = this.token.hidden;
+      tokenUpdate.rotation = this.token.rotation;
       tokenUpdate.sight = prototypeTokenData.sight;
       tokenUpdate.detectionModes = prototypeTokenData.detectionModes;
       delete tokenUpdate.flags.dnd5e.previousActorData;
@@ -3199,10 +3202,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       const tokenUpdates = tokens.map(t => {
         const update = foundry.utils.deepClone(tokenData);
         update._id = t.id;
+        foundry.utils.mergeObject(update, t.document.getFlag("dnd5e", "previousTokenData"));
         update.elevation = t.document.elevation;
+        update.level = t.document.level;
         update.hidden = t.document.hidden;
         update.rotation = t.document.rotation;
-        foundry.utils.mergeObject(update, t.document.getFlag("dnd5e", "previousTokenData"));
         delete update.x;
         delete update.y;
         return update;
