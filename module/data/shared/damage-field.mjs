@@ -90,7 +90,7 @@ export class DamageData extends foundry.abstract.DataModel {
   _manualFormula({ modifiers }={}) {
     if ( !this.custom.formula ) return "";
     modifiers = Array.from(this.modifiers).concat(modifiers ?? []).join("");
-    return this.custom.formula.replace(/(?:\d|\))d(?:\d+\w*|\(.+\)\d*\w*)/, `$&${modifiers}`);
+    return this.custom.formula.replace(/(?:\d|\))d(?:\d+\w*|\([^)]+\)\d*\w*)/, `$&${modifiers}`);
   }
 
   /* -------------------------------------------- */
@@ -110,7 +110,8 @@ export class DamageData extends foundry.abstract.DataModel {
       case "half": increase = Math.floor(increase * .5); break;
       default: increase = 0; break;
     }
-    if ( !increase ) return this.custom.enabled ? this._manualFormula() : this._automaticFormula(0, { modifiers });
+    if ( !increase ) return this.custom.enabled
+      ? this._manualFormula({ modifiers }) : this._automaticFormula(0, { modifiers });
     let formula;
 
     // If dice count scaling, increase the count on the first die rolled
