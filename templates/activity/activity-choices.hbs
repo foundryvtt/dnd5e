@@ -6,7 +6,7 @@
                 <span class="icon">
                     {{ dnd5e-icon img alt=name classes="gold-icon" }}
                 </span>
-                <span class="name">{{ name }}</span>
+                <span class="name">{{ name }}{{#if uses}} <span class="uses">({{ uses.value }}/{{ uses.max }})</span>{{/if}}</span>
             </button>
         </li>
         {{/each}}
