@@ -698,6 +698,19 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
+   * Does this target's cost resolve to a fixed zero, meaning nothing is consumed? Non-deterministic
+   * costs (those containing dice) are never treated as zero.
+   * @param {ActivityUseConfiguration} [config={}]  Usage configuration.
+   * @returns {boolean}
+   */
+  hasZeroCost(config={}) {
+    const roll = this.resolveCost({ config, evaluate: false });
+    return roll.isDeterministic && (roll.evaluateSync().total === 0);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Resolve the amount to consume, taking scaling into account.
    * @param {object} [options={}]
    * @param {ActivityUseConfiguration} [options.config]  Usage configuration.

@@ -71,7 +71,7 @@ export default class ScaleValueAdvancement extends Advancement {
   /** @inheritDoc */
   titleForLevel(level, { configMode=false, legacyDisplay=false }={}) {
     const value = this.valueForLevel(level)?.display;
-    if ( !value || !legacyDisplay ) return this.title;
+    if ( (!value && (value !== 0)) || !legacyDisplay ) return this.title;
     return `${this.title}: <strong>${value}</strong>`;
   }
 

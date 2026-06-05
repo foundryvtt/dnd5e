@@ -132,7 +132,7 @@ export default class ScaleValueConfig extends AdvancementConfig {
     let lastValue = null;
     for ( const [lvl, value] of Object.entries(configuration.scale) ) {
       if ( this.advancement.testEquality(lastValue, value) ) configuration.scale[lvl] = null;
-      else if ( Object.keys(value ?? {}).some(k => value[k]) ) {
+      else if ( this.constructor._hasValue(value) ) {
         this._mergeScaleValues(value, lastValue);
         lastValue = value;
       }
@@ -168,9 +168,21 @@ export default class ScaleValueConfig extends AdvancementConfig {
   /** @override */
   static _cleanedObject(object) {
     return Object.entries(object).reduce((obj, [key, value]) => {
-      if ( Object.keys(value ?? {}).some(k => value[k]) ) obj[key] = value;
+      if ( this._hasValue(value) ) obj[key] = value;
       else obj[key] = _del;
       return obj;
     }, {});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is a scale value entry non-empty?
+   * @param {object} value  Scale value entry.
+   * @returns {boolean}
+   * @protected
+   */
+  static _hasValue(value) {
+    return Object.keys(value ?? {}).some(k => (value[k] != null) && (value[k] !== ""));
   }
 }

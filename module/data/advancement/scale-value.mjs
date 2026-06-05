@@ -204,7 +204,8 @@ export class ScaleValueType extends foundry.abstract.DataModel {
    * @returns {string}
    */
   static getPlaceholder(name, lastValue) {
-    return lastValue?.[name] ?? "";
+    // Coerce to a string so a numeric 0 placeholder is rendered.
+    return String(lastValue?.[name] ?? "");
   }
 }
 
@@ -243,7 +244,7 @@ export class ScaleValueTypeNumber extends ScaleValueType {
   /** @inheritDoc */
   static convertFrom(original, options) {
     const value = Number(original.formula);
-    if ( Number.isNaN(value) ) return null;
+    if ( (original.formula === null) || (original.formula === "") || Number.isNaN(value) ) return null;
     return new this({value}, options);
   }
 }
