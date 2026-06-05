@@ -253,7 +253,7 @@ export default class ContainerData extends ItemDataModel.mixin(
       context.max = this.capacity.weight.value;
       context.units = CONFIG.DND5E.weightUnits[this.capacity.weight.units]?.label ?? "";
     }
-    context.value = context.value.toNearest(0.1);
+    context.value = this.canViewContents ? context.value.toNearest(0.1) : 0;
     context.pct = Math.clamp(context.max ? (context.value / context.max) * 100 : 0, 0, 100);
     return context;
   }
