@@ -204,7 +204,9 @@ export class ScaleValueType extends foundry.abstract.DataModel {
    * @returns {string}
    */
   static getPlaceholder(name, lastValue) {
-    return lastValue?.[name] ?? "";
+    const value = lastValue?.[name];
+    // Coerce to a string so a numeric 0 placeholder is rendered.
+    return value == null ? "" : String(value);
   }
 }
 
