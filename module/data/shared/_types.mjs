@@ -40,6 +40,12 @@
  */
 
 /**
+ * @typedef DamageFormulaOptions
+ * @property {Set<string>|false} modifiers  Additional modifiers to apply to the formula, if possible.
+ *                                          A `false` value will remove modifiers provided by damage data.
+ */
+
+/**
  * @typedef DurationData
  * @property {string} value             Scalar value for the activity's duration.
  * @property {string} units             Units that are used for the duration.

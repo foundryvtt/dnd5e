@@ -19,6 +19,7 @@ const {
 /**
  * @import { DamageRollConfiguration, DamageRollProcessConfiguration } from "../../dice/_types.mjs";
  * @import { ActivityRollData } from "../../documents/_types.mjs";
+ * @import { DamageFormulaOptions } from "../shared/_types.mjs";
  * @import { ActivityData } from "./_types.mjs";
  */
 
@@ -636,7 +637,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @param {ActivityRollData} rollData  Deterministic roll data from the item.
    */
   prepareDamageLabel(rollData) {
-    const config = this.getDamageConfig({}, { rollData });
+    const config = this.getDamageConfig({}, { formulaOptions: { modifiers: false }, rollData });
     const rolls = aggregateDamageRolls(config.rolls.map(({ base, data, options, parts }) => {
       const formula = parts.join(" + ");
       try {
@@ -728,16 +729,17 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * Get the roll parts used to create the damage rolls.
    * @param {Partial<DamageRollProcessConfiguration>} [config={}]  Existing damage configuration to merge into this one.
    * @param {object} [options]                                     Damage configuration options.
+   * @param {DamageFormulaOptions} [options.formulaOptions]        Options to configure the formula.
    * @param {ActivityRollData} [options.rollData]                  Use pre-existing roll data.
    * @returns {DamageRollProcessConfiguration}
    */
-  getDamageConfig(config={}, { rollData }={}) {
+  getDamageConfig(config={}, { formulaOptions, rollData }={}) {
     if ( !this.damage?.parts ) return foundry.utils.mergeObject({ rolls: [] }, config);
 
     const rollConfig = foundry.utils.deepClone(config);
     rollData ??= this.getRollData();
     rollConfig.rolls = this.damage.parts
-      .map((d, index) => this._processDamagePart(d, rollConfig, rollData, index))
+      .map((d, index) => this._processDamagePart(d, rollConfig, rollData, index, formulaOptions))
       .filter(d => d.parts.length)
       .concat(config.rolls ?? []);
 
@@ -752,11 +754,12 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @param {Partial<DamageRollProcessConfiguration>} rollConfig  Roll configuration being built.
    * @param {ActivityRollData} rollData                           Roll data to populate with damage data.
    * @param {number} [index=0]                                    Index of the damage part.
+   * @param {DamageFormulaOptions} [options={}]                   Options to configure the formula.
    * @returns {DamageRollConfiguration}
    * @protected
    */
-  _processDamagePart(damage, rollConfig, rollData, index=0) {
-    const scaledFormula = damage.scaledFormula(rollConfig.scaling ?? rollData.scaling);
+  _processDamagePart(damage, rollConfig, rollData, index=0, options={}) {
+    const scaledFormula = damage.scaledFormula(rollConfig.scaling ?? rollData.scaling, options);
     const parts = scaledFormula ? [scaledFormula] : [];
     const data = { ...rollData };
 
