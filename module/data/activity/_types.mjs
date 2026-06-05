@@ -144,7 +144,7 @@
  * @property {object} save.dc
  * @property {string} save.dc.calculation           Method or ability used to calculate the difficulty class.
  * @property {string} save.dc.formula               Custom DC formula or flat value.
- * @property {boolean} save.visible                 Should this check be displayed to all players?
+ * @property {boolean} save.visible                 Should this save be displayed to all players?
  */
 
 /**
