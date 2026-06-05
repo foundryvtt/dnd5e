@@ -69,8 +69,7 @@ export default function ApplicationV2Mixin(Base, { handlebars=true }={}) {
     }
 
     #window = {
-      subtitle: null,
-      titleMeasure: null
+      subtitle: null
     };
 
     /* -------------------------------------------- */
@@ -180,13 +179,6 @@ export default function ApplicationV2Mixin(Base, { handlebars=true }={}) {
       const frame = await super._renderFrame(options);
       if ( !this.hasFrame ) return frame;
 
-      // Title
-      const titleMeasure = document.createElement("span");
-      titleMeasure.ariaHidden = true;
-      titleMeasure.classList.add("title-measure");
-      frame?.querySelector(".window-title")?.insertAdjacentElement("afterend", titleMeasure);
-      this.#window.titleMeasure = titleMeasure;
-
       // Subtitles
       const subtitle = document.createElement("h2");
       subtitle.classList.add("window-subtitle");
@@ -265,13 +257,10 @@ export default function ApplicationV2Mixin(Base, { handlebars=true }={}) {
     /** @inheritDoc */
     _updateFrame(options) {
       super._updateFrame(options);
-      const window = options.window;
-      if ( !window ) return;
-      if ( ("title" in window) && this.#window.titleMeasure ) {
-        this.window.titleMeasure.innerText = window.title;
-        this.#scaleTitle();
-      }
-      if ( ("subtitle" in window) && this.#window.subtitle ) this.#window.subtitle.innerText = window.subtitle;
+      const win = options.window;
+      if ( !win ) return;
+      if ( ("title" in win) && this.#window.title ) this.#scaleTitle();
+      if ( ("subtitle" in win) && this.#window.subtitle ) this.#window.subtitle.innerText = win.subtitle;
     }
 
     /* -------------------------------------------- */
@@ -329,11 +318,15 @@ export default function ApplicationV2Mixin(Base, { handlebars=true }={}) {
      */
     #scaleTitle() {
       requestAnimationFrame(() => {
+        const { title } = this.window;
+        if ( !this.element || !title ) return;
+        // Divide by existing font scale to recover original size.
+        const scale = parseFloat(title.style.getPropertyValue("--font-size-scale")) || 1;
+        const range = document.createRange();
+        range.selectNodeContents(title);
+        const fullWidth = range.getBoundingClientRect().width / scale;
         const maxWidth = this.element.offsetWidth - 60;
-        const fullWidth = this.window.titleMeasure.offsetWidth;
-        if ( fullWidth > maxWidth ) {
-          this.window.title.style.setProperty("--font-size-scale", Math.clamp(maxWidth / fullWidth, 0.5, 1));
-        }
+        if ( fullWidth ) title.style.setProperty("--font-size-scale", Math.clamp(maxWidth / fullWidth, 0.5, 1));
       });
     }
 
