@@ -808,6 +808,41 @@ export function getSceneTargets(actor, { checkBaseActor }={}) {
 }
 
 /* -------------------------------------------- */
+/*  Measurement                                 */
+/* -------------------------------------------- */
+
+/**
+ * Measure the minimum distance between two tokens spaces.
+ * @param {TokenDocument5e} source  The source token document.
+ * @param {TokenDocument5e} target  The target token document.
+ * @returns {number}  Distance in scene grid units, or {@link Infinity} if unmeasurable.
+ */
+export function measureTokenDistance(source, target) {
+  const grid = source.parent?.grid;
+  if ( !grid ) return Infinity;
+  
+  const sourceHeight = (source.depth ?? 0) * grid.distance;
+  const targetHeight = (target.depth ?? 0) * grid.distance;
+  const sourcePoints = source.getContainmentTestPoints().flatMap(point => [
+    { ...point, elevation: source.elevation },
+    { ...point, elevation: source.elevation + sourceHeight }
+  ]);
+  const targetPoints = target.getContainmentTestPoints().flatMap(point => [
+    { ...point, elevation: target.elevation },
+    { ...point, elevation: target.elevation + targetHeight }
+  ]);
+
+  let minimumDistance = Infinity;
+  for ( const sourcePoint of sourcePoints ) {
+    for ( const targetPoint of targetPoints ) {
+      const distance = grid.measurePath([sourcePoint, targetPoint]).cost;
+      if ( distance < minimumDistance ) minimumDistance = distance;
+    }
+  }
+  return minimumDistance === Infinity ? Infinity : Math.max(0, Math.round(minimumDistance * 100) / 100);
+}
+
+/* -------------------------------------------- */
 /*  Conversions                                 */
 /* -------------------------------------------- */
 

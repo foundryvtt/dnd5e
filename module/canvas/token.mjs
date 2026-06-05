@@ -1,3 +1,5 @@
+import { measureTokenDistance } from "../utils.mjs";
+
 /**
  * Extend the base Token class to implement additional system-specific logic.
  */
@@ -11,6 +13,8 @@ export default class Token5e extends foundry.canvas.placeables.Token {
   };
 
   /* -------------------------------------------- */
+  /** @type {HTMLElement|null} */
+  #distanceLabel = null;
 
   /**
    * Update the token ring when this token is targeted.
@@ -294,5 +298,80 @@ export default class Token5e extends foundry.canvas.placeables.Token {
   /** @override */
   getRingEffects() {
     return this.document.getRingEffects();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onDelete(options, userId) {
+    super._onDelete(options, userId);
+    this.#removeDistanceLabel();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onHoverIn(event, options) {
+    super._onHoverIn(event, options);
+    this.#renderDistanceLabel();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onHoverOut(event) {
+    super._onHoverOut(event);
+    this.#removeDistanceLabel();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Render a distance label above this token showing the distance from the currently-controlled token. 
+   * @returns {Promise<void>}
+   */
+  async #renderDistanceLabel() {
+    this.#removeDistanceLabel();
+    const controlled = canvas.tokens?.controlled ?? [];
+    if ( controlled.length !== 1 || controlled[0] === this ) return;
+
+    const distance = measureTokenDistance(controlled[0].document, this.document);
+    if ( !Number.isFinite(distance) ) return;
+
+    const measurementHud = document.querySelector("#hud #measurement");
+    if ( !measurementHud ) return;
+
+    const uiScale = canvas.dimensions.uiScale;
+    const html = await foundry.applications.handlebars.renderTemplate(
+      "templates/hud/waypoint-label.hbs",
+      {
+        cssClass: "dnd5e-distance-label",
+        action: { icon: "fa-solid fa-ruler-combined" },
+        distance: { total: distance.toNearest(0.01).toLocaleString(game.i18n.lang) },
+        units: canvas.scene?.grid?.units ?? "",
+        uiScale
+      }
+    );
+    if ( !this.hover ) return;
+
+    const label = foundry.utils.parseHTML(html);
+    const center = this.center;
+    label.style.setProperty("--position-x", `${center.x}px`);
+    label.style.setProperty("--position-y", `${center.y - (this.h / 2)}px`);
+    label.style.setProperty("--ui-scale", uiScale);
+    label.style.setProperty("--transformX", "-50%");
+    label.style.setProperty("--transformY", "-100%");
+    measurementHud.appendChild(label);
+    this.#distanceLabel = label;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Remove any distance label associated with this token.
+   */
+  #removeDistanceLabel() {
+    this.#distanceLabel?.remove();
+    this.#distanceLabel = null;
   }
 }
