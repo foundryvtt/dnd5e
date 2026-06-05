@@ -286,7 +286,11 @@ export async function migrateCompendium(pack, { bypassVersionCheck=false, increm
         err.message = `Failed dnd5e system migration for document ${doc.name} in pack ${pack.collection}: ${err.message}`;
         console.error(err);
         hasErrors = true;
-        if ( strict ) throw err;
+        if ( strict ) {
+          progress.element?.classList.add("error");
+          progress.update({ format, message: "MIGRATION.DND5E.Compendium.Failed" });
+          throw err;
+        }
       }
 
       finally {
@@ -354,7 +358,7 @@ export function reparentCompendiums(from, to) {
  * @param {boolean} [options.migrate=true]  Also perform a system migration before refreshing.
  * @param {string} [options.package]        Only update compendiums belonging to this package.
  */
-export async function refreshAllCompendiums(options) {
+export async function refreshAllCompendiums(options={}) {
   for ( const pack of game.packs ) {
     if ( options.package && (options.package !== pack.metadata.packageName) ) continue;
     await refreshCompendium(pack, options);
