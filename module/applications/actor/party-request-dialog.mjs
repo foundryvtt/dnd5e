@@ -120,7 +120,7 @@ export default class PartyRequestDialog extends Dialog5e {
   /**
    * A helper to handle displaying and responding to the dialog.
    * @param {object} [options={}]                Additional options passed to the dialog.
-   * @returns {Promise<Map<Actor5e, User>>}      Promise that resolves to a map of actors and the users who should
+   * @returns {Promise<Map<Actor5e, User5e>>}    Promise that resolves to a map of actors and the users who should
    *                                             handle the request for that actor.
    */
   static async getRecipients(options={}) {
@@ -128,7 +128,7 @@ export default class PartyRequestDialog extends Dialog5e {
       buttons: [{
         default: true,
         icon: "fa-solid fa-bullhorn",
-        label: game.i18n.localize("DND5E.CHATMESSAGE.REQUEST.Action.Post"),
+        label: _loc("DND5E.CHATMESSAGE.REQUEST.Action.Post"),
         type: "submit"
       }]
     }, options));
