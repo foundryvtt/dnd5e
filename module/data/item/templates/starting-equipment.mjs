@@ -170,7 +170,7 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
       type: new StringField({ required: true, initial: "OR", choices: this.TYPES }),
       count: new NumberField({ initial: undefined }),
       key: new StringField({ initial: undefined }),
-      requiresProficiency: new BooleanField({ label: "DND5E.StartingEquipment.Proficient.Label" })
+      requiresProficiency: new BooleanField()
     };
   }
 

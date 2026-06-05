@@ -970,7 +970,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       position: { width: 400 },
       content: `
         <p>
-            <strong>${_loc("AreYouSure")}</strong> ${_loc("SIDEBAR.DeleteWarning", { type })}
+            <strong>${_loc("COMMON.AreYouSure")}</strong> ${_loc("SIDEBAR.DeleteWarning", { type })}
         </p>
       `,
       yes: { callback: () => this.delete(operation) }

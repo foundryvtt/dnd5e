@@ -22,7 +22,7 @@ export default class EncounterData extends GroupTemplate {
           value: new NumberField({ initial: 1, integer: true, min: 0, label: "DND5E.Quantity" }),
           formula: new FormulaField({ label: "DND5E.QuantityFormula" })
         })
-      }), { label: "DND5E.GroupMembers" })
+      }), { label: "DND5E.Group.Member.other" })
     });
   }
 
