@@ -1363,7 +1363,10 @@ dialog.dnd5e2.application {
 }
 
 // height: fit-content (from dialog UA) + flex: 1 on children behaves badly in Safari.
-dialog.dnd5e2.application { height: auto; }
+dialog.dnd5e2.application {
+  height: auto;
+  &:modal { inset-block-end: auto; } // Unset UA modal styles. Required if we have height: true.
+}
 
 /* ---------------------------------- */
 /*  Skill Configuration Dialog        */
