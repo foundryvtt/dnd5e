@@ -2634,14 +2634,14 @@ preLocalize("distanceUnits");
 DND5E.volumeUnits = {
   cubicFoot: {
     label: "DND5E.UNITS.VOLUME.CubicFoot.Label",
-    abbreviation: "DND5E.UNITS.Volume.CubicFoot.Abbreviation",
-    counted: "DND5E.UNITS.Volume.CubicFoot.Counted",
+    abbreviation: "DND5E.UNITS.VOLUME.CubicFoot.Abbreviation",
+    counted: "DND5E.UNITS.VOLUME.CubicFoot.Counted",
     conversion: 1,
     type: "imperial"
   },
   liter: {
     label: "DND5E.UNITS.VOLUME.Liter.Label",
-    abbreviation: "DND5E.UNITS.Volume.Liter.Abbreviation",
+    abbreviation: "DND5E.UNITS.VOLUME.Liter.Abbreviation",
     conversion: 1 / 28.317,
     type: "metric"
   }

@@ -264,7 +264,7 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
 
     if ( this.restrictions.properties.size
       && !this.restrictions.properties.intersection(item.system.properties ?? new Set()).size ) {
-      errors.push(new EnchantmentError(_loc("DND5E.Enchantment.Warning.MissingProperty", {
+      errors.push(new EnchantmentError(_loc("DND5E.ENCHANT.Warning.MissingProperty", {
         validProperties: game.i18n.getListFormatter({ type: "disjunction" }).format(
           Array.from(this.restrictions.properties).map(p => CONFIG.DND5E.itemProperties[p]?.label ?? p)
         )

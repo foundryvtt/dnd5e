@@ -961,7 +961,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       const result = await foundry.applications.api.DialogV2.confirm({
         content: `
           <p>
-            <strong>${_loc("AreYouSure")}</strong> ${_loc("DND5E.Bastion.Trade.Invalid")}
+            <strong>${_loc("COMMON.AreYouSure")}</strong> ${_loc("DND5E.Bastion.Trade.Invalid")}
           </p>
         `,
         window: {

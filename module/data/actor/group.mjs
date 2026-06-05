@@ -32,7 +32,7 @@ export default class GroupData extends GroupTemplate {
       }, { label: "DND5E.Details" }),
       members: new ArrayField(new SchemaField({
         actor: new ForeignDocumentField(foundry.documents.BaseActor)
-      }), { label: "DND5E.GroupMembers" }),
+      }), { label: "DND5E.Group.Member.other" }),
       primaryVehicle: new ForeignDocumentField(foundry.documents.BaseActor)
     });
   }
