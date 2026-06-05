@@ -171,7 +171,7 @@ export default class EncounterData extends GroupTemplate {
   async placeMembers(config={}) {
     const tokenDocuments = await super.placeMembers();
     config.combatBehavior ??= game.settings.get("dnd5e", "encounterPlacementBehavior");
-    if ( tokenDocuments.length && config.combatBehavior !== "none" ) {
+    if ( tokenDocuments.length && (config.combatBehavior !== "none") ) {
       const combatants = await TokenDocument.implementation.createCombatants(tokenDocuments);
       if ( config.combatBehavior === "rollInitiative" ) {
         await game.combats.viewed.rollInitiative(combatants.map(c => c.id));

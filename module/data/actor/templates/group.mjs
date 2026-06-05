@@ -64,9 +64,9 @@ export default class GroupTemplate extends ActorDataModel.mixin(CurrencyTemplate
    * @returns {Promise<TokenDocument[]>}
    */
   async placeMembers() {
-    if ( !game.user.isGM || !canvas.scene ) return;
+    if ( !game.user.isGM || !canvas.scene ) return [];
     const members = await this.getPlaceableMembers();
-    if ( !members.length ) return;
+    if ( !members.length ) return [];
     const minimized = !this.parent.sheet.minimized;
     await this.parent.sheet.minimize();
     const tokensData = [];
@@ -95,6 +95,6 @@ export default class GroupTemplate extends ActorDataModel.mixin(CurrencyTemplate
       if ( minimized ) this.parent.sheet.maximize();
     }
 
-    return await canvas.scene.createEmbeddedDocuments("Token", tokensData);
+    return canvas.scene.createEmbeddedDocuments("Token", tokensData);
   }
 }
