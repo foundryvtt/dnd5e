@@ -2807,9 +2807,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Token appearance updates
     const tokenPropsFromSource = ["width", "height", "alpha", "lockRotation", "ring"];
     const tokenTexturePropsFromSource = ["offsetX", "offsetY", "scaleX", "scaleY", "src", "tint"];
-    const tokenPropsFromSelf = [
-      "bar1", "bar2", "displayBars", "displayName", "actorLink", "disposition", "rotation", "elevation", "hidden"
-    ];
+    const tokenPropsFromSelf = ["bar1", "bar2", "displayBars", "displayName", "actorLink", "disposition"];
+    const tokenPropsPreserved = ["rotation", "elevation", "hidden", "level"];
 
     for ( const k of tokenPropsFromSource ) {
       d.prototypeToken[k] = sourceData.prototypeToken[k];
@@ -2817,7 +2816,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     for ( const k of tokenTexturePropsFromSource ) {
       d.prototypeToken.texture[k] = sourceData.prototypeToken.texture[k];
     }
-    for ( const k of tokenPropsFromSelf ) {
+    for ( const k of [...tokenPropsFromSelf, ...tokenPropsPreserved] ) {
       d.prototypeToken[k] = o.prototypeToken[k];
     }
 
@@ -3013,7 +3012,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( this.isToken ) {
       const tokenData = d.prototypeToken;
       delete d.prototypeToken;
-      for ( const k of tokenPropsFromSelf ) {
+      for ( const k of [...tokenPropsFromSelf, ...tokenPropsPreserved] ) {
         tokenData[k] = this.token[k];
       }
       if ( settings.keep.has("self") ) {
@@ -3080,7 +3079,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       newTokenData._id = t.id;
       newTokenData.actorId = newActor.id;
       newTokenData.actorLink = true;
-      for ( const k of tokenPropsFromSelf ) {
+      for ( const k of [...tokenPropsFromSelf, ...tokenPropsPreserved] ) {
         newTokenData[k] = t.document[k];
       }
       if ( settings.keep.has("self") ) {
@@ -3173,9 +3172,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       tokenUpdate.delta = actorData;
 
       foundry.utils.mergeObject(tokenUpdate, this.token.getFlag("dnd5e", "previousTokenData"));
-      tokenUpdate.elevation = this.token.elevation;
-      tokenUpdate.hidden = this.token.hidden;
-      tokenUpdate.rotation = this.token.rotation;
       tokenUpdate.sight = prototypeTokenData.sight;
       tokenUpdate.detectionModes = prototypeTokenData.detectionModes;
       delete tokenUpdate.flags.dnd5e.previousActorData;
@@ -3203,12 +3199,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         const update = foundry.utils.deepClone(tokenData);
         update._id = t.id;
         foundry.utils.mergeObject(update, t.document.getFlag("dnd5e", "previousTokenData"));
-        update.elevation = t.document.elevation;
-        update.level = t.document.level;
-        update.hidden = t.document.hidden;
-        update.rotation = t.document.rotation;
         delete update.x;
         delete update.y;
+        delete update.elevation;
+        delete update.hidden;
+        delete update.rotation;
+        delete update.level;
         return update;
       });
       await canvas.scene.updateEmbeddedDocuments("Token", tokenUpdates, { diff: false, recursive: false });
