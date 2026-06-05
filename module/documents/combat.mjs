@@ -63,16 +63,19 @@ export default class Combat5e extends Combat {
   async rollInitiative(ids, options={}) {
     const combatantsInfo = ids.reduce((info, id) => {
       const rollGroupingKey = this.combatants.get(id).getInitiativeGroupingKey() ?? id;
-      if ( info.toBeRolled[rollGroupingKey] ) {
-        info.toBeDerived[id] = info.toBeRolled[rollGroupingKey][0];
-      } else {
-        info.toBeRolled[rollGroupingKey] ??= [];
-        info.toBeRolled[rollGroupingKey].push(id);
+      let deriveFrom = null;
+      if ( dnd5e.settings.initiativeGroupRoll && !this.started ) {
+        deriveFrom = this.combatants.find(c =>
+          (c.getInitiativeGroupingKey() === rollGroupingKey) && (Number.isFinite(c.initiative))
+        )?.id ?? null;
       }
+      deriveFrom ??= info.toBeRolled[rollGroupingKey];
+      if ( deriveFrom ) info.toBeDerived[id] = deriveFrom;
+      else info.toBeRolled[rollGroupingKey] = id;
       return info;
     }, { toBeRolled: {}, toBeDerived: {} });
 
-    await super.rollInitiative(Object.values(combatantsInfo.toBeRolled).flat(), options);
+    await super.rollInitiative(Object.values(combatantsInfo.toBeRolled), options);
 
     const updates = Object.keys(combatantsInfo.toBeDerived).map(id => ({
       _id: id, initiative: this.combatants.get(combatantsInfo.toBeDerived[id]).initiative

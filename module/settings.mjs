@@ -422,7 +422,7 @@ export function registerSystemSettings() {
     hint: "SETTINGS.DND5E.COMBAT.InitiativeGroupRoll.Hint",
     scope: "world",
     config: false,
-    default: false,
+    default: true,
     type: Boolean
   });
 

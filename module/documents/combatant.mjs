@@ -65,7 +65,7 @@ export default class Combatant5e extends Combatant {
   getGroupingKey() {
     if ( this.group ) return this.group.id;
     if ( this.token?.actorLink || !this.token?.baseActor || (this.initiative === null)
-      || !game.settings.get("dnd5e", "initiativeGroupCombatants") ) return null;
+      || !dnd5e.settings.initiativeGroupCombatants ) return null;
     return `${Math.floor(this.initiative).paddedString(4)}:${this.token.disposition}:${this.token.baseActor.id}`;
   }
 
@@ -78,7 +78,7 @@ export default class Combatant5e extends Combatant {
   getInitiativeGroupingKey() {
     if ( this.group ) return this.group.id;
     if ( this.token?.actorLink || !this.token?.baseActor
-      || !game.settings.get("dnd5e", "initiativeGroupRoll") ) return null;
+      || !dnd5e.settings.initiativeGroupRoll ) return null;
     return `${this.getInitiativeRoll().formula}:${this.token.disposition}:${this.token.baseActor.id}`;
   }
 
