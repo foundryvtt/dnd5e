@@ -198,8 +198,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
 
     // Inherit the activity's duration when the applied effect has no explicit duration of its own
     let durationOverride = {};
-    const { seconds, rounds, turns } = effect.duration;
-    if ( !seconds && !rounds && !turns ) {
+    if ( !Number.isFinite(effect.duration.value) ) {
       const effectDuration = this.chatMessage.system.activity?.duration.getEffectData();
       if ( !foundry.utils.isEmpty(effectDuration) ) durationOverride = { duration: effectDuration };
     }
