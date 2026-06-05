@@ -165,6 +165,17 @@ export default class ScaleValueConfig extends AdvancementConfig {
 
   /* -------------------------------------------- */
 
+  /** @override */
+  static _cleanedObject(object) {
+    return Object.entries(object).reduce((obj, [key, value]) => {
+      if ( this._hasValue(value) ) obj[key] = value;
+      else obj[key] = _del;
+      return obj;
+    }, {});
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Is a scale value entry non-empty?
    * @param {object} value  Scale value entry.
@@ -173,16 +184,5 @@ export default class ScaleValueConfig extends AdvancementConfig {
    */
   static _hasValue(value) {
     return Object.keys(value ?? {}).some(k => (value[k] != null) && (value[k] !== ""));
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  static _cleanedObject(object) {
-    return Object.entries(object).reduce((obj, [key, value]) => {
-      if ( this._hasValue(value) ) obj[key] = value;
-      else obj[key] = _del;
-      return obj;
-    }, {});
   }
 }

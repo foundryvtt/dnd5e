@@ -427,7 +427,7 @@ export default function ActivityMixin(Base) {
         const activationConfig = CONFIG.DND5E.activityActivationTypes[this.activation.type] ?? {};
         const hasActionConsumption = activationConfig.consume
           && (activationConfig.consume.canConsume?.(this) !== false);
-        const hasResourceConsumption = this.consumption.targets.length > 0;
+        const hasResourceConsumption = !!this.consumption.targets.find(c => !c.hasZeroCost(config));
         const hasLinkedConsumption = (linked?.consumption.targets.length > 0) && !ignoreLinkedConsumption;
         const hasSpellSlotConsumption = this.requiresSpellSlot && this.consumption.spellSlot;
         config.consume ??= {};
