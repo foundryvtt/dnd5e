@@ -65,7 +65,7 @@ export default class CombatSettingsConfig extends BaseSettingsConfig {
         context.fields = [
           this.createSettingField("encounterPlacementBehavior")
         ];
-        context.legend = game.i18n.localize("SETTINGS.DND5E.ENCOUNTERS.Name");
+        context.legend = _loc("SETTINGS.DND5E.ENCOUNTERS.Name");
         break;
     }
     return context;

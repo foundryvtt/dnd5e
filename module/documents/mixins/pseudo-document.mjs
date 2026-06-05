@@ -283,7 +283,7 @@ export default function PseudoDocumentMixin(Base) {
      */
     static defaultName({ type }) {
       const title = this.documentConfig[type].documentClass.metadata.title;
-      return game.i18n.localize(title);
+      return _loc(title);
     }
 
     /* -------------------------------------------- */
