@@ -52,7 +52,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     "system.attributes.encumbrance.multipliers.heavilyEncumbered",
     "system.attributes.encumbrance.multipliers.maximum",
     "system.attributes.encumbrance.multipliers.overall",
-    "system.damageBonus",
+    "system.damage.bonus",
     "save.dc.bonus"
   ]);
 
@@ -198,7 +198,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     change = change.effect._applyChangeShim(change);
     if ( change.key.startsWith("flags.dnd5e.") ) change = change.effect._prepareFlagChange(model, change);
     if ( ActiveEffect5e.FORMULA_FIELDS.has(change.key) ) {
-      const field = new FormulaField({ deterministic: change.key !== "system.damageBonus" });
+      const field = new FormulaField({ deterministic: change.key !== "system.damage.bonus" });
       return { [change.key]: this.applyChangeField(model, change, { field }) };
     }
     if ( (change.key.startsWith("activities[") || change.key.startsWith("system.activities."))
@@ -324,7 +324,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
     // Double-check whether the target should be treated as a formula if the key has been modified
     if ( ActiveEffect5e.FORMULA_FIELDS.has(change.key) ) {
-      const field = new FormulaField({ deterministic: change.key !== "system.damageBonus" });
+      const field = new FormulaField({ deterministic: change.key !== "system.damage.bonus" });
       return { [change.key]: this.applyChangeField(actor, change, { field }) };
     }
 

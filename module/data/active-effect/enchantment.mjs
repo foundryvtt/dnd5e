@@ -40,8 +40,8 @@ export default class EnchantmentData extends (ActiveEffectTypeDataModel ?? TypeD
           );
         }
         return false;
-      case "system.damage.bonus":
-        change.key = "system.damageBonus";
+      case "system.damageBonus":
+        change.key = "system.damage.bonus";
         break;
       case "system.damage.parts":
         try {
