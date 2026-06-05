@@ -6,4 +6,7 @@
  * @property {object} icon
  * @property {string} icon.src
  * @property {boolean} icon.svg
+ * @property {object|null} uses
+ * @property {number} uses.value
+ * @property {number} uses.max
  */

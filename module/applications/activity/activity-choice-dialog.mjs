@@ -111,7 +111,8 @@ export default class ActivityChoiceDialog extends Application5e {
    */
   _prepareActivityContext(activity) {
     const { id, name, img, sort } = activity;
-    return { id, name, img, sort };
+    const uses = activity.uses?.max ? { value: activity.uses.value, max: activity.uses.max } : null;
+    return { id, name, img, sort, uses };
   }
 
   /* -------------------------------------------- */
