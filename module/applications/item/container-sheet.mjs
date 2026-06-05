@@ -105,7 +105,8 @@ export default class ContainerSheet extends ItemSheet5e {
 
     // Contents
     const Inventory = customElements.get(this.options.elements.inventory);
-    for ( const item of await this.item.system.contents ) {
+    const contents = this.item.system.canViewContents ? await this.item.system.contents : [];
+    for ( const item of contents ) {
       const ctx = context.itemContext[item.id] ??= {};
       ctx.totalWeight = (await item.system.totalWeight).toNearest(0.1);
       ctx.isExpanded = this.expandedSections.get(`items.${item.id}`);

@@ -2016,6 +2016,9 @@ DND5E.itemProperties = {
   two: {
     label: "DND5E.ITEM.Property.TwoHanded"
   },
+  unidentifiedContents: {
+    label: "DND5E.ITEM.Property.UnidentifiedContents"
+  },
   ver: {
     label: "DND5E.ITEM.Property.Versatile"
   },
@@ -2045,6 +2048,7 @@ DND5E.validProperties = {
   ]),
   container: new Set([
     "mgc",
+    "unidentifiedContents",
     "weightlessContents"
   ]),
   equipment: new Set([

@@ -125,6 +125,17 @@ export default class ContainerData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /**
+   * Can the current user view this container's contents? Hidden from non-GMs when the container is unidentified and
+   * has the "unidentifiedContents" property.
+   * @type {boolean}
+   */
+  get canViewContents() {
+    return game.user.isGM || (this.identified !== false) || !this.properties.has("unidentifiedContents");
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Get all of the items in this container and any sub-containers. A promise if item is within a compendium.
    * @type {Collection<Item5e>|Promise<Collection<Item5e>>}
    */
