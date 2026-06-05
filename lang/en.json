@@ -1504,6 +1504,10 @@
         "label": "Associated Skills or Tools",
         "hint": "Present ability checks using proficiency and bonuses with these skills or tools."
       },
+      "bonus": {
+        "label": "Check Bonus",
+        "hint": "Bonus added to all checks made using this activity."
+      },
       "dc": {
         "label": "Difficulty Class",
         "calculation": {
@@ -3868,6 +3872,10 @@
       "ability": {
         "label": "Challenge Abilities",
         "hint": "Abilities that may be rolled to attempt to save."
+      },
+      "bonus": {
+        "label": "Save Bonus",
+        "hint": "Bonus added to all saving throws made using this activity."
       },
       "dc": {
         "label": "Difficulty Class",
