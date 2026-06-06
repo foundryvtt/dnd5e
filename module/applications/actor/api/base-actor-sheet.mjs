@@ -140,6 +140,13 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
   /* -------------------------------------------- */
 
+  /** @override */
+  get title() {
+    return this.actor.name;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * The cached concentration information for the character.
    * @type {{ items: Set<Item5e>, effects: Set<ActiveEffect5e> }}
