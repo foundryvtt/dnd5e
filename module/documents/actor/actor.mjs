@@ -2809,6 +2809,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const tokenTexturePropsFromSource = ["offsetX", "offsetY", "scaleX", "scaleY", "src", "tint"];
     const tokenPropsFromSelf = ["bar1", "bar2", "displayBars", "displayName", "actorLink", "disposition"];
     const tokenPropsPreserved = ["rotation", "elevation", "hidden", "level"];
+    const tokenPropsSelfPreserved = [...tokenPropsFromSelf, ...tokenPropsPreserved];
 
     for ( const k of tokenPropsFromSource ) {
       d.prototypeToken[k] = sourceData.prototypeToken[k];
@@ -2816,7 +2817,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     for ( const k of tokenTexturePropsFromSource ) {
       d.prototypeToken.texture[k] = sourceData.prototypeToken.texture[k];
     }
-    for ( const k of [...tokenPropsFromSelf, ...tokenPropsPreserved] ) {
+    for ( const k of tokenPropsSelfPreserved ) {
       d.prototypeToken[k] = o.prototypeToken[k];
     }
 
@@ -3012,7 +3013,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( this.isToken ) {
       const tokenData = d.prototypeToken;
       delete d.prototypeToken;
-      for ( const k of [...tokenPropsFromSelf, ...tokenPropsPreserved] ) {
+      for ( const k of tokenPropsSelfPreserved ) {
         tokenData[k] = this.token[k];
       }
       if ( settings.keep.has("self") ) {
@@ -3079,7 +3080,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       newTokenData._id = t.id;
       newTokenData.actorId = newActor.id;
       newTokenData.actorLink = true;
-      for ( const k of [...tokenPropsFromSelf, ...tokenPropsPreserved] ) {
+      for ( const k of tokenPropsSelfPreserved ) {
         newTokenData[k] = t.document[k];
       }
       if ( settings.keep.has("self") ) {
