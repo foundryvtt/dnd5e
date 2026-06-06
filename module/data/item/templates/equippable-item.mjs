@@ -117,6 +117,17 @@ export default class EquippableItemTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
+  /*  Data Copying                                */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static _resetActorContextData(source) {
+    super._resetActorContextData(source);
+    delete source.equipped;
+    delete source.attuned;
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 

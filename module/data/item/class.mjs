@@ -194,6 +194,17 @@ export default class ClassData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+  /*  Data Copying                                */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static _resetActorContextData(source) {
+    super._resetActorContextData(source);
+    delete source.levels;
+    delete source.hd?.spent;
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 

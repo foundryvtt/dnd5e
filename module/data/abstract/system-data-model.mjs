@@ -68,7 +68,7 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
    */
   static _immiscible = new Set(["length", "mixed", "name", "prototype", "cleanData", "_cleanData",
     "_initializationOrder", "validateJoint", "_validateJoint", "migrateData", "_migrateData",
-    "shimData", "_shimData", "defineSchema"]);
+    "shimData", "_shimData", "defineSchema", "resetActorContextData", "_resetActorContextData"]);
 
   /* -------------------------------------------- */
 
@@ -253,6 +253,33 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
   static _migrateData(source) {
     for ( const template of this._schemaTemplates ) {
       template._migrateData(source);
+    }
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Copying                                */
+  /* -------------------------------------------- */
+
+  /**
+   * Reset actor-specific state on source data copied out of an actor (e.g. dropped to the items sidebar).
+   * @param {object} source  The source data, modified in place.
+   * @returns {object}       The cleaned source data.
+   */
+  static resetActorContextData(source) {
+    this._resetActorContextData(source);
+    return source;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Reset actor-specific state across the type's templates.
+   * @param {object} source  The source data, modified in place.
+   * @protected
+   */
+  static _resetActorContextData(source) {
+    for ( const template of this._schemaTemplates ) {
+      template._resetActorContextData(source);
     }
   }
 

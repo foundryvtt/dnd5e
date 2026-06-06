@@ -46,6 +46,16 @@ export default class AdvancementTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
+  /*  Data Copying                                */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static _resetActorContextData(source) {
+    super._resetActorContextData(source);
+    for ( const advancement of Object.values(source.advancement ?? {}) ) delete advancement.value;
+  }
+
+  /* -------------------------------------------- */
   /*  Socket Event Handlers                       */
   /* -------------------------------------------- */
 
