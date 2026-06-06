@@ -381,6 +381,7 @@ export default class ChatMessage5e extends ChatMessage {
       });
       this._enrichDamageTooltip(this.rolls.filter(r => r instanceof DamageRoll), html);
       this._enrichSaveTooltip(html);
+      this._enrichConcentrationTooltip(html);
       html.querySelectorAll(".dice-roll").forEach(el => el.addEventListener("click", this._onClickDiceRoll.bind(this)));
     } else {
       html.querySelectorAll(".dice-roll").forEach(el => el.classList.add("secret-roll"));
@@ -662,6 +663,51 @@ export default class ChatMessage5e extends ChatMessage {
       `);
       const button = content.querySelector("button");
       button.addEventListener("click", () => actor.system.resistSave(this));
+    }
+
+    else return;
+
+    html.querySelector(".message-content").append(content);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Display option to break concentration on a failed concentration saving throw.
+   * @param {HTMLLIElement} html  The chat card.
+   * @protected
+   */
+  _enrichConcentrationTooltip(html) {
+    const actor = this.getAssociatedActor();
+    const roll = this.getFlag("dnd5e", "roll");
+    if ( !this.rolls.some(r => r.options.isConcentration) || this.rolls.some(r => r.isSuccess) ) return;
+
+    const content = document.createElement("div");
+    content.classList.add("chat-card");
+
+    // If concentration has already been broken from this save, mark it as lost.
+    if ( roll?.concentrationBroken ) content.insertAdjacentHTML("beforeend", `
+      <p class="supplement">
+        <strong>${_loc("DND5E.ROLL.Status")}</strong>
+        ${_loc("DND5E.ConcentrationLost")}
+      </p>
+    `);
+
+    // Otherwise if actor is still concentrating, display break button.
+    else if ( actor?.isOwner && !dnd5e.settings.disableConcentration && actor.concentration.effects.size ) {
+      content.insertAdjacentHTML("beforeend", `
+        <div class="card-buttons">
+          <button type="button">
+            <i class="fa-solid fa-ban" inert></i>
+            ${_loc("DND5E.ConcentrationBreak")}
+          </button>
+        </div>
+      `);
+      const button = content.querySelector("button");
+      button.addEventListener("click", async () => {
+        const ended = await actor.endConcentration();
+        if ( ended.length ) await this.setFlag("dnd5e", "roll.concentrationBroken", true);
+      });
     }
 
     else return;

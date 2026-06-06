@@ -591,6 +591,24 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  static async _onCreateOperation(documents, operation, user) {
+    await super._onCreateOperation(documents, operation, user);
+    if ( user.id !== game.userId ) return;
+    // Prompt to end concentration at most once per actor, even when several incapacitating effects are created in the
+    // same operation.
+    const prompted = new Set();
+    for ( const effect of documents ) {
+      if ( !effect._shouldPromptConcentrationEnd() ) continue;
+      const actor = effect.parent;
+      if ( prompted.has(actor) ) continue;
+      prompted.add(actor);
+      await actor.promptConcentrationEnd();
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   _onUpdate(data, options, userId) {
     super._onUpdate(data, options, userId);
     const originalLevel = foundry.utils.getProperty(options, "dnd5e.originalExhaustion");
@@ -692,6 +710,20 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     if ( item.type === "spell" ) effectData["flags.dnd5e.spellLevel"] = item.system.level;
 
     return effectData;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine whether this effect applies a status that should prompt concentration to end.
+   * @returns {boolean}
+   * @protected
+   */
+  _shouldPromptConcentrationEnd() {
+    if ( !this.active || !(this.parent instanceof Actor) ) return false;
+    if ( dnd5e.settings.disableConcentration || !this.parent.concentration.effects.size ) return false;
+
+    return this.statuses.has("dead") || this.statuses.has("incapacitated");
   }
 
   /* -------------------------------------------- */

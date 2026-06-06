@@ -1119,9 +1119,39 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         "systems/dnd5e/templates/chat/roll-request-card.hbs",
         {
           buttons: [{
-            dataset: { ...dataset, type: "concentration", visbility: "all" },
+            dataset: { ...dataset, type: "concentration", visibility: "all" },
             buttonLabel: createRollLabel({ ...dataset, ...config }),
             hiddenLabel: createRollLabel({ ...dataset, ...config, hideDC: true })
+          }]
+        }
+      ),
+      whisper: game.users.filter(user => this.testUserPermission(user, "OWNER")),
+      speaker: ChatMessage.implementation.getSpeaker({ actor: this })
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create a chat message for this actor with a prompt to end concentration.
+   * @returns {Promise<ChatMessage5e|null>}  A promise that resolves to the created chat message.
+   */
+  async promptConcentrationEnd() {
+    const isConcentrating = this.concentration.effects.size > 0;
+    if ( !isConcentrating ) return null;
+
+    const label = `<i class="fa-solid fa-ban" inert></i>${
+      _loc("DND5E.ConcentrationBreak")
+    }`;
+
+    return ChatMessage.implementation.create({
+      content: await foundry.applications.handlebars.renderTemplate(
+        "systems/dnd5e/templates/chat/roll-request-card.hbs",
+        {
+          buttons: [{
+            dataset: { action: "endConcentration", actorUuid: this.uuid, visibility: "all" },
+            buttonLabel: label,
+            hiddenLabel: label
           }]
         }
       ),
@@ -1699,6 +1729,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const options = {
       advantage: conc.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE,
       disadvantage: conc.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE,
+      isConcentration: true,
       maximum: conc.roll.max,
       minimum: conc.roll.min
     };

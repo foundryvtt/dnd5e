@@ -1560,6 +1560,7 @@ function createRollLink(label, dataset={}, { classes="roll-link", tag="a" }={}) 
  * @param {HTMLElement} element
  */
 export function activateChatListeners(message, element) {
+  _addListeners(element.querySelectorAll('[data-action="endConcentration"]'), handleEndConcentration);
   _addListeners(element.querySelectorAll('[data-action="concentration"]'), handleRoll);
   _addListeners(element.querySelectorAll('[data-action="rollRequest"]'), handleRoll);
 }
@@ -1622,6 +1623,26 @@ async function handleAward(event, target) {
   if ( !command ) return;
   window.getSelection().empty();
   Award.handleAward(command);
+}
+
+/* -------------------------------------------- */
+
+/**
+ * End concentration for the actor attached to a reminder button.
+ * @param {Event} event         Triggering click event.
+ * @param {HTMLElement} target  Button that was clicked.
+ */
+async function handleEndConcentration(event, target) {
+  const dataset = getRollActionDataset(target);
+  const link = target.closest("a") ?? target;
+  link.disabled = true;
+  window.getSelection().empty();
+  try {
+    const actor = dataset.actorUuid ? await fromUuid(dataset.actorUuid) : null;
+    await actor?.endConcentration();
+  } finally {
+    link.disabled = false;
+  }
 }
 
 /* -------------------------------------------- */
