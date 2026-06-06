@@ -1398,18 +1398,6 @@ preLocalize("itemActionTypes");
 /* -------------------------------------------- */
 
 /**
- * Different ways in which item capacity can be limited.
- * @enum {string}
- */
-DND5E.itemCapacityTypes = {
-  items: "DND5E.ItemContainerCapacityItems",
-  weight: "DND5E.ItemContainerCapacityWeight"
-};
-preLocalize("itemCapacityTypes", { sort: true });
-
-/* -------------------------------------------- */
-
-/**
  * List of various item rarities.
  * @enum {string}
  */

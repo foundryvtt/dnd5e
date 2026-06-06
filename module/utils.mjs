@@ -920,8 +920,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/activity/parts/activity-usage-notes.hbs",
 
     // Advancement Partials
-    "systems/dnd5e/templates/advancement/parts/advancement-controls.hbs",
-    "systems/dnd5e/templates/advancement/parts/advancement-spell-config.hbs"
+    "systems/dnd5e/templates/advancement/parts/advancement-controls.hbs"
   ];
 
   const paths = {};
