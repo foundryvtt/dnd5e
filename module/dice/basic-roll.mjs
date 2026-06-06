@@ -271,7 +271,7 @@ export default class BasicRoll extends Roll {
     const msg = new cls(messageData);
 
     // Either create or return the data
-    if ( create ) return cls.create(msg.toObject(), { rollMode });
+    if ( create ) return cls.create(msg.toObject(), { messageMode: rollMode });
     else {
       if ( rollMode ) msg.applyMode(rollMode);
       return msg.toObject();
