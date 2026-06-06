@@ -886,6 +886,9 @@ async function rollCheckSave(config, event) {
  */
 export async function enrichDamage(configs, label, options) {
   const config = { type: "damage", formulas: [], damageTypes: [], rollType: configs._isHealing ? "healing" : "damage" };
+  const typeKeys = Object.fromEntries(
+    Object.keys({ ...CONFIG.DND5E.damageTypes, ...CONFIG.DND5E.healingTypes }).map(k => [slugify(k), k])
+  );
   for ( const c of configs ) {
     const formulaParts = [];
     if ( c.activity ) config.activity = c.activity;
@@ -896,8 +899,7 @@ export async function enrichDamage(configs, label, options) {
     c.type = c.type?.replaceAll("/", "|").split("|") ?? [];
     for ( const value of c.values ) {
       const slug = foundry.utils.getType(value) === "string" ? slugify(value) : value;
-      if ( slug in CONFIG.DND5E.damageTypes ) c.type.push(slug);
-      else if ( slug in CONFIG.DND5E.healingTypes ) c.type.push(slug);
+      if ( slug in typeKeys ) c.type.push(typeKeys[slug]);
       else if ( value in CONFIG.DND5E.attackModes ) config.attackMode = value;
       else if ( value === "average" ) config.average = true;
       else if ( value === "extended" ) config.format = "extended";
