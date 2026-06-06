@@ -440,7 +440,7 @@ export default class ActivityUsageDialog extends Dialog5e {
         // Config stores the scaling increase, but scaling value (increase + 1) is easier to understand in the UI
         value: Math.clamp((this.config.scaling ?? 0) + 1, 1, max),
         max,
-        showRange: max <= 20
+        showRange: Number.isFinite(max)
       };
       else context.hasScaling = false;
     }
