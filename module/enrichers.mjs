@@ -756,11 +756,12 @@ function createSaveRequestButtons(dataset) {
 
 /**
  * Perform a check or save.
- * @param {object} config  Configuration data for the roll.
- * @param {Event} [event]  The click event triggering the action.
+ * @param {object} config             Configuration data for the roll.
+ * @param {Event} [event]             The click event triggering the action.
+ * @param {ChatMessage5e} [message]   Chat message containing the roll request.
  * @returns {Promise<void>}
  */
-async function rollCheckSave(config, event) {
+async function rollCheckSave(config, event, message) {
   const { type, ability, skill, tool, dc } = config;
   const options = { event };
   if ( ability in CONFIG.DND5E.abilities ) options.ability = ability;
@@ -772,23 +773,24 @@ async function rollCheckSave(config, event) {
     ui.notifications.warn("EDITOR.DND5E.Inline.Warning.NoActor");
     return;
   }
+  const messageConfig = message ? { data: { "flags.dnd5e.originatingMessage": message.id } } : {};
 
   for ( const actor of actors ) {
     switch ( type ) {
       case "check":
-        await actor.rollAbilityCheck(options);
+        await actor.rollAbilityCheck(options, {}, messageConfig);
         break;
       case "concentration":
-        await actor.rollConcentration(options);
+        await actor.rollConcentration(options, {}, messageConfig);
         break;
       case "save":
-        await actor.rollSavingThrow(options);
+        await actor.rollSavingThrow(options, {}, messageConfig);
         break;
       case "skill":
-        await actor.rollSkill({ skill, tool: config.usingTool, ...options });
+        await actor.rollSkill({ skill, tool: config.usingTool, ...options }, {}, messageConfig);
         break;
       case "tool":
-        await actor.rollToolCheck({ tool, ...options });
+        await actor.rollToolCheck({ tool, ...options }, {}, messageConfig);
         break;
     }
   }
@@ -1561,8 +1563,8 @@ function createRollLink(label, dataset={}, { classes="roll-link", tag="a" }={}) 
  */
 export function activateChatListeners(message, element) {
   _addListeners(element.querySelectorAll('[data-action="endConcentration"]'), handleEndConcentration);
-  _addListeners(element.querySelectorAll('[data-action="concentration"]'), handleRoll);
-  _addListeners(element.querySelectorAll('[data-action="rollRequest"]'), handleRoll);
+  _addListeners(element.querySelectorAll('[data-action="concentration"]'), handleRoll, message);
+  _addListeners(element.querySelectorAll('[data-action="rollRequest"]'), handleRoll, message);
 }
 
 /* -------------------------------------------- */
@@ -1692,11 +1694,12 @@ function createRequestButton(dataset) {
 
 /**
  * Handle performing a roll.
- * @param {Event} event         Triggering click event.
- * @param {HTMLElement} target  Button that was clicked.
+ * @param {Event} event               Triggering click event.
+ * @param {HTMLElement} target        Button that was clicked.
+ * @param {ChatMessage5e} [message]   Chat message containing the roll request.
  * @returns {Promise}
  */
-async function handleRoll(event, target) {
+async function handleRoll(event, target, message) {
   const dataset = getRollActionDataset(target);
   const link = target.closest("a") ?? target;
   link.disabled = true;
@@ -1706,7 +1709,7 @@ async function handleRoll(event, target) {
       case "attack": return await rollAttack(dataset, event);
       case "damage": return await rollDamage(dataset, event);
       case "item": return await useItem(dataset, event);
-      default: return await rollCheckSave(dataset, event);
+      default: return await rollCheckSave(dataset, event, message);
     }
   } finally {
     link.disabled = false;
@@ -1737,13 +1740,14 @@ const LISTENER = Symbol("enricherListener");
  * Add click listeners for each of the provided buttons, passing the event and target to the handler.
  * @param {HTMLButtonElement[]} buttons  Buttons to attach the listeners to.
  * @param {Function} handler             Click handler to call.
+ * @param {...*} args                    Additional arguments to pass to the handler.
  * @private
  */
-function _addListeners(buttons, handler) {
+function _addListeners(buttons, handler, ...args) {
   buttons.forEach(button => {
     // TODO: Remove this fix when https://github.com/foundryvtt/foundryvtt/issues/13558 is fixed
     button.removeEventListener("click", button[LISTENER]);
-    button[LISTENER] = event => handler(event, event.currentTarget);
+    button[LISTENER] = event => handler(event, event.currentTarget, ...args);
     button.addEventListener("click", button[LISTENER]);
   });
 }
