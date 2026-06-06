@@ -1313,7 +1313,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       if ( newItemData instanceof Item ) newItemData = game.items.fromCompendium(newItemData, {
         clearSort: false, keepId: true, clearOwnership: false
       });
-      foundry.utils.mergeObject(newItemData, {"system.container": containerId} );
+      foundry.utils.mergeObject(newItemData, {"system.container": containerId ?? null} );
       if ( !keepId ) newItemData._id = foundry.utils.randomID();
 
       created.push(newItemData);
@@ -1327,6 +1327,25 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const created = [];
     for ( const item of items ) await createItemData(item, container?.id, initialDepth);
     return created;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Reset actor-specific state on item data copied out of an actor.
+   * @param {object} data  Item source data to clean in place.
+   * @returns {object}     The cleaned data.
+   */
+  static resetActorContextData(data) {
+    const system = data.system ?? {};
+    foundry.utils.mergeObject(system, {
+      equipped: false, attuned: false, levels: 1, hd: { spent: 0 }, uses: { spent: 0 }, preparation: { prepared: 0 }
+    }, { insertKeys: false, insertValues: false });
+    for ( const activity of Object.values(system.activities ?? {}) ) {
+      if ( activity.uses ) activity.uses.spent = 0;
+    }
+    for ( const advancement of Object.values(system.advancement ?? {}) ) advancement.value = {};
+    return data;
   }
 
   /* -------------------------------------------- */
