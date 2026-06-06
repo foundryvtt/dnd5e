@@ -80,7 +80,7 @@ export default class Combat5e extends Combat {
     const updates = Object.keys(combatantsInfo.toBeDerived).map(id => ({
       _id: id, initiative: this.combatants.get(combatantsInfo.toBeDerived[id]).initiative
     }));
-    if ( !updates.length ) return this;
+
     await this.updateEmbeddedDocuments("Combatant", updates, { turnEvents: false });
 
     for ( const id of ids ) await this._recoverUses({ initiative: this.combatants.get(id) });
