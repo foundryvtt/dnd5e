@@ -1244,6 +1244,7 @@ export default class CompendiumBrowser extends Application5e {
    * @param {HTMLElement} html  HTML of the sidebar being rendered.
    */
   static injectSidebarButton(html) {
+    if ( html.querySelector(".open-compendium-browser") ) return;
     const button = document.createElement("button");
     button.type = "button";
     button.classList.add("open-compendium-browser");
