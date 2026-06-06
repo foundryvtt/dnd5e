@@ -769,54 +769,75 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    *                                                 calculation was canceled.
    */
   calculateDamage(damages, options={}) {
+    const originalDamages = foundry.utils.deepClone(damages);
     damages = foundry.utils.deepClone(damages);
-    damages.amount = 0;
-    damages.temp = 0;
-    damages.tempMax = 0;
+    const summarizeDamage = damages => {
+      damages.amount = 0;
+      damages.temp = 0;
+      damages.tempMax = 0;
+      damages.forEach(d => {
+        if ( d.type === "temphp" ) damages.temp += d.value;
+        else if ( d.type === "maximum" ) damages.tempMax += d.value;
+        else damages.amount += d.value;
+      });
+      if ( damages.tempMax < 0 ) damages.amount += damages.tempMax;
+      damages.amount = Math.trunc(damages.amount);
+    };
+
+    const multiplier = options.multiplier ?? 1;
+    const treatAs = options.originatingMessage?.flags?.dnd5e?.roll?.type
+      ? options.originatingMessage.flags.dnd5e.roll.type === "healing" ? "healing" : "damage"
+      : options.only ?? "damage";
+    const traits = foundry.utils.deepClone(this.system.traits ?? {});
+    const dm = traits.dm ?? {};
+    const rollData = this.getRollData({ deterministic: true });
+    const modifications = Object.entries(dm.amount ?? {}).reduce((obj, [type, formula]) => {
+      obj[type] = simplifyBonus(formula, rollData);
+      return obj;
+    }, {});
+    const context = { originalDamages, multiplier, treatAs, traits, rollData, modifications };
 
     /**
      * A hook event that fires before damage amount is calculated for an actor.
      * @param {Actor5e} actor                     The actor being damaged.
      * @param {DamageDescription[]} damages       Damage descriptions.
      * @param {DamageApplicationOptions} options  Additional damage application options.
+     * @param {object} context                    Additional calculation context.
+     * @param {DamageDescription[]} context.originalDamages  Damage descriptions before any calculation or mutation.
+     * @param {number} context.multiplier         Amount by which to multiply all damage.
+     * @param {"damage"|"healing"} context.treatAs  Whether to treat maximum changes as damage or healing.
+     * @param {object} context.traits             Actor trait data used for damage calculation.
+     * @param {ActorRollData} context.rollData    Roll data used for deterministic damage modification formulas.
+     * @param {object} context.modifications      Mutable resolved damage modification values by damage type.
      * @returns {boolean}                         Explicitly return `false` to prevent damage application.
      * @function dnd5e.preCalculateDamage
      * @memberof hookEvents
      */
-    if ( Hooks.call("dnd5e.preCalculateDamage", this, damages, options) === false ) return false;
-
-    const multiplier = options.multiplier ?? 1;
-    const treatAs = options.originatingMessage?.flags?.dnd5e?.roll?.type
-      ? options.originatingMessage.flags.dnd5e.roll.type === "healing" ? "healing" : "damage"
-      : options.only ?? "damage";
+    if ( Hooks.call("dnd5e.preCalculateDamage", this, damages, options, context) === false ) return false;
 
     const skipped = type => {
-      if ( type === "maximum" ) return options.only ? options.only !== treatAs : false;
+      if ( type === "maximum" ) return options.only ? options.only !== context.treatAs : false;
       if ( options.only === "damage" ) return type in CONFIG.DND5E.healingTypes;
       if ( options.only === "healing" ) return type in CONFIG.DND5E.damageTypes;
       return false;
     };
 
-    const dm = this.system.traits?.dm ?? {};
-    const rollData = this.getRollData({ deterministic: true });
-    const modifications = Object.entries(dm.amount ?? {}).reduce((obj, [type, formula]) => {
-      obj[type] = simplifyBonus(formula, rollData);
-      return obj;
-    }, {});
     const applyModification = (d, type=d.type) => {
-      if ( !modifications[type] || this.#changeIsIgnored("modification", type, { options }) ) return;
+      if ( !context.modifications[type]
+        || this.#changeIsIgnored("modification", type, { options, traits: context.traits }) ) return;
       const originalValue = d.value;
-      if ( Math.sign(d.value) !== Math.sign(d.value + modifications[type]) ) d.value = 0;
-      else d.value += modifications[type];
+      if ( Math.sign(d.value) !== Math.sign(d.value + context.modifications[type]) ) d.value = 0;
+      else d.value += context.modifications[type];
+      d.active ??= {};
       (d.active[type === "ALL" ? "all" : "type"] ??= {}).modification = true;
-      modifications[type] += originalValue - d.value;
+      context.modifications[type] += originalValue - d.value;
     };
 
     damages.forEach(d => {
       d.active ??= {};
 
       // Skip damage types with immunity
-      if ( skipped(d.type) || this.#changeHasEffect("immunity", d, { options }) ) {
+      if ( skipped(d.type) || this.#changeHasEffect("immunity", d, { options, traits: context.traits }) ) {
         d.value = 0;
         d.active.multiplier = 0;
         return;
@@ -824,42 +845,38 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
       // Apply damage modification
       if ( !CONFIG.DND5E.damageTypes[d.type]?.isPhysical || !d.properties?.size
-        || !dm.bypasses?.intersection(d.properties).size ) {
+        || !context.traits.dm?.bypasses?.intersection(d.properties).size ) {
         applyModification(d);
         if ( !(d.type in CONFIG.DND5E.healingTypes) ) applyModification(d, "ALL");
       }
 
-      let damageMultiplier = multiplier;
-      let appliedDamage = d.value * multiplier;
+      let damageMultiplier = context.multiplier;
+      let appliedDamage = d.value * context.multiplier;
 
       // Apply damage resistance
-      if ( this.#changeHasEffect("resistance", d, { options }) ) {
+      if ( this.#changeHasEffect("resistance", d, { options, traits: context.traits }) ) {
         damageMultiplier /= 2;
         appliedDamage = Math.trunc(appliedDamage / 2);
       }
 
       // Apply damage vulnerability
-      if ( this.#changeHasEffect("vulnerability", d, { options }) ) {
+      if ( this.#changeHasEffect("vulnerability", d, { options, traits: context.traits }) ) {
         damageMultiplier *= 2;
         appliedDamage *= 2;
       }
 
       // Negate healing types
       if ( (options.invertHealing !== false) && ((d.type === "healing")
-        || ((d.type === "maximum") && (treatAs === "healing"))) ) {
+        || ((d.type === "maximum") && (context.treatAs === "healing"))) ) {
         damageMultiplier *= -1;
         appliedDamage *= -1;
       }
 
       d.value = appliedDamage;
       d.active.multiplier = (d.active.multiplier ?? 1) * damageMultiplier;
-      if ( d.type === "temphp" ) damages.temp += d.value;
-      else if ( d.type === "maximum" ) damages.tempMax += d.value;
-      else damages.amount += d.value;
     });
 
-    if ( damages.tempMax < 0 ) damages.amount += damages.tempMax;
-    damages.amount = Math.trunc(damages.amount);
+    summarizeDamage(damages);
 
     // Apply damage threshold
     if ( ((damages.amount > 0) && (damages.amount < (this.system.attributes?.hp?.dt ?? -Infinity)))
@@ -877,11 +894,21 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * @param {Actor5e} actor                     The actor being damaged.
      * @param {DamageSummary} damages             Damage descriptions.
      * @param {DamageApplicationOptions} options  Additional damage application options.
+     * @param {object} context                    Additional calculation context.
+     * @param {DamageDescription[]} context.originalDamages  Damage descriptions before any calculation or mutation.
+     * @param {number} context.multiplier         Amount by which to multiply all damage.
+     * @param {"damage"|"healing"} context.treatAs  Whether to treat maximum changes as damage or healing.
+     * @param {object} context.traits             Actor trait data used for damage calculation.
+     * @param {ActorRollData} context.rollData    Roll data used for deterministic damage modification formulas.
+     * @param {object} context.modifications      Mutable resolved damage modification values by damage type.
+     * @param {boolean} [context.recalculate]     Set this to true after mutating damage descriptions to recalculate
+     *                                            summary totals.
      * @returns {boolean}                         Explicitly return `false` to prevent damage application.
      * @function dnd5e.calculateDamage
      * @memberof hookEvents
      */
-    if ( Hooks.call("dnd5e.calculateDamage", this, damages, options) === false ) return false;
+    if ( Hooks.call("dnd5e.calculateDamage", this, damages, options, context) === false ) return false;
+    if ( context.recalculate ) summarizeDamage(damages);
 
     return damages;
   }
@@ -894,11 +921,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @param {DamageDescription|string} damage                Damage description to consider or a specific type.
    * @param {object} [options={}]
    * @param {DamageApplicationOptions} [options.options={}]  Damage application options.
+   * @param {object} [options.traits]                        Actor trait data used for damage calculation.
    * @param {boolean} [options.skipDowngrade=false]          Should downgrades be skipped?
    * @returns {boolean}
    */
-  #changeHasEffect(category, damage, { options={}, skipDowngrade=false }={}) {
-    const config = this.system.traits?.[`d${category.slice(0, 1)}`];
+  #changeHasEffect(category, damage, { options={}, traits=this.system.traits, skipDowngrade=false }={}) {
+    const config = traits?.[`d${category.slice(0, 1)}`];
     const downgrade = type => options.downgrade === true || options.downgrade?.has?.(type);
     const setActive = type => {
       if ( damage.active ) {
@@ -912,10 +940,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     // If category is resistance, check for downgraded immunities
     if ( category === "resistance" ) {
-      if ( !isHealingType && downgrade("ALL") && this.#changeHasEffect("immunity", "ALL", { skipDowngrade: true }) ) {
+      if ( !isHealingType && downgrade("ALL") && this.#changeHasEffect("immunity", "ALL", { options, traits, skipDowngrade: true }) ) {
         return setActive("all");
       }
-      if ( downgrade(type) && this.#changeHasEffect("immunity", type, { skipDowngrade: true }) ) {
+      if ( downgrade(type) && this.#changeHasEffect("immunity", type, { options, traits, skipDowngrade: true }) ) {
         return setActive("type");
       }
     }
@@ -926,13 +954,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     // If all damage resistance is present and not ignored (healing types are excluded from "All Damage")
     if ( !isHealingType
-      && !this.#changeIsIgnored(category, "ALL", { options, skipDowngrade })
+      && !this.#changeIsIgnored(category, "ALL", { options, traits, skipDowngrade })
       && config?.value.has("ALL") ) {
       return setActive("all");
     }
 
     // If specific type damage resistance is present and not ignored
-    if ( !this.#changeIsIgnored(category, type, { options, skipDowngrade }) && config?.value.has(type) ) {
+    if ( !this.#changeIsIgnored(category, type, { options, traits, skipDowngrade }) && config?.value.has(type) ) {
       return setActive("type");
     }
 
@@ -947,10 +975,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @param {string} type                                    Specific damage type to consider.
    * @param {object} [options={}]
    * @param {DamageApplicationOptions} [options.options={}]  Damage application options.
+   * @param {object} [options.traits]                        Actor trait data used for damage calculation.
    * @param {boolean} [options.skipDowngrade=false]          Should downgrades not be taken into account?
    * @returns {boolean}
    */
-  #changeIsIgnored(category, type, { options={}, skipDowngrade=false }={}) {
+  #changeIsIgnored(category, type, { options={}, traits=this.system.traits, skipDowngrade=false }={}) {
     const downgrade = type => options.downgrade === true || options.downgrade?.has?.(type);
 
     // All categories are ignored
@@ -963,7 +992,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( (category === "immunity") && downgrade(type) && !skipDowngrade ) return true;
 
     // When downgrading, resistances should be decided by whether immunity is applied
-    if ( (category === "resistance") && downgrade(type) && !this.#changeHasEffect("immunity", type) ) return true;
+    if ( (category === "resistance") && downgrade(type) && !this.#changeHasEffect("immunity", type, { options, traits }) ) return true;
 
     return false;
   }
