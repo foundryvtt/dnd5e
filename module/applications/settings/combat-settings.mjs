@@ -43,7 +43,9 @@ export default class CombatSettingsConfig extends BaseSettingsConfig {
       case "initiative":
         context.fields = [
           this.createSettingField("initiativeDexTiebreaker"),
-          this.createSettingField("initiativeScore")
+          this.createSettingField("initiativeScore"),
+          this.createSettingField("initiativeGroupRoll"),
+          this.createSettingField("initiativeGroupCombatants")
         ];
         context.legend = _loc("DND5E.Initiative");
         break;

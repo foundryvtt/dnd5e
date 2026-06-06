@@ -59,13 +59,25 @@ export default class Combatant5e extends Combatant {
   /* -------------------------------------------- */
 
   /**
-   * Key for the group to which this combatant should belong, or `null` if it can't be grouped.
+   * Key for the group to which this combatant should belong in the encounter tracker, or `null` if it can't be grouped.
    * @returns {string|null}
    */
   getGroupingKey() {
     if ( this.group ) return this.group.id;
-    if ( this.token?.actorLink || !this.token?.baseActor || (this.initiative === null) ) return null;
-    return `${Math.floor(this.initiative).paddedString(4)}:${this.token.disposition}:${this.token.baseActor.id}`;
+    if ( (this.initiative === null) || !dnd5e.settings.initiativeGroupCombatants ) return null;
+    return this.getUniqueKey(Math.floor(this.initiative).paddedString(4));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Key for the group to which this combatant should belong when rolling initiative, or `null` if it can't be grouped.
+   * @returns {string|null}
+   */
+  getInitiativeGroupingKey() {
+    if ( this.group ) return this.group.id;
+    if ( !dnd5e.settings.initiativeGroupRoll ) return null;
+    return this.getUniqueKey(this.getInitiativeRoll().formula);
   }
 
   /* -------------------------------------------- */
@@ -74,6 +86,18 @@ export default class Combatant5e extends Combatant {
   getInitiativeRoll(formula) {
     if ( !this.actor ) return new CONFIG.Dice.D20Roll(formula ?? "1d20", {});
     return this.actor.getInitiativeRoll();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Key identifying a unique set of actors in the combat, optionally prefixed by a grouping discriminator.
+   * @param {string} [prefix]  Discriminator placed at the head of the key.
+   * @returns {string|null}
+   */
+  getUniqueKey(prefix) {
+    if ( this.token?.actorLink || !this.token?.baseActor ) return null;
+    return `${prefix === undefined ? "" : `${prefix}:`}${this.token.disposition}:${this.token.baseActor.id}`;
   }
 
   /* -------------------------------------------- */
