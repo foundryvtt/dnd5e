@@ -519,9 +519,10 @@ export default class ActivitySheet extends PseudoDocumentSheet {
    * @protected
    */
   _addEffectData() {
+    const { name, img } = this.activity._source;
     return {
-      name: this.item.name,
-      img: this.item.img,
+      name: name || this.item.name,
+      img: img || this.item.img,
       origin: this.item.uuid,
       transfer: false
     };
