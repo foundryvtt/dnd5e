@@ -65,6 +65,17 @@ export default class SubclassData extends ItemDataModel.mixin(AdvancementTemplat
   }
 
   /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  get tooltipSubtitle() {
+    const cls = dnd5e.registry.classes.choices[this.classIdentifier];
+    if ( cls ) return [_loc("DND5E.SubclassOf", { class: cls })];
+    return super.tooltipSubtitle;
+  }
+
+  /* -------------------------------------------- */
   /*  Data Migration                              */
   /* -------------------------------------------- */
 
