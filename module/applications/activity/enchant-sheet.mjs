@@ -121,10 +121,11 @@ export default class EnchantSheet extends ActivitySheet {
 
   /** @override */
   _addEffectData() {
+    const { name, img } = this.activity._source;
     return {
       type: "enchantment",
-      name: this.item.name,
-      img: this.item.img,
+      name: name || this.item.name,
+      img: img || this.item.img,
       disabled: true
     };
   }
