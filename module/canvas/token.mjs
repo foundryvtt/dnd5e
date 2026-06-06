@@ -327,7 +327,7 @@ export default class Token5e extends foundry.canvas.placeables.Token {
   /* -------------------------------------------- */
 
   /**
-   * Render a distance label above this token showing the distance from the currently-controlled token. 
+   * Render a distance label above this token showing the distance from the currently-controlled token.
    * @returns {Promise<void>}
    */
   async #renderDistanceLabel() {
@@ -346,8 +346,8 @@ export default class Token5e extends foundry.canvas.placeables.Token {
       "templates/hud/waypoint-label.hbs",
       {
         cssClass: "dnd5e-distance-label",
-        action: { icon: "fa-solid fa-ruler-combined" },
-        distance: { total: distance.toNearest(0.01).toLocaleString(game.i18n.lang) },
+        action: { icon: "fa-solid fa-bullseye" },
+        distance: { total: distance.toLocaleString(game.i18n.lang) },
         units: canvas.scene?.grid?.units ?? "",
         uiScale
       }
@@ -357,7 +357,7 @@ export default class Token5e extends foundry.canvas.placeables.Token {
     const label = foundry.utils.parseHTML(html);
     const center = this.center;
     label.style.setProperty("--position-x", `${center.x}px`);
-    label.style.setProperty("--position-y", `${center.y - (this.h / 2)}px`);
+    label.style.setProperty("--position-y", `${center.y - (this.h / 2) - (16 * uiScale)}px`);
     label.style.setProperty("--ui-scale", uiScale);
     label.style.setProperty("--transformX", "-50%");
     label.style.setProperty("--transformY", "-100%");
