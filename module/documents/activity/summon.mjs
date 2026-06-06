@@ -520,22 +520,25 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
     delete placement.prototypeToken;
     const tokenDocument = await actor.getTokenDocument(foundry.utils.mergeObject(placement, tokenUpdates));
 
-    // Linked summons require more explicit updates before token creation.
-    // Unlinked summons can take actor delta directly.
+    // Linked summons require more explicit updates before token creation
     if ( tokenDocument.actorLink ) {
       const { effects, items, ...rest } = actorUpdates;
-      await tokenDocument.actor.update(rest);
-      await tokenDocument.actor.updateEmbeddedDocuments("Item", items);
-
       const { newEffects, oldEffects } = effects.reduce((acc, curr) => {
         const target = tokenDocument.actor.effects.get(curr._id) ? "oldEffects" : "newEffects";
         acc[target].push(curr);
         return acc;
       }, { newEffects: [], oldEffects: [] });
 
-      await tokenDocument.actor.updateEmbeddedDocuments("ActiveEffect", oldEffects);
-      await tokenDocument.actor.createEmbeddedDocuments("ActiveEffect", newEffects, { keepId: true });
-    } else {
+      await foundry.documents.modifyBatch([
+        { action: "update", documentName: "Actor", updates: [{ _id: tokenDocument.actor.id, ...rest }] },
+        { action: "update", documentName: "Item", updates: items, parent: tokenDocument.actor },
+        { action: "update", documentName: "ActiveEffect", updates: oldEffects, parent: tokenDocument.actor },
+        { action: "create", documentName: "ActiveEffect", data: newEffects, parent: tokenDocument.actor, keepId: true }
+      ]);
+    }
+
+    // Unlinked summons can take actor delta directly
+    else {
       tokenDocument.updateSource({ delta: actorUpdates });
       if ( actor.prototypeToken.appendNumber ) TokenPlacement.adjustAppendedNumber(tokenDocument, placement);
     }

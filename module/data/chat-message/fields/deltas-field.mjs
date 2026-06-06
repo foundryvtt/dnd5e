@@ -4,6 +4,7 @@ import MappingField from "../../fields/mapping-field.mjs";
 const { ArrayField, NumberField, ObjectField, SchemaField, StringField } = foundry.data.fields;
 
 /**
+ * @import { ActorUpdatesDescription } from "../../../documents/_types.mjs";
  * @import { ActorDeltasData, DeltaDisplayContext, IndividualDeltaData } from "./_types.mjs";
  */
 
