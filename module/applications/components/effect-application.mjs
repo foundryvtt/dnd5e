@@ -207,7 +207,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
     const existingEffect = actor.effects.find(e => e.origin === origin.uuid);
     if ( existingEffect ) {
       return existingEffect.update(foundry.utils.mergeObject({
-        ...effect.constructor.getInitialDuration(),
+        start: effect.constructor.getEffectStart(),
         ...durationOverride,
         "duration.expired": false,
         disabled: false
