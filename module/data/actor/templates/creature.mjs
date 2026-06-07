@@ -346,6 +346,9 @@ export default class CreatureTemplate extends CommonTemplate {
     const globalCheckBonus = simplifyBonus(this.rolls.ability?.check?.bonus, rollData);
     const globalToolBonus = simplifyBonus(this.rolls.ability?.tool?.bonus, rollData);
     for ( const [id, tool] of Object.entries(this.tools) ) {
+      tool.ability ??= CONFIG.DND5E.tools[id]?.ability ?? "int";
+      tool.bonuses ??= {};
+      tool.bonuses.check ??= "";
       const ability = this.abilities[tool.ability];
       tool.prof = this.calculateToolProficiency(tool.value, tool.ability);
 

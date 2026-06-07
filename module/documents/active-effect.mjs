@@ -391,8 +391,8 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /** @inheritDoc */
   static applyChangeField(model, change, options={}) {
-    const current = foundry.utils.getProperty(model, change.key);
-    const { field, replacementData } = options;
+    let current = foundry.utils.getProperty(model, change.key);
+    const { field } = options;
 
     // Replace value when using string interpolation syntax
     if ( (field instanceof StringField) && (change.type === "override") && change.value?.includes?.("{}") ) {
@@ -418,9 +418,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       return super.applyChangeField(model, { ...change, type: "override", value: result }, options);
     }
 
-    // If current value is `null`, UPGRADE & DOWNGRADE should always just set the value
-    if ( (current === null) && ["upgrade", "downgrade"].includes(change.type) ) change.type = "override";
-
     // Handle removing entries from sets
     if ( (field instanceof SetField) && (change.type === "add") && (foundry.utils.getType(current) === "Set") ) {
       for ( const value of field._castChangeDelta(change.value) ) {
@@ -442,8 +439,12 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       if ( mappingField && (foundry.utils.getProperty(model, keyPath) === undefined) ) {
         const created = mappingField.model.initialize(mappingField.model.getInitialValue(), mappingField);
         foundry.utils.setProperty(model, keyPath, created);
+        current = foundry.utils.getProperty(model, change.key);
       }
     }
+
+    // If current value is `null` or missing, UPGRADE & DOWNGRADE should always just set the value
+    if ( ([null, undefined].includes(current)) && ["upgrade", "downgrade"].includes(change.type) ) change.type = "override";
 
     // Parse any JSON provided when targeting an object
     if ( (field instanceof ObjectField) || (field instanceof SchemaField) ) {
