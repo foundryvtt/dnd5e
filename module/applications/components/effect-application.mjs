@@ -209,6 +209,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       return existingEffect.update(foundry.utils.mergeObject({
         ...effect.constructor.getInitialDuration(),
         ...durationOverride,
+        "duration.expired": false,
         disabled: false
       }, effectFlags));
     }
