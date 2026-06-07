@@ -12,6 +12,7 @@ export default class AttackRollConfigurationDialog extends D20RollConfigurationD
   /** @override */
   static DEFAULT_OPTIONS = {
     ammunitionOptions: [],
+    abilityOptions: [],
     attackModeOptions: [],
     masteryOptions: []
   };
@@ -23,7 +24,9 @@ export default class AttackRollConfigurationDialog extends D20RollConfigurationD
   /** @inheritDoc */
   async _prepareConfigurationContext(context, options) {
     context = await super._prepareConfigurationContext(context, options);
+    const abilityOptions = this.config.abilityOptions?.length > 1 ? this.config.abilityOptions : [];
     const optionsFields = [
+      { key: "ability", label: "DND5E.Ability", options: abilityOptions },
       { key: "attackMode", label: "DND5E.ATTACK.Mode.Label", options: this.options.attackModeOptions },
       { key: "ammunition", label: "DND5E.CONSUMABLE.Type.Ammunition.Label", options: this.options.ammunitionOptions },
       { key: "mastery", label: "DND5E.WEAPON.Mastery.Label", options: this.options.masteryOptions }

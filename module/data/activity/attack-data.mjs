@@ -253,12 +253,17 @@ export default class BaseAttackActivityData extends BaseActivityData {
    * Get the roll parts used to create the attack roll.
    * @param {object} [config={}]
    * @param {string} [config.ammunition]
+   * @param {string} [config.ability]
    * @param {string} [config.attackMode]
    * @param {string} [config.situational]
    * @returns {{ data: object, parts: string[] }}
    */
-  getAttackData({ ammunition, attackMode, situational }={}) {
+  getAttackData({ ammunition, ability, attackMode, situational }={}) {
     const rollData = this.getRollData({ roll: { attackMode } });
+    if ( ability && (ability in CONFIG.DND5E.abilities) ) {
+      rollData.roll.ability = ability;
+      rollData.mod = this.actor?.system.abilities?.[ability]?.mod ?? 0;
+    }
     if ( this.attack.flat ) return CONFIG.Dice.BasicRoll.constructParts({ toHit: this.attack.bonus }, rollData);
 
     const weapon = this.item.system;
@@ -282,8 +287,22 @@ export default class BaseAttackActivityData extends BaseActivityData {
 
   /* -------------------------------------------- */
 
-  /** @override */
+  /**
+   * Get the roll parts used to create the damage rolls.
+   * @param {Partial<AttackDamageRollProcessConfiguration>} [config={}]
+   * @returns {AttackDamageRollProcessConfiguration}
+   */
   getDamageConfig(config={}, options={}) {
+    const ability = config.ability;
+    let { rollData } = options;
+    rollData ??= ability !== undefined ? this.getRollData({ roll: { attackMode: config.attackMode } }) : null;
+    if ( rollData ) {
+      rollData.roll ??= {};
+      rollData.roll.ability = ability;
+      rollData.mod = ability in CONFIG.DND5E.abilities ? this.actor?.system.abilities?.[ability]?.mod ?? 0 : null;
+    }
+    const rollConfig = super.getDamageConfig(config, { ...options, rollData });
+
     // Copy properties from selected ammunition
     const ammo = config.ammunition?.system;
     if ( ammo ) {
@@ -294,8 +313,6 @@ export default class BaseAttackActivityData extends BaseActivityData {
         if ( !config.properties.includes(property) ) config.properties.push(property);
       }
     }
-
-    const rollConfig = super.getDamageConfig(config, options);
 
     if ( this.damage.critical.bonus && rollConfig.rolls[0] && !rollConfig.rolls[0].options?.critical?.bonusDamage ) {
       foundry.utils.setProperty(rollConfig.rolls[0], "options.critical.bonusDamage", this.damage.critical.bonus);
