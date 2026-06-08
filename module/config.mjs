@@ -1931,8 +1931,7 @@ DND5E.itemProperties = {
     label: "DND5E.ITEM.Property.Reload"
   },
   ret: {
-    label: "DND5E.ITEM.Property.Returning",
-    validForAmmunition: true
+    label: "DND5E.ITEM.Property.Returning"
   },
   ritual: {
     label: "DND5E.ITEM.Property.Ritual",
@@ -2043,6 +2042,8 @@ DND5E.validProperties = {
     "mgc"
   ])
 };
+
+DND5E.validProperties.consumable.ammo = new Set(["ret"]);
 
 /* -------------------------------------------- */
 
