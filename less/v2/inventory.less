@@ -587,6 +587,7 @@
     grid-auto-flow: column;
     grid-template-rows: 1fr 1fr;
     gap: var(--award-gap);
+    margin-block-end: var(--award-gap);
     button[data-action] {
       padding-inline: 6px;
       width: unset;
@@ -607,6 +608,15 @@
     margin-bottom: .25rem;
 
     span:has(+ slide-toggle:not([checked])), slide-toggle[checked] + span { font-weight: bold; }
+  }
+
+  .inspiration {
+    display: flex;
+    align-items: center;
+    gap: .5em;
+    margin-block-end: var(--award-gap);
+
+    span { font-size: var(--font-size-10); }
   }
 
   .destinations {
