@@ -74,7 +74,7 @@ export default class NPCActorSheet extends BaseActorSheet {
       scrollable: [""]
     },
     warnings: {
-      template: "systems/dnd5e/templates/actors/parts/actor-warnings-dialog.hbs"
+      template: "systems/dnd5e/templates/shared/sheet-warnings-dialog.hbs"
     },
     tabs: {
       id: "tabs",

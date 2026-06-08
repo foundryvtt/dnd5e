@@ -565,6 +565,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   _clearData() {
     this.labels = {};
     this.overrides = {};
+    this._preparationWarnings = [];
   }
 
   /* -------------------------------------------- */
@@ -592,6 +593,18 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     // Advancement
     this._prepareAdvancement();
+
+    // Warn about scale values that share an identifier
+    const scaleValues = (this.advancement.byType.ScaleValue ?? []).reduce((acc, a) => {
+      (acc[a.identifier] ??= []).push(a);
+      return acc;
+    }, {});
+    for ( const [identifier, advancements] of Object.entries(scaleValues) ) {
+      if ( advancements.length > 1 ) this._preparationWarnings.push({
+        message: _loc("DND5E.ADVANCEMENT.ScaleValue.Warning.DuplicateIdentifier", { identifier }),
+        link: advancements[0].uuid, type: "warning"
+      });
+    }
 
     // Item Properties
     if ( this.system.properties ) {

@@ -972,6 +972,7 @@ export async function preloadHandlebarsTemplates() {
   const partials = [
     // Shared Partials
     "systems/dnd5e/templates/shared/active-effects.hbs",
+    "systems/dnd5e/templates/shared/sheet-warnings-dialog.hbs",
     "systems/dnd5e/templates/apps/parts/trait-list.hbs",
     "systems/dnd5e/templates/apps/parts/traits-list.hbs",
 
@@ -985,7 +986,6 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/actors/parts/actor-features.hbs",
     "systems/dnd5e/templates/actors/parts/actor-spellbook.hbs",
     "systems/dnd5e/templates/actors/parts/actor-warnings.hbs",
-    "systems/dnd5e/templates/actors/parts/actor-warnings-dialog.hbs",
     "systems/dnd5e/templates/actors/parts/biography-textbox.hbs",
     "systems/dnd5e/templates/actors/tabs/character-bastion.hbs",
     "systems/dnd5e/templates/actors/tabs/character-biography.hbs",
