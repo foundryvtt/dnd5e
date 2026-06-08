@@ -4826,6 +4826,9 @@ Object.defineProperty(DND5E, "enrichmentLookup", {
     if ( !_enrichmentLookup ) {
       _enrichmentLookup = {
         abilities: foundry.utils.deepClone(DND5E.abilities),
+        damageTypes: Object.fromEntries(
+          Object.keys({ ...DND5E.damageTypes, ...DND5E.healingTypes }).map(k => [slugify(k), k])
+        ),
         languages: _flattenConfig(DND5E.languages, { labelKey: "label", skipEntry: (k, d) => d.selectable === false }),
         skills: foundry.utils.deepClone(DND5E.skills),
         spellSchools: foundry.utils.deepClone(DND5E.spellSchools),
