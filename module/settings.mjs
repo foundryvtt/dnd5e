@@ -2,7 +2,6 @@ import CompendiumBrowser from "./applications/compendium-browser.mjs";
 import BastionSettingsConfig from "./applications/settings/bastion-settings.mjs";
 import CalendarSettingsConfig from "./applications/settings/calendar-settings.mjs";
 import CombatSettingsConfig from "./applications/settings/combat-settings.mjs";
-import CompendiumBrowser from "./applications/compendium-browser.mjs";
 import CompendiumBrowserSettingsConfig from "./applications/settings/compendium-browser-settings.mjs";
 import VariantRulesSettingsConfig from "./applications/settings/variant-rules-settings.mjs";
 import VisibilitySettingsConfig from "./applications/settings/visibility-settings.mjs";
@@ -48,11 +47,7 @@ export function registerSystemKeybindings() {
     editable: [{ key: "KeyL" }],
     onDown: () => {
       const app = ui.activeWindow;
-      if ( app?.rendered && app.constructor?.MODES && app._mode !== undefined ) {
-        const { MODES } = app.constructor;
-        app._mode = app._mode === MODES.EDIT ? MODES.PLAY : MODES.EDIT;
-        app.render();
-      }
+      if ( app?.rendered && app.changeMode ) app.changeMode();
       return true;
     }
   });

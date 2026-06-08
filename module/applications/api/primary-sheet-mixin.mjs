@@ -320,7 +320,7 @@ export default function PrimarySheetMixin(Base) {
      * @param {HTMLElement} target  Button that was clicked.
      */
     static #changeMode(event, target) {
-      this._onChangeSheetMode(event, target);
+      this.changeMode();
     }
 
     /* -------------------------------------------- */
@@ -332,11 +332,29 @@ export default function PrimarySheetMixin(Base) {
      * @protected
      */
     async _onChangeSheetMode(event, target=event.currentTarget) {
+      foundry.utils.logCompatibilityWarning(
+        "The `_onChangeSheetMode` method has been moved to `changeMode`.",
+        { since: "DnD5e 6.0", until: "DnD5e 6.2" }
+      );
+      this.changeMode();
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Change the sheet mode.
+     * @param {PrimarySheetMixin.MODES} [mode]  Mode to set. If not provided, mode will be toggled.
+     */
+    async changeMode(mode) {
       const { MODES } = this.constructor;
-      const label = _loc(`DND5E.SheetMode${target.checked ? "Play" : "Edit"}`);
-      target.dataset.tooltip = label;
-      target.setAttribute("aria-label", label);
-      this._mode = target.checked ? MODES.EDIT : MODES.PLAY;
+      this._mode = mode ?? (this.isEditMode ? MODES.PLAY : MODES.EDIT);
+      const button = this.element?.querySelector('[data-action="changeMode"]');
+      if ( button ) {
+        const label = _loc(`DND5E.SheetMode${this.isEditMode ? "Edit" : "Play"}`);
+        button.checked = this.isEditMode;
+        button.dataset.tooltip = label;
+        button.setAttribute("aria-label", label);
+      }
       await this.submit();
       this.render();
     }
