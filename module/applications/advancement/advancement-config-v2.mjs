@@ -200,6 +200,7 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
         if ( !(i instanceof Item) ) i = await fromUuid(i.uuid);
         return i;
       }));
+      items = items.filter(i => i && !i.system.container);
     }
     else return;
 
