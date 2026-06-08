@@ -3,6 +3,7 @@ import AdvancementManager from "../advancement/advancement-manager.mjs";
 import CompendiumBrowser from "../compendium-browser.mjs";
 import ContextMenu5e from "../context-menu.mjs";
 import BaseActorSheet from "./api/base-actor-sheet.mjs";
+import AdvantageModeField from "../../data/fields/advantage-mode-field.mjs";
 import Item5e from "../../documents/item.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
 
@@ -345,12 +346,17 @@ export default class CharacterActorSheet extends BaseActorSheet {
       ability.class = this.constructor.PROFICIENCY_CLASSES[context.editable ? ability.baseProf : ability.proficient];
     }
     if ( this.actor.statuses.has(CONFIG.specialStatusEffects.CONCENTRATING) || context.editable ) {
+      const concentrationAbility = context.system.attributes.concentration.ability
+        || CONFIG.DND5E.defaultAbilities.concentration;
       context.saves.concentration = {
         isConcentration: true,
         class: "colspan concentration",
         label: _loc("DND5E.Concentration"),
         abbr: _loc("DND5E.Concentration"),
-        save: { value: context.system.attributes.concentration.save }
+        save: { value: context.system.attributes.concentration.save },
+        saveAdvantageMode: AdvantageModeField.combineFields(context.system, [
+          `abilities.${concentrationAbility}.save.roll.mode`, "attributes.concentration.roll.mode"
+        ])?.mode ?? 0
       };
     }
 
@@ -569,6 +575,12 @@ export default class CharacterActorSheet extends BaseActorSheet {
 
     // Favorites
     context.favorites = await this._prepareFavorites();
+
+    // Initiative
+    const initiativeAbility = attributes.init.ability || CONFIG.DND5E.defaultAbilities.initiative;
+    context.initiativeAdvantageMode = AdvantageModeField.combineFields(context.system, [
+      `abilities.${initiativeAbility}.check.roll.mode`, "attributes.init.roll.mode"
+    ])?.mode ?? 0;
 
     // Speed
     context.speed = Object.entries(CONFIG.DND5E.movementTypes).reduce((obj, [k, { hidden, label }]) => {

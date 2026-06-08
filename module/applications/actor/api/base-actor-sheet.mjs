@@ -1,4 +1,5 @@
 import * as Trait from "../../../documents/actor/trait.mjs";
+import AdvantageModeField from "../../../data/fields/advantage-mode-field.mjs";
 import Item5e from "../../../documents/item.mjs";
 import {
   formatLength, formatNumber, getPluralRules, parseInputDelta, simplifyBonus, splitSemicolons, staticID
@@ -421,9 +422,11 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     return Object.entries(context.system.abilities).map(([key, ability]) => ({
       ...ability, key,
       abbr: CONFIG.DND5E.abilities[key]?.abbreviation ?? "",
+      checkAdvantageMode: ability.check.roll.mode,
       hover: CONFIG.DND5E.proficiencyLevels[ability.proficient],
       icon: CONFIG.DND5E.abilities[key]?.icon,
       label: CONFIG.DND5E.abilities[key]?.label,
+      saveAdvantageMode: ability.save.roll.mode,
       source: context.source.abilities[key]
     }));
   }
@@ -527,6 +530,9 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         hover: CONFIG.DND5E.proficiencyLevels[entry.value],
         label: (property === "skills") ? CONFIG.DND5E.skills[key]?.label : Trait.keyLabel(key, { trait: "tool" }),
         link: { action: "roll", key, type: property === "skills" ? "skill" : "tool" },
+        advantageMode: property === "skills" ? AdvantageModeField.combineFields(context.system, [
+          `abilities.${entry.ability}.check.roll.mode`, `skills.${key}.roll.mode`
+        ])?.mode ?? 0 : 0,
         source: context.source[property]?.[key],
         value: entry.total
       })).sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang));

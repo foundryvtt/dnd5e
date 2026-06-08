@@ -195,7 +195,17 @@
     <a class="draggable name {{ @root.rollableClass }} {{ roll }}" data-action="roll" data-type="{{ type }}">
         {{ label }}
     </a>
-    <div class="bonus">{{ dnd5e-formatModifier total }}</div>
+    <div class="bonus">
+        {{#if (eq advantageMode 1)}}<span class="advantage-mode" data-tooltip="DND5E.Advantage"
+                                            aria-label="{{ localize 'DND5E.Advantage' }}">
+            <i class="fas fa-angles-up" inert></i>
+        </span>{{/if}}
+        {{#if (eq advantageMode -1)}}<span class="advantage-mode" data-tooltip="DND5E.Disadvantage"
+                                             aria-label="{{ localize 'DND5E.Disadvantage' }}">
+            <i class="fas fa-angles-down" inert></i>
+        </span>{{/if}}
+        <span class="modifier">{{ dnd5e-formatModifier total }}</span>
+    </div>
     {{#if @root.editable}}
     <button type="button" class="config-button unbutton" data-action="showConfiguration" data-config="{{ type }}"
             data-tooltip="{{ config }}" aria-label="{{ localize config }}">
@@ -218,7 +228,17 @@
     {{/if}}
     <a class="name saving-throw full {{ @root.rollableClass }}" data-action="roll" data-type="ability">{{ label }}</a>
     <a class="name saving-throw abbr {{ @root.rollableClass }}" data-action="roll" data-type="ability">{{ abbr }}</a>
-    <div class="bonus">{{ dnd5e-formatModifier save.value }}</div>
+    <div class="bonus">
+        {{#if (eq saveAdvantageMode 1)}}<span class="advantage-mode" data-tooltip="DND5E.Advantage"
+                                                aria-label="{{ localize 'DND5E.Advantage' }}">
+            <i class="fas fa-angles-up" inert></i>
+        </span>{{/if}}
+        {{#if (eq saveAdvantageMode -1)}}<span class="advantage-mode" data-tooltip="DND5E.Disadvantage"
+                                                 aria-label="{{ localize 'DND5E.Disadvantage' }}">
+            <i class="fas fa-angles-down" inert></i>
+        </span>{{/if}}
+        <span class="modifier">{{ dnd5e-formatModifier save.value }}</span>
+    </div>
     {{#if @root.editable}}
     <button type="button" class="config-button unbutton" data-action="showConfiguration" data-config="ability"
             data-tooltip aria-label="{{ config }}">
