@@ -3481,14 +3481,17 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const pct = Math.clamp(Math.abs(value) / this.system.attributes.hp.max, 0, 1);
     const fill = CONFIG.DND5E.tokenHPColors[key];
 
+    // Adapt the font size relative to the Actor's HP total to emphasize more significant blows, scaled to the grid
+    const gridScale = Math.sqrt((canvas?.dimensions?.size ?? 100) / 100);
+    const fontSize = (16 + (32 * pct)) * gridScale;
+
     for ( const token of tokens ) {
       if ( !token.object?.visible || token.isSecret ) continue;
       if ( token.hasDynamicRing ) token.flashRing(key);
       const t = token.object;
       canvas.interface.createScrollingText(t.center, value.signedString(), {
         anchor: CONST.TEXT_ANCHOR_POINTS.TOP,
-        // Adapt the font size relative to the Actor's HP total to emphasize more significant blows
-        fontSize: 16 + (32 * pct), // Range between [16, 48]
+        fontSize,
         fill: fill,
         stroke: 0x000000,
         strokeThickness: 4,
