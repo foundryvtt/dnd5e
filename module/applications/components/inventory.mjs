@@ -323,7 +323,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
    */
   _getContextOptions(item, element) {
     const compendiumLocked = game.packs.get(item.pack)?.locked;
-    const inFavorites = !!element?.closest?.(".favorites");
+    const inFavorites = !!element.closest(".favorites");
 
     // Standard options.
     const options = [{
@@ -338,7 +338,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
     }, {
       label: "DND5E.ContextMenuActionDuplicate",
       icon: '<i class="fa-solid fa-copy fa-fw"></i>',
-      visible: () => item.canDuplicate && item.isOwner && !compendiumLocked,
+      visible: () => !inFavorites && item.canDuplicate && item.isOwner && !compendiumLocked,
       onClick: (event, target) => this._onAction(target, "duplicate", { event })
     }, {
       id: "delete",
