@@ -2028,6 +2028,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     const schoolFilter = spellSchools.intersection(filters);
     const spellcastingClasses = new Set(Object.keys(this.actor.spellcastingClasses));
     const classFilter = spellcastingClasses.intersection(filters);
+    const actionFilter = new Set(actions).intersection(filters);
 
     return items.filter(item => {
 
@@ -2036,14 +2037,12 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       if ( filtered !== undefined ) return filtered;
 
       // Action usage
-      for ( const f of actions ) {
-        if ( !filters.has(f) ) continue;
+      if ( actionFilter.size ) {
         if ( item.type === "spell" ) {
-          if ( item.system.activation.type !== f ) return false;
-          continue;
+          if ( !actionFilter.has(item.system.activation.type) ) return false;
         }
-        if ( !item.system.activities?.size ) return false;
-        if ( item.system.activities.every(a => a.activation?.type !== f) ) return false;
+        else if ( !item.system.activities?.size
+          || !item.system.activities.some(a => actionFilter.has(a.activation?.type)) ) return false;
       }
 
       // Spell-specific filters
