@@ -313,27 +313,17 @@ export async function enrichAward(config, label, options) {
   for ( let [key, amount] of Object.entries(parsed.currency) ) {
     const label = CONFIG.DND5E.currencies[key].label;
     amount = Number.isNumeric(amount) ? formatNumber(amount) : amount;
-    entries.push(`
-      <span class="award-entry">
-        ${amount} <i class="currency ${key}" data-tooltip aria-label="${label}"></i>
-      </span>
-    `);
+    entries.push(`<span class="award-entry">${amount} <i class="currency ${key}" data-tooltip aria-label="${label}"></i></span>`);
   }
-  if ( parsed.xp ) entries.push(`
-    <span class="award-entry">
-      ${formatNumber(parsed.xp)} ${_loc("DND5E.ExperiencePoints.Abbreviation")}
-    </span>
-  `);
+  if ( parsed.xp ) {
+    entries.push(`<span class="award-entry">${formatNumber(parsed.xp)} ${_loc("DND5E.ExperiencePoints.Abbreviation")}</span>`);
+  }
 
   let award = game.i18n.getListFormatter({ type: "unit" }).format(entries);
   if ( parsed.each ) award = _loc("EDITOR.DND5E.Inline.AwardEach", { award });
 
-  block.innerHTML += `
-    ${award}
-    <a class="award-link" data-action="awardRequest">
-      <i class="fa-solid fa-trophy"></i> ${label ?? _loc("DND5E.Award.Action")}
-    </a>
-  `;
+  block.innerHTML += `${award}<a class="award-link" data-action="awardRequest">`
+    + `<i class="fa-solid fa-trophy"></i> ${label ?? _loc("DND5E.Award.Action")}</a>`;
 
   return block;
 }
