@@ -120,7 +120,14 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       effect.updateDuration();
       const li = document.createElement("li");
       li.classList.add("effect");
-      li.dataset.id = effect.id;
+      Object.assign(li.dataset, {
+        id: effect.id,
+        tooltip: `
+          <section class="loading" data-uuid="${effect.uuid}"><i class="fas fa-spinner fa-spin-pulse"></i></section>
+        `,
+        tooltipClass: "dnd5e2 dnd5e-tooltip item-tooltip themed theme-light",
+        tooltipDirection: "LEFT"
+      });
       li.innerHTML = `
         <img class="gold-icon">
         <div class="name-stacked">
@@ -134,11 +141,6 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       `;
       Object.assign(li.querySelector(".gold-icon"), { alt: effect.name, src: effect.img });
       li.querySelector(".name-stacked .title").append(effect.name);
-      li.dataset.tooltip = `
-        <section class="loading" data-uuid="${effect.uuid}"><i class="fas fa-spinner fa-spin-pulse"></i></section>
-      `;
-      li.dataset.tooltipClass = "dnd5e2 dnd5e-tooltip item-tooltip themed theme-light";
-      li.dataset.tooltipDirection = "LEFT";
       this.effectsList.append(li);
       li.addEventListener("click", this._onApplyEffect.bind(this));
     }
