@@ -116,7 +116,7 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
       if ( profile ) {
         const uuid = this.transform.mode ? await this.queryActor(profile) : profile.uuid;
         if ( uuid ) {
-          if ( results.message instanceof ChatMessage ) results.message.setFlag("dnd5e", "transform.uuid", uuid);
+          if ( results.message instanceof ChatMessage ) await results.message.setFlag("dnd5e", "transform.uuid", uuid);
           else foundry.utils.setProperty(results.message, "flags.dnd5e.transform.uuid", uuid);
         }
       }
