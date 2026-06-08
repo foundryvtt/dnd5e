@@ -27,9 +27,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
       deleteDocument: ItemSheet5e.#deleteDocument,
       deleteRecovery: ItemSheet5e.#deleteRecovery,
       editDescription: ItemSheet5e.#editDescription,
-      inspectWarning: ItemSheet5e.#inspectWarning,
       modifyAdvancementChoices: ItemSheet5e.#modifyAdvancementChoices,
-      openWarnings: ItemSheet5e.#openWarnings,
       showConfiguration: ItemSheet5e.#showConfiguration,
       showDocument: ItemSheet5e.#showDocument,
       showIcon: ItemSheet5e.#showIcon,
@@ -209,7 +207,6 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
       user: game.user
     };
     context.source = context.editable ? this.item.system._source : this.item.system;
-    context.warnings = foundry.utils.deepClone(this.item._preparationWarnings);
 
     context.properties = {
       active: [],
@@ -629,16 +626,6 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
       }
     }
 
-    // Preparation warnings
-    const warnings = document.createElement("button");
-    warnings.type = "button";
-    warnings.classList.add(
-      "header-control", "preparation-warnings", "icon", "fa-solid", "fa-triangle-exclamation"
-    );
-    Object.assign(warnings.dataset, { action: "openWarnings", tooltip: "Warnings", tooltipDirection: "DOWN" });
-    warnings.setAttribute("aria-label", _loc("Warnings"));
-    html.querySelector(".window-header .window-subtitle").after(warnings);
-
     this._renderSourceFrame(html);
     return html;
   }
@@ -674,10 +661,6 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     if ( this._mode === this.constructor.MODES.PLAY ) this._disableFields();
 
     this.element.querySelectorAll(".editor-content[data-edit]").forEach(div => this._activateEditor(div));
-
-    // Display warnings
-    const warnings = this.element.querySelector(".window-header .preparation-warnings");
-    warnings?.toggleAttribute("hidden", (!game.user.isGM && this.item.limited) || !context.warnings?.length);
 
     if ( this._headerToggles.identified ) {
       const isIdentified = this.item.system.identified;
@@ -812,49 +795,6 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     const level = target.closest("[data-level]")?.dataset.level;
     const manager = AdvancementManager.forModifyChoices(this.actor, this.item.id, Number(level));
     if ( manager.steps.length ) this._renderChild(manager);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle following a warning link to its document.
-   * @this {ItemSheet5e}
-   * @param {Event} event         Triggering click event.
-   * @param {HTMLElement} target  Link that was clicked.
-   */
-  static async #inspectWarning(event, target) {
-    if ( this._inspectWarning(event, target) === false ) return;
-    const doc = await fromUuid(target.dataset.target);
-    if ( doc?.sheet ) this._renderChild(doc.sheet);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle following a warning link.
-   * @param {Event} event         Triggering click event.
-   * @param {HTMLElement} target  Link that was clicked.
-   * @returns {any}               Return `false` to prevent default behavior.
-   * @protected
-   */
-  _inspectWarning(event, target) {}
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle opening the configuration warnings dialog.
-   * @this {ItemSheet5e}
-   * @param {Event} event         Triggering click event.
-   * @param {HTMLElement} target  Button that was clicked.
-   */
-  static async #openWarnings(event, target) {
-    event.stopImmediatePropagation();
-    const { top, left, height } = event.target.getBoundingClientRect();
-    const { clientWidth } = document.documentElement;
-    const dialog = this.form.querySelector("dialog.warnings");
-    Object.assign(dialog.style, { top: `${top + height}px`, left: `${Math.min(left - 16, clientWidth - 300)}px` });
-    dialog.showModal();
-    dialog.addEventListener("click", () => dialog.close(), { once: true });
   }
 
   /* -------------------------------------------- */
