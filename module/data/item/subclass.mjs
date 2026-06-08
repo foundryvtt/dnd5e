@@ -70,7 +70,7 @@ export default class SubclassData extends ItemDataModel.mixin(AdvancementTemplat
 
   /** @inheritDoc */
   get tooltipSubtitle() {
-    const cls = dnd5e.registry.classes.choices[this.classIdentifier];
+    const cls = dnd5e.registry.classes.get(this.classIdentifier)?.name;
     if ( cls ) return [_loc("DND5E.SubclassOf", { class: cls })];
     return super.tooltipSubtitle;
   }
