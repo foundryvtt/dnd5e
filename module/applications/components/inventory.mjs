@@ -323,6 +323,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
    */
   _getContextOptions(item, element) {
     const compendiumLocked = game.packs.get(item.pack)?.locked;
+    const inFavorites = !!element.closest(".favorites");
 
     // Standard options.
     const options = [{
@@ -337,13 +338,13 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
     }, {
       label: "DND5E.ContextMenuActionDuplicate",
       icon: '<i class="fa-solid fa-copy fa-fw"></i>',
-      visible: () => item.canDuplicate && item.isOwner && !compendiumLocked,
+      visible: () => !inFavorites && item.canDuplicate && item.isOwner && !compendiumLocked,
       onClick: (event, target) => this._onAction(target, "duplicate", { event })
     }, {
       id: "delete",
       label: "DND5E.ContextMenuActionDelete",
       icon: '<i class="fa-solid fa-trash fa-fw"></i>',
-      visible: () => item.canDelete && item.isOwner && !compendiumLocked,
+      visible: () => !inFavorites && item.canDelete && item.isOwner && !compendiumLocked,
       onClick: (event, target) => this._onAction(target, "delete", { event })
     }, {
       label: "DND5E.DisplayCard",
@@ -433,7 +434,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
       label: expanded ? "APPLICATION.ACTIONS.Collapse" : "APPLICATION.ACTIONS.Expand",
       icon: `<i class="fa-solid fa-${expanded ? "compress" : "expand"}"></i>`,
       group: "collapsible",
-      visible: () => "canExpand" in this.app ? this.app.canExpand(item) : true,
+      visible: () => !inFavorites && ("canExpand" in this.app ? this.app.canExpand(item) : true),
       onClick: (event, target) => this._onAction(target, "toggleExpand", { event })
     });
 
