@@ -47,6 +47,7 @@ export async function enrichString(match, options) {
   config = parseConfig(config, { multiple: ["damage", "heal", "healing"].includes(type) });
   config._input = match[0];
   config._rules = getRulesVersion(config, options);
+  if ( options.relativeTo ) config._input += ` (${options.relativeTo.uuid})`;
   delete config.rules;
   switch ( type.toLowerCase() ) {
     case "attack": return enrichAttack(config, label, options);
