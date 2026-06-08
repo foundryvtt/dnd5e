@@ -146,6 +146,13 @@
 /* -------------------------------------------- */
 
 /**
+ * @typedef {ActivityData} MacroActivityData
+ * @property {object} macro
+ * @property {string} macro.uuid         UUID of the Macro executed when this activity is used.
+ * @property {boolean} macro.chatButton  Execute the macro from a chat card button rather than automatically.
+ */
+
+/**
  * @typedef OrderActivityData
  * @property {string} _id    Unique ID for the activity on an item.
  * @property {string} type   Type name of the activity used to build a specific activity class.

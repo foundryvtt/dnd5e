@@ -3281,6 +3281,34 @@
   }
 },
 
+"DND5E.MACRO": {
+  "FIELDS": {
+    "macro": {
+      "uuid": {
+        "label": "Macro",
+        "hint": "The Macro executed when this activity is used."
+      },
+      "chatButton": {
+        "label": "Execute From Chat Card",
+        "hint": "Show a button on the chat card to run the macro, instead of running it automatically."
+      }
+    }
+  },
+  "SECTIONS": {
+    "Macro": "Macro"
+  },
+  "Action": {
+    "Execute": "Execute Macro",
+    "Remove": "Remove Macro"
+  },
+  "Title": "Macro",
+  "Hint": "Run a Macro when this activity is used.",
+  "Warning": {
+    "MissingMacro": "The Macro configured for {activity} could not be found.",
+    "CannotExecute": "You do not have permission to execute this Macro."
+  }
+},
+
 "DND5E.Faith": "Faith",
 "DND5E.FeatureActive": "Active Abilities",
 "DND5E.FeatureAdd": "Create Feature",
