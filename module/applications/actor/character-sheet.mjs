@@ -861,6 +861,13 @@ export default class CharacterActorSheet extends BaseActorSheet {
       case "subclass": ctx.groups.origin = group.class?.identifier ?? "other"; break;
     }
 
+    // Fall back to the feature's own type when it maps to a section that exists.
+    if ( ctx.groups.origin === "other" ) {
+      const featureType = item.system.type?.value;
+      const section = { race: "species", background: "background" }[featureType];
+      if ( section && this.actor.system.details[featureType] instanceof Item5e ) ctx.groups.origin = section;
+    }
+
     ctx.groups.activation = item.system.properties?.has("trait") || !item.system.activities?.size
       ? "passive"
       : "active";
