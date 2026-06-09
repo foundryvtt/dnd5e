@@ -191,13 +191,32 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /** @inheritDoc */
   static applyChange(model, change, options={}) {
     change = change.effect._applyChangeShim(change);
+
+    // Handle special actor flags
     if ( change.key.startsWith("flags.dnd5e.") ) change = change.effect._prepareFlagChange(model, change);
+
+    // Properly handle formulas that don't exist as part of the data model
     if ( ActiveEffect5e.FORMULA_FIELDS.has(change.key) ) {
       const field = new FormulaField({ deterministic: change.key !== "system.damage.bonus" });
       return { [change.key]: this.applyChangeField(model, change, { field }) };
     }
+
+    // Handle activity-targeted changes
     if ( (change.key.startsWith("activities[") || change.key.startsWith("system.activities."))
       && (model instanceof Item) ) return change.effect.applyActivity(model, change);
+
+    // Handle hiding items
+    if ( (change.key === "items.hidden") && (model instanceof Actor) ) {
+      if ( change.type === "add" ) {
+        if ( model.items.has(change.value) ) model.hiddenItems.add(change.value);
+        else model.identifiedItems.get(change.value)?.forEach(i => model.hiddenItems.add(i.id));
+      } else if ( change.type === "subtract" ) {
+        if ( model.items.has(change.value) ) model.hiddenItems.delete(change.value);
+        else model.identifiedItems.get(change.value)?.forEach(i => model.hiddenItems.delete(i.id));
+      }
+      return;
+    }
+
     return super.applyChange(model, change, options);
   }
 
