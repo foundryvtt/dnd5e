@@ -514,6 +514,7 @@
       gap: .5rem;
 
       .container {
+        position: relative;
         max-width: 78px;
         max-height: 78px;
         aspect-ratio: 1;
@@ -521,6 +522,17 @@
         border-radius: 4px;
         box-shadow: 0 0 6px var(--dnd5e-shadow-45);
         background-color: var(--dnd5e-background-alt-1);
+
+        .equipped {
+          position: absolute;
+          bottom: 3px;
+          inset-inline-end: 3px;
+          z-index: 1;
+          font-size: var(--font-size-14);
+          color: var(--item-control-active-color);
+          cursor: var(--cursor-pointer);
+          filter: drop-shadow(0 0 2px var(--dnd5e-shadow-45));
+        }
 
         a {
           display: flex;
