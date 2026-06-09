@@ -200,7 +200,7 @@ export default class ItemDataModel extends SystemDataModel {
     uses = this.hasLimitedUses && (game.user.isGM || identified) ? uses : null;
     price = game.user.isGM || identified ? price : null;
 
-    enrichmentOptions = { rollData, ...enrichmentOptions };
+    enrichmentOptions = { rollData, relative: this.parent, ...enrichmentOptions };
     const context = {
       name, type, img, price, weight, uses, school, materials,
       config: CONFIG.DND5E,
@@ -211,12 +211,13 @@ export default class ItemDataModel extends SystemDataModel {
       description: {
         value: await TextEditor.enrichHTML(
           (game.user.isGM || isIdentified ? description.value : unidentified?.description) ?? "",
-          { relativeTo: this.parent, ...enrichmentOptions }
+          enrichmentOptions
         ),
         chat: await TextEditor.enrichHTML(
-          activity?.description?.value || (isIdentified ? description.chat || (activity ? "" : description.value)
-            : unidentified?.description) || "",
-          { relativeTo: activity?.description?.value ? activity : this.parent, ...enrichmentOptions }
+          activity?.description?.value
+            || (isIdentified ? description.chat || description.value : unidentified?.description)
+            || "",
+          enrichmentOptions
         ),
         concealed: game.user.isGM && game.settings.get("dnd5e", "concealItemDescriptions") && !description.chat
       }
