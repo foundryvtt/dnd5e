@@ -31,6 +31,7 @@ export default class BaseSaveActivityData extends BaseActivityData {
         ability: new SetField(new StringField()),
         bonus: new FormulaField(),
         dc: new SchemaField({
+          bonus: new FormulaField({ deterministic: true, persisted: false }),
           calculation: new StringField({ initial: "initial" }),
           formula: new FormulaField({ deterministic: true })
         }),
@@ -95,7 +96,6 @@ export default class BaseSaveActivityData extends BaseActivityData {
   prepareData() {
     super.prepareData();
     if ( this.save.dc.calculation === "initial" ) this.save.dc.calculation = this.isSpell ? "spellcasting" : "";
-    this.save.dc.bonus = "";
   }
 
   /* -------------------------------------------- */

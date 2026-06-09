@@ -63,6 +63,7 @@ export default class WeaponData extends ItemDataModel.mixin(
       }),
       damage: new SchemaField({
         base: new DamageField(),
+        bonus: new FormulaField({ persisted: false }),
         versatile: new DamageField()
       }),
       magicalBonus: new FormulaField({ deterministic: true, label: "DND5E.MagicalBonus" }),
