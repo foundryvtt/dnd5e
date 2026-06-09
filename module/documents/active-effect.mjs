@@ -41,7 +41,15 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * Additional key paths to properties added during base data preparation that should be treated as formula fields.
    * @type {Set<string>}
    */
-  static FORMULA_FIELDS = new Set(["system.damage.bonus"]);
+  static FORMULA_FIELDS = new class extends Set {
+    add(value) {
+      foundry.utils.logCompatibilityWarning(
+        "`ActiveEffect5e#FOMRULA_FIELDS` has been deprecated in favor of non-persisted fields.",
+        { since: "DnD5e 6.0", until: "DnD5e 6.2" }
+      );
+      super.add(value);
+    }
+  }();
 
   /* -------------------------------------------- */
 

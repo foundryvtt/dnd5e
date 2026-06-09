@@ -1,7 +1,10 @@
 import CastActivity from "../../../documents/activity/cast.mjs";
 import SystemDataModel from "../../abstract/system-data-model.mjs";
 import { ActivitiesField } from "../../fields/activities-field.mjs";
+import FormulaField from "../../fields/formula-field.mjs";
 import UsesField from "../../shared/uses-field.mjs";
+
+const { SchemaField } = foundry.data.fields;
 
 /**
  * @import { ItemRollData } from "../../../documents/_types.mjs";
@@ -28,6 +31,9 @@ export default class ActivitiesTemplate extends SystemDataModel {
   static defineSchema() {
     return {
       activities: new ActivitiesField(),
+      damage: new SchemaField({
+        bonus: new FormulaField()
+      }, { persisted: false }),
       uses: new UsesField()
     };
   }
