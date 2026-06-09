@@ -200,7 +200,7 @@ export default class ItemDataModel extends SystemDataModel {
     uses = this.hasLimitedUses && (game.user.isGM || identified) ? uses : null;
     price = game.user.isGM || identified ? price : null;
 
-    enrichmentOptions = { rollData, relative: this.parent, ...enrichmentOptions };
+    enrichmentOptions = { rollData, relativeTo: this.parent, ...enrichmentOptions };
     const context = {
       name, type, img, price, weight, uses, school, materials,
       config: CONFIG.DND5E,
