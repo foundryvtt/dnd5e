@@ -417,7 +417,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       return game.actors.importFromCompendium(game.packs.get(actor.pack), actor.id, {
         "flags.dnd5e.isAutoImported": true,
         folder: game.folders.get(folderId) ?? null
-      });
+      }, { keepId: false });
     } else {
       // A linked world actor was found. Create a copy to avoid affecting the original.
       return actor.clone({
