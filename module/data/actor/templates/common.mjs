@@ -176,17 +176,20 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
 
       // Adjust rolling mode
       const isPhysicalAbility = CONFIG.DND5E.abilities[id]?.type === "physical";
-      if ( this.parent.hasConditionEffect("abilityCheckDisadvantage")
-        || (isPhysicalAbility && this.parent.hasConditionEffect("physicalCheckDisadvantage")) ) {
-        AdvantageModeField.setMode(this, `abilities.${id}.check.roll.mode`, -1);
+      const checkDisadvantage = this.parent.hasConditionEffect("abilityCheckDisadvantage", { label: true })
+        || (isPhysicalAbility && this.parent.hasConditionEffect("physicalCheckDisadvantage", { label: true }));
+      if ( checkDisadvantage ) {
+        AdvantageModeField.setMode(this, `abilities.${id}.check.roll.mode`, -1, { source: { label: checkDisadvantage } });
       }
-      if ( (id === "dex") && this.parent.hasConditionEffect("dexteritySaveAdvantage") ) {
-        AdvantageModeField.setMode(this, `abilities.${id}.save.roll.mode`, 1);
+      const saveAdvantage = (id === "dex") && this.parent.hasConditionEffect("dexteritySaveAdvantage", { label: true });
+      if ( saveAdvantage ) {
+        AdvantageModeField.setMode(this, `abilities.${id}.save.roll.mode`, 1, { source: { label: saveAdvantage } });
       }
-      if ( this.parent.hasConditionEffect("abilitySaveDisadvantage")
-        || (isPhysicalAbility && this.parent.hasConditionEffect("physicalSaveDisadvantage"))
-        || ((id === "dex") && this.parent.hasConditionEffect("dexteritySaveDisadvantage")) ) {
-        AdvantageModeField.setMode(this, `abilities.${id}.save.roll.mode`, -1);
+      const saveDisadvantage = this.parent.hasConditionEffect("abilitySaveDisadvantage", { label: true })
+        || (isPhysicalAbility && this.parent.hasConditionEffect("physicalSaveDisadvantage", { label: true }))
+        || ((id === "dex") && this.parent.hasConditionEffect("dexteritySaveDisadvantage", { label: true }));
+      if ( saveDisadvantage ) {
+        AdvantageModeField.setMode(this, `abilities.${id}.save.roll.mode`, -1, { source: { label: saveDisadvantage } });
       }
     }
   }
