@@ -467,7 +467,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     const { enchantmentProfile, activityId } = options.dnd5e ?? {};
 
     if ( chatMessageOrigin ) {
-      const message = game.messages.get(options?.chatMessageOrigin);
+      const message = game.messages.get(chatMessageOrigin);
       item = message?.getAssociatedItem();
       const activity = message?.getAssociatedActivity();
       profile = activity?.effects.find(e => e._id === message?.getFlag("dnd5e", "use.enchantmentProfile"));

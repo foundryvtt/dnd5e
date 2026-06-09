@@ -43,7 +43,7 @@ export default class EnchantmentApplicationElement extends MaybeAdoptable {
 
   /**
    * Activity providing the enchantment that will be applied.
-   * @type {Item5e}
+   * @type {Activity}
    */
   get enchantmentActivity() {
     return this.chatMessage.getAssociatedActivity();
