@@ -211,13 +211,13 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       && (model instanceof Item) ) return change.effect.applyActivity(model, change);
 
     // Handle hiding items
-    if ( change.key === "items.hidden" && (doc instanceof Actor) ) {
+    if ( (change.key === "items.hidden") && (model instanceof Actor) ) {
       if ( change.type === "add" ) {
-        if ( doc.items.has(change.value) ) doc.hiddenItems.add(change.value);
-        else doc.identifiedItems.get(change.value)?.forEach(i => doc.hiddenItems.add(i.id));
-      } else if ( change.mode === "subtract" ) {
-        if ( doc.items.has(change.value) ) doc.hiddenItems.delete(change.value);
-        else doc.identifiedItems.get(change.value)?.forEach(i => doc.hiddenItems.delete(i.id));
+        if ( model.items.has(change.value) ) model.hiddenItems.add(change.value);
+        else model.identifiedItems.get(change.value)?.forEach(i => model.hiddenItems.add(i.id));
+      } else if ( change.type === "subtract" ) {
+        if ( model.items.has(change.value) ) model.hiddenItems.delete(change.value);
+        else model.identifiedItems.get(change.value)?.forEach(i => model.hiddenItems.delete(i.id));
       }
       return;
     }
