@@ -47,7 +47,7 @@ export function registerCustomEnrichers() {
  * @returns {false|void}    Returns `false` to prevent the message from continuing to parse.
  */
 export function chatMessage(message) {
-  const match = message.match(CHAT_REGEX);
+  const match = message.replace(/^<p>|<\/p>$/gi, "").match(CHAT_REGEX);
   if ( !match ) return;
   let { type, config } = match.groups;
   config = parseConfig(config, { multiple: ["damage", "heal", "healing"].includes(type) });
