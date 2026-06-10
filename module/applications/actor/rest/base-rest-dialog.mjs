@@ -81,7 +81,7 @@ export default class BaseRestDialog extends Dialog5e {
    */
   get duration() {
     return this.config.duration ?? CONFIG.DND5E.restTypes[this.config.type]
-      ?.duration?.[game.settings.get("dnd5e", "restVariant")] ?? 0;
+      ?.duration?.[dnd5e.settings.restVariant] ?? 0;
   }
 
   /* -------------------------------------------- */
@@ -243,7 +243,7 @@ export default class BaseRestDialog extends Dialog5e {
       data.targets = filteredKeys(data.targets ?? {});
       this.actor.setFlag("dnd5e", "restSettings", data);
     }
-    if ( foundry.utils.getType(data.duration) === "Object" ) {
+    if ( foundry.utils.isPlainObject(data.duration) ) {
       data.duration = convertTime(data.duration.value, data.duration.unit, { strict: false, to: "minute" }).value;
     }
     foundry.utils.mergeObject(this.config, data);
@@ -263,8 +263,8 @@ export default class BaseRestDialog extends Dialog5e {
     const sunrise = Math.round(game.time.calendar.sunrise());
     const now = game.time.components.hour;
     const hoursUntilSunrise = sunrise - now + (now > sunrise ? game.time.calendar.days.hoursPerDay : 0);
-    this.element.querySelector('[name="duration.value"]').value = hoursUntilSunrise;
-    this.element.querySelector('[name="duration.unit"]').value = "hour";
+    this.form.elements["duration.value"].value = hoursUntilSunrise;
+    this.form.elements["duration.unit"].value = "hour";
   }
 
   /* -------------------------------------------- */
