@@ -129,7 +129,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
 
     const spellLevel = config.restriction.level;
     const maxSlot = this._maxSpellSlotLevel();
-    const minSpellLevel = spellLevel === "availableNoCantrips" ? 1 : 0;
+    const minSlot = spellLevel === "availableNoCantrips" ? 1 : 0;
     const validateSpellLevel = (config.type === "spell") && ["available", "availableNoCantrips"].includes(spellLevel);
 
     const added = [];
@@ -154,7 +154,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
           this.advancement.actor, { added, removed, level: this.featureLevel }
         ) === true);
         const validSpell = !validateSpellLevel
-          || ((item.system.level <= maxSlot) && (item.system.level >= minSpellLevel));
+          || ((item.system.level >= minSlot) && (item.system.level <= maxSlot));
         if ( validFeature && validSpell ) {
           const data = {
             id, img, name, uuid,
@@ -347,8 +347,8 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     const spellLevel = this.advancement.configuration.restriction.level;
     if ( (this.advancement.configuration.type === "spell") && ["available", "availableNoCantrips"].includes(spellLevel) ) {
       const maxSlot = this._maxSpellSlotLevel();
-      const minLevel = spellLevel === "availableNoCantrips" ? 1 : 0;
-      if ( (item.system.level > maxSlot) || (item.system.level < minLevel) ) {
+      const minSlot = spellLevel === "availableNoCantrips" ? 1 : 0;
+      if ( (item.system.level < minSlot) || (item.system.level > maxSlot) ) {
         ui.notifications.error("DND5E.ADVANCEMENT.ItemChoice.Warning.SpellLevelAvailable", {
           format: { level: CONFIG.DND5E.spellLevels[maxSlot] }
         });
