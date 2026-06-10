@@ -60,6 +60,7 @@ export function chatMessage(message) {
     case "check":
     case "skill":
     case "tool": handleCheckCommand(config); break;
+    case "concentration": config._isConcentration = true;
     case "save": handleSaveCommand(config); break;
   }
   return false;
@@ -310,7 +311,7 @@ async function rollAttack(config, event) {
     attackMode, event,
     hookNames: ["attack", "d20Test"],
     rolls: [{
-      parts: [formula.replace(/^\s*\+\s*/, "")],
+      parts: formula ? [formula.replace(/^\s*\+\s*/, "")] : [],
       options: {
         target: targets.length === 1 ? targets[0].ac : undefined
       }
@@ -667,7 +668,13 @@ function handleCheckCommand(config) {
 function createCheckRequestButtons(dataset) {
   const skills = foundry.utils.getType(dataset.skill) === "string" ? dataset.skill.split("|") : dataset.skill ?? [];
   const tools = foundry.utils.getType(dataset.tool) === "string" ? dataset.tool.split("|") : dataset.tool ?? [];
-  if ( (skills.length + tools.length) <= 1 ) return [createRequestButton(dataset)];
+  if ( (skills.length + tools.length) <= 1 ) {
+    if ( !dataset.ability ) {
+      if ( skills.length === 1 ) dataset.ability = CONFIG.DND5E.skills[skills[0]]?.ability;
+      else if ( tools.length === 1 ) dataset.ability = CONFIG.DND5E.tools[tools[0]]?.ability;
+    }
+    return [createRequestButton(dataset)];
+  }
   const baseDataset = { ...dataset };
   delete baseDataset.skill;
   delete baseDataset.tool;
@@ -825,7 +832,7 @@ export async function enrichSave(config, label, options) {
  */
 async function handleSaveCommand(config) {
   config = parseSaveConfig(config);
-  config.type = "save";
+  config.type = config._isConcentration ? "concentration" : "save";
   if ( config.request ) return handlePostRequest(config);
   config.ability = config.ability[0];
   rollCheckSave(config);
