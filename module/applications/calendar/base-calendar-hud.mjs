@@ -11,6 +11,7 @@ export default class BaseCalendarHUD extends Application5e {
       reverse: BaseCalendarHUD.#advanceTime
     },
     id: "calendar-hud",
+    tag: "menu",
     window: {
       frame: false,
       positioned: false
