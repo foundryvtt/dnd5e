@@ -225,8 +225,9 @@ export default function PseudoDocumentMixin(Base) {
 
     /**
      * Present a Dialog form to confirm deletion of this PseudoDocument.
-     * @param {object} [options]           Positioning and sizing options for the resulting dialog.
-     * @returns {Promise<PseudoDocument>}  A Promise which resolves to the deleted PseudoDocument.
+     * @param {object} [options]               Positioning and sizing options for the resulting dialog.
+     * @param {DocumentSheet} [options.sheet]  Document sheet to display as detached child.
+     * @returns {Promise<PseudoDocument>}      A Promise which resolves to the deleted PseudoDocument.
      */
     async deleteDialog({ sheet, ...options }={}) {
       const type = _loc(this.metadata.label);
@@ -234,8 +235,7 @@ export default function PseudoDocumentMixin(Base) {
         window: { title: `${_loc("DOCUMENT.Delete", { type })}: ${this.name || this.title}` },
         content: `
           <p>
-            <strong>${_loc("COMMON.AreYouSure")}</strong> ${
-              _loc("SIDEBAR.DeleteWarning", { type })}
+            <strong>${_loc("COMMON.AreYouSure")}</strong> ${_loc("SIDEBAR.DeleteWarning", { type })}
           </p>
         `,
         yes: { callback: this.delete.bind(this) }

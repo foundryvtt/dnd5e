@@ -324,7 +324,7 @@ export default function ApplicationV2Mixin(Base, { handlebars=true }={}) {
      * @param {Event} event         Triggering click event.
      * @param {HTMLElement} target  Button that was clicked.
      */
-    static async _onEditImage(_event, target) {
+    static async _onEditImage(event, target) {
       const attr = target.dataset.edit;
       const current = foundry.utils.getProperty(this.document._source, attr);
       const defaultArtwork = this.document.constructor.getDefaultArtwork?.(this.document._source) ?? {};

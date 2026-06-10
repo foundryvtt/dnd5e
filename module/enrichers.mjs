@@ -1,10 +1,9 @@
-import { formatNumber, getSceneTargets, getTargetDescriptors, simplifyBonus } from "./utils.mjs";
 import Award from "./applications/award.mjs";
 import AttackRollConfigurationDialog from "./applications/dice/attack-configuration-dialog.mjs";
 import simplifyRollFormula from "./dice/simplify-roll-formula.mjs";
 import * as Trait from "./documents/actor/trait.mjs";
 import { rollItem } from "./documents/macro.mjs";
-import { log } from "./utils.mjs";
+import { formatNumber, getSceneTargets, getTargetDescriptors, log, simplifyBonus } from "./utils.mjs";
 
 const slugify = value => value?.slugify().replaceAll("-", "").replaceAll("(", "").replaceAll(")", "");
 const logWarning = (msg, options) =>
