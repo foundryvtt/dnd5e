@@ -160,7 +160,7 @@ export function getRulesVersion(config={}, options={}) {
  */
 export async function enrichAttack(config, label, options) {
   if ( config.activity && config.formula ) {
-    console.warn(`Activity ID and formula found while enriching ${config._input}, only one is supported.`);
+    console.warn(`Activity ID and formula found while enriching ${config._input}, only one is supported.`, options.relativeTo?.uuid ?? "");
     return null;
   }
 
@@ -181,7 +181,7 @@ export async function enrichAttack(config, label, options) {
 
   if ( activity ) {
     if ( activity.type !== "attack" ) {
-      console.warn(`Attack enricher linked to non-attack activity when enriching ${config._input}`);
+      console.warn(`Attack enricher linked to non-attack activity when enriching ${config._input}`, options.relativeTo?.uuid ?? "");
       return null;
     }
 
@@ -195,7 +195,7 @@ export async function enrichAttack(config, label, options) {
   }
 
   if ( !config.activityUuid && !config.formula ) {
-    console.warn(`No formula or linked activity found while enriching ${config._input}.`);
+    console.warn(`No formula or linked activity found while enriching ${config._input}.`, options.relativeTo?.uuid ?? "");
     return null;
   }
 
@@ -301,7 +301,7 @@ export async function enrichAward(config, label, options) {
   try {
     parsed = Award.parseAwardCommand(command);
   } catch(err) {
-    console.warn(err.message);
+    console.warn(err.message, options.relativeTo?.uuid ?? "");
     return null;
   }
 
@@ -468,7 +468,7 @@ export async function enrichCheck(config, label, options) {
 
   if ( activity ) {
     if ( activity.type !== "check" ) {
-      console.warn(`Check enricher linked to non-check activity when enriching ${config._input}.`);
+      console.warn(`Check enricher linked to non-check activity when enriching ${config._input}.`, options.relativeTo?.uuid ?? "");
       return null;
     }
 
@@ -487,7 +487,7 @@ export async function enrichCheck(config, label, options) {
   // TODO: Support "spellcasting" ability
   let abilityConfig = CONFIG.DND5E.enrichmentLookup.abilities[slugify(config.ability)];
   if ( config.ability && !abilityConfig ) {
-    console.warn(`Ability "${config.ability}" not found while enriching ${config._input}.`);
+    console.warn(`Ability "${config.ability}" not found while enriching ${config._input}.`, options.relativeTo?.uuid ?? "");
     invalid = true;
   } else if ( abilityConfig?.key ) config.ability = abilityConfig.key;
 
@@ -499,7 +499,7 @@ export async function enrichCheck(config, label, options) {
       if ( !groups.has(ability) ) groups.set(ability, []);
       groups.get(ability).push({ key: skill, type: "skill", label: skillConfig.label });
     } else {
-      console.warn(`Skill "${skill}" not found while enriching ${config._input}.`);
+      console.warn(`Skill "${skill}" not found while enriching ${config._input}.`, options.relativeTo?.uuid ?? "");
       invalid = true;
     }
   }
@@ -518,27 +518,27 @@ export async function enrichCheck(config, label, options) {
         if ( !groups.has(ability) ) groups.set(ability, []);
         groups.get(ability).push({ key: tool, type: "tool", label: toolLabel });
       } else {
-        console.warn(`Tool "${tool}" found without specified or default ability while enriching ${config._input}.`);
+        console.warn(`Tool "${tool}" found without specified or default ability while enriching ${config._input}.`, options.relativeTo?.uuid ?? "");
         invalid = true;
       }
     } else {
-      console.warn(`Tool "${tool}" not found while enriching ${config._input}.`);
+      console.warn(`Tool "${tool}" not found while enriching ${config._input}.`, options.relativeTo?.uuid ?? "");
       invalid = true;
     }
   }
 
   if ( !abilityConfig && !groups.size ) {
-    console.warn(`No ability, skill, tool, or linked activity provided while enriching ${config._input}.`);
+    console.warn(`No ability, skill, tool, or linked activity provided while enriching ${config._input}.`, options.relativeTo?.uuid ?? "");
     invalid = true;
   }
 
   const complex = (config.skill.length + config.tool.length) > 1;
   if ( config.passive && complex ) {
-    console.warn(`Multiple skills or tools and passive flag found while enriching ${config._input}, which aren't supported together.`);
+    console.warn(`Multiple skills or tools and passive flag found while enriching ${config._input}, which aren't supported together.`, options.relativeTo?.uuid ?? "");
     invalid = true;
   }
   if ( label && complex ) {
-    console.warn(`Multiple skills or tools and a custom label found while enriching ${config._input}, which aren't supported together.`);
+    console.warn(`Multiple skills or tools and a custom label found while enriching ${config._input}, which aren't supported together.`, options.relativeTo?.uuid ?? "");
     invalid = true;
   }
 
@@ -698,7 +698,7 @@ export async function enrichSave(config, label, options) {
 
   if ( activity ) {
     if ( activity.type !== "save" ) {
-      console.warn(`Save enricher linked to non-save activity when enriching ${config._input}`);
+      console.warn(`Save enricher linked to non-save activity when enriching ${config._input}`, options.relativeTo?.uuid ?? "");
       return null;
     }
 
@@ -709,7 +709,7 @@ export async function enrichSave(config, label, options) {
   }
 
   if ( !config.ability.length && !config._isConcentration ) {
-    console.warn(`No ability or linked activity found while enriching ${config._input}.`);
+    console.warn(`No ability or linked activity found while enriching ${config._input}.`, options.relativeTo?.uuid ?? "");
     return null;
   }
 
@@ -718,7 +718,7 @@ export async function enrichSave(config, label, options) {
   }
 
   if ( config.ability.length > 1 && label ) {
-    console.warn(`Multiple abilities and custom label found while enriching ${config._input}, which aren't supported together.`);
+    console.warn(`Multiple abilities and custom label found while enriching ${config._input}, which aren't supported together.`, options.relativeTo?.uuid ?? "");
     return null;
   }
 
@@ -918,7 +918,7 @@ export async function enrichDamage(configs, label, options) {
   if ( config.format === "extended" ) config.average ??= true;
 
   if ( config.activity && config.formulas.length ) {
-    console.warn(`Activity ID and formulas found while enriching ${config._input}, only one is supported.`);
+    console.warn(`Activity ID and formulas found while enriching ${config._input}, only one is supported.`, options.relativeTo?.uuid ?? "");
     return null;
   }
 
@@ -947,7 +947,7 @@ export async function enrichDamage(configs, label, options) {
   }
 
   if ( !config.activityUuid && !config.formulas.length ) {
-    console.warn(`No formula or linked activity found while enriching ${config._input}.`);
+    console.warn(`No formula or linked activity found while enriching ${config._input}.`, options.relativeTo?.uuid ?? "");
     return null;
   }
 
@@ -1080,7 +1080,7 @@ export function enrichLanguage(config, label, options) {
   delete config.values;
 
   if ( !(config.language in CONFIG.DND5E.enrichmentLookup.languages) ) {
-    console.warn(`No language found while enriching ${config._input}.`);
+    console.warn(`No language found while enriching ${config._input}.`, options.relativeTo?.uuid ?? "");
     return null;
   }
 
@@ -1125,12 +1125,12 @@ export function enrichLookup(config, fallback, options) {
 
   let activity = options.relativeTo?.system?.activities?.get(config.activity);
   if ( config.activity && !activity ) {
-    console.warn(`Activity not found when enriching ${config._input}.`);
+    console.warn(`Activity not found when enriching ${config._input}.`, options.relativeTo?.uuid ?? "");
     return null;
   }
 
   if ( !keyPath ) {
-    console.warn(`Lookup path must be defined to enrich ${config._input}.`);
+    console.warn(`Lookup path must be defined to enrich ${config._input}.`, options.relativeTo?.uuid ?? "");
     return null;
   }
 
@@ -1199,7 +1199,7 @@ export async function enrichReference(config, label, options) {
     }
   }
   if ( !source ) {
-    console.warn(`No valid rule found while enriching ${config._input}.`);
+    console.warn(`No valid rule found while enriching ${config._input}.`, options.relativeTo?.uuid ?? "");
     return null;
   }
   const uuid = foundry.utils.getType(source) === "Object" ? source.reference : source;
@@ -1295,13 +1295,13 @@ export async function enrichItem(config, label, options) {
       : parsed.embedded.includes("Actor") ? parsed.embedded[parsed.embedded.findIndex(e => e === "Actor") + 1] : null;
     let doc = await fromUuid(parsed.uuid);
     if ( !doc ) {
-      console.warn(`Item not found while enriching ${config._input}.`);
+      console.warn(`Item not found while enriching ${config._input}.`, options.relativeTo?.uuid ?? "");
       return null;
     }
     if ( (doc instanceof Item) && config.activity ) {
       doc = doc.system.activities?.get(config.activity) ?? doc.system.activities?.getName(config.activity);
       if ( !doc ) {
-        console.warn(`Activity not found while enriching ${config._input}.`);
+        console.warn(`Activity not found while enriching ${config._input}.`, options.relativeTo?.uuid ?? "");
         return null;
       }
     }
@@ -1332,7 +1332,7 @@ export async function enrichItem(config, label, options) {
       foundActivity = foundItem.system.activities?.get(config.activity)
         ?? foundItem.system.activities?.getName(config.activity);
       if ( !foundActivity ) {
-        console.warn(`Activity ${config.activity} not found on ${foundItem.name} while enriching ${config._input}.`);
+        console.warn(`Activity ${config.activity} not found on ${foundItem.name} while enriching ${config._input}.`, options.relativeTo?.uuid ?? "");
         return null;
       }
       if ( !label ) label = _loc("EDITOR.DND5E.Inline.ItemActivity", {
