@@ -45,7 +45,7 @@ export default class AttackSheet extends ActivitySheet {
     const availableAbilities = this.activity.availableAbilities;
     context.abilityOptions = [
       {
-        value: "", label: _loc("DND5E.DefaultSpecific", {
+        value: "default", label: _loc("DND5E.DefaultSpecific", {
           default: this.activity.attack.type.classification === "spell"
             ? _loc("DND5E.Spellcasting").toLowerCase()
             : availableAbilities.size
@@ -55,7 +55,6 @@ export default class AttackSheet extends ActivitySheet {
               : _loc("DND5E.None").toLowerCase()
         })
       },
-      { rule: true },
       { value: "none", label: _loc("DND5E.None") },
       { value: "spellcasting", label: _loc("DND5E.Spellcasting") },
       ...Object.entries(CONFIG.DND5E.abilities).map(([value, config]) => ({
@@ -66,6 +65,16 @@ export default class AttackSheet extends ActivitySheet {
     context.hasBaseDamage = this.item.system.offersBaseDamage;
 
     return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _prepareSubmitData(event, formData) {
+    const submitData = super._prepareSubmitData(event, formData);
+    const ability = submitData.attack?.ability;
+    if ( ability ) submitData.attack.ability = Array.from(new Set([ability].flat().filter(a => a)));
+    return submitData;
   }
 
   /* -------------------------------------------- */

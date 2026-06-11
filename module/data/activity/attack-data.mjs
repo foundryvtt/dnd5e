@@ -5,7 +5,7 @@ import FormulaField from "../fields/formula-field.mjs";
 import DamageField from "../shared/damage-field.mjs";
 import BaseActivityData from "./base-activity.mjs";
 
-const { ArrayField, BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
+const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * @import { AttackDamageRollProcessConfiguration } from "../../dice/_types.mjs";
@@ -23,7 +23,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
     return {
       ...super.defineSchema(),
       attack: new SchemaField({
-        ability: new StringField(),
+        ability: new SetField(new StringField()),
         bonus: new FormulaField(),
         critical: new SchemaField({
           threshold: new NumberField({ integer: true, positive: true })
@@ -50,17 +50,37 @@ export default class BaseAttackActivityData extends BaseActivityData {
 
   /** @override */
   get ability() {
-    if ( this.attack.ability === "none" ) return null;
-    if ( this.attack.ability === "spellcasting" ) return this.spellcastingAbility;
-    if ( this.attack.ability in CONFIG.DND5E.abilities ) return this.attack.ability;
+    const configuredAbilities = this.abilities;
+    if ( (configuredAbilities.size === 1) && configuredAbilities.has("none") ) return null;
+    if ( configuredAbilities.size === 1 ) return configuredAbilities.first();
 
-    const availableAbilities = this.availableAbilities;
+    const availableAbilities = configuredAbilities.size ? configuredAbilities : new Set(this.availableAbilities);
+    availableAbilities.delete("none");
     if ( !availableAbilities?.size ) return null;
     if ( availableAbilities?.size === 1 ) return availableAbilities.first();
     const abilities = this.actor?.system.abilities ?? {};
     return availableAbilities.reduce((largest, ability) =>
       (abilities[ability]?.mod ?? -Infinity) > (abilities[largest]?.mod ?? -Infinity) ? ability : largest
     , availableAbilities.first());
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Configured abilities that can be used with this attack.
+   * @type {Set<string>}
+   */
+  get abilities() {
+    const values = foundry.utils.getType(this.attack.ability) === "string"
+      ? [this.attack.ability]
+      : this.attack.ability;
+    const abilities = new Set(values);
+    abilities.delete("");
+    if ( abilities.delete("default") ) {
+      for ( const ability of this.availableAbilities ) abilities.add(ability);
+    }
+    if ( abilities.delete("spellcasting") && this.spellcastingAbility ) abilities.add(this.spellcastingAbility);
+    return abilities;
   }
 
   /* -------------------------------------------- */
@@ -149,6 +169,18 @@ export default class BaseAttackActivityData extends BaseActivityData {
   /* -------------------------------------------- */
 
   /** @override */
+  static migrateData(source) {
+    super.migrateData(source);
+    if ( foundry.utils.getType(source.attack?.ability) === "string" ) {
+      if ( source.attack.ability ) source.attack.ability = [source.attack.ability];
+      else source.attack.ability = [];
+    }
+    return source;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
   static transformTypeData(source, activityData, options) {
     // For weapons and ammunition, separate the first part from the rest to be used as the base damage and keep the rest
     let damageParts = source.system.damage?.parts ?? [];
@@ -162,7 +194,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
 
     return foundry.utils.mergeObject(activityData, {
       attack: {
-        ability: source.system.ability ?? "",
+        ability: source.system.ability ? [source.system.ability] : [],
         bonus: source.system.attack?.bonus ?? "",
         critical: {
           threshold: source.system.critical?.threshold
@@ -269,7 +301,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
     const weapon = this.item.system;
     const ammo = this.actor?.items.get(ammunition)?.system;
     const { parts, data } = CONFIG.Dice.BasicRoll.constructParts({
-      mod: this.attack.ability !== "none" ? rollData.mod : null,
+      mod: ability !== "none" ? rollData.mod : null,
       prof: weapon.prof?.term,
       bonus: this.attack.bonus,
       weaponMagic: weapon.magicAvailable ? weapon.magicalBonus : null,

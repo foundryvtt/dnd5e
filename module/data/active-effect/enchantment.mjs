@@ -87,9 +87,10 @@ export default class EnchantmentData extends ActiveEffectDataModel {
     switch ( change.key ) {
       case "system.ability":
         for ( const activity of item.system.activities?.getByTypes("attack") ?? [] ) {
-          changes[`system.activities.${activity.id}.attack.ability`] = applyField(
-            activity, { ...change, key: "attack.ability" }
-          );
+          const ability = applyField(activity, { ...change, key: "attack.ability" });
+          changes[`system.activities.${activity.id}.attack.ability`] = foundry.utils.getType(ability) === "string"
+            ? ability ? [ability] : []
+            : ability;
         }
         return false;
       case "system.attack.bonus":
