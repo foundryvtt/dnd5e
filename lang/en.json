@@ -5854,7 +5854,9 @@
     },
     "SenseVision": {
       "Name": "Sync Senses to Token Vision",
-      "Hint": "Automatically configure token vision range, vision mode, and detection modes based on the actor's senses."
+      "Hint": "Automatically configure token vision range, vision mode, and detection modes based on the actor's senses.",
+      "Notice": "Vision and detection are synced from this actor's {senses}.",
+      "Senses": "senses"
     }
   },
   "BLOODIED": {

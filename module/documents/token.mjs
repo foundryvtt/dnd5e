@@ -332,7 +332,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
 
     // Re-derive vision whenever sense-granting data changes, covering direct edits and item/effect-granted senses.
     const overrides = TokenDocument5e.computeSenseOverrides(senses);
-    if ( foundry.utils.objectsEqual(overrides, this.#senseOverrides) ) return;
+    if ( foundry.utils.equals(overrides, this.#senseOverrides) ) return;
     this.#senseOverrides = overrides;
     if ( !this.parent?.isView ) return;
     this.reset();
