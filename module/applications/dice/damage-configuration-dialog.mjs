@@ -38,7 +38,9 @@ export default class DamageRollConfigurationDialog extends RollConfigurationDial
   /** @override */
   async _prepareButtonsContext(context, options) {
     const allowCritical = this.config.critical?.allow !== false;
-    const defaultCritical = allowCritical && (this.options.defaultButton === "critical");
+    let defaultButton = this.options.defaultButton;
+    if ( !defaultButton && this.rolls.some(roll => roll.options?.isCritical) ) defaultButton = "critical";
+    const defaultCritical = allowCritical && (defaultButton === "critical");
     context.buttons = {
       critical: {
         default: defaultCritical,
