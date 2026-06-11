@@ -174,6 +174,7 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
 
     const flags = { enchantmentProfile: profileId };
     if ( concentration ) flags.dependentOn = concentration.uuid;
+    if ( this.effects.find(e => e._id === profile)?.static ) flags.static = true;
     const enchantmentData = effect.clone({ origin: this.uuid, "flags.dnd5e": flags }).toObject();
 
     /**

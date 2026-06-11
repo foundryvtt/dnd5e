@@ -2704,6 +2704,10 @@
           "label": "Additional Items",
           "hint": "These additional items will be added to the creature when one of its items is enchanted, and will be removed if the enchantment is ever removed."
         }
+      },
+      "static": {
+        "label": "Static",
+        "hint": "Prevent this enchantment from being removed via the item context menu."
       }
     },
     "enchant": {

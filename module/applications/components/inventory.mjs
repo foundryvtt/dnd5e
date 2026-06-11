@@ -391,7 +391,8 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
       label: "DND5E.ENCHANTMENT.Action.Remove",
       icon: '<i class="fa-solid fa-rotate-left fa-fw"></i>',
       group: "destructive",
-      visible: () => item.isOwner && !compendiumLocked && item.effects.some(e => e.isAppliedEnchantment),
+      visible: () => item.isOwner && !compendiumLocked
+        && item.effects.some(e => e.isAppliedEnchantment && !e.getFlag("dnd5e", "static")),
       onClick: (event, target) => this._onAction(target, "removeEnchantment", { event })
     }, {
       label: `DND5E.ContextMenuAction${item.system.attuned ? "Unattune" : "Attune"}`,
@@ -653,7 +654,9 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
    * @protected
    */
   _onRemoveEnchantment(item) {
-    const ids = item.effects.filter(e => e.isAppliedEnchantment).map(e => e.id);
+    const ids = item.effects
+      .filter(e => e.isAppliedEnchantment && !e.getFlag("dnd5e", "static"))
+      .map(e => e.id);
     return item.deleteEmbeddedDocuments("ActiveEffect", ids);
   }
 
