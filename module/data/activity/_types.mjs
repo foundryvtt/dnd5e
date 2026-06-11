@@ -79,7 +79,7 @@
 /**
  * @typedef {ActivityData} CheckActivityData
  * @property {object} check
- * @property {string} check.ability          Ability used with the check.
+ * @property {Set<string>} check.ability     Abilities used with the check.
  * @property {Set<string>} check.associated  Skills or tools that can contribute to the check.
  * @property {string} check.bonus            Bonus added to all checks made through this activity.
  * @property {object} check.dc

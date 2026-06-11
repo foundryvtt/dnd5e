@@ -93,6 +93,7 @@
 /**
  * @typedef {D20RollProcessConfiguration} SkillToolRollProcessConfiguration
  * @property {string} [ability]     The ability to be rolled with the skill.
+ * @property {string[]} [abilities] Allowed abilities that can be selected for this roll.
  * @property {string} [bonus]       Additional bonus term added to the check.
  * @property {Item5e} [item]        Tool item used for rolling.
  * @property {string} [skill]       The skill to roll.
@@ -206,6 +207,7 @@
 
 /**
  * @typedef {BasicRollConfigurationDialogOptions} SkillToolRollConfigurationDialogOptions
+ * @property {string[]} [abilities]  Allowed abilities that can be selected.
  * @property {boolean} chooseAbility  Should the ability be selectable?
  */
 

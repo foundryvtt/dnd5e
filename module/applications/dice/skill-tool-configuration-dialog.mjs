@@ -21,12 +21,15 @@ export default class SkillToolRollConfigurationDialog extends D20RollConfigurati
   /** @inheritDoc */
   async _prepareConfigurationContext(context, options) {
     context = await super._prepareConfigurationContext(context, options);
+    const abilities = new Set(this.options.abilities?.filter(ability => ability in CONFIG.DND5E.abilities));
     if ( this.options.chooseAbility ) context.fields.unshift({
       field: new foundry.data.fields.StringField({
         required: true, blank: false, label: _loc("DND5E.Abilities")
       }),
       name: "ability",
-      options: Object.entries(CONFIG.DND5E.abilities).map(([value, { label }]) => ({ value, label })),
+      options: Object.entries(CONFIG.DND5E.abilities)
+        .filter(([value]) => !abilities.size || abilities.has(value))
+        .map(([value, { label }]) => ({ value, label })),
       value: this.config.ability
     });
     return context;

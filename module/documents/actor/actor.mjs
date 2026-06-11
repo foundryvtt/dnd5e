@@ -1324,6 +1324,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       applicationClass: SkillToolRollConfigurationDialog,
       options: {
         buildConfig,
+        abilities: config.abilities,
         chooseAbility: true
       }
     }, dialog);
