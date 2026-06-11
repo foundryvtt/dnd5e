@@ -474,7 +474,7 @@ export async function enrichCheck(config, label, options) {
       return null;
     }
 
-    if ( activity.check.ability.size ) config.ability = activity.ability;
+    if ( activity.abilities.size ) config.ability = activity.ability;
     config.activityUuid = activity.uuid;
     config.dc = activity.check.dc.value;
     config.skill = [];
