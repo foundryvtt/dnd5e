@@ -11,7 +11,7 @@ export class TokenConfig5e extends foundry.applications.sheets.TokenConfig {
     await super._onRender(context, options);
     if ( !this.rendered ) return;
     this._prepareResourceLabels(this.element);
-    this._applySenseSyncUX(this.element);
+    this._applySenseSyncNotice(this.element);
   }
 
   /* -------------------------------------------- */
@@ -86,7 +86,7 @@ export class TokenConfig5e extends foundry.applications.sheets.TokenConfig {
    * @param {HTMLElement} html  The rendered markup.
    * @protected
    */
-  _applySenseSyncUX(html) {
+  _applySenseSyncNotice(html) {
     if ( !game.settings.get("dnd5e", "senseVisionSync") ) return;
     const actor = this.actor ?? this.object?.actor;
     const senses = actor?.system?.attributes?.senses;
@@ -134,7 +134,7 @@ export class PrototypeTokenConfig5e extends foundry.applications.sheets.Prototyp
     await super._onRender(context, options);
     if ( !this.rendered ) return;
     TokenConfig5e.prototype._prepareResourceLabels.call(this, this.element);
-    TokenConfig5e.prototype._applySenseSyncUX.call(this, this.element);
+    TokenConfig5e.prototype._applySenseSyncNotice.call(this, this.element);
   }
 
   /* -------------------------------------------- */

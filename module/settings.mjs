@@ -102,7 +102,10 @@ export function registerSystemSettings() {
     scope: "world",
     config: true,
     default: true,
-    type: Boolean
+    type: Boolean,
+    onChange: () => {
+      if ( canvas?.ready ) canvas.draw();
+    }
   });
 
   // Allow rotating square templates

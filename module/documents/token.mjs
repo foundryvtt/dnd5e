@@ -80,9 +80,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
       const range = senses.ranges?.[key];
       if ( !range ) continue;
 
-      if ( config.detectionMode ) {
-        detectionModes[config.detectionMode] = Math.max(detectionModes[config.detectionMode] ?? 0, range);
-      }
+      if ( config.detectionMode ) detectionModes[config.detectionMode] = range;
 
       if ( config.grantsSight && (range > maxSightRange) ) {
         maxSightRange = range;
@@ -110,18 +108,12 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
 
     for ( const [id, range] of Object.entries(detectionModes) ) {
       const existing = target.detectionModes[id];
-      if ( existing ) {
-        existing.range = Math.max(existing.range ?? 0, range);
-        existing.enabled = true;
-      } else {
-        target.detectionModes[id] = { enabled: true, range };
-      }
+      if ( existing ) Object.assign(existing, { enabled: true, range });
+      else target.detectionModes[id] = { enabled: true, range };
     }
 
     if ( sight.enabled ) {
-      target.sight.enabled = true;
-      target.sight.range = sight.range;
-      target.sight.visionMode = sight.visionMode;
+      Object.assign(target.sight, { enabled: true, range: sight.range, visionMode: sight.visionMode });
     }
   }
 
