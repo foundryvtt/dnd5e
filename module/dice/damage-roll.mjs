@@ -90,6 +90,36 @@ export default class DamageRoll extends BasicRoll {
   }
 
   /* -------------------------------------------- */
+  /*  Evaluate Methods                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async evaluate(options={}) {
+    options = this._prepareEvaluationOptions(options);
+    return super.evaluate(options);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  evaluateSync(options={}) {
+    options = this._prepareEvaluationOptions(options);
+    return super.evaluateSync(options);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Merge roll-level evaluation options into the explicit evaluation options.
+   * @param {object} [options={}]  Evaluation options.
+   * @returns {object}
+   * @protected
+   */
+  _prepareEvaluationOptions(options={}) {
+    return foundry.utils.mergeObject(this.options, options, { inplace: false });
+  }
+
+  /* -------------------------------------------- */
   /*  Roll Configuration                          */
   /* -------------------------------------------- */
 
@@ -159,6 +189,7 @@ export default class DamageRoll extends BasicRoll {
    */
   configureDamage({ critical={} }={}) {
     critical = foundry.utils.mergeObject(critical, this.options.critical ?? {}, { inplace: false });
+    const allowCritical = critical.allow !== false;
 
     // Remove previous critical bonus damage
     this.terms = this.terms.filter(t => !t.options.criticalBonusDamage && !t.options.criticalFlatBonus);
@@ -174,7 +205,7 @@ export default class DamageRoll extends BasicRoll {
         }
         term.options.baseNumber = term.options.baseNumber ?? term.number; // Reset back
         term.number = term.options.baseNumber;
-        if ( this.isCritical ) {
+        if ( this.isCritical && allowCritical ) {
           let cm = critical.multiplier ?? 2;
 
           // Powerful critical - maximize damage and reduce the multiplier by 1
@@ -199,7 +230,7 @@ export default class DamageRoll extends BasicRoll {
         if ( critical.multiplyNumeric ) {
           term.options.baseNumber = term.options.baseNumber ?? term.number; // Reset back
           term.number = term.options.baseNumber;
-          if ( this.isCritical ) {
+          if ( this.isCritical && allowCritical ) {
             term.number *= (critical.multiplier ?? 2);
             term.options.critical = true;
           }
@@ -216,7 +247,7 @@ export default class DamageRoll extends BasicRoll {
     }
 
     // Add extra critical damage term
-    if ( this.isCritical && critical.bonusDamage ) {
+    if ( this.isCritical && allowCritical && critical.bonusDamage ) {
       let extraTerms = new Roll(critical.bonusDamage, this.data).terms;
       if ( !(extraTerms[0] instanceof OperatorTerm) ) extraTerms.unshift(new OperatorTerm({ operator: "+" }));
       extraTerms.forEach(t => t.options.criticalBonusDamage = true);

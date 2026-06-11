@@ -122,6 +122,8 @@
  *
  * @typedef {BasicRollOptions} DamageRollOptions
  * @property {boolean} [isCritical]                    Should critical damage be calculated for this roll?
+ * @property {boolean} [maximize]                      Maximize dice results when evaluating this roll?
+ * @property {boolean} [minimize]                      Minimize dice results when evaluating this roll?
  * @property {CriticalDamageConfiguration} [critical]  Critical configuration for this roll.
  * @property {string[]} [properties]                   Physical properties of the source (e.g. magical, silvered).
  * @property {string} [type]                           Type of damage represented.

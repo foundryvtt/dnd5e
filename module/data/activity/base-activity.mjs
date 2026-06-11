@@ -768,14 +768,16 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
 
     const lastType = this.item.getFlag("dnd5e", `last.${this.id}.damageType.${index}`);
 
+    const options = foundry.utils.mergeObject(foundry.utils.deepClone(damage.options ?? {}), {
+      type: (damage.types.has(lastType) ? lastType : null) ?? damage.types.first(),
+      types: Array.from(damage.types),
+      properties: Array.from(this.item.system.properties ?? [])
+        .filter(p => CONFIG.DND5E.itemProperties[p]?.isPhysical)
+    }, { inplace: false });
+
     return {
       data, parts,
-      options: {
-        type: (damage.types.has(lastType) ? lastType : null) ?? damage.types.first(),
-        types: Array.from(damage.types),
-        properties: Array.from(this.item.system.properties ?? [])
-          .filter(p => CONFIG.DND5E.itemProperties[p]?.isPhysical)
-      }
+      options
     };
   }
 

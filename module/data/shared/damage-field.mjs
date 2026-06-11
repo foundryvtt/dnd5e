@@ -1,7 +1,8 @@
 import Scaling from "../../documents/scaling.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 
-const { BooleanField, EmbeddedDataField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { BooleanField, EmbeddedDataField, NumberField, ObjectField, SchemaField, SetField, StringField } =
+  foundry.data.fields;
 
 /**
  * Field for storing damage data.
@@ -30,6 +31,7 @@ export class DamageData extends foundry.abstract.DataModel {
       denomination: new NumberField({ min: 0, integer: true }),
       bonus: new FormulaField(),
       types: new SetField(new StringField()),
+      options: new ObjectField(),
       custom: new SchemaField({
         enabled: new BooleanField(),
         formula: new FormulaField()
