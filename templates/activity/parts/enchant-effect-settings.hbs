@@ -1,5 +1,7 @@
 <div>
     {{> "systems/dnd5e/templates/activity/parts/activity-effect-level-limit.hbs" }}
+    {{ formField fields.static name=(concat prefix "static") value=data.static
+                 input=@root.inputs.createCheckboxInput rootId=@root.partId }}
     {{#with fields.riders.fields as |fields|}}
     {{ formField fields.activity name=(concat ../prefix "riders.activity") options=../activityOptions
                  rootId=@root.partId }}
