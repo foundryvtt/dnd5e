@@ -41,20 +41,15 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * Additional key paths to properties added during base data preparation that should be treated as formula fields.
    * @type {Set<string>}
    */
-  static FORMULA_FIELDS = new Set([
-    "system.attributes.ac.bonus",
-    "system.attributes.ac.min",
-    "system.attributes.encumbrance.bonuses.encumbered",
-    "system.attributes.encumbrance.bonuses.heavilyEncumbered",
-    "system.attributes.encumbrance.bonuses.maximum",
-    "system.attributes.encumbrance.bonuses.overall",
-    "system.attributes.encumbrance.multipliers.encumbered",
-    "system.attributes.encumbrance.multipliers.heavilyEncumbered",
-    "system.attributes.encumbrance.multipliers.maximum",
-    "system.attributes.encumbrance.multipliers.overall",
-    "system.damage.bonus",
-    "save.dc.bonus"
-  ]);
+  static FORMULA_FIELDS = new class extends Set {
+    add(value) {
+      foundry.utils.logCompatibilityWarning(
+        "`ActiveEffect5e#FOMRULA_FIELDS` has been deprecated in favor of non-persisted fields.",
+        { since: "DnD5e 6.0", until: "DnD5e 6.2" }
+      );
+      super.add(value);
+    }
+  }();
 
   /* -------------------------------------------- */
 
@@ -196,13 +191,32 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /** @inheritDoc */
   static applyChange(model, change, options={}) {
     change = change.effect._applyChangeShim(change);
+
+    // Handle special actor flags
     if ( change.key.startsWith("flags.dnd5e.") ) change = change.effect._prepareFlagChange(model, change);
+
+    // Properly handle formulas that don't exist as part of the data model
     if ( ActiveEffect5e.FORMULA_FIELDS.has(change.key) ) {
       const field = new FormulaField({ deterministic: change.key !== "system.damage.bonus" });
       return { [change.key]: this.applyChangeField(model, change, { field }) };
     }
+
+    // Handle activity-targeted changes
     if ( (change.key.startsWith("activities[") || change.key.startsWith("system.activities."))
       && (model instanceof Item) ) return change.effect.applyActivity(model, change);
+
+    // Handle hiding items
+    if ( (change.key === "items.hidden") && (model instanceof Actor) ) {
+      if ( change.type === "add" ) {
+        if ( model.items.has(change.value) ) model.hiddenItems.add(change.value);
+        else model.identifiedItems.get(change.value)?.forEach(i => model.hiddenItems.add(i.id));
+      } else if ( change.type === "subtract" ) {
+        if ( model.items.has(change.value) ) model.hiddenItems.delete(change.value);
+        else model.identifiedItems.get(change.value)?.forEach(i => model.hiddenItems.delete(i.id));
+      }
+      return;
+    }
+
     return super.applyChange(model, change, options);
   }
 
@@ -467,7 +481,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     const { enchantmentProfile, activityId } = options.dnd5e ?? {};
 
     if ( chatMessageOrigin ) {
-      const message = game.messages.get(options?.chatMessageOrigin);
+      const message = game.messages.get(chatMessageOrigin);
       item = message?.getAssociatedItem();
       const activity = message?.getAssociatedActivity();
       profile = activity?.effects.find(e => e._id === message?.getFlag("dnd5e", "use.enchantmentProfile"));

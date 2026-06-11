@@ -1,4 +1,3 @@
-import { formatIdentifier } from "../../utils.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import IdentifierField from "../fields/identifier-field.mjs";

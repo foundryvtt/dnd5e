@@ -185,6 +185,7 @@ export default class CreateDocumentDialog extends Dialog5e {
    * @param {DatabaseCreateOperation} [createOptions={}]          Document creation options.
    * @param {object} [dialogOptions={}]                           Options forwarded to dialog.
    * @param {object} [dialogOptions.ok={}]                        Options for the OK button.
+   * @param {DocumentSheet} [dialogOptions.sheet]                 Document sheet to display as detached child.
    * @returns {Promise<Document>}
    */
   static async prompt(documentType, data={}, { folders, types, ...createOptions }={}, { ok={}, sheet, ...config }={}) {

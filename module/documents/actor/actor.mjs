@@ -62,6 +62,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
+   * List of IDs of items that should be hidden on the sheet.
+   * @type {Set<string>}
+   */
+  hiddenItems = this.hiddenItems;
+
+  /* -------------------------------------------- */
+
+  /**
    * Mapping of item identifiers to the items.
    * @type {IdentifiedItemsMap<string, Set<Item5e>>}
    */
@@ -306,8 +314,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   prepareData() {
     if ( this.system.modelProvider !== dnd5e ) return super.prepareData();
     this._clearCachedValues();
-    this._preparationWarnings = [];
-    this.labels = {};
     super.prepareData();
     this.items.forEach(item => item.prepareFinalAttributes());
     this._prepareSpellcasting();
@@ -322,6 +328,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   _clearCachedValues() {
     this._lazy = {};
     this._preferredArtwork = null;
+    this._preparationWarnings = [];
+    this.labels = {};
+    this.hiddenItems = new Set();
     this.identifiedItems = new IdentifiedItemsMap();
     this.sourcedItems = new SourcedItemsMap();
   }
@@ -417,7 +426,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       return game.actors.importFromCompendium(game.packs.get(actor.pack), actor.id, {
         "flags.dnd5e.isAutoImported": true,
         folder: game.folders.get(folderId) ?? null
-      });
+      }, { keepId: false });
     } else {
       // A linked world actor was found. Create a copy to avoid affecting the original.
       return actor.clone({

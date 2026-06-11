@@ -120,7 +120,14 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       effect.updateDuration();
       const li = document.createElement("li");
       li.classList.add("effect");
-      li.dataset.id = effect.id;
+      Object.assign(li.dataset, {
+        id: effect.id,
+        tooltip: `
+          <section class="loading" data-uuid="${effect.uuid}"><i class="fas fa-spinner fa-spin-pulse"></i></section>
+        `,
+        tooltipClass: "dnd5e2 dnd5e-tooltip item-tooltip themed theme-light",
+        tooltipDirection: "LEFT"
+      });
       li.innerHTML = `
         <img class="gold-icon">
         <div class="name-stacked">

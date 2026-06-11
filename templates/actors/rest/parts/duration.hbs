@@ -1,0 +1,13 @@
+<div class="form-group split-group">
+    <label>{{ localize "DND5E.REST.Duration.Label" }}</label>
+    <div class="form-fields">
+        {{> "dnd5e.fieldlist" duration.fields }}
+        {{#if duration.showSunriseButton}}
+        <button type="button" class="dice-button" data-action="setDurationSunrise" data-tooltip
+                aria-label="{{ localize 'DND5E.REST.Duration.UntilSunrise' }}">
+            <i class="fa-solid fa-sun" inert></i>
+        </button>
+        {{/if}}
+    </div>
+    <p class="hint">{{ localize "DND5E.REST.Duration.Hint" }}</p>
+</div>

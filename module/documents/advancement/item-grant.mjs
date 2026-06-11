@@ -1,4 +1,3 @@
-import { filteredKeys } from "../../utils.mjs";
 import ItemGrantConfig from "../../applications/advancement/item-grant-config.mjs";
 import ItemGrantFlow from "../../applications/advancement/item-grant-flow-v2.mjs";
 import ItemGrantConfigurationData from "../../data/advancement/item-grant.mjs";

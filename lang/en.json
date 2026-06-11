@@ -58,12 +58,14 @@
 "TYPES.Item.weaponPl": "Weapons",
 
 "TYPES.RegionBehavior": {
+  "dnd5e.applyActiveEffect": "Apply Active Effect (5e)",
   "dnd5e.difficultTerrain": "Difficult Terrain",
   "dnd5e.rotateArea": "Rotate Area"
 },
 
 "TYPES.HINTS": {
   "RegionBehavior": {
+    "dnd5e.applyActiveEffect": "Apply Active Effects to Tokens while they are within the Region and meet certain criteria.",
     "dnd5e.difficultTerrain": "Mark a region as being difficult terrain and set its type and who it affects.",
     "dnd5e.rotateArea": "Rotate tokens, tiles, walls, and other objects around a central pivot point."
   }
@@ -518,7 +520,8 @@
       },
       "restriction": {
         "level": {
-          "Available": "Any Available Level",
+          "Available": "Any Available Level (Including Cantrips)",
+          "AvailableNoCantrips": "Any Available Level (Excluding Cantrips)",
           "hint": "Only allow choices from spells of this level.",
           "label": "Spell Level"
         },
@@ -3599,6 +3602,26 @@
 "DND5E.RecoveryFormula": "Recovery Formula",
 
 "DND5E.REGIONBEHAVIORS": {
+  "APPLYACTIVEEFFECT": {
+    "FIELDS": {
+      "dispositions": {
+        "hint": "If set, only apply effects to Tokens with these dispositions.",
+        "label": "Dispositions"
+      },
+      "effects": {
+        "hint": "The effects that are applied to Tokens within the Region.",
+        "label": "Effects"
+      },
+      "sizes": {
+        "hint": "If set, only apply effects to Tokens that are these sizes.",
+        "label": "Sizes"
+      },
+      "types": {
+        "hint": "If set, only apply effects to Tokens that are these creature types.",
+        "label": "Types"
+      }
+    }
+  },
   "DIFFICULTTERRAIN": {
     "FIELDS": {
       "ignoredDispositions": {
@@ -3718,6 +3741,11 @@
 
 "DND5E.REST": {
   "Configuration": "Rest Configuration",
+  "Duration": {
+    "Hint": "Amount of time to pass during the rest.",
+    "Label": "Duration",
+    "UntilSunrise": "Rest Until Sunrise"
+  },
   "HitDice": {
     "AutoSpend": {
       "Hint": "Automatically spend hit dice until they run out or health is full.",
@@ -4296,6 +4324,7 @@
 "DND5E.SubclassDuplicateError": "A subclass with the identifier {identifier} already exists on this actor.",
 "DND5E.SubclassMismatchWarn": "{name} subclass has no matching class with identifier '{class}'.",
 "DND5E.SubclassName": "Subclass Name",
+"DND5E.SubclassOf": "{class} Subclass",
 "DND5E.Subtype": "Subtype",
 "DND5E.Summary": "Summary",
 
@@ -5873,8 +5902,8 @@
   "BLOODIED": {
     "Name": "Bloodied Status",
     "Hint": "Configure whether the bloodied status is tracked automatically and its visibility.",
-    "All": "Display for Allies & Enemies",
-    "Player": "Only Display for Allies",
+    "All": "Display for Friendly, Neutral, & Hostile Tokens",
+    "Player": "Only Display for Friendly Tokens",
     "None": "Never Display"
   },
   "COLLAPSETRAYS": {
