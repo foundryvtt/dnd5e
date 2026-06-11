@@ -2983,6 +2983,7 @@ DND5E.senses = {
   }
 };
 preLocalize("senses", { key: "label", sort: true });
+patchConfig("senses", "label", { since: "DnD5e 6.0", until: "DnD5e 6.2" });
 
 /* -------------------------------------------- */
 /*  Attacks                                     */

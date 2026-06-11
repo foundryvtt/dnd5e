@@ -336,7 +336,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     this.#senseOverrides = overrides;
     if ( !this.parent?.isView ) return;
     this.reset();
-    canvas.perception.update({ initializeVision: true });
+    this.object?.initializeVisionSource();
   }
 
   /* -------------------------------------------- */
