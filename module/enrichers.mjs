@@ -647,11 +647,15 @@ export async function enrichCheck(config, label, options) {
 /**
  * Handle a check command in chat.
  * @param {object} config  Configuration data.
+ * @returns {void}
  */
 function handleCheckCommand(config) {
   config = parseCheckConfig(config);
   config.type = "check";
   if ( config.request ) return handlePostRequest(config);
+  if ( (config.tool.length === 1) && (config.skill.length > 0) && (dnd5e.settings.rulesVersion === "modern") ) {
+    config.usingTool = config.tool.pop();
+  }
   config.skill = config.skill[0];
   config.tool = config.tool[0];
   config.type = config.skill ? "skill" : config.tool ? "tool" : "check";
@@ -678,6 +682,7 @@ function createCheckRequestButtons(dataset) {
   const baseDataset = { ...dataset };
   delete baseDataset.skill;
   delete baseDataset.tool;
+  if ( (tools.length === 1) && (dnd5e.settings.rulesVersion === "modern") ) baseDataset.usingTool = tools.pop();
   return [
     ...skills.map(skill => createRequestButton({
       ability: CONFIG.DND5E.skills[skill].ability, ...baseDataset, format: "short", skill, type: "skill"
