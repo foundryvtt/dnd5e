@@ -144,6 +144,7 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
     const dialogConfig = foundry.utils.mergeObject({
       applicationClass: AttackRollConfigurationDialog,
       options: {
+        abilityOptions: rollConfig.abilityOptions,
         ammunitionOptions: rollConfig.ammunition !== false ? ammunitionOptions : [],
         attackModeOptions,
         buildConfig,
