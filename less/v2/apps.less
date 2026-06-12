@@ -2082,6 +2082,13 @@ dialog.dnd5e2.application {
   ul { box-shadow: 0 3px 6px var(--dnd5e-shadow-45); }
   li.divider { border-color: #ddd; }
 
+  li[data-action^="dnd5e-"] > span { text-transform: capitalize; }
+
+  ul:has(> li[data-action^="dnd5e-"]):not(:has(> li > ul)) {
+    max-height: 50vh;
+    overflow: hidden auto;
+  }
+
   &.theme-dark {
     --dropdown-background: var(--dnd5e-color-blue-gray-2);
     --dropdown-border: transparent;

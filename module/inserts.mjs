@@ -1,7 +1,75 @@
 /**
- * Register the system's special HTML blocks as ProseMirror inserts.
+ * Build inline enricher inserts for each entry in a config record, titled by the entry's label.
+ * @param {string} prefix                             Action id prefix for each generated child.
+ * @param {Record<string, { label: string }>} record  Config record keyed by entry id.
+ * @param {(key: string) => string} html              Builds the enricher markup for a given entry id.
+ * @returns {object[]}
  */
-export function registerProseMirrorInserts() {
+function buildEnricherInserts(prefix, record, html) {
+  return Object.entries(record).map(([key, { label }]) => ({
+    action: `${prefix}-${key}`,
+    title: label,
+    inline: true,
+    html: html(key)
+  }));
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Inserts whose children are abilities and should stay in stat order rather than be alphabetized.
+ * @type {Set<string>}
+ */
+const STAT_ORDERED = new Set(["dnd5e-enricher-check", "dnd5e-enricher-save", "dnd5e-reference-ability"]);
+
+/**
+ * Recursively order insert entries and their submenus alphabetically by localized title.
+ * @param {object[]} inserts  The insert entries to sort in place.
+ */
+function sortInserts(inserts) {
+  inserts.sort((a, b) => game.i18n.localize(a.title).localeCompare(game.i18n.localize(b.title)));
+  for ( const insert of inserts ) {
+    if ( insert.children && !STAT_ORDERED.has(insert.action) ) sortInserts(insert.children);
+  }
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Build reference enricher inserts grouped into a submenu per rule type, one leaf per referenceable entry.
+ * Entries without a resolvable reference are skipped and duplicate references (e.g. `str`/`strength`) are collapsed.
+ * Rule entries have no configured label, so their referenced document name is resolved for the title.
+ * @returns {Promise<object[]>}  One insert group per non-empty rule type.
+ */
+async function buildReferenceInserts() {
+  const groups = [];
+  for ( const [type, { label, references }] of Object.entries(CONFIG.DND5E.ruleTypes) ) {
+    const record = foundry.utils.getProperty(CONFIG.DND5E, references) ?? {};
+    const seen = new Set();
+    const children = [];
+    for ( const [key, source] of Object.entries(record) ) {
+      const uuid = foundry.utils.getType(source) === "Object" ? source.reference : source;
+      if ( !uuid || seen.has(uuid) ) continue;
+      seen.add(uuid);
+      children.push({
+        action: `dnd5e-reference-${type}-${key}`,
+        title: source?.label ?? source?.name ?? (await fromUuid(uuid))?.name ?? key,
+        inline: true,
+        html: `&amp;Reference[${type}=${key}]`
+      });
+    }
+    if ( children.length ) groups.push({ action: `dnd5e-reference-${type}`, title: label, children });
+  }
+  return groups;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Register the system's special HTML blocks and enrichers as ProseMirror inserts.
+ * @returns {Promise<void>}
+ */
+export async function registerProseMirrorInserts() {
   CONFIG.TextEditor.inserts.push({
     action: "dnd5e-blocks",
     title: "EDITOR.DND5E.Inserts.Group",
@@ -53,4 +121,77 @@ export function registerProseMirrorInserts() {
       }
     ]
   });
+
+  CONFIG.TextEditor.inserts.push({
+    action: "dnd5e-enrichers",
+    title: "EDITOR.DND5E.Inserts.EnrichersGroup",
+    children: [
+      {
+        action: "dnd5e-enricher-check",
+        title: "EDITOR.DND5E.Inserts.Check",
+        children: buildEnricherInserts("dnd5e-enricher-check", CONFIG.DND5E.abilities, key => `[[/check ability=${key}]]`)
+      },
+      {
+        action: "dnd5e-enricher-save",
+        title: "EDITOR.DND5E.Inserts.Save",
+        children: buildEnricherInserts("dnd5e-enricher-save", CONFIG.DND5E.abilities, key => `[[/save ability=${key}]]`)
+      },
+      {
+        action: "dnd5e-enricher-skill",
+        title: "EDITOR.DND5E.Inserts.Skill",
+        children: buildEnricherInserts("dnd5e-enricher-skill", CONFIG.DND5E.skills, key => `[[/check skill=${key}]]`)
+      },
+      {
+        action: "dnd5e-enricher-damage",
+        title: "EDITOR.DND5E.Inserts.Damage",
+        children: buildEnricherInserts("dnd5e-enricher-damage", {
+          ...CONFIG.DND5E.damageTypes,
+          ...Object.fromEntries(Object.entries(CONFIG.DND5E.healingTypes)
+            .map(([key, type]) => [key, { ...type, label: type.labelShort ?? type.label }]))
+        }, key => `[[/damage type=${key}]]`)
+      },
+      {
+        action: "dnd5e-enricher-attack",
+        title: "EDITOR.DND5E.Inserts.Attack",
+        inline: true,
+        html: "[[/attack +5]]"
+      },
+      {
+        action: "dnd5e-enricher-award",
+        title: "EDITOR.DND5E.Inserts.Award",
+        children: [
+          ...buildEnricherInserts("dnd5e-enricher-award", CONFIG.DND5E.currencies,
+            key => `[[/award 50${key}]]`),
+          {
+            action: "dnd5e-enricher-award-xp",
+            title: "DND5E.ExperiencePoints.Label",
+            inline: true,
+            html: "[[/award 50xp]]"
+          }
+        ]
+      },
+      {
+        action: "dnd5e-enricher-item",
+        title: "EDITOR.DND5E.Inserts.Item",
+        inline: true,
+        html: "[[/item Longsword]]"
+      },
+      {
+        action: "dnd5e-enricher-reference",
+        title: "EDITOR.DND5E.Inserts.Reference",
+        children: await buildReferenceInserts()
+      },
+      {
+        action: "dnd5e-enricher-lookup",
+        title: "EDITOR.DND5E.Inserts.Lookup",
+        inline: true,
+        html: "[[lookup @name]]"
+      }
+    ]
+  });
+
+  // Alphabetize every submenu by localized title.
+  CONFIG.TextEditor.inserts
+    .filter(insert => insert.action?.startsWith("dnd5e-"))
+    .forEach(insert => sortInserts(insert.children ?? []));
 }

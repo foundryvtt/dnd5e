@@ -568,6 +568,9 @@ Hooks.once("ready", function() {
   // Adjust sourced items on actors now that compendium UUID redirects have been initialized
   game.actors.forEach(a => a.sourcedItems._redirectKeys());
 
+  // ProseMirror inserts (after compendia are available so reference rule titles can resolve)
+  inserts.registerProseMirrorInserts();
+
   // Register items by type
   dnd5e.registry.backgrounds.initialize();
   dnd5e.registry.classes.initialize();
