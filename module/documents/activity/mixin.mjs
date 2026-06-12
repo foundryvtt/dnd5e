@@ -97,6 +97,7 @@ export default function ActivityMixin(Base) {
      */
     get canUse() {
       if ( this.isRider ) return false;
+      if ( !this.item.canUse ) return false;
       if ( this.dependentOrigin?.active === false ) return false;
       if ( this.visibility?.requireAttunement && !this.item.system.attuned ) return false;
       if ( this.visibility?.requireMagic && (this.item.system.magicAvailable === false) ) return false;
@@ -175,7 +176,7 @@ export default function ActivityMixin(Base) {
      * @returns {Promise<ActivityUsageResults|void>}  Details on the usage process if not canceled.
      */
     async use(usage={}, dialog={}, message={}) {
-      if ( !this.item.isEmbedded || this.item.pack ) return;
+      if ( !this.item.isEmbedded ) return;
       if ( !this.item.isOwner ) {
         ui.notifications.error("DND5E.DocumentUseWarn");
         return;

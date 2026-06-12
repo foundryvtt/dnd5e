@@ -2581,8 +2581,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     result.updateItems ??= [];
     result.rolls ??= [];
     for ( const item of this.items ) {
-      if ( (item.dependentOrigin?.active === false)
-        || (foundry.utils.getType(item.system.recoverUses) !== "function") ) continue;
+      if ( item.isHidden || (foundry.utils.getType(item.system.recoverUses) !== "function") ) continue;
       const rollData = item.getRollData();
       const { updates, rolls, destroy } = await item.system.recoverUses(recovery, rollData);
       if ( destroy ) {

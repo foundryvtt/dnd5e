@@ -166,6 +166,16 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* --------------------------------------------- */
 
   /**
+   * Should this item be able to be used?
+   * @type {boolean}
+   */
+  get canUse() {
+    return !this.inCompendium && !this.isHidden;
+  }
+
+  /* --------------------------------------------- */
+
+  /**
    * The item that contains this item, if it is in a container. Returns a promise if the item is located
    * in a compendium pack.
    * @type {Item5e|Promise<Item5e>|void}
@@ -283,6 +293,18 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   get isHealing() {
     return this.system.isHealing ?? false;
+  }
+
+  /* --------------------------------------------- */
+
+  /**
+   * Is this item hidden, preventing it from being used or recovering uses?
+   * @type {boolean}
+   */
+  get isHidden() {
+    if ( this.actor?.hiddenItems.has(this.id) ) return true;
+    if ( this.dependentOrigin?.active === false ) return true;
+    return false;
   }
 
   /* -------------------------------------------- */
@@ -481,7 +503,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @type {boolean}
    */
   get areEffectsSuppressed() {
-    if ( this.parent?.hiddenItems?.has(this.id) ) return true;
+    if ( this.isHidden ) return true;
     const requireEquipped = (this.type !== "consumable")
       || ["rod", "trinket", "wand"].includes(this.system.type.value);
     if ( requireEquipped && (this.system.equipped === false) ) return true;
@@ -720,8 +742,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    *                                                                   activities and was posted directly to chat.
    */
   async use(config={}, dialog={}, message={}) {
-    if ( this.pack ) return;
-
     let event = config.event;
     const activities = this.system.activities?.filter(a => a.canUse);
     if ( activities?.length ) {
