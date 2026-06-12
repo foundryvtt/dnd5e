@@ -4,7 +4,7 @@ import AbilityScoreImprovementFlow from "../../applications/advancement/ability-
 import {
   AbilityScoreImprovementConfigurationData,
   AbilityScoreImprovementValueData
-} from "../../data/advancement/ability-score-improvement.mjs";
+} from "../../data/advancement/ability-score-improvement-data.mjs";
 
 /**
  * @import { AbilityScoreImprovementAdvancementApplicationData } from "./_types.mjs";
