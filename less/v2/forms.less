@@ -463,7 +463,7 @@
     font-size: var(--font-size-11);
   }
 
-  formula-input {
+  :is(formula-input, file-picker) {
     overflow: hidden;
     &:focus-within { outline: none; }
     &:enabled {
@@ -485,6 +485,35 @@
       background: none;
       box-shadow: none;
       color: var(--formula-input-icon-color);
+    }
+  }
+
+  :is(document-tags, string-tags) {
+    > .input-group {
+      --input-box-shadow: none;
+      overflow: hidden;
+      transition: box-shadow 250ms ease, border-color 250ms ease;
+      &:focus-within { outline: none; }
+      > button {
+        background: none;
+        box-shadow: none;
+        color: var(--formula-input-icon-color);
+      }
+    }
+    &:enabled > .input-group {
+      &:focus-within, &:hover {
+        border-color: var(--input-hover-border-color);
+        box-shadow: 0 0 6px var(--dnd5e-color-gold);
+      }
+      > input[type=text] {
+        &:focus-visible, &:hover { box-shadow: none; }
+      }
+      > button {
+        &:focus-visible, &:hover {
+          box-shadow: none;
+          text-shadow: 0 0 5px var(--color-shadow-primary);
+        }
+      }
     }
   }
 

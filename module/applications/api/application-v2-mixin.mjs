@@ -252,8 +252,8 @@ export default function ApplicationV2Mixin(Base, { handlebars=true }={}) {
         control.addEventListener("click", dnd5e.applications.ContextMenu5e.triggerEvent)
       );
 
-      // Allow multi-select tags to be removed when the whole tag is clicked.
-      this.element.querySelectorAll("multi-select").forEach(select => {
+      // Allow tags to be removed when the whole tag is clicked.
+      this.element.querySelectorAll("multi-select, document-tags, string-tags").forEach(select => {
         if ( select.disabled ) return;
         select.querySelectorAll(".tag").forEach(tag => {
           tag.classList.add("remove");
