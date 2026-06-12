@@ -168,6 +168,9 @@ export default class AttributesFields {
         ac.override = ac.flat;
         break;
       case "default": break;
+      case "natural":
+        ac.selectedFormulas = ["natural"];
+        break;
       default:
         ac.selectedFormulas ??= ["unarmored", "armored"];
         ac.selectedFormulas.push(ac.calc);
@@ -221,7 +224,7 @@ export default class AttributesFields {
     ac.flat ||= 0;
 
     // Add selected formulas
-    const baseFormulas = Object.entries(CONFIG.DND5E.armorClasses)
+    const baseFormulas = foundry.utils.iterateEntries(CONFIG.DND5E.armorClasses)
       .filter(([id, data]) => ac.selectedFormulas.has(id))
       .map(([id, data]) => ({ ...data, id, type: "base" }));
     ac.formulas.unshift(...baseFormulas);
@@ -300,7 +303,7 @@ export default class AttributesFields {
     ac.cover = Math.max(ac.cover, this.parent.coverBonus);
     ac.min = simplifyBonus(ac.min, rollData);
     ac.bonus = simplifyBonus(ac.bonus, rollData);
-    if ( ac.override ) ac.value = ac.override;
+    if ( Number.isFinite(ac.override) ) ac.value = ac.override;
     else ac.value = Math.max(ac.min, ac.base + ac.shield + ac.bonus + ac.cover);
   }
 

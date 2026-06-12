@@ -2659,7 +2659,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const cfg = CONFIG.DND5E.armorClasses[ac.calc];
     const attribution = [];
 
-    if ( ac.override ) {
+    if ( Number.isFinite(ac.override) ) {
       attribution.push({
         label: _loc("DND5E.ARMORCLASS.Flat"),
         type: "override",
@@ -2684,11 +2684,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const armorInFormula = ac.formula.includes("@attributes.ac.armor");
     let label = ac.label || _loc("DND5E.PropertyBase");
     if ( armorInFormula ) label = this.armor?.name ?? _loc("DND5E.ARMORCLASS.Calculation.Unarmored");
-    attribution.unshift({
+    if ( base ) attribution.unshift({
       label,
       type: "override",
       value: base
     });
+    else if ( attribution[0]?.label === "@attributes.ac.flat" ) attribution[0].label = label;
 
     // Shield
     if ( ac.shield !== 0 ) attribution.push({
