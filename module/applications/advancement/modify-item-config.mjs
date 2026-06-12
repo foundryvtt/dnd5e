@@ -126,7 +126,7 @@ export default class ModifyItemConfig extends AdvancementConfig {
       }
       for ( const uuid of submitData.selectedRemoteEffects ?? [] ) {
         const effect = fromUuidSync(uuid, { strict: false });
-        if ( changes.find(e => e.uuid === uuid) || (effect.type !== "enchantment") ) continue;
+        if ( changes.find(e => e.uuid === uuid) || (effect?.type !== "enchantment") ) continue;
         changes.push({ _id: `${foundry.utils.randomID(10)}REMOTE`, uuid });
       }
     }

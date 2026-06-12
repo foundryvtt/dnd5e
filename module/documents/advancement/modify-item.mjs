@@ -80,7 +80,7 @@ export default class ModifyItemAdvancement extends Advancement {
 
   /** @override */
   async restore(level, data, options={}) {
-    this.apply(level, data, options);
+    await this.apply(level, data, options);
   }
 
   /* -------------------------------------------- */
