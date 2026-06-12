@@ -95,7 +95,8 @@
 
 /**
  * @typedef ModifyItemChangeConfiguration
- * @property {string} _id               ID of the enchantment to apply to matched items.
+ * @property {string} _id               ID of the change, matches local enchantment ID if UUID isn't specified.
+ * @property {string} [uuid]            UUID of a remote effect to apply.
  * @property {Set<string>} identifiers  One or more identifiers used to find matching items.
  */
 
@@ -106,7 +107,7 @@
 
 /**
  * @typedef ModifyItemModifiedItemValue
- * @property {string} change  ID of the change effect that was applied (referencing entry in `configuration.changes`).
+ * @property {string} change  ID of the change that was applied (referencing entry in `configuration.changes`).
  * @property {string} effect  ID of the enchantment that was created on the item.
  * @property {string} item    ID of the item that was modified.
  */

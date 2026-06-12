@@ -37,7 +37,7 @@ export default class ModifyItemAdvancement extends Advancement {
 
     const alreadyModified = new Set(this.value.modified.map(({ change, item }) => `${change}.${item}`));
     for ( const change of this.configuration.changes ) {
-      const effect = this.item.effects.get(change._id);
+      const effect = change.uuid ? await fromUuid(change.uuid) : this.item.effects.get(change._id);
       if ( !effect ) continue;
       const itemsToChange = change.identifiers
         .values()
@@ -47,8 +47,17 @@ export default class ModifyItemAdvancement extends Advancement {
       for ( const item of itemsToChange ) {
         const clone = effect.clone({
           _id: foundry.utils.randomID(),
-          "flags.dnd5e.sourceId": effect.uuid,
-          "flags.dnd5e.advancementOrigin": `${this.item.id}.${this.id}`
+          _stats: {
+            [effect.inCompendium ? "compendiumSource" : "duplicateSource"] : effect.uuid,
+            [effect.inCompendium ? "duplicateSource" : "compendiumSource"] : null
+          },
+          flags: {
+            dnd5e: {
+              advancementOrigin: `${this.item.id}.${this.id}`,
+              sourceId: effect.uuid
+            }
+          },
+          origin: this.item.uuid
         }, { keepId: true }).toObject();
         item.updateSource({ effects: [clone] });
         modified.push({ change: change._id, effect: clone._id, item: item._id });
@@ -70,14 +79,14 @@ export default class ModifyItemAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @override */
-  restore(level, data, options={}) {
+  async restore(level, data, options={}) {
     this.apply(level, data, options);
   }
 
   /* -------------------------------------------- */
 
   /** @override */
-  reverse(level, options={}) {
+  async reverse(level, options={}) {
     for ( const change of this.value.modified ) {
       const item = this.actor.items.get(change.item);
       if ( !item?.effects.has(change.effect) ) continue;

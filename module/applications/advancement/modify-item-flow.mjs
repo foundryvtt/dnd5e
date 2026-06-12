@@ -19,13 +19,13 @@ export default class ModifyItemFlow extends AdvancementFlow {
 
   /** @override */
   async _prepareContentContext(context, options) {
-    context.changes = this.advancement.configuration.changes.map(change => ({
-      enchantment: this.item.effects.get(change._id),
+    context.changes = (await Promise.all(this.advancement.configuration.changes.map(async change => ({
+      enchantment: change.uuid ? await fromUuid(change.uuid) : this.item.effects.get(change._id),
       items: change.identifiers
         .values()
         .flatMap(i => this.advancement.actor.identifiedItems.get(i) ?? new Set())
         .toArray()
-    })).filter(c => c.enchantment);
+    })))).filter(c => c.enchantment);
     return context;
   }
 }

@@ -1,6 +1,6 @@
 import IdentifierField from "../fields/identifier-field.mjs";
 
-const { ArrayField, DocumentIdField, SchemaField, SetField } = foundry.data.fields;
+const { ArrayField, DocumentIdField, DocumentUUIDField, SchemaField, SetField } = foundry.data.fields;
 
 /**
  * @import { ModifyItemAdvancementConfigurationData, ModifyItemAdvancementValueData } from "./_types.mjs";
@@ -25,7 +25,8 @@ export class ModifyItemConfigurationData extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
       changes: new ArrayField(new SchemaField({
-        _id: new DocumentIdField(), // TODO: Allow for ID or UUID in V14
+        _id: new DocumentIdField(),
+        uuid: new DocumentUUIDField(),
         identifiers: new SetField(new IdentifierField({ allowType: true }))
       }))
     };
@@ -44,7 +45,7 @@ export class ModifyItemValueData extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
       modified: new ArrayField(new SchemaField({
-        change: new DocumentIdField(), // TODO: Allow for ID or UUID in V14
+        change: new DocumentIdField(),
         effect: new DocumentIdField(),
         item: new DocumentIdField()
       }))

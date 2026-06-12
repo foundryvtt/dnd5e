@@ -39,16 +39,16 @@ export default class ModifyItemConfig extends AdvancementConfig {
     context.allEnchantments = this.item.effects
       .filter(e => e.type === "enchantment")
       .map(effect => ({ value: effect.id, label: effect.name, selected: appliedChanges.has(effect.id) }));
-    context.changes = context.configuration.data.changes.reduce((arr, data, index) => {
-      const effect = this.item.effects.get(data._id);
-      if ( effect ) arr.push({
+    context.changes = [];
+    for ( const [index, data] of context.configuration.data.changes.entries() ) {
+      const effect = data.uuid ? await fromUuid(data.uuid) : this.item.effects.get(data._id);
+      if ( effect ) context.changes.push({
         data, effect,
         contentLink: effect.toAnchor().outerHTML,
         fields: context.configuration.fields.changes.element.fields,
         prefix: `configuration.changes.${index}.`
       });
-      return arr;
-    }, []);
+    }
 
     context.hasEffectsTab = !!this.item.system.metadata?.hasEffects;
 
@@ -67,9 +67,8 @@ export default class ModifyItemConfig extends AdvancementConfig {
    */
   static async #addChange(event, target) {
     const effectData = {
-      name: this.advancement.title,
-      img: this.advancement.icon,
-      origin: this.item.uuid,
+      name: this.advancement._source.title || this.item.name,
+      img: this.advancement._source.icon || this.item.img,
       type: "enchantment"
     };
     const [created] = await this.item.createEmbeddedDocuments("ActiveEffect", [effectData], { render: false });
@@ -87,7 +86,7 @@ export default class ModifyItemConfig extends AdvancementConfig {
    * @param {HTMLElement} target  Button that was clicked.
    */
   static async #deleteChange(event, target) {
-    const effectId = target.closest("[data-effect-id]")?.dataset.effectId;
+    const { effectId } = target.closest("[data-effect-id]")?.dataset ?? {};
     const result = await this.item.effects.get(effectId)?.deleteDialog({}, { render: false });
     if ( result instanceof ActiveEffect ) {
       const changes = this.advancement.configuration.toObject().changes.filter(e => e._id !== effectId);
@@ -104,9 +103,9 @@ export default class ModifyItemConfig extends AdvancementConfig {
    * @param {HTMLElement} target  Button that was clicked.
    */
   static async #dissociateEffect(event, target) {
-    const effectId = target.closest("[data-effect-id]")?.dataset.effectId;
-    if ( !effectId ) return;
-    const changes = this.advancement.configuration.toObject().changes.filter(e => e._id !== effectId);
+    const { profileId } = target.closest("[data-profile-id]")?.dataset ?? {};
+    if ( !profileId ) return;
+    const changes = this.advancement.configuration.toObject().changes.filter(e => e._id !== profileId);
     this.advancement.update({ "configuration.changes": changes });
   }
 
@@ -119,11 +118,16 @@ export default class ModifyItemConfig extends AdvancementConfig {
     const submitData = super._prepareSubmitData(event, formData);
     let changes = submitData.configuration?.changes ? Object.values(submitData.configuration.changes)
       : this.advancement.configuration.toObject().changes;
-    if ( foundry.utils.hasProperty(submitData, "selectedEnchantments") ) {
-      changes = changes.filter(e => submitData.selectedEnchantments.includes(e._id));
-      for ( const _id of submitData.selectedEnchantments ) {
+    if ( foundry.utils.hasProperty(submitData, "selectedLocalEffects")
+      || foundry.utils.hasProperty(submitData, "selectedRemoteEffects") ) {
+      for ( const _id of submitData.selectedLocalEffects ?? [] ) {
         if ( changes.find(e => e._id === _id) ) continue;
         changes.push({ _id });
+      }
+      for ( const uuid of submitData.selectedRemoteEffects ?? [] ) {
+        const effect = fromUuidSync(uuid, { strict: false });
+        if ( changes.find(e => e.uuid === uuid) || (effect.type !== "enchantment") ) continue;
+        changes.push({ _id: `${foundry.utils.randomID(10)}REMOTE`, uuid });
       }
     }
     foundry.utils.setProperty(submitData, "configuration.changes", changes);

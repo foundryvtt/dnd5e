@@ -7,13 +7,12 @@
         </button>
     </legend>
     {{#if hasEffectsTab}}
-    <multi-select name="selectedEnchantments" class="hidden-tags">
-        {{ selectOptions allEnchantments }}
-    </multi-select>
+    <multi-select name="selectedLocalEffects" class="hidden-tags">{{ selectOptions allEnchantments }}</multi-select>
     {{/if}}
+    <document-tags name="selectedRemoteEffects" class="hidden-tags" type="ActiveEffect"></document-tags>
     <ul class="separated-list effects-list flexcol unlist">
         {{#each changes}}
-        <li class="flexcol" data-index="{{ @index }}" data-effect-id="{{ effect.id }}">
+        <li class="flexcol" data-index="{{ @index }}" data-profile-id="{{ data._id }}" data-effect-id="{{ effect.id }}">
             {{> ".change" }}
         </li>
         {{else}}
@@ -26,7 +25,7 @@
 
 {{#*inline ".change"}}
 <div class="details flexrow">
-    <img class="gold-icon" src="{{ effect.img }}" alt="{{ effect.name }}">
+    {{ dnd5e-icon effect.img alt="" classes="gold-icon" }}
     {{{ contentLink }}}
     <div class="list-controls flexrow">
         {{#if @root.hasEffectsTab}}
@@ -35,13 +34,16 @@
             <i class="fa-solid fa-minus" inert></i>
         </button>
         {{/if}}
+        {{#unless data.uuid}}
         <button type="button" class="unbutton control-button" data-action="deleteChange"
                 data-tooltip aria-label="{{ localize 'DND5E.ADVANCEMENT.ModifyItem.Action.DeleteChange' }}">
             <i class="fa-solid fa-trash" inert></i>
         </button>
+        {{/unless}}
     </div>
 </div>
 <input type="hidden" name="{{ prefix }}_id" value="{{ data._id }}">
+<input type="hidden" name="{{ prefix }}uuid" value="{{ data.uuid }}">
 <div class="flexrow">
     {{ formField fields.identifiers name=(concat prefix "identifiers") value=data.identifiers
                  classes="label-top multi-select" rootId=@root.partId }}
