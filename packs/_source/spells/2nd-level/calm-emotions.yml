@@ -11,7 +11,8 @@ system:
       range must make a Charisma saving throw; a creature can choose to fail
       this saving throw if it wishes. If a creature fails its saving throw,
       choose one of the following two effects. You can suppress any effect
-      causing a target to be charmed or frightened. When this spell ends, any
+      causing a target to be &amp;reference[charmed apply=false] or
+      &amp;reference[frightened apply=false]. When this spell ends, any
       suppressed effect resumes, provided that its duration has not expired in
       the meantime.</p><p>Alternatively, you can make a target indifferent about
       creatures of your choice that it is hostile toward. This indifference ends
@@ -35,14 +36,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: sphere
       size: '20'
       contiguous: false
+      count: ''
   range:
     value: '60'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -81,7 +85,13 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: QgkZ0wXeQ7CsDhJJ
+          level: {}
+          onSave: false
+        - _id: GgT59J1pn49xUaJW
+          level: {}
+          onSave: false
       range:
         override: false
       target:
@@ -100,23 +110,122 @@ system:
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: calm-emotions
 sort: 0
 flags: {}
-img: icons/magic/light/explosion-star-blue.webp
-effects: []
+img: icons/magic/control/fear-fright-white.webp
+effects:
+  - name: Suppressed Emotions
+    img: icons/magic/control/fear-fright-white.webp
+    origin: Compendium.dnd5e.spells.Item.3MYDjS6k9IYL0aTj
+    transfer: false
+    _id: QgkZ0wXeQ7CsDhJJ
+    type: base
+    system:
+      changes:
+        - key: system.traits.ci.value
+          type: add
+          value: charmed
+          phase: initial
+          priority: null
+        - key: system.traits.ci.value
+          type: add
+          value: frightened
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>Any effects causing you to be &amp;reference[charmed apply=false] or
+      &amp;reference[frightened apply=false] are suppressed. When this spell
+      ends, any suppressed effect resumes, provided that its duration has not
+      expired in the meantime.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781267253752
+      modifiedTime: 1781267422403
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!3MYDjS6k9IYL0aTj.QgkZ0wXeQ7CsDhJJ'
+  - name: Indifferent
+    img: icons/magic/control/silhouette-aura-energy.webp
+    origin: Compendium.dnd5e.spells.Item.3MYDjS6k9IYL0aTj
+    transfer: false
+    _id: GgT59J1pn49xUaJW
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You have been made indifferent about creatures of the caster's choice
+      that you were hostile toward. This indifference ends if you are attacked
+      or harmed by a spell or if you witnesse any of your friends being harmed.
+      When the spell ends, you become hostile again, unless the DM rules
+      otherwise.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781267340712
+      modifiedTime: 1781267429488
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!3MYDjS6k9IYL0aTj.GgT59J1pn49xUaJW'
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037346638
-  modifiedTime: 1725992716784
+  modifiedTime: 1781267340750
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!3MYDjS6k9IYL0aTj'

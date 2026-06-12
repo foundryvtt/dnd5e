@@ -29,13 +29,16 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: radius
       size: '30'
       contiguous: false
+      count: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -75,7 +78,9 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: yXrjsSvXaxXXzsU2
+          level: {}
       range:
         override: false
       target:
@@ -94,20 +99,69 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: pass-without-trace
 sort: 0
 flags: {}
-img: icons/magic/air/fog-gas-smoke-brown.webp
-effects: []
+img: icons/magic/perception/silhouette-stealth-shadow.webp
+effects:
+  - name: Pass without Trace
+    img: icons/magic/perception/silhouette-stealth-shadow.webp
+    origin: Compendium.dnd5e.spells.Item.pRMvmknwLf2tdMTj
+    transfer: false
+    _id: yXrjsSvXaxXXzsU2
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>A veil of shadows and Silence radiates from you, masking you and your
+      companions from detection. For the Duration, each creature you choose
+      within 30 feet of you (including you) has a +10 bonus to Dexterity
+      (Stealth) checks and can't be tracked except by magical means. A creature
+      that receives this bonus leaves behind no tracks or other traces of its
+      passage.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781229483125
+      modifiedTime: 1781229517159
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!pRMvmknwLf2tdMTj.yXrjsSvXaxXXzsU2'
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037365353
-  modifiedTime: 1725992722839
+  modifiedTime: 1781229483159
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!pRMvmknwLf2tdMTj'

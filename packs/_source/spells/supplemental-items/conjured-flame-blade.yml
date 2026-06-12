@@ -1,0 +1,160 @@
+folder: DQSeMEpnNmujkHlX
+name: Conjured Flame Blade
+type: weapon
+_id: 8cPlf8sC5j7O6mTv
+img: icons/weapons/daggers/dagger-glowing-white.webp
+system:
+  activities:
+    UoEybCxAkKImMdjm:
+      _id: UoEybCxAkKImMdjm
+      type: attack
+      img: ''
+      sort: 0
+      activation:
+        type: action
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ''
+          classification: spell
+        ability: ''
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts: []
+      name: ''
+  damage:
+    base:
+      types:
+        - fire
+      custom:
+        enabled: true
+        formula: '@flags.world.flame-blade'
+      scaling:
+        number: 1
+      number: 3
+      denomination: 6
+      bonus: ''
+    versatile:
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>Created by the
+      @UUID[Compendium.dnd5e.spells.Item.Advtckpz1B733bu9]{Flame Blade}
+      spell.</p><p>The blade is similar in size and shape to a Scimitar, and it
+      lasts for the Duration. If you let go of the blade, it disappears, but you
+      can evoke the blade again as a Bonus Action.</p><p>You can use your action
+      to make a melee spell Attack with the fiery blade. On a hit, the target
+      takes 3d6 fire damage.</p><p>The flaming blade sheds &amp;reference[bright
+      light] in a 10-foot radius and &amp;reference[dim light] for an additional
+      10 feet.</p>
+    chat: ''
+  identifier: conjured-flame-blade
+  source:
+    revision: 1
+    rules: '2014'
+    book: SRD 5.1
+    page: ''
+    custom: ''
+    license: ''
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  crew:
+    value: []
+  ammunition: {}
+  armor: {}
+  properties:
+    - mgc
+  proficient: 1
+  range:
+    units: ft
+    value: null
+    long: null
+    reach: null
+  type:
+    value: ''
+    baseItem: ''
+  mastery: ''
+  magicalBonus: ''
+effects: []
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.361'
+  systemId: dnd5e
+  systemVersion: 6.0.0
+  createdTime: 1781224773102
+  modifiedTime: 1781225060968
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!8cPlf8sC5j7O6mTv'

@@ -28,11 +28,14 @@ system:
     affects:
       type: self
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -91,20 +94,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: locate-animals-or-plants
 sort: 0
 flags: {}
-img: icons/magic/nature/leaf-glow-triple-orange-purple.webp
+img: icons/sundries/books/book-embossed-roots-green.webp
 effects: []
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037352577
-  modifiedTime: 1725992718651
+  modifiedTime: 1781226845403
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!Iv2qqSAT7OkXKPFx'

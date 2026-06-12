@@ -1,7 +1,7 @@
 _id: Advtckpz1B733bu9
 name: Flame Blade
 type: spell
-img: icons/magic/fire/dagger-rune-enchant-flame-orange.webp
+img: icons/weapons/daggers/dagger-glowing-white.webp
 system:
   description:
     value: >-
@@ -10,10 +10,11 @@ system:
       the blade, it disappears, but you can evoke the blade again as a Bonus
       Action.</p><p>You can use your action to make a melee spell Attack with
       the fiery blade. On a hit, the target takes 3d6 fire damage.</p><p>The
-      flaming blade sheds bright light in a 10-foot radius and dim light for an
-      additional 10 feet.</p><p><strong>At Higher Levels.</strong> When you cast
-      this spell using a spell slot of 4th level or higher, the damage increases
-      by 1d6 for every two slot levels above 2nd.</p>
+      flaming blade sheds &amp;reference[bright light] in a 10-foot radius and
+      &amp;reference[dim light] for an additional 10 feet.</p><p><strong>At
+      Higher Levels.</strong> When you cast this spell using a spell slot of 4th
+      level or higher, the damage increases by 1d6 for every two slot levels
+      above 2nd.</p>
     chat: ''
   source:
     custom: ''
@@ -32,11 +33,14 @@ system:
     affects:
       type: self
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -95,42 +99,464 @@ system:
         flat: false
         type:
           value: melee
-          classification: spell
+          classification: ''
       damage:
         critical:
           bonus: ''
         includeBase: true
         parts:
-          - number: null
+          - custom:
+              enabled: true
+              formula: (floor(2 + @item.level / 2))d6
+            number: null
             denomination: null
             bonus: ''
             types:
               - fire
-            custom:
-              enabled: true
-              formula: (floor(2 + @item.level / 2))d6
             scaling:
               mode: ''
-              number: null
-              formula: ''
+              number: 1
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 200000
+      name: Attack with Flame Blade
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    9lqQU474G4xOpX7d:
+      type: enchant
+      name: Conjure Flame Blade
+      _id: 9lqQU474G4xOpX7d
+      img: ''
+      sort: 100000
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: Dg3Qi2SmWyCMpmU4
+          level:
+            min: 2
+            max: 3
+          riders:
+            activity: []
+            effect:
+              - vULxJuCFS32tApK7
+            item:
+              - Compendium.dnd5e.spells.Item.8cPlf8sC5j7O6mTv
+        - _id: nHmffcGZo11sgPV3
+          level:
+            min: 4
+            max: 5
+          riders:
+            activity: []
+            effect:
+              - tpXf44S04mFJMol7
+            item:
+              - Compendium.dnd5e.spells.Item.8cPlf8sC5j7O6mTv
+        - _id: JF8ELBI1o8vmfiZA
+          level:
+            min: 6
+            max: 7
+          riders:
+            activity: []
+            effect:
+              - BUBEz95PSksSQbVs
+            item:
+              - Compendium.dnd5e.spells.Item.8cPlf8sC5j7O6mTv
+        - _id: HrBnniYMsaCB4PQz
+          level:
+            min: 8
+            max: null
+          riders:
+            activity: []
+            effect:
+              - 9TTHVfcjufZowUOr
+            item:
+              - Compendium.dnd5e.spells.Item.8cPlf8sC5j7O6mTv
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      enchant:
+        self: true
+      restrictions:
+        allowMagical: true
+        categories: []
+        properties: []
+        type: spell
   identifier: flame-blade
-effects: []
+effects:
+  - type: enchantment
+    name: 'Flame Blade: 2nd Level'
+    img: icons/weapons/daggers/dagger-glowing-white.webp
+    disabled: true
+    _id: Dg3Qi2SmWyCMpmU4
+    system:
+      changes: []
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have conjured a Flame Blade in your hand.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781224832058
+      modifiedTime: 1781225140885
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!Advtckpz1B733bu9.Dg3Qi2SmWyCMpmU4'
+  - name: 'Flame Blade: 2nd Level'
+    img: icons/magic/fire/blast-jet-stream-splash.webp
+    origin: Compendium.dnd5e.spells.Item.Advtckpz1B733bu9
+    type: base
+    _id: vULxJuCFS32tApK7
+    system:
+      changes:
+        - key: flags.world.flame-blade
+          type: upgrade
+          value: 3d6
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You have conjured a Flame Blade, and it deals 3d6 fire damage on
+      hit.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781225001605
+      modifiedTime: 1781225226421
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!Advtckpz1B733bu9.vULxJuCFS32tApK7'
+  - name: 'Flame Blade: 4th Level'
+    img: icons/magic/fire/blast-jet-stream-splash.webp
+    origin: Compendium.dnd5e.spells.Item.Advtckpz1B733bu9
+    type: base
+    system:
+      changes:
+        - key: flags.world.flame-blade
+          type: upgrade
+          value: 4d6
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You have conjured a Flame Blade, and it deals 4d6 fire damage on
+      hit.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781225071156
+      modifiedTime: 1781225222541
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: tpXf44S04mFJMol7
+    _key: '!items.effects!Advtckpz1B733bu9.tpXf44S04mFJMol7'
+  - name: 'Flame Blade: 6th Level'
+    img: icons/magic/fire/blast-jet-stream-splash.webp
+    origin: Compendium.dnd5e.spells.Item.Advtckpz1B733bu9
+    type: base
+    system:
+      changes:
+        - key: flags.world.flame-blade
+          type: upgrade
+          value: 5d6
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You have conjured a Flame Blade, and it deals 5d6 fire damage on
+      hit.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781225094696
+      modifiedTime: 1781225218971
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: BUBEz95PSksSQbVs
+    _key: '!items.effects!Advtckpz1B733bu9.BUBEz95PSksSQbVs'
+  - name: 'Flame Blade: 8th Level'
+    img: icons/magic/fire/blast-jet-stream-splash.webp
+    origin: Compendium.dnd5e.spells.Item.Advtckpz1B733bu9
+    type: base
+    system:
+      changes:
+        - key: flags.world.flame-blade
+          type: upgrade
+          value: 6d6
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You have conjured a Flame Blade, and it deals 6d6 fire damage on
+      hit.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781225107165
+      modifiedTime: 1781225214764
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: 9TTHVfcjufZowUOr
+    _key: '!items.effects!Advtckpz1B733bu9.9TTHVfcjufZowUOr'
+  - type: enchantment
+    name: 'Flame Blade: 4th Level'
+    img: icons/weapons/daggers/dagger-glowing-white.webp
+    disabled: true
+    system:
+      changes: []
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have conjured a Flame Blade in your hand.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781225153025
+      modifiedTime: 1781225159153
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: nHmffcGZo11sgPV3
+    _key: '!items.effects!Advtckpz1B733bu9.nHmffcGZo11sgPV3'
+  - type: enchantment
+    name: 'Flame Blade: 6th Level'
+    img: icons/weapons/daggers/dagger-glowing-white.webp
+    disabled: true
+    system:
+      changes: []
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have conjured a Flame Blade in your hand.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781225160352
+      modifiedTime: 1781225166134
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: JF8ELBI1o8vmfiZA
+    _key: '!items.effects!Advtckpz1B733bu9.JF8ELBI1o8vmfiZA'
+  - type: enchantment
+    name: 'Flame Blade: 8th Level'
+    img: icons/weapons/daggers/dagger-glowing-white.webp
+    disabled: true
+    system:
+      changes: []
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have conjured a Flame Blade in your hand.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781225167303
+      modifiedTime: 1781225172293
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: HrBnniYMsaCB4PQz
+    _key: '!items.effects!Advtckpz1B733bu9.HrBnniYMsaCB4PQz'
 folder: Qi4Se3we69ukl2V9
 sort: 0
 ownership:
   default: 0
-flags: {}
+flags:
+  dnd5e:
+    riders:
+      effect:
+        - vULxJuCFS32tApK7
+        - tpXf44S04mFJMol7
+        - BUBEz95PSksSQbVs
+        - 9TTHVfcjufZowUOr
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037350089
-  modifiedTime: 1725992717851
+  modifiedTime: 1781225330976
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!Advtckpz1B733bu9'

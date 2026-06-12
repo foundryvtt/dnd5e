@@ -33,14 +33,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: sphere
       size: '10'
       contiguous: false
+      count: ''
   range:
     value: '60'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -110,23 +113,31 @@ system:
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: shatter
 sort: 0
 flags: {}
-img: icons/magic/fire/explosion-fireball-medium-blue.webp
+img: icons/magic/lightning/barrier-shield-orb-pink.webp
 effects: []
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037366380
-  modifiedTime: 1725992723327
+  modifiedTime: 1781227648189
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!wJKpSvSTbSkTjqyb'

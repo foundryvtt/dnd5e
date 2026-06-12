@@ -29,11 +29,14 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -95,9 +98,13 @@ system:
         template:
           contiguous: false
           units: ft
+          type: ''
         affects:
           choice: false
-        override: false
+          type: object
+          count: '1'
+          special: ''
+        override: true
       enchant:
         identifier: ''
       restrictions:
@@ -108,11 +115,18 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Enchant Weapon
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: magic-weapon
 sort: 0
 flags: {}
-img: icons/magic/fire/dagger-rune-enchant-flame-blue.webp
+img: icons/weapons/polearms/spear-flared-silver-pink.webp
 effects:
   - name: Magic Weapon, +1
     flags:
@@ -122,29 +136,15 @@ effects:
             min: null
             max: 3
           riders: []
+        riders:
+          statuses: []
     _id: SLSudYaACjmmmZsU
-    changes:
-      - key: name
-        mode: 5
-        value: '{}, +1'
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.magicalBonus
-        mode: 5
-        value: '1'
-        priority: null
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
     description: >-
       <p>This weapon becomes a magic weapon with a +1 bonus to Attack rolls and
       Damage Rolls.</p>
@@ -155,17 +155,33 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781226960163
+      modifiedTime: 1781226993769
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    img: icons/magic/fire/dagger-rune-enchant-flame-blue.webp
+    img: icons/weapons/polearms/spear-flared-silver-pink.webp
     type: enchantment
-    system: {}
+    system:
+      changes:
+        - key: name
+          value: '{}, +1'
+          priority: null
+          type: override
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+        - key: system.magicalBonus
+          value: 1
+          priority: null
+          type: override
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!Sgjrf8qqv97CCWM4.SLSudYaACjmmmZsU'
   - name: Magic Weapon, +2
     flags:
@@ -175,28 +191,14 @@ effects:
             min: 4
             max: 5
           riders: []
-    changes:
-      - key: name
-        mode: 5
-        value: '{}, +2'
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.magicalBonus
-        mode: 5
-        value: '2'
-        priority: null
+        riders:
+          statuses: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
     description: >-
       <p>This weapon becomes a magic weapon with a +2 bonus to Attack rolls and
       Damage Rolls.</p>
@@ -208,17 +210,33 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781226963833
+      modifiedTime: 1781226997583
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    img: icons/magic/fire/dagger-rune-enchant-flame-blue.webp
+    img: icons/weapons/polearms/spear-flared-silver-pink.webp
     type: enchantment
-    system: {}
+    system:
+      changes:
+        - key: name
+          value: '{}, +2'
+          priority: null
+          type: override
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+        - key: system.magicalBonus
+          value: 2
+          priority: null
+          type: override
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!Sgjrf8qqv97CCWM4.8OhsRxK3dF1JeQXO'
   - name: Magic Weapon, +3
     flags:
@@ -228,28 +246,14 @@ effects:
             min: 6
             max: null
           riders: []
-    changes:
-      - key: name
-        mode: 5
-        value: '{}, +3'
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.magicalBonus
-        mode: 5
-        value: '3'
-        priority: null
+        riders:
+          statuses: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
     description: >-
       <p>This weapon becomes a magic weapon with a +3 bonus to Attack rolls and
       Damage Rolls.</p>
@@ -261,26 +265,42 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781226967795
+      modifiedTime: 1781227001732
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    img: icons/magic/fire/dagger-rune-enchant-flame-blue.webp
+    img: icons/weapons/polearms/spear-flared-silver-pink.webp
     type: enchantment
-    system: {}
+    system:
+      changes:
+        - key: name
+          value: '{}, +3'
+          priority: null
+          type: override
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+        - key: system.magicalBonus
+          value: 3
+          priority: null
+          type: override
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!Sgjrf8qqv97CCWM4.7L1wKfaEdN85IA0Z'
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037356520
-  modifiedTime: 1725992719940
+  modifiedTime: 1781227015165
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!Sgjrf8qqv97CCWM4'
