@@ -4850,13 +4850,15 @@ Object.defineProperty(DND5E, "enrichmentLookup", {
         spellSchools: foundry.utils.deepClone(DND5E.spellSchools),
         tools: foundry.utils.deepClone(DND5E.tools)
       };
-      const addFullKeys = key => Object.entries(DND5E[key]).forEach(([k, v]) =>
-        _enrichmentLookup[key][slugify(v.fullKey)] = { ...v, key: k }
-      );
+      const addFullKeys = key => Object.entries(DND5E[key]).forEach(([k, v]) => {
+        _enrichmentLookup[key][k].key = k;
+        if ( v.fullKey ) _enrichmentLookup[key][slugify(v.fullKey)] = { ...v, key: k };
+      });
       addFullKeys("abilities");
       addFullKeys("skills");
       addFullKeys("spellSchools");
-      Object.entries(DND5E.vehicleTypes).forEach(([k, label]) => _enrichmentLookup.tools[k] = { label });
+      addFullKeys("tools");
+      Object.entries(DND5E.vehicleTypes).forEach(([k, label]) => _enrichmentLookup.tools[k] = { label, key: k });
     }
     return _enrichmentLookup;
   },
