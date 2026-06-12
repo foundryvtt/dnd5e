@@ -143,7 +143,75 @@ system:
     baseItem: ''
   mastery: ''
   magicalBonus: ''
-effects: []
+effects:
+  - name: Flame Blade Illumination
+    img: icons/weapons/daggers/dagger-glowing-white.webp
+    origin: Compendium.dnd5e.spells.Item.8cPlf8sC5j7O6mTv
+    type: base
+    _id: CwXsi6Uf2CwXZsoe
+    system:
+      changes:
+        - key: token.light.dim
+          type: add
+          value: 20
+          phase: initial
+          priority: null
+        - key: token.light.bright
+          type: add
+          value: 10
+          phase: initial
+          priority: null
+        - key: token.light.color
+          type: add
+          value: '#825326'
+          phase: initial
+          priority: null
+        - key: token.light.animation.type
+          type: add
+          value: torch
+          phase: initial
+          priority: null
+        - key: token.light.animation.intensity
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+        - key: token.light.animation.speed
+          type: add
+          value: 1.5
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>The flaming blade sheds &amp;reference[bright light] in a 10-foot
+      radius and &amp;reference[dim light] for an additional 10 feet.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781277773765
+      modifiedTime: 1781277830540
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!8cPlf8sC5j7O6mTv.CwXsi6Uf2CwXZsoe'
 sort: 0
 ownership:
   default: 0
