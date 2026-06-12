@@ -2937,15 +2937,31 @@ preLocalize("restTypes", { key: "label" });
 
 /**
  * The set of possible sensory perception types which an Actor may have.
- * @enum {string}
+ * @enum {SenseConfiguration}
  */
 DND5E.senses = {
-  blindsight: "DND5E.SenseBlindsight",
-  darkvision: "DND5E.SenseDarkvision",
-  tremorsense: "DND5E.SenseTremorsense",
-  truesight: "DND5E.SenseTruesight"
+  blindsight: {
+    label: "DND5E.SenseBlindsight",
+    detectionMode: "blindsight"
+  },
+  darkvision: {
+    label: "DND5E.SenseDarkvision",
+    grantsSight: true,
+    visionMode: "darkvision"
+  },
+  tremorsense: {
+    label: "DND5E.SenseTremorsense",
+    detectionMode: "feelTremor"
+  },
+  truesight: {
+    label: "DND5E.SenseTruesight",
+    detectionMode: "seeAll",
+    grantsSight: true,
+    visionMode: "darkvision"
+  }
 };
-preLocalize("senses", { sort: true });
+preLocalize("senses", { key: "label", sort: true });
+patchConfig("senses", "label", { since: "DnD5e 6.0", until: "DnD5e 6.2" });
 
 /* -------------------------------------------- */
 /*  Attacks                                     */

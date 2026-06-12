@@ -721,7 +721,7 @@ export default class NPCData extends CreatureTemplate {
           formatter.format([
             ...Object.entries(CONFIG.DND5E.senses)
               .filter(([k]) => this.attributes.senses.ranges[k])
-              .map(([k, label]) =>
+              .map(([k, { label }]) =>
                 prepareMeasured(this.attributes.senses.ranges[k], this.attributes.senses.units, label)
               ),
             ...splitSemicolons(this.attributes.senses.special)

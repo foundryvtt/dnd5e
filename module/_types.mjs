@@ -450,6 +450,18 @@
 /* -------------------------------------------- */
 
 /**
+ * Configuration data for an actor sense type.
+ *
+ * @typedef {object} SenseConfiguration
+ * @property {string} label              Localized label for the sense.
+ * @property {string} [detectionMode]    Detection mode ID to add to the token (e.g. "blindsight", "feelTremor").
+ * @property {boolean} [grantsSight]     Whether this sense grants token vision (sight.enabled & sight.range).
+ * @property {string} [visionMode]       Vision mode ID to set on the token when this sense provides sight.
+ */
+
+/* -------------------------------------------- */
+
+/**
  * Configuration data for skills.
  *
  * @typedef SkillConfiguration
