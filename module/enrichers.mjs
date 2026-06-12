@@ -532,14 +532,14 @@ export async function enrichCheck(config, label, options) {
   }
 
   // TODO: Support "spellcasting" ability
-  let abilityConfig = CONFIG.DND5E.enrichmentLookup.abilities[slugify(config.ability)];
+  let abilityConfig = CONFIG.DND5E.abilities[config.ability];
   if ( config.ability && !abilityConfig ) {
     logWarning(`Ability "${config.ability}" not found while enriching ${config._input}.`, options);
     invalid = true;
   } else if ( abilityConfig?.key ) config.ability = abilityConfig.key;
 
   for ( let [index, skill] of config.skill.entries() ) {
-    const skillConfig = CONFIG.DND5E.enrichmentLookup.skills[slugify(skill)];
+    const skillConfig = CONFIG.DND5E.skills[skill];
     if ( skillConfig ) {
       if ( skillConfig.key ) skill = config.skill[index] = skillConfig.key;
       const ability = config.ability || skillConfig.ability;
@@ -553,10 +553,9 @@ export async function enrichCheck(config, label, options) {
 
   let usingTool;
   for ( const tool of config.tool ) {
-    const toolConfig = CONFIG.DND5E.tools[slugify(tool)];
-    const toolUUID = CONFIG.DND5E.enrichmentLookup.tools[slugify(tool)];
-    const toolIndex = toolUUID?.id ? Trait.getBaseItem(toolUUID.id, { indexOnly: true }) : null;
-    const toolLabel = toolIndex?.name ?? toolUUID?.label;
+    const toolConfig = CONFIG.DND5E.enrichmentLookup.tools[slugify(tool)];
+    const toolIndex = Trait.getBaseItem(toolConfig?.id ?? "", { indexOnly: true });
+    const toolLabel = toolIndex?.name ?? toolConfig?.label;
     if ( toolLabel ) {
       const ability = config.ability || toolConfig?.ability;
       if ( config.skill.length && (config.tool.length === 1) && (config._rules === "2024") ) {
@@ -604,7 +603,7 @@ export async function enrichCheck(config, label, options) {
       // Multiple associated proficiencies, link each individually
       if ( associated.length > 1 ) parts.push(
         _loc("EDITOR.DND5E.Inline.SpecificCheck", {
-          ability: CONFIG.DND5E.enrichmentLookup.abilities[ability].label,
+          ability: CONFIG.DND5E.abilities[ability].label,
           type: formatter.format(associated.map(a => createRollLink(a.label, makeConfig(a)).outerHTML ))
         })
       );
@@ -652,10 +651,10 @@ export async function enrichCheck(config, label, options) {
 function handleCheckCommand(config) {
   config = parseCheckConfig(config);
   config.type = "check";
-  if ( config.request ) return handlePostRequest(config);
   if ( (config.tool.length === 1) && (config.skill.length > 0) && (dnd5e.settings.rulesVersion === "modern") ) {
     config.usingTool = config.tool.pop();
   }
+  if ( config.request ) return handlePostRequest(config);
   config.skill = config.skill[0];
   config.tool = config.tool[0];
   config.type = config.skill ? "skill" : config.tool ? "tool" : "check";
@@ -672,7 +671,7 @@ function handleCheckCommand(config) {
 function createCheckRequestButtons(dataset) {
   const skills = foundry.utils.getType(dataset.skill) === "string" ? dataset.skill.split("|") : dataset.skill ?? [];
   const tools = foundry.utils.getType(dataset.tool) === "string" ? dataset.tool.split("|") : dataset.tool ?? [];
-  if ( (skills.length + tools.length) <= 1 ) {
+  if ( ((skills.length + tools.length) <= 1) && !dataset.usingTool ) {
     if ( !dataset.ability ) {
       if ( skills.length === 1 ) dataset.ability = CONFIG.DND5E.skills[skills[0]]?.ability;
       else if ( tools.length === 1 ) dataset.ability = CONFIG.DND5E.tools[tools[0]]?.ability;
@@ -682,7 +681,6 @@ function createCheckRequestButtons(dataset) {
   const baseDataset = { ...dataset };
   delete baseDataset.skill;
   delete baseDataset.tool;
-  if ( (tools.length === 1) && (dnd5e.settings.rulesVersion === "modern") ) baseDataset.usingTool = tools.pop();
   return [
     ...skills.map(skill => createRequestButton({
       ability: CONFIG.DND5E.skills[skill].ability, ...baseDataset, format: "short", skill, type: "skill"
@@ -702,13 +700,14 @@ function createCheckRequestButtons(dataset) {
  * @returns {object}
  */
 export function parseCheckConfig(config, options={}) {
+  const lookup = CONFIG.DND5E.enrichmentLookup;
   config.skill = config.skill?.replaceAll("/", "|").split("|") ?? [];
   config.tool = config.tool?.replaceAll("/", "|").split("|") ?? [];
   for ( let value of config.values ) {
     const slug = foundry.utils.getType(value) === "string" ? slugify(value) : value;
-    if ( slug in CONFIG.DND5E.enrichmentLookup.abilities ) config.ability = slug;
-    else if ( slug in CONFIG.DND5E.enrichmentLookup.skills ) config.skill.push(slug);
-    else if ( slug in CONFIG.DND5E.enrichmentLookup.tools ) config.tool.push(slug);
+    if ( slug in lookup.abilities ) config.ability = lookup.abilities[slug].key;
+    else if ( slug in lookup.skills ) config.skill.push(lookup.skills[slug].key);
+    else if ( slug in lookup.tools ) config.tool.push(lookup.tools[slug].key);
     else if ( Number.isNumeric(value) ) config.dc = Number(value);
     else config[value] = true;
   }
@@ -865,16 +864,15 @@ function createSaveRequestButtons(dataset) {
  * @returns {object}
  */
 export function parseSaveConfig(config, options={}) {
+  const lookup = CONFIG.DND5E.enrichmentLookup;
   config.ability = config.ability?.replace("/", "|").split("|") ?? [];
   for ( let value of config.values ) {
     const slug = foundry.utils.getType(value) === "string" ? slugify(value) : value;
-    if ( slug in CONFIG.DND5E.enrichmentLookup.abilities ) config.ability.push(slug);
+    if ( slug in lookup.abilities ) config.ability.push(lookup.abilities[slug].key);
     else if ( Number.isNumeric(value) ) config.dc = Number(value);
     else config[value] = true;
   }
-  config.ability = config.ability
-    .filter(a => a in CONFIG.DND5E.enrichmentLookup.abilities)
-    .map(a => CONFIG.DND5E.enrichmentLookup.abilities[a].key ?? a);
+  config.ability = config.ability.filter(a => a in CONFIG.DND5E.enrichmentLookup.abilities);
 
   return config;
 }
@@ -1136,7 +1134,7 @@ export function parseDamageConfig(configs, options={}) {
     c.type = c.type?.replaceAll("/", "|").split("|") ?? [];
     for ( const value of c.values ) {
       const slug = foundry.utils.getType(value) === "string" ? slugify(value) : value;
-      if ( value in lookup.damageTypes ) c.type.push(slug);
+      if ( slug in lookup.damageTypes ) c.type.push(lookup.damageTypes[slug]);
       else if ( slug in CONFIG.DND5E.attackModes ) config.attackMode = slug;
       else if ( slug === "average" ) config.average = true;
       else if ( slug === "extended" ) config.format = "extended";
