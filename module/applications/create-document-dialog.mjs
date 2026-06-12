@@ -93,8 +93,6 @@ export default class CreateDocumentDialog extends Dialog5e {
       if ( this.options.types?.length === 0 ) throw new Error("The array of sub-types to restrict to must not be empty");
 
       for ( const type of TYPES ) {
-        // TODO: When `standard` AE type replaces `base`, remove this check for active effect
-        // See https://github.com/foundryvtt/dnd5e/pull/5941
         if ( (this.documentName !== "ActiveEffect") && (type === CONST.BASE_DOCUMENT_TYPE) ) continue;
         if ( this.options.types && !this.options.types.includes(type) ) continue;
         const typeData = { selected: type === defaultType, type };
@@ -208,11 +206,13 @@ export default class CreateDocumentDialog extends Dialog5e {
       if ( !dialog.submitted ) return;
       const { createData, createOptions } = dialog.options;
       if ( !createData.folder ) delete createData.folder;
-      if ( !createData.name?.trim() ) createData.name = documentType.defaultName?.({
-        type: createData.type, parent: createOptions.parent, pack: createOptions.pack
-      });
       // TODO: Temp patch until advancement data is migrated (https://github.com/foundryvtt/dnd5e/issues/5782)
-      else if ( documentType.documentName === "Advancement" ) createData.title = createData.name;
+      if ( documentType.documentName === "Advancement" ) createData.title = createData.name;
+      else if ( (documentType.documentName !== "Activity") && !createData.name?.trim() ) {
+        createData.name = documentType.defaultName?.({
+          type: createData.type, parent: createOptions.parent, pack: createOptions.pack
+        });
+      }
 
       createOptions.renderSheet ??= true;
       if ( foundry.utils.isSubclass(documentType, foundry.abstract.Document) ) {
