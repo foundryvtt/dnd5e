@@ -157,9 +157,7 @@ export default class ActivityUsageDialog extends Dialog5e {
 
   /** @inheritDoc */
   async _prepareContext(options) {
-    if ( "scaling" in this.config ) {
-      this.#item = this.#item.clone({ "flags.dnd5e.scaling": this.config.scaling }, { keepId: true });
-    }
+    if ( "scaling" in this.config ) this.#item = this.#item.scaledClone(this.config.scaling);
     return {
       ...await super._prepareContext(options),
       activity: this.activity,

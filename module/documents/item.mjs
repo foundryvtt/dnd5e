@@ -505,6 +505,18 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Create a clone of this item with a certain scaling.
+   * @param {number} scaling       Scaling increase above base level.
+   * @param {object} [options={}]  Additional options for the clone.
+   * @returns {Item5e}
+   */
+  scaledClone(scaling, options={}) {
+    return this.clone({ "flags.dnd5e": { scaling } }, { keepId: true, ...options });
+  }
+
+  /* -------------------------------------------- */
   /*  Data Migration                              */
   /* -------------------------------------------- */
 

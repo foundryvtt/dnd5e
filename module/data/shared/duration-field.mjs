@@ -60,14 +60,16 @@ export default class DurationField extends SchemaField {
    */
   static getEffectDuration() {
     if ( !Number.isNumeric(this.value) ) return {};
-    switch ( this.units ) {
-      case "turn": return { turns: this.value };
-      case "round": return { rounds: this.value };
-      case "minute": return { seconds: this.value * 60 };
-      case "hour": return { seconds: this.value * 60 * 60 };
-      case "day": return { seconds: this.value * 60 * 60 * 24 };
-      case "month": return { seconds: this.value * 60 * 60 * 24 * 30 };
-      case "year": return { seconds: this.value * 60 * 60 * 24 * 365 };
+    const { value, units } = this;
+    switch ( units ) {
+      case "turn": return { value, units: "turns" };
+      case "round": return { value, units: "rounds" };
+      case "second": return { value, units: "seconds" };
+      case "minute": return { value, units: "minutes" };
+      case "hour": return { value, units: "hours" };
+      case "day": return { value, units: "days" };
+      case "month": return { value, units: "months" };
+      case "year": return { value, units: "years" };
       default: return {};
     }
   }

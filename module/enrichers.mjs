@@ -1762,6 +1762,5 @@ function _addListeners(buttons, handler) {
 async function _fetchActivity(uuid, scaling) {
   const activity = await fromUuid(uuid);
   if ( !activity || !scaling ) return activity;
-  const item = activity.item.clone({ "flags.dnd5e.scaling": scaling }, { keepId: true });
-  return item.system.activities.get(activity.id);
+  return activity.item.scaledClone(scaling).system.activities.get(activity.id);
 }

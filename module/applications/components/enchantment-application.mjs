@@ -52,11 +52,11 @@ export default class EnchantmentApplicationElement extends MaybeAdoptable {
   /* -------------------------------------------- */
 
   /**
-   * Item providing the enchantment that will be applied.
+   * Item providing the enchantment that will be applied with the proper scaling.
    * @type {Item5e}
    */
   get enchantmentItem() {
-    return this.chatMessage.getAssociatedItem();
+    return this.chatMessage.getAssociatedItem({ scaled: true });
   }
 
   /* -------------------------------------------- */
@@ -80,10 +80,7 @@ export default class EnchantmentApplicationElement extends MaybeAdoptable {
     }
 
     // Calculate the maximum targets
-    let item = this.enchantmentItem;
-    const scaling = this.chatMessage.system.scaling;
-    if ( scaling ) item = item.clone({ "flags.dnd5e.scaling": scaling });
-    const activity = item.system.activities.get(this.enchantmentActivity.id);
+    const activity = this.enchantmentItem.system.activities.get(this.enchantmentActivity.id);
     const maxTargets = activity.target?.affects?.count;
     if ( maxTargets ) {
       if ( !this.countArea ) {
