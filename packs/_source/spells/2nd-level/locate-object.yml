@@ -33,11 +33,14 @@ system:
     affects:
       type: self
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -96,20 +99,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: locate-object
 sort: 0
 flags: {}
-img: icons/magic/earth/projectile-stone-boulder-purple.webp
+img: icons/commodities/treasure/statue-runed-blue-grey.webp
 effects: []
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037356654
-  modifiedTime: 1725992720009
+  modifiedTime: 1781226868329
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!SleYkHovQ8NagmeV'

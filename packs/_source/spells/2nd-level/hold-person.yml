@@ -25,12 +25,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '60'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -73,6 +76,9 @@ system:
       effects:
         - _id: HH5YVjzxkwXpDZS0
           onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
       target:
@@ -84,68 +90,78 @@ system:
           choice: false
         override: false
       damage:
-        onSave: half
+        onSave: none
         parts: []
       save:
         ability: wis
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: hold-person
 sort: 0
 flags: {}
-img: icons/magic/control/debuff-chains-ropes-purple.webp
+img: icons/magic/control/debuff-chains-shackle-movement-red.webp
 effects:
   - name: Hold Person
     origin: Compendium.dnd5e.spells.Item.3Lo9boi7P2ro6QV4
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
     disabled: true
     _id: HH5YVjzxkwXpDZS0
-    changes: []
     description: >-
-      <p>The target is Paralyzed for the duration. At the end of each of its
-      turns, the target can make another Wisdom saving throw. On a success, the
-      spell ends on the target.</p>
+      <p>You are &amp;reference[Paralyzed apply=false] for the duration. At the
+      end of each of your turns, you can make another Wisdom saving throw. On a
+      success, the spell ends on you.</p>
     transfer: false
     statuses:
       - paralyzed
-      - incapacitated
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     tint: '#ffffff'
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781226516273
+      modifiedTime: 1781226516273
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    img: icons/magic/control/debuff-chains-ropes-purple.webp
+    img: icons/magic/control/debuff-chains-shackle-movement-red.webp
     type: base
-    system: {}
+    system:
+      changes: []
     sort: 0
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!3Lo9boi7P2ro6QV4.HH5YVjzxkwXpDZS0'
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037346550
-  modifiedTime: 1725992716765
+  modifiedTime: 1781226524448
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!3Lo9boi7P2ro6QV4'

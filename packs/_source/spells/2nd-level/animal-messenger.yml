@@ -42,12 +42,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -68,8 +71,7 @@ system:
     - material
     - ritual
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    UZKLGWLG22XpVdH4:
       type: utility
       activation:
         type: action
@@ -83,18 +85,23 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: VhzMbGyk40slfgl8
+          level: {}
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -106,20 +113,74 @@ system:
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 100000
+      name: Cast
+      img: ''
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: UZKLGWLG22XpVdH4
   identifier: animal-messenger
 sort: 0
 flags: {}
-img: icons/magic/nature/wolf-paw-glow-small-teal-blue.webp
-effects: []
+img: icons/creatures/birds/songbird-yellow-flying.webp
+effects:
+  - name: Animal Messenger
+    img: icons/creatures/birds/songbird-yellow-flying.webp
+    origin: Compendium.dnd5e.spells.Item.X8w9EzYLGc4vQ1H2
+    transfer: false
+    _id: VhzMbGyk40slfgl8
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You have been commanded to deliver a message to a specific target in a
+      location described to you. For the duration of this spell, you travel
+      towards the specified location, covering about 25 miles per 24 hours or
+      about 50 miles per 24 hours if you are a flying messenger.</p><p>When you
+      arrive, you deliver the message to the target, replicating the sound of
+      the caster's voice.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781218937006
+      modifiedTime: 1781219112309
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!X8w9EzYLGc4vQ1H2.VhzMbGyk40slfgl8'
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037358288
-  modifiedTime: 1725992720523
+  modifiedTime: 1781219121038
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!X8w9EzYLGc4vQ1H2'

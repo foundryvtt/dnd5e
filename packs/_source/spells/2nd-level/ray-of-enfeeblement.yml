@@ -31,12 +31,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '60'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -94,7 +97,7 @@ system:
         flat: false
         type:
           value: ranged
-          classification: spell
+          classification: ''
       damage:
         critical:
           bonus: ''
@@ -103,62 +106,127 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
     dnd5eactivity100:
       _id: dnd5eactivity100
       type: save
       activation:
-        type: action
+        type: special
         value: null
-        override: false
+        override: true
+        condition: When you hit a creature with this spell.
       consumption:
         targets: []
         scaling:
           allowed: false
           max: ''
-        spellSlot: true
+        spellSlot: false
       description:
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: HaoKvppKfss4ajTS
+          onSave: false
+          level:
+            min: null
+            max: null
       range:
-        override: false
+        override: true
+        units: spec
+        special: ''
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          type: ''
         affects:
           choice: false
+          type: ''
         override: false
       damage:
-        onSave: half
+        onSave: none
         parts: []
       save:
         ability: con
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Enfeeblement Save
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: ray-of-enfeeblement
 sort: 0
 flags: {}
-img: icons/magic/light/beam-rays-teal.webp
-effects: []
+img: icons/magic/unholy/projectile-missile-green.webp
+effects:
+  - name: Enfeebled
+    img: icons/magic/unholy/projectile-missile-green.webp
+    origin: Compendium.dnd5e.spells.Item.ODhLKBxLnvvLOnw1
+    transfer: false
+    _id: HaoKvppKfss4ajTS
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>Until the spell ends, you deal only half damage with weapon attacks
+      that use Strength. At the end of each of your turns, you can make a
+      Constitution saving throw against the spell. On a success, the spell
+      ends.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781227995114
+      modifiedTime: 1781228637010
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!ODhLKBxLnvvLOnw1.HaoKvppKfss4ajTS'
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037355219
-  modifiedTime: 1725992719534
+  modifiedTime: 1781228665565
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!ODhLKBxLnvvLOnw1'
