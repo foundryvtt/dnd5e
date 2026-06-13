@@ -150,11 +150,21 @@
   }
 
   /* Embed Captions */
-  .content-embed figcaption cite {
-    display: block;
-    text-align: right;
+  .content-embed {
+    figcaption cite {
+      display: block;
+      text-align: right;
 
-    &::before { content: "-"; }
+      &::before { content: "-"; }
+    }
+
+    p > .embed-name {
+      font-style: italic;
+      font-weight: bold;
+
+      &:has(> a) > a::after { content: "."; }
+      &:not(:has(> a))::after { content: ". "; }
+    }
   }
 
   /* Embedded Roll Tables */
