@@ -412,6 +412,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         { key: "reaction", label: "DND5E.Reaction" },
         { key: "concentration", label: "DND5E.Concentration" },
         { key: "ritual", label: "DND5E.Ritual" },
+        { key: "available", label: "DND5E.SpellAvailable" },
         { key: "prepared", label: "DND5E.Prepared" },
         ...Object.entries(CONFIG.DND5E.spellSchools).map(([key, { label }]) => ({ key, label }))
       ],
@@ -2095,6 +2096,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       if ( classFilter.size && !classFilter.has(item.system.classIdentifier) ) return false;
       if ( excluded.has(item.system.classIdentifier) ) return false;
       if ( !passes(included, excluded, "prepared", item.system.canPrepare && item.system.prepared) ) return false;
+      if ( !passes(included, excluded, "available", this.#spellAvailable(item)) ) return false;
 
       // Equipment-specific filters
       if ( !passes(included, excluded, "equipped", item.system.equipped === true) ) return false;
@@ -2112,6 +2114,20 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
       return true;
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine whether a spell is available to cast, for the "available" filter.
+   * @param {Item5e} spell  The spell item.
+   * @returns {boolean}
+   */
+  #spellAvailable(spell) {
+    const { canPrepare, method, prepared } = spell.system;
+    if ( !canPrepare ) return (method === "innate") || (method === "atwill");
+    // Prepared/always-prepared, or granted by an item (wands, scrolls) — those only show when castable.
+    return !!prepared || !!spell.getFlag("dnd5e", "cachedFor");
   }
 
   /* -------------------------------------------- */
