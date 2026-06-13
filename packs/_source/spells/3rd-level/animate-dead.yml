@@ -9,10 +9,13 @@ system:
       <p>This spell creates an undead servant. Choose a pile of bones or a
       corpse of a Medium or Small humanoid within range. Your spell imbues the
       target with a foul mimicry of life, raising it as an undead creature. The
-      target becomes a skeleton if you chose bones or a zombie if you chose a
-      corpse (the DM has the creature's game statistics).</p><p>On each of your
-      turns, you can use a bonus action to mentally command any creature you
-      made with this spell if the creature is within 60 feet of you (if you
+      target becomes a
+      @UUID[Compendium.dnd5e.monsters.Actor.nU8GN8La8DCt8SDb]{Skeleton} if you
+      chose bones or a
+      @UUID[Compendium.dnd5e.monsters.Actor.NAISFPoNNgUCsEyW]{Zombie} if you
+      chose a corpse (the DM has the creature's game statistics).</p><p>On each
+      of your turns, you can use a bonus action to mentally command any creature
+      you made with this spell if the creature is within 60 feet of you (if you
       control multiple creatures, you can command any or all of them at the same
       time, issuing the same command to each one). You decide what action the
       creature will take and where it will move during its next turn, or you can
@@ -46,14 +49,17 @@ system:
   target:
     affects:
       type: object
-      count: '1'
+      count: 1 + @scaling.increase * 2
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '10'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -73,58 +79,200 @@ system:
     - somatic
     - material
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: utility
+    slTKkuzJMunnfkAs:
+      type: summon
+      name: 'Cast: Animate Remains'
+      _id: slTKkuzJMunnfkAs
+      img: ''
+      sort: 100000
       activation:
         type: action
-        value: null
         override: false
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: ''
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: Gz4NTcpPjakj03qY
+          level:
+            min: null
+            max: null
+      flags: {}
       range:
+        units: self
         override: false
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
         affects:
           choice: false
         override: false
-      roll:
-        formula: ''
-        name: ''
-        prompt: false
-        visible: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        disposition: true
+        proficiency: false
+        saves: false
+        ability: ''
+      profiles:
+        - count: 1 + @scaling.increase * 2
+          name: ''
+          _id: kF8801zzzposi50s
+          uuid: null
+          level:
+            min: null
+            max: null
+          types: []
+        - count: 1 + @scaling.increase * 2
+          name: ''
+          _id: dnyb5YF9Kl4QGRAd
+          uuid: null
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+      tempHP: ''
+    jfnuqBcbOWUzfyTU:
+      type: utility
+      name: 'Cast: Reassert Control'
+      _id: jfnuqBcbOWUzfyTU
+      img: ''
+      sort: 200000
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: Gz4NTcpPjakj03qY
+          level:
+            min: null
+            max: null
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: 1 + @scaling.increase * 2
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
   identifier: animate-dead
 sort: 0
 flags: {}
-img: icons/magic/control/fear-fright-monster-red.webp
-effects: []
+img: icons/magic/death/undead-skeleton-deformed-red.webp
+effects:
+  - name: Controlled Undead
+    img: icons/magic/death/undead-skeleton-deformed-red.webp
+    origin: Compendium.dnd5e.spells.Item.oyE5nVppa5mde5gT
+    transfer: false
+    _id: Gz4NTcpPjakj03qY
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 24
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: <p>You are under the caster's control for the next 24 hours.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781288388319
+      modifiedTime: 1781288418027
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!oyE5nVppa5mde5gT.Gz4NTcpPjakj03qY'
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037365161
-  modifiedTime: 1725992722788
+  modifiedTime: 1781288475187
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!oyE5nVppa5mde5gT'

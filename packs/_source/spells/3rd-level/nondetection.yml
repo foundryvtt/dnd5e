@@ -9,7 +9,8 @@ system:
       <p>For the Duration, you hide a target that you touch from Divination
       magic. The target can be a willing creature or a place or an object no
       larger than 10 feet in any dimension. The target can't be targeted by any
-      divination magic or perceived through magical Scrying sensors.</p>
+      divination magic or perceived through magical
+      @UUID[Compendium.dnd5e.spells.Item.fVbCxFRaORalHB20]{Scrying} sensors.</p>
     chat: ''
   source:
     custom: ''
@@ -29,11 +30,14 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -55,8 +59,7 @@ system:
     - somatic
     - material
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    2NuVawqLGZyCNlFT:
       type: utility
       activation:
         type: action
@@ -70,18 +73,23 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: VcHisfZtWwBeEBCP
+          level: {}
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -93,20 +101,71 @@ system:
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 100000
+      name: Cast
+      img: ''
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: 2NuVawqLGZyCNlFT
   identifier: nondetection
 sort: 0
 flags: {}
-img: icons/magic/perception/eye-ringed-glow-angry-red.webp
-effects: []
+img: icons/magic/perception/shadow-stealth-eyes-purple.webp
+effects:
+  - name: Nondetection
+    img: icons/magic/perception/shadow-stealth-eyes-purple.webp
+    origin: Compendium.dnd5e.spells.Item.aU62xVUBYkAQWIHv
+    transfer: false
+    _id: VcHisfZtWwBeEBCP
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 8
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>For the Duration, you are hidden from Divination magic. You can't be
+      targeted by any divination magic or perceived through magical
+      @UUID[Compendium.dnd5e.spells.Item.fVbCxFRaORalHB20]{Scrying} sensors.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781356910548
+      modifiedTime: 1781356963242
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!aU62xVUBYkAQWIHv.VcHisfZtWwBeEBCP'
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037359727
-  modifiedTime: 1725992720976
+  modifiedTime: 1781356910579
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!aU62xVUBYkAQWIHv'

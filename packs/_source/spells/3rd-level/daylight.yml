@@ -7,13 +7,14 @@ system:
   description:
     value: >-
       <p>A 60-foot-radius sphere of light spreads out from a point you choose
-      within range. The sphere is bright light and sheds dim light for an
-      additional 60 feet.</p><p>If you chose a point on an object you are
-      holding or one that isn't being worn or carried, the light shines from the
-      object and moves with it. Completely covering the affected object with an
-      opaque object, such as a bowl or a helm, blocks the light.</p><p>If any of
-      this spell's area overlaps with an area of darkness created by a spell of
-      3rd level or lower, the spell that created the darkness is dispelled.</p>
+      within range. The sphere is &amp;reference[bright light] and sheds
+      &amp;reference[dim light] for an additional 60 feet.</p><p>If you chose a
+      point on an object you are holding or one that isn't being worn or
+      carried, the light shines from the object and moves with it. Completely
+      covering the affected object with an opaque object, such as a bowl or a
+      helm, blocks the light.</p><p>If any of this spell's area overlaps with an
+      area of &amp;reference[darkness] created by a spell of 3rd level or lower,
+      the spell that created the darkness is dispelled.</p>
     chat: ''
   source:
     custom: ''
@@ -31,14 +32,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: sphere
       size: '60'
       contiguous: false
+      count: ''
   range:
     value: '60'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -95,20 +99,207 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    SrAIyQ5bcIehzgmX:
+      type: enchant
+      name: Cast (Conjure Daylight on Object)
+      img: ''
+      sort: 100000
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: pXozRRGkzMMm00kl
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - 9QQoXFhnT4bcSEVM
+            item: []
+      flags: {}
+      range:
+        units: self
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: object
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      enchant:
+        self: false
+      restrictions:
+        allowMagical: false
+        categories: []
+        properties: []
+        type: ''
+      _id: SrAIyQ5bcIehzgmX
   identifier: daylight
 sort: 0
-flags: {}
-img: icons/magic/light/beam-rays-yellow.webp
-effects: []
+flags:
+  dnd5e:
+    riders:
+      effect:
+        - 9QQoXFhnT4bcSEVM
+img: icons/magic/light/explosion-star-glow-yellow.webp
+effects:
+  - type: enchantment
+    name: Daylight
+    img: icons/magic/light/explosion-star-glow-yellow.webp
+    disabled: true
+    _id: pXozRRGkzMMm00kl
+    system:
+      changes:
+        - key: system.description.value
+          type: override
+          value: >-
+            {} <p><strong>Daylight.</strong> This object sheds &reference[bright
+            light] in a 60-foot radius and &reference[dim light] for an
+            additional 60 feet. The light shines from the object and moves with
+            it. Completely covering the affected object with an opaque object,
+            such as a bowl or a helm, blocks the light.</p>
+          phase: initial
+          priority: null
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>This object sheds &amp;reference[bright light] in a 60-foot radius and
+      &amp;reference[dim light] for an additional 60 feet. The light shines from
+      the object and moves with it. Completely covering the affected object with
+      an opaque object, such as a bowl or a helm, blocks the light.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781298340420
+      modifiedTime: 1781305470853
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!BP3GCwa66IAw1yTG.pXozRRGkzMMm00kl'
+  - name: Wielding Daylight Object
+    img: icons/magic/light/explosion-star-glow-yellow.webp
+    origin: Compendium.dnd5e.spells.Item.BP3GCwa66IAw1yTG
+    type: base
+    _id: 9QQoXFhnT4bcSEVM
+    system:
+      changes:
+        - key: token.light.dim
+          type: upgrade
+          value: 120
+          phase: initial
+          priority: null
+        - key: token.light.bright
+          type: upgrade
+          value: 60
+          phase: initial
+          priority: null
+        - key: token.light.animation.type
+          type: override
+          value: starlight
+          phase: initial
+          priority: null
+        - key: token.light.color
+          type: override
+          value: '#bb8c25'
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>The object you are carrying has
+      the@UUID[Compendium.dnd5e.spells.Item.BP3GCwa66IAw1yTG]{Daylight} spell
+      cast upon it.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781305211456
+      modifiedTime: 1781305289895
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!BP3GCwa66IAw1yTG.9QQoXFhnT4bcSEVM'
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037350429
-  modifiedTime: 1725992717954
+  modifiedTime: 1781305435943
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!BP3GCwa66IAw1yTG'

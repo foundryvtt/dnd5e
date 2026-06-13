@@ -10,29 +10,21 @@ system:
       centered on a point on the ground that you can see within range. Glowing
       runes appear wherever the cylinder intersects with the floor or other
       surface.</p><p>Choose one or more of the following types of creatures:
-      Celestials, Elementals, fey, Fiends, or Undead. The circle affects a
-      creature of the chosen type in the following ways:</p>
-
-      <ul>
-
-      <li>The creature can't willingly enter the cylinder by nonmagical means.
-      If the creature tries to use teleportation or interplanar travel to do so,
-      it must first succeed on a Charisma saving throw.</li>
-
-      <li>The creature has disadvantage on Attack rolls against Targets within
-      the Cylinder.</li>
-
-      <li>Targets within the cylinder can't be Charmed, Frightened, or possessed
-      by the creature.</li>
-
-      </ul>
-
-      <p>When you cast this spell, you can elect to cause its magic to operate
-      in the reverse direction, preventing a creature of the specified type from
-      leaving the cylinder and protecting targets outside it.</p><p><strong>At
-      Higher Levels.</strong> When you cast this spell using a spell slot of 4th
-      level or higher, the Duration increases by 1 Hour for each slot level
-      above 3rd.</p>
+      celestials, elementals, fey, fiends, or undead. The circle affects a
+      creature of the chosen type in the following ways:</p><ul><li><p>The
+      creature can't willingly enter the cylinder by nonmagical means. If the
+      creature tries to use teleportation or interplanar travel to do so, it
+      must first succeed on a Charisma saving throw.</p></li><li><p>The creature
+      has disadvantage on attack rolls against targets within the
+      cylinder.</p></li><li><p>Targets within the cylinder can't be
+      &amp;reference[Charmed apply=false], &amp;reference[Frightened
+      apply=false], or possessed by the creature.</p></li></ul><p>When you cast
+      this spell, you can elect to cause its magic to operate in the reverse
+      direction, preventing a creature of the specified type from leaving the
+      cylinder and protecting targets outside it.</p><p><strong>At Higher
+      Levels.</strong> When you cast this spell using a spell slot of 4th level
+      or higher, the Duration increases by 1 Hour for each slot level above
+      3rd.</p>
     chat: ''
   source:
     custom: ''
@@ -50,14 +42,18 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: cylinder
       size: '10'
       contiguous: false
+      height: '20'
+      count: ''
   range:
     value: '10'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -79,61 +75,248 @@ system:
     - somatic
     - material
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: save
+    80Tb8x1GUu4ZcO7R:
+      type: utility
+      name: Cast Magic Circle
+      _id: 80Tb8x1GUu4ZcO7R
+      img: ''
+      sort: 100000
       activation:
         type: action
-        value: null
         override: false
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: 3UZLcyUKG7zz2VdP
+          level: {}
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+    71GHgEVbu7CwzCUg:
+      type: utility
+      name: Cast Inverted Magic Circle
+      img: ''
+      sort: 200000
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects: []
+      flags: {}
       range:
+        units: self
         override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
+      _id: 71GHgEVbu7CwzCUg
+    3tvXJpYrfPS30uAL:
+      type: save
+      activation:
+        type: special
+        value: null
+        override: true
+        condition: >-
+          When a creature the Magic Circle protects against tries to use
+          teleportation or interplanar travel to enter or leave it.
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: false
+      description:
+        chatFlavor: ''
+        value: >-
+          <p>The creature can't willingly enter the cylinder by nonmagical
+          means. If the creature tries to use teleportation or interplanar
+          travel to do so, it must first succeed on a Charisma saving throw.</p>
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      range:
+        override: true
+        units: spec
+        special: ''
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
+          type: ''
         affects:
           choice: false
-        override: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
       damage:
-        onSave: half
+        onSave: none
         parts: []
       save:
-        ability: cha
+        ability:
+          - cha
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
+        bonus: ''
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 400000
+      img: ''
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: 3tvXJpYrfPS30uAL
+      name: Thwart Teleportation Save
   identifier: magic-circle
 sort: 0
 flags: {}
-img: icons/magic/symbols/runes-star-pentagon-blue.webp
-effects: []
+img: icons/magic/symbols/star-inverted-yellow.webp
+effects:
+  - name: Magic Circle Protection
+    img: icons/magic/symbols/star-inverted-yellow.webp
+    origin: Compendium.dnd5e.spells.Item.y8A4HfTwd93ypdEz
+    transfer: false
+    _id: 3UZLcyUKG7zz2VdP
+    type: base
+    system:
+      changes:
+        - key: system.traits.ci.value
+          type: add
+          value: charmed
+          phase: initial
+          priority: null
+        - key: system.traits.ci.value
+          type: add
+          value: frightened
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>While standing within the
+      @UUID[Compendium.dnd5e.spells.Item.y8A4HfTwd93ypdEz]{Magic Circle}, you
+      can't be &amp;refrerence[charmed apply=false], &amp;reference[frightened
+      apply=false], or possessed by the creatures the spell protects against,
+      and those creatures have disadvantage on attack rolls against you.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781361671158
+      modifiedTime: 1781361788033
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!y8A4HfTwd93ypdEz.3UZLcyUKG7zz2VdP'
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037366799
-  modifiedTime: 1725992723506
+  modifiedTime: 1781361714896
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!y8A4HfTwd93ypdEz'
