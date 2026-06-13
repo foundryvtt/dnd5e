@@ -30,7 +30,7 @@ export default class CompendiumBrowser extends Application5e {
     if ( foundry.utils.isEmpty(this.options.filters.locked) ) {
       const isAdvanced = this._mode === this.constructor.MODES.ADVANCED;
       const tab = this.constructor.TABS.find(t => t.tab === this.options.tab);
-      if ( !tab || (!!tab.advanced !== isAdvanced) ) this.options.tab = isAdvanced ? "actors" : "classes";
+      if ( !tab || (!!tab.advanced !== isAdvanced) ) this.options.tab = isAdvanced ? "items" : "physical";
       this._applyTabFilters(this.options.tab, { keepFilters: true });
     }
   }
@@ -75,7 +75,7 @@ export default class CompendiumBrowser extends Application5e {
       min: null,
       max: null
     },
-    tab: "classes"
+    tab: "physical"
   };
 
   /* -------------------------------------------- */
@@ -1058,8 +1058,10 @@ export default class CompendiumBrowser extends Application5e {
     // TODO: Consider persisting this choice in a client setting.
     this._mode = target.checked ? this.constructor.MODES.ADVANCED : this.constructor.MODES.BASIC;
     const tabs = foundry.utils.deepClone(this.constructor.TABS.filter(t => !!t.advanced === target.checked));
-    const activeTab = tabs.find(t => t.tab === this.tabGroups.primary) ?? tabs[0];
-    const types = target.checked ? [] : (activeTab?.types ?? ["class"]);
+    const fallback = tabs.find(t => t.tab === (target.checked ? "items" : "physical")) ?? tabs[0];
+    const activeTab = tabs.find(t => t.tab === this.tabGroups.primary) ?? fallback;
+    const types = target.checked ? [] : (activeTab?.types ?? ["physical"]);
+    this.tabGroups.primary = activeTab?.tab;
     this._applyModeFilters(this._mode);
     this._applyTabFilters(activeTab?.tab);
     this.render({ parts: ["results", "filters", "types", "tabs"], dnd5e: { browser: { types } }, changedTab: true });
