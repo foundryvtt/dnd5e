@@ -116,6 +116,91 @@ system:
       roll:
         prompt: false
         visible: false
+    lFO5S0pA2P2d5GpZ:
+      type: summon
+      name: Summon Creature
+      _id: lFO5S0pA2P2d5GpZ
+      img: ''
+      sort: 200000
+      activation:
+        type: special
+        override: true
+        condition: When you cast this spell.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>You can speak the name of a specific creature (a pseudonym, title,
+          or nickname doesn't work). If that creature is on a plane other than
+          the one you are on, the portal opens in the named creature's immediate
+          vicinity and draws the creature through it to the nearest unoccupied
+          space on your side of the portal. You gain no special power over the
+          creature, and it is free to act as the DM deems appropriate. It might
+          leave, Attack you, or help you.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        disposition: false
+        proficiency: false
+        saves: false
+        ability: ''
+      profiles:
+        - count: '1'
+          cr: ''
+          name: ''
+          _id: atQl8547y7jYbwqk
+          uuid: null
+          types: []
+          level:
+            min: null
+            max: null
+      summon:
+        prompt: true
+        mode: cr
+      tempHP: ''
   identifier: gate
 sort: 0
 flags: {}
@@ -128,7 +213,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 6.0.0
   createdTime: 1725037358568
-  modifiedTime: 1781381255081
+  modifiedTime: 1781389486102
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!XbwGq5kDJNvAxNXV'
