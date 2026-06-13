@@ -31,11 +31,14 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -75,7 +78,9 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: QscuTnvFFOf6QfJp
+          level: {}
       range:
         override: false
       target:
@@ -94,20 +99,71 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: fly
 sort: 0
 flags: {}
-img: icons/magic/control/energy-stream-link-white.webp
-effects: []
+img: icons/creatures/abilities/wings-birdlike-blue.webp
+effects:
+  - name: Fly
+    img: icons/creatures/abilities/wings-birdlike-blue.webp
+    origin: Compendium.dnd5e.spells.Item.yfbK8gZqESlaoY5t
+    transfer: false
+    _id: QscuTnvFFOf6QfJp
+    type: base
+    system:
+      changes:
+        - key: system.attributes.movement.fly
+          type: upgrade
+          value: 60
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 10
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You gain a flying speed of 60 feet for the Duration of this spell. When
+      the spell ends, you fall if you are still aloft, unless you can stop the
+      fall.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781289110224
+      modifiedTime: 1781289190212
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!yfbK8gZqESlaoY5t.QscuTnvFFOf6QfJp'
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037366960
-  modifiedTime: 1725992723578
+  modifiedTime: 1781289175903
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!yfbK8gZqESlaoY5t'

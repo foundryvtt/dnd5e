@@ -39,11 +39,14 @@ system:
     affects:
       type: self
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -62,58 +65,342 @@ system:
     - vocal
     - somatic
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: utility
+    Fi6fAtoW49NrltE1:
+      type: enchant
+      name: Cast
+      _id: Fi6fAtoW49NrltE1
+      img: ''
+      sort: 200000
       activation:
         type: action
-        value: null
         override: false
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: ''
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: RZH3OOkKPx8ee4XY
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - Vw0IvqP9k2jfsu8n
+              - rE8UtAtoQVZnodXV
+            effect: []
+            item: []
+      flags: {}
       range:
+        units: self
         override: false
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
         affects:
           choice: false
         override: false
-      roll:
-        formula: 1d20
-        name: ''
-        prompt: false
-        visible: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      enchant:
+        self: true
+      restrictions:
+        allowMagical: false
+        categories: []
+        properties: []
+        type: ''
+    Vw0IvqP9k2jfsu8n:
+      type: utility
+      name: Blink Check
+      _id: Vw0IvqP9k2jfsu8n
+      img: ''
+      sort: 300000
+      activation:
+        type: turnEnd
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: <p>On a roll of 11 or higher, you vanish to the Ethereal Plane.</p>
+        chatFlavor: ''
+      duration:
+        units: turn
+        concentration: false
+        override: true
+        value: '1'
+      effects:
+        - _id: KfxYKxbFoCe5HJYS
+          level: {}
+      flags: {}
+      range:
+        units: self
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: self
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: Blink Check
+        formula: 1d20
+    rE8UtAtoQVZnodXV:
+      type: utility
+      name: Reappear
+      _id: rE8UtAtoQVZnodXV
+      img: ''
+      sort: 400000
+      activation:
+        type: turnStart
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>You return to an unoccupied space of your choice that you can see
+          within 10 feet of the space you vanished from. If no unoccupied space
+          is available within that range, you appear in the nearest unoccupied
+          space (chosen at random if more than one space is equally near).</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: ft
+        override: true
+        special: ''
+        value: '10'
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: space
+          count: '10'
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
   identifier: blink
 sort: 0
-flags: {}
-img: icons/magic/control/debuff-energy-hold-pink.webp
-effects: []
+flags:
+  dnd5e:
+    riders:
+      activity:
+        - Vw0IvqP9k2jfsu8n
+        - rE8UtAtoQVZnodXV
+img: icons/creatures/magical/spirit-fear-energy-pink.webp
+effects:
+  - name: Blinking
+    img: icons/creatures/magical/spirit-fear-energy-pink.webp
+    origin: Compendium.dnd5e.spells.Item.GSvLWcdCZLQkilXT
+    transfer: false
+    _id: YxZfy9MITIFESXWT
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You are blinking between the your current plane of existence and the
+      Ethereal Plane.</p><p>Roll a d20 at the end of each of your turns for the
+      duration of the spell. On a roll of 11 or higher, you vanish from your
+      current plane of existence and appear in the Ethereal Plane.</p><p>At the
+      start of your next turn, and when the spell ends if you are on the
+      Ethereal Plane, you return to an unoccupied space of your choice that you
+      can see within 10 feet of the space you vanished from. If no unoccupied
+      space is available within that range, you appear in the nearest unoccupied
+      space (chosen at random if more than one space is equally near). You can
+      dismiss this spell as an action.</p><p>While on the Ethereal Plane, you
+      can see and hear the plane you originated from, which is cast in shades of
+      gray, and you can't see anything there more than 60 feet away. You can
+      only affect and be affected by other creatures on the Ethereal Plane.
+      Creatures that aren't there can't perceive you or interact with you,
+      unless they have the ability to do so.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781357058125
+      modifiedTime: 1781357162508
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!GSvLWcdCZLQkilXT.YxZfy9MITIFESXWT'
+  - type: enchantment
+    name: Blink
+    img: icons/creatures/magical/spirit-fear-energy-pink.webp
+    disabled: true
+    _id: RZH3OOkKPx8ee4XY
+    system:
+      changes: []
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You are blinking between your current plane of existence and the
+      Ethereal Plane.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781357174724
+      modifiedTime: 1781357200406
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!GSvLWcdCZLQkilXT.RZH3OOkKPx8ee4XY'
+  - name: Blinked into the Ethereal Plane
+    img: icons/creatures/magical/spirit-fear-energy-pink.webp
+    origin: Compendium.dnd5e.spells.Item.GSvLWcdCZLQkilXT
+    transfer: false
+    _id: KfxYKxbFoCe5HJYS
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: rounds
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You have blinked into the Ethereal Plane until the start of your next
+      turn.</p><p>While on the Ethereal Plane, you can see and hear the plane
+      you originated from, which is cast in shades of gray, and you can't see
+      anything there more than 60 feet away. You can only affect and be affected
+      by other creatures on the Ethereal Plane. Creatures that aren't there
+      can't perceive you or interact with you, unless they have the ability to
+      do so.</p>
+    tint: '#ffffff'
+    statuses:
+      - ethereal
+      - invisible
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781357342958
+      modifiedTime: 1781358660930
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!GSvLWcdCZLQkilXT.KfxYKxbFoCe5HJYS'
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037352006
-  modifiedTime: 1725992718446
+  modifiedTime: 1781357491631
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!GSvLWcdCZLQkilXT'

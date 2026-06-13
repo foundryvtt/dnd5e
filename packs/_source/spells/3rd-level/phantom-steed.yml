@@ -12,11 +12,12 @@ system:
       equipment created by the spell vanishes in a puff of smoke if it is
       carried more than 10 feet away from the steed.</p><p>For the duration, you
       or a creature you choose can ride the steed. The creature uses the
-      statistics for a riding horse, except it has a speed of 100 feet and can
-      travel 10 miles in an hour, or 13 miles at a fast pace. When the spell
-      ends, the steed gradually fades, giving the rider 1 minute to dismount.
-      The spell ends if you use an action to dismiss it or if the steed takes
-      any damage.</p>
+      statistics for a
+      @UUID[Compendium.dnd5e.monsters.Actor.rz8UTUnFT87BsAFR]{Riding Horse},
+      except it has a speed of 100 feet and can travel 10 miles in an hour, or
+      13 miles at a fast pace. When the spell ends, the steed gradually fades,
+      giving the rider 1 minute to dismount. The spell ends if you use an action
+      to dismiss it or if the steed takes any damage.</p>
     chat: ''
   source:
     custom: ''
@@ -35,12 +36,16 @@ system:
     affects:
       type: space
       choice: false
+      count: ''
+      special: ''
     template:
       units: any
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -99,19 +104,140 @@ system:
         spent: 0
         recovery: []
       sort: 0
+    Q5AUKOieKceSQBhH:
+      type: summon
+      name: Summon Steed
+      _id: Q5AUKOieKceSQBhH
+      img: ''
+      sort: 100000
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: IWucom1RuaY1MUMM
+          level: {}
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        disposition: true
+        proficiency: false
+        saves: false
+        ability: ''
+      profiles:
+        - count: ''
+          name: ''
+          _id: 1Y6zngrZKXM3edcB
+          uuid: Compendium.dnd5e.monsters.Actor.rz8UTUnFT87BsAFR
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+      tempHP: ''
   identifier: phantom-steed
 sort: 0
 flags: {}
-img: icons/magic/nature/wolf-paw-glow-teal-blue.webp
-effects: []
+img: icons/creatures/magical/humanoid-horned-rider.webp
+effects:
+  - name: Phantom Steed
+    img: icons/creatures/magical/humanoid-horned-rider.webp
+    origin: Compendium.dnd5e.spells.Item.wpx42mtoZ5BmXRs1
+    transfer: false
+    _id: IWucom1RuaY1MUMM
+    type: base
+    system:
+      changes:
+        - key: system.attributes.movement.walk
+          type: upgrade
+          value: 100
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You have a speed of 100 feet and can travel 10 miles in an hour, or 13
+      miles at a fast pace. When the spell ends, you gradually fade, giving the
+      rider 1 minute to dismount.</p><p>The spell ends if your summoner uses an
+      action to dismiss you or if you take any damage.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781294933417
+      modifiedTime: 1781295041501
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!wpx42mtoZ5BmXRs1.IWucom1RuaY1MUMM'
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037366494
-  modifiedTime: 1725992723363
+  modifiedTime: 1781294933461
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!wpx42mtoZ5BmXRs1'

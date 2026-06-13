@@ -15,11 +15,12 @@ system:
       has advantage on Strength, Dexterity, and Constitution saving throws. The
       target can pass through small holes, narrow openings, and even mere
       cracks, though it treats liquids as though they were solid surfaces. The
-      target can't fall and remains hovering in the air even when stunned or
-      otherwise incapacitated.</p><p>While in the form of a misty cloud, the
-      target can't talk or manipulate objects, and any objects it was carrying
-      or holding can't be dropped, used, or otherwise interacted with. The
-      target can't attack or cast spells.</p>
+      target can't fall and remains hovering in the air even when
+      &amp;reference[stunned apply=false] or otherwise
+      &amp;reference[incapacitated apply=false].</p><p>While in the form of a
+      misty cloud, the target can't talk or manipulate objects, and any objects
+      it was carrying or holding can't be dropped, used, or otherwise interacted
+      with. The target can't attack or cast spells.</p>
     chat: ''
   source:
     custom: ''
@@ -39,11 +40,14 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -83,7 +87,9 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: gICakgyAi1hrs8ug
+          level: {}
       range:
         override: false
       target:
@@ -102,20 +108,137 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: gaseous-form
 sort: 0
 flags: {}
-img: icons/magic/air/fog-gas-smoke-dense-green.webp
-effects: []
+img: icons/magic/air/wind-tornado-cyclone-white.webp
+effects:
+  - name: Gaseous Form
+    img: icons/magic/air/wind-tornado-cyclone-white.webp
+    origin: Compendium.dnd5e.spells.Item.2IWiZAJtOGDoKjiz
+    transfer: false
+    _id: gICakgyAi1hrs8ug
+    type: base
+    system:
+      changes:
+        - key: system.abilities.str.save.roll.mode
+          type: add
+          value: ''
+          phase: initial
+          priority: null
+        - key: system.abilities.dex.save.roll.mode
+          type: add
+          value: ''
+          phase: initial
+          priority: null
+        - key: system.abilities.con.save.roll.mode
+          type: add
+          value: ''
+          phase: initial
+          priority: null
+        - key: system.attributes.movement.fly
+          type: override
+          value: 10
+          phase: initial
+          priority: null
+        - key: system.attributes.movement.walk
+          type: override
+          value: 0
+          phase: initial
+          priority: null
+        - key: system.attributes.movement.swim
+          type: override
+          value: 0
+          phase: initial
+          priority: null
+        - key: system.attributes.movement.climb
+          type: override
+          value: 0
+          phase: initial
+          priority: null
+        - key: system.attributes.movement.burrow
+          type: override
+          value: 0
+          phase: initial
+          priority: null
+        - key: system.traits.dr.value
+          type: add
+          value: bludgeoning
+          phase: initial
+          priority: null
+        - key: system.traits.dr.value
+          type: add
+          value: piercing
+          phase: initial
+          priority: null
+        - key: system.traits.dr.value
+          type: add
+          value: slashing
+          phase: initial
+          priority: null
+        - key: system.traits.dr.bypasses
+          type: add
+          value: mgc
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You have been transformed, along with everything you are wearing and
+      carrying, into a misty cloud for the duration. The spell ends if you drop
+      to 0 hit points.</p><p>While in this form, your only method of movement is
+      a flying speed of 10 feet. You can enter and occupy the space of another
+      creature. You have resistance to nonmagical damage, and you have advantage
+      on Strength, Dexterity, and Constitution saving throws. You can pass
+      through small holes, narrow openings, and even mere cracks, though you
+      treat liquids as though they were solid surfaces. You can't fall and
+      remain hovering in the air even when &amp;reference[stunned apply=false]
+      or otherwise &amp;reference[incapacitated apply=false].</p><p>While in the
+      form of a misty cloud, you can't talk or manipulate objects, and any
+      objects you were carrying or holding can't be dropped, used, or otherwise
+      interacted with. You can't attack or cast spells.</p>
+    tint: '#ffffff'
+    statuses:
+      - transformed
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781359773544
+      modifiedTime: 1781360225675
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!2IWiZAJtOGDoKjiz.gICakgyAi1hrs8ug'
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037345979
-  modifiedTime: 1725992716584
+  modifiedTime: 1781359914779
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!2IWiZAJtOGDoKjiz'
