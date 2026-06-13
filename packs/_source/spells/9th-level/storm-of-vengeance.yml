@@ -11,25 +11,27 @@ system:
       Lightning flashes in the area, thunder booms, and strong winds roar. Each
       creature under the cloud (no more than 5,000 feet beneath the cloud) when
       it appears must make a Constitution saving throw. On a failed save, a
-      creature takes 2d6 thunder damage and becomes Deafened for 5
-      minutes.</p><p>Each round you maintain Concentration on this spell, the
-      storm produces different Effects on your turn.</p><p><strong>Round
-      2</strong>. Acidic rain falls from the cloud. Each creature and object
-      under the cloud takes 1d6 acid damage.</p><p><strong>Round 3</strong>. You
-      call six bolts of lightning from the cloud to strike six creatures or
-      objects of your choice beneath the cloud. A given creature or object can't
-      be struck by more than one bolt. A struck creature must make a Dexterity
-      saving throw. The creature takes 10d6 lightning damage on a failed save,
-      or half as much damage on a successful one.</p><p><strong>Round
-      4</strong>. Hailstones rain down from the cloud. Each creature under the
-      cloud takes 2d6 bludgeoning damage.</p><p><strong>Round 5–10</strong>.
-      Gusts and freezing rain assail the area under the cloud. The area becomes
-      difficult terrain and is heavily obscured. Each creature there takes 1d6
-      cold damage. Ranged weapon attacks in the area are impossible. The wind
-      and rain count as a severe distraction for the purposes of maintaining
-      Concentration on Spells. Finally, gusts of strong wind (ranging from 20 to
-      50 miles per hour) automatically disperse fog, mists, and similar
-      phenomena in the area, whether mundane or magical.</p>
+      creature takes 2d6 thunder damage and becomes &amp;reference[Deafened
+      apply=false] for 5 minutes.</p><p>Each round you maintain Concentration on
+      this spell, the storm produces different Effects on your
+      turn.</p><p><strong>Round 2</strong>. Acidic rain falls from the cloud.
+      Each creature and object under the cloud takes 1d6 acid
+      damage.</p><p><strong>Round 3</strong>. You call six bolts of lightning
+      from the cloud to strike six creatures or objects of your choice beneath
+      the cloud. A given creature or object can't be struck by more than one
+      bolt. A struck creature must make a Dexterity saving throw. The creature
+      takes 10d6 lightning damage on a failed save, or half as much damage on a
+      successful one.</p><p><strong>Round 4</strong>. Hailstones rain down from
+      the cloud. Each creature under the cloud takes 2d6 bludgeoning
+      damage.</p><p><strong>Round 5–10</strong>. Gusts and freezing rain assail
+      the area under the cloud. The area becomes &amp;reference[difficult
+      terrain] and is &amp;reference[heavily obscured]. Each creature there
+      takes 1d6 cold damage. Ranged weapon attacks in the area are impossible.
+      The wind and rain count as a &amp;reference[concentration]{Severe
+      Distraction} for the purposes of maintaining Concentration on Spells.
+      Finally, gusts of strong wind (ranging from 20 to 50 miles per hour)
+      automatically disperse fog, mists, and similar phenomena in the area,
+      whether mundane or magical.</p>
     chat: ''
   source:
     custom: ''
@@ -47,13 +49,18 @@ system:
   target:
     affects:
       choice: false
+      type: creature
+      count: ''
+      special: ''
     template:
       units: ft
       type: radius
       size: '360'
       contiguous: false
+      count: ''
   range:
     units: spec
+    special: sight
   uses:
     max: ''
     recovery: []
@@ -73,112 +80,550 @@ system:
     - somatic
     - concentration
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    Kb0mJl7JsrGs9OAN:
       type: save
+      name: 'Round 1: Deafening Boom'
+      _id: Kb0mJl7JsrGs9OAN
+      img: ''
+      sort: 100000
       activation:
-        type: action
-        value: null
-        override: false
+        type: special
+        override: true
+        condition: On your turn.
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
-        spellSlot: true
+        spellSlot: false
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling:
+              mode: ''
       description:
+        value: >-
+          <p>Each creature under the cloud (no more than 5,000 feet beneath the
+          cloud) when it appears must make a Constitution saving throw. On a
+          failed save, a creature takes 2d6 thunder damage and becomes
+          &amp;reference[Deafened apply=false] for 5 minutes.</p>
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
-        override: false
-      effects: []
+        override: true
+      effects:
+        - _id: FdyZYwspVCq84LMK
+          onSave: false
+          level:
+            min: null
+            max: null
+      flags: {}
       range:
-        override: false
+        units: self
+        override: true
+        special: ''
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: true
           units: ft
+          type: radius
+          size: '360'
+          count: ''
         affects:
           choice: false
-        override: false
+          type: creature
+          count: ''
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: '1'
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
       damage:
-        onSave: half
+        onSave: none
         parts:
-          - number: 2
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
             denomination: 6
             bonus: ''
             types:
               - thunder
-            custom:
-              enabled: false
-              formula: ''
             scaling:
               mode: ''
-              number: null
-              formula: ''
+              number: 1
       save:
-        ability: con
+        ability:
+          - con
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
+        bonus: ''
+    lWQnKu5gulmNcD6h:
+      type: damage
+      name: 'Round 2: Acid Rain'
+      _id: lWQnKu5gulmNcD6h
+      img: ''
+      sort: 200000
+      activation:
+        type: special
+        override: true
+        condition: On your turn.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling:
+              mode: ''
+      description:
+        value: >-
+          <p>Acidic rain falls from the cloud. Each creature and object under
+          the cloud takes 1d6 acid damage.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
-    dnd5eactivity300:
-      _id: dnd5eactivity300
-      type: utility
+        max: '1'
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 6
+            bonus: ''
+            types:
+              - acid
+            scaling:
+              mode: ''
+              number: 1
+    LHS02thv32GFDNB4:
+      type: save
+      name: 'Round 3: Lightning Bolts'
+      _id: LHS02thv32GFDNB4
+      img: ''
+      sort: 300000
       activation:
-        type: action
-        value: null
-        override: false
+        type: special
+        override: true
+        condition: On your turn.
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
-        spellSlot: true
+        spellSlot: false
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling:
+              mode: ''
       description:
+        value: >-
+          <p>You call six bolts of lightning from the cloud to strike six
+          creatures or objects of your choice beneath the cloud. A given
+          creature or object can't be struck by more than one bolt. A struck
+          creature must make a Dexterity saving throw. The creature takes 10d6
+          lightning damage on a failed save, or half as much damage on a
+          successful one.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: ft
+        override: true
+        special: ''
+        value: '360'
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '6'
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: '1'
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        onSave: half
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 10
+            denomination: 6
+            bonus: ''
+            types:
+              - lightning
+            scaling:
+              mode: ''
+              number: 1
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+        visible: true
+        bonus: ''
+    AR8QvQ6OU9PIF5Qj:
+      type: damage
+      name: 'Round 4: Hailstones'
+      img: ''
+      sort: 400000
+      activation:
+        type: special
+        override: true
+        condition: On your turn.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling:
+              mode: ''
+      description:
+        value: >-
+          <p>Hailstones rain down from the cloud. Each creature under the cloud
+          takes 2d6 bludgeoning damage.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: '1'
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: 6
+            bonus: ''
+            types:
+              - bludgeoning
+            scaling:
+              mode: ''
+              number: 1
+      _id: AR8QvQ6OU9PIF5Qj
+    dFKNiCeDuVPLUcLf:
+      type: damage
+      name: 'Round 5 - 10: Gusts & Freezing Rain'
+      _id: dFKNiCeDuVPLUcLf
+      img: ''
+      sort: 500000
+      activation:
+        type: special
+        override: true
+        condition: On your turn.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling:
+              mode: ''
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: '6'
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 6
+            bonus: ''
+            types:
+              - cold
+            scaling:
+              mode: ''
+              number: 1
+    hmeZcry3VB5s2ORq:
+      type: enchant
+      name: Cast
+      _id: hmeZcry3VB5s2ORq
+      img: ''
+      sort: 600000
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: qgkkSsVtqhla6LAc
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - Kb0mJl7JsrGs9OAN
+              - lWQnKu5gulmNcD6h
+              - LHS02thv32GFDNB4
+              - AR8QvQ6OU9PIF5Qj
+              - dFKNiCeDuVPLUcLf
+            effect: []
+            item: []
+      flags: {}
       range:
+        units: self
         override: false
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
         affects:
           choice: false
         override: false
-      roll:
-        formula: 10d6
-        name: ''
-        prompt: false
-        visible: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      enchant:
+        self: true
+      restrictions:
+        allowMagical: false
+        categories: []
+        properties: []
+        type: spell
   identifier: storm-of-vengeance
 sort: 0
-flags: {}
-img: icons/magic/light/projectile-beams-salvo-yellow.webp
-effects: []
+flags:
+  dnd5e:
+    riders:
+      activity:
+        - Kb0mJl7JsrGs9OAN
+        - lWQnKu5gulmNcD6h
+        - LHS02thv32GFDNB4
+        - AR8QvQ6OU9PIF5Qj
+        - dFKNiCeDuVPLUcLf
+img: icons/magic/lightning/bolts-salvo-clouds-sky.webp
+effects:
+  - name: Deafening Boom
+    img: icons/magic/sonic/projectile-sound-rings-wave.webp
+    origin: Compendium.dnd5e.spells.Item.7KjExw0kmuqERa7C
+    transfer: false
+    _id: FdyZYwspVCq84LMK
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 5
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: <p>You are &amp;reference[deafened apply=false] for 5 minutes.</p>
+    tint: '#ffffff'
+    statuses:
+      - deafened
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781383284169
+      modifiedTime: 1781383308987
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!7KjExw0kmuqERa7C.FdyZYwspVCq84LMK'
+  - type: enchantment
+    name: Storm of Vengeance
+    img: icons/magic/lightning/bolts-salvo-clouds-sky.webp
+    disabled: true
+    _id: qgkkSsVtqhla6LAc
+    system:
+      changes: []
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnEnd
+      expired: false
+    description: >-
+      <p>You have conjured a churning storm cloud, producing effects detailed in
+      the @UUID[Compendium.dnd5e.spells.Item.7KjExw0kmuqERa7C]{Storm of
+      Vengeance} every turn.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781383591329
+      modifiedTime: 1781383636147
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!7KjExw0kmuqERa7C.qgkkSsVtqhla6LAc'
 folder: KL6ZY4VRMjojGrL4
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037348074
-  modifiedTime: 1725992717221
+  modifiedTime: 1781383656593
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!7KjExw0kmuqERa7C'
