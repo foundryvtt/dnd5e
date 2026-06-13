@@ -48,12 +48,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '60'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -95,6 +98,24 @@ system:
       effects:
         - _id: fX9KJAQYigkiCMhL
           onSave: false
+          level:
+            min: 4
+            max: 4
+        - _id: YxbwZ5OKWuDoAeeG
+          onSave: false
+          level:
+            min: 5
+            max: 5
+        - _id: eLfg2AYO32DCtzG1
+          onSave: false
+          level:
+            min: 6
+            max: 6
+        - _id: ojk5aU3AWnbZjwxB
+          onSave: false
+          level:
+            min: 7
+            max: null
       range:
         override: false
       target:
@@ -106,66 +127,222 @@ system:
           choice: false
         override: false
       damage:
-        onSave: half
+        onSave: none
         parts: []
       save:
         ability: wis
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: dominate-beast
 sort: 0
 flags: {}
-img: icons/magic/air/air-burst-spiral-large-teal-green.webp
+img: icons/creatures/mammals/bull-horned-blue.webp
 effects:
-  - name: Dominate Beast
+  - name: 'Dominated Beast: 4th Level'
     origin: Compendium.dnd5e.spells.Item.LrPvWHBPmiMQQsKB
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
     disabled: true
     _id: fX9KJAQYigkiCMhL
-    changes: []
     description: >-
       <p>The target is Charmed and must do its best to obey any commands send by
-      the caster.</p>
+      the caster.</p><p>You are &amp;reference[charmed apply=false] and and the
+      caster has a telepathic link with you as long as the two of you are on the
+      same plane of existence. They can use this telepathic link to issue
+      commands to you, which you must do your best to obey. If you complete your
+      order and don't recieve further direction from the caster, you defend and
+      preserve yourself to the best of your ability.</p><p>Each time you take
+      damage, you make a new Wisdom saving throw against the spell. If the
+      saving throw succeeds, the spell ends.</p>
     transfer: false
     statuses:
       - charmed
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     tint: '#ffffff'
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781377766486
+      modifiedTime: 1781377802351
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    img: icons/magic/air/air-burst-spiral-large-teal-green.webp
+    img: icons/creatures/mammals/bull-horned-blue.webp
     type: base
-    system: {}
+    system:
+      changes: []
     sort: 0
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!LrPvWHBPmiMQQsKB.fX9KJAQYigkiCMhL'
+  - name: 'Dominated Beast: 5th Level'
+    origin: Compendium.dnd5e.spells.Item.LrPvWHBPmiMQQsKB
+    duration:
+      value: 10
+      units: minutes
+      expiry: turnStart
+      expired: false
+    disabled: true
+    description: >-
+      <p>The target is Charmed and must do its best to obey any commands send by
+      the caster.</p><p>You are &amp;reference[charmed apply=false] and and the
+      caster has a telepathic link with you as long as the two of you are on the
+      same plane of existence. They can use this telepathic link to issue
+      commands to you, which you must do your best to obey. If you complete your
+      order and don't recieve further direction from the caster, you defend and
+      preserve yourself to the best of your ability.</p><p>Each time you take
+      damage, you make a new Wisdom saving throw against the spell. If the
+      saving throw succeeds, the spell ends.</p>
+    transfer: false
+    statuses:
+      - charmed
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781377803386
+      modifiedTime: 1781377817139
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    img: icons/creatures/mammals/bull-horned-blue.webp
+    type: base
+    system:
+      changes: []
+    sort: 0
+    showIcon: 2
+    start: null
+    folder: null
+    _id: YxbwZ5OKWuDoAeeG
+    _key: '!items.effects!LrPvWHBPmiMQQsKB.YxbwZ5OKWuDoAeeG'
+  - name: 'Dominated Beast: 6th Level'
+    origin: Compendium.dnd5e.spells.Item.LrPvWHBPmiMQQsKB
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    disabled: true
+    description: >-
+      <p>The target is Charmed and must do its best to obey any commands send by
+      the caster.</p><p>You are &amp;reference[charmed apply=false] and and the
+      caster has a telepathic link with you as long as the two of you are on the
+      same plane of existence. They can use this telepathic link to issue
+      commands to you, which you must do your best to obey. If you complete your
+      order and don't recieve further direction from the caster, you defend and
+      preserve yourself to the best of your ability.</p><p>Each time you take
+      damage, you make a new Wisdom saving throw against the spell. If the
+      saving throw succeeds, the spell ends.</p>
+    transfer: false
+    statuses:
+      - charmed
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781377819728
+      modifiedTime: 1781377832545
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    img: icons/creatures/mammals/bull-horned-blue.webp
+    type: base
+    system:
+      changes: []
+    sort: 0
+    showIcon: 2
+    start: null
+    folder: null
+    _id: eLfg2AYO32DCtzG1
+    _key: '!items.effects!LrPvWHBPmiMQQsKB.eLfg2AYO32DCtzG1'
+  - name: 'Dominated Beast: 7th Level'
+    origin: Compendium.dnd5e.spells.Item.LrPvWHBPmiMQQsKB
+    duration:
+      value: 8
+      units: hours
+      expiry: turnStart
+      expired: false
+    disabled: true
+    description: >-
+      <p>The target is Charmed and must do its best to obey any commands send by
+      the caster.</p><p>You are &amp;reference[charmed apply=false] and and the
+      caster has a telepathic link with you as long as the two of you are on the
+      same plane of existence. They can use this telepathic link to issue
+      commands to you, which you must do your best to obey. If you complete your
+      order and don't recieve further direction from the caster, you defend and
+      preserve yourself to the best of your ability.</p><p>Each time you take
+      damage, you make a new Wisdom saving throw against the spell. If the
+      saving throw succeeds, the spell ends.</p>
+    transfer: false
+    statuses:
+      - charmed
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781377834937
+      modifiedTime: 1781377845297
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    img: icons/creatures/mammals/bull-horned-blue.webp
+    type: base
+    system:
+      changes: []
+    sort: 0
+    showIcon: 2
+    start: null
+    folder: null
+    _id: ojk5aU3AWnbZjwxB
+    _key: '!items.effects!LrPvWHBPmiMQQsKB.ojk5aU3AWnbZjwxB'
 folder: 5auWSClKMDUIV5Ni
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037354259
-  modifiedTime: 1725992719201
+  modifiedTime: 1781377860822
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!LrPvWHBPmiMQQsKB'

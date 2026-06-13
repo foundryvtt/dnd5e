@@ -13,9 +13,11 @@ system:
       or the nearest creature of a specific kind (such as a human or a unicorn),
       so long as you have seen such a creature up close—within 30 feet—at least
       once. If the creature you described or named is in a different form, such
-      as being under the effects of a polymorph spell, this spell doesn't locate
-      the creature.</p><p>This spell can't locate a creature if running water at
-      least 10 feet wide blocks a direct path between you and the creature.</p>
+      as being under the effects of a
+      @UUID[Compendium.dnd5e.spells.Item.04nMsTWkIFvkbXlY]{Polymorph} spell,
+      this spell doesn't locate the creature.</p><p>This spell can't locate a
+      creature if running water at least 10 feet wide blocks a direct path
+      between you and the creature.</p>
     chat: ''
   source:
     custom: ''
@@ -34,11 +36,14 @@ system:
     affects:
       type: self
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -97,20 +102,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: locate-creature
 sort: 0
 flags: {}
-img: icons/magic/nature/leaf-glow-maple-orange-purple.webp
+img: icons/commodities/treasure/brooch-gold-green.webp
 effects: []
 folder: 5auWSClKMDUIV5Ni
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037362628
-  modifiedTime: 1725992721971
+  modifiedTime: 1781375277513
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!gXtzz9t1DTzJeLr4'

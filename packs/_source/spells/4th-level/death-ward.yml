@@ -32,11 +32,14 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -74,7 +77,9 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: pTOjdHl8TyRdhRjl
+          level: {}
       range:
         override: false
       target:
@@ -93,20 +98,69 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: death-ward
 sort: 0
 flags: {}
-img: icons/magic/control/fear-fright-monster-purple-blue.webp
-effects: []
+img: icons/magic/life/ankh-shadow-green.webp
+effects:
+  - name: Death Ward
+    img: icons/magic/life/ankh-shadow-green.webp
+    origin: Compendium.dnd5e.spells.Item.VtCXMdyM6mAdIJZb
+    transfer: false
+    _id: pTOjdHl8TyRdhRjl
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 8
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You have been granted a measure of protection from death. The first
+      time you would drop to 0 hit points as a result of taking damage, you
+      instead drop to 1 hit point, and the spell ends.</p><p>If the spell is
+      still in effect when you are subjected to an effect that would kill you
+      instantaneously without dealing damage, that effect is instead negated
+      against you, and the spell ends.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781378037274
+      modifiedTime: 1781378118530
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!VtCXMdyM6mAdIJZb.pTOjdHl8TyRdhRjl'
 folder: 5auWSClKMDUIV5Ni
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037357512
-  modifiedTime: 1725992720261
+  modifiedTime: 1781378037314
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!VtCXMdyM6mAdIJZb'

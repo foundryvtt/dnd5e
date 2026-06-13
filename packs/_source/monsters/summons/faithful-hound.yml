@@ -1,8 +1,8 @@
 folder: 89daM0oezivxN75Y
-name: Arcane Eye
+name: Faithful Hound
 type: npc
-_id: tuHyePQ9GazMTyc0
-img: icons/magic/perception/eye-slit-pink.webp
+_id: GoBpZC30OYlQso2d
+img: systems/dnd5e/tokens/beast/Wolf.webp
 system:
   currency:
     pp: 0
@@ -18,6 +18,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     dex:
       value: 0
       proficient: 0
@@ -25,6 +35,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     con:
       value: 0
       proficient: 0
@@ -32,6 +52,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     int:
       value: 0
       proficient: 0
@@ -39,6 +69,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     wis:
       value: 0
       proficient: 0
@@ -46,6 +86,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     cha:
       value: 0
       proficient: 0
@@ -53,6 +103,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
   bonuses:
     mwak:
       attack: ''
@@ -257,35 +317,28 @@ system:
   spells:
     spell1:
       value: 0
-      override: null
     spell2:
       value: 0
-      override: null
     spell3:
       value: 0
-      override: null
     spell4:
       value: 0
-      override: null
     spell5:
       value: 0
-      override: null
     spell6:
       value: 0
-      override: null
     spell7:
       value: 0
-      override: null
     spell8:
       value: 0
-      override: null
     spell9:
       value: 0
-      override: null
     pact:
       value: 0
-      override: null
   attributes:
+    ac:
+      calc: default
+      flat: null
     init:
       ability: ''
       roll:
@@ -294,23 +347,22 @@ system:
         mode: 0
       bonus: ''
     movement:
-      burrow: null
-      climb: null
-      fly: 30
-      swim: null
-      walk: null
       units: null
-      hover: true
+      hover: false
+      ignoredDifficultTerrain: []
     attunement:
       max: 3
     senses:
-      darkvision: null
-      blindsight: null
-      tremorsense: null
-      truesight: null
+      ranges:
+        blindsight: null
+        darkvision: null
+        tremorsense: null
+        truesight: null
       units: null
       special: ''
-    spellcasting: int
+    spell:
+      level: 0
+    spellcasting: ''
     exhaustion: 0
     concentration:
       ability: ''
@@ -321,62 +373,71 @@ system:
       bonuses:
         save: ''
       limit: 1
-    ac:
-      flat: 0
-      calc: flat
+    loyalty: {}
     hd:
       spent: 0
     hp:
-      value: 0
-      max: 0
+      max: null
       temp: null
       tempmax: null
+      value: 0
       formula: ''
     death:
-      ability: ''
       roll:
         min: null
         max: null
         mode: 0
       success: 0
       failure: 0
+      bonuses:
+        save: ''
+    price:
+      value: null
+      denomination: gp
   details:
     biography:
       value: ''
       public: ''
     alignment: ''
-    race: null
-    type: {}
-    environment: ''
-    cr: 0
-    spellLevel: 0
     ideal: ''
     bond: ''
     flaw: ''
+    race: null
+    type: {}
+    habitat:
+      value: []
+      custom: ''
+    cr: null
+    treasure:
+      value: []
   resources:
     legact:
-      value: 0
       max: 0
+      spent: 0
     legres:
-      value: 0
       max: 0
+      spent: 0
     lair:
       value: false
       initiative: null
+      inside: false
+  source:
+    revision: 1
+    rules: '2014'
   traits:
     size: med
     di:
-      bypasses: []
       value: []
       custom: ''
+      bypasses: []
     dr:
-      bypasses: []
       value: []
       custom: ''
+      bypasses: []
     dv:
-      bypasses: []
       value: []
       custom: ''
+      bypasses: []
     dm:
       amount: {}
       bypasses: []
@@ -386,40 +447,40 @@ system:
     languages:
       value: []
       custom: ''
-  source:
-    revision: 1
-    rules: '2014'
-    book: ''
+      communication: {}
+    important: false
 prototypeToken:
-  name: Arcane Eye
+  name: Faithful Hound
   displayName: 20
   actorLink: false
-  appendNumber: false
-  prependAdjective: false
+  width: 1
+  height: 1
+  depth: 1
   texture:
-    src: icons/svg/eye.svg
-    scaleX: 1
-    scaleY: 1
-    tint: '#9128d7'
+    src: systems/dnd5e/tokens/beast/Wolf.webp
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
+    scaleX: 1
+    scaleY: 1
+    tint: '#ffffff'
     alphaThreshold: 0.75
-  width: 1
-  height: 1
   lockRotation: false
   rotation: 0
   alpha: 1
   disposition: -1
-  displayBars: 20
+  displayBars: 0
   bar1:
     attribute: attributes.hp
   bar2:
     attribute: null
   light:
+    negative: false
+    priority: 0
     alpha: 0.5
     angle: 360
     bright: 0
+    color: null
     coloration: 1
     dim: 0
     attenuation: 0.5
@@ -435,23 +496,25 @@ prototypeToken:
     darkness:
       min: 0
       max: 1
-    color: null
-    negative: false
-    priority: 0
   sight:
-    enabled: true
-    range: 30
+    enabled: false
+    range: 0
     angle: 360
     visionMode: basic
+    color: null
     attenuation: 0.1
     brightness: 0
     saturation: 0
     contrast: 0
-    color: null
-  detectionModes: {}
-  flags:
-    dnd5e: {}
-  randomImg: false
+  detectionModes:
+    seeInvisibility:
+      range: 30
+      enabled: true
+    senseInvisibility:
+      range: 30
+      enabled: true
+  occludable:
+    radius: 0
   ring:
     enabled: false
     colors:
@@ -459,69 +522,25 @@ prototypeToken:
       background: null
     effects: 0
     subject:
-      texture: null
       scale: 1
-  occludable:
-    radius: 0
+      texture: null
   turnMarker:
     mode: 1
     animation: null
     src: null
     disposition: false
   movementAction: null
-  depth: 1
+  flags: {}
+  randomImg: false
+  appendNumber: false
+  prependAdjective: false
 items:
-  - name: Move
+  - name: See Invisibility
     type: feat
-    _id: cCkrxncnhk9T9Y7m
-    img: icons/magic/movement/trail-streak-pink.webp
+    _id: NiEuJouJ3e8vBN1u
+    img: icons/magic/perception/orb-eye-scrying.webp
     system:
-      activities:
-        yGKgBtdnArPJ3Qfg:
-          type: utility
-          name: Move
-          _id: yGKgBtdnArPJ3Qfg
-          img: null
-          sort: 0
-          activation:
-            type: action
-            override: false
-          consumption:
-            scaling:
-              allowed: false
-            spellSlot: true
-            targets: []
-          description:
-            value: ''
-          duration:
-            units: inst
-            concentration: false
-            override: false
-          effects: []
-          flags: {}
-          range:
-            units: self
-            override: false
-          target:
-            template:
-              contiguous: false
-              stationary: false
-              units: ft
-            affects:
-              choice: false
-            override: false
-            prompt: true
-          uses:
-            spent: 0
-            recovery: []
-          visibility:
-            level: {}
-            requireAttunement: false
-            requireIdentification: false
-            requireMagic: false
-          roll:
-            prompt: false
-            visible: false
+      activities: {}
       uses:
         spent: 0
         recovery: []
@@ -529,13 +548,10 @@ items:
       advancement: {}
       description:
         value: >-
-          <p>As an action, you can move the eye up to 30 feet in any direction.
-          There is no limit to how far away from you the eye can move, but it
-          can't enter another plane of existence. A solid barrier blocks the
-          eye's movement, but the eye can pass through an opening as small as 1
-          inch in diameter.</p>
+          <p>The hound sees &amp;reference[invisible apply=false] creatures and
+          can see into the Ethereal Plane. It ignores illusions.</p>
         chat: ''
-      identifier: move
+      identifier: see-invisibility
       source:
         revision: 1
         rules: '2014'
@@ -545,7 +561,8 @@ items:
         items: []
         repeatable: false
         level: null
-      properties: []
+      properties:
+        - trait
       requirements: ''
       type:
         value: monster
@@ -560,71 +577,218 @@ items:
       coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1781370389703
-      modifiedTime: 1781370414072
+      createdTime: 1781376872255
+      modifiedTime: 1781376908679
       lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-    _key: '!actors.items!tuHyePQ9GazMTyc0.cCkrxncnhk9T9Y7m'
+    _key: '!actors.items!GoBpZC30OYlQso2d.NiEuJouJ3e8vBN1u'
+  - name: Bite
+    type: weapon
+    _id: zqzQCW3CmDHxDah3
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
+    system:
+      activities:
+        RNJfHj26uGMhRa93:
+          _id: RNJfHj26uGMhRa93
+          type: attack
+          img: ''
+          sort: 0
+          activation:
+            type: turnStart
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: ''
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: self
+            override: false
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          attack:
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: ''
+              classification: spell
+            ability: ''
+            bonus: ''
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts: []
+          name: ''
+      damage:
+        base:
+          types:
+            - piercing
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+          number: 4
+          denomination: 8
+          bonus: ''
+        versatile:
+          types: []
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      description:
+        value: >-
+          <p>At the start of each of your turns, the hound attempts to bite one
+          creature within 5 feet of it that is hostile to you. The hound's
+          Attack bonus is equal to your Spellcasting ability modifier + your
+          Proficiency Bonus. On a hit, it deals 4d8 piercing damage.</p>
+        chat: ''
+      identifier: bite
+      source:
+        revision: 1
+        rules: '2014'
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 0
+        units: lb
+      price:
+        value: 0
+        denomination: gp
+      rarity: ''
+      attunement: ''
+      attuned: false
+      equipped: true
+      crew:
+        value: []
+      ammunition: {}
+      armor: {}
+      properties: []
+      proficient: null
+      range:
+        units: ft
+        value: null
+        long: null
+        reach: null
+      type:
+        value: ''
+        baseItem: ''
+      mastery: ''
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781376918127
+      modifiedTime: 1781377143501
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!actors.items!GoBpZC30OYlQso2d.zqzQCW3CmDHxDah3'
 effects:
   - name: Invisible
-    _id: VUI3PxyI4LH2J8tm
-    statuses:
-      - invisible
-    description: >-
-      <ul><li>An invisible creature is impossible to see without the aid of
-      magic or a special sense. For the purpose of hiding, the creature is
-      heavily obscured. The creature's location can be detected by any noise it
-      makes or any tracks it leaves.</li><li>Attack rolls against the creature
-      have disadvantage, and the creature's attack rolls have
-      advantage.</li></ul>
+    _id: GXRas3307mHJ8Wbl
+    img: systems/dnd5e/icons/svg/documents/active-effect.svg
+    type: base
+    system:
+      changes: []
     disabled: false
+    start:
+      time: 18
+      combat: null
+      combatant: null
+      initiative: null
+      round: null
+      turn: null
     duration:
       value: null
       units: seconds
       expiry: null
       expired: false
+    description: <p>You are invisible to all creatures except your summoner.</p>
     origin: null
+    tint: '#ffffff'
     transfer: false
-    flags: {}
+    statuses:
+      - invisible
+      - ethereal
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     _stats:
-      compendiumSource: Actor.eIQIKf1xngnKcRpg.ActiveEffect.dnd5einvisible00
-      duplicateSource: null
       coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781376790770
+      modifiedTime: 1781376821879
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
       exportSource: null
-    img: systems/dnd5e/icons/svg/statuses/invisible.svg
-    type: base
-    system:
-      changes: []
-    tint: '#ffffff'
-    sort: 0
-    showIcon: 2
-    start:
-      combat: null
-      round: null
-      time: 0
-      turn: null
-      combatant: null
-      initiative: null
-    folder: null
-    _key: '!actors.effects!tuHyePQ9GazMTyc0.VUI3PxyI4LH2J8tm'
-sort: 500000
+    _key: '!actors.effects!GoBpZC30OYlQso2d.GXRas3307mHJ8Wbl'
+sort: 0
 ownership:
   default: 0
 flags: {}
 _stats:
-  duplicateSource: null
   coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 6.0.0
-  createdTime: 1726171263873
-  modifiedTime: 1781370336964
+  createdTime: 1781376711887
+  modifiedTime: 1781376994576
   lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
   exportSource: null
-_key: '!actors!tuHyePQ9GazMTyc0'
+_key: '!actors!GoBpZC30OYlQso2d'

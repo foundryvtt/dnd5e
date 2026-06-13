@@ -37,14 +37,19 @@ system:
   target:
     affects:
       choice: false
+      type: creature
     template:
       units: ft
       type: wall
       size: '60'
       contiguous: false
+      width: '1'
+      height: '20'
+      count: ''
   range:
     value: '120'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -65,73 +70,247 @@ system:
     - material
     - concentration
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    c7IcbrVmmq74Rzqn:
       type: save
+      name: Conjure Wall of Fire
+      _id: c7IcbrVmmq74Rzqn
+      img: ''
+      sort: 100000
       activation:
         type: action
-        value: null
         override: false
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: ''
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects: []
+      flags: {}
       range:
+        units: self
         override: false
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
+          type: wall
+          size: ''
+          width: ''
+          height: ''
+          count: ''
         affects:
           choice: false
+          type: creature
+          count: ''
+          special: ''
         override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
       damage:
         onSave: half
         parts:
-          - number: 5
+          - custom:
+              enabled: false
+              formula: ''
+            number: 5
             denomination: 8
             bonus: ''
             types:
               - fire
-            custom:
-              enabled: false
-              formula: ''
             scaling:
               mode: whole
               number: 1
               formula: ''
       save:
-        ability: dex
+        ability:
+          - dex
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
+        bonus: ''
+    M7ljtGAftvbGGZ0J:
+      type: save
+      name: Conjure Ringed Wall of Fire
+      img: ''
+      sort: 200000
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: circle
+          size: '10'
+          count: ''
+          width: ''
+          height: ''
+        affects:
+          choice: false
+          type: creature
+          count: ''
+          special: ''
+        override: true
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        onSave: half
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 5
+            denomination: 8
+            bonus: ''
+            types:
+              - fire
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+        visible: true
+        bonus: ''
+      _id: M7ljtGAftvbGGZ0J
+    mVqRN9uGISDMRO1z:
+      type: damage
+      name: Wall Contact Damage
+      _id: mVqRN9uGISDMRO1z
+      img: ''
+      sort: 300000
+      activation:
+        type: special
+        override: true
+        condition: >-
+          When a creature ends their turn within 10 feet of the harmful sideof
+          the wall or inside the wall.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>One side of the wall, selected by you when you cast this spell,
+          deals 5d8 fire damage to each creature that ends its turn within 10
+          feet of that side or inside the wall. A creature takes the same damage
+          when it enters the wall for the first time on a turn or ends its turn
+          there. The other side of the wall deals no damage.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: ''
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 5
+            denomination: 8
+            bonus: ''
+            types:
+              - fire
+            scaling:
+              mode: whole
+              number: 1
   identifier: wall-of-fire
 sort: 0
 flags: {}
-img: icons/magic/air/fog-gas-smoke-swirling-orange.webp
+img: icons/magic/fire/projectile-wave-yellow.webp
 effects: []
 folder: 5auWSClKMDUIV5Ni
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037358134
-  modifiedTime: 1725992720467
+  modifiedTime: 1781379659568
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!X3DrXgxjwI2dvkD6'
