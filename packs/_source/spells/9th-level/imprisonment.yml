@@ -18,11 +18,12 @@ system:
       sphere, nor can any creature Teleport or use Planar Travel to get into or
       out of it. The special component for this version of the spell is a small
       mithral orb.</p><p><strong>Chaining</strong>. Heavy chains, firmly rooted
-      in the ground, hold the target in place. The target is Restrained until
-      the spell ends, and it can't move or be moved by any means until then. The
-      special component for this version of the spell is a fine chain of
-      precious metal.</p><p><strong>Hedged Prison</strong>. The spell transports
-      the target into a tiny Demiplane that is warded against teleportation and
+      in the ground, hold the target in place. The target is
+      &amp;reference[Restrained apply=false] until the spell ends, and it can't
+      move or be moved by any means until then. The special component for this
+      version of the spell is a fine chain of precious
+      metal.</p><p><strong>Hedged Prison</strong>. The spell transports the
+      target into a tiny Demiplane that is warded against teleportation and
       Planar Travel. The Demiplane can be a labyrinth, a cage, a tower, or any
       similar confined structure or area of your choice. The special component
       for this version of the spell is a miniature representation of the prison
@@ -43,8 +44,9 @@ system:
       the condition is reasonable and has a likelihood of coming to pass. The
       Conditions can be based on a creature's name, identity, or deity but
       otherwise must be based on observable Actions or qualities and not based
-      on intangibles such as level, class, or Hit Points.</p><p>A Dispel Magic
-      spell can end the spell only if it is cast as a 9th-level spell, targeting
+      on intangibles such as level, class, or Hit Points.</p><p>A
+      @UUID[Compendium.dnd5e.spells.Item.15Fa6q1nH27XfbR8]{Dispel Magic} spell
+      can end the spell only if it is cast as a 9th-level spell, targeting
       either the prison or the special component used to create it.</p><p>You
       can use a particular special component to create only one prison at a
       time. If you cast the spell again using the same component, the target of
@@ -68,12 +70,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -115,7 +120,22 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: X0R4qjZuKiddR6sh
+          level: {}
+          onSave: false
+        - _id: RCunbEAwoAFbVyfE
+          level: {}
+          onSave: false
+        - _id: z6w7mKaQI4S8tyZu
+          level: {}
+          onSave: false
+        - _id: Yde2VRHr9AOSVb5u
+          level: {}
+          onSave: false
+        - _id: wb9fJ8H6ZRSEzrvS
+          level: {}
+          onSave: false
       range:
         override: false
       target:
@@ -127,30 +147,260 @@ system:
           choice: false
         override: false
       damage:
-        onSave: half
+        onSave: none
         parts: []
       save:
         ability: wis
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: imprisonment
 sort: 0
 flags: {}
-img: icons/magic/control/debuff-chains-ropes-net-red-orange.webp
-effects: []
+img: icons/environment/wilderness/tomb-entrance.webp
+effects:
+  - name: 'Imprisonment: Buried'
+    img: icons/magic/earth/orb-stone-smoke-teal.webp
+    origin: Compendium.dnd5e.spells.Item.ZVnL9L8v1KC9TBF4
+    transfer: false
+    _id: X0R4qjZuKiddR6sh
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You are imprisoned far beneath the earth in a sphere of magical force
+      that is just large enough to contain you. Nothing can pass through the
+      sphere, nor can any creature teleport or use planar travel to get into or
+      out of it.</p><p>This spell can be ended by fulfilling the conditions the
+      caster set when the spell was cast (if a condition was set). A
+      @UUID[Compendium.dnd5e.spells.Item.15Fa6q1nH27XfbR8]{Dispel Magic} spell
+      can end the spell only if it is cast as a 9th-level spell, targeting
+      either the prison or the special component used to create it.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 2
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781381655315
+      modifiedTime: 1781382869559
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!ZVnL9L8v1KC9TBF4.X0R4qjZuKiddR6sh'
+  - name: 'Imprisonment: Chained'
+    img: icons/magic/fire/flame-burning-chain.webp
+    origin: Compendium.dnd5e.spells.Item.ZVnL9L8v1KC9TBF4
+    transfer: false
+    _id: RCunbEAwoAFbVyfE
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>Heavy chains, firmly rooted in the ground, hold you in place. You are
+      &amp;reference[restrained apply=false] until the spell ends and you can't
+      move or be moved by any means until then.</p><p>This spell can be ended by
+      fulfilling the conditions the caster set when the spell was cast (if a
+      condition was set). A
+      @UUID[Compendium.dnd5e.spells.Item.15Fa6q1nH27XfbR8]{Dispel Magic} spell
+      can end the spell only if it is cast as a 9th-level spell, targeting
+      either the prison or the special component used to create it.</p>
+    tint: '#ffffff'
+    statuses:
+      - restrained
+    showIcon: 2
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781381725672
+      modifiedTime: 1781382872468
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!ZVnL9L8v1KC9TBF4.RCunbEAwoAFbVyfE'
+  - name: 'Imprisonment: Hedged Prison'
+    img: icons/environment/wilderness/terrain-forest-gray.webp
+    origin: Compendium.dnd5e.spells.Item.ZVnL9L8v1KC9TBF4
+    transfer: false
+    _id: z6w7mKaQI4S8tyZu
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You have been transported into a tiny demiplane that is warded against
+      teleportation and planar travel. The demiplane is a labyrinth, a cage, a
+      tower, or any similar confined structure or area of the caster's
+      choice.</p><p>This spell can be ended by fulfilling the conditions the
+      caster set when the spell was cast (if a condition was set). A
+      @UUID[Compendium.dnd5e.spells.Item.15Fa6q1nH27XfbR8]{Dispel Magic} spell
+      can end the spell only if it is cast as a 9th-level spell, targeting
+      either the prison or the special component used to create it.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 2
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781381806456
+      modifiedTime: 1781382876054
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!ZVnL9L8v1KC9TBF4.z6w7mKaQI4S8tyZu'
+  - name: 'Imprisonment: Minimum Containment'
+    img: icons/commodities/gems/gem-rough-cushion-purple.webp
+    origin: Compendium.dnd5e.spells.Item.ZVnL9L8v1KC9TBF4
+    transfer: false
+    _id: Yde2VRHr9AOSVb5u
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You have been shrunk to a height of 1 inch and are imprisoned inside a
+      gemstone or similar object. Light can pass through the gemstone normally
+      (allowing you to see out and other creatures to see in), but nothing else
+      can pass through, even by means of teleportation or planar travel. The
+      gemstone can't be cut or broken while the spell remains in
+      effect.</p><p>This spell can be ended by fulfilling the conditions the
+      caster set when the spell was cast (if a condition was set). A
+      @UUID[Compendium.dnd5e.spells.Item.15Fa6q1nH27XfbR8]{Dispel Magic} spell
+      can end the spell only if it is cast as a 9th-level spell, targeting
+      either the prison or the special component used to create it.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 2
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781382562968
+      modifiedTime: 1781382878508
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!ZVnL9L8v1KC9TBF4.Yde2VRHr9AOSVb5u'
+  - name: 'Imprisonment: Slumber'
+    img: icons/environment/wilderness/tomb-entrance.webp
+    origin: Compendium.dnd5e.spells.Item.ZVnL9L8v1KC9TBF4
+    transfer: false
+    _id: wb9fJ8H6ZRSEzrvS
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You have fallen asleep and can't be awoken.</p><p>This spell can be
+      ended by fulfilling the conditions the caster set when the spell was cast
+      (if a condition was set). A
+      @UUID[Compendium.dnd5e.spells.Item.15Fa6q1nH27XfbR8]{Dispel Magic} spell
+      can end the spell only if it is cast as a 9th-level spell, targeting
+      either the prison or the special component used to create it.</p>
+    tint: '#ffffff'
+    statuses:
+      - sleeping
+    showIcon: 2
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781382758185
+      modifiedTime: 1781382881696
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!ZVnL9L8v1KC9TBF4.wb9fJ8H6ZRSEzrvS'
 folder: KL6ZY4VRMjojGrL4
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037359400
-  modifiedTime: 1725992720871
+  modifiedTime: 1781382758232
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!ZVnL9L8v1KC9TBF4'
