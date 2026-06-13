@@ -8,12 +8,18 @@ system:
     value: >-
       <p>You transform up to ten centipedes, three spiders, five wasps, or one
       Scorpion within range into giant versions of their natural forms for the
-      Duration. A centipede becomes a Giant Centipede, a Spider becomes a Giant
-      Spider, a wasp becomes a Giant Wasp, and a Scorpion becomes a Giant
-      Scorpion.</p><p>Each creature obeys your verbal commands, and in Combat,
-      they act on Your Turn each round. The DM has the Statistics for these
+      Duration. A centipede becomes a
+      @UUID[Compendium.dnd5e.monsters.Actor.Hn8FFLEzscgT7azz]{Giant Centipede},
+      a Spider becomes a
+      @UUID[Compendium.dnd5e.monsters.Actor.v99wOosUJjUgcUNF]{Giant Spider}, a
+      wasp becomes a
+      @UUID[Compendium.dnd5e.monsters.Actor.4tl0s2SnaLjkoDiI]{Giant Wasp}, and a
+      Scorpion becomes a
+      @UUID[Compendium.dnd5e.monsters.Actor.GxgIVRX5GbVTifiF]{Giant
+      Scorpion}.</p><p>Each creature obeys your verbal commands, and in Combat,
+      they act on your turn each round. The DM has the Statistics for these
       creatures and resolves their Actions and Movement.</p><p>A creature
-      remains in its giant size for the Duration, until it drops to 0 Hit
+      remains in its giant size for the duration, until it drops to 0 Hit
       Points, or until you use an action to dismiss the effect on it.</p><p>The
       DM might allow you to choose different Targets. For example, if you
       transform a bee, its giant version might have the same Statistics as a
@@ -37,12 +43,15 @@ system:
       type: creature
       count: '10'
       choice: false
+      special: ''
     template:
       units: spec
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -114,13 +123,15 @@ system:
           level:
             min: null
             max: null
-        - count: ''
+          types: []
+        - count: '1'
           name: ''
           _id: zzh3sTByUIvUYVvE
           uuid: Compendium.dnd5e.monsters.Actor.GxgIVRX5GbVTifiF
           level:
             min: null
             max: null
+          types: []
         - count: '3'
           name: ''
           _id: Mjp51GLFAYyA6NgW
@@ -128,6 +139,7 @@ system:
           level:
             min: null
             max: null
+          types: []
         - count: '5'
           name: ''
           _id: LkxYBiqNIyzUJxuH
@@ -135,6 +147,7 @@ system:
           level:
             min: null
             max: null
+          types: []
       summon:
         identifier: ''
         mode: ''
@@ -147,19 +160,66 @@ system:
       name: ''
       img: ''
       appliedEffects: []
+      visibility:
+        level:
+          min: null
+          max: null
+      tempHP: ''
+      effects:
+        - _id: 0pp4rJR7nQHmlENe
+          level: {}
   identifier: giant-insect
 sort: 0
 flags: {}
-img: icons/magic/nature/leaf-glow-triple-orange.webp
-effects: []
+img: icons/creatures/invertebrates/spider-mandibles-brown.webp
+effects:
+  - name: Giant Insect
+    img: icons/creatures/invertebrates/spider-mandibles-brown.webp
+    origin: Compendium.dnd5e.spells.Item.czXrVRx6XYRWsHAi
+    transfer: false
+    _id: 0pp4rJR7nQHmlENe
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You have been created by the
+      @UUID[Compendium.dnd5e.spells.Item.czXrVRx6XYRWsHAi]{Giant Insect}
+      spell.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 0
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781375487515
+      modifiedTime: 1781375519218
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!czXrVRx6XYRWsHAi.0pp4rJR7nQHmlENe'
 folder: 5auWSClKMDUIV5Ni
 _stats:
   duplicateSource: null
-  coreVersion: '13.350'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037360727
-  modifiedTime: 1760981610690
+  modifiedTime: 1781375538953
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!czXrVRx6XYRWsHAi'

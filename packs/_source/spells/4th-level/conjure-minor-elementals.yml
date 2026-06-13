@@ -5,7 +5,7 @@ ownership:
 type: spell
 system:
   description:
-    value: "<p>You summon elementals that appear in unoccupied spaces that you can see within range. You choose one the following options for what appears:</p>\n<ul>\n<li>One elemental of challenge rating 2 or lower</li>\n<li>Two elementals of challenge rating 1 or lower</li>\n<li>Four elementals of challenge rating 1/2 or lower</li>\n<li>Eight elementals of challenge rating 1/4 or lower.</li>\n</ul>\n<p>An elemental summoned by this spell disappears when it drops to 0 hit points or when the spell ends.</p><p>The summoned creatures are friendly to you and your companions. Roll initiative for the summoned creatures as a group, which has its own turns. They obey any verbal commands that you issue to them (no action required by you). If you don't issue any commands to them, they defend themselves from hostile creatures, but otherwise take no actions.</p><p><strong>Higher Levels.\_</strong>When you cast this spell using certain higher-level spell slots, you choose one of the summoning options above, and more creatures appear: twice as many with a 6th-level slot and three times as many with an 8th-level slot.</p>"
+    value: "<p>You summon elementals that appear in unoccupied spaces that you can see within range. You choose one the following options for what appears:</p><ul><li><p>One elemental of challenge rating 2 or lower</p></li><li><p>Two elementals of challenge rating 1 or lower</p></li><li><p>Four elementals of challenge rating 1/2 or lower</p></li><li><p>Eight elementals of challenge rating 1/4 or lower.</p></li></ul><p>An elemental summoned by this spell disappears when it drops to 0 hit points or when the spell ends.</p><p>The summoned creatures are friendly to you and your companions. Roll initiative for the summoned creatures as a group, which has its own turns. They obey any verbal commands that you issue to them (no action required by you). If you don't issue any commands to them, they defend themselves from hostile creatures, but otherwise take no actions.</p><p><strong>Higher Levels.\_</strong>When you cast this spell using certain higher-level spell slots, you choose one of the summoning options above, and more creatures appear: twice as many with a 6th-level slot and three times as many with an 8th-level slot.</p>"
     chat: ''
   source:
     custom: ''
@@ -24,12 +24,16 @@ system:
     affects:
       type: space
       choice: false
+      count: ''
+      special: ''
     template:
       units: any
       contiguous: false
+      type: ''
   range:
     value: '90'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -146,19 +150,72 @@ system:
       name: ''
       img: ''
       appliedEffects: []
+      visibility:
+        level:
+          min: null
+          max: null
+      tempHP: ''
+      effects:
+        - _id: UEWE8BJT1TE6KDt0
+          level: {}
   identifier: conjure-minor-elementals
 sort: 0
 flags: {}
-img: icons/magic/symbols/runes-star-orange.webp
-effects: []
+img: icons/creatures/magical/spirit-fire-yellow.webp
+effects:
+  - name: Conjured Elemental
+    img: icons/creatures/magical/spirit-fire-yellow.webp
+    origin: Compendium.dnd5e.spells.Item.KgEw3sDr39C6g8nY
+    transfer: false
+    _id: UEWE8BJT1TE6KDt0
+    type: base
+    system:
+      changes:
+        - key: name
+          type: override
+          value: Conjured {}
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You have been summoned by the
+      @UUID[Compendium.dnd5e.spells.Item.KgEw3sDr39C6g8nY]{Conjure Minor
+      Elementals} spell.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781374102148
+      modifiedTime: 1781374130884
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.spells.Item.1Drt0SHxbEAHxprN.ActiveEffect.sfKQeT5HoeUFiaBj
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!KgEw3sDr39C6g8nY.UEWE8BJT1TE6KDt0'
 folder: 5auWSClKMDUIV5Ni
 _stats:
   duplicateSource: null
-  coreVersion: '13.350'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037353557
-  modifiedTime: 1760981540777
+  modifiedTime: 1781374106316
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!KgEw3sDr39C6g8nY'

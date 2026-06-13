@@ -8,12 +8,12 @@ system:
     value: >-
       <p>You create an invisible, magical eye within range that hovers in the
       air for the duration.</p><p>You mentally receive visual information from
-      the eye, which has normal vision and darkvision out to 30 feet. The eye
-      can look in every direction.</p><p>As an action, you can move the eye up
-      to 30 feet in any direction. There is no limit to how far away from you
-      the eye can move, but it can't enter another plane of existence. A solid
-      barrier blocks the eye's movement, but the eye can pass through an opening
-      as small as 1 inch in diameter.</p>
+      the eye, which has normal vision and &amp;reference[darkvision] out to 30
+      feet. The eye can look in every direction.</p><p>As an action, you can
+      move the eye up to 30 feet in any direction. There is no limit to how far
+      away from you the eye can move, but it can't enter another plane of
+      existence. A solid barrier blocks the eye's movement, but the eye can pass
+      through an opening as small as 1 inch in diameter.</p>
     chat: ''
   source:
     custom: ''
@@ -31,12 +31,15 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -56,7 +59,6 @@ system:
     - somatic
     - material
     - concentration
-    - mgc
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -118,16 +120,16 @@ system:
   identifier: arcane-eye
 sort: 0
 flags: {}
-img: icons/magic/perception/eye-ringed-glow-angry-teal.webp
+img: icons/magic/perception/eye-slit-pink.webp
 effects: []
 folder: 5auWSClKMDUIV5Ni
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037352502
-  modifiedTime: 1725992718628
+  modifiedTime: 1781370023396
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!ImlCJQwR1VL40Qem'

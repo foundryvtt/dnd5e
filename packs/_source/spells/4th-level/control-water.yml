@@ -65,14 +65,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: cube
       size: '100'
       contiguous: false
+      count: ''
   range:
     value: '300'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -93,73 +96,563 @@ system:
     - material
     - concentration
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: save
+    6iqra0WJJEMKsrd7:
+      type: enchant
+      name: Cast
+      _id: 6iqra0WJJEMKsrd7
+      img: ''
+      sort: 100000
       activation:
         type: action
-        value: null
         override: false
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: ''
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: 0V7pt4ol6yamqIFf
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - 3uKDmmkF8irChzl6
+              - bgxFEFucjRRDxtIr
+              - tcZLcPr3nsDOEaiC
+              - HneTMN8U6QKaRU7B
+              - BTnvB5e4TEPEgZaS
+            effect: []
+            item: []
+      flags: {}
       range:
+        units: self
         override: false
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
         affects:
           choice: false
         override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      enchant:
+        self: true
+      restrictions:
+        allowMagical: false
+        categories: []
+        properties: []
+        type: spell
+    3uKDmmkF8irChzl6:
+      type: utility
+      name: Flood
+      _id: 3uKDmmkF8irChzl6
+      img: ''
+      sort: 200000
+      activation:
+        type: action
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>You cause the water level of all standing water in the area to rise
+          by as much as 20 feet. If the area includes a shore, the flooding
+          water spills over onto dry land, instead create a 20-foot tall wave
+          that travels from one side of the area to the other and then crashes
+          down. Any Huge or smaller vehicles in the wave's path are carried with
+          it to the other side. Any Huge or smaller vehicles struck by the wave
+          have a 25 percent chance of capsizing.</p><p>The water level remains
+          elevated until the spell ends or you choose a different effect. If
+          this effect produced a wave, the wave repeats on the start of your
+          next turn while the flood effect lasts.</p>
+        chatFlavor: ''
+      duration:
+        units: round
+        concentration: false
+        override: true
+        value: '1'
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+          special: ''
+          count: ''
+        override: true
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+    bgxFEFucjRRDxtIr:
+      type: utility
+      name: Part Water
+      _id: bgxFEFucjRRDxtIr
+      img: ''
+      sort: 300000
+      activation:
+        type: action
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>You cause water in the area to move apart and create a trench. The
+          trench extends across the spell's area, and the separated water forms
+          a wall to either side. The trench remains until the spell ends or you
+          choose a different effect. The water then slowly fills in the trench
+          over the course of the next round until the normal water level is
+          restored.</p>
+        chatFlavor: ''
+      duration:
+        units: round
+        concentration: false
+        override: true
+        value: '1'
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+    tcZLcPr3nsDOEaiC:
+      type: utility
+      name: Redirect Flow
+      _id: tcZLcPr3nsDOEaiC
+      img: ''
+      sort: 400000
+      activation:
+        type: action
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>You cause flowing water in the area to move in a direction you
+          choose, even if the water has to flow over obstacles, up walls, or in
+          other unlikely directions. The water in the area moves as you direct
+          it, but once it moves beyond the spell's area, it resumes its flow
+          based on the terrain conditions. The water continues to move in the
+          direction you chose until the spell ends or you choose a different
+          effect.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: true
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+    HneTMN8U6QKaRU7B:
+      type: utility
+      name: Whirlpool
+      _id: HneTMN8U6QKaRU7B
+      img: ''
+      sort: 500000
+      activation:
+        type: action
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>This effect requires a body of water at least 50 feet square and 25
+          feet deep. You cause a whirlpool to form in the center of the area.
+          The whirlpool forms a vortex that is 5 feet wide at the base, up to 50
+          feet wide at the top, and 25 feet tall. Any creature or object in the
+          water and within 25 feet of the vortex is pulled 10 feet toward it. A
+          creature can swim away from the vortex by making a Strength
+          (Athletics) check against your spell save DC.</p><p>When a creature
+          enters the vortex for the first time on a turn or starts its turn
+          there, it must make a Strength saving throw. On a failed save, the
+          creature takes 2d8 bludgeoning damage and is caught in the vortex
+          until the spell ends. On a successful save, the creature takes half
+          damage, and isn't caught in the vortex. A creature caught in the
+          vortex can use its action to try to swim away from the vortex as
+          described above, but has disadvantage on the Strength (Athletics)
+          check to do so.</p><p>The first time each turn that an object enters
+          the vortex, the object takes 2d8 bludgeoning damage; this damage
+          occurs each round it remains in the vortex.</p>
+        chatFlavor: ''
+      duration:
+        units: round
+        concentration: false
+        override: true
+        special: ''
+        value: '1'
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: true
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+    BTnvB5e4TEPEgZaS:
+      type: save
+      name: Whirlpool (Start of Turn Save)
+      _id: BTnvB5e4TEPEgZaS
+      img: ''
+      sort: 600000
+      activation:
+        type: special
+        override: true
+        condition: >-
+          When a creature enters the vortex for the first time on a turn or
+          starts its turn there.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>When a creature enters the vortex for the first time on a turn or
+          starts its turn there, it must make a Strength saving throw. On a
+          failed save, the creature takes 2d8 bludgeoning damage and is caught
+          in the vortex until the spell ends. On a successful save, the creature
+          takes half damage, and isn't caught in the vortex. A creature caught
+          in the vortex can use its action to try to swim away from the vortex
+          as described above, but has disadvantage on the Strength (Athletics)
+          check to do so.</p><p>The first time each turn that an object enters
+          the vortex, the object takes 2d8 bludgeoning damage; this damage
+          occurs each round it remains in the vortex.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects:
+        - _id: G5aZCiqtwSzf1PhW
+          level: {}
+          onSave: false
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: true
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
       damage:
         onSave: half
         parts:
-          - number: 2
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
             denomination: 8
             bonus: ''
             types:
               - bludgeoning
-            custom:
-              enabled: false
-              formula: ''
             scaling:
               mode: ''
-              number: null
-              formula: ''
+              number: 1
       save:
-        ability: str
+        ability:
+          - str
         dc:
           calculation: spellcasting
           formula: ''
-      uses:
-        spent: 0
-        recovery: []
-      sort: 0
+        visible: true
+        bonus: ''
   identifier: control-water
 sort: 0
-flags: {}
-img: icons/magic/air/fog-gas-smoke-swirling-blue.webp
-effects: []
+flags:
+  dnd5e:
+    riders:
+      activity:
+        - 3uKDmmkF8irChzl6
+        - bgxFEFucjRRDxtIr
+        - tcZLcPr3nsDOEaiC
+        - HneTMN8U6QKaRU7B
+        - BTnvB5e4TEPEgZaS
+img: icons/magic/water/wave-water-blue.webp
+effects:
+  - type: enchantment
+    name: Control Water
+    img: icons/magic/water/wave-water-blue.webp
+    disabled: true
+    _id: 0V7pt4ol6yamqIFf
+    system:
+      changes: []
+    start: null
+    duration:
+      value: 10
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You can use your action on your turn to perform one of the effects
+      listed in the @UUID[Compendium.dnd5e.spells.Item.7fFHlBk3UNX8gPKL]{Control
+      Water} spell.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781378237875
+      modifiedTime: 1781378874035
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!7fFHlBk3UNX8gPKL.0V7pt4ol6yamqIFf'
+  - name: Caught in Whirlpool
+    img: icons/magic/water/vortex-water-whirlpool.webp
+    origin: Compendium.dnd5e.spells.Item.7fFHlBk3UNX8gPKL
+    transfer: false
+    _id: G5aZCiqtwSzf1PhW
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You are caught in a whirlpool. You can use your action to try to swim
+      away from the vortex by makin g a [[/check str ath]] against the caster's
+      spell save DC.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 2
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781378597411
+      modifiedTime: 1781378648188
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!7fFHlBk3UNX8gPKL.G5aZCiqtwSzf1PhW'
+  - name: Control Water
+    img: icons/magic/water/wave-water-blue.webp
+    origin: Compendium.dnd5e.spells.Item.7fFHlBk3UNX8gPKL
+    type: base
+    _id: LJZ42m6FoXvAq3i7
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You can use your action on your turn to perform one of the effects
+      listed in the @UUID[Compendium.dnd5e.spells.Item.7fFHlBk3UNX8gPKL]{Control
+      Water} spell.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 2
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781378698832
+      modifiedTime: 1781378734794
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!7fFHlBk3UNX8gPKL.LJZ42m6FoXvAq3i7'
 folder: 5auWSClKMDUIV5Ni
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037348356
-  modifiedTime: 1725992717327
+  modifiedTime: 1781378678285
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!7fFHlBk3UNX8gPKL'

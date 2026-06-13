@@ -1,8 +1,7 @@
-folder: 89daM0oezivxN75Y
-name: Arcane Eye
+_id: phbsplGuardianof
+name: Guardian of Faith
 type: npc
-_id: tuHyePQ9GazMTyc0
-img: icons/magic/perception/eye-slit-pink.webp
+img: ''
 system:
   currency:
     pp: 0
@@ -18,6 +17,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     dex:
       value: 0
       proficient: 0
@@ -25,6 +34,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     con:
       value: 0
       proficient: 0
@@ -32,6 +51,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     int:
       value: 0
       proficient: 0
@@ -39,6 +68,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     wis:
       value: 0
       proficient: 0
@@ -46,6 +85,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
     cha:
       value: 0
       proficient: 0
@@ -53,6 +102,16 @@ system:
       bonuses:
         check: ''
         save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
   bonuses:
     mwak:
       attack: ''
@@ -294,22 +353,21 @@ system:
         mode: 0
       bonus: ''
     movement:
-      burrow: null
-      climb: null
-      fly: 30
-      swim: null
-      walk: null
+      fly: '0'
+      walk: '0'
       units: null
       hover: true
+      ignoredDifficultTerrain: []
     attunement:
       max: 3
     senses:
-      darkvision: null
-      blindsight: null
-      tremorsense: null
-      truesight: null
       units: null
       special: ''
+      ranges:
+        darkvision: null
+        blindsight: null
+        tremorsense: null
+        truesight: null
     spellcasting: int
     exhaustion: 0
     concentration:
@@ -327,44 +385,61 @@ system:
     hd:
       spent: 0
     hp:
-      value: 0
-      max: 0
+      value: 1
+      max: 1
       temp: null
       tempmax: null
-      formula: ''
+      formula: '1'
     death:
-      ability: ''
       roll:
         min: null
         max: null
         mode: 0
       success: 0
       failure: 0
+      bonuses:
+        save: ''
+    spell:
+      level: 0
+    loyalty: {}
+    price:
+      value: null
+      denomination: gp
   details:
     biography:
-      value: ''
+      value: >-
+        <p>@Embed[Compendium.dnd5e.spells24.Item.phbsplGuardianof
+        caption=false]</p>
       public: ''
     alignment: ''
-    race: null
-    type: {}
-    environment: ''
-    cr: 0
-    spellLevel: 0
     ideal: ''
     bond: ''
     flaw: ''
+    race: null
+    type:
+      value: custom
+      subtype: ''
+      swarm: ''
+      custom: Spectral Guardian
+    cr: null
+    habitat:
+      custom: ''
+      value: []
+    treasure:
+      value: []
   resources:
     legact:
-      value: 0
       max: 0
+      spent: 0
     legres:
-      value: 0
       max: 0
+      spent: 0
     lair:
       value: false
       initiative: null
+      inside: false
   traits:
-    size: med
+    size: lg
     di:
       bypasses: []
       value: []
@@ -386,40 +461,48 @@ system:
     languages:
       value: []
       custom: ''
+      communication: {}
+    important: false
   source:
-    revision: 1
     rules: '2014'
-    book: ''
+    license: CC-BY-4.0
+    book: SRD 5.1
+    revision: 1
+    page: ''
+    custom: ''
 prototypeToken:
-  name: Arcane Eye
+  name: Guardian of Faith
   displayName: 20
   actorLink: false
   appendNumber: false
   prependAdjective: false
+  width: 2
+  height: 2
   texture:
-    src: icons/svg/eye.svg
-    scaleX: 1
-    scaleY: 1
-    tint: '#9128d7'
+    src: ''
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
+    scaleX: 1
+    scaleY: 1
+    tint: '#ffffff'
     alphaThreshold: 0.75
-  width: 1
-  height: 1
   lockRotation: false
   rotation: 0
   alpha: 1
-  disposition: -1
+  disposition: -2
   displayBars: 20
   bar1:
     attribute: attributes.hp
   bar2:
     attribute: null
   light:
+    negative: false
+    priority: 0
     alpha: 0.5
     angle: 360
     bright: 0
+    color: null
     coloration: 1
     dim: 0
     attenuation: 0.5
@@ -435,121 +518,230 @@ prototypeToken:
     darkness:
       min: 0
       max: 1
-    color: null
-    negative: false
-    priority: 0
   sight:
-    enabled: true
-    range: 30
+    enabled: false
+    range: 0
     angle: 360
     visionMode: basic
+    color: null
     attenuation: 0.1
     brightness: 0
     saturation: 0
     contrast: 0
-    color: null
   detectionModes: {}
-  flags:
-    dnd5e: {}
-  randomImg: false
+  occludable:
+    radius: 0
   ring:
     enabled: false
     colors:
       ring: null
       background: null
-    effects: 0
+    effects: 1
     subject:
-      texture: null
       scale: 1
-  occludable:
-    radius: 0
+      texture: null
+  flags:
+    dnd5e:
+      tokenRing:
+        effects: 1
+  randomImg: false
   turnMarker:
     mode: 1
     animation: null
     src: null
     disposition: false
   movementAction: null
-  depth: 1
+  depth: 2
 items:
-  - name: Move
-    type: feat
-    _id: cCkrxncnhk9T9Y7m
-    img: icons/magic/movement/trail-streak-pink.webp
+  - name: Guarded Area
     system:
+      description:
+        value: >-
+          <p>Any creature hostile to you that moves to a space within 10 feet of
+          the guardian for the first time on a turn must succeed on a Dexterity
+          saving throw. The creature takes 20 radiant damage on a failed save,
+          or half as much damage on a successful one. The guardian vanishes when
+          it has dealt a total of 60 damage.</p><section
+          id="secret-fNtHgg2PRmVbaDl5" class="secret"><p><strong>Foundry
+          Note</strong></p><p>This feature's Limited Uses is optionally provided
+          for tracking the total damage dealt by the guardian. Additionally, The
+          <strong>Consume Damage Pool</strong> activity is configured with
+          scaling uses consumption in increments of 5 damage for use after the
+          final damage is determined and applied.</p></section>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        book: ''
+        license: CC-BY-4.0
+        revision: 1
+      uses:
+        max: '60'
+        recovery: []
+        spent: 0
+      type:
+        value: monster
+        subtype: ''
+      prerequisites:
+        level: null
+        repeatable: false
+        items: []
+      properties:
+        - mgc
+      requirements: ''
       activities:
-        yGKgBtdnArPJ3Qfg:
-          type: utility
-          name: Move
-          _id: yGKgBtdnArPJ3Qfg
-          img: null
-          sort: 0
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: save
           activation:
-            type: action
+            type: ''
+            value: null
+            condition: ''
             override: false
           consumption:
+            targets: []
             scaling:
               allowed: false
+              max: ''
             spellSlot: true
-            targets: []
           description:
+            chatFlavor: ''
+            value: ''
+          duration:
+            value: ''
+            units: inst
+            special: ''
+            override: false
+            concentration: false
+          effects: []
+          range:
+            value: '10'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: ''
+              type: enemy
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          damage:
+            onSave: half
+            parts:
+              - custom:
+                  enabled: false
+                  formula: '20'
+                number: null
+                denomination: 0
+                bonus: '20'
+                types:
+                  - radiant
+                scaling:
+                  number: 1
+          save:
+            ability:
+              - dex
+            dc:
+              calculation: ''
+              formula: '10'
+            visible: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          name: ''
+          img: ''
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+        xF7Bakh7m5dqmubn:
+          type: utility
+          name: Consume Damage Pool
+          _id: xF7Bakh7m5dqmubn
+          sort: 0
+          activation:
+            type: ''
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: true
+              max: '2'
+            spellSlot: true
+            targets:
+              - type: itemUses
+                value: '10'
+                target: ''
+                scaling:
+                  mode: amount
+                  formula: '10'
+          description:
+            chatFlavor: ''
             value: ''
           duration:
             units: inst
             concentration: false
             override: false
           effects: []
-          flags: {}
           range:
-            units: self
             override: false
+            units: self
+            special: ''
           target:
             template:
               contiguous: false
-              stationary: false
               units: ft
+              type: ''
+              stationary: false
             affects:
               choice: false
+              count: ''
+              type: ''
             override: false
             prompt: true
           uses:
             spent: 0
             recovery: []
-          visibility:
-            level: {}
-            requireAttunement: false
-            requireIdentification: false
-            requireMagic: false
+            max: ''
           roll:
             prompt: false
             visible: false
-      uses:
-        spent: 0
-        recovery: []
-        max: ''
-      advancement: {}
-      description:
-        value: >-
-          <p>As an action, you can move the eye up to 30 feet in any direction.
-          There is no limit to how far away from you the eye can move, but it
-          can't enter another plane of existence. A solid barrier blocks the
-          eye's movement, but the eye can pass through an opening as small as 1
-          inch in diameter.</p>
-        chat: ''
-      identifier: move
-      source:
-        revision: 1
-        rules: '2014'
-      crewed: false
+            name: ''
+            formula: ''
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
       enchant: {}
-      prerequisites:
-        items: []
-        repeatable: false
-        level: null
-      properties: []
-      requirements: ''
-      type:
-        value: monster
-        subtype: ''
+      identifier: guarded-area
+      advancement: {}
+      cover: null
+      crewed: false
+    _id: phbaoiLevel4Conj
+    type: feat
+    img: icons/skills/melee/sword-shield-stylized-white.webp
     effects: []
     folder: null
     sort: 0
@@ -560,71 +752,28 @@ items:
       coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1781370389703
-      modifiedTime: 1781370414072
       lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1781379816214
+      modifiedTime: 1781379879761
+      exportSource: null
       compendiumSource: null
       duplicateSource: null
-      exportSource: null
-    _key: '!actors.items!tuHyePQ9GazMTyc0.cCkrxncnhk9T9Y7m'
-effects:
-  - name: Invisible
-    _id: VUI3PxyI4LH2J8tm
-    statuses:
-      - invisible
-    description: >-
-      <ul><li>An invisible creature is impossible to see without the aid of
-      magic or a special sense. For the purpose of hiding, the creature is
-      heavily obscured. The creature's location can be detected by any noise it
-      makes or any tracks it leaves.</li><li>Attack rolls against the creature
-      have disadvantage, and the creature's attack rolls have
-      advantage.</li></ul>
-    disabled: false
-    duration:
-      value: null
-      units: seconds
-      expiry: null
-      expired: false
-    origin: null
-    transfer: false
-    flags: {}
-    _stats:
-      compendiumSource: Actor.eIQIKf1xngnKcRpg.ActiveEffect.dnd5einvisible00
-      duplicateSource: null
-      coreVersion: '14.361'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    img: systems/dnd5e/icons/svg/statuses/invisible.svg
-    type: base
-    system:
-      changes: []
-    tint: '#ffffff'
-    sort: 0
-    showIcon: 2
-    start:
-      combat: null
-      round: null
-      time: 0
-      turn: null
-      combatant: null
-      initiative: null
-    folder: null
-    _key: '!actors.effects!tuHyePQ9GazMTyc0.VUI3PxyI4LH2J8tm'
-sort: 500000
-ownership:
-  default: 0
-flags: {}
+    _key: '!actors.items!phbsplGuardianof.phbaoiLevel4Conj'
+effects: []
+folder: 89daM0oezivxN75Y
+flags:
+  dnd5e:
+    showTokenPortrait: false
 _stats:
-  duplicateSource: null
   coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 6.0.0
-  createdTime: 1726171263873
-  modifiedTime: 1781370336964
+  createdTime: 1781379816214
+  modifiedTime: 1781379828353
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
-_key: '!actors!tuHyePQ9GazMTyc0'
+  duplicateSource: null
+ownership:
+  default: 0
+sort: 0
+_key: '!actors!phbsplGuardianof'
