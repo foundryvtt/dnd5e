@@ -934,7 +934,9 @@
         "formulas": {
           "element": {
             "armored": {
-              "label": "Armored"
+              "excluded": "Not Armored",
+              "label": "Armored",
+              "required": "Armor Required"
             },
             "formula": {
               "label": "Formula"
@@ -943,7 +945,9 @@
               "label": "Label"
             },
             "shielded": {
-              "label": "Shielded"
+              "excluded": "No Shield",
+              "label": "Shielded",
+              "required": "Shield Required"
             }
           },
           "label": "Formulas"

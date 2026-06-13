@@ -27,11 +27,13 @@ export default class AttributesFields {
       armor: new NumberField({ integer: true, min: 0, initial: 10, persisted: false }),
       base: new NumberField({ integer: true, initial: -Infinity, persisted: false }),
       bonus: new FormulaField({ deterministic: true, persisted: false }),
+      calc: new StringField({ persisted: false }),
       cover: new NumberField({ integer: true, min: 0, initial: 0, persisted: false }),
       flat: new NumberField({
         required: true, integer: true, min: 0, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.flat.label",
         hint: "DND5E.ARMORCLASS.FIELDS.attributes.ac.flat.hint"
       }),
+      formula: new StringField({ persisted: false }),
       formulas: new ArrayField(new SchemaField({
         armored: new BooleanField({
           nullable: true, initial: null, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.formulas.element.armored.label"
@@ -221,7 +223,13 @@ export default class AttributesFields {
    */
   static prepareArmorClass(rollData) {
     const ac = this.attributes.ac;
+    ac.label = "";
     ac.flat ||= 0;
+
+    // Add formulas set by old-style AEs
+    if ( ac.calc === "flat" ) ac.override = ac.flat;
+    else if ( (ac.calc === "custom") && ac.formula ) ac.formulas.push({ formula: ac.formula });
+    else if ( ac.calc in CONFIG.DND5E.armorClasses ) ac.selectedFormulas.push(ac.calc);
 
     // Add selected formulas
     const baseFormulas = foundry.utils.iterateEntries(CONFIG.DND5E.armorClasses)

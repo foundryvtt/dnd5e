@@ -16,16 +16,21 @@
     <div class="form-group split-group full-width card" data-index="{{ @index }}">
         <div class="form-fields field-groups">
             <div class="field-group">
-                {{ formField fields.formula name=(concat "system.attributes.ac.formulas." @index ".formula")
-                             value=source.formula classes="label-top" localize=true rootId=@root.partId }}
+                {{ formField fields.formula name=(concat prefix "formula") value=source.formula
+                             classes="label-top" localize=true rootId=@root.partId }}
                 <button class="unbutton control-button" type="button" data-action="deleteFormula" data-tooltip
                         aria-label="{{ localize 'DND5E.ARMORCLASS.Action.DeleteFormula' }}">
                     <i class="fa-solid fa-minus" inert></i>
                 </button>
             </div>
             <div class="field-group">
-                {{ formField fields.label name=(concat "system.attributes.ac.formulas." @index ".label")
-                             value=source.label classes="label-top" localize=true rootId=@root.partId }}
+                {{ formField fields.label name=(concat prefix "label") value=source.label
+                             classes="label-top" localize=true rootId=@root.partId }}
+            </div>
+            <div class="field-group split-group">
+                <div class="form-fields">
+                    {{> "dnd5e.fieldlist" limitFields }}
+                </div>
             </div>
         </div>
     </div>

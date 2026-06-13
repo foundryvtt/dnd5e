@@ -128,7 +128,23 @@ export default class ArmorClassConfig extends BaseConfigSheet {
    */
   async _prepareConfigurationContext(context, options) {
     context.customFormulas = (context.source.formulas ?? []).map((source, index) => ({
-      source, fields: context.fields.formulas.element.fields
+      source,
+      fields: context.fields.formulas.element.fields,
+      limitFields: ["armored", "shielded"].map(k => ({
+        classes: "label-top",
+        field: new StringField({
+          required: true, blank: false,
+          label: _loc(`DND5E.ARMORCLASS.FIELDS.attributes.ac.formulas.element.${k}.label`)
+        }),
+        name: `system.attributes.ac.formulas.${index}.${k}`,
+        options: [
+          { value: null, label: "" },
+          { value: true, label: _loc(`DND5E.ARMORCLASS.FIELDS.attributes.ac.formulas.element.${k}.required`) },
+          { value: false, label: _loc(`DND5E.ARMORCLASS.FIELDS.attributes.ac.formulas.element.${k}.excluded`) }
+        ],
+        value: source[k]
+      })),
+      prefix: `system.attributes.ac.formulas.${index}.`
     }));
     context.formulaOptions = Object.entries(CONFIG.DND5E.armorClasses).map(([value, { label }]) => ({ value, label }));
     return context;
@@ -162,5 +178,20 @@ export default class ArmorClassConfig extends BaseConfigSheet {
     const formulas = this.document.system.toObject().attributes.ac.formulas;
     formulas.splice(target.closest("[data-index]").dataset.index, 1);
     this.document.update({ "system.attributes.ac.formulas": formulas });
+  }
+
+  /* -------------------------------------------- */
+  /*  Form Handling                               */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _processFormData(event, form, formData) {
+    const submitData = super._processFormData(event, form, formData);
+    for ( const formula of Object.values(submitData.system?.attributes?.ac?.formulas) ?? [] ) {
+      for ( const field of ["armored", "shielded"] ) {
+        formula[field] = formula[field] === "null" ? null : formula[field];
+      }
+    }
+    return submitData;
   }
 }
