@@ -24,12 +24,16 @@ system:
     affects:
       type: space
       choice: false
+      count: ''
+      special: ''
     template:
       units: any
       contiguous: false
+      type: ''
   range:
     value: '90'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -53,9 +57,10 @@ system:
       _id: dnd5eactivity000
       type: summon
       activation:
-        type: action
+        type: ''
         value: null
-        override: false
+        override: true
+        condition: ''
       consumption:
         targets: []
         scaling:
@@ -65,9 +70,10 @@ system:
       description:
         chatFlavor: ''
       duration:
-        units: inst
+        units: hour
         concentration: false
-        override: false
+        override: true
+        value: '1'
       range:
         override: false
       target:
@@ -114,23 +120,115 @@ system:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 200000
+      name: Summon Fey
       img: ''
       appliedEffects: []
+      visibility:
+        level:
+          min: null
+          max: null
+      tempHP: ''
+    x4Ve9uYutRRHlCNi:
+      type: utility
+      name: Cast
+      img: null
+      sort: 100000
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+      _id: x4Ve9uYutRRHlCNi
   identifier: conjure-fey
 sort: 0
 flags: {}
-img: icons/magic/symbols/runes-star-pentagon-blue.webp
-effects: []
+img: icons/magic/nature/plant-glowing-white-purple.webp
+effects:
+  - name: Controlled Fey
+    img: icons/magic/nature/plant-glowing-white-purple.webp
+    origin: Compendium.dnd5e.spells.Item.yN3XZZujhR4aVvPa
+    transfer: false
+    _id: 2k0c8R6S9F6lQIpH
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You are under the caster's control while they maintain concentration on
+      this spell. If their concentration is broken, you don't disappear.
+      Instead, they lose control of you and you become hostile toward the caster
+      and their companions, and you disappear after 1 hour after you were
+      summoned.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781448140939
+      modifiedTime: 1781448150210
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.spells.Item.1LkZvINag7KqBmDR.ActiveEffect.ERO8p9cfsc3Ifbii
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!yN3XZZujhR4aVvPa.2k0c8R6S9F6lQIpH'
 folder: 0pdesvXqKd55VOh2
 _stats:
   duplicateSource: null
-  coreVersion: '13.350'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037366907
-  modifiedTime: 1760981579932
+  modifiedTime: 1781448208831
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!yN3XZZujhR4aVvPa'

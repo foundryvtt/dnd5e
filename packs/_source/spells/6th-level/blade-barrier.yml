@@ -11,11 +11,11 @@ system:
       You can make a straight wall up to 100 feet long, 20 feet high, and 5 feet
       thick, or a ringed wall up to 60 feet in diameter, 20 feet high, and 5
       feet thick. The wall provides three-quarters cover to creatures behind it,
-      and its space is difficult terrain.</p><p>When a creature enters the
-      wall's area for the first time on a turn or starts its turn there, the
-      creature must make a Dexterity saving throw. On a failed save, the
-      creature takes 6d10 slashing damage. On a successful save, the creature
-      takes half as much damage.</p>
+      and its space is &amp;reference[difficult terrain].</p><p>When a creature
+      enters the wall's area for the first time on a turn or starts its turn
+      there, the creature must make a Dexterity saving throw. On a failed save,
+      the creature takes 6d10 slashing damage. On a successful save, the
+      creature takes half as much damage.</p>
     chat: ''
   source:
     custom: ''
@@ -33,14 +33,19 @@ system:
   target:
     affects:
       choice: false
+      type: creature
     template:
       units: ft
       type: wall
       size: '100'
       contiguous: false
+      width: '5'
+      height: '20'
+      count: ''
   range:
     value: '90'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -64,69 +69,198 @@ system:
       _id: dnd5eactivity000
       type: save
       activation:
-        type: action
+        type: special
         value: null
-        override: false
+        override: true
+        condition: >-
+          When a creature enters the wall's area for the first time on a turn or
+          starts its turn there.
       consumption:
         targets: []
         scaling:
           allowed: false
           max: ''
-        spellSlot: true
+        spellSlot: false
       description:
+        chatFlavor: ''
+        value: >-
+          <p>When a creature enters the wall's area for the first time on a turn
+          or starts its turn there, the creature must make a Dexterity saving
+          throw. On a failed save, the creature takes 6d10 slashing damage. On a
+          successful save, the creature takes half as much damage.</p>
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      range:
+        override: true
+        units: spec
+        special: ''
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+      damage:
+        onSave: half
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 6
+            denomination: 10
+            bonus: ''
+            types:
+              - slashing
+            scaling:
+              mode: ''
+              number: 1
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+        bonus: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 300000
+      name: Wall Contact Save
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    mhpt8uRwMGXNYABF:
+      type: utility
+      name: Conjure Blade Barrier (Wall)
+      _id: mhpt8uRwMGXNYABF
+      img: ''
+      sort: 100000
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects: []
+      flags: {}
       range:
+        units: self
         override: false
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
         affects:
           choice: false
         override: false
-      damage:
-        onSave: half
-        parts:
-          - number: 6
-            denomination: 10
-            bonus: ''
-            types:
-              - slashing
-            custom:
-              enabled: false
-              formula: ''
-            scaling:
-              mode: ''
-              number: null
-              formula: ''
-      save:
-        ability: dex
-        dc:
-          calculation: spellcasting
-          formula: ''
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+    HhAJblQ0avFAY3Eg:
+      type: utility
+      name: Conjure Blade Barrier (Ringed Wall)
+      img: ''
+      sort: 200000
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: circle
+          size: '20'
+          count: ''
+        affects:
+          choice: false
+          type: creature
+          count: ''
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
+      _id: HhAJblQ0avFAY3Eg
   identifier: blade-barrier
 sort: 0
 flags: {}
-img: icons/magic/light/projectile-beams-salvo-white.webp
+img: icons/skills/melee/strikes-sword-scimitar.webp
 effects: []
 folder: 0pdesvXqKd55VOh2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037361045
-  modifiedTime: 1725992721438
+  modifiedTime: 1781435153561
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!dLJhxDfeyOsc3zsY'

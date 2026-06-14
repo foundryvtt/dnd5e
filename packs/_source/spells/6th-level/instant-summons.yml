@@ -7,7 +7,7 @@ system:
   description:
     value: >-
       <p>You touch an object weighing 10 pounds or less whose longest dimension
-      is 6 feet or less. The spell leaves an Invisible mark on its surface and
+      is 6 feet or less. The spell leaves an invisible mark on its surface and
       invisibly inscribes the name of the item on the sapphire you use as the
       material component. Each time you cast this spell, you must use a
       different sapphire.</p><p>At any time thereafter, you can use your action
@@ -16,8 +16,10 @@ system:
       spell ends.</p><p>If another creature is holding or carrying the item,
       crushing the sapphire doesn't transport the item to you, but instead you
       learn who the creature possessing the object is and roughly where that
-      creature is located at that moment.</p><p>Dispel Magic or a similar effect
-      successfully applied to the sapphire ends this spell's effect.</p>
+      creature is located at that
+      moment.</p><p>@UUID[Compendium.dnd5e.spells.Item.15Fa6q1nH27XfbR8]{Dispel
+      Magic} or a similar effect successfully applied to the sapphire ends this
+      spell's effect.</p>
     chat: ''
   source:
     custom: ''
@@ -37,11 +39,14 @@ system:
       type: object
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -62,58 +67,206 @@ system:
     - material
     - ritual
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: utility
+    7oF2X1ya1cPfDOcI:
+      type: enchant
+      name: Cast
+      _id: 7oF2X1ya1cPfDOcI
+      img: ''
+      sort: 100000
       activation:
         type: action
-        value: null
         override: false
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: ''
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: l9wtHPpBbSo8cI95
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect: []
+            item: []
+      flags: {}
       range:
+        units: self
         override: false
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
+          type: ''
         affects:
           choice: false
-        override: false
-      roll:
-        formula: ''
-        name: ''
-        prompt: false
-        visible: false
+          type: object
+        override: true
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      enchant:
+        self: false
+      restrictions:
+        allowMagical: true
+        categories: []
+        properties: []
+        type: ''
+    iOJD3BHVzYiiNChW:
+      type: utility
+      name: Summon Marked Objects
+      _id: iOJD3BHVzYiiNChW
+      img: ''
+      sort: 200000
+      activation:
+        type: action
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: touch
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: object
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
   identifier: instant-summons
 sort: 0
 flags: {}
-img: icons/magic/symbols/runes-star-blue.webp
-effects: []
+img: icons/commodities/gems/gem-faceted-teardrop-blue.webp
+effects:
+  - type: enchantment
+    name: Instant Summons Mark
+    img: icons/weapons/wands/wand-gem-teal.webp
+    disabled: true
+    _id: l9wtHPpBbSo8cI95
+    system:
+      changes:
+        - key: system.description.value
+          type: override
+          value: >-
+            {} <p><strong>Instant Summons.</strong> This object has been marked
+            by the @UUID[Compendium.dnd5e.spells.Item.SgrEKiC6dAtvy6Pz]{Instant
+            Summons} spell and can be summoned to the caster's hands regardless
+            of physical or planar distance when its name is spoken and the
+            corresponding sapphire is crushed, ending the spell.</p> <p>If
+            another creature is holding or carrying the item, crushing the
+            sapphire doesn't transport the item to the caster, but they instead
+            learn who the creature possessing the object is and roughly where
+            that creature is located at that moment.</p>
+            <p>@UUID[Compendium.dnd5e.spells.Item.15Fa6q1nH27XfbR8]{Dispel
+            Magic} or a similar effect successfully applied to the sapphire ends
+            this spell's effect.</p>
+          phase: initial
+          priority: null
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p><strong>Instant Summons.</strong> This object has been marked by the
+      @UUID[Compendium.dnd5e.spells.Item.SgrEKiC6dAtvy6Pz]{Instant Summons}
+      spell and can be summoned to the caster's hands regardless of physical or
+      planar distance when its name is spoken and the corresponding sapphire is
+      crushed, ending the spell.</p>
+
+      <p>If another creature is holding or carrying the item, crushing the
+      sapphire doesn't transport the item to the caster, but they instead learn
+      who the creature possessing the object is and roughly where that creature
+      is located at that moment.</p>
+
+      <p>@UUID[Compendium.dnd5e.spells.Item.15Fa6q1nH27XfbR8]{Dispel Magic} or a
+      similar effect successfully applied to the sapphire ends this spell's
+      effect.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781447107939
+      modifiedTime: 1781447341987
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!SgrEKiC6dAtvy6Pz.l9wtHPpBbSo8cI95'
 folder: 0pdesvXqKd55VOh2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037356587
-  modifiedTime: 1725992719968
+  modifiedTime: 1781447374682
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!SgrEKiC6dAtvy6Pz'

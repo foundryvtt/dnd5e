@@ -10,13 +10,13 @@ system:
       phenomenon within range that activates when a specific condition occurs.
       The illusion is imperceptible until then. It must be no larger than a
       30-foot cube, and you decide when you cast the spell how the illusion
-      behaves and what sounds it makes. This scripted Performance can last up to
+      behaves and what sounds it makes. This scripted performance can last up to
       5 minutes.</p><p>When the condition you specify occurs, the illusion
       springs into existence and performs in the manner you described. Once the
       illusion finishes performing, it disappears and remains dormant for 10
       minutes. After this time, the illusion can be activated again.</p><p>The
       triggering condition can be as general or as detailed as you like, though
-      it must be based on visual or audible Conditions that occur within 30 feet
+      it must be based on visual or audible conditions that occur within 30 feet
       of the area. For example, you could create an illusion of yourself to
       appear and warn off others who attempt to open a trapped door, or you
       could set the illusion to trigger only when a creature says the correct
@@ -44,14 +44,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: cube
       size: '30'
       contiguous: false
+      count: ''
   range:
     value: '120'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -109,20 +112,87 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    SiUosVw3RO86FR2Z:
+      type: check
+      name: Investigate Illusion Check
+      img: ''
+      sort: 100000
+      activation:
+        type: ''
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      check:
+        associated:
+          - inv
+        dc:
+          calculation: spellcasting
+          formula: ''
+        ability: ''
+        visible: true
+      _id: SiUosVw3RO86FR2Z
   identifier: programmed-illusion
 sort: 0
 flags: {}
-img: icons/magic/control/debuff-chains-ropes-net-purple-blue.webp
+img: icons/commodities/treasure/gem-framed-spiral-purple.webp
 effects: []
 folder: 0pdesvXqKd55VOh2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037360035
-  modifiedTime: 1725992721076
+  modifiedTime: 1781445811633
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!bA2sk9eMKBeY7EPD'

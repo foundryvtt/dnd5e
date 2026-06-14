@@ -9,12 +9,13 @@ system:
       <p>A beam of brilliant light flashes out from your hand in a 5-foot-wide,
       60-foot-long line. Each creature in the line must make a Constitution
       saving throw. On a failed save, a creature takes 6d8 radiant damage and is
-      Blinded until your next turn. On a successful save, it takes half as much
-      damage and isn't blinded by this spell. Undead and oozes have disadvantage
-      on this saving throw.</p><p>You can create a new line of radiance as your
-      action on any turn until the spell ends.</p><p>For the Duration, a mote of
-      brilliant radiance shines in your hand. It sheds bright light in a 30-foot
-      radius and dim light for an additional 30 feet. This light is
+      &amp;reference[Blinded] until your next turn. On a successful save, it
+      takes half as much damage and isn't blinded by this spell. Undead and
+      oozes have disadvantage on this saving throw.</p><p>You can create a new
+      line of radiance as your action on any turn until the spell
+      ends.</p><p>For the Duration, a mote of brilliant radiance shines in your
+      hand. It sheds &amp;reference[bright light] in a 30-foot radius and
+      &amp;reference[dim light] for an additional 30 feet. This light is
       sunlight.</p>
     chat: ''
   source:
@@ -33,13 +34,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: line
       size: '60'
       contiguous: false
+      width: ''
+      count: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -60,73 +65,309 @@ system:
     - material
     - concentration
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: save
+    VtaByFBtaWze0TIr:
+      type: enchant
+      name: Cast
+      _id: VtaByFBtaWze0TIr
+      img: ''
+      sort: 100000
       activation:
         type: action
-        value: null
         override: false
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: ''
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: TtFRtW3sqtnZ0F4Z
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - mHlSGE3y0KLvlfaj
+            effect:
+              - kWBi1D1UMm4XsLgt
+            item: []
+      flags: {}
       range:
+        units: self
         override: false
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
         affects:
           choice: false
+        override: true
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      enchant:
+        self: true
+      restrictions:
+        allowMagical: false
+        categories: []
+        properties: []
+        type: spell
+    mHlSGE3y0KLvlfaj:
+      type: save
+      name: Line of Radiance
+      _id: mHlSGE3y0KLvlfaj
+      img: ''
+      sort: 200000
+      activation:
+        type: action
         override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects:
+        - _id: Ei5UOSrKn72d5lye
+          onSave: false
+          level:
+            min: null
+            max: null
+      flags: {}
+      range:
+        units: self
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: line
+          size: '60'
+          width: '5'
+          count: ''
+        affects:
+          choice: false
+          type: creature
+          count: ''
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
       damage:
         onSave: half
         parts:
-          - number: 6
+          - custom:
+              enabled: false
+              formula: ''
+            number: 6
             denomination: 8
             bonus: ''
             types:
               - radiant
-            custom:
-              enabled: false
-              formula: ''
             scaling:
               mode: ''
-              number: null
-              formula: ''
+              number: 1
       save:
-        ability: con
+        ability:
+          - con
         dc:
           calculation: spellcasting
           formula: ''
-      uses:
-        spent: 0
-        recovery: []
-      sort: 0
+        visible: true
+        bonus: ''
   identifier: sunbeam
 sort: 0
-flags: {}
-img: icons/magic/light/beams-rays-orange-purple-large.webp
-effects: []
+flags:
+  dnd5e:
+    riders:
+      activity:
+        - mHlSGE3y0KLvlfaj
+      effect:
+        - kWBi1D1UMm4XsLgt
+img: icons/magic/light/projectile-flare-expliosion-yellow.webp
+effects:
+  - type: enchantment
+    name: Sunbeam
+    img: icons/magic/light/beam-red-orange.webp
+    disabled: true
+    _id: TtFRtW3sqtnZ0F4Z
+    system:
+      changes: []
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You can form a new line of radiance as your action on any turn until
+      this spell ends.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781441253405
+      modifiedTime: 1781445319233
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!2RC0EyvBLPH88PZF.TtFRtW3sqtnZ0F4Z'
+  - name: Sunbeam
+    img: icons/magic/light/beam-red-orange.webp
+    origin: Compendium.dnd5e.spells.Item.2RC0EyvBLPH88PZF
+    type: base
+    _id: kWBi1D1UMm4XsLgt
+    system:
+      changes:
+        - key: token.light.dim
+          type: upgrade
+          value: 60
+          phase: initial
+          priority: null
+        - key: token.light.bright
+          type: upgrade
+          value: 30
+          phase: initial
+          priority: null
+        - key: token.light.animation.type
+          type: override
+          value: starlight
+          phase: initial
+          priority: null
+        - key: token.light.color
+          type: override
+          value: '#bb8c25'
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You can form a new line of radiance as your action on any turn until
+      this spell ends.</p><p>Additionally, for the duration, a mote of brilliant
+      radiance shines in your hand. It sheds &amp;reference[bright light] in a
+      30-foot radius and &amp;reference[dim light[ for an additional 30 feet.
+      This light is sunlight.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781445383381
+      modifiedTime: 1781445429680
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!2RC0EyvBLPH88PZF.kWBi1D1UMm4XsLgt'
+  - name: Sunbeam Blindness
+    img: icons/magic/light/explosion-star-glow-orange.webp
+    origin: Compendium.dnd5e.spells.Item.2RC0EyvBLPH88PZF
+    transfer: false
+    _id: Ei5UOSrKn72d5lye
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: rounds
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You are &amp;reference[blinded apply=false] until the start of the
+      caster's next turn.</p>
+    tint: '#ffffff'
+    statuses:
+      - blinded
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781445492774
+      modifiedTime: 1781445551372
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!2RC0EyvBLPH88PZF.Ei5UOSrKn72d5lye'
 folder: 0pdesvXqKd55VOh2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037346050
-  modifiedTime: 1725992716605
+  modifiedTime: 1781445717701
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!2RC0EyvBLPH88PZF'
