@@ -146,6 +146,125 @@ system:
         level:
           min: null
           max: null
+    8EFpgu5tQjpGPOij:
+      type: utility
+      name: Command Creature
+      img: ''
+      sort: 100000
+      activation:
+        type: ''
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      _id: 8EFpgu5tQjpGPOij
+    MrdlZ8bb33mejJ1P:
+      type: utility
+      name: Assume Direct Control
+      img: ''
+      sort: 200000
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>You take total and precise control of the target. Until the end of
+          your next turn, the creature takes only the actions you choose, and
+          doesn't do anything that you don't allow it to do. During this time
+          you can also cause the creature to use a reaction, but this requires
+          you to use your own reaction as well.</p>
+        chatFlavor: ''
+      duration:
+        units: round
+        concentration: false
+        override: true
+        value: '1'
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      _id: MrdlZ8bb33mejJ1P
   identifier: dominate-beast
 sort: 0
 flags: {}
@@ -342,7 +461,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 6.0.0
   createdTime: 1725037354259
-  modifiedTime: 1781377860822
+  modifiedTime: 1781405429528
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!LrPvWHBPmiMQQsKB'
