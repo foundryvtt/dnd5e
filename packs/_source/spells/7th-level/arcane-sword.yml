@@ -8,10 +8,10 @@ system:
     value: >-
       <p>You create a sword-shaped plane of force that hovers within range. It
       lasts for the Duration.</p><p>When the sword appears, you make a melee
-      spell Attack against a target of your choice within 5 feet of the sword.
+      spell attack against a target of your choice within 5 feet of the sword.
       On a hit, the target takes 3d10 force damage. Until the spell ends, you
-      can use a Bonus Action on each of your turns to move the sword up to 20
-      feet to a spot you can see and repeat this Attack against the same target
+      can use a bonus action on each of your turns to move the sword up to 20
+      feet to a spot you can see and repeat this attack against the same target
       or a different one.</p>
     chat: ''
   source:
@@ -32,12 +32,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '60'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -59,7 +62,6 @@ system:
     - somatic
     - material
     - concentration
-    - mgc
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -118,19 +120,76 @@ system:
         spent: 0
         recovery: []
       sort: 0
+    pK9UiWSr9drFEaEE:
+      type: utility
+      name: Move Sword and Attack
+      _id: pK9UiWSr9drFEaEE
+      img: ''
+      sort: 100000
+      activation:
+        type: bonus
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>Until the spell ends, you can use a bonus action on each of your
+          turns to move the sword up to 20 feet to a spot you can see and repeat
+          this attack against the same target or a different one.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: ft
+        override: true
+        special: ''
+        value: '20'
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
   identifier: arcane-sword
 sort: 0
 flags: {}
-img: icons/skills/melee/strike-blade-hooked-orange-blue.webp
+img: icons/weapons/swords/sword-flanged-lightning.webp
 effects: []
 folder: irCSpQWIMtp978TA
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037353959
-  modifiedTime: 1725992719111
+  modifiedTime: 1781462821444
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!LTDNWoFVJNLjiiNa'

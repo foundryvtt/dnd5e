@@ -24,7 +24,13 @@ system:
       damages objects in the area and ignites flammable objects that aren't
       being worn or carried.</p><p><strong>At Higher Levels.</strong> When you
       cast this spell using a spell slot of 8th level or higher, the base damage
-      increases by 1d6 for each slot level above 7th.</p>
+      increases by 1d6 for each slot level above 7th.</p><section
+      id="secret-wrUKMwnkGhkc3mAY" class="secret"><p>Foundry Note</p><p>Casting
+      this spell adds the glowing bead to your inventory, allowing you to use
+      the activity provided by the spell to further apply the
+      @UUID[Compendium.dnd5e.spells.Item.AoTTjapz1FsGOIZz.ActiveEffect.McfIQS8LyxPpT1WI]{Increased
+      Blast Damage} enchantment onto it, increasing the total damage
+      done.</p></section>
     chat: ''
   source:
     custom: ''
@@ -42,14 +48,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: sphere
       size: '20'
       contiguous: false
+      count: ''
   range:
     value: '150'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -70,123 +79,462 @@ system:
     - material
     - concentration
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: save
+    rzgVwe94Heq0ODhJ:
+      type: enchant
+      name: Cast
+      _id: rzgVwe94Heq0ODhJ
+      img: ''
+      sort: 100000
       activation:
-        type: action
-        value: null
-        override: false
+        type: turnStart
+        override: true
+        condition: ''
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
-        spellSlot: true
+        spellSlot: false
+        targets: []
       description:
+        value: ''
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
-        override: false
-      effects: []
+        override: true
+      effects:
+        - _id: i56d0Ydhk9VNQhXa
+          level:
+            min: 7
+            max: 7
+          riders:
+            activity:
+              - GkP1HxC0k8jEEPCP
+            effect:
+              - TRgSJXF4hazkacvg
+            item:
+              - Compendium.dnd5e.spells.Item.57jPNhIGoZqLymQb
+        - _id: 6Xeds9KNRtBZxI5v
+          level:
+            min: 8
+            max: 8
+          riders:
+            activity:
+              - GkP1HxC0k8jEEPCP
+            effect:
+              - WAcb9NZEdHtYPyqE
+            item:
+              - Compendium.dnd5e.spells.Item.57jPNhIGoZqLymQb
+        - _id: ek5rJ5JvvgbdJ2Ae
+          level:
+            min: 9
+            max: 9
+          riders:
+            activity:
+              - GkP1HxC0k8jEEPCP
+            effect:
+              - jwyFRbfDCsWxg9uO
+            item:
+              - Compendium.dnd5e.spells.Item.57jPNhIGoZqLymQb
+      flags: {}
       range:
-        override: false
+        units: spec
+        override: true
+        special: ''
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
+          type: ''
         affects:
           choice: false
-        override: false
-      damage:
-        onSave: half
-        parts:
-          - number: 12
-            denomination: 6
-            bonus: ''
-            types:
-              - fire
-            custom:
-              enabled: false
-              formula: ''
-            scaling:
-              mode: whole
-              number: 1
-              formula: ''
-      save:
-        ability: dex
-        dc:
-          calculation: spellcasting
-          formula: ''
+          type: ''
+        override: true
+        prompt: false
       uses:
         spent: 0
         recovery: []
-      sort: 0
-    dnd5eactivity200:
-      _id: dnd5eactivity200
-      type: damage
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      enchant:
+        self: true
+      restrictions:
+        allowMagical: false
+        categories: []
+        properties: []
+        type: spell
+    GkP1HxC0k8jEEPCP:
+      type: utility
+      name: Increase Blast Damage
+      _id: GkP1HxC0k8jEEPCP
+      img: ''
+      sort: 300000
       activation:
-        type: action
-        value: null
-        override: false
+        type: turnStart
+        override: true
+        condition: ''
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
-        spellSlot: true
+        spellSlot: false
+        targets: []
       description:
+        value: >-
+          <p>The spell's base damage is 12d6. If at the end of your turn the
+          bead has not yet detonated, the damage increases by 1d6. Add the
+          @UUID[Compendium.dnd5e.spells.Item.AoTTjapz1FsGOIZz.ActiveEffect.McfIQS8LyxPpT1WI]{Increased
+          Blast Damage} enchantment onto the Delayed Blast Fireball Bead to
+          increase its damage when triggered.</p>
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
-        override: false
+        override: true
       effects: []
+      flags: {}
       range:
-        override: false
+        units: spec
+        override: true
+        special: ''
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
+          type: ''
         affects:
           choice: false
-        override: false
-      damage:
-        critical:
-          allow: false
-          bonus: ''
-        parts:
-          - number: 1
-            denomination: 6
-            bonus: ''
-            types: []
-            custom:
-              enabled: false
-              formula: ''
-            scaling:
-              mode: whole
-              number: 1
-              formula: ''
+          type: ''
+        override: true
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
   identifier: delayed-blast-fireball
 sort: 0
-flags: {}
-img: icons/magic/fire/projectile-fireball-smoke-strong-orange.webp
-effects: []
+flags:
+  dnd5e:
+    riders:
+      effect:
+        - TRgSJXF4hazkacvg
+        - WAcb9NZEdHtYPyqE
+        - jwyFRbfDCsWxg9uO
+      activity:
+        - GkP1HxC0k8jEEPCP
+img: icons/magic/fire/explosion-mushroom-nuke-orange.webp
+effects:
+  - name: 'Delayed Blast Fireball: 7th Level'
+    img: icons/magic/fire/explosion-mushroom-nuke-orange.webp
+    origin: Compendium.dnd5e.spells.Item.AoTTjapz1FsGOIZz
+    type: base
+    _id: TRgSJXF4hazkacvg
+    system:
+      changes:
+        - key: flags.world.delayed-blast-fireball
+          type: add
+          value: 12
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>A @UUID[Compendium.dnd5e.spells.Item.AoTTjapz1FsGOIZz]{Delayed Blast
+      Fireball} bead is charging up.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781468535823
+      modifiedTime: 1781468893631
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!AoTTjapz1FsGOIZz.TRgSJXF4hazkacvg'
+  - name: 'Delayed Blast Fireball: 8th Level'
+    img: icons/magic/fire/explosion-mushroom-nuke-orange.webp
+    origin: Compendium.dnd5e.spells.Item.AoTTjapz1FsGOIZz
+    type: base
+    system:
+      changes:
+        - key: flags.world.delayed-blast-fireball
+          type: add
+          value: 13
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>A @UUID[Compendium.dnd5e.spells.Item.AoTTjapz1FsGOIZz]{Delayed Blast
+      Fireball} bead is charging up.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781468864794
+      modifiedTime: 1781468889918
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: WAcb9NZEdHtYPyqE
+    _key: '!items.effects!AoTTjapz1FsGOIZz.WAcb9NZEdHtYPyqE'
+  - name: 'Delayed Blast Fireball: 9th Level'
+    img: icons/magic/fire/explosion-mushroom-nuke-orange.webp
+    origin: Compendium.dnd5e.spells.Item.AoTTjapz1FsGOIZz
+    type: base
+    system:
+      changes:
+        - key: flags.world.delayed-blast-fireball
+          type: add
+          value: 14
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>A @UUID[Compendium.dnd5e.spells.Item.AoTTjapz1FsGOIZz]{Delayed Blast
+      Fireball} bead is charging up.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781468894598
+      modifiedTime: 1781468901624
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: jwyFRbfDCsWxg9uO
+    _key: '!items.effects!AoTTjapz1FsGOIZz.jwyFRbfDCsWxg9uO'
+  - type: enchantment
+    name: Increased Blast Damage
+    img: icons/magic/fire/explosion-flame-blue.webp
+    disabled: true
+    _id: McfIQS8LyxPpT1WI
+    system:
+      changes:
+        - key: flags.world.delayed-blast-fireball
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>The damage of the bead of fire increases by 1d6.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781468939138
+      modifiedTime: 1781469181738
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!AoTTjapz1FsGOIZz.McfIQS8LyxPpT1WI'
+  - type: enchantment
+    name: 'Delayed Blast Fireball: 7th Level'
+    img: icons/magic/fire/explosion-mushroom-nuke-orange.webp
+    disabled: true
+    _id: i56d0Ydhk9VNQhXa
+    system:
+      changes: []
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>A @UUID[Compendium.dnd5e.spells.Item.AoTTjapz1FsGOIZz]{Delayed Blast
+      Fireball} bead is charging up.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781468993831
+      modifiedTime: 1781469057378
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!AoTTjapz1FsGOIZz.i56d0Ydhk9VNQhXa'
+  - type: enchantment
+    name: 'Delayed Blast Fireball: 8th Level'
+    img: icons/magic/fire/explosion-mushroom-nuke-orange.webp
+    disabled: true
+    system:
+      changes: []
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>A @UUID[Compendium.dnd5e.spells.Item.AoTTjapz1FsGOIZz]{Delayed Blast
+      Fireball} bead is charging up.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781469058619
+      modifiedTime: 1781469066525
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: 6Xeds9KNRtBZxI5v
+    _key: '!items.effects!AoTTjapz1FsGOIZz.6Xeds9KNRtBZxI5v'
+  - type: enchantment
+    name: 'Delayed Blast Fireball: 9th Level'
+    img: icons/magic/fire/explosion-mushroom-nuke-orange.webp
+    disabled: true
+    system:
+      changes: []
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>A @UUID[Compendium.dnd5e.spells.Item.AoTTjapz1FsGOIZz]{Delayed Blast
+      Fireball} bead is charging up.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781469059482
+      modifiedTime: 1781469074282
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: ek5rJ5JvvgbdJ2Ae
+    _key: '!items.effects!AoTTjapz1FsGOIZz.ek5rJ5JvvgbdJ2Ae'
 folder: irCSpQWIMtp978TA
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037350182
-  modifiedTime: 1725992717882
+  modifiedTime: 1781469636014
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!AoTTjapz1FsGOIZz'
