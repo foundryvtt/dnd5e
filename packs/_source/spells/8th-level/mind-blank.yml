@@ -8,9 +8,11 @@ system:
     value: >-
       <p>Until the spell ends, one willing creature you touch is immune to
       psychic damage, any effect that would sense its emotions or read its
-      thoughts, Divination Spells, and the Charmed condition. The spell even
-      foils Wish spells and Spells or Effects of similar power used to affect
-      the target's mind or to gain information about the target.</p>
+      thoughts, Divination Spells, and the &amp;reference[Charmed apply=false]
+      condition. The spell even foils
+      @UUID[Compendium.dnd5e.spells.Item.3okM6Gn63zzEULkz]{Wish} spells and
+      spells or effects of similar power used to affect the target's mind or to
+      gain information about the target.</p>
     chat: ''
   source:
     custom: ''
@@ -30,11 +32,14 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -72,7 +77,9 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: 3N4KDb8gLlbu1KUC
+          level: {}
       range:
         override: false
       target:
@@ -91,20 +98,79 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: mind-blank
 sort: 0
 flags: {}
-img: icons/magic/air/air-burst-spiral-large-blue.webp
-effects: []
+img: icons/magic/lightning/orb-ball-purple.webp
+effects:
+  - name: Mind Blank
+    img: icons/magic/lightning/orb-ball-purple.webp
+    origin: Compendium.dnd5e.spells.Item.bllEWfm9xfEKynhv
+    transfer: false
+    _id: 3N4KDb8gLlbu1KUC
+    type: base
+    system:
+      changes:
+        - key: system.traits.ci.value
+          type: add
+          value: charmed
+          phase: initial
+          priority: null
+        - key: system.traits.di.value
+          type: add
+          value: psychic
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 24
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>Until the spell ends, you are immune to psychic damage, any effect that
+      would sense its emotions or read its thoughts, Divination Spells, and the
+      &amp;reference[Charmed apply=false] condition. The spell even foils
+      @UUID[Compendium.dnd5e.spells.Item.3okM6Gn63zzEULkz]{Wish} spells and
+      spells or effects of similar power used to affect your mind or to gain
+      information about you.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781451849769
+      modifiedTime: 1781451902095
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!bllEWfm9xfEKynhv.3N4KDb8gLlbu1KUC'
 folder: x1XTiOgx4DJ34wc5
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037360166
-  modifiedTime: 1725992721123
+  modifiedTime: 1781451849806
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!bllEWfm9xfEKynhv'

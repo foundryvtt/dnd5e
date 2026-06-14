@@ -31,12 +31,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '60'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -58,16 +61,81 @@ system:
       _id: dnd5eactivity000
       type: save
       activation:
-        type: action
+        type: special
         value: null
-        override: false
+        override: true
+        condition: >-
+          When a creature &reference[stunned apply=false] by this spell ends
+          their turn.
       consumption:
         targets: []
         scaling:
           allowed: false
           max: ''
-        spellSlot: true
+        spellSlot: false
       description:
+        chatFlavor: ''
+        value: >-
+          <p>The stunned target must make a Constitution saving throw at the end
+          of each of its turns. On a successful save, this stunning effect
+          ends.</p>
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      range:
+        override: true
+        units: spec
+        special: ''
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+      damage:
+        onSave: none
+        parts: []
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+        bonus: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 200000
+      name: Repeat Save
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    q30p6TFrVTCsUSij:
+      type: utility
+      name: Cast
+      _id: q30p6TFrVTCsUSij
+      img: ''
+      sort: 100000
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
         chatFlavor: ''
       duration:
         units: inst
@@ -75,80 +143,89 @@ system:
         override: false
       effects:
         - _id: XUk41wJR26neJaic
-          onSave: false
+          level: {}
+      flags: {}
       range:
+        units: self
         override: false
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
         affects:
           choice: false
         override: false
-      damage:
-        onSave: half
-        parts: []
-      save:
-        ability: con
-        dc:
-          calculation: spellcasting
-          formula: ''
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
   identifier: power-word-stun
 sort: 0
 flags: {}
-img: icons/magic/control/debuff-chains-ropes-red.webp
+img: icons/magic/air/wind-vortex-swirl-blue.webp
 effects:
   - name: Power Word Stun
     origin: Compendium.dnd5e.spells.Item.35j2QIMmIk6aEdxj
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     disabled: true
     _id: XUk41wJR26neJaic
-    changes: []
     description: >-
-      <p>The target is Stunned. The stunned target must make a Constitution
-      saving throw at the end of each of its turns. On a successful save, this
-      stunning effect ends.</p>
+      <p>You are &amp;reference[Stunned apply=false]. You must make a
+      Constitution saving throw at the end of each of your turns. On a
+      successful save, this stunning effect ends.</p>
     transfer: false
     statuses:
       - stunned
-      - incapacitated
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     tint: '#ffffff'
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781451668827
+      modifiedTime: 1781451668827
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    img: icons/magic/control/debuff-chains-ropes-red.webp
+    img: icons/magic/air/wind-vortex-swirl-blue.webp
     type: base
-    system: {}
+    system:
+      changes: []
     sort: 0
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!35j2QIMmIk6aEdxj.XUk41wJR26neJaic'
 folder: x1XTiOgx4DJ34wc5
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037346470
-  modifiedTime: 1725992716734
+  modifiedTime: 1781451716122
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!35j2QIMmIk6aEdxj'
