@@ -6,7 +6,7 @@ type: spell
 system:
   description:
     value: >-
-      <p>You create an illusory copy of yourself that lasts for the Duration.
+      <p>You create an illusory copy of yourself that lasts for the duration.
       The copy can appear at any location within range that you have seen
       before, regardless of intervening obstacles. The Illusion looks and sounds
       like you but is intangible. If the illusion takes any damage, it
@@ -14,15 +14,15 @@ system:
       illusion up to twice your speed, and make it gesture, speak, and behave in
       whatever way you choose. It mimics your mannerisms perfectly.</p><p>You
       can see through its eyes and hear through its ears as if you were in its
-      space. On Your Turn as a Bonus Action, you can switch from using its
+      space. On your turn as a bonus action, you can switch from using its
       senses to using your own, or back again. While you are using its senses,
-      you are Blinded and Deafened in regard to your own
-      surroundings.</p><p>Physical interaction with the image reveals it to be
-      an illusion, because things can pass through it. A creature that uses its
-      action to examine the image can determine that it is an Illusion with a
-      successful Intelligence (Investigation) check against your spell save DC.
-      If a creature discerns the illusion for what it is, the creature can see
-      through the image, and any noise it makes sounds hollow to the
+      you are &amp;reference[Blinded] and &amp;reference[Deafened] in regard to
+      your own surroundings.</p><p>Physical interaction with the image reveals
+      it to be an illusion, because things can pass through it. A creature that
+      uses its action to examine the image can determine that it is an Illusion
+      with a successful Intelligence (Investigation) check against your spell
+      save DC. If a creature discerns the illusion for what it is, the creature
+      can see through the image, and any noise it makes sounds hollow to the
       creature.</p>
     chat: ''
   source:
@@ -42,12 +42,16 @@ system:
     affects:
       type: space
       choice: false
+      count: ''
+      special: ''
     template:
       units: any
       contiguous: false
+      type: ''
   range:
     value: '500'
     units: mi
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -106,20 +110,87 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    flxA1hWAahqcxXRC:
+      type: check
+      name: Investigate Illusion Check
+      img: ''
+      sort: 100000
+      activation:
+        type: ''
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      check:
+        associated:
+          - inv
+        dc:
+          calculation: spellcasting
+          formula: ''
+        ability: ''
+        visible: true
+      _id: flxA1hWAahqcxXRC
   identifier: project-image
 sort: 0
 flags: {}
-img: icons/magic/control/energy-stream-link-spiral-teal.webp
+img: icons/magic/control/silhouette-hold-change-green.webp
 effects: []
 folder: irCSpQWIMtp978TA
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037361736
-  modifiedTime: 1725992721667
+  modifiedTime: 1781465724126
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!ePhRKHXRE7l1sEoQ'
