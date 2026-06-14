@@ -1106,9 +1106,10 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /**
    * Prepare an object of chat data used to display a card for the Item in the chat log.
    * @param {EnrichmentOptions} [enrichmentOptions={}]  Options for text enrichment.
+   * @param {string} [enrichmentOptions.extras]         Extra HTML displayed with the tooltip.
    * @returns {object}              An object of chat data to render.
    */
-  async getPreviewContext(enrichmentOptions={}) {
+  async getPreviewContext({ extras, ...enrichmentOptions }={}) {
     let properties = [];
     if ( this.isSuppressed ) properties.push("DND5E.EFFECT.Status.Unavailable");
     else if ( this.disabled ) properties.push("DND5E.EFFECT.Status.Inactive");
@@ -1120,7 +1121,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     properties.unshift(...this.statuses.map(id => CONFIG.statusEffects[id]?.name).filter(_ => _));
 
     return {
-      properties,
+      extras, properties,
       description: await TextEditor.enrichHTML(this.description ?? "", {
         ...enrichmentOptions,
         relativeTo: this
@@ -1172,6 +1173,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /**
    * Render a rich tooltip for this effect.
    * @param {EnrichmentOptions} [enrichmentOptions={}]  Options for text enrichment.
+   * @param {string} [enrichmentOptions.extras]         Extra HTML displayed with the tooltip.
    * @returns {Promise<{content: string, classes: string[]}>}
    */
   async richTooltip(enrichmentOptions={}) {

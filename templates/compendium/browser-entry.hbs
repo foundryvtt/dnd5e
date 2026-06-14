@@ -24,10 +24,22 @@
             {{/if}}
         </div>
 
+        {{#if displayPrerequisites}}
+        <div class="item-detail item-prerequisites">
+            {{#with prerequisites}}
+            {{#if display}}
+            <i class="prerequisites-result fa-solid fa-circle-{{ ifThen indeterminate 'question' (ifThen valid 'check' 'xmark') }}"
+               aria-label="{{ localize (concat 'DND5E.Prerequisites.Status.' (ifThen indeterminate 'Unknown' (ifThen valid 'Valid' 'Invalid' ))) }}"></i>
+            {{/if}}
+            {{/with}}
+        </div>
+        {{/if}}
+
         <div class="item-detail item-controls">
 
             {{#if displaySelection}}
-            <dnd5e-checkbox name="selected" value="{{ entry.uuid }}" {{ checked selected }}></dnd5e-checkbox>
+            <dnd5e-checkbox name="selected" value="{{ entry.uuid }}" {{ checked selected }}
+                            {{ disabled prerequisites.disabled }}></dnd5e-checkbox>
             {{/if}}
 
         </div>

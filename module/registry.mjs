@@ -5,6 +5,12 @@ import { formatIdentifier } from "./utils.mjs";
  * @import { RegisteredItemData } from "./_types.mjs";
  */
 
+const STATUS_STATES = Object.freeze({
+  NONE: 0,
+  LOADING: 1,
+  READY: 2
+});
+
 /* -------------------------------------------- */
 /*  Dependents                                  */
 /* -------------------------------------------- */
@@ -142,6 +148,81 @@ class EnchantmentRegisty {
 }
 
 /* -------------------------------------------- */
+/*  Identifiers Registry                        */
+/* -------------------------------------------- */
+
+class IdentifierRegistry {
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Identifiers mapped to their names grouped by type.
+   * @type {Map<string, Map<string, string>>}
+   */
+  static #identifiers = new Map([["*", new Map()]]);
+
+  /* -------------------------------------------- */
+
+  /**
+   * Has initial loading been completed?
+   * @type {number}
+   */
+  static #status = STATUS_STATES.NONE;
+
+  /* -------------------------------------------- */
+  /*  Methods                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Get the name of an item based on identifier. Accepts optional type as either separate option or using
+   * the colon-separated format (e.g. `spell:blade-ward`).
+   * @param {string} key             Identifier to find.
+   * @param {object} [options={}]
+   * @param {string} [options.type]  Type of items to check.
+   * @returns {string|void}
+   */
+  static get(key, { type }={}) {
+    if ( !key ) return;
+    if ( key.includes(":") && !type ) [type, key] = key.split(":", 2);
+    return this.#identifiers.get(type ?? "*")?.get(key);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Scan compendium packs to register item identifiers.
+   */
+  static async initialize() {
+    if ( this.#status > STATUS_STATES.NONE ) return;
+    RegistryStatus.set("identifiers", false);
+    if ( game.modules.get("babele")?.active && (game.babele?.initialized === false) ) {
+      Hooks.once("babele.ready", () => this.initialize());
+      return;
+    } else if ( !game.ready ) {
+      Hooks.once("ready", () => this.initialize());
+      return;
+    }
+    this.#status = STATUS_STATES.LOADING;
+
+    const indexes = await CompendiumBrowser.fetch(Item, {
+      // types: new Set([this.#itemType]),
+      indexFields: new Set(["system.identifier"]),
+      sort: false
+    });
+    for ( const item of indexes ) {
+      const identifier = item.system?.identifier ?? formatIdentifier(item.name);
+      if ( !this.#identifiers.has(item.type) ) this.#identifiers.set(item.type, new Map());
+      this.#identifiers.get("*").set(identifier, item.name);
+      this.#identifiers.get(item.type).set(identifier, item.name);
+    }
+
+    this.#status = STATUS_STATES.READY;
+    RegistryStatus.set("identifiers", true);
+  }
+}
+
+/* -------------------------------------------- */
 /*  Item Registry                               */
 /* -------------------------------------------- */
 
@@ -174,17 +255,7 @@ class ItemRegistry {
    * Has initial loading been completed?
    * @type {number}
    */
-  #status = ItemRegistry.#STATUS_STATES.NONE;
-
-  /**
-   * Possible preparation states for the item registry.
-   * @enum {number}
-   */
-  static #STATUS_STATES = Object.freeze({
-    NONE: 0,
-    LOADING: 1,
-    READY: 2
-  });
+  #status = STATUS_STATES.NONE;
 
   /* -------------------------------------------- */
 
@@ -251,7 +322,7 @@ class ItemRegistry {
    * Scan compendium packs to register matching items of this type.
    */
   async initialize() {
-    if ( this.#status > ItemRegistry.#STATUS_STATES.NONE ) return;
+    if ( this.#status > STATUS_STATES.NONE ) return;
     RegistryStatus.set(this.#itemType, false);
     if ( game.modules.get("babele")?.active && (game.babele?.initialized === false) ) {
       Hooks.once("babele.ready", () => this.initialize());
@@ -260,7 +331,7 @@ class ItemRegistry {
       Hooks.once("ready", () => this.initialize());
       return;
     }
-    this.#status = ItemRegistry.#STATUS_STATES.LOADING;
+    this.#status = STATUS_STATES.LOADING;
 
     const indexes = await CompendiumBrowser.fetch(Item, {
       types: new Set([this.#itemType]),
@@ -277,7 +348,7 @@ class ItemRegistry {
       itemData.sources.push(item.uuid);
     }
 
-    this.#status = ItemRegistry.#STATUS_STATES.READY;
+    this.#status = STATUS_STATES.READY;
     RegistryStatus.set(this.#itemType, true);
   }
 }
@@ -739,6 +810,7 @@ export default {
   classes: new ItemRegistry("class"),
   dependents: DependentsRegistry,
   enchantments: EnchantmentRegisty,
+  identifiers: IdentifierRegistry,
   messages: MessageRegistry,
   ready: RegistryStatus.ready,
   species: new ItemRegistry("race"),

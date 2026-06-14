@@ -12,6 +12,8 @@
  * @property {number|null} xp                        Amount of experience points to award.
  */
 
+/* -------------------------------------------- */
+
 /**
  * @typedef CurrencyUpdateOptions
  * @property {boolean} [exact=true]                    Prioritize deducting the requested denomination first.
@@ -30,7 +32,11 @@
  *                                              Locked filters won't be able to be changed by the user. Initial filters
  *                                              will be set to start but can be changed.
  * @property {string|null} hint                 Hint displayed in the interface.
- * @property {CompendiumBrowserSelectionConfiguration} selection  Configuration used to define document selections.
+ * @property {CompendiumBrowserSelectionConfiguration} selection     Configuration used to define document selections.
+ * @property {object} prerequisites
+ * @property {boolean} prerequisites.enforce        Prevent selection of results that fail validation.
+ * @property {boolean} prerequisites.fullDocuments  Require the full documents to be fetched for evaluation.
+ * @property {ValidatePrerequisitesCallback} prerequisites.validate  Callback used to evaluate prerequisites.
  */
 
 /**
@@ -80,6 +86,25 @@
  *                                   class are assumed.
  * @property {boolean} [advanced]    Is this tab only available in the advanced browsing mode.
  */
+
+/**
+ * @typedef PrerequisiteValidationResult
+ * @param {string} label           Label describing the prerequisite.
+ * @param {boolean} [quiet=false]  Only display in mark compendium browser if invalid.
+ * @param {boolean|null} valid     Whether the prerequisite is valid or not, or `null` if it couldn't be evaluated.
+ */
+
+/**
+ * @typedef {Map<string, PrerequisiteValidationResult>} PrerequisiteValidationResults
+ */
+
+/**
+ * @callback ValidatePrerequisitesCallback
+ * @param {Document|object} doc  Document for which to evaluate the prerequisites.
+ * @returns {PrerequisiteValidationResults}
+ */
+
+/* -------------------------------------------- */
 
 /**
  * Description for a single part of a property attribution.

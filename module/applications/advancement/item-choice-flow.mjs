@@ -233,7 +233,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
       return;
     }
 
-    const filters = { locked: { additional: {}, documentClass: "Item" } };
+    const filters = { locked: { additional: {}, documentClass: "Item", exclusive: true } };
 
     // Apply restrictions based on type
     if ( config.type ) {
@@ -273,7 +273,14 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     }
 
     const result = await CompendiumBrowser.select({
-      filters, selection: { min: 1, max: max - current }
+      filters,
+      prerequisites: {
+        validate: item => {
+          if ( !item.system.prerequisiteLabels ) return [];
+          return item.system.prerequisiteLabels({ actor: this.advancement.actor, level: this.level });
+        }
+      },
+      selection: { min: 1, max: max - current }
     }, this.manager?._detachOptions());
     if ( !result?.size ) return;
 

@@ -147,6 +147,22 @@
       &:empty { margin-bottom: .5rem; }
     }
 
+    .extras {
+      .prerequisite::after {
+        font-family: var(--font-awesome);
+        font-weight: 900;
+        padding-inline-start: 4px;
+      }
+      .prerequisite.valid::after {
+        content: "\f00c";
+        color: var(--dnd5e-color-success);
+      }
+      .prerequisite.invalid::after {
+        content: "\f00d";
+        color: var(--dnd5e-color-failure);
+      }
+    }
+
     &.locked-tooltip {
       .description {
         overflow-y: scroll;
