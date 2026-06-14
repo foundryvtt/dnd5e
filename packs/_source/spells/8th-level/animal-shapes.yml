@@ -20,10 +20,11 @@ system:
       transformed. If it reverts as a result of dropping to 0 hit points, any
       excess damage carries over to its normal form. As long as the excess
       damage doesn't reduce the creature's normal form to 0 hit points, it isn't
-      knocked unconscious. The creature is limited in the actions it can perform
-      by the nature of its new form, and it can't speak or cast
-      spells.</p><p>The target's gear melds into the new form. The target can't
-      activate, wield, or otherwise benefit from any of its equipment.</p>
+      knocked &amp;reference[unconscious apply=false]. The creature is limited
+      in the actions it can perform by the nature of its new form, and it can't
+      speak or cast spells.</p><p>The target's gear melds into the new form. The
+      target can't activate, wield, or otherwise benefit from any of its
+      equipment.</p>
     chat: ''
   source:
     custom: ''
@@ -42,12 +43,16 @@ system:
     affects:
       type: creature
       choice: false
+      count: ''
+      special: ''
     template:
       units: any
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -86,7 +91,9 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: OhIP0sFZgym8uFyL
+          level: {}
       range:
         override: false
       target:
@@ -105,20 +112,152 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    Sb7lnASL8TCju9pO:
+      type: transform
+      name: Transform into Beast
+      _id: Sb7lnASL8TCju9pO
+      img: ''
+      sort: 100000
+      activation:
+        type: special
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      profiles:
+        - cr: '4'
+          name: Animal Shape
+          _id: UOffAoTyyX85HMwu
+          uuid: null
+          sizes: []
+          types:
+            - beast
+          movement: []
+          level:
+            min: null
+            max: null
+      settings:
+        effects:
+          - origin
+          - otherOrigin
+          - background
+          - class
+          - feat
+          - spell
+        keep:
+          - mental
+          - class
+          - feats
+          - bio
+          - tempHP
+        merge:
+          - saves
+          - skills
+        minimumAC: ''
+        spellLists: []
+        preset: wildshape
+        other: []
+        transformTokens: true
+        tempFormula: ''
+      transform:
+        customize: true
+        mode: cr
+        preset: wildshape
   identifier: animal-shapes
 sort: 0
 flags: {}
 img: icons/magic/nature/wolf-paw-glow-large-teal-blue.webp
-effects: []
+effects:
+  - name: Animal Shapes
+    img: icons/magic/nature/wolf-paw-glow-large-teal-blue.webp
+    origin: Compendium.dnd5e.spells.Item.ohqAIBg6de989CIo
+    transfer: false
+    _id: OhIP0sFZgym8uFyL
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 24
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>Your magic turns others into beasts. On subsequent turns, you can use
+      your action to transform affected creatures into new forms.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781459159225
+      modifiedTime: 1781462171569
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!ohqAIBg6de989CIo.OhIP0sFZgym8uFyL'
 folder: x1XTiOgx4DJ34wc5
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037365097
-  modifiedTime: 1725992722757
+  modifiedTime: 1781462071644
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!ohqAIBg6de989CIo'
