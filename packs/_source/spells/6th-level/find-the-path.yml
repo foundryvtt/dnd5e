@@ -11,7 +11,7 @@ system:
       of existence. If you name a destination on another plane of existence, a
       destination that moves (such as a Mobile fortress), or a destination that
       isn't specific (such as "a green dragon's lair"), the spell
-      fails.</p><p>For the Duration, as long as you are on the same plane of
+      fails.</p><p>For the duration, as long as you are on the same plane of
       existence as the destination, you know how far it is and in what direction
       it lies. While you are traveling there, whenever you are presented with a
       choice of paths along the way, you automatically determine which path is
@@ -34,11 +34,14 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -80,7 +83,9 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: D1dbIRvlO6QEiUin
+          level: {}
       range:
         override: false
       target:
@@ -99,20 +104,69 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: find-the-path
 sort: 0
 flags: {}
-img: icons/magic/light/explosion-star-teal.webp
-effects: []
+img: icons/tools/navigation/map-chart-tan.webp
+effects:
+  - name: Finding the Path
+    img: icons/tools/navigation/map-chart-tan.webp
+    origin: Compendium.dnd5e.spells.Item.cYI4RNNjI5GAmLhy
+    transfer: false
+    _id: D1dbIRvlO6QEiUin
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: days
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>For the duration, as long as you are on the same plane of existence as
+      the destination, you know how far it is and in what direction it lies.
+      While you are traveling there, whenever you are presented with a choice of
+      paths along the way, you automatically determine which path is the
+      shortest and most direct route (but not necessarily the safest route) to
+      the destination.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781447555704
+      modifiedTime: 1781447576948
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!cYI4RNNjI5GAmLhy.D1dbIRvlO6QEiUin'
 folder: 0pdesvXqKd55VOh2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037360322
-  modifiedTime: 1725992721167
+  modifiedTime: 1781447555742
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!cYI4RNNjI5GAmLhy'

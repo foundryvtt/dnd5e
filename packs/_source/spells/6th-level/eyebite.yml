@@ -6,24 +6,25 @@ type: spell
 system:
   description:
     value: >-
-      <p>For the spell's Duration, your eyes become an inky void imbued with
+      <p>For the spell's duration, your eyes become an inky void imbued with
       dread power. One creature of your choice within 60 feet of you that you
       can see must succeed on a Wisdom saving throw or be affected by one of the
-      following Effects of your choice for the Duration. On each of your turns
+      following Effects of your choice for the duration. On each of your turns
       until the spell ends, you can use your action to target another creature
       but can't target a creature again if it has succeeded on a saving throw
-      against this casting of eyebite.</p><ul><li><strong>Asleep</strong>. The
-      target falls &amp;Reference[Unconscious]. It wakes up if it takes any
+      against this casting of eyebite.</p><ul><li><p><strong>Asleep</strong>.
+      The target falls &amp;Reference[Unconscious]. It wakes up if it takes any
       damage or if another creature uses its action to shake the sleeper
-      awake.</li><li><strong>Panicked</strong>. The target is
+      awake.</p></li><li><p><strong>Panicked</strong>. The target is
       &amp;Reference[Frightened] of you. On each of its turns, the frightened
-      creature must take the Dash action and move away from you by the safest
-      and shortest available route, unless there is nowhere to move. If the
-      target moves to a place at least 60 feet away from you where it can no
-      longer see you, this effect ends.</li><li><strong>Sickened</strong>. The
-      target has disadvantage on Attack rolls and Ability Checks. At the end of
-      each of its turns, it can make another Wisdom saving throw. If it
-      succeeds, the effect ends</li></ul>
+      creature must take the &amp;reference[Dash] action and move away from you
+      by the safest and shortest available route, unless there is nowhere to
+      move. If the target moves to a place at least 60 feet away from you where
+      it can no longer see you, this effect
+      ends.</p></li><li><p><strong>Sickened</strong>. The target has
+      disadvantage on attack rolls and ability checks. At the end of each of its
+      turns, it can make another Wisdom saving throw. If it succeeds, the effect
+      ends</p></li></ul>
     chat: ''
   source:
     custom: ''
@@ -42,11 +43,14 @@ system:
     affects:
       type: self
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: ''
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -115,21 +119,17 @@ system:
   identifier: eyebite
 sort: 0
 flags: {}
-img: icons/magic/perception/eye-ringed-glow-angry-large-red.webp
+img: icons/magic/perception/hand-eye-pink.webp
 effects:
   - name: Eyebite (alseep)
     origin: Compendium.dnd5e.spells.Item.ZRqu3Xh9FmlBCZGy
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: true
     _id: 2pJGy924n0r44Zkh
-    changes: []
     description: >-
       <p>The target falls Unconscious. It wakes up if it takes any damage or if
       another creature uses its action to shake the sleeper awake.</p>
@@ -142,7 +142,7 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -151,22 +151,22 @@ effects:
       exportSource: null
     img: icons/magic/perception/eye-ringed-glow-angry-large-red.webp
     type: base
-    system: {}
+    system:
+      changes: []
     sort: 0
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!ZRqu3Xh9FmlBCZGy.2pJGy924n0r44Zkh'
   - name: Eyebite (panicked)
     origin: Compendium.dnd5e.spells.Item.ZRqu3Xh9FmlBCZGy
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: true
     _id: VcwWVogEU3TwChxb
-    changes: []
     description: >-
       <p>The target is Frightened of the caster. On each of its turns, the
       frightened creature must take the Dash action and move away from the
@@ -181,7 +181,7 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -190,17 +190,21 @@ effects:
       exportSource: null
     img: icons/magic/perception/eye-ringed-glow-angry-large-red.webp
     type: base
-    system: {}
+    system:
+      changes: []
     sort: 0
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!ZRqu3Xh9FmlBCZGy.VcwWVogEU3TwChxb'
 folder: 0pdesvXqKd55VOh2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037359262
-  modifiedTime: 1725992720837
+  modifiedTime: 1781435934639
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!ZRqu3Xh9FmlBCZGy'
