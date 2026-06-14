@@ -55,7 +55,8 @@ system:
     rules: '2014'
   identifier: hill-dwarf
   advancement:
-    - _id: tNfLTuoHfvAxg2FC
+    tNfLTuoHfvAxg2FC:
+      _id: tNfLTuoHfvAxg2FC
       type: ItemGrant
       configuration:
         items:
@@ -63,17 +64,23 @@ system:
             optional: false
           - uuid: Compendium.dnd5e.races.mQPZDRbUhgYTbXKa
             optional: false
+          - uuid: Compendium.dnd5e.races.Item.G7hkETvAYFLSLIVW
+            optional: false
         optional: false
         spell:
           ability: []
-          preparation: ''
           uses:
             max: ''
             per: ''
+            requireSlot: false
+          prepared: 0
       value: {}
       level: 0
       title: ''
-    - _id: Z9hvZFkWUNvowbQX
+      flags: {}
+      hint: ''
+    Z9hvZFkWUNvowbQX:
+      _id: Z9hvZFkWUNvowbQX
       type: AbilityScoreImprovement
       configuration:
         points: 0
@@ -86,10 +93,14 @@ system:
           cha: 0
         cap: 2
         locked: []
+        recommendation: null
       value: {}
       level: 0
       title: ''
-    - _id: kdMPoRp3j1uOHQom
+      flags: {}
+      hint: ''
+    kdMPoRp3j1uOHQom:
+      _id: kdMPoRp3j1uOHQom
       type: Size
       configuration:
         sizes:
@@ -101,7 +112,9 @@ system:
       hint: >-
         Dwarves stand between 4 and 5 feet tall and average about 150 pounds.
         Your size is Medium.
-    - _id: rmcKuRQ2Laloq1xp
+      flags: {}
+    rmcKuRQ2Laloq1xp:
+      _id: rmcKuRQ2Laloq1xp
       type: Trait
       configuration:
         mode: default
@@ -114,7 +127,10 @@ system:
       title: ''
       value:
         chosen: []
-    - _id: 5zWGcz9uAerx3Dh5
+      flags: {}
+      hint: ''
+    5zWGcz9uAerx3Dh5:
+      _id: 5zWGcz9uAerx3Dh5
       type: Trait
       configuration:
         mode: default
@@ -126,7 +142,10 @@ system:
       title: Dwarven Resilience
       value:
         chosen: []
-    - _id: J0UGmCyMy6thWDeU
+      flags: {}
+      hint: ''
+    J0UGmCyMy6thWDeU:
+      _id: J0UGmCyMy6thWDeU
       type: Trait
       configuration:
         mode: default
@@ -141,7 +160,10 @@ system:
       title: Dwarven Combat Training
       value:
         chosen: []
-    - _id: 9CYW7Bj53L9G8Zsw
+      flags: {}
+      hint: ''
+    9CYW7Bj53L9G8Zsw:
+      _id: 9CYW7Bj53L9G8Zsw
       type: Trait
       configuration:
         mode: default
@@ -157,6 +179,8 @@ system:
       title: ''
       value:
         chosen: []
+      flags: {}
+      hint: ''
   senses:
     darkvision: 60
     blindsight: null
@@ -186,7 +210,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 6.0.0
   createdTime: 1725037392950
-  modifiedTime: 1781474023788
+  modifiedTime: 1781474305064
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
