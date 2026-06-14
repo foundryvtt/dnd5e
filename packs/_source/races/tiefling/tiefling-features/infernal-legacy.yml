@@ -34,7 +34,8 @@ system:
     value: race
     subtype: ''
   requirements: Tiefling
-  properties: []
+  properties:
+    - trait
   activities: {}
   enchant: {}
   prerequisites:
@@ -47,11 +48,11 @@ folder: uTOlS6Wk9xGuCs7Z
 sort: 0
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037393347
-  modifiedTime: 1725992703782
+  modifiedTime: 1781473476832
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!wJc88B8OP1y1xzMw'

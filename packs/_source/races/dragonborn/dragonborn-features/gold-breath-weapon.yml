@@ -1,0 +1,142 @@
+_id: YPQQBZAuRiSwuBfh
+name: Gold Breath Weapon
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>You can use your action to exhale destructive fire.</p><p>When you use
+      your breath weapon, [[lookup @labels.description.affects
+      activity=auRpWnbzenXjFwAV]] in a [[lookup @labels.description.template
+      activity=auRpWnbzenXjFwAV]] must make a Dexterity saving throw. The DC for
+      this saving throw equals 8 + your Constitution modifier + your proficiency
+      bonus. A creature takes 2d6 fire damage on a failed save, and half as much
+      damage on a successful one. The damage increases to 3d6 at 6th level, 4d6
+      at 11th level, and 5d6 at 16th level.</p><p>After you use your breath
+      weapon, you can't use it again until you complete a short or long
+      rest.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: ''
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: '1'
+    recovery:
+      - period: sr
+        type: recoverAll
+    spent: 0
+  type:
+    value: race
+    subtype: ''
+  requirements: Gold Dragonborn
+  properties: []
+  activities:
+    auRpWnbzenXjFwAV:
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+        value: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: cone
+          size: '15'
+          width: ''
+          height: ''
+          units: ft
+          stationary: false
+        affects:
+          count: ''
+          type: creature
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - custom:
+              enabled: true
+              formula: '@scale.dragonborn.breath-weapon'
+            number: null
+            denomination: null
+            bonus: ''
+            types:
+              - fire
+            scaling:
+              number: 1
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: con
+          formula: ''
+        visible: true
+        bonus: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 100000
+      name: Exhale Fire
+      img: ''
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      _id: auRpWnbzenXjFwAV
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: breath-weapon-gold
+flags: {}
+img: icons/magic/fire/projectile-fireball-embers-yellow.webp
+effects: []
+_stats:
+  duplicateSource: null
+  coreVersion: '14.361'
+  systemId: dnd5e
+  systemVersion: 6.0.0
+  createdTime: 1725037392990
+  modifiedTime: 1781472489137
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+folder: TAw7621pFkXOkuYI
+_key: '!items!YPQQBZAuRiSwuBfh'

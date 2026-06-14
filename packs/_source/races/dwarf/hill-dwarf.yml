@@ -19,9 +19,10 @@ system:
       Medium.</p><p><strong>Speed.</strong> Your base walking speed is 25 feet.
       Your speed is not reduced by wearing heavy
       armor.</p><p><strong>Darkvision.</strong> Accustomed to life underground,
-      you have superior vision in dark and dim conditions. You can see in dim
-      light within 60 feet of you as if it were bright light, and in darkness as
-      if it were dim light. You can't discern color in darkness, only shades of
+      you have superior vision in dark and dim conditions. You can see in
+      &amp;reference[dim light] within 60 feet of you as if it were
+      &amp;reference[bright light], and in &amp;reference[darkness] as if it
+      were dim light. You can't discern color in darkness, only shades of
       gray.</p><p><strong>Dwarven Resilience.</strong> You have advantage on
       saving throws against poison, and you have resistance against poison
       damage.</p><p><strong>Dwarven Combat Training.</strong> You have
@@ -40,13 +41,10 @@ system:
       resilience.</p><p><strong>Ability Score Increase.</strong> Your Wisdom
       score increases by 1.</p><p><strong>Dwarven Toughness.</strong> Your hit
       point maximum increases by 1, and it increases by 1 every time you gain a
-      level.</p><section class="secret"
-      id="secret-bkbaaEWqAGbU8ZgK"><p><strong>Foundry
-      Note</strong></p><p>Dwarven Toughness should be configured by adding 1 to
-      the "Per Level" bonus in HP configuration on your character sheet
-      (accessible using the cog next to your character's hit points).</p><p>The
-      "Ignore Armor Speed Reduction" flag in the Special Traits tab can be used
-      to prevent armor from reducing your speed if you don't have sufficient
+      level.</p><section id="secret-bkbaaEWqAGbU8ZgK"
+      class="secret"><p><strong>Foundry Note</strong></p><p>The "Ignore Armor
+      Speed Reduction" flag in the Special Traits tab can be used to prevent
+      armor from reducing your speed if you don't have sufficient
       strength.</p></section>
     chat: ''
   source:
@@ -184,11 +182,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037392950
-  modifiedTime: 1769455937269
+  modifiedTime: 1781474023788
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

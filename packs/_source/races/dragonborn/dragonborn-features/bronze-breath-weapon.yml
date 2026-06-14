@@ -1,0 +1,142 @@
+_id: pJzMSk9qYywYy65w
+name: Bronze Breath Weapon
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>You can use your action to exhale destructive lightning.</p><p>When you
+      use your breath weapon, [[lookup @labels.description.affects
+      activity=8pjVqSAPbp1tIUOC]] in a [[lookup @labels.description.template
+      activity=8pjVqSAPbp1tIUOC]] must make a Dexterity saving throw. The DC for
+      this saving throw equals 8 + your Constitution modifier + your proficiency
+      bonus. A creature takes 2d6 lightning damage on a failed save, and half as
+      much damage on a successful one. The damage increases to 3d6 at 6th level,
+      4d6 at 11th level, and 5d6 at 16th level.</p><p>After you use your breath
+      weapon, you can't use it again until you complete a short or long
+      rest.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: ''
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: '1'
+    recovery:
+      - period: sr
+        type: recoverAll
+    spent: 0
+  type:
+    value: race
+    subtype: ''
+  requirements: Bronze Dragonborn
+  properties: []
+  activities:
+    8pjVqSAPbp1tIUOC:
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+        value: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: line
+          size: '30'
+          width: '5'
+          height: ''
+          units: ft
+          stationary: false
+        affects:
+          count: ''
+          type: creature
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - custom:
+              enabled: true
+              formula: '@scale.dragonborn.breath-weapon'
+            number: null
+            denomination: null
+            bonus: ''
+            types:
+              - lightning
+            scaling:
+              number: 1
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: con
+          formula: ''
+        visible: true
+        bonus: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 100000
+      name: Exhale Lightning
+      img: ''
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      _id: 8pjVqSAPbp1tIUOC
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: breath-weapon-bronze
+flags: {}
+img: icons/magic/lightning/bolt-blue.webp
+effects: []
+_stats:
+  duplicateSource: null
+  coreVersion: '14.361'
+  systemId: dnd5e
+  systemVersion: 6.0.0
+  createdTime: 1725037393297
+  modifiedTime: 1781472293290
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+folder: TAw7621pFkXOkuYI
+_key: '!items!pJzMSk9qYywYy65w'
