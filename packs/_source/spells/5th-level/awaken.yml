@@ -13,12 +13,13 @@ system:
       to speak one language you know. If the target is a plant, it gains the
       ability to move its limbs, roots, vines, creepers, and so forth, and it
       gains senses similar to a human's. Your DM chooses statistics appropriate
-      for the awakened plant, such as the statistics for the awakened shrub or
-      the awakened tree.</p><p>The awakened beast or plant is charmed by you for
-      30 days or until you or your companions do anything harmful to it. When
-      the charmed condition ends, the awakened creature chooses whether to
-      remain friendly to you, based on how you treated it while it was
-      charmed.</p>
+      for the awakened plant, such as the statistics for the
+      @UUID[Compendium.dnd5e.monsters.Actor.gaSTr7DFZJLmgI2J]{Awakened Shrub} or
+      the @UUID[Compendium.dnd5e.monsters.Actor.UR2gWLFHmFwG7ReH]{Awakened
+      Tree}.</p><p>The awakened beast or plant is charmed by you for 30 days or
+      until you or your companions do anything harmful to it. When the charmed
+      condition ends, the awakened creature chooses whether to remain friendly
+      to you, based on how you treated it while it was charmed.</p>
     chat: ''
   source:
     custom: ''
@@ -38,11 +39,14 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -100,20 +104,264 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    b5iPh46R9gB3qp7N:
+      type: summon
+      name: Awaken Plant
+      _id: b5iPh46R9gB3qp7N
+      img: ''
+      sort: 100000
+      activation:
+        type: ''
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: disp
+        concentration: false
+        override: true
+      effects:
+        - _id: lGVtMvn8U3KJMTik
+          level:
+            min: null
+            max: null
+        - _id: BjPkBFpp7mZIhyaT
+          level:
+            min: null
+            max: null
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        disposition: true
+        proficiency: false
+        saves: false
+        ability: ''
+      profiles:
+        - count: ''
+          name: ''
+          _id: OcmfEjmN4TVDumTh
+          uuid: Compendium.dnd5e.monsters.Actor.gaSTr7DFZJLmgI2J
+          level:
+            min: null
+            max: null
+          types: []
+        - count: ''
+          name: ''
+          _id: RuPYJu8O0YeJur5R
+          uuid: Compendium.dnd5e.monsters.Actor.UR2gWLFHmFwG7ReH
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+      tempHP: ''
+    0JxiXLKM5oNcaHhD:
+      type: utility
+      name: Awaken Beast
+      _id: 0JxiXLKM5oNcaHhD
+      img: ''
+      sort: 200000
+      activation:
+        type: ''
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: disp
+        concentration: false
+        override: true
+      effects:
+        - _id: BjPkBFpp7mZIhyaT
+          level: {}
+      flags: {}
+      range:
+        units: self
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
   identifier: awaken
 sort: 0
 flags: {}
-img: icons/magic/nature/leaf-glow-maple-orange-purple.webp
-effects: []
+img: icons/magic/nature/tree-animated-squint.webp
+effects:
+  - name: Awakened Friendliness
+    img: icons/magic/life/heart-shadow-red.webp
+    origin: Compendium.dnd5e.spells.Item.MCEpGpvovcXagwQS
+    transfer: false
+    _id: lGVtMvn8U3KJMTik
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 30
+      units: days
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You are &amp;reference[charmed apply=false] by the caster for 30 days,
+      or until the caster or their companions do anything harmful to you. When
+      the charmed condition ends, you choose whether to remain friendly to
+      them.</p>
+    tint: '#ffffff'
+    statuses:
+      - charmed
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781397221957
+      modifiedTime: 1781397301291
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!MCEpGpvovcXagwQS.lGVtMvn8U3KJMTik'
+  - name: Awakened
+    img: icons/magic/nature/tree-animated-squint.webp
+    origin: Compendium.dnd5e.spells.Item.MCEpGpvovcXagwQS
+    transfer: false
+    _id: BjPkBFpp7mZIhyaT
+    type: base
+    system:
+      changes:
+        - key: system.traits.languages.custom
+          type: add
+          value: ;One language the caster that awakened you knows;
+          phase: initial
+          priority: null
+        - key: system.abilities.int.value
+          type: upgrade
+          value: 10
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You have been awakened. You gain an Intelligence of 10. You also gain
+      the ability to speak one langauge the caster knows. If you are a plant,
+      you gain the ability to move your limbs, roots, vines, creepers, and so
+      forth, and gain senses similar to a human's.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781397302407
+      modifiedTime: 1781397450523
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!MCEpGpvovcXagwQS.BjPkBFpp7mZIhyaT'
 folder: bG9QTayc46rfNkv2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037354475
-  modifiedTime: 1725992719277
+  modifiedTime: 1781397502702
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!MCEpGpvovcXagwQS'

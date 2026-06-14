@@ -46,14 +46,19 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: wall
-      size: '100'
+      size: '10'
       contiguous: false
+      width: '6'
+      height: '10'
+      count: ''
   range:
     value: '120'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -112,23 +117,96 @@ system:
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Conjure Wall of Stone (10 ft. x 10 ft. Panels)
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    d5HiSblAgFL6tu4u:
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+          stationary: false
+          type: wall
+          size: '10'
+          width: '3'
+          height: '20'
+          count: '10'
+        affects:
+          choice: false
+          type: ''
+        override: true
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+        bonus: ''
+        visible: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 100000
+      name: Conjure Wall of Stone (10 ft. x 20 ft. Panels)
+      img: ''
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: d5HiSblAgFL6tu4u
   identifier: wall-of-stone
 sort: 0
 flags: {}
-img: icons/magic/light/beam-rays-orange-large.webp
+img: icons/commodities/stone/paver-brick-brown.webp
 effects: []
 folder: bG9QTayc46rfNkv2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037355145
-  modifiedTime: 1725992719512
+  modifiedTime: 1781403888113
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!NmoRmM1mhuM3pqnY'

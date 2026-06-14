@@ -11,11 +11,11 @@ system:
       existence as you. Creatures that don't sleep, such as elves, can't be
       contacted by this spell. You, or a willing creature you touch, enters a
       trance state, acting as a messenger. While in the trance, the messenger is
-      aware of his or her surroundings, but can't take Actions or move.</p><p>If
+      aware of his or her surroundings, but can't take actions or move.</p><p>If
       the target is asleep, the messenger appears in the target's dreams and can
       converse with the target as long as it remains asleep, through the
-      Duration of the spell. The messenger can also shape The Environment of the
-      dream, creating landscapes, Objects, and other images. The messenger can
+      duration of the spell. The messenger can also shape the tnvironment of the
+      dream, creating landscapes, objects, and other images. The messenger can
       emerge from the trance at any time, ending the effect of the spell early.
       The target recalls the dream perfectly upon waking. If the target is awake
       when you cast the spell, the messenger knows it, and can either end the
@@ -24,7 +24,7 @@ system:
       messenger appear monstrous and terrifying to the target. If you do, the
       messenger can deliver a message of no more than ten words and then the
       target must make a Wisdom saving throw. On a failed save, echoes of the
-      phantasmal monstrosity spawn a nightmare that lasts the Duration of the
+      phantasmal monstrosity spawn a nightmare that lasts the duration of the
       target's sleep and prevents the target from gaining any benefit from that
       rest. In addition, when the target wakes up, it takes 3d6 psychic
       damage.</p><p>If you have a body part, lock of hair, clipping from a nail,
@@ -49,11 +49,14 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -79,69 +82,139 @@ system:
       _id: dnd5eactivity000
       type: save
       activation:
-        type: action
+        type: special
         value: null
-        override: false
+        override: true
+        condition: ''
       consumption:
         targets: []
         scaling:
           allowed: false
           max: ''
-        spellSlot: true
+        spellSlot: false
       description:
         chatFlavor: ''
+        value: >-
+          <p>You can make the messenger appear monstrous and terrifying to the
+          target. If you do, the messenger can deliver a message of no more than
+          ten words and then the target must make a Wisdom saving throw. On a
+          failed save, echoes of the phantasmal monstrosity spawn a nightmare
+          that lasts the duration of the target's sleep and prevents the target
+          from gaining any benefit from that rest. In addition, when the target
+          wakes up, it takes 3d6 psychic damage.</p><p>If you have a body part,
+          lock of hair, clipping from a nail, or similar portion of the target's
+          body, the target makes its saving throw with disadvantage.</p>
       duration:
         units: inst
         concentration: false
-        override: false
+        override: true
+        special: ''
       effects: []
       range:
-        override: false
+        override: true
+        units: spec
+        special: ''
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          type: ''
         affects:
           choice: false
-        override: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
       damage:
         onSave: half
         parts:
-          - number: 3
+          - custom:
+              enabled: false
+              formula: ''
+            number: 3
             denomination: 6
             bonus: ''
             types:
               - psychic
-            custom:
-              enabled: false
-              formula: ''
             scaling:
               mode: ''
-              number: null
-              formula: ''
+              number: 1
       save:
         ability: wis
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Nightmare Save
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    WuuR0BgbhJSE7W66:
+      type: utility
+      name: Cast
+      _id: WuuR0BgbhJSE7W66
+      img: null
+      sort: -100000
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
   identifier: dream
 sort: 0
 flags: {}
-img: icons/magic/air/fog-gas-smoke-swirling-pink.webp
+img: icons/magic/nature/plant-undersea-orb-purple.webp
 effects: []
 folder: bG9QTayc46rfNkv2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037363838
-  modifiedTime: 1725992722360
+  modifiedTime: 1781392195267
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!kSPRpeIx3w3nihrF'

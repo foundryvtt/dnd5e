@@ -5,7 +5,7 @@ ownership:
 type: spell
 system:
   description:
-    value: "<p>You call forth an elemental servant. Choose an area of air, earth, fire, or water that fills a 10-foot cube within range. An elemental of challenge rating 5 or lower appropriate to the area you chose appears in an unoccupied space within 10 feet of it. For example, a fire elemental emerges from a bonfire, and an earth elemental rises up from the ground. The elemental disappears when it drops to 0 hit points or when the spell ends.</p><p>The elemental is friendly to you and your companions for the duration. Roll initiative for the elemental, which has its own turns. It obeys any verbal commands that you issue to it (no action required by you). If you don't issue any commands to the elemental, it defends itself from hostile creatures but otherwise takes no actions.</p><p>If your concentration is broken, the elemental doesn't disappear. Instead, you lose control of the elemental, it becomes hostile toward you and your companions, and it might attack. An uncontrolled elemental can't be dismissed by you, and it disappears 1 hour after you summoned it.</p><p><strong>Higher Levels.\_</strong>When you cast this spell using a spell slot of 6th level or higher, the challenge rating increases by 1 for each slot level above 5th.</p>"
+    value: "<p>You call forth an elemental servant. Choose an area of air, earth, fire, or water that fills a 10-foot cube within range. An elemental of challenge rating 5 or lower appropriate to the area you chose appears in an unoccupied space within 10 feet of it. For example, a @UUID[Compendium.dnd5e.monsters.Actor.8SMQl75HLjhuSeau]{Fire Elemental} emerges from a bonfire, and an @UUID[Compendium.dnd5e.monsters.Actor.sApYLZj9PTZ40wJr]{Earth Elemental} rises up from the ground. The elemental disappears when it drops to 0 hit points or when the spell ends.</p><p>The elemental is friendly to you and your companions for the duration. Roll initiative for the elemental, which has its own turns. It obeys any verbal commands that you issue to it (no action required by you). If you don't issue any commands to the elemental, it defends itself from hostile creatures but otherwise takes no actions.</p><p>If your concentration is broken, the elemental doesn't disappear. Instead, you lose control of the elemental, it becomes hostile toward you and your companions, and it might attack. An uncontrolled elemental can't be dismissed by you, and it disappears 1 hour after you summoned it.</p><p><strong>Higher Levels.\_</strong>When you cast this spell using a spell slot of 6th level or higher, the challenge rating increases by 1 for each slot level above 5th.</p>"
     chat: ''
   source:
     custom: ''
@@ -27,12 +27,15 @@ system:
       type: space
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '90'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -59,21 +62,23 @@ system:
       _id: dnd5eactivity000
       type: summon
       activation:
-        type: action
+        type: ''
         value: null
-        override: false
+        override: true
+        condition: ''
       consumption:
         targets: []
         scaling:
           allowed: false
           max: ''
-        spellSlot: true
+        spellSlot: false
       description:
         chatFlavor: ''
       duration:
-        units: inst
+        units: hour
         concentration: false
         override: false
+        value: '1'
       range:
         override: false
       target:
@@ -118,23 +123,117 @@ system:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 200000
+      name: Summon Elemental
       img: ''
       appliedEffects: []
+      visibility:
+        level:
+          min: null
+          max: null
+      tempHP: ''
+      effects:
+        - _id: ERO8p9cfsc3Ifbii
+          level: {}
+    u2Mpx2VgG37KaZHL:
+      type: utility
+      name: Cast
+      _id: u2Mpx2VgG37KaZHL
+      img: null
+      sort: 100000
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
   identifier: conjure-elemental
 sort: 0
 flags: {}
-img: icons/magic/symbols/runes-star-pentagon-orange.webp
-effects: []
+img: icons/magic/water/water-elemental-blue-teeth.webp
+effects:
+  - name: Controlled Elemental
+    img: icons/magic/water/water-elemental-blue-teeth.webp
+    origin: Compendium.dnd5e.spells.Item.1LkZvINag7KqBmDR
+    transfer: false
+    _id: ERO8p9cfsc3Ifbii
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You are under the caster's control while they maintain concentration on
+      this spell. If their concentration is broken, you don't disappear.
+      Instead, they lose control of you and you become hostile toward the caster
+      and their companions, and you disappear after 1 hour after you were
+      summoned.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781396950387
+      modifiedTime: 1781397027468
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!1LkZvINag7KqBmDR.ERO8p9cfsc3Ifbii'
 folder: bG9QTayc46rfNkv2
 _stats:
   duplicateSource: null
-  coreVersion: '13.350'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037345639
-  modifiedTime: 1760981561138
+  modifiedTime: 1781396950426
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!1LkZvINag7KqBmDR'
