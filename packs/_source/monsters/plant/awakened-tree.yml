@@ -447,9 +447,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -464,7 +461,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -484,6 +481,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 3
 items:
   - _id: Q90HYHsZp8MD2iv2
     name: False Appearance
@@ -492,8 +490,8 @@ items:
     system:
       description:
         value: >-
-          <p>While the tree remains motionless, it is indistinguishable from a
-          normal tree.</p>
+          <p>While the [[lookup @name lowercase]]{monster} remains motionless,
+          it is indistinguishable from a normal tree.</p>
         chat: ''
       source:
         custom: ''
@@ -507,10 +505,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -525,22 +524,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.kyVgQNSa12loxVvr
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781477248850
+      modifiedTime: 1781477252660
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!UR2gWLFHmFwG7ReH.Q90HYHsZp8MD2iv2'
   - _id: WEesSpitzLnaCknL
     name: Slam
     type: weapon
-    img: icons/skills/melee/unarmed-punch-fist-yellow-red.webp
+    img: icons/magic/nature/root-vine-wood-blue.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Awakened Tree attacks with its Slam.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -613,8 +614,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        ozRppnRrNVfBkzQp:
           type: attack
           activation:
             type: action
@@ -629,10 +629,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -649,7 +650,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -662,24 +664,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          name: ''
+          img: ''
+          flags: {}
+          visibility:
+            identifier: ''
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: ozRppnRrNVfBkzQp
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: slam
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -689,11 +704,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1744916838254
+      systemVersion: 6.0.0
+      createdTime: 1781477267502
+      modifiedTime: 1781481196068
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!UR2gWLFHmFwG7ReH.WEesSpitzLnaCknL'
@@ -705,7 +720,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171234693

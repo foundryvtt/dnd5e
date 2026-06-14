@@ -54,8 +54,8 @@ system:
     hp:
       value: 138
       max: 138
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 12d12 + 60
     init:
       ability: ''
@@ -451,9 +451,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -468,7 +465,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -488,6 +485,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 3
 items:
   - _id: 8uUyRr6Ho7Yvx8pP
     name: Animate Trees
@@ -496,17 +494,23 @@ items:
     system:
       description:
         value: >-
-          <p>The treant magically animates one or two trees it can see within 60
-          feet of it. These trees have the same statistics as a treant, except
-          they have Intelligence and Charisma scores of 1, they can't speak, and
-          they have only the Slam action option.</p><p>An animated tree acts as
-          an ally of the treant. The tree remains animate for 1 day or until it
-          dies; until the treant dies or is more than 120 feet from the tree; or
-          until the treant takes a bonus action to turn it back into an
+          <p>The [[lookup @name lowercase]]{monster} magically animates one or
+          two trees it can see within [[lookup @labels.description.range
+          activity=1SrLlYGeLgzdmSwc]]  of it. These trees have the same
+          statistics as a [[lookup @name lowercase]]{monster}, except they have
+          Intelligence and Charisma scores of 1, they can't speak, and they have
+          only the
+          @UUID[Compendium.dnd5e.monsters.Actor.NB6wUgVqeOQtsQKu.Item.lisZZTaupqInGEi1]{Slam}
+          action option.</p><p>An animated tree acts as an ally of the [[lookup
+          @name lowercase]]{monster}. The tree remains animate for 1 day or
+          until it dies; until the [[lookup @name lowercase]]{monster} dies or
+          is more than 120 feet from the tree; or until the [[lookup @name
+          lowercase]]{monster} takes a bonus action to turn it back into an
           inanimate tree. The tree then takes root if possible.</p>
         chat: >-
-          <p>The treant magically animates one or two trees it can see
-          <strong>within 60 feet</strong> of it.</p>
+          <p>The [[lookup @name]]{monster} magically animates one or two trees
+          it can see within [[lookup @labels.description.range
+          activity=1SrLlYGeLgzdmSwc]] of it.</p>
       source:
         custom: ''
         book: ''
@@ -524,65 +528,191 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
+        1SrLlYGeLgzdmSwc:
+          type: summon
+          name: Summon Treants
+          img: ''
+          sort: 100000
           activation:
             type: action
-            value: 1
-            condition: ''
             override: false
+            condition: ''
           consumption:
-            targets: []
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets: []
           description:
+            value: ''
             chatFlavor: ''
           duration:
+            units: inst
             concentration: false
-            value: ''
-            units: ''
-            special: ''
             override: false
-          effects: []
+          effects:
+            - _id: 8fL6lSFsN9qyGlUo
+              level:
+                min: null
+                max: null
+          flags: {}
           range:
-            value: '60'
             units: ft
-            special: ''
             override: false
+            special: ''
+            value: '60'
           target:
             template:
-              count: ''
               contiguous: false
+              stationary: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: ''
-              type: ''
               choice: false
+              count: '2'
+              type: object
               special: ''
-            prompt: true
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          bonuses:
+            ac: ''
+            hd: ''
+            hp: ''
+            attackDamage: ''
+            saveDamage: ''
+            healing: ''
+          creatureSizes: []
+          creatureTypes: []
+          match:
+            attacks: false
+            disposition: true
+            proficiency: false
+            saves: false
+            ability: ''
+          profiles:
+            - count: '2'
+              name: ''
+              _id: LQ8hMlJUOBMEa19z
+              uuid: Compendium.dnd5e.monsters.Actor.NB6wUgVqeOQtsQKu
+              level:
+                min: null
+                max: null
+              types: []
+          summon:
+            prompt: true
+            mode: ''
+          tempHP: ''
+          _id: 1SrLlYGeLgzdmSwc
       enchant: {}
       prerequisites:
         level: null
       identifier: animate-trees
-    effects: []
+    effects:
+      - name: Animated Tree
+        img: icons/magic/nature/tree-spirit-green.webp
+        origin: Compendium.dnd5e.monsters.Actor.NB6wUgVqeOQtsQKu.Item.8uUyRr6Ho7Yvx8pP
+        transfer: false
+        _id: 8fL6lSFsN9qyGlUo
+        type: base
+        system:
+          changes:
+            - key: name
+              type: override
+              value: Animated Treant
+              phase: initial
+              priority: null
+            - key: items.hidden
+              type: add
+              value: treant-rock
+              phase: initial
+              priority: null
+            - key: items.hidden
+              type: add
+              value: animate-trees
+              phase: initial
+              priority: null
+            - key: items.hidden
+              type: add
+              value: multiattack
+              phase: initial
+              priority: null
+            - key: system.abilities.int.value
+              type: downgrade
+              value: 1
+              phase: initial
+              priority: null
+            - key: system.abilities.cha.value
+              type: downgrade
+              value: 1
+              phase: initial
+              priority: null
+            - key: system.traits.languages.value
+              type: add
+              value: '-common'
+              phase: initial
+              priority: null
+            - key: system.traits.languages.value
+              type: add
+              value: '-elvish'
+              phase: initial
+              priority: null
+            - key: system.traits.languages.value
+              type: add
+              value: '-sylvan'
+              phase: initial
+              priority: null
+            - key: system.traits.languages.value
+              type: add
+              value: '-druidic'
+              phase: initial
+              priority: null
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You have the same statistics as a treant, except you have an
+          Intelligence and Charisma score of 1, you can't speak, and you only
+          have the Slam action option.</p><p>You act as an ally of the treant.
+          You remain animate for 1 day or until you die; until the treant dies
+          or is more than 120 feet from you; or until the treant takes a bonus
+          action to turn you back into an inanimate tree. You then take root if
+          possible.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781479031259
+          modifiedTime: 1781480743832
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!NB6wUgVqeOQtsQKu.8uUyRr6Ho7Yvx8pP.8fL6lSFsN9qyGlUo
     folder: null
     sort: 500000
     ownership:
@@ -591,11 +721,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.j6F0v4guYhRYWddT
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765827815644
+      systemVersion: 6.0.0
+      createdTime: 1781478373185
+      modifiedTime: 1781481034868
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!NB6wUgVqeOQtsQKu.8uUyRr6Ho7Yvx8pP'
@@ -606,8 +736,8 @@ items:
     system:
       description:
         value: >-
-          <p>While the treant remains motionless, it is indistinguishable from a
-          normal tree.</p>
+          <p>While the [[lookup @name lowercase]]{monster} remains motionless,
+          it is indistinguishable from a normal tree.</p>
         chat: ''
       source:
         custom: ''
@@ -621,10 +751,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -639,12 +770,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.kyVgQNSa12loxVvr
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781478222371
+      modifiedTime: 1781478224813
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!NB6wUgVqeOQtsQKu.skQsBSPby8pLZSLI'
   - _id: BLz58sp79C2HvinU
@@ -653,7 +784,9 @@ items:
     img: icons/skills/melee/blade-tips-triple-steel.webp
     system:
       description:
-        value: <p>The treant makes two [[/item .lisZZTaupqInGEi1]]{slam} attacks.</p>
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} makes two [[/item
+          .lisZZTaupqInGEi1]]{Slam} attacks.</p>
         chat: ''
       source:
         custom: ''
@@ -738,11 +871,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1765827792922
+      systemVersion: 6.0.0
+      createdTime: 1781478260809
+      modifiedTime: 1781478266919
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!NB6wUgVqeOQtsQKu.BLz58sp79C2HvinU'
@@ -753,7 +886,9 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Treant attacks with its Rock.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -816,17 +951,16 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
-        value: simpleR
+        value: natural
         baseItem: ''
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        Spzv022CGxQ2eRrN:
           type: attack
           activation:
             type: action
@@ -841,10 +975,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -861,7 +996,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -874,22 +1010,35 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: ranged
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: Spzv022CGxQ2eRrN
+          name: ''
       attuned: false
-      ammunition: {}
+      ammunition:
+        type: ''
       magicalBonus: null
       identifier: treant-rock
       mastery: ''
@@ -902,11 +1051,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765827800449
+      systemVersion: 6.0.0
+      createdTime: 1781478292529
+      modifiedTime: 1781480916029
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!NB6wUgVqeOQtsQKu.eTROJriR9B5abIZy'
@@ -916,7 +1065,9 @@ items:
     img: icons/creatures/magical/construct-iron-stomping-yellow.webp
     system:
       description:
-        value: <p>The treant deals double damage to objects and structures.</p>
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} deals double damage to
+          objects and structures.</p>
         chat: ''
       source:
         custom: ''
@@ -930,10 +1081,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -948,22 +1100,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.cSA0EbjlxCbst4gJ
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781478236215
+      modifiedTime: 1781478239298
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!NB6wUgVqeOQtsQKu.RMsSkfIx97Hnqf37'
   - _id: lisZZTaupqInGEi1
     name: Slam
     type: weapon
-    img: icons/magic/nature/tree-animated-strike.webp
+    img: icons/magic/nature/root-vine-wood-blue.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Treant attacks with its Slam.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -1026,7 +1180,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -1035,8 +1189,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        aihBfPFVxXjMEPvS:
           type: attack
           activation:
             type: action
@@ -1051,15 +1204,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -1070,7 +1224,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1083,24 +1238,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: aihBfPFVxXjMEPvS
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: slam
+      mastery: ''
     effects: []
     folder: null
     sort: 150000
@@ -1110,11 +1278,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1765827805385
+      systemVersion: 6.0.0
+      createdTime: 1781478272244
+      modifiedTime: 1781480932799
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!NB6wUgVqeOQtsQKu.lisZZTaupqInGEi1'
@@ -1126,11 +1294,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1726171226982
-  modifiedTime: 1726171443938
+  modifiedTime: 1781478606502
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!actors!NB6wUgVqeOQtsQKu'
