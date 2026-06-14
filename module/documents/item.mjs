@@ -1048,7 +1048,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     let update = { [`system.advancement.${id}`]: updates };
     if ( !source && this._needsAdvancementMigration ) update = {
       "system.advancement": _replace(foundry.utils.mergeObject(
-        this.system.toObject().advancement, { [id]: updates }, { performDeletions: true }
+        this.system.toObject().advancement, { [id]: updates }, { applyOperators: true }
       ))
     };
     if ( source ) {

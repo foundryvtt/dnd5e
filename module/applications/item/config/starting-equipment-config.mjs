@@ -118,7 +118,7 @@ export default class StartingEquipmentConfig extends DocumentSheet5e {
   /** @override */
   _prepareSubmitData(event, form, formData, updateData) {
     const submitData = this._processFormData(event, form, formData);
-    if ( updateData ) foundry.utils.mergeObject(submitData, updateData, { inplace: true, performDeletions: true });
+    if ( updateData ) foundry.utils.mergeObject(submitData, updateData, { inplace: true, applyOperators: true });
     // Skip the validation step here because it causes a bunch of problems with providing array
     // updates when using the `submit` method
     return submitData;
