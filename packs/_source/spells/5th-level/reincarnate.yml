@@ -39,11 +39,14 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: spec
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -101,20 +104,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: reincarnate
 sort: 0
 flags: {}
-img: icons/magic/life/heart-cross-strong-flame-blue.webp
+img: icons/magic/nature/tree-spirit-glow-black-yellow.webp
 effects: []
 folder: bG9QTayc46rfNkv2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037367241
-  modifiedTime: 1725992723692
+  modifiedTime: 1781401930798
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!zMEo5DKK8uxsuWnq'

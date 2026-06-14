@@ -8,7 +8,7 @@ system:
     value: >-
       <p>You gain the ability to move or manipulate creatures or objects by
       thought. When you cast the spell, and as your action each round for the
-      Duration, you can exert your will on one creature or object that you can
+      duration, you can exert your will on one creature or object that you can
       see within range, causing the appropriate effect below. You can affect the
       same target round after round, or choose a new one at any time. If you
       switch targets, the prior target is no longer affected by the
@@ -50,12 +50,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '60'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -75,58 +78,313 @@ system:
     - somatic
     - concentration
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: utility
+    nyOwbX2zgwstQ6nB:
+      type: enchant
+      name: Cast
+      _id: nyOwbX2zgwstQ6nB
+      img: ''
+      sort: 100000
       activation:
         type: action
-        value: null
         override: false
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: ''
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: uymOLczuli9tFdSR
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - r5d5cLmb299gcJHl
+              - iSZxY9EGiZdtU7Re
+            effect:
+              - EcgEhwaVCuLL9guG
+            item: []
+      flags: {}
       range:
+        units: self
         override: false
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
         affects:
           choice: false
         override: false
-      roll:
-        formula: ''
-        name: ''
-        prompt: false
-        visible: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      enchant:
+        self: true
+      restrictions:
+        allowMagical: true
+        categories: []
+        properties: []
+        type: ''
+    r5d5cLmb299gcJHl:
+      type: check
+      name: Manipulate Creature
+      _id: r5d5cLmb299gcJHl
+      img: ''
+      sort: 200000
+      activation:
+        type: action
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>You can try to move a Huge or smaller creature. Make an ability
+          check with your spellcasting ability contested by the creature's
+          Strength check. If you win the contest, you move the creature up to 30
+          feet in any direction, including upward but not beyond the range of
+          this spell. Until the end of your next turn, the creature is
+          &amp;reference[Restrained] in your telekinetic grip. A creature lifted
+          upward is suspended in mid-air.</p><p>On subsequent rounds, you can
+          use your action to attempt to maintain your telekinetic grip on the
+          creature by repeating the contest.</p>
+        chatFlavor: ''
+      duration:
+        units: round
+        concentration: false
+        override: true
+        value: '1'
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      check:
+        associated: []
+        dc:
+          calculation: ''
+          formula: ''
+        visible: true
+        ability: spellcasting
+        bonus: ''
+    iSZxY9EGiZdtU7Re:
+      type: check
+      name: Manipulate Object
+      img: ''
+      sort: 300000
+      activation:
+        type: action
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>You can try to move an object that weighs up to 1,000 pounds. If
+          the object isn't being worn or carried, you automatically move it up
+          to 30 feet in any direction, but not beyond the range of this
+          spell.</p><p>If the object is worn or carried by a creature, you must
+          make an ability check with your Spellcasting ability contested by that
+          creature's Strength check. If you succeed, you pull the object away
+          from that creature and can move it up to 30 feet in any direction but
+          not beyond the range of this spell.</p><p>You can exert fine control
+          on objects with your telekinetic grip, such as manipulating a simple
+          tool, opening a door or a container, stowing or retrieving an item
+          from an open container, or pouring the contents from a vial.</p>
+        chatFlavor: ''
+      duration:
+        units: round
+        concentration: false
+        override: true
+        value: '1'
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      check:
+        associated: []
+        dc:
+          calculation: ''
+          formula: ''
+        visible: true
+        ability: spellcasting
+        bonus: ''
+      _id: iSZxY9EGiZdtU7Re
   identifier: telekinesis
 sort: 0
-flags: {}
-img: icons/magic/control/debuff-energy-hold-levitate-yellow.webp
-effects: []
+flags:
+  dnd5e:
+    riders:
+      effect:
+        - EcgEhwaVCuLL9guG
+      activity:
+        - r5d5cLmb299gcJHl
+        - iSZxY9EGiZdtU7Re
+img: icons/magic/air/air-smoke-casting.webp
+effects:
+  - name: Telekinesis
+    img: icons/magic/air/air-smoke-casting.webp
+    origin: Compendium.dnd5e.spells.Item.HQfd7jJyULIoGxrZ
+    transfer: true
+    _id: EcgEhwaVCuLL9guG
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You gain the ability to move or manipulate creatures or objects by
+      thought. When you cast the spell, and as your action each round for the
+      duration, you can exert your will on one creature or object that you can
+      see within range, causing the appropriate effect detailed in the
+      spell.</p><p>If you switch targets, the prior target is no longer affected
+      by the spell.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 2
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781404132500
+      modifiedTime: 1781404400401
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!HQfd7jJyULIoGxrZ.EcgEhwaVCuLL9guG'
+  - type: enchantment
+    name: Telekinesis
+    img: icons/magic/air/air-smoke-casting.webp
+    disabled: true
+    _id: uymOLczuli9tFdSR
+    system:
+      changes: []
+    start: null
+    duration:
+      value: 10
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You gain the ability to move or manipulate creatures or objects by
+      thought. When you cast the spell, and as your action each round for the
+      duration, you can exert your will on one creature or object that you can
+      see within range, causing the appropriate effect detailed in the
+      spell.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781404220632
+      modifiedTime: 1781404236225
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!HQfd7jJyULIoGxrZ.uymOLczuli9tFdSR'
 folder: bG9QTayc46rfNkv2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037352291
-  modifiedTime: 1725992718559
+  modifiedTime: 1781404372718
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!HQfd7jJyULIoGxrZ'

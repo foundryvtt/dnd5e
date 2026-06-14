@@ -16,12 +16,14 @@ system:
       understand you is unaffected by the spell.</p><p>You can issue any command
       you choose, short of an activity that would result in certain death.
       Should you issue a suicidal command, the spell ends.</p><p>You can end the
-      spell early by using an action to dismiss it. A Remove Curse, Greater
-      Restoration, or wish spell also ends it.</p><p><strong>At Higher
-      Levels.</strong> When you cast this spell using a spell slot of 7th or 8th
-      level, the Duration is 1 year. When you cast this spell using a spell slot
-      of 9th level, the spell lasts until it is ended by one of the Spells
-      mentioned above.</p>
+      spell early by using an action to dismiss it. A
+      @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{Remove Curse},
+      @UUID[Compendium.dnd5e.spells.Item.WzvJ7G3cqvIubsLk]{Greater Restoration},
+      or @UUID[Compendium.dnd5e.spells.Item.3okM6Gn63zzEULkz]{Wish} spell also
+      ends it.</p><p><strong>At Higher Levels.</strong> When you cast this spell
+      using a spell slot of 7th or 8th level, the Duration is 1 year. When you
+      cast this spell using a spell slot of 9th level, the spell lasts until it
+      is ended by one of the spells mentioned above.</p>
     chat: ''
   source:
     custom: ''
@@ -41,12 +43,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '60'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -86,6 +91,9 @@ system:
       effects:
         - _id: zSoZHHi7BA6IAeoj
           onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
       target:
@@ -116,61 +124,77 @@ system:
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: geas
 sort: 0
 flags: {}
-img: icons/magic/air/air-burst-spiral-large-yellow.webp
+img: icons/magic/control/control-influence-puppet.webp
 effects:
   - name: Geas
     origin: Compendium.dnd5e.spells.Item.JQyigMNPiDnGI18b
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     disabled: true
     _id: zSoZHHi7BA6IAeoj
-    changes: []
     description: >-
-      <p>The creature is Charmed for the Duration. While the creature is charmed
-      by the caster, it takes psychic damage each time it acts in a manner
-      directly counter to their instructions, but no more than once each
-      day.</p>
+      <p>You are &amp;reference[Charmed apply=false] for the duration. While you
+      are charmed by the caster, you takes psychic damage each time you act in a
+      manner directly counter to their instructions, but no more than once each
+      day. Should the caster issue a suicidal command, the spell ends.</p><p>The
+      caster can end the spell early by using an action to dismiss it. A
+      @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{Remove Curse},
+      @UUID[Compendium.dnd5e.spells.Item.WzvJ7G3cqvIubsLk]{Greater Restoration},
+      or @UUID[Compendium.dnd5e.spells.Item.3okM6Gn63zzEULkz]{Wish} spell also
+      ends it.</p>
     transfer: false
     statuses:
       - charmed
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     tint: '#ffffff'
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781391777913
+      modifiedTime: 1781391777913
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    img: icons/magic/air/air-burst-spiral-large-yellow.webp
+    img: icons/magic/control/control-influence-puppet.webp
     type: base
-    system: {}
+    system:
+      changes: []
     sort: 0
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!JQyigMNPiDnGI18b.zSoZHHi7BA6IAeoj'
 folder: bG9QTayc46rfNkv2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037353095
-  modifiedTime: 1725992718814
+  modifiedTime: 1781391696844
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!JQyigMNPiDnGI18b'

@@ -5,7 +5,7 @@ ownership:
 type: spell
 system:
   description:
-    value: "<p>Your touch inflicts disease. Make a melee spell attack against a creature within your reach. On a hit, you afflict the creature with a disease of your choice from any of the ones described below.</p><p>At the end of each of the target's turns, it must make a Constitution saving throw. After failing three of these saving throws, the disease's effects last for the duration, and the creature stops making these saves. After succeeding on three of these saving throws, the creature recovers from the disease, and the spell ends.</p><p>Since this spell induces a natural disease in its target, any effect that removes a disease or otherwise ameliorates a disease's effects apply to it.</p><p><strong>Blinding Sickness.\_</strong>Pain grips the creature's mind, and its eyes turn milky white. The creature has disadvantage on Wisdom checks and Wisdom saving throws and is blinded.</p><p><strong>Filth Fever.</strong>\_A raging fever sweeps through the creature's body. The creature has disadvantage on Strength checks, Strength saving throws, and attack rolls that use Strength.</p><p><strong>Flesh Rot.\_</strong>The creature's flesh decays. The creature has disadvantage on Charisma checks and vulnerability to all damage.</p><p><strong>Mindfire.</strong>\_The creature's mind becomes feverish. The creature has disadvantage on Intelligence checks and Intelligence saving throws, and the creature behaves as if under the effects of the confusion spell during combat.</p><p><strong>Seizure.\_</strong>The creature is overcome with shaking. The creature has disadvantage on Dexterity checks, Dexterity saving throws, and attack rolls that use Dexterity.</p><p><strong>Slimy Doom.</strong>\_The creature begins to bleed uncontrollably. The creature has disadvantage on Constitution checks and Constitution saving throws. In addition, whenever the creature takes damage, it is stunned until the end of its next turn.</p>"
+    value: "<p>Your touch inflicts disease. Make a melee spell attack against a creature within your reach. On a hit, you afflict the creature with a disease of your choice from any of the ones described below.</p><p>At the end of each of the target's turns, it must make a Constitution saving throw. After failing three of these saving throws, the disease's effects last for the duration, and the creature stops making these saves. After succeeding on three of these saving throws, the creature recovers from the disease, and the spell ends.</p><p>Since this spell induces a natural disease in its target, any effect that removes a disease or otherwise ameliorates a disease's effects apply to it.</p><p><strong>Blinding Sickness.\_</strong>Pain grips the creature's mind, and its eyes turn milky white. The creature has disadvantage on Wisdom checks and Wisdom saving throws and is &amp;reference[blinded apply=false].</p><p><strong>Filth Fever.</strong>\_A raging fever sweeps through the creature's body. The creature has disadvantage on Strength checks, Strength saving throws, and attack rolls that use Strength.</p><p><strong>Flesh Rot.\_</strong>The creature's flesh decays. The creature has disadvantage on Charisma checks and vulnerability to all damage.</p><p><strong>Mindfire.</strong>\_The creature's mind becomes feverish. The creature has disadvantage on Intelligence checks and Intelligence saving throws, and the creature behaves as if under the effects of the @UUID[Compendium.dnd5e.spells.Item.9hQXdMSmerkTsHDe]{Confusion} spell during combat.</p><p><strong>Seizure.\_</strong>The creature is overcome with shaking. The creature has disadvantage on Dexterity checks, Dexterity saving throws, and attack rolls that use Dexterity.</p><p><strong>Slimy Doom.</strong>\_The creature begins to bleed uncontrollably. The creature has disadvantage on Constitution checks and Constitution saving throws. In addition, whenever the creature takes damage, it is &amp;reference[stunned apply=false] until the end of its next turn.</p>"
     chat: ''
   source:
     custom: ''
@@ -25,11 +25,14 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -48,109 +51,902 @@ system:
     - vocal
     - somatic
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    dSOAotUiZwU8xIlV:
       type: attack
+      name: Cast
+      _id: dSOAotUiZwU8xIlV
+      img: ''
+      sort: 100000
       activation:
         type: action
-        value: null
         override: false
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: ''
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: sZYUpIcA0Ixip7bo
+          level:
+            min: null
+            max: null
+        - _id: rdL5guwwTuCvTU1v
+          level:
+            min: null
+            max: null
+        - _id: 9qsScAIMMLwDDkJl
+          level:
+            min: null
+            max: null
+        - _id: egrhxJgirkl5YnuZ
+          level:
+            min: null
+            max: null
+        - _id: 1VXYcPSs43a4CHkf
+          level:
+            min: null
+            max: null
+        - _id: 6Ha38CDFwGGbDbQz
+          level: {}
+      flags: {}
       range:
+        units: self
         override: false
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
         affects:
           choice: false
         override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
       attack:
-        ability: ''
-        bonus: ''
         critical:
           threshold: null
         flat: false
         type:
           value: melee
-          classification: spell
+          classification: ''
+        ability: ''
+        bonus: ''
       damage:
         critical:
           bonus: ''
         includeBase: true
         parts: []
-      uses:
-        spent: 0
-        recovery: []
-      sort: 0
-    dnd5eactivity100:
-      _id: dnd5eactivity100
+    WWmYQQAcFBcp9BgI:
       type: save
       activation:
-        type: action
+        type: special
         value: null
-        override: false
+        override: true
+        condition: >-
+          At the end of each of the target's turns while they are incubating a
+          disease.
       consumption:
         targets: []
         scaling:
           allowed: false
           max: ''
-        spellSlot: true
+        spellSlot: false
       description:
         chatFlavor: ''
+        value: >-
+          <p>At the end of each of the target's turns, it must make a
+          Constitution saving throw. After failing three of these saving throws,
+          the disease's effects last for the duration, and the creature stops
+          making these saves. After succeeding on three of these saving throws,
+          the creature recovers from the disease, and the spell
+          ends.</p><p>Since this spell induces a natural disease in its target,
+          any effect that removes a disease or otherwise ameliorates a disease's
+          effects apply to it.</p>
       duration:
         units: inst
         concentration: false
-        override: false
-      effects: []
+        override: true
+      effects:
+        - _id: LhWesCC0aYGqzgk3
+          level: {}
+          onSave: false
+        - _id: NVfW1Rp0QTgISmDW
+          level: {}
+          onSave: false
       range:
-        override: false
+        override: true
+        units: spec
+        special: ''
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
+          type: ''
         affects:
           choice: false
-        override: false
+          count: '1'
+          type: creature
+          special: ''
+        override: true
       damage:
-        onSave: half
+        onSave: none
         parts: []
       save:
-        ability: con
+        ability:
+          - con
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
+        visible: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 300000
+      name: Disease Save
+      img: ''
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: WWmYQQAcFBcp9BgI
+    JHDzsuyXxSyhdNM6:
+      type: utility
+      name: Apply Disease
+      _id: JHDzsuyXxSyhdNM6
+      img: ''
+      sort: 400000
+      activation:
+        type: special
+        override: true
+        condition: >-
+          When a creature under the effects of this spell fails three of their
+          saving throws.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: day
+        concentration: false
+        override: true
+        value: '7'
+      effects:
+        - _id: i7n9jGZ51Scdwwia
+          level:
+            min: null
+            max: null
+        - _id: hZkALiwlSPABBDSk
+          level:
+            min: null
+            max: null
+        - _id: 1VOSXuEvObGjy3nZ
+          level:
+            min: null
+            max: null
+        - _id: S3eSD4rmdbYajX2l
+          level:
+            min: null
+            max: null
+        - _id: GCyWrky8VpY2W8PA
+          level:
+            min: null
+            max: null
+        - _id: nnfr2kBR5ByV6rdT
+          level:
+            min: null
+            max: null
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
   identifier: contagion
 sort: 0
 flags: {}
-img: icons/magic/unholy/strike-beam-blood-large-red-purple.webp
-effects: []
+img: icons/skills/wounds/blood-cells-disease-green.webp
+effects:
+  - name: Incubating Blinding Sickness
+    img: icons/skills/wounds/blood-cells-disease-green.webp
+    origin: Compendium.dnd5e.spells.Item.CjIq8Ed7bu3vVwT1
+    transfer: false
+    _id: sZYUpIcA0Ixip7bo
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You are currently developing Blinding Sickness. At the end of each of
+      your turns, you must make a Constitution saving throw. After failing three
+      of these saves, the disease's effects last for the full duration, and you
+      stop making these saves. After succeeding on three of these saving throws,
+      you recover from the disease, and the spell ends.</p><p>Since this spell
+      induces a natural disease in you, any effect that removes a disease or
+      otherwise amerliorates a diseases effects apply to it.</p>
+    tint: '#ffffff'
+    statuses:
+      - diseased
+    showIcon: 2
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781392928507
+      modifiedTime: 1781393043555
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!CjIq8Ed7bu3vVwT1.sZYUpIcA0Ixip7bo'
+  - name: Incubating Filth Fever
+    img: icons/skills/wounds/blood-cells-disease-green.webp
+    origin: Compendium.dnd5e.spells.Item.CjIq8Ed7bu3vVwT1
+    transfer: false
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You are currently developing Filth Fever. At the end of each of your
+      turns, you must make a Constitution saving throw. After failing three of
+      these saves, the disease's effects last for the full duration, and you
+      stop making these saves. After succeeding on three of these saving throws,
+      you recover from the disease, and the spell ends.</p><p>Since this spell
+      induces a natural disease in you, any effect that removes a disease or
+      otherwise amerliorates a diseases effects apply to it.</p>
+    tint: '#ffffff'
+    statuses:
+      - diseased
+    showIcon: 2
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781393051636
+      modifiedTime: 1781393074141
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: rdL5guwwTuCvTU1v
+    _key: '!items.effects!CjIq8Ed7bu3vVwT1.rdL5guwwTuCvTU1v'
+  - name: Incubating Flesh Rot
+    img: icons/skills/wounds/blood-cells-disease-green.webp
+    origin: Compendium.dnd5e.spells.Item.CjIq8Ed7bu3vVwT1
+    transfer: false
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You are currently developing Flesh Rot. At the end of each of your
+      turns, you must make a Constitution saving throw. After failing three of
+      these saves, the disease's effects last for the full duration, and you
+      stop making these saves. After succeeding on three of these saving throws,
+      you recover from the disease, and the spell ends.</p><p>Since this spell
+      induces a natural disease in you, any effect that removes a disease or
+      otherwise amerliorates a diseases effects apply to it.</p>
+    tint: '#ffffff'
+    statuses:
+      - diseased
+    showIcon: 2
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781393058156
+      modifiedTime: 1781393087409
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: 9qsScAIMMLwDDkJl
+    _key: '!items.effects!CjIq8Ed7bu3vVwT1.9qsScAIMMLwDDkJl'
+  - name: Incubating Mindfire
+    img: icons/skills/wounds/blood-cells-disease-green.webp
+    origin: Compendium.dnd5e.spells.Item.CjIq8Ed7bu3vVwT1
+    transfer: false
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You are currently developing Mindfire. At the end of each of your
+      turns, you must make a Constitution saving throw. After failing three of
+      these saves, the disease's effects last for the full duration, and you
+      stop making these saves. After succeeding on three of these saving throws,
+      you recover from the disease, and the spell ends.</p><p>Since this spell
+      induces a natural disease in you, any effect that removes a disease or
+      otherwise amerliorates a diseases effects apply to it.</p>
+    tint: '#ffffff'
+    statuses:
+      - diseased
+    showIcon: 2
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781393058992
+      modifiedTime: 1781393099990
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: egrhxJgirkl5YnuZ
+    _key: '!items.effects!CjIq8Ed7bu3vVwT1.egrhxJgirkl5YnuZ'
+  - name: Incubating Seizure
+    img: icons/skills/wounds/blood-cells-disease-green.webp
+    origin: Compendium.dnd5e.spells.Item.CjIq8Ed7bu3vVwT1
+    transfer: false
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You are currently developing Seizure. At the end of each of your turns,
+      you must make a Constitution saving throw. After failing three of these
+      saves, the disease's effects last for the full duration, and you stop
+      making these saves. After succeeding on three of these saving throws, you
+      recover from the disease, and the spell ends.</p><p>Since this spell
+      induces a natural disease in you, any effect that removes a disease or
+      otherwise amerliorates a diseases effects apply to it.</p>
+    tint: '#ffffff'
+    statuses:
+      - diseased
+    showIcon: 2
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781393059685
+      modifiedTime: 1781393116698
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: 1VXYcPSs43a4CHkf
+    _key: '!items.effects!CjIq8Ed7bu3vVwT1.1VXYcPSs43a4CHkf'
+  - name: Incubating Slimy Doom
+    img: icons/skills/wounds/blood-cells-disease-green.webp
+    origin: Compendium.dnd5e.spells.Item.CjIq8Ed7bu3vVwT1
+    transfer: false
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You are currently developing Slimy Doom. At the end of each of your
+      turns, you must make a Constitution saving throw. After failing three of
+      these saves, the disease's effects last for the full duration, and you
+      stop making these saves. After succeeding on three of these saving throws,
+      you recover from the disease, and the spell ends.</p><p>Since this spell
+      induces a natural disease in you, any effect that removes a disease or
+      otherwise amerliorates a diseases effects apply to it.</p>
+    tint: '#ffffff'
+    statuses:
+      - diseased
+    showIcon: 2
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781393060407
+      modifiedTime: 1781393128956
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: 6Ha38CDFwGGbDbQz
+    _key: '!items.effects!CjIq8Ed7bu3vVwT1.6Ha38CDFwGGbDbQz'
+  - name: Failed Contagion Save
+    img: icons/sundries/flags/banner-pink.webp
+    origin: Compendium.dnd5e.spells.Item.CjIq8Ed7bu3vVwT1
+    transfer: false
+    _id: LhWesCC0aYGqzgk3
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You have failed a saving throw against the
+      @UUID[Compendium.dnd5e.spells.Item.CjIq8Ed7bu3vVwT1]{Contagion} spell.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781393182601
+      modifiedTime: 1781393220340
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!CjIq8Ed7bu3vVwT1.LhWesCC0aYGqzgk3'
+  - name: Successful Contagion Save
+    img: icons/sundries/flags/banner-green.webp
+    origin: Compendium.dnd5e.spells.Item.CjIq8Ed7bu3vVwT1
+    transfer: false
+    _id: NVfW1Rp0QTgISmDW
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You have succeeded a saving throw against the
+      @UUID[Compendium.dnd5e.spells.Item.CjIq8Ed7bu3vVwT1]{Contagion} spell.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781393183235
+      modifiedTime: 1781393238798
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!CjIq8Ed7bu3vVwT1.NVfW1Rp0QTgISmDW'
+  - name: Blinding Sickness
+    img: icons/commodities/biological/eye-lizard-green.webp
+    origin: Compendium.dnd5e.spells.Item.CjIq8Ed7bu3vVwT1
+    type: base
+    _id: i7n9jGZ51Scdwwia
+    system:
+      changes:
+        - key: system.abilities.wis.save.roll.mode
+          type: add
+          value: -1
+          phase: initial
+          priority: null
+        - key: system.abilities.wis.check.roll.mode
+          type: add
+          value: -1
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 7
+      units: days
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>Pain grips your mind, and your eyes turn milky white. You have
+      disadvantage on Wisdom checks and Wisdom saving throws and you are
+      &amp;reference[blinded apply=false].</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - blinded
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781393276451
+      modifiedTime: 1781393343738
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!CjIq8Ed7bu3vVwT1.i7n9jGZ51Scdwwia'
+  - name: Filth Fever
+    img: icons/magic/acid/dissolve-vomit-green-brown.webp
+    origin: Compendium.dnd5e.spells.Item.CjIq8Ed7bu3vVwT1
+    type: base
+    system:
+      changes:
+        - key: system.abilities.str.save.roll.mode
+          type: add
+          value: -1
+          phase: initial
+          priority: null
+        - key: system.abilities.str.check.roll.mode
+          type: add
+          value: -1
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 7
+      units: days
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>A raging fever sweeps through your body. You have disadvantage on
+      Strength checks, Strength saving throws, and attack rolls that use
+      Strength.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781393347801
+      modifiedTime: 1781393590191
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: hZkALiwlSPABBDSk
+    _key: '!items.effects!CjIq8Ed7bu3vVwT1.hZkALiwlSPABBDSk'
+  - name: Flesh Rot
+    img: icons/magic/acid/dissolve-arm-flesh.webp
+    origin: Compendium.dnd5e.spells.Item.CjIq8Ed7bu3vVwT1
+    type: base
+    system:
+      changes:
+        - key: system.traits.dv.value
+          type: add
+          value: ALL
+          phase: initial
+          priority: null
+        - key: system.abilities.cha.check.roll.mode
+          type: add
+          value: -1
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 7
+      units: days
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>Your flesh decays. You have disadvantage on Charisma checks and
+      vulnerability to all damage.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781393397704
+      modifiedTime: 1781393593461
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: 1VOSXuEvObGjy3nZ
+    _key: '!items.effects!CjIq8Ed7bu3vVwT1.1VOSXuEvObGjy3nZ'
+  - name: Mindfire
+    img: icons/commodities/biological/organ-brain-pink-purple.webp
+    origin: Compendium.dnd5e.spells.Item.CjIq8Ed7bu3vVwT1
+    type: base
+    system:
+      changes:
+        - key: system.abilities.int.save.roll.mode
+          type: add
+          value: -1
+          phase: initial
+          priority: null
+        - key: system.abilities.int.check.roll.mode
+          type: add
+          value: -1
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 7
+      units: days
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>Your mind becomes feverish. You have disadvantage on Intelligence
+      checks and Intelligence saving throws, and you behave as if under the
+      effects of the
+      @UUID[Compendium.dnd5e.spells.Item.9hQXdMSmerkTsHDe]{Confusion} spell
+      during combat.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781393467994
+      modifiedTime: 1781393597137
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: S3eSD4rmdbYajX2l
+    _key: '!items.effects!CjIq8Ed7bu3vVwT1.S3eSD4rmdbYajX2l'
+  - name: Seizure
+    img: icons/commodities/biological/hand-clawed-blue.webp
+    origin: Compendium.dnd5e.spells.Item.CjIq8Ed7bu3vVwT1
+    type: base
+    system:
+      changes:
+        - key: system.abilities.dex.save.roll.mode
+          type: add
+          value: -1
+          phase: initial
+          priority: null
+        - key: system.abilities.dex.check.roll.mode
+          type: add
+          value: -1
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 7
+      units: days
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You are overcome with shaking. You have disadvantage on Dexterity
+      checks, Dexterity saving throws, and attack rolls that use Dexterity.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781393540333
+      modifiedTime: 1781393584723
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: GCyWrky8VpY2W8PA
+    _key: '!items.effects!CjIq8Ed7bu3vVwT1.GCyWrky8VpY2W8PA'
+  - name: Slimy Doom
+    img: icons/skills/wounds/blood-cells-vessel-red.webp
+    origin: Compendium.dnd5e.spells.Item.CjIq8Ed7bu3vVwT1
+    type: base
+    system:
+      changes:
+        - key: system.abilities.con.save.roll.mode
+          type: add
+          value: -1
+          phase: initial
+          priority: null
+        - key: system.abilities.con.check.roll.mode
+          type: add
+          value: -1
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 7
+      units: days
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You begin to bleed uncontrollably. You have disadvantage on
+      Constitution checks and Constitution saving throws. In addition, whenever
+      you take damage, you are &amp;reference[stunned] until the end of your
+      next turn.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781393598071
+      modifiedTime: 1781393668465
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: nnfr2kBR5ByV6rdT
+    _key: '!items.effects!CjIq8Ed7bu3vVwT1.nnfr2kBR5ByV6rdT'
 folder: bG9QTayc46rfNkv2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037351011
-  modifiedTime: 1725992718119
+  modifiedTime: 1781393737104
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!CjIq8Ed7bu3vVwT1'
