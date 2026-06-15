@@ -149,7 +149,7 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781291972967
-      modifiedTime: 1781293734655
+      modifiedTime: 1781485095242
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     img: icons/skills/movement/feet-winged-boots-glowing-yellow.webp
@@ -157,29 +157,40 @@ effects:
     system:
       changes:
         - key: system.attributes.ac.bonus
-          value: 2
-          priority: null
           type: add
+          value: 2
+          phase: initial
+          priority: null
         - key: system.attributes.movement.burrow
-          value: 2
-          priority: null
           type: multiply
+          value: 2
+          phase: initial
+          priority: null
         - key: system.attributes.movement.climb
-          value: 2
-          priority: null
           type: multiply
+          value: 2
+          phase: initial
+          priority: null
         - key: system.attributes.movement.fly
-          value: 2
-          priority: null
           type: multiply
+          value: 2
+          phase: initial
+          priority: null
         - key: system.attributes.movement.swim
-          value: 2
-          priority: null
           type: multiply
+          value: 2
+          phase: initial
+          priority: null
         - key: system.attributes.movement.walk
-          value: 2
-          priority: null
           type: multiply
+          value: 2
+          phase: initial
+          priority: null
+        - key: system.abilities.dex.save.roll.mode
+          type: add
+          value: 1
+          phase: initial
+          priority: null
     sort: 0
     start: null
     showIcon: 1
