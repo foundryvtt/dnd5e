@@ -447,9 +447,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -464,7 +461,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -484,11 +481,12 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 0.5
 items:
   - _id: 1uXv78I9YByiz6rV
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: >-
@@ -498,8 +496,8 @@ items:
           instead poisoned for 5 ([[/r 1d10]]) minutes and
           &amp;Reference[unconscious] while poisoned in this way.</p>
         chat: >-
-          <p>The Homunculus attacks with its Bite.The target must make a
-          <strong>Constitution</strong> saving throw.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. The target must make a Constitution saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -562,7 +560,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -571,8 +569,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        dNgexfuemTwDYvlr:
           type: attack
           activation:
             type: action
@@ -587,10 +584,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -607,7 +605,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -620,22 +619,33 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: dNgexfuemTwDYvlr
+          name: ''
+        aNFKGc5wFnOQijNd:
           type: save
           activation:
             type: action
@@ -650,13 +660,22 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: PIAt10vJQExkwFbD
+              onSave: false
+              level:
+                min: null
+                max: null
+            - _id: l635qlEf6ays6UwQ
+              level: {}
+              onSave: false
           range:
             value: '5'
             units: ft
@@ -670,7 +689,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -683,50 +703,141 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '10'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: aNFKGc5wFnOQijNd
+          name: Poison Save
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
       mastery: ''
-    effects: []
+    effects:
+      - name: Poisoned
+        img: icons/skills/toxins/symbol-poison-drop-skull-green.webp
+        origin: Compendium.dnd5e.monsters.Actor.ZQTCZfTV9ZoTjNCU.Item.1uXv78I9YByiz6rV
+        transfer: false
+        _id: PIAt10vJQExkwFbD
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: minutes
+          expiry: turnStart
+          expired: false
+        description: <p>You are &amp;reference[poisoned apply=false] for 1 minute.</p>
+        tint: '#ffffff'
+        statuses:
+          - poisoned
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781485543831
+          modifiedTime: 1781485575917
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!ZQTCZfTV9ZoTjNCU.1uXv78I9YByiz6rV.PIAt10vJQExkwFbD
+      - name: Poisoned & Unconscious
+        img: icons/skills/toxins/symbol-poison-drop-skull-green.webp
+        origin: Compendium.dnd5e.monsters.Actor.ZQTCZfTV9ZoTjNCU.Item.1uXv78I9YByiz6rV
+        transfer: false
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 10
+          units: minutes
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You are &amp;reference[poisoned apply=false] for 1 minute. While
+          poisoned in this way, you are &amp;reference[unconscious
+          apply=false].</p>
+        tint: '#ffffff'
+        statuses:
+          - poisoned
+          - unconscious
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781485581392
+          modifiedTime: 1781485628757
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _id: l635qlEf6ays6UwQ
+        _key: >-
+          !actors.items.effects!ZQTCZfTV9ZoTjNCU.1uXv78I9YByiz6rV.l635qlEf6ays6UwQ
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745175030016
+      systemVersion: 6.0.0
+      createdTime: 1781485497464
+      modifiedTime: 1781485663242
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!ZQTCZfTV9ZoTjNCU.1uXv78I9YByiz6rV'
   - _id: 5bFYYcQnfN1KtOwr
     name: Telepathic Bond
     type: feat
-    img: icons/magic/defensive/illusion-evasion-echo-purple.webp
+    img: icons/magic/movement/trail-streak-impact-blue.webp
     system:
       description:
         value: >-
-          <p>While the homunculus is on the same plane of existence as its
-          master, it can magically convey what it senses to its master, and the
-          two can communicate telepathically.</p>
+          <p>While the [[lookup @name lowercase]]{monster} is on the same plane
+          of existence as its master, it can magically convey what it senses to
+          its master, and the two can communicate telepathically.</p>
         chat: ''
       source:
         custom: ''
@@ -740,10 +851,12 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -758,12 +871,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.eVKgO2130oiJqsjY
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781485477293
+      modifiedTime: 1781485492540
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!ZQTCZfTV9ZoTjNCU.5bFYYcQnfN1KtOwr'
 effects: []
@@ -774,7 +887,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171239288

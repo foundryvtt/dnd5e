@@ -450,9 +450,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -467,7 +464,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -487,21 +484,24 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: mJoNsESU5X2lBKqn
     name: Bound
     type: feat
-    img: icons/equipment/neck/choker-chain-thick-silver.webp
+    img: icons/equipment/neck/amulet-carved-stone-purple.webp
     system:
       description:
         value: >-
-          <p>The shield guardian is magically bound to an amulet. As long as the
-          guardian and its amulet are on the same plane of existence, the
-          amulet's wearer can telepathically call the guardian to travel to it,
-          and the guardian knows the distance and direction to the amulet. If
-          the guardian is within 60 feet of the amulet's wearer, half of any
-          damage the wearer takes (rounded up) is transferred to the
-          guardian.</p>
+          <p>The [[lookup @name lowercase]]{monster} is magically bound to an
+          amulet. As long as the [[lookup @name lowercase]]{monster} and its
+          amulet are on the same plane of existence, the amulet's wearer can
+          telepathically call the [[lookup @name lowercase]]{monster} to travel
+          to it, and the [[lookup @name lowercase]]{monster} knows the distance
+          and direction to the amulet. If the [[lookup @name
+          lowercase]]{monster} is within 60 feet of the amulet's wearer, half of
+          any damage the wearer takes (rounded up) is transferred to the
+          [[lookup @name lowercase]]{monster}.</p>
         chat: <p>The shield guardian is magically bound to an amulet. </p>
       source:
         custom: ''
@@ -515,10 +515,12 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -533,11 +535,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.twrIaUZ79Yn5qpML
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745447939014
+      systemVersion: 6.0.0
+      createdTime: 1781486050637
+      modifiedTime: 1781486084441
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!z85EsGS2GVWj46qE.mJoNsESU5X2lBKqn'
@@ -548,8 +550,8 @@ items:
     system:
       description:
         value: >-
-          <p>The shield guardian regains [[/heal]]{10} hit points at the start
-          of its turn if it has at least 1 hit point.</p>
+          <p>The [[lookup @name lowercase]]{monster} regains [[/healing]] at the
+          start of its turn if it has at least 1 hit point.</p>
         chat: >-
           <p>The shield guardian regains <strong>10 hit points</strong> at the
           start of its turn.</p>
@@ -571,8 +573,7 @@ items:
       properties:
         - trait
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        b4GBDoRtEeiDCrDy:
           type: heal
           activation:
             type: turnStart
@@ -587,6 +588,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -606,10 +608,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
-              type: ''
+              type: self
               choice: false
               special: ''
             prompt: true
@@ -631,10 +634,19 @@ items:
               mode: whole
               number: null
               formula: ''
-          sort: 0
-          name: ''
+          sort: 100000
+          name: Regenerate
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            identifier: ''
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: b4GBDoRtEeiDCrDy
       enchant: {}
       prerequisites:
         level: null
@@ -644,19 +656,15 @@ items:
     sort: 250000
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Av7H0ymGdPeTsnwV
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745447969847
+      systemVersion: 6.0.0
+      createdTime: 1781486107467
+      modifiedTime: 1781486125948
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!z85EsGS2GVWj46qE.vk0gd3buCPWGpyYF'
@@ -667,15 +675,21 @@ items:
     system:
       description:
         value: >-
-          <p>A spellcaster who wears the shield guardian's amulet can cause the
-          guardian to store one spell of 4th level or lower. To do so, the
-          wearer must cast the spell on the guardian. The spell has no effect
-          but is stored within the guardian. When commanded to do so by the
+          <p>A spellcaster who wears the shield [[lookup @name
+          lowercase]]{monster}'s amulet can cause the [[lookup @name
+          lowercase]]{monster} to store one spell of 4th level or lower. To do
+          so, the wearer must cast the spell on the [[lookup @name
+          lowercase]]{monster}. The spell has no effect but is stored within the
+          [[lookup @name lowercase]]{monster}. When commanded to do so by the
           wearer or when a situation arises that was predefined by the
-          spellcaster, the guardian casts the stored spell with any parameters
-          set by the original caster, requiring no components. When the spell is
-          cast or a new spell is stored, any previously stored spell is
-          lost.</p>
+          spellcaster, the [[lookup @name lowercase]]{monster} casts the stored
+          spell with any parameters set by the original caster, requiring no
+          components. When the spell is cast or a new spell is stored, any
+          previously stored spell is lost.</p><section
+          id="secret-tV5DEXXS3UxPSEI6" class="secret"><p><strong>Foundry
+          Note</strong></p><p>Add a spell into the Cast activity on this feature
+          to allow the [[lookup @name lowercase]]{monster} to caster the spell.
+          Remove the spell from the activity afterwards.</p></section>
         chat: ''
       source:
         custom: ''
@@ -689,11 +703,72 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
-      activities: {}
+      properties:
+        - mgc
+        - trait
+      activities:
+        7xi2evZLBvKsRZj4:
+          type: cast
+          name: Stored Spell
+          _id: 7xi2evZLBvKsRZj4
+          img: ''
+          sort: 0
+          activation:
+            type: action
+            override: false
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: ''
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          flags: {}
+          range:
+            units: self
+            override: false
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          spell:
+            challenge:
+              override: true
+              attack: null
+              save: null
+            properties:
+              - vocal
+              - somatic
+              - material
+              - concentration
+            spellbook: true
+            uuid: null
+            ability: ''
       enchant: {}
       prerequisites:
         level: null
@@ -707,11 +782,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.kSgBb9r1TCfDIMY0
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1745447929892
+      systemVersion: 6.0.0
+      createdTime: 1781486302088
+      modifiedTime: 1781486421827
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!z85EsGS2GVWj46qE.qbSL2A0uKuh2iER5'
@@ -722,8 +797,8 @@ items:
     system:
       description:
         value: >-
-          <p>The guardian makes two [[/item .r6GQ1TwNK7pinX0a]]{fist}
-          attacks.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes two [[/item
+          .r6GQ1TwNK7pinX0a]]{Fist} attacks.</p>
         chat: ''
       source:
         custom: ''
@@ -742,8 +817,7 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        FGjiaRBILvlQRWu4:
           type: utility
           activation:
             type: action
@@ -758,15 +832,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -777,7 +852,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -794,7 +870,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: FGjiaRBILvlQRWu4
       enchant: {}
       prerequisites:
         level: null
@@ -808,22 +892,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745447977290
+      systemVersion: 6.0.0
+      createdTime: 1781486186144
+      modifiedTime: 1781486189755
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!z85EsGS2GVWj46qE.7R1cDGKMv0mdxaE7'
   - _id: r6GQ1TwNK7pinX0a
     name: Fist
     type: weapon
-    img: icons/magic/fire/flame-burning-fist-strike.webp
+    img: icons/equipment/hand/gauntlet-tooled-steel-grey.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Shield Guardian attacks with its Fist.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -886,7 +972,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -895,8 +981,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        sPd9FrzDW2iYeT9o:
           type: attack
           activation:
             type: action
@@ -911,15 +996,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -930,7 +1016,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -943,24 +1030,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: sPd9FrzDW2iYeT9o
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: fist
+      mastery: ''
     effects: []
     folder: null
     sort: 200000
@@ -970,24 +1070,26 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745447977870
+      systemVersion: 6.0.0
+      createdTime: 1781486149870
+      modifiedTime: 1781486178025
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!z85EsGS2GVWj46qE.r6GQ1TwNK7pinX0a'
   - _id: EjeLsaCua7yjgxax
     name: Shield
     type: feat
-    img: icons/equipment/shield/oval-wooden-boss-steel.webp
+    img: icons/equipment/shield/heater-steel-spiral.webp
     system:
       description:
         value: >-
-          <p>When a creature makes an Attack against the wearer of the
-          guardian's Amulet, the Guardian grants a +2 bonus to the wearer's AC
-          if the Guardian is within 5 feet of the wearer.</p>
+          <p>When a creature makes an attack against the wearer of the [[lookup
+          @name lowercase]]{monster}'s amulet, the [[lookup @name
+          lowercase]]{monster} grants a +2 bonus to the wearer's AC if the
+          [[lookup @name lowercase]]{monster} is within 5 feet of the
+          wearer.</p>
         chat: ''
       source:
         custom: ''
@@ -1006,13 +1108,14 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        oAMdl1NGqF6BXRQu:
           type: utility
           activation:
             type: reaction
             value: 1
-            condition: ''
+            condition: >-
+              When a creature makes an attack against the wearer of the [[lookup
+              @name lowercase]]{monster}'s amulet.
             override: false
           consumption:
             targets: []
@@ -1022,17 +1125,19 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: ft
             special: ''
             override: false
+            value: '5'
           target:
             template:
               count: ''
@@ -1041,10 +1146,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -1058,7 +1164,19 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          name: Guard Amulet Bearer
+          img: ''
+          flags: {}
+          visibility:
+            identifier: ''
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: oAMdl1NGqF6BXRQu
       enchant: {}
       prerequisites:
         level: null
@@ -1072,12 +1190,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.yHcr3vlkmtInELj2
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781486194431
+      modifiedTime: 1781486282887
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!z85EsGS2GVWj46qE.EjeLsaCua7yjgxax'
 effects: []
@@ -1088,7 +1206,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171267320

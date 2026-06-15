@@ -454,9 +454,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -471,7 +468,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -491,6 +488,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: jlZrv208u9gYyh7I
     name: Antimagic Susceptibility
@@ -499,10 +497,14 @@ items:
     system:
       description:
         value: >-
-          <p>The armor is incapacitated while in the area of an <em>antimagic
-          field</em>. If targeted by <em>dispel magic</em>, the armor must
-          succeed on a Constitution saving throw against the caster's spell save
-          DC or fall unconscious for 1 minute.</p>
+          <p>The [[lookup @name lowercase]]{monster} is
+          &amp;reference[incapacitated apply=false] while in the area of an
+          @UUID[Compendium.dnd5e.spells.Item.Eon0jzGzQRNluTPQ]{Antimagic Field}.
+          If targeted by
+          @UUID[Compendium.dnd5e.spells.Item.15Fa6q1nH27XfbR8]{Dispel Magic},
+          the [[lookup @name lowercase]]{monster} must succeed on a Constitution
+          saving throw against the caster's spell save DC or fall
+          &amp;reference[unconscious] for 1 minute.</p>
         chat: >-
           <p>The armor is incapacitated while in the area of an antimagic
           field.</p>
@@ -518,16 +520,127 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
-      activities: {}
+      properties:
+        - trait
+      activities:
+        B2aVXCenI7CfLLlj:
+          type: save
+          name: Dispel Magic Save
+          _id: B2aVXCenI7CfLLlj
+          img: ''
+          sort: 0
+          activation:
+            type: special
+            override: false
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} is targeted by
+              @UUID[Compendium.dnd5e.spells.Item.15Fa6q1nH27XfbR8]{Dispel
+              Magic}.
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: ''
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects:
+            - _id: hZlZMpOIJOexfrmA
+              level: {}
+              onSave: false
+          flags: {}
+          range:
+            units: self
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: self
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          damage:
+            onSave: none
+            parts: []
+          save:
+            ability:
+              - con
+            dc:
+              calculation: ''
+              formula: ''
+            visible: true
+            bonus: ''
       enchant: {}
       prerequisites:
         level: null
       identifier: antimagic-susceptibility
-    effects: []
+    effects:
+      - name: Dispelled
+        img: icons/magic/lightning/orb-ball-purple.webp
+        origin: Compendium.dnd5e.monsters.Actor.eORmAXuV5v3nWsQL.Item.jlZrv208u9gYyh7I
+        transfer: false
+        _id: hZlZMpOIJOexfrmA
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: minutes
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You have been rendered &amp;reference[unconscious apply=false] by
+          the @UUID[Compendium.dnd5e.spells.Item.15Fa6q1nH27XfbR8]{Dispel Magic}
+          spell for 1 minute.</p>
+        tint: '#ffffff'
+        statuses:
+          - unconscious
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781484292173
+          modifiedTime: 1781484341736
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!eORmAXuV5v3nWsQL.jlZrv208u9gYyh7I.hZlZMpOIJOexfrmA
     folder: null
     sort: 0
     ownership:
@@ -536,11 +649,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.KMQAgNxBCAHrd2JU
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745447373985
+      systemVersion: 6.0.0
+      createdTime: 1781484240936
+      modifiedTime: 1781484360594
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!eORmAXuV5v3nWsQL.jlZrv208u9gYyh7I'
@@ -551,8 +664,8 @@ items:
     system:
       description:
         value: >-
-          <p>While the armor remains motionless, it is indistinguishable from a
-          normal suit of armor.</p>
+          <p>While the [[lookup @name lowercase]]{monster} remains motionless,
+          it is indistinguishable from a normal suit of armor.</p>
         chat: ''
       source:
         custom: ''
@@ -566,10 +679,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -584,12 +698,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.kyVgQNSa12loxVvr
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781484196485
+      modifiedTime: 1781484198931
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!eORmAXuV5v3nWsQL.Kwed9PPaTkZYr8Jh'
   - _id: bdRuWKCO8gXQPu16
@@ -598,7 +712,9 @@ items:
     img: icons/skills/melee/blade-tips-triple-steel.webp
     system:
       description:
-        value: <p>The armor makes two [[/item .vUqKQJ1GGWbKg6cX]]{melee} attacks.</p>
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} makes two [[/item
+          .vUqKQJ1GGWbKg6cX]]{melee} attacks.</p>
         chat: ''
       source:
         custom: ''
@@ -683,22 +799,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745447399942
+      systemVersion: 6.0.0
+      createdTime: 1781484412115
+      modifiedTime: 1781484412115
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!eORmAXuV5v3nWsQL.bdRuWKCO8gXQPu16'
   - _id: vUqKQJ1GGWbKg6cX
     name: Slam
     type: weapon
-    img: icons/skills/melee/unarmed-punch-fist-yellow-red.webp
+    img: icons/equipment/hand/gauntlet-armored-steel-grey.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Animated Armor makes a slam attack!</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} makes a [[lookup @item.name]]
+          attack!</p>
       source:
         custom: ''
         book: ''
@@ -761,7 +879,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -770,8 +888,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        nDd47lh9gTY9FyI5:
           type: attack
           activation:
             type: action
@@ -786,10 +903,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -806,7 +924,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -819,20 +938,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: nDd47lh9gTY9FyI5
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -847,11 +978,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745447380310
+      systemVersion: 6.0.0
+      createdTime: 1781484376661
+      modifiedTime: 1781484432927
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!eORmAXuV5v3nWsQL.vUqKQJ1GGWbKg6cX'
@@ -863,7 +994,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171244829

@@ -458,9 +458,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -475,7 +472,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -495,11 +492,12 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: y2j6GWf1Ur3GRtYI
     name: Fire Absorption
     type: feat
-    img: icons/magic/fire/flame-burning-campfire-rocks.webp
+    img: icons/magic/fire/flame-burning-earth-orange.webp
     system:
       description:
         value: >-
@@ -519,11 +517,78 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
-      activities: {}
+      properties:
+        - trait
+      activities:
+        LKRYRmwynsrsR4KJ:
+          type: heal
+          name: Regain Hit Points
+          img: ''
+          sort: 0
+          activation:
+            type: special
+            override: false
+            condition: >-
+              Whenever the [[lookup @name lowercase]]{monster} is subjected to
+              fire damage.
+          consumption:
+            scaling:
+              allowed: true
+              max: ''
+            spellSlot: true
+            targets: []
+          description:
+            value: ''
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: self
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: self
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          healing:
+            types:
+              - healing
+            custom:
+              enabled: false
+            scaling:
+              number: 1
+              mode: ''
+            number: null
+            denomination: null
+            bonus: '@scaling'
+          _id: LKRYRmwynsrsR4KJ
       enchant: {}
       prerequisites:
         level: null
@@ -537,163 +602,23 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.UH57LTsTGDxl2oS6
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745447697372
+      systemVersion: 6.0.0
+      createdTime: 1781485721182
+      modifiedTime: 1781486031421
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!h98AuPfomEPcCibP.y2j6GWf1Ur3GRtYI'
-  - _id: ajTNe969fHHuppwl
-    name: Immutable Form
-    type: feat
-    img: icons/magic/unholy/orb-beam-pink.webp
-    system:
-      description:
-        value: >-
-          <p>The golem is immune to any spell or effect that would alter its
-          form.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: immutable-form
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.MFuiImIvLzYA3osc
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!h98AuPfomEPcCibP.ajTNe969fHHuppwl'
-  - _id: vUyYxadU3cXz7Zqf
-    name: Magic Resistance
-    type: feat
-    img: icons/magic/defensive/shield-barrier-glowing-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The golem has advantage on saving throws against spells and other
-          magical effects.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: magic-resistance
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745447706061
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!h98AuPfomEPcCibP.vUyYxadU3cXz7Zqf'
-  - _id: aIoPr5RkxMhH5prU
-    name: Magic Weapons
-    type: feat
-    img: icons/weapons/swords/sword-runed-glowing.webp
-    system:
-      description:
-        value: <p>The golem's weapon attacks are magical.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: magic-weapons
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.nahRRxck9R5GVVFS
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!h98AuPfomEPcCibP.aIoPr5RkxMhH5prU'
   - _id: UupAbZ0Pu4j3vLLg
     name: Multiattack
     type: feat
     img: icons/skills/melee/blade-tips-triple-steel.webp
     system:
       description:
-        value: <p>The golem makes two melee attacks.</p>
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} makes two melee
+          attacks.</p>
         chat: ''
       source:
         custom: ''
@@ -712,8 +637,7 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        dIRvPdGyoNTvhgye:
           type: utility
           activation:
             type: action
@@ -728,15 +652,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -747,7 +672,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -764,7 +690,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: dIRvPdGyoNTvhgye
       enchant: {}
       prerequisites:
         level: null
@@ -778,22 +712,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1745447711795
+      systemVersion: 6.0.0
+      createdTime: 1781485761345
+      modifiedTime: 1781485763674
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!h98AuPfomEPcCibP.UupAbZ0Pu4j3vLLg'
   - _id: 0z51jBlE4BoPaEQn
     name: Slam
     type: weapon
-    img: icons/skills/melee/unarmed-punch-fist-yellow-red.webp
+    img: icons/equipment/hand/gauntlet-tooled-steel-grey.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Iron Golem attacks with its Slam.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -857,7 +793,7 @@ items:
         conditions: ''
       properties:
         - mgc
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -866,8 +802,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        35BnyPnKJoKdeEVS:
           type: attack
           activation:
             type: action
@@ -882,10 +817,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -902,7 +838,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -915,23 +852,35 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 35BnyPnKJoKdeEVS
+          name: ''
       attuned: false
       ammunition: {}
-      magicalBonus: null
+      magicalBonus: ''
       identifier: slam
       mastery: ''
     effects: []
@@ -943,11 +892,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.0
-      createdTime: null
-      modifiedTime: 1760378692795
+      systemVersion: 6.0.0
+      createdTime: 1781485778057
+      modifiedTime: 1781485962370
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!h98AuPfomEPcCibP.0z51jBlE4BoPaEQn'
@@ -958,7 +907,9 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Iron Golem attacks with its Sword.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -1023,7 +974,7 @@ items:
       properties:
         - mgc
         - rch
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -1032,8 +983,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        EaOi7NL3fMuX6JYx:
           type: attack
           activation:
             type: action
@@ -1048,10 +998,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1068,7 +1019,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1081,23 +1033,35 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: EaOi7NL3fMuX6JYx
+          name: ''
       attuned: false
       ammunition: {}
-      magicalBonus: null
+      magicalBonus: ''
       identifier: sword
       mastery: ''
     effects: []
@@ -1109,28 +1073,30 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.0
-      createdTime: null
-      modifiedTime: 1760378696657
+      systemVersion: 6.0.0
+      createdTime: 1781485802047
+      modifiedTime: 1781485937659
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!h98AuPfomEPcCibP.pPThO0mEw9iMaJw7'
   - _id: x44GisqrxHYC5fov
     name: Poison Breath
     type: feat
-    img: icons/creatures/reptiles/serpent-horned-green.webp
+    img: icons/magic/air/fog-gas-smoke-dense-green.webp
     system:
       description:
         value: >-
-          <p>The golem exhales poisonous gas in a 15-foot cone. Each creature in
-          that area must make a [[/save]] saving throw, taking [[/damage
-          average]] damage on a failed save, or half as much damage on a
-          successful one.</p>
+          <p>The [[lookup @name lowercase]]{monster} exhales poisonous gas in a
+          [[lookup @labels.description.template activity=INgsCYDrlZSCUygg]].
+          Each creature in that area must make a [[/save]] saving throw, taking
+          [[/damage average]] damage on a failed save, or half as much damage on
+          a successful one.</p>
         chat: >-
-          <p>The golem exhales poisonous gas in a 15-foot cone. Each creature in
-          that area must make a <strong>Constitution</strong> saving throw.</p>
+          <p>The [[lookup @name]]{monster} exhales poisonous gas in a [[lookup
+          @labels.description.template activity=INgsCYDrlZSCUygg]]. Each
+          creature in that area must make a Constitution saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -1146,13 +1112,12 @@ items:
             type: recoverAll
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        INgsCYDrlZSCUygg:
           type: save
           activation:
             type: action
@@ -1162,26 +1127,25 @@ items:
           consumption:
             targets:
               - type: itemUses
-                target: ''
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: ''
+                scaling: {}
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -1193,6 +1157,7 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1207,24 +1172,37 @@ items:
           damage:
             onSave: half
             parts:
-              - number: 10
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 10
                 denomination: 8
                 bonus: ''
                 types:
                   - poison
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+                  number: 1
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '19'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: INgsCYDrlZSCUygg
+          name: Poison Gas Save
       enchant: {}
       prerequisites:
         level: null
@@ -1238,14 +1216,173 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.JAEclghgOT24pQD9
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745447736687
+      systemVersion: 6.0.0
+      createdTime: 1781485828467
+      modifiedTime: 1781486000876
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!h98AuPfomEPcCibP.x44GisqrxHYC5fov'
+  - _id: yjYIBPfeldB4GfPg
+    name: Immutable Form
+    type: feat
+    img: icons/magic/unholy/orb-beam-pink.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} is immune to any spell or
+          effect that would alter its form.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: immutable-form
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: null
+    sort: 200000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.MFuiImIvLzYA3osc
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781485745323
+      modifiedTime: 1781485745323
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!h98AuPfomEPcCibP.yjYIBPfeldB4GfPg'
+  - _id: 411cXgDidE6riKWk
+    name: Magic Resistance
+    type: feat
+    img: icons/magic/defensive/barrier-shield-dome-pink.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on saving
+          throws against spells and other magical effects.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: magic-resistance
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: null
+    sort: 300000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781485746222
+      modifiedTime: 1781485746222
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!h98AuPfomEPcCibP.411cXgDidE6riKWk'
+  - _id: VaP12qLKWB1XwlFQ
+    name: Magic Weapons
+    type: feat
+    img: icons/weapons/swords/sword-runed-glowing.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster}'s weapon attacks are
+          magical.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: magic-weapons
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: null
+    sort: 500000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.nahRRxck9R5GVVFS
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781485746978
+      modifiedTime: 1781485746978
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!h98AuPfomEPcCibP.VaP12qLKWB1XwlFQ'
 effects: []
 folder: pucbjwWBrVMweiOd
 sort: 0
@@ -1254,7 +1391,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171248947

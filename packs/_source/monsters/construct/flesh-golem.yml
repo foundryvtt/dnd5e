@@ -457,9 +457,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -474,7 +471,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -494,131 +491,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
-  - _id: AwiZrSjLzs3aNC33
-    name: Berserk
-    type: feat
-    img: icons/creatures/reptiles/lizard-mouth-glowing-red.webp
-    system:
-      description:
-        value: >-
-          <p>Whenever the golem starts its turn with 40 hit points or fewer,
-          roll a [[/r d6]]. On a 6, the golem goes berserk. On each of its turns
-          while berserk, the golem attacks the nearest creature it can
-          see.</p><p>If no creature is near enough to move to and attack, the
-          golem attacks an object, with preference for an object smaller than
-          itself. Once the golem goes berserk, it continues to do so until it is
-          destroyed or regains all its hit points. The golem's creator, if
-          within 60 feet of the berserk golem, can try to calm it by speaking
-          firmly and persuasively. The golem must be able to hear its creator,
-          who must take an action to make a [[/check]] check. If the check
-          succeeds, the golem ceases being berserk. If it takes damage while
-          still at 40 hit points or fewer, the golem might go berserk again.</p>
-        chat: >-
-          <p>The golem goes berserk. On each of its turns while berserk, the
-          golem attacks the nearest creature it can see. If no creature is near
-          enough to move to and attack, the golem attacks an object, with
-          preference for an object smaller than itself.</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        8mMJSIYG7IgI1hQQ:
-          type: check
-          _id: 8mMJSIYG7IgI1hQQ
-          sort: 0
-          activation:
-            type: ''
-            value: null
-            override: false
-            condition: ''
-          consumption:
-            scaling:
-              allowed: false
-            spellSlot: true
-            targets: []
-          description:
-            chatFlavor: ''
-          duration:
-            units: inst
-            concentration: false
-            override: false
-          effects: []
-          range:
-            override: false
-            units: self
-            special: ''
-          target:
-            template:
-              contiguous: false
-              units: ft
-              type: ''
-            affects:
-              choice: false
-              type: ''
-            override: false
-            prompt: true
-          uses:
-            spent: 0
-            recovery: []
-            max: ''
-          check:
-            associated:
-              - per
-            dc:
-              calculation: ''
-              formula: '15'
-            ability: cha
-          name: ''
-          img: ''
-          appliedEffects: []
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: berserk
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.QOWoa60SwvsQJifN
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745447632386
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!Hm4o2FgPZsdbXjLq.AwiZrSjLzs3aNC33'
   - _id: Ee9WvQyqy1lRYtuj
     name: Aversion of Fire
     type: feat
-    img: icons/magic/fire/projectile-wave-arrow.webp
+    img: icons/magic/fire/flame-burning-earth-yellow.webp
     system:
       description:
         value: >-
-          <p>If the golem takes fire damage, it has disadvantage on attack rolls
-          and ability checks until the end of its next turn.</p>
+          <p>If the [[lookup @name lowercase]]{monster} takes fire damage, it
+          has disadvantage on attack rolls and ability checks until the end of
+          its next turn.</p>
         chat: >-
           <p>If the golem takes <strong><em>fire damage</em></strong>, it
           has<strong> disadvantage </strong>on some rolls.</p>
@@ -634,16 +518,145 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
-      activities: {}
+      properties:
+        - trait
+      activities:
+        fnXr5wvfMuSNczkZ:
+          type: utility
+          name: Reel from Fire
+          _id: fnXr5wvfMuSNczkZ
+          img: ''
+          sort: 0
+          activation:
+            type: special
+            override: false
+            condition: When the [[lookup @name lowercase]]{monster} takes fire damage.
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: ''
+            chatFlavor: ''
+          duration:
+            units: round
+            concentration: false
+            override: false
+            value: '1'
+          effects:
+            - _id: dCrLkxXwD3UyiD55
+              level: {}
+          flags: {}
+          range:
+            units: self
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
       enchant: {}
       prerequisites:
         level: null
       identifier: aversion-of-fire
-    effects: []
+    effects:
+      - name: Aversion of Fire
+        img: icons/magic/fire/flame-burning-earth-yellow.webp
+        origin: Compendium.dnd5e.monsters.Actor.Hm4o2FgPZsdbXjLq.Item.Ee9WvQyqy1lRYtuj
+        transfer: false
+        _id: dCrLkxXwD3UyiD55
+        type: base
+        system:
+          changes:
+            - key: system.abilities.str.check.roll.mode
+              type: add
+              value: -1
+              phase: initial
+              priority: null
+            - key: system.abilities.dex.check.roll.mode
+              type: add
+              value: -1
+              phase: initial
+              priority: null
+            - key: system.abilities.con.check.roll.mode
+              type: add
+              value: -1
+              phase: initial
+              priority: null
+            - key: system.abilities.int.check.roll.mode
+              type: add
+              value: -1
+              phase: initial
+              priority: null
+            - key: system.abilities.wis.check.roll.mode
+              type: add
+              value: -1
+              phase: initial
+              priority: null
+            - key: system.abilities.cha.check.roll.mode
+              type: add
+              value: -1
+              phase: initial
+              priority: null
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: rounds
+          expiry: turnEnd
+          expired: false
+        description: >-
+          <p>You have disadvantage on attack rolls and ability checks until the
+          end of your next turn.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781485230746
+          modifiedTime: 1781485289290
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!Hm4o2FgPZsdbXjLq.Ee9WvQyqy1lRYtuj.dCrLkxXwD3UyiD55
     folder: null
     sort: 0
     ownership:
@@ -652,212 +665,23 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.uxFQ3TxO3isW5WKK
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745447656831
+      systemVersion: 6.0.0
+      createdTime: 1781485182037
+      modifiedTime: 1781485363788
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!Hm4o2FgPZsdbXjLq.Ee9WvQyqy1lRYtuj'
-  - _id: NnEyJiIMUFY8ovfl
-    name: Immutable Form
-    type: feat
-    img: icons/magic/unholy/orb-beam-pink.webp
-    system:
-      description:
-        value: >-
-          <p>The golem is immune to any spell or effect that would alter its
-          form.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: immutable-form
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.MFuiImIvLzYA3osc
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!Hm4o2FgPZsdbXjLq.NnEyJiIMUFY8ovfl'
-  - _id: 27csbMlmaIFdMcTA
-    name: Lightning Absorption
-    type: feat
-    img: icons/magic/lightning/bolt-strike-blue.webp
-    system:
-      description:
-        value: >-
-          <p>Whenever the golem is subjected to lightning damage, it takes no
-          damage and instead regains a number of hit points equal to the
-          lightning damage dealt.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: lightning-absorption
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.KTsFgSQlDetDDm1f
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745447668163
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!Hm4o2FgPZsdbXjLq.27csbMlmaIFdMcTA'
-  - _id: EAWR3fONAFox5cvp
-    name: Magic Resistance
-    type: feat
-    img: icons/magic/defensive/shield-barrier-glowing-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The golem has advantage on saving throws against spells and other
-          magical effects.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: magic-resistance
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745447673065
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!Hm4o2FgPZsdbXjLq.EAWR3fONAFox5cvp'
-  - _id: R8MFu1EkI4xBgXXr
-    name: Magic Weapons
-    type: feat
-    img: icons/weapons/swords/sword-runed-glowing.webp
-    system:
-      description:
-        value: <p>The golem's weapon attacks are magical.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: magic-weapons
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.nahRRxck9R5GVVFS
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!Hm4o2FgPZsdbXjLq.R8MFu1EkI4xBgXXr'
   - _id: mCNNxLGdzy54omRW
     name: Multiattack
     type: feat
     img: icons/skills/melee/blade-tips-triple-steel.webp
     system:
       description:
-        value: <p>The golem makes two [[/item .mjn0iMGrjGTOn42w]]{slam} attacks.</p>
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} makes two [[/item
+          .mjn0iMGrjGTOn42w]]{Slam} attacks.</p>
         chat: ''
       source:
         custom: ''
@@ -876,8 +700,7 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        qQrMC4kJbvaO00hU:
           type: utility
           activation:
             type: action
@@ -892,15 +715,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -911,7 +735,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -928,7 +753,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: qQrMC4kJbvaO00hU
       enchant: {}
       prerequisites:
         level: null
@@ -942,11 +775,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745447676781
+      systemVersion: 6.0.0
+      createdTime: 1781485306682
+      modifiedTime: 1781485313706
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!Hm4o2FgPZsdbXjLq.mCNNxLGdzy54omRW'
@@ -1021,7 +854,7 @@ items:
         conditions: ''
       properties:
         - mgc
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -1030,8 +863,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        hTs3I9jTENakoufi:
           type: attack
           activation:
             type: action
@@ -1046,10 +878,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1066,7 +899,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1079,23 +913,35 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: hTs3I9jTENakoufi
+          name: ''
       attuned: false
       ammunition: {}
-      magicalBonus: null
+      magicalBonus: ''
       identifier: slam
       mastery: ''
     effects: []
@@ -1107,14 +953,425 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.0
-      createdTime: null
-      modifiedTime: 1760378701917
+      systemVersion: 6.0.0
+      createdTime: 1781485333770
+      modifiedTime: 1781485348586
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!Hm4o2FgPZsdbXjLq.mjn0iMGrjGTOn42w'
+  - _id: zOfUHzrFb2dvVxie
+    name: Berserk
+    type: feat
+    img: icons/creatures/reptiles/lizard-mouth-glowing-red.webp
+    system:
+      description:
+        value: >-
+          <p>Whenever the [[lookup @name lowercase]]{monster} starts its turn
+          with 60 hit points or fewer, roll a [[/r d6]]. On a 6, the [[lookup
+          @name lowercase]]{monster} goes berserk. On each of its turns while
+          berserk, the [[lookup @name lowercase]]{monster} attacks the nearest
+          creature it can see. If no creature is near enough to move to and
+          attack, the [[lookup @name lowercase]]{monster} attacks an object,
+          with preference for an object smaller than itself. Once the [[lookup
+          @name lowercase]]{monster} goes berserk, it continues to do so until
+          it is destroyed or regains all its hit points.</p>
+        chat: >-
+          <p>The golem goes berserk. On each of its turns while berserk, the
+          golem attacks the nearest creature it can see. If no creature is near
+          enough to move to and attack, the golem attacks an object, with
+          preference for an object smaller than itself.</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities:
+        Y2x7ewOSlmprWOD1:
+          type: utility
+          activation:
+            type: special
+            value: null
+            condition: >-
+              Whenever the [[lookup @name lowercase]]{monster} starts its turn
+              with 60 hit points or fewer.
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: On a result of 1, the [[lookup @name]]{monster} goes berserk.
+            value: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: self
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: 1d6cf1
+            name: Berserk Check
+            prompt: false
+            visible: false
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: Y2x7ewOSlmprWOD1
+          name: Go Berserk
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: berserk
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: null
+    sort: 100000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.QOWoa60SwvsQJifN
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781485152093
+      modifiedTime: 1781485152093
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!Hm4o2FgPZsdbXjLq.zOfUHzrFb2dvVxie'
+  - _id: Et4wxxXo9aoxv3C8
+    name: Magic Resistance
+    type: feat
+    img: icons/magic/defensive/barrier-shield-dome-pink.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on saving
+          throws against spells and other magical effects.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: magic-resistance
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: null
+    sort: 300000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781485155092
+      modifiedTime: 1781485155093
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!Hm4o2FgPZsdbXjLq.Et4wxxXo9aoxv3C8'
+  - _id: YxQj8rquUdekT7me
+    name: Magic Weapons
+    type: feat
+    img: icons/weapons/swords/sword-runed-glowing.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster}'s weapon attacks are
+          magical.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: magic-weapons
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: null
+    sort: 500000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.nahRRxck9R5GVVFS
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781485155866
+      modifiedTime: 1781485155866
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!Hm4o2FgPZsdbXjLq.YxQj8rquUdekT7me'
+  - _id: MjPSsJkOhT9vW4Zf
+    name: Lightning Absorption
+    type: feat
+    img: icons/magic/lightning/bolt-strike-sparks-blue.webp
+    system:
+      description:
+        value: >-
+          <p>Whenever the [[lookup @name lowercase]]{monster} is subjected to
+          lightning damage, it takes no damage and regains a number of hit
+          points equal to the lightning damage dealt.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities:
+        sHJKs30Lu6S4HwKs:
+          type: heal
+          name: Regain Hit Points
+          _id: sHJKs30Lu6S4HwKs
+          img: ''
+          sort: 0
+          activation:
+            type: special
+            override: false
+            condition: >-
+              Whenever the [[lookup @name lowercase]]{monster} is subjected to
+              lightning damage.
+          consumption:
+            scaling:
+              allowed: true
+              max: ''
+            spellSlot: true
+            targets: []
+          description:
+            value: ''
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: self
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: self
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          healing:
+            types:
+              - healing
+            custom:
+              enabled: false
+            scaling:
+              number: 1
+              mode: ''
+            number: null
+            denomination: null
+            bonus: '@scaling'
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: lightning-absorption
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.KTsFgSQlDetDDm1f
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781485169308
+      modifiedTime: 1781485169308
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!Hm4o2FgPZsdbXjLq.MjPSsJkOhT9vW4Zf'
+  - _id: saNeJhD61HGgts1B
+    name: Immutable Form
+    type: feat
+    img: icons/magic/unholy/orb-beam-pink.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} is immune to any spell or
+          effect that would alter its form.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: immutable-form
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: null
+    sort: 200000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.MFuiImIvLzYA3osc
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781485173659
+      modifiedTime: 1781485173659
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!Hm4o2FgPZsdbXjLq.saNeJhD61HGgts1B'
 effects: []
 folder: pucbjwWBrVMweiOd
 sort: 0
@@ -1123,7 +1380,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171219116
