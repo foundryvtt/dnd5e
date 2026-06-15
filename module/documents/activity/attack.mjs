@@ -119,7 +119,7 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
     const rollData = this.getRollData({ roll: { ability: rollConfig.ability, attackMode: rollConfig.attackMode } });
     const rollFields = [
       ...(rollConfig.ability ? [`abilities.${rollConfig.ability}.attack.roll`] : []),
-      "rolls.attack", `rolls.attack.${this.getActionType(rollConfig.attackMode)}`
+      "rolls.ability.attack", "rolls.attack", `rolls.attack.${this.getActionType(rollConfig.attackMode)}`
     ];
     const { advantage, disadvantage, maximum, minimum } = this.actor
       ? D20RollModificationField.combineFields(this.actor.system, rollFields, {
@@ -264,7 +264,7 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
     let { parts, data } = this.getAttackData({ ability, ammunition, attackMode });
     const rollFields = [
       ...(ability ? [`abilities.${ability}.attack.roll`] : []),
-      "rolls.attack", `rolls.attack.${this.getActionType(attackMode)}`
+      "rolls.ability.attack", "rolls.attack", `rolls.attack.${this.getActionType(attackMode)}`
     ];
     const { advantage, disadvantage, maximum, minimum } = this.actor
       ? D20RollModificationField.combineFields(this.actor.system, rollFields, {

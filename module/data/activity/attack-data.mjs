@@ -281,17 +281,20 @@ export default class BaseAttackActivityData extends BaseActivityData {
 
     const weapon = this.item.system;
     const ammo = this.actor?.items.get(ammunition)?.system;
-    const { bonus } = this.actor ? D20RollModificationField.combineFields(this.actor.system, [
-      "rolls.attack", `rolls.attack.${this.getActionType(attackMode)}`
-    ], { rules: { category: "attack", actor: this.actor, item: this.item, rollData } }) : {};
+    const rollFields = [
+      ...(rollData.roll.ability ? [`abilities.${rollData.roll.ability}.attack.roll`] : []),
+      "rolls.ability.attack", "rolls.attack", `rolls.attack.${this.getActionType(attackMode)}`
+    ];
+    const { bonus } = this.actor ? D20RollModificationField.combineFields(this.actor.system, rollFields, {
+      rules: { category: "attack", actor: this.actor, item: this.item, rollData }
+    }) : {};
     const { parts, data } = CONFIG.Dice.BasicRoll.constructParts({
       mod: rollData.roll.ability ? rollData.mod : null,
       prof: weapon.prof?.term,
       bonus: this.attack.bonus,
       weaponMagic: weapon.magicAvailable ? weapon.magicalBonus : null,
-      ammoMagic: ammo?.magicAvailable ? ammo.magicalBonus : null,
-      abilityAttackBonus: this.actor?.system.abilities?.[ability]?.bonuses?.attack,
       ruleBonus: bonus,
+
       situational
     }, rollData);
 

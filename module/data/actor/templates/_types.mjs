@@ -72,10 +72,12 @@
 /**
  * @typedef {CommonTemplateData} CreatureTemplateData
  * @property {object} bonuses
+
  * @property {object} bonuses.spell                  Bonuses to spells.
  * @property {string} bonuses.spell.dc               Numeric bonus to spellcasting DC.
  * @property {object} rolls
  * @property {object} rolls.ability
+ * @property {D20RollModificationData} rolls.ability.attack Modifications to ability attack rolls.
  * @property {ProficientRollModificationData} rolls.ability.check  Modifications to ability checks.
  * @property {ProficientRollModificationData} rolls.ability.save   Modifications to ability saves.
  * @property {ProficientRollModificationData} rolls.ability.skill  Modifications to skill checks.

@@ -32,12 +32,14 @@ export default class CreatureTemplate extends CommonTemplate {
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       bonuses: new SchemaField({
+
         spell: new SchemaField({
           dc: new FormulaField({ required: true, deterministic: true })
         })
       }),
       rolls: new SchemaField({
         ability: new SchemaField({
+          attack: new D20RollModificationField({}, { labelPrefix: "DND5E.ROLL.FIELDS.rolls.ability.attack." }),
           check: new D20RollModificationField({
             proficiency: new NumberField({
               choices: [0, 0.5, 1, 2], initial: 0, persisted: false,
