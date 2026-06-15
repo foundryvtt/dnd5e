@@ -429,7 +429,10 @@ export default class ActivitiesTemplate extends SystemDataModel {
     // Track changes to cached spells on cast activities
     const removed = Object.entries(changed.system?.activities ?? {}).map(([key, data]) => {
       if ( (data instanceof foundry.data.operators.ForcedDeletion)
-        || foundry.utils.hasProperty(data, "spell.uuid") ) return this.activities.get(key)?.cachedSpell?.id;
+        || (foundry.utils.hasProperty(data, "spell.uuid")
+          && (foundry.utils.getProperty(data, "spell.uuid") !== this.activities.get(key)?.spell?.uuid)) ) {
+        return this.activities.get(key)?.cachedSpell?.id;
+      }
       return null;
     }).filter(_ => _);
     if ( removed.length ) foundry.utils.setProperty(options, "dnd5e.removedCachedItems", removed);
