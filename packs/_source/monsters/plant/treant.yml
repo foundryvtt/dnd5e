@@ -523,10 +523,11 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
         1SrLlYGeLgzdmSwc:
           type: summon
@@ -583,7 +584,7 @@ items:
               max: null
             requireAttunement: false
             requireIdentification: false
-            requireMagic: false
+            requireMagic: true
             identifier: ''
           bonuses:
             ac: ''
@@ -725,7 +726,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781478373185
-      modifiedTime: 1781481034868
+      modifiedTime: 1781485132585
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!NB6wUgVqeOQtsQKu.8uUyRr6Ho7Yvx8pP'
