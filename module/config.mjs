@@ -3803,8 +3803,6 @@ DND5E.conditionEffects = {
   malnourished: new Set(["malnutrition"]),
   abilityCheckDisadvantage: new Set(["poisoned"]),
   physicalCheckDisadvantage: new Set(["heavilyEncumbered"]),
-  abilityAttackAdvantage: new Set(),
-  abilityAttackDisadvantage: new Set(),
   abilitySaveDisadvantage: new Set(),
   physicalSaveDisadvantage: new Set(["heavilyEncumbered"]),
   physicalAttackAdvantage: new Set(),
