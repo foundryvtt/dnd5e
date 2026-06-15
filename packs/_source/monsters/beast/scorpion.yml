@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,6 +478,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 0.5
 items:
   - _id: ltue5DUb1SZfphHE
     name: Sting
@@ -491,11 +489,11 @@ items:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
           make a [[/save]] saving throw, taking [[/damage average
-          activity=dnd5eactivity100]] damage on a failed save, or half as much
+          activity=b0UbkEkjgaqHm8tR]] damage on a failed save, or half as much
           damage on a successful one.</p>
         chat: >-
-          <p>The Scorpion attacks with its Sting. The target must make a
-          <strong>Constitution</strong> saving throw.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. The target must make a Constitution saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -558,7 +556,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -567,8 +565,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        cvAJjatPPUZ2UYKh:
           type: attack
           activation:
             type: action
@@ -583,6 +580,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -603,7 +601,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -616,30 +615,38 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: none
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
           name: ''
           img: ''
-          appliedEffects: []
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: cvAJjatPPUZ2UYKh
+        b0UbkEkjgaqHm8tR:
           type: save
           activation:
-            type: action
+            type: special
             value: 1
-            condition: ''
+            condition: When a creature is hit by this attack.
             override: false
           consumption:
             targets: []
@@ -649,6 +656,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -669,10 +677,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -688,19 +697,33 @@ items:
                   enabled: false
                   formula: ''
                 number: 1
-                denomination: '8'
+                denomination: 8
                 bonus: ''
                 types:
                   - poison
+                scaling:
+                  number: 1
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '9'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 200000
           name: ''
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: b0UbkEkjgaqHm8tR
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -711,19 +734,15 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741122891662
+      systemVersion: 6.0.0
+      createdTime: 1781528259132
+      modifiedTime: 1781528542889
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!Y0vxQVF7w2P38FK2.ltue5DUb1SZfphHE'
@@ -735,7 +754,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171237862

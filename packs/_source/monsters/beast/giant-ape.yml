@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,6 +478,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 3
 items:
   - _id: NOajNyilBv8JIEVp
     name: Multiattack
@@ -488,7 +486,9 @@ items:
     img: icons/skills/melee/blade-tips-triple-steel.webp
     system:
       description:
-        value: <p>The ape makes two [[/item .N86NeUNsfvruyJGq]]{fist} attacks.</p>
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} makes two [[/item
+          .N86NeUNsfvruyJGq]]{Fist} attacks.</p>
         chat: ''
       source:
         custom: ''
@@ -502,13 +502,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        v4jgeiZlL3hMG31G:
           type: utility
           activation:
             type: action
@@ -523,15 +522,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -542,7 +542,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -559,7 +560,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: v4jgeiZlL3hMG31G
       enchant: {}
       prerequisites:
         level: null
@@ -573,22 +582,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745273655352
+      systemVersion: 6.0.0
+      createdTime: 1781532542659
+      modifiedTime: 1781532563272
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!8MuL8xisavJW9bnw.NOajNyilBv8JIEVp'
   - _id: N86NeUNsfvruyJGq
     name: Fist
     type: weapon
-    img: icons/magic/fire/flame-burning-fist-strike.webp
+    img: icons/skills/melee/unarmed-punch-fist-yellow-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Giant Ape attacks with its Fist.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -612,7 +623,7 @@ items:
         value: null
         long: null
         units: ft
-        reach: null
+        reach: 10
       uses:
         max: ''
         recovery: []
@@ -650,9 +661,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - rch
-      proficient: 1
+      properties: []
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -661,8 +671,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        CqeyxHNsJDFH0D5H:
           type: attack
           activation:
             type: action
@@ -677,10 +686,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -697,7 +707,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -710,20 +721,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: CqeyxHNsJDFH0D5H
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -738,22 +761,24 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741117987508
+      systemVersion: 6.0.0
+      createdTime: 1781532475179
+      modifiedTime: 1781532499556
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!8MuL8xisavJW9bnw.N86NeUNsfvruyJGq'
   - _id: CVDcFc8ZcjYVl1EV
     name: Rock
     type: weapon
-    img: icons/magic/earth/projectile-stone-ball-brown.webp
+    img: icons/magic/earth/projectile-boulder-yellow.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Giant Ape attacks with its Rock.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -816,7 +841,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -825,8 +850,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        Qx7nDOERRWv2ZQjK:
           type: attack
           activation:
             type: action
@@ -841,10 +865,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -861,7 +886,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -874,20 +900,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
               value: ranged
-              classification: weapon
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: Qx7nDOERRWv2ZQjK
+          name: ''
       attuned: false
       ammunition:
         type: ''
@@ -903,11 +941,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741118010754
+      systemVersion: 6.0.0
+      createdTime: 1781532505639
+      modifiedTime: 1781532519313
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!8MuL8xisavJW9bnw.CVDcFc8ZcjYVl1EV'
@@ -919,7 +957,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171207649

@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,24 +478,26 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: slVyUWagsSZ5CXSh
     name: Charge
     type: feat
-    img: icons/creatures/mammals/ox-bull-horned-glowing-orange.webp
+    img: icons/creatures/mammals/bull-horns-eyes-glowin-orange.webp
     system:
       description:
         value: >-
-          <p>If the elk moves at least 20 ft. straight toward a target and then
-          hits it with a ram attack on the same turn, the target takes an extra
-          [[/damage average]] damage.</p><p>If the target is a creature, it must
-          succeed on a [[/save]] saving throw or be knocked
-          &amp;Reference[prone].</p>
+          <p>If the [[lookup @name lowercase]]{monster} moves at least 20 feet
+          straight toward a target and then hits it with a
+          @UUID[Compendium.dnd5e.monsters.Actor.55PkbskG5iBZGrgR.Item.05Vs3AiPgtQkX84S]{Ram}
+          attack on the same turn, the target takes an extra [[/damage average]]
+          damage.</p><p>If the target is a creature, it must succeed on a
+          [[/save]] saving throw or be knocked &amp;Reference[prone].</p>
         chat: >-
-          <p>If the elk moves at least 20 ft. straight toward a target and then
-          hits it with a ram attack on the same turn, the target takes an extra
-          damage. If the target is a creature, it must make a
-          <strong>Strength</strong> saving throw or be knocked prone.</p>
+          <p>If the [[lookup @name]]{monster} moves at least 20 feet straight
+          toward a target and then hits it with a Ram attack on the same turn,
+          the target takes an extra damage. If the target is a creature, it must
+          make a Strength saving throw or be knocked &amp;reference[prone].</p>
       source:
         custom: ''
         book: ''
@@ -511,144 +510,90 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: damage
+        fPD1c1XD3r0nkApC:
+          type: save
+          name: Charge Save
+          img: ''
+          sort: 100000
           activation:
-            type: ''
-            value: null
-            condition: ''
+            type: special
             override: false
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} moves at least 20
+              feet straight toward a target and then hits it with a
+              @UUID[Compendium.dnd5e.monsters.Actor.55PkbskG5iBZGrgR.Item.05Vs3AiPgtQkX84S]{Ram}
+              attack on the same turn.
           consumption:
-            targets: []
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets: []
           description:
+            value: ''
             chatFlavor: ''
           duration:
-            concentration: false
-            value: ''
             units: inst
-            special: ''
+            concentration: false
             override: false
           effects: []
+          flags: {}
           range:
-            value: '20'
-            units: ft
-            special: ''
+            units: spec
             override: false
+            special: ''
           target:
             template:
-              count: ''
               contiguous: false
+              stationary: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: ''
-              type: ''
               choice: false
+              type: creature
+              count: '1'
               special: ''
-            prompt: true
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
           damage:
-            critical:
-              allow: true
-              bonus: ''
+            onSave: full
             parts:
               - custom:
                   enabled: false
                   formula: ''
                 number: 2
-                denomination: '6'
+                denomination: 6
                 bonus: ''
                 types:
                   - bludgeoning
-          sort: 0
-          name: ''
-          img: ''
-          appliedEffects: []
-        dnd5eactivity100:
-          _id: dnd5eactivity100
-          type: save
-          activation:
-            type: ''
-            value: null
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '20'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          damage:
-            onSave: half
-            parts:
-              - number: 2
-                denomination: 6
-                bonus: ''
-                types: []
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+                  number: 1
           save:
-            ability: str
+            ability:
+              - str
             dc:
               calculation: ''
-              formula: '13'
-          sort: 0
+              formula: '11'
+            visible: true
+            bonus: ''
+          _id: fPD1c1XD3r0nkApC
       enchant: {}
       prerequisites:
         level: null
@@ -658,30 +603,28 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WqRzbokPG0am6AHb
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741124571382
+      systemVersion: 6.0.0
+      createdTime: 1781532086954
+      modifiedTime: 1781532230454
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!55PkbskG5iBZGrgR.slVyUWagsSZ5CXSh'
   - _id: 05Vs3AiPgtQkX84S
     name: Ram
     type: weapon
-    img: icons/creatures/mammals/ox-bull-horned-glowing-orange.webp
+    img: icons/commodities/bones/hurn-curved-yellow.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Elk attacks with its Ram.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -744,7 +687,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -753,8 +696,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        FBOcUb4uIX1MqsvV:
           type: attack
           activation:
             type: action
@@ -769,10 +711,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -789,7 +732,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -802,20 +746,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: FBOcUb4uIX1MqsvV
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -830,11 +786,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741117552303
+      systemVersion: 6.0.0
+      createdTime: 1781531888188
+      modifiedTime: 1781531907801
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!55PkbskG5iBZGrgR.05Vs3AiPgtQkX84S'
@@ -847,7 +803,9 @@ items:
         value: >-
           <p><em>Melee Weapon Attack:</em> [[/attack]], reach5 ft., one prone
           creature. <em>Hit:</em> [[/damage average]] damage.</p>
-        chat: <p>The Elk attacks with its Hooves.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -910,7 +868,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -919,8 +877,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        tHV22y7qxuCLjhaU:
           type: attack
           activation:
             type: action
@@ -935,10 +892,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -955,7 +913,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -968,20 +927,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 200000
+          name: ''
+          img: ''
+          flags: {}
+          visibility:
+            identifier: ''
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: tHV22y7qxuCLjhaU
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -996,11 +967,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.re3oXQ3Xg4Z3Fr6O
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741117605580
+      systemVersion: 6.0.0
+      createdTime: 1781531915913
+      modifiedTime: 1781531984169
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!55PkbskG5iBZGrgR.FneLrX10GhkE2o4E'
@@ -1012,7 +983,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171202501

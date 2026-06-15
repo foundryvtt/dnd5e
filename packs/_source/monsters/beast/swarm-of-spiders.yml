@@ -458,9 +458,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -475,7 +472,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -495,18 +492,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
-  - _id: 72ha7NWOEA4qIOdY
-    name: Swarm
+  - _id: lPUiiHxFoRxG5PpL
+    name: Spider Climb
     type: feat
-    img: icons/creatures/invertebrates/fly-wasp-mosquito-green.webp
+    img: icons/creatures/invertebrates/spider-pink-purple.webp
     system:
       description:
         value: >-
-          <p>The swarm can occupy another creature's space and vice versa, and
-          the swarm can move through any opening large enough for a Tiny insect.
-          The swarm can't regain<strong> hit points</strong> or gain
-          temporary<strong> hit points</strong>.</p>
+          <p>The [[lookup @name lowercase]]{sawrm} can climb difficult surfaces,
+          including upside down on ceilings, without needing to make an ability
+          check.</p>
         chat: ''
       source:
         custom: ''
@@ -520,43 +517,264 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
         level: null
-      identifier: swarm
+        items: []
+        repeatable: false
+      identifier: spider-climb
+      advancement: {}
+      crewed: false
     effects: []
+    folder: UIqfXYMLB6oOsW3Z
+    sort: 150000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.28gU50HtG8Kp7uIz.Item.0Oap13hi3sDNwVZn
+      duplicateSource: Item.lDSSf3aXXmZYJsk1
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781544844661
+      modifiedTime: 1781544870922
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!4udpeEneFSZK9NTB.lPUiiHxFoRxG5PpL'
+  - _id: m9behZnwlLgq9VzL
+    name: Web Sense
+    type: feat
+    img: icons/commodities/materials/material-webbing.webp
+    system:
+      description:
+        value: >-
+          <p>While in contact with a web, the [[lookup @name lowercase]]{swarm}
+          knows the exact location of any other creature in contact with the
+          same web.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: web-sense
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: UIqfXYMLB6oOsW3Z
+    sort: 200000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.28gU50HtG8Kp7uIz.Item.JxuVwnSxsKwGVL0x
+      duplicateSource: Item.kYpmuKe0MtOJBdgi
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781544845342
+      modifiedTime: 1781544878859
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!4udpeEneFSZK9NTB.m9behZnwlLgq9VzL'
+  - _id: 48KjgWw0OHpQ1t99
+    name: Web Walker
+    type: feat
+    img: icons/creatures/webs/web-thin-pruple.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{swarm} ignores movement restrictions
+          caused by webbing.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: web-walker
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: UIqfXYMLB6oOsW3Z
+    sort: 300000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.28gU50HtG8Kp7uIz.Item.GQ8a63ou7VwIGrvv
+      duplicateSource: Item.qHPwkAgbpzDzN0P6
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781544846038
+      modifiedTime: 1781544884702
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!4udpeEneFSZK9NTB.48KjgWw0OHpQ1t99'
+  - _id: e52dN98E7oDusYmw
+    name: Swarm
+    type: feat
+    img: icons/creatures/invertebrates/wasp-swarm-tan.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{swarm} can occupy another creature's
+          space and vice versa, and the [[lookup @name lowercase]]{swarm} can
+          move through any opening large enough for a Tiny insect. The swarm
+          can't regain hit points or gain temporary hit points.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: swarm
+      advancement: {}
+      crewed: false
+    effects:
+      - name: Swarm
+        img: icons/creatures/invertebrates/wasp-swarm-tan.webp
+        origin: Compendium.dnd5e.monsters.Actor.PcZ0QjIG6bHpffp9.Item.cBVltbg8hNBBuTZ7
+        type: base
+        _id: B9IRImqWRVpejk9Z
+        system:
+          changes:
+            - key: system.traits.di.value
+              type: add
+              value: healing
+              phase: initial
+              priority: null
+            - key: system.traits.di.value
+              type: add
+              value: temphp
+              phase: initial
+              priority: null
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You can occupy other creature's spaces and vice versa. You can't
+          regain hit points or gain temporary hit points.</p>
+        tint: '#ffffff'
+        transfer: true
+        statuses:
+          - ethereal
+        showIcon: 0
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781544854438
+          modifiedTime: 1781544854438
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!4udpeEneFSZK9NTB.e52dN98E7oDusYmw.B9IRImqWRVpejk9Z
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.eL3OJmc4FuetizKO
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781544854438
+      modifiedTime: 1781544864977
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!4udpeEneFSZK9NTB.72ha7NWOEA4qIOdY'
-  - _id: qoIR278ckqhlVaNr
+    _key: '!actors.items!4udpeEneFSZK9NTB.e52dN98E7oDusYmw'
+  - _id: TcymrkJnWf22YDtq
     name: Bites
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/invertebrates/spider-mandibles-brown.webp
     system:
       description:
         value: >-
-          <p>Melee Weapon Attack: [[/attack]], 0 ft., one target in the swarm's
-          space. Hit: [[/damage average]] damage, or [[/damage 2d4 piercing
-          average]] damage if the swarm has half of its hit points or fewer.</p>
-        chat: <p>The Swarm of Spiders attacks with a flurry of Bites.</p>
+          <p>Melee Weapon Attack: [[/attack]], 0 ft., one creature in the
+          [[lookup @name lowercase]]{swarm}'s space. Hit: [[/damage 4d4 piercing
+          average]] damage, or [[/damage 2d4 piercing average]] damage if the
+          [[lookup @name lowercase]]{swarm} has half of its hit points or
+          fewer.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with a flurry of [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -572,7 +790,6 @@ items:
         value: 0
         denomination: gp
       attunement: ''
-      equipped: true
       rarity: ''
       identified: true
       cover: null
@@ -587,7 +804,7 @@ items:
         spent: 0
       damage:
         versatile:
-          number: 2
+          number: 1
           denomination: 4
           bonus: ''
           types: []
@@ -599,14 +816,14 @@ items:
             number: null
             formula: ''
         base:
-          number: 4
+          number: 2
           denomination: 4
           bonus: ''
           types:
             - piercing
           custom:
-            enabled: false
-            formula: ''
+            enabled: true
+            formula: (4 - (@statuses.bloodied * 2))d4
           scaling:
             mode: ''
             number: null
@@ -618,19 +835,16 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - fin
-      proficient: 1
+      properties: []
+      proficient: null
       unidentified:
         description: ''
       type:
         value: natural
         baseItem: ''
       container: null
-      crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        h0sdtaqxgM4CQRM0:
           type: attack
           activation:
             type: action
@@ -645,6 +859,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -664,7 +879,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -683,185 +899,50 @@ items:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
           name: ''
           img: ''
-          appliedEffects: []
-      attuned: false
+          flags: {}
+          visibility:
+            identifier: ''
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: h0sdtaqxgM4CQRM0
       ammunition: {}
-      magicalBonus: null
       identifier: bites
       mastery: ''
+      crew:
+        value: []
+      attuned: false
+      equipped: true
     effects: []
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
-      compendiumSource: null
+      compendiumSource: Compendium.dnd5e.monsters.Actor.PcZ0QjIG6bHpffp9.Item.0NpX1YUDTXjgIm23
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741123675763
+      systemVersion: 6.0.0
+      createdTime: 1781544890982
+      modifiedTime: 1781544898638
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!4udpeEneFSZK9NTB.qoIR278ckqhlVaNr'
-  - _id: KYBcEhA6mh3gqPG8
-    name: Spider Climb
-    type: feat
-    img: icons/creatures/invertebrates/spider-beetle-runed-green.webp
-    system:
-      description:
-        value: >-
-          <p>The swarm can climb difficult surfaces, including upside down on
-          ceilings, without needing to make an ability check.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: spider-climb
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.FXHEc39G2d19opuE
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!4udpeEneFSZK9NTB.KYBcEhA6mh3gqPG8'
-  - _id: LPkqp4g22PENqi8b
-    name: Web Sense
-    type: feat
-    img: icons/creatures/webs/web-spider-glowing-purple.webp
-    system:
-      description:
-        value: >-
-          <p>While in contact with a web, the swarm knows the exact location of
-          any other creature in contact with the same web.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: web-sense
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.kjF0btAMYHUAQgOt
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!4udpeEneFSZK9NTB.LPkqp4g22PENqi8b'
-  - _id: KyittoVFeC2HA9By
-    name: Web Walker
-    type: feat
-    img: icons/magic/nature/tree-bare-glow-yellow.webp
-    system:
-      description:
-        value: <p>The swarm ignores movement restrictions caused by webbing.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: web-walker
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.zITrVwmnPpLoBZI1
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!4udpeEneFSZK9NTB.KyittoVFeC2HA9By'
+    _key: '!actors.items!4udpeEneFSZK9NTB.TcymrkJnWf22YDtq'
 effects: []
 folder: g8DmtGW2tiBpzCMk
 sort: 0
@@ -870,7 +951,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.347'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 5.1.3
   createdTime: 1726171202327

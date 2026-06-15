@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,55 +478,8 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
-  - _id: ojB2xDcEAx6QHZAu
-    name: Keen Smell
-    type: feat
-    img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The bear has<strong> advantage </strong>on Wisdom (Perception)
-          checks that rely on smell.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: keen-smell
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!D5WjGwKskeUT8HXa.ojB2xDcEAx6QHZAu'
   - _id: ZBWu2XGwEnsaVNsH
     name: Multiattack
     type: feat
@@ -537,9 +487,9 @@ items:
     system:
       description:
         value: >-
-          <p>The bear makes two attacks: one with its [[/item
-          .8VdhUFhUE9m12piC]]{bite} and one with its [[/item
-          .gaxofmkFqQG1zqK9]]{claws}.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes two attacks: one with
+          its [[/item .8VdhUFhUE9m12piC]]{Bite} and one with its [[/item
+          .gaxofmkFqQG1zqK9]]{Claws}.</p>
         chat: ''
       source:
         custom: ''
@@ -553,7 +503,7 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
@@ -624,22 +574,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745273655547
+      systemVersion: 6.0.0
+      createdTime: 1781524480135
+      modifiedTime: 1781524484857
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!D5WjGwKskeUT8HXa.ZBWu2XGwEnsaVNsH'
   - _id: 8VdhUFhUE9m12piC
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Black Bear attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -702,7 +654,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -711,8 +663,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        PRA9mAKjfNsyjuEk:
           type: attack
           activation:
             type: action
@@ -727,6 +678,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -747,7 +699,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -766,17 +719,26 @@ items:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
           name: ''
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: PRA9mAKjfNsyjuEk
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -787,30 +749,28 @@ items:
     sort: 100000
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741116900067
+      systemVersion: 6.0.0
+      createdTime: 1781524498312
+      modifiedTime: 1781524529808
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!D5WjGwKskeUT8HXa.8VdhUFhUE9m12piC'
   - _id: gaxofmkFqQG1zqK9
     name: Claws
     type: weapon
-    img: icons/skills/melee/strike-slashes-red.webp
+    img: icons/commodities/claws/claw-bear-brown.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Black Bear attacks with its Claws.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -873,7 +833,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -882,8 +842,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        oVqMtEiNwjO4Kf7W:
           type: attack
           activation:
             type: action
@@ -898,10 +857,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -918,7 +878,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -931,20 +892,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: oVqMtEiNwjO4Kf7W
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -959,14 +932,67 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741116910167
+      systemVersion: 6.0.0
+      createdTime: 1781524547374
+      modifiedTime: 1781526241795
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!D5WjGwKskeUT8HXa.gaxofmkFqQG1zqK9'
+  - _id: MILINX3ZpI3X83IE
+    name: Keen Smell
+    type: feat
+    img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on Wisdom
+          (Perception) checks that rely on smell.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: keen-smell
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: UIqfXYMLB6oOsW3Z
+    sort: -100000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.oQvORD924obyPdCc.Item.hwviWX3lRj9wqENj
+      duplicateSource: Item.gcfYCrt0yFVt4QF4
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781524460721
+      modifiedTime: 1781530693805
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!D5WjGwKskeUT8HXa.MILINX3ZpI3X83IE'
 effects: []
 folder: g8DmtGW2tiBpzCMk
 sort: 0
@@ -975,7 +1001,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171213778

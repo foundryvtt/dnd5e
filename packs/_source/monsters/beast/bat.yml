@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,14 +478,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 0.5
 items:
   - _id: xL1zgEf89s0xSVlW
     name: Echolocation
     type: feat
-    img: icons/magic/control/hypnosis-mesmerism-eye.webp
+    img: icons/magic/sonic/projectile-sound-rings-wave.webp
     system:
       description:
-        value: <p>The bat can't use its blindsight while deafened.</p>
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} can't use its
+          &amp;reference[blindsight] while &amp;reference[deafened
+          apply=false].</p>
         chat: ''
       source:
         custom: ''
@@ -502,16 +503,61 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
-      requirements: Bat
-      properties: []
+      requirements: ''
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
         level: null
       identifier: echolocation
-    effects: []
+    effects:
+      - name: Echolocation
+        img: icons/magic/sonic/projectile-sound-rings-wave.webp
+        origin: Compendium.dnd5e.monsters.Actor.qav2dvMIUiMQCCsy.Item.xL1zgEf89s0xSVlW
+        type: base
+        _id: sRd5qKTprNF6ciPZ
+        system:
+          changes:
+            - key: system.attributes.senses.blindsight
+              type: multiply
+              value: 1 - @statuses.deafened
+              phase: initial
+              priority: null
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You can't use your &amp;reference[blindsight] while
+          &amp;reference[deafened apply=false].</p>
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781524302115
+          modifiedTime: 1781524388932
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!qav2dvMIUiMQCCsy.xL1zgEf89s0xSVlW.sRd5qKTprNF6ciPZ
     folder: null
     sort: 0
     ownership:
@@ -520,70 +566,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.rUongiWD51ZopRk2
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781524259294
+      modifiedTime: 1781524287817
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!qav2dvMIUiMQCCsy.xL1zgEf89s0xSVlW'
-  - _id: fVUqOLxkujSbpeB7
-    name: Keen Hearing
-    type: feat
-    img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The bat has<strong> advantage </strong>on Wisdom (Perception)
-          checks that rely on hearing.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: Bat
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: keen-hearing
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!qav2dvMIUiMQCCsy.fVUqOLxkujSbpeB7'
   - _id: N05hdQhXPTOHipkJ
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Bat attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -646,7 +646,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -655,8 +655,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        tJaA6Q6mfkl2DbTK:
           type: attack
           activation:
             type: action
@@ -671,6 +670,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -691,7 +691,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -704,23 +705,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: none
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: true
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
           name: ''
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: tJaA6Q6mfkl2DbTK
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -731,22 +741,71 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741117940876
+      systemVersion: 6.0.0
+      createdTime: 1781524172824
+      modifiedTime: 1781524226643
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!qav2dvMIUiMQCCsy.N05hdQhXPTOHipkJ'
+  - _id: v8ZgPkoPpY00qBN2
+    name: Keen Hearing
+    type: feat
+    img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on Wisdom
+          (Perception) checks that rely on hearing.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: keen-hearing
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: UIqfXYMLB6oOsW3Z
+    sort: 0
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.qav2dvMIUiMQCCsy.Item.fVUqOLxkujSbpeB7
+      duplicateSource: Item.K76NNghIHWhWTY0r
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781524449367
+      modifiedTime: 1781524449367
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!qav2dvMIUiMQCCsy.v8ZgPkoPpY00qBN2'
 effects: []
 folder: g8DmtGW2tiBpzCMk
 sort: 0
@@ -755,7 +814,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171260397

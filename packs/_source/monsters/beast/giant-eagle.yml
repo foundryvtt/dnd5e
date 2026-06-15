@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,55 +478,8 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
-  - _id: qOh4l0rSZlQOEhyc
-    name: Keen Sight
-    type: feat
-    img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The eagle has<strong> advantage </strong>on Wisdom (Perception)
-          checks that rely on sight.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: keen-sight
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!9bHoR8k5D2DKHaF3.qOh4l0rSZlQOEhyc'
   - _id: QaRbm71tWEQzR4GK
     name: Multiattack
     type: feat
@@ -537,9 +487,9 @@ items:
     system:
       description:
         value: >-
-          <p>The eagle makes two attacks: one with its [[/item
-          .vyI1tbobhrYMxj76]]{beak} and one with its [[/item
-          .sh91NilUd5bUZyiG]]{talons}.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes two attacks: one with
+          its [[/item .vyI1tbobhrYMxj76]]{Beak} and one with its [[/item
+          .sh91NilUd5bUZyiG]]{Talons}.</p>
         chat: ''
       source:
         custom: ''
@@ -553,13 +503,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        IwAhGkpzyBVQlb1q:
           type: utility
           activation:
             type: action
@@ -574,15 +523,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -593,7 +543,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -610,7 +561,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: IwAhGkpzyBVQlb1q
       enchant: {}
       prerequisites:
         level: null
@@ -624,22 +583,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745273655369
+      systemVersion: 6.0.0
+      createdTime: 1781542075361
+      modifiedTime: 1781542096085
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!9bHoR8k5D2DKHaF3.QaRbm71tWEQzR4GK'
   - _id: vyI1tbobhrYMxj76
     name: Beak
     type: weapon
-    img: icons/skills/wounds/bone-broken-tooth-fang-red.webp
+    img: icons/commodities/bones/beak-hooked-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Giant Eagle attacks with its Beak.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -701,9 +662,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - fin
-      proficient: 1
+      properties: []
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -712,8 +672,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        Uj9eIClggy9D2twF:
           type: attack
           activation:
             type: action
@@ -728,10 +687,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -748,7 +708,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -761,20 +722,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: Uj9eIClggy9D2twF
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -789,22 +762,24 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741118495139
+      systemVersion: 6.0.0
+      createdTime: 1781542052547
+      modifiedTime: 1781542065836
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!9bHoR8k5D2DKHaF3.vyI1tbobhrYMxj76'
   - _id: sh91NilUd5bUZyiG
     name: Talons
     type: weapon
-    img: icons/creatures/claws/claw-scaled-red.webp
+    img: icons/commodities/claws/claw-bird-pink.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Giant Eagle attacks with its Talons.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -866,9 +841,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - fin
-      proficient: 1
+      properties: []
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -877,8 +851,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        0RSULshTJz2rUwEW:
           type: attack
           activation:
             type: action
@@ -893,10 +866,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -913,7 +887,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -926,20 +901,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 0RSULshTJz2rUwEW
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -954,14 +941,67 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741118487761
+      systemVersion: 6.0.0
+      createdTime: 1781542024502
+      modifiedTime: 1781542045166
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!9bHoR8k5D2DKHaF3.sh91NilUd5bUZyiG'
+  - _id: PveDIwR1E847SK0k
+    name: Keen Sight
+    type: feat
+    img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on Wisdom
+          (Perception) checks that rely on sight.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: keen-sight
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: UIqfXYMLB6oOsW3Z
+    sort: -200000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.AJiJW7K957aJJCN6.Item.TePImx0XTnaVC3HB
+      duplicateSource: Item.9c2KMzJlW3pdb8hy
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781542016942
+      modifiedTime: 1781542016942
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!9bHoR8k5D2DKHaF3.PveDIwR1E847SK0k'
 effects: []
 folder: g8DmtGW2tiBpzCMk
 sort: 0
@@ -970,7 +1010,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171209066

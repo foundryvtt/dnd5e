@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,14 +478,17 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 0.5
 items:
   - _id: PBYkvhJmi5ACi2MO
     name: Water Breathing
     type: feat
-    img: icons/magic/water/bubbles-air-water-blue.webp
+    img: icons/magic/water/orb-water-bubbles.webp
     system:
       description:
-        value: <p>The sea horse can breathe only underwater.</p>
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} can breathe only
+          underwater.</p>
         chat: ''
       source:
         custom: ''
@@ -502,10 +502,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -520,12 +521,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.c4Q6NDCLJSNcNc9T
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781527991380
+      modifiedTime: 1781528007612
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!FWSDiq9SZsdiBAa8.PBYkvhJmi5ACi2MO'
 effects: []
@@ -536,7 +537,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171216563

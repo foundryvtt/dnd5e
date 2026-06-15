@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,6 +478,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: QY2OI39oNi9VUuAY
     name: Rampage
@@ -489,9 +487,10 @@ items:
     system:
       description:
         value: >-
-          <p>When the hyena reduces a creature to <strong>0 hit points</strong>
-          with a melee attack on its turn, the hyena can take a bonus action to
-          move up to half its speed and make a bite attack.</p>
+          <p>When the [[lookup @name lowercase]]{monster} reduces a creature to
+          0 hit points with a melee attack on its turn, the [[lookup @name
+          lowercase]]{mosnter} can take a bonus action to move up to half its
+          speed and make a [[/item .X9XQ405Nx5lHP20E]]{Bite} attack.</p>
         chat: ''
       source:
         custom: ''
@@ -508,16 +507,16 @@ items:
         value: monster
         subtype: ''
       requirements: ''
-      properties:
-        - trait
+      properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        H1SfZj6B8IeNXZRA:
           type: utility
           activation:
             type: bonus
             value: null
-            condition: ''
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} reduces a creature to
+              0 hit points with a melee attack on its turn.
             override: false
           consumption:
             targets: []
@@ -527,15 +526,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -546,10 +546,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
-              type: ''
+              type: self
               choice: false
               special: ''
             prompt: true
@@ -563,7 +564,19 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: H1SfZj6B8IeNXZRA
+          name: Rush Prey
       enchant: {}
       prerequisites:
         level: null
@@ -577,22 +590,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.BnuDkgCOeGvAoYhy
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741121174035
+      systemVersion: 6.0.0
+      createdTime: 1781536117649
+      modifiedTime: 1781536161469
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!aAqfEHPiVbhMwZ6j.QY2OI39oNi9VUuAY'
   - _id: X9XQ405Nx5lHP20E
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Giant Hyena attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -655,7 +670,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -664,8 +679,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        aSegSLpzcFAOPn0k:
           type: attack
           activation:
             type: action
@@ -680,10 +694,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -700,7 +715,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -713,20 +729,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: aSegSLpzcFAOPn0k
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -741,11 +769,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741121184241
+      systemVersion: 6.0.0
+      createdTime: 1781536066582
+      modifiedTime: 1781536081862
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!aAqfEHPiVbhMwZ6j.X9XQ405Nx5lHP20E'
@@ -757,7 +785,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171240373

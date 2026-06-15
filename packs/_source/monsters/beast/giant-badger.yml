@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,55 +478,8 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
-  - _id: MdbJir3UFvpFs2Zq
-    name: Keen Smell
-    type: feat
-    img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The badger has<strong> advantage </strong>on Wisdom (Perception)
-          checks that rely on smell.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: keen-smell
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!cJGY1ZywUOo6heNR.MdbJir3UFvpFs2Zq'
   - _id: 1lGtRKKScQMq9K3R
     name: Multiattack
     type: feat
@@ -537,9 +487,9 @@ items:
     system:
       description:
         value: >-
-          <p>The badger makes two attacks: one with its [[/item
-          .NTUVjYVsAjweAj1R]]{bite} and one with its [[/item
-          .BToZtvd0HCyQvoXC]]{claws}.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes two attacks: one with
+          its [[/item .NTUVjYVsAjweAj1R]]{Bite} and one with its [[/item
+          .BToZtvd0HCyQvoXC]]{Claws}.</p>
         chat: ''
       source:
         custom: ''
@@ -553,13 +503,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        MIIZ8hRKDRJmQQFz:
           type: utility
           activation:
             type: action
@@ -574,15 +523,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -593,7 +543,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -610,7 +561,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 200000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: MIIZ8hRKDRJmQQFz
       enchant: {}
       prerequisites:
         level: null
@@ -624,22 +583,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745273656557
+      systemVersion: 6.0.0
+      createdTime: 1781532576704
+      modifiedTime: 1781532605051
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!cJGY1ZywUOo6heNR.1lGtRKKScQMq9K3R'
   - _id: NTUVjYVsAjweAj1R
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Giant Badger attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -702,7 +663,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -711,8 +672,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        5sIEQMJUOHi0U2yV:
           type: attack
           activation:
             type: action
@@ -727,10 +687,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -747,7 +708,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -760,20 +722,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 5sIEQMJUOHi0U2yV
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -788,22 +762,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741118026489
+      systemVersion: 6.0.0
+      createdTime: 1781532625616
+      modifiedTime: 1781532646996
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!cJGY1ZywUOo6heNR.NTUVjYVsAjweAj1R'
   - _id: BToZtvd0HCyQvoXC
     name: Claws
     type: weapon
-    img: icons/skills/melee/strike-slashes-red.webp
+    img: icons/commodities/claws/claw-bear-brown.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Giant Badger attacks with its Claws.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -866,7 +842,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -875,8 +851,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        hl4yrjwBynXySDdb:
           type: attack
           activation:
             type: action
@@ -891,10 +866,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -911,7 +887,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -924,20 +901,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: hl4yrjwBynXySDdb
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -952,14 +941,67 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741118035349
+      systemVersion: 6.0.0
+      createdTime: 1781532654305
+      modifiedTime: 1781532678755
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!cJGY1ZywUOo6heNR.BToZtvd0HCyQvoXC'
+  - _id: JO9Fm0oqPHkeF3mZ
+    name: Keen Smell
+    type: feat
+    img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on Wisdom
+          (Perception) checks that rely on smell.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: keen-smell
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: UIqfXYMLB6oOsW3Z
+    sort: -100000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.oQvORD924obyPdCc.Item.hwviWX3lRj9wqENj
+      duplicateSource: Item.gcfYCrt0yFVt4QF4
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781532570976
+      modifiedTime: 1781532570976
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!cJGY1ZywUOo6heNR.JO9Fm0oqPHkeF3mZ'
 effects: []
 folder: g8DmtGW2tiBpzCMk
 sort: 0
@@ -968,7 +1010,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171243284

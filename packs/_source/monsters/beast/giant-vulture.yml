@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,105 +478,8 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
-  - _id: AB0XlPm529Z5WEyY
-    name: Keen Sight and Smell
-    type: feat
-    img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The vulture has<strong> advantage </strong>on Wisdom (Perception)
-          checks that rely on sight or smell.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: keen-sight-and-smell
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!4ZlUHt4xmB7GdPfk.AB0XlPm529Z5WEyY'
-  - _id: m4B7gGdnTcIHeRpH
-    name: Pack Tactics
-    type: feat
-    img: icons/creatures/abilities/paw-print-orange.webp
-    system:
-      description:
-        value: >-
-          <p>The vulture has<strong> advantage </strong>on an attack roll
-          against a creature if at least one of the vulture's allies is within
-          <strong>5 ft.</strong> of the creature and the ally isn't
-          incapacitated.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: pack-tactics
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.V1lW1vnrTpVTDr6o
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!4ZlUHt4xmB7GdPfk.m4B7gGdnTcIHeRpH'
   - _id: 5kigRXx2FSlzVUWm
     name: Multiattack
     type: feat
@@ -587,9 +487,9 @@ items:
     system:
       description:
         value: >-
-          <p>The vulture makes two attacks: one with its [[/item
-          .t6TG4rgkOXBefYZQ]]{beak} and one with its [[/item
-          .AXKWmB2ZU1hebo5S]]{talons}.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes two attacks: one with
+          its [[/item .t6TG4rgkOXBefYZQ]]{Beak} and one with its [[/item
+          .AXKWmB2ZU1hebo5S]]{Talons}.</p>
         chat: ''
       source:
         custom: ''
@@ -603,13 +503,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        m8uofyDeH0W7nIy4:
           type: utility
           activation:
             type: action
@@ -624,15 +523,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -643,7 +543,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -660,7 +561,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: m8uofyDeH0W7nIy4
       enchant: {}
       prerequisites:
         level: null
@@ -674,22 +583,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745273655061
+      systemVersion: 6.0.0
+      createdTime: 1781543323707
+      modifiedTime: 1781543339168
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!4ZlUHt4xmB7GdPfk.5kigRXx2FSlzVUWm'
   - _id: t6TG4rgkOXBefYZQ
     name: Beak
     type: weapon
-    img: icons/skills/wounds/bone-broken-tooth-fang-red.webp
+    img: icons/commodities/bones/beak-hooked-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Giant Vulture attacks with its Beak.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -751,9 +662,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - fin
-      proficient: 1
+      properties: []
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -762,8 +672,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        mWBeRGlImJoySOrs:
           type: attack
           activation:
             type: action
@@ -778,10 +687,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -798,7 +708,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -811,20 +722,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: mWBeRGlImJoySOrs
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -839,22 +762,24 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741121839561
+      systemVersion: 6.0.0
+      createdTime: 1781543265858
+      modifiedTime: 1781543282876
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!4ZlUHt4xmB7GdPfk.t6TG4rgkOXBefYZQ'
   - _id: AXKWmB2ZU1hebo5S
     name: Talons
     type: weapon
-    img: icons/creatures/claws/claw-scaled-red.webp
+    img: icons/commodities/claws/claw-bird-pink.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Giant Vulture attacks with its Talons.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -916,9 +841,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - fin
-      proficient: 1
+      properties: []
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -927,8 +851,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        bNps14bwzbRigzbt:
           type: attack
           activation:
             type: action
@@ -943,10 +866,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -963,7 +887,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -976,20 +901,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: bNps14bwzbRigzbt
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -1004,14 +941,122 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741121847737
+      systemVersion: 6.0.0
+      createdTime: 1781543297943
+      modifiedTime: 1781543312463
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!4ZlUHt4xmB7GdPfk.AXKWmB2ZU1hebo5S'
+  - _id: Pr5zVAoP8aOlP9Km
+    name: Keen Sight and Smell
+    type: feat
+    img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on Wisdom
+          (Perception) checks that rely on sight or smell.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: keen-sight-and-smell
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: UIqfXYMLB6oOsW3Z
+    sort: -231250
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.fkJ8Z8zi2JtlcHh9.Item.oFwDpNHu44o0BRx1
+      duplicateSource: Item.oeu4vF2vO7B6y6Ln
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781543254647
+      modifiedTime: 1781543254647
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!4ZlUHt4xmB7GdPfk.Pr5zVAoP8aOlP9Km'
+  - _id: 01lZFom0RUWOtUMF
+    name: Pack Tactics
+    type: feat
+    img: icons/creatures/abilities/paw-print-orange.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on an attack
+          roll against a creature if at least one of the [[lookup @name
+          lowercase]]{monster}'s allies is within 5 feet of the creature and the
+          ally isn't &amp;reference[incapacitated apply=false].</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: pack-tactics
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: UIqfXYMLB6oOsW3Z
+    sort: 100000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.JW8bXggOMBx1S6tF.Item.yb6o6KfKlg9bGhqA
+      duplicateSource: Item.bYY0d7kkeVIYaNof
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781543260652
+      modifiedTime: 1781543260652
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!4ZlUHt4xmB7GdPfk.01lZFom0RUWOtUMF'
 effects: []
 folder: g8DmtGW2tiBpzCMk
 sort: 0
@@ -1020,7 +1065,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171201989
