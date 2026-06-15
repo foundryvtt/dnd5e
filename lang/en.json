@@ -92,6 +92,7 @@
 
 "DND5E.ABILITY": {
   "Configure": {
+    "AttackLabel": "{ability} Attack",
     "CheckLabel": "{ability} Check",
     "SaveLabel": "{ability} Save",
     "Title": "Configure {ability}"
@@ -138,7 +139,7 @@
   "SECTIONS": {
     "Bonuses": {
       "Label": "{ability} Bonuses",
-      "Hint": "These bonuses apply to checks & saves made with {ability}."
+      "Hint": "These bonuses apply to attacks, checks, and saves made with {ability}."
     },
     "Global": {
       "Label": "Global Bonuses",

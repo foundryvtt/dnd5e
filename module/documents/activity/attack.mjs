@@ -117,9 +117,14 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
     }
 
     const rollData = this.getRollData({ roll: { ability: rollConfig.ability, attackMode: rollConfig.attackMode } });
-    const { advantage, disadvantage } = this.actor ? D20RollModificationField.combineFields(this.actor.system, [
+    const rollFields = [
+      ...(rollConfig.ability ? [`abilities.${rollConfig.ability}.attack.roll`] : []),
       "rolls.attack", `rolls.attack.${this.getActionType(rollConfig.attackMode)}`
-    ], { rules: { category: "attack", actor: this.actor, item: this.item, rollData } }) : {};
+    ];
+    const { advantage, disadvantage, maximum, minimum } = this.actor
+      ? D20RollModificationField.combineFields(this.actor.system, rollFields, {
+        rules: { category: "attack", actor: this.actor, item: this.item, rollData }
+      }) : {};
 
     rollConfig.hookNames = [...(config.hookNames ?? []), "attack", "d20Test"];
     rollConfig.rolls = [CONFIG.Dice.D20Roll.mergeConfigs({
@@ -128,7 +133,9 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
         ammunition: rollConfig.ammunition,
         attackMode: rollConfig.attackMode,
         criticalSuccess: this.criticalThreshold,
-        mastery: rollConfig.mastery
+        mastery: rollConfig.mastery,
+        maximum,
+        minimum
       }
     }, config.rolls?.shift())].concat(config.rolls ?? []);
     rollConfig.subject = this;
@@ -253,13 +260,21 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
     const attackMode = formData?.get("attackMode") ?? process.attackMode;
     const mastery = formData?.get("mastery") ?? process.mastery;
 
+    process.ability = ability;
     let { parts, data } = this.getAttackData({ ability, ammunition, attackMode });
-    const { maximum, minimum } = this.actor ? D20RollModificationField.combineFields(this.actor.system, [
+    const rollFields = [
+      ...(ability ? [`abilities.${ability}.attack.roll`] : []),
       "rolls.attack", `rolls.attack.${this.getActionType(attackMode)}`
-    ], { rules: { category: "attack", actor: this.actor, item: this.item, rollData: data } }) : {};
+    ];
+    const { advantage, disadvantage, maximum, minimum } = this.actor
+      ? D20RollModificationField.combineFields(this.actor.system, rollFields, {
+        rules: { category: "attack", actor: this.actor, item: this.item, rollData: data }
+      }) : {};
     const options = CONFIG.Dice.D20Roll.mergeOptions({
       elvenAccuracy: this.actor?.getFlag("dnd5e", "elvenAccuracy")
         && CONFIG.DND5E.characterFlags.elvenAccuracy.abilities.includes(ability),
+      advantage,
+      disadvantage,
       maximum,
       minimum
     }, config.options);

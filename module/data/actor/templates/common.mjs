@@ -44,7 +44,15 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
           required: true, integer: true, nullable: true, min: 0, initial: null, label: "DND5E.AbilityScoreMax",
           labelFormatter: "DND5E.ABILITY.Formatter.Maximum"
         }),
-        bonuses: new SchemaField({}, { label: "DND5E.AbilityBonuses", persisted: false }),
+        bonuses: new SchemaField({
+          attack: new FormulaField({
+            required: true, label: "DND5E.BonusAttack", labelFormatter: "DND5E.ABILITY.Formatter.Attack.Bonus"
+          })
+        }, { label: "DND5E.AbilityBonuses" }),
+        attack: new RollConfigField({ ability: false }, {
+          labelPrefix: "DND5E.ABILITY.FIELDS.abilities.element.attack.roll.",
+          labelFormatterPrefix: "DND5E.ABILITY.Formatter.Attack."
+        }),
         check: new RollConfigField({ ability: false }, {
           labelPrefix: "DND5E.ABILITY.FIELDS.abilities.element.check.roll.",
           labelFormatterPrefix: "DND5E.ABILITY.Formatter.Check."
@@ -274,6 +282,7 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
 
       rollData = { ...rollData };
       rollData.roll = { ability: id, proficient: abl.checkProf.multiplier >= 1, type: "ability" };
+      const attackBonusAbl = simplifyBonus(abl.bonuses?.attack, rollData);
 
       const checkBonusAbl = simplifyBonus(abl.check?.roll?.bonus, rollData);
       const checkBonusRules = simplifyBonus(
@@ -291,7 +300,7 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
 
       abl.save.value = abl.mod + abl.saveBonus;
       if ( Number.isNumeric(abl.saveProf.term) ) abl.save.value += abl.saveProf.flat;
-      abl.attack = abl.mod + prof;
+      abl.attack.value = abl.mod + prof + attackBonusAbl;
       abl.dc = 8 + abl.mod + prof + dcBonus;
 
       if ( !Number.isFinite(abl.max) ) abl.max = CONFIG.DND5E.maxAbilityScore;

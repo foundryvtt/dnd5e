@@ -290,6 +290,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
       bonus: this.attack.bonus,
       weaponMagic: weapon.magicAvailable ? weapon.magicalBonus : null,
       ammoMagic: ammo?.magicAvailable ? ammo.magicalBonus : null,
+      abilityAttackBonus: this.actor?.system.abilities?.[ability]?.bonuses?.attack,
       ruleBonus: bonus,
       situational
     }, rollData);

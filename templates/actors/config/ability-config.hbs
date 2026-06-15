@@ -21,10 +21,30 @@
         <div class="form-group">
             <p class="hint">{{ localize "DND5E.ABILITY.SECTIONS.Bonuses.Hint" ability=label }}</p>
         </div>
+        {{ formField fields.bonuses.fields.attack name=(concat prefix "bonuses.attack") value=data.bonuses.attack
+                     localize=true rootId=partId }}
         {{ formField fields.save.fields.roll.fields.bonus name=(concat prefix "save.roll.bonus")
                      value=data.save.roll.bonus localize=true rootId=partId }}
         {{ formField fields.check.fields.roll.fields.bonus name=(concat prefix "check.roll.bonus")
                      value=data.check.roll.bonus localize=true rootId=partId }}
+    </fieldset>
+
+    {{!-- Attack Rolls --}}
+    <fieldset class="card">
+        <legend>{{ localize "DND5E.ROLL.Section" label=attackLabel }}</legend>
+        <div class="form-group split-group">
+            <label>{{ localize "DND5E.ROLL.Range.Label" }}</label>
+            <div class="form-fields">
+                {{ formField fields.attack.fields.roll.fields.min name=(concat prefix "attack.roll.min")
+                             value=data.attack.roll.min placeholder="1" type="number" localize=true
+                             label=(localize "DND5E.Minimum") hint=false classes="label-top" rootId=partId }}
+                {{ formField fields.attack.fields.roll.fields.max name=(concat prefix "attack.roll.max")
+                             value=data.attack.roll.max placeholder="20" type="number" localize=true
+                             label=(localize "DND5E.Maximum") hint=false classes="label-top" rootId=partId }}
+            </div>
+        </div>
+        {{ formField fields.attack.fields.roll.fields.mode name=(concat prefix "attack.roll.mode")
+                     value=data.attack.roll.mode options=advantageModeOptions localize=true rootId=partId }}
     </fieldset>
 
     {{!-- Check Rolls --}}
