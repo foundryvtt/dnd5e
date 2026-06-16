@@ -384,6 +384,25 @@ export default class PhysicalItemTemplate extends SystemDataModel {
   /* -------------------------------------------- */
 
   /**
+   * Split a stack of this item into two.
+   * @param {number} [splitQuantity=1]  Number of items to split off into a new stack.
+   * @returns {Promise}
+   */
+  split(splitQuantity=1) {
+    const remainingQuantity = this.quantity - splitQuantity;
+    if ( (splitQuantity <= 0) || (remainingQuantity <= 0) ) return;
+
+    const clone = this.parent.clone({ "system.quantity": splitQuantity }, { addSource: true });
+    const details = { documentName: "Item", parent: this.parent.actor, pack: this.parent.pack };
+    return foundry.documents.modifyBatch([
+      { action: "update", updates: [{ _id: this.parent.id, "system.quantity": remainingQuantity }], ...details },
+      { action: "create", data: [clone.toObject()], ...details }
+    ]);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Calculate the total weight and return it in specific units.
    * @param {string} units  Units in which the weight should be returned.
    * @returns {number|Promise<number>}
