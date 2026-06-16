@@ -59,17 +59,7 @@ export default class SplitStackDialog extends Dialog5e {
    * @param {FormDataExtended} formData  Data from the dialog.
    */
   static async #handleFormSubmission(event, form, formData) {
-    const doc = this.options.document;
-    const right = formData.object.right ?? 0;
-    const left = (doc.system.quantity ?? 1) - right;
-    if ( left === doc.system.quantity ) return;
-    const clone = doc.clone({ "system.quantity": right }, { addSource: true });
-    await foundry.documents.modifyBatch([
-      {
-        action: "update", documentName: "Item", updates: [{ _id: doc.id, "system.quantity": left }], parent: doc.parent
-      },
-      { action: "create", documentName: "Item", data: [clone.toObject()], parent: doc.parent }
-    ]);
+    await this.options.document.system.split(formData.object.right ?? 0);
     this.close();
   }
 }
