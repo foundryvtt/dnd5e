@@ -681,8 +681,9 @@ items:
           creature in that area must succeed on a [[/save
           activity=J4QhEMZOdsyIy2D6]] saving throw or have disadvantage on
           Strength-based attack rolls, Strength checks, and Strength saving
-          throws for 1 minute. A creature can repeat the saving throw at the end
-          of each of its turns, ending the effect on itself on a success.</p>
+          throws for [[lookup @labels.duration activity=J4QhEMZOdsyIy2D6]]. A
+          creature can repeat the saving throw at the end of each of its turns,
+          ending the effect on itself on a success.</p>
         chat: <p>The [[lookup @name]]{monster} breathes in!</p>
       source:
         custom: ''
@@ -808,6 +809,15 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>The [[lookup @name lowercase]]{monster} exhales gas in a
+              [[lookup @labels.description.template activity=J4QhEMZOdsyIy2D6]].
+              Each creature in that area must succeed on a [[/save
+              activity=J4QhEMZOdsyIy2D6]] saving throw or have disadvantage on
+              Strength-based attack rolls, Strength checks, and Strength saving
+              throws for [[lookup @labels.duration activity=J4QhEMZOdsyIy2D6]].
+              A creature can repeat the saving throw at the end of each of its
+              turns, ending the effect on itself on a success.</p>
           duration:
             concentration: false
             value: '1'
@@ -936,7 +946,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1745452319939
-      modifiedTime: 1781630351517
+      modifiedTime: 1781631543895
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!naSoHU9KbkgeNIwB.5vCVx0zwz1FKIvTX'

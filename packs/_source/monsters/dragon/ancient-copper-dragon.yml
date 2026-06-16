@@ -1130,12 +1130,13 @@ items:
           <p>Each creature of the [[lookup @name lowercase]]{monster}'s choice
           that is within [[lookup @labels.description.range
           activity=2VOmvThI0bGdUsMt]] of the dragon and aware of it must succeed
-          on a [[/save]] saving throw or become &amp;Reference[frightened] for 1
-          minute.</p><p>A creature can repeat the saving throw at the end of
-          each of its turns, ending the effect on itself on a success. If a
-          creature's saving throw is successful or the effect ends for it, the
-          creature is immune to the [[lookup @name lowercase]]{mosnter}'s
-          [[lookup @item.name]] for the next 24 hours.</p>
+          on a [[/save]] saving throw or become &amp;Reference[frightened] for
+          [[lookup @labels.duration activity=2VOmvThI0bGdUsMt]].</p><p>A
+          creature can repeat the saving throw at the end of each of its turns,
+          ending the effect on itself on a success. If a creature's saving throw
+          is successful or the effect ends for it, the creature is immune to the
+          [[lookup @name lowercase]]{mosnter}'s [[lookup @item.name]] for the
+          next 24 hours.</p>
         chat: >-
           <p>Each creature of the [[lookup @name]]{monster}'s choice that is
           within [[lookup @labels.description.range activity=2VOmvThI0bGdUsMt]]
@@ -1301,7 +1302,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781625790796
-      modifiedTime: 1781625791839
+      modifiedTime: 1781632007075
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!u0FWdplSOMTXGnN1.t7C48MOTONNfLBUV'
@@ -1327,8 +1328,9 @@ items:
           creature can't use reactions, its speed is halved, and it can't make
           more than one attack on its turn. In addition, the creature can use
           either an action or a bonus action on its turn, but not both. These
-          effects last for 1 minute. The creature can repeat the saving throw at
-          the end of each of its turns, ending the effect on itself with a
+          effects last for [[lookup @labels.duration
+          activity=CkPMajPOZWWj3gl0]]. The creature can repeat the saving throw
+          at the end of each of its turns, ending the effect on itself with a
           successful save.</p>
         chat: <p>The [[lookup @name]]{monster} breathes in!</p>
       source:
@@ -1470,9 +1472,10 @@ items:
               creature can't use reactions, its speed is halved, and it can't
               make more than one attack on its turn. In addition, the creature
               can use either an action or a bonus action on its turn, but not
-              both. These effects last for 1 minute. The creature can repeat the
-              saving throw at the end of each of its turns, ending the effect on
-              itself with a successful save.</p>
+              both. These effects last for [[lookup @labels.duration
+              activity=CkPMajPOZWWj3gl0]]. The creature can repeat the saving
+              throw at the end of each of its turns, ending the effect on itself
+              with a successful save.</p>
           duration:
             concentration: false
             value: '1'
@@ -1624,7 +1627,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781625796706
-      modifiedTime: 1781625888736
+      modifiedTime: 1781631732953
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!u0FWdplSOMTXGnN1.A9Cya4gGBfMB0WCr'

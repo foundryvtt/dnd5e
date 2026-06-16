@@ -1279,9 +1279,9 @@ items:
           @labels.description.template activity=O02zuaLvAqtmgutQ]]. Each
           creature in that area must succeed on a [[/save
           activity=O02zuaLvAqtmgutQ]] saving throw or fall
-          &amp;Reference[unconscious] for 10 minutes. This effect ends for a
-          creature if the creature takes damage or someone uses an action to
-          wake it.</p>
+          &amp;Reference[unconscious] for [[lookup @labels.duration
+          activity=O02zuaLvAqtmgutQ]]. This effect ends for a creature if the
+          creature takes damage or someone uses an action to wake it.</p>
         chat: <p>The [[lookup @name]]{monster} breathes in!</p>
       source:
         custom: ''
@@ -1419,9 +1419,10 @@ items:
               [[lookup @labels.description.template activity=O02zuaLvAqtmgutQ]].
               Each creature in that area must succeed on a [[/save
               activity=O02zuaLvAqtmgutQ]] saving throw or fall
-              &amp;Reference[unconscious] for 10 minutes. This effect ends for a
-              creature if the creature takes damage or someone uses an action to
-              wake it.</p>
+              &amp;Reference[unconscious] for [[lookup @labels.duration
+              activity=O02zuaLvAqtmgutQ]]. This effect ends for a creature if
+              the creature takes damage or someone uses an action to wake
+              it.</p>
           duration:
             concentration: false
             value: '10'
@@ -1545,7 +1546,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781621001210
-      modifiedTime: 1781622862009
+      modifiedTime: 1781631837118
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!pAuiNDr7nvpsW9nG.o8kI0IWURJx3MaqK'
@@ -1559,12 +1560,13 @@ items:
           <p>Each creature of the [[lookup @name lowercase]]{monster}'s choice
           that is within [[lookup @labels.description.range
           activity=2VOmvThI0bGdUsMt]] of the dragon and aware of it must succeed
-          on a [[/save]] saving throw or become &amp;Reference[frightened] for 1
-          minute.</p><p>A creature can repeat the saving throw at the end of
-          each of its turns, ending the effect on itself on a success. If a
-          creature's saving throw is successful or the effect ends for it, the
-          creature is immune to the [[lookup @name lowercase]]{mosnter}'s
-          [[lookup @item.name]] for the next 24 hours.</p>
+          on a [[/save]] saving throw or become &amp;Reference[frightened] for
+          [[lookup @labels.duration activity=2VOmvThI0bGdUsMt]].</p><p>A
+          creature can repeat the saving throw at the end of each of its turns,
+          ending the effect on itself on a success. If a creature's saving throw
+          is successful or the effect ends for it, the creature is immune to the
+          [[lookup @name lowercase]]{mosnter}'s [[lookup @item.name]] for the
+          next 24 hours.</p>
         chat: >-
           <p>Each creature of the [[lookup @name]]{monster}'s choice that is
           within [[lookup @labels.description.range activity=2VOmvThI0bGdUsMt]]
@@ -1730,7 +1732,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781621006439
-      modifiedTime: 1781621007537
+      modifiedTime: 1781632029623
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!pAuiNDr7nvpsW9nG.aK8gzRFcKnL7yzcH'

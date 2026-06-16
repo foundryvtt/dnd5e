@@ -766,10 +766,11 @@ items:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
-          succeed on a [[/save]] saving throw or become poisoned for 1 hour. If
-          the saving throw fails by 5 or more, the target falls unconscious for
-          the same duration, or until it takes damage or another creature uses
-          an action to shake it awake.</p>
+          succeed on a [[/save]] saving throw or become &amp;reference[poisoned]
+          for [[lookup @labels.duration activity=hcLz9GILmf8UvyVF]]. If the
+          saving throw fails by 5 or more, the target falls
+          &amp;reference[unconscious] for the same duration, or until it takes
+          damage or another creature uses an action to shake it awake.</p>
         chat: >-
           <p>The [[lookup @name]]{monster} attacks with its [[lookup
           @item.name]]. The target must make a Constitution saving throw.</p>
@@ -938,8 +939,8 @@ items:
               damage or another creature uses an action to shake it awake.</p>
           duration:
             concentration: false
-            value: ''
-            units: inst
+            value: '1'
+            units: hour
             special: ''
             override: false
           effects:
@@ -949,8 +950,10 @@ items:
                 min: null
                 max: null
             - _id: JDRYANXUoIBF9EQr
-              level: {}
               onSave: false
+              level:
+                min: null
+                max: null
           range:
             value: '5'
             units: ft
@@ -1100,7 +1103,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781551046837
-      modifiedTime: 1781551290939
+      modifiedTime: 1781632112380
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!fkCNtbvPOMd7mipF.MKFXRWP55I1bVlyD'

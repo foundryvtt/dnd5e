@@ -679,9 +679,10 @@ items:
           lowercase]]{monster} exhales paralyzing gas in a [[lookup
           @labels.description.template activity=9gMvqjbgKK42uyzr]]. Each
           creature in that area must succeed on a [[/save
-          activity=9gMvqjbgKK42uyzr]] saving throw or be paralyzed for 1 minute.
-          A creature can repeat the saving throw at the end of each of its
-          turns, ending the effect on itself on a success.</p>
+          activity=9gMvqjbgKK42uyzr]] saving throw or be paralyzed for [[lookup
+          @labels.duration activity=9gMvqjbgKK42uyzr]]. A creature can repeat
+          the saving throw at the end of each of its turns, ending the effect on
+          itself on a success.</p>
         chat: <p>The [[lookup @name]]{monster} breathes in!</p>
       source:
         custom: ''
@@ -810,9 +811,10 @@ items:
               in a [[lookup @labels.description.template
               activity=9gMvqjbgKK42uyzr]]. Each creature in that area must
               succeed on a [[/save activity=9gMvqjbgKK42uyzr]] saving throw or
-              be paralyzed for 1 minute. A creature can repeat the saving throw
-              at the end of each of its turns, ending the effect on itself on a
-              success.</p>
+              be paralyzed for [[lookup @labels.duration
+              activity=9gMvqjbgKK42uyzr]]. A creature can repeat the saving
+              throw at the end of each of its turns, ending the effect on itself
+              on a success.</p>
           duration:
             concentration: false
             value: '1'
@@ -931,7 +933,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1745452711596
-      modifiedTime: 1781560477018
+      modifiedTime: 1781631628525
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!J1QVPd8POvcPaqx4.ENcwNUKxDAqH6V9l'

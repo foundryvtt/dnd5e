@@ -683,8 +683,9 @@ items:
           creature can't use reactions, its speed is halved, and it can't make
           more than one attack on its turn. In addition, the creature can use
           either an action or a bonus action on its turn, but not both. These
-          effects last for 1 minute. The creature can repeat the saving throw at
-          the end of each of its turns, ending the effect on itself with a
+          effects last for [[lookup @labels.duration
+          activity=CkPMajPOZWWj3gl0]]. The creature can repeat the saving throw
+          at the end of each of its turns, ending the effect on itself with a
           successful save.</p>
         chat: <p>The [[lookup @name]]{monster} breathes in!</p>
       source:
@@ -817,9 +818,10 @@ items:
               creature can't use reactions, its speed is halved, and it can't
               make more than one attack on its turn. In addition, the creature
               can use either an action or a bonus action on its turn, but not
-              both. These effects last for 1 minute. The creature can repeat the
-              saving throw at the end of each of its turns, ending the effect on
-              itself with a successful save.</p>
+              both. These effects last for [[lookup @labels.duration
+              activity=CkPMajPOZWWj3gl0]]. The creature can repeat the saving
+              throw at the end of each of its turns, ending the effect on itself
+              with a successful save.</p>
           duration:
             concentration: false
             value: '1'
@@ -828,8 +830,10 @@ items:
             override: false
           effects:
             - _id: 5E6iveIba4rYeUbc
-              level: {}
               onSave: false
+              level:
+                min: null
+                max: null
           range:
             units: self
             special: ''
@@ -963,7 +967,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1745451913418
-      modifiedTime: 1781559031574
+      modifiedTime: 1781631716703
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!AyvniEKtyroOe83p.XuuhDCc4RQcZOXUL'

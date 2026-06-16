@@ -1356,12 +1356,13 @@ items:
           <p>Each creature of the [[lookup @name lowercase]]{monster}'s choice
           that is within [[lookup @labels.description.range
           activity=2VOmvThI0bGdUsMt]] of the dragon and aware of it must succeed
-          on a [[/save]] saving throw or become &amp;Reference[frightened] for 1
-          minute.</p><p>A creature can repeat the saving throw at the end of
-          each of its turns, ending the effect on itself on a success. If a
-          creature's saving throw is successful or the effect ends for it, the
-          creature is immune to the [[lookup @name lowercase]]{mosnter}'s
-          [[lookup @item.name]] for the next 24 hours.</p>
+          on a [[/save]] saving throw or become &amp;Reference[frightened] for
+          [[lookup @labels.duration activity=2VOmvThI0bGdUsMt]].</p><p>A
+          creature can repeat the saving throw at the end of each of its turns,
+          ending the effect on itself on a success. If a creature's saving throw
+          is successful or the effect ends for it, the creature is immune to the
+          [[lookup @name lowercase]]{mosnter}'s [[lookup @item.name]] for the
+          next 24 hours.</p>
         chat: >-
           <p>Each creature of the [[lookup @name]]{monster}'s choice that is
           within [[lookup @labels.description.range activity=2VOmvThI0bGdUsMt]]
@@ -1527,7 +1528,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781567037862
-      modifiedTime: 1781567699043
+      modifiedTime: 1781631889473
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!3uIursokd3KdZrW3.vln3DAK5YQJNWMty'

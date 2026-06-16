@@ -680,9 +680,9 @@ items:
           @labels.description.template activity=O02zuaLvAqtmgutQ]]. Each
           creature in that area must succeed on a [[/save
           activity=O02zuaLvAqtmgutQ]] saving throw or fall
-          &amp;Reference[unconscious] for 1 minute. This effect ends for a
-          creature if the creature takes damage or someone uses an action to
-          wake it.</p>
+          &amp;Reference[unconscious] for [[lookup @labels.duration
+          activity=O02zuaLvAqtmgutQ]]. This effect ends for a creature if the
+          creature takes damage or someone uses an action to wake it.</p>
         chat: <p>The [[lookup @name]]{monster} breathes in!</p>
       source:
         custom: ''
@@ -811,9 +811,10 @@ items:
               [[lookup @labels.description.template activity=O02zuaLvAqtmgutQ]].
               Each creature in that area must succeed on a [[/save
               activity=O02zuaLvAqtmgutQ]] saving throw or fall
-              &amp;Reference[unconscious] for 1 minute. This effect ends for a
-              creature if the creature takes damage or someone uses an action to
-              wake it.</p>
+              &amp;Reference[unconscious] for [[lookup @labels.duration
+              activity=O02zuaLvAqtmgutQ]]. This effect ends for a creature if
+              the creature takes damage or someone uses an action to wake
+              it.</p>
           duration:
             concentration: false
             value: '1'
@@ -928,7 +929,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781557850642
-      modifiedTime: 1781620840512
+      modifiedTime: 1781631823320
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!azCbLQt5LAYwTI7U.JmVLjWM4G6OOQxl4'
