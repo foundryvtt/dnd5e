@@ -10,6 +10,7 @@ import EnchantmentApplicationElement from "./enchantment-application.mjs";
 import FiligreeBoxElement from "./filigree-box.mjs";
 import FilterStateElement from "./filter-state.mjs";
 import IconElement from "./icon.mjs";
+import IdentifierInputElement from "./identifier-input.mjs";
 import InventoryElement from "./inventory.mjs";
 import ItemListControlsElement from "./item-list-controls.mjs";
 import ProficiencyCycleElement from "./proficiency-cycle.mjs";
@@ -22,6 +23,7 @@ window.customElements.define(CheckboxElement.tagName, CheckboxElement);
 window.customElements.define(DoubleRangePickerElement.tagName, DoubleRangePickerElement);
 window.customElements.define(EffectsElement.tagName, EffectsElement);
 window.customElements.define(IconElement.tagName, IconElement);
+window.customElements.define(IdentifierInputElement.tagName, IdentifierInputElement);
 window.customElements.define(InventoryElement.tagName, InventoryElement);
 window.customElements.define(EffectApplicationElement.tagName, EffectApplicationElement);
 window.customElements.define(EnchantmentApplicationElement.tagName, EnchantmentApplicationElement);
@@ -34,6 +36,6 @@ window.customElements.define(SlideToggleElement.tagName, SlideToggleElement);
 export {
   ActivitiesElement, AdoptedStyleSheetMixin, CopyableTextElement, CheckboxElement, DamageApplicationElement,
   DoubleRangePickerElement, EffectApplicationElement, EffectsElement, EnchantmentApplicationElement,
-  FiligreeBoxElement, FilterStateElement, IconElement, InventoryElement, ItemListControlsElement,
-  ProficiencyCycleElement, SlideToggleElement
+  FiligreeBoxElement, FilterStateElement, IconElement, IdentifierInputElement, InventoryElement,
+  ItemListControlsElement, ProficiencyCycleElement, SlideToggleElement
 };

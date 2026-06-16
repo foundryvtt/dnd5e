@@ -17,6 +17,12 @@
  */
 
 /**
+ * @typedef {StringFieldOptions} IdentifierFieldOptions
+ * @property {string[]} [allowType=false]  Allow identifiers that are prefixed by type (e.g. `spell:mage-hand`).
+ * @property {string[]} [types=null]       Item types that can be represented by this identifier.
+ */
+
+/**
  * @typedef {StringFieldOptions} LocalDocumentFieldOptions
  * @property {boolean} [fallback=false]  Display the string value if no matching item is found.
  */
