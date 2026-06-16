@@ -4424,6 +4424,10 @@ DND5E.advancementTypes = {
     documentClass: advancement.ItemChoiceAdvancement,
     validItemTypes: new Set(_ALL_ITEM_TYPES)
   },
+  LevelGatedItemChoice: {
+    documentClass: advancement.LevelGatedItemChoiceAdvancement,
+    validItemTypes: new Set(_ALL_ITEM_TYPES)
+  },
   ItemGrant: {
     documentClass: advancement.ItemGrantAdvancement,
     validItemTypes: new Set(_ALL_ITEM_TYPES)

@@ -1,0 +1,85 @@
+<fieldset class="card items level-gated-pool">
+    <legend>{{ localize "DND5E.ADVANCEMENT.LevelGatedItemChoice.PoolHeading" }}</legend>
+    <p class="hint">{{ localize "DND5E.ADVANCEMENT.LevelGatedItemChoice.PoolHint" }}</p>
+
+    <div class="level-gated-pool-settings">
+        <div class="form-group">
+            <label>{{ localize "DND5E.ADVANCEMENT.LevelGatedItemChoice.FIELDS.poolRole.label" }}</label>
+            <div class="form-fields">
+                <select name="configuration.poolRole" data-level-gated-pool-role>
+                    {{#each poolRoleOptions}}
+                    <option value="{{ value }}" {{#if selected}}selected{{/if}}>{{ label }}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <p class="hint">{{ localize "DND5E.ADVANCEMENT.LevelGatedItemChoice.FIELDS.poolRole.hint" }}</p>
+        </div>
+
+        <div class="form-group {{#unless isPoolParent}}level-gated-hidden{{/unless}}"
+             data-level-gated-role-field="parent">
+            <label>{{ localize "DND5E.ADVANCEMENT.LevelGatedItemChoice.FIELDS.poolId.label" }}</label>
+            <div class="form-fields">
+                <input type="text" name="configuration.poolId" value="{{ poolId }}"
+                       placeholder="eldritch-invocations">
+            </div>
+            <p class="hint">{{ localize "DND5E.ADVANCEMENT.LevelGatedItemChoice.FIELDS.poolId.hint" }}</p>
+        </div>
+
+        <div class="form-group {{#unless isPoolChild}}level-gated-hidden{{/unless}}"
+             data-level-gated-role-field="child">
+            <label>{{ localize "DND5E.ADVANCEMENT.LevelGatedItemChoice.FIELDS.parentPoolId.label" }}</label>
+            <div class="form-fields">
+                <input type="text" name="configuration.parentPoolId" value="{{ parentPoolId }}"
+                       placeholder="eldritch-invocations">
+            </div>
+            <p class="hint">{{ localize "DND5E.ADVANCEMENT.LevelGatedItemChoice.FIELDS.parentPoolId.hint" }}</p>
+        </div>
+    </div>
+
+    <div class="level-gated-grid">
+        {{#each levelSections}}
+        <details class="level-gated-section" data-level-gated-level="{{ level }}" {{#if open}}open{{/if}}>
+            <summary class="level-gated-header">
+                <span class="level-gated-title">
+                    <input type="text" class="level-gated-section-title-input"
+                           name="configuration.sectionTitles.{{ level }}" value="{{ titleValue }}"
+                           placeholder="{{ defaultLabel }}"
+                           aria-label="{{ localize 'DND5E.ADVANCEMENT.LevelGatedItemChoice.FIELDS.sectionTitles.label' }}"
+                           data-level-gated-section-title>
+                </span>
+                <span class="level-gated-header-right">
+                    <span class="level-gated-count">{{ items.length }}</span>
+                    <i class="fa-solid fa-chevron-down level-gated-toggle-icon" inert></i>
+                </span>
+            </summary>
+
+            <div class="level-gated-body">
+                <ol class="items-list unlist level-gated-items-list">
+                    {{#each items}}
+                    <li class="item flexrow draggable" draggable="true" data-index="{{ poolIndex }}"
+                        data-item-uuid="{{ data.uuid }}">
+                        <div class="item-name">
+                            {{{ dnd5e-linkForUuid data.uuid renderBroken=true }}}
+                            <input type="hidden" name="configuration.pool.{{ poolIndex }}.uuid" value="{{ data.uuid }}">
+                            <input type="hidden" name="configuration.pool.{{ poolIndex }}.minLevel" value="{{ minLevel }}">
+                        </div>
+                        <div class="item-controls flexrow">
+                            <a class="item-control item-action" data-action="deleteItem" data-tooltip
+                               aria-label="{{ localize 'DND5E.ItemDelete' }}">
+                                <i class="fas fa-trash" inert></i>
+                            </a>
+                        </div>
+                    </li>
+                    {{/each}}
+                </ol>
+
+                <p class="hint centered drop-area">{{ dropLabel }}</p>
+            </div>
+        </details>
+        {{/each}}
+    </div>
+
+    {{#if showContainerWarning}}
+    <p class="hint centered warning">{{ localize "DND5E.ADVANCEMENT.ItemGrant.Warning.Container" }}</p>
+    {{/if}}
+</fieldset>

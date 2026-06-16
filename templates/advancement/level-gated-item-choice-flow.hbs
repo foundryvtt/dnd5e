@@ -1,0 +1,85 @@
+<div class="standard-form level-gated-choice-flow">
+    {{#if (or abilities replaceable)}}
+    <fieldset>
+        <legend>{{ localize "DND5E.ADVANCEMENT.ItemChoice.Options" }}</legend>
+
+        {{#if abilities}}
+        {{ formGroup abilities.field name="ability" value=abilities.value disabled=abilities.disabled
+                     options=abilities.options rootId=partId }}
+        {{/if}}
+
+        {{#if replaceable}}
+        <div class="form-group">
+            <label for="{{ partId }}-replace">{{ localize "DND5E.ADVANCEMENT.ItemChoice.Replacement.None" }}</label>
+            <div class="form-fields">
+                <input type="radio" name="replace" value="" id="{{ partId }}-replace" {{ checked noReplacement }}>
+            </div>
+        </div>
+        {{/if}}
+    </fieldset>
+    {{/if}}
+
+    {{#each previousSections}}
+    <div class="items-section card level-gated-flow-section">
+        <div class="items-header header">
+            <h4 class="item-name">{{ header }}</h4>
+            <span class="level-gated-count">{{ items.length }}</span>
+        </div>
+        <ul class="item-list unlist">
+            {{#each items}}
+            <li class="item flexrow {{~#if replaced}} replaced{{/if}}" data-uuid="{{ uuid }}">
+                <div class="item-name flexrow" data-action="viewItem">
+                    <img class="gold-icon" src="{{ img }}" alt="{{ name }}">
+                    <div class="name-stacked">
+                        <div class="title">{{ name }}</div>
+                    </div>
+                </div>
+                {{#if (and @root.replaceable (not previouslyReplaced))}}
+                <div class="item-controls flexrow">
+                    <input type="radio" name="replace" value="{{ id }}" {{ checked replaced }}>
+                </div>
+                {{/if}}
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+    {{/each}}
+
+    {{#if currentChoiceHeader}}
+    <h4 class="level-gated-current-heading">{{ currentChoiceHeader }}</h4>
+    {{/if}}
+
+    <div class="level-gated-choice-grid">
+        {{#each choiceLevelSections}}
+        <div class="items-section card level-gated-flow-section">
+            <div class="items-header header">
+                <h4 class="item-name">{{ header }}</h4>
+                <span class="level-gated-count">{{ items.length }}</span>
+            </div>
+            <ul class="item-list unlist current-level">
+                {{#each items}}
+                <li class="item flexrow {{~#if replaced}} replaced{{/if}}" data-uuid="{{ uuid }}">
+                    <div class="item-name flexrow" data-action="viewItem">
+                        <img class="gold-icon" src="{{ img }}" alt="{{ name }}">
+                        <div class="name-stacked">
+                            <div class="title">{{ name }}</div>
+                        </div>
+                    </div>
+                    <div class="item-controls flexrow">
+                        {{#if dropped}}
+                        <button type="button" class="unbutton control-button item-control" data-action="deleteItem"
+                                data-tooltip aria-label="{{ localize 'DND5E.ItemDelete' }}">
+                            <i class="fa-solid fa-trash" inert></i>
+                        </button>
+                        <input type="hidden" name="{{ uuid }}" value="true" data-dtype="Boolean">
+                        {{else}}
+                        <dnd5e-checkbox name="{{ uuid }}" {{ checked checked }} {{ disabled disabled }}></dnd5e-checkbox>
+                        {{/if}}
+                    </div>
+                </li>
+                {{/each}}
+            </ul>
+        </div>
+        {{/each}}
+    </div>
+</div>

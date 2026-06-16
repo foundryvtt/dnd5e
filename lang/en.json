@@ -558,6 +558,53 @@
       "SpellList": "Only spells available on the {lists} spell list can be chosen for this advancement."
     }
   },
+  "LevelGatedItemChoice": {
+    "AvailableFromLevel": "Available from Level {level}+",
+    "DropHere": "Drop items here for level {level}+",
+    "Hint": "Present the player with item choices from a pool that expands as their advancement level increases.",
+    "LevelLabel": "Level {level}",
+    "Notification": {
+      "Moved": "Moved {name} to level {level}."
+    },
+    "PoolHeading": "Level-Gated Item Pool",
+    "PoolHint": "Drop items into the level where they first become available.",
+    "PoolRole": {
+      "Child": "Child Pool",
+      "Parent": "Parent Pool",
+      "Standalone": "Standalone"
+    },
+    "Title": "Choose Items by Level",
+    "FIELDS": {
+      "parentPoolId": {
+        "hint": "For a child pool, enter the parent Pool ID to merge into. Child advancements do not prompt for choices.",
+        "label": "Parent Pool ID"
+      },
+      "pool": {
+        "FIELDS": {
+          "minLevel": {
+            "label": "Minimum Level"
+          }
+        },
+        "label": "Level Gated Item Pool"
+      },
+      "poolId": {
+        "hint": "For a parent pool, enter an ID that child pools can target.",
+        "label": "Pool ID"
+      },
+      "poolRole": {
+        "hint": "Standalone pools behave independently. Parent pools can merge child pools with matching IDs.",
+        "label": "Pool Role"
+      },
+      "sectionTitles": {
+        "label": "Section Title"
+      }
+    },
+    "Warning": {
+      "DropOnLevel": "Drop the item onto one of the level sections.",
+      "InvalidSelection": "One or more selected items are not available at level {level}.",
+      "Unavailable": "{name} is not available from this advancement at level {level}."
+    }
+  },
   "ItemGrant": {
     "Details": "Grant Details",
     "DropHint": "Drop Items here to add them to the list granted by this advancement.",

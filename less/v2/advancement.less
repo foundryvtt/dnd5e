@@ -176,6 +176,164 @@
   }
 }
 
+.dnd5e2.advancement.level-gated-item-choice.sheet {
+  --grid-column-left-size: .8fr;
+  --grid-column-center-size: 1.15fr;
+  --grid-column-right-size: .55fr;
+
+  .level-gated-pool {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .level-gated-pool-settings {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 8px;
+    border: 1px solid var(--dnd5e-color-card-border);
+    border-radius: 4px;
+    background: var(--dnd5e-background-card);
+
+    .form-group { margin: 0; }
+    input, select { width: 100%; }
+  }
+
+  .level-gated-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .level-gated-section {
+    overflow: hidden;
+    border: 1px solid var(--dnd5e-color-card-border);
+    border-radius: 4px;
+    background: var(--dnd5e-background-card);
+
+    &.level-gated-drop-active {
+      border-color: var(--color-border-highlight);
+    }
+  }
+
+  .level-gated-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 6px;
+    cursor: pointer;
+    list-style: none;
+
+    &::-webkit-details-marker { display: none; }
+  }
+
+  .level-gated-title {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .level-gated-header-right {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .level-gated-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    background: var(--dnd5e-color-gold);
+    color: var(--color-text-light-primary);
+    font-size: var(--font-size-10);
+    font-weight: bold;
+  }
+
+  .level-gated-toggle-icon {
+    width: 12px;
+    text-align: center;
+    transition: transform 120ms ease;
+  }
+
+  .level-gated-section:not([open]) .level-gated-toggle-icon {
+    transform: rotate(-90deg);
+  }
+
+  .level-gated-body {
+    padding: 6px;
+    border-top: 1px solid var(--dnd5e-color-card-border);
+  }
+
+  .level-gated-items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .level-gated-section-title-input {
+    width: 100%;
+    min-height: 22px;
+    padding: 0 6px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    background: transparent;
+    font-weight: bold;
+
+    &:focus {
+      border-color: var(--color-border-highlight);
+      background: var(--color-bg-option);
+      outline: none;
+    }
+  }
+
+  .level-gated-hidden {
+    display: none !important;
+  }
+}
+
+.advancement.flow[data-type="LGICLevelGatedItemChoice"] {
+  [data-application-part="content"] { gap: 12px; }
+
+  .level-gated-choice-flow,
+  .level-gated-choice-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .level-gated-current-heading {
+    margin: 0;
+    text-align: center;
+  }
+
+  .items-header {
+    align-items: center;
+  }
+
+  .level-gated-count {
+    flex: 0 0 auto;
+    min-width: 20px;
+    text-align: center;
+  }
+
+  .item-list {
+    .item-controls {
+      flex: 0 0 50px;
+      align-items: center;
+      padding: 0;
+
+      .item-control { font-size: var(--font-size-12); }
+    }
+
+    .replaced .title {
+      text-decoration: rgb(200 0 0) line-through 2px;
+    }
+  }
+}
+
 /* ----------------------------------------- */
 /*  Grant Items Advancement                  */
 /* ----------------------------------------- */

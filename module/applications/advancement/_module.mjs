@@ -12,6 +12,8 @@ export {default as HitPointsConfig} from "./hit-points-config.mjs";
 export {default as HitPointsFlow} from "./hit-points-flow.mjs";
 export {default as ItemChoiceConfig} from "./item-choice-config.mjs";
 export {default as ItemChoiceFlow} from "./item-choice-flow.mjs";
+export {default as LevelGatedItemChoiceConfig} from "./level-gated-item-choice-config.mjs";
+export {default as LevelGatedItemChoiceFlow} from "./level-gated-item-choice-flow.mjs";
 export {default as ItemGrantConfig} from "./item-grant-config.mjs";
 export {default as ItemGrantFlow} from "./item-grant-flow.mjs";
 export {default as ItemGrantFlowV2} from "./item-grant-flow-v2.mjs";
