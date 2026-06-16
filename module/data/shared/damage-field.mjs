@@ -1,4 +1,3 @@
-import simplifyRollFormula from "../../dice/simplify-roll-formula.mjs";
 import Scaling from "../../documents/scaling.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 
@@ -77,7 +76,7 @@ export class DamageData extends foundry.abstract.DataModel {
     const number = (this.number ?? 0) + increase;
     if ( number && this.denomination ) {
       formula = `${number}d${this.denomination}${modifiers !== false
-        ? Array.from(this.modifiers).concat(modifiers ?? []).join("") : ""}`;
+        ? Array.from(this.modifiers).concat(...(modifiers ?? [])).join("") : ""}`;
     }
     if ( this.bonus ) formula = formula ? `${formula} + ${this.bonus}` : this.bonus;
     return formula ?? "";
@@ -94,7 +93,7 @@ export class DamageData extends foundry.abstract.DataModel {
   _manualFormula({ modifiers }={}) {
     if ( !this.custom.formula ) return "";
     if ( modifiers === false ) return this.custom.formula;
-    modifiers = Array.from(this.modifiers).concat(modifiers ?? []).join("");
+    modifiers = Array.from(this.modifiers).concat(...(modifiers ?? [])).join("");
     return this.custom.formula.replace(/(?:\d|\))?d(?:\d+\w*|\([^)]+\)\d*\w*)/, `$&${modifiers}`);
   }
 
