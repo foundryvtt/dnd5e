@@ -1,22 +1,12 @@
 import Dialog5e from "../api/dialog.mjs";
 
 /**
- * @type PartyRequestDialogOptions
- * @property {object}                     request
- * @property {PartyRequestCondition|null} request.condition  Callback used to determine if an actor should be included.
- * @property {Actor5e|null}               request.group      Group actor to fetch the actor list from, otherwise uses
- *                                                           the primary party if one is set or falls back to the
- *                                                           assigned characters.
- */
-
-/**
- * @callback PartyRequestCondition
- * @param {Actor5e} actor  An actor that might be able to receive the request.
- * @returns {boolean}      Should the actor be shown in the dialog?
+ * @import { PartyRequestDialogOptions } from "./_types.mjs";
  */
 
 /**
  * Dialog that allows GM to select party members to receive a roll request.
+ * @extends Dialog5e<ApplicationConfiguration & PartyRequestDialogOptions>
  */
 export default class PartyRequestDialog extends Dialog5e {
   /** @override */
@@ -61,7 +51,7 @@ export default class PartyRequestDialog extends Dialog5e {
 
   /**
    * Mapping of selected actors and their requested users.
-   * @type {Map<Actor5e, User>}
+   * @type {Map<Actor5e, User5e>}
    */
   get users() {
     return this.#users;
@@ -74,7 +64,7 @@ export default class PartyRequestDialog extends Dialog5e {
   /** @inheritDoc */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
-    const group = this.options.request.group ?? game.settings.get("dnd5e", "primaryParty")?.actor;
+    const group = this.options.request.group ?? game.actors.party;
     const allActors = group?.system.members.map(m => m.actor) ?? game.users.map(u => u.character).filter(_ => _);
     context.recipients = allActors
       .filter(actor => !this.options.request.condition || this.options.request.condition(actor))
@@ -158,7 +148,7 @@ export default class PartyRequestDialog extends Dialog5e {
     messageData = foundry.utils.mergeObject({
       system: {
         handler,
-        targets: Array.from(recipients.entries()).map(([actor, user]) => ({ actor: actor.id, user: user?.id }))
+        targets: Array.from(recipients.entries()).map(([actor, user]) => ({ actor: actor.uuid, user: user?.id }))
       },
       type: "request"
     }, messageData);
