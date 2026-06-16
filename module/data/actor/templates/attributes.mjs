@@ -6,6 +6,7 @@ import FormulaField from "../../fields/formula-field.mjs";
 import MovementField from "../../shared/movement-field.mjs";
 import RollConfigField from "../../shared/roll-config-field.mjs";
 import SensesField from "../../shared/senses-field.mjs";
+import ACFormulasField from "../fields/ac-formulas-field.mjs";
 
 const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
@@ -34,18 +35,7 @@ export default class AttributesFields {
         hint: "DND5E.ARMORCLASS.FIELDS.attributes.ac.flat.hint"
       }),
       formula: new StringField({ persisted: false }),
-      formulas: new ArrayField(new SchemaField({
-        armored: new BooleanField({
-          nullable: true, initial: null, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.formulas.element.armored.label"
-        }),
-        formula: new FormulaField({
-          deterministic: true, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.formulas.element.formula.label"
-         }),
-        label: new StringField({ label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.formulas.element.label.label" }),
-        shielded: new BooleanField({
-          nullable: true, initial: null, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.formulas.element.shielded.label"
-        })
-      })),
+      formulas: new ACFormulasField(),
       min: new FormulaField({ deterministic: true, persisted: false }),
       override: new NumberField({
         min: 0, integer: true, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.override.label",
@@ -228,8 +218,10 @@ export default class AttributesFields {
 
     // Add formulas set by old-style AEs
     if ( ac.calc === "flat" ) ac.override = ac.flat;
-    else if ( (ac.calc === "custom") && ac.formula ) ac.formulas.push({ formula: ac.formula });
-    else if ( ac.calc in CONFIG.DND5E.armorClasses ) ac.selectedFormulas.push(ac.calc);
+    else if ( (ac.calc === "custom") && ac.formula ) ac.formulas.push({
+      formula: ac.formula, label: _loc("DND5E.ARMORCLASS.Calculation.Custom")
+    });
+    else if ( ac.calc in CONFIG.DND5E.armorClasses ) ac.selectedFormulas.add(ac.calc);
 
     // Add selected formulas
     const baseFormulas = foundry.utils.iterateEntries(CONFIG.DND5E.armorClasses)
@@ -281,7 +273,7 @@ export default class AttributesFields {
       return true;
     });
 
-    for ( const [index, config] of validFormulas.entries() ) {
+    for ( const config of validFormulas ) {
       try {
         const replaced = replaceFormulaData(config.formula, rollData, {
           actor: this, missing: null, property: _loc("DND5E.ArmorClass")
