@@ -446,9 +446,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -463,7 +460,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -483,15 +480,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: x7uPzThV97uQxTun
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Silver Dragon Wyrmling attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -554,7 +554,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -563,8 +563,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        Q798hjNASV9jIVet:
           type: attack
           activation:
             type: action
@@ -579,10 +578,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -599,7 +599,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -612,24 +613,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          name: ''
+          _id: Q798hjNASV9jIVet
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -639,11 +653,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107551117
+      systemVersion: 6.0.0
+      createdTime: 1781560079754
+      modifiedTime: 1781560094172
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!J1QVPd8POvcPaqx4.x7uPzThV97uQxTun'
@@ -654,18 +668,21 @@ items:
     system:
       description:
         value: >-
-          <p>The dragon uses one of the following breath
-          weapons.</p><p><strong>Cold Breath.</strong> The dragon exhales an icy
-          blast in a 90-foot cone. Each creature in that area must make a
-          [[/save activity=U5F5qe2Hu0r0yHmk]] saving throw, taking [[/damage
-          average activity=U5F5qe2Hu0r0yHmk]] damage on a failed save, or half
-          as much damage on a successful one.</p><p><strong>Paralyzing
-          Breath.</strong> The dragon exhales paralyzing gas in a 90- foot cone.
-          Each creature in that area must succeed on a [[/save
+          <p>The [[lookup @name lowercase]]{monster} uses one of the following
+          breath weapons.</p><p><strong>Cold Breath.</strong> The [[lookup @name
+          lowercase]]{monster} exhales an icy blast in a [[lookup
+          @labels.description.template activity=9gMvqjbgKK42uyzr]]. Each
+          creature in that area must make a [[/save activity=U5F5qe2Hu0r0yHmk]]
+          saving throw, taking [[/damage average activity=U5F5qe2Hu0r0yHmk]]
+          damage on a failed save, or half as much damage on a successful
+          one.</p><p><strong>Paralyzing Breath.</strong> The [[lookup @name
+          lowercase]]{monster} exhales paralyzing gas in a [[lookup
+          @labels.description.template activity=9gMvqjbgKK42uyzr]]. Each
+          creature in that area must succeed on a [[/save
           activity=9gMvqjbgKK42uyzr]] saving throw or be paralyzed for 1 minute.
           A creature can repeat the saving throw at the end of each of its
           turns, ending the effect on itself on a success.</p>
-        chat: <p>The dragon breathes in!</p>
+        chat: <p>The [[lookup @name]]{monster} breathes in!</p>
       source:
         custom: ''
         book: ''
@@ -681,7 +698,7 @@ items:
             type: recoverAll
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
@@ -704,6 +721,13 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>The [[lookup @name lowercase]]{monster} exhales an icy blast in
+              a [[lookup @labels.description.labels activity=9gMvqjbgKK42uyzr]].
+              Each creature in that area must make a [[/save
+              activity=U5F5qe2Hu0r0yHmk]] saving throw, taking [[/damage average
+              activity=U5F5qe2Hu0r0yHmk]] damage on a failed save, or half as
+              much damage on a successful one.</p>
           duration:
             concentration: false
             value: ''
@@ -720,13 +744,13 @@ items:
               count: ''
               contiguous: false
               type: cone
-              size: '90'
+              size: '15'
               width: ''
               height: ''
               units: ft
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -750,13 +774,19 @@ items:
             ability:
               - con
             dc:
-              calculation: ''
+              calculation: con
               formula: '13'
+            bonus: ''
           sort: 0
           _id: U5F5qe2Hu0r0yHmk
           name: Cold Breath
           img: ''
           appliedEffects: []
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
         9gMvqjbgKK42uyzr:
           type: save
           activation:
@@ -775,13 +805,26 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>The [[lookup @name lowercase]]{monster} exhales paralyzing gas
+              in a [[lookup @labels.description.template
+              activity=9gMvqjbgKK42uyzr]]. Each creature in that area must
+              succeed on a [[/save activity=9gMvqjbgKK42uyzr]] saving throw or
+              be paralyzed for 1 minute. A creature can repeat the saving throw
+              at the end of each of its turns, ending the effect on itself on a
+              success.</p>
           duration:
             concentration: false
             value: '1'
             units: minute
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: yYbmtst3L1jGwwbF
+              onSave: false
+              level:
+                min: null
+                max: null
           range:
             units: self
             special: ''
@@ -791,13 +834,13 @@ items:
               count: ''
               contiguous: false
               type: cone
-              size: '90'
+              size: '15'
               width: ''
               height: ''
               units: ft
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -807,19 +850,25 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
             ability:
               - con
             dc:
-              calculation: ''
+              calculation: con
               formula: '13'
+            bonus: ''
           sort: 0
           _id: 9gMvqjbgKK42uyzr
           name: Paralyzing Breath
           img: ''
           appliedEffects: []
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
       enchant: {}
       prerequisites:
         level: null
@@ -828,24 +877,61 @@ items:
       advancement: []
       cover: null
       crewed: false
-    effects: []
+    effects:
+      - name: Paralyzing Breath
+        img: icons/magic/control/debuff-chains-shackles-movement-purple.webp
+        origin: Compendium.dnd5e.monsters.Actor.J1QVPd8POvcPaqx4.Item.ENcwNUKxDAqH6V9l
+        transfer: false
+        _id: yYbmtst3L1jGwwbF
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: minutes
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You are &amp;reference[paralyzed apply=false] for 1 minute. You can
+          repeat the saving throw at the end of each of your turns, ending the
+          effect on yourself.</p>
+        tint: '#ffffff'
+        statuses:
+          - paralyzed
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781560256483
+          modifiedTime: 1781560304663
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!J1QVPd8POvcPaqx4.ENcwNUKxDAqH6V9l.yYbmtst3L1jGwwbF
     folder: null
     sort: 600000
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 6.0.0
       createdTime: 1745452711596
-      modifiedTime: 1745452766762
+      modifiedTime: 1781560477018
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!J1QVPd8POvcPaqx4.ENcwNUKxDAqH6V9l'
@@ -857,7 +943,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171220307

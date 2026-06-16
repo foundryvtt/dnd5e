@@ -446,9 +446,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -463,7 +460,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -483,61 +480,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
-  - _id: hTsrzcY4zYsqqzPf
-    name: Amphibious
-    type: feat
-    img: icons/environment/creatures/frog-spotted-green.webp
-    system:
-      description:
-        value: <p>The dragon can breathe air and water.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: amphibious
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.4Fap14HgvAwTAZuD
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!naSoHU9KbkgeNIwB.hTsrzcY4zYsqqzPf'
   - _id: s90OWDANSrZ1ttWp
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Gold Dragon Wyrmling attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -600,7 +554,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -609,8 +563,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        prNI633DLuHXh0BE:
           type: attack
           activation:
             type: action
@@ -625,10 +578,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -645,7 +599,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -658,24 +613,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: prNI633DLuHXh0BE
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -685,11 +653,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107553339
+      systemVersion: 6.0.0
+      createdTime: 1781559077298
+      modifiedTime: 1781559221383
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!naSoHU9KbkgeNIwB.s90OWDANSrZ1ttWp'
@@ -700,19 +668,22 @@ items:
     system:
       description:
         value: >-
-          <p>The dragon uses one of the following breath
-          weapons.</p><p><strong>Fire Breath.</strong> The dragon exhales fire
-          in a 90-foot cone. Each creature in that area must make a [[/save
-          activity=o8fOmWWIqCYwGu3C]] saving throw, taking [[/damage average
-          activity=o8fOmWWIqCYwGu3C]] damage on a failed save, or half as much
-          damage on a successful one.</p><p><strong>Weakening Breath.</strong>
-          The dragon exhales gas in a 90-foot cone. Each creature in that area
-          must succeed on a [[/save activity=J4QhEMZOdsyIy2D6]] saving throw or
-          have disadvantage on Strength-based attack rolls, Strength checks, and
-          Strength saving throws for 1 minute. A creature can repeat the saving
-          throw at the end of each of its turns, ending the effect on itself on
-          a success.</p>
-        chat: <p>The dragon breathes in!</p>
+          <p>The [[lookup @name lowercase]]{monster} uses one of the following
+          breath weapons.</p><p><strong>Fire Breath.</strong> The [[lookup @name
+          lowercase]]{monster} exhales fire in a [[lookup
+          @labels.description.template activity=o8fOmWWIqCYwGu3C]]. Each
+          creature in that area must make a [[/save activity=o8fOmWWIqCYwGu3C]]
+          saving throw, taking [[/damage average activity=o8fOmWWIqCYwGu3C]]
+          damage on a failed save, or half as much damage on a successful
+          one.</p><p><strong>Weakening Breath.</strong> The [[lookup @name
+          lowercase]]{monster} exhales gas in a [[lookup
+          @labels.description.template activity=J4QhEMZOdsyIy2D6]]. Each
+          creature in that area must succeed on a [[/save
+          activity=J4QhEMZOdsyIy2D6]] saving throw or have disadvantage on
+          Strength-based attack rolls, Strength checks, and Strength saving
+          throws for 1 minute. A creature can repeat the saving throw at the end
+          of each of its turns, ending the effect on itself on a success.</p>
+        chat: <p>The [[lookup @name]]{monster} breathes in!</p>
       source:
         custom: ''
         book: ''
@@ -721,11 +692,14 @@ items:
         rules: '2014'
         revision: 1
       uses:
-        max: ''
-        recovery: []
+        max: '1'
+        recovery:
+          - period: recharge
+            formula: '5'
+            type: recoverAll
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
@@ -748,6 +722,15 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>The [[lookup @name lowercase]]{monster} exhales gas in a
+              [[lookup @labels.description.template activity=J4QhEMZOdsyIy2D6]].
+              Each creature in that area must succeed on a [[/save
+              activity=J4QhEMZOdsyIy2D6]] saving throw or have disadvantage on
+              Strength-based attack rolls, Strength checks, and Strength saving
+              throws for 1 minute. A creature can repeat the saving throw at the
+              end of each of its turns, ending the effect on itself on a
+              success.</p>
           duration:
             concentration: false
             value: ''
@@ -764,13 +747,13 @@ items:
               count: ''
               contiguous: false
               type: cone
-              size: '90'
+              size: '15'
               width: ''
               height: ''
               units: ft
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -794,13 +777,19 @@ items:
             ability:
               - dex
             dc:
-              calculation: ''
+              calculation: con
               formula: '13'
+            bonus: ''
           sort: 0
           _id: o8fOmWWIqCYwGu3C
           name: Fire Breath
           img: ''
           appliedEffects: []
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
         J4QhEMZOdsyIy2D6:
           type: save
           activation:
@@ -825,7 +814,12 @@ items:
             units: minute
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: a5q0M5lHMSOhKxFi
+              onSave: false
+              level:
+                min: null
+                max: null
           range:
             units: self
             special: ''
@@ -835,13 +829,13 @@ items:
               count: ''
               contiguous: false
               type: cone
-              size: '90'
+              size: '15'
               width: ''
               height: ''
               units: ft
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -851,19 +845,25 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
             ability:
               - str
             dc:
-              calculation: ''
+              calculation: con
               formula: '13'
+            bonus: ''
           sort: 0
           _id: J4QhEMZOdsyIy2D6
           name: Weakening Breath
           img: ''
           appliedEffects: []
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
       enchant: {}
       prerequisites:
         level: null
@@ -872,27 +872,127 @@ items:
       advancement: []
       cover: null
       crewed: false
-    effects: []
+    effects:
+      - name: Weakened
+        img: icons/magic/death/hand-withered-gray.webp
+        origin: Compendium.dnd5e.monsters.Actor.naSoHU9KbkgeNIwB.Item.5vCVx0zwz1FKIvTX
+        transfer: false
+        _id: a5q0M5lHMSOhKxFi
+        type: base
+        system:
+          changes:
+            - key: system.abilities.str.save.roll.mode
+              type: add
+              value: -1
+              phase: initial
+              priority: null
+            - key: system.abilities.str.check.roll.mode
+              type: add
+              value: -1
+              phase: initial
+              priority: null
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: minutes
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You are weakened. While weakened, you have disadavntage on
+          Strength-based attack rolls, Strength checks, and Strength saving
+          throws for 1 minute. You can repeat the saving throw at the end of
+          each of your turns, ending the effect on yourself on a success.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781559724245
+          modifiedTime: 1781559847768
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!naSoHU9KbkgeNIwB.5vCVx0zwz1FKIvTX.a5q0M5lHMSOhKxFi
     folder: null
     sort: 600000
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 6.0.0
       createdTime: 1745452319939
-      modifiedTime: 1745452376794
+      modifiedTime: 1781630351517
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!naSoHU9KbkgeNIwB.5vCVx0zwz1FKIvTX'
+  - _id: KlIuOYFx8OUMjbZU
+    name: Amphibious
+    type: feat
+    img: icons/creatures/amphibians/treefrog-underneath-teal.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} can breathe air and
+          water.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: amphibious
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: UIqfXYMLB6oOsW3Z
+    sort: 125000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.8RgUhb31VvjUNZU1.Item.ciz8wAZjqxPnu5Pe
+      duplicateSource: Item.pV30uzlB7Apma9GE
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781559068876
+      modifiedTime: 1781559068876
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!naSoHU9KbkgeNIwB.KlIuOYFx8OUMjbZU'
 effects: []
 folder: PNekSR74iAZ5dJwZ
 sort: 0
@@ -901,7 +1001,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171256525

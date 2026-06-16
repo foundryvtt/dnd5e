@@ -72,6 +72,11 @@ system:
       walk: 40
       units: ft
       hover: false
+      bonus: ''
+      ignoredDifficultTerrain:
+        - snow
+        - ice
+      special: ''
     attunement:
       max: 3
     senses:
@@ -447,9 +452,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -464,7 +466,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -484,15 +486,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: qFfEF7lLt2kH3RbA
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Young White Dragon attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -564,8 +569,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        s4JjRKyIFDyrVmAf:
           type: attack
           activation:
             type: action
@@ -580,10 +584,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: The dragon opens its wide mouth to bite its foe.
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -600,7 +605,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -613,36 +619,47 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts:
-              - number: 1
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
                 denomination: 8
                 bonus: ''
                 types:
                   - cold
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
+                  number: 1
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: s4JjRKyIFDyrVmAf
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 100000
@@ -652,22 +669,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745450474492
+      systemVersion: 6.0.0
+      createdTime: 1781561692448
+      modifiedTime: 1781561734771
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!u1UQfHutP5eEKkjM.qFfEF7lLt2kH3RbA'
   - _id: d9xXEIYNNQjIMGF8
     name: Claw
     type: weapon
-    img: icons/skills/melee/strike-slashes-red.webp
+    img: icons/creatures/claws/claw-talons-yellow-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Young White Dragon attacks with its Claw.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -730,7 +749,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -739,8 +758,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        P91sIZ6siXFHfptW:
           type: attack
           activation:
             type: action
@@ -755,10 +773,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: The dragon strikes with one of its claws.
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -775,7 +794,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -788,24 +808,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          name: ''
+          img: ''
+          flags: {}
+          visibility:
+            identifier: ''
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: P91sIZ6siXFHfptW
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: claw
+      mastery: ''
     effects: []
     folder: null
     sort: 300000
@@ -815,28 +848,192 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745450474492
+      systemVersion: 6.0.0
+      createdTime: 1781561664192
+      modifiedTime: 1781561801202
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!u1UQfHutP5eEKkjM.d9xXEIYNNQjIMGF8'
-  - _id: 78LbjdfWaZcAqVE7
-    name: Cold Breath
+  - _id: g2nJbBJ06mRtxEy0
+    name: Ice Walk
     type: feat
-    img: icons/creatures/abilities/dragon-ice-breath-blue.webp
+    img: icons/magic/water/water-iceberg-bubbles.webp
     system:
       description:
         value: >-
-          <p>The dragon exhales an icy blast in a 30-foot cone. Each creature in
-          that area must make a [[/save]] saving throw, taking [[/damage
-          average]] damage on a failed save, or half as much damage on a
-          successful one.</p>
+          <p>The [[lookup @name lowercase]]{monster} can move across and climb
+          icy surfaces without needing to make an ability check. Additionally,
+          &amp;reference[difficult terrain] composed of ice or snow doesn't cost
+          it extra movement.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: ice-walk
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.YKC7pwYkJSKn1vuw
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781561865846
+      modifiedTime: 1781561897490
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!u1UQfHutP5eEKkjM.g2nJbBJ06mRtxEy0'
+  - _id: lRFwKaRqhFY4xNhJ
+    name: Multiattack
+    type: feat
+    img: icons/skills/melee/blade-tips-triple-steel.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} makes three attacks: one
+          with its [[/item .qFfEF7lLt2kH3RbA]]{Bite} and two with its [[/item
+          .d9xXEIYNNQjIMGF8]]{Claws}.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities:
+        KkUtYb3bVzTbjjUV:
+          type: utility
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: self
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: KkUtYb3bVzTbjjUV
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: multiattack
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781561942999
+      modifiedTime: 1781561952981
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!u1UQfHutP5eEKkjM.lRFwKaRqhFY4xNhJ'
+  - _id: K38ku0AFxbQfZwXL
+    name: Cold Breath
+    type: feat
+    img: icons/magic/water/projectile-ice-orb-white.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} exhales an icy blast of
+          hail in a [[lookup @labels.description.template
+          activity=UF4fJlhyYiLM7XeM]]. Each creature in that area must make a
+          [[/save]] saving throw, taking [[/damage average]] damage on a failed
+          save, or half as much damage on a successful one.</p>
         chat: >-
-          <p>The dragon exhales an icy blast in a 30-foot cone. Each creature in
-          that area must make a <strong>Constitution</strong> saving throw.</p>
+          <p>The [[lookup @name]]{monster} exhales an icy blast of hail in a
+          [[lookup @labels.description.template activity=UF4fJlhyYiLM7XeM]].
+          Each creature in that area must make a Constitution saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -857,8 +1054,7 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        UF4fJlhyYiLM7XeM:
           type: save
           activation:
             type: action
@@ -876,7 +1072,8 @@ items:
               max: ''
             spellSlot: true
           description:
-            chatFlavor: The dragon exhales its deadly breath attack.
+            chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -897,9 +1094,10 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: false
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -922,184 +1120,51 @@ items:
                 scaling:
                   number: 1
           save:
-            ability: con
+            ability:
+              - con
             dc:
-              calculation: ''
-              formula: '15'
-          sort: 0
-          name: ''
+              calculation: con
+              formula: '12'
+            visible: true
+            bonus: ''
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: UF4fJlhyYiLM7XeM
+          name: Exhale Ice
       enchant: {}
       prerequisites:
         level: null
+        items: []
+        repeatable: false
       identifier: cold-breath
+      advancement: {}
+      crewed: false
     effects: []
     folder: null
-    sort: 400000
+    sort: 500000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.iHOaiOqwUWIfCljJ
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745450494994
+      systemVersion: 6.0.0
+      createdTime: 1781561603524
+      modifiedTime: 1781561647223
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!u1UQfHutP5eEKkjM.78LbjdfWaZcAqVE7'
-  - _id: g2nJbBJ06mRtxEy0
-    name: Ice Walk
-    type: feat
-    img: icons/magic/water/water-iceberg-bubbles.webp
-    system:
-      description:
-        value: >-
-          <p>The dragon can move across and climb icy surfaces without needing
-          to make an ability check. Additionally, difficult terrain composed of
-          ice or snow doesn't cost it extra movement.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: ice-walk
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.YKC7pwYkJSKn1vuw
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!u1UQfHutP5eEKkjM.g2nJbBJ06mRtxEy0'
-  - _id: lRFwKaRqhFY4xNhJ
-    name: Multiattack
-    type: feat
-    img: icons/skills/melee/blade-tips-triple-steel.webp
-    system:
-      description:
-        value: >-
-          <p>The dragon makes three attacks: one with its [[/item
-          .qFfEF7lLt2kH3RbA]]{bite} and two with its [[/item
-          .d9xXEIYNNQjIMGF8]]{claws}.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ''
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: multiattack
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745450475181
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!u1UQfHutP5eEKkjM.lRFwKaRqhFY4xNhJ'
+    _key: '!actors.items!u1UQfHutP5eEKkjM.K38ku0AFxbQfZwXL'
 effects: []
 folder: PNekSR74iAZ5dJwZ
 sort: 0
@@ -1108,11 +1173,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 6.0.0
   createdTime: 1726171264487
-  modifiedTime: 1745450499055
+  modifiedTime: 1781561886414
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!actors!u1UQfHutP5eEKkjM'

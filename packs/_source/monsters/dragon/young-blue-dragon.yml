@@ -447,9 +447,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -464,7 +461,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -484,15 +481,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: 42AGHJQzJZfUYxF9
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Young Blue Dragon attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -555,7 +555,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -564,8 +564,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        cYV8ujqP4bkhYX6u:
           type: attack
           activation:
             type: action
@@ -580,10 +579,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -600,7 +600,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -613,36 +614,47 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts:
-              - number: 1
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
                 denomination: 10
                 bonus: ''
                 types:
                   - lightning
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
+                  number: 1
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: cYV8ujqP4bkhYX6u
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 100000
@@ -652,22 +664,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745449293676
+      systemVersion: 6.0.0
+      createdTime: 1781562162570
+      modifiedTime: 1781562174626
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!mNijwXPMhwR7yYfc.42AGHJQzJZfUYxF9'
   - _id: YSVencwrBzRdfm62
     name: Claw
     type: weapon
-    img: icons/skills/melee/strike-slashes-red.webp
+    img: icons/creatures/claws/claw-talons-yellow-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Young Blue Dragon attacks with its Claw.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -730,7 +744,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -739,8 +753,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        bUrcp6X5enDY8LzR:
           type: attack
           activation:
             type: action
@@ -755,10 +768,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -775,7 +789,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -801,11 +816,20 @@ items:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: bUrcp6X5enDY8LzR
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: claw
+      mastery: ''
     effects: []
     folder: null
     sort: 300000
@@ -815,144 +839,14 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745449293676
+      systemVersion: 6.0.0
+      createdTime: 1781562140257
+      modifiedTime: 1781562148528
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!mNijwXPMhwR7yYfc.YSVencwrBzRdfm62'
-  - _id: 7XDStiwr5cRAODjk
-    name: Lightning Breath
-    type: feat
-    img: icons/magic/lightning/bolt-strike-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The dragon exhales lightning in an 60-foot line that is 5 feet
-          wide. Each creature in that line must make a [[/save]] saving throw,
-          taking [[/damage average]] damage on a failed save, or half as much
-          damage on a successful one.</p>
-        chat: >-
-          <p>The dragon exhales lightning in a 60-foot line that is 5 feet wide.
-          Each creature in that line must make a <strong>Dexterity</strong>
-          saving throw.</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: '1'
-        recovery:
-          - period: recharge
-            formula: '5'
-            type: recoverAll
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: save
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets:
-              - type: itemUses
-                target: ''
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: inst
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: self
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: line
-              size: '60'
-              width: ''
-              height: ''
-              units: ft
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          damage:
-            onSave: half
-            parts:
-              - number: 10
-                denomination: 10
-                bonus: ''
-                types:
-                  - lightning
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          save:
-            ability: dex
-            dc:
-              calculation: ''
-              formula: '16'
-          sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: lightning-breath
-    effects: []
-    folder: null
-    sort: 400000
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.LVnd9fq9cQj7rR0Q
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745449312945
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!mNijwXPMhwR7yYfc.7XDStiwr5cRAODjk'
   - _id: dGVHjuCt6WhGx0sX
     name: Multiattack
     type: feat
@@ -1047,7 +941,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
@@ -1055,6 +949,153 @@ items:
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!mNijwXPMhwR7yYfc.dGVHjuCt6WhGx0sX'
+  - _id: dDDGb8PVdU0irZz8
+    name: Lightning Breath
+    type: feat
+    img: icons/magic/lightning/bolt-beam-strike-blue.webp
+    system:
+      description:
+        value: >-
+          <p>The dragon exhales lightning in a [[lookup
+          @labels.description.template activity=GSQtl90Opu6WzZk4]]. Each
+          creature in that line must make a [[/save]] saving throw, taking
+          [[/damage average]] damage on a failed save, or half as much damage on
+          a successful one.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} exhales lightning in a [[lookup
+          @labels.description.template activity=GSQtl90Opu6WzZk4]]. Each
+          creature in that line must make a Dexterity saving throw.</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: '1'
+        recovery:
+          - period: recharge
+            formula: '5'
+            type: recoverAll
+        spent: 0
+      type:
+        value: ''
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities:
+        GSQtl90Opu6WzZk4:
+          type: save
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling: {}
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: self
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: line
+              size: '60'
+              width: '5'
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: ''
+              type: creature
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: half
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 10
+                denomination: 10
+                bonus: ''
+                types:
+                  - lightning
+                scaling:
+                  number: 1
+          save:
+            ability:
+              - dex
+            dc:
+              calculation: con
+              formula: '12'
+            visible: true
+            bonus: ''
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: GSQtl90Opu6WzZk4
+          name: Exhale Lightning
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: lightning-breath
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: null
+    sort: 500000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.LVnd9fq9cQj7rR0Q
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781561979470
+      modifiedTime: 1781562128743
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!mNijwXPMhwR7yYfc.dDDGb8PVdU0irZz8'
 effects: []
 folder: PNekSR74iAZ5dJwZ
 sort: 0
@@ -1063,7 +1104,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171254636

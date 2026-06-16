@@ -443,9 +443,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -460,7 +457,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -480,16 +477,17 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 0.5
 items:
   - _id: heZCHSZEeLLiweK7
     name: Keen Senses
     type: feat
-    img: icons/magic/perception/eye-ringed-glow-angry-large-teal.webp
+    img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
     system:
       description:
         value: >-
-          <p>The pseudodragon has advantage on Wisdom (Perception) checks that
-          rely on sight, hearing, or smell.</p>
+          <p>The [[lookup @name lowercase]]{monster} has advantage on Wisdom
+          (Perception) checks that rely on sight, hearing, or smell.</p>
         chat: ''
       source:
         custom: ''
@@ -503,10 +501,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -514,79 +513,31 @@ items:
       identifier: keen-senses
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.JnLN0Rz60WHXk2Fr
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745448365509
+      systemVersion: 6.0.0
+      createdTime: 1781550954040
+      modifiedTime: 1781550985682
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!fkCNtbvPOMd7mipF.heZCHSZEeLLiweK7'
-  - _id: GAzi14ICaeeOAO8J
-    name: Magic Resistance
-    type: feat
-    img: icons/magic/defensive/shield-barrier-glowing-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The pseudodragon has advantage on saving throws against spells and
-          other magical effects.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: magic-resistance
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745448371907
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!fkCNtbvPOMd7mipF.GAzi14ICaeeOAO8J'
   - _id: aIqOpP93mUsy9yD1
     name: Limited Telepathy
     type: feat
-    img: icons/magic/defensive/illusion-evasion-echo-purple.webp
+    img: icons/magic/movement/trail-streak-impact-blue.webp
     system:
       description:
         value: >-
-          <p>The pseudodragon can magically communicate simple ideas, emotions,
-          and images telepathically with any creature within 100 ft. of it that
-          can understand a language.</p>
+          <p>The [[lookup @name lowercase]]{monster} can magically communicate
+          simple ideas, emotions, and images telepathically with any creature
+          within 100 feet of it that can understand a language.</p>
         chat: ''
       source:
         custom: ''
@@ -600,10 +551,12 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -611,29 +564,31 @@ items:
       identifier: limited-telepathy
     effects: []
     folder: null
-    sort: 0
+    sort: 400000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.xna3UTd4EFLCZMt9
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745448376708
+      systemVersion: 6.0.0
+      createdTime: 1781550954041
+      modifiedTime: 1781551014082
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!fkCNtbvPOMd7mipF.aIqOpP93mUsy9yD1'
   - _id: GJgN3Qy49XCaKmTc
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Pseudodragon attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -696,7 +651,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -705,8 +660,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        004d07O7VXJAAKjj:
           type: attack
           activation:
             type: action
@@ -721,10 +675,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -741,7 +696,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -754,20 +710,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          name: ''
+          img: ''
+          flags: {}
+          visibility:
+            identifier: ''
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: 004d07O7VXJAAKjj
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -782,18 +750,18 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745448382139
+      systemVersion: 6.0.0
+      createdTime: 1781551019205
+      modifiedTime: 1781551040839
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!fkCNtbvPOMd7mipF.GJgN3Qy49XCaKmTc'
   - _id: MKFXRWP55I1bVlyD
     name: Sting
     type: weapon
-    img: icons/creatures/abilities/fang-tooth-venomous.webp
+    img: icons/creatures/abilities/stinger-poison-green.webp
     system:
       description:
         value: >-
@@ -803,8 +771,8 @@ items:
           the same duration, or until it takes damage or another creature uses
           an action to shake it awake.</p>
         chat: >-
-          <p>The Pseudodragon attacks with its Sting. The target must make a
-          <strong>Constitution</strong> saving throw.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. The target must make a Constitution saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -876,8 +844,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        EGMpcDJJR9WMrcxv:
           type: attack
           activation:
             type: action
@@ -892,10 +859,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -912,7 +880,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -938,14 +907,21 @@ items:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: EGMpcDJJR9WMrcxv
+        hcLz9GILmf8UvyVF:
           type: save
           activation:
-            type: action
+            type: special
             value: 1
-            condition: ''
+            condition: When a creature is hit by this attack.
             override: false
           consumption:
             targets: []
@@ -955,13 +931,26 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>The target must succeed on a [[/save]] saving throw or become
+              poisoned for 1 hour. If the saving throw fails by 5 or more, the
+              target falls unconscious for the same duration, or until it takes
+              damage or another creature uses an action to shake it awake.</p>
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: 6WbfnxuaqYYI3UDt
+              onSave: false
+              level:
+                min: null
+                max: null
+            - _id: JDRYANXUoIBF9EQr
+              level: {}
+              onSave: false
           range:
             value: '5'
             units: ft
@@ -975,10 +964,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -988,40 +978,185 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '11'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: hcLz9GILmf8UvyVF
+          name: Poison Save
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: sting
       mastery: ''
-    effects: []
+    effects:
+      - name: Pseudodragon Poison
+        img: icons/skills/toxins/symbol-poison-drop-skull-green.webp
+        origin: Compendium.dnd5e.monsters.Actor.fkCNtbvPOMd7mipF.Item.MKFXRWP55I1bVlyD
+        transfer: false
+        _id: 6WbfnxuaqYYI3UDt
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: hours
+          expiry: turnStart
+          expired: false
+        description: <p>You are &amp;reference[poisoned apply=false] for 1 hour.</p>
+        tint: '#ffffff'
+        statuses:
+          - poisoned
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781551192889
+          modifiedTime: 1781551305141
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!fkCNtbvPOMd7mipF.MKFXRWP55I1bVlyD.6WbfnxuaqYYI3UDt
+      - name: Potent Pseudodragon Poison
+        img: icons/skills/toxins/symbol-poison-drop-skull-green.webp
+        origin: Compendium.dnd5e.monsters.Actor.fkCNtbvPOMd7mipF.Item.MKFXRWP55I1bVlyD
+        transfer: false
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: hours
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You are &amp;reference[poisoned apply=false] for 1 hour. You are
+          also &amp;reference[unconscious apply=false] for the same duration, or
+          until you take damage or another creature uses an action to shake you
+          awake.</p>
+        tint: '#ffffff'
+        statuses:
+          - poisoned
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses:
+                - unconscious
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781551235305
+          modifiedTime: 1781551309024
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _id: JDRYANXUoIBF9EQr
+        _key: >-
+          !actors.items.effects!fkCNtbvPOMd7mipF.MKFXRWP55I1bVlyD.JDRYANXUoIBF9EQr
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745448399049
+      systemVersion: 6.0.0
+      createdTime: 1781551046837
+      modifiedTime: 1781551290939
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!fkCNtbvPOMd7mipF.MKFXRWP55I1bVlyD'
+  - _id: l942VLThscFdstX8
+    name: Magic Resistance
+    type: feat
+    img: icons/magic/defensive/barrier-shield-dome-pink.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on saving
+          throws against spells and other magical effects.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: magic-resistance
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: UIqfXYMLB6oOsW3Z
+    sort: 300000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.Hm4o2FgPZsdbXjLq.Item.Et4wxxXo9aoxv3C8
+      duplicateSource: Item.gUYGrA0WHbwQ26NK
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781550953038
+      modifiedTime: 1781550954041
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!fkCNtbvPOMd7mipF.l942VLThscFdstX8'
 effects: []
 folder: PNekSR74iAZ5dJwZ
 sort: 0
@@ -1030,7 +1165,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171246273
