@@ -56,7 +56,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /**
    * Active effect fields that should be redirected to another field, optionally with a compatibility warning.
    * Optional warning object contains options passed to `foundry.utils.logCompatibilityWarning`.
-   * @type {Record<string, { key: string, [warning]: object }>}
+   * @type {Record<string, { key: string, [type]: string, [value]: Function, [warning]: object }>}
    */
   static SHIM_FIELDS = {
     "system.attributes.movement.speed": { key: "system.attributes.movement.walk" },
@@ -327,7 +327,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       `The active effect key "${change.key}" has been deprecated and should be changed to "${shim.key}".`,
       shim.warning
     );
-    return { ...change, key: shim.key };
+    return { ...change, key: shim.key, type: shim.type ?? change.type };
   }
 
   /* -------------------------------------------- */
