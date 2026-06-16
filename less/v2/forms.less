@@ -336,10 +336,13 @@
       &.multi-select {
         position: relative;
 
-        :is(multi-select, string-tags) .tags.input-element-tags {
-          min-height: 16px;
-          padding-left: 40%;
-          &:empty { display: flex; }
+        :is(multi-select, string-tags) {
+          &:has(.input-element-tags:empty) { margin-block-start: 8px; }
+          .tags.input-element-tags {
+            min-height: 16px;
+            padding-left: 40%;
+            &:empty { display: flex; }
+          }
         }
 
         > label {
@@ -538,6 +541,8 @@
   }
 
   :is(document-tags, multi-select, string-tags) {
+    input { --input-background-color: transparent; }
+
     .tags.input-element-tags .tag {
       cursor: var(--cursor-pointer);
       font-size: var(--font-size-10);
@@ -559,7 +564,7 @@
     &.hidden-tags .tags.input-element-tags { display: none; }
   }
 
-  :is(file-picker, document-tags) > button {
+  :is(file-picker, document-tags, string-tags) > button {
     height: var(--form-field-height);
     border: var(--dnd5e-border-gold);
   }
@@ -745,7 +750,7 @@
     &:not(.copy-button, .unbutton, .reveal) { line-height: 28px; }
   }
 
-  :is(document-tags, multi-select) .tags.input-element-tags .tag {
+  :is(document-tags, multi-select, string-tags) .tags.input-element-tags .tag {
     padding: 1px 4px;
     color: var(--color-text-primary);
     height: unset;

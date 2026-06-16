@@ -280,13 +280,9 @@ export default class BaseAttackActivityData extends BaseActivityData {
 
   /* -------------------------------------------- */
 
-  /**
-   * Get the roll parts used to create the damage rolls.
-   * @param {Partial<AttackDamageRollProcessConfiguration>} [config={}]
-   * @returns {AttackDamageRollProcessConfiguration}
-   */
-  getDamageConfig(config={}) {
-    const rollConfig = super.getDamageConfig(config);
+  /** @override */
+  getDamageConfig(config={}, options={}) {
+    const rollConfig = super.getDamageConfig(config, options);
 
     // Handle ammunition
     const ammo = config.ammunition?.system;
@@ -310,14 +306,18 @@ export default class BaseAttackActivityData extends BaseActivityData {
         // If mode is "replace" and base part is present, replace the base part
         if ( ammo.damage.replace & (basePartIndex !== -1) ) {
           damage.base = true;
-          rollConfig.rolls.splice(basePartIndex, 1, this._processDamagePart(damage, config, rollData, basePartIndex));
+          rollConfig.rolls.splice(
+            basePartIndex, 1,
+            this._processDamagePart(damage, config, rollData, basePartIndex, options.formulaOptions)
+          );
         }
 
         // Otherwise stick the ammo damage after base part (or as first part)
         else {
           damage.ammo = true;
           rollConfig.rolls.splice(
-            basePartIndex + 1, 0, this._processDamagePart(damage, rollConfig, rollData, basePartIndex + 1)
+            basePartIndex + 1, 0,
+            this._processDamagePart(damage, rollConfig, rollData, basePartIndex + 1, options.formulaOptions)
           );
         }
       }
@@ -368,8 +368,8 @@ export default class BaseAttackActivityData extends BaseActivityData {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _processDamagePart(damage, rollConfig, rollData, index=0) {
-    if ( !damage.base ) return super._processDamagePart(damage, rollConfig, rollData, index);
+  _processDamagePart(damage, rollConfig, rollData, index=0, options={}) {
+    if ( !damage.base ) return super._processDamagePart(damage, rollConfig, rollData, index, options);
 
     // Swap base damage for versatile if two-handed attack is made on versatile weapon
     if ( this.item.system.isVersatile && (rollConfig.attackMode === "twoHanded") ) {
@@ -381,7 +381,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
       damage = versatile;
     }
 
-    const roll = super._processDamagePart(damage, rollConfig, rollData, index);
+    const roll = super._processDamagePart(damage, rollConfig, rollData, index, options);
     roll.base = true;
 
     if ( this.item.type === "weapon" ) {
