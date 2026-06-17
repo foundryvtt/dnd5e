@@ -281,7 +281,7 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
 
     // Type restriction is set and the item type does not match the selected type
     if ( type && (type !== item.type) ) {
-      type = _loc(CONFIG.Item.typeLabels[restriction.type]);
+      type = _loc(CONFIG.Item.typeLabels[type]);
       return handleError("DND5E.ADVANCEMENT.ItemChoice.Warning.InvalidType", { type });
     }
 
