@@ -53,7 +53,7 @@ export default class ItemChoiceConfig extends ItemSharedConfig {
       index: fromUuidSync(data.uuid)
     })).sort((lhs, rhs) => context.manualSort
       ? lhs.data.sort - rhs.data.sort
-      : lhs.index.name.localeCompare(rhs.index.name));
+      : lhs.index?.name.localeCompare(rhs.index?.name));
 
     context.abilityOptions = Object.entries(CONFIG.DND5E.abilities).map(([value, { label }]) => ({ value, label }));
     context.choices = context.levels.reduce((obj, { value, label }) => {
