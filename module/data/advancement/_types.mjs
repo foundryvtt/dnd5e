@@ -42,7 +42,7 @@
  * @property {Set<string>} restriction.list                   Spell lists from which a spell must be selected.
  * @property {string} restriction.subtype                     Item sub-type allowed.
  * @property {string} restriction.type                        Specific item type allowed.
- * @property {string} sorting                                 Sorting mode for the item list.
+ * @property {"a"|"m"} sorting                                Sorting mode for the item list.
  * @property {AdvancementSpellConfigurationData} spell        Mutations applied to spell items.
  * @property {string} type                                    Type of item allowed, if it should be restricted.
  */
@@ -79,7 +79,7 @@
  * @typedef ItemGrantAdvancementConfigurationData
  * @property {ItemGrantItemConfiguration[]} items       Data for the items to be granted.
  * @property {boolean} optional                         Should user be able to de-select any individual option?
- * @property {string} sorting                           Sorting mode for the item list.
+ * @property {"a"|"m"} sorting                          Sorting mode for the item list.
  * @property {AdvancementSpellConfigurationData} spell  Data used to modify any granted spells.
  */
 

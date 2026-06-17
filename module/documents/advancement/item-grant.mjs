@@ -57,6 +57,7 @@ export default class ItemGrantAdvancement extends Advancement {
     // Link to compendium items
     if ( !this.value.added || configMode ) return this.configuration.items
       .map(i => [i, fromUuidSync(i.uuid)])
+      .filter(([, _]) => _)
       .sort((lhs, rhs) => this.configuration.sorting === "m"
         ? lhs[0].sort - rhs[0].sort
         : lhs[1].name.localeCompare(rhs[1].name))

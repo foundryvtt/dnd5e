@@ -135,4 +135,13 @@ export default class ItemChoiceConfig extends ItemSharedConfig {
 
     return configuration;
   }
+
+  /* -------------------------------------------- */
+  /*  Drag & Drop                                 */
+  /* -------------------------------------------- */
+
+  /** @override */
+  _validateDroppedItem(event, item) {
+    this.advancement._validateItemType(item, { type: false });
+  }
 }
