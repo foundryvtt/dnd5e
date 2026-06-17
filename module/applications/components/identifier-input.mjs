@@ -129,7 +129,7 @@ export default class IdentifierInputElement extends foundry.applications.element
       else typeRegistry.options.forEach(o => addOption(o.value, o.label));
     }
     select.append(document.createElement("hr"));
-    addOption(IdentifierInputElement.CUSTOM, game.i18n.localize("DND5E.IdentifierCustom"));
+    addOption(IdentifierInputElement.CUSTOM, _loc("DND5E.IdentifierCustom"));
 
     return [input, select];
   }

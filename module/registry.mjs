@@ -208,7 +208,7 @@ class ItemRegistry {
   get label() {
     let key = CONFIG.Item.typeLabels[this.#itemType];
     if ( game.i18n.has(`${key}Pl`) ) key = `${key}Pl`;
-    return game.i18n.localize(key);
+    return _loc(key);
   }
 
   /* -------------------------------------------- */
