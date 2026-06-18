@@ -382,7 +382,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
       },
       group: "action"
     }, {
-      label: "DND5E.ConcentrationBreak",
+      label: "DND5E.CONCENTRATION.Action.Break",
       icon: '<dnd5e-icon src="systems/dnd5e/icons/svg/break-concentration.svg"></dnd5e-icon>',
       group: "state",
       visible: () => this.actor?.concentration?.items.has(item),

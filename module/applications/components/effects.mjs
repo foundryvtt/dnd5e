@@ -241,7 +241,7 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
         onClick: (_, target) => this._onAction(target, "toggle")
       },
       {
-        label: "DND5E.ConcentrationBreak",
+        label: "DND5E.CONCENTRATION.Action.Break",
         icon: '<dnd5e-icon src="systems/dnd5e/icons/svg/break-concentration.svg"></dnd5e-icon>',
         group: "state",
         visible: () => isConcentrationEffect,

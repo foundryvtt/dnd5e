@@ -1384,7 +1384,7 @@ export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemNa
 
   // Abilities.
   else if ( attr.startsWith("abilities.") || attr.startsWith("attributes.ac.clamped.") ) {
-    const [key, ...keyPath] = attr.split(".").slice(attr.statsWith("abilities.") ? 1 : 3);
+    const [key, ...keyPath] = attr.split(".").slice(attr.startsWith("abilities.") ? 1 : 3);
     const mapping = dnd5e.dataModels.actor.CharacterData.schema.getField("abilities");
     label = mapping.getFieldLabel(key, keyPath.toReversed());
   }
@@ -1395,8 +1395,8 @@ export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemNa
     label = CONFIG.DND5E.senses[key]?.label;
   }
   // Senses
-  else if ( attr.startsWith("attributes.senses.ranges.") ) label = CONFIG.DND5E.senses[attr.split(".")[3]];
-  else if ( attr.startsWith("attributes.senses.") ) label = CONFIG.DND5E.senses[attr.split(".")[2]];
+  else if ( attr.startsWith("attributes.senses.ranges.") ) label = CONFIG.DND5E.senses[attr.split(".")[3]]?.label;
+  else if ( attr.startsWith("attributes.senses.") ) label = CONFIG.DND5E.senses[attr.split(".")[2]]?.label;
 
   // Resources
   else if ( attr === "resources.legact.spent" ) label = "DND5E.LegendaryAction.LabelPl";
@@ -1447,7 +1447,7 @@ export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemNa
   if ( !label ) label = getUnknownLabel(attr, { actor, item });
 
   if ( label ) {
-    label = _loc(label);
+    label = _loc(String(label));
     _attributeLabelCache[type].set(attr, label);
     if ( name ) label = `${name} ${label}`;
   }

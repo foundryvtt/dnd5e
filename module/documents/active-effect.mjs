@@ -653,7 +653,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   async _preDelete(options, user) {
     const dependents = this.getDependents();
     if ( dependents.length && !game.users.activeGM ) {
-      ui.notifications.warn("DND5E.ConcentrationBreakWarning");
+      ui.notifications.warn("DND5E.CONCENTRATION.Warning.BreakWithoutGM");
       return false;
     }
     return super._preDelete(options, user);
@@ -695,7 +695,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     const effectData = foundry.utils.mergeObject({
       ...statusEffect,
       name: `${_loc("EFFECT.DND5E.StatusConcentrating")}: ${item.name}`,
-      description: `<p>${_loc("DND5E.ConcentratingOn", {
+      description: `<p>${_loc("DND5E.CONCENTRATION.Description", {
         name: item.name,
         type: _loc(`TYPES.Item.${item.type}`)
       })}</p><hr><p>@Embed[${item.uuid} inline]</p>`,
@@ -873,12 +873,12 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     }
     const choices = effects.reduce((acc, effect) => {
       const data = effect.getFlag("dnd5e", "item");
-      acc[effect.id] = data?.name ?? actor.items.get(data?.id)?.name ?? _loc("DND5E.ConcentratingItemless");
+      acc[effect.id] = data?.name ?? actor.items.get(data?.id)?.name ?? _loc("DND5E.CONCENTRATION.NoSource");
       return acc;
     }, {});
     const options = HandlebarsHelpers.selectOptions(choices, { hash: { sort: true } });
     const content = `
-    <p>${_loc("DND5E.ConcentratingEndChoice")}</p>
+    <p>${_loc("DND5E.CONCENTRATION.EndChoice")}</p>
     <div class="form-group">
       <label>${_loc("DND5E.SOURCE.FIELDS.source.label")}</label>
       <div class="form-fields">

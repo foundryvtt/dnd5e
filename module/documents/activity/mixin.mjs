@@ -636,13 +636,13 @@ export default function ActivityMixin(Base) {
         if ( config.concentration.end ) {
           const replacedEffect = effects.find(i => i.id === config.concentration.end);
           if ( !replacedEffect ) errors.push(
-            new ConsumptionError(_loc("DND5E.ConcentratingMissingItem"))
+            new ConsumptionError(_loc("DND5E.CONCENTRATION.Warning.MissingItem"))
           );
         }
 
         // Cannot begin more concentrations than the limit
         else if ( effects.size >= this.actor.system.attributes?.concentration?.limit ) errors.push(
-          new ConsumptionError(_loc("DND5E.ConcentratingLimited"))
+          new ConsumptionError(_loc("DND5E.CONCENTRATION.Limit.Reached"))
         );
       }
 

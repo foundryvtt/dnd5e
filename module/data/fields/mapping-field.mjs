@@ -105,6 +105,6 @@ export default class MappingField extends foundry.data.fields.TypedObjectField {
     if ( !field ) return;
     const name = this.entryLabel?.(key);
     if ( !field.options.labelFormatter || !name ) return field.label;
-    return game.i18n.format(field.options.labelFormatter, { name });
+    return _loc(field.options.labelFormatter, { name });
   }
 }
