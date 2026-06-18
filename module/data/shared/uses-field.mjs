@@ -49,7 +49,7 @@ export default class UsesField extends SchemaField {
     for ( const recovery of this.uses.recovery ) {
       recovery.isScaleValue = recovery.period.startsWith("@scale");
       if ( recovery.isScaleValue ) {
-        const scaleValue = foundry.utils.getProperty(rollData, recovery.period.replace("@", ""));
+        const scaleValue = foundry.utils.getProperty(rollData, recovery.period.slice(1));
         if ( scaleValue?.period ) recovery.period = scaleValue.period;
       }
 
