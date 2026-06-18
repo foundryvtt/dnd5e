@@ -1055,7 +1055,7 @@ items:
         spent: 0
         recovery: []
       type:
-        value: class
+        value: monster
         subtype: ''
       requirements: ''
       properties:
@@ -1063,9 +1063,8 @@ items:
       activities: {}
       enchant: {}
       prerequisites:
-        level: 3
-        items:
-          - reptile-bloodline
+        level: null
+        items: []
         repeatable: false
       identifier: amphibious
       advancement: {}
@@ -1083,7 +1082,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781745533647
-      modifiedTime: 1781745533647
+      modifiedTime: 1781826569396
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!P6qC8jB3pnEH0tIE.muIprvwkxlLF6dM3'
