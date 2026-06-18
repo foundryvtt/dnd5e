@@ -458,9 +458,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -475,7 +472,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -495,16 +492,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: 8QaMc1baRrSlLFXN
     name: Barbed Hide
     type: feat
-    img: icons/skills/wounds/injury-pain-impaled-hand-blood.webp
+    img: icons/commodities/bones/teeth-pointed-gray.webp
     system:
       description:
         value: >-
-          <p>At the start of each of its turns, the barbed devil deals [[/damage
-          average]] damage to any creature grappling it.</p>
+          <p>At the start of each of its turns, the [[lookup @name
+          lowercase]]{monster} deals [[/damage average]] damage to any creature
+          &amp;reference[grappling] it.</p>
         chat: ''
       source:
         custom: ''
@@ -518,19 +517,20 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties:
         - trait
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        OaFWjyHQ90ZsI8EU:
           type: damage
           activation:
-            type: ''
+            type: turnStart
             value: null
-            condition: ''
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} starts its turn while
+              a creature is &reference[grappling] it.
             override: false
           consumption:
             targets: []
@@ -540,15 +540,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: touch
             special: ''
             override: false
           target:
@@ -559,10 +560,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -582,130 +584,44 @@ items:
                 number: 1
                 denomination: 10
                 bonus: ''
-                types: []
-          sort: 0
-          name: ''
+                types:
+                  - piercing
+                scaling:
+                  number: 1
+          sort: 100000
+          name: Grapple Damage
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: OaFWjyHQ90ZsI8EU
       enchant: {}
       prerequisites:
         level: null
       identifier: barbed-hide
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.QMGBV7OSnXqWLdhr
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747956256210
+      systemVersion: 6.0.0
+      createdTime: 1781637070230
+      modifiedTime: 1781637814938
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!sLdpiuaZF8lujJQy.8QaMc1baRrSlLFXN'
-  - _id: wPHhtm2eyM9LKpT4
-    name: Devil's Sight
-    type: feat
-    img: icons/magic/perception/eye-slit-pink.webp
-    system:
-      description:
-        value: <p>Magical darkness doesn't impede the devil's Darkvision.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: devils-sight
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!sLdpiuaZF8lujJQy.wPHhtm2eyM9LKpT4'
-  - _id: f3ItDDfd5L4WMGlf
-    name: Magic Resistance
-    type: feat
-    img: icons/magic/defensive/shield-barrier-glowing-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The devil has advantage on saving throws against spells and other
-          magical effects.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: magic-resistance
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!sLdpiuaZF8lujJQy.f3ItDDfd5L4WMGlf'
   - _id: JbDDt9MNYFyEbHsm
     name: Multiattack
     type: feat
@@ -713,9 +629,9 @@ items:
     system:
       description:
         value: >-
-          <p>The devil makes three melee attacks: one with its [[/item
-          .mlWql992zSZ6hvl6]]{tail} and two with its [[/item
-          .pya9jchjLkwMedEr]]{claws}. Alternatively, it can use [[/item
+          <p>The [[lookup @name lowercase]]{monster} makes three melee attacks:
+          one with its [[/item .mlWql992zSZ6hvl6]]{Tail} and two with its
+          [[/item .pya9jchjLkwMedEr]]{Claws}. Alternatively, it can use [[/item
           .syCZDlwGoyT1GvJv]]{Hurl Flame} twice.</p>
         chat: ''
       source:
@@ -730,13 +646,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        DDs76OVAnNDTRhNd:
           type: utility
           activation:
             type: action
@@ -751,15 +666,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -770,7 +686,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -787,7 +704,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: DDs76OVAnNDTRhNd
       enchant: {}
       prerequisites:
         level: null
@@ -801,22 +726,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745273657458
+      systemVersion: 6.0.0
+      createdTime: 1781637784867
+      modifiedTime: 1781637794000
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!sLdpiuaZF8lujJQy.JbDDt9MNYFyEbHsm'
   - _id: pya9jchjLkwMedEr
     name: Claw
     type: weapon
-    img: icons/skills/melee/strike-slashes-red.webp
+    img: icons/creatures/claws/claw-talons-glowing-purple.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Barbed Devil attacks with its Claw.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -878,10 +805,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - fin
-        - mgc
-      proficient: 1
+      properties: []
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -890,8 +815,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        96mLCHGSPTGKAPKh:
           type: attack
           activation:
             type: action
@@ -906,10 +830,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -926,7 +851,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -939,23 +865,35 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 96mLCHGSPTGKAPKh
+          name: ''
       attuned: false
       ammunition: {}
-      magicalBonus: null
+      magicalBonus: ''
       identifier: claw
       mastery: ''
     effects: []
@@ -967,22 +905,24 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.0
-      createdTime: null
-      modifiedTime: 1760378654655
+      systemVersion: 6.0.0
+      createdTime: 1781637712946
+      modifiedTime: 1781637740121
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!sLdpiuaZF8lujJQy.pya9jchjLkwMedEr'
   - _id: mlWql992zSZ6hvl6
     name: Tail
     type: weapon
-    img: icons/skills/wounds/injury-pain-impaled-hand-blood.webp
+    img: icons/creatures/abilities/tail-swipe-green.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Barbed Devil attacks with its Tail.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -1044,8 +984,7 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - mgc
+      properties: []
       proficient: 1
       unidentified:
         description: ''
@@ -1055,8 +994,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        mrhmnhWiwOepbuib:
           type: attack
           activation:
             type: action
@@ -1071,10 +1009,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1091,7 +1030,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1104,23 +1044,35 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: mrhmnhWiwOepbuib
+          name: ''
       attuned: false
       ammunition: {}
-      magicalBonus: null
+      magicalBonus: ''
       identifier: tail
       mastery: ''
     effects: []
@@ -1132,18 +1084,18 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.0
-      createdTime: null
-      modifiedTime: 1760378658660
+      systemVersion: 6.0.0
+      createdTime: 1781637266035
+      modifiedTime: 1781637762075
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!sLdpiuaZF8lujJQy.mlWql992zSZ6hvl6'
   - _id: syCZDlwGoyT1GvJv
     name: Hurl Flame
     type: weapon
-    img: icons/magic/fire/blast-jet-stream-splash.webp
+    img: icons/magic/fire/projectile-fireball-orange-yellow.webp
     system:
       description:
         value: >-
@@ -1151,9 +1103,9 @@ items:
           flammable object that isn't being worn or carried, it also catches
           fire.</p>
         chat: >-
-          <p>The Barbed Devil attacks with its Hurl Flame. If the target is a
-          flammable object that isn't being worn or carried, it also catches
-          fire.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. If the target is a flammable object that isn't being
+          worn or carried, it also catches fire.</p>
       source:
         custom: ''
         book: ''
@@ -1216,18 +1168,17 @@ items:
         dt: null
         conditions: ''
       properties:
-        - thr
-      proficient: 1
+        - mgc
+      proficient: null
       unidentified:
         description: ''
       type:
-        value: martialR
+        value: natural
         baseItem: ''
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        OYxhOrPcIbUdBQSV:
           type: attack
           activation:
             type: action
@@ -1242,6 +1193,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -1262,7 +1214,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1288,10 +1241,19 @@ items:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
           name: ''
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          _id: OYxhOrPcIbUdBQSV
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -1302,22 +1264,124 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745175668889
+      systemVersion: 6.0.0
+      createdTime: 1781637171200
+      modifiedTime: 1781637756913
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!sLdpiuaZF8lujJQy.syCZDlwGoyT1GvJv'
+  - _id: DWuLaCrJVsysrgNB
+    name: Magic Resistance
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on saving
+          throws against spells and other magical effects.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      properties:
+        - trait
+      identifier: magic-resistance
+      advancement: {}
+      crewed: false
+    flags: {}
+    img: icons/magic/defensive/barrier-shield-dome-pink.webp
+    effects: []
+    folder: null
+    sort: 400000
+    _stats:
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781637041091
+      modifiedTime: 1781637814938
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Item.Hc6MqLQhPTI1KOvm
+    _key: '!actors.items!sLdpiuaZF8lujJQy.DWuLaCrJVsysrgNB'
+  - _id: Mr0XAAdAlLKQU5on
+    name: Devil Sight
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>Magical &amp;reference[darkness] doesn't impede the [[lookup @name
+          lowercase]]{monster}'s &amp;reference[Darkvision].</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      properties:
+        - trait
+      identifier: devil-sight
+      advancement: {}
+      crewed: false
+    flags: {}
+    img: icons/creatures/eyes/lizard-single-slit-pink.webp
+    effects: []
+    folder: null
+    sort: 300000
+    _stats:
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781637813036
+      modifiedTime: 1781637814938
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Item.UjbgbOnd6ltjagZm
+    _key: '!actors.items!sLdpiuaZF8lujJQy.Mr0XAAdAlLKQU5on'
 effects: []
 folder: P1YKVDd1IN7XXWWy
 sort: 0
@@ -1326,7 +1390,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171262244

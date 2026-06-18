@@ -419,35 +419,32 @@ prototypeToken:
   randomImg: false
   alpha: 1
   light:
-    alpha: 1
+    alpha: 0.35
     angle: 360
-    bright: 0
+    bright: 10
     coloration: 1
-    dim: 0
+    dim: 20
     luminosity: 0.5
     saturation: 0
     contrast: 0
     shadows: 0
     animation:
-      speed: 5
-      intensity: 5
-      type: null
+      speed: 1
+      intensity: 1
+      type: flame
       reverse: false
     darkness:
       min: 0
       max: 1
     attenuation: 0.5
-    color: null
+    color: '#6c4714'
     negative: false
     priority: 0
   texture:
-    src: null
+    src: systems/dnd5e/tokens/fiend/Nightmare.webp
     tint: '#ffffff'
-    scaleX: 1
-    scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
+    scaleX: 1.5
+    scaleY: 1.5
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -462,7 +459,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -472,7 +469,7 @@ prototypeToken:
     colors:
       ring: null
       background: null
-    effects: 1
+    effects: 0
     subject:
       scale: 1
       texture: null
@@ -482,16 +479,17 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: ez0lp4uo2fLOc5Yf
     name: Confer Fire Resistance
     type: feat
-    img: icons/magic/fire/explosion-mushroom-nuke-orange.webp
+    img: icons/magic/fire/flame-burning-yellow-orange.webp
     system:
       description:
         value: >-
-          <p>The nightmare can grant resistance to <em>fire damage</em> to
-          anyone riding it.</p>
+          <p>The [[lookup @name lowercase]]{monster} can grant resistance to
+          <em>fire damage</em> to anyone riding it.</p>
         chat: ''
       source:
         custom: ''
@@ -505,16 +503,125 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
-      activities: {}
+      properties:
+        - trait
+      activities:
+        pqCpYgARr0z9rs8q:
+          type: utility
+          name: Grant Fire Resistance
+          img: ''
+          sort: 100000
+          activation:
+            type: special
+            override: false
+            condition: >-
+              While a creature is riding the [[lookup @name
+              lowercase]]{monster}.
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: ''
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects:
+            - _id: MNgx8MPcSucyc8VN
+              level:
+                min: null
+                max: null
+          flags: {}
+          range:
+            units: touch
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: '1'
+              type: creature
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          roll:
+            prompt: false
+            visible: false
+            formula: ''
+            name: ''
+          _id: pqCpYgARr0z9rs8q
       enchant: {}
       prerequisites:
         level: null
       identifier: confer-fire-resistance
-    effects: []
+    effects:
+      - name: Confered Fire Resistance
+        img: icons/magic/fire/flame-burning-yellow-orange.webp
+        origin: Compendium.dnd5e.monsters.Actor.5SgVGhQBswgWRwsF.Item.ez0lp4uo2fLOc5Yf
+        transfer: false
+        _id: MNgx8MPcSucyc8VN
+        type: base
+        system:
+          changes:
+            - key: system.traits.dr.value
+              type: add
+              value: fire
+              phase: initial
+              priority: null
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>The nightmare has confered resistance to fire damage to you while
+          you are riding it.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781641187853
+          modifiedTime: 1781641224891
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!5SgVGhQBswgWRwsF.ez0lp4uo2fLOc5Yf.MNgx8MPcSucyc8VN
     folder: null
     sort: 0
     ownership:
@@ -523,23 +630,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.wzgGJyVFGIcj1XAb
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781641168640
+      modifiedTime: 1781641258840
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!5SgVGhQBswgWRwsF.ez0lp4uo2fLOc5Yf'
   - _id: YXCQq6M3IGaLDz2M
     name: Illumination
     type: feat
-    img: icons/magic/light/explosion-star-glow-blue-purple.webp
+    img: icons/magic/light/explosion-glow-spiral-yellow.webp
     system:
       description:
         value: >-
-          <p>The nightmare sheds bright light in a 10-foot radius and dim light
-          for an additional 10 feet.</p>
+          <p>The [[lookup @name lowercase]]{monster} sheds &amp;reference[bright
+          light] in a 10-foot radius and &amp;reference[dim light] for an
+          additional 10 feet.</p>
         chat: ''
       source:
         custom: ''
@@ -553,10 +661,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -571,11 +680,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.F3gzBbCW7U14zkBF
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747957221726
+      systemVersion: 6.0.0
+      createdTime: 1781641272144
+      modifiedTime: 1781641295239
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!5SgVGhQBswgWRwsF.YXCQq6M3IGaLDz2M'
@@ -586,7 +695,9 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Nightmare attacks with its Hooves.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -649,7 +760,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -658,8 +769,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        qTkLLQjnpd851mxZ:
           type: attack
           activation:
             type: action
@@ -674,10 +784,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -694,7 +805,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -707,36 +819,47 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts:
-              - number: 2
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 2
                 denomination: 6
                 bonus: ''
                 types:
                   - fire
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
+                  number: 1
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: qTkLLQjnpd851mxZ
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: hooves
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -746,28 +869,27 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.re3oXQ3Xg4Z3Fr6O
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107549944
+      systemVersion: 6.0.0
+      createdTime: 1781642856400
+      modifiedTime: 1781642866377
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!5SgVGhQBswgWRwsF.lzv29dS3tAUUuVlI'
   - _id: XtK73VCT1s8abvjs
     name: Ethereal Stride
     type: feat
-    img: icons/magic/lightning/orb-ball-purple.webp
+    img: icons/creatures/magical/spirit-mischief-fire-ice-blue.webp
     system:
       description:
         value: >-
-          <p>The nightmare and up to three willing creatures within 5 feet of it
+          <p>The [[lookup @name lowercase]]{monster} and up to [[lookup
+          @labels.description.affects activity=g0q1v5S5s6ZLTZcz]] within
+          [[lookup @labels.description.range activity=g0q1v5S5s6ZLTZcz]] of it
           magically enter the Ethereal Plane from the Material Plane, or vice
           versa.</p>
-        chat: >-
-          <section class="secret"><p></p></section><p>The nightmare and up to
-          three willing creatures within 5 feet of it magically enter the
-          Ethereal Plane from the Material Plane, or vice versa.</p>
+        chat: ''
       source:
         custom: ''
         book: ''
@@ -780,13 +902,13 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        g0q1v5S5s6ZLTZcz:
           type: utility
           activation:
             type: action
@@ -801,17 +923,19 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: ft
             special: ''
             override: false
+            value: '5'
           target:
             template:
               count: ''
@@ -820,10 +944,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '3'
+              type: willing
               choice: false
               special: ''
             prompt: true
@@ -837,7 +962,19 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          _id: g0q1v5S5s6ZLTZcz
+          name: Travel Planes
       enchant: {}
       prerequisites:
         level: null
@@ -851,11 +988,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.NfTCXq8eRrqjhvAo
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747957255597
+      systemVersion: 6.0.0
+      createdTime: 1781642543927
+      modifiedTime: 1781642890124
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!5SgVGhQBswgWRwsF.XtK73VCT1s8abvjs'
@@ -867,11 +1004,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171203363
-  modifiedTime: 1726171439705
+  modifiedTime: 1781642697516
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!actors!5SgVGhQBswgWRwsF'

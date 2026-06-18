@@ -450,9 +450,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -467,7 +464,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -487,17 +484,19 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: ChSnKd7pSLoN1Jeu
     name: Limited Magic Immunity
     type: feat
-    img: icons/magic/defensive/shield-barrier-glowing-blue.webp
+    img: icons/magic/defensive/barrier-shield-dome-blue-purple.webp
     system:
       description:
         value: >-
-          <p>The rakshasa can't be affected or detected by spells of 6th level
-          or lower unless it wishes to be. It has advantage on saving throws
-          against all other spells and magical effects.</p>
+          <p>The [[lookup @name lowercase]]{monster} can't be affected or
+          detected by spells of 6th level or lower unless it wishes to be. It
+          has advantage on saving throws against all other spells and magical
+          effects.</p>
         chat: ''
       source:
         custom: ''
@@ -511,10 +510,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -529,18 +529,18 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.MBOiQSnMr02wUpEN
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747957375754
+      systemVersion: 6.0.0
+      createdTime: 1781644517340
+      modifiedTime: 1781644533159
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!qXzMsRTHEodqO8l2.ChSnKd7pSLoN1Jeu'
   - _id: NYUeQsYqRhROcVMQ
     name: Innate Spellcasting
     type: feat
-    img: icons/magic/light/projectiles-star-purple.webp
+    img: icons/magic/symbols/star-yellow.webp
     system:
       description:
         value: >-
@@ -573,10 +573,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -591,11 +592,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745447015959
+      systemVersion: 6.0.0
+      createdTime: 1781644542079
+      modifiedTime: 1781644546657
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!qXzMsRTHEodqO8l2.NYUeQsYqRhROcVMQ'
@@ -606,8 +607,8 @@ items:
     system:
       description:
         value: >-
-          <p>The rakshasa makes two [[/item .pHBLWUN5VKEjSBh6]]{claw}
-          attacks.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes two [[/item
+          .pHBLWUN5VKEjSBh6]]{Claw} attacks.</p>
         chat: ''
       source:
         custom: ''
@@ -621,13 +622,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        oVxZNPEi8kDnYP9y:
           type: utility
           activation:
             type: action
@@ -642,15 +642,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -661,7 +662,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -678,7 +680,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: oVxZNPEi8kDnYP9y
       enchant: {}
       prerequisites:
         level: null
@@ -692,27 +702,29 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745273657271
+      systemVersion: 6.0.0
+      createdTime: 1781644564080
+      modifiedTime: 1781644569214
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!qXzMsRTHEodqO8l2.18NEVoD84KHDcWoG'
   - _id: pHBLWUN5VKEjSBh6
     name: Claw
     type: weapon
-    img: icons/skills/melee/strike-slashes-red.webp
+    img: icons/creatures/claws/claw-talons-yellow-red.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]], and the target is
-          cursed if it is a creature. </p><p>The magical curse takes effect
+          cursed if it is a creature.</p><p>The magical curse takes effect
           whenever the target takes a short or long rest, filling the target's
           thoughts with horrible images and dreams. The cursed target gains no
           benefit from finishing a short or long rest. The curse lasts until it
-          is lifted by a remove curse spell or similar magic.</p>
+          is lifted by a
+          @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{Remove Curse}
+          spell or similar magic.</p>
         chat: <p>The Rakshasa attacks with its Claw.</p>
       source:
         custom: ''
@@ -776,7 +788,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -785,8 +797,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        edPztdn9nDIBu6Pc:
           type: attack
           activation:
             type: action
@@ -801,13 +812,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: YiUixfCTC5JZGAZm
+              level: {}
           range:
             value: '5'
             units: ft
@@ -821,7 +835,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -840,19 +855,76 @@ items:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: edPztdn9nDIBu6Pc
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: claw
-    effects: []
+      mastery: ''
+    effects:
+      - name: Rakshasa's Curse
+        img: icons/magic/death/skull-flames-white-blue.webp
+        origin: Compendium.dnd5e.monsters.Actor.qXzMsRTHEodqO8l2.Item.pHBLWUN5VKEjSBh6
+        transfer: false
+        _id: YiUixfCTC5JZGAZm
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You are cursed. While cursed, whenever you take a short or long
+          rest, your thoughts are filled with horrible images and dreams. You
+          gain no benefit from finishing short or long rests.</p><p>The curse
+          lasts until it is lifted by a
+          @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{Remove Curse}
+          spell or similar magic.</p>
+        tint: '#ffffff'
+        statuses:
+          - cursed
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781644637908
+          modifiedTime: 1781644731871
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!qXzMsRTHEodqO8l2.pHBLWUN5VKEjSBh6.YiUixfCTC5JZGAZm
     folder: null
     sort: 0
     ownership:
@@ -861,11 +933,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745173385709
+      systemVersion: 6.0.0
+      createdTime: 1781644576569
+      modifiedTime: 1781644637961
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!qXzMsRTHEodqO8l2.pHBLWUN5VKEjSBh6'
@@ -1005,7 +1077,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ppWAAEul0QHtm4er
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1127,7 +1199,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.A3q2gTNqG6fvNGrv
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1245,7 +1317,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.Utk1OQRwYkMkFRD3
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1371,7 +1443,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.oIzA2MEHwxhtQneU
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1499,7 +1571,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.eS7XnnApoxRxYXPs
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1624,7 +1696,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1748,7 +1820,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.1N8dDMMgZ1h1YJ3B
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1892,7 +1964,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.nslx2nT3p4lNkmdp
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2030,7 +2102,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.zMAWdyc8UVb37BK4
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2175,7 +2247,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.91Sw6vOIaO7U8DvM
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2299,7 +2371,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.yfbK8gZqESlaoY5t
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2495,7 +2567,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.J6Jpw5XzB5aTeqnz
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2618,7 +2690,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.XzkJpE6XpZfKjODD
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2634,7 +2706,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171259963

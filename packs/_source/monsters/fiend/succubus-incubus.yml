@@ -456,9 +456,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -473,7 +470,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -493,17 +490,19 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: P3P1EukfOip32dtd
     name: Telepathic Bond
     type: feat
-    img: icons/magic/control/debuff-energy-hold-levitate-pink.webp
+    img: icons/magic/movement/trail-streak-impact-blue.webp
     system:
       description:
         value: >-
-          <p>The fiend ignores the range restriction on its telepathy when
-          communicating with a creature it has charmed. The two don't even need
-          to be on the same plane of existence.</p>
+          <p>The [[lookup @name lowercase]]{monster} ignores the range
+          restriction on its telepathy when communicating with a creature it has
+          &amp;reference[charmed apply=false]. The two don't even need to be on
+          the same plane of existence.</p>
         chat: ''
       source:
         custom: ''
@@ -536,26 +535,27 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.eVKgO2130oiJqsjY
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.3.8
-      createdTime: null
-      modifiedTime: 1744058659464
+      systemVersion: 6.0.0
+      createdTime: 1781644799052
+      modifiedTime: 1781644822387
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!VmdyZDjqAc8vdncY.P3P1EukfOip32dtd'
   - _id: ZVMVqd01HraMcenH
     name: Shapechanger
     type: feat
-    img: icons/magic/control/silhouette-hold-change-blue.webp
+    img: icons/equipment/head/mask-carved-bird-grey-pink.webp
     system:
       description:
         value: >-
-          <p>The fiend can use its action to polymorph into a Small or Medium
-          humanoid, or back into its true form. Without wings, the fiend loses
-          its flying speed. Other than its size and speed, its statistics are
-          the same in each form.</p><p>Any equipment it is wearing or carrying
-          isn't transformed. It reverts to its true form if it dies.</p>
+          <p>The [[lookup @details.type.value]]{monster} can use its action to
+          polymorph into a Small or Medium humanoid, or back into its true form.
+          Without wings, the [[lookup @details.type.value]]{monster} loses its
+          flying speed. Other than its size and speed, its statistics are the
+          same in each form.</p><p>Any equipment it is wearing or carrying isn't
+          transformed. It reverts to its true form if it dies.</p>
         chat: >-
           <p>The fiend can use its action to <strong>polymorph</strong> into a
           humanoid, or back into its true form.</p>
@@ -571,94 +571,113 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties:
-        - trait
+        - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
+        3d9h1RzUjvJRdk5C:
+          type: transform
+          name: Shapeshift
+          img: ''
+          sort: 100000
           activation:
             type: action
-            value: 1
-            condition: ''
             override: false
+            condition: ''
           consumption:
-            targets: []
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets: []
           description:
+            value: ''
             chatFlavor: ''
           duration:
+            units: inst
             concentration: false
-            value: ''
-            units: ''
-            special: ''
             override: false
           effects: []
+          flags: {}
           range:
-            units: ''
-            special: ''
+            units: self
             override: false
+            special: ''
           target:
             template:
-              count: ''
               contiguous: false
+              stationary: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: ''
-              type: ''
               choice: false
-              special: ''
-            prompt: true
+              type: ''
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          profiles:
+            - cr: ''
+              name: ''
+              _id: hAZbWYsA1wVyGXVn
+              uuid: null
+              sizes:
+                - sm
+                - med
+              types:
+                - humanoid
+              movement: []
+              level:
+                min: null
+                max: null
+          settings: null
+          transform:
+            customize: false
+            mode: cr
+            preset: polymorphSelf
+          _id: 3d9h1RzUjvJRdk5C
       enchant: {}
       prerequisites:
         level: null
       identifier: shapechanger
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.VhByyxHJN7MNQJRd
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747957384472
+      systemVersion: 6.0.0
+      createdTime: 1781644867040
+      modifiedTime: 1781797982176
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!VmdyZDjqAc8vdncY.ZVMVqd01HraMcenH'
   - _id: oSlFzVMu0fdEfYt1
     name: Claw (Fiend Form Only)
     type: weapon
-    img: icons/skills/melee/strike-slashes-red.webp
+    img: icons/creatures/claws/claw-talons-yellow-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Succubus/Incubus attacks with its Claw.</p>
+        chat: >-
+          <p>The [[lookup @details.type.value]]{monster} attacks with its
+          [[lookup @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -720,9 +739,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - fin
-      proficient: 1
+      properties: []
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -731,8 +749,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        yHIsof4m2BrnwUL9:
           type: attack
           activation:
             type: action
@@ -747,6 +764,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -767,7 +785,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -787,16 +806,25 @@ items:
             flat: false
             type:
               value: ''
-              classification: weapon
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
           name: ''
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: yHIsof4m2BrnwUL9
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -807,38 +835,39 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.3.8
-      createdTime: null
-      modifiedTime: 1744058885337
+      systemVersion: 6.0.0
+      createdTime: 1781797989164
+      modifiedTime: 1781798015323
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!VmdyZDjqAc8vdncY.oSlFzVMu0fdEfYt1'
   - _id: 2bFCfFfjRNmhyE8A
     name: Charm
     type: feat
-    img: icons/magic/air/wind-tornado-spiral-pink-purple.webp
+    img: icons/magic/life/heart-shadow-red.webp
     system:
       description:
         value: >-
-          <p>One humanoid the fiend can see within 30 feet of it must make a
-          [[/save]] saving throw or be magically charmed for 1 day. The charmed
-          target obeys the fiend's verbal or telepathic commands.</p><p>If the
-          target suffers any harm or receives a suicidal command, it can repeat
-          the saving throw, ending the effect on a success. If the target
-          successfully saves against the effect, or if the effect on it ends,
-          the target is immune to this fiend's Charm for the next 24 hours.The
-          fiend can have only one target charmed at a time. If it charms
-          another, the effect on the previous target ends.</p>
+          <p>One humanoid the [[lookup @details.type.value]]{monster} can see
+          within [[lookup @labels.description.range activity=ZFCUDfqONxiB5KBa]]
+          of it must make a [[/save]] saving throw or be magically
+          &amp;reference[charmed apply=false] for [[lookup @labels.duration
+          activity=ZFCUDfqONxiB5KBa]]. The charmed target obeys the [[lookup
+          @details.type.value]]{monster}'s verbal or telepathic
+          commands.</p><p>If the target suffers any harm or receives a suicidal
+          command, it can repeat the saving throw, ending the effect on a
+          success. If the target successfully saves against the effect, or if
+          the effect on it ends, the target is immune to this [[lookup
+          @details.type.value]]{monster}'s [[lookup @item.name]] for the next 24
+          hours.The [[lookup @details.type.value]]{monster} can have only one
+          target charmed at a time. If it charms another, the effect on the
+          previous target ends.</p>
         chat: >-
           <p>One humanoid the fiend can see within 30 feet of it must make a
           <strong>Wisdom</strong> saving throw.</p>
@@ -860,8 +889,7 @@ items:
       properties:
         - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        ZFCUDfqONxiB5KBa:
           type: save
           activation:
             type: action
@@ -876,6 +904,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: '1'
@@ -884,6 +913,10 @@ items:
             override: false
           effects:
             - _id: iuVbm8rd6UWg36yg
+              onSave: false
+              level:
+                min: null
+                max: null
           range:
             value: '30'
             units: ft
@@ -897,7 +930,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: '1'
               type: creature
@@ -913,44 +947,50 @@ items:
             onSave: none
             parts: []
           save:
-            ability: wis
+            ability:
+              - wis
             dc:
               calculation: cha
               formula: '15'
-          sort: 0
-          name: ''
+            visible: true
+            bonus: ''
+          sort: 100000
+          name: Charm Target
           img: ''
-          appliedEffects:
-            - iuVbm8rd6UWg36yg
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: ZFCUDfqONxiB5KBa
       enchant: {}
       prerequisites:
         level: null
       identifier: charm
     effects:
       - name: Charmed
-        img: systems/dnd5e/icons/svg/statuses/charmed.svg
+        img: icons/magic/life/heart-shadow-red.webp
         origin: Compendium.dnd5e.monsters.Actor.VmdyZDjqAc8vdncY.Item.2bFCfFfjRNmhyE8A
         transfer: false
         _id: iuVbm8rd6UWg36yg
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: null
-          seconds: 86400
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 1
+          units: days
+          expiry: turnStart
+          expired: false
         description: >-
-          <p>The charmed target obeys the fiend's verbal or telepathic
-          commands.</p><p>If the target suffers any harm or receives a suicidal
-          command, it can repeat the saving throw, ending the effect on a
-          success. If the target successfully saves against the effect, or if
-          the effect on it ends, the target is immune to this fiend's Charm for
-          the next 24 hours.</p>
+          <p>You are &amp;reference[charmed apply=false] and obey the fiend's
+          verbal or telepathic commands.</p><p>If you suffer any harm or recieve
+          a suicidal command, you can repeat the saving throw, ending the effect
+          on a success.</p>
         tint: '#ffffff'
         statuses:
           - charmed
@@ -962,52 +1002,58 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
+          coreVersion: '14.361'
           systemId: dnd5e
           systemVersion: 4.3.8
           createdTime: 1744059005231
-          modifiedTime: 1744059080198
+          modifiedTime: 1781798535446
           lastModifiedBy: dnd5ebuilder0000
           exportSource: null
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!VmdyZDjqAc8vdncY.2bFCfFfjRNmhyE8A.iuVbm8rd6UWg36yg
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.ykoo88OJOdfYH7mH
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.3.8
-      createdTime: null
-      modifiedTime: 1744059148476
+      systemVersion: 6.0.0
+      createdTime: 1781798033178
+      modifiedTime: 1781798575854
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!VmdyZDjqAc8vdncY.2bFCfFfjRNmhyE8A'
   - _id: eb0O9cQ8N6lovLyI
     name: Draining Kiss
     type: feat
-    img: icons/magic/air/wind-vortex-swirl-purple.webp
+    img: icons/magic/death/mouth-teeth-fangs-vampire.webp
     system:
       description:
         value: >-
-          <p>The fiend kisses a creature charmed by it or a willing creature.
-          The target must make a [[/save]] saving throw against this magic,
-          taking [[/damage]] damage on a failed save, or half as much damage on
-          a successful one.</p><p>The target's hit point maximum is reduced by
-          an amount equal to the damage taken. This reduction lasts until the
-          target finishes a long rest. The target dies if this effect reduces
-          its hit point maximum to 0.</p>
+          <p>The [[lookup @details.type.value]]{monster} kisses a
+          &amp;reference[charmed apply=false] charmed by it or a willing
+          creature. The target must make a [[/save activity=hczxJO21CcoyyyO7]]
+          saving throw against this magic, taking [[/damage
+          activity=hczxJO21CcoyyyO7]] damage on a failed save, or half as much
+          damage on a successful one.</p><p>The target's hit point maximum is
+          reduced by an amount equal to the damage taken. This reduction lasts
+          until the target finishes a long rest. The target dies if this effect
+          reduces its hit point maximum to 0.</p><section
+          id="secret-o3d8RMpsTX8cJQ42" class="secret"><p><strong>Foundry
+          Note</strong></p><p>You can use the <em><strong>"Maximum Hit Point
+          Damage"</strong></em><strong> </strong>activity to input the amount of
+          damage a creature took from this attack and reduce their hit point
+          maximum by that amount.</p></section>
         chat: >-
-          <p>The target must make a <strong>Constitution</strong> saving throw
-          against this magic.</p>
+          <p>The target must make a Constitution saving throw against this
+          magic.</p>
       source:
         custom: ''
         book: ''
@@ -1022,12 +1068,11 @@ items:
       type:
         value: monster
         subtype: ''
-      requirements: Targets a charmed or willing creature
+      requirements: ''
       properties:
         - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        hczxJO21CcoyyyO7:
           type: save
           activation:
             type: action
@@ -1042,6 +1087,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -1061,7 +1107,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: '1'
               type: creature
@@ -1080,19 +1127,102 @@ items:
                   enabled: false
                   formula: ''
                 number: 5
-                denomination: '10'
+                denomination: 10
                 bonus: '@mod'
                 types:
                   - psychic
+                scaling:
+                  number: 1
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: cha
               formula: '15'
-          sort: 0
-          name: ''
+            visible: true
+            bonus: ''
+          sort: 100000
+          name: Kiss Creature
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          _id: hczxJO21CcoyyyO7
+        OIVnQaEHfNO9SoVc:
+          type: damage
+          name: Maximum Hit Point Damage
+          _id: OIVnQaEHfNO9SoVc
+          img: ''
+          sort: 200000
+          activation:
+            type: special
+            override: false
+            condition: When a creature takes damage from this feature.
+          consumption:
+            scaling:
+              allowed: true
+              max: ''
+            spellSlot: true
+            targets: []
+          description:
+            value: ''
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: touch
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: creature
+              count: '1'
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          damage:
+            critical:
+              allow: false
+            parts:
+              - custom:
+                  enabled: true
+                  formula: '@scaling'
+                number: null
+                denomination: null
+                bonus: ''
+                types:
+                  - maximum
+                scaling:
+                  mode: ''
+                  number: 1
       enchant: {}
       prerequisites:
         level: null
@@ -1102,31 +1232,27 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.iq0J225DCbHYU2hU
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.3.8
-      createdTime: null
-      modifiedTime: 1744059474380
+      systemVersion: 6.0.0
+      createdTime: 1781798588203
+      modifiedTime: 1781799145205
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!VmdyZDjqAc8vdncY.eb0O9cQ8N6lovLyI'
   - _id: s1s5asgUorljP7SV
     name: Etherealness
     type: feat
-    img: icons/magic/unholy/barrier-shield-glowing-pink.webp
+    img: icons/magic/unholy/silhouette-robe-evil-glow.webp
     system:
       description:
         value: >-
-          <p>The fiend magically enters the Ethereal Plane from the Material
-          Plane, or vice versa.</p>
+          <p>The [[lookup @details.type.value]]{monster} magically enters the
+          Ethereal Plane from the Material Plane, or vice versa.</p>
         chat: ''
       source:
         custom: ''
@@ -1146,8 +1272,7 @@ items:
       properties:
         - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        dUsf5fP5foZoaddo:
           type: utility
           activation:
             type: action
@@ -1162,14 +1287,14 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: perm
+            units: inst
             special: ''
             override: false
-          effects:
-            - _id: 1Bd78CAdilT57jFe
+          effects: []
           range:
             units: self
             special: ''
@@ -1182,10 +1307,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
-              type: self
+              type: ''
               choice: false
               special: ''
             prompt: true
@@ -1199,10 +1325,19 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
-          name: ''
+          sort: 100000
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          name: Traverse Planes
+          _id: dUsf5fP5foZoaddo
       enchant: {}
       prerequisites:
         level: null
@@ -1214,17 +1349,14 @@ items:
         transfer: true
         _id: 1Bd78CAdilT57jFe
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: true
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         statuses:
@@ -1237,32 +1369,31 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
+          coreVersion: '14.361'
           systemId: dnd5e
           systemVersion: 4.3.8
           createdTime: 1744059571494
           modifiedTime: 1744059585380
           lastModifiedBy: dnd5ebuilder0000
           exportSource: null
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!VmdyZDjqAc8vdncY.s1s5asgUorljP7SV.1Bd78CAdilT57jFe
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.rDoNJnKdY47x8MD4
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.3.8
-      createdTime: null
-      modifiedTime: 1744059571510
+      systemVersion: 6.0.0
+      createdTime: 1781799158044
+      modifiedTime: 1781799184676
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!VmdyZDjqAc8vdncY.s1s5asgUorljP7SV'
@@ -1274,7 +1405,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171236478

@@ -458,9 +458,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -475,7 +472,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -495,110 +492,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
-  - _id: xt4Cm1tg8Xfodhdt
-    name: Devil's Sight
-    type: feat
-    img: icons/magic/perception/eye-slit-pink.webp
-    system:
-      description:
-        value: <p>Magical darkness doesn't impede the devil's Darkvision.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: devils-sight
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!9ggQBmAKXraOtz7S.xt4Cm1tg8Xfodhdt'
-  - _id: u1abloZz4RhCI9rk
-    name: Magic Resistance
-    type: feat
-    img: icons/magic/defensive/shield-barrier-glowing-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The devil has advantage on saving throws against spells and other
-          magical effects.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: magic-resistance
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!9ggQBmAKXraOtz7S.u1abloZz4RhCI9rk'
   - _id: PIggvpkBTTCDGOHp
     name: Steadfast
     type: feat
-    img: icons/magic/defensive/illusion-evasion-echo-purple.webp
+    img: icons/environment/people/charge.webp
     system:
       description:
         value: >-
-          <p>The devil can't be frightened while it can see an allied creature
-          within 30 feet of it.</p>
+          <p>The [[lookup @name lowercase]]{monster} can't be
+          &amp;reference[frightened apply=false] while it can see an allied
+          creature within 30 feet of it.</p>
         chat: ''
       source:
         custom: ''
@@ -612,10 +517,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -623,38 +529,39 @@ items:
       identifier: steadfast
     effects: []
     folder: null
-    sort: 0
+    sort: 600000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.4N7S29kDROQ932pG
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747956271839
+      systemVersion: 6.0.0
+      createdTime: 1781637848584
+      modifiedTime: 1781637904167
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!9ggQBmAKXraOtz7S.PIggvpkBTTCDGOHp'
   - _id: ndwCjJFBLTujojCl
     name: Beard
     type: weapon
-    img: icons/creatures/tentacles/tentacles-thing-green.webp
+    img: icons/commodities/biological/stinger-insect-brown.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
           succeed on a [[/save]] saving throw or be &amp;Reference[poisoned] for
-          1 minute. While poisoned in this way, the target can't regain hit
-          points. The target can repeat the saving throw at the end of each of
-          its turns, ending the effect on itself on a success.</p>
-        chat: >-
-          <p>The Bearded Devil attacks with its Beard. The target must make a
-          <strong>Constitution</strong> saving throw. The target can repeat the
-          saving throw at the end of each of its turns, ending the effect on
+          [[lookup @labels.duration activity=otXVZOYTWnkMPkxs]]. While poisoned
+          in this way, the target can't regain hit points. The target can repeat
+          the saving throw at the end of each of its turns, ending the effect on
           itself on a success.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. The target must make a Constitution saving throw. The
+          target can repeat the saving throw at the end of each of its turns,
+          ending the effect on itself on a success.</p>
       source:
         custom: ''
         book: ''
@@ -717,7 +624,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -726,8 +633,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        mUG3YzXgashryiUW:
           type: attack
           activation:
             type: action
@@ -742,6 +648,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -762,7 +669,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -781,24 +689,32 @@ items:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
           name: ''
           img: ''
-          appliedEffects: []
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: mUG3YzXgashryiUW
+        otXVZOYTWnkMPkxs:
           type: save
           activation:
-            type: action
+            type: special
             value: 1
-            condition: ''
+            condition: When a creature is hit by this attack.
             override: false
           consumption:
             targets: []
@@ -808,13 +724,25 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>The target must succeed on a [[/save]] saving throw or be
+              &amp;Reference[poisoned] for [[lookup @labels.duration
+              activity=otXVZOYTWnkMPkxs]]. While poisoned in this way, the
+              target can't regain hit points. The target can repeat the saving
+              throw at the end of each of its turns, ending the effect on itself
+              on a success.</p>
           duration:
             concentration: false
-            value: ''
-            units: ''
+            value: '1'
+            units: minute
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: HUohD8uvaVqJpz1Q
+              onSave: false
+              level:
+                min: null
+                max: null
           range:
             value: '5'
             units: ft
@@ -828,7 +756,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -841,37 +770,95 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '12'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: otXVZOYTWnkMPkxs
+          name: Poison Save
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: beard
       mastery: ''
-    effects: []
+    effects:
+      - name: Bearded Devil Poison
+        img: icons/skills/toxins/symbol-poison-drop-skull-green.webp
+        origin: Compendium.dnd5e.monsters.Actor.9ggQBmAKXraOtz7S.Item.ndwCjJFBLTujojCl
+        transfer: false
+        _id: HUohD8uvaVqJpz1Q
+        type: base
+        system:
+          changes:
+            - key: system.traits.di.value
+              type: add
+              value: healing
+              phase: initial
+              priority: null
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: minutes
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You are &amp;reference[poisoned apply=false] for 1 minute. While
+          poisoned in this way, you can't regain hit points.</p><p>You can
+          repeat the saving throw at the end of each of your turnds, ending the
+          effect on yourself on a success.</p>
+        tint: '#ffffff'
+        statuses:
+          - poisoned
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781638013026
+          modifiedTime: 1781638122396
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!9ggQBmAKXraOtz7S.ndwCjJFBLTujojCl.HUohD8uvaVqJpz1Q
     folder: null
     sort: 100000
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747956294859
+      systemVersion: 6.0.0
+      createdTime: 1781637929044
+      modifiedTime: 1781638129870
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!9ggQBmAKXraOtz7S.ndwCjJFBLTujojCl'
@@ -885,16 +872,17 @@ items:
           <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
           a creature other than an undead or a construct, it must succeed on a
           [[/save]] saving throw or lose 5 (1d10) hit points at the start of
-          each of its turns due to an infernal wound.</p><p>Each time the devil
-          hits the wounded target with this attack, the damage dealt by the
-          wound increases by 5 (1d10). Any creature can take an action to stanch
-          the wound with a successful DC 12 Wisdom (Medicine) check. The wound
-          also closes if the target receives magical healing.</p>
+          each of its turns due to an infernal wound.</p><p>Each time the
+          [[lookup @name lowercase]]{monster} hits the wounded target with this
+          attack, the damage dealt by the wound increases by 5 (1d10). Any
+          creature can take an action to stanch the wound with a successful
+          [[/check 12 wis med]] check. The wound also closes if the target
+          receives magical healing.</p>
         chat: >-
-          <p>The Bearded Devil attacks with its Glaive. If the target is a
-          creature other than an undead or a construct, it must make a
-          <strong>Constitution</strong> saving throw. Any creature can take an
-          action to stanch the wound with a successful Wisdom (Medicine)
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. If the target is a creature other than an undead or a
+          construct, it must make a Constitution saving throw. Any creature can
+          take an action to stanch the wound with a successful Wisdom (Medicine)
           check.</p>
       source:
         custom: ''
@@ -961,7 +949,7 @@ items:
         - hvy
         - rch
         - two
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -970,8 +958,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        TU1j8fVk8TBXzMhl:
           type: attack
           activation:
             type: action
@@ -986,10 +973,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1006,7 +994,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1019,27 +1008,38 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: TU1j8fVk8TBXzMhl
+          name: ''
+        KofC2z7Z0no9xTeX:
           type: save
           activation:
-            type: action
+            type: special
             value: 1
-            condition: ''
+            condition: When a creature is hit by this attack.
             override: false
           consumption:
             targets: []
@@ -1049,13 +1049,24 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>If the target is a creature other than an undead or a
+              construct, it must succeed on a [[/save]] saving throw or lose 5
+              (1d10) hit points at the start of each of its turns due to an
+              @UUID[Compendium.dnd5e.monsters.Actor.9ggQBmAKXraOtz7S.Item.RgZ4lGrNf9AaIyrG.ActiveEffect.jv3cUKchLC6CUW7D]{Infernal
+              Wound}.</p>
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: jv3cUKchLC6CUW7D
+              onSave: false
+              level:
+                min: null
+                max: null
           range:
             value: '10'
             units: ft
@@ -1069,10 +1080,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -1082,37 +1094,161 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '12'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: KofC2z7Z0no9xTeX
+          name: Infernal Wound Save
+        BnnkX7yeweayZAKB:
+          type: damage
+          name: Infernal Wound Damage
+          _id: BnnkX7yeweayZAKB
+          img: ''
+          sort: 300000
+          activation:
+            type: special
+            override: false
+            condition: >-
+              When a creature with an
+              @UUID[Compendium.dnd5e.monsters.Actor.9ggQBmAKXraOtz7S.Item.RgZ4lGrNf9AaIyrG.ActiveEffect.jv3cUKchLC6CUW7D]{Infernal
+              Wound} starts their turn.
+          consumption:
+            scaling:
+              allowed: true
+              max: ''
+            spellSlot: true
+            targets: []
+          description:
+            value: ''
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: spec
+            override: true
+            special: ''
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: creature
+              count: '1'
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          damage:
+            critical:
+              allow: false
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
+                denomination: 10
+                bonus: ''
+                types: []
+                scaling:
+                  mode: whole
+                  number: 1
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: glaive
       mastery: ''
-    effects: []
+    effects:
+      - name: Infernal Wound
+        img: icons/creatures/abilities/mouth-teeth-fire-orange.webp
+        origin: Compendium.dnd5e.monsters.Actor.9ggQBmAKXraOtz7S.Item.RgZ4lGrNf9AaIyrG
+        transfer: false
+        _id: jv3cUKchLC6CUW7D
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You have been inflicted with an infernal wounds. You lose [[/damage
+          1d10 average]] hit points for each infernal wound you have at the
+          start of each of your turns.</p><p>Any creature can take an action to
+          staunch the wound with a successful [[/check 12 wis med]] check. The
+          wound also closes if you receive magical healing.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781638261503
+          modifiedTime: 1781639085667
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!9ggQBmAKXraOtz7S.RgZ4lGrNf9AaIyrG.jv3cUKchLC6CUW7D
     folder: null
     sort: 300000
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.rOG1OM2ihgPjOvFW
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747956326618
+      systemVersion: 6.0.0
+      createdTime: 1781638238981
+      modifiedTime: 1781639746369
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!9ggQBmAKXraOtz7S.RgZ4lGrNf9AaIyrG'
@@ -1123,9 +1259,9 @@ items:
     system:
       description:
         value: >-
-          <p>The devil makes two attacks: one with its [[/item
-          .ndwCjJFBLTujojCl]]{beard} and one with its [[/item
-          .RgZ4lGrNf9AaIyrG]]{glaive}.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes two attacks: one with
+          its [[/item .ndwCjJFBLTujojCl]]{Beard} and one with its [[/item
+          .RgZ4lGrNf9AaIyrG]]{Glaive}.</p>
         chat: ''
       source:
         custom: ''
@@ -1139,13 +1275,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        Ite5b0vqY7eiF7xB:
           type: utility
           activation:
             type: action
@@ -1160,15 +1295,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -1179,7 +1315,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1196,7 +1333,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: Ite5b0vqY7eiF7xB
       enchant: {}
       prerequisites:
         level: null
@@ -1210,14 +1355,120 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1747956274923
+      systemVersion: 6.0.0
+      createdTime: 1781638191216
+      modifiedTime: 1781638196119
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!9ggQBmAKXraOtz7S.iRRniNGmcgkUi4oH'
+  - _id: DrCGu7cY5WhWioFT
+    name: Magic Resistance
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on saving
+          throws against spells and other magical effects.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      properties:
+        - trait
+      identifier: magic-resistance
+      advancement: {}
+      crewed: false
+    flags: {}
+    img: icons/magic/defensive/barrier-shield-dome-pink.webp
+    effects: []
+    folder: null
+    sort: 500000
+    _stats:
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781637836919
+      modifiedTime: 1781637848584
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Item.Hc6MqLQhPTI1KOvm
+    _key: '!actors.items!9ggQBmAKXraOtz7S.DrCGu7cY5WhWioFT'
+  - _id: jfFJ5cnUOGIrUTY4
+    name: Devil Sight
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>Magical &amp;reference[darkness] doesn't impede the [[lookup @name
+          lowercase]]{monster}'s &amp;reference[Darkvision].</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      properties:
+        - trait
+      identifier: devil-sight
+      advancement: {}
+      crewed: false
+    flags: {}
+    img: icons/creatures/eyes/lizard-single-slit-pink.webp
+    effects: []
+    folder: null
+    sort: 400000
+    _stats:
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781637840651
+      modifiedTime: 1781637848584
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Item.UjbgbOnd6ltjagZm
+    _key: '!actors.items!9ggQBmAKXraOtz7S.jfFJ5cnUOGIrUTY4'
 effects: []
 folder: P1YKVDd1IN7XXWWy
 sort: 0
@@ -1226,7 +1477,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171209435
