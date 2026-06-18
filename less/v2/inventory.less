@@ -485,12 +485,12 @@
     }
 
     .changes .change-row {
-      position: relative;
-      border-top: var(--activity-row-border);
-      padding-left: 20px;
+      border-block-start: var(--activity-row-border);
       min-block-size: 32px;
+      padding-inline-start: 20px;
+      position: relative;
 
-      &:last-child { border-bottom: var(--activity-row-border); }
+      &:last-child { border-block-end: var(--activity-row-border); }
 
       &::before {
         content: "\f192";
@@ -512,6 +512,7 @@
       }
 
       .item-name .title { font-size: var(--font-size-12); }
+      .application-status { align-content: center; }
     }
   }
 
