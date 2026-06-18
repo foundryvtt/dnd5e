@@ -1,4 +1,4 @@
-import { ScaleValueTypeUsage } from "../../data/advancement/scale-value.mjs";
+import { ScaleValueTypeUsage } from "../../data/advancement/scale-value-data.mjs";
 import { formatNumber, formatRange, getPluralRules, prepareFormulaValue } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 
