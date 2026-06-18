@@ -2020,6 +2020,9 @@
           "label": "Base Damage Types"
         }
       },
+      "bonus": {
+        "label": "Damage Bonus"
+      },
       "label": "Ammunition Damage",
       "replace": {
         "label": "Replace Weapon Damage",
@@ -2545,12 +2548,12 @@
 "DND5E.Dusk": "Dusk",
 
 "DND5E.Effect": "Effect",
-
 "DND5E.EFFECT": {
   "Action": {
-    "Create": "Create Effect",
-    "Delete": "Delete Effect",
-    "Dissociate": "Dissociate Effect",
+    "CreateEffect": "Create Effect",
+    "DeleteEffect": "Delete Effect",
+    "DissociateEffect": "Dissociate Effect",
+    "EditEffect": "Edit Effect",
     "Search": "Search effects"
   },
   "Application": {
@@ -2571,9 +2574,16 @@
       }
     }
   },
+  "Category": {
+    "Temporary": "Temporary Effects",
+    "Passive": "Passive Effects",
+    "Inactive": "Inactive Effects",
+    "Unavailable": "Unavailable Effects"
+  },
   "DropHint": "Drop an Active Effect here",
   "Empty": "No associated effects. Use the <i class=\"fas fa-plus\"></i> button above to create one, or select an existing effect from the drop-down.",
   "Label": "Available Effects",
+  "New": "New Effect",
   "RIDER": {
     "Activity": "Enchantment Rider Activity",
     "Effect": "Enchantment Rider Effect",
@@ -2586,9 +2596,17 @@
       }
     }
   },
+  "Status": {
+    "Inactive": "Inactive",
+    "Passive": "Passive",
+    "Temporary": "Temporary",
+    "Unavailable": "Unavailable"
+  },
+  "Suppressed": {
+    "Hint": "Source item must be equipped or attuned to activate these"
+  },
   "Tab": "Effects"
 },
-
 
 "DND5E.ENCHANT": {
   "FIELDS": {
@@ -2732,6 +2750,44 @@
   }
 },
 
+"DND5E.Encumbrance": "Encumbrance",
+"DND5E.ENCUMBRANCE": {
+  "FIELDS": {
+    "attributes": {
+      "encumbrance": {
+        "bonuses": {
+          "encumbered": {
+            "label": "Bonus to Encumbered Threshold"
+          },
+          "heavilyEncumbered": {
+            "label": "Bonus to Heavily Encumbered Threshold"
+          },
+          "maximum": {
+            "label": "Bonus to Maximum Carrying Capacity"
+          },
+          "overall": {
+            "label": "Bonus to All Encumberance Thresholds"
+          }
+        },
+        "multipliers": {
+          "encumbered": {
+            "label": "Encumbered Threshold Multiplier"
+          },
+          "heavilyEncumbered": {
+            "label": "Heavily Encumbered Threshold Multiplier"
+          },
+          "maximum": {
+            "label": "Maximum Carrying Capacity Multiplier"
+          },
+          "overall": {
+            "label": "Multiplier for All Encumberance Thresholds"
+          }
+        }
+      }
+    }
+  }
+},
+
 "DND5E.Environment": "Environment",
 
 "DND5E.EQUIPMENT": {
@@ -2790,6 +2846,7 @@
 },
 
 "DND5E.Expertise": "Expertise",
+"DND5E.Eyes": "Eyes",
 
 "DND5E.FACILITY": {
   "Action": {
@@ -3154,26 +3211,6 @@
   }
 },
 
-"DND5E.EffectCreate": "Create Effect",
-"DND5E.EffectToggle": "Toggle Effect",
-"DND5E.EffectEdit": "Edit Effect",
-"DND5E.EffectEnable": "Enable Effect",
-"DND5E.EffectDelete": "Delete Effect",
-"DND5E.EffectDisable": "Disable Effect",
-"DND5E.EffectTemporary": "Temporary Effects",
-"DND5E.EffectPassive": "Passive Effects",
-"DND5E.EffectInactive": "Inactive Effects",
-"DND5E.EffectNew": "New Effect",
-"DND5E.EffectType": {
-  "Inactive": "Inactive",
-  "Passive": "Passive",
-  "Temporary": "Temporary",
-  "Unavailable": "Unavailable"
-},
-"DND5E.EffectUnavailable": "Unavailable Effects",
-"DND5E.EffectUnavailableInfo": "Source item must be equipped or attuned to activate these",
-"DND5E.Encumbrance": "Encumbrance",
-"DND5E.Eyes": "Eyes",
 "DND5E.Faith": "Faith",
 "DND5E.FeatureActive": "Active Abilities",
 "DND5E.FeatureAdd": "Create Feature",
@@ -4247,6 +4284,9 @@
       },
       "dc": {
         "label": "Difficulty Class",
+        "bonus": {
+          "label": "DC Bonus"
+        },
         "calculation": {
           "label": "DC Calculation",
           "hint": "Method or ability used to calculate the difficulty class."
@@ -4708,6 +4748,14 @@
     "creatureTypes": {
       "label": "Creature Types",
       "hint": "Summoned creature will be changed to this type. If more than one type is selected, then the player will be able to choose from these types when summoning."
+    },
+    "flat": {
+      "attack": {
+        "label": "Flat Attack To Hit"
+      },
+      "save": {
+        "label": "Flat Save DC"
+      }
     },
     "match": {
       "ability": {
@@ -6059,6 +6107,9 @@
         "types": {
           "label": "Base Damage Types"
         }
+      },
+      "bonus": {
+        "label": "Damage Bonus"
       },
       "hint": "Intrinsic damage dice from the weapon. Ability modifier and additional damage parts will be provided automatically when attacking."
     },

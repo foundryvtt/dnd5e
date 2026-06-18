@@ -1194,7 +1194,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   /** @override */
   _addDocument(event, target) {
     if ( this.tabGroups.primary === "effects" ) return ActiveEffect.implementation.create({
-      name: _loc("DND5E.EffectNew"),
+      name: _loc("DND5E.EFFECT.New"),
       icon: "icons/svg/aura.svg"
     }, { parent: this.actor, renderSheet: true });
 

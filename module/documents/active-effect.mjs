@@ -979,10 +979,10 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    */
   async getPreviewContext(enrichmentOptions={}) {
     let properties = [];
-    if ( this.isSuppressed ) properties.push("DND5E.EffectType.Unavailable");
-    else if ( this.disabled ) properties.push("DND5E.EffectType.Inactive");
-    else if ( this.isTemporary ) properties.push("DND5E.EffectType.Temporary");
-    else properties.push("DND5E.EffectType.Passive");
+    if ( this.isSuppressed ) properties.push("DND5E.EFFECT.Status.Unavailable");
+    else if ( this.disabled ) properties.push("DND5E.EFFECT.Status.Inactive");
+    else if ( this.isTemporary ) properties.push("DND5E.EFFECT.Status.Temporary");
+    else properties.push("DND5E.EFFECT.Status.Passive");
     if ( this.type === "enchantment" ) properties.push("DND5E.ENCHANTMENT.Label");
     if ( this.system.magical ) properties.push("DND5E.ITEM.Property.Magical");
     properties = properties.map(p => _loc(p));

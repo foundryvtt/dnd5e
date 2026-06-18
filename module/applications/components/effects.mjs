@@ -142,7 +142,7 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
       },
       temporary: {
         type: "temporary",
-        label: _loc("DND5E.EffectTemporary"),
+        label: _loc("DND5E.EFFECT.Category.Temporary"),
         effects: []
       },
       enchantmentActive: {
@@ -153,7 +153,7 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
       },
       passive: {
         type: "passive",
-        label: _loc("DND5E.EffectPassive"),
+        label: _loc("DND5E.EFFECT.Category.Passive"),
         effects: []
       },
       enchantmentInactive: {
@@ -164,15 +164,15 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
       },
       inactive: {
         type: "inactive",
-        label: _loc("DND5E.EffectInactive"),
+        label: _loc("DND5E.EFFECT.Category.Inactive"),
         effects: []
       },
       suppressed: {
         type: "suppressed",
-        label: _loc("DND5E.EffectUnavailable"),
+        label: _loc("DND5E.EFFECT.Category.Unavailable"),
         effects: [],
         disabled: true,
-        info: [_loc("DND5E.EffectUnavailableInfo")]
+        info: [_loc("DND5E.EFFECT.Suppressed.Hint")]
       }
     };
 
@@ -386,7 +386,7 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
     const isEnchantment = li.dataset.effectType.startsWith("enchantment");
     return this.document.createEmbeddedDocuments("ActiveEffect", [{
       type: isEnchantment ? "enchantment" : "base",
-      name: isActor ? _loc("DND5E.EffectNew") : this.document.name,
+      name: isActor ? _loc("DND5E.EFFECT.New") : this.document.name,
       icon: isActor ? "icons/svg/aura.svg" : this.document.img,
       origin: isEnchantment ? undefined : this.document.uuid,
       "duration.rounds": li.dataset.effectType === "temporary" ? 1 : undefined,

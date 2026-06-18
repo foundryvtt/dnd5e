@@ -89,16 +89,40 @@ export default class AttributesFields {
       ac: new SchemaField(this.armorClass, { label: "DND5E.ArmorClass" }),
       encumbrance: new SchemaField({
         bonuses: new SchemaField({
-          encumbered: new FormulaField({ deterministic: true }),
-          heavilyEncumbered: new FormulaField({ deterministic: true }),
-          maximum: new FormulaField({ deterministic: true }),
-          overall: new FormulaField({ deterministic: true })
+          encumbered: new FormulaField({
+            deterministic: true,
+            label: "DND5E.ENCUMBRANCE.FIELDS.attributes.encumbrance.bonuses.encumbered.label"
+          }),
+          heavilyEncumbered: new FormulaField({
+            deterministic: true,
+            label: "DND5E.ENCUMBRANCE.FIELDS.attributes.encumbrance.bonuses.heavilyEncumbered.label"
+          }),
+          maximum: new FormulaField({
+            deterministic: true,
+            label: "DND5E.ENCUMBRANCE.FIELDS.attributes.encumbrance.bonuses.maximum.label"
+          }),
+          overall: new FormulaField({
+            deterministic: true,
+            label: "DND5E.ENCUMBRANCE.FIELDS.attributes.encumbrance.bonuses.overall.label"
+          })
         }),
         multipliers: new SchemaField({
-          encumbered: new FormulaField({ deterministic: true, initial: "1" }),
-          heavilyEncumbered: new FormulaField({ deterministic: true, initial: "1" }),
-          maximum: new FormulaField({ deterministic: true, initial: "1" }),
-          overall: new FormulaField({ deterministic: true, initial: "1" })
+          encumbered: new FormulaField({
+            deterministic: true, initial: "1",
+            label: "DND5E.ENCUMBRANCE.FIELDS.attributes.encumbrance.multipliers.encumbered.label"
+          }),
+          heavilyEncumbered: new FormulaField({
+            deterministic: true, initial: "1",
+            label: "DND5E.ENCUMBRANCE.FIELDS.attributes.encumbrance.multipliers.heavilyEncumbered.label"
+          }),
+          maximum: new FormulaField({
+            deterministic: true, initial: "1",
+            label: "DND5E.ENCUMBRANCE.FIELDS.attributes.encumbrance.multipliers.maximum.label"
+          }),
+          overall: new FormulaField({
+            deterministic: true, initial: "1",
+            label: "DND5E.ENCUMBRANCE.FIELDS.attributes.encumbrance.multipliers.overall.label"
+          })
         })
       }, { persisted: false }),
       init: new RollConfigField({
