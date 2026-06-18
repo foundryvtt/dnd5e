@@ -89,7 +89,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       div.innerHTML = `
         <label class="roboto-upper">
           <i class="fa-solid fa-bolt"></i>
-          <span>${_loc("DND5E.Effects")}</span>
+          <span>${_loc("DND5E.EFFECT.Application.Header")}</span>
           <i class="fa-solid fa-caret-down"></i>
         </label>
         <div class="collapsible-content">
@@ -135,7 +135,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
           <span class="subtitle">${effect.duration.label}</span>
         </div>
         <button class="apply-effect" type="button" data-action="applyEffect"
-                data-tooltip aria-label="${_loc("DND5E.EffectsApplyTokens")}">
+                data-tooltip aria-label="${_loc("DND5E.EFFECT.Application.Action.ApplyTokens")}">
           <i class="fas fa-reply-all fa-flip-horizontal" inert></i>
         </button>
       `;
@@ -190,7 +190,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
     const concentration = this.chatMessage.getAssociatedActor()?.effects.get(this.chatMessage.system.concentration);
     const origin = concentration ?? effect;
     if ( !game.user.isGM && !actor.isOwner ) {
-      throw new Error(_loc("DND5E.EffectApplyWarningOwnership"));
+      throw new Error(_loc("DND5E.EFFECT.Application.Warning.Ownership"));
     }
 
     const effectFlags = {
@@ -221,7 +221,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
     }
 
     if ( !game.user.isGM && concentration && !concentration.isOwner ) {
-      throw new Error(_loc("DND5E.EffectApplyWarningConcentration"));
+      throw new Error(_loc("DND5E.EFFECT.Application.Warning.Concentration"));
     }
 
     // Otherwise, create a new effect on the target

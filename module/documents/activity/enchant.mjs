@@ -163,7 +163,7 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
     // If concentration is required, ensure it is still being maintained & GM is present
     if ( !game.user.isGM && concentration && !concentration.isOwner ) {
       if ( strict ) {
-        ui.notifications.error("DND5E.EffectApplyWarningConcentration", { console: false });
+        ui.notifications.error("DND5E.EFFECT.Application.Warning.Concentration", { console: false });
         return null;
       } else {
         concentration = null;
