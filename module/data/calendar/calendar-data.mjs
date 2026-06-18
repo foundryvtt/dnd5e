@@ -338,7 +338,7 @@ export default class CalendarData5e extends foundry.data.CalendarData {
     if ( previousTime.year === currentTime.year ) return currentTime.day - previousTime.day;
 
     // Calculate the number of days just in current & previous years
-    const daysForYear = year => game.time.calendar.isLeapYear(previousTime.year)
+    const daysForYear = year => game.time.calendar.isLeapYear(year)
       ? game.time.calendar.days.daysPerLeapYear : game.time.calendar.days.daysPerYear;
     let days = 0;
     if ( previousTime.year < currentTime.year ) {
