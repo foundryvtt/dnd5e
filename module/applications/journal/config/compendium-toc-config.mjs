@@ -75,7 +75,9 @@ export default class CompendiumTOCConfig extends Application5e {
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
 
-    const docs = await this.compendium.getIndex({ fields: ["flags.dnd5e.type", "flags.dnd5e.position"] });
+    const docs = await this.compendium.getIndex({
+      fields: ["flags.dnd5e.type", "flags.dnd5e.append", "flags.dnd5e.position"]
+    });
     const counts = {};
     const chapterOptions = docs
       .reduce((arr, doc) => {
@@ -91,7 +93,7 @@ export default class CompendiumTOCConfig extends Application5e {
         return arr;
       }, [{ value: null, label: game.i18n.localize("DND5E.TABLEOFCONTENTS.Special.End"), rule: true }])
       .sort((lhs, rhs) => lhs.sort - rhs.sort)
-      .map((option, value) => ({ ...option, value }));
+      .map((option, value) => ({ ...option, value: option.value === null ? null : value }));
 
     context.folders = [];
     const traverse = node => {
@@ -99,7 +101,7 @@ export default class CompendiumTOCConfig extends Application5e {
       context.folders.push({
         name: node.folder?.name ?? game.i18n.localize("DND5E.TABLEOFCONTENTS.NoFolder"),
         entries: node.entries.map(o => {
-          const entry = this.compendium.get(o._id);
+          const entry = this.compendium.index.get(o._id);
           const data = entry.flags?.dnd5e ?? {};
           const fields = [{
             field: new StringField(),
@@ -164,8 +166,8 @@ export default class CompendiumTOCConfig extends Application5e {
     for ( const [id, flags] of Object.entries(submitData) ) {
       const update = { _id: id };
       for ( const key of ["type", "position", "append"] ) {
-        if ( flags[key] || (flags[key] === 0) ) update[`flags.dnd5e.${key}`] = flags[key];
-        else update[`flags.dnd5e.-=${key}`] = null;
+        if ( (flags[key] || (flags[key] === 0)) && flags.type ) update[`flags.dnd5e.${key}`] = flags[key];
+        else update[`flags.dnd5e.${key}`] = _del;
       }
       updates.push(update);
     }
