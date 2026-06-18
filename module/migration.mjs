@@ -739,7 +739,7 @@ export function migrateEffectData(effect, migrationData, { parent }={}) {
   const updateData = {};
   _migrateDocumentIcon(effect, updateData, {...migrationData, field: "img"});
   _migrateEffectArmorClass(effect, updateData);
-  if ( foundry.utils.isNewerVersion("5.2.0", effect._stats?.systemVersion ?? parent?._stats?.systemVersion) ) {
+  if ( foundry.utils.isNewerVersion("6.0.0", effect._stats?.systemVersion ?? parent?._stats?.systemVersion) ) {
     _migrateEffectMagical(effect, parent, updateData);
   }
   if ( foundry.utils.isNewerVersion("3.1.0", effect._stats?.systemVersion ?? parent?._stats?.systemVersion) ) {

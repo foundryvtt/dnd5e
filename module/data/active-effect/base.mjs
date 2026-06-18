@@ -3,7 +3,7 @@ import ActiveEffectDataModel from "../abstract/active-effect-data-model.mjs";
 const { BooleanField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @import { BaseActiveEffectSystemData } from "./types.mjs";
+ * @import { BaseActiveEffectSystemData } from "./_types.mjs";
  */
 
 /**

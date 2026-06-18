@@ -170,7 +170,7 @@ export default class EnchantmentData extends ActiveEffectDataModel {
 
   /** @inheritDoc */
   async _preCreate(data, options, user) {
-    if ((await super._preCreate(data, options, user)) === false) return false;
+    if ( (await super._preCreate(data, options, user)) === false ) return false;
 
     // Enchantments cannot be added directly to actors
     if ( this.parent.parent instanceof Actor ) {
@@ -205,7 +205,7 @@ export default class EnchantmentData extends ActiveEffectDataModel {
   /** @inheritDoc */
   _onDelete(options, userId) {
     super._onDelete(options, userId);
-    if ( this.isApplied ) dnd5e.registry.enchantments.untrack(this.origin, this.uuid);
+    if ( this.isApplied ) dnd5e.registry.enchantments.untrack(this.parent.origin, this.parent.uuid);
     document.body.querySelectorAll(`enchantment-application:has([data-enchantment-uuid="${this.parent.uuid}"]`)
       .forEach(element => element.buildItemList());
   }

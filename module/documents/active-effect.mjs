@@ -464,7 +464,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * @returns {Promise<ActiveEffect5e[]>}      Created rider effects.
    */
   async createRiderConditions() {
-    const riders = new Set(this.system.riders?.statuses ?? []);
+    const riders = new Set(this.system.rider?.statuses ?? []);
 
     for ( const status of this.statuses ) {
       const r = CONFIG.statusEffects.find(e => e.id === status)?.riders ?? [];
