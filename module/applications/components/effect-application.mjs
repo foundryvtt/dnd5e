@@ -217,6 +217,7 @@ export default class EffectApplicationElement extends ChatTrayElement {
       flags: {
         dnd5e: {
           dependentOn: concentration?.uuid,
+          originatingMessage: this.chatMessage.id,
           scaling: this.chatMessage.system.scaling,
           spellLevel: this.chatMessage.system.level
         }
