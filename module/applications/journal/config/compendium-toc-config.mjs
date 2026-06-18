@@ -74,7 +74,7 @@ export default class CompendiumTOCConfig extends Application5e {
   /** @inheritDoc */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
-    const TableOfContentsCompendium = dnd5e.applications.journal.TableOfContentsCompendium;
+    const { TableOfContentsCompendium } = dnd5e.applications.journal;
     const { chapterOptions, counts } = await TableOfContentsCompendium._getEntryBreakdown(this.compendium);
 
     context.folders = [];

@@ -63,8 +63,8 @@ export default class JournalTOCConfig extends DocumentSheet5e {
   /** @inheritDoc */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
-    const TableOfContentsCompendium = dnd5e.applications.journal.TableOfContentsCompendium;
-    const { chapterOptions, counts } = await TableOfContentsCompendium._getEntryBreakdown(this.compendium);
+    const { TableOfContentsCompendium } = dnd5e.applications.journal;
+    const { chapterOptions } = await TableOfContentsCompendium._getEntryBreakdown(this.compendium);
 
     const data = this.document.flags.dnd5e ?? {};
     context.fields = [
@@ -190,7 +190,7 @@ export default class JournalTOCConfig extends DocumentSheet5e {
       delete submitData.flags.dnd5e._pageUpdates;
     }
     await super._processSubmitData(event, form, submitData, options);
-    this.document.collection.render();
+    this.compendium.render();
   }
 
   /* -------------------------------------------- */
