@@ -103,6 +103,10 @@ export default class ScaleValueAdvancement extends Advancement {
    * @returns {boolean}
    */
   testEquality(a, b) {
+    foundry.utils.logCompatibilityWarning(
+      "`ScaleValueAdvancement#testEquality` has been deprecated without replacement.",
+      { since: "DnD5e 6.0", until: "DnD5e 6.2" }
+    );
     const keys = Object.keys(a ?? {});
     if ( keys.length !== Object.keys(b ?? {}).length ) return false;
     for ( const k of keys ) {

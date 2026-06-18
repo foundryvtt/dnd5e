@@ -62,31 +62,12 @@ export class ScaleValueConfigurationData extends foundry.abstract.DataModel {
  * Data field that automatically selects the appropriate ScaleValueType based on the selected type.
  */
 export class ScaleValueEntryField extends foundry.data.fields.ObjectField {
-  /** @override */
-  _cleanType(value, options, _state) {
-    if ( !(typeof value === "object") ) value = {};
-
-    // Use a defined DataModel
-    const cls = TYPES[options.source?.type];
-    if ( cls ) return cls.cleanData(value, options, _state);
-
-    return value;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  initialize(value, model, options={}) {
-    const cls = TYPES[model.type];
-    if ( !value || !cls ) return value;
-    return new cls(value, {parent: model, ...options});
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  toObject(value) {
-    return value.toObject(false);
+  constructor(...args) {
+    foundry.utils.logCompatibilityWarning(
+      "`ScaleValueEntryField` has been deprecated and replaced with a regular `ObjectField`.",
+      { since: "DnD5e 6.0", until: "DnD5e 6.2" }
+    );
+    super(...args);
   }
 }
 
@@ -97,8 +78,8 @@ export class ScaleValueEntryField extends foundry.data.fields.ObjectField {
  * @mixes ScaleValueStringTypeData
  */
 export class ScaleValueType extends foundry.abstract.DataModel {
-  constructor(data = {}, options = {}) {
-    const explicitKeys = new Set(filteredKeys(data));
+  constructor(data={}, options={}) {
+    const explicitKeys = new Set(filteredKeys(data, v => (v !== null) && (v !== "")));
     super(data, options);
     this.#explicitKeys = explicitKeys;
   }
@@ -269,7 +250,7 @@ export class ScaleValueTypeNumber extends ScaleValueType {
   static convertFrom(original, options) {
     const value = Number(original.formula);
     if ( (original.formula === null) || (original.formula === "") || Number.isNaN(value) ) return null;
-    return new this({value}, options);
+    return new this({ value }, options);
   }
 
   /* -------------------------------------------- */
@@ -381,7 +362,7 @@ export class ScaleValueTypeDice extends ScaleValueType {
   static convertFrom(original, options) {
     const [number, faces] = (original.formula ?? "").split("d");
     if ( !faces || !Number.isNumeric(number) || !Number.isNumeric(faces) ) return null;
-    return new this({number: Number(number) || null, faces: Number(faces)}, options);
+    return new this({ number: Number(number) || null, faces: Number(faces) }, options);
   }
 
   /* -------------------------------------------- */

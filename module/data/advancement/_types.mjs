@@ -124,7 +124,7 @@
  * @property {string} type                   Type of data represented by this scale value.
  * @property {object} [distance]
  * @property {string} [distance.units]       If distance type is selected, the units each value uses.
- * @property {Object<string, object>} scale  Sparse scale values for each level.
+ * @property {Record<string, object>} scale  Sparse scale values for each level.
  */
 
 /**

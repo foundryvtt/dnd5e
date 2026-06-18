@@ -102,6 +102,10 @@ export default class ScaleValueConfig extends AdvancementConfig {
    * @param {*} lastValue  The previous value.
    */
   _mergeScaleValues(value, lastValue) {
+    foundry.utils.logCompatibilityWarning(
+      "`ScaleValueConfig#_mergeScaleValues` has been deprecated without replacement.",
+      { since: "DnD5e 6.0", until: "DnD5e 6.2" }
+    );
     for ( const k of Object.keys(lastValue ?? {}) ) {
       if ( value[k] == null ) value[k] = lastValue[k];
     }
