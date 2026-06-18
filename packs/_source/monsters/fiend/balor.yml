@@ -457,9 +457,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -474,7 +471,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -494,19 +491,21 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 3
 items:
   - _id: nzkZgDrDq0RwWUao
     name: Death Throes
     type: feat
-    img: icons/magic/fire/explosion-fireball-large-red-orange.webp
+    img: icons/magic/fire/flame-burning-skull-orange.webp
     system:
       description:
         value: >-
-          <p>When the balor dies, it explodes, and each creature within 30 feet
-          of it must make a [[/save]] saving throw, taking [[/damage average]]
-          damage on a failed save, or half as much damage on a successful
-          one.</p><p>The explosion ignites flammable objects in that area that
-          aren't being worn or carried, and it destroys the balor's weapons.</p>
+          <p>When the [[lookup @name lowercase]]{monster} dies, it explodes, and
+          each creature within 30 feet of it must make a [[/save]] saving throw,
+          taking [[/damage average]] damage on a failed save, or half as much
+          damage on a successful one.</p><p>The explosion ignites flammable
+          objects in that area that aren't being worn or carried, and it
+          destroys the [[lookup @name lowercase]]{monster}'s weapons.</p>
         chat: >-
           <p>When the balor dies, it explodes, and each creature within 30 feet
           of it must make a <strong>Dexterity</strong> saving throw. The
@@ -529,13 +528,12 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        bft8Mf1FKyyIxwb8:
           type: save
           activation:
-            type: ''
+            type: special
             value: null
-            condition: Upon death
+            condition: When the [[lookup @name lowercase]]{monster} dies.
             override: false
           consumption:
             targets: []
@@ -545,6 +543,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -553,9 +552,10 @@ items:
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
+            value: '30'
           target:
             template:
               count: ''
@@ -565,9 +565,10 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: false
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -587,15 +588,29 @@ items:
                 bonus: ''
                 types:
                   - fire
+                scaling:
+                  number: 1
           save:
-            ability: dex
+            ability:
+              - dex
             dc:
               calculation: ''
               formula: '20'
-          sort: 0
-          name: ''
+            visible: true
+            bonus: ''
+          sort: 100000
+          name: Explode
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: bft8Mf1FKyyIxwb8
       enchant: {}
       prerequisites:
         level: null
@@ -605,34 +620,33 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EmlE1a0rhucK2UT1
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747956196138
+      systemVersion: 6.0.0
+      createdTime: 1781696561266
+      modifiedTime: 1781696677965
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!uZ8NrRenwYZ4qNf6.nzkZgDrDq0RwWUao'
   - _id: FWSzSLqeIDq7meXC
     name: Fire Aura
     type: feat
-    img: icons/magic/air/fog-gas-smoke-swirling-orange.webp
+    img: icons/magic/fire/barrier-wall-explosion-orange.webp
     system:
       description:
         value: >-
-          <p>At the start of each of the balor's turns, each creature within 5
-          feet of it takes [[/damage average]] damage, and flammable objects in
-          the aura that aren't being worn or carried ignite.</p><p>A creature
-          that touches the balor or hits it with a melee attack while within 5
-          feet of it takes [[/damage average]] damage.</p>
+          <p>At the start of each of the [[lookup @name lowercase]]{monster}'s
+          turns, each creature within [[lookup @labels.description.range
+          activity=t0DzL3PUekMarxZX]] of it takes [[/damage average]] damage,
+          and flammable objects in the aura that aren't being worn or carried
+          ignite.</p><p>A creature that touches the [[lookup @name
+          lowercase]]{monster} or hits it with a melee attack while within
+          [[lookup @labels.description.range activity=QoYDB21VZPDbFEuo]] of it
+          takes [[/damage average activity=QoYDB21VZPDbFEuo]] damage.</p>
         chat: >-
           <p>At the start of each of the balor's turns, each creature within 5
           feet of it takes <em>fire damage</em>, and flammable objects in the
@@ -656,11 +670,10 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        t0DzL3PUekMarxZX:
           type: damage
           activation:
-            type: ''
+            type: turnStart
             value: null
             condition: ''
             override: false
@@ -672,18 +685,25 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>At the start of each of the [[lookup @name
+              lowercase]]{monster}'s turns, each creature within [[lookup
+              @labels.description.range activity=t0DzL3PUekMarxZX]] of it takes
+              [[/damage average activity=t0DzL3PUekMarxZX]] damage, and
+              flammable objects in the aura that aren't being worn or carried
+              ignite.</p>
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: self
+            units: ft
             special: ''
             override: false
-            value: ''
+            value: '5'
           target:
             template:
               count: ''
@@ -693,6 +713,7 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: true
             affects:
               count: ''
               type: creature
@@ -717,10 +738,91 @@ items:
                 bonus: ''
                 types:
                   - fire
-          sort: 0
-          name: ''
+                scaling:
+                  number: 1
+          sort: 100000
+          name: Start of Turn Damage
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: t0DzL3PUekMarxZX
+        QoYDB21VZPDbFEuo:
+          type: damage
+          name: Contact Damage
+          _id: QoYDB21VZPDbFEuo
+          img: ''
+          sort: 200000
+          activation:
+            type: special
+            override: false
+            condition: >-
+              When a creature touches the [[lookup @name lowercase]]{monster} or
+              hits it with a melee attack while within 5 feet of it.
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: ''
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: ft
+            override: false
+            special: ''
+            value: '5'
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: creature
+              count: '1'
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          damage:
+            critical:
+              allow: false
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 3
+                denomination: 6
+                bonus: ''
+                types:
+                  - fire
+                scaling:
+                  number: 1
       enchant: {}
       prerequisites:
         level: null
@@ -730,116 +832,18 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.LJTY3nl1cp9go4eT
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747956232743
+      systemVersion: 6.0.0
+      createdTime: 1781696370591
+      modifiedTime: 1781696548754
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!uZ8NrRenwYZ4qNf6.FWSzSLqeIDq7meXC'
-  - _id: 0Y2ThqWytMPb9RlR
-    name: Magic Resistance
-    type: feat
-    img: icons/magic/defensive/shield-barrier-glowing-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The balor has advantage on saving throws against spells and other
-          magical effects.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: magic-resistance
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!uZ8NrRenwYZ4qNf6.0Y2ThqWytMPb9RlR'
-  - _id: 5TGqX6bI8BdLEvTk
-    name: Magic Weapons
-    type: feat
-    img: icons/weapons/swords/sword-runed-glowing.webp
-    system:
-      description:
-        value: <p>The balor's weapon attacks are magical.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: magic-weapons
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.nahRRxck9R5GVVFS
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!uZ8NrRenwYZ4qNf6.5TGqX6bI8BdLEvTk'
   - _id: qzphlErr2D2mRpxT
     name: Multiattack
     type: feat
@@ -847,9 +851,9 @@ items:
     system:
       description:
         value: >-
-          <p>The balor makes two attacks: one with its [[/item
-          .6ZAh5TkiXwQMUfDB]]{longsword} and one with its [[/item
-          .1oGgJQB1ItqyKoZ5]]{whip}.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes two attacks: one with
+          its [[/item .6ZAh5TkiXwQMUfDB]]{Longsword} and one with its [[/item
+          .1oGgJQB1ItqyKoZ5]]{Whip}.</p>
         chat: ''
       source:
         custom: ''
@@ -863,13 +867,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        4JUia83JB2jZzcbw:
           type: utility
           activation:
             type: action
@@ -884,15 +887,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -903,7 +907,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -920,7 +925,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: 4JUia83JB2jZzcbw
       enchant: {}
       prerequisites:
         level: null
@@ -934,24 +947,25 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745273657585
+      systemVersion: 6.0.0
+      createdTime: 1781696706579
+      modifiedTime: 1781696727479
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!uZ8NrRenwYZ4qNf6.qzphlErr2D2mRpxT'
   - _id: mw93amZDA4ctKqvQ
     name: Teleport
     type: feat
-    img: icons/magic/symbols/runes-star-pentagon-magenta.webp
+    img: icons/magic/symbols/ring-circle-smoke-blue.webp
     system:
       description:
         value: >-
-          <p>The balor magically teleports, along with any equipment it is
-          wearing or carrying, up to 120 feet to an unoccupied space it can
-          see.</p>
+          <p>The [[lookup @name lowercase]]{monster} magically teleports, along
+          with any equipment it is wearing or carrying, up to [[lookup
+          @labels.description.range activity=dnd5eactivity000]] to an unoccupied
+          space it can see.</p>
         chat: ''
       source:
         custom: ''
@@ -965,10 +979,11 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
@@ -1024,6 +1039,14 @@ items:
             prompt: false
             visible: false
           sort: 0
+          name: ''
+          img: ''
+          visibility:
+            requireMagic: true
+            level:
+              min: null
+              max: null
+            identifier: ''
       enchant: {}
       prerequisites:
         level: null
@@ -1037,25 +1060,27 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.PPzVD90vab60FqCt
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1747956115054
+      systemVersion: 6.0.0
+      createdTime: 1781696947422
+      modifiedTime: 1781696993751
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!uZ8NrRenwYZ4qNf6.mw93amZDA4ctKqvQ'
   - _id: 6ZAh5TkiXwQMUfDB
     name: Longsword
     type: weapon
-    img: icons/weapons/swords/greatsword-crossguard-steel.webp
+    img: icons/weapons/swords/greatsword-crossguard-flanged-red.webp
     system:
       description:
         value: >-
-          <p>[[/attack extended]]. [[/damage extended]].</p><p>If the balor
-          scores a critical hit, it rolls damage dice three times, instead of
-          twice.</p>
-        chat: <p>The Balor attacks with its Longsword.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>If the [[lookup
+          @name lowercase]]{monster} scores a critical hit, it rolls damage dice
+          three times, instead of twice.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -1179,35 +1204,40 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
-              bonus: ''
+              bonus: 3d8[slashing] + 3d8[lightning]
             includeBase: true
             parts:
-              - number: 3
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 3
                 denomination: 8
                 bonus: ''
                 types:
                   - lightning
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+                  number: 1
           sort: 0
+          name: ''
+          img: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
       attuned: false
       ammunition: {}
-      magicalBonus: null
+      magicalBonus: ''
       identifier: longsword
       mastery: ''
     effects: []
@@ -1219,11 +1249,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.10ZP2Bu3vnCuYMIB
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.0
-      createdTime: null
-      modifiedTime: 1760378666907
+      systemVersion: 6.0.0
+      createdTime: 1781696733476
+      modifiedTime: 1781696840828
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!uZ8NrRenwYZ4qNf6.6ZAh5TkiXwQMUfDB'
@@ -1236,10 +1266,10 @@ items:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]]. The target must succeed
           on a [[/save]] saving throw or be pulled up to 25 feet toward the
-          balor.</p>
+          [[lookup @name lowercase]]{monster}.</p>
         chat: >-
-          <p>The Balor attacks with its Whip. The target must make a
-          <strong>Strength</strong> saving throw.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. The target must make a Strength saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -1305,7 +1335,7 @@ items:
         - fin
         - mgc
         - rch
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -1314,8 +1344,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        YGM2eLITR0pDcdb6:
           type: attack
           activation:
             type: action
@@ -1330,10 +1359,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1350,7 +1380,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1363,39 +1394,48 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts:
-              - number: 3
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 3
                 denomination: 6
                 bonus: ''
                 types:
                   - fire
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+                  number: 1
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: YGM2eLITR0pDcdb6
+          name: ''
+        LEKd2jRukXVvtSPG:
           type: save
           activation:
-            type: action
+            type: special
             value: 1
-            condition: ''
+            condition: When a creautre is hit by this attack.
             override: false
           consumption:
             targets: []
@@ -1405,10 +1445,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1425,10 +1466,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -1438,17 +1480,32 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: str
+            ability:
+              - str
             dc:
               calculation: ''
               formula: '20'
-          sort: 0
+            bonus: ''
+            visible: true
+          sort: 200000
+          name: Pull Save
+          img: ''
+          flags: {}
+          visibility:
+            identifier: ''
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: LEKd2jRukXVvtSPG
       attuned: false
       ammunition: {}
-      magicalBonus: null
+      magicalBonus: ''
       identifier: whip
       mastery: ''
     effects: []
@@ -1456,22 +1513,124 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.QKTyxoO0YDnAsbYe
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.0
-      createdTime: null
-      modifiedTime: 1760378671284
+      systemVersion: 6.0.0
+      createdTime: 1781696862198
+      modifiedTime: 1781696933532
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!uZ8NrRenwYZ4qNf6.1oGgJQB1ItqyKoZ5'
+  - _id: z6qrm9EZiEH500K2
+    name: Magic Resistance
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on saving
+          throws against spells and other magical effects.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      properties:
+        - trait
+      identifier: magic-resistance
+      advancement: {}
+      crewed: false
+    flags: {}
+    img: icons/magic/defensive/barrier-shield-dome-pink.webp
+    effects: []
+    folder: null
+    sort: 100000
+    _stats:
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781696687224
+      modifiedTime: 1781696688274
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Item.Hc6MqLQhPTI1KOvm
+    _key: '!actors.items!uZ8NrRenwYZ4qNf6.z6qrm9EZiEH500K2'
+  - _id: VLlNW1PkgzpXgBKr
+    name: Magic Weapons
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster}'s weapon attacks are
+          magical.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      properties:
+        - trait
+      identifier: magic-weapons
+      advancement: {}
+      crewed: false
+    flags: {}
+    img: icons/weapons/swords/sword-runed-glowing.webp
+    effects: []
+    folder: null
+    sort: 200000
+    _stats:
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781696695915
+      modifiedTime: 1781696696638
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Item.nahRRxck9R5GVVFS
+    _key: '!actors.items!uZ8NrRenwYZ4qNf6.VLlNW1PkgzpXgBKr'
 effects: []
 folder: P1YKVDd1IN7XXWWy
 sort: 0
@@ -1480,7 +1639,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171264697
