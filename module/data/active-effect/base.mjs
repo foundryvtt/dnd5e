@@ -48,6 +48,6 @@ export default class BaseEffectData extends ActiveEffectDataModel {
    * @type {boolean}
    */
   get isRider() {
-    return this.item?.getFlag("dnd5e", "riders.effect")?.includes(this.parent.id) ?? false;
+    return this.item?.getFlag("dnd5e", "riders.effect")?.includes?.(this.parent.id) ?? false;
   }
 }
