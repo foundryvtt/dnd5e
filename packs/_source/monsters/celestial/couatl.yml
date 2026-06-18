@@ -455,9 +455,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -472,7 +469,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -492,11 +489,12 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: 7M1OrMoMMTCEKxta
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: >-
@@ -506,8 +504,8 @@ items:
           &amp;Reference[unconscious apply=false]. Another creature can use an
           action to shake the target awake.</p>
         chat: >-
-          <p>The Couatl attacks with its Bite. The target must make a
-          <strong>Constitution</strong> saving throw.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. The target must make a Constitution saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -570,9 +568,8 @@ items:
         dt: null
         conditions: ''
       properties:
-        - fin
         - mgc
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -581,8 +578,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        HViW2agvROEkJdFw:
           type: attack
           activation:
             type: action
@@ -597,6 +593,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -617,7 +614,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -637,23 +635,31 @@ items:
             flat: false
             type:
               value: ''
-              classification: weapon
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
           name: ''
           img: ''
-          appliedEffects: []
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: HViW2agvROEkJdFw
+        1trjsBLTzZmRMDbU:
           type: save
           activation:
             type: special
             value: 1
-            condition: ''
+            condition: When a creature is hit by this attack.
             override: false
           consumption:
             targets: []
@@ -663,6 +669,12 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>The target must succeed on a [[/save]] saving throw or be
+              &amp;Reference[poisoned apply=false] for 24 hours. Until this
+              poison ends, the target is &amp;Reference[unconscious
+              apply=false]. Another creature can use an action to shake the
+              target awake.</p>
           duration:
             concentration: false
             value: ''
@@ -671,6 +683,10 @@ items:
             override: false
           effects:
             - _id: GLxzcYW1p5BO6Tdt
+              onSave: false
+              level:
+                min: null
+                max: null
           range:
             value: '5'
             units: ft
@@ -684,10 +700,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -700,41 +717,50 @@ items:
             onSave: none
             parts: []
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: con
               formula: '13'
-          sort: 0
-          name: ''
+            visible: true
+            bonus: ''
+          sort: 200000
+          name: Poison Save
           img: ''
-          appliedEffects:
-            - GLxzcYW1p5BO6Tdt
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 1trjsBLTzZmRMDbU
       attuned: false
       ammunition: {}
-      magicalBonus: null
+      magicalBonus: ''
       identifier: bite
       mastery: ''
     effects:
-      - name: Poisoned
-        img: systems/dnd5e/icons/svg/statuses/unconscious.svg
+      - name: Couatl Poison
+        img: icons/skills/toxins/symbol-poison-drop-skull-green.webp
         origin: Compendium.dnd5e.monsters.Actor.ZaP1H91t4FzbRqR5.Item.7M1OrMoMMTCEKxta
         transfer: false
         _id: GLxzcYW1p5BO6Tdt
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: null
-          seconds: 86400
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 24
+          units: hours
+          expiry: turnStart
+          expired: false
         description: >-
-          <p>Until this poison ends, the target is unconscious. Another creature
-          can use an action to shake the target awake.</p>
+          <p>You are &amp;reference[poisoned apply=false]. Until this poison
+          ends, you are &amp;reference[unconscious apply=false].</p><p>Another
+          creature can use an action to shake you awake.</p>
         tint: '#ffffff'
         statuses:
           - poisoned
@@ -747,32 +773,31 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
+          coreVersion: '14.361'
           systemId: dnd5e
           systemVersion: 4.3.8
           createdTime: 1744076654091
-          modifiedTime: 1744076734676
+          modifiedTime: 1781697535488
           lastModifiedBy: dnd5ebuilder0000
           exportSource: null
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!ZaP1H91t4FzbRqR5.7M1OrMoMMTCEKxta.GLxzcYW1p5BO6Tdt
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.3.8
-      createdTime: null
-      modifiedTime: 1744076855445
+      systemVersion: 6.0.0
+      createdTime: 1781697429919
+      modifiedTime: 1781697563629
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!ZaP1H91t4FzbRqR5.7M1OrMoMMTCEKxta'
@@ -990,17 +1015,14 @@ items:
         transfer: false
         _id: bT77MKZEyBFGGrrW
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: <p>Until this grapple ends, the target is restrained.</p>
         tint: '#ffffff'
         statuses:
@@ -1014,13 +1036,16 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
+          coreVersion: '14.361'
           systemId: dnd5e
           systemVersion: 4.3.8
           createdTime: 1744077355795
           modifiedTime: 1744077412495
           lastModifiedBy: dnd5ebuilder0000
           exportSource: null
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!ZaP1H91t4FzbRqR5.8LkzioyaScFxfst7.bT77MKZEyBFGGrrW
     folder: null
@@ -1035,7 +1060,7 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
@@ -1046,7 +1071,7 @@ items:
   - _id: iw2q07K1D0X01DZO
     name: Change Shape
     type: feat
-    img: icons/magic/control/silhouette-hold-change-blue.webp
+    img: icons/equipment/head/mask-carved-bird-grey-pink.webp
     system:
       description:
         value: >-
@@ -1145,11 +1170,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.JsAys4RSGi4lN5Jy
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745444939528
+      createdTime: 1781697635625
+      modifiedTime: 1781697635625
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!ZaP1H91t4FzbRqR5.iw2q07K1D0X01DZO'
@@ -1205,7 +1230,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
@@ -1213,13 +1238,16 @@ items:
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!ZaP1H91t4FzbRqR5.J40yeoOnwpvtVpHt'
-  - _id: 3qE2LLHPANSEPmIN
-    name: Magic Weapons
+  - _id: MGh9IkfXNn7FmwL5
+    name: Shielded Mind
     type: feat
-    img: icons/weapons/swords/sword-runed-glowing.webp
+    img: icons/magic/control/control-influence-rally-purple.webp
     system:
       description:
-        value: <p>The couatl's weapon attacks are magical.</p>
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} is immune to scrying and to
+          any effect that would sense its emotions, read its thoughts, or detect
+          its location.</p>
         chat: ''
       source:
         custom: ''
@@ -1242,55 +1270,6 @@ items:
       enchant: {}
       prerequisites:
         level: null
-      identifier: magic-weapons
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.nahRRxck9R5GVVFS
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.3.8
-      createdTime: null
-      modifiedTime: 1744076521424
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!ZaP1H91t4FzbRqR5.3qE2LLHPANSEPmIN'
-  - _id: MGh9IkfXNn7FmwL5
-    name: Shielded Mind
-    type: feat
-    img: icons/magic/control/control-influence-rally-purple.webp
-    system:
-      description:
-        value: >-
-          <p>The couatl is immune to scrying and to any effect that would sense
-          its emotions, read its thoughts, or detect its location.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties:
-        - trait
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
       identifier: shielded-mind
     effects: []
     folder: null
@@ -1301,11 +1280,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.SrmR5UfLMFxTErTp
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.3.8
-      createdTime: null
-      modifiedTime: 1744076561380
+      systemVersion: 6.0.0
+      createdTime: 1781697394998
+      modifiedTime: 1781697397231
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!ZaP1H91t4FzbRqR5.MGh9IkfXNn7FmwL5'
@@ -1417,7 +1396,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.Mzh95utKDPIrjiH8
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1534,7 +1513,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1678,7 +1657,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ppWAAEul0QHtm4er
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1800,36 +1779,12 @@ items:
     effects:
       - _id: 8rP3gwmXVTgZqYZE
         flags: {}
-        changes:
-          - key: system.bonuses.abilities.save
-            mode: 2
-            value: +1d4
-            priority: null
-          - key: system.bonuses.mwak.attack
-            mode: 2
-            value: +1d4
-            priority: null
-          - key: system.bonuses.msak.attack
-            mode: 2
-            value: +1d4
-            priority: null
-          - key: system.bonuses.rsak.attack
-            mode: 2
-            value: +1d4
-            priority: null
-          - key: system.bonuses.rwak.attack
-            mode: 2
-            value: +1d4
-            priority: null
         disabled: true
         duration:
-          startTime: null
-          seconds: 60
-          rounds: 10
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         origin: Item.kZZAZ6kp9YzgPQEe
         tint: '#ffffff'
         transfer: false
@@ -1839,7 +1794,7 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
+          coreVersion: '14.361'
           systemId: dnd5e
           systemVersion: 4.0.0
           createdTime: null
@@ -1848,8 +1803,32 @@ items:
           exportSource: null
         img: icons/magic/control/buff-flight-wings-blue.webp
         type: base
-        system: {}
+        system:
+          changes:
+            - key: system.bonuses.abilities.save
+              value: +1d4
+              priority: null
+              type: add
+            - key: system.bonuses.mwak.attack
+              value: +1d4
+              priority: null
+              type: add
+            - key: system.bonuses.msak.attack
+              value: +1d4
+              priority: null
+              type: add
+            - key: system.bonuses.rsak.attack
+              value: +1d4
+              priority: null
+              type: add
+            - key: system.bonuses.rwak.attack
+              value: +1d4
+              priority: null
+              type: add
         sort: 0
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!ZaP1H91t4FzbRqR5.8dzaICjGy6mTUaUr.8rP3gwmXVTgZqYZE
     folder: null
@@ -1860,7 +1839,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.8dzaICjGy6mTUaUr
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1981,7 +1960,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.BV0mpbHh29IbbIj5
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2110,7 +2089,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.uUWb1wZgtMou0TVP
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2229,7 +2208,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.F0GsG0SJzsIOacwV
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2358,7 +2337,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.gvdA9nPuWLck4tBl
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2474,20 +2453,12 @@ items:
     effects:
       - _id: 6pbotGIvqQkraPva
         flags: {}
-        changes:
-          - key: system.attributes.ac.bonus
-            value: '5'
-            mode: 2
-            priority: null
         disabled: true
         duration:
-          startTime: null
-          rounds: 1
-          seconds: null
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 1
+          units: rounds
+          expiry: turnStart
+          expired: false
         origin: Item.FlLKKv7bQBlIAs11
         tint: '#ffffff'
         transfer: false
@@ -2497,7 +2468,7 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
+          coreVersion: '14.361'
           systemId: dnd5e
           systemVersion: 4.0.0
           createdTime: null
@@ -2506,8 +2477,16 @@ items:
           exportSource: null
         img: icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp
         type: base
-        system: {}
+        system:
+          changes:
+            - key: system.attributes.ac.bonus
+              value: 5
+              priority: null
+              type: add
         sort: 0
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!ZaP1H91t4FzbRqR5.z1mx84ONwkXKUZd7.6pbotGIvqQkraPva
     folder: null
@@ -2518,7 +2497,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.z1mx84ONwkXKUZd7
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2677,7 +2656,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.kSPRpeIx3w3nihrF
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2810,7 +2789,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.WzvJ7G3cqvIubsLk
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -3031,7 +3010,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.fVbCxFRaORalHB20
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -3152,7 +3131,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.MAxM77CDUu8dgIRQ
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -3160,6 +3139,59 @@ items:
       lastModifiedBy: null
       exportSource: null
     _key: '!actors.items!ZaP1H91t4FzbRqR5.MAxM77CDUu8dgIRQ'
+  - _id: KtxEQuB9SXybD09z
+    name: Magic Weapons
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster}'s weapon attacks are
+          magical.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      properties:
+        - trait
+      identifier: magic-weapons
+      advancement: {}
+      crewed: false
+    flags: {}
+    img: icons/weapons/swords/sword-runed-glowing.webp
+    effects: []
+    folder: null
+    sort: 0
+    _stats:
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781697373695
+      modifiedTime: 1781697373695
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Item.nahRRxck9R5GVVFS
+    _key: '!actors.items!ZaP1H91t4FzbRqR5.KtxEQuB9SXybD09z'
 effects: []
 folder: pCy5ieJezFRCg9A0
 sort: 0
@@ -3168,7 +3200,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171239772
