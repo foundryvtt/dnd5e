@@ -58,7 +58,10 @@ export default class TemplatePlacement extends BasePlacement {
       case "circle": return { ...data, radius: size };
       case "cone": return { ...data, angle: CONFIG.MeasuredTemplate.defaults.angle, radius: size };
       case "emanation": return {
-        base: { ...data, width: 1, height: 1, shape: 4, type: "token" },
+        base: {
+          ...data, width: 1, height: 1, type: "token",
+          shape: canvas.grid.isHexagonal ? CONST.TOKEN_SHAPES.ELLIPSE_1 : CONST.TOKEN_SHAPES.RECTANGLE_1
+        },
         radius: size, type: "emanation"
       };
       case "ray":
