@@ -358,23 +358,39 @@ export default class CalendarData5e extends foundry.data.CalendarData {
     const changes = [];
     const rolls = [];
 
-    if ( !dnd5e.settings.calendarConfig.manualRecovery && periods.size ) {
+    const bastion = dnd5e.settings.bastionConfiguration;
+    const advanceFacilities = timePassageData.midnights > 0;
+    const recoverUses = !dnd5e.settings.calendarConfig.manualRecovery && periods.size;
+    if ( advanceFacilities || recoverUses ) {
       const operations = [];
       for ( const actor of game.actors ) {
         const deltas = { deleted: [], item: {} };
         const deleted = [];
         const updates = [];
-        for ( const item of actor.items ) {
-          const result = await item.system.recoverUses?.(periods) ?? {};
-          if ( result?.rolls ) rolls.push(...result.rolls);
-          if ( result?.destroy ) {
-            deltas.deleted.push(item.toObject());
-            deleted.push(item.id);
-          } else if ( !foundry.utils.isEmpty(result?.updates) ) {
-            deltas.item[item.id] = IndividualDeltaField.getDeltas(item, result.updates);
-            updates.push({ _id: item.id, ...result.updates });
+
+        // Advance bastion facilities
+        if ( advanceFacilities && bastion?.availableForActor(actor) && actor.itemTypes.facility.length ) {
+          const results = await dnd5e.bastion.advanceAllFacilities(actor, {
+            duration: timePassageData.midnights, performUpdates: false, summary: "auto", turn: false
+          });
+          updates.push(...results.updates);
+        }
+
+        // Recover item & activity uses
+        if ( recoverUses ) {
+          for ( const item of actor.items ) {
+            const result = await item.system.recoverUses?.(periods) ?? {};
+            if ( result?.rolls ) rolls.push(...result.rolls);
+            if ( result?.destroy ) {
+              deltas.deleted.push(item.toObject());
+              deleted.push(item.id);
+            } else if ( !foundry.utils.isEmpty(result?.updates) ) {
+              deltas.item[item.id] = IndividualDeltaField.getDeltas(item, result.updates);
+              updates.push({ _id: item.id, ...result.updates });
+            }
           }
         }
+
         if ( deleted.length ) operations.push({ action: "delete", documentName: "Item", ids: deleted, parent: actor });
         if ( updates.length ) operations.push({ action: "update", documentName: "Item", updates, parent: actor });
         if ( deltas.deleted.length || !foundry.utils.isEmpty(deltas.item) ) changes.push({ deltas, uuid: actor.uuid });
