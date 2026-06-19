@@ -49,6 +49,6 @@ export default class BastionSetting extends foundry.abstract.DataModel {
       const { basic, special } = CONFIG.DND5E.facilities.advancement;
       BastionSetting.#threshold = Math.min(...Object.keys(basic), ...Object.keys(special));
     }
-    return this.enabled && (actor.system.details?.level >= BastionSetting.#threshold);
+    return this.enabled && actor.system.isCharacter && (actor.system.details?.level >= BastionSetting.#threshold);
   }
 }
