@@ -1769,11 +1769,7 @@ items:
             condition: ''
             override: false
           consumption:
-            targets:
-              - type: attribute
-                value: '1'
-                target: resources.legact.value
-                scaling: {}
+            targets: []
             scaling:
               allowed: false
               max: ''
@@ -1849,7 +1845,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781832603126
-      modifiedTime: 1781832625841
+      modifiedTime: 1781911033751
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.o4v4mHxP82HTbIOX'
@@ -1888,11 +1884,7 @@ items:
             condition: ''
             override: false
           consumption:
-            targets:
-              - type: attribute
-                value: '1'
-                target: resources.legact.value
-                scaling: {}
+            targets: []
             scaling:
               allowed: false
               max: ''
@@ -1967,7 +1959,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781832638607
-      modifiedTime: 1781832662555
+      modifiedTime: 1781911041792
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.rEmbKJQ6mpvnUPOO'
@@ -2006,11 +1998,7 @@ items:
             condition: ''
             override: false
           consumption:
-            targets:
-              - type: attribute
-                value: '2'
-                target: resources.legact.value
-                scaling: {}
+            targets: []
             scaling:
               allowed: false
               max: ''
@@ -2085,7 +2073,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781832669059
-      modifiedTime: 1781832694268
+      modifiedTime: 1781911055432
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.pW4iNTQphTJ3litv'

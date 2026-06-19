@@ -528,11 +528,7 @@ items:
             condition: ''
             override: false
           consumption:
-            targets:
-              - type: attribute
-                value: '1'
-                target: resources.legact.value
-                scaling: {}
+            targets: []
             scaling:
               allowed: false
               max: ''
@@ -607,7 +603,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781836123075
-      modifiedTime: 1781836144183
+      modifiedTime: 1781910960656
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!bfh29vIEoGzI240e.6PwbK4d0W11LsEkf'
@@ -643,7 +639,7 @@ items:
           sort: 100000
           activation:
             type: legendary
-            value: null
+            value: 1
             override: false
             condition: ''
           consumption:
@@ -712,7 +708,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781836150717
-      modifiedTime: 1781836164823
+      modifiedTime: 1781910952582
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!bfh29vIEoGzI240e.dJLqLsCek3uxbzuX'
@@ -765,11 +761,7 @@ items:
             condition: ''
             override: false
           consumption:
-            targets:
-              - type: attribute
-                value: '2'
-                target: resources.legact.value
-                scaling: {}
+            targets: []
             scaling:
               allowed: false
               max: ''
@@ -897,7 +889,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781836174902
-      modifiedTime: 1781836556058
+      modifiedTime: 1781910943557
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!bfh29vIEoGzI240e.Uox2GEp5GMXOOXOc'
@@ -943,11 +935,7 @@ items:
             condition: ''
             override: false
           consumption:
-            targets:
-              - type: attribute
-                value: '3'
-                target: resources.legact.value
-                scaling: {}
+            targets: []
             scaling:
               allowed: false
               max: ''
@@ -1038,7 +1026,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781836400394
-      modifiedTime: 1781836540266
+      modifiedTime: 1781910968842
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!bfh29vIEoGzI240e.sXU9KTYnmgi08EQw'
