@@ -922,7 +922,7 @@ async function rollCheckSave(config, event) {
             speaker: ChatMessage.implementation.getSpeaker({ actor, scene: canvas.scene, token: actor.token })
           }
         };
-        await actor.rollConcentration({ ...rollData, target: dc }, {}, message);
+        await actor.rollConcentration({ ...options, target: Number(dc) }, {}, message);
         break;
       case "save":
         await actor.rollSavingThrow(options);
