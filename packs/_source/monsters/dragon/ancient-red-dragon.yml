@@ -1090,7 +1090,9 @@ items:
     system:
       description:
         value: <p>[[lookup @resources.legact.label]]</p>
-        chat: <p>The dragon can take 3 legendary actions. </p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} can take [[lookup
+          @resources.legact.max]] legendary actions.</p>
       source:
         custom: ''
         book: ''
@@ -1130,7 +1132,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781604683518
-      modifiedTime: 1781604683518
+      modifiedTime: 1781897323044
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!vFeFRlF2FOgf2HIL.FQS33bP0xH27cjqc'
