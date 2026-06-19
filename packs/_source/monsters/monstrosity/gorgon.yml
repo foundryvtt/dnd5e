@@ -445,9 +445,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -462,7 +459,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -482,19 +479,23 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: zpzof99ziVJCU4hI
     name: Trampling Charge
     type: feat
-    img: icons/creatures/abilities/cougar-pounce-stalk-black.webp
+    img: icons/creatures/mammals/bull-horns-eyes-glowin-orange.webp
     system:
       description:
         value: >-
-          <p>If the gorgon moves at least 20 feet straight toward a creature and
-          then hits it with a gore attack on the same turn, that target must
-          succeed on a DC 16 Strength saving throw or be knocked prone. If the
-          target is prone, the gorgon can make one attack with its hooves
-          against it as a bonus action.</p>
+          <p>If the [[lookup @name lowercase]]{monster} moves at least 20 feet
+          straight toward a creature and then hits it with a
+          @UUID[Compendium.dnd5e.monsters.Actor.nZthq6WHLhcdu3te.Item.7DSbBzpS1e9lYxZx]{Gore}
+          attack on the same turn, that target must succeed on a [[/save]]
+          saving throw or be knocked &amp;reference[prone]. If the target is
+          prone, the [[lookup @name lowercase]]{monster} can make one attack
+          with its [[/item .O8oahxePfpHFYohz]]{Hooves} against it as a bonus
+          action.</p>
         chat: >-
           <p>If the gorgon moves at <strong>least 20 feet</strong> straight
           toward a creature and then hits it with a gore attack on the same
@@ -511,19 +512,22 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties:
         - trait
       activities:
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+        L6R3PCYmTAFAkPMd:
           type: save
           activation:
-            type: ''
+            type: special
             value: null
-            condition: ''
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} moves at least 20
+              feet straight toward a creature and then hits it with a
+              @UUID[Compendium.dnd5e.monsters.Actor.nZthq6WHLhcdu3te.Item.7DSbBzpS1e9lYxZx]{Gore}
+              attack on the same turn.
             override: false
           consumption:
             targets: []
@@ -533,10 +537,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -553,10 +558,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -566,14 +572,29 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: str
+            ability:
+              - str
             dc:
               calculation: ''
               formula: '16'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: L6R3PCYmTAFAkPMd
+          name: Trample Save
       enchant: {}
       prerequisites:
         level: null
@@ -587,22 +608,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.yD51x4dihnbHwfsj
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765825519830
+      systemVersion: 6.0.0
+      createdTime: 1781877768017
+      modifiedTime: 1781877865505
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!nZthq6WHLhcdu3te.zpzof99ziVJCU4hI'
   - _id: 7DSbBzpS1e9lYxZx
     name: Gore
     type: weapon
-    img: icons/creatures/mammals/ox-bull-horned-glowing-orange.webp
+    img: icons/commodities/bones/horn-antler-brown-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Gorgon attacks with its Gore.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -665,7 +688,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -674,8 +697,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        mCE1hvVYRkvgsinB:
           type: attack
           activation:
             type: action
@@ -690,10 +712,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -710,7 +733,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -723,24 +747,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: mCE1hvVYRkvgsinB
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: gore
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -750,11 +787,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107553330
+      systemVersion: 6.0.0
+      createdTime: 1781877874724
+      modifiedTime: 1781877915161
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!nZthq6WHLhcdu3te.7DSbBzpS1e9lYxZx'
@@ -765,7 +802,9 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Gorgon attacks with its Hooves.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -828,7 +867,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -837,8 +876,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        e9QxWbyRnaKQ4WWF:
           type: attack
           activation:
             type: action
@@ -853,10 +891,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -873,7 +912,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -886,24 +926,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: e9QxWbyRnaKQ4WWF
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: hooves
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -913,32 +966,35 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.re3oXQ3Xg4Z3Fr6O
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107553330
+      systemVersion: 6.0.0
+      createdTime: 1781877923446
+      modifiedTime: 1781877932673
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!nZthq6WHLhcdu3te.O8oahxePfpHFYohz'
   - _id: 5tEnGK28Rd4nHnwM
     name: Petrifying Breath
     type: feat
-    img: icons/magic/air/fog-gas-smoke-orange.webp
+    img: icons/magic/air/fog-gas-smoke-dense-orange.webp
     system:
       description:
         value: >-
-          <p>The gorgon exhales petrifying gas in a 30-foot cone. Each creature
-          in that area must succeed on a DC 13 Constitution saving
+          <p>The [[lookup @name lowercase]]{monster} exhales petrifying gas in a
+          [[lookup @labels.description.template activity=I95hdnCSX03wF7Er]].
+          Each creature in that area must succeed on a [[/save]] saving
           throw.</p><p>On a failed save, a target begins to turn to stone and is
-          restrained. The restrained target must repeat the saving throw at the
-          end of its next turn. On a success, the effect ends on the target. On
-          a failure, the target is petrified until freed by the greater
-          restoration spell or other magic.</p>
+          &amp;reference[restrained]. The restrained target must repeat the
+          saving throw at the end of its next turn. On a success, the effect
+          ends on the target. On a failure, the target is
+          &amp;reference[petrified] until freed by the
+          @UUID[Compendium.dnd5e.spells.Item.WzvJ7G3cqvIubsLk]{Greater
+          Restoration} spell or other magic.</p>
         chat: >-
-          <p>The gorgon exhales petrifying gas in a 30-foot cone. Each creature
-          in that area must make a <strong>Constitution</strong> saving throw.
-          </p>
+          <p>The [[lookup @name]]{monster} exhales petrifying gas in a [[lookup
+          @labels.description.template activity=I95hdnCSX03wF7Er]]. Each
+          creature in that area must make a Constitution saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -959,8 +1015,7 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        I95hdnCSX03wF7Er:
           type: save
           activation:
             type: action
@@ -972,21 +1027,31 @@ items:
               - type: itemUses
                 value: '1'
                 target: ''
+                scaling: {}
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: perm
+            units: disp
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: tsQjwB2ka54p6YZ1
+              onSave: false
+              level:
+                min: null
+                max: null
+            - _id: PtowAW8SWftie1x8
+              level: {}
+              onSave: false
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -998,6 +1063,7 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: false
             affects:
               count: ''
               type: creature
@@ -1013,23 +1079,119 @@ items:
             onSave: half
             parts: []
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '13'
-          sort: 0
-          name: ''
+            visible: true
+            bonus: ''
+          sort: 100000
+          name: Exhale Petrifying Gas
           img: ''
           visibility:
             level:
               min: null
               max: null
             identifier: ''
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          flags: {}
+          _id: I95hdnCSX03wF7Er
       enchant: {}
       prerequisites:
         level: null
       identifier: petrifying-breath
-    effects: []
+    effects:
+      - name: Petrifying
+        img: icons/magic/defensive/armor-stone-skin.webp
+        origin: Compendium.dnd5e.monsters.Actor.nZthq6WHLhcdu3te.Item.5tEnGK28Rd4nHnwM
+        transfer: false
+        _id: tsQjwB2ka54p6YZ1
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: turns
+          expiry: turnEnd
+          expired: false
+        description: >-
+          <p>You are &amp;reference[restrained apply=false] as you begin to turn
+          to stone. You must repeat the saving throw at the end of your next
+          turn.</p><p>On a success, the effect ends. On a failure, you are
+          @UUID[Compendium.dnd5e.monsters.Actor.nZthq6WHLhcdu3te.Item.5tEnGK28Rd4nHnwM.ActiveEffect.PtowAW8SWftie1x8]{Petrified}
+          until freed by the
+          @UUID[Compendium.dnd5e.spells.Item.WzvJ7G3cqvIubsLk]{Greater
+          Restoration} spell or other magic.</p>
+        tint: '#ffffff'
+        statuses:
+          - restrained
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781878043041
+          modifiedTime: 1781878071909
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: >-
+            Compendium.dnd5e.monsters.Actor.EpYl7qifM5pq6W6B.Item.gpxvIs8yjQ4awt4s.ActiveEffect.Z4mFj1zWP0EkqbNH
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!nZthq6WHLhcdu3te.5tEnGK28Rd4nHnwM.tsQjwB2ka54p6YZ1
+      - name: Fully Petrified
+        img: icons/commodities/treasure/statue-bust-stone-grey.webp
+        origin: Compendium.dnd5e.monsters.Actor.nZthq6WHLhcdu3te.Item.5tEnGK28Rd4nHnwM
+        transfer: false
+        _id: PtowAW8SWftie1x8
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You are &amp;reference[petrified apply=false] until freed by the
+          @UUID[Compendium.dnd5e.spells.Item.WzvJ7G3cqvIubsLk]{Greater
+          Restoration} spell or other magic.</p>
+        tint: '#ffffff'
+        statuses:
+          - petrified
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781878044075
+          modifiedTime: 1781879660163
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: >-
+            Compendium.dnd5e.monsters.Actor.EpYl7qifM5pq6W6B.Item.gpxvIs8yjQ4awt4s.ActiveEffect.SkiwEOXDYspZ7NOt
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!nZthq6WHLhcdu3te.5tEnGK28Rd4nHnwM.PtowAW8SWftie1x8
     folder: null
     sort: 0
     ownership:
@@ -1038,11 +1200,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.xmXYBevj0kuPa3Fo
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765825552768
+      systemVersion: 6.0.0
+      createdTime: 1781877774759
+      modifiedTime: 1781878165371
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!nZthq6WHLhcdu3te.5tEnGK28Rd4nHnwM'
@@ -1054,7 +1216,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171256342

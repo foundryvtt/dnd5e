@@ -54,8 +54,8 @@ system:
     hp:
       value: 195
       max: 195
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 17d12 + 85
     init:
       ability: ''
@@ -446,9 +446,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -463,7 +460,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -483,6 +480,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 3
 items:
   - _id: Qcgc4zckQ7c1Ky8t
     name: Bite
@@ -491,14 +489,17 @@ items:
     system:
       description:
         value: >-
-          <p>[[/attack extended]]. [[/damage extended]]. </p><p>If the target is
-          a creature, it is grappled (escape DC 17). Until this grapple ends,
-          the target is restrained, and the remorhaz can't bite another
-          target.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
+          a creature, it is &amp;reference[grappled] (escape DC 17). Until this
+          grapple ends, the target is &amp;reference[restrained], and the
+          [[lookup @name lowercase]]{monster} can't [[lookup @item.name]]
+          another target.</p>
         chat: >-
-          <p>The Remorhaz attacks with its Bite. If the target is a creature, it
-          is grappled. Until this grapple ends, the target is restrained, and
-          the remorhaz can't bite another target.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. If the target is a creature, it is
+          &amp;reference[grappled]. Until this grapple ends, the target is
+          &amp;reference[restrained], and the [[lookup @name]]{monster} can't
+          [[lookup @item.name lowercase]] another target.</p>
       source:
         custom: ''
         book: ''
@@ -522,7 +523,7 @@ items:
         value: null
         long: null
         units: ft
-        reach: null
+        reach: 10
       uses:
         max: ''
         recovery: []
@@ -560,9 +561,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - rch
-      proficient: 1
+      properties: []
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -571,8 +571,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        QCSIeH7djd1StcbV:
           type: attack
           activation:
             type: action
@@ -587,13 +586,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: 1AjFX4WSAMPeLQAv
+              level: {}
           range:
             value: '10'
             units: ft
@@ -607,7 +609,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -620,37 +623,90 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts:
-              - number: 3
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 3
                 denomination: 6
                 bonus: ''
                 types:
                   - fire
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
+                  number: 1
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: QCSIeH7djd1StcbV
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
-    effects: []
+      mastery: ''
+    effects:
+      - name: Grappled by Bite
+        img: icons/creatures/abilities/mouth-teeth-fire-orange.webp
+        origin: Compendium.dnd5e.monsters.Actor.VBzqw2rOUvTuNOPI.Item.Qcgc4zckQ7c1Ky8t
+        transfer: false
+        _id: 1AjFX4WSAMPeLQAv
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You are &amp;reference[grappled apply=false] (escape DC 17). While
+          grappled in this way, you are also &amp;reference[restrained
+          apply=false].</p>
+        tint: '#ffffff'
+        statuses:
+          - grappled
+          - restrained
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781866080999
+          modifiedTime: 1781866118731
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!VBzqw2rOUvTuNOPI.Qcgc4zckQ7c1Ky8t.1AjFX4WSAMPeLQAv
     folder: null
     sort: 0
     ownership:
@@ -659,26 +715,27 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107552019
+      systemVersion: 6.0.0
+      createdTime: 1781866035176
+      modifiedTime: 1781876256592
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!VBzqw2rOUvTuNOPI.Qcgc4zckQ7c1Ky8t'
   - _id: usmJdksgWhPnjq94
     name: Heated Body
     type: feat
-    img: icons/magic/fire/flame-burning-campfire-rocks.webp
+    img: icons/tools/smithing/furnace-fire-metal-orange.webp
     system:
       description:
         value: >-
-          <p>A creature that touches the remorhaz or hits it with a melee attack
-          while within 5 feet of it takes 10 (3d6) fire damage.</p>
+          <p>A creature that touches the [[lookup @name lowercase]]{monster} or
+          hits it with a melee attack while within 5 feet of it takes [[/damage
+          average]] damage.</p>
         chat: >-
-          <p>A creature that touches the remorhaz or hits it with a melee attack
-          while within 5 feet of it takes <em>fire damage</em>.</p>
+          <p>A creature that touches the [[lookup @name]]{mosnter} or hits it
+          with a melee attack while within 5 feet of it takes fire damage.</p>
       source:
         custom: ''
         book: ''
@@ -691,18 +748,20 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        kT8O1nYNeEvZcf4s:
           type: damage
           activation:
-            type: ''
+            type: special
             value: null
-            condition: ''
+            condition: >-
+              When a creature touches the [[lookup @name lowercase]]{monster} or
+              hits it with a melee attack while within 5 feet of it.
             override: false
           consumption:
             targets: []
@@ -712,17 +771,19 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: ft
             special: ''
             override: false
+            value: '5'
           target:
             template:
               count: ''
@@ -731,181 +792,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          damage:
-            critical:
-              allow: false
-              bonus: ''
-            parts:
-              - number: 3
-                denomination: 6
-                bonus: ''
-                types:
-                  - fire
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: heated-body
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.iFNpsEMJT66eLoat
-      duplicateSource: null
-      coreVersion: '13.351'
-      systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765826526867
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!VBzqw2rOUvTuNOPI.usmJdksgWhPnjq94'
-  - _id: kT6wF3F49uuWgP3h
-    name: Swallow
-    type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
-    system:
-      description:
-        value: >-
-          <p>The remorhaz makes one bite attack against a Medium or smaller
-          creature it is grappling.</p><p>If the attack hits, that creature
-          takes the bite's damage and is swallowed, and the grapple ends. While
-          swallowed, the creature is blinded and restrained, it has total cover
-          against attacks and other effects outside the remorhaz, and it takes
-          21 (6d6) acid damage at the start of each of the remorhaz's turns.</p>
-        chat: <p>The Remorhaz attacks with its Swallow.</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      quantity: 1
-      weight:
-        value: 0
-        units: lb
-      price:
-        value: 0
-        denomination: gp
-      attunement: ''
-      equipped: true
-      rarity: ''
-      identified: true
-      cover: null
-      range:
-        value: null
-        long: null
-        units: ''
-        reach: null
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      damage:
-        versatile:
-          number: null
-          denomination: null
-          bonus: ''
-          types: []
-          custom:
-            enabled: false
-            formula: ''
-          scaling:
-            mode: ''
-            number: null
-            formula: ''
-        base:
-          number: 6
-          denomination: 6
-          bonus: ''
-          types:
-            - acid
-          custom:
-            enabled: false
-            formula: ''
-          scaling:
-            mode: ''
-            number: null
-            formula: ''
-      armor:
-        value: 10
-      hp:
-        value: 0
-        max: 0
-        dt: null
-        conditions: ''
-      properties: []
-      proficient: 1
-      unidentified:
-        description: ''
-      type:
-        value: natural
-        baseItem: ''
-      container: null
-      crewed: false
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: damage
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ''
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -922,24 +813,30 @@ items:
               - custom:
                   enabled: false
                   formula: ''
-                number: 6
+                number: 3
                 denomination: 6
                 bonus: ''
                 types:
-                  - acid
-          sort: 0
-          name: ''
+                  - fire
+                scaling:
+                  number: 1
+          sort: 100000
+          name: Contact Damage
           img: ''
+          flags: {}
           visibility:
+            identifier: ''
             level:
               min: null
               max: null
-            identifier: ''
-      attuned: false
-      ammunition: {}
-      magicalBonus: null
-      identifier: swallow
-      mastery: ''
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: kT8O1nYNeEvZcf4s
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: heated-body
     effects: []
     folder: null
     sort: 0
@@ -947,16 +844,257 @@ items:
       default: 0
     flags: {}
     _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.aH5ncM30tP8tPQ24
+      compendiumSource: Compendium.dnd5e.monsterfeatures.iFNpsEMJT66eLoat
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765826557086
+      systemVersion: 6.0.0
+      createdTime: 1781866137311
+      modifiedTime: 1781866344927
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!VBzqw2rOUvTuNOPI.kT6wF3F49uuWgP3h'
+    _key: '!actors.items!VBzqw2rOUvTuNOPI.usmJdksgWhPnjq94'
+  - _id: NwgQC3ohxcI1L3GT
+    name: Swallow
+    type: feat
+    img: icons/creatures/abilities/mouth-teeth-tongue-purple.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} makes one
+          @UUID[Compendium.dnd5e.monsters.Actor.VBzqw2rOUvTuNOPI.Item.Qcgc4zckQ7c1Ky8t]{Bite}
+          attack against a Medium or smaller creature it is
+          &amp;reference[grappling].</p><p>If the attack hits, that creature
+          takes the bite's damage and is swallowed, and the grapple ends. While
+          swallowed, the creature is &amp;reference[blinded] and
+          &amp;reference[restrained], it has &amp;reference[total cover] against
+          attacks and other effects outside the [[lookup @name
+          lowercase]]{monster}, and it takes [[/damage activity=uTz7h3Og3Q3YACla
+          average]] damage at the start of each of the remorhaz's turns.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]{monster}.</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities:
+        IZjIl4DUiumKY8Yj:
+          type: utility
+          name: Swallow Creature
+          img: ''
+          sort: 0
+          activation:
+            type: action
+            override: false
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} hits a creature it
+              has &reference[grappled apply=false] with its
+              @UUID[Compendium.dnd5e.monsters.Actor.Ixo5shumxy4I9qyD.Item.lYSWskOMRCVLyWLZ]{Bite}.
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: ''
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects:
+            - _id: 5YoZO3QgfMTcLhgh
+              level: {}
+          flags: {}
+          range:
+            units: touch
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: creature
+              count: '1'
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          _id: IZjIl4DUiumKY8Yj
+        FesIfdYnpzEm3nyu:
+          type: damage
+          name: Start of Turn Digestion Damage
+          img: ''
+          sort: 100000
+          activation:
+            type: special
+            override: false
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} starts its turn while
+              it has a creature swallowed.
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: ''
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: spec
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: creature
+              count: '1'
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          damage:
+            critical:
+              allow: false
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 6
+                denomination: 6
+                bonus: ''
+                types:
+                  - acid
+                scaling:
+                  number: 1
+          _id: FesIfdYnpzEm3nyu
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: swallow
+      advancement: {}
+      crewed: false
+    effects:
+      - name: Swallowed
+        img: icons/creatures/abilities/mouth-teeth-tongue-purple.webp
+        origin: Compendium.dnd5e.monsters.Actor.Ixo5shumxy4I9qyD.Item.6aBDwlIsxceFMXxL
+        transfer: false
+        _id: 5YoZO3QgfMTcLhgh
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You have been swallowed by the remorhaz. You are
+          &amp;reference[blinded apply=false], &amp;reference[restrained
+          apply=false], and have &amp;reference[total cover] against attacks and
+          other effects outsdie the remorhaz.</p><p>You also take [[/damage
+          average 6d6 acid]] damage at the start of each of the remorhaz's
+          turns.</p>
+        tint: '#ffffff'
+        statuses:
+          - blinded
+          - restrained
+          - coverTotal
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781865901413
+          modifiedTime: 1781865994286
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: >-
+            Compendium.dnd5e.monsters.Actor.Ixo5shumxy4I9qyD.Item.6aBDwlIsxceFMXxL.ActiveEffect.5YoZO3QgfMTcLhgh
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!VBzqw2rOUvTuNOPI.NwgQC3ohxcI1L3GT.5YoZO3QgfMTcLhgh
+    folder: null
+    sort: 59375
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.Ixo5shumxy4I9qyD.Item.6aBDwlIsxceFMXxL
+      duplicateSource: Item.ePcEJFaXQWlel7lw
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781865901413
+      modifiedTime: 1781865955730
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!VBzqw2rOUvTuNOPI.NwgQC3ohxcI1L3GT'
 effects: []
 folder: MMKVDW6XI98WdIVu
 sort: 0
@@ -965,11 +1103,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1726171235610
-  modifiedTime: 1726171445528
+  modifiedTime: 1781865975816
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!actors!VBzqw2rOUvTuNOPI'

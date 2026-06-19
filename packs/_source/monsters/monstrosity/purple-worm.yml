@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,16 +478,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 4
 items:
   - _id: ZgUj67GknsWFnbAR
     name: Tunneler
     type: feat
-    img: icons/magic/unholy/orb-glowing-yellow-purple.webp
+    img: icons/environment/wilderness/mine-exterior-entrance.webp
     system:
       description:
         value: >-
-          <p>The worm can burrow through solid rock at half its burrow speed and
-          leaves a 10-foot-diameter tunnel in its wake.</p>
+          <p>The [[lookup @name lowercase]]{monster} can burrow through solid
+          rock at half its burrow speed and leaves a 10-foot-diameter tunnel in
+          its wake.</p>
         chat: ''
       source:
         custom: ''
@@ -504,10 +503,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -522,12 +522,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.3mrPXaxalJxpxVrv
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781876687437
+      modifiedTime: 1781876705550
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!PtotS52HpHX596cZ.ZgUj67GknsWFnbAR'
   - _id: Uo4oxB1xZmJcWVsZ
@@ -537,9 +537,9 @@ items:
     system:
       description:
         value: >-
-          <p>The worm makes two attacks: one with its [[/item
-          .dlzFJ5UjbMAfJ6Sb]]{bite} and one with its [[/item
-          .yOjkK3f9jt2fYu3M]]{stinger}.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes two attacks: one with
+          its [[/item .dlzFJ5UjbMAfJ6Sb]]{Bite} and one with its [[/item
+          .yOjkK3f9jt2fYu3M]]{Stinger}.</p>
         chat: ''
       source:
         custom: ''
@@ -553,13 +553,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        VgOjhyH6sbQBaR2t:
           type: utility
           activation:
             type: action
@@ -574,15 +573,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -593,7 +593,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -610,7 +611,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: VgOjhyH6sbQBaR2t
       enchant: {}
       prerequisites:
         level: null
@@ -624,37 +633,43 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765826442426
+      systemVersion: 6.0.0
+      createdTime: 1781877195485
+      modifiedTime: 1781877204715
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!PtotS52HpHX596cZ.Uo4oxB1xZmJcWVsZ'
   - _id: dlzFJ5UjbMAfJ6Sb
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-tongue-purple.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
-          a Large or smaller creature, it must succeed on a DC 19 Dexterity
-          saving throw or be swallowed by the worm. A swallowed creature is
-          blinded and restrained, it has total cover against attacks and other
-          effects outside the worm, and it takes 21 (6d6) acid damage at the
-          start of each of the worm's turns.If the worm takes 30 damage or more
-          on a single turn from a creature inside it, the worm must succeed on a
-          DC 21 Constitution saving throw at the end of that turn or regurgitate
-          all swallowed creatures, which fall prone in a space within 10 feet of
-          the worm. If the worm dies, a swallowed creature is no longer
-          restrained by it and can escape from the corpse by using 20 feet of
-          movement, exiting prone.</p>
+          a Large or smaller creature, it must succeed on a [[/save
+          activity=dnd5eactivity100]] saving throw or be swallowed by the
+          [[lookup @name lowercase]]{monster}. A swallowed creature is
+          &amp;reference[blinded] and &amp;reference[restrained], it has
+          &amp;reference[total cover] against attacks and other effects outside
+          the [[lookup @name lowercase]]{monster}, and it takes [[/damage
+          average activity=5Ch92u8uWNihu5p1]] damage at the start of each of the
+          [[lookup @name lowercase]]{monster}'s turns.</p><p>If the [[lookup
+          @name lowercase]]{monster} takes 30 damage or more on a single turn
+          from a creature inside it, the [[lookup @name lowercase]]{monster}
+          must succeed on a [[/save activity=RtTQzkfIp3upqvoQ]] saving throw at
+          the end of that turn or regurgitate all swallowed creatures, which
+          fall &amp;reference[prone] in a space within 10 feet of the [[lookup
+          @name lowercase]]{monster}. If the [[lookup @name lowercase]]{monster}
+          dies, a swallowed creature is no longer restrained by it and can
+          escape from the corpse by using 20 feet of movement, exiting
+          &amp;reference[prone].</p>
         chat: >-
-          <p>The Purple Worm attacks with its Bite. If the target is a Large or
-          smaller creature, it must make a <strong>Dexterity</strong> saving
-          throw. </p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. If the target is a Large or smaller creature, it must
+          make a Dexterity saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -678,7 +693,7 @@ items:
         value: null
         long: null
         units: ft
-        reach: null
+        reach: 10
       uses:
         max: ''
         recovery: []
@@ -716,9 +731,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - rch
-      proficient: 1
+      properties: []
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -727,8 +741,220 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        dnd5eactivity100:
+          _id: dnd5eactivity100
+          type: save
+          activation:
+            type: special
+            value: 1
+            condition: When a creature that is Large or smaller is hit by this attack.
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects:
+            - _id: vg1tK3NNahxO2QgV
+              level: {}
+              onSave: false
+          range:
+            value: '10'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: '1'
+              type: creature
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: none
+            parts: []
+          save:
+            ability: dex
+            dc:
+              calculation: ''
+              formula: '19'
+            bonus: ''
+          sort: 300000
+          name: Swallow Save
+          img: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
+        5Ch92u8uWNihu5p1:
+          type: damage
+          name: Start of Turn Digestion Damage
+          img: ''
+          sort: 400000
+          activation:
+            type: special
+            override: false
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} starts its turn while
+              it has a creature swallowed.
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: ''
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: spec
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: creature
+              count: '1'
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          damage:
+            critical:
+              allow: false
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 6
+                denomination: 6
+                bonus: ''
+                types:
+                  - acid
+                scaling:
+                  number: 1
+          _id: 5Ch92u8uWNihu5p1
+        RtTQzkfIp3upqvoQ:
+          type: save
+          name: Regurgitate Creature Save
+          img: ''
+          sort: 500000
+          activation:
+            type: special
+            override: false
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} takes 30 or more
+              damage on a single turn form a swallowed creature.
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: >-
+              <p>If the [[lookup @name lowercase]]{monster} takes 30 damage or
+              more on a single turn from a creature inside it, the [[lookup
+              @name lowercase]]{monster} must succeed on a [[/save
+              activity=RtTQzkfIp3upqvoQ]] saving throw at the end of that turn
+              or regurgitate all swallowed creatures, which fall
+              &amp;reference[prone] in a space within 10 feet of the [[lookup
+              @name lowercase]]{monster}. If the [[lookup @name
+              lowercase]]{monster} dies, a swallowed creature is no longer
+              restrained by it and can escape from the corpse by using 20 feet
+              of movement, exiting &amp;reference[prone].</p>
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: self
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: self
+              count: ''
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          damage:
+            onSave: half
+            parts: []
+          save:
+            ability:
+              - con
+            dc:
+              calculation: ''
+              formula: '21'
+            visible: true
+            bonus: ''
+          _id: RtTQzkfIp3upqvoQ
+        oMB9uuqRLAc5qVXG:
           type: attack
           activation:
             type: action
@@ -743,10 +969,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -763,7 +990,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -776,98 +1004,90 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
-          type: save
-          activation:
-            type: turnStart
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '10'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          damage:
-            onSave: half
-            parts:
-              - custom:
-                  enabled: false
-                  formula: ''
-                number: 6
-                denomination: 6
-                bonus: ''
-                types:
-                  - acid
-          save:
-            ability: dex
-            dc:
-              calculation: ''
-              formula: '19'
-          sort: 0
+          sort: 200000
           name: ''
           img: ''
+          flags: {}
           visibility:
+            identifier: ''
             level:
               min: null
               max: null
-            identifier: ''
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: oMB9uuqRLAc5qVXG
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
       mastery: ''
-    effects: []
+    effects:
+      - name: Swallowed
+        img: icons/creatures/abilities/mouth-teeth-tongue-purple.webp
+        origin: Compendium.dnd5e.monsters.Actor.PtotS52HpHX596cZ.Item.dlzFJ5UjbMAfJ6Sb
+        transfer: false
+        _id: vg1tK3NNahxO2QgV
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You have been swallowed by the purple worm. You are
+          &amp;reference[blinded apply=false], &amp;reference[restrained
+          apply=false], and have &amp;reference[total cover] against attacks and
+          other effects outsdie the purple worm.</p><p>You also take [[/damage
+          average 6d6 acid]] damage at the start of each of the purple worm's
+          turns.</p><p>If the purple worm takes 30 damage or more on a single
+          turn from you, the purple worm must succceed on a Constitution saving
+          throw or regurgitate you, causing you to fall &amp;reference[prone] in
+          a space within 10 feet of the purple worm. If the purple worm dies,
+          you are no longer restrained by it and can escape from the corpse by
+          using 20 feet of movement, exiting &amp;reference[prone].</p>
+        tint: '#ffffff'
+        statuses:
+          - blinded
+          - restrained
+          - coverTotal
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781876935343
+          modifiedTime: 1781885731146
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: >-
+            Compendium.dnd5e.monsters.Actor.Ixo5shumxy4I9qyD.Item.6aBDwlIsxceFMXxL.ActiveEffect.5YoZO3QgfMTcLhgh
+          duplicateSource: Item.ePcEJFaXQWlel7lw.ActiveEffect.5YoZO3QgfMTcLhgh
+          exportSource: null
+        _key: >-
+          !actors.items.effects!PtotS52HpHX596cZ.dlzFJ5UjbMAfJ6Sb.vg1tK3NNahxO2QgV
     folder: null
     sort: 0
     ownership:
@@ -876,11 +1096,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765826483261
+      systemVersion: 6.0.0
+      createdTime: 1781876712263
+      modifiedTime: 1781877178410
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!PtotS52HpHX596cZ.dlzFJ5UjbMAfJ6Sb'
@@ -892,11 +1112,12 @@ items:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
-          make a DC 19 Constitution saving throw, taking 42 (12d6) poison damage
-          on a failed save, or half as much damage on a successful one.</p>
+          make a [[/save activity=IKUzECPGj8QbMFLo]] saving throw, taking
+          [[/damage average activity=IKUzECPGj8QbMFLo]] damage on a failed save,
+          or half as much damage on a successful one.</p>
         chat: >-
-          <p>The Purple Worm attacks with its Tail Stinger. The target must make
-          a <strong>Constitution</strong> saving throw.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. The target must make a Constitution saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -920,7 +1141,7 @@ items:
         value: null
         long: null
         units: ft
-        reach: null
+        reach: 10
       uses:
         max: ''
         recovery: []
@@ -958,9 +1179,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - rch
-      proficient: 1
+      properties: []
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -969,8 +1189,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        LmNp8XIzKZAdNKyy:
           type: attack
           activation:
             type: action
@@ -985,10 +1204,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1005,7 +1225,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1018,27 +1239,38 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: LmNp8XIzKZAdNKyy
+          name: ''
+        IKUzECPGj8QbMFLo:
           type: save
           activation:
-            type: action
+            type: special
             value: 1
-            condition: ''
+            condition: When a creature is hit by this attack.
             override: false
           consumption:
             targets: []
@@ -1048,10 +1280,15 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>The target must make a [[/save activity=IKUzECPGj8QbMFLo]]
+              saving throw, taking [[/damage average activity=IKUzECPGj8QbMFLo]]
+              damage on a failed save, or half as much damage on a successful
+              one.</p>
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1068,10 +1305,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -1091,19 +1329,29 @@ items:
                 bonus: ''
                 types:
                   - poison
+                scaling:
+                  number: 1
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '19'
-          sort: 0
-          name: ''
+            visible: true
+            bonus: ''
+          sort: 200000
+          name: Poison Save
           img: ''
           visibility:
             level:
               min: null
               max: null
             identifier: ''
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          flags: {}
+          _id: IKUzECPGj8QbMFLo
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -1118,11 +1366,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765826505914
+      systemVersion: 6.0.0
+      createdTime: 1781876725230
+      modifiedTime: 1781876804502
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!PtotS52HpHX596cZ.yOjkK3f9jt2fYu3M'
@@ -1134,7 +1382,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171229828

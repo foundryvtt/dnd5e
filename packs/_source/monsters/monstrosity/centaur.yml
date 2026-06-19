@@ -446,9 +446,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -463,7 +460,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -483,6 +480,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: uhqyN44IRWXixgxU
     name: Pike
@@ -491,7 +489,9 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Centaur attacks with its Pike.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -557,7 +557,7 @@ items:
         - hvy
         - rch
         - two
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -566,8 +566,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        YlrG2T6BiMi3NE2c:
           type: attack
           activation:
             type: action
@@ -582,10 +581,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -602,7 +602,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -615,24 +616,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: YlrG2T6BiMi3NE2c
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: pike
+      mastery: ''
     effects: []
     folder: null
     sort: 100000
@@ -642,11 +656,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.tC0kcqZT9HHAO0PD
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1765825099125
+      systemVersion: 6.0.0
+      createdTime: 1781864974274
+      modifiedTime: 1781873895253
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!5kZNNWzZ6HrfKuWf.uhqyN44IRWXixgxU'
@@ -657,7 +671,9 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Centaur attacks with its Hooves.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -720,7 +736,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -729,8 +745,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        RkZcsxPzrqbF2SAS:
           type: attack
           activation:
             type: action
@@ -745,10 +760,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -765,7 +781,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -778,24 +795,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: RkZcsxPzrqbF2SAS
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: hooves
+      mastery: ''
     effects: []
     folder: null
     sort: 300000
@@ -805,11 +835,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.re3oXQ3Xg4Z3Fr6O
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1765825099125
+      systemVersion: 6.0.0
+      createdTime: 1781864996501
+      modifiedTime: 1781873890731
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!5kZNNWzZ6HrfKuWf.ICbiLFrPjwIfA1Nj'
@@ -820,7 +850,9 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Centaur attacks with its Longbow.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -886,7 +918,7 @@ items:
         - amm
         - hvy
         - two
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -895,8 +927,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        1ASAlWuZJlSpczSQ:
           type: attack
           activation:
             type: action
@@ -911,10 +942,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -931,7 +963,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -944,24 +977,38 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: ranged
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 1ASAlWuZJlSpczSQ
+          name: ''
       attuned: false
-      ammunition: {}
+      ammunition:
+        type: ''
       magicalBonus: null
       identifier: longbow
+      mastery: ''
     effects: []
     folder: null
     sort: 400000
@@ -971,11 +1018,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.3cymOVja8jXbzrdT
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1765825099125
+      systemVersion: 6.0.0
+      createdTime: 1781865023020
+      modifiedTime: 1781873899229
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!5kZNNWzZ6HrfKuWf.v7ForWMLPJp1u78X'
@@ -986,10 +1033,10 @@ items:
     system:
       description:
         value: >-
-          <p>The centaur makes two attacks: one with its [[/item
-          .uhqyN44IRWXixgxU]]{pike} and one with its [[/item
-          .ICbiLFrPjwIfA1Nj]]{hooves} or two with its [[/item
-          .v7ForWMLPJp1u78X]]{longbow}.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes two attacks: one with
+          its [[/item .uhqyN44IRWXixgxU]]{Pike} and one with its [[/item
+          .ICbiLFrPjwIfA1Nj]]{Hooves} or two with its [[/item
+          .v7ForWMLPJp1u78X]]{Longbow}.</p>
         chat: ''
       source:
         custom: ''
@@ -1074,28 +1121,31 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1765825100156
+      systemVersion: 6.0.0
+      createdTime: 1781865059323
+      modifiedTime: 1781865059323
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!5kZNNWzZ6HrfKuWf.iYlIoEDfSCrggrca'
   - _id: 4R48w4DH2CqCpmED
     name: Charge
     type: feat
-    img: icons/creatures/mammals/ox-bull-horned-glowing-orange.webp
+    img: icons/creatures/mammals/bull-horns-eyes-glowin-orange.webp
     system:
       description:
         value: >-
-          <p>If the centaur moves at least 30 ft. straight toward a target and
-          then hits it with a pike attack on the same turn, the target takes an
-          extra 10 (3d6) piercing damage.</p>
+          <p>If the [[lookup @name lowercase]]{monster} moves at least 30 feet
+          straight toward a target and then hits it with a
+          @UUID[Compendium.dnd5e.monsters.Actor.5kZNNWzZ6HrfKuWf.Item.uhqyN44IRWXixgxU]{Pike}
+          attack on the same turn, the target takes an extra [[/damage average]]
+          damage.</p>
         chat: >-
-          <p>If the centaur moves at least 30 ft. straight toward a target and
-          then hits it with a pike attack on the same turn, the target takes
-          extra <em>piercing damage</em>.</p>
+          <p>If the [[lookup @name]]{monster} moves at least 30 feet straight
+          toward a target and then hits it with a
+          @UUID[Compendium.dnd5e.monsters.Actor.5kZNNWzZ6HrfKuWf.Item.uhqyN44IRWXixgxU]{Pike}
+          attack on the same turn, the target takes extra piercing damage.</p>
       source:
         custom: ''
         book: ''
@@ -1108,19 +1158,22 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties:
         - trait
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        P5svOu8A9PVBqmL6:
           type: damage
           activation:
-            type: ''
+            type: special
             value: null
-            condition: ''
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} moves at least 30
+              feet straight toward a target and then hits it with a
+              @UUID[Compendium.dnd5e.monsters.Actor.5kZNNWzZ6HrfKuWf.Item.uhqyN44IRWXixgxU]{Pike}
+              attack on the same turn.
             override: false
           consumption:
             targets: []
@@ -1130,10 +1183,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1150,10 +1204,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -1164,22 +1219,32 @@ items:
             recovery: []
           damage:
             critical:
-              allow: false
+              allow: true
               bonus: ''
             parts:
-              - number: 3
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 3
                 denomination: 6
                 bonus: ''
                 types:
                   - piercing
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
+                  number: 1
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: P5svOu8A9PVBqmL6
+          name: Bonus Charge Damage
       enchant: {}
       prerequisites:
         level: null
@@ -1193,11 +1258,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WqRzbokPG0am6AHb
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765825096049
+      systemVersion: 6.0.0
+      createdTime: 1781864965044
+      modifiedTime: 1781865171490
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!5kZNNWzZ6HrfKuWf.4R48w4DH2CqCpmED'
@@ -1209,7 +1274,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171203794

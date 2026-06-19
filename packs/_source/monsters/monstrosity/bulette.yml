@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,15 +478,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: r4KUyv5cYwjHqNl3
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-fire-orange.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Bulette attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -552,7 +552,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -561,8 +561,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        VYfgsV7EsHqyASgX:
           type: attack
           activation:
             type: action
@@ -577,10 +576,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -597,7 +597,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -616,18 +617,31 @@ items:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: VYfgsV7EsHqyASgX
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -637,86 +651,40 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107549721
+      systemVersion: 6.0.0
+      createdTime: 1781873189524
+      modifiedTime: 1781873907451
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!1ES45ODWg3pCrkzv.r4KUyv5cYwjHqNl3'
-  - _id: xZeM7pLE9OPzdhBY
-    name: Standing Leap
-    type: feat
-    img: icons/environment/creatures/frog-spotted-green.webp
-    system:
-      description:
-        value: >-
-          <p>The bulette's long jump is up to 30 feet and its high jump is up to
-          15 feet, with or without a running start.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: standing-leap
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.f4yvSah35ixQOswD
-      duplicateSource: null
-      coreVersion: '13.351'
-      systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765825031471
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!1ES45ODWg3pCrkzv.xZeM7pLE9OPzdhBY'
   - _id: Keg9oouX6Vbl9tms
     name: Deadly leap
     type: feat
-    img: icons/magic/fire/projectile-wave-arrow.webp
+    img: icons/magic/earth/barrier-stone-brown-green.webp
     system:
       description:
         value: >-
-          <p>If the bulette jumps at least 15 ft. as part of its movement, it
-          can then use this action to land on its feet in a space that contains
-          one or more other creatures.</p><p>Each of those creatures must
-          succeed on a DC 16 Strength or Dexterity saving throw (target's
-          choice) or be knocked prone and take 14 (3d6 + 4) <em>bludgeoning
-          damage</em> plus 14 (3d6 + 4) <em>slashing damage</em>. On a
-          successful save, the creature takes only half the damage, isn't
-          knocked prone, and is pushed 5 ft. out of the bulette's space into an
-          unoccupied space of the creature's choice. If no unoccupied space is
-          within range, the creature instead falls prone in the bulette's
+          <p>If the [[lookup @name lowercase]]{mosnter} jumps at least [[lookup
+          @labels.description.range activity=1vGEpDSCHfEAoC4w]] as part of its
+          movement, it can then use this action to land on its feet in a space
+          that contains one or more other creatures.</p><p>Each of those
+          creatures must succeed on a [[/save activity=1vGEpDSCHfEAoC4w]] saving
+          throw (target's choice) or be knocked &amp;reference[prone] and take
+          [[/damage average activity=1vGEpDSCHfEAoC4w]]. On a successful save,
+          the creature takes only half the damage, isn't knocked prone, and is
+          pushed 5 feet out of the [[lookup @name lowercase]]{monster}'s space
+          into an unoccupied space of the creature's choice. If no unoccupied
+          space is within range, the creature instead falls
+          &amp;reference[prone] in the [[lookup @name lowercase]]{mosnter}'s
           space.</p>
         chat: >-
-          <p>If the bulette jumps at least 15 ft. as part of its movement, it
-          can then use this action to land on its feet in a space that contains
-          one or more other creatures. Each of those creatures must make a
-          Strength or Dexterity saving throw (target's choice) or be knocked
-          prone.</p>
+          <p>If the [[lookup @name]]{monster} jumps at least 15 feet as part of
+          its movement, it can then use this action to land on its feet in a
+          space that contains one or more other creatures. Each of those
+          creatures must make a Strength or Dexterity saving throw (target's
+          choice) or be knocked &amp;reference[prone].</p>
       source:
         custom: ''
         book: ''
@@ -729,18 +697,19 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+        1vGEpDSCHfEAoC4w:
           type: save
           activation:
             type: action
             value: null
-            condition: ''
+            condition: >-
+              If the [[lookup @name lowercase]]{monster} jumps at least 15 feet
+              as part of its movement.
             override: false
           consumption:
             targets: []
@@ -750,10 +719,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -770,7 +740,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -793,6 +764,8 @@ items:
                 bonus: '@mod'
                 types:
                   - bludgeoning
+                scaling:
+                  number: 1
               - custom:
                   enabled: false
                   formula: ''
@@ -801,19 +774,30 @@ items:
                 bonus: '@mod'
                 types:
                   - slashing
+                scaling:
+                  number: 1
           save:
-            ability: str
+            ability:
+              - str
+              - dex
             dc:
               calculation: ''
               formula: '16'
-          sort: 100000
-          name: ''
+            bonus: ''
+            visible: true
+          sort: 200000
+          name: Land on Feet
           img: ''
           visibility:
             level:
               min: null
               max: null
             identifier: ''
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          flags: {}
+          _id: 1vGEpDSCHfEAoC4w
       enchant: {}
       prerequisites:
         level: null
@@ -827,14 +811,68 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.bG5Z45jj4wz0N3T6
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765825064404
+      systemVersion: 6.0.0
+      createdTime: 1781873245302
+      modifiedTime: 1781873665591
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!1ES45ODWg3pCrkzv.Keg9oouX6Vbl9tms'
+  - _id: xCDWUdpsC9XrGyHN
+    name: Standing Leap
+    type: feat
+    img: icons/skills/movement/arrows-up-trio-red.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster}'s &amp;reference[long jump]
+          is up to 30 feet and its &amp;reference[high jump] is up to 15 feet,
+          with or without a running start.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: standing-leap
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: null
+    sort: 225000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.f4yvSah35ixQOswD
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781873168077
+      modifiedTime: 1781873184433
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!1ES45ODWg3pCrkzv.xCDWUdpsC9XrGyHN'
 effects: []
 folder: MMKVDW6XI98WdIVu
 sort: 0
@@ -843,7 +881,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171198412
