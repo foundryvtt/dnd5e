@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,6 +478,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: 38I6bGoguRRefN6W
     name: Spellcasting
@@ -529,7 +527,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.fdmzHw875EzpXM2a
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
@@ -544,7 +542,9 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Acolyte attacks with their Club.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -608,7 +608,7 @@ items:
         conditions: ''
       properties:
         - lgt
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -617,8 +617,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        2NqGq0cPTQ6Oi2JY:
           type: attack
           activation:
             type: action
@@ -633,10 +632,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -653,7 +653,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -666,24 +667,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 2NqGq0cPTQ6Oi2JY
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: club
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -693,11 +707,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.nfIRTECQIG81CvM4
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107550723
+      systemVersion: 6.0.0
+      createdTime: 1781819865560
+      modifiedTime: 1781819875241
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!CHEUjiYrVM9X0vIT.swpThURVHnaQRjfY'
@@ -812,7 +826,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.Bnn9Nzajixvow9xi
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -941,7 +955,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.n9pJzTDsAwQxJVRl
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1072,7 +1086,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1186,36 +1200,12 @@ items:
     effects:
       - _id: 8rP3gwmXVTgZqYZE
         flags: {}
-        changes:
-          - key: system.bonuses.abilities.save
-            mode: 2
-            value: +1d4
-            priority: null
-          - key: system.bonuses.mwak.attack
-            mode: 2
-            value: +1d4
-            priority: null
-          - key: system.bonuses.msak.attack
-            mode: 2
-            value: +1d4
-            priority: null
-          - key: system.bonuses.rsak.attack
-            mode: 2
-            value: +1d4
-            priority: null
-          - key: system.bonuses.rwak.attack
-            mode: 2
-            value: +1d4
-            priority: null
         disabled: true
         duration:
-          startTime: null
-          seconds: 60
-          rounds: 10
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         origin: Item.kZZAZ6kp9YzgPQEe
         tint: '#ffffff'
         transfer: false
@@ -1225,7 +1215,7 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
+          coreVersion: '14.361'
           systemId: dnd5e
           systemVersion: 4.0.0
           createdTime: null
@@ -1234,8 +1224,32 @@ items:
           exportSource: null
         img: icons/magic/control/buff-flight-wings-blue.webp
         type: base
-        system: {}
+        system:
+          changes:
+            - key: system.bonuses.abilities.save
+              value: +1d4
+              priority: null
+              type: add
+            - key: system.bonuses.mwak.attack
+              value: +1d4
+              priority: null
+              type: add
+            - key: system.bonuses.msak.attack
+              value: +1d4
+              priority: null
+              type: add
+            - key: system.bonuses.rsak.attack
+              value: +1d4
+              priority: null
+              type: add
+            - key: system.bonuses.rwak.attack
+              value: +1d4
+              priority: null
+              type: add
         sort: 0
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!CHEUjiYrVM9X0vIT.8dzaICjGy6mTUaUr.8rP3gwmXVTgZqYZE
     folder: null
@@ -1246,7 +1260,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.8dzaICjGy6mTUaUr
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1367,7 +1381,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.gvdA9nPuWLck4tBl
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1488,7 +1502,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.uUWb1wZgtMou0TVP
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1504,7 +1518,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171212605

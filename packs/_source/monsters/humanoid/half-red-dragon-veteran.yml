@@ -447,9 +447,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -464,7 +461,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -484,6 +481,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: gMtQsYeAPMGoYGrm
     name: Plate Armor
@@ -555,7 +553,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.OjkIqlW2UpgFcjZa
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -570,9 +568,10 @@ items:
     system:
       description:
         value: >-
-          <p>The veteran makes two [[/item .93eWZ75LncoC5U8d]]{longsword}
-          attacks. If it has a [[/item .pl7hO2z20EnTaPZt]]{shortsword} drawn, it
-          can also make a shortsword attack.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes two [[/item
+          .93eWZ75LncoC5U8d]]{Longsword} attacks. If it has a [[/item
+          .pl7hO2z20EnTaPZt]]{Shortsword} drawn, it can also make a shortsword
+          attack.</p>
         chat: ''
       source:
         custom: ''
@@ -586,13 +585,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        tMIvYOJoxfTpuViY:
           type: utility
           activation:
             type: action
@@ -607,15 +605,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -626,7 +625,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -643,7 +643,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: tMIvYOJoxfTpuViY
       enchant: {}
       prerequisites:
         level: null
@@ -657,24 +665,26 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745273655152
+      systemVersion: 6.0.0
+      createdTime: 1781824073868
+      modifiedTime: 1781824078274
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!5TmstVMURpVtmNR3.MTqXmkJOXkp4bFMQ'
   - _id: 93eWZ75LncoC5U8d
     name: Longsword
     type: weapon
-    img: icons/weapons/swords/greatsword-crossguard-steel.webp
+    img: icons/weapons/swords/greatsword-crossguard-flanged-red.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]], or [[/damage average
           attackMode=twoHanded]] damage if used with two hands.</p>
-        chat: <p>The Half-Red Dragon Veteran attacks with its Longsword.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -738,7 +748,7 @@ items:
         conditions: ''
       properties:
         - ver
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -747,8 +757,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        ZKzVOj8Lbvidoww0:
           type: attack
           activation:
             type: action
@@ -763,10 +772,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -783,7 +793,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -796,24 +807,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: ZKzVOj8Lbvidoww0
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: longsword
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -823,22 +847,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.10ZP2Bu3vnCuYMIB
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745173384809
+      systemVersion: 6.0.0
+      createdTime: 1781823932980
+      modifiedTime: 1781823947196
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!5TmstVMURpVtmNR3.93eWZ75LncoC5U8d'
   - _id: pl7hO2z20EnTaPZt
     name: Shortsword
     type: weapon
-    img: icons/weapons/swords/sword-guard-brown.webp
+    img: icons/weapons/swords/sword-guard-red-jewel.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Half-Red Dragon Veteran attacks with its Shortsword.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -903,7 +929,7 @@ items:
       properties:
         - fin
         - lgt
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -912,8 +938,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        TCNJh1SoBfvJLiyx:
           type: attack
           activation:
             type: action
@@ -928,6 +953,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -948,7 +974,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -967,50 +994,58 @@ items:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
           name: ''
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: TCNJh1SoBfvJLiyx
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: shortsword
+      mastery: ''
     effects: []
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.osLzOwQdPtrK3rQH
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107818097
+      systemVersion: 6.0.0
+      createdTime: 1781823966205
+      modifiedTime: 1781823976884
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!5TmstVMURpVtmNR3.pl7hO2z20EnTaPZt'
   - _id: Jt9HuwZdYUCmEH5q
     name: Heavy Crossbow
     type: weapon
-    img: icons/weapons/crossbows/crossbow-blue.webp
+    img: icons/weapons/crossbows/crossbow-purple.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Half-Red Dragon Veteran attacks with its Heavy Crossbow.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -1077,7 +1112,7 @@ items:
         - hvy
         - lod
         - two
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -1086,8 +1121,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        tKICXwS1Nma6xqbK:
           type: attack
           activation:
             type: action
@@ -1102,10 +1136,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1122,7 +1157,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1135,20 +1171,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: ranged
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: tKICXwS1Nma6xqbK
+          name: ''
       attuned: false
       ammunition:
         type: ''
@@ -1164,28 +1212,30 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.RmP0mYRn2J7K26rX
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745173440006
+      systemVersion: 6.0.0
+      createdTime: 1781823987260
+      modifiedTime: 1781823998886
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!5TmstVMURpVtmNR3.Jt9HuwZdYUCmEH5q'
-  - _id: 68Y4sNHbVetQN3wa
+  - _id: OGek5mWlQ9KSAuqj
     name: Fire Breath
     type: feat
-    img: icons/creatures/abilities/dragon-fire-breath-orange.webp
+    img: icons/magic/fire/flame-burning-earth-orange.webp
     system:
       description:
         value: >-
-          <p>The veteran exhales fire in a 15-foot cone. Each creature in that
-          area must make a [[/save]] saving throw, taking [[/damage average]]
-          damage on a failed save, or half as much damage on a successful
-          one.</p>
+          <p>The [[lookup @name lowercase]]{monster} exhales fire in a [[lookup
+          @labels.description.template activity=dN04D22jj4eo1ERu]]. Each
+          creature in that area must make a [[/save]] saving throw, taking
+          [[/damage average]] damage on a failed save, or half as much damage on
+          a successful one.</p>
         chat: >-
-          <p>The veteran exhales fire in a 15-foot cone. Each creature in that
-          area must make a <strong>Dexterity</strong> saving throw.</p>
+          <p>The [[lookup @name]]{monster} exhales fire in a [[lookup
+          @labels.description.template activity=dN04D22jj4eo1ERu]]. Each
+          creature in that area must make a Dexterity saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -1201,13 +1251,12 @@ items:
             type: recoverAll
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        dN04D22jj4eo1ERu:
           type: save
           activation:
             type: action
@@ -1217,26 +1266,25 @@ items:
           consumption:
             targets:
               - type: itemUses
-                target: ''
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: ''
+                scaling: {}
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -1248,9 +1296,10 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: false
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -1262,28 +1311,45 @@ items:
           damage:
             onSave: half
             parts:
-              - number: 7
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 7
                 denomination: 6
                 bonus: ''
                 types:
                   - fire
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+                  number: 1
           save:
-            ability: dex
+            ability:
+              - dex
             dc:
               calculation: ''
               formula: '15'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: dN04D22jj4eo1ERu
+          name: Exhale Fire
       enchant: {}
       prerequisites:
         level: null
+        items: []
+        repeatable: false
       identifier: fire-breath
+      advancement: {}
+      crewed: false
     effects: []
     folder: null
     sort: 0
@@ -1293,14 +1359,14 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.bGSW8IuWURWiWtxr
       duplicateSource: null
-      coreVersion: '13.345'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1749403465427
+      systemVersion: 6.0.0
+      createdTime: 1781824015562
+      modifiedTime: 1781824029175
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!5TmstVMURpVtmNR3.68Y4sNHbVetQN3wa'
+    _key: '!actors.items!5TmstVMURpVtmNR3.OGek5mWlQ9KSAuqj'
 effects: []
 folder: pEyqIq8DYb21xia3
 sort: 0
@@ -1309,7 +1375,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171203560

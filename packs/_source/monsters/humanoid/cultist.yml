@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,6 +478,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: nfPMecUVS2iOgAKJ
     name: Leather Armor
@@ -550,7 +548,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.WwdpHLXGX5r8uZu5
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -558,62 +556,16 @@ items:
       lastModifiedBy: null
       exportSource: null
     _key: '!actors.items!qkLNA1lKMMJpxuWg.nfPMecUVS2iOgAKJ'
-  - _id: MyhBa9G8ryUWGm5D
-    name: Dark Devotion
-    type: feat
-    img: icons/magic/control/control-influence-rally-purple.webp
-    system:
-      description:
-        value: >-
-          <p>The cultist has advantage on saving throws against being charmed or
-          frightened.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: dark-devotion
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.XFvk6ywwZWTkMmQR
-      duplicateSource: null
-      coreVersion: '13.345'
-      systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1749403051342
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!qkLNA1lKMMJpxuWg.MyhBa9G8ryUWGm5D'
   - _id: dldXP9XwjVIdIj5U
     name: Scimitar
     type: weapon
-    img: icons/weapons/swords/sword-katana.webp
+    img: icons/weapons/swords/scimitar-guard.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Cultist attacks with their Scimitar.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -678,7 +630,7 @@ items:
       properties:
         - fin
         - lgt
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -687,8 +639,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        crye1OeNs0HGdBPB:
           type: attack
           activation:
             type: action
@@ -703,10 +654,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -723,7 +675,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -736,24 +689,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: crye1OeNs0HGdBPB
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: scimitar
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -763,14 +729,68 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.fbC0Mg1a73wdFbqO
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107553629
+      systemVersion: 6.0.0
+      createdTime: 1781820949248
+      modifiedTime: 1781820970716
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!qkLNA1lKMMJpxuWg.dldXP9XwjVIdIj5U'
+  - _id: FQU02Jwlmdhzp34R
+    name: Dark Devotion
+    type: feat
+    img: icons/magic/death/skull-weapon-staff-glow-pink.webp
+    system:
+      description:
+        value: >-
+          <p>The [[l;ookup @name lowercase]]{monster} has advantage on saving
+          throws against being &amp;reference[charmed apply=false] or
+          &amp;reference[frightened apply=false].</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: dark-devotion
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: null
+    sort: 87500
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.tYfQIxCJT0WaaKmc.Item.lSteE7vBmM70Jy3Z
+      duplicateSource: Item.ZcZzJ6IVawFyMTZg
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781820943880
+      modifiedTime: 1781820943880
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!qkLNA1lKMMJpxuWg.FQU02Jwlmdhzp34R'
 effects: []
 folder: pEyqIq8DYb21xia3
 sort: 0
@@ -779,7 +799,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171260539

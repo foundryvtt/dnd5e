@@ -54,8 +54,8 @@ system:
     hp:
       value: 22
       max: 22
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 4d8 + 4
     init:
       ability: ''
@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,17 +478,20 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: UqpaWsGVgiCMSZEw
     name: Spear
     type: weapon
-    img: icons/weapons/polearms/spear-flared-worn-grey.webp
+    img: icons/weapons/polearms/spear-hooked-double-engraved.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]] or [[/damage average
           attackMode=twoHanded]] damage if used with two hands.</p>
-        chat: ''
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -556,7 +556,7 @@ items:
       properties:
         - thr
         - ver
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -565,8 +565,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        tIsZfejd2Hp1B8tc:
           type: attack
           activation:
             type: action
@@ -581,10 +580,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -601,7 +601,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -620,14 +621,26 @@ items:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          name: ''
+          _id: tIsZfejd2Hp1B8tc
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -642,22 +655,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.OG4nBBydvmfWYXIk
       duplicateSource: null
-      coreVersion: '13.345'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1749403644372
+      systemVersion: 6.0.0
+      createdTime: 1781825784100
+      modifiedTime: 1781825799385
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!lyNBFmJdbh4NLRzz.UqpaWsGVgiCMSZEw'
   - _id: NSdAR332o65ZE3hC
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Sahuagin attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -720,7 +735,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -729,8 +744,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        MfaELsohwxdvMf3r:
           type: attack
           activation:
             type: action
@@ -745,15 +759,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -764,7 +779,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -777,24 +793,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: MfaELsohwxdvMf3r
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 300000
@@ -804,70 +833,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.345'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1749403591826
+      systemVersion: 6.0.0
+      createdTime: 1781825803350
+      modifiedTime: 1781825813576
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!lyNBFmJdbh4NLRzz.NSdAR332o65ZE3hC'
-  - _id: uyWDYVSAJuCfayLE
-    name: Blood Frenzy
-    type: feat
-    img: icons/skills/wounds/blood-spurt-spray-red.webp
-    system:
-      description:
-        value: >-
-          <p>The sahuagin has advantage on melee attack rolls against any
-          creature that doesn't have all its hit points.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: blood-frenzy
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.B2kZOyrB7poB4liR
-      duplicateSource: null
-      coreVersion: '13.345'
-      systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1749403585082
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!lyNBFmJdbh4NLRzz.uyWDYVSAJuCfayLE'
   - _id: VJlDAg21VwBOjbuR
     name: Claws
     type: weapon
-    img: icons/skills/melee/strike-slashes-red.webp
+    img: icons/creatures/claws/claw-talons-glowing-orange.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Sahuagin attacks with its Claws.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -930,7 +913,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -939,8 +922,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        eMvpywKi1Rc6v4Hj:
           type: attack
           activation:
             type: action
@@ -955,15 +937,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -974,7 +957,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -987,24 +971,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: eMvpywKi1Rc6v4Hj
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: claws
+      mastery: ''
     effects: []
     folder: null
     sort: 400000
@@ -1014,62 +1011,14 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.345'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1749403591826
+      systemVersion: 6.0.0
+      createdTime: 1781825825401
+      modifiedTime: 1781825838716
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!lyNBFmJdbh4NLRzz.VJlDAg21VwBOjbuR'
-  - _id: lH49mvA2g5C44yM4
-    name: Limited Amphibiousness
-    type: feat
-    img: icons/environment/creatures/frog-spotted-green.webp
-    system:
-      description:
-        value: >-
-          <p>The sahuagin can breathe air and water, but it needs to be
-          submerged at least once every 4 hours to avoid suffocating.</p>
-        chat: <p>The sahuagin can breathe air and water.</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: limited-amphibiousness
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.boO7LJ0RRinoWHyT
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676825
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!lyNBFmJdbh4NLRzz.lH49mvA2g5C44yM4'
   - _id: 1aEgtsYuxz12hFn3
     name: Multiattack
     type: feat
@@ -1077,9 +1026,10 @@ items:
     system:
       description:
         value: >-
-          <p>The sahuagin makes two melee attacks: one with its [[/item
-          .NSdAR332o65ZE3hC]]{bite} and one with its [[/item
-          .VJlDAg21VwBOjbuR]]{claws} or [[/item .UqpaWsGVgiCMSZEw]]{spear}.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes two melee attacks:
+          one with its [[/item .NSdAR332o65ZE3hC]]{Bite} and one with its
+          [[/item .VJlDAg21VwBOjbuR]]{Claws} or [[/item
+          .UqpaWsGVgiCMSZEw]]{Spear}.</p>
         chat: ''
       source:
         custom: ''
@@ -1093,13 +1043,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        x4er4xVATQ4wwaB9:
           type: utility
           activation:
             type: action
@@ -1114,15 +1063,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -1133,7 +1083,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1150,7 +1101,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: x4er4xVATQ4wwaB9
       enchant: {}
       prerequisites:
         level: null
@@ -1164,23 +1123,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.345'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1749403592637
+      systemVersion: 6.0.0
+      createdTime: 1781825858218
+      modifiedTime: 1781825863664
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!lyNBFmJdbh4NLRzz.1aEgtsYuxz12hFn3'
   - _id: SQqFFwf2ADQmLaVO
     name: Shark Telepathy
     type: feat
-    img: icons/magic/unholy/orb-swirling-teal.webp
+    img: icons/creatures/fish/fish-marlin-swordfight-blue.webp
     system:
       description:
         value: >-
-          <p>The sahuagin can magically command any shark within 120 feet of it,
-          using a limited telepathy.</p>
+          <p>The [[lookup @name lowercase]]{monster} can magically command any
+          shark within 120 feet of it, using a limited
+          &amp;reference[telepathy].</p>
         chat: ''
       source:
         custom: ''
@@ -1194,10 +1154,12 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -1205,21 +1167,129 @@ items:
       identifier: shark-telepathy
     effects: []
     folder: null
-    sort: 0
+    sort: 400000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.UYorz1ZrfuoTRknp
       duplicateSource: null
-      coreVersion: '13.345'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1749403589978
+      systemVersion: 6.0.0
+      createdTime: 1781825584845
+      modifiedTime: 1781825709821
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!lyNBFmJdbh4NLRzz.SQqFFwf2ADQmLaVO'
+  - _id: 7CEYhqOfXEDkrLDx
+    name: Blood Frenzy
+    type: feat
+    img: icons/skills/wounds/blood-cells-vessel-red-orange.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on melee
+          attack rolls against any creature that doesn't have all its hit
+          points.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: blood-frenzy
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: UIqfXYMLB6oOsW3Z
+    sort: 100000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.nkyCGJ9wXeAZkyyz.Item.jFoGi81ljGK27zpX
+      duplicateSource: Item.7YLfNxJ6APuseV6A
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781825549303
+      modifiedTime: 1781825637875
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!lyNBFmJdbh4NLRzz.7CEYhqOfXEDkrLDx'
+  - _id: QJSOQXewtM4dM59t
+    name: Limited Amphibiousness
+    type: feat
+    img: icons/creatures/amphibians/treefrog-underneath-teal.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} can breathe air and water,
+          but it needs to be submerged at least once every 4 hours to avoid
+          suffocating.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: limited-amphibiousness
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: 5cwqjeuI64dkrUa8
+    sort: 300000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.8RgUhb31VvjUNZU1.Item.ciz8wAZjqxPnu5Pe
+      duplicateSource: Item.pV30uzlB7Apma9GE
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781825636956
+      modifiedTime: 1781825696616
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!lyNBFmJdbh4NLRzz.QJSOQXewtM4dM59t'
 effects: []
 folder: pEyqIq8DYb21xia3
 sort: 0
@@ -1228,11 +1298,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1726171254178
-  modifiedTime: 1726171449162
+  modifiedTime: 1781825660467
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!actors!lyNBFmJdbh4NLRzz'

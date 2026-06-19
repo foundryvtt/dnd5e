@@ -447,9 +447,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -464,7 +461,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -484,6 +481,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: D4VxUJfO4pVUiCNj
     name: Studded Leather Armor
@@ -552,7 +550,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.TIV3B1vbrVHIhQAm
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -567,9 +565,10 @@ items:
     system:
       description:
         value: >-
-          <p>During its first turn, the assassin has advantage on attack rolls
-          against any creature that hasn't taken a turn. Any hit the assassin
-          scores against a surprised creature is a critical hit.</p>
+          <p>During its first turn, the [[lookup @name lowercase]]{monster} has
+          advantage on attack rolls against any creature that hasn't taken a
+          turn. Any hit the [[lookup @name lowercase]]{mosnter} scores against a
+          &amp;reference[surprise]{Surprised} creature is a critical hit.</p>
         chat: ''
       source:
         custom: ''
@@ -602,25 +601,26 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.IwqUTWqdgrKEvohr
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.3.8
-      createdTime: null
-      modifiedTime: 1744049608086
+      systemVersion: 6.0.0
+      createdTime: 1781819955373
+      modifiedTime: 1781819955373
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!EMvcuOpu7ABCmBWi.Ld00NpZe8Zl4J4Pi'
   - _id: crRphULq6iIdlq88
     name: Evasion
     type: feat
-    img: icons/magic/water/pseudopod-teal.webp
+    img: icons/skills/movement/feet-winged-sandals-tan.webp
     system:
       description:
         value: >-
-          <p>If the assassin is subjected to an effect that allows it to make a
-          Dexterity saving throw to take only half damage, the assassin instead
-          takes no damage if it succeeds on the saving throw, and only half
-          damage if it fails.</p>
+          <p>If the [[lookup @name lowercase]]{monster} is subjected to an
+          effect that allows it to make a Dexterity saving throw to take only
+          half damage, the [[lookup @name lowercase]]{monster} instead takes no
+          damage if it succeeds on the saving throw, and only half damage if it
+          fails.</p>
         chat: ''
       source:
         custom: ''
@@ -653,11 +653,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.xOgrn5QXzSP4QN6V
       duplicateSource: null
-      coreVersion: '13.345'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1749402967558
+      systemVersion: 6.0.0
+      createdTime: 1781819976961
+      modifiedTime: 1781819993978
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!EMvcuOpu7ABCmBWi.crRphULq6iIdlq88'
@@ -668,10 +668,12 @@ items:
     system:
       description:
         value: >-
-          <p>The assassin deals an extra [[/damage average]] damage when it hits
-          a target with a weapon attack and has advantage on the attack roll, or
-          when the target is within 5 ft. of an ally of the assassin that isn't
-          incapacitated and the assassin doesn't have disadvantage on the attack
+          <p>Once per turn, the [[lookup @name lowercase]]{monster} deals an
+          extra [[/damage average]] damage when it hits a target with a weapon
+          attack and has advantage on the attack roll, or when the target is
+          within 5 feet of an ally of the [[lookup @name lowercase]]{monster}
+          that isn't &amp;reference[incapacitated apply=false] and the [[lookup
+          @name lowercase]]{monster} doesn't have disadvantage on the attack
           roll.</p>
         chat: ''
       source:
@@ -682,8 +684,10 @@ items:
         rules: '2014'
         revision: 1
       uses:
-        max: ''
-        recovery: []
+        max: '1'
+        recovery:
+          - period: turnStart
+            type: recoverAll
         spent: 0
       type:
         value: monster
@@ -698,10 +702,20 @@ items:
           activation:
             type: special
             value: null
-            condition: once per turn
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} hits a target with a
+              weapon attack and has advantage on the attack roll, or when the
+              target is within 5 feet of an ally of the [[lookup @name
+              lowercase]]{monster} that isn't &reference[incapacitated
+              apply=false] and the [[lookup @name lowercase]]{monster} doesn't
+              have disadvantage on the attack roll.
             override: false
           consumption:
-            targets: []
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling: {}
             scaling:
               allowed: false
               max: ''
@@ -716,7 +730,7 @@ items:
             override: false
           effects: []
           range:
-            units: self
+            units: spec
             special: ''
             override: false
           target:
@@ -729,8 +743,8 @@ items:
               height: ''
               units: ''
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -741,7 +755,7 @@ items:
             recovery: []
           damage:
             critical:
-              allow: false
+              allow: true
               bonus: ''
             parts:
               - custom:
@@ -753,9 +767,14 @@ items:
                 types:
                   - piercing
           sort: 0
-          name: ''
+          name: Bonus Damage
           img: ''
           appliedEffects: []
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
       enchant: {}
       prerequisites:
         level: null
@@ -765,19 +784,15 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.9uKShqfuA73duQsT
       duplicateSource: null
-      coreVersion: '13.345'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1749402984678
+      systemVersion: 6.0.0
+      createdTime: 1781820036565
+      modifiedTime: 1781820164397
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!EMvcuOpu7ABCmBWi.EcECOhaJIpCtN2o7'
@@ -872,7 +887,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
@@ -883,15 +898,17 @@ items:
   - _id: Kbg12IJ0YW79vP06
     name: Shortsword
     type: weapon
-    img: icons/weapons/swords/sword-guard-brown.webp
+    img: icons/weapons/swords/shortsword-broad-engraved.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
-          make a [[/save]] saving throw, taking [[/damage
-          activity=dnd5eactivity100]] damage on a failed save, or half as much
-          damage on a successful one.</p>
-        chat: ''
+          make a [[/save activity=K4WCmn76MTQNDMpO]] saving throw, taking
+          [[/damage activity=K4WCmn76MTQNDMpO]] damage on a failed save, or half
+          as much damage on a successful one.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -956,7 +973,7 @@ items:
       properties:
         - fin
         - lgt
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -965,8 +982,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        DrjfQpjmYzkLXt1d:
           type: attack
           activation:
             type: action
@@ -981,6 +997,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -1001,7 +1018,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1021,23 +1039,31 @@ items:
             flat: false
             type:
               value: ''
-              classification: weapon
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
           name: ''
           img: ''
-          appliedEffects: []
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: DrjfQpjmYzkLXt1d
+        K4WCmn76MTQNDMpO:
           type: save
           activation:
-            type: action
+            type: special
             value: 1
-            condition: ''
+            condition: When a creature is hit by this attack.
             override: false
           consumption:
             targets: []
@@ -1047,6 +1073,10 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>The target must make a [[/save]] saving throw, taking [[/damage
+              activity=K4WCmn76MTQNDMpO]] damage on a failed save, or half as
+              much damage on a successful one.</p>
           duration:
             concentration: false
             value: ''
@@ -1067,10 +1097,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -1086,55 +1117,66 @@ items:
                   enabled: false
                   formula: ''
                 number: 7
-                denomination: '6'
+                denomination: 6
                 bonus: ''
                 types:
                   - poison
+                scaling:
+                  number: 1
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '15'
-          sort: 0
-          name: ''
+            visible: true
+            bonus: ''
+          sort: 200000
+          name: Poison Save
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: K4WCmn76MTQNDMpO
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: shortsword
+      mastery: ''
     effects: []
     folder: null
     sort: 100000
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.osLzOwQdPtrK3rQH
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.3.8
-      createdTime: null
-      modifiedTime: 1744050091759
+      systemVersion: 6.0.0
+      createdTime: 1781820174715
+      modifiedTime: 1781820230523
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!EMvcuOpu7ABCmBWi.Kbg12IJ0YW79vP06'
   - _id: rNQK7okIBNZ2zDvD
     name: Light Crossbow
     type: weapon
-    img: icons/weapons/crossbows/crossbow-simple-brown.webp
+    img: icons/weapons/crossbows/handcrossbow-green.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
-          make a [[/save]] saving throw, taking [[/damage
-          activity=qt3tGFCRiYgaiWQ3]] damage on a failed save, or half as much
-          damage on a successful one.</p>
+          make a [[/save activity=1veeOGXOGCLeTwbO]] saving throw, taking
+          [[/damage activity=1veeOGXOGCLeTwbO]] damage on a failed save, or half
+          as much damage on a successful one.</p>
         chat: >-
           <p>The Assassin attacks with its Light Crossbow. The target must make
           a <strong>Constitution</strong> saving throw.</p>
@@ -1203,7 +1245,7 @@ items:
         - amm
         - lod
         - two
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -1212,76 +1254,12 @@ items:
       container: null
       crewed: false
       activities:
-        FOPIJT58E21wGaqM:
-          type: attack
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: inst
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '5'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          attack:
-            ability: ''
-            bonus: ''
-            critical:
-              threshold: null
-            flat: false
-            type:
-              value: ''
-              classification: weapon
-          damage:
-            critical:
-              bonus: ''
-            includeBase: true
-            parts: []
-          sort: 0
-          name: ''
-          _id: FOPIJT58E21wGaqM
-        qt3tGFCRiYgaiWQ3:
+        1veeOGXOGCLeTwbO:
           type: save
           activation:
-            type: action
+            type: special
             value: 1
-            condition: ''
+            condition: When a creature is hit by this attack.
             override: false
           consumption:
             targets: []
@@ -1291,6 +1269,10 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>The target must make a [[/save]] saving throw, taking [[/damage
+              activity=1veeOGXOGCLeTwbO]] damage on a failed save, or half as
+              much damage on a successful one.</p>
           duration:
             concentration: false
             value: ''
@@ -1311,10 +1293,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -1342,9 +1325,97 @@ items:
             dc:
               calculation: ''
               formula: '15'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 300000
+          name: Poison Save
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 1veeOGXOGCLeTwbO
+        k3Ra62PvNGY25kr8:
+          type: attack
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '5'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          attack:
+            ability: ''
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: ''
+              classification: ''
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts: []
+          sort: 200000
           name: ''
-          _id: qt3tGFCRiYgaiWQ3
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: k3Ra62PvNGY25kr8
       attuned: false
       ammunition:
         type: crossbowBolt
@@ -1356,19 +1427,15 @@ items:
     sort: 300000
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.ddWvQRLmnnIS0eLF
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.3.8
-      createdTime: null
-      modifiedTime: 1744050413943
+      systemVersion: 6.0.0
+      createdTime: 1781820241991
+      modifiedTime: 1781820304823
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!EMvcuOpu7ABCmBWi.rNQK7okIBNZ2zDvD'
@@ -1380,7 +1447,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.3.8
   createdTime: 1726171214988
