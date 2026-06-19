@@ -4887,7 +4887,13 @@
       }
     },
     "Ring": {
-      "Label": "Wall (ring)"
+      "Label": "Ring",
+      "Counted": {
+        "one": "{number} ring",
+        "other": "{number} rings",
+        "oneSized": "{sizes} Ring",
+        "otherSized": "{number} {sizes} Rings"
+      }
     },
     "Self": {
       "Label": "Self"
@@ -4941,7 +4947,7 @@
       }
     },
     "Wall": {
-      "Label": "Wall (straight)",
+      "Label": "Wall",
       "Counted": {
         "one": "{number} wall",
         "other": "{number} walls",

@@ -2843,7 +2843,7 @@ DND5E.areaTargetTypes = {
   },
   ring: {
     label: "DND5E.TARGET.Type.Ring.Label",
-    counted: "DND5E.TARGET.Type.Wall.Counted",
+    counted: "DND5E.TARGET.Type.Ring.Counted",
     template: "ring",
     sizes: ["radius", "thickness", "height"]
   },
