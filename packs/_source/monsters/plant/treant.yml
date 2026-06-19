@@ -490,23 +490,24 @@ items:
   - _id: 8uUyRr6Ho7Yvx8pP
     name: Animate Trees
     type: feat
-    img: icons/magic/nature/tree-spirit-green.webp
+    img: icons/magic/nature/tree-animated-squint.webp
     system:
       description:
         value: >-
           <p>The [[lookup @name lowercase]]{monster} magically animates one or
           two trees it can see within [[lookup @labels.description.range
-          activity=1SrLlYGeLgzdmSwc]]  of it. These trees have the same
+          activity=1SrLlYGeLgzdmSwc]] of it. These trees have the same
           statistics as a [[lookup @name lowercase]]{monster}, except they have
           Intelligence and Charisma scores of 1, they can't speak, and they have
           only the
           @UUID[Compendium.dnd5e.monsters.Actor.NB6wUgVqeOQtsQKu.Item.lisZZTaupqInGEi1]{Slam}
           action option.</p><p>An animated tree acts as an ally of the [[lookup
-          @name lowercase]]{monster}. The tree remains animate for 1 day or
-          until it dies; until the [[lookup @name lowercase]]{monster} dies or
-          is more than 120 feet from the tree; or until the [[lookup @name
-          lowercase]]{monster} takes a bonus action to turn it back into an
-          inanimate tree. The tree then takes root if possible.</p>
+          @name lowercase]]{monster}. The tree remains animate for [[lookup
+          @labels.duration activity=1SrLlYGeLgzdmSwc]] or until it dies; until
+          the [[lookup @name lowercase]]{monster} dies or is more than 120 feet
+          from the tree; or until the [[lookup @name lowercase]]{monster} takes
+          a bonus action to turn it back into an inanimate tree. The tree then
+          takes root if possible.</p>
         chat: >-
           <p>The [[lookup @name]]{monster} magically animates one or two trees
           it can see within [[lookup @labels.description.range
@@ -547,9 +548,10 @@ items:
             value: ''
             chatFlavor: ''
           duration:
-            units: inst
+            units: day
             concentration: false
             override: false
+            value: '1'
           effects:
             - _id: 8fL6lSFsN9qyGlUo
               level:
@@ -621,7 +623,7 @@ items:
       identifier: animate-trees
     effects:
       - name: Animated Tree
-        img: icons/magic/nature/tree-spirit-green.webp
+        img: icons/magic/nature/tree-animated-squint.webp
         origin: Compendium.dnd5e.monsters.Actor.NB6wUgVqeOQtsQKu.Item.8uUyRr6Ho7Yvx8pP
         transfer: false
         _id: 8fL6lSFsN9qyGlUo
@@ -707,7 +709,7 @@ items:
           systemId: dnd5e
           systemVersion: 6.0.0
           createdTime: 1781479031259
-          modifiedTime: 1781480743832
+          modifiedTime: 1781910360357
           lastModifiedBy: dnd5ebuilder0000
           compendiumSource: null
           duplicateSource: null
@@ -726,14 +728,14 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781478373185
-      modifiedTime: 1781485132585
+      modifiedTime: 1781910470577
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!NB6wUgVqeOQtsQKu.8uUyRr6Ho7Yvx8pP'
   - _id: skQsBSPby8pLZSLI
     name: False Appearance
     type: feat
-    img: icons/magic/nature/stealth-hide-eyes-green.webp
+    img: icons/magic/nature/tree-spirit-glow-black-yellow.webp
     system:
       description:
         value: >-
@@ -775,7 +777,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781478222371
-      modifiedTime: 1781478224813
+      modifiedTime: 1781910337869
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!NB6wUgVqeOQtsQKu.skQsBSPby8pLZSLI'
