@@ -1164,6 +1164,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       whisper: game.users.filter(user => this.testUserPermission(user, "OWNER")),
       speaker: ChatMessage.implementation.getSpeaker({ actor: this })
     });
+  }
 
   /* -------------------------------------------- */
 
