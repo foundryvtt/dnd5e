@@ -453,9 +453,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -470,7 +467,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -490,6 +487,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: uGJpXeUbei6zXTd1
     name: Multiattack
@@ -498,9 +496,9 @@ items:
     system:
       description:
         value: >-
-          <p>The mummy can use its [[/item .8Jju4CVZaIDab6Ju]]{Dreadful Glare}
-          and makes one attack with its [[/item .ik1IkSZi4fpiGbB3]]{rotting
-          fist}.</p>
+          <p>The [[lookup @name lowercase]]{monster} can use its [[/item
+          .8Jju4CVZaIDab6Ju]]{Dreadful Glare} and makes one attack with its
+          [[/item .ik1IkSZi4fpiGbB3]]{Rotting Fist}.</p>
         chat: ''
       source:
         custom: ''
@@ -514,13 +512,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        ZBSXB6xP0yfW3T1D:
           type: utility
           activation:
             type: action
@@ -535,15 +532,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -554,7 +552,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -571,7 +570,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: ZBSXB6xP0yfW3T1D
       enchant: {}
       prerequisites:
         level: null
@@ -585,32 +592,33 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745273657479
+      systemVersion: 6.0.0
+      createdTime: 1781837816818
+      modifiedTime: 1781837821928
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!t8WYD7ak07X7xpx8.uGJpXeUbei6zXTd1'
   - _id: ik1IkSZi4fpiGbB3
     name: Rotting Fist
     type: weapon
-    img: icons/skills/melee/unarmed-punch-fist-yellow-red.webp
+    img: icons/magic/death/hand-withered-gray.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
-          a creature, it must succeed on a DC 12 Constitution saving throw or be
-          cursed with mummy rot. The cursed target can't regain hit points, and
-          its hit point maximum decreases by 10 (3d6) for every 24 hours that
-          elapse. If the curse reduces the target's hit point maximum to 0, the
-          target dies, and its body turns to dust. The curse lasts until removed
-          by the remove curse spell or other magic.</p>
+          a creature, it must succeed on a [[/save]] saving throw or be cursed
+          with mummy rot. The cursed target can't regain hit points, and its hit
+          point maximum decreases by 10 (3d6) for every 24 hours that elapse. If
+          the curse reduces the target's hit point maximum to 0, the target
+          dies, and its body turns to dust. The curse lasts until removed by the
+          @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{Remove Curse}
+          spell or other magic.</p>
         chat: >-
-          <p>The Mummy attacks with its Rotting Fist. If the target is a
-          creature, it must make a <strong>Constitution</strong> saving
-          throw.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. If the target is a creature, it must make a Constitution
+          saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -673,7 +681,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -682,8 +690,93 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        aKkGG9wpEFZSfhFO:
+          type: save
+          activation:
+            type: special
+            value: 1
+            condition: When a creature is hit by this attack.
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: >-
+              <p>If the target is a creature, it must succeed on a [[/save]]
+              saving throw or be cursed with mummy rot. The cursed target can't
+              regain hit points, and its hit point maximum decreases by 10 (3d6)
+              for every 24 hours that elapse. If the curse reduces the target's
+              hit point maximum to 0, the target dies, and its body turns to
+              dust. The curse lasts until removed by the
+              @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{Remove Curse}
+              spell or other magic.</p>
+          duration:
+            concentration: false
+            value: ''
+            units: disp
+            special: ''
+            override: false
+          effects:
+            - _id: UMVpr1Reg58yXSa1
+              onSave: false
+              level:
+                min: null
+                max: null
+          range:
+            value: '5'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: ''
+              type: creature
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: none
+            parts: []
+          save:
+            ability:
+              - con
+            dc:
+              calculation: ''
+              formula: '12'
+            bonus: ''
+            visible: true
+          sort: 300000
+          name: Curse Save
+          img: ''
+          flags: {}
+          visibility:
+            identifier: ''
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: aKkGG9wpEFZSfhFO
+        jv3Uz0EcvkblTQiY:
           type: attack
           activation:
             type: action
@@ -698,10 +791,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -718,7 +812,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -731,95 +826,98 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts:
-              - number: 3
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 3
                 denomination: 6
                 bonus: ''
                 types:
                   - necrotic
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
-          type: save
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '5'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          damage:
-            onSave: half
-            parts: []
-          save:
-            ability: con
-            dc:
-              calculation: ''
-              formula: '12'
-          sort: 0
+                  number: 1
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: jv3Uz0EcvkblTQiY
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: rotting-fist
       mastery: ''
-    effects: []
+    effects:
+      - name: Mummy Rot
+        img: icons/magic/death/skeleton-eye-skull-glow-orange.webp
+        origin: Compendium.dnd5e.monsters.Actor.t8WYD7ak07X7xpx8.Item.ik1IkSZi4fpiGbB3
+        transfer: false
+        _id: UMVpr1Reg58yXSa1
+        type: base
+        system:
+          changes:
+            - key: system.traits.di.value
+              type: add
+              value: healing
+              phase: initial
+              priority: null
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You are cursed. While cursed, you can't regain hit points, and your
+          hit point maximum is reduced by [[/damage maximum 3d6 average]]{10
+          (3d6)} for every 24 hours that elapse.</p><p>If the curse reduces the
+          target's hit point maximum to 0, the target dies, and its body turns
+          to dust. The curse lasts until removed by the
+          @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{Remove Curse}
+          spell or other magic.</p>
+        tint: '#ffffff'
+        statuses:
+          - cursed
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781837874465
+          modifiedTime: 1781837968419
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!t8WYD7ak07X7xpx8.ik1IkSZi4fpiGbB3.UMVpr1Reg58yXSa1
     folder: null
     sort: 0
     ownership:
@@ -828,32 +926,38 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765828401412
+      systemVersion: 6.0.0
+      createdTime: 1781837844983
+      modifiedTime: 1781838316677
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!t8WYD7ak07X7xpx8.ik1IkSZi4fpiGbB3'
   - _id: 8Jju4CVZaIDab6Ju
     name: Dreadful Glare
     type: feat
-    img: icons/magic/perception/hand-eye-pink.webp
+    img: icons/magic/death/skull-energy-light-purple.webp
     system:
       description:
         value: >-
-          <p>The mummy targets one creature it can see within 60 ft. of it. If
-          the target can see the mummy, it must succeed on a DC 11 Wisdom saving
-          throw against this magic or become frightened until the end of the
-          mummy's next turn.</p><p>If the target fails the saving throw by 5 or
-          more, it is also paralyzed for the same duration. A target that
-          succeeds on the saving throw is immune to the Dreadful Glare of all
-          mummies (but not mummy lords) for the next 24 hours.</p>
+          <p>The [[lookup @name lowercase]]{monster} targets [[lookup
+          @labels.description.affects activity=vBP1Ivo8gjkv4DVp]] it can see
+          within [[lookup @labels.description.range activity=vBP1Ivo8gjkv4DVp]]
+          of it. If the target can see the [[lookup @name lowercase]]{monster},
+          it must succeed on a [[/save]] saving throw against this magic or
+          become &amp;reference[frightened] until the end of the [[lookup @name
+          lowercase]]{monster}'s next turn.</p><p>If the target fails the saving
+          throw by 5 or more, it is also &amp;reference[paralyzed] for the same
+          duration. A target that succeeds on the saving throw is immune to the
+          [[lookup @item.name]] of all mummies (but not mummy lords) for the
+          next 24 hours.</p>
         chat: >-
-          <p>The mummy targets one creature it can see within 60 ft. of it. If
-          the target can see the mummy, it must make a <strong>Wisdom</strong>
-          saving throw against this magic.</p>
+          <p>The [[lookup @name]]{monster} targets [[lookup
+          @labels.description.affects activity=vBP1Ivo8gjkv4DVp]] it can see
+          within [[lookup @labels.description.range activity=vBP1Ivo8gjkv4DVp]]
+          of it. If the target can see the [[lookup @name]]{monster}, it must
+          make a Wisdom saving throw against this magic.</p>
       source:
         custom: ''
         book: ''
@@ -866,13 +970,13 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        vBP1Ivo8gjkv4DVp:
           type: save
           activation:
             type: action
@@ -887,13 +991,24 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
-            value: ''
-            units: ''
+            value: '1'
+            units: turn
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: ebQZNdQTJtOhr7Lq
+              onSave: false
+              level:
+                min: null
+                max: null
+            - _id: HaYWb6flfwYF7zHi
+              onSave: false
+              level:
+                min: null
+                max: null
           range:
             value: '60'
             units: ft
@@ -907,7 +1022,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: '1'
               type: creature
@@ -920,19 +1036,116 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: wis
+            ability:
+              - wis
             dc:
               calculation: ''
               formula: '11'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          _id: vBP1Ivo8gjkv4DVp
+          name: Focus Gaze
       enchant: {}
       prerequisites:
         level: null
       identifier: dreadful-glare
-    effects: []
+    effects:
+      - name: Frightening Gaze
+        img: icons/magic/death/skull-humanoid-white-blue.webp
+        origin: Compendium.dnd5e.monsters.Actor.t8WYD7ak07X7xpx8.Item.8Jju4CVZaIDab6Ju
+        transfer: false
+        _id: ebQZNdQTJtOhr7Lq
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: rounds
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You are &amp;reference[frightened apply=false] until the end of the
+          mummy's next turn.</p>
+        tint: '#ffffff'
+        statuses:
+          - frightened
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781838142221
+          modifiedTime: 1781838175646
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!t8WYD7ak07X7xpx8.8Jju4CVZaIDab6Ju.ebQZNdQTJtOhr7Lq
+      - name: Paralyzing Gaze
+        img: icons/magic/death/skull-humanoid-white-red.webp
+        origin: Compendium.dnd5e.monsters.Actor.t8WYD7ak07X7xpx8.Item.8Jju4CVZaIDab6Ju
+        transfer: false
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: rounds
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You are &amp;reference[frightened apply=false] and
+          &amp;reference[paralyzed apply=false until the end of the mummy's next
+          turn.</p>
+        tint: '#ffffff'
+        statuses:
+          - frightened
+          - paralyzed
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781838177919
+          modifiedTime: 1781838226892
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _id: HaYWb6flfwYF7zHi
+        _key: >-
+          !actors.items.effects!t8WYD7ak07X7xpx8.8Jju4CVZaIDab6Ju.HaYWb6flfwYF7zHi
     folder: null
     sort: 0
     ownership:
@@ -941,11 +1154,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.H306eluIH47Wfr0U
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765828409328
+      systemVersion: 6.0.0
+      createdTime: 1781838024247
+      modifiedTime: 1781838290839
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!t8WYD7ak07X7xpx8.8Jju4CVZaIDab6Ju'
@@ -957,7 +1170,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171263073

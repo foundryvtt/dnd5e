@@ -456,9 +456,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -473,7 +470,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -493,22 +490,26 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: Os0eEymWpLTVR2Xv
     name: Blinding Dust
     type: feat
-    img: icons/magic/fire/barrier-wall-explosion-orange.webp
+    img: icons/magic/air/fog-gas-smoke-dense-brown.webp
     system:
       description:
         value: >-
-          <p>Blinding dust and sand swirls magically around the mummy lord. Each
-          creature within 5 feet of the mummy lord must succeed on a DC 16
-          Constitution saving throw or be blinded until the end of the
-          creature's next turn.</p>
+          <p>Blinding dust and sand swirls magically around the [[lookup @name
+          lowercase]]{monster}. Each creature within [[lookup
+          @target.template.size activity=zlgs7Urb6F9nnlIA]] feet of the [[lookup
+          @name lowercase]]{monster} must succeed on a [[/save]] saving throw or
+          be &amp;reference[blinded] until the end of the creature's next
+          turn.</p>
         chat: >-
-          <p>Blinding dust and sand swirls magically around the mummy lord. Each
-          creature within 5 feet of the mummy lord must make a
-          <strong>Constitution</strong> saving throw.</p>
+          <p>Blinding dust and sand swirls magically around the [[lookup
+          @name]]{monster}. Each creature within [[lookup @target.template.size
+          activity=zlgs7Urb6F9nnlIA]] feet of the [[lookup @name]]{monster} must
+          make a Constitution saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -521,13 +522,13 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        zlgs7Urb6F9nnlIA:
           type: save
           activation:
             type: legendary
@@ -537,24 +538,26 @@ items:
           consumption:
             targets:
               - type: attribute
-                target: resources.legact.value
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: resources.legact.value
+                scaling: {}
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: Tp6TMb0fLRqIiZVc
+              level: {}
+              onSave: false
           range:
             units: self
             special: ''
@@ -568,9 +571,10 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: true
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -580,19 +584,74 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: con
               formula: '16'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          _id: zlgs7Urb6F9nnlIA
+          name: Conjure Blinding Dust & Sand
       enchant: {}
       prerequisites:
         level: null
       identifier: blinding-dust
-    effects: []
+    effects:
+      - name: Blinding Dust & Sand
+        img: icons/magic/air/fog-gas-smoke-dense-brown.webp
+        origin: Compendium.dnd5e.monsters.Actor.UFW8M3JHzHkxUEGM.Item.Os0eEymWpLTVR2Xv
+        transfer: false
+        _id: Tp6TMb0fLRqIiZVc
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: turns
+          expiry: turnEnd
+          expired: false
+        description: >-
+          <p>You are &amp;reference[blinded apply=false] until the end of your
+          next turn.</p>
+        tint: '#ffffff'
+        statuses:
+          - blinded
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781838816423
+          modifiedTime: 1781838844334
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!UFW8M3JHzHkxUEGM.Os0eEymWpLTVR2Xv.Tp6TMb0fLRqIiZVc
     folder: null
     sort: 100000
     ownership:
@@ -601,29 +660,33 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.ao6mxTJVYy7WaVgW
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765828499401
+      systemVersion: 6.0.0
+      createdTime: 1781838674954
+      modifiedTime: 1781838816479
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.Os0eEymWpLTVR2Xv'
   - _id: 3PBv68cIzTlrzcYe
     name: Blasphemous Word
     type: feat
-    img: icons/magic/air/wind-vortex-swirl-purple.webp
+    img: icons/magic/symbols/rune-sigil-red-orange.webp
     system:
       description:
         value: >-
-          <p>The mummy lord utters a blasphemous word. Each non-undead creature
-          within 10 feet of the mummy lord that can hear the magical utterance
-          must succeed on a DC 16 Constitution saving throw or be stunned until
-          the end of the mummy lord's next turn.</p>
+          <p>The [[lookup @name lowercse]]{monster} utters a blasphemous word.
+          Each non-undead creature within [[lookup @target.template.size
+          activity=UR3pJCZj7UbuHzg2]] feet of the [[lookup @name
+          lowercase]]{monster} that can hear the magical utterance must succeed
+          on a [[/save]] saving throw or be &amp;reference[stunned] until the
+          end of the [[lookup @name lowercase]]{monster}'s next turn.</p>
         chat: >-
-          <p>The mummy lord utters a blasphemous word. Each non-undead creature
-          within 10 feet of the mummy lord that can hear the magical utterance
-          must make a <strong>Constitution</strong> saving throw.</p>
+          <p>The [[lookup @name]]{monster} utters a blasphemous word. Each
+          non-undead creature within [[lookup @target.template.size
+          activity=UR3pJCZj7UbuHzg2]] feet of the [[lookup @name]]{monster} that
+          can hear the magical utterance must make a Constitution saving
+          throw.</p>
       source:
         custom: ''
         book: ''
@@ -636,13 +699,13 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        UR3pJCZj7UbuHzg2:
           type: save
           activation:
             type: legendary
@@ -652,24 +715,28 @@ items:
           consumption:
             targets:
               - type: attribute
-                target: resources.legact.value
                 value: '2'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: resources.legact.value
+                scaling: {}
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: GP4BRO0eAZKrm1Ws
+              onSave: false
+              level:
+                min: null
+                max: null
           range:
             units: self
             special: ''
@@ -683,9 +750,10 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: true
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -695,19 +763,74 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '16'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          _id: UR3pJCZj7UbuHzg2
+          name: Speak Blasphemy
       enchant: {}
       prerequisites:
         level: null
       identifier: blasphemous-word
-    effects: []
+    effects:
+      - name: Blasphemous Stun
+        img: icons/magic/symbols/rune-sigil-red-orange.webp
+        origin: Compendium.dnd5e.monsters.Actor.UFW8M3JHzHkxUEGM.Item.3PBv68cIzTlrzcYe
+        transfer: false
+        _id: GP4BRO0eAZKrm1Ws
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You are &amp;reference[stunned apply=false] until the end of the
+          mummy lord's next turn.</p>
+        tint: '#ffffff'
+        statuses:
+          - stunned
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781839213127
+          modifiedTime: 1781839286041
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!UFW8M3JHzHkxUEGM.3PBv68cIzTlrzcYe.GP4BRO0eAZKrm1Ws
     folder: null
     sort: 300000
     ownership:
@@ -716,25 +839,27 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Xwj2GPqTxngS0j2L
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765828505585
+      systemVersion: 6.0.0
+      createdTime: 1781839091876
+      modifiedTime: 1781839329395
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.3PBv68cIzTlrzcYe'
   - _id: sjY1jcYS6PdmZYKH
     name: Channel Negative Energy
     type: feat
-    img: icons/magic/unholy/beam-impact-purple.webp
+    img: icons/magic/unholy/beams-impact-pink.webp
     system:
       description:
         value: >-
-          <p>The mummy lord magically unleashes negative energy. Creatures
-          within 60 feet of the mummy lord, including ones behind barriers and
-          around corners, can't regain hit points until the end of the mummy
-          lord's next turn.</p>
+          <p>The [[lookup @name lowercase]]{monster} magically unleashes
+          negative energy. Creatures within [[lookup @target.template.size
+          activity=9ewBziURGwIvgPUb]] feet of the [[lookup @name
+          lowercase]]{monster}, including ones behind barriers and around
+          corners, can't regain hit points until the end of the [[lookup @name
+          lowercase]]{monster}'s next turn.</p>
         chat: ''
       source:
         custom: ''
@@ -748,13 +873,13 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        9ewBziURGwIvgPUb:
           type: utility
           activation:
             type: legendary
@@ -764,24 +889,27 @@ items:
           consumption:
             targets:
               - type: attribute
-                target: resources.legact.value
                 value: '2'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: resources.legact.value
+                scaling: {}
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: cJyglbnvY9IuBGMU
+              level:
+                min: null
+                max: null
           range:
             units: self
             special: ''
@@ -795,9 +923,10 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: true
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -811,12 +940,68 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          _id: 9ewBziURGwIvgPUb
+          name: Unleash Negative Energies
       enchant: {}
       prerequisites:
         level: null
       identifier: channel-negative-energy
-    effects: []
+    effects:
+      - name: Unleashed Negative Energies
+        img: icons/magic/unholy/beams-impact-pink.webp
+        origin: Compendium.dnd5e.monsters.Actor.UFW8M3JHzHkxUEGM.Item.sjY1jcYS6PdmZYKH
+        transfer: false
+        _id: cJyglbnvY9IuBGMU
+        type: base
+        system:
+          changes:
+            - key: system.traits.di.value
+              type: add
+              value: healing
+              phase: initial
+              priority: null
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You can't regain hit points until the end of the mummy lord's next
+          turn.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781838901698
+          modifiedTime: 1781838956179
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!UFW8M3JHzHkxUEGM.sjY1jcYS6PdmZYKH.cJyglbnvY9IuBGMU
     folder: null
     sort: 400000
     ownership:
@@ -825,72 +1010,25 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.LO4nrudXAKJ4DbQI
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1765828467151
+      systemVersion: 6.0.0
+      createdTime: 1781838854214
+      modifiedTime: 1781838981036
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.sjY1jcYS6PdmZYKH'
-  - _id: JxFTskCIHyVwp7fF
-    name: Magic Resistance
-    type: feat
-    img: icons/magic/defensive/shield-barrier-glowing-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The mummy lord has advantage on saving throws against spells and
-          other magical effects.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: magic-resistance
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
-      duplicateSource: null
-      coreVersion: '13.351'
-      systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765828420190
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!UFW8M3JHzHkxUEGM.JxFTskCIHyVwp7fF'
   - _id: AEc5FXdpe3M7KHQI
     name: Rejuvenation
     type: feat
-    img: icons/magic/control/debuff-energy-hold-levitate-green.webp
+    img: icons/magic/life/ankh-gold-blue.webp
     system:
       description:
         value: >-
-          <p>A destroyed mummy lord gains a new body in 24 hours if its heart is
-          intact, regaining all its hit points and becoming active again. The
-          new body appears within 5 feet of the mummy lord's heart.</p>
+          <p>A destroyed [[lookup @name lowercase]]{monster} gains a new body in
+          24 hours if its heart is intact, regaining all its hit points and
+          becoming active again. The new body appears within 5 feet of the
+          [[lookup @name lowercase]]{monster}'s heart.</p>
         chat: <p>A destroyed mummy lord gains a new body in 24 hours.</p>
       source:
         custom: ''
@@ -904,10 +1042,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -915,18 +1054,18 @@ items:
       identifier: rejuvenation
     effects: []
     folder: null
-    sort: 0
+    sort: 200000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.JcfHlAcfwSWnt7Ud
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765828424873
+      systemVersion: 6.0.0
+      createdTime: 1781838419841
+      modifiedTime: 1781838464170
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.AEc5FXdpe3M7KHQI'
@@ -980,18 +1119,18 @@ items:
       identifier: spellcasting
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.fdmzHw875EzpXM2a
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745447015796
+      createdTime: 1781838419841
+      modifiedTime: 1781838419841
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.FeMPdVmbrjP2L3CO'
@@ -1002,9 +1141,9 @@ items:
     system:
       description:
         value: >-
-          <p>The mummy can use its [[/item .yHydHrxw4vlDlyjf]]{Dreadful Glare}
-          and makes one attack with its [[/item .M6t9H8pMhzQxM9qv]]{rotting
-          fist}.</p>
+          <p>The [[lookup @name lowercase]]{monster} can use its [[/item
+          .GSbdcVdjyBwAmgk9]]{Dreadful Glare} and makes one attack with its
+          [[/item .5VmCO7pd2vpSCpq2]]{Rotting Fist}.</p>
         chat: ''
       source:
         custom: ''
@@ -1018,13 +1157,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        scL8qDJ88TOfGkSZ:
           type: utility
           activation:
             type: action
@@ -1039,15 +1177,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -1058,7 +1197,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1075,448 +1215,46 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: scL8qDJ88TOfGkSZ
       enchant: {}
       prerequisites:
         level: null
       identifier: multiattack
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745273656258
+      systemVersion: 6.0.0
+      createdTime: 1781838493179
+      modifiedTime: 1781838614563
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.xZSeAPj02NKne0AK'
-  - _id: M6t9H8pMhzQxM9qv
-    name: Rotting Fist
-    type: weapon
-    img: icons/skills/melee/unarmed-punch-fist-yellow-red.webp
-    system:
-      description:
-        value: >-
-          <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
-          a creature, it must succeed on a [[/save]] saving throw or be cursed
-          with mummy rot. The cursed target can't regain hit points, and its hit
-          point maximum decreases by 10 ([[/r 3d6]]) for every 24 hours that
-          elapse. If the curse reduces the target's hit point maximum to 0, the
-          target dies, and its body turns to dust. The curse lasts until removed
-          by the remove curse spell or other magic.</p>
-        chat: >-
-          <p>The Mummy Lord attacks with its Rotting Fist. If the target is a
-          creature, it must make a <strong>Constitution</strong> saving
-          throw.</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      quantity: 1
-      weight:
-        value: 0
-        units: lb
-      price:
-        value: 0
-        denomination: gp
-      attunement: ''
-      equipped: true
-      rarity: ''
-      identified: true
-      cover: null
-      range:
-        value: null
-        long: null
-        units: ft
-        reach: null
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      damage:
-        versatile:
-          number: null
-          denomination: null
-          bonus: ''
-          types: []
-          custom:
-            enabled: false
-            formula: ''
-          scaling:
-            mode: ''
-            number: null
-            formula: ''
-        base:
-          number: 3
-          denomination: 6
-          bonus: ''
-          types:
-            - bludgeoning
-          custom:
-            enabled: false
-            formula: ''
-          scaling:
-            mode: ''
-            number: null
-            formula: ''
-      armor:
-        value: 10
-      hp:
-        value: 0
-        max: 0
-        dt: null
-        conditions: ''
-      properties: []
-      proficient: 1
-      unidentified:
-        description: ''
-      type:
-        value: natural
-        baseItem: ''
-      container: null
-      crewed: false
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: attack
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '5'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          attack:
-            ability: str
-            bonus: ''
-            critical:
-              threshold: null
-            flat: false
-            type:
-              value: melee
-              classification: weapon
-          damage:
-            critical:
-              bonus: ''
-            includeBase: true
-            parts:
-              - number: 6
-                denomination: 6
-                bonus: ''
-                types:
-                  - necrotic
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
-          type: save
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '5'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          damage:
-            onSave: half
-            parts: []
-          save:
-            ability: con
-            dc:
-              calculation: ''
-              formula: '16'
-          sort: 0
-      attuned: false
-      ammunition: {}
-      magicalBonus: null
-      identifier: rotting-fist
-      mastery: ''
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745176292793
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!UFW8M3JHzHkxUEGM.M6t9H8pMhzQxM9qv'
-  - _id: yHydHrxw4vlDlyjf
-    name: Dreadful Glare
-    type: feat
-    img: icons/magic/perception/hand-eye-pink.webp
-    system:
-      description:
-        value: >-
-          <p>The mummy lord targets one creature it can see within 60 feet of
-          it. If the target can see the mummy lord, it must succeed on a DC 16
-          Wisdom saving throw against this magic or become frightened until the
-          end of the mummy's next turn.</p><p>If the target fails the saving
-          throw by 5 or more, it is also paralyzed for the same duration. A
-          target that succeeds on the saving throw is immune to the Dreadful
-          Glare of all mummies and mummy lords for the next 24 hours.</p>
-        chat: >-
-          <p>The mummy lord targets one creature it can see within 60 ft. of it.
-          If the target can see the mummy, it must make a
-          <strong>Wisdom</strong> saving throw against this magic.</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: save
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '60'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: '1'
-              type: creature
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          damage:
-            onSave: half
-            parts: []
-          save:
-            ability: wis
-            dc:
-              calculation: ''
-              formula: '16'
-          sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: dreadful-glare
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.H306eluIH47Wfr0U
-      duplicateSource: null
-      coreVersion: '13.351'
-      systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765828461323
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!UFW8M3JHzHkxUEGM.yHydHrxw4vlDlyjf'
-  - _id: und47mebgauAcPu4
-    name: Legendary Actions
-    type: feat
-    img: icons/magic/light/hand-sparks-glow-yellow.webp
-    system:
-      description:
-        value: >-
-          <p>The mummy lord can take 3 legendary actions. Only one legendary
-          action option can be used at a time and only at the end of another
-          creature's turn. The mummy lord regains spent legendary actions at the
-          start of its turn.</p>
-        chat: <p>The mummy lord can take 3 legendary actions.</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: legendary-actions
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.terEuqr148hQBkIq
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676962
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!UFW8M3JHzHkxUEGM.und47mebgauAcPu4'
   - _id: MVq9wNMasHT5Cr1J
     name: Attack
     type: feat
-    img: icons/skills/melee/weapons-crossed-swords-white-blue.webp
+    img: icons/magic/death/hand-undead-skeleton-fire-pink.webp
     system:
       description:
         value: >-
-          <p>The mummy lord makes one attack with its [[/item
-          .M6t9H8pMhzQxM9qv]]{Rotting Fist} or uses its [[/item
-          .yHydHrxw4vlDlyjf]]{Dreadful Glare}.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes one attack with its
+          [[/item .5VmCO7pd2vpSCpq2]]{Rotting Fist} or uses its [[/item
+          .GSbdcVdjyBwAmgk9]]{Dreadful Glare}.</p>
         chat: ''
       source:
         custom: ''
@@ -1530,13 +1268,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        RDdWD0VWUqslOXJm:
           type: utility
           activation:
             type: legendary
@@ -1546,26 +1283,25 @@ items:
           consumption:
             targets:
               - type: attribute
-                target: resources.legact.value
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: resources.legact.value
+                scaling: {}
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -1576,7 +1312,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1593,7 +1330,19 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: RDdWD0VWUqslOXJm
+          name: Strike
       enchant: {}
       prerequisites:
         level: null
@@ -1607,26 +1356,30 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765828491955
+      systemVersion: 6.0.0
+      createdTime: 1781838636958
+      modifiedTime: 1781838660144
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.MVq9wNMasHT5Cr1J'
   - _id: o7UvUGPaF9cnGcQi
     name: Whirlwind of Sand
     type: feat
-    img: icons/magic/fire/explosion-mushroom-nuke-orange.webp
+    img: icons/magic/air/wind-tornado-cyclone-red-orange.webp
     system:
       description:
         value: >-
-          <p>The mummy lord magically transforms into a whirlwind of sand, moves
-          up to 60 feet, and reverts to its normal form. While in whirlwind
-          form, the mummy lord is immune to all damage, and it can't be
-          grappled, petrified, knocked prone, restrained, or stunned. Equipment
-          worn or carried by the mummy lord remain in its possession.</p>
+          <p>The [[lookup @name lowercase]]{monster} magically transforms into a
+          whirlwind of sand, moves up to 60 feet, and reverts to its normal
+          form. While in whirlwind form, the [[lookup @name lowercase]]{monster}
+          is immune to all damage, and it can't be &amp;reference[grappled
+          apply=false], &amp;reference[petrified apply=false], knocked
+          &amp;reference[prone apply=false], &amp;reference[restrained
+          apply=false], or &amp;reference[stunned apply=false]. Equipment worn
+          or carried by the [[lookup @name lowercase]]{monster} remain in its
+          possession.</p>
         chat: ''
       source:
         custom: ''
@@ -1640,13 +1393,13 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        0rDB745iaPlQXbbk:
           type: utility
           activation:
             type: legendary
@@ -1656,21 +1409,20 @@ items:
           consumption:
             targets:
               - type: attribute
-                target: resources.legact.value
                 value: '2'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: resources.legact.value
+                scaling: {}
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1687,7 +1439,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1704,7 +1457,19 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          _id: 0rDB745iaPlQXbbk
+          name: Transform into Sandstorm
       enchant: {}
       prerequisites:
         level: null
@@ -1718,11 +1483,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.X96xsQjIolyHtV91
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1765828467151
+      systemVersion: 6.0.0
+      createdTime: 1781838991426
+      modifiedTime: 1781839071110
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.o7UvUGPaF9cnGcQi'
@@ -1847,7 +1612,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.n9pJzTDsAwQxJVRl
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1978,7 +1743,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2089,7 +1854,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.arzCrMRgcNiQuh43
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2227,7 +1992,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.7buEm5KhI5lP8m1z
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2340,7 +2105,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.jZ6JNykRtdQ90MOo
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2454,7 +2219,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.3Lo9boi7P2ro6QV4
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2570,7 +2335,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.5VhqFROQYjr1P9lp
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2713,7 +2478,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.JbxsYXxSOTZbf9I0
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2848,7 +2613,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.oyE5nVppa5mde5gT
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2966,7 +2731,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.15Fa6q1nH27XfbR8
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -3088,7 +2853,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.XqzXSKNR75ZdYTA9
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -3219,7 +2984,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.TgHsuhNasPbhu8MO
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -3379,7 +3144,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.CjIq8Ed7bu3vVwT1
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -3516,7 +3281,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.OVikYmSdHliAG2YD
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -3648,7 +3413,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.tMH6Ivn4GmE1naMj
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -3656,6 +3421,676 @@ items:
       lastModifiedBy: null
       exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.tMH6Ivn4GmE1naMj'
+  - _id: 0kFyfGqZK7GzUNGv
+    name: Magic Resistance
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on saving
+          throws against spells and other magical effects.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      properties:
+        - trait
+      identifier: magic-resistance
+      advancement: {}
+      crewed: false
+    flags: {}
+    img: icons/magic/defensive/barrier-shield-dome-pink.webp
+    effects: []
+    folder: null
+    sort: 150000
+    _stats:
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781838418731
+      modifiedTime: 1781838421122
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Item.Hc6MqLQhPTI1KOvm
+    _key: '!actors.items!UFW8M3JHzHkxUEGM.0kFyfGqZK7GzUNGv'
+  - _id: eFH8Lkvn74h2ObmT
+    name: Legendary Actions
+    type: feat
+    img: icons/skills/melee/weapons-crossed-swords-teal.webp
+    system:
+      description:
+        value: <p>[[lookup @resources.legact.label]]</p>
+        chat: <p>The dragon can take 3 legendary actions. </p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: legendary-actions
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: 5cwqjeuI64dkrUa8
+    sort: 400000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.M4eX4Mu5IHCr3TMf.Item.tWGObm0RZMwSrQLU
+      duplicateSource: Item.iG1TPGZxSyxA5B9l
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781838469108
+      modifiedTime: 1781838472041
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!UFW8M3JHzHkxUEGM.eFH8Lkvn74h2ObmT'
+  - _id: 5VmCO7pd2vpSCpq2
+    name: Rotting Fist
+    type: weapon
+    img: icons/magic/death/hand-withered-gray.webp
+    system:
+      description:
+        value: >-
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
+          a creature, it must succeed on a [[/save]] saving throw or be cursed
+          with mummy rot. The cursed target can't regain hit points, and its hit
+          point maximum decreases by 10 (3d6) for every 24 hours that elapse. If
+          the curse reduces the target's hit point maximum to 0, the target
+          dies, and its body turns to dust. The curse lasts until removed by the
+          @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{Remove Curse}
+          spell or other magic.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. If the target is a creature, it must make a Constitution
+          saving throw.</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 0
+        units: lb
+      price:
+        value: 0
+        denomination: gp
+      attunement: ''
+      rarity: ''
+      identified: true
+      cover: null
+      range:
+        value: null
+        long: null
+        units: ft
+        reach: null
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      damage:
+        versatile:
+          number: null
+          denomination: null
+          bonus: ''
+          types: []
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+        base:
+          number: 3
+          denomination: 6
+          bonus: ''
+          types:
+            - bludgeoning
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+      armor:
+        value: 10
+      hp:
+        value: 0
+        max: 0
+        dt: null
+        conditions: ''
+      properties: []
+      proficient: null
+      unidentified:
+        description: ''
+      type:
+        value: natural
+        baseItem: ''
+      container: null
+      activities:
+        aKkGG9wpEFZSfhFO:
+          type: save
+          activation:
+            type: special
+            value: 1
+            condition: When a creature is hit by this attack.
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: >-
+              <p>If the target is a creature, it must succeed on a [[/save]]
+              saving throw or be cursed with mummy rot. The cursed target can't
+              regain hit points, and its hit point maximum decreases by 10 (3d6)
+              for every 24 hours that elapse. If the curse reduces the target's
+              hit point maximum to 0, the target dies, and its body turns to
+              dust. The curse lasts until removed by the
+              @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{Remove Curse}
+              spell or other magic.</p>
+          duration:
+            concentration: false
+            value: ''
+            units: disp
+            special: ''
+            override: false
+          effects:
+            - _id: UMVpr1Reg58yXSa1
+              onSave: false
+              level:
+                min: null
+                max: null
+          range:
+            value: '5'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: ''
+              type: creature
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: none
+            parts: []
+          save:
+            ability:
+              - con
+            dc:
+              calculation: ''
+              formula: '16'
+            bonus: ''
+            visible: true
+          sort: 300000
+          name: Curse Save
+          img: ''
+          flags: {}
+          visibility:
+            identifier: ''
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: aKkGG9wpEFZSfhFO
+        jv3Uz0EcvkblTQiY:
+          type: attack
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '5'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          attack:
+            ability: ''
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: ''
+              classification: ''
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 6
+                denomination: 6
+                bonus: ''
+                types:
+                  - necrotic
+                scaling:
+                  number: 1
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: jv3Uz0EcvkblTQiY
+          name: ''
+      ammunition: {}
+      identifier: rotting-fist
+      mastery: ''
+      crew:
+        value: []
+      attuned: false
+      equipped: true
+    effects:
+      - name: Mummy Rot
+        img: icons/magic/death/skeleton-eye-skull-glow-orange.webp
+        origin: Compendium.dnd5e.monsters.Actor.t8WYD7ak07X7xpx8.Item.ik1IkSZi4fpiGbB3
+        transfer: false
+        _id: UMVpr1Reg58yXSa1
+        type: base
+        system:
+          changes:
+            - key: system.traits.di.value
+              type: add
+              value: healing
+              phase: initial
+              priority: null
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You are cursed. While cursed, you can't regain hit points, and your
+          hit point maximum is reduced by [[/damage maximum 3d6 average]]{10
+          (3d6)} for every 24 hours that elapse.</p><p>If the curse reduces the
+          target's hit point maximum to 0, the target dies, and its body turns
+          to dust. The curse lasts until removed by the
+          @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{Remove Curse}
+          spell or other magic.</p>
+        tint: '#ffffff'
+        statuses:
+          - cursed
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781838492102
+          modifiedTime: 1781838492102
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!UFW8M3JHzHkxUEGM.5VmCO7pd2vpSCpq2.UMVpr1Reg58yXSa1
+    folder: NKfFWVmYjWCejT76
+    sort: 300000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.t8WYD7ak07X7xpx8.Item.ik1IkSZi4fpiGbB3
+      duplicateSource: Item.sZxQcDZAKp3agCjr
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781838492102
+      modifiedTime: 1781838529384
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!UFW8M3JHzHkxUEGM.5VmCO7pd2vpSCpq2'
+  - _id: GSbdcVdjyBwAmgk9
+    name: Dreadful Glare
+    type: feat
+    img: icons/magic/death/skull-energy-light-purple.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} targets [[lookup
+          @labels.description.affects activity=vBP1Ivo8gjkv4DVp]] it can see
+          within [[lookup @labels.description.range activity=vBP1Ivo8gjkv4DVp]]
+          of it. If the target can see the [[lookup @name lowercase]]{monster},
+          it must succeed on a [[/save]] saving throw against this magic or
+          become &amp;reference[frightened] until the end of the [[lookup @name
+          lowercase]]{monster}'s next turn.</p><p>If the target fails the saving
+          throw by 5 or more, it is also &amp;reference[paralyzed] for the same
+          duration. A target that succeeds on the saving throw is immune to the
+          [[lookup @item.name]] of all [[lookup @name lowercase]]{monster}s for
+          the next 24 hours.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} targets [[lookup
+          @labels.description.affects activity=vBP1Ivo8gjkv4DVp]] it can see
+          within [[lookup @labels.description.range activity=vBP1Ivo8gjkv4DVp]]
+          of it. If the target can see the [[lookup @name]]{monster}, it must
+          make a Wisdom saving throw against this magic.</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - mgc
+      activities:
+        vBP1Ivo8gjkv4DVp:
+          type: save
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: ''
+          duration:
+            concentration: false
+            value: '1'
+            units: turn
+            special: ''
+            override: false
+          effects:
+            - _id: ebQZNdQTJtOhr7Lq
+              onSave: false
+              level:
+                min: null
+                max: null
+            - _id: HaYWb6flfwYF7zHi
+              onSave: false
+              level:
+                min: null
+                max: null
+          range:
+            value: '60'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: '1'
+              type: creature
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: none
+            parts: []
+          save:
+            ability:
+              - wis
+            dc:
+              calculation: ''
+              formula: '16'
+            visible: true
+            bonus: ''
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          _id: vBP1Ivo8gjkv4DVp
+          name: Focus Gaze
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: dreadful-glare
+      advancement: {}
+      crewed: false
+    effects:
+      - name: Frightening Gaze
+        img: icons/magic/death/skull-humanoid-white-blue.webp
+        origin: Compendium.dnd5e.monsters.Actor.t8WYD7ak07X7xpx8.Item.8Jju4CVZaIDab6Ju
+        transfer: false
+        _id: ebQZNdQTJtOhr7Lq
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: rounds
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You are &amp;reference[frightened apply=false] until the end of the
+          mummy's next turn.</p>
+        tint: '#ffffff'
+        statuses:
+          - frightened
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781838495739
+          modifiedTime: 1781838495739
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!UFW8M3JHzHkxUEGM.GSbdcVdjyBwAmgk9.ebQZNdQTJtOhr7Lq
+      - name: Paralyzing Gaze
+        img: icons/magic/death/skull-humanoid-white-red.webp
+        origin: Compendium.dnd5e.monsters.Actor.t8WYD7ak07X7xpx8.Item.8Jju4CVZaIDab6Ju
+        transfer: false
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: rounds
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You are &amp;reference[frightened apply=false] and
+          &amp;reference[paralyzed apply=false until the end of the mummy's next
+          turn.</p>
+        tint: '#ffffff'
+        statuses:
+          - frightened
+          - paralyzed
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781838495739
+          modifiedTime: 1781838495739
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _id: HaYWb6flfwYF7zHi
+        _key: >-
+          !actors.items.effects!UFW8M3JHzHkxUEGM.GSbdcVdjyBwAmgk9.HaYWb6flfwYF7zHi
+    folder: NKfFWVmYjWCejT76
+    sort: 500000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.t8WYD7ak07X7xpx8.Item.8Jju4CVZaIDab6Ju
+      duplicateSource: Item.9D8eGFHWQeu6GT57
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781838495739
+      modifiedTime: 1781838594798
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!UFW8M3JHzHkxUEGM.GSbdcVdjyBwAmgk9'
 effects: []
 folder: FsvtTiIRh93utaoh
 sort: 0
@@ -3664,7 +4099,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171234382

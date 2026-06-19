@@ -453,9 +453,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -470,7 +467,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -490,6 +487,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: nkPIb1htkHIdbJ97
     name: Studded Leather Armor
@@ -558,7 +556,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.TIV3B1vbrVHIhQAm
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -566,54 +564,6 @@ items:
       lastModifiedBy: null
       exportSource: null
     _key: '!actors.items!rbyp54px2D0ql4QK.nkPIb1htkHIdbJ97'
-  - _id: qodTzcDY37TCj4GN
-    name: Sunlight Sensitivity
-    type: feat
-    img: icons/magic/light/explosion-star-glow-blue-purple.webp
-    system:
-      description:
-        value: >-
-          <p>While in sunlight, the wight has disadvantage on attack rolls, as
-          well as on Wisdom (Perception) checks that rely on sight.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: sunlight-sensitivity
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.F14aW2Ke3I5ZtSg4
-      duplicateSource: null
-      coreVersion: '13.351'
-      systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765828739676
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!rbyp54px2D0ql4QK.qodTzcDY37TCj4GN'
   - _id: fKIUImfcNk0pU2HN
     name: Multiattack
     type: feat
@@ -621,10 +571,10 @@ items:
     system:
       description:
         value: >-
-          <p>The wight makes two [[/item .WZ3XGh48UoyAvBhS]]{longsword} attacks
-          or two [[/item .PUYwkzEiKopyM6YL]]{longbow} attacks. It can use its
-          [[/item .NX8cqG6aZMns8wvY]]{Life Drain} in place of one longsword
-          attack.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes two [[/item
+          .WZ3XGh48UoyAvBhS]]{Longsword} attacks or two [[/item
+          .PUYwkzEiKopyM6YL]]{Longbow} attacks. It can use its [[/item
+          .NX8cqG6aZMns8wvY]]{Life Drain} in place of one longsword attack.</p>
         chat: ''
       source:
         custom: ''
@@ -638,13 +588,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        pJUhRwOjOnNrqOwz:
           type: utility
           activation:
             type: action
@@ -659,15 +608,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -678,7 +628,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -695,7 +646,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: pJUhRwOjOnNrqOwz
       enchant: {}
       prerequisites:
         level: null
@@ -709,22 +668,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1765828747375
+      systemVersion: 6.0.0
+      createdTime: 1781830382872
+      modifiedTime: 1781830388015
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!rbyp54px2D0ql4QK.fKIUImfcNk0pU2HN'
   - _id: PUYwkzEiKopyM6YL
     name: Longbow
     type: weapon
-    img: icons/weapons/bows/longbow-leather-green.webp
+    img: icons/weapons/bows/bow-recurve-black.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Wight attacks with its Longbow.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -790,7 +751,7 @@ items:
         - amm
         - hvy
         - two
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -799,8 +760,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        alXVJtrivmlytWms:
           type: attack
           activation:
             type: action
@@ -815,10 +775,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -835,7 +796,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -854,18 +816,32 @@ items:
               threshold: null
             flat: false
             type:
-              value: ranged
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: alXVJtrivmlytWms
+          name: ''
       attuned: false
-      ammunition: {}
+      ammunition:
+        type: ''
       magicalBonus: null
       identifier: longbow
+      mastery: ''
     effects: []
     folder: null
     sort: 200000
@@ -875,24 +851,26 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.3cymOVja8jXbzrdT
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1765828747375
+      systemVersion: 6.0.0
+      createdTime: 1781830129874
+      modifiedTime: 1781830141259
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!rbyp54px2D0ql4QK.PUYwkzEiKopyM6YL'
   - _id: WZ3XGh48UoyAvBhS
     name: Longsword
     type: weapon
-    img: icons/weapons/swords/greatsword-crossguard-steel.webp
+    img: icons/weapons/swords/sword-guard-flanged.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]], or [[/damage average
           attackMode=twoHanded]] damage if used with two hands.</p>
-        chat: <p>The Wight attacks with its Longsword.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -956,7 +934,7 @@ items:
         conditions: ''
       properties:
         - ver
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -965,8 +943,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        sy3eCnZTye87VFVD:
           type: attack
           activation:
             type: action
@@ -981,10 +958,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1001,7 +979,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1020,18 +999,31 @@ items:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: sy3eCnZTye87VFVD
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: longsword
+      mastery: ''
     effects: []
     folder: null
     sort: 175000
@@ -1041,33 +1033,35 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.10ZP2Bu3vnCuYMIB
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1765828767173
+      systemVersion: 6.0.0
+      createdTime: 1781830150612
+      modifiedTime: 1781830161374
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!rbyp54px2D0ql4QK.WZ3XGh48UoyAvBhS'
   - _id: NX8cqG6aZMns8wvY
     name: Life Drain
     type: weapon
-    img: icons/magic/unholy/strike-hand-glow-pink.webp
+    img: icons/magic/unholy/hand-claw-fire-blue.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
-          succeed on a DC 13 Constitution saving throw or its hit point maximum
-          is reduced by an amount equal to the damage taken. This reduction
-          lasts until the target finishes a long rest. The target dies if this
-          effect reduces its hit point maximum to 0.</p><p>A humanoid slain by
-          this attack rises 24 hours later as a zombie under the wight's
-          control, unless the humanoid is restored to life or its body is
-          destroyed. The wight can have no more than twelve zombies under its
+          succeed on a [[/save]] saving throw or its hit point maximum is
+          reduced by an amount equal to the damage taken. This reduction lasts
+          until the target finishes a long rest. The target dies if this effect
+          reduces its hit point maximum to 0.</p><p>A humanoid slain by this
+          attack rises 24 hours later as a
+          @UUID[Compendium.dnd5e.monsters.Actor.NAISFPoNNgUCsEyW]{Zombie} under
+          the [[lookup @name lowercase]]{monster}'s control, unless the humanoid
+          is restored to life or its body is destroyed. The [[lookup @name
+          lowercase]]{monster} can have no more than twelve zombies under its
           control at one time.</p>
         chat: >-
-          <p>The Wight attacks with its Life Drain. The target must make a
-          <strong>Constitution</strong> saving throw.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. The target must make a Constitution saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -1139,85 +1133,22 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: attack
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '5'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          attack:
-            ability: cha
-            bonus: ''
-            critical:
-              threshold: null
-            flat: false
-            type:
-              value: melee
-              classification: weapon
-          damage:
-            critical:
-              bonus: ''
-            includeBase: true
-            parts: []
-          sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+        92VUfAsPBGzKcjQw:
           type: save
           activation:
-            type: action
+            type: special
             value: 1
-            condition: ''
+            condition: When a creature is hit by this attack.
             override: false
           consumption:
             targets: []
             scaling:
-              allowed: false
+              allowed: true
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -1238,7 +1169,92 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
+            affects:
+              count: '1'
+              type: creature
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: none
+            parts:
+              - custom:
+                  enabled: true
+                  formula: '@scaling'
+                number: null
+                denomination: null
+                bonus: ''
+                types:
+                  - maximum
+                scaling:
+                  mode: ''
+                  number: 1
+          save:
+            ability:
+              - con
+            dc:
+              calculation: ''
+              formula: '14'
+            visible: true
+            bonus: ''
+          sort: 300000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          name: Drain Maximum Hit Point Save
+          _id: 92VUfAsPBGzKcjQw
+        F5Zw30mKmjb3pJyI:
+          type: attack
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '5'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1250,16 +1266,119 @@ items:
             spent: 0
             max: ''
             recovery: []
+          attack:
+            ability: cha
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: ''
+              classification: ''
           damage:
-            onSave: half
+            critical:
+              bonus: ''
+            includeBase: true
             parts: []
-          save:
-            ability: con
-            dc:
-              calculation: ''
-              formula: '13'
-          sort: 0
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: F5Zw30mKmjb3pJyI
           name: ''
+        oIaGncKFmwOakdyM:
+          type: summon
+          name: Raise Zombie
+          _id: oIaGncKFmwOakdyM
+          img: ''
+          sort: 400000
+          activation:
+            type: special
+            override: false
+            condition: Twenty four hours after a humanoid is slain by this attack.
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: >-
+              <p>A humanoid slain by this attack rises 24 hours later as a
+              @UUID[Compendium.dnd5e.monsters.Actor.NAISFPoNNgUCsEyW]{Zombie}
+              under the [[lookup @name lowercase]]{monster}'s control, unless
+              the humanoid is restored to life or its body is destroyed. The
+              [[lookup @name lowercase]]{monster} can have no more than twelve
+              zombies under its control at one time.</p>
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: self
+            override: false
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: ''
+              count: ''
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          bonuses:
+            ac: ''
+            hd: ''
+            hp: ''
+            attackDamage: ''
+            saveDamage: ''
+            healing: ''
+          creatureSizes: []
+          creatureTypes: []
+          match:
+            attacks: false
+            disposition: true
+            proficiency: false
+            saves: false
+            ability: ''
+          profiles:
+            - count: '1'
+              name: ''
+              _id: lEoQRNG58qcnVLK3
+              uuid: Compendium.dnd5e.monsters.Actor.NAISFPoNNgUCsEyW
+              level:
+                min: null
+                max: null
+              types: []
+          summon:
+            prompt: true
+            mode: ''
+          tempHP: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -1274,14 +1393,68 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765828754639
+      systemVersion: 6.0.0
+      createdTime: 1781830214725
+      modifiedTime: 1781832211023
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!rbyp54px2D0ql4QK.NX8cqG6aZMns8wvY'
+  - _id: 6fVu7XdsLkwtzHrs
+    name: Sunlight Sensitivity
+    type: feat
+    img: icons/magic/light/beam-rays-yellow.webp
+    system:
+      description:
+        value: >-
+          <p>While in sunlight, the [[lookup @name lowercase]]{monster} has
+          disadvantage on attack rolls, as well as on Wisdom (Perception) checks
+          that rely on sight.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: sunlight-sensitivity
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: null
+    sort: 109375
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.1vaBSMUfOy6JPJ14.Item.Up2YzkDn0uBKQj6K
+      duplicateSource: Item.O2X2jlQHc9cUVKbR
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781830364682
+      modifiedTime: 1781830364682
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!rbyp54px2D0ql4QK.6fVu7XdsLkwtzHrs'
 effects: []
 folder: FsvtTiIRh93utaoh
 sort: 0
@@ -1290,7 +1463,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171261596

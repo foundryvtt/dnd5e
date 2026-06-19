@@ -106,7 +106,7 @@ system:
     biography:
       value: ''
       public: ''
-    alignment: Any Evil
+    alignment: Any Evil Alignment
     race: null
     type:
       value: undead
@@ -459,9 +459,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -476,7 +473,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -496,14 +493,15 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: 6PwbK4d0W11LsEkf
     name: Cantrip
     type: feat
-    img: icons/magic/unholy/strike-hand-glow-pink.webp
+    img: icons/sundries/scrolls/scroll-bound-sealed-red-green.webp
     system:
       description:
-        value: <p>The lich casts a cantrip.</p>
+        value: <p>The [[lookup @name lowercase]]{monster} casts a cantrip.</p>
         chat: ''
       source:
         custom: ''
@@ -522,8 +520,7 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        kblmZb7jFASyLh6M:
           type: utility
           activation:
             type: legendary
@@ -533,26 +530,25 @@ items:
           consumption:
             targets:
               - type: attribute
-                target: resources.legact.value
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: resources.legact.value
+                scaling: {}
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -563,7 +559,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -580,7 +577,19 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          name: Cast Cantrip
+          img: ''
+          flags: {}
+          visibility:
+            identifier: ''
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: kblmZb7jFASyLh6M
       enchant: {}
       prerequisites:
         level: null
@@ -594,23 +603,23 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781836123075
+      modifiedTime: 1781836144183
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!bfh29vIEoGzI240e.6PwbK4d0W11LsEkf'
   - _id: dJLqLsCek3uxbzuX
     name: Paralyzing Touch
     type: feat
-    img: icons/magic/water/water-hand.webp
+    img: icons/magic/death/hand-undead-skeleton-fire-pink.webp
     system:
       description:
         value: >-
-          <p>The lich uses its [[/item .KDSrdpdFPDKnh80y]]{Paralyzing
-          Touch}.</p>
+          <p>The [[lookup @name lowercase]]{monster} uses its [[/item
+          .KDSrdpdFPDKnh80y]]{Paralyzing Touch}.</p>
         chat: ''
       source:
         custom: ''
@@ -629,10 +638,9 @@ items:
       requirements: ''
       properties: []
       activities:
-        yqpsTgbctXS8iVIQ:
+        wiJYafGEAptJZwUd:
           type: utility
-          _id: yqpsTgbctXS8iVIQ
-          sort: 0
+          sort: 100000
           activation:
             type: legendary
             value: null
@@ -645,6 +653,7 @@ items:
             targets: []
           description:
             chatFlavor: ''
+            value: ''
           duration:
             units: inst
             concentration: false
@@ -659,6 +668,7 @@ items:
               contiguous: false
               units: ft
               type: ''
+              stationary: false
             affects:
               choice: false
               type: ''
@@ -673,9 +683,18 @@ items:
             visible: false
             name: ''
             formula: ''
-          name: ''
+          name: Strike
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: wiJYafGEAptJZwUd
       enchant: {}
       prerequisites:
         level: null
@@ -685,36 +704,37 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.ebcmg4M5LsUYCqee
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765828208313
+      systemVersion: 6.0.0
+      createdTime: 1781836150717
+      modifiedTime: 1781836164823
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!bfh29vIEoGzI240e.dJLqLsCek3uxbzuX'
   - _id: Uox2GEp5GMXOOXOc
     name: Frightening Gaze
     type: feat
-    img: icons/magic/perception/silhouette-stealth-shadow.webp
+    img: icons/magic/death/skull-humanoid-white-red.webp
     system:
       description:
         value: >-
-          <p>The lich fixes its gaze on one creature it can see within 10 feet
-          of it. The target must succeed on a DC 18 Wisdom saving throw against
-          this magic or become grappled for 1 minute. The grappled target can
-          repeat the saving throw at the end of each of its turns, ending the
-          effect on itself on a success. If a target's saving throw is
-          successful or the effect ends for it, the target is immune to the
-          lich's gaze for the next 24 hours.</p>
+          <p>The [[lookup @name lowercase]]{monster} fixes its gaze on [[lookup
+          @labels.description.affects activity=wmTdXl8uA71bwJeN]] it can see
+          within [[lookup @labels.description.range activity=wmTdXl8uA71bwJeN]]
+          of it. The target must succeed on a [[/save
+          activity=wmTdXl8uA71bwJeN]] saving throw against this magic or become
+          &amp;reference[frightened] for [[lookup @labels.duration
+          activity=wmTdXl8uA71bwJeN]]. The frightened target can repeat the
+          saving throw at the end of each of its turns, ending the effect on
+          itself on a success. If a target's saving throw is successful or the
+          effect ends for it, the target is immune to the [[lookup @name
+          lowercase]]{monster}'s [[lookup @item.name]] for the next 24
+          hours.</p>
         chat: >-
           <p>The lich fixes its gaze on one creature it can see within 10 feet
           of it. The target must make a <strong>Wisdom</strong> saving
@@ -731,13 +751,13 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        wmTdXl8uA71bwJeN:
           type: save
           activation:
             type: legendary
@@ -747,24 +767,28 @@ items:
           consumption:
             targets:
               - type: attribute
-                target: resources.legact.value
                 value: '2'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: resources.legact.value
+                scaling: {}
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
-            value: ''
-            units: ''
+            value: '1'
+            units: minute
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: OoRXaVihtPj1cUov
+              onSave: false
+              level:
+                min: null
+                max: null
           range:
             value: '10'
             units: ft
@@ -778,7 +802,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: '1'
               type: creature
@@ -791,19 +816,75 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: wis
+            ability:
+              - wis
             dc:
               calculation: ''
               formula: '18'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          _id: wmTdXl8uA71bwJeN
+          name: Fear Save
       enchant: {}
       prerequisites:
         level: null
       identifier: frightening-gaze
-    effects: []
+    effects:
+      - name: Frightening Gaze
+        img: icons/magic/death/skull-humanoid-white-red.webp
+        origin: Compendium.dnd5e.monsters.Actor.bfh29vIEoGzI240e.Item.Uox2GEp5GMXOOXOc
+        transfer: false
+        _id: OoRXaVihtPj1cUov
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: minutes
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You are &amp;reference[frightened apply=false] for the
+          duration.</p><p>You can repeat the saving throw at the end of each of
+          your turns, ending the effect on yourself on a success.</p>
+        tint: '#ffffff'
+        statuses:
+          - frightened
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781836286869
+          modifiedTime: 1781836363689
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!bfh29vIEoGzI240e.Uox2GEp5GMXOOXOc.OoRXaVihtPj1cUov
     folder: null
     sort: 0
     ownership:
@@ -812,28 +893,30 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.cpnrDGQrqgPlSmwR
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765828215173
+      systemVersion: 6.0.0
+      createdTime: 1781836174902
+      modifiedTime: 1781836556058
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!bfh29vIEoGzI240e.Uox2GEp5GMXOOXOc'
   - _id: sXU9KTYnmgi08EQw
     name: Disrupt Life
     type: feat
-    img: icons/magic/death/projectile-skull-fire-purple.webp
+    img: icons/magic/death/skull-flames-white-blue.webp
     system:
       description:
         value: >-
-          <p>Each non-undead creature within 20 feet of the lich must make a DC
-          18 Constitution saving throw against this magic, taking 21 (6d6)
-          necrotic damage on a failed save, or half as much damage on a
-          successful one.</p>
+          <p>Each non-undead creature within [[lookup @target.template.size
+          activity=Ro8ltLqMQLl16Qey]] feet of the [[lookup @name
+          lowercase]]{monster} must make a [[/save]] saving throw against this
+          magic, taking [[/damage average]] damage on a failed save, or half as
+          much damage on a successful one.</p>
         chat: >-
-          <p>Each non-undead creature within 20 feet of the lich must make a
-          <strong>Constitution</strong> saving throw against this magic.</p>
+          <p>Each non-undead creature within [[lookup @target.template.size
+          activity=Ro8ltLqMQLl16Qey]] feet of the [[lookup @name]]{monster} must
+          make a Constitution saving throw against this magic.</p>
       source:
         custom: ''
         book: ''
@@ -846,13 +929,13 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        Ro8ltLqMQLl16Qey:
           type: save
           activation:
             type: legendary
@@ -862,26 +945,25 @@ items:
           consumption:
             targets:
               - type: attribute
-                target: resources.legact.value
                 value: '3'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: resources.legact.value
+                scaling: {}
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -893,9 +975,10 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: true
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -907,24 +990,37 @@ items:
           damage:
             onSave: half
             parts:
-              - number: 6
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 6
                 denomination: 6
                 bonus: ''
                 types:
                   - necrotic
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+                  number: 1
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '18'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          _id: Ro8ltLqMQLl16Qey
+          name: Disrupt Life Save
       enchant: {}
       prerequisites:
         level: null
@@ -938,24 +1034,28 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EguIm3u5kkopYwEM
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765828222353
+      systemVersion: 6.0.0
+      createdTime: 1781836400394
+      modifiedTime: 1781836540266
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!bfh29vIEoGzI240e.sXU9KTYnmgi08EQw'
-  - _id: YfFIobyElKqcizgt
-    name: Legendary Resistance
+  - _id: stk9i3rPK7z99CDf
+    name: Rejuvenation
     type: feat
-    img: icons/equipment/shield/kite-wooden-oak-glow.webp
+    img: icons/commodities/treasure/brooch-skull-dagger-grey.webp
     system:
       description:
         value: >-
-          <p>If the lich fails a saving throw, it can choose to succeed
-          instead.</p>
-        chat: ''
+          <p>If it has a phylactery, a destroyed [[lookup @name
+          lowercase]]{monster} gains a new body in 1d10 days, regaining all its
+          hit points and becoming active again. The new body appears within 5
+          feet of the phylactery.</p>
+        chat: >-
+          <p>A destroyed [[lookup @name lowercase]]{monster} gains a new body in
+          1d10 days, regaining all its hit points and becoming active again.</p>
       source:
         custom: ''
         book: ''
@@ -968,42 +1068,41 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        x8VXBEpLp3UmZ29h:
           type: utility
           activation:
             type: special
             value: null
-            condition: ''
+            condition: When the [[lookup @name]]{monster} dies while it has a phylactery.
             override: false
           consumption:
-            targets:
-              - type: attribute
-                target: resources.legres.value
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+            targets: []
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>If it has a phylactery, a destroyed [[lookup @name
+              lowercase]]{monster} gains a new body in 1d10 ([[1d10]]) days,
+              regaining all its hit points and becoming active again. The new
+              body appears within 5 feet of the phylactery.</p>
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -1014,10 +1113,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
-              type: ''
+              type: self
               choice: false
               special: ''
             prompt: true
@@ -1031,111 +1131,19 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: legendary-resistance
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.J1NxNTJ2qi05iAFF
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!bfh29vIEoGzI240e.YfFIobyElKqcizgt'
-  - _id: stk9i3rPK7z99CDf
-    name: Rejuvenation
-    type: feat
-    img: icons/magic/control/debuff-energy-hold-levitate-green.webp
-    system:
-      description:
-        value: >-
-          <p>If it has a phylactery, a destroyed lich gains a new body in 1d10
-          days, regaining all its hit points and becoming active again. The new
-          body appears within 5 feet of the phylactery.</p>
-        chat: >-
-          <p>A destroyed lich gains a new body in 1d10 days, regaining all
-          its<strong> hit points</strong> and becoming active again.</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
-          activation:
-            type: ''
-            value: null
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ''
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: 1d10
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
+          sort: 100000
+          name: Rejuvenate
+          img: ''
+          flags: {}
+          visibility:
+            identifier: ''
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: x8VXBEpLp3UmZ29h
       enchant: {}
       prerequisites:
         level: null
@@ -1149,11 +1157,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.JcfHlAcfwSWnt7Ud
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765828163097
+      systemVersion: 6.0.0
+      createdTime: 1781835789189
+      modifiedTime: 1781835902553
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!bfh29vIEoGzI240e.stk9i3rPK7z99CDf'
@@ -1223,7 +1231,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.fdmzHw875EzpXM2a
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
@@ -1234,19 +1242,21 @@ items:
   - _id: KDSrdpdFPDKnh80y
     name: Paralyzing Touch
     type: weapon
-    img: icons/magic/water/water-hand.webp
+    img: icons/magic/death/hand-withered-gray.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
-          succeed on a [[/save]] saving throw or be &amp;Reference[paralyzed]
-          for 1 minute. The target can repeat the saving throw at the end of
-          each of its turns, ending the effect on itself on a success.</p>
+          succeed on a [[/save activity=ViiNmmo2Hd9uvmFG]] saving throw or be
+          &amp;Reference[paralyzed] for [[lookup @labels.duration
+          activity=ViiNmmo2Hd9uvmFG]]. The target can repeat the saving throw at
+          the end of each of its turns, ending the effect on itself on a
+          success.</p>
         chat: >-
-          <p>The Lich attacks with its Paralyzing Touch. The target must make a
-          <strong>Constitution</strong> saving throw. The target can repeat the
-          saving throw at the end of each of its turns, ending the effect on
-          itself on a success.</p>
+          <p>[[lookup @name lowercase]]{monster} The target must make a
+          Constitution saving throw. The target can repeat the saving throw at
+          the end of each of its turns, ending the effect on itself on a
+          success.</p>
       source:
         custom: ''
         book: ''
@@ -1308,8 +1318,9 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties: []
-      proficient: 1
+      properties:
+        - mgc
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -1318,8 +1329,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        OK0OvWGiFMtXuhwu:
           type: attack
           activation:
             type: action
@@ -1334,6 +1344,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -1354,7 +1365,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: '1'
               type: creature
@@ -1367,30 +1379,38 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: none
-            bonus: '@abilities.int.mod'
+            ability: spellcasting
+            bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
+              value: ''
               classification: spell
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
           name: ''
           img: ''
-          appliedEffects: []
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: true
+            requireMagic: false
+            identifier: ''
+          _id: OK0OvWGiFMtXuhwu
+        ViiNmmo2Hd9uvmFG:
           type: save
           activation:
             type: action
             value: 1
-            condition: ''
+            condition: When a creature is hit by this attack.
             override: false
           consumption:
             targets: []
@@ -1400,13 +1420,25 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>The target must succeed on a [[/save
+              activity=ViiNmmo2Hd9uvmFG]] saving throw or be
+              &amp;Reference[paralyzed] for [[lookup @labels.duration
+              activity=ViiNmmo2Hd9uvmFG]]. The target can repeat the saving
+              throw at the end of each of its turns, ending the effect on itself
+              on a success.</p>
           duration:
             concentration: false
-            value: ''
-            units: ''
+            value: '1'
+            units: minute
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: I8KIU1orhkqFoUPt
+              onSave: false
+              level:
+                min: null
+                max: null
           range:
             value: '5'
             units: ft
@@ -1420,10 +1452,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -1433,49 +1466,101 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '18'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: true
+            requireMagic: false
+            identifier: ''
+          _id: ViiNmmo2Hd9uvmFG
+          name: Paralysis Save
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: paralyzing-touch
       mastery: ''
-    effects: []
+    effects:
+      - name: Paralysis
+        img: icons/magic/death/hand-withered-gray.webp
+        origin: Compendium.dnd5e.monsters.Actor.bfh29vIEoGzI240e.Item.KDSrdpdFPDKnh80y
+        transfer: false
+        _id: I8KIU1orhkqFoUPt
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: minutes
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You are &amp;reference[paralyzed apply=false] for the
+          duration.</p><p>You can repeat the saving throw at the end of each of
+          youyr turns, ending the effect on yourself on a success.</p>
+        tint: '#ffffff'
+        statuses:
+          - paralyzed
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781836059053
+          modifiedTime: 1781836098375
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!bfh29vIEoGzI240e.KDSrdpdFPDKnh80y.I8KIU1orhkqFoUPt
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.ebcmg4M5LsUYCqee
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745175170431
+      systemVersion: 6.0.0
+      createdTime: 1781835917878
+      modifiedTime: 1781836573906
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!bfh29vIEoGzI240e.KDSrdpdFPDKnh80y'
   - _id: Rry67emsoMMjvQQz
     name: Turn Resistance
     type: feat
-    img: icons/magic/fire/flame-burning-creature-skeleton.webp
+    img: icons/magic/death/projectile-skull-fire-orange-red.webp
     system:
       description:
         value: >-
-          <p>The lich has<strong> advantage </strong>on saving throws against
-          any effect that turns undead.</p>
+          <p>The [[lookup @name lowercase]]{monster} has advantage on saving
+          throws against any effect that turns undead.</p>
         chat: ''
       source:
         custom: ''
@@ -1489,10 +1574,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -1507,64 +1593,14 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.r9aMLZ7F3gSRLgRr
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!bfh29vIEoGzI240e.Rry67emsoMMjvQQz'
-  - _id: GvT7gczoJ6QCocrA
-    name: Legendary Actions
-    type: feat
-    img: icons/magic/light/hand-sparks-glow-yellow.webp
-    system:
-      description:
-        value: >-
-          <p>The lich can take 3 legendary actions. Only one legendary action
-          option can be used at a time and only at the end of another creature's
-          turn. The lich regains spent legendary actions at the start of its
-          turn.</p>
-        chat: <p>The lich can take 3 legendary actions.</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: legendary-actions
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.terEuqr148hQBkIq
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676949
+      systemVersion: 6.0.0
+      createdTime: 1781835871501
+      modifiedTime: 1781835906732
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!bfh29vIEoGzI240e.GvT7gczoJ6QCocrA'
+    _key: '!actors.items!bfh29vIEoGzI240e.Rry67emsoMMjvQQz'
   - _id: Utk1OQRwYkMkFRD3
     name: Mage Hand
     ownership:
@@ -1675,7 +1711,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.Utk1OQRwYkMkFRD3
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1812,7 +1848,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.udsLtG0BugXHR2JQ
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1948,7 +1984,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ctW81uiX56xZR2c5
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2065,7 +2101,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2186,7 +2222,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.41JIhpDyM9Anm7cs
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2294,20 +2330,12 @@ items:
     effects:
       - _id: 6pbotGIvqQkraPva
         flags: {}
-        changes:
-          - key: system.attributes.ac.bonus
-            value: '5'
-            mode: 2
-            priority: null
         disabled: true
         duration:
-          startTime: null
-          rounds: 1
-          seconds: null
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 1
+          units: rounds
+          expiry: turnStart
+          expired: false
         origin: Item.FlLKKv7bQBlIAs11
         tint: '#ffffff'
         transfer: false
@@ -2317,7 +2345,7 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
+          coreVersion: '14.361'
           systemId: dnd5e
           systemVersion: 4.0.0
           createdTime: null
@@ -2326,8 +2354,16 @@ items:
           exportSource: null
         img: icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp
         type: base
-        system: {}
+        system:
+          changes:
+            - key: system.attributes.ac.bonus
+              value: 5
+              priority: null
+              type: add
         sort: 0
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!bfh29vIEoGzI240e.z1mx84ONwkXKUZd7.6pbotGIvqQkraPva
     folder: null
@@ -2338,7 +2374,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.z1mx84ONwkXKUZd7
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2472,7 +2508,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.WTbOQBsarsL1LuXJ
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2663,7 +2699,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.4H6YgYdKgnX6ZQ8M
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2807,7 +2843,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ppWAAEul0QHtm4er
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2923,7 +2959,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.1N8dDMMgZ1h1YJ3B
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -3052,7 +3088,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.X4c8xCkmF8U9HUMz
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -3187,7 +3223,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.oyE5nVppa5mde5gT
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -3297,7 +3333,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.Ek45cBpVXvJdv1Qy
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -3415,7 +3451,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.15Fa6q1nH27XfbR8
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -3550,7 +3586,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ztgcdrWPshKRpFd0
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -3687,7 +3723,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.pybg5MNc3lkerH4Y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -3818,7 +3854,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.A4RsPuSvB9wFtz1j
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -3943,7 +3979,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.LkvI11Uue774QBKZ
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -4156,7 +4192,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.fVbCxFRaORalHB20
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -4298,7 +4334,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.HBHbOGKNVVprSlwn
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -4429,7 +4465,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.HPvZm8YJO91k6Qdg
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -4611,7 +4647,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.J6Jpw5XzB5aTeqnz
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -4745,7 +4781,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.eEpy1ONlXumKS1mp
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -4856,7 +4892,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.dmvaMLFWFtv0qx0S
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -4973,7 +5009,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.35j2QIMmIk6aEdxj
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -5093,7 +5129,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.WmQpxfjZwF3MGUby
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -5101,6 +5137,180 @@ items:
       lastModifiedBy: null
       exportSource: null
     _key: '!actors.items!bfh29vIEoGzI240e.WmQpxfjZwF3MGUby'
+  - _id: kRUqLj1kgOPNQbV1
+    name: Legendary Actions
+    type: feat
+    img: icons/skills/melee/weapons-crossed-swords-teal.webp
+    system:
+      description:
+        value: <p>[[lookup @resources.legact.label]]</p>
+        chat: <p>The dragon can take 3 legendary actions. </p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: legendary-actions
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: 5cwqjeuI64dkrUa8
+    sort: 137500
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.M4eX4Mu5IHCr3TMf.Item.tWGObm0RZMwSrQLU
+      duplicateSource: Item.iG1TPGZxSyxA5B9l
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781835768101
+      modifiedTime: 1781835768101
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!bfh29vIEoGzI240e.kRUqLj1kgOPNQbV1'
+  - _id: mjnqHMqovluIet1r
+    name: Legendary Resistance
+    type: feat
+    img: icons/equipment/shield/targe-steel-blue.webp
+    system:
+      description:
+        value: >-
+          <p>If the [[lookup @name lowercase]]{monster} fails a saving throw, it
+          can choose to succeed instead.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: special
+            value: null
+            condition: When the [[lookup @name lowercase]]{monster} fails a saving throw.
+            override: false
+          consumption:
+            targets:
+              - type: attribute
+                value: '1'
+                target: resources.legres.value
+                scaling: {}
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: self
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: ''
+              type: self
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+          name: Persevere
+          img: ''
+          flags: {}
+          visibility:
+            identifier: ''
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: legendary-resistance
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: 5cwqjeuI64dkrUa8
+    sort: 125000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.M4eX4Mu5IHCr3TMf.Item.6gjpG1ezpMNyJDGc
+      duplicateSource: Item.MwYDaI9opLjPGaPA
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781835769145
+      modifiedTime: 1781835769145
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!bfh29vIEoGzI240e.mjnqHMqovluIet1r'
 effects: []
 folder: FsvtTiIRh93utaoh
 sort: 0
@@ -5109,11 +5319,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 6.0.0
   createdTime: 1726171242041
-  modifiedTime: 1745175220804
+  modifiedTime: 1781836598761
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!actors!bfh29vIEoGzI240e'

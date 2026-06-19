@@ -464,9 +464,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -481,7 +478,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -501,16 +498,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: fo1ZqyGz5iv51Rj1
     name: Amorphous
     type: feat
-    img: icons/creatures/slimes/slime-movement-dripping-purple.webp
+    img: icons/creatures/slimes/slime-movement-swirling-blue.webp
     system:
       description:
         value: >-
-          <p>The shadow can move through a space as narrow as 1 inch wide
-          without squeezing.</p>
+          <p>The [[lookup @name lowercase]]{monster} can move through a space as
+          narrow as 1 inch wide without
+          &amp;reference[squeezing]{Squeezing}.</p>
         chat: ''
       source:
         custom: ''
@@ -524,10 +523,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -542,12 +542,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.3lDp8DtWwNDHSvxX
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781833065556
+      modifiedTime: 1781833073446
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!QGcQYZbVl4bWzi4E.fo1ZqyGz5iv51Rj1'
   - _id: Xa0lRW8VhYHTAQT0
@@ -557,8 +557,9 @@ items:
     system:
       description:
         value: >-
-          <p>While in dim light or darkness, the shadow can take the Hide action
-          as a bonus action.</p>
+          <p>While in &amp;reference[dim light] or &amp;reference[darkness], the
+          [[lookup @name lowercase]]{monster} can take the &amp;reference[Hide]
+          action as a bonus action.</p>
         chat: <p>The shadow can take the Hide action as a bonus action.</p>
       source:
         custom: ''
@@ -572,65 +573,73 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties:
-        - trait
+      properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
+        m5HKomHXhWE8wMMT:
+          type: check
+          name: Hide
+          _id: m5HKomHXhWE8wMMT
+          img: ''
+          sort: 0
           activation:
             type: bonus
-            value: 1
-            condition: In dim light or darkness
             override: false
+            condition: >-
+              While the [[lookup @name lowercase]]{monster} is in &reference[dim
+              light] or &reference[darkness].
           consumption:
-            targets: []
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets: []
           description:
+            value: ''
             chatFlavor: ''
           duration:
-            concentration: false
-            value: ''
             units: inst
-            special: ''
+            concentration: false
             override: false
           effects: []
+          flags: {}
           range:
-            units: ''
-            special: ''
+            units: self
             override: false
+            special: ''
           target:
             template:
-              count: ''
               contiguous: false
+              stationary: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: ''
-              type: self
               choice: false
-              special: ''
-            prompt: true
+              type: self
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          check:
+            associated:
+              - ste
+            dc:
+              calculation: ''
+              formula: ''
+            visible: true
+            ability: ''
+            bonus: ''
       enchant: {}
       prerequisites:
         level: null
@@ -644,75 +653,31 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.nUVFUgyKK7fmQaFh
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765828346422
+      systemVersion: 6.0.0
+      createdTime: 1781832993860
+      modifiedTime: 1781833039375
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!QGcQYZbVl4bWzi4E.Xa0lRW8VhYHTAQT0'
-  - _id: BrzbftAD7eqZXWA8
-    name: Sunlight Weakness
-    type: feat
-    img: icons/magic/time/day-night-sunset-sunrise.webp
-    system:
-      description:
-        value: >-
-          <p>While in sunlight, the shadow has disadvantage on attack rolls,
-          ability checks, and saving throws.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: sunlight-weakness
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.u1Tt4l4Mczgt3wOS
-      duplicateSource: null
-      coreVersion: '13.351'
-      systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765828335736
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!QGcQYZbVl4bWzi4E.BrzbftAD7eqZXWA8'
   - _id: 2OUOBIN4TJDoL0sJ
     name: Strength Drain
     type: weapon
-    img: icons/magic/unholy/strike-hand-glow-pink.webp
+    img: icons/magic/death/hand-withered-gray.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target's
           Strength score is reduced by [[/r 1d4]]. The target dies if this
           reduces its Strength to 0. Otherwise, the reduction lasts until the
-          target finishes a short or long rest.If a non-evil humanoid dies from
-          this attack, a new shadow rises from the corpse 1d4 hours later.</p>
-        chat: <p>The Shadow attacks with its Strength Drain.</p>
+          target finishes a short or long rest. If a non-evil humanoid dies from
+          this attack, a new
+          @UUID[Compendium.dnd5e.monsters.Actor.QGcQYZbVl4bWzi4E]{Shadow} rises
+          from the corpse 1d4 hours later.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -800,13 +765,38 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>[[/attack extended]]. [[/damage extended]].</p><p>The target's
+              Strength score is reduced by [[/r 1d4]]. The target dies if this
+              reduces its Strength to 0. Otherwise, the reduction lasts until
+              the target finishes a short or long rest. If a non-evil humanoid
+              dies from this attack, a new
+              @UUID[Compendium.dnd5e.monsters.Actor.QGcQYZbVl4bWzi4E]{Shadow}
+              rises from the corpse 1d4 hours later.</p><h4>Strength Drained:
+              [[1d4]]</h4>
           duration:
             concentration: false
             value: ''
             units: ''
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: 2BPjsRkPlCjMCCI0
+              level:
+                min: null
+                max: null
+            - _id: prMenKNOqmzt0mYh
+              level:
+                min: null
+                max: null
+            - _id: osUtf5cU3lZ4WwvN
+              level:
+                min: null
+                max: null
+            - _id: hdtdpXtQxrwI3SdE
+              level:
+                min: null
+                max: null
           range:
             value: '5'
             units: ft
@@ -833,26 +823,296 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
           sort: 0
+          name: ''
+          img: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
+        YowdsiyoUgiflev7:
+          type: summon
+          name: Raise Shadow
+          img: ''
+          sort: 100000
+          activation:
+            type: special
+            override: false
+            condition: When a non-evil humanoid dies from this attack.
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: >-
+              <p>If a non-evil humanoid dies from this attack, a new
+              @UUID[Compendium.dnd5e.monsters.Actor.QGcQYZbVl4bWzi4E]{Shadow}
+              rises from the corpse 1d4 ([[1d4]]) hours later.</p>
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: self
+            override: false
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: '1'
+              type: creature
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          bonuses:
+            ac: ''
+            hd: ''
+            hp: ''
+            attackDamage: ''
+            saveDamage: ''
+            healing: ''
+          creatureSizes: []
+          creatureTypes: []
+          match:
+            attacks: false
+            disposition: false
+            proficiency: false
+            saves: false
+            ability: ''
+          profiles:
+            - count: '1'
+              name: ''
+              _id: oiIQKKC3FPwPfLmt
+              uuid: Compendium.dnd5e.monsters.Actor.QGcQYZbVl4bWzi4E
+              level:
+                min: null
+                max: null
+              types: []
+          summon:
+            prompt: true
+            mode: ''
+          tempHP: ''
+          _id: YowdsiyoUgiflev7
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: strength-drain
       mastery: ''
-    effects: []
+    effects:
+      - name: 'Strength Drain: 1'
+        img: icons/magic/death/hand-withered-gray.webp
+        origin: Compendium.dnd5e.monsters.Actor.QGcQYZbVl4bWzi4E.Item.2OUOBIN4TJDoL0sJ
+        transfer: false
+        _id: 2BPjsRkPlCjMCCI0
+        type: base
+        system:
+          changes:
+            - key: system.abilities.str.value
+              type: add
+              value: -1
+              phase: initial
+              priority: null
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>Your Strength score is reduced by 1. You die if this reduces your
+          Strength to 0. Otherwise, the reductions lasts until you finish a
+          short or long rest.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781833158656
+          modifiedTime: 1781833223208
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!QGcQYZbVl4bWzi4E.2OUOBIN4TJDoL0sJ.2BPjsRkPlCjMCCI0
+      - name: 'Strength Drain: 2'
+        img: icons/magic/death/hand-withered-gray.webp
+        origin: Compendium.dnd5e.monsters.Actor.QGcQYZbVl4bWzi4E.Item.2OUOBIN4TJDoL0sJ
+        transfer: false
+        type: base
+        system:
+          changes:
+            - key: system.abilities.str.value
+              type: add
+              value: -2
+              phase: initial
+              priority: null
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>Your Strength score is reduced by 2. You die if this reduces your
+          Strength to 0. Otherwise, the reductions lasts until you finish a
+          short or long rest.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781833226151
+          modifiedTime: 1781833234322
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _id: prMenKNOqmzt0mYh
+        _key: >-
+          !actors.items.effects!QGcQYZbVl4bWzi4E.2OUOBIN4TJDoL0sJ.prMenKNOqmzt0mYh
+      - name: 'Strength Drain: 3'
+        img: icons/magic/death/hand-withered-gray.webp
+        origin: Compendium.dnd5e.monsters.Actor.QGcQYZbVl4bWzi4E.Item.2OUOBIN4TJDoL0sJ
+        transfer: false
+        type: base
+        system:
+          changes:
+            - key: system.abilities.str.value
+              type: add
+              value: -3
+              phase: initial
+              priority: null
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>Your Strength score is reduced by 3. You die if this reduces your
+          Strength to 0. Otherwise, the reductions lasts until you finish a
+          short or long rest.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781833235421
+          modifiedTime: 1781833243075
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _id: osUtf5cU3lZ4WwvN
+        _key: >-
+          !actors.items.effects!QGcQYZbVl4bWzi4E.2OUOBIN4TJDoL0sJ.osUtf5cU3lZ4WwvN
+      - name: 'Strength Drain: 4'
+        img: icons/magic/death/hand-withered-gray.webp
+        origin: Compendium.dnd5e.monsters.Actor.QGcQYZbVl4bWzi4E.Item.2OUOBIN4TJDoL0sJ
+        transfer: false
+        type: base
+        system:
+          changes:
+            - key: system.abilities.str.value
+              type: add
+              value: -4
+              phase: initial
+              priority: null
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>Your Strength score is reduced by 4. You die if this reduces your
+          Strength to 0. Otherwise, the reductions lasts until you finish a
+          short or long rest.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781833236242
+          modifiedTime: 1781833249853
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _id: hdtdpXtQxrwI3SdE
+        _key: >-
+          !actors.items.effects!QGcQYZbVl4bWzi4E.2OUOBIN4TJDoL0sJ.hdtdpXtQxrwI3SdE
     folder: null
     sort: 0
     ownership:
@@ -861,14 +1121,68 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765828365244
+      systemVersion: 6.0.0
+      createdTime: 1781833080042
+      modifiedTime: 1781833414262
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!QGcQYZbVl4bWzi4E.2OUOBIN4TJDoL0sJ'
+  - _id: x0kH7E7cx85DTWOh
+    name: Sunlight Sensitivity
+    type: feat
+    img: icons/magic/light/beam-rays-yellow.webp
+    system:
+      description:
+        value: >-
+          <p>While in sunlight, the [[lookup @name lowercase]]{monster} has
+          disadvantage on attack rolls, as well as on Wisdom (Perception) checks
+          that rely on sight.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: sunlight-sensitivity
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: null
+    sort: 109375
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.1vaBSMUfOy6JPJ14.Item.Up2YzkDn0uBKQj6K
+      duplicateSource: Item.O2X2jlQHc9cUVKbR
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781833044320
+      modifiedTime: 1781833044320
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!QGcQYZbVl4bWzi4E.x0kH7E7cx85DTWOh'
 effects: []
 folder: FsvtTiIRh93utaoh
 sort: 0
@@ -877,7 +1191,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171230233

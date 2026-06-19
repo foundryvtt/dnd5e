@@ -464,9 +464,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -481,7 +478,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -501,23 +498,27 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: RADMbiPme1Hrfu8E
     name: Create Specter
     type: feat
-    img: icons/creatures/abilities/dragon-breath-purple.webp
+    img: icons/magic/death/undead-ghost-scream-teal.webp
     system:
       description:
         value: >-
-          <p>The wraith targets a humanoid within 10 feet of it that has been
-          dead for no longer than 1 minute and died violently. </p><p>The
-          target's spirit rises as a specter in the space of its corpse or in
-          the nearest unoccupied space. The specter is under the wraith's
-          control. The wraith can have no more than seven specters under its
-          control at one time.</p>
+          <p>The [[lookup @name lowercase]]{monster} targets a humanoid within
+          [[lookup @labels.description.range activity=vNy9KUqUheOdKL27]] of it
+          that has been dead for no longer than 1 minute and died
+          violently.</p><p>The target's spirit rises as a
+          @UUID[Compendium.dnd5e.monsters.Actor.PuPo4H4Dcxigf0fY]{Specter} in
+          the space of its corpse or in the nearest unoccupied space. The
+          specter is under the [[lookup @name lowercase]]{monster}'s control.
+          The [[lookup @name lowercase]]{monster} can have no more than seven
+          specters under its control at one time.</p>
         chat: >-
           <p>The target's spirit rises as a specter in the space of its corpse
-          or in the nearest unoccupied space. </p>
+          or in the nearest unoccupied space.</p>
       source:
         custom: ''
         book: ''
@@ -530,64 +531,93 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
+        vNy9KUqUheOdKL27:
+          type: summon
+          name: Raise Specter
+          _id: vNy9KUqUheOdKL27
+          img: ''
+          sort: 100000
           activation:
             type: action
-            value: 1
-            condition: ''
             override: false
+            condition: ''
           consumption:
-            targets: []
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets: []
           description:
+            value: ''
             chatFlavor: ''
           duration:
+            units: inst
             concentration: false
-            value: ''
-            units: ''
-            special: ''
             override: false
           effects: []
+          flags: {}
           range:
-            units: ''
-            special: ''
+            units: ft
             override: false
+            special: ''
+            value: '10'
           target:
             template:
-              count: ''
               contiguous: false
+              stationary: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: ''
-              type: ''
               choice: false
-              special: ''
-            prompt: true
+              type: creature
+              count: '1'
+              special: humanoid
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          bonuses:
+            ac: ''
+            hd: ''
+            hp: ''
+            attackDamage: ''
+            saveDamage: ''
+            healing: ''
+          creatureSizes: []
+          creatureTypes: []
+          match:
+            attacks: false
+            disposition: true
+            proficiency: false
+            saves: false
+            ability: ''
+          profiles:
+            - count: '1'
+              name: ''
+              _id: HpKFZvM3b8fgjttU
+              uuid: Compendium.dnd5e.monsters.Actor.PuPo4H4Dcxigf0fY
+              level:
+                min: null
+                max: null
+              types: []
+          summon:
+            prompt: true
+            mode: ''
+          tempHP: ''
       enchant: {}
       prerequisites:
         level: null
@@ -601,146 +631,29 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.SlAF2AE4ZKoUvQql
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1765828901854
+      systemVersion: 6.0.0
+      createdTime: 1781828015227
+      modifiedTime: 1781828195314
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!ET4PEVEiNJLU4f7c.RADMbiPme1Hrfu8E'
-  - _id: idILnIUj76QH9v8w
-    name: Incorporeal Movement
-    type: feat
-    img: icons/skills/movement/feet-winged-boots-brown.webp
-    system:
-      description:
-        value: >-
-          <p>The wraith can move through other creatures and objects as if they
-          were difficult terrain.</p><p>It takes 5 (1d10) force damage if it
-          ends its turn inside an object.</p>
-        chat: >-
-          <p>The wraith can move through other creatures and objects as if they
-          were difficult terrain.</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties:
-        - trait
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: damage
-          activation:
-            type: ''
-            value: null
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ''
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          damage:
-            critical:
-              allow: false
-              bonus: ''
-            parts:
-              - number: 1
-                denomination: 10
-                bonus: ''
-                types:
-                  - force
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: incorporeal-movement
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.LUHmtIDD1VTreFqI
-      duplicateSource: null
-      coreVersion: '13.351'
-      systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765828874941
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!ET4PEVEiNJLU4f7c.idILnIUj76QH9v8w'
   - _id: xZPFtf2vCYraWXVe
     name: Life Drain
     type: weapon
-    img: icons/magic/unholy/strike-hand-glow-pink.webp
+    img: icons/magic/unholy/hand-claw-fire-blue.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
-          succeed on a DC 14 Constitution saving throw or its hit point maximum
-          is reduced by an amount equal to the damage taken. This reduction
-          lasts until the target finishes a long rest. The target dies if this
-          effect reduces its hit point maximum to 0.</p>
+          succeed on a [[/save]] saving throw or its hit point maximum is
+          reduced by an amount equal to the damage taken. This reduction lasts
+          until the target finishes a long rest. The target dies if this effect
+          reduces its hit point maximum to 0.</p>
         chat: >-
-          <p>The Wraith attacks with its Life Drain. The target must make a
-          <strong>Constitution</strong> saving throw.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. The target must make a Constitution saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -803,7 +716,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -812,8 +725,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        rG9UKvy92fPe5zuT:
           type: attack
           activation:
             type: action
@@ -828,10 +740,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -848,7 +761,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -861,40 +775,52 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: rG9UKvy92fPe5zuT
+          name: ''
+        fgOnIEkkTcT5MCDK:
           type: save
           activation:
-            type: action
+            type: special
             value: 1
-            condition: ''
+            condition: When a creature is hit by this attack.
             override: false
           consumption:
             targets: []
             scaling:
-              allowed: false
+              allowed: true
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -911,10 +837,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -924,14 +851,40 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
-            parts: []
+            onSave: none
+            parts:
+              - custom:
+                  enabled: true
+                  formula: '@scaling'
+                number: null
+                denomination: null
+                bonus: ''
+                types:
+                  - maximum
+                scaling:
+                  mode: ''
+                  number: 1
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '14'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 300000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: fgOnIEkkTcT5MCDK
+          name: Drain Maximum Hit Point Save
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -946,23 +899,24 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765828901252
+      systemVersion: 6.0.0
+      createdTime: 1781828209547
+      modifiedTime: 1781828394187
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!ET4PEVEiNJLU4f7c.xZPFtf2vCYraWXVe'
-  - _id: 3ERjE4pz2bgxXIPi
+  - _id: 6ptySzeP45liCkZe
     name: Sunlight Sensitivity
     type: feat
-    img: icons/magic/light/explosion-star-glow-blue-purple.webp
+    img: icons/magic/light/beam-rays-yellow.webp
     system:
       description:
         value: >-
-          <p>While in sunlight, the wraith has disadvantage on attack rolls, as
-          well as on Wisdom (Perception) checks that rely on sight.</p>
+          <p>While in sunlight, the [[lookup @name lowercase]]{monster} has
+          disadvantage on attack rolls, as well as on Wisdom (Perception) checks
+          that rely on sight.</p>
         chat: ''
       source:
         custom: ''
@@ -976,32 +930,212 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
         level: null
+        items: []
+        repeatable: false
       identifier: sunlight-sensitivity
+      advancement: {}
+      crewed: false
     effects: []
     folder: null
-    sort: 0
+    sort: 109375
     ownership:
       default: 0
     flags: {}
     _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.F14aW2Ke3I5ZtSg4
-      duplicateSource: null
-      coreVersion: '13.351'
+      compendiumSource: Compendium.dnd5e.monsters.Actor.1vaBSMUfOy6JPJ14.Item.Up2YzkDn0uBKQj6K
+      duplicateSource: Item.O2X2jlQHc9cUVKbR
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765828880962
+      systemVersion: 6.0.0
+      createdTime: 1781827973320
+      modifiedTime: 1781827973320
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!ET4PEVEiNJLU4f7c.3ERjE4pz2bgxXIPi'
+    _key: '!actors.items!ET4PEVEiNJLU4f7c.6ptySzeP45liCkZe'
+  - _id: JChE5zlDJSnSvPzf
+    name: Incorporeal Movement
+    type: feat
+    img: icons/creatures/magical/spirit-undead-ghost-purple.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} can move through other
+          creatures and objects as if they were &amp;reference[difficult
+          terrain].</p><p>It takes [[/damage average]] damage if it ends its
+          turn inside an object.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} can move through other creatures and
+          objects as if they were &amp;reference[difficult terrain].</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities:
+        EMsG8gJaIafZVjS5:
+          type: damage
+          activation:
+            type: special
+            value: null
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} ends their turn
+              inside an object.
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: self
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: ''
+              type: self
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            critical:
+              allow: false
+              bonus: ''
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
+                denomination: 10
+                bonus: ''
+                types:
+                  - force
+                scaling:
+                  number: 1
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: EMsG8gJaIafZVjS5
+          name: End Turn in Object Damage
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: incorporeal-movement
+      advancement: {}
+      crewed: false
+    effects:
+      - name: Incorporeal Movement
+        img: icons/creatures/magical/spirit-undead-ghost-purple.webp
+        origin: Compendium.dnd5e.monsters.Actor.ET4PEVEiNJLU4f7c.Item.idILnIUj76QH9v8w
+        type: base
+        _id: T4RyC3NMej3wwUfZ
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You can move through other creatures and objects as if they were
+          &amp;reference[difficult terrain].</p>
+        tint: '#ffffff'
+        transfer: true
+        statuses:
+          - ethereal
+        showIcon: 0
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781832952973
+          modifiedTime: 1781832952973
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!ET4PEVEiNJLU4f7c.JChE5zlDJSnSvPzf.T4RyC3NMej3wwUfZ
+    folder: null
+    sort: 56250
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.ET4PEVEiNJLU4f7c.Item.idILnIUj76QH9v8w
+      duplicateSource: Item.zK1tAqzwB9vwiK6w
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781832952973
+      modifiedTime: 1781832952973
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!ET4PEVEiNJLU4f7c.JChE5zlDJSnSvPzf'
 effects: []
 folder: FsvtTiIRh93utaoh
 sort: 0
@@ -1010,7 +1144,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171215436

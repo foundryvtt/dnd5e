@@ -461,9 +461,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -478,7 +475,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -498,6 +495,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: tjrDz1IWVcjF7PMl
     name: Ethereal Sight
@@ -506,8 +504,8 @@ items:
     system:
       description:
         value: >-
-          <p>The ghost can see 60 feet into the Ethereal Plane when it is on the
-          Material Plane, and vice versa.</p>
+          <p>The [[lookup @name lowercase]]{monster} can see 60 feet into the
+          Ethereal Plane when it is on the Material Plane, and vice versa.</p>
         chat: ''
       source:
         custom: ''
@@ -521,10 +519,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -539,65 +538,14 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.We6R4thWKYDRYlEc
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765828117143
+      systemVersion: 6.0.0
+      createdTime: 1781836868420
+      modifiedTime: 1781836870960
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!qoFEjfrANBdrCP6m.tjrDz1IWVcjF7PMl'
-  - _id: SiBsPubItj26pcHa
-    name: Incorporeal Movement
-    type: feat
-    img: icons/magic/air/air-wave-gust-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The ghost can move through other creatures and objects as if they
-          were difficult terrain.</p><p>It takes 5 (1d10) force damage if it
-          ends its turn inside an object.</p>
-        chat: >-
-          <p>The ghost can move through other creatures and objects as if they
-          were difficult terrain.</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: incorporeal-movement
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.LUHmtIDD1VTreFqI
-      duplicateSource: null
-      coreVersion: '13.351'
-      systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765828122937
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!qoFEjfrANBdrCP6m.SiBsPubItj26pcHa'
   - _id: wdOqdYfLb2Nu1Uud
     name: Withering Touch
     type: weapon
@@ -605,7 +553,9 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Ghost attacks with its Withering Touch.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -744,6 +694,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: withering-touch
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -753,25 +704,25 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107553635
+      systemVersion: 6.0.0
+      createdTime: 1781838326360
+      modifiedTime: 1781838326360
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!qoFEjfrANBdrCP6m.wdOqdYfLb2Nu1Uud'
   - _id: WyxVuCp4iU10bA7m
     name: Etherealness
     type: feat
-    img: icons/magic/unholy/barrier-shield-glowing-pink.webp
+    img: icons/magic/unholy/silhouette-robe-evil-glow.webp
     system:
       description:
         value: >-
-          <p>The ghost enters the Ethereal Plane from the Material Plane, or
-          vice versa. It is visible on the Material Plane while it is in the
-          Border Ethereal, and vice versa, yet it can't affect or be affected by
-          anything on the other plane.</p>
+          <p>The [[lookup @name lowercase]]{mosnter} enters the Ethereal Plane
+          from the Material Plane, or vice versa. It is visible on the Material
+          Plane while it is in the Border Ethereal, and vice versa, yet it can't
+          affect or be affected by anything on the other plane.</p>
         chat: ''
       source:
         custom: ''
@@ -785,13 +736,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        1Kkk4J5Cgu508gfn:
           type: utility
           activation:
             type: action
@@ -806,15 +756,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -825,7 +776,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -842,7 +794,19 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          name: Traverse Planes
+          img: ''
+          flags: {}
+          visibility:
+            identifier: ''
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: 1Kkk4J5Cgu508gfn
       enchant: {}
       prerequisites:
         level: null
@@ -856,33 +820,39 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.rDoNJnKdY47x8MD4
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781836895680
+      modifiedTime: 1781836920569
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!qoFEjfrANBdrCP6m.WyxVuCp4iU10bA7m'
   - _id: lOzkFHeXCdO2FB9X
     name: Horrifying Visage
     type: feat
-    img: icons/magic/death/projectile-skull-fire-purple.webp
+    img: icons/magic/death/skull-energy-light-purple.webp
     system:
       description:
         value: >-
-          <p>Each non-undead creature within 60 ft. of the ghost that can see it
-          must succeed on a DC 13 Wisdom saving throw or be frightened for 1
-          minute. If the save fails by 5 or more, the target also ages 1d4 x 10
+          <p>Each non-undead creature within [[lookup @target.template.size
+          activity=LYjmuZ7QyGDPVBoT]] feet of the [[lookup @name
+          lowercase]]{monster} that can see it must succeed on a DC 13 Wisdom
+          saving throw or be &amp;reference[frightened] for [[lookup
+          @labels.duration activity=LYjmuZ7QyGDPVBoT]]. If the save fails by 5
+          or more, the target also ages [[/r 1d4 * 10 #Years aged.]]{1d4 x 10}
           years.</p><p>A frightened target can repeat the saving throw at the
           end of each of its turns, ending the frightened condition on itself on
           a success. If a target's saving throw is successful or the effect ends
-          for it, the target is immune to this ghost's Horrifying Visage for the
-          next 24 hours. The aging effect can be reversed with a greater
-          restoration spell, but only within 24 hours of it occurring.</p>
+          for it, the target is immune to this [[lookup @name
+          lowercase]]{monster}'s [[lookup @item.name]] for the next 24 hours.
+          The aging effect can be reversed with a
+          @UUID[Compendium.dnd5e.spells.Item.WzvJ7G3cqvIubsLk]{Greater
+          Restoration} spell, but only within 24 hours of it occurring.</p>
         chat: >-
-          <p>Each non-undead creature within 60 ft. of the ghost that can see it
-          must succeed make a <strong>Wisdom</strong> saving throw. A target can
+          <p>Each non-undead creature within [[lookup @target.template.size
+          activity=LYjmuZ7QyGDPVBoT]] feet of the [[lookup @name]]{monster} that
+          can see it must succeed make a Wisdom saving throw. A target can
           repeat the saving throw at the end of each of its turns, ending the
           condition on itself on a success.</p>
       source:
@@ -897,13 +867,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        LYjmuZ7QyGDPVBoT:
           type: save
           activation:
             type: action
@@ -918,13 +887,22 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: '1'
             units: minute
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: TJfxWRiNLIW3idZ6
+              onSave: false
+              level:
+                min: null
+                max: null
+            - _id: YpGPsEF1EFARwjc1
+              level: {}
+              onSave: false
           range:
             units: self
             special: ''
@@ -938,9 +916,10 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: false
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -950,19 +929,117 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: wis
+            ability:
+              - wis
             dc:
               calculation: ''
               formula: '13'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: LYjmuZ7QyGDPVBoT
+          name: Horrify Creatures
       enchant: {}
       prerequisites:
         level: null
       identifier: horrifying-visage
-    effects: []
+    effects:
+      - name: Horrified
+        img: icons/magic/death/skull-energy-light-purple.webp
+        origin: Compendium.dnd5e.monsters.Actor.qoFEjfrANBdrCP6m.Item.lOzkFHeXCdO2FB9X
+        transfer: false
+        _id: TJfxWRiNLIW3idZ6
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: minutes
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You are &amp;reference[frightened apply=false] for the
+          duration.</p><p>You can repeat the saving throw at the end of each of
+          your turns, ending the effect on yourself on a success.</p>
+        tint: '#ffffff'
+        statuses:
+          - frightened
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781836989947
+          modifiedTime: 1781837039845
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!qoFEjfrANBdrCP6m.lOzkFHeXCdO2FB9X.TJfxWRiNLIW3idZ6
+      - name: Fear-Induced Aging
+        img: icons/magic/death/bones-crossed-gray.webp
+        origin: Compendium.dnd5e.monsters.Actor.qoFEjfrANBdrCP6m.Item.lOzkFHeXCdO2FB9X
+        transfer: false
+        _id: YpGPsEF1EFARwjc1
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 24
+          units: hours
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You have been aged.  This aging effect can be reversed with a
+          @UUID[Compendium.dnd5e.spells.Item.WzvJ7G3cqvIubsLk]{Greater
+          Restoration} spell, but only within 24 hours of it
+          occurring.</p><p>After this effect ends, the aging can no longer be
+          revered.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781837132012
+          modifiedTime: 1781837213271
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!qoFEjfrANBdrCP6m.lOzkFHeXCdO2FB9X.YpGPsEF1EFARwjc1
     folder: null
     sort: 0
     ownership:
@@ -971,11 +1048,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.lBN86BToCJgkakL3
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765828136678
+      systemVersion: 6.0.0
+      createdTime: 1781836928815
+      modifiedTime: 1781838358878
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!qoFEjfrANBdrCP6m.lOzkFHeXCdO2FB9X'
@@ -986,25 +1063,41 @@ items:
     system:
       description:
         value: >-
-          <p>One humanoid that the ghost can see within 5 ft. of it must succeed
-          on a DC 13 Charisma saving throw or be possessed by the ghost; the
-          ghost then disappears, and the target is incapacitated and loses
-          control of its body. The ghost now controls the body but doesn't
-          deprive the target of awareness.</p><p>The ghost can't be targeted by
-          any attack, spell, or other effect, except ones that turn undead, and
-          it retains its alignment, Intelligence, Wisdom, Charisma, and immunity
-          to being charmed and frightened. It otherwise uses the possessed
-          target's statistics, but doesn't gain access to the target's
-          knowledge, class features, or proficiencies.The possession lasts until
-          the body drops to 0 hit points, the ghost ends it as a bonus action,
-          or the ghost is turned or forced out by an effect like the dispel evil
-          and good spell. When the possession ends, the ghost reappears in an
-          unoccupied space within 5 ft. of the body. The target is immune to
-          this ghost's Possession for 24 hours after succeeding on the saving
-          throw or after the possession ends.</p>
+          <p>One humanoid that the [[lookup @name lowercase]]{monster} can see
+          within [[lookup @labels.description.range activity=WcBEt039Ueelll14]]
+          of it must succeed on a [[/save activity=WcBEt039Ueelll14]] saving
+          throw or be possessed by the [[lookup @name lowercase]]{monster}; the
+          [[lookup @name lowercase]]{monster} then disappears, and the target is
+          &amp;reference[incapacitated] and loses control of its body. The
+          [[lookup @name lowercase]]{monster} now controls the body but doesn't
+          deprive the target of awareness.</p><p>The [[lookup @name
+          lowercase]]{monster} can't be targeted by any attack, spell, or other
+          effect, except ones that turn undead, and it retains its alignment,
+          Intelligence, Wisdom, Charisma, and immunity to being
+          &amp;reference[charmed apply=false] and &amp;reference[frightened
+          apply=false]. It otherwise uses the possessed target's statistics, but
+          doesn't gain access to the target's knowledge, class features, or
+          proficiencies. The possession lasts until the body drops to 0 hit
+          points, the [[lookup @name lowercase]]{monster} ends it as a bonus
+          action, or the [[lookup @name lowercase]]{monster} is turned or forced
+          out by an effect like the
+          @UUID[Compendium.dnd5e.spells.Item.TkJ8Wtg1L7TZtspm]{Dispel Evil and
+          Good} spell. When the possession ends, the [[lookup @name
+          lowercase]]{monster} reappears in an unoccupied space within 5 feet of
+          the body. The target is immune to this [[lookup @name
+          lowercase]]{monster}'s [[lookup @item.name]] for 24 hours after
+          succeeding on the saving throw or after the possession
+          ends.</p><section id="secret-pRRBgjuEtpd4ZBdt"
+          class="secret"><p><strong>Foundry Note</strong></p><p>The active
+          effect applied by the <em><strong>"Possess Creature"
+          </strong></em>activity sets the target's mental statistics to the
+          [[lookup @name lowercase]]{monster}'s and gives them immunity to the
+          charmed and frightened conditions in order to represent the [[lookup
+          @name lowercase]]{monster} possessing the target.</p></section>
         chat: >-
-          <p>One humanoid that the ghost can see within 5 ft. of it must make a
-          <strong>Charisma</strong> saving throw.</p>
+          <p>One humanoid that the [[lookup @name]]{monster} can see within
+          [[lookup @labels.description.range activity=WcBEt039Ueelll14]] of it
+          must make a Charisma saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -1020,13 +1113,12 @@ items:
             type: recoverAll
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        WcBEt039Ueelll14:
           type: save
           activation:
             type: action
@@ -1036,24 +1128,26 @@ items:
           consumption:
             targets:
               - type: itemUses
-                target: ''
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: ''
+                scaling: {}
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
             units: spec
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: aOay2ytam3lTBVj4
+              level: {}
+              onSave: false
           range:
             value: '5'
             units: ft
@@ -1067,7 +1161,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: '1'
               type: creature
@@ -1080,19 +1175,112 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: cha
+            ability:
+              - cha
             dc:
               calculation: ''
               formula: '13'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: WcBEt039Ueelll14
+          name: Possess Creature
       enchant: {}
       prerequisites:
         level: null
       identifier: possession
-    effects: []
+    effects:
+      - name: Possessed
+        img: icons/magic/control/fear-fright-monster-grin-purple-blue.webp
+        origin: Compendium.dnd5e.monsters.Actor.qoFEjfrANBdrCP6m.Item.UF0mfYsgI4ay6mzv
+        transfer: false
+        _id: aOay2ytam3lTBVj4
+        type: base
+        system:
+          changes:
+            - key: system.abilities.int.value
+              type: override
+              value: 10
+              phase: initial
+              priority: null
+            - key: system.abilities.wis.value
+              type: override
+              value: 12
+              phase: initial
+              priority: null
+            - key: system.abilities.cha.value
+              type: override
+              value: 17
+              phase: initial
+              priority: null
+            - key: system.traits.ci.value
+              type: add
+              value: charmed
+              phase: initial
+              priority: null
+            - key: system.traits.ci.value
+              type: add
+              value: frightened
+              phase: initial
+              priority: null
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You have been possessed by the ghost. You are
+          &amp;reference[incapacitated apply=false] and lose control of your
+          body. The ghost now controls your body but doesn't deprive you of
+          awareness.</p><p>The ghost can't be targeted by any attack, spell, or
+          other effect, except ones that turn undead, and it retains its
+          alignment, Intelligence, Wisdom, Charisma, and immunity to being
+          &amp;reference[charmed apply=false] and &amp;reference[frightened
+          apply=false]. It otherwise uses your statistics, but doesn't gain
+          access to your knowledge, class features, or proficiencies. The
+          possession lasts until your body drops to 0 hit points, the ghost ends
+          it as a bonus action, or the ghost is turned or forced out by an
+          effect like the
+          @UUID[Compendium.dnd5e.spells.Item.TkJ8Wtg1L7TZtspm]{Dispel Evil and
+          Good} spell.</p><p>When the possession ends, the ghost reappears in an
+          unoccupied space within 5 feet of your body.</p>
+        tint: '#ffffff'
+        statuses:
+          - incapacitated
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781837421828
+          modifiedTime: 1781837664960
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!qoFEjfrANBdrCP6m.UF0mfYsgI4ay6mzv.aOay2ytam3lTBVj4
     folder: null
     sort: 0
     ownership:
@@ -1101,14 +1289,189 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.NI3FPb5jQsePdlVl
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765828146358
+      systemVersion: 6.0.0
+      createdTime: 1781837361476
+      modifiedTime: 1781838386210
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!qoFEjfrANBdrCP6m.UF0mfYsgI4ay6mzv'
+  - _id: utXD2LZwh5ZRDhYM
+    name: Incorporeal Movement
+    type: feat
+    img: icons/creatures/magical/spirit-undead-ghost-purple.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} can move through other
+          creatures and objects as if they were &amp;reference[difficult
+          terrain].</p><p>It takes [[/damage average]] damage if it ends its
+          turn inside an object.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} can move through other creatures and
+          objects as if they were &amp;reference[difficult terrain].</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities:
+        EMsG8gJaIafZVjS5:
+          type: damage
+          activation:
+            type: special
+            value: null
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} ends their turn
+              inside an object.
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: self
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: ''
+              type: self
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            critical:
+              allow: false
+              bonus: ''
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
+                denomination: 10
+                bonus: ''
+                types:
+                  - force
+                scaling:
+                  number: 1
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: EMsG8gJaIafZVjS5
+          name: End Turn in Object Damage
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: incorporeal-movement
+      advancement: {}
+      crewed: false
+    effects:
+      - name: Incorporeal Movement
+        img: icons/creatures/magical/spirit-undead-ghost-purple.webp
+        origin: Compendium.dnd5e.monsters.Actor.ET4PEVEiNJLU4f7c.Item.idILnIUj76QH9v8w
+        type: base
+        _id: T4RyC3NMej3wwUfZ
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You can move through other creatures and objects as if they were
+          &amp;reference[difficult terrain].</p>
+        tint: '#ffffff'
+        transfer: true
+        statuses:
+          - ethereal
+        showIcon: 0
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781836852323
+          modifiedTime: 1781836852323
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!qoFEjfrANBdrCP6m.utXD2LZwh5ZRDhYM.T4RyC3NMej3wwUfZ
+    folder: null
+    sort: 56250
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.ET4PEVEiNJLU4f7c.Item.idILnIUj76QH9v8w
+      duplicateSource: Item.zK1tAqzwB9vwiK6w
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781836852323
+      modifiedTime: 1781836852323
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!qoFEjfrANBdrCP6m.utXD2LZwh5ZRDhYM'
 effects: []
 folder: FsvtTiIRh93utaoh
 sort: 0
@@ -1117,7 +1480,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171260703

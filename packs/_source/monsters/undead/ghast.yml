@@ -450,9 +450,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -467,7 +464,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -487,18 +484,21 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: gBiHo206x7uGoySO
     name: Stench
     type: feat
-    img: icons/commodities/tech/smoke-bomb-purple.webp
+    img: icons/magic/acid/orb-bubble-smoke-drip.webp
     system:
       description:
         value: >-
-          <p>Any creature that starts its turn within 5 feet of the ghast must
-          succeed on a DC 10 Constitution saving throw or be poisoned until the
-          start of its next turn. On a successful saving throw, the creature is
-          immune to the ghast's Stench for 24 hours.</p>
+          <p>Any creature that starts its turn within [[lookup
+          @target.template.size activity=6e3MrenfD7Q2nBLE]] feet of the [[lookup
+          @name lowercase]]{monster} must succeed on a [[/save]] saving throw or
+          be &amp;reference[poisoned] until the start of its next turn. On a
+          successful saving throw, the creature is immune to the [[lookup @name
+          lowercase]]{monster}'s [[lookup @item.name]] for 24 hours.</p>
         chat: >-
           <p>Any creature that starts its turn within <strong>5 ft.</strong> of
           the ghast must succeed on a Constitution saving throw.</p>
@@ -514,18 +514,20 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        6e3MrenfD7Q2nBLE:
           type: save
           activation:
-            type: ''
+            type: special
             value: null
-            condition: ''
+            condition: >-
+              When a creature starts its turn within 5 feet of the [[lookup
+              @name lowercase]]}{monster}
             override: false
           consumption:
             targets: []
@@ -535,13 +537,17 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: '1'
             units: turn
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: OVBiaD85V1M70hc7
+              level: {}
+              onSave: false
           range:
             units: self
             special: ''
@@ -555,9 +561,10 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -567,19 +574,74 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '10'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 6e3MrenfD7Q2nBLE
+          name: Stench Save
       enchant: {}
       prerequisites:
         level: null
       identifier: stench
-    effects: []
+    effects:
+      - name: Stench Poisoning
+        img: icons/skills/toxins/symbol-poison-drop-skull-green.webp
+        origin: Compendium.dnd5e.monsters.Actor.IyIybE5t2adMEVUM.Item.gBiHo206x7uGoySO
+        transfer: false
+        _id: OVBiaD85V1M70hc7
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: rounds
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You are &amp;reference[poisoned apply=false] until the start of
+          your next turn.</p>
+        tint: '#ffffff'
+        statuses:
+          - poisoned
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781835500752
+          modifiedTime: 1781835529438
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!IyIybE5t2adMEVUM.gBiHo206x7uGoySO.OVBiaD85V1M70hc7
     folder: null
     sort: 0
     ownership:
@@ -588,23 +650,25 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.OsPhT7jA5LlvUA6e
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765828041131
+      systemVersion: 6.0.0
+      createdTime: 1781835226030
+      modifiedTime: 1781835500780
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!IyIybE5t2adMEVUM.gBiHo206x7uGoySO'
   - _id: WjqNhFTYP9w4gGHd
     name: Turn Defiance
     type: feat
-    img: icons/creatures/abilities/dragon-breath-purple.webp
+    img: icons/magic/death/projectile-skull-fire-orange-red.webp
     system:
       description:
         value: >-
-          <p>The ghast and any ghouls within 30 feet of it have advantage on
-          saving throws against effects that turn undead.</p>
+          <p>The [[lookup @name lowercase]]{monster} and any
+          @UUID[Compendium.dnd5e.monsters.Actor.OBujQLLPSmlJiZnL]{Ghouls} within
+          30 feet of it have advantage on saving throws against effects that
+          turn undead.</p>
         chat: ''
       source:
         custom: ''
@@ -618,10 +682,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -636,22 +701,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.oi1sikVSw463lQlp
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765828051385
+      systemVersion: 6.0.0
+      createdTime: 1781835239614
+      modifiedTime: 1781835263750
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!IyIybE5t2adMEVUM.WjqNhFTYP9w4gGHd'
   - _id: nSgLkorv2oln5BIt
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Ghast attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -723,8 +790,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        eKnMCunKQA6wdBtf:
           type: attack
           activation:
             type: action
@@ -739,10 +805,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -759,7 +826,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -772,20 +840,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: eKnMCunKQA6wdBtf
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -800,31 +880,34 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.348'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.0
-      createdTime: null
-      modifiedTime: 1757447672096
+      systemVersion: 6.0.0
+      createdTime: 1781835274927
+      modifiedTime: 1781835297657
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!IyIybE5t2adMEVUM.nSgLkorv2oln5BIt'
   - _id: ricjyd1SKzeQ5gQE
     name: Claws
     type: weapon
-    img: icons/skills/melee/strike-slashes-red.webp
+    img: icons/creatures/claws/claw-talons-yellow-red.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
-          a creature other than an undead, it must succeed on a DC 10
-          Constitution saving throw or be paralyzed for 1 minute. The target can
-          repeat the saving throw at the end of each of its turns, ending the
-          effect on itself on a success.</p>
+          a creature other than an undead, it must succeed on a [[/save
+          activity=GKEI5W17dgV81huq]] saving throw or be
+          &amp;reference[paralyzed] for [[lookup @labels.duration
+          activity=GKEI5W17dgV81huq]]. The target can repeat the saving throw at
+          the end of each of its turns, ending the effect on itself on a
+          success.</p>
         chat: >-
-          <p>The Ghast attacks with its Claws. If the target is a creature other
-          than an undead, it must make a <strong>Constitution</strong> saving
-          throw. The target can repeat the saving throw at the end of each of
-          its turns, ending the effect on itself on a success.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. If the target is a creature other than an undead, it
+          must make a Constitution saving throw. The target can repeat the
+          saving throw at the end of each of its turns, ending the effect on
+          itself on a success.</p>
       source:
         custom: ''
         book: ''
@@ -887,7 +970,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -896,8 +979,82 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        GKEI5W17dgV81huq:
+          type: save
+          sort: 400000
+          activation:
+            type: special
+            override: false
+            condition: When a creature (other than an undead) is hit by this attack.
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+            value: >-
+              <p>If the target is a creature other than an undead, it must
+              succeed on a [[/save activity=GKEI5W17dgV81huq]] saving throw or
+              be &amp;reference[paralyzed] for [[lookup @labels.duration
+              activity=GKEI5W17dgV81huq]]. The target can repeat the saving
+              throw at the end of each of its turns, ending the effect on itself
+              on a success.</p>
+          duration:
+            units: minute
+            concentration: false
+            override: false
+            value: '1'
+          effects:
+            - _id: mY7AkNbYbelLX5pT
+              onSave: false
+              level:
+                min: null
+                max: null
+          flags: {}
+          range:
+            units: self
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+              stationary: false
+            affects:
+              choice: false
+              type: creature
+              count: '1'
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          damage:
+            onSave: none
+            parts: []
+          save:
+            ability:
+              - con
+            dc:
+              calculation: ''
+              formula: '10'
+            visible: true
+            bonus: ''
+          name: Paralysis Save
+          img: ''
+          _id: GKEI5W17dgV81huq
+        O3HnzJO4BXmAKXGU:
           type: attack
           activation:
             type: action
@@ -912,10 +1069,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -932,7 +1090,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -945,58 +1104,22 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
-        ZD0bnBuStMv4GFbh:
-          type: save
-          _id: ZD0bnBuStMv4GFbh
-          sort: 0
-          activation:
-            type: action
-            override: false
-            condition: ''
-          consumption:
-            scaling:
-              allowed: false
-            spellSlot: true
-            targets: []
-          description:
-            chatFlavor: ''
-          duration:
-            units: inst
-            concentration: false
-            override: false
-          effects: []
+          sort: 300000
+          img: ''
           flags: {}
-          range:
-            units: self
-            override: false
-          target:
-            template:
-              contiguous: false
-              units: ft
-              type: ''
-            affects:
-              choice: false
-              type: ''
-            override: false
-            prompt: true
-          uses:
-            spent: 0
-            recovery: []
-            max: ''
           visibility:
             level:
               min: null
@@ -1005,23 +1128,56 @@ items:
             requireIdentification: false
             requireMagic: false
             identifier: ''
-          damage:
-            onSave: half
-            parts: []
-          save:
-            ability:
-              - con
-            dc:
-              calculation: ''
-              formula: '10'
           name: ''
-          img: ''
+          _id: O3HnzJO4BXmAKXGU
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: claws
       mastery: ''
-    effects: []
+    effects:
+      - name: Paralysis
+        img: icons/magic/death/skeleton-snake-skull-pink.webp
+        origin: Compendium.dnd5e.monsters.Actor.IyIybE5t2adMEVUM.Item.ricjyd1SKzeQ5gQE
+        transfer: false
+        _id: mY7AkNbYbelLX5pT
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: minutes
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You are &amp;reference[paralyzed apply=false] for the
+          duration.</p><p>You can repeat the saving throw at the end of each of
+          your turns, ending the effect on yourself on a success.</p>
+        tint: '#ffffff'
+        statuses:
+          - paralyzed
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781835339901
+          modifiedTime: 1781835339901
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: >-
+            Compendium.dnd5e.monsters.Actor.OBujQLLPSmlJiZnL.Item.ArxzPC3rsBztgUvI.ActiveEffect.ATi5lRucZ2E2Dgsd
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!IyIybE5t2adMEVUM.ricjyd1SKzeQ5gQE.mY7AkNbYbelLX5pT
     folder: null
     sort: 0
     ownership:
@@ -1030,11 +1186,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765828064995
+      systemVersion: 6.0.0
+      createdTime: 1781835305540
+      modifiedTime: 1781835397953
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!IyIybE5t2adMEVUM.ricjyd1SKzeQ5gQE'
@@ -1046,7 +1202,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171220120
