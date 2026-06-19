@@ -23,6 +23,7 @@ export default class Bastion {
     const duration = dnd5e.settings.calendarConfig.enabled ? 0 : dnd5e.settings.bastionConfiguration.duration;
     const haveBastions = game.actors.filter(a => a.system.isCharacter && a.itemTypes.facility.length);
     for ( const actor of haveBastions ) await this.advanceAllFacilities(actor, { duration });
+    game.settings.set("dnd5e", "bastionTurns", [...game.settings.get("dnd5e", "bastionTurns"), game.time.worldTime]);
   }
 
   /* -------------------------------------------- */
@@ -256,10 +257,10 @@ export default class Bastion {
 
   /**
    * Confirm the bastion turn should be advanced.
-   * @returns {Promise<void>}
+   * @returns {Promise<boolean>}
    */
   async confirmAdvance() {
-    if ( !game.user.isGM ) return;
+    if ( !game.user.isGM ) return false;
     const mode = dnd5e.settings.calendarConfig.enabled ? "Maintain" : "Advance";
     const proceed = await foundry.applications.api.DialogV2.confirm({
       content: _loc(`DND5E.Bastion.Confirm.${mode}`, {
@@ -268,7 +269,9 @@ export default class Bastion {
       rejectClose: false,
       window: { icon: "fa-solid fa-chess-rook", title: `DND5E.Bastion.Action.${mode}` }
     });
-    if ( proceed ) return this.advanceAllBastions();
+    if ( !proceed ) return false;
+    await this.advanceAllBastions();
+    return true;
   }
 
   /* -------------------------------------------- */
@@ -278,9 +281,9 @@ export default class Bastion {
    */
   initializeUI() {
     const turnButton = document.getElementById("bastion-turn");
-    const { button, enabled } = game.settings.get("dnd5e", "bastionConfiguration");
+    const { button, enabled } = dnd5e.settings.bastionConfiguration;
 
-    if ( !enabled || !button || !game.user.isGM) {
+    if ( !enabled || !button || !game.user.isGM ) {
       turnButton?.remove();
       return;
     }

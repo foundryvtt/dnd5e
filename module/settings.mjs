@@ -12,7 +12,7 @@ import PrimaryPartySetting from "./data/settings/primary-party-setting.mjs";
 import TransformationSetting from "./data/settings/transformation-setting.mjs";
 import * as LEGACY from "./config-legacy.mjs";
 
-const { StringField } = foundry.data.fields;
+const { ArrayField, NumberField, StringField } = foundry.data.fields;
 
 /**
  * Register all of the system's keybindings.
@@ -386,6 +386,13 @@ export function registerSystemSettings() {
       duration: 7
     },
     onChange: () => game.dnd5e.bastion.initializeUI()
+  });
+
+  game.settings.register("dnd5e", "bastionTurns", {
+    name: "Bastion Turns",
+    scope: "world",
+    config: false,
+    type: new ArrayField(new NumberField())
   });
 
   // Calendar Settings

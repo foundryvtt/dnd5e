@@ -1,8 +1,9 @@
 /**
  * @typedef BastionSettingData
- * @property {boolean} button   Display the "Advance Bastion Turn" button in the interface for GM users.
- * @property {number} duration  Time between bastion turns in days.
- * @property {boolean} enabled  Display bastion tab on sheets of characters that are 5th level or higher.
+ * @property {boolean} button    Display the "Advance Bastion Turn" button in the interface for GM users.
+ * @property {number} duration   Time between bastion turns in days.
+ * @property {boolean} enabled   Display bastion tab on sheets of characters that are 5th level or higher.
+ * @property {boolean} reminder  Display a reminder for when the next bastion turn should occur.
  */
 
 /* -------------------------------------------- */
