@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,15 +478,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: 4oIyAj7rN5JbTjDZ
     name: Scimitar
     type: weapon
-    img: icons/weapons/swords/sword-katana.webp
+    img: icons/weapons/swords/scimitar-guard.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Bandit attacks with their Scimitar.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -554,7 +554,7 @@ items:
       properties:
         - fin
         - lgt
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -563,8 +563,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        jre06WdmWavvLBkg:
           type: attack
           activation:
             type: action
@@ -579,10 +578,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -599,7 +599,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -612,24 +613,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: jre06WdmWavvLBkg
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: scimitar
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -639,11 +653,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.fbC0Mg1a73wdFbqO
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107553231
+      systemVersion: 6.0.0
+      createdTime: 1781820365378
+      modifiedTime: 1781820397497
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!n4TEv7inVUkyZviN.4oIyAj7rN5JbTjDZ'
@@ -654,7 +668,9 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Bandit attacks with their Light Crossbow.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -720,7 +736,7 @@ items:
         - amm
         - lgt
         - two
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -729,8 +745,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        s1edjvaTKCr8Fjby:
           type: attack
           activation:
             type: action
@@ -745,10 +760,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -765,7 +781,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -778,20 +795,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: ranged
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: s1edjvaTKCr8Fjby
+          name: ''
       attuned: false
       ammunition:
         type: ''
@@ -807,11 +836,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.ddWvQRLmnnIS0eLF
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745175518556
+      systemVersion: 6.0.0
+      createdTime: 1781820347064
+      modifiedTime: 1781820359098
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!n4TEv7inVUkyZviN.hSxEhrT9CFdLG40m'
@@ -883,7 +912,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.WwdpHLXGX5r8uZu5
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -899,7 +928,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171255392

@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,6 +478,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: 2reHgwNJRFbhmxqA
     name: Chain Shirt
@@ -551,7 +549,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.p2zChy24ZJdVqMSH
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -627,7 +625,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.yHcr3vlkmtInELj2
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -638,14 +636,16 @@ items:
   - _id: 92uVNexE43Z8D18r
     name: Spear
     type: weapon
-    img: icons/weapons/polearms/spear-flared-worn-grey.webp
+    img: icons/weapons/polearms/spear-hooked-double-engraved.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]] or [[/damage average
           attackMode=twoHanded]] damage if used with two hands to make a melee
           attack.</p>
-        chat: <p>The Guard attacks with its Spear.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -710,7 +710,7 @@ items:
       properties:
         - thr
         - ver
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -719,8 +719,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        DklMnWIRORcECi4r:
           type: attack
           activation:
             type: action
@@ -735,10 +734,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -755,7 +755,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -768,20 +769,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: DklMnWIRORcECi4r
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -796,11 +809,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.OG4nBBydvmfWYXIk
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745174302801
+      systemVersion: 6.0.0
+      createdTime: 1781823867275
+      modifiedTime: 1781823880630
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!E9CvDPDg5dFEpVjS.92uVNexE43Z8D18r'
@@ -812,7 +825,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171214428
