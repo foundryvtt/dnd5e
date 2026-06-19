@@ -77,8 +77,18 @@ export default class Bastion {
   async advanceTurn(facility, { duration=7, performUpdates=true }={}) {
     const { disabled, progress, type } = facility.system;
 
+    // Case 0 - Facility damaged. A shut-down facility can't be used for one bastion turn, after which it is repaired
+    // and made operational again at no cost. Any order in progress is paused rather than canceled.
+    if ( disabled ) {
+      const updates = { "system.disabled": false };
+      // Bump the timestamp so the shut-down turn isn't later credited as progress under calendar advancement.
+      if ( progress.max ) updates["system.progress.updated"] = game.time.worldTime;
+      if ( performUpdates ) await facility.update(updates);
+      return { order: "repair", updates };
+    }
+
     // Case 1 - No order in progress.
-    if ( !progress.max && !disabled ) {
+    if ( !progress.max ) {
       const updates = { "system.progress.order": "" };
       if ( performUpdates ) await facility.update(updates);
       if ( type.value === "basic" ) return { updates }; // Basic facilities do nothing.
@@ -97,7 +107,7 @@ export default class Bastion {
     const newProgress = Math.min(progress.value + duration, progress.max);
 
     // Case 2 - Order incomplete. Ongoing progress.
-    if ( (newProgress < progress.max) && !disabled ) {
+    if ( newProgress < progress.max ) {
       const updates = { "system.progress": { value: newProgress, updated: game.time.worldTime } };
       if ( performUpdates ) await facility.update(updates);
       return { updates };
@@ -143,7 +153,6 @@ export default class Bastion {
       case "craft": return this.#evaluateCraftOrder(facility, updates);
       case "enlarge": return this.#evaluateEnlargeOrder(facility, updates);
       case "harvest": return this.#evaluateHarvestOrder(facility, updates);
-      case "repair": return this.#evaluateRepairOrder(facility, updates);
       case "trade": return this.#evaluateTradeOrder(facility, updates);
     }
     return {};
@@ -206,19 +215,6 @@ export default class Bastion {
   #evaluateHarvestOrder(facility, updates) {
     const { craft } = facility.system;
     return { items: [{ uuid: craft.item, quantity: craft.quantity }] };
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Evaluate the completion of a repair order.
-   * @param {Item5e} facility  The facility.
-   * @param {object} updates   Facility updates.
-   * @returns {Omit<BastionTurnResult, "order"|"updates">}
-   */
-  #evaluateRepairOrder(facility, updates) {
-    updates["system.disabled"] = false;
-    return {};
   }
 
   /* -------------------------------------------- */
