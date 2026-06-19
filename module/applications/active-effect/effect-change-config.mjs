@@ -1,22 +1,24 @@
 import { formatNumber } from "../../utils.mjs";
-import Application5e from "../api/application.mjs";
+import DocumentSheet5e from "../api/document-sheet.mjs";
 
 /**
  * Application for editing a single active effect change.
  */
-export default class EffectChangeConfig extends Application5e {
+export default class EffectChangeConfig extends DocumentSheet5e {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
+    canImport: false,
+    changeId: null,
     classes: ["standard-form"],
-    effect: null,
     form: {
       closeOnSubmit: true,
       handler: EffectChangeConfig.#handleFormSubmission
     },
-    index: null,
+    ownershipConfig: false,
     position: {
       width: 500
     },
+    sheetConfig: false,
     tag: "form"
   };
 
@@ -40,7 +42,7 @@ export default class EffectChangeConfig extends Application5e {
    * Active effect to which this change belongs.
    */
   get effect() {
-    return this.options.effect;
+    return this.options.document;
   }
 
   /* -------------------------------------------- */
@@ -48,12 +50,21 @@ export default class EffectChangeConfig extends Application5e {
   /** @override */
   get title() {
     return _loc("DND5E.EFFECT.Change.Title", {
-      effect: this.effect.name, number: formatNumber(this.options.index + 1)
+      effect: this.effect.name, number: this.options.changeId
     });
   }
 
   /* -------------------------------------------- */
   /*  Rendering                                   */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _initializeApplicationOptions(options) {
+    options = super._initializeApplicationOptions(options);
+    options.uniqueId = `${options.uniqueId}-Change-${options.changeId}`;
+    return options;
+  }
+
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -76,8 +87,8 @@ export default class EffectChangeConfig extends Application5e {
    * @protected
    */
   async _prepareConfigContext(context, options) {
-    context.source = this.effect.system._source.changes[this.options.index];
-    context.defaultPriority = ActiveEffect.CHANGE_TYPES[context.source.type]?.defaultPriority;
+    context.source = this.effect.system._source.changes.find(c => c._id === this.options.changeId);
+    context.defaultPriority = ActiveEffect.CHANGE_TYPES[context.source?.type]?.defaultPriority;
     context.fields = this.effect.system.schema.fields.changes.element.fields;
 
     context.hintText = _loc("DND5E.ACTIVEEFFECT.AttributeKeyTooltip", {
@@ -108,6 +119,14 @@ export default class EffectChangeConfig extends Application5e {
   }
 
   /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async render(...args) {
+    if ( !this.effect.system.changes.find(c => c._id === this.options.changeId) ) return this.close();
+    return super.render(...args);
+  }
+
+  /* -------------------------------------------- */
   /*  Form Handling                               */
   /* -------------------------------------------- */
 
@@ -119,9 +138,10 @@ export default class EffectChangeConfig extends Application5e {
    * @param {FormDataExtended} formData  Data from the dialog.
    */
   static #handleFormSubmission(event, form, formData) {
-    const submitData = foundry.utils.expandObject(formData.object);
     const changes = this.effect.system.toObject().changes;
-    foundry.utils.mergeObject(changes[this.options.index], submitData);
+    const change = changes.find(c => c._id === this.options.changeId);
+    if ( !change ) return;
+    foundry.utils.mergeObject(change, foundry.utils.expandObject(formData.object));
     this.effect.update({ "system.changes": changes });
   }
 }

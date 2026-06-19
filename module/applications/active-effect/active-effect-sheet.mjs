@@ -27,7 +27,7 @@ export default class ActiveEffectSheet5e extends ApplicationV2Mixin(ActiveEffect
   /** @override */
   static PARTS = {
     header: {
-      template: "templates/sheets/active-effect/header.hbs"
+      template: "systems/dnd5e/templates/effects/effect-header.hbs"
     },
     tabs: {
       template: "templates/generic/tab-navigation.hbs"
@@ -81,8 +81,8 @@ export default class ActiveEffectSheet5e extends ApplicationV2Mixin(ActiveEffect
    */
   async _prepareChangesContext(context, options) {
     // TODO: Make use of change context preparation in AE breakout PR once it is merged
-    context.changes = context.source.changes.map(c => ({
-      key: c.key, value: c.value,
+    context.changes = context.document.system.changes.map(c => ({
+      id: c._id, key: c.key, value: c.value,
       type: _loc(ActiveEffect.CHANGE_TYPES[c.type]?.label)
     }));
     return context;
@@ -128,15 +128,6 @@ export default class ActiveEffectSheet5e extends ApplicationV2Mixin(ActiveEffect
   }
 
   /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async _onRender(context, options) {
-    await super._onRender(context, options);
-    this.element.querySelector(".sheet-header img").classList.add("document-image");
-    this.element.querySelector('.sheet-header [name="name"]').classList.add("document-name");
-  }
-
-  /* -------------------------------------------- */
   /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
@@ -166,7 +157,7 @@ export default class ActiveEffectSheet5e extends ApplicationV2Mixin(ActiveEffect
         }
       }
     });
-    const app = new EffectChangeConfig({ effect: this.document, index: this.document.system.changes.length - 1 });
+    const app = new EffectChangeConfig({ changeId: this.document.system.changes.at(-1)._id, document: this.document });
     this._renderChild(app);
   }
 
@@ -196,8 +187,8 @@ export default class ActiveEffectSheet5e extends ApplicationV2Mixin(ActiveEffect
    * @type {ApplicationClickAction}
    */
   static async #onEditChange(event, target) {
-    const index = Number(event.target.closest("[data-index]")?.dataset.index || 0);
-    const app = new EffectChangeConfig({ effect: this.document, index });
+    const { changeId } = event.target.closest("[data-change-id]")?.dataset ?? {};
+    const app = new EffectChangeConfig({ changeId, document: this.document });
     this._renderChild(app);
   }
 

@@ -266,7 +266,7 @@ body.detached .dnd5e2.sheet .tab { max-height: unset; }
   }
 
   form:is(.tab-inventory, .tab-features, .tab-spells, .tab-effects, .tab-advancement, .tab-activities, .tab-crew, .tab-changes) .create-child,
-  &:is(.tab-inventory, .tab-features, .tab-spells, .tab-effects, .tab-advancement, .tab-activities, .tab-crew, .tab-changes) .create-child, {
+  &:is(.tab-inventory, .tab-features, .tab-spells, .tab-effects, .tab-advancement, .tab-activities, .tab-crew, .tab-changes) .create-child {
     display: block;
   }
 }
@@ -278,6 +278,7 @@ body.detached .dnd5e2.sheet .tab { max-height: unset; }
 .dnd5e2.active-effect-config {
   .sheet-header { --dnd5e-document-image-size: 96px; }
   .document-name {
+    background: var(--dnd5e-background-5);
     font-family: var(--dnd5e-font-modesto);
     font-size: var(--font-size-32);
     font-weight: bold;

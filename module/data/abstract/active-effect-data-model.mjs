@@ -1,8 +1,23 @@
+const { DocumentIdField } = foundry.data.fields;
+
 /**
  * Abstract base class to add some shared functionality to all of the system's custom active effect types.
  * @abstract
  */
 export default class ActiveEffectDataModel extends foundry.data.ActiveEffectTypeDataModel {
+  /* -------------------------------------------- */
+  /*  Model Configuration                         */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static defineSchema() {
+    const schema = super.defineSchema();
+    schema.changes.element.extendFields({
+      _id: new DocumentIdField({ initial: () => foundry.utils.randomID() })
+    });
+    return schema;
+  }
+
   /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
