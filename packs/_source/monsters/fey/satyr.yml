@@ -447,9 +447,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -464,7 +461,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -484,15 +481,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: bAm4BNi3o137SAmd
     name: Shortbow
     type: weapon
-    img: icons/weapons/bows/shortbow-recurve.webp
+    img: icons/weapons/bows/longbow-leather-green.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]]</p>
-        chat: ''
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -557,7 +557,7 @@ items:
       properties:
         - amm
         - two
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -566,8 +566,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        NA4y3N9TbB7KheN3:
           type: attack
           activation:
             type: action
@@ -582,10 +581,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -602,7 +602,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -621,14 +622,26 @@ items:
               threshold: null
             flat: false
             type:
-              value: ranged
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: NA4y3N9TbB7KheN3
+          name: ''
       attuned: false
       ammunition:
         type: ''
@@ -644,22 +657,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.GJv6WkD7D2J6rP6M
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747955907453
+      systemVersion: 6.0.0
+      createdTime: 1781810041431
+      modifiedTime: 1781810055694
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!8xhuJXYMnlQD7LF6.bAm4BNi3o137SAmd'
   - _id: 198fJNFbhjGeZ8UZ
     name: Shortsword
     type: weapon
-    img: icons/weapons/swords/sword-guard-brown.webp
+    img: icons/weapons/swords/sword-guard-worn-brown.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]]</p>
-        chat: ''
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -724,7 +739,7 @@ items:
       properties:
         - fin
         - lgt
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -733,8 +748,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        4uxDwQTsYFRGJX6K:
           type: attack
           activation:
             type: action
@@ -749,10 +763,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -769,7 +784,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -788,14 +804,26 @@ items:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 4uxDwQTsYFRGJX6K
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -810,11 +838,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.osLzOwQdPtrK3rQH
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747955914510
+      systemVersion: 6.0.0
+      createdTime: 1781810070038
+      modifiedTime: 1781810081946
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!8xhuJXYMnlQD7LF6.198fJNFbhjGeZ8UZ'
@@ -886,7 +914,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.WwdpHLXGX5r8uZu5
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -894,62 +922,16 @@ items:
       lastModifiedBy: null
       exportSource: null
     _key: '!actors.items!8xhuJXYMnlQD7LF6.vd2pvVVxaLhqrWqe'
-  - _id: jgHhzAjFiPXlluVM
-    name: Magic Resistance
-    type: feat
-    img: icons/magic/defensive/shield-barrier-glowing-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The satyr has advantage on saving throws against spells and other
-          magical effects.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: magic-resistance
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747955887805
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!8xhuJXYMnlQD7LF6.jgHhzAjFiPXlluVM'
   - _id: 2btvWgv8WIkadZjh
     name: Ram
     type: weapon
-    img: icons/creatures/mammals/ox-bull-horned-glowing-orange.webp
+    img: icons/commodities/bones/horn-antler-brown-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Satyr attacks with its Ram.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -1012,7 +994,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -1021,8 +1003,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        BZwInSYPvXr43jJy:
           type: attack
           activation:
             type: action
@@ -1037,15 +1018,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -1056,7 +1038,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1075,18 +1058,31 @@ items:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: BZwInSYPvXr43jJy
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: ram
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -1096,14 +1092,67 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107550515
+      systemVersion: 6.0.0
+      createdTime: 1781810012091
+      modifiedTime: 1781810031916
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!8xhuJXYMnlQD7LF6.2btvWgv8WIkadZjh'
+  - _id: Wo0UWMSUsVVfavZT
+    name: Magic Resistance
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on saving
+          throws against spells and other magical effects.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      properties:
+        - trait
+      identifier: magic-resistance
+      advancement: {}
+      crewed: false
+    flags: {}
+    img: icons/magic/defensive/barrier-shield-dome-pink.webp
+    effects: []
+    folder: null
+    sort: 0
+    _stats:
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781809999697
+      modifiedTime: 1781809999697
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Item.Hc6MqLQhPTI1KOvm
+    _key: '!actors.items!8xhuJXYMnlQD7LF6.Wo0UWMSUsVVfavZT'
 effects: []
 folder: 5TSd0wOZe1L5I3eJ
 sort: 0
@@ -1112,7 +1161,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171208870
