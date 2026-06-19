@@ -329,18 +329,27 @@ export default class ActivitiesTemplate extends SystemDataModel {
 
   /**
    * Perform any item & activity uses recovery.
-   * @param {string[]} periods       Recovery periods to check.
-   * @param {ItemRollData} rollData  Roll data to use when evaluating recovery formulas.
+   * @param {Map<string, number>} periods  Recovery periods to check, mapped to the number of times occurred.
+   * @param {ItemRollData} [rollData]      Roll data to use when evaluating recovery formulas.
    * @returns {Promise<{ updates: object, rolls: BasicRoll[], destroy: boolean }>}
    */
   async recoverUses(periods, rollData) {
+    if ( foundry.utils.getType(periods) === "Array" ) {
+      foundry.utils.logCompatibilityWarning(
+        "The periods parameter of `recoverUses` is now a mapping of periods to times triggered.",
+        { since: "DnD5e 6.0", until: "DnD5e 6.2" }
+      );
+      periods = new Map(periods.map(p => [p, 1]));
+    }
+
     const updates = {};
     const rolls = [];
     const autoRecharge = game.settings.get("dnd5e", "autoRecharge");
-    const shouldRecharge = periods.includes("turnStart") && this.parent.actor.system.isNPC && (autoRecharge !== "no");
+    const shouldRecharge = periods.has("turnStart") && this.parent.actor.system.isNPC && (autoRecharge !== "no");
     const recharge = async doc => {
       const config = { apply: false };
       const message = { create: autoRecharge !== "silent" };
+      // TODO: Roll multiple times if multiple `turnStarts` are present
       const result = await UsesField.rollRecharge.call(doc, config, {}, message);
       if ( result ) {
         if ( doc instanceof Item ) foundry.utils.mergeObject(updates, result.updates);
@@ -348,6 +357,8 @@ export default class ActivitiesTemplate extends SystemDataModel {
         rolls.push(...result.rolls);
       }
     };
+
+    if ( !rollData && this.uses.recovery.some(u => u.type === "formula") ) rollData = this.parent.getRollData();
 
     const result = await UsesField.recoverUses.call(this, periods, rollData);
     if ( result ) {
@@ -361,6 +372,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
 
     for ( const activity of this.activities ) {
       if ( activity.dependentOrigin?.active === false ) continue;
+      if ( !rollData && activity.uses?.recovery.some(u => u.type === "formula") ) rollData = this.parent.getRollData();
       const result = await UsesField.recoverUses.call(activity, periods, rollData);
       if ( result ) {
         foundry.utils.mergeObject(updates, { [`system.activities.${activity.id}.uses`]: result.updates });

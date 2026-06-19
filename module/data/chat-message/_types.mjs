@@ -61,6 +61,19 @@
 /* -------------------------------------------- */
 
 /**
+ * @typedef TimePassedMessageSystemData
+ * @property {DocumentDeltasData[]} changes  Item recovery from this time change.
+ */
+
+/**
+ * @typedef DocumentDeltasData
+ * @property {ActorDeltasData} deltas  Data deltas for a actor update.
+ * @property {string} uuid             UUID of the actor to which the deltas apply.
+ */
+
+/* -------------------------------------------- */
+
+/**
  * @typedef TurnMessageSystemData
  * @property {ActivationsData} activations  Activities that can be used with these periods, stored as relative UUIDs.
  * @property {ActorDeltasData} deltas       Actor/item recovery from this turn change.
