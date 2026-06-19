@@ -450,9 +450,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -467,7 +464,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -487,6 +484,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: m8prrQUwqGwX6Jyk
     name: Ooze Cube
@@ -495,23 +493,29 @@ items:
     system:
       description:
         value: >-
-          <p>The cube takes up its entire space. Other creatures can enter the
-          space, but a creature that does so is subjected to the cube's Engulf
-          and has disadvantage on the saving throw. Creatures inside the cube
-          can be seen but have total cover.</p><p>A creature within 5 feet of
-          the cube can take an action to pull a creature or object out of the
-          cube. Doing so requires a successful DC 12 Strength check, and the
-          creature making the attempt takes 10 (3d6) acid damage. The cube can
-          hold only one Large creature or up to four Medium or smaller creatures
-          inside it at a time.</p>
+          <p>The [[lookup @name lowercase]]{monster} takes up its entire space.
+          Other creatures can enter the space, but a creature that does so is
+          subjected to the cube's
+          @UUID[Compendium.dnd5e.monsters.Actor.3fzQVYQhXxCXRa2o.Item.6PuULfBzy5vpBSFI]{Engulf}
+          and has disadvantage on the saving throw. Creatures inside the
+          [[lookup @name lowercase]]{monster} can be seen but have
+          &amp;reference[total cover].</p><p>A creature within 5 feet of the
+          [[lookup @name lowercase]]{monster} can take an action to pull a
+          creature or object out of the [[lookup @name lowercase]]{monster}.
+          Doing so requires a successful [[/check]] check, and the creature
+          making the attempt takes [[/damage average]] damage. The [[lookup
+          @name lowercase]]{monster} can hold only one Large creature or up to
+          four Medium or smaller creatures inside it at a time.</p>
         chat: >-
-          <p>The cube takes up its entire space. Other creatures can enter the
-          space, but a creature that does so is subjected to the cube's Engulf
-          and has<strong> disadvantage </strong>on the saving throw<strong>.
-          C</strong>reatures inside the cube can be seen but have total
-          cover<strong>. A</strong> creature <strong>within 5 feet</strong> of
-          the cube can take an action to pull a creature or object out of the
-          cube. Doing so requires a successful Strength check.</p>
+          <p>The [[lookup @name]]{monster} takes up its entire space. Other
+          creatures can enter the space, but a creature that does so is
+          subjected to the [[lookup @name]]{monster}'s
+          @UUID[Compendium.dnd5e.monsters.Actor.3fzQVYQhXxCXRa2o.Item.6PuULfBzy5vpBSFI]{Engulf}
+          and has disadvantage on the saving throw. Creatures inside the
+          [[lookup @name]]{monster} can be seen but have &amp;reference[total
+          cover]. A creature within 5 feet of the [[lookup @name]]{monster} can
+          take an action to pull a creature or object out of the [[lookup
+          @name]]{monster}. Doing so requires a successful Strength check.</p>
       source:
         custom: ''
         book: ''
@@ -524,7 +528,7 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties:
@@ -532,13 +536,15 @@ items:
       activities:
         Zk4kCn0YQO2k3QBf:
           type: check
-          name: Rescue
+          name: Rescue Creature
           _id: Zk4kCn0YQO2k3QBf
           sort: 0
           activation:
-            type: action
+            type: special
             override: false
-            condition: ''
+            condition: >-
+              When a creature takes an action to pull a creature out out the
+              [[lookup @name lowercase]]{monster}
           consumption:
             scaling:
               allowed: false
@@ -553,7 +559,7 @@ items:
           effects: []
           flags: {}
           range:
-            units: self
+            units: spec
             override: false
             special: ''
           target:
@@ -563,7 +569,9 @@ items:
               type: ''
             affects:
               choice: false
-              type: ''
+              type: creature
+              count: '1'
+              special: ''
             override: false
             prompt: true
           uses:
@@ -584,15 +592,18 @@ items:
               calculation: ''
               formula: '12'
             ability: str
+            bonus: ''
           img: ''
         Po03o5Zvaah8GBHL:
           type: damage
           _id: Po03o5Zvaah8GBHL
           sort: 0
           activation:
-            type: action
+            type: special
             override: false
-            condition: ''
+            condition: >-
+              When a creature takes an action to pull a creature out out the
+              [[lookup @name lowercase]]{monster}
           consumption:
             scaling:
               allowed: false
@@ -607,7 +618,7 @@ items:
           effects: []
           flags: {}
           range:
-            units: self
+            units: spec
             override: false
             special: ''
           target:
@@ -617,7 +628,9 @@ items:
               type: ''
             affects:
               choice: false
-              type: ''
+              type: creature
+              count: '1'
+              special: ''
             override: false
             prompt: true
           uses:
@@ -644,7 +657,7 @@ items:
                 bonus: ''
                 types:
                   - acid
-          name: ''
+          name: Rescue Attempt Damage
           img: ''
       enchant: {}
       prerequisites:
@@ -659,30 +672,35 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.CvtGj6YimGuZdrhB
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765827393116
+      systemVersion: 6.0.0
+      createdTime: 1781901062701
+      modifiedTime: 1781909484772
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!3fzQVYQhXxCXRa2o.m8prrQUwqGwX6Jyk'
   - _id: ISZmp6ev081hhUxT
     name: Transparent
     type: feat
-    img: icons/magic/control/silhouette-hold-change-blue.webp
+    img: icons/magic/water/orb-water-transparent.webp
     system:
       description:
         value: >-
-          <p>Even when the cube is in plain sight, it takes a successful DC 15
-          Wisdom (Perception) check to spot a cube that has neither moved nor
-          attacked. A creature that tries to enter the cube's space while
-          unaware of the cube is surprised by the cube.</p>
+          <p>Even when the [[lookup @name lowercase]]{monster} is in plain
+          sight, it takes a successful DC 15 Wisdom (Perception) check to spot a
+          cube that has neither moved nor attacked. A creature that tries to
+          enter the [[lookup @name lowercase]]{monster}'s space while unaware of
+          the [[lookup @name lowercase]]{monster} is
+          &amp;reference[surprise]{Surprised} by the [[lookup @name
+          lowercase]]{monster}.</p>
         chat: >-
-          <p>Even when the cube is in plain sight, it takes a successful Wisdom
-          (Perception) check to spot a cube that has neither moved nor attacked.
-          A creature that tries to enter the cube's space while unaware of the
-          cube is surprised by the cube.</p>
+          <p>Even when the [[lookup @name]]{monster} is in plain sight, it takes
+          a successful Wisdom (Perception) check to spot a [[lookup
+          @name]]{monster} that has neither moved nor attacked. A creature that
+          tries to enter the [[lookup @name]]{monster}'s space while unaware of
+          the [[lookup @name]]{monster} is &amp;reference[surprise]{Surprised}
+          by the [[lookup @name]]{monster}.</p>
       source:
         custom: ''
         book: ''
@@ -695,10 +713,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -713,11 +732,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.cueeLXQ3W8gKHiLq
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765827402668
+      systemVersion: 6.0.0
+      createdTime: 1781900938119
+      modifiedTime: 1781901006408
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!3fzQVYQhXxCXRa2o.ISZmp6ev081hhUxT'
@@ -728,7 +747,9 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Gelatinous Cube attacks with its Pseudopod.</p>
+        chat: >-
+          <p>The [[lookup @name lowercase]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -791,7 +812,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -800,8 +821,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        J4Urn8YbNXHQTZVK:
           type: attack
           activation:
             type: action
@@ -816,6 +836,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -836,7 +857,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -855,69 +877,80 @@ items:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 200000
           name: ''
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: J4Urn8YbNXHQTZVK
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: pseudopod
+      mastery: ''
     effects: []
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107723402
+      systemVersion: 6.0.0
+      createdTime: 1781900701134
+      modifiedTime: 1781900926846
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!3fzQVYQhXxCXRa2o.t2KRGzsjV4Wwp0wj'
   - _id: 6PuULfBzy5vpBSFI
     name: Engulf
     type: feat
-    img: icons/magic/water/pseudopod-swirl-blue.webp
+    img: icons/creatures/slimes/slime-giant-face-eyes.webp
     system:
       description:
         value: >-
-          <p>The cube moves up to its speed. While doing so, it can enter Large
-          or smaller creatures' spaces. Whenever the cube enters a creature's
-          space, the creature must make a DC 12 Dexterity saving throw.On a
-          successful save, the creature can choose to be pushed 5 feet back or
-          to the side of the cube. A creature that chooses not to be pushed
-          suffers the consequences of a failed saving throw.</p><p>On a failed
-          save, the cube enters the creature's space, and the creature takes 10
-          (3d6) acid damage and is engulfed. The engulfed creature can't
-          breathe, is restrained, and takes 21 (6d6) acid damage at the start of
-          each of the cube's turns. When the cube moves, the engulfed creature
-          moves with it.An engulfed creature can try to escape by taking an
-          action to make a DC 12 Strength check. On a success, the creature
-          escapes and enters a space of its choice within 5 feet of the
-          cube.</p>
+          <p>The [[lookup @name lowercase]]{monster} moves up to its speed.
+          While doing so, it can enter Large or smaller creatures' spaces.
+          Whenever the [[lookup @name lowercase]]{monster} enters a creature's
+          space, the creature must make a [[/save activity=nGINyQKTsYq10OA0]]
+          saving throw. On a successful save, the creature can choose to be
+          pushed 5 feet back or to the side of the [[lookup @name
+          lowercase]]{monster}. A creature that chooses not to be pushed suffers
+          the consequences of a failed saving throw.</p><p>On a failed save, the
+          [[lookup @name lowercase]]{monster} enters the creature's space, and
+          the creature takes [[/damage average activity=nGINyQKTsYq10OA0]]
+          damage and is engulfed. The engulfed creature can't
+          &amp;reference[suffocating]{Breathe}, is &amp;reference[restrained],
+          and takes [[/damage average activity=sDRiVB3bhk4S5XZI]] damage at the
+          start of each of the [[lookup @name lowercase]]{monster}'s turns. When
+          the [[lookup @name lowercase]]{monster} moves, the engulfed creature
+          moves with it. An engulfed creature can try to escape by taking an
+          action to make a [[/check activity=LMPyxWOrUotM7OLs]] check. On a
+          success, the creature escapes and enters a space of its choice within
+          5 feet of the [[lookup @name lowercase]]{monster}.</p>
         chat: >-
-          <p>Whenever the cube enters a creature's space, the creature must make
-          a <strong>Dexterity</strong> saving throw. On a successful save, the
-          creature can choose to be pushed 5 feet back or to the side of the
-          cube. A creature that chooses not to be pushed suffers the
-          consequences of a failed saving throw.</p>
+          <p>Whenever the [[lookup @name]]{monster} enters a creature's space,
+          the creature must make a Dexterity saving throw. On a successful save,
+          the creature can choose to be pushed 5 feet back or to the side of the
+          [[lookup @name]]{monster}. A creature that chooses not to be pushed
+          suffers the consequences of a failed saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -930,84 +963,16 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: save
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: touch
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          damage:
-            onSave: half
-            parts:
-              - number: 3
-                denomination: 6
-                bonus: ''
-                types:
-                  - acid
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          save:
-            ability: dex
-            dc:
-              calculation: ''
-              formula: '12'
-          sort: 0
         LMPyxWOrUotM7OLs:
           type: check
           name: Escape Check
           _id: LMPyxWOrUotM7OLs
-          sort: 0
+          sort: 500000
           activation:
             type: ''
             value: null
@@ -1027,6 +992,7 @@ items:
           effects: []
           range:
             override: false
+            special: ''
           target:
             template:
               contiguous: false
@@ -1034,7 +1000,9 @@ items:
               type: ''
             affects:
               choice: false
-              type: ''
+              type: creature
+              count: '1'
+              special: ''
             override: false
             prompt: true
           uses:
@@ -1047,16 +1015,24 @@ items:
               calculation: ''
               formula: '12'
             ability: str
+            bonus: ''
           img: ''
           appliedEffects: []
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
         sDRiVB3bhk4S5XZI:
           type: damage
           _id: sDRiVB3bhk4S5XZI
-          sort: 0
+          sort: 400000
           activation:
             type: turnStart
             override: false
-            condition: ''
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} starts their turn
+              while they have a creature engulfed.
           consumption:
             scaling:
               allowed: false
@@ -1071,7 +1047,7 @@ items:
           effects: []
           flags: {}
           range:
-            units: self
+            units: spec
             override: false
             special: ''
           target:
@@ -1081,7 +1057,9 @@ items:
               type: ''
             affects:
               choice: false
-              type: ''
+              type: creature
+              count: ''
+              special: ''
             override: false
             prompt: true
           uses:
@@ -1108,13 +1086,145 @@ items:
                 bonus: ''
                 types:
                   - acid
-          name: ''
+          name: Start of Turn Engulf Damage
           img: ''
+        nGINyQKTsYq10OA0:
+          type: save
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects:
+            - _id: OFLnjIEHg08Bl6X8
+              level: {}
+              onSave: false
+          range:
+            units: touch
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: half
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 3
+                denomination: 6
+                bonus: ''
+                types:
+                  - acid
+                scaling:
+                  number: 1
+          save:
+            ability:
+              - dex
+            dc:
+              calculation: ''
+              formula: '12'
+            bonus: ''
+            visible: true
+          sort: 200000
+          name: Move & Engulf Creatures
+          img: ''
+          flags: {}
+          visibility:
+            identifier: ''
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: nGINyQKTsYq10OA0
       enchant: {}
       prerequisites:
         level: null
       identifier: engulf
-    effects: []
+    effects:
+      - name: Engulfed
+        img: icons/creatures/slimes/slime-giant-face-eyes.webp
+        origin: Compendium.dnd5e.monsters.Actor.3fzQVYQhXxCXRa2o.Item.6PuULfBzy5vpBSFI
+        transfer: false
+        _id: OFLnjIEHg08Bl6X8
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You have been engulfed by the gelatinous cube. While engulfed, you
+          can't &amp;reference[suffocating]{Breathe}, are
+          &amp;reference[restrained apply=false], and take [[/damage average 6d6
+          acid]] damage at the start of each of the gelatinous cube's
+          turns.</p><p>When the gelatinous cube moves, you move with it. You can
+          attempt to escape by taking an action to make a [[/check 12 str]]
+          check. On a success, you escape and enter a space of your choice
+          within 5 feet of the gelatinous cube.</p>
+        tint: '#ffffff'
+        statuses:
+          - restrained
+          - suffocation
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781907256405
+          modifiedTime: 1781907370976
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!3fzQVYQhXxCXRa2o.6PuULfBzy5vpBSFI.OFLnjIEHg08Bl6X8
     folder: null
     sort: 0
     ownership:
@@ -1123,11 +1233,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Eh80lkzHiEOJP8FI
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765827441974
+      systemVersion: 6.0.0
+      createdTime: 1781901271911
+      modifiedTime: 1781909476553
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!3fzQVYQhXxCXRa2o.6PuULfBzy5vpBSFI'
@@ -1139,7 +1249,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171200728
