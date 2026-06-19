@@ -95,6 +95,16 @@ export function registerSystemSettings() {
     }
   });
 
+  // Separate Concentration Checks per Effect
+  game.settings.register("dnd5e", "concentrationPerEffect", {
+    name: "SETTINGS.DND5E.ConcentrationPerEffect.Name",
+    hint: "SETTINGS.DND5E.ConcentrationPerEffect.Hint",
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean
+  });
+
   // Sense-to-token vision sync
   game.settings.register("dnd5e", "senseVisionSync", {
     name: "SETTINGS.DND5E.AUTOMATION.SenseVision.Name",

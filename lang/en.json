@@ -1758,6 +1758,10 @@
   },
   "Locked": "Locked"
 },
+"DND5E.ConcentrationCheckFor": "Concentration Check for {effect}",
+"DND5E.ConcentratingItemless": "an unknown effect",
+"DND5E.ConcentrationMultiPrompt": "Choose a concentration effect to check",
+"DND5E.ConcentrationResultFor": "Concentration check for {effect}",
 "DND5E.ComponentMaterial": "Material",
 "DND5E.ComponentMaterialAbbr": "M",
 "DND5E.ComponentSomatic": "Somatic",
@@ -6130,6 +6134,10 @@
       "Name": "Roll Once per Creature",
       "Hint": "Use the same initiative roll for identical creatures."
     }
+  },
+  "ConcentrationPerEffect": {
+    "Name": "Separate Concentration Checks per Effect",
+    "Hint": "When enabled, a character maintaining multiple concentration effects will roll a separate concentration check for each effect when damaged."
   },
   "CRITICAL": {
     "Name": "Critical Damage",

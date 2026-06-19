@@ -904,7 +904,25 @@ async function rollCheckSave(config, event) {
         await actor.rollAbilityCheck(options);
         break;
       case "concentration":
-        await actor.rollConcentration(options);
+        const effectId = config.effectId;
+        let flavor = game.i18n.localize("DND5E.Concentration");
+        if (effectId) {
+          const effect = actor.effects.get(effectId);
+          if (effect) {
+            flavor = game.i18n.format("DND5E.ConcentrationCheckFor", {
+              effect: effect.name || game.i18n.localize("DND5E.ConcentratingItemless")
+            });
+          }
+        } else {
+          ui.notifications.warn("DND5E.ConcentratingMissingItem");
+        }
+        const message = {
+          data: {
+            flavor,
+            speaker: ChatMessage.implementation.getSpeaker({ actor, scene: canvas.scene, token: actor.token })
+          }
+        };
+        await actor.rollConcentration(options, {}, message);
         break;
       case "save":
         await actor.rollSavingThrow(options);
@@ -1622,9 +1640,15 @@ export function createRollLabel(config) {
       }
       break;
     case "concentration":
+      label = config.effectName
+        ? `${game.i18n.localize("DND5E.Concentration")}: ${config.effectName}`
+        : game.i18n.localize("DND5E.Concentration");
+      if (ability) label = `${label} (${abbreviation})`;
+      if (showDC) label = _loc("EDITOR.DND5E.Inline.DC", { dc: config.dc, check: label });
+      label = _loc(`EDITOR.DND5E.Inline.Save${longSuffix}`, { save: label });
+      break;
     case "save":
-      if ( config.type === "save" ) label = ability;
-      else label = `${_loc("DND5E.Concentration")} ${ability ? `(${abbreviation})` : ""}`;
+      label = ability;
       if ( showDC ) label = _loc("EDITOR.DND5E.Inline.DC", { dc: config.dc, check: label });
       label = _loc(`EDITOR.DND5E.Inline.Save${longSuffix}`, { save: label });
       break;

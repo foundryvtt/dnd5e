@@ -1108,30 +1108,59 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   async challengeConcentration({ dc=10, ability=null }={}) {
     const isConcentrating = this.concentration.effects.size > 0;
     if ( !isConcentrating ) return null;
+    const effects = Array.from(this.concentration.effects);
 
-    const dataset = {
-      action: "concentration",
-      dc: dc
-    };
-    if ( ability in CONFIG.DND5E.abilities ) dataset.ability = ability;
+    const perEffect = game.settings.get("dnd5e", "concentrationPerEffect");
+    const buttons = [];
 
-    const config = {
-      type: "concentration",
-      format: "short",
-      icon: true
-    };
+    if (perEffect && effects.length > 1) {
+      for (const effect of effects) {
+        const itemId = effect.flags?.dnd5e?.item?.id;
+        let itemName = this.items.get(itemId)?.name;
+        const effectName = itemName || game.i18n.localize("DND5E.ConcentratingItemless");
+        const dataset = {
+          action: "concentration",
+          dc: dc,
+          effectName: effectName, 
+          effectId: effect.id
+        };
+        if (ability && ability in CONFIG.DND5E.abilities) {
+          dataset.ability = ability;
+        }
+        const config = { type: "concentration", format: "short", icon: true };
+        const buttonLabel = createRollLabel({ ...dataset, ...config });
+        const hiddenLabel = createRollLabel({ ...dataset, ...config, hideDC: true });
+        buttons.push({
+          dataset: { ...dataset, type: "concentration", visibility: "all" },
+          buttonLabel,
+          hiddenLabel
+        });
+      }
+    } else {
+      const dataset = { action: "concentration", dc: dc };
+      if (ability && ability in CONFIG.DND5E.abilities) dataset.ability = ability;
+      const config = { type: "concentration", format: "short", icon: true };
+      const buttonLabel = createRollLabel({ ...dataset, ...config });
+      const hiddenLabel = createRollLabel({ ...dataset, ...config, hideDC: true });
+      buttons.push({
+        dataset: { ...dataset, type: "concentration", visibility: "all" },
+        buttonLabel,
+        hiddenLabel
+      });
+    }
+
+    const content = await foundry.applications.handlebars.renderTemplate(
+      "systems/dnd5e/templates/chat/roll-request-card.hbs",
+      { buttons }
+    );
+
+    const flavor = (perEffect && effects.length > 1)
+      ? game.i18n.localize("DND5E.ConcentrationMultiPrompt")
+      : game.i18n.localize("DND5E.Concentration");
 
     return ChatMessage.implementation.create({
-      content: await foundry.applications.handlebars.renderTemplate(
-        "systems/dnd5e/templates/chat/roll-request-card.hbs",
-        {
-          buttons: [{
-            dataset: { ...dataset, type: "concentration", visibility: "all" },
-            buttonLabel: createRollLabel({ ...dataset, ...config }),
-            hiddenLabel: createRollLabel({ ...dataset, ...config, hideDC: true })
-          }]
-        }
-      ),
+      content,
+      flavor,
       whisper: game.users.filter(user => this.testUserPermission(user, "OWNER")),
       speaker: ChatMessage.implementation.getSpeaker({ actor: this })
     });
