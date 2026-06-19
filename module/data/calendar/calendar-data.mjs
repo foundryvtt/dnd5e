@@ -358,7 +358,7 @@ export default class CalendarData5e extends foundry.data.CalendarData {
     const changes = [];
     const rolls = [];
 
-    if ( !game.settings.get("dnd5e", "calendarConfig").manualRecovery && periods.size ) {
+    if ( !dnd5e.settings.calendarConfig.manualRecovery && periods.size ) {
       const operations = [];
       for ( const actor of game.actors ) {
         const deltas = { deleted: [], item: {} };
