@@ -2574,8 +2574,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     let recovery = Array.from(restConfig.recoverPeriods ?? []).map(p => [p, 1]);
     if ( recoverShortRestUses ) recovery.unshift(["sr", 1]);
     if ( recoverLongRestUses ) recovery.unshift(["lr", 1]);
-    if ( (recoverDailyUses || config.newDay) && game.settings.get("dnd5e", "calendarConfig").manualRecovery ) {
-      const days = (game.settings.get("dnd5e", "restVariant") === "gritty") && (config.type === "long") ? 7 : 1;
+    if ( (recoverDailyUses || config.newDay) && dnd5e.settings.calendarConfig.manualRecovery ) {
+      const days = (dnd5e.settings.restVariant === "gritty") && (config.type === "long") ? 7 : 1;
       recovery.unshift(["day", days], ["dawn", days], ["dusk", days]);
     }
     recovery = new Map(recovery);

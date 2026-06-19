@@ -358,8 +358,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
       }
     };
 
-    if ( !rollData && (this.activities.some(a => a.uses?.recovery.some(u => u.type === "formula"))
-      || this.uses.recovery.some(u => u.type === "formula")) ) rollData = this.parent.getRollData();
+    if ( !rollData && this.uses.recovery.some(u => u.type === "formula") ) rollData = this.parent.getRollData();
 
     const result = await UsesField.recoverUses.call(this, periods, rollData);
     if ( result ) {
@@ -373,6 +372,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
 
     for ( const activity of this.activities ) {
       if ( activity.dependentOrigin?.active === false ) continue;
+      if ( !rollData && activity.uses?.recovery.some(u => u.type === "formula") ) rollData = this.parent.getRollData();
       const result = await UsesField.recoverUses.call(activity, periods, rollData);
       if ( result ) {
         foundry.utils.mergeObject(updates, { [`system.activities.${activity.id}.uses`]: result.updates });

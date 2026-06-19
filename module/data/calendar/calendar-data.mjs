@@ -346,7 +346,7 @@ export default class CalendarData5e extends foundry.data.CalendarData {
   /* -------------------------------------------- */
 
   /**
-   * Trigger recovery for any world items based on the passage of time.
+   * Trigger recovery for any world actors based on the passage of time.
    * @param {TimePassageData} timePassageData
    */
   static async handleTimePassage(timePassageData) {
