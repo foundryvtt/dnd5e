@@ -608,9 +608,9 @@ items:
           average]] damage, or [[/damage 2d4 piercing average]] damage if the
           [[lookup @name lowercase]]{swarm} has half of its hit points or
           fewer.</p><p>A creature reduced to 0 hit points by a [[lookup @name
-          lowercase]]{swarm} is stable but &amp;Reference[poisoned] for 1 hour,
-          even after regaining hit points, and &amp;reference[paralyzed] while
-          poisoned in this way.</p>
+          lowercase]]{swarm} is &amp;reference[stable] but
+          &amp;Reference[poisoned] for 1 hour, even after regaining hit points,
+          and &amp;reference[paralyzed] while poisoned in this way.</p>
         chat: >-
           <p>The [[lookup @name]]{monster} attacks with a flurry of [[lookup
           @item.name]].</p>
@@ -706,7 +706,7 @@ items:
             special: ''
             override: false
           effects:
-            - _id: gwccig7WtRdFjCDY
+            - _id: EhASjxmj7yDdyQU2
               level: {}
           range:
             units: ft
@@ -768,11 +768,11 @@ items:
       attuned: false
       equipped: true
     effects:
-      - name: Paralyzing Poison
+      - name: Stablizing Paralysis Poison
         img: icons/skills/toxins/symbol-poison-drop-skull-green.webp
         origin: Compendium.dnd5e.monsters.Actor.KC4tYOolARhajP18.Item.s7CTyI6W91Yjb5Hi
         transfer: false
-        _id: gwccig7WtRdFjCDY
+        _id: EhASjxmj7yDdyQU2
         type: base
         system:
           changes: []
@@ -784,9 +784,10 @@ items:
           expiry: turnStart
           expired: false
         description: >-
-          <p>You are stable but &amp;reference[poisoned apply=false] for 1 hour,
-          even after regaining hit points. While poisoned in this way, you are
-          also &amp;reference[paralyzed apply=false].</p>
+          <p>You are &amp;reference[stable] but &amp;reference[poisoned
+          apply=false] for the duration, even after regaining hit points. While
+          poisoned in this way, you are also &amp;reference[paralyzed
+          apply=false].</p>
         tint: '#ffffff'
         statuses:
           - paralyzed
@@ -803,15 +804,15 @@ items:
           coreVersion: '14.361'
           systemId: dnd5e
           systemVersion: 6.0.0
-          createdTime: 1781544322340
-          modifiedTime: 1781544322340
+          createdTime: 1781910170877
+          modifiedTime: 1781910170877
           lastModifiedBy: dnd5ebuilder0000
           compendiumSource: >-
             Compendium.dnd5e.monsters.Actor.Hn8FFLEzscgT7azz.Item.8EvqvqLumOBhrjeD.ActiveEffect.0RzAvZ3heVXtbVt1
           duplicateSource: null
           exportSource: null
         _key: >-
-          !actors.items.effects!KC4tYOolARhajP18.s7CTyI6W91Yjb5Hi.gwccig7WtRdFjCDY
+          !actors.items.effects!KC4tYOolARhajP18.s7CTyI6W91Yjb5Hi.EhASjxmj7yDdyQU2
     folder: null
     sort: 0
     ownership:
@@ -824,7 +825,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781544255135
-      modifiedTime: 1781545010888
+      modifiedTime: 1781910185471
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!KC4tYOolARhajP18.s7CTyI6W91Yjb5Hi'

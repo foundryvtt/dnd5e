@@ -491,15 +491,17 @@ items:
           succeed on a [[/save]] saving throw or take [[/damage average
           activity=RQqJ9wFgglGmzsYF]] damage. If the poison damage reduces the
           target to 0 hit points, the target is stable but
-          &amp;Reference[poisoned] for 1 hour, even after regaining hit points,
-          and is &amp;Reference[paralyzed] while poisoned in this way.</p>
+          &amp;Reference[poisoned] for [[lookup @labels.duration
+          activity=RQqJ9wFgglGmzsYF]], even after regaining hit points, and is
+          &amp;Reference[paralyzed] while poisoned in this way.</p>
         chat: >-
           <p>The [[lookup @name]]{monster} attacks with its [[lookup
           @item.name]]. The target must succeed on a Constitution saving throw
-          or take <em>poison damage</em>. If the <em>poison damage</em> reduces
-          the target to 0 hit points, the target is stable but
-          &amp;reference[poisoned] for 1 hour, even after regaining hit points,
-          and is &amp;reference[paralyzed] while poisoned in this way.</p>
+          or take poison damage. If the poison damage reduces the target to 0
+          hit points, the target is stable but &amp;reference[poisoned] for
+          [[lookup @labels.duration activity=RQqJ9wFgglGmzsYF]], even after
+          regaining hit points, and is &amp;reference[paralyzed] while poisoned
+          in this way.</p>
       source:
         custom: ''
         book: ''
@@ -650,9 +652,9 @@ items:
         RQqJ9wFgglGmzsYF:
           type: save
           activation:
-            type: action
+            type: special
             value: 1
-            condition: ''
+            condition: When a creature is hit by this attack.
             override: false
           consumption:
             targets: []
@@ -671,8 +673,8 @@ items:
               poisoned in this way.</p>
           duration:
             concentration: false
-            value: ''
-            units: inst
+            value: '1'
+            units: hour
             special: ''
             override: false
           effects:
@@ -747,7 +749,7 @@ items:
       identifier: bite
       mastery: ''
     effects:
-      - name: Paralyzing Poison
+      - name: Stablizing Paralysis Poison
         img: icons/skills/toxins/symbol-poison-drop-skull-green.webp
         origin: Compendium.dnd5e.monsters.Actor.Hn8FFLEzscgT7azz.Item.8EvqvqLumOBhrjeD
         transfer: false
@@ -763,9 +765,10 @@ items:
           expiry: turnStart
           expired: false
         description: >-
-          <p>You are stable but &amp;reference[poisoned apply=false] for 1 hour,
-          even after regaining hit points. While poisoned in this way, you are
-          also &amp;reference[paralyzed apply=false].</p>
+          <p>You are &amp;reference[stable] but &amp;reference[poisoned
+          apply=false] for the duration, even after regaining hit points. While
+          poisoned in this way, you are also &amp;reference[paralyzed
+          apply=false].</p>
         tint: '#ffffff'
         statuses:
           - paralyzed
@@ -783,7 +786,7 @@ items:
           systemId: dnd5e
           systemVersion: 6.0.0
           createdTime: 1781542394365
-          modifiedTime: 1781543205897
+          modifiedTime: 1781909869820
           lastModifiedBy: dnd5ebuilder0000
           compendiumSource: null
           duplicateSource: null
@@ -802,7 +805,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781542300632
-      modifiedTime: 1781543502490
+      modifiedTime: 1781910077115
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!Hn8FFLEzscgT7azz.8EvqvqLumOBhrjeD'

@@ -491,12 +491,13 @@ items:
           make a [[/save]] saving throw, taking [[/damage average
           activity=ilzrXBsQAHEBhR5H]] damage on a failed save, or half as much
           damage on a successful one. If the poison damage reduces the target to
-          0 hit points, the target is stable but &amp;reference[poisoned] for 1
-          hour, even after regaining hit points, and is
-          &amp;reference[paralyzed] while poisoned in this way.</p>
+          0 hit points, the target is stable but &amp;reference[poisoned] for
+          [[lookup @labels.duration activity=ilzrXBsQAHEBhR5H]], even after
+          regaining hit points, and is &amp;reference[paralyzed] while poisoned
+          in this way.</p>
         chat: >-
-          <p>The Giant Wasp attacks with its Sting. The target must make a
-          <strong>Constitution</strong> saving throw.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. The target must make a Constitution saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -659,17 +660,26 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
-            value: ''
+            value: >-
+              <p>The target must make a [[/save]] saving throw, taking [[/damage
+              average activity=ilzrXBsQAHEBhR5H]] damage on a failed save, or
+              half as much damage on a successful one. If the poison damage
+              reduces the target to 0 hit points, the target is stable but
+              &amp;reference[poisoned] for [[lookup @labels.duration
+              activity=ilzrXBsQAHEBhR5H]], even after regaining hit points, and
+              is &amp;reference[paralyzed] while poisoned in this way.</p>
           duration:
             concentration: false
-            value: ''
-            units: inst
+            value: '1'
+            units: hour
             special: ''
             override: false
           effects:
-            - _id: daekr93KHL9e1IeB
-              level: {}
+            - _id: xnNdQRo27uXb8Bfo
               onSave: false
+              level:
+                min: null
+                max: null
           range:
             value: '5'
             units: ft
@@ -736,11 +746,11 @@ items:
       identifier: sting
       mastery: ''
     effects:
-      - name: Paralyzing Poison
+      - name: Stablizing Paralysis Poison
         img: icons/skills/toxins/symbol-poison-drop-skull-green.webp
         origin: Compendium.dnd5e.monsters.Actor.4tl0s2SnaLjkoDiI.Item.L1TmhBXd2UrVxExn
         transfer: false
-        _id: daekr93KHL9e1IeB
+        _id: xnNdQRo27uXb8Bfo
         type: base
         system:
           changes: []
@@ -752,9 +762,10 @@ items:
           expiry: turnStart
           expired: false
         description: >-
-          <p>You are stable but &amp;reference[poisoned apply=false] for 1 hour,
-          even after regaining hit points. While poisoned in this way, you are
-          also &amp;reference[paralyzed apply=false].</p>
+          <p>You are &amp;reference[stable] but &amp;reference[poisoned
+          apply=false] for the duration, even after regaining hit points. While
+          poisoned in this way, you are also &amp;reference[paralyzed
+          apply=false].</p>
         tint: '#ffffff'
         statuses:
           - paralyzed
@@ -771,15 +782,15 @@ items:
           coreVersion: '14.361'
           systemId: dnd5e
           systemVersion: 6.0.0
-          createdTime: 1781543174838
-          modifiedTime: 1781543198610
+          createdTime: 1781909830340
+          modifiedTime: 1781909856199
           lastModifiedBy: dnd5ebuilder0000
           compendiumSource: >-
             Compendium.dnd5e.monsters.Actor.Hn8FFLEzscgT7azz.Item.8EvqvqLumOBhrjeD.ActiveEffect.0RzAvZ3heVXtbVt1
           duplicateSource: null
           exportSource: null
         _key: >-
-          !actors.items.effects!4tl0s2SnaLjkoDiI.L1TmhBXd2UrVxExn.daekr93KHL9e1IeB
+          !actors.items.effects!4tl0s2SnaLjkoDiI.L1TmhBXd2UrVxExn.xnNdQRo27uXb8Bfo
     folder: null
     sort: 0
     ownership:
@@ -792,7 +803,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781543133117
-      modifiedTime: 1781543244444
+      modifiedTime: 1781910118682
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!4tl0s2SnaLjkoDiI.L1TmhBXd2UrVxExn'
