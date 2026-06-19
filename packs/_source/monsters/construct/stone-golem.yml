@@ -794,8 +794,9 @@ items:
           can't use reactions, its speed is halved, and it can't make more than
           one attack on its turn. In addition, the target can take either an
           action or a bonus action on its turn, not both. These effects last for
-          1 minute. A target can repeat the saving throw at the end of each of
-          its turns, ending the effect on itself on a success.</p>
+          [[lookup @labels.duration activity=o1gVWezg9dluEi5a]]. A target can
+          repeat the saving throw at the end of each of its turns, ending the
+          effect on itself on a success.</p>
         chat: >-
           <p>The [[lookup @name]]{monster} targets one or more creatures it can
           see within [[lookup @labels.description.range
@@ -962,9 +963,9 @@ items:
         description: >-
           <p>Your speed is halved, take a -2 penalty to AC and Dexterity saving
           throws, and you can't use reactions. On your turn, you can use either
-          an action or a bonus action, not both.</p><p>These effects last for 1
-          minute. You can repeat the saving throw at the end of each of your
-          turns, ending the effect on yourself on a success.</p>
+          an action or a bonus action, not both.</p><p>You can repeat the saving
+          throw at the end of each of your turns, ending the effect on yourself
+          on a success.</p>
         tint: '#ffffff'
         statuses: []
         showIcon: 1
@@ -979,7 +980,7 @@ items:
           systemId: dnd5e
           systemVersion: 6.0.0
           createdTime: 1781486541273
-          modifiedTime: 1781486630487
+          modifiedTime: 1781910537162
           lastModifiedBy: dnd5ebuilder0000
           compendiumSource: null
           duplicateSource: null
@@ -998,7 +999,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781486490666
-      modifiedTime: 1781486692431
+      modifiedTime: 1781910520872
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!z3gSIXHHWYaHjfBT.9aTwUWuZQLhMxjcD'

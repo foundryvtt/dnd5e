@@ -492,9 +492,10 @@ items:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
           succeed on a [[/save]] saving throw or be &amp;Reference[poisoned] for
-          1 minute. If the saving throw fails by 5 or more, the target is
-          instead poisoned for 5 ([[/r 1d10]]) minutes and
-          &amp;Reference[unconscious] while poisoned in this way.</p>
+          [[lookup @labels.duration activity=aNFKGc5wFnOQijNd]]. If the saving
+          throw fails by 5 or more, the target is instead poisoned for 5 ([[/r
+          1d10]]) minutes and &amp;Reference[unconscious] while poisoned in this
+          way.</p>
         chat: >-
           <p>The [[lookup @name]]{monster} attacks with its [[lookup
           @item.name]]. The target must make a Constitution saving throw.</p>
@@ -663,8 +664,8 @@ items:
             value: ''
           duration:
             concentration: false
-            value: ''
-            units: inst
+            value: '1'
+            units: minute
             special: ''
             override: false
           effects:
@@ -674,8 +675,10 @@ items:
                 min: null
                 max: null
             - _id: l635qlEf6ays6UwQ
-              level: {}
               onSave: false
+              level:
+                min: null
+                max: null
           range:
             value: '5'
             units: ft
@@ -824,7 +827,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781485497464
-      modifiedTime: 1781485663242
+      modifiedTime: 1781910580794
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!ZQTCZfTV9ZoTjNCU.1uXv78I9YByiz6rV'
