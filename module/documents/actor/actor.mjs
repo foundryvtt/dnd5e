@@ -1113,7 +1113,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const perEffect = game.settings.get("dnd5e", "concentrationPerEffect");
 
     if (perEffect && effects.length > 1) {
-      const messages = [];
+      const promises = [];
       for (const effect of effects) {
         const effectName = effect.name || game.i18n.localize("DND5E.ConcentratingItemless");
         const dataset = {
