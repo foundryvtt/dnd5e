@@ -40,6 +40,8 @@ export default class BasePlacement {
     return placement.place();
   }
 
+  /* -------------------------------------------- */
+
   /**
    * Perform the placement, asking player guidance when necessary.
    * @returns {Promise<PlacementData[]>}
@@ -58,6 +60,8 @@ export default class BasePlacement {
       await Promise.all(minimizedApplications.map(a => a.maximize()));
     }
   }
+
+  /* -------------------------------------------- */
 
   /**
    * Internal method that handles specific placement details.

@@ -4,7 +4,7 @@ import BasePlacement from "./api/base-placement.mjs";
 /**
  * @import {
  *   TemplatePlacementConfiguration, TemplatePlacementData, TemplatePlacementShapeConfiguration
- * } from "./types.mjs";
+ * } from "./_types.mjs";
  */
 
 /**
@@ -30,6 +30,9 @@ export default class TemplatePlacement extends BasePlacement {
     }, {
       // TODO: `attachToToken: true` if emanation
       create: false,
+      onRotate: ({ shape }) => {
+        if ( (shape.type === "rectangle") && dnd5e.settings.gridAlignedSquareTemplates ) return false;
+      },
       preConfirm: ({ document, index }) => {
         const obj = document.toObject();
         results.push({ ...obj.shapes.at(-1) });
@@ -153,7 +156,7 @@ export default class TemplatePlacement extends BasePlacement {
      */
     if ( Hooks.call("dnd5e.createMeasuredTemplate", activity, regionData) === false ) return null;
 
-    const created = canvas.scene.createEmbeddedDocuments("Region", regionData);
+    const created = await canvas.scene.createEmbeddedDocuments("Region", regionData);
 
     /**
      * A hook event that fires after a template are created for an Activity.
