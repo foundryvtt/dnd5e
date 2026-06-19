@@ -533,6 +533,7 @@ items:
             targets:
               - type: itemUses
                 value: '1'
+                target: ''
                 scaling: {}
             scaling:
               allowed: false
@@ -575,7 +576,7 @@ items:
             recovery: []
           damage:
             critical:
-              allow: false
+              allow: true
               bonus: ''
             parts:
               - custom:
@@ -617,7 +618,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781824096218
-      modifiedTime: 1781824233403
+      modifiedTime: 1781911336401
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!6qnT52lZtZblgGw8.Y73kGtiKbGevpBCo'
