@@ -1103,11 +1103,50 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @param {object} [options]
    * @param {number} [options.dc]         The target value of the saving throw.
    * @param {string} [options.ability]    An ability to use instead of the default.
-   * @returns {Promise<ChatMessage5e>}    A promise that resolves to the created chat message.
+   * @returns {Promise<ChatMessage5e|ChatMessage5e[]>}    A promise that resolves to the created chat message(s).
    */
   async challengeConcentration({ dc=10, ability=null }={}) {
     const isConcentrating = this.concentration.effects.size > 0;
     if ( !isConcentrating ) return null;
+    const effects = Array.from(this.concentration.effects);
+
+    const perEffect = game.settings.get("dnd5e", "concentrationPerEffect");
+
+    if (perEffect && effects.length > 1) {
+      const messages = [];
+      for (const effect of effects) {
+        const effectName = effect.name || game.i18n.localize("DND5E.ConcentratingItemless");
+        const dataset = {
+          action: "concentration",
+          dc: dc,
+          effectId: effect.id  
+        };
+        if ( ability in CONFIG.DND5E.abilities ) dataset.ability = ability;
+        
+        const config = { type: "concentration", format: "short", icon: true };
+        const buttonLabel = createRollLabel({ ...dataset, ...config });
+        const hiddenLabel = createRollLabel({ ...dataset, ...config, hideDC: true });
+        const flavor = game.i18n.format("DND5E.ConcentrationCheckFor", { effect: effectName });
+        const content = await foundry.applications.handlebars.renderTemplate(
+          "systems/dnd5e/templates/chat/roll-request-card.hbs",
+          {
+            buttons: [{
+              dataset: { ...dataset, type: "concentration", visibility: "all" },
+              buttonLabel,
+              hiddenLabel
+            }]
+          }
+        );
+
+        promises.push(ChatMessage.implementation.create({
+          content,
+          flavor,
+          whisper: game.users.filter(user => this.testUserPermission(user, "OWNER")),
+          speaker: ChatMessage.getSpeaker({ actor: this })
+        }));
+      }
+      return Promise.all(promises);
+   }
 
     const dataset = {
       action: "concentration",
