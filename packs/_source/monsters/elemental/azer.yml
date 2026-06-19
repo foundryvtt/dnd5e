@@ -422,7 +422,7 @@ prototypeToken:
   randomImg: false
   alpha: 1
   light:
-    alpha: 1
+    alpha: 0.75
     angle: 360
     bright: 10
     coloration: 1
@@ -432,25 +432,22 @@ prototypeToken:
     contrast: 0
     shadows: 0
     animation:
-      speed: 5
-      intensity: 5
-      type: null
+      speed: 1
+      intensity: 1
+      type: flame
       reverse: false
     darkness:
       min: 0
       max: 1
-    attenuation: 0.5
-    color: null
+    attenuation: 0.6
+    color: '#601806'
     negative: false
     priority: 0
   texture:
-    src: null
+    src: systems/dnd5e/tokens/elemental/Azer.webp
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -465,7 +462,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -475,7 +472,7 @@ prototypeToken:
     colors:
       ring: null
       background: null
-    effects: 1
+    effects: 0
     subject:
       scale: 1
       texture: null
@@ -485,6 +482,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: sSs3hSzkKBMNBgTs
     name: Shield
@@ -554,7 +552,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.yHcr3vlkmtInELj2
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -565,12 +563,13 @@ items:
   - _id: P0pbiook7Q79UYqQ
     name: Heated Body
     type: feat
-    img: icons/magic/earth/volcano-explosion-lava-yellow.webp
+    img: icons/tools/smithing/furnace-fire-metal-orange.webp
     system:
       description:
         value: >-
-          <p>A creature that touches the azer or hits it with a melee attack
-          while within 5 feet of it takes [[/damage average]] damage.</p>
+          <p>A creature that touches the [[lookup @name lowercase]]{monster} or
+          hits it with a melee attack while within 5 feet of it takes [[/damage
+          average]] damage.</p>
         chat: ''
       source:
         custom: ''
@@ -584,18 +583,21 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
           type: damage
           activation:
-            type: ''
+            type: special
             value: null
-            condition: ''
+            condition: >-
+              When a creature touches the [[lookup @name lowercase]]{monster} or
+              hits it with a melee attack while within 5 feet of it.
             override: false
           consumption:
             targets: []
@@ -627,7 +629,7 @@ items:
               height: ''
               units: any
             affects:
-              count: ''
+              count: '1'
               type: creature
               choice: false
               special: ''
@@ -651,9 +653,14 @@ items:
                 types:
                   - fire
           sort: 0
-          name: ''
+          name: Contact Damage
           img: ''
           appliedEffects: []
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
       enchant: {}
       prerequisites:
         level: null
@@ -663,34 +670,31 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.iFNpsEMJT66eLoat
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747954647728
+      systemVersion: 6.0.0
+      createdTime: 1781811689853
+      modifiedTime: 1781811760167
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!IiEDPMWqBlzkggYD.P0pbiook7Q79UYqQ'
   - _id: WRygAnkpMeaqiw70
     name: Heated Weapons
     type: feat
-    img: icons/skills/melee/strike-sword-blood-red.webp
+    img: icons/tools/smithing/crucible-round.webp
     system:
       description:
         value: >-
-          <p>When the azer hits with a metal melee weapon, it deals an extra 3
-          (1d6) fire damage (included in the attack).</p>
+          <p>When the [[lookup @name lowercase]]{monster} hits with a metal
+          melee weapon, it deals an extra 3 (1d6) fire damage (included in the
+          attack).</p>
         chat: >-
-          <p>When the azer hits with a metal melee weapon, it deals extra
-          <em>fire damage</em> (included in the attack).</p>
+          <p>When the [[lookup @name]]{monster} hits with a metal melee weapon,
+          it deals extra fire damage (included in the attack).</p>
       source:
         custom: ''
         book: ''
@@ -703,10 +707,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -725,23 +730,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.i3viKtKcSVeWLJFJ
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747954613222
+      systemVersion: 6.0.0
+      createdTime: 1781811774820
+      modifiedTime: 1781819750529
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!IiEDPMWqBlzkggYD.WRygAnkpMeaqiw70'
   - _id: oPddwb4BScCEDanp
     name: Illumination
     type: feat
-    img: icons/magic/light/explosion-star-glow-blue-purple.webp
+    img: icons/magic/light/explosion-glow-spiral-yellow.webp
     system:
       description:
         value: >-
-          <p>The azer sheds bright light in a 10-foot radius and dim light for
-          an additional 10 ft.</p>
+          <p>The [[lookup @name lowercase]]{monster} sheds &amp;reference[bright
+          light] in a 10-foot radius and &amp;reference[dim light] for an
+          additional 10 feet.</p>
         chat: ''
       source:
         custom: ''
@@ -755,10 +761,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -773,12 +780,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.F3gzBbCW7U14zkBF
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781811797361
+      modifiedTime: 1781811828822
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!IiEDPMWqBlzkggYD.oPddwb4BScCEDanp'
   - _id: YvzdCGQeCV1XOcUt
@@ -792,14 +799,8 @@ items:
           attackMode=twoHanded]] if used with two hands to make a melee
           attack.</p>
         chat: >-
-          <section>
-
-
-          </section>
-
-          <p>A heavy metal hammer capable of being wielded with a single hand
-          with a shield or in two hands to deliver crushing concussive
-          blows.</p>
+          <section></section><p>The [[lookup @name]]{monster} attacks with its
+          [[lookup @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -863,7 +864,7 @@ items:
         conditions: ''
       properties:
         - ver
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -872,8 +873,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        MJsxrM9HuebosAr9:
           type: attack
           activation:
             type: action
@@ -888,10 +888,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -908,7 +909,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -921,32 +923,42 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts:
-              - number: 1
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
                 denomination: 6
                 bonus: ''
                 types:
                   - fire
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
+                  number: 1
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: MJsxrM9HuebosAr9
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -961,11 +973,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.F0Df164Xv1gWcYt0
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747954692108
+      systemVersion: 6.0.0
+      createdTime: 1781811838275
+      modifiedTime: 1781811852950
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!IiEDPMWqBlzkggYD.YvzdCGQeCV1XOcUt'
@@ -977,11 +989,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171219763
-  modifiedTime: 1726171442629
+  modifiedTime: 1781811954963
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!actors!IiEDPMWqBlzkggYD'

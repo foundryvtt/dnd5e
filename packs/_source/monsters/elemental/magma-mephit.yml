@@ -447,9 +447,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -464,7 +461,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -484,6 +481,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: lAwQmCYEd9CtDdTb
     name: Innate Spellcasting
@@ -526,7 +524,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 5.1.0
       createdTime: null
@@ -537,17 +535,20 @@ items:
   - _id: LpYrQPxHA10HPnkl
     name: Death Burst
     type: feat
-    img: icons/magic/light/explosion-star-glow-yellow.webp
+    img: icons/magic/earth/lava-explosion-orange.webp
     system:
       description:
         value: >-
-          <p>When the mephit dies, it explodes in a burst of lava. Each creature
-          within 5 ft. of it must make a [[/save]] saving throw, taking
-          [[/damage average]] damage on a failed save, or half as much damage on
-          a successful one.</p>
+          <p>When the [[lookup @name lowercase]]{monster} dies, it explodes in a
+          burst of lava. Each creature within [[lookup @target.template.size
+          activity=UQfpr7NYbryokaPS]] feet of it must make a [[/save
+          activity=UQfpr7NYbryokaPS]] saving throw, taking [[/damage average
+          activity=UQfpr7NYbryokaPS]] damage on a failed save, or half as much
+          damage on a successful one.</p>
         chat: >-
-          <p>When the mephit dies, it explodes in a burst of lava. Each creature
-          within 5 ft. of it must make a <strong>Dexterity</strong> saving
+          <p>When the [[lookup @name]]{monster} dies, it explodes in a burst of
+          lava. Each creature within [[lookup @target.template.size
+          activity=UQfpr7NYbryokaPS]] feet of it must make a Dexterity saving
           throw.</p>
       source:
         custom: ''
@@ -561,18 +562,18 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        UQfpr7NYbryokaPS:
           type: save
           activation:
-            type: ''
+            type: special
             value: null
-            condition: death
+            condition: When the [[lookup @name lowercse]]{monster}
             override: false
           consumption:
             targets: []
@@ -582,10 +583,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -602,6 +604,7 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: true
             affects:
               count: ''
               type: creature
@@ -624,15 +627,29 @@ items:
                 bonus: ''
                 types:
                   - fire
+                scaling:
+                  number: 1
           save:
-            ability: dex
+            ability:
+              - dex
             dc:
               calculation: ''
               formula: '11'
-          sort: 0
-          name: ''
+            visible: true
+            bonus: ''
+          sort: 100000
+          name: Explode
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: UQfpr7NYbryokaPS
       enchant: {}
       prerequisites:
         level: null
@@ -642,31 +659,27 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.net3yBKQoxl8bZ4r
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747955322141
+      systemVersion: 6.0.0
+      createdTime: 1781818033799
+      modifiedTime: 1781819601000
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!oJCOB9X2BPsBkWW5.LpYrQPxHA10HPnkl'
   - _id: FEdBqpqpIEyjdO2H
     name: False Appearance
     type: feat
-    img: icons/magic/nature/stealth-hide-eyes-green.webp
+    img: icons/magic/earth/explosion-lava-orange.webp
     system:
       description:
         value: >-
-          <p>While the mephit remains motionless, it is indistinguishable from
-          an ordinary mound of magma.</p>
+          <p>While the [[lookup @name lowercase]]{monster} remains motionless,
+          it is indistinguishable from an ordinary mound of magma.</p>
         chat: ''
       source:
         custom: ''
@@ -680,10 +693,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -698,22 +712,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.kyVgQNSa12loxVvr
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781818114571
+      modifiedTime: 1781818126172
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!oJCOB9X2BPsBkWW5.FEdBqpqpIEyjdO2H'
   - _id: BiAfcjq7C9Wf8R9b
     name: Claws
     type: weapon
-    img: icons/skills/melee/strike-slashes-red.webp
+    img: icons/creatures/claws/claw-talons-glowing-orange.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Magma Mephit attacks with its Claws.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -776,7 +792,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -785,8 +801,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        TpGzVJkWKWo53CtO:
           type: attack
           activation:
             type: action
@@ -801,6 +816,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -821,7 +837,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: '1'
               type: creature
@@ -834,14 +851,14 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
@@ -851,14 +868,25 @@ items:
                   enabled: false
                   formula: ''
                 number: 1
-                denomination: '4'
+                denomination: 4
                 bonus: ''
                 types:
                   - fire
-          sort: 0
+                scaling:
+                  number: 1
+          sort: 100000
           name: ''
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: TpGzVJkWKWo53CtO
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -869,36 +897,35 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745175546348
+      systemVersion: 6.0.0
+      createdTime: 1781818136873
+      modifiedTime: 1781818540785
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!oJCOB9X2BPsBkWW5.BiAfcjq7C9Wf8R9b'
   - _id: iXhbFt7gCj3FBM2r
     name: Fire Breath
     type: feat
-    img: icons/creatures/abilities/dragon-fire-breath-orange.webp
+    img: icons/magic/fire/flame-burning-earth-orange.webp
     system:
       description:
         value: >-
-          <p>The mephit exhales a 15-foot cone of fire. Each creature in that
-          area must make a [[/save]] saving throw, taking [[/damage average]]
+          <p>The [[lookup @name lowercase]]{monster} exhales a [[lookup
+          @labels.description.template activity=9MCs28rlCi6lgvch]] of fire. Each
+          creature in that area must make a [[/save activity=9MCs28rlCi6lgvch]]
+          saving throw, taking [[/damage average activity=9MCs28rlCi6lgvch]]
           damage on a failed save, or half as much damage on a successful
           one.</p>
         chat: >-
-          <p>The mephit exhales a 15-foot cone of fire. Each creature in that
-          area must make a <strong>Dexterity</strong> saving throw.</p>
+          <p>The [[lookup @name]]{monster} exhales a [[lookup
+          @labels.description.template activity=9MCs28rlCi6lgvch]] of fire. Each
+          creature in that area must make a Dexterity saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -914,13 +941,12 @@ items:
             type: recoverAll
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        9MCs28rlCi6lgvch:
           type: save
           activation:
             type: action
@@ -930,26 +956,25 @@ items:
           consumption:
             targets:
               - type: itemUses
-                target: ''
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: ''
+                scaling: {}
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -961,9 +986,10 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: false
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -975,24 +1001,37 @@ items:
           damage:
             onSave: half
             parts:
-              - number: 2
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 2
                 denomination: 6
                 bonus: ''
                 types:
                   - fire
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+                  number: 1
           save:
-            ability: dex
+            ability:
+              - dex
             dc:
               calculation: ''
               formula: '11'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 9MCs28rlCi6lgvch
+          name: Exhale Fire
       enchant: {}
       prerequisites:
         level: null
@@ -1006,11 +1045,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.bGSW8IuWURWiWtxr
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747955340194
+      systemVersion: 6.0.0
+      createdTime: 1781818551200
+      modifiedTime: 1781819568877
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!oJCOB9X2BPsBkWW5.iXhbFt7gCj3FBM2r'
@@ -1153,7 +1192,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.2yHXEcrRbadZDr5M
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1169,7 +1208,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171257349

@@ -456,9 +456,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -473,7 +470,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -493,17 +490,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: Ctnlm397G5vkwWA4
     name: Earth Glide
     type: feat
-    img: icons/environment/wilderness/cave-entrance-mountain-blue.webp
+    img: icons/environment/wilderness/terrain-rocks-brown.webp
     system:
       description:
         value: >-
-          <p>The elemental can burrow through nonmagical, unworked earth and
-          stone. While doing so, the elemental doesn't disturb the material it
-          moves through.</p>
+          <p>The [[lookup @name lowercase]]{monster} can burrow through
+          nonmagical, unworked earth and stone. While doing so, the elemental
+          doesn't disturb the material it moves through.</p>
         chat: ''
       source:
         custom: ''
@@ -517,10 +515,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -535,60 +534,14 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.yrpqazOHqI4BrYW4
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781814039213
+      modifiedTime: 1781814045010
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!sApYLZj9PTZ40wJr.Ctnlm397G5vkwWA4'
-  - _id: 1fGoFeub69Dueemk
-    name: Siege Monster
-    type: feat
-    img: icons/creatures/magical/construct-iron-stomping-yellow.webp
-    system:
-      description:
-        value: <p>The elemental deals double damage to objects and structures.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: siege-monster
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.cSA0EbjlxCbst4gJ
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!sApYLZj9PTZ40wJr.1fGoFeub69Dueemk'
   - _id: A8nxS57cG2yZpu1m
     name: Multiattack
     type: feat
@@ -596,8 +549,8 @@ items:
     system:
       description:
         value: >-
-          <p>The elemental makes two [[/item .2AD5aTLMPDmQFhGZ]]{slam}
-          attacks.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes two [[/item
+          .2AD5aTLMPDmQFhGZ]]{Slam} attacks.</p>
         chat: ''
       source:
         custom: ''
@@ -611,13 +564,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        TuozAnLN5eNHClhX:
           type: utility
           activation:
             type: action
@@ -632,15 +584,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -651,7 +604,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -668,7 +622,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: TuozAnLN5eNHClhX
       enchant: {}
       prerequisites:
         level: null
@@ -682,22 +644,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745273657452
+      systemVersion: 6.0.0
+      createdTime: 1781814090392
+      modifiedTime: 1781814095766
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!sApYLZj9PTZ40wJr.A8nxS57cG2yZpu1m'
   - _id: 2AD5aTLMPDmQFhGZ
     name: Slam
     type: weapon
-    img: icons/skills/melee/unarmed-punch-fist-yellow-red.webp
+    img: icons/magic/earth/strike-fist-stone-gray.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Earth Elemental attacks with its Slam.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -721,7 +685,7 @@ items:
         value: null
         long: null
         units: ft
-        reach: null
+        reach: 10
       uses:
         max: ''
         recovery: []
@@ -759,9 +723,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - rch
-      proficient: 1
+      properties: []
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -770,8 +733,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        17587DWsLJYTcguE:
           type: attack
           activation:
             type: action
@@ -786,10 +748,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -806,7 +769,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -819,24 +783,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 17587DWsLJYTcguE
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: slam
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -846,14 +823,67 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107553747
+      systemVersion: 6.0.0
+      createdTime: 1781814111069
+      modifiedTime: 1781814136626
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!sApYLZj9PTZ40wJr.2AD5aTLMPDmQFhGZ'
+  - _id: k8x76Y7EMOOH2VM0
+    name: Siege Monster
+    type: feat
+    img: icons/creatures/magical/construct-iron-stomping-yellow.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} deals double damage to
+          objects and structures.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: siege-monster
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: null
+    sort: 175000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.sApYLZj9PTZ40wJr.Item.C8gw10xhvdECJgkp
+      duplicateSource: Item.JGpJ3LDL8rfjLwVa
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781814078822
+      modifiedTime: 1781814078822
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!sApYLZj9PTZ40wJr.k8x76Y7EMOOH2VM0'
 effects: []
 folder: IB448xVSBvtqitzs
 sort: 0
@@ -862,7 +892,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171262061
