@@ -911,7 +911,7 @@ async function rollCheckSave(config, event) {
           if (effect) {
             flavor = game.i18n.format("DND5E.ConcentrationCheckFor", {
               effect: effect.name || game.i18n.localize("DND5E.ConcentratingItemless")
-            }
+            });
           }
         } else {
           ui.notifications.warn("DND5E.ConcentratingMissingItem");
