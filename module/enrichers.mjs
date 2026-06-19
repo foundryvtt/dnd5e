@@ -919,7 +919,7 @@ async function rollCheckSave(config, event) {
         const message = {
           data: {
             flavor,
-            speaker: ChatMessage.getSpeaker({ actor, scene: canvas.scene, token: actor.token })
+            speaker: ChatMessage.implementation.getSpeaker({ actor, scene: canvas.scene, token: actor.token })
           }
         };
         await actor.rollConcentration({ ...rollData, target: dc }, {}, message);
@@ -1640,9 +1640,15 @@ export function createRollLabel(config) {
       }
       break;
     case "concentration":
+      label = config.effectName
+        ? `${game.i18n.localize("DND5E.Concentration")}: ${config.effectName}`
+        : game.i18n.localize("DND5E.Concentration");
+      if (ability) label = `${label} (${abbreviation})`;
+      if (showDC) label = _loc("EDITOR.DND5E.Inline.DC", { dc: config.dc, check: label });
+      label = _loc(`EDITOR.DND5E.Inline.Save${longSuffix}`, { save: label });
+      break;
     case "save":
-      if ( config.type === "save" ) label = ability;
-      else label = `${_loc("DND5E.Concentration")} ${ability ? `(${abbreviation})` : ""}`;
+      label = ability;
       if ( showDC ) label = _loc("EDITOR.DND5E.Inline.DC", { dc: config.dc, check: label });
       label = _loc(`EDITOR.DND5E.Inline.Save${longSuffix}`, { save: label });
       break;
