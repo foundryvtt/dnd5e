@@ -1,7 +1,7 @@
 import BasePlacement from "./api/base-placement.mjs";
 
 /**
- * @import { TokenPlacementConfiguration, TokenPlacementData } from "./types.mjs";
+ * @import { TokenPlacementConfiguration, TokenPlacementData } from "./_types.mjs";
  */
 
 /**
