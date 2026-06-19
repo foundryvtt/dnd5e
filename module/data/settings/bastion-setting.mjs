@@ -31,7 +31,7 @@ export default class BastionSetting extends foundry.abstract.DataModel {
 
   /**
    * Cached version of the minimum level required to have a bastion.
-   * @param {number}
+   * @type {number}
    */
   static #threshold;
 

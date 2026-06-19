@@ -81,9 +81,7 @@ export default class OrderActivity extends ActivityMixin(BaseOrderActivityData) 
    */
   _finalizeCosts(usageConfig, updates) {
     const { costs } = usageConfig;
-    if ( costs.days ) updates["system.progress"] = {
-      value: 0, max: costs.days, order: this.order, updated: game.time.worldTime
-    };
+    if ( costs.days ) updates["system.progress"] = { value: 0, max: costs.days, order: this.order };
   }
 
   /* -------------------------------------------- */

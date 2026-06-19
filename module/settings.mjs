@@ -321,7 +321,10 @@ export function registerSystemSettings() {
     scope: "world",
     config: false,
     type: CalendarConfigSetting,
-    onChange: () => dnd5e.ui.calendar?.onUpdateSettings?.()
+    onChange: () => {
+      dnd5e.bastion.initializeUI();
+      dnd5e.ui.calendar?.onUpdateSettings?.();
+    }
   });
 
   game.settings.register("dnd5e", "calendarPreferences", {

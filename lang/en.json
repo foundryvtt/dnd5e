@@ -1122,7 +1122,8 @@
 
 "DND5E.Bastion": {
   "Action": {
-    "BastionTurn": "Advance Bastion Turn"
+    "Advance": "Advance Bastion Turn",
+    "Maintain": "Maintain Bastion"
   },
   "Attack": {
     "Automatic": "Resolve Automatically",
@@ -1149,7 +1150,10 @@
     "Label": "Configure Bastions",
     "Hint": "Various configuration options for the Bastion system as presented in the DMG 2024."
   },
-  "Confirm": "Advance one bastion turn?",
+  "Confirm": {
+    "Advance": "This will advance all bastion facility order progress by {duration}, issue the maintain order to all idle facilities, and repair any disabled facilities, would you like to continue?",
+    "Maintain": "This will issue the maintain order to all idle bastion facilities and repair any disabled facilities, would you like to continue?"
+  },
   "Duration": {
     "Label": "Bastion Turn Duration (days)"
   },

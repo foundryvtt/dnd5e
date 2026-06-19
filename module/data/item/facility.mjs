@@ -12,7 +12,6 @@ const { ArrayField, BooleanField, DocumentUUIDField, NumberField, SchemaField, S
  * @import { ActivitiesTemplateData, ItemDescriptionTemplateData } from "./templates/_types.mjs";
  */
 
-
 /**
  * The data definition for Facility items.
  * @extends {ItemDataModel<ActivitiesTemplate & ItemDescriptionTemplate & FacilityItemSystemData>}
@@ -57,8 +56,7 @@ export default class FacilityData extends ItemDataModel.mixin(ActivitiesTemplate
       progress: new SchemaField({
         value: new NumberField({ required: true, integer: true, min: 0, nullable: false, initial: 0 }),
         max: new NumberField({ required: true, integer: true, positive: true }),
-        order: new StringField({ required: true }),
-        updated: new NumberField()
+        order: new StringField({ required: true })
       }),
       size: new StringField({ initial: "cramped", blank: false, nullable: false, required: true }),
       trade: new SchemaField({

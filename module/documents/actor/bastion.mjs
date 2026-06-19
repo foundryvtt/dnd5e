@@ -1,6 +1,6 @@
-import CalendarData5e from "../../data/calendar/calendar-data.mjs";
 import BastionAttackDialog from "../../applications/actor/bastion-attack-dialog.mjs";
 import BastionAttackMessageData from "../../data/chat-message/bastion-attack-message-data.mjs";
+import { formatTime } from "../../utils.mjs";
 
 /**
  * @import { BastionTurnResult } from "../_types.mjs";
@@ -20,8 +20,7 @@ export default class Bastion {
    * @returns {Promise<void>}
    */
   async advanceAllBastions() {
-    // TODO: Should this advance game.time?
-    const { duration } = game.settings.get("dnd5e", "bastionConfiguration");
+    const duration = dnd5e.settings.calendarConfig.enabled ? 0 : dnd5e.settings.bastionConfiguration.duration;
     const haveBastions = game.actors.filter(a => a.system.isCharacter && a.itemTypes.facility.length);
     for ( const actor of haveBastions ) await this.advanceAllFacilities(actor, { duration });
   }
@@ -32,17 +31,20 @@ export default class Bastion {
    * Advance all the facilities of a given Actor by one bastion turn.
    * @param {Actor5e} actor                          The actor.
    * @param {object} [options]
-   * @param {number|null} [options.duration=7]       The number of days the bastion turn spanned or `null` for auto.
+   * @param {number} [options.duration=7]            The number of days the bastion turn spanned.
    * @param {boolean} [options.performUpdates=true]  Update the actor's facilities.
    * @param {boolean|"auto"} [options.summary=true]  Print a chat message summary of the turn. If set to "auto" then
    *                                                 the message will only be created if an order is completed.
+   * @param {boolean} [options.turn=true]            Trigger events like recovery that are tied to turns, not days.
    * @returns {Promise<{ [message]: ChatMessage5e, updates: object[] }>}
    */
-  async advanceAllFacilities(actor, { duration=7, performUpdates=true, summary=true }={}) {
+  async advanceAllFacilities(actor, { duration=7, performUpdates=true, summary=true, turn=true }={}) {
     const results = { orders: [], items: [], gold: 0 };
     const itemUpdates = [];
     for ( const facility of actor.itemTypes.facility ) {
-      const { order, gold, items, updates } = await this.advanceTurn(facility, { duration, performUpdates: false });
+      const { order, gold, items, updates } = await this.advanceTurn(facility, {
+        duration, turn, performUpdates: false
+      });
       if ( !foundry.utils.isEmpty(updates) ) itemUpdates.push({ _id: facility.id, ...updates });
       if ( !order || (order === "maintain") ) continue;
       if ( gold ) results.gold += gold;
@@ -70,51 +72,42 @@ export default class Bastion {
    * Advance the given facility by one bastion turn.
    * @param {Item5e} facility                        The facility.
    * @param {object} [options]
-   * @param {number|null} [options.duration=7]       The number of days the bastion turn spanned or `null` for auto.
+   * @param {number} [options.duration=7]            The number of days the bastion turn spanned.
    * @param {boolean} [options.performUpdates=true]  Update the facility.
+   * @param {boolean} [options.turn=true]            Trigger events like recovery that are tied to turns, not days.
    * @returns {Promise<BastionTurnResult>}
    */
-  async advanceTurn(facility, { duration=7, performUpdates=true }={}) {
+  async advanceTurn(facility, { duration=7, performUpdates=true, turn=true }={}) {
     const { disabled, progress, type } = facility.system;
 
     // Case 0 - Facility damaged. A shut-down facility can't be used for one bastion turn, after which it is repaired
     // and made operational again at no cost. Any order in progress is paused rather than canceled.
     if ( disabled ) {
+      if ( !turn ) return { updates: {} };
       const updates = { "system.disabled": false };
-      // Bump the timestamp so the shut-down turn isn't later credited as progress under calendar advancement.
-      if ( progress.max ) updates["system.progress.updated"] = game.time.worldTime;
       if ( performUpdates ) await facility.update(updates);
       return { order: "repair", updates };
     }
 
     // Case 1 - No order in progress.
     if ( !progress.max ) {
-      const updates = { "system.progress.order": "" };
+      const updates = progress.order ? { "system.progress.order": "" } : {};
       if ( performUpdates ) await facility.update(updates);
       if ( type.value === "basic" ) return { updates }; // Basic facilities do nothing.
       return { order: "maintain", updates }; // Special facilities are considered to have been issued the maintain order.
-    }
-
-    // Calculate duration if automatic
-    if ( !duration && progress.updated ) {
-      const days = CalendarData5e.dayDifference(
-        game.time.calendar.timeToComponents(progress.updated),
-        game.time.components
-      );
-      if ( days > 0 ) duration = days;
     }
 
     const newProgress = Math.min(progress.value + duration, progress.max);
 
     // Case 2 - Order incomplete. Ongoing progress.
     if ( newProgress < progress.max ) {
-      const updates = { "system.progress": { value: newProgress, updated: game.time.worldTime } };
+      const updates = { "system.progress": { value: newProgress } };
       if ( performUpdates ) await facility.update(updates);
       return { updates };
     }
 
     // Case 3 - Order complete.
-    const updates = { "system.progress": { value: 0, max: null, order: "", updated: null } };
+    const updates = { "system.progress": { value: 0, max: null, order: "" } };
     const { gold, items } = this.#evaluateOrder(facility, progress.order, updates);
     if ( performUpdates ) await facility.update(updates);
     return { gold, items, order: progress.order, updates };
@@ -267,10 +260,13 @@ export default class Bastion {
    */
   async confirmAdvance() {
     if ( !game.user.isGM ) return;
+    const mode = dnd5e.settings.calendarConfig.enabled ? "Maintain" : "Advance";
     const proceed = await foundry.applications.api.DialogV2.confirm({
-      content: _loc("DND5E.Bastion.Confirm"),
+      content: _loc(`DND5E.Bastion.Confirm.${mode}`, {
+        duration: formatTime(dnd5e.settings.bastionConfiguration.duration, "day")
+      }),
       rejectClose: false,
-      window: { icon: "fa-solid fa-chess-rook", title: "DND5E.Bastion.Action.BastionTurn" }
+      window: { icon: "fa-solid fa-chess-rook", title: `DND5E.Bastion.Action.${mode}` }
     });
     if ( proceed ) return this.advanceAllBastions();
   }
@@ -289,11 +285,14 @@ export default class Bastion {
       return;
     }
 
-    if ( !turnButton ) {
+    const mode = dnd5e.settings.calendarConfig.enabled ? "Maintain" : "Advance";
+    if ( turnButton ) {
+      turnButton.querySelector("span").innerText = _loc(`DND5E.Bastion.Action.${mode}`);
+    } else {
       document.querySelector("#controls, #scene-controls")?.insertAdjacentHTML("afterend", `
         <button type="button" id="bastion-turn" data-action="bastionTurn" class="dnd5e2 faded-ui">
-          <i class="fas fa-chess-rook"></i>
-          <span>${_loc("DND5E.Bastion.Action.BastionTurn")}</span>
+          <i class="fas fa-chess-rook" inert></i>
+          <span>${_loc(`DND5E.Bastion.Action.${mode}`)}</span>
         </button>
       `);
       document.getElementById("bastion-turn")?.addEventListener("click", this.confirmAdvance.bind(this));
