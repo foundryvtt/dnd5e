@@ -1,6 +1,6 @@
 /**
  * @import { BastionTurnItem } from "../../documents/_types.mjs";
- * @import { ActivationsData, ActorDeltasData, IndividualDeltaData } from "./fields/_types.mjs";
+ * @import { ActivationsData, ActorDeltasData } from "./fields/_types.mjs";
  */
 
 /**
@@ -67,8 +67,8 @@
 
 /**
  * @typedef DocumentDeltasData
- * @param {IndividualDeltaData} deltas  Data deltas for an document update.
- * @param {string} uuid                 UUID of the document to which the deltas apply.
+ * @property {ActorDeltasData} deltas  Data deltas for a actor update.
+ * @property {string} uuid             UUID of the actor to which the deltas apply.
  */
 
 /* -------------------------------------------- */

@@ -1,6 +1,5 @@
 import ChatMessageDataModel from "../abstract/chat-message-data-model.mjs";
-import ActivationsField from "./fields/activations-field.mjs";
-import { IndividualDeltaField } from "./fields/deltas-field.mjs";
+import { ActorDeltasField } from "./fields/deltas-field.mjs";
 
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
 const { ArrayField, DocumentUUIDField, SchemaField } = foundry.data.fields;
@@ -24,7 +23,7 @@ export default class TimePassedMessageData extends ChatMessageDataModel {
   static defineSchema() {
     return {
       changes: new ArrayField(new SchemaField({
-        deltas: new ArrayField(new IndividualDeltaField()),
+        deltas: new ActorDeltasField(),
         uuid: new DocumentUUIDField()
       }))
     };
@@ -49,14 +48,9 @@ export default class TimePassedMessageData extends ChatMessageDataModel {
     };
 
     for ( const { deltas, uuid } of this.changes ) {
-      const doc = fromUuidSync(uuid, { strict: false });
-      if ( !doc?.testUserPermission(game.user, "OBSERVER") ) continue;
-      for ( const delta of deltas ) {
-        context.deltas.push(IndividualDeltaField.processDelta.call(
-          delta, doc, this.parent.rolls
-            .filter(r => (r.options.delta?.itemUuid === doc.uuid) && (r.options.delta?.keyPath === delta.keyPath))
-        ));
-      }
+      const actor = fromUuidSync(uuid, { strict: false });
+      if ( !actor?.testUserPermission(game.user, "OBSERVER") ) continue;
+      context.deltas.push(...ActorDeltasField.processDeltas.call(deltas, actor, this.parent.rolls));
     }
 
     return context;

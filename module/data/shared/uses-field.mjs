@@ -180,11 +180,11 @@ export default class UsesField extends SchemaField {
   /**
    * Determine uses recovery.
    * @this {ItemDataModel|BaseActivityData}
-   * @param {Map<string, number>} periods          Recovery periods to check, mapped to the number of times occurred.
-   * @param {ActorRollData|ItemRollData} rollData  Roll data to use when evaluating recover formulas.
+   * @param {Map<string, number>} periods            Recovery periods to check, mapped to the number of times occurred.
+   * @param {ActorRollData|ItemRollData} [rollData]  Roll data to use when evaluating recovery formulas.
    * @returns {Promise<{ updates: object, rolls: BasicRoll[] }|false>}
    */
-  static async recoverUses(periods, rollData) {
+  static async recoverUses(periods, rollData={}) {
     if ( foundry.utils.getType(periods) === "Array" ) {
       foundry.utils.logCompatibilityWarning(
         "The periods parameter of `recoverUses` is now a mapping of periods to times triggered.",

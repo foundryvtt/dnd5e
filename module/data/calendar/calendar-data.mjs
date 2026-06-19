@@ -339,7 +339,7 @@ export default class CalendarData5e extends foundry.data.CalendarData {
    */
   static onTimePassage(worldTime, deltaTime, options, userId) {
     if ( !game.user.isActiveGM || (deltaTime <= 0) ) return;
-    const timePassageData = { worldTime, deltaTime, ...options.dnd5e.deltas };
+    const timePassageData = { worldTime, deltaTime, ...(options.dnd5e?.deltas ?? {}) };
     CalendarData5e.handleTimePassage(timePassageData);
   }
 
@@ -355,40 +355,39 @@ export default class CalendarData5e extends foundry.data.CalendarData {
       if ( timePassageData[d] ) periods.set(p, timePassageData[d]);
     }
 
-    const deltas = [];
+    const changes = [];
     const rolls = [];
 
-    if ( !game.settings.get("dnd5e", "calendarConfig").manualRecovery ) {
-      const performItemUpdates = async (items, updates) => {
-        for ( const item of items ) {
-          const result = await item.system.recoverUses?.(periods, item.getRollData()) ?? {};
-          if ( !foundry.utils.isEmpty(result?.updates) ) {
-            deltas.push({ uuid: item.uuid, deltas: IndividualDeltaField.getDeltas(item, result.updates) });
+    if ( !game.settings.get("dnd5e", "calendarConfig").manualRecovery && periods.size ) {
+      const operations = [];
+      for ( const actor of game.actors ) {
+        const deltas = { deleted: [], item: {} };
+        const deleted = [];
+        const updates = [];
+        for ( const item of actor.items ) {
+          const result = await item.system.recoverUses?.(periods) ?? {};
+          if ( result?.rolls ) rolls.push(...result.rolls);
+          if ( result?.destroy ) {
+            deltas.deleted.push(item.toObject());
+            deleted.push(item.id);
+          } else if ( !foundry.utils.isEmpty(result?.updates) ) {
+            deltas.item[item.id] = IndividualDeltaField.getDeltas(item, result.updates);
             updates.push({ _id: item.id, ...result.updates });
-            rolls.push(...result.rolls);
           }
         }
-      };
-
-      const itemUpdates = [];
-      await performItemUpdates(game.items, itemUpdates);
-      if ( itemUpdates.length ) await Item.updateDocuments(itemUpdates);
-
-      for ( const actor of game.actors ) {
-        const actorUpdates = [];
-        await performItemUpdates(actor.items, actorUpdates);
-        if ( actorUpdates.length ) await actor.updateEmbeddedDocuments("Item", actorUpdates);
+        if ( deleted.length ) operations.push({ action: "delete", documentName: "Item", ids: deleted, parent: actor });
+        if ( updates.length ) operations.push({ action: "update", documentName: "Item", updates, parent: actor });
+        if ( deltas.deleted.length || !foundry.utils.isEmpty(deltas.item) ) changes.push({ deltas, uuid: actor.uuid });
       }
+      await foundry.documents.modifyBatch(operations);
     }
 
     const messageConfig = {
-      create: deltas.length > 0,
+      create: changes.length > 0,
       data: {
         content: this.generateTimePassageMessage(timePassageData),
         rolls,
-        system: {
-          changes: deltas
-        },
+        system: { changes },
         title: game.i18n.localize("DND5E.CALENDAR.TimePassage.Title"),
         type: "timePassed"
       }
@@ -404,7 +403,7 @@ export default class CalendarData5e extends foundry.data.CalendarData {
      */
     Hooks.callAll("dnd5e.preCreateTimePassedMessage", messageConfig);
 
-    if ( messageConfig.create ) return ChatMessage.implementation.create(messageConfig.data);
+    if ( messageConfig.create ) ChatMessage.implementation.create(messageConfig.data);
   }
 
   /* -------------------------------------------- */

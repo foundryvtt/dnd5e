@@ -37,7 +37,7 @@ export class CalendarConfigSetting extends foundry.abstract.DataModel {
    * @type {boolean}
    */
   get manualRecovery() {
-    return this.dailyRecovery === "manual" || (!this.dailyRecovery && !this.enabled);
+    return (this.dailyRecovery === "manual") || (!this.dailyRecovery && !this.enabled);
   }
 }
 

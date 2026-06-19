@@ -330,7 +330,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
   /**
    * Perform any item & activity uses recovery.
    * @param {Map<string, number>} periods  Recovery periods to check, mapped to the number of times occurred.
-   * @param {ItemRollData} rollData        Roll data to use when evaluating recovery formulas.
+   * @param {ItemRollData} [rollData]      Roll data to use when evaluating recovery formulas.
    * @returns {Promise<{ updates: object, rolls: BasicRoll[], destroy: boolean }>}
    */
   async recoverUses(periods, rollData) {
@@ -357,6 +357,9 @@ export default class ActivitiesTemplate extends SystemDataModel {
         rolls.push(...result.rolls);
       }
     };
+
+    if ( !rollData && (this.activities.some(a => a.uses?.recovery.some(u => u.type === "formula"))
+      || this.uses.recovery.some(u => u.type === "formula")) ) rollData = this.parent.getRollData();
 
     const result = await UsesField.recoverUses.call(this, periods, rollData);
     if ( result ) {
