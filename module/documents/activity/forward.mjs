@@ -32,6 +32,25 @@ export default class ForwardActivity extends ActivityMixin(BaseForwardActivityDa
 
   /** @override */
   async use(usage={}, dialog={}, message={}) {
+    let targetActivity = null;
+    const actor = this.actor;
+
+    const targetItemId = this.targetItem;
+    const targetActivityId = this.activity;
+
+    if (targetItemId) {
+      const targetItem = actor.items.get(targetItemId);
+      if (!targetItem) {
+        ui.notifications.error(game.i18n.format("DND5E.FORWARD.Warning.ItemNotFound", { id: targetItemId }));
+        return;
+      }
+      targetActivity = targetItem.system.activities?.get(targetActivityId);
+      console.log(targetActivity)
+    } else {
+      targetActivity = this.item.system.activities?.get(targetActivityId);
+    }
+    if ( !targetActivity ) ui.notifications.error("DND5E.FORWARD.Warning.NoActivity");
+
     const usageConfig = foundry.utils.mergeObject({
       cause: {
         activity: this.relativeUUID
@@ -39,11 +58,9 @@ export default class ForwardActivity extends ActivityMixin(BaseForwardActivityDa
       consume: {
         resources: false,
         spellSlot: false
-      }
+      },
     }, usage);
 
-    const activity = this.item.system.activities.get(this.activity.id);
-    if ( !activity ) ui.notifications.error("DND5E.FORWARD.Warning.NoActivity");
-    return activity?.use(usageConfig, dialog, message);
+    return targetActivity.use(usageConfig, dialog, message);
   }
 }

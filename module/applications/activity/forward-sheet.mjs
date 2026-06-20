@@ -43,13 +43,56 @@ export default class ForwardSheet extends ActivitySheet {
   /** @inheritDoc */
   async _prepareEffectContext(context, options) {
     context = await super._prepareEffectContext(context, options);
+
+    const actor = this.item?.actor;
+    if (!actor) {
+      context.itemOptions = [];
+      context.activityOptions = [];
+      return context;
+    }
+
+    const currentItemUuid = this.item.uuid;
+    const validItems = actor.items.contents.filter(i => i.system.activities?.size > 0 );
+    context.itemOptions = [
+      { value: "", label: game.i18n.localize("DND5E.FORWARD.Target.Item.Current") },
+      ...validItems
+        .filter(i => i.uuid !== currentItemUuid)
+        .map(i => ({ value: i.id, label: i.name }))
+    ];
+
+    const selectedItemId = this.activity._source.targetItem || "";
+    const targetItem = selectedItemId ? actor.items.get(selectedItemId) : this.item;
+    const activities = targetItem?.system.activities?.contents ?? [];
+    const availableActivities = activities.filter(a => (a.type !== "forward") && (CONFIG.DND5E.activityTypes[a.type] !== false));
+
     context.activityOptions = [
       { value: "", label: "" },
-      ...this.item.system.activities.contents
-        .filter(a => (a.type !== "forward") && (CONFIG.DND5E.activityTypes[a.type] !== false))
-        .map(activity => ({ value: activity.id, label: activity.name }))
+      ...availableActivities.map(activity => ({ value: activity.id, label: activity.name }))
     ];
+
+    const validActivity = availableActivities.some(a => a.id === this.activity._source.activity);
+    if (!this.activity._source.activity || !validActivity) {
+      const defaultActivity = availableActivities.length > 0 ? availableActivities[0].id : null;
+      if (defaultActivity && this.activity._source.activity !== defaultActivity) {
+        this.activity.updateSource({ activity: defaultActivity });
+      } else if (!availableActivities.length && this.activity._source.activity !== null) {
+        this.activity.updateSource({ activity: null });
+      }
+    }
+    
     return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onChangeForm(formConfig, event) {
+    if (event.target.name === "targetItem") {
+      this.activity.update({ targetItem: event.target.value });
+      this.render({ force: true });
+      return;
+    }
+    super._onChangeForm(formConfig, event);
   }
 
   /* -------------------------------------------- */

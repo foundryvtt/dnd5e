@@ -1,6 +1,6 @@
 import BaseActivityData from "./base-activity.mjs";
 
-const { DocumentIdField, SchemaField } = foundry.data.fields;
+const { DocumentIdField, StringField } = foundry.data.fields;
 
 /**
  * @import { ForwardActivityData } from "./_types.mjs";
@@ -21,8 +21,17 @@ export default class BaseForwardActivityData extends BaseActivityData {
     delete schema.target;
     return {
       ...schema,
-      activity: new SchemaField({
-        id: new DocumentIdField()
+      targetItem: new DocumentIdField({ 
+        required: false, 
+        nullable: true, 
+        initial: null, 
+        label: "DND5E.ACTIVITY.FIELDS.Forward.Item.Label" 
+      }),
+      activity: new StringField({ 
+        required: true, 
+        nullable: true, 
+        initial: null, 
+        label: "DND5E.ACTIVITY.FIELDS.Forward.Activity.Label" 
       })
     };
   }

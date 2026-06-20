@@ -2991,14 +2991,26 @@
 
 "DND5E.FORWARD": {
   "FIELDS": {
-    "activity": {
-      "label": "Triggered Activity"
+    "Activity": {
+      "label": "Target Activity"
+    },
+    "Item": {
+      "label": "Target Item"
+    },
+    "target": {
+      "label": "Forward Target"
     }
   },
-  "Hint": "Trigger another activity on this item with different consumption & scaling details.",
+  "Target":{
+    "Item": {
+      "Current": "Current Item"
+    }
+  },
+  "Hint": "Trigger another activity from this item or another item you possess, with different consumption and scaling details.",
   "Title": "Forward",
   "Warning": {
-    "NoActivity": "Linked activity must be configured before Forward activity can be used."
+    "NoActivity": "Linked activity must be configured before Forward activity can be used.",
+    "ItemNotFound": "Target item with ID {id} not found on this actor."
   }
 },
 

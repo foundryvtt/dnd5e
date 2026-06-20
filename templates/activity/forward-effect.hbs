@@ -1,6 +1,18 @@
 <section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
     <fieldset>
-        <legend>{{ localize "DND5E.FORWARD.FIELDS.activity.label" }}</legend>
-        {{ formInput fields.activity.fields.id value=source.activity.id options=activityOptions }}
+        <legend>{{ localize "DND5E.FORWARD.FIELDS.target.label" }}</legend>
+        <div class="form-group">
+            <label>{{ localize "DND5E.FORWARD.FIELDS.Item.label" }}</label>
+            <div class="form-fields">
+                {{ formInput fields.targetItem value=source.targetItem options=itemOptions }}
+            </div>
+        </div>
+        <div class="form-group">
+            <label>{{ localize "DND5E.FORWARD.FIELDS.Activity.label" }}</label>
+            <div class="form-fields">
+                {{ formInput fields.activity value=source.activity options=activityOptions }}
+            </div>
+        </div>
     </fieldset>
 </section>
+
