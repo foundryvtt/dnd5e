@@ -1487,9 +1487,10 @@ items:
       description:
         value: >-
           <p>The [[lookup @name lowercase]]{monster} emits magical, divine
-          energy. Each creature of its choice in a [[lookup @labels.d must make
-          a [[/save]] saving throw, taking [[/damage average]] damage on a
-          failed save, or half as much damage on a successful one.</p>
+          energy. Each creature of its choice in a [[lookup
+          @labels.description.template activity=QE8HFlW0jsWaWwdx]] must make a
+          [[/save]] saving throw, taking [[/damage average]] damage on a failed
+          save, or half as much damage on a successful one.</p>
         chat: >-
           <p>The solar emits magical, divine energy. Each creature of its choice
           in a [[lookup @labels.description.template activity=QE8HFlW0jsWaWwdx]]
@@ -1621,7 +1622,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781791957613
-      modifiedTime: 1781792289939
+      modifiedTime: 1781916138956
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!lOYt73eaJojBDxAV.hvLibxV3shPORnBB'

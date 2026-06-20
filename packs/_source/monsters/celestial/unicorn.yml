@@ -1568,7 +1568,9 @@ items:
     img: icons/magic/life/heart-pink.webp
     system:
       description:
-        value: <p>The unicorn magically regains [[/healing average]].</p>
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} magically regains
+          [[/healing average]].</p>
         chat: ''
       source:
         custom: ''
@@ -1679,7 +1681,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781744261279
-      modifiedTime: 1781744310092
+      modifiedTime: 1781916192400
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!G9PENY6nw0xRxCJW.Plfy8GZ08uqupxe6'
