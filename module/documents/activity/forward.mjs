@@ -45,7 +45,6 @@ export default class ForwardActivity extends ActivityMixin(BaseForwardActivityDa
         return;
       }
       targetActivity = targetItem.system.activities?.get(targetActivityId);
-      console.log(targetActivity)
     } else {
       targetActivity = this.item.system.activities?.get(targetActivityId);
     }

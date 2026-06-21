@@ -2992,10 +2992,12 @@
 "DND5E.FORWARD": {
   "FIELDS": {
     "Activity": {
-      "label": "Target Activity"
+      "label": "Target Activity",
+      "Placeholder": "Activity ID"
     },
     "Item": {
-      "label": "Target Item"
+      "label": "Target Item",
+      "Placeholder": "Item ID, UUID, or Identifier (empty = current item)"
     },
     "target": {
       "label": "Forward Target"

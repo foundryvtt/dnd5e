@@ -21,13 +21,13 @@ export default class BaseForwardActivityData extends BaseActivityData {
     delete schema.target;
     return {
       ...schema,
-      targetItem: new DocumentIdField({ 
+      targetItem: new StringField({ 
         required: false, 
         nullable: true, 
         initial: null, 
         label: "DND5E.ACTIVITY.FIELDS.Forward.Item.Label" 
       }),
-      activity: new StringField({ 
+      activity: new DocumentIdField({ 
         required: true, 
         nullable: true, 
         initial: null, 
@@ -42,7 +42,10 @@ export default class BaseForwardActivityData extends BaseActivityData {
 
   /** @inheritDoc */
   prepareFinalData(rollData) {
-    const activity = this.item.system.activities.get(this.activity.id);
+    const actor = this.actor;
+    
+    const targetItem = actor?.items.get(this.targetItem) ?? this.item;
+    const activity = targetItem.system.activities.get(this.activity.id);
     if ( activity && activity.activation.override ) this.activation = activity.toObject().activation;
 
     super.prepareFinalData(rollData);
