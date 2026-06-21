@@ -92,7 +92,6 @@ export default class ForwardSheet extends ActivitySheet {
       if (!currentActivityId || !isValid) {
         const defaultActivityId = activities.length > 0 ? activities[0].id : null;
         if (currentActivityId !== defaultActivityId) {
-          console.log(defaultActivityId)
           this.activity.updateSource({ activity: defaultActivityId });
         }
       }
@@ -112,7 +111,6 @@ export default class ForwardSheet extends ActivitySheet {
       }
 
       const targetItem = actor?.items?.get(currentTarget) ?? this.item;
-      console.log(targetItem)
       const activities = targetItem?.system.activities?.contents ?? [];
       availableActivities = targetItem.system.activities?.contents.filter(
         a => a.type !== "forward" && CONFIG.DND5E.activityTypes[a.type] !== false
