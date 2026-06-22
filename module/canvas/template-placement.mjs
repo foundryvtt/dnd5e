@@ -36,7 +36,10 @@ export default class TemplatePlacement extends BasePlacement {
           type: "move"
         },
         shapes: this.config.shapes.map(s => this.#createShapeData(s)),
-        "flags.core.MeasuredTemplate": true
+        flags: {
+          core: { MeasuredTemplate: true },
+          dnd5e: { dimensions: this.#getDimensionsData() }
+        }
       }, {
         // TODO: `attachToToken: true` if emanation
         create: false,
@@ -127,6 +130,23 @@ export default class TemplatePlacement extends BasePlacement {
     return {
       bottom: origin.elevation,
       top: origin.elevation + ((origin.depth ?? 1) * canvas.grid.distance)
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get dimensions data for the template.
+   * @returns {object}
+   */
+  #getDimensionsData() {
+    const shape = this.config.shapes?.[0] ?? {};
+    return {
+      type: this.config.targetType,
+      size: shape.size,
+      width: shape.width,
+      height: shape.height,
+      units: canvas.scene.grid.units
     };
   }
 
