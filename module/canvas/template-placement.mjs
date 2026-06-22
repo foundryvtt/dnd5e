@@ -40,7 +40,10 @@ export default class TemplatePlacement extends BasePlacement {
       }, {
         // TODO: `attachToToken: true` if emanation
         create: false,
-        onChange: this.config.targetOnPlacement ? ({ document }) => TemplatePlacement.#targetTokens([document]) : undefined,
+        onChange: ({ preview, document }) => {
+          TemplatePlacement.#displayTemplateElevation(preview);
+          if ( this.config.targetOnPlacement ) TemplatePlacement.#targetTokens([document]);
+        },
         preConfirm: ({ document, index }) => {
           const obj = document.toObject();
           results.elevation = obj.elevation;
@@ -88,7 +91,7 @@ export default class TemplatePlacement extends BasePlacement {
     const diff = document.updateSource({ elevation });
     if ( foundry.utils.isEmpty(diff) ) return;
     document.updateShapeConstraints();
-    preview.renderFlags.set({ refreshShapes: true });
+    preview.renderFlags.set({ refreshShapes: true, refreshMeasurements: true });
     if ( onChange ) onChange({ preview, document, regionIndex, regionCount, shape, shapeIndex, shapeCount });
   }
 
@@ -278,6 +281,25 @@ export default class TemplatePlacement extends BasePlacement {
       }
     }
     canvas.tokens.setTargets(targetIds);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Display the template elevation alongside the measured distance.
+   * @param {Region} preview  Preview region object.
+   */
+  static #displayTemplateElevation(preview) {
+    if ( preview._dnd5eFormatMeasuredDistance ) return;
+    preview._dnd5eFormatMeasuredDistance = preview._formatMeasuredDistance.bind(preview);
+    preview._formatMeasuredDistance = distance => {
+      const text = preview._dnd5eFormatMeasuredDistance(distance);
+      const elevation = preview.document.elevation.bottom;
+      if ( !Number.isFinite(elevation) ) return text;
+      const formattedElevation = elevation.toNearest(0.01).toLocaleString(game.i18n.lang);
+      const units = canvas.grid.units;
+      return `${text} (${formattedElevation}${units ? ` ${units}` : ""})`;
+    };
   }
 
   /* -------------------------------------------- */
