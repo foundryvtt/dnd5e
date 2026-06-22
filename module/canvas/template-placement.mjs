@@ -20,34 +20,74 @@ export default class TemplatePlacement extends BasePlacement {
   /** @override */
   async _place() {
     const results = [];
-    const priorTargets = this.config.targetOnPlacement ? new Set(game.user.targets.map(t => t.id)) : null;
-    const region = await canvas.regions.placeRegion({
-      name: RegionDocument.implementation.defaultName({ parent: canvas.scene }),
-      color: this.config.color,
-      displayMeasurements: true,
-      highlightMode: "coverage",
-      levels: [canvas.level.id],
-      restriction: {
-        enabled: true,
-        type: "move"
-      },
-      shapes: this.config.shapes.map(s => this.#createShapeData(s)),
-      "flags.core.MeasuredTemplate": true
-    }, {
-      // TODO: `attachToToken: true` if emanation
-      create: false,
-      onChange: this.config.targetOnPlacement ? ({ document }) => TemplatePlacement.#targetTokens([document]) : undefined,
-      preConfirm: ({ document, index }) => {
-        const obj = document.toObject();
-        results.push({ ...obj.shapes.at(-1) });
-        // TODO: Set token ID if emanation attached to token
+    const onKeyDown = this.#onKeyDown.bind(this);
+    const priorTargets = this.config.targetOnPlacement ? new Set(Array.from(game.user.targets, t => t.id)) : null;
+    window.addEventListener("keydown", onKeyDown, { capture: true });
+    try {
+      const region = await canvas.regions.placeRegion({
+        name: RegionDocument.implementation.defaultName({ parent: canvas.scene }),
+        color: this.config.color,
+        displayMeasurements: true,
+        highlightMode: "coverage",
+        levels: [canvas.level.id],
+        restriction: {
+          enabled: true,
+          type: "move"
+        },
+        shapes: this.config.shapes.map(s => this.#createShapeData(s)),
+        "flags.core.MeasuredTemplate": true
+      }, {
+        // TODO: `attachToToken: true` if emanation
+        create: false,
+        onChange: this.config.targetOnPlacement ? ({ document }) => TemplatePlacement.#targetTokens([document]) : undefined,
+        preConfirm: ({ document, index }) => {
+          const obj = document.toObject();
+          results.elevation = obj.elevation;
+          results.push({ ...obj.shapes.at(-1) });
+          // TODO: Set token ID if emanation attached to token
+        }
+      });
+      if ( !region && priorTargets ) {
+        canvas.tokens.setTargets(priorTargets);
+        return [];
       }
-    });
-    if ( !region && priorTargets ) {
-      canvas.tokens.setTargets(priorTargets);
-      return [];
+      return results;
+    } finally {
+      window.removeEventListener("keydown", onKeyDown, { capture: true });
     }
-    return results;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle template placement keyboard controls.
+   * @param {KeyboardEvent} event  Triggering keydown event.
+   */
+  #onKeyDown(event) {
+    if ( game.keyboard.hasFocus ) return;
+    const context = game.keyboard.constructor.getKeyboardEventContext(event);
+    const action = game.keyboard.constructor._getMatchingActions(context)
+      .find(a => ["core.ascend", "core.descend"].includes(a.action));
+    if ( !action ) return;
+    const placement = canvas.regions._placementContext;
+    if ( !placement ) return;
+
+    const { preview, regionIndex, regionCount, shapes, shape, onChange } = placement;
+    const document = preview.document;
+    const shapeIndex = shape._index;
+    const shapeCount = shapes.length;
+    const delta = (action.action === "core.ascend" ? 1 : -1) * (event.shiftKey ? 1 : canvas.grid.distance);
+    const elevation = {
+      bottom: Number.isFinite(document.elevation.bottom) ? document.elevation.bottom + delta : null,
+      top: Number.isFinite(document.elevation.top) ? document.elevation.top + delta : null
+    };
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    const diff = document.updateSource({ elevation });
+    if ( foundry.utils.isEmpty(diff) ) return;
+    document.updateShapeConstraints();
+    preview.renderFlags.set({ refreshShapes: true });
+    if ( onChange ) onChange({ preview, document, regionIndex, regionCount, shape, shapeIndex, shapeCount });
   }
 
   /* -------------------------------------------- */
@@ -128,6 +168,7 @@ export default class TemplatePlacement extends BasePlacement {
       // TODO: Should the activity name be included?
       name: `${activity.item.name} [${game.user.name}]`,
       color: game.user.color,
+      elevation: shapes.elevation,
       shapes: shapes.map(({ index, ...data }) => data),
       // TODO: Set elevation based on shape's height
       levels: [canvas.level.id],
