@@ -101,6 +101,19 @@ export default class TemplatePlacement extends BasePlacement {
   #getInitialElevation() {
     const origin = this.config.origin;
     if ( !origin ) return foundry.utils.deepClone(canvas.level.elevation);
+    const size = this.config.shapes?.[0]?.size;
+    if ( this.config.targetType === "cube" && Number.isFinite(size) ) {
+      return {
+        bottom: origin.elevation,
+        top: origin.elevation + size
+      };
+    }
+    if ( this.config.targetType === "sphere" && Number.isFinite(size) ) {
+      return {
+        bottom: origin.elevation - size,
+        top: origin.elevation + size
+      };
+    }
     return {
       bottom: origin.elevation,
       top: origin.elevation + ((origin.depth ?? 1) * canvas.grid.distance)
@@ -161,6 +174,7 @@ export default class TemplatePlacement extends BasePlacement {
     const config = foundry.utils.mergeObject({
       color: game.user.color,
       origin: activity.getUsageToken?.(),
+      targetType: target.type,
       targetOnPlacement: target.targetOnPlacement,
       shapes: Array.fromRange(target.count || 1).map(() => foundry.utils.deepClone(templateData))
     }, placementConfig);
@@ -206,6 +220,7 @@ export default class TemplatePlacement extends BasePlacement {
             size: templateData.size,
             width: templateData.width,
             height: templateData.height,
+            centerElevation: target.type === "sphere" ? ((shapes.elevation.bottom + shapes.elevation.top) / 2) : undefined,
             units: canvas.scene.grid.units
           },
           targetOnPlacement: target.targetOnPlacement,
@@ -287,11 +302,12 @@ export default class TemplatePlacement extends BasePlacement {
     const point = {
       x: Math.clamp(shape.x, token.x, token.x + tokenSize.width),
       y: Math.clamp(shape.y, token.y, token.y + tokenSize.height),
-      elevation: Math.clamp(region.elevation.bottom, token.elevation, token.elevation + (token.depth * canvas.grid.distance))
+      elevation: Math.clamp(dimensions.centerElevation ?? region.elevation.bottom, token.elevation,
+        token.elevation + (token.depth * canvas.grid.distance))
     };
     const dx = (point.x - shape.x) / gridMultiplier;
     const dy = (point.y - shape.y) / gridMultiplier;
-    const dz = point.elevation - region.elevation.bottom;
+    const dz = point.elevation - (dimensions.centerElevation ?? region.elevation.bottom);
     return Math.hypot(dx, dy, dz) <= dimensions.size;
   }
 

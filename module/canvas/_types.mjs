@@ -11,6 +11,7 @@
  * @property {number} color                                  Color to use when creating the template.
  * @property {TokenDocument} [origin]                        Token that is the origin point of the placement.
  * @property {TemplatePlacementShapeConfiguration[]} shapes  Configuration data for individual placements.
+ * @property {string} [targetType]                           Activity target type that produced this template.
  * @property {boolean} [targetOnPlacement]                   Target tokens inside placed template regions.
  */
 
