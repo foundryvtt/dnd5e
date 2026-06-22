@@ -102,13 +102,14 @@
 /**
  * @typedef TargetData
  * @property {object} template
- * @property {string} template.count        Number of templates created.
- * @property {boolean} template.contiguous  Must all created areas be connected to one another?
- * @property {string} template.type         Type of area of effect caused by this activity.
- * @property {string} template.size         Size of the activity's area of effect on its primary axis.
- * @property {string} template.width        Width of line area of effect.
- * @property {string} template.height       Height of cylinder area of effect.
- * @property {string} template.units        Units used to measure the area of effect sizes.
+ * @property {string} template.count              Number of templates created.
+ * @property {boolean} template.contiguous        Must all created areas be connected to one another?
+ * @property {boolean} template.targetOnPlacement Automatically target tokens in the area when placed.
+ * @property {string} template.type               Type of area of effect caused by this activity.
+ * @property {string} template.size               Size of the activity's area of effect on its primary axis.
+ * @property {string} template.width              Width of line area of effect.
+ * @property {string} template.height             Height of cylinder area of effect.
+ * @property {string} template.units              Units used to measure the area of effect sizes.
  * @property {object} affects
  * @property {string} affects.count         Number of individual targets that can be affected.
  * @property {string} affects.type          Type of targets that can be affected (e.g. creatures, objects, spaces).

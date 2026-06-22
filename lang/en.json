@@ -4644,6 +4644,10 @@
           "label": "Stationary",
           "hint": "Emanation cannot be moved once placed."
         },
+        "targetOnPlacement": {
+          "label": "Auto Target",
+          "hint": "Automatically target tokens in the area when the region template is placed."
+        },
         "type": {
           "label": "Area Type",
           "hint": "Type of area of effect targeted."

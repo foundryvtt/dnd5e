@@ -136,6 +136,7 @@ export default class TemplatePlacement extends BasePlacement {
             height: templateData.height,
             units: canvas.scene.grid.units
           },
+          targetOnPlacement: target.targetOnPlacement,
           item: activity.item.uuid,
           origin: activity.uuid,
           spellLevel: rollData.item.level
@@ -153,7 +154,8 @@ export default class TemplatePlacement extends BasePlacement {
      */
     if ( Hooks.call("dnd5e.createMeasuredTemplate", activity, regionData) === false ) return null;
 
-    const created = canvas.scene.createEmbeddedDocuments("Region", regionData);
+    const created = await canvas.scene.createEmbeddedDocuments("Region", regionData);
+    if ( target.targetOnPlacement ) TemplatePlacement.#targetTokens(created);
 
     /**
      * A hook event that fires after a template are created for an Activity.
@@ -165,5 +167,21 @@ export default class TemplatePlacement extends BasePlacement {
     Hooks.callAll("dnd5e.postCreateMeasuredTemplate", activity, created);
 
     return created;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Target tokens inside created template regions.
+   * @param {RegionDocument[]} regions  Created template regions.
+   */
+  static #targetTokens(regions) {
+    const targetIds = new Set();
+    for ( const region of regions ) {
+      for ( const token of canvas.scene.tokens ) {
+        if ( token.testInsideRegion(region) ) targetIds.add(token.id);
+      }
+    }
+    canvas.tokens.setTargets(targetIds);
   }
 }

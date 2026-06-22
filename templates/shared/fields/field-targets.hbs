@@ -34,6 +34,9 @@
     {{ formField fields.affects.fields.choice value=data.affects.choice localize=true input=inputs.createCheckboxInput
                  label="DND5E.TARGET.FIELDS.target.affects.choice.label"
                  hint="DND5E.TARGET.FIELDS.target.affects.choice.hint" rootId=partId }}
+    {{ formField fields.template.fields.targetOnPlacement value=data.template.targetOnPlacement localize=true
+                 input=inputs.createCheckboxInput label="DND5E.TARGET.FIELDS.target.template.targetOnPlacement.label"
+                 hint="DND5E.TARGET.FIELDS.target.template.targetOnPlacement.hint" rootId=partId }}
     {{/if}}
 </fieldset>
 
