@@ -49,13 +49,6 @@ export default class BaseEnchantActivityData extends BaseActivityData {
 
   /* -------------------------------------------- */
 
-  /** @override */
-  get applicableEffects() {
-    return null;
-  }
-
-  /* -------------------------------------------- */
-
   /**
    * Enchantments that have been applied by this activity.
    * @type {ActiveEffect5e[]}
@@ -71,9 +64,7 @@ export default class BaseEnchantActivityData extends BaseActivityData {
    * @type {EnchantEffectApplicationData[]}
    */
   get availableEnchantments() {
-    const level = this.relevantLevel;
-    return this.effects
-      .filter(e => e.effect && ((e.level.min ?? -Infinity) <= level) && (level <= (e.level.max ?? Infinity)));
+    return this.applicableEffects;
   }
 
   /* -------------------------------------------- */

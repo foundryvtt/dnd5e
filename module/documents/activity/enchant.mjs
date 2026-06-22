@@ -66,7 +66,7 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
   _prepareUsageConfig(config) {
     config = super._prepareUsageConfig(config);
     const existingProfile = this.existingEnchantment?.flags.dnd5e?.enchantmentProfile;
-    config.enchantmentProfile ??= this.item.effects.has(existingProfile) ? existingProfile
+    config.enchantmentProfile ??= this.effects.find(p => p._id === existingProfile) ? existingProfile
       : this.availableEnchantments[0]?._id;
     return config;
   }
@@ -83,6 +83,7 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
   /** @inheritDoc */
   _finalizeMessageConfig(usageConfig, messageConfig, results) {
     super._finalizeMessageConfig(usageConfig, messageConfig, results);
+    delete messageConfig.data.system?.effects;
 
     // Store selected enchantment profile in message flag
     if ( usageConfig.enchantmentProfile ) foundry.utils.setProperty(
@@ -139,7 +140,7 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
 
   /**
    * Apply an enchantment to the provided item.
-   * @param {string} profile                  ID of the enchantment profile to apply.
+   * @param {string} profileId                ID of the enchantment profile to apply.
    * @param {Item5e} item                     Item to which to apply the enchantment.
    * @param {object} [options={}]
    * @param {ChatMessage5e} [options.chatMessage]     Chat message used to make the enchantment, if applicable.
@@ -147,8 +148,9 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
    * @param {boolean} [options.strict]        Display UI errors and prevent creation if enchantment isn't allowed.
    * @returns {Promise<ActiveEffect5e|null>}  Created enchantment effect if the process was successful.
    */
-  async applyEnchantment(profile, item, { chatMessage, concentration, strict=true }={}) {
-    const effect = this.item.effects.get(profile);
+  async applyEnchantment(profileId, item, { chatMessage, concentration, strict=true }={}) {
+    const profile = this.effects.find(p => p._id === profileId);
+    const effect = profile?.uuid ? await fromUuid(profile.uuid) : this.item.effects.get(profileId);
     if ( !effect ) return null;
 
     // Validate against the enchantment's restraints on the origin item
@@ -170,7 +172,7 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
       }
     }
 
-    const flags = { enchantmentProfile: profile };
+    const flags = { enchantmentProfile: profileId };
     if ( concentration ) flags.dependentOn = concentration.uuid;
     const enchantmentData = effect.clone({ origin: this.uuid, "flags.dnd5e": flags }).toObject();
 

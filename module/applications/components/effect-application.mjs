@@ -70,7 +70,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
   /* -------------------------------------------- */
 
   /** @override */
-  async connectedCallback() {
+  connectedCallback() {
     // Fetch the associated chat message
     const messageId = this.closest("[data-message-id]")?.dataset.messageId;
     this.chatMessage = game.messages.get(messageId);
@@ -78,9 +78,10 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
 
     // Build the frame HTML only once
     if ( !this.effectsList || !this.targetList ) {
-      if ( !this.effects.length ) this.effects = (await Promise.all(
+      let effectPromise;
+      if ( !this.effects.length ) effectPromise = Promise.all(
         Array.from(this.querySelectorAll("option")).map(o => fromUuid(o.value))
-      )).filter(_ => _);
+      ).then(p => this.effects = p.filter(_ => _));
 
       const div = document.createElement("div");
       div.classList.add("card-tray", "effects-tray", "collapsible");
@@ -100,7 +101,8 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       `;
       this.replaceChildren(div);
       this.effectsList = div.querySelector(".effects");
-      this.buildEffectsList();
+      if ( effectPromise ) effectPromise.then(() => this.buildEffectsList());
+      else this.buildEffectsList();
       div.querySelector(".wrapper").prepend(...this.buildTargetContainer());
       this.targetList.addEventListener("change", this._onCheckTarget.bind(this));
       div.addEventListener("click", this._handleClickHeader.bind(this));
@@ -188,7 +190,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
    */
   async _applyEffectToActor(effect, actor) {
     const concentration = this.chatMessage.getAssociatedActor()?.effects.get(this.chatMessage.system.concentration);
-    const item = this.chatMessage.getAssociatedItem() ?? {};
+    const item = this.chatMessage.getAssociatedItem();
     const origin = concentration ?? (effect.inCompendium && item ? item : effect);
     if ( !game.user.isGM && !actor.isOwner ) {
       throw new Error(_loc("DND5E.EFFECT.Application.Warning.Ownership"));
@@ -215,9 +217,9 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
     const existingEffect = actor.effects.find(e => e.origin === origin.uuid);
     if ( existingEffect ) {
       return existingEffect.update(foundry.utils.mergeObject({
-        ...effect.constructor.getEffectStart(),
         ...durationOverride,
-        disabled: false
+        disabled: false,
+        start: effect.constructor.getEffectStart()
       }, effectFlags));
     }
 

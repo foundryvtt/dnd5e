@@ -80,6 +80,14 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 
   /* -------------------------------------------- */
 
+  /**
+   * Type of active effects that can be added to applied effects.
+   * @type {string}
+   */
+  static SUPPORTED_EFFECT_TYPE = "base";
+
+  /* -------------------------------------------- */
+
   /** @override */
   tabGroups = {
     sheet: "identity",
@@ -312,14 +320,13 @@ export default class ActivitySheet extends PseudoDocumentSheet {
     if ( context.activity.effects ) {
       const appliedEffects = new Set(context.activity.effects?.map(e => e._id) ?? []);
       context.allEffects = this.item.effects
-        .filter(e => e.type !== "enchantment")
+        .filter(e => e.type === this.constructor.SUPPORTED_EFFECT_TYPE)
         .map(effect => ({
           value: effect.id, label: effect.name, selected: appliedEffects.has(effect.id)
         }));
-      context.appliedEffects = await context.activity.effects.reduce(async (arr, data) => {
+      context.appliedEffects = (await Promise.all(context.activity.effects.map(async data => {
         const effectDocument = await data.getEffect();
-        if ( !effectDocument ) return arr;
-        const effect = {
+        return effectDocument ? this._prepareAppliedEffectContext(context, {
           data,
           collapsed: this.expandedSections.get(`effects.${data._id}`) ? "" : "collapsed",
           effect: effectDocument,
@@ -328,10 +335,8 @@ export default class ActivitySheet extends PseudoDocumentSheet {
           source: context.source.effects[data._index] ?? data,
           contentLink: effectDocument.toAnchor().outerHTML,
           additionalSettings: "systems/dnd5e/templates/activity/parts/activity-effect-settings.hbs"
-        };
-        (await arr).push(this._prepareAppliedEffectContext(context, effect));
-        return arr;
-      }, []);
+        }) : null;
+      }))).filter(_ => _);
     }
 
     context.denominationOptions = [
@@ -721,7 +726,9 @@ export default class ActivitySheet extends PseudoDocumentSheet {
         submitData.effects.push({ _id });
       }
       for ( const uuid of submitData.appliedRemoteEffects ?? [] ) {
-        if ( submitData.effects.find(e => e.uuid === uuid) ) continue;
+        const effect = fromUuidSync(uuid, { strict: false });
+        if ( (effect?.type !== this.constructor.SUPPORTED_EFFECT_TYPE)
+          || submitData.effects.find(e => e.uuid === uuid) ) continue;
         submitData.effects.push({ _id: `${foundry.utils.randomID(10)}REMOTE`, uuid });
       }
       delete submitData.appliedLocalEffects;
