@@ -1106,13 +1106,11 @@ export default function ActivityMixin(Base) {
 
     /**
      * Handle placing a measured template in the scene.
-     * @returns {MeasuredTemplateDocument[]}
+     * @returns {RegionDocument[]}
      */
     async #placeTemplate() {
-      const templates = [];
       try {
-        const result = await TemplatePlacement.fromActivity(this);
-        if ( result ) templates.push(...result);
+        return await TemplatePlacement.fromActivity(this) ?? [];
       } catch(err) {
         Hooks.onError("Activity#placeTemplate", err, {
           msg: _loc("DND5E.TARGET.Warning.PlaceTemplate"),
@@ -1120,7 +1118,7 @@ export default function ActivityMixin(Base) {
           notify: "error"
         });
       }
-      return templates;
+      return [];
     }
 
     /* -------------------------------------------- */

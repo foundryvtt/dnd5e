@@ -216,6 +216,8 @@ export default class TemplatePlacement extends BasePlacement {
       shapes: Array.fromRange(target.count || 1).map(() => foundry.utils.deepClone(templateData))
     }, placementConfig);
 
+    // TODO: Add region-named hooks when replacing measured template compatibility hooks.
+
     /**
      * A hook event that fires before player is prompted for template placement.
      * @function dnd5e.preCreateMeasuredTemplate
