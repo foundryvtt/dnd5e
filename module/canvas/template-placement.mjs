@@ -322,6 +322,7 @@ export default class TemplatePlacement extends BasePlacement {
    * @param {RegionDocument[]} regions  Created template regions.
    */
   static #targetTokens(regions) {
+    const priorTargetIds = new Set(Array.from(game.user.targets, t => t.id));
     const targetIds = new Set();
     for ( const region of regions ) {
       for ( const token of canvas.scene.tokens ) {
@@ -329,6 +330,7 @@ export default class TemplatePlacement extends BasePlacement {
       }
     }
     canvas.tokens.setTargets(targetIds);
+    for ( const id of new Set([...priorTargetIds, ...targetIds]) ) canvas.tokens.get(id)?._refreshTarget();
   }
 
   /* -------------------------------------------- */
