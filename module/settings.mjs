@@ -118,6 +118,15 @@ export function registerSystemSettings() {
     type: Boolean
   });
 
+  game.settings.register("dnd5e", "targetTemplateGridSpaces", {
+    name: "SETTINGS.5eTargetTemplateGridSpacesN",
+    hint: "SETTINGS.5eTargetTemplateGridSpacesL",
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean
+  });
+
   // Loyalty
   game.settings.register("dnd5e", "loyaltyScore", {
     name: "SETTINGS.DND5E.LOYALTY.Name",

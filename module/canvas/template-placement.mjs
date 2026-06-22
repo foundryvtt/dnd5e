@@ -326,16 +326,23 @@ export default class TemplatePlacement extends BasePlacement {
       if ( (top <= region.elevation.bottom) || (token.elevation >= region.elevation.top) ) return false;
     }
 
+    const polygonTree = region.object?.animationState?.polygonTree ?? region.polygonTree;
+    const sharedGridSpaces = game.settings.get("dnd5e", "targetTemplateGridSpaces");
     for ( const offset of token.getOccupiedGridSpaceOffsets(token._source) ) {
+      const center = canvas.grid.getCenterPoint(offset);
+      center.x = Math.round(center.x - (canvas.grid.sizeX / 2)) + (canvas.grid.sizeX / 2);
+      center.y = Math.round(center.y - (canvas.grid.sizeY / 2)) + (canvas.grid.sizeY / 2);
+      if ( polygonTree.testPoint(center, 0.75) ) return true;
+      if ( !sharedGridSpaces ) continue;
+
       const topLeft = canvas.grid.getTopLeftPoint(offset);
       const points = [
-        { x: topLeft.x + (canvas.grid.sizeX / 2), y: topLeft.y + (canvas.grid.sizeY / 2) },
         { x: topLeft.x, y: topLeft.y },
         { x: topLeft.x + canvas.grid.sizeX, y: topLeft.y },
         { x: topLeft.x + canvas.grid.sizeX, y: topLeft.y + canvas.grid.sizeY },
         { x: topLeft.x, y: topLeft.y + canvas.grid.sizeY }
       ];
-      if ( points.some(point => region.polygonTree.testPoint(point, 0.75)) ) return true;
+      if ( points.some(point => polygonTree.testPoint(point, 0.75)) ) return true;
     }
     return false;
   }
