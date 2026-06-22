@@ -202,6 +202,7 @@ export default class TemplatePlacement extends BasePlacement {
       flags: {
         dnd5e: {
           dimensions: {
+            type: target.type,
             size: templateData.size,
             width: templateData.width,
             height: templateData.height,
@@ -250,9 +251,47 @@ export default class TemplatePlacement extends BasePlacement {
     const targetIds = new Set();
     for ( const region of regions ) {
       for ( const token of canvas.scene.tokens ) {
-        if ( token.testInsideRegion(region) ) targetIds.add(token.id);
+        if ( TemplatePlacement.#testInsideTemplateRegion(token, region) ) targetIds.add(token.id);
       }
     }
     canvas.tokens.setTargets(targetIds);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Test whether a token is inside a template region, accounting for 3D area shapes.
+   * @param {TokenDocument} token   Token being tested.
+   * @param {RegionDocument} region Template region being tested.
+   * @returns {boolean}
+   */
+  static #testInsideTemplateRegion(token, region) {
+    if ( !token.testInsideRegion(region) ) return false;
+    const dimensions = region.flags.dnd5e?.dimensions;
+    if ( !["cube", "sphere"].includes(dimensions?.type) ) return true;
+
+    const shape = region.shapes.find(s => ["circle", "rectangle"].includes(s.type));
+    if ( !shape ) return true;
+    const tokenSize = token.getSize();
+    if ( dimensions.type === "cube" ) {
+      const x = Math.max(shape.x, token.x);
+      const y = Math.max(shape.y, token.y);
+      const z = Math.max(region.elevation.bottom, token.elevation);
+      const right = Math.min(shape.x + shape.width, token.x + tokenSize.width);
+      const bottom = Math.min(shape.y + shape.height, token.y + tokenSize.height);
+      const top = Math.min(region.elevation.bottom + dimensions.size, token.elevation + (token.depth * canvas.grid.distance));
+      return (x < right) && (y < bottom) && (z < top);
+    }
+
+    const gridMultiplier = canvas.scene.grid.size / canvas.scene.grid.distance;
+    const point = {
+      x: Math.clamp(shape.x, token.x, token.x + tokenSize.width),
+      y: Math.clamp(shape.y, token.y, token.y + tokenSize.height),
+      elevation: Math.clamp(region.elevation.bottom, token.elevation, token.elevation + (token.depth * canvas.grid.distance))
+    };
+    const dx = (point.x - shape.x) / gridMultiplier;
+    const dy = (point.y - shape.y) / gridMultiplier;
+    const dz = point.elevation - region.elevation.bottom;
+    return Math.hypot(dx, dy, dz) <= dimensions.size;
   }
 }
