@@ -197,7 +197,9 @@ export class ApplyActiveEffectActivityBehavior extends BaseActivityBehavior {
   /** @override */
   static defineSchema() {
     return {
-      effects: new SetField(new DocumentUUIDField())
+      effects: new SetField(new DocumentUUIDField({ type: "ActiveEffect", nullable: false })),
+      sizes: new SetField(new StringField()),
+      types: new SetField(new StringField())
     };
   }
 
@@ -209,9 +211,25 @@ export class ApplyActiveEffectActivityBehavior extends BaseActivityBehavior {
   createBehaviorData(activity, options={}) {
     return {
       system: {
-        effects: this.effects
+        effects: this.effects,
+        sizes: this.sizes,
+        types: this.types
+        // TODO: Set "dispositions" based on target affects settings
       },
-      type: "applyActiveEffect"
+      type: "dnd5e.applyActiveEffect"
     };
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /** @override */
+  customizeField(field, data) {
+    if ( field.name === "sizes" ) {
+      data.options = Object.entries(CONFIG.DND5E.actorSizes).map(([value, { label }]) => ({ value, label }));
+    } else if ( field.name === "types" ) {
+      data.options = Object.entries(CONFIG.DND5E.creatureTypes).map(([value, { label }]) => ({ value, label }));
+    }
   }
 }
