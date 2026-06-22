@@ -17,7 +17,14 @@ export default class TargetField extends SchemaField {
         count: new FormulaField({ deterministic: true }),
         contiguous: new BooleanField(),
         stationary: new BooleanField(),
-        targetOnPlacement: new BooleanField(),
+        targetOnPlacement: new StringField({
+          required: true, blank: false, initial: null,
+          choices: {
+            null: "DND5E.TARGET.FIELDS.target.template.targetOnPlacement.default",
+            true: "DND5E.TARGET.FIELDS.target.template.targetOnPlacement.on",
+            false: "DND5E.TARGET.FIELDS.target.template.targetOnPlacement.off"
+          }
+        }),
         wallMode: new StringField({
           required: true, blank: false, initial: "walled",
           choices: {

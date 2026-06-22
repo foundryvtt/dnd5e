@@ -4645,13 +4645,14 @@
           "hint": "Emanation cannot be moved once placed."
         },
         "targetOnPlacement": {
-          "label": "Override Template Targeting",
-          "hint": "Invert the system default for this activity. Default: {default}.",
-          "on": "On",
-          "off": "Off"
+          "label": "Auto Template Targeting",
+          "hint": "Override the the system default for this document. Default: {default}.",
+          "default": null,
+          "true": "On",
+          "false": "Off"
         },
         "wallMode": {
-          "label": "Template Walls",
+          "label": "Walls Interaction",
           "hint": "How walls constrain the placed template.",
           "choices": {
             "walled": "Blocked by Walls",
@@ -6018,7 +6019,7 @@
           "Hint": "When automatically targeting tokens in area templates, only target creatures that share a highlighted grid space with the template. If disabled, creatures sharing any affected grid space can be targeted even if that grid space is not highlighted by core region coverage."
         },
         "OnPlacement": {
-          "Name": "Default Region Template Targeting",
+          "Name": "Region Templates Targeting Automation",
           "Hint": "Automatically target tokens in newly placed region templates unless the activity overrides this default."
         }
       }
