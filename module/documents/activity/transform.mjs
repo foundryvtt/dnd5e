@@ -173,4 +173,21 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
       // TODO: Create message for transformed actors
     }
   }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  getRollData(options) {
+    const rollData = super.getRollData(options);
+    if ( game.user.targets.size ) {
+      foundry.utils.setProperty(rollData, "target.details.cr", game.user.targets.reduce((final, token) => {
+        const details = token.actor?.system.details ?? {};
+        const cr = Math.max(details.cr ?? -Infinity, details.level ?? -Infinity);
+        return Number.isFinite(cr) ? Math.min(cr, final) : final;
+      }, Infinity));
+    }
+    return rollData;
+  }
 }
