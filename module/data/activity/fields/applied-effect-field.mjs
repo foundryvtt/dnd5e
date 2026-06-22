@@ -7,7 +7,7 @@ export default class AppliedEffectField extends SchemaField {
   constructor(fields={}, options={}) {
     fields = {
       _id: new DocumentIdField(),
-      uuid: new DocumentUUIDField(),
+      uuid: new DocumentUUIDField({ type: "ActiveEffect", embedded: false }),
       level: new SchemaField({
         min: new NumberField({ min: 0, integer: true }),
         max: new NumberField({ min: 0, integer: true })
