@@ -114,6 +114,13 @@ export default class TemplatePlacement extends BasePlacement {
         top: origin.elevation + size
       };
     }
+    if ( this.config.targetType === "cone" && Number.isFinite(size) ) {
+      const height = size * Math.tan(Math.toRadians(CONFIG.MeasuredTemplate.defaults.angle / 2));
+      return {
+        bottom: origin.elevation - height,
+        top: origin.elevation + height
+      };
+    }
     return {
       bottom: origin.elevation,
       top: origin.elevation + ((origin.depth ?? 1) * canvas.grid.distance)
@@ -220,7 +227,8 @@ export default class TemplatePlacement extends BasePlacement {
             size: templateData.size,
             width: templateData.width,
             height: templateData.height,
-            centerElevation: target.type === "sphere" ? ((shapes.elevation.bottom + shapes.elevation.top) / 2) : undefined,
+            centerElevation: ["cone", "sphere"].includes(target.type)
+              ? ((shapes.elevation.bottom + shapes.elevation.top) / 2) : undefined,
             units: canvas.scene.grid.units
           },
           targetOnPlacement: target.targetOnPlacement,
@@ -283,9 +291,9 @@ export default class TemplatePlacement extends BasePlacement {
   static #testInsideTemplateRegion(token, region) {
     if ( !token.testInsideRegion(region) && !TemplatePlacement.#sharesTemplateGridSpace(token, region) ) return false;
     const dimensions = region.flags.dnd5e?.dimensions;
-    if ( !["cube", "sphere"].includes(dimensions?.type) ) return true;
+    if ( !["cone", "cube", "sphere"].includes(dimensions?.type) ) return true;
 
-    const shape = region.shapes.find(s => ["circle", "rectangle"].includes(s.type));
+    const shape = region.shapes.find(s => ["circle", "cone", "rectangle"].includes(s.type));
     if ( !shape ) return true;
     const tokenSize = token.getSize();
     if ( dimensions.type === "cube" ) {
@@ -296,6 +304,35 @@ export default class TemplatePlacement extends BasePlacement {
       const bottom = Math.min(shape.y + shape.height, token.y + tokenSize.height);
       const top = Math.min(region.elevation.bottom + dimensions.size, token.elevation + (token.depth * canvas.grid.distance));
       return (x < right) && (y < bottom) && (z < top);
+    }
+    if ( dimensions.type === "cone" ) {
+      const gridMultiplier = canvas.scene.grid.size / canvas.scene.grid.distance;
+      const centerElevation = dimensions.centerElevation ?? region.elevation.bottom;
+      const direction = Math.toRadians(shape.rotation);
+      const axis = { x: Math.cos(direction), y: Math.sin(direction) };
+      const halfAngle = Math.toRadians(shape.angle / 2);
+      const tokenTop = token.elevation + (token.depth * canvas.grid.distance);
+      const points = [
+        [token.x, token.y, token.elevation],
+        [token.x + tokenSize.width, token.y, token.elevation],
+        [token.x + tokenSize.width, token.y + tokenSize.height, token.elevation],
+        [token.x, token.y + tokenSize.height, token.elevation],
+        [token.x, token.y, tokenTop],
+        [token.x + tokenSize.width, token.y, tokenTop],
+        [token.x + tokenSize.width, token.y + tokenSize.height, tokenTop],
+        [token.x, token.y + tokenSize.height, tokenTop],
+        [token.x + (tokenSize.width / 2), token.y + (tokenSize.height / 2), (token.elevation + tokenTop) / 2]
+      ];
+      return points.some(([x, y, elevation]) => {
+        const dx = (x - shape.x) / gridMultiplier;
+        const dy = (y - shape.y) / gridMultiplier;
+        const dz = elevation - centerElevation;
+        const distance = (dx * axis.x) + (dy * axis.y);
+        if ( (distance < 0) || (distance > dimensions.size) ) return false;
+        const radius = distance * Math.tan(halfAngle);
+        const perpendicular = Math.hypot(dx - (distance * axis.x), dy - (distance * axis.y), dz);
+        return perpendicular <= radius;
+      });
     }
 
     const gridMultiplier = canvas.scene.grid.size / canvas.scene.grid.distance;
