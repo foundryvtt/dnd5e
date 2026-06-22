@@ -18,6 +18,14 @@ export default class TargetField extends SchemaField {
         contiguous: new BooleanField(),
         stationary: new BooleanField(),
         targetOnPlacement: new BooleanField(),
+        wallMode: new StringField({
+          required: true, blank: false, initial: "walled",
+          choices: {
+            walled: "DND5E.TARGET.FIELDS.target.template.wallMode.choices.walled",
+            gaps: "DND5E.TARGET.FIELDS.target.template.wallMode.choices.gaps",
+            unwalled: "DND5E.TARGET.FIELDS.target.template.wallMode.choices.unwalled"
+          }
+        }),
         type: new StringField(),
         size: new FormulaField({ deterministic: true }),
         width: new FormulaField({ deterministic: true }),

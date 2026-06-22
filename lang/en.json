@@ -4650,6 +4650,15 @@
           "on": "On",
           "off": "Off"
         },
+        "wallMode": {
+          "label": "Template Walls",
+          "hint": "How walls constrain the placed template.",
+          "choices": {
+            "walled": "Blocked by Walls",
+            "gaps": "Pass Through Gaps",
+            "unwalled": "Ignore Walls"
+          }
+        },
         "type": {
           "label": "Area Type",
           "hint": "Type of area of effect targeted."

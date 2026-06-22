@@ -34,13 +34,16 @@ export default class TemplatePlacement extends BasePlacement {
         highlightMode: "coverage",
         levels: [canvas.level.id],
         restriction: {
-          enabled: true,
+          enabled: this.config.wallMode !== "unwalled",
           type: "move"
         },
         shapes: this.config.shapes.map(s => this.#createShapeData(s)),
         flags: {
           core: { MeasuredTemplate: true },
-          dnd5e: { dimensions: this.#getDimensionsData() }
+          dnd5e: {
+            dimensions: this.#getDimensionsData(),
+            wallMode: this.config.wallMode
+          }
         }
       }, {
         // TODO: `attachToToken: true` if emanation
@@ -216,6 +219,7 @@ export default class TemplatePlacement extends BasePlacement {
       origin: activity.getUsageToken?.(),
       targetType: target.type,
       targetOnPlacement,
+      wallMode: target.wallMode ?? "walled",
       shapes: Array.fromRange(target.count || 1).map(() => foundry.utils.deepClone(templateData))
     }, placementConfig);
 
@@ -247,9 +251,8 @@ export default class TemplatePlacement extends BasePlacement {
       // TODO: Set elevation based on shape's height
       levels: [canvas.level.id],
       restriction: {
-        enabled: true,
+        enabled: config.wallMode !== "unwalled",
         // TODO: Is there a better setting to represent Total Cover?
-        // TODO: What about templates like Fireball that flow around walls?
         type: "move"
       },
       // TODO: Set attachedToken if type=emanation and stationary=false and token clicked on
@@ -267,6 +270,7 @@ export default class TemplatePlacement extends BasePlacement {
             units: canvas.scene.grid.units
           },
           targetOnPlacement: config.targetOnPlacement,
+          wallMode: config.wallMode,
           item: activity.item.uuid,
           origin: activity.uuid,
           spellLevel: rollData.item.level
@@ -461,6 +465,9 @@ export default class TemplatePlacement extends BasePlacement {
    */
   static #testInsideTemplateRegion(token, region) {
     if ( !token.testInsideRegion(region) && !TemplatePlacement.#sharesTemplateGridSpace(token, region) ) return false;
+    if ( region.flags.dnd5e?.wallMode === "gaps" && !TemplatePlacement.#testTemplateLineOfEffect(token, region) ) {
+      return false;
+    }
     const dimensions = region.flags.dnd5e?.dimensions;
     if ( !["cone", "cube", "sphere"].includes(dimensions?.type) ) return true;
 
@@ -517,6 +524,49 @@ export default class TemplatePlacement extends BasePlacement {
     const dy = (point.y - shape.y) / gridMultiplier;
     const dz = point.elevation - (TemplatePlacement.#getTemplateCenterElevation(region) ?? region.elevation.bottom);
     return Math.hypot(dx, dy, dz) <= dimensions.size;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Test whether a template can reach a token without crossing a move wall.
+   * @param {TokenDocument} token   Token being tested.
+   * @param {RegionDocument} region Template region being tested.
+   * @returns {boolean}
+   */
+  static #testTemplateLineOfEffect(token, region) {
+    const shape = region.shapes.find(s => ["circle", "cone", "line", "rectangle"].includes(s.type));
+    const level = canvas.scene.levels.get(Array.from(region.levels)[0]);
+    if ( !shape || !level ) return true;
+
+    const origin = {
+      x: shape.x,
+      y: shape.y,
+      elevation: TemplatePlacement.#getTemplateCenterElevation(region) ?? region.elevation.bottom
+    };
+    const tokenSize = token.getSize();
+    const tokenTop = token.elevation + (token.depth * canvas.grid.distance);
+    const destinations = [{
+      x: token.x + (tokenSize.width / 2),
+      y: token.y + (tokenSize.height / 2),
+      elevation: (token.elevation + tokenTop) / 2
+    }];
+    if ( !canvas.grid.isGridless ) {
+      for ( const offset of token.getOccupiedGridSpaceOffsets(token._source) ) {
+        const point = canvas.grid.getCenterPoint(offset);
+        point.elevation = destinations[0].elevation;
+        if ( region.testPoint(point) ) destinations.push(point);
+      }
+    }
+
+    const polygonBackend = CONFIG.Canvas.polygonBackends.move;
+    const config = {
+      type: "move",
+      level,
+      edgeTypes: { wall: true, outerBounds: true },
+      useThreshold: true
+    };
+    return destinations.some(destination => !polygonBackend.testCollision(origin, destination, { ...config, mode: "any" }));
   }
 
   /* -------------------------------------------- */

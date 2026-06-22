@@ -105,6 +105,7 @@
  * @property {string} template.count              Number of templates created.
  * @property {boolean} template.contiguous        Must all created areas be connected to one another?
  * @property {boolean} template.targetOnPlacement Override the system default for automatically targeting placed templates.
+ * @property {string} template.wallMode           How walls constrain this template.
  * @property {string} template.type               Type of area of effect caused by this activity.
  * @property {string} template.size               Size of the activity's area of effect on its primary axis.
  * @property {string} template.width              Width of line area of effect.
