@@ -4645,8 +4645,10 @@
           "hint": "Emanation cannot be moved once placed."
         },
         "targetOnPlacement": {
-          "label": "Auto Target",
-          "hint": "Automatically target tokens in the area when the region template is placed."
+          "label": "Override Default Region Template Targeting",
+          "hint": "Invert the system default for this activity. Default: {default}.",
+          "on": "On",
+          "off": "Off"
         },
         "type": {
           "label": "Area Type",
@@ -5991,8 +5993,6 @@
 "SETTINGS.5eNoConcentrationL": "Disable the system's automated tracking of concentration.",
 "SETTINGS.5eGridAlignedSquareTemplatesL": "When square templates are created as the result of casting a spell or using an item, they will be locked to the grid alignment and unable to be rotated.",
 "SETTINGS.5eGridAlignedSquareTemplatesN": "Grid-Aligned Square Templates",
-"SETTINGS.5eTargetTemplateGridSpacesL": "When automatically targeting tokens in area templates, target creatures that share any affected grid space with the template even if that grid space is not highlighted by core region coverage.",
-"SETTINGS.5eTargetTemplateGridSpacesN": "Target Shared Template Grid Spaces",
 "SETTINGS.DND5E": {
   "AUTOMATION": {
     "Movement": {
@@ -6001,6 +6001,18 @@
       "Full": "Full",
       "NoBlocking": "Partial",
       "None": "None"
+    },
+    "Targeting": {
+      "RegionTemplates": {
+        "GridSpaces": {
+          "Name": "Target Tokens in Highlighted Template Grid Spaces Only",
+          "Hint": "When automatically targeting tokens in area templates, only target creatures that share a highlighted grid space with the template. If disabled, creatures sharing any affected grid space can be targeted even if that grid space is not highlighted by core region coverage."
+        },
+        "OnPlacement": {
+          "Name": "Default Region Template Targeting",
+          "Hint": "Automatically target tokens in newly placed region templates unless the activity overrides this default."
+        }
+      }
     },
     "SenseVision": {
       "Name": "Sync Senses to Token Vision",

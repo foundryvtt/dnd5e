@@ -118,12 +118,22 @@ export function registerSystemSettings() {
     type: Boolean
   });
 
-  game.settings.register("dnd5e", "targetTemplateGridSpaces", {
-    name: "SETTINGS.5eTargetTemplateGridSpacesN",
-    hint: "SETTINGS.5eTargetTemplateGridSpacesL",
+  // Target tokens on template placement
+  game.settings.register("dnd5e", "targetTemplateOnPlacement", {
+    name: "SETTINGS.DND5E.AUTOMATION.Targeting.RegionTemplates.OnPlacement.Name",
+    hint: "SETTINGS.DND5E.AUTOMATION.Targeting.RegionTemplates.OnPlacement.Hint",
     scope: "world",
     config: true,
-    default: false,
+    default: true,
+    type: Boolean
+  });
+
+  game.settings.register("dnd5e", "targetTemplateGridSpaces", {
+    name: "SETTINGS.DND5E.AUTOMATION.Targeting.RegionTemplates.GridSpaces.Name",
+    hint: "SETTINGS.DND5E.AUTOMATION.Targeting.RegionTemplates.GridSpaces.Hint",
+    scope: "world",
+    config: true,
+    default: true,
     type: Boolean
   });
 

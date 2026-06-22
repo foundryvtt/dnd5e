@@ -74,6 +74,13 @@ export default class TargetField extends SchemaField {
     // Generate the template labels
     const templateConfig = CONFIG.DND5E.areaTargetTypes[this.target.template.type];
     this.target.template.labels = {};
+    const defaultTargeting = game.settings.get("dnd5e", "targetTemplateOnPlacement");
+    const defaultState = game.i18n.localize(
+      `DND5E.TARGET.FIELDS.target.template.targetOnPlacement.${defaultTargeting ? "on" : "off"}`
+    );
+    this.target.template.labels.targetOnPlacementHint = game.i18n.format(
+      "DND5E.TARGET.FIELDS.target.template.targetOnPlacement.hint", { default: defaultState }
+    );
     if ( templateConfig ) {
       const parts = [];
       if ( this.target.template.count > 1 ) parts.push(`${this.target.template.count} ×`);

@@ -207,12 +207,13 @@ export default class TemplatePlacement extends BasePlacement {
       height: target.height
         ? convertLength(target.height, target.units, canvas.scene.grid.units, { strict: false }) : undefined
     };
+    const targetOnPlacement = TemplatePlacement.#getTargetOnPlacement(target);
 
     const config = foundry.utils.mergeObject({
       color: game.user.color,
       origin: activity.getUsageToken?.(),
       targetType: target.type,
-      targetOnPlacement: target.targetOnPlacement,
+      targetOnPlacement,
       shapes: Array.fromRange(target.count || 1).map(() => foundry.utils.deepClone(templateData))
     }, placementConfig);
 
@@ -263,7 +264,7 @@ export default class TemplatePlacement extends BasePlacement {
               ? ((shapes.elevation.bottom + shapes.elevation.top) / 2) : undefined,
             units: canvas.scene.grid.units
           },
-          targetOnPlacement: target.targetOnPlacement,
+          targetOnPlacement: config.targetOnPlacement,
           item: activity.item.uuid,
           origin: activity.uuid,
           spellLevel: rollData.item.level
@@ -282,7 +283,7 @@ export default class TemplatePlacement extends BasePlacement {
     if ( Hooks.call("dnd5e.createMeasuredTemplate", activity, regionData) === false ) return null;
 
     const created = await canvas.scene.createEmbeddedDocuments("Region", regionData);
-    if ( target.targetOnPlacement ) TemplatePlacement.#targetTokens(created);
+    if ( config.targetOnPlacement ) TemplatePlacement.#targetTokens(created);
 
     /**
      * A hook event that fires after a template are created for an Activity.
@@ -294,6 +295,18 @@ export default class TemplatePlacement extends BasePlacement {
     Hooks.callAll("dnd5e.postCreateMeasuredTemplate", activity, created);
 
     return created;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get whether a placed template should target tokens.
+   * @param {object} target  Activity target template data.
+   * @returns {boolean}
+   */
+  static #getTargetOnPlacement(target) {
+    const defaultTargeting = game.settings.get("dnd5e", "targetTemplateOnPlacement");
+    return target.targetOnPlacement ? !defaultTargeting : defaultTargeting;
   }
 
   /* -------------------------------------------- */
@@ -346,7 +359,7 @@ export default class TemplatePlacement extends BasePlacement {
 
     const formattedElevation = elevation.toNearest(0.01).toLocaleString(game.i18n.lang);
     const units = canvas.grid.units;
-    const text = `\u2195 ${formattedElevation}${units ? ` ${units}` : ""}`;
+    const text = `(\u2195 ${formattedElevation}${units ? ` ${units}` : ""})`;
     const style = distanceLabel.style.clone();
     style.fontSize *= 0.65;
 
@@ -356,8 +369,28 @@ export default class TemplatePlacement extends BasePlacement {
     label.position.copyFrom(distanceLabel.position);
     label.rotation = distanceLabel.rotation;
     label.scale.copyFrom(distanceLabel.scale);
-    label.position.y += 18 * canvas.dimensions.uiScale;
+    if ( TemplatePlacement.#canFitInlineElevation(preview, distanceLabel, label) ) {
+      const offset = (distanceLabel.width / 2) + (label.width / 2) + (6 * canvas.dimensions.uiScale);
+      label.position.x += Math.cos(label.rotation) * offset;
+      label.position.y += Math.sin(label.rotation) * offset;
+    } else label.position.y += 18 * canvas.dimensions.uiScale;
     preview._dnd5eElevationLabel = label;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Whether the elevation label can fit inline with the distance label.
+   * @param {Region} preview        Preview region object.
+   * @param {PreciseText} distance  Distance label.
+   * @param {PreciseText} elevation Elevation label.
+   * @returns {boolean}
+   */
+  static #canFitInlineElevation(preview, distance, elevation) {
+    const primary = TemplatePlacement.#getPrimaryMeasurementDistance(preview.document);
+    if ( !Number.isFinite(primary) ) return false;
+    const available = (primary / canvas.dimensions.distance) * canvas.dimensions.size;
+    return (distance.width + elevation.width + (6 * canvas.dimensions.uiScale)) <= available;
   }
 
   /* -------------------------------------------- */
@@ -474,13 +507,13 @@ export default class TemplatePlacement extends BasePlacement {
     }
 
     const polygonTree = region.object?.animationState?.polygonTree ?? region.polygonTree;
-    const sharedGridSpaces = game.settings.get("dnd5e", "targetTemplateGridSpaces");
+    const highlightedGridSpacesOnly = game.settings.get("dnd5e", "targetTemplateGridSpaces");
     for ( const offset of token.getOccupiedGridSpaceOffsets(token._source) ) {
       const center = canvas.grid.getCenterPoint(offset);
       center.x = Math.round(center.x - (canvas.grid.sizeX / 2)) + (canvas.grid.sizeX / 2);
       center.y = Math.round(center.y - (canvas.grid.sizeY / 2)) + (canvas.grid.sizeY / 2);
       if ( polygonTree.testPoint(center, 0.75) ) return true;
-      if ( !sharedGridSpaces ) continue;
+      if ( highlightedGridSpacesOnly ) continue;
 
       const topLeft = canvas.grid.getTopLeftPoint(offset);
       const points = [
