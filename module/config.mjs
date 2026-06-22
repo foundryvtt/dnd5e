@@ -1101,7 +1101,7 @@ preLocalize("activityActivationTypes", { key: "label" });
  * @enum {ActivityBehaviorConfiguration}
  */
 DND5E.activityBehaviorTypes = {
-  appylActiveEffect: {
+  applyActiveEffect: {
     label: "TYPES.RegionBehavior.applyActiveEffect",
     icon: "systems/dnd5e/icons/svg/behaviors/apply-active-effect.svg",
     model: regionBehaviors.ApplyActiveEffectActivityBehavior

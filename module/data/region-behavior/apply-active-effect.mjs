@@ -183,7 +183,7 @@ export default class ApplyActiveEffect5eRegionBehaviorType extends foundry.data.
 /* -------------------------------------------- */
 
 /**
- * Data model representing the difficult terrain activity behavior configuration.
+ * Data model representing the active effect activity behavior configuration.
  * @extends {foundry.abstract.DataModel<ApplyActiveEffectActivityBehaviorData>}
  * @mixes ApplyActiveEffectActivityBehaviorData
  */

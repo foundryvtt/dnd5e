@@ -147,7 +147,7 @@ export default class CreateDocumentDialog extends Dialog5e {
     if ( (event.target.name === "type") && this.documentType.defaultName ) {
       const name = this.element.querySelector('[name="name"]');
       const { pack, parent } = this.options.createOptions;
-      name.placeholder = this.documentType.defaultName?.({ type: event.target.value, pack, parent });
+      name.placeholder = this.documentType.defaultName({ type: event.target.value, pack, parent });
     }
   }
 
