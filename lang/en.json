@@ -4645,7 +4645,7 @@
           "hint": "Emanation cannot be moved once placed."
         },
         "targetOnPlacement": {
-          "label": "Override Default Region Template Targeting",
+          "label": "Override Template Targeting",
           "hint": "Invert the system default for this activity. Default: {default}.",
           "on": "On",
           "off": "Off"
@@ -6005,7 +6005,7 @@
     "Targeting": {
       "RegionTemplates": {
         "GridSpaces": {
-          "Name": "Target Tokens in Highlighted Template Grid Spaces Only",
+          "Name": "Target Highlighted Grid Spaces Only",
           "Hint": "When automatically targeting tokens in area templates, only target creatures that share a highlighted grid space with the template. If disabled, creatures sharing any affected grid space can be targeted even if that grid space is not highlighted by core region coverage."
         },
         "OnPlacement": {
