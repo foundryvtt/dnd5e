@@ -353,7 +353,7 @@ export default class TemplatePlacement extends BasePlacement {
    * @param {Region} preview  Preview region object.
    */
   static #refreshTemplateElevationLabel(preview) {
-    const elevation = preview.document.elevation.bottom;
+    const elevation = TemplatePlacement.#getDisplayedTemplateElevation(preview.document);
     if ( !Number.isFinite(elevation) ) return;
 
     const distanceLabel = TemplatePlacement.#getPrimaryMeasurementLabel(preview);
@@ -428,6 +428,32 @@ export default class TemplatePlacement extends BasePlacement {
   /* -------------------------------------------- */
 
   /**
+   * Get the elevation displayed to users for a template region.
+   * @param {RegionDocument} region  Template region.
+   * @returns {number|undefined}
+   */
+  static #getDisplayedTemplateElevation(region) {
+    const dimensions = region.flags.dnd5e?.dimensions;
+    if ( ["cone", "sphere"].includes(dimensions?.type) ) return TemplatePlacement.#getTemplateCenterElevation(region);
+    return region.elevation.bottom;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the center elevation of a 3D template region.
+   * @param {RegionDocument} region  Template region.
+   * @returns {number|undefined}
+   */
+  static #getTemplateCenterElevation(region) {
+    const { bottom, top } = region.elevation;
+    if ( Number.isFinite(bottom) && Number.isFinite(top) ) return (bottom + top) / 2;
+    return region.flags.dnd5e?.dimensions?.centerElevation;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Test whether a token is inside a template region, accounting for 3D area shapes.
    * @param {TokenDocument} token   Token being tested.
    * @param {RegionDocument} region Template region being tested.
@@ -452,7 +478,7 @@ export default class TemplatePlacement extends BasePlacement {
     }
     if ( dimensions.type === "cone" ) {
       const gridMultiplier = canvas.scene.grid.size / canvas.scene.grid.distance;
-      const centerElevation = dimensions.centerElevation ?? region.elevation.bottom;
+      const centerElevation = TemplatePlacement.#getTemplateCenterElevation(region) ?? region.elevation.bottom;
       const direction = Math.toRadians(shape.rotation);
       const axis = { x: Math.cos(direction), y: Math.sin(direction) };
       const halfAngle = Math.toRadians(shape.angle / 2);
@@ -484,12 +510,12 @@ export default class TemplatePlacement extends BasePlacement {
     const point = {
       x: Math.clamp(shape.x, token.x, token.x + tokenSize.width),
       y: Math.clamp(shape.y, token.y, token.y + tokenSize.height),
-      elevation: Math.clamp(dimensions.centerElevation ?? region.elevation.bottom, token.elevation,
+      elevation: Math.clamp(TemplatePlacement.#getTemplateCenterElevation(region) ?? region.elevation.bottom, token.elevation,
         token.elevation + (token.depth * canvas.grid.distance))
     };
     const dx = (point.x - shape.x) / gridMultiplier;
     const dy = (point.y - shape.y) / gridMultiplier;
-    const dz = point.elevation - (dimensions.centerElevation ?? region.elevation.bottom);
+    const dz = point.elevation - (TemplatePlacement.#getTemplateCenterElevation(region) ?? region.elevation.bottom);
     return Math.hypot(dx, dy, dz) <= dimensions.size;
   }
 
