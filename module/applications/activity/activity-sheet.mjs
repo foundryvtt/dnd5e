@@ -299,13 +299,15 @@ export default class ActivitySheet extends PseudoDocumentSheet {
             data, source,
             additionalFields: instance.generateFields(source.config, { prefix: `behaviors.${data._index}.config.` }),
             additionalSettings: "systems/dnd5e/templates/activity/parts/activity-behavior-settings.hbs",
-            collapsed: this.expandedSections.get(`behavior.${data._id}`) ? "" : "collapsed",
+            collapsed: this.expandedSections.get(`behaviors.${data._id}`) ? "" : "collapsed",
             config: CONFIG.DND5E.activityBehaviorTypes[data.type],
             fields: this.activity.schema.fields.behaviors.element.fields,
             prefix: `behaviors.${data._index}.`
           };
           return this._prepareAppliedBehaviorContext(context, ctx);
-        });
+        })
+        .filter(_ => _)
+        .toArray();
     }
 
     if ( context.activity.effects ) {

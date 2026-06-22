@@ -10,7 +10,7 @@
     <p class="hint">{{ localize "DND5E.BEHAVIOR.Hint" }}</p>
     <ul class="separated-list behaviors-list flexcol unlist">
         {{#each appliedBehaviors}}
-        <li data-index="{{ data.index }}" data-behavior-id="{{ data._id }}" data-expand-id="behaviors.{{ data._id }}">
+        <li data-index="{{ data._index }}" data-behavior-id="{{ data._id }}" data-expand-id="behaviors.{{ data._id }}">
             {{> ".behavior" }}
         </li>
         {{/each}}

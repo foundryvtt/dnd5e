@@ -1,7 +1,7 @@
 const { DocumentIdField, NumberField, SchemaField } = foundry.data.fields;
 
 /**
- * Field for storing an active effects applied by an activity.
+ * Field for storing an active effect applied by an activity.
  */
 export default class AppliedEffectField extends SchemaField {
   constructor(fields={}, options={}) {

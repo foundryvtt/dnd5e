@@ -1,7 +1,7 @@
 const { DocumentIdField, NumberField, ObjectField, SchemaField, StringField } = foundry.data.fields;
 
 /**
- * Field for storing an region behaviors applied by an activity to its template.
+ * Field for storing a region behavior applied by an activity to its template.
  */
 export default class AppliedBehaviorField extends SchemaField {
   constructor(fields={}, options={}) {
