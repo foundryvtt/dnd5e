@@ -1,6 +1,8 @@
 import { convertLength } from "../utils.mjs";
 import BasePlacement from "./api/base-placement.mjs";
 
+const { PreciseText } = foundry.canvas.containers;
+
 /**
  * @import {
  *   TemplatePlacementConfiguration, TemplatePlacementData, TemplatePlacementShapeConfiguration
