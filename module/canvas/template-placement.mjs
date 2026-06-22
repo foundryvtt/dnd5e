@@ -321,22 +321,58 @@ export default class TemplatePlacement extends BasePlacement {
     preview._dnd5eFormatMeasuredDistance = preview._formatMeasuredDistance.bind(preview);
     preview._dnd5eRefreshMeasurements = preview._refreshMeasurements.bind(preview);
     preview._refreshMeasurements = (...args) => {
-      preview._dnd5eElevationLabelUsed = false;
-      return preview._dnd5eRefreshMeasurements(...args);
+      if ( preview._dnd5eElevationLabel ) preview._measurementLabels.removeChild(preview._dnd5eElevationLabel).destroy();
+      preview._dnd5eElevationLabel = null;
+      const result = preview._dnd5eRefreshMeasurements(...args);
+      TemplatePlacement.#refreshTemplateElevationLabel(preview);
+      return result;
     };
-    preview._formatMeasuredDistance = distance => {
-      const text = preview._dnd5eFormatMeasuredDistance(distance);
-      const primary = TemplatePlacement.#getPrimaryMeasurementDistance(preview.document);
-      if ( preview._dnd5eElevationLabelUsed || (Number.isFinite(primary) && (Math.abs(distance - primary) > 1e-9)) ) {
-        return text;
-      }
-      const elevation = preview.document.elevation.bottom;
-      if ( !Number.isFinite(elevation) ) return text;
-      preview._dnd5eElevationLabelUsed = true;
-      const formattedElevation = elevation.toNearest(0.01).toLocaleString(game.i18n.lang);
-      const units = canvas.grid.units;
-      return `${text} (${formattedElevation}${units ? ` ${units}` : ""})`;
-    };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Refresh the separate template elevation label.
+   * @param {Region} preview  Preview region object.
+   */
+  static #refreshTemplateElevationLabel(preview) {
+    const elevation = preview.document.elevation.bottom;
+    if ( !Number.isFinite(elevation) ) return;
+
+    const distanceLabel = TemplatePlacement.#getPrimaryMeasurementLabel(preview);
+    if ( !distanceLabel ) return;
+
+    const formattedElevation = elevation.toNearest(0.01).toLocaleString(game.i18n.lang);
+    const units = canvas.grid.units;
+    const text = `\u2195 ${formattedElevation}${units ? ` ${units}` : ""}`;
+    const style = distanceLabel.style.clone();
+    style.fontSize *= 0.65;
+
+    const label = preview._measurementLabels.addChild(new PreciseText(text, style));
+    label.anchor.copyFrom(distanceLabel.anchor);
+    label.pivot.copyFrom(distanceLabel.pivot);
+    label.position.copyFrom(distanceLabel.position);
+    label.rotation = distanceLabel.rotation;
+    label.scale.copyFrom(distanceLabel.scale);
+    label.position.y += 18 * canvas.dimensions.uiScale;
+    preview._dnd5eElevationLabel = label;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the measurement label matching the primary template distance.
+   * @param {Region} preview  Preview region object.
+   * @returns {PreciseText|null}
+   */
+  static #getPrimaryMeasurementLabel(preview) {
+    const primary = TemplatePlacement.#getPrimaryMeasurementDistance(preview.document);
+    if ( Number.isFinite(primary) ) {
+      const primaryText = preview._dnd5eFormatMeasuredDistance(primary);
+      const label = preview._measurementLabels.children.find(label => label.text === primaryText);
+      if ( label ) return label;
+    }
+    return preview._measurementLabels.children.find(label => !label.text.endsWith("\u00b0")) ?? null;
   }
 
   /* -------------------------------------------- */
