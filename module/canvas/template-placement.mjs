@@ -127,6 +127,13 @@ export default class TemplatePlacement extends BasePlacement {
         top: origin.elevation + height
       };
     }
+    const width = this.config.shapes?.[0]?.width;
+    if ( this.config.targetType === "line" && Number.isFinite(width) ) {
+      return {
+        bottom: origin.elevation,
+        top: origin.elevation + width
+      };
+    }
     return {
       bottom: origin.elevation,
       top: origin.elevation + ((origin.depth ?? 1) * canvas.grid.distance)
@@ -312,14 +319,37 @@ export default class TemplatePlacement extends BasePlacement {
   static #displayTemplateElevation(preview) {
     if ( preview._dnd5eFormatMeasuredDistance ) return;
     preview._dnd5eFormatMeasuredDistance = preview._formatMeasuredDistance.bind(preview);
+    preview._dnd5eRefreshMeasurements = preview._refreshMeasurements.bind(preview);
+    preview._refreshMeasurements = (...args) => {
+      preview._dnd5eElevationLabelUsed = false;
+      return preview._dnd5eRefreshMeasurements(...args);
+    };
     preview._formatMeasuredDistance = distance => {
       const text = preview._dnd5eFormatMeasuredDistance(distance);
+      const primary = TemplatePlacement.#getPrimaryMeasurementDistance(preview.document);
+      if ( preview._dnd5eElevationLabelUsed || (Number.isFinite(primary) && (Math.abs(distance - primary) > 1e-9)) ) {
+        return text;
+      }
       const elevation = preview.document.elevation.bottom;
       if ( !Number.isFinite(elevation) ) return text;
+      preview._dnd5eElevationLabelUsed = true;
       const formattedElevation = elevation.toNearest(0.01).toLocaleString(game.i18n.lang);
       const units = canvas.grid.units;
       return `${text} (${formattedElevation}${units ? ` ${units}` : ""})`;
     };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the primary template measurement.
+   * @param {RegionDocument} region  Template region.
+   * @returns {number|undefined}
+   */
+  static #getPrimaryMeasurementDistance(region) {
+    const dimensions = region.flags.dnd5e?.dimensions;
+    if ( !dimensions ) return;
+    if ( ["cone", "cube", "line", "sphere"].includes(dimensions.type) ) return dimensions.size;
   }
 
   /* -------------------------------------------- */
