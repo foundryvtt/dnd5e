@@ -20,7 +20,8 @@ export default class TemplatePlacement extends BasePlacement {
   /** @override */
   async _place() {
     const results = [];
-    await canvas.regions.placeRegion({
+    const priorTargets = this.config.targetOnPlacement ? new Set(game.user.targets.map(t => t.id)) : null;
+    const region = await canvas.regions.placeRegion({
       name: RegionDocument.implementation.defaultName({ parent: canvas.scene }),
       color: this.config.color,
       displayMeasurements: true,
@@ -30,12 +31,17 @@ export default class TemplatePlacement extends BasePlacement {
     }, {
       // TODO: `attachToToken: true` if emanation
       create: false,
+      onChange: this.config.targetOnPlacement ? ({ document }) => TemplatePlacement.#targetTokens([document]) : undefined,
       preConfirm: ({ document, index }) => {
         const obj = document.toObject();
         results.push({ ...obj.shapes.at(-1) });
         // TODO: Set token ID if emanation attached to token
       }
     });
+    if ( !region && priorTargets ) {
+      canvas.tokens.setTargets(priorTargets);
+      return [];
+    }
     return results;
   }
 
@@ -92,6 +98,7 @@ export default class TemplatePlacement extends BasePlacement {
 
     const config = foundry.utils.mergeObject({
       color: game.user.color,
+      targetOnPlacement: target.targetOnPlacement,
       shapes: Array.fromRange(target.count || 1).map(() => foundry.utils.deepClone(templateData))
     }, placementConfig);
 
