@@ -28,6 +28,7 @@ export default class TemplatePlacement extends BasePlacement {
         name: RegionDocument.implementation.defaultName({ parent: canvas.scene }),
         color: this.config.color,
         displayMeasurements: true,
+        elevation: this.#getInitialElevation(),
         highlightMode: "coverage",
         levels: [canvas.level.id],
         restriction: {
@@ -77,9 +78,10 @@ export default class TemplatePlacement extends BasePlacement {
     const shapeIndex = shape._index;
     const shapeCount = shapes.length;
     const delta = (action.action === "core.ascend" ? 1 : -1) * (event.shiftKey ? 1 : canvas.grid.distance);
+    const base = this.#getInitialElevation();
     const elevation = {
-      bottom: Number.isFinite(document.elevation.bottom) ? document.elevation.bottom + delta : null,
-      top: Number.isFinite(document.elevation.top) ? document.elevation.top + delta : null
+      bottom: (Number.isFinite(document.elevation.bottom) ? document.elevation.bottom : base.bottom) + delta,
+      top: (Number.isFinite(document.elevation.top) ? document.elevation.top : base.top) + delta
     };
     event.preventDefault();
     event.stopImmediatePropagation();
@@ -88,6 +90,21 @@ export default class TemplatePlacement extends BasePlacement {
     document.updateShapeConstraints();
     preview.renderFlags.set({ refreshShapes: true });
     if ( onChange ) onChange({ preview, document, regionIndex, regionCount, shape, shapeIndex, shapeCount });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the initial elevation range for the template.
+   * @returns {{bottom: number|null, top: number|null}}
+   */
+  #getInitialElevation() {
+    const origin = this.config.origin;
+    if ( !origin ) return foundry.utils.deepClone(canvas.level.elevation);
+    return {
+      bottom: origin.elevation,
+      top: origin.elevation + ((origin.depth ?? 1) * canvas.grid.distance)
+    };
   }
 
   /* -------------------------------------------- */
@@ -143,6 +160,7 @@ export default class TemplatePlacement extends BasePlacement {
 
     const config = foundry.utils.mergeObject({
       color: game.user.color,
+      origin: activity.getUsageToken?.(),
       targetOnPlacement: target.targetOnPlacement,
       shapes: Array.fromRange(target.count || 1).map(() => foundry.utils.deepClone(templateData))
     }, placementConfig);
