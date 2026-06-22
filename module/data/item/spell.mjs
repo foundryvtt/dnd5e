@@ -116,7 +116,23 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
           collapseGroup: group => group !== CONFIG.DND5E.spellListTypes.class
         }
       }],
-      ["properties", this.compendiumBrowserPropertiesFilter("spell")]
+      ["properties", this.compendiumBrowserPropertiesFilter("spell")],
+      ["activationType", {
+        label: "DND5E.SpellActivationType", 
+        type: "set",
+        config: {
+          choices: () => {
+            const types = CONFIG.DND5E.abilityActivationTypes;
+            const keep = ["action", "bonus", "reaction", "minute", "hour", "day"];
+            return Object.fromEntries(
+              Object.entries(types)
+              .filter(([key]) => keep.includes(key))
+              .map(([key, label]) => [key, game.i18n.localize(label)])
+            );
+          },
+          keyPath: "system.activation.type"
+        }
+      }]
     ]);
   }
 
