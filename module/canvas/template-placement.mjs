@@ -266,7 +266,7 @@ export default class TemplatePlacement extends BasePlacement {
    * @returns {boolean}
    */
   static #testInsideTemplateRegion(token, region) {
-    if ( !token.testInsideRegion(region) ) return false;
+    if ( !token.testInsideRegion(region) && !TemplatePlacement.#sharesTemplateGridSpace(token, region) ) return false;
     const dimensions = region.flags.dnd5e?.dimensions;
     if ( !["cube", "sphere"].includes(dimensions?.type) ) return true;
 
@@ -293,5 +293,34 @@ export default class TemplatePlacement extends BasePlacement {
     const dy = (point.y - shape.y) / gridMultiplier;
     const dz = point.elevation - region.elevation.bottom;
     return Math.hypot(dx, dy, dz) <= dimensions.size;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Test whether a token shares an affected grid space with a template region.
+   * @param {TokenDocument} token   Token being tested.
+   * @param {RegionDocument} region Template region being tested.
+   * @returns {boolean}
+   */
+  static #sharesTemplateGridSpace(token, region) {
+    if ( canvas.grid.isGridless ) return false;
+    if ( !region.testPoint({ x: token.x, y: token.y, elevation: token.elevation }, 0.75) ) {
+      const top = token.elevation + (token.depth * canvas.grid.distance);
+      if ( (top <= region.elevation.bottom) || (token.elevation >= region.elevation.top) ) return false;
+    }
+
+    for ( const offset of token.getOccupiedGridSpaceOffsets(token._source) ) {
+      const topLeft = canvas.grid.getTopLeftPoint(offset);
+      const points = [
+        { x: topLeft.x + (canvas.grid.sizeX / 2), y: topLeft.y + (canvas.grid.sizeY / 2) },
+        { x: topLeft.x, y: topLeft.y },
+        { x: topLeft.x + canvas.grid.sizeX, y: topLeft.y },
+        { x: topLeft.x + canvas.grid.sizeX, y: topLeft.y + canvas.grid.sizeY },
+        { x: topLeft.x, y: topLeft.y + canvas.grid.sizeY }
+      ];
+      if ( points.some(point => region.polygonTree.testPoint(point, 0.75)) ) return true;
+    }
+    return false;
   }
 }
