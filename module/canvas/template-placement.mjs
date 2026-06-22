@@ -26,6 +26,11 @@ export default class TemplatePlacement extends BasePlacement {
       color: this.config.color,
       displayMeasurements: true,
       highlightMode: "coverage",
+      levels: [canvas.level.id],
+      restriction: {
+        enabled: true,
+        type: "move"
+      },
       shapes: this.config.shapes.map(s => this.#createShapeData(s)),
       "flags.core.MeasuredTemplate": true
     }, {
