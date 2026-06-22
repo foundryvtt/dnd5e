@@ -118,7 +118,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
       }],
       ["properties", this.compendiumBrowserPropertiesFilter("spell")],
       ["activationType", {
-        label: "DND5E.SpellActivationType", 
+        label: "DND5E.SpellCastTime", 
         type: "set",
         config: {
           choices: () => {
