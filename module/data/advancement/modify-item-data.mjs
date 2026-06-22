@@ -26,7 +26,7 @@ export class ModifyItemConfigurationData extends foundry.abstract.DataModel {
     return {
       changes: new ArrayField(new SchemaField({
         _id: new DocumentIdField(),
-        uuid: new DocumentUUIDField(),
+        uuid: new DocumentUUIDField({ type: "ActiveEffect", embedded: false }),
         identifiers: new SetField(new IdentifierField({ allowType: true }))
       }))
     };
