@@ -602,12 +602,12 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     }
     const actor = this.isAppliedEnchantment ? this.parent.parent : this.parent;
     if ( !(actor instanceof Actor) || !this.start?.combat?.started ) return;
-    const {units, value, expiry} = this.duration;
+    const { units, value, expiry } = this.duration;
     if ( units !== "rounds" ) return;
 
     // Default combat-duration expiry to turnStart to avoid effect expiry at round turnover
     if ( !expiry ) {
-      this.updateSource({"duration.expiry": "turnStart"});
+      this.updateSource({ "duration.expiry": "turnStart" });
       return;
     }
 
@@ -618,9 +618,11 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     const effectUpdate = {"flags.dnd5e.specialDuration": expiry, duration: {}};
     const relevantActor = expiry.startsWith("target") ? actor : fromUuidSync(this.origin).actor;
     const combatant = this.start.combat.getCombatantsByActor(relevantActor)[0];
-    if ( combatant && (combatant.turnNumber !== null) ) effectUpdate.start = {combatant: combatant.id};
-    const decreaseDuration = combatant.turnNumber > this.start.combat.turn;
-    if ( decreaseDuration ) effectUpdate.duration.value = value - 1;
+    if ( combatant && (combatant.turnNumber !== null) ) effectUpdate.start = { combatant: combatant.id };
+    if ( combatant ) {
+      const decreaseDuration = combatant.turnNumber > this.start.combat.turn;
+      if ( decreaseDuration ) effectUpdate.duration.value = value - 1;
+    }
     if ( ["targetEnd", "sourceEnd"].includes(expiry) ) effectUpdate.duration.expiry = "turnEnd";
     else effectUpdate.duration.expiry = "turnStart";
     this.updateSource(effectUpdate);
@@ -671,8 +673,8 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     // If out of combat & effect expires, delete it
     if ( game.user.isActiveGM && data.duration?.expired ) {
       const actor = this.isAppliedEnchantment ? this.parent.parent : this.parent;
-      const combat = this.start.combat ?? game.combat;
-      if ( !combat?.getCombatantsByActor(actor).length ) return this.delete()
+      const combat = this.start?.combat ?? game.combat;
+      if ( !combat?.getCombatantsByActor(actor).length ) return this.delete();
     }
 
     // Display proper scrolling status effects for exhaustion

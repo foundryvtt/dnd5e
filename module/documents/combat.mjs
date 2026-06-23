@@ -161,7 +161,7 @@ export default class Combat5e extends Combat {
         parent: item
       });
     }
-    foundry.documents.modifyBatch(batchDelete);
+    return foundry.documents.modifyBatch(batchDelete);
   }
 
   /* -------------------------------------------- */
