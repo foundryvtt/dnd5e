@@ -1,13 +1,16 @@
 import BaseAdvancement from "../advancement/base-advancement.mjs";
 import AdvancementField from "./advancement-field.mjs";
 import MappingField from "./mapping-field.mjs";
+import TypeDataField5e from "./type-data-field.mjs";
 
 /**
  * Field that stores advancement on an item.
  */
 export default class AdvancementCollectionField extends MappingField {
   constructor(options) {
-    super(new AdvancementField(), options);
+    super(new TypeDataField5e({
+      getModel: type => CONFIG.DND5E.advancementTypes[type]?.documentClass
+    }), options);
   }
 
   /* -------------------------------------------- */
