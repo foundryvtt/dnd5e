@@ -168,13 +168,11 @@ export default class DamageRoll extends BasicRoll {
    * @protected
    */
   configureDamage({ critical={} }={}) {
+    // Critical scaling is destructive and applied exactly once. The damage dialog re-builds rolls from configuration
+    // rather than re-running this method, so a second call (e.g. from external code) is a no-op rather than a
+    // double-application.
+    if ( this.options.configured ) return;
     critical = foundry.utils.mergeObject(critical, this.options.critical ?? {}, { inplace: false });
-
-    // Rebuild the term list from the pristine, post-preprocess formula captured on the first call, so that re-running
-    // this method (e.g. toggling critical in the damage dialog) always starts from the same base rather than
-    // compounding transforms on top of an already-modified list.
-    this.options.baseFormula ??= this._formula;
-    this.terms = this.constructor.parse(this.options.baseFormula, this.data);
 
     if ( this.isCritical ) {
       const newTerms = [];
