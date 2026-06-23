@@ -1,6 +1,6 @@
 import TypeDataField5e from "../../fields/type-data-field.mjs";
 
-const { DocumentIdField, NumberField, ObjectField, SchemaField, StringField } = foundry.data.fields;
+const { DocumentIdField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Field for storing a region behavior applied by an activity to its template.
