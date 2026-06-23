@@ -40,25 +40,11 @@ export default class TypedField extends foundry.data.fields.ObjectField {
 
   /* -------------------------------------------- */
 
-  /**
-   * Get the defaults object for the specified field as defined in metadata.
-   * @param {string} type                            Data being prepared for this field.
-   * @param {object} [options={}]
-   * @param {DataModel} [options.parent]             Parent data.
-   * @param {DataModelUpdateState} [options._state]  Internal state variables which are used during recursion.
-   * @returns {object}
-   */
-  getType(value, { parent, _state }={}) {
-    return value.type ?? _state?.source?.type ?? parent?.type;
-  }
-
-  /* -------------------------------------------- */
-
   /** @override */
   _cleanType(value, options, _state) {
     if ( !(typeof value === "object") ) value = {};
 
-    const type = this.getType(value, { _state });
+    const type = _state.dnd5e?.type ?? value.type ?? _state.source?.type;
     const cls = this.getModel(type);
     if ( cls ) return cls.cleanData(value, options, _state);
     if ( options.partial ) return value;
@@ -72,7 +58,7 @@ export default class TypedField extends foundry.data.fields.ObjectField {
 
   /** @override */
   initialize(value, model, options = {}) {
-    const cls = this.getModel(this.getType(value, { parent: model }));
+    const cls = this.getModel(options.dnd5e?.type ?? value.type);
     if ( cls ) return new cls(value, { parent: model, ...options });
     return foundry.utils.deepClone(value);
   }
@@ -81,7 +67,7 @@ export default class TypedField extends foundry.data.fields.ObjectField {
 
   /** @override */
   _migrate(value, options, _state) {
-    const cls = this.getModel(this.getType(value, { _state }));
+    const cls = this.getModel(_state.dnd5e?.type ?? value.type ?? _state.source?.type);
     if ( cls ) cls.migrateDataSafe(value);
     return value;
   }
