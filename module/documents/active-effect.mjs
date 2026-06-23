@@ -594,25 +594,12 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     if ( await super._preCreate(data, options, user) === false ) return false;
     if ( options.keepOrigin === false ) this.updateSource({ origin: this.parent.uuid });
 
-    // Enchantments cannot be added directly to actors
-    if ( (this.type === "enchantment") && (this.parent instanceof Actor) ) {
-      ui.notifications.error("DND5E.ENCHANTMENT.Warning.NotOnActor", { localize: true });
-      return false;
-    }
-
-    if ( this.isAppliedEnchantment ) {
-      const start = this.constructor.getEffectStart();
-      for ( const key of Object.keys(start) ) {
-        if ( data.start?.[key] !== undefined ) delete start[key]; // Prefer user-defined duration data
-      }
-    }
     const actor = this.isAppliedEnchantment ? this.parent.parent : this.parent;
     if ( !(actor instanceof Actor) || !this.start?.combat?.started ) return;
     const { units, value, expiry } = this.duration;
-    if ( units !== "rounds" ) return;
 
     // Default combat-duration expiry to turnStart to avoid effect expiry at round turnover
-    if ( !expiry ) {
+    if ( !expiry && (units === "rounds") ) {
       this.updateSource({ "duration.expiry": "turnStart" });
       return;
     }
@@ -620,8 +607,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     // Convert start/end of source/target next turn expiries to start/end expiries with the proper combatant
     // (default for source, combatant of actor it's applied to for target) and proper duration
     if ( !this.constructor.PSEUDO_EXPIRIES.has(expiry) ) return;
-    // TODO: Use data model instead of flag
-    const effectUpdate = {"flags.dnd5e.specialDuration": expiry, duration: {}};
+    const effectUpdate = {"system.specialDuration": expiry, duration: {}};
     const relevantActor = expiry.startsWith("target") ? actor : fromUuidSync(this.origin).actor;
     const combatant = this.start.combat.getCombatantsByActor(relevantActor)[0];
     if ( combatant && (combatant.turnNumber !== null) ) effectUpdate.start = { combatant: combatant.id };

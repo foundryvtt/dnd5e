@@ -164,12 +164,12 @@ export default class Combat5e extends Combat {
       parent: actor
     }];
     for ( const effect of actor.effects ) {
-      if ( effect.duration.expired || effect.flags.dnd5e?.specialDuration ) batchDelete[0].ids.push(effect.id);
+      if ( effect.duration.expired || effect.system.specialDuration ) batchDelete[0].ids.push(effect.id);
     }
     for ( const item of actor.items ) {
       const toDelete = [];
       for ( const effect of item.effects ) {
-        if ( effect.isAppliedEnchantment && (effect.duration.expired || effect.flags.dnd5e?.specialDuration) ) {
+        if ( effect.isAppliedEnchantment && (effect.duration.expired || effect.system.specialDuration) ) {
           toDelete.push(effect.id);
         }
       }

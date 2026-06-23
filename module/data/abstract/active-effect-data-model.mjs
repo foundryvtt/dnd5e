@@ -1,8 +1,22 @@
+const { StringField } = foundry.data.fields;
+
 /**
  * Abstract base class to add some shared functionality to all of the system's custom active effect types.
  * @abstract
  */
 export default class ActiveEffectDataModel extends foundry.data.ActiveEffectTypeDataModel {
+  /* -------------------------------------------- */
+  /*  Model Configuration                         */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static defineSchema() {
+    return {
+      ...super.defineSchema(),
+      specialDuration: new StringField({ required: true, nullable: true, initial: null })
+    };
+  }
+
   /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
