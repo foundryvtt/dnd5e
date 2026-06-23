@@ -1,14 +1,14 @@
 import BaseActivityData from "../activity/base-activity.mjs";
 import MappingField from "./mapping-field.mjs";
-import TypedField from "./typed-field.mjs";
+import TypeDataField5e from "./type-data-field.mjs";
 
 /**
  * Field that stores activities on an item.
  */
 export class ActivitiesField extends MappingField {
   constructor(options) {
-    super(new TypedField({
-      getModelCallback: type => CONFIG.DND5E.activityTypes[type]?.documentClass
+    super(new TypeDataField5e({
+      getModel: type => CONFIG.DND5E.activityTypes[type]?.documentClass
     }), options);
   }
 
@@ -28,10 +28,10 @@ export class ActivitiesField extends MappingField {
 /**
  * Field that stores activity data and swaps class based on activity type.
  */
-export class ActivityField extends TypedField {
+export class ActivityField extends TypeDataField5e {
   constructor(...args) {
     foundry.utils.logCompatibilityWarning(
-      "`ActivityField` has been deprecated in favor of a `TypedField`.",
+      "`ActivityField` has been deprecated in favor of a `TypeDataField5e`.",
       { since: "DnD5e 6.0", until: "DnD5e 6.2" }
     );
     super(...args);
@@ -42,7 +42,7 @@ export class ActivityField extends TypedField {
   /** @inheritDoc */
   static get _defaults() {
     return foundry.utils.mergeObject(super._defaults, {
-      getModelCallback: type => CONFIG.DND5E.activityTypes[type]?.documentClass
+      getModel: type => CONFIG.DND5E.activityTypes[type]?.documentClass
     });
   }
 }
