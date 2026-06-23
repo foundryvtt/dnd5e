@@ -366,7 +366,6 @@ export default class BasicRoll extends Roll {
 
   /**
    * Replaces all dice or pool terms that have modifiers with their maximum/minimum value.
-   *
    * @param {object} [options={}]            Extra optional arguments which describe or modify the BasicRoll.
    */
   preCalculateDiceTerms(options={}) {
@@ -385,85 +384,61 @@ export default class BasicRoll extends Roll {
   /* -------------------------------------------- */
 
   /**
-   * Summarizes information about valid applicable modifiers for the term to be minimized or maximized.
-   *
-   * @param {DiceTerm|PoolTerm} term  PoolTerm to get the maximum/minimum value.
-   * @returns {BasicRollTermApplicableModifier[]}
+   * Synchronously apply a term's result-selection modifiers to its already-populated results by dispatching to the
+   * term's own modifier handlers. Asynchronous handlers are skipped, as they cannot be awaited on this synchronous
+   * path. Reroll and advantage/disadvantage could not change a forced extreme in any case, but explosion could (its
+   * maximum is unbounded).
+   * @param {DiceTerm|PoolTerm} term  Term whose results have been populated with their maximum or minimum faces.
    * @internal
    */
-  static _matchValidModifiers(term) {
-    const currentModifiers = foundry.utils.deepClone(term.modifiers);
-    const keep = new Set(["k", "kh", "kl"]);
-    const drop = new Set(["d", "dh", "dl"]);
-    const validModifiers = new Set([...keep, ...drop]);
-    let rgx = /([kd][hl]?)(\d+)?/i;
-    if ( term instanceof DiceTerm ) {
-      validModifiers.add("max").add("min");
-      rgx = /(m[ai][xn]|[kd][hl]?)(\d+)?/i;
-    }
-    let modifierCommands = [];
-    for ( const modifier of currentModifiers ) {
-      const match = modifier.match(rgx);
-      if ( !match ) continue;
-      if ( match[0].length < match.input.length ) currentModifiers.push(match.input.slice(match[0].length));
-      let [, command, value] = match;
-      command = command.toLowerCase();
-      if ( !validModifiers.has(command) ) continue;
-      modifierCommands.push({ command, value: value ?? "", keep: keep.has(command), drop: drop.has(command) });
-    }
-    return modifierCommands;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Gets information from passed die and calculates the maximum or minimum value that could be rolled.
-   *
-   * @param {DiceTerm} die                            DiceTerm to get the maximum/minimum value.
-   * @param {object} [preCalculateOptions={}]         Additional options to modify preCalculate functionality.
-   * @param {boolean} [preCalculateOptions.minimize=false]  Calculate the minimum value instead of the maximum.
-   * @returns {number|null}                                 Maximum/Minimum value that could be rolled as an integer, or
-   *                                                        null if the modifiers could not be precalculated.
-   */
-  static preCalculateTerm(die, { minimize=false }={}) {
-    let face = minimize ? 1 : die.faces;
-    let number = die.number;
-    const modifiers = BasicRoll._matchValidModifiers(die);
-    if ( !modifiers.length ) return null;
-    for ( const modifier of modifiers ) {
-      const amount = parseInt(modifier.value) || (modifier.command === "max" || modifier.command === "min" ? -1 : 1);
-      if ( amount > 0 ) {
-        if ( (modifier.command === "max" && minimize) || (modifier.command === "min" && !minimize) ) continue;
-        else if ( (modifier.command === "max" || modifier.command === "min") ) face = Math.min(die.faces, amount);
-        else if ( modifier.keep ) number = Math.min(number, amount);
-        else if ( modifier.drop ) number = Math.max(1, number - amount);
+  static _applyMaxMinModifiers(term) {
+    const cls = term.constructor;
+    const union = Object.keys(cls.MODIFIERS).sort((a, b) => b.length - a.length).join("|");
+    const pattern = new RegExp(`(${union})[^A-z\\s()+\\-*/]*`, "gi");
+    for ( const sequence of term.modifiers.map(m => m.toLowerCase()) ) {
+      for ( const [matched, command] of sequence.matchAll(pattern) ) {
+        let fn = cls.MODIFIERS[command];
+        if ( typeof fn === "string" ) fn = term[fn];
+        if ( (typeof fn === "function") && !(fn instanceof foundry.utils.AsyncFunction) ) fn.call(term, matched);
       }
     }
-
-    return face * number;
-
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Gets information from passed die and calculates the maximum or minimum value that could be rolled.
-   *
-   * @param {PoolTerm} pool                           PoolTerm to get the maximum/minimum value.
-   * @param {object} [preCalculateOptions={}]         Additional options to modify preCalculate functionality.
+   * Calculate the maximum or minimum value that could be rolled by a dice term, honoring all of its modifiers by
+   * populating its results with the extreme face value and then delegating to the term's real modifier handlers.
+   * @param {DiceTerm} die                                  DiceTerm to get the maximum/minimum value.
+   * @param {object} [preCalculateOptions={}]               Additional options to modify preCalculate functionality.
    * @param {boolean} [preCalculateOptions.minimize=false]  Calculate the minimum value instead of the maximum.
    * @returns {number|null}                                 Maximum/Minimum value that could be rolled as an integer, or
-   *                                                        null if the modifiers could not be precalculated.
+   *                                                        null if the term could not be precalculated.
+   */
+  static preCalculateTerm(die, { minimize=false }={}) {
+    if ( !die.modifiers.length || !Number.isFinite(die.number) || !Number.isFinite(die.faces) ) return null;
+    for ( let n = die.results.length; n < Math.abs(die.number); n++ ) {
+      die.results.push({ active: true, result: minimize ? Math.min(1, die.faces) : die.faces });
+    }
+    die._evaluated = true;
+    this._applyMaxMinModifiers(die);
+    return die.total;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Calculate the maximum or minimum value that could be rolled by a pool term, honoring all of its modifiers by
+   * evaluating the pool at its extreme and then delegating to the term's real modifier handlers.
+   * @param {PoolTerm} pool                                 PoolTerm to get the maximum/minimum value.
+   * @param {object} [preCalculateOptions={}]               Additional options to modify preCalculate functionality.
+   * @param {boolean} [preCalculateOptions.minimize=false]  Calculate the minimum value instead of the maximum.
+   * @returns {number|null}                                 Maximum/Minimum value that could be rolled as an integer, or
+   *                                                        null if the term could not be precalculated.
    */
   static preCalculatePoolTerm(pool, { minimize=false }={}) {
     pool.evaluate({ maximize: !minimize, minimize });
-    const modifiers = BasicRoll._matchValidModifiers(pool);
-    if ( !modifiers.length ) return null;
-    for ( const modifier of modifiers ) {
-      if ( modifier.keep ) pool.keep(modifier.command + modifier.value);
-      else if ( modifier.drop ) pool.drop(modifier.command + modifier.value);
-    }
-
+    this._applyMaxMinModifiers(pool);
     return pool.total;
   }
 
