@@ -1,4 +1,4 @@
-import {default as AntimagicRegionBehaviorType} from "./antimagic.mjs";
+import {default as AntimagicRegionBehaviorType, AntimagicActivityBehavior} from "./antimagic.mjs";
 import {
   default as ApplyActiveEffect5eRegionBehaviorType, ApplyActiveEffectActivityBehavior
 } from "./apply-active-effect.mjs";
@@ -6,6 +6,7 @@ import {default as DifficultTerrainRegionBehaviorType, DifficultTerrainActivityB
 import {default as RotateAreaRegionBehaviorType} from "./rotate-area.mjs";
 
 export {
+  AntimagicActivityBehavior,
   AntimagicRegionBehaviorType,
   ApplyActiveEffectActivityBehavior,
   ApplyActiveEffect5eRegionBehaviorType,

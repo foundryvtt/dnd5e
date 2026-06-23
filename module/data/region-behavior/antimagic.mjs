@@ -1,4 +1,5 @@
 import ActiveEffect5e from "../../documents/active-effect.mjs";
+import BaseActivityBehavior from "./base-activity-behavior.mjs";
 
 const { BooleanField, NumberField, SetField, StringField } = foundry.data.fields;
 
@@ -6,11 +7,6 @@ const { BooleanField, NumberField, SetField, StringField } = foundry.data.fields
  * The data model for a region behavior that represents an area of antimagic.
  */
 export default class AntimagicRegionBehaviorType extends foundry.data.regionBehaviors.RegionBehaviorType {
-
-  /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.REGIONBEHAVIORS.ANTIMAGIC"];
-
-  /* ---------------------------------------- */
 
   /** @override */
   static defineSchema() {
@@ -53,4 +49,28 @@ export default class AntimagicRegionBehaviorType extends foundry.data.regionBeha
     [CONST.REGION_EVENTS.TOKEN_ENTER]: this.#onTokenEnter,
     [CONST.REGION_EVENTS.TOKEN_EXIT]: this.#onTokenExit
   };
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Data model representing the difficult terrain activity behavior configuration.
+ */
+export class AntimagicActivityBehavior extends BaseActivityBehavior {
+
+  /** @override */
+  static defineSchema() {
+    return {};
+  }
+
+  /* -------------------------------------------- */
+  /*  Methods                                     */
+  /* -------------------------------------------- */
+
+  /** @override */
+  createBehaviorData(activity, options={}) {
+    return {
+      type: "dnd5e.antimagic"
+    };
+  }
 }

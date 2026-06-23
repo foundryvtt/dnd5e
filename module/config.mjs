@@ -1104,6 +1104,11 @@ preLocalize("activityActivationTypes", { key: "label" });
  * @enum {ActivityBehaviorConfiguration}
  */
 DND5E.activityBehaviorTypes = {
+  antimagic: {
+    label: "TYPES.RegionBehavior.dnd5e.antimagic",
+    icon: "systems/dnd5e/icons/svg/behaviors/antimagic.svg",
+    model: regionBehaviors.AntimagicActivityBehavior
+  },
   applyActiveEffect: {
     label: "TYPES.RegionBehavior.applyActiveEffect",
     icon: "systems/dnd5e/icons/svg/behaviors/apply-active-effect.svg",
