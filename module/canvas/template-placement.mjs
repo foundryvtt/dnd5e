@@ -560,39 +560,7 @@ export default class TemplatePlacement extends BasePlacement {
 
   /* -------------------------------------------- */
 
-  /**
-   * Test whether a token shares an affected grid space with a template region.
-   * @param {TokenDocument} token   Token being tested.
-   * @param {RegionDocument} region Template region being tested.
-   * @returns {boolean}
-   */
-  static #sharesTemplateGridSpace(token, region) {
-    if ( canvas.grid.isGridless ) return false;
-    if ( !region.testPoint({ x: token.x, y: token.y, elevation: token.elevation }, 0.75) ) {
-      const top = token.elevation + (token.depth * canvas.grid.distance);
-      if ( (top <= region.elevation.bottom) || (token.elevation >= region.elevation.top) ) return false;
-    }
-
-    const polygonTree = region.object?.animationState?.polygonTree ?? region.polygonTree;
-    const origin = TemplatePlacement.#getTemplateOrigin(region);
-    const reachablePoints = TemplatePlacement.#getReachableTemplatePoints(region, polygonTree);
-    for ( const offset of token.getOccupiedGridSpaceOffsets(token._source) ) {
-      const polygon = templateGridSpacePolygon(offset);
-      if ( !TemplatePlacement.#testTemplateShapePolygon(polygon, region) ) continue;
-      const [center, ...points] = templateGridSpacePoints(offset);
-      if ( TemplatePlacement.#testTemplateGridPoint(center, polygonTree, origin) ) return true;
-      if ( points.some(point => polygonTree.testPoint(point, 0.75)) ) return true;
-      if ( polygonTree.intersectPolygon(polygon).area > 0 ) return true;
-      const targetPoints = TemplatePlacement.#getTemplateShapePolygonPoints(polygon, region);
-      if ( reachablePoints.some(source => targetPoints.some(target =>
-        TemplatePlacement.#testTemplateLineOfEffect(source, target, region))) ) return true;
-    }
-    return false;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
+    /**
    * Get the template origin for shapes where core measurement includes the origin grid space.
    * @param {RegionDocument} region Template region being tested.
    * @returns {Point|null}
