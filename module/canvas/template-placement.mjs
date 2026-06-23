@@ -574,7 +574,8 @@ export default class TemplatePlacement extends BasePlacement {
     }
 
     const polygonTree = region.object?.animationState?.polygonTree ?? region.polygonTree;
-    const highlightedGridSpacesOnly = game.settings.get("dnd5e", "targetTemplateGridSpaces");
+    const origin = TemplatePlacement.#getTemplateOrigin(region);
+    const reachablePoints = TemplatePlacement.#getReachableTemplatePoints(region, polygonTree);
     for ( const offset of token.getOccupiedGridSpaceOffsets(token._source) ) {
       const polygon = templateGridSpacePolygon(offset);
       if ( !TemplatePlacement.#testTemplateShapePolygon(polygon, region) ) continue;
@@ -582,6 +583,9 @@ export default class TemplatePlacement extends BasePlacement {
       if ( TemplatePlacement.#testTemplateGridPoint(center, polygonTree, origin) ) return true;
       if ( points.some(point => polygonTree.testPoint(point, 0.75)) ) return true;
       if ( polygonTree.intersectPolygon(polygon).area > 0 ) return true;
+      const targetPoints = TemplatePlacement.#getTemplateShapePolygonPoints(polygon, region);
+      if ( reachablePoints.some(source => targetPoints.some(target =>
+        TemplatePlacement.#testTemplateLineOfEffect(source, target, region))) ) return true;
     }
     return false;
   }
@@ -639,6 +643,83 @@ export default class TemplatePlacement extends BasePlacement {
   static #testTemplateShapePolygon(polygon, region) {
     const shape = region.shapes.find(s => ["circle", "cone", "line", "rectangle"].includes(s.type));
     return (shape?.polygonTree?.intersectPolygon(polygon).area ?? 0) > 0;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get points where the wall-constrained area overlaps the unrestricted template shape.
+   * @param {RegionDocument} region       Template region being tested.
+   * @param {PolygonTree} polygonTree     Wall-constrained region polygon.
+   * @returns {Point[]}
+   */
+  static #getReachableTemplatePoints(region, polygonTree) {
+    const shape = region.shapes.find(s => ["circle", "cone", "line", "rectangle"].includes(s.type));
+    if ( !shape?.polygonTree ) return [];
+    return shape.polygonTree.polygons.flatMap(polygon =>
+      TemplatePlacement.#getPolygonSamplePoints(polygonTree.intersectPolygon(polygon)));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get points where a polygon overlaps the unrestricted template shape.
+   * @param {PIXI.Polygon} polygon    Polygon to intersect.
+   * @param {RegionDocument} region   Template region being tested.
+   * @returns {Point[]}
+   */
+  static #getTemplateShapePolygonPoints(polygon, region) {
+    const shape = region.shapes.find(s => ["circle", "cone", "line", "rectangle"].includes(s.type));
+    if ( !shape?.polygonTree ) return [];
+    return TemplatePlacement.#getPolygonSamplePoints(shape.polygonTree.intersectPolygon(polygon));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get sample points from a polygon tree.
+   * @param {PolygonTree} polygonTree Polygon tree to sample.
+   * @returns {Point[]}
+   */
+  static #getPolygonSamplePoints(polygonTree) {
+    return polygonTree.polygons.flatMap(polygon => {
+      const points = [];
+      for ( let i = 0; i < polygon.points.length; i += 2 ) {
+        points.push({ x: polygon.points[i], y: polygon.points[i + 1] });
+      }
+      if ( points.length ) {
+        points.push({
+          x: points.reduce((sum, point) => sum + point.x, 0) / points.length,
+          y: points.reduce((sum, point) => sum + point.y, 0) / points.length
+        });
+      }
+      return points;
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Test whether a line between two points is unobstructed by move walls.
+   * @param {Point} source          Source point.
+   * @param {Point} target          Target point.
+   * @param {RegionDocument} region Template region being tested.
+   * @returns {boolean}
+   */
+  static #testTemplateLineOfEffect(source, target, region) {
+    const level = canvas.scene.levels.get(Array.from(region.levels)[0]);
+    if ( !level ) return true;
+    const elevation = TemplatePlacement.#getTemplateCenterElevation(region) ?? region.elevation.bottom;
+    const config = {
+      type: "move",
+      level,
+      edgeTypes: { wall: true, outerBounds: true },
+      useThreshold: true,
+      mode: "any"
+    };
+    return !CONFIG.Canvas.polygonBackends.move.testCollision(
+      { ...source, elevation }, { ...target, elevation }, config
+    );
   }
 }
 
