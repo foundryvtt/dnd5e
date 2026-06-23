@@ -25,7 +25,7 @@ export default class BaseEnchantActivityData extends BaseActivityData {
           effect: new SetField(new DocumentIdField()),
           item: new SetField(new DocumentUUIDField({ type: "Item" }))
         })
-      })),
+      }, { supportedTypes: new Set(["enchantment"]) })),
       enchant: new SchemaField({
         self: new BooleanField()
       }),

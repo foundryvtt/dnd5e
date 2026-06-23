@@ -80,14 +80,6 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 
   /* -------------------------------------------- */
 
-  /**
-   * Type of active effects that can be added to applied effects.
-   * @type {string}
-   */
-  static SUPPORTED_EFFECT_TYPE = "base";
-
-  /* -------------------------------------------- */
-
   /** @override */
   tabGroups = {
     sheet: "identity",
@@ -319,8 +311,9 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 
     if ( context.activity.effects ) {
       const appliedEffects = new Set(context.activity.effects?.map(e => e._id) ?? []);
+      const supportedTypes = this.activity.schema.getField("effects.element").supportedTypes;
       context.allEffects = this.item.effects
-        .filter(e => e.type === this.constructor.SUPPORTED_EFFECT_TYPE)
+        .filter(e => supportedTypes.has(e.type))
         .map(effect => ({
           value: effect.id, label: effect.name, selected: appliedEffects.has(effect.id)
         }));
@@ -721,14 +714,14 @@ export default class ActivitySheet extends PseudoDocumentSheet {
     if ( foundry.utils.hasProperty(submitData, "appliedLocalEffects")
       || foundry.utils.hasProperty(submitData, "appliedRemoteEffects") ) {
       submitData.effects ??= this.activity.toObject().effects;
+      const supportedTypes = this.activity.schema.getField("effects.element").supportedTypes;
       for ( const _id of submitData.appliedLocalEffects ?? [] ) {
         if ( submitData.effects.find(e => e._id === _id) ) continue;
         submitData.effects.push({ _id });
       }
       for ( const uuid of submitData.appliedRemoteEffects ?? [] ) {
         const effect = fromUuidSync(uuid, { strict: false });
-        if ( (effect?.type !== this.constructor.SUPPORTED_EFFECT_TYPE)
-          || submitData.effects.find(e => e.uuid === uuid) ) continue;
+        if ( !supportedTypes.has(effect?.type) || submitData.effects.find(e => e.uuid === uuid) ) continue;
         submitData.effects.push({ _id: `${foundry.utils.randomID(10)}REMOTE`, uuid });
       }
       delete submitData.appliedLocalEffects;

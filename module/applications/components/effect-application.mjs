@@ -214,7 +214,8 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
     }
 
     // Enable an existing effect on the target if it originated from this effect
-    const existingEffect = actor.effects.find(e => e.origin === origin.uuid);
+    const existingEffect = effect.inCompendium ? actor.effects.find(e => e._stats.compendiumSource === effect.uuid)
+      : actor.effects.find(e => e.origin === origin.uuid);
     if ( existingEffect ) {
       return existingEffect.update(foundry.utils.mergeObject({
         ...durationOverride,

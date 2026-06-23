@@ -21,6 +21,13 @@ export default class AppliedEffectField extends SchemaField {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  static get _defaults() {
+    return foundry.utils.mergeObject(super._defaults, { supportedTypes: new Set(["base"]) });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   initialize(value, model, options={}) {
     const obj = super.initialize(value, model, options);
     const item = model.item;
