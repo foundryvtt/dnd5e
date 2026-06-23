@@ -272,7 +272,8 @@
 
 /**
  * @typedef EffectApplicationData
- * @property {string} _id  ID of the effect to apply.
+ * @property {string} _id        ID of configuration, matches local effect ID if UUID isn't specified.
+ * @property {string} uuid       UUID of remote effect to apply.
  * @property {object} level
  * @property {number} level.min  Minimum level at which this effect can be applied.
  * @property {number} level.max  Maximum level at which this effect can be applied.

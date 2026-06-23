@@ -311,26 +311,25 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 
     if ( context.activity.effects ) {
       const appliedEffects = new Set(context.activity.effects?.map(e => e._id) ?? []);
+      const supportedTypes = this.activity.schema.getField("effects.element").supportedTypes;
       context.allEffects = this.item.effects
-        .filter(e => e.type !== "enchantment")
+        .filter(e => supportedTypes.has(e.type))
         .map(effect => ({
           value: effect.id, label: effect.name, selected: appliedEffects.has(effect.id)
         }));
-      context.appliedEffects = context.activity.effects.reduce((arr, data) => {
-        if ( !data.effect ) return arr;
-        const effect = {
+      context.appliedEffects = (await Promise.all(context.activity.effects.map(async data => {
+        const effectDocument = await data.getEffect();
+        return effectDocument ? this._prepareAppliedEffectContext(context, {
           data,
           collapsed: this.expandedSections.get(`effects.${data._id}`) ? "" : "collapsed",
-          effect: data.effect,
+          effect: effectDocument,
           fields: this.activity.schema.fields.effects.element.fields,
           prefix: `effects.${data._index}.`,
           source: context.source.effects[data._index] ?? data,
-          contentLink: data.effect.toAnchor().outerHTML,
+          contentLink: effectDocument.toAnchor().outerHTML,
           additionalSettings: "systems/dnd5e/templates/activity/parts/activity-effect-settings.hbs"
-        };
-        arr.push(this._prepareAppliedEffectContext(context, effect));
-        return arr;
-      }, []);
+        }) : null;
+      }))).filter(_ => _);
     }
 
     context.denominationOptions = [
@@ -664,7 +663,7 @@ export default class ActivitySheet extends PseudoDocumentSheet {
    */
   static async #deleteEffect(event, target) {
     if ( !this.activity.effects ) return;
-    const effectId = target.closest("[data-effect-id]")?.dataset.effectId;
+    const { effectId } = target.closest("[data-effect-id]")?.dataset ?? {};
     const result = await this.item.effects.get(effectId)?.deleteDialog({}, { render: false });
     if ( result instanceof ActiveEffect ) {
       const effects = this.activity.toObject().effects.filter(e => e._id !== effectId);
@@ -695,9 +694,9 @@ export default class ActivitySheet extends PseudoDocumentSheet {
    * @param {HTMLElement} target  The button that was clicked.
    */
   static #dissociateEffect(event, target) {
-    const { effectId } = target.closest("[data-effect-id]")?.dataset ?? {};
-    if ( !this.activity.effects || !effectId ) return;
-    const effects = this.activity.toObject().effects.filter(e => e._id !== effectId);
+    const { profileId } = target.closest("[data-profile-id]")?.dataset ?? {};
+    if ( !this.activity.effects || !profileId ) return;
+    const effects = this.activity.toObject().effects.filter(e => e._id !== profileId);
     this.activity.update({ effects });
   }
 
@@ -712,14 +711,21 @@ export default class ActivitySheet extends PseudoDocumentSheet {
       const data = foundry.utils.getProperty(submitData, keyPath);
       if ( data ) foundry.utils.setProperty(submitData, keyPath, Object.values(data));
     }
-    if ( foundry.utils.hasProperty(submitData, "appliedEffects") ) {
-      const effects = submitData.effects ?? this.activity.toObject().effects;
-      submitData.effects = effects.filter(e => submitData.appliedEffects.includes(e._id));
-      for ( const _id of submitData.appliedEffects ) {
+    if ( foundry.utils.hasProperty(submitData, "appliedLocalEffects")
+      || foundry.utils.hasProperty(submitData, "appliedRemoteEffects") ) {
+      submitData.effects ??= this.activity.toObject().effects;
+      const supportedTypes = this.activity.schema.getField("effects.element").supportedTypes;
+      for ( const _id of submitData.appliedLocalEffects ?? [] ) {
         if ( submitData.effects.find(e => e._id === _id) ) continue;
         submitData.effects.push({ _id });
       }
-      delete submitData.appliedEffects;
+      for ( const uuid of submitData.appliedRemoteEffects ?? [] ) {
+        const effect = fromUuidSync(uuid, { strict: false });
+        if ( !supportedTypes.has(effect?.type) || submitData.effects.find(e => e.uuid === uuid) ) continue;
+        submitData.effects.push({ _id: `${foundry.utils.randomID(10)}REMOTE`, uuid });
+      }
+      delete submitData.appliedLocalEffects;
+      delete submitData.appliedRemoteEffects;
     }
     return submitData;
   }

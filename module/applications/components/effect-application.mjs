@@ -78,10 +78,10 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
 
     // Build the frame HTML only once
     if ( !this.effectsList || !this.targetList ) {
-      if ( !this.effects.length ) {
-        const item = this.chatMessage.getAssociatedItem();
-        this.effects = Array.from(this.querySelectorAll("option")).map(o => item?.effects.get(o.value)).filter(_ => _);
-      }
+      let effectPromise;
+      if ( !this.effects.length ) effectPromise = Promise.all(
+        Array.from(this.querySelectorAll("option")).map(o => fromUuid(o.value))
+      ).then(p => this.effects = p.filter(_ => _));
 
       const div = document.createElement("div");
       div.classList.add("card-tray", "effects-tray", "collapsible");
@@ -101,7 +101,8 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       `;
       this.replaceChildren(div);
       this.effectsList = div.querySelector(".effects");
-      this.buildEffectsList();
+      if ( effectPromise ) effectPromise.then(() => this.buildEffectsList());
+      else this.buildEffectsList();
       div.querySelector(".wrapper").prepend(...this.buildTargetContainer());
       this.targetList.addEventListener("change", this._onCheckTarget.bind(this));
       div.addEventListener("click", this._handleClickHeader.bind(this));
@@ -126,7 +127,8 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
           <section class="loading" data-uuid="${effect.uuid}"><i class="fas fa-spinner fa-spin-pulse"></i></section>
         `,
         tooltipClass: "dnd5e2 dnd5e-tooltip item-tooltip themed theme-light",
-        tooltipDirection: "LEFT"
+        tooltipDirection: "LEFT",
+        uuid: effect.uuid
       });
       li.innerHTML = `
         <img class="gold-icon">
@@ -188,7 +190,8 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
    */
   async _applyEffectToActor(effect, actor) {
     const concentration = this.chatMessage.getAssociatedActor()?.effects.get(this.chatMessage.system.concentration);
-    const origin = concentration ?? effect;
+    const item = this.chatMessage.getAssociatedItem();
+    const origin = concentration ?? (effect.inCompendium && item ? item : effect);
     if ( !game.user.isGM && !actor.isOwner ) {
       throw new Error(_loc("DND5E.EFFECT.Application.Warning.Ownership"));
     }
@@ -211,12 +214,13 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
     }
 
     // Enable an existing effect on the target if it originated from this effect
-    const existingEffect = actor.effects.find(e => e.origin === origin.uuid);
+    const existingEffect = effect.inCompendium ? actor.effects.find(e => e._stats.compendiumSource === effect.uuid)
+      : actor.effects.find(e => e.origin === origin.uuid);
     if ( existingEffect ) {
       return existingEffect.update(foundry.utils.mergeObject({
-        ...effect.constructor.getInitialDuration(),
         ...durationOverride,
-        disabled: false
+        disabled: false,
+        start: effect.constructor.getEffectStart()
       }, effectFlags));
     }
 
@@ -230,7 +234,11 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       ...durationOverride,
       disabled: false,
       transfer: false,
-      origin: origin.uuid
+      origin: origin.uuid,
+      _stats: {
+        [effect.inCompendium ? "compendiumSource" : "duplicateSource"]: effect.uuid,
+        [effect.inCompendium ? "duplicateSource" : "compendiumSource"]: null
+      }
     }, effectFlags);
     return await ActiveEffect.implementation.create(effectData, { parent: actor });
   }
@@ -243,7 +251,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
    */
   async _onApplyEffect(event) {
     event.preventDefault();
-    const effect = this.chatMessage.getAssociatedItem()?.effects.get(event.target.closest("[data-id]")?.dataset.id);
+    const effect = await fromUuid(event.target.closest("[data-uuid]")?.dataset.uuid);
     if ( !effect ) return;
     for ( const target of this.targetList.querySelectorAll("[data-target-uuid]") ) {
       const actor = fromUuidSync(target.dataset.targetUuid);
