@@ -2,9 +2,7 @@ import DamageRollConfigurationDialog from "../applications/dice/damage-configura
 import { areKeysPressed } from "../utils.mjs";
 import BasicRoll from "./basic-roll.mjs";
 
-const {
-  DiceTerm, FunctionTerm, NumericTerm, OperatorTerm, ParentheticalTerm, RollTerm, StringTerm
-} = foundry.dice.terms;
+const { DiceTerm, NumericTerm, OperatorTerm, ParentheticalTerm, RollTerm } = foundry.dice.terms;
 
 /**
  * @import { CriticalDamageConfiguration, DamageRollOptions } from "./_types.mjs";
@@ -104,57 +102,14 @@ export default class DamageRoll extends BasicRoll {
   /* -------------------------------------------- */
 
   /**
-   * Perform any term-merging required to ensure that criticals can be calculated successfully.
+   * Perform any preprocessing of the roll's terms required before critical damage is configured..
    * @protected
    */
   preprocessFormula() {
-    for ( let [i, term] of this.terms.entries() ) {
-      const nextTerm = this.terms[i + 1];
-      const prevTerm = this.terms[i - 1];
-
-      // Convert shorthand dX terms to 1dX preemptively to allow them to be appropriately doubled for criticals
-      if ( (term instanceof StringTerm) && /^d\d+/.test(term.term) && !(prevTerm instanceof ParentheticalTerm) ) {
-        const formula = `1${term.term}`;
-        const newTerm = new Roll(formula).terms[0];
-        this.terms.splice(i, 1, newTerm);
-        term = newTerm;
-      }
-
-      // Merge parenthetical terms that follow string terms to build a dice term (to allow criticals)
-      else if ( (term instanceof ParentheticalTerm) && (prevTerm instanceof StringTerm)
-        && prevTerm.term.match(/^[0-9]*d$/)) {
-        if ( term.isDeterministic ) {
-          let newFormula = `${prevTerm.term}${term.evaluate().total}`;
-          let deleteCount = 2;
-
-          // Merge in any roll modifiers
-          if ( nextTerm instanceof StringTerm ) {
-            newFormula += nextTerm.term;
-            deleteCount += 1;
-          }
-
-          const newTerm = (new Roll(newFormula)).terms[0];
-          this.terms.splice(i - 1, deleteCount, newTerm);
-          term = newTerm;
-        }
-      }
-
-      // Merge any parenthetical terms followed by string terms
-      else if ( (term instanceof ParentheticalTerm || term instanceof FunctionTerm) && (nextTerm instanceof StringTerm)
-        && nextTerm.term.match(/^d[0-9]*$/)) {
-        if ( term.isDeterministic ) {
-          const newFormula = `${term.evaluate().total}${nextTerm.term}`;
-          const newTerm = (new Roll(newFormula)).terms[0];
-          this.terms.splice(i, 2, newTerm);
-          term = newTerm;
-        }
-      }
-    }
-
     // Re-compile the underlying formula
     this.resetFormula();
 
-    // Mark configuration as complete
+    // Mark preprocessing as complete
     this.options.preprocessed = true;
   }
 
