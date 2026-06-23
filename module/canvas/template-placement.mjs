@@ -466,8 +466,11 @@ export default class TemplatePlacement extends BasePlacement {
    * @returns {boolean}
    */
   static #testInsideTemplateRegion(token, region) {
-    if ( !token.testInsideRegion(region) && !TemplatePlacement.#sharesTemplateGridSpace(token, region) ) return false;
-    if ( region.flags.dnd5e?.wallMode === "gaps" && !TemplatePlacement.#testTemplateLineOfEffect(token, region) ) {
+    const wallMode = region.flags.dnd5e?.wallMode;
+    if ( wallMode === "gaps" ) {
+      if ( !TemplatePlacement.#sharesReachableTemplateGridSpace(token, region) ) return false;
+    }
+    else if ( !token.testInsideRegion(region) && !TemplatePlacement.#sharesTemplateGridSpace(token, region) ) {
       return false;
     }
     const dimensions = region.flags.dnd5e?.dimensions;
@@ -531,9 +534,12 @@ export default class TemplatePlacement extends BasePlacement {
   /* -------------------------------------------- */
 
   /**
-   * Test whether a template can reach a token without crossing a move wall.
+   * Test whether a token shares an affected grid space with a template region.
    * @param {TokenDocument} token   Token being tested.
    * @param {RegionDocument} region Template region being tested.
+   * @param {object} [options]      Additional options.
+   * @param {boolean} [options.useTemplateShape=false]  Test against the unrestricted template shape.
+   * @param {boolean} [options.highlightedGridSpacesOnly] Only test highlighted grid spaces.
    * @returns {boolean}
    */
   static #sharesTemplateGridSpace(token, region, { useTemplateShape=false, highlightedGridSpacesOnly }={}) {
@@ -560,7 +566,39 @@ export default class TemplatePlacement extends BasePlacement {
 
   /* -------------------------------------------- */
 
-    /**
+  /**
+   * Test whether a token shares a grid space that is inside the unrestricted template and reachable through walls.
+   * @param {TokenDocument} token   Token being tested.
+   * @param {RegionDocument} region Template region being tested.
+   * @returns {boolean}
+   */
+  static #sharesReachableTemplateGridSpace(token, region) {
+    if ( canvas.grid.isGridless ) return token.testInsideRegion(region);
+    if ( !region.testPoint({ x: token.x, y: token.y, elevation: token.elevation }, 0.75) ) {
+      const top = token.elevation + (token.depth * canvas.grid.distance);
+      if ( (top <= region.elevation.bottom) || (token.elevation >= region.elevation.top) ) return false;
+    }
+
+    const polygonTree = region.object?.animationState?.polygonTree ?? region.polygonTree;
+    const origin = TemplatePlacement.#getTemplateOrigin(region);
+    const reachablePoints = TemplatePlacement.#getReachableTemplatePoints(region, polygonTree);
+    for ( const offset of token.getOccupiedGridSpaceOffsets(token._source) ) {
+      const polygon = templateGridSpacePolygon(offset);
+      if ( !TemplatePlacement.#testTemplateShapePolygon(polygon, region) ) continue;
+      const [center, ...points] = templateGridSpacePoints(offset);
+      if ( TemplatePlacement.#testTemplateGridPoint(center, polygonTree, origin) ) return true;
+      if ( points.some(point => polygonTree.testPoint(point, 0.75)) ) return true;
+      if ( polygonTree.intersectPolygon(polygon).area > 0 ) return true;
+      const targetPoints = TemplatePlacement.#getTemplateShapePolygonPoints(polygon, region);
+      if ( reachablePoints.some(source => targetPoints.some(target =>
+        TemplatePlacement.#testTemplateLineOfEffect(source, target, region))) ) return true;
+    }
+    return false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Get the template origin for shapes where core measurement includes the origin grid space.
    * @param {RegionDocument} region Template region being tested.
    * @returns {Point|null}
