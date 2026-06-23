@@ -314,7 +314,7 @@ export default class TemplatePlacement extends BasePlacement {
    */
   static #getTargetOnPlacement(target) {
     const defaultTargeting = game.settings.get("dnd5e", "targetTemplateOnPlacement");
-    return target.targetOnPlacement === "null" ? defaultTargeting : target.targetOnPlacement === "true";
+    return target.targetOnPlacement === "default" ? defaultTargeting : target.targetOnPlacement === "on";
   }
 
   /* -------------------------------------------- */

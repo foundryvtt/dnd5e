@@ -18,11 +18,11 @@ export default class TargetField extends SchemaField {
         contiguous: new BooleanField(),
         stationary: new BooleanField(),
         targetOnPlacement: new StringField({
-          required: true, blank: false, initial: "null",
+          required: true, blank: false, initial: "default",
           choices: {
-            null: "DND5E.TARGET.FIELDS.target.template.targetOnPlacement.default",
-            true: "DND5E.TARGET.FIELDS.target.template.targetOnPlacement.on",
-            false: "DND5E.TARGET.FIELDS.target.template.targetOnPlacement.off"
+            default: "DND5E.TARGET.FIELDS.target.template.targetOnPlacement.choices.default",
+            true: "DND5E.TARGET.FIELDS.target.template.targetOnPlacement.choices.on",
+            false: "DND5E.TARGET.FIELDS.target.template.targetOnPlacement.choices.off"
           }
         }),
         wallMode: new StringField({
@@ -91,7 +91,7 @@ export default class TargetField extends SchemaField {
     this.target.template.labels = {};
     const defaultTargeting = game.settings.get("dnd5e", "targetTemplateOnPlacement");
     const defaultState = game.i18n.localize(
-      `DND5E.TARGET.FIELDS.target.template.targetOnPlacement.${defaultTargeting ? "on" : "off"}`
+      `DND5E.TARGET.FIELDS.target.template.targetOnPlacement.choices.${defaultTargeting ? "on" : "off"}`
     );
     this.target.template.labels.targetOnPlacementHint = game.i18n.format(
       "DND5E.TARGET.FIELDS.target.template.targetOnPlacement.hint", { default: defaultState }

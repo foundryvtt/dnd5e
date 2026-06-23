@@ -4645,18 +4645,20 @@
           "hint": "Emanation cannot be moved once placed."
         },
         "targetOnPlacement": {
-          "label": "Auto Template Targeting",
-          "hint": "Override the the system default for this document. Default: {default}.",
-          "default": null,
-          "true": "On",
-          "false": "Off"
+          "label": "Template Targeting",
+          "hint": "Override the system default (currently: {default}) for this document.",
+          "choices": {
+            "default": "System Default",
+            "on": "On",
+            "off": "Off"
+          }
         },
         "wallMode": {
           "label": "Walls Interaction",
-          "hint": "How walls constrain the placed template.",
+          "hint": "Determines how walls affect the area covered by the template.",
           "choices": {
             "walled": "Blocked by Walls",
-            "gaps": "Pass Through Gaps",
+            "gaps": "Spread Around Corners",
             "unwalled": "Ignore Walls"
           }
         },
@@ -6014,13 +6016,13 @@
     },
     "Targeting": {
       "RegionTemplates": {
+        "OnPlacement": {
+          "Name": "Template Targeting Automation",
+          "Hint": "Automatically target tokens in newly placed region templates. Items and activities can override this."
+        },
         "GridSpaces": {
           "Name": "Target Highlighted Grid Spaces Only",
-          "Hint": "When automatically targeting tokens in area templates, only target creatures that share a highlighted grid space with the template. If disabled, creatures sharing any affected grid space can be targeted even if that grid space is not highlighted by core region coverage."
-        },
-        "OnPlacement": {
-          "Name": "Region Templates Targeting Automation",
-          "Hint": "Automatically target tokens in newly placed region templates unless the activity overrides this default."
+          "Hint": "Only target tokens occupying grid spaces highlighted by the region. If disabled, targeting uses occupied-space overlap instead of Foundry's grid-space center-point rule."
         }
       }
     },
