@@ -48,6 +48,14 @@
 /* -------------------------------------------- */
 
 /**
+ * @typedef ActivityBehaviorConfiguration
+ * @param {string} label  Localized label for the behavior.
+ * @param {string} icon   Icon representing the behavior.
+ */
+
+/* -------------------------------------------- */
+
+/**
  * @typedef ActivityConsumptionTargetConfiguration
  * @property {string} label                                     Localized label for the target type.
  * @property {ConsumptionConsumeFunction} consume               Function used to consume according to this type.

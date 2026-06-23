@@ -1124,6 +1124,34 @@ export default function ActivityMixin(Base) {
     }
 
     /* -------------------------------------------- */
+
+    /**
+     * Handle attaching region behaviors to a newly created template.
+     * @param {Region} region
+     * @param {object} options
+     * @param {string} userId
+     */
+    static async placeTemplateBehaviors(region, options, userId) {
+      if ( !game.user.isActiveGM || (options.dnd5e?.createActivityBehaviors === false) ) return;
+
+      const activity = await fromUuid(region.getFlag("dnd5e", "origin"));
+      const behaviors = activity?.applicableBehaviors;
+      if ( !behaviors?.length ) return;
+
+      const toCreate = [];
+      for ( const behavior of behaviors ) {
+        const data = behavior.config.createBehaviorData(activity);
+        if ( !data ) continue;
+        data.name ??= behavior.name;
+        toCreate.push(data);
+      }
+
+      // TODO: Add pre- and post- hooks
+
+      region.createEmbeddedDocuments("RegionBehavior", toCreate);
+    }
+
+    /* -------------------------------------------- */
     /*  Helpers                                     */
     /* -------------------------------------------- */
 
