@@ -267,7 +267,7 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
     return { x: size.width * 0.5, y: size.height * 0.5 };
   }
 
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
 
   /**
    * Current rotation value of a placeable.

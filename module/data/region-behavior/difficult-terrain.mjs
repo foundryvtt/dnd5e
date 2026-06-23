@@ -124,7 +124,7 @@ export class DifficultTerrainActivityBehavior extends BaseActivityBehavior {
     return {
       system: {
         magical: activity.isSpell || activity.item?.system.properties?.has("mgc"),
-        types: Array.from(this.types)
+        types: this.types
         // TODO: Set "ignoredDispositions" based on target affects settings
       },
       type: "dnd5e.difficultTerrain"

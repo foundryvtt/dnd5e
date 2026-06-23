@@ -119,7 +119,7 @@ export default class CreateDocumentDialog extends Dialog5e {
       }
 
       // Apply default name of documents.
-      context.defaultName = this.documentType.defaultName({ type: defaultType, pack, parent });
+      context.defaultName = this.documentType.defaultName?.({ type: defaultType, pack, parent });
     } else if ( (TYPES?.length === 1) && !this.options.createData.type ) {
       this.options.createData.type = defaultType ?? TYPES[0];
     }
@@ -144,7 +144,7 @@ export default class CreateDocumentDialog extends Dialog5e {
   _onChangeForm(formConfig, event) {
     super._onChangeForm(formConfig, event);
 
-    if ( event.target.name === "type" ) {
+    if ( (event.target.name === "type") && this.documentType.defaultName ) {
       const name = this.element.querySelector('[name="name"]');
       const { pack, parent } = this.options.createOptions;
       name.placeholder = this.documentType.defaultName({ type: event.target.value, pack, parent });
