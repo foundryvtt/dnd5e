@@ -187,7 +187,7 @@ export default class ArmorClassConfig extends BaseConfigSheet {
   /** @inheritDoc */
   _processFormData(event, form, formData) {
     const submitData = super._processFormData(event, form, formData);
-    for ( const formula of Object.values(submitData.system?.attributes?.ac?.formulas) ?? [] ) {
+    for ( const formula of Object.values(submitData.system?.attributes?.ac?.formulas ?? {}) ) {
       for ( const field of ["armored", "shielded"] ) {
         formula[field] = formula[field] === "null" ? null : formula[field];
       }

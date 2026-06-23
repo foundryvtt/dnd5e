@@ -91,7 +91,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    */
   get dependentOrigin() {
     if ( !(this.parent instanceof Item) ) return null;
-    return this.parent.effects.get(this.flags.dnd5e?.dependentOn) ?? null;
+    return this.item.effects.get(this.flags.dnd5e?.dependentOn) ?? null;
   }
 
   /* -------------------------------------------- */
@@ -113,7 +113,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   get isConcealed() {
     if ( this.system.isConcealed ) return true;
     if ( this.dependentOrigin?.active === false ) return true;
-    if ( (this.parent.system?.identified === false) && !game.user.isGM ) return true;
+    if ( (this.item?.system?.identified === false) && !game.user.isGM ) return true;
     if ( this.target?.testUserPermission(game.user, "OBSERVER") ) return false;
 
     // Hide bloodied status effect from players unless the token is friendly
@@ -129,10 +129,10 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /** @inheritDoc */
   get isSuppressed() {
     if ( super.isSuppressed ) return true;
-    if ( this.system.magical && this.parent.actor?.statuses.has("antimagic") ) return true;
+    if ( this.system.magical && this.actor?.statuses.has("antimagic") ) return true;
     if ( this.type === "enchantment" ) return false;
-    if ( this.parent instanceof dnd5e.documents.Item5e ) {
-      if ( this.parent.areEffectsSuppressed ) return true;
+    if ( this.item ) {
+      if ( this.item.areEffectsSuppressed ) return true;
       if ( this.dependentOrigin?.active === false ) return true;
     }
     return false;
@@ -153,7 +153,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    */
   async getSource() {
     if ( (this.target instanceof dnd5e.documents.Actor5e) && (this.parent instanceof dnd5e.documents.Item5e) ) {
-      return this.parent;
+      return this.item;
     }
     return fromUuid(this.origin);
   }
@@ -527,10 +527,10 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       riderActivities[activityData._id] = activityData;
     }
     if ( !foundry.utils.isEmpty(riderActivities) ) {
-      await this.parent.update({ "system.activities": riderActivities });
-      const createdActivities = Object.keys(riderActivities).map(id => this.parent.system.activities?.get(id));
+      await this.item.update({ "system.activities": riderActivities });
+      const createdActivities = Object.keys(riderActivities).map(id => this.item.system.activities?.get(id));
       createdActivities.forEach(a => a.effects?.forEach(e => {
-        if ( !this.parent.effects.has(e._id) ) riderEffects.push(item.effects.get(e._id)?.toObject());
+        if ( !this.item.effects.has(e._id) ) riderEffects.push(item.effects.get(e._id)?.toObject());
       }));
     }
 
@@ -546,10 +546,10 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     }));
     riderEffects = riderEffects.filter(_ => _);
     riderEffects.forEach(e => foundry.utils.setProperty(e, "flags.dnd5e.dependentOn", this.id));
-    await this.parent.createEmbeddedDocuments("ActiveEffect", riderEffects, { keepId: true });
+    await this.item.createEmbeddedDocuments("ActiveEffect", riderEffects, { keepId: true });
 
     // Create Items
-    if ( this.parent.isEmbedded ) {
+    if ( this.item.isEmbedded ) {
       const riderItems = await Item5e.createWithContents(
         (await Promise.all(profile.riders.item.map(uuid => fromUuid(uuid)))).filter(_ => _), {
           transformAll: item => {
@@ -560,7 +560,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
           }
         }
       );
-      await this.parent.actor.createEmbeddedDocuments("Item", riderItems, { keepId: true });
+      await this.actor.createEmbeddedDocuments("Item", riderItems, { keepId: true });
     }
   }
 
@@ -569,7 +569,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /** @inheritDoc */
   toDragData() {
     const data = super.toDragData();
-    const activity = this.parent?.system.activities?.getByType("enchant").find(a => {
+    const activity = this.item?.system.activities?.getByType("enchant").find(a => {
       return a.effects.some(e => e._id === this.id);
     });
     if ( activity ) data.activityId = activity.id;
@@ -727,7 +727,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    */
   _shouldPromptConcentrationEnd() {
     if ( !this.active || !(this.parent instanceof Actor) ) return false;
-    if ( dnd5e.settings.disableConcentration || !this.parent.concentration.effects.size ) return false;
+    if ( dnd5e.settings.disableConcentration || !this.actor.concentration.effects.size ) return false;
 
     return this.statuses.has("dead") || this.statuses.has("incapacitated");
   }
@@ -905,8 +905,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * @returns {Array<ActiveEffect5e|Item5e>}
    */
   getDependents() {
-    const actor = this.parent instanceof Actor ? this.parent : this.parent?.parent;
-    const item = this.parent instanceof Item ? this.parent : null;
     return (this.getFlag("dnd5e", "dependents") || []).reduce((arr, { uuid }) => {
       let doc;
       // TODO: Remove this special casing once https://github.com/foundryvtt/foundryvtt/issues/11214 is resolved
@@ -915,12 +913,8 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
         doc = this.parent.getEmbeddedDocument(embeddedName, id);
       }
       else doc = fromUuidSync(uuid, { strict: false });
-      if ( doc ) {
-        const otherActor = doc.parent instanceof Actor ? doc.parent : doc.parent?.parent;
-        const otherItem = doc.parent instanceof Item ? doc.parent : null;
-        if ( ((doc instanceof ActiveEffect) && (doc.origin === this.uuid))
-          || ((actor && (actor === otherActor)) || (item && (item === otherItem)))) arr.push(doc);
-      }
+      if ( doc && (((doc instanceof ActiveEffect) && (doc.origin === this.uuid))
+        || ((this.actor && (this.actor === doc.actor)) || (this.item && (this.item === doc.item)))) ) arr.push(doc);
       return arr;
     }, []).concat(dnd5e.registry.dependents.get(this));
   }

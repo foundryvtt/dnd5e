@@ -1,12 +1,15 @@
 import BaseActivityData from "../activity/base-activity.mjs";
 import MappingField from "./mapping-field.mjs";
+import TypeDataField5e from "./type-data-field.mjs";
 
 /**
  * Field that stores activities on an item.
  */
 export class ActivitiesField extends MappingField {
   constructor(options) {
-    super(new ActivityField(), options);
+    super(new TypeDataField5e({
+      getModel: type => CONFIG.DND5E.activityTypes[type]?.documentClass
+    }), options);
   }
 
   /* -------------------------------------------- */
@@ -25,49 +28,22 @@ export class ActivitiesField extends MappingField {
 /**
  * Field that stores activity data and swaps class based on activity type.
  */
-export class ActivityField extends foundry.data.fields.ObjectField {
-
-  /** @override */
-  static recursive = true;
-
-  /* -------------------------------------------- */
-
-  /**
-   * Get the document type for this activity.
-   * @param {object} value            Activity data being prepared.
-   * @returns {typeof Activity|null}  Activity document type.
-   */
-  getModel(value) {
-    return CONFIG.DND5E.activityTypes[value?.type]?.documentClass ?? null;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  _cleanType(value, options, _state) {
-    if ( !(typeof value === "object") ) value = {};
-
-    const cls = this.getModel(value) ?? this.getModel(_state?.source);
-    if ( cls ) return cls.cleanData(value, options, _state);
-    return value;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  initialize(value, model, options = {}) {
-    const cls = this.getModel(value);
-    if ( cls ) return new cls(value, { parent: model, ...options });
-    return foundry.utils.deepClone(value);
+export class ActivityField extends TypeDataField5e {
+  constructor(...args) {
+    foundry.utils.logCompatibilityWarning(
+      "`ActivityField` has been deprecated in favor of a `TypeDataField5e`.",
+      { since: "DnD5e 6.0", until: "DnD5e 6.2" }
+    );
+    super(...args);
   }
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _migrate(value, options, _state) {
-    const cls = this.getModel(value);
-    if ( cls ) cls.migrateDataSafe(value);
-    return value;
+  static get _defaults() {
+    return foundry.utils.mergeObject(super._defaults, {
+      getModel: type => CONFIG.DND5E.activityTypes[type]?.documentClass
+    });
   }
 }
 
