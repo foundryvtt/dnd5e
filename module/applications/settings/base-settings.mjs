@@ -62,18 +62,18 @@ export default class BaseSettingsConfig extends Application5e {
     const data = {
       name,
       field: isDataField ? setting.type : new Field({ required: true, blank: false }),
-      hint: game.i18n.localize(setting.hint),
-      label: game.i18n.localize(setting.name),
+      hint: _loc(setting.hint),
+      label: _loc(setting.name),
       value: game.settings.get("dnd5e", name)
     };
     if ( (setting.type === Boolean) || (setting.type instanceof BooleanField) ) data.input = createCheckboxInput;
     if ( setting.choices ) data.options = Object.entries(setting.choices)
-      .map(([value, label]) => ({ value, label: game.i18n.localize(label) }));
+      .map(([value, label]) => ({ value, label: _loc(label) }));
     return data;
   }
 
   /* -------------------------------------------- */
-  /*  Event Listeners & Handlers                  */
+  /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
   /**
@@ -98,7 +98,7 @@ export default class BaseSettingsConfig extends Application5e {
       requiresWorldReload ||= (setting.scope === "world") && setting.requiresReload;
     }
     if ( requiresClientReload || requiresWorldReload ) {
-      return SettingsConfig.reloadConfirm({ world: requiresWorldReload });
+      return foundry.applications.settings.SettingsConfig.reloadConfirm({ world: requiresWorldReload });
     }
   }
 }

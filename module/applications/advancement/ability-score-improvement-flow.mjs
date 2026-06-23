@@ -130,11 +130,11 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
 
     const modernRules = dnd5e.settings.rulesVersion === "modern";
     const pluralRules = new Intl.PluralRules(game.i18n.lang);
-    context.pointCap = game.i18n.format(
+    context.pointCap = _loc(
       `DND5E.ADVANCEMENT.AbilityScoreImprovement.CapDisplay.${pluralRules.select(context.points.cap)}`,
       { points: context.points.cap }
     );
-    context.pointsRemaining = game.i18n.format(
+    context.pointsRemaining = _loc(
       `DND5E.ADVANCEMENT.AbilityScoreImprovement.PointsRemaining.${pluralRules.select(context.points.available)}`,
       { points: context.points.available }
     );
@@ -176,6 +176,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
     const filters = {
       locked: {
         additional: { category: { feat: 1 } },
+        arbitrary: [{ k: "system.prerequisites.level", o: "lte", v: this.advancement.actor.system.details.level }],
         types: new Set(["feat"])
       }
     };
@@ -285,7 +286,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
     const item = await Item.implementation.fromDropData(data);
 
     if ( (item.type !== "feat") || (item.system.type.value !== "feat") ) {
-      ui.notifications.error("DND5E.ADVANCEMENT.AbilityScoreImprovement.Warning.Type", {localize: true});
+      ui.notifications.error("DND5E.ADVANCEMENT.AbilityScoreImprovement.Warning.Type");
       return null;
     }
 

@@ -3,7 +3,6 @@ import BastionSettingsConfig from "./applications/settings/bastion-settings.mjs"
 import CalendarSettingsConfig from "./applications/settings/calendar-settings.mjs";
 import CombatSettingsConfig from "./applications/settings/combat-settings.mjs";
 import CompendiumBrowserSettingsConfig from "./applications/settings/compendium-browser-settings.mjs";
-import ModuleArtSettingsConfig from "./applications/settings/module-art-settings.mjs";
 import VariantRulesSettingsConfig from "./applications/settings/variant-rules-settings.mjs";
 import VisibilitySettingsConfig from "./applications/settings/visibility-settings.mjs";
 import BastionSetting from "./data/settings/bastion-setting.mjs";
@@ -93,6 +92,19 @@ export function registerSystemSettings() {
       full: "SETTINGS.DND5E.AUTOMATION.Movement.Full",
       noBlocking: "SETTINGS.DND5E.AUTOMATION.Movement.NoBlocking",
       none: "SETTINGS.DND5E.AUTOMATION.Movement.None"
+    }
+  });
+
+  // Sense-to-token vision sync
+  game.settings.register("dnd5e", "senseVisionSync", {
+    name: "SETTINGS.DND5E.AUTOMATION.SenseVision.Name",
+    hint: "SETTINGS.DND5E.AUTOMATION.SenseVision.Hint",
+    scope: "world",
+    config: true,
+    default: true,
+    type: Boolean,
+    onChange: () => {
+      if ( canvas?.ready ) canvas.draw();
     }
   });
 
@@ -233,29 +245,6 @@ export function registerSystemSettings() {
     default: true
   });
 
-  // Dynamic art.
-  game.settings.registerMenu("dnd5e", "moduleArtConfiguration", {
-    name: "DND5E.ModuleArtConfigN",
-    label: "DND5E.ModuleArtConfigL",
-    hint: "DND5E.ModuleArtConfigH",
-    icon: "fa-solid fa-palette",
-    type: ModuleArtSettingsConfig,
-    restricted: true
-  });
-
-  game.settings.register("dnd5e", "moduleArtConfiguration", {
-    name: "Module Art Configuration",
-    scope: "world",
-    config: false,
-    type: Object,
-    default: {
-      dnd5e: {
-        portraits: true,
-        tokens: true
-      }
-    }
-  });
-
   // Compendium Browser source exclusion
   game.settings.registerMenu("dnd5e", "packSourceConfiguration", {
     name: "DND5E.CompendiumBrowser.Sources.Name",
@@ -332,7 +321,10 @@ export function registerSystemSettings() {
     scope: "world",
     config: false,
     type: CalendarConfigSetting,
-    onChange: () => dnd5e.ui.calendar?.onUpdateSettings?.()
+    onChange: () => {
+      dnd5e.bastion.initializeUI();
+      dnd5e.ui.calendar?.onUpdateSettings?.();
+    }
   });
 
   game.settings.register("dnd5e", "calendarPreferences", {
@@ -399,12 +391,44 @@ export function registerSystemSettings() {
     default: false
   });
 
+  game.settings.register("dnd5e", "encounterPlacementBehavior", {
+    name: "SETTINGS.DND5E.ENCOUNTERS.EncounterPlacementBehavior.Name",
+    hint: "SETTINGS.DND5E.ENCOUNTERS.EncounterPlacementBehavior.Hint",
+    scope: "world",
+    config: false,
+    default: "none",
+    type: String,
+    choices: {
+      none: "SETTINGS.DND5E.ENCOUNTERS.EncounterPlacementBehavior.None",
+      createCombatants: "SETTINGS.DND5E.ENCOUNTERS.EncounterPlacementBehavior.CreateCombatants",
+      rollInitiative: "SETTINGS.DND5E.ENCOUNTERS.EncounterPlacementBehavior.RollInitiative"
+    }
+  });
+
   game.settings.register("dnd5e", "initiativeDexTiebreaker", {
     name: "SETTINGS.DND5E.COMBAT.DexTiebreaker.Name",
     hint: "SETTINGS.DND5E.COMBAT.DexTiebreaker.Hint",
     scope: "world",
     config: false,
     default: false,
+    type: Boolean
+  });
+
+  game.settings.register("dnd5e", "initiativeGroupCombatants", {
+    name: "SETTINGS.DND5E.COMBAT.InitiativeGroupCombatants.Name",
+    hint: "SETTINGS.DND5E.COMBAT.InitiativeGroupCombatants.Hint",
+    scope: "world",
+    config: false,
+    default: true,
+    type: Boolean
+  });
+
+  game.settings.register("dnd5e", "initiativeGroupRoll", {
+    name: "SETTINGS.DND5E.COMBAT.InitiativeGroupRoll.Name",
+    hint: "SETTINGS.DND5E.COMBAT.InitiativeGroupRoll.Hint",
+    scope: "world",
+    config: false,
+    default: true,
     type: Boolean
   });
 
@@ -646,6 +670,14 @@ function cacheSettings() {
  * Register additional settings after modules have had a chance to initialize to give them a chance to modify choices.
  */
 export function registerDeferredSettings() {
+  game.settings.register("dnd5e", "defaultDocumentSubtypes", {
+    name: "Default Document Subtypes",
+    scope: "client",
+    config: false,
+    type: Object,
+    default: { Actor: game.user.isGM ? "npc" : "character", Item: "feat" }
+  });
+
   game.settings.register("dnd5e", "theme", {
     name: "SETTINGS.DND5E.THEME.Name",
     hint: "SETTINGS.DND5E.THEME.Hint",

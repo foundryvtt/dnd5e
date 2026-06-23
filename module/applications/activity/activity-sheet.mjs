@@ -2,6 +2,8 @@ import { ConsumptionTargetData } from "../../data/activity/fields/consumption-ta
 import UsesField from "../../data/shared/uses-field.mjs";
 import PseudoDocumentSheet from "../api/pseudo-document-sheet.mjs";
 
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
+
 /**
  * Default sheet for activities.
  */
@@ -149,28 +151,28 @@ export default class ActivitySheet extends PseudoDocumentSheet {
     context.activationTypes = [
       ...Object.entries(CONFIG.DND5E.activityActivationTypes).map(([value, config]) => ({
         value,
-        label: game.i18n.localize(config.label),
-        group: game.i18n.localize(config.group)
+        label: _loc(config.label),
+        group: _loc(config.group)
       })),
-      { value: "", label: game.i18n.localize("DND5E.NoneActionLabel") }
+      { value: "", label: _loc("DND5E.NoneActionLabel") }
     ];
-    context.affectsPlaceholder = game.i18n.localize(
+    context.affectsPlaceholder = _loc(
       `DND5E.TARGET.Count.${context.data.target?.template?.type ? "Every" : "Any"}`
     );
     context.durationUnits = [
-      { value: "inst", label: game.i18n.localize("DND5E.TimeInst") },
+      { value: "inst", label: _loc("DND5E.TimeInst") },
       ...Object.entries(CONFIG.DND5E.scalarTimePeriods).map(([value, label]) => ({
-        value, label, group: game.i18n.localize("DND5E.DurationTime")
+        value, label, group: _loc("DND5E.DurationTime")
       })),
       ...Object.entries(CONFIG.DND5E.permanentTimePeriods).map(([value, label]) => ({
-        value, label, group: game.i18n.localize("DND5E.DurationPermanent")
+        value, label, group: _loc("DND5E.DurationPermanent")
       })),
-      { value: "spec", label: game.i18n.localize("DND5E.Special") }
+      { value: "spec", label: _loc("DND5E.Special") }
     ];
     context.rangeUnits = [
       ...Object.entries(CONFIG.DND5E.rangeTypes).map(([value, label]) => ({ value, label })),
       ...Object.entries(CONFIG.DND5E.movementUnits).map(([value, { label }]) => ({
-        value, label, group: game.i18n.localize("DND5E.RangeDistance")
+        value, label, group: _loc("DND5E.RangeDistance")
       }))
     ];
 
@@ -192,15 +194,15 @@ export default class ActivitySheet extends PseudoDocumentSheet {
         targetHint: this.item.isEmbedded ? undefined : typeConfig.nonEmbeddedHint,
         typeOptions: consumptionTypeOptions,
         scalingModes: canScale ? [
-          { value: "", label: game.i18n.localize("DND5E.CONSUMPTION.Scaling.None") },
-          { value: "amount", label: game.i18n.localize("DND5E.CONSUMPTION.Scaling.Amount") },
-          ...(typeConfig.scalingModes ?? []).map(({ value, label }) => ({ value, label: game.i18n.localize(label) }))
+          { value: "", label: _loc("DND5E.CONSUMPTION.Scaling.None") },
+          { value: "amount", label: _loc("DND5E.CONSUMPTION.Scaling.Amount") },
+          ...(typeConfig.scalingModes ?? []).map(({ value, label }) => ({ value, label: _loc(label) }))
         ] : null,
         showTargets: "validTargets" in typeConfig,
         selectedTarget: ("validTargets" in typeConfig) && ["itemUses", "material"].includes(data.type)
           ? this.activity._remapConsumptionTarget(data.target)
           : data.target,
-        targetPlaceholder: data.type === "itemUses" ? game.i18n.localize("DND5E.CONSUMPTION.Target.ThisItem") : "",
+        targetPlaceholder: data.type === "itemUses" ? _loc("DND5E.CONSUMPTION.Target.ThisItem") : "",
         validTargets: showTextTarget ? null : target.validTargets
       };
     });
@@ -208,18 +210,18 @@ export default class ActivitySheet extends PseudoDocumentSheet {
     context.showScaling = !this.activity.isSpell || this.activity.isRider;
 
     // Uses recovery
-    context.recoveryPeriods = CONFIG.DND5E.limitedUsePeriods.recoveryOptions;
     context.recoveryTypes = [
-      { value: "recoverAll", label: game.i18n.localize("DND5E.USES.Recovery.Type.RecoverAll") },
-      { value: "loseAll", label: game.i18n.localize("DND5E.USES.Recovery.Type.LoseAll") },
-      { value: "formula", label: game.i18n.localize("DND5E.USES.Recovery.Type.Formula") }
+      { value: "recoverAll", label: _loc("DND5E.USES.Recovery.Type.RecoverAll") },
+      { value: "loseAll", label: _loc("DND5E.USES.Recovery.Type.LoseAll") },
+      { value: "formula", label: _loc("DND5E.USES.Recovery.Type.Formula") }
     ];
     context.usesRecovery = context.source.uses.recovery.map((data, index) => ({
       data,
       fields: this.activity.schema.fields.uses.fields.recovery.element.fields,
       prefix: `uses.recovery.${index}.`,
       source: context.source.uses.recovery[index] ?? data,
-      formulaOptions: data.period === "recharge" ? UsesField.rechargeOptions : null
+      formulaOptions: data.period === "recharge" ? UsesField.rechargeOptions : null,
+      periodOptions: UsesField.recoveryOptions(this.item, data.period)
     }));
 
     // Template dimensions
@@ -297,7 +299,7 @@ export default class ActivitySheet extends PseudoDocumentSheet {
     if ( context.activity.damage?.parts ) {
       const scaleKey = (this.item.type === "spell") && (this.item.system.level === 0) ? "labelCantrip" : "label";
       const scalingOptions = [
-        { value: "", label: game.i18n.localize("DND5E.DAMAGE.Scaling.None") },
+        { value: "", label: _loc("DND5E.DAMAGE.Scaling.None") },
         ...Object.entries(CONFIG.DND5E.damageScalingModes).map(([value, { [scaleKey]: label }]) => ({ value, label }))
       ];
       let typeOptions = Object.entries(CONFIG.DND5E.damageTypes).map(([value, config]) => ({ ...config, value }));
@@ -342,8 +344,11 @@ export default class ActivitySheet extends PseudoDocumentSheet {
       value: context.source.target.prompt,
       input: context.inputs.createCheckboxInput
     });
+    context.enriched = await TextEditor.enrichHTML(this.activity.description.value, {
+      relativeTo: this.activity.item, rollData: this.activity.getRollData(), secrets: this.activity.item.isOwner
+    });
     context.placeholder = {
-      name: game.i18n.localize(this.activity.metadata.title),
+      name: _loc(this.activity.metadata.title),
       img: this.activity.metadata.img
     };
 
@@ -519,9 +524,10 @@ export default class ActivitySheet extends PseudoDocumentSheet {
    * @protected
    */
   _addEffectData() {
+    const { name, img } = this.activity._source;
     return {
-      name: this.item.name,
-      img: this.item.img,
+      name: name || this.item.name,
+      img: img || this.item.img,
       origin: this.item.uuid,
       transfer: false
     };

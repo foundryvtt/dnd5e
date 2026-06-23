@@ -379,8 +379,8 @@ system:
         save: ''
       limit: 1
     ac:
-      flat: null
-      calc: default
+      flat: 14
+      calc: natural
     hd:
       spent: 0
     hp:
@@ -923,9 +923,9 @@ _stats:
   exportSource: null
   coreVersion: '13.351'
   systemId: dnd5e
-  systemVersion: 5.3.0
+  systemVersion: 5.3.1
   createdTime: 1771452716236
-  modifiedTime: 1771452716236
+  modifiedTime: 1775846205858
   lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:

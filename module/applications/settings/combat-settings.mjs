@@ -24,6 +24,9 @@ export default class CombatSettingsConfig extends BaseSettingsConfig {
     npcs: {
       template: "systems/dnd5e/templates/settings/base-config.hbs"
     },
+    encounterPlacement: {
+      template: "systems/dnd5e/templates/settings/base-config.hbs"
+    },
     footer: {
       template: "templates/generic/form-footer.hbs"
     }
@@ -40,23 +43,31 @@ export default class CombatSettingsConfig extends BaseSettingsConfig {
       case "initiative":
         context.fields = [
           this.createSettingField("initiativeDexTiebreaker"),
-          this.createSettingField("initiativeScore")
+          this.createSettingField("initiativeScore"),
+          this.createSettingField("initiativeGroupRoll"),
+          this.createSettingField("initiativeGroupCombatants")
         ];
-        context.legend = game.i18n.localize("DND5E.Initiative");
+        context.legend = _loc("DND5E.Initiative");
         break;
       case "criticals":
         context.fields = [
           this.createSettingField("criticalDamageModifiers"),
           this.createSettingField("criticalDamageMaxDice")
         ];
-        context.legend = game.i18n.localize("SETTINGS.DND5E.CRITICAL.Name");
+        context.legend = _loc("SETTINGS.DND5E.CRITICAL.Name");
         break;
       case "npcs":
         context.fields = [
           this.createSettingField("autoRecharge"),
           this.createSettingField("autoRollNPCHP")
         ];
-        context.legend = game.i18n.localize("SETTINGS.DND5E.NPCS.Name");
+        context.legend = _loc("SETTINGS.DND5E.NPCS.Name");
+        break;
+      case "encounterPlacement":
+        context.fields = [
+          this.createSettingField("encounterPlacementBehavior")
+        ];
+        context.legend = _loc("SETTINGS.DND5E.ENCOUNTERS.Name");
         break;
     }
     return context;

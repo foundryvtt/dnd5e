@@ -56,7 +56,7 @@ system:
   proficient: null
 effects:
   - name: Ogre Strength
-    img: systems/dnd5e/icons/items/gauntlets-of-ogre-power.webp
+    img: icons/equipment/hand/gauntlet-armored-steel-grey.webp
     _id: 8vCrPyrvsQ5MIxTJ
     type: base
     system: {}
@@ -80,15 +80,18 @@ effects:
     transfer: true
     statuses: []
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 5.3.2
       createdTime: 1730729800431
-      modifiedTime: 1730729839984
+      modifiedTime: 1778013848795
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmgGauntletsOfOg.8vCrPyrvsQ5MIxTJ'

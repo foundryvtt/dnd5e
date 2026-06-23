@@ -191,7 +191,7 @@ export default class CompendiumBrowserSettingsConfig extends Application5e {
   }
 
   /* -------------------------------------------- */
-  /*  Event Listeners & Handlers                  */
+  /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
   /** @inheritDoc */

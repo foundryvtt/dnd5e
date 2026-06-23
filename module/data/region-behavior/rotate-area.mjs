@@ -131,16 +131,21 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
     const radians = Math.toRadians(angle);
     const duration = Math.max(this.time.mode === "fixed" ? this.time.value
       : this.time.value * (Math.abs(angle) / 90), 500);
-    const pivot = RotateAreaRegionBehaviorType.#shapeCenter(this.region.shapes[0]);
+    const pivot = this.region.shapes[0].origin;
 
     const calculateRotationUpdate = placeable => {
       if ( !placeable ) return null;
+      if ( placeable instanceof TileDocument ) {
+        const shape = placeable.shape.clone();
+        shape.rotate(angle, { pivot });
+        return { _id: placeable.id, x: shape.x, y: shape.y, rotation: placeable.rotation + angle };
+      }
       const center = RotateAreaRegionBehaviorType.#placeableCenter(placeable);
+      const offset = RotateAreaRegionBehaviorType.#placeableOffset(placeable);
       const rotation = RotateAreaRegionBehaviorType.#placeableRotation(placeable);
-      const size = RotateAreaRegionBehaviorType.#placeableSize(placeable);
       return {
         _id: placeable.id,
-        ...RotateAreaRegionBehaviorType.#calculatePosition(radians, pivot, center, size),
+        ...RotateAreaRegionBehaviorType.#calculatePosition(radians, pivot, center, offset),
         rotation: rotation !== undefined ? rotation + angle : rotation
       };
     };
@@ -174,23 +179,18 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
     await new Promise(resolve => setTimeout(resolve, duration));
 
     // Update all rotated documents
-    await Promise.all([
-      this.parent.update({ "system.status.rotating": false }),
-      this.scene.updateEmbeddedDocuments("AmbientLight", updates.lights),
-      this.scene.updateEmbeddedDocuments("AmbientSound", updates.sounds),
-      this.scene.updateEmbeddedDocuments("Region", updates.regions),
-      this.scene.updateEmbeddedDocuments("Tile", updates.tiles),
-      this.scene.updateEmbeddedDocuments("Token", updates.tokens, {
-        animate: false,
-        movement: updates.tokens.reduce((obj, { _id }) => {
-          obj[_id] = {
-            constrainOptions: { ignoreWalls: true, ignoreCost: true },
-            showRuler: false
-          };
-          return obj;
-        }, {})
-      }),
-      this.scene.updateEmbeddedDocuments("Wall", updates.walls)
+    await foundry.documents.modifyBatch([
+      { action: "update", documentName: "RegionBehavior",
+        updates: [{ _id: this.behavior.id, "system.status.rotating": false }], parent: this.region },
+      // Tokens must be updated before the region so they re-enter the rotated region after they briefly leave it
+      // when moved to the new position while the region shapes have not been updated yet
+      { action: "update", documentName: "Token", updates: updates.tokens, parent: this.scene,
+        animate: false, constrainOptions: { ignoreWalls: true, ignoreCost: true } },
+      { action: "update", documentName: "AmbientLight", updates: updates.lights, parent: this.scene },
+      { action: "update", documentName: "AmbientSound", updates: updates.sounds, parent: this.scene },
+      { action: "update", documentName: "Region", updates: updates.regions, parent: this.scene },
+      { action: "update", documentName: "Tile", updates: updates.tiles, parent: this.scene },
+      { action: "update", documentName: "Wall", updates: updates.walls, parent: this.scene }
     ]);
   }
 
@@ -200,15 +200,15 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
 
   /**
    * Calculate the final position based on a rotation.
-   * @param {Radians} angle  Rotation amount in radians.
-   * @param {Point} pivot    Center point for the rotation.
-   * @param {Point} center   Center point for the object being rotated.
-   * @param {Size} [size]    Size of the placeable being rotated.
+   * @param {Radians} angle   Rotation amount in radians.
+   * @param {Point} pivot     Center point for the rotation.
+   * @param {Point} center    Center point for the object being rotated.
+   * @param {Point} [offset]  How offset the center point is from the stored point.
    * @returns {Point}
    */
-  static #calculatePosition(angle, pivot, center, size={ width: 0, height: 0 }) {
+  static #calculatePosition(angle, pivot, center, offset={ x: 0, y: 0 }) {
     const vector = new Ray(pivot, center).shiftAngle(angle);
-    return { x: vector.B.x - (size.width / 2), y: vector.B.y - (size.height / 2) };
+    return { x: vector.B.x - offset.x, y: vector.B.y - offset.y };
   }
 
   /* ---------------------------------------- */
@@ -240,16 +240,31 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
    * @returns {Point}
    */
   static #placeableCenter(doc) {
+    if ( doc instanceof foundry.canvas.placeables.AmbientLight ) doc = doc.document;
+    if ( doc instanceof AmbientLightDocument ) return { x: doc.x, y: doc.y };
     if ( doc instanceof TokenDocument ) return doc.getCenterPoint();
     if ( doc instanceof foundry.abstract.Document ) {
       if ( doc.object ) doc = doc.object;
       else {
-        const size = this.#placeableSize(doc);
-        return { x: doc.x + (size.width / 2), y: doc.y + (size.height / 2) };
+        const offset = this.#placeableOffset(doc);
+        return { x: doc.x + offset.x, y: doc.y + offset.y };
       }
     }
     if ( "center" in doc ) return doc.center;
     return { x: doc.x, y: doc.y };
+  }
+
+  /* ---------------------------------------- */
+
+  /**
+   * Current rotation value of a placeable.
+   * @param {CanvasDocument|PlaceableObject} doc
+   * @param {Size} [size]
+   * @returns {Degrees}
+   */
+  static #placeableOffset(doc, size=this.#placeableSize(doc)) {
+    if ( !(doc instanceof foundry.abstract.Document) ) doc = doc.document;
+    return { x: size.width * 0.5, y: size.height * 0.5 };
   }
 
   /* ---------------------------------------- */
@@ -290,53 +305,14 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
    * @returns {object}         Update data for the region.
    */
   static #rotateRegionShapes(region, angle, radians, pivot) {
-    const shapes = region.toObject().shapes;
-    for ( const shape of shapes ) {
-      const { x, y, width, height } = shape;
-      switch ( shape.type ) {
-        case foundry.data.RectangleShapeData.TYPE:
-          Object.assign(shape, this.#calculatePosition(
-            radians, pivot, { x: x + (width / 2), y: y + (height / 2) }, { width, height }
-          ));
-          break;
-        case foundry.data.CircleShapeData.TYPE:
-        case foundry.data.EllipseShapeData.TYPE:
-          Object.assign(shape, this.#calculatePosition(radians, pivot, { x, y }));
-          break;
-        case foundry.data.PolygonShapeData.TYPE:
-          const iterator = Iterator.from(shape.points);
-          shape.points = [];
-          let frag;
-          while ( !(frag = iterator.next()).done ) {
-            const { x, y } = this.#calculatePosition(radians, pivot, { x: frag.value, y: iterator.next().value });
-            shape.points.push(x, y);
-          }
-          break;
-      }
-      shape.rotation += angle;
-    }
-    return { _id: region.id, shapes };
-  }
-
-  /* ---------------------------------------- */
-
-  /**
-   * Center of a specific region shape.
-   * @param {ShapeData} shape
-   * @returns {Point}
-   */
-  static #shapeCenter(shape) {
-    switch ( shape.type ) {
-      case foundry.data.RectangleShapeData.TYPE:
-        return { x: shape.x + (shape.width / 2), y: shape.y + (shape.width / 2) };
-      case foundry.data.CircleShapeData.TYPE:
-      case foundry.data.EllipseShapeData.TYPE:
-        return { x: shape.x, y: shape.y };
-      case foundry.data.PolygonShapeData.TYPE:
-        return foundry.utils.polygonCentroid(shape.points);
-      default:
-        throw new Error(`Unrecognized shape type: ${shape.type}.`);
-    }
+    return {
+      _id: region.id,
+      shapes: region.shapes.map(shape => {
+        const clone = shape.clone();
+        clone.rotate(angle, { pivot });
+        return clone.toObject();
+      })
+    };
   }
 
   /* ---------------------------------------- */
@@ -391,8 +367,8 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
       .reduce((map, doc) => {
         map.set(doc, {
           center: RotateAreaRegionBehaviorType.#placeableCenter(doc),
-          rotation: RotateAreaRegionBehaviorType.#placeableRotation(doc),
-          size: RotateAreaRegionBehaviorType.#placeableSize(doc)
+          offset: RotateAreaRegionBehaviorType.#placeableOffset(doc),
+          rotation: RotateAreaRegionBehaviorType.#placeableRotation(doc)
         });
         return map;
       }, new Map());
@@ -404,13 +380,30 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
       priority: PIXI.UPDATE_PRIORITY.OBJECTS + 1,
       ontick: (e, a) => RotateAreaRegionBehaviorType.#animateFrame(animatables, angle, pivot, e, a)
     });
+    const rad = Math.toRadians(angle);
+    for ( const [token, data] of animatables.entries().filter(([a]) => a instanceof TokenDocument) ) {
+      const { center, offset, rotation } = data;
+      const finalPosition = RotateAreaRegionBehaviorType.#calculatePosition(rad, pivot, center, offset);
+      token.object.animate(finalPosition, {
+        duration,
+        easing: foundry.canvas.animation.CanvasAnimation.easeInOutCosine,
+        ontick: (e, a, d) => {
+          const pt = a.time >= a.duration ? 1 : a.time / a.duration;
+          const pa = a.easing?.(pt) ?? pt;
+          const pr = Math.toRadians(angle * pa);
+          const updates = RotateAreaRegionBehaviorType.#calculatePosition(pr, pivot, center, offset);
+          updates.rotation = rotation + (angle * pa);
+          foundry.utils.mergeObject(d, updates);
+        }
+      });
+    }
   }
 
   /* ---------------------------------------- */
 
   /**
    * Handle manually updating animation on tokens per-frame to ensure vision animates.
-   * @param {Map<CanvasDocument, { center: Point, points: number[], rotation: Degrees, size: Size }>} animatables
+   * @param {Map<CanvasDocument, { center: Point, points: number[], offset: Point, rotation: Degrees }>} animatables
    * @param {Degrees} angle
    * @param {Point} pivot
    * @param {number} elapsedMS               The incremental time in MS which has elapsed (uncapped).
@@ -422,26 +415,27 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
     if ( pt <= 1 ) {
       const pa = animation.easing?.(pt) ?? pt;
       const pr = Math.toRadians(angle * pa);
-      for ( const [doc, { center, points, rotation, size }] of animatables.entries() ) {
+      for ( const [doc, { center, points, offset, rotation }] of animatables.entries() ) {
         if ( doc instanceof WallDocument ) {
           const first = RotateAreaRegionBehaviorType.#calculatePosition(pr, pivot, { x: points[0], y: points[1] });
           const second = RotateAreaRegionBehaviorType.#calculatePosition(pr, pivot, { x: points[2], y: points[3] });
           doc.c = [first.x, first.y, second.x, second.y];
           doc.object.renderFlags.set({ refreshLine: true });
-          if ( game.settings.get("core", "visionAnimation") ) {
-            doc.object.initializeEdge();
-            canvas.perception.update({
-              refreshEdges: true, initializeLighting: true, initializeVision: true, initializeSounds: true
-            });
-          }
+          if ( game.settings.get("core", "visionAnimation") ) doc.initializeEdge();
         } else {
-          const updates = RotateAreaRegionBehaviorType.#calculatePosition(pr, pivot, center, size);
-          updates.rotation = rotation + (angle * pa);
-          Object.assign(doc, updates);
+          if ( doc instanceof TileDocument ) {
+            const shape = doc.shape.clone();
+            shape.rotate(angle * pa, { pivot });
+            const updates = { x: shape.x, y: shape.y, rotation: rotation + (angle * pa) };
+            Object.assign(doc.shape, updates);
+          } else {
+            const updates = RotateAreaRegionBehaviorType.#calculatePosition(pr, pivot, center, offset);
+            updates.rotation = rotation + (angle * pa);
+            Object.assign(doc, updates);
+          }
           if ( doc instanceof AmbientLightDocument ) doc.object.initializeLightSource();
           else if ( doc instanceof AmbientSoundDocument ) doc.object.initializeSoundSource();
           else if ( doc instanceof TileDocument ) doc.object.renderFlags.set({ refreshTransform: true });
-          else if ( doc instanceof TokenDocument ) doc.object._onAnimationUpdate(updates);
         }
       }
     }

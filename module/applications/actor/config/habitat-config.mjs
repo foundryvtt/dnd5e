@@ -22,7 +22,7 @@ export default class HabitatConfig extends BaseConfigSheet {
 
   /** @override */
   get title() {
-    return game.i18n.localize("DND5E.Habitat.Configuration.Title");
+    return _loc("DND5E.Habitat.Configuration.Title");
   }
 
   /* -------------------------------------------- */

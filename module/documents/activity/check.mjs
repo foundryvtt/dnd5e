@@ -46,7 +46,7 @@ export default class CheckActivity extends ActivityMixin(BaseCheckActivityData) 
       const ability = CONFIG.DND5E.abilities[abilityKey]?.label;
       const checkType = (associated in CONFIG.DND5E.skills) ? "skill"
         : (associated in CONFIG.DND5E.tools) ? "tool": "ability";
-      const dataset = { ability: abilityKey, action: "rollCheck", visibility: "all" };
+      const dataset = { ability: abilityKey, action: "rollCheck", visibility: this.check.visible ? "all" : undefined };
       if ( dc ) dataset.dc = dc;
       if ( checkType !== "ability" ) dataset[checkType] = associated;
 
@@ -54,12 +54,12 @@ export default class CheckActivity extends ActivityMixin(BaseCheckActivityData) 
       let type;
       if ( checkType === "skill" ) type = CONFIG.DND5E.skills[associated]?.label;
       else if ( checkType === "tool" ) type = Trait.keyLabel(associated, { trait: "tool" });
-      if ( type ) label = game.i18n.format("EDITOR.DND5E.Inline.SpecificCheck", { ability, type });
+      if ( type ) label = _loc("EDITOR.DND5E.Inline.SpecificCheck", { ability, type });
       else label = ability;
 
       buttons.push({
         label: dc ? `
-          <span class="visible-dc">${game.i18n.format("EDITOR.DND5E.Inline.DC", { dc, check: wrap(label) })}</span>
+          <span class="visible-dc">${_loc("EDITOR.DND5E.Inline.DC", { dc, check: wrap(label) })}</span>
           <span class="hidden-dc">${wrap(label)}</span>
         ` : wrap(label),
         icon: checkType === "tool" ? '<i class="fa-solid fa-hammer" inert></i>'
@@ -67,7 +67,7 @@ export default class CheckActivity extends ActivityMixin(BaseCheckActivityData) 
         dataset
       });
     };
-    const wrap = check => game.i18n.format("EDITOR.DND5E.Inline.CheckShort", { check });
+    const wrap = check => _loc("EDITOR.DND5E.Inline.CheckShort", { check });
 
     const associated = Array.from(this.check.associated);
     if ( !associated.length && (this.item.type === "tool") ) associated.push(this.item.system.type.baseItem);
@@ -94,16 +94,18 @@ export default class CheckActivity extends ActivityMixin(BaseCheckActivityData) 
   static async #rollCheck(event, target, message) {
     const targets = getSceneTargets();
     if ( !targets.length && game.user.character ) targets.push(game.user.character);
-    if ( !targets.length ) ui.notifications.warn("DND5E.ActionWarningNoToken", { localize: true });
+    if ( !targets.length ) ui.notifications.warn("DND5E.ActionWarningNoToken");
     let { ability, dc, skill, tool } = target.dataset;
     dc = parseInt(dc);
     const rollData = { event, target: Number.isFinite(dc) ? dc : this.check.dc.value };
+    const bonusData = CONFIG.Dice.BasicRoll.constructParts({ activityBonus: this.check.bonus }, this.getRollData());
     if ( ability in CONFIG.DND5E.abilities ) rollData.ability = ability;
 
     for ( const token of targets ) {
       const actor = token instanceof Actor ? token : token.actor;
       const speaker = ChatMessage.getSpeaker({ actor, scene: canvas.scene, token: token.document });
       const messageData = { data: { speaker } };
+      if ( bonusData.parts.length ) rollData.rolls = [bonusData];
       if ( skill ) await actor.rollSkill({ ...rollData, skill }, {}, messageData);
       else if ( tool ) {
         rollData.tool = tool;

@@ -3,7 +3,7 @@ import SelectChoices from "../actor/select-choices.mjs";
 import * as Trait from "../actor/trait.mjs";
 import TraitConfig from "../../applications/advancement/trait-config.mjs";
 import TraitFlow from "../../applications/advancement/trait-flow.mjs";
-import {TraitConfigurationData, TraitValueData} from "../../data/advancement/trait.mjs";
+import {TraitConfigurationData, TraitValueData} from "../../data/advancement/trait-data.mjs";
 import { filteredKeys, localizeSchema } from "../../utils.mjs";
 
 /**
@@ -26,8 +26,8 @@ export default class TraitAdvancement extends Advancement {
       order: 30,
       icon: "icons/sundries/scrolls/scroll-yellow-teal.webp",
       typeIcon: "systems/dnd5e/icons/svg/trait.svg",
-      title: game.i18n.localize("DND5E.ADVANCEMENT.Trait.Title"),
-      hint: game.i18n.localize("DND5E.ADVANCEMENT.Trait.Hint"),
+      title: _loc("DND5E.ADVANCEMENT.Trait.Title"),
+      hint: _loc("DND5E.ADVANCEMENT.Trait.Hint"),
       apps: {
         config: TraitConfig,
         flow: TraitFlow
@@ -289,7 +289,7 @@ export default class TraitAdvancement extends Advancement {
       const rep = this.representedTraits();
       if ( rep.size === 1 ) return {
         choices: choices.filter(this.representedTraits().map(t => `${t}:*`), { inplace: false }),
-        label: game.i18n.format("DND5E.ADVANCEMENT.Trait.ChoicesRemaining", {
+        label: _loc("DND5E.ADVANCEMENT.Trait.ChoicesRemaining", {
           count: unfilteredLength,
           type: Trait.traitLabel(rep.first(), unfilteredLength)
         })
@@ -311,7 +311,7 @@ export default class TraitAdvancement extends Advancement {
     const rep = this.representedTraits(available.map(a => a.choices.asSet()));
     return {
       choices,
-      label: game.i18n.format("DND5E.ADVANCEMENT.Trait.ChoicesRemaining", {
+      label: _loc("DND5E.ADVANCEMENT.Trait.ChoicesRemaining", {
         count: available.length,
         type: Trait.traitLabel(rep.size === 1 ? rep.first() : null, available.length)
       })

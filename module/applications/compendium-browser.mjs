@@ -437,13 +437,13 @@ export default class CompendiumBrowser extends Application5e {
     context.displaySelection = this.displaySelection;
     context.invalid = (value < (min || -Infinity)) || (value > (max || Infinity));
     const suffix = this.#selectionLocalizationSuffix;
-    context.summary = suffix ? game.i18n.format(
+    context.summary = suffix ? _loc(
       `DND5E.CompendiumBrowser.Selection.Summary.${suffix}`, { max, min, value }
     ) : value;
     const pr = getPluralRules();
-    context.invalidTooltip = game.i18n.format(`DND5E.CompendiumBrowser.Selection.Warning.${suffix}`, {
+    context.invalidTooltip = _loc(`DND5E.CompendiumBrowser.Selection.Warning.${suffix}`, {
       max, min, value,
-      document: game.i18n.localize(`DND5E.CompendiumBrowser.Selection.Warning.Document.${pr.select(max || min)}`)
+      document: _loc(`DND5E.CompendiumBrowser.Selection.Warning.Document.${pr.select(max || min)}`)
     });
     return context;
   }
@@ -551,8 +551,8 @@ export default class CompendiumBrowser extends Application5e {
             ...data,
             expandId: `${key}-${group}`,
             expanded: this.expandedSections.get(`${key}-${group}`) ?? !data.config.collapseGroup?.(group),
-            label: game.i18n.format("DND5E.CompendiumBrowser.Filters.Grouped", {
-              type: game.i18n.localize(data.label), group
+            label: _loc("DND5E.CompendiumBrowser.Filters.Grouped", {
+              type: _loc(data.label), group
             }),
             config: { ...data.config, choices }
           }));
@@ -631,7 +631,7 @@ export default class CompendiumBrowser extends Application5e {
     if ( game.user.isGM ) {
       frame.querySelector('[data-action="close"]').insertAdjacentHTML("beforebegin", `
         <button type="button" class="header-control fas fa-cog icon" data-action="configureSources"
-                data-tooltip aria-label="${game.i18n.localize("DND5E.CompendiumBrowser.Sources.Label")}"></button>
+                data-tooltip aria-label="${_loc("DND5E.CompendiumBrowser.Sources.Label")}"></button>
       `);
     }
     return frame;
@@ -659,9 +659,7 @@ export default class CompendiumBrowser extends Application5e {
     const html = await foundry.applications.handlebars.renderTemplate(
       "systems/dnd5e/templates/compendium/browser-entry.hbs", context
     );
-    const template = document.createElement("template");
-    template.innerHTML = html;
-    const element = template.content.firstElementChild;
+    const element = foundry.utils.parseHTML(html);
     if ( documentClass !== "Item" ) return element;
     element.dataset.tooltip = `
       <section class="loading" data-uuid="${uuid}">
@@ -733,7 +731,7 @@ export default class CompendiumBrowser extends Application5e {
         partId: `${this.id}-filters`
       }
     );
-    filters.insertAdjacentHTML("beforeend", filter);
+    filters.insertAdjacentElement("beforeend", foundry.utils.parseHTML(filter));
   }
 
   /* -------------------------------------------- */
@@ -968,9 +966,9 @@ export default class CompendiumBrowser extends Application5e {
     if ( (value < (min || -Infinity)) || (value > (max || Infinity)) ) {
       const suffix = this.#selectionLocalizationSuffix;
       const pr = getPluralRules();
-      throw new Error(game.i18n.format(`DND5E.CompendiumBrowser.Selection.Warning.${suffix}`, {
+      throw new Error(_loc(`DND5E.CompendiumBrowser.Selection.Warning.${suffix}`, {
         max, min, value,
-        document: game.i18n.localize(`DND5E.CompendiumBrowser.Selection.Warning.Document.${pr.select(max || min)}`)
+        document: _loc(`DND5E.CompendiumBrowser.Selection.Warning.Document.${pr.select(max || min)}`)
       }));
     }
 
@@ -1113,10 +1111,7 @@ export default class CompendiumBrowser extends Application5e {
         && (!types.size || !p.metadata.flags.dnd5e?.types || new Set(p.metadata.flags.dnd5e.types).intersects(types)))
 
       // Generate an index based on the needed fields
-      .map(async p => await Promise.all((await p.getIndex({ fields: Array.from(indexFields) })
-
-        // Apply module art to the new index
-        .then(index => game.dnd5e.moduleArt.apply(index)))
+      .map(async p => await Promise.all((await p.getIndex({ fields: Array.from(indexFields) }))
 
         // Derive source values
         .map(i => {
@@ -1254,7 +1249,7 @@ export default class CompendiumBrowser extends Application5e {
     button.classList.add("open-compendium-browser");
     button.innerHTML = `
       <i class="fa-solid fa-book-open-reader" inert></i>
-      ${game.i18n.localize("DND5E.CompendiumBrowser.Action.Open")}
+      ${_loc("DND5E.CompendiumBrowser.Action.Open")}
     `;
     button.addEventListener("click", event => (new CompendiumBrowser()).render({ force: true }));
 

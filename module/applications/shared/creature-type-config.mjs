@@ -29,7 +29,7 @@ export default class CreatureTypeConfig extends BaseConfigSheet {
 
   /** @override */
   get title() {
-    return game.i18n.localize("DND5E.CreatureType");
+    return _loc("DND5E.CreatureType");
   }
 
   /* -------------------------------------------- */

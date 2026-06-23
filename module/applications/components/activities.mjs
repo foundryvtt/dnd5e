@@ -68,7 +68,7 @@ export default class ActivitiesElement extends (foundry.applications.elements.Ad
   }
 
   /* -------------------------------------------- */
-  /*  Event Listeners & Handlers                  */
+  /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
   /**

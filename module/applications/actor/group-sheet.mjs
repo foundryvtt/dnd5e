@@ -202,12 +202,12 @@ export default class GroupActorSheet extends MultiActorSheet {
     button.innerHTML = `
       <button type="button" class="always-interactive split-control" data-action="toggleInventory"
               data-inventory="group" aria-pressed="${groupInventory}" data-tooltip
-              aria-label="${game.i18n.localize("DND5E.Group.Action.Inventory.Group")}">
+              aria-label="${_loc("DND5E.Group.Action.Inventory.Group")}">
         <i class="fa-solid fa-list-ul fa-fw" inert></i>
       </button>
       <button type="button" class="always-interactive split-control" data-action="toggleInventory"
               data-inventory="vehicle" aria-pressed="${!groupInventory}" data-tooltip
-              aria-label="${game.i18n.localize("DND5E.Group.Action.Inventory.Vehicle")}">
+              aria-label="${_loc("DND5E.Group.Action.Inventory.Vehicle")}">
         <i class="fa-solid fa-wagon-covered fa-fw" inert></i>
       </button>
     `;
@@ -268,7 +268,7 @@ export default class GroupActorSheet extends MultiActorSheet {
     context.skills = Object.fromEntries(Object.entries(actor.system.skills ?? {}).map(([key, skill]) => {
       const { ability, passive, total } = skill;
       const css = [actor.isOwner ? "rollable" : "", "skill"].filterJoin(" ");
-      const label = game.i18n.format(actor.isOwner ? "DND5E.SkillRoll" : "DND5E.SkillTitle", {
+      const label = _loc(actor.isOwner ? "DND5E.SkillRoll" : "DND5E.SkillTitle", {
         ability: CONFIG.DND5E.abilities[ability]?.label,
         skill: CONFIG.DND5E.skills[key]?.label
       });
@@ -342,7 +342,7 @@ export default class GroupActorSheet extends MultiActorSheet {
   }
 
   /* -------------------------------------------- */
-  /*  Event Listeners & Handlers                  */
+  /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
   /** @override */
@@ -453,20 +453,22 @@ export default class GroupActorSheet extends MultiActorSheet {
   /** @inheritDoc */
   _getEntryContextOptions() {
     return super._getEntryContextOptions().concat([{
-      name: "DND5E.Group.Action.SetPrimaryVehicle",
+      label: "DND5E.Group.Action.SetPrimaryVehicle",
       icon: '<i class="fa-solid fa-star"></i>',
       group: "state",
-      condition: li => {
+      visible: li => {
         return foundry.utils.fromUuidSync(li.dataset.uuid)?.system.isVehicle
           && (this.actor.system.primaryVehicle?.uuid !== li.dataset.uuid);
       },
-      callback: async li => this.actor.update({ "system.primaryVehicle": (await fromUuid(li.dataset.uuid))?.id })
+      onClick: async (_, target) => this.actor.update({
+        "system.primaryVehicle": (await fromUuid(target.dataset.uuid))?.id
+      })
     }, {
-      name: "DND5E.Group.Action.UnsetPrimaryVehicle",
+      label: "DND5E.Group.Action.UnsetPrimaryVehicle",
       icon: '<i class="fa-regular fa-star"></i>',
       group: "state",
-      condition: li => this.actor.system.primaryVehicle?.uuid === li.dataset.uuid,
-      callback: () => this.actor.update({ "system.primaryVehicle": null })
+      visible: li => this.actor.system.primaryVehicle?.uuid === li.dataset.uuid,
+      onClick: () => this.actor.update({ "system.primaryVehicle": null })
     }]);
   }
 }

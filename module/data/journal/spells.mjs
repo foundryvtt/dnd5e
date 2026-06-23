@@ -34,7 +34,7 @@ export default class SpellListJournalPageData extends foundry.abstract.TypeDataM
       unlinkedSpells: new ArrayField(new SchemaField({
         _id: new DocumentIdField({ initial: () => foundry.utils.randomID() }),
         identifier: new IdentifierField({ label: "DND5E.Identifier" }),
-        name: new StringField({ required: true, label: "Name" }),
+        name: new StringField({ required: true, label: "DOCUMENT.FIELDS.name.label" }),
         system: new SchemaField({
           level: new NumberField({ min: 0, integer: true, label: "DND5E.Level" }),
           school: new StringField({ label: "DND5E.School" })

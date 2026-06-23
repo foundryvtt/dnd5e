@@ -19,9 +19,9 @@ export default class BaseConfigSheet extends DocumentSheet5e {
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
     context.advantageModeOptions = [
-      { value: -1, label: game.i18n.localize("DND5E.Disadvantage") },
-      { value: 0, label: game.i18n.localize("DND5E.Normal") },
-      { value: 1, label: game.i18n.localize("DND5E.Advantage") }
+      { value: -1, label: _loc("DND5E.Disadvantage") },
+      { value: 0, label: _loc("DND5E.Normal") },
+      { value: 1, label: _loc("DND5E.Advantage") }
     ];
     return context;
   }

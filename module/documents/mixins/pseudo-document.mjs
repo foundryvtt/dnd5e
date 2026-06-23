@@ -97,10 +97,12 @@ export default function PseudoDocumentMixin(Base) {
 
     /**
      * Globally unique identifier for this PseudoDocument.
-     * @type {string}
+     * @type {string|null}
      */
     get uuid() {
-      return `${this.item.uuid}.${this.documentName}.${this.id ?? this._source._id}`;
+      const id = this.id ?? this._source._id;
+      if ( !this.item || !id ) return null;
+      return `${this.item.uuid}.${this.documentName}.${id}`;
     }
 
     /* -------------------------------------------- */
@@ -110,7 +112,7 @@ export default function PseudoDocumentMixin(Base) {
      * @type {Item5e}
      */
     get item() {
-      return this.parent.parent;
+      return this.parent?.parent;
     }
 
     /* -------------------------------------------- */
@@ -120,7 +122,7 @@ export default function PseudoDocumentMixin(Base) {
      * @type {Actor5e|null}
      */
     get actor() {
-      return this.item.parent ?? null;
+      return this.item?.parent ?? null;
     }
 
     /* -------------------------------------------- */
@@ -223,16 +225,17 @@ export default function PseudoDocumentMixin(Base) {
 
     /**
      * Present a Dialog form to confirm deletion of this PseudoDocument.
-     * @param {object} [options]           Positioning and sizing options for the resulting dialog.
-     * @returns {Promise<PseudoDocument>}  A Promise which resolves to the deleted PseudoDocument.
+     * @param {object} [options]               Positioning and sizing options for the resulting dialog.
+     * @param {DocumentSheet} [options.sheet]  Document sheet to display as detached child.
+     * @returns {Promise<PseudoDocument>}      A Promise which resolves to the deleted PseudoDocument.
      */
     async deleteDialog({ sheet, ...options }={}) {
-      const type = game.i18n.localize(this.metadata.label);
+      const type = _loc(this.metadata.label);
       const config = foundry.utils.mergeObject({
-        window: { title: `${game.i18n.format("DOCUMENT.Delete", { type })}: ${this.name || this.title}` },
+        window: { title: `${_loc("DOCUMENT.Delete", { type })}: ${this.name || this.title}` },
         content: `
           <p>
-            <strong>${game.i18n.localize("AreYouSure")}</strong> ${game.i18n.format("SIDEBAR.DeleteWarning", { type })}
+            <strong>${_loc("COMMON.AreYouSure")}</strong> ${_loc("SIDEBAR.DeleteWarning", { type })}
           </p>
         `,
         yes: { callback: this.delete.bind(this) }
@@ -273,6 +276,19 @@ export default function PseudoDocumentMixin(Base) {
     /* -------------------------------------------- */
 
     /**
+     * The default display name of a pseudo-document of this type.
+     * @param {object} options
+     * @param {string} options.type
+     * @returns {string}
+     */
+    static defaultName({ type }) {
+      const title = this.documentConfig[type].documentClass.metadata.title;
+      return _loc(title);
+    }
+
+    /* -------------------------------------------- */
+
+    /**
      * Prepare the data needed for the creation dialog.
      * @param {string} type  Specific type of the PseudoDocument to prepare.
      * @param {Item5e} parent  Parent document within which this PseudoDocument will be created.
@@ -284,8 +300,8 @@ export default function PseudoDocumentMixin(Base) {
       const hint = this.documentConfig[type]?.documentClass?.metadata?.hint;
       return {
         type,
-        label: game.i18n.has(label) ? game.i18n.localize(label) : type,
-        hint: game.i18n.has(hint) ? game.i18n.localize(hint) : null,
+        label: game.i18n.has(label) ? _loc(label) : type,
+        hint: game.i18n.has(hint) ? _loc(hint) : null,
         icon: this.documentConfig[type]?.documentClass?.metadata?.img
       };
     }

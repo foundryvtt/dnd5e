@@ -3,6 +3,16 @@
  */
 export default class AbilityTemplate extends foundry.canvas.placeables.MeasuredTemplate {
 
+  constructor(...args) {
+    super(...args);
+    foundry.utils.logCompatibilityWarning(
+      "The `AbilityTemplate` class has been deprecated in favor of the `TemplatePlacement` API.",
+      { since: "DnD5e 6.0", until: "DnD5e 6.2" }
+    );
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Track the timestamp when the last mouse move event was captured.
    * @type {number}
@@ -50,6 +60,11 @@ export default class AbilityTemplate extends foundry.canvas.placeables.MeasuredT
    * @returns {AbilityTemplate[]|null}  The template objects, or null if the item does not produce a template.
    */
   static fromActivity(activity, options={}) {
+    foundry.utils.logCompatibilityWarning(
+      "`AbilityTemplate.fromActivity` has been deprecated in favor of `TemplatePlacement.fromActivity`.",
+      { since: "DnD5e 6.0", until: "DnD5e 6.2" }
+    );
+
     const target = activity.target?.template ?? {};
     const templateShape = dnd5e.config.areaTargetTypes[target.type]?.template;
     if ( !templateShape ) return null;
@@ -149,7 +164,7 @@ export default class AbilityTemplate extends foundry.canvas.placeables.MeasuredT
     // Hide the sheet that originated the preview
     const sheet = this.actorSheet;
     const { windowId } = (sheet?.parent ?? sheet)?.window ?? {};
-    this.#sheetMinimized = (game.release.generation < 14 || !windowId) && !sheet?._minimized;
+    this.#sheetMinimized = !windowId && !sheet?._minimized;
     if ( this.#sheetMinimized ) sheet?.minimize();
 
     // Activate interactivity
@@ -190,8 +205,7 @@ export default class AbilityTemplate extends foundry.canvas.placeables.MeasuredT
    * @param {Event} event  Triggering event that ended the placement.
    */
   async _finishPlacement(event) {
-    if ( game.release.generation < 14 ) this.layer._onDragLeftCancel(event);
-    else this.layer.clearPreviewContainer();
+    this.layer.clearPreviewContainer();
     canvas.stage.off("mousemove", this.#events.move);
     canvas.stage.off("mouseup", this.#events.confirm);
     canvas.app.view.oncontextmenu = null;

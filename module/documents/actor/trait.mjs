@@ -351,8 +351,8 @@ export function traitIndexFields() {
 export function traitLabel(trait, count) {
   const traitConfig = CONFIG.DND5E.traits[trait];
   const pluralRule = (count !== undefined) ? new Intl.PluralRules(game.i18n.lang).select(count) : "other";
-  if ( !traitConfig ) return game.i18n.localize(`DND5E.TraitGenericPlural.${pluralRule}`);
-  return game.i18n.localize(`${traitConfig.labels.localization}.${pluralRule}`);
+  if ( !traitConfig ) return _loc(`DND5E.TraitGenericPlural.${pluralRule}`);
+  return _loc(`${traitConfig.labels.localization}.${pluralRule}`);
 }
 
 /* -------------------------------------------- */
@@ -442,7 +442,7 @@ export function keyLabel(key, config={}) {
   const traitConfig = CONFIG.DND5E.traits[trait];
   if ( !traitConfig ) return key;
   const traitData = CONFIG.DND5E[traitConfig.configKey ?? trait] ?? {};
-  let categoryLabel = game.i18n.localize(`${traitConfig.labels.localization}.${
+  let categoryLabel = _loc(`${traitConfig.labels.localization}.${
     pluralRules.select(count ?? 1)}`);
 
   // Trait (e.g. "Tool Proficiency")
@@ -464,7 +464,7 @@ export function keyLabel(key, config={}) {
       type = _innerLabel(category, traitConfig);
     } else type = categoryLabel.toLowerCase();
     const localization = `DND5E.TraitConfigChoose${final ? "Other" : `Any${count ? "Counted" : "Uncounted"}`}`;
-    return game.i18n.format(localization, { count: count ?? 1, type });
+    return _loc(localization, { count: count ?? 1, type });
   }
 
   else {
@@ -558,7 +558,7 @@ export function choiceLabel(choice, { only=false, final=false }={}) {
 
   // Select from a list of options (e.g. "2 from Thieves' Tools or any skill proficiency")
   const choices = Array.from(choice.pool).map(key => keyLabel(key)).filter(_ => _);
-  return game.i18n.format("DND5E.TraitConfigChooseList", {
+  return _loc("DND5E.TraitConfigChooseList", {
     count: choice.count,
     list: listFormatter.format(choices)
   });
@@ -595,7 +595,7 @@ export function localizedList({ grants=new Set(), choices=[] }) {
 
   const listFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "conjunction" });
   if ( !sections.length || grants.size ) return listFormatter.format(sections.filter(_ => _));
-  return game.i18n.format("DND5E.TraitConfigChooseWrapper", {
+  return _loc("DND5E.TraitConfigChooseWrapper", {
     choices: listFormatter.format(sections)
   });
 }

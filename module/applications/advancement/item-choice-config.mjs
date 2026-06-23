@@ -1,12 +1,12 @@
-import AdvancementConfig from "./advancement-config-v2.mjs";
+import ItemSharedConfig from "./item-shared-config.mjs";
 
 /**
  * Configuration application for item choices.
  */
-export default class ItemChoiceConfig extends AdvancementConfig {
+export default class ItemChoiceConfig extends ItemSharedConfig {
   /** @override */
   static DEFAULT_OPTIONS = {
-    classes: ["item-choice", "three-column"],
+    classes: ["item-choice"],
     dropKeyPath: "pool",
     position: {
       width: 800
@@ -51,7 +51,9 @@ export default class ItemChoiceConfig extends AdvancementConfig {
       data,
       fields: this.advancement.configuration.schema.fields.pool.element.fields,
       index: fromUuidSync(data.uuid)
-    }));
+    })).sort((lhs, rhs) => context.manualSort
+      ? lhs.data.sort - rhs.data.sort
+      : lhs.index?.name.localeCompare(rhs.index?.name));
 
     context.abilityOptions = Object.entries(CONFIG.DND5E.abilities).map(([value, { label }]) => ({ value, label }));
     context.choices = context.levels.reduce((obj, { value, label }) => {
@@ -62,7 +64,11 @@ export default class ItemChoiceConfig extends AdvancementConfig {
       { value: "", label: "" },
       {
         value: "available",
-        label: game.i18n.localize("DND5E.ADVANCEMENT.ItemChoice.FIELDS.restriction.level.Available")
+        label: _loc("DND5E.ADVANCEMENT.ItemChoice.FIELDS.restriction.level.Available")
+      },
+      {
+        value: "availableNoCantrips",
+        label: _loc("DND5E.ADVANCEMENT.ItemChoice.FIELDS.restriction.level.AvailableNoCantrips")
       },
       { rule: true },
       ...Object.entries(CONFIG.DND5E.spellLevels).map(([value, label]) => ({ value, label }))
@@ -83,21 +89,21 @@ export default class ItemChoiceConfig extends AdvancementConfig {
     }
 
     context.typeOptions = [
-      { value: "", label: game.i18n.localize("DND5E.ADVANCEMENT.ItemChoice.FIELDS.type.Any") },
+      { value: "", label: _loc("DND5E.ADVANCEMENT.ItemChoice.FIELDS.type.Any") },
       { rule: true },
       ...this.advancement.constructor.VALID_TYPES
-        .map(value => ({ value, label: game.i18n.localize(CONFIG.Item.typeLabels[value]) }))
+        .map(value => ({ value, label: _loc(CONFIG.Item.typeLabels[value]) }))
     ];
 
     if ( this.advancement.configuration.type === "feat" ) {
       const selectedType = CONFIG.DND5E.featureTypes[this.advancement.configuration.restriction.type];
       context.typeRestriction = {
-        typeLabel: game.i18n.localize("DND5E.ItemFeatureType"),
+        typeLabel: _loc("DND5E.ItemFeatureType"),
         typeOptions: [
           { value: "", label: "" },
           ...Object.entries(CONFIG.DND5E.featureTypes).map(([value, { label }]) => ({ value, label }))
         ],
-        subtypeLabel: game.i18n.format("DND5E.ItemFeatureSubtype", {category: selectedType?.label}),
+        subtypeLabel: _loc("DND5E.ItemFeatureSubtype", {category: selectedType?.label}),
         subtypeOptions: selectedType?.subtypes ? [
           { value: "", label: "" },
           ...Object.entries(selectedType.subtypes).map(([value, label]) => ({ value, label }))
@@ -134,7 +140,7 @@ export default class ItemChoiceConfig extends AdvancementConfig {
   /*  Drag & Drop                                 */
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
+  /** @override */
   _validateDroppedItem(event, item) {
     this.advancement._validateItemType(item, { type: false });
   }

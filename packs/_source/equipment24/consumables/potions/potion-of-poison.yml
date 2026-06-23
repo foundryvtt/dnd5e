@@ -137,7 +137,7 @@ system:
     - mgc
 effects:
   - name: Poisoned
-    img: systems/dnd5e/icons/items/potion-of-healing.webp
+    img: systems/dnd5e/icons/svg/statuses/poisoned.svg
     origin: Compendium.dnd5e.equipment24.Item.dmgPotionOfPoiso
     transfer: false
     _id: lZOgSICPuR1fKxTL
@@ -158,15 +158,18 @@ effects:
     statuses:
       - poisoned
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.351'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 5.3.2
       createdTime: 1730864211372
-      modifiedTime: 1730864224228
+      modifiedTime: 1778013716715
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmgPotionOfPoiso.lZOgSICPuR1fKxTL'

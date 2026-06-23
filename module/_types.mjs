@@ -227,6 +227,8 @@
  * @property {string} label         Localized label for the currency.
  * @property {string} abbreviation  Localized abbreviation for the currency.
  * @property {number} conversion    Number by which this currency should be multiplied to arrive at a standard value.
+ * @property {number} [fractionalDigits=0]  Number of digits to round currency values of this denomination to. Set to
+ *                                          Infinity to prevent any rounding of the value.
  * @property {string} icon          Icon representing the currency in the interface.
  */
 
@@ -347,8 +349,8 @@
  * @typedef LimitedUsePeriodConfiguration
  * @property {string} label                Localized label.
  * @property {string}  abbreviation        Shorthand form of the label.
- * @property {"combat"|"special"} [group]  Grouping if outside the normal "time" group.
  * @property {boolean} [formula]           Whether this limited use period restores charges via formula.
+ * @property {"combat"|"special"} [type]   Grouping if outside the normal "time" group.
  */
 
 /* -------------------------------------------- */
@@ -371,11 +373,12 @@
 
 /**
  * @typedef MovementTypeConfiguration
- * @property {string} label            Localized label for the movement type.
- * @property {string} [travel]         Travel type in `CONFIG.DND5E.travelTypes` to map this movement speed to. If not
- *                                     provided, then `land` is assumed.
- * @property {boolean} [walkFallback]  When this special movement type runs out, can the actor fall back to using their
- *                                     walk speed at 2x cost?
+ * @property {boolean} [hidden=false]             Whether this movement speed is displayed in the actor's sheet.
+ * @property {string} label                       Localized label for the movement type.
+ * @property {string} [travel]                    Travel type in `CONFIG.DND5E.travelTypes` to map this movement
+ *                                                speed to. If not provided, then `land` is assumed.
+ * @property {boolean} [walkFallback]             When this special movement type runs out, can the actor fall back
+ *                                                to using their walk speed at 2x cost?
  */
 
 /* -------------------------------------------- */
@@ -442,6 +445,18 @@
  * @typedef RuleTypeConfiguration
  * @property {string} label         Localized label for the rule type.
  * @property {string} [references]  Key path for a configuration object that contains reference data.
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * Configuration data for an actor sense type.
+ *
+ * @typedef {object} SenseConfiguration
+ * @property {string} label              Localized label for the sense.
+ * @property {string} [detectionMode]    Detection mode ID to add to the token (e.g. "blindsight", "feelTremor").
+ * @property {boolean} [grantsSight]     Whether this sense grants token vision (sight.enabled & sight.range).
+ * @property {string} [visionMode]       Vision mode ID to set on the token when this sense provides sight.
  */
 
 /* -------------------------------------------- */

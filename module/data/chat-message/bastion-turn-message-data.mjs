@@ -89,15 +89,15 @@ export default class BastionTurnMessageData extends ChatMessageDataModel {
     context.supplements = [];
     if ( this.gold.value ) {
       context.supplements.push(`
-        <strong>${game.i18n.localize("DND5E.CurrencyGP")}</strong>
+        <strong>${_loc("DND5E.CurrencyGP")}</strong>
         ${formatNumber(this.gold.value)}
-        (${game.i18n.localize(`DND5E.Bastion.Gold.${this.gold.claimed ? "Claimed" : "Unclaimed"}`)})
+        (${_loc(`DND5E.Bastion.Gold.${this.gold.claimed ? "Claimed" : "Unclaimed"}`)})
       `);
     }
     context.buttons = [];
     if ( this.gold.value && !this.gold.claimed ) {
       context.buttons.push({
-        label: game.i18n.localize("DND5E.Bastion.Gold.Claim"),
+        label: _loc("DND5E.Bastion.Gold.Claim"),
         icon: '<i class="fa-solid fa-coins" inert></i>',
         dataset: { action: "claimGold" }
       });

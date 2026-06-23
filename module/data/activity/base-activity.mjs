@@ -12,13 +12,14 @@ import AppliedEffectField from "./fields/applied-effect-field.mjs";
 import ConsumptionTargetsField from "./fields/consumption-targets-field.mjs";
 
 const {
-  ArrayField, BooleanField, DocumentFlagsField, DocumentIdField,
-  FilePathField, IntegerSortField, NumberField, SchemaField, StringField
+  ArrayField, BooleanField, DocumentFlagsField, DocumentIdField, FilePathField,
+  HTMLField, IntegerSortField, NumberField, SchemaField, StringField
 } = foundry.data.fields;
 
 /**
  * @import { DamageRollConfiguration, DamageRollProcessConfiguration } from "../../dice/_types.mjs";
  * @import { ActivityRollData } from "../../documents/_types.mjs";
+ * @import { DamageFormulaOptions } from "../shared/_types.mjs";
  * @import { ActivityData } from "./_types.mjs";
  */
 
@@ -63,7 +64,8 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         targets: new ConsumptionTargetsField()
       }),
       description: new SchemaField({
-        chatFlavor: new StringField()
+        chatFlavor: new StringField(),
+        value: new HTMLField()
       }),
       duration: new DurationField({
         concentration: new BooleanField(),
@@ -176,7 +178,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @type {boolean}
    */
   get isRider() {
-    return !!this.item.getFlag("dnd5e", "riders.activity")?.includes(this.id);
+    return !!this.item.getFlag("dnd5e", "riders.activity")?.includes?.(this.id);
   }
 
   /* -------------------------------------------- */
@@ -242,7 +244,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   get spellcastingAbility() {
     let ability;
     if ( this.isSpell ) ability = this.item.system.availableAbilities?.first();
-    return ability ?? this.actor?.system.attributes?.spellcasting ?? null;
+    return ability ?? this.actor?.spellcastingAbility ?? null;
   }
 
   /* -------------------------------------------- */
@@ -556,7 +558,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * Prepare data related to this activity.
    */
   prepareData() {
-    this.name = this.name || game.i18n.localize(this.metadata?.title);
+    this.name = this.name || _loc(this.metadata?.title);
     this.img = this.img || this.metadata?.img;
     this.labels ??= {};
     const addBaseIndices = data => data?.forEach((d, idx) => Object.defineProperty(d, "_index", { value: idx }));
@@ -604,17 +606,6 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       if ( !("identified" in this.item.system) ) this.visibility.requireIdentification = false;
     }
 
-    // TODO: Temporarily add parent to consumption targets & damage parts added by enchantment
-    // Can be removed once https://github.com/foundryvtt/foundryvtt/issues/12528 is implemented
-    if ( this.consumption?.targets ) this.consumption.targets = this.consumption.targets.map(c => {
-      if ( c.parent ) return c;
-      return c.clone({}, { parent: this });
-    });
-    if ( this.damage?.parts ) this.damage.parts = this.damage.parts.map(c => {
-      if ( c.parent ) return c;
-      return c.clone({}, { parent: this });
-    });
-
     if ( this.activation ) ActivationField.prepareData.call(this, rollData, this.labels);
     if ( this.duration ) DurationField.prepareData.call(this, rollData, this.labels);
     if ( this.range ) RangeField.prepareData.call(this, rollData, this.labels);
@@ -631,7 +622,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
 
       // If targeted item isn't found, display preparation warning
       if ( !actor.items.has(target.target) ) {
-        const message = game.i18n.format("DND5E.CONSUMPTION.Warning.MissingItem", {
+        const message = _loc("DND5E.CONSUMPTION.Warning.MissingItem", {
           activity: this.name, item: this.item.name
         });
         actor._preparationWarnings.push({ message, link: this.uuid, type: "warning" });
@@ -646,7 +637,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @param {ActivityRollData} rollData  Deterministic roll data from the item.
    */
   prepareDamageLabel(rollData) {
-    const config = this.getDamageConfig({}, { rollData });
+    const config = this.getDamageConfig({}, { formulaOptions: { modifiers: false }, rollData });
     const rolls = aggregateDamageRolls(config.rolls.map(({ base, data, options, parts }) => {
       const formula = parts.join(" + ");
       try {
@@ -738,16 +729,17 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * Get the roll parts used to create the damage rolls.
    * @param {Partial<DamageRollProcessConfiguration>} [config={}]  Existing damage configuration to merge into this one.
    * @param {object} [options]                                     Damage configuration options.
+   * @param {DamageFormulaOptions} [options.formulaOptions]        Options to configure the formula.
    * @param {ActivityRollData} [options.rollData]                  Use pre-existing roll data.
    * @returns {DamageRollProcessConfiguration}
    */
-  getDamageConfig(config={}, { rollData }={}) {
+  getDamageConfig(config={}, { formulaOptions, rollData }={}) {
     if ( !this.damage?.parts ) return foundry.utils.mergeObject({ rolls: [] }, config);
 
     const rollConfig = foundry.utils.deepClone(config);
     rollData ??= this.getRollData();
     rollConfig.rolls = this.damage.parts
-      .map((d, index) => this._processDamagePart(d, rollConfig, rollData, index))
+      .map((d, index) => this._processDamagePart(d, rollConfig, rollData, index, formulaOptions))
       .filter(d => d.parts.length)
       .concat(config.rolls ?? []);
 
@@ -762,11 +754,12 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @param {Partial<DamageRollProcessConfiguration>} rollConfig  Roll configuration being built.
    * @param {ActivityRollData} rollData                           Roll data to populate with damage data.
    * @param {number} [index=0]                                    Index of the damage part.
+   * @param {DamageFormulaOptions} [options={}]                   Options to configure the formula.
    * @returns {DamageRollConfiguration}
    * @protected
    */
-  _processDamagePart(damage, rollConfig, rollData, index=0) {
-    const scaledFormula = damage.scaledFormula(rollConfig.scaling ?? rollData.scaling);
+  _processDamagePart(damage, rollConfig, rollData, index=0, options={}) {
+    const scaledFormula = damage.scaledFormula(rollConfig.scaling ?? rollData.scaling, options);
     const parts = scaledFormula ? [scaledFormula] : [];
     const data = { ...rollData };
 
@@ -774,7 +767,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       const actionType = this.getActionType(rollConfig.attackMode);
       const bonus = foundry.utils.getProperty(this.actor ?? {}, `system.bonuses.${actionType}.damage`);
       if ( bonus && !/^0+$/.test(bonus) ) parts.push(bonus);
-      if ( this.item.system.damageBonus ) parts.push(String(this.item.system.damageBonus));
+      if ( this.item.system.damage?.bonus ) parts.push(String(this.item.system.damage.bonus));
     }
 
     const lastType = this.item.getFlag("dnd5e", `last.${this.id}.damageType.${index}`);

@@ -234,3 +234,82 @@
     }
   }
 }
+
+/* ------------------------------------ */
+/*  Property Attribution                */
+/* ------------------------------------ */
+:is(#tooltip, .locked-tooltip).property-attribution {
+  min-width: 150px;
+  padding: 3px;
+  background-color: rgba(0, 0, 0, .8);
+  backdrop-filter: blur(4px);
+  text-align: left;
+
+  table {
+    margin: 0;
+    border: 0;
+    font-size: var(--font-size-14);
+
+    caption {
+      padding-block: 0.25em 0.5em;
+      font-size: var(--font-size-16);
+    }
+    tr {
+      background-color: inherit;
+    }
+    td {
+      padding: 3px;
+    }
+    tr.total > td {
+      font-weight: 600;
+      padding-top: 5px;
+      border-top: 1px solid var(--dnd5e-color-tan);
+    }
+    td.attribution-value {
+      inline-size: 5ch;
+      padding-right: 5px;
+      text-align: right;
+      font-weight: 600;
+    }
+
+    // Arithmetic Operators
+    td::before { opacity: 0.6; }
+    td[data-type="multiply"]::before { content: "×"; }
+    td[data-type="add"]::before { content: "+"; }
+    td[data-type="subtract"]::before {
+      content: "−";
+      margin-right: -1px;
+    }
+    td[data-type="downgrade"]::before { content: "↓"; }
+    td[data-type="upgrade"]::before { content: "↑"; }
+  }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    font-size: var(--font-size-14);
+    gap: .5rem;
+
+    + .row { margin-top: 4px; }
+    .value { font-weight: bold; }
+    .label { flex: 1; }
+    .units, .unit {
+      opacity: .6;
+      font-weight: normal;
+    }
+    > i.fas {
+      height: 16px;
+      width: 16px;
+      text-align: center;
+
+      &.burrow::before { content: "\f85e"; }
+      &.climb::before { content: "\f6fc"; }
+      &.fly::before { content: "\f56b"; }
+      &.walk::before { content: "\f554"; }
+      &.swim {
+        transform: scaleX(-1);
+        &::before { content: "\f5c4"; }
+      }
+    }
+  }
+}

@@ -46,7 +46,7 @@ export default class ItemGrantFlow extends AdvancementFlow {
   getSelectAbilities() {
     const config = this.advancement.configuration;
     return config.spell?.ability.size > 1 ? {
-      field: new StringField({ required: true, blank: false, label: game.i18n.localize("DND5E.SpellAbility") }),
+      field: new StringField({ required: true, blank: false, label: _loc("DND5E.SpellAbility") }),
       options: config.spell.ability.map(value => ({ value, label: CONFIG.DND5E.abilities[value]?.label })),
       value: this.advancement.value.ability
     } : null;
@@ -63,6 +63,11 @@ export default class ItemGrantFlow extends AdvancementFlow {
     } else if ( event.target?.tagName === "DND5E-CHECKBOX" ) {
       if ( event.target.checked ) await this.advancement.apply(this.level, { selected: [event.target.name] });
       else await this.advancement.reverse(this.level, { uuid: event.target.name });
+    } else {
+      const selected = this.advancement.configuration.items
+        .filter(i => !this.advancement.configuration.optional && !i.optional)
+        .map(i => i.uuid);
+      if ( selected.length ) await this.advancement.apply(this.level, { selected });
     }
   }
 }

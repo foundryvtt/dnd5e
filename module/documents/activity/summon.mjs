@@ -87,7 +87,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
   _usageChatButtons(message) {
     if ( !this.availableProfiles.length ) return super._usageChatButtons(message);
     return [{
-      label: game.i18n.localize("DND5E.SUMMON.Action.Summon"),
+      label: _loc("DND5E.SUMMON.Action.Summon"),
       icon: '<i class="fa-solid fa-spaghetti-monster-flying" inert></i>',
       dataset: {
         action: "placeSummons"
@@ -132,7 +132,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
 
     const profile = this.profiles.find(p => p._id === options?.profile);
     if ( !profile ) throw new Error(
-      game.i18n.format("DND5E.SUMMON.Warning.NoProfile", { profileId: options.profile, item: this.item.name })
+      _loc("DND5E.SUMMON.Warning.NoProfile", { profileId: options.profile, item: this.item.name })
     );
 
     /**
@@ -149,20 +149,18 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
     // Fetch the actor that will be summoned
     const summonUuid = this.summon.mode === "cr" ? await this.queryActor(profile) : profile.uuid;
     if ( !summonUuid ) return;
-    const actor = await dnd5e.documents.Actor5e.fetchExisting(summonUuid, {
+    const fetchOptions = {
+      folderId: this.actor?.folder?.id ?? null,
       origin: { key: "flags.dnd5e.summon.origin", value: this.item?.uuid }
-    });
+    };
+    const actor = await dnd5e.documents.Actor5e.fetchExisting(summonUuid, fetchOptions);
 
     // Verify ownership of actor
     if ( !actor.isOwner ) {
-      throw new Error(game.i18n.format("DND5E.SUMMON.Warning.NoOwnership", { actor: actor.name }));
+      throw new Error(_loc("DND5E.SUMMON.Warning.NoOwnership", { actor: actor.name }));
     }
 
     const tokensData = [];
-    const sheet = this.actor?.sheet;
-    const { windowId } = (sheet?.parent ?? sheet)?.window ?? {};
-    const minimize = (game.release.generation < 14 || !windowId) && !sheet?._minimized;
-    if ( minimize ) await sheet?.minimize();
     try {
       // Figure out where to place the summons
       const placements = await this.getPlacement(actor.prototypeToken, profile, options);
@@ -204,8 +202,12 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
 
         tokensData.push(tokenData);
       }
-    } finally {
-      if ( minimize ) sheet?.maximize();
+    } catch(err) {
+      Hooks.onError("SummonActivity#placeSummons", err, {
+        msg: game.i18n.localize("DND5E.SUMMON.Warning.PlaceTokens"),
+        log: "error",
+        notify: "error"
+      });
     }
 
     const createdTokens = await canvas.scene.createEmbeddedDocuments("Token", tokensData, {
@@ -279,12 +281,12 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
         _id: staticID("dnd5eMatchProficiency"),
         changes: [{
           key: "system.attributes.prof",
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          type: "override",
           value: prof
         }],
         disabled: false,
         icon: "icons/skills/targeting/crosshair-bars-yellow.webp",
-        name: game.i18n.localize("DND5E.SUMMON.FIELDS.match.proficiency.label")
+        name: _loc("DND5E.SUMMON.FIELDS.match.proficiency.label")
       });
       actorUpdates.effects.push(proficiencyEffect.toObject());
     }
@@ -307,12 +309,12 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
             _id: staticID("dnd5eACBonus"),
             changes: [{
               key: "system.attributes.ac.bonus",
-              mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+              type: "add",
               value: acBonus.total
             }],
             disabled: false,
             icon: "icons/magic/defensive/shield-barrier-blue.webp",
-            name: game.i18n.localize("DND5E.SUMMON.FIELDS.bonuses.ac.label")
+            name: _loc("DND5E.SUMMON.FIELDS.bonuses.ac.label")
           })).toObject());
         }
       }
@@ -327,12 +329,12 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
           _id: staticID("dnd5eHDBonus"),
           changes: [{
             key: "system.attributes.hd.max",
-            mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+            type: "add",
             value: hdBonus.total
           }],
           disabled: false,
           icon: "icons/sundries/gaming/dice-runed-brown.webp",
-          name: game.i18n.localize("DND5E.SUMMON.FIELDS.bonuses.hd.label")
+          name: _loc("DND5E.SUMMON.FIELDS.bonuses.hd.label")
         })).toObject());
       }
     }
@@ -352,12 +354,12 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
             _id: staticID("dnd5eHPBonus"),
             changes: [{
               key: `system.attributes.hp.${hpField}`,
-              mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+              type: "add",
               value: hpBonus.total
             }],
             disabled: false,
             icon: "icons/magic/life/heart-glowing-red.webp",
-            name: game.i18n.localize("DND5E.SUMMON.FIELDS.bonuses.hp.label")
+            name: _loc("DND5E.SUMMON.FIELDS.bonuses.hp.label")
           })).toObject();
         };
 
@@ -414,7 +416,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
       // Match attacks
       if ( this.match.attacks && item.system.hasAttack ) {
         let attack = this.flat?.attack;
-        if ( attack === undefined ) {
+        if ( (attack === undefined) || (attack === null) ) {
           const actionType = item.system.activities.getByType("attack")[0].actionType;
           const typeMapping = { mwak: "msak", rwak: "rsak" };
           const parts = [
@@ -428,11 +430,11 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
         }
         changes.push({
           key: "activities[attack].attack.bonus",
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          type: "override",
           value: attack
         }, {
           key: "activities[attack].attack.flat",
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          type: "override",
           value: true
         });
       }
@@ -441,11 +443,11 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
       if ( this.match.saves && item.hasSave ) {
         changes.push({
           key: "activities[save].save.dc.formula",
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          type: "override",
           value: this.flat?.save ?? rollData.abilities?.[this.ability]?.dc ?? rollData.attributes.spell.dc
         }, {
           key: "activities[save].save.dc.calculation",
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          type: "override",
           value: ""
         });
       }
@@ -458,7 +460,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
       if ( damageBonus && item.system.activities.find(a => a.damage?.parts?.length || a.healing?.formula) ) {
         changes.push({
           key: "system.damage.bonus",
-          mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+          type: "add",
           value: damageBonus
         });
       }
@@ -469,7 +471,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
           changes,
           disabled: false,
           icon: "icons/skills/melee/strike-slashes-orange.webp",
-          name: game.i18n.localize("DND5E.SUMMON.ItemChanges.Label"),
+          name: _loc("DND5E.SUMMON.ItemChanges.Label"),
           origin: this.uuid,
           type: "enchantment"
         })).toObject();
@@ -519,7 +521,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
     if ( actor.prototypeToken.randomImg && !game.user.can("FILES_BROWSE") ) {
       tokenUpdates.texture ??= {};
       tokenUpdates.texture.src ??= actor.img;
-      ui.notifications.warn("DND5E.SUMMON.Warning.Wildcard", { localize: true });
+      ui.notifications.warn("DND5E.SUMMON.Warning.Wildcard");
     }
 
     delete placement.prototypeToken;
@@ -541,7 +543,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
       await tokenDocument.actor.updateEmbeddedDocuments("ActiveEffect", oldEffects);
       await tokenDocument.actor.createEmbeddedDocuments("ActiveEffect", newEffects, { keepId: true });
     } else {
-      tokenDocument.delta.updateSource(actorUpdates);
+      tokenDocument.updateSource({ delta: actorUpdates });
       if ( actor.prototypeToken.appendNumber ) TokenPlacement.adjustAppendedNumber(tokenDocument, placement);
     }
 

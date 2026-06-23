@@ -89,7 +89,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       div.innerHTML = `
         <label class="roboto-upper">
           <i class="fa-solid fa-bolt"></i>
-          <span>${game.i18n.localize("DND5E.Effects")}</span>
+          <span>${_loc("DND5E.EFFECT.Application.Header")}</span>
           <i class="fa-solid fa-caret-down"></i>
         </label>
         <div class="collapsible-content">
@@ -120,7 +120,14 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       effect.updateDuration();
       const li = document.createElement("li");
       li.classList.add("effect");
-      li.dataset.id = effect.id;
+      Object.assign(li.dataset, {
+        id: effect.id,
+        tooltip: `
+          <section class="loading" data-uuid="${effect.uuid}"><i class="fas fa-spinner fa-spin-pulse"></i></section>
+        `,
+        tooltipClass: "dnd5e2 dnd5e-tooltip item-tooltip themed theme-light",
+        tooltipDirection: "LEFT"
+      });
       li.innerHTML = `
         <img class="gold-icon">
         <div class="name-stacked">
@@ -128,7 +135,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
           <span class="subtitle">${effect.duration.label}</span>
         </div>
         <button class="apply-effect" type="button" data-action="applyEffect"
-                data-tooltip aria-label="${game.i18n.localize("DND5E.EffectsApplyTokens")}">
+                data-tooltip aria-label="${_loc("DND5E.EFFECT.Application.Action.ApplyTokens")}">
           <i class="fas fa-reply-all fa-flip-horizontal" inert></i>
         </button>
       `;
@@ -183,7 +190,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
     const concentration = this.chatMessage.getAssociatedActor()?.effects.get(this.chatMessage.system.concentration);
     const origin = concentration ?? effect;
     if ( !game.user.isGM && !actor.isOwner ) {
-      throw new Error(game.i18n.localize("DND5E.EffectApplyWarningOwnership"));
+      throw new Error(_loc("DND5E.EFFECT.Application.Warning.Ownership"));
     }
 
     const effectFlags = {
@@ -196,22 +203,31 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       }
     };
 
+    // Inherit the activity's duration when the applied effect has no explicit duration of its own
+    let durationOverride = {};
+    if ( !Number.isFinite(effect.duration.value) ) {
+      const effectDuration = this.chatMessage.getAssociatedActivity({ scaled: true })?.duration.getEffectData();
+      if ( !foundry.utils.isEmpty(effectDuration) ) durationOverride = { duration: effectDuration };
+    }
+
     // Enable an existing effect on the target if it originated from this effect
     const existingEffect = actor.effects.find(e => e.origin === origin.uuid);
     if ( existingEffect ) {
       return existingEffect.update(foundry.utils.mergeObject({
         ...effect.constructor.getInitialDuration(),
+        ...durationOverride,
         disabled: false
       }, effectFlags));
     }
 
     if ( !game.user.isGM && concentration && !concentration.isOwner ) {
-      throw new Error(game.i18n.localize("DND5E.EffectApplyWarningConcentration"));
+      throw new Error(_loc("DND5E.EFFECT.Application.Warning.Concentration"));
     }
 
     // Otherwise, create a new effect on the target
     const effectData = foundry.utils.mergeObject({
       ...effect.toObject(),
+      ...durationOverride,
       disabled: false,
       transfer: false,
       origin: origin.uuid

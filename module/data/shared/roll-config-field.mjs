@@ -6,7 +6,7 @@ const { StringField, NumberField, SchemaField } = foundry.data.fields;
  * Field for storing data for a specific type of roll.
  */
 export default class RollConfigField extends foundry.data.fields.SchemaField {
-  constructor({roll={}, ability="", ...fields}={}, options={}) {
+  constructor({ roll={}, ability="", ...fields }={}, options={}) {
     const opts = { initial: null, nullable: true, min: 1, max: 20, integer: true };
     fields = {
       ability: (ability === false) ? null : new StringField({

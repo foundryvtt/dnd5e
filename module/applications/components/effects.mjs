@@ -83,51 +83,49 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
     const categories = {
       enchantment: {
         type: "enchantment",
-        label: game.i18n.localize("DND5E.ENCHANTMENT.Category.General"),
+        label: _loc("DND5E.ENCHANTMENT.Category.General"),
         effects: [],
         isEnchantment: true
       },
       temporary: {
         type: "temporary",
-        label: game.i18n.localize("DND5E.EffectTemporary"),
+        label: _loc("DND5E.EffectTemporary"),
         effects: []
       },
       enchantmentActive: {
         type: "activeEnchantment",
-        label: game.i18n.localize("DND5E.ENCHANTMENT.Category.Active"),
+        label: _loc("DND5E.ENCHANTMENT.Category.Active"),
         effects: [],
         isEnchantment: true
       },
       passive: {
         type: "passive",
-        label: game.i18n.localize("DND5E.EffectPassive"),
+        label: _loc("DND5E.EffectPassive"),
         effects: []
       },
       enchantmentInactive: {
         type: "inactiveEnchantment",
-        label: game.i18n.localize("DND5E.ENCHANTMENT.Category.Inactive"),
+        label: _loc("DND5E.ENCHANTMENT.Category.Inactive"),
         effects: [],
         isEnchantment: true
       },
       inactive: {
         type: "inactive",
-        label: game.i18n.localize("DND5E.EffectInactive"),
+        label: _loc("DND5E.EffectInactive"),
         effects: []
       },
       suppressed: {
         type: "suppressed",
-        label: game.i18n.localize("DND5E.EffectUnavailable"),
+        label: _loc("DND5E.EffectUnavailable"),
         effects: [],
         disabled: true,
-        info: [game.i18n.localize("DND5E.EffectUnavailableInfo")]
+        info: [_loc("DND5E.EffectUnavailableInfo")]
       }
     };
 
     // Iterate over active effects, classifying them into categories
     for ( const e of effects ) {
-      if ( (e.dependentOrigin?.active === false) || ((e.parent.system?.identified === false) && !game.user.isGM) ) {
-        continue;
-      }
+      if ( e.isConcealed ) continue;
       if ( e.isAppliedEnchantment ) {
         if ( e.disabled || e.duration.expired ) categories.enchantmentInactive.effects.push(e);
         else categories.enchantmentActive.effects.push(e);
@@ -164,49 +162,49 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
     const isConcentrationEffect = (this.document instanceof Actor5e) && this.app._concentration?.effects.has(effect);
     const options = [
       {
-        name: "DND5E.ContextMenuActionEdit",
+        label: "DND5E.ContextMenuActionEdit",
         icon: "<i class='fas fa-edit fa-fw'></i>",
-        condition: () => effect.isOwner,
-        callback: li => this._onAction(li, "edit")
+        visible: () => effect.isOwner,
+        onClick: (_, target) => this._onAction(target, "edit")
       },
       {
-        name: "DND5E.ContextMenuActionDuplicate",
+        label: "DND5E.ContextMenuActionDuplicate",
         icon: "<i class='fas fa-copy fa-fw'></i>",
-        condition: () => effect.isOwner,
-        callback: li => this._onAction(li, "duplicate")
+        visible: () => effect.isOwner,
+        onClick: (_, target) => this._onAction(target, "duplicate")
       },
       {
-        name: "DND5E.ContextMenuActionDelete",
+        label: "DND5E.ContextMenuActionDelete",
         icon: "<i class='fas fa-trash fa-fw'></i>",
-        condition: () => effect.isOwner && !isConcentrationEffect,
-        callback: li => this._onAction(li, "delete")
+        visible: () => effect.isOwner && !isConcentrationEffect,
+        onClick: (_, target) => this._onAction(target, "delete")
       },
       {
-        name: effect.disabled ? "DND5E.ContextMenuActionEnable" : "DND5E.ContextMenuActionDisable",
+        label: effect.disabled ? "DND5E.ContextMenuActionEnable" : "DND5E.ContextMenuActionDisable",
         icon: effect.disabled ? "<i class='fas fa-check fa-fw'></i>" : "<i class='fas fa-times fa-fw'></i>",
         group: "state",
-        condition: () => effect.isOwner && !isConcentrationEffect,
-        callback: li => this._onAction(li, "toggle")
+        visible: () => effect.isOwner && !isConcentrationEffect,
+        onClick: (_, target) => this._onAction(target, "toggle")
       },
       {
-        name: "DND5E.ConcentrationBreak",
+        label: "DND5E.ConcentrationBreak",
         icon: '<dnd5e-icon src="systems/dnd5e/icons/svg/break-concentration.svg"></dnd5e-icon>',
-        condition: () => isConcentrationEffect,
-        callback: () => this.document.endConcentration(effect),
-        group: "state"
+        group: "state",
+        visible: () => isConcentrationEffect,
+        onClick: () => this.document.endConcentration(effect)
       }
     ];
 
     // Toggle Favorite State
     if ( (this.document instanceof Actor5e) && ("favorites" in this.document.system) ) {
-      const uuid = effect.getRelativeUUID(this.document);
+      const uuid = foundry.utils.buildRelativeUuid(effect, this.document);
       const isFavorited = this.document.system.hasFavorite(uuid);
       options.push({
-        name: isFavorited ? "DND5E.FavoriteRemove" : "DND5E.Favorite",
+        label: isFavorited ? "DND5E.FavoriteRemove" : "DND5E.Favorite",
         icon: "<i class='fas fa-bookmark fa-fw'></i>",
-        condition: () => effect.isOwner,
-        callback: li => this._onAction(li, isFavorited ? "unfavorite" : "favorite"),
-        group: "state"
+        group: "state",
+        visible: () => effect.isOwner,
+        onClick: (_, target) => this._onAction(target, isFavorited ? "unfavorite" : "favorite")
       });
     }
 
@@ -245,15 +243,17 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
         await effect.deleteDialog({ sheet: this.#app }, { render: false });
         return this.#app.render();
       case "duplicate":
-        return effect.clone({name: game.i18n.format("DOCUMENT.CopyOf", {name: effect.name})}, {save: true});
+        return effect.clone({ name: _loc("DOCUMENT.CopyOf", { name: effect.name }) }, { save: true });
       case "edit":
         return this.#app._openDocumentSheet(effect);
       case "favorite":
-        return this.document.system.addFavorite({type: "effect", id: effect.getRelativeUUID(this.document)});
+        return this.document.system.addFavorite({
+          type: "effect", id: foundry.utils.buildRelativeUuid(effect, this.document)
+        });
       case "toggle":
-        return effect.update({disabled: !effect.disabled});
+        return effect.update({ disabled: !effect.disabled });
       case "unfavorite":
-        return this.document.system.removeFavorite(effect.getRelativeUUID(this.document));
+        return this.document.system.removeFavorite(foundry.utils.buildRelativeUuid(effect, this.document));
     }
   }
 
@@ -285,11 +285,14 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
     const isEnchantment = li.dataset.effectType.startsWith("enchantment");
     return this.document.createEmbeddedDocuments("ActiveEffect", [{
       type: isEnchantment ? "enchantment" : "base",
-      name: isActor ? game.i18n.localize("DND5E.EffectNew") : this.document.name,
+      name: isActor ? _loc("DND5E.EffectNew") : this.document.name,
       icon: isActor ? "icons/svg/aura.svg" : this.document.img,
       origin: isEnchantment ? undefined : this.document.uuid,
       "duration.rounds": li.dataset.effectType === "temporary" ? 1 : undefined,
-      disabled: ["inactive", "enchantmentInactive"].includes(li.dataset.effectType)
+      disabled: ["inactive", "enchantmentInactive"].includes(li.dataset.effectType),
+      system: {
+        magical: !isActor && this.document.system.properties?.has("mgc")
+      }
     }]);
   }
 
@@ -305,7 +308,7 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
     const doc = await fromUuid(uuid);
     if ( !doc ) return;
     if ( !doc.testUserPermission(game.user, "LIMITED") ) {
-      ui.notifications.warn("DND5E.DocumentViewWarn", { localize: true });
+      ui.notifications.warn("DND5E.DocumentViewWarn");
       return;
     }
     doc.sheet.render(true);

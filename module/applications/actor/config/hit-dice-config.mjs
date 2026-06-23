@@ -32,7 +32,7 @@ export default class HitDiceConfig extends BaseConfigSheet {
 
   /** @override */
   get title() {
-    return game.i18n.localize("DND5E.HitDice");
+    return _loc("DND5E.HitDice");
   }
 
   /* -------------------------------------------- */

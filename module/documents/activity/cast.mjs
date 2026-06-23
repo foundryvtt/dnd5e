@@ -71,7 +71,7 @@ export default class CastActivity extends ActivityMixin(BaseCastActivityData) {
   async use(usage={}, dialog={}, message={}) {
     if ( !this.item.isEmbedded || this.item.pack ) return;
     if ( !this.item.isOwner ) {
-      ui.notifications.error("DND5E.DocumentUseWarn", { localize: true });
+      ui.notifications.error("DND5E.DocumentUseWarn");
       return;
     }
 
@@ -124,7 +124,7 @@ export default class CastActivity extends ActivityMixin(BaseCastActivityData) {
         {
           _id: this.constructor.ENCHANTMENT_ID,
           type: "enchantment",
-          name: game.i18n.localize("DND5E.CAST.Enchantment.Name"),
+          name: _loc("DND5E.CAST.Enchantment.Name"),
           img: "systems/dnd5e/icons/svg/activity/cast.svg",
           origin: this.uuid,
           changes: this.getSpellChanges()
@@ -147,7 +147,7 @@ export default class CastActivity extends ActivityMixin(BaseCastActivityData) {
    * @returns {object[]}
    */
   getSpellChanges() {
-    const changes = [{ key: "system.method", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: "spell" }];
+    const changes = [{ key: "system.method", type: "override", value: "spell" }];
     const source = this.toObject();
 
     // Override spell details
@@ -155,33 +155,44 @@ export default class CastActivity extends ActivityMixin(BaseCastActivityData) {
       if ( !this[type].override ) continue;
       const data = source[type];
       delete data.override;
-      changes.push({ key: `system.${type}`, mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: JSON.stringify(data) });
+      changes.push({ key: `system.${type}`, type: "override", value: JSON.stringify(data) });
     }
 
     // Set the casting ability
-    if ( this.spell.ability ) changes.push({
-      key: "system.ability", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: this.spell.ability
-    });
+    if ( this.spell.ability ) changes.push(
+      { key: "system.ability", type: "override", value: this.spell.ability }
+    );
 
     // Remove ignored properties
     for ( const property of this.spell.properties ) {
-      changes.push({ key: "system.properties", mode: CONST.ACTIVE_EFFECT_MODES.ADD, value: `-${property}` });
+      changes.push({ key: "system.properties", type: "add", value: `-${property}` });
     }
 
     // Set challenge overrides
     const challenge = this.spell.challenge;
     if ( challenge.override && challenge.attack ) changes.push(
-      { key: "activities[attack].attack.bonus", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: challenge.attack },
-      { key: "activities[attack].attack.flat", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: true },
-      { key: "activities[summon].flat.attack", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: challenge.attack }
+      { key: "activities[attack].attack.bonus", type: "override", value: challenge.attack },
+      { key: "activities[attack].attack.flat", type: "override", value: true },
+      { key: "activities[summon].flat.attack", type: "override", value: challenge.attack }
     );
     if ( challenge.override && challenge.save ) changes.push(
-      { key: "activities[save].save.dc.calculation", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: "" },
-      { key: "activities[save].save.dc.formula", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: challenge.save },
-      { key: "activities[summon].flat.save", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: challenge.save }
+      { key: "activities[save].save.dc.calculation", type: "override", value: "" },
+      { key: "activities[save].save.dc.formula", type: "override", value: challenge.save },
+      { key: "activities[summon].flat.save", type: "override", value: challenge.save }
     );
 
     return changes;
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  getRollData(...options) {
+    const data = super.getRollData(...options);
+    if ( this.cachedSpell ) data.item.level = Math.max(this.cachedSpell.system.level, this.spell.level ?? -Infinity);
+    return data;
   }
 
   /* -------------------------------------------- */

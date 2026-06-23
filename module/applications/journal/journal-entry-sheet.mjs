@@ -1,4 +1,5 @@
 import JournalNavigationConfig from "./config/journal-navigation-config.mjs";
+import JournalTOCConfig from "./config/journal-toc-config.mjs";
 
 /**
  * Variant of the standard journal sheet with support for additional page types.
@@ -7,7 +8,8 @@ export default class JournalEntrySheet5e extends foundry.applications.sheets.jou
   /** @override */
   static DEFAULT_OPTIONS = {
     actions: {
-      configureNavigation: JournalEntrySheet5e.#onConfigureNavigation
+      configureNavigation: JournalEntrySheet5e.#onConfigureNavigation,
+      configureTableOfContents: JournalEntrySheet5e.#onConfigureTableOfContents
     },
     classes: ["dnd5e2", "dnd5e2-journal", "titlebar"],
     window: {
@@ -17,6 +19,12 @@ export default class JournalEntrySheet5e extends foundry.applications.sheets.jou
           icon: "fa-solid fa-compass",
           label: "DND5E.JOURNALENTRY.Action.ConfigureNavigation",
           visible: JournalEntrySheet5e.#canConfigureNavigation
+        },
+        {
+          action: "configureTableOfContents",
+          icon: "fa-solid fa-bars-staggered",
+          label: "DND5E.TABLEOFCONTENTS.Action.Configure",
+          visible: JournalEntrySheet5e.#canConfigureTableOfContents
         }
       ]
     }
@@ -30,17 +38,6 @@ export default class JournalEntrySheet5e extends foundry.applications.sheets.jou
   _createContextMenu(handler, selector, options={}) {
     options.fixed = true;
     return super._createContextMenu(handler, selector, options);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async _onRender(context, options) {
-    await super._onRender(context, options);
-    this.element.querySelectorAll(".action-buttons :is(.previous, .next)").forEach(el => {
-      el.classList.add("inline-control");
-    });
-    if ( options.parts.includes("pages") ) this.constructor._injectNavigation(this.document, this.element);
   }
 
   /* -------------------------------------------- */
@@ -66,7 +63,30 @@ export default class JournalEntrySheet5e extends foundry.applications.sheets.jou
   }
 
   /* -------------------------------------------- */
-  /*  Event Listeners & Handlers                  */
+  /*  Life-Cycle Handlers                         */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onFirstRender(context, options) {
+    await super._onFirstRender(context, options);
+    const compendium = this.document.compendium
+      ?? foundry.utils.parseUuid(this.document._stats.compendiumSource)?.collection;
+    if ( compendium?.metadata ) this.element.dataset.compendiumId = compendium.metadata.id;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+    this.element.querySelectorAll(".action-buttons :is(.previous, .next)").forEach(el => {
+      el.classList.add("inline-control");
+    });
+    if ( options.parts.includes("pages") ) this.constructor._injectNavigation(this.document, this.element);
+  }
+
+  /* -------------------------------------------- */
+  /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -92,13 +112,35 @@ export default class JournalEntrySheet5e extends foundry.applications.sheets.jou
   /* -------------------------------------------- */
 
   /**
-   * Handle opening the navigation configuration application.
+   * Whether it's possible to configure the table of contents listing for this sheet.
+   * @this {JournalEntrySheet5e}
+   * @returns {boolean}
+   */
+  static #canConfigureTableOfContents() {
+    const flags = this.entry.collection.metadata?.flags ?? {};
+    return this.isEditable && this.entry.isOwner && this.entry.inCompendium
+      && ((flags.display === "table-of-contents") || (flags.dnd5e?.display === "table-of-contents"));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle opening the table of contents configuration application.
    * @this {JournalEntrySheet5e}
    * @param {Event} event         Triggering click event.
    * @param {HTMLElement} target  Button that was clicked.
    */
   static async #onConfigureNavigation(event, target) {
     new JournalNavigationConfig({ document: this.document }).render({ force: true });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle opening the navigation configuration application.
+   */
+  static async #onConfigureTableOfContents(event, target) {
+    new JournalTOCConfig({ document: this.entry }).render({ force: true });
   }
 
   /* -------------------------------------------- */
@@ -112,7 +154,6 @@ export default class JournalEntrySheet5e extends foundry.applications.sheets.jou
    * @returns {Promise<ApplicationV2>}
    */
   _renderChild(app, options={}) {
-    if ( game.release.generation < 14 ) return app.render({ force: true, ...options });
     if ( this.parent ) return this.parent.renderChild(app, options);
     return this.renderChild(app, options);
   }

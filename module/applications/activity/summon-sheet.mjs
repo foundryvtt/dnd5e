@@ -54,10 +54,10 @@ export default class SummonSheet extends ActivitySheet {
     context.abilityOptions = [
       {
         value: "", rule: true,
-        label: game.i18n.format("DND5E.DefaultSpecific", {
-          default: this.activity.isSpell ? game.i18n.localize("DND5E.Spellcasting").toLowerCase()
+        label: _loc("DND5E.DefaultSpecific", {
+          default: this.activity.isSpell ? _loc("DND5E.Spellcasting").toLowerCase()
             : CONFIG.DND5E.abilities[this.activity.ability]?.label.toLowerCase()
-              ?? game.i18n.localize("DND5E.None").toLowerCase()
+              ?? _loc("DND5E.None").toLowerCase()
         })
       },
       ...Object.entries(CONFIG.DND5E.abilities).map(([value, { label }]) => ({ value, label }))
@@ -70,8 +70,8 @@ export default class SummonSheet extends ActivitySheet {
     }));
 
     context.profileModes = [
-      { value: "", label: game.i18n.localize("DND5E.SUMMON.FIELDS.summon.mode.Direct") },
-      { value: "cr", label: game.i18n.localize("DND5E.SUMMON.FIELDS.summon.mode.CR") }
+      { value: "", label: _loc("DND5E.SUMMON.FIELDS.summon.mode.Direct") },
+      { value: "cr", label: _loc("DND5E.SUMMON.FIELDS.summon.mode.CR") }
     ];
     context.profiles = this.activity.profiles.map((data, index) => ({
       data, index,

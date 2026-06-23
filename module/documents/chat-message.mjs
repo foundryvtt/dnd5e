@@ -120,18 +120,17 @@ export default class ChatMessage5e extends ChatMessage {
 
     if ( foundry.utils.getType(this.system?.getHTML) === "function" ) {
       await this.system.getHTML(html, options);
-      return html;
-    }
+    } else {
+      this._displayChatActionButtons(html);
+      this._highlightCriticalSuccessFailure(html);
+      if ( game.settings.get("dnd5e", "autoCollapseItemCards") ) {
+        html.querySelectorAll(".description.collapsible").forEach(el => el.classList.add("collapsed"));
+      }
 
-    this._displayChatActionButtons(html);
-    this._highlightCriticalSuccessFailure(html);
-    if ( game.settings.get("dnd5e", "autoCollapseItemCards") ) {
-      html.querySelectorAll(".description.collapsible").forEach(el => el.classList.add("collapsed"));
+      await this._enrichChatCard(html);
+      this._collapseTrays(html);
+      dnd5e.enrichers.activateChatListeners(this, html);
     }
-
-    await this._enrichChatCard(html);
-    this._collapseTrays(html);
-    dnd5e.enrichers.activateChatListeners(this, html);
 
     /**
      * A hook event that fires after dnd5e-specific chat message modifications have completed.
@@ -324,7 +323,7 @@ export default class ChatMessage5e extends ChatMessage {
     if ( !game.user.isGM ) deleteButton?.remove();
     else deleteButton?.querySelector("i").classList.add("fa-fw");
     const anchor = document.createElement("a");
-    anchor.setAttribute("aria-label", game.i18n.localize("DND5E.AdditionalControls"));
+    anchor.setAttribute("aria-label", _loc("DND5E.AdditionalControls"));
     anchor.classList.add("chat-control");
     anchor.dataset.contextMenu = "";
     anchor.innerHTML = '<i class="fas fa-ellipsis-vertical fa-fw"></i>';
@@ -345,11 +344,11 @@ export default class ChatMessage5e extends ChatMessage {
       const isCritical = (roll.type === "damage") && this.rolls[0]?.isCritical;
       const subtitle = roll.type === "damage"
         ? isCritical
-          ? game.i18n.localize("DND5E.CriticalHit")
-          : activity?.damageFlavor ?? game.i18n.localize("DND5E.DamageRoll")
+          ? _loc("DND5E.CriticalHit")
+          : activity?.damageFlavor ?? _loc("DND5E.DamageRoll")
         : roll.type === "attack"
           ? (activity?.getActionLabel(roll.attackMode) ?? "")
-          : (item.system.type?.label ?? game.i18n.localize(CONFIG.Item.typeLabels[item.type]));
+          : (item.system.type?.label ?? _loc(CONFIG.Item.typeLabels[item.type]));
       const flavor = document.createElement("div");
       flavor.classList.add("chat-card");
       flavor.innerHTML = `
@@ -382,6 +381,7 @@ export default class ChatMessage5e extends ChatMessage {
       });
       this._enrichDamageTooltip(this.rolls.filter(r => r instanceof DamageRoll), html);
       this._enrichSaveTooltip(html);
+      this._enrichConcentrationTooltip(html);
       html.querySelectorAll(".dice-roll").forEach(el => el.addEventListener("click", this._onClickDiceRoll.bind(this)));
     } else {
       html.querySelectorAll(".dice-roll").forEach(el => el.classList.add("secret-roll"));
@@ -436,7 +436,7 @@ export default class ChatMessage5e extends ChatMessage {
         <a class="content-link" draggable="true" data-link data-uuid="${masteryConfig.reference}"
            data-tooltip="${mastery}">${mastery}</a>
       `;
-      p.innerHTML = `<strong>${game.i18n.format("DND5E.WEAPON.Mastery.Flavor")}</strong> ${mastery}`;
+      p.innerHTML = `<strong>${_loc("DND5E.WEAPON.Mastery.Flavor")}</strong> ${mastery}`;
       (html.querySelector(".chat-card") ?? html.querySelector(".message-content"))?.appendChild(p);
     }
 
@@ -451,7 +451,7 @@ export default class ChatMessage5e extends ChatMessage {
       <div class="card-tray targets-tray collapsible collapsed">
         <label class="roboto-upper">
           <i class="fas fa-bullseye" inert></i>
-          <span>${game.i18n.localize("DND5E.TargetPl")}</span>
+          <span>${_loc("DND5E.TargetPl")}</span>
           <i class="fas fa-caret-down" inert></i>
         </label>
         <div class="collapsible-content">
@@ -520,7 +520,7 @@ export default class ChatMessage5e extends ChatMessage {
         <section class="tooltip-part">
           <div class="dice">
             ${icon
-              ? `<span class="part-method" data-tooltip aria-label="${game.i18n.localize(method)}">${icon}</span>` : ""}
+              ? `<span class="part-method" data-tooltip aria-label="${_loc(method)}">${icon}</span>` : ""}
             <ol class="dice-rolls">
               ${dice.reduce((str, { result, classes }) => `
                 ${str}<li class="roll ${classes}">${result}</li>
@@ -556,8 +556,8 @@ export default class ChatMessage5e extends ChatMessage {
     if ( damageOnSave ) {
       const p = document.createElement("p");
       p.classList.add("supplement");
-      p.innerHTML = `<strong>${game.i18n.format("DND5E.SAVE.OnSave")}</strong> ${
-        game.i18n.localize(`DND5E.SAVE.FIELDS.damage.onSave.${damageOnSave.capitalize()}`)
+      p.innerHTML = `<strong>${_loc("DND5E.SAVE.OnSave")}</strong> ${
+        _loc(`DND5E.SAVE.FIELDS.damage.onSave.${damageOnSave.capitalize()}`)
       }`;
       html.querySelector(".chat-card, .message-content")?.appendChild(p);
     }
@@ -646,8 +646,8 @@ export default class ChatMessage5e extends ChatMessage {
     // If message has the `forceSuccess` flag, mark it as resisted
     if ( roll.forceSuccess ) content.insertAdjacentHTML("beforeend", `
       <p class="supplement">
-        <strong>${game.i18n.localize("DND5E.ROLL.Status")}</strong>
-        ${game.i18n.localize("DND5E.LegendaryResistance.Resisted")}
+        <strong>${_loc("DND5E.ROLL.Status")}</strong>
+        ${_loc("DND5E.LegendaryResistance.Resisted")}
       </p>
     `);
 
@@ -657,12 +657,57 @@ export default class ChatMessage5e extends ChatMessage {
         <div class="card-buttons">
           <button type="button">
             <i class="fa-solid fa-dragon" inert></i>
-            ${game.i18n.localize("DND5E.LegendaryResistance.Action.Resist")}
+            ${_loc("DND5E.LegendaryResistance.Action.Resist")}
           </button>
         </div>
       `);
       const button = content.querySelector("button");
       button.addEventListener("click", () => actor.system.resistSave(this));
+    }
+
+    else return;
+
+    html.querySelector(".message-content").append(content);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Display option to break concentration on a failed concentration saving throw.
+   * @param {HTMLLIElement} html  The chat card.
+   * @protected
+   */
+  _enrichConcentrationTooltip(html) {
+    const actor = this.getAssociatedActor();
+    const roll = this.getFlag("dnd5e", "roll");
+    if ( !this.rolls.some(r => r.options.isConcentration) || this.rolls.some(r => r.isSuccess) ) return;
+
+    const content = document.createElement("div");
+    content.classList.add("chat-card");
+
+    // If concentration has already been broken from this save, mark it as lost.
+    if ( roll?.concentrationBroken ) content.insertAdjacentHTML("beforeend", `
+      <p class="supplement">
+        <strong>${_loc("DND5E.ROLL.Status")}</strong>
+        ${_loc("DND5E.ConcentrationLost")}
+      </p>
+    `);
+
+    // Otherwise if actor is still concentrating, display break button.
+    else if ( actor?.isOwner && !dnd5e.settings.disableConcentration && actor.concentration.effects.size ) {
+      content.insertAdjacentHTML("beforeend", `
+        <div class="card-buttons">
+          <button type="button">
+            <i class="fa-solid fa-ban" inert></i>
+            ${_loc("DND5E.ConcentrationBreak")}
+          </button>
+        </div>
+      `);
+      const button = content.querySelector("button");
+      button.addEventListener("click", async () => {
+        const ended = await actor.endConcentration();
+        if ( ended.length ) await this.setFlag("dnd5e", "roll.concentrationBroken", true);
+      });
     }
 
     else return;
@@ -688,53 +733,53 @@ export default class ChatMessage5e extends ChatMessage {
     const canTarget = li => game.messages.get(li.dataset.messageId)?.canSelectTargets;
     options.push(
       {
-        name: game.i18n.localize("DND5E.ChatContextDamage"),
+        label: _loc("DND5E.ChatContextDamage"),
         icon: '<i class="fas fa-user-minus"></i>',
-        condition: canApply,
-        callback: li => game.messages.get(li.dataset.messageId)?.applyChatCardDamage(li, 1),
-        group: "damage"
+        group: "damage",
+        visible: canApply,
+        onClick: (_, target) => game.messages.get(target.dataset.messageId)?.applyChatCardDamage(target, 1)
       },
       {
-        name: game.i18n.localize("DND5E.ChatContextHealing"),
+        label: _loc("DND5E.ChatContextHealing"),
         icon: '<i class="fas fa-user-plus"></i>',
-        condition: canApply,
-        callback: li => game.messages.get(li.dataset.messageId)?.applyChatCardDamage(li, -1),
-        group: "damage"
+        group: "damage",
+        visible: canApply,
+        onClick: (_, target) => game.messages.get(target.dataset.messageId)?.applyChatCardDamage(target, -1)
       },
       {
-        name: game.i18n.localize("DND5E.ChatContextTempHP"),
+        label: _loc("DND5E.ChatContextTempHP"),
         icon: '<i class="fas fa-user-clock"></i>',
-        condition: canApply,
-        callback: li => game.messages.get(li.dataset.messageId)?.applyChatCardTemp(li),
-        group: "damage"
+        group: "damage",
+        visible: canApply,
+        onClick: (_, target) => game.messages.get(target.dataset.messageId)?.applyChatCardTemp(target)
       },
       {
-        name: game.i18n.localize("DND5E.ChatContextDoubleDamage"),
+        label: _loc("DND5E.ChatContextDoubleDamage"),
         icon: '<i class="fas fa-user-injured"></i>',
-        condition: canApply,
-        callback: li => game.messages.get(li.dataset.messageId)?.applyChatCardDamage(li, 2),
-        group: "damage"
+        group: "damage",
+        visible: canApply,
+        onClick: (_, target) => game.messages.get(target.dataset.messageId)?.applyChatCardDamage(target, 2)
       },
       {
-        name: game.i18n.localize("DND5E.ChatContextHalfDamage"),
+        label: _loc("DND5E.ChatContextHalfDamage"),
         icon: '<i class="fas fa-user-shield"></i>',
-        condition: canApply,
-        callback: li => game.messages.get(li.dataset.messageId)?.applyChatCardDamage(li, 0.5),
-        group: "damage"
+        group: "damage",
+        visible: canApply,
+        onClick: (_, target) => game.messages.get(target.dataset.messageId)?.applyChatCardDamage(target, 0.5)
       },
       {
-        name: game.i18n.localize("DND5E.ChatContextSelectHit"),
+        label: _loc("DND5E.ChatContextSelectHit"),
         icon: '<i class="fas fa-bullseye"></i>',
-        condition: canTarget,
-        callback: li => game.messages.get(li.dataset.messageId)?.selectTargets(li, "hit"),
-        group: "attack"
+        group: "attack",
+        visible: canTarget,
+        onClick: (_, target) => game.messages.get(target.dataset.messageId)?.selectTargets(target, "hit")
       },
       {
-        name: game.i18n.localize("DND5E.ChatContextSelectMiss"),
+        label: _loc("DND5E.ChatContextSelectMiss"),
         icon: '<i class="fas fa-bullseye"></i>',
-        condition: canTarget,
-        callback: li => game.messages.get(li.dataset.messageId)?.selectTargets(li, "miss"),
-        group: "attack"
+        group: "attack",
+        visible: canTarget,
+        onClick: (_, target) => game.messages.get(target.dataset.messageId)?.selectTargets(target, "miss")
       }
     );
     return options;
@@ -875,7 +920,7 @@ export default class ChatMessage5e extends ChatMessage {
     const close = html.querySelector(".header-button.close");
     if ( close ) {
       close.innerHTML = '<i class="fas fa-times"></i>';
-      close.dataset.tooltip = game.i18n.localize("Close");
+      close.dataset.tooltip = _loc("Close");
       close.setAttribute("aria-label", close.dataset.tooltip);
     }
     html.querySelector(".message-metadata [data-context-menu]")?.remove();
@@ -956,12 +1001,17 @@ export default class ChatMessage5e extends ChatMessage {
 
   /**
    * Get the Activity that created this chat card.
+   * @param {object} [options={}]
+   * @param {boolean} [scaled=false]  Pre-scaled the item based on the scaling value on the chat card.
    * @returns {Activity|void}
    */
-  getAssociatedActivity() {
+  getAssociatedActivity({ scaled=false }={}) {
     const activity = fromUuidSync(this.getFlag("dnd5e", "activity.uuid"), { strict: false });
-    if ( activity ) return activity;
-    return this.getAssociatedItem()?.system.activities?.get(this.getFlag("dnd5e", "activity.id"));
+    if ( activity ) {
+      const scaling = scaled ? this.system.scaling : null;
+      return scaling ? activity.item.scaledClone(scaling).system.activities.get(activity.id) : activity;
+    }
+    return this.getAssociatedItem({ scaled })?.system.activities?.get(this.getFlag("dnd5e", "activity.id"));
   }
 
   /* -------------------------------------------- */
@@ -983,15 +1033,18 @@ export default class ChatMessage5e extends ChatMessage {
 
   /**
    * Get the item associated with this chat card.
+   * @param {object} [options={}]
+   * @param {boolean} [scaled=false]  Pre-scaled the item based on the scaling value on the chat card.
    * @returns {Item5e|void}
    */
-  getAssociatedItem() {
+  getAssociatedItem({ scaled=false }={}) {
     const item = fromUuidSync(this.getFlag("dnd5e", "item.uuid"), { strict: false });
-    if ( item ) return item;
+    const scaling = scaled ? this.system.scaling : null;
+    if ( item ) return scaling ? item.scaledClone(scaling) : item;
     const actor = this.getAssociatedActor();
     if ( !actor ) return;
     const storedData = this.getFlag("dnd5e", "item.data") ?? this.getOriginatingMessage().getFlag("dnd5e", "item.data");
-    if ( storedData ) return new Item.implementation(storedData, { parent: actor });
+    if ( storedData ) return new Item.implementation(storedData, { parent: actor }).scaledClone(scaling);
   }
 
   /* -------------------------------------------- */

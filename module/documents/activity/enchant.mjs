@@ -153,7 +153,7 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
 
     // Validate against the enchantment's restraints on the origin item
     if ( strict ) {
-      const errors = this.canEnchant(item);
+      const errors = this.canEnchant(item, { chatMessage });
       if ( errors?.length ) {
         errors.forEach(err => ui.notifications.error(err.message, { console: false }));
         return null;
@@ -163,7 +163,7 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
     // If concentration is required, ensure it is still being maintained & GM is present
     if ( !game.user.isGM && concentration && !concentration.isOwner ) {
       if ( strict ) {
-        ui.notifications.error("DND5E.EffectApplyWarningConcentration", { console: false, localize: true });
+        ui.notifications.error("DND5E.EFFECT.Application.Warning.Concentration", { console: false });
         return null;
       } else {
         concentration = null;
@@ -178,19 +178,20 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
      * Hook that fires before an enchantment is applied to an item.
      * @function dnd5e.preApplyEnchantment
      * @memberof hookEvents
-     * @param {Item5e} item                Item to which the enchantment will be applied.
-     * @param {object} enchantmentData     Data for the enchantment effect that will be created.
+     * @param {Item5e} item                        Item to which the enchantment will be applied.
+     * @param {object} enchantmentData             Data for the enchantment effect that will be created.
      * @param {object} options
-     * @param {Activity} options.activity  Enchant activity applied the enchantment.
-     * @returns {boolean}                  Explicitly return `false` to prevent enchantment from being applied.
+     * @param {Activity} options.activity          Enchant activity applied the enchantment.
+     * @param {ChatMessage5e} options.chatMessage  Chat message used to make the enchantment, if applicable.
+     * @returns {boolean}                          Explicitly return `false` to prevent enchantment from being applied.
      */
-    if ( Hooks.call("dnd5e.preApplyEnchantment", item, enchantmentData, { activity: this }) === false ) return null;
+    if ( Hooks.call("dnd5e.preApplyEnchantment", item, enchantmentData, { activity: this, chatMessage }) === false ) return null;
 
     // For compendium items, create on actor
     if ( item.inCompendium ) {
       const actor = this.actor.isOwner ? this.actor : (getSceneTargets()[0]?.actor ?? game.user.character);
       if ( !actor ) {
-        ui.notifications.warn("DND5E.ENCHANT.Warning.NoTargetActor", { localize: true });
+        ui.notifications.warn("DND5E.ENCHANT.Warning.NoTargetActor");
         return null;
       }
       enchantmentData._id = foundry.utils.randomID();
@@ -208,12 +209,13 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
      * Hook that fires after an enchantment has been applied to an item.
      * @function dnd5e.applyEnchantment
      * @memberof hookEvents
-     * @param {Item5e} item                 Item to which the enchantment was be applied.
-     * @param {ActiveEffect5e} enchantment  The enchantment effect that was be created.
+     * @param {Item5e} item                        Item to which the enchantment was be applied.
+     * @param {ActiveEffect5e} enchantment         The enchantment effect that was be created.
      * @param {object} options
-     * @param {Activity} options.activity   Enchant activity applied the enchantment.
+     * @param {Activity} options.activity          Enchant activity applied the enchantment.
+     * @param {ChatMessage5e} options.chatMessage  Chat message used to make the enchantment, if applicable.
      */
-    Hooks.callAll("dnd5e.applyEnchantment", item, enchantment, { activity: this });
+    Hooks.callAll("dnd5e.applyEnchantment", item, enchantment, { activity: this, chatMessage });
 
     return enchantment;
   }
@@ -222,21 +224,23 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
 
   /**
    * Determine whether the provided item can be enchanted based on this enchantment's restrictions.
-   * @param {Item5e} item  Item that might be enchanted.
+   * @param {Item5e} item                          Item that might be enchanted.
+   * @param {object} [options={}]
+   * @param {ChatMessage5e} [options.chatMessage]  Chat message used to make the enchantment, if applicable.
    * @returns {true|EnchantmentError[]}
    */
-  canEnchant(item) {
+  canEnchant(item, { chatMessage }={}) {
     const errors = [];
 
     if ( !this.restrictions.allowMagical && item.system.properties?.has("mgc")
       && ("quantity" in item.system) ) {
-      errors.push(new EnchantmentError(game.i18n.localize("DND5E.ENCHANT.Warning.NoMagicalItems")));
+      errors.push(new EnchantmentError(_loc("DND5E.ENCHANT.Warning.NoMagicalItems")));
     }
 
     if ( this.restrictions.type && (item.type !== this.restrictions.type) ) {
-      errors.push(new EnchantmentError(game.i18n.format("DND5E.ENCHANT.Warning.WrongType", {
-        incorrectType: game.i18n.localize(CONFIG.Item.typeLabels[item.type]),
-        allowedType: game.i18n.localize(CONFIG.Item.typeLabels[this.restrictions.type])
+      errors.push(new EnchantmentError(_loc("DND5E.ENCHANT.Warning.WrongType", {
+        incorrectType: _loc(CONFIG.Item.typeLabels[item.type]),
+        allowedType: _loc(CONFIG.Item.typeLabels[this.restrictions.type])
       })));
     }
 
@@ -247,7 +251,7 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
         if ( foundry.utils.getType(config) === "string" ) return config;
         return config.label;
       };
-      errors.push(new EnchantmentError(game.i18n.format(
+      errors.push(new EnchantmentError(_loc(
         `DND5E.ENCHANT.Warning.${item.system.type?.value ? "WrongType" : "NoSubtype"}`,
         {
           allowedType: game.i18n.getListFormatter({ type: "disjunction" }).format(
@@ -260,7 +264,7 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
 
     if ( this.restrictions.properties.size
       && !this.restrictions.properties.intersection(item.system.properties ?? new Set()).size ) {
-      errors.push(new EnchantmentError(game.i18n.format("DND5E.Enchantment.Warning.MissingProperty", {
+      errors.push(new EnchantmentError(_loc("DND5E.ENCHANT.Warning.MissingProperty", {
         validProperties: game.i18n.getListFormatter({ type: "disjunction" }).format(
           Array.from(this.restrictions.properties).map(p => CONFIG.DND5E.itemProperties[p]?.label ?? p)
         )
@@ -271,13 +275,15 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
      * A hook event that fires while validating whether an enchantment can be applied to a specific item.
      * @function dnd5e.canEnchant
      * @memberof hookEvents
-     * @param {EnchantActivity} activity   The activity performing the enchanting.
-     * @param {Item5e} item                Item to which the enchantment will be applied.
-     * @param {EnchantmentError[]} errors  List of errors containing failed restrictions. The item will be enchanted
-     *                                     so long as no errors are listed, otherwise the provided errors will be
-     *                                     displayed to the user.
+     * @param {EnchantActivity} activity             The activity performing the enchanting.
+     * @param {Item5e} item                          Item to which the enchantment will be applied.
+     * @param {EnchantmentError[]} errors            List of errors containing failed restrictions. The item will be
+     *                                               enchanted so long as no errors are listed, otherwise the provided
+     *                                               errors will be displayed to the user.
+     * @param {object} options
+     * @param {ChatMessage5e} [options.chatMessage]  Chat message used to make the enchantment, if applicable.
      */
-    Hooks.callAll("dnd5e.canEnchant", this, item, errors);
+    Hooks.callAll("dnd5e.canEnchant", this, item, errors, { chatMessage });
 
     return errors.length ? errors : true;
   }

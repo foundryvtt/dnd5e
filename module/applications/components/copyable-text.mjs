@@ -6,7 +6,7 @@ export default class CopyableTextElement extends (foundry.applications.elements.
   connectedCallback() {
     this.#controller = new AbortController();
     const button = document.createElement("button");
-    button.ariaLabel = this.getAttribute("label") ?? game.i18n.localize("DND5E.Copy");
+    button.ariaLabel = this.getAttribute("label") ?? _loc("DND5E.Copy");
     button.classList.add("copy-button");
     button.dataset.tooltip = button.ariaLabel;
     button.innerHTML = '<i class="fa-regular fa-clipboard" inert></i>';
@@ -49,6 +49,6 @@ export default class CopyableTextElement extends (foundry.applications.elements.
     event.stopPropagation();
     const value = this.getAttribute("value") ?? this.innerText;
     game.clipboard.copyPlainText(value);
-    game.tooltip.activate(event.target, { text: game.i18n.format("DND5E.Copied", { value }), direction: "UP" });
+    game.tooltip.activate(event.target, { text: _loc("DND5E.Copied", { value }), direction: "UP" });
   }
 }

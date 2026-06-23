@@ -86,7 +86,7 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
   _usageChatButtons(message) {
     if ( !this.availableProfiles.length ) return super._usageChatButtons(message);
     return [{
-      label: game.i18n.localize("DND5E.TRANSFORM.Action.Transform"),
+      label: _loc("DND5E.TRANSFORM.Action.Transform"),
       icon: '<i class="fa-solid fa-frog" inert></i>',
       dataset: {
         action: "transformActor"
@@ -154,7 +154,7 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
     const targets = getSceneTargets();
     if ( !targets.length && game.user.character ) targets.push(game.user.character);
     if ( !targets.length ) {
-      ui.notifications.warn("DND5E.ActionWarningNoToken", { localize: true });
+      ui.notifications.warn("DND5E.ActionWarningNoToken");
       return;
     }
 
@@ -163,7 +163,7 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
     const uuid = message.getFlag("dnd5e", "transform.uuid") ?? await this.queryActor(profile);
     const source = await fromUuid(uuid);
     if ( !source ) {
-      ui.notifications.warn("DND5E.TRANSFORM.Warning.SourceActor", { localize: true });
+      ui.notifications.warn("DND5E.TRANSFORM.Warning.SourceActor");
       return;
     }
 

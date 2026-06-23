@@ -91,13 +91,13 @@ export default class CalendarHUD extends BaseCalendarHUD {
         dataset: defaultTime,
         icon: "fa-solid fa-angles-left",
         position: "start",
-        tooltip: game.i18n.format("DND5E.CALENDAR.Action.ReverseTime", { amount: defaultAmount }),
+        tooltip: _loc("DND5E.CALENDAR.Action.ReverseTime", { amount: defaultAmount }),
         visible: game.user.isGM,
         additional: CalendarHUD.TIME_CONTROL_VALUES.map(({ value, unit }) => ({
           action: "reverse",
           dataset: { value, unit },
           label: `-${formatTime(value, unit, { unitDisplay: "narrow" })}`,
-          tooltip: game.i18n.format("DND5E.CALENDAR.Action.ReverseTime", {
+          tooltip: _loc("DND5E.CALENDAR.Action.ReverseTime", {
             amount: formatTime(value, unit).titleCase()
           })
         }))
@@ -106,14 +106,14 @@ export default class CalendarHUD extends BaseCalendarHUD {
         action: "setDate",
         icon: "fa-solid fa-calendar-days",
         position: "start",
-        tooltip: game.i18n.localize("DND5E.CALENDAR.Action.SetDate"),
+        tooltip: _loc("DND5E.CALENDAR.Action.SetDate"),
         visible: game.user.isGM
       },
       {
         action: "openCharacterSheet",
         icon: "fa-solid fa-user",
         position: "start",
-        tooltip: game.i18n.localize("DND5E.CALENDAR.Action.OpenCharacterSheet"),
+        tooltip: _loc("DND5E.CALENDAR.Action.OpenCharacterSheet"),
         visible: !!game.user.character
       },
       {
@@ -121,13 +121,13 @@ export default class CalendarHUD extends BaseCalendarHUD {
         dataset: defaultTime,
         icon: "fa-solid fa-angles-right",
         position: "end",
-        tooltip: game.i18n.format("DND5E.CALENDAR.Action.AdvanceTime", { amount: defaultAmount }),
+        tooltip: _loc("DND5E.CALENDAR.Action.AdvanceTime", { amount: defaultAmount }),
         visible: game.user.isGM,
         additional: CalendarHUD.TIME_CONTROL_VALUES.map(({ value, unit }) => ({
           action: "advance",
           dataset: { value, unit },
           label: `+${formatTime(value, unit, { unitDisplay: "narrow" })}`,
-          tooltip: game.i18n.format("DND5E.CALENDAR.Action.AdvanceTime", {
+          tooltip: _loc("DND5E.CALENDAR.Action.AdvanceTime", {
             amount: formatTime(value, unit).titleCase()
           })
         }))
@@ -136,7 +136,7 @@ export default class CalendarHUD extends BaseCalendarHUD {
         action: "openPartySheet",
         icon: "fa-solid fa-users",
         position: "end",
-        tooltip: game.i18n.localize("DND5E.CALENDAR.Action.OpenPartySheet"),
+        tooltip: _loc("DND5E.CALENDAR.Action.OpenPartySheet"),
         visible: game.actors.party?.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.LIMITED)
       }
     ];

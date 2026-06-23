@@ -212,7 +212,7 @@ export default class RollConfigurationDialog extends Dialog5e {
       roll: {
         default: true,
         icon: '<i class="fa-solid fa-dice" inert></i>',
-        label: game.i18n.localize("DND5E.Roll")
+        label: _loc("DND5E.Roll")
       }
     };
     return context;
@@ -230,12 +230,13 @@ export default class RollConfigurationDialog extends Dialog5e {
   async _prepareConfigurationContext(context, options) {
     context.fields = [{
       field: new foundry.data.fields.StringField({
-        label: game.i18n.localize("DND5E.RollMode"), blank: false, required: true
+        label: _loc("DND5E.RollMode"), blank: false, required: true
       }),
       name: "rollMode",
-      value: this.message.rollMode ?? this.options.default?.rollMode ?? game.settings.get("core", "rollMode"),
-      options: Object.entries(CONFIG.Dice.rollModes)
-        .map(([value, l]) => ({ value, label: game.i18n.localize(l.label) }))
+      value: this.message.rollMode ?? this.options.default?.rollMode ?? CONFIG.Dice.BasicRoll.getMessageMode(),
+      options: Object.entries(CONFIG.ChatMessage.modes)
+        .filter(([k]) => k !== "ic")
+        .map(([value, l]) => ({ value, label: _loc(l.label) }))
     }];
     return context;
   }

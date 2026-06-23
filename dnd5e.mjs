@@ -24,7 +24,6 @@ import * as documents from "./module/documents/_module.mjs";
 import * as enrichers from "./module/enrichers.mjs";
 import * as Filter from "./module/filter.mjs";
 import * as migrations from "./module/migration.mjs";
-import ModuleArt from "./module/module-art.mjs";
 import { registerModuleData, registerModuleRedirects, setupModulePacks } from "./module/module-registration.mjs";
 import { default as registry } from "./module/registry.mjs";
 import Tooltips5e from "./module/tooltips.mjs";
@@ -58,16 +57,6 @@ Hooks.once("init", function() {
   globalThis.dnd5e = game.dnd5e = Object.assign(game.system, globalThis.dnd5e);
   utils.log(`Initializing the D&D Fifth Game System - Version ${dnd5e.version}\n${DND5E.ASCII}`);
 
-  /**
-   * Suppress some known deprecations.
-   * @deprecated
-   * @since 5.3.0
-   */
-  CONFIG.compatibility.excludePatterns.push(/numeric #mode/, /CONST\.ACTIVE_EFFECT_MODES/, /ContextMenuEntry#/,
-    /foundry\.data\.operators\.ForcedDeletion/, /foundry\.utils\.buildRelativeUuid/, /CONFIG.ChatMessage.modes/,
-    /core\.rollMode/, /ChatMessage\.applyRollMode/, /Scene#templates/, /MeasuredTemplate/, /MeasuredTemplateDocument/,
-    /core\.gridTemplates/, /core\.coneTemplateType/, /ControlIcon#refresh/);
-
   // Record Configuration Values
   CONFIG.DND5E = DND5E;
   CONFIG.ActiveEffect.documentClass = documents.ActiveEffect5e;
@@ -75,6 +64,7 @@ Hooks.once("init", function() {
   CONFIG.Actor.collection = dataModels.collection.Actors5e;
   CONFIG.Actor.documentClass = documents.Actor5e;
   CONFIG.Adventure.documentClass = documents.Adventure5e;
+  CONFIG.Canvas.layers.tokens.layerClass = canvas.layers.TokenLayer5e;
   CONFIG.ChatMessage.documentClass = documents.ChatMessage5e;
   CONFIG.Combat.documentClass = documents.Combat5e;
   CONFIG.Combatant.documentClass = documents.Combatant5e;
@@ -102,15 +92,9 @@ Hooks.once("init", function() {
   CONFIG.ui.items = applications.item.ItemDirectory5e;
   CONFIG.ux.DragDrop = DragDrop5e;
 
-  if ( game.release.generation < 14 ) CONFIG.Token.layerClass = canvas.layers.TokenLayer5e;
-  CONFIG.Canvas.layers.tokens.layerClass = canvas.layers.TokenLayer5e;
-
   // Register System Settings
   registerSystemSettings();
   registerSystemKeybindings();
-
-  // Configure module art
-  game.dnd5e.moduleArt = new ModuleArt();
 
   // Configure bastions
   game.dnd5e.bastion = new documents.Bastion();
@@ -453,7 +437,6 @@ Hooks.once("setup", function() {
   _configureConsumableAttributes();
 
   CONFIG.DND5E.trackableAttributes = expandAttributeList(CONFIG.DND5E.trackableAttributes);
-  game.dnd5e.moduleArt.registerModuleArt();
   Tooltips5e.activateListeners();
   game.dnd5e.tooltips.observe();
 
@@ -505,21 +488,22 @@ Hooks.once("i18nInit", () => {
     const { translations, _fallback } = game.i18n;
     foundry.utils.mergeObject(translations, {
       "TYPES.Item": {
-        race: game.i18n.localize("TYPES.Item.raceLegacy"),
-        racePl: game.i18n.localize("TYPES.Item.raceLegacyPl")
+        race: _loc("TYPES.Item.raceLegacy"),
+        racePl: _loc("TYPES.Item.raceLegacyPl")
       },
       DND5E: {
-        "Feature.Class.ArtificerPlan": game.i18n.localize("DND5E.Feature.Class.ArtificerInfusion"),
-        "Feature.Species": game.i18n.localize("DND5E.Feature.SpeciesLegacy"),
-        FlagsAlertHint: game.i18n.localize("DND5E.FlagsAlertHintLegacy"),
-        ItemSpeciesDetails: game.i18n.localize("DND5E.ItemSpeciesDetailsLegacy"),
-        "Language.Category.Rare": game.i18n.localize("DND5E.Language.Category.Exotic"),
-        "MOVEMENT.Type.Speed": game.i18n.localize("DND5E.MOVEMENT.Type.Walk"),
-        RacialTraits: game.i18n.localize("DND5E.RacialTraitsLegacy"),
-        "REST.Long.Hint.Normal": game.i18n.localize("DND5E.REST.Long.Hint.NormalLegacy"),
-        "REST.Long.Hint.Group": game.i18n.localize("DND5E.REST.Long.Hint.GroupLegacy"),
-        "Species.Add": game.i18n.localize("DND5E.Species.AddLegacy"),
-        "Species.Features": game.i18n.localize("DND5E.Species.FeaturesLegacy"),
+        "Feature.Class.ArtificerPlan": _loc("DND5E.Feature.Class.ArtificerInfusion"),
+        "Feature.Species": _loc("DND5E.Feature.SpeciesLegacy"),
+        FlagsAlertHint: _loc("DND5E.FlagsAlertHintLegacy"),
+        FlagsRemarkableAthleteHint: _loc("DND5E.FlagsRemarkableAthleteHintLegacy"),
+        ItemSpeciesDetails: _loc("DND5E.ItemSpeciesDetailsLegacy"),
+        "Language.Category.Rare": _loc("DND5E.Language.Category.Exotic"),
+        "MOVEMENT.Type.Speed": _loc("DND5E.MOVEMENT.Type.Walk"),
+        RacialTraits: _loc("DND5E.RacialTraitsLegacy"),
+        "REST.Long.Hint.Normal": _loc("DND5E.REST.Long.Hint.NormalLegacy"),
+        "REST.Long.Hint.Group": _loc("DND5E.REST.Long.Hint.GroupLegacy"),
+        "Species.Add": _loc("DND5E.Species.AddLegacy"),
+        "Species.Features": _loc("DND5E.Species.FeaturesLegacy"),
         "TARGET.Type.Emanation": foundry.utils.mergeObject(
           _fallback.DND5E?.TARGET?.Type?.Radius ?? {},
           translations.DND5E?.TARGET?.Type?.Radius ?? {},
@@ -530,7 +514,7 @@ Hooks.once("i18nInit", () => {
           translations.DND5E?.TraitArmorLegacyPlural ?? {},
           { inplace: false }
         ),
-        TraitArmorProf: game.i18n.localize("DND5E.TraitArmorLegacyProf")
+        TraitArmorProf: _loc("DND5E.TraitArmorLegacyProf")
       }
     });
   }
@@ -553,19 +537,22 @@ Hooks.once("i18nInit", () => {
  * Once the entire VTT framework is initialized, check to see if we should perform a data migration
  */
 Hooks.once("ready", function() {
-  // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
+  // Wait to register certain hooks so that modules can register earlier if they want to
   Hooks.on("hotbarDrop", (bar, data, slot) => {
     if ( ["ActiveEffect", "Activity", "Item"].includes(data.type) ) {
       documents.macro.create5eMacro(data, slot);
       return false;
     }
   });
+  Hooks.on("updateWorldTime", dataModels.calendar.CalendarData5e.onTimePassage);
 
   // Adjust sourced items on actors now that compendium UUID redirects have been initialized
   game.actors.forEach(a => a.sourcedItems._redirectKeys());
 
   // Register items by type
+  dnd5e.registry.backgrounds.initialize();
   dnd5e.registry.classes.initialize();
+  dnd5e.registry.species.initialize();
   dnd5e.registry.subclasses.initialize();
 
   // Chat message listeners
@@ -594,7 +581,7 @@ Hooks.once("ready", function() {
 
   // Perform the migration
   if ( cv && foundry.utils.isNewerVersion(game.system.flags.compatibleMigrationVersion, cv) ) {
-    ui.notifications.error("MIGRATION.5eVersionTooOldWarning", {localize: true, permanent: true});
+    ui.notifications.error("MIGRATION.DND5E.Warning.VersionTooOld", { permanent: true });
   }
   migrations.migrateWorld();
 });
@@ -632,7 +619,7 @@ Hooks.on("renderChatLog", (app, html, data) => {
 });
 Hooks.on("renderChatPopout", (app, html, data) => documents.Item5e.chatListeners(html));
 
-Hooks.on("chatMessage", (app, message, data) => applications.Award.chatMessage(message));
+Hooks.on("chatMessage", (app, message, data) => enrichers.chatMessage(message));
 Hooks.on("createChatMessage", dataModels.chatMessage.RequestMessageData.onCreateMessage);
 Hooks.on("updateChatMessage", dataModels.chatMessage.RequestMessageData.onUpdateResultMessage);
 

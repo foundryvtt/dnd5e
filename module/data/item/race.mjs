@@ -87,7 +87,7 @@ export default class RaceData extends ItemDataModel.mixin(AdvancementTemplate, I
    */
   get sensesLabels() {
     const units = this.senses.units || defaultUnits("length");
-    return Object.entries(CONFIG.DND5E.senses).reduce((arr, [k, label]) => {
+    return Object.entries(CONFIG.DND5E.senses).reduce((arr, [k, { label }]) => {
       const value = this.senses.ranges[k];
       if ( value ) arr.push(`${label} ${formatLength(value, units)}`);
       return arr;
@@ -113,6 +113,7 @@ export default class RaceData extends ItemDataModel.mixin(AdvancementTemplate, I
     super._migrateData(source);
     AdvancementTemplate.migrateAdvancement(source);
     SensesField._migrate(source.senses);
+    return source;
   }
 
   /* -------------------------------------------- */
@@ -130,7 +131,7 @@ export default class RaceData extends ItemDataModel.mixin(AdvancementTemplate, I
 
   /** @inheritDoc */
   async getSheetData(context) {
-    context.subtitles = [{ label: game.i18n.localize(CONFIG.Item.typeLabels.race) }];
+    context.subtitles = [{ label: _loc(CONFIG.Item.typeLabels.race) }];
     context.singleDescription = true;
 
     context.parts = ["dnd5e.details-species"];
@@ -160,7 +161,7 @@ export default class RaceData extends ItemDataModel.mixin(AdvancementTemplate, I
       classes: "info-sm info-grid",
       config: "senses",
       tooltip: "DND5E.SensesConfig",
-      value: Object.entries(CONFIG.DND5E.senses).reduce((str, [k, label]) => {
+      value: Object.entries(CONFIG.DND5E.senses).reduce((str, [k, { label }]) => {
         const value = this.senses.ranges[k];
         if ( !value ) return str;
         return `${str}

@@ -13,10 +13,19 @@ import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
  * Error that can be thrown during the advancement update preparation process.
  */
 class AdvancementError extends Error {
-  constructor(...args) {
-    super(...args);
+  constructor(message, { selector }={}) {
+    super(message);
     this.name = "AdvancementError";
+    this.selector = selector ?? null;
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * CSS selector for the element to highlight when this error is displayed in an advancement flow.
+   * @type {string|null}
+   */
+  selector;
 }
 
 /**
@@ -27,9 +36,9 @@ class AdvancementError extends Error {
  * @abstract
  */
 export default class Advancement extends PseudoDocumentMixin(BaseAdvancementData) {
-  constructor(data, {parent=null, ...options}={}) {
+  constructor(data, { parent=null, ...options }={}) {
     if ( parent instanceof Item ) parent = parent.system;
-    super(data, {parent, ...options});
+    super(data, { parent, ...options });
 
     /**
      * A collection of Application instances which should be re-rendered whenever this document is updated.
@@ -61,7 +70,7 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancementData
       order: 100,
       icon: "icons/svg/upgrade.svg",
       typeIcon: "icons/svg/upgrade.svg",
-      title: game.i18n.localize("DND5E.AdvancementTitle"),
+      title: _loc("DND5E.AdvancementTitle"),
       hint: "",
       multiLevel: false,
       validItemTypes: new Set(["background", "class", "race", "subclass"]),
@@ -332,45 +341,45 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancementData
   /* -------------------------------------------- */
 
   /**
-   * Construct context menu options for this Activity.
+   * Construct context menu options for this Advancement.
    * @returns {ContextMenuEntry[]}
    */
   getContextMenuOptions() {
     if ( this.item.isOwner && !this.item.collection?.locked ) return [
       {
-        name: "DND5E.ADVANCEMENT.Action.Edit",
+        label: "DND5E.ADVANCEMENT.Action.Edit",
         icon: "<i class='fas fa-edit fa-fw'></i>",
-        callback: () => this.item.sheet._renderChild(this.sheet)
+        onClick: () => this.item.sheet._renderChild(this.sheet)
       },
       {
-        name: "DND5E.ADVANCEMENT.Action.Duplicate",
+        label: "DND5E.ADVANCEMENT.Action.Duplicate",
         icon: "<i class='fas fa-copy fa-fw'></i>",
-        condition: li => this?.constructor.availableForItem(this.item),
-        callback: () => {
+        visible: li => this?.constructor.availableForItem(this.item),
+        onClick: () => {
           const createData = this.toObject();
           delete createData._id;
           this.item.createAdvancement(createData.type, createData, { renderSheet: false });
         }
       },
       {
-        name: "DND5E.ADVANCEMENT.Action.Delete",
+        label: "DND5E.ADVANCEMENT.Action.Delete",
         icon: "<i class='fas fa-trash fa-fw'></i>",
-        callback: () => this.deleteDialog()
+        onClick: () => this.deleteDialog()
       }
     ];
 
     return [{
-      name: "DND5E.ADVANCEMENT.Action.View",
+      label: "DND5E.ADVANCEMENT.Action.View",
       icon: "<i class='fas fa-eye fa-fw'></i>",
-      callback: () => this.item.sheet._renderChild(this.sheet)
+      onClick: () => this.item.sheet._renderChild(this.sheet)
     }];
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Handle context menu events on activities.
-   * @param {Item5e} item         The Item the Activity belongs to.
+   * Handle context menu events on advancement.
+   * @param {Item5e} item         The Item the Advancement belongs to.
    * @param {HTMLElement} target  The element the menu was triggered on.
    */
   static onContextMenu(item, target) {

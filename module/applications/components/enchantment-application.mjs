@@ -43,7 +43,7 @@ export default class EnchantmentApplicationElement extends MaybeAdoptable {
 
   /**
    * Activity providing the enchantment that will be applied.
-   * @type {Item5e}
+   * @type {Activity}
    */
   get enchantmentActivity() {
     return this.chatMessage.getAssociatedActivity();
@@ -52,11 +52,11 @@ export default class EnchantmentApplicationElement extends MaybeAdoptable {
   /* -------------------------------------------- */
 
   /**
-   * Item providing the enchantment that will be applied.
+   * Item providing the enchantment that will be applied with the proper scaling.
    * @type {Item5e}
    */
   get enchantmentItem() {
-    return this.chatMessage.getAssociatedItem();
+    return this.chatMessage.getAssociatedItem({ scaled: true });
   }
 
   /* -------------------------------------------- */
@@ -80,10 +80,7 @@ export default class EnchantmentApplicationElement extends MaybeAdoptable {
     }
 
     // Calculate the maximum targets
-    let item = this.enchantmentItem;
-    const scaling = this.chatMessage.system.scaling;
-    if ( scaling ) item = item.clone({ "flags.dnd5e.scaling": scaling });
-    const activity = item.system.activities.get(this.enchantmentActivity.id);
+    const activity = this.enchantmentItem.system.activities.get(this.enchantmentActivity.id);
     const maxTargets = activity.target?.affects?.count;
     if ( maxTargets ) {
       if ( !this.countArea ) {
@@ -92,7 +89,7 @@ export default class EnchantmentApplicationElement extends MaybeAdoptable {
         this.querySelector(".enchantment-control").append(div);
         this.countArea = this.querySelector(".count-area");
       }
-      this.countArea.innerHTML = game.i18n.format("DND5E.ENCHANT.Enchanted", {
+      this.countArea.innerHTML = _loc("DND5E.ENCHANT.Enchanted", {
         current: '<span class="current">0</span>',
         max: `<span class="max">${maxTargets}<span>`
       });
@@ -123,7 +120,7 @@ export default class EnchantmentApplicationElement extends MaybeAdoptable {
       div.querySelector(".name").append(item.name);
       if ( item.isOwner ) {
         const control = document.createElement("a");
-        control.ariaLabel = game.i18n.localize("DND5E.ENCHANTMENT.Action.Remove");
+        control.ariaLabel = _loc("DND5E.ENCHANTMENT.Action.Remove");
         control.dataset.action = "removeEnchantment";
         control.dataset.tooltip = "DND5E.ENCHANTMENT.Action.Remove";
         control.innerHTML = '<i class="fa-solid fa-rotate-left" inert></i>';
@@ -132,7 +129,7 @@ export default class EnchantmentApplicationElement extends MaybeAdoptable {
       return div;
     });
     if ( enchantedItems.length ) this.dropArea.replaceChildren(...enchantedItems);
-    else this.dropArea.innerHTML = `<p>${game.i18n.localize("DND5E.ENCHANT.DropArea")}</p>`;
+    else this.dropArea.innerHTML = `<p>${_loc("DND5E.ENCHANT.DropArea")}</p>`;
     if ( this.countArea ) this.countArea.querySelector(".current").innerText = enchantedItems.length;
   }
 
@@ -154,7 +151,7 @@ export default class EnchantmentApplicationElement extends MaybeAdoptable {
     const concentrationId = this.chatMessage.system.concentration;
     const concentration = this.enchantmentActivity.actor.effects.get(concentrationId);
     if ( concentrationId && !concentration ) {
-      ui.notifications.error("DND5E.ENCHANT.Warning.ConcentrationEnded", { console: false, localize: true });
+      ui.notifications.error("DND5E.ENCHANT.Warning.ConcentrationEnded", { console: false });
       return;
     }
 

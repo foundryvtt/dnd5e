@@ -267,6 +267,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
           id, name, img, disabled, duration, source, toggleable,
           parentId: effect.target === effect.parent ? null : effect.parent.id,
           durationParts: duration.remaining ? duration.label.split(", ") : [],
+          showDuration: Number.isFinite(duration.value),
           hasTooltip: source instanceof dnd5e.documents.Item5e
         });
         return arr;
@@ -292,7 +293,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
     // Currency
     context.currency = Object.fromEntries(
-      Object.keys(CONFIG.DND5E.currencies).map(k => [k, this.inventorySource.system._source.currency[k] ?? 0])
+      Object.keys(CONFIG.DND5E.currencies).map(k => [k, this.inventorySource.system.currency[k] ?? 0])
     );
 
     // Containers
@@ -367,7 +368,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       else globals.push({ field, name: field.fieldPath, value: foundry.utils.getProperty(source, field.fieldPath) });
     };
     addBonus(this.document.system.schema.fields.bonuses);
-    if ( globals.length ) sections[game.i18n.localize("DND5E.BONUSES.FIELDS.bonuses.label")] = globals;
+    if ( globals.length ) sections[_loc("DND5E.BONUSES.FIELDS.bonuses.label")] = globals;
 
     flags.sections = Object.entries(sections).map(([label, fields]) => ({ label, fields }));
 
@@ -440,6 +441,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     context.itemContext = {};
     context.items = Array.from(this.inventorySource.items).filter(i => !this.actor.items.has(i.system.container));
     await Promise.all(context.items.map(async item => {
+      if ( !this._isItemVisible(item) ) return;
+
       // Prepare item context
       const ctx = context.itemContext[item.id] ??= {};
       ctx.clickAction = "use";
@@ -493,7 +496,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    */
   _prepareSenses(context) {
     return [
-      ...Object.entries(CONFIG.DND5E.senses).map(([k, label]) => {
+      ...Object.entries(CONFIG.DND5E.senses).map(([k, { label }]) => {
         const value = context.system.attributes.senses.ranges[k];
         return value ? { label, value } : null;
       }, {}).filter(_ => _),
@@ -519,7 +522,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       return src ?? "int";
     };
     return Object.entries(context.system[property] ?? {})
-      .filter(([key]) => key in CONFIG.DND5E[property])
+      .filter(([key]) => key in CONFIG.DND5E[property] || ((property === "tools") && (key in CONFIG.DND5E.vehicleTypes)))
       .map(([key, entry]) => ({
         ...entry, key,
         abbreviation: CONFIG.DND5E.abilities[entry.ability]?.abbreviation,
@@ -527,7 +530,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         hover: CONFIG.DND5E.proficiencyLevels[entry.value],
         label: (property === "skills") ? CONFIG.DND5E.skills[key]?.label : Trait.keyLabel(key, { trait: "tool" }),
         link: { action: "roll", key, type: property === "skills" ? "skill" : "tool" },
-        source: context.source[property]?.[key]
+        source: context.source[property]?.[key],
+        value: entry.total
       })).sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang));
   }
 
@@ -540,6 +544,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @protected
    */
   _prepareSpellbook(context) {
+    const { SingleLevelSpellcasting } = dnd5e.dataModels.spellcasting;
     const spellbook = {};
     const columns = customElements.get(this.options.elements.inventory).mapColumns([
       "school", "time", "range", "target", "roll", { id: "uses", order: 650, priority: 300 },
@@ -556,7 +561,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     const registerSection = (key, level, config) => {
       level = config?.slots ? level : 1;
       if ( key in spellbook ) return;
-      const label = config?.getLabel({ level }) ?? game.i18n.localize("DND5E.CAST.SECTIONS.Spellbook");
+      const label = config?.getLabel({ level }) ?? _loc("DND5E.CAST.SECTIONS.Spellbook");
       const method = config?.key ?? key;
       const order = level === 0 ? 0 : (config?.order ?? 1000);
       const usesSlots = config?.slots && (level !== 0);
@@ -576,10 +581,10 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         const filled = spells.value >= n;
         const temp = n > maxSlots;
         const label = temp
-          ? game.i18n.localize("DND5E.SpellSlotTemporary")
+          ? _loc("DND5E.SpellSlotTemporary")
           : filled
-            ? game.i18n.format(`DND5E.SpellSlotN.${getPluralRules({ type: "ordinal" }).select(n)}`, { n })
-            : game.i18n.localize("DND5E.SpellSlotExpended");
+            ? _loc(`DND5E.SpellSlotN.${getPluralRules({ type: "ordinal" }).select(n)}`, { n })
+            : _loc("DND5E.SpellSlotExpended");
         const classes = ["pip"];
         if ( filled ) classes.push("filled");
         if ( temp ) classes.push("tmp");
@@ -600,7 +605,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       let method = spell.system.method;
       if ( !(method in CONFIG.DND5E.spellcasting) ) method = "innate";
       const spellcasting = CONFIG.DND5E.spellcasting[method];
-      const level = spellcasting instanceof dnd5e.dataModels.spellcasting.SingleLevelSpellcasting
+      const level = spellcasting instanceof SingleLevelSpellcasting && spell.system.level !== 0
         ? null : (spell.system.level || 0);
       method = spellcasting?.getSpellSlotKey?.(level) ?? method;
 
@@ -646,7 +651,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         const icons = value.icons = [];
         if ( data.bypasses?.size && CONFIG.DND5E.damageTypes[key]?.isPhysical ) icons.push(...data.bypasses.map(p => {
           const type = CONFIG.DND5E.itemProperties[p]?.label;
-          return { icon: p, label: game.i18n.format("DND5E.DAMAGE.PhysicalBypass.DescriptionShort", { type }) };
+          return { icon: p, label: _loc("DND5E.DAMAGE.PhysicalBypass.DescriptionShort", { type }) };
         }));
         return value;
       });
@@ -656,7 +661,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
     // If petrified, display "All Damage" instead of all damage types separately
     if ( this.document.hasConditionEffect("petrification") ) {
-      traits.dr = [{ label: game.i18n.localize("DND5E.DAMAGE.All") }];
+      traits.dr = [{ label: _loc("DND5E.DAMAGE.All") }];
     }
 
     // Combine damage & condition immunities in play mode.
@@ -680,7 +685,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         const icons = value.icons = [];
         if ( dm.bypasses.size && CONFIG.DND5E.damageTypes[k]?.isPhysical ) icons.push(...dm.bypasses.map(p => {
           const type = CONFIG.DND5E.itemProperties[p]?.label;
-          return { icon: p, label: game.i18n.format("DND5E.DAMAGE.PhysicalBypass.DescriptionShort", { type }) };
+          return { icon: p, label: _loc("DND5E.DAMAGE.PhysicalBypass.DescriptionShort", { type }) };
         }));
         return value;
       }).filter(f => f);
@@ -705,7 +710,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         traits.weapon ??= [];
         traits.weapon.push(value);
       }
-      value.icons.push({ icon: "mastery", label: game.i18n.format("DND5E.WEAPON.Mastery.Label") });
+      value.icons.push({ icon: "mastery", label: _loc("DND5E.WEAPON.Mastery.Label") });
     }
 
     return traits;
@@ -724,8 +729,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       "header-control", "preparation-warnings", "icon", "fa-solid", "fa-triangle-exclamation"
     );
     Object.assign(warnings.dataset, { action: "openWarnings", tooltip: "Warnings", tooltipDirection: "DOWN" });
-    warnings.setAttribute("aria-label", game.i18n.localize("Warnings"));
-    html.querySelector(".window-header .window-subtitle").after(warnings);
+    warnings.setAttribute("aria-label", _loc("Warnings"));
+    this.window.subtitle.after(warnings);
 
     return html;
   }
@@ -741,12 +746,25 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @protected
    */
   _assignItemCategories(item) {
-    const origin = item.dependentOrigin;
-    if ( (origin?.active === false) && (origin.parent !== item) ) return [];
     if ( item.type === "container" ) return new Set(["containers", "inventory"]);
     if ( item.type === "spell" ) return new Set(["spells"]);
     if ( "inventorySection" in item.system.constructor ) return new Set(["inventory"]);
     return new Set(["features"]);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine whether an item should be displayed on the sheet.
+   * @param {Item5e} item    Item being prepared for display.
+   * @returns {boolean}
+   * @protected
+   */
+  _isItemVisible(item) {
+    const origin = item.dependentOrigin;
+    if ( this.actor.hiddenItems.has(item.id) ) return false;
+    if ( (origin?.active === false) && (origin.parent !== item) ) return false;
+    return true;
   }
 
   /* -------------------------------------------- */
@@ -783,7 +801,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     return {
       _id, img, labels, name, range, uses,
       activation: activationAbbr
-        ? `${activation.value ?? ""}${game.i18n.localize(activationAbbr)}`
+        ? `${activation.value ?? ""}${_loc(activationAbbr)}`
         : labels.activation,
       isSpell: activity.item.type === "spell",
       save: save ? {
@@ -791,7 +809,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         ability: save.ability?.size
           ? save.ability.size === 1
             ? CONFIG.DND5E.abilities[save.ability.first()]?.abbreviation
-            : game.i18n.localize("DND5E.AbbreviationDC")
+            : _loc("DND5E.AbbreviationDC")
           : null
       } : null,
       toHit: Number.isNaN(toHit) ? null : toHit
@@ -825,7 +843,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     ctx.save = { ...item.system.activities?.getByType("save")[0]?.save };
     ctx.save.ability = ctx.save.ability?.size ? ctx.save.ability.size === 1
       ? CONFIG.DND5E.abilities[ctx.save.ability.first()]?.abbreviation
-      : game.i18n.localize("DND5E.AbbreviationDC") : null;
+      : _loc("DND5E.AbbreviationDC") : null;
 
     // Linked Uses
     const cachedFor = fromUuidSync(item.flags.dnd5e?.cachedFor, { relative: item.parent, strict: false });
@@ -922,7 +940,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       hour: "DND5E.TimeHourAbbr",
       day: "DND5E.TimeDayAbbr"
     }[item.system.activation.type];
-    ctx.activation = abbr ? `${cost}${game.i18n.localize(abbr)}` : item.labels.activation;
+    ctx.activation = abbr ? `${cost}${_loc(abbr)}` : item.labels.activation;
 
     // Range
     const units = item.system.range?.units;
@@ -983,7 +1001,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     element.classList.add("attunement");
     element.innerHTML = `
       <i class="fa-solid fa-sun" data-tooltip="DND5E.Attunement"
-         aria-label="${game.i18n.localize("DND5E.Attunement")}"></i>
+         aria-label="${_loc("DND5E.Attunement")}"></i>
       <span class="value"></span>
       <span class="separator">&sol;</span>
     `;
@@ -1012,7 +1030,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     const button = document.createElement("button");
     Object.assign(button, {
       type: "button", className: "create-child gold-button",
-      ariaLabel: game.i18n.format("SIDEBAR.Create", { type: game.i18n.localize("DOCUMENT.Item") })
+      ariaLabel: _loc("SIDEBAR.Create", { type: _loc("DOCUMENT.Item") })
     });
     button.dataset.action = "addDocument";
     button.insertAdjacentHTML("beforeend", '<i class="fa-solid fa-plus" inert></i>');
@@ -1039,7 +1057,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       if ( context.editable ) {
         const config = document.createElement("button");
         Object.assign(config, {
-          type: "button", className: "unbutton config-button", ariaLabel: game.i18n.localize("DND5E.SpellSlotsConfig")
+          type: "button", className: "unbutton config-button", ariaLabel: _loc("DND5E.SpellSlotsConfig")
         });
         Object.assign(config.dataset, {
           action: "showConfiguration", config: "spellSlots", tooltip: "DND5E.SpellSlotsConfig"
@@ -1172,7 +1190,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   /** @override */
   _addDocument(event, target) {
     if ( this.tabGroups.primary === "effects" ) return ActiveEffect.implementation.create({
-      name: game.i18n.localize("DND5E.EffectNew"),
+      name: _loc("DND5E.EffectNew"),
       icon: "icons/svg/aura.svg"
     }, { parent: this.actor, renderSheet: true });
 
@@ -1183,7 +1201,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
     const type = types[0];
     return Item.implementation.create({
-      type, name: game.i18n.format("DOCUMENT.New", { type: game.i18n.format(CONFIG.Item.typeLabels[type]) })
+      type, name: _loc("DOCUMENT.New", { type: _loc(CONFIG.Item.typeLabels[type]) })
     }, { parent: actor, renderSheet: true });
   }
 
@@ -1245,8 +1263,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
     // Adjust create child tooltip
     const createChild = this.element.querySelector(".create-child");
-    createChild?.setAttribute("aria-label", game.i18n.format("SIDEBAR.Create", {
-      type: game.i18n.localize(`DOCUMENT.${tab === "effects" ? "ActiveEffect" : "Item"}`)
+    createChild?.setAttribute("aria-label", _loc("SIDEBAR.Create", {
+      type: _loc(`DOCUMENT.${tab === "effects" ? "ActiveEffect" : "Item"}`)
     }));
 
     // Toggle sidebar
@@ -1584,7 +1602,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     if ( !collapser ) return collapsed;
     const icon = collapser.querySelector("i");
     collapser.dataset.tooltip = `JOURNAL.View${collapsed ? "Expand" : "Collapse"}`;
-    collapser.setAttribute("aria-label", game.i18n.localize(collapser.dataset.tooltip));
+    collapser.setAttribute("aria-label", _loc(collapser.dataset.tooltip));
     icon.classList.remove("fa-caret-left", "fa-caret-right");
     icon.classList.add(`fa-caret-${collapsed ? "right" : "left"}`);
     return collapsed;
@@ -1607,7 +1625,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
       delete submitData.flags.dnd5e[key];
       if ( foundry.utils.hasProperty(this.document._source, `flags.dnd5e.${key}`) ) {
-        submitData.flags.dnd5e[`-=${key}`] = null;
+        submitData.flags.dnd5e[key] = _del;
       }
     }
 
@@ -1762,7 +1780,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     if ( item.type === "container" ) {
       const parentContainers = await container.system.allContainers();
       if ( (container.id === item.id) || parentContainers.includes(item) ) {
-        ui.notifications.error("DND5E.ContainerRecursiveError", { localize: true });
+        ui.notifications.error("DND5E.ContainerRecursiveError");
         return;
       }
     }
@@ -1819,7 +1837,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     const itemsWithoutAdvancement = items.filter(i => !i.system.advancement?.size);
     const multipleAdvancements = (items.length - itemsWithoutAdvancement.length) > 1;
     if ( multipleAdvancements && !game.settings.get("dnd5e", "disableAdvancements") ) {
-      ui.notifications.warn(game.i18n.format("DND5E.WarnCantAddMultipleAdvancements"));
+      ui.notifications.warn("DND5E.WarnCantAddMultipleAdvancements");
       items = itemsWithoutAdvancement;
     }
 
@@ -1863,8 +1881,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     if ( this.constructor.unsupportedItemTypes.has(itemData.type) ) {
       ui.notifications.warn("DND5E.ACTOR.Warning.InvalidItem", {
         format: {
-          itemType: game.i18n.localize(CONFIG.Item.typeLabels[itemData.type]),
-          actorType: game.i18n.localize(CONFIG.Actor.typeLabels[actor.type])
+          itemType: _loc(CONFIG.Item.typeLabels[itemData.type]),
+          actorType: _loc(CONFIG.Actor.typeLabels[actor.type])
         }
       });
       return false;
@@ -1893,8 +1911,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       if ( singleton && actor.itemTypes[itemData.type].length ) {
         ui.notifications.error("DND5E.ACTOR.Warning.Singleton", {
           format: {
-            itemType: game.i18n.localize(CONFIG.Item.typeLabels[itemData.type]),
-            actorType: game.i18n.localize(CONFIG.Actor.typeLabels[actor.type])
+            itemType: _loc(CONFIG.Item.typeLabels[itemData.type]),
+            actorType: _loc(CONFIG.Actor.typeLabels[actor.type])
           }
         });
         return false;
@@ -2026,6 +2044,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     const schoolFilter = spellSchools.intersection(filters);
     const spellcastingClasses = new Set(Object.keys(this.actor.spellcastingClasses));
     const classFilter = spellcastingClasses.intersection(filters);
+    const actionFilter = new Set(actions).intersection(filters);
 
     return items.filter(item => {
 
@@ -2034,14 +2053,12 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       if ( filtered !== undefined ) return filtered;
 
       // Action usage
-      for ( const f of actions ) {
-        if ( !filters.has(f) ) continue;
+      if ( actionFilter.size ) {
         if ( item.type === "spell" ) {
-          if ( item.system.activation.type !== f ) return false;
-          continue;
+          if ( !actionFilter.has(item.system.activation.type) ) return false;
         }
-        if ( !item.system.activities?.size ) return false;
-        if ( item.system.activities.every(a => a.activation?.type !== f) ) return false;
+        else if ( !item.system.activities?.size
+          || !item.system.activities.some(a => actionFilter.has(a.activation?.type)) ) return false;
       }
 
       // Spell-specific filters

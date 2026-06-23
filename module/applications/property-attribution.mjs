@@ -1,3 +1,4 @@
+import { getHumanReadableAttributeLabel } from "../utils.mjs";
 import Application5e from "./api/application.mjs";
 
 /**
@@ -67,11 +68,19 @@ export default class PropertyAttribution extends Application5e {
     if ( Number.isNumeric(property)) total = property;
     else if ( typeof property === "object" && Number.isNumeric(property.value) ) total = property.value;
     const sources = foundry.utils.duplicate(this.attributions);
+    for ( const source of sources ) {
+      if ( source.mode === undefined ) continue;
+      source.type = { 0: "custom", 1: "multiply", 2: "add", 3: "downgrade", 4: "upgrade", 5: "override" }[source.mode];
+      foundry.utils.logCompatibilityWarning(
+        "Property attribution now accepts `type` rather than `mode` to match active effect changes.",
+        { since: "DnD5e 6.0", until: "DnD5e 6.2" }
+      );
+    }
     return {
-      caption: game.i18n.localize(this.options.title),
+      caption: _loc(this.options.title),
       sources: sources.map(entry => {
         if ( entry.label.startsWith("@") ) entry.label = this.getPropertyLabel(entry.label.slice(1));
-        if ( (entry.mode === CONST.ACTIVE_EFFECT_MODES.ADD) && (entry.value < 0) ) {
+        if ( (entry.type === "add") && (entry.value < 0) ) {
           entry.negative = true;
           entry.value = entry.value * -1;
         }
@@ -94,11 +103,13 @@ export default class PropertyAttribution extends Application5e {
     const parts = property.split(".");
     if ( parts[0] === "abilities" && parts[1] ) {
       return CONFIG.DND5E.abilities[parts[1]]?.label ?? property;
+    } else if ( property.startsWith("attributes.ac.clamped.") ) {
+      return CONFIG.DND5E.abilities[parts[3]]?.label ?? property;
     } else if ( (property === "attributes.ac.dex") && CONFIG.DND5E.abilities.dex ) {
       return CONFIG.DND5E.abilities.dex.label;
     } else if ( (parts[0] === "prof") || (property === "attributes.prof") ) {
-      return game.i18n.localize("DND5E.Proficiency");
+      return _loc("DND5E.Proficiency");
     }
-    return property;
+    return getHumanReadableAttributeLabel(property);
   }
 }

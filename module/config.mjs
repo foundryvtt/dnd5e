@@ -1398,18 +1398,6 @@ preLocalize("itemActionTypes");
 /* -------------------------------------------- */
 
 /**
- * Different ways in which item capacity can be limited.
- * @enum {string}
- */
-DND5E.itemCapacityTypes = {
-  items: "DND5E.ItemContainerCapacityItems",
-  weight: "DND5E.ItemContainerCapacityWeight"
-};
-preLocalize("itemCapacityTypes", { sort: true });
-
-/* -------------------------------------------- */
-
-/**
  * List of various item rarities.
  * @enum {string}
  */
@@ -1481,9 +1469,9 @@ Object.defineProperty(DND5E.limitedUsePeriods, "recoveryOptions", {
       ...Object.entries(CONFIG.DND5E.limitedUsePeriods)
         .filter(([, config]) => !config.deprecated)
         .map(([value, { label, type }]) => ({
-          value, label, group: game.i18n.localize(`DND5E.USES.Recovery.${type?.capitalize() ?? "Time"}`)
+          value, label, group: _loc(`DND5E.USES.Recovery.${type?.capitalize() ?? "Time"}`)
         })),
-      { value: "recharge", label: game.i18n.localize("DND5E.USES.Recovery.Recharge.Label") }
+      { value: "recharge", label: _loc("DND5E.USES.Recovery.Recharge.Label") }
     ];
   }
 });
@@ -1557,6 +1545,15 @@ DND5E.armorProficienciesMap = {
 /* -------------------------------------------- */
 
 /**
+ * Amount of speed reduction caused by wearing armor but not meeting the strength requirement in feet.
+ * Value will be converted to the appropriate value to match the actor's speed unit.
+ * @type {number}
+ */
+DND5E.armorSpeedReduction = 10;
+
+/* -------------------------------------------- */
+
+/**
  * The basic armor types in 5e. This enables specific armor proficiencies,
  * automated AC calculation in NPCs, and starting equipment.
  * @enum {string}
@@ -1590,43 +1587,48 @@ DND5E.shieldIds = {
 
 /**
  * Common armor class calculations.
- * @enum {{ label: string, [formula]: string }}
+ * @enum {{ label: string, [formula]: string, [armored]: boolean, [shielded]: boolean }}
  */
 DND5E.armorClasses = {
-  flat: {
-    label: "DND5E.ArmorClassFlat",
-    formula: "@attributes.ac.flat"
-  },
   natural: {
-    label: "DND5E.ArmorClassNatural",
+    label: "DND5E.ARMORCLASS.Calculation.Natural",
     formula: "@attributes.ac.flat"
   },
-  default: {
-    label: "DND5E.ArmorClassEquipment",
-    formula: "@attributes.ac.armor + @attributes.ac.dex"
+  armored: {
+    label: "DND5E.ARMORCLASS.Calculation.Armored",
+    formula: "@attributes.ac.armor + @attributes.ac.clamped.dex",
+    armored: true
+  },
+  unarmored: {
+    label: "DND5E.ARMORCLASS.Calculation.Unarmored",
+    formula: "10 + @abilities.dex.mod",
+    armored: false
   },
   mage: {
-    label: "DND5E.ArmorClassMage",
-    formula: "13 + @abilities.dex.mod"
+    label: "DND5E.ARMORCLASS.Calculation.Mage",
+    formula: "13 + @abilities.dex.mod",
+    armored: false
   },
   draconic: {
-    label: "DND5E.ArmorClassDraconic",
-    formula: "13 + @abilities.dex.mod"
+    label: "DND5E.ARMORCLASS.Calculation.Draconic",
+    formula: "13 + @abilities.dex.mod",
+    armored: false
   },
   unarmoredMonk: {
-    label: "DND5E.ArmorClassUnarmoredMonk",
-    formula: "10 + @abilities.dex.mod + @abilities.wis.mod"
+    label: "DND5E.ARMORCLASS.Calculation.UnarmoredMonk",
+    formula: "10 + @abilities.dex.mod + @abilities.wis.mod",
+    armored: false,
+    shielded: false
   },
   unarmoredBarb: {
-    label: "DND5E.ArmorClassUnarmoredBarbarian",
-    formula: "10 + @abilities.dex.mod + @abilities.con.mod"
+    label: "DND5E.ARMORCLASS.Calculation.UnarmoredBarbarian",
+    formula: "10 + @abilities.dex.mod + @abilities.con.mod",
+    armored: false
   },
   unarmoredBard: {
-    label: "DND5E.ArmorClassUnarmoredBard",
-    formula: "10 + @abilities.dex.mod + @abilities.cha.mod"
-  },
-  custom: {
-    label: "DND5E.ArmorClassCustom"
+    label: "DND5E.ARMORCLASS.Calculation.UnarmoredBard",
+    formula: "10 + @abilities.dex.mod + @abilities.cha.mod",
+    armored: false
   }
 };
 preLocalize("armorClasses", { key: "label" });
@@ -2419,6 +2421,10 @@ DND5E.movementTypes = {
     label: "DND5E.MOVEMENT.Type.Fly",
     travel: "air"
   },
+  jump: {
+    label: "DND5E.MOVEMENT.Type.Jump",
+    hidden: true
+  },
   swim: {
     label: "DND5E.MOVEMENT.Type.Swim",
     travel: "water",
@@ -2621,14 +2627,14 @@ preLocalize("distanceUnits");
 DND5E.volumeUnits = {
   cubicFoot: {
     label: "DND5E.UNITS.VOLUME.CubicFoot.Label",
-    abbreviation: "DND5E.UNITS.Volume.CubicFoot.Abbreviation",
-    counted: "DND5E.UNITS.Volume.CubicFoot.Counted",
+    abbreviation: "DND5E.UNITS.VOLUME.CubicFoot.Abbreviation",
+    counted: "DND5E.UNITS.VOLUME.CubicFoot.Counted",
     conversion: 1,
     type: "imperial"
   },
   liter: {
     label: "DND5E.UNITS.VOLUME.Liter.Label",
-    abbreviation: "DND5E.UNITS.Volume.Liter.Abbreviation",
+    abbreviation: "DND5E.UNITS.VOLUME.Liter.Abbreviation",
     conversion: 1 / 28.317,
     type: "metric"
   }
@@ -2832,8 +2838,14 @@ DND5E.areaTargetTypes = {
   radius: {
     label: "DND5E.TARGET.Type.Emanation.Label",
     counted: "DND5E.TARGET.Type.Emanation.Counted",
-    template: "circle",
+    template: "emanation",
     standard: true
+  },
+  ring: {
+    label: "DND5E.TARGET.Type.Ring.Label",
+    counted: "DND5E.TARGET.Type.Ring.Counted",
+    template: "ring",
+    sizes: ["radius", "thickness", "height"]
   },
   sphere: {
     label: "DND5E.TARGET.Type.Sphere.Label",
@@ -2936,15 +2948,31 @@ preLocalize("restTypes", { key: "label" });
 
 /**
  * The set of possible sensory perception types which an Actor may have.
- * @enum {string}
+ * @enum {SenseConfiguration}
  */
 DND5E.senses = {
-  blindsight: "DND5E.SenseBlindsight",
-  darkvision: "DND5E.SenseDarkvision",
-  tremorsense: "DND5E.SenseTremorsense",
-  truesight: "DND5E.SenseTruesight"
+  blindsight: {
+    label: "DND5E.SenseBlindsight",
+    detectionMode: "blindsight"
+  },
+  darkvision: {
+    label: "DND5E.SenseDarkvision",
+    grantsSight: true,
+    visionMode: "darkvision"
+  },
+  tremorsense: {
+    label: "DND5E.SenseTremorsense",
+    detectionMode: "feelTremor"
+  },
+  truesight: {
+    label: "DND5E.SenseTruesight",
+    detectionMode: "seeAll",
+    grantsSight: true,
+    visionMode: "darkvision"
+  }
 };
-preLocalize("senses", { sort: true });
+preLocalize("senses", { key: "label", sort: true });
+patchConfig("senses", "label", { since: "DnD5e 6.0", until: "DnD5e 6.2" });
 
 /* -------------------------------------------- */
 /*  Attacks                                     */
@@ -3181,67 +3209,6 @@ DND5E.SPELL_LISTS = Object.freeze([
   "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.spellsDraconic00",
   "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.spellsFiend00000"
 ]);
-
-/* -------------------------------------------- */
-
-/**
- * @deprecated since 5.1
- * @ignore
- */
-DND5E.spellPreparationModes = new Proxy(DND5E.spellcasting, {
-  get(target, prop, receiver) {
-    foundry.utils.logCompatibilityWarning("CONFIG.DND5E.spellPreparationModes is deprecated, use CONFIG.DND5E.spellcasting"
-      + " instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
-    if ( (prop === "prepared") || (prop === "always") ) prop = "spell";
-    return Reflect.get(target, prop, receiver);
-  },
-
-  set(target, prop, value, receiver) {
-    foundry.utils.logCompatibilityWarning("CONFIG.DND5E.spellPreparationModes is deprecated, use CONFIG.DND5E.spellcasting"
-      + " instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
-    if ( (prop === "prepared") || (prop === "always") ) prop = "spell";
-    return Reflect.set(target, prop, value, receiver);
-  }
-});
-
-/* -------------------------------------------- */
-
-/**
- * @deprecated since 5.1
- * @ignore
- */
-DND5E.spellcastingTypes = new Proxy(DND5E.spellcasting, {
-  get(target, prop, receiver) {
-    foundry.utils.logCompatibilityWarning("CONFIG.DND5E.spellcastingTypes is deprecated, use CONFIG.DND5E.spellcasting"
-      + " instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
-    if ( prop === "leveled" ) prop = "spell";
-    return Reflect.get(target, prop, receiver);
-  },
-
-  set(target, prop, value, receiver) {
-    foundry.utils.logCompatibilityWarning("CONFIG.DND5E.spellcastingTypes is deprecated, use CONFIG.DND5E.spellcasting"
-      + " instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
-    if ( prop === "leveled" ) prop = "spell";
-    if ( !("type" in value) ) value.type = "single";
-    if ( !("table" in value) ) value.table = DND5E.pactCastingProgression;
-    if ( !("progression" in value) ) value.progression = { [prop]: { label: value.label } };
-    return Reflect.set(target, prop, value, receiver);
-  }
-});
-
-/* -------------------------------------------- */
-
-/**
- * @ignore
- */
-DND5E.spellProgression = new Proxy({}, {
-  set() {
-    foundry.utils.logCompatibilityWarning("CONFIG.DND5E.spellProgression is read-only. Spell progressions must be set "
-      + "on CONFIG.DND5E.spellcasting instead.", { since: "DnD5e 5.1", until: "DnD5e 6.0" });
-    return true;
-  }
-});
-
 
 /* -------------------------------------------- */
 
@@ -3785,9 +3752,13 @@ DND5E.conditionEffects = {
   dehydrated: new Set(["dehydration"]),
   malnourished: new Set(["malnutrition"]),
   abilityCheckDisadvantage: new Set(["poisoned", "exhaustion-1"]),
+  physicalCheckDisadvantage: new Set(["heavilyEncumbered"]),
   abilitySaveDisadvantage: new Set(["exhaustion-3"]),
+  physicalSaveDisadvantage: new Set(["heavilyEncumbered"]),
+  physicalAttackDisadvantage: new Set(["heavilyEncumbered"]),
   attackDisadvantage: new Set(["poisoned", "exhaustion-3"]),
   dexteritySaveDisadvantage: new Set(["restrained"]),
+  dexteritySaveAdvantage: new Set(["dodging"]),
   initiativeAdvantage: new Set(["invisible"]),
   initiativeDisadvantage: new Set(["incapacitated", "surprised"])
 };
@@ -4304,6 +4275,12 @@ DND5E.characterFlags = {
     section: "DND5E.RacialTraits",
     type: Boolean
   },
+  ignoreArmorSpeedReduction: {
+    name: "DND5E.FLAGS.IgnoreArmorSpeedReduction.Name",
+    hint: "DND5E.FLAGS.IgnoreArmorSpeedReduction.Hint",
+    section: "DND5E.RacialTraits",
+    type: Boolean
+  },
   initiativeAlert: {
     name: "DND5E.FlagsAlert",
     hint: "DND5E.FlagsAlertHint",
@@ -4345,6 +4322,7 @@ DND5E.characterFlags = {
     name: "DND5E.FlagsRemarkableAthlete",
     hint: "DND5E.FlagsRemarkableAthleteHint",
     abilities: ["str", "dex", "con"],
+    skills: ["ath"],
     section: "DND5E.Feats",
     type: Boolean
   },
@@ -4459,6 +4437,10 @@ DND5E.advancementTypes = {
   },
   ItemGrant: {
     documentClass: advancement.ItemGrantAdvancement,
+    validItemTypes: new Set(_ALL_ITEM_TYPES)
+  },
+  ModifyItem: {
+    documentClass: advancement.ModifyItemAdvancement,
     validItemTypes: new Set(_ALL_ITEM_TYPES)
   },
   ScaleValue: {
@@ -4590,6 +4572,20 @@ DND5E.calendar = {
 };
 preLocalize("calendar.calendars", { keys: ["label", "group"] });
 preLocalize("calendar.formatters", { keys: ["label", "group"] });
+
+/* -------------------------------------------- */
+
+/**
+ * Mapping of time deltas created by time passing in the calendar system to limited use recovery periods.
+ * Note: Ordering is important in this entry because it determines the order in which these recovery periods
+ * will be selected if multiple applicable periods are found during the recovery process.
+ * @type {Map<string, string>}
+ */
+DND5E.calendarDeltasRecoveryMapping = new Map([
+  ["midnights", "day"],
+  ["sunrises", "dawn"],
+  ["sunsets", "dusk"]
+]);
 
 /* -------------------------------------------- */
 /*  Requests                                    */
@@ -4875,17 +4871,23 @@ Object.defineProperty(DND5E, "enrichmentLookup", {
     if ( !_enrichmentLookup ) {
       _enrichmentLookup = {
         abilities: foundry.utils.deepClone(DND5E.abilities),
+        damageTypes: Object.fromEntries(
+          Object.keys({ ...DND5E.damageTypes, ...DND5E.healingTypes }).map(k => [slugify(k), k])
+        ),
         languages: _flattenConfig(DND5E.languages, { labelKey: "label", skipEntry: (k, d) => d.selectable === false }),
         skills: foundry.utils.deepClone(DND5E.skills),
         spellSchools: foundry.utils.deepClone(DND5E.spellSchools),
         tools: foundry.utils.deepClone(DND5E.tools)
       };
-      const addFullKeys = key => Object.entries(DND5E[key]).forEach(([k, v]) =>
-        _enrichmentLookup[key][slugify(v.fullKey)] = { ...v, key: k }
-      );
+      const addFullKeys = key => Object.entries(DND5E[key]).forEach(([k, v]) => {
+        _enrichmentLookup[key][k].key = k;
+        if ( v.fullKey ) _enrichmentLookup[key][slugify(v.fullKey)] = { ...v, key: k };
+      });
       addFullKeys("abilities");
       addFullKeys("skills");
       addFullKeys("spellSchools");
+      addFullKeys("tools");
+      Object.entries(DND5E.vehicleTypes).forEach(([k, label]) => _enrichmentLookup.tools[k] = { label, key: k });
     }
     return _enrichmentLookup;
   },

@@ -67,11 +67,11 @@ export default class AdvancementConfirmationDialog extends Dialog5e {
   static forDelete(item, { sheet }={}) {
     return this.createDialog({
       item, sheet,
-      title: game.i18n.localize("DND5E.ADVANCEMENT.Deletion.Delete.Title"),
-      message: game.i18n.localize("DND5E.ADVANCEMENT.Deletion.Delete.Message"),
+      title: _loc("DND5E.ADVANCEMENT.Deletion.Delete.Title"),
+      message: _loc("DND5E.ADVANCEMENT.Deletion.Delete.Message"),
       continueButton: {
         icon: "fa-solid fa-trash",
-        label: game.i18n.localize("Delete")
+        label: _loc("COMMON.Delete")
       }
     });
   }
@@ -88,11 +88,11 @@ export default class AdvancementConfirmationDialog extends Dialog5e {
   static forLevelDown(item, { sheet }={}) {
     return this.createDialog({
       item, sheet,
-      title: game.i18n.localize("DND5E.ADVANCEMENT.Deletion.LevelDown.Title"),
-      message: game.i18n.localize("DND5E.ADVANCEMENT.Deletion.LevelDown.Message"),
+      title: _loc("DND5E.ADVANCEMENT.Deletion.LevelDown.Title"),
+      message: _loc("DND5E.ADVANCEMENT.Deletion.LevelDown.Message"),
       continueButton: {
         icon: "fa-solid fa-sort-numeric-down-alt",
-        label: game.i18n.localize("DND5E.LevelActionDecrease")
+        label: _loc("DND5E.LevelActionDecrease")
       }
     });
   }
@@ -109,19 +109,7 @@ export default class AdvancementConfirmationDialog extends Dialog5e {
    * @param {ApplicationV2} [config.sheet]    Sheet to render the dialog as a child of.
    * @returns {Promise<boolean|null>}  Resolves with whether advancements should be unapplied. Rejects with null.
    */
-  static createDialog(config, _title, _message, _continueButton) {
-    if ( config instanceof Item ) {
-      foundry.utils.logCompatibilityWarning(
-        "AdvancementConfirmationDialog.createDialog now takes a single config object rather than positional arguments.",
-        { since: "DnD5e 5.3", until: "DnD5e 6.0" }
-      );
-      config = {
-        item: config,
-        title: _title,
-        message: _message,
-        continueButton: _continueButton
-      };
-    }
+  static createDialog(config) {
     const { item, title, message, continueButton, sheet } = config;
     return new Promise((resolve, reject) => {
       const dialog = new this({
@@ -134,7 +122,7 @@ export default class AdvancementConfirmationDialog extends Dialog5e {
           {
             action: "cancel",
             icon: "fa-solid fa-times",
-            label: game.i18n.localize("Cancel"),
+            label: _loc("COMMON.Cancel"),
             type: "button"
           }
         ],

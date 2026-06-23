@@ -1,7 +1,7 @@
 <{{ elements.effects }} class="effects-element">
 
     {{!-- Searching --}}
-    <item-list-controls for="effects" label="{{ localize "DND5E.EffectsSearch" }}" sort="a"
+    <item-list-controls for="effects" label="{{ localize "DND5E.EFFECT.Action.Search" }}" sort="a"
                         collection="effects"></item-list-controls>
 
     {{!-- Effects List --}}
@@ -103,7 +103,7 @@
     <div class="name name-stacked">
         <span class="title">{{ name }}</span>
     </div>
-    {{#if duration.remaining}}
+    {{#if showDuration}}
     <div class="duration">
         <i class="fa-solid fa-clock" inert></i>
         <span class="most-significant">{{ durationParts.[0] }}</span>

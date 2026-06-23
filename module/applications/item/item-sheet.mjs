@@ -358,7 +358,6 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     // Limited Uses
     context.data = { uses: context.source.uses };
     context.hasLimitedUses = this.item.system.hasLimitedUses;
-    context.recoveryPeriods = CONFIG.DND5E.limitedUsePeriods.recoveryOptions;
     context.recoveryTypes = [
       { value: "recoverAll", label: "DND5E.USES.Recovery.Type.RecoverAll" },
       { value: "loseAll", label: "DND5E.USES.Recovery.Type.LoseAll" },
@@ -369,7 +368,8 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
       fields: context.fields.uses.fields.recovery.element.fields,
       prefix: `system.uses.recovery.${index}.`,
       source: context.source.uses.recovery[index] ?? data,
-      formulaOptions: data.period === "recharge" ? UsesField.rechargeOptions : null
+      formulaOptions: data.period === "recharge" ? UsesField.rechargeOptions : null,
+      periodOptions: UsesField.recoveryOptions(this.item, data.period)
     }));
 
     return context;
@@ -399,6 +399,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
         const ctx = effectMap[id] = {
           id, name, img, disabled, duration, source, parent,
           durationParts: duration.remaining ? duration.label.split(", ") : [],
+          showDuration: Number.isFinite(duration.value),
           hasTooltip: true,
           riders: []
         };
@@ -571,7 +572,6 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
 
   /** @override */
   _renderChild(app, options={}) {
-    if ( game.release.generation < 14 ) return app.render({ force: true, ...options });
     if ( this.parent ) return this.parent.renderChild(app, options);
     if ( this.window?.windowId ) return app.render({
       force: true, window: { detached: true, windowId: this.window.windowId }, ...options
@@ -645,7 +645,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     if ( this._headerToggles.identified ) {
       const isIdentified = this.item.system.identified;
       const label = isIdentified ? "DND5E.Identified" : "DND5E.Unidentified.Title";
-      this._headerToggles.identified.setAttribute("aria-label", game.i18n.localize(label));
+      this._headerToggles.identified.setAttribute("aria-label", _loc(label));
       this._headerToggles.identified.dataset.tooltip = label;
       this._headerToggles.identified.classList.toggle("active", isIdentified);
     }
@@ -653,7 +653,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     if ( this._headerToggles.equipped ) {
       const isEquipped = this.item.system.equipped;
       const label = isEquipped ? "DND5E.Equipped" : "DND5E.Unequipped";
-      this._headerToggles.equipped.setAttribute("aria-label", game.i18n.localize(label));
+      this._headerToggles.equipped.setAttribute("aria-label", _loc(label));
       this._headerToggles.equipped.dataset.tooltip = label;
       this._headerToggles.equipped.classList.toggle("active", isEquipped);
     }
@@ -686,7 +686,10 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
       return ActiveEffect.implementation.createDialog({
         name: this.document.name,
         img: this.document.img,
-        origin: this.document.uuid
+        origin: this.document.uuid,
+        system: {
+          magical: this.document.system.properties?.has("mgc")
+        }
       }, { parent: this.document, renderSheet: true }, { sheet: this });
     }
   }
@@ -950,7 +953,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     const options = { parent: this.item, keepOrigin: false };
 
     if ( effect.type === "enchantment" ) {
-      effectData.origin ??= effect.parent.uuid;
+      effectData.origin ??= effect.parent?.uuid;
       options.keepOrigin = true;
       options.dnd5e = {
         enchantmentProfile: effect.id,

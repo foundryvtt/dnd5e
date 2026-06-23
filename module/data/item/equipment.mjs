@@ -123,7 +123,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
     return [
       this.type.label,
       (this.isArmor || this.isMountable) ? (this.parent.labels?.armor ?? null) : null,
-      this.properties.has("stealthDisadvantage") ? game.i18n.localize("DND5E.ITEM.Property.StealthDisadvantage") : null
+      this.properties.has("stealthDisadvantage") ? _loc("DND5E.ITEM.Property.StealthDisadvantage") : null
     ];
   }
 
@@ -136,7 +136,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
   get cardProperties() {
     return [
       (this.isArmor || this.isMountable) ? (this.parent.labels?.armor ?? null) : null,
-      this.properties.has("stealthDisadvantage") ? game.i18n.localize("DND5E.ITEM.Property.StealthDisadvantage") : null
+      this.properties.has("stealthDisadvantage") ? _loc("DND5E.ITEM.Property.StealthDisadvantage") : null
     ];
   }
 
@@ -198,6 +198,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
     EquipmentData.#migrateType(source);
     EquipmentData.#migrateStrength(source);
     EquipmentData.#migrateProficient(source);
+    return source;
   }
 
   /* -------------------------------------------- */
@@ -283,13 +284,13 @@ export default class EquipmentData extends ItemDataModel.mixin(
     const magicalBonus = simplifyBonus(this.armor.magicalBonus, this.parent.getRollData());
     if ( this.magicAvailable && magicalBonus ) this.armor.value += magicalBonus;
     this.type.label = CONFIG.DND5E.equipmentTypes[this.type.value]
-      ?? game.i18n.localize(CONFIG.Item.typeLabels.equipment);
+      ?? _loc(CONFIG.Item.typeLabels.equipment);
     this.type.identifier = this.type.value === "shield"
       ? CONFIG.DND5E.shieldIds[this.type.baseItem]
       : CONFIG.DND5E.armorIds[this.type.baseItem];
 
     const labels = this.parent.labels ??= {};
-    labels.armor = this.armor.value ? `${this.armor.value} ${game.i18n.localize("DND5E.AC")}` : "";
+    labels.armor = this.armor.value ? `${this.armor.value} ${_loc("DND5E.AC")}` : "";
   }
 
   /* -------------------------------------------- */

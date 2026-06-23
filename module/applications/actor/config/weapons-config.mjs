@@ -26,7 +26,7 @@ export default class WeaponsConfig extends TraitsConfig {
 
   /** @override */
   get title() {
-    return game.i18n.localize("TYPES.Item.weaponPl");
+    return _loc("TYPES.Item.weaponPl");
   }
 
   /* -------------------------------------------- */

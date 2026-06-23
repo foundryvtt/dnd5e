@@ -67,12 +67,12 @@ export default class CombatTracker5e extends foundry.applications.sidebar.tabs.C
       for ( const [index, element] of children.entries() ) {
         if ( element.classList.contains("active") ) activeEntry = index;
       }
-      let count = game.i18n.format(`DND5E.COMBATANT.Counted.${getPluralRules().select(children.length)}`, {
+      let count = _loc(`DND5E.COMBATANT.Counted.${getPluralRules().select(children.length)}`, {
         number: formatNumber(children.length)
       });
       if ( activeEntry !== undefined ) {
         groupContainer.classList.add("active");
-        count = game.i18n.format("DND5E.COMBAT.Group.ActiveCount", {
+        count = _loc("DND5E.COMBAT.Group.ActiveCount", {
           combatants: count, current: formatNumber(activeEntry + 1)
         });
       }
@@ -97,7 +97,7 @@ export default class CombatTracker5e extends foundry.applications.sidebar.tabs.C
         </div>
       `;
       groupContainer.dataset.groupKey = key;
-      groupContainer.querySelector(".name").innerText = game.i18n.format("DND5E.COMBAT.Group.Title", { name });
+      groupContainer.querySelector(".name").innerText = _loc("DND5E.COMBAT.Group.Title", { name });
       children[0].before(groupContainer);
       groupContainer.querySelector(".group-children").replaceChildren(...children);
       groupContainer.addEventListener("click", event => {

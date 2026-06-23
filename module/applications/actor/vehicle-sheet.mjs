@@ -1,4 +1,4 @@
-import { formatCR, formatWeight, getPluralRules, parseDelta } from "../../utils.mjs";
+import { defaultUnits, formatCR, formatLength, formatWeight, getPluralRules, parseDelta } from "../../utils.mjs";
 import CompendiumBrowser from "../compendium-browser.mjs";
 import ContextMenu5e from "../context-menu.mjs";
 import BaseActorSheet from "./api/base-actor-sheet.mjs";
@@ -255,7 +255,7 @@ export default class VehicleActorSheet extends BaseActorSheet {
         return {
           filled,
           n: actions.max - n,
-          label: game.i18n.format(`DND5E.VEHICLE.Actions.Ordinal.${plurals.select(n)}`, { n }),
+          label: _loc(`DND5E.VEHICLE.Actions.Ordinal.${plurals.select(n)}`, { n }),
           classes: classes.join(" ")
         };
       });
@@ -264,6 +264,13 @@ export default class VehicleActorSheet extends BaseActorSheet {
     context.showTravelSpeed = !!context.system.attributes.travel.speeds.max;
     context.showCombatSpeed = !!context.system.attributes.movement.max
       || (context.editable && !context.showTravelPace && !context.showTravelSpeed);
+    const { movement } = context.system.attributes;
+    const units = movement.units || defaultUnits("length");
+    let combatSpeed = formatLength(movement.max, units, { parts: true });
+    if ( movement.hover && (movement.fly > 0) && (movement.fly >= movement.max) ) {
+      combatSpeed = _loc("DND5E.MOVEMENT.HoverSpeed", { speed: combatSpeed });
+    }
+    context.combatSpeed = combatSpeed;
     return context;
   }
 
@@ -365,9 +372,9 @@ export default class VehicleActorSheet extends BaseActorSheet {
     const { COVER } = this.constructor;
     const { armor, cover, crew, hp } = item.system;
     const subtitles = [];
-    if ( COVER[cover] ) subtitles.push(game.i18n.localize(COVER[cover]));
-    if ( armor?.value ) subtitles.push(`${game.i18n.localize("DND5E.AC")} ${armor.value}`);
-    if ( hp?.dt ) subtitles.push(`${game.i18n.localize("DND5E.HITPOINTS.DT.abbr")} ${hp.dt}`);
+    if ( COVER[cover] ) subtitles.push(_loc(COVER[cover]));
+    if ( armor?.value ) subtitles.push(`${_loc("DND5E.AC")} ${armor.value}`);
+    if ( hp?.dt ) subtitles.push(`${_loc("DND5E.HITPOINTS.DT.abbr")} ${hp.dt}`);
     if ( subtitles.length ) ctx.subtitle = subtitles.join(" • ");
     if ( item.type === "weapon" ) {
       const enrichmentOptions = { secrets: item.isOwner, relativeTo: item, rollData: item.getRollData() };
@@ -420,7 +427,7 @@ export default class VehicleActorSheet extends BaseActorSheet {
   }
 
   /* -------------------------------------------- */
-  /*  Event Listeners & Handlers                  */
+  /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
   /**
@@ -484,7 +491,7 @@ export default class VehicleActorSheet extends BaseActorSheet {
   static #onCreateItem(event, target) {
     const Item = getDocumentClass("Item");
     const { type } = target.closest("[data-type]")?.dataset ?? {};
-    const name = game.i18n.format("DOCUMENT.New", { type: game.i18n.localize(Item.metadata.label) });
+    const name = _loc("DOCUMENT.New", { type: _loc(Item.metadata.label) });
     const createData = { name, type };
     if ( type === "equipment" ) createData["system.type.value"] = "vehicle";
     else if ( type === "weapon" ) createData["system.type.value"] = "siege";
@@ -686,8 +693,8 @@ export default class VehicleActorSheet extends BaseActorSheet {
       const subtitle = [
         CONFIG.DND5E.actorSizes[system.traits?.size]?.label,
         system.details?.type?.label,
-        system.details?.cr ? game.i18n.format("DND5E.CRLabel", { cr: formatCR(system.details.cr) }) : null,
-        system.details?.level ? game.i18n.format("DND5E.LevelNumber", { level: system.details.level }) : null
+        system.details?.cr ? _loc("DND5E.CRLabel", { cr: formatCR(system.details.cr) }) : null,
+        system.details?.level ? _loc("DND5E.LevelNumber", { level: system.details.level }) : null
       ].filterJoin(" • ");
       return { uuid, quantity, actor: { cr, img, name, subtitle }, diff: (counts?.[uuid] ?? 0) - quantity };
     });

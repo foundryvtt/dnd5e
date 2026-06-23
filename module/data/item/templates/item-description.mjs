@@ -49,6 +49,7 @@ export default class ItemDescriptionTemplate extends SystemDataModel {
   static _migrateData(source) {
     super._migrateData(source);
     ItemDescriptionTemplate.#migrateSource(source);
+    return source;
   }
 
   /* -------------------------------------------- */

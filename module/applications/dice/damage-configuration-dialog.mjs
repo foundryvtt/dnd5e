@@ -43,12 +43,12 @@ export default class DamageRollConfigurationDialog extends RollConfigurationDial
       critical: {
         default: defaultCritical,
         icon: '<i class="fa-solid fa-bomb" inert></i>',
-        label: game.i18n.localize("DND5E.CriticalHit")
+        label: _loc("DND5E.CriticalHit")
       },
       normal: {
         default: !defaultCritical,
         icon: '<i class="fa-solid fa-dice" inert></i>',
-        label: game.i18n.localize(allowCritical ? "DND5E.Normal" : "DND5E.Roll")
+        label: _loc(allowCritical ? "DND5E.Normal" : "DND5E.Roll")
       }
     };
     if ( !allowCritical ) delete context.buttons.critical;

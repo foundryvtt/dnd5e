@@ -61,13 +61,13 @@ export default class SensesField extends foundry.data.fields.SchemaField {
       Object.defineProperty(senses, key, {
         get() {
           foundry.utils.logCompatibilityWarning(`senses.${key} has moved to "senses.ranges.${key}".`, {
-            since: "DnD5e 5.3", until: "DnD5e 6.1"
+            since: "DnD5e 5.3", until: "DnD5e 6.1", once: true
           });
           return this.ranges[key];
         },
         set(value) {
           foundry.utils.logCompatibilityWarning(`senses.${key} has moved to "senses.ranges.${key}".`, {
-            since: "DnD5e 5.3", until: "DnD5e 6.1"
+            since: "DnD5e 5.3", until: "DnD5e 6.1", once: true
           });
           this.ranges[key] = value;
         },

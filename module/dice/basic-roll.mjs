@@ -1,4 +1,5 @@
 import RollConfigurationDialog from "../applications/dice/roll-configuration-dialog.mjs";
+import BasicDie from "./basic-die.mjs";
 
 const { DiceTerm, NumericTerm } = foundry.dice.terms;
 
@@ -169,8 +170,14 @@ export default class BasicRoll extends Roll {
    */
   static async buildPost(rolls, config, message) {
     message.data = foundry.utils.expandObject(message.data ?? {});
-    const messageId = config.event?.target.closest("[data-message-id]")?.dataset.messageId;
+    const messageId = config.event?.target?.closest("[data-message-id]")?.dataset.messageId;
     if ( messageId ) foundry.utils.setProperty(message.data, "flags.dnd5e.originatingMessage", messageId);
+
+    // Attack & Damage store originatingMessage directly on message.data and do not have a config.event. We retrieve
+    // those here.
+    const originatingMessage = foundry.utils.getProperty(message.data, "flags.dnd5e.originatingMessage");
+    // Store in roll options so that it can be serialized.
+    if ( originatingMessage ) rolls?.forEach(r => r.options.originatingMessage ??= originatingMessage);
 
     if ( rolls?.length && (config.evaluate !== false) ) {
       message[message.create !== false ? "document" : "data"] = await this.toMessage(
@@ -196,6 +203,16 @@ export default class BasicRoll extends Roll {
 
   /* -------------------------------------------- */
   /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Get the chat message that originated this roll (e.g. the item card that triggered it), if any.
+   * @returns {ChatMessage5e|null}
+   */
+  getOriginatingMessage() {
+    return game.messages.get(this.options.originatingMessage) ?? null;
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -231,7 +248,7 @@ export default class BasicRoll extends Roll {
    * @param {BasicRoll[]} rolls              Rolls to add to the message.
    * @param {object} messageData             The data object to use when creating the message.
    * @param {options} [options]              Additional options which modify the created message.
-   * @param {string} [options.rollMode]      The template roll mode to use for the message from CONFIG.Dice.rollModes
+   * @param {string} [options.rollMode]      The roll mode to use for the message from `CONFIG.ChatMessage.modes`.
    * @param {boolean} [options.create=true]  Whether to automatically create the chat message, or only return the
    *                                         prepared chatData object.
    * @returns {Promise<ChatMessage|object>}  A promise which resolves to the created ChatMessage document if create is
@@ -242,7 +259,7 @@ export default class BasicRoll extends Roll {
       if ( !roll._evaluated ) await roll.evaluate({ allowInteractive: rollMode !== CONST.DICE_ROLL_MODES.BLIND });
       rollMode ??= roll.options.rollMode;
     }
-    rollMode ??= game.settings.get("core", "rollMode");
+    rollMode ??= BasicRoll.getMessageMode();
 
     // Prepare chat data
     messageData = foundry.utils.mergeObject({ sound: CONFIG.sounds.dice }, messageData);
@@ -254,9 +271,9 @@ export default class BasicRoll extends Roll {
     const msg = new cls(messageData);
 
     // Either create or return the data
-    if ( create ) return cls.create(msg.toObject(), { rollMode });
+    if ( create ) return cls.create(msg.toObject(), { messageMode: rollMode });
     else {
-      if ( rollMode ) msg.applyRollMode(rollMode);
+      if ( rollMode ) msg.applyMode(rollMode);
       return msg.toObject();
     }
   }
@@ -278,6 +295,9 @@ export default class BasicRoll extends Roll {
   /** @inheritDoc */
   async evaluate(options={}) {
     this.preCalculateDiceTerms(options);
+    for ( const term of this.terms ) {
+      if ( term instanceof BasicDie ) term.expandAdvantage();
+    }
     return super.evaluate(options);
   }
 
@@ -286,6 +306,9 @@ export default class BasicRoll extends Roll {
   /** @inheritDoc */
   evaluateSync(options={}) {
     this.preCalculateDiceTerms(options);
+    for ( const term of this.terms ) {
+      if ( term instanceof BasicDie ) term.expandAdvantage();
+    }
     return super.evaluateSync(options);
   }
 
@@ -423,6 +446,18 @@ export default class BasicRoll extends Roll {
 
   /* -------------------------------------------- */
   /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Retrieve the message mode to use, treating in-character as public by default.
+   * @param {boolean} [ignoreIC=true]  Ignore in-character message mode.
+   * @returns {string}}
+   */
+  static getMessageMode(ignoreIC=true) {
+    const mode = game.settings.get("core", "messageMode");
+    return ignoreIC && (mode === "ic") ? "public" : mode;
+  }
+
   /* -------------------------------------------- */
 
   /**
