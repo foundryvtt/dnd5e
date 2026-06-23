@@ -472,7 +472,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       ctx.clickAction = "use";
       this._prepareItem(item, ctx);
       if ( item.type === "spell" ) await this._prepareItemSpell(item, ctx);
-      else if ( "quantity" in item.system ) await this._prepareItemPhysical(item, ctx);
+      else if ( item.system.isPhysical ) await this._prepareItemPhysical(item, ctx);
       else await this._prepareItemFeature(item, ctx);
 
       // Handle expanded data
