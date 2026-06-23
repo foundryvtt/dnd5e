@@ -536,39 +536,26 @@ export default class TemplatePlacement extends BasePlacement {
    * @param {RegionDocument} region Template region being tested.
    * @returns {boolean}
    */
-  static #testTemplateLineOfEffect(token, region) {
-    const shape = region.shapes.find(s => ["circle", "cone", "line", "rectangle"].includes(s.type));
-    const level = canvas.scene.levels.get(Array.from(region.levels)[0]);
-    if ( !shape || !level ) return true;
-
-    const origin = {
-      x: shape.x,
-      y: shape.y,
-      elevation: TemplatePlacement.#getTemplateCenterElevation(region) ?? region.elevation.bottom
-    };
-    const tokenSize = token.getSize();
-    const tokenTop = token.elevation + (token.depth * canvas.grid.distance);
-    const destinations = [{
-      x: token.x + (tokenSize.width / 2),
-      y: token.y + (tokenSize.height / 2),
-      elevation: (token.elevation + tokenTop) / 2
-    }];
-    if ( !canvas.grid.isGridless ) {
-      for ( const offset of token.getOccupiedGridSpaceOffsets(token._source) ) {
-        const point = canvas.grid.getCenterPoint(offset);
-        point.elevation = destinations[0].elevation;
-        if ( region.testPoint(point) ) destinations.push(point);
-      }
+  static #sharesTemplateGridSpace(token, region, { useTemplateShape=false, highlightedGridSpacesOnly }={}) {
+    if ( canvas.grid.isGridless ) return false;
+    if ( !region.testPoint({ x: token.x, y: token.y, elevation: token.elevation }, 0.75) ) {
+      const top = token.elevation + (token.depth * canvas.grid.distance);
+      if ( (top <= region.elevation.bottom) || (token.elevation >= region.elevation.top) ) return false;
     }
 
-    const polygonBackend = CONFIG.Canvas.polygonBackends.move;
-    const config = {
-      type: "move",
-      level,
-      edgeTypes: { wall: true, outerBounds: true },
-      useThreshold: true
-    };
-    return destinations.some(destination => !polygonBackend.testCollision(origin, destination, { ...config, mode: "any" }));
+    const polygonTree = region.object?.animationState?.polygonTree ?? region.polygonTree;
+    const origin = TemplatePlacement.#getTemplateOrigin(region);
+    highlightedGridSpacesOnly ??= game.settings.get("dnd5e", "targetTemplateGridSpaces");
+    for ( const offset of token.getOccupiedGridSpaceOffsets(token._source) ) {
+      const [center, ...points] = templateGridSpacePoints(offset);
+      if ( useTemplateShape && TemplatePlacement.#testTemplateShapePoint(center, region) ) return true;
+      if ( TemplatePlacement.#testTemplateGridPoint(center, polygonTree, origin) ) return true;
+      if ( highlightedGridSpacesOnly ) continue;
+
+      if ( useTemplateShape && points.some(point => TemplatePlacement.#testTemplateShapePoint(point, region)) ) return true;
+      if ( points.some(point => polygonTree.testPoint(point, 0.75)) ) return true;
+    }
+    return false;
   }
 
   /* -------------------------------------------- */
@@ -589,21 +576,105 @@ export default class TemplatePlacement extends BasePlacement {
     const polygonTree = region.object?.animationState?.polygonTree ?? region.polygonTree;
     const highlightedGridSpacesOnly = game.settings.get("dnd5e", "targetTemplateGridSpaces");
     for ( const offset of token.getOccupiedGridSpaceOffsets(token._source) ) {
-      const center = canvas.grid.getCenterPoint(offset);
-      center.x = Math.round(center.x - (canvas.grid.sizeX / 2)) + (canvas.grid.sizeX / 2);
-      center.y = Math.round(center.y - (canvas.grid.sizeY / 2)) + (canvas.grid.sizeY / 2);
-      if ( polygonTree.testPoint(center, 0.75) ) return true;
-      if ( highlightedGridSpacesOnly ) continue;
-
-      const topLeft = canvas.grid.getTopLeftPoint(offset);
-      const points = [
-        { x: topLeft.x, y: topLeft.y },
-        { x: topLeft.x + canvas.grid.sizeX, y: topLeft.y },
-        { x: topLeft.x + canvas.grid.sizeX, y: topLeft.y + canvas.grid.sizeY },
-        { x: topLeft.x, y: topLeft.y + canvas.grid.sizeY }
-      ];
+      const polygon = templateGridSpacePolygon(offset);
+      if ( !TemplatePlacement.#testTemplateShapePolygon(polygon, region) ) continue;
+      const [center, ...points] = templateGridSpacePoints(offset);
+      if ( TemplatePlacement.#testTemplateGridPoint(center, polygonTree, origin) ) return true;
       if ( points.some(point => polygonTree.testPoint(point, 0.75)) ) return true;
+      if ( polygonTree.intersectPolygon(polygon).area > 0 ) return true;
     }
     return false;
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the template origin for shapes where core measurement includes the origin grid space.
+   * @param {RegionDocument} region Template region being tested.
+   * @returns {Point|null}
+   */
+  static #getTemplateOrigin(region) {
+    const dimensions = region.flags.dnd5e?.dimensions;
+    if ( !["cone", "line"].includes(dimensions?.type) ) return null;
+    const shape = region.shapes.find(s => ["cone", "line"].includes(s.type));
+    return shape ? { x: shape.x, y: shape.y } : null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Test a template grid point, including the origin square for cone and line templates.
+   * @param {Point} point
+   * @param {PolygonTree} polygonTree
+   * @param {Point|null} origin
+   * @returns {boolean}
+   */
+  static #testTemplateGridPoint(point, polygonTree, origin) {
+    return (origin && (Math.max(Math.abs(point.x - origin.x), Math.abs(point.y - origin.y)) < 1))
+      || polygonTree.testPoint(point, 0.75);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Test whether a point is inside the unrestricted template shape.
+   * @param {Point} point           Point to test.
+   * @param {RegionDocument} region Template region being tested.
+   * @returns {boolean}
+   */
+  static #testTemplateShapePoint(point, region) {
+    const shape = region.shapes.find(s => ["circle", "cone", "line", "rectangle"].includes(s.type));
+    if ( !shape ) return false;
+    return shape.polygonTree?.testPoint(point, 0.75) ?? false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Test whether a polygon overlaps the unrestricted template shape.
+   * @param {PIXI.Polygon} polygon    Polygon to test.
+   * @param {RegionDocument} region   Template region being tested.
+   * @returns {boolean}
+   */
+  static #testTemplateShapePolygon(polygon, region) {
+    const shape = region.shapes.find(s => ["circle", "cone", "line", "rectangle"].includes(s.type));
+    return (shape?.polygonTree?.intersectPolygon(polygon).area ?? 0) > 0;
+  }
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Get the polygon for a grid space.
+ * @param {GridOffset2D} offset  Grid offset.
+ * @returns {PIXI.Polygon}
+ */
+function templateGridSpacePolygon(offset) {
+  const topLeft = canvas.grid.getTopLeftPoint(offset);
+  return new PIXI.Rectangle(topLeft.x, topLeft.y, canvas.grid.sizeX, canvas.grid.sizeY).toPolygon();
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Get center and boundary points for a grid space.
+ * @param {GridOffset2D} offset  Grid offset.
+ * @returns {Point[]}
+ */
+function templateGridSpacePoints(offset) {
+  const center = canvas.grid.getCenterPoint(offset);
+  center.x = Math.round(center.x - (canvas.grid.sizeX / 2)) + (canvas.grid.sizeX / 2);
+  center.y = Math.round(center.y - (canvas.grid.sizeY / 2)) + (canvas.grid.sizeY / 2);
+  const topLeft = canvas.grid.getTopLeftPoint(offset);
+  return [
+    center,
+    { x: topLeft.x, y: topLeft.y },
+    { x: topLeft.x + (canvas.grid.sizeX / 2), y: topLeft.y },
+    { x: topLeft.x + canvas.grid.sizeX, y: topLeft.y },
+    { x: topLeft.x + canvas.grid.sizeX, y: topLeft.y + (canvas.grid.sizeY / 2) },
+    { x: topLeft.x + canvas.grid.sizeX, y: topLeft.y + canvas.grid.sizeY },
+    { x: topLeft.x + (canvas.grid.sizeX / 2), y: topLeft.y + canvas.grid.sizeY },
+    { x: topLeft.x, y: topLeft.y + (canvas.grid.sizeY / 2) },
+    { x: topLeft.x, y: topLeft.y + canvas.grid.sizeY }
+  ];
 }
