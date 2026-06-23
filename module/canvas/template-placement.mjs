@@ -50,7 +50,7 @@ export default class TemplatePlacement extends BasePlacement {
         create: false,
         onChange: ({ preview, document }) => {
           TemplatePlacement.#displayTemplateElevation(preview);
-          if ( this.config.targetOnPlacement ) TemplatePlacement.#targetTokens([document]);
+          if ( this.config.targetOnPlacement ) TemplatePlacement.#targetTokens([document], this.config);
         },
         preConfirm: ({ document, index }) => {
           const obj = document.toObject();
@@ -215,6 +215,8 @@ export default class TemplatePlacement extends BasePlacement {
     const targetOnPlacement = TemplatePlacement.#getTargetOnPlacement(target);
 
     const config = foundry.utils.mergeObject({
+      activity,
+      affects: activity.target.affects?.type,
       color: game.user.color,
       origin: activity.getUsageToken?.(),
       targetType: target.type,
@@ -289,7 +291,7 @@ export default class TemplatePlacement extends BasePlacement {
     if ( Hooks.call("dnd5e.createMeasuredTemplate", activity, regionData) === false ) return null;
 
     const created = await canvas.scene.createEmbeddedDocuments("Region", regionData);
-    if ( config.targetOnPlacement ) TemplatePlacement.#targetTokens(created);
+    if ( config.targetOnPlacement ) TemplatePlacement.#targetTokens(created, config);
 
     /**
      * A hook event that fires after a template are created for an Activity.
@@ -320,13 +322,35 @@ export default class TemplatePlacement extends BasePlacement {
   /**
    * Target tokens inside created template regions.
    * @param {RegionDocument[]} regions  Created template regions.
+   * @param {object} config             The template regions configuration object.
    */
-  static #targetTokens(regions) {
+  static #targetTokens(regions, config) {
     const priorTargetIds = new Set(Array.from(game.user.targets, t => t.id));
     const targetIds = new Set();
+    const sourceTokenDocument = config.origin;
+    const affects = config.affects;
     for ( const region of regions ) {
       for ( const token of canvas.scene.tokens ) {
-        if ( TemplatePlacement.#testInsideTemplateRegion(token, region) ) targetIds.add(token.id);
+        const blockEtherealTargeting = () => {
+          if ( !sourceTokenDocument.actor || !token.actor ) return false;
+          const isSourceEthereal = sourceTokenDocument.actor.statuses.has("ethereal");
+          const isTargetEthereal = token.actor.statuses.has("ethereal");
+          return isSourceEthereal !== isTargetEthereal;
+        };
+        const isHidden = token.hidden;
+        const isMatchingDisposition = () => {
+          if ( !sourceTokenDocument ) return true;
+          const sourceTokenDisposition = sourceTokenDocument?.disposition || undefined;
+          const targetTokenDisposition = token.disposition;
+          if ( sourceTokenDisposition === undefined ) return true;
+          if ( affects === "ally" ) return sourceTokenDisposition === targetTokenDisposition;
+          if ( affects === "enemy" ) return sourceTokenDisposition !== targetTokenDisposition;
+          if ( affects === "self" ) return sourceTokenDocument.id === token.id;
+          if ( affects === "object" || affects === "space" ) return false;
+          return true;
+        }
+        const isValidTarget = !blockEtherealTargeting() && !isHidden && isMatchingDisposition();
+        if ( isValidTarget && TemplatePlacement.#testInsideTemplateRegion(token, region) ) targetIds.add(token.id);
       }
     }
     canvas.tokens.setTargets(targetIds);
