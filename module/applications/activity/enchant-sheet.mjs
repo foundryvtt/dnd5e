@@ -29,11 +29,6 @@ export default class EnchantSheet extends ActivitySheet {
   /* -------------------------------------------- */
 
   /** @override */
-  static SUPPORTED_EFFECT_TYPE = "enchantment";
-
-  /* -------------------------------------------- */
-
-  /** @override */
   tabGroups = {
     sheet: "identity",
     activation: "time",
