@@ -31,5 +31,14 @@
             durationUnits=durationUnits inputs=inputs }}
         {{ formField fields.duration.fields.concentration value=data.duration.concentration
            input=inputs.createCheckboxInput rootId=partId }}
+        {{#if data.duration.concentration}}
+          {{ formField fields.duration.fields.ignoreDamageConcentration 
+                       value=data.duration.ignoreDamageConcentration
+                       label="DND5E.DURATION.FIELDS.duration.ignoreDamageConcentration.label"
+                       hint="DND5E.DURATION.FIELDS.duration.ignoreDamageConcentration.hint"
+                       localize=true
+                       input=inputs.createCheckboxInput 
+                       rootId=partId }}
+        {{/if}}
     </fieldset>
 </section>

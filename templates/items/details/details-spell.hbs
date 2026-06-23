@@ -86,6 +86,12 @@
     {{!-- Duration --}}
     {{> "dnd5e.field-duration" duration=system.duration fields=fields.duration.fields data=source.duration
         durationUnits=durationUnits inputs=inputs }}
+
+    {{!-- Ignore Concentration Checks from Damage --}}
+    {{#if system.duration.concentration}}
+    {{ formField fields.duration.fields.ignoreDamageConcentration value=source.duration.ignoreDamageConcentration label="DND5E.DURATION.FIELDS.duration.ignoreDamageConcentration.label"
+        hint="DND5E.DURATION.FIELDS.duration.ignoreDamageConcentration.hint" localize=true input=inputs.createCheckboxInput rootId=partId }}
+    {{/if}}
 </fieldset>
 
 {{> "dnd5e.field-targets" target=system.target fields=fields.target.fields data=source.target inputs=inputs

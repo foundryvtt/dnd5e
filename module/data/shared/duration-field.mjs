@@ -1,7 +1,7 @@
 import { formatTime, prepareFormulaValue } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 
-const { SchemaField, StringField } = foundry.data.fields;
+const { SchemaField, StringField, BooleanField } = foundry.data.fields;
 
 /**
  * @import { ActivityRollData, ItemRollData } from "../../documents/_types.mjs";
@@ -16,6 +16,11 @@ export default class DurationField extends SchemaField {
       value: new FormulaField({ deterministic: true }),
       units: new StringField({ required: true, blank: false, initial: "inst" }),
       special: new StringField(),
+      ignoreDamageConcentration: new BooleanField({
+        required: true,
+        label: "DND5E.DURATION.FIELDS.duration.ignoreDamageConcentration.label",
+        hint: "DND5E.DURATION.FIELDS.duration.ignoreDamageConcentration.hint"
+      }),
       ...fields
     };
     super(fields, options);

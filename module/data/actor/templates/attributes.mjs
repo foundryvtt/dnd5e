@@ -621,6 +621,16 @@ export default class AttributesFields {
     changes.total = changes.hp + changes.temp;
     if ( !Number.isInteger(changes.total) || (changes.total === 0) ) return;
 
+    if (this.parent?.concentration?.effects.size > 0) {
+      for (const effect of this.parent?.concentration?.effects) {
+        if (effect.getFlag("dnd5e", "ignoreDamageConcentration") === true) {
+          options.dnd5e ??= {};
+          options.dnd5e.concentrationCheck = false;
+          break;
+        }
+      }
+    }
+
     this.parent._displayTokenEffect(changes);
     if ( !game.settings.get("dnd5e", "disableConcentration") && (userId === game.userId)
       && (options.dnd5e?.concentrationCheck !== false)

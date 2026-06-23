@@ -2366,6 +2366,10 @@
         "label": "Concentration",
         "hint": "Creature must maintain concentration while active."
       },
+      "ignoreDamageConcentration": {
+        "label": "Unbreakable Concentration",
+        "hint": "If checked, damage taken while concentrating on this spell does not require a concentration saving throw."
+      },
       "override": {
         "label": "Override Duration",
         "hint": "Use these duration values instead of the item's when using this activity."

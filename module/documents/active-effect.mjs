@@ -707,7 +707,8 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
         item: {
           type: item.type, id: item.id, uuid: item.uuid,
           data: !item.actor.items.has(item.id) ? item.toObject() : undefined
-        }
+        },
+        ignoreDamageConcentration: activity.duration.ignoreDamageConcentration === true
       },
       origin: item.uuid,
       statuses: [statusEffect.id].concat(statusEffect.statuses ?? [])
