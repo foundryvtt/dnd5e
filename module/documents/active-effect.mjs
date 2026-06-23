@@ -156,6 +156,13 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  get isExpiryTrackable() {
+    return super.isExpiryTrackable && !this.getFlag("dnd5e", "isTemporary");
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Retrieve the source Actor or Item, or null if it could not be determined.
    * @returns {Promise<Actor5e|Item5e|null>}
@@ -596,7 +603,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
     const actor = this.isAppliedEnchantment ? this.parent.parent : this.parent;
     if ( !(actor instanceof Actor) || !this.start?.combat?.started ) return;
-    const { units, value, expiry } = this.duration;
+    const { units, expiry } = this.duration;
 
     // Default combat-duration expiry to turnStart to avoid effect expiry at round turnover
     if ( !expiry && (units === "rounds") ) {
@@ -605,16 +612,12 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     }
 
     // Convert start/end of source/target next turn expiries to start/end expiries with the proper combatant
-    // (default for source, combatant of actor it's applied to for target) and proper duration
+    // (default for source, combatant of actor it's applied to for target) and null duration
     if ( !this.constructor.PSEUDO_EXPIRIES.has(expiry) ) return;
-    const effectUpdate = {"system.specialDuration": expiry, duration: {}};
+    const effectUpdate = {"system.specialDuration": expiry, duration: {value: null}};
     const relevantActor = expiry.startsWith("target") ? actor : fromUuidSync(this.origin).actor;
     const combatant = this.start.combat.getCombatantsByActor(relevantActor)[0];
     if ( combatant && (combatant.turnNumber !== null) ) effectUpdate.start = { combatant: combatant.id };
-    if ( combatant ) {
-      const decreaseDuration = combatant.turnNumber > this.start.combat.turn;
-      if ( decreaseDuration ) effectUpdate.duration.value = value - 1;
-    }
     if ( ["targetEnd", "sourceEnd"].includes(expiry) ) effectUpdate.duration.expiry = "turnEnd";
     else effectUpdate.duration.expiry = "turnStart";
     this.updateSource(effectUpdate);
@@ -658,8 +661,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     if ( this.constructor.PSEUDO_EXPIRIES.has(newExpiry) ) {
       foundry.utils.mergeObject(changed, {
         duration: {
-          value: 1,
-          units: "rounds"
+          value: null
         }
       });
     }
@@ -730,6 +732,20 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   _displayScrollingStatus(enabled) {
     if ( this.isConcealed ) return;
     super._displayScrollingStatus(enabled);
+  }
+
+  /* -------------------------------------------- */
+  /*  Expiration                                  */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  isExpiryEvent(event, context) {
+    const shouldExpire = super.isExpiryEvent(event, context);
+    if ( !shouldExpire || !this.system.specialDuration || (event !== "turnEnd") ) return shouldExpire;
+
+    // If "End of Source/Target turn"-expiry effect was created on the currently-ending turn, do not yet expire
+    if ( (this.start?.round === context.round) && (this.start?.turn === context.turn) ) return false;
+    return shouldExpire;
   }
 
   /* -------------------------------------------- */
