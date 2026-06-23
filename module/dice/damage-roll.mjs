@@ -2,7 +2,9 @@ import DamageRollConfigurationDialog from "../applications/dice/damage-configura
 import { areKeysPressed } from "../utils.mjs";
 import BasicRoll from "./basic-roll.mjs";
 
-const { DiceTerm, FunctionTerm, NumericTerm, OperatorTerm, ParentheticalTerm, StringTerm } = foundry.dice.terms;
+const {
+  DiceTerm, FunctionTerm, NumericTerm, OperatorTerm, ParentheticalTerm, RollTerm, StringTerm
+} = foundry.dice.terms;
 
 /**
  * @import { CriticalDamageConfiguration, DamageRollOptions } from "./_types.mjs";
@@ -28,6 +30,14 @@ export default class DamageRoll extends BasicRoll {
 
   /** @inheritDoc */
   static DefaultConfigurationDialog = DamageRollConfigurationDialog;
+
+  /* -------------------------------------------- */
+
+  /**
+   * Operators that bind more strongly than additive operators.
+   * @type {Set<string>}
+   */
+  static #BINDING_OPERATORS = new Set(["*", "/", "%"]);
 
   /* -------------------------------------------- */
   /*  Static Construction                         */
@@ -160,76 +170,27 @@ export default class DamageRoll extends BasicRoll {
   configureDamage({ critical={} }={}) {
     critical = foundry.utils.mergeObject(critical, this.options.critical ?? {}, { inplace: false });
 
-    // Remove previous critical bonus damage
-    this.terms = this.terms.filter(t => !t.options.criticalBonusDamage && !t.options.criticalFlatBonus);
+    // Rebuild the term list from the pristine, post-preprocess formula captured on the first call, so that re-running
+    // this method (e.g. toggling critical in the damage dialog) always starts from the same base rather than
+    // compounding transforms on top of an already-modified list.
+    this.options.baseFormula ??= this._formula;
+    this.terms = this.constructor.parse(this.options.baseFormula, this.data);
 
-    const flatBonus = new Map();
-    let extraTerms = [];
-    for ( let [i, term] of this.terms.entries() ) {
-      if ( !(term instanceof OperatorTerm )) {
-        if ( term instanceof DiceTerm && term._number instanceof Roll ) {
-          // Complex number term.
-          if ( !term._number.isDeterministic ) continue;
-          if ( !term._number._evaluated ) term._number.evaluateSync();
-        }
-        if ( term instanceof DiceTerm || ( term instanceof NumericTerm && critical.multiplyNumeric ) ) {
-          term.options.baseNumber = term.options.baseNumber ?? term.number; // Reset back
-          term.number = term.options.baseNumber;
-        }
-        if ( this.isCritical ) {
-          term.options.critical = true;
-          if ( term instanceof NumericTerm ) {
-            if ( critical.multiplyNumeric ) {
-              // Multiply numeric terms
-              term.number *= (critical.multiplier ?? 2);
-            }
-          } else {
-            let cm = critical.multiplier ?? 2;
-            let cb = (critical.bonusDice && (i === 0)) ? critical.bonusDice : 0;
-
-            // Powerful critical - add maximized damage dice and reset term alterations
-            if ( critical.powerfulCritical ) {
-              const bonus = Roll.create(term.formula).evaluateSync({ maximize: true }).total * (Math.max(1, cm-1) + cb);
-              if ( bonus > 0 ) {
-                const flavor = term.flavor?.toLowerCase().trim() ?? _loc("DND5E.PowerfulCritical");
-                flatBonus.set(flavor, (flatBonus.get(flavor) ?? 0) + bonus);
-              }
-              cm = 1;
-              cb = 0;
-            }
-
-            if ( term instanceof DiceTerm && !term.modifiers.length ) {
-              // Alter the damage dice term
-              term.alter(cm, cb);
-            } else if ( !term.isDeterministic ) {
-              // Complex terms are added
-              for ( let i = 0; i < cm - 1 + cb; i++ ) {
-                extraTerms.push(new OperatorTerm({ operator: "+" }));
-                extraTerms.push(...Roll.create(term.formula).terms);
-              }
-            }
-          }
-        }
+    if ( this.isCritical ) {
+      const newTerms = [];
+      for ( const [i, term] of this.terms.entries() ) {
+        if ( term instanceof OperatorTerm ) newTerms.push(term);
+        else newTerms.push(...this.#applyCriticalTerm(term, critical, i));
       }
-    }
 
-    // Add powerful critical bonus
-    if ( critical.powerfulCritical && flatBonus.size ) {
-      for ( const [type, number] of flatBonus.entries() ) {
-        this.terms.push(new OperatorTerm({ operator: "+", options: { criticalFlatBonus: true } }));
-        this.terms.push(new NumericTerm({ number, options: { flavor: type, criticalFlatBonus: true } }));
+      // Add extra, unmodified critical damage.
+      if ( critical.bonusDamage ) {
+        const bonusTerms = new Roll(critical.bonusDamage, this.data).terms;
+        if ( !(bonusTerms[0] instanceof OperatorTerm) ) newTerms.push(new OperatorTerm({ operator: "+" }));
+        newTerms.push(...bonusTerms);
       }
-    }
 
-    // Add extra critical damage term
-    if ( this.isCritical && critical.bonusDamage ) {
-      extraTerms = extraTerms.concat(new Roll(critical.bonusDamage, this.data).terms);
-    }
-
-    if (extraTerms.length) {
-      if ( !(extraTerms[0] instanceof OperatorTerm) ) extraTerms.unshift(new OperatorTerm({ operator: "+" }));
-      extraTerms.forEach(t => t.options.criticalBonusDamage = true);
-      this.terms.push(...extraTerms);
+      this.terms = newTerms;
     }
 
     // Re-compile the underlying formula
@@ -237,5 +198,95 @@ export default class DamageRoll extends BasicRoll {
 
     // Mark configuration as complete
     this.options.configured = true;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Apply critical scaling to a single non-operator term, mutating it in place where possible and returning the
+   * term(s) that should occupy its slot.
+   * @param {RollTerm} term                          The term to scale.
+   * @param {CriticalDamageConfiguration} critical   The resolved critical configuration.
+   * @param {number} index                           Index of the term within this.terms.
+   * @returns {RollTerm[]}                           The term, plus any copies or bonuses added alongside it.
+   */
+  #applyCriticalTerm(term, critical, index) {
+    // If a dice term's count is itself a roll, flatten a deterministic one to a plain integer so it scales and clones
+    // cleanly. A random count is left as a roll: a plain die falls through to alter(), which multiplies the count roll
+    // in place (rolled once, then doubled), and a modified die is left untouched, since duplicating it would need the
+    // rolled count shared across the copies, which cannot be done synchronously.
+    if ( (term instanceof DiceTerm) && (term._number instanceof Roll) ) {
+      if ( term._number.isDeterministic ) term.number = term._number.evaluateSync().total;
+      else if ( term.modifiers.length ) return [term];
+    }
+
+    term.options.critical = true;
+
+    // Numeric terms are only multiplied when configured to do so.
+    if ( term instanceof NumericTerm ) {
+      if ( critical.multiplyNumeric ) term.number *= (critical.multiplier ?? 2);
+      return [term];
+    }
+
+    let cm = critical.multiplier ?? 2;
+    let cb = (critical.bonusDice && !index) ? critical.bonusDice : 0;
+
+    // Powerful critical replaces the extra dice with their maximized value, added as a flat bonus.
+    if ( critical.powerfulCritical ) {
+      const bonus = Roll.create(term.formula).evaluateSync({ maximize: true }).total * (Math.max(1, cm - 1) + cb);
+      if ( bonus <= 0 ) return [term];
+      const flavor = term.flavor?.toLowerCase().trim() ?? _loc("DND5E.PowerfulCritical");
+      return this.#placeCritical(term, [new NumericTerm({ number: bonus, options: { flavor } })], index);
+    }
+
+    // For RAW criticals without modifiers we can double the dice with alter.
+    if ( (term instanceof DiceTerm) && !term.modifiers.length ) {
+      term.alter(cm, cb);
+      return [term];
+    }
+
+    // Modified or complex terms are duplicated and placed via #placeCritical.
+    const copies = (cm - 1) + cb;
+    if ( !term.isDeterministic && (copies > 0) ) {
+      const clones = Array.from({ length: copies }, () => RollTerm.fromData(foundry.utils.deepClone(term.toJSON())));
+      return this.#placeCritical(term, clones, index);
+    }
+
+    return [term];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Position a critical term together with its extra copies or bonuses. Additive terms are spliced inline carrying the
+   * term's sign, and a term bound by a higher-precedence operator (*, /, %) is wrapped in a parenthetical so that
+   * operator applies to the whole group. The shared damage type is carried onto any wrapper because chunkTerms does
+   * not introspect parentheticals.
+   * @param {RollTerm} term      The original critical term.
+   * @param {RollTerm[]} extras  Additional copies or bonus terms to place alongside it.
+   * @param {number} index       Index of the term within this.terms.
+   * @returns {RollTerm[]}       The terms that should occupy the original term's slot.
+   */
+  #placeCritical(term, extras, index) {
+    const bound = t => (t instanceof OperatorTerm) && DamageRoll.#BINDING_OPERATORS.has(t.operator);
+    const prev = this.terms[index - 1];
+    const next = this.terms[index + 1];
+
+    // Case 1 - Bound by a higher-precedence operator. Wrap so it applies to the whole group. The wrapper is the
+    // canonical carrier of the group's damage type (chunkTerms reads it there, as it does not recurse into
+    // parentheticals), so move the term's options onto the wrapper and clear the inner flavors to avoid ugly display.
+    if ( bound(prev) || bound(next) ) {
+      const options = foundry.utils.deepClone(term.options);
+      const group = [term];
+      for ( const extra of extras ) group.push(new OperatorTerm({ operator: "+" }), extra);
+      for ( const t of group ) t.options.flavor = "";
+      return [ParentheticalTerm.fromTerms(group, options)];
+    }
+
+    // Case 2 - Additive. Splice inline, carrying the term's sign.
+    const sign = (prev instanceof OperatorTerm) ? prev.operator : "+";
+    const placed = [term];
+    for ( const extra of extras ) placed.push(new OperatorTerm({ operator: sign }), extra);
+    return placed;
   }
 }
