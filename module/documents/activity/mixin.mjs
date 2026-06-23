@@ -1140,8 +1140,7 @@ export default function ActivityMixin(Base) {
 
       const toCreate = [];
       for ( const behavior of behaviors ) {
-        const model = new CONFIG.DND5E.activityBehaviorTypes[behavior.type].model(behavior.config);
-        const data = model.createBehaviorData(activity);
+        const data = behavior.config.createBehaviorData(activity);
         if ( !data ) continue;
         data.name ??= behavior.name;
         toCreate.push(data);

@@ -1,3 +1,5 @@
+import { createCheckboxInput } from "../../applications/fields.mjs";
+
 const PATH = Symbol("path");
 const SCHEMA = Symbol("schema");
 

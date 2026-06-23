@@ -294,10 +294,9 @@ export default class ActivitySheet extends PseudoDocumentSheet {
         .map(data => {
           const source = context.source.behaviors[data._index];
           if ( !source ) return null;
-          const instance = new CONFIG.DND5E.activityBehaviorTypes[source.type].model(source.config);
           const ctx = {
             data, source,
-            additionalFields: instance.generateFields(source.config, { prefix: `behaviors.${data._index}.config.` }),
+            additionalFields: data.config.generateFields(source.config, { prefix: `behaviors.${data._index}.config.` }),
             additionalSettings: "systems/dnd5e/templates/activity/parts/activity-behavior-settings.hbs",
             collapsed: this.expandedSections.get(`behaviors.${data._id}`) ? "" : "collapsed",
             config: CONFIG.DND5E.activityBehaviorTypes[data.type],
