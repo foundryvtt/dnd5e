@@ -61,7 +61,6 @@ Hooks.once("init", function() {
   // Record Configuration Values
   CONFIG.DND5E = DND5E;
   CONFIG.ActiveEffect.documentClass = documents.ActiveEffect5e;
-  CONFIG.ActiveEffect.legacyTransferral = false;
   CONFIG.Actor.collection = dataModels.collection.Actors5e;
   CONFIG.Actor.documentClass = documents.Actor5e;
   CONFIG.Adventure.documentClass = documents.Adventure5e;
@@ -125,6 +124,7 @@ Hooks.once("init", function() {
   CONFIG.Dice.rolls = [dice.BasicRoll, dice.D20Roll, dice.DamageRoll];
 
   // Hook up system data types
+  Object.assign(CONFIG.ActiveEffect.changeTypes, DND5E.activeEffectChangeTypes);
   Object.assign(CONFIG.ActiveEffect.dataModels, dataModels.activeEffect.config);
   CONFIG.Actor.dataModels = dataModels.actor.config;
   CONFIG.ChatMessage.dataModels = dataModels.chatMessage.config;

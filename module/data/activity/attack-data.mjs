@@ -1,4 +1,5 @@
 import simplifyRollFormula from "../../dice/simplify-roll-formula.mjs";
+import AppliedRules from "../../documents/applied-rules.mjs";
 import { convertLength, formatLength, formatNumber, simplifyBonus } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import DamageField from "../shared/damage-field.mjs";
@@ -257,7 +258,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
    * @returns {{ data: object, parts: string[] }}
    */
   getAttackData({ ammunition, attackMode, situational }={}) {
-    const rollData = this.getRollData();
+    const rollData = this.getRollData({ roll: { attackMode } });
     if ( this.attack.flat ) return CONFIG.Dice.BasicRoll.constructParts({ toHit: this.attack.bonus }, rollData);
 
     const weapon = this.item.system;
@@ -269,6 +270,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
       weaponMagic: weapon.magicAvailable ? weapon.magicalBonus : null,
       ammoMagic: ammo?.magicAvailable ? ammo.magicalBonus : null,
       actorBonus: this.actor?.system.bonuses?.[this.getActionType(attackMode)]?.attack,
+      ruleBonus: AppliedRules.collect("attack:bonus", this.actor, this.item).filterWith(rollData).toFormula(),
       situational
     }, rollData);
 

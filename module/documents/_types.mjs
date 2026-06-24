@@ -142,6 +142,12 @@
  * @property {object} activity    Object containing the activity's data.
  * @property {object} [consumed]  Information on what resources the activity's activation consumed.
  * @property {number} mod         The ability modifier value used by the activity.
+ * @property {object} [roll]      Data describing a specific roll being performed.
+ */
+
+/**
+ * @typedef {RollDataOptions} ActivityRollDataOptions
+ * @property {object} [roll]  Changes to the roll object within the activity's roll data.
  */
 
 /**

@@ -401,6 +401,17 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /* -------------------------------------------- */
 
   /**
+   * Apply one of the rule active effect change types.
+   * @type {ActiveEffectChangeHandler}
+   */
+  static _applyChangeRule(targetDoc, change, options) {
+    if ( !targetDoc.appliedRules ) return;
+    targetDoc.appliedRules.set(change);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Modify the provided change according to a shim an emit a warning if required.
    * @param {EffectChangeData} change  The change being applied.
    * @returns {EffectChangeData}
@@ -480,7 +491,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * @internal
    */
   _checkCondition(change, conditionData) {
-    if ( conditionData ) {
+    if ( conditionData && !CONFIG.ActiveEffect.changeTypes[change.type]?.skipConditions ) {
       if ( this.system.conditions?.check(conditionData) === false ) return false;
       if ( change.conditions?.check(conditionData) === false ) return false;
     }
