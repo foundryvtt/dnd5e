@@ -9,7 +9,6 @@
     {{#if hasEffectsTab}}
     <multi-select name="selectedLocalEffects" class="hidden-tags">{{ selectOptions allEnchantments }}</multi-select>
     {{/if}}
-    <document-tags name="selectedRemoteEffects" class="hidden-tags" type="ActiveEffect"></document-tags>
     <ul class="separated-list effects-list flexcol unlist">
         {{#each changes}}
         <li class="flexcol" data-index="{{ @index }}" data-profile-id="{{ data._id }}" data-effect-id="{{ effect.id }}">
@@ -21,6 +20,8 @@
         </li>
         {{/each}}
     </ul>
+    <document-tags name="selectedRemoteEffects" class="hidden-tags drop-area" type="ActiveEffect"
+                   data-drop-hint="{{ localize "DND5E.ADVANCEMENT.ModifyItem.DropHint" }}"></document-tags>
 </fieldset>
 
 {{#*inline ".change"}}
