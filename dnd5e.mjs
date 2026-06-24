@@ -61,6 +61,7 @@ Hooks.once("init", function() {
   // Record Configuration Values
   CONFIG.DND5E = DND5E;
   CONFIG.ActiveEffect.documentClass = documents.ActiveEffect5e;
+  Object.assign(CONFIG.ActiveEffect.expiryEvents, CONFIG.DND5E.expiryEvents);
   CONFIG.Actor.collection = dataModels.collection.Actors5e;
   CONFIG.Actor.documentClass = documents.Actor5e;
   CONFIG.Adventure.documentClass = documents.Adventure5e;

@@ -2410,6 +2410,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     await this.deleteEmbeddedDocuments("Item", result.deleteItems, { isRest: true });
     await this.updateEmbeddedDocuments("Item", result.updateItems, { isRest: true });
 
+    // Expire active effects
+    const restConfig = CONFIG.DND5E.restTypes[config.type ?? "long"];
+    for ( const event of restConfig.expiryEvents ?? [] ) {
+      await ActiveEffect.registry.refresh(event, { actors: new Set([this]) });
+    }
+
     // Advance the game clock
     if ( config.advanceTime && (config.duration > 0) && game.user.isGM ) await game.time.advance(60 * config.duration);
 
