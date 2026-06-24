@@ -25,7 +25,7 @@ export default class LanguagesConfig extends TraitsConfig {
 
   /** @override */
   get title() {
-    return game.i18n.localize("DND5E.Languages");
+    return _loc("DND5E.Languages");
   }
 
   /* -------------------------------------------- */

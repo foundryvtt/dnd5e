@@ -437,13 +437,13 @@ export default class CompendiumBrowser extends Application5e {
     context.displaySelection = this.displaySelection;
     context.invalid = (value < (min || -Infinity)) || (value > (max || Infinity));
     const suffix = this.#selectionLocalizationSuffix;
-    context.summary = suffix ? game.i18n.format(
+    context.summary = suffix ? _loc(
       `DND5E.CompendiumBrowser.Selection.Summary.${suffix}`, { max, min, value }
     ) : value;
     const pr = getPluralRules();
-    context.invalidTooltip = game.i18n.format(`DND5E.CompendiumBrowser.Selection.Warning.${suffix}`, {
+    context.invalidTooltip = _loc(`DND5E.CompendiumBrowser.Selection.Warning.${suffix}`, {
       max, min, value,
-      document: game.i18n.localize(`DND5E.CompendiumBrowser.Selection.Warning.Document.${pr.select(max || min)}`)
+      document: _loc(`DND5E.CompendiumBrowser.Selection.Warning.Document.${pr.select(max || min)}`)
     });
     return context;
   }
@@ -551,8 +551,8 @@ export default class CompendiumBrowser extends Application5e {
             ...data,
             expandId: `${key}-${group}`,
             expanded: this.expandedSections.get(`${key}-${group}`) ?? !data.config.collapseGroup?.(group),
-            label: game.i18n.format("DND5E.CompendiumBrowser.Filters.Grouped", {
-              type: game.i18n.localize(data.label), group
+            label: _loc("DND5E.CompendiumBrowser.Filters.Grouped", {
+              type: _loc(data.label), group
             }),
             config: { ...data.config, choices }
           }));
@@ -631,7 +631,7 @@ export default class CompendiumBrowser extends Application5e {
     if ( game.user.isGM ) {
       frame.querySelector('[data-action="close"]').insertAdjacentHTML("beforebegin", `
         <button type="button" class="header-control fas fa-cog icon" data-action="configureSources"
-                data-tooltip aria-label="${game.i18n.localize("DND5E.CompendiumBrowser.Sources.Label")}"></button>
+                data-tooltip aria-label="${_loc("DND5E.CompendiumBrowser.Sources.Label")}"></button>
       `);
     }
     return frame;
@@ -966,9 +966,9 @@ export default class CompendiumBrowser extends Application5e {
     if ( (value < (min || -Infinity)) || (value > (max || Infinity)) ) {
       const suffix = this.#selectionLocalizationSuffix;
       const pr = getPluralRules();
-      throw new Error(game.i18n.format(`DND5E.CompendiumBrowser.Selection.Warning.${suffix}`, {
+      throw new Error(_loc(`DND5E.CompendiumBrowser.Selection.Warning.${suffix}`, {
         max, min, value,
-        document: game.i18n.localize(`DND5E.CompendiumBrowser.Selection.Warning.Document.${pr.select(max || min)}`)
+        document: _loc(`DND5E.CompendiumBrowser.Selection.Warning.Document.${pr.select(max || min)}`)
       }));
     }
 
@@ -1249,7 +1249,7 @@ export default class CompendiumBrowser extends Application5e {
     button.classList.add("open-compendium-browser");
     button.innerHTML = `
       <i class="fa-solid fa-book-open-reader" inert></i>
-      ${game.i18n.localize("DND5E.CompendiumBrowser.Action.Open")}
+      ${_loc("DND5E.CompendiumBrowser.Action.Open")}
     `;
     button.addEventListener("click", event => (new CompendiumBrowser()).render({ force: true }));
 

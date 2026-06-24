@@ -286,6 +286,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     SpellData.#migrateTarget(source);
     SpellData.#migratePreparation(source);
     SpellData.#migrateSourceItem(source);
+    return source;
   }
 
   /* -------------------------------------------- */
@@ -409,7 +410,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
       return obj;
     }, { all: [], vsm: [], tags: [] });
     labels.components.vsm = game.i18n.getListFormatter({ style: "narrow" }).format(labels.components.vsm);
-    labels.components.full = labels.materials ? game.i18n.format("DND5E.SpellComponentsMaterial", {
+    labels.components.full = labels.materials ? _loc("DND5E.SpellComponentsMaterial", {
       components: labels.components.vsm, materials: labels.materials
     }) : labels.components.vsm;
 
@@ -449,8 +450,8 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async getCardData(enrichmentOptions={}) {
-    const context = await super.getCardData(enrichmentOptions);
+  async getCardData(options) {
+    const context = await super.getCardData(options);
     context.isSpell = true;
     const { activation, components, duration, range, target } = this.parent.labels;
     context.properties = [components?.vsm, activation, duration, range, target].filter(_ => _);
@@ -495,8 +496,8 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
         this.parent.actor.spellcastingClasses[this.classIdentifier]?.spellcasting.ability
           ?? this.parent.actor.system.attributes?.spellcasting
       ]?.label?.toLowerCase();
-      if ( ability ) context.defaultAbility = game.i18n.format("DND5E.DefaultSpecific", { default: ability });
-      else context.defaultAbility = game.i18n.localize("DND5E.Default");
+      if ( ability ) context.defaultAbility = _loc("DND5E.DefaultSpecific", { default: ability });
+      else context.defaultAbility = _loc("DND5E.Default");
       context.spellcastingClasses = Object.entries(this.parent.actor.spellcastingClasses ?? {})
         .map(([value, cls]) => ({ value: `class:${value}`, label: cls.name }));
 
@@ -561,7 +562,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     ];
     context.scalarTarget = this.target.affects.type
       && (CONFIG.DND5E.individualTargetTypes[this.target.affects.type]?.scalar !== false);
-    context.affectsPlaceholder = game.i18n.localize(`DND5E.TARGET.Count.${
+    context.affectsPlaceholder = _loc(`DND5E.TARGET.Count.${
       this.target?.template?.type ? "Every" : "Any"}`);
     context.dimensions = this.target.template.dimensions;
     // TODO: Ensure this behaves properly with enchantments, will probably need source target data
@@ -643,7 +644,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     const tag = document.createElement("p");
     tag.classList.add("item-entry-tag");
     const classes = labels.classes;
-    tag.innerText = game.i18n.format(
+    tag.innerText = _loc(
       `DND5E.SPELL.Embed.Tag.${!this.level ? "Cantrip" : "Leveled"}${rulesVersion === "2014" ? "Legacy" : ""}`,
       {
         level: formatNumber(this.level),
@@ -652,9 +653,9 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
       }
     );
     if ( (rulesVersion === "2014") && this.properties.has("ritual") ) {
-      tag.innerText = game.i18n.format("DND5E.SPELL.Embed.Tag.Ritual", { levelSchool: tag.innerText });
+      tag.innerText = _loc("DND5E.SPELL.Embed.Tag.Ritual", { levelSchool: tag.innerText });
     } else if ( (rulesVersion === "2024") && classes?.length ) {
-      tag.innerText = game.i18n.format("DND5E.SPELL.Embed.Tag.Classes", {
+      tag.innerText = _loc("DND5E.SPELL.Embed.Tag.Classes", {
         classes: game.i18n.getListFormatter({ type: "unit" }).format(classes),
         levelSchool: tag.innerText
       });
@@ -662,7 +663,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     details.append(tag);
 
     let castingTime = rulesVersion === "2014" ? labels.legacyActivation : labels.ritualActivation;
-    if ( (this.activation.type === "reaction") && this.activation.condition ) castingTime = game.i18n.format(
+    if ( (this.activation.type === "reaction") && this.activation.condition ) castingTime = _loc(
       "DND5E.SPELL.Embed.CastingTimeTrigger", { castingTime, trigger: this.activation.condition }
     );
     const specifics = [
@@ -676,7 +677,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     for ( const [label, description] of specifics ) {
       const div = document.createElement("div");
       const dt = document.createElement("dt");
-      dt.innerText = game.i18n.localize(label);
+      dt.innerText = _loc(label);
       const dd = document.createElement("dd");
       dd.innerText = description;
       div.append(dt, dd);

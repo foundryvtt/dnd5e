@@ -31,7 +31,7 @@ export default class HitPointsConfig extends BaseConfigSheet {
 
   /** @override */
   get title() {
-    return game.i18n.localize("DND5E.HitPoints");
+    return _loc("DND5E.HitPoints");
   }
 
   /* -------------------------------------------- */
@@ -101,7 +101,7 @@ export default class HitPointsConfig extends BaseConfigSheet {
       const roll = await this.document.rollNPCHitPoints();
       this.submit({ updateData: { "system.attributes.hp.max": roll.total } });
     } catch(error) {
-      ui.notifications.error("DND5E.HPFormulaError", { localize: true });
+      ui.notifications.error("DND5E.HPFormulaError");
       throw error;
     }
   }

@@ -41,7 +41,7 @@ export default class ActivationField extends SchemaField {
       if ( this.activation.type in CONFIG.DND5E.timeUnits ) {
         scalar = formatTime(this.activation.value ?? 1, this.activation.type);
       }
-      else if ( config?.counted ) scalar = game.i18n.format(
+      else if ( config?.counted ) scalar = _loc(
         `${config.counted}.${getPluralRules().select(this.activation.value ?? 1)}`,
         { number: formatNumber(this.activation.value ?? 1) }
       );
@@ -51,7 +51,7 @@ export default class ActivationField extends SchemaField {
       this.activation.labels.legacy = scalar.toLowerCase();
       const formatter = game.i18n.getListFormatter({ type: "disjunction" });
       this.activation.labels.ritual = this.properties?.has?.("ritual")
-        ? formatter.format([this.activation.labels.simple, game.i18n.localize("DND5E.Ritual")])
+        ? formatter.format([this.activation.labels.simple, _loc("DND5E.Ritual")])
         : this.activation.labels.simple;
     }
 

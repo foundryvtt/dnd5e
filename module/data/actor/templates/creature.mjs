@@ -121,6 +121,7 @@ export default class CreatureTemplate extends CommonTemplate {
     super._migrateData(source);
     CreatureTemplate.#migrateSensesData(source);
     CreatureTemplate.#migrateToolData(source);
+    return source;
   }
 
   /* -------------------------------------------- */
@@ -265,6 +266,12 @@ export default class CreatureTemplate extends CommonTemplate {
       skillData.bonuses.check = `${skillData.bonuses.check ?? ""} + ${difference}`;
       skillData.bonus += difference;
       skillData.total += difference;
+    }
+
+    const isLegacy = game.settings.get("dnd5e", "rulesVersion") === "legacy";
+    if ( flags.remarkableAthlete
+      && CONFIG.DND5E.characterFlags.remarkableAthlete.skills.includes(skillId) && !isLegacy ) {
+      AdvantageModeField.setMode(this, `skills.${skillId}.roll.mode`, 1);
     }
 
     // Compute passive bonus

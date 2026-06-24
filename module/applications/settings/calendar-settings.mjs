@@ -69,6 +69,7 @@ export default class CalendarSettingsConfig extends BaseSettingsConfig {
       .map(([name, field]) => ({
         field,
         input: field instanceof BooleanField ? createCheckboxInput : undefined,
+        localize: !!field.choices,
         name: `calendarConfig.${name}`,
         value: data[name]
       }));
@@ -80,7 +81,7 @@ export default class CalendarSettingsConfig extends BaseSettingsConfig {
       enabledField.value = false;
       context.message = {
         level: "warn",
-        text: game.i18n.localize("DND5E.CALENDAR.Configuration.UnavailableMessage")
+        text: _loc("DND5E.CALENDAR.Configuration.UnavailableMessage")
       };
     }
 
@@ -119,18 +120,18 @@ export default class CalendarSettingsConfig extends BaseSettingsConfig {
         value: data.formatters.time
       }
     ];
-    context.legend = game.i18n.localize("DND5E.CALENDAR.Configuration.Preferences");
+    context.legend = _loc("DND5E.CALENDAR.Configuration.Preferences");
     if ( !CONFIG.DND5E.calendar.application ) {
       context.disabled = true;
       if ( !game.user.isGM ) context.message = {
         level: "warn",
-        text: game.i18n.localize("DND5E.CALENDAR.Configuration.UnavailableMessage")
+        text: _loc("DND5E.CALENDAR.Configuration.UnavailableMessage")
       };
     } else if ( !game.settings.get("dnd5e", "calendarConfig")?.enabled ) {
       context.disabled = !game.user.isGM;
       context.message = {
         level: "warn",
-        text: game.i18n.localize("DND5E.CALENDAR.Configuration.DisabledMessage")
+        text: _loc("DND5E.CALENDAR.Configuration.DisabledMessage")
       };
     }
     return context;

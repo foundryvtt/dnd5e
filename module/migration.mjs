@@ -9,7 +9,7 @@ import { formatIdentifier, log } from "./utils.mjs";
  */
 export async function migrateWorld({ bypassVersionCheck=false }={}) {
   const version = game.system.version;
-  const progress = ui.notifications.info("MIGRATION.5eBegin", {
+  const progress = ui.notifications.info("MIGRATION.DND5E.World.Begin", {
     console: false, format: { version }, permanent: true, progress: true
   });
   const { packs, packDocuments } = game.packs.reduce((obj, pack) => {
@@ -191,7 +191,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
   // Set the migration as complete
   game.settings.set("dnd5e", "systemMigrationVersion", game.system.version);
   progress.element?.classList.add(hasErrors ? "warning" : "success");
-  progress.update({ message: "MIGRATION.5eComplete", format: { version }, pct: 1 });
+  progress.update({ message: "MIGRATION.DND5E.World.Complete", format: { version }, pct: 1 });
 }
 
 /* -------------------------------------------- */
@@ -229,6 +229,13 @@ function _shouldMigrateCompendium(pack) {
 export async function migrateCompendium(pack, { bypassVersionCheck=false, incrementProgress, strict=false }={}) {
   const documentName = pack.documentName;
   if ( !["Actor", "Item", "Scene"].includes(documentName) ) return;
+
+  const format = { compendium: pack.collection, version: game.system.version };
+  const progress = ui.notifications.info("MIGRATION.DND5E.Compendium.Migrate", {
+    console: false, format, permanent: true, progress: true
+  });
+  let hasErrors = false;
+  let migrated = 0;
 
   const migrationData = await getMigrationData();
 
@@ -278,20 +285,29 @@ export async function migrateCompendium(pack, { bypassVersionCheck=false, increm
       catch(err) {
         err.message = `Failed dnd5e system migration for document ${doc.name} in pack ${pack.collection}: ${err.message}`;
         console.error(err);
-        if ( strict ) throw err;
+        hasErrors = true;
+        if ( strict ) {
+          progress.element?.classList.add("error");
+          progress.update({ format, message: "MIGRATION.DND5E.Compendium.Failed" });
+          throw err;
+        }
       }
 
       finally {
         incrementProgress?.();
+        progress.update({ pct: ++migrated / pack.index.size });
       }
     }
 
     log(`Migrated all ${documentName} documents from Compendium ${pack.collection}`);
   } finally {
     // Apply the original locked status for the pack
-    await pack.configure({locked: wasLocked});
+    await pack.configure({ locked: wasLocked });
     game.compendiumArt.enabled = true;
   }
+
+  progress.element?.classList.add(hasErrors ? "warning" : "success");
+  progress.update({ format, message: "MIGRATION.DND5E.Compendium.Migrate", pct: 1 });
 }
 
 /* -------------------------------------------- */
@@ -340,9 +356,11 @@ export function reparentCompendiums(from, to) {
  * @param {boolean} [options.bypassVersionCheck=false]  Bypass certain migration restrictions gated behind system
  *                                                      version stored in item stats.
  * @param {boolean} [options.migrate=true]  Also perform a system migration before refreshing.
+ * @param {string} [options.package]        Only update compendiums belonging to this package.
  */
-export async function refreshAllCompendiums(options) {
+export async function refreshAllCompendiums(options={}) {
   for ( const pack of game.packs ) {
+    if ( options.package && (options.package !== pack.metadata.packageName) ) continue;
     await refreshCompendium(pack, options);
   }
 }
@@ -369,21 +387,31 @@ export async function refreshCompendium(pack, { bypassVersionCheck, migrate=true
     }
   }
 
+  const format = { compendium: pack.collection };
+  const progress = ui.notifications.info("MIGRATION.DND5E.Compendium.Refresh", {
+    console: false, format, permanent: true, progress: true
+  });
+  let migrated = 0;
+
   game.compendiumArt.enabled = false;
   const DocumentClass = CONFIG[pack.documentName].documentClass;
   const wasLocked = pack.locked;
-  await pack.configure({locked: false});
+  await pack.configure({ locked: false });
 
-  ui.notifications.info(`Beginning to refresh Compendium ${pack.collection}`);
   const documents = await pack.getDocuments();
   for ( const doc of documents ) {
     const data = doc.toObject();
     await doc.delete();
     await DocumentClass.create(data, {keepId: true, keepEmbeddedIds: true, pack: pack.collection});
+    log(`Refreshed ${pack.documentName} document ${doc.name} in Compendium ${pack.collection}`);
+    progress.update({ pct: ++migrated / pack.index.size });
   }
-  await pack.configure({locked: wasLocked});
+
+  await pack.configure({ locked: wasLocked });
   game.compendiumArt.enabled = true;
-  ui.notifications.info(`Refreshed all documents from Compendium ${pack.collection}`);
+
+  progress.element?.classList.add("success");
+  progress.update({ format, message: "MIGRATION.DND5E.Compendium.Refresh", pct: 1 });
 }
 
 /* -------------------------------------------- */
@@ -711,8 +739,11 @@ export function migrateEffectData(effect, migrationData, { parent }={}) {
   const updateData = {};
   _migrateDocumentIcon(effect, updateData, {...migrationData, field: "img"});
   _migrateEffectArmorClass(effect, updateData);
+  if ( foundry.utils.isNewerVersion("6.0.0", effect._stats?.systemVersion ?? parent?._stats?.systemVersion) ) {
+    _migrateEffectMagical(effect, parent, updateData);
+  }
   if ( foundry.utils.isNewerVersion("3.1.0", effect._stats?.systemVersion ?? parent?._stats?.systemVersion) ) {
-    _migrateTransferEffect(effect, parent, updateData);
+    _migrateEffectTransfer(effect, parent, updateData);
   }
   return updateData;
 }
@@ -1013,6 +1044,42 @@ function _migrateEffectArmorClass(effect, updateData) {
 /* -------------------------------------------- */
 
 /**
+ * Marks effects on spells & items marked with "Magical" property as magical.
+ * @param {object} effect      Effect data to migrate.
+ * @param {object} parent      The parent of this effect.
+ * @param {object} updateData  Existing update to expand upon.
+ * @returns {object}           The updateData to apply.
+ */
+function _migrateEffectMagical(effect, parent, updateData) {
+  if ( isSpellOrScroll(parent) || parent.system?.properties?.includes("mgc") ) updateData["system.magical"] = true;
+  return updateData;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Disable transfer on effects on spell items
+ * @param {object} effect      Effect data to migrate.
+ * @param {object} parent      The parent of this effect.
+ * @param {object} updateData  Existing update to expand upon.
+ * @returns {object}           The updateData to apply.
+ */
+function _migrateEffectTransfer(effect, parent, updateData) {
+  if ( !effect.transfer ) return updateData;
+  if ( !isSpellOrScroll(parent) ) return updateData;
+
+  updateData.transfer = false;
+  updateData.disabled = true;
+  updateData["duration.startTime"] = null;
+  updateData["duration.startRound"] = null;
+  updateData["duration.startTurn"] = null;
+
+  return updateData;
+}
+
+/* -------------------------------------------- */
+
+/**
  * Move `uses.value` to `uses.spent` for items.
  * @param {Item5e} item        Full item instance.
  * @param {object} itemData    Item data to migrate.
@@ -1027,28 +1094,6 @@ function _migrateItemUses(item, itemData, updateData, flags) {
     flags.persistSourceMigration = true;
   }
   if ( value !== undefined ) updateData["flags.dnd5e.migratedUses"] = _del;
-}
-
-/* -------------------------------------------- */
-
-/**
- * Disable transfer on effects on spell items
- * @param {object} effect      Effect data to migrate.
- * @param {object} parent      The parent of this effect.
- * @param {object} updateData  Existing update to expand upon.
- * @returns {object}           The updateData to apply.
- */
-function _migrateTransferEffect(effect, parent, updateData) {
-  if ( !effect.transfer ) return updateData;
-  if ( !isSpellOrScroll(parent) ) return updateData;
-
-  updateData.transfer = false;
-  updateData.disabled = true;
-  updateData["duration.startTime"] = null;
-  updateData["duration.startRound"] = null;
-  updateData["duration.startTurn"] = null;
-
-  return updateData;
 }
 
 /* -------------------------------------------- */

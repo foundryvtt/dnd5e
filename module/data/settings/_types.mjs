@@ -9,7 +9,9 @@
 
 /**
  * @typedef CalendarConfigSettingData
- * @property {boolean} enabled         Enable the calendar system for all users.
+ * @property {boolean} enabled                       Enable the calendar system for all users.
+ * @property {""|"calendar"|"manual"} dailyRecovery  How daily recovery uses are handled. A blank value is automatic
+ *                                                   based on the calendar being enabled.
  */
 
 /**
@@ -56,6 +58,12 @@
  * @property {string} title     The pack title.
  * @property {string} id        The pack ID.
  * @property {boolean} checked  True if the pack is included.
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef {"none"|"createCombatants"|"rollInitiative"} EncounterPlacementSettingData
  */
 
 /* -------------------------------------------- */

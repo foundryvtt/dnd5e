@@ -95,6 +95,19 @@ export function registerSystemSettings() {
     }
   });
 
+  // Sense-to-token vision sync
+  game.settings.register("dnd5e", "senseVisionSync", {
+    name: "SETTINGS.DND5E.AUTOMATION.SenseVision.Name",
+    hint: "SETTINGS.DND5E.AUTOMATION.SenseVision.Hint",
+    scope: "world",
+    config: true,
+    default: true,
+    type: Boolean,
+    onChange: () => {
+      if ( canvas?.ready ) canvas.draw();
+    }
+  });
+
   // Allow rotating square templates
   game.settings.register("dnd5e", "gridAlignedSquareTemplates", {
     name: "SETTINGS.5eGridAlignedSquareTemplatesN",
@@ -308,7 +321,10 @@ export function registerSystemSettings() {
     scope: "world",
     config: false,
     type: CalendarConfigSetting,
-    onChange: () => dnd5e.ui.calendar?.onUpdateSettings?.()
+    onChange: () => {
+      dnd5e.bastion.initializeUI();
+      dnd5e.ui.calendar?.onUpdateSettings?.();
+    }
   });
 
   game.settings.register("dnd5e", "calendarPreferences", {
@@ -375,12 +391,44 @@ export function registerSystemSettings() {
     default: false
   });
 
+  game.settings.register("dnd5e", "encounterPlacementBehavior", {
+    name: "SETTINGS.DND5E.ENCOUNTERS.EncounterPlacementBehavior.Name",
+    hint: "SETTINGS.DND5E.ENCOUNTERS.EncounterPlacementBehavior.Hint",
+    scope: "world",
+    config: false,
+    default: "none",
+    type: String,
+    choices: {
+      none: "SETTINGS.DND5E.ENCOUNTERS.EncounterPlacementBehavior.None",
+      createCombatants: "SETTINGS.DND5E.ENCOUNTERS.EncounterPlacementBehavior.CreateCombatants",
+      rollInitiative: "SETTINGS.DND5E.ENCOUNTERS.EncounterPlacementBehavior.RollInitiative"
+    }
+  });
+
   game.settings.register("dnd5e", "initiativeDexTiebreaker", {
     name: "SETTINGS.DND5E.COMBAT.DexTiebreaker.Name",
     hint: "SETTINGS.DND5E.COMBAT.DexTiebreaker.Hint",
     scope: "world",
     config: false,
     default: false,
+    type: Boolean
+  });
+
+  game.settings.register("dnd5e", "initiativeGroupCombatants", {
+    name: "SETTINGS.DND5E.COMBAT.InitiativeGroupCombatants.Name",
+    hint: "SETTINGS.DND5E.COMBAT.InitiativeGroupCombatants.Hint",
+    scope: "world",
+    config: false,
+    default: true,
+    type: Boolean
+  });
+
+  game.settings.register("dnd5e", "initiativeGroupRoll", {
+    name: "SETTINGS.DND5E.COMBAT.InitiativeGroupRoll.Name",
+    hint: "SETTINGS.DND5E.COMBAT.InitiativeGroupRoll.Hint",
+    scope: "world",
+    config: false,
+    default: true,
     type: Boolean
   });
 
@@ -622,6 +670,14 @@ function cacheSettings() {
  * Register additional settings after modules have had a chance to initialize to give them a chance to modify choices.
  */
 export function registerDeferredSettings() {
+  game.settings.register("dnd5e", "defaultDocumentSubtypes", {
+    name: "Default Document Subtypes",
+    scope: "client",
+    config: false,
+    type: Object,
+    default: { Actor: game.user.isGM ? "npc" : "character", Item: "feat" }
+  });
+
   game.settings.register("dnd5e", "theme", {
     name: "SETTINGS.DND5E.THEME.Name",
     hint: "SETTINGS.DND5E.THEME.Hint",

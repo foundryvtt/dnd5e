@@ -158,20 +158,22 @@
     --control-active-background-color: rgb(0 0 0 / 45%);
   }
 
-  input, textarea, formula-input { --input-placeholder-color: var(--dnd5e-color-blue-gray-3); }
+  input, textarea, file-picker, formula-input, document-tags, string-tags {
+    --input-placeholder-color: var(--dnd5e-color-blue-gray-3);
+  }
 
-  input, select, formula-input {
+  input, select, file-picker, formula-input, document-tags, string-tags {
     --input-background-color: var(--dnd5e-color-blue-gray-2);
     --input-disabled-background-color: var(--dnd5e-color-dark-gray);
   }
 
-  input:not([type=range]), select, file-picker, formula-input {
+  input:not([type=range]), select, file-picker, formula-input, document-tags, string-tags {
     --input-border-color: var(--dnd5e-color-blue-gray-1);
     --input-hover-border-color: transparent;
   }
 
   fieldset.card {
-    input:not([type=range]), select, file-picker, formula-input {
+    input:not([type=range]), select, file-picker, formula-input, document-tags, string-tags {
       --input-background-color: var(--dnd5e-background-25);
     }
     .input-element-tags .tag {

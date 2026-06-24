@@ -40,7 +40,7 @@ export default class VehicleData extends CommonTemplate {
         ...AttributesFields.common,
         ac: new SchemaField({
           ...AttributesFields.armorClass,
-          calc: new StringField({ initial: "flat", label: "DND5E.ArmorClassCalculation" })
+          calc: new StringField({ initial: "flat", label: "DND5E.ARMORCLASS.Calculation.Label" })
         }, { label: "DND5E.ArmorClass" }),
         hp: new SchemaField({
           ...AttributesFields.hitPoints,
@@ -162,12 +162,14 @@ export default class VehicleData extends CommonTemplate {
   /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
+    AttributesFields._migrateArmorClass(source.attributes);
     AttributesFields._migrateInitiative(source.attributes);
     VehicleData.#migrateSource(source);
     VehicleData.#migrateMovement(source);
     VehicleData.#migrateType(source);
     VehicleData.#migrateCargoCapacity(source);
     VehicleData.#migrateActions(source);
+    return source;
   }
 
   /* -------------------------------------------- */
@@ -272,6 +274,7 @@ export default class VehicleData extends CommonTemplate {
     const { originalSaves } = this.parent.getOriginalStats();
 
     this.prepareAbilities({ rollData, originalSaves });
+    this.prepareCurrency();
     AttributesFields.prepareArmorClass.call(this, rollData);
     if ( this.attributes.ac.value ) {
       this.attributes.ac.motionless = this.attributes.ac.value - Math.max(0, this.abilities.dex?.mod ?? 0);

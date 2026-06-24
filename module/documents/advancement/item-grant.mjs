@@ -1,7 +1,6 @@
-import { filteredKeys } from "../../utils.mjs";
 import ItemGrantConfig from "../../applications/advancement/item-grant-config.mjs";
 import ItemGrantFlow from "../../applications/advancement/item-grant-flow-v2.mjs";
-import ItemGrantConfigurationData from "../../data/advancement/item-grant.mjs";
+import ItemGrantConfigurationData from "../../data/advancement/item-grant-data.mjs";
 import Advancement from "./advancement.mjs";
 
 /**
@@ -25,8 +24,8 @@ export default class ItemGrantAdvancement extends Advancement {
       order: 40,
       icon: "icons/sundries/books/book-open-purple.webp",
       typeIcon: "systems/dnd5e/icons/svg/item-grant.svg",
-      title: game.i18n.localize("DND5E.ADVANCEMENT.ItemGrant.Title"),
-      hint: game.i18n.localize("DND5E.ADVANCEMENT.ItemGrant.Hint"),
+      title: _loc("DND5E.ADVANCEMENT.ItemGrant.Title"),
+      hint: _loc("DND5E.ADVANCEMENT.ItemGrant.Hint"),
       apps: {
         config: ItemGrantConfig,
         flow: ItemGrantFlow
@@ -56,8 +55,13 @@ export default class ItemGrantAdvancement extends Advancement {
   /** @inheritDoc */
   summaryForLevel(level, { configMode=false }={}) {
     // Link to compendium items
-    if ( !this.value.added || configMode ) return this.configuration.items.filter(i => fromUuidSync(i.uuid))
-      .reduce((html, i) => html + dnd5e.utils.linkForUuid(i.uuid), "");
+    if ( !this.value.added || configMode ) return this.configuration.items
+      .map(i => [i, fromUuidSync(i.uuid)])
+      .filter(([, _]) => _)
+      .sort((lhs, rhs) => this.configuration.sorting === "m"
+        ? lhs[0].sort - rhs[0].sort
+        : lhs[1].name.localeCompare(rhs[1].name))
+      .reduce((html, [i]) => html + dnd5e.utils.linkForUuid(i.uuid), "");
 
     // Link to items on the actor
     else {
@@ -177,7 +181,7 @@ export default class ItemGrantAdvancement extends Advancement {
         items[item.flags.dnd5e?.sourceId ?? item._stats.compendiumSource ?? item.uuid] = item.toObject();
       }
       this.actor.items.delete(id);
-      added[`-=${id}`] = null;
+      added[id] = _del;
     }
 
     this.actor.reset();
@@ -199,8 +203,8 @@ export default class ItemGrantAdvancement extends Advancement {
   _validateItemType(item, { strict=true }={}) {
     if ( !item ) return false;
     if ( this.constructor.VALID_TYPES.has(item.type) ) return true;
-    const type = game.i18n.localize(CONFIG.Item.typeLabels[item.type]);
-    if ( strict ) throw new Error(game.i18n.format("DND5E.AdvancementItemTypeInvalidWarning", {type}));
+    const type = _loc(CONFIG.Item.typeLabels[item.type]);
+    if ( strict ) throw new Error(_loc("DND5E.AdvancementItemTypeInvalidWarning", {type}));
     return false;
   }
 }

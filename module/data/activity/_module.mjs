@@ -13,6 +13,7 @@ export {default as TeleportActivityData} from "./teleport-data.mjs";
 export {default as TransformActivityData} from "./transform-data.mjs";
 export {default as UtilityActivityData} from "./utility-data.mjs";
 
+export {default as AppliedBehaviorField} from "./fields/applied-behavior-field.mjs";
 export {default as AppliedEffectField} from "./fields/applied-effect-field.mjs";
 export {
   default as ConsumptionTargetsField, ConsumptionTargetData, ConsumptionError

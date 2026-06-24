@@ -1,3 +1,4 @@
+import { getHumanReadableAttributeLabel } from "../utils.mjs";
 import Application5e from "./api/application.mjs";
 
 /**
@@ -76,7 +77,7 @@ export default class PropertyAttribution extends Application5e {
       );
     }
     return {
-      caption: game.i18n.localize(this.options.title),
+      caption: _loc(this.options.title),
       sources: sources.map(entry => {
         if ( entry.label.startsWith("@") ) entry.label = this.getPropertyLabel(entry.label.slice(1));
         if ( (entry.type === "add") && (entry.value < 0) ) {
@@ -102,11 +103,13 @@ export default class PropertyAttribution extends Application5e {
     const parts = property.split(".");
     if ( parts[0] === "abilities" && parts[1] ) {
       return CONFIG.DND5E.abilities[parts[1]]?.label ?? property;
+    } else if ( property.startsWith("attributes.ac.clamped.") ) {
+      return CONFIG.DND5E.abilities[parts[3]]?.label ?? property;
     } else if ( (property === "attributes.ac.dex") && CONFIG.DND5E.abilities.dex ) {
       return CONFIG.DND5E.abilities.dex.label;
     } else if ( (parts[0] === "prof") || (property === "attributes.prof") ) {
-      return game.i18n.localize("DND5E.Proficiency");
+      return _loc("DND5E.Proficiency");
     }
-    return property;
+    return getHumanReadableAttributeLabel(property);
   }
 }

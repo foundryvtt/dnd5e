@@ -27,7 +27,7 @@ export default class DeathConfig extends BaseConfigSheet {
 
   /** @override */
   get title() {
-    return game.i18n.localize("DND5E.DeathSaveConfigure");
+    return _loc("DND5E.DeathSaveConfigure");
   }
 
   /* -------------------------------------------- */

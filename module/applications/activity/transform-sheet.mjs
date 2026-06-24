@@ -60,7 +60,7 @@ export default class TransformSheet extends ActivitySheet {
     });
     context.categories = settings.createFormCategories({ prefix: "settings." });
     context.presetOptions = [
-      { value: "", label: game.i18n.localize("DND5E.TRANSFORM.Preset.Default") },
+      { value: "", label: _loc("DND5E.TRANSFORM.Preset.Default") },
       { rule: true },
       ...Object.entries(CONFIG.DND5E.transformation.presets)
         .map(([value, { label }]) => ({ value, label }))
@@ -74,8 +74,8 @@ export default class TransformSheet extends ActivitySheet {
       .map(([value, { label }]) => ({ value, label }));
 
     context.profileModes = [
-      { value: "", label: game.i18n.localize("DND5E.TRANSFORM.FIELDS.transform.mode.Direct") },
-      { value: "cr", label: game.i18n.localize("DND5E.TRANSFORM.FIELDS.transform.mode.CR") }
+      { value: "", label: _loc("DND5E.TRANSFORM.FIELDS.transform.mode.Direct") },
+      { value: "cr", label: _loc("DND5E.TRANSFORM.FIELDS.transform.mode.CR") }
     ];
     context.profiles = context.source.profiles.map((data, index) => ({
       data, index,

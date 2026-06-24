@@ -46,7 +46,7 @@ export default class RangeField extends SchemaField {
       } else if ( !this.range.scalar ) {
         this.range.labels.range = CONFIG.DND5E.distanceUnits[this.range.units];
       }
-    } else this.range.labels.range = game.i18n.localize("DND5E.DistSelf");
+    } else this.range.labels.range = _loc("DND5E.DistSelf");
 
     if ( labels ) {
       labels.description ??= {};

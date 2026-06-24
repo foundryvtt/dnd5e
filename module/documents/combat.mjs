@@ -61,7 +61,28 @@ export default class Combat5e extends Combat {
 
   /** @inheritDoc */
   async rollInitiative(ids, options={}) {
-    await super.rollInitiative(ids, options);
+    const combatantsInfo = ids.reduce((info, id) => {
+      const rollGroupingKey = this.combatants.get(id).getInitiativeGroupingKey() ?? id;
+      let deriveFrom = null;
+      if ( dnd5e.settings.initiativeGroupRoll && !this.started ) {
+        deriveFrom = this.combatants.find(c =>
+          (c.getInitiativeGroupingKey() === rollGroupingKey) && (Number.isFinite(c.initiative))
+        )?.id ?? null;
+      }
+      deriveFrom ??= info.toBeRolled[rollGroupingKey];
+      if ( deriveFrom ) info.toBeDerived[id] = deriveFrom;
+      else info.toBeRolled[rollGroupingKey] = id;
+      return info;
+    }, { toBeRolled: {}, toBeDerived: {} });
+
+    await super.rollInitiative(Object.values(combatantsInfo.toBeRolled), options);
+
+    const updates = Object.keys(combatantsInfo.toBeDerived).map(id => ({
+      _id: id, initiative: this.combatants.get(combatantsInfo.toBeDerived[id]).initiative
+    }));
+
+    await this.updateEmbeddedDocuments("Combatant", updates, { turnEvents: false });
+
     for ( const id of ids ) await this._recoverUses({ initiative: this.combatants.get(id) });
     return this;
   }

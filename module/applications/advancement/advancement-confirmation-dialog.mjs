@@ -67,11 +67,11 @@ export default class AdvancementConfirmationDialog extends Dialog5e {
   static forDelete(item, { sheet }={}) {
     return this.createDialog({
       item, sheet,
-      title: game.i18n.localize("DND5E.ADVANCEMENT.Deletion.Delete.Title"),
-      message: game.i18n.localize("DND5E.ADVANCEMENT.Deletion.Delete.Message"),
+      title: _loc("DND5E.ADVANCEMENT.Deletion.Delete.Title"),
+      message: _loc("DND5E.ADVANCEMENT.Deletion.Delete.Message"),
       continueButton: {
         icon: "fa-solid fa-trash",
-        label: game.i18n.localize("COMMON.Delete")
+        label: _loc("COMMON.Delete")
       }
     });
   }
@@ -88,11 +88,11 @@ export default class AdvancementConfirmationDialog extends Dialog5e {
   static forLevelDown(item, { sheet }={}) {
     return this.createDialog({
       item, sheet,
-      title: game.i18n.localize("DND5E.ADVANCEMENT.Deletion.LevelDown.Title"),
-      message: game.i18n.localize("DND5E.ADVANCEMENT.Deletion.LevelDown.Message"),
+      title: _loc("DND5E.ADVANCEMENT.Deletion.LevelDown.Title"),
+      message: _loc("DND5E.ADVANCEMENT.Deletion.LevelDown.Message"),
       continueButton: {
         icon: "fa-solid fa-sort-numeric-down-alt",
-        label: game.i18n.localize("DND5E.LevelActionDecrease")
+        label: _loc("DND5E.LevelActionDecrease")
       }
     });
   }
@@ -122,7 +122,7 @@ export default class AdvancementConfirmationDialog extends Dialog5e {
           {
             action: "cancel",
             icon: "fa-solid fa-times",
-            label: game.i18n.localize("COMMON.Cancel"),
+            label: _loc("COMMON.Cancel"),
             type: "button"
           }
         ],

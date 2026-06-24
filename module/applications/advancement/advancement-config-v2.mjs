@@ -57,7 +57,7 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
   async _prepareContext(options) {
     const levels = Array.fromRange(CONFIG.DND5E.maxLevel + 1).map(l => ({ value: l, label: l }));
     if ( ["class", "subclass"].includes(this.item.type) ) delete levels[0];
-    else levels[0].label = game.i18n.localize("DND5E.ADVANCEMENT.Config.AnyLevel");
+    else levels[0].label = _loc("DND5E.ADVANCEMENT.Config.AnyLevel");
     const context = {
       ...(await super._prepareContext(options)),
       advancement: this.advancement,
@@ -74,9 +74,9 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
       },
       levels,
       classRestrictionOptions: [
-        { value: "", label: game.i18n.localize("DND5E.AdvancementClassRestrictionNone") },
-        { value: "primary", label: game.i18n.localize("DND5E.AdvancementClassRestrictionPrimary") },
-        { value: "secondary", label: game.i18n.localize("DND5E.AdvancementClassRestrictionSecondary") }
+        { value: "", label: _loc("DND5E.AdvancementClassRestrictionNone") },
+        { value: "primary", label: _loc("DND5E.AdvancementClassRestrictionPrimary") },
+        { value: "secondary", label: _loc("DND5E.AdvancementClassRestrictionSecondary") }
       ],
       showClassRestrictions: this.item.type === "class",
       showLevelSelector: !this.advancement.metadata.multiLevel,
@@ -152,7 +152,7 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
    * Helper method to take an object and apply updates that remove any empty keys.
    * @param {object} object  Object to be cleaned.
    * @returns {object}       Copy of object with only non false-ish values included and others marked
-   *                         using `-=` syntax to be removed by update process.
+   *                         with ForcedDeletion to be removed by update process.
    * @protected
    */
   static _cleanedObject(object) {
@@ -161,7 +161,7 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
       if ( foundry.utils.getType(value) === "Object" ) keep = Object.values(value).some(v => v);
       else if ( value ) keep = true;
       if ( keep ) obj[key] = value;
-      else obj[`-=${key}`] = null;
+      else obj[key] = _del;
       return obj;
     }, {});
   }
@@ -204,13 +204,13 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
 
     // Abort if this uuid is the parent item
     if ( item.uuid === this.item.uuid ) {
-      ui.notifications.error("DND5E.ADVANCEMENT.ItemGrant.Warning.Recursive", {localize: true});
+      ui.notifications.error("DND5E.ADVANCEMENT.ItemGrant.Warning.Recursive");
       return;
     }
 
     // Abort if this uuid exists already
     if ( existingItems.find(i => i.uuid === item.uuid) ) {
-      ui.notifications.warn("DND5E.ADVANCEMENT.ItemGrant.Warning.Duplicate", {localize: true});
+      ui.notifications.warn("DND5E.ADVANCEMENT.ItemGrant.Warning.Duplicate");
       return;
     }
 

@@ -47,23 +47,23 @@ export default class SetDateDialog extends Dialog5e {
       {
         classes: "label-top",
         field: new NumberField({ integer: true }),
-        label: game.i18n.localize("DND5E.CALENDAR.Component.Year"),
+        label: _loc("DND5E.CALENDAR.Component.Year"),
         name: "year",
         value: year + game.time.calendar.years.yearZero
       },
       {
         classes: "label-top",
         field: new NumberField({ required: true, blank: false }),
-        label: game.i18n.localize("DND5E.CALENDAR.Component.Month"),
+        label: _loc("DND5E.CALENDAR.Component.Month"),
         name: "month",
         options: game.time.calendar.months.values
-          .map(({ name }, value) => ({ value, label: game.i18n.localize(name) })),
+          .map(({ name }, value) => ({ value, label: _loc(name) })),
         value: month
       },
       {
         classes: "label-top",
         field: new NumberField(),
-        label: game.i18n.localize("DND5E.CALENDAR.Component.Day"),
+        label: _loc("DND5E.CALENDAR.Component.Day"),
         name: "day",
         value: dayOfMonth + 1
       }

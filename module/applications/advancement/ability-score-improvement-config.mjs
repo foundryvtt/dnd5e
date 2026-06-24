@@ -58,7 +58,7 @@ export default class AbilityScoreImprovementConfig extends AdvancementConfig {
     context.points = {
       key: "points",
       name: "configuration.points",
-      label: game.i18n.localize("DND5E.ADVANCEMENT.AbilityScoreImprovement.FIELDS.points.label"),
+      label: _loc("DND5E.ADVANCEMENT.AbilityScoreImprovement.FIELDS.points.label"),
       min: 0,
       value: this.advancement.configuration.points,
       canIncrease: true,

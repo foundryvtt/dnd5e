@@ -169,6 +169,10 @@ export default class AdvantageModeField extends foundry.data.fields.NumberField 
   static setMode(model, keyPath, value, { override=false }={}) {
     const field = keyPath.startsWith("system.") ? model.system.schema.getField(keyPath.slice(7))
       : model.schema.getField(keyPath);
+    if ( !field ) {
+      console.error(`No field found at "${keyPath}" to apply advantage to.`);
+      return 0;
+    }
     const type = override ? "override" : "add";
     const change = { key: keyPath, value, type };
     const final = field.applyChange(foundry.utils.getProperty(model, keyPath), model, change);

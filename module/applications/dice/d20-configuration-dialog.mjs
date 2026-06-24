@@ -44,15 +44,15 @@ export default class D20RollConfigurationDialog extends RollConfigurationDialog 
     context.buttons = {
       advantage: {
         default: defaultButton === "advantage",
-        label: game.i18n.localize("DND5E.Advantage")
+        label: _loc("DND5E.Advantage")
       },
       normal: {
         default: !["advantage", "disadvantage"].includes(defaultButton),
-        label: game.i18n.localize("DND5E.Normal")
+        label: _loc("DND5E.Normal")
       },
       disadvantage: {
         default: defaultButton === "disadvantage",
-        label: game.i18n.localize("DND5E.Disadvantage")
+        label: _loc("DND5E.Disadvantage")
       }
     };
     return context;
@@ -63,14 +63,13 @@ export default class D20RollConfigurationDialog extends RollConfigurationDialog 
   /* -------------------------------------------- */
 
   /** @override */
-  _finalizeRolls(action) {
+  _finalizeConfig(config, action) {
     let advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.NORMAL;
     if ( action === "advantage" ) advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE;
     else if ( action === "disadvantage" ) advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE;
-    return this.rolls.map(roll => {
+    for ( const roll of config.rolls ?? [] ) {
+      roll.options ??= {};
       roll.options.advantageMode = advantageMode;
-      roll.configureModifiers();
-      return roll;
-    });
+    }
   }
 }

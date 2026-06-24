@@ -205,11 +205,11 @@ export default class OrderActivity extends ActivityMixin(BaseOrderActivityData) 
     const { costs } = message.data.flags.dnd5e.order;
     if ( !costs.gold || costs.paid ) return [];
     return [{
-      label: game.i18n.localize("DND5E.FACILITY.Costs.Automatic"),
+      label: _loc("DND5E.FACILITY.Costs.Automatic"),
       icon: '<i class="fas fa-coins"></i>',
       dataset: { action: "pay", method: "automatic" }
     }, {
-      label: game.i18n.localize("DND5E.FACILITY.Costs.Manual"),
+      label: _loc("DND5E.FACILITY.Costs.Manual"),
       icon: '<i class="fas fa-clipboard-check"></i>',
       dataset: { action: "pay", method: "manual" }
     }];
@@ -223,24 +223,24 @@ export default class OrderActivity extends ActivityMixin(BaseOrderActivityData) 
     const { type } = this.item.system;
     const supplements = [];
     if ( costs.days ) supplements.push(`
-      <strong>${game.i18n.localize("DND5E.DurationTime")}</strong>
-      ${game.i18n.format("DND5E.FACILITY.Costs.Days", { days: costs.days })}
+      <strong>${_loc("DND5E.DurationTime")}</strong>
+      ${_loc("DND5E.FACILITY.Costs.Days", { days: costs.days })}
     `);
     if ( costs.gold ) supplements.push(`
-      <strong>${game.i18n.localize("DND5E.CurrencyGP")}</strong>
+      <strong>${_loc("DND5E.CurrencyGP")}</strong>
       ${formatNumber(costs.gold)}
-      (${game.i18n.localize(`DND5E.FACILITY.Costs.${costs.paid ? "Paid" : "Unpaid"}`)})
+      (${_loc(`DND5E.FACILITY.Costs.${costs.paid ? "Paid" : "Unpaid"}`)})
     `);
     if ( craft?.item ) {
       const item = await fromUuid(craft.item);
       supplements.push(`
-        <strong>${game.i18n.localize("DOCUMENT.Items")}</strong>
+        <strong>${_loc("DOCUMENT.Items")}</strong>
         ${craft.quantity > 1 ? `${craft.quantity}&times;` : ""}
         ${item.toAnchor().outerHTML}
       `);
     }
     if ( trade?.stock?.value && trade.sell ) supplements.push(`
-      <strong>${game.i18n.localize("DND5E.FACILITY.Trade.Sell.Supplement")}</strong>
+      <strong>${_loc("DND5E.FACILITY.Trade.Sell.Supplement")}</strong>
       ${formatNumber(trade.stock.value)}
       ${CONFIG.DND5E.currencies[CONFIG.DND5E.defaultCurrency]?.abbreviation ?? ""}
     `);
@@ -254,17 +254,17 @@ export default class OrderActivity extends ActivityMixin(BaseOrderActivityData) 
       }
       else creatures.push(...await Promise.all(trade.creatures.buy.filter(_ => _).map(uuid => fromUuid(uuid))));
       supplements.push(`
-        <strong>${game.i18n.localize(`DND5E.FACILITY.Trade.${trade.sell ? "Sell" : "Buy"}.Supplement`)}</strong>
+        <strong>${_loc(`DND5E.FACILITY.Trade.${trade.sell ? "Sell" : "Buy"}.Supplement`)}</strong>
         ${game.i18n.getListFormatter({ style: "narrow" }).format(creatures.map(a => a.toAnchor().outerHTML))}
       `);
     }
-    const facilityType = game.i18n.localize(`DND5E.FACILITY.Types.${type.value.titleCase()}.Label.one`);
+    const facilityType = _loc(`DND5E.FACILITY.Types.${type.value.titleCase()}.Label.one`);
     const buttons = this._usageChatButtons(message);
     return {
       supplements,
       buttons: buttons.length ? buttons : null,
-      description: game.i18n.format("DND5E.FACILITY.Use.Description", {
-        order: game.i18n.localize(`DND5E.FACILITY.Orders.${this.order}.inf`),
+      description: _loc("DND5E.FACILITY.Use.Description", {
+        order: _loc(`DND5E.FACILITY.Orders.${this.order}.inf`),
         link: this.item.toAnchor().outerHTML,
         facilityType: facilityType.toLocaleLowerCase(game.i18n.lang)
       })

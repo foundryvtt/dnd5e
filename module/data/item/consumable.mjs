@@ -56,6 +56,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
     return this.mergeSchema(super.defineSchema(), {
       damage: new SchemaField({
         base: new DamageField(),
+        bonus: new FormulaField({ persisted: false }),
         replace: new BooleanField()
       }),
       magicalBonus: new FormulaField({ deterministic: true }),
@@ -121,7 +122,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
   get chatProperties() {
     return [
       this.type.label,
-      this.hasLimitedUses ? `${this.uses.value}/${this.uses.max} ${game.i18n.localize("DND5E.Charges")}` : null,
+      this.hasLimitedUses ? `${this.uses.value}/${this.uses.max} ${_loc("DND5E.Charges")}` : null,
       this.priceLabel
     ];
   }
@@ -131,7 +132,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
   /** @inheritDoc */
   get _typeAbilityMod() {
     if ( this.type.value !== "scroll" ) return null;
-    return this.parent?.actor?.system.attributes.spellcasting || "int";
+    return this.parent?.actor?.spellcastingAbility ?? "int";
   }
 
   /* -------------------------------------------- */
@@ -186,6 +187,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
     ActivitiesTemplate.migrateActivities(source);
     ConsumableData.#migrateDamage(source);
     ConsumableData.#migratePropertiesData(source);
+    return source;
   }
 
   /* -------------------------------------------- */
@@ -228,7 +230,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
     if ( config ) {
       this.type.label = config.subtypes?.[this.type.subtype] ?? config.label;
     } else {
-      this.type.label = game.i18n.localize(CONFIG.Item.typeLabels.consumable);
+      this.type.label = _loc(CONFIG.Item.typeLabels.consumable);
     }
   }
 

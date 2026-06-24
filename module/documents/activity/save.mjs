@@ -44,23 +44,24 @@ export default class SaveActivity extends ActivityMixin(BaseSaveActivityData) {
 
     for ( const abilityId of this.save.ability ) {
       const ability = CONFIG.DND5E.abilities[abilityId]?.label ?? "";
+      const promptTitle = _loc("DND5E.SavePromptTitle", { ability });
       buttons.push({
-        label: `
-          <span class="visible-dc">${game.i18n.format("DND5E.SavingThrowDC", { dc, ability })}</span>
-          <span class="hidden-dc">${game.i18n.format("DND5E.SavePromptTitle", { ability })}</span>
-        `,
+        label: dc ? `
+          <span class="visible-dc">${_loc("DND5E.SavingThrowDC", { dc, ability })}</span>
+          <span class="hidden-dc">${promptTitle}</span>
+        ` : promptTitle,
         icon: '<i class="fa-solid fa-shield-heart" inert></i>',
         dataset: {
           dc,
           ability: abilityId,
           action: "rollSave",
-          visibility: "all"
+          visibility: this.save.visible ? "all" : undefined
         }
       });
     }
 
     if ( this.damage.parts.length ) buttons.push({
-      label: game.i18n.localize("DND5E.Damage"),
+      label: _loc("DND5E.Damage"),
       icon: '<i class="fas fa-burst" inert></i>',
       dataset: {
         action: "rollDamage"
@@ -110,16 +111,19 @@ export default class SaveActivity extends ActivityMixin(BaseSaveActivityData) {
   static async #rollSave(event, target, message) {
     const targets = getSceneTargets();
     if ( !targets.length && game.user.character ) targets.push(game.user.character);
-    if ( !targets.length ) ui.notifications.warn("DND5E.ActionWarningNoToken", { localize: true });
+    if ( !targets.length ) ui.notifications.warn("DND5E.ActionWarningNoToken");
     const dc = parseInt(target.dataset.dc);
+    const bonusData = CONFIG.Dice.BasicRoll.constructParts({ activityBonus: this.save.bonus }, this.getRollData());
     for ( const token of targets ) {
       const actor = token instanceof Actor ? token : token.actor;
       const speaker = ChatMessage.getSpeaker({ actor, scene: canvas.scene, token: token.document });
-      await actor.rollSavingThrow({
+      const rollData = {
         event,
         ability: target.dataset.ability ?? this.save.ability.first(),
         target: Number.isFinite(dc) ? dc : this.save.dc.value
-      }, {}, { data: { speaker } });
+      };
+      if ( bonusData.parts.length ) rollData.rolls = [bonusData];
+      await actor.rollSavingThrow(rollData, {}, { data: { speaker } });
     }
   }
 

@@ -32,7 +32,7 @@ export default class SubclassData extends ItemDataModel.mixin(AdvancementTemplat
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       classIdentifier: new IdentifierField({
-        required: true, label: "DND5E.ClassIdentifier", hint: "DND5E.ClassIdentifierHint"
+        required: true, label: "DND5E.ClassIdentifier", hint: "DND5E.ClassIdentifierHint", types: ["class"]
       }),
       spellcasting: new SpellcastingField()
     });
@@ -65,6 +65,17 @@ export default class SubclassData extends ItemDataModel.mixin(AdvancementTemplat
   }
 
   /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  get tooltipSubtitle() {
+    const cls = dnd5e.registry.classes.get(this.classIdentifier)?.name;
+    if ( cls ) return [_loc("DND5E.SubclassOf", { class: cls })];
+    return super.tooltipSubtitle;
+  }
+
+  /* -------------------------------------------- */
   /*  Data Migration                              */
   /* -------------------------------------------- */
 
@@ -72,6 +83,7 @@ export default class SubclassData extends ItemDataModel.mixin(AdvancementTemplat
   static _migrateData(source) {
     super._migrateData(source);
     AdvancementTemplate.migrateAdvancement(source);
+    return source;
   }
 
   /* -------------------------------------------- */
@@ -103,7 +115,7 @@ export default class SubclassData extends ItemDataModel.mixin(AdvancementTemplat
 
   /** @inheritDoc */
   async getSheetData(context) {
-    context.subtitles = [{ label: game.i18n.localize(CONFIG.Item.typeLabels.subclass) }];
+    context.subtitles = [{ label: _loc(CONFIG.Item.typeLabels.subclass) }];
     context.singleDescription = true;
     context.parts = ["dnd5e.details-subclass", "dnd5e.details-spellcasting"];
   }

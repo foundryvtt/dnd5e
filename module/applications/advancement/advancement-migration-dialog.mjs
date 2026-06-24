@@ -67,7 +67,7 @@ export default class AdvancementMigrationDialog extends Dialog5e {
           action: "complete",
           default: true,
           icon: "fa-solid fa-check",
-          label: game.i18n.localize("DND5E.ADVANCEMENT.Migration.Action.Confirm")
+          label: _loc("DND5E.ADVANCEMENT.Migration.Action.Confirm")
         }
       ],
       content: await foundry.applications.handlebars.renderTemplate(
@@ -76,7 +76,7 @@ export default class AdvancementMigrationDialog extends Dialog5e {
       ),
       rejectClose: false,
       window: {
-        title: game.i18n.localize("DND5E.ADVANCEMENT.Migration.Title"),
+        title: _loc("DND5E.ADVANCEMENT.Migration.Title"),
         subtitle: item.name
       }
     });

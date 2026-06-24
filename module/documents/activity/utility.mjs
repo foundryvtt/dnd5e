@@ -45,7 +45,7 @@ export default class UtilityActivity extends ActivityMixin(BaseUtilityActivityDa
   _usageChatButtons(message) {
     if ( !this.roll.formula ) return super._usageChatButtons(message);
     return [{
-      label: this.roll.name || game.i18n.localize("DND5E.Roll"),
+      label: this.roll.name || _loc("DND5E.Roll"),
       icon: '<i class="fa-solid fa-dice" inert></i>',
       dataset: {
         action: "rollFormula",
@@ -90,7 +90,7 @@ export default class UtilityActivity extends ActivityMixin(BaseUtilityActivityDa
     const messageConfig = foundry.utils.mergeObject({
       create: true,
       data: {
-        flavor: `${this.item.name} - ${this.roll.label || game.i18n.localize("DND5E.OtherFormula")}`,
+        flavor: `${this.item.name} - ${this.roll.label || _loc("DND5E.OtherFormula")}`,
         flags: {
           dnd5e: {
             ...this.messageFlags,

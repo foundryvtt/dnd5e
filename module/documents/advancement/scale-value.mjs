@@ -1,7 +1,7 @@
 import Advancement from "./advancement.mjs";
 import ScaleValueConfig from "../../applications/advancement/scale-value-config.mjs";
 import ScaleValueFlow from "../../applications/advancement/scale-value-flow.mjs";
-import { ScaleValueConfigurationData, TYPES } from "../../data/advancement/scale-value.mjs";
+import { ScaleValueConfigurationData, TYPES } from "../../data/advancement/scale-value-data.mjs";
 import { formatIdentifier } from "../../utils.mjs";
 
 /**
@@ -18,8 +18,8 @@ export default class ScaleValueAdvancement extends Advancement {
       order: 60,
       icon: "icons/sundries/gaming/dice-pair-white-green.webp",
       typeIcon: "systems/dnd5e/icons/svg/scale-value.svg",
-      title: game.i18n.localize("DND5E.ADVANCEMENT.ScaleValue.Title"),
-      hint: game.i18n.localize("DND5E.ADVANCEMENT.ScaleValue.Hint"),
+      title: _loc("DND5E.ADVANCEMENT.ScaleValue.Title"),
+      hint: _loc("DND5E.ADVANCEMENT.ScaleValue.Hint"),
       multiLevel: true,
       apps: {
         config: ScaleValueConfig,
@@ -71,7 +71,7 @@ export default class ScaleValueAdvancement extends Advancement {
   /** @inheritDoc */
   titleForLevel(level, { configMode=false, legacyDisplay=false }={}) {
     const value = this.valueForLevel(level)?.display;
-    if ( !value || !legacyDisplay ) return this.title;
+    if ( (!value && (value !== 0)) || !legacyDisplay ) return this.title;
     return `${this.title}: <strong>${value}</strong>`;
   }
 
@@ -79,15 +79,19 @@ export default class ScaleValueAdvancement extends Advancement {
 
   /**
    * Scale value for the given level.
-   * @param {number} level      Level for which to get the scale value.
-   * @returns {ScaleValueType}  Scale value at the given level or null if none exists.
+   * @param {number} level           Level for which to get the scale value.
+   * @returns {ScaleValueType|null}  Scale value at the given level or null if none exists.
    */
   valueForLevel(level) {
-    const key = Object.keys(this.configuration.scale).reverse().find(l => Number(l) <= level);
-    const data = this.configuration.scale[key];
     const TypeClass = this.constructor.TYPES[this.configuration.type];
-    if ( !data || !TypeClass ) return null;
-    return new TypeClass(data, { parent: this });
+    if ( !TypeClass ) return null;
+    const validKeys = Object.keys(TypeClass.schema.fields);
+    const data = {};
+    for ( const [key, value] of Object.entries(this.configuration.scale).reverse() ) {
+      if ( Number(key) > level ) continue;
+      validKeys.forEach(k => (data[k] ??= value[k]));
+    }
+    return foundry.utils.isEmpty(data) ? null : new TypeClass(data, { parent: this });
   }
 
   /* -------------------------------------------- */
@@ -99,6 +103,10 @@ export default class ScaleValueAdvancement extends Advancement {
    * @returns {boolean}
    */
   testEquality(a, b) {
+    foundry.utils.logCompatibilityWarning(
+      "`ScaleValueAdvancement#testEquality` has been deprecated without replacement.",
+      { since: "DnD5e 6.0", until: "DnD5e 6.2" }
+    );
     const keys = Object.keys(a ?? {});
     if ( keys.length !== Object.keys(b ?? {}).length ) return false;
     for ( const k of keys ) {
@@ -130,7 +138,7 @@ export default class ScaleValueAdvancement extends Advancement {
       onClick: () => {
         const value = `@scale.${this.item.identifier}.${this.identifier}`;
         game.clipboard.copyPlainText(value);
-        ui.notifications.info(game.i18n.format("DND5E.Copied", { value }), { console: false });
+        ui.notifications.info("DND5E.Copied", { console: false, format: { value } });
       }
     });
     return options;

@@ -214,6 +214,43 @@
 }
 
 /* ----------------------------------------- */
+/*  Modify Items Advancement                 */
+/* ----------------------------------------- */
+
+.dnd5e2.advancement.modify-item.sheet {
+  .separated-list {
+    margin-block-start: 4px;
+    li.flexcol { gap: 4px; }
+    li.empty {
+      color: var(--color-text-secondary);
+      font-style: italic;
+    }
+    .gold-icon {
+      --icon-fill: var(--activity-icon-color);
+    }
+  }
+}
+.advancement.flow[data-type="ModifyItem"] {
+  .item-list .item {
+    > .item-row, > .linked-items { flex: 1 0 100%; }
+    .linked-items .item-row {
+      position: relative;
+      border-block-start: var(--activity-row-border);
+      padding-left: 20px;
+
+      &::before {
+        content: "┗";
+        position: absolute;
+        inset: 9px auto auto 5px;
+        font-size: var(--font-size-12);
+        font-weight: bold;
+        color: var(--activity-row-indent-color);
+      }
+    }
+  }
+}
+
+/* ----------------------------------------- */
 /*  Scale Value Advancement                  */
 /* ----------------------------------------- */
 
@@ -240,11 +277,19 @@
       .number-header, .level-number { grid-column: number; }
       .faces-header, .level-faces { grid-column: faces; }
     }
-    select option[value=""] { color: var(--color-text-tertiary); }
-    .new-scale-value select { font-weight: bold; }
-    li.level:not(.new-scale-value) select {
-      color: var(--color-text-tertiary);
-      option:not([value=""]) { color: var(--color-text-primary); }
+    &[data-type="usage"] {
+      grid-template-columns: [level] max-content [value] 1fr [period] 2fr;
+      .period-header, .level-period { grid-column: period; }
+    }
+    input, select {
+      font-weight: bold;
+      color: var(--color-text-primary);
+    }
+    div.placeholder {
+      input, select {
+        color: var(--color-text-tertiary);
+        font-weight: normal;
+      }
     }
   }
 }

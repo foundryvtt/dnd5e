@@ -63,7 +63,7 @@ export default class TraitsField {
     const languages = this.traits.languages;
     const labels = languages.labels = { languages: [], ranged: [] };
 
-    if ( languages.value.has("ALL") ) labels.languages.push(game.i18n.localize("DND5E.Language.All"));
+    if ( languages.value.has("ALL") ) labels.languages.push(_loc("DND5E.Language.All"));
     else {
       const processCategory = (key, data, group) => {
         // If key is within languages, don't bother with children

@@ -149,7 +149,9 @@ export default class CharacterData extends CreatureTemplate {
   /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
+    AttributesFields._migrateArmorClass(source.attributes);
     AttributesFields._migrateInitiative(source.attributes);
+    return source;
   }
 
   /* -------------------------------------------- */
@@ -159,8 +161,6 @@ export default class CharacterData extends CreatureTemplate {
   /** @inheritDoc */
   prepareBaseData() {
     this.attributes.hd = new HitDice(this.parent);
-    this.details.level = 0;
-    this.attributes.attunement.value = 0;
 
     for ( const item of this.parent.items ) {
       if ( item.type === "class" ) this.details.level += item.system.levels;
@@ -223,6 +223,7 @@ export default class CharacterData extends CreatureTemplate {
 
     AttributesFields.prepareExhaustionLevel.call(this);
     this.prepareAbilities({ rollData, originalSaves });
+    this.prepareCurrency();
     this.prepareSkills({ rollData, originalSkills });
     this.prepareTools({ rollData });
     AttributesFields.prepareArmorClass.call(this, rollData);

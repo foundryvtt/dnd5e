@@ -70,7 +70,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
         label: "DND5E.Rarity",
         type: "set",
         config: {
-          blank: game.i18n.localize("DND5E.ItemRarityMundane").capitalize(),
+          blank: _loc("DND5E.ItemRarityMundane").capitalize(),
           choices: Object.entries(CONFIG.DND5E.itemRarity).reduce((obj, [key, label]) => {
             obj[key] = { label: label.capitalize() };
             return obj;
@@ -133,6 +133,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
     PhysicalItemTemplate.#migratePrice(source);
     PhysicalItemTemplate.#migrateRarity(source);
     PhysicalItemTemplate.#migrateWeight(source);
+    return source;
   }
 
   /* -------------------------------------------- */
@@ -378,6 +379,25 @@ export default class PhysicalItemTemplate extends SystemDataModel {
     }
 
     return data;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Split a stack of this item into two.
+   * @param {number} [splitQuantity=1]  Number of items to split off into a new stack.
+   * @returns {Promise}
+   */
+  split(splitQuantity=1) {
+    const remainingQuantity = this.quantity - splitQuantity;
+    if ( (splitQuantity <= 0) || (remainingQuantity <= 0) ) return;
+
+    const clone = this.parent.clone({ "system.quantity": splitQuantity }, { addSource: true });
+    const details = { documentName: "Item", parent: this.parent.actor, pack: this.parent.pack };
+    return foundry.documents.modifyBatch([
+      { action: "update", updates: [{ _id: this.parent.id, "system.quantity": remainingQuantity }], ...details },
+      { action: "create", data: [clone.toObject()], ...details }
+    ]);
   }
 
   /* -------------------------------------------- */

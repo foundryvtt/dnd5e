@@ -27,7 +27,7 @@ export default class DamagesConfig extends TraitsConfig {
 
   /** @override */
   get otherLabel() {
-    return game.i18n.localize("DND5E.DamageTypes");
+    return _loc("DND5E.DamageTypes");
   }
 
   /* -------------------------------------------- */
@@ -81,7 +81,7 @@ export default class DamagesConfig extends TraitsConfig {
       for ( const [type, formula] of Object.entries(submitData.system?.traits?.dm?.amount ?? {}) ) {
         if ( !formula ) {
           delete submitData.system.traits.dm.amount[type];
-          submitData.system.traits.dm.amount[`-=${type}`] = null;
+          submitData.system.traits.dm.amount[type] = _del;
         }
       }
     }

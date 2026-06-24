@@ -87,7 +87,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
   _usageChatButtons(message) {
     if ( !this.availableProfiles.length ) return super._usageChatButtons(message);
     return [{
-      label: game.i18n.localize("DND5E.SUMMON.Action.Summon"),
+      label: _loc("DND5E.SUMMON.Action.Summon"),
       icon: '<i class="fa-solid fa-spaghetti-monster-flying" inert></i>',
       dataset: {
         action: "placeSummons"
@@ -132,7 +132,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
 
     const profile = this.profiles.find(p => p._id === options?.profile);
     if ( !profile ) throw new Error(
-      game.i18n.format("DND5E.SUMMON.Warning.NoProfile", { profileId: options.profile, item: this.item.name })
+      _loc("DND5E.SUMMON.Warning.NoProfile", { profileId: options.profile, item: this.item.name })
     );
 
     /**
@@ -149,20 +149,18 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
     // Fetch the actor that will be summoned
     const summonUuid = this.summon.mode === "cr" ? await this.queryActor(profile) : profile.uuid;
     if ( !summonUuid ) return;
-    const actor = await dnd5e.documents.Actor5e.fetchExisting(summonUuid, {
+    const fetchOptions = {
+      folderId: this.actor?.folder?.id ?? null,
       origin: { key: "flags.dnd5e.summon.origin", value: this.item?.uuid }
-    });
+    };
+    const actor = await dnd5e.documents.Actor5e.fetchExisting(summonUuid, fetchOptions);
 
     // Verify ownership of actor
     if ( !actor.isOwner ) {
-      throw new Error(game.i18n.format("DND5E.SUMMON.Warning.NoOwnership", { actor: actor.name }));
+      throw new Error(_loc("DND5E.SUMMON.Warning.NoOwnership", { actor: actor.name }));
     }
 
     const tokensData = [];
-    const sheet = this.actor?.sheet;
-    const { windowId } = (sheet?.parent ?? sheet)?.window ?? {};
-    const minimize = !windowId && !sheet?._minimized;
-    if ( minimize ) await sheet?.minimize();
     try {
       // Figure out where to place the summons
       const placements = await this.getPlacement(actor.prototypeToken, profile, options);
@@ -204,8 +202,12 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
 
         tokensData.push(tokenData);
       }
-    } finally {
-      if ( minimize ) sheet?.maximize();
+    } catch(err) {
+      Hooks.onError("SummonActivity#placeSummons", err, {
+        msg: game.i18n.localize("DND5E.SUMMON.Warning.PlaceTokens"),
+        log: "error",
+        notify: "error"
+      });
     }
 
     const createdTokens = await canvas.scene.createEmbeddedDocuments("Token", tokensData, {
@@ -284,7 +286,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
         }],
         disabled: false,
         icon: "icons/skills/targeting/crosshair-bars-yellow.webp",
-        name: game.i18n.localize("DND5E.SUMMON.FIELDS.match.proficiency.label")
+        name: _loc("DND5E.SUMMON.FIELDS.match.proficiency.label")
       });
       actorUpdates.effects.push(proficiencyEffect.toObject());
     }
@@ -312,7 +314,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
             }],
             disabled: false,
             icon: "icons/magic/defensive/shield-barrier-blue.webp",
-            name: game.i18n.localize("DND5E.SUMMON.FIELDS.bonuses.ac.label")
+            name: _loc("DND5E.SUMMON.FIELDS.bonuses.ac.label")
           })).toObject());
         }
       }
@@ -332,7 +334,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
           }],
           disabled: false,
           icon: "icons/sundries/gaming/dice-runed-brown.webp",
-          name: game.i18n.localize("DND5E.SUMMON.FIELDS.bonuses.hd.label")
+          name: _loc("DND5E.SUMMON.FIELDS.bonuses.hd.label")
         })).toObject());
       }
     }
@@ -357,7 +359,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
             }],
             disabled: false,
             icon: "icons/magic/life/heart-glowing-red.webp",
-            name: game.i18n.localize("DND5E.SUMMON.FIELDS.bonuses.hp.label")
+            name: _loc("DND5E.SUMMON.FIELDS.bonuses.hp.label")
           })).toObject();
         };
 
@@ -469,7 +471,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
           changes,
           disabled: false,
           icon: "icons/skills/melee/strike-slashes-orange.webp",
-          name: game.i18n.localize("DND5E.SUMMON.ItemChanges.Label"),
+          name: _loc("DND5E.SUMMON.ItemChanges.Label"),
           origin: this.uuid,
           type: "enchantment"
         })).toObject();
@@ -478,7 +480,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
     }
 
     // Add applied effects
-    actorUpdates.effects.push(...this.applicableEffects.map(e => e.toObject()));
+    actorUpdates.effects.push(...(await this.getApplicableEffects()).map(e => e.toObject()));
 
     return { actorUpdates, tokenUpdates };
   }
@@ -519,7 +521,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
     if ( actor.prototypeToken.randomImg && !game.user.can("FILES_BROWSE") ) {
       tokenUpdates.texture ??= {};
       tokenUpdates.texture.src ??= actor.img;
-      ui.notifications.warn("DND5E.SUMMON.Warning.Wildcard", { localize: true });
+      ui.notifications.warn("DND5E.SUMMON.Warning.Wildcard");
     }
 
     delete placement.prototypeToken;

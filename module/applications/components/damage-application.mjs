@@ -96,14 +96,14 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
       div.innerHTML = `
         <label class="roboto-upper">
           <i class="fa-solid fa-heart-crack"></i>
-          <span>${game.i18n.localize("DND5E.Apply")}</span>
+          <span>${_loc("DND5E.Apply")}</span>
           <i class="fa-solid fa-caret-down"></i>
         </label>
         <div class="collapsible-content">
           <div class="wrapper">
             <button class="apply-damage" type="button" data-action="applyDamage">
               <i class="fa-solid fa-reply-all fa-flip-horizontal" inert></i>
-              ${game.i18n.localize("DND5E.Apply")}
+              ${_loc("DND5E.Apply")}
             </button>
           </div>
         </div>
@@ -261,12 +261,12 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
     if ( (options.ignore?.[change] === true) || options.ignore?.[change]?.has?.(type) ) mode = "ignore";
     else if ( (change === "immunity") && options.downgrade?.has(type) ) mode = "downgrade";
 
-    let label = game.i18n.format(`DND5E.DamageApplication.Change.${change.capitalize()}`, {
-      type: type === "ALL" ? game.i18n.localize("DND5E.DAMAGE.All")
+    let label = _loc(`DND5E.DamageApplication.Change.${change.capitalize()}`, {
+      type: type === "ALL" ? _loc("DND5E.DAMAGE.All")
         : CONFIG.DND5E.damageTypes[type]?.label ?? CONFIG.DND5E.healingTypes[type]?.label
     });
-    if ( mode === "ignore" ) label = game.i18n.format("DND5E.DamageApplication.Ignoring", { source: label });
-    if ( mode === "downgrade" ) label = game.i18n.format("DND5E.DamageApplication.Downgrading", { source: label });
+    if ( mode === "ignore" ) label = _loc("DND5E.DamageApplication.Ignoring", { source: label });
+    if ( mode === "downgrade" ) label = _loc("DND5E.DamageApplication.Downgrading", { source: label });
 
     return { label, pressed: mode === "active" ? "false" : mode === "ignore" ? "true" : "mixed" };
   }

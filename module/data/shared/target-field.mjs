@@ -79,24 +79,24 @@ export default class TargetField extends SchemaField {
       if ( this.target.template.units in CONFIG.DND5E.movementUnits ) {
         parts.push(formatLength(this.target.template.size, this.target.template.units));
       }
-      this.target.template.labels.statblock = this.target.template.label = game.i18n.format(
+      this.target.template.labels.statblock = this.target.template.label = _loc(
         `${templateConfig.counted}.${pr.select(this.target.template.count || 1)}`, { number: parts.filterJoin(" ") }
       ).trim().capitalize();
 
       const sizeUnit = CONFIG.DND5E.movementUnits[this.target.template.units]?.template ?? "";
-      if ( Object.keys(dimensions).length === 1 ) this.target.template.labels.size = game.i18n.format(
+      if ( Object.keys(dimensions).length === 1 ) this.target.template.labels.size = _loc(
         "DND5E.AreaOfEffect.Description.SizeSimple",
         { number: formatNumber(this.target.template.size), unit: sizeUnit }
       );
       else this.target.template.labels.size = game.i18n.getListFormatter({ type: "unit" })
         .format(Object.entries(dimensions).map(([k, l]) =>
-          game.i18n.format("DND5E.AreaOfEffect.Description.SizeType", {
+          _loc("DND5E.AreaOfEffect.Description.SizeType", {
             number: formatNumber(this.target.template[k]), unit: sizeUnit,
-            type: game.i18n.localize(l.replace("DND5E.AreaOfEffect.Size.", "DND5E.AreaOfEffect.Description."))
+            type: _loc(l.replace("DND5E.AreaOfEffect.Size.", "DND5E.AreaOfEffect.Description."))
           })
         ));
 
-      this.target.template.labels.description = game.i18n.format(
+      this.target.template.labels.description = _loc(
         `${templateConfig.counted}.${pr.select(this.target.template.count || 1)}Sized`,
         {
           number: formatNumber(this.target.template.count, { words: true }),
@@ -110,7 +110,7 @@ export default class TargetField extends SchemaField {
     // Generate the affects labels
     const affectsConfig = CONFIG.DND5E.individualTargetTypes[this.target.affects.type];
     this.target.affects.labels = {
-      description: game.i18n.format(
+      description: _loc(
         `${this.target.affects.special ? "DND5E.TARGET.Type.Special.Counted"
           : affectsConfig?.counted ?? "DND5E.TARGET.Type.Target.Counted"}.${this.target.affects.count
           ? pr.select(this.target.affects.count) : this.target.template.type ? "each" : "any"}`,
@@ -119,13 +119,13 @@ export default class TargetField extends SchemaField {
           special: this.target.affects.special
         }
       ),
-      sheet: affectsConfig?.counted ? game.i18n.format(
+      sheet: affectsConfig?.counted ? _loc(
         `${affectsConfig.counted}.${this.target.affects.count ? pr.select(this.target.affects.count) : "other"}`, {
           number: this.target.affects.count ? formatNumber(this.target.affects.count)
-            : game.i18n.localize(`DND5E.TARGET.Count.${this.target.template.type ? "Every" : "Any"}`)
+            : _loc(`DND5E.TARGET.Count.${this.target.template.type ? "Every" : "Any"}`)
         }
       ).trim().capitalize() : (affectsConfig?.label ?? ""),
-      statblock: game.i18n.format(
+      statblock: _loc(
         `${affectsConfig?.counted ?? "DND5E.TARGET.Type.Target.Counted"}.${pr.select(this.target.affects.count || 1)}`,
         { number: formatNumber(this.target.affects.count || 1, { words: true }) }
       )

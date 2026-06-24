@@ -44,6 +44,9 @@ export default class SpellConfigurationData extends foundry.abstract.DataModel {
 
   /** @inheritDoc */
   static migrateData(source) {
+    super.migrateData(source);
+    if ( !source ) return source;
+
     if ( foundry.utils.getType(source.ability) === "string" ) source.ability = source.ability ? [source.ability] : [];
     if ( !("preparation" in source) ) return;
     const { preparation } = source;
@@ -58,6 +61,8 @@ export default class SpellConfigurationData extends foundry.abstract.DataModel {
       if ( !("prepared" in source) ) source.prepared = 0;
     }
     delete source.preparation;
+
+    return source;
   }
 
   /* -------------------------------------------- */
@@ -98,9 +103,9 @@ export default class SpellConfigurationData extends foundry.abstract.DataModel {
           const newActivity = {
             _id: foundry.utils.randomID(),
             type: "forward",
-            name: `${activity.name ?? game.i18n.localize(
+            name: `${activity.name ?? _loc(
               CONFIG.DND5E.activityTypes[activity.type]?.documentClass.metadata.title
-            )} (${game.i18n.localize("DND5E.ADVANCEMENT.SPELLCONFIG.FreeCasting").toLowerCase()})`,
+            )} (${_loc("DND5E.ADVANCEMENT.SPELLCONFIG.FreeCasting").toLowerCase()})`,
             sort: (activity.sort ?? 0) + 1,
             activity: {
               id: activity._id

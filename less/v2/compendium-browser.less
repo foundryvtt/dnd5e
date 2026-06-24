@@ -2,6 +2,11 @@
   --icon-size: 32px;
   border: none;
 
+  &:not(.minimized, .minimizing, .maximizing) {
+    min-width: 750px;
+    min-height: 600px;
+  }
+
   .window-resize-handle {
     inset: auto 0 0 auto;
     z-index: 1;

@@ -100,7 +100,7 @@ export default class HitPointsFlow extends AdvancementFlow {
         if ( !useAverage && !Number.isInteger(value) ) {
           const errorType = value === null ? "Empty" : "Invalid";
           throw new Advancement.ERROR(
-            game.i18n.localize(`DND5E.ADVANCEMENT.HitPoints.Warning.${errorType}`),
+            _loc(`DND5E.ADVANCEMENT.HitPoints.Warning.${errorType}`),
             { selector: ".roll-result" }
           );
         }
