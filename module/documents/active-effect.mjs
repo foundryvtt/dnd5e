@@ -164,6 +164,18 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /* -------------------------------------------- */
 
   /**
+   * Get the special duration (whether configured on an applied effect or otherwise), or null if none.
+   * @returns {string|null}
+   */
+  get specialDuration() {
+    if ( this.system.specialDuration ) return this.system.specialDuration;
+    if ( this.constructor.PSEUDO_EXPIRIES.has(this.duration.expiry) ) return this.duration.expiry;
+    return null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Retrieve the source Actor or Item, or null if it could not be determined.
    * @returns {Promise<Actor5e|Item5e|null>}
    */
@@ -172,6 +184,34 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       return this.item;
     }
     return fromUuid(this.origin);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Synchronously retrieve the originating Actor, or null if it cannot be determined.
+   * @returns {Actor5e|null}
+   */
+  getSourceActor() {
+    let sourceActor = fromUuidSync(this.origin);
+    if ( (sourceActor instanceof dnd5e.dataModels.activity.BaseActivityData)
+      || (sourceActor instanceof dnd5e.documents.ActiveEffect5e )
+      || (sourceActor instanceof dnd5e.documents.Item5e)
+    ) {
+      sourceActor = sourceActor.actor;
+    }
+    return (sourceActor instanceof dnd5e.documents.Actor5e) ? sourceActor : null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Format durationParts for use in the Active Effects & Effect Tooltip partials.
+   * @returns {string[]}
+   */
+  getDurationParts() {
+    if ( this.specialDuration ) return [this.duration.label];
+    return this.duration.remaining ? this.duration.label.split(", ") : [];
   }
 
   /* -------------------------------------------- */
@@ -441,6 +481,22 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  _prepareDuration(duration, context) {
+    super._prepareDuration();
+    if ( this.duration.expired && !Number.isFinite(this.duration.value) ) {
+      duration.label = _loc("DND5E.ACTIVEEFFECT.Expired");
+    } else if ( this.specialDuration ) {
+      const useYour = (this.modifiesActor || this.isAppliedEnchantment)
+        && (this.specialDuration.startsWith("target") || (this.getSourceActor() === this.actor));
+      if ( useYour ) duration.label = _loc(`DND5E.ACTIVEEFFECT.EXPIRIES.your${this.specialDuration.slice(6)}`);
+      else duration.label = _loc(`DND5E.ACTIVEEFFECT.EXPIRIES.${this.specialDuration}`);
+    }
+    return duration;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Modify the ActiveEffect's attributes based on the exhaustion level.
    * @protected
@@ -615,7 +671,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     // (default for source, combatant of actor it's applied to for target) and null duration
     if ( !this.constructor.PSEUDO_EXPIRIES.has(expiry) ) return;
     const effectUpdate = {"system.specialDuration": expiry, duration: {value: null}};
-    const relevantActor = expiry.startsWith("target") ? actor : fromUuidSync(this.origin).actor;
+    const relevantActor = expiry.startsWith("target") ? actor : this.getSourceActor();
     const combatant = this.start.combat.getCombatantsByActor(relevantActor)[0];
     if ( combatant && (combatant.turnNumber !== null) ) effectUpdate.start = { combatant: combatant.id };
     if ( ["targetEnd", "sourceEnd"].includes(expiry) ) effectUpdate.duration.expiry = "turnEnd";
@@ -866,10 +922,10 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     }
     const expirySelect = html.querySelector("[name='duration.expiry']");
     expirySelect?.insertAdjacentElement("beforeend", optGroup);
-    if ( ActiveEffect5e.PSEUDO_EXPIRIES.has(expirySelect?.value) ) {
-      html.querySelector("[name='duration.value']")?.setAttribute("disabled", "");
-      html.querySelector("[name='duration.units']")?.setAttribute("disabled", "");
-    }
+
+    // TODO: This really needs to be in _onChangeForm
+    const hideDuration = ActiveEffect5e.PSEUDO_EXPIRIES.has(expirySelect?.value);
+    html.querySelector("[data-duration]")?.classList.toggle("hidden", hideDuration);
   }
 
   /* -------------------------------------------- */
@@ -1080,8 +1136,8 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
         "systems/dnd5e/templates/effects/parts/effect-tooltip.hbs", {
           effect: this,
           description: await TextEditor.enrichHTML(this.description ?? "", { relativeTo: this, ...enrichmentOptions }),
-          durationParts: this.duration.remaining ? this.duration.label.split(", ") : [],
-          showDuration: Number.isFinite(this.duration.value),
+          durationParts: this.getDurationParts(),
+          showDuration: !!this.specialDuration || Number.isFinite(this.duration.value),
           properties
         }
       ),

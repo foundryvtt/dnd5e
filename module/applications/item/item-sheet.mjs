@@ -398,8 +398,8 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
         arr = await arr;
         const ctx = effectMap[id] = {
           id, name, img, disabled, duration, source, parent,
-          durationParts: duration.remaining ? duration.label.split(", ") : [],
-          showDuration: Number.isFinite(duration.value),
+          durationParts: effect.getDurationParts(),
+          showDuration: effect.specialDuration || Number.isFinite(duration.value),
           hasTooltip: true,
           riders: []
         };

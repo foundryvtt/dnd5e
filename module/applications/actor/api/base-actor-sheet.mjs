@@ -249,7 +249,6 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       return arr;
     }, []);
 
-    // TODO: Account for v14's duration labels & our custom start/end of next turn expiries
     for ( const category of Object.values(context.effects) ) {
       category.effects = await category.effects.reduce(async (arr, effect) => {
         effect.updateDuration();
@@ -266,8 +265,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         arr.push({
           id, name, img, disabled, duration, source, toggleable,
           parentId: effect.target === effect.parent ? null : effect.parent.id,
-          durationParts: duration.remaining ? duration.label.split(", ") : [],
-          showDuration: Number.isFinite(duration.value),
+          durationParts: effect.getDurationParts(),
+          showDuration: !!effect.specialDuration || Number.isFinite(duration.value),
           hasTooltip: source instanceof dnd5e.documents.Item5e
         });
         return arr;
