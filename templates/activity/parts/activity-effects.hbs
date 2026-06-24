@@ -7,7 +7,6 @@
         </button>
     </legend>
     <multi-select name="appliedLocalEffects" class="hidden-tags">{{ selectOptions allEffects }}</multi-select>
-    <document-tags name="appliedRemoteEffects" class="hidden-tags" type="ActiveEffect"></document-tags>
     <ul class="separated-list effects-list flexcol unlist">
         {{#each appliedEffects}}
         <li data-index="{{ @index }}" data-profile-id="{{ data._id }}" data-effect-id="{{ effect.id }}"
@@ -20,6 +19,8 @@
         </li>
         {{/each}}
     </ul>
+    <document-tags name="appliedRemoteEffects" class="hidden-tags drop-area" type="ActiveEffect"
+                   data-drop-hint="{{ localize (ifThen labels.drop labels.drop "DND5E.EFFECT.DropHint") }}"></document-tags>
 </fieldset>
 
 {{#*inline ".effect"}}

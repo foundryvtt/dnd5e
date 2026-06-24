@@ -58,11 +58,6 @@
       line-height: normal;
     }
     .name { flex: 1 0 175px; }
-    .drop-area {
-      border: var(--dnd5e-border-dashed);
-      border-radius: 4px;
-      padding-inline: 4px;
-    }
     .gold-icon {
       --icon-size: 24px;
       --icon-fill: var(--activity-icon-color);
@@ -111,19 +106,13 @@
 /* ----------------------------------------- */
 
 :is(.summon-activity, .transform-activity).sheet .separated-list:not(.effects-list) {
-  .content-link, .drop-area, .name {
+  .content-link, .name {
     display: flex;
     align-items: center;
     align-content: center;
   }
 
-  .drop-area {
-    justify-content: center;
-    font-size: var(--font-size-11);
-    font-style: italic;
-    height: var(--form-field-height);
-    color: var(--color-text-secondary);
-  }
+  .drop-area { height: var(--form-field-height); }
 
   .content-link {
     height: var(--form-field-height);
