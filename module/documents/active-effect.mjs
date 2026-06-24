@@ -797,6 +797,15 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /** @inheritDoc */
   isExpiryEvent(event, context) {
     const shouldExpire = super.isExpiryEvent(event, context);
+
+    // Catch false negatives for source-based expiries where the source is no longer in combat
+    if ( !shouldExpire && this.system.specialDuration?.startsWith("source") ) {
+      const combat = context.combat ?? game.combat;
+      const hasCombatant = (combat === this.start.combat) && combat.combatants.has(this.start.combatant);
+      if ( !hasCombatant ) return (this.start?.round ?? 0) < context.round;
+    }
+
+    // Otherwise if not going to expire or not "end of turn" special expiry, defer to core logic
     if ( !shouldExpire || !this.system.specialDuration || (event !== "turnEnd") ) return shouldExpire;
 
     // If "End of Source/Target turn"-expiry effect was created on the currently-ending turn, do not yet expire
