@@ -21,7 +21,7 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
   /** @override */
   static LOCALIZATION_PREFIXES = ["DND5E.REGIONBEHAVIORS.ROTATEAREA"];
 
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
 
   /** @override */
   static defineSchema() {
@@ -62,7 +62,7 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
     };
   }
 
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
 
   /**
    * Modes for determining rotation direction when moving to the next point.
@@ -75,7 +75,7 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
     long: "DND5E.REGIONBEHAVIORS.ROTATEAREA.DirectionMode.Longest"
   });
 
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
 
   /**
    * Modes for mapping rotation time to final speed.
@@ -86,9 +86,9 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
     variable: "DND5E.REGIONBEHAVIORS.ROTATEAREA.SpeedMode.Variable"
   });
 
-  /* ---------------------------------------- */
-  /*  Rotation                                */
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
+  /*  Rotation                                    */
+  /* -------------------------------------------- */
 
   /**
    * Rotate to the next position.
@@ -102,7 +102,7 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
     return this.rotateTo({ position });
   }
 
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
 
   /**
    * Trigger the rotator to rotate to a angle or specific position. Either the angle or position must be provided.
@@ -194,9 +194,9 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
     ]);
   }
 
-  /* ---------------------------------------- */
-  /*  Helpers                                 */
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
 
   /**
    * Calculate the final position based on a rotation.
@@ -211,7 +211,7 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
     return { x: vector.B.x - offset.x, y: vector.B.y - offset.y };
   }
 
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
 
   /**
    * Retrieve and object with canvas documents for anything rotated.
@@ -232,7 +232,7 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
     return animatables;
   }
 
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
 
   /**
    * Center of the placeable used for position adjustment.
@@ -254,7 +254,7 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
     return { x: doc.x, y: doc.y };
   }
 
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
 
   /**
    * Current rotation value of a placeable.
@@ -267,7 +267,7 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
     return { x: size.width * 0.5, y: size.height * 0.5 };
   }
 
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
 
   /**
    * Current rotation value of a placeable.
@@ -280,7 +280,7 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
     return doc.object?.rotation;
   }
 
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
 
   /**
    * Size of the placeable used for position adjustment.
@@ -294,7 +294,7 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
     else return { width: 0, height: 0 };
   }
 
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
 
   /**
    * Create updates needed to rotate a region's shapes.
@@ -315,7 +315,7 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
     };
   }
 
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
 
   /**
    * Determine the direction to rotate and the final rotation angle based on the direction mode.
@@ -336,9 +336,9 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
     }
   }
 
-  /* ---------------------------------------- */
-  /*  Hooks                                   */
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
+  /*  Hooks                                       */
+  /* -------------------------------------------- */
 
   /**
    * Animate rotation in response to changes to behavior.
@@ -353,7 +353,7 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
     }
   }
 
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
 
   /**
    * Handle animating the rotation of the region.
@@ -399,7 +399,7 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
     }
   }
 
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
 
   /**
    * Handle manually updating animation on tokens per-frame to ensure vision animates.

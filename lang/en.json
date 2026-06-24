@@ -292,6 +292,24 @@
     "other": "Activities"
   },
   "FIELDS": {
+    "behaviors": {
+      "element": {
+        "level": {
+          "label": "Level Limit",
+          "hint": "Range of levels required to apply this behavior.",
+          "max": {
+            "label": "Maximum Level"
+          },
+          "min": {
+            "label": "Minimum Level"
+          }
+        },
+        "name": {
+          "label": "Name"
+        }
+      },
+      "label": "Area of Effect Behaviors"
+    },
     "description": {
       "label": "Description",
       "chatFlavor": {
@@ -1177,6 +1195,15 @@
     "Invalid": "Removing a pending trade will invalidate your trade order.",
     "Pending": "Pending trade"
   }
+},
+
+"DND5E.BEHAVIOR": {
+  "Action": {
+    "Create": "Create Behavior",
+    "Delete": "Delete Behavior"
+  },
+  "Hint": "These behaviors will apply to any area of effect placed by this activity.",
+  "Label": "Behavior"
 },
 
 "DND5E.Biography": "Biography",
@@ -2425,7 +2452,7 @@
       }
     }
   },
-  "Empty": "No associated effects. Use the <i class=\"fas fa-plus\"></i> button above to create one, or select an existing effect from the drop-down.",
+  "Empty": "No associated effects. Use the <i class=\"fas fa-plus\"></i> button above to create one, select an existing effect from the drop-down, or drop one from a compendium.",
   "Label": "Available Effects",
   "RIDER": {
     "Activity": "Enchantment Rider Activity",
@@ -2510,7 +2537,8 @@
   "Enchantment": {
     "Action": {
       "Create": "Create Enchantment",
-      "Delete": "Delete Enchantment"
+      "Delete": "Delete Enchantment",
+      "Dissociate": "Dissociate Enchantment"
     },
     "Active": "{name} (active)",
     "Empty": "No associated enchantments. Use the <i class=\"fas fa-plus\"></i> button above to create one, or select an existing enchantment from the drop-down."

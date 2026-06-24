@@ -204,7 +204,7 @@ export default function ActivityMixin(Base) {
             dnd5e: this.messageFlags
           },
           system: {
-            effects: this.applicableEffects?.map(e => `.ActiveEffect.${e.id}`)
+            effects: this.applicableEffects?.map(e => e.relativeUUID)
           }
         },
         hasConsumption: usageConfig.hasConsumption
@@ -719,7 +719,7 @@ export default function ActivityMixin(Base) {
      */
     _finalizeMessageConfig(usageConfig, messageConfig, results) {
       messageConfig.data.rolls = (messageConfig.data.rolls ?? []).concat(results.updates.rolls);
-      const effects = this.applicableEffects?.map(e => `.ActiveEffect.${e.id}`);
+      const effects = this.applicableEffects?.map(e => e.relativeUUID);
       if ( effects ) foundry.utils.setProperty(messageConfig.data, "system.effects", effects);
     }
 
@@ -1121,6 +1121,34 @@ export default function ActivityMixin(Base) {
         });
       }
       return templates;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Handle attaching region behaviors to a newly created template.
+     * @param {Region} region
+     * @param {object} options
+     * @param {string} userId
+     */
+    static async placeTemplateBehaviors(region, options, userId) {
+      if ( !game.user.isActiveGM || (options.dnd5e?.createActivityBehaviors === false) ) return;
+
+      const activity = await fromUuid(region.getFlag("dnd5e", "origin"));
+      const behaviors = activity?.applicableBehaviors;
+      if ( !behaviors?.length ) return;
+
+      const toCreate = [];
+      for ( const behavior of behaviors ) {
+        const data = behavior.config.createBehaviorData(activity);
+        if ( !data ) continue;
+        data.name ??= behavior.name;
+        toCreate.push(data);
+      }
+
+      // TODO: Add pre- and post- hooks
+
+      region.createEmbeddedDocuments("RegionBehavior", toCreate);
     }
 
     /* -------------------------------------------- */
