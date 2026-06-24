@@ -181,8 +181,8 @@ export default class DamageRoll extends BasicRoll {
       return [term];
     }
 
-    let cm = critical.multiplier ?? 2;
-    let cb = (critical.bonusDice && !index) ? critical.bonusDice : 0;
+    const cm = critical.multiplier ?? 2;
+    const cb = (critical.bonusDice && !index) ? critical.bonusDice : 0;
 
     // Powerful critical replaces the extra dice with their maximized value, added as a flat bonus.
     if ( critical.powerfulCritical ) {
