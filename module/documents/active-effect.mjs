@@ -436,7 +436,13 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
+  /**
+   * Determine whether a specific change should be applied during this phase, setting `applied` if approved.
+   * @param {object} change           Change that might be applied.
+   * @param {object} [options={}]
+   * @param {string} [options.phase]  Active effect phase being checked.
+   * @returns {boolean}
+   */
   shouldApplyChange(change, { phase }={}) {
     // TODO: Adapt when core implements https://github.com/foundryvtt/foundryvtt/issues/13931, if it does
     if ( change.phase !== phase ) return false;
