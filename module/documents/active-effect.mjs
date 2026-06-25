@@ -489,8 +489,8 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     } else if ( this.specialDuration ) {
       const useYour = (this.modifiesActor || this.isAppliedEnchantment)
         && (this.specialDuration.startsWith("target") || (this.getSourceActor() === this.actor));
-      if ( useYour ) duration.label = _loc(`DND5E.ACTIVEEFFECT.EXPIRIES.your${this.specialDuration.slice(6)}`);
-      else duration.label = _loc(`DND5E.ACTIVEEFFECT.EXPIRIES.${this.specialDuration}`);
+      if ( useYour ) duration.label = _loc(`DND5E.ACTIVEEFFECT.Expiry.Your${this.specialDuration.slice(6)}`);
+      else duration.label = _loc(`DND5E.ACTIVEEFFECT.Expiry.${this.specialDuration.capitalize()}`);
     }
     return duration;
   }
@@ -927,7 +927,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     const optGroup = document.createElement("optgroup");
     optGroup.label = _loc("DND5E.ACTIVEEFFECT.SystemExpiries");
     for ( const expiry of ActiveEffect5e.PSEUDO_EXPIRIES ) {
-      optGroup.insertAdjacentHTML("beforeEnd", `<option ${expiry === app.document.duration.expiry ? "selected " : ""}value="${expiry}">${_loc(`DND5E.ACTIVEEFFECT.EXPIRIES.${expiry}`)}</option>`);
+      optGroup.insertAdjacentHTML("beforeEnd", `<option ${expiry === app.document.duration.expiry ? "selected " : ""}value="${expiry}">${_loc(`DND5E.ACTIVEEFFECT.Expiry.${expiry.capitalize()}`)}</option>`);
     }
     const expirySelect = html.querySelector("[name='duration.expiry']");
     expirySelect?.insertAdjacentElement("beforeend", optGroup);
