@@ -496,6 +496,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       template: {
         count: "",
         contiguous: false,
+        wallMode: "walled",
         type: "",
         size: "",
         width: "",

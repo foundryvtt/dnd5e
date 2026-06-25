@@ -17,6 +17,22 @@ export default class TargetField extends SchemaField {
         count: new FormulaField({ deterministic: true }),
         contiguous: new BooleanField(),
         stationary: new BooleanField(),
+        targetOnPlacement: new StringField({
+          required: true, blank: false, initial: "default",
+          choices: {
+            default: "DND5E.TARGET.FIELDS.target.template.targetOnPlacement.choices.default",
+            true: "DND5E.TARGET.FIELDS.target.template.targetOnPlacement.choices.on",
+            false: "DND5E.TARGET.FIELDS.target.template.targetOnPlacement.choices.off"
+          }
+        }),
+        wallMode: new StringField({
+          required: true, blank: false, initial: "walled",
+          choices: {
+            walled: "DND5E.TARGET.FIELDS.target.template.wallMode.choices.walled",
+            gaps: "DND5E.TARGET.FIELDS.target.template.wallMode.choices.gaps",
+            unwalled: "DND5E.TARGET.FIELDS.target.template.wallMode.choices.unwalled"
+          }
+        }),
         type: new StringField(),
         size: new FormulaField({ deterministic: true }),
         width: new FormulaField({ deterministic: true }),
@@ -73,6 +89,13 @@ export default class TargetField extends SchemaField {
     // Generate the template labels
     const templateConfig = CONFIG.DND5E.areaTargetTypes[this.target.template.type];
     this.target.template.labels = {};
+    const defaultTargeting = game.settings.get("dnd5e", "targetTemplateOnPlacement");
+    const defaultState = game.i18n.localize(
+      `DND5E.TARGET.FIELDS.target.template.targetOnPlacement.choices.${defaultTargeting ? "on" : "off"}`
+    );
+    this.target.template.labels.targetOnPlacementHint = game.i18n.format(
+      "DND5E.TARGET.FIELDS.target.template.targetOnPlacement.hint", { default: defaultState }
+    );
     if ( templateConfig ) {
       const parts = [];
       if ( this.target.template.count > 1 ) parts.push(`${this.target.template.count} ×`);

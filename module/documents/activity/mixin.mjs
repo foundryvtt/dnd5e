@@ -1106,7 +1106,7 @@ export default function ActivityMixin(Base) {
 
     /**
      * Handle placing a measured template in the scene.
-     * @returns {MeasuredTemplateDocument[]}
+     * @returns {RegionDocument[]}
      */
     async #placeTemplate() {
       const templates = [];
