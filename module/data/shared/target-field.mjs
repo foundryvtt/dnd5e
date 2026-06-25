@@ -21,8 +21,8 @@ export default class TargetField extends SchemaField {
           required: true, blank: false, initial: "default",
           choices: {
             default: "DND5E.TARGET.FIELDS.target.template.targetOnPlacement.choices.default",
-            true: "DND5E.TARGET.FIELDS.target.template.targetOnPlacement.choices.on",
-            false: "DND5E.TARGET.FIELDS.target.template.targetOnPlacement.choices.off"
+            on: "DND5E.TARGET.FIELDS.target.template.targetOnPlacement.choices.on",
+            off: "DND5E.TARGET.FIELDS.target.template.targetOnPlacement.choices.off"
           }
         }),
         wallMode: new StringField({
