@@ -675,7 +675,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const model = CONFIG.DND5E.spellcasting[type];
 
     // Otherwise proceed with calculation.
-    model.prepareSlots(spells, actor, progression);
+    if ( model.slots ) model.prepareSlots(spells, actor, progression);
   }
 
   /* -------------------------------------------- */
