@@ -103,7 +103,7 @@ class RulesIterator extends Iterator {
    * @returns {RulesIterator}
    */
   filterWith(rollData) {
-    return new RulesIterator(this.#iterator.filter(r => {
+    return new RulesIterator(this.filter(r => {
       if ( r.effect?.system.conditions?.recheck(rollData) === false ) return false;
       if ( r.conditions?.recheck(rollData) === false ) return false;
       return true;
@@ -145,8 +145,9 @@ class RulesIterator extends Iterator {
   /**
    * Transform each rule element into its underlying value.
    * @param {Number|String} [type]  Transform value into specific primitive type.
+   * @returns {RulesIterator}
    */
   values(type) {
-    return new RulesIterator(this.#iterator.map(r => type ? type(r.value ?? r) : r.value ?? r));
+    return new RulesIterator(this.map(r => type ? type(r.value ?? r) : r.value ?? r));
   }
 }
