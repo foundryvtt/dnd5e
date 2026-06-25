@@ -22,6 +22,7 @@ export default class TemplatePlacement extends BasePlacement {
   /** @override */
   async _place() {
     const results = [];
+    const placedDocuments = [];
     const onKeyDown = this.#onKeyDown.bind(this);
     const priorTargets = this.config.targetOnPlacement ? new Set(Array.from(game.user.targets, t => t.id)) : null;
     const attachToToken = this.config.shapes.some(s => s.type === "emanation");
@@ -54,12 +55,15 @@ export default class TemplatePlacement extends BasePlacement {
         },
         onChange: ({ preview, document }) => {
           TemplatePlacement.#displayTemplateElevation(preview);
-          if ( this.config.targetOnPlacement ) TemplatePlacement.#targetTokens([document], this.config);
+          if ( this.config.targetOnPlacement ) {
+            TemplatePlacement.#targetTokens([...placedDocuments.filter(Boolean), document], this.config);
+          }
         },
-        preConfirm: ({ document, index }) => {
+        preConfirm: ({ document, regionIndex }) => {
           const obj = document.toObject();
           // TODO-thatlonelybugbear: Store elevation and level per placement if multi-shape placement can use different
           // elevations or scene levels, then build region data from each placement's own vertical context.
+          placedDocuments[regionIndex] = document;
           results.elevation = obj.elevation;
           results.push({ ...obj.shapes.at(-1), token: obj.attachment.token });
         }
@@ -285,6 +289,7 @@ export default class TemplatePlacement extends BasePlacement {
       visibility: CONST.REGION_VISIBILITY.ALWAYS,
       highlightMode: "coverage",
       flags: {
+        core: { MeasuredTemplate: true },
         dnd5e: {
           dimensions: {
             type: target.type,
