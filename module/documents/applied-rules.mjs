@@ -76,6 +76,8 @@ export default class AppliedRules extends Map {
 
 /* -------------------------------------------- */
 
+const CONSUMED = Symbol("consumed");
+
 /**
  * Special iterator for rules that adds some additional helper methods.
  */
@@ -103,6 +105,16 @@ class RulesIterator extends Iterator {
   /* -------------------------------------------- */
 
   /**
+   * Mark all rules as consumed and skip any previously consumed rules.
+   * @returns {RulesIterator}
+   */
+  consume() {
+    return new RulesIterator(this.#iterator.filter(r => r[CONSUMED] ? false : r[CONSUMED] = true));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Filter rules based on effect & change conditions.
    * @param {RollData} rollData
    * @returns {RulesIterator}
@@ -113,6 +125,15 @@ class RulesIterator extends Iterator {
       if ( r.conditions?.check(rollData) === false ) return false;
       return true;
     }));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Reset the consumption for all rules.
+   */
+  reset() {
+    this.forEach(r => delete r[CONSUMED]);
   }
 
   /* -------------------------------------------- */

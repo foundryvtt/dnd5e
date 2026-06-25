@@ -1,5 +1,6 @@
 import aggregateDamageRolls from "../../dice/aggregate-damage-rolls.mjs";
 import simplifyRollFormula from "../../dice/simplify-roll-formula.mjs";
+import AppliedRules from "../../documents/applied-rules.mjs";
 import { safePropertyExists, staticID } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import IdentifierField from "../fields/identifier-field.mjs";
@@ -767,11 +768,18 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
     if ( !this.damage?.parts ) return foundry.utils.mergeObject({ rolls: [] }, config);
 
     const rollConfig = foundry.utils.deepClone(config);
-    rollData ??= this.getRollData();
+    rollData ??= this.getRollData({ roll: { attackMode: config.attackMode } });
+    rollData = { ...rollData, roll: foundry.utils.deepClone(rollData.roll ?? {}) };
+    Object.assign(rollData.roll, {
+      isCritical: rollConfig.isCritical,
+      properties: Array.from(this.item.system.properties ?? []).filter(p => CONFIG.DND5E.itemProperties[p]?.isPhysical)
+    });
     rollConfig.rolls = this.damage.parts
       .map((d, index) => this._processDamagePart(d, rollConfig, rollData, index, formulaOptions))
       .filter(d => d.parts.length)
       .concat(config.rolls ?? []);
+
+    AppliedRules.collect("damage:bonus", this.actor, this.item).reset();
 
     return rollConfig;
   }
@@ -783,12 +791,11 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @param {ActivityRollDataOptions} [options]
    * @returns {ActivityRollData}
    */
-  getRollData({ data, ...options }={}) {
+  getRollData(options={}) {
     const rollData = this.item.getRollData(options);
     rollData.activity = { ...this };
     rollData.consumed = this.item.flags.dnd5e?.consumed;
     rollData.mod = this.actor?.system.abilities?.[this.ability]?.mod ?? 0;
-    if ( data ) Object.assign(rollData, data);
     return rollData;
   }
 
@@ -807,7 +814,9 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   _processDamagePart(damage, rollConfig, rollData, index=0, options={}) {
     const scaledFormula = damage.scaledFormula(rollConfig.scaling ?? rollData.scaling, options);
     const parts = scaledFormula ? [scaledFormula] : [];
-    const data = { ...rollData };
+    const lastType = this.item.getFlag("dnd5e", `last.${this.id}.damageType.${index}`);
+    const data = { ...rollData, roll: foundry.utils.deepClone(rollData.roll ?? {}) };
+    data.roll.damageType = (damage.types.has(lastType) ? lastType : null) ?? damage.types.first();
 
     if ( index === 0 ) {
       const actionType = this.getActionType(rollConfig.attackMode);
@@ -816,15 +825,16 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       if ( this.item.system.damage?.bonus ) parts.push(String(this.item.system.damage.bonus));
     }
 
-    const lastType = this.item.getFlag("dnd5e", `last.${this.id}.damageType.${index}`);
+    const ruleBonus = AppliedRules.collect("damage:bonus", this.actor, this.item)
+      .filterWith(data).consume().toFormula();
+    if ( ruleBonus ) parts.push(ruleBonus);
 
     return {
       data, parts,
       options: {
-        type: (damage.types.has(lastType) ? lastType : null) ?? damage.types.first(),
+        type: data.roll.damageType,
         types: Array.from(damage.types),
-        properties: Array.from(this.item.system.properties ?? [])
-          .filter(p => CONFIG.DND5E.itemProperties[p]?.isPhysical)
+        properties: data.roll.properties
       }
     };
   }

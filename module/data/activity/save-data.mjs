@@ -146,4 +146,13 @@ export default class BaseSaveActivityData extends BaseActivityData {
 
     return rollConfig;
   }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  getRollData(options={}) {
+    const rollData = super.getRollData(options);
+    if ( rollData.roll ) rollData.roll.type = "save";
+    return rollData;
+  }
 }
