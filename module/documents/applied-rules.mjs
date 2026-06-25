@@ -16,7 +16,7 @@ export default class AppliedRules extends Map {
 
   /**
    * Get just the rule values for a provided key.
-   * @property {string} key  Rule target and type separated by a colon (e.g. "attack:bonus").
+   * @param {string} key  Rule target and type separated by a colon (e.g. "attack:bonus").
    * @returns {any[]}
    */
   getValues(key) {
@@ -117,7 +117,7 @@ class RulesIterator extends Iterator {
    * @returns {string}
    */
   toFormula() {
-    return this.#iterator.map(c => c.value).toArray().join(" + ");
+    return this.values(String).toArray().join(" + ");
   }
 
   /* -------------------------------------------- */
@@ -126,11 +126,8 @@ class RulesIterator extends Iterator {
    * Find the highest value among all of the provided rules, or `-Infinity` of no rules are available.
    * @returns {number}
    */
-  toMax() {
-    return this.#iterator.reduce((max, c) => {
-      const value = Number(c.value);
-      return value > max ? value : max;
-    }, -Infinity);
+  toLargest() {
+    return this.values(Number).reduce((max, value) => value > max ? value : max, -Infinity);
   }
 
   /* -------------------------------------------- */
@@ -139,10 +136,17 @@ class RulesIterator extends Iterator {
    * Find the lowest value among all of the provided rules, or `Infinity` of no rules are available.
    * @returns {number}
    */
-  toMin() {
-    return this.#iterator.reduce((min, c) => {
-      const value = Number(c.value);
-      return value < min ? value : min;
-    }, Infinity);
+  toSmallest() {
+    return this.values(Number).reduce((min, value) => value < min ? value : min, Infinity);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Transform each rule element into its underlying value.
+   * @param {Number|String} [type]  Transform value into specific primitive type.
+   */
+  values(type) {
+    return new RulesIterator(this.#iterator.map(r => type ? type(r.value ?? r) : r.value ?? r));
   }
 }
