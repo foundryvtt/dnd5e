@@ -30,6 +30,8 @@
  *                                           on an actor, or only on a class that is multi-classing?
  */
 
+/* -------------------------------------------- */
+
 /**
  * @typedef ItemChoiceAdvancementConfigurationData
  * @property {boolean} allowDrops                             Should players be able to drop non-listed items?
@@ -40,6 +42,7 @@
  * @property {Set<string>} restriction.list                   Spell lists from which a spell must be selected.
  * @property {string} restriction.subtype                     Item sub-type allowed.
  * @property {string} restriction.type                        Specific item type allowed.
+ * @property {"a"|"m"} sorting                                Sorting mode for the item list.
  * @property {AdvancementSpellConfigurationData} spell        Mutations applied to spell items.
  * @property {string} type                                    Type of item allowed, if it should be restricted.
  */
@@ -52,6 +55,7 @@
 
 /**
  * @typedef ItemChoicePoolEntry
+ * @property {number} sort  Manual sorting value for the entry.
  * @property {string} uuid  UUID of the item to present as a choice.
  */
 
@@ -69,26 +73,58 @@
  * @property {string} [replacement]  ID of the replacement item.
  */
 
+/* -------------------------------------------- */
+
 /**
  * @typedef ItemGrantAdvancementConfigurationData
  * @property {ItemGrantItemConfiguration[]} items       Data for the items to be granted.
  * @property {boolean} optional                         Should user be able to de-select any individual option?
+ * @property {"a"|"m"} sorting                          Sorting mode for the item list.
  * @property {AdvancementSpellConfigurationData} spell  Data used to modify any granted spells.
  */
 
 /**
  * @typedef ItemGrantItemConfiguration
- * @property {string} uuid       UUID of the item to grant.
  * @property {boolean} optional  Is this item optional? Has no effect if whole advancement is optional.
+ * @property {number} sort       Manual sorting value for the entry.
+ * @property {string} uuid       UUID of the item to grant.
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef ModifyItemAdvancementConfigurationData
+ * @property {ModifyItemChangeConfiguration[]} changes  List of enchantments to apply and their valid items.
  */
 
 /**
+ * @typedef ModifyItemChangeConfiguration
+ * @property {string} _id               ID of the change, matches local enchantment ID if UUID isn't specified.
+ * @property {string} [uuid]            UUID of a remote effect to apply.
+ * @property {Set<string>} identifiers  One or more identifiers used to find matching items.
+ */
+
+/**
+ * @typedef ModifyItemAdvancementValueData
+ * @property {ModifyItemModifiedItemValue[]} modified  List of items that were modified by the advancement.
+ */
+
+/**
+ * @typedef ModifyItemModifiedItemValue
+ * @property {string} change  ID of the change that was applied (referencing entry in `configuration.changes`).
+ * @property {string} effect  ID of the enchantment that was created on the item.
+ * @property {string} item    ID of the item that was modified.
+ */
+
+/* -------------------------------------------- */
+
+/**
  * @typedef ScaleValueAdvancementConfigurationData
- * @property {string} identifier        Identifier used to select this scale value in roll formulas.
- * @property {string} type              Type of data represented by this scale value.
+ * @property {string} identifier             Identifier used to select this scale value in roll formulas.
+ * @property {string} type                   Type of data represented by this scale value.
  * @property {object} [distance]
- * @property {string} [distance.units]  If distance type is selected, the units each value uses.
- * @property {Object<string, *>} scale  Scale values for each level. Value format is determined by type.
+ * @property {string} [distance.units]       If distance type is selected, the units each value uses.
+ * @property {Record<string, object>} scale  Sparse scale values for each level.
  */
 
 /**
@@ -109,6 +145,12 @@
  */
 
 /**
+ * @typedef ScaleValueUsesTypeData
+ * @property {number} value           Number of uses.
+ * @property {string} period          Usage refresh period.
+ */
+
+/**
  * Information on how a scale value of this type is configured.
  *
  * @typedef ScaleValueTypeMetadata
@@ -117,6 +159,8 @@
  * @property {string} identifier  Hint for the identifier for this type.
  * @property {boolean} isNumeric  When using the default editing interface, should numeric inputs be used?
  */
+
+/* -------------------------------------------- */
 
 /**
  * @typedef SizeAdvancementConfigurationData
@@ -127,6 +171,8 @@
  * @typedef SizeAdvancementValueData
  * @property {string} size  Selected size.
  */
+
+/* -------------------------------------------- */
 
 /**
  * @typedef AdvancementSpellConfigurationData
@@ -139,11 +185,15 @@
  * @property {boolean} uses.requireSlot  Require a spell slot in addition to limited uses.
  */
 
+/* -------------------------------------------- */
+
 /**
  * @typedef SubclassAdvancementValueData
  * @property {Item5e} document  Copy of the subclass on the actor.
  * @property {string} uuid      UUID of the remote subclass source.
  */
+
+/* -------------------------------------------- */
 
 /**
  * @typedef TraitAdvancementConfigurationData

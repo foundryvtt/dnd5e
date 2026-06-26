@@ -1,7 +1,10 @@
 import CastActivity from "../../../documents/activity/cast.mjs";
 import SystemDataModel from "../../abstract/system-data-model.mjs";
 import { ActivitiesField } from "../../fields/activities-field.mjs";
+import FormulaField from "../../fields/formula-field.mjs";
 import UsesField from "../../shared/uses-field.mjs";
+
+const { SchemaField } = foundry.data.fields;
 
 /**
  * @import { ItemRollData } from "../../../documents/_types.mjs";
@@ -28,6 +31,9 @@ export default class ActivitiesTemplate extends SystemDataModel {
   static defineSchema() {
     return {
       activities: new ActivitiesField(),
+      damage: new SchemaField({
+        bonus: new FormulaField()
+      }, { persisted: false }),
       uses: new UsesField()
     };
   }
@@ -323,18 +329,27 @@ export default class ActivitiesTemplate extends SystemDataModel {
 
   /**
    * Perform any item & activity uses recovery.
-   * @param {string[]} periods       Recovery periods to check.
-   * @param {ItemRollData} rollData  Roll data to use when evaluating recovery formulas.
+   * @param {Map<string, number>} periods  Recovery periods to check, mapped to the number of times occurred.
+   * @param {ItemRollData} [rollData]      Roll data to use when evaluating recovery formulas.
    * @returns {Promise<{ updates: object, rolls: BasicRoll[], destroy: boolean }>}
    */
   async recoverUses(periods, rollData) {
+    if ( foundry.utils.getType(periods) === "Array" ) {
+      foundry.utils.logCompatibilityWarning(
+        "The periods parameter of `recoverUses` is now a mapping of periods to times triggered.",
+        { since: "DnD5e 6.0", until: "DnD5e 6.2" }
+      );
+      periods = new Map(periods.map(p => [p, 1]));
+    }
+
     const updates = {};
     const rolls = [];
     const autoRecharge = game.settings.get("dnd5e", "autoRecharge");
-    const shouldRecharge = periods.includes("turnStart") && this.parent.actor.system.isNPC && (autoRecharge !== "no");
+    const shouldRecharge = periods.has("turnStart") && this.parent.actor.system.isNPC && (autoRecharge !== "no");
     const recharge = async doc => {
       const config = { apply: false };
       const message = { create: autoRecharge !== "silent" };
+      // TODO: Roll multiple times if multiple `turnStarts` are present
       const result = await UsesField.rollRecharge.call(doc, config, {}, message);
       if ( result ) {
         if ( doc instanceof Item ) foundry.utils.mergeObject(updates, result.updates);
@@ -342,6 +357,8 @@ export default class ActivitiesTemplate extends SystemDataModel {
         rolls.push(...result.rolls);
       }
     };
+
+    if ( !rollData && this.uses.recovery.some(u => u.type === "formula") ) rollData = this.parent.getRollData();
 
     const result = await UsesField.recoverUses.call(this, periods, rollData);
     if ( result ) {
@@ -355,6 +372,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
 
     for ( const activity of this.activities ) {
       if ( activity.dependentOrigin?.active === false ) continue;
+      if ( !rollData && activity.uses?.recovery.some(u => u.type === "formula") ) rollData = this.parent.getRollData();
       const result = await UsesField.recoverUses.call(activity, periods, rollData);
       if ( result ) {
         foundry.utils.mergeObject(updates, { [`system.activities.${activity.id}.uses`]: result.updates });
@@ -423,7 +441,10 @@ export default class ActivitiesTemplate extends SystemDataModel {
     // Track changes to cached spells on cast activities
     const removed = Object.entries(changed.system?.activities ?? {}).map(([key, data]) => {
       if ( (data instanceof foundry.data.operators.ForcedDeletion)
-        || foundry.utils.hasProperty(data, "spell.uuid") ) return this.activities.get(key)?.cachedSpell?.id;
+        || (foundry.utils.hasProperty(data, "spell.uuid")
+          && (foundry.utils.getProperty(data, "spell.uuid") !== this.activities.get(key)?.spell?.uuid)) ) {
+        return this.activities.get(key)?.cachedSpell?.id;
+      }
       return null;
     }).filter(_ => _);
     if ( removed.length ) foundry.utils.setProperty(options, "dnd5e.removedCachedItems", removed);

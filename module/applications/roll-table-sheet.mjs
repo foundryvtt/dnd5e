@@ -10,6 +10,7 @@ export default class RollTableSheet5e extends ApplicationV2Mixin(RollTableSheet,
   /** @override */
   static DEFAULT_OPTIONS = {
     actions: {
+      changeMode: RollTableSheet5e.#onChangeMode,
       editImage: RollTableSheet5e._onEditImage
     },
     classes: ["titlebar"]
@@ -56,5 +57,39 @@ export default class RollTableSheet5e extends ApplicationV2Mixin(RollTableSheet,
       if ( callback ) callback(newElement);
       oldElement.replaceWith(newElement);
     }
+  }
+
+  /* -------------------------------------------- */
+  /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
+
+  /**
+   * Change the sheet mode.
+   * @param {PrimarySheetMixin.MODES} [mode]  Mode to set. If not provided, mode will be toggled.
+   */
+  async changeMode(mode) {
+    this.mode = mode ? mode === dnd5e.applications.item.ItemSheet5e.MODES.PLAY ? "view" : "edit"
+      : this.isEditMode ? "view" : "edit";
+    const button = this.element?.querySelector('[data-action="changeMode"]');
+    if ( button ) {
+      const label = _loc(`DND5E.SheetMode${this.isEditMode ? "Edit" : "Play"}`);
+      button.checked = this.isEditMode;
+      button.dataset.tooltip = label;
+      button.setAttribute("aria-label", label);
+    }
+    await this.submit();
+    this.render();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle changing the sheet mode.
+   * @this {RollTableSheet5e}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   */
+  static #onChangeMode(event, target) {
+    this.changeMode();
   }
 }

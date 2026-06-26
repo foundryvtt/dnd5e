@@ -1,20 +1,31 @@
+import CompendiumTOCConfig from "./config/compendium-toc-config.mjs";
+
 /**
  * Compendium that renders pages as a table of contents.
  */
 export default class TableOfContentsCompendium extends foundry.applications.sidebar.apps.Compendium {
   /** @override */
   static DEFAULT_OPTIONS = {
-    classes: ["table-of-contents"],
-    window: {
-      resizable: true,
-      contentTag: "article"
+    actions: {
+      activateEntry: this.prototype._onClickLink,
+      configureTableOfContents: TableOfContentsCompendium.#onConfigureTableOfContents
     },
+    classes: ["table-of-contents"],
     position: {
       width: 800,
       height: 950
     },
-    actions: {
-      activateEntry: this.prototype._onClickLink
+    window: {
+      contentTag: "article",
+      controls: [
+        {
+          action: "configureTableOfContents",
+          icon: "fa-solid fa-bars-staggered",
+          label: "DND5E.TABLEOFCONTENTS.Action.Configure",
+          visible: TableOfContentsCompendium.#canConfigureTableOfContents
+        }
+      ],
+      resizable: true
     }
   };
 
@@ -38,6 +49,19 @@ export default class TableOfContentsCompendium extends foundry.applications.side
     chapter: 0,
     appendix: 100
   };
+
+  /* -------------------------------------------- */
+
+  /**
+   * Options allowed for entry types.
+   * @type {FormSelectOption[]}
+   */
+  static TYPE_OPTIONS = [
+    { value: "chapter", label: "DND5E.TABLEOFCONTENTS.Type.Chapter" },
+    { value: "appendix", label: "DND5E.TABLEOFCONTENTS.Type.Appendix" },
+    { value: "header", label: "DND5E.TABLEOFCONTENTS.Type.Header" },
+    { value: "special", label: "DND5E.TABLEOFCONTENTS.Type.Special" }
+  ];
 
   /* -------------------------------------------- */
   /*  Rendering                                   */
@@ -158,6 +182,29 @@ export default class TableOfContentsCompendium extends foundry.applications.side
   /* -------------------------------------------- */
 
   /**
+   * Whether it's possible to configure the table of contents.
+   * @this {TableOfContentsCompendium}
+   * @returns {boolean}
+   */
+  static #canConfigureTableOfContents() {
+    return !this.collection.locked && this.collection.testUserPermission(game.user, "OWNER");
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle opening the configuration application.
+   * @this {TableOfContentsCompendium}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   */
+  static async #onConfigureTableOfContents(event, target) {
+    new CompendiumTOCConfig({ compendium: this.collection }).render({ force: true });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Handle clicking a link to a journal entry or page.
    * @param {PointerEvent} event  The triggering click event.
    * @param {HTMLElement} target  The action target.
@@ -181,5 +228,39 @@ export default class TableOfContentsCompendium extends foundry.applications.side
     dragData = this._getEntryDragData(event.target.dataset.documentId);
     if ( !dragData ) return;
     event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare information on all entries in the provided compendium for configuring table of contents.
+   * @param {CompendiumCollection} compendium
+   * @returns { chapterOptions: FormSelectOption[], counts: Record<string, number> }
+   */
+  static async _getEntryBreakdown(compendium) {
+    const docs = await compendium.getIndex({
+      fields: ["flags.dnd5e.type", "flags.dnd5e.append", "flags.dnd5e.position"]
+    });
+
+    const counts = {};
+    const chapterOptions = docs
+      .reduce((arr, doc) => {
+        const flags = doc.flags.dnd5e ?? {};
+        if ( flags.type ) {
+          counts[`${flags.type}-${flags.position ?? 0}`] ??= 0;
+          counts[`${flags.type}-${flags.position ?? 0}`] += 1;
+        }
+        if ( (flags.type === "appendix") || (flags.type === "chapter") ) {
+          const sort = TableOfContentsCompendium.TYPES[flags.type] + (flags.position ?? 0);
+          arr.push({ label: game.i18n.format("DND5E.TABLEOFCONTENTS.Special.After", { chapter: doc.name }), sort });
+        }
+        return arr;
+      }, [{ value: null, label: game.i18n.localize("DND5E.TABLEOFCONTENTS.Special.End"), rule: true }])
+      .sort((lhs, rhs) => lhs.sort - rhs.sort)
+      .map((option, value) => ({ ...option, value: option.value === null ? null : value }));
+
+    return { chapterOptions, counts };
   }
 }

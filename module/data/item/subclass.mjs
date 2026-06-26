@@ -32,7 +32,7 @@ export default class SubclassData extends ItemDataModel.mixin(AdvancementTemplat
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       classIdentifier: new IdentifierField({
-        required: true, label: "DND5E.ClassIdentifier", hint: "DND5E.ClassIdentifierHint"
+        required: true, label: "DND5E.ClassIdentifier", hint: "DND5E.ClassIdentifierHint", types: ["class"]
       }),
       spellcasting: new SpellcastingField()
     });
@@ -62,6 +62,17 @@ export default class SubclassData extends ItemDataModel.mixin(AdvancementTemplat
         }
       }]
     ]);
+  }
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  get tooltipSubtitle() {
+    const cls = dnd5e.registry.classes.get(this.classIdentifier)?.name;
+    if ( cls ) return [_loc("DND5E.SubclassOf", { class: cls })];
+    return super.tooltipSubtitle;
   }
 
   /* -------------------------------------------- */

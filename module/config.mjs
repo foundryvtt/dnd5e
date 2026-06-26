@@ -8,6 +8,7 @@ import { CalendarGreyhawk, CALENDAR_OF_GREYHAWK } from "./data/calendar/calendar
 import { CalendarHarptos, CALENDAR_OF_HARPTOS } from "./data/calendar/calendar-of-harptos.mjs";
 import { CalendarKhorvaire, CALENDAR_OF_KHORVAIRE } from "./data/calendar/calendar-of-khorvaire.mjs";
 import MappingField from "./data/fields/mapping-field.mjs";
+import * as regionBehaviors from "./data/region-behavior/_module.mjs";
 import * as activities from "./documents/activity/_module.mjs";
 import Actor5e from "./documents/actor/actor.mjs";
 import * as advancement from "./documents/advancement/_module.mjs";
@@ -1096,6 +1097,26 @@ preLocalize("activityActivationTypes", { key: "label" });
 /* -------------------------------------------- */
 
 /**
+ * Types of behaviors that can be attached to regions through activities.
+ * @enum {ActivityBehaviorConfiguration}
+ */
+DND5E.activityBehaviorTypes = {
+  applyActiveEffect: {
+    label: "TYPES.RegionBehavior.applyActiveEffect",
+    icon: "systems/dnd5e/icons/svg/behaviors/apply-active-effect.svg",
+    model: regionBehaviors.ApplyActiveEffectActivityBehavior
+  },
+  difficultTerrain: {
+    label: "TYPES.RegionBehavior.dnd5e.difficultTerrain",
+    icon: "systems/dnd5e/icons/svg/behaviors/difficult-terrain.svg",
+    model: regionBehaviors.DifficultTerrainActivityBehavior
+  }
+};
+preLocalize("activityBehaviorTypes", { key: "label" });
+
+/* -------------------------------------------- */
+
+/**
  * Different things that an ability can consume upon use.
  * @enum {string}
  */
@@ -1587,43 +1608,48 @@ DND5E.shieldIds = {
 
 /**
  * Common armor class calculations.
- * @enum {{ label: string, [formula]: string }}
+ * @enum {{ label: string, [formula]: string, [armored]: boolean, [shielded]: boolean }}
  */
 DND5E.armorClasses = {
-  flat: {
-    label: "DND5E.ArmorClassFlat",
-    formula: "@attributes.ac.flat"
-  },
   natural: {
-    label: "DND5E.ArmorClassNatural",
+    label: "DND5E.ARMORCLASS.Calculation.Natural",
     formula: "@attributes.ac.flat"
   },
-  default: {
-    label: "DND5E.ArmorClassEquipment",
-    formula: "@attributes.ac.armor + @attributes.ac.dex"
+  armored: {
+    label: "DND5E.ARMORCLASS.Calculation.Armored",
+    formula: "@attributes.ac.armor + @attributes.ac.clamped.dex",
+    armored: true
+  },
+  unarmored: {
+    label: "DND5E.ARMORCLASS.Calculation.Unarmored",
+    formula: "10 + @abilities.dex.mod",
+    armored: false
   },
   mage: {
-    label: "DND5E.ArmorClassMage",
-    formula: "13 + @abilities.dex.mod"
+    label: "DND5E.ARMORCLASS.Calculation.Mage",
+    formula: "13 + @abilities.dex.mod",
+    armored: false
   },
   draconic: {
-    label: "DND5E.ArmorClassDraconic",
-    formula: "13 + @abilities.dex.mod"
+    label: "DND5E.ARMORCLASS.Calculation.Draconic",
+    formula: "13 + @abilities.dex.mod",
+    armored: false
   },
   unarmoredMonk: {
-    label: "DND5E.ArmorClassUnarmoredMonk",
-    formula: "10 + @abilities.dex.mod + @abilities.wis.mod"
+    label: "DND5E.ARMORCLASS.Calculation.UnarmoredMonk",
+    formula: "10 + @abilities.dex.mod + @abilities.wis.mod",
+    armored: false,
+    shielded: false
   },
   unarmoredBarb: {
-    label: "DND5E.ArmorClassUnarmoredBarbarian",
-    formula: "10 + @abilities.dex.mod + @abilities.con.mod"
+    label: "DND5E.ARMORCLASS.Calculation.UnarmoredBarbarian",
+    formula: "10 + @abilities.dex.mod + @abilities.con.mod",
+    armored: false
   },
   unarmoredBard: {
-    label: "DND5E.ArmorClassUnarmoredBard",
-    formula: "10 + @abilities.dex.mod + @abilities.cha.mod"
-  },
-  custom: {
-    label: "DND5E.ArmorClassCustom"
+    label: "DND5E.ARMORCLASS.Calculation.UnarmoredBard",
+    formula: "10 + @abilities.dex.mod + @abilities.cha.mod",
+    armored: false
   }
 };
 preLocalize("armorClasses", { key: "label" });
@@ -2833,8 +2859,14 @@ DND5E.areaTargetTypes = {
   radius: {
     label: "DND5E.TARGET.Type.Emanation.Label",
     counted: "DND5E.TARGET.Type.Emanation.Counted",
-    template: "circle",
+    template: "emanation",
     standard: true
+  },
+  ring: {
+    label: "DND5E.TARGET.Type.Ring.Label",
+    counted: "DND5E.TARGET.Type.Ring.Counted",
+    template: "ring",
+    sizes: ["radius", "thickness", "height"]
   },
   sphere: {
     label: "DND5E.TARGET.Type.Sphere.Label",
@@ -2937,15 +2969,31 @@ preLocalize("restTypes", { key: "label" });
 
 /**
  * The set of possible sensory perception types which an Actor may have.
- * @enum {string}
+ * @enum {SenseConfiguration}
  */
 DND5E.senses = {
-  blindsight: "DND5E.SenseBlindsight",
-  darkvision: "DND5E.SenseDarkvision",
-  tremorsense: "DND5E.SenseTremorsense",
-  truesight: "DND5E.SenseTruesight"
+  blindsight: {
+    label: "DND5E.SenseBlindsight",
+    detectionMode: "blindsight"
+  },
+  darkvision: {
+    label: "DND5E.SenseDarkvision",
+    grantsSight: true,
+    visionMode: "darkvision"
+  },
+  tremorsense: {
+    label: "DND5E.SenseTremorsense",
+    detectionMode: "feelTremor"
+  },
+  truesight: {
+    label: "DND5E.SenseTruesight",
+    detectionMode: "seeAll",
+    grantsSight: true,
+    visionMode: "darkvision"
+  }
 };
-preLocalize("senses", { sort: true });
+preLocalize("senses", { key: "label", sort: true });
+patchConfig("senses", "label", { since: "DnD5e 6.0", until: "DnD5e 6.2" });
 
 /* -------------------------------------------- */
 /*  Attacks                                     */
@@ -4412,6 +4460,10 @@ DND5E.advancementTypes = {
     documentClass: advancement.ItemGrantAdvancement,
     validItemTypes: new Set(_ALL_ITEM_TYPES)
   },
+  ModifyItem: {
+    documentClass: advancement.ModifyItemAdvancement,
+    validItemTypes: new Set(_ALL_ITEM_TYPES)
+  },
   ScaleValue: {
     documentClass: advancement.ScaleValueAdvancement,
     validItemTypes: new Set(_ALL_ITEM_TYPES)
@@ -4541,6 +4593,20 @@ DND5E.calendar = {
 };
 preLocalize("calendar.calendars", { keys: ["label", "group"] });
 preLocalize("calendar.formatters", { keys: ["label", "group"] });
+
+/* -------------------------------------------- */
+
+/**
+ * Mapping of time deltas created by time passing in the calendar system to limited use recovery periods.
+ * Note: Ordering is important in this entry because it determines the order in which these recovery periods
+ * will be selected if multiple applicable periods are found during the recovery process.
+ * @type {Map<string, string>}
+ */
+DND5E.calendarDeltasRecoveryMapping = new Map([
+  ["midnights", "day"],
+  ["sunrises", "dawn"],
+  ["sunsets", "dusk"]
+]);
 
 /* -------------------------------------------- */
 /*  Requests                                    */
@@ -4826,18 +4892,23 @@ Object.defineProperty(DND5E, "enrichmentLookup", {
     if ( !_enrichmentLookup ) {
       _enrichmentLookup = {
         abilities: foundry.utils.deepClone(DND5E.abilities),
+        damageTypes: Object.fromEntries(
+          Object.keys({ ...DND5E.damageTypes, ...DND5E.healingTypes }).map(k => [slugify(k), k])
+        ),
         languages: _flattenConfig(DND5E.languages, { labelKey: "label", skipEntry: (k, d) => d.selectable === false }),
         skills: foundry.utils.deepClone(DND5E.skills),
         spellSchools: foundry.utils.deepClone(DND5E.spellSchools),
         tools: foundry.utils.deepClone(DND5E.tools)
       };
-      const addFullKeys = key => Object.entries(DND5E[key]).forEach(([k, v]) =>
-        _enrichmentLookup[key][slugify(v.fullKey)] = { ...v, key: k }
-      );
+      const addFullKeys = key => Object.entries(DND5E[key]).forEach(([k, v]) => {
+        _enrichmentLookup[key][k].key = k;
+        if ( v.fullKey ) _enrichmentLookup[key][slugify(v.fullKey)] = { ...v, key: k };
+      });
       addFullKeys("abilities");
       addFullKeys("skills");
       addFullKeys("spellSchools");
-      Object.entries(DND5E.vehicleTypes).forEach(([k, label]) => _enrichmentLookup.tools[k] = { label });
+      addFullKeys("tools");
+      Object.entries(DND5E.vehicleTypes).forEach(([k, label]) => _enrichmentLookup.tools[k] = { label, key: k });
     }
     return _enrichmentLookup;
   },

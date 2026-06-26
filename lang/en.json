@@ -7,63 +7,72 @@
   }
 },
 
-"TYPES.Actor.character": "Player Character",
-"TYPES.Actor.characterPl": "Player Characters",
-"TYPES.Actor.encounter": "Encounter",
-"TYPES.Actor.encounterPl": "Encounters",
-"TYPES.Actor.group": "Group",
-"TYPES.Actor.groupPl": "Groups",
-"TYPES.Actor.npc": "Non-Player Character",
-"TYPES.Actor.npcPl": "Non-Player Characters",
-"TYPES.Actor.vehicle": "Vehicle",
-"TYPES.Actor.vehiclePl": "Vehicles",
+"TYPES.Actor": {
+  "character": "Player Character",
+  "characterPl": "Player Characters",
+  "encounter": "Encounter",
+  "encounterPl": "Encounters",
+  "group": "Group",
+  "groupPl": "Groups",
+  "npc": "Non-Player Character",
+  "npcPl": "Non-Player Characters",
+  "vehicle": "Vehicle",
+  "vehiclePl": "Vehicles"
+},
 
-"TYPES.ActiveEffect.enchantment": "Enchantment",
-"TYPES.ActiveEffect.enchantmentPl": "Enchantments",
+"TYPES.ActiveEffect": {
+  "enchantment": "Enchantment",
+  "enchantmentPl": "Enchantments"
+},
 
 "TYPES.ChatMessage": {
   "request": "Request Message",
   "rest": "Rest Message",
+  "timePassed": "Time Passed Message",
   "turn": "Combat Turn Message",
   "usage": "Usage Message"
 },
 
-"TYPES.Item.background": "Background",
-"TYPES.Item.backgroundPl": "Backgrounds",
-"TYPES.Item.container": "Container",
-"TYPES.Item.containerPl": "Containers",
-"TYPES.Item.class": "Class",
-"TYPES.Item.classPl": "Classes",
-"TYPES.Item.consumable": "Consumable",
-"TYPES.Item.consumablePl": "Consumables",
-"TYPES.Item.equipment": "Equipment",
-"TYPES.Item.equipmentPl": "Equipment",
-"TYPES.Item.facility": "Facility",
-"TYPES.Item.facilityPl": "Facilities",
-"TYPES.Item.feat": "Feature",
-"TYPES.Item.featurePl": "Features",
-"TYPES.Item.loot": "Loot",
-"TYPES.Item.lootPl": "Loot",
-"TYPES.Item.race": "Species",
-"TYPES.Item.racePl": "Species",
-"TYPES.Item.raceLegacy": "Race",
-"TYPES.Item.raceLegacyPl": "Races",
-"TYPES.Item.spell": "Spell",
-"TYPES.Item.spellPl": "Spells",
-"TYPES.Item.subclass": "Subclass",
-"TYPES.Item.subclassPl": "Subclasses",
-"TYPES.Item.tool": "Tool",
-"TYPES.Item.toolPl": "Tools",
-"TYPES.Item.weapon": "Weapon",
-"TYPES.Item.weaponPl": "Weapons",
+"TYPES.Item": {
+  "background": "Background",
+  "backgroundPl": "Backgrounds",
+  "container": "Container",
+  "containerPl": "Containers",
+  "class": "Class",
+  "classPl": "Classes",
+  "consumable": "Consumable",
+  "consumablePl": "Consumables",
+  "equipment": "Equipment",
+  "equipmentPl": "Equipment",
+  "facility": "Facility",
+  "facilityPl": "Facilities",
+  "feat": "Feature",
+  "featurePl": "Features",
+  "loot": "Loot",
+  "lootPl": "Loot",
+  "race": "Species",
+  "racePl": "Species",
+  "raceLegacy": "Race",
+  "raceLegacyPl": "Races",
+  "spell": "Spell",
+  "spellPl": "Spells",
+  "subclass": "Subclass",
+  "subclassPl": "Subclasses",
+  "tool": "Tool",
+  "toolPl": "Tools",
+  "weapon": "Weapon",
+  "weaponPl": "Weapons"
+},
 
 "TYPES.RegionBehavior": {
+  "dnd5e.applyActiveEffect": "Apply Active Effect (5e)",
   "dnd5e.difficultTerrain": "Difficult Terrain",
   "dnd5e.rotateArea": "Rotate Area"
 },
 
 "TYPES.HINTS": {
   "RegionBehavior": {
+    "dnd5e.applyActiveEffect": "Apply Active Effects to Tokens while they are within the Region and meet certain criteria.",
     "dnd5e.difficultTerrain": "Mark a region as being difficult terrain and set its type and who it affects.",
     "dnd5e.rotateArea": "Rotate tokens, tiles, walls, and other objects around a central pivot point."
   }
@@ -283,6 +292,24 @@
     "other": "Activities"
   },
   "FIELDS": {
+    "behaviors": {
+      "element": {
+        "level": {
+          "label": "Level Limit",
+          "hint": "Range of levels required to apply this behavior.",
+          "max": {
+            "label": "Maximum Level"
+          },
+          "min": {
+            "label": "Minimum Level"
+          }
+        },
+        "name": {
+          "label": "Name"
+        }
+      },
+      "label": "Area of Effect Behaviors"
+    },
     "description": {
       "label": "Description",
       "chatFlavor": {
@@ -518,7 +545,8 @@
       },
       "restriction": {
         "level": {
-          "Available": "Any Available Level",
+          "Available": "Any Available Level (Including Cantrips)",
+          "AvailableNoCantrips": "Any Available Level (Excluding Cantrips)",
           "hint": "Only allow choices from spells of this level.",
           "label": "Spell Level"
         },
@@ -532,6 +560,9 @@
         "type": {
           "label": "Type"
         }
+      },
+      "sorting": {
+        "label": "Sorting Mode"
       },
       "type": {
         "Any": "Anything",
@@ -565,6 +596,9 @@
       "optional": {
         "label": "Optional",
         "hint": "If the whole advancement is marked optional, players may opt out of any of the following items, otherwise all non-optional items are granted."
+      },
+      "sorting": {
+        "label": "Sorting Mode"
       }
     },
     "Hint": "Grant the character items (such as equipment, features, or spells) when they reach a certain level.",
@@ -609,6 +643,33 @@
     "Hint": "Select which of the following advancements will be added to {name}.",
     "Selection": "Advancement Selection",
     "Title": "Migrate Advancement"
+  },
+  "ModifyItem": {
+    "Action": {
+      "AddChange": "Add Change",
+      "DeleteChange": "Delete Change"
+    },
+    "DropHint": "Drop an Enchantment here",
+    "Empty": {
+      "WithDropdown": "No changes. Use the <i class=\"fa-solid fa-plus\"></i> button above to create one, or select an existing effect from the drop-down.",
+      "WithoutDropdown": "No changes. Use the <i class=\"fa-solid fa-plus\"></i> button above to create one."
+    },
+    "FIELDS": {
+      "changes": {
+        "element": {
+          "enchantment": {
+            "label": "Applied Enchantment"
+          },
+          "identifiers": {
+            "hint": "Identifiers for items that will be modified by this enchantment. Identifiers can be prefixed using the item type (e.g. \"spell:mage-hand\").",
+            "label": "Modified Items"
+          }
+        },
+        "label": "Item Changes"
+      }
+    },
+    "Hint": "Modify existing items using an enchantment.",
+    "Title": "Modify Items"
   },
   "ScaleValue": {
     "Action": {
@@ -673,6 +734,18 @@
         "Hint": "Use this if you are unsure of the type of the scale values, or if the type does not matter.",
         "Identifier": "This scale value for the current level will be available in a formula using:<br><copyable-text>@scale.{class}.{identifier}</copyable-text>",
         "Label": "Anything"
+      },
+      "Usage": {
+        "FIELDS": {
+          "period": {
+            "label": "Period"
+          },
+          "value": {
+            "label": "Uses"
+          }
+        },
+        "Hint": "Use this to represent item uses over a certain period.",
+        "Label": "Usage"
       }
     }
   },
@@ -868,22 +941,79 @@
   }
 },
 "DND5E.Armor": "Armor",
+
+"DND5E.ARMORCLASS": {
+  "Action": {
+    "Configure": "Configure Armor",
+    "CreateFormula": "Create Custom Formula",
+    "DeleteFormula": "Delete Custom Formula"
+  },
+  "Calculation": {
+    "Armored": "Equipped Armor",
+    "Custom": "Custom",
+    "Draconic": "Draconic Resilience",
+    "Label": "Calculation",
+    "Mage": "Mage Armor",
+    "Natural": "Natural Armor",
+    "Unarmored": "Unarmored",
+    "UnarmoredBarbarian": "Unarmored Defense (Barbarian)",
+    "UnarmoredBard": "Unarmored Defense (Bard)",
+    "UnarmoredMonk": "Unarmored Defense (Monk)"
+  },
+  "Condition": {
+    "Positive": "Must have {type}",
+    "Negative": "Must not have {type}"
+  },
+  "Configuration": "Configuration",
+  "CurrentFormula": "Current Formula",
+  "CustomFormulas": {
+    "Empty": "No custom formulas. Use the <i class=\"fas fa-plus\"></i> button above to create one."
+  },
+  "FIELDS": {
+    "attributes": {
+      "ac": {
+        "flat": {
+          "hint": "Number that can be used in an armor class by using @attributes.ac.flat in the formula.",
+          "label": "Flat Value"
+        },
+        "formulas": {
+          "element": {
+            "armored": {
+              "excluded": "Not Armored",
+              "label": "Armored",
+              "required": "Armor Required"
+            },
+            "formula": {
+              "label": "Formula"
+            },
+            "label": {
+              "label": "Label"
+            },
+            "shielded": {
+              "excluded": "No Shield",
+              "label": "Shielded",
+              "required": "Shield Required"
+            }
+          },
+          "label": "Formulas"
+        },
+        "label": "Armor Class",
+        "override": {
+          "hint": "Value that will be used in place of calculated armor class, ignoring cover, shield, and any other bonuses.",
+          "label": "Override"
+        },
+        "selectedFormulas": {
+          "hint": "These formulas will be used when calculating armor class.",
+          "label": "Selected Formulas"
+        }
+      }
+    }
+  },
+  "Flat": "Flat",
+  "Formula": "Formula"
+},
+
 "DND5E.ArmorClass": "Armor Class",
-"DND5E.ArmorClassEquipment": "Equipped Armor",
-"DND5E.ArmorClassFlat": "Flat",
-"DND5E.ArmorClassUnarmored": "Unarmored",
-"DND5E.ArmorClassNatural": "Natural Armor",
-"DND5E.ArmorClassMage": "Mage Armor",
-"DND5E.ArmorClassMotionless": "Armor Class while Motionless",
-"DND5E.ArmorClassDraconic": "Draconic Resilience",
-"DND5E.ArmorClassUnarmoredMonk": "Unarmored Defense (Monk)",
-"DND5E.ArmorClassUnarmoredBarbarian": "Unarmored Defense (Barbarian)",
-"DND5E.ArmorClassUnarmoredBard": "Unarmored Defense (Bard)",
-"DND5E.ArmorClassCustom": "Custom Formula",
-"DND5E.ArmorConfig": "Configure Armor",
-"DND5E.ArmorConfigHint": "Fill in the above box to override automatically calculated armor class.",
-"DND5E.ArmorClassCalculation": "Calculation",
-"DND5E.ArmorClassFormula": "Formula",
 "DND5E.ArmorHeavyProficiency": "Heavy",
 "DND5E.ArmorLightProficiency": "Light",
 "DND5E.ArmorMediumProficiency": "Medium",
@@ -1011,7 +1141,8 @@
 
 "DND5E.Bastion": {
   "Action": {
-    "BastionTurn": "Advance Bastion Turn"
+    "Advance": "Advance Bastion Turn",
+    "Maintain": "Maintain Bastion"
   },
   "Attack": {
     "Automatic": "Resolve Automatically",
@@ -1038,7 +1169,10 @@
     "Label": "Configure Bastions",
     "Hint": "Various configuration options for the Bastion system as presented in the DMG 2024."
   },
-  "Confirm": "Advance one bastion turn?",
+  "Confirm": {
+    "Advance": "This will advance all bastion facility order progress by {duration}, issue the maintain order to all idle facilities, and repair any disabled facilities, would you like to continue?",
+    "Maintain": "This will issue the maintain order to all idle bastion facilities and repair any disabled facilities, would you like to continue?"
+  },
   "Duration": {
     "Label": "Bastion Turn Duration (days)"
   },
@@ -1062,6 +1196,15 @@
     "Invalid": "Removing a pending trade will invalidate your trade order.",
     "Pending": "Pending trade"
   }
+},
+
+"DND5E.BEHAVIOR": {
+  "Action": {
+    "Create": "Create Behavior",
+    "Delete": "Delete Behavior"
+  },
+  "Hint": "These behaviors will apply to any area of effect placed by this activity.",
+  "Label": "Behavior"
 },
 
 "DND5E.Biography": "Biography",
@@ -1168,6 +1311,13 @@
     "enabled": {
       "hint": "Allow the calendar UI to be viewed & customized by all users.",
       "label": "Enabled"
+    },
+    "dailyRecovery": {
+      "calendar": "Calendar Recovery (via time passing)",
+      "default": "Default (tied to calendar enabled setting)",
+      "hint": "Control whether limited uses with day, dawn, and dusk recovery are recovered based on the world calendar or through the rest dialog.",
+      "label": "Daily Recovery Mode",
+      "manual": "Manual Recovery (via rest dialog)"
     },
     "formatters": {
       "date": {
@@ -1358,6 +1508,17 @@
       "Autumn": "Autumn",
       "Winter": "Winter"
     }
+  },
+  "TimePassage": {
+    "Midnight": "A new day has begun.",
+    "Sunrise": "The sun has risen.",
+    "Sunset": "The sun has set.",
+    "SunsetSunrise": "The sun has set and the dawn of a new day has come.",
+    "TimePassed": {
+      "one": "{number} has passed.",
+      "other": "{number} have passed."
+    },
+    "Title": "Passage of Time"
   }
 },
 
@@ -1482,10 +1643,13 @@
   },
   "REQUEST": {
     "Action": {
-      "Handle": "Handle Request"
+      "Handle": "Handle Request",
+      "Post": "Post Request"
     },
+    "AnyOwner": "Any Owner",
     "Complete": "Request Fulfilled",
-    "PartyMembers": "Party Members"
+    "PartyMembers": "Party Members",
+    "Title": "Request"
   },
   "TURN": {
     "NoCombatant": "Combatant no longer exists!"
@@ -1677,12 +1841,6 @@
 "DND5E.ConCharmed": "Charmed",
 "DND5E.ConDeafened": "Deafened",
 "DND5E.ConDiseased": "Diseased",
-"DND5E.CONDITIONS": {
-  "RiderConditions": {
-    "label": "Separate Status Conditions",
-    "hint": "When this Active Effect is applied, these additional status conditions will be applied separately."
-  }
-},
 "DND5E.ConExhaustion": "Exhaustion",
 "DND5E.ConFrightened": "Frightened",
 "DND5E.ConGrappled": "Grappled",
@@ -2075,6 +2233,10 @@
             "label": "Die Denomination",
             "hint": "Denomination of the dice to roll."
           },
+          "modifiers": {
+            "label": "Modifiers",
+            "hint": "Roll modifiers added to the base die."
+          },
           "number": {
             "label": "Die Number",
             "hint": "Number of dice to roll."
@@ -2259,25 +2421,52 @@
 "DND5E.DurationUnits": "Duration Units",
 "DND5E.DurationValue": "Duration Value",
 "DND5E.Dusk": "Dusk",
+
 "DND5E.Effect": "Effect",
-"DND5E.Effects": "Effects",
+
 "DND5E.EFFECT": {
   "Action": {
     "Create": "Create Effect",
     "Delete": "Delete Effect",
-    "Dissociate": "Dissociate Effect"
+    "Dissociate": "Dissociate Effect",
+    "Search": "Search effects"
   },
+  "Application": {
+    "Action": {
+      "ApplyTokens": "Apply to selected tokens"
+    },
+    "Header": "Effects",
+    "Warning": {
+      "Concentration": "Applying an effect that is being concentrated on by another character requires GM permissions.",
+      "Ownership": "Effects cannot be applied to tokens you are not the owner of."
+    }
+  },
+  "BASE": {
+    "FIELDS": {
+      "magical": {
+        "hint": "This effect is from a magical source and should be disabled when magic isn't available.",
+        "label": "Magical"
+      }
+    }
+  },
+  "DropHint": "Drop an Active Effect here",
   "Empty": "No associated effects. Use the <i class=\"fas fa-plus\"></i> button above to create one, or select an existing effect from the drop-down.",
   "Label": "Available Effects",
   "RIDER": {
     "Activity": "Enchantment Rider Activity",
-    "Effect": "Enchantment Rider Effect"
-  }
+    "Effect": "Enchantment Rider Effect",
+    "FIELDS": {
+      "rider": {
+        "statuses": {
+          "hint": "When this Active Effect is applied, these additional status conditions will be applied separately.",
+          "label": "Separate Status Conditions"
+        }
+      }
+    }
+  },
+  "Tab": "Effects"
 },
-"DND5E.EffectsApplyTokens": "Apply to selected tokens",
-"DND5E.EffectApplyWarningConcentration": "Applying an effect that is being concentrated on by another character requires GM permissions.",
-"DND5E.EffectApplyWarningOwnership": "Effects cannot be applied to tokens you are not the owner of.",
-"DND5E.EffectsSearch": "Search effects",
+
 
 "DND5E.ENCHANT": {
   "FIELDS": {
@@ -2346,7 +2535,8 @@
   "Enchantment": {
     "Action": {
       "Create": "Create Enchantment",
-      "Delete": "Delete Enchantment"
+      "Delete": "Delete Enchantment",
+      "Dissociate": "Dissociate Enchantment"
     },
     "Active": "{name} (active)",
     "Empty": "No associated enchantments. Use the <i class=\"fas fa-plus\"></i> button above to create one, or select an existing enchantment from the drop-down."
@@ -2382,18 +2572,9 @@
     "Inactive": "Inactive Enchantments"
   },
   "FIELDS": {
-    "enchantment": {
-      "label": "Enchantment Configuration",
-      "items": {
-        "max": {
-          "label": "Item Limit",
-          "hint": "Formula for the maximum number of enchantments of this type that can be active at a time."
-        },
-        "period": {
-          "label": "Replacement Period",
-          "hint": "How frequently the enchantments of this type can be re-bound to different items."
-        }
-      }
+    "magical": {
+      "hint": "This enchantment is magical and should be disabled when magic isn't available.",
+      "label": "Magical"
     }
   },
   "Items": {
@@ -2753,6 +2934,19 @@
     "cover": {
       "label": "Cover",
       "hint": "Cover provided to crew by this vehicle feature."
+    },
+    "enchant": {
+      "label": "Enchantment Configuration",
+      "items": {
+        "max": {
+          "label": "Item Limit",
+          "hint": "Formula for the maximum number of enchantments of this type that can be active at a time."
+        },
+        "period": {
+          "label": "Replacement Period",
+          "hint": "How frequently the enchantments of this type can be re-bound to different items."
+        }
+      }
     },
     "properties": {
       "label": "Feature Properties"
@@ -3150,6 +3344,7 @@
 "DND5E.Ideals": "Ideals",
 "DND5E.Identified": "Identified",
 "DND5E.Identifier": "Identifier",
+"DND5E.IdentifierCustom": "Custom Identifier",
 "DND5E.IdentifierError": "An identifier can only contain letters (a-z), numbers (0-9), dashes (-), and underscores (_).",
 "DND5E.Identify": "Identify",
 "DND5E.Immunities": "Immunities",
@@ -3599,6 +3794,26 @@
 "DND5E.RecoveryFormula": "Recovery Formula",
 
 "DND5E.REGIONBEHAVIORS": {
+  "APPLYACTIVEEFFECT": {
+    "FIELDS": {
+      "dispositions": {
+        "hint": "If set, only apply effects to Tokens with these dispositions.",
+        "label": "Dispositions"
+      },
+      "effects": {
+        "hint": "The effects that are applied to Tokens within the Region.",
+        "label": "Effects"
+      },
+      "sizes": {
+        "hint": "If set, only apply effects to Tokens that are these sizes.",
+        "label": "Sizes"
+      },
+      "types": {
+        "hint": "If set, only apply effects to Tokens that are these creature types.",
+        "label": "Types"
+      }
+    }
+  },
   "DIFFICULTTERRAIN": {
     "FIELDS": {
       "ignoredDispositions": {
@@ -3718,6 +3933,11 @@
 
 "DND5E.REST": {
   "Configuration": "Rest Configuration",
+  "Duration": {
+    "Hint": "Amount of time to pass during the rest.",
+    "Label": "Duration",
+    "UntilSunrise": "Rest Until Sunrise"
+  },
   "HitDice": {
     "AutoSpend": {
       "Hint": "Automatically spend hit dice until they run out or health is full.",
@@ -3803,6 +4023,7 @@
 },
 "DND5E.RollExample": "e.g. 1d4",
 "DND5E.RollMode": "Roll Mode",
+"DND5E.RollModifiers": "Modifiers",
 "DND5E.RollSituationalBonus": "Situational Bonus?",
 "DND5E.Rule": {
   "Tooltip": "Tooltip",
@@ -4257,6 +4478,11 @@
 "DND5E.SpellUsage": "Spell Usage",
 "DND5E.Spellbook": "Spellbook",
 "DND5E.Spent": "Spent",
+"DND5E.SplitStack": {
+  "Action": "Split",
+  "Title": "Split Stack"
+},
+
 "DND5E.StartingEquipment": {
   "Title": "Starting Equipment",
   "Action": {
@@ -4296,6 +4522,7 @@
 "DND5E.SubclassDuplicateError": "A subclass with the identifier {identifier} already exists on this actor.",
 "DND5E.SubclassMismatchWarn": "{name} subclass has no matching class with identifier '{class}'.",
 "DND5E.SubclassName": "Subclass Name",
+"DND5E.SubclassOf": "{class} Subclass",
 "DND5E.Subtype": "Subtype",
 "DND5E.Summary": "Summary",
 
@@ -4447,6 +4674,7 @@
   "Warning": {
     "NoOwnership": "You must have ownership of '{actor}' in order to summon it.",
     "NoProfile": "Cannot find summoning profile {profileId} on '{item}'.",
+    "PlaceTokens": "Error placing summons in scene.",
     "Wildcard": "You must have 'Use File Browser' permissions to summon creatures with wildcard artwork."
   }
 },
@@ -4456,6 +4684,48 @@
 },
 "DND5E.Supply": "Supply",
 "DND5E.Suppressed": "Suppressed",
+
+"DND5E.TABLEOFCONTENTS": {
+  "Action": {
+    "Configure": "Configure Table of Contents"
+  },
+  "FIELDS": {
+    "order": {
+      "label": "Order"
+    },
+    "position": {
+      "label": "Position"
+    },
+    "showPages": {
+      "label": "Show Pages"
+    },
+    "title": {
+      "label": "Title Override"
+    },
+    "type": {
+      "label": "Type"
+    }
+  },
+  "HiddenPages": "Hidden Pages",
+  "HideAllPages": "Hide All Pages",
+  "JournalEntry": "Journal Entry",
+  "NoFolder": "No Folder",
+  "Special": {
+    "After": "After {chapter}",
+    "End": "End of Table of Contents"
+  },
+  "Title": "Table of Contents",
+  "Type": {
+    "Appendix": "Appendix",
+    "Chapter": "Chapter",
+    "Header": "Header",
+    "Special": "Special"
+  },
+  "Warning": {
+    "DuplicateHeader": "Only one entry can be set with the Header type.",
+    "DuplicatePosition": "Each Chapter and Appendix should have a unique position value."
+  }
+},
 
 "DND5E.TARGET": {
   "Action": {
@@ -4648,6 +4918,15 @@
         "other": "{number} radii",
         "oneSized": "{sizes} Radius",
         "otherSized": "{number} {sizes} Radii"
+      }
+    },
+    "Ring": {
+      "Label": "Ring",
+      "Counted": {
+        "one": "{number} ring",
+        "other": "{number} rings",
+        "oneSized": "{sizes} Ring",
+        "otherSized": "{number} {sizes} Rings"
       }
     },
     "Self": {
@@ -5868,13 +6147,19 @@
       "Full": "Full",
       "NoBlocking": "Partial",
       "None": "None"
+    },
+    "SenseVision": {
+      "Name": "Sync Senses to Token Vision",
+      "Hint": "Automatically configure token vision range, vision mode, and detection modes based on the actor's senses.",
+      "Notice": "Vision and detection are synced from this actor's {senses}.",
+      "Senses": "senses"
     }
   },
   "BLOODIED": {
     "Name": "Bloodied Status",
     "Hint": "Configure whether the bloodied status is tracked automatically and its visibility.",
-    "All": "Display for Allies & Enemies",
-    "Player": "Only Display for Allies",
+    "All": "Display for Friendly, Neutral, & Hostile Tokens",
+    "Player": "Only Display for Friendly Tokens",
     "None": "Never Display"
   },
   "COLLAPSETRAYS": {

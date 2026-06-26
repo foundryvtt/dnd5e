@@ -440,6 +440,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     context.itemContext = {};
     context.items = Array.from(this.inventorySource.items).filter(i => !this.actor.items.has(i.system.container));
     await Promise.all(context.items.map(async item => {
+      if ( !this._isItemVisible(item) ) return;
+
       // Prepare item context
       const ctx = context.itemContext[item.id] ??= {};
       ctx.clickAction = "use";
@@ -493,7 +495,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    */
   _prepareSenses(context) {
     return [
-      ...Object.entries(CONFIG.DND5E.senses).map(([k, label]) => {
+      ...Object.entries(CONFIG.DND5E.senses).map(([k, { label }]) => {
         const value = context.system.attributes.senses.ranges[k];
         return value ? { label, value } : null;
       }, {}).filter(_ => _),
@@ -727,7 +729,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     );
     Object.assign(warnings.dataset, { action: "openWarnings", tooltip: "Warnings", tooltipDirection: "DOWN" });
     warnings.setAttribute("aria-label", _loc("Warnings"));
-    html.querySelector(".window-header .window-subtitle").after(warnings);
+    this.window.subtitle.after(warnings);
 
     return html;
   }
@@ -743,12 +745,25 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @protected
    */
   _assignItemCategories(item) {
-    const origin = item.dependentOrigin;
-    if ( (origin?.active === false) && (origin.parent !== item) ) return [];
     if ( item.type === "container" ) return new Set(["containers", "inventory"]);
     if ( item.type === "spell" ) return new Set(["spells"]);
     if ( "inventorySection" in item.system.constructor ) return new Set(["inventory"]);
     return new Set(["features"]);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine whether an item should be displayed on the sheet.
+   * @param {Item5e} item    Item being prepared for display.
+   * @returns {boolean}
+   * @protected
+   */
+  _isItemVisible(item) {
+    const origin = item.dependentOrigin;
+    if ( this.actor.hiddenItems.has(item.id) ) return false;
+    if ( (origin?.active === false) && (origin.parent !== item) ) return false;
+    return true;
   }
 
   /* -------------------------------------------- */
@@ -2028,6 +2043,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     const schoolFilter = spellSchools.intersection(filters);
     const spellcastingClasses = new Set(Object.keys(this.actor.spellcastingClasses));
     const classFilter = spellcastingClasses.intersection(filters);
+    const actionFilter = new Set(actions).intersection(filters);
 
     return items.filter(item => {
 
@@ -2036,14 +2052,12 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       if ( filtered !== undefined ) return filtered;
 
       // Action usage
-      for ( const f of actions ) {
-        if ( !filters.has(f) ) continue;
+      if ( actionFilter.size ) {
         if ( item.type === "spell" ) {
-          if ( item.system.activation.type !== f ) return false;
-          continue;
+          if ( !actionFilter.has(item.system.activation.type) ) return false;
         }
-        if ( !item.system.activities?.size ) return false;
-        if ( item.system.activities.every(a => a.activation?.type !== f) ) return false;
+        else if ( !item.system.activities?.size
+          || !item.system.activities.some(a => actionFilter.has(a.activation?.type)) ) return false;
       }
 
       // Spell-specific filters

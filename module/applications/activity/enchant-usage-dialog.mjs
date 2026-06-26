@@ -31,12 +31,15 @@ export default class EnchantUsageDialog extends ActivityUsageDialog {
         field: new StringField({ required: true, blank: false, label: _loc("DND5E.ENCHANTMENT.Label") }),
         name: "enchantmentProfile",
         value: this.config.enchantmentProfile,
-        options: enchantments.map(e => ({
-          value: e._id,
-          label: e._id === existingProfile
-            ? _loc("DND5E.ENCHANT.Enchantment.Active", { name: e.effect.name })
-            : e.effect.name
-        }))
+        options: (await Promise.all(enchantments.map(async e => {
+          const effect = await e.getEffect();
+          return effect ? {
+            value: e._id,
+            label: e._id === existingProfile
+              ? _loc("DND5E.ENCHANT.Enchantment.Active", { name: effect.name })
+              : effect.name
+          } : null;
+        }))).filter(_ => _)
       };
     } else if ( enchantments.length ) {
       context.enchantment = enchantments[0]?._id ?? false;

@@ -49,6 +49,7 @@
       "bastionTurn": {},
       "request": {},
       "rest": {},
+      "timePassed": {},
       "turn": {},
       "usage": {}
     },
@@ -57,25 +58,33 @@
         "filePathFields": {
           "activities.*.img": ["IMAGE"]
         },
-        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
+        "htmlFields": [
+          "activities.*.description.value", "description.value", "description.chat", "unidentified.description"
+        ]
       },
       "equipment": {
         "filePathFields": {
           "activities.*.img": ["IMAGE"]
         },
-        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
+        "htmlFields": [
+          "activities.*.description.value", "description.value", "description.chat", "unidentified.description"
+        ]
       },
       "consumable": {
         "filePathFields": {
           "activities.*.img": ["IMAGE"]
         },
-        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
+        "htmlFields": [
+          "activities.*.description.value", "description.value", "description.chat", "unidentified.description"
+        ]
       },
       "tool": {
         "filePathFields": {
           "activities.*.img": ["IMAGE"]
         },
-        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
+        "htmlFields": [
+          "activities.*.description.value", "description.value", "description.chat", "unidentified.description"
+        ]
       },
       "loot": {
         "htmlFields": ["description.value", "description.chat", "unidentified.description"]
@@ -108,14 +117,14 @@
         "filePathFields": {
           "activities.*.img": ["IMAGE"]
         },
-        "htmlFields": ["description.value", "description.chat"]
+        "htmlFields": ["activities.*.description.value", "description.value", "description.chat"]
       },
       "feat": {
         "filePathFields": {
           "activities.*.img": ["IMAGE"],
           "advancement.*.icon": ["IMAGE"]
         },
-        "htmlFields": ["advancement.*.hint", "description.value", "description.chat"]
+        "htmlFields": ["activities.*.description.value", "advancement.*.hint", "description.value", "description.chat"]
       },
       "container": {
         "htmlFields": ["description.value", "description.chat", "unidentified.description"]
@@ -127,7 +136,7 @@
         "filePathFields": {
           "activities.*.img": ["IMAGE"]
         },
-        "htmlFields": ["description.value", "description.chat"]
+        "htmlFields": ["activities.*.description.value", "description.value", "description.chat"]
       }
     },
     "JournalEntryPage": {
@@ -150,6 +159,7 @@
       }
     },
     "RegionBehavior": {
+      "dnd5e.applyActiveEffect": {},
       "dnd5e.difficultTerrain": {},
       "dnd5e.rotateArea": {}
     }
@@ -343,7 +353,9 @@
       },
       "system": "dnd5e",
       "flags": {
-        "display": "table-of-contents"
+        "dnd5e": {
+          "display": "table-of-contents"
+        }
       }
     },
     {

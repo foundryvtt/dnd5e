@@ -116,13 +116,18 @@ export function formatModifier(mod) {
  * @returns {string}
  */
 export function formatNumber(value, { blank, numerals, ordinal, words, ...options }={}) {
-  if ( words && game.i18n.has(`DND5E.NUMBER.${value}`, false) ) return _loc(`DND5E.NUMBER.${value}`);
   if ( !value && (typeof blank === "string") ) return blank;
+  if ( (numerals || words) && options.unit ) {
+    return _formatNumberParts(value, { numerals, words, ...options }).map(({ value }) => value).join("");
+  }
   if ( numerals ) return _formatNumberAsNumerals(value);
   if ( ordinal ) return _formatNumberAsOrdinal(value, options);
+  if ( words ) return _formatNumberAsWords(value, options);
   const formatter = new Intl.NumberFormat(game.i18n.lang, options);
   return formatter.format(value);
 }
+
+/* -------------------------------------------- */
 
 /**
  * Roman numerals.
@@ -152,11 +157,12 @@ function _formatNumberAsNumerals(n) {
 
 /**
  * Format a number using an ordinal format.
- * @param {number} n        The number to format.
- * @param {object} options  Options forwarded to `formatNumber`.
+ * @param {number} n             The number to format.
+ * @param {object} [options={}]  Options forwarded to `formatNumber`.
  * @returns {string}
  */
 function _formatNumberAsOrdinal(n, options={}) {
+  if ( options.style === "unit" ) throw new Error("Cannot format number as ordinal with unit formatting.");
   const pr = getPluralRules({ type: "ordinal" }).select(n);
   const number = formatNumber(n, options);
   return game.i18n.has(`DND5E.ORDINAL.${pr}`) ? _loc(`DND5E.ORDINAL.${pr}`, { number }) : number;
@@ -165,15 +171,64 @@ function _formatNumberAsOrdinal(n, options={}) {
 /* -------------------------------------------- */
 
 /**
+ * Format a number using an word format.
+ * @param {number} n          The number to format.
+ * @param {object} [options]  Options forwarded to `formatNumber`.
+ * @returns {string|false}
+ */
+function _formatNumberAsWords(n, options) {
+  return game.i18n.has(`DND5E.NUMBER.${n}`, false) ? _loc(`DND5E.NUMBER.${n}`) : formatNumber(n, options);
+}
+
+/* -------------------------------------------- */
+
+/**
  * Produce a number with the parts wrapped in their own spans.
- * @param {number} value      A number for format.
+ * @param {number} value      The number to format.
  * @param {object} [options]  Formatting options.
  * @returns {string}
  */
 export function formatNumberParts(value, options) {
-  if ( options.numerals ) throw new Error("Cannot segment numbers when formatted as numerals.");
-  return new Intl.NumberFormat(game.i18n.lang, options).formatToParts(value)
+  return _formatNumberParts(value, options)
     .reduce((str, { type, value }) => `${str}<span class="${type}">${value}</span>`, "");
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Format a number to parts while handling the "words" and "numerals" options.
+ * @param {number} value                The number to format.
+ * @param {object} [options={}]         Formatting options.
+ * @param {boolean} [options.numerals]  Format the number as roman numerals.
+ * @param {boolean} [options.ordinal]   Use ordinal formatting.
+ * @param {string} [options.unit]       Unit to use for formatting.
+ * @param {boolean} [options.words]     Write out number as full word, if possible.
+ * @returns {{ type: string, value: string }[]}
+ */
+function _formatNumberParts(value, { numerals, ordinal, words, unit, ...options }={}) {
+  const parts = new Intl.NumberFormat(game.i18n.lang, { unit, ...options }).formatToParts(value);
+  if ( ordinal ) throw new Error("Cannot segment numbers when formatted as ordinal.");
+  if ( !numerals && !words ) return parts;
+
+  // Find portions for number and replace with proper value
+  let startIndex;
+  let length = 0;
+  for ( const [index, part] of parts.entries() ) {
+    if ( ["integer", "group", "decimal", "fraction"].includes(part.type) ) {
+      startIndex ??= index;
+      length += 1;
+    } else if ( length > 0 ) break;
+  }
+  if ( startIndex === undefined ) return parts;
+
+  let replacement;
+  if ( numerals ) replacement = [{ type: "numeral", value: _formatNumberAsNumerals(value, options) }];
+  else if ( words && game.i18n.has(`DND5E.NUMBER.${value}`, false) ) {
+    replacement = [{ type: "word", value: _formatNumberAsWords(value, options) }];
+  }
+  if ( replacement ) parts.splice(startIndex, length, ...replacement);
+
+  return parts;
 }
 
 /* -------------------------------------------- */
@@ -799,6 +854,8 @@ export function defaultUnits(type) {
 /*  Validators                                  */
 /* -------------------------------------------- */
 
+const IDENTIFIER_REGEX = /^([a-zA-Z0-9_\-]+)$/i;
+
 /**
  * Ensure the provided string contains only the characters allowed in identifiers.
  * @param {string} identifier
@@ -813,11 +870,11 @@ function isValidIdentifier(identifier, { allowType=false }={}) {
     if ( split.length > 2 ) return false;
     identifier = split[1];
   }
-  return /^([a-z0-9_-]+)$/i.test(identifier);
+  return IDENTIFIER_REGEX.test(identifier);
 }
 
 export const validators = {
-  isValidIdentifier: isValidIdentifier
+  IDENTIFIER_REGEX, isValidIdentifier
 };
 
 /* -------------------------------------------- */
@@ -1306,15 +1363,15 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
   else if ( attr === "attributes.spell.dc" ) label = "DND5E.SpellDC";
 
   // Abilities.
-  else if ( attr.startsWith("abilities.") ) {
-    const [, key] = attr.split(".");
+  else if ( attr.startsWith("abilities.") || attr.startsWith("attributes.ac.clamped.") ) {
+    const key = attr.split(".")[attr.startsWith("abilities.") ? 1 : 3];
     label = _loc("DND5E.AbilityScoreL", { ability: CONFIG.DND5E.abilities[key].label });
   }
 
   // Senses
   else if ( attr.startsWith("attributes.senses.ranges.") ) {
     const key = attr.split(".")[3];
-    label = CONFIG.DND5E.senses[key];
+    label = CONFIG.DND5E.senses[key]?.label;
   }
 
   // Resources

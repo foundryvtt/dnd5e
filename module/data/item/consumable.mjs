@@ -56,6 +56,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
     return this.mergeSchema(super.defineSchema(), {
       damage: new SchemaField({
         base: new DamageField(),
+        bonus: new FormulaField({ persisted: false }),
         replace: new BooleanField()
       }),
       magicalBonus: new FormulaField({ deterministic: true }),

@@ -63,14 +63,13 @@ export default class D20RollConfigurationDialog extends RollConfigurationDialog 
   /* -------------------------------------------- */
 
   /** @override */
-  _finalizeRolls(action) {
+  _finalizeConfig(config, action) {
     let advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.NORMAL;
     if ( action === "advantage" ) advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE;
     else if ( action === "disadvantage" ) advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE;
-    return this.rolls.map(roll => {
+    for ( const roll of config.rolls ?? [] ) {
+      roll.options ??= {};
       roll.options.advantageMode = advantageMode;
-      roll.configureModifiers();
-      return roll;
-    });
+    }
   }
 }

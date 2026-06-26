@@ -62,6 +62,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
+   * List of IDs of items that should be hidden on the sheet.
+   * @type {Set<string>}
+   */
+  hiddenItems = this.hiddenItems;
+
+  /* -------------------------------------------- */
+
+  /**
    * Mapping of item identifiers to the items.
    * @type {IdentifiedItemsMap<string, Set<Item5e>>}
    */
@@ -306,8 +314,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   prepareData() {
     if ( this.system.modelProvider !== dnd5e ) return super.prepareData();
     this._clearCachedValues();
-    this._preparationWarnings = [];
-    this.labels = {};
     super.prepareData();
     this.items.forEach(item => item.prepareFinalAttributes());
     this._prepareSpellcasting();
@@ -322,6 +328,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   _clearCachedValues() {
     this._lazy = {};
     this._preferredArtwork = null;
+    this._preparationWarnings = [];
+    this.labels = {};
+    this.hiddenItems = new Set();
     this.identifiedItems = new IdentifiedItemsMap();
     this.sourcedItems = new SourcedItemsMap();
   }
@@ -363,9 +372,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /** @inheritDoc */
   *allApplicableEffects() {
     for ( const effect of super.allApplicableEffects() ) {
-      if ( effect.type === "enchantment" ) continue;
-      if ( effect.parent?.getFlag("dnd5e", "riders.effect")?.includes(effect.id) ) continue;
-      yield effect;
+      if ( effect.applicableType === "Actor" ) yield effect;
     }
   }
 
@@ -417,7 +424,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       return game.actors.importFromCompendium(game.packs.get(actor.pack), actor.id, {
         "flags.dnd5e.isAutoImported": true,
         folder: game.folders.get(folderId) ?? null
-      });
+      }, { keepId: false });
     } else {
       // A linked world actor was found. Create a copy to avoid affecting the original.
       return actor.clone({
@@ -668,7 +675,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const model = CONFIG.DND5E.spellcasting[type];
 
     // Otherwise proceed with calculation.
-    model.prepareSlots(spells, actor, progression);
+    if ( model.slots ) model.prepareSlots(spells, actor, progression);
   }
 
   /* -------------------------------------------- */
@@ -2564,18 +2571,20 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     recoverShortRestUses, recoverLongRestUses, recoverDailyUses, ...config
   }={}, result={}) {
     const restConfig = CONFIG.DND5E.restTypes[config.type];
-    const recovery = Array.from(restConfig.recoverPeriods ?? []);
-    if ( recoverShortRestUses ) recovery.unshift("sr");
-    if ( recoverLongRestUses ) recovery.unshift("lr");
-    if ( recoverDailyUses || config.newDay ) recovery.unshift("day", "dawn", "dusk");
+    let recovery = Array.from(restConfig.recoverPeriods ?? []).map(p => [p, 1]);
+    if ( recoverShortRestUses ) recovery.unshift(["sr", 1]);
+    if ( recoverLongRestUses ) recovery.unshift(["lr", 1]);
+    if ( (recoverDailyUses || config.newDay) && dnd5e.settings.calendarConfig.manualRecovery ) {
+      const days = (dnd5e.settings.restVariant === "gritty") && (config.type === "long") ? 7 : 1;
+      recovery.unshift(["day", days], ["dawn", days], ["dusk", days]);
+    }
+    recovery = new Map(recovery);
 
     result.updateItems ??= [];
     result.rolls ??= [];
     for ( const item of this.items ) {
-      if ( (item.dependentOrigin?.active === false)
-        || (foundry.utils.getType(item.system.recoverUses) !== "function") ) continue;
-      const rollData = item.getRollData();
-      const { updates, rolls, destroy } = await item.system.recoverUses(recovery, rollData);
+      if ( item.isHidden || (foundry.utils.getType(item.system.recoverUses) !== "function") ) continue;
+      const { updates, rolls, destroy } = await item.system.recoverUses(recovery);
       if ( destroy ) {
         result.deleteItems.push(item.id);
       } else if ( !foundry.utils.isEmpty(updates) ) {
@@ -2651,51 +2660,37 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const cfg = CONFIG.DND5E.armorClasses[ac.calc];
     const attribution = [];
 
-    if ( ac.calc === "flat" ) {
+    if ( Number.isFinite(ac.override) ) {
       attribution.push({
-        label: _loc("DND5E.ArmorClassFlat"),
+        label: _loc("DND5E.ARMORCLASS.Flat"),
         type: "override",
-        value: ac.flat
+        value: ac.override
       });
       return new PropertyAttribution(this, attribution, "attributes.ac", { title }).renderTooltip();
     }
 
     // Base AC Attribution
-    switch ( ac.calc ) {
-
-      // Natural armor
-      case "natural":
-        attribution.push({
-          label: _loc("DND5E.ArmorClassNatural"),
-          type: "override",
-          value: ac.flat
-        });
-        break;
-
-      default:
-        const formula = ac.calc === "custom" ? ac.formula : cfg.formula;
-        let base = ac.base;
-        const dataRgx = new RegExp(/@([a-z.0-9_-]+)/gi);
-        for ( const [match, term] of formula.matchAll(dataRgx) ) {
-          const value = String(foundry.utils.getProperty(rollData, term));
-          if ( (term === "attributes.ac.armor") || (value === "0") ) continue;
-          if ( Number.isNumeric(value) ) base -= Number(value);
-          attribution.push({
-            label: match,
-            type: "add",
-            value
-          });
-        }
-        const armorInFormula = formula.includes("@attributes.ac.armor");
-        let label = _loc("DND5E.PropertyBase");
-        if ( armorInFormula ) label = this.armor?.name ?? _loc("DND5E.ArmorClassUnarmored");
-        attribution.unshift({
-          label,
-          type: "override",
-          value: base
-        });
-        break;
+    let base = ac.base;
+    const dataRgx = new RegExp(/@([a-z.0-9_-]+)/gi);
+    for ( const [match, term] of ac.formula.matchAll(dataRgx) ) {
+      const value = String(foundry.utils.getProperty(rollData, term));
+      if ( (term === "attributes.ac.armor") || (value === "0") ) continue;
+      if ( Number.isNumeric(value) ) base -= Number(value);
+      attribution.push({
+        label: match,
+        type: "add",
+        value
+      });
     }
+    const armorInFormula = ac.formula.includes("@attributes.ac.armor");
+    let label = ac.label || _loc("DND5E.PropertyBase");
+    if ( armorInFormula ) label = this.armor?.name ?? _loc("DND5E.ARMORCLASS.Calculation.Unarmored");
+    if ( base ) attribution.unshift({
+      label,
+      type: "override",
+      value: base
+    });
+    else if ( attribution[0]?.label === "@attributes.ac.flat" ) attribution[0].label = label;
 
     // Shield
     if ( ac.shield !== 0 ) attribution.push({

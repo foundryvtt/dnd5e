@@ -8,18 +8,20 @@ import DurationField from "../shared/duration-field.mjs";
 import RangeField from "../shared/range-field.mjs";
 import TargetField from "../shared/target-field.mjs";
 import UsesField from "../shared/uses-field.mjs";
+import AppliedBehaviorField from "./fields/applied-behavior-field.mjs";
 import AppliedEffectField from "./fields/applied-effect-field.mjs";
 import ConsumptionTargetsField from "./fields/consumption-targets-field.mjs";
 
 const {
-  ArrayField, BooleanField, DocumentFlagsField, DocumentIdField,
-  FilePathField, IntegerSortField, NumberField, SchemaField, StringField
+  ArrayField, BooleanField, DocumentFlagsField, DocumentIdField, FilePathField,
+  HTMLField, IntegerSortField, NumberField, SchemaField, StringField
 } = foundry.data.fields;
 
 /**
  * @import { DamageRollConfiguration, DamageRollProcessConfiguration } from "../../dice/_types.mjs";
  * @import { ActivityRollData } from "../../documents/_types.mjs";
- * @import { ActivityData } from "./_types.mjs";
+ * @import { DamageFormulaOptions } from "../shared/_types.mjs";
+ * @import { ActivityData, BehaviorApplicationData, EffectApplicationData } from "./_types.mjs";
  */
 
 /**
@@ -54,6 +56,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       activation: new ActivationField({
         override: new BooleanField()
       }),
+      behaviors: new ArrayField(new AppliedBehaviorField()),
       consumption: new SchemaField({
         scaling: new SchemaField({
           allowed: new BooleanField(),
@@ -63,7 +66,8 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         targets: new ConsumptionTargetsField()
       }),
       description: new SchemaField({
-        chatFlavor: new StringField()
+        chatFlavor: new StringField(),
+        value: new HTMLField()
       }),
       duration: new DurationField({
         concentration: new BooleanField(),
@@ -129,14 +133,28 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
-   * Effects that can be applied from this activity.
-   * @type {ActiveEffect5e[]|null}
+   * Behaviors that can be applied from this activity.
+   * @type {BehaviorApplicationData[]|null}
+   */
+  get applicableBehaviors() {
+    const level = this.relevantLevel;
+    return this.behaviors?.filter(b =>
+      ((b.level?.min ?? -Infinity) <= level) && (level <= (b.level?.max ?? Infinity))
+      && (b.type in CONFIG.DND5E.activityBehaviorTypes)
+    ) ?? null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Effect profiles that can be applied from this activity.
+   * @type {EffectApplicationData[]|null}
    */
   get applicableEffects() {
     const level = this.relevantLevel;
     return this.effects?.filter(e =>
-      e.effect && ((e.level?.min ?? -Infinity) <= level) && (level <= (e.level?.max ?? Infinity))
-    ).map(e => e.effect) ?? null;
+      ((e.level?.min ?? -Infinity) <= level) && (level <= (e.level?.max ?? Infinity))
+    ) ?? null;
   }
 
   /* -------------------------------------------- */
@@ -176,7 +194,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @type {boolean}
    */
   get isRider() {
-    return !!this.item.getFlag("dnd5e", "riders.activity")?.includes(this.id);
+    return !!this.item.getFlag("dnd5e", "riders.activity")?.includes?.(this.id);
   }
 
   /* -------------------------------------------- */
@@ -560,6 +578,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
     this.img = this.img || this.metadata?.img;
     this.labels ??= {};
     const addBaseIndices = data => data?.forEach((d, idx) => Object.defineProperty(d, "_index", { value: idx }));
+    addBaseIndices(this.behaviors);
     addBaseIndices(this.consumption?.targets);
     addBaseIndices(this.damage?.parts);
     addBaseIndices(this.effects);
@@ -635,7 +654,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @param {ActivityRollData} rollData  Deterministic roll data from the item.
    */
   prepareDamageLabel(rollData) {
-    const config = this.getDamageConfig({}, { rollData });
+    const config = this.getDamageConfig({}, { formulaOptions: { modifiers: false }, rollData });
     const rolls = aggregateDamageRolls(config.rolls.map(({ base, data, options, parts }) => {
       const formula = parts.join(" + ");
       try {
@@ -727,20 +746,34 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * Get the roll parts used to create the damage rolls.
    * @param {Partial<DamageRollProcessConfiguration>} [config={}]  Existing damage configuration to merge into this one.
    * @param {object} [options]                                     Damage configuration options.
+   * @param {DamageFormulaOptions} [options.formulaOptions]        Options to configure the formula.
    * @param {ActivityRollData} [options.rollData]                  Use pre-existing roll data.
    * @returns {DamageRollProcessConfiguration}
    */
-  getDamageConfig(config={}, { rollData }={}) {
+  getDamageConfig(config={}, { formulaOptions, rollData }={}) {
     if ( !this.damage?.parts ) return foundry.utils.mergeObject({ rolls: [] }, config);
 
     const rollConfig = foundry.utils.deepClone(config);
     rollData ??= this.getRollData();
     rollConfig.rolls = this.damage.parts
-      .map((d, index) => this._processDamagePart(d, rollConfig, rollData, index))
+      .map((d, index) => this._processDamagePart(d, rollConfig, rollData, index, formulaOptions))
       .filter(d => d.parts.length)
       .concat(config.rolls ?? []);
 
     return rollConfig;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Effects that can be applied from this activity.
+   * @returns {Promise<ActiveEffect5e[]>|null}
+   */
+  getApplicableEffects() {
+    const applicableEffects = this.applicableEffects;
+    return applicableEffects
+      ? Promise.all(applicableEffects.map(e => e.getEffect())).then(e => e.filter(_ => _))
+      : null;
   }
 
   /* -------------------------------------------- */
@@ -751,11 +784,12 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @param {Partial<DamageRollProcessConfiguration>} rollConfig  Roll configuration being built.
    * @param {ActivityRollData} rollData                           Roll data to populate with damage data.
    * @param {number} [index=0]                                    Index of the damage part.
+   * @param {DamageFormulaOptions} [options={}]                   Options to configure the formula.
    * @returns {DamageRollConfiguration}
    * @protected
    */
-  _processDamagePart(damage, rollConfig, rollData, index=0) {
-    const scaledFormula = damage.scaledFormula(rollConfig.scaling ?? rollData.scaling);
+  _processDamagePart(damage, rollConfig, rollData, index=0, options={}) {
+    const scaledFormula = damage.scaledFormula(rollConfig.scaling ?? rollData.scaling, options);
     const parts = scaledFormula ? [scaledFormula] : [];
     const data = { ...rollData };
 

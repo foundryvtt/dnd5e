@@ -12,6 +12,7 @@ export {
   VehicleData
 };
 export {default as GroupSystemFlags} from "./group-system-flags.mjs";
+export {default as ACFormulasField} from "./fields/ac-formulas-field.mjs";
 export {default as DamageTraitField} from "./fields/damage-trait-field.mjs";
 export {default as SimpleTraitField} from "./fields/simple-trait-field.mjs";
 export {default as TravelField} from "./fields/travel-field.mjs";

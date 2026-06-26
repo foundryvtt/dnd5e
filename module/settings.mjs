@@ -95,6 +95,19 @@ export function registerSystemSettings() {
     }
   });
 
+  // Sense-to-token vision sync
+  game.settings.register("dnd5e", "senseVisionSync", {
+    name: "SETTINGS.DND5E.AUTOMATION.SenseVision.Name",
+    hint: "SETTINGS.DND5E.AUTOMATION.SenseVision.Hint",
+    scope: "world",
+    config: true,
+    default: true,
+    type: Boolean,
+    onChange: () => {
+      if ( canvas?.ready ) canvas.draw();
+    }
+  });
+
   // Allow rotating square templates
   game.settings.register("dnd5e", "gridAlignedSquareTemplates", {
     name: "SETTINGS.5eGridAlignedSquareTemplatesN",
@@ -308,7 +321,10 @@ export function registerSystemSettings() {
     scope: "world",
     config: false,
     type: CalendarConfigSetting,
-    onChange: () => dnd5e.ui.calendar?.onUpdateSettings?.()
+    onChange: () => {
+      dnd5e.bastion.initializeUI();
+      dnd5e.ui.calendar?.onUpdateSettings?.();
+    }
   });
 
   game.settings.register("dnd5e", "calendarPreferences", {

@@ -130,7 +130,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
     { tab: "inventory", label: "DND5E.Inventory", svg: "systems/dnd5e/icons/svg/backpack.svg" },
     { tab: "features", label: "DND5E.Features", icon: "fas fa-list" },
     { tab: "spells", label: "TYPES.Item.spellPl", icon: "fas fa-book" },
-    { tab: "effects", label: "DND5E.Effects", icon: "fas fa-bolt" },
+    { tab: "effects", label: "DND5E.EFFECT.Tab", icon: "fas fa-bolt" },
     { tab: "biography", label: "DND5E.Biography", icon: "fas fa-feather" },
     { tab: "bastion", label: "DND5E.Bastion.Label", icon: "fas fa-chess-rook", condition: this.hasBastion },
     { tab: "specialTraits", label: "DND5E.SpecialTraits", icon: "fas fa-star" }
@@ -649,6 +649,9 @@ export default class CharacterActorSheet extends BaseActorSheet {
       const favorite = await fromUuid(id, { relative: this.actor });
       if ( !favorite && ((type === "item") || (type === "effect") || (type === "activity")) ) return arr;
       if ( favorite?.dependentOrigin?.active === false ) return arr;
+      if ( ((type === "item") && this.actor.hiddenItems.has(favorite.id))
+        || ((type === "effect") && this.actor.hiddenItems.has(favorite.parent?.id))
+        || ((type === "activity") && this.actor.hiddenItems.has(favorite.item?.id)) ) return arr;
       arr = await arr;
 
       let data;
@@ -1344,8 +1347,6 @@ export default class CharacterActorSheet extends BaseActorSheet {
    * @returns {boolean}
    */
   static hasBastion(actor) {
-    const { basic, special } = CONFIG.DND5E.facilities.advancement;
-    const threshold = Math.min(...Object.keys(basic), ...Object.keys(special));
-    return game.settings.get("dnd5e", "bastionConfiguration")?.enabled && (actor.system.details.level >= threshold);
+    return dnd5e.settings.bastionConfiguration.availableForActor(actor);
   }
 }

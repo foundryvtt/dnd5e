@@ -1,22 +1,28 @@
-import { formatNumber, getSceneTargets, getTargetDescriptors, simplifyBonus } from "./utils.mjs";
 import Award from "./applications/award.mjs";
 import AttackRollConfigurationDialog from "./applications/dice/attack-configuration-dialog.mjs";
 import simplifyRollFormula from "./dice/simplify-roll-formula.mjs";
 import * as Trait from "./documents/actor/trait.mjs";
 import { rollItem } from "./documents/macro.mjs";
+import { formatNumber, getSceneTargets, getTargetDescriptors, log, simplifyBonus } from "./utils.mjs";
 
 const slugify = value => value?.slugify().replaceAll("-", "").replaceAll("(", "").replaceAll(")", "");
+const logWarning = (msg, options) =>
+  log(options.relativeTo ? `${msg} [${options.relativeTo.uuid}]` : msg, { level: "warn" });
+
+const VALID_CHAT_COMMANDS = [
+  "attack", "award", "check", "concentration", "damage", "heal", "healing", "save", "skill", "tool"
+];
+const VALID_COMMANDS = [...VALID_CHAT_COMMANDS, "item"];
+const makeCommandPattern = commands => `/(?<type>${commands.join("|")})(?<config> .*?)?`;
+const CHAT_REGEX = new RegExp(`^${makeCommandPattern(VALID_CHAT_COMMANDS)}$`, "i");
 
 /**
  * Set up custom text enrichers.
  */
 export function registerCustomEnrichers() {
-  const stringNames = [
-    "attack", "award", "check", "concentration", "damage", "heal", "healing", "item", "save", "skill", "tool"
-  ];
   CONFIG.TextEditor.enrichers.push({
     id: "dnd5e-enricher",
-    pattern: new RegExp(`\\[\\[/(?<type>${stringNames.join("|")})(?<config> .*?)?]](?!])(?:{(?<label>[^}]+)})?`, "gi"),
+    pattern: new RegExp(`\\[\\[${makeCommandPattern(VALID_COMMANDS)}]](?!])(?:{(?<label>[^}]+)})?`, "gi"),
     enricher: enrichString,
     onRender: onRenderEnricher
   },
@@ -31,6 +37,33 @@ export function registerCustomEnrichers() {
     enricher: enrichString,
     onRender: onRenderEnricher
   });
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Use the `chatMessage` hook to determine if an enricher command was typed.
+ * @param {string} message  Text of the message being posted.
+ * @returns {false|void}    Returns `false` to prevent the message from continuing to parse.
+ */
+export function chatMessage(message) {
+  const match = message.replace(/^<p>|<\/p>$/gi, "").match(CHAT_REGEX);
+  if ( !match ) return;
+  let { type, config } = match.groups;
+  config = parseConfig(config, { multiple: ["damage", "heal", "healing"].includes(type) });
+  switch (type) {
+    case "attack": handleAttackCommand(config); break;
+    case "award": Award.handleAward(message); break;
+    case "heal":
+    case "healing": config._isHealing = true;
+    case "damage": handleDamageCommand(config); break;
+    case "check":
+    case "skill":
+    case "tool": handleCheckCommand(config); break;
+    case "concentration": config._isConcentration = true;
+    case "save": handleSaveCommand(config); break;
+  }
+  return false;
 }
 
 /* -------------------------------------------- */
@@ -160,28 +193,18 @@ export function getRulesVersion(config={}, options={}) {
  */
 export async function enrichAttack(config, label, options) {
   if ( config.activity && config.formula ) {
-    console.warn(`Activity ID and formula found while enriching ${config._input}, only one is supported.`);
+    logWarning(`Activity ID and formula found while enriching ${config._input}, only one is supported.`, options);
     return null;
   }
 
-  const formulaParts = [];
-  if ( config.formula ) formulaParts.push(config.formula);
-  for ( const value of config.values ) {
-    if ( value in CONFIG.DND5E.attackModes ) config.attackMode = value;
-    else if ( value === "extended" ) config.format = "extended";
-    else formulaParts.push(value);
-  }
-  config.formula = Roll.defaultImplementation.replaceFormulaData(
-    formulaParts.join(" "),
-    options.rollData ?? options.relativeTo?.getRollData?.() ?? {}
-  );
+  config = parseAttackConfig(config, options);
 
   const activity = config.activity ? options.relativeTo?.system?.activities?.get(config.activity)
     : !config.formula ? options.relativeTo?.system?.activities?.getByType("attack")[0] : null;
 
   if ( activity ) {
     if ( activity.type !== "attack" ) {
-      console.warn(`Attack enricher linked to non-attack activity when enriching ${config._input}`);
+      logWarning(`Attack enricher linked to non-attack activity when enriching ${config._input}`, options);
       return null;
     }
 
@@ -195,7 +218,7 @@ export async function enrichAttack(config, label, options) {
   }
 
   if ( !config.activityUuid && !config.formula ) {
-    console.warn(`No formula or linked activity found while enriching ${config._input}.`);
+    logWarning(`No formula or linked activity found while enriching ${config._input}.`, options);
     return null;
   }
 
@@ -236,6 +259,40 @@ export async function enrichAttack(config, label, options) {
 /* -------------------------------------------- */
 
 /**
+ * Handle a attack command in chat.
+ * @param {object} config  Configuration data.
+ */
+function handleAttackCommand(config) {
+  rollAttack(parseAttackConfig(config));
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Parse the raw configuration data for a attack enricher.
+ * @param {object} config                   Configuration data.
+ * @param {EnrichmentOptions} [options={}]  Options provided to customize text enrichment.
+ * @returns {object}
+ */
+export function parseAttackConfig(config, options={}) {
+  const formulaParts = [];
+  if ( config.formula ) formulaParts.push(config.formula);
+  for ( const value of config.values ) {
+    if ( value in CONFIG.DND5E.attackModes ) config.attackMode = value;
+    else if ( value === "extended" ) config.format = "extended";
+    else formulaParts.push(value);
+  }
+  config.formula = Roll.defaultImplementation.replaceFormulaData(
+    formulaParts.join(" "),
+    options.rollData ?? options.relativeTo?.getRollData?.() ?? {}
+  );
+
+  return config;
+}
+
+/* -------------------------------------------- */
+
+/**
  * Perform an attack roll.
  * @param {object} config  Configuration data for the roll.
  * @param {Event} [event]  The click event triggering the action.
@@ -254,7 +311,7 @@ async function rollAttack(config, event) {
     attackMode, event,
     hookNames: ["attack", "d20Test"],
     rolls: [{
-      parts: [formula.replace(/^\s*\+\s*/, "")],
+      parts: formula ? [formula.replace(/^\s*\+\s*/, "")] : [],
       options: {
         target: targets.length === 1 ? targets[0].ac : undefined
       }
@@ -301,7 +358,7 @@ export async function enrichAward(config, label, options) {
   try {
     parsed = Award.parseAwardCommand(command);
   } catch(err) {
-    console.warn(err.message);
+    logWarning(err.message, options);
     return null;
   }
 
@@ -447,17 +504,7 @@ export async function enrichAward(config, label, options) {
  * ```
  */
 export async function enrichCheck(config, label, options) {
-  config.skill = config.skill?.replaceAll("/", "|").split("|") ?? [];
-  config.tool = config.tool?.replaceAll("/", "|").split("|") ?? [];
-  for ( let value of config.values ) {
-    const slug = foundry.utils.getType(value) === "string" ? slugify(value) : value;
-    if ( slug in CONFIG.DND5E.enrichmentLookup.abilities ) config.ability = slug;
-    else if ( slug in CONFIG.DND5E.enrichmentLookup.skills ) config.skill.push(slug);
-    else if ( slug in CONFIG.DND5E.enrichmentLookup.tools ) config.tool.push(slug);
-    else if ( Number.isNumeric(value) ) config.dc = Number(value);
-    else config[value] = true;
-  }
-  delete config.values;
+  config = parseCheckConfig(config, options);
 
   const groups = new Map();
   let invalid = false;
@@ -468,7 +515,7 @@ export async function enrichCheck(config, label, options) {
 
   if ( activity ) {
     if ( activity.type !== "check" ) {
-      console.warn(`Check enricher linked to non-check activity when enriching ${config._input}.`);
+      logWarning(`Check enricher linked to non-check activity when enriching ${config._input}.`, options);
       return null;
     }
 
@@ -485,31 +532,30 @@ export async function enrichCheck(config, label, options) {
   }
 
   // TODO: Support "spellcasting" ability
-  let abilityConfig = CONFIG.DND5E.enrichmentLookup.abilities[slugify(config.ability)];
+  let abilityConfig = CONFIG.DND5E.abilities[config.ability];
   if ( config.ability && !abilityConfig ) {
-    console.warn(`Ability "${config.ability}" not found while enriching ${config._input}.`);
+    logWarning(`Ability "${config.ability}" not found while enriching ${config._input}.`, options);
     invalid = true;
   } else if ( abilityConfig?.key ) config.ability = abilityConfig.key;
 
   for ( let [index, skill] of config.skill.entries() ) {
-    const skillConfig = CONFIG.DND5E.enrichmentLookup.skills[slugify(skill)];
+    const skillConfig = CONFIG.DND5E.skills[skill];
     if ( skillConfig ) {
       if ( skillConfig.key ) skill = config.skill[index] = skillConfig.key;
       const ability = config.ability || skillConfig.ability;
       if ( !groups.has(ability) ) groups.set(ability, []);
       groups.get(ability).push({ key: skill, type: "skill", label: skillConfig.label });
     } else {
-      console.warn(`Skill "${skill}" not found while enriching ${config._input}.`);
+      logWarning(`Skill "${skill}" not found while enriching ${config._input}.`, options);
       invalid = true;
     }
   }
 
   let usingTool;
   for ( const tool of config.tool ) {
-    const toolConfig = CONFIG.DND5E.tools[slugify(tool)];
-    const toolUUID = CONFIG.DND5E.enrichmentLookup.tools[slugify(tool)];
-    const toolIndex = toolUUID?.id ? Trait.getBaseItem(toolUUID.id, { indexOnly: true }) : null;
-    const toolLabel = toolIndex?.name ?? toolUUID?.label;
+    const toolConfig = CONFIG.DND5E.enrichmentLookup.tools[slugify(tool)];
+    const toolIndex = Trait.getBaseItem(toolConfig?.id ?? "", { indexOnly: true });
+    const toolLabel = toolIndex?.name ?? toolConfig?.label;
     if ( toolLabel ) {
       const ability = config.ability || toolConfig?.ability;
       if ( config.skill.length && (config.tool.length === 1) && (config._rules === "2024") ) {
@@ -518,27 +564,27 @@ export async function enrichCheck(config, label, options) {
         if ( !groups.has(ability) ) groups.set(ability, []);
         groups.get(ability).push({ key: tool, type: "tool", label: toolLabel });
       } else {
-        console.warn(`Tool "${tool}" found without specified or default ability while enriching ${config._input}.`);
+        logWarning(`Tool "${tool}" found without specified or default ability while enriching ${config._input}.`, options);
         invalid = true;
       }
     } else {
-      console.warn(`Tool "${tool}" not found while enriching ${config._input}.`);
+      logWarning(`Tool "${tool}" not found while enriching ${config._input}.`, options);
       invalid = true;
     }
   }
 
   if ( !abilityConfig && !groups.size ) {
-    console.warn(`No ability, skill, tool, or linked activity provided while enriching ${config._input}.`);
+    logWarning(`No ability, skill, tool, or linked activity provided while enriching ${config._input}.`, options);
     invalid = true;
   }
 
   const complex = (config.skill.length + config.tool.length) > 1;
   if ( config.passive && complex ) {
-    console.warn(`Multiple skills or tools and passive flag found while enriching ${config._input}, which aren't supported together.`);
+    logWarning(`Multiple skills or tools and passive flag found while enriching ${config._input}, which aren't supported together.`, options);
     invalid = true;
   }
   if ( label && complex ) {
-    console.warn(`Multiple skills or tools and a custom label found while enriching ${config._input}, which aren't supported together.`);
+    logWarning(`Multiple skills or tools and a custom label found while enriching ${config._input}, which aren't supported together.`, options);
     invalid = true;
   }
 
@@ -557,7 +603,7 @@ export async function enrichCheck(config, label, options) {
       // Multiple associated proficiencies, link each individually
       if ( associated.length > 1 ) parts.push(
         _loc("EDITOR.DND5E.Inline.SpecificCheck", {
-          ability: CONFIG.DND5E.enrichmentLookup.abilities[ability].label,
+          ability: CONFIG.DND5E.abilities[ability].label,
           type: formatter.format(associated.map(a => createRollLink(a.label, makeConfig(a)).outerHTML ))
         })
       );
@@ -598,14 +644,40 @@ export async function enrichCheck(config, label, options) {
 /* -------------------------------------------- */
 
 /**
+ * Handle a check command in chat.
+ * @param {object} config  Configuration data.
+ * @returns {void}
+ */
+function handleCheckCommand(config) {
+  config = parseCheckConfig(config);
+  config.type = "check";
+  if ( (config.tool.length === 1) && (config.skill.length > 0) && (dnd5e.settings.rulesVersion === "modern") ) {
+    config.usingTool = config.tool.pop();
+  }
+  if ( config.request ) return handlePostRequest(config);
+  config.skill = config.skill[0];
+  config.tool = config.tool[0];
+  config.type = config.skill ? "skill" : config.tool ? "tool" : "check";
+  rollCheckSave(config);
+}
+
+/* -------------------------------------------- */
+
+/**
  * Create the buttons for a check requested in chat.
  * @param {object} dataset
  * @returns {object[]}
  */
 function createCheckRequestButtons(dataset) {
-  const skills = dataset.skill?.split("|") ?? [];
-  const tools = dataset.tool?.split("|") ?? [];
-  if ( (skills.length + tools.length) <= 1 ) return [createRequestButton(dataset)];
+  const skills = foundry.utils.getType(dataset.skill) === "string" ? dataset.skill.split("|") : dataset.skill ?? [];
+  const tools = foundry.utils.getType(dataset.tool) === "string" ? dataset.tool.split("|") : dataset.tool ?? [];
+  if ( ((skills.length + tools.length) <= 1) && !dataset.usingTool ) {
+    if ( !dataset.ability ) {
+      if ( skills.length === 1 ) dataset.ability = CONFIG.DND5E.skills[skills[0]]?.ability;
+      else if ( tools.length === 1 ) dataset.ability = CONFIG.DND5E.tools[tools[0]]?.ability;
+    }
+    return [createRequestButton(dataset)];
+  }
   const baseDataset = { ...dataset };
   delete baseDataset.skill;
   delete baseDataset.tool;
@@ -617,6 +689,31 @@ function createCheckRequestButtons(dataset) {
       ability: CONFIG.DND5E.tools[tool]?.ability, ...baseDataset, format: "short", tool, type: "tool"
     }))
   ];
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Parse the raw configuration data for a check enricher.
+ * @param {object} config                   Configuration data.
+ * @param {EnrichmentOptions} [options={}]  Options provided to customize text enrichment.
+ * @returns {object}
+ */
+export function parseCheckConfig(config, options={}) {
+  const lookup = CONFIG.DND5E.enrichmentLookup;
+  config.skill = config.skill?.replaceAll("/", "|").split("|") ?? [];
+  config.tool = config.tool?.replaceAll("/", "|").split("|") ?? [];
+  for ( let value of config.values ) {
+    const slug = foundry.utils.getType(value) === "string" ? slugify(value) : value;
+    if ( slug in lookup.abilities ) config.ability = lookup.abilities[slug].key;
+    else if ( slug in lookup.skills ) config.skill.push(lookup.skills[slug].key);
+    else if ( slug in lookup.tools ) config.tool.push(lookup.tools[slug].key);
+    else if ( Number.isNumeric(value) ) config.dc = Number(value);
+    else config[value] = true;
+  }
+  delete config.values;
+
+  return config;
 }
 
 /* -------------------------------------------- */
@@ -682,23 +779,14 @@ function createCheckRequestButtons(dataset) {
  * ```
  */
 export async function enrichSave(config, label, options) {
-  config.ability = config.ability?.replace("/", "|").split("|") ?? [];
-  for ( let value of config.values ) {
-    const slug = foundry.utils.getType(value) === "string" ? slugify(value) : value;
-    if ( slug in CONFIG.DND5E.enrichmentLookup.abilities ) config.ability.push(slug);
-    else if ( Number.isNumeric(value) ) config.dc = Number(value);
-    else config[value] = true;
-  }
-  config.ability = config.ability
-    .filter(a => a in CONFIG.DND5E.enrichmentLookup.abilities)
-    .map(a => CONFIG.DND5E.enrichmentLookup.abilities[a].key ?? a);
+  config = parseSaveConfig(config, options);
 
   const activity = config.activity ? options.relativeTo?.system?.activities?.get(config.activity)
     : !config.ability.length ? options.relativeTo?.system?.activities?.getByType("save")[0] : null;
 
   if ( activity ) {
     if ( activity.type !== "save" ) {
-      console.warn(`Save enricher linked to non-save activity when enriching ${config._input}`);
+      logWarning(`Save enricher linked to non-save activity when enriching ${config._input}`, options);
       return null;
     }
 
@@ -709,7 +797,7 @@ export async function enrichSave(config, label, options) {
   }
 
   if ( !config.ability.length && !config._isConcentration ) {
-    console.warn(`No ability or linked activity found while enriching ${config._input}.`);
+    logWarning(`No ability or linked activity found while enriching ${config._input}.`, options);
     return null;
   }
 
@@ -718,7 +806,7 @@ export async function enrichSave(config, label, options) {
   }
 
   if ( config.ability.length > 1 && label ) {
-    console.warn(`Multiple abilities and custom label found while enriching ${config._input}, which aren't supported together.`);
+    logWarning(`Multiple abilities and custom label found while enriching ${config._input}, which aren't supported together.`, options);
     return null;
   }
 
@@ -743,13 +831,50 @@ export async function enrichSave(config, label, options) {
 /* -------------------------------------------- */
 
 /**
+ * Handle a save command in chat.
+ * @param {object} config  Configuration data.
+ */
+async function handleSaveCommand(config) {
+  config = parseSaveConfig(config);
+  config.type = config._isConcentration ? "concentration" : "save";
+  if ( config.request ) return handlePostRequest(config);
+  config.ability = config.ability[0];
+  rollCheckSave(config);
+}
+
+/* -------------------------------------------- */
+
+/**
  * Create the buttons for a save requested in chat.
  * @param {object} dataset
  * @returns {object[]}
  */
 function createSaveRequestButtons(dataset) {
-  return (dataset.ability?.split("|") ?? [])
-    .map(ability => createRequestButton({ ...dataset, format: "long", ability }));
+  const abilities = foundry.utils.getType(dataset.ability) === "string" ? dataset.ability.split("|")
+    : dataset.ability ?? [];
+  return abilities.map(ability => createRequestButton({ ...dataset, format: "long", ability }));
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Parse the raw configuration data for a check enricher.
+ * @param {object} config                   Configuration data.
+ * @param {EnrichmentOptions} [options={}]  Options provided to customize text enrichment.
+ * @returns {object}
+ */
+export function parseSaveConfig(config, options={}) {
+  const lookup = CONFIG.DND5E.enrichmentLookup;
+  config.ability = config.ability?.replace("/", "|").split("|") ?? [];
+  for ( let value of config.values ) {
+    const slug = foundry.utils.getType(value) === "string" ? slugify(value) : value;
+    if ( slug in lookup.abilities ) config.ability.push(lookup.abilities[slug].key);
+    else if ( Number.isNumeric(value) ) config.dc = Number(value);
+    else config[value] = true;
+  }
+  config.ability = config.ability.filter(a => a in CONFIG.DND5E.enrichmentLookup.abilities);
+
+  return config;
 }
 
 /* -------------------------------------------- */
@@ -885,39 +1010,10 @@ async function rollCheckSave(config, event) {
  * ````
  */
 export async function enrichDamage(configs, label, options) {
-  const config = { type: "damage", formulas: [], damageTypes: [], rollType: configs._isHealing ? "healing" : "damage" };
-  for ( const c of configs ) {
-    const formulaParts = [];
-    if ( c.activity ) config.activity = c.activity;
-    if ( c.attackMode ) config.attackMode = c.attackMode;
-    if ( c.average ) config.average = c.average;
-    if ( c.format ) config.format = c.format;
-    if ( c.formula ) formulaParts.push(c.formula);
-    c.type = c.type?.replaceAll("/", "|").split("|") ?? [];
-    for ( const value of c.values ) {
-      if ( value in CONFIG.DND5E.damageTypes ) c.type.push(value);
-      else if ( value in CONFIG.DND5E.healingTypes ) c.type.push(value);
-      else if ( value in CONFIG.DND5E.attackModes ) config.attackMode = value;
-      else if ( value === "average" ) config.average = true;
-      else if ( value === "extended" ) config.format = "extended";
-      else if ( value === "temp" ) c.type.push("temphp");
-      else formulaParts.push(value);
-    }
-    c.formula = Roll.defaultImplementation.replaceFormulaData(
-      formulaParts.join(" "),
-      options.rollData ?? options.relativeTo?.getRollData?.() ?? {}
-    );
-    if ( configs._isHealing && !c.type.length ) c.type.push("healing");
-    if ( c.formula ) {
-      config.formulas.push(c.formula);
-      config.damageTypes.push(c.type.join("|"));
-    }
-  }
-  config.damageTypes = config.damageTypes.map(t => t?.replace("/", "|"));
-  if ( config.format === "extended" ) config.average ??= true;
+  const config = parseDamageConfig(configs, options);
 
   if ( config.activity && config.formulas.length ) {
-    console.warn(`Activity ID and formulas found while enriching ${config._input}, only one is supported.`);
+    logWarning(`Activity ID and formulas found while enriching ${config._input}, only one is supported.`, options);
     return null;
   }
 
@@ -946,7 +1042,7 @@ export async function enrichDamage(configs, label, options) {
   }
 
   if ( !config.activityUuid && !config.formulas.length ) {
-    console.warn(`No formula or linked activity found while enriching ${config._input}.`);
+    logWarning(`No formula or linked activity found while enriching ${config._input}.`, options);
     return null;
   }
 
@@ -1009,6 +1105,59 @@ export async function enrichDamage(configs, label, options) {
 }
 
 /* -------------------------------------------- */
+/**
+ * Handle a damage command in chat.
+ * @param {object[]} configs  Configuration data.
+ */
+function handleDamageCommand(configs) {
+  rollDamage(parseDamageConfig(configs));
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Parse the raw configuration data for a damage enricher.
+ * @param {object[]} configs                Configuration data.
+ * @param {EnrichmentOptions} [options={}]  Options provided to customize text enrichment.
+ * @returns {object}
+ */
+export function parseDamageConfig(configs, options={}) {
+  const config = { type: "damage", formulas: [], damageTypes: [], rollType: configs._isHealing ? "healing" : "damage" };
+  const lookup = CONFIG.DND5E.enrichmentLookup;
+  for ( const c of configs ) {
+    const formulaParts = [];
+    if ( c.activity ) config.activity = c.activity;
+    if ( c.attackMode ) config.attackMode = c.attackMode;
+    if ( c.average ) config.average = c.average;
+    if ( c.format ) config.format = c.format;
+    if ( c.formula ) formulaParts.push(c.formula);
+    c.type = c.type?.replaceAll("/", "|").split("|") ?? [];
+    for ( const value of c.values ) {
+      const slug = foundry.utils.getType(value) === "string" ? slugify(value) : value;
+      if ( slug in lookup.damageTypes ) c.type.push(lookup.damageTypes[slug]);
+      else if ( slug in CONFIG.DND5E.attackModes ) config.attackMode = slug;
+      else if ( slug === "average" ) config.average = true;
+      else if ( slug === "extended" ) config.format = "extended";
+      else if ( slug === "temp" ) c.type.push("temphp");
+      else formulaParts.push(value);
+    }
+    c.formula = Roll.defaultImplementation.replaceFormulaData(
+      formulaParts.join(" "),
+      options.rollData ?? options.relativeTo?.getRollData?.() ?? {}
+    );
+    if ( configs._isHealing && !c.type.length ) c.type.push("healing");
+    if ( c.formula ) {
+      config.formulas.push(c.formula);
+      config.damageTypes.push(c.type.join("|"));
+    }
+  }
+  config.damageTypes = config.damageTypes.map(t => t?.replace("/", "|"));
+  if ( config.format === "extended" ) config.average ??= true;
+
+  return config;
+}
+
+/* -------------------------------------------- */
 
 /**
  * Perform a damage roll.
@@ -1024,8 +1173,10 @@ async function rollDamage(config, event) {
     if ( activity ) return activity.rollDamage({ attackMode, event });
   }
 
-  formulas = formulas?.split("&") ?? [];
-  damageTypes = damageTypes?.split("&") ?? [];
+  if ( event ) {
+    formulas = formulas?.split("&") ?? [];
+    damageTypes = damageTypes?.split("&") ?? [];
+  }
 
   const rollConfig = {
     attackMode, event,
@@ -1079,7 +1230,7 @@ export function enrichLanguage(config, label, options) {
   delete config.values;
 
   if ( !(config.language in CONFIG.DND5E.enrichmentLookup.languages) ) {
-    console.warn(`No language found while enriching ${config._input}.`);
+    logWarning(`No language found while enriching ${config._input}.`, options);
     return null;
   }
 
@@ -1124,12 +1275,12 @@ export function enrichLookup(config, fallback, options) {
 
   let activity = options.relativeTo?.system?.activities?.get(config.activity);
   if ( config.activity && !activity ) {
-    console.warn(`Activity not found when enriching ${config._input}.`);
+    logWarning(`Activity not found when enriching ${config._input}.`, options);
     return null;
   }
 
   if ( !keyPath ) {
-    console.warn(`Lookup path must be defined to enrich ${config._input}.`);
+    logWarning(`Lookup path must be defined to enrich ${config._input}.`, options);
     return null;
   }
 
@@ -1198,7 +1349,7 @@ export async function enrichReference(config, label, options) {
     }
   }
   if ( !source ) {
-    console.warn(`No valid rule found while enriching ${config._input}.`);
+    logWarning(`No valid rule found while enriching ${config._input}.`, options);
     return null;
   }
   const uuid = foundry.utils.getType(source) === "Object" ? source.reference : source;
@@ -1294,13 +1445,13 @@ export async function enrichItem(config, label, options) {
       : parsed.embedded.includes("Actor") ? parsed.embedded[parsed.embedded.findIndex(e => e === "Actor") + 1] : null;
     let doc = await fromUuid(parsed.uuid);
     if ( !doc ) {
-      console.warn(`Item not found while enriching ${config._input}.`);
+      logWarning(`Item not found while enriching ${config._input}.`, options);
       return null;
     }
     if ( (doc instanceof Item) && config.activity ) {
       doc = doc.system.activities?.get(config.activity) ?? doc.system.activities?.getName(config.activity);
       if ( !doc ) {
-        console.warn(`Activity not found while enriching ${config._input}.`);
+        logWarning(`Activity not found while enriching ${config._input}.`, options);
         return null;
       }
     }
@@ -1331,7 +1482,7 @@ export async function enrichItem(config, label, options) {
       foundActivity = foundItem.system.activities?.get(config.activity)
         ?? foundItem.system.activities?.getName(config.activity);
       if ( !foundActivity ) {
-        console.warn(`Activity ${config.activity} not found on ${foundItem.name} while enriching ${config._input}.`);
+        logWarning(`Activity ${config.activity} not found on ${foundItem.name} while enriching ${config._input}.`, options);
         return null;
       }
       if ( !label ) label = _loc("EDITOR.DND5E.Inline.ItemActivity", {
@@ -1649,12 +1800,14 @@ async function handleEndConcentration(event, target) {
 
 /**
  * Handle creating a roll request chat message.
- * @param {Event} event         Triggering click event.
- * @param {HTMLElement} target  Button that was clicked.
+ * @param {object|Event} dataset  Configuration dataset or triggering click event.
+ * @param {HTMLElement} [target]  Button that was clicked.
  */
-async function handlePostRequest(event, target) {
-  window.getSelection().empty();
-  const dataset = getRollActionDataset(target);
+async function handlePostRequest(dataset, target) {
+  if ( dataset instanceof Event ) {
+    window.getSelection().empty();
+    dataset = getRollActionDataset(target);
+  }
 
   let buttons;
   if ( dataset.type === "check" ) buttons = createCheckRequestButtons(dataset);
@@ -1759,6 +1912,5 @@ function _addListeners(buttons, handler) {
 async function _fetchActivity(uuid, scaling) {
   const activity = await fromUuid(uuid);
   if ( !activity || !scaling ) return activity;
-  const item = activity.item.clone({ "flags.dnd5e.scaling": scaling }, { keepId: true });
-  return item.system.activities.get(activity.id);
+  return activity.item.scaledClone(scaling).system.activities.get(activity.id);
 }

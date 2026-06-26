@@ -1,5 +1,5 @@
 import AdvancementConfig from "./advancement-config-v2.mjs";
-import { TYPES } from "../../data/advancement/scale-value.mjs";
+import { TYPES } from "../../data/advancement/scale-value-data.mjs";
 import { formatIdentifier } from "../../utils.mjs";
 
 /**
@@ -31,6 +31,19 @@ export default class ScaleValueConfig extends AdvancementConfig {
       template: "systems/dnd5e/templates/advancement/scale-value-config-levels.hbs"
     }
   };
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Range of levels that can be used based on what item type this advancement is within.
+   * @type {number[]}
+   */
+  get levelRange() {
+    let levels = Array.fromRange(CONFIG.DND5E.maxLevel + 1);
+    return ["class", "subclass"].includes(this.advancement.item.type) ? levels.slice(1) : levels;
+  }
 
   /* -------------------------------------------- */
   /*  Rendering                                   */
@@ -69,21 +82,14 @@ export default class ScaleValueConfig extends AdvancementConfig {
    * @protected
    */
   _prepareLevelData() {
-    let lastValue = null;
-    let levels = Array.fromRange(CONFIG.DND5E.maxLevel + 1);
-    if ( ["class", "subclass"].includes(this.advancement.item.type) ) levels = levels.slice(1);
-    return levels.reduce((obj, level) => {
-      const value = this.advancement.configuration.scale[level]?.clone();
+    const TypeClass = TYPES[this.advancement.configuration.type];
+    return this.levelRange.reduce((obj, level) => {
+      const value = new TypeClass(this.advancement.configuration.scale[level] ?? {});
+      const lastValue = this.advancement.valueForLevel(level - 1);
       obj[level] = {
-        fields: TYPES[this.advancement.configuration.type].getFields(level, value, lastValue),
-        value: null
+        fields: TypeClass.getFields(level, value, lastValue),
+        value: this.advancement.configuration.scale[level] ?? {}
       };
-      if ( value ) {
-        this._mergeScaleValues(value, lastValue);
-        obj[level].className = "new-scale-value";
-        obj[level].value = value;
-        lastValue = value;
-      }
       return obj;
     }, {});
   }
@@ -96,6 +102,10 @@ export default class ScaleValueConfig extends AdvancementConfig {
    * @param {*} lastValue  The previous value.
    */
   _mergeScaleValues(value, lastValue) {
+    foundry.utils.logCompatibilityWarning(
+      "`ScaleValueConfig#_mergeScaleValues` has been deprecated without replacement.",
+      { since: "DnD5e 6.0", until: "DnD5e 6.2" }
+    );
     for ( const k of Object.keys(lastValue ?? {}) ) {
       if ( value[k] == null ) value[k] = lastValue[k];
     }
@@ -128,16 +138,34 @@ export default class ScaleValueConfig extends AdvancementConfig {
 
   /** @inheritDoc */
   prepareConfigurationUpdate(configuration) {
-    // Ensure multiple values in a row are not the same
-    let lastValue = null;
-    for ( const [lvl, value] of Object.entries(configuration.scale) ) {
-      if ( this.advancement.testEquality(lastValue, value) ) configuration.scale[lvl] = null;
-      else if ( this.constructor._hasValue(value) ) {
-        this._mergeScaleValues(value, lastValue);
-        lastValue = value;
+    const TypeClass = TYPES[configuration.type ?? this.advancement.configuration.type];
+    const validKeys = Object.keys(TypeClass.schema.fields);
+
+    let lastValue = {};
+    const scale = {};
+    for ( const level of this.levelRange ) {
+      const value = configuration.scale[level] ?? {};
+      scale[level] = {};
+
+      // Fetch data for valid keys, skipping if value is empty or the same as a previous level
+      for ( const key of validKeys ) {
+        if ( (value[key] === null) || (value[key] === "") || (value[key] === lastValue[key]) ) scale[level][key] = _del;
+        else lastValue[key] = scale[level][key] = value[key];
+        // TODO: Ensure value is valid
+      }
+
+      // Strip out any invalid keys
+      for ( const key of Object.keys(this.advancement.configuration.scale[level] ?? {}) ) {
+        if ( !validKeys.includes(key) ) scale[level][key] = _del;
+      }
+
+      // If all updates were removals, just remove the level as a whole
+      if ( Object.values(scale[level]).every(v => v instanceof foundry.data.operators.ForcedDeletion) ) {
+        scale[level] = _del;
       }
     }
-    configuration.scale = this.constructor._cleanedObject(configuration.scale);
+
+    configuration.scale = scale;
     return configuration;
   }
 
@@ -145,44 +173,22 @@ export default class ScaleValueConfig extends AdvancementConfig {
 
   /** @inheritDoc */
   async _processSubmitData(event, submitData) {
-    const typeChange = foundry.utils.hasProperty(submitData, "configuration.type");
-    if ( typeChange && (submitData.configuration.type !== this.advancement.configuration.type) ) {
-      // Clear existing scale value data to prevent error during type update
-      await this.advancement.update(Array.fromRange(CONFIG.DND5E.maxLevel, 1).reduce((obj, lvl) => {
-        obj[`configuration.scale.${lvl}`] = _del;
-        return obj;
-      }, {}));
-      submitData.configuration.scale ??= {};
-      const OriginalType = TYPES[this.advancement.configuration.type];
-      const NewType = TYPES[submitData.configuration.type];
-      for ( const [lvl, data] of Object.entries(submitData.configuration.scale) ) {
-        const original = new OriginalType(data, { parent: this.advancement, strict: false });
-        submitData.configuration.scale[lvl] = NewType.convertFrom(original)?.toObject();
+    const type = submitData.configuration.type;
+    if ( type && (submitData.configuration.type !== this.advancement.configuration.type) ) {
+      // Perform the update with the old type
+      delete submitData.configuration.type;
+      await super._processSubmitData(event, submitData);
+
+      // Transform values into new type
+      const NewType = TYPES[type];
+      for ( const level of this.levelRange ) {
+        const value = this.advancement.valueForLevel(level);
+        if ( value ) submitData.configuration.scale[level] = _replace(NewType.convertFrom(value)?.toObject());
+        else submitData.configuration.scale[level] = _del;
       }
+
+      submitData.configuration.type = type;
     }
     return super._processSubmitData(event, submitData);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  static _cleanedObject(object) {
-    return Object.entries(object).reduce((obj, [key, value]) => {
-      if ( this._hasValue(value) ) obj[key] = value;
-      else obj[key] = _del;
-      return obj;
-    }, {});
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Is a scale value entry non-empty?
-   * @param {object} value  Scale value entry.
-   * @returns {boolean}
-   * @protected
-   */
-  static _hasValue(value) {
-    return Object.keys(value ?? {}).some(k => (value[k] != null) && (value[k] !== ""));
   }
 }

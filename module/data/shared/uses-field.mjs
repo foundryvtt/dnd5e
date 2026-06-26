@@ -1,3 +1,4 @@
+import { ScaleValueTypeUsage } from "../../data/advancement/scale-value-data.mjs";
 import { formatNumber, formatRange, getPluralRules, prepareFormulaValue } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 
@@ -46,6 +47,12 @@ export default class UsesField extends SchemaField {
 
     const periods = [];
     for ( const recovery of this.uses.recovery ) {
+      recovery.isScaleValue = recovery.period.startsWith("@scale");
+      if ( recovery.isScaleValue ) {
+        const scaleValue = foundry.utils.getProperty(rollData, recovery.period.slice(1));
+        if ( scaleValue?.period ) recovery.period = scaleValue.period;
+      }
+
       if ( recovery.period === "recharge" ) {
         recovery.formula ??= "6";
         recovery.type = "recoverAll";
@@ -80,6 +87,48 @@ export default class UsesField extends SchemaField {
         range: min === 6 ? formatNumber(6) : formatRange(min, 6)
       })
     }));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Recovery options for an item.
+   * @param {Item5e} item   Item for which the recovery options will be created.
+   * @param {string} value  Current recovery value.
+   * @returns {FormSelectOption[]|null}
+   */
+  static recoveryOptions(item, value) {
+    // For non-embedded items with a scale value, just show text input
+    if ( !item.isEmbedded && value.startsWith("@scale") ) return null;
+    const recoveryOptions = CONFIG.DND5E.limitedUsePeriods.recoveryOptions;
+
+    // For embedded items, build a list of uses scale values to display
+    if ( item.isEmbedded ) {
+      const usesScaleValues = [];
+      for ( const [itemIdentifier, scaleValues] of Object.entries(item.actor.system.scale ?? {}) ) {
+        for ( const [scaleIdentifier, scaleValue] of Object.entries(scaleValues) ) {
+          if ( scaleValue instanceof ScaleValueTypeUsage ) usesScaleValues.push({
+            value: `@scale.${itemIdentifier}.${scaleIdentifier}`,
+            label: scaleValue.parent.title
+          });
+        }
+      }
+      if ( value.startsWith("@scale") && !usesScaleValues.find(s => s.value === value) ) return null;
+      recoveryOptions.push(
+        { rule: true },
+        ...usesScaleValues.sort((lhs, rhs) => lhs.label.localeCompare(rhs.label, game.i18n.lang))
+      );
+    }
+
+    // Not embedded, just show single Scale Value option that transform input into freeform text box
+    else {
+      recoveryOptions.push(
+        { rule: true },
+        { value: "@scale", label: game.i18n.localize("DND5E.ADVANCEMENT.ScaleValue.Title") }
+      );
+    }
+
+    return recoveryOptions;
   }
 
   /* -------------------------------------------- */
@@ -131,20 +180,31 @@ export default class UsesField extends SchemaField {
   /**
    * Determine uses recovery.
    * @this {ItemDataModel|BaseActivityData}
-   * @param {string[]} periods                     Recovery periods to check.
-   * @param {ActorRollData|ItemRollData} rollData  Roll data to use when evaluating recovery formulas.
+   * @param {Map<string, number>} periods            Recovery periods to check, mapped to the number of times occurred.
+   * @param {ActorRollData|ItemRollData} [rollData]  Roll data to use when evaluating recovery formulas.
    * @returns {Promise<{ updates: object, rolls: BasicRoll[] }|false>}
    */
-  static async recoverUses(periods, rollData) {
+  static async recoverUses(periods, rollData={}) {
+    if ( foundry.utils.getType(periods) === "Array" ) {
+      foundry.utils.logCompatibilityWarning(
+        "The periods parameter of `recoverUses` is now a mapping of periods to times triggered.",
+        { since: "DnD5e 6.0", until: "DnD5e 6.2" }
+      );
+      periods = new Map(periods.map(p => [p, 1]));
+    }
+
     if ( !this.uses?.recovery.length ) return false;
 
     // Search the recovery profiles in order to find the first matching period,
     // and then find the first profile that uses that recovery period
+    let count;
     let profile;
     findPeriod: {
-      for ( const period of periods ) {
+      for ( const [period, periodCount] of periods.entries() ) {
+        if ( periodCount < 1 ) continue;
         for ( const recovery of this.uses.recovery ) {
           if ( recovery.period === period ) {
+            count = periodCount;
             profile = recovery;
             break findPeriod;
           }
@@ -157,19 +217,19 @@ export default class UsesField extends SchemaField {
     const rolls = [];
     const item = this.item ?? this.parent;
 
-    if ( profile.type === "recoverAll" ) updates.spent = 0;
-    else if ( profile.type === "loseAll" ) updates.spent = this.uses.max;
-    else if ( profile.formula ) {
+    if ( profile.type === "recoverAll" ) {
+      if ( this.uses.spent !== 0 ) updates.spent = 0;
+    } else if ( profile.type === "loseAll" ) {
+      if ( this.uses.spent !== this.uses.max ) updates.spent = this.uses.max;
+    } else if ( profile.formula ) {
       let roll;
       let total;
       try {
-        const delta = this.parent instanceof Item ? { item: this.parent.id, keyPath: "system.uses.spent" }
-          : { item: this.item.id, keyPath: `system.activities.${this.id}.uses.spent` };
+        const delta = this.parent instanceof Item
+          ? { item: this.parent.id, itemUuid: this.parent.uuid, keyPath: "system.uses.spent" }
+          : { item: this.item.id, itemUuid: this.item.uuid, keyPath: `system.activities.${this.id}.uses.spent` };
         roll = new CONFIG.Dice.BasicRoll(profile.formula, rollData, { delta });
-        if ( ["day", "dawn", "dusk"].includes(profile.period)
-          && (game.settings.get("dnd5e", "restVariant") === "gritty") ) {
-          roll.alter(7, 0, { multiplyNumeric: true });
-        }
+        if ( count > 1 ) roll.alter(count, 0, { multiplyNumeric: true });
         total = (await roll.evaluate()).total;
       } catch(err) {
         Hooks.onError("UsesField#recoverUses", err, {
@@ -189,7 +249,7 @@ export default class UsesField extends SchemaField {
       }
     }
 
-    return { updates, rolls };
+    return foundry.utils.isEmpty(updates) ? false : { updates, rolls };
   }
 
   /* -------------------------------------------- */

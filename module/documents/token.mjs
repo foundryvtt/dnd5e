@@ -5,6 +5,12 @@ import SystemFlagsMixin from "./mixins/flags.mjs";
  */
 export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
 
+  /**
+   * Cached sense-derived overrides, used to skip vision re-derivation when senses are unchanged.
+   * @type {{ sight: object, detectionModes: Record<string, number> }}
+   */
+  #senseOverrides;
+
   /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
@@ -36,6 +42,81 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
 
   /* -------------------------------------------- */
   /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _prepareDetectionModes() {
+    // Set sight & sense detection modes before calling super so basicSight is seeded from the derived sight range.
+    this._applySenseVision();
+    super._prepareDetectionModes();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Derive token sight range and detection modes from the actor's senses.
+   * @protected
+   */
+  _applySenseVision() {
+    if ( !game.settings.get("dnd5e", "senseVisionSync") ) return;
+    const senses = this.actor?.system?.attributes?.senses;
+    if ( senses ) TokenDocument5e.applySenseOverrides(senses, this);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Compute sense-derived sight and detection mode data from actor senses.
+   * @param {object} senses                          Object containing sense ranges.
+   * @param {Record<string, number>} senses.ranges   Mapping of sense keys to their range values.
+   * @returns {{ sight: object, detectionModes: Record<string, number> }}
+   */
+  static computeSenseOverrides(senses) {
+    const detectionModes = {};
+    let maxSightRange = 0;
+    let sightVisionMode = null;
+
+    for ( const [key, config] of Object.entries(CONFIG.DND5E.senses) ) {
+      const range = senses.ranges?.[key];
+      if ( !range ) continue;
+
+      if ( config.detectionMode ) detectionModes[config.detectionMode] = range;
+
+      if ( config.grantsSight && (range > maxSightRange) ) {
+        maxSightRange = range;
+        sightVisionMode = config.visionMode ?? null;
+      }
+    }
+
+    const sight = maxSightRange > 0
+      ? { enabled: true, range: maxSightRange, visionMode: sightVisionMode ?? "basic" }
+      : {};
+
+    return { sight, detectionModes };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Apply sense-derived overrides to a token-like target's prepared data.
+   * @param {object} senses                         Object containing sense ranges.
+   * @param {Record<string, number>} senses.ranges  Mapping of sense keys to their range values.
+   * @param {object} target                         Target with `sight` and `detectionModes` properties.
+   */
+  static applySenseOverrides(senses, target) {
+    const { sight, detectionModes } = TokenDocument5e.computeSenseOverrides(senses);
+
+    for ( const [id, range] of Object.entries(detectionModes) ) {
+      const existing = target.detectionModes[id];
+      if ( existing ) Object.assign(existing, { enabled: true, range });
+      else target.detectionModes[id] = { enabled: true, range };
+    }
+
+    if ( sight.enabled ) {
+      Object.assign(target.sight, { enabled: true, range: sight.range, visionMode: sight.visionMode });
+    }
+  }
+
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -230,6 +311,24 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
       };
       this.updateSource({ delta: update });
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onRelatedUpdate(update={}, operation={}) {
+    super._onRelatedUpdate(update, operation);
+    if ( !game.settings.get("dnd5e", "senseVisionSync") ) return;
+    const senses = this.actor?.system?.attributes?.senses;
+    if ( !senses ) return;
+
+    // Re-derive vision whenever sense-granting data changes, covering direct edits and item/effect-granted senses.
+    const overrides = TokenDocument5e.computeSenseOverrides(senses);
+    if ( foundry.utils.equals(overrides, this.#senseOverrides) ) return;
+    this.#senseOverrides = overrides;
+    if ( !this.parent?.isView ) return;
+    this.reset();
+    this.object?.initializeVisionSource();
   }
 
   /* -------------------------------------------- */
