@@ -2,7 +2,7 @@
     <legend>
         <span>{{ localize (ifThen labels.legend labels.legend "DND5E.ACTIVITY.FIELDS.effects.label") }}</span>
         <button type="button" class="unbutton control-button" data-action="addEffect"
-                data-tooltip aria-label="{{ localize (ifThen labels.add labels.add 'DND5E.EFFECT.Action.Create') }}">
+                data-tooltip aria-label="{{ localize (ifThen labels.add labels.add 'DND5E.EFFECT.Action.CreateEffect') }}">
             <i class="fas fa-plus" inert></i>
         </button>
     </legend>
@@ -29,12 +29,12 @@
     {{{ contentLink }}}
     <div class="list-controls flexrow">
         <button type="button" class="unbutton control-button" data-action="dissociateEffect" data-tooltip
-                aria-label="{{ localize (ifThen labels.dissociate labels.dissociate 'DND5E.EFFECT.Action.Dissociate') }}">
+                aria-label="{{ localize (ifThen labels.dissociate labels.dissociate 'DND5E.EFFECT.Action.DissociateEffect') }}">
             <i class="fa-solid fa-minus" inert></i>
         </button>
         {{#unless data.uuid}}
         <button type="button" class="unbutton control-button" data-action="deleteEffect" data-tooltip
-                aria-label="{{ localize (ifThen labels.delete labels.delete 'DND5E.EFFECT.Action.Delete') }}">
+                aria-label="{{ localize (ifThen labels.delete labels.delete 'DND5E.EFFECT.Action.DeleteEffect') }}">
             <i class="fa-solid fa-trash" inert></i>
         </button>
         {{/unless}}

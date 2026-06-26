@@ -94,6 +94,23 @@
     "SaveLabel": "{ability} Save",
     "Title": "Configure {ability}"
   },
+  "Formatter": {
+    "Check": {
+      "AdvantageMode": "{name} Check Advantage Mode",
+      "Bonus": "{name} Check Bonus",
+      "Maximum": "Maximum {name} Check Roll",
+      "Minimum": "Minimum {name} Check Roll"
+    },
+    "Maximum": "Maximum {name}",
+    "Save": {
+      "AdvantageMode": "{name} Save Advantage Mode",
+      "Bonus": "{name} Save Bonus",
+      "Maximum": "Maximum {name} Save Roll",
+      "Minimum": "Minimum {name} Save Roll",
+      "Proficiency": "{name} Save Proficiency"
+    },
+    "Score": "{name} Score"
+  },
   "SECTIONS": {
     "Bonuses": {
       "Label": "{ability} Bonuses",
@@ -972,9 +989,27 @@
   "FIELDS": {
     "attributes": {
       "ac": {
+        "armor": {
+          "label": "Equipped Armor Value"
+        },
+        "base": {
+          "label": "Base Armor Class"
+        },
+        "bonus": {
+          "label": "AC Bonus"
+        },
+        "calc": {
+          "label": "AC Calculation Method"
+        },
+        "cover": {
+          "label": "AC from Cover"
+        },
         "flat": {
           "hint": "Number that can be used in an armor class by using @attributes.ac.flat in the formula.",
           "label": "Flat Value"
+        },
+        "formula": {
+          "label": "Extra AC Formula"
         },
         "formulas": {
           "element": {
@@ -998,9 +1033,15 @@
           "label": "Formulas"
         },
         "label": "Armor Class",
+        "min": {
+          "label": "Minimum Armor Class"
+        },
         "override": {
           "hint": "Value that will be used in place of calculated armor class, ignoring cover, shield, and any other bonuses.",
           "label": "Override"
+        },
+        "shield": {
+          "label": "Equipped Shield Value"
         },
         "selectedFormulas": {
           "hint": "These formulas will be used when calculating armor class.",
@@ -1138,6 +1179,11 @@
 "DND5E.BackgroundAdd": "Add Background",
 "DND5E.BackgroundName": "Background Name",
 "DND5E.BaseItem": "Base Item",
+
+"DND5E.BASE": {
+  "Image": "Image",
+  "Name": "Name"
+},
 
 "DND5E.Bastion": {
   "Action": {
@@ -1623,6 +1669,24 @@
 },
 "DND5E.Challenge": "Challenge",
 "DND5E.ChallengeRating": "Challenge Rating",
+
+"DND5E.CHARACTER": {
+  "FIELDS": {
+    "traits": {
+      "weaponProf": {
+        "mastery": {
+          "bonus": {
+            "label": "Bonus Weapon Masteries"
+          },
+          "value": {
+            "label": "Weapon Masteries"
+          }
+        }
+      }
+    }
+  }
+},
+
 "DND5E.Charged": "Charged",
 "DND5E.Charges": "Charges",
 "DND5E.ChatContextDamage": "Apply As Damage",
@@ -1854,24 +1918,53 @@
 "DND5E.ConRestrained": "Restrained",
 "DND5E.ConStunned": "Stunned",
 "DND5E.ConUnconscious": "Unconscious",
+
 "DND5E.Concentration": "Concentration",
-"DND5E.ConcentrationAbbr": "C",
-"DND5E.ConcentrationBreak": "Break Concentration",
-"DND5E.ConcentrationBreakWarning": "Breaking concentration on an effect that is active on other creatures requires an active GM to be present.",
-"DND5E.ConcentrationBonus": "Concentration Bonus",
-"DND5E.ConcentrationDuration": "Concentration, up to {duration}",
-"DND5E.ConcentratingOn": "You are maintaining concentration on the effects of the '{name}' {type}.",
-"DND5E.ConcentratingEndChoice": "You are concentrating on effects from more than one source. Pick which effect to end.",
-"DND5E.ConcentratingMissingItem": "The effect that is concentrated on and to be replaced does not exist.",
-"DND5E.ConcentratingLimited": "You are not able to begin concentrating on an additional effect.",
-"DND5E.ConcentrationLimit": "Concentration Limit",
-"DND5E.ConcentrationLost": "Lost Concentration",
-"DND5E.ConcentratingEnd": "End Concentration",
-"DND5E.ConcentratingItemless": "Concentration With No Source",
-"DND5E.ConcentratingWarnLimit": "You cannot maintain concentration on more effects!",
-"DND5E.ConcentratingWarnLimitOptional": "You may end concentration on one of your maintained effects to use this item.",
-"DND5E.ConcentratingWarnLimitZero": "You are not able to maintain concentration on any effects!",
-"DND5E.ConcentrationConfigurationHint": "Configure concentration modifiers and bonuses which apply to this creature.",
+"DND5E.CONCENTRATION": {
+  "Abbreviation": "C",
+  "Action": {
+    "Break": "Break Concentration",
+    "End": "End Concentration"
+  },
+  "Description": "You are maintaining concentration on the effects of the '{name}' {type}.",
+  "Duration": "Concentration, up to {duration}",
+  "EndChoice": "You are concentrating on effects from more than one source. Pick which effect to end.",
+  "FIELDS": {
+    "attributes": {
+      "concentration": {
+        "bonuses": {
+          "label": "Concentration Bonuses",
+          "save": {
+            "label": "Concentration Bonus"
+          }
+        },
+        "label": "Concentration",
+        "limit": {
+          "label": "Concentration Limit"
+        },
+        "roll": {
+          "ability": "Concentration Save Ability",
+          "max": "Maximum Concentration Save Roll",
+          "min": "Minimum Concentration Save Roll",
+          "mode": "Concentration Save Advantage Mode"
+        }
+      }
+    }
+  },
+  "Limit": {
+    "Hard": "You cannot maintain concentration on more effects!",
+    "Optional": "You may end concentration on one of your maintained effects to use this item.",
+    "Reached": "You are not able to begin concentrating on an additional effect.",
+    "Zero": "You are not able to maintain concentration on any effects!"
+  },
+  "Lost": "Lost Concentration",
+  "NoSource": "Concentration With No Source",
+  "Warning": {
+    "BreakWithoutGM": "Breaking concentration on an effect that is active on other creatures requires an active GM to be present.",
+    "MissingItem": "The effect that is concentrated on and to be replaced does not exist."
+  }
+},
+
 "DND5E.ConsumeTitle": "Resource Consumption",
 "DND5E.ConsumeAmount": "Consumption Amount",
 "DND5E.ConsumeHint": {
@@ -1898,6 +1991,42 @@
 "DND5E.CONSUMABLE": {
   "FIELDS": {
     "damage": {
+      "base": {
+        "bonus": {
+          "label": "Base Damage Bonus"
+        },
+        "custom": {
+          "enabled": {
+            "label": "Use Custom Base Damage Formula"
+          },
+          "formula": {
+            "label": "Custom Base Damage Formula"
+          }
+        },
+        "denomination": {
+          "label": "Base Damage Denomination"
+        },
+        "number": {
+          "label": "Base Damage Die Count"
+        },
+        "scaling": {
+          "formula": {
+            "label": "Base Damage Scaling Formula"
+          },
+          "mode": {
+            "label": "Base Damage Scaling Mode"
+          },
+          "number": {
+            "label": "Base Damage Scaling Value"
+          }
+        },
+        "types": {
+          "label": "Base Damage Types"
+        }
+      },
+      "bonus": {
+        "label": "Damage Bonus"
+      },
       "label": "Ammunition Damage",
       "replace": {
         "label": "Replace Weapon Damage",
@@ -2423,12 +2552,12 @@
 "DND5E.Dusk": "Dusk",
 
 "DND5E.Effect": "Effect",
-
 "DND5E.EFFECT": {
   "Action": {
-    "Create": "Create Effect",
-    "Delete": "Delete Effect",
-    "Dissociate": "Dissociate Effect",
+    "CreateEffect": "Create Effect",
+    "DeleteEffect": "Delete Effect",
+    "DissociateEffect": "Dissociate Effect",
+    "EditEffect": "Edit Effect",
     "Search": "Search effects"
   },
   "Application": {
@@ -2449,9 +2578,16 @@
       }
     }
   },
+  "Category": {
+    "Temporary": "Temporary Effects",
+    "Passive": "Passive Effects",
+    "Inactive": "Inactive Effects",
+    "Unavailable": "Unavailable Effects"
+  },
   "DropHint": "Drop an Active Effect here",
   "Empty": "No associated effects. Use the <i class=\"fas fa-plus\"></i> button above to create one, or select an existing effect from the drop-down.",
   "Label": "Available Effects",
+  "New": "New Effect",
   "RIDER": {
     "Activity": "Enchantment Rider Activity",
     "Effect": "Enchantment Rider Effect",
@@ -2464,9 +2600,19 @@
       }
     }
   },
+  "Status": {
+    "ChangeActive": "Change Active",
+    "ChangeInactive": "Change Inactive",
+    "Inactive": "Inactive",
+    "Passive": "Passive",
+    "Temporary": "Temporary",
+    "Unavailable": "Unavailable"
+  },
+  "Suppressed": {
+    "Hint": "Source item must be equipped or attuned to activate these"
+  },
   "Tab": "Effects"
 },
-
 
 "DND5E.ENCHANT": {
   "FIELDS": {
@@ -2610,6 +2756,44 @@
   }
 },
 
+"DND5E.Encumbrance": "Encumbrance",
+"DND5E.ENCUMBRANCE": {
+  "FIELDS": {
+    "attributes": {
+      "encumbrance": {
+        "bonuses": {
+          "encumbered": {
+            "label": "Bonus to Encumbered Threshold"
+          },
+          "heavilyEncumbered": {
+            "label": "Bonus to Heavily Encumbered Threshold"
+          },
+          "maximum": {
+            "label": "Bonus to Maximum Carrying Capacity"
+          },
+          "overall": {
+            "label": "Bonus to All Encumberance Thresholds"
+          }
+        },
+        "multipliers": {
+          "encumbered": {
+            "label": "Encumbered Threshold Multiplier"
+          },
+          "heavilyEncumbered": {
+            "label": "Heavily Encumbered Threshold Multiplier"
+          },
+          "maximum": {
+            "label": "Maximum Carrying Capacity Multiplier"
+          },
+          "overall": {
+            "label": "Multiplier for All Encumberance Thresholds"
+          }
+        }
+      }
+    }
+  }
+},
+
 "DND5E.Environment": "Environment",
 
 "DND5E.EQUIPMENT": {
@@ -2668,6 +2852,7 @@
 },
 
 "DND5E.Expertise": "Expertise",
+"DND5E.Eyes": "Eyes",
 
 "DND5E.FACILITY": {
   "Action": {
@@ -3032,26 +3217,6 @@
   }
 },
 
-"DND5E.EffectCreate": "Create Effect",
-"DND5E.EffectToggle": "Toggle Effect",
-"DND5E.EffectEdit": "Edit Effect",
-"DND5E.EffectEnable": "Enable Effect",
-"DND5E.EffectDelete": "Delete Effect",
-"DND5E.EffectDisable": "Disable Effect",
-"DND5E.EffectTemporary": "Temporary Effects",
-"DND5E.EffectPassive": "Passive Effects",
-"DND5E.EffectInactive": "Inactive Effects",
-"DND5E.EffectNew": "New Effect",
-"DND5E.EffectType": {
-  "Inactive": "Inactive",
-  "Passive": "Passive",
-  "Temporary": "Temporary",
-  "Unavailable": "Unavailable"
-},
-"DND5E.EffectUnavailable": "Unavailable Effects",
-"DND5E.EffectUnavailableInfo": "Source item must be equipped or attuned to activate these",
-"DND5E.Encumbrance": "Encumbrance",
-"DND5E.Eyes": "Eyes",
 "DND5E.Faith": "Faith",
 "DND5E.FeatureActive": "Active Abilities",
 "DND5E.FeatureAdd": "Create Feature",
@@ -4020,6 +4185,12 @@
 "DND5E.RitualAbbr": "R",
 
 "DND5E.ROLL": {
+  "Formatter": {
+    "AdvantageMode": "{name} Advantage Mode",
+    "Maximum": "Maximum {name} Roll",
+    "Minimum": "Minimum {name} Roll",
+    "ModifierAbility": "{name} Modifier Ability"
+  },
   "Range": {
     "Label": "Roll Range",
     "Maximum": "Maximum Roll",
@@ -4119,6 +4290,9 @@
       },
       "dc": {
         "label": "Difficulty Class",
+        "bonus": {
+          "label": "DC Bonus"
+        },
         "calculation": {
           "label": "DC Calculation",
           "hint": "Method or ability used to calculate the difficulty class."
@@ -4226,6 +4400,11 @@
 "DND5E.SizeTinyAbbr": "Tn",
 
 "DND5E.SKILL": {
+  "Formatter": {
+    "CheckBonus": "{name} Check Bonus",
+    "PassiveBonus": "Passive {name} Bonus",
+    "Proficiency": "{name} Proficiency"
+  },
   "SECTIONS": {
     "Details": "{label} Details",
     "Bonuses": {
@@ -4575,6 +4754,14 @@
     "creatureTypes": {
       "label": "Creature Types",
       "hint": "Summoned creature will be changed to this type. If more than one type is selected, then the player will be able to choose from these types when summoning."
+    },
+    "flat": {
+      "attack": {
+        "label": "Flat Attack To Hit"
+      },
+      "save": {
+        "label": "Flat Save DC"
+      }
     },
     "match": {
       "ability": {
@@ -5056,6 +5243,10 @@
 "DND5E.ToggleDescription": "Toggle Description",
 
 "DND5E.TOOL": {
+  "Formatter": {
+    "CheckBonus": "{name} Check Bonus",
+    "Proficiency": "{name} Proficiency"
+  },
   "SECTIONS": {
     "Details": "{label} Details",
     "Bonuses": {
@@ -5890,6 +6081,42 @@
       }
     },
     "damage": {
+      "base": {
+        "bonus": {
+          "label": "Base Damage Bonus"
+        },
+        "custom": {
+          "enabled": {
+            "label": "Use Custom Base Damage Formula"
+          },
+          "formula": {
+            "label": "Custom Base Damage Formula"
+          }
+        },
+        "denomination": {
+          "label": "Base Damage Denomination"
+        },
+        "number": {
+          "label": "Base Damage Die Count"
+        },
+        "scaling": {
+          "formula": {
+            "label": "Base Damage Scaling Formula"
+          },
+          "mode": {
+            "label": "Base Damage Scaling Mode"
+          },
+          "number": {
+            "label": "Base Damage Scaling Value"
+          }
+        },
+        "types": {
+          "label": "Base Damage Types"
+        }
+      },
+      "bonus": {
+        "label": "Damage Bonus"
+      },
       "hint": "Intrinsic damage dice from the weapon. Ability modifier and additional damage parts will be provided automatically when attacking."
     },
     "mastery": {

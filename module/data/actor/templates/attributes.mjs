@@ -8,7 +8,7 @@ import RollConfigField from "../../shared/roll-config-field.mjs";
 import SensesField from "../../shared/senses-field.mjs";
 import ACFormulasField from "../fields/ac-formulas-field.mjs";
 
-const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * @import { ActorRollData } from "../../../documents/_types.mjs";
@@ -25,18 +25,28 @@ export default class AttributesFields {
    */
   static get armorClass() {
     return {
-      armor: new NumberField({ integer: true, min: 0, initial: 10, persisted: false }),
-      base: new NumberField({ integer: true, initial: -Infinity, persisted: false }),
-      bonus: new FormulaField({ deterministic: true, persisted: false }),
-      calc: new StringField({ persisted: false }),
-      cover: new NumberField({ integer: true, min: 0, initial: 0, persisted: false }),
+      armor: new NumberField({
+        integer: true, min: 0, initial: 10, persisted: false, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.armor.label"
+      }),
+      base: new NumberField({
+        integer: true, initial: -Infinity, persisted: false, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.base.label"
+      }),
+      bonus: new FormulaField({
+        deterministic: true, persisted: false, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.bonus.label"
+      }),
+      calc: new StringField({ persisted: false, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.calc.label" }),
+      cover: new NumberField({
+        integer: true, min: 0, initial: 0, persisted: false, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.cover.label"
+      }),
       flat: new NumberField({
         required: true, integer: true, min: 0, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.flat.label",
         hint: "DND5E.ARMORCLASS.FIELDS.attributes.ac.flat.hint"
       }),
-      formula: new StringField({ persisted: false }),
+      formula: new StringField({ persisted: false, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.formula.label" }),
       formulas: new ACFormulasField(),
-      min: new FormulaField({ deterministic: true, persisted: false }),
+      min: new FormulaField({
+        deterministic: true, persisted: false, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.min.label"
+      }),
       override: new NumberField({
         min: 0, integer: true, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.override.label",
         hint: "DND5E.ARMORCLASS.FIELDS.attributes.ac.override.hint"
@@ -45,7 +55,9 @@ export default class AttributesFields {
         initial: ["unarmored", "armored"], label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.selectedFormulas.label",
         hint: "DND5E.ARMORCLASS.FIELDS.attributes.ac.selectedFormulas.hint"
       }),
-      shield: new NumberField({ integer: true, min: 0, initial: 0, persisted: false })
+      shield: new NumberField({
+        integer: true, min: 0, initial: 0, persisted: false, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.shield.label"
+      })
     };
   }
 
@@ -77,16 +89,40 @@ export default class AttributesFields {
       ac: new SchemaField(this.armorClass, { label: "DND5E.ArmorClass" }),
       encumbrance: new SchemaField({
         bonuses: new SchemaField({
-          encumbered: new FormulaField({ deterministic: true }),
-          heavilyEncumbered: new FormulaField({ deterministic: true }),
-          maximum: new FormulaField({ deterministic: true }),
-          overall: new FormulaField({ deterministic: true })
+          encumbered: new FormulaField({
+            deterministic: true,
+            label: "DND5E.ENCUMBRANCE.FIELDS.attributes.encumbrance.bonuses.encumbered.label"
+          }),
+          heavilyEncumbered: new FormulaField({
+            deterministic: true,
+            label: "DND5E.ENCUMBRANCE.FIELDS.attributes.encumbrance.bonuses.heavilyEncumbered.label"
+          }),
+          maximum: new FormulaField({
+            deterministic: true,
+            label: "DND5E.ENCUMBRANCE.FIELDS.attributes.encumbrance.bonuses.maximum.label"
+          }),
+          overall: new FormulaField({
+            deterministic: true,
+            label: "DND5E.ENCUMBRANCE.FIELDS.attributes.encumbrance.bonuses.overall.label"
+          })
         }),
         multipliers: new SchemaField({
-          encumbered: new FormulaField({ deterministic: true, initial: "1" }),
-          heavilyEncumbered: new FormulaField({ deterministic: true, initial: "1" }),
-          maximum: new FormulaField({ deterministic: true, initial: "1" }),
-          overall: new FormulaField({ deterministic: true, initial: "1" })
+          encumbered: new FormulaField({
+            deterministic: true, initial: "1",
+            label: "DND5E.ENCUMBRANCE.FIELDS.attributes.encumbrance.multipliers.encumbered.label"
+          }),
+          heavilyEncumbered: new FormulaField({
+            deterministic: true, initial: "1",
+            label: "DND5E.ENCUMBRANCE.FIELDS.attributes.encumbrance.multipliers.heavilyEncumbered.label"
+          }),
+          maximum: new FormulaField({
+            deterministic: true, initial: "1",
+            label: "DND5E.ENCUMBRANCE.FIELDS.attributes.encumbrance.multipliers.maximum.label"
+          }),
+          overall: new FormulaField({
+            deterministic: true, initial: "1",
+            label: "DND5E.ENCUMBRANCE.FIELDS.attributes.encumbrance.multipliers.overall.label"
+          })
         })
       }, { persisted: false }),
       init: new RollConfigField({
@@ -124,9 +160,13 @@ export default class AttributesFields {
       concentration: new RollConfigField({
         ability: "",
         bonuses: new SchemaField({
-          save: new FormulaField({ required: true, label: "DND5E.ConcentrationBonus" })
+          save: new FormulaField({
+            required: true, label: "DND5E.CONCENTRATION.FIELDS.attributes.concentration.bonuses.save.label"
+          })
         }),
-        limit: new NumberField({ integer: true, min: 0, initial: 1, label: "DND5E.ConcentrationLimit" })
+        limit: new NumberField({
+          integer: true, min: 0, initial: 1, label: "DND5E.CONCENTRATION.FIELDS.attributes.concentration.limit.label"
+        })
       }, { label: "DND5E.Concentration" }),
       loyalty: new SchemaField({
         value: new NumberField({ integer: true, min: 0, max: 20, label: "DND5E.Loyalty" })

@@ -32,7 +32,7 @@ export default class CharacterData extends CreatureTemplate {
   /* -------------------------------------------- */
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.BONUSES"];
+  static LOCALIZATION_PREFIXES = ["DND5E.BONUSES", "DND5E.CHARACTER"];
 
   /* -------------------------------------------- */
 

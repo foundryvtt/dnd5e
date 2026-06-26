@@ -1902,7 +1902,7 @@ DND5E.itemProperties = {
   },
   concentration: {
     label: "DND5E.ITEM.Property.Concentration",
-    abbreviation: "DND5E.ConcentrationAbbr",
+    abbreviation: "DND5E.CONCENTRATION.Abbreviation",
     icon: "systems/dnd5e/icons/svg/statuses/concentrating.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.ow58p27ctAnr4VPH",
     isTag: true

@@ -1148,7 +1148,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( !isConcentrating ) return null;
 
     const label = `<i class="fa-solid fa-ban" inert></i>${
-      _loc("DND5E.ConcentrationBreak")
+      _loc("DND5E.CONCENTRATION.Action.Break")
     }`;
 
     return ChatMessage.implementation.create({
