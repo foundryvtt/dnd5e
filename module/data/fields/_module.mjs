@@ -3,6 +3,7 @@ export {default as AdvancementCollectionField} from "./advancement-collection-fi
 export {default as AdvancementDataField} from "./advancement-data-field.mjs";
 export {default as AdvancementField} from "./advancement-field.mjs";
 export {default as AdvantageModeField} from "./advantage-mode-field.mjs";
+export {default as FiltersField} from "./filters-field.mjs";
 export {default as FormulaField} from "./formula-field.mjs";
 export {default as IdentifierField} from "./identifier-field.mjs";
 export {default as LocalDocumentField} from "./local-document-field.mjs";
