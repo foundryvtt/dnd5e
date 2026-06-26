@@ -487,7 +487,7 @@
     .changes .change-row {
       border-block-start: var(--activity-row-border);
       min-block-size: 32px;
-      padding-inline-start: 20px;
+      padding-inline-start: 29px;
       position: relative;
 
       &:last-child { border-block-end: var(--activity-row-border); }
@@ -495,9 +495,9 @@
       &::before {
         content: "\f192";
         position: absolute;
-        inset: 8px auto auto 5px;
+        inset: 8px auto auto 13px;
         font-family: var(--font-awesome);
-        font-size: var(--font-size-14);
+        font-size: var(--font-size-11);
         font-weight: 900;
         color: var(--activity-row-indent-color);
       }
@@ -511,8 +511,28 @@
         rotate: 90deg;
       }
 
-      .item-name .title { font-size: var(--font-size-12); }
+      .item-name .title {
+        font-family: var(--dnd5e-font-roboto);
+        font-size: var(--font-size-12);
+      }
+
       .application-status { align-content: center; }
+    }
+
+    .riders .changes {
+      position: relative;
+
+      &::before {
+        content: "";
+        position: absolute;
+        inset: 0 auto 0 12px;
+        border-inline-start: var(--dnd5e-border-dotted);
+      }
+
+      .change-row {
+        padding-inline-start: 39px;
+        &::before { inset-inline-start: 23px; }
+      }
     }
   }
 

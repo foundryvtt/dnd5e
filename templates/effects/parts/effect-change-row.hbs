@@ -4,9 +4,7 @@
     <div class="change-name item-name" role="button" aria-label="{{ name }}">
 
         <div class="name name-stacked">
-            <span class="title">{{ name }}</span>
-            <span class="subtitle"
-                  {{~#if (ne key displayKey)}} data-tooltip aria-label="{{ key }}"{{/if}}>{{ displayKey }}</span>
+            <span class="title" data-tooltip="{{ key }}">{{ name }}</span>
         </div>
 
     </div>
