@@ -36,7 +36,6 @@ export class Filter {
    * Check some data against the filter to determine if it matches. Result will be cached between multiple calls.
    * @param {object} data  Arbitrary data object to check.
    * @returns {boolean}
-   * @throws
    */
   check(data) {
     if ( this.#result !== undefined ) return this.#result;
@@ -45,7 +44,7 @@ export class Filter {
       else this.#result = performCheck(data, this.#definition);
       return this.#result;
     } catch(err) {
-      console.error(err.message);
+      console.error(err);
       return false;
     }
   }
@@ -56,7 +55,6 @@ export class Filter {
    * Clear the cached result of the filter check and perform the check again.
    * @param {object} data  Arbitrary data object to check.
    * @returns {boolean}
-   * @throws
    */
   recheck(data) {
     this.#result = undefined;
@@ -105,15 +103,15 @@ export function uniqueKeys(filter=[]) {
 
 /**
  * Internal check implementation.
- * @param {object} data             Data to check.
- * @param {string} [keyPath]        Path to individual piece within data to check.
- * @param {*} value                 Value to compare against or additional filters.
- * @param {string} [operation="_"]  Checking function to use.
+ * @param {object} data                 Data to check.
+ * @param {string} [keyPath]            Path to individual piece within data to check.
+ * @param {*} value                     Value to compare against or additional filters.
+ * @param {string} [operation="exact"]  Checking function to use.
  * @returns {boolean}
  * @internal
  * @throws
  */
-function _check(data, keyPath, value, operation="_") {
+function _check(data, keyPath, value, operation="exact") {
   const operator = OPERATOR_FUNCTIONS[operation];
   if ( operator ) return operator(data, value);
 
@@ -222,7 +220,7 @@ export function NOT(data, filter) {
  * @enum {Function}
  */
 export const COMPARISON_FUNCTIONS = {
-  _: exact, exact, contains, icontains, startswith, istartswith, endswith,
+  exact, contains, icontains, startswith, istartswith, endswith, iendswith,
   has, hasany, hasall, in: in_, gt, gte, lt, lte
 };
 
@@ -296,6 +294,18 @@ export function istartswith(data, value) {
  */
 export function endswith(data, value) {
   return String(data).endsWith(String(value));
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Case-insensitive check that data ends with value.
+ * @param {*} data
+ * @param {*} value
+ * @returns {boolean}
+ */
+export function iendswith(data, value) {
+  return endswith(String(data).toLocaleLowerCase(game.i18n.lang), String(value).toLocaleLowerCase(game.i18n.lang));
 }
 
 /* -------------------------------------------- */

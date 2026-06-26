@@ -33,7 +33,7 @@ export default class FiltersInputElement extends foundry.applications.elements.A
 
   /**
    * Editor instance opened by this input.
-   * @type {FiltersConfig}
+   * @type {FiltersEditor}
    */
   #editor;
 
@@ -86,13 +86,16 @@ export default class FiltersInputElement extends foundry.applications.elements.A
       return;
     }
 
-    if ( foundry.utils.isEmpty(filters) ) {
+    const isEmpty = foundry.utils.isEmpty(filters);
+    this.#breakdown.classList.toggle("empty", isEmpty);
+    if ( isEmpty ) {
       this.#breakdown.innerText = game.i18n.localize("DND5E.FILTER.Empty");
       return;
     }
 
-    if ( !Array.isArray(filters) ) filters = [filters];
-    this.#breakdown.replaceChildren(...filters.map(f => this.#renderBreakdownNode(f)).filter(_ => _));
+    this.#breakdown.replaceChildren(this.#renderBreakdownNode(
+      Array.isArray(filters) ? { o: "AND", v: filters } : filters
+    ));
   }
 
   /* -------------------------------------------- */
@@ -104,7 +107,7 @@ export default class FiltersInputElement extends foundry.applications.elements.A
    */
   #renderBreakdownNode(filter) {
     let { k: key, o: operator="exact", v: value } = filter;
-    if ( !value ) return;
+    if ( value === undefined ) return;
 
     // If in OPERATOR_FUNCTIONS, create group and recurse
     if ( operator in OPERATOR_FUNCTIONS ) {
@@ -122,7 +125,12 @@ export default class FiltersInputElement extends foundry.applications.elements.A
       const keyElement = document.createElement("filter-key");
       keyElement.innerText = getHumanReadableAttributeLabel(key) ?? key;
       const valueElement = document.createElement("filter-value");
-      valueElement.innerText = Array.isArray(value) ? value.join(", ") : value;
+      if ( foundry.utils.isPlainObject(value) ) {
+        const innerNode = this.#renderBreakdownNode(value);
+        if ( innerNode ) valueElement.replaceChildren(innerNode);
+      } else {
+        valueElement.innerText = Array.isArray(value) ? value.join(", ") : value;
+      }
       node.replaceChildren(keyElement, valueElement);
       return node;
     }
@@ -147,8 +155,9 @@ export default class FiltersInputElement extends foundry.applications.elements.A
     event.preventDefault();
     const edit = new Event("edit", { bubbles: true, cancelable: true });
     this.dispatchEvent(edit);
-    if ( edit.defaultPrevent ) return;
+    if ( edit.defaultPrevented ) return;
 
+    this.#editor?.close();
     this.#editor = new FiltersEditor({ value: this.value });
     this.#editor.addEventListener("close", () => {
       this.value = this.#editor.value;
@@ -193,10 +202,10 @@ class FilterOperatorElement extends HTMLElement {
     const symbol = operator?.endsWith("AND") ? game.i18n.localize("DND5E.FILTER.Operator.And")
       : operator?.endsWith("OR") ? game.i18n.localize("DND5E.FILTER.Operator.Or") : null;
     if ( symbol ) this.querySelectorAll(":is(filter-comparison, filter-operator):not(:last-child)").forEach(e =>
-      e.insertAdjacentHTML("afterend", `<span class="seperator">${symbol}</span>`)
+      e.insertAdjacentHTML("afterend", `<span class="separator">${symbol}</span>`)
     );
     if ( operator?.startsWith("N") ) this.insertAdjacentHTML(
-      "afterbegin", `<span class="seperator">${game.i18n.localize("DND5E.FILTER.Operator.Not")}`
+      "afterbegin", `<span class="separator">${game.i18n.localize("DND5E.FILTER.Operator.Not")}</span>`
     );
   }
 
@@ -204,6 +213,6 @@ class FilterOperatorElement extends HTMLElement {
 
   /** @override */
   disconnectedCallback() {
-    this.querySelectorAll(".seperator").forEach(e => e.remove());
+    this.querySelectorAll(".separator").forEach(e => e.remove());
   }
 }

@@ -8,9 +8,7 @@ export default class FiltersField extends foundry.data.fields.JSONField {
 
   /** @override */
   static get _defaults() {
-    return Object.assign(super._defaults, {
-      initial: "{}"
-    });
+    return Object.assign(super._defaults, { initial: "{}" });
   }
 
   /* -------------------------------------------- */

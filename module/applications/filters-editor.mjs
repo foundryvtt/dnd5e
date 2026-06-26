@@ -37,7 +37,7 @@ export default class FiltersEditor extends Application5e {
 
   /**
    * The active CodeMirror editor instance.
-   * @type {EditorView}
+   * @type {HTMLCodeMirrorEditor}
    */
   #editor;
 

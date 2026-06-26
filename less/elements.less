@@ -118,16 +118,16 @@ filters-input {
     padding: 0.1875rem 0.375rem;
 
     filter-key { display: contents; }
-    &[operator="exact"] filter-key::after { content: "="; }
-    &[operator="gt"] filter-key::after { content: ">"; }
-    &[operator="gte"] filter-key::after { content: "≥"; }
-    &[operator="lt"] filter-key::after { content: "<"; }
-    &[operator="lte"] filter-key::after { content: "≤"; }
-    &[operator$="startswith"] filter-key::after { content: "⋞"; }
-    &[operator$="endswith"] filter-key::after { content: "⋟"; }
-    &[operator$="contains"] filter-key::after { content: "⊂"; }
-    &[operator^="has"] filter-key::after { content: "∩"; }
-    &[operator="in"] filter-key::after { content: "⊂"; }
+    &[operator="exact"] > filter-key::after { content: "="; }
+    &[operator="gt"] > filter-key::after { content: ">"; }
+    &[operator="gte"] > filter-key::after { content: "≥"; }
+    &[operator="lt"] > filter-key::after { content: "<"; }
+    &[operator="lte"] > filter-key::after { content: "≤"; }
+    &[operator$="startswith"] > filter-key::after { content: "⋞"; }
+    &[operator$="endswith"] > filter-key::after { content: "⋟"; }
+    &[operator$="contains"] > filter-key::after { content: "⊇"; }
+    &[operator^="has"] > filter-key::after { content: "∋"; }
+    &[operator="in"] > filter-key::after { content: "∈"; }
   }
   filter-operator {
     flex-wrap: wrap;
