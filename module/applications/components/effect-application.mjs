@@ -196,13 +196,12 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
     const effectFlags = {
       flags: {
         dnd5e: {
+          dependentOn: concentration?.uuid,
           scaling: this.chatMessage.system.scaling,
           spellLevel: this.chatMessage.system.spellLevel
         }
       }
     };
-
-    if ( concentration ) effectFlags.flags.dnd5e.dependentOn = concentration.uuid;
 
     // Inherit the activity's duration when the applied effect has no explicit duration of its own
     let durationOverride = {};
