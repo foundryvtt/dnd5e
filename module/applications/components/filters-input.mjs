@@ -163,7 +163,7 @@ export default class FiltersInputElement extends foundry.applications.elements.A
       this.value = this.#editor.value;
       this.#editor = undefined;
     }, { once: true });
-    this.#editor.render({ force: true });
+    this.#editor.render({ force: true, window: { windowId: this.ownerDocument.defaultView.id } });
   }
 
   /* -------------------------------------------- */
