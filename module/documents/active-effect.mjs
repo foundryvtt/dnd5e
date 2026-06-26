@@ -164,13 +164,11 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /* -------------------------------------------- */
 
   /**
-   * Get the special duration (whether configured on an applied effect or otherwise), or null if none.
+   * Get the special duration, if expiry is one, or null if none.
    * @returns {string|null}
    */
   get specialDuration() {
-    if ( this.system.specialDuration ) return this.system.specialDuration;
-    if ( this.constructor.PSEUDO_EXPIRIES.has(this.duration.expiry) ) return this.duration.expiry;
-    return null;
+    return this.constructor.PSEUDO_EXPIRIES.has(this.duration.expiry) ? this.duration.expiry : null;
   }
 
   /* -------------------------------------------- */
@@ -193,14 +191,8 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * @returns {Actor5e|null}
    */
   getSourceActor() {
-    let sourceActor = fromUuidSync(this.origin);
-    if ( (sourceActor instanceof dnd5e.dataModels.activity.BaseActivityData)
-      || (sourceActor instanceof dnd5e.documents.ActiveEffect5e )
-      || (sourceActor instanceof dnd5e.documents.Item5e)
-    ) {
-      sourceActor = sourceActor.actor;
-    }
-    return (sourceActor instanceof dnd5e.documents.Actor5e) ? sourceActor : null;
+    const origin = fromUuidSync(this.origin);
+    return (origin instanceof dnd5e.documents.Actor5e) ? origin : (origin?.actor || null);
   }
 
   /* -------------------------------------------- */
@@ -483,7 +475,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /** @inheritDoc */
   _prepareDuration(duration, context) {
-    super._prepareDuration();
+    super._prepareDuration(duration, context);
     if ( this.duration.expired && !Number.isFinite(this.duration.value) ) {
       duration.label = _loc("DND5E.ACTIVEEFFECT.Expired");
     } else if ( this.specialDuration ) {
@@ -662,21 +654,10 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     const { units, expiry } = this.duration;
 
     // Default combat-duration expiry to turnStart to avoid effect expiry at round turnover
-    if ( !expiry && (units === "rounds") ) {
-      this.updateSource({ "duration.expiry": "turnStart" });
-      return;
-    }
+    if ( !expiry && (units === "rounds") ) this.updateSource({ "duration.expiry": "turnStart" });
 
-    // Convert start/end of source/target next turn expiries to start/end expiries with the proper combatant
-    // (default for source, combatant of actor it's applied to for target) and null duration
-    if ( !this.constructor.PSEUDO_EXPIRIES.has(expiry) ) return;
-    const effectUpdate = {"system.specialDuration": expiry, duration: {value: null}};
-    const relevantActor = expiry.startsWith("target") ? actor : this.getSourceActor();
-    const combatant = this.start.combat.getCombatantsByActor(relevantActor)[0];
-    if ( combatant && (combatant.turnNumber !== null) ) effectUpdate.start = { combatant: combatant.id };
-    if ( ["targetEnd", "sourceEnd"].includes(expiry) ) effectUpdate.duration.expiry = "turnEnd";
-    else effectUpdate.duration.expiry = "turnStart";
-    this.updateSource(effectUpdate);
+    // Special expiries are evaluated live in isExpiryEvent so we set duration to `null` to so it's always triggered
+    if ( this.constructor.PSEUDO_EXPIRIES.has(expiry) ) this.updateSource({ "duration.value": null });
   }
 
   /* -------------------------------------------- */
@@ -714,13 +695,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   async _preUpdate(changed, options, user) {
     if ( await super._preUpdate(changed, options, user) === false ) return false;
     const newExpiry = foundry.utils.getProperty(changed, "duration.expiry");
-    if ( this.constructor.PSEUDO_EXPIRIES.has(newExpiry) ) {
-      foundry.utils.mergeObject(changed, {
-        duration: {
-          value: null
-        }
-      });
-    }
+    if ( this.constructor.PSEUDO_EXPIRIES.has(newExpiry) ) foundry.utils.setProperty(changed, "duration.value", null);
   }
 
   /* -------------------------------------------- */
@@ -795,22 +770,33 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  isExpiryEvent(event, context) {
-    const shouldExpire = super.isExpiryEvent(event, context);
+  isExpiryEvent(event, context={}) {
+    const special = this.specialDuration;
+    if ( !special ) return super.isExpiryEvent(event, context);
 
-    // Catch false negatives for source-based expiries where the source is no longer in combat
-    if ( !shouldExpire && this.system.specialDuration?.startsWith("source") ) {
-      const combat = context.combat ?? game.combat;
-      const hasCombatant = (combat === this.start.combat) && combat.combatants.has(this.start.combatant);
-      if ( !hasCombatant ) return (this.start?.round ?? 0) < context.round;
-    }
+    // Out of combat, any time advancement expires the effect
+    if ( (event === "updateWorldTime") && !this.actor?.inCombat ) return true;
 
-    // Otherwise if not going to expire or not "end of turn" special expiry, defer to core logic
-    if ( !shouldExpire || !this.system.specialDuration || (event !== "turnEnd") ) return shouldExpire;
+    // Skip irrelevant events
+    const isStart = special.endsWith("Start");
+    if ( event !== (isStart ? "turnStart" : "turnEnd") ) return;
 
-    // If "End of Source/Target turn"-expiry effect was created on the currently-ending turn, do not yet expire
-    if ( (this.start?.round === context.round) && (this.start?.turn === context.turn) ) return false;
-    return shouldExpire;
+    // These expiries are only driven by the combat they were created in
+    const combat = context.combat ?? game.combat;
+    if ( combat !== this.start.combat ) return false;
+
+    // Re-derive the origin combatant
+    // If they have left combat, expire once we are past the creation round.
+    const origin = special.startsWith("target") ? this.actor : this.getSourceActor();
+    const [combatant] = combat.getCombatantsByActor(origin);
+    if ( !combatant ) return this.start.round < context.round;
+
+    // Only the origin's own turn edge triggers expiry
+    const originTurn = isStart ? (combat.combatant === combatant) : (combat.previous.combatantId === combatant.id);
+    if ( !originTurn ) return false;
+
+    // Skip the turn the effect was applied on
+    return (this.start.round !== context.round) || (this.start.turn !== context.turn);
   }
 
   /* -------------------------------------------- */

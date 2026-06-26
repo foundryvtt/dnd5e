@@ -156,7 +156,6 @@ export default class Combat5e extends Combat {
     await super._onExit(combatant);
     const actor = combatant.actor;
     if ( !actor ) return;
-    // TODO: Use data model instead of flag
     const batchDelete = [{
       action: "delete",
       documentName: "ActiveEffect",
@@ -164,12 +163,12 @@ export default class Combat5e extends Combat {
       parent: actor
     }];
     for ( const effect of actor.effects ) {
-      if ( effect.duration.expired || effect.system.specialDuration ) batchDelete[0].ids.push(effect.id);
+      if ( effect.duration.expired || effect.specialDuration ) batchDelete[0].ids.push(effect.id);
     }
     for ( const item of actor.items ) {
       const toDelete = [];
       for ( const effect of item.effects ) {
-        if ( effect.isAppliedEnchantment && (effect.duration.expired || effect.system.specialDuration) ) {
+        if ( effect.isAppliedEnchantment && (effect.duration.expired || effect.specialDuration) ) {
           toDelete.push(effect.id);
         }
       }
