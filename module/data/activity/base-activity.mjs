@@ -802,7 +802,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
 
     const lastType = this.item.getFlag("dnd5e", `last.${this.id}.damageType.${index}`);
 
-    const options = foundry.utils.mergeObject(foundry.utils.deepClone(damage.options ?? {}), {
+    const rollOptions = foundry.utils.mergeObject(foundry.utils.deepClone(damage.options ?? {}), {
       type: (damage.types.has(lastType) ? lastType : null) ?? damage.types.first(),
       types: Array.from(damage.types),
       properties: Array.from(this.item.system.properties ?? [])
@@ -811,7 +811,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
 
     return {
       data, parts,
-      options
+      options: rollOptions
     };
   }
 
