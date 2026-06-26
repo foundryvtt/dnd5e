@@ -27,12 +27,16 @@ export default class ItemGrantFlow extends AdvancementFlow {
     const config = this.advancement.configuration;
     const checked = new Set(Object.values(this.advancement.value.added ?? {}));
     context.items = config.items.map(i => {
-      const item = foundry.utils.deepClone(fromUuidSync(i.uuid));
+      let item = fromUuidSync(i.uuid);
       if ( !item ) return null;
-      item.checked = checked.has(item.uuid);
-      item.optional = config.optional || i.optional;
-      return item;
-    }, []).filter(i => i);
+      const { name, img } = item;
+      return {
+        name, img,
+        checked: checked.has(i.uuid),
+        optional: config.optional || i.optional,
+        uuid: i.uuid
+      };
+    }, []).filter(_ => _);
 
     return context;
   }
@@ -63,11 +67,6 @@ export default class ItemGrantFlow extends AdvancementFlow {
     } else if ( event.target?.tagName === "DND5E-CHECKBOX" ) {
       if ( event.target.checked ) await this.advancement.apply(this.level, { selected: [event.target.name] });
       else await this.advancement.reverse(this.level, { uuid: event.target.name });
-    } else {
-      const selected = this.advancement.configuration.items
-        .filter(i => !this.advancement.configuration.optional && !i.optional)
-        .map(i => i.uuid);
-      if ( selected.length ) await this.advancement.apply(this.level, { selected });
     }
   }
 }
