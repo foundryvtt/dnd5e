@@ -3,7 +3,7 @@
  * @abstract
  */
 export default class ActiveEffectDataModel extends foundry.data.ActiveEffectTypeDataModel {
-/* -------------------------------------------- */
+  /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
 

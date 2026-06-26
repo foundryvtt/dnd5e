@@ -70,7 +70,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /**
    * System-specific "expiry" choices which do not require registration or custom expiry events, and instead
-   * are transformed into standard expiries upon application.
+   * are handled dynamically in isExpiryEvent.
    * @type {Set<string>}
    */
   static PSEUDO_EXPIRIES = new Set(["sourceStart", "sourceEnd", "targetStart", "targetEnd"]);
@@ -779,14 +779,15 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
     // Skip irrelevant events
     const isStart = special.endsWith("Start");
-    if ( event !== (isStart ? "turnStart" : "turnEnd") ) return;
+    if ( event !== (isStart ? "turnStart" : "turnEnd") ) return false;
 
     // These expiries are only driven by the combat they were created in
+    if ( !this.start.combat ) return true;
     const combat = context.combat ?? game.combat;
     if ( combat !== this.start.combat ) return false;
 
-    // Re-derive the origin combatant
-    // If they have left combat, expire once we are past the creation round.
+    // Re-derive the expiry-relevant combatant; affected actor for "target" or originating actor for "source"
+    // If they have left combat, expire once we are past the creation round
     const origin = special.startsWith("target") ? this.actor : this.getSourceActor();
     const [combatant] = combat.getCombatantsByActor(origin);
     if ( !combatant ) return this.start.round < context.round;

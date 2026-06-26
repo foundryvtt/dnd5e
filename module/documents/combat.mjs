@@ -162,23 +162,27 @@ export default class Combat5e extends Combat {
       ids: [],
       parent: actor
     }];
+    const shouldDelete = effect => {
+      // Don't delete dependent effects, as these will be deleted via the 5e dependency registry
+      if ( effect.getFlag("dnd5e", "dependentOn") ) return false;
+
+      // Don't delete item-bound effects which aren't applied enchantments
+      if ( !effect.isAppliedEnchantment && (effect.parent instanceof Item) ) return false;
+
+      // If effect is expired, delete
+      if ( effect.duration.expired ) return true;
+
+      // Otherwise, if a combat-specific pseudo-expiry, delete only if no start combat or start combat is this combat
+      const startCombat = effect.start?.combat;
+      return effect.specialDuration && (!startCombat || (combatant.parent === startCombat));
+    };
     for ( const effect of actor.effects ) {
-      if ( effect.duration.expired || effect.specialDuration ) {
-        const parentEffect = fromUuidSync(effect.getFlag("dnd5e", "dependentOn"));
-        const applied = parentEffect?.modifiesActor || parentEffect?.isAppliedEnchantment;
-        const expired = parentEffect?.duration.expired || parentEffect?.specialDuration;
-        if ( !parentEffect || !applied || !expired ) batchDelete[0].ids.push(effect.id);
-      }
+      if ( shouldDelete(effect) ) batchDelete[0].ids.push(effect.id);
     }
     for ( const item of actor.items ) {
       const toDelete = [];
       for ( const effect of item.effects ) {
-        if ( effect.isAppliedEnchantment && (effect.duration.expired || effect.specialDuration) ) {
-          const parentEffect = fromUuidSync(effect.getFlag("dnd5e", "dependentOn"));
-          const applied = parentEffect?.modifiesActor || parentEffect?.isAppliedEnchantment;
-          const expired = parentEffect?.duration.expired || parentEffect?.specialDuration;
-          if ( !parentEffect || !applied || !expired ) toDelete.push(effect.id);
-        }
+        if ( shouldDelete(effect) ) toDelete.push(effect.id);
       }
       if ( toDelete.length ) batchDelete.push({
         action: "delete",
