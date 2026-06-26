@@ -61,11 +61,15 @@ export default class TemplatePlacement extends BasePlacement {
         },
         preConfirm: ({ document, regionIndex }) => {
           const obj = document.toObject();
-          // TODO-thatlonelybugbear: Store elevation and level per placement if multi-shape placement can use different
-          // elevations or scene levels, then build region data from each placement's own vertical context.
           placedDocuments[regionIndex] = document;
-          results.elevation = obj.elevation;
-          results.push({ ...obj.shapes.at(-1), token: obj.attachment.token });
+          results.push({
+            ...obj.shapes.at(-1),
+            index: results.length,
+            token: obj.attachment.token,
+            elevation: obj.elevation,
+            levels: obj.levels,
+            hidden: obj.hidden
+          });
         }
       });
       if ( !results.length && priorTargets ) {
@@ -255,28 +259,46 @@ export default class TemplatePlacement extends BasePlacement {
     const placements = await TemplatePlacement.place(config);
     if ( !placements?.length ) return null;
 
-    const combinedShapes = [];
-    const splitShapes = [];
+    const shapeGroups = new Map();
     for ( const placement of placements ) {
       if ( placement.token ) {
         const { x, y, width, height, shape } = canvas.scene.tokens.get(placement.token);
         Object.assign(placement.base, { x, y, width, height, shape });
       }
-      if ( !placement.token || target.stationary ) combinedShapes.push(placement);
-      else splitShapes.push([placement]);
+      const attachmentToken = target.stationary ? undefined : placement.token;
+      const key = JSON.stringify({
+        attachmentToken,
+        split: attachmentToken ? placement.index : undefined,
+        elevation: placement.elevation,
+        levels: placement.levels,
+        hidden: placement.hidden
+      });
+      let group = shapeGroups.get(key);
+      if ( !group ) {
+        group = {
+          attachmentToken,
+          elevation: placement.elevation,
+          levels: placement.levels,
+          hidden: placement.hidden,
+          shapes: []
+        };
+        shapeGroups.set(key, group);
+      }
+      group.shapes.push(placement);
     }
 
     const rollData = activity.getRollData();
-    const elevation = placements.elevation;
-    const regionData = [combinedShapes, ...splitShapes].map(shapes => shapes.length ? foundry.utils.mergeObject({
+    const regionData = Array.from(shapeGroups.values()).map(({ attachmentToken, elevation, levels, hidden, shapes }) =>
+      shapes.length ? foundry.utils.mergeObject({
       // TODO: Should the activity name be included?
       // TODO: Include count if more than one created?
       name: `${activity.item.name} [${game.user.name}]`,
       color: game.user.color,
       elevation,
-      shapes: shapes.map(({ index, token, ...data }) => data),
+      hidden,
+      shapes: shapes.map(({ index, token, elevation, levels, hidden, ...data }) => data),
       // TODO: Set elevation based on shape's height
-      levels: [canvas.level.id],
+      levels,
       restriction: {
         enabled: config.wallMode !== "unwalled",
         // TODO: Is there a better setting to represent Total Cover?
@@ -284,7 +306,7 @@ export default class TemplatePlacement extends BasePlacement {
         type: "move"
       },
       attachment: {
-        token: target.stationary ? undefined : shapes[0].token
+        token: attachmentToken
       },
       visibility: CONST.REGION_VISIBILITY.ALWAYS,
       highlightMode: "coverage",
@@ -529,59 +551,61 @@ export default class TemplatePlacement extends BasePlacement {
     const dimensions = region.flags.dnd5e?.dimensions;
     if ( !["cone", "cube", "sphere"].includes(dimensions?.type) ) return true;
 
-    const shape = region.shapes.find(s => ["circle", "cone", "rectangle"].includes(s.type));
-    if ( !shape ) return true;
+    const shapes = region.shapes.filter(s => ["circle", "cone", "rectangle"].includes(s.type));
+    if ( !shapes.length ) return true;
     const tokenSize = token.getSize();
-    if ( dimensions.type === "cube" ) {
-      const x = Math.max(shape.x, token.x);
-      const y = Math.max(shape.y, token.y);
-      const z = Math.max(region.elevation.bottom, token.elevation);
-      const right = Math.min(shape.x + shape.width, token.x + tokenSize.width);
-      const bottom = Math.min(shape.y + shape.height, token.y + tokenSize.height);
-      const top = Math.min(region.elevation.bottom + dimensions.size, token.elevation + (token.depth * canvas.grid.distance));
-      return (x < right) && (y < bottom) && (z < top);
-    }
-    if ( dimensions.type === "cone" ) {
-      const gridMultiplier = canvas.scene.grid.size / canvas.scene.grid.distance;
-      const centerElevation = TemplatePlacement.#getTemplateCenterElevation(region) ?? region.elevation.bottom;
-      const direction = Math.toRadians(shape.rotation);
-      const axis = { x: Math.cos(direction), y: Math.sin(direction) };
-      const halfAngle = Math.toRadians(shape.angle / 2);
-      const tokenTop = token.elevation + (token.depth * canvas.grid.distance);
-      const points = [
-        [token.x, token.y, token.elevation],
-        [token.x + tokenSize.width, token.y, token.elevation],
-        [token.x + tokenSize.width, token.y + tokenSize.height, token.elevation],
-        [token.x, token.y + tokenSize.height, token.elevation],
-        [token.x, token.y, tokenTop],
-        [token.x + tokenSize.width, token.y, tokenTop],
-        [token.x + tokenSize.width, token.y + tokenSize.height, tokenTop],
-        [token.x, token.y + tokenSize.height, tokenTop],
-        [token.x + (tokenSize.width / 2), token.y + (tokenSize.height / 2), (token.elevation + tokenTop) / 2]
-      ];
-      return points.some(([x, y, elevation]) => {
-        const dx = (x - shape.x) / gridMultiplier;
-        const dy = (y - shape.y) / gridMultiplier;
-        const dz = elevation - centerElevation;
-        const distance = (dx * axis.x) + (dy * axis.y);
-        if ( (distance < 0) || (distance > dimensions.size) ) return false;
-        const radius = distance * Math.tan(halfAngle);
-        const perpendicular = Math.hypot(dx - (distance * axis.x), dy - (distance * axis.y), dz);
-        return perpendicular <= radius;
-      });
-    }
+    return shapes.some(shape => {
+      if ( dimensions.type === "cube" ) {
+        const x = Math.max(shape.x, token.x);
+        const y = Math.max(shape.y, token.y);
+        const z = Math.max(region.elevation.bottom, token.elevation);
+        const right = Math.min(shape.x + shape.width, token.x + tokenSize.width);
+        const bottom = Math.min(shape.y + shape.height, token.y + tokenSize.height);
+        const top = Math.min(region.elevation.bottom + dimensions.size, token.elevation + (token.depth * canvas.grid.distance));
+        return (x < right) && (y < bottom) && (z < top);
+      }
+      if ( dimensions.type === "cone" ) {
+        const gridMultiplier = canvas.scene.grid.size / canvas.scene.grid.distance;
+        const centerElevation = TemplatePlacement.#getTemplateCenterElevation(region) ?? region.elevation.bottom;
+        const direction = Math.toRadians(shape.rotation);
+        const axis = { x: Math.cos(direction), y: Math.sin(direction) };
+        const halfAngle = Math.toRadians(shape.angle / 2);
+        const tokenTop = token.elevation + (token.depth * canvas.grid.distance);
+        const points = [
+          [token.x, token.y, token.elevation],
+          [token.x + tokenSize.width, token.y, token.elevation],
+          [token.x + tokenSize.width, token.y + tokenSize.height, token.elevation],
+          [token.x, token.y + tokenSize.height, token.elevation],
+          [token.x, token.y, tokenTop],
+          [token.x + tokenSize.width, token.y, tokenTop],
+          [token.x + tokenSize.width, token.y + tokenSize.height, tokenTop],
+          [token.x, token.y + tokenSize.height, tokenTop],
+          [token.x + (tokenSize.width / 2), token.y + (tokenSize.height / 2), (token.elevation + tokenTop) / 2]
+        ];
+        return points.some(([x, y, elevation]) => {
+          const dx = (x - shape.x) / gridMultiplier;
+          const dy = (y - shape.y) / gridMultiplier;
+          const dz = elevation - centerElevation;
+          const distance = (dx * axis.x) + (dy * axis.y);
+          if ( (distance < 0) || (distance > dimensions.size) ) return false;
+          const radius = distance * Math.tan(halfAngle);
+          const perpendicular = Math.hypot(dx - (distance * axis.x), dy - (distance * axis.y), dz);
+          return perpendicular <= radius;
+        });
+      }
 
-    const gridMultiplier = canvas.scene.grid.size / canvas.scene.grid.distance;
-    const point = {
-      x: Math.clamp(shape.x, token.x, token.x + tokenSize.width),
-      y: Math.clamp(shape.y, token.y, token.y + tokenSize.height),
-      elevation: Math.clamp(TemplatePlacement.#getTemplateCenterElevation(region) ?? region.elevation.bottom, token.elevation,
-        token.elevation + (token.depth * canvas.grid.distance))
-    };
-    const dx = (point.x - shape.x) / gridMultiplier;
-    const dy = (point.y - shape.y) / gridMultiplier;
-    const dz = point.elevation - (TemplatePlacement.#getTemplateCenterElevation(region) ?? region.elevation.bottom);
-    return Math.hypot(dx, dy, dz) <= dimensions.size;
+      const gridMultiplier = canvas.scene.grid.size / canvas.scene.grid.distance;
+      const point = {
+        x: Math.clamp(shape.x, token.x, token.x + tokenSize.width),
+        y: Math.clamp(shape.y, token.y, token.y + tokenSize.height),
+        elevation: Math.clamp(TemplatePlacement.#getTemplateCenterElevation(region) ?? region.elevation.bottom, token.elevation,
+          token.elevation + (token.depth * canvas.grid.distance))
+      };
+      const dx = (point.x - shape.x) / gridMultiplier;
+      const dy = (point.y - shape.y) / gridMultiplier;
+      const dz = point.elevation - (TemplatePlacement.#getTemplateCenterElevation(region) ?? region.elevation.bottom);
+      return Math.hypot(dx, dy, dz) <= dimensions.size;
+    });
   }
 
   /* -------------------------------------------- */
