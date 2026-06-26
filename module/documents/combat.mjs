@@ -163,13 +163,21 @@ export default class Combat5e extends Combat {
       parent: actor
     }];
     for ( const effect of actor.effects ) {
-      if ( effect.duration.expired || effect.specialDuration ) batchDelete[0].ids.push(effect.id);
+      if ( effect.duration.expired || effect.specialDuration ) {
+        const parentEffect = fromUuidSync(effect.getFlag("dnd5e", "dependentOn"));
+        const applied = parentEffect?.modifiesActor || parentEffect?.isAppliedEnchantment;
+        const expired = parentEffect?.duration.expired || parentEffect?.specialDuration;
+        if ( !parentEffect || !applied || !expired ) batchDelete[0].ids.push(effect.id);
+      }
     }
     for ( const item of actor.items ) {
       const toDelete = [];
       for ( const effect of item.effects ) {
         if ( effect.isAppliedEnchantment && (effect.duration.expired || effect.specialDuration) ) {
-          toDelete.push(effect.id);
+          const parentEffect = fromUuidSync(effect.getFlag("dnd5e", "dependentOn"));
+          const applied = parentEffect?.modifiesActor || parentEffect?.isAppliedEnchantment;
+          const expired = parentEffect?.duration.expired || parentEffect?.specialDuration;
+          if ( !parentEffect || !applied || !expired ) toDelete.push(effect.id);
         }
       }
       if ( toDelete.length ) batchDelete.push({
