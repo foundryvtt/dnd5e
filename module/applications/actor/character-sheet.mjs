@@ -1336,7 +1336,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
 
   /** @inheritDoc */
   canExpand(item) {
-    return !["background", "race", "facility"].includes(item.type) && super.canExpand(item);
+    return !["background", "race", "facility", "container"].includes(item.type) && super.canExpand(item);
   }
 
   /* -------------------------------------------- */
