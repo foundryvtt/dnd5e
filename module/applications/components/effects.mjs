@@ -359,7 +359,7 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
       }, { once: true });
       this.app.expandedSections.set(`effects.${effect.id}`, false);
     } else {
-      const context = await effect.getPreviewContext();
+      const context = await effect.getPreviewContext({ secrets: effect.isOwner });
       const template = "systems/dnd5e/templates/effects/parts/effect-summary.hbs";
       const content = await foundry.applications.handlebars.renderTemplate(template, context);
       summary.querySelectorAll(".item-summary").forEach(el => el.remove());

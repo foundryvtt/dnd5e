@@ -991,6 +991,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     return {
       properties,
       description: await TextEditor.enrichHTML(this.description ?? "", {
+        ...enrichmentOptions,
         relativeTo: this
         // TODO: Use this once https://github.com/foundryvtt/dnd5e/issues/5758 is resolved
         // rollData: this.getRollData()
@@ -1043,7 +1044,8 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    */
   async richTooltip(enrichmentOptions={}) {
     const context = await this.getPreviewContext(enrichmentOptions);
-    context.durationParts = this.duration.remaining ? this.duration.label.split(", ") : [];
+    context.durationParts = Number.isFinite(this.duration.remaining) ? this.duration.label.split(", ") : [];
+    context.showDuration = Number.isFinite(this.duration.value);
 
     return {
       content: await foundry.applications.handlebars.renderTemplate(

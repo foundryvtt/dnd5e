@@ -1390,11 +1390,6 @@ export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemNa
   }
 
   // Senses
-  else if ( attr.startsWith("attributes.senses.ranges.") ) {
-    const key = attr.split(".")[3];
-    label = CONFIG.DND5E.senses[key]?.label;
-  }
-  // Senses
   else if ( attr.startsWith("attributes.senses.ranges.") ) label = CONFIG.DND5E.senses[attr.split(".")[3]]?.label;
   else if ( attr.startsWith("attributes.senses.") ) label = CONFIG.DND5E.senses[attr.split(".")[2]]?.label;
 

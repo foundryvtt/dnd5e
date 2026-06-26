@@ -260,20 +260,20 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         if ( conditionIds.has(effect.id) && !effect.duration.remaining ) return arr;
         const toggleable = !this._concentration?.effects.has(effect);
         const isExpanded = this.expandedSections.get(`effects.${effect.id}`) === true;
-        const context = {
+        const ctx = {
           ...(await effect.getSheetContext()), toggleable, isExpanded,
           parentId: effect.target === effect.parent ? null : effect.parent.id,
           expanded: isExpanded ? await effect.getPreviewContext({ secrets: effect.isOwner }) : null
         };
         // If the source is an ActiveEffect from another Actor, note the source as that Actor instead.
-        context.hasTooltip = context.source instanceof dnd5e.documents.Item5e;
-        if ( context.source instanceof ActiveEffect ) {
-          const src = context.source;
-          context.source = src.target;
-          if ( (src instanceof Item) && src.parent && (src.parent !== this.object) ) context.source = src.parent;
+        ctx.hasTooltip = ctx.source instanceof dnd5e.documents.Item5e;
+        if ( ctx.source instanceof ActiveEffect ) {
+          const src = ctx.source;
+          ctx.source = src.target;
+          if ( (src instanceof Item) && src.parent && (src.parent !== this.object) ) ctx.source = src.parent;
         }
         arr = await arr;
-        arr.push(context);
+        arr.push(ctx);
         return arr;
       }, []);
     }

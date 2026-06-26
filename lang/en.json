@@ -95,16 +95,20 @@
     "Title": "Configure {ability}"
   },
   "Formatter": {
-    "CheckAdvantageMode": "{name} Check Advantage Mode",
-    "CheckBonus": "{name} Check Bonus",
-    "CheckMaximum": "Maximum {name} Check Roll",
-    "CheckMinimum": "Minimum {name} Check Roll",
+    "Check": {
+      "AdvantageMode": "{name} Check Advantage Mode",
+      "Bonus": "{name} Check Bonus",
+      "Maximum": "Maximum {name} Check Roll",
+      "Minimum": "Minimum {name} Check Roll"
+    },
     "Maximum": "Maximum {name}",
-    "SaveAdvantageMode": "{name} Save Advantage Mode",
-    "SaveBonus": "{name} Save Bonus",
-    "SaveMaximum": "Maximum {name} Save Roll",
-    "SaveMinimum": "Minimum {name} Save Roll",
-    "SaveProficiency": "{name} Save Proficiency",
+    "Save": {
+      "AdvantageMode": "{name} Save Advantage Mode",
+      "Bonus": "{name} Save Bonus",
+      "Maximum": "Maximum {name} Save Roll",
+      "Minimum": "Minimum {name} Save Roll",
+      "Proficiency": "{name} Save Proficiency"
+    },
     "Score": "{name} Score"
   },
   "SECTIONS": {

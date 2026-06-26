@@ -37,22 +37,22 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
         }),
         proficient: new NumberField({
           required: true, integer: true, min: 0, max: 1, initial: 0, label: "DND5E.ProficiencyLevel",
-          labelFormatter: "DND5E.ABILITY.Formatter.SaveProficiency"
+          labelFormatter: "DND5E.ABILITY.Formatter.Save.Proficiency"
         }),
         max: new NumberField({
           required: true, integer: true, nullable: true, min: 0, initial: null, label: "DND5E.AbilityScoreMax",
-          labelFormatter: "DND5E.ABILITY.Formatter.Maxmimum"
+          labelFormatter: "DND5E.ABILITY.Formatter.Maximum"
         }),
         bonuses: new SchemaField({
           check: new FormulaField({
-            required: true, label: "DND5E.AbilityCheckBonus", labelFormatter: "DND5E.ABILITY.Formatter.CheckBonus"
+            required: true, label: "DND5E.AbilityCheckBonus", labelFormatter: "DND5E.ABILITY.Formatter.Check.Bonus"
           }),
           save: new FormulaField({
-            required: true, label: "DND5E.SaveBonus", labelFormatter: "DND5E.ABILITY.Formatter.SaveBonus"
+            required: true, label: "DND5E.SaveBonus", labelFormatter: "DND5E.ABILITY.Formatter.Save.Bonus"
           })
         }, { label: "DND5E.AbilityBonuses" }),
-        check: new RollConfigField({ ability: false, labelFormatterPrefix: "DND5E.ABILITY.Formatter.Check" }),
-        save: new RollConfigField({ ability: false, labelFormatterPrefix: "DND5E.ABILITY.Formatter.Save" })
+        check: new RollConfigField({ ability: false, labelFormatterPrefix: "DND5E.ABILITY.Formatter.Check." }),
+        save: new RollConfigField({ ability: false, labelFormatterPrefix: "DND5E.ABILITY.Formatter.Save." })
       }), {
         initialKeys: CONFIG.DND5E.abilities, initialValue: this._initialAbilityValue.bind(this),
         initialKeysOnly: true, label: "DND5E.Abilities", entryLabel: key => CONFIG.DND5E.abilities[key]?.label
