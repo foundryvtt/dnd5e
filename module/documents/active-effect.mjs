@@ -649,15 +649,14 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     if ( await super._preCreate(data, options, user) === false ) return false;
     if ( options.keepOrigin === false ) this.updateSource({ origin: this.parent.uuid });
 
-    const actor = this.isAppliedEnchantment ? this.parent.parent : this.parent;
-    if ( !(actor instanceof Actor) || !this.start?.combat?.started ) return;
+    // Special expiries are evaluated live in isExpiryEvent so we set duration to `null` to so it's always triggered
     const { units, expiry } = this.duration;
+    if ( this.constructor.PSEUDO_EXPIRIES.has(expiry) ) this.updateSource({ "duration.value": null });
 
     // Default combat-duration expiry to turnStart to avoid effect expiry at round turnover
+    const actor = this.isAppliedEnchantment ? this.parent.parent : this.parent;
+    if ( !(actor instanceof Actor) || !this.start?.combat?.started ) return;
     if ( !expiry && (units === "rounds") ) this.updateSource({ "duration.expiry": "turnStart" });
-
-    // Special expiries are evaluated live in isExpiryEvent so we set duration to `null` to so it's always triggered
-    if ( this.constructor.PSEUDO_EXPIRIES.has(expiry) ) this.updateSource({ "duration.value": null });
   }
 
   /* -------------------------------------------- */
