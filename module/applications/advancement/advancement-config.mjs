@@ -9,6 +9,10 @@
  */
 export default class AdvancementConfig extends FormApplication {
   constructor(advancement, options={}) {
+    foundry.utils.logCompatibilityWarning(
+      "The V1 `AdvancementConfig` has been deprecated in favor of a `AdvancementConfigV2`.",
+      { since: "DnD5e 6.0", until: "DnD5e 7.0" }
+    );
     super(advancement, options);
     this.#advancementId = advancement.id;
     this.item = advancement.item;
