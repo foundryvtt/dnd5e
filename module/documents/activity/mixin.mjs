@@ -1115,7 +1115,13 @@ export default function ActivityMixin(Base) {
         const result = await TemplatePlacement.fromActivity(this, {
           createData: { flags: { dnd5e: { originatingMessage: message?.id } } }
         });
-        if ( result ) templates.push(...result);
+        if ( result ) {
+          templates.push(...result);
+          if ( message?.update && result.some(r => r.getFlag("dnd5e", "targetOnPlacement")) ) {
+            const targets = getTargetDescriptors();
+            await message.update({ "flags.dnd5e.targets": targets });
+          }
+        }
       } catch(err) {
         Hooks.onError("Activity#placeTemplate", err, {
           msg: _loc("DND5E.TARGET.Warning.PlaceTemplate"),
