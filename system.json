@@ -49,6 +49,7 @@
       "bastionTurn": {},
       "request": {},
       "rest": {},
+      "timePassed": {},
       "turn": {},
       "usage": {}
     },
@@ -352,7 +353,9 @@
       },
       "system": "dnd5e",
       "flags": {
-        "display": "table-of-contents"
+        "dnd5e": {
+          "display": "table-of-contents"
+        }
       }
     },
     {

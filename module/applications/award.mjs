@@ -343,8 +343,8 @@ export default class Award extends Application5e {
 
   /**
    * Use the `chatMessage` hook to determine if an award command was typed.
-   * @param {string} message   Text of the message being posted.
-   * @returns {boolean|void}   Returns `false` to prevent the message from continuing to parse.
+   * @param {string} message  Text of the message being posted.
+   * @returns {false|void}    Returns `false` to prevent the message from continuing to parse.
    */
   static chatMessage(message) {
     if ( !this.COMMAND_PATTERN.test(message) ) return;

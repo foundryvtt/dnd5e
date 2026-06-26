@@ -1,6 +1,6 @@
 import ActivitySheet from "../../applications/activity/activity-sheet.mjs";
 import ActivityUsageDialog from "../../applications/activity/activity-usage-dialog.mjs";
-import AbilityTemplate from "../../canvas/ability-template.mjs";
+import TemplatePlacement from "../../canvas/template-placement.mjs";
 import { ConsumptionError } from "../../data/activity/fields/consumption-targets-field.mjs";
 import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
 import { formatNumber, getSceneTargets, getTargetDescriptors, localizeSchema } from "../../utils.mjs";
@@ -97,6 +97,7 @@ export default function ActivityMixin(Base) {
      */
     get canUse() {
       if ( this.isRider ) return false;
+      if ( !this.item.canUse ) return false;
       if ( this.dependentOrigin?.active === false ) return false;
       if ( this.visibility?.requireAttunement && !this.item.system.attuned ) return false;
       if ( this.visibility?.requireMagic && (this.item.system.magicAvailable === false) ) return false;
@@ -175,7 +176,7 @@ export default function ActivityMixin(Base) {
      * @returns {Promise<ActivityUsageResults|void>}  Details on the usage process if not canceled.
      */
     async use(usage={}, dialog={}, message={}) {
-      if ( !this.item.isEmbedded || this.item.pack ) return;
+      if ( !this.item.isEmbedded ) return;
       if ( !this.item.isOwner ) {
         ui.notifications.error("DND5E.DocumentUseWarn");
         return;
@@ -203,7 +204,7 @@ export default function ActivityMixin(Base) {
             dnd5e: this.messageFlags
           },
           system: {
-            effects: this.applicableEffects?.map(e => `.ActiveEffect.${e.id}`)
+            effects: this.applicableEffects?.map(e => e.relativeUUID)
           }
         },
         hasConsumption: usageConfig.hasConsumption
@@ -718,7 +719,7 @@ export default function ActivityMixin(Base) {
      */
     _finalizeMessageConfig(usageConfig, messageConfig, results) {
       messageConfig.data.rolls = (messageConfig.data.rolls ?? []).concat(results.updates.rolls);
-      const effects = this.applicableEffects?.map(e => `.ActiveEffect.${e.id}`);
+      const effects = this.applicableEffects?.map(e => e.relativeUUID);
       if ( effects ) foundry.utils.setProperty(messageConfig.data, "system.effects", effects);
     }
 
@@ -1110,10 +1111,8 @@ export default function ActivityMixin(Base) {
     async #placeTemplate() {
       const templates = [];
       try {
-        for ( const template of AbilityTemplate.fromActivity(this) ) {
-          const result = await template.drawPreview();
-          if ( result ) templates.push(result);
-        }
+        const result = await TemplatePlacement.fromActivity(this);
+        if ( result ) templates.push(...result);
       } catch(err) {
         Hooks.onError("Activity#placeTemplate", err, {
           msg: _loc("DND5E.TARGET.Warning.PlaceTemplate"),
@@ -1122,6 +1121,34 @@ export default function ActivityMixin(Base) {
         });
       }
       return templates;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Handle attaching region behaviors to a newly created template.
+     * @param {Region} region
+     * @param {object} options
+     * @param {string} userId
+     */
+    static async placeTemplateBehaviors(region, options, userId) {
+      if ( !game.user.isActiveGM || (options.dnd5e?.createActivityBehaviors === false) ) return;
+
+      const activity = await fromUuid(region.getFlag("dnd5e", "origin"));
+      const behaviors = activity?.applicableBehaviors;
+      if ( !behaviors?.length ) return;
+
+      const toCreate = [];
+      for ( const behavior of behaviors ) {
+        const data = behavior.config.createBehaviorData(activity);
+        if ( !data ) continue;
+        data.name ??= behavior.name;
+        toCreate.push(data);
+      }
+
+      // TODO: Add pre- and post- hooks
+
+      region.createEmbeddedDocuments("RegionBehavior", toCreate);
     }
 
     /* -------------------------------------------- */

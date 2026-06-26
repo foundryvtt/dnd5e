@@ -50,7 +50,7 @@ export default class BaseSummonActivityData extends BaseActivityData {
         }),
         name: new StringField(),
         types: new SetField(new StringField()),
-        uuid: new DocumentUUIDField()
+        uuid: new DocumentUUIDField({ type: "Actor" })
       })),
       summon: new SchemaField({
         mode: new StringField(),

@@ -1,7 +1,8 @@
-import { formatNumber } from "../../utils.mjs";
+import { convertTime, formatNumber, formatTime, getPluralRules } from "../../utils.mjs";
+import { IndividualDeltaField } from "../chat-message/fields/deltas-field.mjs";
 
 /**
- * @import { CalendarFormattingContext, CalendarTimeDeltas } from "./_types.mjs";
+ * @import { CalendarFormattingContext, CalendarTimeDeltas, TimePassageData } from "./_types.mjs";
  */
 
 /**
@@ -328,6 +329,137 @@ export default class CalendarData5e extends foundry.data.CalendarData {
   /* -------------------------------------------- */
 
   /**
+   * Respond to time changes and trigger the handling of time passage. This hook is split off from
+   * `onUpdateWorldTime` and registered late to allow modules to modify the time deltas with their
+   * own entries before time passage is handled.
+   * @param {number} worldTime
+   * @param {number} deltaTime
+   * @param {object} options
+   * @param {string} userId
+   */
+  static onTimePassage(worldTime, deltaTime, options, userId) {
+    if ( !game.user.isActiveGM || (deltaTime <= 0) ) return;
+    const timePassageData = { worldTime, deltaTime, ...(options.dnd5e?.deltas ?? {}) };
+    CalendarData5e.handleTimePassage(timePassageData);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Trigger recovery for any world actors based on the passage of time.
+   * @param {TimePassageData} timePassageData
+   */
+  static async handleTimePassage(timePassageData) {
+    const periods = new Map();
+    for ( const [d, p] of CONFIG.DND5E.calendarDeltasRecoveryMapping.entries() ) {
+      if ( timePassageData[d] ) periods.set(p, timePassageData[d]);
+    }
+
+    const changes = [];
+    const rolls = [];
+
+    const bastion = dnd5e.settings.bastionConfiguration;
+    const advanceFacilities = timePassageData.midnights > 0;
+    const recoverUses = !dnd5e.settings.calendarConfig.manualRecovery && periods.size;
+    if ( advanceFacilities || recoverUses ) {
+      const operations = [];
+      for ( const actor of game.actors ) {
+        const deltas = { deleted: [], item: {} };
+        const deleted = [];
+        const updates = [];
+
+        // Advance bastion facilities
+        if ( advanceFacilities && bastion?.availableForActor(actor) && actor.itemTypes.facility.length ) {
+          const results = await dnd5e.bastion.advanceAllFacilities(actor, {
+            duration: timePassageData.midnights, performUpdates: false, summary: "auto", turn: false
+          });
+          updates.push(...results.updates);
+        }
+
+        // Recover item & activity uses
+        if ( recoverUses ) {
+          for ( const item of actor.items ) {
+            const result = await item.system.recoverUses?.(periods) ?? {};
+            if ( result?.rolls ) rolls.push(...result.rolls);
+            if ( result?.destroy ) {
+              deltas.deleted.push(item.toObject());
+              deleted.push(item.id);
+            } else if ( !foundry.utils.isEmpty(result?.updates) ) {
+              deltas.item[item.id] = IndividualDeltaField.getDeltas(item, result.updates);
+              updates.push({ _id: item.id, ...result.updates });
+            }
+          }
+        }
+
+        if ( deleted.length ) operations.push({ action: "delete", documentName: "Item", ids: deleted, parent: actor });
+        if ( updates.length ) operations.push({ action: "update", documentName: "Item", updates, parent: actor });
+        if ( deltas.deleted.length || !foundry.utils.isEmpty(deltas.item) ) changes.push({ deltas, uuid: actor.uuid });
+      }
+      await foundry.documents.modifyBatch(operations);
+    }
+
+    const messageConfig = {
+      create: changes.length > 0,
+      data: {
+        content: this.generateTimePassageMessage(timePassageData),
+        rolls,
+        system: { changes },
+        title: game.i18n.localize("DND5E.CALENDAR.TimePassage.Title"),
+        type: "timePassed"
+      }
+    };
+
+    /**
+     * A hook event that fires before a time passed chat message is created.
+     * @function dnd5e.preCreateTimePassedMessage
+     * @memberof hookEvents
+     * @param {object} messageConfig
+     * @param {boolean} messageConfig.create  Should the chat message be posted?
+     * @param {object} messageConfig.data     Data for the created chat message.
+     */
+    Hooks.callAll("dnd5e.preCreateTimePassedMessage", messageConfig);
+
+    if ( messageConfig.create ) ChatMessage.implementation.create(messageConfig.data);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create the message displayed in a time passage message based on the amount of time passed.
+   * @param {TimePassageData} timePassageData
+   * @returns {string|void}
+   */
+  static generateTimePassageMessage(timePassageData) {
+    let message;
+
+    // X days have passed
+    if ( timePassageData.midnights > 1 ) {
+      const pr = getPluralRules();
+      const { value, unit } = convertTime(timePassageData.midnights, "day", { strict: false });
+      const number = formatTime(value, unit, { words: true });
+      message = game.i18n.format(`DND5E.CALENDAR.TimePassage.TimePassed.${pr.select(value)}`, {
+        number: number.capitalize(), numberLc: number
+      });
+    }
+
+    // Sun has set and risen again
+    else if ( timePassageData.sunsets && timePassageData.sunrises ) {
+      message = game.i18n.localize("DND5E.CALENDAR.TimePassage.SunsetSunrise");
+    }
+
+    // Sun has set, risen, or midnight has been passed
+    else if ( timePassageData.sunsets ) message = game.i18n.localize("DND5E.CALENDAR.TimePassage.Sunset");
+    else if ( timePassageData.sunrises ) message = game.i18n.localize("DND5E.CALENDAR.TimePassage.Sunrise");
+    else if ( timePassageData.midnights ) message = game.i18n.localize("DND5E.CALENDAR.TimePassage.Midnight");
+
+    return message ? `<p>${message}</p>` : undefined;
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
    * Count the total number of full days that have passed between two times.
    * @param {Components} previousTime
    * @param {Components} currentTime
@@ -338,7 +470,7 @@ export default class CalendarData5e extends foundry.data.CalendarData {
     if ( previousTime.year === currentTime.year ) return currentTime.day - previousTime.day;
 
     // Calculate the number of days just in current & previous years
-    const daysForYear = year => game.time.calendar.isLeapYear(previousTime.year)
+    const daysForYear = year => game.time.calendar.isLeapYear(year)
       ? game.time.calendar.days.daysPerLeapYear : game.time.calendar.days.daysPerYear;
     let days = 0;
     if ( previousTime.year < currentTime.year ) {

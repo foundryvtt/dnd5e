@@ -102,7 +102,7 @@ export default class BaseRestDialog extends Dialog5e {
    */
   get promptNewDay() {
     // Only prompt if rest is longer than 10 minutes and less than 24 hours
-    return (this.duration > 10) && (this.duration < 1440);
+    return dnd5e.settings.calendarConfig.manualRecovery && (this.duration > 10) && (this.duration < 1440);
   }
 
   /* -------------------------------------------- */

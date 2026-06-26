@@ -14,10 +14,10 @@
     </div>
     <ol class="levels-list unlist">
         {{#each levels}}
-        <li class="level {{ className }}">
+        <li class="level">
             <div class="level-level">{{ @key }}</div>
             {{#each fields}}
-            <div class="level-{{ @key }}">
+            <div class="level-{{ @key }} {{~#if isPlaceholder}} placeholder{{/if}}">
                 {{ formInput field name=name value=value input=input options=options placeholder=placeholder }}
             </div>
             {{/each}}

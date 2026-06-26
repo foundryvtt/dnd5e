@@ -138,8 +138,8 @@ export default class BaseSaveActivityData extends BaseActivityData {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  getDamageConfig(config={}) {
-    const rollConfig = super.getDamageConfig(config);
+  getDamageConfig(config={}, options={}) {
+    const rollConfig = super.getDamageConfig(config, options);
 
     rollConfig.critical ??= {};
     rollConfig.critical.allow ??= false;

@@ -578,17 +578,6 @@
       justify-content: space-between;
       margin-block-end: 4px;
     }
-    .drag-bar {
-      position: absolute;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      inset-block: 0;
-      inset-inline-end: 0;
-      inline-size: 16px;
-      cursor: var(--cursor-grab);
-      color: var(--dnd5e-color-faint);
-    }
     [data-action="delete-entry"] {
       --size: 26px;
       flex: 0 0 var(--size);
@@ -604,16 +593,9 @@
       &:hover, &:focus-visible { text-shadow: 0 0 5px var(--color-shadow-primary); }
     }
     [name$=".count"] { flex: 0 0 3em; }
-    .content-link, .drop-area {
+    .content-link {
       display: flex;
       align-items: center;
-    }
-    .drop-area {
-      border: 1px dashed var(--color-border-light-2);
-      border-radius: 4px;
-      padding: 6px;
-      font-size: var(--font-size-11);
-      color: var(--color-text-secondary);
     }
     .require-proficiency {
       flex: 0.66;

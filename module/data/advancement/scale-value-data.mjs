@@ -1,14 +1,14 @@
-import { formatLength } from "../../utils.mjs";
+import { filteredKeys, formatLength } from "../../utils.mjs";
 import IdentifierField from "../fields/identifier-field.mjs";
 import MappingField from "../fields/mapping-field.mjs";
 import { createCheckboxInput } from "../../applications/fields.mjs";
 
-const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { BooleanField, NumberField, ObjectField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * @import {
  *   ScaleValueAdvancementConfigurationData, ScaleValueDiceTypeData, ScaleValueNumberTypeData,
- *   ScaleValueStringTypeData, ScaleValueTypeMetadata
+ *   ScaleValueStringTypeData, ScaleValueTypeMetadata, ScaleValueUsesTypeData
  * } from "./_types.mjs";
  */
 
@@ -34,7 +34,7 @@ export class ScaleValueConfigurationData extends foundry.abstract.DataModel {
       identifier: new IdentifierField({ required: true }),
       type: new StringField({ required: true, initial: "string", choices: TYPES }),
       distance: new SchemaField({ units: new StringField({ required: true }) }),
-      scale: new MappingField(new ScaleValueEntryField(), { required: true })
+      scale: new MappingField(new ObjectField(), { required: true })
     };
   }
 
@@ -45,11 +45,11 @@ export class ScaleValueConfigurationData extends foundry.abstract.DataModel {
   /** @inheritDoc */
   static migrateData(source) {
     super.migrateData(source);
-    if ( !source ) return source;
+    if ( !source?.type ) return source;
 
     if ( source.type === "numeric" ) source.type = "number";
     for ( const [k, v] of Object.entries(source.scale ?? {}) ) {
-      if ( foundry.utils.isDeletionKey(k) ) continue;
+      if ( v instanceof foundry.data.operators.ForcedDeletion ) continue;
       TYPES[source.type].migrateData(v);
     }
 
@@ -62,31 +62,12 @@ export class ScaleValueConfigurationData extends foundry.abstract.DataModel {
  * Data field that automatically selects the appropriate ScaleValueType based on the selected type.
  */
 export class ScaleValueEntryField extends foundry.data.fields.ObjectField {
-  /** @override */
-  _cleanType(value, options, _state) {
-    if ( !(typeof value === "object") ) value = {};
-
-    // Use a defined DataModel
-    const cls = TYPES[options.source?.type];
-    if ( cls ) return cls.cleanData(value, options, _state);
-
-    return value;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  initialize(value, model, options={}) {
-    const cls = TYPES[model.type];
-    if ( !value || !cls ) return value;
-    return new cls(value, {parent: model, ...options});
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  toObject(value) {
-    return value.toObject(false);
+  constructor(...args) {
+    foundry.utils.logCompatibilityWarning(
+      "`ScaleValueEntryField` has been deprecated and replaced with a regular `ObjectField`.",
+      { since: "DnD5e 6.0", until: "DnD5e 6.2" }
+    );
+    super(...args);
   }
 }
 
@@ -97,6 +78,11 @@ export class ScaleValueEntryField extends foundry.data.fields.ObjectField {
  * @mixes ScaleValueStringTypeData
  */
 export class ScaleValueType extends foundry.abstract.DataModel {
+  constructor(data={}, options={}) {
+    const explicitKeys = new Set(filteredKeys(data, v => (v !== null) && (v !== "")));
+    super(data, options);
+    this.#explicitKeys = explicitKeys;
+  }
 
   /* -------------------------------------------- */
   /*  Model Configuration                         */
@@ -146,6 +132,14 @@ export class ScaleValueType extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
+   * Keys provided directly to the model rather than filled in automatically from default values.
+   * @type {Set<string>}
+   */
+  #explicitKeys;
+
+  /* -------------------------------------------- */
+
+  /**
    * This scale value prepared to be used in roll formulas.
    * @type {string|null}
    */
@@ -176,23 +170,34 @@ export class ScaleValueType extends foundry.abstract.DataModel {
   /**
    * Retrieve field data with associated values.
    * @param {number} level                Level for which this data is being prepared.
-   * @param {ScaleValueType} [value]      Value for the field at this level.
    * @param {ScaleValueType} [lastValue]  Previous value used to generate placeholders.
    * @returns {Record<string, object>}
    */
-  static getFields(level, value, lastValue) {
+  getFields(level, lastValue) {
     const fields = {};
     for ( const [name, field] of Object.entries(this.schema.fields) ) {
       if ( field.options.hidden ) continue;
       fields[name] = {
         field,
         input: field instanceof BooleanField ? createCheckboxInput : null,
+        isPlaceholder: !this.#explicitKeys.has(name),
         name: `configuration.scale.${level}.${name}`,
-        placeholder: this.getPlaceholder(name, lastValue),
-        value: value?.[name]
+        placeholder: this.constructor.getPlaceholder(name, lastValue),
+        value: this.#explicitKeys.has(name) ? this[name] : null
       };
     }
     return fields;
+  }
+
+  /**
+   * Retrieve field data with associated values.
+   * @param {number} level                Level for which this data is being prepared.
+   * @param {ScaleValueType} value        Value for this level.
+   * @param {ScaleValueType} [lastValue]  Previous value used to generate placeholders.
+   * @returns {Record<string, object>}
+   */
+  static getFields(level, value, lastValue) {
+    return value.getFields(level, lastValue);
   }
 
   /* -------------------------------------------- */
@@ -245,8 +250,15 @@ export class ScaleValueTypeNumber extends ScaleValueType {
   static convertFrom(original, options) {
     const value = Number(original.formula);
     if ( (original.formula === null) || (original.formula === "") || Number.isNaN(value) ) return null;
-    return new this({value}, options);
+    return new this({ value }, options);
   }
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /** @override */
+  get formula() { return String(this.value); }
 }
 
 
@@ -350,7 +362,7 @@ export class ScaleValueTypeDice extends ScaleValueType {
   static convertFrom(original, options) {
     const [number, faces] = (original.formula ?? "").split("d");
     if ( !faces || !Number.isNumeric(number) || !Number.isNumeric(faces) ) return null;
-    return new this({number: Number(number) || null, faces: Number(faces)}, options);
+    return new this({ number: Number(number) || null, faces: Number(faces) }, options);
   }
 
   /* -------------------------------------------- */
@@ -402,8 +414,10 @@ export class ScaleValueTypeDice extends ScaleValueType {
 
   /** @inheritDoc */
   static migrateData(source) {
+    if ( !source ) return super.migrateData(source);
     if ( source.n ) source.number = source.n;
     if ( source.die ) source.faces = source.die;
+    return super.migrateData(source);
   }
 
   /* -------------------------------------------- */
@@ -462,6 +476,83 @@ export class ScaleValueTypeDistance extends ScaleValueTypeNumber {
 
 
 /**
+ * Scale value data that stores a feature's usage number.
+ * @extends {ScaleValueType<ScaleValueUsesTypeData>}
+ * @mixes ScaleValueUsesTypeData
+ */
+export class ScaleValueTypeUsage extends ScaleValueTypeNumber {
+
+  /* -------------------------------------------- */
+  /*  Model Configuration                         */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static LOCALIZATION_PREFIXES = ["DND5E.ADVANCEMENT.ScaleValue.Type.Usage"];
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static defineSchema() {
+    return {
+      value: new NumberField({ nullable: true, integer: true, min: 0 }),
+      period: new StringField({ blank: false })
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static get metadata() {
+    return foundry.utils.mergeObject(super.metadata, {
+      label: "DND5E.ADVANCEMENT.ScaleValue.Type.Usage.Label",
+      hint: "DND5E.ADVANCEMENT.ScaleValue.Type.Usage.Hint"
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static convertFrom(original, options) {
+    let value = parseInt(original.formula);
+    if ( Number.isNaN(value) ) return null;
+    if ( value < 1 ) value = 1;
+    return new this({ value }, options);
+  }
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  get display() {
+    return `${this.value}/${CONFIG.DND5E.limitedUsePeriods[this.period]?.abbreviation ?? ""}`;
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static getFields(level, value, lastValue) {
+    const fields = super.getFields(level, value, lastValue);
+    fields.period.options = [
+      { value: "", label: fields.period.placeholder, rule: true },
+      ...CONFIG.DND5E.limitedUsePeriods.recoveryOptions.filter(r => r.value !== "recharge")
+    ];
+    return fields;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static getPlaceholder(name, lastValue) {
+    if ( (name === "period") && lastValue?.period ) return CONFIG.DND5E.limitedUsePeriods[lastValue.period]?.label;
+    return super.getPlaceholder(name, lastValue);
+  }
+}
+
+
+/**
  * The available types of scaling value.
  * @enum {ScaleValueType}
  */
@@ -470,5 +561,6 @@ export const TYPES = {
   number: ScaleValueTypeNumber,
   cr: ScaleValueTypeCR,
   dice: ScaleValueTypeDice,
-  distance: ScaleValueTypeDistance
+  distance: ScaleValueTypeDistance,
+  usage: ScaleValueTypeUsage
 };

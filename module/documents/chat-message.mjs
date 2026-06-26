@@ -1001,12 +1001,17 @@ export default class ChatMessage5e extends ChatMessage {
 
   /**
    * Get the Activity that created this chat card.
+   * @param {object} [options={}]
+   * @param {boolean} [scaled=false]  Pre-scaled the item based on the scaling value on the chat card.
    * @returns {Activity|void}
    */
-  getAssociatedActivity() {
+  getAssociatedActivity({ scaled=false }={}) {
     const activity = fromUuidSync(this.getFlag("dnd5e", "activity.uuid"), { strict: false });
-    if ( activity ) return activity;
-    return this.getAssociatedItem()?.system.activities?.get(this.getFlag("dnd5e", "activity.id"));
+    if ( activity ) {
+      const scaling = scaled ? this.system.scaling : null;
+      return scaling ? activity.item.scaledClone(scaling).system.activities.get(activity.id) : activity;
+    }
+    return this.getAssociatedItem({ scaled })?.system.activities?.get(this.getFlag("dnd5e", "activity.id"));
   }
 
   /* -------------------------------------------- */
@@ -1028,15 +1033,18 @@ export default class ChatMessage5e extends ChatMessage {
 
   /**
    * Get the item associated with this chat card.
+   * @param {object} [options={}]
+   * @param {boolean} [scaled=false]  Pre-scaled the item based on the scaling value on the chat card.
    * @returns {Item5e|void}
    */
-  getAssociatedItem() {
+  getAssociatedItem({ scaled=false }={}) {
     const item = fromUuidSync(this.getFlag("dnd5e", "item.uuid"), { strict: false });
-    if ( item ) return item;
+    const scaling = scaled ? this.system.scaling : null;
+    if ( item ) return scaling ? item.scaledClone(scaling) : item;
     const actor = this.getAssociatedActor();
     if ( !actor ) return;
     const storedData = this.getFlag("dnd5e", "item.data") ?? this.getOriginatingMessage().getFlag("dnd5e", "item.data");
-    if ( storedData ) return new Item.implementation(storedData, { parent: actor });
+    if ( storedData ) return new Item.implementation(storedData, { parent: actor }).scaledClone(scaling);
   }
 
   /* -------------------------------------------- */

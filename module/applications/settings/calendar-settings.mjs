@@ -69,6 +69,7 @@ export default class CalendarSettingsConfig extends BaseSettingsConfig {
       .map(([name, field]) => ({
         field,
         input: field instanceof BooleanField ? createCheckboxInput : undefined,
+        localize: !!field.choices,
         name: `calendarConfig.${name}`,
         value: data[name]
       }));

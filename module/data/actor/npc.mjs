@@ -226,6 +226,7 @@ export default class NPCData extends CreatureTemplate {
     NPCData.#migrateSource(source);
     NPCData.#migrateSpellLevel(source);
     NPCData.#migrateTypeData(source);
+    AttributesFields._migrateArmorClass(source.attributes);
     AttributesFields._migrateInitiative(source.attributes);
     return source;
   }
@@ -721,7 +722,7 @@ export default class NPCData extends CreatureTemplate {
           formatter.format([
             ...Object.entries(CONFIG.DND5E.senses)
               .filter(([k]) => this.attributes.senses.ranges[k])
-              .map(([k, label]) =>
+              .map(([k, { label }]) =>
                 prepareMeasured(this.attributes.senses.ranges[k], this.attributes.senses.units, label)
               ),
             ...splitSemicolons(this.attributes.senses.special)

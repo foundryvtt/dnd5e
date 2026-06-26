@@ -495,7 +495,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    */
   _prepareSenses(context) {
     return [
-      ...Object.entries(CONFIG.DND5E.senses).map(([k, label]) => {
+      ...Object.entries(CONFIG.DND5E.senses).map(([k, { label }]) => {
         const value = context.system.attributes.senses.ranges[k];
         return value ? { label, value } : null;
       }, {}).filter(_ => _),
@@ -729,7 +729,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     );
     Object.assign(warnings.dataset, { action: "openWarnings", tooltip: "Warnings", tooltipDirection: "DOWN" });
     warnings.setAttribute("aria-label", _loc("Warnings"));
-    html.querySelector(".window-header .window-subtitle").after(warnings);
+    this.window.subtitle.after(warnings);
 
     return html;
   }

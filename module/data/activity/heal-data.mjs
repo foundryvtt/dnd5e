@@ -46,12 +46,14 @@ export default class BaseHealActivityData extends BaseActivityData {
   /* -------------------------------------------- */
 
   /** @override */
-  getDamageConfig(config={}) {
+  getDamageConfig(config={}, options={}) {
     if ( !this.healing.formula ) return foundry.utils.mergeObject({ rolls: [] }, config);
 
     const rollConfig = foundry.utils.mergeObject({ critical: { allow: false } }, config);
-    const rollData = this.getRollData();
-    rollConfig.rolls = [this._processDamagePart(this.healing, rollConfig, rollData)].concat(config.rolls ?? []);
+    const rollData = options.rollData ?? this.getRollData();
+    rollConfig.rolls = [
+      this._processDamagePart(this.healing, rollConfig, rollData, options.formulaOptions)
+    ].concat(config.rolls ?? []);
 
     return rollConfig;
   }
