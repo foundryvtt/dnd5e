@@ -1923,9 +1923,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     const combat = await super.rollInitiative(options);
+    if ( !combat ) {
+      delete this._cachedInitiativeRoll;
+      return null;
+    }
+
     const combatants = this.isToken ? this.getActiveTokens(false, true).reduce((arr, t) => {
-      return arr.concat(game.combat.getCombatantsByToken(t.id));
-    }, []) : game.combat.getCombatantsByActor(this.id);
+      return arr.concat(combat.getCombatantsByToken(t.id));
+    }, []) : combat.getCombatantsByActor(this.id);
 
     /**
      * A hook event that fires after an Actor has rolled for initiative.
