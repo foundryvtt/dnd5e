@@ -10,20 +10,17 @@
             </div>
             <ol class="item-list changes unlist">
                 {{#each changes}}
-                <li class="item change" data-change-id="{{ id }}" data-index="{{ @index }}">
+                <li class="item change" data-change-id="{{ _id }}" data-index="{{ @index }}">
                     <div class="item-row change-row">
                         <div class="item-name">
                             <div class="name name-stacked">
-                                <!-- TODO: Add human-readable name once AE breakout is merged -->
-                                <span class="title">{{ key }}</span>
+                                <span class="title" data-tooltip="{{ key }}">{{ name }}</span>
                             </div>
                         </div>
                         <div class="item-detail effect-type">
-                            <span class="condensed">{{ type }}</span>
+                            <span class="condensed">{{ typeLabel }}</span>
                         </div>
-                        <div class="item-detail effect-value">
-                            <span class="condensed">{{ value }}</span>
-                        </div>
+                        {{> "systems/dnd5e/templates/effects/columns/value.hbs" ctx=this }}
                         <div class="item-detail item-controls">
                             {{#if @root.editable}}
                             {{!-- Editing --}}

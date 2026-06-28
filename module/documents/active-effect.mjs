@@ -950,34 +950,36 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /**
    * Prepare the context used to display an effect on an actor or item sheet.
-   * @param {object} [options={}]
-   * @param {number} [options.maxKeyLength=35]  Maximum length of the attribute key displayed.
    * @returns {object}  An object of chat data to render.
    */
-  async getSheetContext({ maxKeyLength=35 }={}) {
+  async getSheetContext() {
     this.updateDuration();
     const { id, name, img, disabled, duration } = this;
     const source = await this.getSource();
+    return {
+      id, name, img, disabled, duration, source,
+      changes: this.changes.map(change => this.getSheetChangeContext(change)),
+      durationParts: Number.isFinite(duration.remaining) ? duration.label.split(", ") : [],
+      showDuration: Number.isFinite(duration.value),
+      effect: this
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare the context for individual changes to display on actor, item, or active effect sheets.
+   * @param {object} change                     Change to prepare.
+   * @returns {object}  An object of chat data to render.
+   */
+  getSheetChangeContext(change) {
     const attributeCtx = this.type === "enchantment"
       ? { item: this.isAppliedEnchantment ? this.item : true }
       : { actor: this.actor };
     return {
-      id, name, img, disabled, duration, source,
-      changes: this.changes.map(change => {
-        let displayKey = change.key;
-        if ( displayKey.length > (maxKeyLength + 5) ) {
-          displayKey = displayKey.replace(/^systems.|^flags.|^activities\[/, "");
-          if ( displayKey.length > maxKeyLength ) displayKey = displayKey.slice(1 - maxKeyLength);
-          displayKey = `…${displayKey}`;
-        }
-        return {
-          ...change, displayKey,
-          name: getHumanReadableAttributeLabel(change.key, { ...attributeCtx, prefixItemName: false })
-        };
-      }),
-      durationParts: Number.isFinite(duration.remaining) ? duration.label.split(", ") : [],
-      showDuration: Number.isFinite(duration.value),
-      effect: this
+      ...change,
+      name: getHumanReadableAttributeLabel(change.key, { ...attributeCtx, prefixItemName: false }),
+      typeLabel: _loc(ActiveEffect.CHANGE_TYPES[change.type]?.label)
     };
   }
 

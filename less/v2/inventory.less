@@ -492,12 +492,13 @@
     .changes .change-row {
       border-block-start: var(--activity-row-border);
       min-block-size: 32px;
-      padding-inline-start: 29px;
+      padding-inline-start: 6px;
       position: relative;
 
       &:last-child { border-block-end: var(--activity-row-border); }
 
-      &::before {
+      &[data-change-type] { padding-inline-start: 29px; }
+      &[data-change-type]::before {
         content: "\f192";
         position: absolute;
         inset: 9px auto auto 13px;

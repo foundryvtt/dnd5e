@@ -41,6 +41,9 @@ export default class ActiveEffectSheet5e extends ApplicationV2Mixin(ActiveEffect
     },
     changes: {
       template: "systems/dnd5e/templates/effects/effect-changes.hbs",
+      templates: [
+        "systems/dnd5e/templates/effects/columns/value.hbs"
+      ],
       scrollable: ["ol.changes"]
     }
   };
@@ -80,11 +83,7 @@ export default class ActiveEffectSheet5e extends ApplicationV2Mixin(ActiveEffect
    * @protected
    */
   async _prepareChangesContext(context, options) {
-    // TODO: Make use of change context preparation in AE breakout PR once it is merged
-    context.changes = context.document.system.changes.map(c => ({
-      id: c._id, key: c.key, value: c.value,
-      type: _loc(ActiveEffect.CHANGE_TYPES[c.type]?.label)
-    }));
+    context.changes = context.document.system.changes.map(c => this.document.getSheetChangeContext(c));
     return context;
   }
 
