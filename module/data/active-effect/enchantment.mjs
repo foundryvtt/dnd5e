@@ -216,10 +216,10 @@ export default class EnchantmentData extends ActiveEffectDataModel {
 
   /**
    * Can an active effect of this type be added to the provided document?
-   * @param {Actor5e|Item5e} doc  Candidate document to which the active effect might be added.
-   * @returns {boolean}           Should this active effect be available?
+   * @param {Actor5e|Item5e} [doc]  Candidate document to which the active effect might be added.
+   * @returns {boolean}             Should this active effect be available?
    */
   static availableForItem(doc) {
-    return doc instanceof Item;
+    return !doc || (doc instanceof Item);
   }
 }
