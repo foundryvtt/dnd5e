@@ -7,7 +7,6 @@ system:
     - key: system.attributes.movement.swim
       type: upgrade
       value: '@attributes.movement.speed'
-      priority: null
       phase: initial
 disabled: false
 start: null
@@ -23,10 +22,7 @@ transfer: false
 statuses: []
 showIcon: 1
 sort: 0
-flags:
-  dnd5e:
-    riders:
-      statuses: []
+flags: {}
 _stats:
   coreVersion: '14.354'
   systemId: dnd5e

@@ -8,7 +8,6 @@ system:
     - key: system.traits.di.value
       type: add
       value: ALL
-      priority: null
       phase: initial
 disabled: false
 start: null
@@ -24,10 +23,7 @@ transfer: false
 statuses: []
 showIcon: 1
 sort: 0
-flags:
-  dnd5e:
-    riders:
-      statuses: []
+flags: {}
 _stats:
   coreVersion: '14.354'
   systemId: dnd5e

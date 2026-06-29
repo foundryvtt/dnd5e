@@ -7,7 +7,6 @@ system:
     - key: system.traits.dr.value
       type: add
       value: acid
-      priority: null
       phase: initial
 disabled: false
 start: null
@@ -24,10 +23,7 @@ statuses: []
 showIcon: 1
 folder: m7bI2qqrnUPGPIjj
 sort: 100000
-flags:
-  dnd5e:
-    riders:
-      statuses: []
+flags: {}
 _stats:
   coreVersion: '14.354'
   systemId: dnd5e

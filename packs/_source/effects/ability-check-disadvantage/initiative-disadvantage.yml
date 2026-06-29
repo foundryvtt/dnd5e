@@ -1,13 +1,13 @@
-folder: TxqYeqxORIBFjl3d
-name: Damage Vulnerability
-_id: OdQ1asxcW6nN7lTo
-img: systems/dnd5e/icons/svg/damage/all.svg
+folder: 0Ch2NOcABVIoN3cQ
+name: Initiative Disadvantage
 type: base
+_id: APHt5RDc5RWe8Y4j
+img: systems/dnd5e/icons/svg/action/dash.svg
 system:
   changes:
-    - key: system.traits.dv.value
+    - key: system.attributes.init.roll.mode
       type: add
-      value: ALL
+      value: -1
       phase: initial
 disabled: false
 start: null
@@ -25,12 +25,12 @@ showIcon: 1
 sort: 0
 flags: {}
 _stats:
-  coreVersion: '14.354'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 6.0.0
+  createdTime: 1782753095041
+  modifiedTime: 1782753537631
   lastModifiedBy: dnd5ebuilder0000
   duplicateSource: null
   exportSource: null
-  createdTime: 1771883824158
-  modifiedTime: 1771883935857
-_key: '!effects!OdQ1asxcW6nN7lTo'
+_key: '!effects!APHt5RDc5RWe8Y4j'
