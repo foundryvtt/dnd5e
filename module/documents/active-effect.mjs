@@ -131,6 +131,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     if ( super.isSuppressed ) return true;
     if ( this.system.magical && this.actor?.statuses.has("antimagic") ) return true;
     if ( this.type === "enchantment" ) return false;
+    if ( this.type === "condition" ) return false;
     if ( this.item ) {
       if ( this.item.areEffectsSuppressed ) return true;
       if ( this.dependentOrigin?.active === false ) return true;
