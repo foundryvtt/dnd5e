@@ -47,6 +47,7 @@ export default class TokenHUD5e extends foundry.applications.hud.TokenHUD {
 
   /**
    * Toggle a condition via the HUD.
+   * @this TokenHUD5e
    * @param {PointerEvent} event    The triggering event.
    * @param {HTMLElement} target    The element that defined the [data-action].
    */

@@ -542,9 +542,12 @@ export default class AttributesFields {
     const units = this.attributes.movement.units ??= defaultUnits("length");
 
     let reduction = statuses.reduce((acc, status) => {
+      const immune = this.traits?.ci?.value?.has(status);
+      if ( immune ) return acc;
+
       const speed = CONFIG.DND5E.conditionTypes[status]?.reduction?.speed ?? 0;
       const level = ConditionData.hasLevels(status)
-        ? this.parent.system.conditions?.[status] ?? 0
+        ? this.parent.system.conditions[status] ?? 0
         : Boolean(statuses.has(status));
       return acc + (level * speed);
     }, 0);

@@ -553,6 +553,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       // If immune, naturally never applied.
       if ( imms.has(status) ) return false;
 
+      // You cannot be dodging while incapacitated or while you have no movement.
+      if ( status === "dodging" ) {
+        if ( this.statuses.has("incapacitated") ) return false;
+        if ( CONFIG.DND5E.conditionEffects.noMovement?.some(applyCondition) ) return false;
+      }
+
       // If not leveled, or not requiring a level, need only check if status is active.
       if ( !ConditionData.hasLevels(status) || !level ) return this.statuses.has(status);
 
@@ -1188,18 +1194,40 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
-   * Add the reduction to this roll from exhaustion if using the modern rules.
+   * Add the reduction to this roll from conditions.
    * @param {string[]} parts  Roll parts.
    * @param {object} data     Roll data.
    */
   addRollExhaustion(parts, data) {
-    if ( (dnd5e.settings.rulesVersion !== "modern") || !this.system.attributes?.exhaustion
-      || this.system.traits?.ci?.value?.has("exhaustion") ) return;
-    const amount = this.system.attributes.exhaustion * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.rolls ?? 0);
-    if ( amount ) {
-      parts.push("@exhaustion");
-      data.exhaustion = -amount;
-    }
+    foundry.utils.logCompatibilityWarning(
+      "The `addRollExhaustion` method has been deprecated in favor of a `addConditionRollReduction`.",
+      { since: "DnD5e 6.0", until: "DnD5e 6.2", once: true }
+    );
+    this.addConditionRollReduction(parts, data);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Add the reduction to this roll from conditions.
+   * @param {string[]} parts  Roll parts.
+   * @param {object} data     Roll data.
+   */
+  addConditionRollReduction(parts, data) {
+    const immunities = this.system.traits?.ci?.value ?? new Set();
+    this.statuses.difference(immunities).forEach(status => {
+      const reduction = CONFIG.DND5E.conditionTypes[status]?.reduction?.rolls ?? 0;
+      if ( !reduction ) return;
+
+      const levels = ConditionData.hasLevels(status) ? (this.system.conditions[status] ?? 0) : 1;
+      const penalty = levels * reduction;
+
+      if (penalty) {
+        parts.push(`@reductions.${status}`);
+        data.reductions ??= {};
+        data.reductions[status] = -penalty;
+      }
+    });
   }
 
   /* -------------------------------------------- */
@@ -1404,8 +1432,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       abilityCheckBonus: this.system.bonuses?.abilities?.check
     }, { ...rollData });
 
-    // Add exhaustion reduction
-    this.addRollExhaustion(parts, data);
+    // Add condition reductions.
+    this.addConditionRollReduction(parts, data);
 
     config.parts = [...(config.parts ?? []), ...parts];
     config.data = { ...data, ...(config.data ?? {}) };
@@ -1526,7 +1554,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     rollConfig.rolls = [
       CONFIG.Dice.D20Roll.mergeConfigs({ parts, data, options }, config.rolls?.shift())
     ].concat(config.rolls ?? []);
-    rollConfig.rolls.forEach(({ parts, data }) => this.addRollExhaustion(parts, data));
+    rollConfig.rolls.forEach(({ parts, data }) => this.addConditionRollReduction(parts, data));
     rollConfig.subject = this;
 
     const dialogConfig = foundry.utils.deepClone(dialog);
@@ -1835,8 +1863,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       "attributes.init.roll.mode"
     ]);
 
-    // Add exhaustion reduction
-    this.addRollExhaustion(parts, data);
+    // Add condition reductions
+    this.addConditionRollReduction(parts, data);
 
     // Ability score tiebreaker
     const tiebreaker = game.settings.get("dnd5e", "initiativeDexTiebreaker");
@@ -3505,16 +3533,17 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /**
    * Toggle a configured status effect for the Actor.
    * @override
-   * @param {string} statusId                 A status effect ID defined in CONFIG.statusEffects
-   * @param {object} [options={}]             Additional options which modify how the effect is created.
-   * @param {boolean} [options.active]        Force the effect to be active or inactive regardless of its current state.
-   * @param {boolean} [options.overlay=false] Display the toggled effect as an overlay.
-   * @param {number} [options.levels=1]       A potential level increase.
-   * @returns {Promise<ActiveEffect|boolean|undefined>}  A promise which resolves to one of the following values:
-   *                                 - ActiveEffect if a new effect need to be created or updated.
-   *                                 - true if was already an existing effect
-   *                                 - false if an existing effect needed to be removed
-   *                                 - undefined if no changes need to be made
+   * @param {string} statusId                       A status effect ID defined in CONFIG.statusEffects
+   * @param {object} [options={}]                   Additional options which modify how the effect is created.
+   * @param {boolean} [options.active]              Force the effect to be active or inactive
+   *                                                regardless of its current state.
+   * @param {boolean} [options.overlay=false]       Display the toggled effect as an overlay.
+   * @param {number} [options.levels=1]             A potential level increase.
+   * @returns {Promise<ActiveEffect|boolean|void>}  A promise which resolves to one of the following values:
+   *                                                - ActiveEffect if a new effect need to be created or updated.
+   *                                                - true if was already an existing effect.
+   *                                                - false if an existing effect needed to be removed.
+   *                                                - undefined if no changes need to be made.
    */
   async toggleStatusEffect(statusId, options={}) {
     const hasLevels = ConditionData.hasLevels(statusId);

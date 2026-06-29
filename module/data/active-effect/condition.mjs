@@ -1,16 +1,12 @@
-const { ActiveEffectTypeDataModel } = foundry.data;
-const { TypeDataModel } = foundry.abstract;
-
 const { NumberField, StringField } = foundry.data.fields;
 
 /**
  * System data model for condition active effects.
  */
-export default class ConditionData extends (ActiveEffectTypeDataModel ?? TypeDataModel) {
-  /** @override */
+export default class ConditionData extends foundry.data.ActiveEffectTypeDataModel {
+  /** @inheritDoc */
   static defineSchema() {
-    const schema = ActiveEffectTypeDataModel ? super.defineSchema() : {};
-    return Object.assign(schema, {
+    return Object.assign(super.defineSchema(), {
       level: new NumberField({ nullable: true, integer: true, initial: null, min: 1 }),
       type: new StringField({ required: true, blank: false })
     });
@@ -64,14 +60,13 @@ export default class ConditionData extends (ActiveEffectTypeDataModel ?? TypeDat
     this.parent.name = `${CONFIG.DND5E.conditionTypes[this.type].name} (${this.level})`;
     this.parent.img = this.constructor.getIconByLevel(this.type, this.level);
 
-    for (let i=1; i <= this.level; i++) {
+    for ( let i = 1; i <= this.level; i++ ) {
       const statuses = CONFIG.DND5E.conditionTypes[this.type].conditions?.[i] ?? [];
       statuses.forEach(s => this.parent.statuses.add(s));
     }
 
     const actor = this.parent.parent;
-    if ( this.parent.active && (actor instanceof Actor) ) {
-      actor.system.conditions ??= {};
+    if ( this.parent.active && (actor instanceof foundry.documents.Actor) ) {
       actor.system.conditions[this.type] = this.level;
     }
   }
@@ -96,8 +91,8 @@ export default class ConditionData extends (ActiveEffectTypeDataModel ?? TypeDat
 
   /**
    * Decrease the level of this condition.
-   * @param {number} [levels=1]   The increase in levels.
-   * @returns {Promise<ActiveEffect5e>}   A promise that resolves to the updaeed effect.
+   * @param {number} [levels=1]           The decrease in levels.
+   * @returns {Promise<ActiveEffect5e>}   A promise that resolves to the updated effect.
    */
   async decrease(levels=1) {
     if ( !this.hasLevels ) return this;
@@ -109,8 +104,8 @@ export default class ConditionData extends (ActiveEffectTypeDataModel ?? TypeDat
 
   /**
    * Increase the level of this condition.
-   * @param {number} [levels=1]   The increase in levels.
-   * @returns {Promise<ActiveEffect5e>}   A promise that resolves to the updaeed effect.
+   * @param {number} [levels=1]           The increase in levels.
+   * @returns {Promise<ActiveEffect5e>}   A promise that resolves to the updated effect.
    */
   async increase(levels=1) {
     if ( !this.hasLevels ) return this;
@@ -150,7 +145,7 @@ export default class ConditionData extends (ActiveEffectTypeDataModel ?? TypeDat
       const nLevel = effect.system.level + levels;
       if ( nLevel <= 0 ) {
         await effect.delete();
-        return false;
+        return effect;
       }
       return effect.system.decrease(Math.abs(levels));
     }
@@ -164,6 +159,6 @@ export default class ConditionData extends (ActiveEffectTypeDataModel ?? TypeDat
 
     if ( !this.hasLevels ) return;
     const delta = this.level - options.dnd5e?.originalLevel;
-    if ( delta ) this.parent._displayScrollingStatus(delta);
+    if ( Number.isFinite(delta) ) this.parent._displayScrollingStatus(delta > 0);
   }
 }

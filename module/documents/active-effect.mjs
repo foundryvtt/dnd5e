@@ -181,7 +181,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       foundry.utils.setProperty(data, "flags.dnd5e.persistSourceMigration", true);
     }
 
-    else if ( CONFIG.statusEffects.some(e => e._id === data._id) ) {
+    else if ( Object.values(CONFIG.statusEffects).some(e => e._id === data._id) ) {
       foundry.utils.mergeObject(data, {
         type: "condition",
         "system.type": data.statuses[0],
@@ -422,14 +422,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   prepareBaseData() {
     this.origin = this.getFlag("core", "originText") ?? this.origin;
     super.prepareBaseData();
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  prepareDerivedData() {
-    super.prepareDerivedData();
-    if ( this.isAppliedEnchantment && this.uuid ) dnd5e.registry.enchantments.track(this.origin, this.uuid);
   }
 
   /* -------------------------------------------- */
@@ -698,6 +690,20 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     if ( item.type === "spell" ) effectData["flags.dnd5e.spellLevel"] = item.system.level;
 
     return effectData;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine whether this effect applies a status that should prompt concentration to end.
+   * @returns {boolean}
+   * @protected
+   */
+  _shouldPromptConcentrationEnd() {
+    if ( !this.active || !(this.parent instanceof Actor) ) return false;
+    if ( dnd5e.settings.disableConcentration || !this.actor.concentration.effects.size ) return false;
+
+    return this.statuses.has("dead") || this.statuses.has("incapacitated");
   }
 
   /* -------------------------------------------- */
