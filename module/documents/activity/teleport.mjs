@@ -53,7 +53,7 @@ export default class TeleportActivity extends ActivityMixin(TeleportActivityData
   _usageChatButtons(message) {
     if ( !this.canPlanTeleport ) return super._usageChatButtons(message);
     return [{
-      label: game.i18n.localize("DND5E.TELEPORT.Action.Teleport"),
+      label: _loc("DND5E.TELEPORT.Action.Teleport"),
       icon: '<i class="fa-solid fa-person-walking-dashed-line-arrow-right" inert></i>',
       dataset: {
         action: "planTeleport"
@@ -61,14 +61,13 @@ export default class TeleportActivity extends ActivityMixin(TeleportActivityData
     }].concat(super._usageChatButtons(message));
   }
 
-  // /* -------------------------------------------- */
+  /* -------------------------------------------- */
 
-  // TODO: triggerSubsequentActions only when the spell specifically targets "Self"
-  // /** @inheritDoc */
-  // async _triggerSubsequentActions() {
-  //   if ( !this.canPlanTeleport ) return;  
-  //   await this.planTeleport();  
-  // }
+  /** @inheritDoc */
+  async _triggerSubsequentActions(config, results) {
+    // TODO: Automatically plan teleport movement, but only when the spell specifically targets "Self".
+    await super._triggerSubsequentActions(config, results);
+  }
 
   /* -------------------------------------------- */
 
@@ -91,9 +90,9 @@ export default class TeleportActivity extends ActivityMixin(TeleportActivityData
     let movement = null;
     for ( const token of tokens ) {
       const plan = await token.planMovement({
+        maxDistance,
         allowedActions: ["blink"],
         direct: true,
-        maxDistance,
         preventDrop: true
       });
       if ( !plan ) break;

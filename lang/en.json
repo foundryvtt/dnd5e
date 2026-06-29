@@ -5011,6 +5011,10 @@
     "teleport": {
       "label": "Distance",
       "hint": "Set the maximum teleport distance.",
+      "useRange": {
+        "label": "Use Range",
+        "hint": "Use the activity's configured range as the maximum teleport distance."
+      },
       "unlimited": {
         "label": "Unlimited",
         "hint": "Ignore distance limits when teleporting."
