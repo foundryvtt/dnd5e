@@ -179,6 +179,7 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
     // Iterate over active effects, classifying them into categories
     for ( const e of effects ) {
       if ( e.isConcealed ) continue;
+      if ( e.type === "condition" ) continue;
       if ( e.isAppliedEnchantment ) {
         if ( e.disabled ) categories.enchantmentInactive.effects.push(e);
         else categories.enchantmentActive.effects.push(e);
