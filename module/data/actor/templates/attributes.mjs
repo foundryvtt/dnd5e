@@ -449,7 +449,7 @@ export default class AttributesFields {
    * @this {CharacterData|NPCData}
    */
   static prepareExhaustionLevel() {
-    this.attributes.exhaustion = this.conditions?.exhaustion ?? 0;
+    this.attributes.exhaustion = this.conditions.exhaustion ?? 0;
   }
 
   /* -------------------------------------------- */
@@ -555,7 +555,6 @@ export default class AttributesFields {
       && !this.parent.flags.dnd5e?.ignoreArmorSpeedReduction && this.isCreature ) {
       reduction += CONFIG.DND5E.armorSpeedReduction;
     }
-
     reduction = convertLength(reduction, CONFIG.DND5E.defaultUnits.length.imperial, units);
     const bonus = simplifyBonus(this.attributes.movement.bonus, rollData);
     this.attributes.movement.max = 0;

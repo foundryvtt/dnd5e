@@ -524,7 +524,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
    * @protected
    */
   async _prepareSidebarContext(context, options) {
-    const { attributes, conditions={} } = this.actor.system;
+    const { attributes, conditions } = this.actor.system;
     context.portrait = await this._preparePortrait(context);
 
     // Death Saves
