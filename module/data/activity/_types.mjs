@@ -226,6 +226,8 @@
  * @property {string} teleport.value        Maximum distance the token can teleport.
  */
 
+/* -------------------------------------------- */
+
 /**
  * @typedef {ActivityData} TransformActivityData
  * @property {TransformProfile[]} profiles         Information on transformation methods and sources.

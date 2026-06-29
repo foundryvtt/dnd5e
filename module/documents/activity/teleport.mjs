@@ -4,6 +4,10 @@ import { convertLength, getSceneTargets } from "../../utils.mjs";
 import ActivityMixin from "./mixin.mjs";
 
 /**
+ * @import { TeleportMovementResult } from "./_types.mjs";
+ */
+
+/**
  * Activity for teleporting a token using planned blink movement.
  */
 export default class TeleportActivity extends ActivityMixin(TeleportActivityData) {
@@ -71,7 +75,10 @@ export default class TeleportActivity extends ActivityMixin(TeleportActivityData
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
+  /**
+   * Handle planning teleport for selected tokens.
+   * @returns {Promise<TeleportMovementResult[]|null>}
+   */
   async planTeleport() {
     if ( !this.canPlanTeleport ) return null;
 
@@ -87,7 +94,19 @@ export default class TeleportActivity extends ActivityMixin(TeleportActivityData
       return null;
     }
 
-    let movement = null;
+    const config = { maxDistance, tokens };
+
+    /**
+     * A hook event that fires after teleport movement has been planned, but before tokens have been moved.
+     * @function dnd5e.preTeleport
+     * @memberof hookEvents
+     * @param {TeleportActivity} activity                          The activity that is performing the teleportation.
+     * @param {{ maxDistance: number, tokens: Token5e[] }} config  Information on the teleport to plan.
+     * @returns {boolean}  Explicitly return `false` to prevent teleporting.
+     */
+    if ( Hooks.call("dnd5e.preTeleport", this, config) === false ) return;
+
+    const plans = [];
     for ( const token of tokens ) {
       const plan = await token.planMovement({
         maxDistance,
@@ -95,11 +114,34 @@ export default class TeleportActivity extends ActivityMixin(TeleportActivityData
         direct: true,
         preventDrop: true
       });
-      if ( !plan ) break;
-      movement = await token.document.startMovement(plan.id);
+      if ( !plan ) continue;
+      plans.push({ token, plan });
     }
 
-    return movement;
+    /**
+     * A hook event that fires after teleport movement has been planned, but before tokens have been moved.
+     * @function dnd5e.teleport
+     * @memberof hookEvents
+     * @param {TeleportActivity} activity                       The activity that is performing the teleportation.
+     * @param {Omit<TeleportMovementResult, "result">[]} plans  Plans for tokens that are to be moved.
+     * @returns {boolean}  Explicitly return `false` to prevent teleporting.
+     */
+    if ( Hooks.call("dnd5e.teleport", this, plans) === false ) return;
+
+    const results = await Promise.all(
+      plans.map(({ token, plan }) => token.document.startMovement(plan.id).then(moved => ({ token, plan, moved })))
+    );
+
+    /**
+     * A hook event that fires after teleport movement has occurred.
+     * @function dnd5e.postTeleport
+     * @memberof hookEvents
+     * @param {TeleportActivity} activity         The activity that is performing the teleportation.
+     * @param {TeleportMovementResult[]} results  Plans for tokens that are to be moved.
+     */
+    Hooks.callAll("dnd5e.postTeleport", this, results);
+
+    return results;
   }
 
   /* -------------------------------------------- */
@@ -126,7 +168,7 @@ export default class TeleportActivity extends ActivityMixin(TeleportActivityData
    * @param {PointerEvent} event     Triggering click event.
    * @param {HTMLElement} target     The capturing HTML element which defined a [data-action].
    * @param {ChatMessage5e} message  Message associated with the activation.
-   * @returns {Promise<boolean|null>}
+   * @returns {Promise<TeleportMovementResult[]|null>}
    */
   static #planTeleport(event, target, message) {
     return this.planTeleport();
