@@ -1,0 +1,21 @@
+<fieldset>
+    <legend>{{ localize "DND5E.TELEPORT.FIELDS.teleport.label" }}</legend>
+    {{ formField fields.teleport.fields.useRange value=source.teleport.useRange input=inputs.createCheckboxInput
+                 rootId=partId }}
+    {{#unless source.teleport.useRange}}
+    {{ formField fields.teleport.fields.unlimited value=source.teleport.unlimited input=inputs.createCheckboxInput
+                 rootId=partId }}
+    {{#unless source.teleport.unlimited}}
+    <div class="form-group split-group">
+        <label>{{ localize "DND5E.TELEPORT.FIELDS.teleport.value.label" }}</label>
+        <div class="form-fields">
+            {{ formField fields.teleport.fields.value value=source.teleport.value label="DND5E.Value" localize=true
+                         hint=false classes="label-top" rootId=partId }}
+            {{ formField fields.teleport.fields.units value=source.teleport.units label="DND5E.Unit" localize=true
+                         hint=false choices=CONFIG.movementUnits classes="label-top" rootId=partId }}
+        </div>
+    </div>
+    <p class="hint">{{ localize "DND5E.TELEPORT.FIELDS.teleport.hint" }}</p>
+    {{/unless}}
+    {{/unless}}
+</fieldset>

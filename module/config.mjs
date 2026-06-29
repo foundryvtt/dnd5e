@@ -4427,6 +4427,9 @@ DND5E.activityTypes = {
   summon: {
     documentClass: activities.SummonActivity
   },
+  teleport: {
+    documentClass: activities.TeleportActivity
+  },
   transform: {
     documentClass: activities.TransformActivity
   },
