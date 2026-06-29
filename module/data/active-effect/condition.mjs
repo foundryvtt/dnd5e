@@ -161,4 +161,17 @@ export default class ConditionData extends foundry.data.ActiveEffectTypeDataMode
     const delta = this.level - options.dnd5e?.originalLevel;
     if ( Number.isFinite(delta) ) this.parent._displayScrollingStatus(delta > 0);
   }
+
+  /* -------------------------------------------- */
+  /*  Importing and Exporting                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Can an active effect of this type be added to the provided document?
+   * @param {Actor5e|Item5e} [doc]    Candidate document to which the active effect might be added.
+   * @returns {boolean}               Should this active effect be available?
+   */
+  static availableForItem(doc) {
+    return false;
+  }
 }
