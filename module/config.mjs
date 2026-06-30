@@ -3658,7 +3658,10 @@ DND5E.conditionTypes = {
     img: "systems/dnd5e/icons/svg/statuses/exhaustion.svg",
     reference: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.jSQtPgNm0i4f3Qi3",
     levels: 6,
-    reduction: { rolls: 2, speed: 5 }
+    reduction: { rolls: 2, speed: 5 },
+    conditions: {
+      6: ["dead"]
+    }
   },
   falling: {
     name: "EFFECT.DND5E.StatusFalling",
@@ -3761,23 +3764,23 @@ preLocalize("conditionTypes", { key: "name", sort: true });
 
 /**
  * Various effects of conditions and which conditions apply it. Either keys for the conditions,
- * and with a number appended for a level of exhaustion.
+ * and with a number appended for a level of a leveled condition.
  * @enum {Set<string>}
  */
 DND5E.conditionEffects = {
-  noMovement: new Set(["exhaustion-5", "grappled", "paralyzed", "petrified", "restrained", "unconscious"]),
-  halfMovement: new Set(["exhaustion-2"]),
+  noMovement: new Set(["grappled", "paralyzed", "petrified", "restrained", "unconscious"]),
+  halfMovement: new Set(),
   crawl: new Set(["prone", "exceedingCarryingCapacity"]),
   petrification: new Set(["petrified"]),
-  halfHealth: new Set(["exhaustion-4"]),
+  halfHealth: new Set(),
   dehydrated: new Set(["dehydration"]),
   malnourished: new Set(["malnutrition"]),
-  abilityCheckDisadvantage: new Set(["poisoned", "exhaustion-1"]),
+  abilityCheckDisadvantage: new Set(["poisoned"]),
   physicalCheckDisadvantage: new Set(["heavilyEncumbered"]),
-  abilitySaveDisadvantage: new Set(["exhaustion-3"]),
+  abilitySaveDisadvantage: new Set(),
   physicalSaveDisadvantage: new Set(["heavilyEncumbered"]),
   physicalAttackDisadvantage: new Set(["heavilyEncumbered"]),
-  attackDisadvantage: new Set(["poisoned", "exhaustion-3"]),
+  attackDisadvantage: new Set(["poisoned"]),
   dexteritySaveDisadvantage: new Set(["restrained"]),
   dexteritySaveAdvantage: new Set(["dodging"]),
   initiativeAdvantage: new Set(["invisible"]),

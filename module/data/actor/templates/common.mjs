@@ -56,7 +56,8 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
       }), {
         initialKeys: CONFIG.DND5E.abilities, initialValue: this._initialAbilityValue.bind(this),
         initialKeysOnly: true, label: "DND5E.Abilities", entryLabel: key => CONFIG.DND5E.abilities[key]?.label
-      })
+      }),
+      conditions: new MappingField(new NumberField({ integer: true, min: 1 }), { persisted: false })
     });
   }
 
