@@ -66,7 +66,11 @@ export default class BaseTransformActivityData extends BaseActivityData {
    */
   get currentProfile() {
     if ( this.transform.mode !== "form" ) return null;
-    return this.effects.find(e => !e.effect?.disabled && e.effect?.transfer)?._id ?? "";
+    const active = this.effects.find(e => {
+      const effect = e.getEffect();
+      return !effect?.disabled && effect?.transfer;
+    })?._id;
+    return active ?? (this.transform.formless ? "" : null);
   }
 
   /* -------------------------------------------- */

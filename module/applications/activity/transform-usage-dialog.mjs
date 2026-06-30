@@ -67,6 +67,10 @@ export default class TransformUsageDialog extends ActivityUsageDialog {
       case "cr":
         const cr = simplifyBonus(profile.cr, rollData);
         return _loc("DND5E.TRANSFORM.Profile.ChallengeRatingLabel", { cr: formatCR(cr) });
+      case "form":
+        const effect = profile.getEffect();
+        if ( effect ) return effect.name;
+        break;
       default:
         const doc = fromUuidSync(profile.uuid);
         if ( doc ) return doc.name;

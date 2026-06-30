@@ -1,7 +1,7 @@
 <section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
     {{#if (eq activity.transform.mode "form")}}
 
-    {{> "systems/dnd5e/templates/activity/parts/activity-effects.hbs" labels=effects.labels }}
+    {{> "systems/dnd5e/templates/activity/parts/activity-effects.hbs" labels=effects.labels remote=false }}
 
     {{else}}
 

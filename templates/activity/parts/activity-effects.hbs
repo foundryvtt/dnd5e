@@ -22,8 +22,10 @@
         </li>
         {{/each}}
     </ul>
+    {{#unless (eq remote false)}}
     <document-tags name="appliedRemoteEffects" class="hidden-tags drop-area" type="ActiveEffect"
                    data-drop-hint="{{ localize (ifThen labels.drop labels.drop "DND5E.EFFECT.DropHint") }}"></document-tags>
+    {{/unless}}
 </fieldset>
 
 {{#*inline ".effect"}}
