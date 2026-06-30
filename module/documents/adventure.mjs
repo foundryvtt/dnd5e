@@ -14,16 +14,25 @@ export default class Adventure5e extends foundry.documents.Adventure {
 
   /**
    * List of configuration data for each import action. Options can either be defined using the `dnd5e.importActions`
-   * flag on the adventure to use pre-defined actions or fetched from the adventure registry if custom actions or
-   * more complex configurations are required.
+   * flag on the adventure to use pre-defined actions or fetched from `CONFIG.DND5E.adventure.config` by adventure
+   * UUID or package name.
    * @type {AdventureImportAction[]}
    */
   get importActions() {
-    const flag = this.getFlag("dnd5e", "importActions");
-    if ( flag ) return this.getFlag("dnd5e", "importActions")
-      .filter(id => id in CONFIG.DND5E.adventure.importActions)
-      .map(id => ({ ...CONFIG.DND5E.adventure.importActions[id], id }));
-    return dnd5e.registry.adventures.get(this.uuid).importActions;
+    let actions = this.getFlag("dnd5e", "importActions")
+      ?? CONFIG.DND5E.adventure.config[this.uuid]?.importActions
+      ?? CONFIG.DND5E.adventure.config[this.compendium.metadata.packageName]?.importActions
+      ?? [];
+
+    actions = actions
+      .filter(a => a.id || (a in CONFIG.DND5E.adventure.importActions))
+      .map(a => {
+        if ( foundry.utils.getType(a) === "string" ) a = { id: a };
+        if ( !(a.id in CONFIG.DND5E.adventure.importActions) ) return { ...a, label: _loc(a.label) };
+        return { ...CONFIG.DND5E.adventure.importActions[a.id], ...a };
+      });
+
+    return actions;
   }
 
   /* -------------------------------------------- */
@@ -36,7 +45,7 @@ export default class Adventure5e extends foundry.documents.Adventure {
   get quickstartConfig() {
     if ( this.compendium?.metadata.packageType !== "module" ) return null;
     const manifest = game.modules.get(this.compendium.metadata.packageName);
-    if ( !manifest.quickstart?.adventures?.[game.system.uuid]
+    if ( !manifest.quickstart?.adventures?.[game.system.id]
       || (manifest.quickstart.adventures[game.system.id].uuid === this.uuid) ) return manifest.quickstart;
     return null;
   }

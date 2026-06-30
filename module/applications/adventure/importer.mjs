@@ -82,16 +82,6 @@ export default class AdventureImporter5e extends ApplicationV2Mixin(AdventureImp
   /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  _onChangeForm(formConfig, event) {
-    if ( (event.target.name === "importFields") && (event.target.getAttribute("value") === "all") ) {
-      this._onToggleImportAll(event);
-    }
-    super._onChangeForm(formConfig, event);
-  }
-
-  /* -------------------------------------------- */
-
   /** @override */
   _onToggleImportAll(event) {
     const target = event.target;

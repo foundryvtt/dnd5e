@@ -18,7 +18,8 @@ import { preLocalize } from "./utils.mjs";
 /**
  * @import {
  *   AbilityConfiguration, ActivityActivationTypeConfiguration, ActivityConsumptionTargetConfiguration,
- *   ActivityTypeConfiguration, ActorSizeConfiguration, AdvancementTypeConfiguration, AdventureImportAction,
+ *   ActivityTypeConfiguration, ActorSizeConfiguration, AdvancementTypeConfiguration,
+ *   AdventureConfiguration, AdventureImportAction,
  *   AreaTargetDefinition, CalendarHUDConfiguration, CharacterFlagConfiguration, ConditionConfiguration,
  *   CraftingConfiguration, CreatureTypeConfiguration, CurrencyConfiguration, DamageTypeConfiguration,
  *   EncumbranceConfiguration, FacilityConfiguration, HabitatConfiguration5e,
@@ -4530,9 +4531,13 @@ DND5E.defaultArtwork = {
 
 /**
  * Configuration for adventure handling by the system.
- * @type {{ importActions: Record<string, Omit<AdventureImportAction, "id">> }}
+ * @type {{
+ *   config: Record<string, AdventureConfiguration>,
+ *   importActions: Record<string, Omit<AdventureImportAction, "id">>
+ * }}
  */
 DND5E.adventure = {
+  config: {},
   importActions: {
     activateScene: {
       label: "DND5E.ADVENTURE.ImportAction.ActivateScene",
