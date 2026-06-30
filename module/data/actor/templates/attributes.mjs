@@ -148,6 +148,9 @@ export default class AttributesFields {
         }),
         value: new NumberField({ integer: true, min: 0, initial: 0, persisted: false })
       }, { label: "DND5E.Attunement" }),
+      bloodiedThreshold: new NumberField({
+        nullable: false, min: 0, max: 100, persisted: false, initial: () => CONFIG.DND5E.bloodied.threshold
+      }),
       senses: new SensesField(),
       spell: new SchemaField({
         attack: new NumberField({ integer: true }),
@@ -236,16 +239,6 @@ export default class AttributesFields {
    * @this {CharacterData|NPCData|VehicleData}
    */
   static prepareBaseArmorClass() {}
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare the bloodied threshold.
-   * @this {CharacterData|NPCData}
-   */
-  static prepareBaseBloodied() {
-    this.attributes.bloodiedThreshold = CONFIG.DND5E.bloodied.threshold;
-  }
 
   /* -------------------------------------------- */
 
