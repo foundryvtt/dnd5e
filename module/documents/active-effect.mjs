@@ -142,7 +142,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /** @inheritDoc */
   get isTemporary() {
-    return !this.isConcealed && (super.isTemporary || this.getFlag("dnd5e", "isTemporary"));
+    return !this.isConcealed && (super.isTemporary || !!this.getFlag("dnd5e", "isTemporary"));
   }
 
   /* -------------------------------------------- */
