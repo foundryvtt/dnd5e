@@ -1222,7 +1222,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       const levels = ConditionData.hasLevels(status) ? (this.system.conditions[status] ?? 0) : 1;
       const penalty = levels * reduction;
 
-      if (penalty) {
+      if ( penalty ) {
         parts.push(`@reductions.${status}`);
         data.reductions ??= {};
         data.reductions[status] = -penalty;
