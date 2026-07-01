@@ -32,4 +32,21 @@ export default class TeleportSheet extends ActivitySheet {
     tabs.effect.icon = "fa-solid fa-person-walking-dashed-line-arrow-right";
     return tabs;
   }
+
+  /* -------------------------------------------- */
+  /*  Rendering                                   */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _prepareEffectContext(context, options) {
+    context = await super._prepareEffectContext(context, options);
+    context.distance = {
+      data: context.source.teleport.override ? context.source.teleport : {
+        value: Number.isFinite(this.activity.teleport.value) ? this.activity.teleport.value : "∞",
+        units: this.activity.teleport.units
+      },
+      disabled: !context.source.teleport.override
+    };
+    return context;
+  }
 }

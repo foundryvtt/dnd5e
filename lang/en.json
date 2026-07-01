@@ -5236,16 +5236,15 @@
     "teleport": {
       "label": "Distance",
       "hint": "Set the maximum teleport distance.",
-      "useRange": {
-        "label": "Use Range",
-        "hint": "Use the activity's configured range as the maximum teleport distance."
+      "override": {
+        "label": "Override",
+        "hint": "Override the activity's normal range and manually set the maximum teleport distance."
       },
-      "unlimited": {
-        "label": "Unlimited",
-        "hint": "Ignore distance limits when teleporting."
+      "units": {
+        "label": "Distance Unit"
       },
       "value": {
-        "label": "Distance"
+        "label": "Maximum Distance"
       }
     }
   },
@@ -5817,9 +5816,6 @@
     }
   }
 },
-
-"DND5E.Unknown": "Unknown",
-"DND5E.Unlimited": "Unlimited",
 
 "DND5E.USAGE": {
   "SECTION": {

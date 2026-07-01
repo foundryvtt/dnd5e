@@ -45,8 +45,8 @@ export default class TeleportActivity extends ActivityMixin(TeleportActivityData
    * @type {boolean}
    */
   get canPlanTeleport() {
-    return this.teleport?.unlimited || ((this.teleport?.units in CONFIG.DND5E.movementUnits)
-      && Number.isFinite(this.teleport?.value) && (this.teleport.value > 0));
+    return !Number.isFinite(this.teleport.value)
+      || ((this.teleport.units in CONFIG.DND5E.movementUnits) && (this.teleport.value > 0));
   }
 
   /* -------------------------------------------- */
@@ -97,7 +97,7 @@ export default class TeleportActivity extends ActivityMixin(TeleportActivityData
     const config = { maxDistance, tokens };
 
     /**
-     * A hook event that fires after teleport movement has been planned, but before tokens have been moved.
+     * A hook event that fires before teleport movement has been planned.
      * @function dnd5e.preTeleport
      * @memberof hookEvents
      * @param {TeleportActivity} activity                          The activity that is performing the teleportation.
@@ -151,9 +151,9 @@ export default class TeleportActivity extends ActivityMixin(TeleportActivityData
    * @returns {number|null}
    */
   #getSceneMaxDistance() {
-    if ( this.teleport?.unlimited ) return Infinity;
+    if ( !Number.isFinite(this.teleport.value) ) return Infinity;
     const sceneUnits = canvas.grid?.units;
-    if ( !(this.teleport?.units in CONFIG.DND5E.movementUnits) || !(this.teleport?.value > 0)
+    if ( !(this.teleport.units in CONFIG.DND5E.movementUnits) || !(this.teleport.value > 0)
       || !(sceneUnits in CONFIG.DND5E.movementUnits) ) return null;
     return convertLength(this.teleport.value, this.teleport.units, sceneUnits);
   }
