@@ -728,7 +728,7 @@ export function getTargetDescriptors() {
  * Get currently selected tokens in the scene or user's character's tokens.
  * @param {Actor5e} [actor]                   Only allow tokens associated with this specific actor.
  * @param {object} [options={}]
- * @param {boolean} [options=checkBaseActor]  Also include tokens whose base actor matches the provided actor.
+ * @param {boolean} [options.checkBaseActor]  Also include tokens whose base actor matches the provided actor.
  * @returns {Token5e[]}
  */
 export function getSceneTargets(actor, { checkBaseActor }={}) {

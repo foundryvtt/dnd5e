@@ -205,7 +205,7 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
   async #transformToForm(profileId) {
     if ( this.transform.mode !== "form" ) return;
     const profile = this.applicableEffects.find(e => e._id === profileId);
-    if ( !profile && !this.transform.forrmless ) return;
+    if ( !profile && !this.transform.formless ) return;
 
     let targets = getSceneTargets(this.actor, { checkBaseActor: true }).map(t => t.actor);
     if ( !targets.length ) targets.push(this.actor);
