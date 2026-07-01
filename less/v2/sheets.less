@@ -281,6 +281,32 @@ body.detached .dnd5e2.sheet .tab { max-height: unset; }
 }
 
 /* ---------------------------------- */
+/*  Adventure Importer                */
+/* ---------------------------------- */
+
+.dnd5e2.adventure-importer {
+  [data-application-part="body"] { gap: 10px; }
+  .adventure-contents {
+    display: grid;
+    grid-template-areas:
+      "overview controls"
+      "overview options";
+    gap: 1rem 2rem;
+
+    .adventure-overview { grid-area: overview; }
+    .import-controls { grid-area: controls; }
+    .import-options { grid-area: options; }
+
+    h2 { font-size: var(--font-h2-size); }
+  }
+  .import-controls .form-group { margin-block-end: 4px; }
+}
+
+.dnd5e2.adventure-quickstart {
+  .standard-form .form-group label { flex: 6; }
+}
+
+/* ---------------------------------- */
 /*  Roll Table Sheets                 */
 /* ---------------------------------- */
 
