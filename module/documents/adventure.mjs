@@ -21,7 +21,7 @@ export default class Adventure5e extends foundry.documents.Adventure {
   get importActions() {
     let actions = this.getFlag("dnd5e", "importActions")
       ?? CONFIG.DND5E.adventure.config[this.uuid]?.importActions
-      ?? CONFIG.DND5E.adventure.config[this.compendium.metadata.packageName]?.importActions
+      ?? CONFIG.DND5E.adventure.config[this.compendium?.metadata.packageName]?.importActions
       ?? [];
 
     actions = actions

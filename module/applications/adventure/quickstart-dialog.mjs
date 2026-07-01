@@ -107,7 +107,7 @@ export default class AdventureQuickstartDialog extends Dialog5e {
   /* -------------------------------------------- */
 
   /**
-   * Run during the setup hook to present post-quickstart dialogs for each quickstarted adventure.
+   * Run during the ready hook to present post-quickstart dialogs for each quickstarted adventure.
    */
   static async handleQuickstart() {
     if ( !game.user.isGM ) return;

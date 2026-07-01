@@ -138,7 +138,7 @@
 
 /**
  * @typedef AdventureConfiguration
- * @param {AdventureImportAction[]} importActions  Actions performed when the adventure is imported.
+ * @property {AdventureImportAction[]} importActions  Actions performed when the adventure is imported.
  */
 
 /* -------------------------------------------- */
