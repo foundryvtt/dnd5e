@@ -12,7 +12,8 @@
 // Import Configuration
 import DND5E from "./module/config.mjs";
 import {
-  applyLegacyRules, registerDeferredSettings, registerSystemKeybindings, registerSystemSettings
+  applyLegacyRules, disableExhaustionAutomation, registerDeferredSettings, registerSystemKeybindings,
+  registerSystemSettings
 } from "./module/settings.mjs";
 
 // Import Submodules
@@ -109,6 +110,9 @@ Hooks.once("init", function() {
 
   // Legacy rules.
   if ( dnd5e.settings.rulesVersion === "legacy" ) applyLegacyRules();
+
+  // Remove exhaustion automation if disabled. Must run after legacy rules are applied.
+  if ( dnd5e.settings.disableExhaustion ) disableExhaustionAutomation();
 
   // Register system
   DND5E.SPELL_LISTS.forEach(uuid => dnd5e.registry.spellLists.register(uuid));

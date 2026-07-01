@@ -148,6 +148,17 @@ export function registerSystemSettings() {
     type: Boolean
   });
 
+  // Disable Exhaustion Automation
+  game.settings.register("dnd5e", "disableExhaustion", {
+    name: "SETTINGS.5eNoExhaustionN",
+    hint: "SETTINGS.5eNoExhaustionL",
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean,
+    requiresReload: true
+  });
+
   // Collapse Item Cards (by default)
   game.settings.register("dnd5e", "autoCollapseItemCards", {
     name: "SETTINGS.5eAutoCollapseCardN",
@@ -771,6 +782,29 @@ export function applyLegacyRules() {
 
   // Swap spell lists.
   DND5E.SPELL_LISTS = LEGACY.SPELL_LISTS;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Disable exhaustion automation if applicable.
+ */
+export function disableExhaustionAutomation() {
+  const DND5E = CONFIG.DND5E;
+
+  // Roll and speed reductions (modern) and death at maximum level.
+  delete DND5E.conditionTypes.exhaustion.reduction;
+  delete DND5E.conditionTypes.exhaustion.conditions;
+
+  // Graded condition effects (legacy).
+  for ( const effects of Object.values(DND5E.conditionEffects) ) {
+    for ( const key of effects ) {
+      if ( key.startsWith("exhaustion-") ) effects.delete(key);
+    }
+  }
+
+  // Exhaustion recovered on a long rest.
+  delete DND5E.restTypes.long.exhaustionDelta;
 }
 
 /* -------------------------------------------- */
