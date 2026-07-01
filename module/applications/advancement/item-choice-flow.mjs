@@ -233,7 +233,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
       return;
     }
 
-    const filters = { locked: { additional: {}, documentClass: "Item" } };
+    const filters = { locked: { additional: {}, documentClass: "Item", exclusive: true } };
 
     // Apply restrictions based on type
     if ( config.type ) {
@@ -267,6 +267,14 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     // Apply restrictions based on spell list
     if ( (config.type === "spell") && config.restriction.list.size ) {
       filters.locked.additional.spelllist = config.restriction.list.reduce((obj, list) => {
+        obj[list] = 1;
+        return obj;
+      }, {});
+    }
+
+    // Apply restrictions based on spell school
+    if ( (config.type === "spell") && config.restriction.school.size ) {
+      filters.locked.additional.school = config.restriction.school.reduce((obj, list) => {
         obj[list] = 1;
         return obj;
       }, {});

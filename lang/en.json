@@ -571,6 +571,10 @@
           "hint": "Only allow spells from these lists.",
           "label": "Spell Lists"
         },
+        "school": {
+          "hint": "Only allow spells from these schools.",
+          "label": "Spell Schools"
+        },
         "subtype": {
           "label": "Subtype"
         },
@@ -600,7 +604,8 @@
       "NoOriginal": "Previously selected choice no longer available for replacement.",
       "SpellLevelAvailable": "Only {level} or lower spells can be chosen for this advancement.",
       "SpellLevelSpecific": "Only {level} spells can be chosen for this advancement.",
-      "SpellList": "Only spells available on the {lists} spell list can be chosen for this advancement."
+      "SpellList": "Only spells available on the {lists} spell list can be chosen for this advancement.",
+      "SpellSchool": "Only spells of the {schools} school can be chosen for this advancement."
     }
   },
   "ItemGrant": {

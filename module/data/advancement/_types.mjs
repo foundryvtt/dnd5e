@@ -40,6 +40,7 @@
  * @property {object} restriction
  * @property {"available"|number} restriction.level           Level of spell allowed.
  * @property {Set<string>} restriction.list                   Spell lists from which a spell must be selected.
+ * @property {Set<string>} restriction.school                 Spell schools from which a spell must be selected.
  * @property {string} restriction.subtype                     Item sub-type allowed.
  * @property {string} restriction.type                        Specific item type allowed.
  * @property {"a"|"m"} sorting                                Sorting mode for the item list.
