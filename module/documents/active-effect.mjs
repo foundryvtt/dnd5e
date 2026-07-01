@@ -60,6 +60,12 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    */
   static SHIM_FIELDS = {
     "system.attributes.movement.speed": { key: "system.attributes.movement.walk" },
+    "system.attributes.movement.burrow": { key: "system.attributes.movement.speeds.burrow" },
+    "system.attributes.movement.climb": { key: "system.attributes.movement.speeds.climb" },
+    "system.attributes.movement.fly": { key: "system.attributes.movement.speeds.fly" },
+    "system.attributes.movement.jump": { key: "system.attributes.movement.speeds.jump" },
+    "system.attributes.movement.swim": { key: "system.attributes.movement.speeds.swim" },
+    "system.attributes.movement.walk": { key: "system.attributes.movement.speeds.walk" },
     "system.attributes.senses.darkvision": { key: "system.attributes.senses.ranges.darkvision" },
     "system.attributes.senses.blindsight": { key: "system.attributes.senses.ranges.blindsight" },
     "system.attributes.senses.tremorsense": { key: "system.attributes.senses.ranges.tremorsense" },

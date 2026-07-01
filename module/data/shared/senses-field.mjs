@@ -3,6 +3,10 @@ import MappingField from "../fields/mapping-field.mjs";
 const { NumberField, StringField } = foundry.data.fields;
 
 /**
+ * @import { SensesData } from "./_types.mjs";
+ */
+
+/**
  * Field for storing senses data.
  */
 export default class SensesField extends foundry.data.fields.SchemaField {

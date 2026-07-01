@@ -573,7 +573,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
     // Speed
     context.speed = Object.entries(CONFIG.DND5E.movementTypes).reduce((obj, [k, { hidden, label }]) => {
       if ( hidden ) return obj;
-      const value = attributes.movement[k];
+      const value = attributes.movement.speeds[k];
       if ( (k === "fly") && attributes.movement.hover ) {
         label = _loc("DND5E.MOVEMENT.HoverSpeed", { speed: label });
       }

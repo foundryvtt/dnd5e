@@ -3584,19 +3584,6 @@ preLocalize("cover");
 /* -------------------------------------------- */
 
 /**
- * A selection of actor attributes that can be tracked on token resource bars.
- * @type {string[]}
- * @deprecated since v10
- */
-DND5E.trackableAttributes = [
-  "attributes.ac.value", "attributes.init.bonus", "attributes.movement", "attributes.senses",
-  "attributes.spell.attack", "attributes.spell.dc", "attributes.spell.level", "details.cr",
-  "details.xp.value", "skills.*.passive", "abilities.*.value"
-];
-
-/* -------------------------------------------- */
-
-/**
  * A selection of actor and item attributes that are valid targets for item resource consumption.
  * @type {string[]}
  */

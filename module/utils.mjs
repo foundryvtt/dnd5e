@@ -1329,7 +1329,7 @@ export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemNa
     return item?.name ?? getUnknownLabel(attr, { actor, item });
   }
 
-  // Check if the attribute is already in cache.
+  // Check if the attribute is already in cache
   let label = item ? null : _attributeLabelCache.actor.get(attr);
   if ( label ) return label;
   let name;
@@ -1386,12 +1386,17 @@ export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemNa
   else if ( attr === "attributes.spell.attack" ) label = "DND5E.SpellAttackBonus";
   else if ( attr === "attributes.spell.dc" ) label = "DND5E.SpellDC";
 
-  // Abilities.
+  // Abilities
   else if ( attr.startsWith("abilities.") || attr.startsWith("attributes.ac.clamped.") ) {
     const [key, ...keyPath] = attr.split(".").slice(attr.startsWith("abilities.") ? 1 : 3);
     const mapping = dnd5e.dataModels.actor.CharacterData.schema.getField("abilities");
     label = mapping.getFieldLabel(key, keyPath.toReversed());
   }
+
+  // Movement
+  else if ( attr.startsWith("attributes.movement.speeds.") ) {
+    label = CONFIG.DND5E.movementTypes[attr.split(".")[3]]?.label;
+  } else if ( attr.startsWith("attributes.movement.") ) label = CONFIG.DND5E.movementTypes[attr.split(".")[2]]?.label;
 
   // Senses
   else if ( attr.startsWith("attributes.senses.ranges.") ) label = CONFIG.DND5E.senses[attr.split(".")[3]]?.label;
@@ -1422,7 +1427,7 @@ export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemNa
     label = mapping.getFieldLabel(key, keyPath.toReversed());
   }
 
-  // Spell slots.
+  // Spell slots
   else if ( attr.startsWith("spells.") ) {
     const [, key] = attr.split(".");
     if ( !/spell\d+/.test(key) ) label = `DND5E.SpellSlots${key.capitalize()}`;
@@ -1439,7 +1444,7 @@ export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemNa
     label = CONFIG.DND5E.currencies[key]?.label;
   }
 
-  // Attempt to find the attribute in a data model.
+  // Attempt to find the attribute in a data model
   if ( !label && (type === "actor") ) label = getSchemaLabel(attr, "Actor", actor);
 
   // Call hook if no label is available

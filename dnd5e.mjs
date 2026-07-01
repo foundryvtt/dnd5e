@@ -284,7 +284,7 @@ function _configureTrackableAttributes() {
     bar: [],
     value: [
       ...Object.keys(DND5E.abilities).map(ability => `abilities.${ability}.value`),
-      ...Object.keys(DND5E.movementTypes).map(movement => `attributes.movement.${movement}`),
+      ...Object.keys(DND5E.movementTypes).map(movement => `attributes.movement.speeds.${movement}`),
       "attributes.ac.value", "attributes.init.total"
     ]
   };
@@ -439,7 +439,6 @@ Hooks.once("setup", function() {
   _configureTrackableAttributes();
   _configureConsumableAttributes();
 
-  CONFIG.DND5E.trackableAttributes = expandAttributeList(CONFIG.DND5E.trackableAttributes);
   Tooltips5e.activateListeners();
   game.dnd5e.tooltips.observe();
 
@@ -463,20 +462,6 @@ Hooks.once("setup", function() {
   `;
   document.head.append(style);
 });
-
-/* --------------------------------------------- */
-
-/**
- * Expand a list of attribute paths into an object that can be traversed.
- * @param {string[]} attributes  The initial attributes configuration.
- * @returns {object}  The expanded object structure.
- */
-function expandAttributeList(attributes) {
-  return attributes.reduce((obj, attr) => {
-    foundry.utils.setProperty(obj, attr, true);
-    return obj;
-  }, {});
-}
 
 /* --------------------------------------------- */
 
