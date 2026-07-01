@@ -27,6 +27,7 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
       hint: "DND5E.ENCHANT.Hint",
       sheetClass: EnchantSheet,
       usage: {
+        applyEffectsInChat: false,
         dialog: EnchantUsageDialog
       }
     }, { inplace: false })
@@ -83,7 +84,6 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
   /** @inheritDoc */
   _finalizeMessageConfig(usageConfig, messageConfig, results) {
     super._finalizeMessageConfig(usageConfig, messageConfig, results);
-    delete messageConfig.data.system?.effects;
 
     // Store selected enchantment profile in message flag
     if ( usageConfig.enchantmentProfile ) foundry.utils.setProperty(

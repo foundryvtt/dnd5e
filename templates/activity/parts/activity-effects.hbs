@@ -6,6 +6,9 @@
             <i class="fas fa-plus" inert></i>
         </button>
     </legend>
+    {{#if effects.fields.length}}
+    {{> "dnd5e.fieldlist" effects.fields }}
+    {{/if}}
     <multi-select name="appliedLocalEffects" class="hidden-tags">{{ selectOptions allEffects }}</multi-select>
     <ul class="separated-list effects-list flexcol unlist">
         {{#each appliedEffects}}
@@ -19,8 +22,10 @@
         </li>
         {{/each}}
     </ul>
+    {{#unless (eq remote false)}}
     <document-tags name="appliedRemoteEffects" class="hidden-tags drop-area" type="ActiveEffect"
                    data-drop-hint="{{ localize (ifThen labels.drop labels.drop "DND5E.EFFECT.DropHint") }}"></document-tags>
+    {{/unless}}
 </fieldset>
 
 {{#*inline ".effect"}}

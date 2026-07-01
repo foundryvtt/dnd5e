@@ -39,6 +39,7 @@ export default function ActivityMixin(Base) {
       sheetClass: ActivitySheet,
       usage: {
         actions: {},
+        applyEffectsInChat: true,
         chatCard: "systems/dnd5e/templates/chat/activity-card.hbs",
         dialog: ActivityUsageDialog
       }
@@ -202,9 +203,6 @@ export default function ActivityMixin(Base) {
         data: {
           flags: {
             dnd5e: this.messageFlags
-          },
-          system: {
-            effects: this.applicableEffects?.map(e => e.relativeUUID)
           }
         },
         hasConsumption: usageConfig.hasConsumption
@@ -719,8 +717,10 @@ export default function ActivityMixin(Base) {
      */
     _finalizeMessageConfig(usageConfig, messageConfig, results) {
       messageConfig.data.rolls = (messageConfig.data.rolls ?? []).concat(results.updates.rolls);
-      const effects = this.applicableEffects?.map(e => e.relativeUUID);
-      if ( effects ) foundry.utils.setProperty(messageConfig.data, "system.effects", effects);
+      if ( this.metadata.usage.applyEffectsInChat ) {
+        const effects = this.applicableEffects?.map(e => e.relativeUUID);
+        if ( effects ) foundry.utils.setProperty(messageConfig.data, "system.effects", effects);
+      }
     }
 
     /* -------------------------------------------- */
