@@ -2,7 +2,7 @@
     <legend>{{ localize "DND5E.TELEPORT.FIELDS.teleport.label" }}</legend>
     {{ formField fields.teleport.fields.override value=source.teleport.override input=inputs.createCheckboxInput
                  rootId=partId }}
-    <div class="form-group split-group">{{log distance}}
+    <div class="form-group split-group">
         <label>{{ localize "DND5E.TELEPORT.FIELDS.teleport.value.label" }}</label>
         <div class="form-fields">
             {{ formField fields.teleport.fields.value value=distance.data.value label=(localize "DND5E.Value")
