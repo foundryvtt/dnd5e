@@ -220,9 +220,8 @@
 /**
  * @typedef {ActivityData} TeleportActivityData
  * @property {object} teleport
- * @property {boolean} teleport.useRange    Use the activity's range as the maximum teleport distance.
+ * @property {boolean} teleport.override    Use custom maximum distance rather than the activity's range.
  * @property {string} teleport.units        Units used to measure teleport distance.
- * @property {boolean} teleport.unlimited   Ignore teleport distance limits.
  * @property {string} teleport.value        Maximum distance the token can teleport.
  */
 

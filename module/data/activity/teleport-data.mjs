@@ -19,9 +19,8 @@ export default class BaseTeleportActivityData extends BaseActivityData {
     return {
       ...super.defineSchema(),
       teleport: new SchemaField({
-        useRange: new BooleanField({ initial: true }),
+        override: new BooleanField(),
         units: new StringField({ required: true, blank: false, initial: () => defaultUnits("length") }),
-        unlimited: new BooleanField(),
         value: new FormulaField({ deterministic: true })
       })
     };
@@ -36,14 +35,17 @@ export default class BaseTeleportActivityData extends BaseActivityData {
     rollData ??= this.getRollData({ deterministic: true });
     super.prepareFinalData(rollData);
 
-    if ( this.teleport.useRange ) {
-      this.teleport.unlimited = this.range.units === "any";
-      if ( this.range.scalar ) {
+    if ( !this.teleport.override ) {
+      if ( this.range.units === "any" ) this.teleport.value = Infinity;
+      else if ( this.range.scalar ) {
         this.teleport.units = this.range.units;
         this.teleport.value = this.range.value;
       }
-    } else if ( !this.teleport.unlimited ) {
+      else this.teleport.value = 0;
+    } else if ( this.teleport.value ) {
       prepareFormulaValue(this, "teleport.value", "DND5E.TELEPORT.FIELDS.teleport.value.label", rollData);
     }
+
+    if ( this.teleport.value === "" ) this.teleport.value = Infinity;
   }
 }
