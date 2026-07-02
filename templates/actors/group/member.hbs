@@ -21,7 +21,7 @@
             {{#if max}}
             <div class="hp-bar bar">
                 <label>{{ localize "DND5E.HP" }}</label>
-                <div class="meter hit-points progress" role="meter" aria-valuemin="0"
+                <div class="meter hit-points progress meter-sm" role="meter" aria-valuemin="0"
                      aria-valuenow="{{ value }}" aria-valuemax="{{ max }}"
                      style="--bar-percentage: {{ pct }}%"></div>
                 <div class="values">
@@ -37,7 +37,7 @@
             {{#with system.attributes.hd}}
             <div class="hd-bar bar">
                 <label>{{ localize "DND5E.HITDICE.Abbreviation" }}</label>
-                <div class="meter hit-dice progress" role="meter" aria-valuemin="0"
+                <div class="meter hit-dice progress meter-sm" role="meter" aria-valuemin="0"
                      aria-valuenow="{{ value }}" aria-valuemax="{{ max }}"
                      style="--bar-percentage: {{ pct }}%"></div>
                 <div class="values">

@@ -742,54 +742,6 @@
     + .meter-group { margin-block-start: .5rem; }
   }
 
-  .meter {
-    border: 1px solid var(--dnd5e-color-gold);
-    border-radius: 4px;
-    background: var(--meter-background);
-    font-family: var(--dnd5e-font-roboto);
-    font-weight: bold;
-    box-shadow: inset 0 0 16px rgb(0 0 0 / 25%);
-    position: relative;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-
-    &.progress, .progress {
-      --bar-percentage: 0%;
-      --border-width: 3px;
-      overflow: hidden;
-
-      &::before {
-        content: "";
-        position: absolute;
-        block-size: 100%;
-        inline-size: var(--bar-percentage);
-        box-shadow: 0 0 6px var(--dnd5e-shadow-45);
-        clip-path: polygon(0 0, calc(100% + 6px) 0, calc(100% + 6px) 100%, 0 100%);
-      }
-    }
-
-    .label {
-      inline-size: 100%;
-      display: flex;
-      align-items: center;
-      gap: .25rem;
-      position: relative;
-      padding-inline-start: 8px;
-      padding-inline-end: 12px;
-      color: var(--color-text-light-0);
-
-      &[hidden] { display: none; }
-      .value, .max { text-shadow: 0 0 4px var(--dnd5e-color-gold); }
-      .separator { color: var(--dnd5e-color-gold); }
-      .bonus {
-        margin-inline-start: auto;
-        font-size: var(--font-size-14);
-        opacity: .8;
-      }
-    }
-  }
-
   /* ---------------------------------- */
   /*  Slots                             */
   /* ---------------------------------- */
@@ -1894,6 +1846,20 @@ dialog.dnd5e2.application {
 .rest.application {
   .window-content > section.flexcol { gap: 12px; }
   [data-action="rollHitDie"] { flex: 0; }
+
+  .bar.hit-points {
+    margin: 4px 0 0 -4px;
+
+    .meter:not(.full)::before { border-radius: 2px 0 0 2px; }
+
+    .progress-potential-min, .progress-potential-max {
+      position: absolute;
+      inset-block: 1px;
+    }
+
+    .progress-potential-min { background: var(--dnd5e-color-hp-2); }
+    .progress-potential-max { background: var(--dnd5e-color-hp-1); }
+  }
 }
 
 /* ---------------------------------- */
