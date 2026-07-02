@@ -360,19 +360,25 @@ export default class ContainerSheet extends ItemSheet5e {
    */
   _filterItems(items, filters) {
     const actions = ["action", "bonus", "reaction"];
+    if ( !filters.size ) return items.filter(item => this._filterItem(item, filters) !== false);
+    const { included, excluded } = ItemListControlsElement.partitionFilters(filters);
+    const actionSet = new Set(actions);
+    const actionFilter = actionSet.intersection(included);
+    const actionExclude = actionSet.intersection(excluded);
+    const passes = ItemListControlsElement.passesFilter;
+
     return items.filter(item => {
       // Subclass-specific logic.
       const filtered = this._filterItem(item, filters);
       if ( filtered !== undefined ) return filtered;
 
       // Action usage.
-      for ( const action of actions ) {
-        if ( filters.has(action) && (item.system.activation?.type !== action) ) return false;
-      }
+      if ( actionFilter.size && !actionFilter.has(item.system.activation?.type) ) return false;
+      if ( actionExclude.size && actionExclude.has(item.system.activation?.type) ) return false;
 
       // Equipment-specific filters.
-      if ( filters.has("equipped") && (item.system.equipped !== true) ) return false;
-      if ( filters.has("mgc") && !item.system.properties?.has("mgc") ) return false;
+      if ( !passes(included, excluded, "equipped", item.system.equipped === true) ) return false;
+      if ( !passes(included, excluded, "mgc", item.system.properties?.has("mgc")) ) return false;
 
       return true;
     });
@@ -399,7 +405,8 @@ export default class ContainerSheet extends ItemSheet5e {
      * @param {Set<string>} filters                     Filters applied to the Item.
      * @returns {false|void} Return false to hide the item, otherwise other filters will continue to apply.
      */
-    if ( Hooks.call("dnd5e.filterItem", this, item, filters) === false ) return false;
+    if ( ("dnd5e.filterItem" in Hooks.events)
+      && Hooks.call("dnd5e.filterItem", this, item, filters) === false ) return false;
   }
 
   /* -------------------------------------------- */

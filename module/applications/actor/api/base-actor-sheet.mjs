@@ -37,6 +37,7 @@ const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fie
 /**
  * @import { DropEffectValue } from "../../../_types.mjs"
  * @import { InventorySectionDescriptor } from "../../components/_types.mjs";
+ * @import ContainerSheet from "../../item/container-sheet.mjs";
  */
 
 /**
@@ -2042,11 +2043,14 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   _filterItems(items, filters) {
     const actions = ["action", "bonus", "reaction", "lair", "legendary"];
     const recoveries = ["lr", "sr"];
-    const spellSchools = new Set(Object.keys(CONFIG.DND5E.spellSchools));
-    const schoolFilter = spellSchools.intersection(filters);
-    const spellcastingClasses = new Set(Object.keys(this.actor.spellcastingClasses));
-    const classFilter = spellcastingClasses.intersection(filters);
-    const actionFilter = new Set(actions).intersection(filters);
+    if ( !filters.size ) return items.filter(item => this._filterItem(item, filters) !== false);
+    const { included, excluded } = ItemListControlsElement.partitionFilters(filters);
+    const schoolFilter = new Set(Object.keys(CONFIG.DND5E.spellSchools)).intersection(included);
+    const classFilter = new Set(Object.keys(this.actor.spellcastingClasses)).intersection(included);
+    const actionSet = new Set(actions);
+    const actionFilter = actionSet.intersection(included);
+    const actionExclude = actionSet.intersection(excluded);
+    const passes = ItemListControlsElement.passesFilter;
 
     return items.filter(item => {
 
@@ -2058,27 +2062,40 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       if ( actionFilter.size ) {
         if ( item.type === "spell" ) {
           if ( !actionFilter.has(item.system.activation.type) ) return false;
+        } else if ( !item.system.activities?.size
+          || !item.system.activities.some(a => actionFilter.has(a.activation?.type)) ) {
+          return false;
         }
-        else if ( !item.system.activities?.size
-          || !item.system.activities.some(a => actionFilter.has(a.activation?.type)) ) return false;
+      }
+      if ( actionExclude.size ) {
+        if ( item.type === "spell" ) {
+          if ( actionExclude.has(item.system.activation.type) ) return false;
+        } else if ( item.system.activities?.some(a => actionExclude.has(a.activation?.type)) ) {
+          return false;
+        }
       }
 
       // Spell-specific filters
-      if ( filters.has("ritual") && !item.system.properties?.has("ritual") ) return false;
-      if ( filters.has("concentration") && !item.system.properties?.has("concentration") ) return false;
+      if ( !passes(included, excluded, "ritual", item.system.properties?.has("ritual")) ) return false;
+      if ( !passes(included, excluded, "concentration", item.system.properties?.has("concentration")) ) return false;
       if ( schoolFilter.size && !schoolFilter.has(item.system.school) ) return false;
+      if ( excluded.has(item.system.school) ) return false;
       if ( classFilter.size && !classFilter.has(item.system.classIdentifier) ) return false;
-      if ( filters.has("prepared") ) return item.system.canPrepare && item.system.prepared;
+      if ( excluded.has(item.system.classIdentifier) ) return false;
+      if ( !passes(included, excluded, "prepared", item.system.canPrepare && item.system.prepared) ) return false;
 
       // Equipment-specific filters
-      if ( filters.has("equipped") && (item.system.equipped !== true) ) return false;
-      if ( filters.has("mgc") && !item.system.properties?.has("mgc") ) return false;
+      if ( !passes(included, excluded, "equipped", item.system.equipped === true) ) return false;
+      if ( !passes(included, excluded, "mgc", item.system.properties?.has("mgc")) ) return false;
 
       // Recovery
       for ( const f of recoveries ) {
-        if ( !filters.has(f) ) continue;
+        const inc = included.has(f);
+        const exc = excluded.has(f);
+        if ( !inc && !exc ) continue;
         if ( !item.system.uses?.recovery.length ) return false;
-        if ( item.system.uses.recovery.every(r => r.period !== f) ) return false;
+        if ( inc && item.system.uses.recovery.every(r => r.period !== f) ) return false;
+        if ( exc && item.system.uses.recovery.every(r => r.period === f) ) return false;
       }
 
       return true;
@@ -2095,8 +2112,6 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @protected
    */
   _filterItem(item, filters) {
-    /** @import ContainerSheet from "../../item/container-sheet.mjs" */
-
     /**
      * A hook event that fires when a sheet filters an item.
      * @function dnd5e.filterItem
@@ -2106,7 +2121,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
      * @param {Set<string>} filters                     Filters applied to the Item.
      * @returns {false|void} Return false to hide the item, otherwise other filters will continue to apply.
      */
-    if ( Hooks.call("dnd5e.filterItem", this, item, filters) === false ) return false;
+    if ( ("dnd5e.filterItem" in Hooks.events)
+      && (Hooks.call("dnd5e.filterItem", this, item, filters) === false) ) return false;
   }
 
   /* -------------------------------------------- */
