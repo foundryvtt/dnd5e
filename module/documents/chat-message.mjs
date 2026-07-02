@@ -689,7 +689,7 @@ export default class ChatMessage5e extends ChatMessage {
     if ( roll?.concentrationBroken ) content.insertAdjacentHTML("beforeend", `
       <p class="supplement">
         <strong>${_loc("DND5E.ROLL.Status")}</strong>
-        ${_loc("DND5E.ConcentrationLost")}
+        ${_loc("DND5E.CONCENTRATION.Lost")}
       </p>
     `);
 
@@ -699,7 +699,7 @@ export default class ChatMessage5e extends ChatMessage {
         <div class="card-buttons">
           <button type="button">
             <i class="fa-solid fa-ban" inert></i>
-            ${_loc("DND5E.ConcentrationBreak")}
+            ${_loc("DND5E.CONCENTRATION.Action.Break")}
           </button>
         </div>
       `);

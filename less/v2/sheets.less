@@ -116,15 +116,6 @@ body.detached .dnd5e2.sheet .tab { max-height: unset; }
   /*  Sheet Body                        */
   /* ---------------------------------- */
 
-  .meter.progress::before {
-    // Becomes more red the closer it is to 100% encumbrance.
-    --bar-color-2: color-mix(in oklab, var(--dnd5e-color-blue), var(--dnd5e-color-maroon) var(--bar-percentage));
-    --bar-color-1: color-mix(in oklab, var(--bar-color-2), black 33%);
-    --bar-color-3: color-mix(in oklab, var(--bar-color-2), black 20%);
-    background: linear-gradient(to right, var(--bar-color-1), var(--bar-color-2));
-    border-right: var(--border-width) solid var(--bar-color-3);
-  }
-
   /* Encumbrance */
   .encumbrance, .difficulty {
     display: flex;
@@ -278,6 +269,32 @@ body.detached .dnd5e2.sheet .tab { max-height: unset; }
   }
 
   &:not(.locked) .rollable.draggable { cursor: var(--cursor-pointer); }
+}
+
+/* ---------------------------------- */
+/*  Adventure Importer                */
+/* ---------------------------------- */
+
+.dnd5e2.adventure-importer {
+  [data-application-part="body"] { gap: 10px; }
+  .adventure-contents {
+    display: grid;
+    grid-template-areas:
+      "overview controls"
+      "overview options";
+    gap: 1rem 2rem;
+
+    .adventure-overview { grid-area: overview; }
+    .import-controls { grid-area: controls; }
+    .import-options { grid-area: options; }
+
+    h2 { font-size: var(--font-h2-size); }
+  }
+  .import-controls .form-group { margin-block-end: 4px; }
+}
+
+.dnd5e2.adventure-quickstart {
+  .standard-form .form-group label { flex: 6; }
 }
 
 /* ---------------------------------- */

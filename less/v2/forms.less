@@ -521,6 +521,7 @@
         }
       }
     }
+    &:disabled > .input-group { background: var(--input-disabled-background-color); }
   }
 
   :is(.form-group, fieldset) :is(select, input):not([type="range"]) {
@@ -569,6 +570,14 @@
   :is(file-picker, document-tags, string-tags) > button {
     height: var(--form-field-height);
     border: var(--dnd5e-border-gold);
+  }
+
+  document-tags.drop-area {
+    margin-block-start: 4px;
+    min-block-size: var(--form-field-height);
+    padding-block: 8px;
+    > .input-group { display: none; }
+    &::after { content: attr(data-drop-hint); }
   }
 
   /* Numeric Range Fields */

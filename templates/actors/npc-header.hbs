@@ -132,7 +132,7 @@
 
                 {{!-- HP --}}
                 {{#with system.attributes.hp}}
-                <div class="meter hit-points sectioned">
+                <div class="meter hit-points sectioned meter-lg">
                     <div class="progress hit-points {{#if (gt tempmax 0)}}temp-positive{{else if (lt tempmax 0)~}}
                          temp-negative{{/if}}" role="meter" aria-valuemin="0" aria-valuenow="{{ value }}"
                          aria-valuemax="{{ max }}" style="--bar-percentage: {{ pct }}%">

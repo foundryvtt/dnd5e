@@ -12,7 +12,8 @@
 // Import Configuration
 import DND5E from "./module/config.mjs";
 import {
-  applyLegacyRules, registerDeferredSettings, registerSystemKeybindings, registerSystemSettings
+  applyLegacyRules, disableExhaustionAutomation, registerDeferredSettings, registerSystemKeybindings,
+  registerSystemSettings
 } from "./module/settings.mjs";
 
 // Import Submodules
@@ -74,6 +75,7 @@ Hooks.once("init", function() {
   CONFIG.Item.documentClass = documents.Item5e;
   CONFIG.JournalEntryPage.documentClass = documents.JournalEntryPage5e;
   CONFIG.Token.documentClass = documents.TokenDocument5e;
+  CONFIG.Token.hudClass = applications.hud.TokenHUD5e;
   CONFIG.Token.objectClass = canvas.Token5e;
   CONFIG.Token.rulerClass = canvas.TokenRuler5e;
   CONFIG.Token.movement.TerrainData = dataModels.TerrainData5e;
@@ -108,6 +110,9 @@ Hooks.once("init", function() {
 
   // Legacy rules.
   if ( dnd5e.settings.rulesVersion === "legacy" ) applyLegacyRules();
+
+  // Remove exhaustion automation if disabled. Must run after legacy rules are applied.
+  if ( dnd5e.settings.disableExhaustion ) disableExhaustionAutomation();
 
   // Register system
   DND5E.SPELL_LISTS.forEach(uuid => dnd5e.registry.spellLists.register(uuid));
@@ -158,6 +163,11 @@ Hooks.once("init", function() {
     types: ["encounter"],
     makeDefault: true,
     label: "DND5E.SheetClass.Encounter"
+  });
+
+  DocumentSheetConfig.registerSheet(Adventure, "dnd5e", applications.adventure.AdventureImporter5e, {
+    canBeDefault: false,
+    label: "DND5E.SheetClass.AdventureImporter"
   });
 
   DocumentSheetConfig.unregisterSheet(Item, "core", foundry.appv1.sheets.ItemSheet);
@@ -228,9 +238,6 @@ Hooks.once("init", function() {
 
   // Enrichers
   enrichers.registerCustomEnrichers();
-
-  // Exhaustion handling
-  documents.ActiveEffect5e.registerHUDListeners();
 
   // Set up token movement actions
   documents.TokenDocument5e.registerMovementActions();
@@ -568,8 +575,19 @@ Hooks.once("ready", function() {
     dnd5e.ui.calendar.render({ force: true });
   }
 
-  // Determine whether a system migration is required and feasible
+  // Run migrations & post-import actions for quickstarted adventures
+  _handleMigration()
+    .then(() => applications.adventure.AdventureQuickstartDialog.handleQuickstart());
+});
+
+/* -------------------------------------------- */
+
+/**
+ * Determine whether a system migration is required and feasible and run it.
+ */
+async function _handleMigration() {
   if ( !game.user.isGM ) return;
+
   const cv = game.settings.get("dnd5e", "systemMigrationVersion") || game.world.flags.dnd5e?.version;
   const totalDocuments = game.actors.size + game.scenes.size + game.items.size;
   if ( !cv && totalDocuments === 0 ) return game.settings.set("dnd5e", "systemMigrationVersion", game.system.version);
@@ -584,8 +602,9 @@ Hooks.once("ready", function() {
   if ( cv && foundry.utils.isNewerVersion(game.system.flags.compatibleMigrationVersion, cv) ) {
     ui.notifications.error("MIGRATION.DND5E.Warning.VersionTooOld", { permanent: true });
   }
-  migrations.migrateWorld();
-});
+
+  await migrations.migrateWorld();
+}
 
 /* -------------------------------------------- */
 /*  System Styling                              */

@@ -37,6 +37,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
         actions: {
           placeSummons: SummonActivity.#placeSummons
         },
+        applyEffectsInChat: false,
         dialog: SummonUsageDialog
       }
     }, { inplace: false })
@@ -71,14 +72,6 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
     config.summons.creatureSize ??= this.creatureSizes.first() ?? null;
     config.summons.creatureType ??= this.creatureTypes.first() ?? null;
     return config;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _finalizeMessageConfig(usageConfig, messageConfig, results) {
-    super._finalizeMessageConfig(usageConfig, messageConfig, results);
-    delete messageConfig.data.system?.effects;
   }
 
   /* -------------------------------------------- */

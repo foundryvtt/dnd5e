@@ -148,6 +148,17 @@ export function registerSystemSettings() {
     type: Boolean
   });
 
+  // Disable Exhaustion Automation
+  game.settings.register("dnd5e", "disableExhaustion", {
+    name: "SETTINGS.5eNoExhaustionN",
+    hint: "SETTINGS.5eNoExhaustionL",
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean,
+    requiresReload: true
+  });
+
   // Collapse Item Cards (by default)
   game.settings.register("dnd5e", "autoCollapseItemCards", {
     name: "SETTINGS.5eAutoCollapseCardN",
@@ -744,6 +755,15 @@ export function applyLegacyRules() {
   DND5E.conditionEffects.initiativeDisadvantage.delete("incapacitated");
   DND5E.conditionEffects.initiativeDisadvantage.delete("surprised");
 
+  // Add exhaustion effects.
+  DND5E.conditionEffects.noMovement.add("exhaustion-5");
+  DND5E.conditionEffects.halfMovement.add("exhaustion-2");
+  DND5E.conditionEffects.halfHealth.add("exhaustion-4");
+  DND5E.conditionEffects.abilityCheckDisadvantage.add("exhaustion-1");
+  DND5E.conditionEffects.abilitySaveDisadvantage.add("exhaustion-3");
+  DND5E.conditionEffects.attackDisadvantage.add("exhaustion-3");
+  delete DND5E.conditionTypes.exhaustion.reduction;
+
   // Incapacitated creatures within 2 size categories still cannot be moved through in legacy
   delete DND5E.conditionTypes.incapacitated.neverBlockMovement;
 
@@ -762,6 +782,29 @@ export function applyLegacyRules() {
 
   // Swap spell lists.
   DND5E.SPELL_LISTS = LEGACY.SPELL_LISTS;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Disable exhaustion automation if applicable.
+ */
+export function disableExhaustionAutomation() {
+  const DND5E = CONFIG.DND5E;
+
+  // Roll and speed reductions (modern) and death at maximum level.
+  delete DND5E.conditionTypes.exhaustion.reduction;
+  delete DND5E.conditionTypes.exhaustion.conditions;
+
+  // Graded condition effects (legacy).
+  for ( const effects of Object.values(DND5E.conditionEffects) ) {
+    for ( const key of effects ) {
+      if ( key.startsWith("exhaustion-") ) effects.delete(key);
+    }
+  }
+
+  // Exhaustion recovered on a long rest.
+  delete DND5E.restTypes.long.exhaustionDelta;
 }
 
 /* -------------------------------------------- */

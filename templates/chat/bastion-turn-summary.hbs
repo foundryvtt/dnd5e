@@ -16,7 +16,7 @@
     <ul class="unlist item-summary">
         {{#each items}}
         <li class="item-tooltip" data-uuid="{{ uuid }}" data-quantity="{{ quantity }}" data-action="viewItem"
-            data-tooltip="<section class='loading' data-uuid='{{ uuid }}'><i class='fas fa-spinner fa-spin-pulse'></i></section>">
+            data-tooltip-html="{{ dnd5e-tooltip uuid=uuid }}">
             <img src="{{ img }}" alt="{{ name }}">
         </li>
         {{/each}}

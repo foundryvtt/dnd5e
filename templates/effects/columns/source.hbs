@@ -1,0 +1,10 @@
+<div class="item-detail effect-source {{#unless ctx.source}}empty{{/unless}}" data-column-id="source">
+    {{#if ctx.source}}
+    {{#if ctx.hasTooltip}}
+    <a class="item-tooltip" data-uuid="{{ ctx.source.uuid }}"
+       data-tooltip-direction="RIGHT">{{ ctx.source.name }}</a>
+    {{else}}
+    {{ ctx.source.name }}
+    {{/if}}
+    {{/if}}
+</div>
