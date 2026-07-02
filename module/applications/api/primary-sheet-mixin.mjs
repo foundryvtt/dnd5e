@@ -1,3 +1,4 @@
+import { loadingTooltip } from "../../utils.mjs";
 import DragDropApplicationMixin from "../api/drag-drop-mixin.mjs";
 import CheckboxElement from "../components/checkbox.mjs";
 import ItemSheet5e from "../item/item-sheet.mjs";
@@ -292,7 +293,7 @@ export default function PrimarySheetMixin(Base) {
      * @protected
      */
     _applyItemTooltips(element) {
-      if ( "tooltip" in element.dataset ) return;
+      if ( ("tooltip" in element.dataset) || ("tooltipHtml" in element.dataset) ) return;
       const target = element.closest("[data-item-id], [data-effect-id], [data-uuid]");
       let uuid = target.dataset.uuid;
       if ( !uuid && target.dataset.itemId ) {
@@ -304,9 +305,7 @@ export default function PrimarySheetMixin(Base) {
         uuid = collection?.get(effectId)?.uuid;
       }
       if ( !uuid ) return;
-      element.dataset.tooltip = `
-        <section class="loading" data-uuid="${uuid}"><i class="fas fa-spinner fa-spin-pulse"></i></section>
-      `;
+      element.dataset.tooltipHtml = loadingTooltip({ uuid });
       element.dataset.tooltipClass = "dnd5e2 dnd5e-tooltip item-tooltip themed theme-light";
       element.dataset.tooltipDirection ??= "LEFT";
     }

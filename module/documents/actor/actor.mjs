@@ -17,6 +17,7 @@ import SystemDocumentMixin from "../mixins/document.mjs";
 import Proficiency from "./proficiency.mjs";
 import SelectChoices from "./select-choices.mjs";
 import * as Trait from "./trait.mjs";
+import ConditionData from "../../data/active-effect/condition.mjs";
 
 /**
  * @import { RequestOptions5e } from "../../_types.mjs";
@@ -527,9 +528,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     data.name = this.name;
     data.statuses = {};
     for ( const status of this.statuses ) {
-      data.statuses[status] = status === "exhaustion"
-        ? this.system.attributes?.exhaustion ?? 1
-        : status === "concentrating" ? this.concentration.effects.size : 1;
+      if ( ConditionData.hasLevels(status) ) data.statuses[status] = this.system.conditions[status];
+      else if ( status === "concentrating" ) data.statuses[status] = this.concentration.effects.size;
+      else data.statuses[status] = 1;
     }
     return data;
   }
@@ -537,27 +538,35 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
-   * Is this actor under the effect of this property from some status or due to its level of exhaustion?
+   * Is this actor under the effect of this property from some status or due to its level of a condition?
    * @param {string} key      A key in `DND5E.conditionEffects`.
    * @returns {boolean}       Whether the actor is affected.
    */
   hasConditionEffect(key) {
     const props = CONFIG.DND5E.conditionEffects[key] ?? new Set();
-    const level = this.system.attributes?.exhaustion ?? null;
+    const conditions = this.system.conditions ?? {};
     const imms = this.system.traits?.ci?.value ?? new Set();
-    const applyExhaustion = (level !== null) && !imms.has("exhaustion")
-      && (dnd5e.settings.rulesVersion === "legacy");
-    const statuses = this.statuses;
-    const isActiveSource = k => {
-      const l = Number(k.split("-").pop());
-      return (statuses.has(k) && !imms.has(k)) || (applyExhaustion && Number.isInteger(l) && (level >= l));
+
+    const applyCondition = prop => {
+      let [status, level] = prop.split("-");
+
+      // If immune, naturally never applied.
+      if ( imms.has(status) ) return false;
+
+      // You cannot be dodging while incapacitated or while you have no movement.
+      if ( status === "dodging" ) {
+        if ( this.statuses.has("incapacitated") ) return false;
+        if ( CONFIG.DND5E.conditionEffects.noMovement?.some(applyCondition) ) return false;
+      }
+
+      // If not leveled, or not requiring a level, need only check if status is active.
+      if ( !ConditionData.hasLevels(status) || !level ) return this.statuses.has(status);
+
+      // If leveled condition, needs to be high enough.
+      return Number(level) <= conditions[status];
     };
-    const applyDodging = !statuses.has("incapacitated")
-      && !(CONFIG.DND5E.conditionEffects.noMovement?.some(isActiveSource) ?? false);
-    return props.some(k => {
-      if ( (k === "dodging") && !applyDodging ) return false;
-      return isActiveSource(k);
-    });
+
+    return props.some(applyCondition);
   }
 
   /* -------------------------------------------- */
@@ -675,7 +684,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const model = CONFIG.DND5E.spellcasting[type];
 
     // Otherwise proceed with calculation.
-    model.prepareSlots(spells, actor, progression);
+    if ( model.slots ) model.prepareSlots(spells, actor, progression);
   }
 
   /* -------------------------------------------- */
@@ -1148,7 +1157,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( !isConcentrating ) return null;
 
     const label = `<i class="fa-solid fa-ban" inert></i>${
-      _loc("DND5E.ConcentrationBreak")
+      _loc("DND5E.CONCENTRATION.Action.Break")
     }`;
 
     return ChatMessage.implementation.create({
@@ -1185,18 +1194,40 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
-   * Add the reduction to this roll from exhaustion if using the modern rules.
+   * Add the reduction to this roll from conditions.
    * @param {string[]} parts  Roll parts.
    * @param {object} data     Roll data.
    */
   addRollExhaustion(parts, data) {
-    if ( (dnd5e.settings.rulesVersion !== "modern") || !this.system.attributes?.exhaustion
-      || this.system.traits?.ci?.value?.has("exhaustion") ) return;
-    const amount = this.system.attributes.exhaustion * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.rolls ?? 0);
-    if ( amount ) {
-      parts.push("@exhaustion");
-      data.exhaustion = -amount;
-    }
+    foundry.utils.logCompatibilityWarning(
+      "The `addRollExhaustion` method has been deprecated in favor of a `addConditionRollReduction`.",
+      { since: "DnD5e 6.0", until: "DnD5e 6.2", once: true }
+    );
+    this.addConditionRollReduction(parts, data);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Add the reduction to this roll from conditions.
+   * @param {string[]} parts  Roll parts.
+   * @param {object} data     Roll data.
+   */
+  addConditionRollReduction(parts, data) {
+    const immunities = this.system.traits?.ci?.value ?? new Set();
+    this.statuses.difference(immunities).forEach(status => {
+      const reduction = CONFIG.DND5E.conditionTypes[status]?.reduction?.rolls ?? 0;
+      if ( !reduction ) return;
+
+      const levels = ConditionData.hasLevels(status) ? (this.system.conditions[status] ?? 0) : 1;
+      const penalty = levels * reduction;
+
+      if ( penalty ) {
+        parts.push(`@reductions.${status}`);
+        data.reductions ??= {};
+        data.reductions[status] = -penalty;
+      }
+    });
   }
 
   /* -------------------------------------------- */
@@ -1401,8 +1432,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       abilityCheckBonus: this.system.bonuses?.abilities?.check
     }, { ...rollData });
 
-    // Add exhaustion reduction
-    this.addRollExhaustion(parts, data);
+    // Add condition reductions.
+    this.addConditionRollReduction(parts, data);
 
     config.parts = [...(config.parts ?? []), ...parts];
     config.data = { ...data, ...(config.data ?? {}) };
@@ -1523,7 +1554,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     rollConfig.rolls = [
       CONFIG.Dice.D20Roll.mergeConfigs({ parts, data, options }, config.rolls?.shift())
     ].concat(config.rolls ?? []);
-    rollConfig.rolls.forEach(({ parts, data }) => this.addRollExhaustion(parts, data));
+    rollConfig.rolls.forEach(({ parts, data }) => this.addConditionRollReduction(parts, data));
     rollConfig.subject = this;
 
     const dialogConfig = foundry.utils.deepClone(dialog);
@@ -1832,8 +1863,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       "attributes.init.roll.mode"
     ]);
 
-    // Add exhaustion reduction
-    this.addRollExhaustion(parts, data);
+    // Add condition reductions
+    this.addConditionRollReduction(parts, data);
 
     // Ability score tiebreaker
     const tiebreaker = game.settings.get("dnd5e", "initiativeDexTiebreaker");
@@ -1923,9 +1954,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     const combat = await super.rollInitiative(options);
+    if ( !combat ) {
+      delete this._cachedInitiativeRoll;
+      return null;
+    }
+
     const combatants = this.isToken ? this.getActiveTokens(false, true).reduce((arr, t) => {
-      return arr.concat(game.combat.getCombatantsByToken(t.id));
-    }, []) : game.combat.getCombatantsByActor(this.id);
+      return arr.concat(combat.getCombatantsByToken(t.id));
+    }, []) : combat.getCombatantsByActor(this.id);
 
     /**
      * A hook event that fires after an Actor has rolled for initiative.
@@ -3494,9 +3530,28 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  async toggleStatusEffect(statusId, options) {
-    const created = await super.toggleStatusEffect(statusId, options);
+  /**
+   * Toggle a configured status effect for the Actor.
+   * @override
+   * @param {string} statusId                       A status effect ID defined in CONFIG.statusEffects
+   * @param {object} [options={}]                   Additional options which modify how the effect is created.
+   * @param {boolean} [options.active]              Force the effect to be active or inactive
+   *                                                regardless of its current state.
+   * @param {boolean} [options.overlay=false]       Display the toggled effect as an overlay.
+   * @param {number} [options.levels=1]             A potential level increase.
+   * @returns {Promise<ActiveEffect|boolean|void>}  A promise which resolves to one of the following values:
+   *                                                - ActiveEffect if a new effect need to be created or updated.
+   *                                                - true if was already an existing effect.
+   *                                                - false if an existing effect needed to be removed.
+   *                                                - undefined if no changes need to be made.
+   */
+  async toggleStatusEffect(statusId, options={}) {
+    const hasLevels = ConditionData.hasLevels(statusId);
+    const ActiveEffect = getDocumentClass("ActiveEffect");
+    let created;
+
+    if ( hasLevels ) created = await ConditionData._applyDelta(statusId, this, { levels: options.levels ?? 1});
+    created ??= await super.toggleStatusEffect(statusId, options);
     const status = CONFIG.statusEffects.find(e => e.id === statusId);
     if ( !(created instanceof ActiveEffect) || !status.exclusiveGroup ) return created;
 
@@ -3518,18 +3573,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @protected
    */
   async _onUpdateExhaustion(data, options) {
+    const originalExhaustion = foundry.utils.getProperty(options, "dnd5e.originalExhaustion");
     const level = foundry.utils.getProperty(data, "system.attributes.exhaustion");
-    if ( !Number.isFinite(level) ) return;
-    let effect = this.effects.get(ActiveEffect5e.ID.EXHAUSTION);
-    if ( level < 1 ) return effect?.delete();
-    else if ( effect ) {
-      const originalExhaustion = foundry.utils.getProperty(options, "dnd5e.originalExhaustion");
-      return effect.update({ "flags.dnd5e.exhaustionLevel": level }, { dnd5e: { originalExhaustion } });
-    } else {
-      effect = await ActiveEffect.implementation.fromStatusEffect("exhaustion", { parent: this });
-      effect.updateSource({ "flags.dnd5e.exhaustionLevel": level });
-      return ActiveEffect.implementation.create(effect, { parent: this, keepId: true });
-    }
+    const delta = level - originalExhaustion;
+    if ( delta ) ConditionData._applyDelta("exhaustion", this, { levels: delta });
   }
 
   /* -------------------------------------------- */

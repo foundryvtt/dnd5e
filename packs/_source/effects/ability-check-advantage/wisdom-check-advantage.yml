@@ -1,0 +1,36 @@
+folder: Ix7AOd1FAYuhH9YR
+name: Wisdom Check Advantage
+type: base
+img: systems/dnd5e/icons/svg/abilities/wisdom.svg
+system:
+  changes:
+    - key: system.abilities.wis.check.roll.mode
+      type: add
+      value: 1
+      phase: initial
+disabled: false
+start: null
+duration:
+  value: null
+  units: seconds
+  expiry: null
+  expired: false
+description: ''
+origin: null
+tint: '#ffffff'
+transfer: false
+statuses: []
+showIcon: 1
+sort: 0
+flags: {}
+_stats:
+  coreVersion: '14.354'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+  createdTime: 1769816486553
+  modifiedTime: 1769816486553
+_id: BmqLvBiBbVNa8c1c
+_key: '!effects!BmqLvBiBbVNa8c1c'

@@ -48,6 +48,14 @@
 /* -------------------------------------------- */
 
 /**
+ * @typedef ActivityBehaviorConfiguration
+ * @param {string} label  Localized label for the behavior.
+ * @param {string} icon   Icon representing the behavior.
+ */
+
+/* -------------------------------------------- */
+
+/**
  * @typedef ActivityConsumptionTargetConfiguration
  * @property {string} label                                     Localized label for the target type.
  * @property {ConsumptionConsumeFunction} consume               Function used to consume according to this type.
@@ -124,6 +132,57 @@
  * @property {typeof Advancement} documentClass  The advancement's document class.
  * @property {Set<string>} validItemTypes        What item types this advancement can be used with.
  * @property {boolean} [hidden]                  Should this advancement type be hidden in the selection dialog?
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef AdventureConfiguration
+ * @property {AdventureImportAction[]} importActions  Actions performed when the adventure is imported.
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef AdventureImportAction
+ * @property {string} id                   Unique ID for this import action.
+ * @property {AdventureImportPreHandler|AdventureImportPostHandler} handler  Handler function to call.
+ * @property {"pre"|"post"} lifecycle      Should this handler be called before or after importing?
+ * @property {boolean} [default=false]     Should this option be checked by default on the adventure importer?
+ * @property {string} [label]              Localized label for the option. Required if `silent` isn't `true`.
+ * @property {AdventureImportQuickstartHandler} [quickstartHandler]  Handler called when after quickstarting a module.
+ *                                                                   Must be set to use an action during quickstart.
+ * @property {boolean} [silent=false]      Silent actions aren't displayed in the dialog and are always run.
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @callback AdventureImportPostHandler
+ * @this {Adventure}
+ * @param {AdventureImportAction} config
+ * @param {AdventureImportResult} importResult
+ * @param {AdventureImportOptions} importOptions
+ * @returns {Promise<*>}
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @callback AdventureImportPreHandler
+ * @this {Adventure}
+ * @param {AdventureImportAction} config
+ * @param {AdventureImportData} importData
+ * @param {AdventureImportOptions} importOptions
+ * @returns {Promise<*>}
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @callback AdventureImportQuickstartHandler
+ * @param {{ adventure: Adventure, config: AdventureImportAction }[]} adventures
+ * @returns {Promise<*>}
  */
 
 /* -------------------------------------------- */
@@ -544,6 +603,8 @@
  *                                                           when using the modern rules. Speed reduction is measured
  *                                                           in the default imperial units and converted to metric
  *                                                           if necessary.
+ * @property {Record<number, string[]>} [conditions]  Additional statuses applied at given
+ *                                                    levels of a condition, e.g., 'dead' at Exhaustion 6.
  */
 
 /**
