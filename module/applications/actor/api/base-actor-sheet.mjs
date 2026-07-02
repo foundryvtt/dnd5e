@@ -1,7 +1,14 @@
 import * as Trait from "../../../documents/actor/trait.mjs";
 import Item5e from "../../../documents/item.mjs";
 import {
-  formatLength, formatNumber, getPluralRules, loadingTooltip, parseInputDelta, simplifyBonus, splitSemicolons, staticID
+  formatLength,
+  formatNumber,
+  getPluralRules,
+  loadingTooltip,
+  parseInputDelta,
+  simplifyBonus,
+  splitSemicolons,
+  staticID
 } from "../../../utils.mjs";
 
 import AdvancementConfirmationDialog from "../../advancement/advancement-confirmation-dialog.mjs";
@@ -9,7 +16,7 @@ import AdvancementManager from "../../advancement/advancement-manager.mjs";
 import ApplicationV2Mixin from "../../api/application-v2-mixin.mjs";
 import PrimarySheetMixin from "../../api/primary-sheet-mixin.mjs";
 import EffectsElement from "../../components/effects.mjs";
-import { createCheckboxInput } from "../../fields.mjs";
+import {createCheckboxInput} from "../../fields.mjs";
 import CreatureTypeConfig from "../../shared/creature-type-config.mjs";
 import MovementSensesConfig from "../../shared/movement-senses-config.mjs";
 import SourceConfig from "../../shared/source-config.mjs";
@@ -2041,15 +2048,14 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @protected
    */
   _filterItems(items, filters) {
-    const actions = ["action", "bonus", "reaction", "lair", "legendary"];
     const recoveries = ["lr", "sr"];
     if ( !filters.size ) return items.filter(item => this._filterItem(item, filters) !== false);
     const { included, excluded } = ItemListControlsElement.partitionFilters(filters);
     const schoolFilter = new Set(Object.keys(CONFIG.DND5E.spellSchools)).intersection(included);
     const classFilter = new Set(Object.keys(this.actor.spellcastingClasses)).intersection(included);
-    const actionSet = new Set(actions);
-    const actionFilter = actionSet.intersection(included);
-    const actionExclude = actionSet.intersection(excluded);
+    const actions = new Set(["action", "bonus", "reaction", "lair", "legendary"]);
+    const actionFilter = actions.intersection(included);
+    const actionExclude = actions.intersection(excluded);
     const passes = ItemListControlsElement.passesFilter;
 
     return items.filter(item => {

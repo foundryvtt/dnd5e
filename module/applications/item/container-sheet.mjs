@@ -359,12 +359,11 @@ export default class ContainerSheet extends ItemSheet5e {
    * @protected
    */
   _filterItems(items, filters) {
-    const actions = ["action", "bonus", "reaction"];
     if ( !filters.size ) return items.filter(item => this._filterItem(item, filters) !== false);
     const { included, excluded } = ItemListControlsElement.partitionFilters(filters);
-    const actionSet = new Set(actions);
-    const actionFilter = actionSet.intersection(included);
-    const actionExclude = actionSet.intersection(excluded);
+    const actions = new Set(["action", "bonus", "reaction"]);
+    const actionFilter = actions.intersection(included);
+    const actionExclude = actions.intersection(excluded);
     const passes = ItemListControlsElement.passesFilter;
 
     return items.filter(item => {
