@@ -68,29 +68,19 @@
   }
 
   .filter-item {
-    &.active {
+    &.active, &.excluded {
       font-weight: bold;
       position: relative;
 
       &::after {
-        content: "\f00c";
-        font-family: var(--font-awesome);
-        position: absolute;
-        right: .5rem;
         color: var(--dnd5e-color-gold);
+        font-family: var(--font-awesome);
+        inset-inline-end: 8px;
+        position: absolute;
       }
     }
-    &.activeX {
-      font-weight: bold;
-      position: relative;
 
-      &::after {
-        content: "\f00d";
-        font-family: var(--font-awesome);
-        position: absolute;
-        right: .5rem;
-        color: var(--dnd5e-color-gold);
-      }
-    }
+    &.active::after { content: "\f00c"; }
+    &.excluded::after { content: "\f00d"; }
   }
 }
