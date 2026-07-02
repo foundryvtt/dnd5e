@@ -1270,6 +1270,7 @@
     "Create": "Create Behavior",
     "Delete": "Delete Behavior"
   },
+  "Empty": "No associated behaviors. Use the <i class=\"fas fa-plus\"></i> button above to create one.",
   "Hint": "These behaviors will apply to any area of effect placed by this activity.",
   "Label": "Behavior"
 },
@@ -2174,6 +2175,7 @@
     "Delete": "Delete Consumption Target",
     "RefundResource": "Refund Resource"
   },
+  "Empty": "No associated consumption. Use the <i class=\"fas fa-plus\"></i> button above to add consumption targets.",
   "Scaling": {
     "Amount": "Amount",
     "Automatic": "Automatic",
@@ -2417,6 +2419,8 @@
       }
     }
   },
+  "Empty": "No damage configured. Use the <i class=\"fas fa-plus\"></i> button above to add damage parts.",
+  "EmptyExceptBase": "Use the <i class=\"fas fa-plus\"></i> button above to add additional damage parts.",
   "Hint": "Damage a creature without any attack or save.",
   "Part": {
     "Action": {
@@ -5875,6 +5879,7 @@
       "Delete": "Delete Recovery Profile"
     },
     "Combat": "Combat",
+    "Empty": "No recovery specified. Use the <i class=\"fas fa-plus\"></i> button above to add recovery periods.",
     "Never": "Never",
     "Period": {
       "Dawn": {
