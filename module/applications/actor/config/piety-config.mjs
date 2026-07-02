@@ -40,11 +40,6 @@ export default class PietyConfig extends BaseConfigSheet {
 
     context.data = source.attributes.piety;
     context.fields = this.document.system.schema.getField("attributes.piety").fields;
-    context.deityOptions = Object.entries(CONFIG.DND5E.deities).map(([k, v]) => ({ value: k, label: v.label }));
-
-    if (context.data.deity && !(context.data.deity in CONFIG.DND5E.deities)) {
-      context.deityOptions.unshift({ value: context.data.deity, label: context.data.deity });
-    }
 
     return context;
   }

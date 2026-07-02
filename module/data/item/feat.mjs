@@ -49,10 +49,6 @@ export default class FeatData extends ItemDataModel.mixin(
         max: new FormulaField({ deterministic: true }),
         period: new StringField()
       }),
-      piety: new SchemaField({
-        deity: new StringField({ required: true }),
-        threshold: new NumberField({ integer: true, nullable: false, initial: 3, min: 1 })
-      }),
       prerequisites: new SchemaField({
         items: new SetField(new IdentifierField({ allowType: true })),
         level: new NumberField({ integer: true, min: 0 }),
