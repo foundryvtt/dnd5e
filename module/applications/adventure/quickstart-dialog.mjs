@@ -42,7 +42,7 @@ export default class AdventureQuickstartDialog extends Dialog5e {
     const importActions = {};
     for ( const adventure of this.options.adventures ) {
       for ( const action of adventure.importActions ) {
-        if ( !action.quickstartHandler || (action.id in importActions) ) continue;
+        if ( action.silent || !action.quickstartHandler || (action.id in importActions) ) continue;
         importActions[action.id] = {
           field: new BooleanField(),
           input: createCheckboxInput,
@@ -82,13 +82,11 @@ export default class AdventureQuickstartDialog extends Dialog5e {
     const importActions = {};
     for ( const adventure of this.options.adventures ) {
       for ( const action of adventure.importActions ) {
-        if ( !(action.id in formData.object) ) continue;
-        if ( formData.object[action.id] ) {
-          importActions[action.id] ??= { adventures: [], handler: action.quickstartHandler };
-          importActions[action.id].adventures.push({ adventure, config: action });
-        }
+        if ( !action.quickstartHandler || !((action.id in formData.object) || action.silent) ) continue;
+        importActions[action.id] ??= { adventures: [], handler: action.quickstartHandler };
+        importActions[action.id].adventures.push({ adventure, config: action });
         foundry.utils.setProperty(
-          adventureImports[adventure.uuid].options, `actions.${action.id}`, formData.object[action.id]
+          adventureImports[adventure.uuid].options, `actions.${action.id}`, formData.object[action.id] ?? {}
         );
       }
     }

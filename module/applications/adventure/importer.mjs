@@ -37,6 +37,7 @@ export default class AdventureImporter5e extends ApplicationV2Mixin(AdventureImp
     const selected = game.settings.get("core", "adventureImports")[this.adventure.uuid]?.options?.actions ?? {};
     const fields = {};
     for ( const action of importActions ) {
+      if ( action.silent ) continue;
       fields[`actions.${action.id}`] = new BooleanField({
         initial: selected[action.id] ?? action.default, label: action.label
       });
@@ -60,7 +61,7 @@ export default class AdventureImporter5e extends ApplicationV2Mixin(AdventureImp
   async _preImport(importData, importOptions) {
     await super._preImport(importData, importOptions);
     const actions = this.adventure.importActions
-      .filter(o => o.lifecycle === "pre" && importOptions.actions?.includes(o.id));
+      .filter(o => o.lifecycle === "pre" && ((o.silent === true) || importOptions.actions?.includes(o.id)));
     for ( const action of actions ) {
       await action.handler.call(this.adventure, action, importData, importOptions);
     }
@@ -72,7 +73,7 @@ export default class AdventureImporter5e extends ApplicationV2Mixin(AdventureImp
   async _onImport(importResult, importOptions) {
     await super._onImport(importResult, importOptions);
     const actions = this.adventure.importActions
-      .filter(o => o.lifecycle === "post" && importOptions.actions?.includes(o.id));
+      .filter(o => o.lifecycle === "post" && ((o.silent === true) || importOptions.actions?.includes(o.id)));
     for ( const action of actions ) {
       await action.handler.call(this.adventure, action, importResult, importOptions);
     }
