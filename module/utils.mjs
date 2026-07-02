@@ -702,6 +702,20 @@ export function linkForUuid(uuid, { tooltip, renderBroken }={}) {
 }
 
 /* -------------------------------------------- */
+
+/**
+ * Construct the markup for a loading tooltip section, displayed as a spinner while the rich tooltip content is fetched.
+ * @param {object} [options={}]
+ * @param {string} [options.uuid]      UUID of the document whose rich tooltip should be displayed.
+ * @param {boolean} [options.passive]  Mark this as a passive tooltip, with data supplied by the hovered element.
+ * @returns {string}
+ */
+export function loadingTooltip({ uuid, passive=false }={}) {
+  const attr = uuid ? ` data-uuid="${uuid}"` : passive ? " data-passive" : "";
+  return `<section class="loading"${attr}><i class="fas fa-spinner fa-spin-pulse" inert></i></section>`;
+}
+
+/* -------------------------------------------- */
 /*  Targeting                                   */
 /* -------------------------------------------- */
 
@@ -1184,7 +1198,8 @@ export function registerHandlebarsHelpers() {
     "dnd5e-numberFormat": (value, options) => formatNumber(value, options.hash),
     "dnd5e-numberParts": (value, options) => formatNumberParts(value, options.hash),
     "dnd5e-object": makeObject,
-    "dnd5e-textFormat": formatText
+    "dnd5e-textFormat": formatText,
+    "dnd5e-tooltip": ({ hash }) => loadingTooltip(hash)
   });
 }
 

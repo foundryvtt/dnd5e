@@ -1,6 +1,6 @@
 import * as Filter from "../filter.mjs";
 import SourceField from "../data/shared/source-field.mjs";
-import { getPluralRules } from "../utils.mjs";
+import { getPluralRules, loadingTooltip } from "../utils.mjs";
 import Application5e from "./api/application.mjs";
 import CompendiumBrowserSettingsConfig from "./settings/compendium-browser-settings.mjs";
 
@@ -661,11 +661,7 @@ export default class CompendiumBrowser extends Application5e {
     );
     const element = foundry.utils.parseHTML(html);
     if ( documentClass !== "Item" ) return element;
-    element.dataset.tooltip = `
-      <section class="loading" data-uuid="${uuid}">
-        <i class="fa-solid fa-spinner fa-spin-pulse" inert></i>
-      </section>
-    `;
+    element.dataset.tooltipHtml = loadingTooltip({ uuid });
     element.dataset.tooltipClass = "dnd5e2 dnd5e-tooltip item-tooltip";
     element.dataset.tooltipDirection ??= "RIGHT";
     return element;

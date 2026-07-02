@@ -1,3 +1,4 @@
+import { loadingTooltip } from "../../utils.mjs";
 import ChatTrayElement from "./chat-tray-element.mjs";
 import TargetedApplicationMixin from "./targeted-application-mixin.mjs";
 
@@ -123,9 +124,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       li.classList.add("effect");
       Object.assign(li.dataset, {
         id: effect.id,
-        tooltip: `
-          <section class="loading" data-uuid="${effect.uuid}"><i class="fas fa-spinner fa-spin-pulse"></i></section>
-        `,
+        tooltipHtml: loadingTooltip({ uuid: effect.uuid }),
         tooltipClass: "dnd5e2 dnd5e-tooltip item-tooltip themed theme-light",
         tooltipDirection: "LEFT",
         uuid: effect.uuid

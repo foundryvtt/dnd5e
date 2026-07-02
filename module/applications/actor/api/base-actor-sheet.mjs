@@ -1,7 +1,7 @@
 import * as Trait from "../../../documents/actor/trait.mjs";
 import Item5e from "../../../documents/item.mjs";
 import {
-  formatLength, formatNumber, getPluralRules, parseInputDelta, simplifyBonus, splitSemicolons, staticID
+  formatLength, formatNumber, getPluralRules, loadingTooltip, parseInputDelta, simplifyBonus, splitSemicolons, staticID
 } from "../../../utils.mjs";
 
 import AdvancementConfirmationDialog from "../../advancement/advancement-confirmation-dialog.mjs";
@@ -1095,11 +1095,9 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @protected
    */
   _applyTooltips(element) {
-    if ( "tooltip" in element.dataset ) return;
+    if ( ("tooltip" in element.dataset) || ("tooltipHtml" in element.dataset) ) return;
     const uuid = element.dataset.referenceTooltip ?? this.actor.uuid;
-    element.dataset.tooltip = `
-      <section class="loading" data-uuid="${uuid}"><i class="fas fa-spinner fa-spin-pulse"></i></section>
-    `;
+    element.dataset.tooltipHtml = loadingTooltip({ uuid });
     if ( element.dataset.attribution ) element.dataset.tooltipClass = "property-attribution";
   }
 
