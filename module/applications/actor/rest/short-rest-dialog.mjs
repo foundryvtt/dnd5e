@@ -124,10 +124,11 @@ export default class ShortRestDialog extends BaseRestDialog {
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
   _onChangeForm(formConfig, event) {
     super._onChangeForm(formConfig, event);
-    this.#denom = this.form.denom.value;
-    foundry.utils.mergeObject(this.config, new FormDataExtended(this.form).object);
+    this.#denom = this.form.denom?.value;
+    foundry.utils.mergeObject(this.config, new foundry.applications.ux.FormDataExtended(this.form).object);
     this.render();
   }
 }
