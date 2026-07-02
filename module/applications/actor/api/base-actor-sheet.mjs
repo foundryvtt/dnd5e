@@ -1172,7 +1172,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         .forEach(i => i.addEventListener("change", this._onChangeInputDelta.bind(this)));
 
       // Meter editing
-      for ( const meter of this.element.querySelectorAll('.meter-group [role="meter"]:has(> input)') ) {
+      for ( const meter of this.element.querySelectorAll('.meter > [role="meter"]:has(> input)') ) {
         meter.addEventListener("click", event => this.#toggleMeter(event, true));
         meter.querySelector(":scope > input")?.addEventListener("blur", event => this.#toggleMeter(event, false));
       }
