@@ -26,7 +26,7 @@ export default class PietyConfig extends BaseConfigSheet {
 
   /** @override */
   get title() {
-    return game.i18n.localize("DND5E.PIETY.Configure");
+    return _loc("DND5E.PIETY.Configure");
   }
 
   /* -------------------------------------------- */
