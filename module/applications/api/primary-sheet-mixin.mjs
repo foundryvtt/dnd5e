@@ -343,14 +343,15 @@ export default function PrimarySheetMixin(Base) {
 
     /**
      * Change the sheet mode.
-     * @param {PrimarySheetMixin.MODES} [mode]  Mode to set. If not provided, mode will be toggled.
+     * @param {PrimarySheet5e.MODES} [mode]  Mode to set. If not provided, mode will be toggled.
      */
     async changeMode(mode) {
+      if ( !this.isEditable ) return;
       const { MODES } = this.constructor;
       this._mode = mode ?? (this.isEditMode ? MODES.PLAY : MODES.EDIT);
       const button = this.element?.querySelector('[data-action="changeMode"]');
       if ( button ) {
-        const label = _loc(`DND5E.SheetMode${this.isEditMode ? "Edit" : "Play"}`);
+        const label = _loc(`DND5E.SheetMode${this.isEditMode ? "Play" : "Edit"}`);
         button.checked = this.isEditMode;
         button.dataset.tooltip = label;
         button.setAttribute("aria-label", label);

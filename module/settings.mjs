@@ -44,10 +44,11 @@ export function registerSystemKeybindings() {
 
   game.keybindings.register("dnd5e", "toggleSheetMode", {
     name: "KEYBINDINGS.DND5E.ToggleSheetMode",
-    editable: [{ key: "KeyL" }],
+    editable: [{ key: "KeyE", modifiers: ["Shift"] }],
     onDown: () => {
       const app = ui.activeWindow;
-      if ( app?.rendered && app.changeMode ) app.changeMode();
+      if ( !app?.rendered || !app.changeMode || !app.isEditable ) return false;
+      app.changeMode();
       return true;
     }
   });
@@ -62,6 +63,18 @@ export function registerSystemKeybindings() {
       else new CompendiumBrowser().render({ force: true });
       return true;
     }
+  });
+
+  // TODO: Workaround for foundryvtt#14564
+  Hooks.on("openDetachedWindow", (id, win) => {
+    const { KeyboardManager } = foundry.helpers.interaction;
+    const forward = up => event => {
+      const el = win.document.activeElement;
+      if ( el && (["INPUT", "SELECT", "TEXTAREA"].includes(el.tagName) || el.isContentEditable) ) return;
+      game.keyboard._processKeyboardContext(KeyboardManager.getKeyboardEventContext(event, up), { force: true });
+    };
+    win.addEventListener("keydown", forward(false));
+    win.addEventListener("keyup", forward(true));
   });
 }
 
