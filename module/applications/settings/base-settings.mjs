@@ -60,12 +60,14 @@ export default class BaseSettingsConfig extends Application5e {
 
   /**
    * Create the field data for a specific setting.
-   * @param {string} name  Setting key within the dnd5e namespace.
+   * @param {string} name                         Setting key.
+   * @param {object} [options={}]
+   * @param {string} [options.namespace="dnd5e"]  Namespace for the settings to change.
    * @returns {object}
    */
-  static createSettingField(name) {
-    const setting = game.settings.settings.get(`${this.options.namespace}.${name}`);
-    if ( !setting ) throw new Error(`Setting \`${this.options.namespace}.${name}\` not registered.`);
+  static createSettingField(name, { namespace="dnd5e" }={}) {
+    const setting = game.settings.settings.get(`${namespace}.${name}`);
+    if ( !setting ) throw new Error(`Setting \`${namespace}.${name}\` not registered.`);
     const isDataField = setting.type instanceof DataField;
     const Field = { [Boolean]: BooleanField, [Number]: NumberField, [String]: StringField }[setting.type];
     if ( !isDataField && !Field ) {
@@ -76,7 +78,7 @@ export default class BaseSettingsConfig extends Application5e {
       field: isDataField ? setting.type : new Field({ required: true, blank: false }),
       hint: _loc(setting.hint),
       label: _loc(setting.name),
-      value: game.settings.get(this.options.namespace, name)
+      value: game.settings.get(namespace, name)
     };
     if ( (setting.type === Boolean) || (setting.type instanceof BooleanField) ) data.input = createCheckboxInput;
     if ( setting.choices ) data.options = Object.entries(setting.choices)

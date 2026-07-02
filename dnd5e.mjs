@@ -615,15 +615,11 @@ async function _handleMigration() {
 /*  Post-migration                              */
 /* -------------------------------------------- */
 
+/**
+ * Display the welcome dialog if required.
+ */
 Hooks.once("dnd5e.ready", () => {
-  // Present adventure quickstart dialog
-  applications.adventure.AdventureQuickstartDialog.handleQuickstart();
-
-  // Present welcome dialog to GMs
-  if ( game.user.isGM && game.settings.get("dnd5e", "firstRun") ) {
-    const welcome = new applications.WelcomeScreen();
-    welcome.render({ force: true });
-  }
+  applications.WelcomeScreen.presentScreen();
 });
 
 /* -------------------------------------------- */

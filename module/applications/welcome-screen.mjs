@@ -1,3 +1,4 @@
+import { getPluralRules } from "../utils.mjs";
 import Application5e from "./api/application.mjs";
 import { createCheckboxInput } from "./fields.mjs";
 import BaseSettingsConfig from "./settings/base-settings.mjs";
@@ -19,9 +20,10 @@ export default class WelcomeScreen extends Application5e {
 
   /** @override */
   static DEFAULT_OPTIONS = {
+    adventures: [],
     classes: ["welcome", "standard-form"],
     form: {
-      handler: WelcomeScreen.#onSubmitForm
+      handler: WelcomeScreen.#handleFormSubmission
     },
     position: {
       width: 720,
@@ -137,6 +139,21 @@ export default class WelcomeScreen extends Application5e {
       }
     ];
 
+    const importActions = {};
+    for ( const adventure of this.options.adventures ) {
+      for ( const action of adventure.importActions ) {
+        if ( action.silent || !action.quickstartHandler || (action.id in importActions) ) continue;
+        importActions[action.id] = {
+          field: new BooleanField(),
+          input: createCheckboxInput,
+          label: action.label,
+          name: `actions.${action.id}`,
+          value: action.default
+        };
+      }
+    }
+    context.importActions = Object.values(importActions);
+
     return context;
   }
 
@@ -200,10 +217,10 @@ export default class WelcomeScreen extends Application5e {
    * @param {HTMLFormElement} form       The form that was submitted.
    * @param {FormDataExtended} formData  Data from the submitted form.
    */
-  static async #onSubmitForm(event, form, formData) {
+  static async #handleFormSubmission(event, form, formData) {
     if ( !game.user.isGM ) return;
 
-    const { modules, ...settings } = foundry.utils.expandObject(formData.object);
+    const { actions, modules, ...settings } = foundry.utils.expandObject(formData.object);
     settings.calendarConfig = { enabled: settings.calendar !== "" };
     if ( settings.calendar === "" ) delete settings.calendar;
     if ( !this.element.querySelector('[name="metric"]').indeterminate ) {
@@ -247,9 +264,43 @@ export default class WelcomeScreen extends Application5e {
       await game.settings.set("dnd5e", "firstRun", false);
     }
 
+    if ( !foundry.utils.isEmpty(actions) ) {
+      await this.#handleAdventureImportActions(foundry.utils.flattenObject(actions));
+    }
+
     if ( requiresClientReload || requiresWorldReload ) {
       foundry.applications.settings.SettingsConfig.reloadConfirm({ world: requiresWorldReload });
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle submission of the dialog.
+   * @param {object} actions  Actions object from the form submission.
+   * @returns {Promise}
+   */
+  async #handleAdventureImportActions(actions) {
+    const adventureImports = game.settings.get("core", "adventureImports");
+    const importActions = {};
+    for ( const adventure of this.options.adventures ) {
+      for ( const action of adventure.importActions ) {
+        if ( !action.quickstartHandler || !((action.id in actions) || action.silent) ) continue;
+        importActions[action.id] ??= { adventures: [], handler: action.quickstartHandler };
+        importActions[action.id].adventures.push({ adventure, config: action });
+        foundry.utils.setProperty(
+          adventureImports[adventure.uuid].options, `actions.${action.id}`, actions[action.id] ?? {}
+        );
+      }
+    }
+
+    for ( const { adventures, handler } of Object.values(importActions) ) await handler(adventures);
+    await game.settings.set("core", "adventureImports", adventureImports);
+
+    const pr = getPluralRules();
+    ui.notifications.success(`DND5E.ADVENTURE.Finished.${pr.select(this.options.adventures.length)}`, {
+      format: { adventure: this.options.adventures[0].name, number: this.options.adventures.length }
+    });
   }
 
   /* -------------------------------------------- */
@@ -283,5 +334,35 @@ export default class WelcomeScreen extends Application5e {
 
     WelcomeScreen.#modules = local;
     return WelcomeScreen.#modules;
+  }
+
+  /* -------------------------------------------- */
+  /*  Factory Methods                             */
+  /* -------------------------------------------- */
+
+  /**
+   * Determine whether the welcome dialog needs to be displayed (either the first run of the world or there are
+   * unresolved adventure post-import actions).
+   */
+  static async presentScreen() {
+    if ( !game.user.isGM ) return;
+
+    const adventures = (await Promise.all(Object.entries(game.settings.get("core", "adventureImports"))
+      .filter(([, { quickstart={} }]) => quickstart.quickstarted && !quickstart.postImport)
+      .map(([uuid]) => fromUuid(uuid)))).filter(_ => _);
+
+    if ( !adventures.length && !dnd5e.settings.firstRun ) return;
+
+    try {
+      const dialog = new WelcomeScreen({ adventures });
+      const { promise, resolve } = Promise.withResolvers();
+      dialog.addEventListener("close", () => resolve());
+      dialog.render({ force: true });
+      await promise;
+    } finally {
+      const adventureImports = game.settings.get("core", "adventureImports");
+      adventures.forEach(a => adventureImports[a.uuid].quickstart.postImport = true);
+      await game.settings.set("core", "adventureImports", adventureImports);
+    }
   }
 }

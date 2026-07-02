@@ -917,10 +917,6 @@
 "DND5E.AdvantageMode": "Advantage Mode",
 
 "DND5E.ADVENTURE": {
-  "Action": {
-    "Configure": "Configure Adventure",
-    "Launch": "Launch Adventure"
-  },
   "Finished": {
     "one": "Finished preparing {adventure}.",
     "other": "Finished preparing {number} adventures."
@@ -930,6 +926,7 @@
     "CustomizeWorld": "Customize World Details",
     "DisplayJournal": "Display Getting Started Journal"
   },
+  "Options": "Adventure Options",
   "Warning": {
     "JournalMissing": "Journal entry `{id}` could not be found to display for {adventure}.",
     "SceneMissing": "Scene `{id}` could not be found to activate for {adventure}."
