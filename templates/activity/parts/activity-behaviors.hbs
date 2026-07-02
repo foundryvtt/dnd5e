@@ -7,6 +7,7 @@
         </button>
     </legend>
     <p class="hint">{{ localize "DND5E.BEHAVIOR.Hint" }}</p>
+    {{#if appliedBehaviors}}
     <ul class="separated-list behaviors-list flexcol unlist">
         {{#each appliedBehaviors}}
         <li data-index="{{ data._index }}" data-behavior-id="{{ data._id }}" data-expand-id="behaviors.{{ data._id }}">
@@ -14,6 +15,11 @@
         </li>
         {{/each}}
     </ul>
+    {{else}}
+    <div class="empty">
+        {{{ localize "DND5E.BEHAVIOR.Empty" }}}
+    </div>
+    {{/if}}
 </fieldset>
 
 {{#*inline ".behavior"}}
