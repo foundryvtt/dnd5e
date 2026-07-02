@@ -80,7 +80,7 @@ export default class CharacterData extends CreatureTemplate {
         inspiration: new BooleanField({ required: true, label: "DND5E.Inspiration" }),
         piety: new SchemaField({
           value: new NumberField({
-            min: 1, initial: null, nullable: true, integer: true, label: "DND5E.PIETY.FIELDS.value.label"
+            min: 1, initial: null, nullable: true, integer: true, label: "DND5E.PIETY.FIELDS.value.label", placeholder: "0"
           }),
         })
       }, { label: "DND5E.Attributes" }),
