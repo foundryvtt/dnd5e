@@ -950,6 +950,7 @@
 "DND5E.Amount": "Amount",
 "DND5E.Appearance": "Appearance",
 "DND5E.Apply": "Apply",
+"DND5E.AttributeScores": "Attribute Scores",
 "DND5E.Attunement": "Attunement",
 "DND5E.AttunementMax": "Maximum Attuned Items",
 "DND5E.AttunementNone": "Attunement Not Required",
@@ -3200,6 +3201,7 @@
     "Origin": "Origin Feat"
   },
   "Monster": "Monster Feature",
+  "PietyTrait": "Piety Trait",
   "Species": "Species Feature",
   "SpeciesLegacy": "Race Feature",
   "SupernaturalGift": {
@@ -3897,6 +3899,18 @@
 "DND5E.PassivePerception": "Passive Perception",
 "DND5E.Period": "Period",
 "DND5E.PersonalityTraits": "Personality Traits",
+
+"DND5E.PIETY": {
+  "Configure": "Configure Piety",
+  "Label": "Piety",
+  "FIELDS": {
+    "value": {
+      "label": "Piety Score",
+      "hint": "This character's current piety score."
+    }
+  }
+},
+
 "DND5E.Portrait": "Portrait",
 "DND5E.Prepared": "Prepared",
 "DND5E.Preparation": "Preparation",
@@ -6558,6 +6572,10 @@
       "Silent": "Roll without creating chat card",
       "Yes": "Roll and create chat card"
     }
+  },
+  "PIETY": {
+    "Hint": "Enable optional Piety tracking for player characters.",
+    "Name": "Piety Score"
   },
   "THEME": {
     "Name": "Theme",

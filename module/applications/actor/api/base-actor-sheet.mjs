@@ -30,6 +30,7 @@ import HitDiceConfig from "../config/hit-dice-config.mjs";
 import HitPointsConfig from "../config/hit-points-config.mjs";
 import InitiativeConfig from "../config/initiative-config.mjs";
 import LanguagesConfig from "../config/languages-config.mjs";
+import PietyConfig from "../config/piety-config.mjs";
 import SkillsConfig from "../config/skills-config.mjs";
 import SkillToolConfig from "../config/skill-tool-config.mjs";
 import SpellSlotsConfig from "../config/spell-slots-config.mjs";
@@ -1519,6 +1520,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         return this._renderChild(new HitPointsConfig(config));
       case "initiative":
         return this._renderChild(new InitiativeConfig(config));
+      case "piety":
+        return this._renderChild(new PietyConfig(config));
       case "movement":
       case "senses":
         return this._renderChild(new MovementSensesConfig({ ...config, type: target.dataset.config }));
