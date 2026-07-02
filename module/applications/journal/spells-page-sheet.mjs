@@ -1,4 +1,4 @@
-import { linkForUuid, sortObjectEntries } from "../../utils.mjs";
+import { linkForUuid, loadingTooltip, sortObjectEntries } from "../../utils.mjs";
 import Items5e from "../../data/collection/items-collection.mjs";
 import SpellsUnlinkedConfig from "./spells-unlinked-config.mjs";
 
@@ -217,9 +217,7 @@ export default class JournalSpellListPageSheet extends JournalEntryPageHandlebar
         data.unlinked ??= unlinkedData[data.spell?.uuid];
         data.name = data.spell?.name ?? data.unlinked?.name ?? "";
         if ( data.spell ) {
-          data.display = linkForUuid(data.spell.uuid, {
-            tooltip: '<section class="loading"><i class="fas fa-spinner fa-spin-pulse"></i></section>'
-          });
+          data.display = linkForUuid(data.spell.uuid, { tooltip: loadingTooltip() });
         } else {
           data.display = `<span class="unlinked-spell" data-tooltip="${
             data.unlinked.source.label}">${data.unlinked.name ?? "—"}*</span>`;
