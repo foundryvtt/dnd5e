@@ -10,16 +10,22 @@
             <i class="fa-solid fa-dice-d20" inert></i>
         </button>
     </div>
-    <div class="meter hit-points">
-        <div class="label">
-            <span class="value">{{ hp.value }}</span>
-            <span class="separator">/</span>
-            <span class="max">{{ hp.effectiveMax }}</span>
+    {{#with progress}}
+    <div class="hit-points bar">
+        <label>{{ localize "DND5E.HP" }}</label>
+        <div class="meter hit-points progress meter-sm {{#if (gt pct 99)}}full{{/if}}" role="meter" aria-valuemin="0"
+             aria-valuenow="{{ ../hp.value }}" aria-valuemax="{{ ../hp.effectiveMax }}"
+             style="--bar-percentage: {{ pct }}%">
+            <div class="progress-potential-min" style="width: {{ potential.min }}%; left: {{ pct }}%"></div>
+            <div class="progress-potential-max" style="width: {{ potential.max }}%; left: {{ left }}%"></div>
         </div>
-        <div class="progress-potential-max" style="width:{{potentialMax}}%; left:{{maxLeft}}%"></div>
-        <div class="progress-potential-min" style="width:{{potentialMin}}%; left:{{progressBar}}%"></div>
-        <div class="progress" style="width:{{progressBar}}%"></div>
+        <div class="values">
+            <span class="value">{{ ../hp.value }}</span>
+            <span class="separator">&sol;</span>
+            <span class="max">{{ ../hp.effectiveMax }}</span>
+        </div>
     </div>
+    {{/with}}
     {{ formField autoRoll name="autoHD" value=config.autoHD input=inputs.createCheckboxInput rootId=partId }}
 </fieldset>
 {{else}}

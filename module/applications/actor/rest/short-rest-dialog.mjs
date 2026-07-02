@@ -85,22 +85,21 @@ export default class ShortRestDialog extends BaseRestDialog {
       });
     }
 
-    const numericalDenom = Number(context.hitDice.denomination?.slice(1));
-    if ( numericalDenom ) {
-      const { value: currHP, max: maxHP } = this.actor.system.attributes.hp;
-      context.progressBar = 100 * currHP / maxHP;
-      const conMod = this.actor.system.abilities.con.mod;
-      let minRegain = Math.max(1 + conMod, 1);
-      let maxRegain = Math.max(numericalDenom + conMod, 1);
-      if (context.config.autoHD) {
+    const denom = Number(context.hitDice.denomination?.slice(1));
+    if ( denom ) {
+      const { pct, effectiveMax: max } = this.actor.system.attributes.hp;
+      context.progress = { pct };
+      const con = this.actor.system.abilities.con.mod;
+      let minRegain = Math.max(1 + con, 1);
+      let maxRegain = Math.max(denom + con, 1);
+      if ( context.config.autoHD ) {
         minRegain = minRegain * context.hd.value;
         maxRegain = context.hitDice.options.reduce((acc, hd) => {
-          return acc + (Math.max(Number(hd.value.slice(1)) + conMod, 1) * hd.number);
+          return acc + (Math.max(Number(hd.value.slice(1)) + con, 1) * hd.number);
         }, 0);
       }
-      context.potentialMin = 100 * minRegain / maxHP;
-      context.potentialMax = 100 * maxRegain / maxHP;
-      context.maxLeft = context.potentialMin + context.progressBar;
+      context.progress.potential = { max: 100 * (maxRegain - minRegain) / max, min: 100 * minRegain / max };
+      context.progress.left = context.progress.potential.min + pct;
     }
 
     return context;

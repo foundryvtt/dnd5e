@@ -137,7 +137,7 @@
                     {{/if}}
                 </div>
                 {{#with system.attributes.hp}}
-                <div class="meter sectioned hit-points">
+                <div class="meter sectioned hit-points meter-lg">
                     <div class="progress hit-points
                          {{~#if (gt tempmax 0)}} temp-positive
                          {{~else if (lt tempmax 0)}} temp-negative{{/if}}"
@@ -177,7 +177,7 @@
                     </button>
                     {{/if}}
                 </div>
-                <div class="meter hit-dice progress" role="meter" aria-valuemin="0"
+                <div class="meter hit-dice progress meter-lg" role="meter" aria-valuemin="0"
                      aria-valuenow="{{ value }}" aria-valuemax="{{ max }}"
                      style="--bar-percentage: {{ pct }}%">
                     <div class="label">
