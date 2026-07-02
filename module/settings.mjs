@@ -41,6 +41,41 @@ export function registerSystemKeybindings() {
     name: "KEYBINDINGS.DND5E.DragMove",
     editable: [{ key: "ShiftLeft" }, { key: "ShiftRight" }, { key: "OsLeft" }, { key: "OsRight" }]
   });
+
+  game.keybindings.register("dnd5e", "toggleSheetMode", {
+    name: "KEYBINDINGS.DND5E.ToggleSheetMode",
+    editable: [{ key: "KeyE", modifiers: ["Shift"] }],
+    onDown: () => {
+      const app = ui.activeWindow;
+      if ( !app?.rendered || !app.changeMode || !app.isEditable ) return false;
+      app.changeMode();
+      return true;
+    }
+  });
+
+  game.keybindings.register("dnd5e", "openCompendiumBrowser", {
+    name: "KEYBINDINGS.DND5E.OpenCompendiumBrowser",
+    editable: [{ key: "KeyB", modifiers: ["Shift"] }],
+    onDown: () => {
+      const existing = Array.from(foundry.applications.instances.values())
+        .find(app => app instanceof CompendiumBrowser && app.rendered);
+      if ( existing ) existing.bringToFront();
+      else new CompendiumBrowser().render({ force: true });
+      return true;
+    }
+  });
+
+  // TODO: Workaround for foundryvtt#14564
+  Hooks.on("openDetachedWindow", (id, win) => {
+    const { KeyboardManager } = foundry.helpers.interaction;
+    const forward = up => event => {
+      const el = win.document.activeElement;
+      if ( el && (["INPUT", "SELECT", "TEXTAREA"].includes(el.tagName) || el.isContentEditable) ) return;
+      game.keyboard._processKeyboardContext(KeyboardManager.getKeyboardEventContext(event, up), { force: true });
+    };
+    win.addEventListener("keydown", forward(false));
+    win.addEventListener("keyup", forward(true));
+  });
 }
 
 /* -------------------------------------------- */
