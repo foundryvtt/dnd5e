@@ -1,3 +1,4 @@
+{{#if (or activity.target.template.type activity.isRider)}}
 <fieldset>
     <legend>
         <span>{{ localize "DND5E.ACTIVITY.FIELDS.behaviors.label" }}</span>
@@ -15,6 +16,9 @@
         {{/each}}
     </ul>
 </fieldset>
+{{else}}
+<section class="hidden"></section>
+{{/if}}
 
 {{#*inline ".behavior"}}
 <div class="details flexrow">
