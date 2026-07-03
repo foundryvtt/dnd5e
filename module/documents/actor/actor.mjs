@@ -3643,7 +3643,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       flags: { dnd5e: { autoDowned: true }, core: { overlay: true } },
       name: CONFIG.statusEffects.dead.name,
       statuses: ["dead"],
-      showIcon: CONST.ACTIVE_EFFECT_SHOW_ICON.ALWAYS
+      showIcon: CONST.ACTIVE_EFFECT_SHOW_ICON.ALWAYS,
+      type: "condition",
+      system: { type: "dead" }
     }, { parent: this, keepId: true });
     else if ( !isUnconscious ) return ActiveEffect.implementation.create({
       _id: CONFIG.statusEffects.unconscious._id,
@@ -3651,7 +3653,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       flags: { dnd5e: { autoDowned: true } },
       name: CONFIG.statusEffects.unconscious.name,
       statuses: ["unconscious"],
-      showIcon: CONST.ACTIVE_EFFECT_SHOW_ICON.ALWAYS
+      showIcon: CONST.ACTIVE_EFFECT_SHOW_ICON.ALWAYS,
+      type: "condition",
+      system: { type: "unconscious" }
     }, { parent: this, keepId: true });
   }
 

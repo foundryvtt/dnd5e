@@ -703,6 +703,9 @@ export default class AttributesFields {
    */
   static async onUpdateDeathSaves(changed, options, userId) {
     if ( changed.system?.attributes?.death?.failure !== 3 ) return;
+
+    // If hp update is included, updateDowned will be called in onUpdateHP, so exit early
+    if ( !!changed.system.attributes.hp ) return;
     if ( userId === game.userId ) await this.parent.updateDowned(options);
   }
 }
