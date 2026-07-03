@@ -6500,7 +6500,7 @@
     },
     "AutoApplyDowned": {
       "Name": "Auto-Apply Downed Conditions",
-      "Hint": "Automatically apply \"Dead\" (for unimportant NPCs) or \"Unconscious\" (for others) when an actor is reduced to 0 HP in combat or fails their third death saving throw.",
+      "Hint": "Automatically apply the \"Dead\" or \"Unconscious\" status when a creature is reduced to 0 HP in combat. Unimportant NPCs are marked Dead. Important NPCs and PCs are marked Unconscious first, and Dead if they fail three death saving throws.",
       "None": "Never",
       "DeadOnly": "For NPCs (dead only)",
       "NPCs": "For NPCs (dead and unconscious)",

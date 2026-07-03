@@ -695,7 +695,7 @@ export default class AttributesFields {
   /* -------------------------------------------- */
 
   /**
-   * Trigger auto-downed logic if failed third death save
+   * Trigger auto-downed logic if failed three death saves.
    * @this {CharacterData|NPCData}
    * @param {object} changed  The differential data that was changed relative to the document's prior values.
    * @param {object} options  Additional options which modify the update request.
@@ -703,6 +703,6 @@ export default class AttributesFields {
    */
   static async onUpdateDeathSaves(changed, options, userId) {
     if ( changed.system?.attributes?.death?.failure !== 3 ) return;
-    if (userId === game.userId ) await this.parent.updateDowned(options);
+    if ( userId === game.userId ) await this.parent.updateDowned(options);
   }
 }

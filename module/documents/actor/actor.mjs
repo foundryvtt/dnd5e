@@ -3609,10 +3609,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /**
    * Handle applying/removing the dead/unconscious status.
    * @param {DocumentModificationContext} options  Additional options supplied with the update.
-   * @returns {Promise<ActiveEffect|boolean|undefined>|void}
+   * @returns {Promise<ActiveEffect|boolean|void>|void}
    */
   updateDowned(options) {
-    const autoApplyDowned = game.settings.get("dnd5e", "autoApplyDowned");
+    const { autoApplyDowned } = dnd5e.settings;
     if ( autoApplyDowned === "none" ) return;
     const hp = this.system.attributes?.hp;
     if ( !hp ) return;
@@ -3625,7 +3625,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     // Do not auto-apply statuses outside of combat or if already dead
     if ( !this.inCombat || this.statuses.has("dead") ) return;
-    const failedDeathSaves = this.system.attributes.death.failure >= 3
+    const failedDeathSaves = this.system.attributes.death.failure >= 3;
     let toApply = null;
     if ( this.type === "npc" ) {
       if ( !this.system.traits.important ) toApply = "dead";
@@ -3646,7 +3646,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       _id: CONFIG.statusEffects.unconscious._id,
       img: CONFIG.statusEffects.unconscious.img,
       flags: { dnd5e: { autoDowned: true } },
-      name: _loc(CONFIG.statusEffects.unconscious.name),
+      name: CONFIG.statusEffects.unconscious.name,
       statuses: ["unconscious"],
       showIcon: CONST.ACTIVE_EFFECT_SHOW_ICON.ALWAYS
     }, { parent: this, keepId: true });
