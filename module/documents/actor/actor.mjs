@@ -3607,6 +3607,61 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
+   * Handle applying/removing the dead/unconscious status.
+   * @param {DocumentModificationContext} options  Additional options supplied with the update.
+   * @returns {Promise<ActiveEffect|boolean|void>|void}
+   */
+  updateDowned(options) {
+    const { autoApplyDowned } = dnd5e.settings;
+    if ( autoApplyDowned === "none" ) return;
+    const hp = this.system.attributes?.hp;
+    if ( !hp ) return;
+
+    // If non-zero, remove any auto-downed effects
+    if ( hp.value ) {
+      const autoEffects = this.effects.filter(e => e.getFlag("dnd5e", "autoDowned"));
+      return this.deleteEmbeddedDocuments("ActiveEffect", autoEffects.map(e => e.id));
+    }
+    const conditionEffects = this.effects.documentsByType.condition;
+    const isDead = conditionEffects.some(e => e.system.type === "dead");
+    const isUnconscious = conditionEffects.some(e => e.system.type === "unconscious");
+
+    // Do not auto-apply statuses outside of combat or if already dead
+    if ( !this.inCombat || isDead ) return;
+    const failedDeathSaves = this.system.attributes.death.failure >= 3;
+    let toApply = null;
+    if ( this.type === "npc" ) {
+      if ( !this.system.traits.important ) toApply = "dead";
+      else if ( autoApplyDowned !== "deadOnly" ) toApply = failedDeathSaves ? "dead" : "unconscious";
+    } else if ( (this.type === "character") && (autoApplyDowned === "all") ) {
+      toApply = failedDeathSaves ? "dead" : "unconscious";
+    }
+    if ( !toApply ) return;
+    if ( toApply === "dead" ) return ActiveEffect.implementation.create({
+      _id: CONFIG.statusEffects.dead._id,
+      img: CONFIG.statusEffects.dead.img,
+      flags: { dnd5e: { autoDowned: true }, core: { overlay: true } },
+      name: CONFIG.statusEffects.dead.name,
+      statuses: ["dead"],
+      showIcon: CONST.ACTIVE_EFFECT_SHOW_ICON.ALWAYS,
+      type: "condition",
+      system: { type: "dead" }
+    }, { parent: this, keepId: true });
+    else if ( !isUnconscious ) return ActiveEffect.implementation.create({
+      _id: CONFIG.statusEffects.unconscious._id,
+      img: CONFIG.statusEffects.unconscious.img,
+      flags: { dnd5e: { autoDowned: true } },
+      name: CONFIG.statusEffects.unconscious.name,
+      statuses: ["unconscious"],
+      showIcon: CONST.ACTIVE_EFFECT_SHOW_ICON.ALWAYS,
+      type: "condition",
+      system: { type: "unconscious" }
+    }, { parent: this, keepId: true });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Handle applying/removing encumbrance statuses.
    * @param {DocumentModificationContext} options  Additional options supplied with the update.
    * @returns {Promise<ActiveEffect>|void}

@@ -487,6 +487,7 @@ export default class NPCData extends CreatureTemplate {
   _onUpdate(changed, options, userId) {
     super._onUpdate(changed, options, userId);
     AttributesFields.onUpdateHP.call(this, changed, options, userId);
+    AttributesFields.onUpdateDeathSaves.call(this, changed, options, userId);
   }
 
   /* -------------------------------------------- */

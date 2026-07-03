@@ -656,7 +656,10 @@ export default class AttributesFields {
    */
   static async onUpdateHP(changed, options, userId) {
     if ( !changed.system?.attributes?.hp ) return;
-    if ( userId === game.userId ) await this.parent.updateBloodied(options);
+    if ( userId === game.userId ) {
+      await this.parent.updateBloodied(options);
+      await this.parent.updateDowned(options);
+    }
 
     const hp = options.dnd5e?.hp;
     if ( !hp || options.isRest || options.isAdvancement ) return;
@@ -687,5 +690,22 @@ export default class AttributesFields {
      * @param {string} userId                                       Id of the user that performed the update.
      */
     Hooks.callAll(`dnd5e.${changes.total > 0 ? "heal" : "damage"}Actor`, this.parent, changes, changed, userId);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Trigger auto-downed logic if failed three death saves.
+   * @this {CharacterData|NPCData}
+   * @param {object} changed  The differential data that was changed relative to the document's prior values.
+   * @param {object} options  Additional options which modify the update request.
+   * @param {string} userId   The id of the User requesting the document update.
+   */
+  static async onUpdateDeathSaves(changed, options, userId) {
+    if ( changed.system?.attributes?.death?.failure !== 3 ) return;
+
+    // If hp update is included, updateDowned will be called in onUpdateHP, so exit early
+    if ( !!changed.system.attributes.hp ) return;
+    if ( userId === game.userId ) await this.parent.updateDowned(options);
   }
 }
