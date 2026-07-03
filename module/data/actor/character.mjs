@@ -33,7 +33,7 @@ export default class CharacterData extends CreatureTemplate {
   /* -------------------------------------------- */
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.BONUSES", "DND5E.CHARACTER"];
+  static LOCALIZATION_PREFIXES = ["DND5E.BONUSES", "DND5E.ROLL", "DND5E.CHARACTER"];
 
   /* -------------------------------------------- */
 
@@ -201,6 +201,7 @@ export default class CharacterData extends CreatureTemplate {
     AttributesFields.prepareBaseEncumbrance.call(this);
     MovementField._shim(this.attributes.movement);
     SensesField._shim(this.attributes.senses);
+    this.shimBonusData();
   }
 
   /* -------------------------------------------- */

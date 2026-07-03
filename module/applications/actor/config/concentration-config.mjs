@@ -48,10 +48,8 @@ export default class ConcentrationConfig extends BaseConfigSheet {
       ...Object.entries(CONFIG.DND5E.abilities).map(([value, { label }]) => ({ value, label }))
     ];
 
-    if ( this.document.system.bonuses?.abilities ) context.global = {
-      data: source.bonuses?.abilities ?? {},
-      fields: this.document.system.schema.fields.bonuses.fields.abilities.fields
-    };
+    const globalAbilityField = this.document.system.schema.getField("roll.ability");
+    if ( globalAbilityField ) context.global = { data: source.roll?.ability ?? {}, fields: globalAbilityField.fields };
 
     return context;
   }

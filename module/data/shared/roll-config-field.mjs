@@ -6,7 +6,9 @@ const { SchemaField, StringField } = foundry.data.fields;
  * Field for storing data for a specific type of roll.
  */
 export default class RollConfigField extends SchemaField {
-  constructor({ roll={}, ability="", labelFormatterPrefix="DND5E.ROLL.Formatter.", ...fields }={}, options={}) {
+  constructor({ roll={}, ability="", ...fields }={}, {
+    labelPrefix, labelFormatterPrefix="DND5E.ROLL.Formatter.", ...options
+  }={}) {
     fields = {
       ability: (ability === false) ? null : new StringField({
         required: true,
@@ -14,7 +16,10 @@ export default class RollConfigField extends SchemaField {
         label: "DND5E.AbilityModifier",
         labelFormatter: `${labelFormatterPrefix}ModifierAbility`
       }),
-      roll: new D2RollModificationField({ bonus: false, labelFormatterPrefix, ...roll }, { required: true }),
+      roll: new D2RollModificationField(
+        { bonus: false, ...roll },
+        { labelPrefix, labelFormatterPrefix, required: true }
+      ),
       ...fields
     };
     Object.entries(fields).forEach(([k, v]) => !v ? delete fields[k] : null);

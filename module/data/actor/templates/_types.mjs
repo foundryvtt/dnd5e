@@ -76,36 +76,32 @@
 /**
  * @typedef {CommonTemplateData} CreatureTemplateData
  * @property {object} bonuses
- * @property {AttackBonusesData} bonuses.mwak        Bonuses to melee weapon attacks.
- * @property {AttackBonusesData} bonuses.rwak        Bonuses to ranged weapon attacks.
- * @property {AttackBonusesData} bonuses.msak        Bonuses to melee spell attacks.
- * @property {AttackBonusesData} bonuses.rsak        Bonuses to ranged spell attacks.
- * @property {object} bonuses.abilities              Bonuses to ability scores.
- * @property {string} bonuses.abilities.check        Numeric or dice bonus to ability checks.
- * @property {string} bonuses.abilities.save         Numeric or dice bonus to ability saves.
- * @property {string} bonuses.abilities.skill        Numeric or dice bonus to skill checks.
  * @property {object} bonuses.spell                  Bonuses to spells.
  * @property {string} bonuses.spell.dc               Numeric bonus to spellcasting DC.
- * @property {object} rolls
- * @property {object} rolls.ability
- * @property {D20RollModificationData} rolls.ability.check  Modifications to ability checks.
- * @property {D20RollModificationData} rolls.ability.save   Modifications to ability saves.
- * @property {D20RollModificationData} rolls.ability.skill  Modifications to skill checks.
- * @property {AttackModificationData} rolls.attack          Modifications to attack rolls.
- * @property {AttackModificationData} rolls.attack.spell    Modifications to spell attacks.
- * @property {AttackModificationData} rolls.attack.weapon   Modifications to weapon attacks.
- * @property {AttackDamageData} rolls.damage                Damage bonuses to attacks.
- * @property {AttackDamageData} rolls.damage.spell          Damage bonuses to spell attacks.
- * @property {AttackDamageData} rolls.damage.weapon         Damage bonuses to weapon attacks.
+ * @property {object} roll
+ * @property {object} roll.ability
+ * @property {ProficientRollModificationData} roll.ability.check  Modifications to ability checks.
+ * @property {ProficientRollModificationData} roll.ability.save   Modifications to ability saves.
+ * @property {ProficientRollModificationData} roll.ability.skill  Modifications to skill checks.
+ * @property {ProficientRollModificationData} roll.ability.tool   Modifications to tool checks.
+ * @property {D20ModificationData} roll.attack       Modifications to attack rolls.
+ * @property {D20ModificationData} roll.attack.msak  Modifications to melee spell attack rolls.
+ * @property {D20ModificationData} roll.attack.mwak  Modifications to melee weapon attack rolls.
+ * @property {D20ModificationData} roll.attack.rsak  Modifications to ranged spell attack rolls.
+ * @property {D20ModificationData} roll.attack.rwak  Modifications to ranged weapon attack rolls.
+ * @property {object} roll.damage
+ * @property {DamageRollModificationData} roll.damage.msak  Damage bonuses to melee spell attacks.
+ * @property {DamageRollModificationData} roll.damage.mwak  Damage bonuses to melee weapon attacks.
+ * @property {DamageRollModificationData} roll.damage.rsak  Damage bonuses to ranged spell attacks.
+ * @property {DamageRollModificationData} roll.damage.rwak  Damage bonuses to ranged weapon attacks.
  * @property {Record<string, ToolData>} tools        Actor's tools.
  * @property {Record<string, SkillData>} skills      Actor's skills.
  * @property {Record<string, SpellSlotData>} spells  Actor's spell slots.
  */
 
 /**
- * @typedef {DamageRollModificationData} AttackModificationData
- * @property {DamageRollModificationData} melee   Damage bonus for melee attacks in this category.
- * @property {DamageRollModificationData} ranged  Damage bonus for ranged attacks in this category.
+ * @typedef {D20RollModificationData} ProficientRollModificationData
+ * @property {number} melee   Damage bonus for melee attacks in this category.
  */
 
 /**

@@ -2,6 +2,7 @@ import AttackSheet from "../../applications/activity/attack-sheet.mjs";
 import AttackRollConfigurationDialog from "../../applications/dice/attack-configuration-dialog.mjs";
 import BaseAttackActivityData from "../../data/activity/attack-data.mjs";
 import AdvantageModeField from "../../data/fields/advantage-mode-field.mjs";
+import D20RollModificationField from "../../data/shared/d20-roll-modification-field.mjs";
 import { getTargetDescriptors } from "../../utils.mjs";
 import AppliedRules from "../applied-rules.mjs";
 import ActivityMixin from "./mixin.mjs";
@@ -119,10 +120,9 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
     }
 
     const rollData = this.getRollData({ roll: { attackMode: rollConfig.attackMode } });
-    const { advantage, disadvantage } = this.actor ? AdvantageModeField.combineFields(
-      this.actor.system, [],
-      AppliedRules.collect("attack:advantage", this.actor, this.item).filterWith(rollData).toAdvantageCounts()
-    ) : {};
+    const { advantage, disadvantage } = this.actor ? D20RollModificationField.combineFields(this.actor.system, [
+      "roll.attack", `roll.attack.${this.getActionType(rollConfig.attackMode)}`
+    ], AppliedRules.collect("attack:advantage", this.actor, this.item).filterWith(rollData).toAdvantageCounts()) : {};
 
     rollConfig.hookNames = [...(config.hookNames ?? []), "attack", "d20Test"];
     rollConfig.rolls = [CONFIG.Dice.D20Roll.mergeConfigs({
@@ -259,14 +259,14 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
     const mastery = formData?.get("mastery") ?? process.mastery;
 
     let { parts, data } = this.getAttackData({ ammunition, attackMode });
-    const options = foundry.utils.mergeObject({
+    const options = CONFIG.Dice.D20Roll.mergeOptions({
       maximum: this.actor
         ? AppliedRules.collect("attack:maximum", this.actor, this.item).filterWith(data).resolve(data).toSmallest()
         : undefined,
       minimum: this.actor
         ? AppliedRules.collect("attack:minimum", this.actor, this.item).filterWith(data).resolve(data).toLargest()
         : undefined,
-    }, config.options ?? {});
+    }, config.options);
     if ( ammunition !== undefined ) options.ammunition = ammunition;
     if ( attackMode !== undefined ) options.attackMode = attackMode;
     if ( mastery !== undefined ) options.mastery = mastery;

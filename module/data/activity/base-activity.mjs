@@ -845,7 +845,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
 
     if ( index === 0 ) {
       const actionType = this.getActionType(rollConfig.attackMode);
-      const bonus = foundry.utils.getProperty(this.actor ?? {}, `system.bonuses.${actionType}.damage`);
+      const bonus = foundry.utils.getProperty(this.actor ?? {}, `system.roll.damage.${actionType}.bonus`);
       if ( bonus && !/^0+$/.test(bonus) ) parts.push(bonus);
       if ( this.item.system.damage?.bonus ) parts.push(String(this.item.system.damage.bonus));
     }

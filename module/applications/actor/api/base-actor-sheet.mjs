@@ -379,11 +379,15 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
     // Global Bonuses
     const globals = [];
-    const addBonus = field => {
-      if ( field instanceof SchemaField ) Object.values(field.fields).forEach(f => addBonus(f));
-      else globals.push({ field, name: field.fieldPath, value: foundry.utils.getProperty(source, field.fieldPath) });
+    const addBonus = (field, checkName=false) => {
+      if ( field instanceof SchemaField ) Object.values(field.fields).forEach(f => addBonus(f, checkName));
+      else if ( !checkName || (field.name === "bonus") ) globals.push({
+        field, disabled: context.flags.disabled, localize: true, name: field.fieldPath,
+        value: foundry.utils.getProperty(source, field.fieldPath)
+      });
     };
     addBonus(this.document.system.schema.fields.bonuses);
+    addBonus(this.document.system.schema.fields.roll, true);
     if ( globals.length ) sections[_loc("DND5E.BONUSES.FIELDS.bonuses.label")] = globals;
 
     flags.sections = Object.entries(sections).map(([label, fields]) => ({ label, fields }));

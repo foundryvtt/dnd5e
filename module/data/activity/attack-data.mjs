@@ -269,7 +269,8 @@ export default class BaseAttackActivityData extends BaseActivityData {
       bonus: this.attack.bonus,
       weaponMagic: weapon.magicAvailable ? weapon.magicalBonus : null,
       ammoMagic: ammo?.magicAvailable ? ammo.magicalBonus : null,
-      actorBonus: this.actor?.system.bonuses?.[this.getActionType(attackMode)]?.attack,
+      actorGenericBonus: this.actor?.system.roll?.attack?.bonus,
+      actorSpecificBonus: this.actor?.system.roll?.attack?.[this.getActionType(attackMode)]?.bonus,
       ruleBonus: AppliedRules.collect("attack:bonus", this.actor, this.item).filterWith(rollData).toFormula(),
       situational
     }, rollData);
