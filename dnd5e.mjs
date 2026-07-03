@@ -410,25 +410,26 @@ function _configureFonts() {
  * Configure system status effects.
  */
 function _configureStatusEffects() {
-  const addEffect = (effects, {special, ...data}) => {
+  const statusEffects = {};
+  const addEffect = ({special, ...data}) => {
     data = foundry.utils.deepClone(data);
     data._id = utils.staticID(`dnd5e${data.id}`);
     data.order ??= Infinity;
-    effects.push(data);
+    statusEffects[data.id] = data;
     if ( special ) CONFIG.specialStatusEffects[special] = data.id;
     if ( data.neverBlockMovement ) DND5E.neverBlockStatuses.add(data.id);
   };
-  CONFIG.statusEffects = Object.entries(CONFIG.DND5E.statusEffects).reduce((arr, [id, data]) => {
-    const original = CONFIG.statusEffects.find(s => s.id === id);
-    addEffect(arr, foundry.utils.mergeObject(original ?? {}, { id, ...data }, { inplace: false }));
-    return arr;
-  }, []);
+  for ( const [id, data] of Object.entries(CONFIG.DND5E.statusEffects) ) {
+    const original = CONFIG.statusEffects[id];
+    addEffect(foundry.utils.mergeObject(original ?? {}, { id, ...data }, { inplace: false }));
+  }
   for ( const [id, data] of Object.entries(CONFIG.DND5E.conditionTypes) ) {
-    addEffect(CONFIG.statusEffects, { id, ...data });
+    addEffect({ id, ...data });
   }
   for ( const [id, data] of Object.entries(CONFIG.DND5E.encumbrance.effects) ) {
-    addEffect(CONFIG.statusEffects, { id, ...data, hud: false });
+    addEffect({ id, ...data, hud: false });
   }
+  CONFIG.statusEffects = statusEffects;
 }
 
 /* -------------------------------------------- */

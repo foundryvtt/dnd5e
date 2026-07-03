@@ -1244,7 +1244,7 @@ export function performPreLocalization(config) {
   }
 
   // Localize & sort status effects
-  CONFIG.statusEffects.forEach(s => s.name = _loc(s.name));
+  for ( const s of Object.values(CONFIG.statusEffects) ) s.name = _loc(s.name);
 }
 
 /* -------------------------------------------- */

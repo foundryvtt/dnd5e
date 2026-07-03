@@ -3552,10 +3552,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     if ( hasLevels ) created = await ConditionData._applyDelta(statusId, this, { levels: options.levels ?? 1});
     created ??= await super.toggleStatusEffect(statusId, options);
-    const status = CONFIG.statusEffects.find(e => e.id === statusId);
+    const status = CONFIG.statusEffects[statusId];
     if ( !(created instanceof ActiveEffect) || !status.exclusiveGroup ) return created;
 
-    const others = CONFIG.statusEffects
+    const others = Object.values(CONFIG.statusEffects)
       .filter(e => (e.id !== statusId) && (e.exclusiveGroup === status.exclusiveGroup) && this.effects.has(e._id));
     if ( others.length ) await this.deleteEmbeddedDocuments("ActiveEffect", others.map(e => e._id));
 
