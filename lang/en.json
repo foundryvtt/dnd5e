@@ -6500,7 +6500,7 @@
     },
     "AutoApplyDowned": {
       "Name": "Auto-Apply Downed",
-      "Hint": "Automatically apply the \"Dead\" or \"Unconscious\" status when a creature is reduced to 0 HP in combat. Unimportant NPCs are marked Dead. Important NPCs and PCs are marked Unconscious first, and Dead if they fail three death saving throws.",
+      "Hint": "Automatically mark a creature as Dead or Unconscious when it is reduced to 0 HP in combat. Unimportant NPCs are marked Dead. Important NPCs and PCs are marked Unconscious first, and Dead if they fail three death saving throws.",
       "None": "Never",
       "DeadOnly": "For NPCs (dead only)",
       "NPCs": "For NPCs (dead and unconscious)",

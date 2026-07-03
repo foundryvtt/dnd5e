@@ -3622,9 +3622,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       const autoEffects = this.effects.filter(e => e.getFlag("dnd5e", "autoDowned"));
       return this.deleteEmbeddedDocuments("ActiveEffect", autoEffects.map(e => e.id));
     }
+    const conditionEffects = this.effects.documentsByType.condition;
+    const isDead = conditionEffects.some(e => e.system.type === "dead");
+    const isUnconscious = conditionEffects.some(e => e.system.type === "unconscious");
 
     // Do not auto-apply statuses outside of combat or if already dead
-    if ( !this.inCombat || this.statuses.has("dead") ) return;
+    if ( !this.inCombat || isDead ) return;
     const failedDeathSaves = this.system.attributes.death.failure >= 3;
     let toApply = null;
     if ( this.type === "npc" ) {
@@ -3642,7 +3645,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       statuses: ["dead"],
       showIcon: CONST.ACTIVE_EFFECT_SHOW_ICON.ALWAYS
     }, { parent: this, keepId: true });
-    else if ( !this.statuses.has("unconscious") ) return ActiveEffect.implementation.create({
+    else if ( !isUnconscious ) return ActiveEffect.implementation.create({
       _id: CONFIG.statusEffects.unconscious._id,
       img: CONFIG.statusEffects.unconscious.img,
       flags: { dnd5e: { autoDowned: true } },
