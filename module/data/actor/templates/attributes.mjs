@@ -691,4 +691,18 @@ export default class AttributesFields {
      */
     Hooks.callAll(`dnd5e.${changes.total > 0 ? "heal" : "damage"}Actor`, this.parent, changes, changed, userId);
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Trigger auto-downed logic if failed third death save
+   * @this {CharacterData|NPCData}
+   * @param {object} changed  The differential data that was changed relative to the document's prior values.
+   * @param {object} options  Additional options which modify the update request.
+   * @param {string} userId   The id of the User requesting the document update.
+   */
+  static async onUpdateDeathSaves(changed, options, userId) {
+    if ( changed.system?.attributes?.death?.failure !== 3 ) return;
+    if (userId === game.userId ) await this.parent.updateDowned(options);
+  }
 }

@@ -6500,10 +6500,11 @@
     },
     "AutoApplyDowned": {
       "Name": "Auto-Apply Downed Conditions",
-      "Hint": "Automatically apply \"Dead\" (for unimportant NPCs) or \"Unconscious\" (for others) when an actor is reduced to 0 HP in combat.",
-      "None": "Never auto-apply",
-      "DeadOnly": "Auto-apply \"Dead\"",
-      "All": "Auto-apply \"Dead\" and \"Unconscious\""
+      "Hint": "Automatically apply \"Dead\" (for unimportant NPCs) or \"Unconscious\" (for others) when an actor is reduced to 0 HP in combat or fails their third death saving throw.",
+      "None": "Never",
+      "DeadOnly": "For NPCs (dead only)",
+      "NPCs": "For NPCs (dead and unconscious)",
+      "All": "Always"
     },
     "InitiativeScore": {
       "Name": "Initiative Score",

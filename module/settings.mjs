@@ -512,6 +512,7 @@ export function registerSystemSettings() {
     choices: {
       none: "SETTINGS.DND5E.COMBAT.AutoApplyDowned.None",
       deadOnly: "SETTINGS.DND5E.COMBAT.AutoApplyDowned.DeadOnly",
+      npcs: "SETTINGS.DND5E.COMBAT.AutoApplyDowned.NPCs",
       all: "SETTINGS.DND5E.COMBAT.AutoApplyDowned.All"
     }
   });
