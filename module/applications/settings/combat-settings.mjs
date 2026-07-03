@@ -24,7 +24,7 @@ export default class CombatSettingsConfig extends BaseSettingsConfig {
     npcs: {
       template: "systems/dnd5e/templates/settings/base-config.hbs"
     },
-    effects: {
+    conditions: {
       template: "systems/dnd5e/templates/settings/base-config.hbs"
     },
     encounterPlacement: {
@@ -72,11 +72,11 @@ export default class CombatSettingsConfig extends BaseSettingsConfig {
         ];
         context.legend = _loc("SETTINGS.DND5E.ENCOUNTERS.Name");
         break;
-      case "effects":
+      case "conditions":
         context.fields = [
           this.createSettingField("autoApplyDowned")
         ];
-        context.legend = _loc("SETTINGS.DND5E.EFFECTS.Name");
+        context.legend = _loc("SETTINGS.DND5E.CONDITIONS.Name");
         break;
     }
     return context;
