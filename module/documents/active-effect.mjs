@@ -182,7 +182,8 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       foundry.utils.setProperty(data, "flags.dnd5e.persistSourceMigration", true);
     }
 
-    else if ( Object.values(CONFIG.statusEffects).some(e => e._id === data._id) ) {
+    else if ( (data.type !== "condition")
+      && Object.values(CONFIG.statusEffects).some(e => e._id === data._id) ) {
       foundry.utils.mergeObject(data, {
         type: "condition",
         "system.type": data.statuses[0],
@@ -451,7 +452,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     const riders = new Set(this.system.rider?.statuses ?? []);
 
     for ( const status of this.statuses ) {
-      const r = CONFIG.statusEffects.find(e => e.id === status)?.riders ?? [];
+      const r = CONFIG.statusEffects[status]?.riders ?? [];
       for ( const p of r ) riders.add(p);
     }
 
@@ -663,7 +664,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       throw new Error("You may not begin concentrating on this item!");
     }
 
-    const statusEffect = CONFIG.statusEffects.find(e => e.id === CONFIG.specialStatusEffects.CONCENTRATING);
+    const statusEffect = CONFIG.statusEffects[CONFIG.specialStatusEffects.CONCENTRATING];
     const effectData = foundry.utils.mergeObject({
       ...statusEffect,
       name: `${_loc("EFFECT.DND5E.StatusConcentrating")}: ${item.name}`,
@@ -724,7 +725,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     });
     const statusesField = fields.rider?.fields?.statuses?.toFormGroup({}, {
       value: app.document.system._source.rider?.statuses ?? [],
-      options: CONFIG.statusEffects.map(se => ({ value: se.id, label: se.name })),
+      options: Object.values(CONFIG.statusEffects).map(se => ({ value: se.id, label: se.name })),
       disabled: !context.editable
     });
     const detailsTab = html.querySelector("[data-application-part=details]");
