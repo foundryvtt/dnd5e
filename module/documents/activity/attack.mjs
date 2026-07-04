@@ -1,7 +1,9 @@
 import AttackSheet from "../../applications/activity/attack-sheet.mjs";
 import AttackRollConfigurationDialog from "../../applications/dice/attack-configuration-dialog.mjs";
 import BaseAttackActivityData from "../../data/activity/attack-data.mjs";
+import AdvantageModeField from "../../data/fields/advantage-mode-field.mjs";
 import { getTargetDescriptors } from "../../utils.mjs";
+import AppliedRules from "../applied-rules.mjs";
 import ActivityMixin from "./mixin.mjs";
 
 /**
@@ -116,9 +118,16 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
       rollConfig.mastery = masteryOptions?.[0]?.value;
     }
 
+    const rollData = this.getRollData({ data: { roll: { attack: { mode: rollConfig.attackMode } } } });
+    const { advantage, disadvantage } = this.actor ? AdvantageModeField.combineFields(
+      this.actor.system, [],
+      AppliedRules.collect("attack:advantage", this.actor, this.item).filterWith(rollData).toAdvantageCounts()
+    ) : {};
+
     rollConfig.hookNames = [...(config.hookNames ?? []), "attack", "d20Test"];
     rollConfig.rolls = [CONFIG.Dice.D20Roll.mergeConfigs({
       options: {
+        advantage, disadvantage,
         ammunition: rollConfig.ammunition,
         attackMode: rollConfig.attackMode,
         criticalSuccess: this.criticalThreshold,

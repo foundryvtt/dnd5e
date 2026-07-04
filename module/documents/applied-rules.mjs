@@ -1,4 +1,8 @@
 /**
+ * @import { AdvantageModeData } from "../data/fields/_types.mjs";
+ */
+
+/**
  * @extends {Map<string, Map<string, ChangeData[]>>}
  */
 export default class AppliedRules extends Map {
@@ -105,6 +109,39 @@ class RulesIterator extends Iterator {
       if ( r.conditions?.check(rollData) === false ) return false;
       return true;
     }));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Count advantage mode values into number of advantages and disadvantages.
+   * @param {Partial<AdvantageModeData>} [counts]  Existing counts with which to merge rule counts.
+   * @returns {AdvantageModeData}
+   */
+  toAdvantageCounts(counts={}) {
+    return this.values(String).reduce((data, value) => {
+      switch ( value ) {
+        // 1 - Add advantage
+        case "1":
+        case "+1": data.advantages.count++; break;
+        // -1 - Add disadvantage
+        case "-1": data.disadvantages.count++; break;
+        // =1 - Always advantage
+        case "=1":
+        case "=+1": data.override = 1; break;
+        // =-1 - Always disadvantage
+        case "=-1": data.override = -1; break;
+        // >=0 - Cannot have disadvantage
+        case ">=0": data.disadvantages.suppressed = true; break;
+        // <=0 - Cannot have advantage
+        case "<=0": data.advantages.suppressed = true; break;
+      }
+      return data;
+    }, foundry.utils.mergeObject({
+      advantages: { count: 0, suppressed: false },
+      disadvantages: { count: 0, suppressed: false },
+      override: null
+    }, counts));
   }
 
   /* -------------------------------------------- */
