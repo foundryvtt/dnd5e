@@ -67,6 +67,7 @@ export default class JournalTOCConfig extends DocumentSheet5e {
     const { chapterOptions } = await TableOfContentsCompendium._getEntryBreakdown(this.compendium);
 
     const data = this.document.flags.dnd5e ?? {};
+    const appendedSpecial = (data.type === "special") && Number.isNumeric(data.append);
     context.fields = [
       {
         field: new StringField(),
@@ -113,7 +114,7 @@ export default class JournalTOCConfig extends DocumentSheet5e {
         label: game.i18n.localize("DND5E.TABLEOFCONTENTS.HideAllPages"),
         name: "hidePages",
         value: data.showPages === false,
-        visible: data.type === "chapter"
+        visible: (data.type !== "header") && !appendedSpecial
       },
       {
         field: new BooleanField(),
@@ -121,7 +122,7 @@ export default class JournalTOCConfig extends DocumentSheet5e {
         label: game.i18n.localize("DND5E.TABLEOFCONTENTS.FIELDS.showPages.label"),
         name: "showPages",
         value: data.showPages === true,
-        visible: (data.type === "appendix") || (data.type === "special")
+        visible: appendedSpecial
       },
       {
         field: new SetField(new StringField()),
@@ -139,8 +140,10 @@ export default class JournalTOCConfig extends DocumentSheet5e {
           })
           .sort((lhs, rhs) => (lhs.groupSort - rhs.groupSort) || (lhs.sort - rhs.sort)),
         value: this.#getHiddenPages(),
-        visible: ((data.type === "chapter") && (data.showPages !== false))
-          || (((data.type === "appendix") || (data.type === "special")) && (data.showPages === true))
+        visible: (data.showPages !== false) && (
+          ((data.type === "chapter") || (data.type === "appendix") || ((data.type === "special") && !appendedSpecial))
+          || (appendedSpecial && (data.showPages === true))
+        )
       }
     ];
 
