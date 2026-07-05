@@ -221,9 +221,11 @@ system:
           contiguous: false
           stationary: false
           units: ft
-          type: circle
-          size: '20'
+          type: ring
+          size: '30'
           count: ''
+          width: '5'
+          height: '20'
         affects:
           choice: false
           type: creature
@@ -260,7 +262,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 6.0.0
   createdTime: 1725037361045
-  modifiedTime: 1781435153561
+  modifiedTime: 1783216108447
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!dLJhxDfeyOsc3zsY'

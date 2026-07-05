@@ -17,8 +17,8 @@ system:
       crushing the sapphire doesn't transport the item to you, but instead you
       learn who the creature possessing the object is and roughly where that
       creature is located at that
-      moment.</p><p>@UUID[Compendium.dnd5e.spells.Item.15Fa6q1nH27XfbR8]{Dispel
-      Magic} or a similar effect successfully applied to the sapphire ends this
+      moment.</p><p>@UUID[Compendium.dnd5e.spells.Item.15Fa6q1nH27XfbR8]{dispel
+      magic} or a similar effect successfully applied to the sapphire ends this
       spell's effect.</p>
     chat: ''
   source:
@@ -203,16 +203,16 @@ effects:
           type: override
           value: >-
             {} <p><strong>Instant Summons.</strong> This object has been marked
-            by the @UUID[Compendium.dnd5e.spells.Item.SgrEKiC6dAtvy6Pz]{Instant
-            Summons} spell and can be summoned to the caster's hands regardless
+            by the @UUID[Compendium.dnd5e.spells.Item.SgrEKiC6dAtvy6Pz]{instant
+            summons} spell and can be summoned to the caster's hands regardless
             of physical or planar distance when its name is spoken and the
             corresponding sapphire is crushed, ending the spell.</p> <p>If
             another creature is holding or carrying the item, crushing the
             sapphire doesn't transport the item to the caster, but they instead
             learn who the creature possessing the object is and roughly where
             that creature is located at that moment.</p>
-            <p>@UUID[Compendium.dnd5e.spells.Item.15Fa6q1nH27XfbR8]{Dispel
-            Magic} or a similar effect successfully applied to the sapphire ends
+            <p>@UUID[Compendium.dnd5e.spells.Item.15Fa6q1nH27XfbR8]{dispel
+            magic} or a similar effect successfully applied to the sapphire ends
             this spell's effect.</p>
           phase: initial
           priority: null
@@ -224,19 +224,16 @@ effects:
       expired: false
     description: >-
       <p><strong>Instant Summons.</strong> This object has been marked by the
-      @UUID[Compendium.dnd5e.spells.Item.SgrEKiC6dAtvy6Pz]{Instant Summons}
+      @UUID[Compendium.dnd5e.spells.Item.SgrEKiC6dAtvy6Pz]{instant summons}
       spell and can be summoned to the caster's hands regardless of physical or
       planar distance when its name is spoken and the corresponding sapphire is
-      crushed, ending the spell.</p>
-
-      <p>If another creature is holding or carrying the item, crushing the
-      sapphire doesn't transport the item to the caster, but they instead learn
-      who the creature possessing the object is and roughly where that creature
-      is located at that moment.</p>
-
-      <p>@UUID[Compendium.dnd5e.spells.Item.15Fa6q1nH27XfbR8]{Dispel Magic} or a
-      similar effect successfully applied to the sapphire ends this spell's
-      effect.</p>
+      crushed, ending the spell.</p><p>If another creature is holding or
+      carrying the item, crushing the sapphire doesn't transport the item to the
+      caster, but they instead learn who the creature possessing the object is
+      and roughly where that creature is located at that
+      moment.</p><p>@UUID[Compendium.dnd5e.spells.Item.15Fa6q1nH27XfbR8]{dispel
+      magic} or a similar effect successfully applied to the sapphire ends this
+      spell's effect.</p>
     origin: null
     tint: '#ffffff'
     transfer: true
@@ -253,7 +250,7 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781447107939
-      modifiedTime: 1781447341987
+      modifiedTime: 1783215570678
       lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null
@@ -266,7 +263,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 6.0.0
   createdTime: 1725037356587
-  modifiedTime: 1781447374682
+  modifiedTime: 1783215522644
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!SgrEKiC6dAtvy6Pz'

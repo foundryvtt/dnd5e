@@ -65,75 +65,12 @@ system:
     - material
     - concentration
   activities:
-    VtaByFBtaWze0TIr:
-      type: enchant
-      name: Cast
-      _id: VtaByFBtaWze0TIr
-      img: ''
-      sort: 100000
-      activation:
-        type: action
-        override: false
-      consumption:
-        scaling:
-          allowed: false
-        spellSlot: true
-        targets: []
-      description:
-        value: ''
-        chatFlavor: ''
-      duration:
-        units: inst
-        concentration: false
-        override: false
-      effects:
-        - _id: TtFRtW3sqtnZ0F4Z
-          level:
-            min: null
-            max: null
-          riders:
-            activity:
-              - mHlSGE3y0KLvlfaj
-            effect:
-              - kWBi1D1UMm4XsLgt
-            item: []
-      flags: {}
-      range:
-        units: self
-        override: false
-      target:
-        template:
-          contiguous: false
-          stationary: false
-          units: ft
-        affects:
-          choice: false
-        override: true
-        prompt: false
-      uses:
-        spent: 0
-        recovery: []
-        max: ''
-      visibility:
-        level:
-          min: null
-          max: null
-        requireAttunement: false
-        requireIdentification: false
-        requireMagic: false
-      enchant:
-        self: true
-      restrictions:
-        allowMagical: false
-        categories: []
-        properties: []
-        type: spell
     mHlSGE3y0KLvlfaj:
       type: save
       name: Line of Radiance
       _id: mHlSGE3y0KLvlfaj
       img: ''
-      sort: 200000
+      sort: 600000
       activation:
         type: action
         override: false
@@ -211,55 +148,69 @@ system:
           formula: ''
         visible: true
         bonus: ''
+    IGmFdcD9mxoHsJf9:
+      type: utility
+      name: Cast
+      _id: IGmFdcD9mxoHsJf9
+      img: ''
+      sort: 500000
+      activation:
+        type: action
+        override: false
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: cO5TRfdHXvJfJw4Q
+          uuid: null
+          level: {}
+        - _id: kWBi1D1UMm4XsLgt
+          uuid: null
+          level: {}
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
   identifier: sunbeam
 sort: 0
-flags:
-  dnd5e:
-    riders:
-      activity:
-        - mHlSGE3y0KLvlfaj
-      effect:
-        - kWBi1D1UMm4XsLgt
+flags: {}
 img: icons/magic/light/projectile-flare-expliosion-yellow.webp
 effects:
-  - type: enchantment
-    name: Sunbeam
-    img: icons/magic/light/beam-red-orange.webp
-    disabled: true
-    _id: TtFRtW3sqtnZ0F4Z
-    system:
-      changes: []
-    start: null
-    duration:
-      value: 1
-      units: minutes
-      expiry: turnStart
-      expired: false
-    description: >-
-      <p>You can form a new line of radiance as your action on any turn until
-      this spell ends.</p>
-    origin: null
-    tint: '#ffffff'
-    transfer: true
-    statuses: []
-    showIcon: 1
-    folder: null
-    sort: 0
-    flags:
-      dnd5e:
-        riders:
-          statuses: []
-    _stats:
-      coreVersion: '14.361'
-      systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1781441253405
-      modifiedTime: 1781445319233
-      lastModifiedBy: dnd5ebuilder0000
-      compendiumSource: null
-      duplicateSource: null
-      exportSource: null
-    _key: '!items.effects!2RC0EyvBLPH88PZF.TtFRtW3sqtnZ0F4Z'
   - name: Sunbeam
     img: icons/magic/light/beam-red-orange.webp
     origin: Compendium.dnd5e.spells.Item.2RC0EyvBLPH88PZF
@@ -290,9 +241,9 @@ effects:
     disabled: false
     start: null
     duration:
-      value: null
-      units: seconds
-      expiry: null
+      value: 1
+      units: minutes
+      expiry: turnStart
       expired: false
     description: >-
       <p>You can form a new line of radiance as your action on any turn until
@@ -315,7 +266,7 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781445383381
-      modifiedTime: 1781445429680
+      modifiedTime: 1783218208853
       lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null
@@ -367,7 +318,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 6.0.0
   createdTime: 1725037346050
-  modifiedTime: 1781445717701
+  modifiedTime: 1783218204184
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!2RC0EyvBLPH88PZF'

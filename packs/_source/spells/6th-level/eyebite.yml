@@ -7,8 +7,9 @@ system:
   description:
     value: >-
       <p>For the spell's duration, your eyes become an inky void imbued with
-      dread power. One creature of your choice within 60 feet of you that you
-      can see must succeed on a Wisdom saving throw or be affected by one of the
+      dread power. One creature of your choice within [[lookup
+      @labels.description.range activity=NtvCfReyXVq619Kz]] of you that you can
+      see must succeed on a Wisdom saving throw or be affected by one of the
       following Effects of your choice for the duration. On each of your turns
       until the spell ends, you can use your action to target another creature
       but can't target a creature again if it has succeeded on a saving throw
@@ -70,8 +71,7 @@ system:
     - somatic
     - concentration
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    NtvCfReyXVq619Kz:
       type: save
       activation:
         type: action
@@ -85,118 +85,286 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects:
-        - _id: 2pJGy924n0r44Zkh
+        - _id: 4aX9fGlauAQsLCAH
+          uuid: null
           onSave: false
-        - _id: VcwWVogEU3TwChxb
+          level:
+            min: null
+            max: null
+        - _id: 2X7i49sZdg2mqPZB
+          uuid: null
           onSave: false
+          level:
+            min: null
+            max: null
+        - _id: yBr3oIopzL8uDrPi
+          uuid: null
+          onSave: false
+          level:
+            min: null
+            max: null
       range:
-        override: false
+        override: true
+        value: '60'
+        units: ft
+        special: ''
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
+          type: ''
         affects:
           choice: false
-        override: false
+          count: '1'
+          type: creature
+          special: ''
+        override: true
       damage:
-        onSave: half
+        onSave: none
         parts: []
       save:
-        ability: wis
+        ability:
+          - wis
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
+        visible: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 100000
+      name: Cast
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: NtvCfReyXVq619Kz
+    eLnw2b2iYJhBaQIY:
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: false
+      description:
+        chatFlavor: ''
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects:
+        - _id: 4aX9fGlauAQsLCAH
+          uuid: null
+          onSave: false
+          level:
+            min: null
+            max: null
+        - _id: 2X7i49sZdg2mqPZB
+          uuid: null
+          onSave: false
+          level:
+            min: null
+            max: null
+        - _id: yBr3oIopzL8uDrPi
+          uuid: null
+          onSave: false
+          level:
+            min: null
+            max: null
+      range:
+        override: true
+        value: '60'
+        units: ft
+        special: ''
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+          stationary: false
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: true
+      damage:
+        onSave: none
+        parts: []
+      save:
+        ability:
+          - wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+        bonus: ''
+        visible: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 200000
+      name: Focus Gaze
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: eLnw2b2iYJhBaQIY
   identifier: eyebite
 sort: 0
 flags: {}
 img: icons/magic/perception/hand-eye-pink.webp
 effects:
-  - name: Eyebite (alseep)
+  - name: 'Eyebite: Slumber'
+    img: icons/magic/perception/hand-eye-pink.webp
     origin: Compendium.dnd5e.spells.Item.ZRqu3Xh9FmlBCZGy
-    duration:
-      value: 60
-      units: seconds
-      expiry: turnStart
-      expired: false
-    disabled: true
-    _id: 2pJGy924n0r44Zkh
-    description: >-
-      <p>The target falls Unconscious. It wakes up if it takes any damage or if
-      another creature uses its action to shake the sleeper awake.</p>
     transfer: false
+    _id: 4aX9fGlauAQsLCAH
+    type: base
+    system:
+      changes: []
+      magical: false
+      rider:
+        statuses: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You have fallen &amp;reference[unconscious apply=false]. You wake if
+      you take any damage or if another creature uses an action to shake you
+      awake.</p>
+    tint: '#ffffff'
     statuses:
       - unconscious
-      - incapacitated
+    showIcon: 1
+    folder: null
+    sort: 0
     flags: {}
-    tint: '#ffffff'
     _stats:
-      compendiumSource: null
-      duplicateSource: null
       coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783215797887
+      modifiedTime: 1783215859098
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
       exportSource: null
-    img: icons/magic/perception/eye-ringed-glow-angry-large-red.webp
+    _key: '!items.effects!ZRqu3Xh9FmlBCZGy.4aX9fGlauAQsLCAH'
+  - name: 'Eyebite: Panic'
+    img: icons/magic/perception/hand-eye-pink.webp
+    origin: Compendium.dnd5e.spells.Item.ZRqu3Xh9FmlBCZGy
+    transfer: false
+    _id: 2X7i49sZdg2mqPZB
     type: base
     system:
       changes: []
-    sort: 0
-    showIcon: 2
+      magical: false
+      rider:
+        statuses: []
+    disabled: false
     start: null
-    folder: null
-    _key: '!items.effects!ZRqu3Xh9FmlBCZGy.2pJGy924n0r44Zkh'
-  - name: Eyebite (panicked)
-    origin: Compendium.dnd5e.spells.Item.ZRqu3Xh9FmlBCZGy
     duration:
-      value: 60
+      value: null
       units: seconds
-      expiry: turnStart
+      expiry: null
       expired: false
-    disabled: true
-    _id: VcwWVogEU3TwChxb
     description: >-
-      <p>The target is Frightened of the caster. On each of its turns, the
-      frightened creature must take the Dash action and move away from the
-      caster by the safest and shortest available route, unless there is nowhere
-      to move. If the target moves to a place at least 60 feet away from the
-      case where it can no longer see them, this effect ends.</p>
-    transfer: false
+      <p>You are &amp;reference[frightened apply=false] of the caster. On each
+      of your turns, you must take the &amp;reference[dash] action and move away
+      from them by the safest and shortest available route, unless there is
+      nowhere to move. If you move to a place at least 60 feet away from the
+      caster where you it can no longer see you, this effect ends.</p>
+    tint: '#ffffff'
     statuses:
       - frightened
+    showIcon: 1
+    folder: null
+    sort: 0
     flags: {}
-    tint: '#ffffff'
     _stats:
-      compendiumSource: null
-      duplicateSource: null
       coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783215860856
+      modifiedTime: 1783215940494
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
       exportSource: null
-    img: icons/magic/perception/eye-ringed-glow-angry-large-red.webp
+    _key: '!items.effects!ZRqu3Xh9FmlBCZGy.2X7i49sZdg2mqPZB'
+  - name: 'Eyebite: Sickened'
+    img: icons/magic/perception/hand-eye-pink.webp
+    origin: Compendium.dnd5e.spells.Item.ZRqu3Xh9FmlBCZGy
+    transfer: false
+    _id: yBr3oIopzL8uDrPi
     type: base
     system:
       changes: []
-    sort: 0
-    showIcon: 2
+      magical: false
+      rider:
+        statuses: []
+    disabled: false
     start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You have disadvantage on attack rolls and ability checks. At the end of
+      each of your turns, you can make another Wisdom saving throw. If you
+      succeed, the effect ends.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 2
     folder: null
-    _key: '!items.effects!ZRqu3Xh9FmlBCZGy.VcwWVogEU3TwChxb'
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783215943839
+      modifiedTime: 1783215986055
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!ZRqu3Xh9FmlBCZGy.yBr3oIopzL8uDrPi'
 folder: 0pdesvXqKd55VOh2
 _stats:
   duplicateSource: null
@@ -204,7 +372,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 6.0.0
   createdTime: 1725037359262
-  modifiedTime: 1781435934639
+  modifiedTime: 1783216025855
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!ZRqu3Xh9FmlBCZGy'

@@ -163,12 +163,16 @@ system:
           contiguous: false
           units: ft
           stationary: false
-          type: circle
+          type: ring
           size: '10'
           count: ''
+          width: '5'
+          height: '20'
         affects:
           choice: false
           type: creature
+          count: ''
+          special: ''
         override: true
       damage:
         onSave: half
@@ -301,7 +305,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 6.0.0
   createdTime: 1725037349938
-  modifiedTime: 1781440492461
+  modifiedTime: 1783215373664
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!AQsBc94ES7W7s7iG'

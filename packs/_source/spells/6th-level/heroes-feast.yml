@@ -125,55 +125,6 @@ flags: {}
 img: icons/consumables/food/cheese-wedge-swiss-yellow.webp
 effects:
   - name: Heroes' Feast
-    origin: Compendium.dnd5e.spells.Item.mgFqi0ev8f7Ut19y
-    duration:
-      value: 86400
-      units: seconds
-      expiry: turnStart
-      expired: false
-    disabled: true
-    _id: RY4byZPJu4TkIxyz
-    description: >-
-      <p>The creature is cured of all Diseases and poison, becomes immune to
-      poison and being Frightened, and makes all Wisdom Saving Throws with
-      advantage. Its hit point maximum also increases by 2d10, and it gains the
-      same number of Hit Points. These benefits last for 24 hours.</p>
-    transfer: false
-    statuses: []
-    flags: {}
-    tint: '#ffffff'
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '14.361'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    img: icons/magic/life/heart-cross-strong-flame-purple-orange.webp
-    type: base
-    system:
-      changes:
-        - key: system.traits.di.value
-          value: poison
-          priority: null
-          type: add
-        - key: system.traits.ci.value
-          value: poisoned
-          priority: null
-          type: add
-        - key: system.traits.ci.value
-          value: frightened
-          priority: null
-          type: add
-    sort: 0
-    start: null
-    showIcon: 1
-    folder: null
-    _key: '!items.effects!mgFqi0ev8f7Ut19y.RY4byZPJu4TkIxyz'
-  - name: Heroes' Feast
     img: icons/consumables/food/cheese-wedge-swiss-yellow.webp
     origin: Compendium.dnd5e.spells.Item.mgFqi0ev8f7Ut19y
     transfer: false
