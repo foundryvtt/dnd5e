@@ -127,7 +127,7 @@ system:
         spent: 0
         recovery: []
         max: ''
-      sort: 300000
+      sort: 600000
       name: Vampiric Touch Attack
       img: ''
       flags: {}
@@ -139,15 +139,16 @@ system:
         requireIdentification: false
         requireMagic: false
       _id: 2exFAw3zKK49UfZJ
-    4PQmIVu7SAqpMvHv:
-      type: enchant
+    KfKXsfMmkV5Z6EiR:
+      type: utility
       name: Cast
-      _id: 4PQmIVu7SAqpMvHv
+      _id: KfKXsfMmkV5Z6EiR
       img: ''
-      sort: 400000
+      sort: 500000
       activation:
         type: action
         override: false
+      behaviors: []
       consumption:
         scaling:
           allowed: false
@@ -161,16 +162,9 @@ system:
         concentration: false
         override: false
       effects:
-        - _id: lsN93jcqyH4o05AN
-          level:
-            min: null
-            max: null
-          riders:
-            activity:
-              - 2exFAw3zKK49UfZJ
-            effect:
-              - K4VZdmVD4p9PErIh
-            item: []
+        - _id: K4VZdmVD4p9PErIh
+          uuid: null
+          level: {}
       flags: {}
       range:
         units: self
@@ -195,22 +189,14 @@ system:
         requireAttunement: false
         requireIdentification: false
         requireMagic: false
-      enchant:
-        self: true
-      restrictions:
-        allowMagical: false
-        categories: []
-        properties: []
-        type: spell
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
   identifier: vampiric-touch
 sort: 0
-flags:
-  dnd5e:
-    riders:
-      activity:
-        - 2exFAw3zKK49UfZJ
-      effect:
-        - K4VZdmVD4p9PErIh
+flags: {}
 img: icons/magic/unholy/hand-claw-glow-orange.webp
 effects:
   - name: Vampiric Touch
@@ -224,9 +210,9 @@ effects:
     disabled: false
     start: null
     duration:
-      value: null
-      units: seconds
-      expiry: null
+      value: 1
+      units: minutes
+      expiry: turnStart
       expired: false
     description: >-
       <p>The touch of your shadow-wreathed hand can siphon life force from
@@ -246,51 +232,12 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781307352497
-      modifiedTime: 1781356369186
+      modifiedTime: 1783217026902
       lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null
       exportSource: null
     _key: '!items.effects!UfHQhA54M4323gVO.K4VZdmVD4p9PErIh'
-  - type: enchantment
-    name: Vampiric Touch
-    img: icons/magic/unholy/hand-claw-glow-orange.webp
-    disabled: true
-    _id: lsN93jcqyH4o05AN
-    system:
-      changes: []
-    start: null
-    duration:
-      value: 1
-      units: minutes
-      expiry: turnStart
-      expired: false
-    description: >-
-      <p>You can repeat the attack from the
-      @UUID[Compendium.dnd5e.spells.Item.UfHQhA54M4323gVO]{Vampiric Touch} spell
-      on each of your turns.</p>
-    origin: null
-    tint: '#ffffff'
-    transfer: true
-    statuses: []
-    showIcon: 1
-    folder: null
-    sort: 0
-    flags:
-      dnd5e:
-        riders:
-          statuses: []
-    _stats:
-      coreVersion: '14.361'
-      systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1781356272172
-      modifiedTime: 1781356374041
-      lastModifiedBy: dnd5ebuilder0000
-      compendiumSource: null
-      duplicateSource: null
-      exportSource: null
-    _key: '!items.effects!UfHQhA54M4323gVO.lsN93jcqyH4o05AN'
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
@@ -298,7 +245,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 6.0.0
   createdTime: 1725037357370
-  modifiedTime: 1781356357719
+  modifiedTime: 1783217008709
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!UfHQhA54M4323gVO'

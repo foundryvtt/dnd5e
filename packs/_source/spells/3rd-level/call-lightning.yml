@@ -221,15 +221,16 @@ system:
         visible: true
         bonus: ''
       _id: eMwCeO9hr0fOnDJx
-    swLHmKPrExqKpDXn:
-      type: enchant
+    DbENrGJ4INjSxR6p:
+      type: utility
       name: Cast
-      _id: swLHmKPrExqKpDXn
-      img: ''
+      _id: DbENrGJ4INjSxR6p
+      img: null
       sort: 0
       activation:
         type: action
         override: false
+      behaviors: []
       consumption:
         scaling:
           allowed: false
@@ -237,22 +238,14 @@ system:
         targets: []
       description:
         value: ''
-        chatFlavor: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects:
-        - _id: ehbxRW6a6pvG69Gx
-          level:
-            min: null
-            max: null
-          riders:
-            activity:
-              - giA2SOiOUIIjl1H1
-              - eMwCeO9hr0fOnDJx
-            effect: []
-            item: []
+        - _id: Rr22YcqOODpYOlJJ
+          uuid: null
+          level: {}
       flags: {}
       range:
         units: self
@@ -269,67 +262,57 @@ system:
       uses:
         spent: 0
         recovery: []
-        max: ''
       visibility:
-        level:
-          min: null
-          max: null
+        level: {}
         requireAttunement: false
         requireIdentification: false
         requireMagic: false
-      enchant:
-        self: true
-      restrictions:
-        allowMagical: true
-        categories: []
-        properties: []
-        type: spell
+      roll:
+        prompt: false
+        visible: false
   identifier: call-lightning
 sort: 0
-flags:
-  dnd5e:
-    riders:
-      activity:
-        - giA2SOiOUIIjl1H1
-        - eMwCeO9hr0fOnDJx
+flags: {}
 img: icons/magic/lightning/bolt-cloud-sky-white.webp
 effects:
-  - type: enchantment
-    name: Call Lightning
+  - name: Call Lightning
     img: icons/magic/lightning/bolt-cloud-sky-white.webp
-    disabled: true
-    _id: ehbxRW6a6pvG69Gx
+    origin: Compendium.dnd5e.spells.Item.ehvmg9U9fcMEhE4z
+    transfer: false
+    _id: Rr22YcqOODpYOlJJ
+    type: base
     system:
       changes: []
+      magical: false
+      rider:
+        statuses: []
+    disabled: false
     start: null
     duration:
       value: 10
       units: minutes
       expiry: turnStart
       expired: false
-    description: <p>You have conjured a storm to call lightning from.</p>
-    origin: null
+    description: >-
+      <p>You have conjured a storm to call lightning from. As an action until
+      this spell ends, you can call down bolts of lightning.</p>
     tint: '#ffffff'
-    transfer: true
     statuses: []
     showIcon: 1
     folder: null
     sort: 0
-    flags:
-      dnd5e:
-        riders:
-          statuses: []
+    flags: {}
     _stats:
       coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1781356092939
-      modifiedTime: 1781356170481
+      createdTime: 1783217267507
+      modifiedTime: 1783217333019
       lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-    _key: '!items.effects!ehvmg9U9fcMEhE4z.ehbxRW6a6pvG69Gx'
+    _key: '!items.effects!ehvmg9U9fcMEhE4z.Rr22YcqOODpYOlJJ'
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
@@ -337,7 +320,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 6.0.0
   createdTime: 1725037361893
-  modifiedTime: 1781356404369
+  modifiedTime: 1783217267558
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!ehvmg9U9fcMEhE4z'

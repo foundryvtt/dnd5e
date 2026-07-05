@@ -65,69 +65,6 @@ system:
     - vocal
     - somatic
   activities:
-    Fi6fAtoW49NrltE1:
-      type: enchant
-      name: Cast
-      _id: Fi6fAtoW49NrltE1
-      img: ''
-      sort: 200000
-      activation:
-        type: action
-        override: false
-      consumption:
-        scaling:
-          allowed: false
-        spellSlot: true
-        targets: []
-      description:
-        value: ''
-        chatFlavor: ''
-      duration:
-        units: inst
-        concentration: false
-        override: false
-      effects:
-        - _id: RZH3OOkKPx8ee4XY
-          level:
-            min: null
-            max: null
-          riders:
-            activity:
-              - Vw0IvqP9k2jfsu8n
-              - rE8UtAtoQVZnodXV
-            effect: []
-            item: []
-      flags: {}
-      range:
-        units: self
-        override: false
-      target:
-        template:
-          contiguous: false
-          stationary: false
-          units: ft
-        affects:
-          choice: false
-        override: false
-        prompt: true
-      uses:
-        spent: 0
-        recovery: []
-        max: ''
-      visibility:
-        level:
-          min: null
-          max: null
-        requireAttunement: false
-        requireIdentification: false
-        requireMagic: false
-      enchant:
-        self: true
-      restrictions:
-        allowMagical: false
-        categories: []
-        properties: []
-        type: ''
     Vw0IvqP9k2jfsu8n:
       type: utility
       name: Blink Check
@@ -187,51 +124,44 @@ system:
         visible: false
         name: Blink Check
         formula: 1d20
-    rE8UtAtoQVZnodXV:
+    16QEMgsGT7SpSMTD:
       type: utility
-      name: Reappear
-      _id: rE8UtAtoQVZnodXV
+      name: Cast
+      _id: 16QEMgsGT7SpSMTD
       img: ''
-      sort: 400000
+      sort: 200000
       activation:
-        type: turnStart
-        override: true
-        condition: ''
+        type: action
+        override: false
+      behaviors: []
       consumption:
         scaling:
           allowed: false
-        spellSlot: false
+        spellSlot: true
         targets: []
       description:
-        value: >-
-          <p>You return to an unoccupied space of your choice that you can see
-          within 10 feet of the space you vanished from. If no unoccupied space
-          is available within that range, you appear in the nearest unoccupied
-          space (chosen at random if more than one space is equally near).</p>
+        value: ''
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
-        override: true
-      effects: []
+        override: false
+      effects:
+        - _id: YxZfy9MITIFESXWT
+          uuid: null
+          level: {}
       flags: {}
       range:
-        units: ft
-        override: true
-        special: ''
-        value: '10'
+        units: self
+        override: false
       target:
         template:
           contiguous: false
           stationary: false
           units: ft
-          type: ''
         affects:
           choice: false
-          type: space
-          count: '10'
-          special: ''
-        override: true
+        override: false
         prompt: true
       uses:
         spent: 0
@@ -251,12 +181,7 @@ system:
         formula: ''
   identifier: blink
 sort: 0
-flags:
-  dnd5e:
-    riders:
-      activity:
-        - Vw0IvqP9k2jfsu8n
-        - rE8UtAtoQVZnodXV
+flags: {}
 img: icons/creatures/magical/spirit-fear-energy-pink.webp
 effects:
   - name: Blinking
@@ -310,46 +235,8 @@ effects:
       duplicateSource: null
       exportSource: null
     _key: '!items.effects!GSvLWcdCZLQkilXT.YxZfy9MITIFESXWT'
-  - type: enchantment
-    name: Blink
-    img: icons/creatures/magical/spirit-fear-energy-pink.webp
-    disabled: true
-    _id: RZH3OOkKPx8ee4XY
-    system:
-      changes: []
-    start: null
-    duration:
-      value: 1
-      units: minutes
-      expiry: turnStart
-      expired: false
-    description: >-
-      <p>You are blinking between your current plane of existence and the
-      Ethereal Plane.</p>
-    origin: null
-    tint: '#ffffff'
-    transfer: true
-    statuses: []
-    showIcon: 1
-    folder: null
-    sort: 0
-    flags:
-      dnd5e:
-        riders:
-          statuses: []
-    _stats:
-      coreVersion: '14.361'
-      systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1781357174724
-      modifiedTime: 1781357200406
-      lastModifiedBy: dnd5ebuilder0000
-      compendiumSource: null
-      duplicateSource: null
-      exportSource: null
-    _key: '!items.effects!GSvLWcdCZLQkilXT.RZH3OOkKPx8ee4XY'
   - name: Blinked into the Ethereal Plane
-    img: icons/creatures/magical/spirit-fear-energy-pink.webp
+    img: icons/creatures/magical/spirit-mischief-fire-blue.webp
     origin: Compendium.dnd5e.spells.Item.GSvLWcdCZLQkilXT
     transfer: false
     _id: KfxYKxbFoCe5HJYS
@@ -387,7 +274,7 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781357342958
-      modifiedTime: 1781358660930
+      modifiedTime: 1783217381043
       lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null
@@ -400,7 +287,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 6.0.0
   createdTime: 1725037352006
-  modifiedTime: 1781357491631
+  modifiedTime: 1783217369491
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!GSvLWcdCZLQkilXT'

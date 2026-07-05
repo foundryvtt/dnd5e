@@ -17,7 +17,7 @@ system:
       it wastes its action that turn doing nothing.</p></li><li><p>While the
       target is cursed, your attacks and spells deal an extra 1d8 necrotic
       damage to the target.</p></li></ul><p>A
-      @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{Remove Curse} spell
+      @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{remove curse} spell
       ends this effect. At the DM's option, you may choose an alternative curse
       effect, but it should be no more powerful than those described above. The
       DM has final say on such a curse's effect.</p><p><strong>At Higher
@@ -201,7 +201,7 @@ effects:
           type: add
     description: >-
       <p>You have Disadvantage on Charisma checks and saving throws.</p><p>A
-      @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{Remove Curse} spell
+      @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{remove curse} spell
       ends this effect.</p>
     tint: '#ffffff'
     transfer: false
@@ -217,7 +217,7 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1761861699311
-      modifiedTime: 1781288946654
+      modifiedTime: 1783217402003
       lastModifiedBy: dnd5ebuilder0000
     showIcon: 2
     start: null
@@ -250,7 +250,7 @@ effects:
           type: add
     description: >-
       <p>You have Disadvantage on Constitution checks and saving throws.</p><p>A
-      @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{Remove Curse} spell
+      @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{remove curse} spell
       ends this effect.</p>
     tint: '#ffffff'
     transfer: false
@@ -266,7 +266,7 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1761861700362
-      modifiedTime: 1781288949249
+      modifiedTime: 1783217405566
       lastModifiedBy: dnd5ebuilder0000
     showIcon: 2
     start: null
@@ -299,7 +299,7 @@ effects:
           type: add
     description: >-
       <p>You have Disadvantage on Dexterity checks and saving throws.</p><p>A
-      @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{Remove Curse} spell
+      @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{remove curse} spell
       ends this effect.</p>
     tint: '#ffffff'
     transfer: false
@@ -315,7 +315,7 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1761861702288
-      modifiedTime: 1781288951991
+      modifiedTime: 1783217409287
       lastModifiedBy: dnd5ebuilder0000
     showIcon: 2
     start: null
@@ -348,7 +348,7 @@ effects:
           type: add
     description: >-
       <p>You have Disadvantage on Intelligence checks and saving throws.</p><p>A
-      @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{Remove Curse} spell
+      @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{remove curse} spell
       ends this effect.</p>
     tint: '#ffffff'
     transfer: false
@@ -364,7 +364,7 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1761861704580
-      modifiedTime: 1781288954581
+      modifiedTime: 1783217414140
       lastModifiedBy: dnd5ebuilder0000
     showIcon: 2
     start: null
@@ -397,7 +397,7 @@ effects:
           type: add
     description: >-
       <p>You have Disadvantage on Strength checks and saving throws.</p><p>A
-      @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{Remove Curse} spell
+      @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{remove curse} spell
       ends this effect.</p>
     tint: '#ffffff'
     transfer: false
@@ -413,7 +413,7 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1761861706464
-      modifiedTime: 1781288939691
+      modifiedTime: 1783217417782
       lastModifiedBy: dnd5ebuilder0000
     showIcon: 2
     start: null
@@ -446,7 +446,7 @@ effects:
           type: add
     description: >-
       <p>You have Disadvantage on Wisdom checks and saving throws.</p><p>A
-      @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{Remove Curse} spell
+      @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{remove curse} spell
       ends this effect.</p>
     tint: '#ffffff'
     transfer: false
@@ -462,7 +462,7 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1761861707655
-      modifiedTime: 1781288933647
+      modifiedTime: 1783217421087
       lastModifiedBy: dnd5ebuilder0000
     showIcon: 2
     start: null
@@ -484,7 +484,7 @@ effects:
       expired: false
     description: >-
       <p>You have Disadvantage on attack rolls against the caster.</p><p>A
-      @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{Remove Curse} spell
+      @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{remove curse} spell
       ends this effect.</p>
     tint: '#ffffff'
     statuses:
@@ -502,7 +502,7 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1761861708992
-      modifiedTime: 1781288919851
+      modifiedTime: 1783217424280
       lastModifiedBy: dnd5ebuilder0000
     showIcon: 2
     start: null
@@ -525,7 +525,7 @@ effects:
       <p>In combat, you must succeed on a [[/save wis]] saving throw at the
       start of each of your turns. On a failure, you waste your action on your
       turn doing nothing.</p><p>A
-      @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{Remove Curse} spell
+      @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{remove curse} spell
       ends this effect.</p>
     tint: '#ffffff'
     statuses:
@@ -543,7 +543,7 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1761861710228
-      modifiedTime: 1781288910832
+      modifiedTime: 1783217430033
       lastModifiedBy: dnd5ebuilder0000
     _id: Ebzd58ARPldBzKci
     showIcon: 2
@@ -566,7 +566,7 @@ effects:
     description: >-
       <p>When the caster deals damqage to you with an attack or spell, they deal
       an additional [[/damage 1d8 necrotic]] damage.</p><p>A
-      @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{Remove Curse} spell
+      @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{remove curse} spell
       ends this effect.</p>
     tint: '#ffffff'
     statuses:
@@ -584,7 +584,7 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1761861711417
-      modifiedTime: 1781288915664
+      modifiedTime: 1783217434817
       lastModifiedBy: dnd5ebuilder0000
     _id: 2EP5ujWSLnkP1zV0
     showIcon: 2
@@ -598,7 +598,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 6.0.0
   createdTime: 1725037365284
-  modifiedTime: 1781288964665
+  modifiedTime: 1783217394618
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!pO4zGe5LmFIYqJiL'
