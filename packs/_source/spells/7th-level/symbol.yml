@@ -38,31 +38,36 @@ system:
       or half as much damage on a successful
       save.</p></li><li><p><strong>Discord.</strong> Each target must make a
       Constitution saving throw. On a failed save, a target bickers and argues
-      with other creatures for 1 minute. During this time, it is incapable of
+      with other creatures for [[lookup @labels.duration
+      activity=aQ5gGxhnROMnbUYo]]. During this time, it is incapable of
       meaningful communication and has disadvantage on attack rolls and ability
       checks.</p></li><li><p><strong>Fear.</strong> Each target must make a
-      Wisdom saving throw and becomes &amp;Reference[Frightened] for 1 minute on
-      a failed save. While Frightened, the target drops whatever it is holding
-      and must move at least 30 feet away from the glyph on each of its turns,
-      if able.</p></li><li><p><strong>Hopelessness.</strong> Each target must
-      make a Charisma saving throw. On a failed save, the target is overwhelmed
-      with despair for 1 minute. During this time, it can't attack or target any
-      creature with harmful abilities, spells, or other magical
+      Wisdom saving throw and becomes &amp;Reference[Frightened] for [[lookup
+      @labels.duration activity=JpTNQO6B5su2lz7Q]] on a failed save. While
+      Frightened, the target drops whatever it is holding and must move at least
+      30 feet away from the glyph on each of its turns, if
+      able.</p></li><li><p><strong>Hopelessness.</strong> Each target must make
+      a Charisma saving throw. On a failed save, the target is overwhelmed with
+      despair for [[lookup @labels.duration activity=EbNUoZmq2qyEIE75]]. During
+      this time, it can't attack or target any creature with harmful abilities,
+      spells, or other magical
       effects.</p></li><li><p><strong>Insanity.</strong> Each target must make
       an Intelligence saving throw. On a failed save, the target is driven
-      insane for 1 minute. An insane creature can't take actions, can't
-      understand what other creatures say, can't read, and speaks only in
-      gibberish. The DM controls its movement, which is
-      erratic.</p></li><li><p><strong>Pain.</strong> Each target must make a
-      Constitution saving throw and becomes &amp;Reference[Incapacitated] with
-      excruciating pain for 1 minute on a failed
+      insane for [[lookup @labels.duration activity=l4wdQCsSrKaSzEnP]]. An
+      insane creature can't take actions, can't understand what other creatures
+      say, can't read, and speaks only in gibberish. The DM controls its
+      movement, which is erratic.</p></li><li><p><strong>Pain.</strong> Each
+      target must make a Constitution saving throw and becomes
+      &amp;Reference[Incapacitated] with excruciating pain for [[lookup
+      @labels.duration activity=ileq899HQ5YZKEif]] on a failed
       save.</p></li><li><p><strong>Sleep.</strong> Each target must make a
-      Wisdom saving throw and falls &amp;Reference[Unconscious] for 10 minutes
-      on a failed save. A creature awakens if it takes damage or if someone uses
-      an action to shake or slap it
-      awake.</p></li><li><p><strong>Stunning.</strong> Each target must make a
-      Wisdom saving throw and becomes &amp;Reference[Stunned] for 1 minute on a
-      failed save.</p></li></ul>
+      Wisdom saving throw and falls &amp;Reference[Unconscious] for [[lookup
+      @labels.duration activity=S48Cy0ZHIKduGUUD]] on a failed save. A creature
+      awakens if it takes damage or if someone uses an action to shake or slap
+      it awake.</p></li><li><p><strong>Stunning.</strong> Each target must make
+      a Wisdom saving throw and becomes &amp;Reference[Stunned] for [[lookup
+      @labels.duration activity=SbxsIIBtx25GNijc]] on a failed
+      save.</p></li></ul>
     chat: ''
   source:
     custom: ''
@@ -261,14 +266,15 @@ system:
           the first time on a turn or ends its turn
           there.</p><h4>Discord</h4><p>Each target must make a Constitution
           saving throw. On a failed save, a target bickers and argues with other
-          creatures for 1 minute. During this time, it is incapable of
-          meaningful communication and has disadvantage on attack rolls and
-          ability checks.</p>
+          creatures for [[lookup @labels.duration activity=aQ5gGxhnROMnbUYo]].
+          During this time, it is incapable of meaningful communication and has
+          disadvantage on attack rolls and ability checks.</p>
         chatFlavor: ''
       duration:
-        units: inst
+        units: minute
         concentration: false
         override: true
+        value: '1'
       effects:
         - _id: wBljD0GOI2rgOZgm
           onSave: false
@@ -339,16 +345,17 @@ system:
           spell ends. Each creature in the sphere when the glyph activates is
           targeted by its effect, as is a creature that enters the sphere for
           the first time on a turn or ends its turn
-          there.</p><h4>Fear</h4><p>Each target must make a Constitution saving
-          throw. On a failed save, a target bickers and argues with other
-          creatures for 1 minute. During this time, it is incapable of
-          meaningful communication and has disadvantage on attack rolls and
-          ability checks.</p>
+          there.</p><h4>Fear</h4><p>Each target must make a Wisdom saving throw
+          and becomes &amp;Reference[Frightened] for [[lookup @labels.duration
+          activity=JpTNQO6B5su2lz7Q]] on a failed save. While Frightened, the
+          target drops whatever it is holding and must move at least 30 feet
+          away from the glyph on each of its turns, if able.</p>
         chatFlavor: ''
       duration:
-        units: inst
+        units: minute
         concentration: false
         override: true
+        value: '1'
       effects:
         - _id: 22oHewgna1ZehSSx
           onSave: false
@@ -421,13 +428,15 @@ system:
           the first time on a turn or ends its turn
           there.</p><h4>Hopelessness</h4><p>Each target must make a Charisma
           saving throw. On a failed save, the target is overwhelmed with despair
-          for 1 minute. During this time, it can't attack or target any creature
-          with harmful abilities, spells, or other magical effects.</p>
+          for [[lookup @labels.duration activity=EbNUoZmq2qyEIE75]]. During this
+          time, it can't attack or target any creature with harmful abilities,
+          spells, or other magical effects.</p>
         chatFlavor: ''
       duration:
-        units: inst
+        units: minute
         concentration: false
         override: true
+        value: '1'
       effects:
         - _id: 1jUvUPVKQ2x66y0d
           onSave: false
@@ -499,15 +508,17 @@ system:
           targeted by its effect, as is a creature that enters the sphere for
           the first time on a turn or ends its turn
           there.</p><h4>Insanity</h4><p>Each target must make an Intelligence
-          saving throw. On a failed save, the target is driven insane for 1
-          minute. An insane creature can't take actions, can't understand what
-          other creatures say, can't read, and speaks only in gibberish. The DM
-          controls its movement, which is erratic.</p>
+          saving throw. On a failed save, the target is driven insane for
+          [[lookup @labels.duration activity=l4wdQCsSrKaSzEnP]]. An insane
+          creature can't take actions, can't understand what other creatures
+          say, can't read, and speaks only in gibberish. The DM controls its
+          movement, which is erratic.</p>
         chatFlavor: ''
       duration:
-        units: inst
+        units: minute
         concentration: false
         override: true
+        value: '1'
       effects:
         - _id: Cvg6HrXoZJe9uWQQ
           onSave: false
@@ -580,12 +591,14 @@ system:
           the first time on a turn or ends its turn
           there.</p><h4>Pain</h4><p>Each target must make a Constitution saving
           throw and becomes &amp;Reference[Incapacitated] with excruciating pain
-          for 1 minute on a failed save.</p>
+          for [[lookup @labels.duration activity=ileq899HQ5YZKEif]] on a failed
+          save.</p>
         chatFlavor: ''
       duration:
-        units: inst
+        units: minute
         concentration: false
         override: true
+        value: '1'
       effects:
         - _id: fH66SK1HAboC2B5Q
           onSave: false
@@ -657,14 +670,16 @@ system:
           targeted by its effect, as is a creature that enters the sphere for
           the first time on a turn or ends its turn
           there.</p><h4>Sleep</h4><p>Each target must make a Wisdom saving throw
-          and falls &amp;Reference[Unconscious] for 10 minutes on a failed save.
-          A creature awakens if it takes damage or if someone uses an action to
-          shake or slap it awake.</p>
+          and falls &amp;Reference[Unconscious] for [[lookup @labels.duration
+          activity=S48Cy0ZHIKduGUUD]] on a failed save. A creature awakens if it
+          takes damage or if someone uses an action to shake or slap it
+          awake.</p>
         chatFlavor: ''
       duration:
-        units: inst
+        units: minute
         concentration: false
         override: true
+        value: '10'
       effects:
         - _id: S9Jw89F2ZmaC2lsw
           onSave: false
@@ -736,13 +751,14 @@ system:
           targeted by its effect, as is a creature that enters the sphere for
           the first time on a turn or ends its turn
           there.</p><h4>Stunning</h4><p>Each target must make a Wisdom saving
-          throw and becomes &amp;Reference[Stunned] for 1 minute on a failed
-          save.</p>
+          throw and becomes &amp;Reference[Stunned] for [[lookup
+          @labels.duration activity=SbxsIIBtx25GNijc]] on a failed save.</p>
         chatFlavor: ''
       duration:
-        units: inst
+        units: minute
         concentration: false
         override: true
+        value: '1'
       effects:
         - _id: zeCgJ2WL6LphCbJd
           onSave: false
@@ -843,7 +859,7 @@ effects:
       expiry: turnStart
       expired: false
     description: >-
-      <p>You bicker and argue with other creatures for 1 minute. During this
+      <p>You bicker and argue with other creatures for the duration. During this
       time, you are incapable of meaningful communication and have disadvantage
       on attack rolls and ability checks.</p>
     tint: '#ffffff'
@@ -860,7 +876,7 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781467299793
-      modifiedTime: 1781467375338
+      modifiedTime: 1783215276690
       lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null
@@ -882,7 +898,7 @@ effects:
       expiry: turnStart
       expired: false
     description: >-
-      <p>You are &amp;Reference[Frightened apply=false] for 1 minute. While
+      <p>You are &amp;Reference[Frightened apply=false] for the duration. While
       frightened, you drop whatever you are holding and must move at least 30
       feet away from the glyph on each of your turns, if able.</p>
     tint: '#ffffff'
@@ -900,7 +916,7 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781467400011
-      modifiedTime: 1781467460364
+      modifiedTime: 1783215282034
       lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null
@@ -922,8 +938,8 @@ effects:
       expiry: turnStart
       expired: false
     description: >-
-      <p>You are overwhelmed with despair for 1 minute. During this time, you
-      can't attack or target any creature with harmful abilities, spells, or
+      <p>You are overwhelmed with despair for the duration. During this time,
+      you can't attack or target any creature with harmful abilities, spells, or
       other magical effects.</p>
     tint: '#ffffff'
     statuses: []
@@ -939,7 +955,7 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781467499122
-      modifiedTime: 1781467526671
+      modifiedTime: 1783215286585
       lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null
@@ -976,7 +992,7 @@ effects:
       expiry: turnStart
       expired: false
     description: >-
-      <p>You have been driven insane for 1 minute. You creature can't take
+      <p>You have been driven insane for the duration. You creature can't take
       actions, can't understand what other creatures say, can't read, and speaks
       only in gibberish. The DM controls your movement, which is erratic.</p>
     tint: '#ffffff'
@@ -993,7 +1009,7 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781467864565
-      modifiedTime: 1781467946208
+      modifiedTime: 1783215291274
       lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null
@@ -1016,7 +1032,7 @@ effects:
       expired: false
     description: >-
       <p>You are &amp;reference[incapacitated apply=false] with excruciating
-      pain for 1 minute.</p>
+      pain for the duration.</p>
     tint: '#ffffff'
     statuses:
       - incapacitated
@@ -1032,7 +1048,7 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781467986739
-      modifiedTime: 1781468042979
+      modifiedTime: 1783215298253
       lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null
@@ -1054,7 +1070,7 @@ effects:
       expiry: turnStart
       expired: false
     description: >-
-      <p>You fall &amp;reference[unconcious apply=false] for 10 minutes. You
+      <p>You fall &amp;reference[unconcious apply=false] for the duration. You
       awaken if you take damage or if someone uses an action to shake or slap
       you awake.</p>
     tint: '#ffffff'
@@ -1071,7 +1087,7 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781468070813
-      modifiedTime: 1781468122023
+      modifiedTime: 1783215305160
       lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null
@@ -1092,7 +1108,7 @@ effects:
       units: minutes
       expiry: turnStart
       expired: false
-    description: <p>You are &amp;reference[stunned apply=false] for 1 minute.</p>
+    description: <p>You are &amp;reference[stunned apply=false] for the duration.</p>
     tint: '#ffffff'
     statuses:
       - stunned
@@ -1108,7 +1124,7 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781468174069
-      modifiedTime: 1781468200980
+      modifiedTime: 1783215312959
       lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null
@@ -1121,7 +1137,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 6.0.0
   createdTime: 1725037350335
-  modifiedTime: 1781468272118
+  modifiedTime: 1783215254752
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!B2kbmgbA2WQR00kx'
