@@ -82,23 +82,19 @@ system:
   activities:
     Kb0mJl7JsrGs9OAN:
       type: save
-      name: 'Round 1: Deafening Boom'
+      name: Cast
       _id: Kb0mJl7JsrGs9OAN
       img: ''
       sort: 100000
       activation:
-        type: special
-        override: true
-        condition: On your turn.
+        type: action
+        override: false
+        condition: ''
       consumption:
         scaling:
           allowed: false
-        spellSlot: false
-        targets:
-          - type: activityUses
-            value: '1'
-            scaling:
-              mode: ''
+        spellSlot: true
+        targets: []
       description:
         value: >-
           <p>Each creature under the cloud (no more than 5,000 feet beneath the
@@ -109,7 +105,7 @@ system:
       duration:
         units: inst
         concentration: false
-        override: true
+        override: false
       effects:
         - _id: FdyZYwspVCq84LMK
           onSave: false
@@ -139,7 +135,7 @@ system:
       uses:
         spent: 0
         recovery: []
-        max: '1'
+        max: ''
       visibility:
         level:
           min: null
@@ -183,11 +179,7 @@ system:
         scaling:
           allowed: false
         spellSlot: false
-        targets:
-          - type: activityUses
-            value: '1'
-            scaling:
-              mode: ''
+        targets: []
       description:
         value: >-
           <p>Acidic rain falls from the cloud. Each creature and object under
@@ -216,7 +208,7 @@ system:
       uses:
         spent: 0
         recovery: []
-        max: '1'
+        max: ''
       visibility:
         level:
           min: null
@@ -253,11 +245,7 @@ system:
         scaling:
           allowed: false
         spellSlot: false
-        targets:
-          - type: activityUses
-            value: '1'
-            scaling:
-              mode: ''
+        targets: []
       description:
         value: >-
           <p>You call six bolts of lightning from the cloud to strike six
@@ -294,7 +282,7 @@ system:
       uses:
         spent: 0
         recovery: []
-        max: '1'
+        max: ''
       visibility:
         level:
           min: null
@@ -337,11 +325,7 @@ system:
         scaling:
           allowed: false
         spellSlot: false
-        targets:
-          - type: activityUses
-            value: '1'
-            scaling:
-              mode: ''
+        targets: []
       description:
         value: >-
           <p>Hailstones rain down from the cloud. Each creature under the cloud
@@ -370,7 +354,7 @@ system:
       uses:
         spent: 0
         recovery: []
-        max: '1'
+        max: ''
       visibility:
         level:
           min: null
@@ -408,11 +392,7 @@ system:
         scaling:
           allowed: false
         spellSlot: false
-        targets:
-          - type: activityUses
-            value: '1'
-            scaling:
-              mode: ''
+        targets: []
       description:
         value: ''
         chatFlavor: ''
@@ -438,7 +418,7 @@ system:
       uses:
         spent: 0
         recovery: []
-        max: '6'
+        max: ''
       visibility:
         level:
           min: null
@@ -461,83 +441,9 @@ system:
             scaling:
               mode: ''
               number: 1
-    hmeZcry3VB5s2ORq:
-      type: enchant
-      name: Cast
-      _id: hmeZcry3VB5s2ORq
-      img: ''
-      sort: 600000
-      activation:
-        type: action
-        override: false
-      consumption:
-        scaling:
-          allowed: false
-        spellSlot: true
-        targets: []
-      description:
-        value: ''
-        chatFlavor: ''
-      duration:
-        units: inst
-        concentration: false
-        override: false
-      effects:
-        - _id: qgkkSsVtqhla6LAc
-          level:
-            min: null
-            max: null
-          riders:
-            activity:
-              - Kb0mJl7JsrGs9OAN
-              - lWQnKu5gulmNcD6h
-              - LHS02thv32GFDNB4
-              - AR8QvQ6OU9PIF5Qj
-              - dFKNiCeDuVPLUcLf
-            effect: []
-            item: []
-      flags: {}
-      range:
-        units: self
-        override: false
-      target:
-        template:
-          contiguous: false
-          stationary: false
-          units: ft
-        affects:
-          choice: false
-        override: false
-        prompt: true
-      uses:
-        spent: 0
-        recovery: []
-        max: ''
-      visibility:
-        level:
-          min: null
-          max: null
-        requireAttunement: false
-        requireIdentification: false
-        requireMagic: false
-      enchant:
-        self: true
-      restrictions:
-        allowMagical: false
-        categories: []
-        properties: []
-        type: spell
   identifier: storm-of-vengeance
 sort: 0
-flags:
-  dnd5e:
-    riders:
-      activity:
-        - Kb0mJl7JsrGs9OAN
-        - lWQnKu5gulmNcD6h
-        - LHS02thv32GFDNB4
-        - AR8QvQ6OU9PIF5Qj
-        - dFKNiCeDuVPLUcLf
+flags: {}
 img: icons/magic/lightning/bolts-salvo-clouds-sky.webp
 effects:
   - name: Deafening Boom
@@ -577,45 +483,6 @@ effects:
       duplicateSource: null
       exportSource: null
     _key: '!items.effects!7KjExw0kmuqERa7C.FdyZYwspVCq84LMK'
-  - type: enchantment
-    name: Storm of Vengeance
-    img: icons/magic/lightning/bolts-salvo-clouds-sky.webp
-    disabled: true
-    _id: qgkkSsVtqhla6LAc
-    system:
-      changes: []
-    start: null
-    duration:
-      value: 1
-      units: minutes
-      expiry: turnEnd
-      expired: false
-    description: >-
-      <p>You have conjured a churning storm cloud, producing effects detailed in
-      the @UUID[Compendium.dnd5e.spells.Item.7KjExw0kmuqERa7C]{Storm of
-      Vengeance} every turn.</p>
-    origin: null
-    tint: '#ffffff'
-    transfer: true
-    statuses: []
-    showIcon: 1
-    folder: null
-    sort: 0
-    flags:
-      dnd5e:
-        riders:
-          statuses: []
-    _stats:
-      coreVersion: '14.361'
-      systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1781383591329
-      modifiedTime: 1781383636147
-      lastModifiedBy: dnd5ebuilder0000
-      compendiumSource: null
-      duplicateSource: null
-      exportSource: null
-    _key: '!items.effects!7KjExw0kmuqERa7C.qgkkSsVtqhla6LAc'
 folder: KL6ZY4VRMjojGrL4
 _stats:
   duplicateSource: null
@@ -623,7 +490,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 6.0.0
   createdTime: 1725037348074
-  modifiedTime: 1781383656593
+  modifiedTime: 1783214145633
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!7KjExw0kmuqERa7C'
