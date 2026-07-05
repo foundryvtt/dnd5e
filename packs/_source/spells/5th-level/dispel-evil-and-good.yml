@@ -80,7 +80,7 @@ system:
       consumption:
         scaling:
           allowed: false
-        spellSlot: true
+        spellSlot: false
         targets: []
       description:
         value: >-
@@ -272,7 +272,7 @@ system:
       name: Cast
       _id: knKM6trrjVLF3EOQ
       img: null
-      sort: 400000
+      sort: 0
       activation:
         type: action
         override: false
@@ -378,7 +378,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 6.0.0
   createdTime: 1725037357090
-  modifiedTime: 1781392711856
+  modifiedTime: 1783216505613
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!TkJ8Wtg1L7TZtspm'

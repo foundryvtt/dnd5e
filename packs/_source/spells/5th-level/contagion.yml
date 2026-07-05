@@ -5,7 +5,7 @@ ownership:
 type: spell
 system:
   description:
-    value: "<p>Your touch inflicts disease. Make a melee spell attack against a creature within your reach. On a hit, you afflict the creature with a disease of your choice from any of the ones described below.</p><p>At the end of each of the target's turns, it must make a Constitution saving throw. After failing three of these saving throws, the disease's effects last for the duration, and the creature stops making these saves. After succeeding on three of these saving throws, the creature recovers from the disease, and the spell ends.</p><p>Since this spell induces a natural disease in its target, any effect that removes a disease or otherwise ameliorates a disease's effects apply to it.</p><p><strong>Blinding Sickness.\_</strong>Pain grips the creature's mind, and its eyes turn milky white. The creature has disadvantage on Wisdom checks and Wisdom saving throws and is &amp;reference[blinded apply=false].</p><p><strong>Filth Fever.</strong>\_A raging fever sweeps through the creature's body. The creature has disadvantage on Strength checks, Strength saving throws, and attack rolls that use Strength.</p><p><strong>Flesh Rot.\_</strong>The creature's flesh decays. The creature has disadvantage on Charisma checks and vulnerability to all damage.</p><p><strong>Mindfire.</strong>\_The creature's mind becomes feverish. The creature has disadvantage on Intelligence checks and Intelligence saving throws, and the creature behaves as if under the effects of the @UUID[Compendium.dnd5e.spells.Item.9hQXdMSmerkTsHDe]{Confusion} spell during combat.</p><p><strong>Seizure.\_</strong>The creature is overcome with shaking. The creature has disadvantage on Dexterity checks, Dexterity saving throws, and attack rolls that use Dexterity.</p><p><strong>Slimy Doom.</strong>\_The creature begins to bleed uncontrollably. The creature has disadvantage on Constitution checks and Constitution saving throws. In addition, whenever the creature takes damage, it is &amp;reference[stunned apply=false] until the end of its next turn.</p>"
+    value: "<p>Your touch inflicts disease. Make a melee spell attack against a creature within your reach. On a hit, you afflict the creature with a disease of your choice from any of the ones described below.</p><p>At the end of each of the target's turns, it must make a Constitution saving throw. After failing three of these saving throws, the disease's effects last for the duration, and the creature stops making these saves. After succeeding on three of these saving throws, the creature recovers from the disease, and the spell ends.</p><p>Since this spell induces a natural disease in its target, any effect that removes a disease or otherwise ameliorates a disease's effects apply to it.</p><p><strong>Blinding Sickness.\_</strong>Pain grips the creature's mind, and its eyes turn milky white. The creature has disadvantage on Wisdom checks and Wisdom saving throws and is &amp;reference[blinded apply=false].</p><p><strong>Filth Fever.</strong>\_A raging fever sweeps through the creature's body. The creature has disadvantage on Strength checks, Strength saving throws, and attack rolls that use Strength.</p><p><strong>Flesh Rot.\_</strong>The creature's flesh decays. The creature has disadvantage on Charisma checks and vulnerability to all damage.</p><p><strong>Mindfire.</strong>\_The creature's mind becomes feverish. The creature has disadvantage on Intelligence checks and Intelligence saving throws, and the creature behaves as if under the effects of the @UUID[Compendium.dnd5e.spells.Item.9hQXdMSmerkTsHDe]{confusion} spell during combat.</p><p><strong>Seizure.\_</strong>The creature is overcome with shaking. The creature has disadvantage on Dexterity checks, Dexterity saving throws, and attack rolls that use Dexterity.</p><p><strong>Slimy Doom.</strong>\_The creature begins to bleed uncontrollably. The creature has disadvantage on Constitution checks and Constitution saving throws. In addition, whenever the creature takes damage, it is &amp;reference[stunned apply=false] until the end of its next turn.</p>"
     chat: ''
   source:
     custom: ''
@@ -817,7 +817,7 @@ effects:
       <p>Your mind becomes feverish. You have disadvantage on Intelligence
       checks and Intelligence saving throws, and you behave as if under the
       effects of the
-      @UUID[Compendium.dnd5e.spells.Item.9hQXdMSmerkTsHDe]{Confusion} spell
+      @UUID[Compendium.dnd5e.spells.Item.9hQXdMSmerkTsHDe]{confusion} spell
       during combat.</p>
     tint: '#ffffff'
     transfer: false
@@ -834,7 +834,7 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781393467994
-      modifiedTime: 1781393597137
+      modifiedTime: 1783216567194
       lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null
@@ -946,7 +946,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 6.0.0
   createdTime: 1725037351011
-  modifiedTime: 1781393737104
+  modifiedTime: 1783216557971
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!CjIq8Ed7bu3vVwT1'

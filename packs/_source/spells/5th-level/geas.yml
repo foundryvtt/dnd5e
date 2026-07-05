@@ -17,9 +17,9 @@ system:
       you choose, short of an activity that would result in certain death.
       Should you issue a suicidal command, the spell ends.</p><p>You can end the
       spell early by using an action to dismiss it. A
-      @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{Remove Curse},
-      @UUID[Compendium.dnd5e.spells.Item.WzvJ7G3cqvIubsLk]{Greater Restoration},
-      or @UUID[Compendium.dnd5e.spells.Item.3okM6Gn63zzEULkz]{Wish} spell also
+      @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{remove curse},
+      @UUID[Compendium.dnd5e.spells.Item.WzvJ7G3cqvIubsLk]{greater restoration},
+      or @UUID[Compendium.dnd5e.spells.Item.3okM6Gn63zzEULkz]{wish} spell also
       ends it.</p><p><strong>At Higher Levels.</strong> When you cast this spell
       using a spell slot of 7th or 8th level, the Duration is 1 year. When you
       cast this spell using a spell slot of 9th level, the spell lasts until it
@@ -148,7 +148,7 @@ effects:
       units: seconds
       expiry: null
       expired: false
-    disabled: true
+    disabled: false
     _id: zSoZHHi7BA6IAeoj
     description: >-
       <p>You are &amp;reference[Charmed apply=false] for the duration. While you
@@ -156,9 +156,9 @@ effects:
       manner directly counter to their instructions, but no more than once each
       day. Should the caster issue a suicidal command, the spell ends.</p><p>The
       caster can end the spell early by using an action to dismiss it. A
-      @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{Remove Curse},
-      @UUID[Compendium.dnd5e.spells.Item.WzvJ7G3cqvIubsLk]{Greater Restoration},
-      or @UUID[Compendium.dnd5e.spells.Item.3okM6Gn63zzEULkz]{Wish} spell also
+      @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{remove curse},
+      @UUID[Compendium.dnd5e.spells.Item.WzvJ7G3cqvIubsLk]{greater restoration},
+      or @UUID[Compendium.dnd5e.spells.Item.3okM6Gn63zzEULkz]{wish} spell also
       ends it.</p>
     transfer: false
     statuses:
@@ -175,7 +175,7 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781391777913
-      modifiedTime: 1781391777913
+      modifiedTime: 1783216466433
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     img: icons/magic/control/control-influence-puppet.webp
@@ -194,7 +194,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 6.0.0
   createdTime: 1725037353095
-  modifiedTime: 1781391696844
+  modifiedTime: 1783216450817
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!JQyigMNPiDnGI18b'
