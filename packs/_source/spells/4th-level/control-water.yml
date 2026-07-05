@@ -96,72 +96,6 @@ system:
     - material
     - concentration
   activities:
-    6iqra0WJJEMKsrd7:
-      type: enchant
-      name: Cast
-      _id: 6iqra0WJJEMKsrd7
-      img: ''
-      sort: 100000
-      activation:
-        type: action
-        override: false
-      consumption:
-        scaling:
-          allowed: false
-        spellSlot: true
-        targets: []
-      description:
-        value: ''
-        chatFlavor: ''
-      duration:
-        units: inst
-        concentration: false
-        override: false
-      effects:
-        - _id: 0V7pt4ol6yamqIFf
-          level:
-            min: null
-            max: null
-          riders:
-            activity:
-              - 3uKDmmkF8irChzl6
-              - bgxFEFucjRRDxtIr
-              - tcZLcPr3nsDOEaiC
-              - HneTMN8U6QKaRU7B
-              - BTnvB5e4TEPEgZaS
-            effect: []
-            item: []
-      flags: {}
-      range:
-        units: self
-        override: false
-      target:
-        template:
-          contiguous: false
-          stationary: false
-          units: ft
-        affects:
-          choice: false
-        override: false
-        prompt: true
-      uses:
-        spent: 0
-        recovery: []
-        max: ''
-      visibility:
-        level:
-          min: null
-          max: null
-        requireAttunement: false
-        requireIdentification: false
-        requireMagic: false
-      enchant:
-        self: true
-      restrictions:
-        allowMagical: false
-        categories: []
-        properties: []
-        type: spell
     3uKDmmkF8irChzl6:
       type: utility
       name: Flood
@@ -515,58 +449,66 @@ system:
           formula: ''
         visible: true
         bonus: ''
+    fXJqNRirIlkLmU1Q:
+      type: utility
+      name: Cast
+      _id: fXJqNRirIlkLmU1Q
+      img: ''
+      sort: 100000
+      activation:
+        type: action
+        override: false
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: LJZ42m6FoXvAq3i7
+          uuid: null
+          level: {}
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
   identifier: control-water
 sort: 0
-flags:
-  dnd5e:
-    riders:
-      activity:
-        - 3uKDmmkF8irChzl6
-        - bgxFEFucjRRDxtIr
-        - tcZLcPr3nsDOEaiC
-        - HneTMN8U6QKaRU7B
-        - BTnvB5e4TEPEgZaS
+flags: {}
 img: icons/magic/water/wave-water-blue.webp
 effects:
-  - type: enchantment
-    name: Control Water
-    img: icons/magic/water/wave-water-blue.webp
-    disabled: true
-    _id: 0V7pt4ol6yamqIFf
-    system:
-      changes: []
-    start: null
-    duration:
-      value: 10
-      units: minutes
-      expiry: turnStart
-      expired: false
-    description: >-
-      <p>You can use your action on your turn to perform one of the effects
-      listed in the @UUID[Compendium.dnd5e.spells.Item.7fFHlBk3UNX8gPKL]{Control
-      Water} spell.</p>
-    origin: null
-    tint: '#ffffff'
-    transfer: true
-    statuses: []
-    showIcon: 1
-    folder: null
-    sort: 0
-    flags:
-      dnd5e:
-        riders:
-          statuses: []
-    _stats:
-      coreVersion: '14.361'
-      systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1781378237875
-      modifiedTime: 1781378874035
-      lastModifiedBy: dnd5ebuilder0000
-      compendiumSource: null
-      duplicateSource: null
-      exportSource: null
-    _key: '!items.effects!7fFHlBk3UNX8gPKL.0V7pt4ol6yamqIFf'
   - name: Caught in Whirlpool
     img: icons/magic/water/vortex-water-whirlpool.webp
     origin: Compendium.dnd5e.spells.Item.7fFHlBk3UNX8gPKL
@@ -652,7 +594,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 6.0.0
   createdTime: 1725037348356
-  modifiedTime: 1781378678285
+  modifiedTime: 1783216872398
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!7fFHlBk3UNX8gPKL'

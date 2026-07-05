@@ -177,11 +177,11 @@ system:
           contiguous: false
           stationary: false
           units: ft
-          type: circle
+          type: ring
           size: '10'
           count: ''
-          width: ''
-          height: ''
+          width: '1'
+          height: '20'
         affects:
           choice: false
           type: creature
@@ -310,7 +310,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 6.0.0
   createdTime: 1725037358134
-  modifiedTime: 1781379659568
+  modifiedTime: 1783216708691
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!X3DrXgxjwI2dvkD6'
