@@ -764,35 +764,8 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     if ( effects.size < 1 ) return false;
     event.preventDefault();
     event.stopPropagation();
-    if ( effects.size === 1 ) {
-      actor.endConcentration(effects.first());
-      return true;
-    }
-    const choices = effects.reduce((acc, effect) => {
-      const data = effect.getFlag("dnd5e", "item");
-      acc[effect.id] = data?.name ?? actor.items.get(data?.id)?.name ?? _loc("DND5E.CONCENTRATION.NoSource");
-      return acc;
-    }, {});
-    const options = foundry.applications.handlebars.selectOptions(choices, { hash: { sort: true } });
-    const content = `
-    <p>${_loc("DND5E.CONCENTRATION.EndChoice")}</p>
-    <div class="form-group">
-      <label>${_loc("DND5E.SOURCE.FIELDS.source.label")}</label>
-      <div class="form-fields">
-        <select name="source">${options}</select>
-      </div>
-    </div>`;
-    foundry.applications.api.Dialog.prompt({
-      content,
-      window: { title: _loc("DND5E.Concentration") },
-      ok: {
-        label: _loc("DND5E.Confirm"),
-        callback: (event, button, dialog) => {
-          const source = new foundry.applications.ux.FormDataExtended(button.form).object.source;
-          if ( source ) actor.endConcentration(source);
-        }
-      }
-    });
+    if ( effects.size === 1 ) actor.endConcentration(effects.first());
+    else ActiveEffect5e.endConcentrationDialog(actor, effects);
     return true;
   }
 
@@ -829,16 +802,55 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       effects = new Set(actor.effects.filter(effect => effect.statuses.has(effects)));
     }
     if ( !effects.size ) return null;
+    const choices = Object.fromEntries(Array.from(effects).map(effect => [effect.id, effect.name]));
+    const source = await ActiveEffect5e.#promptRemoveSource({
+      choices, hint: "DND5E.EFFECT.Status.DeleteDialog.hint", title: "DND5E.EFFECT.Status.DeleteDialog.title"
+    });
+    if ( source === null ) return null;
+    return actor.deleteEmbeddedDocuments("ActiveEffect", source ? [source] : Object.keys(choices));
+  }
 
-    const sources = Array.from(effects).sort((a, b) => a.name.localeCompare(b.name, game.i18n.lang));
+  /* -------------------------------------------- */
+
+  /**
+   * Prompt the user to end concentration on one source, or all of them.
+   * @param {Actor5e} actor                       The concentrating actor.
+   * @param {Collection<ActiveEffect5e>} effects  The active concentration effects.
+   * @returns {Promise<ActiveEffect5e[]|null>}    The effects concentration was ended on, or null if dismissed.
+   */
+  static async endConcentrationDialog(actor, effects) {
+    const choices = effects.reduce((acc, effect) => {
+      const data = effect.getFlag("dnd5e", "item");
+      acc[effect.id] = data?.name ?? actor.items.get(data?.id)?.name ?? _loc("DND5E.CONCENTRATION.NoSource");
+      return acc;
+    }, {});
+    const source = await ActiveEffect5e.#promptRemoveSource({
+      choices, hint: "DND5E.CONCENTRATION.EndChoice", title: "DND5E.Concentration"
+    });
+    if ( source === null ) return null;
+    return actor.endConcentration(source || undefined);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prompt the user to pick one of several sources of an effect, or all of them.
+   * @param {object} config
+   * @param {Record<string, string>} config.choices  Mapping of option value to display label.
+   * @param {string} config.hint                     Localization key for the hint describing the choice.
+   * @param {string} config.title                    Localization key for the dialog title.
+   * @returns {Promise<string|null>}                 The selected value ("" for all sources), or null if dismissed.
+   */
+  static #promptRemoveSource({ choices, hint, title }) {
+    const sources = Object.entries(choices).sort((a, b) => a[1].localeCompare(b[1], game.i18n.lang));
     const group = foundry.applications.fields.createFormGroup({
-      label: game.i18n.localize("DND5E.EFFECT.Status.DeleteDialog.label"),
-      hint: game.i18n.localize("DND5E.EFFECT.Status.DeleteDialog.hint"),
+      label: _loc("DND5E.EFFECT.Action.RemoveStatus.label"),
+      hint: _loc(hint),
       input: foundry.applications.fields.createSelectInput({
         name: "source",
         options: [
-          { label: game.i18n.localize("DND5E.EFFECT.Status.DeleteDialog.all"), rule: true, value: "" },
-          ...sources.map(effect => ({ label: effect.name, value: effect.id }))
+          { label: _loc("DND5E.EFFECT.Action.RemoveStatus.all"), rule: true, value: "" },
+          ...sources.map(([value, label]) => ({ label, value }))
         ]
       })
     }).outerHTML;
@@ -846,15 +858,11 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     return foundry.applications.api.DialogV2.prompt({
       rejectClose: false,
       content: `<fieldset>${group}</fieldset>`,
-      window: { title: "DND5E.EFFECT.Status.DeleteDialog.title" },
+      window: { title },
       position: { width: 400 },
       ok: {
         label: "DND5E.Confirm",
-        callback: (event, button) => {
-          const source = button.form.elements.source.value;
-          const ids = source ? [source] : sources.map(effect => effect.id);
-          return actor.deleteEmbeddedDocuments("ActiveEffect", ids);
-        }
+        callback: (event, button) => button.form.elements.source.value
       }
     });
   }
