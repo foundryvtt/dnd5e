@@ -1023,6 +1023,10 @@
         "calc": {
           "label": "AC Calculation Method"
         },
+        "calcs": {
+          "hint": "These formulas will be used when calculating armor class.",
+          "label": "Selected Formulas"
+        },
         "cover": {
           "label": "AC from Cover"
         },
@@ -1064,10 +1068,6 @@
         },
         "shield": {
           "label": "Equipped Shield Value"
-        },
-        "selectedFormulas": {
-          "hint": "These formulas will be used when calculating armor class.",
-          "label": "Selected Formulas"
         }
       }
     }

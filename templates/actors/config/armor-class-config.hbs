@@ -7,8 +7,7 @@
         </button>
     </legend>
 
-    {{ formField fields.selectedFormulas value=source.selectedFormulas options=formulaOptions localize=true
-                 rootId=partId }}
+    {{ formField fields.calcs value=source.calcs options=formulaOptions localize=true rootId=partId }}
     {{ formField fields.flat value=source.flat localize=true rootId=partId }}
     {{ formField fields.override value=source.override localize=true rootId=partId }}
 
