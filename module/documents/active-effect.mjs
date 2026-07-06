@@ -1,4 +1,5 @@
 import CreateDocumentDialog from "../applications/create-document-dialog.mjs";
+import ConditionData from "../data/active-effect/condition.mjs";
 import FormulaField from "../data/fields/formula-field.mjs";
 import MappingField from "../data/fields/mapping-field.mjs";
 import { getHumanReadableAttributeLabel, parseOrString, staticID } from "../utils.mjs";
@@ -802,19 +803,17 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * @param {PointerEvent} event        The triggering event.
    * @param {Actor5e} actor             The actor belonging to the token.
    * @param {string} status             The status condition.
+   * @returns {boolean}                 Whether the status was resolved via this method.
    */
   static _manageCondition(event, actor, status) {
+    if ( ConditionData.hasLevels(status) ) return false;
     const effects = new Set(actor.effects.filter(effect => effect.statuses.has(status)));
-    if ( !effects.size ) return;
-
+    if ( !effects.size ) return false;
     event.preventDefault();
     event.stopPropagation();
-
-    if ( effects.size > 1 ) {
-      ActiveEffect5e.deleteConditionDialog(actor, effects);
-    } else {
-      effects.first().delete();
-    }
+    if ( effects.size > 1 ) ActiveEffect5e.deleteConditionDialog(actor, effects);
+    else effects.first().delete();
+    return true;
   }
 
   /* -------------------------------------------- */
@@ -832,8 +831,8 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     if ( !effects.size ) return null;
 
     const html = new foundry.data.fields.StringField({
-      label: game.i18n.localize("DND5E.CONDITIONS.DeleteDialog.label"),
-      hint: game.i18n.localize("DND5E.CONDITIONS.DeleteDialog.hint"),
+      label: game.i18n.localize("DND5E.EFFECT.Status.DeleteDialog.label"),
+      hint: game.i18n.localize("DND5E.EFFECT.Status.DeleteDialog.hint"),
       required: true,
       choices: Object.fromEntries(Array.from(effects).map(effect => [effect.id, effect.name]))
     }).toFormGroup({}, { name: "source", sort: true }).outerHTML;
@@ -841,13 +840,13 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     return foundry.applications.api.DialogV2.prompt({
       rejectClose: false,
       content: `<fieldset>${html}</fieldset>`,
-      window: { title: "DND5E.CONDITIONS.DeleteDialog.title" },
+      window: { title: "DND5E.EFFECT.Status.DeleteDialog.title" },
       position: { width: 400 },
       ok: {
         label: "DND5E.Confirm",
         callback: async function(event, button) {
           const source = button.form.elements.source.value;
-          return actor.effects.get(source).delete();
+          return actor.effects.get(source)?.delete();
         }
       }
     });

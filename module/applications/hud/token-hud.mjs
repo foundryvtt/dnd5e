@@ -15,6 +15,19 @@ export default class TokenHUD5e extends foundry.applications.hud.TokenHUD {
   /* -------------------------------------------------- */
 
   /** @inheritDoc */
+  _getStatusEffectChoices() {
+    const choices = super._getStatusEffectChoices();
+    for ( const status of Object.values(choices) ) {
+      if ( status.isActive || !this.actor?.statuses.has(status.id) ) continue;
+      status.isActive = true;
+      status.cssClass = ["active", status.cssClass].filterJoin(" ");
+    }
+    return choices;
+  }
+
+  /* -------------------------------------------------- */
+
+  /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
     this.#adjustConditionIcons();
@@ -59,8 +72,9 @@ export default class TokenHUD5e extends foundry.applications.hud.TokenHUD {
 
     const id = target.dataset.statusId;
 
-    let resolved = false;
+    let resolved;
     if ( id === "concentrating" ) resolved = ActiveEffect5e._manageConcentration(event, this.actor);
+    else resolved = ActiveEffect5e._manageCondition(event, this.actor, id);
 
     if ( !resolved ) this.actor.toggleStatusEffect(id, {
       overlay: event.button === 2,
