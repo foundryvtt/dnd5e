@@ -59,6 +59,10 @@ export default class NPCData extends CreatureTemplate {
         }, { label: "DND5E.HitDice" }),
         hp: new SchemaField({
           ...AttributesFields.hitPoints,
+          bloodied: new NumberField({
+            nullable: false, min: 0, max: 100, persisted: false, initial: () => CONFIG.DND5E.bloodied.threshold,
+            label: "DND5E.HITPOINTS.Bloodied.label"
+          }),
           formula: new FormulaField({ required: true, label: "DND5E.HPFormula" })
         }, { label: "DND5E.HitPoints" }),
         death: new RollConfigField({
