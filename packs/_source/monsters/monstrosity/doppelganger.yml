@@ -446,9 +446,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -463,7 +460,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -483,16 +480,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: Cp2MgsVDDSRiF2aj
     name: Ambusher
     type: feat
-    img: icons/magic/nature/stealth-hide-eyes-green.webp
+    img: icons/equipment/head/hood-cloth-teal-gold.webp
     system:
       description:
         value: >-
-          <p>In the first round of a combat, the doppelganger has advantage on
-          attack rolls against any creature it has surprised.</p>
+          <p>In the first round of a combat, the [[lookup @name
+          lowercase]]{monster} has advantage on attack rolls against any
+          creature it has &amp;reference[surprise]{Surprised}.</p>
         chat: ''
       source:
         custom: ''
@@ -506,10 +505,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -524,135 +524,23 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EMygUh5uRujWaFYK
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765825336192
+      systemVersion: 6.0.0
+      createdTime: 1781895850656
+      modifiedTime: 1781895861475
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!mWbrPhcKOz6oLXMV.Cp2MgsVDDSRiF2aj'
-  - _id: yfN4gklLV7zqhzxo
-    name: Surprise Attack
-    type: feat
-    img: icons/magic/water/elemental-water.webp
-    system:
-      description:
-        value: >-
-          <p>If the doppelganger surprises a creature and hits it with an attack
-          during the first round of combat, the target takes an extra 10 (3d6)
-          damage from the attack.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: damage
-          activation:
-            type: special
-            value: null
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ''
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          damage:
-            critical:
-              allow: false
-              bonus: ''
-            parts:
-              - number: 3
-                denomination: 6
-                bonus: ''
-                types:
-                  - bludgeoning
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: surprise-attack
-    effects: []
-    folder: null
-    sort: 300000
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.5DJYFjGQCz5aSl5e
-      duplicateSource: null
-      coreVersion: '13.351'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1765825331013
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!mWbrPhcKOz6oLXMV.yfN4gklLV7zqhzxo'
   - _id: Sr7ZTAYd1TQ6Nfto
     name: Multiattack
     type: feat
     img: icons/skills/melee/blade-tips-triple-steel.webp
     system:
       description:
-        value: <p>The doppelganger makes two melee attacks.</p>
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} makes two melee
+          attacks.</p>
         chat: ''
       source:
         custom: ''
@@ -666,13 +554,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        RnLnzG0gjJoS77W5:
           type: utility
           activation:
             type: action
@@ -687,15 +574,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -706,7 +594,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -723,7 +612,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: RnLnzG0gjJoS77W5
       enchant: {}
       prerequisites:
         level: null
@@ -737,12 +634,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781896379670
+      modifiedTime: 1781896383066
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!mWbrPhcKOz6oLXMV.Sr7ZTAYd1TQ6Nfto'
   - _id: scZU8bs551DZRvgC
@@ -752,7 +649,9 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Doppelganger attacks with its Slam.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -814,9 +713,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - fin
-      proficient: 1
+      properties: []
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -825,8 +723,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        G6PBPrEE5LkYrSky:
           type: attack
           activation:
             type: action
@@ -841,10 +738,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -861,7 +759,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -874,24 +773,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: G6PBPrEE5LkYrSky
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: slam
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -901,11 +813,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107553225
+      systemVersion: 6.0.0
+      createdTime: 1781896082905
+      modifiedTime: 1781896093728
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!mWbrPhcKOz6oLXMV.scZU8bs551DZRvgC'
@@ -916,18 +828,23 @@ items:
     system:
       description:
         value: >-
-          <p>The doppelganger magically reads the surface thoughts of one
-          creature within 60 ft. of it. The effect can penetrate barriers, but 3
-          ft. of wood or dirt, 2 ft. of stone, 2 inches of metal, or a thin
-          sheet of lead blocks it.</p><p>While the target is in range, the
-          doppelganger can continue reading its thoughts, as long as the
-          doppelganger's concentration isn't broken (as if concentrating on a
-          spell). While reading the target's mind, the doppelganger has
-          advantage on Wisdom (Insight) and Charisma (Deception, Intimidation,
-          and Persuasion) checks against the target.</p>
+          <p>The [[lookup @name lowercase]]{monster} magically reads the surface
+          thoughts of [[lookup @labels.description.affects
+          activity=2oQ9P8HQppd6D9n8]] within [[lookup @labels.description.range
+          activity=2oQ9P8HQppd6D9n8]] of it. The effect can penetrate barriers,
+          but 3 feet of wood or dirt, 2 feet of stone, 2 inches of metal, or a
+          thin sheet of lead blocks it.</p><p>While the target is in range, the
+          [[lookup @name lowercase]]{monster} can continue reading its thoughts,
+          as long as the [[lookup @name lowercase]]{monster}'s concentration
+          isn't broken (as if concentrating on a spell). While reading the
+          target's mind, the [[lookup @name lowercase]]{monster} has advantage
+          on Wisdom (Insight) and Charisma (Deception, Intimidation, and
+          Persuasion) checks against the target.</p>
         chat: >-
-          <p>The doppelganger magically reads the surface thoughts of one
-          creature within 60 ft. of it.</p>
+          <p>The [[lookup @name]]{monster} magically reads the surface thoughts
+          of [[lookup @labels.description.affects activity=2oQ9P8HQppd6D9n8]]
+          within [[lookup @labels.description.range activity=2oQ9P8HQppd6D9n8]]
+          of it.</p>
       source:
         custom: ''
         book: ''
@@ -940,13 +857,13 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        2oQ9P8HQppd6D9n8:
           type: utility
           activation:
             type: action
@@ -961,13 +878,18 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
-          duration:
-            concentration: false
             value: ''
-            units: ''
+          duration:
+            concentration: true
+            value: ''
+            units: disp
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: rYSIFsj2E3DFKsuN
+              level:
+                min: null
+                max: null
           range:
             value: '60'
             units: ft
@@ -981,10 +903,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -998,12 +921,69 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          _id: 2oQ9P8HQppd6D9n8
+          name: Read Surface Thoughts
       enchant: {}
       prerequisites:
         level: null
       identifier: read-thoughts
-    effects: []
+    effects:
+      - name: Reading Surface Thoughts
+        img: icons/magic/control/hypnosis-mesmerism-watch.webp
+        origin: Compendium.dnd5e.monsters.Actor.mWbrPhcKOz6oLXMV.Item.YIoB9xCKEcrrPRt9
+        transfer: false
+        _id: rYSIFsj2E3DFKsuN
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You are reading a creature's surface thoughts. The effect can
+          penetrate barriers, but 3 feet of wood or dirt, 2 feet of stone, 2
+          inches of metal, or a thin sheet of lead blocks it.</p><p>While the
+          target is in range, you can continue reading its thoughts, as long as
+          your concentration isn't broken (as if concentrating on a spell).
+          While reading the target's mind, you hve advantage on Wisdom (Insight)
+          and Charisma (Deception, Intimidation, and Persuasion) checks against
+          the target.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781896176648
+          modifiedTime: 1781896294618
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!mWbrPhcKOz6oLXMV.YIoB9xCKEcrrPRt9.rYSIFsj2E3DFKsuN
     folder: null
     sort: 0
     ownership:
@@ -1012,29 +992,29 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.w5mFTTFsdKC7TXgg
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676742
+      systemVersion: 6.0.0
+      createdTime: 1781896155365
+      modifiedTime: 1781896318361
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!mWbrPhcKOz6oLXMV.YIoB9xCKEcrrPRt9'
   - _id: cG4WdhcrTZt6rxUi
     name: Shapechanger
     type: feat
-    img: icons/magic/control/silhouette-hold-change-blue.webp
+    img: icons/equipment/head/mask-carved-bird-grey-pink.webp
     system:
       description:
         value: >-
-          <p>The doppelganger can use its action to polymorph into a Small or
-          Medium humanoid it has seen, or back into its true form.</p><p>Its
-          statistics, other than its size, are the same in each form. Any
-          equipment it is wearing or carrying isn't transformed. It reverts to
-          its true form if it dies.</p>
+          <p>The [[lookup @name lowercase]]{monster} can use its action to
+          polymorph into a Small or Medium humanoid it has seen, or back into
+          its true form.</p><p>Its statistics, other than its size, are the same
+          in each form. Any equipment it is wearing or carrying isn't
+          transformed. It reverts to its true form if it dies.</p>
         chat: >-
-          <p>The doppelganger can use its action to <strong>polymorph</strong>
-          into a Small or Medium humanoid it has seen, or back into its true
+          <p>The [[lookup @name]]{monster} can use its action to polymorph into
+          a Small or Medium humanoid it has seen, or back into its true
           form.</p>
       source:
         custom: ''
@@ -1048,65 +1028,81 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties:
-        - trait
+      properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
+        5KkQshkuWVmkFHqv:
+          type: transform
+          name: Change Appearance
+          _id: 5KkQshkuWVmkFHqv
+          img: ''
+          sort: 200000
           activation:
             type: action
-            value: 1
-            condition: ''
             override: false
+            condition: ''
           consumption:
-            targets: []
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets: []
           description:
+            value: ''
             chatFlavor: ''
           duration:
+            units: inst
             concentration: false
-            value: ''
-            units: ''
-            special: ''
             override: false
           effects: []
+          flags: {}
           range:
-            units: ''
-            special: ''
+            units: self
             override: false
+            special: ''
           target:
             template:
-              count: ''
               contiguous: false
+              stationary: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: ''
-              type: ''
               choice: false
-              special: ''
-            prompt: true
+              type: ''
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          profiles:
+            - cr: ''
+              name: ''
+              _id: iITKUxSkKFyURbcN
+              uuid: null
+              sizes:
+                - sm
+                - med
+              types:
+                - humanoid
+              movement: []
+              level:
+                min: null
+                max: null
+          settings: null
+          transform:
+            customize: false
+            mode: cr
+            preset: polymorphSelf
       enchant: {}
       prerequisites:
         level: null
@@ -1120,14 +1116,147 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.VhByyxHJN7MNQJRd
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765825332121
+      systemVersion: 6.0.0
+      createdTime: 1781895876999
+      modifiedTime: 1781896073924
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!mWbrPhcKOz6oLXMV.cG4WdhcrTZt6rxUi'
+  - _id: hq6GWkSXkspcOLv3
+    name: Surprise Attack
+    type: feat
+    img: icons/skills/melee/strike-dagger-white-orange.webp
+    system:
+      description:
+        value: >-
+          <p>If the [[lookup @name lowercase]]{monster}
+          &amp;reference[surprise]{Surprises} a creature and hits it with an
+          attack during the first round of combat, the target takes an extra
+          [[/damage average]] from the attack.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: damage
+          activation:
+            type: special
+            value: null
+            condition: >-
+              When the [[lookup @name lowercase]]{monster}
+              &reference[surprise]{Surprises} a creature an hits it with an
+              attack during the first round of combat.
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: spec
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: '1'
+              type: creature
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            critical:
+              allow: true
+              bonus: ''
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 3
+                denomination: 6
+                bonus: ''
+                types: []
+                scaling:
+                  number: 1
+          sort: 0
+          name: Bonus Damage
+          img: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          flags: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: surprise-attack
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: null
+    sort: 150000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.QtJairF0h18BRhEM.Item.CgwJLpd3sHn21cUQ
+      duplicateSource: Item.cx86ZVtbSYswQ0Yp
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781895804923
+      modifiedTime: 1781895813321
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!mWbrPhcKOz6oLXMV.hq6GWkSXkspcOLv3'
 effects: []
 folder: MMKVDW6XI98WdIVu
 sort: 0
@@ -1136,7 +1265,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171255216
