@@ -34,11 +34,14 @@ system:
     affects:
       type: self
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -61,8 +64,7 @@ system:
     - material
     - ritual
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    iKNfgXeRMe2bLzIz:
       type: utility
       activation:
         type: action
@@ -76,6 +78,7 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -83,11 +86,13 @@ system:
       effects: []
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -99,20 +104,32 @@ system:
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 100000
+      name: Cast
+      img: ''
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: iKNfgXeRMe2bLzIz
   identifier: divination
 sort: 0
 flags: {}
-img: icons/magic/light/beam-rays-blue.webp
+img: icons/magic/control/hypnosis-mesmerism-eye-tan.webp
 effects: []
 folder: 5auWSClKMDUIV5Ni
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037358631
-  modifiedTime: 1725992720644
+  modifiedTime: 1781377901164
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!XqzXSKNR75ZdYTA9'

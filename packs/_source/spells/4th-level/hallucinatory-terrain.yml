@@ -36,14 +36,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: cube
       size: '150'
       contiguous: false
+      count: ''
   range:
     value: '300'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -101,20 +104,87 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    zffeuwSHDGXH8vUF:
+      type: check
+      name: Investigate Illusion Check
+      img: ''
+      sort: 100000
+      activation:
+        type: ''
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      check:
+        associated:
+          - inv
+        dc:
+          calculation: spellcasting
+          formula: ''
+        ability: ''
+        visible: true
+      _id: zffeuwSHDGXH8vUF
   identifier: hallucinatory-terrain
 sort: 0
 flags: {}
-img: icons/magic/air/air-burst-spiral-teal-green.webp
+img: icons/environment/wilderness/terrain-river-road-gray.webp
 effects: []
 folder: 5auWSClKMDUIV5Ni
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037365938
-  modifiedTime: 1725992723092
+  modifiedTime: 1781375401299
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!sTIkQK7KuQNOyY0C'
