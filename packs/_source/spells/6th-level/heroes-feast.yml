@@ -7,14 +7,14 @@ system:
   description:
     value: >-
       <p>You bring forth a great feast, including magnificent food and drink.
-      The feast takes 1 Hour to consume and disappears at the end of that time,
-      and the beneficial Effects don't set in until this hour is over. Up to
+      The feast takes 1 hour to consume and disappears at the end of that time,
+      and the beneficial effects don't set in until this hour is over. Up to
       twelve creatures can partake of the feast.</p><p>A creature that partakes
-      of the feast gains several benefits. The creature is cured of all Diseases
-      and poison, becomes immune to poison and being Frightened, and makes all
-      Wisdom Saving Throws with advantage. Its hit point maximum also increases
-      by 2d10, and it gains the same number of Hit Points. These benefits last
-      for 24 hours.</p>
+      of the feast gains several benefits. The creature is cured of all diseases
+      and poison, becomes immune to poison and being &amp;reference[Frightened
+      apply=false], and makes all Wisdom saving throws with advantage. Its hit
+      point maximum also increases by 2d10, and it gains the same number of Hit
+      Points. These benefits last for 24 hours.</p>
     chat: ''
   source:
     custom: ''
@@ -32,12 +32,15 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -57,108 +60,118 @@ system:
     - somatic
     - material
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: utility
+    wJsylU11YTOlX6yk:
+      type: heal
+      name: Cast
+      _id: wJsylU11YTOlX6yk
+      img: ''
+      sort: 100000
       activation:
         type: action
-        value: null
         override: false
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: ''
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects:
-        - _id: RY4byZPJu4TkIxyz
+        - _id: 9nCmXRaDKtOjPZVh
+          level: {}
+      flags: {}
       range:
+        units: self
         override: false
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
         affects:
           choice: false
         override: false
-      roll:
-        formula: ''
-        name: ''
-        prompt: false
-        visible: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      healing:
+        types:
+          - maximum
+        custom:
+          enabled: false
+        scaling:
+          number: 1
+          mode: ''
+        number: 2
+        denomination: 10
+        bonus: ''
   identifier: heroes-feast
 sort: 0
 flags: {}
-img: icons/magic/life/heart-cross-strong-flame-purple-orange.webp
+img: icons/consumables/food/cheese-wedge-swiss-yellow.webp
 effects:
   - name: Heroes' Feast
+    img: icons/consumables/food/cheese-wedge-swiss-yellow.webp
     origin: Compendium.dnd5e.spells.Item.mgFqi0ev8f7Ut19y
-    duration:
-      startTime: null
-      seconds: 86400
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
-    disabled: true
-    _id: RY4byZPJu4TkIxyz
-    changes:
-      - key: system.traits.di.value
-        mode: 2
-        value: poison
-        priority: null
-      - key: system.traits.ci.value
-        mode: 2
-        value: poisoned
-        priority: null
-      - key: system.traits.ci.value
-        mode: 2
-        value: frightened
-        priority: null
-    description: >-
-      <p>The creature is cured of all Diseases and poison, becomes immune to
-      poison and being Frightened, and makes all Wisdom Saving Throws with
-      advantage. Its hit point maximum also increases by 2d10, and it gains the
-      same number of Hit Points. These benefits last for 24 hours.</p>
     transfer: false
-    statuses: []
-    flags: {}
+    _id: 9nCmXRaDKtOjPZVh
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 24
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You have partaken in a heroes' feast. You are immune to poison and
+      being &amp;reference[Frightened apply=false], and make all Wisdom saving
+      throws with advantage. Your hit point maximum also increases by 2d10.
+      These benefits last for 24 hours.</p>
     tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781438601756
+      modifiedTime: 1781438673834
+      lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
       exportSource: null
-    img: icons/magic/life/heart-cross-strong-flame-purple-orange.webp
-    type: base
-    system: {}
-    sort: 0
-    _key: '!items.effects!mgFqi0ev8f7Ut19y.RY4byZPJu4TkIxyz'
+    _key: '!items.effects!mgFqi0ev8f7Ut19y.9nCmXRaDKtOjPZVh'
 folder: 0pdesvXqKd55VOh2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037364507
-  modifiedTime: 1725992722545
+  modifiedTime: 1781438717377
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!mgFqi0ev8f7Ut19y'
