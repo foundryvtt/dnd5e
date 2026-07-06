@@ -573,7 +573,7 @@ items:
           activation:
             type: special
             value: null
-            condition: When the [[lookup @name lowercse]]{monster}
+            condition: When the [[lookup @name lowercse]]{monster} dies.
             override: false
           consumption:
             targets: []

@@ -455,7 +455,7 @@ prototypeToken:
     negative: false
     priority: 0
   texture:
-    src: systems/dnd5e/tokens/elemental/FireElemental.webp
+    src: null
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
@@ -547,7 +547,7 @@ items:
             value: null
             condition: >-
               When a creature touches the [[lookup @name lowercase]]{monster} or
-              hits it with a emelee attack while within 5 feet of it.
+              hits it with a melee attack while within 5 feet of it.
             override: false
           consumption:
             targets: []
