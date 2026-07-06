@@ -7,8 +7,8 @@ system:
     value: >-
       <p><em>The potion's dense, purple liquid has an ovoid cloud of pink
       floating in it.</em></p><p>When you drink this potion, you gain the effect
-      of the @UUID[Compendium.dnd5e.spells.Item.ppWAAEul0QHtm4er]{Detect
-      Thoughts} spell (save DC 13).</p>
+      of the @UUID[Compendium.dnd5e.spells.Item.ppWAAEul0QHtm4er]{detect
+      thoughts} spell (save DC 13).</p>
     chat: ''
   source:
     custom: ''
@@ -55,51 +55,49 @@ system:
     - mgc
   magicalBonus: null
   activities:
-    DN8gzY6YObgBtXba:
-      type: cast
-      spell:
-        uuid: Compendium.dnd5e.spells.Item.ppWAAEul0QHtm4er
-        challenge:
-          override: true
-          attack: ''
-          save: 13
-        properties:
-          - vocal
-          - somatic
-          - material
-        spellbook: false
-        ability: ''
-        level: 2
-      _id: DN8gzY6YObgBtXba
-      sort: 0
+    pZiGEv6ugCZX3Agp:
+      type: utility
+      name: Drink
+      _id: pZiGEv6ugCZX3Agp
+      img: ''
+      sort: 100000
       activation:
         type: action
         override: false
+        condition: ''
+      behaviors: []
       consumption:
         scaling:
           allowed: false
         spellSlot: true
-        targets:
-          - type: itemUses
-            value: '1'
-            target: ''
-            scaling: {}
+        targets: []
       description:
+        value: ''
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
         override: false
+      effects:
+        - _id: sGtB63gv4o99IFMT
+          uuid: null
+          level:
+            min: null
+            max: null
       flags: {}
       range:
         units: self
         override: false
+        special: ''
       target:
         template:
           contiguous: false
+          stationary: false
           units: ft
+          type: ''
         affects:
           choice: false
+          type: ''
         override: false
         prompt: true
       uses:
@@ -112,13 +110,80 @@ system:
           max: null
         requireAttunement: false
         requireIdentification: false
-        requireMagic: false
+        requireMagic: true
         identifier: ''
-      name: Drink
-      img: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
   attuned: false
   identifier: potion-of-mind-reading
-effects: []
+effects:
+  - name: Alchemical Mind Reading
+    img: icons/magic/perception/third-eye-blue-red.webp
+    origin: Compendium.dnd5e.items.Item.Ct9LR9Ft1FG4a6Y1
+    transfer: false
+    _id: sGtB63gv4o99IFMT
+    type: base
+    system:
+      changes: []
+      magical: true
+      rider:
+        statuses: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>For the duration, you can read the thoughts of certain creatures. When
+      you drink this potion and as your action on each turn until the effect
+      ends, you can focus your mind on any one creature that you can see within
+      30 feet of you. If the creature you choose has an Intelligence of 3 or
+      lower or doesn't speak any language, the creature is unaffected.</p><p>You
+      initially learn the surface thoughts of the creature—what is most on its
+      mind in that moment. As an action, you can either shift your attention to
+      another creature's thoughts or attempt to probe deeper into the same
+      creature's mind. If you probe deeper, the target must make a [[/save wis
+      13]] saving throw. If it fails, you gain insight into its reasoning (if
+      any), its emotional state, and something that looms large in its mind
+      (such as something it worries over, loves, or hates). If it succeeds, the
+      effect ends. Either way, the target knows that you are probing into its
+      mind, and unless you shift your attention to another creature's thoughts,
+      the creature can use its action on its turn to make an Intelligence check
+      contested by your Intelligence check; if it succeeds, the effect
+      ends.</p><p>Questions verbally directed at the target creature naturally
+      shape the course of its thoughts, so this effect is particularly effective
+      as part of an interrogation.</p><p>You can also use this effect to detect
+      the presence of thinking creatures you can't see. When you drink the
+      potion or as your action during the duration, you can search for thoughts
+      within 30 feet of you. Theis effect can penetrate barriers, but 2 feet of
+      rock, 2 inches of any metal other than lead, or a thin sheet of lead
+      blocks you. You can't detect a creature with an Intelligence of 3 or lower
+      or one that doesn't speak any language.</p><p>Once you detect the presence
+      of a creature in this way, you can read its thoughts for the rest of the
+      duration as described above, even if you can't see it, but it must still
+      be within range.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783377579024
+      modifiedTime: 1783377745198
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!Ct9LR9Ft1FG4a6Y1.sGtB63gv4o99IFMT'
 folder: gyBZp72zKb56Da84
 sort: 0
 ownership:
@@ -130,7 +195,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 6.0.0
   createdTime: 1725037129606
-  modifiedTime: 1783373070029
+  modifiedTime: 1783377780767
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!Ct9LR9Ft1FG4a6Y1'
