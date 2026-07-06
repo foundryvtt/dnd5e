@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,6 +478,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: J12x6xIwx1aCEm1e
     name: Spellcasting
@@ -533,7 +531,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.fdmzHw875EzpXM2a
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
@@ -544,15 +542,16 @@ items:
   - _id: 9LzZrzdWIZpjFIGV
     name: Divine Eminence
     type: feat
-    img: icons/magic/symbols/cog-shield-white-blue.webp
+    img: icons/magic/light/beam-strike-village-yellow.webp
     system:
       description:
         value: >-
-          <p>As a bonus action, the priest can expend a spell slot to cause its
-          melee weapon attacks to magically deal an extra [[/damage]] damage to
-          a target on a hit.</p><p>This benefit lasts until the end of the turn.
-          If the priest expends a spell slot of 2nd level or higher, the extra
-          damage increases by 1d6 for each level above 1st.</p>
+          <p>As a bonus action, the [[lookup @name lowercase]]{monster} can
+          expend a spell slot to cause its melee weapon attacks to magically
+          deal an extra [[/damage]] damage to a target on a hit.</p><p>This
+          benefit lasts until the end of the turn. If the [[lookup @name
+          lowercase]]{monster} expends a spell slot of 2nd level or higher, the
+          extra damage increases by 1d6 for each level above 1st.</p>
         chat: >-
           <p>As a bonus action, the priest can expend a spell slot to cause its
           melee weapon attacks to magically deal an extra <em>radiant
@@ -575,102 +574,240 @@ items:
       properties:
         - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: damage
+        YlbwXUwUD6nJY83h:
+          type: utility
+          name: Grant Divine Eminence
+          _id: YlbwXUwUD6nJY83h
+          img: ''
+          sort: 100000
           activation:
             type: bonus
-            value: 1
-            condition: ''
             override: false
+            condition: ''
           consumption:
+            scaling:
+              allowed: true
+              max: '3'
+            spellSlot: true
             targets:
               - type: spellSlots
                 value: '1'
                 target: '1'
                 scaling:
                   mode: level
-                  formula: ''
-            scaling:
-              allowed: true
-              max: '3'
-            spellSlot: true
+                  formula: '1'
           description:
+            value: >-
+              <p>As a bonus action, the [[lookup @name lowercase]]{monster} can
+              expend a spell slot to cause its melee weapon attacks to magically
+              deal an extra [[/damage]] damage to a target on a hit.</p><p>This
+              benefit lasts until the end of the turn. If the [[lookup @name
+              lowercase]]{monster} expends a spell slot of 2nd level or higher,
+              the extra damage increases by 1d6 for each level above
+              1st.</p><h4>Level of Expended Spell Slot: [[lookup @scaling]]</h4>
             chatFlavor: ''
           duration:
-            concentration: false
-            value: '1'
             units: turn
-            special: ''
+            concentration: false
             override: false
-          effects: []
+            value: '1'
+          effects:
+            - _id: PaQtao21YjjGVqKB
+              level:
+                min: null
+                max: null
+            - _id: tfpaZ6OFBFw27RbT
+              level:
+                min: null
+                max: null
+            - _id: PgUQuuROJAyV6QEP
+              level:
+                min: null
+                max: null
+          flags: {}
           range:
             units: self
-            special: ''
             override: false
+            special: ''
           target:
             template:
-              count: ''
               contiguous: false
+              stationary: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: ''
-              type: ''
               choice: false
+              type: self
               special: ''
-            prompt: true
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
-          damage:
-            critical:
-              allow: true
-              bonus: ''
-            parts:
-              - custom:
-                  enabled: false
-                  formula: ''
-                number: 3
-                denomination: '6'
-                bonus: ''
-                types:
-                  - radiant
-                scaling:
-                  mode: whole
-                  number: 1
-                  formula: ''
-          sort: 0
-          name: ''
-          img: ''
-          appliedEffects: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
       enchant: {}
       prerequisites:
         level: null
       identifier: divine-eminence
-    effects: []
+    effects:
+      - name: 'Divine Eminence: 1st Level'
+        img: icons/magic/light/beam-strike-village-yellow.webp
+        origin: Compendium.dnd5e.monsters.Actor.PVD5wRdyO7iCJPs1.Item.9LzZrzdWIZpjFIGV
+        transfer: false
+        _id: PaQtao21YjjGVqKB
+        type: base
+        system:
+          changes:
+            - key: system.bonuses.mwak.damage
+              type: add
+              value: 3d6[radiant]
+              phase: initial
+              priority: null
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: turns
+          expiry: turnEnd
+          expired: false
+        description: >-
+          <p>Until the end of your turn, your melee weapon attacks deal an
+          additional [[/damage average 3d6 radiant]] damage on hit.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781825293514
+          modifiedTime: 1781825360127
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!PVD5wRdyO7iCJPs1.9LzZrzdWIZpjFIGV.PaQtao21YjjGVqKB
+      - name: 'Divine Eminence: 2nd Level'
+        img: icons/magic/light/beam-strike-village-yellow.webp
+        origin: Compendium.dnd5e.monsters.Actor.PVD5wRdyO7iCJPs1.Item.9LzZrzdWIZpjFIGV
+        transfer: false
+        type: base
+        system:
+          changes:
+            - key: system.bonuses.mwak.damage
+              type: add
+              value: 4d6[radiant]
+              phase: initial
+              priority: null
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: turns
+          expiry: turnEnd
+          expired: false
+        description: >-
+          <p>Until the end of your turn, your melee weapon attacks deal an
+          additional [[/damage average 4d6 radiant]] damage on hit.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781825366202
+          modifiedTime: 1781825381480
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _id: tfpaZ6OFBFw27RbT
+        _key: >-
+          !actors.items.effects!PVD5wRdyO7iCJPs1.9LzZrzdWIZpjFIGV.tfpaZ6OFBFw27RbT
+      - name: 'Divine Eminence: 3rd Level'
+        img: icons/magic/light/beam-strike-village-yellow.webp
+        origin: Compendium.dnd5e.monsters.Actor.PVD5wRdyO7iCJPs1.Item.9LzZrzdWIZpjFIGV
+        transfer: false
+        type: base
+        system:
+          changes:
+            - key: system.bonuses.mwak.damage
+              type: add
+              value: 5d6[radiant]
+              phase: initial
+              priority: null
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: turns
+          expiry: turnEnd
+          expired: false
+        description: >-
+          <p>Until the end of your turn, your melee weapon attacks deal an
+          additional [[/damage average 5d6 radiant]] damage on hit.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781825367192
+          modifiedTime: 1781825390830
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _id: PgUQuuROJAyV6QEP
+        _key: >-
+          !actors.items.effects!PVD5wRdyO7iCJPs1.9LzZrzdWIZpjFIGV.PgUQuuROJAyV6QEP
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.lVrnjqBrv90VH96d
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.3.8
-      createdTime: null
-      modifiedTime: 1744056004524
+      systemVersion: 6.0.0
+      createdTime: 1781825227399
+      modifiedTime: 1781825528963
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!PVD5wRdyO7iCJPs1.9LzZrzdWIZpjFIGV'
@@ -681,7 +818,9 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Priest attacks with its Mace.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -743,7 +882,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -752,8 +891,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        6Uh16TFd1E9TDySh:
           type: attack
           activation:
             type: action
@@ -768,10 +906,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -788,7 +927,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -801,24 +941,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 6Uh16TFd1E9TDySh
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: mace
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -828,11 +981,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.Ajyq6nGwF7FtLhDQ
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.3.8
-      createdTime: null
-      modifiedTime: 1744053508579
+      systemVersion: 6.0.0
+      createdTime: 1781825117648
+      modifiedTime: 1781825126695
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!PVD5wRdyO7iCJPs1.B0jROhxuoqvfmz2B'
@@ -957,7 +1110,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.n9pJzTDsAwQxJVRl
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1088,7 +1241,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1226,7 +1379,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.7buEm5KhI5lP8m1z
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1347,7 +1500,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.gvdA9nPuWLck4tBl
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1458,7 +1611,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.F0GsG0SJzsIOacwV
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1601,7 +1754,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.JbxsYXxSOTZbf9I0
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1719,7 +1872,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.15Fa6q1nH27XfbR8
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1857,7 +2010,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.uCud2s4TjMfjiXUb
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1976,7 +2129,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.Bnn9Nzajixvow9xi
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2097,7 +2250,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.uUWb1wZgtMou0TVP
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2174,7 +2327,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.p2zChy24ZJdVqMSH
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: 1744053591786
@@ -2190,7 +2343,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.3.8
   createdTime: 1726171229383

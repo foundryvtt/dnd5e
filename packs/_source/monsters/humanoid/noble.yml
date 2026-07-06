@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,6 +478,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: 87olpriernjyGLbC
     name: Breastplate
@@ -551,7 +549,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.SK2HATQ4abKUlV8i
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -562,11 +560,13 @@ items:
   - _id: f12lOXuMaI21HDrz
     name: Rapier
     type: weapon
-    img: icons/weapons/swords/sword-guard-brown.webp
+    img: icons/weapons/swords/sword-guard-bronze.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Noble attacks with its Rapier.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -630,7 +630,7 @@ items:
         conditions: ''
       properties:
         - fin
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -639,8 +639,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        BMB8fjeueguqA2wY:
           type: attack
           activation:
             type: action
@@ -655,6 +654,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -675,7 +675,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -695,16 +696,25 @@ items:
             flat: false
             type:
               value: ''
-              classification: weapon
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
           name: ''
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: BMB8fjeueguqA2wY
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -715,35 +725,32 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.Tobce1hexTnDk4sV
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.3.8
-      createdTime: null
-      modifiedTime: 1744048714751
+      systemVersion: 6.0.0
+      createdTime: 1781825051309
+      modifiedTime: 1781825064327
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!GlaCGcgIP6YjBjGc.f12lOXuMaI21HDrz'
-  - _id: HhLmdqeivyDnsemN
+  - _id: gJ5Nl48TvnTHZarp
     name: Parry
     type: feat
-    img: icons/skills/melee/weapons-crossed-swords-yellow-teal.webp
+    img: icons/skills/melee/swords-parry-block-yellow.webp
     system:
       description:
         value: >-
-          <p>The noble adds 2 to its AC against one melee Attack that would hit
-          it. To do so, the noble must see the attacker and be wielding a melee
+          <p>The [[lookup @name lowercase]]{monster} adds 2 to its AC against
+          one melee attack that would hit it. To do so, the [[lookup @name
+          lowercase]]{monster} must see the attacker and be wielding a melee
           weapon.</p>
         chat: >-
-          <p>The noble adds 2 to its <strong>AC</strong> against one melee
-          Attack that would hit it.</p>
+          <p>The [[lookup @name lowercase]]{monster} adds 2 to its AC against
+          one melee Attack that would hit it.</p>
       source:
         custom: ''
         book: ''
@@ -756,18 +763,19 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        5RUe1bRJr64laA0l:
           type: utility
           activation:
             type: reaction
             value: 1
-            condition: ''
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} would be hit by a
+              melee attack while it is wielding a melee weapon.
             override: false
           consumption:
             targets: []
@@ -777,15 +785,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -796,10 +805,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
-              type: ''
+              type: self
               choice: false
               special: ''
             prompt: true
@@ -813,28 +823,44 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          name: Parry Attack
+          _id: 5RUe1bRJr64laA0l
       enchant: {}
       prerequisites:
         level: null
+        items: []
+        repeatable: false
       identifier: parry
+      advancement: {}
+      crewed: false
     effects: []
     folder: null
-    sort: 0
+    sort: 50000
     ownership:
       default: 0
     flags: {}
     _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.kfi26Jy0VLXv9TTm
-      duplicateSource: null
-      coreVersion: '13.345'
+      compendiumSource: Compendium.dnd5e.monsters.Actor.egsSDYbqoLCelb0J.Item.lS2o3QOZ2lxKyi0L
+      duplicateSource: Item.45SLiafyQy1HrDdF
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1749403571330
+      systemVersion: 6.0.0
+      createdTime: 1781825022322
+      modifiedTime: 1781825032212
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!GlaCGcgIP6YjBjGc.HhLmdqeivyDnsemN'
+    _key: '!actors.items!GlaCGcgIP6YjBjGc.gJ5Nl48TvnTHZarp'
 effects: []
 folder: pEyqIq8DYb21xia3
 sort: 0
@@ -843,7 +869,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.3.8
   createdTime: 1726171217891

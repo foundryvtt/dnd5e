@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,6 +478,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: gSrKQbka5aLxlcJz
     name: Spellcasting
@@ -550,7 +548,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.fdmzHw875EzpXM2a
       duplicateSource: null
-      coreVersion: '13.345'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 5.1.0
       createdTime: null
@@ -558,54 +556,6 @@ items:
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!B7lBOr1AahNZs4a6.gSrKQbka5aLxlcJz'
-  - _id: Wa6dckSFp3pY8yH5
-    name: Magic Resistance
-    type: feat
-    img: icons/magic/defensive/shield-barrier-glowing-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The archmage has advantage on saving throws against spells and
-          other magical effects.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: magic-resistance
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
-      duplicateSource: null
-      coreVersion: '13.345'
-      systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1749402955593
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!B7lBOr1AahNZs4a6.Wa6dckSFp3pY8yH5'
   - _id: vgTunE3gLps5Q595
     name: Dagger
     type: weapon
@@ -613,7 +563,9 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Archmage attacks with their Dagger.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -679,7 +631,7 @@ items:
         - fin
         - lgt
         - thr
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -688,8 +640,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        rDhdcAetzC4ctuHU:
           type: attack
           activation:
             type: action
@@ -704,10 +655,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -724,7 +676,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: '1'
               type: creature
@@ -737,24 +690,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: rDhdcAetzC4ctuHU
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: dagger
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -764,11 +730,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.0E565kQUBmndJ1a2
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745173385111
+      systemVersion: 6.0.0
+      createdTime: 1781819893574
+      modifiedTime: 1781819922678
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!B7lBOr1AahNZs4a6.vgTunE3gLps5Q595'
@@ -900,7 +866,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.EOmsUcFQJTfG2oio
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1019,7 +985,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.Bnn9Nzajixvow9xi
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1137,7 +1103,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.Utk1OQRwYkMkFRD3
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1274,7 +1240,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.udsLtG0BugXHR2JQ
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1410,7 +1376,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.XvbiNhNqXXIFisIy
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1527,7 +1493,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1645,7 +1611,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.3OZnNhunvRtPOQmH
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1751,20 +1717,12 @@ items:
       identifier: mage-armor
     effects:
       - _id: cfwMU7LuOJ619Lny
-        changes:
-          - key: system.attributes.ac.calc
-            value: mage
-            mode: 5
-            priority: null
         disabled: true
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         origin: Compendium.dnd5e.spells.CKZTpZlxj7hjjo2H
         transfer: false
         flags: {}
@@ -1775,7 +1733,7 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
+          coreVersion: '14.361'
           systemId: dnd5e
           systemVersion: 4.0.0
           createdTime: null
@@ -1784,8 +1742,16 @@ items:
           exportSource: null
         img: icons/magic/defensive/shield-barrier-glowing-triangle-blue.webp
         type: base
-        system: {}
+        system:
+          changes:
+            - key: system.attributes.ac.calc
+              value: mage
+              priority: null
+              type: override
         sort: 0
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!B7lBOr1AahNZs4a6.CKZTpZlxj7hjjo2H.cfwMU7LuOJ619Lny
     folder: null
@@ -1796,7 +1762,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.CKZTpZlxj7hjjo2H
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1917,7 +1883,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.41JIhpDyM9Anm7cs
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2061,7 +2027,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ppWAAEul0QHtm4er
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2190,7 +2156,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.X4c8xCkmF8U9HUMz
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2299,7 +2265,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.wqfAVANuQonNBgnL
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2409,7 +2375,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.Ek45cBpVXvJdv1Qy
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2525,7 +2491,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.yfbK8gZqESlaoY5t
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2658,7 +2624,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.IyikgTEOTv701jgQ
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2788,7 +2754,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.pxpb2eOB6bv4phAf
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2921,20 +2887,12 @@ items:
     effects:
       - _id: lVKx8swB08jm6IFE
         flags: {}
-        changes:
-          - key: system.traits.dr.value
-            value: cold
-            mode: 2
-            priority: null
         disabled: true
         duration:
-          startTime: null
-          seconds: 600
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
-          combat: null
+          value: 600
+          units: seconds
+          expiry: turnStart
+          expired: false
         origin: Item.OtcTsffCQaOFkr9K
         tint: '#ffffff'
         transfer: false
@@ -2944,7 +2902,7 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
+          coreVersion: '14.361'
           systemId: dnd5e
           systemVersion: 4.0.0
           createdTime: null
@@ -2953,26 +2911,26 @@ items:
           exportSource: null
         img: icons/magic/defensive/shield-barrier-flaming-pentagon-red.webp
         type: base
-        system: {}
+        system:
+          changes:
+            - key: system.traits.dr.value
+              value: cold
+              priority: null
+              type: add
         sort: 0
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!B7lBOr1AahNZs4a6.avD5XUtkBPQQR97c.lVKx8swB08jm6IFE
       - _id: UUXwEKSPX4nYfDzo
         flags: {}
-        changes:
-          - key: system.traits.dr.value
-            value: fire
-            mode: 2
-            priority: null
         disabled: true
         duration:
-          startTime: null
-          seconds: 600
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
-          combat: null
+          value: 600
+          units: seconds
+          expiry: turnStart
+          expired: false
         origin: Item.OtcTsffCQaOFkr9K
         tint: '#ffffff'
         transfer: false
@@ -2982,7 +2940,7 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
+          coreVersion: '14.361'
           systemId: dnd5e
           systemVersion: 4.0.0
           createdTime: null
@@ -2991,15 +2949,23 @@ items:
           exportSource: null
         img: icons/magic/defensive/shield-barrier-flaming-pentagon-blue.webp
         type: base
-        system: {}
+        system:
+          changes:
+            - key: system.traits.dr.value
+              value: fire
+              priority: null
+              type: add
         sort: 0
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!B7lBOr1AahNZs4a6.avD5XUtkBPQQR97c.UUXwEKSPX4nYfDzo
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.avD5XUtkBPQQR97c
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -3110,32 +3076,12 @@ items:
     effects:
       - origin: Compendium.dnd5e.spells.ReMbjfeOKoSj3O79
         duration:
-          startTime: null
-          seconds: 3600
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 3600
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: true
         _id: cSVCA9h5OEo5lfBE
-        changes:
-          - key: system.traits.dr.value
-            mode: 2
-            value: bludgeoning
-            priority: null
-          - key: system.traits.dr.value
-            mode: 2
-            value: piercing
-            priority: null
-          - key: system.traits.dr.value
-            mode: 2
-            value: slashing
-            priority: null
-          - key: system.traits.dr.bypasses
-            mode: 2
-            value: mgc
-            priority: null
         tint: '#ffffff'
         transfer: false
         flags: {}
@@ -3145,7 +3091,7 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
+          coreVersion: '14.361'
           systemId: dnd5e
           systemVersion: 4.0.0
           createdTime: null
@@ -3154,15 +3100,35 @@ items:
           exportSource: null
         img: icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp
         type: base
-        system: {}
+        system:
+          changes:
+            - key: system.traits.dr.value
+              value: bludgeoning
+              priority: null
+              type: add
+            - key: system.traits.dr.value
+              value: piercing
+              priority: null
+              type: add
+            - key: system.traits.dr.value
+              value: slashing
+              priority: null
+              type: add
+            - key: system.traits.dr.bypasses
+              value: mgc
+              priority: null
+              type: add
         sort: 0
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!B7lBOr1AahNZs4a6.ReMbjfeOKoSj3O79.cSVCA9h5OEo5lfBE
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ReMbjfeOKoSj3O79
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -3286,7 +3252,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.RpKjTlYASrfqUPVA
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -3499,7 +3465,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.fVbCxFRaORalHB20
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -3624,7 +3590,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.o9ZCvuD2B1OTcubb
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -3744,7 +3710,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.WmQpxfjZwF3MGUby
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -4021,7 +3987,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.L4J89JXqbKs6puEV
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -4134,7 +4100,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.bllEWfm9xfEKynhv
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -4248,7 +4214,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.JYuRBwxpoFhXduvD
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -4364,7 +4330,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.1N8dDMMgZ1h1YJ3B
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -4486,7 +4452,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.A3q2gTNqG6fvNGrv
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -4494,6 +4460,59 @@ items:
       lastModifiedBy: null
       exportSource: null
     _key: '!actors.items!B7lBOr1AahNZs4a6.A3q2gTNqG6fvNGrv'
+  - _id: 3TiWhGLJV51EudMG
+    name: Magic Resistance
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on saving
+          throws against spells and other magical effects.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      properties:
+        - trait
+      identifier: magic-resistance
+      advancement: {}
+      crewed: false
+    flags: {}
+    img: icons/magic/defensive/barrier-shield-dome-pink.webp
+    effects: []
+    folder: null
+    sort: 0
+    _stats:
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781819884542
+      modifiedTime: 1781819884542
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Item.Hc6MqLQhPTI1KOvm
+    _key: '!actors.items!B7lBOr1AahNZs4a6.3TiWhGLJV51EudMG'
 effects: []
 folder: pEyqIq8DYb21xia3
 sort: 0
@@ -4502,7 +4521,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171211119
