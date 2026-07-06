@@ -822,7 +822,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * Prompt the user to delete one of several conditions.
    * @param {Actor5e} actor                           The owner of the effects.
    * @param {string|Set<ActiveEffect5e>} effects      A set of effects, or the status to derive them from.
-   * @returns {Promise<ActiveEffect5e|null>}
+   * @returns {Promise<ActiveEffect5e[]|null>}
    */
   static async deleteConditionDialog(actor, effects) {
     if ( foundry.utils.getType(effects) === "string" ) {
@@ -830,23 +830,30 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     }
     if ( !effects.size ) return null;
 
-    const html = new foundry.data.fields.StringField({
+    const sources = Array.from(effects).sort((a, b) => a.name.localeCompare(b.name, game.i18n.lang));
+    const group = foundry.applications.fields.createFormGroup({
       label: game.i18n.localize("DND5E.EFFECT.Status.DeleteDialog.label"),
       hint: game.i18n.localize("DND5E.EFFECT.Status.DeleteDialog.hint"),
-      required: true,
-      choices: Object.fromEntries(Array.from(effects).map(effect => [effect.id, effect.name]))
-    }).toFormGroup({}, { name: "source", sort: true }).outerHTML;
+      input: foundry.applications.fields.createSelectInput({
+        name: "source",
+        options: [
+          { label: game.i18n.localize("DND5E.EFFECT.Status.DeleteDialog.all"), rule: true, value: "" },
+          ...sources.map(effect => ({ label: effect.name, value: effect.id }))
+        ]
+      })
+    }).outerHTML;
 
     return foundry.applications.api.DialogV2.prompt({
       rejectClose: false,
-      content: `<fieldset>${html}</fieldset>`,
+      content: `<fieldset>${group}</fieldset>`,
       window: { title: "DND5E.EFFECT.Status.DeleteDialog.title" },
       position: { width: 400 },
       ok: {
         label: "DND5E.Confirm",
-        callback: async function(event, button) {
+        callback: (event, button) => {
           const source = button.form.elements.source.value;
-          return actor.effects.get(source)?.delete();
+          const ids = source ? [source] : sources.map(effect => effect.id);
+          return actor.deleteEmbeddedDocuments("ActiveEffect", ids);
         }
       }
     });
