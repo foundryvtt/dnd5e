@@ -455,9 +455,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -472,7 +469,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -492,11 +489,12 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 0.5
 items:
   - _id: 9ioH5ocevSRjYBaD
     name: Shapechanger
     type: feat
-    img: icons/magic/control/silhouette-hold-change-blue.webp
+    img: icons/equipment/head/mask-carved-bird-grey-pink.webp
     system:
       description:
         value: >-
@@ -519,65 +517,96 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties:
         - trait
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
+        pXG82JA5sw7GF11D:
+          type: transform
+          name: Shapeshift
+          img: ''
+          sort: 100000
           activation:
             type: action
-            value: 1
-            condition: ''
             override: false
+            condition: ''
           consumption:
-            targets: []
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets: []
           description:
+            value: ''
             chatFlavor: ''
           duration:
+            units: inst
             concentration: false
-            value: ''
-            units: ''
-            special: ''
             override: false
           effects: []
+          flags: {}
           range:
-            units: ''
-            special: ''
+            units: self
             override: false
+            special: ''
           target:
             template:
-              count: ''
               contiguous: false
+              stationary: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: ''
-              type: ''
               choice: false
-              special: ''
-            prompt: true
+              type: ''
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          profiles:
+            - name: Rat
+              _id: p7SLorpuBrwc2IGY
+              uuid: Compendium.dnd5e.monsters.Actor.pozQUPTnLZW8epox
+              level:
+                min: null
+                max: null
+              movement: []
+              sizes: []
+              types: []
+            - name: Raven
+              _id: DPTp2z3B8UDGsbAQ
+              uuid: Compendium.dnd5e.monsters.Actor.LPdX5YLlwci0NDZx
+              level:
+                min: null
+                max: null
+              movement: []
+              sizes: []
+              types: []
+            - name: Spider
+              _id: 1OR7BiWrDkYMiSLs
+              uuid: Compendium.dnd5e.monsters.Actor.28gU50HtG8Kp7uIz
+              level:
+                min: null
+                max: null
+              movement: []
+              sizes: []
+              types: []
+          settings: null
+          transform:
+            customize: false
+            mode: ''
+            preset: polymorphSelf
+          _id: pXG82JA5sw7GF11D
       enchant: {}
       prerequisites:
         level: null
@@ -591,122 +620,28 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.VhByyxHJN7MNQJRd
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747956891381
+      systemVersion: 6.0.0
+      createdTime: 1781801478899
+      modifiedTime: 1781801565790
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!dLQiESMsfsXijD5c.9ioH5ocevSRjYBaD'
-  - _id: OljCWQpwojS4FKur
-    name: Devil's Sight
-    type: feat
-    img: icons/magic/perception/eye-slit-pink.webp
-    system:
-      description:
-        value: <p>Magical darkness doesn't impede the imp's darkvision.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: devils-sight
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!dLQiESMsfsXijD5c.OljCWQpwojS4FKur'
-  - _id: sl0CxgkL7SkRIv7j
-    name: Magic Resistance
-    type: feat
-    img: icons/magic/defensive/shield-barrier-glowing-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The imp has advantage on saving throws against spells and other
-          magical effects.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: magic-resistance
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!dLQiESMsfsXijD5c.sl0CxgkL7SkRIv7j'
   - _id: 64Swhse7QnbiLAbi
     name: Sting (Bite in Beast Form)
     type: weapon
-    img: icons/creatures/abilities/fang-tooth-venomous.webp
+    img: icons/creatures/abilities/stinger-poison-green.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
           make on a [[/save]] saving throw, taking [[/damage average
-          activity=dnd5eactivity100]] damage on a failed save, or half as much
+          activity=hUmRNvmmpY5rJfVE]] damage on a failed save, or half as much
           damage on a successful one.</p>
         chat: >-
-          <p>The Imp attacks with its Sting. The target must make a
-          <strong>Constitution</strong> saving throw.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. The target must make a Constitution saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -769,7 +704,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -778,8 +713,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        dljgnmOafe7LqxcY:
           type: attack
           activation:
             type: action
@@ -794,69 +728,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
-          duration:
-            concentration: false
             value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '5'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          attack:
-            ability: dex
-            bonus: ''
-            critical:
-              threshold: null
-            flat: false
-            type:
-              value: melee
-              classification: weapon
-          damage:
-            critical:
-              bonus: ''
-            includeBase: true
-            parts: []
-          sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
-          type: save
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
           duration:
             concentration: false
             value: ''
@@ -877,10 +749,90 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          attack:
+            ability: ''
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: ''
+              classification: ''
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts: []
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: dljgnmOafe7LqxcY
+          name: ''
+        hUmRNvmmpY5rJfVE:
+          type: save
+          activation:
+            type: special
+            value: 1
+            condition: When a creature is hit by this attack.
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: >-
+              <p>The target must make on a [[/save]] saving throw, taking
+              [[/damage average activity=hUmRNvmmpY5rJfVE]] damage on a failed
+              save, or half as much damage on a successful one.</p>
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '5'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -896,19 +848,33 @@ items:
                   enabled: false
                   formula: ''
                 number: 3
-                denomination: '6'
+                denomination: 6
                 bonus: ''
                 types:
                   - poison
+                scaling:
+                  number: 1
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '11'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 200000
           name: ''
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: hUmRNvmmpY5rJfVE
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -919,35 +885,33 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1747956945254
+      systemVersion: 6.0.0
+      createdTime: 1781801371223
+      modifiedTime: 1781801439187
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!dLQiESMsfsXijD5c.64Swhse7QnbiLAbi'
-  - _id: mMdtSlNy6FuPju7p
+  - _id: ABjkKWIBbRYp2fy5
     name: Invisibility
     type: feat
-    img: icons/creatures/webs/webthin-blue.webp
+    img: icons/creatures/magical/spirit-undead-ghost-blue.webp
     system:
       description:
         value: >-
-          <p>The imp magically turns invisible until it attacks, or until its
-          concentration ends (as if concentrating on a spell). Any equipment the
-          imp wears or carries is invisible with it.</p>
+          <p>The [[lookup @name lowercase]]{monster} magically turns
+          &amp;reference[invisible] until it attacks or until its concentration
+          ends (as if concentrating on a spell). Any equipment the [[lookup
+          @name lowercase]]{monster} wears or carries is invisible with it.</p>
         chat: >-
-          <p>The imp magically turns invisible. Any equipment the imp wears or
-          carries is invisible with it.</p>
+          <p>The [[lookup @name]]{monster} magically turns
+          &amp;reference[invisible]. Any equipment the [[lookup @name]]{monster}
+          wears or carries is invisible with it.</p>
       source:
         custom: ''
         book: ''
@@ -960,13 +924,13 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        CaKaGslGFsgCW6kV:
           type: utility
           activation:
             type: action
@@ -981,15 +945,20 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
-          duration:
-            concentration: false
             value: ''
-            units: ''
+          duration:
+            concentration: true
+            value: '1'
+            units: disp
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: dJA0IOGziAr9Onj9
+              level:
+                min: null
+                max: null
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -1000,7 +969,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1017,28 +987,191 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          _id: CaKaGslGFsgCW6kV
+          name: Become Invisible
       enchant: {}
       prerequisites:
         level: null
+        items: []
+        repeatable: false
       identifier: invisibility
-    effects: []
+      advancement: {}
+      crewed: false
+    effects:
+      - name: Invisibility
+        img: icons/creatures/magical/spirit-undead-ghost-blue.webp
+        origin: Compendium.dnd5e.monsters.Actor.bwtkdzavdNHISgp4.Item.MLfZqvhaJjB78YiT
+        transfer: false
+        _id: dJA0IOGziAr9Onj9
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You are &amp;reference[invisible] until you attack or until your
+          concentration ends (as if concentrating on a spell). Any equipment you
+          are wearing or carrying is invisible as well.</p>
+        tint: '#ffffff'
+        statuses:
+          - invisible
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781801344002
+          modifiedTime: 1781801458402
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!dLQiESMsfsXijD5c.ABjkKWIBbRYp2fy5.dJA0IOGziAr9Onj9
     folder: null
-    sort: 200000
+    sort: 650000
     ownership:
       default: 0
     flags: {}
     _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.dA5X2eQuOtHywpQF
-      duplicateSource: null
-      coreVersion: '13.344'
+      compendiumSource: Compendium.dnd5e.monsters.Actor.bwtkdzavdNHISgp4.Item.MLfZqvhaJjB78YiT
+      duplicateSource: Item.6c4SMQeuAWhmqOHx
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747956927936
+      systemVersion: 6.0.0
+      createdTime: 1781801344002
+      modifiedTime: 1781801361969
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!dLQiESMsfsXijD5c.mMdtSlNy6FuPju7p'
+    _key: '!actors.items!dLQiESMsfsXijD5c.ABjkKWIBbRYp2fy5'
+  - _id: 4fV0Bx98jhEx562G
+    name: Magic Resistance
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on saving
+          throws against spells and other magical effects.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      properties:
+        - trait
+      identifier: magic-resistance
+      advancement: {}
+      crewed: false
+    flags: {}
+    img: icons/magic/defensive/barrier-shield-dome-pink.webp
+    effects: []
+    folder: null
+    sort: 100000
+    _stats:
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781801462838
+      modifiedTime: 1781801466565
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Item.Hc6MqLQhPTI1KOvm
+    _key: '!actors.items!dLQiESMsfsXijD5c.4fV0Bx98jhEx562G'
+  - _id: mE8GYyYeV3dIxYMF
+    name: Devil Sight
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>Magical &amp;reference[darkness] doesn't impede the [[lookup @name
+          lowercase]]{monster}'s &amp;reference[Darkvision].</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      properties:
+        - trait
+      identifier: devil-sight
+      advancement: {}
+      crewed: false
+    flags: {}
+    img: icons/creatures/eyes/lizard-single-slit-pink.webp
+    effects: []
+    folder: null
+    sort: 0
+    _stats:
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781801465657
+      modifiedTime: 1781801465657
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Item.UjbgbOnd6ltjagZm
+    _key: '!actors.items!dLQiESMsfsXijD5c.mE8GYyYeV3dIxYMF'
 effects: []
 folder: P1YKVDd1IN7XXWWy
 sort: 0
@@ -1047,7 +1180,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171244145

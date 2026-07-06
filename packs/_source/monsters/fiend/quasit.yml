@@ -455,9 +455,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -472,7 +469,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -492,20 +489,24 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 0.5
 items:
   - _id: MLfZqvhaJjB78YiT
     name: Invisibility
     type: feat
-    img: icons/creatures/webs/webthin-blue.webp
+    img: icons/creatures/magical/spirit-undead-ghost-blue.webp
     system:
       description:
         value: >-
-          <p>The quasit magically turns invisible until it attacks or uses
-          Scare, or until its concentration ends (as if concentrating on a
-          spell). Any equipment the quasit wears or carries is invisible with
-          it.</p>
+          <p>The [[lookup @name lowercase]]{monster} magically turns 
+          &amp;reference[invisible] until it attacks or uses
+          @UUID[Compendium.dnd5e.monsters.Actor.bwtkdzavdNHISgp4.Item.1YhP86rTuRIXKFi2]{Scare},
+          or until its concentration ends (as if concentrating on a spell). Any
+          equipment the [[lookup @name lowercase]]{monster} wears or carries is
+          invisible with it.</p>
         chat: >-
-          <p>The quasit magically turns invisible. Any equipment the quasit
+          <p>The [[lookup @name]]{monster} magically turns
+          &amp;reference[invisible]. Any equipment the [[lookup @name]]{monster}
           wears or carries is invisible with it.</p>
       source:
         custom: ''
@@ -519,13 +520,13 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        CaKaGslGFsgCW6kV:
           type: utility
           activation:
             type: action
@@ -540,15 +541,20 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
-          duration:
-            concentration: false
             value: ''
-            units: ''
+          duration:
+            concentration: true
+            value: '1'
+            units: disp
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: dJA0IOGziAr9Onj9
+              level:
+                min: null
+                max: null
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -559,7 +565,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -576,12 +583,66 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          _id: CaKaGslGFsgCW6kV
+          name: Become Invisible
       enchant: {}
       prerequisites:
         level: null
       identifier: invisibility
-    effects: []
+    effects:
+      - name: Invisibility
+        img: icons/creatures/magical/spirit-undead-ghost-blue.webp
+        origin: Compendium.dnd5e.monsters.Actor.bwtkdzavdNHISgp4.Item.MLfZqvhaJjB78YiT
+        transfer: false
+        _id: dJA0IOGziAr9Onj9
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You are &amp;reference[invisible] until you attack or use
+          @UUID[Compendium.dnd5e.monsters.Actor.bwtkdzavdNHISgp4.Item.1YhP86rTuRIXKFi2]{Scare},
+          or until your concentration ends (as if concentrating on a spell). Any
+          equipment you are wearing or carrying is invisible as well.</p>
+        tint: '#ffffff'
+        statuses:
+          - invisible
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781801074023
+          modifiedTime: 1781801163332
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!bwtkdzavdNHISgp4.MLfZqvhaJjB78YiT.dJA0IOGziAr9Onj9
     folder: null
     sort: 100000
     ownership:
@@ -590,31 +651,33 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.dA5X2eQuOtHywpQF
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1747957321172
+      systemVersion: 6.0.0
+      createdTime: 1781800950884
+      modifiedTime: 1781801147908
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!bwtkdzavdNHISgp4.MLfZqvhaJjB78YiT'
   - _id: ae0OI3obJqa4AS7U
     name: Claw (Bite in Beast Form)
     type: weapon
-    img: icons/skills/melee/strike-slashes-red.webp
+    img: icons/creatures/claws/claw-talons-glowing-orange.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
-          succeed on a [[/save]] saving throw or take [[/damage average
-          activity=dnd5eactivity100]] damage and become &amp;Reference[poisoned]
-          for 1 minute. The target can repeat the saving throw at the end of
-          each of its turns, ending the effect on itself on a success.</p>
+          succeed on a [[/save activity=YYGdywRW1up1nXSJ]] saving throw or take
+          [[/damage average activity=YYGdywRW1up1nXSJ]] damage and become
+          &amp;Reference[poisoned] for [[lookup @labels.duration
+          activity=YYGdywRW1up1nXSJ]]. The target can repeat the saving throw at
+          the end of each of its turns, ending the effect on itself on a
+          success.</p>
         chat: >-
-          <p>The Quasit attacks with its Claw. The target must make a
-          <strong>Constitution</strong> saving throw. The target can repeat the
-          saving throw at the end of each of its turns, ending the effect on
-          itself on a success.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. The target must make a Constitution saving throw. The
+          target can repeat the saving throw at the end of each of its turns,
+          ending the effect on itself on a success.</p>
       source:
         custom: ''
         book: ''
@@ -677,17 +740,16 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
-        value: simpleM
+        value: natural
         baseItem: ''
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        zoPZrSG1OVFrLQPx:
           type: attack
           activation:
             type: action
@@ -702,69 +764,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
-          duration:
-            concentration: false
             value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '5'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          attack:
-            ability: dex
-            bonus: ''
-            critical:
-              threshold: null
-            flat: false
-            type:
-              value: melee
-              classification: weapon
-          damage:
-            critical:
-              bonus: ''
-            includeBase: true
-            parts: []
-          sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
-          type: save
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
           duration:
             concentration: false
             value: ''
@@ -785,7 +785,89 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          attack:
+            ability: ''
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: ''
+              classification: ''
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts: []
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: zoPZrSG1OVFrLQPx
+          name: ''
+        YYGdywRW1up1nXSJ:
+          type: save
+          activation:
+            type: special
+            value: 1
+            condition: When a creature is hit by this attack.
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: ''
+          duration:
+            concentration: false
+            value: '1'
+            units: minute
+            special: ''
+            override: false
+          effects:
+            - _id: lj4cHP3WVTg1ePKt
+              onSave: false
+              level:
+                min: null
+                max: null
+          range:
+            value: '5'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -804,49 +886,100 @@ items:
                   enabled: false
                   formula: ''
                 number: 2
-                denomination: '4'
+                denomination: 4
                 bonus: ''
                 types:
                   - poison
+                scaling:
+                  number: 1
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '10'
-          sort: 0
-          name: ''
+            visible: true
+            bonus: ''
+          sort: 200000
+          name: Poison Save
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: YYGdywRW1up1nXSJ
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: claw-bite-in-beast-form
       mastery: ''
-    effects: []
+    effects:
+      - name: Quasit Poison
+        img: icons/skills/toxins/symbol-poison-drop-skull-green.webp
+        origin: Compendium.dnd5e.monsters.Actor.bwtkdzavdNHISgp4.Item.ae0OI3obJqa4AS7U
+        transfer: false
+        _id: lj4cHP3WVTg1ePKt
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: minutes
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You are &amp;reference[poisoned apply=false].</p><p>You can repeat
+          the saving throw at the end of each of your turns, ending the effect
+          on yourself on a success.</p>
+        tint: '#ffffff'
+        statuses:
+          - poisoned
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781800511672
+          modifiedTime: 1781800563183
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!bwtkdzavdNHISgp4.ae0OI3obJqa4AS7U.lj4cHP3WVTg1ePKt
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745175290818
+      systemVersion: 6.0.0
+      createdTime: 1781799942640
+      modifiedTime: 1781800611553
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!bwtkdzavdNHISgp4.ae0OI3obJqa4AS7U'
   - _id: e8rpvJJVWCN4HU7I
     name: Shapechanger
     type: feat
-    img: icons/magic/control/silhouette-hold-change-blue.webp
+    img: icons/equipment/head/mask-carved-bird-grey-pink.webp
     system:
       description:
         value: >-
@@ -871,64 +1004,96 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
+        Xw2uhanKyF8msNlO:
+          type: transform
+          name: Shapeshift
+          _id: Xw2uhanKyF8msNlO
+          img: ''
+          sort: 100000
           activation:
             type: action
-            value: 1
-            condition: ''
             override: false
+            condition: ''
           consumption:
-            targets: []
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets: []
           description:
+            value: ''
             chatFlavor: ''
           duration:
+            units: inst
             concentration: false
-            value: ''
-            units: ''
-            special: ''
             override: false
           effects: []
+          flags: {}
           range:
-            units: ''
-            special: ''
+            units: self
             override: false
+            special: ''
           target:
             template:
-              count: ''
               contiguous: false
+              stationary: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: ''
-              type: ''
               choice: false
-              special: ''
-            prompt: true
+              type: ''
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          profiles:
+            - name: Bat
+              _id: p7SLorpuBrwc2IGY
+              uuid: Compendium.dnd5e.monsters.Actor.qav2dvMIUiMQCCsy
+              level:
+                min: null
+                max: null
+              movement: []
+              sizes: []
+              types: []
+            - name: Centipede
+              _id: DPTp2z3B8UDGsbAQ
+              uuid: Compendium.dnd5e.monsters.Actor.Hn8FFLEzscgT7azz
+              level:
+                min: null
+                max: null
+              movement: []
+              sizes: []
+              types: []
+            - name: Toad
+              _id: 1OR7BiWrDkYMiSLs
+              uuid: Compendium.dnd5e.monsters.Actor.Ixo5shumxy4I9qyD
+              level:
+                min: null
+                max: null
+              movement: []
+              sizes: []
+              types: []
+          settings: null
+          transform:
+            customize: false
+            mode: ''
+            preset: polymorphSelf
       enchant: {}
       prerequisites:
         level: null
@@ -942,74 +1107,29 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.VhByyxHJN7MNQJRd
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747957367424
+      systemVersion: 6.0.0
+      createdTime: 1781800739602
+      modifiedTime: 1781801583178
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!bwtkdzavdNHISgp4.e8rpvJJVWCN4HU7I'
-  - _id: vlmHYqAZxNGh8xQ6
-    name: Magic Resistance
-    type: feat
-    img: icons/magic/defensive/shield-barrier-glowing-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The quasit has advantage on saving throws against spells and other
-          magical effects.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: magic-resistance
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747957317985
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!bwtkdzavdNHISgp4.vlmHYqAZxNGh8xQ6'
   - _id: 1YhP86rTuRIXKFi2
     name: Scare
     type: feat
-    img: icons/creatures/unholy/demon-winged-cyclops-drooling.webp
+    img: icons/magic/control/fear-fright-monster-grin-purple-blue.webp
     system:
       description:
         value: >-
-          <p>One creature of the quasit's choice within 20 ft. of it must
-          succeed on a [[/save]] saving throw or be &amp;Reference[frightened]
-          for 1 minute.</p><p>The target can repeat the saving throw at the end
-          of each of its turns, with disadvantage if the quasit is within line
-          of sight, ending the effect on itself on a success.</p>
+          <p>One creature of the [[lookup @name lowercase]]{monster}'s choice
+          within [[lookup @labels.description.range activity=zQ8s6ZTP8J2d98cR]]
+          of it must succeed on a [[/save]] saving throw or be
+          &amp;Reference[frightened] for [[lookup @labels.duration
+          activity=zQ8s6ZTP8J2d98cR]].</p><p>The target can repeat the saving
+          throw at the end of each of its turns, with disadvantage if the
+          [[lookup @name lowercase]]{monster} is within line of sight, ending
+          the effect on itself on a success.</p>
         chat: >-
           <p>One creature of the quasit's choice within 20 ft. of it must make a
           <strong>Wisdom</strong> saving throw. The target can repeat the saving
@@ -1029,13 +1149,12 @@ items:
             type: recoverAll
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+        zQ8s6ZTP8J2d98cR:
           type: save
           activation:
             type: action
@@ -1045,24 +1164,26 @@ items:
           consumption:
             targets:
               - type: itemUses
-                target: ''
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: ''
+                scaling: {}
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
-            value: ''
-            units: ''
+            value: '1'
+            units: minute
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: DiTStRlGa6CI65oe
+              level: {}
+              onSave: false
           range:
             value: '20'
             units: ft
@@ -1076,7 +1197,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: '1'
               type: creature
@@ -1089,39 +1211,145 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: wis
+            ability:
+              - wis
             dc:
               calculation: ''
               formula: '10'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: zQ8s6ZTP8J2d98cR
+          name: Frighten Creature
       enchant: {}
       prerequisites:
         level: null
       identifier: scare
-    effects: []
+    effects:
+      - name: Scared
+        img: icons/magic/control/fear-fright-white.webp
+        origin: Compendium.dnd5e.monsters.Actor.bwtkdzavdNHISgp4.Item.1YhP86rTuRIXKFi2
+        transfer: false
+        _id: DiTStRlGa6CI65oe
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: minutes
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You are &amp;reference[frightened apply=false].</p><p>You can
+          repeat the saving throw at the end of each of your turns, with
+          disadvantage if the quasit is within line of sight, ending the effect
+          on yourself on a success.</p>
+        tint: '#ffffff'
+        statuses:
+          - frightened
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781800826861
+          modifiedTime: 1781800884126
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!bwtkdzavdNHISgp4.1YhP86rTuRIXKFi2.DiTStRlGa6CI65oe
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.gqrKcFwxHhmwrP2q
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747957347912
+      systemVersion: 6.0.0
+      createdTime: 1781800759056
+      modifiedTime: 1781801173800
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!bwtkdzavdNHISgp4.1YhP86rTuRIXKFi2'
+  - _id: BazHsWJucole1yk3
+    name: Magic Resistance
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on saving
+          throws against spells and other magical effects.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      properties:
+        - trait
+      identifier: magic-resistance
+      advancement: {}
+      crewed: false
+    flags: {}
+    img: icons/magic/defensive/barrier-shield-dome-pink.webp
+    effects: []
+    folder: null
+    sort: 0
+    _stats:
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781799287829
+      modifiedTime: 1781799287829
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Item.Hc6MqLQhPTI1KOvm
+    _key: '!actors.items!bwtkdzavdNHISgp4.BazHsWJucole1yk3'
 effects: []
 folder: P1YKVDd1IN7XXWWy
 sort: 0
@@ -1130,7 +1358,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171242436
