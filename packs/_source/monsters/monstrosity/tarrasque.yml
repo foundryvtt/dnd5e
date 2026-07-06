@@ -498,7 +498,7 @@ items:
       description:
         value: >-
           <p>Any time the [[lookup @name lowercase]]{monster} is targeted by a
-          @UUID[Compendium.dnd5e.spells.Item.41JIhpDyM9Anm7cs]{Magic Missile}
+          @UUID[Compendium.dnd5e.spells.Item.41JIhpDyM9Anm7cs]{magic missile}
           spell, a line spell, or a spell that requires a ranged attack roll,
           roll a d6. On a 1 to 5, the [[lookup @name lowercase]]{monster} is
           unaffected.</p><p>On a 6, the [[lookup @name lowercase]]{monster} is
@@ -534,8 +534,8 @@ items:
             value: null
             condition: >-
               When the [[lookup @name lowercase]]{monster} is targeted by a
-              @UUID[Compendium.dnd5e.spells.Item.41JIhpDyM9Anm7cs]{Magic
-              Missile} spell, a line spell, or a spell that requires a ranged
+              @UUID[Compendium.dnd5e.spells.Item.41JIhpDyM9Anm7cs]{magic
+              missile} spell, a line spell, or a spell that requires a ranged
               attack roll.
             override: false
           consumption:
@@ -614,7 +614,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781892620222
-      modifiedTime: 1781892772248
+      modifiedTime: 1783368419352
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!KCvt4FdOVJbuZ3T0.tE9TjxIMLnqDisjv'

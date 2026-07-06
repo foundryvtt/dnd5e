@@ -502,8 +502,8 @@ items:
           next turn, becoming &amp;reference[petrified] on a failure or ending
           the effect on a success. The petrification lasts until the creature is
           freed by the
-          @UUID[Compendium.dnd5e.spells.Item.WzvJ7G3cqvIubsLk]{Greater
-          Restoration} spell or other magic.</p><p>Unless
+          @UUID[Compendium.dnd5e.spells.Item.WzvJ7G3cqvIubsLk]{greater
+          restoration} spell or other magic.</p><p>Unless
           &amp;reference[surprise]{Surprised}, a creature can avert its eyes to
           avoid the saving throw at the start of its turn. If the creature does
           so, it can't see the [[lookup @name lowercase]]{monster} until the
@@ -651,8 +651,8 @@ items:
           expired: false
         description: >-
           <p>You are &amp;reference[petrified apply=false] until freed by the
-          @UUID[Compendium.dnd5e.spells.Item.WzvJ7G3cqvIubsLk]{Greater
-          Restoration} spell or other magic.</p>
+          @UUID[Compendium.dnd5e.spells.Item.WzvJ7G3cqvIubsLk]{greater
+          restoration} spell or other magic.</p>
         tint: '#ffffff'
         statuses:
           - petrified
@@ -668,7 +668,7 @@ items:
           systemId: dnd5e
           systemVersion: 6.0.0
           createdTime: 1781879439333
-          modifiedTime: 1781879680933
+          modifiedTime: 1783368550125
           lastModifiedBy: dnd5ebuilder0000
           compendiumSource: >-
             Compendium.dnd5e.monsters.Actor.EpYl7qifM5pq6W6B.Item.gpxvIs8yjQ4awt4s.ActiveEffect.SkiwEOXDYspZ7NOt
@@ -697,8 +697,8 @@ items:
           turn.</p><p>On a success, the effect ends. On a failure, you are
           @UUID[Compendium.dnd5e.monsters.Actor.eiifqZwYGi71r2Yl.Item.KmzlUGMXUhY2HubE.ActiveEffect.Nc19TcGMlbwrwBeq]{Petrified}
           until freed by the
-          @UUID[Compendium.dnd5e.spells.Item.WzvJ7G3cqvIubsLk]{Greater
-          Restoration} spell or other magic.</p>
+          @UUID[Compendium.dnd5e.spells.Item.WzvJ7G3cqvIubsLk]{greater
+          restoration} spell or other magic.</p>
         tint: '#ffffff'
         statuses:
           - restrained
@@ -714,7 +714,7 @@ items:
           systemId: dnd5e
           systemVersion: 6.0.0
           createdTime: 1781879444391
-          modifiedTime: 1781879493405
+          modifiedTime: 1783368546010
           lastModifiedBy: dnd5ebuilder0000
           compendiumSource: >-
             Compendium.dnd5e.monsters.Actor.EpYl7qifM5pq6W6B.Item.gpxvIs8yjQ4awt4s.ActiveEffect.Z4mFj1zWP0EkqbNH
@@ -734,7 +734,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781879182727
-      modifiedTime: 1781879449791
+      modifiedTime: 1783368555757
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!eiifqZwYGi71r2Yl.KmzlUGMXUhY2HubE'

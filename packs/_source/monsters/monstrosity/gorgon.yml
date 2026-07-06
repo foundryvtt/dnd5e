@@ -490,11 +490,11 @@ items:
         value: >-
           <p>If the [[lookup @name lowercase]]{monster} moves at least 20 feet
           straight toward a creature and then hits it with a
-          @UUID[Compendium.dnd5e.monsters.Actor.nZthq6WHLhcdu3te.Item.7DSbBzpS1e9lYxZx]{Gore}
+          @UUID[Compendium.dnd5e.monsters.Actor.nZthq6WHLhcdu3te.Item.7DSbBzpS1e9lYxZx]{gore}
           attack on the same turn, that target must succeed on a [[/save]]
           saving throw or be knocked &amp;reference[prone]. If the target is
           prone, the [[lookup @name lowercase]]{monster} can make one attack
-          with its [[/item .O8oahxePfpHFYohz]]{Hooves} against it as a bonus
+          with its [[/item .O8oahxePfpHFYohz]]{hooves} against it as a bonus
           action.</p>
         chat: >-
           <p>If the gorgon moves at <strong>least 20 feet</strong> straight
@@ -526,7 +526,7 @@ items:
             condition: >-
               When the [[lookup @name lowercase]]{monster} moves at least 20
               feet straight toward a creature and then hits it with a
-              @UUID[Compendium.dnd5e.monsters.Actor.nZthq6WHLhcdu3te.Item.7DSbBzpS1e9lYxZx]{Gore}
+              @UUID[Compendium.dnd5e.monsters.Actor.nZthq6WHLhcdu3te.Item.7DSbBzpS1e9lYxZx]{gore}
               attack on the same turn.
             override: false
           consumption:
@@ -612,7 +612,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781877768017
-      modifiedTime: 1781877865505
+      modifiedTime: 1783368218881
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!nZthq6WHLhcdu3te.zpzof99ziVJCU4hI'
@@ -989,8 +989,8 @@ items:
           saving throw at the end of its next turn. On a success, the effect
           ends on the target. On a failure, the target is
           &amp;reference[petrified] until freed by the
-          @UUID[Compendium.dnd5e.spells.Item.WzvJ7G3cqvIubsLk]{Greater
-          Restoration} spell or other magic.</p>
+          @UUID[Compendium.dnd5e.spells.Item.WzvJ7G3cqvIubsLk]{greater
+          restoration} spell or other magic.</p>
         chat: >-
           <p>The [[lookup @name]]{monster} exhales petrifying gas in a [[lookup
           @labels.description.template activity=I95hdnCSX03wF7Er]]. Each
@@ -1125,8 +1125,8 @@ items:
           turn.</p><p>On a success, the effect ends. On a failure, you are
           @UUID[Compendium.dnd5e.monsters.Actor.nZthq6WHLhcdu3te.Item.5tEnGK28Rd4nHnwM.ActiveEffect.PtowAW8SWftie1x8]{Petrified}
           until freed by the
-          @UUID[Compendium.dnd5e.spells.Item.WzvJ7G3cqvIubsLk]{Greater
-          Restoration} spell or other magic.</p>
+          @UUID[Compendium.dnd5e.spells.Item.WzvJ7G3cqvIubsLk]{greater
+          restoration} spell or other magic.</p>
         tint: '#ffffff'
         statuses:
           - restrained
@@ -1142,7 +1142,7 @@ items:
           systemId: dnd5e
           systemVersion: 6.0.0
           createdTime: 1781878043041
-          modifiedTime: 1781878071909
+          modifiedTime: 1783368566413
           lastModifiedBy: dnd5ebuilder0000
           compendiumSource: >-
             Compendium.dnd5e.monsters.Actor.EpYl7qifM5pq6W6B.Item.gpxvIs8yjQ4awt4s.ActiveEffect.Z4mFj1zWP0EkqbNH
@@ -1167,8 +1167,8 @@ items:
           expired: false
         description: >-
           <p>You are &amp;reference[petrified apply=false] until freed by the
-          @UUID[Compendium.dnd5e.spells.Item.WzvJ7G3cqvIubsLk]{Greater
-          Restoration} spell or other magic.</p>
+          @UUID[Compendium.dnd5e.spells.Item.WzvJ7G3cqvIubsLk]{greater
+          restoration} spell or other magic.</p>
         tint: '#ffffff'
         statuses:
           - petrified
@@ -1184,7 +1184,7 @@ items:
           systemId: dnd5e
           systemVersion: 6.0.0
           createdTime: 1781878044075
-          modifiedTime: 1781879660163
+          modifiedTime: 1783368570339
           lastModifiedBy: dnd5ebuilder0000
           compendiumSource: >-
             Compendium.dnd5e.monsters.Actor.EpYl7qifM5pq6W6B.Item.gpxvIs8yjQ4awt4s.ActiveEffect.SkiwEOXDYspZ7NOt
@@ -1204,7 +1204,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781877774759
-      modifiedTime: 1781878165371
+      modifiedTime: 1783368231166
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!nZthq6WHLhcdu3te.5tEnGK28Rd4nHnwM'
