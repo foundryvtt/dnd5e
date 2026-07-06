@@ -207,7 +207,7 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
    */
   calculateAbilityCheckProficiency(multiplier, ability, options={}) {
     let roundDown = true;
-    if ( (multiplier < 1) && ((game.settings.get("dnd5e", "rulesVersion") === "legacy") || options.skill) ) {
+    if ( (multiplier < 1) && ((dnd5e.settings.rulesVersion === "legacy") || options.skill) ) {
       if ( this.parent._isRemarkableAthlete(ability) ) {
         multiplier = .5;
         roundDown = false;
