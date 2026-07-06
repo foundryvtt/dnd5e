@@ -1,4 +1,5 @@
 import CreateDocumentDialog from "../applications/create-document-dialog.mjs";
+import ConditionData from "../data/active-effect/condition.mjs";
 import FormulaField from "../data/fields/formula-field.mjs";
 import MappingField from "../data/fields/mapping-field.mjs";
 import { getHumanReadableAttributeLabel, parseOrString, staticID } from "../utils.mjs";
@@ -763,36 +764,107 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     if ( effects.size < 1 ) return false;
     event.preventDefault();
     event.stopPropagation();
-    if ( effects.size === 1 ) {
-      actor.endConcentration(effects.first());
-      return true;
+    if ( effects.size === 1 ) actor.endConcentration(effects.first());
+    else ActiveEffect5e.endConcentrationDialog(actor, effects);
+    return true;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Manage custom condition handling when interacting with the token HUD.
+   * @param {PointerEvent} event        The triggering event.
+   * @param {Actor5e} actor             The actor belonging to the token.
+   * @param {string} status             The status condition.
+   * @returns {boolean}                 Whether the status was resolved via this method.
+   */
+  static _manageCondition(event, actor, status) {
+    if ( ConditionData.hasLevels(status) ) return false;
+    const effects = new Set(actor.effects.filter(effect => effect.statuses.has(status)));
+    if ( !effects.size ) return false;
+    event.preventDefault();
+    event.stopPropagation();
+    if ( effects.size > 1 ) ActiveEffect5e.deleteConditionDialog(actor, effects);
+    else effects.first().delete();
+    return true;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prompt the user to delete one of several conditions.
+   * @param {Actor5e} actor                           The owner of the effects.
+   * @param {string|Set<ActiveEffect5e>} effects      A set of effects, or the status to derive them from.
+   * @returns {Promise<ActiveEffect5e[]|null>}
+   */
+  static async deleteConditionDialog(actor, effects) {
+    if ( foundry.utils.getType(effects) === "string" ) {
+      effects = new Set(actor.effects.filter(effect => effect.statuses.has(effects)));
     }
+    if ( !effects.size ) return null;
+    const choices = Object.fromEntries(Array.from(effects).map(effect => [effect.id, effect.name]));
+    const source = await ActiveEffect5e.#promptRemoveSource({
+      choices, hint: "DND5E.EFFECT.Status.DeleteDialog.hint", title: "DND5E.EFFECT.Status.DeleteDialog.title"
+    });
+    if ( source === null ) return null;
+    return actor.deleteEmbeddedDocuments("ActiveEffect", source ? [source] : Object.keys(choices));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prompt the user to end concentration on one source, or all of them.
+   * @param {Actor5e} actor                       The concentrating actor.
+   * @param {Collection<ActiveEffect5e>} effects  The active concentration effects.
+   * @returns {Promise<ActiveEffect5e[]|null>}    The effects concentration was ended on, or null if dismissed.
+   */
+  static async endConcentrationDialog(actor, effects) {
     const choices = effects.reduce((acc, effect) => {
       const data = effect.getFlag("dnd5e", "item");
       acc[effect.id] = data?.name ?? actor.items.get(data?.id)?.name ?? _loc("DND5E.CONCENTRATION.NoSource");
       return acc;
     }, {});
-    const options = foundry.applications.handlebars.selectOptions(choices, { hash: { sort: true } });
-    const content = `
-    <p>${_loc("DND5E.CONCENTRATION.EndChoice")}</p>
-    <div class="form-group">
-      <label>${_loc("DND5E.SOURCE.FIELDS.source.label")}</label>
-      <div class="form-fields">
-        <select name="source">${options}</select>
-      </div>
-    </div>`;
-    foundry.applications.api.Dialog.prompt({
-      content,
-      window: { title: _loc("DND5E.Concentration") },
+    const source = await ActiveEffect5e.#promptRemoveSource({
+      choices, hint: "DND5E.CONCENTRATION.EndChoice", title: "DND5E.Concentration"
+    });
+    if ( source === null ) return null;
+    return actor.endConcentration(source || undefined);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prompt the user to pick one of several sources of an effect, or all of them.
+   * @param {object} config
+   * @param {Record<string, string>} config.choices  Mapping of option value to display label.
+   * @param {string} config.hint                     Localization key for the hint describing the choice.
+   * @param {string} config.title                    Localization key for the dialog title.
+   * @returns {Promise<string|null>}                 The selected value ("" for all sources), or null if dismissed.
+   */
+  static #promptRemoveSource({ choices, hint, title }) {
+    const sources = Object.entries(choices).sort((a, b) => a[1].localeCompare(b[1], game.i18n.lang));
+    const group = foundry.applications.fields.createFormGroup({
+      label: _loc("DND5E.EFFECT.Action.RemoveStatus.label"),
+      hint: _loc(hint),
+      input: foundry.applications.fields.createSelectInput({
+        name: "source",
+        options: [
+          { label: _loc("DND5E.EFFECT.Action.RemoveStatus.all"), rule: true, value: "" },
+          ...sources.map(([value, label]) => ({ label, value }))
+        ]
+      })
+    }).outerHTML;
+
+    return foundry.applications.api.DialogV2.prompt({
+      rejectClose: false,
+      content: `<fieldset>${group}</fieldset>`,
+      window: { title },
+      position: { width: 400 },
       ok: {
-        label: _loc("DND5E.Confirm"),
-        callback: (event, button, dialog) => {
-          const source = new foundry.applications.ux.FormDataExtended(button.form).object.source;
-          if ( source ) actor.endConcentration(source);
-        }
+        label: "DND5E.Confirm",
+        callback: (event, button) => button.form.elements.source.value
       }
     });
-    return true;
   }
 
   /* -------------------------------------------- */

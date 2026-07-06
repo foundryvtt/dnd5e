@@ -2584,6 +2584,10 @@
     "DeleteEffect": "Delete Effect",
     "DissociateEffect": "Dissociate Effect",
     "EditEffect": "Edit Effect",
+    "RemoveStatus": {
+      "all": "All Sources",
+      "label": "Source"
+    },
     "Search": "Search effects"
   },
   "Application": {
@@ -2629,6 +2633,10 @@
   "Status": {
     "ChangeActive": "Change Active",
     "ChangeInactive": "Change Inactive",
+    "DeleteDialog": {
+      "hint": "You are under the effects of this condition from more than one source. Pick which effect to end.",
+      "title": "Remove Effect"
+    },
     "Inactive": "Inactive",
     "Passive": "Passive",
     "Temporary": "Temporary",
