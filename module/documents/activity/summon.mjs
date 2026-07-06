@@ -197,7 +197,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
       }
     } catch(err) {
       Hooks.onError("SummonActivity#placeSummons", err, {
-        msg: game.i18n.localize("DND5E.SUMMON.Warning.PlaceTokens"),
+        msg: _loc("DND5E.SUMMON.Warning.PlaceTokens"),
         log: "error",
         notify: "error"
       });
