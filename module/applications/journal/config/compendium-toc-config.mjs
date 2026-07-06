@@ -48,7 +48,7 @@ export default class CompendiumTOCConfig extends Application5e {
 
   /** @override */
   get title() {
-    return game.i18n.localize(this.options.window.title);
+    return _loc(this.options.window.title);
   }
 
   /* --------------------------------------------- */
@@ -81,7 +81,7 @@ export default class CompendiumTOCConfig extends Application5e {
     const traverse = node => {
       if ( !node ) return;
       context.folders.push({
-        name: node.folder?.name ?? game.i18n.localize("DND5E.TABLEOFCONTENTS.NoFolder"),
+        name: node.folder?.name ?? _loc("DND5E.TABLEOFCONTENTS.NoFolder"),
         entries: node.entries.map(o => {
           const entry = this.compendium.index.get(o._id);
           const data = entry.flags?.dnd5e ?? {};
@@ -115,7 +115,7 @@ export default class CompendiumTOCConfig extends Application5e {
           const warn = data.type && (data.type !== "special") && (counts[`${data.type}-${data.position ?? 0}`] > 1);
           return {
             data, entry, fields,
-            warning: warn ? game.i18n.localize(
+            warning: warn ? _loc(
               `DND5E.TABLEOFCONTENTS.Warning.Duplicate${data.type === "header" ? "Header" : "Position"}`
             ) : null
           };
