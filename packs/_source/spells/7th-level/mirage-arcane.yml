@@ -15,11 +15,12 @@ system:
       road.</p><p>Similarly, you can alter the appearance of structures, or add
       them where none are present. The spell doesn't disguise, conceal, or add
       creatures.</p><p>The Illusion includes audible, visual, tactile, and
-      olfactory elements, so it can turn clear ground into difficult terrain (or
-      vice versa) or otherwise impede Movement through the area. Any piece of
-      the illusory terrain (such as a rock or stick) that is removed from the
-      spell's area disappears immediately.</p><p>Creatures with Truesight can
-      see through the Illusion to the terrain's true form; however, all other
+      olfactory elements, so it can turn clear ground into
+      &amp;reference[difficult terrain] (or vice versa) or otherwise impede
+      Movement through the area. Any piece of the illusory terrain (such as a
+      rock or stick) that is removed from the spell's area disappears
+      immediately.</p><p>Creatures with &amp;reference[Truesight] can see
+      through the Illusion to the terrain's true form; however, all other
       elements of the illusion remain, so while the creature is aware of the
       illusion's presence, the creature can still physically interact with the
       illusion.</p>
@@ -40,13 +41,16 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: mi
       type: square
       size: '1'
       contiguous: false
+      count: ''
   range:
     units: spec
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -103,20 +107,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: mirage-arcane
 sort: 0
 flags: {}
-img: icons/magic/air/fog-gas-smoke-swirling-blue.webp
+img: icons/environment/wilderness/island-palm-white.webp
 effects: []
 folder: irCSpQWIMtp978TA
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037362192
-  modifiedTime: 1725992721809
+  modifiedTime: 1781467008451
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!f38w5rd9SgdmWc6F'

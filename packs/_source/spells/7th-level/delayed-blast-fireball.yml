@@ -42,14 +42,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: sphere
       size: '20'
       contiguous: false
+      count: ''
   range:
     value: '150'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -70,123 +73,88 @@ system:
     - material
     - concentration
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    fg4NDHu8DhMQvmzT:
       type: save
+      name: Cast
+      _id: fg4NDHu8DhMQvmzT
+      img: ''
+      sort: 400000
       activation:
         type: action
-        value: null
         override: false
+      behaviors: []
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: ''
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects: []
+      flags: {}
       range:
+        units: self
         override: false
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
         affects:
           choice: false
         override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
       damage:
         onSave: half
         parts:
-          - number: 12
-            denomination: 6
-            bonus: ''
-            types:
-              - fire
-            custom:
+          - custom:
               enabled: false
               formula: ''
+            number: 12
+            denomination: 6
+            bonus: ''
+            modifiers: []
+            types:
+              - fire
             scaling:
               mode: whole
               number: 1
-              formula: ''
       save:
-        ability: dex
+        ability: []
         dc:
           calculation: spellcasting
           formula: ''
-      uses:
-        spent: 0
-        recovery: []
-      sort: 0
-    dnd5eactivity200:
-      _id: dnd5eactivity200
-      type: damage
-      activation:
-        type: action
-        value: null
-        override: false
-      consumption:
-        targets: []
-        scaling:
-          allowed: false
-          max: ''
-        spellSlot: true
-      description:
-        chatFlavor: ''
-      duration:
-        units: inst
-        concentration: false
-        override: false
-      effects: []
-      range:
-        override: false
-      target:
-        prompt: true
-        template:
-          contiguous: false
-          units: ft
-        affects:
-          choice: false
-        override: false
-      damage:
-        critical:
-          allow: false
-          bonus: ''
-        parts:
-          - number: 1
-            denomination: 6
-            bonus: ''
-            types: []
-            custom:
-              enabled: false
-              formula: ''
-            scaling:
-              mode: whole
-              number: 1
-              formula: ''
-      uses:
-        spent: 0
-        recovery: []
-      sort: 0
+        visible: true
+        bonus: ''
   identifier: delayed-blast-fireball
 sort: 0
 flags: {}
-img: icons/magic/fire/projectile-fireball-smoke-strong-orange.webp
+img: icons/magic/fire/explosion-mushroom-nuke-orange.webp
 effects: []
 folder: irCSpQWIMtp978TA
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037350182
-  modifiedTime: 1725992717882
+  modifiedTime: 1783214938484
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!AoTTjapz1FsGOIZz'
