@@ -451,9 +451,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -468,7 +465,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -488,19 +485,21 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: 2n8ByeQNl7QkjNVA
     name: Heated Body
     type: feat
-    img: icons/creatures/abilities/mouth-teeth-fire-orange.webp
+    img: icons/tools/smithing/furnace-fire-metal-orange.webp
     system:
       description:
         value: >-
-          <p>A creature that touches the salamander or hits it with a melee
-          attack while within 5 ft. of it takes [[/damage average]] damage.</p>
+          <p>A creature that touches the [[lookup @name lowercase]]{monster} or
+          hits it with a melee attack while within 5 feet of it takes [[/damage
+          average]] damage.</p>
         chat: >-
-          <p>A creature that touches the salamander or hits it with a melee
-          attack while within 5 ft. of it takes <em>fire damage</em>.</p>
+          <p>A creature that touches the [[lookup @name]]{monster} or hits it
+          with a melee attack while within 5 feet of it takes fire damage.</p>
       source:
         custom: ''
         book: ''
@@ -513,18 +512,20 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        8xylZIW1hvRj5kB4:
           type: damage
           activation:
-            type: ''
+            type: special
             value: null
-            condition: ''
+            condition: >-
+              When a creature touches the [[lookup @name lowercase]]{monster} or
+              hits it with a melee attack while within 5 feet of it.
             override: false
           consumption:
             targets: []
@@ -534,17 +535,19 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: ft
             special: ''
             override: false
+            value: '5'
           target:
             template:
               count: ''
@@ -553,10 +556,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -570,90 +574,50 @@ items:
               allow: false
               bonus: ''
             parts:
-              - number: 2
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 2
                 denomination: 6
                 bonus: ''
                 types:
                   - fire
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
+                  number: 1
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 8xylZIW1hvRj5kB4
+          name: Contact Damage
       enchant: {}
       prerequisites:
         level: null
       identifier: heated-body
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.iFNpsEMJT66eLoat
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747955396739
+      systemVersion: 6.0.0
+      createdTime: 1781816405232
+      modifiedTime: 1781819469274
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!yVNPVJIBpQ2Mp3Xa.2n8ByeQNl7QkjNVA'
-  - _id: 2y0o9wGzCVoBBuDZ
-    name: Heated Weapons
-    type: feat
-    img: icons/skills/melee/strike-weapons-orange.webp
-    system:
-      description:
-        value: >-
-          <p>Any metal melee weapon the salamander wields deals an extra 3 (1d6)
-          fire damage on a hit (included in the attack).</p>
-        chat: >-
-          <p>Any metal melee weapon the salamander wields deals an extra
-          <em>fire damage</em> on a hit (included in the attack).</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: heated-weapons
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.i3viKtKcSVeWLJFJ
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747955407863
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!yVNPVJIBpQ2Mp3Xa.2y0o9wGzCVoBBuDZ'
   - _id: H9TCRB3zfkFwk192
     name: Multiattack
     type: feat
@@ -661,9 +625,9 @@ items:
     system:
       description:
         value: >-
-          <p>The salamander makes two attacks: one with its [[/item
-          .SKwOsrThcwqMXCZv]]{spear} and one with its [[/item
-          .rvRy41yt9zowrAr1]]{tail}.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes two attacks: one with
+          its [[/item .SKwOsrThcwqMXCZv]]{Spear} and one with its [[/item
+          .rvRy41yt9zowrAr1]]{Tail}.</p>
         chat: ''
       source:
         custom: ''
@@ -677,13 +641,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        9hTwmhjrler42wTH:
           type: utility
           activation:
             type: action
@@ -698,15 +661,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -717,7 +681,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -734,7 +699,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: 9hTwmhjrler42wTH
       enchant: {}
       prerequisites:
         level: null
@@ -748,31 +721,35 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745273657680
+      systemVersion: 6.0.0
+      createdTime: 1781816554705
+      modifiedTime: 1781816559274
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!yVNPVJIBpQ2Mp3Xa.H9TCRB3zfkFwk192'
   - _id: rvRy41yt9zowrAr1
     name: Tail
     type: weapon
-    img: icons/magic/lightning/bolt-strike-smoke-yellow.webp
+    img: icons/creatures/abilities/tail-strike-bone-orange.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target is
-          grappled (escape DC 14). Until this grapple ends, the target is
-          restrained, the salamander can automatically hit the target with its
-          tail, and the salamander can't make tail attacks against other
-          targets.</p>
+          &amp;reference[grappled] (escape DC 14). Until this grapple ends, the
+          target is &amp;reference[restrained], the [[lookup @name
+          lowercase]]{monster} can automatically hit the target with its
+          [[lookup @item.name lowercase]], and the [[lookup @name
+          lowercase]]{monster} can't make [[lookup @item.name lowercase]]
+          attacks against other targets.</p>
         chat: >-
-          <p>The Salamander attacks with its Tail. The target is grappled. Until
-          this grapple ends, the target is restrained, the salamander can
-          automatically hit the target with its tail, and the salamander can't
-          make tail attacks against other targets.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. The target is &amp;reference[grappled]. Until this
+          grapple ends, the target is restrained, the [[lookup @name]]{monster}
+          can automatically hit the target with its [[lookup @item.name]], and
+          the [[lookup @name]]{monster} can't make [[lookup @item.name]] attacks
+          against other targets.</p>
       source:
         custom: ''
         book: ''
@@ -834,19 +811,17 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - rch
-      proficient: 1
+      properties: []
+      proficient: null
       unidentified:
         description: ''
       type:
-        value: martialR
+        value: natural
         baseItem: ''
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        IxUgO1yBhgDUQRa7:
           type: attack
           activation:
             type: action
@@ -861,13 +836,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: hEwZP7oYnc1IS0fZ
+              level: {}
           range:
             value: '10'
             units: ft
@@ -881,7 +859,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -894,38 +873,90 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts:
-              - number: 2
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 2
                 denomination: 6
                 bonus: ''
                 types:
                   - fire
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
+                  number: 1
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: IxUgO1yBhgDUQRa7
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: salamander-tail
       mastery: ''
-    effects: []
+    effects:
+      - name: Grappled by Tail
+        img: icons/creatures/abilities/tail-strike-bone-orange.webp
+        origin: Compendium.dnd5e.monsters.Actor.yVNPVJIBpQ2Mp3Xa.Item.rvRy41yt9zowrAr1
+        transfer: false
+        _id: hEwZP7oYnc1IS0fZ
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You are &amp;reference[grappled apply=false] (escape DC 14). While
+          grappled in this way, you are also &amp;reference[restrained
+          apply=false].</p>
+        tint: '#ffffff'
+        statuses:
+          - grappled
+          - restrained
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781816667470
+          modifiedTime: 1781816714036
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!yVNPVJIBpQ2Mp3Xa.rvRy41yt9zowrAr1.hEwZP7oYnc1IS0fZ
     folder: null
     sort: 0
     ownership:
@@ -934,25 +965,27 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745108431042
+      systemVersion: 6.0.0
+      createdTime: 1781816566409
+      modifiedTime: 1781816667499
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!yVNPVJIBpQ2Mp3Xa.rvRy41yt9zowrAr1'
   - _id: SKwOsrThcwqMXCZv
     name: Spear
     type: weapon
-    img: icons/magic/fire/projectile-arrow-fire-red-yellow.webp
+    img: icons/magic/fire/projectile-arrow-fire-gem-yellow.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]] or [[/damage average
           attackMode=twoHanded]] if used with two hands to make a melee
           attack.</p>
-        chat: <p>The Salamander attacks with its Spear.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -1017,7 +1050,7 @@ items:
       properties:
         - thr
         - ver
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -1026,8 +1059,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        8tb2lFotMNj9wBqm:
           type: attack
           activation:
             type: action
@@ -1042,6 +1074,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -1062,7 +1095,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1075,7 +1109,7 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
@@ -1092,14 +1126,25 @@ items:
                   enabled: false
                   formula: ''
                 number: 1
-                denomination: '6'
+                denomination: 6
                 bonus: ''
                 types:
                   - fire
-          sort: 0
+                scaling:
+                  number: 1
+          sort: 100000
           name: ''
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 8tb2lFotMNj9wBqm
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -1110,22 +1155,78 @@ items:
     sort: 0
     ownership:
       default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.items.OG4nBBydvmfWYXIk
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781816728742
+      modifiedTime: 1781816749187
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!yVNPVJIBpQ2Mp3Xa.SKwOsrThcwqMXCZv'
+  - _id: Fq7lbhjMFR5fwEFS
+    name: Heated Weapons
+    type: feat
+    img: icons/tools/smithing/crucible-round.webp
+    system:
+      description:
+        value: >-
+          <p>When the [[lookup @name lowercase]]{monster} hits with a metal
+          melee weapon, it deals an extra 3 (1d6) fire damage (included in the
+          attack).</p>
+        chat: >-
+          <p>When the [[lookup @name]]{monster} hits with a metal melee weapon,
+          it deals extra fire damage (included in the attack).</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: heated-weapons
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: null
+    sort: 200000
+    ownership:
+      default: 0
     flags:
       dnd5e:
         riders:
           activity: []
           effect: []
     _stats:
-      compendiumSource: Compendium.dnd5e.items.OG4nBBydvmfWYXIk
-      duplicateSource: null
-      coreVersion: '13.344'
+      compendiumSource: Compendium.dnd5e.monsters.Actor.IiEDPMWqBlzkggYD.Item.WRygAnkpMeaqiw70
+      duplicateSource: Item.xL60eO1VH0SwtCJP
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745175926415
+      systemVersion: 6.0.0
+      createdTime: 1781816499301
+      modifiedTime: 1781819486016
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!yVNPVJIBpQ2Mp3Xa.SKwOsrThcwqMXCZv'
+    _key: '!actors.items!yVNPVJIBpQ2Mp3Xa.Fq7lbhjMFR5fwEFS'
 effects: []
 folder: IB448xVSBvtqitzs
 sort: 0
@@ -1134,7 +1235,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171266675
