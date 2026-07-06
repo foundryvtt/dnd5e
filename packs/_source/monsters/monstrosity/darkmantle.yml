@@ -440,7 +440,7 @@ prototypeToken:
     negative: false
     priority: 0
   texture:
-    src: systems/dnd5e/tokens/monstrosity/Darkmantle.webp
+    src: null
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
@@ -1106,8 +1106,7 @@ items:
       description:
         value: >-
           <p>The [[lookup @name lowercase]]{monster} can't use its
-          &amp;reference[blindsight] while &amp;reference[deafened
-          apply=false].</p>
+          &amp;reference[blindsight] while &amp;reference[deafened apply=false].</p>
         chat: ''
       source:
         custom: ''
@@ -1192,7 +1191,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781879691267
-      modifiedTime: 1781879691267
+      modifiedTime: 1783367201854
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!g7FSu2oU4YHPgWNA.gFd9Tb3nIqKyHGxm'

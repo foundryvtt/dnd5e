@@ -561,7 +561,7 @@ items:
       description:
         value: >-
           <p>The [[lookup @name lowercase]]{monster} makes two [[/item
-          .gVFZXBtgx450yiH7]]{Claw} attacks.</p>
+          .gVFZXBtgx450yiH7]]{claw} attacks.</p>
         chat: ''
       source:
         custom: ''
@@ -659,7 +659,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781895342051
-      modifiedTime: 1781895365113
+      modifiedTime: 1783366994669
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!6wbasdWWqtXeIAyD.hVUH6pBt7hYD84ez'
@@ -851,7 +851,7 @@ items:
       description:
         value: >-
           <p>The [[lookup @name lowercase]]{monster} makes one [[/item
-          .gVFZXBtgx450yiH7]]{Claw} attack.</p>
+          .gVFZXBtgx450yiH7]]{claw} attack.</p>
         chat: ''
       source:
         custom: ''
@@ -953,7 +953,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781895151789
-      modifiedTime: 1781895300528
+      modifiedTime: 1783367000518
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!6wbasdWWqtXeIAyD.7ttJw5cEHPyb5ETl'
@@ -3081,7 +3081,7 @@ items:
         value: >-
           <p>The [[lookup @name lowercase]]{monster} magically teleports, along
           with any equipment it is wearing or carrying, up to [[lookup
-          @labels.description.range activity=ceqRWRMK1a37epib]] to an unoccupied
+          @labels.description.range activity=uklF2NbFqnNyuHOp]] to an unoccupied
           space it can see.</p>
         chat: ''
       source:
@@ -3102,73 +3102,64 @@ items:
       properties:
         - mgc
       activities:
-        ceqRWRMK1a37epib:
-          type: utility
+        uklF2NbFqnNyuHOp:
+          type: teleport
+          name: Reposition
+          _id: uklF2NbFqnNyuHOp
+          img: ''
+          sort: 200000
           activation:
             type: legendary
-            value: 2
-            condition: ''
             override: false
+            condition: ''
+            value: 2
+          behaviors: []
           consumption:
-            targets: []
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets: []
           description:
+            value: ''
             chatFlavor: ''
-            value: ''
           duration:
-            concentration: false
-            value: ''
             units: inst
-            special: ''
+            concentration: true
             override: false
           effects: []
+          flags: {}
           range:
-            value: '120'
             units: ft
-            special: ''
             override: false
+            special: ''
+            value: '120'
           target:
             template:
-              count: ''
               contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ft
               stationary: false
-            affects:
-              count: ''
+              units: ft
               type: ''
+            affects:
               choice: false
+              type: self
               special: ''
-            prompt: true
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 100000
-          name: Reposition
-          img: ''
-          flags: {}
+            max: ''
           visibility:
             level:
               min: null
               max: null
             requireAttunement: false
             requireIdentification: false
-            requireMagic: true
+            requireMagic: false
             identifier: ''
-          _id: ceqRWRMK1a37epib
+          teleport:
+            override: false
+            units: ft
       enchant: {}
       prerequisites:
         level: null
@@ -3190,7 +3181,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781895214233
-      modifiedTime: 1781895220111
+      modifiedTime: 1782949938370
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!6wbasdWWqtXeIAyD.dZvwgTh5Bex9FM0C'

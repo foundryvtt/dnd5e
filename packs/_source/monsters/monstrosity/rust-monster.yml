@@ -539,7 +539,7 @@ items:
           <p>Any nonmagical weapon made of metal that hits the [[lookup @name
           lowercase]]{monster} corrodes. After dealing damage, the weapon takes
           a permanent and cumulative -1 penalty to damage rolls. If its penalty
-          drops to -5, the weapon is destroyed. Non magical ammunition made of
+          drops to -5, the weapon is destroyed. Nonmagical ammunition made of
           metal that hits the [[lookup @name lowercase]]{monster} is destroyed
           after dealing damage.</p><section id="secret-kf8c02ZiwU9vjF3Q"
           class="secret"><p><strong>Foundry Note</strong></p><p>You can apply
@@ -579,7 +579,7 @@ items:
             type: special
             override: false
             condition: >-
-              When a nonmagicial weapon made of metal hits the [[lookup @name
+              When a nonmagical weapon made of metal hits the [[lookup @name
               lowercase]]{monster}.
           consumption:
             scaling:
@@ -591,8 +591,8 @@ items:
               <p>Any nonmagical weapon made of metal that hits the [[lookup
               @name lowercase]]{monster} corrodes. After dealing damage, the
               weapon takes a permanent and cumulative -1 penalty to damage
-              rolls. If its penalty drops to -5, the weapon is destroyed. Non
-              magical ammunition made of metal that hits the [[lookup @name
+              rolls. If its penalty drops to -5, the weapon is destroyed.
+              Nonmagical ammunition made of metal that hits the [[lookup @name
               lowercase]]{monster} is destroyed after dealing
               damage.</p><p>@UUID[Compendium.dnd5e.monsters.Actor.WJsxqbHU28D64lWT.Item.dobpPU4kb00zSkQt.ActiveEffect.iqyGcqOolg6tFCwC]{Rusted
               Weapon}</p>
@@ -659,16 +659,6 @@ items:
               value: -1
               phase: initial
               priority: null
-            - key: system.description.value
-              type: override
-              value: >-
-                {} <p><strong>Corroded Weapon
-                (@item.flags.world.corrode-weapon-penalty).</strong> This weapon
-                has been corroded, taking a permanent and cumulative -1 penalty
-                to damage rolls. If its penalty drops to -5, the weapon is
-                destroyed.</p>
-              phase: initial
-              priority: null
         disabled: false
         start: null
         duration:
@@ -695,7 +685,7 @@ items:
           systemId: dnd5e
           systemVersion: 6.0.0
           createdTime: 1781886475666
-          modifiedTime: 1781908773495
+          modifiedTime: 1783366706195
           lastModifiedBy: dnd5ebuilder0000
           compendiumSource: null
           duplicateSource: null
@@ -714,7 +704,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781886301198
-      modifiedTime: 1781892269478
+      modifiedTime: 1783366619258
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!WJsxqbHU28D64lWT.dobpPU4kb00zSkQt'
@@ -1059,16 +1049,6 @@ items:
               value: -1
               phase: initial
               priority: null
-            - key: system.description.value
-              type: override
-              value: >-
-                {} <p><strong>Rusted Armor
-                (@item.flags.world.rust-armor-penalty).</strong> This armor has
-                been corroded, taking a permanent and cumulative -1 penalty to
-                the AC it offers. If its penalty reduces an armor to an AC of 10
-                or a shield drops to a +0 bonus, it is destroyed.</p>
-              phase: initial
-              priority: null
         disabled: false
         start: null
         duration:
@@ -1095,7 +1075,7 @@ items:
           systemId: dnd5e
           systemVersion: 6.0.0
           createdTime: 1781891925467
-          modifiedTime: 1781892232243
+          modifiedTime: 1783366731873
           lastModifiedBy: dnd5ebuilder0000
           compendiumSource: null
           duplicateSource: null

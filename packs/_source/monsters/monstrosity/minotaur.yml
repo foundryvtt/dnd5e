@@ -1201,45 +1201,6 @@ items:
       - name: Reckless
         img: icons/skills/social/intimidation-impressing.webp
         origin: Compendium.dnd5e.monsters.Actor.kz1t6xeXVwODpYb2.Item.Qzj9HKnvRGhYoggC
-        _id: WqXUqzRbXoMjF2MJ
-        type: base
-        system:
-          changes: []
-        disabled: true
-        duration:
-          value: 1
-          units: rounds
-          expiry: turnStart
-          expired: false
-        description: >-
-          <p>Attack rolls against it have advantage until the start of its next
-          turn.</p>
-        tint: '#ffffff'
-        transfer: true
-        statuses: []
-        sort: 0
-        flags:
-          dnd5e:
-            riders:
-              statuses: []
-        _stats:
-          compendiumSource: null
-          duplicateSource: null
-          coreVersion: '14.361'
-          systemId: dnd5e
-          systemVersion: 6.0.0
-          createdTime: 1781866707635
-          modifiedTime: 1781866707635
-          lastModifiedBy: dnd5ebuilder0000
-          exportSource: null
-        start: null
-        showIcon: 1
-        folder: null
-        _key: >-
-          !actors.items.effects!pOPQU4UnR27zA0jf.ySBloqdCK5BJN5K6.WqXUqzRbXoMjF2MJ
-      - name: Reckless
-        img: icons/skills/social/intimidation-impressing.webp
-        origin: Compendium.dnd5e.monsters.Actor.kz1t6xeXVwODpYb2.Item.Qzj9HKnvRGhYoggC
         transfer: false
         _id: mc0qfRRq1rZXrJbi
         type: base
@@ -1253,7 +1214,7 @@ items:
           expiry: turnStart
           expired: false
         description: >-
-          <p>You have advantag eon all melee weapon attack rolls during your
+          <p>You have advantage on all melee weapon attack rolls during your
           turn, but attack rolls against you have advantage until the start of
           your next turn.</p>
         tint: '#ffffff'
@@ -1270,7 +1231,7 @@ items:
           systemId: dnd5e
           systemVersion: 6.0.0
           createdTime: 1781866707635
-          modifiedTime: 1781866707635
+          modifiedTime: 1783366449994
           lastModifiedBy: dnd5ebuilder0000
           compendiumSource: null
           duplicateSource: null

@@ -489,8 +489,8 @@ items:
       description:
         value: >-
           <p>The [[lookup @name lowercase]]{monster} makes two attacks: one with
-          its [[/item .WqD5jsrWCeNHoD9O]]{Claws} and one with its [[/item
-          .ywVQhULZvd4Jn51c]]{Club}.</p>
+          its [[/item .WqD5jsrWCeNHoD9O]]{claws} and one with its [[/item
+          .ywVQhULZvd4Jn51c]]{club}.</p>
         chat: ''
       source:
         custom: ''
@@ -588,7 +588,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781877715478
-      modifiedTime: 1781877719817
+      modifiedTime: 1783366296293
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!CqQ6pXQA5WXZNOm3.9efeESJpU7Zmfcyo'
@@ -1028,11 +1028,6 @@ items:
             special: ''
             override: false
           effects:
-            - _id: FV3RSATdNvP8YZBv
-              onSave: false
-              level:
-                min: null
-                max: null
             - _id: 1uHL7hrfX61bYExn
               onSave: false
               level:
@@ -1149,47 +1144,6 @@ items:
         level: null
       identifier: luring-song
     effects:
-      - name: Singing Luring Song
-        img: icons/magic/sonic/scream-wail-shout-teal.webp
-        origin: Compendium.dnd5e.monsters.Actor.CqQ6pXQA5WXZNOm3.Item.QeobH0xuWk2yWmsb
-        transfer: false
-        _id: FV3RSATdNvP8YZBv
-        type: base
-        system:
-          changes: []
-        disabled: false
-        start: null
-        duration:
-          value: null
-          units: seconds
-          expiry: null
-          expired: false
-        description: >-
-          <p>You are singing a luring song. You must take a bonus action on your
-          subsequent turns to continue singing.</p><p>You can stop singing at
-          any time. The song ends if you are &amp;reference[incapacitated
-          apply=false].</p>
-        tint: '#ffffff'
-        statuses: []
-        showIcon: 2
-        folder: null
-        sort: 0
-        flags:
-          dnd5e:
-            riders:
-              statuses: []
-        _stats:
-          coreVersion: '14.361'
-          systemId: dnd5e
-          systemVersion: 6.0.0
-          createdTime: 1781877462449
-          modifiedTime: 1781877527485
-          lastModifiedBy: dnd5ebuilder0000
-          compendiumSource: null
-          duplicateSource: null
-          exportSource: null
-        _key: >-
-          !actors.items.effects!CqQ6pXQA5WXZNOm3.QeobH0xuWk2yWmsb.FV3RSATdNvP8YZBv
       - name: Charmed by Song
         img: icons/magic/control/hypnosis-mesmerism-swirl.webp
         origin: Compendium.dnd5e.monsters.Actor.CqQ6pXQA5WXZNOm3.Item.QeobH0xuWk2yWmsb
@@ -1251,7 +1205,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781877309584
-      modifiedTime: 1781877751414
+      modifiedTime: 1783366285256
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!CqQ6pXQA5WXZNOm3.QeobH0xuWk2yWmsb'
