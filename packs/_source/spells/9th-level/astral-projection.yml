@@ -9,33 +9,35 @@ system:
       <p>You and up to eight willing creatures within range project your astral
       bodies into the Astral Plane (the spell fails and the casting is wasted if
       you are already on that plane). The material body you leave behind is
-      unconscious and in a state of suspended animation, it doesn't need food or
-      air and doesn't age.</p><p>Your astral body resembles your mortal form in
-      almost every way, replicating your game statistics and possessions. The
-      principal difference is the addition of a silvery cord that extends from
-      between your shoulder blades and trails behind you, fading to invisibility
-      after 1 foot. This cord is your tether to your material body. As long as
-      the tether remains intact, you can find your way home. If the cord is
-      cut-something that can happen only when an effect specifically states that
-      it does-your soul and body are separated, killing you
-      instantly.</p><p>Your astral form can freely travel through the Astral
-      Plane and can pass through portals there leading to any other plane. If
-      you enter a new plane or return to the plane you were on when casting this
-      spell, your body and possessions are transported along the silver cord,
-      allowing you to re-enter your body as you enter the new plane. Your astral
-      form is a separate incarnation. Any damage or other effects that apply to
-      it have no effect on your physical body, nor do they persist when you
-      return to it.</p><p>The spell ends for you and your companions when you
-      use your action to dismiss it. When the spell ends, the affected creature
-      returns to its physical body, and it awakens.</p><p>The spell might also
-      end early for you or one of your companions. A successful dispel magic
-      spell used against an astral or physical body ends the spell for that
-      creature. If a creature's original body or its astral form drops to 0 hit
-      points, the spell ends for that creature. If the spell ends and the silver
-      cord is intact, the cord pulls the creature's astral form back to its
-      body, ending its state of suspended animation.</p><p>If you are returned
-      to your body prematurely, your companions remain in their astral forms and
-      must find their own way back to their bodies, usually by dropping to 0 hit
+      &amp;reference[unconscious apply=false] and in a state of suspended
+      animation, it doesn't need food or air and doesn't age.</p><p>Your astral
+      body resembles your mortal form in almost every way, replicating your game
+      statistics and possessions. The principal difference is the addition of a
+      silvery cord that extends from between your shoulder blades and trails
+      behind you, fading to invisibility after 1 foot. This cord is your tether
+      to your material body. As long as the tether remains intact, you can find
+      your way home. If the cord is cut-something that can happen only when an
+      effect specifically states that it does-your soul and body are separated,
+      killing you instantly.</p><p>Your astral form can freely travel through
+      the Astral Plane and can pass through portals there leading to any other
+      plane. If you enter a new plane or return to the plane you were on when
+      casting this spell, your body and possessions are transported along the
+      silver cord, allowing you to re-enter your body as you enter the new
+      plane. Your astral form is a separate incarnation. Any damage or other
+      effects that apply to it have no effect on your physical body, nor do they
+      persist when you return to it.</p><p>The spell ends for you and your
+      companions when you use your action to dismiss it. When the spell ends,
+      the affected creature returns to its physical body, and it
+      awakens.</p><p>The spell might also end early for you or one of your
+      companions. A successful
+      @UUID[Compendium.dnd5e.spells.Item.15Fa6q1nH27XfbR8]{dispel magic} spell
+      used against an astral or physical body ends the spell for that creature.
+      If a creature's original body or its astral form drops to 0 hit points,
+      the spell ends for that creature. If the spell ends and the silver cord is
+      intact, the cord pulls the creature's astral form back to its body, ending
+      its state of suspended animation.</p><p>If you are returned to your body
+      prematurely, your companions remain in their astral forms and must find
+      their own way back to their bodies, usually by dropping to 0 hit
       points.</p>
     chat: ''
   source:
@@ -51,17 +53,21 @@ system:
   duration:
     value: ''
     units: spec
+    special: ''
   target:
     affects:
       type: creature
       count: '9'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '10'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -103,7 +109,9 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: g5ORnmf4g3hrB7FN
+          level: {}
       range:
         override: false
       target:
@@ -122,20 +130,92 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: astral-projection
 sort: 0
 flags: {}
-img: icons/magic/control/debuff-energy-hold-levitate-teal-blue.webp
-effects: []
+img: icons/creatures/magical/spirit-undead-horned-blue.webp
+effects:
+  - name: Astrally Projecting
+    img: icons/creatures/magical/spirit-undead-horned-blue.webp
+    origin: Compendium.dnd5e.spells.Item.TIoadMIsUKD4edXi
+    transfer: false
+    _id: g5ORnmf4g3hrB7FN
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You are projecting your astral bodies into the Astral Plane. The
+      material body you leave behind is &amp;reference[unconscious apply=false]
+      and in a state of suspended animation, it doesn't need food or air and
+      doesn't age.</p><p>Your astral body resembles your mortal form in almost
+      every way, replicating your game statistics and possessions. The principal
+      difference is the addition of a silvery cord that extends from between
+      your shoulder blades and trails behind you, fading to invisibility after 1
+      foot. This cord is your tether to your material body. As long as the
+      tether remains intact, you can find your way home. If the cord is
+      cut-something that can happen only when an effect specifically states that
+      it does-your soul and body are separated, killing you
+      instantly.</p><p>Your astral form can freely travel through the Astral
+      Plane and can pass through portals there leading to any other plane. If
+      you enter a new plane or return to the plane you were on when casting this
+      spell, your body and possessions are transported along the silver cord,
+      allowing you to re-enter your body as you enter the new plane. Your astral
+      form is a separate incarnation. Any damage or other effects that apply to
+      it have no effect on your physical body, nor do they persist when you
+      return to it.</p><p>The spell ends for you when the caster uses their your
+      action to dismiss it. When the spell ends, you return to your physical
+      body, and you awaken.</p><p>The spell might also end early for you. A
+      successful @UUID[Compendium.dnd5e.spells.Item.15Fa6q1nH27XfbR8]{dispel
+      magic} spell used against your astral or physical body ends the spell for
+      you. If your original body or your astral form drops to 0 hit points, the
+      spell ends for you. If the spell ends and the silver cord is intact, the
+      cord pulls your astral form back to your body, ending its state of
+      suspended animation.</p><p>If the caster returns to their body
+      prematurely, your remain in your astral form and must find your own way
+      back to your body, usually by dropping to 0 hit points.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 2
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781388683122
+      modifiedTime: 1783213913688
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!TIoadMIsUKD4edXi.g5ORnmf4g3hrB7FN'
 folder: KL6ZY4VRMjojGrL4
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037356883
-  modifiedTime: 1725992720081
+  modifiedTime: 1783213905156
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!TIoadMIsUKD4edXi'
