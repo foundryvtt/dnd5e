@@ -1661,12 +1661,8 @@ items:
         type: base
         system:
           changes:
-            - key: system.attributes.ac.formula
+            - key: system.attributes.ac.min
               value: 16
-              priority: null
-              type: override
-            - key: system.attributes.ac.calc
-              value: custom
               priority: null
               type: override
         sort: 0
