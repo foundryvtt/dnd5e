@@ -855,10 +855,10 @@ items:
     system:
       description:
         value: >-
-          <p>The dragon can use its [[/item .xWSOEwthNmDecfQ8]]{Frightful
-          Presence}. It then makes three attacks: one with its [[/item
-          .tz3vYeFf3GLouPGC]]{Bite} and two with its [[/item
-          .kYySllKlNPBsT7Ho]]{Claws}.</p>
+          <p>The [[lookup @name lowercase]]{monster} can use its [[/item
+          .xWSOEwthNmDecfQ8]]{Frightful Presence}. It then makes three attacks:
+          one with its [[/item .tz3vYeFf3GLouPGC]]{bite} and two with its
+          [[/item .kYySllKlNPBsT7Ho]]{claws}.</p>
         chat: ''
       source:
         custom: ''
@@ -872,7 +872,7 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
@@ -947,7 +947,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781567928003
-      modifiedTime: 1781567928003
+      modifiedTime: 1783370849425
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!cGM3iVYTtCsYXjzO.kWquVg3QhBwODyz3'
@@ -1499,9 +1499,9 @@ items:
     system:
       description:
         value: >-
-          <p>The dragon exhales lightning in a [[lookup
-          @labels.description.template activity=GSQtl90Opu6WzZk4]]. Each
-          creature in that line must make a [[/save]] saving throw, taking
+          <p>The [[lookup @name lowercase]]{monster} exhales lightning in a
+          [[lookup @labels.description.template activity=GSQtl90Opu6WzZk4]].
+          Each creature in that line must make a [[/save]] saving throw, taking
           [[/damage average]] damage on a failed save, or half as much damage on
           a successful one.</p>
         chat: >-
@@ -1635,7 +1635,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781567949643
-      modifiedTime: 1781568153769
+      modifiedTime: 1783370815717
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!cGM3iVYTtCsYXjzO.tU4OoHX9Hwg3qGLM'
@@ -1833,7 +1833,7 @@ items:
       description:
         value: >-
           <p>The [[lookup @name lowercase]]{monster} makes a [[/item
-          .tPZA3sUmzXN6euE9]]{Tail} attack.</p>
+          .tPZA3sUmzXN6euE9]]{tail} attack.</p>
         chat: >-
           <p>The [[lookup @name]]{monster} slams its long tail against its
           foe!</p>
@@ -1863,7 +1863,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781567987520
-      modifiedTime: 1781567999586
+      modifiedTime: 1783370828987
       lastModifiedBy: dnd5ebuilder0000
       compendiumSource: Compendium.dnd5e.monsters.Actor.M4eX4Mu5IHCr3TMf.Item.iXsGJD1VHeJYYSev
       duplicateSource: Item.MNSBoigqkD6fGpA2

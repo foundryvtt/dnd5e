@@ -845,10 +845,10 @@ items:
     system:
       description:
         value: >-
-          <p>The dragon can use its [[/item .YkCurZ53A7ciRit3]]{Frightful
-          Presence}. It then makes three attacks: one with its [[/item
-          .eCpXCLFLV7W22orV]]{bite} and two with its [[/item
-          .lsey8RJZiuByt97z]]{claws}.</p>
+          <p>The [[lookup @name lowercase]]{monster} can use its [[/item
+          .YkCurZ53A7ciRit3]]{Frightful Presence}. It then makes three attacks:
+          one with its [[/item .eCpXCLFLV7W22orV]]{bite} and two with its
+          [[/item .lsey8RJZiuByt97z]]{claws}.</p>
         chat: ''
       source:
         custom: ''
@@ -862,7 +862,7 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
@@ -935,9 +935,9 @@ items:
       duplicateSource: null
       coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745451770318
+      systemVersion: 6.0.0
+      createdTime: 1783371749027
+      modifiedTime: 1783371750815
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!u0FWdplSOMTXGnN1.8GXBUXkbu1e62ZDK'
@@ -1974,7 +1974,7 @@ items:
       description:
         value: >-
           <p>The [[lookup @name lowercase]]{monster} makes a [[/item
-          .o9fC6jOW8DlJCqT6]]{Tail} attack.</p>
+          .o9fC6jOW8DlJCqT6]]{tail} attack.</p>
         chat: >-
           <p>The [[lookup @name]]{monster} slams its long tail against its
           foe!</p>
@@ -2004,7 +2004,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781625808799
-      modifiedTime: 1781625912347
+      modifiedTime: 1783371764494
       lastModifiedBy: dnd5ebuilder0000
       compendiumSource: Compendium.dnd5e.monsters.Actor.M4eX4Mu5IHCr3TMf.Item.iXsGJD1VHeJYYSev
       duplicateSource: Item.MNSBoigqkD6fGpA2

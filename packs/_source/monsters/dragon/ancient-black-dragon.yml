@@ -487,10 +487,10 @@ items:
     system:
       description:
         value: >-
-          <p>The dragon can use its [[/item .M3VJyuM63OKH7JH0]]{Frightful
-          Presence}. It then makes three attacks: one with its [[/item
-          .YauNxZeIeT4uDcTf]]{bite} and two with its [[/item
-          .GQLQiLBrkoOiNc8q]]{claws}.</p>
+          <p>The [[lookup @name lowercase]]{monster} can use its [[/item
+          .M3VJyuM63OKH7JH0]]{Frightful Presence}. It then makes three attacks:
+          one with its [[/item .YauNxZeIeT4uDcTf]]{bite} and two with its
+          [[/item .GQLQiLBrkoOiNc8q]]{claws}.</p>
         chat: ''
       source:
         custom: ''
@@ -504,13 +504,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        bFxsKzwoVXq5aFFT:
           type: utility
           activation:
             type: action
@@ -525,15 +524,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -544,7 +544,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -561,7 +562,16 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          behaviors: []
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: bFxsKzwoVXq5aFFT
       enchant: {}
       prerequisites:
         level: null
@@ -577,9 +587,9 @@ items:
       duplicateSource: null
       coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745448580176
+      systemVersion: 6.0.0
+      createdTime: 1783371656009
+      modifiedTime: 1783371665477
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!qNdFhY3JOkCfhG3d.RKsS1lZwBekMMGMt'
@@ -1882,7 +1892,7 @@ items:
       description:
         value: >-
           <p>The [[lookup @name lowercase]]{monster} makes a [[/item
-          .A5cRQsDF3Qih94rC]]{Tail} attack.</p>
+          .A5cRQsDF3Qih94rC]]{tail} attack.</p>
         chat: >-
           <p>The [[lookup @name]]{monster} slams its long tail against its
           foe!</p>
@@ -1912,7 +1922,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781555483961
-      modifiedTime: 1781555493329
+      modifiedTime: 1783371671975
       lastModifiedBy: dnd5ebuilder0000
       compendiumSource: Compendium.dnd5e.monsters.Actor.M4eX4Mu5IHCr3TMf.Item.iXsGJD1VHeJYYSev
       duplicateSource: Item.3qD1BjSwCtlGUEF0

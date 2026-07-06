@@ -489,8 +489,8 @@ items:
         value: >-
           <p>The [[lookup @name lowercase]]{monster} can use its [[/item
           .ySrfqC410pMPhqpH]]{Frightful Presence}. It then makes three attacks:
-          one with its [[/item .060hAjIEDdMDfVoE]]{Bite} and two with its
-          [[/item .pzDFBmC7wfQsMJzw]]{Claws}.</p>
+          one with its [[/item .060hAjIEDdMDfVoE]]{bite} and two with its
+          [[/item .pzDFBmC7wfQsMJzw]]{claws}.</p>
         chat: ''
       source:
         custom: ''
@@ -504,7 +504,7 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
@@ -579,7 +579,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781604660441
-      modifiedTime: 1781604660441
+      modifiedTime: 1783370965429
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!ZyIBOoZZD0nDaO2s.nF4ZHYj37UstHCUT'
@@ -951,160 +951,6 @@ items:
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!ZyIBOoZZD0nDaO2s.pzDFBmC7wfQsMJzw'
-  - _id: ut9yaZWaSkU7bT1h
-    name: Tail Attack
-    type: weapon
-    img: icons/skills/wounds/injury-pain-impaled-hand-blood.webp
-    system:
-      description:
-        value: <p>The dragon makes a [[/item .DF0doZR8pYSjsrme]]{tail} attack.</p>
-        chat: <p>The dragon slams its long tail against its foe!</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      quantity: 1
-      weight:
-        value: 0
-        units: lb
-      price:
-        value: 0
-        denomination: gp
-      attunement: ''
-      equipped: true
-      rarity: ''
-      identified: true
-      cover: null
-      range:
-        value: null
-        long: null
-        units: ''
-        reach: null
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      damage:
-        versatile:
-          number: null
-          denomination: null
-          bonus: ''
-          types: []
-          custom:
-            enabled: false
-            formula: ''
-          scaling:
-            mode: ''
-            number: null
-            formula: ''
-        base:
-          number: null
-          denomination: 0
-          types: []
-          custom:
-            enabled: false
-          scaling:
-            number: 1
-          bonus: ''
-      armor:
-        value: 10
-      hp:
-        value: 0
-        max: 0
-        dt: null
-        conditions: ''
-      properties: []
-      proficient: 1
-      unidentified:
-        description: ''
-      type:
-        value: natural
-        baseItem: ''
-      container: null
-      crewed: false
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
-          activation:
-            type: legendary
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ''
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
-      attuned: false
-      ammunition: {}
-      magicalBonus: null
-      identifier: tail-attack
-      mastery: ''
-    effects: []
-    folder: null
-    sort: 100000
-    ownership:
-      default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '14.361'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745450115842
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!ZyIBOoZZD0nDaO2s.ut9yaZWaSkU7bT1h'
   - _id: 6BPWT2E4DlgYUv4m
     name: Legendary Resistance
     type: feat
@@ -1987,7 +1833,7 @@ items:
       description:
         value: >-
           <p>The [[lookup @name lowercase]]{monster} makes a [[/item
-          .3AymdEL9N4S8M06R]]{Tail} attack.</p>
+          .3AymdEL9N4S8M06R]]{tail} attack.</p>
         chat: >-
           <p>The [[lookup @name]]{monster} slams its long tail against its
           foe!</p>
@@ -2017,7 +1863,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781604590346
-      modifiedTime: 1781604613826
+      modifiedTime: 1783370973949
       lastModifiedBy: dnd5ebuilder0000
       compendiumSource: Compendium.dnd5e.monsters.Actor.M4eX4Mu5IHCr3TMf.Item.iXsGJD1VHeJYYSev
       duplicateSource: Item.MNSBoigqkD6fGpA2

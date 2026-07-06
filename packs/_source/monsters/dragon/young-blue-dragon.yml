@@ -854,8 +854,8 @@ items:
     system:
       description:
         value: >-
-          <p>The dragon makes three attacks: one with its [[/item
-          .42AGHJQzJZfUYxF9]]{bite} and two with its [[/item
+          <p>The [[lookup @name lowercase]]{monster} makes three attacks: one
+          with its [[/item .42AGHJQzJZfUYxF9]]{bite} and two with its [[/item
           .YSVencwrBzRdfm62]]{claws}.</p>
         chat: ''
       source:
@@ -870,13 +870,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        rwbidIpOUtznNF33:
           type: utility
           activation:
             type: action
@@ -891,15 +890,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -910,7 +910,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -927,7 +928,16 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          behaviors: []
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: rwbidIpOUtznNF33
       enchant: {}
       prerequisites:
         level: null
@@ -943,9 +953,9 @@ items:
       duplicateSource: null
       coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745449294437
+      systemVersion: 6.0.0
+      createdTime: 1783370694463
+      modifiedTime: 1783370703571
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!mNijwXPMhwR7yYfc.dGVHjuCt6WhGx0sX'
@@ -956,9 +966,9 @@ items:
     system:
       description:
         value: >-
-          <p>The dragon exhales lightning in a [[lookup
-          @labels.description.template activity=GSQtl90Opu6WzZk4]]. Each
-          creature in that line must make a [[/save]] saving throw, taking
+          <p>The [[lookup @name lowercase]]{monster} exhales lightning in a
+          [[lookup @labels.description.template activity=GSQtl90Opu6WzZk4]].
+          Each creature in that line must make a [[/save]] saving throw, taking
           [[/damage average]] damage on a failed save, or half as much damage on
           a successful one.</p>
         chat: >-
@@ -980,7 +990,7 @@ items:
             type: recoverAll
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
@@ -1092,7 +1102,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781561979470
-      modifiedTime: 1781562128743
+      modifiedTime: 1783370720229
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!mNijwXPMhwR7yYfc.dDDGb8PVdU0irZz8'
