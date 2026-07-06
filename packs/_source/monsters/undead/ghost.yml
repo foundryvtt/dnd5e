@@ -847,8 +847,8 @@ items:
           for it, the target is immune to this [[lookup @name
           lowercase]]{monster}'s [[lookup @item.name]] for the next 24 hours.
           The aging effect can be reversed with a
-          @UUID[Compendium.dnd5e.spells.Item.WzvJ7G3cqvIubsLk]{Greater
-          Restoration} spell, but only within 24 hours of it occurring.</p>
+          @UUID[Compendium.dnd5e.spells.Item.WzvJ7G3cqvIubsLk]{greater
+          restoration} spell, but only within 24 hours of it occurring.</p>
         chat: >-
           <p>Each non-undead creature within [[lookup @target.template.size
           activity=LYjmuZ7QyGDPVBoT]] feet of the [[lookup @name]]{monster} that
@@ -1014,9 +1014,9 @@ items:
           expiry: turnStart
           expired: false
         description: >-
-          <p>You have been aged.  This aging effect can be reversed with a
-          @UUID[Compendium.dnd5e.spells.Item.WzvJ7G3cqvIubsLk]{Greater
-          Restoration} spell, but only within 24 hours of it
+          <p>You have been aged. This aging effect can be reversed with a
+          @UUID[Compendium.dnd5e.spells.Item.WzvJ7G3cqvIubsLk]{greater
+          restoration} spell, but only within 24 hours of it
           occurring.</p><p>After this effect ends, the aging can no longer be
           revered.</p>
         tint: '#ffffff'
@@ -1033,7 +1033,7 @@ items:
           systemId: dnd5e
           systemVersion: 6.0.0
           createdTime: 1781837132012
-          modifiedTime: 1781837213271
+          modifiedTime: 1783369099032
           lastModifiedBy: dnd5ebuilder0000
           compendiumSource: null
           duplicateSource: null
@@ -1052,7 +1052,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781836928815
-      modifiedTime: 1781838358878
+      modifiedTime: 1783369092758
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!qoFEjfrANBdrCP6m.lOzkFHeXCdO2FB9X'
@@ -1081,8 +1081,8 @@ items:
           points, the [[lookup @name lowercase]]{monster} ends it as a bonus
           action, or the [[lookup @name lowercase]]{monster} is turned or forced
           out by an effect like the
-          @UUID[Compendium.dnd5e.spells.Item.TkJ8Wtg1L7TZtspm]{Dispel Evil and
-          Good} spell. When the possession ends, the [[lookup @name
+          @UUID[Compendium.dnd5e.spells.Item.TkJ8Wtg1L7TZtspm]{dispel evil and
+          good} spell. When the possession ends, the [[lookup @name
           lowercase]]{monster} reappears in an unoccupied space within 5 feet of
           the body. The target is immune to this [[lookup @name
           lowercase]]{monster}'s [[lookup @item.name]] for 24 hours after
@@ -1256,8 +1256,8 @@ items:
           possession lasts until your body drops to 0 hit points, the ghost ends
           it as a bonus action, or the ghost is turned or forced out by an
           effect like the
-          @UUID[Compendium.dnd5e.spells.Item.TkJ8Wtg1L7TZtspm]{Dispel Evil and
-          Good} spell.</p><p>When the possession ends, the ghost reappears in an
+          @UUID[Compendium.dnd5e.spells.Item.TkJ8Wtg1L7TZtspm]{dispel evil and
+          good} spell.</p><p>When the possession ends, the ghost reappears in an
           unoccupied space within 5 feet of your body.</p>
         tint: '#ffffff'
         statuses:
@@ -1274,7 +1274,7 @@ items:
           systemId: dnd5e
           systemVersion: 6.0.0
           createdTime: 1781837421828
-          modifiedTime: 1781837664960
+          modifiedTime: 1783369116468
           lastModifiedBy: dnd5ebuilder0000
           compendiumSource: null
           duplicateSource: null
@@ -1293,7 +1293,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781837361476
-      modifiedTime: 1781838386210
+      modifiedTime: 1783369109695
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!qoFEjfrANBdrCP6m.UF0mfYsgI4ay6mzv'
