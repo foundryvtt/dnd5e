@@ -13,7 +13,8 @@ system:
       of at least 1 to understand the meaning of your message.</p><p>You can
       send the message across any distance and even to other planes of
       existence, but if the target is on a different plane than you, there is a
-      5 percent chance that the message doesn't arrive.</p>
+      [[/r 1d100cf&lt;6 #On a roll of 1, the message doesn't arrive.]]{5
+      percent} chance that the message doesn't arrive.</p>
     chat: ''
   source:
     custom: ''
@@ -33,11 +34,14 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: any
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -95,20 +99,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: sending
 sort: 0
 flags: {}
-img: icons/magic/air/wind-vortex-swirl-purple.webp
+img: icons/sundries/documents/envelope-sealed-red-white.webp
 effects: []
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037352068
-  modifiedTime: 1725992718472
+  modifiedTime: 1781293309966
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!GtGjNjPBgUHxGYAD'

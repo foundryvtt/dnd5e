@@ -10,11 +10,11 @@ system:
       creature in a 30-foot cone must succeed on a Wisdom saving throw or drop
       whatever it is holding and become &amp;Reference[Frightened] for the
       duration.</p><p>While Frightened by this spell, a creature must take the
-      Dash action and move away from you by the safest available route on each
-      of its turns, unless there is nowhere to move. If the creature ends its
-      turn in a location where it doesn't have line of sight to you, the
-      creature can make a Wisdom saving throw. On a successful save, the spell
-      ends for that creature.</p>
+      &amp;reference[Dash] action and move away from you by the safest available
+      route on each of its turns, unless there is nowhere to move. If the
+      creature ends its turn in a location where it doesn't have line of sight
+      to you, the creature can make a Wisdom saving throw. On a successful save,
+      the spell ends for that creature.</p>
     chat: ''
   source:
     custom: ''
@@ -32,13 +32,16 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: cone
       size: '30'
       contiguous: false
+      count: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -81,6 +84,9 @@ system:
       effects:
         - _id: 4QpReACTSQTg2KTw
           onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
       target:
@@ -92,68 +98,80 @@ system:
           choice: false
         override: false
       damage:
-        onSave: half
+        onSave: none
         parts: []
       save:
         ability: wis
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: fear
 sort: 0
 flags: {}
-img: icons/magic/control/fear-fright-monster-purple-blue.webp
+img: icons/magic/control/fear-fright-monster-grin-purple-blue.webp
 effects:
   - name: Fear
     origin: Compendium.dnd5e.spells.Item.XXUDGFELgoskdOD0
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
     disabled: true
     _id: 4QpReACTSQTg2KTw
-    changes: []
     description: >-
-      <p>The target drops whatever it is holding and become Frightened for the
-      duration. While Frightened by this spell, a creature must take the Dash
-      action and move away from the caster by the safest available route on each
-      of its turns, unless there is nowhere to move.</p>
+      <p>You drop whatever you are holding and become &amp;reference[Frightened
+      apply=false] for the duration. While Frightened by this spell, you must
+      take the &amp;reference[Dash] action and move away from the caster by the
+      safest available route on each of your turns, unless there is nowhere to
+      move.</p>
     transfer: false
     statuses:
       - frightened
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     tint: '#ffffff'
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781289053234
+      modifiedTime: 1781289053234
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    img: icons/magic/control/fear-fright-monster-purple-blue.webp
+    img: icons/magic/control/fear-fright-monster-grin-purple-blue.webp
     type: base
-    system: {}
+    system:
+      changes: []
     sort: 0
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!XXUDGFELgoskdOD0.4QpReACTSQTg2KTw'
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037358436
-  modifiedTime: 1725992720569
+  modifiedTime: 1781289203806
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!XXUDGFELgoskdOD0'
