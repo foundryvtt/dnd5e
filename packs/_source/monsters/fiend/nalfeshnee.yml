@@ -454,9 +454,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -471,7 +468,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -491,55 +488,8 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
-  - _id: jZeQHAOQV365hmZF
-    name: Magic Resistance
-    type: feat
-    img: icons/magic/defensive/shield-barrier-glowing-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The nalfeshnee has advantage on saving throws against spells and
-          other magical effects.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: magic-resistance
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747957072839
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!rUg5JMnKNnZNBAq9.jZeQHAOQV365hmZF'
   - _id: swlYyGYwkdNzuRkG
     name: Multiattack
     type: feat
@@ -547,10 +497,10 @@ items:
     system:
       description:
         value: >-
-          <p>The nalfeshnee uses [[/item .RFPDYIhkmBW2B47S]]{Horror Nimbus} if
-          it can. It then makes three attacks: one with its [[/item
-          .524dkWbpWUJKFaj2]]{bite} and two with its [[/item
-          .xhKo80CbyA57Kl1l]]{claws}.</p>
+          <p>The [[lookup @name lowercase]]{monster} uses [[/item
+          .RFPDYIhkmBW2B47S]]{Horror Nimbus} if it can. It then makes three
+          attacks: one with its [[/item .524dkWbpWUJKFaj2]]{bite} and two with
+          its [[/item .xhKo80CbyA57Kl1l]]{claws}.</p>
         chat: ''
       source:
         custom: ''
@@ -564,13 +514,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        PNSvDHvNCMsHXYWm:
           type: utility
           activation:
             type: action
@@ -585,15 +534,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -604,7 +554,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -621,7 +572,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: PNSvDHvNCMsHXYWm
       enchant: {}
       prerequisites:
         level: null
@@ -635,22 +594,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745273657367
+      systemVersion: 6.0.0
+      createdTime: 1781793591550
+      modifiedTime: 1781793596259
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!rUg5JMnKNnZNBAq9.swlYyGYwkdNzuRkG'
   - _id: 524dkWbpWUJKFaj2
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Nalfeshnee attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name lowercase]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -713,7 +674,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -722,8 +683,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        rEXxJb0k6IQUPfFc:
           type: attack
           activation:
             type: action
@@ -738,10 +698,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -758,7 +719,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -771,24 +733,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: rEXxJb0k6IQUPfFc
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -798,22 +773,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107553648
+      systemVersion: 6.0.0
+      createdTime: 1781793547030
+      modifiedTime: 1781793563220
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!rUg5JMnKNnZNBAq9.524dkWbpWUJKFaj2'
   - _id: xhKo80CbyA57Kl1l
     name: Claw
     type: weapon
-    img: icons/skills/melee/strike-slashes-red.webp
+    img: icons/creatures/claws/claw-talons-glowing-orange.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Nalfeshnee attacks with its Claw.</p>
+        chat: >-
+          <p>The [[lookup @name lowercase]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -837,7 +814,7 @@ items:
         value: null
         long: null
         units: ft
-        reach: null
+        reach: 10
       uses:
         max: ''
         recovery: []
@@ -875,9 +852,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - rch
-      proficient: 1
+      properties: []
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -886,8 +862,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        zSquIy2mUfmQeIP4:
           type: attack
           activation:
             type: action
@@ -902,10 +877,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -922,7 +898,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -941,18 +918,31 @@ items:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: zSquIy2mUfmQeIP4
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: claw
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -962,11 +952,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107553648
+      systemVersion: 6.0.0
+      createdTime: 1781793500303
+      modifiedTime: 1781793541750
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!rUg5JMnKNnZNBAq9.xhKo80CbyA57Kl1l'
@@ -977,14 +967,15 @@ items:
     system:
       description:
         value: >-
-          <p>The nalfeshnee magically emits scintillating, multicolored light.
-          Each creature within 15 feet of the nalfeshnee that can see the light
-          must succeed on a [[/save]] saving throw or be
-          &amp;Reference[frightened] for 1 minute.</p><p>A creature can repeat
-          the saving throw at the end of each of its turns, ending the effect on
-          itself on a success. If a creature's saving throw is successful or the
-          effect ends for it, the creature is immune to the nalfeshnee's Horror
-          Nimbus for the next 24 hours.</p>
+          <p>The [[lookup @name lowercase]]{monster} magically emits
+          scintillating, multicolored light. Each creature within 15 feet of the
+          [[lookup @name lowercase]]{monster} that can see the light must
+          succeed on a [[/save]] saving throw or be &amp;Reference[frightened]
+          for 1 minute.</p><p>A creature can repeat the saving throw at the end
+          of each of its turns, ending the effect on itself on a success. If a
+          creature's saving throw is successful or the effect ends for it, the
+          creature is immune to the [[lookup @name lowercase]]{monster}'s
+          [[lookup @item.name]] for the next 24 hours.</p>
         chat: >-
           <p>A creature can repeat the saving throw at the end of each of its
           turns, ending the effect on itself on a success. If a creature's
@@ -1021,11 +1012,9 @@ items:
           consumption:
             targets:
               - type: itemUses
-                target: ''
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: ''
+                scaling: {}
             scaling:
               allowed: false
               max: ''
@@ -1038,7 +1027,12 @@ items:
             units: minute
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: 8yRrVxNl9Ndvr6F8
+              onSave: false
+              level:
+                min: null
+                max: null
           range:
             units: self
             special: ''
@@ -1064,19 +1058,68 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
             ability: wis
             dc:
               calculation: ''
               formula: '15'
+            bonus: ''
           sort: 0
+          name: Frighten
+          img: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
       enchant: {}
       prerequisites:
         level: null
       identifier: horror-nimbus
-    effects: []
+    effects:
+      - name: Horror Nimbus
+        img: icons/creatures/unholy/demons-horned-glowing-pink.webp
+        origin: Compendium.dnd5e.monsters.Actor.rUg5JMnKNnZNBAq9.Item.RFPDYIhkmBW2B47S
+        transfer: false
+        _id: 8yRrVxNl9Ndvr6F8
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: minutes
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You are &amp;reference[frightened apply=false] for 1
+          minute.</p><p>You can repeat the saving throw at the end of each of
+          your turns, ending the effect on yourself on a success.</p>
+        tint: '#ffffff'
+        statuses:
+          - frightened
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781645330454
+          modifiedTime: 1781645403530
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!rUg5JMnKNnZNBAq9.RFPDYIhkmBW2B47S.8yRrVxNl9Ndvr6F8
     folder: null
     sort: 0
     ownership:
@@ -1085,25 +1128,79 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hu2pgYS1RD7hglvg
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747957090259
+      systemVersion: 6.0.0
+      createdTime: 1781645326750
+      modifiedTime: 1781645453235
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!rUg5JMnKNnZNBAq9.RFPDYIhkmBW2B47S'
-  - _id: zK5E9yD6BR0fZRBo
-    name: Teleport
+  - _id: FHVDMSqY433bBryM
+    name: Magic Resistance
+    ownership:
+      default: 0
     type: feat
-    img: icons/magic/symbols/runes-star-pentagon-magenta.webp
     system:
       description:
-        value: "<p>The nalfeshnee magically teleports, along with any equipment\_it\_is wearing\_or\_carrying, up to 120 feet\_to\_an\_unoccupied\_space it can\_see.</p>"
-        chat: >-
-          <section class="secret"><p></p></section><p>The nalfeshnee magically
-          teleports, along with any equipment it is wearing or carrying, up to
-          120 feet to an unoccupied space it can see.</p>
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on saving
+          throws against spells and other magical effects.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      properties:
+        - trait
+      identifier: magic-resistance
+      advancement: {}
+      crewed: false
+    flags: {}
+    img: icons/magic/defensive/barrier-shield-dome-pink.webp
+    effects: []
+    folder: null
+    sort: 0
+    _stats:
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781645279933
+      modifiedTime: 1781645279934
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Item.Hc6MqLQhPTI1KOvm
+    _key: '!actors.items!rUg5JMnKNnZNBAq9.FHVDMSqY433bBryM'
+  - _id: vzwfZvoOTxx0afIN
+    name: Teleport
+    type: feat
+    img: icons/magic/symbols/ring-circle-smoke-blue.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} magically teleports, along
+          with any equipment it is wearing or carrying, up to [[lookup
+          @labels.description.range activity=ceqRWRMK1a37epib]] to an unoccupied
+          space it can see.</p>
+        chat: ''
       source:
         custom: ''
         book: ''
@@ -1116,17 +1213,17 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        ceqRWRMK1a37epib:
           type: utility
           activation:
             type: action
-            value: 1
+            value: null
             condition: ''
             override: false
           consumption:
@@ -1137,10 +1234,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1157,7 +1255,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1174,28 +1273,44 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          name: Reposition
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          _id: ceqRWRMK1a37epib
       enchant: {}
       prerequisites:
         level: null
+        items: []
+        repeatable: false
       identifier: teleport
+      advancement: {}
+      crewed: false
     effects: []
     folder: null
-    sort: 0
+    sort: 118750
     ownership:
       default: 0
     flags: {}
     _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.PPzVD90vab60FqCt
-      duplicateSource: null
-      coreVersion: '13.344'
+      compendiumSource: Compendium.dnd5e.monsters.Actor.lOYt73eaJojBDxAV.Item.H4Qnl5aNwIuOiKvm
+      duplicateSource: Item.F4RvgKoeOdcVw8YS
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747957138149
+      systemVersion: 6.0.0
+      createdTime: 1781793470620
+      modifiedTime: 1781793476970
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!rUg5JMnKNnZNBAq9.zK5E9yD6BR0fZRBo'
+    _key: '!actors.items!rUg5JMnKNnZNBAq9.vzwfZvoOTxx0afIN'
 effects: []
 folder: P1YKVDd1IN7XXWWy
 sort: 0
@@ -1204,7 +1319,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171261206
