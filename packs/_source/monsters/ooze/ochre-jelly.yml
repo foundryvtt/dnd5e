@@ -453,9 +453,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -470,7 +467,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -490,6 +487,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: SYdqeemFOudCYb9E
     name: Pseudopod
@@ -498,7 +496,9 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Ochre Jelly attacks with its Pseudopod.</p>
+        chat: >-
+          <p>The [[lookup @name lowercase]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -561,17 +561,16 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
-        value: simpleM
+        value: natural
         baseItem: ''
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        ih0OIHAEMuicJnF1:
           type: attack
           activation:
             type: action
@@ -586,10 +585,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -606,7 +606,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -619,36 +620,47 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts:
-              - number: 1
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
                 denomination: 6
                 bonus: ''
                 types:
                   - acid
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
+                  number: 1
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: ih0OIHAEMuicJnF1
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: pseudopod
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -658,125 +670,31 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107554054
+      systemVersion: 6.0.0
+      createdTime: 1781900667158
+      modifiedTime: 1781900680746
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!xBhG7Dos3tkg9jWz.SYdqeemFOudCYb9E'
-  - _id: Rrswv9BPB94D3xHQ
-    name: Amorphous
+  - name: Split
     type: feat
-    img: icons/creatures/slimes/slime-movement-dripping-purple.webp
+    img: icons/creatures/slimes/slime-face-skull-green.webp
     system:
       description:
         value: >-
-          <p>The jelly can move through a space as narrow as 1 inch wide without
-          squeezing.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: amorphous
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.3lDp8DtWwNDHSvxX
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!xBhG7Dos3tkg9jWz.Rrswv9BPB94D3xHQ'
-  - _id: aaVwT7vVSywUzWhC
-    name: Spider Climb
-    type: feat
-    img: icons/creatures/invertebrates/spider-beetle-runed-green.webp
-    system:
-      description:
-        value: >-
-          <p>The jelly can climb difficult surfaces, including upside down on
-          ceilings, without needing to make an ability check.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: spider-climb
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.FXHEc39G2d19opuE
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!xBhG7Dos3tkg9jWz.aaVwT7vVSywUzWhC'
-  - _id: 2ifhxY5f2Xs4GMxR
-    name: Split
-    type: feat
-    img: icons/creatures/slimes/slime-movement-pseudopod-green.webp
-    system:
-      description:
-        value: >-
-          <p>When a jelly that is Medium or larger is subjected to lightning or
-          <em>slashing damage</em>, it splits into two new jellies if it has at
-          least 10 Hit Points. Each new jelly has Hit Points equal to half the
-          original jelly's, rounded down. New jellies are one size smaller than
-          the original jelly.</p>
+          <p>When a [[lookup @name lowercase]]{monster} that is Medium or larger
+          is subjected to lightning or slashing damage, it splits into two new
+          [[lookup @name lowercase]]{monster}s if it has at least 10 Hit Points.
+          Each new pudding has Hit Points equal to half the original [[lookup
+          @name lowercase]]{monster}'s, rounded down. New [[lookup @name
+          lowercase]]{monster}s are one size smaller than the original [[lookup
+          @name lowercase]]{monster}.</p>
         chat: >-
-          <p>The jelly splits into two new jellies. New jellies are one size
-          smaller than the original jelly.</p>
+          <p>The [[lookup @name]]{monster} splits into two new [[lookup
+          @name]]{monster}s. New [[lookup @name]]{monster}s are one size smaller
+          than the original [[lookup @name]]{monster}.</p>
       source:
         custom: ''
         book: ''
@@ -789,69 +707,289 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
+        lnQUX5t8FkfwBXF0:
+          type: summon
+          name: Split in Medium Jellies
+          _id: lnQUX5t8FkfwBXF0
+          img: ''
+          sort: 200000
           activation:
             type: reaction
-            value: 1
-            condition: ''
             override: false
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} is subjected to
+              lightning or slashing damage while it is Medium or larger.
           consumption:
-            targets: []
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets: []
           description:
+            value: ''
             chatFlavor: ''
           duration:
+            units: inst
             concentration: false
-            value: ''
-            units: ''
-            special: ''
             override: false
-          effects: []
+          effects:
+            - _id: WZn6kAQJRm0Cm6i9
+              level:
+                min: null
+                max: null
+          flags: {}
           range:
-            units: ''
-            special: ''
+            units: self
             override: false
+            special: ''
           target:
             template:
-              count: ''
               contiguous: false
+              stationary: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: ''
-              type: ''
               choice: false
+              type: self
               special: ''
-            prompt: true
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          bonuses:
+            ac: ''
+            hd: ''
+            hp: ''
+            attackDamage: ''
+            saveDamage: ''
+            healing: ''
+          creatureSizes:
+            - med
+          creatureTypes: []
+          match:
+            attacks: false
+            disposition: true
+            proficiency: false
+            saves: false
+            ability: ''
+          profiles:
+            - count: '2'
+              name: ''
+              _id: MRP4kRQNMysSkdQG
+              uuid: Compendium.dnd5e.monsters.Actor.xBhG7Dos3tkg9jWz
+              level:
+                min: null
+                max: null
+              types: []
+          summon:
+            prompt: true
+            mode: ''
+          tempHP: ''
+        Lqw20oXln5ANuHDx:
+          type: summon
+          name: Split into Small Jellies
+          _id: Lqw20oXln5ANuHDx
+          img: ''
+          sort: 300000
+          activation:
+            type: reaction
+            override: false
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} is subjected to
+              lightning or slashing damage while it is Medium or larger.
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: ''
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects:
+            - _id: QTexJH8jSdxaIXP2
+              level:
+                min: null
+                max: null
+          flags: {}
+          range:
+            units: self
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: self
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          bonuses:
+            ac: ''
+            hd: ''
+            hp: ''
+            attackDamage: ''
+            saveDamage: ''
+            healing: ''
+          creatureSizes:
+            - sm
+          creatureTypes: []
+          match:
+            attacks: false
+            disposition: true
+            proficiency: false
+            saves: false
+            ability: ''
+          profiles:
+            - count: '2'
+              name: ''
+              _id: UVi85Ihz8eGGJkIz
+              uuid: Compendium.dnd5e.monsters.Actor.xBhG7Dos3tkg9jWz
+              level:
+                min: null
+                max: null
+              types: []
+          summon:
+            prompt: true
+            mode: ''
+          tempHP: ''
       enchant: {}
       prerequisites:
         level: null
+        items: []
+        repeatable: false
       identifier: split
-    effects: []
+      advancement: {}
+      crewed: false
+    effects:
+      - name: Split Medium Jellies
+        img: icons/creatures/slimes/slime-face-skull-green.webp
+        origin: Compendium.dnd5e.monsters.Actor.NwQpeeaMxAC3fRft.Item.VcVWWSlfTBeXWh3T
+        transfer: false
+        _id: WZn6kAQJRm0Cm6i9
+        type: base
+        system:
+          changes:
+            - key: system.attributes.hp.max
+              type: multiply
+              value: 0.5
+              phase: initial
+              priority: null
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You have been created by a Large
+          @UUID[Compendium.dnd5e.monsters.Actor.xBhG7Dos3tkg9jWz]{Ochre Jelly}
+          splitting into two.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 0
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781900298854
+          modifiedTime: 1781900346097
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!xBhG7Dos3tkg9jWz.iruCpiLtSuIAoEm6.WZn6kAQJRm0Cm6i9
+      - name: Split Small Jellies
+        img: icons/creatures/slimes/slime-face-skull-green.webp
+        origin: Compendium.dnd5e.monsters.Actor.NwQpeeaMxAC3fRft.Item.VcVWWSlfTBeXWh3T
+        transfer: false
+        type: base
+        system:
+          changes:
+            - key: system.attributes.hp.max
+              type: multiply
+              value: 0.25
+              phase: initial
+              priority: null
+            - key: items.hidden
+              type: add
+              value: split
+              phase: initial
+              priority: null
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You have been created by a Medium
+          @UUID[Compendium.dnd5e.monsters.Actor.xBhG7Dos3tkg9jWz]{Ochre Jelly}
+          splitting into two.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 0
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781900298854
+          modifiedTime: 1781900358881
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _id: QTexJH8jSdxaIXP2
+        _key: >-
+          !actors.items.effects!xBhG7Dos3tkg9jWz.iruCpiLtSuIAoEm6.QTexJH8jSdxaIXP2
     folder: null
     sort: 0
     ownership:
@@ -859,15 +997,124 @@ items:
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.NzHwrEuKnKxZ4NTP
-      duplicateSource: null
-      coreVersion: '13.344'
+      duplicateSource: Compendium.dnd5e.monsters.Actor.NwQpeeaMxAC3fRft.Item.VcVWWSlfTBeXWh3T
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676619
+      systemVersion: 6.0.0
+      createdTime: 1781900298854
+      modifiedTime: 1781900378254
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!xBhG7Dos3tkg9jWz.2ifhxY5f2Xs4GMxR'
+    _id: iruCpiLtSuIAoEm6
+    _key: '!actors.items!xBhG7Dos3tkg9jWz.iruCpiLtSuIAoEm6'
+  - _id: arNeEd7Vf8pEfQjh
+    name: Spider Climb
+    type: feat
+    img: icons/creatures/invertebrates/spider-pink-purple.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} can climb difficult
+          surfaces, including upside down on ceilings, without needing to make
+          an ability check.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: spider-climb
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: UIqfXYMLB6oOsW3Z
+    sort: 150000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.28gU50HtG8Kp7uIz.Item.0Oap13hi3sDNwVZn
+      duplicateSource: Item.lDSSf3aXXmZYJsk1
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781900629882
+      modifiedTime: 1781900629882
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!xBhG7Dos3tkg9jWz.arNeEd7Vf8pEfQjh'
+  - _id: KPLltVyVr3KqVNVD
+    name: Amorphous
+    type: feat
+    img: icons/creatures/slimes/slime-movement-swirling-blue.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} can move through a space as
+          narrow as 1 inch wide without
+          &amp;reference[squeezing]{Squeezing}.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: amorphous
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: null
+    sort: 125000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.NwQpeeaMxAC3fRft.Item.Na7qo8robmcacNZI
+      duplicateSource: Item.SH8rYorZ9zbgpEka
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781900635139
+      modifiedTime: 1781900635139
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!xBhG7Dos3tkg9jWz.KPLltVyVr3KqVNVD'
 effects: []
 folder: spz6Dws3tO6Qs5Mh
 sort: 0
@@ -876,7 +1123,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171265707
