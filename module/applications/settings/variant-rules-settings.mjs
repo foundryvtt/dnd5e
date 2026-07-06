@@ -68,7 +68,7 @@ export default class VariantRulesSettingsConfig extends BaseSettingsConfig {
           this.createSettingField("loyaltyScore"),
           this.createSettingField("pietyScore")
         ];
-        context.legend = game.i18n.localize("DND5E.AttributeScores");
+        context.legend = _loc("DND5E.AttributeScores");
         break;
     }
     return context;
