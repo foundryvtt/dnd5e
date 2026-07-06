@@ -12,10 +12,10 @@ system:
       that is held shut by a mundane lock or that is stuck or barred becomes
       unlocked, unstuck, or unbarred. If the object has multiple locks, only one
       of them is unlocked.</p><p>If you choose a target that is held shut with
-      Arcane Lock, that spell is suppressed for 10 minutes, during which time
-      the target can be opened and shut normally.</p><p>When you cast the spell,
-      a loud knock, audible from as far away as 300 feet, emanates from the
-      target object.</p>
+      @UUID[Compendium.dnd5e.spells.Item.8cse7rit0oswRPUP]{arcane lock}, that
+      spell is suppressed for 10 minutes, during which time the target can be
+      opened and shut normally.</p><p>When you cast the spell, a loud knock,
+      audible from as far away as 300 feet, emanates from the target object.</p>
     chat: ''
   source:
     custom: ''
@@ -35,12 +35,15 @@ system:
       type: object
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '60'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -96,20 +99,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: knock
 sort: 0
 flags: {}
-img: icons/magic/symbols/runes-triangle-orange.webp
+img: icons/sundries/misc/key-short-red.webp
 effects: []
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037345836
-  modifiedTime: 1725992716536
+  modifiedTime: 1783217721929
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!1nhIxh0DsJsntCfj'

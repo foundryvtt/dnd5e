@@ -37,12 +37,15 @@ system:
       type: object
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '60'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -67,9 +70,10 @@ system:
       _id: dnd5eactivity000
       type: save
       activation:
-        type: action
+        type: bonus
         value: null
-        override: false
+        override: true
+        condition: ''
       consumption:
         targets: []
         scaling:
@@ -81,55 +85,292 @@ system:
       duration:
         units: inst
         concentration: false
-        override: false
-      effects: []
+        override: true
+      effects:
+        - _id: hPjQYP6nZM06WETE
+          onSave: false
+          level:
+            min: null
+            max: null
       range:
-        override: false
+        override: true
+        special: ''
+        units: spec
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          type: ''
         affects:
           choice: false
-        override: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
       damage:
-        onSave: half
-        parts:
-          - number: 2
-            denomination: 8
-            bonus: ''
-            types:
-              - fire
-            custom:
-              enabled: false
-              formula: ''
-            scaling:
-              mode: whole
-              number: 1
-              formula: ''
+        onSave: none
+        parts: []
       save:
         ability: con
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 400000
+      name: Hold onto Object Save
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    xQF2eW8hFVpfT1h0:
+      type: utility
+      name: Cast
+      _id: xQF2eW8hFVpfT1h0
+      img: ''
+      sort: 100000
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: UFaQd43rbMjowXA2
+          level: {}
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+    G2KFLGhU06lqMm12:
+      type: damage
+      name: Scorch Object
+      _id: G2KFLGhU06lqMm12
+      img: ''
+      sort: 300000
+      activation:
+        type: bonus
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: 8
+            bonus: ''
+            types:
+              - fire
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
   identifier: heat-metal
 sort: 0
 flags: {}
-img: icons/magic/light/explosion-star-large-orange.webp
-effects: []
+img: icons/commodities/metal/barstock-heated-steel.webp
+effects:
+  - name: Heated Metal Object
+    img: icons/commodities/metal/barstock-heated-steel.webp
+    origin: Compendium.dnd5e.spells.Item.2yHXEcrRbadZDr5M
+    transfer: false
+    _id: UFaQd43rbMjowXA2
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>A manufactored object you are holding, such as a metal weapon or suit
+      of heavy or medium metal armor has begun to glow red-hot. While you are in
+      physical contact with the object, you take fire damage.</p><p>When you
+      take damage, you must succeed on a Constitution saving throw or drop the
+      object if you can. If you don't drop the object, you have disadantage on
+      attack rolls and ab ility checks until the start of your next turn.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781226024556
+      modifiedTime: 1781226182996
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!2yHXEcrRbadZDr5M.UFaQd43rbMjowXA2'
+  - name: Holding onto Heated Object
+    img: icons/magic/fire/flame-burning-fist-strike.webp
+    origin: Compendium.dnd5e.spells.Item.2yHXEcrRbadZDr5M
+    transfer: false
+    _id: hPjQYP6nZM06WETE
+    type: base
+    system:
+      changes:
+        - key: system.abilities.str.bonuses.check
+          type: add
+          value: -1
+          phase: initial
+          priority: null
+        - key: system.abilities.dex.bonuses.check
+          type: add
+          value: -1
+          phase: initial
+          priority: null
+        - key: system.abilities.con.bonuses.check
+          type: add
+          value: -1
+          phase: initial
+          priority: null
+        - key: system.abilities.int.bonuses.check
+          type: add
+          value: -1
+          phase: initial
+          priority: null
+        - key: system.abilities.wis.bonuses.check
+          type: add
+          value: -1
+          phase: initial
+          priority: null
+        - key: system.abilities.cha.bonuses.check
+          type: add
+          value: -1
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: rounds
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You have disadvantage on attack rolls and ability checks until the
+      start of the caster's next turn.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781226234022
+      modifiedTime: 1781226446518
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!2yHXEcrRbadZDr5M.hPjQYP6nZM06WETE'
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037346261
-  modifiedTime: 1725992716668
+  modifiedTime: 1781226422746
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!2yHXEcrRbadZDr5M'

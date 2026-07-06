@@ -8,35 +8,22 @@ system:
     value: >-
       <p>You touch a creature and bestow upon it a magical enhancement. Choose
       one of the following effects; the target gains that effect until the spell
-      ends.</p>
-
-      <ul>
-
-      <li><strong>Bear's Endurance</strong>. The target has advantage on
-      Constitution Checks. It also gains 2d6 Temporary Hit Points, which are
-      lost when the spell ends.</li>
-
-      <li><strong>Bull's Strength</strong>. The target has advantage on Strength
-      Checks, and his or her carrying capacity doubles.</li>
-
-      <li><strong>Cat's Grace</strong>. The target has advantage on Dexterity
-      Checks. It also doesn't take damage from Falling 20 feet or less if it
-      isn't Incapacitated.</li>
-
-      <li><strong>Eagle's Splendor</strong>. The target has advantage on
-      Charisma Checks.</li>
-
-      <li><strong>Fox's Cunning</strong>. The target has advantage on
-      Intelligence Checks.</li>
-
-      <li><strong>Owl's Wisdom</strong>. The target has advantage on Wisdom
-      Checks.</li>
-
-      </ul>
-
-      <p><strong>At Higher Levels.</strong> When you cast this spell using a
-      spell slot of 3rd level or higher, you can target one additional creature
-      for each slot level above 2nd.</p>
+      ends.</p><ul><li><p><strong>Bear's Endurance</strong>. The target has
+      advantage on Constitution Checks. It also gains 2d6 Temporary Hit Points,
+      which are lost when the spell ends.</p></li><li><p><strong>Bull's
+      Strength</strong>. The target has advantage on Strength Checks, and his or
+      her carrying capacity doubles.</p></li><li><p><strong>Cat's
+      Grace</strong>. The target has advantage on Dexterity Checks. It also
+      doesn't take damage from &amp;reference[Falling] 20 feet or less if it
+      isn't &amp;reference[Incapacitated
+      apply=false].</p></li><li><p><strong>Eagle's Splendor</strong>. The target
+      has advantage on Charisma Checks.</p></li><li><p><strong>Fox's
+      Cunning</strong>. The target has advantage on Intelligence
+      Checks.</p></li><li><p><strong>Owl's Wisdom</strong>. The target has
+      advantage on Wisdom Checks.</p></li></ul><p><strong>At Higher
+      Levels.</strong> When you cast this spell using a spell slot of 3rd level
+      or higher, you can target one additional creature for each slot level
+      above 2nd.</p>
     chat: ''
   source:
     custom: ''
@@ -56,11 +43,14 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -81,66 +71,339 @@ system:
     - material
     - concentration
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: heal
+    38V0wnjhbPgl3No8:
+      type: utility
+      name: Cast
+      _id: 38V0wnjhbPgl3No8
+      img: null
+      sort: 100000
       activation:
         type: action
-        value: null
         override: false
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
-        chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: 4wHuqQygcUoETdfL
+          level: {}
+        - _id: dXPiowCzQbenlxaJ
+          level: {}
+        - _id: fQYlplRem5XWAYlX
+          level: {}
+        - _id: fL5yxySa2tgQR96A
+          level: {}
+        - _id: pHwVg5BiH0Z7ysfD
+          level: {}
+        - _id: FCTEJkHaaxkAeNhQ
+          level: {}
+      flags: {}
       range:
+        units: self
         override: false
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
         affects:
           choice: false
         override: false
-      healing:
-        number: 2
-        denomination: 6
-        bonus: ''
-        types:
-          - temphp
-        custom:
-          enabled: false
-          formula: ''
-        scaling:
-          mode: whole
-          number: null
-          formula: ''
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
   identifier: enhance-ability
 sort: 0
 flags: {}
-img: icons/magic/control/buff-flight-wings-runes-purple.webp
-effects: []
+img: icons/magic/control/buff-strength-muscle-damage-orange.webp
+effects:
+  - name: Bear's Endurance
+    img: icons/creatures/abilities/bear-roar-bite-brown.webp
+    origin: Compendium.dnd5e.spells.Item.9eOZDBImVKxbeOyZ
+    transfer: false
+    _id: 4wHuqQygcUoETdfL
+    type: base
+    system:
+      changes:
+        - key: system.abilities.con.bonuses.check
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>FOr the duration of the spell, you have advantage on Constitution
+      Checks. You also gain 2d6 temporary hit points, which are lost when the
+      spell ends.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781223235541
+      modifiedTime: 1781223565278
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!9eOZDBImVKxbeOyZ.4wHuqQygcUoETdfL'
+  - name: Bull's Strength
+    img: icons/creatures/abilities/bull-head-horns-glowing.webp
+    origin: Compendium.dnd5e.spells.Item.9eOZDBImVKxbeOyZ
+    transfer: false
+    _id: dXPiowCzQbenlxaJ
+    type: base
+    system:
+      changes:
+        - key: system.abilities.str.bonuses.check
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+        - key: system.attributes.encumbrance.multipliers.overall
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>For the duration of the spell, you have advantage on Strength Checks.
+      Your carrying capacity also doubles.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781223292367
+      modifiedTime: 1781223692218
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!9eOZDBImVKxbeOyZ.dXPiowCzQbenlxaJ'
+  - name: Cat's Grace
+    img: icons/creatures/abilities/lion-roar-yellow.webp
+    origin: Compendium.dnd5e.spells.Item.9eOZDBImVKxbeOyZ
+    transfer: false
+    _id: fQYlplRem5XWAYlX
+    type: base
+    system:
+      changes:
+        - key: system.abilities.dex.bonuses.check
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>For the duration of the spell, you have advantage on Dexterity Checks.
+      You also don't take damage from &amp;reference[falling] 20 feet or less if
+      you aren't &amp;reference[incapacitated apply=false].</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781223343599
+      modifiedTime: 1781226319897
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!9eOZDBImVKxbeOyZ.fQYlplRem5XWAYlX'
+  - name: Eagle's Splendor
+    img: icons/creatures/birds/songbird-yellow-flying.webp
+    origin: Compendium.dnd5e.spells.Item.9eOZDBImVKxbeOyZ
+    transfer: false
+    _id: fL5yxySa2tgQR96A
+    type: base
+    system:
+      changes:
+        - key: system.abilities.cha.bonuses.check
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>For the duration of the spell, you have advantage on Charisma
+      Checks.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781223413371
+      modifiedTime: 1781223581307
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!9eOZDBImVKxbeOyZ.fL5yxySa2tgQR96A'
+  - name: Fox's Cunning
+    img: icons/creatures/mammals/dog-husky-white-blue.webp
+    origin: Compendium.dnd5e.spells.Item.9eOZDBImVKxbeOyZ
+    transfer: false
+    _id: pHwVg5BiH0Z7ysfD
+    type: base
+    system:
+      changes:
+        - key: system.abilities.int.bonuses.check
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>For the duration of the spell, you have advantage on Intelligence
+      Checks.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781223456036
+      modifiedTime: 1781223587091
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!9eOZDBImVKxbeOyZ.pHwVg5BiH0Z7ysfD'
+  - name: Owl's Wisdom
+    img: icons/creatures/birds/corvid-flying-wings-purple.webp
+    origin: Compendium.dnd5e.spells.Item.9eOZDBImVKxbeOyZ
+    transfer: false
+    _id: FCTEJkHaaxkAeNhQ
+    type: base
+    system:
+      changes:
+        - key: system.abilities.wis.bonuses.check
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: <p>For the duration of the spell, you have advantage on Wisdom Checks.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781223503142
+      modifiedTime: 1781223593041
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!9eOZDBImVKxbeOyZ.FCTEJkHaaxkAeNhQ'
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037349410
-  modifiedTime: 1725992717633
+  modifiedTime: 1781223768737
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!9eOZDBImVKxbeOyZ'
