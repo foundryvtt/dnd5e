@@ -13,6 +13,7 @@
  * @typedef CharacterActorSystemData
  * @property {Union<AttributesCommonData, AttributesCreatureData>} attributes
  * @property {HitPointsData} attributes.hp
+ * @property {number} attributes.hp.bloodied              HP percentage at or below which the creature is bloodied.
  * @property {object} attributes.hp.bonuses
  * @property {string} attributes.hp.bonuses.level         Bonus formula applied for each class level.
  * @property {string} attributes.hp.bonuses.overall       Bonus formula applied to total HP.
@@ -132,6 +133,7 @@
  * @property {object} attributes.hd
  * @property {number} attributes.hd.spent        Number of hit dice spent.
  * @property {HitPointsData} attributes.hp
+ * @property {number} attributes.hp.bloodied     HP percentage at or below which the creature is bloodied.
  * @property {string} attributes.hp.formula      Formula used to determine hit points.
  * @property {Omit<RollConfigData, "ability">} attributes.death
  * @property {number} attributes.death.success        Number of successful death saves.
