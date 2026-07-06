@@ -1,7 +1,7 @@
 import FormulaField from "../fields/formula-field.mjs";
 import MappingField from "../fields/mapping-field.mjs";
 
-const { BooleanField, SetField, StringField } = foundry.data.fields;
+const { BooleanField, NumberField, SetField, StringField } = foundry.data.fields;
 
 /**
  * @import { TravelPace5e } from "../actor/fields/_types.mjs";
@@ -15,6 +15,9 @@ export default class MovementField extends foundry.data.fields.SchemaField {
   constructor(fields={}, { initialUnits=null, ...options }={}) {
     fields = {
       bonus: new FormulaField({ deterministic: true, label: "DND5E.MOVEMENT.FIELDS.bonus.label" }),
+      multiplier: new NumberField({
+        min: 0, initial: 1, persisted: false, label: "DND5E.MOVEMENT.FIELDS.multiplier.label"
+      }),
       special: new StringField({ label: "DND5E.MOVEMENT.FIELDS.special.label" }),
       speeds: new MappingField(new FormulaField({ deterministic: true }), {
         initialKeys: CONFIG.DND5E.movementTypes, initialKeysOnly: true

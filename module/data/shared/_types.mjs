@@ -55,6 +55,7 @@
 /**
  * @typedef MovementData
  * @property {string} bonus                         Bonus applied to all movement types that already have a speed.
+ * @property {number} multiplier                    Multiplier for each movement type.
  * @property {string} special                       Semi-colon separated list of special movement information.
  * @property {Record<string, string>} speeds        Speeds for various movement types.
  * @property {string} units                         Movement used to measure the various speeds.
