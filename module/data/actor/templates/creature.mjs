@@ -277,7 +277,7 @@ export default class CreatureTemplate extends CommonTemplate {
       skillData.total += difference;
     }
 
-    const isLegacy = game.settings.get("dnd5e", "rulesVersion") === "legacy";
+    const isLegacy = dnd5e.settings.rulesVersion === "legacy";
     if ( flags.remarkableAthlete
       && CONFIG.DND5E.characterFlags.remarkableAthlete.skills.includes(skillId) && !isLegacy ) {
       AdvantageModeField.setMode(this, `skills.${skillId}.roll.mode`, 1);
