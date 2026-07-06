@@ -6,15 +6,17 @@ type: spell
 system:
   description:
     value: >-
-      <p>You become Invisible at the same time that an illusory double of you
-      appears where you are standing. The double lasts for the Duration, but the
-      Invisibility ends if you Attack or Cast a Spell.</p><p>You can use your
-      action to move your illusory double up to twice your speed and make it
-      gesture, speak, and behave in whatever way you choose.</p><p>You can see
-      through its eyes and hear through its ears as if you were located where it
-      is. On each of your turns as a Bonus Action, you can switch from using its
-      senses to using your own, or back again. While you are using its senses,
-      you are Blinded and Deafened in regard to your own surroundings.</p>
+      <p>You become &amp;reference[Invisible] at the same time that an illusory
+      double of you appears where you are standing. The double lasts for the
+      duration, but the invisibility ends if you &amp;reference[attack] or
+      &amp;reference[cast a spell].</p><p>You can use your action to move your
+      illusory double up to twice your speed and make it gesture, speak, and
+      behave in whatever way you choose.</p><p>You can see through its eyes and
+      hear through its ears as if you were located where it is. On each of your
+      turns as a bonus action, you can switch from using its senses to using
+      your own, or back again. While you are using its senses, you are
+      &amp;reference[Blinded apply=false] and &amp;reference[Deafened
+      apply=false] in regard to your own surroundings.</p>
     chat: ''
   source:
     custom: ''
@@ -33,11 +35,14 @@ system:
     affects:
       type: self
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -75,7 +80,9 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: vnVe2IbyTKkhsByd
+          level: {}
       range:
         override: false
       target:
@@ -94,20 +101,130 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    LK6FrR896AucW2lk:
+      type: utility
+      name: Control Illusion
+      _id: LK6FrR896AucW2lk
+      img: ''
+      sort: 100000
+      activation:
+        type: action
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: self
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
   identifier: mislead
 sort: 0
 flags: {}
-img: icons/magic/control/debuff-energy-hold-levitate-blue-yellow.webp
-effects: []
+img: icons/equipment/head/hood-cloth-teal-gold.webp
+effects:
+  - name: Misleading
+    img: icons/equipment/head/hood-cloth-teal-gold.webp
+    origin: Compendium.dnd5e.spells.Item.MBMaQLwoy05qzMJ3
+    transfer: false
+    _id: vnVe2IbyTKkhsByd
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You become &amp;reference[Invisible apply=false] at the same time that
+      an illusory double of you appears where you are standing. The double lasts
+      for the duration, but the invisibility ends if you &amp;reference[attack]
+      or &amp;reference[cast a spell].</p><p>You can use your action to move
+      your illusory double up to twice your speed and make it gesture, speak,
+      and behave in whatever way you choose.</p><p>You can see through its eyes
+      and hear through its ears as if you were located where it is. On each of
+      your turns as a bonus action, you can switch from using its senses to
+      using your own, or back again. While you are using its senses, you are
+      &amp;reference[Blinded apply=false] and &amp;reference[Deafened
+      apply=false] in regard to your own surroundings.</p>
+    tint: '#ffffff'
+    statuses:
+      - invisible
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781401275589
+      modifiedTime: 1781401307857
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!MBMaQLwoy05qzMJ3.vnVe2IbyTKkhsByd'
 folder: bG9QTayc46rfNkv2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037354409
-  modifiedTime: 1725992719246
+  modifiedTime: 1781401335084
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!MBMaQLwoy05qzMJ3'

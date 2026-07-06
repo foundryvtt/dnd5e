@@ -9,33 +9,36 @@ system:
       <p>You attempt to reshape another creature's memories. One creature that
       you can see must make a Wisdom saving throw. If you are fighting the
       creature, it has advantage on the saving throw. On a failed save, the
-      target becomes Charmed by you for the Duration. The charmed target is
-      Incapacitated and unaware of its surroundings, though it can still hear
-      you. If it takes any damage or is targeted by another spell, this spell
-      ends, and none of the target's memories are modified.</p><p>While this
-      charm lasts, you can affect the target's memory of an event that it
-      experienced within the last 24 hours and that lasted no more than 10
-      minutes. You can permanently eliminate all memory of the event, allow the
-      target to recall the event with perfect clarity and exacting detail,
-      change its memory of the details of the event, or create a memory of some
-      other event.</p><p>You must speak to the target to describe how its
-      memories are affected, and it must be able to understand your language for
-      the modified memories to take root. Its mind fills in any gaps in the
-      details of your description. If the spell ends before you have finished
-      describing the modified memories, the creature's memory isn't altered.
-      Otherwise, the modified memories take hold when the spell ends.</p><p>A
-      modified memory doesn't necessarily affect how a creature behaves,
-      particularly if the memory contradicts the creature's natural
-      inclinations, Alignment, or beliefs. An illogical modified memory, such as
-      implanting a memory of how much the creature enjoyed dousing itself in
-      acid, is dismissed, perhaps as a bad dream. The DM might deem a modified
-      memory too nonsensical to affect a creature in a significant
-      manner.</p><p>A Remove Curse or Greater Restoration spell cast on the
-      target restores the creature's true memory.</p><p><strong>At Higher
-      Levels</strong>. If you cast this spell using a spell slot of 6th level or
-      higher, you can alter the target's memories of an event that took place up
-      to 7 days ago (6th level), 30 days ago (7th level), 1 year ago (8th
-      level), or any time in the creature's past (9th level).</p>
+      target becomes &amp;reference[Charmed] by you for the duration. The
+      charmed target is &amp;reference[Incapacitated] and unaware of its
+      surroundings, though it can still hear you. If it takes any damage or is
+      targeted by another spell, this spell ends, and none of the target's
+      memories are modified.</p><p>While this charm lasts, you can affect the
+      target's memory of an event that it experienced within the last 24 hours
+      and that lasted no more than 10 minutes. You can permanently eliminate all
+      memory of the event, allow the target to recall the event with perfect
+      clarity and exacting detail, change its memory of the details of the
+      event, or create a memory of some other event.</p><p>You must speak to the
+      target to describe how its memories are affected, and it must be able to
+      understand your language for the modified memories to take root. Its mind
+      fills in any gaps in the details of your description. If the spell ends
+      before you have finished describing the modified memories, the creature's
+      memory isn't altered. Otherwise, the modified memories take hold when the
+      spell ends.</p><p>A modified memory doesn't necessarily affect how a
+      creature behaves, particularly if the memory contradicts the creature's
+      natural inclinations, Alignment, or beliefs. An illogical modified memory,
+      such as implanting a memory of how much the creature enjoyed dousing
+      itself in acid, is dismissed, perhaps as a bad dream. The DM might deem a
+      modified memory too nonsensical to affect a creature in a significant
+      manner.</p><p>A
+      @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{remove curse} or
+      @UUID[Compendium.dnd5e.spells.Item.WzvJ7G3cqvIubsLk]{greater restoration}
+      spell cast on the target restores the creature's true
+      memory.</p><p><strong>At Higher Levels</strong>. If you cast this spell
+      using a spell slot of 6th level or higher, you can alter the target's
+      memories of an event that took place up to 7 days ago (6th level), 30 days
+      ago (7th level), 1 year ago (8th level), or any time in the creature's
+      past (9th level).</p>
     chat: ''
   source:
     custom: ''
@@ -55,12 +58,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -99,7 +105,12 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: rHGMR5r82WMvwTnq
+          onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
       target:
@@ -111,30 +122,81 @@ system:
           choice: false
         override: false
       damage:
-        onSave: half
+        onSave: none
         parts: []
       save:
         ability: wis
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: modify-memory
 sort: 0
 flags: {}
-img: icons/magic/air/air-burst-spiral-large-teal-green.webp
-effects: []
+img: icons/commodities/biological/organ-brain-red.webp
+effects:
+  - name: Modify Memory in Progress
+    img: icons/commodities/biological/organ-brain-red.webp
+    origin: Compendium.dnd5e.spells.Item.r3243JU4AyQJyfX4
+    transfer: false
+    _id: rHGMR5r82WMvwTnq
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You are &amp;reference[charmed apply=false]. While charmed, you are
+      &amp;reference[incapacitated apply=false] and unaware of your
+      surroundings, though you can still hear the caster. If you take any damage
+      or are targeted by another spell, this spell ends, and none of your
+      memories are modified.</p>
+    tint: '#ffffff'
+    statuses:
+      - charmed
+      - incapacitated
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781404485038
+      modifiedTime: 1781404576876
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!r3243JU4AyQJyfX4.rHGMR5r82WMvwTnq'
 folder: bG9QTayc46rfNkv2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037365838
-  modifiedTime: 1725992723039
+  modifiedTime: 1783216395194
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!r3243JU4AyQJyfX4'

@@ -30,14 +30,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: sphere
       size: '30'
       contiguous: false
+      count: ''
   range:
     value: '60'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -102,20 +105,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: mass-cure-wounds
 sort: 0
 flags: {}
-img: icons/magic/life/heart-cross-strong-green.webp
+img: icons/magic/life/heart-cross-strong-flame-blue.webp
 effects: []
 folder: bG9QTayc46rfNkv2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037355655
-  modifiedTime: 1725992719688
+  modifiedTime: 1781404436135
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!Pyzmm8R7rVsNAPsd'

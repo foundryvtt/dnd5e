@@ -48,12 +48,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '60'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -95,6 +98,24 @@ system:
       effects:
         - _id: t7q0nA3ojHoNF0A8
           onSave: false
+          level:
+            min: null
+            max: null
+        - _id: OlmR2e1Mm1oevh9J
+          onSave: false
+          level:
+            min: null
+            max: null
+        - _id: NmiqxKuk9UUWjSfU
+          onSave: false
+          level:
+            min: null
+            max: null
+        - _id: YBuB8CsYjYrl3GXE
+          onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
       target:
@@ -106,66 +127,337 @@ system:
           choice: false
         override: false
       damage:
-        onSave: half
+        onSave: none
         parts: []
       save:
         ability: wis
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    NB35NZ5xw2Gol0nu:
+      type: utility
+      name: Assume Direct Control
+      _id: NB35NZ5xw2Gol0nu
+      img: ''
+      sort: 100000
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>You take total and precise control of the target. Until the end of
+          your next turn, the creature takes only the actions you choose, and
+          doesn't do anything that you don't allow it to do. During this time
+          you can also cause the creature to use a reaction, but this requires
+          you to use your own reaction as well.</p>
+        chatFlavor: ''
+      duration:
+        units: round
+        concentration: false
+        override: true
+        value: '1'
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+    200TV6FrMbK0EJzM:
+      type: utility
+      name: Command Creature
+      _id: 200TV6FrMbK0EJzM
+      img: ''
+      sort: 50000
+      activation:
+        type: ''
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
   identifier: dominate-person
 sort: 0
 flags: {}
-img: icons/magic/air/air-burst-spiral-large-pink.webp
+img: icons/magic/control/encase-creature-monster-hold.webp
 effects:
-  - name: Dominate Person
+  - name: 'Dominate Person: 5th Level'
     origin: Compendium.dnd5e.spells.Item.91Sw6vOIaO7U8DvM
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
     disabled: true
     _id: t7q0nA3ojHoNF0A8
-    changes: []
     description: >-
-      <p>The target is Charmed and must do its best to obey any commands sent by
-      the caster.</p>
+      <p>You are &amp;reference[charmed apply=false] and and the caster has a
+      telepathic link with you as long as the two of you are on the same plane
+      of existence. They can use this telepathic link to issue commands to you,
+      which you must do your best to obey. If you complete your order and don't
+      recieve further direction from the caster, you defend and preserve
+      yourself to the best of your ability.</p><p>Each time you take damage, you
+      make a new Wisdom saving throw against the spell. If the saving throw
+      succeeds, the spell ends.</p>
     transfer: false
     statuses:
       - charmed
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     tint: '#ffffff'
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781392300707
+      modifiedTime: 1781392300707
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    img: icons/magic/air/air-burst-spiral-large-pink.webp
+    img: icons/magic/control/encase-creature-monster-hold.webp
     type: base
-    system: {}
+    system:
+      changes: []
     sort: 0
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!91Sw6vOIaO7U8DvM.t7q0nA3ojHoNF0A8'
+  - name: 'Dominate Person: 6th Level'
+    origin: Compendium.dnd5e.spells.Item.91Sw6vOIaO7U8DvM
+    duration:
+      value: 10
+      units: minutes
+      expiry: turnStart
+      expired: false
+    disabled: true
+    description: >-
+      <p>You are &amp;reference[charmed apply=false] and and the caster has a
+      telepathic link with you as long as the two of you are on the same plane
+      of existence. They can use this telepathic link to issue commands to you,
+      which you must do your best to obey. If you complete your order and don't
+      recieve further direction from the caster, you defend and preserve
+      yourself to the best of your ability.</p><p>Each time you take damage, you
+      make a new Wisdom saving throw against the spell. If the saving throw
+      succeeds, the spell ends.</p>
+    transfer: false
+    statuses:
+      - charmed
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781392303486
+      modifiedTime: 1781392317968
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    img: icons/magic/control/encase-creature-monster-hold.webp
+    type: base
+    system:
+      changes: []
+    sort: 0
+    showIcon: 2
+    start: null
+    folder: null
+    _id: OlmR2e1Mm1oevh9J
+    _key: '!items.effects!91Sw6vOIaO7U8DvM.OlmR2e1Mm1oevh9J'
+  - name: 'Dominate Person: 7th Level'
+    origin: Compendium.dnd5e.spells.Item.91Sw6vOIaO7U8DvM
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    disabled: true
+    description: >-
+      <p>You are &amp;reference[charmed apply=false] and and the caster has a
+      telepathic link with you as long as the two of you are on the same plane
+      of existence. They can use this telepathic link to issue commands to you,
+      which you must do your best to obey. If you complete your order and don't
+      recieve further direction from the caster, you defend and preserve
+      yourself to the best of your ability.</p><p>Each time you take damage, you
+      make a new Wisdom saving throw against the spell. If the saving throw
+      succeeds, the spell ends.</p>
+    transfer: false
+    statuses:
+      - charmed
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781392324071
+      modifiedTime: 1781392332089
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    img: icons/magic/control/encase-creature-monster-hold.webp
+    type: base
+    system:
+      changes: []
+    sort: 0
+    showIcon: 2
+    start: null
+    folder: null
+    _id: NmiqxKuk9UUWjSfU
+    _key: '!items.effects!91Sw6vOIaO7U8DvM.NmiqxKuk9UUWjSfU'
+  - name: 'Dominate Person: 8th Level'
+    origin: Compendium.dnd5e.spells.Item.91Sw6vOIaO7U8DvM
+    duration:
+      value: 8
+      units: hours
+      expiry: turnStart
+      expired: false
+    disabled: true
+    description: >-
+      <p>You are &amp;reference[charmed apply=false] and and the caster has a
+      telepathic link with you as long as the two of you are on the same plane
+      of existence. They can use this telepathic link to issue commands to you,
+      which you must do your best to obey. If you complete your order and don't
+      recieve further direction from the caster, you defend and preserve
+      yourself to the best of your ability.</p><p>Each time you take damage, you
+      make a new Wisdom saving throw against the spell. If the saving throw
+      succeeds, the spell ends.</p>
+    transfer: false
+    statuses:
+      - charmed
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781392333448
+      modifiedTime: 1781392339268
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    img: icons/magic/control/encase-creature-monster-hold.webp
+    type: base
+    system:
+      changes: []
+    sort: 0
+    showIcon: 2
+    start: null
+    folder: null
+    _id: YBuB8CsYjYrl3GXE
+    _key: '!items.effects!91Sw6vOIaO7U8DvM.YBuB8CsYjYrl3GXE'
 folder: bG9QTayc46rfNkv2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037349257
-  modifiedTime: 1725992717573
+  modifiedTime: 1781392483669
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!91Sw6vOIaO7U8DvM'
