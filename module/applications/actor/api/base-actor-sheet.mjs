@@ -1,4 +1,5 @@
 import * as Trait from "../../../documents/actor/trait.mjs";
+import ConditionData from "../../../data/active-effect/condition.mjs";
 import Item5e from "../../../documents/item.mjs";
 import {
   formatLength,
@@ -259,11 +260,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         img: existing?.img ?? img,
         disabled: existing ? disabled : true
       };
-      // Add exhaustion level for exhaustion condition
-      if ( k === "exhaustion" ) {
-        condition.isExhaustion = true;
-        condition.exhaustionLevel = this.actor.system.attributes?.exhaustion ?? 0;
-      }
+      if ( ConditionData.hasLevels(k) ) condition.level = this.actor.system.conditions?.[k] ?? 0;
       arr.push(condition);
       return arr;
     }, []);

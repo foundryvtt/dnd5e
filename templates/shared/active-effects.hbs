@@ -86,8 +86,8 @@
                     <div class="name-stacked">
                         <span class="title">{{ name }}</span>
                     </div>
-                    {{#if isExhaustion}}
-                    <span class="exhaustion-level">{{ exhaustionLevel }}</span>
+                    {{#if level includeZero=true}}
+                    <span class="condition-level">{{ level }}</span>
                     {{else}}
                     <i class="fa-solid fa-toggle-{{ ifThen disabled "off" "on" }}"></i>
                     {{/if}}

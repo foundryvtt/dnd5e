@@ -1,4 +1,5 @@
 import Actor5e from "../../documents/actor/actor.mjs";
+import ConditionData from "../../data/active-effect/condition.mjs";
 import {staticID} from "../../utils.mjs";
 import ContextMenu5e from "../context-menu.mjs";
 
@@ -100,11 +101,14 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
 
     for ( const control of this.querySelectorAll("[data-action]") ) {
       control.addEventListener("click", event => {
-        this._onAction(event.currentTarget, event.currentTarget.dataset.action);
+        this._onAction(event.currentTarget, event.currentTarget.dataset.action, { event });
       });
-      control.addEventListener("contextmenu", event => {
-        this._onAction(event.currentTarget, event.currentTarget.dataset.action, event);
-      });
+      if ( control.dataset.action === "toggleCondition" ) {
+        control.addEventListener("contextmenu", event => {
+          event.preventDefault();
+          this._onAction(event.currentTarget, event.currentTarget.dataset.action, { event });
+        });
+      }
     }
 
     for ( const source of this.querySelectorAll(".effect-source a") ) {
@@ -223,26 +227,26 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
         label: "DND5E.ContextMenuActionEdit",
         icon: "<i class='fas fa-edit fa-fw'></i>",
         visible: () => effect.isOwner,
-        onClick: (_, target) => this._onAction(target, "edit")
+        onClick: (event, target) => this._onAction(target, "edit", { event })
       },
       {
         label: "DND5E.ContextMenuActionDuplicate",
         icon: "<i class='fas fa-copy fa-fw'></i>",
         visible: () => effect.isOwner,
-        onClick: (_, target) => this._onAction(target, "duplicate")
+        onClick: (event, target) => this._onAction(target, "duplicate", { event })
       },
       {
         label: "DND5E.ContextMenuActionDelete",
         icon: "<i class='fas fa-trash fa-fw'></i>",
         visible: () => effect.isOwner && !isConcentrationEffect,
-        onClick: (_, target) => this._onAction(target, "delete")
+        onClick: (event, target) => this._onAction(target, "delete", { event })
       },
       {
         label: effect.disabled ? "DND5E.ContextMenuActionEnable" : "DND5E.ContextMenuActionDisable",
         icon: effect.disabled ? "<i class='fas fa-check fa-fw'></i>" : "<i class='fas fa-times fa-fw'></i>",
         group: "state",
         visible: () => effect.isOwner && !isConcentrationEffect,
-        onClick: (_, target) => this._onAction(target, "toggle")
+        onClick: (event, target) => this._onAction(target, "toggle", { event })
       },
       {
         label: "DND5E.CONCENTRATION.Action.Break",
@@ -256,7 +260,7 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
         icon: `<i class="fa-solid fa-${expanded ? "compress" : "expand"}"></i>`,
         group: "collapsible",
         visible: () => "canExpand" in this.app ? this.app.canExpand(effect) : true,
-        onClick: (_, target) => this._onAction(target, "toggleExpand")
+        onClick: (event, target) => this._onAction(target, "toggleExpand", { event })
       }
     ];
 
@@ -269,7 +273,7 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
         icon: "<i class='fas fa-bookmark fa-fw'></i>",
         group: "state",
         visible: () => effect.isOwner,
-        onClick: (_, target) => this._onAction(target, isFavorited ? "unfavorite" : "favorite")
+        onClick: (event, target) => this._onAction(target, isFavorited ? "unfavorite" : "favorite", { event })
       });
     }
 
@@ -280,13 +284,14 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
 
   /**
    * Handle effects actions.
-   * @param {Element} target         Button or context menu entry that triggered this action.
-   * @param {string} action          Action being triggered.
-   * @param {PointerEvent} [event]   Original pointer event if available.
+   * @param {Element} target                Button or context menu entry that triggered this action.
+   * @param {string} action                 Action being triggered.
+   * @param {object} [options]
+   * @param {PointerEvent} [options.event]  The triggering event.
    * @returns {Promise}
    * @protected
    */
-  async _onAction(target, action, event) {
+  async _onAction(target, action, { event }={}) {
     const customEvent = new CustomEvent("effect", {
       bubbles: true,
       cancelable: true,
@@ -295,7 +300,7 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
     if ( target.dispatchEvent(customEvent) === false ) return;
 
     if ( action === "toggleCondition" ) {
-      return this._onToggleCondition(target.closest("[data-condition-id]")?.dataset.conditionId, event);
+      return this._onToggleCondition(target.closest("[data-condition-id]")?.dataset.conditionId, { event });
     }
 
     const dataset = target.closest("[data-effect-id]")?.dataset;
@@ -329,21 +334,19 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
 
   /**
    * Handle toggling a condition.
-   * @param {string} conditionId       The condition identifier.
-   * @param {PointerEvent} [event]     Original pointer event if available.
+   * @param {string} conditionId            The condition identifier.
+   * @param {object} [options]
+   * @param {PointerEvent} [options.event]  The triggering event.
    * @returns {Promise}
    * @protected
    */
-  async _onToggleCondition(conditionId, event) {
-    // Handle exhaustion specially - increment/decrement level
-    if ( conditionId === "exhaustion" ) {
-      // Initialize exhaustion to 0 if not set
-      let level = foundry.utils.getProperty(this.document, "system.attributes.exhaustion");
-      if ( !Number.isFinite(level) ) await this.document.update({ "system.attributes.exhaustion": 0 });
-      return ActiveEffect.implementation._manageExhaustion(event, this.document);
+  async _onToggleCondition(conditionId, { event }={}) {
+    // Leveled conditions increment/decrement.
+    if ( ConditionData.hasLevels(conditionId) ) {
+      return this.document.toggleStatusEffect(conditionId, { levels: event?.type === "contextmenu" ? -1 : 1 });
     }
 
-    // Handle other conditions normally
+    // Other conditions toggle on and off.
     const existing = this.document.effects.get(staticID(`dnd5e${conditionId}`));
     if ( existing ) return existing.delete();
     const effect = await ActiveEffect.implementation.fromStatusEffect(conditionId);
