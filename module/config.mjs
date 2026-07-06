@@ -2062,6 +2062,8 @@ DND5E.validProperties = {
   ])
 };
 
+DND5E.validProperties.consumable.ammo = new Set(["ret"]);
+
 /* -------------------------------------------- */
 
 /**
